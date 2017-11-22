@@ -30,6 +30,7 @@ class UpgradeCore extends Kernel
      * Remote update URL.
      */
     const REMOTE_URL = 'http://update.ph7cms.com/';
+    const MIN_SQL_FILE_SIZE = 12; // Filesize in bytes
 
     /**
      * Internal update folders.
