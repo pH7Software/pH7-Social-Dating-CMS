@@ -97,7 +97,7 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Two-Factor Authentication Option available for Admins, Users and Affiliates
 * Admin Panel - Block Access with IP Restriction
 * Beautiful Code: Very thoroughly commented about what's happening throughout the PHP code, beautiful indentation and very readable, even for non-programmers
-* Everyone can easily contribute to this great innovative project with our [GitHub repository](https://github.com/pH7Software/pH7-Social-Dating-CMS)
+* Anyone can easily contribute to pH7CMS project thanks the [GitHub repository](https://github.com/pH7Software/pH7-Social-Dating-CMS)
 
 
 **It's not a hazard that pH7CMS is considered to be the first choice for creating an enterprise level dating web app or social networking website**
