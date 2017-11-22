@@ -17,7 +17,7 @@ class SearchFriendForm
     {
         $oHttpRequest = new HttpRequest;
         $sUsername = $oHttpRequest->get('username');
-        $sAction = ($oHttpRequest->getExists('action')) ? 'mutual' : 'index';
+        $sAction = $oHttpRequest->getExists('action') ? 'mutual' : 'index';
         unset($oHttpRequest);
 
         $oForm = new \PFBC\Form('form_search');
