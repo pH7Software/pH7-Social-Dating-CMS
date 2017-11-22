@@ -9,7 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Config\Config;
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Url\Header;
 
@@ -25,8 +25,18 @@ class EditMsgForm
             Header::redirect();
         }
 
-        $oHttpRequest = new Http;
-        $oMsg = (new ForumModel)->getTopic(strstr($oHttpRequest->get('forum_name'), '-', true), $oHttpRequest->get('forum_id'), strstr($oHttpRequest->get('topic_name'), '-', true), $oHttpRequest->get('topic_id'), (new Session)->get('member_id'), 1, 0, 1);
+        $oHttpRequest = new HttpRequest;
+        $oMsg = (new ForumModel)->getTopic(
+            strstr($oHttpRequest->get('forum_name'), '-', true),
+            $oHttpRequest->get('forum_id'),
+            strstr($oHttpRequest->get('topic_name'), '-', true),
+            $oHttpRequest->get('topic_id'),
+            (new Session)->get('member_id'),
+            1,
+            0,
+            1
+        );
+
         unset($oHttpRequest);
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
