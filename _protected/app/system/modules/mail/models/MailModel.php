@@ -315,6 +315,6 @@ class MailModel extends MailCoreModel
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_STR);
         $rStmt->execute();
 
-        return ($rStmt->rowCount() === 0);
+        return $rStmt->rowCount() === 0;
     }
 }
