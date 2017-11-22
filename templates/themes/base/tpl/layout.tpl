@@ -160,7 +160,6 @@
       <div role="banner" class="center ad_728_90">
           {{ $designModel->ad(728, 90) }}
       </div>
-      {{ $design->link() }}
 
       {* To avoid scammers *}
       {if $is_user_auth AND $current_url != $url_root}
@@ -177,7 +176,7 @@
       <div role="contentinfo">
         <div class="ft_copy">
           <p>
-            &copy; <ph:date value="Y" /> <strong>{site_name}</strong>
+            &copy; <ph:date value="Y" /> <strong>{site_name}</strong>, {{ $design->link() }}
           </p>
           {{ $design->littleLikeApi() }}
         </div>
