@@ -8,14 +8,14 @@
 
 namespace PH7;
 
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 
 class SearchVisitorForm
 {
     public static function display()
     {
-        $sUsername = (new Http)->get('username');
+        $sUsername = (new HttpRequest)->get('username');
 
         $oForm = new \PFBC\Form('form_search');
         $oForm->configure(array('action' => Uri::get('user', 'visitor', 'index', $sUsername) . PH7_SH, 'method' => 'get'));
