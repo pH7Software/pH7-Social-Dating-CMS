@@ -26,7 +26,11 @@ class EditReplyMsgFormProcess extends Form
 
         (new ForumModel)->updateMessage(
             $this->session->get('member_id'),
-            $iMessageId, $this->httpRequest->post('message', Http::ONLY_XSS_CLEAN), $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+            $iMessageId, $this->httpRequest->post(
+                'message',
+                Http::ONLY_XSS_CLEAN
+            ),
+            $this->dateTime->get()->dateTime('Y-m-d H:i:s')
         );
 
         Header::redirect(
