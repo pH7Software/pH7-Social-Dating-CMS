@@ -24,12 +24,12 @@ class ForumForm
             Header::redirect();
         }
 
-        $oCategoriesData = (new ForumModel)->getCategory();
         $aCategoriesName = array();
-        foreach ($oCategoriesData as $oId) {
-            $aCategoriesName[$oId->categoryId] = $oId->title;
+        $oCategories = (new ForumModel)->getCategory();
+        foreach ($oCategories as $oCategory) {
+            $aCategoriesName[$oCategory->categoryId] = $oCategory->title;
         }
-        unset($oCategoriesData);
+        unset($oCategories);
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
 
