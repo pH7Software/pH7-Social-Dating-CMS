@@ -14,7 +14,6 @@ use PH7\Framework\Url\Header;
 
 class EditCategoryForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_category_edit'])) {
@@ -38,5 +37,4 @@ class EditCategoryForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
     }
-
 }
