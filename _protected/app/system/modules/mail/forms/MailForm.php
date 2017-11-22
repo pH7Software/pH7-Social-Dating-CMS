@@ -9,7 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Url\Header;
 
 class MailForm
@@ -24,7 +24,7 @@ class MailForm
             Header::redirect();
         }
 
-        $oHttpRequest = new Http; // For Reply Function
+        $oHttpRequest = new HttpRequest; // For Reply Function
 
         $oForm = new \PFBC\Form('form_compose_mail');
         $oForm->configure(array('action' => ''));
