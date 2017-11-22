@@ -9,7 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Date\CDateTime;
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Url\Header;
@@ -28,7 +28,7 @@ class EditForm
         $bAdminLogged = (AdminCore::auth() && !User::auth()); // Check if the admin is logged.
 
         $oUserModel = new UserModel;
-        $oHR = new Http;
+        $oHR = new HttpRequest;
         $iProfileId = ($bAdminLogged && $oHR->getExists('profile_id')) ? $oHR->get('profile_id', 'int') : (new Session)->get('member_id');
 
         $oUser = $oUserModel->readProfile($iProfileId);

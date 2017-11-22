@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class DesignForm
 {
@@ -18,7 +19,7 @@ class DesignForm
             if (\PFBC\Form::isValid($_POST['submit_design'])) {
                 new DesignFormProcess;
             }
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_design');
