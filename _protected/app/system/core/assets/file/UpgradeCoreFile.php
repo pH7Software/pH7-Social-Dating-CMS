@@ -357,11 +357,11 @@ class UpgradeCore extends Kernel
      *
      * @return bool Returns TRUE if it is correct, FALSE otherwise.
      */
-    private function _checkUpgradeFolder($sFolder)
+    private function checkUpgradeFolder($sFolder)
     {
         $sFullPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sFolder;
 
-        return !preg_match('#^' . Version::PATTERN . '\-' . Version::PATTERN . '#', $sFolder) || !is_file($sFullPath . static::INFO_DIR . PH7_DS . PH7_CONFIG_FILE) ? false : true;
+        return !preg_match('#^' . Version::VERSION_PATTERN . '\-' . Version::VERSION_PATTERN . '#', $sFolder) || !is_file($sFullPath . static::INFO_DIR . PH7_DS . PH7_CONFIG_FILE) ? false : true;
     }
 
     /**
