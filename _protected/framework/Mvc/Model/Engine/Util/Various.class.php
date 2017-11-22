@@ -42,7 +42,7 @@ class Various
         }
 
         $sSqlContent = file_get_contents($sSqlFile);
-        $sSqlContent = str_replace(PH7_TABLE_PREFIX, Db::prefix(), $sSqlContent);
+        $sSqlContent = static::renameTablePrefix($sSqlContent);
         $rStmt = Db::getInstance()->exec($sSqlContent);
         unset($sSqlContent);
 
@@ -256,5 +256,15 @@ class Various
     {
         throw new PH7InvalidArgumentException('Bad data table: "' . $sTable . '"!');
         exit(1);
+    }
+
+    /**
+     * @param string $sSqlContent
+     *
+     * @return string
+     */
+    public static function renameTablePrefix($sSqlContent)
+    {
+        return str_replace(PH7_TABLE_PREFIX, Db::prefix(), $sSqlContent);
     }
 }
