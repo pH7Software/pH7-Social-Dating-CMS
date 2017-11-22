@@ -36,6 +36,7 @@ class ReplyMsgFormProcess extends Form
             \PFBC\Form::setError('form_reply', Form::duplicateContentMsg());
         } else {
             $oForumModel->addMessage($iProfileId, $iTopicId, $sMessage, $sCurrentTime);
+
             Header::redirect(
                 Uri::get(
                     'forum',
