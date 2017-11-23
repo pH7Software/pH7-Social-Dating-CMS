@@ -77,7 +77,7 @@ class Mail
      */
     public function bottomFooter()
     {
-        return t('Best regards,<br />The %0% Team.', '<a href="%site_url%">%site_name%</a>');
+        return t('Best regards,<br />%0% team.', '<a href="%site_url%">%site_name%</a>');
     }
 
     /**
@@ -87,7 +87,7 @@ class Mail
      */
     public function privacyPolicyFooter($sEmail)
     {
-        return t('This message was sent to %0%.<br /> You are receiving this message because you have registered on %1%.<br /> You can change the e-mail alerts by visiting your account.', $sEmail, '<a href="%site_url%">%site_name%</a>');
+        return t('This message was sent to %0%.<br /> You receive this message because you are registered on %1%.<br /> You can change the email alerts by visiting your account.', $sEmail, '<a href="%site_url%">%site_name%</a>');
     }
 
     /**
