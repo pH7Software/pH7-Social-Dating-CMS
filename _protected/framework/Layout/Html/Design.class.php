@@ -387,9 +387,6 @@ class Design
     }
 
     /**
-     * The below code MUST be present and you cannot remove it in any case.
-     * (useless you got the explicit writing authorization from the author)
-     *
      * @return void Output the relevant link based on the client browser's language.
      */
     final public function smartLink()
