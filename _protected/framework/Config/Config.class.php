@@ -141,11 +141,16 @@ class Config implements Configurable
      * Read Config File.
      *
      * @return void
+     *
+     * @throws FileNotFoundException
      */
     private function read()
     {
-        /* Loading configuration files */
+        if (!is_file($this->sConfigAppFilePath)) {
+            throw new FileNotFoundException(sprintf('"%s" is not found.', $this->sConfigAppFilePath));
+        }
 
+        /** Load configuration files **/
         // 1) Load app config file
         $this->values = parse_ini_file($this->sConfigAppFilePath, true);
         // 2) Now we have to use array_merge() function, so we do with the Config::load() method for loading system config file
