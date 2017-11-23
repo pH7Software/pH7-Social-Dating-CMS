@@ -355,7 +355,7 @@ class Design
      */
     final public function link($bLink = true, $bSoftwareName = true, $bVersion = false, $bComment = true, $bEmailContext = false)
     {
-        if ((bool)DbConfig::getSetting('displayPoweredByLink')) {
+        if (!$bEmailContext && (bool)DbConfig::getSetting('displayPoweredByLink')) {
             if ($bLink) {
                 $bSoftwareName = true;
             }
