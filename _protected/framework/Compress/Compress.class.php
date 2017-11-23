@@ -26,50 +26,50 @@ class Compress
      *
      * The YUI Compressor path where it is stored.
      *
-     * @var string $_sYuiCompressorPath
+     * @var string $sYuiCompressorPath
      */
-    private $_sYuiCompressorPath;
+    private $sYuiCompressorPath;
 
     /**
      * For JavaScript Only.
      *
      * The Google Closure Compiler path where it is stored.
      *
-     * @var string $_sClosureCompilerPath
+     * @var string $sClosureCompilerPath
      */
-    private $_sClosureCompilerPath;
+    private $sClosureCompilerPath;
 
     /**
      * Temporary File Path.
      *
-     * @var string $_sTmpFilePath
+     * @var string $sTmpFilePath
      */
-    private $_sTmpFilePath;
+    private $sTmpFilePath;
 
     /**
      * Enable or Disabled Google Closure Compiler Service (https://closure-compiler.appspot.com )for the JS files.
      * If you use for too many files at the same time, Google might break it.
      *
-     * @var boolean $_bIsGoogleClosure
+     * @var boolean $bIsGoogleClosure
      */
-    private $_bIsGoogleClosure;
+    private $bIsGoogleClosure;
 
     /**
      * Enable Java Engine Compiler.
      *
-     * @var boolean $_bJavaCompiler
+     * @var boolean $bJavaCompiler
      */
-    private $_bJavaCompiler;
+    private $bJavaCompiler;
 
     public function __construct()
     {
         $sUniqIdPrefix = (string)mt_rand();
 
-        $this->_sYuiCompressorPath = realpath(__DIR__) . '/Compiler/YUICompressor-2.4.7.jar';
-        $this->_sClosureCompilerPath = realpath(__DIR__) . '/Compiler/ClosureCompiler.jar';
-        $this->_sTmpFilePath = PH7_PATH_TMP . PH7_DS . uniqid($sUniqIdPrefix, true) . '.tmp';
-        $this->_bJavaCompiler = (bool)Config::getInstance()->values['cache']['enable.static.minify_java_compiler'];
-        $this->_bIsGoogleClosure = (bool)Config::getInstance()->values['cache']['enable.js.closure_compiler_service'];
+        $this->sYuiCompressorPath = realpath(__DIR__) . '/Compiler/YUICompressor-2.4.7.jar';
+        $this->sClosureCompilerPath = realpath(__DIR__) . '/Compiler/ClosureCompiler.jar';
+        $this->sTmpFilePath = PH7_PATH_TMP . PH7_DS . uniqid($sUniqIdPrefix, true) . '.tmp';
+        $this->bJavaCompiler = (bool)Config::getInstance()->values['cache']['enable.static.minify_java_compiler'];
+        $this->bIsGoogleClosure = (bool)Config::getInstance()->values['cache']['enable.js.closure_compiler_service'];
     }
 
     public function parsePhp($sPhp)
@@ -100,10 +100,10 @@ class Compress
 
     public function parseCss($sContent)
     {
-        if ($this->_bJavaCompiler) {
-            file_put_contents($this->_sTmpFilePath, $sContent);
-            $sCssMinified = exec("java -jar $this->_sYuiCompressorPath $this->_sTmpFilePath --type css --charset utf-8");
-            unlink($this->_sTmpFilePath);
+        if ($this->bJavaCompiler) {
+            file_put_contents($this->sTmpFilePath, $sContent);
+            $sCssMinified = exec("java -jar $this->sYuiCompressorPath $this->sTmpFilePath --type css --charset utf-8");
+            unlink($this->sTmpFilePath);
         } else {
             // Backup any values within single or double quotes
             preg_match_all('/(\'[^\']*?\'|"[^"]*?")/ims', $sContent, $aHit, PREG_PATTERN_ORDER);
@@ -151,10 +151,10 @@ class Compress
 
     public function parseJs($sContent)
     {
-        if ($this->_bJavaCompiler) {
-            file_put_contents($this->_sTmpFilePath, $sContent);
-            $sJsMinified = exec("java -jar $this->_sYuiCompressorPath $this->_sTmpFilePath --type js --charset utf-8");
-            unlink($this->_sTmpFilePath);
+        if ($this->bJavaCompiler) {
+            file_put_contents($this->sTmpFilePath, $sContent);
+            $sJsMinified = exec("java -jar $this->sYuiCompressorPath $this->sTmpFilePath --type js --charset utf-8");
+            unlink($this->sTmpFilePath);
         } else {
             // If we can open connection to Google Closure
             // Google Closure has a max limit of 200KB POST size, and will break JS with eval-command
@@ -165,7 +165,7 @@ class Compress
             $sHost = 'closure-compiler.appspot.com';
 
             if (
-                $this->_bIsGoogleClosure && strlen($sContentEncoded) < static::MAX_LIMIT_SIZE_GOOGLE_CLOSURE &&
+                $this->bIsGoogleClosure && strlen($sContentEncoded) < static::MAX_LIMIT_SIZE_GOOGLE_CLOSURE &&
                 preg_match('/[^a-z]eval\(/ism', $sContent) == 0 && $rSocket = @pfsockopen($sHost, 80)
             ) {
                 // Working vars
