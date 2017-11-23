@@ -65,7 +65,7 @@ class Url
      * @param array $aParams
      * @param string $sNumericPrefix Default NULL
      * @param string $sArgSeparator Default '&amp;
-     * @param integer $iEncType Default PHP_QUERY_RFC1738
+     * @param int $iEncType Default PHP_QUERY_RFC1738
      *
      * @return string Returns a URL-encoded string.
      */
