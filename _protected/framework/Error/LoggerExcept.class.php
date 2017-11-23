@@ -80,7 +80,6 @@ final class LoggerExcept extends Logger
                 $sFullFile = $this->sDir . static::EXCEPT_DIR . $this->sFileName . '.json';
                 $sFullGzipFile = $this->sDir . static::EXCEPT_DIR . static::GZIP_DIR . $this->sFileName . '.gz';
 
-                // If the log file is larger than 5 Mb, then compresses it into gzip
                 if ($this->isGzipEligible($sFullFile)) {
                     $rHandler = @gzopen($sFullGzipFile, 'a') or exit('Unable to write to log file gzip.');
                     gzwrite($rHandler, $sContents);
@@ -113,7 +112,9 @@ final class LoggerExcept extends Logger
     }
 
     /**
-     * @param string $sFullFile
+     * If the log file already exists and is larger than 5 Mb, then returns TRUE, FALSE otherwise.
+     *
+     * @param string $sFullFile Log file path.
      *
      * @return bool
      */
