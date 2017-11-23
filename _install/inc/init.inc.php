@@ -27,7 +27,7 @@ if (is_file(PH7_ROOT_PUBLIC . '_constants.php') &&
     $sCtrlName === 'InstallController' &&
     ($sAction === 'index' || $sAction === 'config_path')
 ) {
-    exit('Your site is already installed.<br /> If you want to redo a clean install, please delete your "_constants.php" file and delete all the content of your database.');
+    exit('Your site is already installed.<br /> If you want to redo a clean installation, please delete your "_constants.php" file and delete all the content of your database.');
 }
 
 try {
