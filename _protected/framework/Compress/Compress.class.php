@@ -19,7 +19,7 @@ use PH7\Framework\Config\Config;
 
 class Compress
 {
-    const MAX_LIMIT_GOOGLE_CLOSURE = 200000; // 200KB
+    const MAX_LIMIT_SIZE_GOOGLE_CLOSURE = 200000; // 200KB
 
     /**
      * For Stylesheet and JavaScript.
@@ -165,7 +165,7 @@ class Compress
             $sHost = 'closure-compiler.appspot.com';
 
             if (
-                $this->_bIsGoogleClosure && strlen($sContentEncoded) < self::MAX_LIMIT_GOOGLE_CLOSURE &&
+                $this->_bIsGoogleClosure && strlen($sContentEncoded) < static::MAX_LIMIT_SIZE_GOOGLE_CLOSURE &&
                 preg_match('/[^a-z]eval\(/ism', $sContent) == 0 && $rSocket = @pfsockopen($sHost, 80)
             ) {
                 // Working vars
