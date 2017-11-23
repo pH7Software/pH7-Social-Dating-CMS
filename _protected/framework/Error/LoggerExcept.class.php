@@ -25,6 +25,8 @@ use PH7\Framework\Mvc\Router\FrontController;
 
 final class LoggerExcept extends Logger
 {
+    const MAX_UNCOMPRESSED_SIZE = 5; // Size in megabytes
+
     public function __construct()
     {
         try {
@@ -78,8 +80,8 @@ final class LoggerExcept extends Logger
                 $sFullFile = $this->sDir . static::EXCEPT_DIR . $this->sFileName . '.json';
                 $sFullGzipFile = $this->sDir . static::EXCEPT_DIR . static::GZIP_DIR . $this->sFileName . '.gz';
 
-                // If the log file is larger than 5 Mo then it compresses it into gzip
-                if (file_exists($sFullFile) && filesize($sFullFile) >= 5 * 1024 * 1024) {
+                // If the log file is larger than 5 Mb, then compresses it into gzip
+                if ($this->isGzipEligible($sFullFile)) {
                     $rHandler = @gzopen($sFullGzipFile, 'a') or exit('Unable to write to log file gzip.');
                     gzwrite($rHandler, $sContents);
                     gzclose($rHandler);
