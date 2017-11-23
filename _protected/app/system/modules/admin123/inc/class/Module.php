@@ -21,7 +21,7 @@ class Module
 {
     const INSTALL = 1;
     const UNINSTALL = 2;
-    const MIN_SQL_FILE_SIZE = 12; // Filesize in bytes
+    const MIN_SQL_FILE_SIZE = 12; // Size in bytes
     const REGEX_MODULE_FOLDER_FORMAT = '#^[a-z0-9\-]{2,35}#i';
 
     /**
