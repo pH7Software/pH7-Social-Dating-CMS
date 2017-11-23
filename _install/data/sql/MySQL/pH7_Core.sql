@@ -906,7 +906,7 @@ CREATE TABLE IF NOT EXISTS pH7_MetaMain (
   promoText text DEFAULT NULL,
   metaRobots varchar(50) NOT NULL DEFAULT '',
   metaAuthor varchar(50) NOT NULL DEFAULT '',
-  metaCopyright varchar(50) NOT NULL DEFAULT '',
+  metaCopyright varchar(55) NOT NULL DEFAULT '',
   metaRating varchar(50) NOT NULL DEFAULT '',
   metaDistribution varchar(50) NOT NULL DEFAULT '',
   metaCategory varchar(50) NOT NULL DEFAULT '',
