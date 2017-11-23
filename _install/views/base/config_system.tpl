@@ -24,7 +24,7 @@
 
     <p><span class="mandatory">*</span> <label for="db_prefix">{$LANG.db_prefix}:</label><br />
     <span class="small">{$LANG.desc_db_prefix}</span><br />
-    <input type="text" name="db_prefix" id="db_prefix" onfocus="if ('PH7_' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'PH7_';" value="{$smarty.session.db.prefix|escape}" required="required" /></p>
+    <input type="text" name="db_prefix" id="db_prefix" pattern="[\w_]+" onfocus="if ('PH7_' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'PH7_';" value="{$smarty.session.db.prefix|escape}" required="required" /></p>
 
     <p><span class="mandatory">*</span> <label for="db_charset">{$LANG.db_encoding}:</label><br />
     <span class="small">{$LANG.desc_db_encoding}</span><br />
