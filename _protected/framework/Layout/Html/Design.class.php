@@ -339,7 +339,7 @@ class Design
         $sIcon = $this->oStr->lower($sCountryCode) . '.gif';
         $sDir = PH7_URL_STATIC . PH7_IMG . 'flag/s/';
 
-        echo (is_file(PH7_PATH_STATIC . PH7_IMG . 'flag/s/' . $sIcon)) ? $sDir . $sIcon : $sDir . 'none.gif';
+        echo is_file(PH7_PATH_STATIC . PH7_IMG . 'flag/s/' . $sIcon) ? $sDir . $sIcon : $sDir . 'none.gif';
     }
 
     /**
