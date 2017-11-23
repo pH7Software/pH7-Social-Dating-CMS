@@ -1071,7 +1071,7 @@ INSERT INTO pH7_Settings (settingName, settingValue, description, settingGroup) 
 ('disclaimer', 0, 'Enable a disclaimer to enter to the site. This is useful for sites with adult content. 0 = Disable | 1 = Enable', 'general'),
 ('cookieConsentBar', 0, 'Enable the cookie consent bar to prevent your users that your site uses cookies. 0 = Disable | 1 = Enable', 'general'),
 ('isSoftwareNewsFeed', 1, 'Enable the news feed. 0 = Disable | 1 = Enable', 'general'),
-('displayPoweredByLink', 1, 'Show or not the Branding link in the footer.', 'general');
+('displayPoweredByLink', 1, 'Show or not the branding link in the footer.', 'general');
 
 
 CREATE TABLE IF NOT EXISTS pH7_Subscribers (
