@@ -17,4 +17,6 @@ use PH7\Framework\Error\CException\PH7Exception;
 
 class FileNotFoundException extends PH7Exception
 {
+    const APP_FILE = 1;
+    const SYS_FILE = 2;
 }
