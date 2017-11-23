@@ -111,4 +111,14 @@ final class LoggerExcept extends Logger
                 exit(t('Invalid Log Option.'));
         }
     }
+
+    /**
+     * @param string $sFullFile
+     *
+     * @return bool
+     */
+    private function isGzipEligible($sFullFile)
+    {
+        return is_file($sFullFile) && filesize($sFullFile) >= static::MAX_UNCOMPRESSED_SIZE * 1024 * 1024;
+    }
 }
