@@ -118,12 +118,12 @@ class UpgradeCore extends Kernel
     {
         $aVersions = $this->getVersions();
 
-        if ($iKey = array_search(Kernel::SOFTWARE_VERSION, $aVersions)) {
+        if ($iKey = array_search(Kernel::SOFTWARE_VERSION, $aVersions, true)) {
             return $aVersions[$iKey + 1];
-        } else {
-            // If no next version is found, just returns the current one.
-            return Kernel::SOFTWARE_VERSION;
         }
+
+        // If no next version is found, just returns the current one.
+        return Kernel::SOFTWARE_VERSION;
     }
 
     private function prepare()
