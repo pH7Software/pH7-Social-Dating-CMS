@@ -14,7 +14,6 @@ namespace PH7\Framework\Config;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\File\File;
 use PH7\Framework\Pattern\Singleton;
 
@@ -85,14 +84,14 @@ class Config implements Configurable
     /**
      * {@inheritdoc}
      *
-     * @throws PH7InvalidArgumentException
+     * @throws KeyAlreadyExistsException
      */
     public function setValue($sKey, $sValue)
     {
         if (!array_key_exists($sKey, $this->values)) {
             $this->values[$sKey] = $sValue;
         } else {
-            throw new PH7InvalidArgumentException(sprintf('%s already exists. You cannot reassign a config key.', $sKey));
+            throw new KeyAlreadyExistsException(sprintf('%s already exists. You cannot reassign a config key.', $sKey));
         }
     }
 
