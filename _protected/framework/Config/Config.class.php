@@ -48,6 +48,14 @@ class Config implements Configurable
         $this->sConfigAppFilePath = PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE;
         $this->sConfigSysFilePath = PH7_PATH_SYS . PH7_CONFIG . PH7_CONFIG_FILE;
 
+        if (!is_file($this->sConfigAppFilePath) || !is_file($this->sConfigSysFilePath)) {
+            $aFile = !is_file($this->sConfigAppFilePath) ?
+                ['code' => FileNotFoundException::APP_FILE, 'filename' => $this->sConfigAppFilePath] :
+                ['code' => FileNotFoundException::SYS_FILE, 'filename' => $this->sConfigSysFilePath];
+
+            throw new FileNotFoundException(sprintf('"%s" is not found.', $aFile['filename']), $aFile['code']);
+        }
+
         $this->read();
     }
 
@@ -143,15 +151,9 @@ class Config implements Configurable
      * Read Config File.
      *
      * @return void
-     *
-     * @throws FileNotFoundException
      */
     private function read()
     {
-        if (!is_file($this->sConfigAppFilePath)) {
-            throw new FileNotFoundException(sprintf('"%s" is not found.', $this->sConfigAppFilePath));
-        }
-
         /** Load configuration files **/
         // 1) Load app config file
         $this->values = parse_ini_file($this->sConfigAppFilePath, true);
