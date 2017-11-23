@@ -97,19 +97,6 @@ INSERT INTO pH7_MembersNotifications (profileId, enableNewsletters, newMsg, frie
 (@iProfileId+15, 0, 0, 0);
 
 
-/*
-DELIMITER |
-
-WHILE (@iTotalMembers > 0) DO
-   SET iTotalMembers = @iTotalMembers-1;
-   INSERT INTO pH7_MembersPrivacy (profileId, privacyProfile, searchProfile, userSaveViews) VALUES
-   (@iProfileId-@iTotalMembers, 'all', 'yes', 'yes');
-END WHILE;
-
-DELIMITER ;
-*/
-
-
 -- Sample Affiliates --
 
 INSERT INTO pH7_Affiliates (email, username, password, firstName, lastName, bankAccount, birthDate, sex, ip, lastActivity, joinDate) VALUES
