@@ -40,6 +40,8 @@ class Config implements Configurable
 
     /**
      * Set to private so nobody can create a new instance using new.
+     *
+     * @throws FileNotFoundException
      */
     private function __construct()
     {
