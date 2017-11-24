@@ -44,7 +44,7 @@ class MainController extends Controller
 
         /*** Display ***/
         // If the user is logged in, we do not display its own avatar since the user cannot vote for himself.
-        $iProfileId = (UserCore::auth()) ? $this->session->get('member_id') : null;
+        $iProfileId = UserCore::auth() ? $this->session->get('member_id') : null;
         $oData = $this->oHoNModel->getPicture($iProfileId);
 
         if (empty($oData)) {
