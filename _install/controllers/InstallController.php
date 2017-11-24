@@ -70,11 +70,13 @@ class InstallController extends Controller
      * Enable/Disable Site Settings according to the chosen niche
      */
     const SOCIAL_SETTINGS = [
-        'social_media_widgets' => '1'
+        'social_media_widgets' => '1',
+        'require_registration_avatar' => '0'
     ];
 
     const DATING_SETTINGS = [
-        'social_media_widgets' => '0'
+        'social_media_widgets' => '0',
+        'require_registration_avatar' => '1'
     ];
 
 
@@ -551,8 +553,14 @@ class InstallController extends Controller
         // Initialize the site's database to get "\PH7\Framework\Mvc\Model\Engine\Db" class working (as it uses that DB and not the installer one)
         Framework\Mvc\Router\FrontController::getInstance()->_databaseInitialize();
 
-        // Enable/Disable Social Media Widgets according to the chosen niche
-        Framework\Mvc\Model\DbConfig::setSocialWidgets($aParams['social_media_widgets']);
+        if (isset($aParams['social_media_widgets'])) {
+            // Enable/Disable Social Media Widgets according to the chosen niche
+            Framework\Mvc\Model\DbConfig::setSocialWidgets($aParams['social_media_widgets']);
+        }
+
+        if (isset($aParams['require_registration_avatar'])) {
+            Framework\Mvc\Model\DbConfig::setSetting($aParams['require_registration_avatar'], 'requireRegistrationAvatar');
+        }
     }
 
     /***** Set the correct permission to the config files *****/
