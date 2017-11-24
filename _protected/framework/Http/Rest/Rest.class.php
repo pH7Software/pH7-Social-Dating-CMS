@@ -22,24 +22,24 @@ use PH7\Framework\Str\Str;
 class Rest extends Http
 {
     /** @var string */
-    private $_sContentType;
+    private $sContentType;
 
     /** @var integer */
-    private $_iCode;
+    private $iCode;
 
     /** @var string */
-    private $_sData;
+    private $sData;
 
     /** @var array */
-    private $_aRequest;
+    private $aRequest;
 
     /**
      * Calls Rest::_inputs() method and sets default values.
      */
     public function __construct()
     {
-        $this->_sContentType = 'application/json'; // Output format
-        $this->_inputs();
+        $this->sContentType = 'application/json'; // Output format
+        $this->inputs();
     }
 
     /**
@@ -50,13 +50,13 @@ class Rest extends Http
      */
     public function response($sData, $iStatus = 200)
     {
-        $this->_sData = $sData;
+        $this->sData = $sData;
 
         /**
          * @internal Http::getStatusCodes() returns FLASE when it doesn't find a GTTP status code.
          */
-        $this->_iCode = (false !== static::getStatusCodes($iStatus)) ? $iStatus : 500; // If it finds nothing, then we put the 500 HTTP Status Code.
-        $this->_output();
+        $this->iCode = (false !== static::getStatusCodes($iStatus)) ? $iStatus : 500; // If it finds nothing, then we put the 500 HTTP Status Code.
+        $this->output();
     }
 
     /**
@@ -64,27 +64,27 @@ class Rest extends Http
      */
     public function getRequest()
     {
-        return $this->_aRequest;
+        return $this->aRequest;
     }
 
     /**
      * @return void
      */
-    private function _inputs()
+    private function inputs()
     {
         switch ($this->getRequestMethod()) {
             case HttpRequest::METHOD_POST:
-                $this->_aRequest = $this->_cleanInputs($_POST);
+                $this->aRequest = $this->cleanInputs($_POST);
                 break;
 
             case HttpRequest::METHOD_GET:
             case HttpRequest::METHOD_DELETE:
-                $this->_aRequest = $this->_cleanInputs($_GET);
+                $this->aRequest = $this->cleanInputs($_GET);
                 break;
 
             case HttpRequest::METHOD_PUT:
-                parse_str(Stream::getInput(), $this->_aRequest);
-                $this->_aRequest = $this->_cleanInputs($this->_aRequest);
+                parse_str(Stream::getInput(), $this->aRequest);
+                $this->aRequest = $this->cleanInputs($this->aRequest);
                 break;
 
             default:
@@ -98,13 +98,13 @@ class Rest extends Http
      *
      * @return array|string
      */
-    private function _cleanInputs($mData)
+    private function cleanInputs($mData)
     {
         if (is_array($mData)) {
             $aCleanInput = array();
 
             foreach ($mData as $sKey => $sValue) {
-                $aCleanInput[$sKey] = $this->_cleanInputs($sValue);
+                $aCleanInput[$sKey] = $this->cleanInputs($sValue);
             }
 
             return $aCleanInput;
@@ -119,11 +119,11 @@ class Rest extends Http
      *
      * @return void
      */
-    private function _output()
+    private function output()
     {
-        static::setHeadersByCode($this->_iCode);
-        static::setContentType($this->_sContentType);
-        echo $this->_sData;
+        static::setHeadersByCode($this->iCode);
+        static::setContentType($this->sContentType);
+        echo $this->sData;
         exit; // Stop the Script
     }
 }
