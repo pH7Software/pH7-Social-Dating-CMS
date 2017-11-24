@@ -58,7 +58,7 @@ class ReportModel extends Framework\Mvc\Model\Engine\Model
         $rStmt->bindValue(':limit', $iLimit, PDO::PARAM_INT);
         $rStmt->execute();
 
-        return (!empty($iId)) ? $rStmt->fetch(PDO::FETCH_OBJ) : $rStmt->fetchAll(PDO::FETCH_OBJ);
+        return !empty($iId) ? $rStmt->fetch(PDO::FETCH_OBJ) : $rStmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     public function delete($iReportId)
