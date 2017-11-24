@@ -136,14 +136,15 @@ final class DbConfig
 
     /**
      * @param string $sStatus '0' = Disable | '1' = Enable. (need to be string because in DB it is an "enum").
+     * @param string $sFieldName
      *
      * @return void
      */
-    public static function setSocialWidgets($sStatus)
+    public static function setSocialWidgets($sStatus, $sFieldName = 'socialMediaWidgets')
     {
         $sStatus = (string)$sStatus; // Cast into string to be sure it will work as in DB it's an "enum" type
 
-        self::setSetting($sStatus, 'socialMediaWidgets');
+        self::setSetting($sStatus, $sFieldName);
 
         // addthis JS file's staticID is '1'
         $rStmt = Engine\Db::getInstance()->prepare('UPDATE' . Engine\Db::prefix('StaticFiles') . 'SET active = :status WHERE staticId = 1 AND fileType = \'js\' LIMIT 1');
@@ -155,16 +156,17 @@ final class DbConfig
 
     /**
      * @param string $sStatus The constant 'DbConfig::ENABLE_SITE' or 'DbConfig::MAINTENANCE_SITE'
+     * @param string $sFieldName
      *
      * @return void
      */
-    public static function setSiteMode($sStatus)
+    public static function setSiteMode($sStatus, $sFieldName = 'siteStatus')
     {
         if ($sStatus !== self::MAINTENANCE_SITE && $sStatus !== self::ENABLE_SITE) {
             exit('Wrong maintenance mode type!');
         }
 
-        self::setSetting($sStatus, 'siteStatus');
+        self::setSetting($sStatus, $sFieldName);
 
         /* Clear DbConfig Cache (this method is not always called in SettingFormProcess class, so clear the cache to be sure) */
         self::clearCache();
