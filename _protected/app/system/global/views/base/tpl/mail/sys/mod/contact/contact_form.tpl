@@ -1,4 +1,5 @@
 {inc_header}
+{inc_sub_header}
 
 <p>{last_name}<br /> {first_name}</p>
 <p>{email}</p>
