@@ -13,7 +13,9 @@
 
 namespace PH7\Framework\Layout\Form;
 
-abstract class Form extends \PH7\Framework\Core\Core
+use PH7\Framework\Core\Core;
+
+abstract class Form extends Core
 {
     /**
      * Launch Error Token Message.
