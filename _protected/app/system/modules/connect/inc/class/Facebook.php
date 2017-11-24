@@ -202,6 +202,11 @@ class Facebook extends Api implements IApi
         $this->sUrl = $oHelper->getLoginUrl(Uri::get('connect', 'main', 'home'), self::$aPermissions);
     }
 
+    /**
+     * @param FacebookResponse $oResponse
+     *
+     * @return void
+     */
     private function initClassAttrs(FacebookResponse $oResponse)
     {
         $this->oProfile = $oResponse->getGraphObject(GraphUser::className());
