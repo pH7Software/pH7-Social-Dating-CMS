@@ -75,7 +75,9 @@ class Google extends Api implements IApi
                     $this->setAvatar($aUserData['picture']);
                 }
 
-                $this->oDesign->setFlashMsg(t('You have now been registered! %0%', (new Registration)->sendMail($this->_aUserInfo, true)->getMsg()));
+                $this->oDesign->setFlashMsg(
+                    t('You have now been registered! %0%', (new Registration($this->oView))->sendMail($this->aUserInfo, true)->getMsg())
+                );
                 $this->sUrl = Uri::get('connect', 'main', 'register');
             } else {
                 // Login

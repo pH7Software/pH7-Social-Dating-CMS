@@ -14,6 +14,7 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Layout\Html\Design;
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Util\Various;
@@ -23,12 +24,16 @@ abstract class Api
     /** @var Design */
     protected $oDesign;
 
+    /** @var PH7Tpl */
+    protected $oView;
+
     /** @var string */
     protected $sUrl;
 
     public function __construct()
     {
         $this->oDesign = new Design;
+        $this->oView = new PH7Tpl;
     }
 
     /**
