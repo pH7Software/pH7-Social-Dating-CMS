@@ -16,7 +16,17 @@ class AdminController extends Controller
 {
     const REPORTS_PER_PAGE = 15;
 
-    private $oReportModel, $sTitle, $sMsg, $bStatus;
+    /** @var ReportModel */
+    private $oReportModel;
+
+    /** @var string */
+    private $sTitle;
+
+    /** @var string */
+    private $sMsg;
+
+    /** @var bool */
+    private $bStatus;
 
     public function __construct()
     {
@@ -73,7 +83,8 @@ class AdminController extends Controller
     public function delete()
     {
         $this->bStatus = $this->oReportModel->delete($this->httpRequest->post('id', 'int'));
-        $this->sMsg = ($this->bStatus) ? t('The report has been deleted.') : t('A problem occurred during the deleted of the reporting.');
+        $this->sMsg = $this->bStatus ? t('The report has been deleted.') : t('A problem occurred during the deleted of the reporting.');
+
         Header::redirect(Uri::get('report', 'admin', 'index'), $this->sMsg);
     }
 
