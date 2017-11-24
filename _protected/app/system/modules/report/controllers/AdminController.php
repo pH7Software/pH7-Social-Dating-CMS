@@ -40,7 +40,7 @@ class AdminController extends Controller
         $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'common.js');
         $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
 
-        $iTotalReports = $this->oReportModel->totalReports();
+        $iTotalReports = ReportModel::totalReports();
 
         $this->sTitle = nt('%n% Report', '%n% Reports', $iTotalReports);
         $this->view->page_title = $this->sTitle;

@@ -12,9 +12,8 @@ namespace PH7;
 
 use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
-use PH7\Framework\Mvc\Model\Engine\Model;
 
-class ReportModel extends Model
+class ReportModel extends ReportCoreModel
 {
     /**
      * @param array $aData
@@ -85,18 +84,5 @@ class ReportModel extends Model
         $rStmt->bindValue(':reportId', $iReportId, PDO::PARAM_INT);
 
         return $rStmt->execute();
-    }
-
-    /**
-     * @return int Total of reports
-     */
-    public function totalReports()
-    {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(reportId) FROM' . Db::prefix('Report'));
-        $rStmt->execute();
-        $iTotalReports = (int)$rStmt->fetchColumn();
-        Db::free($rStmt);
-
-        return $iTotalReports;
     }
 }
