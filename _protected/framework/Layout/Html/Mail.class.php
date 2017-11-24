@@ -17,6 +17,9 @@ use PH7\Framework\Registry\Registry;
 
 class Mail
 {
+    /** @var bool */
+    private $bSubFooter = false;
+
     /*** Headers ***/
 
     /**
@@ -97,6 +100,8 @@ class Mail
      */
     public function subFooter($sEmail)
     {
+        $this->bSubFooter = true;
+
         return '</div>
             </td></tr>
             <tr><td>
@@ -115,7 +120,9 @@ class Mail
      */
     public function footer()
     {
-        return '</div></body></html>';
+        $sHtmlFooter = !$this->bSubFooter ? '</div></td></tr></table>' : '';
+
+        return $sHtmlFooter . '</div></body></html>';
     }
 
     /**
