@@ -144,8 +144,8 @@ class InstallController extends Controller
             session_regenerate_id(true);
 
             if (empty($_SESSION['val'])) {
-                $_SESSION['db']['type_name'] = 'MySQL';
-                $_SESSION['db']['type'] = 'mysql';
+                $_SESSION['db']['type_name'] = Db::DBMS_MYSQL_NAME;
+                $_SESSION['db']['type'] = Db::DSN_MYSQL_PREFIX;
                 $_SESSION['db']['hostname'] = 'localhost';
                 $_SESSION['db']['username'] = 'root';
                 $_SESSION['db']['name'] = 'ph7cms';
@@ -196,7 +196,7 @@ class InstallController extends Controller
                                 $aErrors[] = $LANG['no_app_config_writable'];
                             } else {
                                 if (
-                                    !($DB->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'mysql' &&
+                                    !($DB->getAttribute(\PDO::ATTR_DRIVER_NAME) === Db::DSN_MYSQL_PREFIX &&
                                     version_compare($DB->getAttribute(\PDO::ATTR_SERVER_VERSION), PH7_REQUIRE_SQL_VERSION, '>='))
                                 ) {
                                     $aErrors[] = $LANG['require_mysql_version'];
