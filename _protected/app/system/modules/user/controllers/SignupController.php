@@ -75,6 +75,7 @@ class SignupController extends Controller
     {
         $this->setTitle(t('Sign up - Step 2/3'));
         $this->setupProgressbar(2, 66);
+
         $this->output();
     }
 
@@ -82,6 +83,7 @@ class SignupController extends Controller
     {
         $this->setTitle(t('Sign up - Step 3/3'));
         $this->setupProgressbar(3, 99);
+
         $this->output();
     }
 
@@ -89,6 +91,7 @@ class SignupController extends Controller
     {
         $this->setTitle(t('Now, Upload a Profile Photo of you!'));
         $this->view->avatarDesign = new AvatarDesignCore; // Add AvatarDesign Class for displaying the avatar lightBox
+
         $this->output();
     }
 
@@ -99,7 +102,15 @@ class SignupController extends Controller
         }
 
         $this->session->destroy(); // Remove all sessions created pending registration
-        Header::redirect(Uri::get('user', 'main', 'login'), (new Registration)->getMsg());
+
+        Header::redirect(
+            Uri::get(
+                'user',
+                'main',
+                'login'
+            ),
+            (new Registration($this->view))->getMsg()
+        );
     }
 
     /**

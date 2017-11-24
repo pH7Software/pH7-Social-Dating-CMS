@@ -147,7 +147,12 @@ class JoinFormProcess extends Form
         }
 
         $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
-        $bAvatar = (new UserCore)->setAvatar($this->session->get('profile_id'), $this->session->get('username'), $_FILES['avatar']['tmp_name'], $iApproved);
+        $bAvatar = (new UserCore)->setAvatar(
+            $this->session->get('profile_id'),
+            $this->session->get('username'),
+            $_FILES['avatar']['tmp_name'],
+            $iApproved
+        );
 
         if (!$bAvatar) {
             \PFBC\Form::setError('form_join_user4', Form::wrongImgFileTypeMsg());
