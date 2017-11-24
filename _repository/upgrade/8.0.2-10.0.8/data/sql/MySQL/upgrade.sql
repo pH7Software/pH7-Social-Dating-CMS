@@ -11,6 +11,12 @@ ALTER TABLE pH7_Settings CHANGE `value` settingValue varchar(150) DEFAULT '';
 ALTER TABLE pH7_Settings CHANGE `desc` description varchar(120) DEFAULT '' COMMENT 'Informative desc about the setting';
 ALTER TABLE pH7_Settings CHANGE `group` settingGroup varchar(12) NOT NULL;
 
+-- Increase length of "metaCopyright" column for French copyright (since it is longer)
+ALTER TABLE pH7_MetaMain MODIFY metaCopyright varchar(55);
+
+-- Change "photo" enum value to "picture". Since it must be the module name here.
+ALTER TABLE pH7_Report MODIFY contentType enum('user', 'avatar', 'mail', 'comment', 'picture', 'video', 'forum', 'note') NOT NULL DEFAULT 'user';
+
 -- Change pH7_Settings's primary key
 ALTER TABLE pH7_Settings DROP PRIMARY KEY, ADD PRIMARY KEY (settingName);
 
