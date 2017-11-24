@@ -8,7 +8,6 @@
 
 namespace PH7;
 
-
 use PH7\Framework\Layout\Html\Meta;
 use stdClass;
 
@@ -16,6 +15,7 @@ class MainController extends Controller
 {
     const MAX_PROFILES = 5;
 
+    /** @var UserCoreModel */
     private $oUserModel;
 
     public function __construct()
