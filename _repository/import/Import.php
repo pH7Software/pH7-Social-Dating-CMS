@@ -11,11 +11,11 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 abstract class Import
 {
-
     protected $db;
 
     public function __construct()
@@ -23,5 +23,4 @@ abstract class Import
         $this->db = Db::getInstance();
 
     }
-
 }
