@@ -112,7 +112,8 @@ class MainController extends Controller
                 MailModel::INBOX
             );
             $this->view->total_pages = $this->oPage->getTotalPages(
-                $this->iTotalMails, self::EMAILS_PER_PAGE
+                $this->iTotalMails,
+                self::EMAILS_PER_PAGE
             );
             $this->view->current_page = $this->oPage->getCurrentPage();
             $oMail = $this->oMailModel->search(
@@ -171,7 +172,8 @@ class MainController extends Controller
                 MailModel::OUTBOX
             );
             $this->view->total_pages = $this->oPage->getTotalPages(
-                $this->iTotalMails, self::EMAILS_PER_PAGE
+                $this->iTotalMails,
+                self::EMAILS_PER_PAGE
             );
             $this->view->current_page = $this->oPage->getCurrentPage();
             $oMail = $this->oMailModel->search(
@@ -232,7 +234,8 @@ class MainController extends Controller
                 MailModel::TRASH
             );
             $this->view->total_pages = $this->oPage->getTotalPages(
-                $this->iTotalMails, self::EMAILS_PER_PAGE
+                $this->iTotalMails,
+                self::EMAILS_PER_PAGE
             );
             $this->view->current_page = $this->oPage->getCurrentPage();
             $oMail = $this->oMailModel->search(
@@ -284,7 +287,8 @@ class MainController extends Controller
             $sType
         );
         $this->view->total_pages = $this->oPage->getTotalPages(
-            $this->iTotalMails, self::EMAILS_PER_PAGE
+            $this->iTotalMails,
+            self::EMAILS_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oSearch = $this->oMailModel->search(

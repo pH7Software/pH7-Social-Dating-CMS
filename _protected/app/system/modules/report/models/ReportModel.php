@@ -15,6 +15,11 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class ReportModel extends Framework\Mvc\Model\Engine\Model
 {
+    /**
+     * @param array $aData
+     *
+     * @return bool|string
+     */
     public function add(array $aData)
     {
         $rStmt = Db::getInstance()->prepare('SELECT count(reportId) FROM' . Db::prefix('Report') .
@@ -44,6 +49,13 @@ class ReportModel extends Framework\Mvc\Model\Engine\Model
         }
     }
 
+    /**
+     * @param int|null $iId
+     * @param int $iOffset
+     * @param $iLimit
+     *
+     * @return int array|mixed
+     */
     public function get($iId = null, $iOffset, $iLimit)
     {
         $iOffset = (int)$iOffset;
@@ -61,6 +73,11 @@ class ReportModel extends Framework\Mvc\Model\Engine\Model
         return !empty($iId) ? $rStmt->fetch(PDO::FETCH_OBJ) : $rStmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    /**
+     * @param int $iReportId
+     *
+     * @return bool
+     */
     public function delete($iReportId)
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Report') . 'WHERE reportId = :reportId LIMIT 1');

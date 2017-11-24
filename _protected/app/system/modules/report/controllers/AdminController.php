@@ -40,13 +40,17 @@ class AdminController extends Controller
         $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'common.js');
         $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
 
-        $this->sTitle = t('Reports');
+        $iTotalReports = $this->oReportModel->totalReports();
+
+        $this->sTitle = nt('%n% Report', '%n% Reports', $iTotalReports);
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
 
         $oPage = new Page;
-        $this->view->total_pages = $oPage->getTotalPages($this->oReportModel->totalReports(),
-            self::REPORTS_PER_PAGE);
+        $this->view->total_pages = $oPage->getTotalPages(
+            $iTotalReports,
+            self::REPORTS_PER_PAGE
+        );
         $this->view->current_page = $oPage->getCurrentPage();
         $this->view->reports = $this->oReportModel->get(null, $oPage->getFirstItem(), $oPage->getNbItemsPerPage());
         unset($oPage);
