@@ -970,7 +970,7 @@ CREATE TABLE IF NOT EXISTS pH7_Report (
   reporterId int(10) unsigned DEFAULT NULL,
   spammerId int(10) unsigned DEFAULT NULL,
   dateTime datetime DEFAULT NULL,
-  contentType enum('user','avatar','mail','comment','photo','video','forum','note') NOT NULL DEFAULT 'user',
+  contentType enum('user', 'avatar', 'mail', 'comment', 'picture', 'video', 'forum', 'note') NOT NULL DEFAULT 'user',
   description varchar(255) DEFAULT NULL,
   url varchar(255) DEFAULT NULL,
   PRIMARY KEY (reportId),
