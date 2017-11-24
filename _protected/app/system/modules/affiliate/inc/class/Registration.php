@@ -8,15 +8,16 @@
 
 namespace PH7;
 
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 
 class Registration extends RegistrationCore
 {
-    public function __construct()
+    public function __construct(PH7Tpl $oView)
     {
-        parent::__construct();
+        parent::__construct($oView);
 
         $this->iActiveType = DbConfig::getSetting('affActivationType');
     }
@@ -31,17 +32,17 @@ class Registration extends RegistrationCore
      */
     public function sendMail(array $aInfo, $bIsUniversalLogin = false)
     {
-        $this->view->content = t('Dear %0% %1%, welcome to affiliate platform %site_name%!', $aInfo['last_name'], $aInfo['first_name']) . '<br />' .
+        $this->oView->content = t('Dear %0% %1%, welcome to affiliate platform %site_name%!', $aInfo['last_name'], $aInfo['first_name']) . '<br />' .
             t('Hello %0%! We are proud to welcome you as an affiliate on our %site_name%!', $aInfo['first_name']) . '<br />' .
             $this->getEmailMsg($aInfo) .
             '<br /><span style="text-decoration:underline">' . t('Please save the following information for future refenrence:') . '</span><br /><em>' .
             t('Email: %0%.', $aInfo['email']) . '<br />' .
             t('Username: %0%.', $aInfo['username']) . '<br />' .
             t('Password: ****** (This field is hidden to protect against theft of your account. If you have forgotten your password, please request a new one <a href="%0%">here</a>).', Uri::get('lost-password', 'main', 'forgot', 'affiliate')) . '</em>';
-            $this->view->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $aInfo['email']) . '<br />' .
+            $this->oView->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $aInfo['email']) . '<br />' .
             t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
-        $sMsgHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/affiliate/registration.tpl', $aInfo['email']);
+        $sMsgHtml = $this->oView->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/affiliate/registration.tpl', $aInfo['email']);
 
         $aMailInfo = [
             'to' => $aInfo['email'],

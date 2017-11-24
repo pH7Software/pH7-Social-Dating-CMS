@@ -112,7 +112,7 @@ class Facebook extends Api implements IApi
                 // Add User Avatar
                 $this->setAvatar($this->oProfile->getId());
 
-                $this->oDesign->setFlashMsg(t('You have now been registered! %0%', (new Registration)->sendMail($this->aUserInfo, true)->getMsg()));
+                $this->oDesign->setFlashMsg(t('You have now been registered! %0%', (new Registration($this->oView))->sendMail($this->aUserInfo, true)->getMsg()));
                 $this->sUrl = Uri::get('connect', 'main', 'register');
             } else {
                 // Login
