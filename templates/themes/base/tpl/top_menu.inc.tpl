@@ -28,17 +28,14 @@
     {* Guest Menu *}
 
       {if !$is_user_auth AND !$is_aff_auth AND !$is_admin_auth}
-
         <li><a class="bold" href="{{ $design->url('user','signup','step1') }}" title="{lang 'Join Now!'}"><i class="fa fa-user-plus"></i> {lang 'Join Now!'}</a></li>
         <li><a href="{{ $design->url('user', 'main','login') }}" title="{lang 'Login'}" data-load="ajax"><i class="fa fa-sign-in"></i> {lang 'Login'}</a></li>
-
       {/if}
 
 
     {* Menu Guest, Member and Admin *}
 
       {if !$is_aff_auth}
-
         <li class="dropdown"><a href="{{ $design->url('user', 'browse', 'index') }}" title="{lang 'Members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-user fa-fw"></i> {lang 'People'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ $design->url('user', 'browse', 'index') }}" rel="nofollow" title="{lang 'Members'}" data-load="ajax"><i class="fa fa-users"></i> {lang 'People'}</a></li>
