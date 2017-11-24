@@ -92,7 +92,7 @@ class Report
         );
 
         $aInfo = [
-            'subject' => t('Spam report from %site_name%')
+            'subject' => t('Abuse report from %site_name%')
         ];
 
         return (new Mail)->send($aInfo, $sHtmlMessage);
