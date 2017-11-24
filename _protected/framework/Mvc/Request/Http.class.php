@@ -276,8 +276,9 @@ class Http extends \PH7\Framework\Http\Http
      */
     public function requestUri()
     {
-        $sRequestUri = (substr($this->_sRequestUri, 0, 1) === PH7_SH) ? substr($this->_sRequestUri, 1) : $this->_sRequestUri;
-        $sRelative = (substr(PH7_RELATIVE, 0, 1) === PH7_SH) ? substr(PH7_RELATIVE, 1) : PH7_RELATIVE;
+        $sRequestUri = substr($this->sRequestUri, 0, 1) === PH7_SH ? substr($this->sRequestUri, 1) : $this->sRequestUri;
+        $sRelative = substr(PH7_RELATIVE, 0, 1) === PH7_SH ? substr(PH7_RELATIVE, 1) : PH7_RELATIVE;
+
         return str_replace($sRelative, '', $sRequestUri);
     }
 
@@ -312,7 +313,7 @@ class Http extends \PH7\Framework\Http\Http
      */
     public function pH7Url($sUrl)
     {
-        return ($this->isRelativeUrl($sUrl)) ? PH7_URL_ROOT . $sUrl : $sUrl;
+        return $this->isRelativeUrl($sUrl) ? PH7_URL_ROOT . $sUrl : $sUrl;
     }
 
     /**
