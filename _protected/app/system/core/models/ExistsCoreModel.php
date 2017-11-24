@@ -12,11 +12,11 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
-use PH7\Framework\Mvc\Model\Engine\Model;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 
-class ExistsCoreModel extends Model
+class ExistsCoreModel
 {
     /**
      * Checks if the same email address already exists.
@@ -55,7 +55,7 @@ class ExistsCoreModel extends Model
      */
     public function id($iId, $sTable = 'Members')
     {
-        return $this->is('profileId', $iId, $sTable, \PDO::PARAM_INT, 'AND profileId <> ' . PH7_GHOST_ID);
+        return $this->is('profileId', $iId, $sTable, PDO::PARAM_INT, 'AND profileId <> ' . PH7_GHOST_ID);
     }
 
     /**
@@ -77,7 +77,7 @@ class ExistsCoreModel extends Model
      * @param string $sColumn
      * @param string $sValue
      * @param string $sTable
-     * @param string $sType PDO PARAM TYPE (\PDO::PARAM_*). Default is \PDO::PARAM_STR
+     * @param string $sType PDO PARAM TYPE (PDO::PARAM_*). Default is PDO::PARAM_STR
      * @param string $sParam Optional WHERE parameter SQL.
      *
      * @return bool Returns TRUE if it exists, FALSE otherwise.
@@ -85,11 +85,12 @@ class ExistsCoreModel extends Model
     protected function is($sColumn, $sValue, $sTable, $sType = null, $sParam = null)
     {
         Various::checkModelTable($sTable);
-        $sType = (empty($sType)) ? \PDO::PARAM_STR : $sType;
+        $sType = empty($sType) ? PDO::PARAM_STR : $sType;
 
         $rExists = Db::getInstance()->prepare('SELECT COUNT(' . $sColumn . ') FROM' . Db::prefix($sTable) . 'WHERE ' . $sColumn . ' = :column ' . $sParam . ' LIMIT 1');
         $rExists->bindValue(':column', $sValue, $sType);
         $rExists->execute();
+
         return $rExists->fetchColumn() == 1;
     }
 }
