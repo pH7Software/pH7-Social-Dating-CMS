@@ -21,9 +21,12 @@ class Report
     /** @var string|bool */
     private $mStatus = false;
 
-    public function __construct()
+    /**
+     * @param PH7Tpl $oView
+     */
+    public function __construct(PH7Tpl $oView)
     {
-        $this->oView = new PH7Tpl;
+        $this->oView = $oView;
     }
 
     /**
