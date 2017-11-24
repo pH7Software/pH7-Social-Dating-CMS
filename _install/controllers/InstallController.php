@@ -291,13 +291,7 @@ class InstallController extends Controller
                                         if (!find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_username']) && !find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_first_name']) && !find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_last_name'])) {
                                             if (validate_name($_SESSION['val']['admin_first_name'])) {
                                                 if (validate_name($_SESSION['val']['admin_last_name'])) {
-                                                    @require_once PH7_ROOT_PUBLIC . '_constants.php';
-                                                    @require_once PH7_PATH_APP . 'configs/constants.php';
-
-                                                    require PH7_PATH_APP . 'includes/helpers/misc.php';
-                                                    require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
-                                                    // To load "\PH7\Framework\Security\Security" class
-                                                    Framework\Loader\Autoloader::getInstance()->init();
+                                                    $this->initializeClasses();
 
                                                     try {
                                                         require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
@@ -420,13 +414,7 @@ class InstallController extends Controller
                     }
 
                     if ($bUpdateNeeded) {
-                        @require_once PH7_ROOT_PUBLIC . '_constants.php';
-                        @require_once PH7_PATH_APP . 'configs/constants.php';
-
-                        require PH7_PATH_APP . 'includes/helpers/misc.php';
-                        require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
-                        // To load "PH7\Framework\Mvc\Model\DbConfig" class
-                        Framework\Loader\Autoloader::getInstance()->init();
+                        $this->initializeClasses();
 
                         try {
                             require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
@@ -564,6 +552,20 @@ class InstallController extends Controller
     {
         @chmod(PH7_PATH_APP_CONFIG . 'config.ini', 0644);
         @chmod(PH7_ROOT_PUBLIC . '_constants.php', 0644);
+    }
+
+    /***** Require & Initialize the classes *****/
+    private function initializeClasses()
+    {
+        @require_once PH7_ROOT_PUBLIC . '_constants.php';
+        @require_once PH7_PATH_APP . 'configs/constants.php';
+
+        require PH7_PATH_APP . 'includes/helpers/misc.php';
+        require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
+        require PH7_PATH_FRAMEWORK . 'Error/Debug.class.php';
+
+        // To load "\PH7\Framework\Security\Security" class
+        Framework\Loader\Autoloader::getInstance()->init();
     }
 
     /***** Get the loading image *****/
