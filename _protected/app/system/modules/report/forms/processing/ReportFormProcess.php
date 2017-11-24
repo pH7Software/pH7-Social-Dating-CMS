@@ -16,7 +16,7 @@ class ReportFormProcess extends Form
     {
         parent::__construct();
 
-        $sUrl = ($this->httpRequest->postExists('url') ? $this->httpRequest->post('url') : $this->httpRequest->currentUrl());
+        $sUrl = $this->getUrl();
         $mNeedle = strstr($sUrl, '?', true);
         $aData = [
             'reporter_id' => $this->session->get('member_id'),
@@ -39,5 +39,15 @@ class ReportFormProcess extends Form
         } else {
             \PFBC\Form::setSuccess('form_report', t('You have successfully reported abuse about this profile.'));
         }
+    }
+
+    /**
+     * @return string
+     */
+    private function getUrl()
+    {
+        return $this->httpRequest->postExists('url') ?
+            $this->httpRequest->post('url') :
+            $this->httpRequest->currentUrl();
     }
 }
