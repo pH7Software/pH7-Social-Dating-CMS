@@ -12,8 +12,9 @@ namespace PH7;
 
 use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Model;
 
-class ReportModel extends Framework\Mvc\Model\Engine\Model
+class ReportModel extends Model
 {
     /**
      * @param array $aData
@@ -86,13 +87,16 @@ class ReportModel extends Framework\Mvc\Model\Engine\Model
         return $rStmt->execute();
     }
 
+    /**
+     * @return int Total of reports
+     */
     public function totalReports()
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(reportId) AS totalRpts FROM' . Db::prefix('Report'));
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(reportId) FROM' . Db::prefix('Report'));
         $rStmt->execute();
-        $oRow = $rStmt->fetch(PDO::FETCH_OBJ);
+        $iTotalReports = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
 
-        return (int)$oRow->totalRpts;
+        return $iTotalReports;
     }
 }
