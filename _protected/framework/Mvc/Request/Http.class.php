@@ -42,7 +42,7 @@ class Http extends \PH7\Framework\Http\Http
 {
     const METHOD_HEAD = 'HEAD';
     const METHOD_GET = 'GET';
-    const METHOD_POST = 'POST'; // Create
+    const METHOD_POST = 'POST'; // Create (REST)
     const METHOD_PUT = 'PUT'; // Update
     const METHOD_DELETE = 'DELETE';
     const METHOD_PATCH = 'PATCH'; // Partially update
