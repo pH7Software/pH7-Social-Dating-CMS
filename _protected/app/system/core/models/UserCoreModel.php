@@ -633,6 +633,7 @@ class UserCoreModel extends Model
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET active = 1 WHERE email = :email AND hashValidation = :hash AND active = 2');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->bindParam(':hash', $sHash, \PDO::PARAM_STR, 40);
+
         return $rStmt->execute();
     }
 
