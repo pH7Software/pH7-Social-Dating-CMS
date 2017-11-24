@@ -541,9 +541,9 @@ class InstallController extends Controller
         // Initialize the site's database to get "\PH7\Framework\Mvc\Model\Engine\Db" class working (as it uses that DB and not the installer one)
         Framework\Mvc\Router\FrontController::getInstance()->_databaseInitialize();
 
-        foreach ($aParams as $Name => $sValue) {
-            $sMethodName = ($Name === 'socialMediaWidgets' ? 'setSocialWidgets' : 'setSetting');
-            Framework\Mvc\Model\DbConfig::$sMethodName($sValue, $Name);
+        foreach ($aParams as $sName => $sValue) {
+            $sMethodName = ($sName === 'socialMediaWidgets' ? 'setSocialWidgets' : 'setSetting');
+            Framework\Mvc\Model\DbConfig::$sMethodName($sValue, $sName);
         }
     }
 
