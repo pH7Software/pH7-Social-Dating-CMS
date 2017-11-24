@@ -564,7 +564,6 @@ class InstallController extends Controller
         require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
         require PH7_PATH_FRAMEWORK . 'Error/Debug.class.php';
 
-        // To load "\PH7\Framework\Security\Security" class
         Framework\Loader\Autoloader::getInstance()->init();
     }
 
