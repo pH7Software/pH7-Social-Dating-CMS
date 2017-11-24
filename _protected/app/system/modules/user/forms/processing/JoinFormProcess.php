@@ -75,7 +75,7 @@ class JoinFormProcess extends Form
             }
 
             // Send email
-            (new Registration)->sendMail($aData);
+            (new Registration($this->view))->sendMail($aData);
 
             $aSessData = [
                 'mail_step1' => $aData['email'],
