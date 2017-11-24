@@ -53,7 +53,12 @@ class EditCommentFormProcess extends Form
                     CommentCore::clearCache();
 
                     Header::redirect(
-                        Uri::get('comment', 'comment', 'read', $sTable . ',' . $this->iRecipientId),
+                        Uri::get(
+                            'comment',
+                            'comment',
+                            'read',
+                            $sTable . ',' . $this->iRecipientId
+                        ),
                         t('The comment has been updated successfully!')
                     );
                 } else {
