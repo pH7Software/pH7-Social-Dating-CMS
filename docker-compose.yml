@@ -1,0 +1,14 @@
+web:
+    image: nginx:latest
+    ports:
+        - "8080:80"
+    volumes:
+        - ./var/www:/var/www/
+        - ./sites:/etc/nginx/conf.d
+        - ./nginx.conf:/etc/nginx/ph7cms.conf
+    links:
+        - php
+php:
+    image: php:7-fpm
+    volumes:
+        - ./var/www:/var/www/
