@@ -39,8 +39,8 @@ class InstallController extends Controller
         'mail' => '1',
         'im' => '0',
         'user-dashboard' => '0',
-        'related-profile' => '1',
-        'friend' => '1'
+        'friend' => '1',
+        'related-profile' => '1'
     ];
 
     const DATING_MODS = [
@@ -62,8 +62,8 @@ class InstallController extends Controller
         'mail' => '1',
         'im' => '1',
         'user-dashboard' => '1',
-        'related-profile' => '1',
-        'friend' => '0'
+        'friend' => '0',
+        'related-profile' => '0'
     ];
 
     /**
