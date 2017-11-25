@@ -17,7 +17,7 @@ class BankAccount extends \PFBC\Validation
     /**
      * Constructor of class.
      *
-     * @param $sTable Default 'Affiliates'
+     * @param string $sTable
      */
     public function __construct($sTable = 'Affiliates')
     {
@@ -27,7 +27,8 @@ class BankAccount extends \PFBC\Validation
 
     /**
      * @param string $sValue
-     * @return boolean
+     *
+     * @return bool
      */
     public function isValid($sValue)
     {
