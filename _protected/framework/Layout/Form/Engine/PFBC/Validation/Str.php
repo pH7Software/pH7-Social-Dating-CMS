@@ -10,8 +10,14 @@ use PH7\Framework\Str\Str as FwkStr;
 
 class Str extends \PFBC\Validation
 {
+    /** @var FwkStr */
+    protected $oStr;
 
-    protected $oStr, $iMin, $iMax;
+    /** @var int|null */
+    protected $iMin;
+
+    /** @var int|null */
+    protected $iMax;
 
     /**
      * @param integer $iMin Default NULL
@@ -32,7 +38,9 @@ class Str extends \PFBC\Validation
     {
         $sValue = trim($sValue);
 
-        if ($this->isNotApplicable($sValue)) return true; // Field not required
+        if ($this->isNotApplicable($sValue)) {
+            return true; // Field not required
+        }
 
         if (!empty($this->iMin) && $this->oStr->length($sValue) < $this->iMin) {
             $this->message = t('Error: %element% must be at least %0% character(s) long.', $this->iMin);
@@ -44,6 +52,7 @@ class Str extends \PFBC\Validation
             $this->message = t('Please enter a string.');
             return false;
         }
+
         return true;
     }
 
