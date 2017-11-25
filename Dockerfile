@@ -6,16 +6,16 @@ FROM ubuntu:latest
 # Add application repository URL to the default sources
 RUN echo "deb http://archive.ubuntu.com/ubuntu/ raring main universe" >> /etc/apt/sources.list
 
-# Update the repository
-RUN apt-get update
+# Update the repository & upgrade
+RUN apt-get update && apt-get upgrade -y
 
 RUN apt-get install -y software-properties-common
 
-RUN apt-get install -y php5.6 php5.6-mysql php5.6-mcrypt php5.6-cli php5.6-gd php5.6-curl
-
-RUN apt-get install -y libicu-dev
-RUN apt-get update && apt-get install -y zlib1g-dev libicu-dev g++
-RUN docker-php-ext-install mbstring
+# Install dependencies
+RUN apt-get install -y && \
+    bzip2 curl git less mysql-client sudo unzip zip \
+    libbz2-dev libfontconfig1 libfontconfig1-dev \
+    libfreetype6-dev libjpeg62-turbo-dev libpng12-dev libzip-dev
 
 # Download and Install Nginx
 RUN apt-get install -y nginx
@@ -28,6 +28,25 @@ ADD ph7cms.conf /etc/nginx/
 
 # Append "daemon off;" to the beginning of the configuration
 RUN echo "daemon off;" >> /etc/nginx/ph7cms.conf
+
+# Install PHP!
+FROM php:5.6-fpm
+
+RUN docker-php-ext-install bz2 && \
+    docker-php-ext-configure gd \
+        --with-freetype-dir=/usr/include/ \
+        --with-jpeg-dir=/usr/include/ && \
+    docker-php-ext-install gd && \
+    docker-php-ext-install iconv && \
+    docker-php-ext-install opcache && \
+    docker-php-ext-install pdo_mysql && \
+    docker-php-ext-install zip
+
+
+# Run Composer
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+RUN php composer-setup.php --install-dir=/usr/bin --filename=composer
+RUN php -r "unlink('composer-setup.php');"
 
 # Expose ports
 EXPOSE 80
