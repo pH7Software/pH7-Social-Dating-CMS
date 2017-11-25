@@ -9,6 +9,16 @@ RUN echo "deb http://archive.ubuntu.com/ubuntu/ raring main universe" >> /etc/ap
 # Update the repository & upgrade
 RUN apt-get update && apt-get upgrade -y
 
+# Install locale for Gettext
+RUN apt-get -y install apt-utils
+RUN apt-get -y install locales
+
+# Set the locale
+RUN locale-gen en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+
 RUN apt-get install -y software-properties-common
 
 # Install dependencies
@@ -39,6 +49,7 @@ RUN docker-php-ext-install bz2 && \
     docker-php-ext-install gd && \
     docker-php-ext-install iconv && \
     docker-php-ext-install opcache && \
+    docker-php-ext-install pdo && \
     docker-php-ext-install pdo_mysql && \
     docker-php-ext-install zip
 
