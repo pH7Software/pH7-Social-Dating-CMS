@@ -44,7 +44,7 @@ class BankAccount extends \PFBC\Validation
         } else {
             $this->message = t('Error: Your bank account is incorrect.');
         }
+
         return false;
     }
-
 }
