@@ -8,6 +8,8 @@
 
 namespace PH7;
 
+use PH7\Framework\Http\Http;
+
 abstract class Cron extends Framework\Cron\Run\Cron
 {
     public function __construct()
@@ -26,7 +28,7 @@ abstract class Cron extends Framework\Cron\Run\Cron
     public function isAlreadyExec()
     {
         if (!$this->checkDelay()) {
-            Framework\Http\Http::setHeadersByCode(403);
+            Http::setHeadersByCode(403);
             exit(t('This cron has already been executed.'));
         }
     }
