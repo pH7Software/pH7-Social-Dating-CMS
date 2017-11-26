@@ -23,7 +23,7 @@ use PH7\Framework\Util\Various;
 
 class ImportUser extends Core
 {
-    const NO_ERRORS = 0;
+    const NO_ERROR = 0;
     const ERR_BAD_FILE = 1;
     const ERR_TOO_LARGE = 2;
     const ERR_INVALID = 3;
@@ -240,7 +240,7 @@ class ImportUser extends Core
     {
         $iErrType = $this->hasError();
 
-        if ($iErrType !== static::NO_ERRORS) {
+        if ($iErrType !== static::NO_ERROR) {
             $this->removeTmpFile();
             $this->aRes = ['status' => false, 'msg' => $this->getErrMsg($iErrType)];
         } else {
@@ -288,6 +288,6 @@ class ImportUser extends Core
             return static::ERR_INVALID;
         }
 
-        return static::NO_ERRORS;
+        return static::NO_ERROR;
     }
 }
