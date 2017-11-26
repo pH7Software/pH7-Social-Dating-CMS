@@ -567,12 +567,12 @@ ServerSignature Off
     SetEnvIfNoCase User-Agent "^zerxbot" bad_bot
     SetEnvIfNoCase User-Agent "^Zeus" bad_bot
     SetEnvIfNoCase User-Agent "^ZyBorg" bad_bot
-    Order deny, allow
+    Order deny,allow
     Deny from env=bad_bot
 </IfModule>
 
 <Limit GET POST PUT DELETE HEAD>
-    Order allow, deny
+    Order allow,deny
     Allow from all
     Deny from env=bad_bot
 </Limit>
