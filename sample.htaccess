@@ -713,7 +713,7 @@ ErrorDocument 505 /error/http/index?code=505
 # Modify Headers
 <IfModule mod_headers.c>
     # Cache files
-    <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|swf|mp3|mp4)$">
+    <FilesMatch "\.(jpe?g|png|gif|ico|webp|swf|mp3|mp4|flv|webm|pdf)$">
         Header set Cache-Control "public"
         Header set Expires "Mon, 20 Apr 2060 20:00:00 GMT"
         Header unset Last-Modified
