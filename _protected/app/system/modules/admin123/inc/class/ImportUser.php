@@ -74,16 +74,16 @@ class ImportUser extends Core
     private static $aGenderList = ['male', 'female', 'couple'];
 
     /**
-     * @param array $aFiles
+     * @param array $aFile
      * @param string $sDelimiter Delimiter Field delimiter (one character).
      * @param string $sEnclosure Enclosure Field enclosure (one character).
      */
-    public function __construct(array $aFiles, $sDelimiter, $sEnclosure)
+    public function __construct(array $aFile, $sDelimiter, $sEnclosure)
     {
         parent::__construct();
 
         // Initialize necessary attributes
-        $this->aFile = $aFiles;
+        $this->aFile = $aFile;
         $this->rHandler = @fopen($this->aFile['tmp_name'], 'rb');
         $this->aFileData = @fgetcsv($this->rHandler, 0, $sDelimiter, $sEnclosure);
         $this->aRes = $this->run();
