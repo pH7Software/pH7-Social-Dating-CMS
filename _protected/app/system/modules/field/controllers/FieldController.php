@@ -20,7 +20,9 @@ class FieldController extends Controller
 
     public function index()
     {
-        Header::redirect(Uri::get('field', 'field', 'all', 'user'));
+        Header::redirect(
+            Uri::get('field', 'field', 'all', 'user')
+        );
     }
 
     public function all($sMod = '')
@@ -73,9 +75,17 @@ class FieldController extends Controller
             }
         }
 
-        $sMsg = ($bStatus) ? t('The field has been deleted') : t('An error occurred while deleting the field.');
-        $sMsgType = ($bStatus) ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
+        $sMsg = $bStatus ? t('The field has been deleted') : t('An error occurred while deleting the field.');
+        $sMsgType = $bStatus ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
 
-        Header::redirect(Uri::get('field', 'field', 'all', $sMod), $sMsg, $sMsgType);
+        Header::redirect(
+            Uri::get('field',
+                'field',
+                'all',
+                $sMod
+            ),
+            $sMsg,
+            $sMsgType
+        );
     }
 }
