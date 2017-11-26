@@ -215,7 +215,7 @@ class ImportUser extends Core
                 break;
 
             case static::ERR_INVALID:
-                $sErrMsg = t('The file is Invalid/empty or incorrect Delimiter/Enclosure set.');
+                $sErrMsg = t('The file is Invalid/Empty or has incorrect Delimiter/Enclosure set.');
                 break;
         }
 
