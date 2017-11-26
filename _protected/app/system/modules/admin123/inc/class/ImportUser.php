@@ -320,7 +320,7 @@ class ImportUser extends Core
     {
         $sExtFile = $this->file->getFileExt($this->aFile['name']);
 
-        if ($sExtFile !== 'csv' && $sExtFile !== 'txt') {
+        if ($sExtFile !== 'csv') {
             return static::ERR_BAD_FILE;
         }
 
