@@ -82,7 +82,7 @@ class ImportUser extends Core
     {
         parent::__construct();
 
-        // Initialize necessary variables
+        // Initialize necessary attributes
         $this->aFile = $aFiles;
         $this->rHandler = @fopen($this->aFile['tmp_name'], 'rb');
         $this->aFileData = @fgetcsv($this->rHandler, 0, $sDelimiter, $sEnclosure);
@@ -109,7 +109,7 @@ class ImportUser extends Core
         $oUser = new UserCore;
 
         foreach (self::DB_TYPES as $sType) {
-            $sData = (!empty($this->aFileData[$this->aTmpData[$sType]])) ? trim($this->aFileData[$this->aTmpData[$sType]]) : $this->aTmpData[$sType];
+            $sData = !empty($this->aFileData[$this->aTmpData[$sType]]) ? trim($this->aFileData[$this->aTmpData[$sType]]) : $this->aTmpData[$sType];
 
             if ($sType == 'username') {
                 $this->aData[$iRow][$sType] = $oUser->findUsername($sData, $this->aData[$iRow]['first_name'], $this->aData[$iRow]['last_name']);
@@ -265,7 +265,10 @@ class ImportUser extends Core
             fclose($this->rHandler);
             unset($this->rHandler, $oUserModel, $oExistsModel, $oValidate, $this->aTmpData, $this->aFileData, $this->aData);
 
-            return ['status' => true, 'msg' => nt('%n% user has been successfully added.', '%n% users has been successfully added.', $iRow)];
+            return [
+                'status' => true,
+                'msg' => nt('%n% user has been successfully added.', '%n% users has been successfully added.', $iRow)
+            ];
         }
     }
 
