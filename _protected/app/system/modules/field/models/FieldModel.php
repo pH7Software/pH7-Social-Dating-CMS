@@ -17,22 +17,22 @@ use PH7\Framework\Mvc\Request\Http;
 class FieldModel extends Model
 {
     /** @var string */
-    private $_sTable;
+    private $sTable;
 
     /** @var null|string */
-    private $_sName;
+    private $sName;
 
     /** @var null|string */
-    private $_sType;
+    private $sType;
 
     /** @var null|int */
-    private $_iLength;
+    private $iLength;
 
     /** @var null|string */
-    private $_sDefVal;
+    private $sDefVal;
 
     /** @var string */
-    private $_sSql;
+    private $sSql;
 
     /**
      * @param string $sTable Table name.
@@ -45,11 +45,11 @@ class FieldModel extends Model
     {
         parent::__construct();
 
-        $this->_sTable = Various::checkModelTable($sTable);
-        $this->_sName = $sName;
-        $this->_sType = $sType;
-        $this->_iLength = (int)$iLength;
-        $this->_sDefVal = $sDefVal;
+        $this->sTable = Various::checkModelTable($sTable);
+        $this->sName = $sName;
+        $this->sType = $sType;
+        $this->iLength = (int)$iLength;
+        $this->sDefVal = $sDefVal;
     }
 
     /**
@@ -59,7 +59,7 @@ class FieldModel extends Model
      */
     public function all()
     {
-        $rStmt = Db::getInstance()->query('SELECT * FROM' . Db::prefix($this->_sTable) . 'LIMIT 1');
+        $rStmt = Db::getInstance()->query('SELECT * FROM' . Db::prefix($this->sTable) . 'LIMIT 1');
 
         $iNum = (int)$rStmt->rowCount();
         $aColumn = array();
@@ -79,19 +79,19 @@ class FieldModel extends Model
 
     public function insert()
     {
-        $this->_sSql = 'ALTER TABLE' . Db::prefix($this->_sTable) . 'ADD ' . $this->_sName . ' ' . $this->getType();
+        $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'ADD ' . $this->sName . ' ' . $this->getType();
         return $this->execute();
     }
 
     public function update()
     {
-        $this->_sSql = 'ALTER TABLE' . Db::prefix($this->_sTable) . 'CHANGE ' . (new Http)->get('name') . ' ' . $this->_sName . ' ' . $this->getType();
+        $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'CHANGE ' . (new Http)->get('name') . ' ' . $this->sName . ' ' . $this->getType();
         return $this->execute();
     }
 
     public function delete()
     {
-        $this->_sSql = 'ALTER TABLE' . Db::prefix($this->_sTable) . 'DROP ' . $this->_sName;
+        $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'DROP ' . $this->sName;
         return $this->execute();
     }
 
