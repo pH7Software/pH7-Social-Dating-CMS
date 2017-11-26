@@ -86,7 +86,7 @@ class ImportUser extends Core
         $this->aFile = $aFiles;
         $this->rHandler = @fopen($this->aFile['tmp_name'], 'rb');
         $this->aFileData = @fgetcsv($this->rHandler, 0, $sDelimiter, $sEnclosure);
-        $this->aRes = $this->run($sDelimiter, $sEnclosure);
+        $this->aRes = $this->run();
     }
 
     /**
@@ -234,14 +234,11 @@ class ImportUser extends Core
     }
 
     /**
-     * @param string $sDelimiter
-     * $param string $sEnclosure
-     *
      * @return array
      */
-    private function run($sDelimiter, $sEnclosure)
+    private function run()
     {
-        $iErrType = $this->hasError($sDelimiter, $sEnclosure);
+        $iErrType = $this->hasError();
 
         if ($iErrType !== static::NO_ERRORS) {
             $this->removeTmpFile();
@@ -273,12 +270,9 @@ class ImportUser extends Core
     }
 
     /**
-     * @param string $sDelimiter
-     * @param string $sEnclosure
-     *
      * @return int
      */
-    private function hasError($sDelimiter, $sEnclosure)
+    private function hasError()
     {
         $sExtFile = $this->file->getFileExt($this->aFile['name']);
 
