@@ -54,7 +54,7 @@ ServerSignature Off
 <Files ~ "^\.ht">
     Order allow,deny
     Deny from all
-    Satisfy All
+    Satisfy all
 </Files>
 
 # block bots spam
@@ -567,13 +567,13 @@ ServerSignature Off
     SetEnvIfNoCase User-Agent "^zerxbot" bad_bot
     SetEnvIfNoCase User-Agent "^Zeus" bad_bot
     SetEnvIfNoCase User-Agent "^ZyBorg" bad_bot
-    Order Deny,Allow
+    Order deny, allow
     Deny from env=bad_bot
 </IfModule>
 
 <Limit GET POST PUT DELETE HEAD>
-    Order Allow,Deny
-    Allow from All
+    Order allow, deny
+    Allow from all
     Deny from env=bad_bot
 </Limit>
 
