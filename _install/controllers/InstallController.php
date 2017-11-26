@@ -28,6 +28,7 @@ class InstallController extends Controller
         'chatroulette' => '0',
         'picture' => '1',
         'video' => '1',
+        'friend' => '1',
         'hotornot' => '0',
         'forum' => '1',
         'note' => '1',
@@ -39,7 +40,6 @@ class InstallController extends Controller
         'mail' => '1',
         'im' => '0',
         'user-dashboard' => '0',
-        'friend' => '1',
         'related-profile' => '1'
     ];
 
@@ -51,6 +51,7 @@ class InstallController extends Controller
         'chatroulette' => '1',
         'picture' => '1',
         'video' => '0',
+        'friend' => '0',
         'hotornot' => '1',
         'forum' => '0',
         'note' => '0',
@@ -62,8 +63,7 @@ class InstallController extends Controller
         'mail' => '1',
         'im' => '1',
         'user-dashboard' => '1',
-        'friend' => '0',
-        'related-profile' => '0'
+        'related-profile' => '1'
     ];
 
     /**
