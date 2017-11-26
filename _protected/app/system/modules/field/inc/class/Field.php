@@ -45,7 +45,7 @@ class Field
      */
     public static function getTable($sMod)
     {
-        return (strtolower($sMod) == 'aff' ? 'Affiliates' : 'Members') . 'Info';
+        return (strtolower($sMod) === 'aff' ? 'Affiliates' : 'Members') . 'Info';
     }
 
     /**
