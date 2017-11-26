@@ -111,13 +111,13 @@ class ImportUser extends Core
         foreach (self::DB_TYPES as $sType) {
             $sData = !empty($this->aFileData[$this->aTmpData[$sType]]) ? trim($this->aFileData[$this->aTmpData[$sType]]) : $this->aTmpData[$sType];
 
-            if ($sType == 'username') {
+            if ($sType === 'username') {
                 $this->aData[$iRow][$sType] = $oUser->findUsername($sData, $this->aData[$iRow]['first_name'], $this->aData[$iRow]['last_name']);
-            } elseif ($sType == 'sex') {
+            } elseif ($sType === 'sex') {
                 $this->aData[$iRow][$sType] = $this->checkGender($sData);
-            } elseif ($sType == 'match_sex') {
+            } elseif ($sType === 'match_sex') {
                 $this->aData[$iRow][$sType] = [$this->checkGender($sData)];
-            } elseif ($sType == 'birth_date') {
+            } elseif ($sType === 'birth_date') {
                 $this->aData[$iRow][$sType] = $this->dateTime->get($sData)->date('Y-m-d');
             } else {
                 $this->aData[$iRow][$sType] = $sData;
@@ -163,19 +163,60 @@ class ImportUser extends Core
             $sVal = strtolower(trim(str_replace(['-', '_', ' '], '', $sVal)));
 
             // Test comparisons of strings and adding values in an array "ImportUser::$_aTmpData"
-            if ($sVal == 'username' || $sVal == 'login' || $sVal == 'user' || $sVal == 'nickname') $this->aTmpData['username'] = $sKey;
-            if ($sVal == 'name' || $sVal == 'firstname' || $sVal == 'forname') $this->aTmpData['first_name'] = $sKey;
-            if ($sVal == 'lastname' || $sVal == 'surname') $this->aTmpData['last_name'] = $sKey;
-            if ($sVal == 'matchsex' || $sVal == 'looking' || $sVal == 'lookingfor') $this->aTmpData['match_sex'] = $sKey;
-            if ($sVal == 'sex' || $sVal == 'gender') $this->aTmpData['sex'] = $sKey;
-            if ($sVal == 'email' || $sVal == 'mail') $this->aTmpData['email'] = $sKey;
-            if ($sVal == 'desc' || $sVal == 'description' || $sVal == 'descriptionme' || $sVal == 'generaldescription' || $sVal == 'about' || $sVal == 'aboutme' || $sVal == 'bio' || $sVal == 'biography' || $sVal == 'comment') $this->aTmpData['description'] = $sKey;
-            if ($sVal == 'country' || $sVal == 'countryid') $this->aTmpData['country'] = $sKey;
-            if ($sVal == 'city' || $sVal == 'town') $this->aTmpData['city'] = $sKey;
-            if ($sVal == 'state' || $sVal == 'district' || $sVal == 'province' || $sVal == 'region') $this->aTmpData['state'] = $sKey;
-            if ($sVal == 'zip' || $sVal == 'zipcode' || $sVal == 'postal' || $sVal == 'postalcode' || $sVal == 'eircode') $this->aTmpData['zip_code'] = $sKey;
-            if ($sVal == 'website' || $sVal == 'site' || $sVal == 'url') $this->aTmpData['website'] = $sKey;
-            if ($sVal == 'birthday' || $sVal == 'birthdate' || $sVal == 'dateofbirth') $this->aTmpData['birth_date'] = $sKey;
+            if ($sVal === 'username' || $sVal === 'login' || $sVal === 'user' || $sVal === 'nickname') {
+                $this->aTmpData['username'] = $sKey;
+            }
+
+            if ($sVal === 'name' || $sVal === 'firstname' || $sVal === 'forname') {
+                $this->aTmpData['first_name'] = $sKey;
+            }
+
+            if ($sVal === 'lastname' || $sVal === 'surname') {
+                $this->aTmpData['last_name'] = $sKey;
+            }
+
+            if ($sVal === 'matchsex' || $sVal === 'looking' || $sVal === 'lookingfor') {
+                $this->aTmpData['match_sex'] = $sKey;
+            }
+
+            if ($sVal === 'sex' || $sVal === 'gender') {
+                $this->aTmpData['sex'] = $sKey;
+            }
+
+            if ($sVal === 'email' || $sVal === 'mail') {
+                $this->aTmpData['email'] = $sKey;
+            }
+
+            if ($sVal === 'desc' || $sVal === 'description' || $sVal === 'descriptionme' ||
+                $sVal === 'generaldescription' || $sVal === 'about' || $sVal === 'aboutme' ||
+                $sVal === 'bio' || $sVal === 'biography' || $sVal === 'comment') {
+                $this->aTmpData['description'] = $sKey;
+            }
+
+            if ($sVal === 'country' || $sVal === 'countryid') {
+                $this->aTmpData['country'] = $sKey;
+            }
+
+            if ($sVal === 'city' || $sVal === 'town') {
+                $this->aTmpData['city'] = $sKey;
+            }
+
+            if ($sVal === 'state' || $sVal === 'district' || $sVal === 'province' || $sVal === 'region') {
+                $this->aTmpData['state'] = $sKey;
+            }
+
+            if ($sVal === 'zip' || $sVal === 'zipcode' || $sVal === 'postal' ||
+                $sVal === 'postalcode' || $sVal === 'eircode') {
+                $this->aTmpData['zip_code'] = $sKey;
+            }
+
+            if ($sVal === 'website' || $sVal === 'site' || $sVal === 'url') {
+                $this->aTmpData['website'] = $sKey;
+            }
+
+            if ($sVal === 'birthday' || $sVal === 'birthdate' || $sVal === 'dateofbirth') {
+                $this->aTmpData['birth_date'] = $sKey;
+            }
         }
     }
 
@@ -279,7 +320,7 @@ class ImportUser extends Core
     {
         $sExtFile = $this->file->getFileExt($this->aFile['name']);
 
-        if ($sExtFile != 'csv' && $sExtFile != 'txt') {
+        if ($sExtFile !== 'csv' && $sExtFile !== 'txt') {
             return static::ERR_BAD_FILE;
         }
 
