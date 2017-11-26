@@ -26,7 +26,7 @@ use ZipArchive;
 
 class File
 {
-    const REGEX_BINARY_FILE = '/^(.*?)\.(gif|jpg|jpeg|png|ico|mp3|mp4|mov|avi|flv|mpg|mpeg|wmv|ogg|ogv|webm|pdf|ttf|eot|woff|svg|swf)$/i';
+    const REGEX_BINARY_FILE = '/^(.*?)\.(gif|jpg|jpeg|png|webp|ico|mp3|mp4|mov|avi|flv|mpg|mpeg|wmv|ogg|ogv|webm|pdf|ttf|eot|woff|svg|swf)$/i';
 
     // End Of Line relative to the operating system
     const EOL = PHP_EOL;
@@ -50,6 +50,7 @@ class File
         'png' => 'image/png',
         'jpeg' => 'image/jpg',
         'jpg' => 'image/jpg',
+        'webp' => 'image/webp',
         'ico' => 'image/x-icon',
         'eot' => 'application/vnd.ms-fontobject',
         'otf' => 'application/octet-stream',
@@ -59,6 +60,7 @@ class File
         'swf' => 'application/x-shockwave-flash',
         'mp3' => 'audio/mpeg',
         'mp4' => 'video/mp4',
+        'webm' => 'video/webm',
         'mov' => 'video/quicktime',
         'avi' => 'video/x-msvideo',
         'php' => 'text/plain',
