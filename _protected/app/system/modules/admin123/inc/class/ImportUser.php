@@ -23,6 +23,7 @@ use PH7\Framework\Util\Various;
 
 class ImportUser extends Core
 {
+    const NO_ERRORS = 0;
     const ERR_BAD_FILE = 1;
     const ERR_TOO_LARGE = 2;
     const ERR_INVALID = 3;
@@ -64,9 +65,6 @@ class ImportUser extends Core
     /** @var array */
     private $aRes;
 
-    /** @var int */
-    private $iErrType;
-
     /**
      * @var array $aGenderList Gender types available for pH7CMS.
      */
@@ -82,20 +80,11 @@ class ImportUser extends Core
         parent::__construct();
 
         $this->aFile = $aFiles;
-        $sExtFile = $this->file->getFileExt($this->aFile['name']);
+        $iErrType = $this->hasError($sDelimiter, $sEnclosure);
 
-        if ($sExtFile != 'csv' && $sExtFile != 'txt')
-            $this->iErrType = static::ERR_BAD_FILE;
-        elseif ($this->aFile['error'] == UPLOAD_ERR_INI_SIZE)
-            $this->iErrType = static::ERR_TOO_LARGE;
-        elseif (!$rHandler = @fopen($this->aFile['tmp_name'], 'rb'))
-            $this->iErrType = static::ERR_INVALID;
-        elseif (!($this->aFileData = @fgetcsv($rHandler, 0, $sDelimiter, $sEnclosure)) || !is_array($this->aFileData))
-            $this->iErrType = static::ERR_INVALID;
-
-        if (!empty($this->iErrType)) {
+        if ($iErrType !== static::NO_ERRORS) {
             $this->removeTmpFile();
-            $this->aRes = ['status' => false, 'msg' => $this->getErrMsg()];
+            $this->aRes = ['status' => false, 'msg' => $this->getErrMsg($iErrType)];
         } else {
             $this->setDefVals();
 
@@ -210,11 +199,13 @@ class ImportUser extends Core
     /**
      * Returns the error message for the form.
      *
+     * @param int $iErrType
+     *
      * @return string The error message.
      */
-    protected function getErrMsg()
+    protected function getErrMsg($iErrType)
     {
-        switch ($this->iErrType) {
+        switch ($iErrType) {
             case static::ERR_BAD_FILE:
                 $sErrMsg = t('Invalid File Format! Please select a valid CSV/TXT file containing data members.');
                 break;
@@ -257,5 +248,34 @@ class ImportUser extends Core
     private function removeTmpFile()
     {
         $this->file->deleteFile($this->aFile['tmp_name']);
+    }
+
+    /**
+     * @param string $sDelimiter
+     * @param string $sEnclosure
+     *
+     * @return int
+     */
+    private function hasError($sDelimiter, $sEnclosure)
+    {
+        $sExtFile = $this->file->getFileExt($this->aFile['name']);
+
+        if ($sExtFile != 'csv' && $sExtFile != 'txt') {
+            return static::ERR_BAD_FILE;
+        }
+
+        if ($this->aFile['error'] === UPLOAD_ERR_INI_SIZE) {
+            return static::ERR_TOO_LARGE;
+        }
+
+        if (!$rHandler = @fopen($this->aFile['tmp_name'], 'rb')) {
+            return static::ERR_INVALID;
+        }
+
+        if (!($this->aFileData = @fgetcsv($rHandler, 0, $sDelimiter, $sEnclosure)) || !is_array($this->aFileData)) {
+            return static::ERR_INVALID;
+        }
+
+        return static::NO_ERRORS;
     }
 }
