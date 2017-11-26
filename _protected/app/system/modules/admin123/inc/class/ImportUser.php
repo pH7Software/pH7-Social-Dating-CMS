@@ -50,6 +50,9 @@ class ImportUser extends Core
         'ip'
     ];
 
+    /** @var bool|resource */
+    private $rHandler;
+
     /** @var array */
     private $aFile;
 
@@ -79,54 +82,11 @@ class ImportUser extends Core
     {
         parent::__construct();
 
+        // Initialize necessary variables
         $this->aFile = $aFiles;
-        $iErrType = $this->hasError($sDelimiter, $sEnclosure);
-
-        if ($iErrType !== static::NO_ERRORS) {
-            $this->removeTmpFile();
-            $this->aRes = ['status' => false, 'msg' => $this->getErrMsg($iErrType)];
-        } else {
-            $this->setDefVals();
-
-            foreach ($this->aFileData as $sKey => $sVal) {
-                // Clean the text to make comparisons easier...
-                $sVal = strtolower(trim(str_replace(['-', '_', ' '], '', $sVal)));
-
-                // Test comparisons of strings and adding values in an array "ImportUser::$_aTmpData"
-                if ($sVal == 'username' || $sVal == 'login' || $sVal == 'user' || $sVal == 'nickname') $this->aTmpData['username'] = $sKey;
-                if ($sVal == 'name' || $sVal == 'firstname' || $sVal == 'forname') $this->aTmpData['first_name'] = $sKey;
-                if ($sVal == 'lastname' || $sVal == 'surname') $this->aTmpData['last_name'] = $sKey;
-                if ($sVal == 'matchsex' || $sVal == 'looking' || $sVal == 'lookingfor') $this->aTmpData['match_sex'] = $sKey;
-                if ($sVal == 'sex' || $sVal == 'gender') $this->aTmpData['sex'] = $sKey;
-                if ($sVal == 'email' || $sVal == 'mail') $this->aTmpData['email'] = $sKey;
-                if ($sVal == 'desc' || $sVal == 'description' || $sVal == 'descriptionme' || $sVal == 'generaldescription' || $sVal == 'about' || $sVal == 'aboutme' || $sVal == 'bio' || $sVal == 'biography' || $sVal == 'comment') $this->aTmpData['description'] = $sKey;
-                if ($sVal == 'country' || $sVal == 'countryid') $this->aTmpData['country'] = $sKey;
-                if ($sVal == 'city' || $sVal == 'town') $this->aTmpData['city'] = $sKey;
-                if ($sVal == 'state' || $sVal == 'district' || $sVal == 'province' || $sVal == 'region') $this->aTmpData['state'] = $sKey;
-                if ($sVal == 'zip' || $sVal == 'zipcode' || $sVal == 'postal' || $sVal == 'postalcode' || $sVal == 'eircode') $this->aTmpData['zip_code'] = $sKey;
-                if ($sVal == 'website' || $sVal == 'site' || $sVal == 'url') $this->aTmpData['website'] = $sKey;
-                if ($sVal == 'birthday' || $sVal == 'birthdate' || $sVal == 'dateofbirth') $this->aTmpData['birth_date'] = $sKey;
-            }
-
-            $iRow = 0;
-            $oUserModel = new UserCoreModel;
-            $oExistsModel = new ExistsCoreModel;
-            $oValidate = new Validate;
-            while (($this->aFileData = fgetcsv($rHandler, 0, $sDelimiter, $sEnclosure)) !== false) {
-                $sEmail = trim($this->aFileData[$this->aTmpData['email']]);
-                if ($oValidate->email($sEmail) && !$oExistsModel->email($sEmail)) {
-                    $this->setData($iRow);
-                    $oUserModel->add(escape($this->aData[$iRow], true));
-                    $iRow++;
-                }
-            }
-
-            $this->removeTmpFile();
-            fclose($rHandler);
-            unset($rHandler, $oUserModel, $oExistsModel, $oValidate, $this->aTmpData, $this->aFileData, $this->aData);
-
-            $this->aRes = ['status' => true, 'msg' => nt('%n% user has been successfully added.', '%n% users has been successfully added.', $iRow)];
-        }
+        $this->rHandler = @fopen($this->aFile['tmp_name'], 'rb');
+        $this->aFileData = @fgetcsv($this->rHandler, 0, $sDelimiter, $sEnclosure);
+        $this->aRes = $this->run($sDelimiter, $sEnclosure);
     }
 
     /**
@@ -144,7 +104,7 @@ class ImportUser extends Core
      *
      * @return void
      */
-    protected function setData($iRow)
+    private function setData($iRow)
     {
         $oUser = new UserCore;
 
@@ -172,7 +132,7 @@ class ImportUser extends Core
      *
      * @return void
      */
-    protected function setDefVals()
+    private function setDefVals()
     {
         $sFiveChars = Various::genRnd($this->aFile['name'], 5);
 
@@ -196,6 +156,29 @@ class ImportUser extends Core
         ];
     }
 
+    private function setTmpData()
+    {
+        foreach ($this->aFileData as $sKey => $sVal) {
+            // Clean the text to make comparisons easier...
+            $sVal = strtolower(trim(str_replace(['-', '_', ' '], '', $sVal)));
+
+            // Test comparisons of strings and adding values in an array "ImportUser::$_aTmpData"
+            if ($sVal == 'username' || $sVal == 'login' || $sVal == 'user' || $sVal == 'nickname') $this->aTmpData['username'] = $sKey;
+            if ($sVal == 'name' || $sVal == 'firstname' || $sVal == 'forname') $this->aTmpData['first_name'] = $sKey;
+            if ($sVal == 'lastname' || $sVal == 'surname') $this->aTmpData['last_name'] = $sKey;
+            if ($sVal == 'matchsex' || $sVal == 'looking' || $sVal == 'lookingfor') $this->aTmpData['match_sex'] = $sKey;
+            if ($sVal == 'sex' || $sVal == 'gender') $this->aTmpData['sex'] = $sKey;
+            if ($sVal == 'email' || $sVal == 'mail') $this->aTmpData['email'] = $sKey;
+            if ($sVal == 'desc' || $sVal == 'description' || $sVal == 'descriptionme' || $sVal == 'generaldescription' || $sVal == 'about' || $sVal == 'aboutme' || $sVal == 'bio' || $sVal == 'biography' || $sVal == 'comment') $this->aTmpData['description'] = $sKey;
+            if ($sVal == 'country' || $sVal == 'countryid') $this->aTmpData['country'] = $sKey;
+            if ($sVal == 'city' || $sVal == 'town') $this->aTmpData['city'] = $sKey;
+            if ($sVal == 'state' || $sVal == 'district' || $sVal == 'province' || $sVal == 'region') $this->aTmpData['state'] = $sKey;
+            if ($sVal == 'zip' || $sVal == 'zipcode' || $sVal == 'postal' || $sVal == 'postalcode' || $sVal == 'eircode') $this->aTmpData['zip_code'] = $sKey;
+            if ($sVal == 'website' || $sVal == 'site' || $sVal == 'url') $this->aTmpData['website'] = $sKey;
+            if ($sVal == 'birthday' || $sVal == 'birthdate' || $sVal == 'dateofbirth') $this->aTmpData['birth_date'] = $sKey;
+        }
+    }
+
     /**
      * Returns the error message for the form.
      *
@@ -203,7 +186,7 @@ class ImportUser extends Core
      *
      * @return string The error message.
      */
-    protected function getErrMsg($iErrType)
+    private function getErrMsg($iErrType)
     {
         switch ($iErrType) {
             case static::ERR_BAD_FILE:
@@ -229,7 +212,7 @@ class ImportUser extends Core
      *
      * @return string
      */
-    protected function checkGender($sSex)
+    private function checkGender($sSex)
     {
         $sSex = strtolower($sSex);
 
@@ -252,6 +235,45 @@ class ImportUser extends Core
 
     /**
      * @param string $sDelimiter
+     * $param string $sEnclosure
+     *
+     * @return array
+     */
+    private function run($sDelimiter, $sEnclosure)
+    {
+        $iErrType = $this->hasError($sDelimiter, $sEnclosure);
+
+        if ($iErrType !== static::NO_ERRORS) {
+            $this->removeTmpFile();
+            $this->aRes = ['status' => false, 'msg' => $this->getErrMsg($iErrType)];
+        } else {
+            $this->setDefVals();
+            $this->setTmpData();
+
+            $iRow = 0;
+            $oUserModel = new UserCoreModel;
+            $oExistsModel = new ExistsCoreModel;
+            $oValidate = new Validate;
+
+            while ($this->aFileData !== false) {
+                $sEmail = trim($this->aFileData[$this->aTmpData['email']]);
+                if ($oValidate->email($sEmail) && !$oExistsModel->email($sEmail)) {
+                    $this->setData($iRow);
+                    $oUserModel->add(escape($this->aData[$iRow], true));
+                    $iRow++;
+                }
+            }
+
+            $this->removeTmpFile();
+            fclose($this->rHandler);
+            unset($this->rHandler, $oUserModel, $oExistsModel, $oValidate, $this->aTmpData, $this->aFileData, $this->aData);
+
+            return ['status' => true, 'msg' => nt('%n% user has been successfully added.', '%n% users has been successfully added.', $iRow)];
+        }
+    }
+
+    /**
+     * @param string $sDelimiter
      * @param string $sEnclosure
      *
      * @return int
@@ -268,11 +290,7 @@ class ImportUser extends Core
             return static::ERR_TOO_LARGE;
         }
 
-        if (!$rHandler = @fopen($this->aFile['tmp_name'], 'rb')) {
-            return static::ERR_INVALID;
-        }
-
-        if (!($this->aFileData = @fgetcsv($rHandler, 0, $sDelimiter, $sEnclosure)) || !is_array($this->aFileData)) {
+        if (!$this->rHandler || !$this->aFileData || !is_array($this->aFileData)) {
             return static::ERR_INVALID;
         }
 
