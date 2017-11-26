@@ -195,14 +195,12 @@ class MainController extends Controller
                 if ($o2CO->valid($sVendorId, $sSecretWord)
                     && $this->httpRequest->postExists('sale_id')
                 ) {
-                    if (
-                    $this->oUserModel->updateMembership(
+                    if ($this->oUserModel->updateMembership(
                         $iItemNumber,
                         $this->iProfileId,
                         $this->dateTime->get()
                             ->dateTime('Y-m-d H:i:s')
-                    )
-                    ) {
+                    )) {
                         $this->bStatus = true; // Status is OK
                         $this->updateUserGroupId($iItemNumber);
                         $this->notification(TwoCO::class, $iItemNumber);
