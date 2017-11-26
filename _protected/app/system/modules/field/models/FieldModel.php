@@ -114,30 +114,41 @@ class FieldModel extends Model
      */
     protected function execute()
     {
-        $rStmt = Db::getInstance()->exec($this->_sSql);
+        $rStmt = Db::getInstance()->exec($this->sSql);
         return $rStmt === false ? $rStmt->errorInfo() : true;
     }
 
     protected function getType()
     {
-        switch ($this->_sType) {
-            case 'textbox':
-                if (mb_strlen($this->_sDefVal) > $this->_iLength) $this->_iLength = mb_strlen($this->_sDefVal);
-                if ($this->_iLength == 0 || $this->_iLength > 255) $this->_iLength = 255;
-                $this->_sSql .= 'VARCHAR(' . $this->_iLength . ')';
-                break;
+        switch ($this->sType) {
+            case 'textbox': {
+                if (mb_strlen($this->sDefVal) > $this->iLength) {
+                    $this->iLength = mb_strlen($this->sDefVal);
+                }
+                if ($this->iLength === 0 || $this->iLength > 255) {
+                    $this->iLength = 255;
+                }
+                $this->sSql .= 'VARCHAR(' . $this->iLength . ')';
+            } break;
 
-            case 'number':
-                if (!is_numeric($this->_sDefVal)) $this->_sDefVal = 0;
-                if (strlen($this->_sDefVal) > $this->_iLength) $this->_iLength = strlen($this->_sDefVal);
-                if ($this->_iLength == 0 || $this->_iLength > 11) $this->_iLength = 9; // Set the default maximum length value.
-                $this->_sSql .= 'INT(' . $this->_iLength . ')';
-                break;
+            case 'number': {
+                if (!is_numeric($this->sDefVal)) {
+                    $this->sDefVal = 0;
+                }
+                if (strlen($this->sDefVal) > $this->iLength) {
+                    $this->iLength = strlen($this->sDefVal);
+                }
+                if ($this->iLength === 0 || $this->iLength > 11) {
+                    $this->iLength = 9; // Set the default maximum length value.
+                }
+
+                $this->sSql .= 'INT(' . $this->iLength . ')';
+            } break;
 
             default:
                 throw new PH7InvalidArgumentException('Invalid Field type!');
         }
 
-        return $this->_sSql . ' NOT NULL DEFAULT ' . Db::getInstance()->quote($this->_sDefVal) . ';';
+        return $this->sSql . ' NOT NULL DEFAULT ' . Db::getInstance()->quote($this->sDefVal) . ';';
     }
 }
