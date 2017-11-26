@@ -34,7 +34,7 @@ class EditFieldForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Field Name:'), 'name', array('description' => t('Field Name must contain 2-30 alphanumeric characters ([a-z], [A-Z], [0-9] and [_], [-]). After you can translate this language key in <span class="italic underline">%0%</span>', PH7_PATH_APP_LANG . PH7_LANG_NAME . PH7_DS . 'language.php'), 'value' => (new Http)->get('name'), 'pattern' => $sFieldPattern, 'required' => 1, 'validation' => new \PFBC\Validation\RegExp($sFieldPattern))));
         $oForm->addElement(new \PFBC\Element\Number(t('Length Field:'), 'length', array('description' => t('Length of the field in numeric number (e.g., 250).') . '<br /><small>' . t('Note: The field will always have the default value (255) even if you updated to another value. Your change is saved, but cannot be retrieve on the form.') . '</small>', 'value' => 255, 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Default Field Value'), 'value', array('description' => t('The default value of the field (optional).') . '<br /><small>' . t('Note: The default value will always be empty even if you added a default string. Your change is saved, but cannot be retrieve on the form.') . '</small>', 'validation' => new \PFBC\Validation\Str(2, 120))));
-        $oForm->addElement(new \PFBC\Element\Button(t('Edit')));
+        $oForm->addElement(new \PFBC\Element\Button(t('Update')));
         $oForm->render();
     }
 }
