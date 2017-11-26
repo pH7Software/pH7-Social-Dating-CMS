@@ -195,7 +195,7 @@ class UserController extends MainController
             if (!empty($oUsers)) {
                 $this->oRest->response($this->set([$oUsers]));
             } else {
-                $aResults = ['status' => 'failed', 'msg' => t('No profiles found in %0%, %1%', $sCity, $sCountry)];
+                $aResults = ['status' => 'failed', 'msg' => t('No profiles found in %1%, %0%', $sCity, $sCountryCode)];
                 $this->oRest->response($this->set($aResults), 404);
             }
         }
