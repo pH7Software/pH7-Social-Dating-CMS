@@ -14,10 +14,13 @@ use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\Spam\Spam;
 use PH7\Framework\Url\Header;
 
 class MailFormProcess extends Form
 {
+    const MAX_ALLOWED_LINKS = 0;
+
     public function __construct()
     {
         parent::__construct();
@@ -43,6 +46,8 @@ class MailFormProcess extends Form
             \PFBC\Form::setError('form_compose_mail', Form::waitWriteMsg($iTimeDelay));
         } elseif (!$bIsAdmin && $oMailModel->isDuplicateContent($iSenderId, $sMessage)) {
             \PFBC\Form::setError('form_compose_mail', Form::duplicateContentMsg());
+        } elseif (!$bIsAdmin && Spam::areUrls($sMessage, self::MAX_ALLOWED_LINKS)) {
+            \PFBC\Form::setError('form_compose_mail', Form::tooManyUrlsMsg());
         } else {
             $mSendMsg = $oMailModel->sendMsg($iSenderId, $iRecipientId, $this->httpRequest->post('title'), $sMessage, $sCurrentTime);
 
