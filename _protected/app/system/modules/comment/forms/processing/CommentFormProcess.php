@@ -12,10 +12,13 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\Spam\Spam;
 use PH7\Framework\Url\Header;
 
 class CommentFormProcess extends Form
 {
+    const MAX_ALLOWED_LINKS = 1;
+
     public function __construct()
     {
         parent::__construct();
@@ -35,6 +38,8 @@ class CommentFormProcess extends Form
             \PFBC\Form::setError('form_comment', Form::waitWriteMsg($iTimeDelay));
         } elseif ($oCommentModel->isDuplicateContent($iSenderId, $sComment, $sTable)) {
             \PFBC\Form::setError('form_comment', Form::duplicateContentMsg());
+        } elseif (Spam::areUrls($sComment, self::MAX_ALLOWED_LINKS)) {
+            \PFBC\Form::setError('form_comment', Form::tooManyUrlsMsg());
         } else {
             if (!$oCommentModel->add($sComment, $iRecipientId, $iSenderId, 1, $sCurrentTime, $sTable)) {
                 \PFBC\Form::setError('form_comment', t('Oops! Error when adding comment.'));
