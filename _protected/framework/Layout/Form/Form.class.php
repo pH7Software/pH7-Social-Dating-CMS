@@ -88,6 +88,23 @@ abstract class Form extends Core
     }
 
     /**
+     * @return string
+     */
+    public static function tooManyUrlsMsg()
+    {
+        return t('Oops! It seems that you abuse of links. Why links are that important for you...?');
+    }
+
+    /**
+     * @return string
+     */
+    public static function tooManyEmailsMsg()
+    {
+        return t('Oops! It seems that you abuse of emails. Why emails are that important for you...?');
+    }
+
+
+    /**
      * Wait to write a new message (mainly to reduce spam).
      *
      * @param integer $iWaitTime (in munutes)
