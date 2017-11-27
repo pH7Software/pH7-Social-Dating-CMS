@@ -85,6 +85,7 @@ class CommentController extends Controller
         } else {
             $this->notFound();
         }
+
         $this->output();
     }
 

@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Spam;
 
 class CommentModel extends CommentCoreModel
 {
@@ -52,12 +53,15 @@ class CommentModel extends CommentCoreModel
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Comments' . $sTable) . '(comment, recipient, sender, approved, createdDate) VALUES(:comment, :recipient, :sender, :approved, :createdDate)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Comments' . $sTable) .
+            '(comment, recipient, sender, approved, createdDate) VALUES(:comment, :recipient, :sender, :approved, :createdDate)');
+
         $rStmt->bindValue(':comment', $iCommentId, \PDO::PARAM_STR);
         $rStmt->bindValue('recipient', $iRecipientId, \PDO::PARAM_INT);
         $rStmt->bindValue(':sender', $iSenderId, \PDO::PARAM_INT);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
         $rStmt->bindValue(':createdDate', $sCreatedDate, \PDO::PARAM_STR);
+
         return $rStmt->execute();
     }
 
@@ -76,13 +80,16 @@ class CommentModel extends CommentCoreModel
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Comments' . $sTable) . 'SET comment = :comment, approved = :approved, updatedDate = :updatedDate WHERE commentId = :commentId AND recipient = :recipient AND sender = :sender LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Comments' . $sTable) .
+            'SET comment = :comment, approved = :approved, updatedDate = :updatedDate WHERE commentId = :commentId AND recipient = :recipient AND sender = :sender LIMIT 1');
+
         $rStmt->bindValue('commentId', $iCommentId, \PDO::PARAM_INT);
         $rStmt->bindValue('recipient', $iRecipientId, \PDO::PARAM_INT);
         $rStmt->bindValue(':sender', $iSenderId, \PDO::PARAM_INT);
         $rStmt->bindValue(':comment', $sComment, \PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
         $rStmt->bindValue(':updatedDate', $sUpdatedDate, \PDO::PARAM_STR);
+
         return $rStmt->execute();
     }
 
@@ -98,10 +105,13 @@ class CommentModel extends CommentCoreModel
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Comments' . $sTable) . 'WHERE commentId = :commentId AND recipient = :recipient AND sender = :sender LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Comments' . $sTable) .
+            'WHERE commentId = :commentId AND recipient = :recipient AND sender = :sender LIMIT 1');
+
         $rStmt->bindValue(':commentId', $iCommentId, \PDO::PARAM_INT);
         $rStmt->bindValue('recipient', $iRecipientId, \PDO::PARAM_INT);
         $rStmt->bindValue(':sender', $iSenderId, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -130,6 +140,7 @@ class CommentModel extends CommentCoreModel
             Db::free($rStmt);
             $this->cache->put($bData);
         }
+
         return $bData;
     }
 
@@ -146,7 +157,7 @@ class CommentModel extends CommentCoreModel
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        return Framework\Mvc\Model\Spam::detectDuplicate($sCheckMsg, 'comment', 'sender', $iSenderId, 'Comments' . $sTable);
+        return Spam::detectDuplicate($sCheckMsg, 'comment', 'sender', $iSenderId, 'Comments' . $sTable);
     }
 
     /**
@@ -163,11 +174,14 @@ class CommentModel extends CommentCoreModel
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT commentId FROM' . Db::prefix('Comments' . $sTable) . 'WHERE sender = :sender AND DATE_ADD(createdDate, INTERVAL :waitTime MINUTE) > :currentTime LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('SELECT commentId FROM' . Db::prefix('Comments' . $sTable) .
+            'WHERE sender = :sender AND DATE_ADD(createdDate, INTERVAL :waitTime MINUTE) > :currentTime LIMIT 1');
+
         $rStmt->bindValue(':sender', $iSenderId, \PDO::PARAM_INT);
         $rStmt->bindValue(':waitTime', $iWaitTime, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_STR);
         $rStmt->execute();
+
         return $rStmt->rowCount() === 0;
     }
 }
