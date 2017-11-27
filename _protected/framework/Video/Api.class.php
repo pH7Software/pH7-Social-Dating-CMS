@@ -44,6 +44,7 @@ class Api
                 break;
 
             case 'dailymotion':
+            case 'dai':
                 $sClass = (new Api\Dailymotion)->getVideo($sUrl);
                 break;
 
@@ -84,6 +85,7 @@ class Api
                 break;
 
             case 'dailymotion':
+            case 'dai':
                 $oClass = (new Api\Dailymotion)->getInfo($sUrl);
                 break;
 
@@ -127,6 +129,7 @@ class Api
                 break;
 
             case 'dailymotion':
+            case 'dai':
                 $sClass = (new Api\Dailymotion)->getMeta($sUrl, $sMedia, $iWidth, $iHeight);
                 break;
 
