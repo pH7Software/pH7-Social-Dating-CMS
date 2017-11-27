@@ -101,12 +101,12 @@ class PictureFormProcess extends Form
             $oPicture5->save($sPath . $sFile5);
             $oPicture6->save($sPath . $sFile6);
 
-            $this->iApproved = (DbConfig::getSetting('pictureManualApproval') == 0) ? '1' : '0';
+            $this->iApproved = DbConfig::getSetting('pictureManualApproval') == 0 ? '1' : '0';
 
             $this->checkNudityFilter($aPhotos[$i]);
 
             // It creates a nice title if no title is specified.
-            $sTitle = ($this->httpRequest->postExists('title') && $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2) ? $this->httpRequest->post('title') : $this->str->upperFirst(str_replace(array('-', '_'), ' ', str_ireplace(PH7_DOT . $oPicture1->getExt(), '', escape($_FILES['photos']['name'][$i], true))));
+            $sTitle = $this->getImageTitle($i, $oPicture1);
             $sTitle = MediaCore::cleanTitle($sTitle);
 
             (new PictureModel)->addPhoto(
@@ -147,5 +147,30 @@ class PictureFormProcess extends Form
             // The photo(s) seems to be suitable for adults only, so set for moderation
             $this->iApproved = '0';
         }
+    }
+
+    /**
+     * Create a nice picture title if no title is specified.
+     *
+     * @param int $i
+     * @param Image $oPicture
+     *
+     * @return string
+     */
+    private function getImageTitle($i, Image $oPicture)
+    {
+        if ($this->httpRequest->postExists('title') &&
+            $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2
+        ) {
+            return $this->httpRequest->post('title');
+        }
+
+        return $this->str->upperFirst(
+            str_replace(
+                ['-', '_'],
+                ' ',
+                str_ireplace(PH7_DOT . $oPicture->getExt(), '', escape($_FILES['photos']['name'][$i], true))
+            )
+        );
     }
 }

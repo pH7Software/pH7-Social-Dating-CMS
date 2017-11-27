@@ -29,6 +29,7 @@ class PictureForm
 
         $oAlbums = (new PictureModel)->getAlbumsName((new Session)->get('member_id'));
         $aAlbumName = array();
+
         foreach ($oAlbums as $oAlbum) {
             $aAlbumName[$oAlbum->albumId] = $oAlbum->name;
         }

@@ -22,6 +22,7 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Util\Various;
 use PH7\Framework\Video as V;
+use PH7\Framework\Video\Api\IApi;
 
 class VideoFormProcess extends Form
 {
@@ -71,8 +72,8 @@ class VideoFormProcess extends Form
                 return;
             }
 
-            $sTitle = ($this->httpRequest->postExists('title') && $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2 ? $this->httpRequest->post('title') : ($oInfo->getTitle() ? $oInfo->getTitle() : t('Untitled')));
-            $sDescription = ($this->httpRequest->postExists('description') ? $this->httpRequest->post('description') : ($oInfo->getDescription() ? $oInfo->getDescription() : ''));
+            $sTitle = $this->getApiVideoTitle($oInfo);
+            $sDescription = $this->getApiVideoDescription($oInfo);
             $sDuration = ($oInfo->getDuration() ? $oInfo->getDuration() : '0'); // Time in seconds
 
             if (!$sFile) {
@@ -94,8 +95,7 @@ class VideoFormProcess extends Form
                 \PFBC\Form::setError('form_video', t('File exceeds maximum allowed video filesize of %0%!', F\Various::bytesToSize($oVideo->getMaxSize())));
                 return;
             } else {
-                // It creates a nice title if no title is specified.
-                $sTitle = ($this->httpRequest->postExists('title') && $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2) ? $this->httpRequest->post('title') : $this->str->upperFirst(str_replace(array('-', '_'), ' ', str_ireplace(PH7_DOT . $oVideo->getExt(), '', escape($_FILES['video']['name'], true))));
+                $sTitle = $this->getVideoTitle($oVideo);
                 $sDescription = $this->httpRequest->post('description');
                 $sDuration = $oVideo->getDuration();
 
@@ -125,7 +125,7 @@ class VideoFormProcess extends Form
         }
 
         $sTitle = MediaCore::cleanTitle($sTitle);
-        $iApproved = (DbConfig::getSetting('videoManualApproval') == 0) ? '1' : '0';
+        $iApproved = DbConfig::getSetting('videoManualApproval') == 0 ? '1' : '0';
 
         (new VideoModel)->addVideo(
             $this->session->get('member_id'),
@@ -143,7 +143,7 @@ class VideoFormProcess extends Form
 
         $sModerationText = t('Your video has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
         $sText = t('Your video has been successfully added!');
-        $sMsg = ($iApproved == '0') ? $sModerationText : $sText;
+        $sMsg = $iApproved === '0' ? $sModerationText : $sText;
 
         Header::redirect(
             Uri::get(
@@ -153,6 +153,62 @@ class VideoFormProcess extends Form
                 $this->session->get('member_username') . ',' . $sAlbumTitle . ',' . $iAlbumId
             ),
             $sMsg
+        );
+    }
+
+    /**
+     * Creates a nice title if no title is specified.
+     *
+     * @param IApi $oInfo
+     *
+     * @return string
+     */
+    private function getApiVideoTitle(IApi $oInfo)
+    {
+        if ($this->httpRequest->postExists('title') &&
+            $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2
+        ) {
+            return $this->httpRequest->post('title');
+        }
+
+        return $oInfo->getTitle() ? $oInfo->getTitle() : t('Untitled');
+    }
+
+    /**
+     * @param IApi $oInfo
+     *
+     * @return string
+     */
+    private function getApiVideoDescription(IApi $oInfo)
+    {
+        if ($this->httpRequest->postExists('description')) {
+            return $this->httpRequest->post('description');
+        }
+
+        return $oInfo->getDescription() ? $oInfo->getDescription() : '';
+    }
+
+    /**
+     * Creates a nice title if no title is specified.
+     *
+     * @param V\Video $oVideo
+     *
+     * @return string
+     */
+    private function getVideoTitle(V\Video $oVideo)
+    {
+        if ($this->httpRequest->postExists('title') &&
+            $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2
+        ) {
+            return $this->httpRequest->post('title');
+        }
+
+        return $this->str->upperFirst(
+            str_replace(
+                ['-', '_'],
+                ' ',
+                str_ireplace(PH7_DOT . $oVideo->getExt(), '', escape($_FILES['video']['name'], true))
+            )
         );
     }
 }

@@ -22,7 +22,7 @@ class AvatarFormProcess extends Form
         parent::__construct();
 
         // Number has to be string because in DB it's an "enum" type
-        $this->iApproved = (AdminCore::auth() || DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
+        $this->iApproved = AdminCore::auth() || DbConfig::getSetting('avatarManualApproval') == 0 ? '1' : '0';
 
         if ($this->doesAdminEdit()) {
             $iProfileId = $this->httpRequest->get('profile_id');
@@ -40,7 +40,8 @@ class AvatarFormProcess extends Form
         } else {
             $sModerationText = t('Your profile photo has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
             $sText = t('Your profile photo has been updated successfully!');
-            $sMsg = ($this->iApproved == '0') ? $sModerationText : $sText;
+            $sMsg = $this->iApproved === '0' ? $sModerationText : $sText;
+
             \PFBC\Form::setSuccess('form_avatar', $sMsg);
         }
     }
@@ -51,7 +52,7 @@ class AvatarFormProcess extends Form
     private function checkNudityFilter()
     {
         if (DbConfig::getSetting('nudityFilter') && Filter::isNudity($_FILES['avatar']['tmp_name'])) {
-            // Avatar doesn't seem suitable for everyone. Overwrite "$iApproved" and set for moderation
+            // Avatar doesn't seem suitable for everyone. Overwrite "$iApproved" to set it for moderation
             $this->iApproved = '0';
         }
     }
