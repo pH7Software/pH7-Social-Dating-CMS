@@ -103,11 +103,15 @@ class UserCore
          * This can cause minor errors (eg if a user sent a file that is not a photo).
          * So we hide the errors if we are not in development mode.
          */
-        if (!isDebug()) error_reporting(0);
+        if (!isDebug()) {
+            error_reporting(0);
+        }
 
         $oAvatar1 = new Image($sFile, 600, 800);
 
-        if (!$oAvatar1->validate()) return false; // File type incompatible.
+        if (!$oAvatar1->validate()) {
+            return false; // File type incompatible!
+        }
 
         // We removes the old avatar if it exists and we delete the cache at the same time.
         $this->deleteAvatar($iProfileId, $sUsername);
@@ -219,11 +223,15 @@ class UserCore
          * This can cause minor errors (eg if a user sent a file that is not a photo).
          * So we hide the errors if we are not in development mode.
          */
-        if (!isDebug()) error_reporting(0);
+        if (!isDebug()) {
+            error_reporting(0);
+        }
 
         $oWallpaper = new Image($sFile, 600, 800);
 
-        if (!$oWallpaper->validate()) return false;
+        if (!$oWallpaper->validate()) {
+            return false;
+        }
 
         // We removes the old background if it exists and we delete the cache at the same time.
         $this->deleteBackground($iProfileId, $sUsername);
@@ -320,8 +328,9 @@ class UserCore
     public function setAuth(stdClass $oUserData, UserCoreModel $oUserModel, Session $oSession, SecurityModel $oSecurityModel)
     {
         // Remove the session if the user is logged on as "affiliate" or "administrator".
-        if (AffiliateCore::auth() || AdminCore::auth())
+        if (AffiliateCore::auth() || AdminCore::auth()) {
             $oSession->destroy();
+        }
 
         // Regenerate the session ID to prevent session fixation attack
         $oSession->regenerateId();
