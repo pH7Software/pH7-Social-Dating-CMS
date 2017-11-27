@@ -19,6 +19,7 @@ class Dailymotion extends Api implements IApi
     const PLAYER_URL = 'https://www.dailymotion.com/embed/video/';
     const REGEX_EMBED_FORMAT1 = '#/video/(\w+)_#i';
     const REGEX_EMBED_FORMAT2 = '#/embed/video/(\w+)#i';
+    const REGEX_SHARING_FORMAT = '#//dai\.ly/(\w+)#i'; // short sharing URL version
 
     /**
      * @param string $sUrl
@@ -72,6 +73,11 @@ class Dailymotion extends Api implements IApi
         }
 
         preg_match(static::REGEX_EMBED_FORMAT2, $sUrl, $aMatch);
+        if (!empty($aMatch[1])) {
+            return $aMatch[1];
+        }
+
+        preg_match(static::REGEX_SHARING_FORMAT, $sUrl, $aMatch);
         if (!empty($aMatch[1])) {
             return $aMatch[1];
         }
