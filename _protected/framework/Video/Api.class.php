@@ -114,9 +114,9 @@ class Api
     {
         $sClass = $this->clear($sUrl);
 
-        $sMedia = (isset($sMedia) ? $sMedia : 'movie');
-        $iWidth = (isset($iWidth) ? $iWidth : self::DEF_VIDEO_WIDTH);
-        $iHeight = (isset($iHeight) ? $iHeight : self::DEF_VIDEO_HEIGHT);
+        $sMedia = isset($sMedia) ? $sMedia : 'movie';
+        $iWidth = isset($iWidth) ? $iWidth : self::DEF_VIDEO_WIDTH;
+        $iHeight = isset($iHeight) ? $iHeight : self::DEF_VIDEO_HEIGHT;
 
         switch ($sClass) {
             case 'youtube':
