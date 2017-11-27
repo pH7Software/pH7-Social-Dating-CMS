@@ -32,7 +32,7 @@ class DisableModuleFormProcess extends Form
 
         $this->clearCache();
 
-        \PFBC\Form::setSuccess('form_module', t('Module Status have been saved!'));
+        \PFBC\Form::setSuccess('form_module', t('Module Status saved!'));
     }
 
     protected function disableMods(ModuleModel $oModuleModel)
