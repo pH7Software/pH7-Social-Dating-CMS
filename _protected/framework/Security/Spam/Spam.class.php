@@ -16,7 +16,7 @@ defined('PH7') or exit('Restricted access');
 
 class Spam
 {
-    const REGEX_URL_FORMAT = '#https?://(?:www\.)?\w+[a-z]{2,5}/?#i';
+    const REGEX_URL_FORMAT = '#https?://(?:www\.)?[a-z0-9._-]{2,}\.[a-z]{2,5}/?#i';
     const REGEX_EMAIL_FORMAT = '#[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}#i';
 
     const ERASE_CHARACTERS = [
