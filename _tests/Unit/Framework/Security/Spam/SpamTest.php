@@ -13,7 +13,7 @@ use PHPUnit_Framework_TestCase;
 
 class SpamTest extends PHPUnit_Framework_TestCase
 {
-    public function testNotDuplicatedTest()
+    public function testNotDuplicatedText()
     {
         $sText1 = 'Hi, so I am writing a test for a while and I love that, because tests are important, and yes...';
         $sText2 = 'Hi, so I am on the sofa watching TV for hours. TV shows are soooo gooood and soooo stupids.... sometimes?';
@@ -21,7 +21,7 @@ class SpamTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(Spam::detectDuplicate($sText1, $sText2));
     }
 
-    public function testDuplicatedTest()
+    public function testDuplicatedText()
     {
         $sText1 = 'Hi, so I am writing a test for a while and I love that, because tests are important, and yes...';
         $sText2 = 'Hi, so I am writing a test for a while and I love that, because tests are important, and yes!!!'; // Almost the same, so it's a duplicate!
