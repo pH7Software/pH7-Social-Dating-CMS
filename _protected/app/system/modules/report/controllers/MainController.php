@@ -12,7 +12,7 @@ class MainController extends Controller
 {
     public function abuse()
     {
-        $this->view->page_title = t('Report abuse contents');
+        $this->view->page_title = t('Report Abuse/Content');
 
         $this->output();
     }
