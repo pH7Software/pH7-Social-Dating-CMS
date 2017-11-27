@@ -16,6 +16,9 @@ defined('PH7') or exit('Restricted access');
 
 class Spam
 {
+    const REGEX_URL_FORMAT = '#https?://(?:www\.)?\w+[a-z]{2,5}/?#i';
+    const REGEX_EMAIL_FORMAT = '#[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}#i';
+
     const ERASE_CHARACTERS = [
         '#',
         '@',
@@ -62,5 +65,45 @@ class Spam
         $sText2 = str_ireplace(static::ERASE_CHARACTERS, '', $sText2);
 
         return stripos($sText1, $sText2) !== false;
+    }
+
+    /**
+     * Check if there are (x) links in text.
+     *
+     * @param string $sText
+     * @param int $iMaxAmount Number maximum of URLs the text can contain.
+     *
+     * @return bool TRUE if there are too many emails, FALSE otherwise.
+     */
+    public static function areUrls($sText, $iMaxAmount = 1)
+    {
+        return self::are(self::REGEX_URL_FORMAT, $sText, $iMaxAmount);
+    }
+
+    /**
+     * Check if there are (x) emails in the text.
+     *
+     * @param string $sText
+     * @param int $iMaxAmount Number maximum of emails the text can contain.
+     *
+     * @return bool TRUE if there are too many links than the accepted amount, FALSE otherwise.
+     */
+    public static function areEmails($sText, $iMaxAmount = 1)
+    {
+        return self::are(self::REGEX_EMAIL_FORMAT, $sText, $iMaxAmount);
+    }
+
+    /**
+     * @param string $sRegex
+     * @param string $sText
+     * @param int $iMaxAmount
+     *
+     * @return bool
+     */
+    private static function are($sRegex, $sText, $iMaxAmount)
+    {
+        preg_match_all($sRegex, $sText, $aMatch);
+
+        return count($aMatch[0]) > $iMaxAmount;
     }
 }
