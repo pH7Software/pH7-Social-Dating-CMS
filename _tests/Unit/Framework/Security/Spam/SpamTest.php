@@ -29,18 +29,32 @@ class SpamTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(Spam::detectDuplicate($sText1, $sText2));
     }
 
-    public function testTooManyLinksTest()
+    public function testTooManyLinks()
     {
         $sText = 'Hi, can you go to http://affiliate-link.com this website http://affiliate-link.com/?ref=4933 is so good!';
 
         $this->assertTrue(Spam::areUrls($sText, 1));
     }
 
-    public function testCorrectAmountOfLinksTest()
+    public function testCannotHaveUrls()
+    {
+        $sText = 'My URL is http://ph7.me';
+
+        $this->assertTrue(Spam::areUrls($sText, 0));
+    }
+
+    public function testCorrectAmountOfLinks()
     {
         $sText = 'I am nice. I just share one great website because I think it is a great resource: https://wikipedia.com ;)';
 
         $this->assertFalse(Spam::areUrls($sText, 1));
+    }
+
+    public function testTooManyEmails()
+    {
+        $sText = 'Hi! Please email me eva.nice@mail.com and even at evalana@mymail.io!';
+
+        $this->assertTrue(Spam::areEmails($sText, 1));
     }
 
     public function testCannotHaveEmails()
