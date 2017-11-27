@@ -18,6 +18,7 @@ use PH7\Framework\Url\Header;
 class CommentFormProcess extends Form
 {
     const MAX_ALLOWED_LINKS = 1;
+    const MAX_ALLOWED_EMAILS = 0;
 
     public function __construct()
     {
@@ -40,6 +41,8 @@ class CommentFormProcess extends Form
             \PFBC\Form::setError('form_comment', Form::duplicateContentMsg());
         } elseif (Spam::areUrls($sComment, self::MAX_ALLOWED_LINKS)) {
             \PFBC\Form::setError('form_comment', Form::tooManyUrlsMsg());
+        } elseif (Spam::areEmails($sComment, self::MAX_ALLOWED_EMAILS)) {
+            \PFBC\Form::setError('form_comment', Form::tooManyEmailsMsg());
         } else {
             if (!$oCommentModel->add($sComment, $iRecipientId, $iSenderId, 1, $sCurrentTime, $sTable)) {
                 \PFBC\Form::setError('form_comment', t('Oops! Error when adding comment.'));
