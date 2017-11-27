@@ -79,6 +79,7 @@ class AdminController extends Controller
         $this->view->h1_title = $this->sTitle;
         $this->view->dateTime = $this->dateTime;
         $this->view->report = $this->oReportModel->get($iId, 0, 1);
+
         $this->output();
     }
 
