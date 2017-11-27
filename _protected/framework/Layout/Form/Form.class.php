@@ -80,8 +80,6 @@ abstract class Form extends Core
     }
 
     /**
-     * Duplicate Content.
-     *
      * @return string
      */
     public static function duplicateContentMsg()
