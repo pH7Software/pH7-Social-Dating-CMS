@@ -8,15 +8,33 @@
 
 namespace PH7;
 
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Layout\Html\Design;
+use PH7\Framework\Layout\Html\Security as HtmlSecurity;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
+use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Url\Header;
+use PH7\Framework\Util\Various;
 
 class AdminController extends Controller
 {
     const PROFILES_PER_PAGE = 15;
 
-    private $oAff, $oAffModel, $sMsg, $sTitle, $iTotalUsers;
+    /** @var Affiliate */
+    private $oAff;
+
+    /** @var AffiliateModel */
+    private $oAffModel;
+
+    /** @var string */
+    private $sMsg;
+
+    /** @var string */
+    private $sTitle;
+
+    /** @var int */
+    private $iTotalUsers;
 
     public function __construct()
     {
@@ -29,7 +47,10 @@ class AdminController extends Controller
 
     public function index()
     {
-        Header::redirect(Uri::get('affiliate', 'admin', 'browse'), t('Welcome to the administration of Ad Affiliate'));
+        Header::redirect(
+            Uri::get('affiliate', 'admin', 'browse'),
+            t('Welcome to the administration of Ad Affiliate')
+        );
     }
 
     public function config()
@@ -47,7 +68,14 @@ class AdminController extends Controller
 
     public function browse()
     {
-        $this->iTotalUsers = $this->oAffModel->searchAff($this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
+        $this->iTotalUsers = $this->oAffModel->searchAff(
+            $this->httpRequest->get('looking'),
+            true,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            null,
+            null
+        );
 
         $oPage = new Page;
         $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, self::PROFILES_PER_PAGE);
@@ -70,7 +98,7 @@ class AdminController extends Controller
             $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
 
             // Assigns variables for views
-            $this->view->designSecurity = new Framework\Layout\Html\Security; // Security Design Class
+            $this->view->designSecurity = new HtmlSecurity; // Security Design Class
             $this->view->dateTime = $this->dateTime; // Date Time Class
 
             $this->sTitle = t('Browse Affiliates');
@@ -110,9 +138,9 @@ class AdminController extends Controller
                 'affiliate_username' => $oUser->username,
                 'affiliate_first_name' => $oUser->firstName,
                 'affiliate_sex' => $oUser->sex,
-                'affiliate_ip' => Framework\Ip\Ip::get(),
+                'affiliate_ip' => Ip::get(),
                 'affiliate_http_user_agent' => $this->browser->getUserAgent(),
-                'affiliate_token' => Framework\Util\Various::genRnd($oUser->email)
+                'affiliate_token' => Various::genRnd($oUser->email)
             ];
             $this->session->set($aSessionData);
             $this->sMsg = t('You are now logged in as affiliate: %0%!', $oUser->username);
@@ -120,14 +148,17 @@ class AdminController extends Controller
 
             Header::redirect(Uri::get('affiliate', 'account', 'index'), $this->sMsg);
         } else {
-            Header::redirect($this->httpRequest->previousPage(), t("This affiliate doesn't exist."), 'error');
+            Header::redirect(
+                $this->httpRequest->previousPage(),
+                t("This affiliate doesn't exist."),
+                Design::ERROR_TYPE
+            );
         }
     }
 
     public function logoutUserAs()
     {
-        $this->sMsg = t('You are now logged out as affiliate: %0%!', $this->
-            session->get('affiliate_username'));
+        $this->sMsg = t('You are now logged out as affiliate: %0%!', $this->session->get('affiliate_username'));
 
         $aSessionData = [
             'login_affiliate_as',
@@ -142,46 +173,60 @@ class AdminController extends Controller
         ];
 
         $this->session->remove($aSessionData);
-        Header::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->
-            sMsg);
+        Header::redirect(
+            Uri::get('affiliate', 'admin', 'browse'),
+            $this->sMsg
+        );
     }
 
     public function approve()
     {
-        Header::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->_moderateRegistration($this->httpRequest->post('id'), 1));
+        Header::redirect(
+            Uri::get('affiliate', 'admin', 'browse'),
+            $this->moderateRegistration($this->httpRequest->post('id'),  1)
+        );
     }
 
     public function disapprove()
     {
-        Header::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->_moderateRegistration($this->httpRequest->post('id'), 0));
+        Header::redirect(
+            Uri::get('affiliate', 'admin', 'browse'),
+            $this->moderateRegistration($this->httpRequest->post('id'), 0)
+        );
     }
 
     public function approveAll($iId)
     {
-        if (!(new Framework\Security\CSRF\Token)->check('aff_action')) {
+        if (!(new SecurityToken)->check('aff_action')) {
             $this->sMsg = Form::errorTokenMsg();
         } elseif (count($this->httpRequest->post('action')) > 0) {
             foreach ($this->httpRequest->post('action') as $sAction) {
                 $iId = (int)explode('_', $sAction)[0];
-                $this->sMsg = $this->_moderateRegistration($iId, 1);
+                $this->sMsg = $this->moderateRegistration($iId, 1);
             }
         }
 
-        Header::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->sMsg);
+        Header::redirect(
+            Uri::get('affiliate', 'admin', 'browse'),
+            $this->sMsg
+        );
     }
 
     public function disapproveAll($iId)
     {
-        if (!(new Framework\Security\CSRF\Token)->check('aff_action')) {
+        if (!(new SecurityToken)->check('aff_action')) {
             $this->sMsg = Form::errorTokenMsg();
         } elseif (count($this->httpRequest->post('action')) > 0) {
             foreach ($this->httpRequest->post('action') as $sAction) {
                 $iId = (int)explode('_', $sAction)[0];
-                $this->sMsg = $this->_moderateRegistration($iId, 0);
+                $this->sMsg = $this->moderateRegistration($iId, 0);
             }
         }
 
-        Header::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->sMsg);
+        Header::redirect(
+            Uri::get('affiliate', 'admin', 'browse'),
+            $this->sMsg
+        );
     }
 
     public function ban()
@@ -195,7 +240,10 @@ class AdminController extends Controller
             $this->sMsg = t('Oops! An error has occurred while banishment the affiliate.');
         }
 
-        Header::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->sMsg);
+        Header::redirect(
+            Uri::get('affiliate', 'admin', 'browse'),
+            $this->sMsg
+        );
     }
 
     public function unBan()
@@ -209,7 +257,10 @@ class AdminController extends Controller
             $this->sMsg = t('Oops! An error has occurred while unban the affiliate.');
         }
 
-        Header::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->sMsg);
+        Header::redirect(
+            Uri::get('affiliate', 'admin', 'browse'),
+            $this->sMsg
+        );
     }
 
     public function delete()
@@ -219,12 +270,15 @@ class AdminController extends Controller
         $sUsername = (string)$aData[1];
 
         $this->oAff->delete($iId, $sUsername);
-        Header::redirect(Uri::get('affiliate', 'admin', 'browse'), t('The affiliate has been deleted.'));
+        Header::redirect(
+            Uri::get('affiliate', 'admin', 'browse'),
+            t('The affiliate has been deleted.')
+        );
     }
 
     public function banAll()
     {
-        if (!(new Framework\Security\CSRF\Token)->check('aff_action')) {
+        if (!(new SecurityToken)->check('aff_action')) {
             $this->sMsg = Form::errorTokenMsg();
         } elseif (count($this->httpRequest->post('action')) > 0) {
             foreach ($this->httpRequest->post('action') as $sAction) {
@@ -236,12 +290,15 @@ class AdminController extends Controller
             $this->sMsg = t('The affiliate(s) has/have been banned.');
         }
 
-        Header::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->sMsg);
+        Header::redirect(
+            Uri::get('affiliate', 'admin', 'browse'),
+            $this->sMsg
+        );
     }
 
     public function unBanAll()
     {
-        if (!(new Framework\Security\CSRF\Token)->check('aff_action')) {
+        if (!(new SecurityToken)->check('aff_action')) {
             $this->sMsg = Form::errorTokenMsg();
         } elseif (count($this->httpRequest->post('action')) > 0) {
             foreach ($this->httpRequest->post('action') as $sAction) {
@@ -253,12 +310,15 @@ class AdminController extends Controller
             $this->sMsg = t('The affiliate(s) has/have been unbanned.');
         }
 
-        Header::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->sMsg);
+        Header::redirect(
+            Uri::get('affiliate', 'admin', 'browse'),
+            $this->sMsg
+        );
     }
 
     public function deleteAll()
     {
-        if (!(new Framework\Security\CSRF\Token)->check('aff_action')) {
+        if (!(new SecurityToken)->check('aff_action')) {
             $this->sMsg = Form::errorTokenMsg();
         } elseif (count($this->httpRequest->post('action')) > 0) {
             foreach ($this->httpRequest->post('action') as $sAction) {
@@ -271,10 +331,13 @@ class AdminController extends Controller
             $this->sMsg = t('The affiliate(s) has/have been deleted.');
         }
 
-        Header::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->sMsg);
+        Header::redirect(
+            Uri::get('affiliate', 'admin', 'browse'),
+            $this->sMsg
+        );
     }
 
-    private function _moderateRegistration($iId, $iStatus)
+    private function moderateRegistration($iId, $iStatus)
     {
         if (isset($iId, $iStatus)) {
             if ($oUser = $this->oAffModel->readProfile($iId, 'Affiliates')) {

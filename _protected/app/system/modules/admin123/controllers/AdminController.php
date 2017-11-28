@@ -10,6 +10,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Layout\Html\Security as HtmlSecurity;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
@@ -40,7 +41,9 @@ class AdminController extends Controller
 
     public function index()
     {
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'));
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'admin', 'browse')
+        );
     }
 
     public function browse()
@@ -64,7 +67,7 @@ class AdminController extends Controller
             $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
 
             // Assigns variables for views
-            $this->view->designSecurity = new Framework\Layout\Html\Security; // Security Design Class
+            $this->view->designSecurity = new HtmlSecurity; // Security Design Class
             $this->view->dateTime = $this->dateTime; // Date Time Class
 
             $this->sTitle = t('Browse Admins');
@@ -82,6 +85,7 @@ class AdminController extends Controller
         $this->sTitle = t('Admin Search');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -90,6 +94,7 @@ class AdminController extends Controller
         $this->sTitle = t('Add an Admin');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -122,6 +127,9 @@ class AdminController extends Controller
             $this->sMsg = t('The admin(s) has/have been deleted.');
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'), $this->sMsg);
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'),
+            $this->sMsg
+        );
     }
 }
