@@ -59,10 +59,10 @@ class EditCommentFormProcess extends Form
                             'read',
                             $sTable . ',' . $this->iRecipientId
                         ),
-                        t('The comment has been updated successfully!')
+                        t('Comment updated!')
                     );
                 } else {
-                    \PFBC\Form::setError('form_edit_comment', t('Oops! Error when updated comment.'));
+                    \PFBC\Form::setError('form_edit_comment', t('Oops! Error occurred when updated comment.'));
                 }
             } else {
                 \PFBC\Form::setError('form_edit_comment', t("Oops! You don't have the permission to update the comment."));

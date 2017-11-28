@@ -34,7 +34,7 @@ class CommentFormProcess extends Form
         $iSenderId = (int)$this->session->get('member_id');
 
         if (!$oCommentModel->idExists($iRecipientId, $sTable)) {
-            \PFBC\Form::setError('form_comment', t('The comment recipient does not exists.'));
+            \PFBC\Form::setError('form_comment', t("The comment recipient doesn't exists."));
         } elseif (!$oCommentModel->checkWaitSend($iSenderId, $iTimeDelay, $sCurrentTime, $sTable)) {
             \PFBC\Form::setError('form_comment', Form::waitWriteMsg($iTimeDelay));
         } elseif ($oCommentModel->isDuplicateContent($iSenderId, $sComment, $sTable)) {
@@ -45,13 +45,13 @@ class CommentFormProcess extends Form
             \PFBC\Form::setError('form_comment', Form::tooManyEmailsMsg());
         } else {
             if (!$oCommentModel->add($sComment, $iRecipientId, $iSenderId, 1, $sCurrentTime, $sTable)) {
-                \PFBC\Form::setError('form_comment', t('Oops! Error when adding comment.'));
+                \PFBC\Form::setError('form_comment', t('Oops! Error occurred when adding comment.'));
             } else {
                 CommentCore::clearCache();
 
                 Header::redirect(
                     Uri::get('comment', 'comment', 'read', $sTable . ',' . $iRecipientId),
-                    t('The comment has been successfully sent!')
+                    t('Comment posted!')
                 );
             }
         }
