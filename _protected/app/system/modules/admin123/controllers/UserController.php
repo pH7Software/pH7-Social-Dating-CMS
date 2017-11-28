@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Ip\Ip;
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Layout\Html\Security as HtmlSecurity;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Router\Uri;
@@ -48,7 +49,9 @@ class UserController extends Controller
 
     public function index()
     {
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'));
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'user', 'browse')
+        );
     }
 
     public function browse()
@@ -109,7 +112,7 @@ class UserController extends Controller
         $sWhere = $this->httpRequest->get('where');
         $sWhat = $this->httpRequest->get('what');
 
-        if ($sWhere !== 'all' && $sWhere !== SearchCoreModel::USERNAME && $sWhere !== SearchCoreModel::EMAIL && $sWhere !== SearchCoreModel::FIRST_NAME && $sWhere !== SearchCoreModel::LAST_NAME && $sWhere !== SearchCoreModel::IP) {
+        if ($this->areInvalidSearchArgs($sWhere)) {
             \PFBC\Form::setError('form_user_search', 'Invalid argument.');
             Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'search'));
         } else {
@@ -142,7 +145,13 @@ class UserController extends Controller
             unset($oPage);
 
             if (empty($oSearch)) {
-                $this->design->setRedirect(Uri::get(PH7_ADMIN_MOD, 'user', 'search'), null, null, 2);
+                $this->design->setRedirect(
+                    Uri::get(PH7_ADMIN_MOD, 'user', 'search'),
+                    null,
+                    null,
+                    2
+                );
+
                 $this->displayPageNotFound('No results found. Please try again with wider/new search criteria');
             } else {
                 // Add the JS file for the browse form
@@ -179,14 +188,17 @@ class UserController extends Controller
 
             Header::redirect($this->registry->site_url, $this->sMsg);
         } else {
-            Header::redirect($this->httpRequest->previousPage(), t("This user doesn't exist."), 'error');
+            Header::redirect(
+                $this->httpRequest->previousPage(),
+                t("This user doesn't exist."),
+                Design::ERROR_TYPE
+            );
         }
     }
 
     public function logoutUserAs()
     {
-        $this->sMsg = t('You are now logged out as member: %0%!', $this->session->
-            get('member_username'));
+        $this->sMsg = t('You are now logged out as member: %0%!', $this->session->get('member_username'));
 
         $aSessionData = [
             'login_user_as',
@@ -202,8 +214,11 @@ class UserController extends Controller
         ];
 
         $this->session->remove($aSessionData);
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->
-            sMsg);
+
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
+            $this->sMsg
+        );
     }
 
     public function approve()
@@ -233,7 +248,10 @@ class UserController extends Controller
             }
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
+            $this->sMsg
+        );
     }
 
     public function disapproveAll($iId)
@@ -247,7 +265,10 @@ class UserController extends Controller
             }
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
+            $this->sMsg
+        );
     }
 
     public function ban()
@@ -261,7 +282,10 @@ class UserController extends Controller
             $this->sMsg = t('Oops! An error has occurred while banishment the profile.');
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
+            $this->sMsg
+        );
     }
 
     public function unBan()
@@ -275,7 +299,10 @@ class UserController extends Controller
             $this->sMsg = t('Oops! An error has occurred while unban the profile.');
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
+            $this->sMsg
+        );
     }
 
     public function delete()
@@ -285,7 +312,11 @@ class UserController extends Controller
         $sUsername = (string)$aData[1];
 
         $this->oAdmin->delete($iId, $sUsername);
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), t('The profile has been deleted.'));
+
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
+            t('The profile has been deleted.')
+        );
     }
 
     public function banAll()
@@ -303,7 +334,10 @@ class UserController extends Controller
             $this->sMsg = t('The profile(s) has/have been banned.');
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
+            $this->sMsg
+        );
     }
 
     public function unBanAll()
@@ -320,7 +354,10 @@ class UserController extends Controller
             $this->sMsg = t('The profile(s) has/have been unbanned.');
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
+            $this->sMsg
+        );
     }
 
     public function deleteAll()
@@ -338,7 +375,10 @@ class UserController extends Controller
             $this->sMsg = t('The profile(s) has/have been deleted.');
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
+            $this->sMsg
+        );
     }
 
     private function _moderateRegistration($iId, $iStatus)
@@ -392,5 +432,17 @@ class UserController extends Controller
         }
 
         return $sOutputMsg;
+    }
+
+    /**
+     * @param string $sWhere
+     *
+     * @return bool
+     */
+    private function areInvalidSearchArgs($sWhere)
+    {
+        return $sWhere !== 'all' && $sWhere !== SearchCoreModel::USERNAME &&
+            $sWhere !== SearchCoreModel::EMAIL && $sWhere !== SearchCoreModel::FIRST_NAME &&
+            $sWhere !== SearchCoreModel::LAST_NAME && $sWhere !== SearchCoreModel::IP;
     }
 }

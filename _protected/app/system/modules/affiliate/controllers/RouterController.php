@@ -8,6 +8,8 @@
 
 namespace PH7;
 
+use PH7\Framework\Url\Header;
+
 class RouterController extends Controller
 {
     /**
@@ -23,6 +25,6 @@ class RouterController extends Controller
             }
         }
 
-        Framework\Url\Header::redirect($this->registry->site_url . $this->httpRequest->get('action'));
+        Header::redirect($this->registry->site_url . $this->httpRequest->get('action'));
     }
 }

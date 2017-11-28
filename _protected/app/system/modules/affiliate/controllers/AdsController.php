@@ -14,6 +14,7 @@ class AdsController extends Controller
 {
     const ADS_PER_PAGE = 10;
 
+    /** @var string */
     private $sTitle;
 
     public function index()
@@ -29,6 +30,7 @@ class AdsController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
         $this->view->h3_title = nt('%n% Banner', '%n% Banners', $iTotalAds);
+
         $this->output();
     }
 }
