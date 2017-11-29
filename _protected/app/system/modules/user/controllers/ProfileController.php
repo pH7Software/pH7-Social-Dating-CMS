@@ -55,11 +55,17 @@ class ProfileController extends Controller
         $oUserModel = new UserModel;
 
         // Add the General and Tabs Menu stylesheets
-        $this->design->addCss(PH7_LAYOUT, PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS . 'tabs.css,' . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS . 'general.css');
+        $this->design->addCss(
+            PH7_LAYOUT,
+            PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS . 'tabs.css,' . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS . 'general.css'
+        );
 
         if (SysMod::isEnabled('friend')) {
             // Add the JavaScript file for the Ajax Friend block
-            $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . 'friend' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'friend.js');
+            $this->design->addJs(
+                PH7_LAYOUT . PH7_SYS . PH7_MOD . 'friend' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
+                'friend.js'
+            );
         }
 
         // Set the Profile username
@@ -214,7 +220,9 @@ class ProfileController extends Controller
         if ($this->bUserAuth) {
             $oPrivacyViewsVisitor = $oUserModel->getPrivacySetting($this->iVisitorId);
 
-            if ($oPrivacyViewsUser->userSaveViews == 'yes' && $oPrivacyViewsVisitor->userSaveViews == 'yes' && !$this->isOwnProfile()) {
+            if ($oPrivacyViewsUser->userSaveViews == 'yes' && $oPrivacyViewsVisitor->userSaveViews == 'yes' &&
+                !$this->isOwnProfile()
+            ) {
                 $this->updateVisitorViews();
             }
         }
@@ -239,7 +247,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @return boolean TRUE if the user is on their own profile, FALSE otherwise.
+     * @return bool TRUE if the user is on their own profile, FALSE otherwise.
      */
     private function isOwnProfile()
     {
@@ -265,7 +273,12 @@ class ProfileController extends Controller
                 'f_n' => $sFirstName,
                 's' => $oUser->sex
             ];
-            $sMailLink = Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aUrlParms), false);
+            $sMailLink = Uri::get(
+                'user',
+                'signup',
+                'step1', '?' . Url::httpBuildQuery($aUrlParms),
+                false
+            );
         }
 
         return $sMailLink;
@@ -291,7 +304,10 @@ class ProfileController extends Controller
                 's' => $oUser->sex
             ];
             $sMessengerLink = Uri::get(
-                'user', 'signup', 'step1', '?' . Url::httpBuildQuery($aUrlParms),
+                'user',
+                'signup',
+                'step1',
+                '?' . Url::httpBuildQuery($aUrlParms),
                 false
             );
         }
@@ -318,7 +334,12 @@ class ProfileController extends Controller
                 'f_n' => $sFirstName,
                 's' => $oUser->sex
             ];
-            $sBefriendLink = Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aUrlParms), false);
+            $sBefriendLink = Uri::get(
+                'user',
+                'signup',
+                'step1', '?' . Url::httpBuildQuery($aUrlParms),
+                false
+            );
         }
 
         return $sBefriendLink;
