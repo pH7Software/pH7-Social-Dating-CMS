@@ -119,11 +119,13 @@ class MainController extends Controller
      * Get the guest homepage template file.
      *
      * @return string The template filename.
+     *
+     * @throws PH7InvalidArgumentException
      */
     private function _getGuestTplPage()
     {
         if (isDebug() && $this->httpRequest->getExists('force')) {
-            $sPage = $this->_getPageForced();
+            $sPage = $this->getPageForced();
         } elseif ($this->_bIsMobile || $this->browser->isMobile()) {
             /* 'index.guest.inc.tpl' is not responsive enough for very small screen resolutions, so set to 'index.guest_splash.inc.tpl' by default */
             $sPage = static::GUEST_SPLASH_FILE;
