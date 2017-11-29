@@ -22,7 +22,7 @@ It is designed with the **KISS** principle in mind, and the all source code can 
 
 This Free and Open Source **Social Dating Site Builder** wants to be low resource-intensive, powerful, stable and secure. The software also comes with 34 system modules and is based on **pH7Framework** *(written specifically for this project)* that has over 52 packages.
 
-To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **best dating service** or **social networking** website on the World Wide Web!
+*To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **best dating service** or **social networking** website on the World Wide Web!*
 
 
 ## How Powerful is your future Dating App?
@@ -217,7 +217,7 @@ Just clone the repository, make your changes and then make a push ;-)
 
 *WARNING, your code/modification must be of excellent quality and follow the [Code Convention](http://ph7cms.com/doc/en/code-convention).* I manually validate all the improvements and changes.
 
-You will also be eligible to [pH7CMS VIP members](http://ph7cms.com/get-one-tine-license-for-free/) and get all premium contents.
+**You will also become a pH7CMS VIP member and get all premium contents and modules.**
 
 
 ## Tools/Software Used to Develop pH7CMS
