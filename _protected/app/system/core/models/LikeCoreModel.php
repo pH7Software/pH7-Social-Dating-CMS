@@ -16,6 +16,11 @@ class LikeCoreModel extends Model
 {
     const CACHE_GROUP = 'db/sys/core/like';
 
+    /**
+     * @param string $sKey
+     *
+     * @return \stdClass
+     */
     public function select($sKey)
     {
         $this->cache->start(self::CACHE_GROUP, 'select' . $sKey, 3600 * 168);
@@ -33,6 +38,12 @@ class LikeCoreModel extends Model
         return $oData;
     }
 
+    /**
+     * @param string $sKey
+     * @param float $fLastIp
+     *
+     * @return bool
+     */
     public function update($sKey, $fLastIp)
     {
         $sSqlQuery = 'UPDATE' . Db::prefix('Likes') .
@@ -45,6 +56,12 @@ class LikeCoreModel extends Model
         return $rStmt->execute();
     }
 
+    /**
+     * @param string $sKey
+     * @param float $fLastIp
+     *
+     * @return bool
+     */
     public function insert($sKey, $fLastIp)
     {
         $sSqlQuery = 'INSERT INTO' . Db::prefix('Likes') .
