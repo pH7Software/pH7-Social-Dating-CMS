@@ -89,11 +89,12 @@ class LikeCoreAjax
                 static::$iVotesLike = (int)$mRow->votes;
                 $this->sLastIpVoted = $mRow->lastIp;
             }
-            if ($this->iVote)
-                if ($this->checkPerm()) $this->update();
-        } else {
-            if ($this->iVote)
-                if ($this->checkPerm()) $this->insert();
+
+            if ($this->isUserVoting()) {
+                $this->update();
+            }
+        } elseif ($this->isUserVoting()) {
+            $this->insert();
         }
     }
 
@@ -131,6 +132,13 @@ class LikeCoreAjax
         }
     }
 
+    /**
+     * @return bool
+     */
+    private function isUserVoting()
+    {
+        return $this->iVote && $this->checkPerm();
+    }
 }
 
 echo (new LikeCoreAjax)->show();
