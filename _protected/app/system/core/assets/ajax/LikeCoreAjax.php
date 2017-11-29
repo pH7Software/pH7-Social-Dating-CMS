@@ -66,7 +66,7 @@ class LikeCoreAjax
      *
      * @return void
      */
-    protected function initialize()
+    private function initialize()
     {
         $this->oLikeModel = new LikeCoreModel;
         $this->sKey = $this->oHttpRequest->post('key');
@@ -80,7 +80,7 @@ class LikeCoreAjax
      *
      * @return void
      */
-    protected function select()
+    private function select()
     {
         $oResult = $this->oLikeModel->select($this->sKey);
 
@@ -102,7 +102,7 @@ class LikeCoreAjax
      *
      * @return bool Returns true if the user is connected, false otherwise.
      */
-    protected function checkPerm()
+    private function checkPerm()
     {
         return UserCore::auth();
     }
@@ -112,7 +112,7 @@ class LikeCoreAjax
      *
      * @return void
      */
-    protected function insert()
+    private function insert()
     {
         static::$iVotesLike++;
         $this->oLikeModel->insert($this->sKey, $this->sLastIp);
@@ -123,7 +123,7 @@ class LikeCoreAjax
      *
      * @return void
      */
-    protected function update()
+    private function update()
     {
         if ($this->sLastIpVoted != $this->sLastIp) {
             static::$iVotesLike++;
