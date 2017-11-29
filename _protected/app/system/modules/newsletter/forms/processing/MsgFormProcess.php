@@ -19,7 +19,11 @@ class MsgFormProcess
         if (!$aData['status']) {
             \PFBC\Form::setError('form_msg', Form::errorSendingEmail());
         } else {
-            \PFBC\Form::setSuccess('form_msg', nt('%n% newsletter has been successfully sent', '%n% newsletters were successfully sent!', $aData['nb_mail_sent']));
+            \PFBC\Form::setSuccess(
+                'form_msg',
+                nt('%n% newsletter has been successfully sent', '%n% newsletters were successfully sent!',
+                    $aData['nb_mail_sent'])
+            );
         }
     }
 }
