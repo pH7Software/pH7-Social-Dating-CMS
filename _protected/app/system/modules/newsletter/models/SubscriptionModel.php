@@ -76,7 +76,7 @@ class SubscriptionModel extends UserCoreModel
      * @param integer $iOffset
      * @param integer $iLimit
      *
-     * @return integer|object Integer for the number subscribers returned or string for the subscribers list returned
+     * @return integer|\stdClass Integer for the number subscribers returned or string for the subscribers list returned
      */
     public function browse($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {

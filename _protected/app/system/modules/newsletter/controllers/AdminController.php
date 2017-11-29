@@ -107,6 +107,9 @@ class AdminController extends Controller
             $this->sMsg = t('The subscribers(s) has/have been removed.');
         }
 
-        Header::redirect(Uri::get('newsletter', 'admin', 'browse'), $this->sMsg);
+        Header::redirect(
+            Uri::get('newsletter', 'admin', 'browse'),
+            $this->sMsg
+        );
     }
 }
