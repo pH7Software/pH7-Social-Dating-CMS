@@ -28,7 +28,7 @@ class MainController extends Controller
      * @var \stdClass $oGameModel
      * @var \stdClass $sTitle
      * @var string $$sMetaKeywords
-     * @var integer $iTotalGames
+     * @var int $iTotalGames
      */
     protected $oGameModel, $oPage, $sTitle, $sMetaKeywords, $iTotalGames;
 
