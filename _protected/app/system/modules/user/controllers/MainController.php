@@ -139,11 +139,11 @@ class MainController extends Controller
      * When you are in the development mode, you can force the guest page by set a "force" GET request with the "splash" or "classic" parameter.
      * Example: "/?force=splash" or "/?force=classic"
      *
-     * @throws PH7InvalidArgumentException
-     *
      * @return string
+     *
+     * @throws PH7InvalidArgumentException
      */
-    private function _getPageForced()
+    private function getPageForced()
     {
         switch ($this->httpRequest->get('force')) {
             case 'classic':
