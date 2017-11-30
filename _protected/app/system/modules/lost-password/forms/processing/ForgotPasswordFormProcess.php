@@ -33,7 +33,10 @@ class ForgotPasswordFormProcess extends Form
 
         if (!$iProfileId = $this->oUserModel->getId($sEmail, null, $sTable)) {
             $this->preventBruteForce(self::BRUTE_FORCE_SLEEP_DELAY);
-            \PFBC\Form::setError('form_forgot_password', t('Oops, this "%0%" is not associated with any %site_name% account. Please, make sure that you entered the e-mail address used in creating your account.', escape(substr($sEmail, 0, PH7_MAX_EMAIL_LENGTH))));
+            \PFBC\Form::setError(
+                'form_forgot_password',
+                t('Oops, this "%0%" is not associated with any %site_name% account. Please, make sure that you entered the e-mail address used in creating your account.', escape(substr($sEmail, 0, PH7_MAX_EMAIL_LENGTH)))
+            );
         } else {
             $this->oUserModel->setNewHashValidation($iProfileId, Various::genRnd(), $sTable);
             (new UserCore)->clearReadProfileCache($iProfileId, $sTable); // Clean the profile data (for the new hash)
@@ -57,7 +60,13 @@ class ForgotPasswordFormProcess extends Form
         $oData = $this->oUserModel->readProfile($iProfileId, $sTable);
 
         /** We place the text outside of Uri::get(), otherwise special characters will be deleted and the parameters passed in the url will be unusable thereafter. **/
-        $sResetUrl = Uri::get('lost-password', 'main', 'reset', $this->httpRequest->get('mod')) . PH7_SH . $oData->email . PH7_SH . $oData->hashValidation;
+        $sResetUrl = Uri::get(
+            'lost-password',
+            'main',
+            'reset',
+            $this->httpRequest->get('mod')
+        );
+        $sResetUrl .= PH7_SH . $oData->email . PH7_SH . $oData->hashValidation;
 
         $this->view->content = t('Hello %0%!', $oData->username) . '<br />' .
             t('Someone (from the IP: %0%) has requested a new password for this account.', $this->design->ip(null, false)) . '<br />' .
