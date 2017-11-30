@@ -4,7 +4,7 @@
  * @desc           This class is used to manage settings of the web server and can simulate a server secure and reliable.
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / Framework / Server
  */
@@ -15,6 +15,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\Url\Uri;
+use function PH7\is_internet;
 
 final class Server
 {
@@ -56,32 +57,33 @@ final class Server
     /**
      * Check to see if we are on a Windows server.
      *
-     * @return boolean TRUE if windows, FALSE if not.
+     * @return bool TRUE if windows, FALSE if not.
      */
     public static function isWindows()
     {
-        return (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN');
+
+        return 0 === stripos(PHP_OS, 'WIN');
     }
 
     /**
      * Check to see if we are on a Unix server.
      *
-     * @return boolean TRUE if Unix, FALSE if not.
+     * @return bool TRUE if Unix, FALSE if not.
      */
     public static function isUnix()
     {
         $sOS = strtoupper(PHP_OS);
-        return ($sOS === 'UNIX' || $sOS === 'LINUX' || $sOS === 'FREEBSD' || $sOS === 'OPENBSD');
+        return $sOS === 'UNIX' || $sOS === 'LINUX' || $sOS === 'FREEBSD' || $sOS === 'OPENBSD';
     }
 
     /**
      * Check to see if we are on a Mac OS server.
      *
-     * @return boolean TRUE if windows, FALSE if not.
+     * @return bool TRUE if windows, FALSE if not.
      */
     public static function isMac()
     {
-        return strtoupper(substr(PHP_OS, 0, 3) === 'MAC');
+        return 0 === stripos(PHP_OS, 'MAC');
     }
 
     /**
@@ -106,9 +108,11 @@ final class Server
      */
     public static function getVar($sKey = null, $sDefVal = null)
     {
-        if (null === $sKey) return $_SERVER;
+        if (null === $sKey) {
+            return $_SERVER;
+        }
 
-        return (!empty($_SERVER[$sKey])) ? htmlspecialchars($_SERVER[$sKey], ENT_QUOTES) : $sDefVal;
+        return !empty($_SERVER[$sKey]) ? htmlspecialchars($_SERVER[$sKey], ENT_QUOTES) : $sDefVal;
     }
 
     /**
@@ -124,19 +128,20 @@ final class Server
     /**
      * Check if the server is in local.
      *
-     * @return boolean TRUE if it is in local mode, FALSE if not.
+     * @return bool TRUE if it is in local mode, FALSE if not.
      */
     public static function isLocalHost()
     {
         $sServerName = self::getName();
         $sHttpHost = self::getVar(self::HTTP_HOST);
+
         return ($sServerName === 'localhost' || $sServerName === '127.0.0.1' || $sHttpHost === 'localhost' || $sHttpHost === '127.0.0.1');
     }
 
     /**
      * Check if Apache's mod_rewrite is installed.
      *
-     * @return boolean
+     * @return bool
      */
     public static function isRewriteMod()
     {
@@ -158,10 +163,10 @@ final class Server
     /**
      * Alias method of the checkInternetConnection() function (located in ~/_protected/app/includes/helpers/misc.php).
      *
-     * @return boolean Returns TRUE if the Internet connection is enabled, FALSE otherwise.
+     * @return bool Returns TRUE if the Internet connection is enabled, FALSE otherwise.
      */
     public static function checkInternetConnection()
     {
-        return \PH7\is_internet();
+        return is_internet();
     }
 }

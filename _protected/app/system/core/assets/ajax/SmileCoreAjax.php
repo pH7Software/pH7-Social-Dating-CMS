@@ -4,35 +4,38 @@
  * @desc           Get Smiles Ajax in JSON format.
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Asset / Ajax
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Http\Http;
+use PH7\Framework\Service\Emoticon;
 
-class SmileCoreAjax extends \PH7\Framework\Service\Emoticon
+class SmileCoreAjax extends Emoticon
 {
-
-    private static $_sData = '';
+    /** @var string */
+    private static $sData = '';
 
     public static function output()
     {
-        static::_get();
+        static::retrieve();
 
         Http::setContentType('application/json');
-        echo static::$_sData;
+        echo self::$sData;
     }
 
-    private static function _get()
+    private static function retrieve()
     {
         $oCache = (new Cache)->start('str/json', 'emoticons', 120 * 48 * 30);
 
-        if (!static::$_sData = $oCache->get()) {
+        self::$sData = $oCache->get();
+        if (!self::$sData) {
             $aEmoticons = static::get();
 
             foreach ($aEmoticons as $sEmoticonKey => $aEmoticon) {
@@ -42,7 +45,7 @@ class SmileCoreAjax extends \PH7\Framework\Service\Emoticon
 
                 $sCode = (is_array($mCode)) ? $mCode[0] : $mCode;
 
-                static::$_sData .= <<<EOD
+                self::$sData .= <<<EOD
                 {
                     "code": "$sCode",
                     "img": "$sImg",
@@ -51,12 +54,11 @@ class SmileCoreAjax extends \PH7\Framework\Service\Emoticon
 EOD;
             }
 
-            static::$_sData = '{"smiles": [' . substr(static::$_sData, 0, -1) . ']}';
-            $oCache->put(static::$_sData);
+            self::$sData = '{"smiles": [' . substr(self::$sData, 0, -1) . ']}';
+            $oCache->put(self::$sData);
         }
         unset($oCache);
     }
-
 }
 
 // Output

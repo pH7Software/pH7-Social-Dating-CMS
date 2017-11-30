@@ -3,7 +3,7 @@
  * @title            Youtube Class
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Video / Api
  * @version          1.2
@@ -20,6 +20,7 @@ class Youtube extends Api implements IApi
     const API_URL = 'https://www.googleapis.com/youtube/v3/videos?id=';
     const PLAYER_URL = 'https://youtube.com/v/';
     const REGEX_TIME_FORMAT = '/[0-9]+[HMS]/';
+    const API_KEY_MIN_LENGTH = 10;
 
     /** @var \stdClass */
     private $oContentDetails;
@@ -27,7 +28,7 @@ class Youtube extends Api implements IApi
     /**
      * @param string $sUrl
      *
-     * @return string|boolean Returns the embed video URL if found, FALSE otherwise.
+     * @return string|bool Returns the embed video URL if found, FALSE otherwise.
      */
     public function getVideo($sUrl)
     {
@@ -37,7 +38,7 @@ class Youtube extends Api implements IApi
     /**
      * @param string $sUrl URL video (e.g., https://www.youtube.com/watch?v=q-1eHnBOg4A).
      *
-     * @return Youtube|self|boolean FALSE if unable to open the API URL, otherwise Youtube
+     * @return self|bool FALSE if unable to open the API URL, otherwise Youtube
      *
      * @throws Exception If the is a problem with Youtube API service.
      */
@@ -47,7 +48,7 @@ class Youtube extends Api implements IApi
 
         if ($oData = $this->getData($sDataUrl)) {
             // Use Youtube's API to get the Youtube video's data only if the API key has been set, otherwise it won't work
-            if (!empty($this->sApiKey) && strlen($this->sApiKey) > 10) {
+            if ($this->isApiKeySet()) {
                 if (!empty($oData->error->errors[0]->message)) {
                     throw new Exception('YouTube API: ' . $oData->error->errors[0]->message);
                 } else {
@@ -67,7 +68,7 @@ class Youtube extends Api implements IApi
      *
      * @see Youtube::getInfo();
      *
-     * @return integer|boolean The video duration if found, FALSE otherwise.
+     * @return int|bool The video duration if found, FALSE otherwise.
      */
     public function getDuration()
     {
@@ -77,8 +78,8 @@ class Youtube extends Api implements IApi
     /**
      * @param string $sUrl
      * @param string $sMedia
-     * @param integer $iWidth
-     * @param integer $iHeight
+     * @param int $iWidth
+     * @param int $iHeight
      *
      * @return string
      */
@@ -88,7 +89,7 @@ class Youtube extends Api implements IApi
             $aThumb = ['default', 1, 2, 3];
             shuffle($aThumb);
 
-            return 'https://i' . mt_rand(1,4) . '.ytimg.com/vi/' . $this->getVideoId($sUrl) . PH7_SH . $aThumb[0] . '.jpg';
+            return 'https://i' . mt_rand(1, 4) . '.ytimg.com/vi/' . $this->getVideoId($sUrl) . PH7_SH . $aThumb[0] . '.jpg';
         } else {
             $sParam = ($this->bAutoplay) ? '?autoplay=1&amp;' : '?';
 
@@ -103,7 +104,7 @@ class Youtube extends Api implements IApi
      *
      * @param string $sDuration Youtube duration format (e.g., PT4M13S).
      *
-     * @return integer Youtube Duration in seconds.
+     * @return int Youtube Duration in seconds.
      */
     protected function getDurationTime($sDuration)
     {
@@ -112,21 +113,29 @@ class Youtube extends Api implements IApi
 
         foreach ($aMatches as $aMatch) {
             foreach ($aMatch as $iPors) {
-                switch (substr($iPors, strlen($iPors)-1)) {
+                switch (substr($iPors, strlen($iPors) - 1)) {
                     case 'H':
-                        $iDuration += substr($iPors, 0, strlen($iPors)-1)*60*60;
+                        $iDuration += substr($iPors, 0, strlen($iPors) - 1) * 60 * 60;
                         break;
                     case 'M':
-                        $iDuration += substr($iPors, 0, strlen($iPors)-1)*60;
+                        $iDuration += substr($iPors, 0, strlen($iPors) - 1) * 60;
                         break;
                     case 'S':
-                        $iDuration += substr($iPors, 0, strlen($iPors)-1);
+                        $iDuration += substr($iPors, 0, strlen($iPors) - 1);
                         break;
                 }
             }
         }
 
         return $iDuration;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isApiKeySet()
+    {
+        return !empty($this->sApiKey) && strlen($this->sApiKey) > self::API_KEY_MIN_LENGTH;
     }
 }
 

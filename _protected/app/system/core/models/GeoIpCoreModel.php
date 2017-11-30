@@ -1,18 +1,18 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
+
 namespace PH7;
 
 class GeoIpCoreModel extends Framework\Mvc\Model\Engine\Model
 {
-
-/*
- *  In developing
- */
+    /*
+     *  In development. Feel free to help me! <https://github.com/pH7Software/pH7-Social-Dating-CMS>
+     */
 
     public function getCountry($sWhere)
     {
@@ -28,5 +28,4 @@ class GeoIpCoreModel extends Framework\Mvc\Model\Engine\Model
     {
         return $this->orm->select('GeoCity', 'cityId, cityTitle')->find('cityId', $sWhere)->orderBy('cityTitle')->execute();
     }
-
 }

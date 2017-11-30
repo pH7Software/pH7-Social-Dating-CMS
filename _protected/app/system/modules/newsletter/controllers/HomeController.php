@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Newsletter / Controller
  */
@@ -15,6 +15,7 @@ class HomeController extends Controller
         $this->view->page_title = t('Subscribe to our Newsletter');
         $this->view->meta_description = t('Newsletters - Subscribe to our newsletter %site_name% | Social networking, dating website.');
         $this->view->meta_keywords = t('newsletter, newsletters, subscription, email, social, social network, social networking, community, metting, dating, friends, people');
+
         $this->output();
     }
 

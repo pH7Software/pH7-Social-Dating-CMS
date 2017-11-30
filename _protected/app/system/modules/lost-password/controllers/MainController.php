@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Lost Password / Controller
  */
@@ -48,10 +48,11 @@ class MainController extends Controller
         if (!(new UserCoreModel)->checkHashValidation($sEmail, $sHash, $sTable)) {
             Header::redirect($this->registry->site_url, t('Oops! Email or hash is invalid.'), Design::ERROR_TYPE);
         } else {
-            if (!$this->sendMail($sTable, $sEmail))
+            if (!$this->sendMail($sTable, $sEmail)) {
                 Header::redirect($this->registry->site_url, Form::errorSendingEmail(), Design::ERROR_TYPE);
-            else
+            } else {
                 Header::redirect($this->registry->site_url, t('Your new password has been emailed to you.'), Design::SUCCESS_TYPE);
+            }
         }
     }
 
@@ -70,8 +71,8 @@ class MainController extends Controller
         (new UserCoreModel)->changePassword($sEmail, $sNewPassword, $sTable);
 
         $this->view->content = t('Hello,') . '<br />' .
-            t('Your new password is %0%', '<em>"' . $sNewPassword . '"</em>') . '<br />' .
-            t("Please change it when you're logged in (Account -> Edit Profile -> Change Password).");
+            t('Your new password is: %0%', '<em>' . $sNewPassword . '</em>') . '<br />' .
+            t('Please change it once you are <a href="%0%">logged in</a> (Account -> Edit Profile -> Change Password).', $this->getLoginUrl($sTable));
 
         $sMessageHtml = $this->view->parseMail(
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/lost-password/recover_password.tpl',
@@ -88,15 +89,35 @@ class MainController extends Controller
 
     public function account()
     {
-        if (UserCore::auth())
+        if (UserCore::auth()) {
             $sUrl = Uri::get('user', 'account', 'index');
-        elseif (AffiliateCore::auth())
+        } elseif (AffiliateCore::auth()) {
             $sUrl = Uri::get('affiliate', 'account', 'index');
-        elseif (AdminCore::auth())
+        } elseif (AdminCore::auth()) {
             $sUrl = Uri::get(PH7_ADMIN_MOD, 'main', 'index');
-        else
+        } else {
             $sUrl = $this->registry->site_url;
-        Header::redirect($sUrl);
+        }
 
+        Header::redirect($sUrl);
+    }
+
+    /**
+     * @param string $sTableName
+     *
+     * @return string
+     */
+    private function getLoginUrl($sTableName)
+    {
+        switch($sTableName) {
+            case 'Members':
+                return Uri::get('user', 'main', 'index');
+
+            case 'Affiliates':
+                return Uri::get('affiliate', 'home', 'login');
+
+            case 'Admins':
+                return Uri::get(PH7_ADMIN_MOD, 'main', 'login');
+        }
     }
 }

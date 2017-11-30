@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2016-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2016-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Two-Factor Auth / Controller
  */
@@ -58,7 +58,7 @@ class MainController extends Controller
         $this->view->page_title = $this->view->h2_title = t('Two-Factor Authentication');
         $this->view->mod = $this->sMod;
 
-        $this->iIsEnabled = (int) $this->o2FactorModel->isEnabled($this->iProfileId);
+        $this->iIsEnabled = (int)$this->o2FactorModel->isEnabled($this->iProfileId);
         if ($this->httpRequest->postExists('status')) {
             $this->update2FaStatus();
         }

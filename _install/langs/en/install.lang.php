@@ -3,7 +3,7 @@
  * @title            English Language File
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Lang / EN
  */
@@ -32,23 +32,17 @@ $LANG = array(
     'later' => 'Not Now',
     'register' => 'Save It!',
     'site_name' => 'Site Name',
-    'license' => 'Your License',
-    'license_desc' => 'Please read the license carefully and accept it before continuing the installation of the software!',
-    'registration_for_license' => 'If you haven\'t done it yet, it\'s a good time to buy now <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">a license key</a> to get all Professional Premium Features offered by the software.<br /> If you wish to try first pH7CMS with its basic features and promo links, you can skip this step.',
-    'your_license' => 'Your License Key',
     'agree_license' => 'I have read and agree to the above Terms.',
     'step' => 'Step',
     'welcome' => 'Welcome to the installation of',
     'welcome_to_installer' => 'Installation of',
     'config_site' => 'Configure your website!',
     'config_system' => 'Database/System Configuration',
-    'finish' => 'Congrats! The installation is finished and your site is alive!',
+    'finish' => 'Woohoo! pH7CMS is now installed! 😋',
     'go_your_site' => 'Go to your new website!',
     'go_your_admin_panel' => 'Go to your admin panel!',
     'error_page_not_found' => 'Page not found',
     'error_page_not_found_desc' => 'Sorry, the page you are looking for could not be found.',
-    'success_license' => 'Well done!',
-    'failure_license' => 'Incorrect license format!',
     'no_protected_exist' => 'Sorry, we haven\'t found the &quot;protected&quot; directory.',
     'no_protected_readable' => 'Please change the permissions of the &quot;protected&quot; directory to read mode (CHMOD 755).',
     'no_public_writable' => 'Please change the permissions for the root public directory to write mode (CHMOD 777).',
@@ -76,9 +70,9 @@ $LANG = array(
     'admin_last_name' => 'Your last name',
     'admin_username' => 'Your username (to login into the admin panel)',
     'admin_login_email' => 'Your email to login into the admin panel',
-    'admin_email' => 'Admin email address for your site',
+    'admin_email' => 'Admin email address for your website',
     'admin_return_email' => 'No-reply email address (usually noreply@yoursite.com)',
-    'admin_feedback_email' => 'Email address for the contact form of your site',
+    'admin_feedback_email' => 'Email address for the contact form of your website',
     'admin_password' => 'Your password (to login into the admin panel)',
     'admin_passwords' => 'Please confirm your password',
     'bad_email' => 'Incorrect email',
@@ -105,39 +99,34 @@ $LANG = array(
             Your Admin Login Username is: <em>' . (!empty($_SESSION['val']['admin_username']) ? $_SESSION['val']['admin_username'] : '') . '</em><br />
             Your Admin Login Password is: <em>****** (hidden for security reasons. It\'s the one you chose during the installation).</em>
         </p>
-        <p>Don\'t forget to show off by showing YOUR new Social Dating Business to all your friends, your colleagues and your Facebook\'s mates (and even to your haters... or not :-) ).</p>
-        <p>Finally, if you haven\'t done it yet, it\'s a really good time to buy a license today by simply <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">visiting our website</a> in order to get all Premium Modules/Features, Remove all Links and Copyright Notice on your Website and even get access to the Unlimited Support Ticket.</p>
+        <p>Don\'t forget to show off YOUR new Social Dating Website to your friends, colleagues and Facebook\'s mates (and even to your haters... why not! :-) ).</p>
+        <p><strong>Here is a <a href="' . get_tweet_post(Controller::SOFTWARE_TWITTER, Controller::SOFTWARE_GIT_REPO) . '">pre-written Tweet</a> (which you can edit, of course)</strong>.</p>
         <p>&nbsp;</p>
         <p>P.S. For any bug reports, suggestions, partnership, translation, contribution or other,
-        please visit our <a href="' . Controller::SOFTWARE_WEBSITE . '">website</a>.</p>
+        please visit the <a href="' . Controller::SOFTWARE_WEBSITE . '">official website</a>.</p>
         <p>---</p>
-        <p>Kind regards,</p>
-        <p>The pH7CMS developers team.</p>',
+        <p>Best regards,<br />
+        <a href="' . Controller::AUTHOR_URL . '">Pierre Soria</a></p>',
     'yes_dir' => 'The directory was found successfully!',
     'no_dir' => 'The directory does not exist.',
     'wait_importing_database' => 'Please wait while importing the database.<br />
         This may take several minutes.',
-    'service' => 'Useful additional services',
-    'buy_copyright_license_title' => 'Buy a Copyright Removal License',
-    'buy_copyright_license' => '<span class="gray">One-time Payment</span><br /> <span class="bold">Buy Now</span>',
-    'buy_copyright_license_desc' => 'By buying a License, you won\'t have any Links and Copyright Notice on your site, you will get all Premium Mods/Features and also be entitled to all next Update/Upgrade versions of the software.',
-    'buy_individual_ticket_support_title' => 'Buy an Individual Support Service',
-    'buy_individual_ticket_support' => '<span class="gray">Full ticket support for one month</span><br /> <span class="bold">Buy Now</span>',
-    'buy_individual_ticket_support_desc' => 'By purchasing an individual unlimited ticket support, we\'ll help you whenever you have an issue/problem with the software. We are at your total disposal to solve any problem encountered with pH7CMS.',
     'niche' => 'Choose the Kind of Site you Want to Build',
     'social_dating_niche' => 'Social-Dating Niche',
     'social_niche' => 'Community Niche',
     'dating_niche' => 'Dating Niche',
     'base_niche_desc' => 'By choosing this niche, the main modules will be enabled and the generic template (social dating community theme) will be enabled by default.',
-    'zendate_niche_desc' => 'By choosing the Social niche, only Social modules will be enabled and the Social theme will be enabled by default.',
-    'datelove_niche_desc' => 'By choosing the Dating niche, only Dating modules will be enabled on your site and the Dating theme will be enabled by default.',
+    'zendate_niche_desc' => 'By choosing the Social niche, only the Social modules will be enabled, profile photo won\'t be required by default and the Social theme will be enabled by default.',
+    'datelove_niche_desc' => 'By choosing the Dating niche, only the Dating modules will be enabled on your website, profile photo will be required by default and the Dating theme will be enabled by default.',
     'go_social_dating' => 'Go for Social Dating!',
     'go_social' => 'Go for Social!',
     'go_dating' => 'Go for Dating!',
-    'recommended' => 'Recommended',
+    'recommended' => 'Recommended Niche',
     'recommended_desc' => 'Choose this niche if you haven\'t an idea yet.',
     'note_able_to_change_niche_settings_later' => 'Please note that you will be able to change the template and enable/disable the modules later in your admin panel.',
-    'looking_hosting' => 'Looking for a Web host compatible with pH7CMS? See <a href="' . Controller::SOFTWARE_HOSTING_LIST_URL . '" target="_blank">our Web Hosting List</a>!',
+    'will_you_make_donation' => 'Will you help me to maintain &amp; improve the software?',
+    'donate_here' => 'Make a donation now',
+    'or_paypal_donation' => '...Or donate by PayPal',
     'warning_no_js' => 'JavaScript is disabled on your Web browser!<br />
         Please enable JavaScript via the options of your Web browser in order to use this website.',
     'admin_url' => 'Admin Panel URL',

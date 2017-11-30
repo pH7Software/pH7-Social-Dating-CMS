@@ -3,7 +3,7 @@
  * @title          Security Class
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / Framework / Security
  * @version        1.2
@@ -47,7 +47,7 @@ final class Security
      */
     public static function hashPwd($sPassword)
     {
-        return password_hash($sPassword , self::PWD_ALGORITHM, self::$_aPwdOptions);
+        return password_hash($sPassword, self::PWD_ALGORITHM, self::$_aPwdOptions);
     }
 
     /**
@@ -56,7 +56,7 @@ final class Security
      * @param string $sPassword
      * @param string $sHash
      *
-     * @return boolean
+     * @return bool
      */
     public static function checkPwd($sPassword, $sHash)
     {
@@ -69,7 +69,7 @@ final class Security
      * @param string $sPassword
      * @param string $sHash
      *
-     * @return string|boolean Returns the new password if the password needs to be rehash, otherwise FALSE
+     * @return string|bool Returns the new password if the password needs to be rehash, otherwise FALSE
      */
     public static function pwdNeedsRehash($sPassword, $sHash)
     {
@@ -84,7 +84,7 @@ final class Security
      * Generate a hash for Cookie Password encryption.
      *
      * @param string $sPassword
-     * @param integer $iLength Default: 40
+     * @param int $iLength
      *
      * @return string The password hashed.
      *
@@ -99,7 +99,7 @@ final class Security
      * Generate a hash.
      *
      * @param string $sVal
-     * @param integer $iLength Default 80
+     * @param int $iLength
      *
      * @return string
      */
@@ -115,7 +115,7 @@ final class Security
      * Generate a user hash.
      *
      * @param string $sVal
-     * @param integer $iLength
+     * @param int $iLength
      * @param string $sAlgo The algorithm. Only 'whirlpool' or 'sha512' are accepted.
      *
      * @return string

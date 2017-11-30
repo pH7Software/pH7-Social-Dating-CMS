@@ -3,7 +3,7 @@
  * @title            InstallController Class
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Install / Controller
  */
@@ -28,6 +28,7 @@ class InstallController extends Controller
         'chatroulette' => '0',
         'picture' => '1',
         'video' => '1',
+        'friend' => '1',
         'hotornot' => '0',
         'forum' => '1',
         'note' => '1',
@@ -39,8 +40,7 @@ class InstallController extends Controller
         'mail' => '1',
         'im' => '0',
         'user-dashboard' => '0',
-        'related-profile' => '1',
-        'friend' => '1'
+        'related-profile' => '1'
     ];
 
     const DATING_MODS = [
@@ -51,6 +51,7 @@ class InstallController extends Controller
         'chatroulette' => '1',
         'picture' => '1',
         'video' => '0',
+        'friend' => '0',
         'hotornot' => '1',
         'forum' => '0',
         'note' => '0',
@@ -62,19 +63,20 @@ class InstallController extends Controller
         'mail' => '1',
         'im' => '1',
         'user-dashboard' => '1',
-        'related-profile' => '1',
-        'friend' => '0'
+        'related-profile' => '1'
     ];
 
     /**
      * Enable/Disable Site Settings according to the chosen niche
      */
     const SOCIAL_SETTINGS = [
-        'social_media_widgets' => '1'
+        'socialMediaWidgets' => '1',
+        'requireRegistrationAvatar' => '0'
     ];
 
     const DATING_SETTINGS = [
-        'social_media_widgets' => '0'
+        'socialMediaWidgets' => '0',
+        'requireRegistrationAvatar' => '1'
     ];
 
 
@@ -100,8 +102,9 @@ class InstallController extends Controller
     {
         global $LANG;
 
-        if (empty($_SESSION['val']['path_protected']))
+        if (empty($_SESSION['val']['path_protected'])) {
             $_SESSION['val']['path_protected'] = PH7_ROOT_PUBLIC . '_protected' . PH7_DS;
+        }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['path_protected'])) {
             $_SESSION['val']['path_protected'] = check_ext_start(check_ext_end(trim($_POST['path_protected'])));
@@ -143,8 +146,8 @@ class InstallController extends Controller
             session_regenerate_id(true);
 
             if (empty($_SESSION['val'])) {
-                $_SESSION['db']['type_name'] = 'MySQL';
-                $_SESSION['db']['type'] = 'mysql';
+                $_SESSION['db']['type_name'] = Db::DBMS_MYSQL_NAME;
+                $_SESSION['db']['type'] = Db::DSN_MYSQL_PREFIX;
                 $_SESSION['db']['hostname'] = 'localhost';
                 $_SESSION['db']['username'] = 'root';
                 $_SESSION['db']['name'] = 'ph7cms';
@@ -195,7 +198,7 @@ class InstallController extends Controller
                                 $aErrors[] = $LANG['no_app_config_writable'];
                             } else {
                                 if (
-                                    !($DB->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'mysql' &&
+                                    !($DB->getAttribute(\PDO::ATTR_DRIVER_NAME) === Db::DSN_MYSQL_PREFIX &&
                                     version_compare($DB->getAttribute(\PDO::ATTR_SERVER_VERSION), PH7_REQUIRE_SQL_VERSION, '>='))
                                 ) {
                                     $aErrors[] = $LANG['require_mysql_version'];
@@ -222,8 +225,9 @@ class InstallController extends Controller
                                         'pH7_SampleData'
                                     ];
 
-                                    for ($i = 0, $iCount = count($aDumps); $i < $iCount; $i++)
+                                    for ($i = 0, $iCount = count($aDumps); $i < $iCount; $i++) {
                                         exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/' . $_SESSION['db']['type_name'] . '/' . $aDumps[$i] . '.sql');
+                                    }
 
                                     unset($DB);
 
@@ -250,6 +254,7 @@ class InstallController extends Controller
         $this->oView->assign('sept_number', 3);
         $this->oView->assign('errors', @$aErrors);
         unset($aErrors);
+
         $this->oView->display('config_system.tpl');
     }
 
@@ -286,13 +291,7 @@ class InstallController extends Controller
                                         if (!find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_username']) && !find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_first_name']) && !find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_last_name'])) {
                                             if (validate_name($_SESSION['val']['admin_first_name'])) {
                                                 if (validate_name($_SESSION['val']['admin_last_name'])) {
-                                                    @require_once PH7_ROOT_PUBLIC . '_constants.php';
-                                                    @require_once PH7_PATH_APP . 'configs/constants.php';
-
-                                                    require PH7_PATH_APP . 'includes/helpers/misc.php';
-                                                    require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
-                                                    // To load "\PH7\Framework\Security\Security" class
-                                                    Framework\Loader\Autoloader::getInstance()->init();
+                                                    $this->initializeClasses();
 
                                                     try {
                                                         require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
@@ -314,16 +313,16 @@ class InstallController extends Controller
                                                             'ip' => client_ip()
                                                         ]);
 
-                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :siteName WHERE name = \'siteName\' LIMIT 1');
+                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET settingValue = :siteName WHERE settingName = \'siteName\' LIMIT 1');
                                                         $rStmt->execute(['siteName' => $_SESSION['val']['site_name']]);
 
-                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :adminEmail WHERE name = \'adminEmail\'  LIMIT 1');
+                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET settingValue = :adminEmail WHERE settingName = \'adminEmail\'  LIMIT 1');
                                                         $rStmt->execute(['adminEmail' => $_SESSION['val']['admin_email']]);
 
-                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :feedbackEmail WHERE name = \'feedbackEmail\'  LIMIT 1');
+                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET settingValue = :feedbackEmail WHERE settingName = \'feedbackEmail\'  LIMIT 1');
                                                         $rStmt->execute(['feedbackEmail' => $_SESSION['val']['admin_feedback_email']]);
 
-                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :returnEmail WHERE name = \'returnEmail\'  LIMIT 1');
+                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET settingValue = :returnEmail WHERE settingName = \'returnEmail\'  LIMIT 1');
                                                         $rStmt->execute(['returnEmail' => $_SESSION['val']['admin_return_email']]);
 
                                                         // We finalise by putting the correct permission to the config files
@@ -415,25 +414,20 @@ class InstallController extends Controller
                     }
 
                     if ($bUpdateNeeded) {
-                        @require_once PH7_ROOT_PUBLIC . '_constants.php';
-                        @require_once PH7_PATH_APP . 'configs/constants.php';
-
-                        require PH7_PATH_APP . 'includes/helpers/misc.php';
-                        require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
-                        // To load "PH7\Framework\Mvc\Model\DbConfig" class
-                        Framework\Loader\Autoloader::getInstance()->init();
+                        $this->initializeClasses();
 
                         try {
                             require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
 
                             // Enable/Disable the modules according to the chosen niche
-                            foreach ($aModUpdate as $sModName => $sStatus)
+                            foreach ($aModUpdate as $sModName => $sStatus) {
                                 $this->updateMods($DB, $sModName, $sStatus);
+                            }
 
                             $this->updateSettings($aSettingUpdate);
 
                             // Set the theme for the chosen niche
-                            $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :theme WHERE name = \'defaultTemplate\' LIMIT 1';
+                            $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET settingValue = :theme WHERE settingName = \'defaultTemplate\' LIMIT 1';
                             $rStmt = $DB->prepare($sSql);
                             $rStmt->execute(['theme' => $sTheme]);
                         } catch (\PDOException $oE) {
@@ -442,13 +436,13 @@ class InstallController extends Controller
                     }
                     $_SESSION['step5'] = 1;
 
-                    redirect(PH7_URL_SLUG_INSTALL . 'service');
+                    redirect(PH7_URL_SLUG_INSTALL . 'finish');
                 }
             } else {
                 redirect(PH7_URL_SLUG_INSTALL . 'config_site');
             }
         } else {
-            redirect(PH7_URL_SLUG_INSTALL . 'service');
+            redirect(PH7_URL_SLUG_INSTALL . 'finish');
         }
 
         $this->oView->assign('sept_number', 5);
@@ -458,52 +452,6 @@ class InstallController extends Controller
     }
 
     /********************* STEP 6 *********************/
-    public function service()
-    {
-        $this->oView->assign('sept_number', 6);
-        $this->oView->display('service.tpl');
-    }
-
-    /********************* STEP 7 *********************/
-    public function license()
-    {
-        global $LANG;
-
-        if (!empty($_SESSION['step5']) && is_file(PH7_ROOT_PUBLIC . '_constants.php')) {
-            if (empty($_SESSION['val']['license']))
-                $_SESSION['val']['license'] = '';
-
-            if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['license'])) {
-                $sKey = trim($_POST['license']);
-                if (check_license($sKey)) {
-                    @require_once PH7_ROOT_PUBLIC . '_constants.php';
-                    @require_once PH7_PATH_APP . 'configs/constants.php';
-
-                    try {
-                        require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
-
-                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'License SET licenseKey = :key WHERE licenseId = 1');
-                        $rStmt->execute(['key' => $sKey]);
-
-                        redirect(PH7_URL_SLUG_INSTALL . 'finish');
-                    } catch (\PDOException $oE) {
-                        $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
-                    }
-                } else {
-                    $aErrors[] = $LANG['failure_license'];
-                }
-            }
-        } else {
-            redirect(PH7_URL_SLUG_INSTALL . 'niche');
-        }
-
-        $this->oView->assign('sept_number', 7);
-        $this->oView->assign('errors', @$aErrors);
-        unset($aErrors);
-        $this->oView->display('license.tpl');
-    }
-
-    /********************* STEP 8 *********************/
     public function finish()
     {
         @require_once PH7_ROOT_PUBLIC . '_constants.php';
@@ -530,7 +478,7 @@ class InstallController extends Controller
             exit(header('Location: ' . PH7_URL_ROOT));
         }
 
-        $this->oView->assign('sept_number', 8);
+        $this->oView->assign('sept_number', 6);
         $this->oView->display('finish.tpl');
     }
 
@@ -542,6 +490,7 @@ class InstallController extends Controller
         global $LANG;
 
         $aParams = [
+            'from' => Controller::SOFTWARE_EMAIL,
             'to' => $_SESSION['val']['admin_login_email'],
             'subject' => $LANG['title_email_finish_install'],
             'body' => $LANG['content_email_finish_install']
@@ -592,8 +541,10 @@ class InstallController extends Controller
         // Initialize the site's database to get "\PH7\Framework\Mvc\Model\Engine\Db" class working (as it uses that DB and not the installer one)
         Framework\Mvc\Router\FrontController::getInstance()->_databaseInitialize();
 
-        // Enable/Disable Social Media Widgets according to the chosen niche
-        Framework\Mvc\Model\DbConfig::setSocialWidgets($aParams['social_media_widgets']);
+        foreach ($aParams as $sName => $sValue) {
+            $sMethodName = ($sName === 'socialMediaWidgets' ? 'setSocialWidgets' : 'setSetting');
+            Framework\Mvc\Model\DbConfig::$sMethodName($sValue, $sName);
+        }
     }
 
     /***** Set the correct permission to the config files *****/
@@ -601,6 +552,19 @@ class InstallController extends Controller
     {
         @chmod(PH7_PATH_APP_CONFIG . 'config.ini', 0644);
         @chmod(PH7_ROOT_PUBLIC . '_constants.php', 0644);
+    }
+
+    /***** Require & Initialize the classes *****/
+    private function initializeClasses()
+    {
+        @require_once PH7_ROOT_PUBLIC . '_constants.php';
+        @require_once PH7_PATH_APP . 'configs/constants.php';
+
+        require PH7_PATH_APP . 'includes/helpers/misc.php';
+        require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
+        require PH7_PATH_FRAMEWORK . 'Error/Debug.class.php';
+
+        Framework\Loader\Autoloader::getInstance()->init();
     }
 
     /***** Get the loading image *****/

@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Newsletter / Controller
  */
@@ -16,7 +16,11 @@ class AdminController extends Controller
 {
     const SUBSCRIBERS_PER_PAGE = 30;
 
-    private $oSubscriptionModel, $sTitle;
+    /** @var SubscriptionModel */
+    private $oSubscriptionModel;
+
+    /** @var string */
+    private $sTitle;
 
     public function __construct()
     {
@@ -30,6 +34,7 @@ class AdminController extends Controller
         $this->sTitle = t('Newsletter');
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -38,6 +43,7 @@ class AdminController extends Controller
         $this->sTitle = t('Search Subscribers');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -91,15 +97,19 @@ class AdminController extends Controller
 
     public function deleteAll()
     {
-        if (!(new Framework\Security\CSRF\Token)->check('subscriber_action'))
+        if (!(new Framework\Security\CSRF\Token)->check('subscriber_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        elseif (count($this->httpRequest->post('action')) > 0) {
-            foreach ($this->httpRequest->post('action') as $sEmail)
+        } elseif (count($this->httpRequest->post('action')) > 0) {
+            foreach ($this->httpRequest->post('action') as $sEmail) {
                 $this->oSubscriptionModel->unsubscribe($sEmail);
+            }
 
             $this->sMsg = t('The subscribers(s) has/have been removed.');
         }
 
-        Header::redirect(Uri::get('newsletter', 'admin', 'browse'), $this->sMsg);
+        Header::redirect(
+            Uri::get('newsletter', 'admin', 'browse'),
+            $this->sMsg
+        );
     }
 }

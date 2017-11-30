@@ -4,7 +4,7 @@
  * @desc             Useful methods for handling files.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / File
  */
@@ -26,7 +26,7 @@ use ZipArchive;
 
 class File
 {
-    const REGEX_BINARY_FILE = '/^(.*?)\.(gif|jpg|jpeg|png|ico|mp3|mp4|mov|avi|flv|mpg|mpeg|wmv|ogg|ogv|webm|pdf|ttf|eot|woff|svg|swf)$/i';
+    const REGEX_BINARY_FILE = '/^(.*?)\.(gif|jpg|jpeg|png|webp|ico|mp3|mp4|mov|avi|flv|mpg|mpeg|wmv|ogg|ogv|webm|pdf|ttf|eot|woff|svg|swf)$/i';
 
     // End Of Line relative to the operating system
     const EOL = PHP_EOL;
@@ -50,6 +50,7 @@ class File
         'png' => 'image/png',
         'jpeg' => 'image/jpg',
         'jpg' => 'image/jpg',
+        'webp' => 'image/webp',
         'ico' => 'image/x-icon',
         'eot' => 'application/vnd.ms-fontobject',
         'otf' => 'application/octet-stream',
@@ -59,6 +60,7 @@ class File
         'swf' => 'application/x-shockwave-flash',
         'mp3' => 'audio/mpeg',
         'mp4' => 'video/mp4',
+        'webm' => 'video/webm',
         'mov' => 'video/quicktime',
         'avi' => 'video/x-msvideo',
         'php' => 'text/plain',
@@ -211,7 +213,7 @@ class File
      */
     public function size($sFile)
     {
-        return (int) @filesize($sFile);
+        return (int)@filesize($sFile);
     }
 
     /**
@@ -805,7 +807,7 @@ class File
                 return is_binary($sContents);
 
             return (
-                0 or substr_count($sContents, "^ -~", "^\r\n")/512 > 0.3
+                0 or substr_count($sContents, "^ -~", "^\r\n") / 512 > 0.3
                 or substr_count($sContents, "\x00") > 0
             );
         }

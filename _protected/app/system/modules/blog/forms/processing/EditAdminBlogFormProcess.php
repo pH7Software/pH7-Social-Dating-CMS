@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Blog / Form / Processing
  */
@@ -36,7 +36,7 @@ class EditAdminBlogFormProcess extends Form
             if ($oBlog->checkPostId($sPostId, $oBlogModel)) {
                 $oBlogModel->updatePost('postId', $sPostId, $iBlogId);
             } else {
-                \PFBC\Form::setError('form_blog', t('The post ID already exists or is incorrect.'));
+                \PFBC\Form::setError('form_edit_blog', t('The post ID already exists or is incorrect.'));
                 return;
             }
         }
@@ -96,6 +96,7 @@ class EditAdminBlogFormProcess extends Form
      * @param integer $iBlogId
      * @param stdClass $oPost Post data from the database.
      * @param BlogModel $oBlogModel
+     *
      * @return void
      *
      * @internal WARNING: Be careful, you should use Http::NO_CLEAN constant,

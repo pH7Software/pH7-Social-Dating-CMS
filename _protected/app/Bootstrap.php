@@ -2,20 +2,21 @@
 /**
  * @title          Bootstrap
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @author         Pierre-Henry Soria <hi@ph7.me>
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @link           http://ph7cms.com
  * @package        PH7 / App / Core
- * @version        2.0
  */
 
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use Exception;
 use PH7\App\Includes\Classes\Loader\Autoloader as AppLoader;
 use PH7\Framework\Config\Config;
+use PH7\Framework\Config\FileNotFoundException;
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\Error\CException as Except;
 use PH7\Framework\File\Import;
@@ -49,7 +50,7 @@ class Bootstrap
      */
     public static function getInstance()
     {
-        return (null === static::$oInstance) ? static::$oInstance = new static : static::$oInstance;
+        return null === static::$oInstance ? static::$oInstance = new static : static::$oInstance;
     }
 
     /**
@@ -85,9 +86,10 @@ class Bootstrap
      *
      * @return void
      *
-     * @throws Except\UserException
+     * @throws Exception
      * @throws Except\PH7Exception
-     * @throws \Exception
+     * @throws Except\UserException
+     * @throws FileNotFoundException
      */
     public function run()
     {
@@ -105,25 +107,25 @@ class Bootstrap
 
             new Server; // Start Server
 
-            Registry::getInstance()->start_time = microtime(true);
+            $this->startPageBenchmark();
 
             /**
              * Initialize the FrontController, we are asking the front controller to process the HTTP request
              */
             FrontController::getInstance()->runRouter();
-        } # \PH7\Framework\Error\CException\UserException
-        catch (Except\UserException $oE) {
+        /**  When pH7CMS will support PHP 7.1
+        } catch (FileNotFoundException | Except\UserException $oE) {
+        //*/
+        } catch (FileNotFoundException $oE) {
+            echo $oE->getMessage();
+        } catch (Except\UserException $oE) {
             echo $oE->getMessage(); // Simple User Error with Exception
-        } # \PH7\Framework\Error\CException\PH7Exception
-        catch (Except\PH7Exception $oE) {
+        } catch (Except\PH7Exception $oE) {
             Except\PH7Exception::launch($oE);
-        } # \Exception and other...
-        catch (\Exception $oE) {
+        } catch (Exception $oE) {
             Except\PH7Exception::launch($oE);
         } finally {
-            if (session_status() === PHP_SESSION_ACTIVE) {
-                session_write_close();
-            }
+            $this->closeAppSession();
         }
     }
 
@@ -156,6 +158,28 @@ class Bootstrap
 
         /* Structure/General.class.php functions are not currently used */
         // Import::pH7FwkClass('Structure.General');
+    }
+
+    /**
+     * Initialize the benchmark time. It is calculated in Framework\Layout\Html\Design::stat()
+     *
+     * @return void
+     */
+    private function startPageBenchmark()
+    {
+        Registry::getInstance()->start_time = microtime(true);
+    }
+
+    /**
+     * If sessions status are enabled, writes session data and ends session.
+     *
+     * @return void
+     */
+    private function closeAppSession()
+    {
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_write_close();
+        }
     }
 
     /**

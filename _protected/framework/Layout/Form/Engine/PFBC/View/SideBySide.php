@@ -11,10 +11,11 @@ class SideBySide extends \PFBC\View
 
     public function __construct($labelWidth, array $properties = null)
     {
-        if (!empty($properties))
+        if (!empty($properties)) {
             $properties["labelWidth"] = $labelWidth;
-        else
+        } else {
             $properties = array("labelWidth" => $labelWidth);
+        }
 
         parent::__construct($properties);
     }

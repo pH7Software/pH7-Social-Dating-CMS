@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Comment / Model
  */
@@ -9,9 +9,17 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Spam;
 
 class CommentModel extends CommentCoreModel
 {
+    /**
+     * @param int $iCommentId
+     * @param int $iApproved
+     * @param string $sTable
+     *
+     * @return array|bool|float|int|mixed|object|string
+     */
     public function get($iCommentId, $iApproved, $sTable)
     {
         $this->cache->start(static::CACHE_GROUP, 'get' . $iCommentId . $iApproved . $sTable, static::CACHE_TIME);
@@ -27,53 +35,93 @@ class CommentModel extends CommentCoreModel
             Db::free($rStmt);
             $this->cache->put($oData);
         }
+
         return $oData;
     }
 
+    /**
+     * @param int $iCommentId
+     * @param int $iRecipientId
+     * @param int $iSenderId
+     * @param int $iApproved
+     * @param string $sCreatedDate
+     * @param string $sTable
+     *
+     * @return bool
+     */
     public function add($iCommentId, $iRecipientId, $iSenderId, $iApproved, $sCreatedDate, $sTable)
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Comments' . $sTable) . '(comment, recipient, sender, approved, createdDate) VALUES(:comment, :recipient, :sender, :approved, :createdDate)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Comments' . $sTable) .
+            '(comment, recipient, sender, approved, createdDate) VALUES(:comment, :recipient, :sender, :approved, :createdDate)');
+
         $rStmt->bindValue(':comment', $iCommentId, \PDO::PARAM_STR);
         $rStmt->bindValue('recipient', $iRecipientId, \PDO::PARAM_INT);
         $rStmt->bindValue(':sender', $iSenderId, \PDO::PARAM_INT);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
         $rStmt->bindValue(':createdDate', $sCreatedDate, \PDO::PARAM_STR);
+
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iCommentId
+     * @param int $iRecipientId
+     * @param int $iSenderId
+     * @param string $sComment
+     * @param int $iApproved
+     * @param string $sUpdatedDate
+     * @param string $sTable
+     *
+     * @return bool
+     */
     public function update($iCommentId, $iRecipientId, $iSenderId, $sComment, $iApproved, $sUpdatedDate, $sTable)
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Comments' . $sTable) . 'SET comment = :comment, approved = :approved, updatedDate = :updatedDate WHERE commentId = :commentId AND recipient = :recipient AND sender = :sender LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Comments' . $sTable) .
+            'SET comment = :comment, approved = :approved, updatedDate = :updatedDate WHERE commentId = :commentId AND recipient = :recipient AND sender = :sender LIMIT 1');
+
         $rStmt->bindValue('commentId', $iCommentId, \PDO::PARAM_INT);
         $rStmt->bindValue('recipient', $iRecipientId, \PDO::PARAM_INT);
         $rStmt->bindValue(':sender', $iSenderId, \PDO::PARAM_INT);
         $rStmt->bindValue(':comment', $sComment, \PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
         $rStmt->bindValue(':updatedDate', $sUpdatedDate, \PDO::PARAM_STR);
+
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iCommentId
+     * @param int $iRecipientId
+     * @param int $iSenderId
+     * @param string $sTable
+     *
+     * @return bool
+     */
     public function delete($iCommentId, $iRecipientId, $iSenderId, $sTable)
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Comments' . $sTable) . 'WHERE commentId = :commentId AND recipient = :recipient AND sender = :sender LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Comments' . $sTable) .
+            'WHERE commentId = :commentId AND recipient = :recipient AND sender = :sender LIMIT 1');
+
         $rStmt->bindValue(':commentId', $iCommentId, \PDO::PARAM_INT);
         $rStmt->bindValue('recipient', $iRecipientId, \PDO::PARAM_INT);
         $rStmt->bindValue(':sender', $iSenderId, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
     /**
      * Check if the recipient ID exists in the table.
      *
-     * @param  integer $iId
-     * @param  string $sTable
-     * @return boolean
+     * @param int $iId
+     * @param string $sTable
+     *
+     * @return bool
      */
     public function idExists($iId, $sTable)
     {
@@ -92,42 +140,48 @@ class CommentModel extends CommentCoreModel
             Db::free($rStmt);
             $this->cache->put($bData);
         }
+
         return $bData;
     }
 
     /**
      * Check Duplicate Contents.
      *
-     * @param integer $iSenderId
+     * @param int $iSenderId
      * @param string $sCheckMsg
      * @param string $sTable
-     * @return boolean Returns TRUE if similar content was found in the table, FALSE otherwise.
+     *
+     * @return bool Returns TRUE if similar content was found in the table, FALSE otherwise.
      */
     public function isDuplicateContent($iSenderId, $sCheckMsg, $sTable)
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        return Framework\Mvc\Model\Spam::detectDuplicate($sCheckMsg, 'comment', 'sender', $iSenderId, 'Comments' . $sTable);
+        return Spam::detectDuplicate($sCheckMsg, 'comment', 'sender', $iSenderId, 'Comments' . $sTable);
     }
 
     /**
      * To prevent spam!
      *
-     * @param integer $iSenderId
-     * @param integer $iWaitTime In minutes!
+     * @param int $iSenderId
+     * @param int $iWaitTime In minutes!
      * @param string $sCurrentTime In date format: 0000-00-00 00:00:00
      * @param string $sTable
-     * @return boolean Return TRUE if the weather was fine, otherwise FALSE
+     *
+     * @return bool Return TRUE if the weather was fine, otherwise FALSE
      */
     public function checkWaitSend($iSenderId, $iWaitTime, $sCurrentTime, $sTable)
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT commentId FROM' . Db::prefix('Comments' . $sTable) . 'WHERE sender = :sender AND DATE_ADD(createdDate, INTERVAL :waitTime MINUTE) > :currentTime LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('SELECT commentId FROM' . Db::prefix('Comments' . $sTable) .
+            'WHERE sender = :sender AND DATE_ADD(createdDate, INTERVAL :waitTime MINUTE) > :currentTime LIMIT 1');
+
         $rStmt->bindValue(':sender', $iSenderId, \PDO::PARAM_INT);
         $rStmt->bindValue(':waitTime', $iWaitTime, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_STR);
         $rStmt->execute();
+
         return $rStmt->rowCount() === 0;
     }
 }

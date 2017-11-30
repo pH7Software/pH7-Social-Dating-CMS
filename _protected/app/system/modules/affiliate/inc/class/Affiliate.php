@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Inc / Class
  */
@@ -31,7 +31,9 @@ class Affiliate extends AffiliateCore
      * Add Refer Link.
      *
      * @param string $sUsername The Affiliate Username.
+     *
      * @return void
+     *
      * @internal Today's IP address is also easier to change than delete a cookie, so we have chosen the Cookie instead save the IP address in the database.
      */
     public function addRefer($sUsername)
@@ -56,6 +58,7 @@ class Affiliate extends AffiliateCore
      *
      * @param integer $iAffId
      * @param Cookie $oCookie
+     *
      * @return void
      */
     private function _setCookie($iAffId, Cookie $oCookie)

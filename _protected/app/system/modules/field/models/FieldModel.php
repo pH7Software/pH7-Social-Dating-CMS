@@ -1,61 +1,75 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2013-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2013-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Field / Model
  */
 
 namespace PH7;
 
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Model;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 use PH7\Framework\Mvc\Request\Http;
 
-class FieldModel extends Framework\Mvc\Model\Engine\Model
+class FieldModel extends Model
 {
+    /** @var string */
+    private $sTable;
 
-    private $_sTable, $_sName, $_sType, $_iLength, $_sDefVal, $_sSql;
+    /** @var null|string */
+    private $sName;
+
+    /** @var null|string */
+    private $sType;
+
+    /** @var null|int */
+    private $iLength;
+
+    /** @var null|string */
+    private $sDefVal;
+
+    /** @var string */
+    private $sSql;
 
     /**
-     * Constructor.
-     *
      * @param string $sTable Table name.
-     * @param string $sName Fielde name. Default NULL
-     * @param string $sType Field type. Default NULL
-     * @param integer $iLength Length field. Default NULL
-     * @param string $sDefVal Default field value. Default NULL
+     * @param string $sName Field name.
+     * @param string $sType Field type.
+     * @param int $iLength Length field.
+     * @param string $sDefVal Default field value.
      */
     public function __construct($sTable, $sName = null, $sType = null, $iLength = null, $sDefVal = null)
     {
-        $this->_sTable = Various::checkModelTable($sTable);
-        $this->_sName = $sName;
-        $this->_sType = $sType;
-        $this->_iLength = (int) $iLength;
-        $this->_sDefVal = $sDefVal;
+        parent::__construct();
+
+        $this->sTable = Various::checkModelTable($sTable);
+        $this->sName = $sName;
+        $this->sType = $sType;
+        $this->iLength = (int)$iLength;
+        $this->sDefVal = $sDefVal;
     }
 
     /**
      * Get all fields.
      *
-     * @return object Data of users
      * @return array All fields.
      */
     public function all()
     {
-        $rStmt = Db::getInstance()->query('SELECT * FROM' . Db::prefix($this->_sTable) . 'LIMIT 1');
+        $rStmt = Db::getInstance()->query('SELECT * FROM' . Db::prefix($this->sTable) . 'LIMIT 1');
 
-        $iNum = (int) $rStmt->rowCount();
+        $iNum = (int)$rStmt->rowCount();
         $aColumn = array();
 
-        if ($iNum > 0)
-        {
-            while ($aRow = $rStmt->fetch())
-            {
-                foreach ($aRow as $sColumn => $sValue)
-                {
-                    if (!is_numeric($sColumn) && $sColumn !== 'profileId')
+        if ($iNum > 0) {
+            while ($aRow = $rStmt->fetch()) {
+                foreach ($aRow as $sColumn => $sValue) {
+                    if (!is_numeric($sColumn) && $sColumn !== 'profileId') {
                         $aColumn[] = $sColumn;
+                    }
                 }
             }
         }
@@ -65,66 +79,76 @@ class FieldModel extends Framework\Mvc\Model\Engine\Model
 
     public function insert()
     {
-        $this->_sSql = 'ALTER TABLE' . Db::prefix($this->_sTable) . 'ADD ' . $this->_sName . ' ' . $this->getType();
+        $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'ADD ' . $this->sName . ' ' . $this->getType();
         return $this->execute();
     }
 
     public function update()
     {
-        $this->_sSql = 'ALTER TABLE' . Db::prefix($this->_sTable) . 'CHANGE ' . (new Http)->get('name') . ' ' . $this->_sName . ' ' . $this->getType();
+        $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'CHANGE ' . (new Http)->get('name') . ' ' . $this->sName . ' ' . $this->getType();
         return $this->execute();
     }
 
     public function delete()
     {
-        $this->_sSql = 'ALTER TABLE' . Db::prefix($this->_sTable) . 'DROP ' . $this->_sName;
+        $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'DROP ' . $this->sName;
         return $this->execute();
     }
 
     /**
      * Count fields.
      *
-     * @return integer
+     * @return int
      */
     public function total()
     {
-        return (int) count($this->all());
+        return (int)count($this->all());
     }
 
     /**
      * Executes SQL queries.
      *
-     * @return mixed (boolean | array) Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException Explanatory message.
+     * @return bool|array Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
+     *
+     * @throws PH7InvalidArgumentException Explanatory message.
      */
     protected function execute()
     {
-        $rStmt = Db::getInstance()->exec($this->_sSql);
-        return ($rStmt === false) ? $rStmt->errorInfo() : true;
+        $rStmt = Db::getInstance()->exec($this->sSql);
+        return $rStmt === false ? $rStmt->errorInfo() : true;
     }
 
     protected function getType()
     {
-        switch ($this->_sType)
-        {
-            case 'textbox':
-                if (mb_strlen($this->_sDefVal) > $this->_iLength) $this->_iLength = mb_strlen($this->_sDefVal);
-                if ($this->_iLength == 0 || $this->_iLength > 255) $this->_iLength = 255;
-                $this->_sSql .= 'VARCHAR(' . $this->_iLength . ')';
-            break;
+        switch ($this->sType) {
+            case 'textbox': {
+                if (mb_strlen($this->sDefVal) > $this->iLength) {
+                    $this->iLength = mb_strlen($this->sDefVal);
+                }
+                if ($this->iLength === 0 || $this->iLength > 255) {
+                    $this->iLength = 255;
+                }
+                $this->sSql .= 'VARCHAR(' . $this->iLength . ')';
+            } break;
 
-            case 'number':
-                if (!is_numeric($this->_sDefVal)) $this->_sDefVal = 0;
-                if (strlen($this->_sDefVal) > $this->_iLength) $this->_iLength = strlen($this->_sDefVal);
-                if ($this->_iLength == 0 || $this->_iLength > 11) $this->_iLength = 9; // Set the default maximum length value.
-                $this->_sSql .= 'INT(' . $this->_iLength . ')';
-            break;
+            case 'number': {
+                if (!is_numeric($this->sDefVal)) {
+                    $this->sDefVal = 0;
+                }
+                if (strlen($this->sDefVal) > $this->iLength) {
+                    $this->iLength = strlen($this->sDefVal);
+                }
+                if ($this->iLength === 0 || $this->iLength > 11) {
+                    $this->iLength = 9; // Set the default maximum length value.
+                }
+
+                $this->sSql .= 'INT(' . $this->iLength . ')';
+            } break;
 
             default:
-                throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Invalid Field type!');
+                throw new PH7InvalidArgumentException('Invalid Field type!');
         }
 
-        return $this->_sSql . ' NOT NULL DEFAULT ' . Db::getInstance()->quote($this->_sDefVal) . ';';
+        return $this->sSql . ' NOT NULL DEFAULT ' . Db::getInstance()->quote($this->sDefVal) . ';';
     }
-
 }

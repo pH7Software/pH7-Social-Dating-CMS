@@ -10,7 +10,11 @@ use PH7\Framework\Security\Validate\Validate;
 
 abstract class Validation extends Base
 {
-    protected $oValidate, $message;
+    /** @var Validate */
+    protected $oValidate;
+
+    /** @var string */
+    protected $message;
 
     public function __construct($message = '')
     {
@@ -31,5 +35,5 @@ abstract class Validation extends Base
         return ($value === null || is_array($value) || $value === '');
     }
 
-    public abstract function isValid($value);
+    abstract public function isValid($value);
 }

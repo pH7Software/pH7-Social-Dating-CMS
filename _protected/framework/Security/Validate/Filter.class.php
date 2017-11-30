@@ -1,10 +1,11 @@
 <?php
 
 namespace PH7\Framework\Security\Validate;
+
 defined('PH7') or exit('Restricted access');
 
 /**
- * NOTE: This script has been modified by P.H. Soria pH7 Developers Team.
+ * NOTE: This script has been modified by Pierre-Henry Soria
  *
  * - We accept the HTML tag "style" for the functioning of "CKEditor" and "TinyMCE".
  *
@@ -139,21 +140,18 @@ class Filter
     public function csrf_verify()
     {
         // If no POST data exists we will set the CSRF cookie
-        if (count($_POST) == 0)
-        {
+        if (count($_POST) == 0) {
             return $this->csrf_set_cookie();
         }
 
         // Do the tokens exist in both the _POST and _COOKIE arrays?
-        if ( ! isset($_POST[$this->_csrf_token_name]) OR
-             ! isset($_COOKIE[$this->_csrf_cookie_name]))
-        {
+        if (!isset($_POST[$this->_csrf_token_name]) OR
+            !isset($_COOKIE[$this->_csrf_cookie_name])) {
             $this->csrf_show_error();
         }
 
         // Do the tokens match?
-        if ($_POST[$this->_csrf_token_name] != $_COOKIE[$this->_csrf_cookie_name])
-        {
+        if ($_POST[$this->_csrf_token_name] != $_COOKIE[$this->_csrf_cookie_name]) {
             $this->csrf_show_error();
         }
 
@@ -183,12 +181,10 @@ class Filter
         $expire = time() + $this->_csrf_expire;
         $secure_cookie = (config_item('cookie_secure') === TRUE) ? 1 : 0;
 
-        if ($secure_cookie)
-        {
+        if ($secure_cookie) {
             $req = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : FALSE;
 
-            if ( ! $req OR $req == 'off')
-            {
+            if (!$req OR $req == 'off') {
                 return FALSE;
             }
         }
@@ -274,10 +270,8 @@ class Filter
          * Is the string an array?
          *
          */
-        if (is_array($str))
-        {
-            while (list($key) = each($str))
-            {
+        if (is_array($str)) {
+            while (list($key) = each($str)) {
                 $str[$key] = $this->xssClean($str[$key]);
             }
 
@@ -331,8 +325,7 @@ class Filter
          * large blocks of data, so we use str_replace.
          */
 
-        if (strpos($str, "\t") !== FALSE)
-        {
+        if (strpos($str, "\t") !== FALSE) {
             $str = str_replace("\t", ' ', $str);
         }
 
@@ -353,16 +346,13 @@ class Filter
          *
          * But it doesn't seem to pose a problem.
          */
-        if ($is_image === TRUE)
-        {
+        if ($is_image === TRUE) {
             // Images have a tendency to have the PHP short opening and
             // closing tags every so often so we skip those and only
             // do the long opening tags.
             $str = preg_replace('/<\?(php)/i', "&lt;?\\1", $str);
-        }
-        else
-        {
-            $str = str_replace(array('<?', '?'.'>'),  array('&lt;?', '?&gt;'), $str);
+        } else {
+            $str = str_replace(array('<?', '?' . '>'), array('&lt;?', '?&gt;'), $str);
         }
 
         /*
@@ -372,22 +362,20 @@ class Filter
          * These words are compacted back to their correct state.
          */
         $words = array(
-                'javascript', 'expression', 'vbscript', 'script',
-                'applet', 'alert', 'document', 'write', 'cookie', 'window'
-            );
+            'javascript', 'expression', 'vbscript', 'script',
+            'applet', 'alert', 'document', 'write', 'cookie', 'window'
+        );
 
-        foreach ($words as $word)
-        {
+        foreach ($words as $word) {
             $temp = '';
 
-            for ($i = 0, $wordlen = strlen($word); $i < $wordlen; $i++)
-            {
-                $temp .= substr($word, $i, 1)."\s*";
+            for ($i = 0, $wordlen = strlen($word); $i < $wordlen; $i++) {
+                $temp .= substr($word, $i, 1) . "\s*";
             }
 
             // We only want to do this when it is followed by a non-word character
             // That way valid stuff like "dealer to" does not become "dealerto"
-            $str = preg_replace_callback('#('.substr($temp, 0, -3).')(\W)#is', array($this, '_compact_exploded_words'), $str);
+            $str = preg_replace_callback('#(' . substr($temp, 0, -3) . ')(\W)#is', array($this, '_compact_exploded_words'), $str);
         }
 
         /*
@@ -396,26 +384,21 @@ class Filter
          * but it is dog slow compared to these simplified non-capturing
          * preg_match(), especially if the pattern exists in the string
          */
-        do
-        {
+        do {
             $original = $str;
 
-            if (preg_match("/<a/i", $str))
-            {
+            if (preg_match("/<a/i", $str)) {
                 $str = preg_replace_callback("#<a\s+([^>]*?)(>|$)#si", array($this, '_js_link_removal'), $str);
             }
 
-            if (preg_match("/<img/i", $str))
-            {
+            if (preg_match("/<img/i", $str)) {
                 $str = preg_replace_callback("#<img\s+([^>]*?)(\s?/?>|$)#si", array($this, '_js_img_removal'), $str);
             }
 
-            if (preg_match("/script/i", $str) OR preg_match("/xss/i", $str))
-            {
+            if (preg_match("/script/i", $str) OR preg_match("/xss/i", $str)) {
                 $str = preg_replace("#<(/*)(script|xss)(.*?)\>#si", '', $str); // '' OR [removed]
             }
-        }
-        while($original != $str);
+        } while ($original != $str);
 
         unset($original);
 
@@ -432,7 +415,7 @@ class Filter
          * Becomes: &lt;blink&gt;
          */
         $naughty = 'alert|applet|audio|basefont|base|behavior|bgsound|blink|body|embed|expression|form|frameset|frame|head|html|ilayer|iframe|input|isindex|layer|link|meta|object|plaintext|style|script|textarea|title|video|xml|xss';
-        $str = preg_replace_callback('#<(/*\s*)('.$naughty.')([^><]*)([><]*)#is', array($this, '_sanitize_naughty_html'), $str);
+        $str = preg_replace_callback('#<(/*\s*)(' . $naughty . ')([^><]*)([><]*)#is', array($this, '_sanitize_naughty_html'), $str);
 
         /*
          * Sanitize naughty scripting elements
@@ -464,9 +447,8 @@ class Filter
          * code found and removed/changed during processing.
          */
 
-        if ($is_image === TRUE)
-        {
-            return ($str == $converted_string) ? TRUE: FALSE;
+        if ($is_image === TRUE) {
+            return ($str == $converted_string) ? TRUE : FALSE;
         }
 
         //log_message('debug', "XSS Filtering completed");
@@ -482,8 +464,7 @@ class Filter
      */
     public function xss_hash()
     {
-        if ($this->_xss_hash == '')
-        {
+        if ($this->_xss_hash == '') {
             mt_srand();
             $this->_xss_hash = md5(time() + mt_rand(0, 1999999999));
         }
@@ -508,10 +489,9 @@ class Filter
      * @param    string
      * @return    string
      */
-    public function entity_decode($str, $charset='UTF-8')
+    public function entity_decode($str, $charset = 'UTF-8')
     {
-        if (stristr($str, '&') === FALSE)
-        {
+        if (stristr($str, '&') === FALSE) {
             return $str;
         }
 
@@ -532,41 +512,40 @@ class Filter
     public function sanitize_filename($str, $relative_path = FALSE)
     {
         $bad = array(
-                        "../",
-                        "<!--",
-                        "-->",
-                        "<",
-                        ">",
-                        "'",
-                        '"',
-                        '&',
-                        '$',
-                        '#',
-                        '{',
-                        '}',
-                        '[',
-                        ']',
-                        '=',
-                        ';',
-                        '?',
-                        "%20",
-                        "%22",
-                        "%3c",        // <
-                        "%253c",    // <
-                        "%3e",        // >
-                        "%0e",        // >
-                        "%28",        // (
-                        "%29",        // )
-                        "%2528",    // (
-                        "%26",        // &
-                        "%24",        // $
-                        "%3f",        // ?
-                        "%3b",        // ;
-                        "%3d"        // =
-                    );
+            "../",
+            "<!--",
+            "-->",
+            "<",
+            ">",
+            "'",
+            '"',
+            '&',
+            '$',
+            '#',
+            '{',
+            '}',
+            '[',
+            ']',
+            '=',
+            ';',
+            '?',
+            "%20",
+            "%22",
+            "%3c",        // <
+            "%253c",    // <
+            "%3e",        // >
+            "%0e",        // >
+            "%28",        // (
+            "%29",        // )
+            "%2528",    // (
+            "%26",        // &
+            "%24",        // $
+            "%3f",        // ?
+            "%3b",        // ;
+            "%3d"        // =
+        );
 
-        if ( ! $relative_path)
-        {
+        if (!$relative_path) {
             $bad[] = './';
             $bad[] = '/';
         }
@@ -588,7 +567,7 @@ class Filter
      */
     protected function _compact_exploded_words($matches)
     {
-        return preg_replace('/\s+/s', '', $matches[1]).$matches[2];
+        return preg_replace('/\s+/s', '', $matches[1]) . $matches[2];
     }
 
     // --------------------------------------------------------------------
@@ -618,10 +597,9 @@ class Filter
          * WARNING: Allowing the "style" and/or "img" tags promotes the CSRF attack!
          * If you do not want to use color in these editors, it is strongly recommended not to accept the tag style!!
          */
-           $evil_attributes = array('on\w*', 'xmlns', 'formaction');
+        $evil_attributes = array('on\w*', 'xmlns', 'formaction');
 
-        if ($is_image === TRUE)
-        {
+        if ($is_image === TRUE) {
             /*
              * Adobe Photoshop puts XML metadata into JFIF images,
              * including namespacing, so we have to allow this for images.
@@ -634,25 +612,22 @@ class Filter
             $attribs = array();
 
             // find occurrences of illegal attribute strings without quotes
-            preg_match_all("/(".implode('|', $evil_attributes).")\s*=\s*([^\s]*)/is",  $str, $matches, PREG_SET_ORDER);
+            preg_match_all("/(" . implode('|', $evil_attributes) . ")\s*=\s*([^\s]*)/is", $str, $matches, PREG_SET_ORDER);
 
-            foreach ($matches as $attr)
-            {
+            foreach ($matches as $attr) {
                 $attribs[] = preg_quote($attr[0], '/');
             }
 
             // find occurrences of illegal attribute strings with quotes (042 and 047 are octal quotes)
-            preg_match_all("/(".implode('|', $evil_attributes).")\s*=\s*(\042|\047)([^\\2]*?)(\\2)/is",  $str, $matches, PREG_SET_ORDER);
+            preg_match_all("/(" . implode('|', $evil_attributes) . ")\s*=\s*(\042|\047)([^\\2]*?)(\\2)/is", $str, $matches, PREG_SET_ORDER);
 
-            foreach ($matches as $attr)
-            {
+            foreach ($matches as $attr) {
                 $attribs[] = preg_quote($attr[0], '/');
             }
 
             // replace illegal attribute strings that are inside an html tag
-            if (count($attribs) > 0)
-            {
-                $str = preg_replace("/<(\/?[^><]+?)([^A-Za-z\-])(".implode('|', $attribs).")([\s><])([><]*)/i", '<$1$2$4$5', $str, -1, $count);
+            if (count($attribs) > 0) {
+                $str = preg_replace("/<(\/?[^><]+?)([^A-Za-z\-])(" . implode('|', $attribs) . ")([\s><])([><]*)/i", '<$1$2$4$5', $str, -1, $count);
             }
 
         } while ($count);
@@ -673,11 +648,11 @@ class Filter
     protected function _sanitize_naughty_html($matches)
     {
         // encode opening brace
-        $str = '&lt;'.$matches[1].$matches[2].$matches[3];
+        $str = '&lt;' . $matches[1] . $matches[2] . $matches[3];
 
         // encode captured opening or closing brace to prevent recursive vectors
         $str .= str_replace(array('>', '<'), array('&gt;', '&lt;'),
-                            $matches[4]);
+            $matches[4]);
 
         return $str;
     }
@@ -751,10 +726,8 @@ class Filter
     {
         $out = '';
 
-        if (preg_match_all('#\s*[a-z\-]+\s*=\s*(\042|\047)([^\\1]*?)\\1#is', $str, $matches))
-        {
-            foreach ($matches[0] as $match)
-            {
+        if (preg_match_all('#\s*[a-z\-]+\s*=\s*(\042|\047)([^\\1]*?)\\1#is', $str, $matches)) {
+            foreach ($matches[0] as $match) {
                 $out .= preg_replace("#/\*.*?\*/#s", '', $match);
             }
         }
@@ -793,9 +766,9 @@ class Filter
          * Protect GET variables in URLs
          */
 
-         // 901119URL5918AMP18930PROTECT8198
+        // 901119URL5918AMP18930PROTECT8198
 
-        $str = preg_replace('|\&([a-z\_0-9\-]+)\=([a-z\_0-9\-]+)|i', $this->xss_hash()."\\1=\\2", $str);
+        $str = preg_replace('|\&([a-z\_0-9\-]+)\=([a-z\_0-9\-]+)|i', $this->xss_hash() . "\\1=\\2", $str);
 
         /*
          * Validate standard character entities
@@ -812,7 +785,7 @@ class Filter
          * Just as above, adds a semicolon if missing.
          *
          */
-        $str = preg_replace('#(&\#x?)([0-9A-F]+);?#i',"\\1\\2;",$str);
+        $str = preg_replace('#(&\#x?)([0-9A-F]+);?#i', "\\1\\2;", $str);
 
         /*
          * Un-Protect GET variables in URLs
@@ -834,14 +807,12 @@ class Filter
      */
     protected function _do_never_allowed($str)
     {
-        foreach ($this->_never_allowed_str as $key => $val)
-        {
+        foreach ($this->_never_allowed_str as $key => $val) {
             $str = str_replace($key, $val, $str);
         }
 
-        foreach ($this->_never_allowed_regex as $key => $val)
-        {
-            $str = preg_replace("#".$key."#i", $val, $str);
+        foreach ($this->_never_allowed_regex as $key => $val) {
+            $str = preg_replace("#" . $key . "#i", $val, $str);
         }
 
         return $str;
@@ -856,92 +827,85 @@ class Filter
      */
     protected function _csrf_set_hash()
     {
-        if ($this->_csrf_hash == '')
-        {
+        if ($this->_csrf_hash == '') {
             // If the cookie exists we will use it's value.
             // We don't necessarily want to regenerate it with
             // each page load since a page could contain embedded
             // sub-pages causing this feature to fail
             if (isset($_COOKIE[$this->_csrf_cookie_name]) &&
-                $_COOKIE[$this->_csrf_cookie_name] != '')
-            {
+                $_COOKIE[$this->_csrf_cookie_name] != '') {
                 return $this->_csrf_hash = $_COOKIE[$this->_csrf_cookie_name];
             }
 
-            return $this->_csrf_hash = md5(uniqid(rand(), TRUE));
+            $sPrefix = (string)mt_rand();
+            return $this->_csrf_hash = md5(uniqid($sPrefix, true));
         }
 
         return $this->_csrf_hash;
     }
 
 }
+
 // END Security Class
 
 /**
-* Loads the main config.php file
-*
-* This function lets us grab the config file even if the Config class
-* hasn't been instantiated yet
-*
-* @access    private
-* @return    array
-*/
-    function &get_config($replace = array())
-    {
-        static $_config;
+ * Loads the main config.php file
+ *
+ * This function lets us grab the config file even if the Config class
+ * hasn't been instantiated yet
+ *
+ * @access    private
+ * @return    array
+ */
+function &get_config($replace = array())
+{
+    static $_config;
 
-        if (isset($_config))
-        {
-            return $_config[0];
-        }
-
-        require(__DIR__ . '/config_filter.inc.php');
-
-        // Does the $config array exist in the file?
-        if ( ! isset($config) OR ! is_array($config))
-        {
-            exit('Your config file does not appear to be formatted correctly.');
-        }
-
-        // Are any values being dynamically replaced?
-        if (count($replace) > 0)
-        {
-            foreach ($replace as $key => $val)
-            {
-                if (isset($config[$key]))
-                {
-                    $config[$key] = $val;
-                }
-            }
-        }
-
-        $_config[0] =& $config;
+    if (isset($_config)) {
         return $_config[0];
     }
 
-/**
-* Returns the specified config item
-*
-* @access    public
-* @return    mixed
-*/
-    function config_item($item)
-    {
-        static $_config_item = array();
+    require(__DIR__ . '/config_filter.inc.php');
 
-        if ( ! isset($_config_item[$item]))
-        {
-            $config =& get_config();
-
-            if ( ! isset($config[$item]))
-            {
-                return FALSE;
-            }
-            $_config_item[$item] = $config[$item];
-        }
-
-        return $_config_item[$item];
+    // Does the $config array exist in the file?
+    if (!isset($config) OR !is_array($config)) {
+        exit('Your config file does not appear to be formatted correctly.');
     }
+
+    // Are any values being dynamically replaced?
+    if (count($replace) > 0) {
+        foreach ($replace as $key => $val) {
+            if (isset($config[$key])) {
+                $config[$key] = $val;
+            }
+        }
+    }
+
+    $_config[0] =& $config;
+    return $_config[0];
+}
+
+/**
+ * Returns the specified config item
+ *
+ * @access    public
+ * @return    mixed
+ */
+function config_item($item)
+{
+    static $_config_item = array();
+
+    if (!isset($_config_item[$item])) {
+        $config =& get_config();
+
+        if (!isset($config[$item])) {
+            return FALSE;
+        }
+        $_config_item[$item] = $config[$item];
+    }
+
+    return $_config_item[$item];
+}
 
 // --------------------------------------------------------------------
 
@@ -955,29 +919,26 @@ class Filter
  * @param    string
  * @return    string
  */
-    function remove_invisible_characters($str, $url_encoded = TRUE)
-    {
-        $non_displayables = array();
+function remove_invisible_characters($str, $url_encoded = TRUE)
+{
+    $non_displayables = array();
 
-        // every control character except newline (dec 10)
-        // carriage return (dec 13), and horizontal tab (dec 09)
+    // every control character except newline (dec 10)
+    // carriage return (dec 13), and horizontal tab (dec 09)
 
-        if ($url_encoded)
-        {
-            $non_displayables[] = '/%0[0-8bcef]/';    // url encoded 00-08, 11, 12, 14, 15
-            $non_displayables[] = '/%1[0-9a-f]/';    // url encoded 16-31
-        }
-
-        $non_displayables[] = '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S';    // 00-08, 11, 12, 14-31, 127
-
-        do
-        {
-            $str = preg_replace($non_displayables, '', $str, -1, $count);
-        }
-        while ($count);
-
-        return $str;
+    if ($url_encoded) {
+        $non_displayables[] = '/%0[0-8bcef]/';    // url encoded 00-08, 11, 12, 14, 15
+        $non_displayables[] = '/%1[0-9a-f]/';    // url encoded 16-31
     }
+
+    $non_displayables[] = '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S';    // 00-08, 11, 12, 14-31, 127
+
+    do {
+        $str = preg_replace($non_displayables, '', $str, -1, $count);
+    } while ($count);
+
+    return $str;
+}
 
 /* End of file Security.php */
 /* Location: ./system/libraries/Security.php */

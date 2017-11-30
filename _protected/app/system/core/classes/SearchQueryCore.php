@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2017-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
@@ -10,7 +10,7 @@ namespace PH7;
 
 class SearchQueryCore
 {
-    const BIRTHDATE = 'birth_date';
+    const BIRTH_DATE = 'birth_date';
     const SEX = 'sex';
     const MATCH_SEX = 'match_sex';
     const AGE = 'age';

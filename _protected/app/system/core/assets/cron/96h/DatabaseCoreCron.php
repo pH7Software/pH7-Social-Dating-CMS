@@ -4,7 +4,7 @@
  * @desc             Database Periodic Cron.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / App / System / Core / Asset / Cron / 96H
  * @version          1.1
@@ -138,8 +138,9 @@ class DatabaseCoreCron extends Cron
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Messages') . 'WHERE FIND_IN_SET(\'sender\', toDelete) AND FIND_IN_SET(\'recipient\', toDelete)');
 
-        if ($rStmt->execute())
+        if ($rStmt->execute()) {
             echo nt('Deleted %n% temporary message... OK!', 'Deleted %n% temporary messages... OK!', $rStmt->rowCount()) . '<br />';
+        }
     }
 
     protected function removeLog()
@@ -176,7 +177,7 @@ class DatabaseCoreCron extends Cron
         if ($iCleanComment > 0) {
             $aCommentMod = ['Blog', 'Note', 'Picture', 'Video', 'Game', 'Profile'];
             foreach ($aCommentMod as $sSuffixTable) {
-                if ($iRow = $this->pruningDb($iCleanComment, 'Comments' . $sSuffixTable, 'updatedDate') > 0) {
+                if ($iRow = ($this->pruningDb($iCleanComment, 'Comments' . $sSuffixTable, 'updatedDate') > 0)) {
                     echo t('Deleted %0% %1% comment(s) ... OK!', $iRow, $sSuffixTable) . '<br />';
                 }
             }
@@ -184,30 +185,31 @@ class DatabaseCoreCron extends Cron
 
         // If the option is enabled for Messages
         if ($iCleanMsg > 0) {
-            if ($iRow = $this->pruningDb($iCleanMsg, 'Messages', 'sendDate') > 0) {
+            if ($iRow = ($this->pruningDb($iCleanMsg, 'Messages', 'sendDate') > 0)) {
                 echo nt('Deleted %n% message... OK!', 'Deleted %n% messages... OK!', $iRow) . '<br />';
             }
         }
 
         // If the option is enabled for Messenger
         if ($iCleanMessenger > 0) {
-            if ($iRow = $this->pruningDb($iCleanMessenger, 'Messenger', 'sent') > 0) {
+            if ($iRow = ($this->pruningDb($iCleanMessenger, 'Messenger', 'sent') > 0)) {
                 echo nt('Deleted %n% IM message... OK!', 'Deleted %n% IM messages... OK!', $iRow) . '<br />';
             }
         }
     }
 
     /**
-     * @param integer $iOlderThanXDay Delete data older than X days (e.g., 365 for data older than 1 year).
+     * @param int $iOlderThanXDay Delete data older than X days (e.g., 365 for data older than 1 year).
      * @param string $sTable Table name. Choose between 'Comments<TYPE>', 'Messages' and 'Messenger'
      * @param string $sDateColumn The DB column that indicates when the data has been created/updated (e.g., sendDate, updatedDate).
      *
-     * @return integer Returns the number of rows.
+     * @return int Returns the number of rows.
      */
     protected function pruningDb($iOlderThanXDay, $sTable, $sDateColumn)
     {
-        if (strstr($sTable, 'Comments') === false && $sTable !== 'Messages' && $sTable !== 'Messenger') {
-           DbVarious::launchErr($sTable);
+        if (strstr($sTable, 'Comments') === false &&
+            $sTable !== 'Messages' && $sTable !== 'Messenger') {
+            DbVarious::launchErr($sTable);
         }
 
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix($sTable) . 'WHERE (' . $sDateColumn . ' < NOW() - INTERVAL :dayNumber DAY)');

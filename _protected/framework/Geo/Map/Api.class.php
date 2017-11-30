@@ -15,8 +15,8 @@
  * ----------------- Modified by Pierre-Henry SORIA ----------------- *
  *
  * @author          Pierre-Henry SORIA <ph7software@gmail.com>
- * @copyright       (c) 2011-2017, Pierre-Henry SORIA, All Rights Reserved.
- * @version         Last update 04/21/2017
+ * @copyright       (c) 2011-2018, Pierre-Henry Soria, All Rights Reserved.
+ * @version         Last update 11/15/2017
  * @package         pH7CMS
  */
 
@@ -24,6 +24,7 @@ namespace PH7\Framework\Geo\Map;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Compress\Compress;
 use PH7\Framework\Config\Config;
 
 /**
@@ -33,6 +34,8 @@ use PH7\Framework\Config\Config;
  */
 class Api
 {
+    const API_KEY_MIN_LENGTH = 10;
+
     /** GoogleMap ID for the HTML DIV and identifier for all the methods (to have several gmaps) **/
     protected $googleMapId = 'googlemapapi';
 
@@ -94,7 +97,7 @@ class Api
     protected $useClusterer = false;
     protected $gridSize = 100;
     protected $maxZoom = 9;
-    protected $clustererLibrarypath = 'https://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/1.0/src/markerclusterer_packed.js';
+    protected $clustererLibrarypath = 'https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer.js';
 
     /** Enable automatic center/zoom **/
     protected $enableAutomaticCenterZoom = false;
@@ -170,8 +173,8 @@ class Api
      */
     public function setMapType($type)
     {
-        $mapsType = array('ROADMAP', 'HYBRID', 'TERRAIN', 'SATELLITE');
-        if (!in_array(strtoupper($type), $mapsType)) {
+        $mapsType = ['ROADMAP', 'HYBRID', 'TERRAIN', 'SATELLITE'];
+        if (!in_array(strtoupper($type), $mapsType, true)) {
             $this->mapType = $mapsType[0];
         } else {
             $this->mapType = strtoupper($type);
@@ -286,7 +289,7 @@ class Api
 
     /**
      * Set the Google Maps key
-     * Ref: http://googlegeodevelopers.blogspot.ie/2016/06/building-for-scale-updates-to-google.html
+     * Ref: https://maps-apis.googleblog.com/2016/06/building-for-scale-updates-to-google.html
      *
      * @param string $key
      *
@@ -294,7 +297,7 @@ class Api
      */
     public function setKey($key)
     {
-        $this->key = $key;
+        $this->key = trim($key);
     }
 
     /**
@@ -413,8 +416,9 @@ class Api
      */
     public function getMap()
     {
-        if ($this->bCompressor)
-            $this->content = (new \PH7\Framework\Compress\Compress)->parseJs($this->content);
+        if ($this->bCompressor) {
+            $this->content = (new Compress)->parseJs($this->content);
+        }
 
         return $this->content;
     }
@@ -610,14 +614,14 @@ class Api
             $this->content .= '</script>' . "\n";
 
             // Clusterer JS
-            if ($this->useClusterer == true) {
+            if ($this->useClusterer) {
                 $this->content .= '<script src="' . $this->clustererLibraryPath . '" type="text/javascript"></script>' . "\n";
             }
         }
 
         $this->content .= '<script>' . "\n";
 
-        if (empty($this->key) || strlen($this->key) <= 10) {
+        if ($this->isApiKeyNotSet()) {
             $this->content .= 'document.write("' . t('You need to get a Google Maps API key to get it working. Please go to your pH7CMS Admin Panel -> Settings -> General -> API -> Google Maps API Key') . '".toUpperCase());' . "\n";
         }
 
@@ -667,7 +671,7 @@ class Api
         $this->content .= "\t\t" . '});' . "\n";
 
         // Display direction inputs in the info window
-        if ($this->displayDirectionFields == true) {
+        if ($this->displayDirectionFields) {
             $this->content .= "\t\t" . 'content += \'<div style="clear:both;height:20px;"></div>\';' . "\n";
             $this->content .= "\t\t" . 'id_name = \'marker_\'+gmarkers.length;' . "\n";
             $this->content .= "\t\t" . 'content += \'<input type="text" id="\'+id_name+\'"/>\';' . "\n";
@@ -683,7 +687,7 @@ class Api
         $this->content .= "\t\t\t" . 'infowindow.open(currentmap,marker);' . "\n";
 
         // Enable the zoom when you click on a marker
-        if ($this->enableWindowZoom == true) {
+        if ($this->enableWindowZoom) {
             $this->content .= "\t\t\t" . 'currentmap.setCenter(new google.maps.LatLng(latlng.lat(),latlng.lng()),' . $this->infoWindowZoom . ');' . "\n";
         }
 
@@ -693,7 +697,7 @@ class Api
         $this->content .= "\t\t" . 'gmarkers.push(marker);' . "\n";
 
         // Hide marker by default
-        if ($this->defaultHideMarker == true) {
+        if ($this->defaultHideMarker) {
             $this->content .= "\t\t" . 'marker.setVisible(false);' . "\n";
         }
         $this->content .= "\t" . '}' . "\n";
@@ -821,7 +825,7 @@ class Api
         $this->content .= "\t" . 'map' . $this->googleMapId . ' = new google.maps.Map(document.getElementById("' . $this->googleMapId . '"), myOptions);' . "\n";
 
         // Center
-        if ($this->enableAutomaticCenterZoom == true) {
+        if ($this->enableAutomaticCenterZoom) {
             $lenLng = $this->maxLng - $this->minLng;
             $lenLat = $this->maxLat - $this->minLat;
             $this->minLng -= $lenLng * $this->coordCoef;
@@ -860,7 +864,7 @@ class Api
         $this->content .= $this->contentMarker;
 
         // Clusterer JS
-        if ($this->useClusterer == true) {
+        if ($this->useClusterer) {
             $this->content .= "\t" . 'var markerCluster = new MarkerClusterer(map' . $this->googleMapId . ', gmarkers,{gridSize: ' . $this->gridSize . ', maxZoom: ' . $this->maxZoom . '});' . "\n";
         }
 
@@ -872,5 +876,13 @@ class Api
 
         //Fermeture du javascript
         $this->content .= '</script>' . "\n";
+    }
+
+    /**
+     * @return bool
+     */
+    public function isApiKeyNotSet()
+    {
+        return empty($this->key) || strlen($this->key) <= self::API_KEY_MIN_LENGTH;
     }
 }

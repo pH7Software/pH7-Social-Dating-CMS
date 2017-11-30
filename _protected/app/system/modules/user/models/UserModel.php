@@ -3,35 +3,38 @@
  * @title          User Model
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7/ App / System / Module / User / Model
  * @version        1.0
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
 
 class UserModel extends UserCoreModel
 {
-
-    private $_sQueryPath;
+    /** @var string */
+    private $sQueryPath;
 
     public function __construct()
     {
         parent::__construct();
-        $this->_sQueryPath = __DIR__ . PH7_DS . PH7_QUERY;
+
+        $this->sQueryPath = __DIR__ . PH7_DS . PH7_QUERY;
     }
 
     /**
      * Join Step 1
      *
      * @param array $aData
-     * @return integer Returns the user's ID
+     *
+     * @return int Returns the user's ID
      */
     public function join(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare( $this->getQuery('join', $this->_sQueryPath) );
+        $rStmt = Db::getInstance()->prepare($this->getQuery('join', $this->sQueryPath));
         $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $aData['username'], \PDO::PARAM_STR);
         $rStmt->bindValue(':password', $aData['password'], \PDO::PARAM_STR);
@@ -61,11 +64,11 @@ class UserModel extends UserCoreModel
      *
      * @param array $aData
      * @param string $sJoinStep Step of the "Join" file ('2_1', '2_2' or '3').
-     * @return boolean
+     *
+     * @return bool
      */
     public function exe(array $aData, $sJoinStep)
     {
-        return $this->exec('join' . $sJoinStep, $this->_sQueryPath, $aData);
+        return $this->exec('join' . $sJoinStep, $this->sQueryPath, $aData);
     }
-
 }

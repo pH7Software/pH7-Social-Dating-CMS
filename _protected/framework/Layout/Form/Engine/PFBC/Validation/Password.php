@@ -18,12 +18,15 @@ class Password extends \PFBC\Validation
 
         $this->iMin = DbConfig::getSetting('minPasswordLength');
         $this->iMax = DbConfig::getSetting('maxPasswordLength');
-        $this->message = t('Error: Your password has to contain from %0% to %1% characters.', $this->iMin, $this->iMax);
+        $this->message = t('Error: Your password has to be from %0% to %1% characters long.', $this->iMin, $this->iMax);
     }
 
     public function isValid($sValue)
     {
-        if ($this->isNotApplicable($sValue)) return true;
+        if ($this->isNotApplicable($sValue)) {
+            return true;
+        }
+
         return $this->oValidate->password($sValue, $this->iMin, $this->iMax);
     }
 }

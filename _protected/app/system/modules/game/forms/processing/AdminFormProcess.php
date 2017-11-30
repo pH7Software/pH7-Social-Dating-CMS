@@ -1,13 +1,15 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Game / Form / Processing
  */
 
 namespace PH7;
+
 defined('PH7') or die('Restricted access');
+
 
 use PH7\Framework\Image\Image;
 use PH7\Framework\Mvc\Model\Engine\Db;
@@ -57,8 +59,7 @@ class AdminFormProcess extends Form
 
             (new GameModel)->add($aData);
 
-            /* Clean GameModel Cache */
-            (new Framework\Cache\Cache)->start(GameModel::CACHE_GROUP, null, null)->clear();
+            Game::clearCache();
 
             Header::redirect(Uri::get('game', 'main', 'game', $aData['title'] . ',' . Db::getInstance()->lastInsertId()), t('The game has been successfully added!'));
         }

@@ -3,30 +3,29 @@
  * @title            Markdown Markup Parser Class
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Parse
  * @version          0.8
  */
 
 namespace PH7\Framework\Parse;
+
 defined('PH7') or exit('Restricted access');
 
 class Markdown extends Code
 {
-
     /**
-     * @access public
      * @param string The text formatted in Markdown
      */
     public function __construct($sText)
     {
         $this->sText = $sText;
+
         parent::__construct();
     }
 
     /**
-     * @access public
      * @return string The code parsed
      */
     public function __toString()
@@ -37,7 +36,6 @@ class Markdown extends Code
     /**
      * Run the transform methods
      *
-     * @access protected
      * @return void
      */
     protected function run()
@@ -57,7 +55,6 @@ class Markdown extends Code
     /**
      * Strong
      *
-     * @access protected
      * @return void
      */
     protected function strong()
@@ -72,7 +69,6 @@ class Markdown extends Code
     /**
      * Italic
      *
-     * @access protected
      * @return void
      */
     protected function italic()
@@ -87,7 +83,6 @@ class Markdown extends Code
     /**
      * Code
      *
-     * @access protected
      * @return void
      */
     protected function code()
@@ -98,7 +93,6 @@ class Markdown extends Code
     /**
      * Links
      *
-     * @access protected
      * @return void
      */
     protected function link()
@@ -117,7 +111,6 @@ class Markdown extends Code
      *
      * Images
      *
-     * @access protected
      * @return void
      */
     protected function img()
@@ -132,7 +125,6 @@ class Markdown extends Code
     /**
      * Blockquote
      *
-     * @access protected
      * @return void
      */
     protected function blockquote()
@@ -144,7 +136,6 @@ class Markdown extends Code
     /**
      * Break line
      *
-     * @access protected
      * @return void
      */
     protected function br()
@@ -156,7 +147,6 @@ class Markdown extends Code
     /**
      * Thematic break
      *
-     * @access protected
      * @return void
      */
     protected function hr()
@@ -167,12 +157,11 @@ class Markdown extends Code
     /**
      * Headings
      *
-     * @access protected
      * @return void
      */
     protected function heading()
     {
-        $this->sText = preg_replace ('/##### (.+?)\n/', '<h5>\1</h5>', $this->sText); //h5
+        $this->sText = preg_replace('/##### (.+?)\n/', '<h5>\1</h5>', $this->sText); //h5
         $this->sText = preg_replace('/#### (.+?)\n/', '<h4>\1</h4>', $this->sText); //h4
         $this->sText = preg_replace('/### (.+?)\n/', '<h3>\1</h3>', $this->sText); //h3
         $this->sText = preg_replace('/## (.+?)\n/', '<h2>\1</h2>', $this->sText); //h2
@@ -185,6 +174,5 @@ class Markdown extends Code
         $this->sText = preg_replace('/====(.+?)====/s', '<h4>\1</h4>', $this->sText); //h4
         $this->sText = preg_replace('/===(.+?)===/s', '<h5>\1</h5>', $this->sText); //h5
     }
-
 }
 

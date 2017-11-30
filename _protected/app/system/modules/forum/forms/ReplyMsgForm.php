@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Forum / Form
  */
@@ -9,16 +9,18 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Url\Header;
 
 class ReplyMsgForm
 {
     public static function display()
     {
         if (isset($_POST['submit_reply'])) {
-            if (\PFBC\Form::isValid($_POST['submit_reply']))
+            if (\PFBC\Form::isValid($_POST['submit_reply'])) {
                 new ReplyMsgFormProcess();
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_reply');

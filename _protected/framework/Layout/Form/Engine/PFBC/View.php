@@ -14,19 +14,18 @@ abstract class View extends Base
         $this->configure($properties);
     }
 
-    /*This method encapsulates the various pieces that are included in an element's label.*/
-
     public function setForm(Form $form)
     {
         $this->form = $form;
     }
 
+    /**
+     * jQuery is used to apply css entries to the last element.
+     */
     public function jQueryDocumentReady()
     {
         echo 'jQuery("#', $this->form->getId(), ' .pfbc-element:last").css({ "margin-bottom": "0", "padding-bottom": "0", "border-bottom": "none" });';
     }
-
-    /*jQuery is used to apply css entries to the last element.*/
 
     public function render()
     {
@@ -51,11 +50,17 @@ CSS;
     {
     }
 
+    /**
+     * This method encapsulates the various pieces that are included in an element's label.
+     *
+     * @param Element $element
+     */
     protected function renderLabel(Element $element)
     {
         $label = $element->getLabel();
         $id = $element->getID();
         $description = $element->getDescription();
+
         if (!empty($label) || !empty($description)) {
             echo '<div class="pfbc-label">';
             if (!empty($label)) {

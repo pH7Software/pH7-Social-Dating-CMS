@@ -3,7 +3,7 @@
  * @title            Meta tag HTML Class
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2016-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2016-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
  * @package          PH7 / Framework / Layout / Html
  */

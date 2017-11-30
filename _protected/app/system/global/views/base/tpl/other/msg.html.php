@@ -1,12 +1,15 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2014-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2014-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Global / View / Base / Other
  */
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
+
 use PH7\Framework\Layout\Html\Design;
 
 $oDesign = new Design;
@@ -22,16 +25,16 @@ $aMeta = [
 
 <!-- Begin Content -->
 <div id="content" class="center s_padd">
-<br />
-<h1><?php echo t('Whoops!') ?></h1>
-<p>&nbsp;</p>
-<p class="center"><?php echo $sMsg ?></p>
+    <br />
+    <h1><?php echo t('Whoops!') ?></h1>
+    <p>&nbsp;</p>
+    <p class="center"><?php echo $sMsg ?></p>
 </div>
 <!-- End Content -->
 
 <!-- Begin Footer -->
 <footer>
-<?php $oDesign->link(); ?>
+    <p><?php $oDesign->link(); ?></p>
 </footer>
 <!-- End Footer -->
 <?php $oDesign->htmlFooter(); ?>

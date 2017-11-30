@@ -4,7 +4,7 @@
  * @desc             Useful methods for the handing Array.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / CArray
  * @version          1.0
@@ -27,12 +27,13 @@ class CArray
     public static function merge(array $aFrom, array $aTo)
     {
         foreach ($aTo as $mKey => $mVal) {
-            if (is_int($mKey))
+            if (is_int($mKey)) {
                 $aFrom[] = $mVal;
-            elseif (is_array($mVal) && isset($aFrom[$mKey]) && is_array($aFrom[$mKey]))
+            } elseif (is_array($mVal) && isset($aFrom[$mKey]) && is_array($aFrom[$mKey])) {
                 $aFrom[$mKey] = self::merge($aFrom[$mKey], $mVal); // Recursive method
-            else
+            } else {
                 $aFrom[$mKey] = $mVal;
+            }
         }
 
         return $aFrom;
@@ -48,7 +49,8 @@ class CArray
      */
     public static function getKeByVal($sValue, array $aArray)
     {
-        $mKey = array_search($sValue, $aArray);
+        $mKey = array_search($sValue, $aArray, true);
+
         return static::get($mKey);
     }
 
@@ -62,7 +64,8 @@ class CArray
      */
     public static function getKeyByValIgnoreCase($sValue, array $aArray)
     {
-        $mKey = array_search(strtolower($sValue), array_map('strtolower', $aArray));
+        $mKey = array_search(strtolower($sValue), array_map('strtolower', $aArray), true);
+
         return static::get($mKey);
     }
 
@@ -76,7 +79,7 @@ class CArray
      */
     public static function getValueByKey($sKey, array $aArray)
     {
-        return (array_key_exists($sKey, $aArray) && !empty($aArray[$sKey])) ? $aArray[$sKey] : null;
+        return array_key_exists($sKey, $aArray) && !empty($aArray[$sKey]) ? $aArray[$sKey] : null;
     }
 
     /**
@@ -88,6 +91,6 @@ class CArray
      */
     private static function get($mKey)
     {
-        return ($mKey !== false) ? $mKey : null;
+        return $mKey !== false ? $mKey : null;
     }
 }

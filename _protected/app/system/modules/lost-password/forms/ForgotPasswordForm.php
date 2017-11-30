@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Lost Password / Form
  */
@@ -18,12 +18,13 @@ class ForgotPasswordForm
 {
     public static function display()
     {
-        $sTable = Various::convertModToTable( (new Http)->get('mod') );
+        $sTable = Various::convertModToTable((new Http)->get('mod'));
 
         if (isset($_POST['submit_forgot_password'])) {
             if (\PFBC\Form::isValid($_POST['submit_forgot_password'])) {
                 new ForgotPasswordFormProcess($sTable);
             }
+
             Header::redirect();
         }
 

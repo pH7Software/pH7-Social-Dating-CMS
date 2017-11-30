@@ -22,24 +22,20 @@
             <div role="banner" id="logo" class="navbar-brand"><h1><a href="{{ $design->homePageUrl() }}" title="{slogan}">{site_name}</a></h1></div>
           </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
 
     {* Guest Menu *}
 
       {if !$is_user_auth AND !$is_aff_auth AND !$is_admin_auth}
-
         <li><a class="bold" href="{{ $design->url('user','signup','step1') }}" title="{lang 'Join Now!'}"><i class="fa fa-user-plus"></i> {lang 'Join Now!'}</a></li>
         <li><a href="{{ $design->url('user', 'main','login') }}" title="{lang 'Login'}" data-load="ajax"><i class="fa fa-sign-in"></i> {lang 'Login'}</a></li>
-
       {/if}
 
 
     {* Menu Guest, Member and Admin *}
 
       {if !$is_aff_auth}
-
         <li class="dropdown"><a href="{{ $design->url('user', 'browse', 'index') }}" title="{lang 'Members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-user fa-fw"></i> {lang 'People'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ $design->url('user', 'browse', 'index') }}" rel="nofollow" title="{lang 'Members'}" data-load="ajax"><i class="fa fa-users"></i> {lang 'People'}</a></li>
@@ -51,7 +47,7 @@
               </ul>
             </li>
 
-            <li><a href="{{ $design->url('user','country','index',$country.PH7_SH.$city) }}" title="{lang 'Users in %0% through the Map!',$city}"><i class="fa fa-map-marker"></i> {lang 'Users in your Area'}</a></li>
+            <li><a href="{{ $design->url('user','country','index',$country.PH7_SH.$city) }}" title="{lang 'Users in %0% through the Map!',$city}"><i class="fa fa-map-marker"></i> {lang 'People Nearby'}</a></li>
 
             <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('user', 'birthday', 'index') }}" title="{lang 'Users Birthday'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-birthday-cake"></i> {lang 'Birthday'}</a>
               <ul class="dropdown-menu" role="menu">
@@ -134,7 +130,6 @@
             </ul>
           </li>
         {/if}
-
       {/if}
 
 
@@ -143,7 +138,7 @@
         {if $is_user_auth AND ( !$is_aff_auth AND !$is_admin_auth ) OR $admin_logged_as_user }
 
           {if $is_mail_enabled}
-            <li class="dropdown"><a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'My Emails'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-envelope-o fa-fw"></i> {lang 'Mail'} <span class="badge">{count_unread_mail}</span> <span class="caret"></span></a>
+            <li class="dropdown"><a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'My Emails'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-envelope-o fa-fw"></i> {lang 'Mail'} {if $count_unread_mail}<span class="badge">{count_unread_mail}</span>{/if} <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ $design->url('mail','main','compose') }}" title="{lang 'Compose'}"><i class="fa fa-pencil"></i> {lang 'Compose'}</a></li>
                 <li><a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'Inbox - Messages Received'}"><i class="fa fa-inbox"></i> {lang 'Inbox'}</a></li>
@@ -194,14 +189,14 @@
               {if $is_note_enabled}
                 <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('note','main','index') }}" title="{lang 'Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-newspaper-o"></i> {lang 'Note'}</a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="{{ $design->url('note','main','add') }}" title="{lang 'Add a Note'}"><i class="fa fa-newspaper-o"></i> {lang 'Add a Note'}</a></li>
+                    <li><a href="{{ $design->url('note','main','add') }}" title="{lang 'Add a Note'}">{lang 'Add a Note'}</a></li>
                     <li><a href="{{ $design->url('note','main','author', $oSession->get('member_username')) }}" title="{lang 'My Notes'}">{lang 'My Notes'}</a></li>
                   </ul>
                 </li>
               {/if}
 
               {if $is_friend_enabled}
-                  <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('friend','main','index') }}" title="{lang 'Friends Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-users"></i> {lang 'Friends Manager'} <span class="badge">{count_pen_friend_request}</span></a>
+                  <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('friend','main','index') }}" title="{lang 'Friends Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-users"></i> {lang 'Friends Manager'} {if $count_pen_friend_request}<span class="badge">{count_pen_friend_request}</span>{/if}</a>
                   <ul class="dropdown-menu" role="menu">
                       <li><a href="{{ $design->url('friend','main','index') }}" title="{lang 'Friends List'}">{lang 'Friends List'}</a></li>
                     <li><a href="{{ $design->url('friend','main','search',$oSession->get('member_username')) }}" title="{lang 'Find a friend in my list'}">{lang 'Find a Friend'}</a></li>
@@ -244,6 +239,7 @@
     {* Admin Menu *}
 
       {if $is_admin_auth AND ( !$is_user_auth AND !$is_aff_auth ) }
+          {{ $count_total_reports = ReportCoreModel::totalReports() }}
 
         <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'user','index') }}" title="{lang 'Users/Admins Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-user fa-fw"></i> {lang 'User/Admin'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -252,7 +248,7 @@
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','browse') }}" title="{lang 'Browse Users'}"><i class="fa fa-users"></i> {lang 'Browse'}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','search') }}" title="{lang 'Search Users'}"><i class="fa fa-search"></i> {lang 'Search'}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','add') }}" title="{lang 'Add a User'}"><i class="fa fa-user-plus"></i> {lang 'Add User'}</a></li>
-                <li><a href="{{ $design->url('report','admin','index') }}" title="{lang 'Reports'}"><i class="fa fa-flag"></i> {lang 'Reports'}</a></li>
+                <li><a href="{{ $design->url('report','admin','index') }}" title="{lang 'Report Abuse'}"><i class="fa fa-flag"></i> {lang 'Reports'} {if $count_total_reports}<span class="badge">{count_total_reports}</span>{/if}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','addfakeprofiles') }}" title="{lang 'Fake Profiles Automatic Generator'}"><i class="fa fa-user-plus"></i> {lang 'Fake Profile Generator'}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','import') }}" title="{lang 'Import Users'}"><i class="fa fa-user-plus"></i> {lang 'Import Users'}</a></li>
                 <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('field','field','all','user') }}" title="{lang 'User Fields'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-check-circle-o"></i> {lang 'User Fields'}</a>
@@ -281,7 +277,7 @@
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','analyticsapi') }}" title="{lang 'Analytics Code'}"><i class="fa fa-bar-chart"></i> {lang 'Analytics Code'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'style') }}" title="{lang 'Custom CSS Style'}"><i class="fa fa-code"></i> {lang 'CSS Style'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'script') }}" title="{lang 'JavaScript Injection'}"><i class="fa fa-code"></i> {lang 'JavaScript'}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'license') }}" title="{lang 'License Key'}"><i class="fa fa-key"></i> {lang 'License'}</a></li>
+            {*<li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'license') }}" title="{lang 'License Key'}"><i class="fa fa-key"></i> {lang 'License'}</a></li>*}
           </ul>
         </li>
 
@@ -390,17 +386,17 @@
 
         <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','index') }}" title="{lang 'User Moderation'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-user-secret"></i> {lang 'Moderation'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picturealbum') }}" title="{lang 'Moderate Photo Albums'}"><i class="fa fa-picture-o"></i> {lang 'Photo Album'} <span class="badge">{count_moderate_total_picture_album}</span></a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picture') }}" title="{lang 'Moderate Pictures'}"><i class="fa fa-picture-o"></i> {lang 'Picture'} <span class="badge">{count_moderate_total_picture}</span></a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','videoalbum') }}" title="{lang 'Moderate Video Albums'}"><i class="fa fa-youtube-play"></i> {lang 'Video Album'} <span class="badge">{count_moderate_total_video_album}</span></a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','video') }}" title="{lang 'Moderate Videos'}"><i class="fa fa-youtube-play"></i> {lang 'Video'} <span class="badge">{count_moderate_total_video}</span></a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','avatar') }}" title="{lang 'Moderate Profile Photos'}"><i class="fa fa-picture-o"></i> {lang 'Profile Photo'} <span class="badge">{count_moderate_total_avatar}</span></a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','background') }}" title="{lang 'Moderate Profile Background'}"><i class="fa fa-picture-o"></i> {lang 'Profile Background'} <span class="badge">{count_moderate_total_background}</span></a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picturealbum') }}" title="{lang 'Moderate Photo Albums'}"><i class="fa fa-picture-o"></i> {lang 'Photo Album'} {if $count_moderate_total_picture_album }<span class="badge">{count_moderate_total_picture_album}</span>{/if}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picture') }}" title="{lang 'Moderate Pictures'}"><i class="fa fa-picture-o"></i> {lang 'Picture'} {if $count_moderate_total_picture }<span class="badge">{count_moderate_total_picture}</span>{/if}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','videoalbum') }}" title="{lang 'Moderate Video Albums'}"><i class="fa fa-youtube-play"></i> {lang 'Video Album'} {if $count_moderate_total_video_album }<span class="badge">{count_moderate_total_video_album}</span>{/if}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','video') }}" title="{lang 'Moderate Videos'}"><i class="fa fa-youtube-play"></i> {lang 'Video'} {if $count_moderate_total_video }<span class="badge">{count_moderate_total_video}</span>{/if}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','avatar') }}" title="{lang 'Moderate Profile Photos'}"><i class="fa fa-picture-o"></i> {lang 'Profile Photo'} {if $count_moderate_total_avatar }<span class="badge">{count_moderate_total_avatar}{/if}</span></a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','background') }}" title="{lang 'Moderate Profile Background'}"><i class="fa fa-picture-o"></i> {lang 'Profile Background'} {if $count_moderate_total_background}<span class="badge">{count_moderate_total_background}</span>{/if}</a></li>
 
             {if $is_note_enabled}
-              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-newspaper-o"></i> {lang 'Notes'} <span class="badge">{count_moderate_total_note}</span></a>
+              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-newspaper-o"></i> {lang 'Notes'} {if $count_moderate_total_note}<span class="badge">{count_moderate_total_note}</span>{/if}</a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="{{ $design->url('note','admin','unmoderated') }}" title="{lang 'Unmoderated Note Posts'}">{lang 'Unmoderated Notes'} <span class="badge">{count_moderate_total_note}</span></a></li>
+                  <li><a href="{{ $design->url('note','admin','unmoderated') }}" title="{lang 'Unmoderated Note Posts'}">{lang 'Unmoderated Notes'} {if $count_moderate_total_note}<span class="badge">{count_moderate_total_note}</span>{/if}</a></li>
                   <li><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Note Posts'}">{lang 'All Notes'}</a></li>
                 </ul>
               </li>
@@ -447,20 +443,14 @@
           </ul>
         </li>
 
-        <li class="dropdown"><a class="bold dropdown-toggle" href="{software_help_url}" title="{lang "Need some Helps? We're here for you!"}" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-life-ring"></i> {lang 'Help'} <span class="caret"></span></a>
+        <li class="dropdown"><a class="bold dropdown-toggle" href="{software_doc_url}" title="{lang 'Need some Helps?'}" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-life-ring"></i> {lang 'Help'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             {if !$is_valid_license}
                 <li><a class="bold underline" href="{software_license_url}" title="{lang 'Buy a License Key'}"><i class="fa fa-key"></i> {lang 'Switch to pH7CMSPro'}</a></li>
             {/if}
-            {* <li><a href="{software_help_url}" title="{lang 'Need Professional Technical Supports?'}"><i class="fa fa-life-ring"></i> {lang 'Technical Support'}</a></li> *}
+            <li><a class="bold underline" href="{{ $design->url('ph7cms-donation','main','donationbox') }}" title="{lang 'Will You Be Nice Today? Like 78% of our users who contribute on a regular basis.'}"><i class="fa fa-trophy"></i> {lang 'Will You Help pH7CMS?'}</a></li>
             <li><a href="{software_doc_url}" title="{lang 'Software Documentation'}"><i class="fa fa-book"></i> {lang 'Documentation'}</a></li>
-            <li><a href="{software_faq_url}" title="{lang 'Frequently Asked Questions'}"><i class="fa fa-question"></i> {lang 'FAQ'}</a></li>
-            <li><a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/issues/" title="{lang 'Report a Problem'}"><i class="fa fa-bug"></i> {lang 'Report a Bug'}</a></li>
-            <li><a href="http://appninja.space" title="{lang 'Do you have Android Apps..? Boost them with a full marketing service!'}"><i class="fa fa-star"></i> {lang 'Market your Android Apps'}</a></li>
-            <li><a href="http://smartfreelancer.top" title="{lang 'Are you selling on Fiverr? Market and Boost your Gigs Today!'}"><i class="fa fa-star-o"></i> {lang 'Are you selling Fiverr? Market your Gigs!'}</a></li>
-            {* Coming soon ...
-              <li><a href="{software_forum_url}" title="{lang 'Support Forum'}">{lang 'Forum'}</a></li>
-            *}
+            <li><a href="{software_issue_url}" title="{lang 'Report a Problem'}"><i class="fa fa-bug"></i> {lang 'Report a Bug'}</a></li>
           </ul>
         </li>
 
@@ -486,16 +476,5 @@
     <p class="center bold loginas"><a href="{{ $design->url('affiliate', 'admin', 'logoutuseras') }}">{lang}Switch back to the Admin Panel{/lang}</a></p>
   {/if}
 
-  {* Destroy the varaibles *}
-    {{
-        unset(
-          $oSession,
-          $count_moderate_total_picture_album,
-          $count_moderate_total_picture,
-          $count_moderate_total_video_album,
-          $count_moderate_total_video,
-          $count_moderate_total_avatar,
-          $count_moderate_total_background,
-          $count_moderate_total_note
-        )
-    }}
+  {* Destroy Session varaible *}
+  {{ unset($oSession) }}

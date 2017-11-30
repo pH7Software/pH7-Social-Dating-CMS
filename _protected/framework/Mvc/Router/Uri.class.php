@@ -3,7 +3,7 @@
  * Uri Router for URLs rewrite.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Router
  */
@@ -13,16 +13,15 @@ namespace PH7\Framework\Mvc\Router;
 defined('PH7') or exit('Restricted access');
 
 use DOMDocument;
+use DOMElement;
 use PH7\Framework\File\Exception as FileException;
 use PH7\Framework\Parse\Url;
 use PH7\Framework\Pattern\Statik;
 
 class Uri
 {
-    /**
-     * @staticvar boolean $_bFullClean If you need to completely clean URL.
-     */
-    private static $_bFullClean;
+    /** @var bool */
+    private static $bFullClean;
 
     /**
      * Import the trait to set the class static.
@@ -41,19 +40,8 @@ class Uri
      */
     public static function loadFile(DOMDocument $oDom)
     {
-        $sPathLangName = PH7_PATH_APP_CONFIG . 'routes/' . PH7_LANG_CODE . '.xml';
-        $sPathDefaultLang = PH7_PATH_APP_CONFIG . 'routes/' . PH7_DEFAULT_LANG_CODE . '.xml';
-
-        if (is_file($sPathLangName)) {
-            $sRoutePath = $sPathLangName;
-        } elseif (is_file($sPathDefaultLang)) {
-            $sRoutePath = $sPathDefaultLang;
-        } else {
-            throw new FileException('File route xml not found: ' . $sPathDefaultLang);
-        }
-
-        $sContents = file_get_contents($sRoutePath); // Get the XML contents
-        $sContents = static::_parseVariable($sContents); // Parse the variables
+        $sContents = file_get_contents(self::getRouteFilePath()); // Get the XML contents
+        $sContents = self::parseVariable($sContents); // Parse the variables
         $oDom->loadXML($sContents); // Load the XML contents
 
         return $oDom;
@@ -64,14 +52,17 @@ class Uri
      * @param string $sController
      * @param string $sAction
      * @param string $sVars Default NULL
-     * @param boolean $bFullClean Default TRUE
+     * @param bool $bFullClean Default TRUE
      *
      * @return string
+     *
+     * @throws FileException
      */
     public static function get($sModule, $sController, $sAction, $sVars = null, $bFullClean = true)
     {
-        static::$_bFullClean = $bFullClean;
-        $sUrl = static::_uri(array('module' => $sModule, 'controller' => $sController, 'action' => $sAction, 'vars' => $sVars));
+        self::$bFullClean = $bFullClean;
+        $sUrl = self::uri(['module' => $sModule, 'controller' => $sController, 'action' => $sAction, 'vars' => $sVars]);
+
         return $sUrl;
     }
 
@@ -82,26 +73,13 @@ class Uri
      *
      * @throws FileException If the XML file is not found.
      */
-    private static function _uri(array $aParams)
+    private static function uri(array $aParams)
     {
         $sModule = $aParams['module'];
         $sController = $aParams['controller'];
         $sAction = $aParams['action'];
-        $sVars = ''; // Default value
 
-        if (!empty($aParams['vars'])) {
-            // Omit the commas which may be part of a sentence in the URL parameters
-            $aParams['vars'] = str_replace(array(', ', ' ,'), '', $aParams['vars']);
-
-            $aVars = explode(',', $aParams['vars']);
-            foreach ($aVars as $sVar) {
-                $sVars .= PH7_SH . $sVar;
-            }
-            unset($aVars);
-
-            $sVars = Url::clean($sVars, static::$_bFullClean);
-
-        }
+        $sVars = self::areVariablesSet($aParams) ? self::getVariables($aParams['vars']) : '';
 
         $oUrl = static::loadFile(new DOMDocument);
         foreach ($oUrl->getElementsByTagName('route') as $oRoute) {
@@ -110,11 +88,7 @@ class Uri
                 preg_match('#^' . $oRoute->getAttribute('controller') . '$#', $sController) &&
                 preg_match('#^' . $oRoute->getAttribute('action') . '$#', $sAction)
             ) {
-                // Strip the special characters
-                $sUri = $oRoute->getAttribute('url');
-                $sUri = str_replace('\\', '', $sUri);
-                $sUri = preg_replace('#\(.+\)#', '', $sUri);
-                $sUri = preg_replace('#([/\?]+)$#', '', $sUri);
+                $sUri = self::stripSpecialCharacters($oRoute);
 
                 return PH7_URL_ROOT . $sUri . $sVars;
             }
@@ -125,13 +99,34 @@ class Uri
     }
 
     /**
+     * @return string XML route filename.
+     *
+     * @throws FileException If the file is not found.
+     */
+    private static function getRouteFilePath()
+    {
+        $sPathLangName = PH7_PATH_APP_CONFIG . 'routes/' . PH7_LANG_CODE . '.xml';
+        $sPathDefaultLang = PH7_PATH_APP_CONFIG . 'routes/' . PH7_DEFAULT_LANG_CODE . '.xml';
+
+        if (is_file($sPathLangName)) {
+            return $sPathLangName;
+        }
+
+        if (is_file($sPathDefaultLang)) {
+            return $sPathDefaultLang;
+        }
+
+        throw new FileException('XML route file not found: ' . $sPathDefaultLang);
+    }
+
+    /**
      * Parse the variables route.
      *
      * @param string $sContents
      *
      * @return string The contents parsed.
      */
-    private static function _parseVariable($sContents)
+    private static function parseVariable($sContents)
     {
         /**
          * Replace the "[$page_ext]" variable by the "PH7_PAGE_EXT" constant.
@@ -146,5 +141,52 @@ class Uri
         $sContents = str_replace('[$admin_mod]', PH7_ADMIN_MOD, $sContents);
 
         return $sContents;
+    }
+
+    /**
+     * @param array $aParams
+     *
+     * @return bool
+     */
+    private static function areVariablesSet(array $aParams)
+    {
+        return !empty($aParams['vars']);
+    }
+
+    /**
+     * @param string $sVariables
+     *
+     * @return string
+     */
+    private static function getVariables($sVariables)
+    {
+        // Omit commas which may be part of a sentence in the URL parameters
+        $sVariables = str_replace([', ', ' ,'], '', $sVariables);
+
+        $sVars = '';
+        $aVars = explode(',', $sVariables);
+        foreach ($aVars as $sVar) {
+            $sVars .= PH7_SH . $sVar;
+        }
+        unset($aVars);
+
+        return Url::clean($sVars, self::$bFullClean);
+    }
+
+    /**
+     * Strip the special characters from the URI.
+     *
+     * @param DOMElement $oRoute
+     *
+     * @return string
+     */
+    private static function stripSpecialCharacters(DOMElement $oRoute)
+    {
+        $sUri = $oRoute->getAttribute('url');
+        $sUri = str_replace('\\', '', $sUri);
+        $sUri = preg_replace('#\(.+\)#', '', $sUri);
+        $sUri = preg_replace('#([/\?]+)$#', '', $sUri);
+
+        return $sUri;
     }
 }

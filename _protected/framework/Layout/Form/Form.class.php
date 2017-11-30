@@ -5,7 +5,7 @@
  *                   It allows, among other display popular predefined messages to avoid duplicate text (message) similar.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Layout / Form
  * @version          1.0
@@ -13,9 +13,10 @@
 
 namespace PH7\Framework\Layout\Form;
 
-abstract class Form extends \PH7\Framework\Core\Core
-{
+use PH7\Framework\Core\Core;
 
+abstract class Form extends Core
+{
     /**
      * Launch Error Token Message.
      *
@@ -79,14 +80,29 @@ abstract class Form extends \PH7\Framework\Core\Core
     }
 
     /**
-     * Duplicate Content.
-     *
      * @return string
      */
     public static function duplicateContentMsg()
     {
         return t('Oops! It seems that you have already sent the same message to prevent spam you can not send multiple same content.');
     }
+
+    /**
+     * @return string
+     */
+    public static function tooManyUrlsMsg()
+    {
+        return t('Oops! It seems that you abuse of links. Why links are that important for you...?');
+    }
+
+    /**
+     * @return string
+     */
+    public static function tooManyEmailsMsg()
+    {
+        return t('Oops! It seems that you abuse of emails. Why emails are that important for you...?');
+    }
+
 
     /**
      * Wait to write a new message (mainly to reduce spam).
@@ -118,7 +134,7 @@ abstract class Form extends \PH7\Framework\Core\Core
      */
     private static function _getTimeText($iWaitTime)
     {
-        $iWaitTime = (int) $iWaitTime;
+        $iWaitTime = (int)$iWaitTime;
 
         return ($iWaitTime < 2 ? t('minute') : ($iWaitTime < 60 ? t('minutes') : ($iWaitTime < 120 ? t('hour') : ($iWaitTime < 1440 ? t('hours') : ($iWaitTime < 2880 ? t('day') : t('days'))))));
     }
@@ -131,14 +147,13 @@ abstract class Form extends \PH7\Framework\Core\Core
      */
     private static function _convertTime($iWaitTime)
     {
-        $iWaitTime = (int) $iWaitTime;
+        $iWaitTime = (int)$iWaitTime;
 
-        if($iWaitTime > 60) {
+        if ($iWaitTime > 60) {
             $iDivide = ($iWaitTime < 1440) ? 60 : 1440;
             $iWaitTime = floor($iWaitTime / $iDivide);
         }
 
         return $iWaitTime;
     }
-
 }

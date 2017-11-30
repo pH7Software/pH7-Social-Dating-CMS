@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Blog / Form
  */
@@ -13,16 +13,19 @@ use PH7\Framework\Url\Header;
 
 class AdminBlogForm
 {
+    const MAX_CATEGORIES = 300;
+
     public static function display()
     {
         if (isset($_POST['submit_blog'])) {
             if (\PFBC\Form::isValid($_POST['submit_blog'])) {
                 new AdminBlogFormProcess();
             }
+
             Header::redirect();
         }
 
-        $oCategoryData = (new BlogModel)->getCategory(null, 0, 300);
+        $oCategoryData = (new BlogModel)->getCategory(null, 0, self::MAX_CATEGORIES);
 
         $aCategoryNames = array();
         foreach ($oCategoryData as $oId) {

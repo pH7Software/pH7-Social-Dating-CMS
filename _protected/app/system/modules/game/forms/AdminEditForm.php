@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Game / Form
  */
@@ -11,16 +11,20 @@ namespace PH7;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Str\Str;
+use PH7\Framework\Url\Header;
 
 class AdminEditForm
 {
+    const MAX_CATEGORIES = 500;
+
     public static function display()
     {
         if (isset($_POST['submit_edit'])) {
-            if (\PFBC\Form::isValid($_POST['submit_edit']))
+            if (\PFBC\Form::isValid($_POST['submit_edit'])) {
                 new AdminEditFormProcess();
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oHttpRequest = new Http;
@@ -28,10 +32,11 @@ class AdminEditForm
         $iGameId = $oHttpRequest->get('id', 'int');
         $oGame = $oGameModel->get(strstr($oHttpRequest->get('title'), '-', true), $iGameId, 0, 1);
 
-        $oCategoriesData = $oGameModel->getCategory(null, 0, 500);
+        $oCategoriesData = $oGameModel->getCategory(null, 0, self::MAX_CATEGORIES);
         $aCategoriesName = array();
-        foreach ($oCategoriesData as $oId)
+        foreach ($oCategoriesData as $oId) {
             $aCategoriesName[$oId->categoryId] = $oId->name;
+        }
         unset($oHttpRequest, $oGameModel);
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];

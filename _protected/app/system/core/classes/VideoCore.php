@@ -3,7 +3,7 @@
  * @title          Video Core Class
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  * @version        1.0
@@ -15,24 +15,27 @@ use PH7\Framework\File\File;
 
 class VideoCore
 {
+    const REGEX_API_URL_FORMAT = '#(^https?://(www\.)?.+\.[a-z]{2,8})#i';
 
     /**
      * Check if this is a url, if so, this is a video from an external site.
      *
      * @param string $sFile
-     * @return boolean
+     *
+     * @return bool
      */
     public function isApi($sFile)
     {
-        return preg_match('#(^https?://(www\.)?.+\.[a-z]{2,8})#i', $sFile);
+        return preg_match(static::REGEX_API_URL_FORMAT, $sFile);
     }
 
     /**
-     * @param integer $iAlbumId
+     * @param int $iAlbumId
      * @param string $sUsername
      * @param string $sVideoLink (file with the extension)
-     * @param string $sVideoExt Separate the different extensions with commas. (extension with the point. e.g., .ogg,.webm,.mp4) Default: .webm,.mp4
-     * @param string $sThumbExt (extension of thumbnail with the point) Default: .jpg
+     * @param string $sVideoExt Separate the different extensions with commas (extension with the point. e.g. .ogg,.webm,.mp4)
+     * @param string $sThumbExt (extension of thumbnail with the point
+     *
      * @return void
      */
     public function deleteVideo($iAlbumId, $sUsername, $sVideoLink, $sVideoExt = '.webm,.mp4', $sThumbExt = '.jpg')
@@ -44,8 +47,9 @@ class VideoCore
 
         // Delete video file
         $aVideoExt = explode(',', $sVideoExt);
-        foreach ($aVideoExt as $sExt)
+        foreach ($aVideoExt as $sExt) {
             $oFile->deleteFile($sDir . $sVideoLink . $sExt);
+        }
 
         // Delete thumbnail
         $oFile->deleteFile($sDir . $sThumbName . $sThumbExt);
@@ -55,5 +59,4 @@ class VideoCore
         $oFile->deleteFile($sDir . $sThumbName . '-4' . $sThumbExt);
         unset($oFile);
     }
-
 }

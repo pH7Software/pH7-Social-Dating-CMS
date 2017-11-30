@@ -1,7 +1,7 @@
 ####################
 # File:           .htaccess
 # Author:         Pierre-Henry Soria <ph7software@gmail.com>
-# Copyright:      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+# Copyright:      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
 # License:        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 ####################
 
@@ -41,12 +41,12 @@ Options +FollowSymLinks
 ServerSignature Off
 
 # Deny access to all CGI, Perl, Python, Bash, SQL, Template, INI configuration, cache, log, temporary and text files
-<FilesMatch "\.(cgi|pl|py|sh|sql|tpl|ini|cache|log|tmp|txt)">
+<FilesMatch "\.(cgi|pl|py|sh|bash|sql|tpl|ini|cache|log|tmp|txt)">
     Deny from all
 </FilesMatch>
 
 # Leave open the humans.txt and robots.txt file
-<FilesMatch humans.txt|robots.txt>
+<FilesMatch "humans\.txt|robots\.txt">
     Allow from all
 </FilesMatch>
 
@@ -54,7 +54,7 @@ ServerSignature Off
 <Files ~ "^\.ht">
     Order allow,deny
     Deny from all
-    Satisfy All
+    Satisfy all
 </Files>
 
 # block bots spam
@@ -567,13 +567,13 @@ ServerSignature Off
     SetEnvIfNoCase User-Agent "^zerxbot" bad_bot
     SetEnvIfNoCase User-Agent "^Zeus" bad_bot
     SetEnvIfNoCase User-Agent "^ZyBorg" bad_bot
-    Order Deny,Allow
+    Order deny,allow
     Deny from env=bad_bot
 </IfModule>
 
 <Limit GET POST PUT DELETE HEAD>
-    Order Allow,Deny
-    Allow from All
+    Order allow,deny
+    Allow from all
     Deny from env=bad_bot
 </Limit>
 
@@ -713,7 +713,7 @@ ErrorDocument 505 /error/http/index?code=505
 # Modify Headers
 <IfModule mod_headers.c>
     # Cache files
-    <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|swf|mp3|mp4)$">
+    <FilesMatch "\.(jpe?g|png|gif|ico|webp|swf|mp3|mp4|flv|webm|pdf)$">
         Header set Cache-Control "public"
         Header set Expires "Mon, 20 Apr 2060 20:00:00 GMT"
         Header unset Last-Modified

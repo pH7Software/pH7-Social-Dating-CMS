@@ -3,7 +3,7 @@
  * @title          Main Controller
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  * @version        1.0
@@ -19,17 +19,17 @@ class MainController extends Controller
 {
     public function index()
     {
-        // Add Validate-Site JS file if needed
+        // Add ph7cms-donation JS file if needed
         if (ValidateSiteCore::needInject(new ValidateSiteCoreModel, $this->session)) {
-            $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . 'validate-site' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'validationbox.js');
+            $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . 'ph7cms-donation' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'donationbox.js');
         }
 
         $this->view->page_title = t('Admin Panel');
-        $this->view->h1_title = t('Dashboard');
+        $this->view->h1_title = t('Admin Dashboard');
         $this->view->h2_title = t('Hi <em>%0%</em>! Welcome back to your site!', $this->session->get('admin_first_name'));
-        $this->view->h3_title = t('How are you today?');
+        $this->view->h3_title = t('How are you doing today?');
 
-        $this->view->is_news_feed = (bool) DbConfig::getSetting('isSoftwareNewsFeed');
+        $this->view->is_news_feed = (bool)DbConfig::getSetting('isSoftwareNewsFeed');
 
         $this->checkUpdates();
 
@@ -307,6 +307,9 @@ class MainController extends Controller
         unset($oStatModel);
     }
 
+    /**
+     * @return void
+     */
     protected function checkUpdates()
     {
         if (Version::isUpdateEligible()) {

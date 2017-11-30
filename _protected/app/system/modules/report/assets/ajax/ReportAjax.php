@@ -1,10 +1,11 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Report / Asset / Ajax
  */
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -18,16 +19,15 @@ class ReportAjax
     public function __construct()
     {
         if (!(new Framework\Security\CSRF\Token)->check('report'))
-        exit(jsonMsg(0, Form::errorTokenMsg()));
+            exit(jsonMsg(0, Form::errorTokenMsg()));
 
         $this->_oHttpRequest = new Http;
         $this->_oReportModel = new ReportModel;
 
-        switch ($this->_oHttpRequest->post('type'))
-        {
+        switch ($this->_oHttpRequest->post('type')) {
             case 'delete':
                 $this->delete();
-            break;
+                break;
 
             default:
                 Framework\Http\Http::setHeadersByCode(400);

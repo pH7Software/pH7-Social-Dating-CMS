@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
@@ -30,15 +30,16 @@ class SettingFormProcess extends Form
         'default_language' => 'defaultLanguage',
         'map_type' => 'mapType',
         'profile_with_avatars' => 'profileWithAvatarSet',
-        'users_block' => 'usersBlock',
-        'number_profile_splash_page' => 'numberProfileSplashPage',
         'splash_page' => 'splashPage',
         'bg_splash_vid' => 'bgSplashVideo',
+        'users_block' => 'usersBlock',
+        'number_profile_splash_page' => 'numberProfileSplashPage',
         'full_ajax_site' => 'fullAjaxSite',
         'site_status' => 'siteStatus',
         'social_media_widgets' => 'socialMediaWidgets',
         'disclaimer' => 'disclaimer',
         'cookie_consent_bar' => 'cookieConsentBar',
+        'display_powered_by_link' => 'displayPoweredByLink',
         'is_software_news_feed' => 'isSoftwareNewsFeed',
 
         // Email
@@ -222,7 +223,7 @@ class SettingFormProcess extends Form
                  */
                 $sPathName = PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . self::LOGO_FILENAME;
                 $this->file->deleteFile($sPathName); // It erases the old logo.
-                $oLogo->dynamicResize(250,60);
+                $oLogo->dynamicResize(250, 60);
                 $oLogo->save($sPathName);
 
                 // Clear CSS cache, because the logo is storaged with data URI in the CSS cache file

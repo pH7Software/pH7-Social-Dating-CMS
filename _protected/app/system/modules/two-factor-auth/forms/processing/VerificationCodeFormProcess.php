@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2016-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2016-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Two-Factor Auth / Form / Processing
  */
@@ -45,7 +45,7 @@ class VerificationCodeFormProcess extends Form
             $oUserData = $sCoreModelClass->readProfile($iProfileId, Various::convertModToTable($sMod));
             (new $sCoreClassName)->setAuth($oUserData, $sCoreModelClass, $this->session, new Framework\Mvc\Model\Security);
 
-            $sUrl = ($sMod == PH7_ADMIN_MOD) ? Uri::get(PH7_ADMIN_MOD, 'main', 'index') : Uri::get($sMod, 'account', 'index');
+            $sUrl = ($sMod === PH7_ADMIN_MOD) ? Uri::get(PH7_ADMIN_MOD, 'main', 'index') : Uri::get($sMod, 'account', 'index');
             Header::redirect($sUrl, t('You are successfully logged in!'));
         } else {
             \PFBC\Form::setError('form_verification_code', t('Oops! The Verification Code is incorrect. Please try again.'));
@@ -65,22 +65,21 @@ class VerificationCodeFormProcess extends Form
     {
         switch ($sMod) {
             case 'user':
-                $oClass = 'UserCore';
-            break;
+                $sFullClassName = UserCore::class;
+                break;
 
             case 'affiliate':
-                 $oClass = 'AffiliateCore';
-            break;
+                $sFullClassName = AffiliateCore::class;
+                break;
 
             case PH7_ADMIN_MOD:
-                $oClass = 'AdminCore';
-            break;
+                $sFullClassName = AdminCore::class;
+                break;
 
             default:
                 throw new PH7InvalidArgumentException('Wrong "' . $sMod . '" module specified to get the class name');
         }
 
-        // Need to use the fully qualified name (with namespace) as we create the class name dynamically
-        return 'PH7\\' . $oClass;
+        return $sFullClassName;
     }
 }

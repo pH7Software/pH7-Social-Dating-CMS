@@ -1,24 +1,29 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2013-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2013-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
 
 namespace PH7;
 
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PH7\Framework\File\File;
+
 abstract class WriteCore
 {
     const THUMBNAIL_FILENAME = 'thumb.png';
+    const DEFAULT_THUMBNAIL_FILENAME = 'default_thumb.jpg';
 
     /**
-     * @param mixed (integer | string) $mId Put the username + the PH7_DS constant + the image file for the Note module or just the post ID for the Blog module.
+     * @param int|string $mId Put the username + the PH7_DS constant + the image file for the Note module or just the post ID for the Blog module.
      * @param string $sMod Module name. Choose between 'blog' and 'note'.
-     * @param \PH7\Framework\File\File $oFile
-     * @return boolean
+     * @param File $oFile
+     *
+     * @return bool
      */
-    public function deleteThumb($mId, $sMod, Framework\File\File $oFile)
+    public function deleteThumb($mId, $sMod, File $oFile)
     {
         self::checkMod($sMod);
 
@@ -31,13 +36,15 @@ abstract class WriteCore
 
     /**
      * @param string $sMod Module name. Choose between 'blog' and 'note'.
+     *
      * @return void
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException If the module is incorrect.
+     *
+     * @throws PH7InvalidArgumentException If the module is incorrect.
      */
     public static function checkMod($sMod)
     {
         if ($sMod !== 'blog' && $sMod !== 'note') {
-            Framework\Error\CException\PH7InvalidArgumentException('Bad module: ' . $sMod);
+            throw new PH7InvalidArgumentException('Bad module: ' . $sMod);
         }
     }
 }

@@ -108,13 +108,6 @@
 </url>
 
 <url>
-  <loc>{{ $design->url('page','main','team') }}</loc>
-  <lastmod>{current_date}</lastmod>
-  <changefreq>yearly</changefreq>
-  <priority>0.3</priority>
-</url>
-
-<url>
   <loc>{{ $design->url('affiliate','home','index') }}</loc>
   <lastmod>{current_date}</lastmod>
   <changefreq>monthly</changefreq>

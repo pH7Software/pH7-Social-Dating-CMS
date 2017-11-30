@@ -3,7 +3,7 @@
  * @title          Profile Controller
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Controller
  * @version        1.6
@@ -37,15 +37,16 @@ class ProfileController extends Controller
     /** @var string */
     private $sTitle;
 
-    /** @var integer */
+    /** @var int */
     private $iProfileId;
 
-    /** @var integer */
+    /** @var int */
     private $iVisitorId;
 
     public function __construct()
     {
         parent::__construct();
+
         $this->bUserAuth = User::auth();
     }
 
@@ -54,11 +55,17 @@ class ProfileController extends Controller
         $oUserModel = new UserModel;
 
         // Add the General and Tabs Menu stylesheets
-        $this->design->addCss(PH7_LAYOUT, PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS . 'tabs.css,' . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS . 'general.css');
+        $this->design->addCss(
+            PH7_LAYOUT,
+            PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS . 'tabs.css,' . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS . 'general.css'
+        );
 
         if (SysMod::isEnabled('friend')) {
             // Add the JavaScript file for the Ajax Friend block
-            $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . 'friend' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'friend.js');
+            $this->design->addJs(
+                PH7_LAYOUT . PH7_SYS . PH7_MOD . 'friend' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
+                'friend.js'
+            );
         }
 
         // Set the Profile username
@@ -66,12 +73,12 @@ class ProfileController extends Controller
 
         // Set the Profile ID and Visitor ID
         $this->iProfileId = $oUserModel->getId(null, $this->sUsername);;
-        $this->iVisitorId = (int) $this->session->get('member_id');
+        $this->iVisitorId = (int)$this->session->get('member_id');
 
         // Read the Profile information
         $oUser = $oUserModel->readProfile($this->iProfileId);
 
-        if (!empty($oUser->username) && $this->str->equalsIgnoreCase($this->sUsername, $oUser->username)) {
+        if ($oUser && $this->doesProfileExist($oUser)) {
             // The administrators can view all profiles and profile visits are not saved.
             if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
                 $this->initPrivacy($oUserModel, $this->iProfileId, $this->iVisitorId);
@@ -84,14 +91,14 @@ class ProfileController extends Controller
 
             unset($oUserModel);
 
-            $sFirstName = (!empty($oUser->firstName)) ? $this->str->escape($this->str->upperFirst($oUser->firstName), true) : '';
-            $sLastName = (!empty($oUser->lastName)) ? $this->str->escape($this->str->upperFirst($oUser->lastName), true) : '';
-            $sMiddleName = (!empty($oFields->middleName)) ? $this->str->escape($this->str->upperFirst($oFields->middleName), true) : '';
+            $sFirstName = !empty($oUser->firstName) ? $this->str->escape($this->str->upperFirst($oUser->firstName), true) : '';
+            $sLastName = !empty($oUser->lastName) ? $this->str->escape($this->str->upperFirst($oUser->lastName), true) : '';
+            $sMiddleName = !empty($oFields->middleName) ? $this->str->escape($this->str->upperFirst($oFields->middleName), true) : '';
 
-            $sCountry = (!empty($oFields->country)) ? $oFields->country : '';
-            $sCity = (!empty($oFields->city)) ? $this->str->escape($this->str->upperFirst($oFields->city), true) : '';
-            $sState = (!empty($oFields->state)) ? $this->str->escape($this->str->upperFirst($oFields->state), true) : '';
-            $sDescription = (!empty($oFields->description)) ? Emoticon::init(Ban::filterWord($oFields->description)) : '';
+            $sCountry = !empty($oFields->country) ? $oFields->country : '';
+            $sCity = !empty($oFields->city) ? $this->str->escape($this->str->upperFirst($oFields->city), true) : '';
+            $sState = !empty($oFields->state) ? $this->str->escape($this->str->upperFirst($oFields->state), true) : '';
+            $sDescription = !empty($oFields->description) ? Emoticon::init(Ban::filterWord($oFields->description)) : '';
 
             // Age
             $this->view->birth_date = $oUser->birthDate;
@@ -151,7 +158,7 @@ class ProfileController extends Controller
             $this->view->is_logged = $this->bUserAuth;
             $this->view->is_own_profile = $this->isOwnProfile();
 
-            // Stat Profile
+            // Count number of views
             Statistic::setView($this->iProfileId, 'Members');
         } else {
             $this->notFound();
@@ -189,7 +196,7 @@ class ProfileController extends Controller
     /**
      * Privacy Profile.
      *
-     * @param \PH7\UserModel $oUserModel
+     * @param UserModel $oUserModel
      *
      * @return void
      */
@@ -199,8 +206,7 @@ class ProfileController extends Controller
         $oPrivacyViewsUser = $oUserModel->getPrivacySetting($this->iProfileId);
 
         if ($oPrivacyViewsUser->searchProfile == 'no') {
-            // Exclude profile of search engines
-            $this->view->header = Meta::NOINDEX;
+            $this->excludeProfileFromSearchEngines();
         }
 
         if (!$this->bUserAuth && $oPrivacyViewsUser->privacyProfile == 'only_members') {
@@ -214,7 +220,9 @@ class ProfileController extends Controller
         if ($this->bUserAuth) {
             $oPrivacyViewsVisitor = $oUserModel->getPrivacySetting($this->iVisitorId);
 
-            if ($oPrivacyViewsUser->userSaveViews == 'yes' && $oPrivacyViewsVisitor->userSaveViews == 'yes' && !$this->isOwnProfile()) {
+            if ($oPrivacyViewsUser->userSaveViews == 'yes' && $oPrivacyViewsVisitor->userSaveViews == 'yes' &&
+                !$this->isOwnProfile()
+            ) {
                 $this->updateVisitorViews();
             }
         }
@@ -239,7 +247,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @return boolean TRUE if the user is on their own profile, FALSE otherwise.
+     * @return bool TRUE if the user is on their own profile, FALSE otherwise.
      */
     private function isOwnProfile()
     {
@@ -265,7 +273,12 @@ class ProfileController extends Controller
                 'f_n' => $sFirstName,
                 's' => $oUser->sex
             ];
-            $sMailLink = Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aUrlParms), false);
+            $sMailLink = Uri::get(
+                'user',
+                'signup',
+                'step1', '?' . Url::httpBuildQuery($aUrlParms),
+                false
+            );
         }
 
         return $sMailLink;
@@ -290,7 +303,13 @@ class ProfileController extends Controller
                 'f_n' => $sFirstName,
                 's' => $oUser->sex
             ];
-            $sMessengerLink = Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aUrlParms), false);
+            $sMessengerLink = Uri::get(
+                'user',
+                'signup',
+                'step1',
+                '?' . Url::httpBuildQuery($aUrlParms),
+                false
+            );
         }
 
         return $sMessengerLink;
@@ -315,7 +334,12 @@ class ProfileController extends Controller
                 'f_n' => $sFirstName,
                 's' => $oUser->sex
             ];
-            $sBefriendLink = Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aUrlParms), false);
+            $sBefriendLink = Uri::get(
+                'user',
+                'signup',
+                'step1', '?' . Url::httpBuildQuery($aUrlParms),
+                false
+            );
         }
 
         return $sBefriendLink;
@@ -327,8 +351,8 @@ class ProfileController extends Controller
     private function getFriendLinkName()
     {
         $iNbFriend = FriendCoreModel::total($this->iProfileId);
-        $sNbFriend = ($iNbFriend > 0) ? ' (' . $iNbFriend . ')' : '';
-        $sFriendTxt = ($iNbFriend <= 1) ? ($iNbFriend == 1) ? t('Friend:') : t('No Friends') : t('Friends:');
+        $sNbFriend = $iNbFriend > 0 ? ' (' . $iNbFriend . ')' : '';
+        $sFriendTxt = $iNbFriend <= 1 ? ($iNbFriend == 1) ? t('Friend:') : t('No Friends') : t('Friends:');
 
         return $sFriendTxt . $sNbFriend;
     }
@@ -339,10 +363,30 @@ class ProfileController extends Controller
     private function getMutualFriendLinkName()
     {
         $iNbMutFriend = (new FriendCoreModel)->get($this->iVisitorId, $this->iProfileId, null, true, null, null, null, null);
-        $sNbMutFriend = ($iNbMutFriend > 0) ? ' (' . $iNbMutFriend . ')' : '';
-        $sMutFriendTxt = ($iNbMutFriend <= 1) ? ($iNbMutFriend == 1) ? t('Mutual Friend:') : t('No Mutual Friends') : t('Mutuals Friends:');
+        $sNbMutFriend = $iNbMutFriend > 0 ? ' (' . $iNbMutFriend . ')' : '';
+        $sMutFriendTxt = $iNbMutFriend <= 1 ? ($iNbMutFriend == 1) ? t('Mutual Friend:') : t('No Mutual Friends') : t('Mutuals Friends:');
 
         return $sMutFriendTxt . $sNbMutFriend;
+    }
+
+    /**
+     * @param stdClass $oUser
+     *
+     * @return bool
+     */
+    private function doesProfileExist(stdClass $oUser)
+    {
+        return !empty($oUser->username) && $this->str->equalsIgnoreCase($this->sUsername, $oUser->username);
+    }
+
+    /**
+     * Set noindex meta tag to exclude the profile from search engines.
+     *
+     * @return void
+     */
+    private function excludeProfileFromSearchEngines()
+    {
+        $this->view->header = Meta::NOINDEX;
     }
 
     /**
@@ -355,13 +399,13 @@ class ProfileController extends Controller
         Http::setHeadersByCode(404);
 
         /**
-         * @internal We can include HTML tags in the title since the template will erase them before display.
+         * @internal We can include HTML tags in the title since the template will automatically escape them before displaying it.
          */
         $this->sTitle = t('Whoops! The "%0%" profile is not found.', substr($this->sUsername, 0, PH7_MAX_USERNAME_LENGTH), true);
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
         $this->view->error = '<strong><em>' . t('Suggestions:') . '</em></strong><br />
-        <a href="' . $this->registry->site_url . '">' . t('Return home') . '</a><br />
-        <a href="javascript:history.back();">' . t('Go back to the previous page') . '</a><br />';
+            <a href="' . $this->registry->site_url . '">' . t('Return home') . '</a><br />
+            <a href="javascript:history.back();">' . t('Go back to the previous page') . '</a><br />';
     }
 }

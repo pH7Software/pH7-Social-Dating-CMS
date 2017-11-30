@@ -4,7 +4,7 @@
  * @desc             Handler for the template emails.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Layout / Html
  */
@@ -17,6 +17,9 @@ use PH7\Framework\Registry\Registry;
 
 class Mail
 {
+    /** @var bool */
+    private $bSubFooter = false;
+
     /*** Headers ***/
 
     /**
@@ -77,7 +80,7 @@ class Mail
      */
     public function bottomFooter()
     {
-        return t('Best regards,<br />The %0% Team.', '<a href="%site_url%">%site_name%</a>');
+        return t('Best regards,<br />%0% team.', '<a href="%site_url%">%site_name%</a>');
     }
 
     /**
@@ -87,7 +90,7 @@ class Mail
      */
     public function privacyPolicyFooter($sEmail)
     {
-        return t('This message was sent to %0%.<br /> You are receiving this message because you have registered on %1%.<br /> You can change the e-mail alerts by visiting your account.', $sEmail, '<a href="%site_url%">%site_name%</a>');
+        return t('This message was sent to %0%.<br /> You receive this message because you are registered on %1%.<br /> You can change the email alerts by visiting your account.', $sEmail, '<a href="%site_url%">%site_name%</a>');
     }
 
     /**
@@ -97,13 +100,15 @@ class Mail
      */
     public function subFooter($sEmail)
     {
+        $this->bSubFooter = true;
+
         return '</div>
             </td></tr>
             <tr><td>
             <div class="break"></div>
             <p class="foot1">' . $this->bottomFooter() . '</p>
-            <p class="foot2">' . $this->privacyPolicyFooter($sEmail) .'</p>
-            <p class="foot2">' . $this->link() .'</p>
+            <p class="foot2">' . $this->privacyPolicyFooter($sEmail) . '</p>
+            <p class="foot2">' . $this->link() . '</p>
             </td></tr>
             </table>';
     }
@@ -115,7 +120,9 @@ class Mail
      */
     public function footer()
     {
-        return '</div></body></html>';
+        $sHtmlFooter = !$this->bSubFooter ? '</div></td></tr></table>' : '';
+
+        return $sHtmlFooter . '</div></body></html>';
     }
 
     /**
@@ -126,7 +133,7 @@ class Mail
     final protected function link()
     {
         ob_start();
-        (new Design)->link(true, true, true, true, true);
+        (new Design)->link(true, true, false, false, true);
         $sOutputLink = ob_get_contents();
         ob_end_clean();
 

@@ -9,11 +9,11 @@
  * @file           requirements
  * @author         Pierre-Henry Soria
  * @email          <hello@ph7cms.com>
- * @copyright      (c) 2011-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2011-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        Lesser General Public License (LGPL) (http://www.gnu.org/copyleft/lesser.html)
  * @language       (PHP) and (HTML5 + CSS)
  * @since          2011/10/25
- * @version        Last revision: 2017/05/25
+ * @version        Last revision: 2017/10/23
  */
 
 defined('PH7') or exit('Restricted access');
@@ -88,7 +88,7 @@ foreach ($aRequirementsNeeded as $sType => $aRequirements) {
 
 $iErrors = (!empty($aErrors)) ? count($aErrors) : 0;
 if ($iErrors > 0) {
-    echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Requirements - pH7CMS Installation</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><style>body{background:#EFEFEF;color:#555;font:normal 10pt Arial,Helvetica,sans-serif;margin:0;padding:0}.center{margin-left:auto;margin-right:auto;text-align:center;width:80%}.error{color:red;font-size:13px}.success{color:green}.success,.error{font-weight:bold}.italic{font-style:italic}.underline{text-decoration:underline}</style></head><body><div class="center">';
+    display_html_header('Requirements - pH7CMS Installation');
 
     printf('<h3 class="error underline italic">You have %d error(s):</h3>', $iErrors);
 
@@ -96,7 +96,18 @@ if ($iErrors > 0) {
         printf('<p class="error">%d) %s</p>', $i + 1, $aErrors[$i]);
     }
 
-    echo '</div></body></html>';
+    display_html_footer();
 
     exit(1);
+}
+
+
+function display_html_header($sPageTitle)
+{
+    echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>', $sPageTitle, '</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><style>body{background:#EFEFEF;color:#555;font:normal 10pt Arial,Helvetica,sans-serif;margin:0;padding:0}.center{margin-left:auto;margin-right:auto;text-align:center;width:80%}.error{color:red;font-size:13px}.success{color:green}.success,.error{font-weight:bold}.italic{font-style:italic}.underline{text-decoration:underline}</style></head><body><div class="center">';
+}
+
+function display_html_footer()
+{
+    echo '</div></body></html>';
 }

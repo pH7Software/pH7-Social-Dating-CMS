@@ -4,7 +4,7 @@
  * @desc             Management of the file transfer protocol.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / File / Transfer
  * @version          0.8
@@ -269,10 +269,10 @@ class Ftp extends File
      *
      * @return string Current directory name.
      */
-     public function getCurrentDir()
-     {
-         return ftp_pwd($this->_rStream);
-     }
+    public function getCurrentDir()
+    {
+        return ftp_pwd($this->_rStream);
+    }
 
     /**
      * Changes the current directory.
@@ -336,18 +336,10 @@ class Ftp extends File
     }
 
     /**
-     * Destruction of the attributes and closes the FTP connection.
+     * Closes the FTP connection.
      */
     public function __destruct()
     {
         $this->close();
-
-        unset(
-            $this->_sHost,
-            $this->_sUsername,
-            $this->_sPassword,
-            $this->_sPath,
-            $this->_rStream
-        );
     }
 }

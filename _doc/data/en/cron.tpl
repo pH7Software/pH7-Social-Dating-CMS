@@ -14,6 +14,3 @@ Do this for the rest of the URLs with the time corresponding to the folder name.
 All cron jobs are located in the following directory: <pre>"/YOUR-PATH/YOUR-PROTECTED-FOLDER/app/system/assets/cron/"</pre><br />
 
 <strong>Careful, you should not put the end of the file: Cron.php in the executor of the cron job.</strong></p>
-
-<p>If you have problems with setting up cron jobs, simply <a href="http://clients.hizup.com/support">buy a ticket</a> and we will configure it properly for you.<br />
-<em>Professional support is the best solution for your website!</em></p>

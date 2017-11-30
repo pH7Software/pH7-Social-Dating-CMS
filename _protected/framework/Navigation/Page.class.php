@@ -4,7 +4,7 @@
  * @desc             Various Page methods with also the pagination methods.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Navigation
  * @version          1.2
@@ -51,14 +51,14 @@ class Page
      */
     protected function totalPages($iTotalItems, $iNbItemsPerPage)
     {
-        $this->iTotalItems = (int) $iTotalItems;
-        $this->iNbItemsPerPage = (int) $iNbItemsPerPage; // or intval() function, but it is slower than casting
-        $this->iCurrentPage = (int) $this->oHttpRequest->getExists('p') ? $this->oHttpRequest->get('p') : 1;
+        $this->iTotalItems = (int)$iTotalItems;
+        $this->iNbItemsPerPage = (int)$iNbItemsPerPage; // or intval() function, but it is slower than casting
+        $this->iCurrentPage = (int)$this->oHttpRequest->getExists('p') ? $this->oHttpRequest->get('p') : 1;
 
         // Ternary condition to prevent division by zero
-        $this->iTotalPages = (int) ($this->iTotalItems !== 0 && $this->iNbItemsPerPage !== 0) ? ceil($this->iTotalItems / $this->iNbItemsPerPage) : 0;
+        $this->iTotalPages = (int)($this->iTotalItems !== 0 && $this->iNbItemsPerPage !== 0) ? ceil($this->iTotalItems / $this->iNbItemsPerPage) : 0;
 
-        $this->iFirstItem = (int) ($this->iCurrentPage-1) * $this->iNbItemsPerPage;
+        $this->iFirstItem = (int)($this->iCurrentPage - 1) * $this->iNbItemsPerPage;
     }
 
     /**
@@ -105,13 +105,10 @@ class Page
         $sCurrentUrl = (new HttpRequest)->currentUrl();
         $sUrl = preg_replace('#\?.+$#', '', $sCurrentUrl);
 
-        if (preg_match('#\?(.+[^\./])=(.+[^\./])$#', $sCurrentUrl))
-        {
+        if (preg_match('#\?(.+[^\./])=(.+[^\./])$#', $sCurrentUrl)) {
             $sUrlSlug = (strpos($sCurrentUrl, '&amp;') !== false) ? strrchr($sCurrentUrl, '?') : strrchr($sCurrentUrl, '?');
             $sPageUrl = $sUrl . $sUrlSlug . '&amp;' . $sVar . '=';
-        }
-        else
-        {
+        } else {
             $sPageUrl = $sUrl . static::trailingSlash($sUrl) . '?' . $sVar . '=';
         }
 

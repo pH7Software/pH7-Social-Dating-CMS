@@ -3,12 +3,13 @@
  * @title            Page Class
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Page
  */
 
 namespace PH7\Framework\Page;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Http\Http;
@@ -16,11 +17,8 @@ use PH7\Framework\Navigation\Browser;
 
 class Page
 {
-
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
-     *
-     * @access private
      */
     private function __construct()
     {
@@ -29,9 +27,8 @@ class Page
     /**
      * Set a maintenance page.
      *
-     * @access public
-     * @static
      * @param integer $iMaintenanceTime Time site will be down for (in seconds).
+     *
      * @return void
      */
     public static function maintenance($iMaintenanceTime)
@@ -52,9 +49,8 @@ class Page
     /**
      * Set a message page.
      *
-     * @access public
-     * @static
      * @param string $sMsg Information message.
+     *
      * @return void
      */
     public static function message($sMsg)
@@ -69,8 +65,6 @@ class Page
     /**
      * Set IP address banned page.
      *
-     * @access public
-     * @static
      * @return void
      */
     public static function banned()
@@ -88,9 +82,8 @@ class Page
     /**
      * Set exception page.
      *
-     * @access public
-     * @static
-     * @param object $oExcept \Exception
+     * @param \Exception $oExcept
+     *
      * @return void
      */
     public static function exception(\Exception $oExcept)
@@ -108,8 +101,6 @@ class Page
     /**
      * Set error 500 page.
      *
-     * @access public
-     * @static
      * @return void
      */
     public static function error500()
@@ -126,5 +117,4 @@ class Page
         // Stop script
         exit;
     }
-
 }

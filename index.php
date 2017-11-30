@@ -3,8 +3,8 @@
  * @title          Index
  * @desc           Index file for public root.
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2011-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @author         Pierre-Henry Soria <hi@ph7.me>
+ * @copyright      (c) 2011-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @link           http://ph7cms.com
  * @package        PH7 / ROOT / Core

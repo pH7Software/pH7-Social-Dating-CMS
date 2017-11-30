@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Page / Controller
  */
@@ -13,14 +13,15 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class MainController extends Controller
 {
+    /** @var string */
     private $sTitle;
 
     public function __construct()
     {
-          parent::__construct();
+        parent::__construct();
 
-          // Global variable for all template pages of this module
-          $this->view->admin_email = DbConfig::getSetting('adminEmail');
+        // Global variable for all template pages of this module
+        $this->view->admin_email = DbConfig::getSetting('adminEmail');
     }
 
     public function index()
@@ -30,6 +31,7 @@ class MainController extends Controller
         $this->view->meta_keywords = t('dating, free dating, online dating, people, meeting, romance, woman, man, dating site, flirt, chat, chat room, webcam, video chat, %site_name%');
         $this->view->h1_title = t('Free Online Dating with %site_name%!');
         $this->view->h2_title = t('Innovative Online Dating Platform');
+
         $this->output();
     }
 
@@ -39,6 +41,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -52,6 +55,7 @@ class MainController extends Controller
         $this->sTitle = t('Frequently asked questions of %site_name%');
         $this->view->meta_description = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -64,6 +68,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Terms and Conditions of Use, Terms of Use - %site_name%');
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -75,6 +80,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Affiliate Terms and Conditions of Use, Terms of Use - %site_name%');
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -86,6 +92,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Privacy Policy - %site_name%');
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -97,6 +104,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Legal Notice - %site_name%');
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -106,6 +114,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Help US - %site_name%');
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -115,6 +124,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Do you like %site_name% and want it even more popular, then share this site on your website, blog, discussion forum, etc...');
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -124,6 +134,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -133,6 +144,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = $this->sTitle;
         $this->view->h1_title = t('Careers, Jobs and Internships at %site_name%');
+
         $this->output();
     }
 
@@ -142,6 +154,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 }

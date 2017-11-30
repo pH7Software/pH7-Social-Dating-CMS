@@ -10,8 +10,14 @@ use PH7\Framework\Str\Str as FwkStr;
 
 class Str extends \PFBC\Validation
 {
+    /** @var FwkStr */
+    protected $oStr;
 
-    protected $oStr, $iMin, $iMax;
+    /** @var int|null */
+    protected $iMin;
+
+    /** @var int|null */
+    protected $iMax;
 
     /**
      * @param integer $iMin Default NULL
@@ -26,25 +32,32 @@ class Str extends \PFBC\Validation
 
     /**
      * @param string $sValue Check if the variable type is a valid string.
-     * @return boolean
+     *
+     * @return bool
      */
     public function isValid($sValue)
     {
         $sValue = trim($sValue);
 
-        if ($this->isNotApplicable($sValue)) return true; // Field not required
+        if ($this->isNotApplicable($sValue)) {
+            return true; // If the field not required
+        }
 
         if (!empty($this->iMin) && $this->oStr->length($sValue) < $this->iMin) {
-            $this->message = t('Error: this %element% must contain %0% character(s) or more.', $this->iMin);
+            $this->message = t('Error: %element% must be at least %0% character(s) long.', $this->iMin);
             return false;
-        } elseif (!empty($this->iMax) && $this->oStr->length($sValue) > $this->iMax) {
-            $this->message = t('Error: this %element% must contain %0% character(s) or less.', $this->iMax);
+        }
+
+        if (!empty($this->iMax) && $this->oStr->length($sValue) > $this->iMax) {
+            $this->message = t('Error: %element% cannot exceed %0% character(s).', $this->iMax);
             return false;
-        } elseif (!is_string($sValue)) {
+        }
+
+        if (!is_string($sValue)) {
             $this->message = t('Please enter a string.');
             return false;
         }
+
         return true;
     }
-
 }

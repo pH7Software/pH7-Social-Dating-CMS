@@ -17,7 +17,7 @@ class CEmail extends \PFBC\Validation
         parent::__construct();
         $this->sTable = $sTable;
         $this->sType = $sType;
-        $this->message = t('Error: Invalid email address or this email is already used by another member.');
+        $this->message = t('Error: Invalid email or already used by another user.');
     }
 
     public function isValid($sValue)

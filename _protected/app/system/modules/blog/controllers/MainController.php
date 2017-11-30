@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Blog / Controller
  */
@@ -22,6 +22,7 @@ class MainController extends Controller
     const ITEMS_MENU_TOP_VIEWS = 5;
     const ITEMS_MENU_TOP_RATING = 5;
     const ITEMS_MENU_CATEGORIES = 10;
+    const MAX_CATEGORIES = 300;
 
     /** @var BlogModel */
     protected $oBlogModel;
@@ -89,7 +90,7 @@ class MainController extends Controller
                     'blog_id' => $oPost->blogId,
                     'h1_title' => $oPost->title,
                     'content' => Emoticon::init($oPost->content),
-                    'categories' => $this->oBlogModel->getCategory($oPost->blogId, 0, 300),
+                    'categories' => $this->oBlogModel->getCategory($oPost->blogId, 0, self::MAX_CATEGORIES),
                     'enable_comment' => $oPost->enableComment,
 
                     /** Date **/

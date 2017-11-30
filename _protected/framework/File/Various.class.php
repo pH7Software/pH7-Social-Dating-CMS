@@ -3,21 +3,21 @@
  * @title            Various File Class
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / File
  */
 
 namespace PH7\Framework\File;
+
 defined('PH7') or exit('Restricted access');
+
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 class Various
 {
-
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
-     *
-     * @access private
      */
     private function __construct()
     {
@@ -26,9 +26,9 @@ class Various
     /**
      * Convert bytes to human readable format.
      *
-     * @static
-     * @param integer $iBytes The size in bytes.
-     * @param integer $iPrecision Default 2
+     * @param int $iBytes The size in bytes.
+     * @param int $iPrecision Default 2
+     *
      * @return string The size.
      */
     public static function bytesToSize($iBytes, $iPrecision = 2)
@@ -46,10 +46,11 @@ class Various
     /**
      * Convert the string size to bytes.
      *
-     * @static
      * @param string The size (e.g.,10K, 10M, 10G).
+     *
      * @return string The integer bytes.
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException Explanatory message.
+     *
+     * @throws PH7InvalidArgumentException Explanatory message.
      */
     public static function sizeToBytes($sSize)
     {
@@ -73,10 +74,9 @@ class Various
                 break;
 
             default:
-                throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Bad suffix: \'' . $cSuffix . '\'! Choose between: K, M, G');
+                throw new PH7InvalidArgumentException('Bad suffix: \'' . $cSuffix . '\'! Choose between: K, M, G');
         }
 
         return $iSize;
     }
-
 }

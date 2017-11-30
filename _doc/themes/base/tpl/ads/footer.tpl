@@ -1,1 +1,1 @@
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8560246457913786" data-ad-slot="5993623753" data-ad-format="auto"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({})</script>
+<!-- AD HERE -->

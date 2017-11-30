@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Form
  */
@@ -21,7 +21,7 @@ class BannerForm
         $oPage = new Page;
         $oAdsModel = new AdsCoreModel;
 
-        $oPage->getTotalPages($oAdsModel->total('AdsAffiliates'), self::ADS_PER_PAGE);
+        $oPage->getTotalPages($oAdsModel->total(AdsCore::AFFILIATE_AD_TABLE_NAME), self::ADS_PER_PAGE);
         $oAds = $oAdsModel->get(
             null,
             $oPage->getFirstItem(),

@@ -1,10 +1,11 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2013-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2013-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Controller
  */
+
 namespace PH7;
 
 use PH7\Framework\Navigation\Page;
@@ -13,7 +14,20 @@ class BirthdayController extends Controller
 {
     const MAX_PROFILE_PER_PAGE = 20;
 
-    private $oBirthModel, $oPage, $sTitle, $sCurrentDate, $iTotalBirths;
+    /** @var BirthdayModel */
+    private $oBirthModel;
+
+    /** @var Page */
+    private $oPage;
+
+    /** @var string */
+    private $sTitle;
+
+    /** @var string */
+    private $sCurrentDate;
+
+    /** @var int */
+    private $iTotalBirths;
 
     public function __construct()
     {
@@ -63,8 +77,7 @@ class BirthdayController extends Controller
 
     protected function checkType($sSexType)
     {
-        switch ($sSexType)
-        {
+        switch ($sSexType) {
             case BirthdayModel::ALL:
             case BirthdayModel::COUPLE:
             case BirthdayModel::MALE:

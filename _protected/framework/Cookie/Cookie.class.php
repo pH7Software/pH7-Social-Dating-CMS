@@ -4,7 +4,7 @@
  * @desc             Handler Cookie
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Cookie
  */
@@ -103,11 +103,13 @@ class Cookie
         } else {
             $sCookieName = Config::getInstance()->values['cookie']['prefix'] . $mName;
 
-            // We put the cookie in a table so if the cookie is in the form of multi-dimensional array, it is clear how much is destroyed
+            // We put the cookie into an array. So, if the cookie is in a multi-dimensional arrays, it is clear how much is destroyed
             $_COOKIE[$sCookieName] = array();
-            // We are asking the browser to delete the cookie
+
+            // We ask the browser to delete the cookie
             setcookie($sCookieName, 0, 0);
-            // and we delete the cookie value locally to avoid using it by mistake in following our script
+
+            // then, we delete the cookie value locally to avoid using it by mistake in following our script
             unset($_COOKIE[$sCookieName]);
         }
     }

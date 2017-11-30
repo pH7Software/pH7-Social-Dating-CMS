@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Contact / Inc / Class
  */
@@ -49,7 +49,7 @@ class Contact extends Core
     /**
      * Send the email.
      *
-     * @return integer Number of recipients who were accepted for delivery.
+     * @return int Number of recipients who were accepted for delivery.
      *
      * @throws \PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
@@ -65,17 +65,17 @@ class Contact extends Core
 
         $this->view->footer_title = t('User Information');
         $this->view->footer_content =
-        '<p>' . t('User IP: %0%', $this->design->ip(null, false)) . '</p>
-         <p>' . t('User Browser info: %0%', $this->browser->getUserAgent()) . '</p>
-         <p>' . t('User come from: %0%', '<a href="' . $this->httpRequest->currentUrl() . '">' . t('URL Page') . '</a>') . '</p>';
+            '<p>' . t('User IP: %0%', $this->design->ip(null, false)) . '</p>
+             <p>' . t('User Browser info: %0%', $this->browser->getUserAgent()) . '</p>
+             <p>' . t('User come from: %0%', '<a href="' . $this->httpRequest->currentUrl() . '">' . t('URL Page') . '</a>') . '</p>';
 
         $sHtmlMessage = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/contact/contact_form.tpl', $this->sFeedbackEmail);
 
         $aInfo = [
-          'from' => $this->sMail,
-          'form_name' => $this->httpRequest->post('last_name') . ' ' . $this->httpRequest->post('first_name'),
-          'subject' => t('Contact Form: %0%', $this->sSubject),
-          'to' => $this->sFeedbackEmail
+            'from' => $this->sMail,
+            'form_name' => $this->httpRequest->post('last_name') . ' ' . $this->httpRequest->post('first_name'),
+            'subject' => t('Contact Form: %0%', $this->sSubject),
+            'to' => $this->sFeedbackEmail
         ];
 
         return (new Mail)->send($aInfo, $sHtmlMessage);

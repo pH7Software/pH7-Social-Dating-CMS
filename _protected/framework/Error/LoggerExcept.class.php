@@ -4,7 +4,7 @@
  * @desc           Handler Logger Exception Management.
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7/ Framework / Error
  * @version        1.3
@@ -25,6 +25,8 @@ use PH7\Framework\Mvc\Router\FrontController;
 
 final class LoggerExcept extends Logger
 {
+    const MAX_UNCOMPRESSED_SIZE = 5; // Size in megabytes
+
     public function __construct()
     {
         try {
@@ -78,8 +80,7 @@ final class LoggerExcept extends Logger
                 $sFullFile = $this->sDir . static::EXCEPT_DIR . $this->sFileName . '.json';
                 $sFullGzipFile = $this->sDir . static::EXCEPT_DIR . static::GZIP_DIR . $this->sFileName . '.gz';
 
-                // If the log file is larger than 5 Mo then it compresses it into gzip
-                if (file_exists($sFullFile) && filesize($sFullFile) >= 5 * 1024 * 1024) {
+                if ($this->isGzipEligible($sFullFile)) {
                     $rHandler = @gzopen($sFullGzipFile, 'a') or exit('Unable to write to log file gzip.');
                     gzwrite($rHandler, $sContents);
                     gzclose($rHandler);
@@ -108,5 +109,17 @@ final class LoggerExcept extends Logger
             default:
                 exit(t('Invalid Log Option.'));
         }
+    }
+
+    /**
+     * If the log file already exists and is larger than 5 Mb, then returns TRUE, FALSE otherwise.
+     *
+     * @param string $sFullFile Log file path.
+     *
+     * @return bool
+     */
+    private function isGzipEligible($sFullFile)
+    {
+        return is_file($sFullFile) && filesize($sFullFile) >= static::MAX_UNCOMPRESSED_SIZE * 1024 * 1024;
     }
 }

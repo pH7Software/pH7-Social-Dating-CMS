@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Form / Processing
  */
@@ -19,6 +19,9 @@ use PH7\Framework\Url\Header;
 
 class LoginFormProcess extends Form implements LoginableForm
 {
+    const BRUTE_FORCE_SLEEP_DELAY = 1;
+
+    /** @var AffiliateModel */
     private $oAffModel;
 
     public function __construct()
@@ -44,7 +47,7 @@ class LoginFormProcess extends Form implements LoginableForm
         // Check Login
         $sLogin = $this->oAffModel->login($sEmail, $sPassword, 'Affiliates');
         if ($sLogin === 'email_does_not_exist' || $sLogin === 'password_does_not_exist') {
-            sleep(1); // Security against brute-force attack to avoid drowning the server and the database
+            $this->preventBruteForce(self::BRUTE_FORCE_SLEEP_DELAY);
 
             if ($sLogin === 'email_does_not_exist') {
                 $this->enableCaptcha();
@@ -72,25 +75,19 @@ class LoginFormProcess extends Form implements LoginableForm
             $this->updatePwdHashIfNeeded($sPassword, $oAffData->password, $sEmail);
 
             $oAff = new AffiliateCore;
-            if (true !== ($mStatus = $oAff->checkAccountStatus($oAffData)))
-            {
+            if (true !== ($mStatus = $oAff->checkAccountStatus($oAffData))) {
                 \PFBC\Form::setError('form_login_aff', $mStatus);
-            }
-            else
-            {
+            } else {
                 $o2FactorModel = new TwoFactorAuthCoreModel('affiliate');
-                if ($o2FactorModel->isEnabled($iId))
-                {
+                if ($o2FactorModel->isEnabled($iId)) {
                     // Store the affiliate ID for 2FA
                     $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iId);
 
                     Header::redirect(Uri::get('two-factor-auth', 'main', 'verificationcode', 'affiliate'));
-                }
-                else
-                {
+                } else {
                     $oAff->setAuth($oAffData, $this->oAffModel, $this->session, $oSecurityModel);
 
-                    Header::redirect(Uri::get('affiliate','account','index'), t('You are successfully logged in!'));
+                    Header::redirect(Uri::get('affiliate', 'account', 'index'), t('You are successfully logged in!'));
                 }
             }
         }

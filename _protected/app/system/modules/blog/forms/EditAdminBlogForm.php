@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Blog / Form
  */
@@ -16,6 +16,8 @@ use PH7\Framework\Url\Header;
 
 class EditAdminBlogForm
 {
+    const MAX_CATEGORIES = 300;
+
     public static function display()
     {
         if (isset($_POST['submit_edit_blog'])) {
@@ -32,7 +34,7 @@ class EditAdminBlogForm
         $oPost = $oBlogModel->readPost($sPostId);
 
         if (!empty($oPost) && (new Str)->equals($iBlogId, $oPost->blogId)) {
-            $oCategoryData = $oBlogModel->getCategory(null, 0, 300);
+            $oCategoryData = $oBlogModel->getCategory(null, 0, self::MAX_CATEGORIES);
 
             $aCategoryNames = array();
             foreach ($oCategoryData as $oId) {
@@ -40,16 +42,16 @@ class EditAdminBlogForm
             }
 
             $aSelectedCategories = array();
-            $oCategoryIds = $oBlogModel->getCategory($iBlogId, 0, 300);
+            $oCategoryIds = $oBlogModel->getCategory($iBlogId, 0, self::MAX_CATEGORIES);
             unset($oBlogModel);
 
             foreach ($oCategoryIds as $oId) {
                 $aSelectedCategories[] = $oId->categoryId;
             }
 
-            $oForm = new \PFBC\Form('form_blog');
+            $oForm = new \PFBC\Form('form_edit_blog');
             $oForm->configure(array('action' => ''));
-            $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_blog', 'form_blog'));
+            $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_blog', 'form_edit_blog'));
             $oForm->addElement(new \PFBC\Element\Token('edit_blog'));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Article name:'), 'title', array('value' => $oPost->title, 'validation' => new \PFBC\Validation\Str(2, 60), 'required' => 1)));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Article ID:'), 'post_id', array('value' => $oPost->postId, 'description' => Uri::get('blog', 'main', 'index') . '/<strong><span class="your-address">' . $oPost->postId . '</span><span class="post_id"></span></strong>', 'title' => t('Article ID will be the name of the URL.'), 'id' => 'post_id', 'validation' => new \PFBC\Validation\Str(2, 60), 'required' => 1)));
@@ -80,7 +82,8 @@ class EditAdminBlogForm
             $oForm->addElement(new \PFBC\Element\Button);
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_TPL_SYS_MOD . 'blog/' . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS . 'common.js"></script>'));
             $oForm->render();
-        } else
+        } else {
             echo '<p class="center bold">' . t('Post Not Found!') . '</p>';
+        }
     }
 }

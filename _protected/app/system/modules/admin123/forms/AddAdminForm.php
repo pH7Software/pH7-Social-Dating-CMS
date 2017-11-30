@@ -1,12 +1,14 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
 
 namespace PH7;
+
+use PH7\Framework\Url\Header;
 
 class AddAdminForm
 {
@@ -16,7 +18,8 @@ class AddAdminForm
             if (\PFBC\Form::isValid($_POST['submit_add_admin'])) {
                 new AddAdminFormProcess;
             }
-            Framework\Url\Header::redirect();
+
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_add_admin');

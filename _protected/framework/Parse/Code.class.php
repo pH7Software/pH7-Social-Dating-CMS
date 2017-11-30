@@ -4,7 +4,7 @@
  * @desc             The Prototype for the extends code classes.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Parse
  * @version          1.0
@@ -16,9 +16,9 @@ defined('PH7') or exit('Restricted access');
 
 abstract class Code
 {
-    /**
-     * @var string $sText
-     */
+    const REGEX_SCRIPT_BLOCK_PATTERN = '/<script(.*?)>(.*?)<\/script>/is';
+
+    /** @var string */
     protected $sText;
 
     public function __construct()
@@ -33,7 +33,7 @@ abstract class Code
      */
     protected function sanitize()
     {
-        $this->sText = preg_replace('/<script(.*?)>(.*?)<\/script>/is', '', $this->sText);
+        $this->sText = preg_replace(static::REGEX_SCRIPT_BLOCK_PATTERN, '', $this->sText);
         $this->convert();
     }
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Game / Form
  */
@@ -9,22 +9,27 @@
 namespace PH7;
 
 use PH7\Framework\Config\Config;
+use PH7\Framework\Url\Header;
 
 class AdminForm
 {
+    const MAX_CATEGORIES = 500;
+
     public static function display()
     {
         if (isset($_POST['submit_game'])) {
-            if (\PFBC\Form::isValid($_POST['submit_game']))
+            if (\PFBC\Form::isValid($_POST['submit_game'])) {
                 new AdminFormProcess();
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
-        $oCategoriesData = (new GameModel)->getCategory(null, 0, 500);
+        $oCategoriesData = (new GameModel)->getCategory(null, 0, self::MAX_CATEGORIES);
         $aCategoriesName = array();
-        foreach ($oCategoriesData as $oId)
+        foreach ($oCategoriesData as $oId) {
             $aCategoriesName[$oId->categoryId] = $oId->name;
+        }
         unset($oCategoriesData);
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];

@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Note / Model
  */
@@ -30,13 +30,13 @@ class NoteModel extends NoteCoreModel
             if ($bCount) {
                 $sSql = 'SELECT *, COUNT(c.noteId) AS totalCatNotes FROM' . Db::prefix('NotesDataCategories') . 'AS d INNER JOIN' . Db::prefix('NotesCategories') . 'AS c ON d.categoryId = c.categoryId GROUP BY d.name ASC LIMIT :offset, :limit';
             } else {
-                $sSqlNoteId = (isset($iNoteId)) ? ' INNER JOIN ' . Db::prefix('NotesCategories') . 'AS c ON d.categoryId = c.categoryId WHERE c.noteId = :noteId ' : ' ';
+                $sSqlNoteId = ($iNoteId !== null) ? ' INNER JOIN ' . Db::prefix('NotesCategories') . 'AS c ON d.categoryId = c.categoryId WHERE c.noteId = :noteId ' : ' ';
                 $sSql = 'SELECT * FROM' . Db::prefix('NotesDataCategories') . 'AS d' . $sSqlNoteId . 'ORDER BY d.name ASC LIMIT :offset, :limit';
             }
 
             $rStmt = Db::getInstance()->prepare($sSql);
 
-            if (isset($iNoteId)) {
+            if ($iNoteId !== null) {
                 $rStmt->bindParam(':noteId', $iNoteId, \PDO::PARAM_INT);
             }
 

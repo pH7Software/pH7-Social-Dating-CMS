@@ -4,7 +4,7 @@
  * @desc             File containing HTML for display management.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
  * @package          PH7 / Framework / Layout / Html
  */
@@ -36,6 +36,7 @@ use PH7\Framework\Registry\Registry;
 use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Str\Str;
+use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Url;
 use PH7\UserCore;
 use PH7\UserCoreModel;
@@ -115,8 +116,8 @@ class Design
                 continue;
             }
 
-            // Retrieve only the first two characters
-            $sAbbrLang = substr($sLang, 0, 2);
+            // Get the two-letter country code
+            $sAbbrLang = Lang::getIsoCode($sLang);
 
             echo '<a href="', $sCurrentPage, $sLang, '" hreflang="', $sAbbrLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>&nbsp;';
         }
@@ -136,8 +137,8 @@ class Design
 
         echo '<link rel="alternate" hreflang="x-default" href="', PH7_URL_ROOT, '">'; // For pages that are not specifically targeted
         foreach ($aLangs as $sLang) {
-            // Retrieve only the first two characters
-            $sAbbrLang = substr($sLang, 0, 2);
+            // Get only the two-letter country code
+            $sAbbrLang = Lang::getIsoCode($sLang);
             echo '<link rel="alternate" hreflang="', $sAbbrLang, '" href="', $sCurrentPage, $sLang, '" />';
         }
 
@@ -163,8 +164,9 @@ class Design
      */
     public function message()
     {
-        if ($this->oHttpRequest->getExists('msg'))
+        if ($this->oHttpRequest->getExists('msg')) {
             $this->aMessages[] = substr($this->oHttpRequest->get('msg'), 0, 300);
+        }
 
         $iMsgNum = count($this->aMessages);
         /*** Check if there are any messages in the aMessages array ***/
@@ -211,37 +213,37 @@ class Design
         $iErrNum = count($this->aErrors);
         /*** Check if there are any errors in the aErrors array ***/
         if ($iErrNum > 0) {
-           $this->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/apprise.js');
+            $this->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/apprise.js');
 
-           echo '<script>$(function(){Apprise(\'';
-           echo '<strong>', t('You have'), ' <em>', $iErrNum, '</em> ', nt('error:', 'errors:', $iErrNum), '</strong><br />';
+            echo '<script>$(function(){Apprise(\'';
+            echo '<strong>', t('You have'), ' <em>', $iErrNum, '</em> ', nt('error:', 'errors:', $iErrNum), '</strong><br />';
 
-           for ($i=0; $i < $iErrNum; $i++)
-             echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aErrors[$i])), '<br />';
+            for ($i = 0; $i < $iErrNum; $i++)
+                echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aErrors[$i])), '<br />';
 
-           echo '\')});</script>';
+            echo '\')});</script>';
         }
 
         unset($this->aErrors);
     }
 
-   /**
-    * Redirect Page using Refresh with Header.
-    *
-    * @param string $sUrl If NULL, the URL will be the current page. Default NULL
-    * @param string $sMsg, Optional, display a message after redirect of the page.
-    * @param string $sType Type of message: "success", "info", "warning" or "error". Default: "success".
-    * @param integer $iTime Optional, a time. Default: "3" seconds.
-    *
-    * @return void
-    */
+    /**
+     * Redirect Page using Refresh with Header.
+     *
+     * @param string $sUrl If NULL, the URL will be the current page. Default NULL
+     * @param string $sMsg , Optional, display a message after redirect of the page.
+     * @param string $sType Type of message: "success", "info", "warning" or "error". Default: "success".
+     * @param integer $iTime Optional, a time. Default: "3" seconds.
+     *
+     * @return void
+     */
     public function setRedirect($sUrl = null, $sMsg = null, $sType = self::SUCCESS_TYPE, $iTime = 3)
     {
-        if (!empty($sMsg)) {
+        if ($sMsg !== null) {
             $this->setFlashMsg($sMsg, $sType);
         }
 
-        $sUrl = (!empty($sUrl)) ? $sUrl : $this->oHttpRequest->currentUrl();
+        $sUrl = ($sUrl !== null) ? $sUrl : $this->oHttpRequest->currentUrl();
 
         header('Refresh: ' . $iTime . '; URL=' . $this->oHttpRequest->pH7Url($sUrl));
     }
@@ -260,7 +262,7 @@ class Design
         $sTime = Benchmark::readableElapsedTime($sMicrotime);
         $iMemory = Benchmark::readableSize(memory_get_usage(true));
 
-        echo t('Queries time: %0% | %1% %2% | Generated in %3% | Memory allocated: %4%', Db::time(), $iCountQueries, $sRequest, $sTime, $iMemory);
+        echo t('Queries time %0% | %1% %2% | Generated in %3% | Memory allocated %4%', Db::time(), $iCountQueries, $sRequest, $sTime, $iMemory);
     }
 
     /**
@@ -314,7 +316,7 @@ class Design
      */
     public function popupLinkConfirm($sLabel, $sMod, $sCtrl, $sAct, $mId, $sClass = null)
     {
-        $sClass = (!empty($sClass)) ? ' class="' . $sClass . '" ' : ' ';
+        $sClass = ($sClass !== null) ? ' class="' . $sClass . '" ' : ' ';
 
         $aHttpParams = [
             'label' => Url::encode($sLabel),
@@ -337,47 +339,41 @@ class Design
         $sIcon = $this->oStr->lower($sCountryCode) . '.gif';
         $sDir = PH7_URL_STATIC . PH7_IMG . 'flag/s/';
 
-        echo (is_file(PH7_PATH_STATIC . PH7_IMG . 'flag/s/' . $sIcon)) ? $sDir . $sIcon : $sDir . 'none.gif';
+        echo is_file(PH7_PATH_STATIC . PH7_IMG . 'flag/s/' . $sIcon) ? $sDir . $sIcon : $sDir . 'none.gif';
     }
 
     /**
      * Provide a "Powered By" link.
      *
-     * @param boolean $bLink To include a link to pH7CMS or pH7Framework. Default TRUE
-     * @param boolean $bSoftwareName Default TRUE
-     * @param boolean $bVersion To include the version being used. Default TRUE
-     * @param boolean $bComment HTML comment. Default TRUE
-     * @param boolean $bEmail Is it for email content or not. Default FALSE
+     * @param bool $bLink To include a link to pH7CMS or pH7Framework.
+     * @param bool $bSoftwareName
+     * @param bool $bVersion To include the version being used.
+     * @param bool $bComment HTML comment.
+     * @param bool $bEmailContext Is it for email content or not.
      *
      * @return void
      */
-    final public function link($bLink = true, $bSoftwareName = true, $bVersion = true, $bComment = true, $bEmail = false)
+    final public function link($bLink = true, $bSoftwareName = true, $bVersion = false, $bComment = true, $bEmailContext = false)
     {
-        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE) {
-            return;
-        }
+        if (!$bEmailContext && (bool)DbConfig::getSetting('displayPoweredByLink')) {
+            if ($bLink) {
+                $bSoftwareName = true;
+            }
 
-        if ($bLink) {
-            $bSoftwareName = true;
-        }
-
-        if (!$bEmail && AdminCore::auth()) {
-            echo '<p class="s_bMarg underline"><strong><em><a class="red" href="', Uri::get(PH7_ADMIN_MOD, 'setting', 'license'), '">', t('Need to remove the link below?'), '</a></em></strong><br /><em class="small">' . t('(... and get rid of all other promo notices)') . '</em></p>';
+            echo ($bSoftwareName ? '<span class="italic">' . t('Powered by') : ''), ' <strong>', ($bLink ? '<a class="underline" href="' . Kernel::SOFTWARE_WEBSITE . '" title="' . Kernel::SOFTWARE_DESCRIPTION . '">' : ''), ($bSoftwareName ? Kernel::SOFTWARE_NAME : ''), ($bVersion ? ' ' . Kernel::SOFTWARE_VERSION : ''), ($bLink ? '</a>' : ''), ($bSoftwareName ? '</strong></span>' : '');
         }
 
         if ($bComment) {
             echo '
-            <!-- ', Kernel::SOFTWARE_COPYRIGHT, ' -->
-            <!-- Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->
-            <!-- You must leave this comment and the back link in the footer.
-            This open source software is distributed free and you must respect the thousands of days, months and several years it takes to develop it!
-            All rights reserved for ', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_COMPANY, '
-            You can never claim that you took, developed, or helped in any other way in this software if it is wrong! -->';
+                <!-- ' . sprintf(Kernel::SOFTWARE_COPYRIGHT, date('Y')) . ' -->
+                <!-- Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->
+                <!-- You must leave this comment.
+                This open source software is distributed for free and you must respect the thousands of days, months and several years it took to develop it.
+                All rights reserved to ', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_COMPANY, '
+                You can never claim that you took, developed, or helped in any other way in this software if it is wrong -->';
         }
 
-        echo($bSoftwareName ? '<p class="italic"><strong>' . t('Powered by') : ''), ' ', ($bLink ? '<a class="underline" href="' . Kernel::SOFTWARE_WEBSITE . '" title="' . Kernel::SOFTWARE_DESCRIPTION . '">' : ''), ($bSoftwareName ? Kernel::SOFTWARE_NAME : ''), ($bVersion ? ' ' . Kernel::SOFTWARE_VERSION : ''), ($bLink ? '</a>' : ''), ($bSoftwareName ? '</strong></p>' : ''),
-
-        '<!-- "Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->';
+        echo '<!-- "Powered by ', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_VERSION_NAME, ', ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->';
     }
 
     /**
@@ -387,52 +383,39 @@ class Design
      */
     final public function smallLink()
     {
-        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE) {
-            return;
-        }
-
-        echo '<p><strong>', t('Proudly Powered by'), ' <a href="', Kernel::SOFTWARE_WEBSITE, '" title="', Kernel::SOFTWARE_DESCRIPTION, '">', Kernel::SOFTWARE_NAME, '</a> ', Kernel::SOFTWARE_VERSION, '</strong></p>';
+        echo '<strong>', t('Proudly Powered by'), ' <a href="', Kernel::SOFTWARE_WEBSITE, '" title="', Kernel::SOFTWARE_DESCRIPTION, '">', Kernel::SOFTWARE_NAME, '</a> ', Kernel::SOFTWARE_VERSION, '</strong>';
     }
 
     /**
-     * The below code MUST be present if you didn't pay a pH7CMS Pro License.
-     *
      * @return void Output the relevant link based on the client browser's language.
      */
     final public function smartLink()
     {
-        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE) {
-            return;
-        }
-
         // Get Client's Language Code
         $sLangCode = (new Browser)->getLanguage(true);
 
         // Default links, set to English
         $aSites = [
-            ['title' => 'Flirt Hot Girls', 'link' => 'http://meetlovelypeople.com'],
-            ['title' => 'Flirt Naughty & Girls', 'link' => 'http://meetlovelypeople.com'],
-            ['title' => 'The MOBILE Dating App', 'link' => 'http://flirt-dating.london'],
-            ['title' => 'Dating App', 'link' => 'http://meetlovelypeople.com'],
-            ['title' => 'Date People by Mobile App', 'link' => 'http://meetlovelypeople.com'],
-            ['title' => 'Dating App for Dating Singles', 'link' => 'http://london-dating-app.meetlovelypeople.com']
+            ['title' => 'Free Dating CMS', 'link' => Kernel::SOFTWARE_GIT_REPO],
+            ['title' => 'Flirt Hot Girls', 'link' => 'http://01script.com/p/dooba'],
+            ['title' => 'Romance Dating', 'link' => 'http://love-rencontre.wekiss.net'],
+            ['title' => 'Date your Friends', 'link' => 'http://01script.com/p/dooba']
         ];
 
         if ($sLangCode === 'en-ie') {
-            $aSites = [
-                ['title' => 'Dublin Dating Site', 'link' => 'http://dublin.meetlovelypeople.com'],
-                ['title' => 'Meet Singles in Pubs/Bars', 'link' => 'http://dublin.meetlovelypeople.com']
-            ];
+            $aSites[] = ['title' => 'FREE Flirt in Dublin City', 'link' => 'http://01script.com/p/dooba'];
+            $aSites[] = ['title' => 'Date Dubs in the Town!', 'link' => 'http://01script.com/p/dooba'];
         } elseif ($sLangCode === 'en-gb') {
-            $aSites = [
-                ['title' => 'London Dating App', 'link' => 'http://london.meetlovelypeople.com'],
-                ['title' => 'Meet Singles in Pubs/Bars', 'link' => 'http://london.meetlovelypeople.com'],
-                ['title' => 'Date Londoners', 'link' => 'http://flirt-dating.london']
-            ];
+            $aSites[] = ['title' => 'Date Brits near from YOU', 'link' => 'http://01script.com/p/dooba'];
+            $aSites[] = ['title' => 'Date Londoners', 'link' => 'http://01script.com/p/dooba'];
         } elseif (strpos($sLangCode, 'fr') !== false) {
+            /**
+             * Reset the array since we don't want to mix it up with different langs (default one is English, not French)
+             */
             $aSites = [
-                ['title' => 'Rencontre d\'un soir', 'link' => 'http://flirt-rencontre.net'],
-                ['title' => ' Flirt Coquin', 'link' => 'http://flirt-rencontre.net']
+                ['title' => 'Rencontre d\'un soir', 'link' => 'http://01script.com/p/dooba'],
+                ['title' => 'Flirt Coquin', 'link' => 'http://01script.com/p/dooba'],
+                ['title' => 'Rencontre amoureuse', 'link' => 'http://love-rencontre.wekiss.net']
             ];
         }
 
@@ -517,7 +500,7 @@ class Design
     public function setFlashMsg($sMessage, $sType = self::SUCCESS_TYPE)
     {
         /*** Check the type of message, otherwise it is the default ***/
-        $sType = in_array($sType, self::MESSAGE_TYPES) ? $sType : self::SUCCESS_TYPE;
+        $sType = in_array($sType, self::MESSAGE_TYPES, true) ? $sType : self::SUCCESS_TYPE;
         $sType = ($sType == self::ERROR_TYPE ? 'danger' : $sType); // Now the "error" CSS class has become "danger", so we have to convert it
         $this->oSession->set(
             [
@@ -550,6 +533,7 @@ class Design
      * Show the user IP address with a link to get the IP information.
      *
      * @internal If it's an IPv6, show only the beginning, otherwise it would be too long in the template.
+     *
      * @param string $sIp Allows to speciy another IP address than the client one.
      * @param boolean $bPrint Print or Return the HTML code. Default TRUE
      *
@@ -581,7 +565,7 @@ class Design
         $sCountryLang = t($sCountryCode); // Country name translated into the user language
         $sCity = Geo::getCity();
 
-        $sHtml = '<a href="' . Uri::get('user', 'country', 'index', $sCountry . PH7_SH . $sCity) . '" title="' . t('Meet New People in %0%, %1% with %site_name%!', $sCountryLang, $sCity) . '">' . $sCountryLang . ', ' . $sCity . '</a>';
+        $sHtml = '<a href="' . Uri::get('user', 'country', 'index', $sCountry . PH7_SH . $sCity) . '" title="' . t('Meet New People in %0%, %1% with %site_name%!', $sCountryLang, $sCity) . '">' . $sCity . '</a>';
 
         if (!$bPrint) {
             return $sHtml;
@@ -702,7 +686,7 @@ class Design
      *
      * @param string $sEmail The user email address.
      * @param string $sType The default image type to show. Default: 'wavatar'
-     * @param integer $iSize  The size of the image. Default: 80
+     * @param integer $iSize The size of the image. Default: 80
      * @param character $cRating The max image rating allowed. Default: 'g' (for all)
      * @param boolean $bSecure Display avatar via HTTPS, for example if the site uses HTTPS, you should use this option to not get a warning with most Web browsers. Default: FALSE
      *
@@ -712,7 +696,7 @@ class Design
     {
         $sProtocol = $bSecure ? 'https' : 'http';
         $bSubDomain = $bSecure ? 'secure' : 'www';
-        return $sProtocol . '://' . $bSubDomain . '.gravatar.com/avatar/' . md5( strtolower($sEmail) ) . '?d=' . $sType . '&s=' . $iSize . '&r=' . $cRating;
+        return $sProtocol . '://' . $bSubDomain . '.gravatar.com/avatar/' . md5(strtolower($sEmail)) . '?d=' . $sType . '&s=' . $iSize . '&r=' . $cRating;
     }
 
     /**
@@ -727,7 +711,7 @@ class Design
         $sImg = Browser::favicon($sUrl);
         $sName = Http::getHostName($sUrl);
 
-        $this->imgTag($sImg, $sName, ['width'=>16, 'height'=>16]);
+        $this->imgTag($sImg, $sName, ['width' => 16, 'height' => 16]);
     }
 
     /**
@@ -743,7 +727,7 @@ class Design
     public function like($sUsername, $sFirstName, $sSex, $sForceUrlKey = null)
     {
         $aHttpParams = [
-            'msg' => t('Please join for free to vote that'),
+            'msg' => t('You need to be a member for liking contents.'),
             'ref' => $this->oHttpRequest->currentController(),
             'a' => 'like',
             'u' => $sUsername,
@@ -755,7 +739,7 @@ class Design
         $sLikeLink = ($bIsLogged) ? '#' : Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false);
         $sLikeId = ($bIsLogged) ? ' id="like"' : '';
 
-        $sUrlKey = (empty($sForceUrlKey)) ? $this->oHttpRequest->currentUrl() : $sForceUrlKey;
+        $sUrlKey = empty($sForceUrlKey) ? $this->oHttpRequest->currentUrl() : $sForceUrlKey;
         echo '<a rel="nofollow" href="', $sLikeLink, '" data-key="', $sUrlKey, '" title="', t('Like %0%', $sFirstName), '" class="like"', $sLikeId, '>', t('Like %0%', $sFirstName), '</a>';
         $this->staticFiles('js', PH7_STATIC . PH7_JS, 'Like.js');
     }
@@ -769,7 +753,7 @@ class Design
      */
     public function likeApi()
     {
-        if ((bool) DbConfig::getSetting('socialMediaWidgets')) {
+        if ((bool)DbConfig::getSetting('socialMediaWidgets')) {
             echo '<br /><br /><div class="center addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like"></a><a class="addthis_button_tweet" tw:count="horizontal"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_counter addthis_pill_style"></a></div>';
         }
     }
@@ -795,6 +779,7 @@ class Design
      * @param string $sUsername
      * @param string $sFirstName
      * @param string $sSex
+     *
      * @internal We do not use Url::httpBuildQuery() method for the first condition otherwise the URL is distorted and it doesn't work.
      *
      * @return void
@@ -804,9 +789,31 @@ class Design
         $iId = (int)$iId;
 
         if ($iId > PH7_GHOST_ID) {
-            $sReportLink = (UserCore::auth()) ?
-                Uri::get('report', 'main', 'abuse', '?spammer=' . $iId . '&amp;url=' . $this->oHttpRequest->currentUrl() . '&amp;type=' . Registry::getInstance()->module, false) . '" data-popup="block-page' :
-                Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery(['msg' => t('You must be registered to report contents.'), 'ref' => 'profile', 'a' => 'report', 'u' => $sUsername, 'f_n' => $sFirstName, 's' => $sSex]), false);
+            if (UserCore::auth()) {
+                $aUrlParams = [
+                    'spammer' => $iId,
+                    'type' => Registry::getInstance()->module
+                ];
+                $sReportLink = Uri::get(
+                    'report',
+                    'main',
+                    'abuse',
+                    '?' . Url::httpBuildQuery($aUrlParams) . '&amp;url=' . $this->oHttpRequest->currentUrl(),
+                    false
+                );
+
+                $sReportLink .= '" data-popup="block-page';
+            } else {
+                $aUrlParams = [
+                    'msg' => t('You need to be a user to report contents.'),
+                    'ref' => 'profile',
+                    'a' => 'report',
+                    'u' => $sUsername,
+                    'f_n' => $sFirstName,
+                    's' => $sSex
+                ];
+                $sReportLink = Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aUrlParams), false);
+            }
 
             echo '<a rel="nofollow" href="', $sReportLink, '" title="', t('Report Abuse'), '">', t('Report'), '</a>';
         } else {
@@ -851,11 +858,11 @@ class Design
     {
         $aDefAttrs = ['src' => $sImg, 'alt' => $sAlt];
 
-        if (!empty($aAttrs)) {
+        if ($aAttrs !== null) {
             $aDefAttrs += $aAttrs; // Update the attributes if necessary
         }
 
-        $this->htmlTag('img',  $aDefAttrs);
+        $this->htmlTag('img', $aDefAttrs);
     }
 
     /**
@@ -872,7 +879,7 @@ class Design
     {
         $sAttrs = '';
 
-        if (!empty($aAttrs)) {
+        if ($aAttrs !== null) {
             foreach ($aAttrs as $sName => $sValue) {
                 $sAttrs .= ' ' . $sName . '="' . $sValue . '"';
             }
@@ -913,7 +920,7 @@ class Design
         }
 
         echo '<meta name="author" content="', Kernel::SOFTWARE_COMPANY, '" />
-        <meta name="copyright" content="', Kernel::SOFTWARE_COPYRIGHT, '" />
+        <meta name="copyright" content="' . sprintf(Kernel::SOFTWARE_COPYRIGHT, date('Y')) . ' />
         <meta name="creator" content="', Kernel::SOFTWARE_NAME, '" />
         <meta name="designer" content="', Kernel::SOFTWARE_NAME, '" />
         <meta name="generator" content="', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, '" />';
@@ -967,7 +974,7 @@ class Design
      */
     public function externalCssFile($sFile, $sCssMedia = null)
     {
-        $sCssMedia = (!empty($sCssMedia)) ? ' media="' . $sCssMedia . '"' : '';
+        $sCssMedia = ($sCssMedia !== null) ? ' media="' . $sCssMedia . '"' : '';
         echo '<link rel="stylesheet" href="', $sFile, '"', $sCssMedia, ' />';
     }
 
@@ -981,15 +988,5 @@ class Design
     public function externalJsFile($sFile)
     {
         echo '<script src="', $sFile, '"></script>';
-    }
-
-    public function __destruct()
-    {
-        unset(
-          $this->bIsDiv,
-          $this->oStr,
-          $this->oSession,
-          $this->oHttpRequest
-        );
     }
 }

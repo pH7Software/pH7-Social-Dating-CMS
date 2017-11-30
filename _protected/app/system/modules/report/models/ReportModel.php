@@ -3,7 +3,7 @@
  * @title          Report Model Class
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Report / Model
  */
@@ -13,8 +13,13 @@ namespace PH7;
 use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
 
-class ReportModel extends Framework\Mvc\Model\Engine\Model
+class ReportModel extends ReportCoreModel
 {
+    /**
+     * @param array $aData
+     *
+     * @return bool|string
+     */
     public function add(array $aData)
     {
         $rStmt = Db::getInstance()->prepare('SELECT count(reportId) FROM' . Db::prefix('Report') .
@@ -44,10 +49,17 @@ class ReportModel extends Framework\Mvc\Model\Engine\Model
         }
     }
 
+    /**
+     * @param int|null $iId
+     * @param int $iOffset
+     * @param $iLimit
+     *
+     * @return int array|mixed
+     */
     public function get($iId = null, $iOffset, $iLimit)
     {
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
 
         $sSqlId = (!empty($iId)) ? ' WHERE reportId = :id ' : ' ';
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Report') . $sSqlId . 'LIMIT :offset, :limit');
@@ -58,24 +70,19 @@ class ReportModel extends Framework\Mvc\Model\Engine\Model
         $rStmt->bindValue(':limit', $iLimit, PDO::PARAM_INT);
         $rStmt->execute();
 
-        return (!empty($iId)) ? $rStmt->fetch(PDO::FETCH_OBJ) : $rStmt->fetchAll(PDO::FETCH_OBJ);
+        return !empty($iId) ? $rStmt->fetch(PDO::FETCH_OBJ) : $rStmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    /**
+     * @param int $iReportId
+     *
+     * @return bool
+     */
     public function delete($iReportId)
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Report') . 'WHERE reportId = :reportId LIMIT 1');
         $rStmt->bindValue(':reportId', $iReportId, PDO::PARAM_INT);
 
         return $rStmt->execute();
-    }
-
-    public function totalReports()
-    {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(reportId) AS totalRpts FROM' . Db::prefix('Report'));
-        $rStmt->execute();
-        $oRow = $rStmt->fetch(PDO::FETCH_OBJ);
-        Db::free($rStmt);
-
-        return (int) $oRow->totalRpts;
     }
 }

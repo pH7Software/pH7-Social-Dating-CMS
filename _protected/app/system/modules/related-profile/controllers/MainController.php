@@ -1,20 +1,21 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2017-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Related Profile / Controller
  */
-namespace PH7;
 
+namespace PH7;
 
 use PH7\Framework\Layout\Html\Meta;
 use stdClass;
 
 class MainController extends Controller
 {
-    const MAX_PROFILE = 5;
+    const MAX_PROFILES = 5;
 
+    /** @var UserCoreModel */
     private $oUserModel;
 
     public function __construct()
@@ -37,18 +38,19 @@ class MainController extends Controller
                 $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
                 $this->view->related_profiles = $oRelatedProfiles;
                 $this->view->id = $iProfileId;
-                $this->output();
-                return true;
             }
         }
+
         $this->output();
     }
 
     /**
      * Get related profile data.
      *
-     * @param object $oProfile Profile User Data.
-     * @return stdClass Profile data.
+     * @param stdClass $oProfile User data.
+     * @param stdClass $oProfileFields Profile fields.
+     *
+     * @return stdClass Related profiles.
      */
     private function relatedProdiles(stdClass $oProfile, stdClass $oProfileFields)
     {
@@ -59,7 +61,6 @@ class MainController extends Controller
             SearchQueryCore::CITY => $oProfileFields->city
         ];
 
-        return $this->oUserModel->search($aParams, false, 0, self::MAX_PROFILE);
-        $this->output();
+        return $this->oUserModel->search($aParams, false, 0, self::MAX_PROFILES);
     }
 }

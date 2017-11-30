@@ -3,7 +3,7 @@
     {{ ShareUrlCoreForm::display(Framework\Mvc\Router\Uri::get('affiliate','router','refer', $username), null, false) }}
     <p>&nbsp;</p>
 
-    <p class="bold">{lang 'Your affiliate amount is: %1%%0%', $amount, $currency_sign}</p>
+    <p class="bold">{lang 'Your affiliate amount is <em>%1%%0%</em>', $amount, $currency_sign}</p>
     <hr />
     {if $amount >= $min_withdrawal}
         <p>{lang 'If you want, you can <a href="%0%">contact us</a> to request a payment.', $contact_url}</p>

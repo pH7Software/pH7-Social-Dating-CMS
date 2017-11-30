@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Note / Controller
  */
@@ -25,6 +25,7 @@ class MainController extends Controller
     const ITEMS_MENU_TOP_RATING = 5;
     const ITEMS_MENU_AUTHORS = 5;
     const ITEMS_MENU_CATEGORIES = 10;
+    const MAX_CATEGORIES = 300;
 
     /** @var NoteModel */
     protected $oNoteModel;
@@ -44,6 +45,7 @@ class MainController extends Controller
     public function __construct()
     {
         parent::__construct();
+
         $this->oNoteModel = new NoteModel;
         $this->oPage = new Page;
         $this->iApproved = (AdminCore::auth() && !UserCore::isAdminLoggedAs()) ? null : 1;
@@ -101,7 +103,7 @@ class MainController extends Controller
 
                     /***** CONTENTS *****/
                     'h1_title' => Ban::filterWord($oPost->title),
-                    'categories' => $this->oNoteModel->getCategory($oPost->noteId, 0, 300),
+                    'categories' => $this->oNoteModel->getCategory($oPost->noteId, 0, self::MAX_CATEGORIES),
 
                     /** Date **/
                     'dateTime' => $this->dateTime,
@@ -306,7 +308,7 @@ class MainController extends Controller
         $this->oNoteModel->deleteThumb($iId, $iProfileId);
 
         Note::clearCache();
-        Header::redirect(Uri::get('note','main','edit', $iId), t('The thumbnail has been deleted successfully!'));
+        Header::redirect(Uri::get('note', 'main', 'edit', $iId), t('The thumbnail has been deleted successfully!'));
     }
 
     /**
@@ -340,14 +342,14 @@ class MainController extends Controller
     protected function notFound($b404Status = true)
     {
         if ($b404Status) {
-           Http::setHeadersByCode(404);
+            Http::setHeadersByCode(404);
         }
 
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
 
         $this->view->error = t("Sorry, we weren't able to find the page you requested.") . '<br />' .
             t('You can go back on the <a href="%0%">note homepage</a> or <a href="%1%">search with different keywords</a>.',
-                Uri::get('note','main','index'), Uri::get('note','main','search')
+                Uri::get('note', 'main', 'index'), Uri::get('note', 'main', 'search')
             );
     }
 

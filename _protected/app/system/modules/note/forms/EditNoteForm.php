@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Note / Form
  */
@@ -17,12 +17,15 @@ use PH7\Framework\Url\Header;
 
 class EditNoteForm
 {
+    const MAX_CATEGORIES = 300;
+
     public static function display()
     {
         if (isset($_POST['submit_edit_note'])) {
             if (\PFBC\Form::isValid($_POST['submit_edit_note'])) {
                 new EditNoteFormProcess();
             }
+
             Header::redirect();
         }
 
@@ -35,7 +38,7 @@ class EditNoteForm
         $oPost = $oNoteModel->readPost($sPostId, $iProfileId);
 
         if (!empty($oPost) && (new Str)->equals($iNoteId, $oPost->noteId)) {
-            $oCategoryData = $oNoteModel->getCategory(null, 0, 300);
+            $oCategoryData = $oNoteModel->getCategory(null, 0, self::MAX_CATEGORIES);
 
             $aCategoryNames = array();
             foreach ($oCategoryData as $oId) {
@@ -43,16 +46,16 @@ class EditNoteForm
             }
 
             $aSelectedCategories = array();
-            $oCategoryIds = $oNoteModel->getCategory($iNoteId, 0, 300);
+            $oCategoryIds = $oNoteModel->getCategory($iNoteId, 0, self::MAX_CATEGORIES);
             unset($oNoteModel);
 
             foreach ($oCategoryIds as $iId) {
                 $aSelectedCategories[] = $iId->categoryId;
             }
 
-            $oForm = new \PFBC\Form('form_note');
+            $oForm = new \PFBC\Form('form_edit_note');
             $oForm->configure(array('action' => ''));
-            $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_note', 'form_note'));
+            $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_note', 'form_edit_note'));
             $oForm->addElement(new \PFBC\Element\Token('edit_note'));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Article name:'), 'title', array('value' => $oPost->title, 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Article ID:'), 'post_id', array('value' => $oPost->postId, 'description' => Uri::get('note', 'main', 'read', (new Session)->get('member_username')) . '/<strong><span class="your-address">' . $oPost->postId . '</span><span class="post_id"></span></strong>', 'title' => t('Article ID will be the name of the URL.'), 'data-profile_id' => $iProfileId, 'id' => 'post_id', 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
@@ -80,7 +83,8 @@ class EditNoteForm
             $oForm->addElement(new \PFBC\Element\Button);
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_TPL_SYS_MOD . 'note/' . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS . 'common.js"></script>'));
             $oForm->render();
-        } else
+        } else {
             echo '<p class="center bold">' . t('Post Not Found!') . '</p>';
+        }
     }
 }

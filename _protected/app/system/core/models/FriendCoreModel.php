@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
@@ -41,6 +41,7 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
             $sSqlSelect = 'COUNT(f.friendId) AS totalFriends';
         }
 
+        $sSqlWhere = '(f.profileId = :profileId OR f.friendId = :profileId)';
         if (!empty($iFriendId)) {
             $sSqlWhere = 'f.profileId IN
            (SELECT * FROM (SELECT (m.profileId)
@@ -50,14 +51,11 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
                SELECT (f.friendId) FROM ' . Db::prefix('MembersFriends') . ' AS f
                WHERE (f.profileId IN(:profileId, :friendId))) AS fd
                GROUP BY fd.profileId HAVING COUNT(fd.profileId) > 1)';
-        } else {
-            $sSqlWhere = '(f.profileId = :profileId OR f.friendId = :profileId)';
         }
 
+        $sSqlSearchWhere = '(m.username LIKE :looking OR m.firstName LIKE :looking OR m.lastName LIKE :looking OR m.email LIKE :looking)';
         if (ctype_digit($mLooking)) {
             $sSqlSearchWhere = '(m.profileId = :profileId AND f.friendId= :profileId) OR (m.profileId = :friendId OR f.friendId= :friendId)';
-        } else {
-            $sSqlSearchWhere = '(m.username LIKE :looking OR m.firstName LIKE :looking OR m.lastName LIKE :looking OR m.email LIKE :looking)';
         }
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
@@ -69,7 +67,12 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
         );
 
         $rStmt->bindValue(':profileId', $iIdProfileId, \PDO::PARAM_INT);
-        (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+
+        if (ctype_digit($mLooking)) {
+            $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
+        } else {
+            $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+        }
 
         if (!empty($iFriendId)) {
             $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
@@ -92,7 +95,7 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
         } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $mData = (int) $oRow->totalFriends;
+            $mData = (int)$oRow->totalFriends;
             unset($oRow);
         }
 
@@ -113,10 +116,10 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
         $rStmt->execute();
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        $iPendingFriends = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
 
-        return (int) $oRow->pendingFds;
+        return $iPendingFriends;
     }
 
     /**
@@ -133,9 +136,9 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->execute();
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        $iTotalFriends = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
 
-        return (int) $oRow->totalFds;
+        return $iTotalFriends;
     }
 }

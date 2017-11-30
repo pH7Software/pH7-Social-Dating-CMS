@@ -3,7 +3,7 @@
  * @title          Main Controller Class
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Connect / Controller
  * @version        1.0
@@ -13,15 +13,23 @@ namespace PH7;
 
 class MainController extends Controller
 {
+    const FB_PROVIDER = 'fb';
+    const GOOGLE_PROVIDER = 'google';
+    const TWITTER_PROVIDER = 'twitter';
+    const MICROSOFT_PROVIDER = 'microsoft';
 
     /**
-     * @access protected Protected access for the AdminController class derived from this class.
+     * @internal Protected access for the AdminController class derived from this class.
+     *
      * @var string $sTitle
      */
     protected $sTitle;
 
-    private $_sApi, $_sUrl;
+    /** @var string */
+    private $_sApi;
 
+    /** @var string */
+    private $_sUrl;
 
     public function index()
     {
@@ -32,7 +40,6 @@ class MainController extends Controller
         $this->view->h1_title = $this->sTitle;
 
         $this->output();
-
     }
 
     public function register()
@@ -44,7 +51,6 @@ class MainController extends Controller
 
         $this->manualTplInclude('waiting.inc.tpl');
         $this->output();
-
     }
 
     public function login($sApiName = '')
@@ -76,31 +82,29 @@ class MainController extends Controller
 
     private function _whatApi()
     {
-        switch ($this->_sApi)
-        {
-            case 'fb':
+        switch ($this->_sApi) {
+            case self::FB_PROVIDER:
                 if (!$this->config->values['module.api']['facebook.enabled']) continue;
                 $this->_sUrl = new Facebook;
-            break;
+                break;
 
-            case 'google':
+            case self::GOOGLE_PROVIDER:
                 if (!$this->config->values['module.api']['google.enabled']) continue;
                 $this->_sUrl = new Google($this->session, $this->httpRequest, $this->registry);
-            break;
+                break;
 
-            case 'twitter':
+            case self::TWITTER_PROVIDER:
                 if (!$this->config->values['module.api']['twitter.enabled']) continue;
                 $this->_sUrl = new Twitter;
-            break;
+                break;
 
-            case 'microsoft':
+            case self::MICROSOFT_PROVIDER:
                 if (!$this->config->values['module.api']['microsoft.enabled']) continue;
                 $this->_sUrl = new Microsoft;
-            break;
+                break;
 
             default:
                 $this->displayPageNotFound(t('The %0% API is incorrect.', $this->_sApi));
         }
     }
-
 }

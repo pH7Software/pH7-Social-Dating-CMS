@@ -4,7 +4,7 @@
  * @desc           Class supports the viewing of videos in HTML5.
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class / Design
  * @version        1.3
@@ -23,6 +23,9 @@ use PH7\Framework\Video\Api as VideoApi;
 
 class VideoDesignCore
 {
+    const PREVIEW_MEDIA_MODE = 'preview';
+    const MOVIE_MEDIA_MODE = 'movie';
+
     /**
      * @internal Import the trait to set the class static.
      * The trait sets constructor/clone private to prevent instantiation.
@@ -32,24 +35,25 @@ class VideoDesignCore
     /**
      * Generates HTML contents Video.
      *
-     * @param object $oData
-     * @param string $sMedia Type of the media ('preview' or 'movie'). Default: 'movie'
-     * @param integer $iWidth Default: 600
-     * @param integer $iHeight Default: 400
+     * @param \stdClass $oData
+     * @param string $sMedia Type of the media ('preview' or 'movie').
+     * @param int $iWidth
+     * @param int $iHeight
+     *
      * @return void
      */
-    public static function generate($oData, $sMedia = 'movie', $iWidth = 600, $iHeight = 400)
+    public static function generate($oData, $sMedia = self::MOVIE_MEDIA_MODE, $iWidth = 600, $iHeight = 400)
     {
         $sDurationTag = '<div class="video_duration">' . Various::secToTime($oData->duration) . '</div>';
 
         if ((new VideoCore)->isApi($oData->file)) {
             $oVideo = (new VideoApi)->getMeta($oData->file, $sMedia, $iWidth, $iHeight);
 
-            if ($sMedia == 'preview')
-
+            if ($sMedia === self::PREVIEW_MEDIA_MODE) {
                 echo $sDurationTag, '<a href="', $oData->file, '" title="', $oData->title, '" data-popup="frame-video"><img src="', $oVideo, '" alt="', $oData->title, '" title="', $oData->title, '" /></a>';
-            else
+            } else {
                 echo $oVideo;
+            }
         } else {
             $sDir = 'video/file/' . $oData->username . PH7_SH . $oData->albumId . PH7_SH;
             $sVidPath1 = $sDir . $oData->file . '.webm';
@@ -74,7 +78,7 @@ class VideoDesignCore
                 $sThumbUrl = PH7_URL_TPL . PH7_TPL_NAME . PH7_SH . PH7_IMG . 'icon/none.jpg';
             }
 
-            $sParam = ($sMedia == 'movie' && DbConfig::getSetting('autoplayVideo')) ? 'autoplay="autoplay"' : '';
+            $sParam = self::isAutoplayVideo($sMedia) ? 'autoplay="autoplay"' : '';
             $sVideoTag = '
             <video poster="' . $sThumbUrl . '" width="' . $iWidth . '" height="' . $iHeight . '" controls="controls" ' . $sParam . '>
                 <source src="' . PH7_URL_DATA_SYS_MOD . $sVidPath1 . '" type="video/webm" />
@@ -88,11 +92,22 @@ class VideoDesignCore
                 <button class="btn btn-default btn-sm" onclick="Video.smallSize()">' . t('Small') . '</button>
             </div>';
 
-            if ($sMedia == 'preview')
+            if ($sMedia === self::PREVIEW_MEDIA_MODE) {
                 echo $sDurationTag, '<a href="#watch', $oData->videoId, '" title="', $oData->title, '" data-popup="video"><img src="', $sThumbUrl, '" alt="', $oData->title, '" title="', $oData->title, '" /></a>
                 <div class="hidden"><div id="watch', $oData->videoId, '">', $sVideoTag, '</div></div>';
-            else
+            } else {
                 echo $sVideoTag;
+            }
         }
+    }
+
+    /**
+     * @param string $sMedia
+     *
+     * @return bool
+     */
+    private static function isAutoplayVideo($sMedia)
+    {
+        return $sMedia === self::MOVIE_MEDIA_MODE && DbConfig::getSetting('autoplayVideo');
     }
 }

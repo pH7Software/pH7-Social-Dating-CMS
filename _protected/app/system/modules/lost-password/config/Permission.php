@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Lost Password / Config
  */
@@ -20,7 +20,9 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if ((UserCore::auth() || AffiliateCore::auth() || AdminCore::auth()) && ($this->registry->action == 'forgot' || $this->registry->action == 'reset')) {
+        if ((UserCore::auth() || AffiliateCore::auth() || AdminCore::auth()) &&
+            ($this->registry->action === 'forgot' || $this->registry->action === 'reset')
+        ) {
             Header::redirect(Uri::get('lost-password', 'main', 'account'),
                 $this->alreadyConnectedMsg(),
                 Design::ERROR_TYPE

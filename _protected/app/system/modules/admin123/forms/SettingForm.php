@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
@@ -13,6 +13,7 @@ use PH7\Framework\Ip\Ip;
 use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class SettingForm
 {
@@ -27,7 +28,7 @@ class SettingForm
                 new SettingFormProcess;
             }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_setting');
@@ -53,17 +54,17 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Profiles with Photo Only:'), 'profile_with_avatars', array('1' => t('Yes'), '0' => t('No')), array('description' => t('Display only the profiles with a profile photo on profile blocks (such as the homepage).'), 'value' => DbConfig::getSetting('profileWithAvatarSet'), 'required' => 1)));
 
+        $oForm->addElement(new \PFBC\Element\Select(t('Splash Homepage:'), 'splash_page', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Use the Splash Page (recommended) for visitors (not logged), otherwise the classic page will be used. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('splashPage'), 'required' => 1)));
+
+        $oForm->addElement(new \PFBC\Element\Select(t('Background Splash Video:'), 'bg_splash_vid', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Enable/Disable the "Animated Video" on the Splash Homepage. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('bgSplashVideo'), 'required' => 1)));
+
         $oForm->addElement(new \PFBC\Element\Select(t('Display Profiles on Guest Homepage:'), 'users_block', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Display or not the newest users on the homepage for visitors. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('usersBlock'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Number(t('Number of Profiles on Splash Page:'), 'number_profile_splash_page', array('description' => t('The number of profiles to display on the Splash Homepage. <br /><em>Available only if "Profiles on Guest Homepage" is enabled and if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('numberProfileSplashPage'), 'validation' => new \PFBC\Validation\Str(1, 2), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Splash Homepage:'), 'splash_page', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Use the Splash Page (recommended) for visitors (not logged), otherwise the classic page will be used. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('splashPage'), 'required' => 1)));
-
-        $oForm->addElement(new \PFBC\Element\Select(t('Background Splash Video:'), 'bg_splash_vid', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Enable/Disable the "Animated Video" on the Splash Homepage. <strong>If you hold <a href="%0%">pH7CMSPro</a>, we can provide professional splash videos for your specific niche and setting-up the video for you</strong>. <br /><em>Available only if "User" is the Default Module.</em>', Core::SOFTWARE_LICENSE_KEY_URL), 'value' => DbConfig::getSetting('bgSplashVideo'), 'required' => 1)));
-
         $oForm->addElement(new \PFBC\Element\Select(t('Ajax Site with AjPH:'), 'full_ajax_site', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t("Be careful! 'Full Ajax Navigation' feature is still in <strong>Beta version</strong> and may not be working properly on all pages."), 'value' => DbConfig::getSetting('fullAjaxSite'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Site Status:'), 'site_status', array(DbConfig::ENABLE_SITE => t('Enable'), DbConfig::MAINTENANCE_SITE => t('Maintenance')), array('value' => DbConfig::getSetting('siteStatus'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Site Status:'), 'site_status', array(DbConfig::ENABLE_SITE => t('Enable'), DbConfig::MAINTENANCE_SITE => t('Maintenance')), array('description' => t("Maintenance mode is useful if you are working on your website or update it. Logged in admins and admin panel won't be affected by the maintenance page."), 'value' => DbConfig::getSetting('siteStatus'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Social Media Widgets:'), 'social_media_widgets', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Enable the Social Media Sharing such as Like and Sharing buttons.'), 'value' => DbConfig::getSetting('socialMediaWidgets'), 'required' => 1)));
 
@@ -71,7 +72,9 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Cookie Consent Bar:'), 'cookie_consent_bar', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Enable a Cookie Consent Bar to prevent your users that your website uses cookies. This is required for EU Law (if you have visitors from EU countries). The Cookie Bar will only be displayed if the visitor is in the EU.'), 'value' => DbConfig::getSetting('cookieConsentBar'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Show the News Feed:'), 'is_software_news_feed', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Show the Latest News about the software in the admin dashboard (recommend).'), 'value' => DbConfig::getSetting('isSoftwareNewsFeed'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Show "Powered By" link in footer:'), 'display_powered_by_link', array(1 => t('Enable'), 0 => t('Disable (not recommended)')), array('description' => t('Are you proud of pH7CMS brand? Are you proud to say your dating app has been made by the European Leader Dating software?'), 'value' => DbConfig::getSetting('displayPoweredByLink'), 'required' => 1)));
+
+        $oForm->addElement(new \PFBC\Element\Select(t('Show the News Feed:'), 'is_software_news_feed', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Show the latest news about the software in the admin dashboard (recommend).'), 'value' => DbConfig::getSetting('isSoftwareNewsFeed'), 'required' => 1)));
 
         unset($oFile);
 
@@ -191,7 +194,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Number(t('CSRF token lifetime:'), 'security_token_lifetime', array('description' => t('Time in seconds.'), 'value' => DbConfig::getSetting('securityTokenLifetime'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('System against the DDoS attacks:'), 'stop_DDoS', array('1' => t('Activate'), '0' => t('Deactivate')), array('value' => DbConfig::getSetting('DDoS'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('System against DDoS attacks:'), 'stop_DDoS', array('1' => t('Activate'), '0' => t('Deactivate')), array('description' => t('Enable it ONLY if you think your website has real DDoS attacks or if your server is highly overloaded.'), 'value' => DbConfig::getSetting('DDoS'), 'required' => 1)));
 
 
         /********** Spam **********/
@@ -283,6 +286,7 @@ class SettingForm
 
     /**
      * @param File $oFile
+     *
      * @return array
      */
     private static function getLangs(File $oFile)

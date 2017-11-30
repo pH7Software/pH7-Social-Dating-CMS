@@ -6,7 +6,7 @@
         <div class="m_photo center">
             {{ $absolute_url = Framework\Mvc\Router\Uri::get('video','main','video',"$a->username,$a->albumId,$a->title,$a->videoId") }}
             <h4><a href="{absolute_url}">{% substr(Framework\Security\Ban\Ban::filterWord($a->title),0,25) %}</a></h4>
-            {{ VideoDesign::generate($a, 'preview', '100%', 400) }}
+            {{ VideoDesign::generate($a, VideoDesign::PREVIEW_MEDIA_MODE, '100%', 400) }}
 
             {if $is_user_auth AND $member_id == $a->profileId}
                 <div class="small">

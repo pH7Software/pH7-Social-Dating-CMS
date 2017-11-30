@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Video / Model
  */
@@ -23,6 +23,7 @@ class VideoModel extends VideoCoreModel
         $rStmt->bindValue(':thumb', $sThumb, \PDO::PARAM_STR);
         $rStmt->bindValue(':createdDate', $sCreatedDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -40,6 +41,7 @@ class VideoModel extends VideoCoreModel
         $rStmt->bindValue(':duration', $sDuration, \PDO::PARAM_STR);
         $rStmt->bindValue(':createdDate', $sCreatedDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -48,6 +50,7 @@ class VideoModel extends VideoCoreModel
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('AlbumsVideos') . 'WHERE profileId=:profileId AND albumId=:albumId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -55,8 +58,7 @@ class VideoModel extends VideoCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'albumName' . $iProfileId, static::CACHE_TIME);
 
-        if (!$oData = $this->cache->get())
-        {
+        if (!$oData = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT albumId, name FROM' . Db::prefix('AlbumsVideos') . ' WHERE profileId = :profileId');
             (!empty($iProfileId)) ? $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT) : '';
 
@@ -65,6 +67,7 @@ class VideoModel extends VideoCoreModel
             Db::free($rStmt);
             $this->cache->put($oData);
         }
+
         return $oData;
     }
 
@@ -72,10 +75,9 @@ class VideoModel extends VideoCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'video' . $iProfileId . $iAlbumId . $iVideoId . $iApproved . $iOffset . $iLimit, static::CACHE_TIME);
 
-        if (!$oData = $this->cache->get())
-        {
-            $iOffset = (int) $iOffset;
-            $iLimit = (int) $iLimit;
+        if (!$oData = $this->cache->get()) {
+            $iOffset = (int)$iOffset;
+            $iLimit = (int)$iLimit;
 
             $sSqlVideoId = (!empty($iVideoId)) ? ' v.videoId=:videoId AND ' : ' ';
             $rStmt = Db::getInstance()->prepare('SELECT v.*, a.name, m.username, m.firstName, m.sex FROM' . Db::prefix('Videos') . 'AS v INNER JOIN'
@@ -94,6 +96,7 @@ class VideoModel extends VideoCoreModel
             Db::free($rStmt);
             $this->cache->put($oData);
         }
+
         return $oData;
     }
 
@@ -101,18 +104,18 @@ class VideoModel extends VideoCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'totalAlbums' . $iProfileId, static::CACHE_TIME);
 
-        if (!$iData = $this->cache->get())
-        {
+        if (!$iData = $this->cache->get()) {
             $sSqlProfileId = (!empty($iProfileId)) ? ' WHERE profileId=:profileId' : '';
             $rStmt = Db::getInstance()->prepare('SELECT COUNT(albumId) AS totalAlbums FROM' . Db::prefix('AlbumsVideos') . $sSqlProfileId);
             (!empty($iProfileId)) ? $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT) : '';
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $iData = (int) $oRow->totalAlbums;
+            $iData = (int)$oRow->totalAlbums;
             unset($oRow);
             $this->cache->put($iData);
         }
+
         return $iData;
     }
 
@@ -120,17 +123,17 @@ class VideoModel extends VideoCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'totalVideos' . $iProfileId, static::CACHE_TIME);
 
-        if (!$iData = $this->cache->get())
-        {
+        if (!$iData = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT COUNT(videoId) AS totalVideos FROM' . Db::prefix('Videos') . 'WHERE profileId=:profileId');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $iData = (int) $oRow->totalVideos;
+            $iData = (int)$oRow->totalVideos;
             unset($oRow);
             $this->cache->put($iData);
         }
+
         return $iData;
     }
 
@@ -144,6 +147,7 @@ class VideoModel extends VideoCoreModel
         $rStmt->bindValue(':name', $sTitle, \PDO::PARAM_STR);
         $rStmt->bindValue(':description', $sDescription, \PDO::PARAM_STR);
         $rStmt->bindValue(':updatedDate', $sUpdatedDate, \PDO::PARAM_STR);
+
         return $rStmt->execute();
     }
 
@@ -158,24 +162,26 @@ class VideoModel extends VideoCoreModel
         $rStmt->bindValue(':title', $sTitle, \PDO::PARAM_STR);
         $rStmt->bindValue(':description', $sDescription, \PDO::PARAM_STR);
         $rStmt->bindValue(':updatedDate', $sUpdatedDate, \PDO::PARAM_STR);
+
         return $rStmt->execute();
     }
 
     /**
-     * @param integer|string $mLooking
-     * @param boolean $bCount
+     * @param int|string $mLooking
+     * @param bool $bCount
      * @param string $sOrderBy
-     * @param integer $iSort
-     * @param integer $iOffset
-     * @param integer $iLimit
-     * @param integer $iApproved
-     * @return integer|object
+     * @param int $iSort
+     * @param int $iOffset
+     * @param int $iLimit
+     * @param int $iApproved
+     *
+     * @return int|\stdClass
      */
     public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $iApproved = 1)
     {
-        $bCount = (bool) $bCount;
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $bCount = (bool)$bCount;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
@@ -185,31 +191,28 @@ class VideoModel extends VideoCoreModel
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE v.videoId = :looking' : ' WHERE v.title LIKE :looking OR v.description LIKE :looking';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ', a.name, m.username, m.firstName, m.sex FROM' . Db::prefix('Videos') . 'AS v INNER JOIN'
-                . Db::prefix('AlbumsVideos') . 'AS a ON v.albumId = a.albumId INNER JOIN' . Db::prefix('Members') . 'AS m ON v.profileId = m.profileId' . $sSqlWhere . ' AND v.approved=:approved' . $sSqlOrder . $sSqlLimit);
+            . Db::prefix('AlbumsVideos') . 'AS a ON v.albumId = a.albumId INNER JOIN' . Db::prefix('Members') . 'AS m ON v.profileId = m.profileId' . $sSqlWhere . ' AND v.approved=:approved' . $sSqlOrder . $sSqlLimit);
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-        }
-        else
-        {
+        } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $mData = (int) @$oRow->totalVideos;
+            $mData = (int)@$oRow->totalVideos;
             unset($oRow);
         }
+
         return $mData;
     }
 }
