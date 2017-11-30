@@ -3,12 +3,14 @@
  * @title          Picture Form Process Class
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Picture / Form / Processing
  * @version        1.4
  */
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Image\Image;
@@ -30,7 +32,9 @@ class PictureFormProcess extends Form
          * @desc This can cause minor errors (eg if a user sent a file that is not a photo).
          * So we hide the errors if we are not in development mode.
          */
-        if (!isDebug()) error_reporting(0);
+        if (!isDebug()) {
+            error_reporting(0);
+        }
 
         /**
          * @desc
@@ -38,27 +42,24 @@ class PictureFormProcess extends Form
          * This test is necessary because when the selection exists but that no option is available (this can when a user wants to add photos but he has no album)
          * the return value is of type "string" and the value is "1".
          */
-        if (!is_numeric($this->httpRequest->post('album_id')))
-        {
+        if (!is_numeric($this->httpRequest->post('album_id'))) {
             \PFBC\Form::setError('form_picture', t('Please add a category before you add some photos.'));
             return; // Stop execution of the method.
         }
 
         /**
-         * @desc Resizing and saving some photos
+         * Resizing and saving some photos
          */
         $aPhotos = $_FILES['photos']['tmp_name'];
-        for ($i = 0, $iNumPhotos = count($aPhotos); $i < $iNumPhotos; $i++)
-        {
+        for ($i = 0, $iNumPhotos = count($aPhotos); $i < $iNumPhotos; $i++) {
             $oPicture1 = new Image($aPhotos[$i], 2500, 2500);
-            if (!$oPicture1->validate())
-            {
+            if (!$oPicture1->validate()) {
                 \PFBC\Form::setError('form_picture', Form::wrongImgFileTypeMsg());
                 return; // Stop execution of the method.
             }
 
-            $sAlbumTitle = $this->httpRequest->post('album_title');
-            $iAlbumId = (int) $this->httpRequest->post('album_id');
+            $sAlbumTitle = MediaCore::cleanTitle($this->httpRequest->post('album_title'));
+            $iAlbumId = (int)$this->httpRequest->post('album_id');
 
             $oPicture2 = clone $oPicture1;
             $oPicture3 = clone $oPicture1;
@@ -100,12 +101,13 @@ class PictureFormProcess extends Form
             $oPicture5->save($sPath . $sFile5);
             $oPicture6->save($sPath . $sFile6);
 
-            $this->iApproved = (DbConfig::getSetting('pictureManualApproval') == 0) ? '1' : '0';
+            $this->iApproved = DbConfig::getSetting('pictureManualApproval') == 0 ? '1' : '0';
 
             $this->checkNudityFilter($aPhotos[$i]);
 
             // It creates a nice title if no title is specified.
-            $sTitle = ($this->httpRequest->postExists('title') && $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2) ? $this->httpRequest->post('title') : $this->str->upperFirst(str_replace(array('-', '_'), ' ', str_ireplace(PH7_DOT . $oPicture1->getExt(), '', escape($_FILES['photos']['name'][$i], true))));
+            $sTitle = $this->getImageTitle($i, $oPicture1);
+            $sTitle = MediaCore::cleanTitle($sTitle);
 
             (new PictureModel)->addPhoto(
                 $this->session->get('member_id'),
@@ -118,16 +120,25 @@ class PictureFormProcess extends Form
             );
         }
 
-        $this->clearCache();
+        Picture::clearCache();
 
         $sModerationText = t('Your photo(s) has/have been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
-        $sText =  t('Your photo(s) has/have been added successfully!');
+        $sText = t('Your photo(s) has/have been successfully added!');
         $sMsg = ($this->iApproved == '0') ? $sModerationText : $sText;
-        Header::redirect(Uri::get('picture', 'main', 'album', $this->session->get('member_username') . ',' . $sAlbumTitle . ',' . $iAlbumId), $sMsg);
+
+        Header::redirect(
+            Uri::get('picture',
+                'main',
+                'album',
+                $this->session->get('member_username') . ',' . $sAlbumTitle . ',' . $iAlbumId
+            ),
+            $sMsg
+        );
     }
 
     /**
      * @param string $sFile File path.
+     *
      * @return void
      */
     protected function checkNudityFilter($sFile)
@@ -138,8 +149,28 @@ class PictureFormProcess extends Form
         }
     }
 
-    private function clearCache()
+    /**
+     * Create a nice picture title if no title is specified.
+     *
+     * @param int $i
+     * @param Image $oPicture
+     *
+     * @return string
+     */
+    private function getImageTitle($i, Image $oPicture)
     {
-        (new Framework\Cache\Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
+        if ($this->httpRequest->postExists('title') &&
+            $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2
+        ) {
+            return $this->httpRequest->post('title');
+        }
+
+        return $this->str->upperFirst(
+            str_replace(
+                ['-', '_'],
+                ' ',
+                str_ireplace(PH7_DOT . $oPicture->getExt(), '', escape($_FILES['photos']['name'][$i], true))
+            )
+        );
     }
 }

@@ -3,7 +3,7 @@
  * @title          Height Class
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2013-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2013-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / Framework / Math / Measure
  * @version        1.0
@@ -34,7 +34,7 @@ class Height extends Measure implements Measurable
      *
      * @see self::get()
      *
-     * @param boolean $bPrint Default FALSE
+     * @param bool $bPrint
      *
      * @return void|string
      */

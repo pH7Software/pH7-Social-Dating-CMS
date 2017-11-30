@@ -1,12 +1,13 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Forum / Form / Processing
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Model\DbConfig;
@@ -17,13 +18,13 @@ use PH7\Framework\Url\Header;
 
 class MsgFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
 
         $oForumModel = new ForumModel;
 
+        $sTitle = trim($this->httpRequest->post('title'));
         $sMessage = $this->httpRequest->post('message', Http::ONLY_XSS_CLEAN);
         $sCurrentTime = $this->dateTime->get()->dateTime('Y-m-d H:i:s');
         $iTimeDelay = (int)DbConfig::getSetting('timeDelaySendForumTopic');
@@ -35,10 +36,18 @@ class MsgFormProcess extends Form
         } elseif ($oForumModel->isDuplicateTopic($iProfileId, $sMessage)) {
             \PFBC\Form::setError('form_msg', Form::duplicateContentMsg());
         } else {
-            $oForumModel->addTopic($iProfileId, $iForumId, $this->httpRequest->post('title'), $sMessage, $sCurrentTime);
-            Header::redirect(Uri::get('forum', 'forum', 'post', $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $this->httpRequest->post('title') . ',' . Db::getInstance()->lastInsertId()), t('Your message has been added successfully!'));
+            $oForumModel->addTopic($iProfileId, $iForumId, $sTitle, $sMessage, $sCurrentTime);
+
+            Header::redirect(
+                Uri::get(
+                    'forum',
+                    'forum',
+                    'post',
+                    $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $sTitle . ',' . Db::getInstance()->lastInsertId()
+                ),
+                t('Message posted!')
+            );
         }
         unset($oForumModel);
     }
-
 }

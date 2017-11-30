@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
@@ -10,6 +10,7 @@ namespace PH7;
 
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Parse\SysVar;
+use PH7\Framework\Url\Header;
 
 class UpdateAdsForm
 {
@@ -21,7 +22,8 @@ class UpdateAdsForm
             if (\PFBC\Form::isValid($_POST['submit_update_ads'])) {
                 new UpdateAdsFormProcess;
             }
-            Framework\Url\Header::redirect();
+
+            Header::redirect();
         }
 
         $oPage = new Page;
@@ -53,8 +55,9 @@ class UpdateAdsForm
             // mt_rand() function for generate an ID different if it causes problems in the display.
             $oForm->addElement(new \PFBC\Element\Button(t('Update'), 'submit', array('id' => mt_rand())));
 
-            if (AdsCore::getTable() == 'Ads') // This feature is not available for affiliate banners
+            if (AdsCore::getTable() === AdsCore::AD_TABLE_NAME) {// This feature is not available for affiliate banners
                 $oForm->addElement(new \PFBC\Element\HTMLExternal(t('Views: %0% | Clicks: %1%', $oRow->views, $oRow->clicks) . ' | '));
+            }
 
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<a href="javascript:void(0)" onclick="ads(\'delete\',' . $oRow->adsId . ',\'' . $sCSRFToken . '\')">' . t('Delete') . '</a> | '));
 

@@ -4,7 +4,7 @@
  * @desc           Handler Logger Management.
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7/ Framework / Error
  * @version        1.0
@@ -23,11 +23,11 @@ class Logger extends Core
     const EXCEPT_DIR = 'except/';
     const GZIP_DIR = 'gzip/';
 
-    /**
-     * @var string $sDir
-     * @var string $sFileName
-     */
-    protected $sDir, $sFileName;
+    /** @var string */
+    protected $sDir;
+
+    /** @var string */
+    protected $sFileName;
 
     public function __construct()
     {

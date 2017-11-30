@@ -1,7 +1,98 @@
 /*
  * Author:        Pierre-Henry Soria <ph7software@gmail.com>
- * Copyright:     (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * Copyright:     (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * License:       GNU General Public License <http://www.gnu.org/licenses/gpl.html>
  */
 
-body{margin:0;padding:0;color:#555;font:normal 10pt Arial,Helvetica,sans-serif;background:#EFEFEF}section{margin-bottom:5px}a{color:#08c}.success{color:green}.error,.warning,.mandatory{color:red;font-size:13px}.italic{font-style:italic}.underline{text-decoration:underline}input{margin:6px;width:220px;height:24px;font-size:16px}input[type="submit"],input[type="reset"]{width:190px}iframe{border:1px #475C9E solid;width:100%}ul li{display:block;line-height:1.5rem}#block{margin-top:5px}abbr{border-bottom:1px dotted #666}.center{text-align:center;margin-left:auto;margin-right:auto;width:80%}.right{float:right}.left{float:left}.success,.error,.warning,.mandatory,.bold{font-weight:bold}img,video,iframe{max-width:100%}figure{margin-top:30px;margin-bottom:30px}figcaption{font-style:italic}
+body {
+    margin: 0;
+    padding: 0;
+    color: #555;
+    font: normal 10pt Arial, Helvetica, sans-serif;
+    background: #EFEFEF;
+}
+
+section {
+    margin-bottom: 5px;
+}
+
+a {
+    color: #08c;
+}
+
+.success {
+    color: green;
+}
+
+.error, .warning, .mandatory {
+    color: red;
+    font-size: 13px;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+input {
+    margin: 6px;
+    width: 220px;
+    height: 24px;
+    font-size: 16px;
+}
+
+input[type="submit"], input[type="reset"] {
+    width: 190px;
+}
+
+iframe {
+    border: 1px #475C9E solid;
+    width: 100%;
+}
+
+ul li {
+    display: block;
+    line-height: 1.5rem;
+}
+
+#block {
+    margin-top: 5px;
+}
+
+abbr {
+    border-bottom: 1px dotted #666;
+}
+
+.center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+.success, .error, .warning, .mandatory, .bold {
+    font-weight: bold;
+}
+
+img, video, iframe {
+    max-width: 100%;
+}
+
+figure {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+figcaption {
+    font-style: italic;
+}

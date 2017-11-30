@@ -3,7 +3,7 @@
  * @title            Spanish Language File
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2013-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2013-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Lang / ES
  */
@@ -32,10 +32,6 @@ $LANG = array(
     'later' => 'Más tarde ...',
     'register' => '¡Guárdelo!',
     'site_name' => 'Nombre de tu sitio',
-    'license' => 'Su Licencia',
-    'license_desc' => '¡Por favor, lea cuidadosamente la licencia y acéptelo para continuar la instalación del software!',
-    'registration_for_license' => 'Si no lo has hecho todavía, es un buen momento para comprar ahora <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">una licencia</a> con el fin de obtener la prima características ofrecen por el software.<br /> Si quieres probar la versión de prueba y que contienen enlaces de publicidad, puede omitir este paso.',
-    'your_license' => 'Su clave de licencia',
     'agree_license' => 'He leído y acepto los términos anteriores.',
     'step' => 'Paso',
     'welcome' => 'Bienvenido a la instalación de',
@@ -47,8 +43,6 @@ $LANG = array(
     'go_your_admin_panel' => '¡Ve a tu panel de administración!',
     'error_page_not_found' => 'Página no encontrada',
     'error_page_not_found_desc' => 'Lo sentimos, pero la página que busca no se pudo encontrar.',
-    'success_license' => '¡Bien hecho!',
-    'failure_license' => '¡Formato de licencia incorrecta!',
     'no_protected_exist' => 'Lo sentimos, pero no hemos encontrado el directorio &laquo;protected&raquo;.',
     'no_protected_readable' => 'Cambie los permisos del directorio &laquo;protected&raquo; en el modo de lectura (CHMOD 755).',
     'no_public_writable' => 'Cambie los permisos del directorio &laquo;public&raquo; en el modo de escritura (CHMOD 777).',
@@ -101,24 +95,16 @@ $LANG = array(
         <p>La URL de su propio sitio web es: <a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></p>
         <p>Tu Panel de Administración URL es: <a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></p>
         <p>No se olvide de mostrar al mostrar su nuevo sitio de citas para todos sus amigos, sus colegas y compañeros de su Facebook (e incluso a sus enemigos ... o no).</p>
-        <p>Por último, si no lo has hecho todavía, es un muy buen momento para comprar hoy una clave de licencia, simplemente <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">visitando nuestra página web</a> con el fin de obtener las características premium, quite todos los enlaces y notas de copyright en su sitio web e incluso el acceso a la ilimitada ticket de soporte.</p>
         <p>&nbsp;</p>
         <p>P.D. Para informes de errores, sugerencias, colaboración, participación en el desarrollo y / o traducción de software, etc,
             por favor visite nuestro <a href="' . Controller::SOFTWARE_WEBSITE . '">sitio web</a>.</p>
         <p>---</p>
-        <p>Saludos cordiales,</p>
-        <p>El equipo de desarrolladores pH7CMS.</p>',
+        <p>Saludos cordiales,<br />
+        <a href="' . Controller::AUTHOR_URL . '">Pierre Soria</a></p>',
     'yes_dir' => '¡El directorio se encuentra correctamente!',
     'no_dir' => 'El directorio no existe.',
     'wait_importing_database' => 'Espere al importar la base de datos por favor.<br />
         Esto puede tardar varios minutos.',
-    'service' => 'Servicios adicionales útiles',
-    'buy_copyright_license_title' => 'Comprar una licencia',
-    'buy_copyright_license' => '<span class="gray">Licencia de por vida</span><br /> <span class="bold">Compre ahora</span>',
-    'buy_copyright_license_desc' => 'Al comprar una licencia, usted no tendrá ningún vínculo y avisos de copyright en su sitio web, obtiene todas las características premium y usted también será capaz de actualizar/actualizarlo.',
-    'buy_individual_ticket_support_title' => 'Compre un servicio de apoyo individual',
-    'buy_individual_ticket_support' => '<span class="gray">Tickets de soporte completo durante un mes</span><br /> <span class="bold">Compre ahora</span>',
-    'buy_individual_ticket_support_desc' => 'Al comprar el apoyo individual, le ayudaremos siempre que tenga un problema con nuestro software. Estamos a su disposición para resolver cualquier encuentro problema pH7CMS.',
     'niche' => 'Elige el tipo de sitio que desea tener',
     'social_dating_niche' => 'Nicho de citas sociales',
     'social_niche' => 'Nicho de redes sociales',
@@ -132,7 +118,9 @@ $LANG = array(
     'recommended' => 'Recomendada',
     'recommended_desc' => 'Elegir este lugar si no sabe qué elegir el recreo.',
     'note_able_to_change_niche_settings_later' => 'Por favor, tenga en cuenta que puede cambiar el tema y activar/desactivar los módulos más tarde en su panel de administración.',
-    'looking_hosting' => '¿Buscando un alojamiento web compatible con pH7CMS? ¡Vea <a href="' . Controller::SOFTWARE_HOSTING_LIST_URL . '" target="_blank">nuestra Lista de Alojamiento</a>!',
+    'will_you_make_donation' => '¿Me ayudarás a mantener &amp; mejorar el software?',
+    'donate_here' => 'Haz una donación aquí',
+    'or_paypal_donation' => 'o por PayPal',
     'warning_no_js' => 'Esta página web no es compatible sin tener Javascript activado.<br />
         Por favor, activa JavaScript en las opciones de su navegador web.',
     'admin_url' => 'URL del panel de administración',

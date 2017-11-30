@@ -1,13 +1,14 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  */
 
 namespace PH7;
 
+use PH7\Framework\Core\License;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Url\Header;
@@ -94,7 +95,7 @@ class SettingController extends Controller
         $this->view->page_title = $this->view->h1_title = t('License Key');
 
         if ($this->httpRequest->getExists('set_msg')) {
-            $aData = $this->_getLicStatusMsg();
+            $aData = $this->getLicStatusMsg();
             $this->design->setFlashMsg($aData['msg'], ($aData['is_err'] ? 'error' : 'success'));
         }
 
@@ -104,28 +105,27 @@ class SettingController extends Controller
     /**
      * Get the status and the message for the license key.
      *
-     * @access private
      * @return array ['is_err' => BOOLEAN, 'msg' => STRING];
      */
-    private function _getLicStatusMsg()
+    private function getLicStatusMsg()
     {
         $bIsErr = true; // Set default value
 
         switch (PH7_LICENSE_STATUS) {
-            case 'active':
+            case License::ACTIVE_STATUS:
                 $sMsg = t('Hurrah! Your License Key has been successfully enabled!');
                 $bIsErr = false;
                 break;
 
-            case 'invalid':
+            case License::INVALID_STATUS:
                 $sMsg = t('Oops! Your license key is Invalid.');
                 break;
 
-            case 'expired':
+            case License::EXPIRED_STATUS:
                 $sMsg = t('Oops! Your license key is Expired.');
                 break;
 
-            case 'suspended':
+            case License::SUSPENDED_STATUS:
                 $sMsg = t('We are sorry, but your license key is Suspended.');
                 break;
 

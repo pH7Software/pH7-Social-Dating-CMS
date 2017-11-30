@@ -3,7 +3,7 @@
  * @title          Admin Controller
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Payment / Controller
  * @version        1.0
@@ -66,7 +66,7 @@ class AdminController extends MainController
 
     public function deleteMembership()
     {
-        $this->oPayModel->deleteMembership( $this->httpRequest->post('id') );
+        $this->oPayModel->deleteMembership($this->httpRequest->post('id'));
         /* Clean UserCoreModel Cache */
         (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
 

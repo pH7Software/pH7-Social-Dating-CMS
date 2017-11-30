@@ -4,7 +4,7 @@
  * @desc             Parse the global pH7CMS variables.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Parse
  * @version          1.7
@@ -23,6 +23,7 @@ use PH7\Framework\Session\Session;
 class SysVar
 {
     const REGEX_NOT_PARSING = '/#!.+!#/';
+    const NOT_PARSING_DELIMITERS = ['#!', '!#'];
 
     /** @var string */
     private $sVar;
@@ -57,8 +58,8 @@ class SysVar
         $oRegistry = Registry::getInstance();
         $this->sVar = str_replace('%site_name%', $oRegistry->site_name, $this->sVar);
         $this->sVar = str_replace('%url_relative%', PH7_RELATIVE, $this->sVar);
-        $this->sVar = str_replace(array('%site_url%','%url_root%'), $oRegistry->site_url, $this->sVar);
-        $this->sVar = str_replace('%url_static%', PH7_URL_STATIC , $this->sVar);
+        $this->sVar = str_replace(array('%site_url%', '%url_root%'), $oRegistry->site_url, $this->sVar);
+        $this->sVar = str_replace('%url_static%', PH7_URL_STATIC, $this->sVar);
         unset($oRegistry);
     }
 
@@ -66,7 +67,7 @@ class SysVar
     {
         $oSession = new Session;
         $sAffUsername = ($oSession->exists('affiliate_username')) ? $oSession->get('affiliate_username') : 'aid';
-        $this->sVar = str_replace('%affiliate_url%', Uri::get('affiliate','router','refer', $sAffUsername), $this->sVar);
+        $this->sVar = str_replace('%affiliate_url%', Uri::get('affiliate', 'router', 'refer', $sAffUsername), $this->sVar);
         unset($oSession);
     }
 
@@ -88,7 +89,7 @@ class SysVar
 
     private function removeNotParsingDelimiters()
     {
-        $this->sVar = str_replace(array('#!', '!#'), '', $this->sVar);
+        $this->sVar = str_replace(self::NOT_PARSING_DELIMITERS, '', $this->sVar);
     }
 
     /**

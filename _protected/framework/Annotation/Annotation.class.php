@@ -5,7 +5,7 @@
  *                   To use annotations, you must inherit your class with this Annotation class.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Annotation
  * @version          1.1
@@ -23,9 +23,7 @@ abstract class Annotation
 {
     const CACHE_GROUP = 'str/annotation';
 
-    /**
-     * @var object $oCache
-     */
+    /** @var Cache */
     private $oCache;
 
     /**
@@ -67,13 +65,13 @@ abstract class Annotation
                 $sComment = preg_replace('/\/\*\*(.*)\*\//', '$1', $sComment);
                 $aComment = preg_split('/\n/', $sComment);
 
-                $sKey = $sVal = null;
+                $sKey = $sVal = null; // Set default values
                 $aChema[$sName] = array();
 
                 foreach ($aComment as $sCommentLine) {
                     if (preg_match('/@(.*?): (.*)/i', $sCommentLine, $aMatches)) {
                         $sKey = $aMatches[1];
-                        $sKey = $aMatches[2];
+                        $sVal = $aMatches[2];
 
                         $aChema[$sName][trim($sKey)] = trim($sVal);
                     }

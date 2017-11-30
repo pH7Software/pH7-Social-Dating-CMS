@@ -3,7 +3,7 @@
  * @title          Tool Controller
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  * @version        1.1
@@ -24,6 +24,8 @@ use PH7\Framework\Url\Header;
 
 class ToolController extends Controller
 {
+    const BACKUP_FILE_EXTS = ['.sql', '.gz'];
+
     /** @var  string */
     private $sTitle;
 
@@ -107,7 +109,8 @@ class ToolController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
 
-        $aDumpList = $this->file->getFileList(PH7_PATH_BACKUP_SQL, array('.sql', '.gz'));
+        $aDumpList = $this->file->getFileList(PH7_PATH_BACKUP_SQL, static::BACKUP_FILE_EXTS);
+
         // Removing the path
         $aDumpList = array_map(function ($sValue) {
             return str_replace(PH7_PATH_BACKUP_SQL, '', $sValue);
@@ -122,7 +125,7 @@ class ToolController extends Controller
                 $this->design->setFlashMsg(Form::errorTokenMsg(), 'error');
             } else {
                 // Clean the site name to avoid bug with the backup path
-                $sSiteName = str_replace(array(' ', '/', '\\'), '_', $this->registry->site_name);
+                $sSiteName = str_replace([' ', '/', '\\'], '_', $this->registry->site_name);
                 $sCurrentDate = (new CDateTime)->get()->date();
 
                 switch ($this->httpRequest->post('backup_type')) {
@@ -256,7 +259,7 @@ class ToolController extends Controller
     /**
      * Checks if the request been made ​​by the post method.
      *
-     * @return boolean
+     * @return bool
      */
     private function isPost()
     {

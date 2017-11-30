@@ -4,7 +4,7 @@
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @link           http://ph7cms.com
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / Config
  */
@@ -58,14 +58,14 @@ define('PH7_MAX_URL_LENGTH', 120);
 
 /***** DESIGN *****/
 
-define('PH7_WIDTH_SEARCH_FORM', '156px');
+define('PH7_WIDTH_SEARCH_FORM', '148px');
 
 /***** SECURITY *****/
 
 /*** DDoS Attack ***/
 define('PH7_DDOS_DELAY_SLEEP', 40);
 define('PH7_DDOS_MAX_COOKIE_PAGE_LOAD', 99999999);
-define('PH7_DDOS_MAX_SESSION_PAGE_LOAD', 999);
+define('PH7_DDOS_MAX_SESSION_PAGE_LOAD', 1500);
 
 
 /***** TABLE PREFIX *****/

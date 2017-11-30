@@ -3,13 +3,16 @@
  * @title            Upload File Class
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2013-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2013-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / File
  */
 
 namespace PH7\Framework\File;
+
 defined('PH7') or exit('Restricted access');
+
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 abstract class Upload
 {
@@ -21,7 +24,7 @@ abstract class Upload
     /**
      * Check if everything is correct.
      *
-     * @return boolean
+     * @return bool
      */
     public function check()
     {
@@ -31,7 +34,9 @@ abstract class Upload
     /**
      * Get maximum file size.
      *
-     * @return integer Bytes.
+     * @return int Bytes.
+     *
+     * @throws PH7InvalidArgumentException
      */
     public function getMaxSize()
     {
@@ -45,11 +50,10 @@ abstract class Upload
     /**
      * Check the file size.
      *
-     * @return boolean
+     * @return bool
      */
     protected function checkSize()
     {
-        return ($this->iFileSize < $this->getMaxSize());
+        return $this->iFileSize < $this->getMaxSize();
     }
-
 }

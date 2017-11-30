@@ -4,7 +4,7 @@
  * @desc             Handler Session
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Session
  */
@@ -34,7 +34,7 @@ class Session
          * Otherwise if we are in production mode, we activate this.
          */
         if (!Server::isLocalHost()) {
-            $iTime = (int) Config::getInstance()->values['session']['expiration'];
+            $iTime = (int)Config::getInstance()->values['session']['expiration'];
             session_set_cookie_params($iTime, Config::getInstance()->values['session']['path'], Config::getInstance()->values['session']['domain'], (substr(PH7_URL_PROT, 0, 5) === 'https'), true);
         }
 
@@ -151,8 +151,9 @@ class Session
      */
     protected function initializePHPSession()
     {
-        if (session_status() !== PHP_SESSION_ACTIVE)
+        if (session_status() !== PHP_SESSION_ACTIVE) {
             @session_start();
+        }
     }
 
     protected function close()

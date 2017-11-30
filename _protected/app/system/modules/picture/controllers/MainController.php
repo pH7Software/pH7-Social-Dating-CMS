@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Picture / Controller
  */
@@ -9,7 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Analytics\Statistic;
-use PH7\Framework\Cache\Cache;
+use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\Ban\Ban;
@@ -20,11 +20,22 @@ class MainController extends Controller
     const ALBUMS_PER_PAGE = 16;
     const PHOTOS_PER_PAGE = 10;
 
+    /** @var PictureModel */
     private $oPictureModel;
+
+    /** @var Page */
     private $oPage;
+
+    /** @var string */
     private $sUsername;
+
+    /** @var bool|int */
     private $iProfileId;
+
+    /** @var string */
     private $sTitle;
+
+    /** @var int */
     private $iTotalPictures;
 
     public function __construct()
@@ -185,10 +196,15 @@ class MainController extends Controller
             $this->httpRequest->post('picture_link')
         );
 
-        $this->clearCache();
+        Picture::clearCache();
 
         Header::redirect(
-            Uri::get('picture', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')),
+            Uri::get(
+                'picture',
+                'main',
+                'album',
+                $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')
+            ),
             t('Your photo has been removed.')
         );
     }
@@ -200,9 +216,16 @@ class MainController extends Controller
         $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'picture/img/' . $this->session->get('member_username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
         $this->file->deleteDir($sDir);
 
-        $this->clearCache();
+        Picture::clearCache();
 
-        Header::redirect(Uri::get('picture', 'main', 'albums'), t('Your album has been removed.'));
+        Header::redirect(
+            Uri::get(
+            'picture',
+            'main',
+            'albums'
+            ),
+            t('Your album has been removed.')
+        );
     }
 
     public function search()
@@ -254,14 +277,14 @@ class MainController extends Controller
     /**
      * Set a Not Found Error Message with HTTP 404 Code Status.
      *
-     * @access private
-     * @param boolean $b404Status For the Ajax blocks profile, we can not put HTTP error code 404, so the attribute must be set to "false". Default TRUE
+     * @param bool $b404Status For the Ajax blocks profile, we can not put HTTP error code 404, so the attribute must be set to "false". Default TRUE
+     *
      * @return void
      */
     private function notFound($b404Status = true)
     {
         if ($b404Status === true) {
-            Framework\Http\Http::setHeadersByCode(404);
+            Http::setHeadersByCode(404);
         }
 
         $sErrMsg = '';
@@ -271,13 +294,5 @@ class MainController extends Controller
 
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
         $this->view->error = $this->sTitle . $sErrMsg;
-    }
-
-    /**
-     * @return void
-     */
-    private function clearCache()
-    {
-        (new Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
     }
 }

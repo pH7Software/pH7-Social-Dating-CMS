@@ -1,10 +1,11 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Video / Config
  */
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -19,14 +20,15 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if(!UserCore::auth() && ($this->registry->action === 'addalbum' || $this->registry->action === 'addvideo'
-        || $this->registry->action === 'editalbum' || $this->registry->action === 'editvideo'
-        || $this->registry->action === 'deletevideo' || $this->registry->action === 'deletealbum'))
-        {
+        if (!UserCore::auth() && ($this->registry->action === 'addalbum' ||
+                $this->registry->action === 'addvideo' ||
+                $this->registry->action === 'editalbum' || $this->registry->action === 'editvideo' ||
+                $this->registry->action === 'deletevideo' || $this->registry->action === 'deletealbum')
+        ) {
             $this->signInRedirect();
         }
 
-         // If the admin is not logged (but can be if the admin use "login as user" feature)
+        // If the admin is not logged (but can be if the admin use "login as user" feature)
         if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
             if (!$this->checkMembership() || !$this->group->view_videos) {
                 $this->paymentRedirect();
@@ -37,7 +39,7 @@ class Permission extends PermissionCore
             if ($this->registry->controller === 'AdminController') {
                 // For security reasons, we don't redirect the user to the admin panel URL
                 Header::redirect(
-                    Uri::get('user','main','login'),
+                    Uri::get('user', 'main', 'login'),
                     $this->adminSignInMsg(),
                     Design::ERROR_TYPE
                 );

@@ -4,7 +4,7 @@
  * @desc             Useful methods for the management of the Models.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Model / Engine / Util
  */
@@ -37,10 +37,12 @@ class Various
      */
     public static function execQueryFile($sSqlFile)
     {
-        if (!is_file($sSqlFile)) return false;
+        if (!is_file($sSqlFile)) {
+            return false;
+        }
 
         $sSqlContent = file_get_contents($sSqlFile);
-        $sSqlContent = str_replace(PH7_TABLE_PREFIX, Db::prefix(), $sSqlContent);
+        $sSqlContent = static::renameTablePrefix($sSqlContent);
         $rStmt = Db::getInstance()->exec($sSqlContent);
         unset($sSqlContent);
 
@@ -76,7 +78,7 @@ class Various
                 break;
 
             default:
-               static::launchErr($Mod);
+                static::launchErr($Mod);
         }
 
         return $sTable;
@@ -254,5 +256,15 @@ class Various
     {
         throw new PH7InvalidArgumentException('Bad data table: "' . $sTable . '"!');
         exit(1);
+    }
+
+    /**
+     * @param string $sSqlContent
+     *
+     * @return string
+     */
+    public static function renameTablePrefix($sSqlContent)
+    {
+        return str_replace(PH7_TABLE_PREFIX, Db::prefix(), $sSqlContent);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
@@ -9,14 +9,14 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Model;
 
-class ForumCoreModel extends Framework\Mvc\Model\Engine\Model
+class ForumCoreModel extends Model
 {
-    const
-    CACHE_GROUP = 'db/sys/mod/forum',
-    CREATED = 'createdDate DESC',
-    UPDATED = 'updatedDate DESC',
-    NAME = 'name ASC';
+    const CACHE_GROUP = 'db/sys/mod/forum';
+    const CREATED = 'createdDate DESC';
+    const UPDATED = 'updatedDate DESC';
+    const NAME = 'name ASC';
 
     /**
      * @param integer|null $iForumId
@@ -100,8 +100,8 @@ class ForumCoreModel extends Framework\Mvc\Model\Engine\Model
 
         if (!empty($iProfileId)) {
             return $rStmt->fetch(\PDO::FETCH_OBJ);
-        } else {
-            return $rStmt->fetchAll(\PDO::FETCH_OBJ);
         }
+
+        return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 }

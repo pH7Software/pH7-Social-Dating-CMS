@@ -4,7 +4,7 @@
  * @desc             Useful URL methods.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Url
  */
@@ -65,7 +65,7 @@ class Url
      * @param array $aParams
      * @param string $sNumericPrefix Default NULL
      * @param string $sArgSeparator Default '&amp;
-     * @param integer $iEncType Default PHP_QUERY_RFC1738
+     * @param int $iEncType Default PHP_QUERY_RFC1738
      *
      * @return string Returns a URL-encoded string.
      */

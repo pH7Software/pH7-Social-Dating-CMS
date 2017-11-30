@@ -4,7 +4,7 @@
  * @desc             Mail Class derived from Swift Class
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mail
  * @version          1.2 (Last update 10/13/2015)
@@ -23,18 +23,18 @@ class Mail
      *
      * @param array $aInfo
      * @param string $sContents
-     * @param boolean $bHtmlFormat
+     * @param bool $bHtmlFormat
      *
-     * @return integer Number of recipients who were accepted for delivery.
+     * @return int Number of recipients who were accepted for delivery.
      */
     public function send(array $aInfo, $sContents, $bHtmlFormat = true)
     {
         // Default values
-        $sFromMail = (empty($aInfo['from'])) ? DbConfig::getSetting('returnEmail') : $aInfo['from']; // Email noreply (generally noreply@yoursite.com)
-        $sFromName = (empty($aInfo['form_name'])) ? DbConfig::getSetting('emailName') : $aInfo['form_name'];
+        $sFromMail = empty($aInfo['from']) ? DbConfig::getSetting('returnEmail') : $aInfo['from']; // Email noreply (generally noreply@yoursite.com)
+        $sFromName = empty($aInfo['form_name']) ? DbConfig::getSetting('emailName') : $aInfo['form_name'];
 
-        $sToMail = (empty($aInfo['to'])) ? DbConfig::getSetting('adminEmail') : $aInfo['to'];
-        $sToName = (empty($aInfo['to_name'])) ? $sToMail : $aInfo['to_name'];
+        $sToMail = empty($aInfo['to']) ? DbConfig::getSetting('adminEmail') : $aInfo['to'];
+        $sToName = empty($aInfo['to_name']) ? $sToMail : $aInfo['to_name'];
 
         $sSubject = $aInfo['subject'];
 
@@ -68,7 +68,7 @@ class Mail
      *
      * @param array $aParams The parameters information to send email.
      *
-     * @return boolean Returns TRUE if the mail was successfully accepted for delivery, FALSE otherwise.
+     * @return bool Returns TRUE if the mail was successfully accepted for delivery, FALSE otherwise.
      */
     protected function phpMail(array $aParams)
     {

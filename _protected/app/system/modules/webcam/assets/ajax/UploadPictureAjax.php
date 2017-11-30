@@ -3,15 +3,18 @@
  * @title            Update Picture Ajax Class
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / App / System / Module / Webcam / Asset / Ajax
  * @version          1.6
  */
+
 /*
  * This code was inspired by Martin Angelov's tutorial: http://tutorialzine.com/2011/04/jquery-webcam-photobooth/
  */
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Error\CException\UserException;
@@ -61,8 +64,7 @@ class UploadPictureAjax
 
 
         $rResult = file_put_contents($this->sTmpPathFile, $rInput);
-        if (!$rResult)
-        {
+        if (!$rResult) {
             echo '{
         "error"     : 1,
         "message"   : "Failed save the image. Make sure you chmod the uploads folder and its subfolders to 777."
@@ -77,8 +79,7 @@ class UploadPictureAjax
     {
         $aInfo = getimagesize($this->sTmpPathFile);
 
-        if ($aInfo['mime'] != 'image/jpeg')
-        {
+        if ($aInfo['mime'] != 'image/jpeg') {
             unlink($this->sTmpPathFile);
             throw new UserException('Image type invalid!');
         }

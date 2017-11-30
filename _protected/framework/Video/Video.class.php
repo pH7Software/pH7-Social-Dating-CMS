@@ -4,7 +4,7 @@
  * @desc             Class is used to create/manipulate videos using FFmpeg.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Video
  * @link             http://ph7cms.com
@@ -23,6 +23,8 @@ use PH7\Framework\File\Upload;
 
 class Video extends Upload
 {
+    const MP4_TYPE = 'mp4';
+
     /** @var File */
     private $oFile;
 
@@ -70,7 +72,7 @@ class Video extends Upload
 
         /** Attributes from "Upload" abstract class **/
         $this->sMaxSize = Config::getInstance()->values['video']['upload.max_size'];
-        $this->iFileSize = (int) $this->aFile['size'];
+        $this->iFileSize = (int)$this->aFile['size'];
     }
 
     /**
@@ -87,7 +89,7 @@ class Video extends Upload
                 throw new TooLargeException('The file could not be uploaded. Possibly too large.');
             }
         } else {
-            return in_array($this->sType, self::$aAllowedTypes);
+            return in_array($this->sType, self::$aAllowedTypes, true);
         }
     }
 
@@ -112,7 +114,7 @@ class Video extends Upload
     /**
      * Convert video file and the extension video type.
      *
-     * @param string $sFile
+     * @param string $sFile New renamed file name.
      *
      * @return string The new name that you entered in the parameter of this method.
      */
@@ -121,8 +123,9 @@ class Video extends Upload
         $sParams = ''; // By default, we don't use parameter
 
         $sType = $this->oFile->getFileExt($sFile); // Get the new format
-        if ($sType == 'mp4')
+        if ($sType === self::MP4_TYPE) {
             $sParams = '-c copy -copyts';
+        }
 
         exec("$this->sFfmpegPath -i {$this->aFile['tmp_name']} $sParams $sFile");
 
@@ -133,28 +136,30 @@ class Video extends Upload
      * Generate a thumbnail with FFmpeg.
      *
      * @param string $sPicturePath
-     * @param integer $iSeconds
-     * @param integer $iWidth
-     * @param integer $iHeight
+     * @param int $iSeconds
+     * @param int $iWidth
+     * @param int $iHeight
      *
      * @return string The thumbnail file that you entered in the parameter of this method.
      */
     public function thumbnail($sPicturePath, $iSeconds, $iWidth, $iHeight)
     {
         exec($this->sFfmpegPath . ' -itsoffset -' . $iSeconds . ' -i ' . $this->aFile['tmp_name'] . '  -vcodec mjpeg -vframes 1 -an -f rawvideo -s ' . $iWidth . 'x' . $iHeight . ' ' . $sPicturePath);
+
         return $sPicturePath;
     }
 
     /**
      * Gets video duration.
      *
-     * @return integer Seconds.
+     * @return int Seconds.
      */
     public function getDuration()
     {
-         $sTime = exec($this->sFfmpegPath . ' -i ' . $this->aFile['tmp_name'] . ' 2>&1 | grep "Duration" | cut -d \' \' -f 4 | sed s/,//');
-         return Various::timeToSec($sTime);
-     }
+        $sTime = exec($this->sFfmpegPath . ' -i ' . $this->aFile['tmp_name'] . ' 2>&1 | grep "Duration" | cut -d \' \' -f 4 | sed s/,//');
+
+        return Various::timeToSec($sTime);
+    }
 
     /**
      * Get Type Video File.
@@ -167,18 +172,11 @@ class Video extends Upload
     }
 
     /**
-     * Destruction of attributes and temporary file.
+     * Remove temporary file.
      */
     public function __destruct()
     {
-        // If it exists, delete the temporary video
+        // If it exists, delete the temporary video file
         $this->oFile->deleteFile($this->aFile['tmp_name']);
-
-        unset(
-            $this->oFile,
-            $this->sType,
-            $this->sFfmpegPath,
-            $this->aFile
-        );
     }
 }

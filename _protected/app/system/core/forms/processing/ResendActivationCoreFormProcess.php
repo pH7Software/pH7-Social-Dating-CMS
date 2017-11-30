@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Form / Processing
  */
@@ -29,10 +29,11 @@ class ResendActivationCoreFormProcess extends Form
             } else {
                 $iRet = $this->sendMail($mHash, $sTable);
 
-                if ($iRet)
+                if ($iRet) {
                     \PFBC\Form::setSuccess('form_resend_activation', t('Your activation link has been emailed to you.'));
-                else
+                } else {
                     \PFBC\Form::setError('form_resend_activation', Form::errorSendingEmail());
+                }
             }
         }
     }
@@ -40,13 +41,13 @@ class ResendActivationCoreFormProcess extends Form
     /**
      * Send the confirmation email.
      *
-     * @param object $oHash User data from the DB.
+     * @param \stdClass $oHash User data from the DB.
      * @param string $sTable Table name.
-     * @return integer Number of recipients who were accepted for delivery.
+     * @return int Number of recipients who were accepted for delivery.
      */
     protected function sendMail($oHash, $sTable)
     {
-        $sMod = ($sTable == 'Affiliates') ? 'affiliate' : 'user';
+        $sMod = ($sTable === 'Affiliates') ? 'affiliate' : 'user';
         $sActivateLink = Uri::get($sMod, 'account', 'activate') . PH7_SH . $oHash->email . PH7_SH . $oHash->hashValidation;
 
         $this->view->content = t('Welcome to %site_name%, %0%!', $oHash->firstName) . '<br />' .

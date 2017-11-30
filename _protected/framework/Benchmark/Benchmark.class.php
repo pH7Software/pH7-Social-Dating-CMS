@@ -6,7 +6,7 @@
  *
  * Copyright (c) 2012 Jeremy Perret
  *
- * File Modified by Pierre-Henry Soria, Copyright (c) 2014-2017
+ * File Modified by Pierre-Henry Soria, Copyright (c) 2014-2018
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -33,13 +33,15 @@ defined('PH7') or exit('Restricted access');
 
 class Benchmark
 {
+    const SIZE_MODE = 1024;
+
     /** @var float */
     protected $fStartTime;
 
     /** @var float */
     protected $fEndTime;
 
-    /** @var integer */
+    /** @var int */
     protected $iMemoryUsage;
 
     /**
@@ -66,7 +68,7 @@ class Benchmark
     /**
      * Returns the elapsed time, readable or not
      *
-     * @param  boolean $raw Whether the result must be human readable
+     * @param  bool $raw Whether the result must be human readable
      * @param  string $format The format to display (printf format)
      *
      * @return string|float
@@ -109,7 +111,7 @@ class Benchmark
     /**
      * Returns the memory usage at the end checkpoint
      *
-     * @param  boolean $raw Whether the result must be human readable
+     * @param  bool $raw Whether the result must be human readable
      * @param  string $format The format to display (printf format)
      *
      * @return string|float
@@ -130,16 +132,14 @@ class Benchmark
      */
     public static function readableSize($size, $format = null, $round = 3)
     {
-        $mod = 1024;
-
         if ($format === null) {
             $format = '%.2f%s';
         }
 
         $units = explode(' ', 'B Kb Mb Gb Tb');
 
-        for ($i = 0; $size > $mod; $i++) {
-            $size /= $mod;
+        for ($i = 0; $size > self::SIZE_MODE; $i++) {
+            $size /= self::SIZE_MODE;
         }
 
         if (0 === $i) {
@@ -152,7 +152,7 @@ class Benchmark
     /**
      * Returns the memory peak, readable or not
      *
-     * @param  boolean $raw Whether the result must be human readable
+     * @param  bool $raw Whether the result must be human readable
      * @param  string $format The format to display (printf format)
      *
      * @return string|float

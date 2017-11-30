@@ -9,4 +9,6 @@
     <p>{lang}After you click the "Send Activation" button, the account activation email will be sent to you, using this email address.<br /> You should receive the email after a few minutes.{/lang}</p>
 </div>
 
-<div class="right col-md-4 ad_336_280">{{ $designModel->ad(336,280) }}</div>
+<div class="right col-md-4 ad_336_280">
+    {{ $designModel->ad(336,280) }}
+</div>

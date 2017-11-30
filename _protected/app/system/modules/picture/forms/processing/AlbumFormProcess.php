@@ -1,11 +1,13 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Picture / Form / Processing
  */
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Image\Image;
@@ -28,17 +30,16 @@ class AlbumFormProcess extends Form
          * This can cause minor errors (eg if a user sent a file that is not a photo).
          * So we hide the errors if we are not in development mode.
          */
-        if (!isDebug()) error_reporting(0);
+        if (!isDebug()) {
+            error_reporting(0);
+        }
 
         // Resizing and saving the thumbnail
         $oPicture = new Image($_FILES['album']['tmp_name']);
 
-        if (!$oPicture->validate())
-        {
+        if (!$oPicture->validate()) {
             \PFBC\Form::setError('form_picture_album', Form::wrongImgFileTypeMsg());
-        }
-        else
-        {
+        } else {
             $this->iApproved = (DbConfig::getSetting('pictureManualApproval') == 0) ? '1' : '0';
 
             $this->checkNudityFilter();
@@ -47,13 +48,13 @@ class AlbumFormProcess extends Form
 
             (new PictureModel)->addAlbum(
                 $this->session->get('member_id'),
-                $this->httpRequest->post('name'),
+                MediaCore::cleanTitle($this->httpRequest->post('name')),
                 $this->httpRequest->post('description'),
                 $sFileName,
                 $this->dateTime->get()->dateTime('Y-m-d H:i:s'),
                 $this->iApproved
             );
-            $iLastAlbumId = (int) Db::getInstance()->lastInsertId();
+            $iLastAlbumId = (int)Db::getInstance()->lastInsertId();
 
             $oPicture->square(200);
 
@@ -68,9 +69,15 @@ class AlbumFormProcess extends Form
 
             $oPicture->save($sPath . $sFileName);
 
-            $this->clearCache();
+            Picture::clearCache();
 
-            Header::redirect(Uri::get('picture', 'main', 'addphoto', $iLastAlbumId));
+            Header::redirect(
+                Uri::get('picture',
+                    'main',
+                    'addphoto',
+                    $iLastAlbumId
+                )
+            );
         }
     }
 
@@ -83,10 +90,5 @@ class AlbumFormProcess extends Form
             // The photo doesn't seem suitable for everyone. Overwrite "$iApproved" and set for moderation
             $this->iApproved = '0';
         }
-    }
-
-    private function clearCache()
-    {
-        (new Framework\Cache\Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
     }
 }

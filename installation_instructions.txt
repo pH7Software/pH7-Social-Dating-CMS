@@ -12,8 +12,3 @@ http://ph7cms.com/hosting/
 --- Useful doc ---
 Documentation: http://ph7cms.com/doc/
 Knowledge center: http://clients.hizup.com/knowledgebase.php
-
---- If you hold pH7CMSPro (http://ph7cms.com/pro) ---
-Your member area is: http://clients.hizup.com/clientarea.php
-Where to download pH7CMSPro: https://clients.hizup.com/knowledgebase/2/Where-can-I-find-the-softwareorlicense-key.html
-How to setup your license key: https://clients.hizup.com/knowledgebase/3/Where-I-have-to-enter-my-license-key.html

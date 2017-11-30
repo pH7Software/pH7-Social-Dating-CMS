@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
@@ -12,17 +12,18 @@ use PH7\Framework\File\File;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class MetaMainForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_meta'])) {
-            if (\PFBC\Form::isValid($_POST['submit_meta']))
+            if (\PFBC\Form::isValid($_POST['submit_meta'])) {
                 new MetaMainFormProcess;
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $sWhereLang = (new Http)->get('meta_lang');
@@ -67,7 +68,7 @@ class MetaMainForm
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Author (meta tag):'), 'meta_author', array('value' => $oMeta->metaAuthor, 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Copyright (meta tag):'), 'meta_copyright', array('value' => $oMeta->metaCopyright, 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Copyright (meta tag):'), 'meta_copyright', array('value' => $oMeta->metaCopyright, 'validation' => new \PFBC\Validation\Str(2, 55), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Rating (meta tag):'), 'meta_rating', array('value' => $oMeta->metaRating, 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
 
@@ -79,5 +80,4 @@ class MetaMainForm
 
         $oForm->render();
     }
-
 }

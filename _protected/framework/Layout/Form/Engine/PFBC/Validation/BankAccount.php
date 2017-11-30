@@ -17,7 +17,7 @@ class BankAccount extends \PFBC\Validation
     /**
      * Constructor of class.
      *
-     * @param $sTable Default 'Affiliates'
+     * @param string $sTable
      */
     public function __construct($sTable = 'Affiliates')
     {
@@ -27,7 +27,8 @@ class BankAccount extends \PFBC\Validation
 
     /**
      * @param string $sValue
-     * @return boolean
+     *
+     * @return bool
      */
     public function isValid($sValue)
     {
@@ -36,15 +37,15 @@ class BankAccount extends \PFBC\Validation
                 if (!(new ExistsCoreModel)->bankAccount($sValue, $this->sTable)) {
                     return true;
                 } else {
-                    $this->message = t('Error: Another account with the same bank account already exists. Please choose another.');
+                    $this->message = t('Error: Another account with the same bank account already exists. Please choose another one.');
                 }
             } else {
-                $this->message = t('Sorry, This bank account is not supported by our payment system.');
+                $this->message = t('Error: This bank account is not supported by our payment system.');
             }
         } else {
-            $this->message = t('Error: Your bank account is incorrect!');
+            $this->message = t('Error: Your bank account is incorrect.');
         }
+
         return false;
     }
-
 }

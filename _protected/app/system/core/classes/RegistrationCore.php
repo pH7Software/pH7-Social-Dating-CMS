@@ -1,13 +1,14 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
 
 namespace PH7;
 
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
@@ -15,19 +16,22 @@ use PH7\Framework\Mvc\Router\Uri;
 /**
  * @abstract
  */
-abstract class RegistrationCore extends Core
+abstract class RegistrationCore
 {
     const REFERENCE_VAR_NAME = 'join_ref';
 
     /**
-     * @var integer $iActiveType
      * @internal Set protected visibility because this attribute is used in child classes.
      */
+    /** @var int */
     protected $iActiveType;
 
-    public function __construct()
+    /** @var PH7Tpl */
+    protected $oView;
+
+    public function __construct(PH7Tpl $oView)
     {
-        parent::__construct();
+        $this->oView = $oView;
 
         $this->iActiveType = DbConfig::getSetting('userActivationType');
     }
@@ -48,18 +52,19 @@ abstract class RegistrationCore extends Core
             $sPwdMsg = t('Password: ****** (hidden to protect against theft of your account. If you have forgotten your password, please request a new one <a href="%0%">here</a>).', Uri::get('lost-password', 'main', 'forgot', 'user'));
         }
 
-        $this->view->content = t('Welcome to %site_name%, %0%!', $aInfo['first_name']) . '<br />' .
+        $this->oView->content = t('Welcome to %site_name%, %0%!', $aInfo['first_name']) . '<br />' .
             t('Hi %0%! We are proud to welcome you as a member of %site_name%!', $aInfo['first_name']) . '<br />' .
             $this->getEmailMsg() . '<br />' .
             '<br /><span style="text-decoration:underline">' . t('Please save the following information for future refenrence:') . '</span><br /><em>' .
             t('Email: %0%.', $aInfo['email']) . '<br />' .
             t('Username: %0%.', $aInfo['username']) . '<br />' .
             $sPwdMsg . '</em>';
-        $this->view->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $aInfo['email']) . '<br />' .
+
+        $this->oView->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $aInfo['email']) . '<br />' .
             t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
         $sTplName = (defined('PH7_TPL_MAIL_NAME')) ? PH7_TPL_MAIL_NAME : PH7_DEFAULT_THEME;
-        $sMsgHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . $sTplName . '/tpl/mail/sys/mod/user/account_registration.tpl', $aInfo['email']);
+        $sMsgHtml = $this->oView->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . $sTplName . '/tpl/mail/sys/mod/user/account_registration.tpl', $aInfo['email']);
 
         $aMailInfo = [
             'to' => $aInfo['email'],

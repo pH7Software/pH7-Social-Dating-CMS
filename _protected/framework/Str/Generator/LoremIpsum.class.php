@@ -3,7 +3,7 @@
  * @title            Lorem Ipsum Class
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2013-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2013-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Str / Generator
  * @version          1.1
@@ -32,21 +32,20 @@ class LoremIpsum
      */
     public function __construct($iTotalWords, $iFormat)
     {
-        $this->_iTotalWords = (int) $iTotalWords;
+        $this->_iTotalWords = (int)$iTotalWords;
 
-        switch($iFormat)
-        {
+        switch ($iFormat) {
             case static::PLAIN_FORMAT:
                 $this->_sContents = $this->getPlain();
-            break;
+                break;
 
             case static::TEXT_FORMAT:
                 $this->_sContents = $this->getText();
-            break;
+                break;
 
             case static::HTML_FORMAT:
                 $this->_sContents = $this->getHtml();
-            break;
+                break;
 
             default:
                 throw new \PH7\Framework\Str\Exception('Output Format for "Lorem Ipsum" is invalid!');
@@ -87,12 +86,11 @@ class LoremIpsum
         $sDictPath = __DIR__ . '/loremipsum.txt';
         $aDoctWords = file($sDictPath);
 
-        for ($i = 0; $i < $this->_iTotalWords; $i++)
-        {
+        for ($i = 0; $i < $this->_iTotalWords; $i++) {
             $iIndex = array_rand($aDoctWords);
             $sWord = str_replace(array("\n", "\r"), '', $aDoctWords[$iIndex]);
 
-            if ($i > 0 && $aWords[$i-1] == $sWord)
+            if ($i > 0 && $aWords[$i - 1] == $sWord)
                 $i--;
             else
                 $aWords[$i] = $sWord;
@@ -106,10 +104,9 @@ class LoremIpsum
         $sOutputText = '';
         $aWords = $this->_getWords();
 
-        for ($i = 0, $iN = count($aWords); $i < $iN; $i++)
-        {
-            $sDelimiter =  ($i%12==4 ? ', ' : ($i%12==8 ? '. ' : ($i%12==1 ? "\n" : ' ')));
-            $sOutputText .= ($i%12==9 ? ucfirst($aWords[$i]) : $aWords[$i]) . $sDelimiter;
+        for ($i = 0, $iN = count($aWords); $i < $iN; $i++) {
+            $sDelimiter = ($i % 12 == 4 ? ', ' : ($i % 12 == 8 ? '. ' : ($i % 12 == 1 ? "\n" : ' ')));
+            $sOutputText .= ($i % 12 == 9 ? ucfirst($aWords[$i]) : $aWords[$i]) . $sDelimiter;
         }
 
         return $sOutputText;

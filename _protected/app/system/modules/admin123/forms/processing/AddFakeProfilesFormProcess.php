@@ -4,7 +4,7 @@
  * @desc           Generate Fake Profiles from Web API.
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2014-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2014-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
@@ -39,24 +39,10 @@ class AddFakeProfilesFormProcess extends Form
         foreach ($this->getApiClient()['results'] as $aUser) {
             $sEmail = trim($aUser['email']);
             $sUsername = trim($aUser['login']['username']);
+
             if ($oValidate->email($sEmail) && !$oExistsModel->email($sEmail) && $oValidate->username($sUsername)) {
-                $aData['username'] = $sUsername;
-                $aData['email'] = $sEmail;
-                $aData['first_name'] = $aUser['name']['first'];
-                $aData['last_name'] = $aUser['name']['last'];
-                $aData['password'] = $aUser['login']['password'];
-                $aData['sex'] = $aUser['gender'];
-                $aData['match_sex'] = array($oUser->getMatchSex($aData['sex']));
-                $aData['country'] = Country::fixCode($aUser['nat']);
-                $aData['city'] = $aUser['location']['city'];
-                $aData['state'] = $aUser['location']['state'];
-                $aData['zip_code'] = $aUser['location']['postcode'];
-                $aData['birth_date'] = $this->dateTime->get($aUser['dob'])->date('Y-m-d');
-                $aData['avatar'] = $aUser['picture']['large'];
-                $aData['ip'] = Ip::get();
-
+                $aData = $this->storeUserDataIntoArray($sUsername, $sEmail, $aUser, $oUser);
                 $aData['profile_id'] = $oUserModel->add(escape($aData, true));
-
                 $this->addAvatar($aData, $oUser);
             }
         }
@@ -74,9 +60,10 @@ class AddFakeProfilesFormProcess extends Form
     protected function getApiClient()
     {
         $sApiUrl = static::API_URL;
-        $sApiParms = '?' . Url::httpBuildQuery($this->getApiParameters(), null, '&');
+        $sApiParams = '?' . Url::httpBuildQuery($this->getApiParameters(), null, '&');
         $sApiVer = static::API_VER;
-        $rUserData = $this->getApiResults($sApiUrl, $sApiParms, $sApiVer);
+        $rUserData = $this->getApiResults($sApiUrl, $sApiParams, $sApiVer);
+
         return json_decode($rUserData, true);
     }
 
@@ -94,25 +81,25 @@ class AddFakeProfilesFormProcess extends Form
      * Get Data from the third-party API.
      *
      * @param string $sApiUrl API URL.
-     * @param string $sApiParms Parameters to send to the API.
+     * @param string $sApiParams Parameters to send to the API.
      * @param string $sApiVersion Version of the API it will use. If fails from the API server, it will ignore it.
      *
      * @return void
      */
-    private function getApiResults($sApiUrl, $sApiParms, $sApiVersion)
+    private function getApiResults($sApiUrl, $sApiParams, $sApiVersion)
     {
-        if ($rData = $this->file->getFile($sApiUrl . PH7_SH . $sApiVersion . PH7_SH . $sApiParms)) {
+        if ($rData = $this->file->getFile($sApiUrl . PH7_SH . $sApiVersion . PH7_SH . $sApiParams)) {
             return $rData;
-        } else {
-            return $this->file->getFile($sApiUrl . PH7_SH . $sApiParms);
         }
+
+        return $this->file->getFile($sApiUrl . PH7_SH . $sApiParams);
     }
 
     /**
      * Add User's Avatar.
      *
      * @param array $aData
-     * @param object \PH7\UserCore $oUser
+     * @param object UserCore $oUser
      *
      * @return void
      */
@@ -124,7 +111,8 @@ class AddFakeProfilesFormProcess extends Form
         }
 
         // Create a temporary file before creating the avatar images
-        $sTmpFile = PH7_PATH_TMP . PH7_DS . uniqid() . sha1($aData['avatar']) . '.tmp';
+        $sUniqIdPrefix = (string)mt_rand();
+        $sTmpFile = PH7_PATH_TMP . PH7_DS . uniqid($sUniqIdPrefix, true) . sha1($aData['avatar']) . '.tmp';
         $this->file->putFile($sTmpFile, $rFile);
 
         // Create different avatar sizes, save them and set the avatar into the DB
@@ -132,5 +120,34 @@ class AddFakeProfilesFormProcess extends Form
 
         // Remove the temporary file since we don't need it anymore
         $this->file->deleteFile($sTmpFile);
+    }
+
+    /**
+     * @param string $sUsername
+     * @param string $sEmail
+     * @param array $aUser
+     * @param UserCore $oUser
+     *
+     * @return array
+     */
+    private function storeUserDataIntoArray($sUsername, $sEmail, array $aUser, UserCore $oUser)
+    {
+        $aData = [];
+        $aData['username'] = $sUsername;
+        $aData['email'] = $sEmail;
+        $aData['first_name'] = $aUser['name']['first'];
+        $aData['last_name'] = $aUser['name']['last'];
+        $aData['password'] = $aUser['login']['password'];
+        $aData['sex'] = $aUser['gender'];
+        $aData['match_sex'] = array($oUser->getMatchSex($aData['sex']));
+        $aData['country'] = Country::fixCode($aUser['nat']);
+        $aData['city'] = $aUser['location']['city'];
+        $aData['state'] = $aUser['location']['state'];
+        $aData['zip_code'] = $aUser['location']['postcode'];
+        $aData['birth_date'] = $this->dateTime->get($aUser['dob'])->date('Y-m-d');
+        $aData['avatar'] = $aUser['picture']['large'];
+        $aData['ip'] = Ip::get();
+
+        return $aData;
     }
 }

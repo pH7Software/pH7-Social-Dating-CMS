@@ -1,11 +1,13 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Payment / Form / Processing
  */
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Cache\Cache;
@@ -14,8 +16,8 @@ use PH7\Framework\Url\Header;
 
 class EditMembershipFormProcess extends Form
 {
-
-    private $aFields = [
+    /** @var array */
+    private static $aFields = [
         'name' => 'name',
         'description' => 'description',
         'price' => 'price',
@@ -38,21 +40,25 @@ class EditMembershipFormProcess extends Form
         /* Clean UserCoreModel Cache */
         (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
 
-        Header::redirect(Uri::get('payment','admin','membershiplist'), t('The Membership has been saved successfully!'));
+        Header::redirect(
+            Uri::get('payment', 'admin', 'membershiplist'),
+            t('The Membership has been saved successfully!')
+        );
     }
 
     /**
      * Update fields into the DB (the modified ones only).
      *
      * @param PaymentModel $oPayModel
-     * @param integer $iGroupId
+     * @param int $iGroupId
+     *
      * @return void
      */
     private function updateTextFields(PaymentModel $oPayModel, $iGroupId)
     {
         $oMembership = $oPayModel->getMemberships($iGroupId);
 
-        foreach ($this->aFields as $sKey => $sVal) {
+        foreach (self::$aFields as $sKey => $sVal) {
             if (!$this->str->equals($this->httpRequest->post($sKey), $oMembership->$sVal)) {
                 $oPayModel->updateMembershipGroup($sVal, $this->httpRequest->post($sKey), $oMembership->groupId);
             }
@@ -63,7 +69,8 @@ class EditMembershipFormProcess extends Form
      * Update serialized permission data.
      *
      * @param PaymentModel $oPayModel
-     * @param integer $iGroupId
+     * @param int $iGroupId
+     *
      * @return void
      */
     private function updatePermsFields(PaymentModel $oPayModel, $iGroupId)

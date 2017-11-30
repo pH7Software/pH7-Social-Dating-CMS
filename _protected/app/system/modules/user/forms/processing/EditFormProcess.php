@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Form / Processing
  */
@@ -20,11 +20,11 @@ class EditFormProcess extends Form
         parent::__construct();
 
         $oUserModel = new UserModel;
-        $iProfileId = (AdminCore::auth() && !User::auth() && $this->httpRequest->getExists('profile_id')) ? $this->httpRequest->get('profile_id', 'int') : $this->session->get('member_id');
+        $iProfileId = $this->getProfileId();
         $oUser = $oUserModel->readProfile($iProfileId);
 
         // For Admins only!
-        if ((AdminCore::auth() && !User::auth() && $this->httpRequest->getExists('profile_id'))) {
+        if ($this->isOnlyAdminLoggedAndUserIdExists()) {
             if (!$this->str->equals($this->httpRequest->post('group_id'), $oUser->groupId)) {
                 $oUserModel->updateMembership($this->httpRequest->post('group_id'), $iProfileId, $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
 
@@ -59,7 +59,7 @@ class EditFormProcess extends Form
 
         // Update dynamic fields.
         $oFields = $oUserModel->getInfoFields($iProfileId);
-        foreach($oFields as $sColumn => $sValue) {
+        foreach ($oFields as $sColumn => $sValue) {
             $sHRParam = ($sColumn == 'description') ? Http::ONLY_XSS_CLEAN : null;
             if (!$this->str->equals($this->httpRequest->post($sColumn, $sHRParam), $sValue)) {
                 $oUserModel->updateProfile($sColumn, $this->httpRequest->post($sColumn, $sHRParam), $iProfileId, 'MembersInfo');
@@ -78,5 +78,25 @@ class EditFormProcess extends Form
         unset($oUserModel, $oUser, $oUserCache);
 
         \PFBC\Form::setSuccess('form_user_edit_account', t('The profile has been successfully updated'));
+    }
+
+    /**
+     * @return int
+     */
+    private function getProfileId()
+    {
+        if ($this->isOnlyAdminLoggedAndUserIdExists()) {
+            return $this->httpRequest->get('profile_id', 'int');
+        }
+
+        return $this->session->get('member_id');
+    }
+
+    /**
+     * @return bool
+     */
+    private function isOnlyAdminLoggedAndUserIdExists()
+    {
+        return AdminCore::auth() && !User::auth() && $this->httpRequest->getExists('profile_id');
     }
 }

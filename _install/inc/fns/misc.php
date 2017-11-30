@@ -3,7 +3,7 @@
  * @title            Misc (Miscellaneous Functions) File
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Install / Inc
  * @version          1.7
@@ -17,6 +17,7 @@ defined('PH7') or exit('Restricted access');
  * Get the list of name of directories inside a directory.
  *
  * @param string $sDir
+ *
  * @return array
  */
 function get_dir_list($sDir)
@@ -39,7 +40,8 @@ function get_dir_list($sDir)
  * Check valid directory.
  *
  * @param string $sDir
- * @return boolean
+ *
+ * @return bool
  */
 function is_directory($sDir)
 {
@@ -54,6 +56,7 @@ function is_directory($sDir)
  * Check start extension.
  *
  * @param string $sDir
+ *
  * @return string The good extension.
  */
 function check_ext_start($sDir)
@@ -65,6 +68,7 @@ function check_ext_start($sDir)
  * Check end extension.
  *
  * @param string $sDir
+ *
  * @return string The good extension.
  */
 function check_ext_end($sDir)
@@ -76,9 +80,10 @@ function check_ext_end($sDir)
  * Validate name (first and last name).
  *
  * @param string $sName
- * @param integer $iMin Default 2
- * @param integer $iMax Default 20
- * @return boolean
+ * @param int $iMin Default 2
+ * @param int $iMax Default 20
+ *
+ * @return bool
  */
 function validate_name($sName, $iMin = 2, $iMax = 20)
 {
@@ -89,9 +94,10 @@ function validate_name($sName, $iMin = 2, $iMax = 20)
  * Validate username.
  *
  * @param string $sUsername
- * @param integer $iMin Default 3
- * @param integer $iMax Default 30
- * @return integer (0 = OK | 1 = too short | 2 = too long | 3 = bad username).
+ * @param int $iMin Default 3
+ * @param int $iMax Default 30
+ *
+ * @return int (0 = OK | 1 = too short | 2 = too long | 3 = bad username).
  */
 function validate_username($sUsername, $iMin = 3, $iMax = 30)
 {
@@ -105,9 +111,10 @@ function validate_username($sUsername, $iMin = 3, $iMax = 30)
  * Validate password.
  *
  * @param string $sPassword
- * @param integer $iMin 6
- * @param integer $iMax 92
- * @return integer (0 = OK | 1 = too short | 2 = too long | 3 = no number | 4 = no upper).
+ * @param int $iMin 6
+ * @param int $iMax 92
+ *
+ * @return int (0 = OK | 1 = too short | 2 = too long | 3 = no number | 4 = no upper).
  */
 function validate_password($sPassword, $iMin = 6, $iMax = 92)
 {
@@ -122,7 +129,8 @@ function validate_password($sPassword, $iMin = 6, $iMax = 92)
  * Validate email.
  *
  * @param string $sEmail
- * @return boolean
+ *
+ * @return bool
  */
 function validate_email($sEmail)
 {
@@ -134,7 +142,8 @@ function validate_email($sEmail)
  *
  * @param string $sVal1
  * @param string $sVal2
- * @return boolean
+ *
+ * @return bool
  */
 function validate_identical($sVal1, $sVal2)
 {
@@ -146,7 +155,8 @@ function validate_identical($sVal1, $sVal2)
  *
  * @param string $sText Sentence.
  * @param string $sWord Word to find.
- * @return boolean Returns TRUE if the word is found, FALSE otherwise.
+ *
+ * @return bool Returns TRUE if the word is found, FALSE otherwise.
  */
 function find($sText, $sWord)
 {
@@ -157,7 +167,8 @@ function find($sText, $sWord)
  * Check that all fields are filled.
  *
  * @param array $aVars
- * @return boolean
+ *
+ * @return bool
  */
 function filled_out(array $aVars)
 {
@@ -171,6 +182,7 @@ function filled_out(array $aVars)
  * Redirect to another URL.
  *
  * @param string $sUrl
+ *
  * @return void
  */
 function redirect($sUrl)
@@ -183,7 +195,8 @@ function redirect($sUrl)
  * Delete directory.
  *
  * @param string $sPath
- * @return boolean
+ *
+ * @return bool
  */
 function delete_dir($sPath)
 {
@@ -201,11 +214,14 @@ function delete_dir($sPath)
  *
  * @param Db $oDb
  * @param string $sSqlFile SQL File.
- * @return boolean|array Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
+ *
+ * @return bool|array Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
  */
 function exec_query_file(Db $oDb, $sSqlFile)
 {
-    if (!is_file($sSqlFile)) return false;
+    if (!is_file($sSqlFile)) {
+        return false;
+    }
 
     $sSqlContent = file_get_contents($sSqlFile);
     $sSqlContent = str_replace(PH7_TABLE_PREFIX, $_SESSION['db']['prefix'], $sSqlContent);
@@ -233,12 +249,13 @@ function remove_install_dir()
  */
 function client_ip()
 {
-    if (!empty($_SERVER['HTTP_CLIENT_IP']))
+    $sIp = $_SERVER['REMOTE_ADDR']; // Default value
+
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
         $sIp = $_SERVER['HTTP_CLIENT_IP'];
-    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
         $sIp = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    else
-        $sIp = $_SERVER['REMOTE_ADDR'];
+    }
 
     return preg_match('/^[a-z0-9:.]{7,}$/', $sIp) ? $sIp : '0.0.0.0';
 }
@@ -247,6 +264,7 @@ function client_ip()
  * Escape string.
  *
  * @param string $sVal
+ *
  * @return string The escaped string.
  */
 function escape($sVal)
@@ -258,6 +276,7 @@ function escape($sVal)
  * Clean string.
  *
  * @param string $sVal
+ *
  * @return string The cleaned string.
  */
 function clean_string($sVal)
@@ -268,12 +287,15 @@ function clean_string($sVal)
 /**
  * Generate Hash.
  *
- * @param integer $iLength Default 80
+ * @param int $iLength Default 80
+ *
  * @return string The random hash. Maximum 128 characters with whirlpool encryption.
  */
 function generate_hash($iLength = 80)
 {
-    return substr(hash('whirlpool', time() . hash('sha512', getenv('REMOTE_ADDR') . uniqid(mt_rand(), true) . microtime(true) * 999999999999)), 0, $iLength);
+    $sPrefix = (string)mt_rand();
+
+    return substr(hash('whirlpool', time() . hash('sha512', getenv('REMOTE_ADDR') . uniqid($sPrefix, true) . microtime(true) * 999999999999)), 0, $iLength);
 }
 
 /**
@@ -294,7 +316,7 @@ function ffmpeg_path()
 /**
  * Check if Apache's mod_rewrite is installed.
  *
- * @return boolean
+ * @return bool
  */
 function is_url_rewrite()
 {
@@ -319,18 +341,19 @@ function is_url_rewrite()
 /**
  * Check if the OS is Windows.
  *
- * @return boolean
+ * @return bool
  */
 function is_windows()
 {
-    return (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN');
+    return 0 === stripos(PHP_OS, 'WIN');
 }
 
 /**
  * Get the URL contents with CURL.
  *
  * @param string $sFile
- * @return string|boolean Returns the result content on success, FALSE on failure.
+ *
+ * @return string|bool Returns the result content on success, FALSE on failure.
  */
 function get_url_contents($sFile)
 {
@@ -351,7 +374,8 @@ function get_url_contents($sFile)
  *
  * @param string $sFile Zip file.
  * @param string $sDir Destination to extract the file.
- * @return boolean
+ *
+ * @return bool
  */
 function zip_extract($sFile, $sDir)
 {
@@ -372,24 +396,26 @@ function zip_extract($sFile, $sDir)
  * Checks if the URL is valid and contains the HTTP status code '200 OK', '301 Moved Permanently' or '302 Found'
  *
  * @param string $sUrl
- * @return boolean
+ *
+ * @return bool
  */
 function check_url($sUrl)
 {
     $rCurl = curl_init();
     curl_setopt_array($rCurl, [CURLOPT_RETURNTRANSFER => true, CURLOPT_URL => $sUrl]);
     curl_exec($rCurl);
-    $iResponse = (int) curl_getinfo($rCurl, CURLINFO_HTTP_CODE);
+    $iResponse = (int)curl_getinfo($rCurl, CURLINFO_HTTP_CODE);
     curl_close($rCurl);
 
-    return ($iResponse === 200 || $iResponse === 301 || $iResponse === 302);
+    return $iResponse === 200 || $iResponse === 301 || $iResponse === 302;
 }
 
 /**
  * Check license key.
  *
  * @param string $sKey The License Key.
- * @return integer
+ *
+ * @return int
  */
 function check_license($sKey)
 {
@@ -399,10 +425,25 @@ function check_license($sKey)
 }
 
 /**
+ * @param string $sTwitterUsername
+ * @param string $sGitRepoUrl
+ *
+ * @return string
+ */
+function get_tweet_post($sTwitterUsername, $sGitRepoUrl)
+{
+    $sTwitterTweetUrl = 'https://twitter.com/intent/tweet?text=';
+    $sMsg = sprintf("Just built my social dating website with #pH7CMS ;) %s \n%s", $sTwitterUsername, $sGitRepoUrl);
+
+    return $sTwitterTweetUrl  . urlencode($sMsg);
+}
+
+/**
  * Send an email (text and HTML format).
  *
  * @param array $aParams The parameters information to send email.
- * @return boolean Returns TRUE if the mail was successfully accepted for delivery, FALSE otherwise.
+ *
+ * @return bool Returns TRUE if the mail was successfully accepted for delivery, FALSE otherwise.
  */
 function send_mail(array $aParams)
 {
@@ -426,8 +467,9 @@ function send_mail(array $aParams)
 EOF;
 
     // If the email sender is empty, we define the server email.
-    if (empty($aParams['from']))
+    if (empty($aParams['from'])) {
         $aParams['from'] = $_SERVER['SERVER_ADMIN'];
+    }
 
     /*** Headers ***/
     // To avoid the email goes in the spam folder of email client.

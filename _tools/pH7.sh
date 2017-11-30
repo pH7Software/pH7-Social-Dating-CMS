@@ -6,7 +6,7 @@
 #                  (e.g., you@you:/path/to/root-project$ bash _tools/pH7.sh).
 #
 # Author:          Pierre-Henry Soria <ph7software@gmail.com>
-# Copyright:       (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+# Copyright:       (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
 # License:         GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 ##
 
@@ -155,14 +155,13 @@ function file-strict-permissions() {
 # Push the project into GitHub and Bitbucket repos
 function save-code() {
     # Bitbucket repo
-    git remote rm origin
-    git remote add origin git@bitbucket.org:pH_7/ph7cms-social-dating-app-site-builder.git
-    git push
+    _save-project-to-repo git@bitbucket.org:pH_7/ph7cms-social-dating-app-site-builder.git
+
+    # GitLab repo
+    _save-project-to-repo git@gitlab.com:pH-7/pH7CMS.git
 
     # GitHub repo
-    git remote rm origin
-    git remote add origin git@github.com:pH7Software/pH7-Social-Dating-CMS.git
-    git push
+    _save-project-to-repo git@github.com:pH7Software/pH7-Social-Dating-CMS.git
 
     echo "Yaaay! Changes successfully saved into remote repos!"
 }
@@ -210,7 +209,7 @@ extra_empty_lines,encoding
     find . -type f -name "*.php" -exec php $cs_script fix {} --fixers=$indents \;
 }
 
-# CHange permissions of the folders/files (CHMOD)
+# Change permissions of the folders/files (CHMOD)
 function _permissions() {
     find . -type f -print0 | sudo xargs -0 chmod $1 # First parameter for Files
     find . -type d -print0 | sudo xargs -0 chmod $2 # Second parameter for Folders
@@ -229,6 +228,13 @@ function _permissions() {
 function _cache-permissions() {
     sudo chmod 777 -R ./_install/data/caches/*
     sudo chmod 777 -R ./_protected/data/cache/*
+}
+
+# Save a git project to the specified repo (e.g. github, bitbucket)
+function _save-project-to-repo() {
+    git remote rm origin
+    git remote add origin $1
+    git push
 }
 
 # Confirmation of orders entered

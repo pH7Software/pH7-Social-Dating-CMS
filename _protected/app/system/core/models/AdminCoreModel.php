@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
@@ -17,8 +17,8 @@ class AdminCoreModel extends UserCoreModel
     const CACHE_GROUP = 'db/sys/mod/admin';
 
     /**
-     * @param integer $iOffset
-     * @param integer $iLimit
+     * @param int $iOffset
+     * @param int $iLimit
      * @param string $sTable
      *
      * @return \stdClass
@@ -26,6 +26,7 @@ class AdminCoreModel extends UserCoreModel
     public function browse($iOffset, $iLimit, $sTable = 'Members')
     {
         Various::checkModelTable($sTable);
+
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
@@ -44,17 +45,17 @@ class AdminCoreModel extends UserCoreModel
     }
 
     /**
-     * @param integer|string $mWhat
+     * @param int|string $mWhat
      * @param string $sWhere
-     * @param integer $iGroupId
-     * @param integer $iBanned
-     * @param boolean $bCount
+     * @param int $iGroupId
+     * @param int $iBanned
+     * @param bool $bCount
      * @param string $sOrderBy
-     * @param integer $iSort
-     * @param integer $iOffset
-     * @param integer $iLimit
+     * @param int $iSort
+     * @param int $iOffset
+     * @param int $iLimit
      *
-     * @return integer|\stdClass
+     * @return int|\stdClass
      */
     public function searchUser($mWhat, $sWhere, $iGroupId, $iBanned, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
@@ -99,11 +100,11 @@ class AdminCoreModel extends UserCoreModel
     }
 
     /**
-     * @param integer $iProfileId
-     * @param integer $iBan
+     * @param int $iProfileId
+     * @param int $iBan
      * @param string $sTable
      *
-     * @return boolean
+     * @return bool
      */
     public function ban($iProfileId, $iBan, $sTable = 'Members')
     {

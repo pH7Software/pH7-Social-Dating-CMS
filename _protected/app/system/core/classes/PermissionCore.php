@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
@@ -31,7 +31,7 @@ abstract class PermissionCore extends Framework\Core\Core
     /**
      * Checks whether the user membership is still valid or not.
      *
-     * @return boolean Returns TRUE if the membership is still valid (or user not logged), FALSE otherwise.
+     * @return bool Returns TRUE if the membership is still valid (or user not logged), FALSE otherwise.
      */
     public function checkMembership()
     {

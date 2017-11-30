@@ -3,20 +3,20 @@
 -- Title:         SQL Core (base) Install File
 --
 -- Author:        Pierre-Henry Soria <hello@ph7cms.com>
--- Copyright:     (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+-- Copyright:     (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
 -- License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
--- Package:       PH7 / Install / Data / Sql
+-- Package:       PH7 / Install / Data / Sql / MySQL
 --
 --
 
 --
 -- Set the variables --
 --
-SET @sDefaultSiteName = 'Social Dating App';
+SET @sDefaultSiteName = 'My Dating WebApp';
 SET @sAdminEmail = 'admin@yoursite.com';
 SET @sFeedbackEmail = 'feedback@yoursite.com';
 SET @sNoReplyEmail = 'noreply@yoursite.com';
-SET @sIpApiUrl = 'http://whatismyipaddress.com/ip/';
+SET @sIpApiUrl = 'https://whatismyipaddress.com/ip/';
 SET @sDefaultVideoUrl = 'https://www.youtube.com/watch?v=q-1eHnBOg4A';
 SET @sChatApiUrl = 'https://ph7cms.com/addons/chat/?name=%site_name%&url=%site_url%&skin=4';
 SET @sChatrouletteApiUrl = 'https://ph7cms.com/addons/chatroulette/?name=%site_name%&url=%site_url%&skin=1';
@@ -906,7 +906,7 @@ CREATE TABLE IF NOT EXISTS pH7_MetaMain (
   promoText text DEFAULT NULL,
   metaRobots varchar(50) NOT NULL DEFAULT '',
   metaAuthor varchar(50) NOT NULL DEFAULT '',
-  metaCopyright varchar(50) NOT NULL DEFAULT '',
+  metaCopyright varchar(55) NOT NULL DEFAULT '',
   metaRating varchar(50) NOT NULL DEFAULT '',
   metaDistribution varchar(50) NOT NULL DEFAULT '',
   metaCategory varchar(50) NOT NULL DEFAULT '',
@@ -914,14 +914,14 @@ CREATE TABLE IF NOT EXISTS pH7_MetaMain (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO pH7_MetaMain (langId, pageTitle, metaDescription, metaKeywords, headline, slogan, promoText, metaRobots, metaAuthor, metaCopyright, metaRating, metaDistribution, metaCategory) VALUES
-('en_US', 'Home', 'The Best Online Social Dating Service to meet people and keep in touch your friends', 'meet people, community, single, friends, meet singles, women, men, dating site, dating service, dating website, online dating website', 'Be on the best e-place!', 'The Best place to Meet Nice People', 'You''re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Social Dating Business App or Website like this one with the #1 <a href="https://ph7cms.com">Dating Web App Builder</a>. It''s Professional, Modern, Open Source, and gives you the Best Way to launch a new Social/Dating Business!', 'index, follow, all', 'Pierre-Henry Soria', 'Copyright Pierre-Henry Soria. All Rights Reserved.', 'general', 'global', 'dating');
+('en_US', 'Home', 'The Best Online Social Dating Service to meet people and keep in touch with your friends', 'meet people, community, single, friends, meet singles, women, men, dating site, dating service, dating website, online dating website', 'Be on the right place!', 'The Place to Meet Lovely People', 'You''re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Social Dating Web Apps or Websites like this one with the #1 <a href="http://ph7cms.com">Dating Web App Builder</a>. It''s Professional, Modern, Open Source, and gives you the Best Way to launch a new Social/Dating Business!', 'index, follow, all', 'Pierre-Henry Soria', 'Copyright Pierre-Henry Soria. All Rights Reserved.', 'general', 'global', 'dating');
 
 
 CREATE TABLE IF NOT EXISTS pH7_SysModsEnabled (
   moduleId tinyint(2) unsigned NOT NULL AUTO_INCREMENT,
   moduleTitle varchar(50) NOT NULL,
   folderName varchar(20) NOT NULL,
-  premiumMod enum('0','1') NOT NULL DEFAULT '0', -- If the module required pH7CMSPro (http://ph7cms.com/pro/)
+  premiumMod enum('0','1') NOT NULL DEFAULT '0',
   enabled enum('0','1') NOT NULL DEFAULT '1',
   PRIMARY KEY (moduleId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
@@ -939,14 +939,14 @@ INSERT INTO pH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VA
 ('Love Calculator', 'love-calculator', '0', '1'),
 ('Mail (private message)', 'mail', '0', '1'),
 ('Instant Messaging (IM)', 'im', '0', '1'),
-('Related Profiles', 'related-profile', '0', '1'),
 ('Friends', 'friend', '0', '1'),
+('Related Profiles', 'related-profile', '0', '1'),
 ('User Dashboard', 'user-dashboard', '0', '1'),
 ('Game', 'game', '0', '1'),
 ('Newsletter', 'newsletter', '0', '1'),
 ('Invite Friends', 'invite', '0', '1'),
 ('Social Media Auth (connect module)', 'connect', '0', '0'),
-('Webcam', 'webcam', '0', '1');
+('Webcam', 'webcam', '0', '0');
 
 
 CREATE TABLE IF NOT EXISTS pH7_Modules (
@@ -962,7 +962,7 @@ CREATE TABLE IF NOT EXISTS pH7_Modules (
 
 INSERT INTO pH7_Modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of the SQL schema of pH7CMS (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.4.0', 1);
+('pH7CMS', 'SQL System Schema', '1.4.1', 1);
 
 
 CREATE TABLE IF NOT EXISTS pH7_Report (
@@ -970,7 +970,7 @@ CREATE TABLE IF NOT EXISTS pH7_Report (
   reporterId int(10) unsigned DEFAULT NULL,
   spammerId int(10) unsigned DEFAULT NULL,
   dateTime datetime DEFAULT NULL,
-  contentType enum('user','avatar','mail','comment','photo','video','forum','note') NOT NULL DEFAULT 'user',
+  contentType enum('user', 'avatar', 'mail', 'comment', 'picture', 'video', 'forum', 'note') NOT NULL DEFAULT 'user',
   description varchar(255) DEFAULT NULL,
   url varchar(255) DEFAULT NULL,
   PRIMARY KEY (reportId),
@@ -980,14 +980,14 @@ CREATE TABLE IF NOT EXISTS pH7_Report (
 
 
 CREATE TABLE IF NOT EXISTS pH7_Settings (
-  `name` varchar(64) NOT NULL,
-  value varchar(150) DEFAULT '',
-  `desc` varchar(120) DEFAULT '' COMMENT 'Informative desc about the setting',
-  `group` varchar(12) NOT NULL,
-  PRIMARY KEY (`name`)
+  settingName varchar(64) NOT NULL,
+  settingValue varchar(150) DEFAULT '',
+  description varchar(120) DEFAULT '' COMMENT 'Informative desc about the setting',
+  settingGroup varchar(12) NOT NULL,
+  PRIMARY KEY (settingName)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
+INSERT INTO pH7_Settings (settingName, settingValue, description, settingGroup) VALUES
 ('siteName', @sDefaultSiteName, '', 'general'),
 ('adminEmail', @sAdminEmail, '', 'email'),
 ('defaultLanguage', 'en_US', '', 'language'),
@@ -1056,7 +1056,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('banWordReplace', '[removed]',  '',  'security'),
 ('securityToken', 0, '0 to disable or 1 to enable the CSRF security token in the forms', 'security'),
 ('securityTokenLifetime', 720, 'Time in seconds to the CSRF security token. Default 720 seconds (12 mins)', 'security'),
-('DDoS', 0,  '0 to disabled or 1 to enabled the DDoS attack protection',  'security'),
+('DDoS', 0,  '0 to disabled or 1 to enabled DDoS attack protection',  'security'),
 ('isSiteValidated', 0,  '0 = site not validated | 1 = site validated',  'security'),
 ('cleanMsg', 0, 'Delete messages older than X days. 0 = Disable', 'pruning'),
 ('cleanComment', 0, 'Delete comments older than X days. 0 = Disable', 'pruning'),
@@ -1070,6 +1070,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('socialMediaWidgets', 0, 'Enable the Social Media Widgets such as Like and Sharing buttons. 0 = Disable | 1 = Enable', 'general'),
 ('disclaimer', 0, 'Enable a disclaimer to enter to the site. This is useful for sites with adult content. 0 = Disable | 1 = Enable', 'general'),
 ('cookieConsentBar', 0, 'Enable the cookie consent bar to prevent your users that your site uses cookies. 0 = Disable | 1 = Enable', 'general'),
+('displayPoweredByLink', 1, 'Show or not the branding link in the footer.', 'general'),
 ('isSoftwareNewsFeed', 1, 'Enable the news feed. 0 = Disable | 1 = Enable', 'general');
 
 

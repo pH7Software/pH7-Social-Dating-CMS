@@ -4,7 +4,7 @@
  * @desc           Record Database Class. It's the pH7CMS home-made Object-Relational Mapping (ORM).
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / Framework / Mvc / Model / Engine
  * @version        1.1
@@ -25,24 +25,16 @@ use stdClass;
  */
 class Record
 {
-    /**
-     * @var array $_aErrors
-     */
-    private $_aErrors = array();
+    /** @var array */
+    private $aErrors = array();
 
-    /**
-     * @var string $_sSql
-     */
-    private $_sSql;
+    /** @var string */
+    private $sSql;
 
-    /**
-     * @var array $_aValues
-     */
-    private $_aValues = array();
+    /** @var array */
+    private $aValues = array();
 
-    /**
-     * Import the Singleton trait.
-     */
+    /** Import the Singleton trait */
     use Singleton;
 
     /**
@@ -59,7 +51,8 @@ class Record
      */
     public function addValue($sKey, $sValue)
     {
-        $this->_aValues[$sKey] = $sValue;
+        $this->aValues[$sKey] = $sValue;
+
         return $this;
     }
 
@@ -67,11 +60,12 @@ class Record
      * Set the values.
      *
      * @param array $aValues
+     *
      * @return void
      */
     public function setValues(array $aValues)
     {
-        $this->_aValues = $aValues;
+        $this->aValues = $aValues;
     }
 
     /**
@@ -82,10 +76,12 @@ class Record
     public function getErrors()
     {
         $sErrMsg = '';
-        if (count($this->_aErrors) > 1) {
-            foreach ($this->_aErrors as $sError)
+        if (count($this->aErrors) > 1) {
+            foreach ($this->aErrors as $sError) {
                 $sErrMsg .= $sError . "\r\n";
+            }
         }
+
         return $sErrMsg;
     }
 
@@ -96,7 +92,7 @@ class Record
      * @param string $sField
      * @param string $sId
      *
-     * @return boolean Returns TRUE on success or FALSE on failure.
+     * @return bool Returns TRUE on success or FALSE on failure.
      */
     public function delete($sTable, $sField, $sId)
     {
@@ -106,8 +102,8 @@ class Record
             // We start the transaction.
             $oDb->beginTransaction();
 
-            $this->_sSql = 'DELETE FROM' . Db::prefix($sTable) . "WHERE $sField = :id";
-            $rStmt = $oDb->prepare($this->_sSql);
+            $this->sSql = 'DELETE FROM' . Db::prefix($sTable) . "WHERE $sField = :id";
+            $rStmt = $oDb->prepare($this->sSql);
             $rStmt->bindParam(':id', $sId);
             $bStatus = $rStmt->execute();
 
@@ -118,7 +114,7 @@ class Record
 
             return $bStatus;
         } catch (Exception $oE) {
-            $this->_aErrors[] = $oE->getMessage();
+            $this->aErrors[] = $oE->getMessage();
 
             // We cancel the transaction if an error occurs.
             $oDb->rollBack();
@@ -132,12 +128,12 @@ class Record
      * @param string $sTable
      * @param array $aValues
      *
-     * @return integer|boolean Returns the last Insert ID on success or FALSE on failure.
+     * @return int|bool Returns the last Insert ID on success or FALSE on failure.
      */
     public function insert($sTable, array $aValues)
     {
-        $aValues = ($aValues === null) ? $this->_aValues : $aValues;
-        $this->_sSql = 'INSERT INTO' . Db::prefix($sTable) . 'SET ';
+        $aValues = ($aValues === null) ? $this->aValues : $aValues;
+        $this->sSql = 'INSERT INTO' . Db::prefix($sTable) . 'SET ';
 
         $oCachingIterator = new CachingIterator(new ArrayIterator($aValues));
 
@@ -148,11 +144,11 @@ class Record
             $oDb->beginTransaction();
 
             foreach ($oCachingIterator as $sField => $sValue) {
-                $this->_sSql .= $sField . ' = :' . $sField;
-                $this->_sSql .= $oCachingIterator->hasNext() ? ',' : '';
+                $this->sSql .= $sField . ' = :' . $sField;
+                $this->sSql .= $oCachingIterator->hasNext() ? ',' : '';
             }
 
-            $rStmt = $oDb->prepare($this->_sSql);
+            $rStmt = $oDb->prepare($this->sSql);
 
             foreach ($aValues as $sField => $sValue) {
                 $rStmt->bindParam(':' . $sField, $sValue);
@@ -166,7 +162,7 @@ class Record
             Db::free($rStmt);
             return $oDb->lastInsertId();
         } catch (Exception $oE) {
-            $this->_aErrors[] = $oE->getMessage();
+            $this->aErrors[] = $oE->getMessage();
 
             // We cancel the transaction if an error occurs.
             $oDb->rollBack();
@@ -184,7 +180,7 @@ class Record
      * @param string $sPk The primary key. Default: NULL
      * @param string $sId The id. Default: NULL
      *
-     * @return integer|boolean Returns the number of rows on success or FALSE on failure.
+     * @return int|bool Returns the number of rows on success or FALSE on failure.
      */
     public function update($sTable, $sField, $sValue, $sPk = null, $sId = null)
     {
@@ -196,13 +192,13 @@ class Record
 
             $bIsWhere = isset($sPk, $sId);
 
-            $this->_sSql = 'UPDATE' . Db::prefix($sTable) . "SET $sField = :value";
+            $this->sSql = 'UPDATE' . Db::prefix($sTable) . "SET $sField = :value";
 
             if ($bIsWhere) {
-                $this->_sSql .= " WHERE $sPk = :id";
+                $this->sSql .= " WHERE $sPk = :id";
             }
 
-            $rStmt = $oDb->prepare($this->_sSql);
+            $rStmt = $oDb->prepare($this->sSql);
             $rStmt->bindParam(':value', $sValue);
             if ($bIsWhere) {
                 $rStmt->bindParam(':id', $sId);
@@ -217,7 +213,7 @@ class Record
 
             return $iRow;
         } catch (Exception $oE) {
-            $this->_aErrors[] = $oE->getMessage();
+            $this->aErrors[] = $oE->getMessage();
 
             // We cancel the transaction if an error occurs.
             $oDb->rollBack();
@@ -231,7 +227,7 @@ class Record
      *
      * @param string $sSql
      *
-     * @return stdClass|boolean Returns stdClass on success or FALSE on failure.
+     * @return stdClass|bool Returns stdClass on success or FALSE on failure.
      *
      */
     public function query($sSql)
@@ -252,7 +248,7 @@ class Record
             Db::free($rStmt);
             return $oRow;
         } catch (Exception $oE) {
-            $this->_aErrors[] = $oE->getMessage();
+            $this->aErrors[] = $oE->getMessage();
 
             // We cancel the transaction if an error occurs.
             $oDb->rollBack();
@@ -263,11 +259,11 @@ class Record
     /**
      * Execute a Record query.
      *
-     * @return stdClass|boolean Returns a PDOStatement object, or FALSE on failure.
+     * @return stdClass|bool Returns a PDOStatement object, or FALSE on failure.
      */
     public function execute()
     {
-        return $this->query($this->_sSql);
+        return $this->query($this->sSql);
     }
 
     /**
@@ -279,8 +275,8 @@ class Record
     public function clean()
     {
         // Set to default values
-        $this->_sSql = '';
-        $this->_aValues = array();
+        $this->sSql = '';
+        $this->aValues = array();
     }
 
     /**
@@ -305,7 +301,7 @@ class Record
      * @param array $aJoin Default: NULL
      * @param string $sOptions Default: NULL
      *
-     * @return stdClass|boolean Returns stdClass on success or throw PDOException on failure.
+     * @return stdClass|bool Returns stdClass on success or throw PDOException on failure.
      */
     public function getAllInOne($mTable, $sField = null, $sId = null, $mWhat = '*', array $aJoin = null, $sOptions = null)
     {
@@ -329,21 +325,21 @@ class Record
 
             $bIsWhere = isset($sField, $sId);
 
-            $this->_sSql = "SELECT $sWhat FROM " . $sTable;
+            $this->sSql = "SELECT $sWhat FROM " . $sTable;
 
             if (!empty($aJoin) && count($aJoin) == 2) {
-                $this->_sSql .= " LEFT JOIN $aJoin[0] ON $sTable.$aJoin[1] = $aJoin[0].$aJoin[1]";
+                $this->sSql .= " LEFT JOIN $aJoin[0] ON $sTable.$aJoin[1] = $aJoin[0].$aJoin[1]";
             }
 
             if ($bIsWhere) {
-                $this->_sSql .= " WHERE $sField = :id";
+                $this->sSql .= " WHERE $sField = :id";
             }
 
             if (!empty($sOptions)) {
-                $this->_sSql .= " $sOptions";
+                $this->sSql .= " $sOptions";
             }
 
-            $rStmt = Db::getInstance()->prepare($this->_sSql);
+            $rStmt = Db::getInstance()->prepare($this->sSql);
             if ($bIsWhere) {
                 $rStmt->bindParam(':id', $sId);
             }
@@ -353,7 +349,7 @@ class Record
 
             return $oRow;
         } catch (Exception $oE) {
-            $this->_aErrors[] = $oE->getMessage();
+            $this->aErrors[] = $oE->getMessage();
         }
     }
 
@@ -366,7 +362,7 @@ class Record
      * @param string $sWhat Default: '*'
      * @param string $sOptions Default: NULL
      *
-     * @return string|stdClass|boolean SQL query on success (returns string or stdClass values) or throw PDOException on failure (returns a false boolean).
+     * @return string|stdClass|bool SQL query on success (returns string or stdClass values) or throw PDOException on failure (returns a false boolean).
      *
      */
     public function getOne($sTable, $sField = null, $sId = null, $sWhat = '*', $sOptions = null)
@@ -374,26 +370,29 @@ class Record
         try {
             $bIsWhere = isset($sField, $sId);
 
-            $this->_sSql = 'SELECT ' . $sWhat . ' FROM' . Db::prefix($sTable);
+            $this->sSql = 'SELECT ' . $sWhat . ' FROM' . Db::prefix($sTable);
 
             if ($bIsWhere) {
-                $this->_sSql .= "WHERE $sField = :id ";
+                $this->sSql .= "WHERE $sField = :id ";
             }
 
             if (!empty($sOptions)) {
-                $this->_sSql .= " $sOptions ";
+                $this->sSql .= " $sOptions ";
             }
 
-            $this->_sSql .= 'LIMIT 0,1'; // Get only one column
+            $this->sSql .= 'LIMIT 0,1'; // Get only one column
 
-            $rStmt = Db::getInstance()->prepare($this->_sSql);
-            if ($bIsWhere) $rStmt->bindParam(':id', $sId);
+            $rStmt = Db::getInstance()->prepare($this->sSql);
+            if ($bIsWhere) {
+                $rStmt->bindParam(':id', $sId);
+            }
             $rStmt->execute();
             $mRow = $rStmt->fetch(PDO::FETCH_OBJ);
             Db::free($rStmt);
+
             return $mRow;
         } catch (Exception $oE) {
-            $this->_aErrors[] = $oE->getMessage();
+            $this->aErrors[] = $oE->getMessage();
         }
     }
 
@@ -408,14 +407,14 @@ class Record
      */
     public function updates($sTable, array $aValues)
     {
-        $aValues = ($aValues === null) ? $this->_aValues : $aValues;
-        $this->_sSql = 'UPDATE' . Db::prefix($sTable) . 'SET ';
+        $aValues = ($aValues === null) ? $this->aValues : $aValues;
+        $this->sSql = 'UPDATE' . Db::prefix($sTable) . 'SET ';
 
         $oCachingIterator = new CachingIterator(new ArrayIterator($aValues));
 
         foreach ($oCachingIterator as $sField => $sValue) {
-            $this->_sSql .= $sField . ' = ' . $this->escape($sValue);
-            $this->_sSql .= $oCachingIterator->hasNext() ? ',' : '';
+            $this->sSql .= $sField . ' = ' . $this->escape($sValue);
+            $this->sSql .= $oCachingIterator->hasNext() ? ',' : '';
         }
 
         return $this;
@@ -429,11 +428,11 @@ class Record
      * @param string $sWhat Default: '*'
      *
      * @return self
-     *
      */
     public function select($sTable, $sWhat = '*')
     {
-        $this->_sSql = 'SELECT ' . $sWhat . ' FROM' . Db::prefix($sTable);
+        $this->sSql = 'SELECT ' . $sWhat . ' FROM' . Db::prefix($sTable);
+
         return $this;
     }
 
@@ -446,11 +445,11 @@ class Record
      * @param string $sValue
      *
      * @return self
-     *
      */
     public function find($sField, $sValue)
     {
         $this->where($sField, $sValue, '=');
+
         return $this;
     }
 
@@ -463,11 +462,11 @@ class Record
      * @param string $sValue
      *
      * @return self
-     *
      */
     public function andFind($sField, $sValue)
     {
         $this->andClause($sField, $sValue, '=');
+
         return $this;
     }
 
@@ -480,11 +479,11 @@ class Record
      * @param string $sValue
      *
      * @return self
-     *
      */
     public function orFind($sField, $sValue)
     {
         $this->orClause($sField, $sValue, '=');
+
         return $this;
     }
 
@@ -501,6 +500,7 @@ class Record
     public function havingFind($sField, $sValue)
     {
         $this->having($sField, $sValue, '=');
+
         return $this;
     }
 
@@ -512,11 +512,11 @@ class Record
      * @param string $sOperator Default: '='
      *
      * @return self
-     *
      */
     public function where($sField, $sValue, $sOperator = '=')
     {
         $this->optClause('WHERE', $sField, $sValue, $sOperator);
+
         return $this;
     }
 
@@ -532,6 +532,7 @@ class Record
     public function andClause($sField, $sValue, $sOperator = '=')
     {
         $this->optClause('AND', $sField, $sValue, $sOperator);
+
         return $this;
     }
 
@@ -547,20 +548,22 @@ class Record
     public function orClause($sField, $sValue, $sOperator = '=')
     {
         $this->optClause('OR', $sField, $sValue, $sOperator);
+
         return $this;
     }
 
     /**
      * Set limit.
      *
-     * @param integer $iOffset
-     * @param integer $iLimit
+     * @param int $iOffset
+     * @param int $iLimit
      *
      * @return self
      */
     public function limit($iOffset, $iLimit)
     {
         $this->clause('LIMIT', "$iOffset, $iLimit");
+
         return $this;
     }
 
@@ -575,6 +578,7 @@ class Record
     public function orderBy($sField, $sOrder = Db::ASC)
     {
         $this->clause('ORDER BY', "$sField $sOrder");
+
         return $this;
     }
 
@@ -588,6 +592,7 @@ class Record
     public function groupBy($sGroup)
     {
         $this->clause('GROUP BY', $sGroup);
+
         return $this;
     }
 
@@ -603,6 +608,7 @@ class Record
     public function having($sField, $sValue, $sOperator = '=')
     {
         $this->optClause('HAVING', $sField, $sValue, $sOperator);
+
         return $this;
     }
 
@@ -616,7 +622,8 @@ class Record
      */
     protected function clause($sClsName, $sVal)
     {
-        $this->_sSql .= " $sClsName $sVal";
+        $this->sSql .= " $sClsName $sVal";
+
         return $this;
     }
 
@@ -633,7 +640,7 @@ class Record
     protected function optClause($sClsName, $sField, $sVal, $sOpt)
     {
         $sVal = $this->escape($sVal);
-        $this->_sSql .= " $sClsName $sField $sOpt $sVal";
+        $this->sSql .= " $sClsName $sField $sOpt $sVal";
 
         return $this;
     }

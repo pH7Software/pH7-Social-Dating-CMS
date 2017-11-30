@@ -4,7 +4,7 @@
  * @desc             Useful date methods.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Date
  */
@@ -22,7 +22,7 @@ class Various
      *
      * @param string $sTime A date/time string valid formats (http://php.net/manual/en/datetime.formats.php). Default: 'now'
      *
-     * @return integer
+     * @return int
      */
     public static function getTime($sTime = 'now')
     {
@@ -34,7 +34,7 @@ class Various
      *
      * @param string $sTime A date/time string. EX: Add one month '+1 month' | Remove one month '-1 month'
      *
-     * @return integer The Unix timestamp representing including the time modification.
+     * @return int The Unix timestamp representing including the time modification.
      */
     public static function setTime($sTime)
     {
@@ -49,9 +49,9 @@ class Various
     /**
      * Convert the time (e.g. hour:minutes:seconds) to seconds.
      *
-     * @param integer $iHMS Hours/Minutes/Seconds
+     * @param int $iHMS Hours/Minutes/Seconds
      *
-     * @return integer
+     * @return int
      */
     public static function timeToSec($iHMS)
     {
@@ -67,7 +67,7 @@ class Various
     /**
      * Convert the seconds to time.
      *
-     * @param integer $iSeconds
+     * @param int $iSeconds
      *
      * @return string Example: 00:00
      */
@@ -84,7 +84,7 @@ class Various
     /**
      * Creates the text of the timestamp.
      *
-     * @param integer|string Unix timestamp or string date format.
+     * @param int|string Unix timestamp or string date format.
      *
      * @return string Returns the text of the time stamp.
      */
@@ -130,9 +130,9 @@ class Various
      *
      * @see self::secToTime()
      *
-     * @param integer $iVal
+     * @param int $iVal
      *
-     * @return integer
+     * @return int
      */
     protected static function checkSecToTime($iVal)
     {

@@ -3,7 +3,7 @@
  * Description:     Loading pages in Ajax with HTML5 pushState.
  *
  * Author:          Pierre-Henry Soria <ph7software@gmail.com>
- * Copyright:       (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * Copyright:       (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * License:         GNU General Public License <http://www.gnu.org/licenses/gpl.html>
  * Version:         1.3
  */

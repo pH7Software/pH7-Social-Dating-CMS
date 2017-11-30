@@ -3,7 +3,7 @@
  * @title          Year Class
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2013-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2013-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / Framework / Math / Measure
  * @version        1.0
@@ -15,25 +15,25 @@ defined('PH7') or exit('Restricted access');
 
 class Year implements Measurable
 {
-    /** @var integer */
+    /** @var int */
     protected $iYear;
 
-    /** @var integer */
+    /** @var int */
     protected $iMonth;
 
-    /** @var integer */
+    /** @var int */
     protected $iDay;
 
-    /** @var integer */
+    /** @var int */
     protected $iTimestamp;
 
     /**
      * Calculating the age of a user relative to their date of birth.
      *
-     * @param integer $iBirthYear
-     * @param integer $iBirthMonth
-     * @param integer $iBirthDay
-     * @param integer $iTimestamp You can optionally set another date for the calculation of the age. By default age is checked against the current date.
+     * @param int $iBirthYear
+     * @param int $iBirthMonth
+     * @param int $iBirthDay
+     * @param int $iTimestamp You can optionally set another date for the calculation of the age. By default age is checked against the current date.
      */
     public function __construct($iBirthYear, $iBirthMonth, $iBirthDay, $iTimestamp = null)
     {
@@ -48,7 +48,7 @@ class Year implements Measurable
     /**
      * Get User's age.
      *
-     * @return integer The age of the user.
+     * @return int The age of the user.
      */
     public function get()
     {

@@ -1,10 +1,11 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Controller
  */
+
 namespace PH7;
 
 use PH7\Framework\Navigation\Page;
@@ -13,7 +14,26 @@ class VisitorController extends Controller
 {
     const MAX_PROFILE_PER_PAGE = 10;
 
-    private $oUserModel, $oVisitorModel, $oPage, $sUsername, $sTitle, $iId, $iTotalVisitors;
+    /** @var UserModel */
+    private $oUserModel;
+
+    /** @var VisitorModel */
+    private $oVisitorModel;
+
+    /** @var Page */
+    private $oPage;
+
+    /** @var string */
+    private $sUsername;
+
+    /** @var string */
+    private $sTitle;
+
+    /** @var int */
+    private $iId;
+
+    /** @var int */
+    private $iTotalVisitors;
 
     public function __construct()
     {
@@ -63,15 +83,12 @@ class VisitorController extends Controller
 
         $this->view->user_views_setting = (UserCore::auth()) ? $this->oUserModel->getPrivacySetting($this->session->get('member_id'))->userSaveViews : '';
 
-        if (empty($oVisitor))
-        {
+        if (empty($oVisitor)) {
             $this->sTitle = t('No one has seen "%0%"', $this->sUsername);
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
             $this->view->error = t('No one has visited the profile.');
-        }
-        else
-        {
+        } else {
             $this->sTitle = t("%0%'s Visitors:", $this->sUsername);
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;

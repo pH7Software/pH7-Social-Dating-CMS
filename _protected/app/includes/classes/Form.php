@@ -4,7 +4,7 @@
  * @desc             Some useful form methods.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / App / Include / Class
  */
@@ -17,6 +17,7 @@ class Form extends Framework\Layout\Form\Form
      * To get Value Data from the database.
      *
      * @param string $sValue
+     *
      * @return array
      */
     public static function getVal($sValue)
@@ -24,8 +25,9 @@ class Form extends Framework\Layout\Form\Form
         $aVal = array(); // Default Value
         $aValue = explode(',', $sValue);
 
-        foreach ($aValue as $sVal)
+        foreach ($aValue as $sVal) {
             $aVal[] = $sVal;
+        }
 
         return $aVal;
     }
@@ -34,15 +36,29 @@ class Form extends Framework\Layout\Form\Form
      * To set Value Data into the database.
      *
      * @param array $aValue
+     *
      * @return string
      */
     public static function setVal($aValue)
     {
         $sVal = ''; // Devault Value
 
-        foreach ($aValue as $sValue)
+        foreach ($aValue as $sValue) {
             $sVal .= $sValue . ',';
+        }
 
         return rtrim($sVal, ','); // Removes the last comma
+    }
+
+    /**
+     * Prevent against brute-force attack to avoid drowning the server and database.
+     *
+     * @param int $iDelayInSec Delay in seconds.
+     *
+     * @return void
+     */
+    protected function preventBruteForce($iDelayInSec)
+    {
+        sleep($iDelayInSec);
     }
 }

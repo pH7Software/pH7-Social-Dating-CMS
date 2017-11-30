@@ -7,7 +7,7 @@
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
- * @copyright        (c) 2011-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2011-2018, Pierre-Henry Soria. All Rights Reserved.
  * @version          1.3.0
  * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
  *
@@ -34,24 +34,23 @@ use PH7\Framework\Parse\SysVar;
 
 class PH7Tpl extends Kernel
 {
-    const
-    NAME = 'PH7Tpl',
-    AUTHOR = 'Pierre-Henry Soria',
-    VERSION = '1.3.0',
-    LICENSE = 'Creative Commons Attribution 3.0 License - http://creativecommons.org/licenses/by/3.0/',
-    ERR_MSG = 'It seems you have removed some copyright links/notice in the software. If you want to remove them, first you should upgrade your site to <a href="http://ph7cms.com/order">pH7CMSPro</a><br /> or if you hold <a href="http://ph7cms.com/pro">pH7CMSPro</a>, please contact the support to get it fixed.',
+    const NAME = 'PH7Tpl';
+    const AUTHOR = 'Pierre-Henry Soria';
+    const VERSION = '1.3.0';
+    const LICENSE = 'Creative Commons Attribution 3.0 License - http://creativecommons.org/licenses/by/3.0/';
+    const ERR_MSG = 'It seems you have removed some copyright links/notice in the software. If you want to remove them, please email at: %s';
 
     /**
      * @internal For better compatibility with Windows, we didn't put a slash at the end of the directory constants.
      */
-    COMPILE_DIR = 'pH7tpl_compile',
-    CACHE_DIR = 'pH7tpl_cache',
-    MAIN_COMPILE_DIR = 'public_main',
+    const COMPILE_DIR = 'pH7tpl_compile';
+    const CACHE_DIR = 'pH7tpl_cache';
+    const MAIN_COMPILE_DIR = 'public_main';
 
-    MAIN_PAGE = 'layout',
-    MAIN_COMPILE_PAGE = 'layout.cpl.php',
-    XML_SITEMAP_COMPILE_PAGE = 'mainlayout.xsl.cpl.php',
-    COMPILE_FILE_EXT = '.cpl.php';
+    const MAIN_PAGE = 'layout';
+    const MAIN_COMPILE_PAGE = 'layout.cpl.php';
+    const XML_SITEMAP_COMPILE_PAGE = 'mainlayout.xsl.cpl.php';
+    const COMPILE_FILE_EXT = '.cpl.php';
 
     /**
      * The attributes must always be private (or protected), so we do not indicate convention ($_var)
@@ -97,8 +96,8 @@ class PH7Tpl extends Kernel
         // Enable (true) or Disables (false) html comments in the source code of the site that shows information conernant template engine such as name, version, ...
         $this->bLicense = PH7_VALID_LICENSE;
 
-        $this->bHtmlCompressor = (bool) $this->config->values['cache']['enable.static.minify'];
-        $this->bPhpCompressor = (bool) $this->config->values['cache']['enable.static.minify'];
+        $this->bHtmlCompressor = (bool)$this->config->values['cache']['enable.static.minify'];
+        $this->bPhpCompressor = (bool)$this->config->values['cache']['enable.static.minify'];
     }
 
     /**
@@ -195,7 +194,7 @@ class PH7Tpl extends Kernel
      */
     public function setCaching($bCaching)
     {
-        $this->bCaching = (bool) $bCaching;
+        $this->bCaching = (bool)$bCaching;
     }
 
     /**
@@ -205,7 +204,7 @@ class PH7Tpl extends Kernel
      */
     public function isEnableCache()
     {
-        return (bool) $this->bCaching;
+        return (bool)$this->bCaching;
     }
 
     /**
@@ -251,10 +250,10 @@ class PH7Tpl extends Kernel
      *
      * @return void
      */
-     public function setXmlSyntax($bIsActive)
-     {
-         $this->bXmlTags = (bool) $bIsActive;
-     }
+    public function setXmlSyntax($bIsActive)
+    {
+        $this->bXmlTags = (bool)$bIsActive;
+    }
 
     /**
      * Adds a variable that can be used by the templates.
@@ -337,15 +336,15 @@ class PH7Tpl extends Kernel
             }
 
             // It is forbidden to violate the copyright!
-            // Thought for those who have spent years for developing a professional, high-quality software and done their best to help developers!
+            // Thought for me who has spent years for developing a professional, high-quality software and done their best to help developers!
             if (!$this->isMarkCopyright()) {
                 $this->setErrMsg();
             }
         }
 
-        if ($this->isXmlSitemapCompilePage())
-            if (!$this->isSmallMarkCopyright() && !$this->bLicense)
-                $this->setErrMsg();
+        if ($this->isXmlSitemapCompilePage() && !$this->isSmallMarkCopyright()) {
+            $this->setErrMsg();
+        }
 
         if ($this->bPhpCompressor)
             $this->sCode = (new Compress)->parsePhp($this->sCode);
@@ -430,7 +429,7 @@ class PH7Tpl extends Kernel
         }
 
         $this->sCompileDirFile = ($this->isMainDir($sDirPath)) ? $this->sCompileDir2 . $this->file->getFileWithoutExt($this->sTplFile) . static::COMPILE_FILE_EXT : $this->sCompileDir2 .
-                str_replace($this->getCurrentController(), '', $this->file->getFileWithoutExt($this->sTplFile)) . static::COMPILE_FILE_EXT;
+            str_replace($this->getCurrentController(), '', $this->file->getFileWithoutExt($this->sTplFile)) . static::COMPILE_FILE_EXT;
 
         if (!$this->file->existFile($this->sTemplateDirFile)) {
             throw new TplException('File \'' . $this->sTemplateDirFile . '\' does no exist');
@@ -439,26 +438,21 @@ class PH7Tpl extends Kernel
 
         /*** If the file does not exist or if the template has been modified, recompile the makefiles ***/
         if ($this->file->getModifTime($this->sTemplateDirFile) > $this->file->
-                        getModifTime($this->sCompileDirFile)) {
+            getModifTime($this->sCompileDirFile)) {
             $this->compile();
         }
 
         if (!empty($_bInclude)) {
-            $bCaching = (bool) $this->config->values['cache']['enable.html.tpl.cache'];
+            $bCaching = (bool)$this->config->values['cache']['enable.html.tpl.cache'];
 
-            if ($this->isEnableCache() === true && $bCaching === true && !$this->isMainCompilePage())
-            {
+            if ($this->isEnableCache() === true && $bCaching === true && !$this->isMainCompilePage()) {
                 $this->cache();
-            }
-            else
-            {
+            } else {
                 // Extraction Variables
                 extract($this->_aVars);
                 require $this->sCompileDirFile;
             }
-        }
-        else
-        {
+        } else {
             return $this->sCompileDirFile;
         }
     }
@@ -674,14 +668,13 @@ class PH7Tpl extends Kernel
         $this->file->createDir($this->sCacheDir);
 
         $this->sCacheDir2 = $this->sCacheDir . $this->registry->module . '_' . md5($this->
-                        registry->path_module) . PH7_DS . PH7_TPL_MOD_NAME . PH7_DS . PH7_LANG_NAME . PH7_DS . $this->getCurrentController() . PH7_DS;
+            registry->path_module) . PH7_DS . PH7_TPL_MOD_NAME . PH7_DS . PH7_LANG_NAME . PH7_DS . $this->getCurrentController() . PH7_DS;
         $this->file->createDir($this->sCacheDir2);
         $this->sCacheDirFile = $this->sCacheDir2 . str_replace(PH7_DS, '_', $this->file->getFileWithoutExt($this->sTplFile)) . '.cache.html';
 
         // If the cache has expired
         if ($this->file->getModifTime($this->sCompileDirFile) > $this->file->getModifTime($this->sCacheDirFile) || (!empty($this->mCacheExpire) && $this->
-                file->getModifTime($this->sCacheDirFile) < time() - $this->mCacheExpire))
-        {
+                file->getModifTime($this->sCacheDirFile) < time() - $this->mCacheExpire)) {
             ob_start();
 
             // Extraction Variables
@@ -877,7 +870,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
  * @author     SORIA Pierre-Henry
  * @email      ' . self::SOFTWARE_EMAIL . '
  * @link       ' . self::SOFTWARE_WEBSITE . '
- * @copyright  ' . self::SOFTWARE_COPYRIGHT . '
+ * @copyright  ' . sprintf(self::SOFTWARE_COPYRIGHT, date('Y')) . '
  * @license    ' . self::LICENSE . '
  ***************************************************************************/
 ';
@@ -942,16 +935,13 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      */
     final private function isMarkCopyright()
     {
-        // Skip this step if it's not the base template (because there is no "smartLink()" and "link()" in layout.tpl of other templates as it includes the "base" one)
-        if ($this->notBaseTheme())
+        // Skip this step if it's not the base template (because there is no "link()" in layout.tpl of other templates as it includes the "base" one)
+        if ($this->notBaseTheme()) {
             return true;
-
-        // "design->smartLink()" can be removed ONLY if you bought a license
-        if (!$this->bLicense && false === strpos($this->sCode, 'design->smartLink()'))
-            return false;
+        }
 
         // "design->link()" can never be removed. Copyright notices won't be displayed if you bought a license
-        return false !== strpos($this->sCode, 'design->link()');
+        return (false !== strpos($this->sCode, 'design->link()'));
     }
 
     /**
@@ -994,33 +984,11 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      */
     final private function setErrMsg()
     {
-        $this->sCode = static::ERR_MSG;
+        $this->sCode = sprintf(static::ERR_MSG, self::SOFTWARE_EMAIL);
     }
 
     public function __destruct()
     {
         $this->clean();
-
-        parent::__destruct();
-        unset(
-          $this->designModel,
-          $this->sTplFile,
-          $this->bLicense,
-          $this->sTemplateDir,
-          $this->sCompileDir,
-          $this->sCompileDir2,
-          $this->sCacheDir,
-          $this->sCacheDir2,
-          $this->sCode,
-          $this->sTemplateDirFile,
-          $this->sCompileDirFile,
-          $this->sCacheDirFile,
-          $this->sTplExt,
-          $this->bCaching,
-          $this->bHtmlCompressor,
-          $this->bPhpCompressor,
-          $this->mCacheExpire,
-          $this->bXmlTags
-        );
     }
 }

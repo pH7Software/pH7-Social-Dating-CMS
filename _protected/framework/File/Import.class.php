@@ -3,7 +3,7 @@
  * Helper to importing files.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / File
  */
@@ -33,9 +33,9 @@ class Import
      */
     public static function pH7FwkClass($sClassName, $sNameSpace = null, $sExt = 'php')
     {
-        $sClassName = static::_getSlashPath($sClassName);
+        $sClassName = static::getSlashPath($sClassName);
 
-        return static::_load(PH7_PATH_FRAMEWORK . $sClassName . '.class', $sExt, $sNameSpace);
+        return static::load(PH7_PATH_FRAMEWORK . $sClassName . '.class', $sExt, $sNameSpace);
     }
 
     /**
@@ -49,9 +49,9 @@ class Import
      */
     public static function pH7App($sClassName, $sNameSpace = null, $sExt = 'php')
     {
-        $sClassName = static::_getSlashPath($sClassName);
+        $sClassName = static::getSlashPath($sClassName);
 
-        return static::_load(PH7_PATH_APP . $sClassName, $sExt, $sNameSpace);
+        return static::load(PH7_PATH_APP . $sClassName, $sExt, $sNameSpace);
     }
 
     /**
@@ -65,7 +65,7 @@ class Import
      */
     public static function file($sFile, $sNameSpace = null, $sExt = 'php')
     {
-        return static::_load($sFile, $sExt, $sNameSpace);
+        return static::load($sFile, $sExt, $sNameSpace);
     }
 
     /**
@@ -79,9 +79,9 @@ class Import
      */
     public static function lib($sFile, $sNameSpace = null, $sExt = 'php')
     {
-        $sFile = static::_getSlashPath($sFile);
+        $sFile = static::getSlashPath($sFile);
 
-        return static::_load(PH7_PATH_LIBRARY . $sFile, $sExt, $sNameSpace);
+        return static::load(PH7_PATH_LIBRARY . $sFile, $sExt, $sNameSpace);
     }
 
     /**
@@ -91,7 +91,7 @@ class Import
      *
      * @return string The path convert.
      */
-    private static function _getSlashPath($sFile)
+    private static function getSlashPath($sFile)
     {
         return str_replace(PH7_DOT, PH7_DS, $sFile);
     }
@@ -107,13 +107,13 @@ class Import
      *
      * @throws Exception If the file is not found.
      */
-    private static function _load($sFile, $sExt, $sNameSpace)
+    private static function load($sFile, $sExt, $sNameSpace)
     {
         $sFile .= PH7_DOT . $sExt;
 
         // Hack to remove the backslash
         if (!empty($sNameSpace)) {
-            $sFile = str_replace($sFile . '\\', '', $sClassName);
+            $sFile = str_replace($sNameSpace . '\\', '', $sFile);
         }
 
         if (is_file($sFile)) {

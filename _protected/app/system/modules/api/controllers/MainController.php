@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2015-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2015-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Api / Controller
  * @link           http://ph7cms.com
@@ -10,13 +10,14 @@
 
 namespace PH7;
 
+use PH7\Framework\Api\Api;
 use PH7\Framework\Http\Rest\Rest;
 
 class MainController extends Controller
 {
+    use Api; // Import the Api Trait
 
-    use Framework\Api\Api; // Import the Api Trait
-
+    /** @var Rest */
     protected $oRest;
 
     public function __construct()
@@ -28,13 +29,15 @@ class MainController extends Controller
 
     /**
      * Test if the API works well.
+     *
+     * @return void
      */
     public function test()
     {
-        if ($this->oRest->getRequestMethod() != 'POST')
+        if ($this->oRest->getRequestMethod() != 'POST') {
             $this->oRest->response('', 406);
-        else
-            $this->oRest->response($this->set(array('return' => 'It Works!')));
+        } else {
+            $this->oRest->response($this->set(['return' => 'It Works!']));
+        }
     }
-
 }

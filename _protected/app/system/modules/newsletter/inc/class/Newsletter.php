@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Newsletter / Inc / Class
  */
@@ -24,15 +24,15 @@ class Newsletter extends Core
     const SLEEP_SEC = 10;
 
     /** @var SubscriptionModel */
-    private $_oSubscriptionModel;
+    private $oSubscriptionModel;
 
     /** @var int */
-    private static $_iTotalSent = 0;
+    private static $iTotalSent = 0;
 
     public function __construct()
     {
         parent::__construct();
-        $this->_oSubscriptionModel = new SubscriptionModel;
+        $this->oSubscriptionModel = new SubscriptionModel;
     }
 
     /**
@@ -46,7 +46,7 @@ class Newsletter extends Core
         $iRes = 0; // Default value
 
         $sSubscribersMethod = ($bOnlySubscribers) ? 'getSubscribers' : 'getProfiles';
-        $oSubscribers = $this->_oSubscriptionModel->$sSubscribersMethod();
+        $oSubscribers = $this->oSubscriptionModel->$sSubscribersMethod();
 
         $oMail = new Mail;
         foreach ($oSubscribers as $oSubscriber) {
@@ -55,13 +55,13 @@ class Newsletter extends Core
             }
 
             // Do not send all emails at the same time to avoid overloading the mail server.
-            if (++self::$_iTotalSent > self::MAX_BULK_EMAIL_NUMBER) {
+            if (++self::$iTotalSent > self::MAX_BULK_EMAIL_NUMBER) {
                 sleep(self::SLEEP_SEC);
             }
         }
         unset($oMail, $oSubscribers);
 
-        return ['status' => $iRes, 'nb_mail_sent' => self::$_iTotalSent];
+        return ['status' => $iRes, 'nb_mail_sent' => self::$iTotalSent];
     }
 
     /**
@@ -70,7 +70,7 @@ class Newsletter extends Core
      * @param stdClass $oSubscriber Subscriber data from the DB.
      * @param Mail $oMail
      *
-     * @return integer Number of recipients who were accepted for delivery.
+     * @return int Number of recipients who were accepted for delivery.
      */
     protected function sendMail(stdClass $oSubscriber, Mail $oMail)
     {

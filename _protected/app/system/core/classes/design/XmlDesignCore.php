@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class / Design
  */
@@ -63,7 +63,7 @@ class XmlDesignCore
     /**
      * Show the software news.
      *
-     * @param integet $iNum Number of news to display.
+     * @param int $iNum Number of news to display.
      *
      * @return void HTML contents.
      */
@@ -82,7 +82,7 @@ class XmlDesignCore
             }
         } catch (PH7Exception $oE) {
             (new Design)->setFlashMsg(
-                t("It seems you don't have Internet connection or the remote URL is temporarily unavailable. Some features on the admin panel won't be available."),
+                t("It seems you don't have Internet (or pH7CMS feed news is temporarily unavailable). Some features on the dashboard won't be available."),
                 'error'
             );
         }

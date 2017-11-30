@@ -3,7 +3,7 @@
  * @title            2 Check Out Class
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Payment / Gateway / Api
  * @version          1.0
@@ -27,8 +27,6 @@ class TwoCheckOut extends Provider implements Api
 
     /**
      * @param bool $bSandbox
-     *
-     * @return void
      */
     public function __construct($bSandbox = false)
     {
@@ -48,7 +46,7 @@ class TwoCheckOut extends Provider implements Api
      */
     public function getUrl($bSinglePage = false)
     {
-        $sPurchasePage = (true === (bool) $bSinglePage) ? 'spurchase' : 'purchase';
+        $sPurchasePage = (true === (bool)$bSinglePage) ? 'spurchase' : 'purchase';
 
         return $this->_sUrl . $sPurchasePage;
     }

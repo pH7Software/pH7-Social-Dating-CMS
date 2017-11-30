@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Note / Inc / Class / Design
  */
@@ -19,10 +19,11 @@ class NoteDesign extends WriteDesignCoreModel
     public static function thumb($oNoteModel)
     {
         echo '<div>';
-        if (!empty($oNoteModel->thumb))
+        if (!empty($oNoteModel->thumb)) {
             echo '<a href="', Uri::get('note', 'main', 'read', $oNoteModel->username . ',' . $oNoteModel->postId), '" class="pic thumb" data-load="ajax"><img src="', PH7_URL_DATA_SYS_MOD, 'note/', PH7_IMG, $oNoteModel->username, PH7_SH, $oNoteModel->thumb, '" alt="', $oNoteModel->pageTitle, '" title="', $oNoteModel->pageTitle, '" /></a>';
-        else
+        } else {
             (new AvatarDesignCore)->get($oNoteModel->username, $oNoteModel->firstName, $oNoteModel->sex, 100);
+        }
         echo '</div>';
     }
 }

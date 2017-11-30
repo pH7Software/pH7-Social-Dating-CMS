@@ -1,5 +1,5 @@
 /*!
-    Colorbox 1.6.4 (latest version from Github, Sep 10th 2016 Update)
+    Colorbox 1.6.4 (latest version from Github repo, Nov 28th 2017)
     license: MIT
     http://www.jacklmoore.com/colorbox
 */

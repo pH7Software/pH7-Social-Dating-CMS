@@ -4,7 +4,7 @@
  * @desc             Header URL methods.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Url
  * @version          1.2
@@ -26,7 +26,7 @@ class Header
      * @param string $sUrl Default NULL, so it's the current URL.
      * @param string $sMessage Default NULL, so no message.
      * @param string $sType Type of message: "Design::SUCCESS_TYPE", "Design::INFO_TYPE", "Design::WARNING_TYPE" or "Design::ERROR_TYPE"
-     * @param integer $iRedirectCode Default NULL, so the redirect code will be "301".
+     * @param int $iRedirectCode Default NULL, so the redirect code will be "301".
      *
      * @return void
      */
@@ -39,11 +39,11 @@ class Header
         Http::setHeadersByCode(Http::getStatusCodes($iRedirectCode));
 
         $oHttpRequest = new HttpRequest;
-        $sUrl = (!empty($sUrl)) ? $sUrl : $oHttpRequest->currentUrl();
+        $sUrl = ($sUrl !== null) ? $sUrl : $oHttpRequest->currentUrl();
         $sUrl = $oHttpRequest->pH7Url($sUrl);
         unset($oHttpRequest);
 
-        if (!empty($sMessage)) {
+        if ($sMessage !== null) {
             (new Design)->setFlashMsg($sMessage, $sType);
         }
 

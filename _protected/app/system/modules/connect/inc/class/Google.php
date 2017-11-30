@@ -3,7 +3,7 @@
  * @title          Google OAuth Class
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Connect / Inc / Class
  * @version        1.1
@@ -13,6 +13,8 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use Google_Client;
+use Google_Oauth2Service;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Date\CDateTime;
 use PH7\Framework\File\File;
@@ -28,7 +30,17 @@ use PH7\Framework\Util\Various;
 
 class Google extends Api implements IApi
 {
-    private $_sAvatarFile, $_sUsername, $_iProfileId, $_aUserInfo;
+    /** @var string */
+    private $sAvatarFile;
+
+    /** @var string */
+    private $sUsername;
+
+    /** @var int */
+    private $iProfileId;
+
+    /** @var array */
+    private $aUserInfo;
 
     /**
      * @param Session $oSession
@@ -43,16 +55,16 @@ class Google extends Api implements IApi
         Import::lib('Service.Google.OAuth.Google_Client');
         Import::lib('Service.Google.OAuth.contrib.Google_Oauth2Service');
 
-        $oClient = new \Google_Client;
+        $oClient = new Google_Client;
         $oClient->setApplicationName($oRegistry->site_name);
-        $this->_setConfig($oClient);
+        $this->setConfig($oClient);
 
-        $oOauth = new \Google_Oauth2Service($oClient);
+        $oOauth = new Google_Oauth2Service($oClient);
 
         if ($oHttpRequest->getExists('code')) {
             $oClient->authenticate();
             $oSession->set('token', $oClient->getAccessToken());
-            $this->sUrl = Uri::get('connect','main','home');
+            $this->sUrl = Uri::get('connect', 'main', 'home');
         }
 
         if ($oSession->exists('token')) {
@@ -75,12 +87,14 @@ class Google extends Api implements IApi
                     $this->setAvatar($aUserData['picture']);
                 }
 
-                $this->oDesign->setFlashMsg( t('You have now been registered! %0%', (new Registration)->sendMail($this->_aUserInfo, true)->getMsg()) );
-                $this->sUrl = Uri::get('connect','main','register');
+                $this->oDesign->setFlashMsg(
+                    t('You have now been registered! %0%', (new Registration($this->oView))->sendMail($this->aUserInfo, true)->getMsg())
+                );
+                $this->sUrl = Uri::get('connect', 'main', 'register');
             } else {
                 // Login
                 $this->setLogin($iId, $oUserModel);
-                $this->sUrl = Uri::get('connect','main','home');
+                $this->sUrl = Uri::get('connect', 'main', 'home');
             }
 
             // Add the access token
@@ -105,11 +119,11 @@ class Google extends Api implements IApi
         $sBirthDate = (!empty($aProfile['birthday'])) ? $aProfile['birthday'] : date('m/d/Y', strtotime('-30 year'));
         $sSex = $this->checkGender($aProfile['gender']);
         $sMatchSex = ($sSex == 'male' ? 'female' : ($sSex == 'female' ? 'male' : 'couple'));
-        $this->_sUsername = (new UserCore)->findUsername($aProfile['given_name'], $aProfile['name'], $aProfile['family_name']);
+        $this->sUsername = (new UserCore)->findUsername($aProfile['given_name'], $aProfile['name'], $aProfile['family_name']);
 
-        $this->_aUserInfo = [
+        $this->aUserInfo = [
             'email' => $aProfile['email'],
-            'username' => $this->_sUsername,
+            'username' => $this->sUsername,
             'password' => Various::genRndWord(Registration::DEFAULT_PASSWORD_LENGTH),
             'first_name' => (!empty($aProfile['given_name'])) ? $aProfile['given_name'] : '',
             'last_name' => (!empty($aProfile['family_name'])) ? $aProfile['family_name'] : '',
@@ -130,7 +144,7 @@ class Google extends Api implements IApi
             'is_active' => DbConfig::getSetting('userActivationType')
         ];
 
-        $this->_iProfileId = $oUserModel->add($this->_aUserInfo);
+        $this->iProfileId = $oUserModel->add($this->aUserInfo);
     }
 
     /**
@@ -142,29 +156,29 @@ class Google extends Api implements IApi
      */
     public function setAvatar($sUrl)
     {
-        $this->_sAvatarFile = $this->getAvatar($sUrl);
+        $this->sAvatarFile = $this->getAvatar($sUrl);
 
-        if ($this->_sAvatarFile) {
+        if ($this->sAvatarFile) {
             $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
-            (new UserCore)->setAvatar($this->_iProfileId, $this->_sUsername, $this->_sAvatarFile, $iApproved);
+            (new UserCore)->setAvatar($this->iProfileId, $this->sUsername, $this->sAvatarFile, $iApproved);
         }
 
         // Remove the temporary avatar
-        (new File)->deleteFile($this->_sAvatarFile);
+        (new File)->deleteFile($this->sAvatarFile);
     }
 
     /**
      * Set Configuration of OAuth API.
      *
-     * @param \Google_Client $oClient
+     * @param Google_Client $oClient
      *
      * @return void
      */
-    private function _setConfig(\Google_Client $oClient)
+    private function setConfig(Google_Client $oClient)
     {
         $oClient->setClientId(Config::getInstance()->values['module.api']['google.client_id']);
         $oClient->setClientSecret(Config::getInstance()->values['module.api']['google.client_secret_key']);
-        $oClient->setRedirectUri(Uri::get('connect','main','login','google'));
+        $oClient->setRedirectUri(Uri::get('connect', 'main', 'login', 'google'));
         $oClient->setDeveloperKey(Config::getInstance()->values['module.api']['google.developer_key']);
     }
 }

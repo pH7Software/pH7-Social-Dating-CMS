@@ -8,7 +8,7 @@
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl / Predefined
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @version          1.0.2
  * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
  *
@@ -28,10 +28,8 @@ class Variable extends Predefined
         /***** KERNEL VARIABLES *****/
         $this->addVar('software_name', 'self::SOFTWARE_NAME');
         $this->addVar('software_url', 'self::SOFTWARE_WEBSITE');
-        $this->addVar('software_help_url', 'self::SOFTWARE_HELP_URL');
         $this->addVar('software_doc_url', 'self::SOFTWARE_DOC_URL');
-        $this->addVar('software_faq_url', 'self::SOFTWARE_FAQ_URL');
-        $this->addVar('software_forum_url', 'self::SOFTWARE_FORUM_URL');
+        $this->addVar('software_issue_url', 'self::SOFTWARE_ISSUE_URL');
         $this->addVar('software_license_url', 'self::SOFTWARE_LICENSE_KEY_URL');
         $this->addVar('software_version', 'self::SOFTWARE_VERSION');
         $this->addVar('is_valid_license', 'PH7_VALID_LICENSE');

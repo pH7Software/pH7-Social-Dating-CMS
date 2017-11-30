@@ -1,24 +1,26 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2013-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2013-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
 
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\Design as Design;
+use PH7\Framework\Mvc\Model\Design;
+use PH7\Framework\Url\Header;
 
 class StyleForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_style'])) {
-            if (\PFBC\Form::isValid($_POST['submit_style']))
+            if (\PFBC\Form::isValid($_POST['submit_style'])) {
                 new StyleFormProcess;
-            Framework\Url\Header::redirect();
+            }
+
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_style');
@@ -29,5 +31,4 @@ class StyleForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2014-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2014-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / Config
  */
@@ -18,7 +18,7 @@ defined('PH7') or exit('Restricted access');
  * Default ad sizes.
  */
 
-return array(
+return [
     '728x90',
     '200x200',
     '250x250',
@@ -27,5 +27,4 @@ return array(
     '336x280',
     '120x600',
     '160x600',
-);
-
+];

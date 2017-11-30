@@ -5,7 +5,7 @@
  *                 Some various useful methods.
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / Framework / Util
  */
@@ -32,8 +32,10 @@ class Various
      */
     public static function genRnd($sStr = null, $iLength = self::MAX_LENGTH)
     {
+        $sPrefix = (string)mt_rand();
         $sStr = (!empty($sStr)) ? (string)$sStr : '';
-        $sChars = hash('whirlpool', hash('whirlpool', uniqid(mt_rand(), true) . $sStr . Ip::get() . time()) . hash('sha512', (new Browser)->getUserAgent() . microtime(true) * 9999));
+        $sChars = hash('whirlpool', hash('whirlpool', uniqid($sPrefix, true) . $sStr . Ip::get() . time()) . hash('sha512', (new Browser)->getUserAgent() . microtime(true) * 9999));
+
         return self::padStr($sChars, $iLength);
     }
 
@@ -48,6 +50,7 @@ class Various
     public static function padStr($sStr, $iLength = self::MAX_LENGTH)
     {
         $iLength = (int)$iLength;
+
         return ((new Str)->length($sStr) >= $iLength) ? substr($sStr, 0, $iLength) : str_pad($sStr, $iLength, $sStr);
     }
 

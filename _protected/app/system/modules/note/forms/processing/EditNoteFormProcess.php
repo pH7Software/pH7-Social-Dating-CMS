@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Note / Form / Processing
  */
@@ -36,13 +36,13 @@ class EditNoteFormProcess extends Form
             if ($oNote->checkPostId($sPostId, $iProfileId, $oNoteModel)) {
                 $oNoteModel->updatePost('postId', $sPostId, $iNoteId, $iProfileId);
             } else {
-                \PFBC\Form::setError('form_note', t('The post ID already exists or is incorrect.'));
+                \PFBC\Form::setError('form_edit_note', t('The post ID already exists or is incorrect.'));
                 return;
             }
         }
 
         if (!$this->updateCategories($iNoteId, $iProfileId, $oPost, $oNoteModel)) {
-            \PFBC\Form::setError('form_note', t('You cannot select more than %0% categories.', Note::MAX_CATEGORY_ALLOWED));
+            \PFBC\Form::setError('form_edit_note', t('You cannot select more than %0% categories.', Note::MAX_CATEGORY_ALLOWED));
             return; // Stop execution of the method
         }
 
@@ -108,11 +108,12 @@ class EditNoteFormProcess extends Form
     /**
      * Update categories.
      *
-     * @param integer $iNoteId
-     * @param integer $iProfileId
+     * @param int $iNoteId
+     * @param int $iProfileId
      * @param stdClass $oPost Post data from the database
      * @param NoteModel $oNoteModel
-     * @return boolean FALSE if the maximal number of categories allowed has been reached, FALSE otherwise.
+     *
+     * @return bool FALSE if the maximal number of categories allowed has been reached, TRUE otherwise.
      *
      * @internal WARNING: Be careful, you should use Http::NO_CLEAN constant,
      * otherwise Http::post() method removes the special tags and damages the SET function SQL for entry into the database.
@@ -130,6 +131,7 @@ class EditNoteFormProcess extends Form
                 $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
             }
         }
+
         return true;
     }
 }

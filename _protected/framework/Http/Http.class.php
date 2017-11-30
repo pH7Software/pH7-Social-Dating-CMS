@@ -4,7 +4,7 @@
  * @desc             HTTP Management Class.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Http
  */
@@ -89,8 +89,9 @@ class Http
      */
     public static function getStatusCodes($iStatus)
     {
-        $iStatus = (int) $iStatus;
-        return (!empty(static::STATUS_CODE[$iStatus])) ? $iStatus : false;
+        $iStatus = (int)$iStatus;
+
+        return !empty(static::STATUS_CODE[$iStatus]) ? $iStatus : false;
     }
 
     /**
@@ -128,12 +129,12 @@ class Http
     public static function setHeaders($mHeaders)
     {
         // Header already sent
-        if (static::_isSent()) {
+        if (static::isSent()) {
             throw new Exception('Headers were already sent.');
         }
 
         // Loop elements and set header
-        foreach ((array) $mHeaders as $sHeader) {
+        foreach ((array)$mHeaders as $sHeader) {
             header((string)$sHeader);
         }
     }
@@ -141,7 +142,9 @@ class Http
     /**
      * Parse headers for a given status code.
      *
-     * @param integer $iCode The code to use, possible values are: 200, 301, 302, 304, 307, 400, 401, 403, 404, 410, 500, 501, ... Default: 200
+     * @param integer $iCode The code to use, possible values are: 200, 301, 302, 304, 307, 400, 401, 403, 404, 410, 500, 501, ...
+     *
+     * @throws Exception
      */
     public static function setHeadersByCode($iCode = 200)
     {
@@ -157,6 +160,8 @@ class Http
      * Set a HTTP Content Type.
      *
      * @param string $sType Example: "text/xml".
+     *
+     * @throws Exception
      */
     public static function setContentType($sType)
     {
@@ -187,7 +192,7 @@ class Http
         $sAuthUsr = Server::getVar(Server::AUTH_USER);
         $sAuthPwd = Server::getVar(Server::AUTH_PW);
 
-        if (!($sAuthUsr == $sUsr && $sAuthPwd == $sPwd)) {
+        if (!($sAuthUsr === $sUsr && $sAuthPwd === $sPwd)) {
             header('WWW-Authenticate: Basic realm="HTTP Basic Authentication"');
             static::setHeadersByCode(401);
             echo t('You must enter a valid login ID and password to access this resource.') . "\n";
@@ -236,7 +241,7 @@ class Http
      */
     public function isRelativeUrl($sUrl)
     {
-        return (0 !== stripos($sUrl, 'http'));
+        return 0 !== stripos($sUrl, 'http');
     }
 
     /**
@@ -263,7 +268,7 @@ class Http
         $sHost = static::getHostName($sUrl);
         $aDomainParts = explode('.', $sHost);
 
-        return (count($aDomainParts) > 2) ? $aDomainParts[0] : null;
+        return count($aDomainParts) > 2 ? $aDomainParts[0] : null;
     }
 
     /**
@@ -293,17 +298,17 @@ class Http
     /**
      * @return string The HTTP server protocol.
      */
-     public static function getProtocol()
-     {
-         return Server::getVar(Server::SERVER_PROTOCOL);
-     }
+    public static function getProtocol()
+    {
+        return Server::getVar(Server::SERVER_PROTOCOL);
+    }
 
     /**
      * Checks if any headers were already sent.
      *
      * @return boolean TRUE if the headers were sent, FALSE if not.
      */
-    final private static function _isSent()
+    final private static function isSent()
     {
         return headers_sent();
     }

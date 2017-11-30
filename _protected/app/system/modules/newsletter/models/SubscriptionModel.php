@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Newsletter / Model
  */
@@ -15,7 +15,7 @@ class SubscriptionModel extends UserCoreModel
     /**
      * Get all Active Subscribers (it is required by the law to send emails only to the confirmed opt-in subscribers).
      *
-     * @return object
+     * @return \stdClass
      */
     public function getSubscribers()
     {
@@ -23,6 +23,7 @@ class SubscriptionModel extends UserCoreModel
         $rStmt->execute();
         $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);
+
         return $oRow;
     }
 
@@ -75,7 +76,7 @@ class SubscriptionModel extends UserCoreModel
      * @param integer $iOffset
      * @param integer $iLimit
      *
-     * @return integer|object Integer for the number subscribers returned or string for the subscribers list returned
+     * @return integer|\stdClass Integer for the number subscribers returned or string for the subscribers list returned
      */
     public function browse($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {

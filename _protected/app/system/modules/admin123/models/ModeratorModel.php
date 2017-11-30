@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Inc / Model
  */
@@ -12,17 +12,20 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class ModeratorModel extends ModeratorCoreModel
 {
-
     public function getAlbumsPicture($iOffset, $iLimit)
     {
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
-        $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, a.* FROM' .
+
+        $sSqlQuery = 'SELECT m.profileId, m.username, a.* FROM' .
             Db::prefix('AlbumsPictures') . 'AS a INNER JOIN' . Db::prefix('Members') .
-            'AS m USING(profileId) WHERE a.approved = \'0\' LIMIT :offset, :limit');
+            'AS m USING(profileId) WHERE a.approved = \'0\' LIMIT :offset, :limit';
+
+        $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
@@ -36,6 +39,7 @@ class ModeratorModel extends ModeratorCoreModel
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
@@ -49,6 +53,7 @@ class ModeratorModel extends ModeratorCoreModel
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
@@ -62,6 +67,7 @@ class ModeratorModel extends ModeratorCoreModel
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
@@ -74,6 +80,7 @@ class ModeratorModel extends ModeratorCoreModel
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
@@ -87,6 +94,7 @@ class ModeratorModel extends ModeratorCoreModel
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
@@ -96,6 +104,7 @@ class ModeratorModel extends ModeratorCoreModel
             'SET approved = :status  WHERE albumId = :albumId');
         $rStmt->bindParam(':albumId', $iAlbumId, \PDO::PARAM_INT);
         $rStmt->bindParam(':status', $iStatus, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -105,6 +114,7 @@ class ModeratorModel extends ModeratorCoreModel
             'SET approved = :status  WHERE pictureId = :pictureId');
         $rStmt->bindParam(':pictureId', $iPictureId, \PDO::PARAM_INT);
         $rStmt->bindParam(':status', $iStatus, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -114,6 +124,7 @@ class ModeratorModel extends ModeratorCoreModel
             'SET approved = :status  WHERE albumId = :albumId');
         $rStmt->bindParam(':albumId', $iAlbumId, \PDO::PARAM_INT);
         $rStmt->bindParam(':status', $iStatus, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -123,6 +134,7 @@ class ModeratorModel extends ModeratorCoreModel
             'SET approved = :status  WHERE videoId = :videoId');
         $rStmt->bindParam(':videoId', $iVideoId, \PDO::PARAM_INT);
         $rStmt->bindParam(':status', $iStatus, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -132,6 +144,7 @@ class ModeratorModel extends ModeratorCoreModel
             'SET approvedAvatar = :status WHERE profileId = :profileId');
         $rStmt->bindParam(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindParam(':status', $iStatus, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -141,6 +154,7 @@ class ModeratorModel extends ModeratorCoreModel
             'SET approved = :status WHERE profileId = :profileId');
         $rStmt->bindParam(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindParam(':status', $iStatus, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -149,6 +163,7 @@ class ModeratorModel extends ModeratorCoreModel
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('AlbumsPictures') .
             'WHERE albumId = :albumId');
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -157,7 +172,7 @@ class ModeratorModel extends ModeratorCoreModel
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('AlbumsVideos') .
             'WHERE albumId = :albumId');
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
-
 }

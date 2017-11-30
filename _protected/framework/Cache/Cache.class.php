@@ -4,7 +4,7 @@
  * @desc             Handler Cache.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2011-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2011-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Cache
  * @version          1.3
@@ -25,30 +25,30 @@ class Cache
     const CACHE_FILE_EXT = '.cache.php';
 
     /** @var File */
-    private $_oFile;
+    private $oFile;
 
     /** @var string */
-    private $_sCacheDir;
+    private $sCacheDir;
 
     /** @var string */
-    private $_sGroup;
+    private $sGroup;
 
     /** @var string */
-    private $_sId;
+    private $sId;
 
     /** @var integer */
-    private $_iTtl;
+    private $iTtl;
 
     /** @var string */
-    private $_sPrefix = 'pH7_';
+    private $sPrefix = 'pH7_';
 
     /** @var boolean */
-    private $_bEnabled = true;
+    private $bEnabled = true;
 
     public function __construct()
     {
-        $this->_oFile = new File;
-        $this->_bEnabled = (bool)Config::getInstance()->values['cache']['enable.general.cache'];
+        $this->oFile = new File;
+        $this->bEnabled = (bool)Config::getInstance()->values['cache']['enable.general.cache'];
     }
 
     /**
@@ -60,7 +60,7 @@ class Cache
      */
     public function enabled($bIsEnable)
     {
-        $this->_bEnabled = (bool)$bIsEnable;
+        $this->bEnabled = (bool)$bIsEnable;
 
         return $this;
     }
@@ -79,7 +79,7 @@ class Cache
     public function setCacheDir($sCacheDir)
     {
         if (is_dir($sCacheDir)) {
-            $this->_sCacheDir = $sCacheDir;
+            $this->sCacheDir = $sCacheDir;
         } else {
             throw new PH7InvalidArgumentException('"' . $sCacheDir . '" cache directory cannot be found!');
         }
@@ -96,7 +96,8 @@ class Cache
      */
     public function setPrefix($sPrefix)
     {
-        $this->_sPrefix = $sPrefix;
+        $this->sPrefix = $sPrefix;
+
         return $this;
     }
 
@@ -111,12 +112,12 @@ class Cache
      */
     public function start($sGroup, $sId, $iTtl)
     {
-        $this->_checkCacheDir();
+        $this->checkCacheDir();
 
-        if ($this->_bEnabled) {
-            $this->_sGroup = $sGroup . PH7_DS;
-            $this->_sId = $sId;
-            $this->_iTtl = $iTtl;
+        if ($this->bEnabled) {
+            $this->sGroup = $sGroup . PH7_DS;
+            $this->sId = $sId;
+            $this->iTtl = (int)$iTtl;
             ob_start();
         }
 
@@ -132,13 +133,13 @@ class Cache
      */
     public function stop($bPrint = true)
     {
-        if (!$this->_bEnabled) {
+        if (!$this->bEnabled) {
             return null;
         }
 
         $sBuffer = ob_get_contents();
         ob_end_clean();
-        $this->_write($sBuffer);
+        $this->write($sBuffer);
 
         if ($bPrint) {
             echo $sBuffer;
@@ -151,14 +152,12 @@ class Cache
     /**
      * Sets the time expire cache.
      *
-     * @param integer $iExpire (the time with the 'touch' function).
-     *
      * @return self
      */
-    public function setExpire($iExpire)
+    public function setExpire()
     {
         // How long to cache for (in seconds, e.g. 3600*24 = 24 hour)
-        @touch($this->_getFile(), time() + (int)$this->_iTtl);
+        @touch($this->getFile(), time() + $this->iTtl);
 
         return $this;
     }
@@ -166,12 +165,12 @@ class Cache
     /**
      * Gets the data cache.
      *
-     * @param boolean $bPrint Default FALSE
-     * @return boolean|integer|float|string|array|object Returns the converted cache value if successful, FALSE otherwise.
+     * @param bool $bPrint Default FALSE
+     * @return bool|int|float|string|array|object Returns the converted cache value if successful, FALSE otherwise.
      */
     public function get($bPrint = false)
     {
-        $mData = $this->_read($bPrint);
+        $mData = $this->read($bPrint);
 
         if ($mData !== false) {
             $mData = unserialize($mData);
@@ -189,11 +188,11 @@ class Cache
      */
     public function put($sData)
     {
-        if (!$this->_bEnabled) {
+        if (!$this->bEnabled) {
             return null;
         }
 
-        $this->_write(serialize($sData));
+        $this->write(serialize($sData));
 
         return $this;
     }
@@ -205,10 +204,11 @@ class Cache
      */
     public function clear()
     {
-        if (!empty($this->_sId))
-            $this->_oFile->deleteFile($this->_getFile());
-        else
-            $this->_oFile->deleteDir($this->_sCacheDir . $this->_sGroup);
+        if (!empty($this->sId)) {
+            $this->oFile->deleteFile($this->getFile());
+        } else {
+            $this->oFile->deleteDir($this->sCacheDir . $this->sGroup);
+        }
 
         return $this;
     }
@@ -216,11 +216,11 @@ class Cache
     /**
      * Get the creation/modification time of the current cache file.
      *
-     * @return integer|boolean Time the file was last modified/created as a Unix timestamp, or FALSE on failure.
+     * @return int|bool Time the file was last modified/created as a Unix timestamp, or FALSE on failure.
      */
     public function getTimeOfCacheFile()
     {
-        return $this->_oFile->getModifTime($this->_getFile());
+        return $this->oFile->getModifTime($this->getFile());
     }
 
     /**
@@ -233,7 +233,7 @@ class Cache
         return 'defined(\'PH7\') or exit(\'Restricted access\');
 /*
 Created on ' . gmdate('Y-m-d H:i:s') . '
-File ID: ' . $this->_sId . '
+File ID: ' . $this->sId . '
 */
 /***************************************************************************
  *     ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_COMPANY . '
@@ -242,7 +242,7 @@ File ID: ' . $this->_sId . '
  * @author     SORIA Pierre-Henry
  * @email      ' . Kernel::SOFTWARE_EMAIL . '
  * @link       ' . Kernel::SOFTWARE_WEBSITE . '
- * @copyright  ' . Kernel::SOFTWARE_COPYRIGHT . '
+ * @copyright  ' . sprintf(Kernel::SOFTWARE_COPYRIGHT, date('Y')) . '
  * @license    ' . Kernel::SOFTWARE_LICENSE . '
  ***************************************************************************/
 ';
@@ -251,15 +251,15 @@ File ID: ' . $this->_sId . '
     /**
      * Checks the cache.
      *
-     * @return boolean
+     * @return bool
      */
-    private function _check()
+    private function check()
     {
-        $sFile = $this->_getFile();
+        $sFile = $this->getFile();
 
-        if (!$this->_bEnabled || !is_file($sFile) || (!empty($this->_iTtl) && $this->_oFile->getModifTime($sFile) < time())) {
+        if (!$this->bEnabled || !is_file($sFile) || (!empty($this->iTtl) && $this->oFile->getModifTime($sFile) < time())) {
             // If the cache has expired
-            $this->_oFile->deleteFile($this->_getFile());
+            $this->oFile->deleteFile($this->getFile());
             return false;
         }
 
@@ -272,9 +272,9 @@ File ID: ' . $this->_sId . '
      *
      * @return self
      */
-    private function _checkCacheDir()
+    private function checkCacheDir()
     {
-        $this->_sCacheDir = (empty($this->_sCacheDir)) ? PH7_PATH_CACHE . static::CACHE_DIR : $this->_sCacheDir;
+        $this->sCacheDir = (empty($this->sCacheDir)) ? PH7_PATH_CACHE . static::CACHE_DIR : $this->sCacheDir;
 
         return $this;
     }
@@ -284,22 +284,23 @@ File ID: ' . $this->_sId . '
      *
      * @return string
      */
-    private function _getFile()
+    private function getFile()
     {
-        return $this->_sCacheDir . $this->_sGroup . sha1($this->_sId) . static::CACHE_FILE_EXT;
+        return $this->sCacheDir . $this->sGroup . sha1($this->sId) . static::CACHE_FILE_EXT;
     }
 
     /**
      * Reads the Cache.
      *
      * @param boolean $bPrint
-     * @return boolean|string Returns TRUE or a string if successful, FALSE otherwise.
+     * @return bool|string Returns TRUE or a string if successful, FALSE otherwise.
      */
-    private function _read($bPrint)
+    private function read($bPrint)
     {
-        if ($this->_check()) {
-            require $this->_getFile();
+        if ($this->check()) {
+            require $this->getFile();
 
+            /** @internal $_mData is in the cache file included just above */
             if (!empty($_mData)) {
                 if ($bPrint) {
                     echo $_mData;
@@ -321,15 +322,16 @@ File ID: ' . $this->_sId . '
      * @return boolean
      *
      * @throws Exception If the file cannot be written.
+     * @throws \PH7\Framework\File\Exception If the file cannot be created.
      */
-    final private function _write($sData)
+    final private function write($sData)
     {
-        if (!$this->_bEnabled) {
+        if (!$this->bEnabled) {
             return null;
         }
 
-        $sFile = $this->_getFile();
-        $this->_oFile->createDir($this->_sCacheDir . $this->_sGroup);
+        $sFile = $this->getFile();
+        $this->oFile->createDir($this->sCacheDir . $this->sGroup);
 
         $sPhpHeader = $this->getHeaderContents();
 
@@ -341,8 +343,8 @@ File ID: ' . $this->_sId . '
             }
 
             fclose($rHandle);
-            $this->setExpire($this->_iTtl);
-            $this->_oFile->chmod($sFile, 420);
+            $this->setExpire();
+            $this->oFile->chmod($sFile, 420);
             return true;
         }
 

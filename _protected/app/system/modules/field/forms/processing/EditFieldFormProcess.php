@@ -1,12 +1,13 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2013-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2013-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Field / Form / Processing
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Cache\Cache;
@@ -15,7 +16,6 @@ use PH7\Framework\Url\Header;
 
 class EditFieldFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -39,5 +39,4 @@ class EditFieldFormProcess extends Form
                 \PFBC\Form::setError('form_edit_field', t('Oops! An error occurred while adding the field, please try again.'));
         }
     }
-
 }

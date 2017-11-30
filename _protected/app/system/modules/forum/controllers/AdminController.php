@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Forum / Controller
  */
@@ -39,6 +39,7 @@ class AdminController extends Controller
         $this->sTitle = t('Add a new Category');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -47,6 +48,7 @@ class AdminController extends Controller
         $this->sTitle = t('Add a new Forum');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -55,6 +57,7 @@ class AdminController extends Controller
         $this->sTitle = t('Edit the Category');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -63,15 +66,16 @@ class AdminController extends Controller
         $this->sTitle = t('Edit the Forum');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
     public function deleteCategory()
     {
         if ($this->oForumModel->deleteCategory($this->httpRequest->post('id'))) {
-            $this->sMsg = t('Your Category has been deleted!');
+            $this->sMsg = t('Your Category has been deleted.');
         } else {
-            $this->sMsg = t('Oops! Your Category could not be deleted');
+            $this->sMsg = t('Oops! Your Category could not be deleted.');
         }
 
         Header::redirect(
@@ -82,10 +86,11 @@ class AdminController extends Controller
 
     public function deleteForum()
     {
-        if ($this->oForumModel->deleteForum($this->httpRequest->post('id')))
-            $this->sMsg = t('Your Forum has been deleted!');
-        else
-            $this->sMsg = t('Oops! Your Forum could not be deleted');
+        if ($this->oForumModel->deleteForum($this->httpRequest->post('id'))) {
+            $this->sMsg = t('Your Forum has been deleted.');
+        } else {
+            $this->sMsg = t('Oops! Your Forum could not be deleted.');
+        }
 
         Header::redirect(
             Uri::get('forum', 'forum', 'index'),

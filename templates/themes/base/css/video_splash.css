@@ -1,6 +1,6 @@
 /*
  * Author:        Pierre-Henry Soria <hello@ph7cms.com>
- * Copyright:     (c) 2016-2017, Pierre-Henry Soria. All Rights Reserved.
+ * Copyright:     (c) 2016-2018, Pierre-Henry Soria. All Rights Reserved.
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
@@ -15,6 +15,10 @@ body {
 
 #promo_text h2, #promo_text h2 a {
     color: #F55959 !important;
+}
+
+#promo_text {
+    max-width: 500px;
 }
 
 footer a, footer p {
@@ -40,4 +44,11 @@ footer a, footer p {
 
 #logo a {
     color: #EEE;
+}
+
+
+/* Make sure Bootstrap "alert" message is always well displayed */
+.alert {
+    z-index: 999;
+    position: absolute;
 }

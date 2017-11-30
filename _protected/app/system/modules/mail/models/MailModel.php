@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Mail / Model
  */
@@ -14,7 +14,9 @@ use PH7\Framework\Mvc\Model\Spam as SpamModel;
 
 class MailModel extends MailCoreModel
 {
-    const INBOX = 1, OUTBOX = 2, TRASH = 3;
+    const INBOX = 1;
+    const OUTBOX = 2;
+    const TRASH = 3;
 
     const TRASH_MODE = 'trash';
     const RESTOR_MODE = 'restor';
@@ -27,8 +29,8 @@ class MailModel extends MailCoreModel
     ];
 
     /**
-     * @param integer $iRecipient
-     * @param integer $iMessageId
+     * @param int $iRecipient
+     * @param int $iMessageId
      *
      * @return \stdClass
      */
@@ -43,12 +45,13 @@ class MailModel extends MailCoreModel
         $rStmt->bindValue(':recipient', $iRecipient, \PDO::PARAM_INT);
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->fetch(\PDO::FETCH_OBJ);
     }
 
     /**
-     * @param integer $iSender
-     * @param integer $iMessageId
+     * @param int $iSender
+     * @param int $iMessageId
      *
      * @return \stdClass
      */
@@ -63,12 +66,13 @@ class MailModel extends MailCoreModel
         $rStmt->bindValue(':sender', $iSender, \PDO::PARAM_INT);
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->fetch(\PDO::FETCH_OBJ);
     }
 
     /**
-     * @param integer $iProfileId
-     * @param integer $iMessageId
+     * @param int $iProfileId
+     * @param int $iMessageId
      *
      * @return \stdClass
      */
@@ -84,19 +88,20 @@ class MailModel extends MailCoreModel
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->fetch(\PDO::FETCH_OBJ);
     }
 
     /**
      * Send a message.
      *
-     * @param integer $iSender
-     * @param integer $iRecipient
+     * @param int $iSender
+     * @param int $iRecipient
      * @param string $sTitle
      * @param string $sMessage
      * @param string $sCreatedDate
      *
-     * @return boolean|integer Returns the ID of the message on success or FALSE on failure.
+     * @return bool|int Returns the ID of the message on success or FALSE on failure.
      */
     public function sendMsg($iSender, $iRecipient, $sTitle, $sMessage, $sCreatedDate)
     {
@@ -109,14 +114,15 @@ class MailModel extends MailCoreModel
         $rStmt->bindValue(':title', $sTitle, \PDO::PARAM_STR);
         $rStmt->bindValue(':message', $sMessage, \PDO::PARAM_STR);
         $rStmt->bindValue(':sendDate', $sCreatedDate, \PDO::PARAM_STR);
+
         return (!$rStmt->execute()) ? false : Db::getInstance()->lastInsertId();
     }
 
     /**
-     * @param integer $iRecipient
-     * @param integer $iMessageId
+     * @param int $iRecipient
+     * @param int $iMessageId
      *
-     * @return boolean
+     * @return bool
      */
     public function deleteMsg($iRecipient, $iMessageId)
     {
@@ -128,9 +134,9 @@ class MailModel extends MailCoreModel
     }
 
     /**
-     * @param integer $iMessageId
+     * @param int $iMessageId
      *
-     * @return boolean
+     * @return bool
      */
     public function adminDeleteMsg($iMessageId)
     {
@@ -141,7 +147,7 @@ class MailModel extends MailCoreModel
     }
 
     /**
-     * @param integer $iMessageId
+     * @param int $iMessageId
      */
     public function setReadMsg($iMessageId)
     {
@@ -152,7 +158,7 @@ class MailModel extends MailCoreModel
     }
 
     /**
-     * @param integer $iMessageId
+     * @param int $iMessageId
      *
      * @return \stdClass
      */
@@ -161,23 +167,24 @@ class MailModel extends MailCoreModel
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Messages') . 'WHERE messageId = :messageId LIMIT 1');
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->fetch(\PDO::FETCH_OBJ);
     }
 
     /**
      * Set message to 'trash' or 'toDelete'.
      *
-     * @param integer $iProfileId User ID
-     * @param integer $iMessageId Message ID
+     * @param int $iProfileId User ID
+     * @param int $iMessageId Message ID
      * @param string $sMode Set to this category. Choose between 'trash', 'restor' and 'delete'
      *
      * @throws PH7InvalidArgumentException
      *
-     * @return boolean
+     * @return bool
      */
     public function setTo($iProfileId, $iMessageId, $sMode)
     {
-        if (!in_array($sMode, self::MODES)) {
+        if (!in_array($sMode, self::MODES, true)) {
             throw new PH7InvalidArgumentException('Bad set mode: "' . $sMode . '"!');
         }
 
@@ -200,16 +207,16 @@ class MailModel extends MailCoreModel
     }
 
     /**
-     * @param integer|string $mLooking
-     * @param boolean $bCount
+     * @param int|string $mLooking
+     * @param bool $bCount
      * @param string $sOrderBy
-     * @param integer $iSort
-     * @param integer $iOffset
-     * @param integer $iLimit
-     * @param integer|null $iProfileId
+     * @param int $iSort
+     * @param int $iOffset
+     * @param int $iLimit
+     * @param int|null $iProfileId
      * @param string $sType
      *
-     * @return integer|\stdClass
+     * @return int|\stdClass
      */
     public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $iProfileId = null, $sType = 'all')
     {
@@ -274,10 +281,10 @@ class MailModel extends MailCoreModel
     /**
      * Check Duplicate Contents.
      *
-     * @param integer $iSenderId Sender's ID
+     * @param int $iSenderId Sender's ID
      * @param string $sMsg Message content
      *
-     * @return boolean Returns TRUE if similar content was found in the table, FALSE otherwise.
+     * @return bool Returns TRUE if similar content was found in the table, FALSE otherwise.
      */
     public function isDuplicateContent($iSenderId, $sMsg)
     {
@@ -294,11 +301,11 @@ class MailModel extends MailCoreModel
     /**
      * To prevent spam!
      *
-     * @param integer $iSenderId
-     * @param integer $iWaitTime In minutes!
+     * @param int $iSenderId
+     * @param int $iWaitTime In minutes!
      * @param string $sCurrentTime In date format: 0000-00-00 00:00:00
      *
-     * @return boolean Return TRUE if the weather was fine, otherwise FALSE
+     * @return bool Return TRUE if the weather was fine, otherwise FALSE
      */
     public function checkWaitSend($iSenderId, $iWaitTime, $sCurrentTime)
     {
@@ -308,6 +315,6 @@ class MailModel extends MailCoreModel
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_STR);
         $rStmt->execute();
 
-        return ($rStmt->rowCount() === 0);
+        return $rStmt->rowCount() === 0;
     }
 }

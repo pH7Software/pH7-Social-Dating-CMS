@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Forum / Controller
  */
@@ -20,6 +20,7 @@ class ForumController extends Controller
     const TOPICS_PER_PAGE = 20;
     const FORUMS_PER_PAGE = 20;
     const POSTS_PER_PAGE = 10;
+    const MAX_SUMMARY_MESSAGE_LENGTH = 150;
 
     /** @var ForumModel */
     private $oForumModel;
@@ -83,12 +84,14 @@ class ForumController extends Controller
 
     public function topic()
     {
+        $sForumName = $this->httpRequest->get('forum_name');
+
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->oForumModel->totalTopics(), self::TOPICS_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oTopics = $this->oForumModel->getTopic(
-            strstr($this->httpRequest->get('forum_name'), '-', true),
+            strstr($sForumName, '-', true),
             $this->httpRequest->get('forum_id', 'int'),
             null,
             null,
@@ -98,19 +101,20 @@ class ForumController extends Controller
             $this->oPage->getNbItemsPerPage()
         );
 
-        $this->view->forum_name = $this->httpRequest->get('forum_name');
+        $this->view->forum_name = $sForumName;
         $this->view->forum_id = $this->httpRequest->get('forum_id', 'int');
 
         if (empty($oTopics)) {
             $this->sTitle = t('No Topics found.');
             $this->notFound();
         } else {
-            $this->view->page_title = t('%0% - Forums', $this->str->upperFirst($this->httpRequest->get('forum_name')));
-            $this->view->meta_description = t('%0% - Topics - Discussion Forums', $this->httpRequest->get('forum_name'));
-            $this->view->meta_keywords = t('%0%,forum,discussion,dating forum,social forum,people,meet people,forums,free dating forum', str_replace(' ', ',', $this->httpRequest->get('forum_name')));
-            $this->view->h1_title = $this->str->upperFirst($this->httpRequest->get('forum_name'));
+            $this->view->page_title = t('%0% - Forums', $this->str->upperFirst($sForumName));
+            $this->view->meta_description = t('%0% - Topics - Discussion Forums', $sForumName);
+            $this->view->meta_keywords = t('%0%,forum,discussion,dating forum,social forum,people,meet people,forums,free dating forum', $this->getNameAsKeywords($sForumName));
+            $this->view->h1_title = $this->str->upperFirst($sForumName);
             $this->view->topics = $oTopics;
         }
+
         $this->output();
     }
 
@@ -148,14 +152,16 @@ class ForumController extends Controller
             $this->sTitle = t('Topic Not Found!');
             $this->notFound();
         } else {
+            $sForumName = $this->httpRequest->get('forum_name');
+
             // Adding the RSS link
             $this->view->header = '<link rel="alternate" type="application/rss+xml" title="' . t('Latest Forum Posts') . '" href="' . Uri::get('xml', 'rss', 'xmlrouter', 'forum-post,' . $oPost->topicId) . '" />';
-            $this->sTitle = t('%0% | %1% - Forum', $this->str->upperFirst($this->httpRequest->get('forum_name')), $this->str->escape(Ban::filterWord($oPost->title), true));
+            $this->sTitle = t('%0% | %1% - Forum', $this->str->upperFirst($sForumName), $this->getTitle($oPost->title));
             $this->view->page_title = $this->sTitle;
-            $this->view->meta_description = t('%0% Topics - Discussion Forums', substr($this->str->escape(Ban::filterWord($oPost->message), true), 0, 150));
+            $this->view->meta_description = t('%0% Topics - Discussion Forums', $this->getShortedMessage($oPost->message));
 
             // Generates beautiful meta keywords for good SEO
-            $this->view->meta_keywords = t('%0%,%1%,forum,discussion,dating forum,social forum', str_replace(' ', ',', $this->httpRequest->get('forum_name')), substr(str_replace(' ', ',', Ban::filterWord($oPost->title, false)), 0, 250));
+            $this->view->meta_keywords = t('%0%,%1%,forum,discussion,dating forum,social forum', $this->getNameAsKeywords($sForumName), $this->getTitleAsKeywords($oPost->title));
             $this->view->h1_title = $this->sTitle;
 
             $this->view->dateTime = $this->dateTime;
@@ -199,6 +205,7 @@ class ForumController extends Controller
             $this->view->h2_title = $this->sTitle;
             $this->view->topics = $oTopics;
         }
+
         $this->output();
     }
 
@@ -208,6 +215,7 @@ class ForumController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Topic Search - Discussion Forum - %site_name%');
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -250,6 +258,7 @@ class ForumController extends Controller
         }
 
         $this->manualTplInclude('topic.tpl');
+
         $this->output();
     }
 
@@ -258,6 +267,7 @@ class ForumController extends Controller
         $this->sTitle = t('Add a new Topic');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -266,6 +276,7 @@ class ForumController extends Controller
         $this->sTitle = t('Edit Topic');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -274,6 +285,7 @@ class ForumController extends Controller
         $this->sTitle = t('Edit your Message');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -282,6 +294,7 @@ class ForumController extends Controller
         $this->sTitle = t('Reply Message');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -295,7 +308,7 @@ class ForumController extends Controller
         if ($this->oForumModel->deleteTopic($this->session->get('member_id'), $iTopicId)) {
             $this->sMsg = t('Your topic has been deleted.');
         } else {
-            $this->sMsg = t('Oops! Your topic could not be deleted');
+            $this->sMsg = t('Oops! Your topic could not be deleted.');
         }
 
         Header::redirect(
@@ -317,7 +330,7 @@ class ForumController extends Controller
         if ($this->oForumModel->deleteMessage($this->session->get('member_id', 'int'), $iMessageId)) {
             $this->sMsg = t('Your message has been deleted.');
         } else {
-            $this->sMsg = t('Oops! Your message could not be deleted');
+            $this->sMsg = t('Oops! Your message could not be deleted.');
         }
 
         Header::redirect(
@@ -327,9 +340,49 @@ class ForumController extends Controller
     }
 
     /**
+     * @param string $sForumName
+     *
+     * @return string
+     */
+    private function getNameAsKeywords($sForumName)
+    {
+        return str_replace(' ', ',', $sForumName);
+    }
+
+    /**
+     * @param string $sTitle
+     *
+     * @return string
+     */
+    private function getTitleAsKeywords($sTitle)
+    {
+        return str_replace(' ', ',', Ban::filterWord($sTitle, false));
+    }
+
+    /**
+     * @param string $sTitle
+     *
+     * @return string
+     */
+    private function getTitle($sTitle)
+    {
+        return $this->str->escape(Ban::filterWord($sTitle), true);
+    }
+
+    /**
+     * @param string $sMessage
+     *
+     * @return string
+     */
+    private function getShortedMessage($sMessage)
+    {
+        return substr($this->str->escape(Ban::filterWord($sMessage), true), 0, self::MAX_SUMMARY_MESSAGE_LENGTH);
+    }
+
+    /**
      * Set a Not Found Error Message with HTTP 404 Code Status.
      *
-     * @param boolean $b404Status For the Ajax blocks profile, we can not put HTTP error code 404, so the attribute must be set to "false".
+     * @param bool $b404Status For the Ajax blocks profile, we can not put HTTP error code 404, so the attribute must be set to "false".
      *
      * @return void
      */
@@ -341,7 +394,8 @@ class ForumController extends Controller
 
         $sErrMsg = '';
         if ($b404Status === true) {
-            $sErrMsg = '<br />' . t('Please return to the <a href="%0%">main forum page</a> or <a href="%1%">the previous page</a>.', Uri::get('forum', 'forum', 'index'), 'javascript:history.back();');
+            $sForumHomepageUrl = Uri::get('forum', 'forum', 'index');
+            $sErrMsg = '<br />' . t('Please return to the <a href="%0%">main forum page</a> or <a href="%1%">the previous page</a>.', $sForumHomepageUrl, 'javascript:history.back();');
         }
 
         $this->view->page_title = $this->sTitle;

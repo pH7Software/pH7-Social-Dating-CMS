@@ -1,9 +1,9 @@
 # pH7 Social Dating CMS
 
-### The Most Secure and Powerful Professional Dating Web App Builder
+### The Most Secure, Powerful & Professional Dating Web App Builder
 
 
-[![Build Status](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/build.png?b=master)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/?branch=master) [![PayPal donate button](http://img.shields.io/badge/paypal-donate-orange.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XWLDYLFKCLEJQ "Help keep me off the streets! ;)")
+[![Build Status](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/build.png?b=master)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/?branch=master) [![PayPal donate button](http://img.shields.io/badge/paypal-donate-orange.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6 "Help keep me off the streets! ;)")
 
 
 **pH7 Social Dating CMS** is a **Professional** & **Open Source** Social Dating CMS, fully responsive design, low-resource-intensive, powerful and very secure.
@@ -18,7 +18,7 @@ pH7CMS is included with 34 modules and based on its homemade framework (pH7Frame
 
 **pH7 Dating CMS** is a **Social/Dating CMS** written in **Object-Oriented** PHP (*OOP*), fully compatible and highly optimised for PHP 7+ and based on **MVC** architecture (Model-View-Controller).
 
-It is designed with the **KISS** principle in mind, and the all source code can be read and understood in minutes. For a better flexibility, the software uses **PDO** (PHP Data Objects) abstraction which allows the choice of the database. The principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (not duplicate code).
+It is designed with the **KISS** principle in mind, and the all source code can be read and understood in minutes. For a better flexibility, the software uses **PDO** (PHP Data Objects) abstraction which allows the choice of the database. The principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (no duplicate code).
 
 This Free and Open Source **Social Dating Site Builder** wants to be low resource-intensive, powerful, stable and secure. The software also comes with 34 system modules and is based on **pH7Framework** *(written specifically for this project)* that has over 52 packages.
 
@@ -39,6 +39,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Hot or Not
 * Love Calculator
 * Geolocation
+* People Nearby
 * Photo Albums
 * Videos (and possibility to upload videos from API v3 YouTube, Vimeo, Metacafe and Dailymotion)
 * Forums
@@ -57,7 +58,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Member approval system
 * Advanced Admin Panel
 * Complete Membership System
-* Payment Gateways Integration for PayPal, Stripe, Bitcoin and 2CheckOut
+* Payment Gateways Integration for PayPal, Stripe, Braintree, Bitcoin and 2CheckOut
 * Statistics & Analytics System
 * Live Notification System
 * Registration delay (to avoid spam)
@@ -72,7 +73,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Cache system for the database, pH7Tpl (our template engine), static files (HTML, CSS, JS), string content, ...
 * Maintenance Mode
 * Database Backup
-* Report
+* Report Abuse
 * SEO-Friendly (Title, Content, Code, ...), Sitemap module, [hreflang](https://support.google.com/webmasters/answer/189077), possibility to translate each URL, ...
 * Multilingual URLs
 * Check that all UGC (User-Generated Content) are Unique (to avoid spam and malicious users)
@@ -91,17 +92,17 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Allow to sign in to your site with Facebook, Google and Twitter thanks pH7CMS's Connect module
 * Invite Friends
 * Social Bookmark (Social Media Sharing Buttons)
-* Anti-spam system
+* Powerful Anti-Spam System
 * Full Security system against XSS, CSRF, SQL injection, authentication hacking, session fixation, brute-force, reverse tabnabbing phishing attacks, ... and can even prevent some DDoS attacks!
 * Two-Factor Authentication Option available for Admins, Users and Affiliates
 * Admin Panel - Block Access with IP Restriction
 * Beautiful Code: Very thoroughly commented about what's happening throughout the PHP code, beautiful indentation and very readable, even for non-programmers
-* Everyone can easily contribute to this great innovative project with our [GitHub repository](https://github.com/pH7Software/pH7-Social-Dating-CMS)
+* Anyone can easily contribute to pH7CMS project thanks the [GitHub repository](https://github.com/pH7Software/pH7-Social-Dating-CMS)
 
 
-**It's not a hazard that pH7CMS is considered to be the first choice for creating enterprise level Dating Apps/Service or Social Networking Sites**
+**It's not a hazard that pH7CMS is considered to be the first choice for creating an enterprise level dating web app or social networking website**
 
-*If you want more, [here are other great features](http://ph7cms.com/social-dating-features/) included in pH7CMS (and obviously in [pH7CMS Pro](http://ph7cms.com/pro/) as well) that may interest you!*
+*Great features [like here](http://ph7cms.com/social-dating-features/) and many other unique and exclusive features are waiting for YOU. Already released in pH7CMS!*
 
 ![Build a Social Dating Web App with pH7CMS](https://cloud.githubusercontent.com/assets/1325411/19419481/657386a4-93d0-11e6-8eee-95deba2d30a0.png)
 
@@ -133,11 +134,11 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
     * From a command line opened in the folder, run `composer install` to install pH7CMS's dependencies.
   * Composer:
     * Install Composer (https://getcomposer.org)
-    * `composer create-project ph7software/ph7cms --prefer-dist website`
+    * `composer create-project ph7software/ph7cms --prefer-dist ph7cms`
   * Sourceforge:
-    * Directly download the latest stable version [from Sourceforge](https://sourceforge.net/projects/ph7socialdating/)
+    * Directly download the latest stable version from [Sourceforge](https://sourceforge.net/projects/ph7socialdating/).
   * Softaculous:
-    * If your Web host offers Softaculous, you might be able to install [pH7CMS in one-click with Softaculous](http://www.softaculous.com/softwares/socialnetworking/pH7CMS)
+    * If your Web host offers Softaculous, you might be able to install [pH7CMS in one-click with Softaculous](http://www.softaculous.com/softwares/socialnetworking/pH7CMS).
 
 
 ## Nginx Configuration
@@ -196,7 +197,7 @@ You can find and add other languages on the [I18N repo](https://github.com/pH7So
 
 ## Website
 
-**[Social Dating Script](http://ph7cms.com)**
+**[pH7CMS Social Dating Script](http://ph7cms.com)**
 
 
 ## Documentation
@@ -223,7 +224,7 @@ Just clone the repository, make your changes and then make a push ;-)
 
 * LAMP on **Fedora/Ubuntu** (and Windows/Mac with WampServer/MAMP for testing purpose)
 
-* **Geany &amp; Sublime Text** for coding the whole project. That's it! However, since pH7CMS 5.0, PhpStorm is used as well.
+* **Geany &amp; Sublime Text** for coding the whole project. That's it! However, since pH7CMS 5.0, PhpStorm (and sometimes Atom) are used as well.
 
 * **GIMP** for editing the assets, etc.
 
@@ -238,7 +239,7 @@ Just clone the repository, make your changes and then make a push ;-)
 
 ## Contact
 
-You can send email for any suggestions or feedback at *hello {AT} ph7cms {D0T} com* OR *pierrehenrysoria {AT} gmail {D0T} com*
+You can send me an email for any suggestions or feedback at: *hi {AT} ph7 {D0T} me* OR *hello {AT} ph7cms {D0T} com*
 
 
 ## License

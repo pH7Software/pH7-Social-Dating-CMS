@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2013-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2013-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Field / Controller
  */
@@ -15,11 +15,14 @@ use PH7\Framework\Url\Header;
 
 class FieldController extends Controller
 {
+    /** @var string */
     private $sTitle;
 
     public function index()
     {
-        Header::redirect(Uri::get('field', 'field', 'all', 'user'));
+        Header::redirect(
+            Uri::get('field', 'field', 'all', 'user')
+        );
     }
 
     public function all($sMod = '')
@@ -72,9 +75,17 @@ class FieldController extends Controller
             }
         }
 
-        $sMsg = ($bStatus) ? t('The field has been deleted') : t('An error occurred while deleting the field.');
-        $sMsgType = ($bStatus) ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
+        $sMsg = $bStatus ? t('The field has been deleted') : t('An error occurred while deleting the field.');
+        $sMsgType = $bStatus ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
 
-        Header::redirect(Uri::get('field', 'field', 'all', $sMod), $sMsg, $sMsgType);
+        Header::redirect(
+            Uri::get('field',
+                'field',
+                'all',
+                $sMod
+            ),
+            $sMsg,
+            $sMsgType
+        );
     }
 }

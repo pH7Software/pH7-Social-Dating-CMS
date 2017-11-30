@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2016-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2016-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
@@ -21,7 +21,7 @@ class DisableModuleFormProcess extends Form
 
         $oModuleModel = new ModuleModel;
 
-        // First, disable all mods as uncheckboxes elements aren't send throughth the form
+        // First, disable all mods as uncheckboxes elements aren't send through the form
         $this->disableMods($oModuleModel);
 
         // Then, enable the mods selected to be enabled
@@ -32,7 +32,7 @@ class DisableModuleFormProcess extends Form
 
         $this->clearCache();
 
-        \PFBC\Form::setSuccess('form_module', t('Module Status have been saved!'));
+        \PFBC\Form::setSuccess('form_module', t('Module Status saved!'));
     }
 
     protected function disableMods(ModuleModel $oModuleModel)

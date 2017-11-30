@@ -3,7 +3,7 @@
  * @title          User Core Class
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
@@ -103,11 +103,15 @@ class UserCore
          * This can cause minor errors (eg if a user sent a file that is not a photo).
          * So we hide the errors if we are not in development mode.
          */
-        if (!isDebug()) error_reporting(0);
+        if (!isDebug()) {
+            error_reporting(0);
+        }
 
         $oAvatar1 = new Image($sFile, 600, 800);
 
-        if (!$oAvatar1->validate()) return false; // File type incompatible.
+        if (!$oAvatar1->validate()) {
+            return false; // File type incompatible!
+        }
 
         // We removes the old avatar if it exists and we delete the cache at the same time.
         $this->deleteAvatar($iProfileId, $sUsername);
@@ -219,11 +223,15 @@ class UserCore
          * This can cause minor errors (eg if a user sent a file that is not a photo).
          * So we hide the errors if we are not in development mode.
          */
-        if (!isDebug()) error_reporting(0);
+        if (!isDebug()) {
+            error_reporting(0);
+        }
 
         $oWallpaper = new Image($sFile, 600, 800);
 
-        if (!$oWallpaper->validate()) return false;
+        if (!$oWallpaper->validate()) {
+            return false;
+        }
 
         // We removes the old background if it exists and we delete the cache at the same time.
         $this->deleteBackground($iProfileId, $sUsername);
@@ -299,14 +307,12 @@ class UserCore
                 's' => $sSex
             ];
 
-            $sLink = Uri::get('user','signup','step1', '?' . Url::httpBuildQuery($aHttpParams), false);
-        }
-        else
-        {
+            $sLink = Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false);
+        } else {
             $sLink = $this->getProfileLink($sUsername);
         }
 
-       return $sLink;
+        return $sLink;
     }
 
     /**
@@ -322,8 +328,9 @@ class UserCore
     public function setAuth(stdClass $oUserData, UserCoreModel $oUserModel, Session $oSession, SecurityModel $oSecurityModel)
     {
         // Remove the session if the user is logged on as "affiliate" or "administrator".
-        if (AffiliateCore::auth() || AdminCore::auth())
+        if (AffiliateCore::auth() || AdminCore::auth()) {
             $oSession->destroy();
+        }
 
         // Regenerate the session ID to prevent session fixation attack
         $oSession->regenerateId();
@@ -434,23 +441,20 @@ class UserCore
             $oUserModel = new AffiliateCoreModel;
             if ($oUserModel->validateAccount($sEmail, $sHash, $sTable)) {
                 $iId = $oUserModel->getId($sEmail, null, $sTable);
-                if ($sMod != 'newsletter')
+                if ($sMod != 'newsletter') {
                     $this->clearReadProfileCache($iId, $sTable);
+                }
 
                 /** Update the Affiliate Commission **/
                 $iAffId = $oUserModel->getAffiliatedId($iId);
                 AffiliateCore::updateJoinCom($iAffId, $oConfig, $oRegistry);
 
                 Header::redirect($sRedirectLoginUrl, $sSuccessMsg);
-            }
-            else
-            {
+            } else {
                 Header::redirect($sRedirectLoginUrl, t('Oops! The URL is either invalid or you already have activated your account.'), 'error');
             }
             unset($oUserModel);
-        }
-        else
-        {
+        } else {
             Header::redirect($sRedirectIndexUrl, t('Invalid approach, please use the link that has been send to your email.'), 'error');
         }
     }
@@ -478,7 +482,7 @@ class UserCore
      */
     public function clearReadProfileCache($iId, $sTable = 'Members')
     {
-        $this->_clearCache('readProfile', $iId, $sTable);
+        $this->clearCache('readProfile', $iId, $sTable);
     }
 
     /**
@@ -492,7 +496,7 @@ class UserCore
      */
     public function clearInfoFieldCache($iId, $sTable = 'MembersInfo')
     {
-        $this->_clearCache('infoFields', $iId, $sTable);
+        $this->clearCache('infoFields', $iId, $sTable);
     }
 
     /**
@@ -504,7 +508,7 @@ class UserCore
      *
      * @return void
      */
-    private function _clearCache($sId, $iId, $sTable)
+    private function clearCache($sId, $iId, $sTable)
     {
         VariousModel::checkModelTable($sTable);
 
@@ -514,5 +518,7 @@ class UserCore
     /**
      * Clone is set to private to stop cloning.
      */
-    private function __clone() {}
+    private function __clone()
+    {
+    }
 }

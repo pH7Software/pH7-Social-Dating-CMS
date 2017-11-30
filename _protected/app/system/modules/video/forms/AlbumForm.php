@@ -1,24 +1,26 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Video / Form
  */
+
 namespace PH7;
 
 use PH7\Framework\Config\Config;
+use PH7\Framework\Url\Header;
 
 class AlbumForm
 {
     public static function display()
     {
-        if (isset($_POST['submit_video_album']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_video_album']))
+        if (isset($_POST['submit_video_album'])) {
+            if (\PFBC\Form::isValid($_POST['submit_video_album'])) {
                 new AlbumFormProcess;
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
@@ -27,9 +29,9 @@ class AlbumForm
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_video_album', 'form_video_album'));
         $oForm->addElement(new \PFBC\Element\Token('album'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Name of your Album Cover:'), 'name', array('required'=>1, 'pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Description of your Album Cover:'), 'description', array('validation' => new \PFBC\Validation\Str(2, 200))));
-        $oForm->addElement(new \PFBC\Element\File(t('Thumbnail for the Album Cover:'), 'album', array('accept' => 'image/*', 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Album Cover Name:'), 'name', array('required' => 1, 'pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Album Cover Description:'), 'description', array('validation' => new \PFBC\Validation\Str(2, 200))));
+        $oForm->addElement(new \PFBC\Element\File(t('Album Cover Thumbnail:'), 'album', array('accept' => 'image/*', 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

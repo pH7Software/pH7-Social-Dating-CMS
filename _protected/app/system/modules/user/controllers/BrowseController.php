@@ -1,12 +1,14 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Controller
  */
+
 namespace PH7;
 
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Url\Header;
@@ -15,7 +17,14 @@ class BrowseController extends Controller
 {
     const MAX_PROFILE_PER_PAGE = 40;
 
-    private $oUserModel, $oPage, $iTotalUsers;
+    /** @var UserModel */
+    private $oUserModel;
+
+    /** @var Page */
+    private $oPage;
+
+    /** @var int */
+    private $iTotalUsers;
 
     public function __construct()
     {
@@ -42,7 +51,8 @@ class BrowseController extends Controller
         if (empty($oUsers)) {
             Header::redirect(
                 Uri::get('user', 'search', 'index'),
-                t('Empty search result. Please try again with wider or new search parameters.')
+                t('No results. Please try again with wider or new search criteria.'),
+                Design::WARNING_TYPE
             );
         } else {
             // We can put HTML tags in the <title> tag as our template engine will remove all HTML tags present in the title tag, ...

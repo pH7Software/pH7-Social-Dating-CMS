@@ -9,14 +9,13 @@
     <title>{if $page_title}{% $this->str->escape($this->str->upperFirst($page_title), true) %} - {site_name}{else}{site_name} - {slogan}{/if}</title>
     <meta name="description" content="{% $this->str->escape($this->str->upperFirst($meta_description), true) %}" />
     <meta name="keywords" content="{% $this->str->escape($meta_keywords, true) %}" />
+    <meta name="robots" content="{meta_robots}" />
     <link rel="shortcut icon" href="{url_relative}favicon.ico" />
     <link rel="canonical" href="{current_url}" />
-    {if !$is_user_auth}{{ $design->regionalUrls() }}{/if}
     <link rel="author" href="{url_root}humans.txt" />
-    <meta name="robots" content="{meta_robots}" />
+    {if !$is_user_auth}{{ $design->regionalUrls() }}{/if}
     <meta name="author" content="{meta_author}" />
     <meta name="copyright" content="{meta_copyright}" />
-    <meta name="revisit-after" content="7 days" />
     <meta name="category" content="{meta_category}" />
     <meta name="rating" content="{meta_rating}" />
     <meta name="distribution" content="{meta_distribution}" />
@@ -79,13 +78,19 @@
       {/if}
 
       <noscript>
-          <div class="noscript err_msg">{lang}JavaScript is disabled on your Web browser!<br /> Please enable JavaScript via the options of your Web browser in order to use this website.{/lang}</div>
+        <div class="noscript err_msg">
+          {lang}JavaScript is disabled on your Web browser!<br /> Please enable JavaScript via the options of your Web browser in order to use this website.{/lang}
+        </div>
       </noscript>
 
       {if $is_guest_homepage}
-        <div class="row">
-          <div role="banner" id="logo" class="col-md-8"><h1><a href="{{ $design->homePageUrl() }}" title="{slogan}">{site_name}</a></h1></div>
-        </div>
+          <div class="row">
+              <div role="banner" id="logo" class="col-md-8">
+                  <h1>
+                      <a href="{{ $design->homePageUrl() }}" title="{slogan}">{site_name}</a>
+                  </h1>
+              </div>
+          </div>
       {/if}
 
       {* Headings group *}
@@ -105,7 +110,9 @@
       </div>
       {* Don't display the top middle banner on the the splash page *}
       {if !$is_guest_homepage}
-          <div role="banner" class="center ad_468_60">{{ $designModel->ad(468,60) }}</div>
+          <div role="banner" class="center ad_468_60">
+              {{ $designModel->ad(468, 60) }}
+          </div>
       {/if}
 
       <div class="clear"></div>
@@ -143,26 +150,33 @@
         </div>
       </div>
     </div>
-    <div role="banner" class="center ad_468_60">{{ $designModel->ad(468,60) }}</div>
-
+    <div role="banner" class="center ad_468_60">
+        {{ $designModel->ad(468, 60) }}
+    </div>
     <!-- End Content -->
 
     <!-- Begin Footer -->
     <footer>
-      <div role="banner" class="center ad_728_90">{{ $designModel->ad(728,90) }}</div>
-      {{ $design->link() }}
+      <div role="banner" class="center ad_728_90">
+          {{ $designModel->ad(728, 90) }}
+      </div>
 
       {* To avoid scammers *}
       {if $is_user_auth AND $current_url != $url_root}
-        <div class="warning_block center"><p>{lang}<strong>Attention!</strong> Some of the women (or men) profiles you see on dating sites might be scams to collect money.<br />
-        People who are really interested in you will never ask for money.<br />
-        Be careful, don\'t send the money to anybody!{/lang}</p></div>
+        <div class="warning_block center">
+          <p>
+            <strong>{lang 'Attention!'}</strong>
+            {lang 'Some of the women (or men) profiles you see on dating sites might be scams to collect money.'}<br />
+            {lang 'People who are really interested in you will never ask for money.'}<br />
+            {lang "Be careful, don't send the money to anybody!"}
+          </p>
+        </div>
       {/if}
 
       <div role="contentinfo">
         <div class="ft_copy">
           <p>
-            <strong>{site_name}</strong> &copy; <ph:date value="Y" /> {{ $design->smartLink() }}
+            &copy; <ph:date value="Y" /> <strong>{site_name}</strong>  {{ $design->link() }}
           </p>
           {{ $design->littleLikeApi() }}
         </div>
@@ -172,14 +186,19 @@
 
       {if isDebug()}
         <div class="ft">
-          <p>{{ $design->stat() }}</p>
+          <p><small>{{ $design->stat() }}</small></p>
         </div>
-        <p class="small darkred">{lang 'WARNING: Your site is in development mode! You can change the mode'} <a href="{{ $design->url(PH7_ADMIN_MOD,'tool','envmode') }}" title="{lang 'Change the Environment Mode'}" class="darkred">{lang 'here'}</a>.</p>
+        <p class="small darkred">
+          {lang 'WARNING: Your site is in development mode! You can change the mode'} <a href="{{ $design->url(PH7_ADMIN_MOD,'tool','envmode') }}" title="{lang 'Change the Environment Mode'}" class="darkred">{lang 'here'}</a>
+        </p>
       {/if}
     </footer>
-    <!-- Required for the free version of MaxMind Geo DB -->
+
     <div class="clear"></div>
-    <div class="right vs_marg"><small>This product includes GeoLite2 data created by MaxMind, available from <a href="http://www.maxmind.com" rel="nofollow" class="gray">http://www.maxmind.com</a></small></div>
+    <div class="right vs_marg">
+      <!-- Required for free version of MaxMind GeoDB. Ref: https://dev.maxmind.com/geoip/geoip2/geolite2/#License -->
+      <small class="small">This product includes GeoLite2 data created by MaxMind, available from <a href="http://www.maxmind.com" rel="nofollow" class="gray">http://www.maxmind.com</a></small>
+    </div>
     <!-- End Footer -->
 
     <!-- Begin Footer JavaScript -->

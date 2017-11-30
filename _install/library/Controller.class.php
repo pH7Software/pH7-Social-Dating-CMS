@@ -3,7 +3,7 @@
  * @title            Controller Core Class
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @link             http://ph7cms.com
  * @package          PH7 / Install / Library
@@ -17,28 +17,32 @@ use Smarty;
 
 abstract class Controller implements Controllable
 {
+    const PHP_TIMEZONE_DIRECTIVE = 'date.timezone';
+
     const SOFTWARE_NAME = 'pH7CMS';
-    const DEFAULT_SITE_NAME = 'Social Dating App';
+    const DEFAULT_SITE_NAME = 'My Dating WebApp';
     const SOFTWARE_PREFIX_COOKIE_NAME = 'pH7';
     const SOFTWARE_WEBSITE = 'http://ph7cms.com';
     const SOFTWARE_LICENSE_URL = 'http://ph7cms.com/legal/license';
-    const SOFTWARE_HELP_URL = 'http://clients.hizup.com/support'; // Help Desk URL
-    const SOFTWARE_LICENSE_KEY_URL = 'http://ph7cms.com/web/buysinglelicense';
-    const SOFTWARE_DOWNLOAD_URL = 'http://download.hizup.com/';
     const SOFTWARE_REQUIREMENTS_URL = 'http://ph7cms.com/doc/en/requirements';
-    const SOFTWARE_HOSTING_LIST_URL = 'http://ph7cms.com/hosting';
-    const SOFTWARE_HOSTING_LIST_FR_URL = 'http://ph7cms.com/doc/fr/h%C3%A9bergement-web';
+    const PAYPAL_DONATE_URL = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6';
+    const PATREON_URL = 'https://www.patreon.com/bePatron?u=3534366';
     const SOFTWARE_EMAIL = 'hello@ph7cms.com';
     const SOFTWARE_AUTHOR = 'Pierre-Henry Soria';
+    const AUTHOR_URL = 'https://github.com/pH-7';
+    const SOFTWARE_GIT_REPO = 'https://github.com/pH7Software/pH7-Social-Dating-CMS';
+    const SOFTWARE_TWITTER = '@pH7Soft';
     const SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.';
-    const SOFTWARE_COPYRIGHT = '© (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.';
+    const SOFTWARE_COPYRIGHT = '© (c) 2012-%s, Pierre-Henry Soria. All Rights Reserved.';
+    const TOTAL_INSTALL_STEPS = 6;
 
     /**
+     * VERSION NAMES:
      * 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO",
-     * 5.* was "pCO", 6.* was "WoW" and 7.*, 8.* is NaOH
+     * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH" and 10.* is "pKa"
      */
-    const SOFTWARE_VERSION_NAME = 'NaOH';
-    const SOFTWARE_VERSION = '8.0.6';
+    const SOFTWARE_VERSION_NAME = 'pKa';
+    const SOFTWARE_VERSION = '10.0.8';
     const SOFTWARE_BUILD = '1';
 
     const DEFAULT_LANG = 'en';
@@ -71,22 +75,24 @@ abstract class Controller implements Controllable
         $this->oView->setCompileDir(PH7_ROOT_INSTALL . 'data/caches/smarty_compile');
         $this->oView->setCacheDir(PH7_ROOT_INSTALL . 'data/caches/smarty_cache');
         $this->oView->setPluginsDir(PH7_ROOT_INSTALL . 'library/Smarty/plugins');
+
         // Smarty Cache
         $this->oView->caching = 0; // 0 = Cache disabled |  1 = Cache never expires | 2 = Set the cache duration at "cache_lifetime" attribute
         $this->oView->cache_lifetime = 86400; // 86400 seconds = 24h
 
         $this->oView->assign('LANG', $LANG);
         $this->oView->assign('software_name', self::SOFTWARE_NAME);
-        $this->oView->assign('software_version', self::SOFTWARE_VERSION . ' Build ' . self::SOFTWARE_BUILD . ' - ' . self::SOFTWARE_VERSION_NAME);
+        $this->oView->assign('software_version', self::SOFTWARE_VERSION . ' ' . self::SOFTWARE_VERSION_NAME . ' - Build ' . self::SOFTWARE_BUILD);
         $this->oView->assign('software_website', self::SOFTWARE_WEBSITE);
         $this->oView->assign('software_license_url', self::SOFTWARE_LICENSE_URL);
-        $this->oView->assign('software_help_url', self::SOFTWARE_HELP_URL);
-        $this->oView->assign('software_license_key_url', self::SOFTWARE_LICENSE_KEY_URL);
+        $this->oView->assign('paypal_donate_url', self::PAYPAL_DONATE_URL);
+        $this->oView->assign('patreon_url', self::PATREON_URL);
         $this->oView->assign('software_author', self::SOFTWARE_AUTHOR);
-        $this->oView->assign('software_copyright', self::SOFTWARE_COPYRIGHT);
+        $this->oView->assign('software_copyright', sprintf(self::SOFTWARE_COPYRIGHT, date('Y')));
         $this->oView->assign('software_email', self::SOFTWARE_EMAIL);
         $this->oView->assign('tpl_name', self::DEFAULT_THEME);
         $this->oView->assign('current_lang', $this->sCurrentLang);
+        $this->oView->assign('total_install_steps', self::TOTAL_INSTALL_STEPS);
     }
 
     /**
@@ -97,8 +103,9 @@ abstract class Controller implements Controllable
      */
     protected function initializePHPSession()
     {
-        if (session_status() !== PHP_SESSION_ACTIVE)
+        if (session_status() !== PHP_SESSION_ACTIVE) {
             @session_start();
+        }
     }
 
     /**
@@ -108,7 +115,8 @@ abstract class Controller implements Controllable
      */
     protected function checkTimezone()
     {
-        if (!ini_get('date.timezone'))
+        if (!ini_get(self::PHP_TIMEZONE_DIRECTIVE)) {
             date_default_timezone_set(PH7_DEFAULT_TIMEZONE);
+        }
     }
 }

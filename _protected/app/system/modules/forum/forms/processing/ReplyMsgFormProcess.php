@@ -1,12 +1,13 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Forum / Form / Processing
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Model\DbConfig;
@@ -16,7 +17,6 @@ use PH7\Framework\Url\Header;
 
 class ReplyMsgFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -36,9 +36,17 @@ class ReplyMsgFormProcess extends Form
             \PFBC\Form::setError('form_reply', Form::duplicateContentMsg());
         } else {
             $oForumModel->addMessage($iProfileId, $iTopicId, $sMessage, $sCurrentTime);
-            Header::redirect(Uri::get('forum', 'forum', 'post', $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $this->httpRequest->get('topic_name') . ',' . $iTopicId), t('Your message has been updated successfully!'));
+
+            Header::redirect(
+                Uri::get(
+                    'forum',
+                    'forum',
+                    'post',
+                    $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $this->httpRequest->get('topic_name') . ',' . $iTopicId
+                ),
+                t('Reply posted!')
+            );
         }
         unset($oForumModel);
     }
-
 }

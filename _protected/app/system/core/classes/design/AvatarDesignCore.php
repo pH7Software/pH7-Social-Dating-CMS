@@ -3,7 +3,7 @@
  * @title          Avatar Design Core Class
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class / Design
  */
@@ -19,12 +19,16 @@ use PH7\Framework\Service\SearchImage\Url as ImageUrl;
 
 class AvatarDesignCore extends Design
 {
+    const DEF_AVATAR_SIZE = 32;
+    const DEF_LIGHTBOX_AVATAR_SIZE = 400;
+
     /** @var UserCore */
     private $_oUser;
 
     public function __construct()
     {
         parent::__construct();
+
         $this->_oUser = new UserCore;
     }
 
@@ -34,10 +38,12 @@ class AvatarDesignCore extends Design
      * @param string $sUsername
      * @param string $sFirstName
      * @param string $sSex
-     * @param integer $iSize Avatar size (available sizes: 32, 64, 100, 150, 200, 400)
-     * @param boolean $bRollover CSS effect
+     * @param int $iSize Avatar size (available sizes: 32, 64, 100, 150, 200, 400)
+     * @param bool $bRollover CSS effect
+     *
+     * @return void
      */
-    public function get($sUsername = '', $sFirstName = '', $sSex = null, $iSize = 32, $bRollover = false)
+    public function get($sUsername = '', $sFirstName = '', $sSex = null, $iSize = self::DEF_AVATAR_SIZE, $bRollover = false)
     {
         // The profile does not exist, so it creates a fake profile = ghost
         if ($sUsername === PH7_ADMIN_USERNAME) {
@@ -67,9 +73,11 @@ class AvatarDesignCore extends Design
      * @param string $sUsername
      * @param string $sFirstName
      * @param string $sSex
-     * @param integer $iSize Avatar size (available sizes: 32, 64, 100, 150, 200, 400)
+     * @param int $iSize Avatar size (available sizes: 32, 64, 100, 150, 200, 400)
+     *
+     * @return void
      */
-    public function lightbox($sUsername = '', $sFirstName = '', $sSex = null, $iSize = 400)
+    public function lightbox($sUsername = '', $sFirstName = '', $sSex = null, $iSize = self::DEF_LIGHTBOX_AVATAR_SIZE)
     {
         // The profile does not exist, so it creates a fake profile = ghost
         if (empty($sUsername)) {
@@ -78,16 +86,16 @@ class AvatarDesignCore extends Design
             $sSex = PH7_GHOST_USERNAME;
         }
 
-        echo '<div class="picture_block"><a href="', $this->getUserAvatar($sUsername, $sSex, $iSize), '" title="', ucfirst($sUsername), '" data-popup="image"><img src="', $this->getUserAvatar($sUsername, $sSex, $iSize / 2), '" alt="', ucfirst($sUsername), '" title="', ucfirst($sFirstName), '" class="img_picture" /></a></div>';
+        echo '<div class="picture_block">
+            <a href="', $this->getUserAvatar($sUsername, $sSex, $iSize), '" title="', ucfirst($sUsername), '" data-popup="image">
+                <img src="', $this->getUserAvatar($sUsername, $sSex, $iSize / 2), '" alt="', ucfirst($sUsername), '" title="', ucfirst($sFirstName), '" class="img_picture" />
+            </a>
+        </div>';
 
         /**
          * @internal Google Search Image works only on non-local URLs, so check if we aren't on dev environments.
          */
-        if (
-            AdminCore::auth()
-            && Registry::getInstance()->controller === 'ModeratorController'
-            && !Server::isLocalHost()
-        ) {
+        if ($this->isGoogleSearchImageEligible()) {
             $sAvatarUrl = $this->getUserAvatar($sUsername, $sSex, null, false);
 
             echo '<p>';
@@ -117,5 +125,18 @@ class AvatarDesignCore extends Design
         } catch (InvalidUrlException $oExcept) {
             // Display nothing
         }
+    }
+
+    /**
+     * Check if Google Search Image feature can be enabled.
+     *
+     * @return bool
+     */
+    private function isGoogleSearchImageEligible()
+    {
+        // It works only on non-local URLs, so check if we aren't on dev environments (e.g. http://127.0.0.1)
+        return AdminCore::auth() &&
+            Registry::getInstance()->controller === 'ModeratorController'
+            && !Server::isLocalHost();
     }
 }

@@ -6,8 +6,8 @@
 
     <div class="col-md-4">
         <h3 class="underline">{$LANG.social_dating_niche}</h3>
-        <p class="bold italic underline darkred">{$LANG.recommended}</p>
         <p class="img_thumb"><img src="{$smarty.const.PH7_URL_ROOT}templates/themes/base/img/preview.png" alt="Default Base Template" title="Default Base Template" /></p>
+        <p class="bold italic underline darkred">{$LANG.recommended}</p>
         <p class="bold">{$LANG.base_niche_desc}</p>
         <p class="italic">{$LANG.recommended_desc}</p>
         <p><button type="submit" name="niche_submit" value="base" class="btn btn-primary btn-lg">{$LANG.go_social_dating}</button></p>

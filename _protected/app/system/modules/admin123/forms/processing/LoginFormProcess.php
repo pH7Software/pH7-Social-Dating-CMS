@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
@@ -20,6 +20,9 @@ use PH7\Framework\Url\Header;
 
 class LoginFormProcess extends Form implements LoginableForm
 {
+    const BRUTE_FORCE_SLEEP_DELAY = 2;
+
+    /** @var AdminModel */
     private $oAdminModel;
 
     public function __construct()
@@ -54,7 +57,7 @@ class LoginFormProcess extends Form implements LoginableForm
 
         if (!$bIsLogged || $bIpNotAllowed) // If the login is failed or if the IP address is not allowed
         {
-            sleep(2); // Security against brute-force attack to avoid drowning the server and the database
+            $this->preventBruteForce(self::BRUTE_FORCE_SLEEP_DELAY);
 
             if (!$bIsLogged) {
                 $oSecurityModel->addLoginLog($sEmail, $sUsername, $sPassword, 'Failed! Incorrect Email, Username or Password', 'Admins');

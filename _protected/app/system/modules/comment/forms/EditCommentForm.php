@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Comment / Form
  */
@@ -9,17 +9,18 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Url\Header;
 
 class EditCommentForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_edit_comment'])) {
-            if (\PFBC\Form::isValid($_POST['submit_edit_comment']))
+            if (\PFBC\Form::isValid($_POST['submit_edit_comment'])) {
                 new EditCommentFormProcess();
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oHttpRequest = new Http;
@@ -36,5 +37,4 @@ class EditCommentForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }

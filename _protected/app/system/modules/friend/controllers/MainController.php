@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Friend / Controller
  */
@@ -14,9 +14,32 @@ use PH7\Framework\Security\CSRF\Token;
 
 class MainController extends Controller
 {
-    const MAX_FRIEND_PER_PAGE = 10, MAX_MUTUAL_FRIEND_PER_PAGE = 10;
+    const MAX_FRIEND_PER_PAGE = 10;
+    const MAX_MUTUAL_FRIEND_PER_PAGE = 10;
 
-    private $oUserModel, $oFriendModel, $oPage, $sUsername, $sTitle, $iId, $iMemberId, $iTotalFriends;
+    /** @var UserCoreModel */
+    private $oUserModel;
+
+    /** @var FriendModel */
+    private $oFriendModel;
+
+    /** @var Page */
+    private $oPage;
+
+    /** @var string */
+    private $sUsername;
+
+    /** @var string */
+    private $sTitle;
+
+    /** @var bool|int */
+    private $iId;
+
+    /** @var string */
+    private $iMemberId;
+
+    /** @var int */
+    private $iTotalFriends;
 
     public function __construct()
     {
@@ -32,7 +55,7 @@ class MainController extends Controller
         $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'friend.js');
 
         /**
-         * @desc The Session of the User.
+         * Assign member ID to $iMemberId class attribute
          */
         $this->iMemberId = $this->session->get('member_id');
 
@@ -95,6 +118,7 @@ class MainController extends Controller
 
         $this->view->action = '';
         $this->manualTplInclude('index.tpl');
+
         $this->output();
     }
 
@@ -131,6 +155,7 @@ class MainController extends Controller
         $this->sTitle = t("Search %0%'s friends", $this->sUsername);
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 }

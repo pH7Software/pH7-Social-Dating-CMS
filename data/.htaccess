@@ -1,0 +1,7 @@
+# Deny all other file extensions to prevent any compromised files to be executed
+
+Deny from all
+<FilesMatch "\.(jpe?g|png|gif|webp|mp4|webm|swf)$">
+    Order deny,allow
+    Allow from all
+</FilesMatch>

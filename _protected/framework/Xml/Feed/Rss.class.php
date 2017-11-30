@@ -3,11 +3,11 @@
  * @title            RSS Class
  * @desc             RSS Dom class with the DomDocument object.
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Xml / Feed
- * @version          1.1
+ * @version          1.3
  * @linkDomDocument  http://php.net/manual/class.domdocument.php
  */
 
@@ -24,9 +24,9 @@ class Rss extends DomDocument
     /**
      * RSS channel object.
      *
-     * @var \DOMNode $_oChannel
+     * @var \DOMNode $oChannel
      */
-    private $_oChannel;
+    private $oChannel;
 
     /**
      * Sets up the DOM environment.
@@ -47,12 +47,12 @@ class Rss extends DomDocument
         $oRoot->setAttribute('version', self::DOCUMENT_VERSION);
 
         // Sets the channel node
-        $this->_oChannel = $oRoot->appendChild($this->createElement('channel'));
+        $this->oChannel = $oRoot->appendChild($this->createElement('channel'));
 
         // Sets the title link and description elements
-        $this->_oChannel->appendChild($this->createElement('title', $sTitle));
-        $this->_oChannel->appendChild($this->createElement('link', $sLink));
-        $this->_oChannel->appendChild($this->createElement('description', $sDescription));
+        $this->oChannel->appendChild($this->createElement('title', $sTitle));
+        $this->oChannel->appendChild($this->createElement('link', $sLink));
+        $this->oChannel->appendChild($this->createElement('description', $sDescription));
     }
 
 
@@ -75,7 +75,7 @@ class Rss extends DomDocument
                 case 'skipHour':
                 case 'skipDay': {
                     $oImage = $this->createElement('image');
-                    $this->_oChannel->appendChild($oImage);
+                    $this->oChannel->appendChild($oImage);
 
                     foreach ($mValue as $sSubElement => $sSubValue) {
                         $oSub = $this->createElement($sSubElement, $sSubValue);
@@ -106,7 +106,7 @@ class Rss extends DomDocument
         }
 
         // Append the item to the channel
-        $this->_oChannel->appendChild($oItem);
+        $this->oChannel->appendChild($oItem);
 
         // Allow chaining with $this
         return $this;

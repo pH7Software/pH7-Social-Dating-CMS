@@ -1,29 +1,30 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Form
  */
+
 namespace PH7;
 
 use PH7\Framework\Registry\Registry;
 use PH7\Framework\Session\Session;
+use PH7\Framework\Url\Header;
 
 class PrivacyForm
 {
-
     public static function display()
     {
         $oUserModel = new UserCoreModel;
-        $iProfileId = (int) (new Session)->get('member_id');
+        $iProfileId = (int)(new Session)->get('member_id');
 
-        if (isset($_POST['submit_privacy_account']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_privacy_account']))
+        if (isset($_POST['submit_privacy_account'])) {
+            if (\PFBC\Form::isValid($_POST['submit_privacy_account'])) {
                 new PrivacyFormProcess($iProfileId, $oUserModel);
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oPrivacy = $oUserModel->getPrivacySetting($iProfileId);
@@ -45,5 +46,4 @@ class PrivacyForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }

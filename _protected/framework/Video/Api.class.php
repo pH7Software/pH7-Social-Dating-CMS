@@ -3,7 +3,7 @@
  * @title            Video API Class
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Video
  * @link             http://ph7cms.com
@@ -21,17 +21,8 @@ class Api
 {
     const URL_PATTERN = '(^https?://|www\.|\.[a-z]{2,4}/?(.+)?$)';
 
-    /** @var int */
-    protected $iWidth;
-
-    /** @var int */
-    protected $iHeight;
-
-    public function __construct()
-    {
-        $this->iWidth = 480;
-        $this->iHeight = 295;
-    }
+    const DEF_VIDEO_WIDTH = 480;
+    const DEF_VIDEO_HEIGHT = 295;
 
     /**
      * @param string $sUrl
@@ -53,6 +44,7 @@ class Api
                 break;
 
             case 'dailymotion':
+            case 'dai':
                 $sClass = (new Api\Dailymotion)->getVideo($sUrl);
                 break;
 
@@ -93,6 +85,7 @@ class Api
                 break;
 
             case 'dailymotion':
+            case 'dai':
                 $oClass = (new Api\Dailymotion)->getInfo($sUrl);
                 break;
 
@@ -110,8 +103,8 @@ class Api
     /**
      * @param string $sUrl
      * @param string $sMedia (preview or movie)
-     * @param integer $iWidth
-     * @param integer $iHeight
+     * @param int $iWidth
+     * @param int $iHeight
      *
      * @throws PH7InvalidArgumentException If the Video Api is invalid.
      *
@@ -121,30 +114,31 @@ class Api
     {
         $sClass = $this->clear($sUrl);
 
-        $sMedia = ( isset($sMedia) ? $sMedia : 'movie' );
-        $iWidth = ( isset($iWidth) ? $iWidth : $this->iWidth );
-        $iHeight = (isset($iHeight) ? $iHeight : $this->iHeight );
+        $sMedia = isset($sMedia) ? $sMedia : 'movie';
+        $iWidth = isset($iWidth) ? $iWidth : self::DEF_VIDEO_WIDTH;
+        $iHeight = isset($iHeight) ? $iHeight : self::DEF_VIDEO_HEIGHT;
 
         switch ($sClass) {
             case 'youtube':
             case 'youtu':
                 $sClass = (new Api\Youtube)->getMeta($sUrl, $sMedia, $iWidth, $iHeight);
-            break;
+                break;
 
             case 'vimeo':
                 $sClass = (new Api\Vimeo)->getMeta($sUrl, $sMedia, $iWidth, $iHeight);
-            break;
+                break;
 
             case 'dailymotion':
+            case 'dai':
                 $sClass = (new Api\Dailymotion)->getMeta($sUrl, $sMedia, $iWidth, $iHeight);
-            break;
+                break;
 
             case 'metacafe':
                 $sClass = (new Api\Metacafe)->getMeta($sUrl, $sMedia, $iWidth, $iHeight);
-            break;
+                break;
 
             default:
-                throw new PH7InvalidArgumentException('Invalid Api Video Type! Bad Type is: \''  . $sClass . '\'');
+                throw new PH7InvalidArgumentException('Invalid Api Video Type! Bad Type is: \'' . $sClass . '\'');
         }
 
         return $sClass;

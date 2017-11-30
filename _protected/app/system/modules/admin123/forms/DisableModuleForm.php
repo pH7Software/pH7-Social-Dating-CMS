@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2016-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2016-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
@@ -11,6 +11,7 @@ namespace PH7;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Module as ModuleModel;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class DisableModuleForm
 {
@@ -20,7 +21,8 @@ class DisableModuleForm
             if (\PFBC\Form::isValid($_POST['submit_module'])) {
                 new DisableModuleFormProcess;
             }
-            Framework\Url\Header::redirect();
+
+            Header::redirect();
         }
 
         $oModuleData = (new ModuleModel)->get();
@@ -30,8 +32,9 @@ class DisableModuleForm
 
         foreach ($oModuleData as $oData) {
             // Ignore the default core module (since it cannot be disabled)
-            if ($oData->folderName === $sDefaultCoreMod)
+            if ($oData->folderName === $sDefaultCoreMod) {
                 continue;
+            }
 
             if ((int)$oData->enabled === 1) {
                 $aSelectedMods[] = $oData->moduleId;
@@ -39,7 +42,6 @@ class DisableModuleForm
 
             $sAdditionalText = '';
             if ((int)$oData->premiumMod === 1) {
-                $sAdditionalText .= ' – (<a class="italic darkred" href="' . Core::SOFTWARE_LICENSE_KEY_URL . '">' . t('Premium Module') . '</a>)';
                 $sAdditionalText .= ' • <a class="small" href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'general') . '#p=api">' . t('Change the default Chat by yours') . '</a>';
             }
 

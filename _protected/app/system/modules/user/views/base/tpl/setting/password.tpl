@@ -1,4 +1,4 @@
-<div class="col-md-10">
+<div class="col-md-8">
     {{ ChangePasswordCoreForm::display() }}
     {{ TwoFactorAuthDesignCore::link('user') }}
 </div>

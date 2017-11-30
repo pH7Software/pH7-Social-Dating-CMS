@@ -4,7 +4,7 @@
  * @desc             Database Config Class.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Model
  * @version          1.1
@@ -31,8 +31,9 @@ final class DbConfig
     }
 
     /**
-     * @param string $sSetting You can specify a specific parameter. Default NULL
-     * @return mixed (string | integer | object) Returns a string or an integer if you specify a specific parameter, otherwise returns an object.
+     * @param string|null $sSetting You can specify a specific parameter.
+     *
+     * @return string|int|\stdClass A string or an integer if you specify a specific parameter, otherwise returns an object.
      */
     public static function getSetting($sSetting = null)
     {
@@ -41,13 +42,11 @@ final class DbConfig
         // @return value of config the database
         if (!empty($sSetting)) {
             if (!$sData = $oCache->get()) {
-                $rStmt = Engine\Db::getInstance()->prepare('SELECT value FROM' . Engine\Db::prefix('Settings') . 'WHERE name = :setting');
+                $rStmt = Engine\Db::getInstance()->prepare('SELECT settingValue FROM' . Engine\Db::prefix('Settings') . 'WHERE settingName = :setting');
                 $rStmt->bindParam(':setting', $sSetting, \PDO::PARAM_STR);
                 $rStmt->execute();
-                $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+                $sData = $rStmt->fetchColumn();
                 Engine\Db::free($rStmt);
-                $sData = $oRow->value;
-                unset($oRow);
                 $oCache->put($sData);
             }
             $mData = $sData;
@@ -63,17 +62,19 @@ final class DbConfig
         }
 
         unset($oCache);
+
         return empty($mData) ? 0 : $mData;
     }
 
     /**
      * @param string $sValue Value to set.
      * @param string $sName Name of the DB pH7_Settings column.
-     * @return integer 1 on success.
+     *
+     * @return int 1 on success.
      */
     public static function setSetting($sValue, $sName)
     {
-        return Engine\Record::getInstance()->update('Settings', 'value', $sValue, 'name', $sName);
+        return Engine\Record::getInstance()->update('Settings', 'settingValue', $sValue, 'settingName', $sName);
     }
 
     public static function getMetaMain($sLangId)
@@ -125,6 +126,7 @@ final class DbConfig
      * @param string $sSection
      * @param string $sValue
      * @param string $sLangId
+     *
      * @return void
      */
     public static function setMetaMain($sSection, $sValue, $sLangId)
@@ -134,13 +136,15 @@ final class DbConfig
 
     /**
      * @param string $sStatus '0' = Disable | '1' = Enable. (need to be string because in DB it is an "enum").
+     * @param string $sFieldName
+     *
      * @return void
      */
-    public static function setSocialWidgets($sStatus)
+    public static function setSocialWidgets($sStatus, $sFieldName = 'socialMediaWidgets')
     {
         $sStatus = (string)$sStatus; // Cast into string to be sure it will work as in DB it's an "enum" type
 
-        self::setSetting($sStatus, 'socialMediaWidgets');
+        self::setSetting($sStatus, $sFieldName);
 
         // addthis JS file's staticID is '1'
         $rStmt = Engine\Db::getInstance()->prepare('UPDATE' . Engine\Db::prefix('StaticFiles') . 'SET active = :status WHERE staticId = 1 AND fileType = \'js\' LIMIT 1');
@@ -152,15 +156,17 @@ final class DbConfig
 
     /**
      * @param string $sStatus The constant 'DbConfig::ENABLE_SITE' or 'DbConfig::MAINTENANCE_SITE'
+     * @param string $sFieldName
+     *
      * @return void
      */
-    public static function setSiteMode($sStatus)
+    public static function setSiteMode($sStatus, $sFieldName = 'siteStatus')
     {
         if ($sStatus !== self::MAINTENANCE_SITE && $sStatus !== self::ENABLE_SITE) {
             exit('Wrong maintenance mode type!');
         }
 
-        self::setSetting($sStatus, 'siteStatus');
+        self::setSetting($sStatus, $sFieldName);
 
         /* Clear DbConfig Cache (this method is not always called in SettingFormProcess class, so clear the cache to be sure) */
         self::clearCache();

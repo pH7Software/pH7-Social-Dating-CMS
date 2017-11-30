@@ -4,7 +4,7 @@
  * @desc             Loading and management config files.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2011-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2011-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Config
  * @version          1.2
@@ -14,7 +14,6 @@ namespace PH7\Framework\Config;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\File\File;
 use PH7\Framework\Pattern\Singleton;
 
@@ -26,59 +25,56 @@ class Config implements Configurable
     const DEVELOPMENT_MODE = 'development';
     const PRODUCTION_MODE = 'production';
 
-    /**
-     * @var array $values
-     */
+    /** @var array */
     public $values = array();
 
-    /**
-     * @var string $_sConfigAppFilePath
-     */
-    private $_sConfigAppFilePath;
+    /** @var string */
+    private $sConfigAppFilePath;
 
-    /**
-     * @var string $_sConfigAppFilePath
-     */
-    private $_sConfigSysFilePath;
+    /** @var string */
+    private $sConfigSysFilePath;
 
-    /**
-     * Import the Singleton trait.
-     */
+    /** Import the Singleton trait*/
     use Singleton;
 
     /**
      * Set to private so nobody can create a new instance using new.
+     *
+     * @throws FileNotFoundException
      */
     private function __construct()
     {
-        $this->_sConfigAppFilePath = PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE;
-        $this->_sConfigSysFilePath = PH7_PATH_SYS . PH7_CONFIG . PH7_CONFIG_FILE;
+        $this->sConfigAppFilePath = PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE;
+        $this->sConfigSysFilePath = PH7_PATH_SYS . PH7_CONFIG . PH7_CONFIG_FILE;
 
-        $this->_read();
+        if (!is_file($this->sConfigAppFilePath) || !is_file($this->sConfigSysFilePath)) {
+            $aFile = !is_file($this->sConfigAppFilePath) ?
+                ['code' => FileNotFoundException::APP_FILE, 'filename' => $this->sConfigAppFilePath] :
+                ['code' => FileNotFoundException::SYS_FILE, 'filename' => $this->sConfigSysFilePath];
+
+            throw new FileNotFoundException(sprintf('"%s" is not found.', $aFile['filename']), $aFile['code']);
+        }
+
+        $this->read();
     }
 
     /**
-     * Load ini file.
-     *
-     * @param string $sFile
-     *
-     * @return boolean Returne FALSE if the file doesn't exist, TRUE otherwise.
+     * {@inheritdoc}
      */
     public function load($sFile)
     {
-        if (!is_file($sFile)) return false;
+        if (!is_file($sFile)) {
+            return false;
+        }
 
         $aContents = parse_ini_file($sFile, true);
         $this->values = array_merge($this->values, $aContents);
+
         return true;
     }
 
     /**
-     * Get a config option by key.
-     *
-     * @param string $sKey The configuration setting key.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getValue($sKey)
     {
@@ -86,21 +82,16 @@ class Config implements Configurable
     }
 
     /**
-     * Set dynamically a value to config data.
+     * {@inheritdoc}
      *
-     * @param string $sKey A unique config key.
-     * @param string $sValue The value to add.
-     *
-     * @return void
-     *
-     * @throws PH7InvalidArgumentException
+     * @throws KeyAlreadyExistsException
      */
     public function setValue($sKey, $sValue)
     {
         if (!array_key_exists($sKey, $this->values)) {
             $this->values[$sKey] = $sValue;
         } else {
-            throw new PH7InvalidArgumentException(sprintf('%s already exists. You cannot reassign a config key.', $sKey));
+            throw new KeyAlreadyExistsException(sprintf('%s already exists. You cannot reassign a config key.', $sKey));
         }
     }
 
@@ -111,7 +102,7 @@ class Config implements Configurable
      */
     public function setProductionMode()
     {
-        $this->_setMode(self::PRODUCTION_MODE);
+        $this->setMode(self::PRODUCTION_MODE);
     }
 
     /**
@@ -121,35 +112,36 @@ class Config implements Configurable
      */
     public function setDevelopmentMode()
     {
-        $this->_setMode(self::DEVELOPMENT_MODE);
+        $this->setMode(self::DEVELOPMENT_MODE);
     }
 
     /**
      * Set a Mode (Generic method).
      *
      * @param string $sReplace The Mode site.
-     * @see PH7\Framework\Config\Config::setProductionMode()
-     * @see PH7\Framework\Config\Config::setDevelopmentMode()
+     *
+     * @see Config::setProductionMode()
+     * @see Config::setDevelopmentMode()
      *
      * @return void
      */
-    private function _setMode($sReplace)
+    private function setMode($sReplace)
     {
         $sSearch = $sReplace === self::DEVELOPMENT_MODE ? self::PRODUCTION_MODE : self::DEVELOPMENT_MODE;
 
         $oFile = new File;
 
         // Check and correct the file permission if necessary.
-        $oFile->chmod($this->_sConfigAppFilePath, 0666);
+        $oFile->chmod($this->sConfigAppFilePath, 0666);
 
-        $sFileContents = $oFile->getFile($this->_sConfigAppFilePath);
+        $sFileContents = $oFile->getFile($this->sConfigAppFilePath);
         $sSearchContents = 'environment = ' . $sSearch;
         $sReplaceContents = 'environment = ' . $sReplace;
         $sNewContents = str_replace($sSearchContents, $sReplaceContents, $sFileContents);
-        $oFile->putFile($this->_sConfigAppFilePath, $sNewContents);
+        $oFile->putFile($this->sConfigAppFilePath, $sNewContents);
 
         // Check and correct the file permission if necessary.
-        $oFile->chmod($this->_sConfigAppFilePath, 0644);
+        $oFile->chmod($this->sConfigAppFilePath, 0644);
 
         unset($oFile, $sFileContents);
     }
@@ -159,14 +151,13 @@ class Config implements Configurable
      *
      * @return void
      */
-    private function _read()
+    private function read()
     {
-        /* Loading configuration files */
-
+        /** Load configuration files **/
         // 1) Load app config file
-        $this->values = parse_ini_file($this->_sConfigAppFilePath, true);
+        $this->values = parse_ini_file($this->sConfigAppFilePath, true);
         // 2) Now we have to use array_merge() function, so we do with the Config::load() method for loading system config file
-        $this->load($this->_sConfigSysFilePath);
+        $this->load($this->sConfigSysFilePath);
 
         /* The config constants */
         define('PH7_DEFAULT_THEME', $this->values['application']['default_theme']);

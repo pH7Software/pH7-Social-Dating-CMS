@@ -4,7 +4,7 @@
  * @desc             Backs up the database.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2011-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2011-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Model / Engine / Util
  * @version          1.3
@@ -48,11 +48,11 @@ class Backup
     public function back()
     {
         $this->_sSql =
-        "#################### Database Backup ####################\n" .
-        '# ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_VERSION . ', Build ' . Kernel::SOFTWARE_BUILD . "\r\n" .
-        '# Database name: ' . Config::getInstance()->values['database']['name'] . "\r\n" .
-        '# Created on ' . (new CDateTime)->get()->dateTime() . "\r\n" .
-        "#########################################################\r\n\r\n";
+            "#################### Database Backup ####################\n" .
+            '# ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_VERSION . ', Build ' . Kernel::SOFTWARE_BUILD . "\r\n" .
+            '# Database name: ' . Config::getInstance()->values['database']['name'] . "\r\n" .
+            '# Created on ' . (new CDateTime)->get()->dateTime() . "\r\n" .
+            "#########################################################\r\n\r\n";
 
         $aTables = $aColumns = $aValues = array();
         $oAllTables = Db::showTables();

@@ -3,7 +3,7 @@
  * @title          Generate a dynamic form from database fields
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2013-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2013-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Form
  */
@@ -14,100 +14,105 @@ defined('PH7') or exit('Restricted access');
 
 class DynamicFieldCoreForm
 {
-    private $_oForm, $_sColumn, $_sVal;
+    /** @var \PFBC\Form */
+    private $oForm;
+
+    /** @var string */
+    private $sColumn;
+
+    /** @var string */
+    private $sVal;
 
     /**
-     * @param object \PFBC\Form $oForm
+     * @param \PFBC\Form $oForm
      * @param string $sValue Column name
      * @param string $sValue Field value
      */
     public function __construct(\PFBC\Form $oForm, $sColumn, $sValue)
     {
-        $this->_oForm = $oForm;
-        $this->_sColumn = $sColumn;
-        $this->_sVal = $sValue;
+        $this->oForm = $oForm;
+        $this->sColumn = $sColumn;
+        $this->sVal = $sValue;
     }
 
     /**
      * Generate the dynamic form.
      *
-     * @return object \PFBC\Form
+     * @return \PFBC\Form
      */
     public function generate()
     {
-        switch ($this->_sColumn)
-        {
+        switch ($this->sColumn) {
             case 'description':
-                $this->_oForm->addElement(new \PFBC\Element\Textarea(t('Description:'), $this->_sColumn, array('id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,10,2000)','value' => $this->_sVal, 'validation' => new \PFBC\Validation\Str(20,4000), 'required' => 1)));
+                $this->oForm->addElement(new \PFBC\Element\Textarea(t('Description:'), $this->sColumn, array('id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,10,2000)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(20, 4000), 'required' => 1)));
                 $this->addCheckErrSpan('str');
-            break;
+                break;
 
             case 'country':
-                $this->_oForm->addElement(new \PFBC\Element\Country(t('Your Country:'), $this->_sColumn, array('id'=>$this->getFieldId('str'), 'value' => $this->_sVal, 'required'=>1)));
-            break;
+                $this->oForm->addElement(new \PFBC\Element\Country(t('Your Country:'), $this->sColumn, array('id' => $this->getFieldId('str'), 'value' => $this->sVal, 'required' => 1)));
+                break;
 
             case 'city':
-                $this->_oForm->addElement(new \PFBC\Element\Textbox(t('Your City:'), $this->_sColumn, array('id'=>$this->getFieldId('str'), 'onblur' =>'CValid(this.value,this.id,2,150)','value' => $this->_sVal, 'validation'=>new \PFBC\Validation\Str(2,150), 'required'=>1)));
+                $this->oForm->addElement(new \PFBC\Element\Textbox(t('Your City:'), $this->sColumn, array('id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,2,150)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(2, 150), 'required' => 1)));
                 $this->addCheckErrSpan('str');
-            break;
+                break;
 
             case 'state':
-                $this->_oForm->addElement(new \PFBC\Element\Textbox(t('Your State/Province:'), $this->_sColumn, array('id'=>$this->getFieldId('str'), 'onblur' =>'CValid(this.value,this.id,2,150)','value' => $this->_sVal, 'validation'=>new \PFBC\Validation\Str(2,150))));
+                $this->oForm->addElement(new \PFBC\Element\Textbox(t('Your State/Province:'), $this->sColumn, array('id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,2,150)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(2, 150))));
                 $this->addCheckErrSpan('str');
-            break;
+                break;
 
             case 'zipCode':
-                $this->_oForm->addElement(new \PFBC\Element\Textbox(t('Postal Code:'), $this->_sColumn, array('id'=>$this->getFieldId('str'), 'onblur' =>'CValid(this.value,this.id,2,15)','value' => $this->_sVal, 'validation'=>new \PFBC\Validation\Str(2,15))));
+                $this->oForm->addElement(new \PFBC\Element\Textbox(t('Postal Code:'), $this->sColumn, array('id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,2,15)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(2, 15))));
                 $this->addCheckErrSpan('str');
-            break;
+                break;
 
             case 'middleName':
-                $this->_oForm->addElement(new \PFBC\Element\Textbox(t('Middle Name:'), $this->_sColumn, array('id'=>$this->getFieldId('name'), 'onblur' =>'CValid(this.value,this.id)', 'value' => $this->_sVal, 'validation'=>new \PFBC\Validation\Name)));
+                $this->oForm->addElement(new \PFBC\Element\Textbox(t('Middle Name:'), $this->sColumn, array('id' => $this->getFieldId('name'), 'onblur' => 'CValid(this.value,this.id)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Name)));
                 $this->addCheckErrSpan('name');
-            break;
+                break;
 
             case 'height':
-                $this->_oForm->addElement(new \PFBC\Element\Height(t('Height:'), $this->_sColumn, array('value' => $this->_sVal)));
-            break;
+                $this->oForm->addElement(new \PFBC\Element\Height(t('Height:'), $this->sColumn, array('value' => $this->sVal)));
+                break;
 
             case 'weight':
-                $this->_oForm->addElement(new \PFBC\Element\Weight(t('Weight:'), $this->_sColumn, array('value' => $this->_sVal)));
-            break;
+                $this->oForm->addElement(new \PFBC\Element\Weight(t('Weight:'), $this->sColumn, array('value' => $this->sVal)));
+                break;
 
             case 'website':
             case 'socialNetworkSite':
-                $sLang = ($this->_sColumn == 'socialNetworkSite') ? t('Social Media Profile:') : t('Your Website:');
-                $sDesc = ($this->_sColumn == 'socialNetworkSite') ? t('The URL of your social profile like Facebook, Snapchat, Instagram, Google+, etc.') : t('Your Personal Website/Blog (any promotional/affiliated contents will be banned)');
-                $this->_oForm->addElement(new \PFBC\Element\Url($sLang, $this->_sColumn, array('id'=>$this->getFieldId('url'), 'onblur'=>'CValid(this.value,this.id)', 'description'=>$sDesc, 'value' => $this->_sVal)));
+                $sLang = ($this->sColumn == 'socialNetworkSite') ? t('Social Media Profile:') : t('Your Website:');
+                $sDesc = ($this->sColumn == 'socialNetworkSite') ? t('The URL of your social profile like Facebook, Snapchat, Instagram, Google+, etc.') : t('Your Personal Website/Blog (any promotional/affiliated contents will be banned)');
+                $this->oForm->addElement(new \PFBC\Element\Url($sLang, $this->sColumn, array('id' => $this->getFieldId('url'), 'onblur' => 'CValid(this.value,this.id)', 'description' => $sDesc, 'value' => $this->sVal)));
                 $this->addCheckErrSpan('url');
-            break;
+                break;
 
             case 'phone':
             case 'fax':
-                $sLang = ($this->_sColumn == 'fax') ? t('Your Fax Number:') : t('Your Phone Number:');
-                $this->_oForm->addElement(new \PFBC\Element\Phone($sLang, $this->_sColumn, array('id'=>$this->getFieldId('phone'), 'onblur'=>'CValid(this.value, this.id)', 'title'=>t('Enter full number with area code.'), 'value' => $this->_sVal)));
+                $sLang = ($this->sColumn == 'fax') ? t('Your Fax Number:') : t('Your Phone Number:');
+                $this->oForm->addElement(new \PFBC\Element\Phone($sLang, $this->sColumn, array('id' => $this->getFieldId('phone'), 'onblur' => 'CValid(this.value, this.id)', 'title' => t('Enter full number with area code.'), 'value' => $this->sVal)));
                 $this->addCheckErrSpan('phone');
-            break;
+                break;
 
-            default:
-            {
-                $sLangKey = strtolower($this->_sColumn);
+            default: {
+                $sLangKey = strtolower($this->sColumn);
                 $sClass = '\PFBC\Element\\' . $this->getFieldType();
-                $this->_oForm->addElement(new $sClass(t($sLangKey), $this->_sColumn, array('value' => $this->_sVal)));
+                $this->oForm->addElement(new $sClass(t($sLangKey), $this->sColumn, array('value' => $this->sVal)));
             }
         }
 
-        return $this->_oForm;
+        return $this->oForm;
     }
 
     protected function getFieldId($sType)
     {
-        return $sType . '_' . $this->_sColumn;
+        return $sType . '_' . $this->sColumn;
     }
 
     protected function addCheckErrSpan($sType)
     {
-        $this->_oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ' . $this->getFieldId($sType) . '"></span>'));
+        $this->oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ' . $this->getFieldId($sType) . '"></span>'));
     }
 
     /**
@@ -117,29 +122,29 @@ class DynamicFieldCoreForm
      */
     protected function getFieldType()
     {
-        if (strstr($this->_sColumn, 'textarea'))
+        if (strstr($this->sColumn, 'textarea'))
             $sType = 'Textarea';
-        elseif (strstr($this->_sColumn, 'editor'))
+        elseif (strstr($this->sColumn, 'editor'))
             $sType = 'CKEditor';
-        elseif (strstr($this->_sColumn, 'email'))
+        elseif (strstr($this->sColumn, 'email'))
             $sType = 'Email';
-        elseif (strstr($this->_sColumn, 'password'))
+        elseif (strstr($this->sColumn, 'password'))
             $sType = 'Password';
-        elseif (strstr($this->_sColumn, 'url'))
+        elseif (strstr($this->sColumn, 'url'))
             $sType = 'Url';
-        elseif (strstr($this->_sColumn, 'phone'))
+        elseif (strstr($this->sColumn, 'phone'))
             $sType = 'Phone';
-        elseif (strstr($this->_sColumn, 'date'))
+        elseif (strstr($this->sColumn, 'date'))
             $sType = 'Date';
-        elseif (strstr($this->_sColumn, 'color'))
+        elseif (strstr($this->sColumn, 'color'))
             $sType = 'Color';
-        elseif (strstr($this->_sColumn, 'number'))
+        elseif (strstr($this->sColumn, 'number'))
             $sType = 'Number';
-        elseif (strstr($this->_sColumn, 'range'))
+        elseif (strstr($this->sColumn, 'range'))
             $sType = 'Range';
-        elseif (strstr($this->_sColumn, 'height'))
+        elseif (strstr($this->sColumn, 'height'))
             $sType = 'Height';
-        elseif (strstr($this->_sColumn, 'weight'))
+        elseif (strstr($this->sColumn, 'weight'))
             $sType = 'Weight';
         else
             $sType = 'Textbox';
