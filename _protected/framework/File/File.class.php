@@ -105,6 +105,7 @@ class File
     public function getFileWithoutExt($sFile)
     {
         $sExt = $this->getFileExt($sFile);
+
         return str_replace(PH7_DOT . $sExt, '', $sFile);
     }
 
@@ -194,13 +195,15 @@ class File
 
         if ($rHandle = opendir($sDir)) {
             while (false !== ($sFile = readdir($rHandle))) {
-                if ($sFile != '.' && $sFile != '..' && is_dir($sDir . PH7_DS . $sFile))
+                if ($sFile != '.' && $sFile != '..' && is_dir($sDir . PH7_DS . $sFile)) {
                     $aDirList[] = $sFile;
+                }
             }
             asort($aDirList);
             reset($aDirList);
         }
         closedir($rHandle);
+
         return $aDirList;
     }
 
@@ -830,11 +833,11 @@ class File
     /**
      * Recursive Directory Iterator.
      *
-     * @param string $sFuncName The function name. Choose between 'copy' and 'rename'.
      * @param string $sFrom Directory.
      * @param string $sTo Directory.
+     * @param string $sFuncName The function name. Choose between 'copy' and 'rename'.
      *
-     * @return boolean
+     * @return bool
      *
      * @throws PH7InvalidArgumentException If the type is bad.
      */

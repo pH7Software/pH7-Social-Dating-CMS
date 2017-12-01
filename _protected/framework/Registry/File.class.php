@@ -20,15 +20,15 @@ defined('PH7') or exit('Restricted access');
 abstract class File implements \Serializable
 {
     /** @var string */
-    private $_sPath;
+    private $sPath;
 
     /** @var resource|null */
-    private $_rFile = null;
+    private $rFile = null;
 
     public function __construct()
     {
-        $this->_sPath = PH7_PATH_TMP . 'hashList.tmp';
-        $this->_open();
+        $this->sPath = PH7_PATH_TMP . 'hashList.tmp';
+        $this->open();
     }
 
     /**
@@ -56,7 +56,7 @@ abstract class File implements \Serializable
      */
     public function __sleep()
     {
-        $this->_close();
+        $this->close();
     }
 
     /**
@@ -64,7 +64,7 @@ abstract class File implements \Serializable
      */
     public function __wakeup()
     {
-        $this->_close();
+        $this->close();
     }
 
     /**
@@ -72,8 +72,9 @@ abstract class File implements \Serializable
      */
     public function read()
     {
-        rewind($this->_rFile);
-        return fread($this->_rFile, filesize($this->_sPath));
+        rewind($this->rFile);
+
+        return fread($this->rFile, filesize($this->sPath));
     }
 
     /**
@@ -83,36 +84,36 @@ abstract class File implements \Serializable
      */
     public function write($sData)
     {
-        fwrite($this->_rFile, $sData);
+        fwrite($this->rFile, $sData);
     }
 
     /**
      * @return void
      */
-    private function _open()
+    private function open()
     {
-        $this->_rFile = fopen($this->_sPath, 'wb+');
+        $this->rFile = fopen($this->sPath, 'wb+');
     }
 
     /**
      * @return boolean
      */
-    private function _close()
+    private function close()
     {
-        if (null === $this->_rFile) {
+        if (null === $this->rFile) {
             return false;
         }
 
-        fclose($this->_rFile);
-        $this->_rFile = null;
+        fclose($this->rFile);
+        $this->rFile = null;
 
         return true;
     }
 
     public function __destruct()
     {
-        if (null !== $this->_rFile) {
-            $this->_close();
+        if (null !== $this->rFile) {
+            $this->close();
         }
     }
 }
