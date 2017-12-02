@@ -225,7 +225,7 @@ class UserController extends Controller
     {
         Header::redirect(
             Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
-            $this->_moderateRegistration($this->httpRequest->post('id'), 1)
+            $this->moderateRegistration($this->httpRequest->post('id'), 1)
         );
     }
 
@@ -233,7 +233,7 @@ class UserController extends Controller
     {
         Header::redirect(
             Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
-            $this->_moderateRegistration($this->httpRequest->post('id'), 0)
+            $this->moderateRegistration($this->httpRequest->post('id'), 0)
         );
     }
 
@@ -244,7 +244,7 @@ class UserController extends Controller
         } elseif (count($this->httpRequest->post('action')) > 0) {
             foreach ($this->httpRequest->post('action') as $sAction) {
                 $iId = (int)explode('_', $sAction)[0];
-                $this->sMsg = $this->_moderateRegistration($iId, 1);
+                $this->sMsg = $this->moderateRegistration($iId, 1);
             }
         }
 
@@ -261,7 +261,7 @@ class UserController extends Controller
         } elseif (count($this->httpRequest->post('action')) > 0) {
             foreach ($this->httpRequest->post('action') as $sAction) {
                 $iId = (int)explode('_', $sAction)[0];
-                $this->sMsg = $this->_moderateRegistration($iId, 0);
+                $this->sMsg = $this->moderateRegistration($iId, 0);
             }
         }
 
