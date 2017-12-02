@@ -381,18 +381,18 @@ class UserController extends Controller
         );
     }
 
-    private function _moderateRegistration($iId, $iStatus)
+    private function moderateRegistration($iId, $iStatus)
     {
         if (isset($iId, $iStatus)) {
             if ($oUser = $this->oAdminModel->readProfile($iId)) {
-                if ($iStatus == 0) {
+                if ($iStatus === 0) {
                     // Set user not active
                     $this->oAdminModel->approve($oUser->profileId, 0);
 
                     // We leave the user in disapproval (but send an email). After we can ban or delete it
                     $sSubject = t('Your membership account has been declined');
                     $this->sMsg = t('Sorry, Your membership account has been declined.');
-                } elseif ($iStatus == 1) {
+                } elseif ($iStatus === 1) {
                     // Approve user
                     $this->oAdminModel->approve($oUser->profileId, 1);
 
