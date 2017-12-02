@@ -23,14 +23,14 @@ class CDateTime
     const DEFAULT_DATE_FORMAT = 'Y-m-d H:i:s';
 
     /** @var Config */
-    private $_oConfig;
+    private $oConfig;
 
     /** @var DateTime */
-    private $_oDateTime;
+    private $oDateTime;
 
     public function __construct()
     {
-        $this->_oConfig = Config::getInstance();
+        $this->oConfig = Config::getInstance();
     }
 
     /**
@@ -43,7 +43,7 @@ class CDateTime
     public function get($mTime = null)
     {
         $sSetTime = $mTime !== null ? date(self::DEFAULT_DATE_FORMAT, (!is_numeric($mTime) ? strtotime($mTime) : $mTime)) : 'now';
-        $this->_oDateTime = new DateTime($sSetTime, new DateTimeZone($this->_oConfig->values['language.application']['timezone']));
+        $this->oDateTime = new DateTime($sSetTime, new DateTimeZone($this->oConfig->values['language.application']['timezone']));
 
         return $this;
     }
@@ -57,9 +57,9 @@ class CDateTime
      */
     public function dateTime($sFormat = null)
     {
-        $sFormat = ($sFormat === null) ? $this->_oConfig->values['language.application']['date_time_format'] : $sFormat;
+        $sFormat = ($sFormat === null) ? $this->oConfig->values['language.application']['date_time_format'] : $sFormat;
 
-        return $this->_oDateTime->format($sFormat);
+        return $this->oDateTime->format($sFormat);
     }
 
     /**
@@ -71,9 +71,9 @@ class CDateTime
      */
     public function date($sFormat = null)
     {
-        $sFormat = ($sFormat === null) ? $this->_oConfig->values['language.application']['date_format'] : $sFormat;
+        $sFormat = ($sFormat === null) ? $this->oConfig->values['language.application']['date_format'] : $sFormat;
 
-        return $this->_oDateTime->format($sFormat);
+        return $this->oDateTime->format($sFormat);
     }
 
     /**
@@ -85,8 +85,8 @@ class CDateTime
      */
     public function time($sFormat = null)
     {
-        $sFormat = ($sFormat === null) ? $this->_oConfig->values['language.application']['time_format'] : $sFormat;
+        $sFormat = ($sFormat === null) ? $this->oConfig->values['language.application']['time_format'] : $sFormat;
 
-        return $this->_oDateTime->format($sFormat);
+        return $this->oDateTime->format($sFormat);
     }
 }
