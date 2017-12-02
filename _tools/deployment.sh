@@ -60,6 +60,7 @@ function run() {
             rm ./phpunit.phar
             rm ./phpunit.xml.dist
             rm ./_protected/app/configs/config.ini
+            rm -rf ./coverage/ # PHPUnit coverage reports
             rm -rf ./.idea/ # PHPStorm
 
             ## Other
