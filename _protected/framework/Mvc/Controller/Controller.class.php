@@ -30,7 +30,6 @@ use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Security\DDoS\Stop as DDoSStoper;
 use PH7\FriendCoreModel;
 use PH7\MailCoreModel;
-use PH7\Permission;
 use PH7\UserCore;
 
 abstract class Controller extends Core
@@ -286,7 +285,7 @@ abstract class Controller extends Core
     {
         if (is_file($this->registry->path_module_config . 'Permission.php')) {
             require $this->registry->path_module_config . 'Permission.php';
-            new Permission;
+            new \PH7\Permission;
         }
     }
 
