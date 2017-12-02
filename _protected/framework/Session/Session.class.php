@@ -64,7 +64,7 @@ class Session
      * Get a session value by giving its name.
      *
      * @param string $sName Name of the session.
-     * @param boolean $bEscape Default TRUE
+     * @param bool $bEscape Default TRUE
      *
      * @return string If the session exists, returns the session with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the session doesn't exist.
      */
@@ -79,7 +79,7 @@ class Session
      *
      * @param array|string $mName Name of the session.
      *
-     * @return boolean
+     * @return bool
      */
     public function exists($mName)
     {
