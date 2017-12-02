@@ -149,14 +149,22 @@ class Session
      *
      * @return void
      */
-    protected function initializePHPSession()
+    private function initializePHPSession()
     {
-        if (session_status() !== PHP_SESSION_ACTIVE) {
+        if (!$this->isSessionActivated()) {
             @session_start();
         }
     }
 
-    protected function close()
+    /**
+     * @return bool
+     */
+    private function isSessionActivated()
+    {
+        return session_status() === PHP_SESSION_ACTIVE;
+    }
+
+    private function close()
     {
         session_write_close();
     }
