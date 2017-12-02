@@ -164,7 +164,7 @@ abstract class Controller extends Core
     /**
      * Set an Access Denied page.
      *
-     * @param boolean $b403Status Set the Forbidden status. For the Ajax blocks and others, we cannot put the HTTP 403 error code, so the attribute must be set to FALSE. Default TRUE
+     * @param bool $b403Status Set the Forbidden status. For the Ajax blocks and others, we cannot put the HTTP 403 error code, so the attribute must be set to FALSE. Default TRUE
      *
      * @return void Quits the page with the exit() function
      */
@@ -309,10 +309,7 @@ abstract class Controller extends Core
      */
     private function checkSiteStatus()
     {
-        if ($this->registry->module !== PH7_ADMIN_MOD &&
-            M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE &&
-            !AdminCore::auth()
-        ) {
+        if ($this->isMaintenancePageEligible()) {
             // Set 1 hour for the duration time of the "Service Unavailable" HTTP status
             Page::maintenance(3600);
         }
@@ -332,5 +329,19 @@ abstract class Controller extends Core
             }
             unset($oDDoS);
         }
+    }
+
+    /**
+     * Determines when and where the maintenance page should be displayed.
+     * e.g., Maintenance page should be displayed only when enabled
+     * and shouldn't be displayed in the admin panel.
+     *
+     * @return bool
+     */
+    private function isMaintenancePageEligible()
+    {
+        return $this->registry->module !== PH7_ADMIN_MOD &&
+            M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE &&
+            !AdminCore::auth();
     }
 }
