@@ -36,5 +36,9 @@ Thumbs.db
 .DS_Store*
 ._*
 
+
+# PHPUnit Coverage folder
+coverage
+
 # PHPStorm IDE folder.
-/.idea
+.idea
