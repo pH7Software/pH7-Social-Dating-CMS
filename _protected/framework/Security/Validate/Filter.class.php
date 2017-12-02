@@ -271,7 +271,7 @@ class Filter
          *
          */
         if (is_array($str)) {
-            while (list($key) = each($str)) {
+            foreach ($str as $key => $val) {
                 $str[$key] = $this->xssClean($str[$key]);
             }
 
