@@ -18,6 +18,8 @@
     </filter>
 
     <logging>
-        <log type="coverage-html" target="coverage"/>
+        <log type="coverage-text" target="php://stdout" showUncoveredFiles="true" showOnlySummary="true" />
+        <log type="coverage-html" target="coverage" />
+        <log type="coverage-clover" target="coverage/clover.xml" />
     </logging>
 </phpunit>
