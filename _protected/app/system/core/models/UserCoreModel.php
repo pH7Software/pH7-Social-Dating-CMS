@@ -279,7 +279,7 @@ class UserCoreModel extends Model
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return stdClass|int Object for the users list returned or integer for the total number users returned.
+     * @return array|stdClass|int Object for the users list returned or integer for the total number users returned.
      */
     public function search(array $aParams, $bCount, $iOffset, $iLimit)
     {
@@ -417,10 +417,10 @@ class UserCoreModel extends Model
         $rStmt->execute();
 
         if (!$bCount) {
-            $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $aRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
 
-            return $oRow;
+            return $aRow;
         }
 
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -988,7 +988,7 @@ class UserCoreModel extends Model
      * @param string $sUsernameSearch
      * @param string $sTable Default 'Members'
      *
-     * @return stdClass data of users (profileId, username, sex)
+     * @return array data of users (profileId, username, sex)
      */
     public function getUsernameList($sUsernameSearch, $sTable = 'Members')
     {
@@ -997,10 +997,10 @@ class UserCoreModel extends Model
         $rStmt = Db::getInstance()->prepare('SELECT profileId, username, sex FROM' . Db::prefix($sTable) . 'WHERE username <> \'' . PH7_GHOST_USERNAME . '\' AND username LIKE :username');
         $rStmt->bindValue(':username', '%' . $sUsernameSearch . '%', \PDO::PARAM_STR);
         $rStmt->execute();
-        $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        $aRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);
 
-        return $oRow;
+        return $aRow;
     }
 
     /**
@@ -1010,7 +1010,7 @@ class UserCoreModel extends Model
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return stdClass Data of users
+     * @return array Data of users
      */
     public function getProfiles($sOrder = SearchCoreModel::LAST_ACTIVITY, $iOffset = null, $iLimit = null)
     {
@@ -1045,10 +1045,10 @@ class UserCoreModel extends Model
         }
 
         $rStmt->execute();
-        $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        $aRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);
 
-        return $oRow;
+        return $aRow;
     }
 
     /**
@@ -1061,7 +1061,7 @@ class UserCoreModel extends Model
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return stdClass|int Object with the users list returned or integer for the total number users returned.
+     * @return array|stdClass|int Object with the users list returned or integer for the total number users returned.
      */
     public function getGeoProfiles($sCountryCode, $sCity, $bCount, $sOrder, $iOffset = null, $iLimit = null)
     {
@@ -1098,10 +1098,10 @@ class UserCoreModel extends Model
         $rStmt->execute();
 
         if (!$bCount) {
-            $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $aRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
 
-            return $oRow;
+            return $aRow;
         }
 
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -1373,7 +1373,7 @@ class UserCoreModel extends Model
      *
      * @param int $iGroupId Group ID. Select only the specific membership from a group ID.
      *
-     * @return stdClass The membership(s) data.
+     * @return stdClass|array The membership(s) data.
      */
     public function getMemberships($iGroupId = null)
     {

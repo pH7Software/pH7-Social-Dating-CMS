@@ -13,18 +13,18 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 class BlogModel extends BlogCoreModel
 {
     /**
-     * @param integer|null $iBlogId
-     * @param integer $iOffset
-     * @param integer $iLimit
-     * @param boolean $bCount
+     * @param int|null $iBlogId
+     * @param int $iOffset
+     * @param int $iLimit
+     * @param bool $bCount
      *
-     * @return \stdClass
+     * @return array
      */
     public function getCategory($iBlogId = null, $iOffset, $iLimit, $bCount = false)
     {
         $this->cache->start(self::CACHE_GROUP, 'category' . $iBlogId . $iOffset . $iLimit . $bCount, static::CACHE_TIME);
 
-        if (!$oData = $this->cache->get()) {
+        if (!$aData = $this->cache->get()) {
             $iOffset = (int)$iOffset;
             $iLimit = (int)$iLimit;
 
@@ -44,17 +44,17 @@ class BlogModel extends BlogCoreModel
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
             $rStmt->execute();
-            $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $aData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $this->cache->put($oData);
+            $this->cache->put($aData);
         }
 
-        return $oData;
+        return $aData;
     }
 
     /**
-     * @param integer $iCategoryId
-     * @param integer $iBlogId
+     * @param int $iCategoryId
+     * @param int $iBlogId
      */
     public function addCategory($iCategoryId, $iBlogId)
     {
@@ -89,7 +89,7 @@ class BlogModel extends BlogCoreModel
     /**
      * @param array $aData
      *
-     * @return boolean
+     * @return bool
      */
     public function addPost(array $aData)
     {
@@ -117,13 +117,13 @@ class BlogModel extends BlogCoreModel
 
     /**
      * @param string $sCategoryName
-     * @param boolean $bCount
+     * @param bool $bCount
      * @param string $sOrderBy
-     * @param integer $iSort
-     * @param integer $iOffset
-     * @param integer $iLimit
+     * @param int $iSort
+     * @param int $iOffset
+     * @param int $iLimit
      *
-     * @return integer|\stdClass
+     * @return int|array|\stdClass
      */
     public function category($sCategoryName, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
@@ -163,14 +163,14 @@ class BlogModel extends BlogCoreModel
     }
 
     /**
-     * @param integer|string $mLooking
-     * @param boolean $bCount
+     * @param int|string $mLooking
+     * @param bool $bCount
      * @param string $sOrderBy
-     * @param integer $iSort
-     * @param integer $iOffset
-     * @param integer $iLimit
+     * @param int $iSort
+     * @param int $iOffset
+     * @param int $iLimit
      *
-     * @return integer|\stdClass
+     * @return int|\stdClass|array
      */
     public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
@@ -216,7 +216,7 @@ class BlogModel extends BlogCoreModel
     }
 
     /**
-     * @param integer $iBlogId
+     * @param int $iBlogId
      *
      * @return string
      */
@@ -241,7 +241,7 @@ class BlogModel extends BlogCoreModel
     /**
      * @param string $sPostId
      *
-     * @return boolean
+     * @return bool
      */
     public function postIdExists($sPostId)
     {
@@ -260,9 +260,9 @@ class BlogModel extends BlogCoreModel
     }
 
     /**
-     * @param integer $iBlogId
+     * @param int $iBlogId
      *
-     * @return boolean
+     * @return bool
      */
     public function deletePost($iBlogId)
     {
@@ -274,7 +274,7 @@ class BlogModel extends BlogCoreModel
     }
 
     /**
-     * @param integer $iBlogId
+     * @param int $iBlogId
      */
     public function deleteCategory($iBlogId)
     {
@@ -288,7 +288,8 @@ class BlogModel extends BlogCoreModel
     /**
      * @param string $sSection
      * @param string $sValue
-     * @param integer $iBlogId
+     *
+     * @param int $iBlogId
      */
     public function updatePost($sSection, $sValue, $iBlogId)
     {
