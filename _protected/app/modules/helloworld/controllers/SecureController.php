@@ -30,7 +30,7 @@ class SecureController extends Controller
             /* H TITLE html tag H1 to H4 */
             $this->view->h1_title = t('HTTP Secure Page');
 
-            // Assign variavle
+            // Assign variables to the template
             $this->view->user = $sUsr;
 
             // Output Template
