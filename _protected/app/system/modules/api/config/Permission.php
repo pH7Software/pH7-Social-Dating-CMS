@@ -12,14 +12,17 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Api\Tool;
+use PH7\Framework\Http\Http;
+
 class Permission extends PermissionCore
 {
     public function __construct()
     {
         parent::__construct();
 
-        if (!Framework\Api\Tool::checkAccess($this->config, $this->httpRequest)) {
-            Framework\Http\Http::setHeadersByCode(403);
+        if (!Tool::checkAccess($this->config, $this->httpRequest)) {
+            Http::setHeadersByCode(403);
             t("Your API key and/or the URL of your external application don't match with the one in your pH7CMS's configuration system!");
             exit;
         }
