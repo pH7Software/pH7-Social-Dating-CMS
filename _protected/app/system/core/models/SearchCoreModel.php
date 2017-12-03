@@ -95,7 +95,7 @@ class SearchCoreModel
      *
      * @return string
      */
-    protected static function sort($iSort)
+    private static function sort($iSort)
     {
         return $iSort === static::DESC ? ' DESC ' : ' ASC ';
     }
