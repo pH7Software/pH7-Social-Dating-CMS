@@ -50,7 +50,7 @@ class SearchCoreModel
      * Order By method.
      *
      * @param string $sColumn Table Column
-     * @param integer $iSort SearchCoreModel::ASC OR SearchCoreModel::DESC
+     * @param int $iSort SearchCoreModel::ASC OR SearchCoreModel::DESC
      * @param string|null $sAsTable The Alias Table, this prevents the ambiguous clause
      *
      * @return string SQL order by query
@@ -76,7 +76,7 @@ class SearchCoreModel
             case static::SEND_DATE:
             case static::ADDED_DATE:
             case static::UPDATED:
-                $sAsTable = (!empty($sAsTable)) ? $sAsTable . '.' : '';
+                $sAsTable = !empty($sAsTable) ? $sAsTable . '.' : '';
                 $sOrderBy = $sColumn;
                 break;
 
@@ -89,7 +89,7 @@ class SearchCoreModel
     }
 
     /**
-     * @param integer $iSort
+     * @param int $iSort
      *
      * @return string
      */

@@ -186,14 +186,17 @@ class BlogModel extends BlogCoreModel
 
         $sSqlWhere = ' WHERE postId LIKE :looking OR title LIKE :looking OR
                 pageTitle LIKE :looking OR content LIKE :looking OR tags LIKE :looking';
-
         if (ctype_digit($mLooking)) {
             $sSqlWhere = ' WHERE blogId = :looking';
         }
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Blogs') . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
-        (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+        if (ctype_digit($mLooking)) {
+            $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
+        } else {
+            $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+        }
 
         if (!$bCount) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
