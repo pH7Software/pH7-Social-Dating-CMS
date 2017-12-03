@@ -1430,9 +1430,12 @@ class UserCoreModel extends Model
      */
     public function checkMembershipExpiration($iProfileId, $sCurrentTime)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT m.profileId FROM' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Memberships') .
-            'AS pay USING(groupId) WHERE (pay.expirationDays = 0 OR DATE_ADD(m.membershipDate, INTERVAL pay.expirationDays DAY) >= :currentTime)
-             AND (m.profileId = :profileId) LIMIT 1');
+        $sSqlQuery = 'SELECT m.profileId FROM' . Db::prefix('Members') . 'AS m INNER JOIN' .
+            Db::prefix('Memberships') . 'AS pay USING(groupId) WHERE
+            (pay.expirationDays = 0 OR DATE_ADD(m.membershipDate, INTERVAL pay.expirationDays DAY) >= :currentTime) AND
+            (m.profileId = :profileId) LIMIT 1';
+
+        $rStmt = Db::getInstance()->prepare($sSqlQuery);
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_INT);
