@@ -9,12 +9,22 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Model;
 
-class GameCoreModel extends Framework\Mvc\Model\Engine\Model
+class GameCoreModel extends Model
 {
+    const CACHE_GROUP = 'db/sys/mod/game';
+    const CACHE_TIME = 93312000;
 
-    const CACHE_GROUP = 'db/sys/mod/game', CACHE_TIME = 93312000;
-
+    /**
+     * @param string|null $sTitle
+     * @param int|null $iGameId
+     * @param int $iOffset
+     * @param int $iLimit
+     * @param string $sOrder
+     *
+     * @return array|\stdClass
+     */
     public function get($sTitle = null, $iGameId = null, $iOffset, $iLimit, $sOrder = SearchCoreModel::NAME)
     {
         $iOffset = (int)$iOffset;
@@ -29,9 +39,10 @@ class GameCoreModel extends Framework\Mvc\Model\Engine\Model
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
-        $oData = (!empty($iGameId)) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        $mData = !empty($iGameId) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);
-        return $oData;
+
+        return $mData;
     }
 
 }

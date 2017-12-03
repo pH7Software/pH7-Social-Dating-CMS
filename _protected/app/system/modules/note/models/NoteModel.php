@@ -110,12 +110,14 @@ class NoteModel extends NoteCoreModel
         $this->cache->start(self::CACHE_GROUP, 'readPost' . $sPostId . $iProfileId . $iApproved, static::CACHE_TIME);
 
         if (!$oData = $this->cache->get()) {
-            $sSqlApproved = (isset($iApproved)) ? ' AND approved = :approved' : '';
+            $bIsApproved = isset($iApproved);
+
+            $sSqlApproved = $bIsApproved ? ' AND approved = :approved' : '';
 
             $rStmt = Db::getInstance()->prepare('SELECT n.*, c.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Notes') . 'AS n LEFT JOIN' . Db::prefix('NotesCategories') . 'AS c ON n.noteId = c.noteId INNER JOIN' . Db::prefix('Members') . ' AS m ON n.profileId = m.profileId WHERE n.profileId = :profileId AND n.postId = :postId' . $sSqlApproved . ' LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->bindValue(':postId', $sPostId, \PDO::PARAM_STR);
-            if (isset($iApproved)) {
+            if ($bIsApproved) {
                 $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
             }
             $rStmt->execute();
@@ -269,25 +271,27 @@ class NoteModel extends NoteCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
+        $bIsApproved = isset($iApproved);
 
-        $sSqlApproved = (isset($iApproved)) ? ' AND (approved = :approved)' : '';
+        $sSqlApproved = $bIsApproved ? ' AND (approved = :approved)' : '';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'n');
 
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? 'n.*, m.username, m.firstName, m.sex' : 'COUNT(noteId) AS totalNotes';
 
+        $sSqlWhere = ' WHERE (postId LIKE :looking OR title LIKE :looking OR
+            pageTitle LIKE :looking OR content LIKE :looking OR tags LIKE :looking OR
+            username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)';
+
         if (ctype_digit($mLooking)) {
             $sSqlWhere = ' WHERE (noteId = :looking)';
-        } else {
-            $sSqlWhere = ' WHERE (postId LIKE :looking OR title LIKE :looking OR
-                pageTitle LIKE :looking OR content LIKE :looking OR tags LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)';
         }
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Notes') . 'AS n INNER JOIN' . Db::prefix('Members') . 'AS m ON n.profileId = m.profileId' . $sSqlWhere . $sSqlApproved . $sSqlOrder . $sSqlLimit);
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
-        if (isset($iApproved)) {
+        if ($bIsApproved) {
             $rStmt->bindParam(':approved', $iApproved, \PDO::PARAM_INT);
         }
 
@@ -454,6 +458,6 @@ class NoteModel extends NoteCoreModel
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_STR);
         $rStmt->execute();
 
-        return ($rStmt->rowCount() === 0);
+        return $rStmt->rowCount() === 0;
     }
 }

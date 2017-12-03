@@ -18,7 +18,7 @@ class ForumModel extends ForumCoreModel
      * @param int|null $iOffset
      * @param int|null $iLimit
      *
-     * @return array|mixed
+     * @return array|\stdClass|bool
      */
     public function getCategory($iCategoryId = null, $iOffset = null, $iLimit = null)
     {
@@ -55,7 +55,7 @@ class ForumModel extends ForumCoreModel
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return array|mixed
+     * @return array|\stdClass|bool
      */
     public function getTopic($sForumName, $iForumId, $sTopicSubject, $iTopicId, $iProfileId, $iApproved, $iOffset, $iLimit)
     {
@@ -362,7 +362,12 @@ class ForumModel extends ForumCoreModel
 
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? 'f.*, f.createdDate AS forumCreatedDate, f.updatedDate AS forumUpdatedDate, t.*, m.username, m.firstName, m.sex' : 'COUNT(t.topicId) AS totalTopics';
-        $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE t.topicId = :looking ' : ' WHERE t.message LIKE :looking OR t.title LIKE :looking OR m.username LIKE :looking';
+
+        $sSqlWhere = ' WHERE t.message LIKE :looking OR t.title LIKE :looking OR m.username LIKE :looking';
+        if (ctype_digit($mLooking)) {
+            $sSqlWhere = ' WHERE t.topicId = :looking ';
+        }
+
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Forums') . 'AS f INNER JOIN' . Db::prefix('ForumsTopics') . 'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix('Members') . ' AS m ON t.profileId = m.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         if (ctype_digit($mLooking)) {
@@ -557,7 +562,7 @@ class ForumModel extends ForumCoreModel
      *
      * @param int $iForumId
      *
-     * @return \stdClass
+     * @return array
      */
     protected function getTopicIdsFromForumId($iForumId)
     {
@@ -573,7 +578,7 @@ class ForumModel extends ForumCoreModel
      *
      * @param int $iCategoryId
      *
-     * @return \stdClass
+     * @return array
      */
     protected function getForumIdsFromCatId($iCategoryId)
     {
