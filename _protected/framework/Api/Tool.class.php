@@ -30,10 +30,32 @@ class Tool
      */
     public static function checkAccess(Config $oConfig, HttpRequest $oRequest)
     {
-        if (strcmp($oRequest->gets('private_api_key'), $oConfig->values['ph7cms.api']['private_key']) === 0) {
-            return in_array($oRequest->gets('url'), $oConfig->values['ph7cms.api']['allow_domains'], true);
+        if (self::isApiKeyValid($oRequest->gets('private_api_key'), $oConfig)) {
+            return self::isUrlAllowed($oRequest->gets('url'), $oConfig);
         }
 
         return false;
+    }
+
+    /**
+     * @param string $sPrivateApiKey
+     * @param Config $oConfig
+     *
+     * @return bool
+     */
+    private static function isApiKeyValid($sPrivateApiKey, Config $oConfig)
+    {
+        return strcmp($sPrivateApiKey, $oConfig->values['ph7cms.api']['private_key']) === 0;
+    }
+
+    /**
+     * @param string $sUrl
+     * @param Config $oConfig
+     *
+     * @return bool
+     */
+    private static function isUrlAllowed($sUrl, Config $oConfig)
+    {
+        return in_array($sUrl, $oConfig->values['ph7cms.api']['allow_domains'], true);
     }
 }
