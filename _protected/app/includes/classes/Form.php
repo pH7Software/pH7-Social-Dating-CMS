@@ -41,7 +41,7 @@ class Form extends Framework\Layout\Form\Form
      */
     public static function setVal($aValue)
     {
-        $sVal = ''; // Devault Value
+        $sVal = ''; // Default Value
 
         foreach ($aValue as $sValue) {
             $sVal .= $sValue . ',';
