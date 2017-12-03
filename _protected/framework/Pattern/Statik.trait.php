@@ -18,7 +18,7 @@ defined('PH7') or exit('Restricted access');
 trait Statik
 {
     /**
-     * Pivate Constructor & Cloning to prevent direct creation of object and blocking cloning.
+     * Private Constructor & Cloning to prevent direct creation of object and blocking cloning.
      */
     final private function __construct()
     {
