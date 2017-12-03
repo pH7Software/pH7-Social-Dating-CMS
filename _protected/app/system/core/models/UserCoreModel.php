@@ -1457,7 +1457,8 @@ class UserCoreModel extends Model
     {
         $bIsTime = !empty($sDateTime);
 
-        $sSqlTime = ($bIsTime) ? ',membershipDate = :dateTime ' : ' ';
+        $sSqlTime = $bIsTime ? ',membershipDate = :dateTime ' : ' ';
+
         $sSqlQuery = 'UPDATE' . Db::prefix('Members') . 'SET groupId = :groupId' .
             $sSqlTime . 'WHERE profileId = :profileId LIMIT 1';
 
