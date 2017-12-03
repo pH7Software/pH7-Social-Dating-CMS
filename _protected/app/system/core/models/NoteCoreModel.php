@@ -36,14 +36,14 @@ class NoteCoreModel extends Model
         if (!$aData = $this->cache->get()) {
             $iOffset = (int)$iOffset;
             $iLimit = (int)$iLimit;
-            $bIsApprived = isset($iApproved);
+            $bIsApproved = isset($iApproved);
 
-            $sSqlApproved = $bIsApprived ? ' WHERE approved = :approved' : '';
+            $sSqlApproved = $bIsApproved ? ' WHERE approved = :approved' : '';
             $sOrderBy = SearchCoreModel::order($sOrder, SearchCoreModel::DESC);
             $rStmt = Db::getInstance()->prepare('SELECT n.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Notes') . ' AS n INNER JOIN ' . Db::prefix('Members') . 'AS m ON n.profileId = m.profileId' . $sSqlApproved . $sOrderBy . 'LIMIT :offset, :limit');
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
-            if ($bIsApprived) {
+            if ($bIsApproved) {
                 $rStmt->bindParam(':approved', $iApproved, \PDO::PARAM_INT);
             }
             $rStmt->execute();
@@ -69,15 +69,15 @@ class NoteCoreModel extends Model
 
         if (!$iData = $this->cache->get()) {
             $iDay = (int)$iDay;
-            $bIsApprived = isset($iApproved);
+            $bIsApproved = isset($iApproved);
 
-            $sSqlWhere = $bIsApprived ? 'WHERE' : '';
-            $sSqlAnd = ($bIsApprived && $iDay > 0 ? ' AND' : ($iDay > 0 ? 'WHERE' : ''));
-            $sSqlApproved = $bIsApprived ? ' approved = :approved' : '';
+            $sSqlWhere = $bIsApproved ? 'WHERE' : '';
+            $sSqlAnd = ($bIsApproved && $iDay > 0 ? ' AND' : ($iDay > 0 ? 'WHERE' : ''));
+            $sSqlApproved = $bIsApproved ? ' approved = :approved' : '';
             $sSqlDay = ($iDay > 0) ? ' (createdDate + INTERVAL ' . $iDay . ' DAY) > NOW()' : '';
 
             $rStmt = Db::getInstance()->prepare('SELECT COUNT(postId) AS totalPosts FROM' . Db::prefix('Notes') . $sSqlWhere . $sSqlApproved . $sSqlAnd . $sSqlDay);
-            if ($bIsApprived) {
+            if ($bIsApproved) {
                 $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
             }
 
