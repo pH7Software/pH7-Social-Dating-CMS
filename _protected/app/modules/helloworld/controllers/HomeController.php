@@ -33,7 +33,7 @@ class HomeController extends Controller
         /* H TITLE html tag H1 to H4 */
         $this->view->h1_title = t('Example of a simple module that displays "Hello World"');
         $this->view->h3_title = t('H3 title example');
-        $this->view->desc = t('Hello world %0% %1%, how are you on %2%?', $this->str->upperFirst($sFirstName), $this->str->upperFirst($sLastName), $this->dateTime->get()->date('Y-m-d'));
+        $this->view->desc = t('Hello %0% %1% How are you on this %2%?', $this->str->upperFirst($sFirstName), $this->str->upperFirst($sLastName), $this->dateTime->get()->date('l'));
 
         // Display the page
         $this->output();
