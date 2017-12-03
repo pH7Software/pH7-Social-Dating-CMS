@@ -32,7 +32,12 @@ class User
     {
         foreach (static::getAtUsernames($sContents) as $sUsername) {
             $sUsernameLink = (new UserCore)->getProfileLink($sUsername);
-            $sContents = str_replace(static::AT . $sUsername, '<a href="' . $sUsernameLink . '">' . static::AT . $sUsername . '</a>', $sContents);
+
+            $sContents = str_replace(
+                static::AT . $sUsername,
+                '<a href="' . $sUsernameLink . '">' . static::AT . $sUsername . '</a>',
+                $sContents
+            );
         }
 
         return $sContents;
