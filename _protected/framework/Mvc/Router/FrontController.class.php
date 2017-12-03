@@ -286,7 +286,7 @@ final class FrontController
             $this->oRegistry->controller = ucfirst($this->oConfig->values['module']['default_controller']) . 'Controller';
         }
 
-        if ($this->oUri->fragment(3) && preg_match(self::REGEX_ACTION_REGEX, $this->oUri->fragment(3))) {
+        if ($this->oUri->fragment(3) && preg_match(self::REGEX_ACTION_FORMAT, $this->oUri->fragment(3))) {
             // Set the action
             $this->oRegistry->action = $this->oUri->fragment(3);
         } else {
