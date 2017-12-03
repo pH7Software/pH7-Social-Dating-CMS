@@ -52,7 +52,7 @@ class Ftp extends File
      * @param string $sHost
      * @param string $sUsername
      * @param string $sPassword
-     * @param string $sPath Default: '/'
+     * @param string $sPath
      *
      * @throws MissingExtensionException If FTP PHP extension is not installed.
      */
@@ -72,7 +72,7 @@ class Ftp extends File
     /**
      * Connect to FTP server.
      *
-     * @param bool $bSsl For a SSL-FTP connection. Default: FALSE
+     * @param bool $bSsl For a SSL-FTP connection.
      *
      * @return bool Returns TRUE on success or FALSE on failure.
      *
@@ -126,7 +126,7 @@ class Ftp extends File
      * allows the creation of nested directories specified in the pathname.
      *
      * @param string|array $mDir
-     * @param int (octal) $iMode Default: 0755
+     * @param int (octal) $iMode
      *
      * @return void
      *
@@ -173,7 +173,7 @@ class Ftp extends File
      *
      * @param string $sFrom Full path to the file on the computer.
      * @param string $sTo Full path where the file will be placed on the server.
-     * @param int (octal) $iMode Default: 0644
+     * @param int (octal) $iMode
      *
      * @return void
      *
