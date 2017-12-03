@@ -57,6 +57,8 @@ class SearchCoreModel
      */
     public static function order($sColumn, $iSort = self::ASC, $sAsTable = null)
     {
+        $iSort = (int)$iSort; // Make sure it's an integer and not a digit string!
+
         switch ($sColumn) {
             case static::NAME:
             case static::TITLE:
