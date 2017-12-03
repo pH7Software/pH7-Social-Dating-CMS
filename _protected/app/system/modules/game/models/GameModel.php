@@ -25,23 +25,25 @@ class GameModel extends GameCoreModel
         $this->cache->start(static::CACHE_GROUP, 'category' . $iCategoryId . $iOffset . $iLimit . $bCount, static::CACHE_TIME);
 
         if (!$mData = $this->cache->get()) {
+            $bIsCategoryId = $iCategoryId !== null;
+
             if ($bCount) {
                 $sSql = 'SELECT c.*, COUNT(g.gameId) AS totalCatGames FROM' . Db::prefix('GamesCategories') . 'AS c INNER JOIN' . Db::prefix('Games') . 'AS g
                 ON c.categoryId = g.categoryId GROUP BY c.name ASC LIMIT :offset, :limit';
             } else {
-                $sSqlCategoryId = (!empty($iCategoryId)) ? ' WHERE categoryId = :categoryId ' : ' ';
+                $sSqlCategoryId = $bIsCategoryId ? ' WHERE categoryId = :categoryId ' : ' ';
                 $sSql = 'SELECT * FROM' . Db::prefix('GamesCategories') . $sSqlCategoryId . 'ORDER BY name ASC LIMIT :offset, :limit';
             }
 
             $rStmt = Db::getInstance()->prepare($sSql);
 
-            if (!empty($iCategoryId)) {
+            if ($bIsCategoryId) {
                 $rStmt->bindValue(':categoryId', $iCategoryId, \PDO::PARAM_INT);
             }
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
             $rStmt->execute();
-            $mData = !empty($iCategoryId) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = $bIsCategoryId ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
 
             $this->cache->put($mData);

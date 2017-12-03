@@ -10,7 +10,6 @@ namespace PH7;
 
 defined('PH7') or die('Restricted access');
 
-
 use PH7\Framework\Image\Image;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Router\Uri;
@@ -61,7 +60,14 @@ class AdminFormProcess extends Form
 
             Game::clearCache();
 
-            Header::redirect(Uri::get('game', 'main', 'game', $aData['title'] . ',' . Db::getInstance()->lastInsertId()), t('The game has been successfully added!'));
+            Header::redirect(
+                Uri::get('game',
+                    'main',
+                    'game',
+                    $aData['title'] . ',' . Db::getInstance()->lastInsertId()
+                ),
+                t('The game has been successfully added!')
+            );
         }
     }
 }
