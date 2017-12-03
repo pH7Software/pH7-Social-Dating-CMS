@@ -56,8 +56,8 @@ class Year implements Measurable
         $iAge = date('Y', $this->iTimestamp) - $this->iYear;
 
         // Taken out a year if the birthday is not over yet
-        if ($this->iMonth > date('n', $this->iTimestamp) || ($this->iMonth == date('n', $this->iTimestamp)
-                && $this->iDay > date('j', $this->iTimestamp))
+        if ($this->iMonth > date('n', $this->iTimestamp) ||
+            ($this->iMonth === date('n', $this->iTimestamp) && $this->iDay > date('j', $this->iTimestamp))
         ) {
             $iAge--;
         }
