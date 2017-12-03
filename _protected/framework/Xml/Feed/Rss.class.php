@@ -40,7 +40,7 @@ class Rss extends DomDocument
         // Call the parent constructor (DomDocument)
         parent::__construct();
 
-        // Craete the root element
+        // Create the root element
         $oRoot = $this->appendChild($this->createElement('rss'));
 
         // Sets to RSS version 2
