@@ -42,7 +42,7 @@ class Year implements Measurable
         $this->iDay = $iBirthDay;
 
         // If you want to check the current date (default)
-        $this->iTimestamp = (!empty($iTimestamp)) ? $iTimestamp : time();
+        $this->iTimestamp = !empty($iTimestamp) ? $iTimestamp : time();
     }
 
     /**
