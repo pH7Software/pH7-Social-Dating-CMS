@@ -80,9 +80,9 @@ class Ftp extends File
      */
     public function connect($bSsl = false)
     {
-        $sConnFunc = $bSsl ? 'ftp_ssl_connect' : 'ftp_connect';
+        $sConnFuncName = $bSsl ? 'ftp_ssl_connect' : 'ftp_connect';
 
-        if (!$this->rStream = $sConnFunc($this->sHost)) {
+        if (!$this->rStream = $sConnFuncName($this->sHost)) {
             throw new RuntimeException('Couldn\'t connect to \'' . $this->sHost);
         }
 
