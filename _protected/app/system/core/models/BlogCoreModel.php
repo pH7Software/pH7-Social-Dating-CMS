@@ -23,14 +23,14 @@ class BlogCoreModel extends Model
      * @param integer $iLimit
      * @param string $sOrder A constant: SearchCoreModel::CREATED (default value) or SearchCoreModel::UPDATED
      *
-     * @return string
+     * @return array
      */
     public function getPosts($iOffset, $iLimit, $sOrder = SearchCoreModel::CREATED)
     {
         // We do not have a long duration of the cache for the changes of positions to be easily updated on the list of Blogs of the home page.
         $this->cache->start(self::CACHE_GROUP, 'posts' . $iOffset . $iLimit . $sOrder, 3600);
 
-        if (!$oData = $this->cache->get()) {
+        if (!$aData = $this->cache->get()) {
             $iOffset = (int)$iOffset;
             $iLimit = (int)$iLimit;
 
@@ -40,20 +40,20 @@ class BlogCoreModel extends Model
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
             $rStmt->execute();
-            $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $aData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $this->cache->put($oData);
+            $this->cache->put($aData);
         }
 
-        return $oData;
+        return $aData;
     }
 
     /**
      * Gets the total posts.
      *
-     * @param integer $iDay
+     * @param int $iDay
      *
-     * @return integer
+     * @return int
      */
     public function totalPosts($iDay = 0)
     {

@@ -13,17 +13,17 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 class NoteModel extends NoteCoreModel
 {
     /**
-     * @param integer|null $iNoteId
-     * @param integer $iOffset
-     * @param integer $iLimit
-     * @param boolean $bCount
+     * @param int|null $iNoteId
+     * @param int $iOffset
+     * @param int $iLimit
+     * @param bool $bCount
      *
-     * @return \stdClass
+     * @return array
      */
     public function getCategory($iNoteId = null, $iOffset, $iLimit, $bCount = false)
     {
         $this->cache->start(self::CACHE_GROUP, 'category' . $iNoteId . $iOffset . $iLimit . $bCount, static::CACHE_TIME);
-        if (!$oData = $this->cache->get()) {
+        if (!$aData = $this->cache->get()) {
             $iOffset = (int)$iOffset;
             $iLimit = (int)$iLimit;
 
@@ -43,48 +43,50 @@ class NoteModel extends NoteCoreModel
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
             $rStmt->execute();
-            $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $aData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $this->cache->put($oData);
+            $this->cache->put($aData);
         }
 
-        return $oData;
+        return $aData;
     }
 
     /**
-     * @param integer $iOffset
-     * @param integer $iLimit
-     * @param boolean $bCount
+     * @param int $iOffset
+     * @param int $iLimit
+     * @param bool $bCount
      *
-     * @return \stdClass
+     * @return array
      */
     public function getAuthor($iOffset, $iLimit, $bCount = false)
     {
         $this->cache->start(self::CACHE_GROUP, 'author' . $iOffset . $iLimit . $bCount, static::CACHE_TIME);
 
-        if (!$oData = $this->cache->get()) {
+        if (!$aData = $this->cache->get()) {
             $iOffset = (int)$iOffset;
             $iLimit = (int)$iLimit;
 
-            $sSelect = ($bCount) ? '*, COUNT(n.noteId) AS totalAuthors' : '*';
+            $sSelect = $bCount ? '*, COUNT(n.noteId) AS totalAuthors' : '*';
 
             $rStmt = Db::getInstance()->prepare('SELECT ' . $sSelect . ' FROM' . Db::prefix('Notes') . 'AS n INNER JOIN' . Db::prefix('Members') . 'AS m ON n.profileId = m.profileId GROUP BY m.username ASC LIMIT :offset, :limit');
 
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
             $rStmt->execute();
-            $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $aData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $this->cache->put($oData);
+            $this->cache->put($aData);
         }
 
-        return $oData;
+        return $aData;
     }
 
     /**
-     * @param integer $iCategoryId
-     * @param integer $iNoteId
-     * @param integer $iProfileId
+     * @param int $iCategoryId
+     * @param int $iNoteId
+     * @param int $iProfileId
+     *
+     * @return void
      */
     public function addCategory($iCategoryId, $iNoteId, $iProfileId)
     {
@@ -98,8 +100,8 @@ class NoteModel extends NoteCoreModel
 
     /**
      * @param string $sPostId
-     * @param integer $iProfileId
-     * @param integer $iApproved
+     * @param int $iProfileId
+     * @param int $iApproved
      *
      * @return \stdClass
      */
@@ -128,7 +130,7 @@ class NoteModel extends NoteCoreModel
     /**
      * @param array $aData
      *
-     * @return boolean
+     * @return bool
      */
     public function addPost(array $aData)
     {
@@ -158,13 +160,13 @@ class NoteModel extends NoteCoreModel
 
     /**
      * @param string $sCategoryName
-     * @param boolean $bCount
+     * @param bool $bCount
      * @param string $sOrderBy
-     * @param integer $iSort
-     * @param integer $iOffset
-     * @param integer $iLimit
+     * @param int $iSort
+     * @param int $iOffset
+     * @param int $iLimit
      *
-     * @return integer|\stdClass
+     * @return int|array|\stdClass
      */
     public function category($sCategoryName, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
@@ -205,13 +207,13 @@ class NoteModel extends NoteCoreModel
 
     /**
      * @param string $sAuthor
-     * @param boolean $bCount
+     * @param bool $bCount
      * @param string $sOrderBy
-     * @param integer $iSort
-     * @param integer $iOffset
-     * @param integer $iLimit
+     * @param int $iSort
+     * @param int $iOffset
+     * @param int $iLimit
      *
-     * @return integer|\stdClass
+     * @return int|array|\stdClass
      */
     public function author($sAuthor, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
@@ -251,15 +253,15 @@ class NoteModel extends NoteCoreModel
     }
 
     /**
-     * @param integer|string $mLooking Integer for post ID or string for a keyword
-     * @param boolean $bCount Put 'true' for count the notes or 'false' for the result of notes.
+     * @param int|string $mLooking Integer for post ID or string for a keyword
+     * @param bool $bCount Put 'true' for count the notes or 'false' for the result of notes.
      * @param string $sOrderBy
-     * @param integer $iSort
-     * @param integer $iOffset
-     * @param integer $iLimit
-     * @param integer $iApproved (0 = Unmoderated | 1 = Approved | NULL = unmoderated and approved) Default 1
+     * @param int $iSort
+     * @param int $iOffset
+     * @param int $iLimit
+     * @param int $iApproved (0 = Unmoderated | 1 = Approved | NULL = unmoderated and approved) Default 1
      *
-     * @return integer|\stdClass (integer for the number notes returned or an object containing the notes list)
+     * @return int|array|\stdClass (integer for the number notes returned or an object containing the notes list)
      */
     public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $iApproved = 1)
     {
@@ -310,7 +312,7 @@ class NoteModel extends NoteCoreModel
     }
 
     /**
-     * @param integer $iNoteId
+     * @param int $iNoteId
      *
      * @return string
      */
@@ -333,10 +335,10 @@ class NoteModel extends NoteCoreModel
     }
 
     /**
-     * @param integer $sPostId
-     * @param integer $iProfileId
+     * @param int $sPostId
+     * @param int $iProfileId
      *
-     * @return boolean
+     * @return bool
      */
     public function postIdExists($sPostId, $iProfileId)
     {
@@ -356,10 +358,10 @@ class NoteModel extends NoteCoreModel
     }
 
     /**
-     * @param integer $iNoteId
-     * @param integer $iProfileId
+     * @param int $iNoteId
+     * @param int $iProfileId
      *
-     * @return boolean
+     * @return bool
      */
     public function deletePost($iNoteId, $iProfileId)
     {
@@ -374,7 +376,9 @@ class NoteModel extends NoteCoreModel
     }
 
     /**
-     * @param integer $iNoteId
+     * @param int $iNoteId
+     *
+     * @return void
      */
     public function deleteCategory($iNoteId)
     {
@@ -386,8 +390,10 @@ class NoteModel extends NoteCoreModel
     }
 
     /**
-     * @param integer $iNoteId
-     * @param integer $iProfileId
+     * @param int $iNoteId
+     * @param int $iProfileId
+     *
+     * @return void
      */
     public function deleteThumb($iNoteId, $iProfileId)
     {
@@ -400,10 +406,10 @@ class NoteModel extends NoteCoreModel
     /**
      * @param string $sSection
      * @param string $sValue
-     * @param integer $iNoteId
-     * @param integer $iProfileId
+     * @param int $iNoteId
+     * @param int $iProfileId
      *
-     * @return boolean
+     * @return bool
      */
     public function updatePost($sSection, $sValue, $iNoteId, $iProfileId)
     {
@@ -416,27 +422,28 @@ class NoteModel extends NoteCoreModel
     }
 
     /**
-     * @param integer $iNoteId
-     * @param integer $iStatus
+     * @param int $iNoteId
+     * @param int $iStatus
      *
-     * @return boolean
+     * @return bool
      */
     public function approved($iNoteId, $iStatus = 1)
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Notes') . 'SET approved = :status WHERE noteId = :noteId');
         $rStmt->bindParam(':noteId', $iNoteId, \PDO::PARAM_INT);
         $rStmt->bindParam(':status', $iStatus, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
     /**
      * To prevent spam!
      *
-     * @param integer $iProfileId
-     * @param integer $iWaitTime In minutes
+     * @param int $iProfileId
+     * @param int $iWaitTime In minutes
      * @param string $sCurrentTime In date format: 0000-00-00 00:00:00
      *
-     * @return boolean Return TRUE if the weather was fine, otherwise FALSE
+     * @return bool Return TRUE if the weather was fine, otherwise FALSE
      */
     public function checkWaitSend($iProfileId, $iWaitTime, $sCurrentTime)
     {
@@ -446,6 +453,7 @@ class NoteModel extends NoteCoreModel
         $rStmt->bindValue(':waitTime', $iWaitTime, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_STR);
         $rStmt->execute();
+
         return ($rStmt->rowCount() === 0);
     }
 }
