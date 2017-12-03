@@ -115,6 +115,7 @@ class Ftp extends File
         if ($this->changeDir($sCurrentDir)) {
             $this->changeDir($sDir);
             $sNewDir = $this->getCurrentDir();
+
             return empty($sNewDir);
         }
 
@@ -218,12 +219,16 @@ class Ftp extends File
     public function deleteFile($mFile)
     {
         if (is_array($mFile)) {
+            $bRet = false;
             foreach ($mFile as $sFile) {
-                $this->deleteFile($sFile);
+                if (!$bRet = $this->deleteFile($sFile)) {
+                    return false;
+                }
             }
+            return $bRet;
         } else {
             if ($this->existFile($mFile)) {
-                ftp_delete($this->rStream, $mFile);
+                return ftp_delete($this->rStream, $mFile);
             }
         }
     }
