@@ -62,7 +62,7 @@ class Vimeo extends Api implements IApi
             // Then retrieve the thumbnail.
             return $this->oData->thumbnail_medium;
         } else {
-            $sParam = ($this->bAutoplay) ? '?autoplay=1&amp;' : '?';
+            $sParam = $this->bAutoplay ? '?autoplay=1&amp;' : '?';
             return '<iframe src="' . $this->getEmbedUrl($sUrl) . $sParam . 'title=0&amp;byline=0&amp;portrait=0" width="' . $iWidth . '" height="' . $iHeight . '" frameborder="0"></iframe>';
         }
     }
