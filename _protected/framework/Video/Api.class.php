@@ -19,7 +19,7 @@ use PH7\Framework\Http\Http;
 
 class Api
 {
-    const URL_PATTERN = '(^https?://|www\.|\.[a-z]{2,4}/?(.+)?$)';
+    const REGEX_URL_PATTERN = '#(^https?://|www\.|\.[a-z]{2,4}/?(.+)?$)#i';
 
     const DEF_VIDEO_WIDTH = 480;
     const DEF_VIDEO_HEIGHT = 295;
@@ -163,6 +163,6 @@ class Api
         }
         unset($oHttp);
 
-        return preg_replace('#' . static::URL_PATTERN . '#i', '', $sUrl);
+        return preg_replace(static::REGEX_URL_PATTERN, '', $sUrl);
     }
 }
