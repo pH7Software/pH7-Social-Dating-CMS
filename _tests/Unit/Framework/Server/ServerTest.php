@@ -15,14 +15,14 @@ class ServerTest extends PHPUnit_Framework_TestCase
 {
     public function testGetServerName()
     {
-        $_SERVER['SERVER_NAME'] = 'Apache';
+        $_SERVER['SERVER_NAME'] = 'ph7cms.com';
 
-        $this->assertSame('Apache', Server::getName());
+        $this->assertSame('ph7cms.com', Server::getName());
     }
 
     public function testItIsLocalHost()
     {
-        $_SERVER['HTTP_HOST'] = '127.0.0.1';
+        $_SERVER['SERVER_NAME'] = '127.0.0.1';
 
         $this->assertTrue(Server::isLocalHost());
     }
