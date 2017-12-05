@@ -84,7 +84,8 @@ class Blog extends WriteCore
      */
     public function checkPostId($sPostId, BlogModel $oBlogModel)
     {
-        return (preg_match('#^' . Config::getInstance()->values['module.setting']['post_id.pattern'] . '$#', $sPostId) && !$oBlogModel->postIdExists($sPostId));
+        return preg_match('#^' . Config::getInstance()->values['module.setting']['post_id.pattern'] . '$#', $sPostId) &&
+            !$oBlogModel->postIdExists($sPostId);
     }
 
     public static function clearCache()
