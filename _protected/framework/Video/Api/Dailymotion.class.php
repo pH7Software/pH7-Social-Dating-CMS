@@ -17,7 +17,7 @@ class Dailymotion extends Api implements IApi
 {
     const API_URL = 'https://api.dailymotion.com/video/';
     const PLAYER_URL = 'https://www.dailymotion.com/embed/video/';
-    const REGEX_EMBED_FORMAT1 = '#/video/(\w+)_#i';
+    const REGEX_EMBED_FORMAT1 = '#/video/(\w+)#i';
     const REGEX_EMBED_FORMAT2 = '#/embed/video/(\w+)#i';
     const REGEX_SHARING_FORMAT = '#//dai\.ly/(\w+)#i'; // short sharing URL version
 
