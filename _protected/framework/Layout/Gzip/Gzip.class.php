@@ -32,6 +32,18 @@ class Gzip
     const MAX_IMG_SIZE_BASE64_CONVERTOR = 24000; // 24KB
     const GZIP_COMPRESS_LEVEL = 9;
 
+    const HTML_NAME = 'html';
+    const CSS_NAME = 'css';
+    const JS_ABBR_NAME = 'js';
+    const JS_NAME = 'javascript';
+
+    const ASSET_FILES_ACCEPTED = [
+        self::HTML_NAME,
+        self::CSS_NAME,
+        self::JS_ABBR_NAME
+    ];
+
+
     /** @var File */
     private $oFile;
 
@@ -128,14 +140,13 @@ class Gzip
         // Determine the directory and type we should use
         if (
             !$this->oHttpRequest->getExists('t') ||
-            ($this->oHttpRequest->get('t') !== 'html' && $this->oHttpRequest->get('t') !== 'css' &&
-                $this->oHttpRequest->get('t') !== 'js')
+            !in_array($this->oHttpRequest->get('t'), self::ASSET_FILES_ACCEPTED, true)
         ) {
             Http::setHeadersByCode(503);
             exit('Invalid type file!');
         }
 
-        $this->sType = ($this->oHttpRequest->get('t') === 'js') ? 'javascript' : $this->oHttpRequest->get('t');
+        $this->sType = ($this->oHttpRequest->get('t') === self::JS_ABBR_NAME) ? self::JS_NAME : $this->oHttpRequest->get('t');
 
         // Directory
         if (!$this->oHttpRequest->getExists('d')) {
@@ -160,15 +171,15 @@ class Gzip
             $sPath = realpath($this->sBase . $sElement);
 
             if (
-                ($this->sType == 'html' && substr($sPath, -5) != '.html') ||
-                ($this->sType == 'javascript' && substr($sPath, -3) != '.js') ||
-                ($this->sType == 'css' && substr($sPath, -4) != '.css')
+                ($this->sType === self::HTML_NAME && substr($sPath, -5) !== '.html') ||
+                ($this->sType === self::JS_NAME && substr($sPath, -3) !== '.js') ||
+                ($this->sType === self::CSS_NAME && substr($sPath, -4) !== '.css')
             ) {
                 Http::setHeadersByCode(403);
                 exit('Error file extension.');
             }
 
-            if (substr($sPath, 0, strlen($this->sBase)) != $this->sBase || !is_file($sPath)) {
+            if (substr($sPath, 0, strlen($this->sBase)) !== $this->sBase || !is_file($sPath)) {
                 Http::setHeadersByCode(404);
                 exit('The file not found!');
             }
@@ -245,15 +256,15 @@ class Gzip
         $oCompress = new Compress;
 
         switch ($this->sType) {
-            case 'html':
+            case self::HTML_NAME:
                 $this->sContents = $oCompress->parseHtml($this->sContents);
                 break;
 
-            case 'css':
+            case self::CSS_NAME:
                 $this->sContents = $oCompress->parseCss($this->sContents);
                 break;
 
-            case 'javascript':
+            case self::JS_NAME:
                 $this->sContents = $oCompress->parseJs($this->sContents);
                 break;
 
@@ -291,13 +302,13 @@ class Gzip
             $this->sContents .= File::EOL . $this->oFile->getUrlContents(PH7_URL_ROOT . $this->sBaseUrl . $sElement);
         }
 
-        if ($this->sType == 'css') {
+        if ($this->sType === self::CSS_NAME) {
             $this->parseVariable();
             $this->getSubCssFile();
             $this->getImageIntoCss();
         }
 
-        if ($this->sType == 'javascript') {
+        if ($this->sType === self::JS_NAME) {
             $this->parseVariable();
             $this->getSubJsFile();
         }
