@@ -24,6 +24,17 @@ class Api
     const DEF_VIDEO_WIDTH = 480;
     const DEF_VIDEO_HEIGHT = 295;
 
+    const YOUTUBE_NAMES = [
+        'youtube',
+        'youtu'
+    ];
+    const DAILYMOTION_NAMES = [
+        'dailymotion',
+        'dai'
+    ];
+    const VIMEO_NAME = 'vimeo';
+    const METACAFE_NAME = 'metacafe';
+
     /**
      * @param string $sUrl
      *
@@ -34,21 +45,19 @@ class Api
         $sClass = $this->clear($sUrl);
 
         switch ($sClass) {
-            case 'youtube':
-            case 'youtu':
+            case in_array($sClass, self::YOUTUBE_NAMES, true):
                 $sClass = (new Api\Youtube)->getVideo($sUrl);
                 break;
 
-            case 'vimeo':
+            case self::VIMEO_NAME:
                 $sClass = (new Api\Vimeo)->getVideo($sUrl);
                 break;
 
-            case 'dailymotion':
-            case 'dai':
+            case in_array($sClass, self::DAILYMOTION_NAMES, true):
                 $sClass = (new Api\Dailymotion)->getVideo($sUrl);
                 break;
 
-            case 'metacafe':
+            case self::METACAFE_NAME:
                 $sClass = (new Api\Metacafe)->getVideo($sUrl);
                 break;
 
@@ -71,8 +80,7 @@ class Api
         $sClass = $this->clear($sUrl);
 
         switch ($sClass) {
-            case 'youtube':
-            case 'youtu':
+            case in_array($sClass, self::YOUTUBE_NAMES, true):
                 $sKey = Config::getInstance()->values['module.api']['youtube.key'];
                 $oYoutube = new Api\Youtube;
                 $oYoutube->setKey($sKey); // Youtube's API v3+ requires an API key
@@ -80,16 +88,15 @@ class Api
                 unset($oYoutube);
                 break;
 
-            case 'vimeo':
+            case self::VIMEO_NAME:
                 $oClass = (new Api\Vimeo)->getInfo($sUrl);
                 break;
 
-            case 'dailymotion':
-            case 'dai':
+            case in_array($sClass, self::DAILYMOTION_NAMES, true):
                 $oClass = (new Api\Dailymotion)->getInfo($sUrl);
                 break;
 
-            case 'metacafe':
+            case self::METACAFE_NAME:
                 $oClass = (new Api\Metacafe)->getInfo($sUrl);
                 break;
 
@@ -119,21 +126,19 @@ class Api
         $iHeight = isset($iHeight) ? $iHeight : self::DEF_VIDEO_HEIGHT;
 
         switch ($sClass) {
-            case 'youtube':
-            case 'youtu':
+            case in_array($sClass, self::YOUTUBE_NAMES, true):
                 $sClass = (new Api\Youtube)->getMeta($sUrl, $sMedia, $iWidth, $iHeight);
                 break;
 
-            case 'vimeo':
+            case self::VIMEO_NAME:
                 $sClass = (new Api\Vimeo)->getMeta($sUrl, $sMedia, $iWidth, $iHeight);
                 break;
 
-            case 'dailymotion':
-            case 'dai':
+            case in_array($sClass, self::DAILYMOTION_NAMES, true):
                 $sClass = (new Api\Dailymotion)->getMeta($sUrl, $sMedia, $iWidth, $iHeight);
                 break;
 
-            case 'metacafe':
+            case self::METACAFE_NAME:
                 $sClass = (new Api\Metacafe)->getMeta($sUrl, $sMedia, $iWidth, $iHeight);
                 break;
 
