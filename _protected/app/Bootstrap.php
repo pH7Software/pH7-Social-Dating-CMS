@@ -144,7 +144,7 @@ class Bootstrap
         // For All environment
         Import::file(PH7_PATH_APP . 'configs/environment/all.env');
         // Specific to the current environment
-        Import::file(PH7_PATH_APP . 'configs/environment/' . Config::getInstance()->values['mode']['environment'] . '.env');
+        Import::file(PH7_PATH_APP . 'configs/environment/' . $this->getEnvFileName());
 
         // Loading Class ~/protected/app/includes/classes/*
         Import::pH7App('includes.classes.Loader.Autoloader');
@@ -180,6 +180,18 @@ class Bootstrap
         if (session_status() === PHP_SESSION_ACTIVE) {
             session_write_close();
         }
+    }
+
+    /**
+     * @return string The correct config environment filename (without .php ext).
+     */
+    private function getEnvFileName()
+    {
+        $aEnvNames = ['production', 'development'];
+        $sEnvironment = Config::getInstance()->values['mode']['environment'];
+        $sFileName = in_array($sEnvironment, $aEnvNames, true) ? $sEnvironment : $aEnvNames[0];
+
+        return $sFileName . '.env';
     }
 
     /**
