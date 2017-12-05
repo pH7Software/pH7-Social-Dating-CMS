@@ -63,7 +63,7 @@ abstract class RegistrationCore
         $this->oView->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $aInfo['email']) . '<br />' .
             t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
-        $sTplName = (defined('PH7_TPL_MAIL_NAME')) ? PH7_TPL_MAIL_NAME : PH7_DEFAULT_THEME;
+        $sTplName = defined('PH7_TPL_MAIL_NAME') ? PH7_TPL_MAIL_NAME : PH7_DEFAULT_THEME;
         $sMsgHtml = $this->oView->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . $sTplName . '/tpl/mail/sys/mod/user/account_registration.tpl', $aInfo['email']);
 
         $aMailInfo = [
