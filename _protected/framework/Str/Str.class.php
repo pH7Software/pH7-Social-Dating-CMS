@@ -99,11 +99,10 @@ namespace PH7\Framework\Str {
          * @param string $sFlag Optionally, a flag
          *
          * @return string
-         *
          */
         public function sanitize($sText, $sFilter = null, $sFlag = null)
         {
-            $sFlag = (!empty($sFlag)) ? (string)$sFlag : '';
+            $sFlag = !empty($sFlag) ? (string)$sFlag : '';
 
             if (!empty($sFilter)) {
                 $aFilters = explode(',', $sFilter);
@@ -245,7 +244,7 @@ namespace PH7\Framework\Str {
          */
         public function get($sText)
         {
-            return (!empty($sText)) ? $sText : '';
+            return !empty($sText) ? $sText : '';
         }
 
         /**
@@ -306,7 +305,7 @@ namespace PH7\Framework\Str {
         protected function arrayEscape(array $aData, $bStrip)
         {
             foreach ($aData as $sKey => $mValue) {
-                $aData[$sKey] = (is_array($mValue)) ? $this->arrayEscape($mValue, $bStrip) : $this->cEscape($mValue, $bStrip);
+                $aData[$sKey] = is_array($mValue) ? $this->arrayEscape($mValue, $bStrip) : $this->cEscape($mValue, $bStrip);
             }
 
             return $aData;
