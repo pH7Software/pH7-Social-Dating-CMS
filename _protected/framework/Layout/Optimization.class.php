@@ -47,7 +47,7 @@ class Optimization
      */
     public static function cssDataUriCleanup($sFile, $sDir)
     {
-        // Scan for any left file-references and adjust their path
+        // Scan any left file references & adjust their paths
         $sRegexUrl = '/(url\([\'"]??)([^\'"\)]+?\.[^\'"\)]+?)([\'"]??\))/msi';
 
         preg_match_all($sRegexUrl, $sFile, $aHit, PREG_PATTERN_ORDER);
@@ -56,15 +56,15 @@ class Optimization
             $sSearch = $aHit[1][$i] . $aHit[2][$i] . $aHit[3][$i];
 
             $sReplace = $sDir . $aHit[1][$i];
-            $sReplace .= $aHit[2][$i] . $aRreffer[3][$i];
+            $sReplace .= $aHit[2][$i] . $aHit[3][$i];
 
             if (
-                substr(str_replace(array('"', "'"), '', $aHit[2][$i]), 0, 5) !== 'http:' &&
-                substr(str_replace(array('"', "'"), '', $aHit[2][$i]), 0, 6) !== 'https:' &&
-                substr(str_replace(array('"', "'"), '', $aHit[2][$i]), 0, 5) !== 'data:' &&
-                substr(str_replace(array('"', "'"), '', $aHit[2][$i]), 0, 6) !== 'mhtml:' &&
-                substr(str_replace(array('"', "'"), '', $aHit[2][$i]), 0, 1) !== '/' &&
-                substr(str_replace(array('"', "'"), '', $aHit[2][$i]), strlen(str_replace(array('"', "'"), '', $aHit[2][$i])) - 4, 4) != '.htc'
+                substr(str_replace(['"', "'"], '', $aHit[2][$i]), 0, 5) !== 'http:' &&
+                substr(str_replace(['"', "'"], '', $aHit[2][$i]), 0, 6) !== 'https:' &&
+                substr(str_replace(['"', "'"], '', $aHit[2][$i]), 0, 5) !== 'data:' &&
+                substr(str_replace(['"', "'"], '', $aHit[2][$i]), 0, 6) !== 'mhtml:' &&
+                substr(str_replace(['"', "'"], '', $aHit[2][$i]), 0, 1) !== '/' &&
+                substr(str_replace(['"', "'"], '', $aHit[2][$i]), strlen(str_replace(['"', "'"], '', $aHit[2][$i])) - 4, 4) !== '.htc'
             ) {
                 $sFile = str_replace($sSearch, $sReplace, $sFile);
             }
