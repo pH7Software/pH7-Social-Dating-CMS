@@ -15,6 +15,7 @@ namespace PH7\Framework\Compress;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Config\Config;
+use PH7\Framework\Url\Url;
 
 class Compress
 {
@@ -159,7 +160,7 @@ class Compress
             // Google Closure has a max limit of 200KB POST size, and will break JS with eval-command
 
             // URL-encoded file contents
-            $sContentEncoded = \PH7\Framework\Url\Url::encode($sContent);
+            $sContentEncoded = Url::encode($sContent);
             // Closure Host
             $sHost = 'closure-compiler.appspot.com';
 
