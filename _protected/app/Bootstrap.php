@@ -24,6 +24,7 @@ use PH7\Framework\Loader\Autoloader as FrameworkLoader;
 use PH7\Framework\Mvc\Router\FrontController;
 use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Registry\Registry;
+use PH7\Framework\Server\Environment as Env;
 use PH7\Framework\Server\Server;
 
 /*** Begin Loading Files ***/
@@ -144,7 +145,7 @@ class Bootstrap
         // For All environment
         Import::file(PH7_PATH_APP . 'configs/environment/all.env');
         // Specific to the current environment
-        Import::file(PH7_PATH_APP . 'configs/environment/' . $this->getEnvFileName());
+        Import::file(PH7_PATH_APP . 'configs/environment/' . Env::getEnvFileName(Config::getInstance()->values['mode']['environment']));
 
         // Loading Class ~/protected/app/includes/classes/*
         Import::pH7App('includes.classes.Loader.Autoloader');
@@ -180,18 +181,6 @@ class Bootstrap
         if (session_status() === PHP_SESSION_ACTIVE) {
             session_write_close();
         }
-    }
-
-    /**
-     * @return string The correct config environment filename (without .php ext).
-     */
-    private function getEnvFileName()
-    {
-        $aEnvNames = ['production', 'development'];
-        $sEnvironment = Config::getInstance()->values['mode']['environment'];
-        $sFileName = in_array($sEnvironment, $aEnvNames, true) ? $sEnvironment : $aEnvNames[0];
-
-        return $sFileName . '.env';
     }
 
     /**
