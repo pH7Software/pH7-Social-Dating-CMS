@@ -9,8 +9,9 @@
 namespace PH7\Test\Unit\Framework\Server;
 
 use PH7\Framework\Server\Environment;
+use PHPUnit_Framework_TestCase;
 
-class EnvironmentTest extends \PHPUnit_Framework_TestCase
+class EnvironmentTest extends PHPUnit_Framework_TestCase
 {
     public function testWrongEnvFile()
     {
