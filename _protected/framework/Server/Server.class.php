@@ -61,7 +61,6 @@ final class Server
      */
     public static function isWindows()
     {
-
         return 0 === stripos(PHP_OS, 'WIN');
     }
 
