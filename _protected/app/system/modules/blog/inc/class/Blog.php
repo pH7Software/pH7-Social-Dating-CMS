@@ -11,6 +11,7 @@ namespace PH7;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Config\Config;
 use PH7\Framework\File\File;
+use PH7\Framework\Image\Image;
 use PH7\Framework\Navigation\Browser;
 use stdClass;
 
@@ -33,7 +34,7 @@ class Blog extends WriteCore
     public function setThumb(stdClass $oPost, File $oFile)
     {
         if (!empty($_FILES['thumb']['tmp_name'])) {
-            $oImage = new Framework\Image\Image($_FILES['thumb']['tmp_name']);
+            $oImage = new Image($_FILES['thumb']['tmp_name']);
             if (!$oImage->validate()) {
                 \PFBC\Form::setError('form_blog', Form::wrongImgFileTypeMsg());
             } else {
