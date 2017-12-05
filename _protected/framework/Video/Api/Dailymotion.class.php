@@ -39,7 +39,7 @@ class Dailymotion extends Api implements IApi
     public function getInfo($sUrl)
     {
         $sDataUrl = static::API_URL . $this->getVideoId($sUrl) . '?fields=title,duration';
-        return $this->oData = $this->getData($sDataUrl) ? $this : false;
+        return ($this->oData = $this->getData($sDataUrl)) ? $this : false;
     }
 
     /**
