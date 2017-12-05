@@ -54,7 +54,7 @@ abstract class RegistrationCore
 
         $this->oView->content = t('Welcome to %site_name%, %0%!', $aInfo['first_name']) . '<br />' .
             t('Hi %0%! We are proud to welcome you as a member of %site_name%!', $aInfo['first_name']) . '<br />' .
-            $this->getEmailMsg() . '<br />' .
+            $this->getEmailMsg($aInfo) . '<br />' .
             '<br /><span style="text-decoration:underline">' . t('Please save the following information for future refenrence:') . '</span><br /><em>' .
             t('Email: %0%.', $aInfo['email']) . '<br />' .
             t('Username: %0%.', $aInfo['username']) . '<br />' .
@@ -106,9 +106,11 @@ abstract class RegistrationCore
     /**
      * The the email message to send.
      *
+     * @param array $aData
+     *
      * @return string
      */
-    private function getEmailMsg()
+    private function getEmailMsg(array $aData)
     {
         switch ($this->iActiveType) {
             case 1:
@@ -117,7 +119,7 @@ abstract class RegistrationCore
 
             case 2:
                 /** We place the text outside of Uri::get() otherwise special characters will be deleted and the parameters passed in the url will be unusable thereafter. **/
-                $sActivateLink = Uri::get('user', 'account', 'activate') . PH7_SH . $aInfo['email'] . PH7_SH . $aInfo['hash_validation'];
+                $sActivateLink = Uri::get('user', 'account', 'activate') . PH7_SH . $aData['email'] . PH7_SH . $aData['hash_validation'];
                 $sEmailMsg = t('Activation link: %0%.', '<a href="' . $sActivateLink . '">' . $sActivateLink . '</a>');
                 break;
 

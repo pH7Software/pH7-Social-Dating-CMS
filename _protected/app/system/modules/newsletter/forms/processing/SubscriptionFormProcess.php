@@ -74,7 +74,7 @@ class SubscriptionFormProcess extends Form
      *
      * @param array $aData The data details.
      *
-     * @return integer Number of recipients who were accepted for delivery.
+     * @return int Number of recipients who were accepted for delivery.
      */
     protected function sendMail(array $aData)
     {
