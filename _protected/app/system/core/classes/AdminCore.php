@@ -43,7 +43,7 @@ class AdminCore extends UserCore
      */
     public static function isRootProfileId($iProfileId)
     {
-        return $iProfileId == static::ROOT_PROILE_ID;
+        return $iProfileId === static::ROOT_PROILE_ID;
     }
 
     /**
