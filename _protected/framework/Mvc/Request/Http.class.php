@@ -341,10 +341,8 @@ class Http extends \PH7\Framework\Http\Http
      */
     protected function validate(&$aType, $sKey, $sParam)
     {
-        if (!empty($sParam)) {
-            if (!Secty\Validate\Validate::type($aType[$sKey], $sParam)) {
-                return false;
-            }
+        if (!empty($sParam) && !Secty\Validate\Validate::type($aType[$sKey], $sParam)) {
+            return false;
         }
 
         return true;
