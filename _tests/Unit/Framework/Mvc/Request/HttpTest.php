@@ -18,18 +18,32 @@ class HttpTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        parent::setUp();
-
         $this->oHttpRequest = new HttpRequest;
     }
 
-    public function testGetMethodRequestWithIntCasting()
+    public function testGetRequestWithIntCast()
     {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
         $_GET['string_id'] = '123';
 
         $sActual = $this->oHttpRequest->get('string_id', 'int');
 
         $this->assertSame(123, $sActual);
+    }
+
+    public function testPostRequestWithIntCast()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_POST['string_id'] = '123';
+
+        $sActual = $this->oHttpRequest->post('string_id', 'int');
+
+        $this->assertSame(123, $sActual);
+    }
+
+    protected function tearDown()
+    {
+        unset($_GET, $_POST, $_SERVER);
     }
 }
 
