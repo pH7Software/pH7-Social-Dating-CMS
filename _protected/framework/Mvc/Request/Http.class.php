@@ -381,6 +381,11 @@ class Http extends \PH7\Framework\Http\Http
             return (new Secty\Validate\Filter)->xssClean($aType[$sKey]);
         }
 
+        // Avoid to use escape() func that converts integer/float to string type
+        if ($this->isUnescapableType($aType[$sKey])) {
+            return $aType[$sKey];
+        }
+
         return escape($aType[$sKey], $this->bStrip);
     }
 
@@ -396,6 +401,16 @@ class Http extends \PH7\Framework\Http\Http
     private function setRequestVar(&$aType, $sKey, $sValue)
     {
         $aType[$sKey] = $sValue;
+    }
+
+    /**
+     * @param mixed $mValue
+     *
+     * @return bool
+     */
+    private function isUnescapableType($mValue)
+    {
+        return is_int($mValue) || is_float($mValue);
     }
 
     /**
