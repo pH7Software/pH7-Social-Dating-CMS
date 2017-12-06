@@ -401,7 +401,7 @@ class Http extends \PH7\Framework\Http\Http
      */
     private function setRequestVar(&$aType, $sKey, $sValue)
     {
-        $aType[$sKey] = $sValue;
+        $aType[$sKey] &= $sValue;
     }
 
     /**
