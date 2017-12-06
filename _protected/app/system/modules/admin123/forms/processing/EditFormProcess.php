@@ -25,9 +25,7 @@ class EditFormProcess extends Form
         $oValidate = new Validate;
         $oAdminModel = new AdminModel;
 
-        // Prohibit other admins to edit the Root Administrator (ID 1)
-        $iProfileId = ($this->httpRequest->getExists('profile_id') && !AdminCore::isRootProfileId($this->httpRequest->get('profile_id', 'int'))) ? $this->httpRequest->get('profile_id', 'int') : $this->session->get('admin_id');
-
+        $iProfileId = $this->getProfileId();
         $oAdmin = $oAdminModel->readProfile($iProfileId, 'Admins');
 
         if (!$this->str->equals($this->httpRequest->post('username'), $oAdmin->username)) {
@@ -85,5 +83,18 @@ class EditFormProcess extends Form
         if (!$this->bIsErr) {
             \PFBC\Form::setSuccess('form_admin_edit_account', t('Profile successfully updated!'));
         }
+    }
+
+    /**
+     * @return string
+     */
+    private function getProfileId()
+    {
+        // Prohibit other admins to edit the Root Administrator (ID 1)
+        if ($this->httpRequest->getExists('profile_id') && !AdminCore::isRootProfileId($this->httpRequest->get('profile_id', 'int'))) {
+            return $this->httpRequest->get('profile_id', 'int');
+        }
+
+        return $this->session->get('admin_id');
     }
 }
