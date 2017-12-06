@@ -61,12 +61,6 @@ class Http extends \PH7\Framework\Http\Http
         '%A9'
     ];
 
-    /** @var string */
-    private $sRequestUri;
-
-    /** @var null|string */
-    private $sMethod;
-
     /** @var array */
     private $aRequest;
 
@@ -81,22 +75,29 @@ class Http extends \PH7\Framework\Http\Http
 
     public function __construct()
     {
-        $this->sMethod = $this->getRequestMethod();
-        $this->sRequestUri = $this->getRequestUri();
-
         $this->aRequest = &$_REQUEST;
         $this->aGet = &$_GET;
         $this->aPost = &$_POST;
     }
 
     /**
-     * Get method.
+     * Get method (alias of Http::getRequestMethod() ).
      *
      * @return string 'GET', 'POST', 'HEAD', 'PUT'
      */
     public function getMethod()
     {
-        return $this->sMethod;
+        return $this->getRequestMethod();
+    }
+
+    /**
+     * Get Request URI (alias of Http::getRequestUri() ).
+     *
+     * @return string
+     */
+    public function getUri()
+    {
+        return $this->getRequestUri();
     }
 
     /**
@@ -227,7 +228,7 @@ class Http extends \PH7\Framework\Http\Http
      */
     public function get($sKey, $sParam = null, $bStrip = false)
     {
-        //if ($this->sMethod !== self::METHOD_GET) throw new Exception('GET');
+        //if ($this->getMethod() !== self::METHOD_GET) throw new Exception('GET');
 
         if (!isset($this->aGet[$sKey])) {
             return '';
@@ -262,7 +263,7 @@ class Http extends \PH7\Framework\Http\Http
      */
     public function post($sKey, $sParam = null, $bStrip = true)
     {
-        if ($this->sMethod !== self::METHOD_POST) {
+        if ($this->getMethod() !== self::METHOD_POST) {
             throw new Exception('POST');
         }
 
@@ -287,7 +288,9 @@ class Http extends \PH7\Framework\Http\Http
      */
     public function requestUri()
     {
-        $sRequestUri = substr($this->sRequestUri, 0, 1) === PH7_SH ? substr($this->sRequestUri, 1) : $this->sRequestUri;
+        $sUri = $this->getUri();
+
+        $sRequestUri = substr($sUri, 0, 1) === PH7_SH ? substr($sUri, 1) : $sUri;
         $sRelative = substr(PH7_RELATIVE, 0, 1) === PH7_SH ? substr(PH7_RELATIVE, 1) : PH7_RELATIVE;
 
         return str_replace($sRelative, '', $sRequestUri);
@@ -298,7 +301,7 @@ class Http extends \PH7\Framework\Http\Http
      */
     public function currentUrl()
     {
-        return PH7_URL_PROT . PH7_DOMAIN . $this->sRequestUri;
+        return PH7_URL_PROT . PH7_DOMAIN . $this->getUri();
     }
 
     /**
@@ -373,8 +376,8 @@ class Http extends \PH7\Framework\Http\Http
     protected function cleanData(&$aType, $sKey, $sParam)
     {
         // For space and others in the address bar
-        if ($this->sMethod === self::METHOD_GET) {
-            $aType[$sKey] = str_replace(self::SPECIAL_CHARS, '', $aType[$sKey]);
+        if ($this->getMethod() === self::METHOD_GET) {
+            $aType[$sKey] &= str_replace(self::SPECIAL_CHARS, '', $aType[$sKey]);
         }
 
         if (!empty($sParam) && $sParam === self::ONLY_XSS_CLEAN) {
