@@ -313,6 +313,10 @@
               </li>
             {/if}
 
+            {if $is_note_enabled}
+              <li><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Note Note Posts'}"><i class="fa fa-newspaper-o"></i> {lang 'Note'}</a></li>
+            {/if}
+
             {if $is_game_enabled}
               <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('game','admin','index') }}" title="{lang 'Admin Game'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-gamepad"></i> {lang 'Game'}</a>
                 <ul class="dropdown-menu" role="menu">
