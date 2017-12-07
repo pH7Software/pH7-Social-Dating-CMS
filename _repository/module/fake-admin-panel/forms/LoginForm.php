@@ -2,11 +2,10 @@
 /**
  * @title          Login Form
  *
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hi@ph7.me>
  * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License <http://www.gnu.org/licenses/gpl.html>
  * @package        PH7 / App / Module / Fake Admin Panel / Form
- * @version        1.1.1
  */
 
 namespace PH7;
