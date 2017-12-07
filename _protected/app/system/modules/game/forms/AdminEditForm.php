@@ -29,7 +29,7 @@ class AdminEditForm
 
         $oHttpRequest = new Http;
         $oGameModel = new GameModel;
-        $iGameId = $oHttpRequest->get('id', 'int');
+        $iGameId = $oHttpRequest->get('id');
         $oGame = $oGameModel->get(strstr($oHttpRequest->get('title'), '-', true), $iGameId, 0, 1);
 
         $oCategoriesData = $oGameModel->getCategory(null, 0, self::MAX_CATEGORIES);
