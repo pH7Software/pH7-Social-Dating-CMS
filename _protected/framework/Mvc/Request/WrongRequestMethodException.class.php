@@ -16,10 +16,17 @@ defined('PH7') or exit('Restricted access');
 use PH7\Framework\Error\CException\UserException;
 use PH7\Framework\Layout\Form\Form;
 
-class Exception extends UserException
+class WrongRequestMethodException extends UserException
 {
-    public function __construct($sMethodName)
+    const GET_METHOD = 1;
+    const POST_METHOD = 2;
+
+    /**
+     * @param string $sMethodName
+     * @param int $iCode
+     */
+    public function __construct($sMethodName, $iCode)
     {
-        parent::__construct(Form::wrongRequestMethodMsg($sMethodName));
+        parent::__construct(Form::wrongRequestMethodMsg($sMethodName), $iCode);
     }
 }
