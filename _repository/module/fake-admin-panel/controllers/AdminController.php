@@ -28,6 +28,7 @@ class AdminController extends MainController
         $this->sTitle = t('Config | Fake Admin Honeypot');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 }
