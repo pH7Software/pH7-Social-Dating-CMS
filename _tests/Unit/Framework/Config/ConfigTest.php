@@ -22,7 +22,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \PH7\Framework\Error\CException\PH7InvalidArgumentException
+     * @expectedException \PH7\Framework\Config\KeyAlreadyExistsException
      */
     public function testSetDuplicateKey()
     {
