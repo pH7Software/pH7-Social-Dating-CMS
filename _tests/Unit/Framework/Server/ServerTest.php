@@ -55,9 +55,4 @@ class ServerTest extends PHPUnit_Framework_TestCase
 
         $this->assertSame('&lt;b&gt;I&#039;m the value&lt;/b&gt;', $sActual);
     }
-
-    protected function tearDown()
-    {
-        unset($_SERVER);
-    }
 }
