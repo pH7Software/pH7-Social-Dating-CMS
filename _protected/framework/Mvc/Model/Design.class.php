@@ -60,11 +60,11 @@ class Design extends HtmlDesign
      * Gets Ads with ORDER BY RAND() SQL aggregate function.
      * With caching, advertising changes every hour.
      *
-     * @param integer $iWidth
-     * @param integer $iHeight
-     * @param boolean $bOnlyActive
+     * @param int $iWidth
+     * @param int $iHeight
+     * @param bool $bOnlyActive
      *
-     * @return boolean|void
+     * @return bool|void
      */
     public function ad($iWidth, $iHeight, $bOnlyActive = true)
     {
@@ -99,8 +99,8 @@ class Design extends HtmlDesign
     /**
      * Analytics API code.
      *
-     * @param boolean $bPrint Print the analytics HTML code.
-     * @param boolean $bOnlyActive Only active code.
+     * @param bool $bPrint Print the analytics HTML code.
+     * @param bool $bOnlyActive Only active code.
      *
      * @return string|void
      */
@@ -155,7 +155,7 @@ class Design extends HtmlDesign
      * Get CSS/JS files.
      *
      * @param string $sType Choose between 'css' and 'js'.
-     * @param boolean $bOnlyActive If TRUE, it will get only the files activated.
+     * @param bool $bOnlyActive If TRUE, it will get only the files activated.
      *
      * @return void HTML output.
      */
