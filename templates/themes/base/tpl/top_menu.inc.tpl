@@ -314,7 +314,7 @@
             {/if}
 
             {if $is_note_enabled}
-              <li><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Note Note Posts'}"><i class="fa fa-newspaper-o"></i> {lang 'Note'}</a></li>
+              <li><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Note Posts'}"><i class="fa fa-newspaper-o"></i> {lang 'Note'}</a></li>
             {/if}
 
             {if $is_game_enabled}
