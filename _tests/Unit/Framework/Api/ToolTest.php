@@ -8,8 +8,8 @@
 
 namespace PH7\Test\Unit\Framework\Api;
 
-use PH7\Framework\Config\Config;
 use PH7\Framework\Api\Tool;
+use PH7\Framework\Config\Config;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PHPUnit_Framework_TestCase;
 
