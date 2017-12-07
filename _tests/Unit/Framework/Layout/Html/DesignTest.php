@@ -13,11 +13,17 @@ namespace PH7\Test\Unit\Framework\Layout\Html;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Session\Session;
+use PHPUnit_Framework_TestCase;
 
-class DesignTest extends \PHPUnit_Framework_TestCase
+class DesignTest extends PHPUnit_Framework_TestCase
 {
+    /** @var Design */
     private $oDesign;
+
+    /** @var Session */
     private $oSession;
+
+    /** @var Config */
     private $oConfig;
 
     protected function setUp()
@@ -38,13 +44,13 @@ class DesignTest extends \PHPUnit_Framework_TestCase
     {
         $this->oDesign->setFlashMsg('Wrong Message!', Design::ERROR_TYPE);
         $this->assertEquals('Wrong Message!', $this->oSession->get('flash_msg'));
-        $this->assertEquals('error', $this->oSession->get('flash_type'));
+        $this->assertEquals('danger', $this->oSession->get('flash_type'));
     }
 
     public function testSetFlashMsgWithWrongType()
     {
         $this->oDesign->setFlashMsg('blabla', 'wrong_type');
         $this->assertEquals('blabla', $this->oSession->get('flash_msg'));
-        $this->assertEquals('', $this->oSession->get('flash_type'));
+        $this->assertEquals('success', $this->oSession->get('flash_type'));
     }
  }
