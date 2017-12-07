@@ -72,9 +72,7 @@ class Rest extends Http
      */
     public function getBody()
     {
-        parse_str(Stream::getInput(), $this->aRequest);
-
-        return $this->cleanInputs($this->aRequest);
+        return Stream::getInput();
     }
 
     /**
