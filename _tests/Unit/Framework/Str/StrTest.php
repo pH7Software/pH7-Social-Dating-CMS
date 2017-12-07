@@ -23,13 +23,13 @@ class StrTest extends PHPUnit_Framework_TestCase
     public function testLower()
     {
         $sOutputString = $this->oStr->lower('Hello The WORLD');
-        $this->assertEquals('hello the world', $sOutputString);
+        $this->assertSame('hello the world', $sOutputString);
     }
 
     public function testUpper()
     {
         $sOutputString = $this->oStr->upper('Hello The world');
-        $this->assertEquals('HELLO THE WORLD', $sOutputString);
+        $this->assertSame('HELLO THE WORLD', $sOutputString);
     }
 
     public function testEquals()
@@ -59,7 +59,7 @@ class StrTest extends PHPUnit_Framework_TestCase
 
     public function testEscape()
     {
-        $this->assertEquals('&lt;b&gt;Me &amp; You&lt;/b&gt;', $this->oStr->escape('<b>Me & You</b>'));
-        $this->assertEquals('Me & You', $this->oStr->escape('<b>Me & You</b>', true));
+        $this->assertSame('&lt;b&gt;Me &amp; You&lt;/b&gt;', $this->oStr->escape('<b>Me & You</b>'));
+        $this->assertSame('Me & You', $this->oStr->escape('<b>Me & You</b>', true));
     }
  }
