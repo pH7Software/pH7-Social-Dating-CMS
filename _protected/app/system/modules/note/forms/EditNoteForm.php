@@ -32,12 +32,12 @@ class EditNoteForm
         // Generate edit form post of the note
         $oNoteModel = new NoteModel;
 
-        $iNoteId = (new Http)->get('id');
+        $iNoteId = (new Http)->get('id', 'int');
         $iProfileId = (new Session)->get('member_id');
         $sPostId = $oNoteModel->getPostId($iNoteId);
         $oPost = $oNoteModel->readPost($sPostId, $iProfileId);
 
-        if (!empty($oPost) && (new Str)->equals($iNoteId, $oPost->noteId)) {
+        if (!empty($oPost) && (new Str)->equals($iNoteId, (int)$oPost->noteId)) {
             $oCategoryData = $oNoteModel->getCategory(null, 0, self::MAX_CATEGORIES);
 
             $aCategoryNames = array();
