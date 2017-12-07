@@ -36,9 +36,9 @@ class MailFormProcess extends Form
         $iRecipientId = $oUserModel->getId(null, $sRecipient);
         $iSenderId = (int)($bIsAdmin ? PH7_ADMIN_ID : $this->session->get('member_id'));
 
-        if ($iSenderId == $iRecipientId) {
+        if ($iSenderId === $iRecipientId) {
             \PFBC\Form::setError('form_compose_mail', t('Oops! You can not send a message to yourself.'));
-        } elseif ($sRecipient == PH7_ADMIN_USERNAME) {
+        } elseif ($sRecipient === PH7_ADMIN_USERNAME) {
             \PFBC\Form::setError('form_compose_mail', t('Oops! You cannot reply to administrator! If you want to contact us, please use our <a href="%0%">contact form</a>.', Uri::get('contact', 'contact', 'index')));
         } elseif (!(new ExistsCoreModel)->id($iRecipientId, 'Members')) {
             \PFBC\Form::setError('form_compose_mail', t('Oops! The username "%0%" does not exist.', escape(substr($this->httpRequest->post('recipient'), 0, PH7_MAX_USERNAME_LENGTH), true)));
