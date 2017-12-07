@@ -26,7 +26,6 @@
             <ul class="nav navbar-nav">
 
     {* Guest Menu *}
-
       {if !$is_user_auth AND !$is_aff_auth AND !$is_admin_auth}
         <li><a class="bold" href="{{ $design->url('user','signup','step1') }}" title="{lang 'Join Now!'}"><i class="fa fa-user-plus"></i> {lang 'Join Now!'}</a></li>
         <li><a href="{{ $design->url('user', 'main','login') }}" title="{lang 'Login'}" data-load="ajax"><i class="fa fa-sign-in"></i> {lang 'Login'}</a></li>
@@ -34,7 +33,6 @@
 
 
     {* Menu Guest, Member and Admin *}
-
       {if !$is_aff_auth}
         <li class="dropdown"><a href="{{ $design->url('user', 'browse', 'index') }}" title="{lang 'Members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-user fa-fw"></i> {lang 'People'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -63,9 +61,7 @@
 
 
     {* Menu Guest, Member and LoginUserAs of Admin Panel *}
-
       {if ( !$is_aff_auth AND !$is_admin_auth ) OR $admin_logged_as_user }
-
         {if $is_chat_enabled OR $is_chatroulette_enabled}
           <li class="dropdown"><a href="#" title="{lang 'Free Social Dating Chat Rooms'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-weixin"></i> {lang 'Chat'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
@@ -134,9 +130,7 @@
 
 
     {* Member Menu *}
-
-        {if $is_user_auth AND ( !$is_aff_auth AND !$is_admin_auth ) OR $admin_logged_as_user }
-
+      {if $is_user_auth AND ( !$is_aff_auth AND !$is_admin_auth ) OR $admin_logged_as_user }
           {if $is_mail_enabled}
             <li class="dropdown"><a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'My Emails'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-envelope-o fa-fw"></i> {lang 'Mail'} {if $count_unread_mail}<span class="badge">{count_unread_mail}</span>{/if} <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -214,14 +208,11 @@
               <li><a href="{{ $design->url('user','main','logout') }}" title="{lang 'Logout'}"><i class="fa fa-sign-out"></i> {lang 'Logout'}</a></li>
             </ul>
           </li>
-
       {/if}
 
 
     {* Affiliate Menu *}
-
       {if $is_aff_auth AND ( !$is_user_auth AND !$is_admin_auth OR $admin_logged_as_affiliate ) }
-
         <li><a href="{{ $design->url('affiliate','ads','index') }}" title="{lang 'Get Ad Banners'}"><i class="fa fa-money"></i> {lang 'Banners'}</a></li>
 
         <li class="dropdown"><a href="{{ $design->url('affiliate','account','index') }}" title="{lang 'My Account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-cog"></i> {lang 'Account'} <span class="caret"></span></a>
@@ -232,15 +223,12 @@
             <li><a href="{{ $design->url('affiliate','home','logout') }}" title="{lang 'Logout'}"><i class="fa fa-sign-out"></i> {lang 'Logout'}</a></li>
           </ul>
         </li>
-
       {/if}
 
 
     {* Admin Menu *}
-
       {if $is_admin_auth AND ( !$is_user_auth AND !$is_aff_auth ) }
-          {{ $count_total_reports = ReportCoreModel::totalReports() }}
-
+        {{ $count_total_reports = ReportCoreModel::totalReports() }}
         <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'user','index') }}" title="{lang 'Users/Admins Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-user fa-fw"></i> {lang 'User/Admin'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url(PH7_ADMIN_MOD,'user','browse') }}" title="{lang 'Browse Users'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-user"></i> {lang 'Users'}</a>
@@ -465,7 +453,6 @@
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'main','logout') }}" title="{lang 'Logout'}"><i class="fa fa-sign-out"></i> {lang 'Logout'}</a></li>
           </ul>
         </li>
-
       {/if}
 
       </ul>

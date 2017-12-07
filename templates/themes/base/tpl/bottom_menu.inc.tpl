@@ -1,5 +1,4 @@
-    <nav class="bottom_nav">
-
+  <nav class="bottom_nav">
       <div role="listbox" class="dropdown_menu ft_dm">
         <span class="dropdown_item_css">
           <a rel="nofollow" href="{{ $design->url('page','main','about') }}" class="dropdown_item" data-load="ajax">{lang 'About %site_name%'}</a>
@@ -44,5 +43,4 @@
         <a rel="nofollow" href="{{ $design->url('invite','home','invitation') }}" title="{lang 'Invite your friends!'}" data-popup="block-page">{lang 'Invite'}</a> |
       {/if}
       <a href="{{ $design->url('xml','sitemap','index') }}" title="{lang 'Site Map'}" data-load="ajax">{lang 'Site Map'}</a>
-
-    </nav>
+  </nav>
