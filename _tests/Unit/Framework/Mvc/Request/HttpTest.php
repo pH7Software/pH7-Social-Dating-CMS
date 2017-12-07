@@ -21,7 +21,7 @@ class HttpTest extends PHPUnit_Framework_TestCase
         $this->oHttpRequest = new HttpRequest;
     }
 
-    public function testGetRequestWithIntCast()
+    public function testGetRequestCastedToInt()
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_GET['string_id'] = '123';
@@ -31,7 +31,7 @@ class HttpTest extends PHPUnit_Framework_TestCase
         $this->assertSame(123, $sActual);
     }
 
-    public function testPostRequestWithIntCast()
+    public function testPostRequestCastedToInt()
     {
         $_SERVER['REQUEST_METHOD'] = 'POST';
         $_POST['string_id'] = '123';
