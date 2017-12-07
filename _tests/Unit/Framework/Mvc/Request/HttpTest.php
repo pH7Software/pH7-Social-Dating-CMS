@@ -31,18 +31,6 @@ class HttpTest extends PHPUnit_Framework_TestCase
         $this->assertSame(123, $sActual);
     }
 
-    /**
-     * @expectedException \PH7\Framework\Mvc\Request\WrongRequestMethodException
-     * @expectedExceptionCode \PH7\Framework\Mvc\Request\WrongRequestMethodException::GET_METHOD
-     */
-    public function testGetMethodWithWrongRequestMethod()
-    {
-        $_SERVER['REQUEST_METHOD'] = 'POST';
-        $_POST['foo'] = 'bar';
-
-        $this->oHttpRequest->get('foo');
-    }
-
     public function testPostRequestCastedToInt()
     {
         $_SERVER['REQUEST_METHOD'] = 'POST';
