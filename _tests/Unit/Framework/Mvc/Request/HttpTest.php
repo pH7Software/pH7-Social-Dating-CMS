@@ -52,10 +52,5 @@ class HttpTest extends PHPUnit_Framework_TestCase
 
         $this->oHttpRequest->post('foo');
     }
-
-    protected function tearDown()
-    {
-        unset($_GET, $_POST, $_SERVER);
-    }
 }
 
