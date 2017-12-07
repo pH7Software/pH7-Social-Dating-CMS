@@ -39,4 +39,4 @@ class SecurityTest extends PHPUnit_Framework_TestCase
         $sExpectedHash = '19fe127eb53178ab6b0c576bcfe90d41225443c6064139e6a058b4b0a4eb040ef912a89dd97c3fb6';
         $this->assertSame($sExpectedHash, $sActualHash);
     }
- }
+}

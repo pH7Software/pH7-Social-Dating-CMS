@@ -17,4 +17,4 @@ class AjaxTest extends \PHPUnit_Framework_TestCase
         $sActualResult = Ajax::jsonMsg(1, 'Yaaay!');
         $this->assertSame('{"status":1,"txt":"Yaaay!"}', $sActualResult);
     }
- }
+}
