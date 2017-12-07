@@ -109,7 +109,7 @@ class Design extends HtmlDesign
         $this->oCache->start(self::CACHE_STATIC_GROUP, 'analyticsApi' . $bOnlyActive, static::CACHE_TIME);
 
         if (!$sData = $this->oCache->get()) {
-            $sSqlWhere = ($bOnlyActive) ? 'WHERE active=\'1\'' : '';
+            $sSqlWhere = $bOnlyActive ? 'WHERE active=\'1\'' : '';
             $rStmt = Db::getInstance()->prepare('SELECT code FROM ' . Db::prefix('AnalyticsApi') . $sSqlWhere . ' LIMIT 1');
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -164,7 +164,7 @@ class Design extends HtmlDesign
         $this->oCache->start(self::CACHE_STATIC_GROUP, 'files' . $sType . $bOnlyActive, static::CACHE_TIME);
 
         if (!$oData = $this->oCache->get()) {
-            $sSqlWhere = ($bOnlyActive) ? ' AND active=\'1\'' : '';
+            $sSqlWhere = $bOnlyActive ? ' AND active=\'1\'' : '';
             $rStmt = Db::getInstance()->prepare('SELECT file FROM ' . Db::prefix('StaticFiles') . 'WHERE fileType = :type' . $sSqlWhere);
             $rStmt->bindValue(':type', $sType, \PDO::PARAM_STR);
             $rStmt->execute();
