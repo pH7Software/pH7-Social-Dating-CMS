@@ -48,3 +48,7 @@ define('PH7_MAX_URL_LENGTH', 120);
 require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
 
 FrameworkLoader::getInstance()->init();
+
+if (!function_exists('escape')) {
+    new \PH7\Framework\Str\Str; // Load class to get escape() function
+}
