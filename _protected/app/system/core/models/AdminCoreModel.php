@@ -67,7 +67,7 @@ class AdminCoreModel extends UserCoreModel
         $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? 'm.*, g.name AS membershipName' : 'COUNT(m.profileId) AS totalUsers';
 
-        $sSqlQuery = (!empty($iBanned)) ? '(ban = 1) AND ' : '';
+        $sSqlQuery = !empty($iBanned) ? '(ban = 1) AND ' : '';
         if ($sWhere === 'all') {
             $sSqlQuery .= '(m.username LIKE :what OR m.email LIKE :what OR m.firstName LIKE :what OR m.lastName LIKE :what OR m.ip LIKE :what)';
         } else {
