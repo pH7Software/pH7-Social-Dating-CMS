@@ -80,7 +80,7 @@ namespace PH7\Framework\Translate {
         /**
          * Get the two-letter country code; ISO 3166-1 alpha-2
          *
-         * @param string $sLocaleName Locale language name (e.g., locale such as "en_US", ..)
+         * @param string $sLocaleName Locale language name (e.g., locale such as "en_US", ..).
          *
          * @return string e.g., "en"
          */
@@ -92,7 +92,7 @@ namespace PH7\Framework\Translate {
         /**
          * Set the default language name.
          *
-         * @param string $sNewDefLang Prefix of the language.
+         * @param string $sNewDefLang Locale language name (e.g., locale such as "en_US", ..).
          *
          * @return self
          */
@@ -120,7 +120,7 @@ namespace PH7\Framework\Translate {
         /**
          * Get the default language name.
          *
-         * @return string The prefix of the language.
+         * @return string The locale language name (e.g., locale such as "en_US", ..).
          */
         public function getDefaultLang()
         {
