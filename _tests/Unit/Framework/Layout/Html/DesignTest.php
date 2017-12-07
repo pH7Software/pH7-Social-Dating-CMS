@@ -36,21 +36,21 @@ class DesignTest extends PHPUnit_Framework_TestCase
     public function testSetFlashMsgWithDefaultType()
     {
         $this->oDesign->setFlashMsg('Hey You!');
-        $this->assertEquals('Hey You!', $this->oSession->get('flash_msg'));
-        $this->assertEquals('success', $this->oSession->get('flash_type'));
+        $this->assertSame('Hey You!', $this->oSession->get('flash_msg'));
+        $this->assertSame('success', $this->oSession->get('flash_type'));
     }
 
     public function testSetFlashMsgWithErrorType()
     {
         $this->oDesign->setFlashMsg('Wrong Message!', Design::ERROR_TYPE);
-        $this->assertEquals('Wrong Message!', $this->oSession->get('flash_msg'));
-        $this->assertEquals('danger', $this->oSession->get('flash_type'));
+        $this->assertSame('Wrong Message!', $this->oSession->get('flash_msg'));
+        $this->assertSame('danger', $this->oSession->get('flash_type'));
     }
 
     public function testSetFlashMsgWithWrongType()
     {
         $this->oDesign->setFlashMsg('blabla', 'wrong_type');
-        $this->assertEquals('blabla', $this->oSession->get('flash_msg'));
-        $this->assertEquals('success', $this->oSession->get('flash_type'));
+        $this->assertSame('blabla', $this->oSession->get('flash_msg'));
+        $this->assertSame('success', $this->oSession->get('flash_type'));
     }
- }
+}
