@@ -29,11 +29,11 @@ class EditAdminBlogForm
 
         $oBlogModel = new BlogModel;
 
-        $iBlogId = (new Http)->get('id');
+        $iBlogId = (new Http)->get('id', 'int');
         $sPostId = $oBlogModel->getPostId($iBlogId);
         $oPost = $oBlogModel->readPost($sPostId);
 
-        if (!empty($oPost) && (new Str)->equals($iBlogId, $oPost->blogId)) {
+        if (!empty($oPost) && (new Str)->equals($iBlogId, (int)$oPost->blogId)) {
             $oCategoryData = $oBlogModel->getCategory(null, 0, self::MAX_CATEGORIES);
 
             $aCategoryNames = array();

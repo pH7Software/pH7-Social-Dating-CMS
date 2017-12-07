@@ -29,7 +29,7 @@ class AdminEditForm
 
         $oHttpRequest = new Http;
         $oGameModel = new GameModel;
-        $iGameId = $oHttpRequest->get('id');
+        $iGameId = $oHttpRequest->get('id', 'int');
         $oGame = $oGameModel->get(strstr($oHttpRequest->get('title'), '-', true), $iGameId, 0, 1);
 
         $oCategoriesData = $oGameModel->getCategory(null, 0, self::MAX_CATEGORIES);
@@ -41,7 +41,7 @@ class AdminEditForm
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
 
-        if (!empty($oGame) && (new Str)->equals($iGameId, $oGame->gameId)) {
+        if (!empty($oGame) && (new Str)->equals($iGameId, (int)$oGame->gameId)) {
             $oForm = new \PFBC\Form('form_edit');
             $oForm->configure(array('action' => ''));
             $oForm->addElement(new \PFBC\Element\Hidden('submit_edit', 'form_edit'));
