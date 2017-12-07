@@ -55,4 +55,4 @@ class ConfigTest extends PHPUnit_Framework_TestCase
         $this->assertSame('development', $this->oConfig->values['mode']['environment']);
         $this->assertSame('pH7 Social Dating CMS', $this->oConfig->getValue('ph7cms'));
     }
- }
+}
