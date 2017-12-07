@@ -15,13 +15,18 @@ if (!ini_get('date.timezone')) {
     date_default_timezone_set(PH7_DEFAULT_TIMEZONE);
 }
 
-// Charset Constant
+// Charset constant
 define('PH7_ENCODING', 'utf-8');
 
-// URL Constants
-define('PH7_URL_PROT', '');
+// URL/Path constants
+define('PH7_DS', DIRECTORY_SEPARATOR);
+define('PH7_PS', PATH_SEPARATOR);
+define('PH7_SH', '/'); // SlasH
 
-// General Kernel Constants
+define('PH7_URL_PROT', '');
+define('PH7_RELATIVE', '');
+
+// General Kernel constants
 define('PH7_PATH_PROTECTED', dirname(dirname(__DIR__)) . '/_protected/');
 define('PH7_PATH_FRAMEWORK', PH7_PATH_PROTECTED . 'framework/');
 define('PH7_PATH_APP', PH7_PATH_PROTECTED . 'app/');
@@ -29,12 +34,15 @@ define('PH7_PATH_SYS', PH7_PATH_APP . 'system/');
 define('PH7_PATH_SYS_MOD', PH7_PATH_SYS . 'modules/');
 define('PH7_PATH_TEST', __DIR__ . '/');
 
-// Config Constants
+// Config constants
 define('PH7_CONFIG', 'config/');
 define('PH7_PATH_APP_CONFIG', PH7_PATH_APP . 'configs/');
 define('PH7_CONFIG_FILE', 'config.ini');
 
-// Max Values Constants
+// Cache constant
+define('PH7_PATH_CACHE', '');
+
+// Max Values constants
 define('PH7_MAX_URL_LENGTH', 120);
 
 require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
