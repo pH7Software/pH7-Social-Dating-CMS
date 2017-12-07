@@ -47,6 +47,12 @@ class XmlDesignCore
         echo '<link rel="alternate" type="application/xml" title="Sitemap" href="', Uri::get('xml', 'sitemap', 'xmlrouter'), '" />';
     }
 
+    /**
+     * @internal Normally, we should display each link only if the module is enabled, but for optimization reasons,
+     * we don't do it since it doesn't really matter for this section.
+     *
+     * @return void
+     */
     public static function rssHeaderLinks()
     {
         echo '<link rel="alternate" type="application/rss+xml" title="', t('Latest Blog Posts'), '" href="', Uri::get('xml', 'rss', 'xmlrouter', 'blog'), '" />
