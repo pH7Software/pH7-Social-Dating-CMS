@@ -32,4 +32,4 @@ class LangTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame('en', $sLangCode);
     }
- }
+}

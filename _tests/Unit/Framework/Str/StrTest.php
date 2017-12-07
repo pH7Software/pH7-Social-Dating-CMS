@@ -62,4 +62,4 @@ class StrTest extends PHPUnit_Framework_TestCase
         $this->assertSame('&lt;b&gt;Me &amp; You&lt;/b&gt;', $this->oStr->escape('<b>Me & You</b>'));
         $this->assertSame('Me & You', $this->oStr->escape('<b>Me & You</b>', true));
     }
- }
+}
