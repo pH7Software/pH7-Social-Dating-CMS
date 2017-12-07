@@ -42,7 +42,7 @@ class HttpTest extends PHPUnit_Framework_TestCase
 
     public function testGetExistsWithValidType()
     {
-        $_GET['id'] = 123;
+        $_GET['id'] = 0;
 
         $sActual = $this->oHttpRequest->getExists('id', 'int');
 
@@ -87,7 +87,7 @@ class HttpTest extends PHPUnit_Framework_TestCase
 
     public function testPostExistsWithValidType()
     {
-        $_POST['id'] = 123;
+        $_POST['id'] = 0;
 
         $sActual = $this->oHttpRequest->postExists('id', 'int');
 
