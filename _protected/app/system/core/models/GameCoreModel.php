@@ -32,10 +32,14 @@ class GameCoreModel extends Model
 
         $sOrderBy = SearchCoreModel::order($sOrder, SearchCoreModel::DESC);
 
-        $sSqlGameId = (!empty($iGameId)) ? ' WHERE title LIKE :title AND gameId =:gameId ' : '';
+        $sSqlGameId = isset($iGameId) ? ' WHERE title LIKE :title AND gameId =:gameId ' : '';
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Games') . $sSqlGameId . $sOrderBy . 'LIMIT :offset, :limit');
-        (isset($sTitle, $iGameId)) ? $rStmt->bindValue(':title', $sTitle . '%', \PDO::PARAM_STR) : '';
-        (isset($sTitle, $iGameId)) ? $rStmt->bindValue(':gameId', $iGameId, \PDO::PARAM_INT) : '';
+        if (isset($sTitle, $iGameId)) {
+            $rStmt->bindValue(':title', $sTitle . '%', \PDO::PARAM_STR);
+        }
+        if (isset($sTitle, $iGameId)) {
+            $rStmt->bindValue(':gameId', $iGameId, \PDO::PARAM_INT);
+        }
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
