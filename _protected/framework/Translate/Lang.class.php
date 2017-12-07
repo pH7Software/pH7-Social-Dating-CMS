@@ -82,7 +82,7 @@ namespace PH7\Framework\Translate {
          *
          * @param string $sLocaleName Locale language name (e.g., locale such as "en_US", ..)
          *
-         * @return string
+         * @return string e.g., "en"
          */
         public static function getIsoCode($sLocaleName)
         {
