@@ -34,6 +34,7 @@ define('PH7_PATH_FRAMEWORK', PH7_PATH_PROTECTED . 'framework/');
 define('PH7_PATH_APP', PH7_PATH_PROTECTED . 'app/');
 define('PH7_PATH_SYS', PH7_PATH_APP . 'system/');
 define('PH7_PATH_SYS_MOD', PH7_PATH_SYS . 'modules/');
+define('PH7_PATH_APP_LANG', PH7_PATH_APP . 'langs/');
 define('PH7_PATH_TEST', __DIR__ . '/');
 
 // Config constants
@@ -60,4 +61,10 @@ FrameworkLoader::getInstance()->init();
 
 if (!function_exists('escape')) {
     new \PH7\Framework\Str\Str; // Load class to get escape() function
+}
+
+if (!function_exists('t')) {
+    include PH7_PATH_APP_LANG . 'en_US/language.php';
+    // Load class to include t() function
+    new \PH7\Framework\Translate\Lang;
 }
