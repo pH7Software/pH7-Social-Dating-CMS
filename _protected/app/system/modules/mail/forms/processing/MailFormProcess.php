@@ -59,8 +59,7 @@ class MailFormProcess extends Form
                     $this->sendMail($iRecipientId, $mSendMsg, $oUserModel);
                 }
 
-                $sUrl = ($bIsAdmin ? Uri::get(PH7_ADMIN_MOD, 'user', 'browse') : Uri::get('mail', 'main', 'index'));
-                Header::redirect($sUrl, t('Your message has been successfully sent!'));
+                Header::redirect($this->getRedirectUrl(), t('Your message has been successfully sent!'));
             }
 
             unset($oUserModel, $oMailModel);
@@ -100,5 +99,17 @@ class MailFormProcess extends Form
     private function isAdminEligible()
     {
         return AdminCore::auth() && !UserCore::auth() && !UserCore::isAdminLoggedAs();
+    }
+
+    /**
+     * @return string
+     */
+    private function getRedirectUrl()
+    {
+        if ($this->isAdminEligible()) {
+            return Uri::get(PH7_ADMIN_MOD, 'user', 'browse');
+        }
+
+        return Uri::get('mail', 'main', 'index');
     }
 }
