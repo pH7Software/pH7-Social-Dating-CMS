@@ -434,7 +434,7 @@ class Design
      */
     public function staticFiles($sType, $sDir, $sFiles, $sCssMedia = 'all')
     {
-        if ($sType == 'js') {
+        if ($sType === 'js') {
             echo $this->externalJsFile(PH7_RELATIVE . 'asset/gzip/?t=js&amp;d=' . $sDir . '&amp;f=' . $sFiles);
         } else {
             echo $this->externalCssFile(PH7_RELATIVE . 'asset/gzip/?t=css&amp;d=' . $sDir . '&amp;f=' . $sFiles, $sCssMedia);
@@ -621,7 +621,7 @@ class Design
                 /* If sex is empty, it is recovered in the database using information from member */
                 $sSex = (!empty($sSex)) ? $sSex : $oUserModel->getSex(null, $sUsername, 'Members');
                 $sSex = $this->oStr->lower($sSex);
-                $sIcon = ($sSex == 'male' || $sSex == 'female' || $sSex == 'couple' || $sSex == PH7_ADMIN_USERNAME) ? $sSex : 'visitor';
+                $sIcon = ($sSex === 'male' || $sSex === 'female' || $sSex === 'couple' || $sSex === PH7_ADMIN_USERNAME) ? $sSex : 'visitor';
                 $sUrlTplName = defined('PH7_TPL_NAME') ? PH7_TPL_NAME : PH7_DEFAULT_THEME;
 
                 /*** If the user doesn't have an avatar ***/
