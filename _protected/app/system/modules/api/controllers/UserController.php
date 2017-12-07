@@ -87,7 +87,7 @@ class UserController extends MainController
                     'description' => $aData['description'],
                     'ip' => Framework\Ip\Ip::get(),
                 ];
-                $iUserId = $this->oUserModel->add($aValidData);
+                $iUserId = $this->oUserModel->add(escape($aValidData, true));
 
                 // Add 'profile_id' key into the array
                 $aValidData['profile_id'] = $iUserId;
