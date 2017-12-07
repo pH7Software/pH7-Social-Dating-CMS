@@ -39,11 +39,11 @@ class Validate
     const DEF_MAX_AGE = 99;
 
     /** @var Str */
-    private $_oStr;
+    private $oStr;
 
     public function __construct()
     {
-        $this->_oStr = new Str;
+        $this->oStr = new Str;
     }
 
     /**
@@ -125,9 +125,9 @@ class Validate
         $sValue = filter_var($sValue, FILTER_SANITIZE_STRING);
 
         if (!empty($sValue)) {
-            if (!empty($iMin) && $this->_oStr->length($sValue) < $iMin)
+            if (!empty($iMin) && $this->oStr->length($sValue) < $iMin)
                 return false;
-            elseif (!empty($iMax) && $this->_oStr->length($sValue) > $iMax)
+            elseif (!empty($iMax) && $this->oStr->length($sValue) > $iMax)
                 return false;
             elseif (!is_string($sValue))
                 return false;
@@ -238,7 +238,7 @@ class Validate
      */
     public function password($sPwd, $iMin = self::DEF_MIN_PASS_LENGTH, $iMax = self::DEF_MAX_PASS_LENGTH)
     {
-        $iPwdLength = $this->_oStr->length($sPwd);
+        $iPwdLength = $this->oStr->length($sPwd);
 
         return $iPwdLength >= $iMin && $iPwdLength <= $iMax;
     }
@@ -262,7 +262,7 @@ class Validate
         }
 
         return filter_var($sEmail, FILTER_VALIDATE_EMAIL) !== false &&
-            $this->_oStr->length($sEmail) <= PH7_MAX_EMAIL_LENGTH && !Ban::isEmail($sEmail);
+            $this->oStr->length($sEmail) <= PH7_MAX_EMAIL_LENGTH && !Ban::isEmail($sEmail);
     }
 
     /**
@@ -319,7 +319,7 @@ class Validate
     {
         $sUrl = filter_var($sUrl, FILTER_SANITIZE_URL);
 
-        if (filter_var($sUrl, FILTER_VALIDATE_URL) === false || $this->_oStr->length($sUrl) >= PH7_MAX_URL_LENGTH) {
+        if (filter_var($sUrl, FILTER_VALIDATE_URL) === false || $this->oStr->length($sUrl) >= PH7_MAX_URL_LENGTH) {
             return false;
         }
 
@@ -375,7 +375,7 @@ class Validate
     public function name($sName, $iMin = self::MIN_NAME_LENGTH, $iMax = self::MAX_NAME_LENGTH)
     {
         // Check the length
-        if ($this->_oStr->length($sName) < $iMin || $this->_oStr->length($sName) > $iMax) {
+        if ($this->oStr->length($sName) < $iMin || $this->oStr->length($sName) > $iMax) {
             return false;
         }
 
