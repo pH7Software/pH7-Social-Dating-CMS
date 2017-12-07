@@ -22,8 +22,10 @@ define('PH7_ENCODING', 'utf-8');
 define('PH7_DS', DIRECTORY_SEPARATOR);
 define('PH7_PS', PATH_SEPARATOR);
 define('PH7_SH', '/'); // SlasH
-
-define('PH7_URL_PROT', '');
+define('PH7_PAGE_EXT', '.html');
+define('PH7_URL_PROT', 'http://');
+define('PH7_URL_ROOT', PH7_URL_PROT . 'localhost:8888/');
+define('PH7_URL_STATIC', '');
 define('PH7_RELATIVE', '');
 
 // General Kernel constants
@@ -38,6 +40,13 @@ define('PH7_PATH_TEST', __DIR__ . '/');
 define('PH7_CONFIG', 'config/');
 define('PH7_PATH_APP_CONFIG', PH7_PATH_APP . 'configs/');
 define('PH7_CONFIG_FILE', 'config.ini');
+
+// Admin constant
+define('PH7_ADMIN_MOD', 'admin123');
+
+// Lang constant
+define('PH7_DEFAULT_LANG_CODE', 'en');
+define('PH7_LANG_CODE', 'en');
 
 // Cache constant
 define('PH7_PATH_CACHE', '');
