@@ -176,7 +176,7 @@ class Design extends HtmlDesign
         if (!empty($oData)) {
             foreach ($oData as $oFile) {
                 $sFullPath = (new SysVar)->parse($oFile->file);
-                $sMethodName = 'external' . ($sType == 'js' ? 'Js' : 'Css') . 'File';
+                $sMethodName = 'external' . ($sType === 'js' ? 'Js' : 'Css') . 'File';
                 $this->$sMethodName($sFullPath);
             }
         }
