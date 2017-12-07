@@ -68,7 +68,7 @@ class Rest extends Http
     }
 
     /**
-     * @return string A JSON string.
+     * @return string The request body content (usually, should be a JSON string).
      */
     public function getBody()
     {
