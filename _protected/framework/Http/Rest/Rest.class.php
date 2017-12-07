@@ -68,6 +68,16 @@ class Rest extends Http
     }
 
     /**
+     * @return string A JSON string.
+     */
+    public function getBody()
+    {
+        parse_str(Stream::getInput(), $this->aRequest);
+
+        return $this->cleanInputs($this->aRequest);
+    }
+
+    /**
      * @return void
      */
     private function inputs()
