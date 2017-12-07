@@ -195,7 +195,7 @@ class Http extends \PH7\Framework\Http\Http
      */
     public function setPost($sKey, $sValue)
     {
-        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_SERVER['REQUEST_METHOD'] = self::METHOD_POST;
 
         $this->setRequestVar($this->aPost, $sKey, $sValue);
     }

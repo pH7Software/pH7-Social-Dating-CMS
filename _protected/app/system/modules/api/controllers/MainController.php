@@ -12,6 +12,7 @@ namespace PH7;
 
 use PH7\Framework\Api\Api;
 use PH7\Framework\Http\Rest\Rest;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 class MainController extends Controller
 {
@@ -34,7 +35,7 @@ class MainController extends Controller
      */
     public function test()
     {
-        if ($this->oRest->getRequestMethod() != 'POST') {
+        if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_POST) {
             $this->oRest->response('', 406);
         } else {
             $this->oRest->response($this->set(['return' => 'It Works!']));
