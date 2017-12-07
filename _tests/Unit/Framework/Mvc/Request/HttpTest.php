@@ -31,6 +31,41 @@ class HttpTest extends PHPUnit_Framework_TestCase
         $this->assertSame(123, $sActual);
     }
 
+    public function testGetExistsWithWrongValidateType()
+    {
+        $_GET['id'] = 123;
+
+        $sActual = $this->oHttpRequest->getExists('id', 'string');
+
+        $this->assertFalse($sActual);
+    }
+
+    public function testGetExistsWithValidType()
+    {
+        $_GET['id'] = 123;
+
+        $sActual = $this->oHttpRequest->getExists('id', 'int');
+
+        $this->assertTrue($sActual);
+    }
+
+    public function testGetNotExists()
+    {
+        $sActual = $this->oHttpRequest->getExists('undefined_key');
+
+        $this->assertFalse($sActual);
+    }
+
+    public function testGetExistsWithSeveralKeys()
+    {
+        $_GET['key1'] = 'blabla';
+        $_GET['key2'] = 'blabla';
+
+        $sActual = $this->oHttpRequest->getExists(['key1', 'key2']);
+
+        $this->assertTrue($sActual);
+    }
+
     public function testPostRequestCastedToInt()
     {
         $_SERVER['REQUEST_METHOD'] = 'POST';
@@ -39,6 +74,41 @@ class HttpTest extends PHPUnit_Framework_TestCase
         $sActual = $this->oHttpRequest->post('string_id', 'int');
 
         $this->assertSame(123, $sActual);
+    }
+
+    public function testPostExistsWithWrongValidateType()
+    {
+        $_POST['id'] = 123;
+
+        $sActual = $this->oHttpRequest->postExists('id', 'string');
+
+        $this->assertFalse($sActual);
+    }
+
+    public function testPostExistsWithValidType()
+    {
+        $_POST['id'] = 123;
+
+        $sActual = $this->oHttpRequest->postExists('id', 'int');
+
+        $this->assertTrue($sActual);
+    }
+
+    public function testPostNotExists()
+    {
+        $sActual = $this->oHttpRequest->postExists('undefined_key');
+
+        $this->assertFalse($sActual);
+    }
+
+    public function testPostExistsWithSeveralKeys()
+    {
+        $_POST['key1'] = 'blabla';
+        $_POST['key2'] = 'blabla';
+
+        $sActual = $this->oHttpRequest->postExists(['key1', 'key2']);
+
+        $this->assertTrue($sActual);
     }
 
     /**
