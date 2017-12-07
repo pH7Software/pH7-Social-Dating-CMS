@@ -94,7 +94,11 @@ class CountryController extends Controller
      */
     private function getCountry()
     {
-        return str_replace('-', ' ', substr($this->str->upperFirst($this->httpRequest->get('country')), 0, self::MAX_COUNTRY_LENGTH));
+        return str_replace(
+            '-',
+            ' ',
+            substr($this->str->upperFirst($this->httpRequest->get('country')), 0, self::MAX_COUNTRY_LENGTH)
+        );
     }
 
     /**
@@ -102,6 +106,10 @@ class CountryController extends Controller
      */
     private function getCity()
     {
-        return str_replace('-', ' ', substr($this->str->upperFirst($this->httpRequest->get('city')), 0, self::MAX_CITY_LENGTH));
+        return str_replace(
+            '-',
+            ' ',
+            substr($this->str->upperFirst($this->httpRequest->get('city')), 0, self::MAX_CITY_LENGTH)
+        );
     }
 }
