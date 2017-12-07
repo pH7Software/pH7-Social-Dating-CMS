@@ -18,6 +18,9 @@ if (!ini_get('date.timezone')) {
 // Charset Constant
 define('PH7_ENCODING', 'utf-8');
 
+// URL Constants
+define('PH7_URL_PROT', '');
+
 // General Kernel Constants
 define('PH7_PATH_PROTECTED', dirname(dirname(__DIR__)) . '/_protected/');
 define('PH7_PATH_FRAMEWORK', PH7_PATH_PROTECTED . 'framework/');
