@@ -32,7 +32,7 @@ class EditNoteForm
         // Generate edit form post of the note
         $oNoteModel = new NoteModel;
 
-        $iNoteId = (new Http)->get('id', 'int');
+        $iNoteId = (new Http)->get('id');
         $iProfileId = (new Session)->get('member_id');
         $sPostId = $oNoteModel->getPostId($iNoteId);
         $oPost = $oNoteModel->readPost($sPostId, $iProfileId);

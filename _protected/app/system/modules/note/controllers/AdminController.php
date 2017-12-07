@@ -47,10 +47,8 @@ class AdminController extends MainController
     public function approved()
     {
         $iNoteId = $this->httpRequest->post('note_id');
-        $sPostId = $this->httpRequest->post('post_id');
-        $iProfileId = $this->httpRequest->post('profile_id', 'int');
 
-        if (isset($iNoteId, $iProfileId, $sPostId) && $this->oNoteModel->approved($iNoteId)) {
+        if (isset($iNoteId) && $this->oNoteModel->approved($iNoteId)) {
             /* Clean NoteModel Cache */
             (new Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
 
@@ -65,10 +63,8 @@ class AdminController extends MainController
     public function disapproved()
     {
         $iNoteId = $this->httpRequest->post('note_id');
-        $sPostId = $this->httpRequest->post('post_id');
-        $iProfileId = $this->httpRequest->post('profile_id', 'int');
 
-        if (isset($iNoteId, $iProfileId, $sPostId) && $this->oNoteModel->approved($iNoteId, '0')) {
+        if (isset($iNoteId) && $this->oNoteModel->approved($iNoteId, '0')) {
             /* Clean NoteModel Cache */
             (new Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
 

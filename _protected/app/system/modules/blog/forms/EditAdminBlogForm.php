@@ -29,7 +29,7 @@ class EditAdminBlogForm
 
         $oBlogModel = new BlogModel;
 
-        $iBlogId = (new Http)->get('id', 'int');
+        $iBlogId = (new Http)->get('id');
         $sPostId = $oBlogModel->getPostId($iBlogId);
         $oPost = $oBlogModel->readPost($sPostId);
 
