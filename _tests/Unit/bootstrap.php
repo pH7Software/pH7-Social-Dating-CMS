@@ -27,9 +27,9 @@ define('PH7_PATH_SYS_MOD', PH7_PATH_SYS . 'modules/');
 define('PH7_PATH_TEST', __DIR__ . '/');
 
 // Config Constants
-define('PH7_CONFIG', '');
-define('PH7_PATH_APP_CONFIG', PH7_PATH_TEST . 'fixtures/config/');
-define('PH7_CONFIG_FILE', 'test.ini');
+define('PH7_CONFIG', 'config/');
+define('PH7_PATH_APP_CONFIG', PH7_PATH_APP . 'configs/');
+define('PH7_CONFIG_FILE', 'config.ini');
 
 // Max Values Constants
 define('PH7_MAX_URL_LENGTH', 120);
