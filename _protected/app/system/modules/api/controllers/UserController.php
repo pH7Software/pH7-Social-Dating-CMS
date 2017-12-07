@@ -50,12 +50,22 @@ class UserController extends MainController
             $iMinAge = DbConfig::getSetting('minAgeRegistration');
             $iMaxAge = DbConfig::getSetting('maxAgeRegistration');
 
-            if (
-                empty($aData['email']) || empty($aData['username']) || empty($aData['password']) ||
-                empty($aData['first_name']) || empty($aData['last_name']) || empty($aData['sex']) ||
-                empty($aData['match_sex']) || empty($aData['birth_date']) || empty($aData['country']) ||
-                empty($aData['city']) || empty($aData['state']) || empty($aData['zip_code']) || empty($aData['description'])
-            ) {
+            $aRequiredFields = [
+                'email',
+                'username',
+                'password',
+                'first_name',
+                'last_name',
+                'sex',
+                'match_sex',
+                'birth_date',
+                'country',
+                'city',
+                'state',
+                'zip_code',
+                'description'
+            ];
+            if (!$this->areFieldsExist($aData, $aRequiredFields)) {
                 $aResults = ['status' => 'failed', 'msg' => t('One or several profile fields are empty.')];
                 $this->oRest->response($this->set($aResults), 400);
             } elseif (!$this->oValidate->email($aData['email'])) {
@@ -200,5 +210,22 @@ class UserController extends MainController
                 $this->oRest->response($this->set($aResults), 404);
             }
         }
+    }
+
+    /**
+     * @param array $aData
+     * @param array $aRequiredElements
+     *
+     * @return bool
+     */
+    private function areFieldsExist(array $aData, array $aRequiredElements)
+    {
+        foreach ($aRequiredElements as $sName) {
+            if (empty($aData[$sName])) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
