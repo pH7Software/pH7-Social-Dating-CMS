@@ -225,10 +225,14 @@ class Http extends \PH7\Framework\Http\Http
      * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities, so less secure
      *
      * @return string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
+     *
+     * @throws WrongRequestMethodException If the request is not GET.
      */
     public function get($sKey, $sParam = null, $bStrip = false)
     {
-        //if ($this->getMethod() !== self::METHOD_GET) throw new Exception('GET');
+        if ($this->getMethod() !== self::METHOD_GET) {
+            throw new WrongRequestMethodException('GET', WrongRequestMethodException::GET_METHOD);
+        }
 
         if (!isset($this->aGet[$sKey])) {
             return '';
@@ -259,12 +263,12 @@ class Http extends \PH7\Framework\Http\Http
      *
      * @return string The string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
      *
-     * @throws Exception If the request is not POST.
+     * @throws WrongRequestMethodException If the request is not POST.
      */
     public function post($sKey, $sParam = null, $bStrip = true)
     {
         if ($this->getMethod() !== self::METHOD_POST) {
-            throw new Exception('POST');
+            throw new WrongRequestMethodException('POST', WrongRequestMethodException::POST_METHOD);
         }
 
         if (!isset($this->aPost[$sKey])) {

@@ -21,10 +21,12 @@ class UserException extends Exception
 
     /**
      * @param string $sMsg
+     * @param int $iCode
      */
-    public function __construct($sMsg)
+    public function __construct($sMsg, $iCode = 0)
     {
-        parent::__construct($sMsg);
+        parent::__construct($sMsg, $iCode);
+
         $this->init($sMsg);
     }
 }
