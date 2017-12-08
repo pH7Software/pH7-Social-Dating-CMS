@@ -20,7 +20,7 @@ use PH7\Framework\Mvc\Request\Http as HttpRequest;
 class Tool
 {
     const SOFTWARE_API_URL = 'http://api.ph7cms.com/';
-    const DEV_API_KEY = 'dev772277';
+    const DEV_APP_API_KEY = 'dev772277';
 
     /**
      * Check if an external app can have access to the API.
@@ -48,7 +48,7 @@ class Tool
     private static function isApiKeyValid($sPrivateApiKey, Config $oConfig)
     {
         return strcmp($sPrivateApiKey, $oConfig->values['ph7cms.api']['private_key']) === 0 ||
-            (Server::isLocalHost() && $sPrivateApiKey === self::DEV_API_KEY);
+            (Server::isLocalHost() && $sPrivateApiKey === self::DEV_APP_API_KEY);
     }
 
     /**
