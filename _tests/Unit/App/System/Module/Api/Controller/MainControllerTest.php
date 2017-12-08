@@ -9,38 +9,27 @@
 namespace PH7\Test\Unit\App\System\Module\Api\Controller;
 
 use GuzzleHttp\Client;
-use PH7\Framework\Config\Config;
-use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Api\Tool as ApiTool;
 use PH7\Framework\Mvc\Router\Uri;
 use PHPUnit_Framework_TestCase;
 
 class MainControllerTest extends PHPUnit_Framework_TestCase
 {
-    /** @var HttpRequest */
-    protected $oHttpRequest;
-
-    /** Config */
-    protected $oConfig;
-
     /** @var Client */
     protected $oClient;
 
     protected function setUp()
     {
-        $this->oHttpRequest = new HttpRequest();
-        $this->oConfig = Config::getInstance();
-
-        $this->oConfig->values['ph7cms.api']['private_key'] = 'c56cd417b958b9ce37bdd80569ef94836ccdc5c7';
-        $this->oConfig->values['ph7cms.api']['allow_domains'][] = 'ph7cms.com';
-
         $this->oClient = new Client(['exceptions' => false]);
     }
 
     public function testDenyRequest()
     {
         $oResponse = $this->oClient->get($this->getApiUrl('test'), [
-            'private_api_key' => 'wrong api key',
-            'url' => 'doesntexist.com'
+            'query' => [
+                'private_api_key' => ApiTool::DEV_API_KEY,
+                'url' => 'doesntexist.com'
+            ]
         ]);
 
         $this->assertSame(403, $oResponse->getStatusCode());
@@ -49,19 +38,23 @@ class MainControllerTest extends PHPUnit_Framework_TestCase
     public function testWrongTestRequestMethod()
     {
         $oResponse = $this->oClient->get($this->getApiUrl('test'), [
-            'private_api_key' => 'c56cd417b958b9ce37bdd80569ef94836ccdc5c7',
-             'url' => 'ph7cms.com'
+            'query' => [
+                'private_api_key' => ApiTool::DEV_API_KEY,
+                'url' => 'ph7cms.com'
+            ]
         ]);
 
         $this->assertSame(406, $oResponse->getStatusCode());
-        $this->assertSame('', $oResponse->getBody());
+        $this->assertNull(json_decode($oResponse->getBody()));
     }
 
     public function testCorrectTestUri()
     {
         $oResponse = $this->oClient->post($this->getApiUrl('test'), [
-            'private_api_key' => 'c56cd417b958b9ce37bdd80569ef94836ccdc5c7',
-            'url' => 'ph7cms.com'
+            'query' => [
+                'private_api_key' => ApiTool::DEV_API_KEY,
+                'url' => 'ph7cms.com'
+            ]
         ]);
 
         $this->assertSame(200, $oResponse->getStatusCode());
