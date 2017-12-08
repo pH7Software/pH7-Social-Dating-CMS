@@ -6,7 +6,7 @@
  * @package          PH7 / Test / Unit / App / System / Core / Classes
  */
 
-namespace PH7\Test\Unit\App\System\Module\Xml\Inc\Classes;
+namespace PH7\Test\Unit\App\System\Core\Classes;
 
 require PH7_PATH_SYS . 'core/classes/MediaCore.php';
 
