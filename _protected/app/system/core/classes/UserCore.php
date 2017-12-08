@@ -70,7 +70,9 @@ class UserCore
      */
     public function delete($iProfileId, $sUsername)
     {
-        if ($sUsername == PH7_GHOST_USERNAME) exit('You cannot delete this profile!');
+        if ($sUsername === PH7_GHOST_USERNAME) {
+            exit('You cannot delete this profile!');
+        }
 
         $oFile = new File;
         $oFile->deleteDir(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/avatar/' . PH7_IMG . $sUsername);
@@ -433,9 +435,9 @@ class UserCore
     public function activateAccount($sEmail, $sHash, Config $oConfig, Registry $oRegistry, $sMod = 'user')
     {
         $sTable = VariousModel::convertModToTable($sMod);
-        $sRedirectLoginUrl = ($sMod == 'newsletter' ? PH7_URL_ROOT : ($sMod == 'affiliate' ? Uri::get('affiliate', 'home', 'login') : Uri::get('user', 'main', 'login')));
-        $sRedirectIndexUrl = ($sMod == 'newsletter' ? PH7_URL_ROOT : ($sMod == 'affiliate' ? Uri::get('affiliate', 'home', 'index') : Uri::get('user', 'main', 'index')));
-        $sSuccessMsg = ($sMod == 'newsletter' ? t('Your subscription to our newsletters has been successfully validated!') : t('Your account has been successfully validated. You can now login!'));
+        $sRedirectLoginUrl = ($sMod === 'newsletter' ? PH7_URL_ROOT : ($sMod === 'affiliate' ? Uri::get('affiliate', 'home', 'login') : Uri::get('user', 'main', 'login')));
+        $sRedirectIndexUrl = ($sMod === 'newsletter' ? PH7_URL_ROOT : ($sMod === 'affiliate' ? Uri::get('affiliate', 'home', 'index') : Uri::get('user', 'main', 'index')));
+        $sSuccessMsg = ($sMod === 'newsletter' ? t('Your subscription to our newsletters has been successfully validated!') : t('Your account has been successfully validated. You can now login!'));
 
         if (isset($sEmail, $sHash)) {
             $oUserModel = new AffiliateCoreModel;
@@ -468,7 +470,7 @@ class UserCore
      */
     public function getMatchSex($sSex)
     {
-        return ($sSex == 'male' ? 'female' : ($sSex == 'female' ? 'male' : 'couple'));
+        return ($sSex === 'male' ? 'female' : ($sSex === 'female' ? 'male' : 'couple'));
     }
 
     /**
