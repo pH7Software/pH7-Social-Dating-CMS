@@ -80,7 +80,7 @@ class ToolTest extends PHPUnit_Framework_TestCase
     {
         $_SERVER['SERVER_NAME'] = '127.0.0.1';
         $_SERVER['REQUEST_METHOD'] = 'POST';
-        $_POST['private_api_key'] = Tool::DEV_API_KEY;
+        $_POST['private_api_key'] = 'dev772277';
         $_POST['url'] = 'ph7cms.com';
 
         $this->assertTrue(Tool::checkAccess($this->oConfig, $this->oHttpRequest));
