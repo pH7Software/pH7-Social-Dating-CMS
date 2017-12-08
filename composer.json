@@ -44,7 +44,7 @@
         "phpunit/phpunit": "^5.5",
         "phake/phake": "^2.3",
         "friendsofphp/php-cs-fixer": "^2.2",
-        "guzzlehttp/guzzle-services": "^1.1"
+        "guzzlehttp/guzzle": "^6.3"
     },
     "autoload-dev": {
         "psr-4": {
