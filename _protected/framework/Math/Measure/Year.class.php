@@ -49,15 +49,18 @@ class Year implements Measurable
      * Get User's age.
      *
      * @return int The age of the user.
+     *
+     * @internal Don't use strict comparisons since some integer values got their types as a strict.
      */
     public function get()
     {
         // We estimate the age, one year in excess
         $iAge = date('Y', $this->iTimestamp) - $this->iYear;
+        $iCurrentMonth = date('n', $this->iTimestamp);
 
         // Taken out a year if the birthday is not over yet
-        if ($this->iMonth > date('n', $this->iTimestamp) ||
-            ($this->iMonth === date('n', $this->iTimestamp) && $this->iDay > date('j', $this->iTimestamp))
+        if ($this->iMonth > $iCurrentMonth ||
+            ($this->iMonth == $iCurrentMonth && $this->iDay > date('j', $this->iTimestamp))
         ) {
             $iAge--;
         }
