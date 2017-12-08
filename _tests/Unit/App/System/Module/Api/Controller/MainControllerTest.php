@@ -27,7 +27,7 @@ class MainControllerTest extends PHPUnit_Framework_TestCase
     {
         $oResponse = $this->oClient->get($this->getApiUrl('test'), [
             'query' => [
-                'private_api_key' => ApiTool::DEV_API_KEY,
+                'private_api_key' => 'dev772277',
                 'url' => 'doesntexist.com'
             ]
         ]);
@@ -39,7 +39,7 @@ class MainControllerTest extends PHPUnit_Framework_TestCase
     {
         $oResponse = $this->oClient->get($this->getApiUrl('test'), [
             'query' => [
-                'private_api_key' => ApiTool::DEV_API_KEY,
+                'private_api_key' => 'dev772277',
                 'url' => 'ph7cms.com'
             ]
         ]);
@@ -52,7 +52,7 @@ class MainControllerTest extends PHPUnit_Framework_TestCase
     {
         $oResponse = $this->oClient->post($this->getApiUrl('test'), [
             'query' => [
-                'private_api_key' => ApiTool::DEV_API_KEY,
+                'private_api_key' => 'dev772277',
                 'url' => 'ph7cms.com'
             ]
         ]);
