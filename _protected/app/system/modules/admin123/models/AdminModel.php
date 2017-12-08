@@ -95,7 +95,7 @@ class AdminModel extends AdminCoreModel
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return int|\stdClass
+     * @return int|array
      */
     public function searchAdmin($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {

@@ -21,7 +21,7 @@ class AdminCoreModel extends UserCoreModel
      * @param int $iLimit
      * @param string $sTable
      *
-     * @return \stdClass
+     * @return array
      */
     public function browse($iOffset, $iLimit, $sTable = 'Members')
     {
@@ -55,7 +55,7 @@ class AdminCoreModel extends UserCoreModel
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return int|\stdClass
+     * @return int|array
      */
     public function searchUser($mWhat, $sWhere, $iGroupId, $iBanned, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
@@ -89,9 +89,9 @@ class AdminCoreModel extends UserCoreModel
         $rStmt->execute();
 
         if (!$bCount) {
-            $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $aRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            return $oRow;
+            return $aRow;
         } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);

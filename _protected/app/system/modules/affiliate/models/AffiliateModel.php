@@ -18,7 +18,7 @@ class AffiliateModel extends AffiliateCoreModel
      *
      * @param array $aData
      *
-     * @return boolean Returns TRUE on success or FALSE on failure.
+     * @return bool Returns TRUE on success or FALSE on failure.
      */
     public function join(array $aData)
     {
@@ -51,7 +51,7 @@ class AffiliateModel extends AffiliateCoreModel
      *
      * @param array $aData
      *
-     * @return boolean Returns TRUE on success or FALSE on failure.
+     * @return bool Returns TRUE on success or FALSE on failure.
      */
     public function join2(array $aData)
     {
@@ -70,9 +70,9 @@ class AffiliateModel extends AffiliateCoreModel
     /**
      * Add a reference affiliate.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      *
-     * @return boolean Returns TRUE on success or FALSE on failure.
+     * @return bool Returns TRUE on success or FALSE on failure.
      */
     public function addRefer($iProfileId)
     {
@@ -86,14 +86,14 @@ class AffiliateModel extends AffiliateCoreModel
     /**
      * Search an affiliate.
      *
-     * @param integer|string $mLooking (integer for profile ID or string for a keyword)
-     * @param boolean $bCount Put 'true' for count the affiliates or 'false' for the result of affiliates.
+     * @param int|string $mLooking (integer for profile ID or string for a keyword)
+     * @param bool $bCount Put 'true' for count the affiliates or 'false' for the result of affiliates.
      * @param string $sOrderBy
-     * @param integer $iSort
-     * @param integer $iOffset
-     * @param integer $iLimit
+     * @param int $iSort
+     * @param int $iOffset
+     * @param int $iLimit
      *
-     * @return object|integer Object for the affiliate list or Integer for the total number users returned.
+     * @return array|int An array containing stdClass object with the affiliates or an integer for the total number of users returned.
      */
     public function searchAff($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
@@ -141,7 +141,7 @@ class AffiliateModel extends AffiliateCoreModel
      *
      * @param array $aData
      *
-     * @return integer The ID of the Affiliate.
+     * @return int The ID of the Affiliate.
      */
     public function add(array $aData)
     {
@@ -190,9 +190,9 @@ class AffiliateModel extends AffiliateCoreModel
     /**
      * Get the Affiliate's Amount.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      *
-     * @return integer|float The amount
+     * @return int|float The amount
      */
     public function getAmount($iProfileId)
     {

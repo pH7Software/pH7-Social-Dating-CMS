@@ -279,7 +279,7 @@ class UserCoreModel extends Model
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return array|stdClass|int Object for the users list returned or integer for the total number users returned.
+     * @return array|int Object for the users list returned or integer for the total number users returned.
      */
     public function search(array $aParams, $bCount, $iOffset, $iLimit)
     {
