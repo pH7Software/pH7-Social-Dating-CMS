@@ -9,7 +9,6 @@
 namespace PH7\Test\Unit\App\System\Module\Api\Controller;
 
 use GuzzleHttp\Client;
-use PH7\Framework\Api\Tool as ApiTool;
 use PH7\Framework\Mvc\Router\Uri;
 use PHPUnit_Framework_TestCase;
 
