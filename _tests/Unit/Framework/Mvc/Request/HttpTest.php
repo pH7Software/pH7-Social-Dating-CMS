@@ -66,6 +66,15 @@ class HttpTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($sActual);
     }
 
+    public function testGetRequestWithGets()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_GET['name'] = 'value';
+
+        $sActual = $this->oHttpRequest->gets('name');
+        $this->assertSame('value', $sActual);
+    }
+
     public function testPostRequestCastedToInt()
     {
         $_SERVER['REQUEST_METHOD'] = 'POST';
@@ -109,6 +118,15 @@ class HttpTest extends PHPUnit_Framework_TestCase
         $sActual = $this->oHttpRequest->postExists(['key1', 'key2']);
 
         $this->assertTrue($sActual);
+    }
+
+    public function testPostRequestWithGets()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_POST['name'] = 'value';
+
+        $sActual = $this->oHttpRequest->gets('name');
+        $this->assertSame('value', $sActual);
     }
 
     /**
