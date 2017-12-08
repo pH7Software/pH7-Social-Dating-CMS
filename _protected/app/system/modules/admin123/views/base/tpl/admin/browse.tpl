@@ -41,11 +41,12 @@
 
             <tbody>
                 {each $admin in $browse}
+                    {{ $adminId = (int)$admin->profileId }}
                     <tr>
                       <td>
-                          <input type="checkbox" name="action[]" value="{% $admin->profileId %}_{% $admin->username %}" />
+                          <input type="checkbox" name="action[]" value="{adminId}_{% $admin->username %}" />
                       </td>
-                      <td>{% $admin->profileId %}</td>
+                      <td>{adminId}</td>
                       <td>{% $admin->email %}</td>
                       <td>
                           {% $admin->username %}<br />
@@ -68,9 +69,9 @@
                           {/if}
                       </td>
                       <td class="small">
-                          <a href="{{ $design->url(PH7_ADMIN_MOD,'account','edit',$admin->profileId) }}" title="{lang 'Edit this Admin'}">{lang 'Edit'}</a>
-                          {if !AdminCore::isRootProfileId($admin->profileId) }
-                              | {{ $design->popupLinkConfirm(t('Delete'), PH7_ADMIN_MOD, 'admin', 'delete', $admin->profileId.'_'.$admin->username) }}
+                          <a href="{{ $design->url(PH7_ADMIN_MOD,'account','edit',$adminId) }}" title="{lang 'Edit this Admin'}">{lang 'Edit'}</a>
+                          {if !AdminCore::isRootProfileId($adminId) }
+                              | {{ $design->popupLinkConfirm(t('Delete'), PH7_ADMIN_MOD, 'admin', 'delete', $adminId.'_'.$admin->username) }}
                           {/if}
                       </td>
                     </tr>
