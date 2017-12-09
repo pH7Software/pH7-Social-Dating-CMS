@@ -19,6 +19,9 @@ use PH7\Framework\Url\Header;
 
 class FileController extends Controller
 {
+    const PUBLIC_DIR_NAME = 'public';
+    const PROTECTED_DIR_NAME = 'protected';
+
     const THEME_FILE_EXTS = [
         '.tpl',
         '.css',
@@ -38,9 +41,11 @@ class FileController extends Controller
         /* Add the stylesheet files for the Elfinder File Manager */
         $this->design->addCss(PH7_STATIC . 'fileManager/css/', 'elfinder.css,theme.css');
 
-        $sIsDirTxt = ($sDir === 'protected') ? t('Protected') : t('Public');
+        $bIsProtectedDir = $sDir === self::PROTECTED_DIR_NAME;
+
+        $sIsDirTxt = $bIsProtectedDir ? t('Protected') : t('Public');
         $this->sTitle = t('File Manager System | %0%', $sIsDirTxt);
-        $this->view->type = ($sDir === 'protected') ? 'protected' : 'public';
+        $this->view->type = $bIsProtectedDir ? self::PROTECTED_DIR_NAME : self::PUBLIC_DIR_NAME;
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
 
         $this->output();
