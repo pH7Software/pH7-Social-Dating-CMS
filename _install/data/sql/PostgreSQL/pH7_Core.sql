@@ -1109,7 +1109,7 @@ INSERT INTO pH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VA
 ('Newsletter', 'newsletter', '0', '1'),
 ('Invite Friends', 'invite', '0', '1'),
 ('Social Media Auth (connect module)', 'connect', '0', '0'),
-('Webcam', 'webcam', '0', '1');
+('Webcam', 'webcam', '0', '0');
 
 
 CREATE SEQUENCE pH7_Modules_seq;
