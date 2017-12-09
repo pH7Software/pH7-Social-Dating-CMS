@@ -16,6 +16,7 @@ class ConfirmCoreForm
 {
     /**
      * @param array $aParam The parameters
+     *
      * @return void
      */
     public static function display(array $aParam)

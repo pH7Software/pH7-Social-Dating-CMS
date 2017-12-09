@@ -270,6 +270,7 @@ class SettingForm
 
     /**
      * @param File $oFile
+     *
      * @return array
      */
     private static function getTpls(File $oFile)
