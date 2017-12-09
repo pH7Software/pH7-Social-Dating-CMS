@@ -106,8 +106,7 @@ class Page
         $sUrl = preg_replace('#\?.+$#', '', $sCurrentUrl);
 
         if (preg_match('#\?(.+[^\./])=(.+[^\./])$#', $sCurrentUrl)) {
-            $sUrlSlug = (strpos($sCurrentUrl, '&amp;') !== false) ? strrchr($sCurrentUrl, '?') : strrchr($sCurrentUrl, '?');
-            $sPageUrl = $sUrl . $sUrlSlug . '&amp;' . $sVar . '=';
+            $sPageUrl = $sUrl . self::getUrlSlug($sCurrentUrl) . '&amp;' . $sVar . '=';
         } else {
             $sPageUrl = $sUrl . static::trailingSlash($sUrl) . '?' . $sVar . '=';
         }
@@ -122,8 +121,18 @@ class Page
      *
      * @return string
      */
-    protected static function trailingSlash($sUrl)
+    private static function trailingSlash($sUrl)
     {
         return (substr($sUrl, -1) !== PH7_SH && !strstr($sUrl, PH7_PAGE_EXT)) ? PH7_SH : '';
+    }
+
+    /**
+     * @param string $sCurrentUrl
+     *
+     * @return string
+     */
+    private static function getUrlSlug($sCurrentUrl)
+    {
+        return strpos($sCurrentUrl, '&amp;') !== false ? strrchr($sCurrentUrl, '?') : strrchr($sCurrentUrl, '?');
     }
 }
