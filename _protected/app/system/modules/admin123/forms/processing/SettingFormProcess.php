@@ -147,7 +147,7 @@ class SettingFormProcess extends Form
     private function updateGenericFields()
     {
         foreach (self::$aSettingFields as $sKey => $sVal) {
-            if ($sKey == 'security_token_lifetime') {
+            if ($sKey === 'security_token_lifetime') {
                 $iSecTokenLifetime = (int) $this->httpRequest->post('security_token_lifetime');
 
                 if (!$this->str->equals($iSecTokenLifetime, DbConfig::getSetting('securityTokenLifetime'))) {
@@ -196,7 +196,7 @@ class SettingFormProcess extends Form
                     } break;
 
                     default: {
-                        $sMethod = ($sKey == 'site_status' ? 'setSiteMode' : ($sKey == 'social_media_widgets' ? 'setSocialWidgets' : 'setSetting'));
+                        $sMethod = ($sKey === 'site_status' ? 'setSiteMode' : ($sKey === 'social_media_widgets' ? 'setSocialWidgets' : 'setSetting'));
                         DbConfig::$sMethod($this->httpRequest->post($sKey, null, true), $sVal);
                     }
                 }
