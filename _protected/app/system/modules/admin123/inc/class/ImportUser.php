@@ -28,6 +28,8 @@ class ImportUser extends Core
     const ERR_TOO_LARGE = 2;
     const ERR_INVALID = 3;
 
+    const IMPORT_FILE_EXTENSION = 'csv';
+
     /*
      * @var array Array containing the DB data types.
      */
@@ -231,7 +233,7 @@ class ImportUser extends Core
     {
         switch ($iErrType) {
             case static::ERR_BAD_FILE:
-                $sErrMsg = t('Invalid File Format! Please select a valid CSV/TXT file containing data members.');
+                $sErrMsg = t('Invalid File Format! Please select a valid CSV file containing the member data.');
                 break;
 
             case static::ERR_TOO_LARGE:
@@ -320,7 +322,7 @@ class ImportUser extends Core
     {
         $sExtFile = $this->file->getFileExt($this->aFile['name']);
 
-        if ($sExtFile !== 'csv') {
+        if ($sExtFile !== self::IMPORT_FILE_EXTENSION) {
             return static::ERR_BAD_FILE;
         }
 
