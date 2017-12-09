@@ -151,58 +151,51 @@ class SettingFormProcess extends Form
                 $iSecTokenLifetime = (int) $this->httpRequest->post('security_token_lifetime');
 
                 if (!$this->str->equals($iSecTokenLifetime, DbConfig::getSetting('securityTokenLifetime'))) {
-                    if ($iSecTokenLifetime < 10) {
-                        \PFBC\Form::setError('form_setting', t('The token lifetime cannot be below 10 seconds.'));
+                    if ($iSecTokenLifetime < self::MIN_CSRF_TOKEN_LIFETIME) {
+                        \PFBC\Form::setError('form_setting', t('The token lifetime cannot be below %0% seconds.', self::MIN_CSRF_TOKEN_LIFETIME));
                         $this->bIsErr = true;
-                    }
-                    else
+                    } else {
                         DbConfig::setSetting($iSecTokenLifetime, 'securityTokenLifetime');
+                    }
                 }
-            }
-            elseif (!$this->str->equals($this->httpRequest->post($sKey), DbConfig::getSetting($sVal))) {
+            } elseif (!$this->str->equals($this->httpRequest->post($sKey), DbConfig::getSetting($sVal))) {
                 switch ($sKey) {
-                    case 'min_username_length':
-                    {
+                    case 'min_username_length': {
                         $iMaxUsernameLength = $this->httpRequest->post('max_username_length')-1;
-                        if ($this->httpRequest->post('min_username_length') > $iMaxUsernameLength)
-                        {
+                        if ($this->httpRequest->post('min_username_length') > $iMaxUsernameLength) {
                             \PFBC\Form::setError('form_setting', t('The minimum length of the username cannot exceed %0% characters.', $iMaxUsernameLength));
                              $this->bIsErr = true;
-                         }
-                         else
-                             DbConfig::setSetting($this->httpRequest->post('min_username_length'), 'minUsernameLength');
+                         } else {
+                            DbConfig::setSetting($this->httpRequest->post('min_username_length'), 'minUsernameLength');
+                        }
                     } break;
 
-                    case 'max_username_length':
-                    {
-                        if ($this->httpRequest->post('max_username_length') > PH7_MAX_USERNAME_LENGTH)
-                        {
+                    case 'max_username_length': {
+                        if ($this->httpRequest->post('max_username_length') > PH7_MAX_USERNAME_LENGTH) {
                             \PFBC\Form::setError('form_setting', t('The maximum length of the username cannot exceed %0% characters.', PH7_MAX_USERNAME_LENGTH));
                             $this->bIsErr = true;
-                        }
-                        else
+                        } else {
                             DbConfig::setSetting($this->httpRequest->post('max_username_length'), 'maxUsernameLength');
+                        }
                     } break;
 
-                    case 'min_age_registration':
-                    {
-                        if ($this->httpRequest->post('min_age_registration') >= $this->httpRequest->post('max_age_registration'))
-                        {
+                    case 'min_age_registration': {
+                        if ($this->httpRequest->post('min_age_registration') >= $this->httpRequest->post('max_age_registration')) {
                             \PFBC\Form::setError('form_setting', t('You cannot specify a minimum age higher than the maximum age.'));
                             $this->bIsErr = true;
-                        }
-                        else
+                        } else {
                             DbConfig::setSetting($this->httpRequest->post('min_age_registration'), 'minAgeRegistration');
+                        }
                     } break;
 
-                    case 'size_watermark_text_image':
-                    {
-                        if ($this->httpRequest->post('size_watermark_text_image') >= 0 && $this->httpRequest->post('size_watermark_text_image') <= 5)
+                    case 'size_watermark_text_image': {
+                        if ($this->httpRequest->post('size_watermark_text_image') >= 0 &&
+                            $this->httpRequest->post('size_watermark_text_image') <= 5) {
                             DbConfig::setSetting($this->httpRequest->post('size_watermark_text_image'), 'sizeWatermarkTextImage');
+                        }
                     } break;
 
-                    default:
-                    {
+                    default: {
                         $sMethod = ($sKey == 'site_status' ? 'setSiteMode' : ($sKey == 'social_media_widgets' ? 'setSocialWidgets' : 'setSetting'));
                         DbConfig::$sMethod($this->httpRequest->post($sKey, null, true), $sVal);
                     }
