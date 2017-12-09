@@ -19,6 +19,7 @@ interface Api
      * Get Checkout URL.
      *
      * @param string $sOptionalParam Default ''
+     *
      * @return string
      */
     public function getUrl($sOptionalParam = '');

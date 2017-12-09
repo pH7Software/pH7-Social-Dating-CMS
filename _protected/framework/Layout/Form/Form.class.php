@@ -51,6 +51,7 @@ abstract class Form extends Core
      * Launch Wrong HTTP Request Method Message.
      *
      * @param string $sMethodName
+     *
      * @return string
      */
     public static function wrongRequestMethodMsg($sMethodName)
@@ -72,6 +73,7 @@ abstract class Form extends Core
      * Number of connection attempts exceeded.
      *
      * @param integer $iWaitTime
+     *
      * @return string
      */
     public static function loginAttemptsExceededMsg($iWaitTime)
@@ -108,6 +110,7 @@ abstract class Form extends Core
      * Wait to write a new message (mainly to reduce spam).
      *
      * @param integer $iWaitTime (in munutes)
+     *
      * @return string
      */
     public static function waitWriteMsg($iWaitTime)
@@ -119,6 +122,7 @@ abstract class Form extends Core
      * Wait to new registration (mainly to reduce spam).
      *
      * @param integer $iWaitTime (in munutes)
+     *
      * @return string
      */
     public static function waitRegistrationMsg($iWaitTime)
@@ -130,6 +134,7 @@ abstract class Form extends Core
      * Get Time text.
      *
      * @param integer $iWaitTime
+     *
      * @return integer
      */
     private static function _getTimeText($iWaitTime)
@@ -143,6 +148,7 @@ abstract class Form extends Core
      * Conversion time if necessary (we do not do the conversion of minutes so you should rather take hours sharp (same thing for days).
      *
      * @param integer $iWaitTime
+     *
      * @return integer
      */
     private static function _convertTime($iWaitTime)

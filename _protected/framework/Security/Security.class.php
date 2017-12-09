@@ -107,8 +107,8 @@ final class Security
     {
         return Various::padStr(
             hash(self::WHIRLPOOL_ALGORITHM, hash(self::SHA512_ALGORITHM, self::PREFIX_SALT . hash(self::WHIRLPOOL_ALGORITHM, self::PREFIX_SALT)) . hash(self::WHIRLPOOL_ALGORITHM, $sVal) . hash(self::SHA512_ALGORITHM, hash(self::WHIRLPOOL_ALGORITHM, self::SUFFIX_SALT) . self::SUFFIX_SALT)),
-             $iLength
-         );
+            $iLength
+        );
     }
 
     /**
