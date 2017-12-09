@@ -123,7 +123,7 @@ class BlogModel extends BlogCoreModel
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return int|array|\stdClass
+     * @return int|array
      */
     public function category($sCategoryName, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
@@ -170,7 +170,7 @@ class BlogModel extends BlogCoreModel
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return int|\stdClass|array
+     * @return int|array
      */
     public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {

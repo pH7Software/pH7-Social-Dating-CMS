@@ -60,7 +60,7 @@ class GameModel extends GameCoreModel
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return int|array|\stdClass
+     * @return int|array
      */
     public function category($sCategoryName, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
@@ -131,7 +131,7 @@ class GameModel extends GameCoreModel
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return int|\stdClass|array Returns int for the number games returned or DB object containing the games list.
+     * @return int|array Returns int for the number games returned or DB object containing the games list.
      */
     public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {

@@ -168,7 +168,7 @@ class NoteModel extends NoteCoreModel
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return int|array|\stdClass
+     * @return int|array
      */
     public function category($sCategoryName, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
@@ -215,7 +215,7 @@ class NoteModel extends NoteCoreModel
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return int|array|\stdClass
+     * @return int|array
      */
     public function author($sAuthor, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
@@ -263,7 +263,7 @@ class NoteModel extends NoteCoreModel
      * @param int $iLimit
      * @param int $iApproved (0 = Unmoderated | 1 = Approved | NULL = unmoderated and approved) Default 1
      *
-     * @return int|array|\stdClass (integer for the number notes returned or an object containing the notes list)
+     * @return int|array (integer for the number notes returned or an object containing the notes list)
      */
     public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $iApproved = 1)
     {
