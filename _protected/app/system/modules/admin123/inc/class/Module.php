@@ -275,6 +275,7 @@ class Module
      * Checks if the constant is correct.
      *
      * Note: This method is valid only for public methods, it is not necessary to check the private methods.
+     *
      * @param string $sSwitch The check constant.
      *
      * @return string Returns the constant if it is correct, otherwise an error message with exit() function.

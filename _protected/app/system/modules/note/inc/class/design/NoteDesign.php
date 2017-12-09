@@ -14,6 +14,7 @@ class NoteDesign extends WriteDesignCoreModel
 {
     /**
      * @param object $oNoteModel
+     *
      * @return void Output the URL of the thumbnail.
      */
     public static function thumb($oNoteModel)

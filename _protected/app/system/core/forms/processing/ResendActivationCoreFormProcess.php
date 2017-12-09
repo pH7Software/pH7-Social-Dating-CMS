@@ -43,6 +43,7 @@ class ResendActivationCoreFormProcess extends Form
      *
      * @param \stdClass $oHash User data from the DB.
      * @param string $sTable Table name.
+     *
      * @return int Number of recipients who were accepted for delivery.
      */
     protected function sendMail($oHash, $sTable)
