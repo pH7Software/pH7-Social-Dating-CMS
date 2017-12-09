@@ -18,6 +18,9 @@ use PH7\Framework\Navigation\Browser;
 class SettingFormProcess extends Form
 {
     const LOGO_FILENAME = 'logo.png';
+    const MIN_CSRF_TOKEN_LIFETIME = 10;
+    const LOGO_WIDTH = 250;
+    const LOGO_HEIGHT = 60;
 
     /** @var boolean */
     private $bIsErr = false;
@@ -224,7 +227,7 @@ class SettingFormProcess extends Form
                  */
                 $sPathName = PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . self::LOGO_FILENAME;
                 $this->file->deleteFile($sPathName); // It erases the old logo.
-                $oLogo->dynamicResize(250, 60);
+                $oLogo->dynamicResize(self::LOGO_WIDTH, self::LOGO_HEIGHT);
                 $oLogo->save($sPathName);
 
                 // Clear CSS cache, because the logo is storaged with data URI in the CSS cache file
