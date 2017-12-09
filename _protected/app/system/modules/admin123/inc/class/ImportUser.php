@@ -130,7 +130,7 @@ class ImportUser extends Core
     }
 
     /**
-     * Set default values for the "ImportUser::$_aTmpData" array.
+     * Set default values for the "ImportUser::$aTmpData" array.
      *
      * @return void
      */
@@ -164,7 +164,7 @@ class ImportUser extends Core
             // Clean the text to make comparisons easier...
             $sVal = strtolower(trim(str_replace(['-', '_', ' '], '', $sVal)));
 
-            // Test comparisons of strings and adding values in an array "ImportUser::$_aTmpData"
+            // Test comparisons of strings and adding values in an array "ImportUser::$aTmpData"
             if ($sVal === 'username' || $sVal === 'login' || $sVal === 'user' || $sVal === 'nickname') {
                 $this->aTmpData['username'] = $sKey;
             }
