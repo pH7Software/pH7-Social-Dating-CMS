@@ -133,7 +133,7 @@ class MainController extends Controller
      */
     protected function update2FaStatus()
     {
-        $this->iIsEnabled = ($this->iIsEnabled === 1) ? 0 : 1; // Get the opposite value (if 1 so 0 | if 0 so 1)
+        $this->iIsEnabled = $this->iIsEnabled === 1 ? 0 : 1; // Get the opposite value (if 1 so 0 | if 0 so 1)
 
         $this->o2FactorModel->setStatus($this->iIsEnabled, $this->iProfileId);
     }
