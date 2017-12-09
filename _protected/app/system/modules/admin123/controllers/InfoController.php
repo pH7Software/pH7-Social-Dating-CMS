@@ -23,7 +23,13 @@ class InfoController extends Controller
 
     public function index()
     {
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'info', 'software'));
+        Header::redirect(
+            Uri::get(
+                PH7_ADMIN_MOD,
+                'info',
+                'software'
+            )
+        );
     }
 
     public function language()
@@ -49,7 +55,7 @@ class InfoController extends Controller
 
     private function getTweetPost()
     {
-        $sMsg = t("I built my social dating business with #pH7CMS -> %0% \n%1%" , Kernel::SOFTWARE_TWITTER, Kernel::SOFTWARE_GIT_REPO);
+        $sMsg = t("I built my social dating business with #pH7CMS -> %0% \n%1%", Kernel::SOFTWARE_TWITTER, Kernel::SOFTWARE_GIT_REPO);
 
         return self::TWITTER_TWEET_URL . Url::encode($sMsg);
     }
