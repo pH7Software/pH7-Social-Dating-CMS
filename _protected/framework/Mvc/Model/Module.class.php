@@ -21,6 +21,7 @@ class Module extends Engine\Model
      * Get all modules status (enabled & disabled).
      *
      * @param string $sFolderName Name of the module folder. Default: NULL
+     *
      * @return \stdClass
      */
     public function get($sFolderName = null)

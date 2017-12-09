@@ -151,6 +151,7 @@ class Db
      * Execute an SQL statement and return the number of affected rows.
      *
      * @param string $sStatement
+     *
      * @return bool|int
      */
     public function exec($sStatement)

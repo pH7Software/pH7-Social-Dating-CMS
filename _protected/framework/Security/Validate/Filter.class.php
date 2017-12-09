@@ -262,6 +262,7 @@ class Filter
      *
      * @param    mixed    string or array
      * @param     bool
+     *
      * @return    string
      */
     public function xssClean($str, $is_image = FALSE)
@@ -487,6 +488,7 @@ class Filter
      *
      * @param    string
      * @param    string
+     *
      * @return    string
      */
     public function entity_decode($str, $charset = 'UTF-8')
@@ -507,6 +509,7 @@ class Filter
      *
      * @param    string
      * @param     bool
+     *
      * @return    string
      */
     public function sanitize_filename($str, $relative_path = FALSE)
@@ -563,6 +566,7 @@ class Filter
      * things like j a v a s c r i p t
      *
      * @param    type
+     *
      * @return    type
      */
     protected function _compact_exploded_words($matches)
@@ -643,6 +647,7 @@ class Filter
      * Callback function for xssClean() to remove naughty HTML elements
      *
      * @param    array
+     *
      * @return    string
      */
     protected function _sanitize_naughty_html($matches)
@@ -668,6 +673,7 @@ class Filter
      * PHP 5.2+ on link-heavy strings
      *
      * @param    array
+     *
      * @return    string
      */
     protected function _js_link_removal($match)
@@ -688,6 +694,7 @@ class Filter
      * PHP 5.2+ on image tag heavy strings
      *
      * @param    array
+     *
      * @return    string
      */
     protected function _js_img_removal($match)
@@ -705,6 +712,7 @@ class Filter
      * Used as a callback for XSS Clean
      *
      * @param    array
+     *
      * @return    string
      */
     protected function _convert_attribute($match)
@@ -720,6 +728,7 @@ class Filter
      * Filters tag attributes for consistency and safety
      *
      * @param    string
+     *
      * @return    string
      */
     protected function _filter_attributes($str)
@@ -743,6 +752,7 @@ class Filter
      * Used as a callback for XSS Clean
      *
      * @param    array
+     *
      * @return    string
      */
     protected function _decode_entity($match)
@@ -758,6 +768,7 @@ class Filter
      * Called by xssClean()
      *
      * @param     string
+     *
      * @return     string
      */
     protected function _validate_entities($str)
@@ -803,6 +814,7 @@ class Filter
      * A utility function for xssClean()
      *
      * @param     string
+     *
      * @return     string
      */
     protected function _do_never_allowed($str)
@@ -916,7 +928,9 @@ function config_item($item)
  * between ascii characters, like Java\0script.
  *
  * @access    public
+ *
  * @param    string
+ *
  * @return    string
  */
 function remove_invisible_characters($str, $url_encoded = TRUE)

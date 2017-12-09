@@ -169,6 +169,7 @@ class Api
      * HYBRID, TERRAIN, ROADMAP, SATELLITE
      *
      * @param string $type
+     *
      * @return void
      */
     public function setMapType($type)

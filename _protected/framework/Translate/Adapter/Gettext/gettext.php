@@ -90,6 +90,7 @@ class gettext_reader
      * Reads an array of Integers from the Stream
      *
      * @param int count How many elements should be read
+     *
      * @return Array of Integers
      */
     function readintarray($count)
@@ -183,7 +184,9 @@ class gettext_reader
      * Returns a string from the "originals" table
      *
      * @access private
+     *
      * @param int num Offset number of original string
+     *
      * @return string Requested string if found, otherwise ''
      */
     function get_original_string($num)
@@ -201,7 +204,9 @@ class gettext_reader
      * Returns a string from the "translations" table
      *
      * @access private
+     *
      * @param int num Offset number of original string
+     *
      * @return string Requested string if found, otherwise ''
      */
     function get_translation_string($num)
@@ -219,9 +224,11 @@ class gettext_reader
      * Binary search for string
      *
      * @access private
+     *
      * @param string string
      * @param int start (internally used in recursive function)
      * @param int end (internally used in recursive function)
+     *
      * @return int string number (offset in originals table)
      */
     function find_string($string, $start = -1, $end = -1)
@@ -261,7 +268,9 @@ class gettext_reader
      * Translates a string
      *
      * @access public
+     *
      * @param string string to be translated
+     *
      * @return string translated string (or original, if not found)
      */
     function translate($string)
@@ -366,7 +375,9 @@ class gettext_reader
      * Detects which plural form to take
      *
      * @access private
+     *
      * @param n count
+     *
      * @return int array index of the right plural form
      */
     function select_string($n)
@@ -392,9 +403,11 @@ class gettext_reader
      * Plural version of gettext
      *
      * @access public
+     *
      * @param string single
      * @param string plural
      * @param string number
+     *
      * @return translated plural form
      */
     function ngettext($single, $plural, $number)
