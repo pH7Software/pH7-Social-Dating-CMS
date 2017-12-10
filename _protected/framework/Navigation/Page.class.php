@@ -108,7 +108,7 @@ class Page
         if (preg_match('#\?(.+[^\./])=(.+[^\./])$#', $sCurrentUrl)) {
             $sPageUrl = $sUrl . self::getUrlSlug($sCurrentUrl) . '&amp;' . $sVar . '=';
         } else {
-            $sPageUrl = $sUrl . static::trailingSlash($sUrl) . '?' . $sVar . '=';
+            $sPageUrl = $sUrl . self::trailingSlash($sUrl) . '?' . $sVar . '=';
         }
 
         return $sPageUrl;
