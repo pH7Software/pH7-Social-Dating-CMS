@@ -118,12 +118,10 @@ class Page
         $sUrl = preg_replace('#\?.+$#', '', $sCurrentUrl);
 
         if (preg_match('#\?(.+[^\./])=(.+[^\./])$#', $sCurrentUrl)) {
-            $sPageUrl = $sUrl . self::getUrlSlug($sCurrentUrl) . '&amp;' . $sVar . '=';
-        } else {
-            $sPageUrl = $sUrl . self::trailingSlash($sUrl) . '?' . $sVar . '=';
+            return $sUrl . self::getUrlSlug($sCurrentUrl) . '&amp;' . $sVar . '=';
         }
 
-        return $sPageUrl;
+        return $sUrl . self::trailingSlash($sUrl) . '?' . $sVar . '=';
     }
 
     /**
