@@ -133,7 +133,7 @@ class Page
      */
     private static function trailingSlash($sUrl)
     {
-        return (substr($sUrl, -1) !== PH7_SH && !strstr($sUrl, PH7_PAGE_EXT)) ? PH7_SH : '';
+        return substr($sUrl, -1) !== PH7_SH && !strstr($sUrl, PH7_PAGE_EXT) ? PH7_SH : '';
     }
 
     /**
