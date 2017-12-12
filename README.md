@@ -190,14 +190,14 @@ For more information, please refer to the nginx documentation.
 You can find and add other languages on the [I18N repo](https://github.com/pH7Software/pH7-Internationalization).
 
 
-## Author
+## The Author
 
-**[Pierre-Henry Soria](http://ph7.me)**
+Made with lots of ❤️ by [Pierre-Henry Soria](http://ph7.me). A passionate Belgian engineer 🍫🍺
 
 
-## Website
+## Official Website
 
-**[pH7CMS Social Dating Script](http://ph7cms.com)**
+[pH7CMS.com](http://ph7cms.com)
 
 
 ## Documentation
