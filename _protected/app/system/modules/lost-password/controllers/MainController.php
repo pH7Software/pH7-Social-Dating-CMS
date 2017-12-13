@@ -37,13 +37,27 @@ class MainController extends Controller
         $this->output();
     }
 
+    /**
+     * @param string $sMod
+     *
+     * @return void
+     */
     private function checkMod($sMod)
     {
-        if ($sMod !== 'user' && $sMod !== 'affiliate' && $sMod !== PH7_ADMIN_MOD) {
+        $aMods = ['user', 'affiliate', PH7_ADMIN_MOD];
+
+        if (!in_array($sMod, $aMods, true)) {
             Header::redirect($this->registry->site_url, t('No module found!'), Design::ERROR_TYPE);
         }
     }
 
+    /**
+     * @param string $sMod
+     * @param string $sEmail
+     * @param string $sHash
+     *
+     * @return void
+     */
     public function reset($sMod = '', $sEmail = '', $sHash = '')
     {
         $this->checkMod($sMod);
