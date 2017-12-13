@@ -136,7 +136,7 @@ class AvatarDesignCore extends Design
     {
         // It works only on non-local URLs, so check if we aren't on dev environments (e.g. http://127.0.0.1)
         return AdminCore::auth() &&
-            Registry::getInstance()->controller === 'ModeratorController'
-            && !Server::isLocalHost();
+            Registry::getInstance()->controller === 'ModeratorController' &&
+            !Server::isLocalHost();
     }
 }
