@@ -29,24 +29,25 @@ class GameCoreModel extends Model
     {
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
+        $bIsTitle = $sTitle !== null;
+        $bIsGameId = $iGameId !== null;
 
         $sOrderBy = SearchCoreModel::order($sOrder, SearchCoreModel::DESC);
 
-        $sSqlGameId = isset($iGameId) ? ' WHERE title LIKE :title AND gameId =:gameId ' : '';
+        $sSqlGameId = ($bIsTitle && $bIsGameId) ? ' WHERE title LIKE :title AND gameId =:gameId ' : '';
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Games') . $sSqlGameId . $sOrderBy . 'LIMIT :offset, :limit');
-        if (isset($sTitle, $iGameId)) {
+        if ($bIsTitle) {
             $rStmt->bindValue(':title', $sTitle . '%', \PDO::PARAM_STR);
         }
-        if (isset($sTitle, $iGameId)) {
+        if ($bIsGameId) {
             $rStmt->bindValue(':gameId', $iGameId, \PDO::PARAM_INT);
         }
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
-        $mData = !empty($iGameId) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        $mData = $bIsGameId ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);
 
         return $mData;
     }
-
 }
