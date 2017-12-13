@@ -39,20 +39,6 @@ class MainController extends Controller
 
     /**
      * @param string $sMod
-     *
-     * @return void
-     */
-    private function checkMod($sMod)
-    {
-        $aMods = ['user', 'affiliate', PH7_ADMIN_MOD];
-
-        if (!in_array($sMod, $aMods, true)) {
-            Header::redirect($this->registry->site_url, t('No module found!'), Design::ERROR_TYPE);
-        }
-    }
-
-    /**
-     * @param string $sMod
      * @param string $sEmail
      * @param string $sHash
      *
@@ -73,6 +59,24 @@ class MainController extends Controller
                 Header::redirect($this->registry->site_url, t('Your new password has been emailed to you.'), Design::SUCCESS_TYPE);
             }
         }
+    }
+
+    /**
+     * @return void
+     */
+    public function account()
+    {
+        if (UserCore::auth()) {
+            $sUrl = Uri::get('user', 'account', 'index');
+        } elseif (AffiliateCore::auth()) {
+            $sUrl = Uri::get('affiliate', 'account', 'index');
+        } elseif (AdminCore::auth()) {
+            $sUrl = Uri::get(PH7_ADMIN_MOD, 'main', 'index');
+        } else {
+            $sUrl = $this->registry->site_url;
+        }
+
+        Header::redirect($sUrl);
     }
 
     /**
@@ -107,24 +111,6 @@ class MainController extends Controller
     }
 
     /**
-     * @return void
-     */
-    public function account()
-    {
-        if (UserCore::auth()) {
-            $sUrl = Uri::get('user', 'account', 'index');
-        } elseif (AffiliateCore::auth()) {
-            $sUrl = Uri::get('affiliate', 'account', 'index');
-        } elseif (AdminCore::auth()) {
-            $sUrl = Uri::get(PH7_ADMIN_MOD, 'main', 'index');
-        } else {
-            $sUrl = $this->registry->site_url;
-        }
-
-        Header::redirect($sUrl);
-    }
-
-    /**
      * @param string $sTableName
      *
      * @return string
@@ -140,6 +126,20 @@ class MainController extends Controller
 
             case 'Admins':
                 return Uri::get(PH7_ADMIN_MOD, 'main', 'login');
+        }
+    }
+
+    /**
+     * @param string $sMod
+     *
+     * @return void
+     */
+    private function checkMod($sMod)
+    {
+        $aMods = ['user', 'affiliate', PH7_ADMIN_MOD];
+
+        if (!in_array($sMod, $aMods, true)) {
+            Header::redirect($this->registry->site_url, t('No module found!'), Design::ERROR_TYPE);
         }
     }
 }
