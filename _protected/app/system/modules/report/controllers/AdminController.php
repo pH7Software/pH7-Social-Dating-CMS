@@ -103,6 +103,9 @@ class AdminController extends Controller
             $this->sMsg = t('Report successfully deleted.');
         }
 
-        Header::redirect(Uri::get('report', 'admin', 'index'), $this->sMsg);
+        Header::redirect(
+            Uri::get('report', 'admin', 'index'),
+            $this->sMsg
+        );
     }
 }

@@ -139,7 +139,11 @@ class MainController extends Controller
         $aMods = ['user', 'affiliate', PH7_ADMIN_MOD];
 
         if (!in_array($sMod, $aMods, true)) {
-            Header::redirect($this->registry->site_url, t('No module found!'), Design::ERROR_TYPE);
+            Header::redirect(
+                $this->registry->site_url,
+                t('Module not found!'),
+                Design::ERROR_TYPE
+            );
         }
     }
 }
