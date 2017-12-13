@@ -21,7 +21,7 @@ class AdsCoreModel extends Ads
      * @param int|null $mActive 1 = active otherwise null. Default value is 1.
      * @param string $sTable The table.
      *
-     * @return \stdClass The advertisements data.
+     * @return array The advertisements data.
      */
     public function get($mActive = 1, $iOffset, $iLimit, $sTable = AdsCore::AD_TABLE_NAME)
     {
