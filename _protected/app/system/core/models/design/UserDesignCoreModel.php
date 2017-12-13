@@ -45,13 +45,17 @@ class UserDesignCoreModel extends Design
      *
      * @param string $sCountryCode Optional The country code (e.g., GB, RU, FR, ES, ...). Default ''
      * @param string $sCity Optional. The city name. Default ''
-     * @param integer $iOffset Optional. Default 0
-     * @param integer $iLimit Optional. Default 14
+     * @param int $iOffset Optional. Default 0
+     * @param int $iLimit Optional. Default 14
      *
      * @return void HTML output.
      */
-    public function geoProfiles($sCountryCode = '', $sCity = '', $iOffset = 0, $iLimit = self::GEO_PROFILE_LIMIT)
-    {
+    public function geoProfiles(
+        $sCountryCode = '',
+        $sCity = '',
+        $iOffset = UserCoreModel::OFFLINE_STATUS,
+        $iLimit = self::GEO_PROFILE_LIMIT
+    ) {
         $oUserGeo = $this->oUserModel->getGeoProfiles($sCountryCode, $sCity, false, SearchCoreModel::LAST_ACTIVITY, $iOffset, $iLimit);
         if (empty($oUserGeo)) {
             return;
