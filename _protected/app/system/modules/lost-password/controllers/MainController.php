@@ -20,6 +20,11 @@ class MainController extends Controller
 {
     const DEFAULT_PASSWORD_LENGTH = 8;
 
+    /**
+     * @param string $sMod
+     *
+     * @return void
+     */
     public function forgot($sMod = '')
     {
         // For better SEO, exclude not interesting pages from search engines
@@ -87,6 +92,9 @@ class MainController extends Controller
         return (new Mail)->send($aInfo, $sMessageHtml);
     }
 
+    /**
+     * @return void
+     */
     public function account()
     {
         if (UserCore::auth()) {
