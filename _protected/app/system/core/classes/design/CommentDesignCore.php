@@ -29,9 +29,7 @@ class CommentDesignCore
      */
     public static function link($iId, $sTable)
     {
-        $oCommentModel = new CommentCoreModel;
-        $iCommentNumber = $oCommentModel->total($iId, $sTable);
-        unset($oCommentModel);
+        $iCommentNumber = (new CommentCoreModel)->total($iId, $sTable);
 
         echo '<p class="s_marg"><a class="underline" href="', Uri::get('comment', 'comment', 'add', "$sTable,$iId"), '">', t('Add a comment'), '</a>';
 
