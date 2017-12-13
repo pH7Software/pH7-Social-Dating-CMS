@@ -9,14 +9,21 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Model;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 
 // Abstract Class
-class RatingCoreModel extends Framework\Mvc\Model\Engine\Model
+class RatingCoreModel extends Model
 {
+    const CACHE_GROUP = 'db/sys/core/rating';
+    const CACHE_TIME = 604800;
 
-    const CACHE_GROUP = 'db/sys/core/rating', CACHE_TIME = 604800;
-
+    /**
+     * @param int $iId
+     * @param string $sTable
+     *
+     * @return int
+     */
     public function getVote($iId, $sTable)
     {
         $this->cache->start(self::CACHE_GROUP, 'getVote' . $iId . $sTable, static::
