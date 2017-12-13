@@ -30,20 +30,20 @@ class BirthdayCoreModel
      * @param int $iOffset Default: NULL
      * @param int $iLimit Default: NULL
      *
-     * @return \stdClass|int object for the birthdays list returned or integer for the total number birthdays returned.
+     * @return array|int object for the birthdays list returned or integer for the total number birthdays returned.
      */
     public function get($sGender = self::ALL, $bCount = false, $sOrderBy = SearchCoreModel::LAST_ACTIVITY, $iSort = SearchCoreModel::DESC, $iOffset = null, $iLimit = null)
     {
-        $bIsLimit = (null !== $iOffset && null !== $iLimit);
-        $bIsSex = ($sGender !== self::ALL);
+        $bIsLimit = iOffset !== null && $iLimit !== null;
+        $bIsSex = $sGender !== self::ALL;
 
         $bCount = (bool)$bCount;
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
         $sSqlLimit = (!$bCount && $bIsLimit) ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(profileId) AS totalBirths';
-        $sSqlWhere = ($bIsSex) ? ' AND (sex = :sex) ' : '';
+        $sSqlSelect = !$bCount ? '*' : 'COUNT(profileId) AS totalBirths';
+        $sSqlWhere = $bIsSex ? ' AND (sex = :sex) ' : '';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (groupId <> 1) AND (groupId <> 9) AND (birthDate LIKE :date)' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
@@ -60,13 +60,15 @@ class BirthdayCoreModel
         $rStmt->execute();
 
         if (!$bCount) {
-            $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $aRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            return $oRow;
-        } else {
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
-            return (int)$oRow->totalBirths;
+
+            return $aRow;
         }
+
+        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        Db::free($rStmt);
+
+        return (int)$oRow->totalBirths;
     }
 }
