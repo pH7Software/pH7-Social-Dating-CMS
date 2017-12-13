@@ -40,7 +40,7 @@ class PrivacyForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<h3><u>' . t('Show profile visitors:') . '</u></h3>'));
         $oForm->addElement(new \PFBC\Element\Radio(t('Would you like to display members that have viewed your profile?'), 'user_save_views', array('yes' => t('Yes, display members who viewed my profile (Selecting this option will allow other members to see that you visited their profile).'), 'no' => t('No, don\'t display members who viewed my profile. (Selecting this option will prevent you from seeing who visited your profile).')), array('value' => $oPrivacy->userSaveViews, 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<h3><u>' . t('Presence:') . '</u></h3>'));
-        $oForm->addElement(new \PFBC\Element\Select(t('Your status'), 'user_status', array('1' => t('Online'), '2' => t('Busy'), '3' => t('Away'), '0' => 'Offline'), array('id' => 'status', 'onchange' => 'init_status()', 'value' => $oUserModel->getUserStatus($iProfileId), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Your status'), 'user_status', array(UserModel::ONLINE_STATUS => t('Online'), UserModel::BUSY_STATUS => t('Busy'), UserModel::AWAY_STATUS => t('Away'), UserModel::OFFLINE_STATUS => 'Offline'), array('id' => 'status', 'onchange' => 'init_status()', 'value' => $oUserModel->getUserStatus($iProfileId), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="user_status right" id="status_div"></div>'));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script>$(function(){ init_status() });</script>'));
         $oForm->addElement(new \PFBC\Element\Button);

@@ -28,6 +28,11 @@ class UserCoreModel extends Model
     const CACHE_GROUP = 'db/sys/mod/user';
     const CACHE_TIME = 604800;
 
+    const OFFLINE_STATUS = 0;
+    const ONLINE_STATUS = 1;
+    const BUSY_STATUS = 2;
+    const AWAY_STATUS = 3;
+
     /** @var string */
     protected $sCurrentDate;
 
@@ -319,7 +324,7 @@ class UserCoreModel extends Model
         $sSqlState = $bIsState ? ' AND state LIKE :state ' : '';
         $sSqlZipCode = $bIsZipCode ? ' AND zipCode LIKE :zipCode ' : '';
         $sSqlEmail = $bIsMail ? ' AND email LIKE :email ' : '';
-        $sSqlOnline = $bIsOnline ? ' AND userStatus = 1 AND lastActivity > DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL ' . DbConfig::getSetting('userTimeout') . ' MINUTE) ' : '';
+        $sSqlOnline = $bIsOnline ? ' AND userStatus = :userStatus AND lastActivity > DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL ' . DbConfig::getSetting('userTimeout') . ' MINUTE) ' : '';
         $sSqlAvatar = $bIsAvatar ? $this->getUserWithAvatarOnlySql() : '';
         $sSqlHideLoggedProfile = $bHideUserLogged ? ' AND (m.profileId <> :profileId)' : '';
 
@@ -406,6 +411,9 @@ class UserCoreModel extends Model
         if ($bIsMail) {
             $rStmt->bindValue(':email', '%' . $aParams[SearchQueryCore::EMAIL] . '%', \PDO::PARAM_STR);
         }
+        if ($bIsOnline) {
+            $rStmt->bindValue(':userStatus', self::ONLINE_STATUS, \PDO::PARAM_INT);
+        }
         if ($bHideUserLogged) {
             $rStmt->bindValue(':profileId', $this->iProfileId, \PDO::PARAM_INT);
         }
@@ -443,8 +451,9 @@ class UserCoreModel extends Model
         $iTime = (int)$iTime;
 
         $rStmt = Db::getInstance()->prepare('SELECT profileId FROM' . Db::prefix('Members') . 'WHERE profileId = :profileId
-            AND userStatus = 1 AND lastActivity >= DATE_SUB(:currentTime, INTERVAL :time MINUTE) LIMIT 1');
+            AND userStatus = :userStatus AND lastActivity >= DATE_SUB(:currentTime, INTERVAL :time MINUTE) LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':userStatus', self::ONLINE_STATUS, \PDO::PARAM_INT);
         $rStmt->bindValue(':time', $iTime, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $this->sCurrentDate, \PDO::PARAM_STR);
         $rStmt->execute();
