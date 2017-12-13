@@ -8,7 +8,9 @@
 
 namespace PH7;
 
-class UserDesignCore extends Framework\Layout\Html\Design
+use PH7\Framework\Layout\Html\Design;
+
+class UserDesignCore extends Design
 {
     /**
      * Ajax counter endpoint to count the number of users registered on the site.
