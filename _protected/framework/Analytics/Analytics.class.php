@@ -21,9 +21,9 @@ class Analytics extends StoreStats
     /**
      * OS list.
      *
-     * @staticvar array $_aOs
+     * @staticvar array $aOs
      */
-    private static $_aOs = [
+    private static $aOs = [
         'windows nt 6.2' => 'Windows 8',
         'windows nt 6.1' => 'Windows Seven',
         'windows nt 6.0' => 'Windows Longhorn',
@@ -104,9 +104,9 @@ class Analytics extends StoreStats
     /**
      * Web browser list.
      *
-     * @staticvar array $_aWebBrowsers
+     * @staticvar array $aWebBrowsers
      */
-    private static $_aWebBrowsers = [
+    private static $aWebBrowsers = [
         'msie|internet explorer' => 'Internet Explorer',
         'firefox' => 'Firefox',
         'safari' => 'Safari',
@@ -140,9 +140,9 @@ class Analytics extends StoreStats
     /**
      * Search engine bots list.
      *
-     * @staticvar array $_aRobots
+     * @staticvar array $aRobots
      */
-    private static $_aRobots = [
+    private static $aRobots = [
         'googlebot' => 'Google',
         'msnbot' => 'Bing',
         'slurp' => 'Inktomi Slurp',
@@ -158,9 +158,9 @@ class Analytics extends StoreStats
     /**
      * Search engine IP bots list.
      *
-     * @staticvar array $_aIpRobots
+     * @staticvar array $aIpRobots
      */
-    private static $_aIpRobots = [
+    private static $aIpRobots = [
         '74.125.130.105' => 'Google',
         '131.253.13.32' => 'Bing',
     ];
@@ -168,9 +168,9 @@ class Analytics extends StoreStats
     /**
      * Keywords.
      *
-     * @staticvar array $_aKeywords
+     * @staticvar array $aKeywords
      */
-    private static $_aKeywords = [
+    private static $aKeywords = [
         'google',
         'bing',
         'ask',
@@ -181,18 +181,18 @@ class Analytics extends StoreStats
     ];
 
     /** @var null|string */
-    private $_sUserAgent;
+    private $sUserAgent;
     /** @var null|string */
-    private $_sReferer;
+    private $sReferer;
     /** @var string */
-    private $_sUserLang;
+    private $sUserLang;
 
     public function __construct()
     {
         $oBrowser = new Browser;
-        $this->_sUserAgent = $oBrowser->getUserAgent();
-        $this->_sReferer = $oBrowser->getHttpReferer();
-        $this->_sUserLang = $oBrowser->getLanguage();
+        $this->sUserAgent = $oBrowser->getUserAgent();
+        $this->sReferer = $oBrowser->getHttpReferer();
+        $this->sUserLang = $oBrowser->getLanguage();
         unset($oBrowser);
 
         $this->init();
@@ -207,8 +207,8 @@ class Analytics extends StoreStats
     {
         $sOs = t('Unknown OS');
 
-        foreach (static::$_aOs as $sRegex => $sName) {
-            if ($this->find($sRegex, $this->_sUserAgent)) {
+        foreach (static::$aOs as $sRegex => $sName) {
+            if ($this->find($sRegex, $this->sUserAgent)) {
                 $sOs = $sName;
                 break;
             }
@@ -226,8 +226,8 @@ class Analytics extends StoreStats
     {
         $sBrowser = t('Unknown Web Browser');
 
-        foreach (static::$_aWebBrowsers as $sRegex => $sName) {
-            if ($this->find($sRegex, $this->_sUserAgent)) {
+        foreach (static::$aWebBrowsers as $sRegex => $sName) {
+            if ($this->find($sRegex, $this->sUserAgent)) {
                 $sBrowser = $sName;
                 break;
             }
@@ -245,8 +245,8 @@ class Analytics extends StoreStats
     {
         $sBot = t('Unknown Search Engine Bot');
 
-        foreach (static::$_aRobots as $sRegex => $sName) {
-            if ($this->find($sRegex, $this->_sUserAgent)) {
+        foreach (static::$aRobots as $sRegex => $sName) {
+            if ($this->find($sRegex, $this->sUserAgent)) {
                 $sBot = $sName;
                 break;
             }
@@ -264,8 +264,8 @@ class Analytics extends StoreStats
     {
         $sIpBot = t('Unknown Search Engine Bot IP');
 
-        foreach (static::$_aIpRobots as $sRegex => $sName) {
-            if ($this->find($sRegex, $this->_sUserAgent)) {
+        foreach (static::$aIpRobots as $sRegex => $sName) {
+            if ($this->find($sRegex, $this->sUserAgent)) {
                 $sIpBot = $sName;
                 break;
             }
@@ -281,8 +281,8 @@ class Analytics extends StoreStats
     {
         $sKeyword = null;
 
-        foreach (static::$_aKeywords as $sWord) {
-            if ($this->find($sWord, $this->_sReferer)) {
+        foreach (static::$aKeywords as $sWord) {
+            if ($this->find($sWord, $this->sReferer)) {
                 $sKeyword = $sWord;
                 break;
             }
@@ -336,7 +336,7 @@ class Analytics extends StoreStats
         $this->add('Bots', $sBot);
         $this->add('IpBots', $sIpBot);
         $this->add('Keywords', $sKeyword);
-        $this->add('UserLanguage', $this->_sUserLang);
+        $this->add('UserLanguage', $this->sUserLang);
     }
 
     /**
@@ -345,7 +345,7 @@ class Analytics extends StoreStats
      * @param string $sToFind
      * @param string $sContents
      *
-     * @return boolean
+     * @return bool
      */
     protected function find($sToFind, $sContents)
     {

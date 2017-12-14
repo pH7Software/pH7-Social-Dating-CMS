@@ -23,13 +23,13 @@ class AvatarDesignCore extends Design
     const DEF_LIGHTBOX_AVATAR_SIZE = 400;
 
     /** @var UserCore */
-    private $_oUser;
+    private $oUser;
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->_oUser = new UserCore;
+        $this->oUser = new UserCore;
     }
 
     /**
@@ -61,9 +61,9 @@ class AvatarDesignCore extends Design
         $iSize = (int)$iSize;
         if ($bRollover) {
             echo '<style scoped="scoped">.rollover img{width:', ($iSize / 1), 'px;height:', ($iSize / 1), 'px;transition:all 0.3s ease-in-out;-webkit-transition:all 0.3s ease-in-out;-moz-transition:all 0.3s ease-in-out;-o-transition:all 0.3s ease-in-out;-ms-transition:all 0.3s ease-in-out;-khtml-transition:all 0.3s ease-in-out;z-index:0}.rollover a:hover >img{width:', $iSize, 'px;height:', $iSize, 'px;border:1px solid #eee;box-shadow:4px 4px 4px rgba(0,0,0,0.2);transform:scale(1.5,1.5);-webkit-transform:scale(1.5,1.5);-moz-transform:scale(1.5,1.5);-o-transform:scale(1.5,1.5);-ms-transform:scale(1.5,1.5);-khtml-transform:scale(1.5,1.5);transition:all 0.5s ease;-webkit-transition:all 0.5s ease;-moz-transition:all 0.5s ease;-o-transition:all 0.5s ease;-ms-transition:all 0.5s ease;-khtml-transition:all 0.5s ease;z-index:999}</style>';
-            echo '<div class="rollover"><a href="', $this->_oUser->getProfileSignupLink($sUsername, $sFirstName, $sSex), '"><img src="', $this->getUserAvatar($sUsername, $sSex, $iSize), '" alt="', ucfirst($sUsername), '" title="', ucfirst($sFirstName), '" /></a></div>';
+            echo '<div class="rollover"><a href="', $this->oUser->getProfileSignupLink($sUsername, $sFirstName, $sSex), '"><img src="', $this->getUserAvatar($sUsername, $sSex, $iSize), '" alt="', ucfirst($sUsername), '" title="', ucfirst($sFirstName), '" /></a></div>';
         } else {
-            echo '<a class="pic" href="', $this->_oUser->getProfileSignupLink($sUsername, $sFirstName, $sSex), '"><img src="', $this->getUserAvatar($sUsername, $sSex, $iSize), '" alt="', ucfirst($sUsername), '" title="', ucfirst($sFirstName), '" class="avatar" /></a>';
+            echo '<a class="pic" href="', $this->oUser->getProfileSignupLink($sUsername, $sFirstName, $sSex), '"><img src="', $this->getUserAvatar($sUsername, $sSex, $iSize), '" alt="', ucfirst($sUsername), '" title="', ucfirst($sFirstName), '" class="avatar" /></a>';
         }
     }
 
@@ -136,7 +136,7 @@ class AvatarDesignCore extends Design
     {
         // It works only on non-local URLs, so check if we aren't on dev environments (e.g. http://127.0.0.1)
         return AdminCore::auth() &&
-            Registry::getInstance()->controller === 'ModeratorController'
-            && !Server::isLocalHost();
+            Registry::getInstance()->controller === 'ModeratorController' &&
+            !Server::isLocalHost();
     }
 }

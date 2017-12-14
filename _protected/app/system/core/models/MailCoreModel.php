@@ -9,10 +9,18 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Model;
 
 // Abstract Class
-class MailCoreModel extends Framework\Mvc\Model\Engine\Model
+class MailCoreModel extends Model
 {
+    /**
+     * Get the number of unread messages.
+     *
+     * @param int $iProfileId
+     *
+     * @return int
+     */
     public static function countUnreadMsg($iProfileId)
     {
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(status) AS unread FROM' . Db::prefix('Messages') .

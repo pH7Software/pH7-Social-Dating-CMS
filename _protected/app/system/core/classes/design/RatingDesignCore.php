@@ -31,20 +31,17 @@ class RatingDesignCore
      */
     public static function voting($iId, $sTable, $sCssClass = '')
     {
-        $oRatingModel = new RatingCoreModel;
-        $iVotes = $oRatingModel->getVote($iId, $sTable);
-        $fScore = $oRatingModel->getScore($iId, $sTable);
-        unset($oRatingModel);
+        $aRating = self::getRatingData($iId, $sTable);
 
         // Note: The rating.css style file is included by default in the CMS
         (new Design)->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/rating.js');
 
 
-        $fRate = ($iVotes > 0) ? number_format($fScore / $iVotes, 1) : 0;
+        $fRate = ($aRating['votes'] > 0) ? number_format($aRating['score'] / $aRating['votes'], 1) : 0;
 
         $sPHSClass = 'pHS' . $iId . $sTable;
 
-        echo '<div class="', $sCssClass, ' ', $sPHSClass, '" id="', $fRate, '_', $iId, '_', $sTable, '"></div><p class="', $sPHSClass, '_txt">', t('Score: %0% - Votes: %1%', $fRate, $iVotes), '</p>
+        echo '<div class="', $sCssClass, ' ', $sPHSClass, '" id="', $fRate, '_', $iId, '_', $sTable, '"></div><p class="', $sPHSClass, '_txt">', t('Score: %0% - Votes: %1%', $fRate, $aRating['votes']), '</p>
               <script>$(".', $sPHSClass, '").pHRating({length:5,decimalLength:1,rateMax:5});</script>';
 
         /**
@@ -55,5 +52,24 @@ class RatingDesignCore
             $sUrl = Uri::get('user', 'signup', 'step1', '?msg=' . t('You need to be a member for voting.'), false);
             echo '<script>$(".', $sPHSClass, '").click(function(){window.location=\'', $sUrl, '\'});</script>';
         }
+    }
+
+    /**
+     * @param int $iId
+     * @param string $sTable
+     *
+     * @return array
+     */
+    private static function getRatingData($iId, $sTable)
+    {
+        $oRatingModel = new RatingCoreModel;
+
+        $aRatingData = [
+            'votes' => $oRatingModel->getVote($iId, $sTable),
+            'score' => $oRatingModel->getScore($iId, $sTable)
+        ];
+        unset($oRatingModel);
+
+        return $aRatingData;
     }
 }
