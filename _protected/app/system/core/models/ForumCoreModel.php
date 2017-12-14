@@ -33,7 +33,7 @@ class ForumCoreModel extends Model
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
-        $sSqlLimit = ($bIsLimit) ? ' LIMIT :offset, :limit' : '';
+        $sSqlLimit = $bIsLimit ? ' LIMIT :offset, :limit' : '';
         $sSqlForumId = (!empty($iForumId)) ? 'WHERE forumId = :forumId ' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Forums') . $sSqlForumId . 'ORDER BY ' . $sOrder . $sSqlLimit);

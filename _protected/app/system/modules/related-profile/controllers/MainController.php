@@ -50,7 +50,7 @@ class MainController extends Controller
      * @param stdClass $oProfile User data.
      * @param stdClass $oProfileFields Profile fields.
      *
-     * @return stdClass Related profiles.
+     * @return array|int Related profiles.
      */
     private function relatedProdiles(stdClass $oProfile, stdClass $oProfileFields)
     {

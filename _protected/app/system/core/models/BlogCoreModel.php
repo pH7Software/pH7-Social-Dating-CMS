@@ -19,8 +19,8 @@ class BlogCoreModel extends Model
     /**
      * Gets all blog posts.
      *
-     * @param integer $iOffset
-     * @param integer $iLimit
+     * @param int $iOffset
+     * @param int $iLimit
      * @param string $sOrder A constant: SearchCoreModel::CREATED (default value) or SearchCoreModel::UPDATED
      *
      * @return array

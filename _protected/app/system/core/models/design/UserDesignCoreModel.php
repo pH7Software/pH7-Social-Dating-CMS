@@ -45,13 +45,17 @@ class UserDesignCoreModel extends Design
      *
      * @param string $sCountryCode Optional The country code (e.g., GB, RU, FR, ES, ...). Default ''
      * @param string $sCity Optional. The city name. Default ''
-     * @param integer $iOffset Optional. Default 0
-     * @param integer $iLimit Optional. Default 14
+     * @param int $iOffset Optional. Default 0
+     * @param int $iLimit Optional. Default 14
      *
      * @return void HTML output.
      */
-    public function geoProfiles($sCountryCode = '', $sCity = '', $iOffset = 0, $iLimit = self::GEO_PROFILE_LIMIT)
-    {
+    public function geoProfiles(
+        $sCountryCode = '',
+        $sCity = '',
+        $iOffset = UserCoreModel::OFFLINE_STATUS,
+        $iLimit = self::GEO_PROFILE_LIMIT
+    ) {
         $oUserGeo = $this->oUserModel->getGeoProfiles($sCountryCode, $sCity, false, SearchCoreModel::LAST_ACTIVITY, $iOffset, $iLimit);
         if (empty($oUserGeo)) {
             return;
@@ -86,7 +90,7 @@ class UserDesignCoreModel extends Design
      * @param integer $iOffset
      * @param integer $iLimit
      */
-    public function carouselProfiles($iOffset = 0, $iLimit = self::CAROUSEL_PROFILE_LIMIT)
+    public function carouselProfiles($iOffset = UserCoreModel::OFFLINE_STATUS, $iLimit = self::CAROUSEL_PROFILE_LIMIT)
     {
         $oUsers = $this->oUserModel->getProfiles(SearchCoreModel::LATEST, $iOffset, $iLimit);
 
@@ -128,7 +132,7 @@ class UserDesignCoreModel extends Design
      * @param integer $iOffset
      * @param integer $iLimit
      */
-    public function profilesBlock($iOffset = 0, $iLimit = self::PROFILE_BLOCK_LIMIT)
+    public function profilesBlock($iOffset = UserCoreModel::OFFLINE_STATUS, $iLimit = self::PROFILE_BLOCK_LIMIT)
     {
         $oUsers = $this->oUserModel->getProfiles(SearchCoreModel::LATEST, $iOffset, $iLimit);
         if (empty($oUsers)) {
@@ -150,7 +154,7 @@ class UserDesignCoreModel extends Design
      * @param integer $iOffset
      * @param integer $iLimit
      */
-    public function profiles($iOffset = 0, $iLimit = self::PROFILE_LIMIT)
+    public function profiles($iOffset = UserCoreModel::OFFLINE_STATUS, $iLimit = self::PROFILE_LIMIT)
     {
         $oUsers = $this->oUserModel->getProfiles(SearchCoreModel::LAST_ACTIVITY, $iOffset, $iLimit);
         if (empty($oUsers)) {
@@ -175,8 +179,8 @@ class UserDesignCoreModel extends Design
             echo '<img src="', PH7_URL_TPL, PH7_TPL_NAME, PH7_SH, PH7_IMG, 'icon/online.png" alt="', t('Online'), '" title="', t('Is Online!'), '" />';
         } else {
             $iStatus = $oUserModel->getUserStatus($iProfileId);
-            $sImgName = ($iStatus == 2 ? 'busy' : ($iStatus == 3 ? 'away' : 'offline'));
-            $sTxt = ($iStatus == 2 ? t('Busy') : ($iStatus == 3 ? t('Away') : t('Offline')));
+            $sImgName = ($iStatus === UserCoreModel::BUSY_STATUS ? 'busy' : ($iStatus === UserCoreModel::AWAY_STATUS ? 'away' : 'offline'));
+            $sTxt = ($iStatus === UserCoreModel::BUSY_STATUS ? t('Busy') : ($iStatus === UserCoreModel::AWAY_STATUS ? t('Away') : t('Offline')));
 
             echo '<img src="', PH7_URL_TPL, PH7_TPL_NAME, PH7_SH, PH7_IMG, 'icon/', $sImgName, '.png" alt="', $sTxt, '" title="', $sTxt, '" />';
         }

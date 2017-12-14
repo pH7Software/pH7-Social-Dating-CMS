@@ -22,7 +22,7 @@ It is designed with the **KISS** principle in mind, and the all source code can 
 
 This Free and Open Source **Social Dating Site Builder** wants to be low resource-intensive, powerful, stable and secure. The software also comes with 34 system modules and is based on **pH7Framework** *(written specifically for this project)* that has over 52 packages.
 
-*To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **best dating service** or **social networking** website on the World Wide Web!*
+*To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **best online dating service** or **social networking** website on the World Wide Web!*
 
 
 ## How Powerful is your future Dating App?
@@ -192,12 +192,12 @@ You can find and add other languages on the [I18N repo](https://github.com/pH7So
 
 ## Author
 
-**[Pierre-Henry Soria](http://ph7.me)**
+Made with lots of ❤️ by [Pierre-Henry Soria](http://ph7.me). A passionate Belgian software engineer 🍫🍺
 
 
-## Website
+## Official Website
 
-**[pH7CMS Social Dating Script](http://ph7cms.com)**
+[pH7CMS.com](http://ph7cms.com)
 
 
 ## Documentation
@@ -249,5 +249,5 @@ You can send me an email for any suggestions or feedback at: *hi {AT} ph7 {D0T} 
 License: [General Public License 3](http://www.gnu.org/licenses/gpl.html) or later; See the *PH7.LICENSE.txt* and *PH7.COPYRIGHT.txt* files for more details.
 
 
-![Admin Panel, Browse Users](https://cloud.githubusercontent.com/assets/1325411/14080251/b476e5c6-f4fb-11e5-825e-ddc992ba1055.png)
 ![pH7CMS allows anyone to start a web dating app like Tinder/Bumble or Badoo](https://cloud.githubusercontent.com/assets/1325411/19419477/5476b45c-93d0-11e6-823d-d293f186c0f7.png)
+![Admin Panel, Browse Users](https://cloud.githubusercontent.com/assets/1325411/14080251/b476e5c6-f4fb-11e5-825e-ddc992ba1055.png)

@@ -9,14 +9,21 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Model;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 
 // Abstract Class
-class RatingCoreModel extends Framework\Mvc\Model\Engine\Model
+class RatingCoreModel extends Model
 {
+    const CACHE_GROUP = 'db/sys/core/rating';
+    const CACHE_TIME = 604800;
 
-    const CACHE_GROUP = 'db/sys/core/rating', CACHE_TIME = 604800;
-
+    /**
+     * @param int $iId
+     * @param string $sTable
+     *
+     * @return int
+     */
     public function getVote($iId, $sTable)
     {
         $this->cache->start(self::CACHE_GROUP, 'getVote' . $iId . $sTable, static::
@@ -36,9 +43,16 @@ class RatingCoreModel extends Framework\Mvc\Model\Engine\Model
             unset($oRow);
             $this->cache->put($iData);
         }
+
         return $iData;
     }
 
+    /**
+     * @param int $iId
+     * @param string $sTable
+     *
+     * @return float
+     */
     public function getScore($iId, $sTable)
     {
         $this->cache->start(self::CACHE_GROUP, 'getScore' . $iId . $sTable, static::
@@ -58,9 +72,16 @@ class RatingCoreModel extends Framework\Mvc\Model\Engine\Model
             unset($oRow);
             $this->cache->put($fData);
         }
+
         return $fData;
     }
 
+    /**
+     * @param int $iId
+     * @param string $sTable
+     *
+     * @return bool
+     */
     public function updateVotes($iId, $sTable)
     {
 
@@ -73,6 +94,13 @@ class RatingCoreModel extends Framework\Mvc\Model\Engine\Model
         return $rStmt->execute();
     }
 
+    /**
+     * @param float $fScore
+     * @param int $iId
+     * @param string $sTable
+     *
+     * @return bool
+     */
     public function updateScore($fScore, $iId, $sTable)
     {
         $sTable = Various::checkTable($sTable);
@@ -84,5 +112,4 @@ class RatingCoreModel extends Framework\Mvc\Model\Engine\Model
         $rStmt->bindValue(':id', $iId);
         return $rStmt->execute();
     }
-
 }

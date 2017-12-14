@@ -8,9 +8,10 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Model\Ads;
 use PH7\Framework\Mvc\Model\Engine\Db;
 
-class AdsCoreModel extends Framework\Mvc\Model\Ads
+class AdsCoreModel extends Ads
 {
     const CACHE_GROUP = 'db/sys/core/ads';
 
@@ -20,7 +21,7 @@ class AdsCoreModel extends Framework\Mvc\Model\Ads
      * @param int|null $mActive 1 = active otherwise null. Default value is 1.
      * @param string $sTable The table.
      *
-     * @return \stdClass The advertisements data.
+     * @return array The advertisements data.
      */
     public function get($mActive = 1, $iOffset, $iLimit, $sTable = AdsCore::AD_TABLE_NAME)
     {
