@@ -30,7 +30,7 @@ class Geo
     /**
      * Get the country ISO Code (e.g., en, it, es, ru, fr, ...).
      *
-     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
      *
      * @return string Country Code.
      */
@@ -42,7 +42,7 @@ class Geo
     /**
      * Get the Zip Code (postal code).
      *
-     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
      *
      * @return integer Zip Code.
      */
@@ -54,7 +54,7 @@ class Geo
     /**
      * Get the latitude.
      *
-     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
      *
      * @return float Latitude.
      */
@@ -66,7 +66,7 @@ class Geo
     /**
      * Get the longitude.
      *
-     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
      *
      * @return float Longitude.
      */
@@ -78,7 +78,7 @@ class Geo
     /**
      * Get the country name.
      *
-     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
      *
      * @return string Country Name.
      */
@@ -91,7 +91,7 @@ class Geo
     /**
      * Get the city name.
      *
-     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
      *
      * @return string City Name.
      */
@@ -104,7 +104,7 @@ class Geo
     /**
      * Get the state (region) name.
      *
-     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
      *
      * @return string State Name.
      */
@@ -116,7 +116,7 @@ class Geo
     /**
      * Get Geo Ip Data Information.
      *
-     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
      *
      * @return string|\GeoIp2\Model\City
      */
@@ -140,5 +140,4 @@ class Geo
     private function __clone()
     {
     }
-
 }
