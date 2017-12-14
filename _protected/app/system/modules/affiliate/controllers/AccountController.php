@@ -56,10 +56,10 @@ class AccountController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
 
-        if ($this->httpRequest->get('delete_status') == 'yesdelete') {
+        if ($this->httpRequest->get('delete_status') === 'yesdelete') {
             $this->session->set('yes_delete', 1);
             Header::redirect(Uri::get('affiliate', 'account', 'yesdelete'));
-        } elseif ($this->httpRequest->get('delete_status') == 'nodelete') {
+        } elseif ($this->httpRequest->get('delete_status') === 'nodelete') {
             $this->view->delete_status = false;
             $this->design->setRedirect(Uri::get('affiliate', 'home', 'index'), null, null, 4);
         } else {
