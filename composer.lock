@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "braintree/braintree_php",
-            "version": "3.26.0",
+            "version": "3.26.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/braintree/braintree_php.git",
-                "reference": "184bbdd65951a3ad766992ef73bb6e93aeba82b7"
+                "reference": "7f66ed17f38efd45904f920695b02603b091bae6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/braintree/braintree_php/zipball/184bbdd65951a3ad766992ef73bb6e93aeba82b7",
-                "reference": "184bbdd65951a3ad766992ef73bb6e93aeba82b7",
+                "url": "https://api.github.com/repos/braintree/braintree_php/zipball/7f66ed17f38efd45904f920695b02603b091bae6",
+                "reference": "7f66ed17f38efd45904f920695b02603b091bae6",
                 "shasum": ""
             },
             "require": {
@@ -51,7 +51,7 @@
                 }
             ],
             "description": "Braintree PHP Client Library",
-            "time": "2017-11-17T21:47:27+00:00"
+            "time": "2017-12-14T00:08:17+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -595,16 +595,16 @@
         },
         {
             "name": "doctrine/annotations",
-            "version": "v1.5.0",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "5beebb01b025c94e93686b7a0ed3edae81fe3e7f"
+                "reference": "c7f2050c68a9ab0bdb0f98567ec08d80ea7d24d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/5beebb01b025c94e93686b7a0ed3edae81fe3e7f",
-                "reference": "5beebb01b025c94e93686b7a0ed3edae81fe3e7f",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/c7f2050c68a9ab0bdb0f98567ec08d80ea7d24d5",
+                "reference": "c7f2050c68a9ab0bdb0f98567ec08d80ea7d24d5",
                 "shasum": ""
             },
             "require": {
@@ -613,12 +613,12 @@
             },
             "require-dev": {
                 "doctrine/cache": "1.*",
-                "phpunit/phpunit": "^5.7"
+                "phpunit/phpunit": "^6.4"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.5.x-dev"
+                    "dev-master": "1.6.x-dev"
                 }
             },
             "autoload": {
@@ -659,7 +659,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2017-07-22T10:58:02+00:00"
+            "time": "2017-12-06T07:11:42+00:00"
         },
         {
             "name": "doctrine/instantiator",
