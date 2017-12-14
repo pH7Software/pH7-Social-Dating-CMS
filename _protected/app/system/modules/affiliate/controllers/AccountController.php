@@ -84,6 +84,12 @@ class AccountController extends Controller
      */
     public function activate($sMail, $sHash)
     {
-        (new UserCore)->activateAccount($sMail, $sHash, $this->config, $this->registry, 'affiliate');
+        (new UserCore)->activateAccount(
+            $sMail,
+            $sHash,
+            $this->config,
+            $this->registry,
+            'affiliate'
+        );
     }
 }
