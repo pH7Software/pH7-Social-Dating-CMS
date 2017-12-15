@@ -298,6 +298,8 @@ class Analytics extends StoreStats
      * @param string $sData
      *
      * @return void
+     *
+     * @throws Exception
      */
     public function add($sType, $sData)
     {
@@ -310,6 +312,8 @@ class Analytics extends StoreStats
      * @param string $sFileName
      *
      * @return array Analytics data.
+     *
+     * @throws Exception
      */
     public function get($sFileName)
     {
