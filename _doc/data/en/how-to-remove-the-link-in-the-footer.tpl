@@ -8,8 +8,8 @@
 
 <figure>
     <img
-            src="{site_url}static/img/disable-footer-copyright-link.png"
-            alt="How to remove the Powered By Link from the footer"
-            title="How to remove the Powered By Link from the footer" />
+        src="{site_url}static/img/disable-footer-copyright-link.png"
+        alt="How to remove the Powered By Link from the footer"
+        title="How to remove the Powered By Link from the footer" />
     <figcaption>For removing the branding link. <em>Admin Panel -> Settings -> General -> Show "Powered By" link</em></figcaption>
 </figure>
