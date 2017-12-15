@@ -19,6 +19,7 @@ use PH7\Framework\Mvc\Model\Engine\Util\Various;
 class StatisticCoreModel extends Framework\Mvc\Model\Statistic
 {
     const CACHE_GROUP = 'db/sys/core/statistic';
+    const CACHE_LIFETIME = 10368000;
 
     /**
      * Get the date since the website has been created.
@@ -27,7 +28,7 @@ class StatisticCoreModel extends Framework\Mvc\Model\Statistic
      */
     public static function getDateOfCreation()
     {
-        $oCache = (new Cache)->start(self::CACHE_GROUP, 'dateofcreation', 10368000);
+        $oCache = (new Cache)->start(self::CACHE_GROUP, 'dateofcreation', self::CACHE_LIFETIME);
 
         if (!$sSinceDate = $oCache->get()) {
             $sSinceDate = Record::getInstance()->getOne('Admins', 'profileId', 1, 'joinDate')->joinDate;
