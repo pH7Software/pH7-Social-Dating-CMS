@@ -15,6 +15,7 @@ namespace PH7\Framework\Analytics;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Cache\Exception;
 
 class Analytics extends StoreStats
 {
@@ -324,6 +325,8 @@ class Analytics extends StoreStats
      * Init method.
      *
      * @return void
+     *
+     * @throws Exception
      */
     protected function init()
     {
