@@ -37,7 +37,7 @@ class StoreStats
             throw new Exception('Couldn\'t get cache file: \'' . $sFullPath . '\'');
         }
 
-        $aData = (!empty($aGetData)) ? unserialize($aGetData) : array();
+        $aData = !empty($aGetData) ? unserialize($aGetData) : array();
 
         return $aData;
     }
