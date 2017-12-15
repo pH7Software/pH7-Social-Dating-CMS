@@ -15,17 +15,17 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
     /**
      * "Get" and "Find" "Friends" or "Mutual Friends"
      *
-     * @param integer $iIdProfileId User ID
-     * @param integer $iFriendId Enter a user Friend ID to find a mutual friend in the friends list or null = the whole list. Default is NULL
-     * @param integet|string $mLooking Integer for profile ID or string for a keyword
-     * @param boolean $bCount Put 'true' for count friends or 'false' for the result of friends
+     * @param int $iIdProfileId User ID
+     * @param int $iFriendId Enter a user Friend ID to find a mutual friend in the friends list or null = the whole list. Default is NULL
+     * @param int|string $mLooking Integer for profile ID or string for a keyword
+     * @param bool $bCount Put 'true' for count friends or 'false' for the result of friends
      * @param string $sOrderBy
-     * @param integer $iSort
-     * @param integer $iOffset
-     * @param integer $iLimit
-     * @param integer|string $mPending 'all' = approved and pending, 1 = approved or 0 = pending friend requests. Default value is 'all'
+     * @param int $iSort
+     * @param int $iOffset
+     * @param int $iLimit
+     * @param int|string $mPending 'all' = approved and pending, 1 = approved or 0 = pending friend requests. Default value is 'all'
      *
-     * @return integer|\stdClass Integer for the number friends returned or string for the friends list returned)
+     * @return int|array Integer for the number friends returned or string for the friends list returned)
      */
     public function get($iIdProfileId, $iFriendId = null, $mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $mPending = 'all')
     {
@@ -105,9 +105,9 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
     /**
      * Get Pending Friend.
      *
-     * @param integer $iFriendId
+     * @param int $iFriendId
      *
-     * @return integer
+     * @return int
      */
     public static function getPending($iFriendId)
     {
@@ -125,9 +125,9 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
     /**
      * Count total friends.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      *
-     * @return integer
+     * @return int
      */
     public static function total($iProfileId)
     {

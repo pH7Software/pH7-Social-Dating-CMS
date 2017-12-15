@@ -19,7 +19,7 @@ class LikeCoreModel extends Model
     /**
      * @param string $sKey
      *
-     * @return \stdClass
+     * @return array
      */
     public function select($sKey)
     {
