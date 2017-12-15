@@ -25,7 +25,7 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
      * @param int $iLimit
      * @param int|string $mPending 'all' = approved and pending, 1 = approved or 0 = pending friend requests. Default value is 'all'
      *
-     * @return int|array Integer for the number friends returned or string for the friends list returned)
+     * @return int|array Integer for the number friends returned or an array containing a stdClass object with the friends list)
      */
     public function get($iIdProfileId, $iFriendId = null, $mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $mPending = 'all')
     {
