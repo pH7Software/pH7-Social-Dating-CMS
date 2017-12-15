@@ -159,6 +159,12 @@ class StatisticCoreModel extends Framework\Mvc\Model\Statistic
         return $this->totalComments('Game', $iDay);
     }
 
+    /**
+     * @param string $sTable
+     * @param int $iDay
+     *
+     * @return int
+     */
     protected function totalComments($sTable, $iDay = 0)
     {
         CommentCore::checkTable($sTable);
