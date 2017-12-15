@@ -35,10 +35,10 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
         $mLooking = trim($mLooking);
 
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
+
+        $sSqlSelect = 'COUNT(f.friendId) AS totalFriends';
         if (!$bCount) {
             $sSqlSelect = '(f.profileId + f.friendId - :profileId) AS fdId, f.*, m.username, m.firstName, m.sex';
-        } else {
-            $sSqlSelect = 'COUNT(f.friendId) AS totalFriends';
         }
 
         $sSqlWhere = '(f.profileId = :profileId OR f.friendId = :profileId)';
