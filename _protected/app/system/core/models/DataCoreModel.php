@@ -17,6 +17,8 @@ class DataCoreModel extends Framework\Mvc\Model\Engine\Model
     const MAX_ITEMS = 1000;
 
     /**
+     * Get images or videos from either Videos or Pictures table.
+     *
      * @param string $sTable
      * @param string $sOrder
      * @param int $iOffset
