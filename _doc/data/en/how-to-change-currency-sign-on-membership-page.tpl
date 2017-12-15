@@ -15,9 +15,10 @@ Move <code>{% $config->values['module.setting']['currency_sign'] %}</code> after
 
 <figure>
     <a href="{site_url}static/img/change-currency-sign-code-membership-page.png" target="_blank">
-        <img src="{site_url}static/img/change-currency-sign-code-membership-page.png"
-         alt="Move the currency sign after the price from membership template"
-         title="Move the currency sign after the price from membership template" />
+        <img
+            src="{site_url}static/img/change-currency-sign-code-membership-page.png"
+            alt="Move the currency sign after the price from membership template"
+            title="Move the currency sign after the price from membership template" />
     </a>
     <figcaption>Change the Currency Sign on the Membership Page</figcaption>
 </figure>
