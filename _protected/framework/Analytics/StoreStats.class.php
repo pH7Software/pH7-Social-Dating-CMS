@@ -23,6 +23,8 @@ class StoreStats
     /**
      * Read cache.
      *
+     * @param string $sFileName
+     *
      * @return array Cache data.
      *
      * @throws Exception If the file cannot be gotten.
