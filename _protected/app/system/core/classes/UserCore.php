@@ -70,7 +70,7 @@ class UserCore
      */
     public function delete($iProfileId, $sUsername)
     {
-        if ($sUsername === PH7_GHOST_USERNAME) {
+        if ($this->isGhost($sUsername)) {
             exit('You cannot delete this profile!');
         }
 
@@ -499,6 +499,16 @@ class UserCore
     public function clearInfoFieldCache($iId, $sTable = 'MembersInfo')
     {
         $this->clearCache('infoFields', $iId, $sTable);
+    }
+
+    /**
+     * @param string $sUsername
+     *
+     * @return bool
+     */
+    private function isGhost($sUsername)
+    {
+        return $sUsername === PH7_GHOST_USERNAME;
     }
 
     /**
