@@ -207,7 +207,7 @@ class Analytics extends StoreStats
     {
         $sOs = t('Unknown OS');
 
-        foreach (static::$aOs as $sRegex => $sName) {
+        foreach (self::$aOs as $sRegex => $sName) {
             if ($this->find($sRegex, $this->sUserAgent)) {
                 $sOs = $sName;
                 break;
@@ -226,7 +226,7 @@ class Analytics extends StoreStats
     {
         $sBrowser = t('Unknown Web Browser');
 
-        foreach (static::$aWebBrowsers as $sRegex => $sName) {
+        foreach (self::$aWebBrowsers as $sRegex => $sName) {
             if ($this->find($sRegex, $this->sUserAgent)) {
                 $sBrowser = $sName;
                 break;
@@ -245,7 +245,7 @@ class Analytics extends StoreStats
     {
         $sBot = t('Unknown Search Engine Bot');
 
-        foreach (static::$aRobots as $sRegex => $sName) {
+        foreach (self::$aRobots as $sRegex => $sName) {
             if ($this->find($sRegex, $this->sUserAgent)) {
                 $sBot = $sName;
                 break;
@@ -264,7 +264,7 @@ class Analytics extends StoreStats
     {
         $sIpBot = t('Unknown Search Engine Bot IP');
 
-        foreach (static::$aIpRobots as $sRegex => $sName) {
+        foreach (self::$aIpRobots as $sRegex => $sName) {
             if ($this->find($sRegex, $this->sUserAgent)) {
                 $sIpBot = $sName;
                 break;
@@ -281,7 +281,7 @@ class Analytics extends StoreStats
     {
         $sKeyword = null;
 
-        foreach (static::$aKeywords as $sWord) {
+        foreach (self::$aKeywords as $sWord) {
             if ($this->find($sWord, $this->sReferer)) {
                 $sKeyword = $sWord;
                 break;
