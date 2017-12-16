@@ -15,8 +15,9 @@ use PH7\Framework\Cache\Cache;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Record;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
+use PH7\Framework\Mvc\Model\Statistic as StatisticModel;
 
-class StatisticCoreModel extends Framework\Mvc\Model\Statistic
+class StatisticCoreModel extends StatisticModel
 {
     const CACHE_GROUP = 'db/sys/core/statistic';
     const CACHE_LIFETIME = 10368000;
