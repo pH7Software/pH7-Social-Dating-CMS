@@ -19,12 +19,12 @@ class ForumCoreModel extends Model
     const NAME = 'name ASC';
 
     /**
-     * @param integer|null $iForumId
-     * @param integer|null $iOffset
-     * @param integer|null $iLimit
+     * @param int|null $iForumId
+     * @param int|null $iOffset
+     * @param int|null $iLimit
      * @param string $sOrder
      *
-     * @return \stdClass|false
+     * @return array|\stdClass|false
      */
     public function getForum($iForumId = null, $iOffset = null, $iLimit = null, $sOrder = self::NAME)
     {
