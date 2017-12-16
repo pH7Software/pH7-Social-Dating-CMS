@@ -8,7 +8,9 @@
 
 namespace PH7;
 
-class GeoIpCoreModel extends Framework\Mvc\Model\Engine\Model
+use PH7\Framework\Mvc\Model\Engine\Model;
+
+class GeoIpCoreModel extends Model
 {
     /*
      *  In development. Feel free to help me! <https://github.com/pH7Software/pH7-Social-Dating-CMS>
