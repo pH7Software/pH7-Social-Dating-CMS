@@ -32,13 +32,14 @@ class ForumCoreModel extends Model
 
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
+        $bIsForumId = $iForumId !== null;
 
         $sSqlLimit = $bIsLimit ? ' LIMIT :offset, :limit' : '';
-        $sSqlForumId = (!empty($iForumId)) ? 'WHERE forumId = :forumId ' : '';
+        $sSqlForumId = $bIsForumId ? 'WHERE forumId = :forumId ' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Forums') . $sSqlForumId . 'ORDER BY ' . $sOrder . $sSqlLimit);
 
-        if (!empty($iForumId)) {
+        if ($bIsForumId) {
             $rStmt->bindParam(':forumId', $iForumId, \PDO::PARAM_INT);
         }
 
@@ -52,31 +53,33 @@ class ForumCoreModel extends Model
 
         $rStmt->execute();
 
-        if (!empty($iForumId)) {
+        if ($bIsForumId) {
             return $rStmt->fetch(\PDO::FETCH_OBJ);
-        } else {
-            return $rStmt->fetchAll(\PDO::FETCH_OBJ);
         }
+
+        return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
     /**
-     * @param integer $iTopicId
-     * @param integer|null $iMessageId
-     * @param integer|null $iProfileId
-     * @param integer $iApproved
-     * @param integer $iOffset
-     * @param integer $iLimit
+     * @param int $iTopicId
+     * @param int|null $iMessageId
+     * @param int|null $iProfileId
+     * @param int $iApproved
+     * @param int $iOffset
+     * @param int $iLimit
      * @param string $sSort
      *
-     * @return \stdClass|false
+     * @return array|\stdClass|false
      */
     public function getMessage($iTopicId, $iMessageId = null, $iProfileId = null, $iApproved, $iOffset, $iLimit, $sSort = Db::ASC)
     {
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
+        $bIsMessageId = $iMessageId !== null;
+        $bIsProfileId = $iProfileId !== null;
 
-        $sSqlMessageId = (!empty($iMessageId)) ? ' AND msg.messageId = :messageId ' : '';
-        $sSqlProfileId = (!empty($iProfileId)) ? ' AND msg.profileId = :profileId ' : '';
+        $sSqlMessageId = $bIsMessageId ? ' AND msg.messageId = :messageId ' : '';
+        $sSqlProfileId = $bIsProfileId ? ' AND msg.profileId = :profileId ' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT f.name, t.title, t.forumId, msg.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Forums') .
             'AS f INNER JOIN' . Db::prefix('ForumsTopics') . 'AS t ON f.forumId = t.forumId INNER JOIN ' . Db::prefix('ForumsMessages') .
@@ -85,11 +88,11 @@ class ForumCoreModel extends Model
 
         $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
 
-        if (!empty($iMessageId)) {
+        if ($bIsMessageId) {
             $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
         }
 
-        if (!empty($iProfileId)) {
+        if ($bIsProfileId) {
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         }
 
@@ -98,7 +101,7 @@ class ForumCoreModel extends Model
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
 
-        if (!empty($iProfileId)) {
+        if ($bIsProfileId) {
             return $rStmt->fetch(\PDO::FETCH_OBJ);
         }
 

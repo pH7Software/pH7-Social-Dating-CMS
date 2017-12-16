@@ -22,16 +22,17 @@ class ForumModel extends ForumCoreModel
      */
     public function getCategory($iCategoryId = null, $iOffset = null, $iLimit = null)
     {
-        $bIsLimit = isset($iOffset, $iLimit);
-
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
-        $sSqlLimit = ($bIsLimit) ? ' LIMIT :offset, :limit' : '';
-        $sSqlCategoryId = (!empty($iCategoryId)) ? ' WHERE categoryId = :categoryId ' : '';
+        $bIsLimit = isset($iOffset, $iLimit);
+        $bIsCategoryId = $iCategoryId !== null;
+
+        $sSqlLimit = $bIsLimit ? ' LIMIT :offset, :limit' : '';
+        $sSqlCategoryId = $bIsCategoryId ? ' WHERE categoryId = :categoryId ' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('ForumsCategories') . $sSqlCategoryId . 'ORDER BY title ASC' . $sSqlLimit);
-        if (!empty($iCategoryId)) {
+        if ($bIsCategoryId) {
             $rStmt->bindParam(':categoryId', $iCategoryId, \PDO::PARAM_INT);
         }
         if ($bIsLimit) {
@@ -42,7 +43,7 @@ class ForumModel extends ForumCoreModel
         }
         $rStmt->execute();
 
-        return !empty($iCategoryId) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        return $bIsCategoryId ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
     /**
@@ -62,7 +63,9 @@ class ForumModel extends ForumCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
-        $sSqlProfileId = isset($iProfileId) ? 'AND t.profileId = :profileId ' : '';
+        $bIsProfileId = $iProfileId !== null;
+
+        $sSqlProfileId = $bIsProfileId ? 'AND t.profileId = :profileId ' : '';
         $sSqlMsg = isset($sTopicSubject, $iTopicId) ? ' AND (t.title LIKE :topicSubject AND t.topicId = :topicId) ' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT f.*, f.createdDate AS forumCreatedDate, f.updatedDate AS forumUpdatedDate, t.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Forums') .
@@ -77,7 +80,7 @@ class ForumModel extends ForumCoreModel
             $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
         }
 
-        if (isset($iProfileId)) {
+        if ($bIsProfileId) {
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         }
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
