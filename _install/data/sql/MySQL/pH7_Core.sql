@@ -758,7 +758,7 @@ CREATE TABLE IF NOT EXISTS pH7_AffiliatesLogLogin (
 
 
 CREATE TABLE IF NOT EXISTS pH7_AdminsLogSess (
-  profileId tinyint(3) unsigned DEFAULT NULL,
+  profileId tinyint(3) unsigned NOT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(240) DEFAULT NULL,
   email varchar(120) DEFAULT NULL,
@@ -780,7 +780,7 @@ CREATE TABLE IF NOT EXISTS pH7_AdminsLogSess (
 
 
 CREATE TABLE IF NOT EXISTS pH7_MembersLogSess (
-  profileId int(10) unsigned DEFAULT NULL,
+  profileId int(10) unsigned NOT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(120) DEFAULT NULL,
   email varchar(120) DEFAULT NULL,
@@ -802,7 +802,7 @@ CREATE TABLE IF NOT EXISTS pH7_MembersLogSess (
 
 
 CREATE TABLE IF NOT EXISTS pH7_AffiliatesLogSess (
-  profileId int(10) unsigned DEFAULT NULL,
+  profileId int(10) unsigned NOT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(120) DEFAULT NULL,
   email varchar(120) DEFAULT NULL,
