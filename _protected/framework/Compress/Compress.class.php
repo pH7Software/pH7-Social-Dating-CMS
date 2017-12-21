@@ -19,6 +19,9 @@ use PH7\Framework\Url\Url;
 
 class Compress
 {
+    const OUTPUT_COMPRESSION_LEVEL = 6;
+    const OUTPUT_COMPRESSION = 2048;
+
     const MAX_LIMIT_SIZE_GOOGLE_CLOSURE = 200000; // 200KB
 
     /**
@@ -204,5 +207,21 @@ class Compress
         }
 
         return $sJsMinified;
+    }
+
+    /**
+     * zlib-compressed output.
+     *
+     * These "zlib output compression" compress the pages.
+     * It save your bandwidth and gives faster download of the pages.
+     * WARNING: It can consume high CPU resources on the server.
+     * So it might be wise not to use this method if the server isn't so powerful.
+     *
+     * @return void
+     */
+    public static function setZlipCompression()
+    {
+        ini_set('zlib.output_compression', self::OUTPUT_COMPRESSION);
+        ini_set('zlib.output_compression_level', self::OUTPUT_COMPRESSION_LEVEL);
     }
 }
