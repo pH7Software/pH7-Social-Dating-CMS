@@ -67,32 +67,32 @@ class MainController extends Controller
         switch ($sAction) {
             case 'comment-profile':
                 $this->view->table = 'profile';
-                $this->view->comments = (!empty($mParam) && is_numeric($mParam)) ? $this->oDataModel->getRecipientCommentsProfiles($mParam) : $this->view->comments = $this->oDataModel->getCommentsProfiles();
+                $this->view->comments = $this->isParamValid($mParam) ? $this->oDataModel->getRecipientCommentsProfiles($mParam) : $this->view->comments = $this->oDataModel->getCommentsProfiles();
                 break;
 
             case 'comment-blog':
                 $this->view->table = 'blog';
-                $this->view->comments = (!empty($mParam) && is_numeric($mParam)) ? $this->oDataModel->getRecipientCommentsBlogs($mParam) : $this->view->comments = $this->oDataModel->getCommentsBlogs();
+                $this->view->comments = $this->isParamValid($mParam) ? $this->oDataModel->getRecipientCommentsBlogs($mParam) : $this->view->comments = $this->oDataModel->getCommentsBlogs();
                 break;
 
             case 'comment-note':
                 $this->view->table = 'note';
-                $this->view->comments = (!empty($mParam) && is_numeric($mParam)) ? $this->oDataModel->getRecipientCommentsNotes($mParam) : $this->oDataModel->getCommentsNotes();
+                $this->view->comments = $this->isParamValid($mParam) ? $this->oDataModel->getRecipientCommentsNotes($mParam) : $this->oDataModel->getCommentsNotes();
                 break;
 
             case 'comment-picture':
                 $this->view->table = 'picture';
-                $this->view->comments = (!empty($mParam) && is_numeric($mParam)) ? $this->oDataModel->getRecipientCommentsPictures($mParam) : $this->oDataModel->getCommentsPictures();
+                $this->view->comments = $this->isParamValid($mParam) ? $this->oDataModel->getRecipientCommentsPictures($mParam) : $this->oDataModel->getCommentsPictures();
                 break;
 
             case 'comment-video':
                 $this->view->table = 'video';
-                $this->view->comments = (!empty($mParam) && is_numeric($mParam)) ? $this->oDataModel->getRecipientCommentsVideos($mParam) : $this->oDataModel->getCommentsVideos();
+                $this->view->comments = $this->isParamValid($mParam) ? $this->oDataModel->getRecipientCommentsVideos($mParam) : $this->oDataModel->getCommentsVideos();
                 break;
 
             case 'comment-game':
                 $this->view->table = 'game';
-                $this->view->comments = (!empty($mParam) && is_numeric($mParam)) ? $this->oDataModel->getRecipientCommentsGames($mParam) : $this->view->comments = $this->oDataModel->getCommentsGames();
+                $this->view->comments = $this->isParamValid($mParam) ? $this->oDataModel->getRecipientCommentsGames($mParam) : $this->view->comments = $this->oDataModel->getCommentsGames();
                 break;
         }
     }
@@ -111,5 +111,15 @@ class MainController extends Controller
     protected function setContentType()
     {
         header('Content-Type: text/xml; charset=' . PH7_ENCODING);
+    }
+
+    /**
+     * @param mixed $mParam
+     *
+     * @return bool
+     */
+    private function isParamValid($mParam)
+    {
+        return !empty($mParam) && is_numeric($mParam);
     }
 }
