@@ -50,11 +50,11 @@ namespace PH7\Framework\Error {
         /**
          * Checks if the CMS is in development mode.
          *
-         * @return boolean Returns true if the development mode is enabled else returns false.
+         * @return bool Returns true if the development mode is enabled else returns false.
          */
         public static function is()
         {
-            return (Config::getInstance()->values['mode']['environment'] === 'development');
+            return Config::getInstance()->values['mode']['environment'] === 'development';
         }
 
         /**
