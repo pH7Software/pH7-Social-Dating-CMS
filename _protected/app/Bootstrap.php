@@ -67,22 +67,6 @@ class Bootstrap
     }
 
     /**
-     * zlib-compressed output.
-     *
-     * These "zlib output compression" compress the pages.
-     * It save your bandwidth and gives faster download of the pages.
-     * WARNING: It can consume high CPU resources on the server.
-     * So it might be wise not to use this method if the server isn't so powerful.
-     *
-     * @return void
-     */
-    public function zlipCompression()
-    {
-        ini_set('zlib.output_compression', 2048);
-        ini_set('zlib.output_compression_level', 6);
-    }
-
-    /**
      * Initialize the app, load the files and launch the main FrontController router.
      *
      * @return void
@@ -109,6 +93,7 @@ class Bootstrap
             new Server; // Start Server
 
             $this->startPageBenchmark();
+            //Framework\Compress\Compress::setZlipCompression();
 
             /**
              * Initialize the FrontController, we are asking the front controller to process the HTTP request
