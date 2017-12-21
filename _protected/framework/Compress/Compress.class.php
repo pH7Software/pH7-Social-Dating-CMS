@@ -19,8 +19,8 @@ use PH7\Framework\Url\Url;
 
 class Compress
 {
-    const OUTPUT_COMPRESSION_LEVEL = 6;
-    const OUTPUT_COMPRESSION = 2048;
+    const COMPRESSION_LEVEL = 6;
+    const COMPRESSION_BYTE_BUFFER_SIZE = 2048;
 
     const MAX_LIMIT_SIZE_GOOGLE_CLOSURE = 200000; // 200KB
 
@@ -221,7 +221,7 @@ class Compress
      */
     public static function setZlipCompression()
     {
-        ini_set('zlib.output_compression', self::OUTPUT_COMPRESSION);
-        ini_set('zlib.output_compression_level', self::OUTPUT_COMPRESSION_LEVEL);
+        ini_set('zlib.output_compression', self::COMPRESSION_LEVEL);
+        ini_set('zlib.output_compression_level', self::COMPRESSION_BYTE_BUFFER_SIZE);
     }
 }
