@@ -47,4 +47,3 @@ class PH7Exception extends Exception
         }
     }
 }
-

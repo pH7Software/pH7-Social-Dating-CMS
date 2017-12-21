@@ -55,10 +55,10 @@ final class LoggerExcept extends Logger
         // UserAgent: The User Agent of the Browser Web.
         // UrlPag: The URL page where the exception is thrown.
         // Query: The request for such a page.
-        // Message: constains the error message.
+        // Message: contains the error message.
         // Level: contains the log level.
-        // File: constains the file name.
-        // Line: constains the line number.
+        // File: contains the file name.
+        // Line: contains the line number.
         $sAgent = (null !== ($mAgent = $this->browser->getUserAgent())) ? $mAgent : 'NO USER AGENT';
         $sQuery = (null !== ($mQuery = (new Http)->getQueryString())) ? $mQuery : 'NO QUERY STRING';
         $aLog = [
