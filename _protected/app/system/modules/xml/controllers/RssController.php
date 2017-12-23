@@ -43,11 +43,24 @@ class RssController extends MainController
     {
         $sAction = $this->httpRequest->get('action');
         $mParam = $this->httpRequest->get('param');
-        $this->_xmlRouter($sAction, $mParam);
+        $this->xmlRouter($sAction, $mParam);
         $this->sXmlType = 'rss';
         $this->view->current_date = DateFormat::getRss(); // Date format for RSS feed
 
         // RSS router
+        $this->generateRssCommentRouter($sAction, $mParam);
+
+        $this->xmlOutput();
+    }
+
+    /**
+     * @param string $sAction
+     * @param mixed $mParam
+     *
+     * @return void
+     */
+    private function generateRssCommentRouter($sAction, $mParam)
+    {
         switch ($sAction) {
             case 'blog':
             case 'note':
@@ -65,16 +78,14 @@ class RssController extends MainController
                 $this->sAction = 'comment.inc';
                 break;
 
-            case 'forum-post' && !empty($mParam) && is_numeric($mParam):
+            case 'forum-post' && $this->isParamValid($mParam):
                 $this->view->setCaching(false); // We disable the cache since they are dynamic pages managed by the router.
                 $this->view->forums_messages = $this->oDataModel->getForumsMessages($mParam);
                 $this->sAction = $sAction;
                 break;
 
             default:
-                $this->displayPageNotFound(t('Not Found RSS Feed!'));
+                $this->displayPageNotFound(t('RSS Feed Not Found!'));
         }
-
-        $this->xmlOutput();
     }
 }
