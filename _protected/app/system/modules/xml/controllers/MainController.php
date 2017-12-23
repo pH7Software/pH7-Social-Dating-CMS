@@ -50,7 +50,7 @@ class MainController extends Controller
      *
      * @return void
      */
-    protected function _xmlRouter($sAction, $mParam = null)
+    protected function xmlRouter($sAction, $mParam = null)
     {
         $this->view->members = $this->oDataModel->getProfiles();
         $this->view->blogs = $this->oDataModel->getBlogs();
@@ -64,6 +64,43 @@ class MainController extends Controller
         $this->view->games = $this->oDataModel->getGames();
 
         // For the Comments
+        $this->generateCommentRouter($sAction, $mParam);
+    }
+
+    protected function xmlOutput()
+    {
+        /* Compression damages the XML files, so we disable them */
+        $this->view->setHtmlCompress(false);
+        $this->view->setPhpCompress(false);
+
+        // Display
+        $this->setContentType(); // Header
+        $this->view->display($this->sAction . PH7_DOT . $this->sXmlType . '.xml.tpl');
+    }
+
+    protected function setContentType()
+    {
+        header('Content-Type: text/xml; charset=' . PH7_ENCODING);
+    }
+
+    /**
+     * @param mixed $mParam
+     *
+     * @return bool
+     */
+    protected function isParamValid($mParam)
+    {
+        return !empty($mParam) && is_numeric($mParam);
+    }
+
+    /**
+     * @param string $sAction
+     * @param mixed $mParam
+     *
+     * @return void
+     */
+    private function generateCommentRouter($sAction, $mParam)
+    {
         switch ($sAction) {
             case 'comment-profile':
                 $this->view->table = 'profile';
@@ -95,31 +132,5 @@ class MainController extends Controller
                 $this->view->comments = $this->isParamValid($mParam) ? $this->oDataModel->getRecipientCommentsGames($mParam) : $this->view->comments = $this->oDataModel->getCommentsGames();
                 break;
         }
-    }
-
-    protected function xmlOutput()
-    {
-        /* Compression damages the XML files, so we disable them */
-        $this->view->setHtmlCompress(false);
-        $this->view->setPhpCompress(false);
-
-        // Display
-        $this->setContentType(); // Header
-        $this->view->display($this->sAction . PH7_DOT . $this->sXmlType . '.xml.tpl');
-    }
-
-    protected function setContentType()
-    {
-        header('Content-Type: text/xml; charset=' . PH7_ENCODING);
-    }
-
-    /**
-     * @param mixed $mParam
-     *
-     * @return bool
-     */
-    private function isParamValid($mParam)
-    {
-        return !empty($mParam) && is_numeric($mParam);
     }
 }
