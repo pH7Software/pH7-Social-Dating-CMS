@@ -11,7 +11,7 @@ namespace PH7;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Xml\Link;
 
-class RssController extends MainController implements XmlContrable
+class RssController extends MainController implements XmlControllable
 {
     public function __construct()
     {
