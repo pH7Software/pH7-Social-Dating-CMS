@@ -43,7 +43,7 @@ class RssController extends MainController
     {
         $sAction = $this->httpRequest->get('action');
         $mParam = $this->httpRequest->get('param');
-        $this->xmlRouter($sAction, $mParam);
+        $this->generateXmlRouter($sAction, $mParam);
         $this->sXmlType = 'rss';
         $this->view->current_date = DateFormat::getRss(); // Date format for RSS feed
 

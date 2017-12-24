@@ -50,7 +50,7 @@ class MainController extends Controller
      *
      * @return void
      */
-    protected function xmlRouter($sAction, $mParam = null)
+    protected function generateXmlRouter($sAction, $mParam = null)
     {
         $this->view->members = $this->oDataModel->getProfiles();
         $this->view->blogs = $this->oDataModel->getBlogs();
