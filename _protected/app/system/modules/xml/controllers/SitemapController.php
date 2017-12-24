@@ -48,7 +48,7 @@ class SitemapController extends MainController
     public function xmlRouter()
     {
         $sAction = $this->httpRequest->get('action');
-        $this->xmlRouter($sAction);
+        $this->generateXmlRouter($sAction);
         $this->sXmlType = 'sitemap';
         $this->view->current_date = DateFormat::getSitemap(); // Date format for sitemap
 
