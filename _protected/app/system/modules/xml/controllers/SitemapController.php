@@ -12,7 +12,7 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Xml\Exception as XmlException;
 use PH7\Framework\Xml\Link;
 
-class SitemapController extends MainController
+class SitemapController extends MainController implements Xmlable
 {
     public function __construct()
     {
