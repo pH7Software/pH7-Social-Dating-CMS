@@ -46,7 +46,7 @@ class Design
     const CACHE_GROUP = 'str/design';
     const CACHE_AVATAR_GROUP = 'str/design/avatar/'; // We put a slash for after creating a directory for each username
 
-    const AVATAR_IMG_EXT = '.png';
+    const AVATAR_IMG_EXT = '.svg';
 
     const SUCCESS_TYPE = 'success';
     const ERROR_TYPE = 'error';
