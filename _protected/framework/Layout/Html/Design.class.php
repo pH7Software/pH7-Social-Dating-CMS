@@ -46,7 +46,8 @@ class Design
     const CACHE_GROUP = 'str/design';
     const CACHE_AVATAR_GROUP = 'str/design/avatar/'; // We put a slash for after creating a directory for each username
 
-    const AVATAR_IMG_EXT = '.png';
+    const AVATAR_IMG_EXT = '.svg';
+    const PENDING_IMG_EXT = '.png';
 
     const SUCCESS_TYPE = 'success';
     const ERROR_TYPE = 'error';
@@ -638,9 +639,8 @@ class Design
                         // If there is no Gravatar, we set the default pH7CMS's avatar
                         $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/' . $sIcon . '_no_picture' . $sSize . self::AVATAR_IMG_EXT;
                     }
-                } elseif (!$bIsModerate) {
-                    // We do not display the pending approval image when an administrator is on the panel admin
-                    $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/pending' . $sSize . self::AVATAR_IMG_EXT;
+                } elseif (!$bIsModerate) { // We don't display pending approval image when admins are on the panel admin
+                    $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/pending' . $sSize . self::PENDING_IMG_EXT;
                 }
             }
             unset($oUserModel);
