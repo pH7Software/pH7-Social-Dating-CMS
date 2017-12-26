@@ -47,6 +47,7 @@ class Design
     const CACHE_AVATAR_GROUP = 'str/design/avatar/'; // We put a slash for after creating a directory for each username
 
     const AVATAR_IMG_EXT = '.svg';
+    const PENDING_IMG_EXT = '.png';
 
     const SUCCESS_TYPE = 'success';
     const ERROR_TYPE = 'error';
@@ -640,7 +641,7 @@ class Design
                     }
                 } elseif (!$bIsModerate) {
                     // We do not display the pending approval image when an administrator is on the panel admin
-                    $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/pending' . $sSize . self::AVATAR_IMG_EXT;
+                    $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/pending' . $sSize . self::PENDING_IMG_EXT;
                 }
             }
             unset($oUserModel);
