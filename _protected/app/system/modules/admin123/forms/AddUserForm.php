@@ -43,7 +43,7 @@ class AddUserForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('State/Province:'), 'state', array('id' => 'str_state', 'validation' => new \PFBC\Validation\Str(2, 150))));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Postal Code:'), 'zip_code', array('id' => 'str_zip_code', 'validation' => new \PFBC\Validation\Str(2, 15))));
         $oForm->addElement(new \PFBC\Element\CKEditor(t('Description:'), 'description', array('validation' => new \PFBC\Validation\Str(10, 2000), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\File(t('Avatar'), 'avatar', array('accept' => 'image/*')));
+        $oForm->addElement(new \PFBC\Element\File(t('Profile Photo'), 'avatar', array('accept' => 'image/*')));
         $oForm->addElement(new \PFBC\Element\Url(t('Your Website:'), 'website'));
         $oForm->addElement(new \PFBC\Element\Url(t('Social Network Site:'), 'social_network_site', array('description' => t('The url of your profile Facebook, Twitter, Google+, etc.'))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
