@@ -154,7 +154,8 @@ class JoinForm
         }
 
         $aAvatarFieldOption = ['accept' => 'image/*'];
-        if (DbConfig::getSetting('requireRegistrationAvatar')) {
+        $bIsAvatarRequired = DbConfig::getSetting('requireRegistrationAvatar');
+        if ($bIsAvatarRequired) {
             $aAvatarFieldOption += ['required' => 1];
         }
 
@@ -165,7 +166,7 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\File(t('Your Profile Photo'), 'avatar', $aAvatarFieldOption));
         $oForm->addElement(new \PFBC\Element\Button(t('Add My Photo')));
 
-        if (!DbConfig::getSetting('requireRegistrationAvatar')) {
+        if (!$bIsAvatarRequired) {
             $oForm->addElement(new \PFBC\Element\Button(t('Skip'), 'submit', array('formaction' => Uri::get('user', 'signup', 'done'))));
         }
         $oForm->render();
