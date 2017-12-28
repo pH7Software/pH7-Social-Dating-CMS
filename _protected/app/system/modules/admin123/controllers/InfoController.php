@@ -55,7 +55,7 @@ class InfoController extends Controller
 
     private function getTweetPost()
     {
-        $sMsg = t("I built my social #dating business with #pH7CMS #DatingSoftware -> %0% \n%1%", Kernel::SOFTWARE_TWITTER, Kernel::SOFTWARE_GIT_REPO);
+        $sMsg = t("I built my social #DatingBusiness with #pH7CMS, #DatingSoftware -> %0% \n%1%", Kernel::SOFTWARE_TWITTER, Kernel::SOFTWARE_GIT_REPO);
 
         return self::TWITTER_TWEET_URL . Url::encode($sMsg);
     }
