@@ -433,7 +433,7 @@ function check_license($sKey)
 function get_tweet_post($sTwitterUsername, $sGitRepoUrl)
 {
     $sTwitterTweetUrl = 'https://twitter.com/intent/tweet?text=';
-    $sMsg = sprintf("Just built my social dating website with #pH7CMS ;) %s \n%s", $sTwitterUsername, $sGitRepoUrl);
+    $sMsg = sprintf("Just built my social #dating #website with #pH7CMS ;) %s \n%s #DatingSoftware", $sTwitterUsername, $sGitRepoUrl);
 
     return $sTwitterTweetUrl . urlencode($sMsg);
 }
