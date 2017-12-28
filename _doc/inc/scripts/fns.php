@@ -25,6 +25,7 @@ function get_browser_lang()
  * Display a page if the file exists, otherwise displays a 404.
  *
  * @param string $sPage The page.
+ *
  * @return void
  */
 function get_page($sPage)
@@ -41,6 +42,7 @@ function get_page($sPage)
  * Parse the text to transform variable.
  *
  * @param string $sContent The text.
+ *
  * @return string The text parsed.
  */
 function parse_var($sContent)
@@ -86,7 +88,8 @@ function get_lang()
 
 /**
  * @param string $sDir The directory.
- * @return string The list of the folder that is in the directory.
+ *
+ * @return array The list of the folder that is in the directory.
  */
 function get_dir_list($sDir)
 {
@@ -138,6 +141,7 @@ function set_lang()
  * Escape string with htmlspecialchars() PHP function.
  *
  * @param string $sVal
+ *
  * @return string
  */
 function escape($sVal)
