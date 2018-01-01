@@ -113,7 +113,7 @@ class GoogleKeywordsRankAPI
     public function getKeywordsRank($keywords)
     {
         if (isset($this->url) && isset($keywords)) {
-            $base_url = 'http://www.google.' . $this->extension . '/search?hl=en&q=' . urlencode($keywords) . '&start=';
+            $base_url = 'http://www.google.' . $this->extension . '/search?q=' . urlencode($keywords) . '&start=';
 
             $index = 0; // counting start from here
             $page = 0;
