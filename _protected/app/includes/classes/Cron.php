@@ -29,6 +29,7 @@ abstract class Cron extends Framework\Cron\Run\Cron
     {
         if (!$this->checkDelay()) {
             Http::setHeadersByCode(403);
+
             exit(t('This cron has already been executed.'));
         }
     }
