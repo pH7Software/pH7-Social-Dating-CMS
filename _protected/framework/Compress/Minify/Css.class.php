@@ -6,6 +6,7 @@ defined('PH7') or exit('Restricted access');
 
 /**
  * (Small changes by Pierre-Henry Soria)
+ *
  * @package Minify
  */
 
