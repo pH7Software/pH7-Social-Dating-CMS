@@ -39,7 +39,7 @@ class Smarty_Internal_Method_Literals
      * @api Smarty::addLiterals()
      *
      * @param \Smarty_Internal_TemplateBase|\Smarty_Internal_Template|\Smarty $obj
-     * @param  array|string                                                   $literals  literal or list of literals
+     * @param  array|string $literals literal or list of literals
      *                                                                                   to add
      *
      * @return \Smarty|\Smarty_Internal_Template
@@ -59,7 +59,7 @@ class Smarty_Internal_Method_Literals
      * @api Smarty::setLiterals()
      *
      * @param \Smarty_Internal_TemplateBase|\Smarty_Internal_Template|\Smarty $obj
-     * @param  array|string                                                   $literals  literal or list of literals
+     * @param  array|string $literals literal or list of literals
      *                                                                                   to set
      *
      * @return \Smarty|\Smarty_Internal_Template
@@ -80,18 +80,18 @@ class Smarty_Internal_Method_Literals
      * Smarty::$literals array gets filled with identical key values
      *
      * @param \Smarty $smarty
-     * @param  array  $literals
+     * @param  array $literals
      *
      * @throws \SmartyException
      */
     private function set(Smarty $smarty, $literals)
     {
         $literals = array_combine($literals, $literals);
-        $error = isset($literals[ $smarty->left_delimiter ]) ? array($smarty->left_delimiter) : array();
-        $error = isset($literals[ $smarty->right_delimiter ]) ? $error[] = $smarty->right_delimiter : $error;
+        $error = isset($literals[$smarty->left_delimiter]) ? array($smarty->left_delimiter) : array();
+        $error = isset($literals[$smarty->right_delimiter]) ? $error[] = $smarty->right_delimiter : $error;
         if (!empty($error)) {
             throw new SmartyException('User defined literal(s) "' . $error .
-                                      '" may not be identical with left or right delimiter');
+                '" may not be identical with left or right delimiter');
         }
         $smarty->literals = array_merge((array)$smarty->literals, (array)$literals);
     }

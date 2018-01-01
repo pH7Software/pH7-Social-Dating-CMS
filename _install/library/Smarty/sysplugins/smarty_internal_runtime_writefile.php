@@ -6,6 +6,7 @@
  * @subpackage PluginsInternal
  * @author     Monte Ohrt
  */
+
 /**
  * Smarty Internal Write File Class
  *
@@ -19,7 +20,7 @@ class Smarty_Internal_Runtime_WriteFile
      *
      * @param  string $_filepath complete filepath
      * @param  string $_contents file content
-     * @param  Smarty $smarty    smarty instance
+     * @param  Smarty $smarty smarty instance
      *
      * @throws SmartyException
      * @return boolean true

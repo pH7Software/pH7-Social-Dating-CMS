@@ -19,11 +19,11 @@ class Smarty_Internal_Nocache_Insert
     /**
      * Compiles code for the {insert} tag into cache file
      *
-     * @param  string                   $_function insert function name
-     * @param  array                    $_attr     array with parameter
+     * @param  string $_function insert function name
+     * @param  array $_attr array with parameter
      * @param  Smarty_Internal_Template $_template template object
-     * @param  string                   $_script   script name to load or 'null'
-     * @param  string                   $_assign   optional variable name
+     * @param  string $_script script name to load or 'null'
+     * @param  string $_assign optional variable name
      *
      * @return string                   compiled code
      */
@@ -38,7 +38,7 @@ class Smarty_Internal_Nocache_Insert
         // call insert
         if (isset($_assign)) {
             $_output .= "\$_smarty_tpl->assign('{$_assign}' , {$_function} (" . var_export($_attr, true) .
-                        ',\$_smarty_tpl), true);?>';
+                ',\$_smarty_tpl), true);?>';
         } else {
             $_output .= "echo {$_function}(" . var_export($_attr, true) . ',$_smarty_tpl);?>';
         }

@@ -7,6 +7,7 @@
  * @subpackage Compiler
  * @author     Uwe Tews
  */
+
 /**
  * Smarty Internal Plugin Compile Insert Class
  *
@@ -42,7 +43,7 @@ class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase
     /**
      * Compiles code for the {include_php} tag
      *
-     * @param  array                                $args     array with attributes from parser
+     * @param  array $args array with attributes from parser
      * @param \Smarty_Internal_TemplateCompilerBase $compiler compiler object
      *
      * @return string
@@ -62,7 +63,7 @@ class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase
         $_smarty_tpl = $compiler->template;
         $_filepath = false;
         $_file = null;
-        eval('$_file = @' . $_attr[ 'file' ] . ';');
+        eval('$_file = @' . $_attr['file'] . ';');
         if (!isset($compiler->smarty->security_policy) && file_exists($_file)) {
             $_filepath = $compiler->smarty->_realpath($_file, true);
         } else {
@@ -87,13 +88,13 @@ class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase
         if (isset($compiler->smarty->security_policy)) {
             $compiler->smarty->security_policy->isTrustedPHPDir($_filepath);
         }
-        if (isset($_attr[ 'assign' ])) {
+        if (isset($_attr['assign'])) {
             // output will be stored in a smarty variable instead of being displayed
-            $_assign = $_attr[ 'assign' ];
+            $_assign = $_attr['assign'];
         }
         $_once = '_once';
-        if (isset($_attr[ 'once' ])) {
-            if ($_attr[ 'once' ] === 'false') {
+        if (isset($_attr['once'])) {
+            if ($_attr['once'] === 'false') {
                 $_once = '';
             }
         }

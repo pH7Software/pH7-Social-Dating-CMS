@@ -43,7 +43,7 @@ class Smarty_Internal_Compile_Eval extends Smarty_Internal_CompileBase
     /**
      * Compiles code for the {eval} tag
      *
-     * @param  array  $args     array with attributes from parser
+     * @param  array $args array with attributes from parser
      * @param  object $compiler compiler object
      *
      * @return string compiled code
@@ -52,9 +52,9 @@ class Smarty_Internal_Compile_Eval extends Smarty_Internal_CompileBase
     {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
-        if (isset($_attr[ 'assign' ])) {
+        if (isset($_attr['assign'])) {
             // output will be stored in a smarty variable instead of being displayed
-            $_assign = $_attr[ 'assign' ];
+            $_assign = $_attr['assign'];
         }
 
         // create template object

@@ -25,8 +25,8 @@ class Smarty_Internal_Method_RegisterResource
      * @link http://www.smarty.net/docs/en/api.register.resource.tpl
      *
      * @param \Smarty_Internal_TemplateBase|\Smarty_Internal_Template|\Smarty $obj
-     * @param  string                                                         $name             name of resource type
-     * @param  Smarty_Resource|array                                          $resource_handler or instance of
+     * @param  string $name name of resource type
+     * @param  Smarty_Resource|array $resource_handler or instance of
      *                                                                                          Smarty_Resource, or
      *                                                                                          array of callbacks to
      *                                                                                          handle resource
@@ -37,7 +37,7 @@ class Smarty_Internal_Method_RegisterResource
     public function registerResource(Smarty_Internal_TemplateBase $obj, $name, $resource_handler)
     {
         $smarty = $obj->_getSmartyObj();
-        $smarty->registered_resources[ $name ] =
+        $smarty->registered_resources[$name] =
             $resource_handler instanceof Smarty_Resource ? $resource_handler : array($resource_handler, false);
         return $obj;
     }

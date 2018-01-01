@@ -57,7 +57,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_Compile_Shared_Inher
     /**
      * Compiles code for the {block} tag
      *
-     * @param  array                                 $args     array with attributes from parser
+     * @param  array $args array with attributes from parser
      * @param  \Smarty_Internal_TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
@@ -78,15 +78,15 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_Compile_Shared_Inher
         $_attr = $this->getAttributes($compiler, $args);
         $compiler->_cache['blockNesting']++;
         $_className = 'Block_' . preg_replace('![^\w]+!', '_', uniqid(rand(), true));
-        $compiler->_cache['blockName'][ $compiler->_cache['blockNesting'] ] = $_attr['name'];
-        $compiler->_cache['blockClass'][ $compiler->_cache['blockNesting'] ] = $_className;
-        $compiler->_cache['blockParams'][ $compiler->_cache['blockNesting'] ] = array();
-        $compiler->_cache['blockParams'][1]['subBlocks'][ trim($_attr['name'], '"\'') ][] = $_className;
+        $compiler->_cache['blockName'][$compiler->_cache['blockNesting']] = $_attr['name'];
+        $compiler->_cache['blockClass'][$compiler->_cache['blockNesting']] = $_className;
+        $compiler->_cache['blockParams'][$compiler->_cache['blockNesting']] = array();
+        $compiler->_cache['blockParams'][1]['subBlocks'][trim($_attr['name'], '"\'')][] = $_className;
         $this->openTag($compiler,
-                       'block',
-                       array($_attr, $compiler->nocache, $compiler->parser->current_buffer,
-                             $compiler->template->compiled->has_nocache_code,
-                             $compiler->template->caching));
+            'block',
+            array($_attr, $compiler->nocache, $compiler->parser->current_buffer,
+                $compiler->template->compiled->has_nocache_code,
+                $compiler->template->caching));
         // must whole block be nocache ?
         if ($compiler->tag_nocache) {
             $i = 0;
@@ -104,9 +104,9 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_Compile_Shared_Inher
     /**
      * Compiles code for the {$smarty.block.parent} or {$smarty.block.child}tag
      *
-     * @param  array                                $args      array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler  compiler object
-     * @param  array                                $parameter array with compilation parameter
+     * @param  array $args array with attributes from parser
+     * @param \Smarty_Internal_TemplateCompilerBase $compiler compiler object
+     * @param  array $parameter array with compilation parameter
      *
      * @return string compiled code
      * @throws \SmartyCompilerException
@@ -116,17 +116,17 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_Compile_Shared_Inher
         $name = isset($parameter[1]) ? $compiler->getId($parameter[1]) : false;
         if (!$name) {
             $compiler->trigger_template_error("invalid '\$smarty.block' expected '\$smarty.block.child' or '\$smarty.block.parent'",
-                                              null,
-                                              true);
+                null,
+                true);
         }
         if (!isset($compiler->_cache['blockNesting'])) {
             $compiler->trigger_template_error(" '\$smarty.block.{$name}' used outside {block} tags ",
-                                              $compiler->parser->lex->taglineno);
+                $compiler->parser->lex->taglineno);
         }
         $compiler->suppressNocacheProcessing = true;
         switch ($name) {
             case 'child':
-                $compiler->_cache['blockParams'][ $compiler->_cache['blockNesting'] ]['callsChild'] = 'true';
+                $compiler->_cache['blockParams'][$compiler->_cache['blockNesting']]['callsChild'] = 'true';
                 return '$_smarty_tpl->inheritance->callChild($_smarty_tpl, $this, true)';
                 break;
             case 'parent':
@@ -134,8 +134,8 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_Compile_Shared_Inher
                 break;
             default:
                 $compiler->trigger_template_error("invalid '\$smarty.block.{$name}' expected '\$smarty.block.child' or '\$smarty.block.parent'",
-                                                  null,
-                                                  true);
+                    null,
+                    true);
         }
     }
 }
@@ -149,7 +149,7 @@ class Smarty_Internal_Compile_Blockclose extends Smarty_Internal_Compile_Shared_
     /**
      * Compiles code for the {/block} tag
      *
-     * @param  array                                $args     array with attributes from parser
+     * @param  array $args array with attributes from parser
      * @param \Smarty_Internal_TemplateCompilerBase $compiler compiler object
      *
      * @return string compiled code
@@ -159,17 +159,17 @@ class Smarty_Internal_Compile_Blockclose extends Smarty_Internal_Compile_Shared_
     {
         list($_attr, $_nocache, $_buffer, $_has_nocache_code, $_caching) = $this->closeTag($compiler, array('block'));
         // init block parameter
-        $_block = $compiler->_cache['blockParams'][ $compiler->_cache['blockNesting'] ];
-        unset($compiler->_cache['blockParams'][ $compiler->_cache['blockNesting'] ]);
+        $_block = $compiler->_cache['blockParams'][$compiler->_cache['blockNesting']];
+        unset($compiler->_cache['blockParams'][$compiler->_cache['blockNesting']]);
         $_name = $_attr['name'];
         $_assign = isset($_attr['assign']) ? $_attr['assign'] : null;
         unset($_attr['assign'], $_attr['name']);
         foreach ($_attr as $name => $stat) {
             if ((is_bool($stat) && $stat !== false) || (!is_bool($stat) && $stat !== 'false')) {
-                $_block[ $name ] = 'true';
+                $_block[$name] = 'true';
             }
         }
-        $_className = $compiler->_cache['blockClass'][ $compiler->_cache['blockNesting'] ];
+        $_className = $compiler->_cache['blockClass'][$compiler->_cache['blockNesting']];
         // get compiled block code
         $_functionCode = $compiler->parser->current_buffer;
         // setup buffer for template function code
@@ -192,8 +192,8 @@ class Smarty_Internal_Compile_Blockclose extends Smarty_Internal_Compile_Shared_
         }
         $output .= "?>\n";
         $compiler->parser->current_buffer->append_subtree($compiler->parser,
-                                                          new Smarty_Internal_ParseTree_Tag($compiler->parser,
-                                                                                            $output));
+            new Smarty_Internal_ParseTree_Tag($compiler->parser,
+                $output));
         $compiler->parser->current_buffer->append_subtree($compiler->parser, $_functionCode);
         $output = "<?php\n";
         if (isset($_assign)) {
@@ -204,15 +204,15 @@ class Smarty_Internal_Compile_Blockclose extends Smarty_Internal_Compile_Shared_
         $output .= "/* {/block {$_name}} */\n\n";
         $output .= "?>\n";
         $compiler->parser->current_buffer->append_subtree($compiler->parser,
-                                                          new Smarty_Internal_ParseTree_Tag($compiler->parser,
-                                                                                            $output));
+            new Smarty_Internal_ParseTree_Tag($compiler->parser,
+                $output));
         $compiler->blockOrFunctionCode .= $f = $compiler->parser->current_buffer->to_smarty_php($compiler->parser);
         $compiler->parser->current_buffer = new Smarty_Internal_ParseTree_Template();
         // nocache plugins must be copied
         if (!empty($compiler->template->compiled->required_plugins['nocache'])) {
             foreach ($compiler->template->compiled->required_plugins['nocache'] as $plugin => $tmp) {
                 foreach ($tmp as $type => $data) {
-                    $compiler->parent_compiler->template->compiled->required_plugins['compiled'][ $plugin ][ $type ] =
+                    $compiler->parent_compiler->template->compiled->required_plugins['compiled'][$plugin][$type] =
                         $data;
                 }
             }
