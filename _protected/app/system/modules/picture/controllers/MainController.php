@@ -220,9 +220,9 @@ class MainController extends Controller
 
         Header::redirect(
             Uri::get(
-            'picture',
-            'main',
-            'albums'
+                'picture',
+                'main',
+                'albums'
             ),
             t('Your album has been removed.')
         );
