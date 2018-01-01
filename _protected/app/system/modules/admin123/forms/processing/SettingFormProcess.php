@@ -148,7 +148,7 @@ class SettingFormProcess extends Form
     {
         foreach (self::$aSettingFields as $sKey => $sVal) {
             if ($sKey === 'security_token_lifetime') {
-                $iSecTokenLifetime = (int) $this->httpRequest->post('security_token_lifetime');
+                $iSecTokenLifetime = (int)$this->httpRequest->post('security_token_lifetime');
 
                 if (!$this->str->equals($iSecTokenLifetime, DbConfig::getSetting('securityTokenLifetime'))) {
                     if ($iSecTokenLifetime < self::MIN_CSRF_TOKEN_LIFETIME) {
