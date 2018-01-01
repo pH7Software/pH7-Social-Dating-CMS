@@ -14,8 +14,8 @@ namespace PH7\Framework\Analytics;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Cache\Exception;
+use PH7\Framework\Navigation\Browser;
 
 class Analytics extends StoreStats
 {
