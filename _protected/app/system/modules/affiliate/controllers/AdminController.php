@@ -183,7 +183,7 @@ class AdminController extends Controller
     {
         Header::redirect(
             Uri::get('affiliate', 'admin', 'browse'),
-            $this->moderateRegistration($this->httpRequest->post('id'),  1)
+            $this->moderateRegistration($this->httpRequest->post('id'), 1)
         );
     }
 
