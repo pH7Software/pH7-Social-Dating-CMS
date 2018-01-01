@@ -27,7 +27,7 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource
     /**
      * populate Source Object with meta data from Resource
      *
-     * @param Smarty_Template_Source   $source    source object
+     * @param Smarty_Template_Source $source source object
      * @param Smarty_Internal_Template $_template template object
      *
      * @throws SmartyException
@@ -42,10 +42,10 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource
         foreach ($components as $component) {
             /* @var \Smarty_Template_Source $_s */
             $_s = Smarty_Template_Source::load(null, $smarty, $component);
-            if ($_s->type == 'php') {
+            if ($_s->type === 'php') {
                 throw new SmartyException("Resource type {$_s->type} cannot be used with the extends resource type");
             }
-            $sources[ $_s->uid ] = $_s;
+            $sources[$_s->uid] = $_s;
             $uid .= $_s->filepath;
             if ($_template) {
                 $exists = $exists && $_s->exists;
@@ -118,6 +118,9 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource
       *
       * @return bool
       */
+    /**
+     * @return bool
+     */
     public function checkTimestamps()
     {
         return false;

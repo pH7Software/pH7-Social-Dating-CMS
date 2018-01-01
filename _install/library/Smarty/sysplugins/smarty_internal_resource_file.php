@@ -20,7 +20,7 @@ class Smarty_Internal_Resource_File extends Smarty_Resource
     /**
      * build template filepath by traversing the template_dir array
      *
-     * @param Smarty_Template_Source    $source    source object
+     * @param Smarty_Template_Source $source source object
      * @param  Smarty_Internal_Template $_template template object
      *
      * @return string fully qualified filepath
@@ -30,50 +30,50 @@ class Smarty_Internal_Resource_File extends Smarty_Resource
     {
         $file = $source->name;
         // absolute file ?
-        if ($file[ 0 ] == '/' || $file[ 1 ] == ':') {
+        if ($file[0] === '/' || $file[1] === ':') {
             $file = $source->smarty->_realpath($file, true);
             return is_file($file) ? $file : false;
         }
         // go relative to a given template?
-        if ($file[ 0 ] == '.' && $_template && $_template->_isSubTpl() &&
+        if ($file[0] === '.' && $_template && $_template->_isSubTpl() &&
             preg_match('#^[.]{1,2}[\\\/]#', $file)
         ) {
-            if ($_template->parent->source->type != 'file' && $_template->parent->source->type != 'extends' &&
-                !isset($_template->parent->_cache[ 'allow_relative_path' ])
+            if ($_template->parent->source->type !== 'file' && $_template->parent->source->type !== 'extends' &&
+                !isset($_template->parent->_cache['allow_relative_path'])
             ) {
                 throw new SmartyException("Template '{$file}' cannot be relative to template of resource type '{$_template->parent->source->type}'");
             }
             // normalize path
-            $path = $source->smarty->_realpath(dirname($_template->parent->source->filepath) . $source->smarty->ds . $file);
+            $path = $source->smarty->_realpath(dirname($_template->parent->source->filepath) . DIRECTORY_SEPARATOR . $file);
             // files relative to a template only get one shot
             return is_file($path) ? $path : false;
         }
-        // normalize $source->smarty->ds
-        if (strpos($file, $source->smarty->ds == '/' ? '\\' : '/') !== false) {
-            $file = str_replace($source->smarty->ds == '/' ? '\\' : '/', $source->smarty->ds, $file);
+        // normalize DIRECTORY_SEPARATOR
+        if (strpos($file, DIRECTORY_SEPARATOR === '/' ? '\\' : '/') !== false) {
+            $file = str_replace(DIRECTORY_SEPARATOR === '/' ? '\\' : '/', DIRECTORY_SEPARATOR, $file);
         }
 
         $_directories = $source->smarty->getTemplateDir(null, $source->isConfig);
         // template_dir index?
-        if ($file[ 0 ] == '[' && preg_match('#^\[([^\]]+)\](.+)$#', $file, $fileMatch)) {
-            $file = $fileMatch[ 2 ];
-            $_indices = explode(',', $fileMatch[ 1 ]);
+        if ($file[0] === '[' && preg_match('#^\[([^\]]+)\](.+)$#', $file, $fileMatch)) {
+            $file = $fileMatch[2];
+            $_indices = explode(',', $fileMatch[1]);
             $_index_dirs = array();
             foreach ($_indices as $index) {
                 $index = trim($index);
                 // try string indexes
-                if (isset($_directories[ $index ])) {
-                    $_index_dirs[] = $_directories[ $index ];
+                if (isset($_directories[$index])) {
+                    $_index_dirs[] = $_directories[$index];
                 } elseif (is_numeric($index)) {
                     // try numeric index
-                    $index = (int) $index;
-                    if (isset($_directories[ $index ])) {
-                        $_index_dirs[] = $_directories[ $index ];
+                    $index = (int)$index;
+                    if (isset($_directories[$index])) {
+                        $_index_dirs[] = $_directories[$index];
                     } else {
                         // try at location index
                         $keys = array_keys($_directories);
-                        if (isset($_directories[ $keys[ $index ] ])) {
-                            $_index_dirs[] = $_directories[ $keys[ $index ] ];
+                        if (isset($_directories[$keys[$index]])) {
+                            $_index_dirs[] = $_directories[$keys[$index]];
                         }
                     }
                 }
@@ -90,7 +90,7 @@ class Smarty_Internal_Resource_File extends Smarty_Resource
         foreach ($_directories as $_directory) {
             $path = $_directory . $file;
             if (is_file($path)) {
-                return (strpos($path, '.' . $source->smarty->ds) !== false) ? $source->smarty->_realpath($path) : $path;
+                return (strpos($path, '.' . DIRECTORY_SEPARATOR) !== false) ? $source->smarty->_realpath($path) : $path;
             }
         }
         if (!isset($_index_dirs)) {
@@ -110,8 +110,10 @@ class Smarty_Internal_Resource_File extends Smarty_Resource
     /**
      * populate Source Object with meta data from Resource
      *
-     * @param Smarty_Template_Source   $source    source object
+     * @param Smarty_Template_Source $source source object
      * @param Smarty_Internal_Template $_template template object
+     *
+     * @throws \SmartyException
      */
     public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template = null)
     {
@@ -123,7 +125,7 @@ class Smarty_Internal_Resource_File extends Smarty_Resource
             }
             $source->exists = true;
             $source->uid = sha1($source->filepath . ($source->isConfig ? $source->smarty->_joined_config_dir :
-                                    $source->smarty->_joined_template_dir));
+                    $source->smarty->_joined_template_dir));
             $source->timestamp = filemtime($source->filepath);
         } else {
             $source->timestamp = $source->exists = false;
@@ -159,7 +161,7 @@ class Smarty_Internal_Resource_File extends Smarty_Resource
             return file_get_contents($source->filepath);
         }
         throw new SmartyException('Unable to read ' . ($source->isConfig ? 'config' : 'template') .
-                                  " {$source->type} '{$source->name}'");
+            " {$source->type} '{$source->name}'");
     }
 
     /**

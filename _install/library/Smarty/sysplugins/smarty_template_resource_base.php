@@ -80,9 +80,11 @@ abstract class Smarty_Template_Resource_Base
     public $required_plugins = array();
 
     /**
-     * Included subtemplates
+     * Included sub templates
+     * - index name
+     * - value use count
      *
-     * @var array
+     * @var int[]
      */
     public $includes = array();
 
@@ -104,7 +106,7 @@ abstract class Smarty_Template_Resource_Base
      * get rendered template content by calling compiled or cached template code
      *
      * @param \Smarty_Internal_Template $_template
-     * @param string                    $unifunc function with template code
+     * @param string $unifunc function with template code
      *
      * @throws \Exception
      */
@@ -130,8 +132,7 @@ abstract class Smarty_Template_Resource_Base
                 call_user_func($callback, $_template);
             }
             $_template->isRenderingCache = false;
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             $_template->isRenderingCache = false;
             while (ob_get_level() > $level) {
                 ob_end_clean();

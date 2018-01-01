@@ -64,7 +64,7 @@ class SmartyBC extends Smarty
      * wrapper for assign_by_ref
      *
      * @param string $tpl_var the template variable name
-     * @param mixed  &$value  the referenced value to assign
+     * @param mixed &$value the referenced value to assign
      */
     public function assign_by_ref($tpl_var, &$value)
     {
@@ -74,9 +74,9 @@ class SmartyBC extends Smarty
     /**
      * wrapper for append_by_ref
      *
-     * @param string  $tpl_var the template variable name
-     * @param mixed   &$value  the referenced value to append
-     * @param boolean $merge   flag if array elements shall be merged
+     * @param string $tpl_var the template variable name
+     * @param mixed &$value the referenced value to append
+     * @param boolean $merge flag if array elements shall be merged
      */
     public function append_by_ref($tpl_var, &$value, $merge = false)
     {
@@ -96,10 +96,12 @@ class SmartyBC extends Smarty
     /**
      * Registers custom function to be used in templates
      *
-     * @param string $function      the name of the template function
+     * @param string $function the name of the template function
      * @param string $function_impl the name of the PHP function to register
-     * @param bool   $cacheable
-     * @param mixed  $cache_attrs
+     * @param bool $cacheable
+     * @param mixed $cache_attrs
+     *
+     * @throws \SmartyException
      */
     public function register_function($function, $function_impl, $cacheable = true, $cache_attrs = null)
     {
@@ -119,11 +121,11 @@ class SmartyBC extends Smarty
     /**
      * Registers object to be used in templates
      *
-     * @param string  $object        name of template object
-     * @param object  $object_impl   the referenced PHP object to register
-     * @param array   $allowed       list of allowed methods (empty = all)
-     * @param boolean $smarty_args   smarty argument format, else traditional
-     * @param array   $block_methods list of methods that are block format
+     * @param string $object name of template object
+     * @param object $object_impl the referenced PHP object to register
+     * @param array $allowed list of allowed methods (empty = all)
+     * @param boolean $smarty_args smarty argument format, else traditional
+     * @param array $block_methods list of methods that are block format
      *
      * @throws SmartyException
      * @internal param array $block_functs list of methods that are block format
@@ -149,10 +151,12 @@ class SmartyBC extends Smarty
     /**
      * Registers block function to be used in templates
      *
-     * @param string $block      name of template block
+     * @param string $block name of template block
      * @param string $block_impl PHP function to register
-     * @param bool   $cacheable
-     * @param mixed  $cache_attrs
+     * @param bool $cacheable
+     * @param mixed $cache_attrs
+     *
+     * @throws \SmartyException
      */
     public function register_block($block, $block_impl, $cacheable = true, $cache_attrs = null)
     {
@@ -172,9 +176,11 @@ class SmartyBC extends Smarty
     /**
      * Registers compiler function
      *
-     * @param string $function      name of template function
+     * @param string $function name of template function
      * @param string $function_impl name of PHP function to register
-     * @param bool   $cacheable
+     * @param bool $cacheable
+     *
+     * @throws \SmartyException
      */
     public function register_compiler_function($function, $function_impl, $cacheable = true)
     {
@@ -194,8 +200,10 @@ class SmartyBC extends Smarty
     /**
      * Registers modifier to be used in templates
      *
-     * @param string $modifier      name of template modifier
+     * @param string $modifier name of template modifier
      * @param string $modifier_impl name of PHP function to register
+     *
+     * @throws \SmartyException
      */
     public function register_modifier($modifier, $modifier_impl)
     {
@@ -215,8 +223,8 @@ class SmartyBC extends Smarty
     /**
      * Registers a resource to fetch a template
      *
-     * @param string $type      name of resource
-     * @param array  $functions array of functions to handle resource
+     * @param string $type name of resource
+     * @param array $functions array of functions to handle resource
      */
     public function register_resource($type, $functions)
     {
@@ -238,6 +246,8 @@ class SmartyBC extends Smarty
      * to a template before compiling
      *
      * @param callable $function
+     *
+     * @throws \SmartyException
      */
     public function register_prefilter($function)
     {
@@ -259,6 +269,8 @@ class SmartyBC extends Smarty
      * to a compiled template after compilation
      *
      * @param callable $function
+     *
+     * @throws \SmartyException
      */
     public function register_postfilter($function)
     {
@@ -280,6 +292,8 @@ class SmartyBC extends Smarty
      * to a template output
      *
      * @param callable $function
+     *
+     * @throws \SmartyException
      */
     public function register_outputfilter($function)
     {
@@ -301,6 +315,8 @@ class SmartyBC extends Smarty
      *
      * @param string $type filter type
      * @param string $name filter name
+     *
+     * @throws \SmartyException
      */
     public function load_filter($type, $name)
     {
@@ -310,10 +326,10 @@ class SmartyBC extends Smarty
     /**
      * clear cached content for the given template and cache id
      *
-     * @param  string $tpl_file   name of template file
-     * @param  string $cache_id   name of cache_id
+     * @param  string $tpl_file name of template file
+     * @param  string $cache_id name of cache_id
      * @param  string $compile_id name of compile_id
-     * @param  string $exp_time   expiration time
+     * @param  string $exp_time expiration time
      *
      * @return boolean
      */
@@ -341,7 +357,9 @@ class SmartyBC extends Smarty
      * @param  string $cache_id
      * @param  string $compile_id
      *
-     * @return boolean
+     * @return bool
+     * @throws \Exception
+     * @throws \SmartyException
      */
     public function is_cached($tpl_file, $cache_id = null, $compile_id = null)
     {
@@ -377,7 +395,8 @@ class SmartyBC extends Smarty
      *
      * @param  string $tpl_file
      *
-     * @return boolean
+     * @return bool
+     * @throws \SmartyException
      */
     public function template_exists($tpl_file)
     {
@@ -445,7 +464,7 @@ class SmartyBC extends Smarty
     /**
      * trigger Smarty error
      *
-     * @param string  $error_msg
+     * @param string $error_msg
      * @param integer $error_type
      */
     public function trigger_error($error_msg, $error_type = E_USER_WARNING)

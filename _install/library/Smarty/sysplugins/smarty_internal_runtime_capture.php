@@ -55,17 +55,19 @@ class Smarty_Internal_Runtime_Capture
      * Open capture section
      *
      * @param \Smarty_Internal_Template $_template
-     * @param string                    $buffer capture name
-     * @param string                    $assign variable name
-     * @param string                    $append variable name
+     * @param string $buffer capture name
+     * @param string $assign variable name
+     * @param string $append variable name
      */
     public function open(Smarty_Internal_Template $_template, $buffer, $assign, $append)
     {
         if (!$this->isRegistered) {
             $this->register($_template);
         }
-        $this->captureStack[] = array($buffer, $assign, $append);
-        $this->captureCount ++;
+        $this->captureStack[] = array($buffer,
+            $assign,
+            $append);
+        $this->captureCount++;
         ob_start();
     }
 
@@ -76,8 +78,10 @@ class Smarty_Internal_Runtime_Capture
      */
     private function register(Smarty_Internal_Template $_template)
     {
-        $_template->startRenderCallbacks[] = array($this, 'startRender');
-        $_template->endRenderCallbacks[] = array($this, 'endRender');
+        $_template->startRenderCallbacks[] = array($this,
+            'startRender');
+        $_template->endRenderCallbacks[] = array($this,
+            'endRender');
         $this->startRender($_template);
         $this->isRegistered = true;
     }
@@ -104,14 +108,14 @@ class Smarty_Internal_Runtime_Capture
     {
         if ($this->captureCount) {
             list($buffer, $assign, $append) = array_pop($this->captureStack);
-            $this->captureCount --;
+            $this->captureCount--;
             if (isset($assign)) {
                 $_template->assign($assign, ob_get_contents());
             }
             if (isset($append)) {
                 $_template->append($append, ob_get_contents());
             }
-            $this->namedBuffer[ $buffer ] = ob_get_clean();
+            $this->namedBuffer[$buffer] = ob_get_clean();
         } else {
             $this->error($_template);
         }
@@ -126,20 +130,24 @@ class Smarty_Internal_Runtime_Capture
      */
     public function error(Smarty_Internal_Template $_template)
     {
-        throw new SmartyException("Not matching {capture}{/capture} in \"{$_template->template_resource}\"");
+        throw new SmartyException("Not matching {capture}{/capture} in '{$_template->template_resource}'");
     }
 
     /**
-     * Return content of named capture buffer
+     * Return content of named capture buffer by key or as array
      *
      * @param \Smarty_Internal_Template $_template
-     * @param                           $name
+     * @param   string|null $name
      *
-     * @return null
+     * @return string|string[]|null
      */
-    public function getBuffer(Smarty_Internal_Template $_template, $name)
+    public function getBuffer(Smarty_Internal_Template $_template, $name = null)
     {
-        return isset($this->namedBuffer[ $name ]) ? $this->namedBuffer[ $name ] : null;
+        if (isset($name)) {
+            return isset($this->namedBuffer[$name]) ? $this->namedBuffer[$name] : null;
+        } else {
+            return $this->namedBuffer;
+        }
     }
 
     /**
