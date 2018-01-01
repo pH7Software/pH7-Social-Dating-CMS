@@ -43,7 +43,7 @@ class GoogleKeywordsRankAPI
      * @return void
      */
 
-    public function __construct($url, $maxPages = 1, $extension = 'en')
+    public function __construct($url, $maxPages = 1, $extension = 'com')
     {
         $this->url = str_replace('http://www.', '', $url);
         $this->extension = $extension;
