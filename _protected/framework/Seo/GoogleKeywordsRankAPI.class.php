@@ -74,7 +74,6 @@ class GoogleKeywordsRankAPI
      *
      * @return int maxPages
      */
-
     public function getMaxPages()
     {
         return $this->maxPages;
