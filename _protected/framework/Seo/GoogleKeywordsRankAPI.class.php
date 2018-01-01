@@ -30,7 +30,7 @@ class GoogleKeywordsRankAPI
     private $maxPages = 1;
 
     /** Extension of the google domain (fr,com,...) **/
-    private $extension = 'fr';
+    private $extension = 'com';
 
     /** The HTML response send by the service **/
     private $response;
@@ -112,15 +112,12 @@ class GoogleKeywordsRankAPI
      *
      * @param string $keywords keywords
      *
-     * @return array array with keywords=>rank
+     * @return array An array with keywords=>rank
      */
-
-
     public function getKeywordsRank($keywords)
     {
-
         if (isset($this->url) && isset($keywords)) {
-            $base_url = 'http://www.google.' . $this->extension . '/search?hl=fr&q=' . urlencode($keywords) . '&start=';
+            $base_url = 'http://www.google.' . $this->extension . '/search?hl=en&q=' . urlencode($keywords) . '&start=';
 
             $index = 0; // counting start from here
             $page = 0;
