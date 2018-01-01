@@ -59,7 +59,7 @@ class Smarty_Internal_Resource_Php extends Smarty_Internal_Resource_File
     /**
      * populate compiled object with compiled filepath
      *
-     * @param Smarty_Template_Compiled $compiled  compiled object
+     * @param Smarty_Template_Compiled $compiled compiled object
      * @param Smarty_Internal_Template $_template template object (is ignored)
      */
     public function populateCompiledFilepath(Smarty_Template_Compiled $compiled, Smarty_Internal_Template $_template)
@@ -67,16 +67,16 @@ class Smarty_Internal_Resource_Php extends Smarty_Internal_Resource_File
         $compiled->filepath = $_template->source->filepath;
         $compiled->timestamp = $_template->source->timestamp;
         $compiled->exists = $_template->source->exists;
-        $compiled->file_dependency[ $_template->source->uid ] =
+        $compiled->file_dependency[$_template->source->uid] =
             array($compiled->filepath,
-                  $compiled->timestamp,
-                  $_template->source->type,);
+                $compiled->timestamp,
+                $_template->source->type,);
     }
 
     /**
      * Render and output the template (without using the compiler)
      *
-     * @param  Smarty_Template_Source   $source    source object
+     * @param  Smarty_Template_Source $source source object
      * @param  Smarty_Internal_Template $_template template object
      *
      * @return void
@@ -89,7 +89,7 @@ class Smarty_Internal_Resource_Php extends Smarty_Internal_Resource_File
         }
         if (!$source->exists) {
             throw new SmartyException("Unable to load template '{$source->type}:{$source->name}'" .
-                                      ($_template->_isSubTpl() ? " in '{$_template->parent->template_resource}'" : ''));
+                ($_template->_isSubTpl() ? " in '{$_template->parent->template_resource}'" : ''));
         }
 
         // prepare variables

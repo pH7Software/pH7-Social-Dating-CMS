@@ -25,12 +25,12 @@ class Smarty_Internal_Method_RegisterPlugin
      * @link http://www.smarty.net/docs/en/api.register.plugin.tpl
      *
      * @param \Smarty_Internal_TemplateBase|\Smarty_Internal_Template|\Smarty $obj
-     * @param  string                                                         $type       plugin type
-     * @param  string                                                         $name       name of template tag
-     * @param  callback                                                       $callback   PHP callback to register
-     * @param  bool                                                           $cacheable  if true (default) this
+     * @param  string $type plugin type
+     * @param  string $name name of template tag
+     * @param  callback $callback PHP callback to register
+     * @param  bool $cacheable if true (default) this
      *                                                                                    function is cache able
-     * @param  mixed                                                          $cache_attr caching attributes if any
+     * @param  mixed $cache_attr caching attributes if any
      *
      * @return \Smarty|\Smarty_Internal_Template
      * @throws SmartyException              when the plugin tag is invalid
@@ -39,12 +39,12 @@ class Smarty_Internal_Method_RegisterPlugin
                                    $cache_attr = null)
     {
         $smarty = $obj->_getSmartyObj();
-        if (isset($smarty->registered_plugins[ $type ][ $name ])) {
+        if (isset($smarty->registered_plugins[$type][$name])) {
             throw new SmartyException("Plugin tag '{$name}' already registered");
         } elseif (!is_callable($callback)) {
             throw new SmartyException("Plugin '{$name}' not callable");
         } else {
-            $smarty->registered_plugins[ $type ][ $name ] = array($callback, (bool) $cacheable, (array) $cache_attr);
+            $smarty->registered_plugins[$type][$name] = array($callback, (bool)$cacheable, (array)$cache_attr);
         }
         return $obj;
     }

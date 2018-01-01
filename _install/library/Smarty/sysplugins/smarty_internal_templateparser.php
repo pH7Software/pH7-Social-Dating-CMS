@@ -22,84 +22,84 @@ class TP_yyStackEntry
 class Smarty_Internal_Templateparser
 {
     #line 23 "../smarty/lexer/smarty_internal_templateparser.y"
-    const Err1                 = 'Security error: Call to private object member not allowed';
-    const Err2                 = 'Security error: Call to dynamic object member not allowed';
-    const Err3                 = 'PHP in template not allowed. Use SmartyBC to enable it';
-    const TP_VERT              = 1;
-    const TP_COLON             = 2;
-    const TP_UNIMATH           = 3;
-    const TP_PHP               = 4;
-    const TP_TEXT              = 5;
-    const TP_STRIPON           = 6;
-    const TP_STRIPOFF          = 7;
-    const TP_LITERALSTART      = 8;
-    const TP_LITERALEND        = 9;
-    const TP_LITERAL           = 10;
-    const TP_SIMPELOUTPUT      = 11;
-    const TP_SIMPLETAG         = 12;
-    const TP_LDEL              = 13;
-    const TP_RDEL              = 14;
-    const TP_DOLLARID          = 15;
-    const TP_EQUAL             = 16;
-    const TP_ID                = 17;
-    const TP_PTR               = 18;
-    const TP_LDELMAKENOCACHE   = 19;
-    const TP_LDELIF            = 20;
-    const TP_LDELFOR           = 21;
-    const TP_SEMICOLON         = 22;
-    const TP_INCDEC            = 23;
-    const TP_TO                = 24;
-    const TP_STEP              = 25;
-    const TP_LDELFOREACH       = 26;
-    const TP_SPACE             = 27;
-    const TP_AS                = 28;
-    const TP_APTR              = 29;
-    const TP_LDELSETFILTER     = 30;
-    const TP_CLOSETAG          = 31;
-    const TP_LDELSLASH         = 32;
-    const TP_ATTR              = 33;
-    const TP_INTEGER           = 34;
-    const TP_COMMA             = 35;
-    const TP_OPENP             = 36;
-    const TP_CLOSEP            = 37;
-    const TP_MATH              = 38;
-    const TP_ISIN              = 39;
-    const TP_QMARK             = 40;
-    const TP_NOT               = 41;
-    const TP_TYPECAST          = 42;
-    const TP_HEX               = 43;
-    const TP_DOT               = 44;
-    const TP_INSTANCEOF        = 45;
+    const Err1 = 'Security error: Call to private object member not allowed';
+    const Err2 = 'Security error: Call to dynamic object member not allowed';
+    const Err3 = 'PHP in template not allowed. Use SmartyBC to enable it';
+    const TP_VERT = 1;
+    const TP_COLON = 2;
+    const TP_UNIMATH = 3;
+    const TP_PHP = 4;
+    const TP_TEXT = 5;
+    const TP_STRIPON = 6;
+    const TP_STRIPOFF = 7;
+    const TP_LITERALSTART = 8;
+    const TP_LITERALEND = 9;
+    const TP_LITERAL = 10;
+    const TP_SIMPELOUTPUT = 11;
+    const TP_SIMPLETAG = 12;
+    const TP_LDEL = 13;
+    const TP_RDEL = 14;
+    const TP_DOLLARID = 15;
+    const TP_EQUAL = 16;
+    const TP_ID = 17;
+    const TP_PTR = 18;
+    const TP_LDELMAKENOCACHE = 19;
+    const TP_LDELIF = 20;
+    const TP_LDELFOR = 21;
+    const TP_SEMICOLON = 22;
+    const TP_INCDEC = 23;
+    const TP_TO = 24;
+    const TP_STEP = 25;
+    const TP_LDELFOREACH = 26;
+    const TP_SPACE = 27;
+    const TP_AS = 28;
+    const TP_APTR = 29;
+    const TP_LDELSETFILTER = 30;
+    const TP_CLOSETAG = 31;
+    const TP_LDELSLASH = 32;
+    const TP_ATTR = 33;
+    const TP_INTEGER = 34;
+    const TP_COMMA = 35;
+    const TP_OPENP = 36;
+    const TP_CLOSEP = 37;
+    const TP_MATH = 38;
+    const TP_ISIN = 39;
+    const TP_QMARK = 40;
+    const TP_NOT = 41;
+    const TP_TYPECAST = 42;
+    const TP_HEX = 43;
+    const TP_DOT = 44;
+    const TP_INSTANCEOF = 45;
     const TP_SINGLEQUOTESTRING = 46;
-    const TP_DOUBLECOLON       = 47;
-    const TP_NAMESPACE         = 48;
-    const TP_AT                = 49;
-    const TP_HATCH             = 50;
-    const TP_OPENB             = 51;
-    const TP_CLOSEB            = 52;
-    const TP_DOLLAR            = 53;
-    const TP_LOGOP             = 54;
-    const TP_SLOGOP            = 55;
-    const TP_TLOGOP            = 56;
-    const TP_SINGLECOND        = 57;
-    const TP_QUOTE             = 58;
-    const TP_BACKTICK          = 59;
-    const YY_NO_ACTION         = 509;
-    const YY_ACCEPT_ACTION     = 508;
-    const YY_ERROR_ACTION      = 507;
-    const YY_SZ_ACTTAB         = 1956;
-    const YY_SHIFT_USE_DFLT    = -13;
-    const YY_SHIFT_MAX         = 227;
-    const YY_REDUCE_USE_DFLT   = -75;
-    const YY_REDUCE_MAX        = 176;
-    const YYNOCODE             = 107;
-    const YYSTACKDEPTH         = 500;
-    const YYNSTATE             = 322;
-    const YYNRULE              = 185;
-    const YYERRORSYMBOL        = 60;
-    const YYERRSYMDT           = 'yy0';
-    const YYFALLBACK           = 0;
-    static public $yy_action        = array(
+    const TP_DOUBLECOLON = 47;
+    const TP_NAMESPACE = 48;
+    const TP_AT = 49;
+    const TP_HATCH = 50;
+    const TP_OPENB = 51;
+    const TP_CLOSEB = 52;
+    const TP_DOLLAR = 53;
+    const TP_LOGOP = 54;
+    const TP_SLOGOP = 55;
+    const TP_TLOGOP = 56;
+    const TP_SINGLECOND = 57;
+    const TP_QUOTE = 58;
+    const TP_BACKTICK = 59;
+    const YY_NO_ACTION = 509;
+    const YY_ACCEPT_ACTION = 508;
+    const YY_ERROR_ACTION = 507;
+    const YY_SZ_ACTTAB = 1956;
+    const YY_SHIFT_USE_DFLT = -13;
+    const YY_SHIFT_MAX = 227;
+    const YY_REDUCE_USE_DFLT = -75;
+    const YY_REDUCE_MAX = 176;
+    const YYNOCODE = 107;
+    const YYSTACKDEPTH = 500;
+    const YYNSTATE = 322;
+    const YYNRULE = 185;
+    const YYERRORSYMBOL = 60;
+    const YYERRSYMDT = 'yy0';
+    const YYFALLBACK = 0;
+    static public $yy_action = array(
         41, 15, 301, 113, 209, 252, 254, 12, 274, 275,
         1, 251, 124, 95, 183, 165, 211, 10, 79, 141,
         14, 204, 248, 107, 6, 316, 17, 212, 250, 215,
@@ -297,7 +297,7 @@ class Smarty_Internal_Templateparser
         293, 293, 293, 293, 293, 293, 293, 293, 423, 14,
         293, 145, 293, 293, 293, 17,
     );
-    static public $yy_lookahead     = array(
+    static public $yy_lookahead = array(
         3, 13, 65, 70, 67, 11, 73, 13, 11, 12,
         13, 17, 15, 80, 17, 81, 19, 20, 21, 93,
         27, 2, 89, 26, 36, 92, 33, 30, 31, 32,
@@ -495,7 +495,7 @@ class Smarty_Internal_Templateparser
         106, 106, 106, 106, 106, 106, 106, 106, 47, 27,
         106, 29, 106, 106, 106, 33,
     );
-    static public $yy_shift_ofst    = array(
+    static public $yy_shift_ofst = array(
         -13, 393, 393, 305, 85, 85, 85, 85, 349, 305,
         349, -3, 85, 85, 129, 85, 217, 85, 173, 85,
         85, 85, 129, 261, 85, 85, 85, 85, 85, 85,
@@ -520,7 +520,7 @@ class Smarty_Internal_Templateparser
         607, 637, 624, 579, 503, 491, 370, 330, 300, 219,
         311, 341, 414, 471, 469, 423, 72, 445,
     );
-    static public $yy_reduce_ofst   = array(
+    static public $yy_reduce_ofst = array(
         700, 455, 426, 481, 507, 765, 707, 735, 565, 675,
         649, 1076, 1160, 1186, 1102, 1244, 964, 992, 1018, 1048,
         1216, 1438, 1468, 1384, 1412, 1270, 1300, 1354, 1328, 1132,
@@ -864,7 +864,7 @@ class Smarty_Internal_Templateparser
         array(),
         array(),
     );
-    static public $yy_default       = array(
+    static public $yy_default = array(
         333, 507, 507, 492, 507, 471, 471, 471, 507, 507,
         507, 507, 507, 507, 507, 507, 507, 507, 507, 507,
         507, 507, 507, 507, 507, 507, 507, 507, 507, 507,
@@ -899,8 +899,8 @@ class Smarty_Internal_Templateparser
         416, 417, 449, 447, 488, 427, 428, 487, 486, 450,
         485, 465,
     );
-    public static $yyFallback       = array();
-    public static $yyRuleName       = array(
+    public static $yyFallback = array();
+    public static $yyRuleName = array(
         'start ::= template',
         'template ::= template PHP',
         'template ::= template TEXT',
@@ -1087,7 +1087,7 @@ class Smarty_Internal_Templateparser
         'doublequotedcontent ::= smartytag',
         'doublequotedcontent ::= TEXT',
     );
-    public static $yyRuleInfo       = array(
+    public static $yyRuleInfo = array(
         array(0 => 61, 1 => 1),
         array(0 => 62, 1 => 2),
         array(0 => 62, 1 => 2),
@@ -1274,118 +1274,118 @@ class Smarty_Internal_Templateparser
         array(0 => 105, 1 => 1),
         array(0 => 105, 1 => 1),
     );
-    public static $yyReduceMap      = array(
-        0   => 0,
-        1   => 1,
-        2   => 2,
-        3   => 3,
-        4   => 4,
-        5   => 5,
-        6   => 6,
-        7   => 7,
-        21  => 7,
-        22  => 7,
-        23  => 7,
-        36  => 7,
-        56  => 7,
-        57  => 7,
-        65  => 7,
-        66  => 7,
-        70  => 7,
-        79  => 7,
-        84  => 7,
-        85  => 7,
-        90  => 7,
-        94  => 7,
-        95  => 7,
-        99  => 7,
+    public static $yyReduceMap = array(
+        0 => 0,
+        1 => 1,
+        2 => 2,
+        3 => 3,
+        4 => 4,
+        5 => 5,
+        6 => 6,
+        7 => 7,
+        21 => 7,
+        22 => 7,
+        23 => 7,
+        36 => 7,
+        56 => 7,
+        57 => 7,
+        65 => 7,
+        66 => 7,
+        70 => 7,
+        79 => 7,
+        84 => 7,
+        85 => 7,
+        90 => 7,
+        94 => 7,
+        95 => 7,
+        99 => 7,
         101 => 7,
         106 => 7,
         168 => 7,
         173 => 7,
-        8   => 8,
-        9   => 9,
-        10  => 10,
-        12  => 12,
-        13  => 13,
-        14  => 14,
-        15  => 15,
-        16  => 16,
-        17  => 17,
-        18  => 18,
-        19  => 19,
-        20  => 20,
-        24  => 24,
-        25  => 25,
-        26  => 26,
-        27  => 27,
-        28  => 28,
-        29  => 29,
-        30  => 30,
-        31  => 31,
-        33  => 31,
-        32  => 32,
-        34  => 34,
-        35  => 35,
-        37  => 37,
-        38  => 38,
-        39  => 39,
-        40  => 40,
-        41  => 41,
-        42  => 42,
-        43  => 43,
-        44  => 44,
-        45  => 45,
-        46  => 46,
-        47  => 47,
-        48  => 48,
-        49  => 49,
-        50  => 50,
-        59  => 50,
+        8 => 8,
+        9 => 9,
+        10 => 10,
+        12 => 12,
+        13 => 13,
+        14 => 14,
+        15 => 15,
+        16 => 16,
+        17 => 17,
+        18 => 18,
+        19 => 19,
+        20 => 20,
+        24 => 24,
+        25 => 25,
+        26 => 26,
+        27 => 27,
+        28 => 28,
+        29 => 29,
+        30 => 30,
+        31 => 31,
+        33 => 31,
+        32 => 32,
+        34 => 34,
+        35 => 35,
+        37 => 37,
+        38 => 38,
+        39 => 39,
+        40 => 40,
+        41 => 41,
+        42 => 42,
+        43 => 43,
+        44 => 44,
+        45 => 45,
+        46 => 46,
+        47 => 47,
+        48 => 48,
+        49 => 49,
+        50 => 50,
+        59 => 50,
         148 => 50,
         152 => 50,
         156 => 50,
         157 => 50,
-        51  => 51,
+        51 => 51,
         149 => 51,
         155 => 51,
-        52  => 52,
-        53  => 53,
-        54  => 53,
-        55  => 55,
+        52 => 52,
+        53 => 53,
+        54 => 53,
+        55 => 55,
         133 => 55,
-        58  => 58,
-        60  => 60,
-        61  => 61,
-        62  => 61,
-        63  => 63,
-        64  => 64,
-        67  => 67,
-        68  => 68,
-        69  => 68,
-        71  => 71,
-        98  => 71,
-        72  => 72,
-        73  => 73,
-        74  => 74,
-        75  => 75,
-        76  => 76,
-        77  => 77,
-        78  => 78,
-        80  => 80,
-        82  => 80,
-        83  => 80,
+        58 => 58,
+        60 => 60,
+        61 => 61,
+        62 => 61,
+        63 => 63,
+        64 => 64,
+        67 => 67,
+        68 => 68,
+        69 => 68,
+        71 => 71,
+        98 => 71,
+        72 => 72,
+        73 => 73,
+        74 => 74,
+        75 => 75,
+        76 => 76,
+        77 => 77,
+        78 => 78,
+        80 => 80,
+        82 => 80,
+        83 => 80,
         113 => 80,
-        81  => 81,
-        86  => 86,
-        87  => 87,
-        88  => 88,
-        89  => 89,
-        91  => 91,
-        92  => 92,
-        93  => 92,
-        96  => 96,
-        97  => 97,
+        81 => 81,
+        86 => 86,
+        87 => 87,
+        88 => 88,
+        89 => 89,
+        91 => 91,
+        92 => 92,
+        93 => 92,
+        96 => 96,
+        97 => 97,
         100 => 100,
         102 => 102,
         103 => 103,
@@ -1558,8 +1558,8 @@ class Smarty_Internal_Templateparser
     public $yyTracePrompt;
     public $yyidx;
     public $yyerrcnt;
-    public $yystack          = array();
-    public $yyTokenName      = array(
+    public $yystack = array();
+    public $yyTokenName = array(
         '$', 'VERT', 'COLON', 'UNIMATH',
         'PHP', 'TEXT', 'STRIPON', 'STRIPOFF',
         'LITERALSTART', 'LITERALEND', 'LITERAL', 'SIMPELOUTPUT',
@@ -1598,7 +1598,7 @@ class Smarty_Internal_Templateparser
     /**
      * constructor
      *
-     * @param Smarty_Internal_Templatelexer        $lex
+     * @param Smarty_Internal_Templatelexer $lex
      * @param Smarty_Internal_TemplateCompilerBase $compiler
      */
     function __construct(Smarty_Internal_Templatelexer $lex, Smarty_Internal_TemplateCompilerBase $compiler)
@@ -1683,7 +1683,7 @@ class Smarty_Internal_Templateparser
             return 'End of Input';
         }
         if ($tokenType > 0 && $tokenType < count($this->yyTokenName)) {
-            return $this->yyTokenName[ $tokenType ];
+            return $this->yyTokenName[$tokenType];
         } else {
             return 'Unknown';
         }
@@ -1697,8 +1697,8 @@ class Smarty_Internal_Templateparser
         $yytos = array_pop($this->yystack);
         if ($this->yyTraceFILE && $this->yyidx >= 0) {
             fwrite($this->yyTraceFILE,
-                   $this->yyTracePrompt . 'Popping ' . $this->yyTokenName[ $yytos->major ] .
-                   "\n");
+                $this->yyTracePrompt . 'Popping ' . $this->yyTokenName[$yytos->major] .
+                "\n");
         }
         $yymajor = $yytos->major;
         self::yy_destructor($yymajor, $yytos->minor);
@@ -1720,14 +1720,14 @@ class Smarty_Internal_Templateparser
     {
         static $res3 = array();
         static $res4 = array();
-        $state = $this->yystack[ $this->yyidx ]->stateno;
-        $expected = self::$yyExpectedTokens[ $state ];
-        if (isset($res3[ $state ][ $token ])) {
-            if ($res3[ $state ][ $token ]) {
+        $state = $this->yystack[$this->yyidx]->stateno;
+        $expected = self::$yyExpectedTokens[$state];
+        if (isset($res3[$state][$token])) {
+            if ($res3[$state][$token]) {
                 return $expected;
             }
         } else {
-            if ($res3[ $state ][ $token ] = in_array($token, self::$yyExpectedTokens[ $state ], true)) {
+            if ($res3[$state][$token] = in_array($token, self::$yyExpectedTokens[$state], true)) {
                 return $expected;
             }
         }
@@ -1747,21 +1747,21 @@ class Smarty_Internal_Templateparser
                         return array_unique($expected);
                     }
                     $yyruleno = $yyact - self::YYNSTATE;
-                    $this->yyidx -= self::$yyRuleInfo[ $yyruleno ][ 1 ];
+                    $this->yyidx -= self::$yyRuleInfo[$yyruleno][1];
                     $nextstate = $this->yy_find_reduce_action(
-                        $this->yystack[ $this->yyidx ]->stateno,
-                        self::$yyRuleInfo[ $yyruleno ][ 0 ]);
-                    if (isset(self::$yyExpectedTokens[ $nextstate ])) {
-                        $expected = array_merge($expected, self::$yyExpectedTokens[ $nextstate ]);
-                        if (isset($res4[ $nextstate ][ $token ])) {
-                            if ($res4[ $nextstate ][ $token ]) {
+                        $this->yystack[$this->yyidx]->stateno,
+                        self::$yyRuleInfo[$yyruleno][0]);
+                    if (isset(self::$yyExpectedTokens[$nextstate])) {
+                        $expected = array_merge($expected, self::$yyExpectedTokens[$nextstate]);
+                        if (isset($res4[$nextstate][$token])) {
+                            if ($res4[$nextstate][$token]) {
                                 $this->yyidx = $yyidx;
                                 $this->yystack = $stack;
                                 return array_unique($expected);
                             }
                         } else {
-                            if ($res4[ $nextstate ][ $token ] =
-                                in_array($token, self::$yyExpectedTokens[ $nextstate ], true)) {
+                            if ($res4[$nextstate][$token] =
+                                in_array($token, self::$yyExpectedTokens[$nextstate], true)) {
                                 $this->yyidx = $yyidx;
                                 $this->yystack = $stack;
                                 return array_unique($expected);
@@ -1773,8 +1773,8 @@ class Smarty_Internal_Templateparser
                         $this->yyidx++;
                         $x = new TP_yyStackEntry;
                         $x->stateno = $nextstate;
-                        $x->major = self::$yyRuleInfo[ $yyruleno ][ 0 ];
-                        $this->yystack[ $this->yyidx ] = $x;
+                        $x->major = self::$yyRuleInfo[$yyruleno][0];
+                        $this->yystack[$this->yyidx] = $x;
                         continue 2;
                     } else if ($nextstate === self::YYNSTATE + self::YYNRULE + 1) {
                         $this->yyidx = $yyidx;
@@ -1807,13 +1807,13 @@ class Smarty_Internal_Templateparser
         if ($token === 0) {
             return true; // 0 is not part of this
         }
-        $state = $this->yystack[ $this->yyidx ]->stateno;
-        if (isset($res[ $state ][ $token ])) {
-            if ($res[ $state ][ $token ]) {
+        $state = $this->yystack[$this->yyidx]->stateno;
+        if (isset($res[$state][$token])) {
+            if ($res[$state][$token]) {
                 return true;
             }
         } else {
-            if ($res[ $state ][ $token ] = in_array($token, self::$yyExpectedTokens[ $state ], true)) {
+            if ($res[$state][$token] = in_array($token, self::$yyExpectedTokens[$state], true)) {
                 return true;
             }
         }
@@ -1833,21 +1833,21 @@ class Smarty_Internal_Templateparser
                         return true;
                     }
                     $yyruleno = $yyact - self::YYNSTATE;
-                    $this->yyidx -= self::$yyRuleInfo[ $yyruleno ][ 1 ];
+                    $this->yyidx -= self::$yyRuleInfo[$yyruleno][1];
                     $nextstate = $this->yy_find_reduce_action(
-                        $this->yystack[ $this->yyidx ]->stateno,
-                        self::$yyRuleInfo[ $yyruleno ][ 0 ]);
-                    if (isset($res2[ $nextstate ][ $token ])) {
-                        if ($res2[ $nextstate ][ $token ]) {
+                        $this->yystack[$this->yyidx]->stateno,
+                        self::$yyRuleInfo[$yyruleno][0]);
+                    if (isset($res2[$nextstate][$token])) {
+                        if ($res2[$nextstate][$token]) {
                             $this->yyidx = $yyidx;
                             $this->yystack = $stack;
                             return true;
                         }
                     } else {
-                        if ($res2[ $nextstate ][ $token ] = (isset(self::$yyExpectedTokens[ $nextstate ]) &&
-                                                             in_array($token,
-                                                                      self::$yyExpectedTokens[ $nextstate ],
-                                                                      true))) {
+                        if ($res2[$nextstate][$token] = (isset(self::$yyExpectedTokens[$nextstate]) &&
+                            in_array($token,
+                                self::$yyExpectedTokens[$nextstate],
+                                true))) {
                             $this->yyidx = $yyidx;
                             $this->yystack = $stack;
                             return true;
@@ -1858,8 +1858,8 @@ class Smarty_Internal_Templateparser
                         $this->yyidx++;
                         $x = new TP_yyStackEntry;
                         $x->stateno = $nextstate;
-                        $x->major = self::$yyRuleInfo[ $yyruleno ][ 0 ];
-                        $this->yystack[ $this->yyidx ] = $x;
+                        $x->major = self::$yyRuleInfo[$yyruleno][0];
+                        $this->yystack[$this->yyidx] = $x;
                         continue 2;
                     } else if ($nextstate === self::YYNSTATE + self::YYNRULE + 1) {
                         $this->yyidx = $yyidx;
@@ -1891,57 +1891,57 @@ class Smarty_Internal_Templateparser
 
     public function yy_find_shift_action($iLookAhead)
     {
-        $stateno = $this->yystack[ $this->yyidx ]->stateno;
+        $stateno = $this->yystack[$this->yyidx]->stateno;
         /* if ($this->yyidx < 0) return self::YY_NO_ACTION;  */
-        if (!isset(self::$yy_shift_ofst[ $stateno ])) {
+        if (!isset(self::$yy_shift_ofst[$stateno])) {
             // no shift actions
-            return self::$yy_default[ $stateno ];
+            return self::$yy_default[$stateno];
         }
-        $i = self::$yy_shift_ofst[ $stateno ];
+        $i = self::$yy_shift_ofst[$stateno];
         if ($i === self::YY_SHIFT_USE_DFLT) {
-            return self::$yy_default[ $stateno ];
+            return self::$yy_default[$stateno];
         }
         if ($iLookAhead === self::YYNOCODE) {
             return self::YY_NO_ACTION;
         }
         $i += $iLookAhead;
         if ($i < 0 || $i >= self::YY_SZ_ACTTAB ||
-            self::$yy_lookahead[ $i ] != $iLookAhead) {
+            self::$yy_lookahead[$i] != $iLookAhead) {
             if (count(self::$yyFallback) && $iLookAhead < count(self::$yyFallback)
-                && ($iFallback = self::$yyFallback[ $iLookAhead ]) != 0) {
+                && ($iFallback = self::$yyFallback[$iLookAhead]) != 0) {
                 if ($this->yyTraceFILE) {
                     fwrite($this->yyTraceFILE,
-                           $this->yyTracePrompt . 'FALLBACK ' .
-                           $this->yyTokenName[ $iLookAhead ] . ' => ' .
-                           $this->yyTokenName[ $iFallback ] . "\n");
+                        $this->yyTracePrompt . 'FALLBACK ' .
+                        $this->yyTokenName[$iLookAhead] . ' => ' .
+                        $this->yyTokenName[$iFallback] . "\n");
                 }
                 return $this->yy_find_shift_action($iFallback);
             }
-            return self::$yy_default[ $stateno ];
+            return self::$yy_default[$stateno];
         } else {
-            return self::$yy_action[ $i ];
+            return self::$yy_action[$i];
         }
     }
 
     public function yy_find_reduce_action($stateno, $iLookAhead)
     {
         /* $stateno = $this->yystack[$this->yyidx]->stateno; */
-        if (!isset(self::$yy_reduce_ofst[ $stateno ])) {
-            return self::$yy_default[ $stateno ];
+        if (!isset(self::$yy_reduce_ofst[$stateno])) {
+            return self::$yy_default[$stateno];
         }
-        $i = self::$yy_reduce_ofst[ $stateno ];
+        $i = self::$yy_reduce_ofst[$stateno];
         if ($i === self::YY_REDUCE_USE_DFLT) {
-            return self::$yy_default[ $stateno ];
+            return self::$yy_default[$stateno];
         }
         if ($iLookAhead === self::YYNOCODE) {
             return self::YY_NO_ACTION;
         }
         $i += $iLookAhead;
         if ($i < 0 || $i >= self::YY_SZ_ACTTAB ||
-            self::$yy_lookahead[ $i ] != $iLookAhead) {
-            return self::$yy_default[ $stateno ];
+            self::$yy_lookahead[$i] != $iLookAhead) {
+            return self::$yy_default[$stateno];
         } else {
-            return self::$yy_action[ $i ];
+            return self::$yy_action[$i];
         }
     }
 
@@ -1969,14 +1969,14 @@ class Smarty_Internal_Templateparser
         $this->yystack[] = $yytos;
         if ($this->yyTraceFILE && $this->yyidx > 0) {
             fprintf($this->yyTraceFILE,
-                    "%sShift %d\n",
-                    $this->yyTracePrompt,
-                    $yyNewState);
+                "%sShift %d\n",
+                $this->yyTracePrompt,
+                $yyNewState);
             fprintf($this->yyTraceFILE, "%sStack:", $this->yyTracePrompt);
             for ($i = 1; $i <= $this->yyidx; $i++) {
                 fprintf($this->yyTraceFILE,
-                        " %s",
-                        $this->yyTokenName[ $this->yystack[ $i ]->major ]);
+                    " %s",
+                    $this->yyTokenName[$this->yystack[$i]->major]);
             }
             fwrite($this->yyTraceFILE, "\n");
         }
@@ -1994,9 +1994,9 @@ class Smarty_Internal_Templateparser
     function yy_r1()
     {
         $code = $this->compiler->compileTag('private_php',
-                                            array(array('code' => $this->yystack[ $this->yyidx + 0 ]->minor),
-                                                  array('type' => $this->lex->phpType)),
-                                            array());
+            array(array('code' => $this->yystack[$this->yyidx + 0]->minor),
+                array('type' => $this->lex->phpType)),
+            array());
         if ($this->compiler->has_code && !empty($code)) {
             $tmp = '';
             foreach ($this->compiler->prefix_code as $code) {
@@ -2004,10 +2004,10 @@ class Smarty_Internal_Templateparser
             }
             $this->compiler->prefix_code = array();
             $this->current_buffer->append_subtree($this,
-                                                  new Smarty_Internal_ParseTree_Tag($this,
-                                                                                    $this->compiler->processNocacheCode($tmp .
-                                                                                                                        $code,
-                                                                                                                        true)));
+                new Smarty_Internal_ParseTree_Tag($this,
+                    $this->compiler->processNocacheCode($tmp .
+                        $code,
+                        true)));
         }
     }
 
@@ -2015,7 +2015,7 @@ class Smarty_Internal_Templateparser
     function yy_r2()
     {
         $this->current_buffer->append_subtree($this,
-                                              $this->compiler->processText($this->yystack[ $this->yyidx + 0 ]->minor));
+            $this->compiler->processText($this->yystack[$this->yyidx + 0]->minor));
     }
 
     #line 259 "../smarty/lexer/smarty_internal_templateparser.y"
@@ -2034,26 +2034,26 @@ class Smarty_Internal_Templateparser
     function yy_r5()
     {
         $this->current_buffer->append_subtree($this,
-                                              new Smarty_Internal_ParseTree_Text($this->yystack[ $this->yyidx +
-                                                                                                 -1 ]->minor));
+            new Smarty_Internal_ParseTree_Text($this->yystack[$this->yyidx +
+            -1]->minor));
     }
 
     #line 272 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r6()
     {
-        $this->_retvalue = $this->yystack[ $this->yyidx + -3 ]->minor . $this->yystack[ $this->yyidx + -1 ]->minor;
+        $this->_retvalue = $this->yystack[$this->yyidx + -3]->minor . $this->yystack[$this->yyidx + -1]->minor;
     }
 
     #line 276 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r7()
     {
-        $this->_retvalue = $this->yystack[ $this->yyidx + 0 ]->minor;
+        $this->_retvalue = $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 281 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r8()
     {
-        $this->_retvalue = $this->yystack[ $this->yyidx + -1 ]->minor . $this->yystack[ $this->yyidx + 0 ]->minor;
+        $this->_retvalue = $this->yystack[$this->yyidx + -1]->minor . $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 285 "../smarty/lexer/smarty_internal_templateparser.y"
@@ -2067,7 +2067,7 @@ class Smarty_Internal_Templateparser
     {
         if ($this->compiler->has_code) {
             $this->current_buffer->append_subtree($this,
-                                                  $this->mergePrefixCode($this->yystack[ $this->yyidx + 0 ]->minor));
+                $this->mergePrefixCode($this->yystack[$this->yyidx + 0]->minor));
         }
         $this->compiler->has_variable_string = false;
         $this->block_nesting_level = count($this->compiler->_tag_stack);
@@ -2076,31 +2076,31 @@ class Smarty_Internal_Templateparser
     #line 307 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r12()
     {
-        $var = trim(substr($this->yystack[ $this->yyidx + 0 ]->minor,
-                           $this->compiler->getLdelLength(),
-                           -$this->compiler->getRdelLength()),
-                    ' $');
+        $var = trim(substr($this->yystack[$this->yyidx + 0]->minor,
+            $this->compiler->getLdelLength(),
+            -$this->compiler->getRdelLength()),
+            ' $');
         if (preg_match('/^(.*)(\s+nocache)$/', $var, $match)) {
             $this->_retvalue = $this->compiler->compileTag('private_print_expression',
-                                                           array('nocache'),
-                                                           array('value' => $this->compiler->compileVariable('\'' .
-                                                                                                             $match[ 1 ] .
-                                                                                                             '\'')));
+                array('nocache'),
+                array('value' => $this->compiler->compileVariable('\'' .
+                    $match[1] .
+                    '\'')));
         } else {
             $this->_retvalue = $this->compiler->compileTag('private_print_expression',
-                                                           array(),
-                                                           array('value' => $this->compiler->compileVariable('\'' .
-                                                                                                             $var .
-                                                                                                             '\'')));
+                array(),
+                array('value' => $this->compiler->compileVariable('\'' .
+                    $var .
+                    '\'')));
         }
     }
 
     #line 327 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r13()
     {
-        $tag = trim(substr($this->yystack[ $this->yyidx + 0 ]->minor,
-                           $this->compiler->getLdelLength(),
-                           -$this->compiler->getRdelLength()));
+        $tag = trim(substr($this->yystack[$this->yyidx + 0]->minor,
+            $this->compiler->getLdelLength(),
+            -$this->compiler->getRdelLength()));
         if ($tag == 'strip') {
             $this->strip = true;
             $this->_retvalue = null;;
@@ -2113,7 +2113,7 @@ class Smarty_Internal_Templateparser
                     $this->compiler->compileTag('private_print_expression', array(), array('value' => $tag));
             } else {
                 if (preg_match('/^(.*)(\s+nocache)$/', $tag, $match)) {
-                    $this->_retvalue = $this->compiler->compileTag($match[ 1 ], array('\'nocache\''));
+                    $this->_retvalue = $this->compiler->compileTag($match[1], array('\'nocache\''));
                 } else {
                     $this->_retvalue = $this->compiler->compileTag($tag, array());
                 }
@@ -2124,283 +2124,283 @@ class Smarty_Internal_Templateparser
     #line 331 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r14()
     {
-        $this->_retvalue = $this->yystack[ $this->yyidx + -1 ]->minor;
+        $this->_retvalue = $this->yystack[$this->yyidx + -1]->minor;
     }
 
     #line 335 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r15()
     {
-        $this->_retvalue = $this->yystack[ $this->yyidx + -1 ]->minor;
+        $this->_retvalue = $this->yystack[$this->yyidx + -1]->minor;
     }
 
     #line 344 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r16()
     {
         $this->_retvalue = $this->compiler->compileTag('private_print_expression',
-                                                       $this->yystack[ $this->yyidx + 0 ]->minor[ 1 ],
-                                                       array('value' => $this->yystack[ $this->yyidx +
-                                                                                        0 ]->minor[ 0 ]));
+            $this->yystack[$this->yyidx + 0]->minor[1],
+            array('value' => $this->yystack[$this->yyidx +
+            0]->minor[0]));
     }
 
     #line 348 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r17()
     {
         $this->_retvalue = $this->compiler->compileTag('assign',
-                                                       array_merge(array(array('value' => $this->yystack[ $this->yyidx +
-                                                                                                          0 ]->minor[ 0 ]),
-                                                                         array('var' => '\'' .
-                                                                                        substr($this->yystack[ $this->yyidx +
-                                                                                                               -1 ]->minor,
-                                                                                               1) . '\'')),
-                                                                   $this->yystack[ $this->yyidx + 0 ]->minor[ 1 ]));
+            array_merge(array(array('value' => $this->yystack[$this->yyidx +
+            0]->minor[0]),
+                array('var' => '\'' .
+                    substr($this->yystack[$this->yyidx +
+                    -1]->minor,
+                        1) . '\'')),
+                $this->yystack[$this->yyidx + 0]->minor[1]));
     }
 
     #line 352 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r18()
     {
         $this->_retvalue = $this->compiler->compileTag('assign',
-                                                       array_merge(array(array('value' => $this->yystack[ $this->yyidx +
-                                                                                                          0 ]->minor[ 0 ]),
-                                                                         array('var' => $this->yystack[ $this->yyidx +
-                                                                                                        -1 ]->minor[ 'var' ])),
-                                                                   $this->yystack[ $this->yyidx + 0 ]->minor[ 1 ]),
-                                                       array('smarty_internal_index' => $this->yystack[ $this->yyidx +
-                                                                                                        -1 ]->minor[ 'smarty_internal_index' ]));
+            array_merge(array(array('value' => $this->yystack[$this->yyidx +
+            0]->minor[0]),
+                array('var' => $this->yystack[$this->yyidx +
+                -1]->minor['var'])),
+                $this->yystack[$this->yyidx + 0]->minor[1]),
+            array('smarty_internal_index' => $this->yystack[$this->yyidx +
+            -1]->minor['smarty_internal_index']));
     }
 
     #line 356 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r19()
     {
-        $this->_retvalue = $this->yystack[ $this->yyidx + 0 ]->minor;
+        $this->_retvalue = $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 371 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r20()
     {
-        $this->_retvalue = array($this->yystack[ $this->yyidx + -1 ]->minor, $this->yystack[ $this->yyidx + 0 ]->minor);
+        $this->_retvalue = array($this->yystack[$this->yyidx + -1]->minor, $this->yystack[$this->yyidx + 0]->minor);
     }
 
     #line 381 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r24()
     {
-        if (defined($this->yystack[ $this->yyidx + -1 ]->minor)) {
+        if (defined($this->yystack[$this->yyidx + -1]->minor)) {
             if ($this->security) {
-                $this->security->isTrustedConstant($this->yystack[ $this->yyidx + -1 ]->minor, $this->compiler);
+                $this->security->isTrustedConstant($this->yystack[$this->yyidx + -1]->minor, $this->compiler);
             }
             $this->_retvalue = $this->compiler->compileTag('private_print_expression',
-                                                           $this->yystack[ $this->yyidx + 0 ]->minor,
-                                                           array('value' => $this->yystack[ $this->yyidx +
-                                                                                            -1 ]->minor));
+                $this->yystack[$this->yyidx + 0]->minor,
+                array('value' => $this->yystack[$this->yyidx +
+                -1]->minor));
         } else {
-            $this->_retvalue = $this->compiler->compileTag($this->yystack[ $this->yyidx + -1 ]->minor,
-                                                           $this->yystack[ $this->yyidx + 0 ]->minor);
+            $this->_retvalue = $this->compiler->compileTag($this->yystack[$this->yyidx + -1]->minor,
+                $this->yystack[$this->yyidx + 0]->minor);
         }
     }
 
     #line 394 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r25()
     {
-        if (defined($this->yystack[ $this->yyidx + 0 ]->minor)) {
+        if (defined($this->yystack[$this->yyidx + 0]->minor)) {
             if ($this->security) {
-                $this->security->isTrustedConstant($this->yystack[ $this->yyidx + 0 ]->minor, $this->compiler);
+                $this->security->isTrustedConstant($this->yystack[$this->yyidx + 0]->minor, $this->compiler);
             }
             $this->_retvalue = $this->compiler->compileTag('private_print_expression',
-                                                           array(),
-                                                           array('value' => $this->yystack[ $this->yyidx + 0 ]->minor));
+                array(),
+                array('value' => $this->yystack[$this->yyidx + 0]->minor));
         } else {
-            $this->_retvalue = $this->compiler->compileTag($this->yystack[ $this->yyidx + 0 ]->minor, array());
+            $this->_retvalue = $this->compiler->compileTag($this->yystack[$this->yyidx + 0]->minor, array());
         }
     }
 
     #line 406 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r26()
     {
-        if (defined($this->yystack[ $this->yyidx + -2 ]->minor)) {
+        if (defined($this->yystack[$this->yyidx + -2]->minor)) {
             if ($this->security) {
-                $this->security->isTrustedConstant($this->yystack[ $this->yyidx + -2 ]->minor, $this->compiler);
+                $this->security->isTrustedConstant($this->yystack[$this->yyidx + -2]->minor, $this->compiler);
             }
             $this->_retvalue = $this->compiler->compileTag('private_print_expression',
-                                                           $this->yystack[ $this->yyidx + 0 ]->minor,
-                                                           array('value'        => $this->yystack[ $this->yyidx +
-                                                                                                   -2 ]->minor,
-                                                                 'modifierlist' => $this->yystack[ $this->yyidx +
-                                                                                                   -1 ]->minor));
+                $this->yystack[$this->yyidx + 0]->minor,
+                array('value' => $this->yystack[$this->yyidx +
+                -2]->minor,
+                    'modifierlist' => $this->yystack[$this->yyidx +
+                    -1]->minor));
         } else {
-            $this->_retvalue = $this->compiler->compileTag($this->yystack[ $this->yyidx + -2 ]->minor,
-                                                           $this->yystack[ $this->yyidx + 0 ]->minor,
-                                                           array('modifierlist' => $this->yystack[ $this->yyidx +
-                                                                                                   -1 ]->minor));
+            $this->_retvalue = $this->compiler->compileTag($this->yystack[$this->yyidx + -2]->minor,
+                $this->yystack[$this->yyidx + 0]->minor,
+                array('modifierlist' => $this->yystack[$this->yyidx +
+                -1]->minor));
         }
     }
 
     #line 411 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r27()
     {
-        $this->_retvalue = $this->compiler->compileTag($this->yystack[ $this->yyidx + -3 ]->minor,
-                                                       $this->yystack[ $this->yyidx + 0 ]->minor,
-                                                       array('object_method' => $this->yystack[ $this->yyidx +
-                                                                                                -1 ]->minor));
+        $this->_retvalue = $this->compiler->compileTag($this->yystack[$this->yyidx + -3]->minor,
+            $this->yystack[$this->yyidx + 0]->minor,
+            array('object_method' => $this->yystack[$this->yyidx +
+            -1]->minor));
     }
 
     #line 416 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r28()
     {
-        $this->_retvalue = $this->compiler->compileTag($this->yystack[ $this->yyidx + -4 ]->minor,
-                                                       $this->yystack[ $this->yyidx + 0 ]->minor,
-                                                       array('modifierlist'  => $this->yystack[ $this->yyidx +
-                                                                                                -1 ]->minor,
-                                                             'object_method' => $this->yystack[ $this->yyidx +
-                                                                                                -2 ]->minor));
+        $this->_retvalue = $this->compiler->compileTag($this->yystack[$this->yyidx + -4]->minor,
+            $this->yystack[$this->yyidx + 0]->minor,
+            array('modifierlist' => $this->yystack[$this->yyidx +
+            -1]->minor,
+                'object_method' => $this->yystack[$this->yyidx +
+                -2]->minor));
     }
 
     #line 421 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r29()
     {
         $this->_retvalue = $this->compiler->compileTag('make_nocache',
-                                                       array(array('var' => '\'' . substr($this->yystack[ $this->yyidx +
-                                                                                                          0 ]->minor,
-                                                                                          1) . '\'')));
+            array(array('var' => '\'' . substr($this->yystack[$this->yyidx +
+                0]->minor,
+                    1) . '\'')));
     }
 
     #line 426 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r30()
     {
-        $tag = trim(substr($this->yystack[ $this->yyidx + -1 ]->minor, $this->compiler->getLdelLength()));
+        $tag = trim(substr($this->yystack[$this->yyidx + -1]->minor, $this->compiler->getLdelLength()));
         $this->_retvalue = $this->compiler->compileTag(($tag === 'else if') ? 'elseif' : $tag,
-                                                       array(),
-                                                       array('if condition' => $this->yystack[ $this->yyidx +
-                                                                                               0 ]->minor));
+            array(),
+            array('if condition' => $this->yystack[$this->yyidx +
+            0]->minor));
     }
 
     #line 431 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r31()
     {
-        $tag = trim(substr($this->yystack[ $this->yyidx + -2 ]->minor, $this->compiler->getLdelLength()));
+        $tag = trim(substr($this->yystack[$this->yyidx + -2]->minor, $this->compiler->getLdelLength()));
         $this->_retvalue = $this->compiler->compileTag(($tag === 'else if') ? 'elseif' : $tag,
-                                                       $this->yystack[ $this->yyidx + 0 ]->minor,
-                                                       array('if condition' => $this->yystack[ $this->yyidx +
-                                                                                               -1 ]->minor));
+            $this->yystack[$this->yyidx + 0]->minor,
+            array('if condition' => $this->yystack[$this->yyidx +
+            -1]->minor));
     }
 
     #line 442 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r32()
     {
-        $tag = trim(substr($this->yystack[ $this->yyidx + -1 ]->minor, $this->compiler->getLdelLength()));
+        $tag = trim(substr($this->yystack[$this->yyidx + -1]->minor, $this->compiler->getLdelLength()));
         $this->_retvalue = $this->compiler->compileTag(($tag === 'else if') ? 'elseif' : $tag,
-                                                       array(),
-                                                       array('if condition' => $this->yystack[ $this->yyidx +
-                                                                                               0 ]->minor));
+            array(),
+            array('if condition' => $this->yystack[$this->yyidx +
+            0]->minor));
     }
 
     #line 446 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r34()
     {
         $this->_retvalue = $this->compiler->compileTag('for',
-                                                       array_merge($this->yystack[ $this->yyidx + 0 ]->minor,
-                                                                   array(array('start' => $this->yystack[ $this->yyidx +
-                                                                                                          -6 ]->minor),
-                                                                         array('ifexp' => $this->yystack[ $this->yyidx +
-                                                                                                          -4 ]->minor),
-                                                                         array('var' => $this->yystack[ $this->yyidx +
-                                                                                                        -2 ]->minor),
-                                                                         array('step' => $this->yystack[ $this->yyidx +
-                                                                                                         -1 ]->minor))),
-                                                       1);
+            array_merge($this->yystack[$this->yyidx + 0]->minor,
+                array(array('start' => $this->yystack[$this->yyidx +
+                -6]->minor),
+                    array('ifexp' => $this->yystack[$this->yyidx +
+                    -4]->minor),
+                    array('var' => $this->yystack[$this->yyidx +
+                    -2]->minor),
+                    array('step' => $this->yystack[$this->yyidx +
+                    -1]->minor))),
+            1);
     }
 
     #line 454 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r35()
     {
-        $this->_retvalue = '=' . $this->yystack[ $this->yyidx + 0 ]->minor;
+        $this->_retvalue = '=' . $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 458 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r37()
     {
         $this->_retvalue = $this->compiler->compileTag('for',
-                                                       array_merge($this->yystack[ $this->yyidx + 0 ]->minor,
-                                                                   array(array('start' => $this->yystack[ $this->yyidx +
-                                                                                                          -3 ]->minor),
-                                                                         array('to' => $this->yystack[ $this->yyidx +
-                                                                                                       -1 ]->minor))),
-                                                       0);
+            array_merge($this->yystack[$this->yyidx + 0]->minor,
+                array(array('start' => $this->yystack[$this->yyidx +
+                -3]->minor),
+                    array('to' => $this->yystack[$this->yyidx +
+                    -1]->minor))),
+            0);
     }
 
     #line 463 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r38()
     {
         $this->_retvalue = $this->compiler->compileTag('for',
-                                                       array_merge($this->yystack[ $this->yyidx + 0 ]->minor,
-                                                                   array(array('start' => $this->yystack[ $this->yyidx +
-                                                                                                          -5 ]->minor),
-                                                                         array('to' => $this->yystack[ $this->yyidx +
-                                                                                                       -3 ]->minor),
-                                                                         array('step' => $this->yystack[ $this->yyidx +
-                                                                                                         -1 ]->minor))),
-                                                       0);
+            array_merge($this->yystack[$this->yyidx + 0]->minor,
+                array(array('start' => $this->yystack[$this->yyidx +
+                -5]->minor),
+                    array('to' => $this->yystack[$this->yyidx +
+                    -3]->minor),
+                    array('step' => $this->yystack[$this->yyidx +
+                    -1]->minor))),
+            0);
     }
 
     #line 467 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r39()
     {
         $this->_retvalue = $this->compiler->compileTag('foreach',
-                                                       array_merge($this->yystack[ $this->yyidx + 0 ]->minor,
-                                                                   array(array('from' => $this->yystack[ $this->yyidx +
-                                                                                                         -3 ]->minor),
-                                                                         array('item' => $this->yystack[ $this->yyidx +
-                                                                                                         -1 ]->minor))));
+            array_merge($this->yystack[$this->yyidx + 0]->minor,
+                array(array('from' => $this->yystack[$this->yyidx +
+                -3]->minor),
+                    array('item' => $this->yystack[$this->yyidx +
+                    -1]->minor))));
     }
 
     #line 470 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r40()
     {
         $this->_retvalue = $this->compiler->compileTag('foreach',
-                                                       array_merge($this->yystack[ $this->yyidx + 0 ]->minor,
-                                                                   array(array('from' => $this->yystack[ $this->yyidx +
-                                                                                                         -5 ]->minor),
-                                                                         array('item' => $this->yystack[ $this->yyidx +
-                                                                                                         -1 ]->minor),
-                                                                         array('key' => $this->yystack[ $this->yyidx +
-                                                                                                        -3 ]->minor))));
+            array_merge($this->yystack[$this->yyidx + 0]->minor,
+                array(array('from' => $this->yystack[$this->yyidx +
+                -5]->minor),
+                    array('item' => $this->yystack[$this->yyidx +
+                    -1]->minor),
+                    array('key' => $this->yystack[$this->yyidx +
+                    -3]->minor))));
     }
 
     #line 475 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r41()
     {
-        $this->_retvalue = $this->compiler->compileTag('foreach', $this->yystack[ $this->yyidx + 0 ]->minor);
+        $this->_retvalue = $this->compiler->compileTag('foreach', $this->yystack[$this->yyidx + 0]->minor);
     }
 
     #line 479 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r42()
     {
         $this->_retvalue = $this->compiler->compileTag('setfilter',
-                                                       array(),
-                                                       array('modifier_list' => array(array_merge(array($this->yystack[ $this->yyidx +
-                                                                                                                        -1 ]->minor),
-                                                                                                  $this->yystack[ $this->yyidx +
-                                                                                                                  0 ]->minor))));
+            array(),
+            array('modifier_list' => array(array_merge(array($this->yystack[$this->yyidx +
+            -1]->minor),
+                $this->yystack[$this->yyidx +
+                0]->minor))));
     }
 
     #line 485 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r43()
     {
         $this->_retvalue = $this->compiler->compileTag('setfilter',
-                                                       array(),
-                                                       array('modifier_list' => array_merge(array(array_merge(array($this->yystack[ $this->yyidx +
-                                                                                                                                    -2 ]->minor),
-                                                                                                              $this->yystack[ $this->yyidx +
-                                                                                                                              -1 ]->minor)),
-                                                                                            $this->yystack[ $this->yyidx +
-                                                                                                            0 ]->minor)));
+            array(),
+            array('modifier_list' => array_merge(array(array_merge(array($this->yystack[$this->yyidx +
+            -2]->minor),
+                $this->yystack[$this->yyidx +
+                -1]->minor)),
+                $this->yystack[$this->yyidx +
+                0]->minor)));
     }
 
     #line 494 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r44()
     {
-        $tag = trim(substr($this->yystack[ $this->yyidx + 0 ]->minor,
-                           $this->compiler->getLdelLength(),
-                           -$this->compiler->getRdelLength()),
-                    ' /');
+        $tag = trim(substr($this->yystack[$this->yyidx + 0]->minor,
+            $this->compiler->getLdelLength(),
+            -$this->compiler->getRdelLength()),
+            ' /');
         if ($tag === 'strip') {
             $this->strip = false;
             $this->_retvalue = null;
@@ -2412,49 +2412,49 @@ class Smarty_Internal_Templateparser
     #line 498 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r45()
     {
-        $this->_retvalue = $this->compiler->compileTag($this->yystack[ $this->yyidx + 0 ]->minor . 'close', array());
+        $this->_retvalue = $this->compiler->compileTag($this->yystack[$this->yyidx + 0]->minor . 'close', array());
     }
 
     #line 503 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r46()
     {
-        $this->_retvalue = $this->compiler->compileTag($this->yystack[ $this->yyidx + -1 ]->minor . 'close',
-                                                       array(),
-                                                       array('modifier_list' => $this->yystack[ $this->yyidx +
-                                                                                                0 ]->minor));
+        $this->_retvalue = $this->compiler->compileTag($this->yystack[$this->yyidx + -1]->minor . 'close',
+            array(),
+            array('modifier_list' => $this->yystack[$this->yyidx +
+            0]->minor));
     }
 
     #line 507 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r47()
     {
-        $this->_retvalue = $this->compiler->compileTag($this->yystack[ $this->yyidx + -2 ]->minor . 'close',
-                                                       array(),
-                                                       array('object_method' => $this->yystack[ $this->yyidx +
-                                                                                                0 ]->minor));
+        $this->_retvalue = $this->compiler->compileTag($this->yystack[$this->yyidx + -2]->minor . 'close',
+            array(),
+            array('object_method' => $this->yystack[$this->yyidx +
+            0]->minor));
     }
 
     #line 515 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r48()
     {
-        $this->_retvalue = $this->compiler->compileTag($this->yystack[ $this->yyidx + -3 ]->minor . 'close',
-                                                       array(),
-                                                       array('object_method' => $this->yystack[ $this->yyidx +
-                                                                                                -1 ]->minor,
-                                                             'modifier_list' => $this->yystack[ $this->yyidx +
-                                                                                                0 ]->minor));
+        $this->_retvalue = $this->compiler->compileTag($this->yystack[$this->yyidx + -3]->minor . 'close',
+            array(),
+            array('object_method' => $this->yystack[$this->yyidx +
+            -1]->minor,
+                'modifier_list' => $this->yystack[$this->yyidx +
+                0]->minor));
     }
 
     #line 521 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r49()
     {
-        $this->_retvalue = $this->yystack[ $this->yyidx + -1 ]->minor;
-        $this->_retvalue[] = $this->yystack[ $this->yyidx + 0 ]->minor;
+        $this->_retvalue = $this->yystack[$this->yyidx + -1]->minor;
+        $this->_retvalue[] = $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 526 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r50()
     {
-        $this->_retvalue = array($this->yystack[ $this->yyidx + 0 ]->minor);
+        $this->_retvalue = array($this->yystack[$this->yyidx + 0]->minor);
     }
 
     #line 531 "../smarty/lexer/smarty_internal_templateparser.y"
@@ -2466,16 +2466,16 @@ class Smarty_Internal_Templateparser
     #line 542 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r52()
     {
-        if (defined($this->yystack[ $this->yyidx + 0 ]->minor)) {
+        if (defined($this->yystack[$this->yyidx + 0]->minor)) {
             if ($this->security) {
-                $this->security->isTrustedConstant($this->yystack[ $this->yyidx + 0 ]->minor, $this->compiler);
+                $this->security->isTrustedConstant($this->yystack[$this->yyidx + 0]->minor, $this->compiler);
             }
             $this->_retvalue =
-                array($this->yystack[ $this->yyidx + -2 ]->minor => $this->yystack[ $this->yyidx + 0 ]->minor);
+                array($this->yystack[$this->yyidx + -2]->minor => $this->yystack[$this->yyidx + 0]->minor);
         } else {
             $this->_retvalue =
-                array($this->yystack[ $this->yyidx + -2 ]->minor => '\'' . $this->yystack[ $this->yyidx + 0 ]->minor .
-                                                                    '\'');
+                array($this->yystack[$this->yyidx + -2]->minor => '\'' . $this->yystack[$this->yyidx + 0]->minor .
+                    '\'');
         }
     }
 
@@ -2483,215 +2483,215 @@ class Smarty_Internal_Templateparser
     function yy_r53()
     {
         $this->_retvalue =
-            array(trim($this->yystack[ $this->yyidx + -1 ]->minor, " =\n\r\t") => $this->yystack[ $this->yyidx +
-                                                                                                  0 ]->minor);
+            array(trim($this->yystack[$this->yyidx + -1]->minor, " =\n\r\t") => $this->yystack[$this->yyidx +
+            0]->minor);
     }
 
     #line 562 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r55()
     {
-        $this->_retvalue = '\'' . $this->yystack[ $this->yyidx + 0 ]->minor . '\'';
+        $this->_retvalue = '\'' . $this->yystack[$this->yyidx + 0]->minor . '\'';
     }
 
     #line 575 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r58()
     {
         $this->_retvalue =
-            array($this->yystack[ $this->yyidx + -2 ]->minor => $this->yystack[ $this->yyidx + 0 ]->minor);
+            array($this->yystack[$this->yyidx + -2]->minor => $this->yystack[$this->yyidx + 0]->minor);
     }
 
     #line 580 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r60()
     {
-        $this->yystack[ $this->yyidx + -2 ]->minor[] = $this->yystack[ $this->yyidx + 0 ]->minor;
-        $this->_retvalue = $this->yystack[ $this->yyidx + -2 ]->minor;
+        $this->yystack[$this->yyidx + -2]->minor[] = $this->yystack[$this->yyidx + 0]->minor;
+        $this->_retvalue = $this->yystack[$this->yyidx + -2]->minor;
     }
 
     #line 587 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r61()
     {
-        $this->_retvalue = array('var'   => '\'' . substr($this->yystack[ $this->yyidx + -2 ]->minor, 1) . '\'',
-                                 'value' => $this->yystack[ $this->yyidx + 0 ]->minor);
+        $this->_retvalue = array('var' => '\'' . substr($this->yystack[$this->yyidx + -2]->minor, 1) . '\'',
+            'value' => $this->yystack[$this->yyidx + 0]->minor);
     }
 
     #line 591 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r63()
     {
-        $this->_retvalue = array('var'   => $this->yystack[ $this->yyidx + -2 ]->minor,
-                                 'value' => $this->yystack[ $this->yyidx + 0 ]->minor);
+        $this->_retvalue = array('var' => $this->yystack[$this->yyidx + -2]->minor,
+            'value' => $this->yystack[$this->yyidx + 0]->minor);
     }
 
     #line 611 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r64()
     {
-        $this->_retvalue = $this->yystack[ $this->yyidx + -1 ]->minor;
+        $this->_retvalue = $this->yystack[$this->yyidx + -1]->minor;
     }
 
     #line 616 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r67()
     {
         $this->_retvalue =
-            '$_smarty_tpl->getStreamVariable(\'' . substr($this->yystack[ $this->yyidx + -2 ]->minor, 1) . '://' .
-            $this->yystack[ $this->yyidx + 0 ]->minor . '\')';
+            '$_smarty_tpl->getStreamVariable(\'' . substr($this->yystack[$this->yyidx + -2]->minor, 1) . '://' .
+            $this->yystack[$this->yyidx + 0]->minor . '\')';
     }
 
     #line 630 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r68()
     {
         $this->_retvalue =
-            $this->yystack[ $this->yyidx + -2 ]->minor . trim($this->yystack[ $this->yyidx + -1 ]->minor) .
-            $this->yystack[ $this->yyidx + 0 ]->minor;
+            $this->yystack[$this->yyidx + -2]->minor . trim($this->yystack[$this->yyidx + -1]->minor) .
+            $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 636 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r71()
     {
         $this->_retvalue = $this->compiler->compileTag('private_modifier',
-                                                       array(),
-                                                       array('value'        => $this->yystack[ $this->yyidx +
-                                                                                               -1 ]->minor,
-                                                             'modifierlist' => $this->yystack[ $this->yyidx +
-                                                                                               0 ]->minor));
+            array(),
+            array('value' => $this->yystack[$this->yyidx +
+            -1]->minor,
+                'modifierlist' => $this->yystack[$this->yyidx +
+                0]->minor));
     }
 
     #line 640 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r72()
     {
         $this->_retvalue =
-            $this->yystack[ $this->yyidx + -1 ]->minor[ 'pre' ] . $this->yystack[ $this->yyidx + -2 ]->minor .
-            $this->yystack[ $this->yyidx + -1 ]->minor[ 'op' ] . $this->yystack[ $this->yyidx + 0 ]->minor . ')';
+            $this->yystack[$this->yyidx + -1]->minor['pre'] . $this->yystack[$this->yyidx + -2]->minor .
+            $this->yystack[$this->yyidx + -1]->minor['op'] . $this->yystack[$this->yyidx + 0]->minor . ')';
     }
 
     #line 644 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r73()
     {
-        $this->_retvalue = $this->yystack[ $this->yyidx + -2 ]->minor . $this->yystack[ $this->yyidx + -1 ]->minor .
-                           $this->yystack[ $this->yyidx + 0 ]->minor;
+        $this->_retvalue = $this->yystack[$this->yyidx + -2]->minor . $this->yystack[$this->yyidx + -1]->minor .
+            $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 648 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r74()
     {
-        $this->_retvalue = $this->yystack[ $this->yyidx + 0 ]->minor . $this->yystack[ $this->yyidx + -1 ]->minor . ')';
+        $this->_retvalue = $this->yystack[$this->yyidx + 0]->minor . $this->yystack[$this->yyidx + -1]->minor . ')';
     }
 
     #line 652 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r75()
     {
         $this->_retvalue =
-            'in_array(' . $this->yystack[ $this->yyidx + -2 ]->minor . ',' . $this->yystack[ $this->yyidx + 0 ]->minor .
+            'in_array(' . $this->yystack[$this->yyidx + -2]->minor . ',' . $this->yystack[$this->yyidx + 0]->minor .
             ')';
     }
 
     #line 660 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r76()
     {
-        $this->_retvalue = 'in_array(' . $this->yystack[ $this->yyidx + -2 ]->minor . ',(array)' .
-                           $this->yystack[ $this->yyidx + 0 ]->minor . ')';
+        $this->_retvalue = 'in_array(' . $this->yystack[$this->yyidx + -2]->minor . ',(array)' .
+            $this->yystack[$this->yyidx + 0]->minor . ')';
     }
 
     #line 664 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r77()
     {
-        $this->_retvalue = $this->yystack[ $this->yyidx + -5 ]->minor . ' ? ' . $this->compiler->compileVariable('\'' .
-                                                                                                                 substr($this->yystack[ $this->yyidx +
-                                                                                                                                        -2 ]->minor,
-                                                                                                                        1) .
-                                                                                                                 '\'') .
-                           ' : ' . $this->yystack[ $this->yyidx + 0 ]->minor;
+        $this->_retvalue = $this->yystack[$this->yyidx + -5]->minor . ' ? ' . $this->compiler->compileVariable('\'' .
+                substr($this->yystack[$this->yyidx +
+                -2]->minor,
+                    1) .
+                '\'') .
+            ' : ' . $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 674 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r78()
     {
         $this->_retvalue =
-            $this->yystack[ $this->yyidx + -5 ]->minor . ' ? ' . $this->yystack[ $this->yyidx + -2 ]->minor . ' : ' .
-            $this->yystack[ $this->yyidx + 0 ]->minor;
+            $this->yystack[$this->yyidx + -5]->minor . ' ? ' . $this->yystack[$this->yyidx + -2]->minor . ' : ' .
+            $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 679 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r80()
     {
-        $this->_retvalue = $this->yystack[ $this->yyidx + -1 ]->minor . $this->yystack[ $this->yyidx + 0 ]->minor;
+        $this->_retvalue = $this->yystack[$this->yyidx + -1]->minor . $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 700 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r81()
     {
-        $this->_retvalue = '!' . $this->yystack[ $this->yyidx + 0 ]->minor;
+        $this->_retvalue = '!' . $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 704 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r86()
     {
-        $this->_retvalue = $this->yystack[ $this->yyidx + -2 ]->minor . '.' . $this->yystack[ $this->yyidx + 0 ]->minor;
+        $this->_retvalue = $this->yystack[$this->yyidx + -2]->minor . '.' . $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 708 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r87()
     {
-        $this->_retvalue = $this->yystack[ $this->yyidx + -1 ]->minor . '.';
+        $this->_retvalue = $this->yystack[$this->yyidx + -1]->minor . '.';
     }
 
     #line 713 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r88()
     {
-        $this->_retvalue = '.' . $this->yystack[ $this->yyidx + 0 ]->minor;
+        $this->_retvalue = '.' . $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 730 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r89()
     {
-        if (defined($this->yystack[ $this->yyidx + 0 ]->minor)) {
+        if (defined($this->yystack[$this->yyidx + 0]->minor)) {
             if ($this->security) {
-                $this->security->isTrustedConstant($this->yystack[ $this->yyidx + 0 ]->minor, $this->compiler);
+                $this->security->isTrustedConstant($this->yystack[$this->yyidx + 0]->minor, $this->compiler);
             }
-            $this->_retvalue = $this->yystack[ $this->yyidx + 0 ]->minor;
+            $this->_retvalue = $this->yystack[$this->yyidx + 0]->minor;
         } else {
-            $this->_retvalue = '\'' . $this->yystack[ $this->yyidx + 0 ]->minor . '\'';
+            $this->_retvalue = '\'' . $this->yystack[$this->yyidx + 0]->minor . '\'';
         }
     }
 
     #line 734 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r91()
     {
-        $this->_retvalue = '(' . $this->yystack[ $this->yyidx + -1 ]->minor . ')';
+        $this->_retvalue = '(' . $this->yystack[$this->yyidx + -1]->minor . ')';
     }
 
     #line 752 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r92()
     {
-        $this->_retvalue = $this->yystack[ $this->yyidx + -2 ]->minor . $this->yystack[ $this->yyidx + -1 ]->minor .
-                           $this->yystack[ $this->yyidx + 0 ]->minor;
+        $this->_retvalue = $this->yystack[$this->yyidx + -2]->minor . $this->yystack[$this->yyidx + -1]->minor .
+            $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 763 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r96()
     {
         $prefixVar = $this->compiler->getNewPrefixVariable();
-        if ($this->yystack[ $this->yyidx + -2 ]->minor[ 'var' ] === '\'smarty\'') {
+        if ($this->yystack[$this->yyidx + -2]->minor['var'] === '\'smarty\'') {
             $this->compiler->appendPrefixCode("<?php {$prefixVar} = " .
-                                              $this->compiler->compileTag('private_special_variable',
-                                                                          array(),
-                                                                          $this->yystack[ $this->yyidx +
-                                                                                          -2 ]->minor[ 'smarty_internal_index' ]) .
-                                              ';?>');
+                $this->compiler->compileTag('private_special_variable',
+                    array(),
+                    $this->yystack[$this->yyidx +
+                    -2]->minor['smarty_internal_index']) .
+                ';?>');
         } else {
             $this->compiler->appendPrefixCode("<?php  {$prefixVar} = " .
-                                              $this->compiler->compileVariable($this->yystack[ $this->yyidx +
-                                                                                               -2 ]->minor[ 'var' ]) .
-                                              $this->yystack[ $this->yyidx + -2 ]->minor[ 'smarty_internal_index' ] .
-                                              ';?>');
+                $this->compiler->compileVariable($this->yystack[$this->yyidx +
+                -2]->minor['var']) .
+                $this->yystack[$this->yyidx + -2]->minor['smarty_internal_index'] .
+                ';?>');
         }
-        $this->_retvalue = $prefixVar . '::' . $this->yystack[ $this->yyidx + 0 ]->minor[ 0 ] .
-                           $this->yystack[ $this->yyidx + 0 ]->minor[ 1 ];
+        $this->_retvalue = $prefixVar . '::' . $this->yystack[$this->yyidx + 0]->minor[0] .
+            $this->yystack[$this->yyidx + 0]->minor[1];
     }
 
     #line 780 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r97()
     {
         $prefixVar = $this->compiler->getNewPrefixVariable();
-        $tmp = $this->compiler->appendCode('<?php ob_start();?>', $this->yystack[ $this->yyidx + 0 ]->minor);
+        $tmp = $this->compiler->appendCode('<?php ob_start();?>', $this->yystack[$this->yyidx + 0]->minor);
         $this->compiler->appendPrefixCode($this->compiler->appendCode($tmp, "<?php {$prefixVar} = ob_get_clean();?>"));
         $this->_retvalue = $prefixVar;
     }
@@ -2699,107 +2699,107 @@ class Smarty_Internal_Templateparser
     #line 799 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r100()
     {
-        if (!in_array(strtolower($this->yystack[ $this->yyidx + -2 ]->minor), array('self', 'parent')) &&
-            (!$this->security || $this->security->isTrustedStaticClassAccess($this->yystack[ $this->yyidx + -2 ]->minor,
-                                                                             $this->yystack[ $this->yyidx + 0 ]->minor,
-                                                                             $this->compiler))) {
-            if (isset($this->smarty->registered_classes[ $this->yystack[ $this->yyidx + -2 ]->minor ])) {
+        if (!in_array(strtolower($this->yystack[$this->yyidx + -2]->minor), array('self', 'parent')) &&
+            (!$this->security || $this->security->isTrustedStaticClassAccess($this->yystack[$this->yyidx + -2]->minor,
+                    $this->yystack[$this->yyidx + 0]->minor,
+                    $this->compiler))) {
+            if (isset($this->smarty->registered_classes[$this->yystack[$this->yyidx + -2]->minor])) {
                 $this->_retvalue =
-                    $this->smarty->registered_classes[ $this->yystack[ $this->yyidx + -2 ]->minor ] . '::' .
-                    $this->yystack[ $this->yyidx + 0 ]->minor[ 0 ] . $this->yystack[ $this->yyidx + 0 ]->minor[ 1 ];
+                    $this->smarty->registered_classes[$this->yystack[$this->yyidx + -2]->minor] . '::' .
+                    $this->yystack[$this->yyidx + 0]->minor[0] . $this->yystack[$this->yyidx + 0]->minor[1];
             } else {
                 $this->_retvalue =
-                    $this->yystack[ $this->yyidx + -2 ]->minor . '::' . $this->yystack[ $this->yyidx + 0 ]->minor[ 0 ] .
-                    $this->yystack[ $this->yyidx + 0 ]->minor[ 1 ];
+                    $this->yystack[$this->yyidx + -2]->minor . '::' . $this->yystack[$this->yyidx + 0]->minor[0] .
+                    $this->yystack[$this->yyidx + 0]->minor[1];
             }
         } else {
-            $this->compiler->trigger_template_error('static class \'' . $this->yystack[ $this->yyidx + -2 ]->minor .
-                                                    '\' is undefined or not allowed by security setting');
+            $this->compiler->trigger_template_error('static class \'' . $this->yystack[$this->yyidx + -2]->minor .
+                '\' is undefined or not allowed by security setting');
         }
     }
 
     #line 810 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r102()
     {
-        $this->_retvalue = $this->yystack[ $this->yyidx + 0 ]->minor;
+        $this->_retvalue = $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 813 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r103()
     {
         $this->_retvalue =
-            $this->compiler->compileVariable('\'' . substr($this->yystack[ $this->yyidx + 0 ]->minor, 1) . '\'');
+            $this->compiler->compileVariable('\'' . substr($this->yystack[$this->yyidx + 0]->minor, 1) . '\'');
     }
 
     #line 826 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r104()
     {
-        if ($this->yystack[ $this->yyidx + 0 ]->minor[ 'var' ] === '\'smarty\'') {
+        if ($this->yystack[$this->yyidx + 0]->minor['var'] === '\'smarty\'') {
             $smarty_var = $this->compiler->compileTag('private_special_variable',
-                                                      array(),
-                                                      $this->yystack[ $this->yyidx +
-                                                                      0 ]->minor[ 'smarty_internal_index' ]);
+                array(),
+                $this->yystack[$this->yyidx +
+                0]->minor['smarty_internal_index']);
             $this->_retvalue = $smarty_var;
         } else {
             // used for array reset,next,prev,end,current
-            $this->last_variable = $this->yystack[ $this->yyidx + 0 ]->minor[ 'var' ];
-            $this->last_index = $this->yystack[ $this->yyidx + 0 ]->minor[ 'smarty_internal_index' ];
-            $this->_retvalue = $this->compiler->compileVariable($this->yystack[ $this->yyidx + 0 ]->minor[ 'var' ]) .
-                               $this->yystack[ $this->yyidx + 0 ]->minor[ 'smarty_internal_index' ];
+            $this->last_variable = $this->yystack[$this->yyidx + 0]->minor['var'];
+            $this->last_index = $this->yystack[$this->yyidx + 0]->minor['smarty_internal_index'];
+            $this->_retvalue = $this->compiler->compileVariable($this->yystack[$this->yyidx + 0]->minor['var']) .
+                $this->yystack[$this->yyidx + 0]->minor['smarty_internal_index'];
         }
     }
 
     #line 836 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r105()
     {
-        $this->_retvalue = '$_smarty_tpl->tpl_vars[' . $this->yystack[ $this->yyidx + -2 ]->minor . ']->' .
-                           $this->yystack[ $this->yyidx + 0 ]->minor;
+        $this->_retvalue = '$_smarty_tpl->tpl_vars[' . $this->yystack[$this->yyidx + -2]->minor . ']->' .
+            $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 840 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r107()
     {
         $this->_retvalue =
-            $this->compiler->compileConfigVariable('\'' . $this->yystack[ $this->yyidx + -1 ]->minor . '\'');
+            $this->compiler->compileConfigVariable('\'' . $this->yystack[$this->yyidx + -1]->minor . '\'');
     }
 
     #line 844 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r108()
     {
         $this->_retvalue = '(is_array($tmp = ' .
-                           $this->compiler->compileConfigVariable('\'' . $this->yystack[ $this->yyidx + -2 ]->minor .
-                                                                  '\'') . ') ? $tmp' .
-                           $this->yystack[ $this->yyidx + 0 ]->minor . ' :null)';
+            $this->compiler->compileConfigVariable('\'' . $this->yystack[$this->yyidx + -2]->minor .
+                '\'') . ') ? $tmp' .
+            $this->yystack[$this->yyidx + 0]->minor . ' :null)';
     }
 
     #line 848 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r109()
     {
-        $this->_retvalue = $this->compiler->compileConfigVariable($this->yystack[ $this->yyidx + -1 ]->minor);
+        $this->_retvalue = $this->compiler->compileConfigVariable($this->yystack[$this->yyidx + -1]->minor);
     }
 
     #line 852 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r110()
     {
         $this->_retvalue =
-            '(is_array($tmp = ' . $this->compiler->compileConfigVariable($this->yystack[ $this->yyidx + -2 ]->minor) .
-            ') ? $tmp' . $this->yystack[ $this->yyidx + 0 ]->minor . ' : null)';
+            '(is_array($tmp = ' . $this->compiler->compileConfigVariable($this->yystack[$this->yyidx + -2]->minor) .
+            ') ? $tmp' . $this->yystack[$this->yyidx + 0]->minor . ' : null)';
     }
 
     #line 855 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r111()
     {
-        $this->_retvalue = array('var'                   => '\'' .
-                                                            substr($this->yystack[ $this->yyidx + -1 ]->minor, 1) .
-                                                            '\'',
-                                 'smarty_internal_index' => $this->yystack[ $this->yyidx + 0 ]->minor);
+        $this->_retvalue = array('var' => '\'' .
+            substr($this->yystack[$this->yyidx + -1]->minor, 1) .
+            '\'',
+            'smarty_internal_index' => $this->yystack[$this->yyidx + 0]->minor);
     }
 
     #line 868 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r112()
     {
-        $this->_retvalue = array('var'                   => $this->yystack[ $this->yyidx + -1 ]->minor,
-                                 'smarty_internal_index' => $this->yystack[ $this->yyidx + 0 ]->minor);
+        $this->_retvalue = array('var' => $this->yystack[$this->yyidx + -1]->minor,
+            'smarty_internal_index' => $this->yystack[$this->yyidx + 0]->minor);
     }
 
     #line 874 "../smarty/lexer/smarty_internal_templateparser.y"
@@ -2812,73 +2812,73 @@ class Smarty_Internal_Templateparser
     function yy_r115()
     {
         $this->_retvalue =
-            '[' . $this->compiler->compileVariable('\'' . substr($this->yystack[ $this->yyidx + 0 ]->minor, 1) . '\'') .
+            '[' . $this->compiler->compileVariable('\'' . substr($this->yystack[$this->yyidx + 0]->minor, 1) . '\'') .
             ']';
     }
 
     #line 881 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r116()
     {
-        $this->_retvalue = '[' . $this->compiler->compileVariable($this->yystack[ $this->yyidx + 0 ]->minor) . ']';
+        $this->_retvalue = '[' . $this->compiler->compileVariable($this->yystack[$this->yyidx + 0]->minor) . ']';
     }
 
     #line 885 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r117()
     {
-        $this->_retvalue = '[' . $this->compiler->compileVariable($this->yystack[ $this->yyidx + -2 ]->minor) . '->' .
-                           $this->yystack[ $this->yyidx + 0 ]->minor . ']';
+        $this->_retvalue = '[' . $this->compiler->compileVariable($this->yystack[$this->yyidx + -2]->minor) . '->' .
+            $this->yystack[$this->yyidx + 0]->minor . ']';
     }
 
     #line 889 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r118()
     {
-        $this->_retvalue = '[\'' . $this->yystack[ $this->yyidx + 0 ]->minor . '\']';
+        $this->_retvalue = '[\'' . $this->yystack[$this->yyidx + 0]->minor . '\']';
     }
 
     #line 894 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r119()
     {
-        $this->_retvalue = '[' . $this->yystack[ $this->yyidx + 0 ]->minor . ']';
+        $this->_retvalue = '[' . $this->yystack[$this->yyidx + 0]->minor . ']';
     }
 
     #line 899 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r120()
     {
-        $this->_retvalue = '[' . $this->yystack[ $this->yyidx + -1 ]->minor . ']';
+        $this->_retvalue = '[' . $this->yystack[$this->yyidx + -1]->minor . ']';
     }
 
     #line 903 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r121()
     {
         $this->_retvalue = '[' . $this->compiler->compileTag('private_special_variable',
-                                                             array(),
-                                                             '[\'section\'][\'' .
-                                                             $this->yystack[ $this->yyidx + -1 ]->minor .
-                                                             '\'][\'index\']') . ']';
+                array(),
+                '[\'section\'][\'' .
+                $this->yystack[$this->yyidx + -1]->minor .
+                '\'][\'index\']') . ']';
     }
 
     #line 906 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r122()
     {
         $this->_retvalue = '[' . $this->compiler->compileTag('private_special_variable',
-                                                             array(),
-                                                             '[\'section\'][\'' .
-                                                             $this->yystack[ $this->yyidx + -3 ]->minor . '\'][\'' .
-                                                             $this->yystack[ $this->yyidx + -1 ]->minor . '\']') . ']';
+                array(),
+                '[\'section\'][\'' .
+                $this->yystack[$this->yyidx + -3]->minor . '\'][\'' .
+                $this->yystack[$this->yyidx + -1]->minor . '\']') . ']';
     }
 
     #line 912 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r123()
     {
-        $this->_retvalue = '[' . $this->yystack[ $this->yyidx + -1 ]->minor . ']';
+        $this->_retvalue = '[' . $this->yystack[$this->yyidx + -1]->minor . ']';
     }
 
     #line 928 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r125()
     {
         $this->_retvalue = '[' . $this->compiler->compileVariable('\'' .
-                                                                  substr($this->yystack[ $this->yyidx + -1 ]->minor,
-                                                                         1) . '\'') . ']';;
+                substr($this->yystack[$this->yyidx + -1]->minor,
+                    1) . '\'') . ']';;
     }
 
     #line 938 "../smarty/lexer/smarty_internal_templateparser.y"
@@ -2890,7 +2890,7 @@ class Smarty_Internal_Templateparser
     #line 942 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r130()
     {
-        $this->_retvalue = '\'' . substr($this->yystack[ $this->yyidx + 0 ]->minor, 1) . '\'';
+        $this->_retvalue = '\'' . substr($this->yystack[$this->yyidx + 0]->minor, 1) . '\'';
     }
 
     #line 947 "../smarty/lexer/smarty_internal_templateparser.y"
@@ -2902,61 +2902,61 @@ class Smarty_Internal_Templateparser
     #line 955 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r132()
     {
-        $this->_retvalue = $this->yystack[ $this->yyidx + -1 ]->minor . '.' . $this->yystack[ $this->yyidx + 0 ]->minor;
+        $this->_retvalue = $this->yystack[$this->yyidx + -1]->minor . '.' . $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 961 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r134()
     {
-        $var = trim(substr($this->yystack[ $this->yyidx + 0 ]->minor,
-                           $this->compiler->getLdelLength(),
-                           -$this->compiler->getRdelLength()),
-                    ' $');
+        $var = trim(substr($this->yystack[$this->yyidx + 0]->minor,
+            $this->compiler->getLdelLength(),
+            -$this->compiler->getRdelLength()),
+            ' $');
         $this->_retvalue = $this->compiler->compileVariable('\'' . $var . '\'');
     }
 
     #line 968 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r135()
     {
-        $this->_retvalue = '(' . $this->yystack[ $this->yyidx + -1 ]->minor . ')';
+        $this->_retvalue = '(' . $this->yystack[$this->yyidx + -1]->minor . ')';
     }
 
     #line 977 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r136()
     {
-        if ($this->yystack[ $this->yyidx + -1 ]->minor[ 'var' ] === '\'smarty\'') {
+        if ($this->yystack[$this->yyidx + -1]->minor['var'] === '\'smarty\'') {
             $this->_retvalue = $this->compiler->compileTag('private_special_variable',
-                                                           array(),
-                                                           $this->yystack[ $this->yyidx +
-                                                                           -1 ]->minor[ 'smarty_internal_index' ]) .
-                               $this->yystack[ $this->yyidx + 0 ]->minor;
+                    array(),
+                    $this->yystack[$this->yyidx +
+                    -1]->minor['smarty_internal_index']) .
+                $this->yystack[$this->yyidx + 0]->minor;
         } else {
-            $this->_retvalue = $this->compiler->compileVariable($this->yystack[ $this->yyidx + -1 ]->minor[ 'var' ]) .
-                               $this->yystack[ $this->yyidx + -1 ]->minor[ 'smarty_internal_index' ] .
-                               $this->yystack[ $this->yyidx + 0 ]->minor;
+            $this->_retvalue = $this->compiler->compileVariable($this->yystack[$this->yyidx + -1]->minor['var']) .
+                $this->yystack[$this->yyidx + -1]->minor['smarty_internal_index'] .
+                $this->yystack[$this->yyidx + 0]->minor;
         }
     }
 
     #line 982 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r137()
     {
-        $this->_retvalue = $this->yystack[ $this->yyidx + 0 ]->minor;
+        $this->_retvalue = $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 987 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r138()
     {
-        $this->_retvalue = $this->yystack[ $this->yyidx + -1 ]->minor . $this->yystack[ $this->yyidx + 0 ]->minor;
+        $this->_retvalue = $this->yystack[$this->yyidx + -1]->minor . $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 994 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r139()
     {
-        if ($this->security && substr($this->yystack[ $this->yyidx + -1 ]->minor, 0, 1) === '_') {
+        if ($this->security && substr($this->yystack[$this->yyidx + -1]->minor, 0, 1) === '_') {
             $this->compiler->trigger_template_error(self::Err1);
         }
         $this->_retvalue =
-            '->' . $this->yystack[ $this->yyidx + -1 ]->minor . $this->yystack[ $this->yyidx + 0 ]->minor;
+            '->' . $this->yystack[$this->yyidx + -1]->minor . $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 1001 "../smarty/lexer/smarty_internal_templateparser.y"
@@ -2965,8 +2965,8 @@ class Smarty_Internal_Templateparser
         if ($this->security) {
             $this->compiler->trigger_template_error(self::Err2);
         }
-        $this->_retvalue = '->{' . $this->compiler->compileVariable($this->yystack[ $this->yyidx + -1 ]->minor) .
-                           $this->yystack[ $this->yyidx + 0 ]->minor . '}';
+        $this->_retvalue = '->{' . $this->compiler->compileVariable($this->yystack[$this->yyidx + -1]->minor) .
+            $this->yystack[$this->yyidx + 0]->minor . '}';
     }
 
     #line 1008 "../smarty/lexer/smarty_internal_templateparser.y"
@@ -2976,7 +2976,7 @@ class Smarty_Internal_Templateparser
             $this->compiler->trigger_template_error(self::Err2);
         }
         $this->_retvalue =
-            '->{' . $this->yystack[ $this->yyidx + -2 ]->minor . $this->yystack[ $this->yyidx + 0 ]->minor . '}';
+            '->{' . $this->yystack[$this->yyidx + -2]->minor . $this->yystack[$this->yyidx + 0]->minor . '}';
     }
 
     #line 1016 "../smarty/lexer/smarty_internal_templateparser.y"
@@ -2986,31 +2986,31 @@ class Smarty_Internal_Templateparser
             $this->compiler->trigger_template_error(self::Err2);
         }
         $this->_retvalue =
-            '->{\'' . $this->yystack[ $this->yyidx + -4 ]->minor . '\'.' . $this->yystack[ $this->yyidx + -2 ]->minor .
-            $this->yystack[ $this->yyidx + 0 ]->minor . '}';
+            '->{\'' . $this->yystack[$this->yyidx + -4]->minor . '\'.' . $this->yystack[$this->yyidx + -2]->minor .
+            $this->yystack[$this->yyidx + 0]->minor . '}';
     }
 
     #line 1024 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r143()
     {
-        $this->_retvalue = '->' . $this->yystack[ $this->yyidx + 0 ]->minor;
+        $this->_retvalue = '->' . $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 1032 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r144()
     {
-        $this->_retvalue = $this->compiler->compilePHPFunctionCall($this->yystack[ $this->yyidx + -3 ]->minor,
-                                                                   $this->yystack[ $this->yyidx + -1 ]->minor);
+        $this->_retvalue = $this->compiler->compilePHPFunctionCall($this->yystack[$this->yyidx + -3]->minor,
+            $this->yystack[$this->yyidx + -1]->minor);
     }
 
     #line 1039 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r145()
     {
-        if ($this->security && substr($this->yystack[ $this->yyidx + -3 ]->minor, 0, 1) === '_') {
+        if ($this->security && substr($this->yystack[$this->yyidx + -3]->minor, 0, 1) === '_') {
             $this->compiler->trigger_template_error(self::Err1);
         }
-        $this->_retvalue = $this->yystack[ $this->yyidx + -3 ]->minor . '(' .
-                           implode(',', $this->yystack[ $this->yyidx + -1 ]->minor) . ')';
+        $this->_retvalue = $this->yystack[$this->yyidx + -3]->minor . '(' .
+            implode(',', $this->yystack[$this->yyidx + -1]->minor) . ')';
     }
 
     #line 1050 "../smarty/lexer/smarty_internal_templateparser.y"
@@ -3021,214 +3021,214 @@ class Smarty_Internal_Templateparser
         }
         $prefixVar = $this->compiler->getNewPrefixVariable();
         $this->compiler->appendPrefixCode("<?php {$prefixVar} = " . $this->compiler->compileVariable('\'' .
-                                                                                                     substr($this->yystack[ $this->yyidx +
-                                                                                                                            -3 ]->minor,
-                                                                                                            1) . '\'') .
-                                          ';?>');
-        $this->_retvalue = $prefixVar . '(' . implode(',', $this->yystack[ $this->yyidx + -1 ]->minor) . ')';
+                substr($this->yystack[$this->yyidx +
+                -3]->minor,
+                    1) . '\'') .
+            ';?>');
+        $this->_retvalue = $prefixVar . '(' . implode(',', $this->yystack[$this->yyidx + -1]->minor) . ')';
     }
 
     #line 1067 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r147()
     {
         $this->_retvalue =
-            array_merge($this->yystack[ $this->yyidx + -2 ]->minor, array($this->yystack[ $this->yyidx + 0 ]->minor));
+            array_merge($this->yystack[$this->yyidx + -2]->minor, array($this->yystack[$this->yyidx + 0]->minor));
     }
 
     #line 1071 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r150()
     {
-        $this->_retvalue = array_merge($this->yystack[ $this->yyidx + -2 ]->minor,
-                                       array(array_merge($this->yystack[ $this->yyidx + -1 ]->minor,
-                                                         $this->yystack[ $this->yyidx + 0 ]->minor)));
+        $this->_retvalue = array_merge($this->yystack[$this->yyidx + -2]->minor,
+            array(array_merge($this->yystack[$this->yyidx + -1]->minor,
+                $this->yystack[$this->yyidx + 0]->minor)));
     }
 
     #line 1079 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r151()
     {
         $this->_retvalue =
-            array(array_merge($this->yystack[ $this->yyidx + -1 ]->minor, $this->yystack[ $this->yyidx + 0 ]->minor));
+            array(array_merge($this->yystack[$this->yyidx + -1]->minor, $this->yystack[$this->yyidx + 0]->minor));
     }
 
     #line 1087 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r153()
     {
-        $this->_retvalue = array($this->yystack[ $this->yyidx + 0 ]->minor);
+        $this->_retvalue = array($this->yystack[$this->yyidx + 0]->minor);
     }
 
     #line 1106 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r154()
     {
         $this->_retvalue =
-            array_merge($this->yystack[ $this->yyidx + -1 ]->minor, $this->yystack[ $this->yyidx + 0 ]->minor);
+            array_merge($this->yystack[$this->yyidx + -1]->minor, $this->yystack[$this->yyidx + 0]->minor);
     }
 
     #line 1111 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r158()
     {
-        $this->_retvalue = array($this->yystack[ $this->yyidx + 0 ]->minor, '', 'method');
+        $this->_retvalue = array($this->yystack[$this->yyidx + 0]->minor, '', 'method');
     }
 
     #line 1116 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r159()
     {
         $this->_retvalue =
-            array($this->yystack[ $this->yyidx + -1 ]->minor, $this->yystack[ $this->yyidx + 0 ]->minor, 'method');
+            array($this->yystack[$this->yyidx + -1]->minor, $this->yystack[$this->yyidx + 0]->minor, 'method');
     }
 
     #line 1121 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r160()
     {
-        $this->_retvalue = array($this->yystack[ $this->yyidx + 0 ]->minor, '');
+        $this->_retvalue = array($this->yystack[$this->yyidx + 0]->minor, '');
     }
 
     #line 1126 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r161()
     {
         $this->_retvalue =
-            array($this->yystack[ $this->yyidx + -1 ]->minor, $this->yystack[ $this->yyidx + 0 ]->minor, 'property');
+            array($this->yystack[$this->yyidx + -1]->minor, $this->yystack[$this->yyidx + 0]->minor, 'property');
     }
 
     #line 1132 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r162()
     {
-        $this->_retvalue = array($this->yystack[ $this->yyidx + -2 ]->minor,
-                                 $this->yystack[ $this->yyidx + -1 ]->minor . $this->yystack[ $this->yyidx + 0 ]->minor,
-                                 'property');
+        $this->_retvalue = array($this->yystack[$this->yyidx + -2]->minor,
+            $this->yystack[$this->yyidx + -1]->minor . $this->yystack[$this->yyidx + 0]->minor,
+            'property');
     }
 
     #line 1136 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r163()
     {
-        $this->_retvalue = ' ' . trim($this->yystack[ $this->yyidx + 0 ]->minor) . ' ';
+        $this->_retvalue = ' ' . trim($this->yystack[$this->yyidx + 0]->minor) . ' ';
     }
 
     #line 1155 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r164()
     {
         static $lops = array(
-            'eq'  => ' == ',
-            'ne'  => ' != ',
+            'eq' => ' == ',
+            'ne' => ' != ',
             'neq' => ' != ',
-            'gt'  => ' > ',
-            'ge'  => ' >= ',
+            'gt' => ' > ',
+            'ge' => ' >= ',
             'gte' => ' >= ',
-            'lt'  => ' < ',
-            'le'  => ' <= ',
+            'lt' => ' < ',
+            'le' => ' <= ',
             'lte' => ' <= ',
             'mod' => ' % ',
             'and' => ' && ',
-            'or'  => ' || ',
+            'or' => ' || ',
             'xor' => ' xor ',
         );
-        $op = strtolower(preg_replace('/\s*/', '', $this->yystack[ $this->yyidx + 0 ]->minor));
-        $this->_retvalue = $lops[ $op ];
+        $op = strtolower(preg_replace('/\s*/', '', $this->yystack[$this->yyidx + 0]->minor));
+        $this->_retvalue = $lops[$op];
     }
 
     #line 1168 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r165()
     {
         static $tlops = array(
-            'isdivby'     => array('op' => ' % ', 'pre' => '!('),
-            'isnotdivby'  => array('op' => ' % ', 'pre' => '('),
-            'isevenby'    => array('op' => ' / ', 'pre' => '!(1 & '),
+            'isdivby' => array('op' => ' % ', 'pre' => '!('),
+            'isnotdivby' => array('op' => ' % ', 'pre' => '('),
+            'isevenby' => array('op' => ' / ', 'pre' => '!(1 & '),
             'isnotevenby' => array('op' => ' / ', 'pre' => '(1 & '),
-            'isoddby'     => array('op' => ' / ', 'pre' => '(1 & '),
-            'isnotoddby'  => array('op' => ' / ', 'pre' => '!(1 & '),
+            'isoddby' => array('op' => ' / ', 'pre' => '(1 & '),
+            'isnotoddby' => array('op' => ' / ', 'pre' => '!(1 & '),
         );
-        $op = strtolower(preg_replace('/\s*/', '', $this->yystack[ $this->yyidx + 0 ]->minor));
-        $this->_retvalue = $tlops[ $op ];
+        $op = strtolower(preg_replace('/\s*/', '', $this->yystack[$this->yyidx + 0]->minor));
+        $this->_retvalue = $tlops[$op];
     }
 
     #line 1182 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r166()
     {
         static $scond = array(
-            'iseven'    => '!(1 & ',
+            'iseven' => '!(1 & ',
             'isnoteven' => '(1 & ',
-            'isodd'     => '(1 & ',
-            'isnotodd'  => '!(1 & ',
+            'isodd' => '(1 & ',
+            'isnotodd' => '!(1 & ',
         );
-        $op = strtolower(str_replace(' ', '', $this->yystack[ $this->yyidx + 0 ]->minor));
-        $this->_retvalue = $scond[ $op ];
+        $op = strtolower(str_replace(' ', '', $this->yystack[$this->yyidx + 0]->minor));
+        $this->_retvalue = $scond[$op];
     }
 
     #line 1190 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r167()
     {
-        $this->_retvalue = 'array(' . $this->yystack[ $this->yyidx + -1 ]->minor . ')';
+        $this->_retvalue = 'array(' . $this->yystack[$this->yyidx + -1]->minor . ')';
     }
 
     #line 1198 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r169()
     {
-        $this->_retvalue = $this->yystack[ $this->yyidx + -2 ]->minor . ',' . $this->yystack[ $this->yyidx + 0 ]->minor;
+        $this->_retvalue = $this->yystack[$this->yyidx + -2]->minor . ',' . $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 1202 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r171()
     {
         $this->_retvalue =
-            $this->yystack[ $this->yyidx + -2 ]->minor . '=>' . $this->yystack[ $this->yyidx + 0 ]->minor;
+            $this->yystack[$this->yyidx + -2]->minor . '=>' . $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 1218 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r172()
     {
         $this->_retvalue =
-            '\'' . $this->yystack[ $this->yyidx + -2 ]->minor . '\'=>' . $this->yystack[ $this->yyidx + 0 ]->minor;
+            '\'' . $this->yystack[$this->yyidx + -2]->minor . '\'=>' . $this->yystack[$this->yyidx + 0]->minor;
     }
 
     #line 1224 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r175()
     {
         $this->compiler->leaveDoubleQuote();
-        $this->_retvalue = $this->yystack[ $this->yyidx + -1 ]->minor->to_smarty_php($this);
+        $this->_retvalue = $this->yystack[$this->yyidx + -1]->minor->to_smarty_php($this);
     }
 
     #line 1229 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r176()
     {
-        $this->yystack[ $this->yyidx + -1 ]->minor->append_subtree($this, $this->yystack[ $this->yyidx + 0 ]->minor);
-        $this->_retvalue = $this->yystack[ $this->yyidx + -1 ]->minor;
+        $this->yystack[$this->yyidx + -1]->minor->append_subtree($this, $this->yystack[$this->yyidx + 0]->minor);
+        $this->_retvalue = $this->yystack[$this->yyidx + -1]->minor;
     }
 
     #line 1233 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r177()
     {
-        $this->_retvalue = new Smarty_Internal_ParseTree_Dq($this, $this->yystack[ $this->yyidx + 0 ]->minor);
+        $this->_retvalue = new Smarty_Internal_ParseTree_Dq($this, $this->yystack[$this->yyidx + 0]->minor);
     }
 
     #line 1237 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r178()
     {
-        $this->_retvalue = new Smarty_Internal_ParseTree_Code('(string)' . $this->yystack[ $this->yyidx + -1 ]->minor);
+        $this->_retvalue = new Smarty_Internal_ParseTree_Code('(string)' . $this->yystack[$this->yyidx + -1]->minor);
     }
 
     #line 1241 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r179()
     {
         $this->_retvalue =
-            new Smarty_Internal_ParseTree_Code('(string)(' . $this->yystack[ $this->yyidx + -1 ]->minor . ')');
+            new Smarty_Internal_ParseTree_Code('(string)(' . $this->yystack[$this->yyidx + -1]->minor . ')');
     }
 
     #line 1253 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r180()
     {
         $this->_retvalue = new Smarty_Internal_ParseTree_Code('(string)$_smarty_tpl->tpl_vars[\'' .
-                                                              substr($this->yystack[ $this->yyidx + 0 ]->minor, 1) .
-                                                              '\']->value');
+            substr($this->yystack[$this->yyidx + 0]->minor, 1) .
+            '\']->value');
     }
 
     #line 1257 "../smarty/lexer/smarty_internal_templateparser.y"
     function yy_r183()
     {
-        $this->_retvalue = new Smarty_Internal_ParseTree_Tag($this, $this->yystack[ $this->yyidx + 0 ]->minor);
+        $this->_retvalue = new Smarty_Internal_ParseTree_Tag($this, $this->yystack[$this->yyidx + 0]->minor);
     }
 
     function yy_r184()
     {
-        $this->_retvalue = new Smarty_Internal_ParseTree_DqContent($this->yystack[ $this->yyidx + 0 ]->minor);
+        $this->_retvalue = new Smarty_Internal_ParseTree_DqContent($this->yystack[$this->yyidx + 0]->minor);
     }
 
     public function yy_reduce($yyruleno)
@@ -3236,26 +3236,26 @@ class Smarty_Internal_Templateparser
         if ($this->yyTraceFILE && $yyruleno >= 0
             && $yyruleno < count(self::$yyRuleName)) {
             fprintf($this->yyTraceFILE,
-                    "%sReduce (%d) [%s].\n",
-                    $this->yyTracePrompt,
-                    $yyruleno,
-                    self::$yyRuleName[ $yyruleno ]);
+                "%sReduce (%d) [%s].\n",
+                $this->yyTracePrompt,
+                $yyruleno,
+                self::$yyRuleName[$yyruleno]);
         }
         $this->_retvalue = $yy_lefthand_side = null;
-        if (isset(self::$yyReduceMap[ $yyruleno ])) {
+        if (isset(self::$yyReduceMap[$yyruleno])) {
             // call the action
             $this->_retvalue = null;
-            $this->{'yy_r' . self::$yyReduceMap[ $yyruleno ]}();
+            $this->{'yy_r' . self::$yyReduceMap[$yyruleno]}();
             $yy_lefthand_side = $this->_retvalue;
         }
-        $yygoto = self::$yyRuleInfo[ $yyruleno ][ 0 ];
-        $yysize = self::$yyRuleInfo[ $yyruleno ][ 1 ];
+        $yygoto = self::$yyRuleInfo[$yyruleno][0];
+        $yysize = self::$yyRuleInfo[$yyruleno][1];
         $this->yyidx -= $yysize;
         for ($i = $yysize; $i; $i--) {
             // pop all of the right-hand side parameters
             array_pop($this->yystack);
         }
-        $yyact = $this->yy_find_reduce_action($this->yystack[ $this->yyidx ]->stateno, $yygoto);
+        $yyact = $this->yy_find_reduce_action($this->yystack[$this->yyidx]->stateno, $yygoto);
         if ($yyact < self::YYNSTATE) {
             if (!$this->yyTraceFILE && $yysize) {
                 $this->yyidx++;
@@ -3263,7 +3263,7 @@ class Smarty_Internal_Templateparser
                 $x->stateno = $yyact;
                 $x->major = $yygoto;
                 $x->minor = $yy_lefthand_side;
-                $this->yystack[ $this->yyidx ] = $x;
+                $this->yystack[$this->yyidx] = $x;
             } else {
                 $this->yy_shift($yyact, $yygoto, $yy_lefthand_side);
             }
@@ -3319,9 +3319,9 @@ class Smarty_Internal_Templateparser
         $yyendofinput = ($yymajor == 0);
         if ($this->yyTraceFILE) {
             fprintf($this->yyTraceFILE,
-                    "%sInput %s\n",
-                    $this->yyTracePrompt,
-                    $this->yyTokenName[ $yymajor ]);
+                "%sInput %s\n",
+                $this->yyTracePrompt,
+                $this->yyTokenName[$yymajor]);
         }
         do {
             $yyact = $this->yy_find_shift_action($yymajor);
@@ -3343,27 +3343,27 @@ class Smarty_Internal_Templateparser
             } else if ($yyact === self::YY_ERROR_ACTION) {
                 if ($this->yyTraceFILE) {
                     fprintf($this->yyTraceFILE,
-                            "%sSyntax Error!\n",
-                            $this->yyTracePrompt);
+                        "%sSyntax Error!\n",
+                        $this->yyTracePrompt);
                 }
                 if (self::YYERRORSYMBOL) {
                     if ($this->yyerrcnt < 0) {
                         $this->yy_syntax_error($yymajor, $yytokenvalue);
                     }
-                    $yymx = $this->yystack[ $this->yyidx ]->major;
+                    $yymx = $this->yystack[$this->yyidx]->major;
                     if ($yymx === self::YYERRORSYMBOL || $yyerrorhit) {
                         if ($this->yyTraceFILE) {
                             fprintf($this->yyTraceFILE,
-                                    "%sDiscard input token %s\n",
-                                    $this->yyTracePrompt,
-                                    $this->yyTokenName[ $yymajor ]);
+                                "%sDiscard input token %s\n",
+                                $this->yyTracePrompt,
+                                $this->yyTokenName[$yymajor]);
                         }
                         $this->yy_destructor($yymajor, $yytokenvalue);
                         $yymajor = self::YYNOCODE;
                     } else {
                         while ($this->yyidx >= 0 &&
-                               $yymx !== self::YYERRORSYMBOL &&
-                               ($yyact = $this->yy_find_shift_action(self::YYERRORSYMBOL)) >= self::YYNSTATE
+                            $yymx !== self::YYERRORSYMBOL &&
+                            ($yyact = $this->yy_find_shift_action(self::YYERRORSYMBOL)) >= self::YYNSTATE
                         ) {
                             $this->yy_pop_parser_stack();
                         }

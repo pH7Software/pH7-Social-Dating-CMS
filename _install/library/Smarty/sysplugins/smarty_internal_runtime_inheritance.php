@@ -62,9 +62,9 @@ class Smarty_Internal_Runtime_Inheritance
     /**
      * Initialize inheritance
      *
-     * @param \Smarty_Internal_Template $tpl        template object of caller
-     * @param bool                      $initChild  if true init for child template
-     * @param array                     $blockNames outer level block name
+     * @param \Smarty_Internal_Template $tpl template object of caller
+     * @param bool $initChild if true init for child template
+     * @param array $blockNames outer level block name
      *
      */
     public function init(Smarty_Internal_Template $tpl, $initChild, $blockNames = array())
@@ -76,7 +76,7 @@ class Smarty_Internal_Runtime_Inheritance
             return;
         }
         $this->tplIndex++;
-        $this->sources[ $this->tplIndex ] = $tpl->source;
+        $this->sources[$this->tplIndex] = $tpl->source;
 
         // start of child sub template(s)
         if ($initChild) {
@@ -100,9 +100,9 @@ class Smarty_Internal_Runtime_Inheritance
      * - if outer level is reached flush output buffer and switch to wait for parent template state
      *
      * @param \Smarty_Internal_Template $tpl
-     * @param null|string               $template optional name of inheritance parent template
-     * @param null|string               $uid      uid of inline template
-     * @param null|string               $func     function call name of inline template
+     * @param null|string $template optional name of inheritance parent template
+     * @param null|string $uid uid of inline template
+     * @param null|string $func function call name of inline template
      *
      * @throws \Exception
      * @throws \SmartyException
@@ -115,17 +115,17 @@ class Smarty_Internal_Runtime_Inheritance
             $this->state = 2;
         }
         if (isset($template) && (($tpl->parent->_isTplObj() && $tpl->parent->source->type !== 'extends') ||
-                                 $tpl->smarty->extends_recursion)) {
+                $tpl->smarty->extends_recursion)) {
             $tpl->_subTemplateRender($template,
-                                     $tpl->cache_id,
-                                     $tpl->compile_id,
-                                     $tpl->caching ? 9999 : 0,
-                                     $tpl->cache_lifetime,
-                                     array(),
-                                     2,
-                                     false,
-                                     $uid,
-                                     $func);
+                $tpl->cache_id,
+                $tpl->compile_id,
+                $tpl->caching ? 9999 : 0,
+                $tpl->cache_lifetime,
+                array(),
+                2,
+                false,
+                $uid,
+                $func);
         }
     }
 
@@ -136,19 +136,19 @@ class Smarty_Internal_Runtime_Inheritance
      *
      * @param \Smarty_Internal_Template $tpl
      * @param                           $className
-     * @param string                    $name
-     * @param int|null                  $tplIndex index of outer level {block} if nested
+     * @param string $name
+     * @param int|null $tplIndex index of outer level {block} if nested
      *
      * @throws \SmartyException
      */
     public function instanceBlock(Smarty_Internal_Template $tpl, $className, $name, $tplIndex = null)
     {
         $block = new $className($name, isset($tplIndex) ? $tplIndex : $this->tplIndex);
-        if (isset($this->childRoot[ $name ])) {
-            $block->child = $this->childRoot[ $name ];
+        if (isset($this->childRoot[$name])) {
+            $block->child = $this->childRoot[$name];
         }
         if ($this->state === 1) {
-            $this->childRoot[ $name ] = $block;
+            $this->childRoot[$name] = $block;
             return;
         }
         // make sure we got child block of child template of current block
@@ -161,8 +161,8 @@ class Smarty_Internal_Runtime_Inheritance
     /**
      * Goto child block or render this
      *
-     * @param \Smarty_Internal_Template   $tpl
-     * @param \Smarty_Internal_Block      $block
+     * @param \Smarty_Internal_Template $tpl
+     * @param \Smarty_Internal_Block $block
      * @param \Smarty_Internal_Block|null $parent
      *
      * @throws \SmartyException
@@ -205,8 +205,8 @@ class Smarty_Internal_Runtime_Inheritance
      * Render child on $smarty.block.child
      *
      * @param \Smarty_Internal_Template $tpl
-     * @param \Smarty_Internal_Block    $block
-     * @param boolean                   $returnContent flag if content shall be returned
+     * @param \Smarty_Internal_Block $block
+     * @param boolean $returnContent flag if content shall be returned
      *
      * @return null|string null or block content dependent on $returnContent
      * @throws \SmartyException
@@ -229,9 +229,9 @@ class Smarty_Internal_Runtime_Inheritance
      * Render parent block on $smarty.block.parent or {block append/prepend}
      *
      * @param \Smarty_Internal_Template $tpl
-     * @param \Smarty_Internal_Block    $block
-     * @param null|string               $name
-     * @param boolean                   $returnContent flag if content shall be returned
+     * @param \Smarty_Internal_Block $block
+     * @param null|string $name
+     * @param boolean $returnContent flag if content shall be returned
      *
      * @return null|string  null or block content dependent on $returnContent
      * @throws \SmartyException
@@ -247,7 +247,7 @@ class Smarty_Internal_Runtime_Inheritance
         if (isset($name)) {
             $block = $block->parent;
             while (isset($block)) {
-                if (isset($block->subBlocks[ $name ])) {
+                if (isset($block->subBlocks[$name])) {
                 } else {
                     $block = $block->parent;
                 }
@@ -267,13 +267,13 @@ class Smarty_Internal_Runtime_Inheritance
     /**
      * redender block
      *
-     * @param \Smarty_Internal_Block    $block
+     * @param \Smarty_Internal_Block $block
      * @param \Smarty_Internal_Template $tpl
      */
     public function callBlock(Smarty_Internal_Block $block, Smarty_Internal_Template $tpl)
     {
         $this->sourceStack[] = $tpl->source;
-        $tpl->source = $this->sources[ $block->tplIndex ];
+        $tpl->source = $this->sources[$block->tplIndex];
         $block->callBlock($tpl);
         $tpl->source = array_pop($this->sourceStack);
     }

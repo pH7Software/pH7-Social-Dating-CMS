@@ -17,11 +17,11 @@ class Smarty_Internal_Method_CompileAllConfig extends Smarty_Internal_Method_Com
      *
      * @api  Smarty::compileAllConfig()
      *
-     * @param \Smarty $smarty        passed smarty object
-     * @param  string $extension     file extension
-     * @param  bool   $force_compile force all to recompile
-     * @param  int    $time_limit
-     * @param  int    $max_errors
+     * @param \Smarty $smarty passed smarty object
+     * @param  string $extension file extension
+     * @param  bool $force_compile force all to recompile
+     * @param  int $time_limit
+     * @param  int $max_errors
      *
      * @return int number of template files recompiled
      */

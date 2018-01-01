@@ -19,10 +19,10 @@
  * @link   http://www.smarty.net/manual/en/language.modifier.date.format.php date_format (Smarty online manual)
  * @author Monte Ohrt <monte at ohrt dot com>
  *
- * @param string $string       input date string
- * @param string $format       strftime format for output
+ * @param string $string input date string
+ * @param string $format strftime format for output
  * @param string $default_date default date if $string is empty
- * @param string $formatter    either 'strftime' or 'auto'
+ * @param string $formatter either 'strftime' or 'auto'
  *
  * @return string |void
  * @uses   smarty_make_timestamp()
@@ -52,19 +52,19 @@ function smarty_modifier_date_format($string, $format = null, $default_date = ''
     if ($formatter === 'strftime' || ($formatter === 'auto' && strpos($format, '%') !== false)) {
         if (Smarty::$_IS_WINDOWS) {
             $_win_from = array('%D',
-                               '%h',
-                               '%n',
-                               '%r',
-                               '%R',
-                               '%t',
-                               '%T');
+                '%h',
+                '%n',
+                '%r',
+                '%R',
+                '%t',
+                '%T');
             $_win_to = array('%m/%d/%y',
-                             '%b',
-                             "\n",
-                             '%I:%M:%S %p',
-                             '%H:%M',
-                             "\t",
-                             '%H:%M:%S');
+                '%b',
+                "\n",
+                '%I:%M:%S %p',
+                '%H:%M',
+                "\t",
+                '%H:%M:%S');
             if (strpos($format, '%e') !== false) {
                 $_win_from[] = '%e';
                 $_win_to[] = sprintf('%\' 2d', date('j', $timestamp));
