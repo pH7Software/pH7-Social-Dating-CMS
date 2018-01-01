@@ -1,5 +1,6 @@
 <?php
 namespace PH7\Framework\Seo;
+
 defined('PH7') or exit('Restricted access');
 
 /*
