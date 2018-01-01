@@ -210,10 +210,10 @@ class MainController extends Controller
 
         Header::redirect(
             Uri::get(
-            'video',
-            'main',
-            'album',
-            $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')
+                'video',
+                'main',
+                'album',
+                $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')
             ),
             t('Your video has been removed.')
         );
@@ -230,9 +230,9 @@ class MainController extends Controller
 
         Header::redirect(
             Uri::get(
-            'video',
-            'main',
-            'albums'
+                'video',
+                'main',
+                'albums'
             ),
             t('Your album has been removed.')
         );
