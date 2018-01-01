@@ -3,6 +3,8 @@ namespace PH7\Framework\Seo;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Error\CException\PH7Exception;
+
 /*
 *
 * This script is distributed in the hope that it will be useful,
@@ -88,11 +90,10 @@ class GoogleKeywordsRankAPI
      *
      * @return string the html code
      */
-
     public function getContent($url)
     {
         if (!extension_loaded('curl')) {
-            throw new \PH7\Framework\Error\CException\PH7Exception('curl extension is not available');
+            throw new PH7Exception('curl extension is not available');
         }
 
         $curl = curl_init();
