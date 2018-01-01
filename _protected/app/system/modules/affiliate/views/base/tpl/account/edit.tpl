@@ -12,4 +12,4 @@
 </div>
 
 <script src="{url_static}{% PH7_JS %}tabs.js"></script>
-<script>tabs('p', ['general','bank']);</script>
+<script>tabs('p', ['general', 'bank']);</script>
