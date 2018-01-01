@@ -22,18 +22,18 @@
 
 <script src="{$smarty.const.PH7_URL_INSTALL}static/js/AJAPH.js"></script>
 {literal}
-<script>
-var oCheckDir = document.getElementById("path_protected");
-oCheckDir.onkeyup = function() {
-  var sDir = oCheckDir.value, sHtmlId = "txtDir";
-  if (sDir == "") {
-    document.getElementById(sHtmlId).innerHTML = "";
-    return;
-  }
+    <script>
+        var oCheckDir = document.getElementById("path_protected");
+        oCheckDir.onkeyup = function () {
+            var sDir = oCheckDir.value, sHtmlId = "txtDir";
+            if (sDir == "") {
+                document.getElementById(sHtmlId).innerHTML = "";
+                return;
+            }
 
-  (new AJAPH).send("POST", sInstallUrl + "inc/ajax/check_dir.php", "dir=" + sDir).setResponseHtml(sHtmlId);
-}
-</script>
+            (new AJAPH).send("POST", sInstallUrl + "inc/ajax/check_dir.php", "dir=" + sDir).setResponseHtml(sHtmlId);
+        }
+    </script>
 {/literal}
 
 {include file="inc/footer.tpl"}
