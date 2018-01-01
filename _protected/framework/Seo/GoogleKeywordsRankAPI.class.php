@@ -48,10 +48,9 @@ class GoogleKeywordsRankAPI
         $this->url = str_replace('http://www.', '', $url);
         $this->extension = $extension;
 
+        $this->maxPages = 1;
         if ($maxPages > 0) {
             $this->maxPages = $maxPages;
-        } else {
-            $this->maxPages = 1;
         }
     }
 
@@ -62,13 +61,11 @@ class GoogleKeywordsRankAPI
      *
      * @return void
      */
-
     public function setMaxPages($maxPages)
     {
+        $this->maxPages = 1;
         if ($maxPages > 0) {
             $this->maxPages = $maxPages;
-        } else {
-            $this->maxPages = 1;
         }
     }
 
@@ -147,39 +144,35 @@ class GoogleKeywordsRankAPI
                     trigger_error('Google results parse problem : http error ' . $getContentCode, E_USER_WARNING);
                     return null;
                 }
-
             }
         }
+
         return null;
     }
 
     /**
      * Get the position of the keywords array
-     * There is a sleep() function of 3 secondes because google can ban you for 24 hours if the number of search is too large(1000 req/24 hour)
+     * There is a sleep() function of 3 seconds because google can ban you for 24 hours if the number of search is too large(1000 req/24 hour)
      *
      * @param array $keywords array of keywords
      *
      * @return array arrays with keywords=>rank
      */
-
-
     public function getKeywordsArrayRank($keywords)
     {
         $keywords_rank = array();
 
         foreach ($keywords as $keyword) {
             $rank = $this->getKeywordsRank($keyword);
+
+            $keywords_rank [] = array($keyword, 0);
             if ($rank) {
                 $keywords_rank [] = $rank;
-            } else {
-                $keywords_rank [] = array($keyword, 0);
             }
+
             sleep(3);
         }
 
         return $keywords_rank;
     }
-
 }
-
-?>
