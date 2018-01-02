@@ -19,7 +19,7 @@ use PH7\Framework\Server\Server;
 class Session
 {
     /**
-     * @param boolean $bDisableSessCache Disable PHP's session cache. Default FALSE
+     * @param bool $bDisableSessCache Disable PHP's session cache. Default FALSE
      */
     public function __construct($bDisableSessCache = false)
     {
