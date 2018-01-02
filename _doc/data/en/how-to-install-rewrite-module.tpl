@@ -6,7 +6,8 @@
 <p>The Apache configuration file depends on your operating system.<br />
 For CentOS, Fedora and other OS based on Red Hat, the Web server configuration file will normally be "<em>/etc/httpd/conf/httpd.conf</em>".<br />
 For Ubuntu and other OS based on Debian, the Web server configuration file will normally be "<em>/etc/apache2/sites-enabled/000-default.conf</em>".</p>
-<p>Now, change "<em>AllowOverride None</em>" to "<em>AllowOverride All</em>" inside the DocumentRoot Directory Directive, normally "<em>&lt;Directory "/var/www"&gt;</em>"
+<p>Now, change "<em>AllowOverride None</em>" to "<em>AllowOverride All</em>" inside the DocumentRoot Directory Directive, normally "<em>&lt;Directory "/var/www"&gt;</em>"<br />
+If "<em>&lt;Directory "/var/www"&gt;</em>" isn't present, add <code class="apache">&lt;Directory "/var/www"&gt;AllowOverride All&lt;/Directory&gt;</code> inside of "<em>&lt;VirtualHost&gt;&lt;/VirtualHost&gt;</em>" tags.</p>
 <p>Now, save the file (you need to have the administrative privileges), and restart your Apache server.</p>
 <p>Done!</p>
 

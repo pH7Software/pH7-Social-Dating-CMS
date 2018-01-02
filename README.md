@@ -117,7 +117,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 
 * **Web Server** Apache with mod_php or with PHP in CGI, FastCGI mode (nginx, LiteSpeed and IIS should also work you should change some pieces of code and change the url rewriting to make it work).
 
-* **URL rewriting extension module** Apache, nginx, LiteSpeed, IIS (for Web.config, you have a [good tutorial here](http://www.phpgenious.com/2010/04/url-rewriting-with-php-and-iis-7/)).
+* **URL rewriting extension module** [Apache](https://ph7cms.com/doc/en/how-to-install-rewrite-module), nginx, LiteSpeed, IIS (for Web.config, you have a [good tutorial here](http://www.phpgenious.com/2010/04/url-rewriting-with-php-and-iis-7/)).
 
 * **Specific Requirement** Server has to be connected to Internet.
 
