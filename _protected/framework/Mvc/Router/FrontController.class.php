@@ -64,7 +64,7 @@ final class FrontController
     private $oUri;
 
     /** @var array */
-    private $aRequestParameter;
+    private $aRequestParameter = [];
 
     /** @var boolean */
     private $bIsRouterRewritten = false;
