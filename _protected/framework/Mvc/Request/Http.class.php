@@ -70,7 +70,7 @@ class Http extends \PH7\Framework\Http\Http
     /** @var array */
     private $aPost;
 
-    /** @var boolean */
+    /** @var bool */
     private $bStrip = false;
 
     public function __construct()
@@ -106,7 +106,7 @@ class Http extends \PH7\Framework\Http\Http
      * @param array|string $mKey The key of the request or an array with the list of key of the variables request.
      * @param string $sParam Optional parameter, check the type of the request variable | Value type is: str, int, float, bool
      *
-     * @return boolean
+     * @return bool
      */
     public function getExists($mKey, $sParam = null)
     {
@@ -135,7 +135,7 @@ class Http extends \PH7\Framework\Http\Http
      * @param array|string $mKey The key of the request or an array with the list of key of the variables request.
      * @param string $sParam Optional parameter, check the type of the request variable | Value type is: str, int, float, bool
      *
-     * @return boolean
+     * @return bool
      */
     public function postExists($mKey, $sParam = null)
     {
@@ -224,7 +224,7 @@ class Http extends \PH7\Framework\Http\Http
      *
      * @param string $sKey The key of the request.
      * @param string $sParam Optional parameter, set a type of the request | Value type is: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
-     * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities, so less secure
+     * @param bool $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities, so less secure
      *
      * @return string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
      */
@@ -255,7 +255,7 @@ class Http extends \PH7\Framework\Http\Http
      *
      * @param string $sKey The key of the request.
      * @param string $sParam Optional parameter, set a type of the request | Value type is: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
-     * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities, so less secure.
+     * @param bool $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities, so less secure.
      *
      * @return string The string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
      *
@@ -337,7 +337,7 @@ class Http extends \PH7\Framework\Http\Http
      * @param string $sKey
      * @param string $sParam
      *
-     * @return boolean Returns TRUE if the type of the variable is valid, FALSE otherwise.
+     * @return bool Returns TRUE if the type of the variable is valid, FALSE otherwise.
      */
     protected function validate(&$aType, $sKey, $sParam)
     {
