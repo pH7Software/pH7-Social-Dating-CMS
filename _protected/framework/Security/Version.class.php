@@ -31,9 +31,9 @@ final class Version
      * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH" and 10.* is "pKa"
      */
     const KERNEL_VERSION_NAME = 'pKa';
-    const KERNEL_VERSION = '10.0.8';
+    const KERNEL_VERSION = '10.2.0';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELASE_DATE = '2018-01-03';
+    const KERNEL_RELASE_DATE = '2018-02-01';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1'; // Ph7 Technology
