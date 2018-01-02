@@ -22,10 +22,11 @@ class ForumModel extends ForumCoreModel
      */
     public function getCategory($iCategoryId = null, $iOffset = null, $iLimit = null)
     {
+        $bIsLimit = isset($iOffset, $iLimit);
+
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
-        $bIsLimit = isset($iOffset, $iLimit);
         $bIsCategoryId = $iCategoryId !== null;
 
         $sSqlLimit = $bIsLimit ? ' LIMIT :offset, :limit' : '';
