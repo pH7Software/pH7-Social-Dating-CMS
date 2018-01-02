@@ -51,6 +51,8 @@ class BirthdayCore extends Core
      * @param Mail $oMail
      *
      * @return int Number of recipients who were accepted for delivery.
+     *
+     * @throws \PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
     protected function sendMail(stdClass $oUser, Mail $oMail)
     {
