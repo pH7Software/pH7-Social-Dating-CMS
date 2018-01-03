@@ -15,6 +15,7 @@ use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Url\Header;
+use stdClass;
 
 class MainController extends Controller
 {
@@ -88,10 +89,7 @@ class MainController extends Controller
             $iProfileId = (new UserCoreModel)->getId(null, $sUsername);
             $oPost = $this->oNoteModel->readPost($sPostId, $iProfileId, $this->iApproved);
 
-            if (
-                !empty($oPost->postId) &&
-                $this->str->equals($sPostId, $oPost->postId)
-            ) {
+            if ($this->doesPostExist($sPostId, $oPost)) {
                 $aVars = [
                     /***** META TAGS *****/
                     'page_title' => Ban::filterWord($oPost->pageTitle, false),
@@ -401,5 +399,16 @@ class MainController extends Controller
             'note',
             $this->file
         );
+    }
+
+    /**
+     * @param string $sPostId
+     * @param stdClass $oPost
+     *
+     * @return bool
+     */
+    private function doesPostExist($sPostId, stdClass $oPost)
+    {
+        return !empty($oPost->postId) && $this->str->equals($sPostId, $oPost->postId);
     }
 }
