@@ -8,7 +8,6 @@
 
 namespace PH7;
 
-use PH7\Framework\Cache\Cache;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Url\Header;
@@ -45,8 +44,7 @@ class AdminController extends MainController
         $this->oBlogModel->deletePost($iId);
         (new Blog)->deleteThumb($iId, 'blog', $this->file);
 
-        /* Clean BlogModel Cache  */
-        (new Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();
+        Blog::clearCache();
 
         Header::redirect(
             Uri::get('blog', 'main', 'index'),
