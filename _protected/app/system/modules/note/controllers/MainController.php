@@ -15,6 +15,7 @@ use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Url\Header;
+use stdClass;
 
 class MainController extends Controller
 {
@@ -60,6 +61,7 @@ class MainController extends Controller
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->oNoteModel->totalPosts($this->iApproved), self::POSTS_PER_PAGE
         );
+
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oPosts = $this->oNoteModel->getPosts(
             $this->oPage->getFirstItem(),
@@ -67,6 +69,7 @@ class MainController extends Controller
             SearchCoreModel::UPDATED,
             $this->iApproved
         );
+
         $this->setMenuVars();
 
         if (empty($oPosts)) {
@@ -86,10 +89,7 @@ class MainController extends Controller
             $iProfileId = (new UserCoreModel)->getId(null, $sUsername);
             $oPost = $this->oNoteModel->readPost($sPostId, $iProfileId, $this->iApproved);
 
-            if (
-                !empty($oPost->postId) &&
-                $this->str->equals($sPostId, $oPost->postId)
-            ) {
+            if ($this->doesPostExist($sPostId, $oPost)) {
                 $aVars = [
                     /***** META TAGS *****/
                     'page_title' => Ban::filterWord($oPost->pageTitle, false),
@@ -138,9 +138,11 @@ class MainController extends Controller
             null,
             null
         );
+
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->iTotalNotes, self::CATEGORIES_PER_PAGE
         );
+
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oSearch = $this->oNoteModel->category(
@@ -151,6 +153,7 @@ class MainController extends Controller
             $this->oPage->getFirstItem(),
             $this->oPage->getNbItemsPerPage()
         );
+
         $this->setMenuVars();
 
         $sCategoryTxt = substr($sCategory, 0, 60);
@@ -185,9 +188,11 @@ class MainController extends Controller
             null,
             null
         );
+
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->iTotalNotes, self::AUTHORS_PER_PAGE
         );
+
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oSearch = $this->oNoteModel->author(
@@ -198,6 +203,7 @@ class MainController extends Controller
             $this->oPage->getFirstItem(),
             $this->oPage->getNbItemsPerPage()
         );
+
         $this->setMenuVars();
 
         $sAuthorTxt = substr($sAuthor, 0, 60);
@@ -236,9 +242,11 @@ class MainController extends Controller
             null,
             $this->iApproved
         );
+
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->iTotalNotes, self::POSTS_PER_PAGE
         );
+
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oSearch = $this->oNoteModel->search(
@@ -250,6 +258,7 @@ class MainController extends Controller
             $this->oPage->getNbItemsPerPage(),
             $this->iApproved
         );
+
         $this->setMenuVars();
 
         if (empty($oSearch)) {
@@ -289,11 +298,14 @@ class MainController extends Controller
         CommentCoreModel::deleteRecipient($iId, 'Note');
         $this->oNoteModel->deleteCategory($iId);
 
-        $this->_deleteThumbFile($iId, $iProfileId);
+        $this->deleteThumbFile($iId, $iProfileId);
         $this->oNoteModel->deletePost($iId, $iProfileId);
 
         Note::clearCache();
-        Header::redirect(Uri::get('note', 'main', 'index'), t('Your post has been deleted!'));
+        Header::redirect(
+            Uri::get('note', 'main', 'index'),
+            t('Your post has been deleted!')
+        );
     }
 
     public function removeThumb($iId)
@@ -304,11 +316,14 @@ class MainController extends Controller
 
         $iProfileId = $this->session->get('member_id');
 
-        $this->_deleteThumbFile($iId, $iProfileId);
+        $this->deleteThumbFile($iId, $iProfileId);
         $this->oNoteModel->deleteThumb($iId, $iProfileId);
 
         Note::clearCache();
-        Header::redirect(Uri::get('note', 'main', 'edit', $iId), t('The thumbnail has been deleted successfully!'));
+        Header::redirect(
+            Uri::get('note', 'main', 'edit', $iId),
+            t('The thumbnail has been deleted successfully!')
+        );
     }
 
     /**
@@ -319,23 +334,37 @@ class MainController extends Controller
     protected function setMenuVars()
     {
         $this->view->top_views = $this->oNoteModel->getPosts(
-            0, self::ITEMS_MENU_TOP_VIEWS, SearchCoreModel::VIEWS, $this->iApproved
+            0,
+            self::ITEMS_MENU_TOP_VIEWS,
+            SearchCoreModel::VIEWS,
+            $this->iApproved
         );
+
         $this->view->top_rating = $this->oNoteModel->getPosts(
-            0, self::ITEMS_MENU_TOP_RATING, SearchCoreModel::RATING, $this->iApproved
+            0,
+            self::ITEMS_MENU_TOP_RATING,
+            SearchCoreModel::RATING,
+            $this->iApproved
         );
+
         $this->view->authors = $this->oNoteModel->getAuthor(
-            0, self::ITEMS_MENU_AUTHORS, true
+            0,
+            self::ITEMS_MENU_AUTHORS,
+            true
         );
+
         $this->view->categories = $this->oNoteModel->getCategory(
-            null, 0, self::ITEMS_MENU_CATEGORIES, true
+            null,
+            0,
+            self::ITEMS_MENU_CATEGORIES,
+            true
         );
     }
 
     /**
      * Set a custom Not Found Error Message with HTTP 404 Code Status.
      *
-     * @param boolean $b404Status For the Ajax blocks and others, we can not put HTTP error code 404, so the attribute must be set to FALSE
+     * @param bool $b404Status For the Ajax blocks and others, we can not put HTTP error code 404, so the attribute must be set to FALSE
      *
      * @return void
      */
@@ -356,14 +385,30 @@ class MainController extends Controller
     /**
      * @internal Warning! Thumbnail must be removed before the note post in the database.
      *
-     * @param integer $iId
-     * @param integer $iProfileId
+     * @param int $iId
+     * @param int $iProfileId
      *
-     * @return boolean
+     * @return bool
      */
-    private function _deleteThumbFile($iId, $iProfileId)
+    private function deleteThumbFile($iId, $iProfileId)
     {
         $oFile = $this->oNoteModel->readPost($this->oNoteModel->getPostId($iId), $iProfileId, null);
-        return (new Note)->deleteThumb($this->session->get('member_username') . PH7_DS . $oFile->thumb, 'note', $this->file);
+
+        return (new Note)->deleteThumb(
+            $this->session->get('member_username') . PH7_DS . $oFile->thumb,
+            'note',
+            $this->file
+        );
+    }
+
+    /**
+     * @param string $sPostId
+     * @param stdClass $oPost
+     *
+     * @return bool
+     */
+    private function doesPostExist($sPostId, stdClass $oPost)
+    {
+        return !empty($oPost->postId) && $this->str->equals($sPostId, $oPost->postId);
     }
 }

@@ -14,6 +14,7 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Parse\Emoticon;
 use PH7\Framework\Url\Header;
+use stdClass;
 
 class MainController extends Controller
 {
@@ -73,7 +74,7 @@ class MainController extends Controller
         if (!empty($sPostId)) {
             $oPost = $this->oBlogModel->readPost($sPostId);
 
-            if (!empty($oPost->postId) && $this->str->equals($sPostId, $oPost->postId)) {
+            if ($this->doesPostExist($sPostId, $oPost)) {
                 $aVars = [
                     /***** META TAGS *****/
                     'page_title' => $oPost->pageTitle,
@@ -223,7 +224,7 @@ class MainController extends Controller
     /**
      * Set a custom Not Found Error Message with HTTP 404 Code Status.
      *
-     * @param boolean $b404Status For the Ajax blocks and others, we can not put HTTP error code 404, so the attribute must be set to FALSE
+     * @param bool $b404Status For the Ajax blocks and others, we can not put HTTP error code 404, so the attribute must be set to FALSE
      *
      * @return void
      */
@@ -240,5 +241,16 @@ class MainController extends Controller
                 Uri::get('blog', 'main', 'index'),
                 Uri::get('blog', 'main', 'search')
             );
+    }
+
+    /**
+     * @param string $sPostId
+     * @param stdClass $oPost
+     *
+     * @return bool
+     */
+    private function doesPostExist($sPostId, stdClass $oPost)
+    {
+        return !empty($oPost->postId) && $this->str->equals($sPostId, $oPost->postId);
     }
 }

@@ -8,7 +8,6 @@
 
 namespace PH7;
 
-use PH7\Framework\Cache\Cache;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
@@ -49,9 +48,7 @@ class AdminController extends MainController
         $iNoteId = $this->httpRequest->post('note_id', 'int');
 
         if (isset($iNoteId) && $this->oNoteModel->approved($iNoteId)) {
-            /* Clean NoteModel Cache */
-            (new Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
-
+            Note::clearCache();
             $this->sMsg = t('The Note has been approved!');
         } else {
             $this->sMsg = t('Oops! The Note could not be approved!');
@@ -65,9 +62,7 @@ class AdminController extends MainController
         $iNoteId = $this->httpRequest->post('note_id', 'int');
 
         if (isset($iNoteId) && $this->oNoteModel->approved($iNoteId, '0')) {
-            /* Clean NoteModel Cache */
-            (new Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
-
+            Note::clearCache();
             $this->sMsg = t('The Note has been approved!');
         } else {
             $this->sMsg = t('Oops! The Note could not be approved!');

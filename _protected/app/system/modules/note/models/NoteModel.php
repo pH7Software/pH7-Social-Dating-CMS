@@ -28,7 +28,7 @@ class NoteModel extends NoteCoreModel
             $iLimit = (int)$iLimit;
 
             if ($bCount) {
-                $sSql = 'SELECT *, COUNT(c.noteId) AS totalCatNotes FROM' . Db::prefix('NotesDataCategories') . 'AS d INNER JOIN' . Db::prefix('NotesCategories') . 'AS c ON d.categoryId = c.categoryId GROUP BY d.name ASC LIMIT :offset, :limit';
+                $sSql = 'SELECT *, COUNT(c.noteId) AS totalCatNotes FROM' . Db::prefix('NotesDataCategories') . 'AS d INNER JOIN' . Db::prefix('NotesCategories') . 'AS c ON d.categoryId = c.categoryId GROUP BY d.name, c.noteId, d.categoryId, c.profileId ASC LIMIT :offset, :limit';
             } else {
                 $sSqlNoteId = ($iNoteId !== null) ? ' INNER JOIN ' . Db::prefix('NotesCategories') . 'AS c ON d.categoryId = c.categoryId WHERE c.noteId = :noteId ' : ' ';
                 $sSql = 'SELECT * FROM' . Db::prefix('NotesDataCategories') . 'AS d' . $sSqlNoteId . 'ORDER BY d.name ASC LIMIT :offset, :limit';
@@ -68,7 +68,7 @@ class NoteModel extends NoteCoreModel
 
             $sSelect = $bCount ? '*, COUNT(n.noteId) AS totalAuthors' : '*';
 
-            $rStmt = Db::getInstance()->prepare('SELECT ' . $sSelect . ' FROM' . Db::prefix('Notes') . 'AS n INNER JOIN' . Db::prefix('Members') . 'AS m ON n.profileId = m.profileId GROUP BY m.username ASC LIMIT :offset, :limit');
+            $rStmt = Db::getInstance()->prepare('SELECT ' . $sSelect . ' FROM' . Db::prefix('Notes') . 'AS n INNER JOIN' . Db::prefix('Members') . 'AS m ON n.profileId = m.profileId GROUP BY m.username, n.noteId ASC LIMIT :offset, :limit');
 
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
