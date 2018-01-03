@@ -45,17 +45,13 @@ class AvatarDesignCore extends Design
      */
     public function get($sUsername = '', $sFirstName = '', $sSex = null, $iSize = self::DEF_AVATAR_SIZE, $bRollover = false)
     {
-        // The profile does not exist, so it creates a fake profile = ghost
         if ($sUsername === PH7_ADMIN_USERNAME) {
-            $sUsername = PH7_ADMIN_USERNAME;
-            $sFirstName = t('Administrator');
-            $sSex = PH7_ADMIN_USERNAME;
+            list($sUsername, $sFirstName, $sSex) = $this->getAdminAvatarDetails();
         }
 
+        // The profile does not exist, so it creates a fake profile = ghost
         if (empty($sUsername)) {
-            $sUsername = PH7_GHOST_USERNAME;
-            $sFirstName = t('Ghost');
-            $sSex = PH7_GHOST_USERNAME;
+            list($sUsername, $sFirstName, $sSex) = $this->getGhostAvatarDetails();
         }
 
         $iSize = (int)$iSize;
@@ -81,9 +77,7 @@ class AvatarDesignCore extends Design
     {
         // The profile does not exist, so it creates a fake profile = ghost
         if (empty($sUsername)) {
-            $sUsername = PH7_GHOST_USERNAME;
-            $sFirstName = t('Ghost');
-            $sSex = PH7_GHOST_USERNAME;
+            list($sUsername, $sFirstName, $sSex) = $this->getGhostAvatarDetails();
         }
 
         echo '<div class="picture_block">
@@ -138,5 +132,29 @@ class AvatarDesignCore extends Design
         return AdminCore::auth() &&
             Registry::getInstance()->controller === 'ModeratorController' &&
             !Server::isLocalHost();
+    }
+
+    /**
+     * @return array
+     */
+    private function getAdminAvatarDetails()
+    {
+        $sUsername = PH7_ADMIN_USERNAME;
+        $sFirstName = t('Administrator');
+        $sSex = PH7_ADMIN_USERNAME;
+
+        return [$sUsername, $sFirstName, $sSex];
+    }
+
+    /**
+     * @return array
+     */
+    private function getGhostAvatarDetails()
+    {
+        $sUsername = PH7_GHOST_USERNAME;
+        $sFirstName = t('Ghost');
+        $sSex = PH7_GHOST_USERNAME;
+
+        return [$sUsername, $sFirstName, $sSex];
     }
 }
