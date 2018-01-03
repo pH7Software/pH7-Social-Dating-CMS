@@ -298,7 +298,7 @@ class MainController extends Controller
         CommentCoreModel::deleteRecipient($iId, 'Note');
         $this->oNoteModel->deleteCategory($iId);
 
-        $this->_deleteThumbFile($iId, $iProfileId);
+        $this->deleteThumbFile($iId, $iProfileId);
         $this->oNoteModel->deletePost($iId, $iProfileId);
 
         Note::clearCache();
@@ -316,7 +316,7 @@ class MainController extends Controller
 
         $iProfileId = $this->session->get('member_id');
 
-        $this->_deleteThumbFile($iId, $iProfileId);
+        $this->deleteThumbFile($iId, $iProfileId);
         $this->oNoteModel->deleteThumb($iId, $iProfileId);
 
         Note::clearCache();
@@ -385,12 +385,12 @@ class MainController extends Controller
     /**
      * @internal Warning! Thumbnail must be removed before the note post in the database.
      *
-     * @param integer $iId
-     * @param integer $iProfileId
+     * @param int $iId
+     * @param int $iProfileId
      *
-     * @return boolean
+     * @return bool
      */
-    private function _deleteThumbFile($iId, $iProfileId)
+    private function deleteThumbFile($iId, $iProfileId)
     {
         $oFile = $this->oNoteModel->readPost($this->oNoteModel->getPostId($iId), $iProfileId, null);
 
