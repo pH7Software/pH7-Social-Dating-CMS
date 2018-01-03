@@ -60,6 +60,7 @@ class MainController extends Controller
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->oNoteModel->totalPosts($this->iApproved), self::POSTS_PER_PAGE
         );
+
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oPosts = $this->oNoteModel->getPosts(
             $this->oPage->getFirstItem(),
@@ -67,6 +68,7 @@ class MainController extends Controller
             SearchCoreModel::UPDATED,
             $this->iApproved
         );
+
         $this->setMenuVars();
 
         if (empty($oPosts)) {
@@ -138,9 +140,11 @@ class MainController extends Controller
             null,
             null
         );
+
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->iTotalNotes, self::CATEGORIES_PER_PAGE
         );
+
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oSearch = $this->oNoteModel->category(
@@ -151,6 +155,7 @@ class MainController extends Controller
             $this->oPage->getFirstItem(),
             $this->oPage->getNbItemsPerPage()
         );
+
         $this->setMenuVars();
 
         $sCategoryTxt = substr($sCategory, 0, 60);
@@ -185,9 +190,11 @@ class MainController extends Controller
             null,
             null
         );
+
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->iTotalNotes, self::AUTHORS_PER_PAGE
         );
+
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oSearch = $this->oNoteModel->author(
@@ -198,6 +205,7 @@ class MainController extends Controller
             $this->oPage->getFirstItem(),
             $this->oPage->getNbItemsPerPage()
         );
+
         $this->setMenuVars();
 
         $sAuthorTxt = substr($sAuthor, 0, 60);
@@ -236,9 +244,11 @@ class MainController extends Controller
             null,
             $this->iApproved
         );
+
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->iTotalNotes, self::POSTS_PER_PAGE
         );
+
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oSearch = $this->oNoteModel->search(
@@ -250,6 +260,7 @@ class MainController extends Controller
             $this->oPage->getNbItemsPerPage(),
             $this->iApproved
         );
+
         $this->setMenuVars();
 
         if (empty($oSearch)) {
@@ -293,7 +304,10 @@ class MainController extends Controller
         $this->oNoteModel->deletePost($iId, $iProfileId);
 
         Note::clearCache();
-        Header::redirect(Uri::get('note', 'main', 'index'), t('Your post has been deleted!'));
+        Header::redirect(
+            Uri::get('note', 'main', 'index'),
+            t('Your post has been deleted!')
+        );
     }
 
     public function removeThumb($iId)
@@ -308,7 +322,10 @@ class MainController extends Controller
         $this->oNoteModel->deleteThumb($iId, $iProfileId);
 
         Note::clearCache();
-        Header::redirect(Uri::get('note', 'main', 'edit', $iId), t('The thumbnail has been deleted successfully!'));
+        Header::redirect(
+            Uri::get('note', 'main', 'edit', $iId),
+            t('The thumbnail has been deleted successfully!')
+        );
     }
 
     /**
@@ -319,16 +336,30 @@ class MainController extends Controller
     protected function setMenuVars()
     {
         $this->view->top_views = $this->oNoteModel->getPosts(
-            0, self::ITEMS_MENU_TOP_VIEWS, SearchCoreModel::VIEWS, $this->iApproved
+            0,
+            self::ITEMS_MENU_TOP_VIEWS,
+            SearchCoreModel::VIEWS,
+            $this->iApproved
         );
+
         $this->view->top_rating = $this->oNoteModel->getPosts(
-            0, self::ITEMS_MENU_TOP_RATING, SearchCoreModel::RATING, $this->iApproved
+            0,
+            self::ITEMS_MENU_TOP_RATING,
+            SearchCoreModel::RATING,
+            $this->iApproved
         );
+
         $this->view->authors = $this->oNoteModel->getAuthor(
-            0, self::ITEMS_MENU_AUTHORS, true
+            0,
+            self::ITEMS_MENU_AUTHORS,
+            true
         );
+
         $this->view->categories = $this->oNoteModel->getCategory(
-            null, 0, self::ITEMS_MENU_CATEGORIES, true
+            null,
+            0,
+            self::ITEMS_MENU_CATEGORIES,
+            true
         );
     }
 
@@ -364,6 +395,11 @@ class MainController extends Controller
     private function _deleteThumbFile($iId, $iProfileId)
     {
         $oFile = $this->oNoteModel->readPost($this->oNoteModel->getPostId($iId), $iProfileId, null);
-        return (new Note)->deleteThumb($this->session->get('member_username') . PH7_DS . $oFile->thumb, 'note', $this->file);
+
+        return (new Note)->deleteThumb(
+            $this->session->get('member_username') . PH7_DS . $oFile->thumb,
+            'note',
+            $this->file
+        );
     }
 }
