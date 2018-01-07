@@ -46,8 +46,7 @@ class ConfigFileCoreForm
 
         $aData = parse_ini_file($sIniFile, true);
         foreach ($aData[$sConfigVar] as $sKey => $sVal) {
-            $sLabel = str_replace(array('.', '_'), ' ', $sKey);
-            $sLabel = (new Str)->upperFirstWords($sLabel);
+            $sLabel = self::getLabelText($sKey);
 
             if (false !== strpos($sKey, 'enable'))
                 $oForm->addElement(new \PFBC\Element\Select($sLabel, 'config[' . $sKey . ']', array(1 => t('Enable'), 0 => t('Disable')), array('value' => $sVal)));
@@ -64,5 +63,17 @@ class ConfigFileCoreForm
 
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
+    }
+
+    /**
+     * @param string $sKey
+     *
+     * @return string
+     */
+    private static function getLabelText($sKey)
+    {
+        $sLabel = str_replace(['.', '_'], ' ', $sKey);
+
+        return (new Str)->upperFirstWords($sLabel);
     }
 }
