@@ -48,16 +48,17 @@ class ConfigFileCoreForm
         foreach ($aData[$sConfigVar] as $sKey => $sVal) {
             $sLabel = self::getLabelText($sKey);
 
-            if (false !== strpos($sKey, 'enable'))
+            if (false !== strpos($sKey, 'enable')) {
                 $oForm->addElement(new \PFBC\Element\Select($sLabel, 'config[' . $sKey . ']', array(1 => t('Enable'), 0 => t('Disable')), array('value' => $sVal)));
-            elseif (false !== strpos($sKey, 'email'))
+            } elseif (false !== strpos($sKey, 'email')) {
                 $oForm->addElement(new \PFBC\Element\Email($sLabel, 'config[' . $sKey . ']', array('value' => $sVal)));
-            elseif (false !== strpos($sKey, 'environment'))
+            } elseif (false !== strpos($sKey, 'environment')) {
                 $oForm->addElement(new \PFBC\Element\Select($sLabel, 'config[' . $sKey . ']', array('production' => t('Production'), 'development' => t('Development')), array('description' => t('If you see "Internal Server Error" message on your site, please set to "development" mode in order to see the details of the error. If your site is on production (and visible by everyone) please set it to the production mode for security reason.'), 'value' => $sVal)));
-            elseif (ctype_digit($sVal))
+            } elseif (ctype_digit($sVal)) {
                 $oForm->addElement(new \PFBC\Element\Number($sLabel, 'config[' . $sKey . ']', array('step' => 'any', 'value' => $sVal)));
-            else
+            } else {
                 $oForm->addElement(new \PFBC\Element\Textbox($sLabel, 'config[' . $sKey . ']', array('value' => $sVal)));
+            }
         }
         unset($aData);
 
