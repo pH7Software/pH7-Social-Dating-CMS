@@ -22,11 +22,16 @@ class SmileCoreAjax extends Emoticon
     /** @var string */
     private static $sData = '';
 
+    /**
+     * @return void
+     *
+     * @throws Framework\Http\Exception
+     */
     public static function output()
     {
         static::retrieve();
-
         Http::setContentType('application/json');
+
         echo self::$sData;
     }
 

@@ -83,9 +83,9 @@ class Http
 
 
     /**
-     * @param integer $iStatus The "code" for the HTTP status.
+     * @param int $iStatus The "code" for the HTTP status.
      *
-     * @return string|boolean $iStatus Returns the "HTTP status code" if found otherwise returns "false"
+     * @return string|bool $iStatus Returns the "HTTP status code" if found otherwise returns "false"
      */
     public static function getStatusCodes($iStatus)
     {
@@ -142,7 +142,7 @@ class Http
     /**
      * Parse headers for a given status code.
      *
-     * @param integer $iCode The code to use, possible values are: 200, 301, 302, 304, 307, 400, 401, 403, 404, 410, 500, 501, ...
+     * @param int $iCode The code to use, possible values are: 200, 301, 302, 304, 307, 400, 401, 403, 404, 410, 500, 501, ...
      *
      * @throws Exception
      */
@@ -171,7 +171,7 @@ class Http
     /**
      * Set the HTTP status codes for the maintenance page.
      *
-     * @param integer $iMaintenanceTime Time site will be down for (in seconds).
+     * @param int $iMaintenanceTime Time site will be down for (in seconds).
      */
     public static function setMaintenanceCodes($iMaintenanceTime)
     {
@@ -185,7 +185,7 @@ class Http
      * @param string $sUsr
      * @param string $sPwd
      *
-     * @return boolean TRUE if the authentication is correct, otherwise FALSE.
+     * @return bool TRUE if the authentication is correct, otherwise FALSE.
      */
     public static function requireAuth($sUsr, $sPwd)
     {
@@ -207,7 +207,7 @@ class Http
      *
      * @internal In this method, there are some yoda conditions.
      *
-     * @return boolean
+     * @return bool
      */
     public static function isSsl()
     {
@@ -237,7 +237,7 @@ class Http
      *
      * @param string $sUrl
      *
-     * @return boolean
+     * @return bool
      */
     public function isRelativeUrl($sUrl)
     {
@@ -249,7 +249,7 @@ class Http
      *
      * @param string $sUrl URL
      *
-     * @return boolean
+     * @return bool
      */
     public function detectSubdomain($sUrl)
     {
@@ -306,7 +306,7 @@ class Http
     /**
      * Checks if any headers were already sent.
      *
-     * @return boolean TRUE if the headers were sent, FALSE if not.
+     * @return bool TRUE if the headers were sent, FALSE if not.
      */
     final private static function isSent()
     {
