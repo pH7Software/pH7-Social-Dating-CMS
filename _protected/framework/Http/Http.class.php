@@ -197,9 +197,9 @@ class Http
             static::setHeadersByCode(401);
             echo t('You must enter a valid login ID and password to access this resource.') . "\n";
             exit(false);
-        } else {
-            return true;
         }
+
+        return true;
     }
 
     /**
