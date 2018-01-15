@@ -228,13 +228,15 @@ Just clone the repository, make your changes and then make a push ;-)
 
 * **GIMP** for editing the assets, etc.
 
-* **Trimage** (and ImageOptim when developing on Mac) for compressing &amp; optimizing the images
+* **Trimage** (and **ImageOptim** when developing on Mac) for compressing &amp; optimizing the images
 
 * **Poedit** for translating the Gettext files
 
 * **FileZilla** for FTP client
 
 * **Git** for the version control system
+
+* Sometimes, when working on Mac, **Sequel Pro** is used to lookup easily at a database.
 
 
 ## Contact
