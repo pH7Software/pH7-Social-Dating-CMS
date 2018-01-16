@@ -9,8 +9,9 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Model;
 
-class DataCoreModel extends Framework\Mvc\Model\Engine\Model
+class DataCoreModel extends Model
 {
     const TB_PICTURE = 'Pictures';
     const TB_VIDEO = 'Videos';
@@ -31,13 +32,19 @@ class DataCoreModel extends Framework\Mvc\Model\Engine\Model
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
-        $rStmt = Db::getInstance()->prepare('SELECT data.*, m.username FROM' . Db::prefix($sTable) . 'AS data INNER JOIN' . Db::prefix('Members') . 'AS m ON data.profileId = m.profileId WHERE data.approved=1 ORDER BY ' . $sOrder . ' DESC LIMIT :offset, :limit');
+
+        $sSqlQuery = 'SELECT data.*, m.username FROM' . Db::prefix($sTable) . 'AS data INNER JOIN' .
+            Db::prefix('Members') . 'AS m ON data.profileId = m.profileId WHERE data.approved=1 ORDER BY ' .
+            $sOrder . ' DESC LIMIT :offset, :limit';
+
+        $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
 
         $rStmt->execute();
         $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);
+
         return $oData;
     }
 
@@ -53,13 +60,19 @@ class DataCoreModel extends Framework\Mvc\Model\Engine\Model
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
-        $rStmt = Db::getInstance()->prepare('SELECT f.name, t.title, t.message, t.createdDate, t.updatedDate, t.forumId, t.topicId, m.username FROM' . Db::prefix('Forums') . 'AS f INNER JOIN' . Db::prefix('ForumsTopics') . 'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix('Members') . ' AS m ON t.profileId = m.profileId WHERE t.approved=1 ORDER BY ' . $sOrder . ' DESC LIMIT :offset, :limit');
+        $sSqlQuery = 'SELECT f.name, t.title, t.message, t.createdDate, t.updatedDate, t.forumId, t.topicId, m.username FROM' .
+            Db::prefix('Forums') . 'AS f INNER JOIN' . Db::prefix('ForumsTopics') .
+            'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix('Members') .
+            ' AS m ON t.profileId = m.profileId WHERE t.approved=1 ORDER BY ' . $sOrder . ' DESC LIMIT :offset, :limit';
+
+        $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
 
         $rStmt->execute();
         $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);
+
         return $oData;
     }
 
