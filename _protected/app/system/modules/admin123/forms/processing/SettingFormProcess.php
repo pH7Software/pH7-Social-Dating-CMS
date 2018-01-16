@@ -19,8 +19,8 @@ class SettingFormProcess extends Form
 {
     const LOGO_FILENAME = 'logo.png';
     const MIN_CSRF_TOKEN_LIFETIME = 10;
-    const LOGO_WIDTH = 250;
-    const LOGO_HEIGHT = 60;
+    const LOGO_WIDTH = 50;
+    const LOGO_HEIGHT = 45;
 
     /** @var boolean */
     private $bIsErr = false;
