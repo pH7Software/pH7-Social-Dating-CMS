@@ -55,7 +55,8 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Affiliate
 * Newsletter
 * Activity Streams
-* Member approval system
+* User Mentions (using the “@” symbol with the username such as @pH-7)
+* Member Approval System
 * Advanced Admin Panel
 * Complete Membership System
 * Payment Gateways Integration for PayPal, Stripe, Braintree, Bitcoin and 2CheckOut
