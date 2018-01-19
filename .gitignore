@@ -16,6 +16,12 @@ phpunit.phar
 *.log
 *.tmp
 
+# PHPUnit Coverage folder
+coverage
+
+# PHPStorm IDE folder
+.idea
+
 ## Gettext ##
 *.mo
 
@@ -35,10 +41,3 @@ Thumbs.db
 # Mac OS
 .DS_Store*
 ._*
-
-
-# PHPUnit Coverage folder
-coverage
-
-# PHPStorm IDE folder.
-.idea
