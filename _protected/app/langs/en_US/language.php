@@ -281,6 +281,9 @@ Framework\Registry\Registry::getInstance()->lang = [
     'hr' => 'Hrvatski',
     'rs' => 'Srpski',
     'si' => 'Slovenski',
+    'id' => 'bahasa Indonesia',
+    'hi' => 'हिन्दी',
+    'td' => 'ไทย',
 
     /***** Time Zone *****/
     '-12' => '(UTC -12:00) Eniwetok, Kwajalein',
