@@ -10,7 +10,7 @@
     <meta name="description" content="{% $this->str->escape($this->str->upperFirst($meta_description), true) %}" />
     <meta name="keywords" content="{% $this->str->escape($meta_keywords, true) %}" />
     <meta name="robots" content="{meta_robots}" />
-    <link rel="shortcut icon" href="{url_relative}favicon.ico" />
+    <link rel="icon" href="{url_relative}favicon.ico" />
     <link rel="canonical" href="{current_url}" />
     <link rel="author" href="{url_root}humans.txt" />
     {if !$is_user_auth}{{ $design->regionalUrls() }}{/if}

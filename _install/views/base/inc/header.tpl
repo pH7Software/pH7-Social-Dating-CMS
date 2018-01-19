@@ -7,7 +7,7 @@
 
         <!-- Begin Title and Meta Info -->
         <title>{$LANG.welcome|upper} «{$software_name|upper}» {$software_version}</title>
-        <link rel="shortcut icon" href="{$smarty.const.PH7_URL_ROOT}favicon.ico" />
+        <link rel="icon" href="{$smarty.const.PH7_URL_ROOT}favicon.ico" />
         <!---- Copyright pH7 Dating/Social CMS; All Rights Reserved ---->
         <meta name="author" content="{$software_author}" />
         <meta name="copyright" content="{$software_copyright}" />
