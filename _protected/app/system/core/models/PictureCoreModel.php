@@ -40,7 +40,7 @@ class PictureCoreModel extends Model
             $bIsAlbumId = $iAlbumId !== null;
 
             $sSqlProfileId = $bIsProfileId ? ' a.profileId = :profileId AND ' : '';
-            $sSqlAlbum = $bIsProfileId ? ' a.albumId=:albumId AND ' : '';
+            $sSqlAlbum = $bIsAlbumId ? ' a.albumId=:albumId AND ' : '';
             $sSqlQuery = 'SELECT a.*, m.username, m.firstName, m.sex FROM' . Db::prefix('AlbumsPictures') . 'AS a INNER JOIN' .
                 Db::prefix('Members') . 'AS m ON a.profileId = m.profileId WHERE' . $sSqlProfileId . $sSqlAlbum .
                 ' a.approved=:approved ORDER BY ' . $sOrder . ' DESC LIMIT :offset, :limit';
