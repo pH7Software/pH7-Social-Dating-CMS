@@ -13,6 +13,7 @@ use PH7\Framework\Ip\Ip;
 use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Header;
 
 class SettingForm
@@ -296,7 +297,7 @@ class SettingForm
 
         $aLangIds = $oFile->getDirList(PH7_PATH_APP_LANG);
         foreach ($aLangIds as $sLang) {
-            $sAbbrLang = substr($sLang, 0, 2);
+            $sAbbrLang = Lang::getIsoCode($sLang);
             $aLangs[$sLang] = t($sAbbrLang) . ' (' . $sLang . ')';
         }
 
