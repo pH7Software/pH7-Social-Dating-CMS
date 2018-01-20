@@ -712,10 +712,10 @@ final class FrontController
      */
     private function notFound($sMsg = null, $iRedirect = null)
     {
-        if (isDebug() && !empty($sMsg)) {
+        if ($sMsg !== null && isDebug()) {
             throw new PH7Exception($sMsg);
         } else {
-            if (empty($iRedirect)) {
+            if ($iRedirect === null) {
                 $this->oRegistry->module = 'error';
             } else {
                 Header::redirect(UriRoute::get('error', 'http', 'index'));
