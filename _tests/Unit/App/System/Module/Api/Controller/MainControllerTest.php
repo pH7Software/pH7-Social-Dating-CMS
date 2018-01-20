@@ -47,6 +47,14 @@ class MainControllerTest extends PHPUnit_Framework_TestCase
         $this->assertNull(json_decode($oResponse->getBody()));
     }
 
+    public function testNotFoundRequest()
+    {
+        $oResponse = $this->oClient->get($this->getApiUrl('blablabla'));
+
+        // If website is on development mode, it will return "500" code, otherwise, "404"
+        $this->assertRegExp('/404|500/', (string)$oResponse->getStatusCode());
+    }
+
     public function testCorrectTestUri()
     {
         $oResponse = $this->oClient->post($this->getApiUrl('test'), [
