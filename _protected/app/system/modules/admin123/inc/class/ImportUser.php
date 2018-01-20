@@ -161,8 +161,7 @@ class ImportUser extends Core
     private function setTmpData()
     {
         foreach ($this->aFileData as $sKey => $sVal) {
-            // Clean the text to make comparisons easier...
-            $sVal = strtolower(trim(str_replace(['-', '_', ' '], '', $sVal)));
+            $sVal = $this->cleanValue($sVal);
 
             // Test comparisons of strings and adding values in an array "ImportUser::$aTmpData"
             if ($sVal === 'username' || $sVal === 'login' || $sVal === 'user' || $sVal === 'nickname') {
@@ -335,5 +334,17 @@ class ImportUser extends Core
         }
 
         return static::NO_ERROR;
+    }
+
+    /**
+     * Clean the text to make comparisons easier...
+     *
+     * @param $sValue
+     *
+     * @return string
+     */
+    private function cleanValue($sValue)
+    {
+        return strtolower(trim(str_replace(['-', '_', ' '], '', $sValue)));
     }
 }
