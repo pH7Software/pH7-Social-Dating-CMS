@@ -4,7 +4,7 @@
     "keywords": ["Web business builder","CMS","dating","social","social network","social networking","community","portal","user","member","member area","payment","business"],
     "type": "project",
     "homepage": "http://ph7cms.com",
-    "license": "GPL-3.0+",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "Pierre-Henry Soria",
