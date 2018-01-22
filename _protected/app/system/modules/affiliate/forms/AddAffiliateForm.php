@@ -32,7 +32,7 @@ class AddAffiliateForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Last Name:'), 'last_name', array('required' => 1, 'validation' => new \PFBC\Validation\Name)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Middle Name:'), 'middle_name', array('validation' => new \PFBC\Validation\Name)));
         $oForm->addElement(new \PFBC\Element\Radio(t('Gender:'), 'sex', array('male' => t('Man'), 'female' => t('Woman')), array('required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', array('placeholder' => t('Month/Day/Year'), 'title' => t('Please specify the birth date using the calendar or with this format: Month/Day/Year.'), 'required' => 1, 'validation' => new \PFBC\Validation\BirthDate)));
+        $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', array('title' => t('Please specify the birth date using the calendar.'), 'required' => 1, 'validation' => new \PFBC\Validation\BirthDate)));
         $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country', array('id' => 'str_country', 'value' => Geo::getCountryCode(), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', array('id' => 'str_city', 'validation' => new \PFBC\Validation\Str(2, 150), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('State/Province:'), 'state', array('id' => 'str_state', 'validation' => new \PFBC\Validation\Str(2, 150), 'required' => 1)));

@@ -5,6 +5,7 @@
 
 namespace PFBC\Validation;
 
+use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Mvc\Model\DbConfig;
 
 class BirthDate extends \PFBC\Validation
@@ -28,6 +29,8 @@ class BirthDate extends \PFBC\Validation
         if ($this->isNotApplicable($sValue)) {
             return true;
         }
+
+        $sValue = (new CDateTime)->get($sValue)->date('m/d/Y');
 
         return $this->oValidate->birthDate($sValue, $this->iMin, $this->iMax);
     }

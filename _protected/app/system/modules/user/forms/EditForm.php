@@ -34,7 +34,7 @@ class EditForm
         $oUser = $oUserModel->readProfile($iProfileId);
 
         // Birth Date with the date format for the date picker
-        $sBirthDate = (new CDateTime)->get($oUser->birthDate)->date('m/d/Y');
+        $sBirthDate = (new CDateTime)->get($oUser->birthDate)->date('Y-m-d');
 
         $oForm = new \PFBC\Form('form_user_edit_account');
         $oForm->configure(array('action' => ''));

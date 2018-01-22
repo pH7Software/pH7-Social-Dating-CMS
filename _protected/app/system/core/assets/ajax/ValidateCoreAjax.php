@@ -14,6 +14,7 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
@@ -191,8 +192,11 @@ class ValidateCoreAjax
         $iMin = DbConfig::getSetting('minAgeRegistration');
         $iMax = DbConfig::getSetting('maxAgeRegistration');
 
+        // Format the date to the needed format
+        $sValue = (new CDateTime)->get($sValue)->date('m/d/Y');
+
         if (!$this->oValidate->date($sValue)) {
-            $this->sMsg = t('Your must enter a date valid (Month/Day/Year).');
+            $this->sMsg = t('Your must enter a valid date (Month-Day-Year).');
         } elseif (!$this->oValidate->birthDate($sValue, $iMin, $iMax)) {
             $this->sMsg = sprintf(t('You must be %d to %d years to register on the site.'), $iMin, $iMax);
         } else {

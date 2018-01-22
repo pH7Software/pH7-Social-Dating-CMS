@@ -10,6 +10,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
@@ -50,6 +51,8 @@ class UserController extends MainController
             $iMinAge = DbConfig::getSetting('minAgeRegistration');
             $iMaxAge = DbConfig::getSetting('maxAgeRegistration');
 
+            $sBirthDate = (new CDateTime)->get($aData['birth_date'])->date('m/d/Y');
+
             $aRequiredFields = [
                 'email',
                 'username',
@@ -77,7 +80,7 @@ class UserController extends MainController
             } elseif (!$this->oValidate->password($aData['password'], $iMinPwd, $iMaxPwd)) {
                 $aResults = ['status' => 'form_error', 'msg' => t('The Password must contain from %0% to %1% characters.', $iMinPwd, $iMaxPwd)];
                 $this->oRest->response($this->set($aResults), 400);
-            } elseif (!$this->oValidate->birthDate($aData['birth_date'], $iMinAge, $iMaxAge)) {
+            } elseif (!$this->oValidate->birthDate($sBirthDate, $iMinAge, $iMaxAge)) {
                 $aResults = ['status' => 'form_error', 'msg' => t('You must be %0% to %1% years to register on the site.', $iMinAge, $iMinAge)];
                 $this->oRest->response($this->set($aResults), 400);
             } else {
