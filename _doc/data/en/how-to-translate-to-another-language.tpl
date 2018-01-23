@@ -5,7 +5,7 @@
 <p>You can make a translation to your language using the 'global.po' file. You can find this file in: "_protected/app/langs/en_US/LC_MESSAGES/global.po"</p>
 
 <p>You will also have to translate "language.php" located in "_protected/app/langs/en_US/language.php" (replace "en_US" to your own language).<br />
-    and edit "_protected/app/langs/en_US/config.ini" (like changing "<code>lang = id</code>" located in the beginning of the file).
+    and edit "_protected/app/langs/en_US/config/config.ini" (like changing "<code>lang = id</code>" located in the beginning of the file).
 </p>
 
 <p>The language folder name conforms to the <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php">ISO 639-2</a> (language code + _ + country code). So, for instance "German" language will be "de_DE", "Dutch" will be "nl_NL", "Italian" will be "it_IT", "Spanish" will be "es_ES", "Russian" will be "ru_RU", and so on.</p>
