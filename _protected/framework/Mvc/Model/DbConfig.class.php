@@ -98,6 +98,7 @@ final class DbConfig
                     'pageTitle' => 'Home',
                     'metaDescription' => 'The Dating Software for creating online dating service or online social community.',
                     'metaKeywords' => 'script,CMS,PHP,dating script,dating software,social networking software,social networking script,social network script,free,open source,match clone,friend finder clone,adult friend finder clone',
+                    'headline' => 'Be on the right place!',
                     'slogan' => 'Online Dating Community with Chat Rooms',
                     'promoText' => 'You\'re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Dating Sites like that with <a href="http://ph7cms.com">pH7CMS</a>. It is Professional, Free, Open Source, ...',
                     'metaRobots' => 'index, follow, all',
