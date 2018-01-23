@@ -14,14 +14,39 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\File\File;
 use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class BrowsePictureAjax
 {
+    /** @var Http */
+    private $oHttpRequest;
 
-    private $oHttpRequest, $aPath, $sMsg, $aNames = array(), $aModified = array(), $mStart = 0, $iNextStart, $iPerPage = 24;
+    /** @var array */
+    private $aPath;
+
+    /** @var string */
+    private $sMsg;
+
+    /** @var array */
+    private $aNames = array();
+
+    /** @var array */
+    private $aModified = array();
+
+    /** @var int|bool */
+    private $mStart = 0;
+
+    /** @var int */
+    private $iNextStart;
+
+    /** @var int */
+    private $iPerPage = 24;
 
     public function __construct()
     {
@@ -36,18 +61,19 @@ class BrowsePictureAjax
          * return a JSON object with file names. It is used by
          * jQuery to display the images on the front page:
          */
-        return json_encode(array(
+        return json_encode([
             'files' => $this->aNames,
             'nextStart' => $this->iNextStart
-        ));
+        ]);
     }
 
     private function init()
     {
-        if ($this->oHttpRequest->get('deletePicture'))
+        if ($this->oHttpRequest->get('deletePicture')) {
             $this->adminDeletePicture();
-        else
+        } else {
             $this->gets();
+        }
     }
 
     private function gets()
@@ -55,8 +81,9 @@ class BrowsePictureAjax
         // Scanning the thumbnail folder for JPG images:
         $aG = glob(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'webcam/picture/img/thumb/*.jpg');
 
-        if (!$aG)
+        if (!$aG) {
             $aG = array();
+        }
 
         // We loop though the file names returned by glob,
         // and we populate a second file with modifed timestamps.
@@ -79,8 +106,7 @@ class BrowsePictureAjax
         if ($this->oHttpRequest->getExists('start') && strlen($this->oHttpRequest->get('start') > 1)) {
             $this->mStart = array_search($this->oHttpRequest->get('start'), $this->aNames);
 
-            if ($this->mStart === false) {
-                // Such a picture was not found
+            if ($this->isPictureExists()) {
                 $this->mStart = 0;
             }
         }
@@ -96,23 +122,29 @@ class BrowsePictureAjax
     private function adminDeletePicture()
     {
         if (AdminCore::auth()) {
-            if ($this->httpRequest->getExists('file') == true && (new Framework\File\File)->deleteFile($sFile) == true) {
-                ;
+            if ($this->httpRequest->getExists('file')) {
+                $sFile = $this->httpRequest->get('file');
+                (new File)->deleteFile($sFile);
+
                 $this->sMsg = t('The photo has been deleted!');
             } else {
                 $this->sMsg = t("Sorry, we haven't found any photo!");
             }
-            Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get('webcam', 'webcam', 'picture'));
+
+            Header::redirect(
+                Uri::get('webcam', 'webcam', 'picture'),
+                $this->sMsg
+            );
         }
     }
 
-    public function __destruct()
+    /**
+     * @return bool
+     */
+    private function isPictureExists()
     {
-        unset(
-            $this->oHttpRequest, $this->aPath, $this->sMsg, $this->aNames, $this->aModified, $this->mStart, $this->iNextStart, $this->iPerPage
-        );
+        return $this->mStart === false;
     }
-
 }
 
 echo (new BrowsePictureAjax)->display();
