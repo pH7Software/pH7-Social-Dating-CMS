@@ -19,10 +19,7 @@ class Url
      */
     public function __construct($sUrl)
     {
-        if (
-            filter_var($sUrl, FILTER_VALIDATE_URL) === false ||
-            strlen($sUrl) >= $this->getMaxImageLength()
-        ) {
+        if (!$this->isValid($sUrl)) {
             throw new InvalidUrlException(sprintf('%s is an invalid URL', $sUrl));
         }
 
@@ -35,6 +32,16 @@ class Url
     public function getValue()
     {
         return $this->sUrl;
+    }
+
+    /**
+     * @param $sUrl
+     *
+     * @return bool
+     */
+    private function isValid($sUrl)
+    {
+        return filter_var($sUrl, FILTER_VALIDATE_URL) !== false && strlen($sUrl) <= $this->getMaxImageLength();
     }
 
     /**
