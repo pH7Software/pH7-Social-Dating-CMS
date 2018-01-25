@@ -12,6 +12,9 @@ defined('PH7') or exit('Restricted access');
 
 class Url
 {
+    /** @var string */
+    private $sUrl;
+
     /**
      * @param string $sUrl
      *
