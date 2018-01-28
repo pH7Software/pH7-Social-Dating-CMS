@@ -145,11 +145,19 @@ class FileController extends Controller
      */
     private function displayAction($sFile, $mExt = null)
     {
-        if (empty($this->sTitle)) {
+        if (!$this->isPageTitleSet()) {
             $this->sTitle = t('File Manager');
         }
 
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
         $this->view->filesList = $this->file->getFileList($sFile, $mExt);
+    }
+
+    /**
+     * @return bool
+     */
+    private function isPageTitleSet()
+    {
+        return !empty($this->sTitle);
     }
 }
