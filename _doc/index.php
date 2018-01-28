@@ -8,6 +8,7 @@
  */
 
 namespace PH7\Doc;
+
 define('PH7', 1);
 
 include __DIR__ . '/inc/conf.const.php';
