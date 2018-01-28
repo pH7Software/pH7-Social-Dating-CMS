@@ -21,19 +21,13 @@ use PH7\Framework\Pattern\Singleton;
  */
 class Uri
 {
-    /**
-     * @var array $aFragments
-     */
+    /** @var array $aFragments */
     private static $aFragments;
 
-    /**
-     * @var string $sUri
-     */
+    /** @var string $sUri */
     private $sUri;
 
-    /**
-     * Import the Singleton trait.
-     */
+    /** Import the Singleton trait */
     use Singleton;
 
     /**
