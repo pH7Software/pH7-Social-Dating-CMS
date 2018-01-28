@@ -53,13 +53,6 @@ class ProfileController extends Controller
 
     public function index()
     {
-        if (SysMod::isEnabled('cool-profile-page')) {
-            // If enabled, redirect to the other profile page style
-            Header::redirect(
-                Uri::get('cool-profile-page', 'main', 'index')
-            );
-        }
-
         $oUserModel = new UserModel;
 
         // Add the General and Tabs Menu stylesheets
