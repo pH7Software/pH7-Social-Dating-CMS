@@ -408,7 +408,7 @@ class ProfileController extends Controller
      */
     private function notFound()
     {
-        Http::setHeadersByCode(404);
+        Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
 
         /**
          * @internal We can include HTML tags in the title since the template will automatically escape them before displaying it.
