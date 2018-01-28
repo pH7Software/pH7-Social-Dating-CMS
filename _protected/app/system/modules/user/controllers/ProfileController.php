@@ -263,8 +263,8 @@ class ProfileController extends Controller
     }
 
     /**
-     * @param string $sFirstName  User's first name.
-     * @param stdClass $oUser     User data from the DB.
+     * @param string $sFirstName User's first name.
+     * @param stdClass $oUser User data from the DB.
      *
      * @return string             The anchor for the link.
      */
@@ -293,8 +293,8 @@ class ProfileController extends Controller
     }
 
     /**
-     * @param string $sFirstName  User's first name.
-     * @param stdClass $oUser     User data from the DB.
+     * @param string $sFirstName User's first name.
+     * @param stdClass $oUser User data from the DB.
      *
      * @return string             The anchor for the link.
      */
@@ -324,8 +324,8 @@ class ProfileController extends Controller
     }
 
     /**
-     * @param string $sFirstName  User's first name.
-     * @param stdClass $oUser     User data from the DB.
+     * @param string $sFirstName User's first name.
+     * @param stdClass $oUser User data from the DB.
      *
      * @return string             The anchor for the link.
      */
