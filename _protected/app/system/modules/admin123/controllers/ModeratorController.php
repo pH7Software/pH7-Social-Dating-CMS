@@ -429,6 +429,10 @@ class ModeratorController extends Controller
      */
     private function clearUserBgCache()
     {
-        (new Cache)->start(UserCoreModel::CACHE_GROUP, 'background' . $this->httpRequest->post('id'), null)->clear();
+        (new Cache)->start(
+            UserCoreModel::CACHE_GROUP,
+            'background' . $this->httpRequest->post('id'),
+            null
+        )->clear();
     }
 }

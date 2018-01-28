@@ -19,13 +19,18 @@ class SettingController extends Controller
 
     public function index()
     {
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'general'));
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'setting', 'general')
+        );
     }
 
     public function general()
     {
         // Add Css Style for Tabs
-        $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'tabs.css');
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS,
+            'tabs.css'
+        );
 
         $this->view->page_title = $this->view->h1_title = t('General Settings');
         $this->output();
@@ -42,7 +47,10 @@ class SettingController extends Controller
         unset($oPage, $sTable);
 
         // Add JS file for the ads form
-        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'common.js');
+        $this->design->addJs(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
+            'common.js'
+        );
 
         $this->view->page_title = $this->view->h1_title = t('Banner Settings');
         $this->view->h4_title = nt('%n% Banner', '%n% Banners', $iTotalAds);
@@ -83,7 +91,15 @@ class SettingController extends Controller
 
         $aLangs = $this->file->getDirList(PH7_PATH_APP_LANG);
         if (!in_array(substr($this->httpRequest->currentUrl(), -5), $aLangs)) {
-            Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'metamain', PH7_LANG_NAME, false));
+            Header::redirect(
+                Uri::get(
+                    PH7_ADMIN_MOD,
+                    'setting',
+                    'metamain',
+                    PH7_LANG_NAME,
+                    false
+                )
+            );
         }
         unset($aLangs);
 
