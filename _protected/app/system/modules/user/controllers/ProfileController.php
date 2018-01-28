@@ -23,6 +23,7 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Parse\Emoticon;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Security\CSRF\Token;
+use PH7\Framework\Url\Header;
 use PH7\Framework\Url\Url;
 use stdClass;
 
@@ -52,6 +53,13 @@ class ProfileController extends Controller
 
     public function index()
     {
+        if (SysMod::isEnabled('cool-profile-page')) {
+            // If enabled, redirect to the other profile page style
+            Header::redirect(
+                Uri::get('cool-profile-page', 'main', 'index')
+            );
+        }
+
         $oUserModel = new UserModel;
 
         // Add the General and Tabs Menu stylesheets
