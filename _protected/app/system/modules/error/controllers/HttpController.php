@@ -21,7 +21,7 @@ class HttpController extends Controller
     const HTTP_INTERNAL_SERVER_ERROR_CODE = 500;
     const HTTP_UNIMPLEMENTED_CODE = 501;
     const HTTP_BAD_GATEWAY_CODE = 502;
-    const HTTP_GATEWAY_TIMEOUT_CODE = 503;
+    const HTTP_GATEWAY_TIMEOUT_CODE = 504;
     const HTTP_VERSION_UNSUPPORTED_CODE = 505;
 
     /** @var string */
