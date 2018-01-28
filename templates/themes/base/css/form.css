@@ -141,8 +141,15 @@ input[type=checkbox], input[type=radio] {
     margin-right: 4px;
 }
 
-input[type=text]:disabled {
-    background: #ddd;
+input[disabled],
+button[disabled],
+select[disabled],
+textarea[disabled],
+input[readonly],
+button[readonly],
+select[readonly],
+textarea[readonly] {
+    background-color: #ddd;
     cursor: not-allowed;
 }
 
