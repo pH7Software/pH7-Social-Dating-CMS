@@ -55,7 +55,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Affiliate
 * Newsletter
 * Activity Streams
-* User Mentions (using the “@” symbol with the username such as @pH-7)
+* User Mentions (using the “@” symbol with the username such as [@pH-7](https://github.com/pH-7))
 * Member Approval System
 * Advanced Admin Panel
 * Complete Membership System
