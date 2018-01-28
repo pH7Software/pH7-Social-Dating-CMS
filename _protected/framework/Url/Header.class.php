@@ -20,6 +20,8 @@ use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 class Header
 {
+    const HTTP_MOVED_PERMANENTLY_CODE = 301;
+
     /**
      * Allows a redirection URL respecting the HTTP status code for search engines friendly.
      *
@@ -33,7 +35,7 @@ class Header
     public static function redirect($sUrl = null, $sMessage = null, $sType = Design::SUCCESS_TYPE, $iRedirectCode = null)
     {
         if (!Http::getStatusCodes($iRedirectCode)) {
-            $iRedirectCode = 301;
+            $iRedirectCode = self::HTTP_MOVED_PERMANENTLY_CODE;
         }
 
         Http::setHeadersByCode(Http::getStatusCodes($iRedirectCode));
