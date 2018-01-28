@@ -41,8 +41,8 @@ abstract class Controller implements Controllable
      * 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO",
      * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH" and 10.* is "pKa"
      */
-    const SOFTWARE_VERSION_NAME = 'pKa';
-    const SOFTWARE_VERSION = '10.2.0';
+    const SOFTWARE_VERSION_NAME = 'PHS';
+    const SOFTWARE_VERSION = '12.0.0';
     const SOFTWARE_BUILD = '1';
 
     const DEFAULT_LANG = 'en';
