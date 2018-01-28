@@ -27,7 +27,7 @@ class Page
     /**
      * Set a maintenance page.
      *
-     * @param integer $iMaintenanceTime Time site will be down for (in seconds).
+     * @param int $iMaintenanceTime Time in seconds that the site will be down for maintenance.
      *
      * @return void
      */
