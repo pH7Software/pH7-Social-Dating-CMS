@@ -73,13 +73,20 @@ class ProfileController extends Controller
         $this->sUsername = $this->httpRequest->get('username', 'string');
 
         // Set the Profile ID and Visitor ID
-        $this->iProfileId = $oUserModel->getId(null, $this->sUsername);;
+        $this->iProfileId = $oUserModel->getId(null, $this->sUsername);
         $this->iVisitorId = (int)$this->session->get('member_id');
 
         // Read the Profile information
         $oUser = $oUserModel->readProfile($this->iProfileId);
 
         if ($oUser && $this->doesProfileExist($oUser)) {
+            if (SysMod::isEnabled('cool-profile-page')) {
+                // If enabled, redirect to the other profile page style
+                Header::redirect(
+                    Uri::get('cool-profile-page', 'main', 'index', $this->iProfileId)
+                );
+            }
+
             // The administrators can view all profiles and profile visits are not saved.
             if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
                 $this->initPrivacy($oUserModel, $this->iProfileId, $this->iVisitorId);
