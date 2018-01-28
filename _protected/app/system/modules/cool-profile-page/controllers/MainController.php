@@ -162,7 +162,8 @@ class MainController extends Controller
         if ($this->bUserAuth) {
             $oPrivacyViewsVisitor = $oUserModel->getPrivacySetting($this->iVisitorId);
 
-            if ($oPrivacyViewsUser->userSaveViews == 'yes' && $oPrivacyViewsVisitor->userSaveViews == 'yes' &&
+            if ($oPrivacyViewsUser->userSaveViews == 'yes' &&
+                $oPrivacyViewsVisitor->userSaveViews == 'yes' &&
                 !$this->isOwnProfile()
             ) {
                 $this->updateVisitorViews();

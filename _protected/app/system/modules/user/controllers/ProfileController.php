@@ -229,7 +229,8 @@ class ProfileController extends Controller
             $oPrivacyViewsVisitor = $oUserModel->getPrivacySetting($this->iVisitorId);
 
             if ($oPrivacyViewsUser->userSaveViews == 'yes' &&
-                $oPrivacyViewsVisitor->userSaveViews == 'yes' && !$this->isOwnProfile()
+                $oPrivacyViewsVisitor->userSaveViews == 'yes' &&
+                !$this->isOwnProfile()
             ) {
                 $this->updateVisitorViews();
             }
