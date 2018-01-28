@@ -17,6 +17,8 @@ use PH7\Framework\Server\Server;
 
 class Http
 {
+    const HTTP_OK_CODE = 200;
+
     const STATUS_CODE = [
         100 => '100 Continue',
         101 => '101 Switching Protocols',
@@ -146,10 +148,10 @@ class Http
      *
      * @throws Exception
      */
-    public static function setHeadersByCode($iCode = 200)
+    public static function setHeadersByCode($iCode = self::HTTP_OK_CODE)
     {
         if (!static::getStatusCodes($iCode)) {
-            $iCode = 200;
+            $iCode = self::HTTP_OK_CODE;
         }
 
         // Set header
