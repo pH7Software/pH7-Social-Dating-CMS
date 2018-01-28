@@ -11,6 +11,7 @@ namespace PH7;
 use PH7\Framework\Core\License;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
+use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Header;
 
 class SettingController extends Controller
@@ -89,8 +90,7 @@ class SettingController extends Controller
 
         $this->view->page_title = $this->view->h1_title = t('Meta Tags - Settings');
 
-        $aLangs = $this->file->getDirList(PH7_PATH_APP_LANG);
-        if (!in_array(substr($this->httpRequest->currentUrl(), -5), $aLangs)) {
+        if ($this->langNameFromUrlDoesNotExist()) {
             Header::redirect(
                 Uri::get(
                     PH7_ADMIN_MOD,
@@ -101,7 +101,6 @@ class SettingController extends Controller
                 )
             );
         }
-        unset($aLangs);
 
         $this->output();
     }
@@ -150,5 +149,12 @@ class SettingController extends Controller
         }
 
         return ['is_err' => $bIsErr, 'msg' => $sMsg];
+    }
+
+    private function langNameFromUrlDoesNotExist()
+    {
+        $aLangs = $this->file->getDirList(PH7_PATH_APP_LANG);
+
+        return !in_array(substr($this->httpRequest->currentUrl(), -Lang::LANG_FOLDER_LENGTH), $aLangs, true);
     }
 }
