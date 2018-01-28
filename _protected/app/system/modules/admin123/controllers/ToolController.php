@@ -233,7 +233,10 @@ class ToolController extends Controller
         $this->checkPost();
 
         Db::optimize();
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'tool', 'index'), t('All tables have been optimized!'));
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'tool', 'index'),
+            t('All tables have been optimized!')
+        );
     }
 
     public function repair()
@@ -241,7 +244,10 @@ class ToolController extends Controller
         $this->checkPost();
 
         Db::repair();
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'tool', 'index'), t('All tables have been repaired!'));
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'tool', 'index'),
+            t('All tables have been repaired!')
+        );
     }
 
     /**

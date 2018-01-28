@@ -60,7 +60,10 @@ class AdminController extends Controller
         unset($oPage);
 
         if (empty($oSearch)) {
-            $this->design->setRedirect(Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'));
+            $this->design->setRedirect(
+                Uri::get(PH7_ADMIN_MOD, 'admin', 'browse')
+            );
+
             $this->displayPageNotFound(t('Sorry, Your search returned no results!'));
         } else {
             // Adding the JS form file
