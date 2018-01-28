@@ -266,7 +266,7 @@ class ProfileController extends Controller
      * @param string $sFirstName User's first name.
      * @param stdClass $oUser User data from the DB.
      *
-     * @return string             The anchor for the link.
+     * @return string The anchor for the link.
      */
     private function getMailLink($sFirstName, stdClass $oUser)
     {
@@ -296,7 +296,7 @@ class ProfileController extends Controller
      * @param string $sFirstName User's first name.
      * @param stdClass $oUser User data from the DB.
      *
-     * @return string             The anchor for the link.
+     * @return string The anchor for the link.
      */
     private function getMessengerLink($sFirstName, stdClass $oUser)
     {
@@ -327,7 +327,7 @@ class ProfileController extends Controller
      * @param string $sFirstName User's first name.
      * @param stdClass $oUser User data from the DB.
      *
-     * @return string             The anchor for the link.
+     * @return string The anchor for the link.
      */
     private function getBeFriendLink($sFirstName, stdClass $oUser)
     {
