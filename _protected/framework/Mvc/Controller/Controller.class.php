@@ -34,6 +34,9 @@ use PH7\UserCore;
 
 abstract class Controller extends Core
 {
+    const HTTP_NOT_FOUND_CODE = 404;
+    const MAINTENANCE_DURATION_SECONDS = 3600;
+
     public function __construct()
     {
         parent::__construct();
@@ -136,7 +139,7 @@ abstract class Controller extends Core
     public function displayPageNotFound($sMsg = '', $b404Status = true)
     {
         if ($b404Status) {
-            Http::setHeadersByCode(404);
+            Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
         }
 
         $this->view->page_title = (!empty($sMsg)) ? t('%0% - Page Not Found', $sMsg) : t('Page Not Found');
@@ -311,7 +314,7 @@ abstract class Controller extends Core
     {
         if ($this->isMaintenancePageEligible()) {
             // Set 1 hour for the duration time of the "Service Unavailable" HTTP status
-            Page::maintenance(3600);
+            Page::maintenance(self::MAINTENANCE_DURATION_SECONDS);
         }
     }
 
