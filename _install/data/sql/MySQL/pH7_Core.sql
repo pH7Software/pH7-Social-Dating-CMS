@@ -942,6 +942,7 @@ INSERT INTO pH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VA
 ('Friends', 'friend', '0', '1'),
 ('Related Profiles', 'related-profile', '0', '1'),
 ('User Dashboard', 'user-dashboard', '0', '1'),
+('Cool Profile Page', 'cool-profile-page', '0', '0'),
 ('Game', 'game', '0', '1'),
 ('Newsletter', 'newsletter', '0', '1'),
 ('Invite Friends', 'invite', '0', '1'),
