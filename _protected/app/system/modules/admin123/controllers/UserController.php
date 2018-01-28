@@ -65,7 +65,10 @@ class UserController extends Controller
         unset($oPage);
 
         if (empty($oBrowse)) {
-            $this->design->setRedirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'));
+            $this->design->setRedirect(
+                Uri::get(PH7_ADMIN_MOD, 'user', 'browse')
+            );
+
             $this->displayPageNotFound(t('No user were found.'));
         } else {
             // Add the JS file for the browse form
@@ -114,7 +117,9 @@ class UserController extends Controller
 
         if (!$this->areSearchArgsValid($sWhere)) {
             \PFBC\Form::setError('form_user_search', 'Invalid argument.');
-            Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'search'));
+            Header::redirect(
+                Uri::get(PH7_ADMIN_MOD, 'user', 'search')
+            );
         } else {
             $this->iTotalUsers = $this->oAdminModel->searchUser(
                 $sWhat,

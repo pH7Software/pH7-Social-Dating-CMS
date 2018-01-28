@@ -20,7 +20,9 @@ class AccountController extends Controller
 
     public function index()
     {
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'account', 'edit'));
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'account', 'edit')
+        );
     }
 
     public function password()
