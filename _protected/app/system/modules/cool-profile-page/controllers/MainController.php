@@ -12,6 +12,7 @@ namespace PH7;
 
 use PH7\Framework\Analytics\Statistic;
 use PH7\Framework\Date\Various as VDate;
+use PH7\Framework\Geo\Map\Map;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Layout\Html\Meta;
 use PH7\Framework\Math\Measure\Year;
@@ -26,6 +27,9 @@ use stdClass;
 
 class MainController extends Controller
 {
+    const MAP_ZOOM_LEVEL = 12;
+    const MAP_WIDTH_PIXEL = 200;
+
     /** @var bool */
     private $bUserAuth;
 
@@ -106,6 +110,9 @@ class MainController extends Controller
             $this->view->mail_link = $this->getMailLink($sFirstName, $oUser);
             $this->view->messenger_link = $this->getMessengerLink($sFirstName, $oUser);
 
+            // Set parameters Google Map
+            $this->view->map = $this->getMap($sCity, $sState, $sCountry, $oUser);
+
             $this->view->id = $this->iProfileId;
             $this->view->username = $oUser->username;
             $this->view->first_name = $sFirstName;
@@ -133,6 +140,35 @@ class MainController extends Controller
         }
 
         $this->output();
+    }
+
+    /**
+     * Get the Google Map.
+     *
+     * @param string $sCity
+     * @param string $sState
+     * @param string $sCountry
+     * @param stdClass $oUser
+     *
+     * @return string The Google Maps code.
+     */
+    private function getMap($sCity, $sState, $sCountry, stdClass $oUser)
+    {
+        $oMap = new Map;
+        $oMap->setKey(DbConfig::getSetting('googleApiKey'));
+        $oMap->setCenter($sCity . ' ' . $sState . ' ' . t($sCountry));
+        $oMap->setSize('100%', self::MAP_WIDTH_PIXEL . 'px');
+        $oMap->setDivId('profile_map');
+        $oMap->setZoom(self::MAP_ZOOM_LEVEL);
+        $oMap->addMarkerByAddress(
+            $sCity . ' ' . $sState . ' ' . t($sCountry), t('Meet %0% near here!',
+                $oUser->username)
+        );
+        $oMap->generate();
+        $map = $oMap->getMap();
+        unset($oMap);
+
+        return $map;
     }
 
     /**
