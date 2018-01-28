@@ -29,6 +29,9 @@ use stdClass;
 
 class ProfileController extends Controller
 {
+    const ZOOM_MAP_LEVEL = 12;
+    const MAP_WIDTH_PIXEL = 300;
+
     /** @var bool */
     private $bUserAuth;
 
@@ -190,9 +193,9 @@ class ProfileController extends Controller
         $oMap = new Map;
         $oMap->setKey(DbConfig::getSetting('googleApiKey'));
         $oMap->setCenter($sCity . ' ' . $sState . ' ' . t($sCountry));
-        $oMap->setSize('100%', '300px');
+        $oMap->setSize('100%', self::MAP_WIDTH_PIXEL . 'px');
         $oMap->setDivId('profile_map');
-        $oMap->setZoom(12);
+        $oMap->setZoom(self::ZOOM_MAP_LEVEL);
         $oMap->addMarkerByAddress($sCity . ' ' . $sState . ' ' . t($sCountry), t('Meet %0% near here!', $oUser->username));
         $oMap->generate();
         $map = $oMap->getMap();
