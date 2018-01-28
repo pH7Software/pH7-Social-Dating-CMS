@@ -41,8 +41,7 @@ namespace PH7\Framework\Translate {
             $this->oConfig = Config::getInstance();
             $oCookie = new Cookie;
 
-            // Check a template name has been specify and if it meets the length requirement
-            if (!empty($_REQUEST['l']) && strlen($_REQUEST['l']) === static::LANG_FOLDER_LENGTH) {
+            if ($this->isLangParamSet()) {
                 $this->sUserLang = $_REQUEST['l'];
                 $oCookie->set(static::COOKIE_NAME, $this->sUserLang, static::COOKIE_LIFETIME);
             } elseif ($oCookie->exists(static::COOKIE_NAME)) {
@@ -208,6 +207,16 @@ namespace PH7\Framework\Translate {
             mb_http_input(PH7_ENCODING);
             mb_language('uni');
             mb_regex_encoding(PH7_ENCODING);
+        }
+
+        /**
+         * Check if a language name has been specified and meets the length requirement.
+         *
+         * @return bool
+         */
+        private function isLangParamSet()
+        {
+            return !empty($_REQUEST['l']) && strlen($_REQUEST['l']) === static::LANG_FOLDER_LENGTH;
         }
     }
 }

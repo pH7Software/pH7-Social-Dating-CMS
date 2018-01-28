@@ -45,8 +45,7 @@ class LoadTemplate
         $this->oConfig = Config::getInstance();
         $oCookie = new Cookie;
 
-        // Check a template name has been entered and if it exceeds the maximum length (49 characters).
-        if (!empty($_REQUEST['tpl']) && strlen($_REQUEST['tpl']) < static::MAX_TPL_FOLDER_LENGTH) {
+        if ($this->isTplParamSet()) {
             $this->sUserTpl = $_REQUEST['tpl'];
             $oCookie->set('site_tpl', $this->sUserTpl, static::COOKIE_LIFETIME);
         } elseif ($oCookie->exists('site_tpl')) {
@@ -165,5 +164,15 @@ class LoadTemplate
         }
 
         return $this;
+    }
+
+    /**
+     * Check if a template name has been specified and if it doesn't exceed the maximum length (50 characters).
+     *
+     * @return bool
+     */
+    private function isTplParamSet()
+    {
+        return !empty($_REQUEST['tpl']) && strlen($_REQUEST['tpl']) <= static::MAX_TPL_FOLDER_LENGTH;
     }
 }
