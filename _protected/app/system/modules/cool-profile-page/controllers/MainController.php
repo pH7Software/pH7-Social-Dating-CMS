@@ -78,7 +78,7 @@ class MainController extends Controller
             $this->view->birth_date = $oUser->birthDate;
             $this->view->birth_date_formatted = $this->dateTime->get($oUser->birthDate)->date();
 
-            $aData = $this->getFilteredData();
+            $aData = $this->getFilteredData($oUser, $oFields);
 
             $this->view->page_title = t('Meet %0%, A %1% looking for %2% - %3% years - %4% - %5% %6%',
                 $aData['first_name'], t($oUser->sex), t($oUser->matchSex), $aData['age'], t($aData['country']), $aData['city'], $aData['state']);
