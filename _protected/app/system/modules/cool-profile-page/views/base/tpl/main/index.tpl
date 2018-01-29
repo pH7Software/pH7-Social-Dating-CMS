@@ -39,42 +39,54 @@
         {* Profile's Fields *}
         {each $key => $val in $fields}
             {if $key != 'description' AND $key != 'middleName' AND !empty($val)}
-              {{ $val = escape($val, true) }}
+                {{ $val = escape($val, true) }}
 
-              {if $key == 'height'}
-                <p><span class="bold">{lang 'Height:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&height='.$val) }}">{{ (new Framework\Math\Measure\Height($val))->display(true) }}</a></span></p>
-
-              {elseif $key == 'weight'}
-                <p><span class="bold">{lang 'Weight:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&weight='.$val) }}">{{ (new Framework\Math\Measure\Weight($val))->display(true) }}</a></span></p>
-
-              {elseif $key == 'country'}
-                <p><span class="bold">{lang 'Country:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}">{country}</a></span>&nbsp;&nbsp;<img src="{{ $design->getSmallFlagIcon($country_code) }}" title="{country}" alt="{country}" /></p>
-
-              {elseif $key == 'city'}
-                <p><span class="bold">{lang 'City/Town:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&city='.$city) }}">{city}</a></span></p>
-
-              {elseif $key == 'state'}
-                <p><span class="bold">{lang 'State/Province:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&state='.$state) }}">{state}</a></span></p>
-
-              {elseif $key == 'zipCode'}
-                <p><span class="bold">{lang 'Postal Code:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&zip_code='.$val) }}">{val}</a></span></p>
-
-              {elseif $key == 'website'}
-                <p>{{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Site/Blog:'}</span> <span class="italic">{{ $design->urlTag($val) }}</span></p>
-
-              {elseif $key == 'socialNetworkSite'}
-                <p>{{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Social Profile:'}</span> <span class="italic">{{ $design->urlTag($val) }}</span></p>
-
-              {else}
-                {{ $lang_key = strtolower($key) }}
-
-                {if strstr($key, 'url')}
-                  <p>{{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang $lang_key}</span> <span class="italic">{{ $design->urlTag($val) }}</span></p>
+                {if $key == 'height'}
+                    <p>
+                        <span class="bold">{lang 'Height:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&height='.$val) }}">{{ (new Framework\Math\Measure\Height($val))->display(true) }}</a></span>
+                    </p>
+                {elseif $key == 'weight'}
+                    <p>
+                        <span class="bold">{lang 'Weight:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&weight='.$val) }}">{{ (new Framework\Math\Measure\Weight($val))->display(true) }}</a></span>
+                    </p>
+                 {elseif $key == 'country'}
+                    <p>
+                        <span class="bold">{lang 'Country:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}">{country}</a></span>&nbsp;&nbsp;<img src="{{ $design->getSmallFlagIcon($country_code) }}" title="{country}" alt="{country}" />
+                    </p>
+                {elseif $key == 'city'}
+                    <p>
+                        <span class="bold">{lang 'City/Town:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&city='.$city) }}">{city}</a></span>
+                    </p>
+                {elseif $key == 'state'}
+                    <p>
+                        <span class="bold">{lang 'State/Province:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&state='.$state) }}">{state}</a></span>
+                    </p>
+                {elseif $key == 'zipCode'}
+                    <p>
+                        <span class="bold">{lang 'Postal Code:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&zip_code='.$val) }}">{val}</a></span>
+                    </p>
+                {elseif $key == 'website'}
+                    <p>
+                        {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Site/Blog:'}</span> <span class="italic">{{ $design->urlTag($val) }}</span>
+                    </p>
+                {elseif $key == 'socialNetworkSite'}
+                    <p>
+                        {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Social Profile:'}</span> <span class="italic">{{ $design->urlTag($val) }}</span>
+                    </p>
                 {else}
-                  <p><span class="bold">{lang $lang_key}</span> <span class="italic">{val}</span></p>
+                    {{ $lang_key = strtolower($key) }}
+
+                    {if strstr($key, 'url')}
+                        <p>
+                            {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang $lang_key}</span> <span class="italic">{{ $design->urlTag($val) }}</span>
+                        </p>
+                    {else}
+                        <p>
+                            <span class="bold">{lang $lang_key}</span> <span class="italic">{val}</span>
+                        </p>
+                    {/if}
                 {/if}
-              {/if}
-              <div class="break"></div>
+                <div class="break"></div>
             {/if}
         {/each}
 
