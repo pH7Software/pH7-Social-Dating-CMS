@@ -7,6 +7,21 @@
 h2 {
     text-transform: uppercase;
     text-decoration: underline;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.profile-section {
+    padding-bottom: 4rem;
+}
+
+.profile-section::after {
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    content: '';
+    padding-bottom: 4rem;
+    border-bottom: 1px solid #ddd;
 }
 
 .chat, .message, .friend, .heart {
