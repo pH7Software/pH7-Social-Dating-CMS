@@ -61,7 +61,6 @@ class MainController extends Controller
 
         // Read the profile information
         $oUser = $oUserModel->readProfile($this->iProfileId);
-
         if ($oUser) {
             // The administrators can view all profiles and profile visits are not saved.
             if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
