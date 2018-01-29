@@ -35,17 +35,7 @@ class CountryController extends Controller
             $this->registry->country = $this->getCountry();
             $this->registry->city = $this->httpRequest->getExists('city') ? $this->getCity() : '';
 
-            // Set parameters Google Map
-            $oMap = new Map;
-            $oMap->setKey(DbConfig::getSetting('googleApiKey'));
-            $oMap->setCenter($this->registry->country . ' ' . $this->registry->city);
-            $oMap->setSize(self::MAP_HEIGHT_SIZE, self::MAP_WIDTH_SIZE);
-            $oMap->setDivId('country_map');
-            $oMap->setZoom(self::MAP_ZOOM_LEVEL);
-            $oMap->addMarkerByAddress($this->registry->country . ' ' . $this->registry->city, t('Meet new people here!'));
-            $oMap->generate();
-            $this->view->map = $oMap->getMap();
-            unset($oMap);
+            $this->setMap();
 
             $sCountryCode = $this->getCountryCode();
 
@@ -63,12 +53,7 @@ class CountryController extends Controller
             $this->view->nb_user_by_page = $oPage->getNbItemsPerPage();
 
             // SEO Meta
-            $this->view->page_title = t('Free online dating in %0% %1%, meet people, find friends. Single men & women in %2% %3%', $this->registry->country, $this->registry->city, $this->registry->country, $this->registry->city);
-            $this->view->meta_description = t('Free online dating in %0% with single women & men. Personals, meet people & find friends in %1% on internet dating site. Find sweet love or sex dating and flirt in %2%, %3% with %site_name%', $this->registry->country, $this->registry->country, $this->registry->country, $this->registry->city);
-            $this->view->meta_keywords = t('meeting woman, meeting man, %0%, %1%, meet people, networking, friends, communicate, meet online, online community, clubs, announces meeting, free dating, dating, %2% dating, communication, matrimonial meeting, sharing photos, flirt, finding friends, classifieds, personals, online, social networking', $this->registry->country, $this->registry->city, $this->registry->country);
-            $this->view->h1_title = t('Meet new people in %0% %1%', '<span class="pH1">' . $this->registry->country . '</span>', '<span class="pH1">' . $this->registry->city . '</span>');
-            $sMemberTxt = nt('%n% member', '%n% members', $iTotalUsers);
-            $this->view->h3_title = t('%0% lives near %1% %2%', $sMemberTxt, $this->registry->country, $this->registry->city);
+            $this->setMetaTags($iTotalUsers);
         } else {
             // Not found page
             Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
@@ -92,6 +77,41 @@ class CountryController extends Controller
         return $sCountryCode;
     }
 
+    /**
+     * Assign SEO meta tags to the template.
+     *
+     * @param int $iTotalUsers
+     *
+     * @return void
+     */
+    private function setMetaTags($iTotalUsers)
+    {
+        $this->view->page_title = t('Free online dating in %0% %1%, meet people, find friends. Single men & women in %2% %3%', $this->registry->country, $this->registry->city, $this->registry->country, $this->registry->city);
+        $this->view->meta_description = t('Free online dating in %0% with single women & men. Personals, meet people & find friends in %1% on internet dating site. Find sweet love or sex dating and flirt in %2%, %3% with %site_name%', $this->registry->country, $this->registry->country, $this->registry->country, $this->registry->city);
+        $this->view->meta_keywords = t('meeting woman, meeting man, %0%, %1%, meet people, networking, friends, communicate, meet online, online community, clubs, announces meeting, free dating, dating, %2% dating, communication, matrimonial meeting, sharing photos, flirt, finding friends, classifieds, personals, online, social networking', $this->registry->country, $this->registry->city, $this->registry->country);
+        $this->view->h1_title = t('Meet new people in %0% %1%', '<span class="pH1">' . $this->registry->country . '</span>', '<span class="pH1">' . $this->registry->city . '</span>');
+        $sMemberTxt = nt('%n% member', '%n% members', $iTotalUsers);
+        $this->view->h3_title = t('%0% lives near %1% %2%', $sMemberTxt, $this->registry->country, $this->registry->city);
+    }
+
+    /**
+     * Set the map to the view.
+     *
+     * @return void
+     */
+    private function setMap()
+    {
+        $oMap = new Map;
+        $oMap->setKey(DbConfig::getSetting('googleApiKey'));
+        $oMap->setCenter($this->registry->country . ' ' . $this->registry->city);
+        $oMap->setSize(self::MAP_HEIGHT_SIZE, self::MAP_WIDTH_SIZE);
+        $oMap->setDivId('country_map');
+        $oMap->setZoom(self::MAP_ZOOM_LEVEL);
+        $oMap->addMarkerByAddress($this->registry->country . ' ' . $this->registry->city, t('Meet new people here!'));
+        $oMap->generate();
+        $this->view->map = $oMap->getMap();
+        unset($oMap);
+    }
 
     /**
      * @return string
