@@ -85,7 +85,7 @@ class BirthdayController extends Controller
      *
      * @return string|void
      */
-    protected function checkType($sSexType)
+    private function checkType($sSexType)
     {
         switch ($sSexType) {
             case BirthdayModel::ALL:
