@@ -34,12 +34,12 @@
         {/if}
         {if $is_picture_enabled}
             <li>
-              <a href="#picture"><span>{lang 'Photos'}</span></a>
+                <a href="#picture"><span>{lang 'Photos'}</span></a>
             </li>
         {/if}
         {if $is_video_enabled}
             <li>
-              <a href="#video"><span>{lang 'Videos'}</span></a>
+                <a href="#video"><span>{lang 'Videos'}</span></a>
             </li>
         {/if}
         {if $is_forum_enabled}
@@ -49,30 +49,30 @@
         {/if}
         {if $is_note_enabled}
             <li>
-              <a href="#note"><span>{lang 'Notes'}</span></a>
+                <a href="#note"><span>{lang 'Notes'}</span></a>
             </li>
         {/if}
         <li>
-          <a href="#visitor"><span>{lang 'Recently Viewed'}</span></a>
+            <a href="#visitor"><span>{lang 'Recently Viewed'}</span></a>
         </li>
         {if $is_mail_enabled AND $is_logged AND !$is_own_profile}
             <li>
-              <a rel="nofollow" href="{mail_link}"><span>{lang 'Send Message'}</span></a>
+                <a rel="nofollow" href="{mail_link}"><span>{lang 'Send Message'}</span></a>
             </li>
         {/if}
         {if $is_im_enabled AND $is_logged AND !$is_own_profile}
             <li>
-              <a rel="nofollow" href="{messenger_link}"><span>{lang 'Live Chat'}</span></a>
+                <a rel="nofollow" href="{messenger_link}"><span>{lang 'Live Chat'}</span></a>
             </li>
         {/if}
         {if $is_friend_enabled AND $is_logged AND !$is_own_profile}
             <li>
-              <a ref="nofollow" href="{befriend_link}"><span>{lang 'Add Friend'}</span></a>
+                <a ref="nofollow" href="{befriend_link}"><span>{lang 'Add Friend'}</span></a>
             </li>
         {/if}
         {if $is_lovecalculator_enabled AND $is_logged AND !$is_own_profile}
             <li>
-              <a href="{{ $design->url('love-calculator','main','index',$username) }}" title="{lang 'Love Calculator'}"><span>{lang 'Match'} <b class="pink2">&hearts;</b></span></a>
+                <a href="{{ $design->url('love-calculator','main','index',$username) }}" title="{lang 'Love Calculator'}"><span>{lang 'Match'} <b class="pink2">&hearts;</b></span></a>
             </li>
         {/if}
     </ol>
@@ -82,39 +82,45 @@
         {{ $avatarDesign->lightBox($username, $first_name, $sex, 400) }}
 
         <p>
-          <span class="bold">{lang 'I am a:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&match_sex='.$sex) }}">{lang $sex}</a></span>
+            <span class="bold">{lang 'I am a:'}</span>
+            <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&match_sex='.$sex) }}">{lang $sex}</a></span>
         </p>
         <div class="break"></div>
 
         {if !empty($match_sex)}
             <p>
-                <span class="bold">{lang 'Looking for a:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}{match_sex_search}">{lang $match_sex}</a></span>
+                <span class="bold">{lang 'Looking for a:'}</span>
+                <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}{match_sex_search}">{lang $match_sex}</a></span>
             </p>
             <div class="break"></div>
         {/if}
 
         <p>
-            <span class="bold">{lang 'First name:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&first_name='.$first_name) }}">{first_name}</a></span>
+            <span class="bold">{lang 'First name:'}</span>
+            <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&first_name='.$first_name) }}">{first_name}</a></span>
         </p>
         <div class="break"></div>
 
         {if !empty($middle_name)}
             <p>
-                <span class="bold">{lang 'Middle name:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&middle_name='.$middle_name) }}">{middle_name}</a></span>
+                <span class="bold">{lang 'Middle name:'}</span>
+                <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&middle_name='.$middle_name) }}">{middle_name}</a></span>
             </p>
             <div class="break"></div>
         {/if}
 
         {if !empty($last_name)}
             <p>
-                <span class="bold">{lang 'Last name:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&last_name='.$last_name) }}">{last_name}</a></span>
+                <span class="bold">{lang 'Last name:'}</span>
+                <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&last_name='.$last_name) }}">{last_name}</a></span>
             </p>
             <div class="break"></div>
         {/if}
 
         {if !empty($age)}
             <p>
-                <span class="bold">{lang 'Age:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$birth_date) }}">{age}</a> <span class="gray">({birth_date_formatted})</span></span>
+                <span class="bold">{lang 'Age:'}</span>
+                <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$birth_date) }}">{age}</a> <span class="gray">({birth_date_formatted})</span></span>
             </p>
             <div class="break"></div>
         {/if}

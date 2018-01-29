@@ -10,16 +10,25 @@
 
         {manual_include 'profile_links.inc.tpl'}
 
-        <p><span class="bold">{lang 'I am a:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&match_sex='.$sex) }}">{lang $sex}</a></span></p>
+        <p>
+            <span class="bold">{lang 'I am a:'}</span>
+            <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&match_sex='.$sex) }}">{lang $sex}</a></span>
+        </p>
         <div class="break"></div>
 
         {if !empty($match_sex)}
-          <p><span class="bold">{lang 'Looking for a:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}{match_sex_search}">{lang $match_sex}</a></span></p>
+          <p>
+              <span class="bold">{lang 'Looking for a:'}</span>
+              <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}{match_sex_search}">{lang $match_sex}</a></span>
+          </p>
           <div class="break"></div>
         {/if}
 
         {if !empty($age)}
-          <p><span class="bold">{lang 'Age:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$birth_date) }}">{age}</a> <span class="gray">({birth_date_formatted})</span></span></p>
+          <p>
+              <span class="bold">{lang 'Age:'}</span>
+              <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$birth_date) }}">{age}</a> <span class="gray">({birth_date_formatted})</span></span>
+          </p>
           <div class="break"></div>
         {/if}
 
