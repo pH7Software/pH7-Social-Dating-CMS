@@ -8,6 +8,8 @@
     <div class="col-md-3">
         {{ $avatarDesign->lightBox($username, $first_name, $sex, 400) }}
 
+        {manual_include 'profile_links.inc.tpl'}
+
         <p><span class="bold">{lang 'I am a:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&match_sex='.$sex) }}">{lang $sex}</a></span></p>
         <div class="break"></div>
 

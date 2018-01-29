@@ -7,3 +7,24 @@
 h2 {
     text-transform: uppercase;
 }
+
+.chat, .message, .friend, .heart {
+    font-size: 80px;
+    line-height: 100px;
+}
+
+.chat {
+    color: #00a6ff;
+}
+
+.message {
+    color: #45c000;
+}
+
+.friend {
+    color: #2b65f8;
+}
+
+.heart {
+    color: #F06;
+}
