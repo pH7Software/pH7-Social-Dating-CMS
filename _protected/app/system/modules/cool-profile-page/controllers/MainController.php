@@ -27,7 +27,7 @@ use stdClass;
 
 class MainController extends Controller
 {
-    const MAP_ZOOM_LEVEL = 12;
+    const MAP_ZOOM_LEVEL = 10;
     const MAP_WIDTH_PIXEL = 200;
 
     /** @var bool */
