@@ -126,11 +126,11 @@
 
         <div class="center small">
             {if !empty($join_date)}
-                {lang 'Join Date:'} <span class="italic">{join_date}</span> &nbsp; | &nbsp;
+                {lang 'Join Date:'} <span class="italic">{join_date}</span> •
             {/if}
 
             {if !empty($last_activity)}
-                {lang 'Last Activity:'} <span class="italic">{last_activity}</span> &nbsp; | &nbsp;
+                {lang 'Last Activity:'} <span class="italic">{last_activity}</span> •
             {/if}
 
             {lang 'Views:'} <span class="italic">{% Framework\Mvc\Model\Statistic::getView($id,'Members') %}</span>
