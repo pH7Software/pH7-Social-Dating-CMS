@@ -74,54 +74,45 @@ class MainController extends Controller
 
             unset($oUserModel);
 
-            $sFirstName = !empty($oUser->firstName) ? $this->str->escape($this->str->upperFirst($oUser->firstName), true) : '';
-            $sLastName = !empty($oUser->lastName) ? $this->str->escape($this->str->upperFirst($oUser->lastName), true) : '';
-            $sMiddleName = !empty($oFields->middleName) ? $this->str->escape($this->str->upperFirst($oFields->middleName), true) : '';
-
-            $sCountry = !empty($oFields->country) ? $oFields->country : '';
-            $sCity = !empty($oFields->city) ? $this->str->escape($this->str->upperFirst($oFields->city), true) : '';
-            $sState = !empty($oFields->state) ? $this->str->escape($this->str->upperFirst($oFields->state), true) : '';
-            $sDescription = !empty($oFields->description) ? Emoticon::init(Ban::filterWord($oFields->description)) : '';
-
             // Age
             $this->view->birth_date = $oUser->birthDate;
             $this->view->birth_date_formatted = $this->dateTime->get($oUser->birthDate)->date();
-            $aAge = explode('-', $oUser->birthDate);
-            $iAge = (new Year($aAge[0], $aAge[1], $aAge[2]))->get();
+
+            $aData = $this->getFilteredData();
 
             $this->view->page_title = t('Meet %0%, A %1% looking for %2% - %3% years - %4% - %5% %6%',
-                $sFirstName, t($oUser->sex), t($oUser->matchSex), $iAge, t($sCountry), $sCity, $sState);
+                $aData['first_name'], t($oUser->sex), t($oUser->matchSex), $aData['age'], t($aData['country']), $aData['city'], $aData['state']);
 
-            $this->view->meta_description = t('Meet %0% %1% | %2% - %3%', $sFirstName, $sLastName,
-                $oUser->username, substr($sDescription, 0, 100));
+            $this->view->meta_description = t('Meet %0% %1% | %2% - %3%', $aData['first_name'], $aData['last_name'],
+                $oUser->username, substr($aData['description'], 0, 100));
 
             $this->view->h3_title = t('A <span class="pH1">%0%</span> of <span class="pH3">%1% years</span>, from <span class="pH2">%2%, %3% %4%</span>',
-                t($oUser->sex), $iAge, t($sCountry), $sCity, $sState);
+                t($oUser->sex), $aData['age'], t($aData['country']), $aData['city'], $aData['state']);
 
             $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
 
             // Member Menubar
-            $this->view->mail_link = $this->getMailLink($sFirstName, $oUser);
-            $this->view->messenger_link = $this->getMessengerLink($sFirstName, $oUser);
-            $this->view->befriend_link = $this->getBeFriendLink($sFirstName, $oUser);
+            $this->view->mail_link = $this->getMailLink($aData['first_name'], $oUser);
+            $this->view->messenger_link = $this->getMessengerLink($aData['first_name'], $oUser);
+            $this->view->befriend_link = $this->getBeFriendLink($aData['first_name'], $oUser);
 
             // Set parameters Google Map
-            $this->view->map = $this->getMap($sCity, $sState, $sCountry, $oUser);
+            $this->view->map = $this->getMap($aData['city'], $aData['state'], $aData['country'], $oUser);
 
             $this->view->id = $this->iProfileId;
             $this->view->username = $oUser->username;
-            $this->view->first_name = $sFirstName;
-            $this->view->last_name = $sLastName;
-            $this->view->middle_name = $sMiddleName;
+            $this->view->first_name = $aData['first_name'];
+            $this->view->last_name = $aData['last_name'];
+            $this->view->middle_name = $aData['middle_name'];
             $this->view->sex = $oUser->sex;
             $this->view->match_sex = $oUser->matchSex;
             $this->view->match_sex_search = str_replace(array('[code]', ','), '&sex[]=', '[code]' . $oUser->matchSex);
-            $this->view->age = $iAge;
-            $this->view->country = t($sCountry);
-            $this->view->country_code = $sCountry;
-            $this->view->city = $sCity;
-            $this->view->state = $sState;
-            $this->view->description = nl2br($sDescription);
+            $this->view->age = $aData['age'];
+            $this->view->country = t($aData['country']);
+            $this->view->country_code = $aData['country'];
+            $this->view->city = $aData['city'];
+            $this->view->state = $aData['state'];
+            $this->view->description = nl2br($aData['description']);
             $this->view->join_date = VDate::textTimeStamp($oUser->joinDate);
             $this->view->last_activity = VDate::textTimeStamp($oUser->lastActivity);
             $this->view->fields = $oFields;
@@ -321,6 +312,41 @@ class MainController extends Controller
         }
 
         return $sBefriendLink;
+    }
+
+    /**
+     * Returns filtered user/field data.
+     *
+     * @param stdClass $oUser
+     * @param stdClass $oFields
+     *
+     * @return array
+     */
+    private function getFilteredData(stdClass $oUser, stdClass $oFields)
+    {
+        $sFirstName = !empty($oUser->firstName) ? $this->str->escape($this->str->upperFirst($oUser->firstName), true) : '';
+        $sLastName = !empty($oUser->lastName) ? $this->str->escape($this->str->upperFirst($oUser->lastName), true) : '';
+        $sMiddleName = !empty($oFields->middleName) ? $this->str->escape($this->str->upperFirst($oFields->middleName), true) : '';
+
+        $sCountry = !empty($oFields->country) ? $oFields->country : '';
+        $sCity = !empty($oFields->city) ? $this->str->escape($this->str->upperFirst($oFields->city), true) : '';
+        $sState = !empty($oFields->state) ? $this->str->escape($this->str->upperFirst($oFields->state), true) : '';
+        $sDescription = !empty($oFields->description) ? Emoticon::init(Ban::filterWord($oFields->description)) : '';
+
+
+        $aAge = explode('-', $oUser->birthDate);
+        $iAge = (new Year($aAge[0], $aAge[1], $aAge[2]))->get();
+
+        return [
+            'first_name' => $sFirstName,
+            'last_name' => $sLastName,
+            'middle_name' => $sMiddleName,
+            'country' => $sCountry,
+            'city' => $sCity,
+            'state' => $sState,
+            'description' => $sDescription,
+            'age' => $iAge
+        ];
     }
 
     /**
