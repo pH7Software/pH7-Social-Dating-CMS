@@ -50,6 +50,11 @@ class BirthdayController extends Controller
         $this->view->meta_keywords = t('birthday,birthdate,anniversary,birth,friend,dating,social networking,profile,social');
     }
 
+    /**
+     * @param string $sGender
+     *
+     * @return void
+     */
     public function index($sGender = BirthdayModel::ALL)
     {
         $this->checkType($sGender);
@@ -75,6 +80,11 @@ class BirthdayController extends Controller
         $this->output();
     }
 
+    /**
+     * @param string $sSexType
+     *
+     * @return string|void
+     */
     protected function checkType($sSexType)
     {
         switch ($sSexType) {
