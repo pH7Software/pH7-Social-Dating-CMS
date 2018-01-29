@@ -83,13 +83,13 @@
 
     <div class="col-md-6">
         {if !empty($description)}
-            <h2 class="underline center">{lang 'A Little About Me'}</h2>
+            <h2 class="center">{lang 'A Little About Me'}</h2>
             <div class="quote italic center s_bMarg">{description}</div>
         {/if}
 
         <hr class="s_bMarg" />
 
-        <h2 class="underline center">{lang 'Photos & Videos'}</h2>
+        <h2 class="center">{lang 'Photos & Videos'}</h2>
         {if $is_picture_enabled}
             <div class="content" id="picture">
                 <script>

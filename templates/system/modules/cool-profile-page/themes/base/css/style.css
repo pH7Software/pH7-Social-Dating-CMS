@@ -6,6 +6,7 @@
 
 h2 {
     text-transform: uppercase;
+    text-decoration: underline;
 }
 
 .chat, .message, .friend, .heart {
