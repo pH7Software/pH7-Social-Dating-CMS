@@ -90,12 +90,9 @@ class MainController extends Controller
             $this->view->h3_title = t('A <span class="pH1">%0%</span> of <span class="pH3">%1% years</span>, from <span class="pH2">%2%, %3% %4%</span>',
                 t($oUser->sex), $aData['age'], t($aData['country']), $aData['city'], $aData['state']);
 
-            // Member Menubar
-            $this->view->mail_link = $this->getMailLink($aData['first_name'], $oUser);
-            $this->view->messenger_link = $this->getMessengerLink($aData['first_name'], $oUser);
-            $this->view->befriend_link = $this->getBeFriendLink($aData['first_name'], $oUser);
+            $this->setMenubar($aData['first_name'], $oUser);
 
-            $this->view->map = $this->getMap($aData['city'], $aData['state'], $aData['country'], $oUser);
+            $this->setMap($aData['city'], $aData['state'], $aData['country'], $oUser);
 
             $this->view->id = $this->iProfileId;
             $this->view->username = $oUser->username;
@@ -127,16 +124,16 @@ class MainController extends Controller
     }
 
     /**
-     * Get the Google Map.
+     * Set the Google Maps code to the view.
      *
      * @param string $sCity
      * @param string $sState
      * @param string $sCountry
      * @param stdClass $oUser
      *
-     * @return string The Google Maps code.
+     * @return void
      */
-    private function getMap($sCity, $sState, $sCountry, stdClass $oUser)
+    private function setMap($sCity, $sState, $sCountry, stdClass $oUser)
     {
         $oMap = new Map;
         $oMap->setKey(DbConfig::getSetting('googleApiKey'));
@@ -149,10 +146,8 @@ class MainController extends Controller
                 $oUser->username)
         );
         $oMap->generate();
-        $sMap = $oMap->getMap();
+        $this->view->map = $oMap->getMap();
         unset($oMap);
-
-        return $sMap;
     }
 
     /**
@@ -345,6 +340,19 @@ class MainController extends Controller
             'description' => $sDescription,
             'age' => $iAge
         ];
+    }
+
+    /**
+     * @param string $sFirstName
+     * @param stdClass $oUser
+     *
+     * @return void
+     */
+    private function setMenubar($sFirstName, stdClass $oUser)
+    {
+        $this->view->mail_link = $this->getMailLink($sFirstName, $oUser);
+        $this->view->messenger_link = $this->getMessengerLink($sFirstName, $oUser);
+        $this->view->befriend_link = $this->getBeFriendLink($sFirstName, $oUser);
     }
 
     /**
