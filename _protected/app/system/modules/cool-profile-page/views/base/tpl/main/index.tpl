@@ -95,13 +95,13 @@
         {if !empty($description)}
             <h2 class="center">{lang 'A Little About Me'}</h2>
             <div class="quote italic center s_bMarg">{description}</div>
-        {/if}
 
-        <hr class="s_bMarg" />
+            <hr />
+        {/if}
 
         <h2 class="center">{lang 'Photos & Videos'}</h2>
         {if $is_picture_enabled}
-            <div class="content" id="picture">
+            <div class="content s_bMarg" id="picture">
                 <script>
                     var url_picture_block = '{{ $design->url('picture','main','albums',$username) }}';
                     $('#picture').load(url_picture_block + ' #picture_block');
@@ -110,7 +110,7 @@
         {/if}
 
         {if $is_video_enabled}
-            <div class="content" id="video">
+            <div class="content s_bMarg" id="video">
                 <script>
                     var url_video_block = '{{ $design->url('video','main','albums',$username) }}';
                     $('#video').load(url_video_block + ' #video_block');
