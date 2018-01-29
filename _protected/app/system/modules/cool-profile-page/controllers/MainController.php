@@ -94,7 +94,6 @@ class MainController extends Controller
             $this->view->messenger_link = $this->getMessengerLink($aData['first_name'], $oUser);
             $this->view->befriend_link = $this->getBeFriendLink($aData['first_name'], $oUser);
 
-            // Set parameters Google Map
             $this->view->map = $this->getMap($aData['city'], $aData['state'], $aData['country'], $oUser);
 
             $this->view->id = $this->iProfileId;
