@@ -109,6 +109,7 @@ class MainController extends Controller
             // Member Menubar
             $this->view->mail_link = $this->getMailLink($sFirstName, $oUser);
             $this->view->messenger_link = $this->getMessengerLink($sFirstName, $oUser);
+            $this->view->befriend_link = $this->getBeFriendLink($sFirstName, $oUser);
 
             // Set parameters Google Map
             $this->view->map = $this->getMap($sCity, $sState, $sCountry, $oUser);
@@ -296,6 +297,36 @@ class MainController extends Controller
         }
 
         return $sMessengerLink;
+    }
+
+    /**
+     * @param string $sFirstName User's first name.
+     * @param stdClass $oUser User data from the DB.
+     *
+     * @return string The anchor for the link.
+     */
+    private function getBeFriendLink($sFirstName, stdClass $oUser)
+    {
+        if ($this->bUserAuth) {
+            $sBefriendLink = 'javascript:void(0)" onclick="friend(\'add\',' . $this->iProfileId . ',\'' . (new Token)->generate('friend') . '\')';
+        } else {
+            $aUrlParms = [
+                'msg' => t('Free Sign up for %site_name% to become friend with %0%.', $sFirstName),
+                'ref' => 'profile',
+                'a' => 'befriend',
+                'u' => $oUser->username,
+                'f_n' => $sFirstName,
+                's' => $oUser->sex
+            ];
+            $sBefriendLink = Uri::get(
+                'user',
+                'signup',
+                'step1', '?' . Url::httpBuildQuery($aUrlParms),
+                false
+            );
+        }
+
+        return $sBefriendLink;
     }
 
     /**
