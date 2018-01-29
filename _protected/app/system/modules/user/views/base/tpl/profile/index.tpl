@@ -34,16 +34,16 @@
       <li><a href="#note"><span>{lang 'Notes'}</span></a></li>
     {/if}
     <li><a href="#visitor"><span>{lang 'Recently Viewed'}</span></a></li>
-    {if $is_logged AND !$is_own_profile AND $is_mail_enabled}
+    {if $is_mail_enabled AND $is_logged AND !$is_own_profile}
       <li><a rel="nofollow" href="{mail_link}"><span>{lang 'Send Message'}</span></a></li>
     {/if}
-    {if $is_logged AND !$is_own_profile AND $is_im_enabled}
+    {if $is_im_enabled AND $is_logged AND !$is_own_profile}
       <li><a rel="nofollow" href="{messenger_link}"><span>{lang 'Live Chat'}</span></a></li>
     {/if}
     {if $is_friend_enabled AND $is_logged AND !$is_own_profile}
       <li><a ref="nofollow" href="{befriend_link}"><span>{lang 'Add Friend'}</span></a></li>
     {/if}
-    {if $is_logged AND !$is_own_profile AND $is_lovecalculator_enabled}
+    {if $is_lovecalculator_enabled AND $is_logged AND !$is_own_profile}
       <li><a href="{{ $design->url('love-calculator','main','index',$username) }}" title="{lang 'Love Calculator'}"><span>{lang 'Match'} <b class="pink2">&hearts;</b></span></a></li>
     {/if}
   </ol>
