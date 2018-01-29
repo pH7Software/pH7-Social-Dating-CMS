@@ -8,7 +8,7 @@
 
 **pH7 Social Dating CMS** is a **Professional** & **Open Source** Social Dating CMS, fully responsive design, low-resource-intensive, powerful and very secure.
 
-pH7CMS is included with 34 modules and based on its homemade framework (pH7Framework). It is also the first Professional, free and open source European Social Dating Site Builder Software and the first choice for creating enterprise level Dating Apps/Service or social networking sites.
+pH7CMS is included with 35 modules and based on its homemade framework (pH7Framework). It is also the first Professional, free and open source European Social Dating Site Builder Software and the first choice for creating enterprise level Dating Apps/Service or social networking sites.
 
 
 ![Professional PHP Social Dating Builder Software](https://cloud.githubusercontent.com/assets/1325411/19419476/5475b32c-93d0-11e6-9756-8e7db8df129f.png)
@@ -20,7 +20,7 @@ pH7CMS is included with 34 modules and based on its homemade framework (pH7Frame
 
 It is designed with the **KISS** principle in mind, and the all source code can be read and understood in minutes. For a better flexibility, the software uses **PDO** (PHP Data Objects) abstraction which allows the choice of the database. The principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (no duplicate code).
 
-This Free and Open Source **Social Dating Site Builder** wants to be low resource-intensive, powerful, stable and secure. The software also comes with 34 system modules and is based on **pH7Framework** *(written specifically for this project)* that has over 52 packages.
+This Free and Open Source **Social Dating Site Builder** wants to be low resource-intensive, powerful, stable and secure. The software also comes with 35 system modules and is based on **pH7Framework** *(written specifically for this project)* that has over 52 packages.
 
 *To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **best online dating service** or **social networking** website on the World Wide Web!*
 
