@@ -11,6 +11,7 @@
         {manual_include 'profile_links.inc.tpl'}
 
         <p>
+            <i class="fa fa-{sex}"></i>
             <span class="bold">{lang 'I am a:'}</span>
             <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&match_sex='.$sex) }}">{lang $sex}</a></span>
         </p>
@@ -18,6 +19,7 @@
 
         {if !empty($match_sex)}
           <p>
+              <i class="fa fa-{match_sex}"></i>
               <span class="bold">{lang 'Looking for a:'}</span>
               <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}{match_sex_search}">{lang $match_sex}</a></span>
           </p>
