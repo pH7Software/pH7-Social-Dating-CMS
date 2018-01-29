@@ -3,9 +3,8 @@
     {manual_include 'profile_background.inc.tpl'}
 {/if}
 
-
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-xs-12 col-sm-4 col-md-3">
         {{ $avatarDesign->lightBox($username, $first_name, $sex, 400) }}
         <h3>{first_name} {middle_name} {last_name}</h3>
 
@@ -81,7 +80,7 @@
         {{ $design->likeApi() }}
     </div>
 
-    <div class="col-md-6">
+    <div class="col-xs-12 col-sm-6 col-md-6">
         {if !empty($description)}
             <h2 class="center">{lang 'A Little About Me'}</h2>
             <div class="quote italic center s_bMarg">{description}</div>
@@ -127,7 +126,7 @@
         </p>
     </div>
 
-    <div class="col-md-3">
+    <div class="col-xs-12 col-sm-2 col-md-3">
         <div class="s_bMarg">
             <h2>{lang 'Location'}</h2>
             {map}
