@@ -26,7 +26,8 @@ use stdClass;
 class MainController extends Controller
 {
     const MAP_ZOOM_LEVEL = 10;
-    const MAP_WIDTH_PIXEL = 200;
+    const MAP_WIDTH_SIZE = '100%';
+    const MAP_HEIGHT_SIZE = '200px';
 
     /** @var bool */
     private $bUserAuth;
@@ -140,7 +141,7 @@ class MainController extends Controller
         $oMap = new Map;
         $oMap->setKey(DbConfig::getSetting('googleApiKey'));
         $oMap->setCenter($sCity . ' ' . $sState . ' ' . t($sCountry));
-        $oMap->setSize('100%', self::MAP_WIDTH_PIXEL . 'px');
+        $oMap->setSize(self::MAP_WIDTH_SIZE, self::MAP_HEIGHT_SIZE);
         $oMap->setDivId('profile_map');
         $oMap->setZoom(self::MAP_ZOOM_LEVEL);
         $oMap->addMarkerByAddress(

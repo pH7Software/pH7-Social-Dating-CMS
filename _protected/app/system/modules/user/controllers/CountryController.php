@@ -17,8 +17,8 @@ use PH7\Framework\Navigation\Page;
 class CountryController extends Controller
 {
     const MAP_ZOOM_LEVEL = 12;
-    const MAP_WIDTH_SIZE = '520px';
-    const MAP_HEIGHT_SIZE = '100%';
+    const MAP_WIDTH_SIZE = '100%';
+    const MAP_HEIGHT_SIZE = '520px';
 
     const COUNTRY_CODE_LENGTH = 2;
     const MAX_PROFILE_PER_PAGE = 20;
@@ -104,7 +104,7 @@ class CountryController extends Controller
         $oMap = new Map;
         $oMap->setKey(DbConfig::getSetting('googleApiKey'));
         $oMap->setCenter($this->registry->country . ' ' . $this->registry->city);
-        $oMap->setSize(self::MAP_HEIGHT_SIZE, self::MAP_WIDTH_SIZE);
+        $oMap->setSize(self::MAP_WIDTH_SIZE, self::MAP_HEIGHT_SIZE);
         $oMap->setDivId('country_map');
         $oMap->setZoom(self::MAP_ZOOM_LEVEL);
         $oMap->addMarkerByAddress($this->registry->country . ' ' . $this->registry->city, t('Meet new people here!'));
