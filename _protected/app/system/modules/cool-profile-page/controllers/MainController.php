@@ -89,8 +89,6 @@ class MainController extends Controller
             $this->view->h3_title = t('A <span class="pH1">%0%</span> of <span class="pH3">%1% years</span>, from <span class="pH2">%2%, %3% %4%</span>',
                 t($oUser->sex), $aData['age'], t($aData['country']), $aData['city'], $aData['state']);
 
-            $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
-
             // Member Menubar
             $this->view->mail_link = $this->getMailLink($aData['first_name'], $oUser);
             $this->view->messenger_link = $this->getMessengerLink($aData['first_name'], $oUser);

@@ -129,9 +129,6 @@ class ProfileController extends Controller
             $this->view->h2_title = t('A <span class="pH1">%0%</span> of <span class="pH3">%1% years</span>, from <span class="pH2">%2%, %3% %4%</span>',
                 t($oUser->sex), $iAge, t($sCountry), $sCity, $sState);
 
-
-            $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
-
             // Member Menubar
             $this->view->mail_link = $this->getMailLink($sFirstName, $oUser);
             $this->view->messenger_link = $this->getMessengerLink($sFirstName, $oUser);

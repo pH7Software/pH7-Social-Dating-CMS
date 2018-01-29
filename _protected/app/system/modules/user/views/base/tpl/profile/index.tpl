@@ -79,7 +79,7 @@
 
     <div class="content" id="general">
         {{ UserDesignCoreModel::userStatus($id) }}
-        {{ $avatarDesign->lightBox($username, $first_name, $sex, 400) }}
+        {{ (new AvatarDesignCore)->lightBox($username, $first_name, $sex, 400) }}
 
         <p>
             <span class="bold">{lang 'I am a:'}</span>
