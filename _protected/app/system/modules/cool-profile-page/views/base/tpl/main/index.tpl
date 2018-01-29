@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-4 col-md-3">
         {{ $avatarDesign->lightBox($username, $first_name, $sex, 400) }}
-        <h3>{first_name} {middle_name} {last_name}  <span class="pink-link-text">{{ $design->report($id, $username, $first_name, $sex) }}</span></h3>
+        <h3>{first_name} {middle_name} {last_name}  {{ $design->report($id, $username, $first_name, $sex) }}</h3>
 
         {manual_include 'profile_links.inc.tpl'}
 

@@ -9,10 +9,6 @@ h2 {
     text-decoration: underline;
 }
 
-.pink-link-text a {
-    color: #EF627E;
-}
-
 .chat, .message, .friend, .heart {
     font-size: 80px;
     line-height: 100px;
