@@ -83,12 +83,7 @@ class ProfileController extends Controller
         $oUser = $oUserModel->readProfile($this->iProfileId);
 
         if ($oUser && $this->doesProfileExist($oUser)) {
-            if (SysMod::isEnabled('cool-profile-page')) {
-                // If enabled, redirect to the other profile page style
-                Header::redirect(
-                    Uri::get('cool-profile-page', 'main', 'index', $this->iProfileId)
-                );
-            }
+            $this->redirectToOtherProfileStyleIfEnabled();
 
             // The administrators can view all profiles and profile visits are not saved.
             if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
@@ -400,6 +395,19 @@ class ProfileController extends Controller
     private function excludeProfileFromSearchEngines()
     {
         $this->view->header = Meta::NOINDEX;
+    }
+
+    /**
+     * @return void
+     */
+    private function redirectToOtherProfileStyleIfEnabled()
+    {
+        if (SysMod::isEnabled('cool-profile-page')) {
+            // If enabled, redirect to the other profile page style
+            Header::redirect(
+                Uri::get('cool-profile-page', 'main', 'index', $this->iProfileId)
+            );
+        }
     }
 
     /**
