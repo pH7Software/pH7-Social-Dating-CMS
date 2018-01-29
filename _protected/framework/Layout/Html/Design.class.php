@@ -816,9 +816,9 @@ class Design
                 $sReportLink = Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aUrlParams), false);
             }
 
-            echo '<a rel="nofollow" href="', $sReportLink, '" title="', t('Report Abuse'), '">', t('Report'), '</a>';
+            echo '<a rel="nofollow" href="', $sReportLink, '" title="', t('Report Abuse'), '"><i class="fa fa-flag"></i></a>';
         } else {
-            echo '<abbr title="' . t('Report feature is not available for this content since the user who posted that content has been deleted.') . '"">' . t('Report') . '</abbr>';
+            echo '<abbr title="' . t('Report feature is not available for this content since the user who posted that content has been deleted.') . '""><i class="fa fa-flag"></i></abbr>';
         }
     }
 
