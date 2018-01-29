@@ -66,7 +66,7 @@ class BirthdayController extends Controller
         $this->sTitle = nt('%n% Birthday', '%n% Birthdays', $this->iTotalBirths) . $sHtmlCurrentDate;
         $this->view->page_title = $this->view->h1_title = $this->sTitle;
 
-        if ($sGender != BirthdayModel::ALL) {
+        if ($sGender !== BirthdayModel::ALL) {
             $this->view->h3_title = '<span class="pH0">' . t($sGender) . '</span>';
         }
 
