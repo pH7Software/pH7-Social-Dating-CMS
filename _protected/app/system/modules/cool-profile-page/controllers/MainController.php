@@ -149,10 +149,10 @@ class MainController extends Controller
                 $oUser->username)
         );
         $oMap->generate();
-        $map = $oMap->getMap();
+        $sMap = $oMap->getMap();
         unset($oMap);
 
-        return $map;
+        return $sMap;
     }
 
     /**

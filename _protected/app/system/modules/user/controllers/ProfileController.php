@@ -190,10 +190,10 @@ class ProfileController extends Controller
         $oMap->setZoom(self::ZOOM_MAP_LEVEL);
         $oMap->addMarkerByAddress($sCity . ' ' . $sState . ' ' . t($sCountry), t('Meet %0% near here!', $oUser->username));
         $oMap->generate();
-        $map = $oMap->getMap();
+        $sMap = $oMap->getMap();
         unset($oMap);
 
-        return $map;
+        return $sMap;
     }
 
     /**
