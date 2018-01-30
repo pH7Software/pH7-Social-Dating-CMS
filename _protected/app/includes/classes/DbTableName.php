@@ -39,6 +39,7 @@ class DbTableName
     const COMMENT_VIDEO = 'comments_video';
     const COMMENT_GAME = 'comments_game';
     const COMMENT_PROFILE = 'comments_profile';
+    const FORUM = 'forums';
     const FORUM_CATEGORY = 'forums_categories';
 
     const USER_TABLES = [

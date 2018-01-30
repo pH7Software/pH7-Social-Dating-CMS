@@ -61,7 +61,7 @@ class DataCoreModel extends Model
         $iLimit = (int)$iLimit;
 
         $sSqlQuery = 'SELECT f.name, t.title, t.message, t.createdDate, t.updatedDate, t.forumId, t.topicId, m.username FROM' .
-            Db::prefix('Forums') . 'AS f INNER JOIN' . Db::prefix('ForumsTopics') .
+            Db::prefix(DbTableName::FORUM) . 'AS f INNER JOIN' . Db::prefix('ForumsTopics') .
             'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix(DbTableName::MEMBER) .
             ' AS m ON t.profileId = m.profileId WHERE t.approved = 1 ORDER BY ' . $sOrder . ' DESC LIMIT :offset, :limit';
 
