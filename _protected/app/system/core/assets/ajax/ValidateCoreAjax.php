@@ -120,8 +120,7 @@ class ValidateCoreAjax
      */
     protected function username($sValue, $sTable)
     {
-        // Checks and corrects the table if it is incorrect.
-        if (!in_array($sTable, DbTableName::USER_TABLES, true)) {
+        if (!$this->isDbTableValid($sTable)) {
             $sTable = DbTableName::MEMBER;
         }
 
@@ -143,8 +142,7 @@ class ValidateCoreAjax
      */
     protected function email($sValue, $sParam, $sTable)
     {
-        // Checks and corrects the table if it is incorrect.
-        if (!in_array($sTable, DbTableName::USER_TABLES, true)) {
+        if (!$this->isDbTableValid($sTable)) {
             $sTable = DbTableName::MEMBER;
         }
 
@@ -315,6 +313,16 @@ class ValidateCoreAjax
         } else {
             $this->iStatus = 1;
         }
+    }
+
+    /**
+     * @param string $sTable The table name.
+     *
+     * @return bool
+     */
+    private function isDbTableValid($sTable)
+    {
+        return in_array($sTable, DbTableName::USER_TABLES, true);
     }
 }
 
