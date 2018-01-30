@@ -4,7 +4,7 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
-function display_status(sUrl, sExt) {
+function display_status() {
     var sSelected = 'select#status option:selected';
     var sStatusTitle = $(sSelected).text();
     var iStatusVal = $(sSelected).val();
@@ -13,5 +13,5 @@ function display_status(sUrl, sExt) {
 }
 
 function init_status() {
-    display_status(pH7Url.tplImg + 'icon/', 'png');
+    display_status();
 }
