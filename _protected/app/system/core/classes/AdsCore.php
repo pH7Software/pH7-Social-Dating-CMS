@@ -18,7 +18,7 @@ class AdsCore extends Ads
     const ID_COLUMN_NAME = 'adsId';
 
     const AD_TABLE_NAME = DbTableName::AD;
-    const AFFILIATE_AD_TABLE_NAME = 'AdsAffiliates';
+    const AFFILIATE_AD_TABLE_NAME = DbTableName::AD_AFFILIATE;
 
     const TABLE_NAMES = [
         self::AD_TABLE_NAME,
