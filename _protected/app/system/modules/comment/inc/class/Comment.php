@@ -43,7 +43,7 @@ class Comment extends CommentCore
                 break;
 
             case 'Game':
-                $sNewTable = DbTableName::Game;
+                $sNewTable = DbTableName::GAME;
                 break;
 
             default:

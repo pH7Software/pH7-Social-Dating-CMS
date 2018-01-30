@@ -93,12 +93,12 @@ class MainController extends Controller
             $this->view->meta_keywords = $oGame->keywords . $this->sMetaKeywords;
             $this->view->h2_title = $this->sTitle;
             $this->view->downloads = $this->oGameModel->getDownloadStat($oGame->gameId);
-            $this->view->views = Stat::getView($oGame->gameId, DbTableName::Game);
+            $this->view->views = Stat::getView($oGame->gameId, DbTableName::GAME);
 
             $this->view->game = $oGame;
 
             //Set Game Statistics
-            Stat::setView($oGame->gameId, DbTableName::Game);
+            Stat::setView($oGame->gameId, DbTableName::GAME);
         }
 
         $this->output();

@@ -164,7 +164,7 @@ class Various
                 $sId = 'noteId';
                 break;
 
-            case DbTableName::Game:
+            case DbTableName::GAME:
                 $sId = 'GameId';
                 break;
 
@@ -203,7 +203,7 @@ class Various
             case DbTableName::ALBUM_VIDEO:
             case DbTableName::PICTURE:
             case DbTableName::VIDEO:
-            case DbTableName::Game:
+            case DbTableName::GAME:
             case DbTableName::BLOG:
             case DbTableName::NOTE:
                 return $sTable;

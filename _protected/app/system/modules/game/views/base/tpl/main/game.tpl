@@ -15,7 +15,7 @@
             {lang '%0% was played %1% and download %2% time(s).', '<strong>'.$game->title.'</strong>', '<strong>'.$views.'</strong>', '<strong>'.$downloads.'</strong>'}
         </p>
 
-        {{ RatingDesignCore::voting($game->gameId,DbTableName::Game,'center') }}
+        {{ RatingDesignCore::voting($game->gameId,DbTableName::GAME,'center') }}
         {{ ShareUrlCoreForm::display(Framework\Mvc\Router\Uri::get('game','main','game',"$game->title,$game->gameId")) }}
         {{ ShareEmbedCoreForm::display(PH7_URL_DATA_SYS_MOD . 'game/file/' . $game->file) }}
 
