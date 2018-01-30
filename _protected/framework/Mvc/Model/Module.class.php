@@ -33,7 +33,7 @@ class Module extends Engine\Model
             $sSelect = ($bIsFolderName) ? 'enabled' : '*';
             $sSqlWhere = ($bIsFolderName) ? 'WHERE folderName = :modName LIMIT 1' : '';
 
-            $rStmt = Db::getInstance()->prepare('SELECT ' . $sSelect . ' FROM ' . DB::prefix('SysModsEnabled') . $sSqlWhere);
+            $rStmt = Db::getInstance()->prepare('SELECT ' . $sSelect . ' FROM ' . DB::prefix(DbTableName::SYS_MOD_ENABLED) . $sSqlWhere);
             if ($bIsFolderName) {
                 $rStmt->bindValue(':modName', $sFolderName, \PDO::PARAM_STR);
             }
@@ -56,6 +56,6 @@ class Module extends Engine\Model
      */
     public function update($iId, $sIsEnabled = '1')
     {
-        return $this->orm->update('SysModsEnabled', 'enabled', $sIsEnabled, 'moduleId', $iId);
+        return $this->orm->update(DbTableName::SYS_MOD_ENABLED, 'enabled', $sIsEnabled, 'moduleId', $iId);
     }
 }

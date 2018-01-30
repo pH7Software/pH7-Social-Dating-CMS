@@ -62,6 +62,7 @@ class DbTableName
     const MESSAGE = 'messages';
     const MESSENGER = 'messenger';
     const META_MAIN = 'meta_main';
+    const SYS_MOD_ENABLED = 'sys_mods_enabled';
 
     const USER_TABLES = [
         self::ADMIN,
