@@ -62,7 +62,7 @@ class Various
     {
         switch ($Mod) {
             case 'user':
-                $sTable = 'members';
+                $sTable = DbTableName::MEMBER;
                 break;
 
             case 'affiliate':
@@ -98,15 +98,15 @@ class Various
     public static function convertTableToMod($sTable)
     {
         switch ($sTable) {
-            case 'members':
+            case DbTableName::MEMBER:
                 $sMod = 'user';
                 break;
 
-            case 'Affiliates':
+            case DbTableName::AFFILIATE:
                 $sMod = 'affiliate';
                 break;
 
-            case 'Subscribers':
+            case DbTableName::SUBSCRIBER:
                 $sMod = 'newsletter';
                 break;
 
@@ -135,7 +135,7 @@ class Various
     public static function convertTableToId($sTable)
     {
         switch ($sTable) {
-            case 'members':
+            case DbTableName::MEMBER:
                 $sId = 'profileId';
                 break;
 
@@ -197,7 +197,7 @@ class Various
     public static function checkTable($sTable)
     {
         switch ($sTable) {
-            case 'members':
+            case DbTableName::MEMBER:
             case 'AlbumsPictures':
             case 'AlbumsVideos':
             case 'Pictures':
@@ -230,11 +230,11 @@ class Various
     public static function checkModelTable($sTable)
     {
         switch ($sTable) {
-            case 'members':
-            case 'Affiliates':
-            case 'MembersInfo':
-            case 'AffiliatesInfo':
-            case 'Subscribers':
+            case DbTableName::MEMBER:
+            case DbTableName::AFFILIATE:
+            case DbTableName::MEMBER_INFO:
+            case DbTableName::AFFILIATE_INFO:
+            case DbTableName::SUBSCRIBER:
             case DbTableName::ADMIN:
                 return $sTable;
 
