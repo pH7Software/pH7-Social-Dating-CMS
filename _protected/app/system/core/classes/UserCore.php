@@ -492,11 +492,11 @@ class UserCore
      * Clean UserCoreModel / infoFields Cache
      *
      * @param integer $iId Profile ID.
-     * @param string $sTable Default 'MembersInfo'
+     * @param string $sTable Default DbTableName::MEMBER_INFO
      *
      * @return void
      */
-    public function clearInfoFieldCache($iId, $sTable = 'MembersInfo')
+    public function clearInfoFieldCache($iId, $sTable = DbTableName::MEMBER_INFO)
     {
         $this->clearCache('infoFields', $iId, $sTable);
     }

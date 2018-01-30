@@ -62,7 +62,7 @@ class EditFormProcess extends Form
         foreach ($oFields as $sColumn => $sValue) {
             $sHRParam = ($sColumn == 'description') ? Http::ONLY_XSS_CLEAN : null;
             if (!$this->str->equals($this->httpRequest->post($sColumn, $sHRParam), $sValue)) {
-                $oUserModel->updateProfile($sColumn, $this->httpRequest->post($sColumn, $sHRParam), $iProfileId, 'MembersInfo');
+                $oUserModel->updateProfile($sColumn, $this->httpRequest->post($sColumn, $sHRParam), $iProfileId, DbTableName::MEMBER_INFO);
             }
         }
         unset($oFields);
