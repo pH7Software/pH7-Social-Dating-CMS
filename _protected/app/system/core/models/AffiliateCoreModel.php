@@ -36,7 +36,7 @@ class AffiliateCoreModel extends AdminCoreModel
      * Get the Affiliated Id of a User.
      *
      * @param int $iProfileId
-     * @param string $sTable DbTableName::MEMBER, DbTableName::AFFILIATE or 'Subscribers'. Default DbTableName::MEMBER
+     * @param string $sTable DbTableName::MEMBER, DbTableName::AFFILIATE or DbTableName::SUBSCRIBER. Default DbTableName::MEMBER
      *
      * @return int The Affiliated ID
      */

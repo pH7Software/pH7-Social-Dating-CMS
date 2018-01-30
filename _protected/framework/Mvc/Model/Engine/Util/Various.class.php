@@ -71,7 +71,7 @@ class Various
                 break;
 
             case 'newsletter':
-                $sTable = 'Subscribers';
+                $sTable = DbTableName::SUBSCRIBER;
                 break;
 
             case PH7_ADMIN_MOD:
