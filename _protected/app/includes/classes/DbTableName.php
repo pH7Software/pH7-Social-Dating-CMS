@@ -69,6 +69,7 @@ class DbTableName
     const STATIC_FILE = 'static_files';
     const LICENSE = 'license';
     const CUSTOM_CODE = 'custom_code';
+    const GAME = 'games';
 
 
     const USER_TABLES = [

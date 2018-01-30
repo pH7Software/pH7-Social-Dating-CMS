@@ -35,7 +35,7 @@ class GameCoreModel extends Model
         $sOrderBy = SearchCoreModel::order($sOrder, SearchCoreModel::DESC);
 
         $sSqlGameId = ($bIsTitle && $bIsGameId) ? ' WHERE title LIKE :title AND gameId =:gameId ' : '';
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Games') . $sSqlGameId . $sOrderBy . 'LIMIT :offset, :limit');
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::Game) . $sSqlGameId . $sOrderBy . 'LIMIT :offset, :limit');
         if ($bIsTitle) {
             $rStmt->bindValue(':title', $sTitle . '%', \PDO::PARAM_STR);
         }
