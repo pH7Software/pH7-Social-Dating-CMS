@@ -8,6 +8,8 @@
 
 namespace PH7\Framework\Mvc\Model;
 
+use PH7\DbTableName;
+
 defined('PH7') or exit('Restricted access');
 
 class License extends Engine\Model
