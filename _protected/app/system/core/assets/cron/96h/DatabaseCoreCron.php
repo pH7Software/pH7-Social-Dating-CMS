@@ -177,7 +177,7 @@ class DatabaseCoreCron extends Cron
         if ($iCleanComment > 0) {
             $aCommentMod = ['Blog', 'Note', 'Picture', 'Video', 'Game', 'Profile'];
             foreach ($aCommentMod as $sSuffixTable) {
-                if ($iRow = ($this->pruningDb($iCleanComment, 'Comments' . $sSuffixTable, 'updatedDate') > 0)) {
+                if ($iRow = ($this->pruningDb($iCleanComment, 'comments_' . $sSuffixTable, 'updatedDate') > 0)) {
                     echo t('Deleted %0% %1% comment(s) ... OK!', $iRow, $sSuffixTable) . '<br />';
                 }
             }
@@ -207,7 +207,7 @@ class DatabaseCoreCron extends Cron
      */
     protected function pruningDb($iOlderThanXDay, $sTable, $sDateColumn)
     {
-        if (strstr($sTable, 'Comments') === false &&
+        if (strstr($sTable, 'comments_') === false &&
             $sTable !== 'Messages' && $sTable !== 'Messenger') {
             DbVarious::launchErr($sTable);
         }

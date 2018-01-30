@@ -132,32 +132,32 @@ class StatisticCoreModel extends StatisticModel
 
     public function totalProfileComments($iDay = 0)
     {
-        return $this->totalComments('Profile', $iDay);
+        return $this->totalComments('profile', $iDay);
     }
 
     public function totalPictureComments($iDay = 0)
     {
-        return $this->totalComments('Picture', $iDay);
+        return $this->totalComments('picture', $iDay);
     }
 
     public function totalVideoComments($iDay = 0)
     {
-        return $this->totalComments('Video', $iDay);
+        return $this->totalComments('video', $iDay);
     }
 
     public function totalBlogComments($iDay = 0)
     {
-        return $this->totalComments('Blog', $iDay);
+        return $this->totalComments('blog', $iDay);
     }
 
     public function totalNoteComments($iDay = 0)
     {
-        return $this->totalComments('Note', $iDay);
+        return $this->totalComments('note', $iDay);
     }
 
     public function totalGameComments($iDay = 0)
     {
-        return $this->totalComments('Game', $iDay);
+        return $this->totalComments('game', $iDay);
     }
 
     /**
@@ -173,7 +173,7 @@ class StatisticCoreModel extends StatisticModel
 
         $sSqlDay = ($iDay > 0) ? ' WHERE (createdDate + INTERVAL ' . $iDay . ' DAY) > NOW()' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(commentId) AS totalComments FROM' . Db::prefix('Comments' . $sTable) . $sSqlDay);
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(commentId) AS totalComments FROM' . Db::prefix('comments_' . $sTable) . $sSqlDay);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
 
