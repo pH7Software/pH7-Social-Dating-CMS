@@ -8,7 +8,7 @@
 
 namespace PH7;
 
-class DbTableNameName
+class DbTableName
 {
     const ADMIN = 'admins';
 
