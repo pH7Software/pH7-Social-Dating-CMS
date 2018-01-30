@@ -14,7 +14,7 @@ class ModeratorCoreModel extends AdminCoreModel
 {
     public function totalPictureAlbums()
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(albumId) AS totalAlbums FROM' . Db::prefix('AlbumsPictures') . 'WHERE approved = \'0\'');
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(albumId) AS totalAlbums FROM' . Db::prefix(DbTableName::ALBUM_PICTURE) . 'WHERE approved = \'0\'');
         $rStmt->execute();
         $iTotalAlbums = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
@@ -24,7 +24,7 @@ class ModeratorCoreModel extends AdminCoreModel
 
     public function totalPictures()
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(pictureId) AS totalPictures FROM' . Db::prefix('Pictures') . 'WHERE approved = \'0\'');
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(pictureId) AS totalPictures FROM' . Db::prefix(DbTableName::PICTURE) . 'WHERE approved = \'0\'');
         $rStmt->execute();
         $iTotalPictures = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
@@ -34,7 +34,7 @@ class ModeratorCoreModel extends AdminCoreModel
 
     public function totalVideoAlbums()
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(albumId) AS totalAlbums FROM' . Db::prefix('AlbumsVideos') . 'WHERE approved = \'0\'');
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(albumId) AS totalAlbums FROM' . Db::prefix(DbTableName::ALBUM_VIDEO) . 'WHERE approved = \'0\'');
         $rStmt->execute();
         $iTotalAlbums = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
@@ -44,7 +44,7 @@ class ModeratorCoreModel extends AdminCoreModel
 
     public function totalVideos()
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(videoId) AS totalVideos FROM' . Db::prefix('Videos') . 'WHERE approved = \'0\'');
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(videoId) AS totalVideos FROM' . Db::prefix(DbTableName::VIDEO) . 'WHERE approved = \'0\'');
         $rStmt->execute();
         $iTotalVideos = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
@@ -54,7 +54,7 @@ class ModeratorCoreModel extends AdminCoreModel
 
     public function totalAvatars()
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(avatar) AS totalAvatars FROM' . Db::prefix('Members') . 'WHERE approvedAvatar = \'0\'');
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(avatar) AS totalAvatars FROM' . Db::prefix(DbTableName::MEMBER) . 'WHERE approvedAvatar = \'0\'');
         $rStmt->execute();
         $iTotalAvatars = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
@@ -64,7 +64,7 @@ class ModeratorCoreModel extends AdminCoreModel
 
     public function totalBackgrounds()
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(file) AS totalBackgrounds FROM' . Db::prefix('MembersBackground') . 'WHERE approved = \'0\'');
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(file) AS totalBackgrounds FROM' . Db::prefix(DbTableName::MEMBER_BACKGROUND) . 'WHERE approved = \'0\'');
         $rStmt->execute();
         $iTotalBackgrounds = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
@@ -74,7 +74,7 @@ class ModeratorCoreModel extends AdminCoreModel
 
     public function totalNotes()
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(noteId) AS totalNotes FROM' . Db::prefix('Notes') . 'WHERE approved = \'0\'');
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(noteId) AS totalNotes FROM' . Db::prefix(DbTableName::NOTE) . 'WHERE approved = \'0\'');
         $rStmt->execute();
         $iTotalNotes = (int)$rStmt->fetchColumn();
         Db::free($rStmt);

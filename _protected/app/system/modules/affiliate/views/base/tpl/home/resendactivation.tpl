@@ -4,7 +4,7 @@
         {lang}It must be the same email address you gave us when you became a member.{/lang}
     </p>
 
-    {{ ResendActivationCoreForm::display('Affiliates') }}
+    {{ ResendActivationCoreForm::display(DbTableName::AFFILIATE) }}
 
     <p>
         {lang}After you click the "Send Activation" button, the account activation email will be sent to you, using this email address.{/lang}<br />

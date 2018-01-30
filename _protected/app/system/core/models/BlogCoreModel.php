@@ -36,7 +36,7 @@ class BlogCoreModel extends Model
 
             $sOrderBy = SearchCoreModel::order($sOrder, SearchCoreModel::DESC);
 
-            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Blogs') . $sOrderBy . 'LIMIT :offset, :limit');
+            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::BLOG) . $sOrderBy . 'LIMIT :offset, :limit');
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
             $rStmt->execute();
@@ -63,7 +63,7 @@ class BlogCoreModel extends Model
             $iDay = (int)$iDay;
             $sSqlDay = ($iDay > 0) ? ' WHERE (createdDate + INTERVAL ' . $iDay . ' DAY) > NOW()' : '';
 
-            $rStmt = Db::getInstance()->prepare('SELECT COUNT(postId) AS totalPosts FROM' . Db::prefix('Blogs') . $sSqlDay);
+            $rStmt = Db::getInstance()->prepare('SELECT COUNT(postId) AS totalPosts FROM' . Db::prefix(DbTableName::BLOG) . $sSqlDay);
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);

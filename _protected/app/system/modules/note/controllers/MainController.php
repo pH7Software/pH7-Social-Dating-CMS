@@ -112,7 +112,7 @@ class MainController extends Controller
                 $this->view->assigns($aVars);
 
                 // Set Notes Post Views Statistics
-                Statistic::setView($oPost->noteId, 'Notes');
+                Statistic::setView($oPost->noteId, DbTableName::NOTE);
             } else {
                 $this->sTitle = t('No Note Found.');
                 $this->notFound();

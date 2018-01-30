@@ -15,6 +15,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\AdminCore;
 use PH7\AffiliateCore;
+use PH7\DbTableName;
 use PH7\Framework\Benchmark\Benchmark;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Core\Kernel;
@@ -620,7 +621,7 @@ class Design
 
             if (!is_file($sPath) || $oGetAvatar->approvedAvatar == '0') {
                 /* If sex is empty, it is recovered in the database using information from member */
-                $sSex = !empty($sSex) ? $sSex : $oUserModel->getSex(null, $sUsername, 'Members');
+                $sSex = !empty($sSex) ? $sSex : $oUserModel->getSex(null, $sUsername, DbTableName::MEMBER);
                 $sSex = $this->oStr->lower($sSex);
                 $sIcon = ($sSex === 'male' || $sSex === 'female' || $sSex === 'couple' || $sSex === PH7_ADMIN_USERNAME) ? $sSex : 'visitor';
                 $sUrlTplName = defined('PH7_TPL_NAME') ? PH7_TPL_NAME : PH7_DEFAULT_THEME;
@@ -741,14 +742,14 @@ class Design
         $sLikeId = ($bIsLogged) ? ' id="like"' : '';
 
         $sUrlKey = empty($sForceUrlKey) ? $this->oHttpRequest->currentUrl() : $sForceUrlKey;
-        echo '<a rel="nofollow" href="', $sLikeLink, '" data-key="', $sUrlKey, '" title="', t('Like %0%', $sFirstName), '" class="like"', $sLikeId, '>', t('Like %0%', $sFirstName), '</a>';
+        echo '<a rel="nofollow" href="', $sLikeLink, '" data-key="', $sUrlKey, '" title="', t('Like %0%', $sFirstName), '" class="like smooth-pink"', $sLikeId, '>', t('Like %0%', $sFirstName), '</a>';
         $this->staticFiles('js', PH7_STATIC . PH7_JS, 'Like.js');
     }
 
     /**
      * Add Normal size Social Media Widgets.
      *
-     * @internal AddThis JS file will be included through 'pH7_StaticFiles' table.
+     * @internal AddThis JS file will be included through 'ph7_static_files' table.
      *
      * @return void HTML output.
      */
@@ -762,7 +763,7 @@ class Design
     /**
      * Add Small size Social Media Widgets.
      *
-     * @internal AddThis JS file will be included through 'pH7_StaticFiles' table.
+     * @internal AddThis JS file will be included through 'ph7_static_files' table.
      *
      * @return void HTML output.
      */
@@ -816,9 +817,9 @@ class Design
                 $sReportLink = Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aUrlParams), false);
             }
 
-            echo '<a rel="nofollow" href="', $sReportLink, '" title="', t('Report Abuse'), '">', t('Report'), '</a>';
+            echo '<a rel="nofollow" href="', $sReportLink, '" title="', t('Report Abuse'), '"><i class="fa fa-flag smooth-pink"></i></a>';
         } else {
-            echo '<abbr title="' . t('Report feature is not available for this content since the user who posted that content has been deleted.') . '"">' . t('Report') . '</abbr>';
+            echo '<abbr title="' . t('Report feature is not available for this content since the user who posted that content has been deleted.') . '""><i class="fa fa-flag smooth-pink"></i></abbr>';
         }
     }
 

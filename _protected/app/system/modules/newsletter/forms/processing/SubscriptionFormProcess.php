@@ -27,7 +27,7 @@ class SubscriptionFormProcess extends Form
         $oSubscriptionModel = new SubscriptionModel;
         $sEmail = $this->httpRequest->post('email');
         $sName = $this->httpRequest->post('name');
-        $bIsSubscriber = (new ExistsCoreModel)->email($sEmail, 'Subscribers');
+        $bIsSubscriber = (new ExistsCoreModel)->email($sEmail, DbTableName::SUBSCRIBER);
 
         switch ($this->httpRequest->post('direction')) {
             case 'subscrire': {

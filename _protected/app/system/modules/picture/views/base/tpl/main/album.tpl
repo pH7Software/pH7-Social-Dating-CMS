@@ -1,7 +1,7 @@
 {if empty($error)}
     {each $a in $album}
         {* Set Picture Album Statistics *}
-        {{ Framework\Analytics\Statistic::setView($a->albumId, 'AlbumsPictures') }}
+        {{ Framework\Analytics\Statistic::setView($a->albumId, DbTableName::ALBUM_PICTURE) }}
         <div class="m_photo center">
             {{ $absolute_url = Framework\Mvc\Router\Uri::get('picture','main','photo',"$a->username,$a->albumId,$a->title,$a->pictureId") }}
 
@@ -19,7 +19,7 @@
                 </div>
             {/if}
             <p>
-                {{ RatingDesignCore::voting($a->pictureId,'Pictures') }}
+                {{ RatingDesignCore::voting($a->pictureId,DbTableName::PICTURE) }}
                 {{ $design->like($a->username,$a->firstName,$a->sex,$absolute_url) }} | {{ $design->report($a->profileId, $a->username, $a->firstName, $a->sex) }}
             </p>
         </div>

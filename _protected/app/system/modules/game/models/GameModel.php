@@ -28,11 +28,11 @@ class GameModel extends GameCoreModel
             $bIsCategoryId = $iCategoryId !== null;
 
             if ($bCount) {
-                $sSql = 'SELECT c.*, COUNT(g.gameId) AS totalCatGames FROM' . Db::prefix('GamesCategories') . 'AS c INNER JOIN' . Db::prefix('Games') . 'AS g
+                $sSql = 'SELECT c.*, COUNT(g.gameId) AS totalCatGames FROM' . Db::prefix(DbTableName::GAME_CATEGORY) . 'AS c INNER JOIN' . Db::prefix(DbTableName::GAME) . 'AS g
                 ON c.categoryId = g.categoryId GROUP BY c.name ASC LIMIT :offset, :limit';
             } else {
                 $sSqlCategoryId = $bIsCategoryId ? ' WHERE categoryId = :categoryId ' : ' ';
-                $sSql = 'SELECT * FROM' . Db::prefix('GamesCategories') . $sSqlCategoryId . 'ORDER BY name ASC LIMIT :offset, :limit';
+                $sSql = 'SELECT * FROM' . Db::prefix(DbTableName::GAME_CATEGORY) . $sSqlCategoryId . 'ORDER BY name ASC LIMIT :offset, :limit';
             }
 
             $rStmt = Db::getInstance()->prepare($sSql);
@@ -73,7 +73,7 @@ class GameModel extends GameCoreModel
         $sSqlSelect = (!$bCount) ? 'g.*, c.*' : 'COUNT(g.gameId) AS totalGames';
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Games') . 'AS g LEFT JOIN ' . Db::prefix('GamesCategories') . 'AS c ON g.categoryId = c.categoryId
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::GAME) . 'AS g LEFT JOIN ' . Db::prefix(DbTableName::GAME_CATEGORY) . 'AS c ON g.categoryId = c.categoryId
         WHERE c.name LIKE :name' . $sSqlOrder . $sSqlLimit);
 
         $rStmt->bindValue(':name', '%' . $sCategoryName . '%', \PDO::PARAM_STR);
@@ -108,7 +108,7 @@ class GameModel extends GameCoreModel
         $this->cache->start(static::CACHE_GROUP, 'file' . $iGameId, static::CACHE_TIME);
 
         if (!$sData = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT file FROM' . Db::prefix('Games') . 'WHERE gameId = :gameId LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT file FROM' . Db::prefix(DbTableName::GAME) . 'WHERE gameId = :gameId LIMIT 1');
             $rStmt->bindValue(':gameId', $iGameId, \PDO::PARAM_INT);
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -150,7 +150,7 @@ class GameModel extends GameCoreModel
 
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Games') . $sSqlWhere . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::GAME) . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         if (ctype_digit($mLooking)) {
             $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
@@ -183,7 +183,7 @@ class GameModel extends GameCoreModel
         $this->cache->start(static::CACHE_GROUP, 'totalGames', static::CACHE_TIME);
 
         if (!$sData = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT COUNT(gameId) AS totalGames FROM' . Db::prefix('Games'));
+            $rStmt = Db::getInstance()->prepare('SELECT COUNT(gameId) AS totalGames FROM' . Db::prefix(DbTableName::GAME));
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
@@ -204,7 +204,7 @@ class GameModel extends GameCoreModel
      */
     public function setDownloadStat($iId)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Games') . 'SET downloads = downloads+1 WHERE gameId = :id LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::GAME) . 'SET downloads = downloads+1 WHERE gameId = :id LIMIT 1');
         $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
         $rStmt->execute();
         Db::free($rStmt);
@@ -220,7 +220,7 @@ class GameModel extends GameCoreModel
      */
     public function getDownloadStat($iId)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT downloads FROM' . Db::prefix('Games') . 'WHERE gameId = :id LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('SELECT downloads FROM' . Db::prefix(DbTableName::GAME) . 'WHERE gameId = :id LIMIT 1');
         $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -231,7 +231,7 @@ class GameModel extends GameCoreModel
 
     public function add(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Games') . '(categoryId, name, title, description, keywords, thumb, file) VALUES(:categoryId, :name, :title, :description, :keywords, :thumb, :file)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::GAME) . '(categoryId, name, title, description, keywords, thumb, file) VALUES(:categoryId, :name, :title, :description, :keywords, :thumb, :file)');
         $rStmt->bindValue(':categoryId', $aData['category_id'], \PDO::PARAM_INT);
         $rStmt->bindValue(':name', $aData['name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':title', $aData['title'], \PDO::PARAM_STR);
@@ -245,7 +245,7 @@ class GameModel extends GameCoreModel
 
     public function update(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Games') . 'SET categoryId = :categoryId, name = :name, title = :title, description = :description, keywords = :keywords WHERE gameId = :id LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::GAME) . 'SET categoryId = :categoryId, name = :name, title = :title, description = :description, keywords = :keywords WHERE gameId = :id LIMIT 1');
         $rStmt->bindValue(':id', $aData['id'], \PDO::PARAM_INT);
         $rStmt->bindValue(':categoryId', $aData['category_id'], \PDO::PARAM_INT);
         $rStmt->bindValue(':name', $aData['name'], \PDO::PARAM_STR);
@@ -258,7 +258,7 @@ class GameModel extends GameCoreModel
 
     public function delete($iId)
     {
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Games') . 'WHERE gameId = :id LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::GAME) . 'WHERE gameId = :id LIMIT 1');
         $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
 
         return $rStmt->execute();

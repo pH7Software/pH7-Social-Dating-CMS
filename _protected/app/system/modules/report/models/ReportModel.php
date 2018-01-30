@@ -22,7 +22,7 @@ class ReportModel extends ReportCoreModel
      */
     public function add(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT count(reportId) FROM' . Db::prefix('Report') .
+        $rStmt = Db::getInstance()->prepare('SELECT count(reportId) FROM' . Db::prefix(DbTableName::REPORT) .
             'WHERE reporterId = :reporterId AND spammerId = :spammerId AND url = :url AND contentType = :type');
 
         $rStmt->bindValue(':reporterId', $aData['reporter_id'], PDO::PARAM_INT);
@@ -34,7 +34,7 @@ class ReportModel extends ReportCoreModel
         if ($rStmt->fetchColumn() > 0) {
             return 'already_reported';
         } else {
-            $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Report') .
+            $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::REPORT) .
                 '(reporterId, spammerId, url, contentType, description, dateTime)
             VALUES (:reporterId, :spammerId, :url, :type, :desc, :time)');
 
@@ -62,7 +62,7 @@ class ReportModel extends ReportCoreModel
         $iLimit = (int)$iLimit;
 
         $sSqlId = (!empty($iId)) ? ' WHERE reportId = :id ' : ' ';
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Report') . $sSqlId . 'LIMIT :offset, :limit');
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::REPORT) . $sSqlId . 'LIMIT :offset, :limit');
         if (!empty($iId)) {
             $rStmt->bindValue(':id', $iId, PDO::PARAM_INT);
         }
@@ -80,7 +80,7 @@ class ReportModel extends ReportCoreModel
      */
     public function delete($iReportId)
     {
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Report') . 'WHERE reportId = :reportId LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::REPORT) . 'WHERE reportId = :reportId LIMIT 1');
         $rStmt->bindValue(':reportId', $iReportId, PDO::PARAM_INT);
 
         return $rStmt->execute();

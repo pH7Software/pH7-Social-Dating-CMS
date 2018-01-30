@@ -13,6 +13,7 @@ namespace PH7\Framework\Mvc\Model;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\DbTableName;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Mvc\Model\Engine\Db;
 
@@ -33,7 +34,7 @@ class Lang
 
         if (!$oData = $oCache->get()) {
             $sSqlWhere = ($bOnlyActive) ? 'WHERE active=\'1\'' : '';
-            $rStmt = Db::getInstance()->prepare('SELECT * FROM ' . DB::prefix('LanguagesInfo') . $sSqlWhere . ' ORDER BY name ASC');
+            $rStmt = Db::getInstance()->prepare('SELECT * FROM ' . DB::prefix(DbTableName::LANGUAGE_INFO) . $sSqlWhere . ' ORDER BY name ASC');
             $rStmt->execute();
             $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);

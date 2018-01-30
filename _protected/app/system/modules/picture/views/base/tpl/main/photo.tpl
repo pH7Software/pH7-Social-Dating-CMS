@@ -9,7 +9,7 @@
 
         <p>{% nl2br(Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($picture->description))) %}</p>
         <p class="italic">{lang 'Album created on %0%.', $picture->createdDate} {if !empty($picture->updatedDate)} <br />{lang 'Modified on %0%.', $picture->updatedDate} {/if}</p>
-        <p class="italic">{lang 'Views:'} {% Framework\Mvc\Model\Statistic::getView($picture->pictureId,'Pictures') %}</p>
+        <p class="italic">{lang 'Views:'} {% Framework\Mvc\Model\Statistic::getView($picture->pictureId,DbTableName::PICTURE) %}</p>
 
         {if $is_user_auth AND $member_id == $picture->profileId}
             <div class="small">
@@ -19,7 +19,7 @@
         {/if}
 
         {{ ShareUrlCoreForm::display(Framework\Mvc\Router\Uri::get('picture','main','photo',"$picture->username,$picture->albumId,$picture->title,$picture->pictureId")) }}
-        {{ RatingDesignCore::voting($picture->pictureId,'Pictures','center') }}
+        {{ RatingDesignCore::voting($picture->pictureId,DbTableName::PICTURE,'center') }}
         {{ CommentDesignCore::link($picture->pictureId, 'Picture') }}
 
         <p class="center">

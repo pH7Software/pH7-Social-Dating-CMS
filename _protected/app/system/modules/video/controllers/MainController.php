@@ -181,7 +181,7 @@ class MainController extends Controller
             $this->view->video = $oVideo;
 
             //Set Video Statistics
-            Statistic::setView($oVideo->videoId, 'Videos');
+            Statistic::setView($oVideo->videoId, DbTableName::VIDEO);
         }
 
         $this->output();

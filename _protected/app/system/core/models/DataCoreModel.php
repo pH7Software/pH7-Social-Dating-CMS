@@ -13,8 +13,8 @@ use PH7\Framework\Mvc\Model\Engine\Model;
 
 class DataCoreModel extends Model
 {
-    const TB_PICTURE = 'Pictures';
-    const TB_VIDEO = 'Videos';
+    const TB_PICTURE = DbTableName::PICTURE;
+    const TB_VIDEO = DbTableName::VIDEO;
     const MAX_ITEMS = 1000;
 
     /**
@@ -34,7 +34,7 @@ class DataCoreModel extends Model
 
 
         $sSqlQuery = 'SELECT data.*, m.username FROM' . Db::prefix($sTable) . 'AS data INNER JOIN' .
-            Db::prefix('Members') . 'AS m ON data.profileId = m.profileId WHERE data.approved=1 ORDER BY ' .
+            Db::prefix(DbTableName::MEMBER) . 'AS m ON data.profileId = m.profileId WHERE data.approved = 1 ORDER BY ' .
             $sOrder . ' DESC LIMIT :offset, :limit';
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
@@ -61,9 +61,9 @@ class DataCoreModel extends Model
         $iLimit = (int)$iLimit;
 
         $sSqlQuery = 'SELECT f.name, t.title, t.message, t.createdDate, t.updatedDate, t.forumId, t.topicId, m.username FROM' .
-            Db::prefix('Forums') . 'AS f INNER JOIN' . Db::prefix('ForumsTopics') .
-            'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix('Members') .
-            ' AS m ON t.profileId = m.profileId WHERE t.approved=1 ORDER BY ' . $sOrder . ' DESC LIMIT :offset, :limit';
+            Db::prefix(DbTableName::FORUM) . 'AS f INNER JOIN' . Db::prefix(DbTableName::FORUM_TOPIC) .
+            'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix(DbTableName::MEMBER) .
+            ' AS m ON t.profileId = m.profileId WHERE t.approved = 1 ORDER BY ' . $sOrder . ' DESC LIMIT :offset, :limit';
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);

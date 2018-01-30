@@ -42,8 +42,8 @@ class VideoCoreModel extends Model
             $sSqlProfileId = $bIsProfileId ? ' a.profileId = :profileId AND ' : '';
             $sSqlAlbum = $bIsAlbumId ? ' a.albumId=:albumId AND ' : '';
 
-            $sSqlQuery = 'SELECT a.*, m.username, m.firstName, m.sex FROM' . Db::prefix('AlbumsVideos') .
-                'AS a INNER JOIN' . Db::prefix('Members') . 'AS m ON a.profileId = m.profileId WHERE' .
+            $sSqlQuery = 'SELECT a.*, m.username, m.firstName, m.sex FROM' . Db::prefix(DbTableName::ALBUM_VIDEO) .
+                'AS a INNER JOIN' . Db::prefix(DbTableName::MEMBER) . 'AS m ON a.profileId = m.profileId WHERE' .
                 $sSqlProfileId . $sSqlAlbum . ' a.approved=:approved ORDER BY ' .
                 $sOrder . ' DESC LIMIT :offset, :limit';
 
@@ -80,7 +80,7 @@ class VideoCoreModel extends Model
         $bVideoId = $iVideoId !== null;
 
         $sSqlVideoId = $bVideoId ? ' AND videoId=:videoId ' : '';
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Videos') . 'WHERE profileId=:profileId AND albumId=:albumId' . $sSqlVideoId);
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::VIDEO) . 'WHERE profileId=:profileId AND albumId=:albumId' . $sSqlVideoId);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
         if ($bVideoId) {

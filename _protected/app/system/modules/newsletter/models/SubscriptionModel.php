@@ -19,7 +19,7 @@ class SubscriptionModel extends UserCoreModel
      */
     public function getSubscribers()
     {
-        $rStmt = Db::getInstance()->prepare('SELECT email, name AS firstName FROM' . Db::prefix('Subscribers') . 'WHERE active = 1');
+        $rStmt = Db::getInstance()->prepare('SELECT email, name AS firstName FROM' . Db::prefix(DbTableName::SUBSCRIBER) . 'WHERE active = 1');
         $rStmt->execute();
         $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);
@@ -36,7 +36,7 @@ class SubscriptionModel extends UserCoreModel
      */
     public function add(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Subscribers') . '(name, email, joinDate, ip, hashValidation, active, affiliatedId)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::SUBSCRIBER) . '(name, email, joinDate, ip, hashValidation, active, affiliatedId)
             VALUES (:name, :email, :joinDate, :ip, :hashValidation, :active, :affiliatedId)');
 
         $rStmt->bindValue(':name', $aData['name'], \PDO::PARAM_STR);
@@ -60,7 +60,7 @@ class SubscriptionModel extends UserCoreModel
      */
     public function unsubscribe($sEmail)
     {
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Subscribers') . 'WHERE email = :email LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::SUBSCRIBER) . 'WHERE email = :email LIMIT 1');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
 
         return $rStmt->execute();
@@ -90,7 +90,7 @@ class SubscriptionModel extends UserCoreModel
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE profileId = :looking' : ' WHERE name LIKE :looking OR email LIKE :looking OR ip LIKE :looking';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Subscribers') . $sSqlWhere . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::SUBSCRIBER) . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 

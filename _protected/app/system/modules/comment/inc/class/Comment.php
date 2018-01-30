@@ -23,27 +23,27 @@ class Comment extends CommentCore
     {
         switch ($sTable) {
             case 'Profile':
-                $sNewTable = 'Members';
+                $sNewTable = DbTableName::MEMBER;
                 break;
 
             case 'Picture':
-                $sNewTable = 'Pictures';
+                $sNewTable = DbTableName::PICTURE;
                 break;
 
             case 'Video':
-                $sNewTable = 'Videos';
+                $sNewTable = DbTableName::VIDEO;
                 break;
 
             case 'Blog':
-                $sNewTable = 'Blogs';
+                $sNewTable = DbTableName::BLOG;
                 break;
 
             case 'Note':
-                $sNewTable = 'Notes';
+                $sNewTable = DbTableName::NOTE;
                 break;
 
             case 'Game':
-                $sNewTable = 'Games';
+                $sNewTable = DbTableName::GAME;
                 break;
 
             default:
