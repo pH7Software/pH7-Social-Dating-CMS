@@ -46,7 +46,7 @@ class LoginFormProcess extends Form implements LoginableForm
         $iMaxAttempts = (int)DbConfig::getSetting('maxAdminLoginAttempts');
         $iTimeDelay = (int)DbConfig::getSetting('loginAdminAttemptTime');
 
-        if ($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view, 'Admins')) {
+        if ($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view, 'admins')) {
             \PFBC\Form::setError('form_admin_login', Form::loginAttemptsExceededMsg($iTimeDelay));
             return; // Stop execution of the method.
         }
@@ -60,10 +60,10 @@ class LoginFormProcess extends Form implements LoginableForm
             $this->preventBruteForce(self::BRUTE_FORCE_SLEEP_DELAY);
 
             if (!$bIsLogged) {
-                $oSecurityModel->addLoginLog($sEmail, $sUsername, $sPassword, 'Failed! Incorrect Email, Username or Password', 'Admins');
+                $oSecurityModel->addLoginLog($sEmail, $sUsername, $sPassword, 'Failed! Incorrect Email, Username or Password', 'admins');
 
                 if ($bIsLoginAttempt) {
-                    $oSecurityModel->addLoginAttempt('Admins');
+                    $oSecurityModel->addLoginAttempt('admins');
                 }
 
                 $this->enableCaptcha();
@@ -71,13 +71,13 @@ class LoginFormProcess extends Form implements LoginableForm
             } elseif ($bIpNotAllowed) {
                 $this->enableCaptcha();
                 \PFBC\Form::setError('form_admin_login', t('Incorrect Login!'));
-                $oSecurityModel->addLoginLog($sEmail, $sUsername, $sPassword, 'Failed! Wrong IP address', 'Admins');
+                $oSecurityModel->addLoginLog($sEmail, $sUsername, $sPassword, 'Failed! Wrong IP address', 'admins');
             }
         } else {
-            $oSecurityModel->clearLoginAttempts('Admins');
+            $oSecurityModel->clearLoginAttempts('admins');
             $this->session->remove('captcha_admin_enabled');
-            $iId = $this->oAdminModel->getId($sEmail, null, 'Admins');
-            $oAdminData = $this->oAdminModel->readProfile($iId, 'Admins');
+            $iId = $this->oAdminModel->getId($sEmail, null, 'admins');
+            $oAdminData = $this->oAdminModel->readProfile($iId, 'admins');
 
             $this->updatePwdHashIfNeeded($sPassword, $oAdminData->password, $sEmail);
 
@@ -101,7 +101,7 @@ class LoginFormProcess extends Form implements LoginableForm
     public function updatePwdHashIfNeeded($sPassword, $sUserPasswordHash, $sEmail)
     {
         if ($sNewPwdHash = Security::pwdNeedsRehash($sPassword, $sUserPasswordHash)) {
-            $this->oAdminModel->changePassword($sEmail, $sNewPwdHash, 'Admins');
+            $this->oAdminModel->changePassword($sEmail, $sNewPwdHash, 'admins');
         }
     }
 

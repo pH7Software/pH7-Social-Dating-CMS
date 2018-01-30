@@ -74,7 +74,7 @@ class Various
                 break;
 
             case PH7_ADMIN_MOD:
-                $sTable = 'Admins';
+                $sTable = 'admins';
                 break;
 
             default:
@@ -110,7 +110,7 @@ class Various
                 $sMod = 'newsletter';
                 break;
 
-            case 'Admins':
+            case 'admins':
                 $sMod = PH7_ADMIN_MOD;
                 break;
 
@@ -235,7 +235,7 @@ class Various
             case 'MembersInfo':
             case 'AffiliatesInfo':
             case 'Subscribers':
-            case 'Admins':
+            case 'admins':
                 return $sTable;
 
             default:

@@ -26,7 +26,7 @@ class EditFormProcess extends Form
         $oAdminModel = new AdminModel;
 
         $iProfileId = $this->getProfileId();
-        $oAdmin = $oAdminModel->readProfile($iProfileId, 'Admins');
+        $oAdmin = $oAdminModel->readProfile($iProfileId, 'admins');
 
         if (!$this->str->equals($this->httpRequest->post('username'), $oAdmin->username)) {
             $iMinUsernameLength = DbConfig::getSetting('minUsernameLength');
@@ -36,10 +36,10 @@ class EditFormProcess extends Form
                 \PFBC\Form::setError('form_admin_edit_account', t('Your username has to contain from %0% to %1% characters, your username is not available or your username already used by other admin.', $iMinUsernameLength, $iMaxUsernameLength));
                 $this->bIsErr = true;
             } else {
-                $oAdminModel->updateProfile('username', $this->httpRequest->post('username'), $iProfileId, 'Admins');
+                $oAdminModel->updateProfile('username', $this->httpRequest->post('username'), $iProfileId, 'admins');
                 $this->session->set('admin_username', $this->httpRequest->post('username'));
 
-                (new Cache)->start(UserCoreModel::CACHE_GROUP, 'username' . $iProfileId . 'Admins', null)->clear();
+                (new Cache)->start(UserCoreModel::CACHE_GROUP, 'username' . $iProfileId . 'admins', null)->clear();
             }
         }
 
@@ -48,37 +48,37 @@ class EditFormProcess extends Form
                 \PFBC\Form::setError('form_admin_edit_account', t('Invalid email address or this email is already used by another admin.'));
                 $this->bIsErr = true;
             } else {
-                $oAdminModel->updateProfile('email', $this->httpRequest->post('mail'), $iProfileId, 'Admins');
+                $oAdminModel->updateProfile('email', $this->httpRequest->post('mail'), $iProfileId, 'admins');
                 $this->session->set('admin_email', $this->httpRequest->post('mail'));
             }
         }
 
         if (!$this->str->equals($this->httpRequest->post('first_name'), $oAdmin->firstName)) {
-            $oAdminModel->updateProfile('firstName', $this->httpRequest->post('first_name'), $iProfileId, 'Admins');
+            $oAdminModel->updateProfile('firstName', $this->httpRequest->post('first_name'), $iProfileId, 'admins');
             $this->session->set('admin_first_name', $this->httpRequest->post('first_name'));
 
-            (new Cache)->start(UserCoreModel::CACHE_GROUP, 'firstName' . $iProfileId . 'Admins', null)->clear();
+            (new Cache)->start(UserCoreModel::CACHE_GROUP, 'firstName' . $iProfileId . 'admins', null)->clear();
         }
 
         if (!$this->str->equals($this->httpRequest->post('last_name'), $oAdmin->lastName)) {
-            $oAdminModel->updateProfile('lastName', $this->httpRequest->post('last_name'), $iProfileId, 'Admins');
+            $oAdminModel->updateProfile('lastName', $this->httpRequest->post('last_name'), $iProfileId, 'admins');
         }
 
         if (!$this->str->equals($this->httpRequest->post('sex'), $oAdmin->sex)) {
-            $oAdminModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId, 'Admins');
+            $oAdminModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId, 'admins');
 
-            (new Cache)->start(UserCoreModel::CACHE_GROUP, 'sex' . $iProfileId . 'Admins', null)->clear();
+            (new Cache)->start(UserCoreModel::CACHE_GROUP, 'sex' . $iProfileId . 'admins', null)->clear();
         }
 
         if (!$this->str->equals($this->httpRequest->post('time_zone'), $oAdmin->timeZone)) {
-            $oAdminModel->updateProfile('timeZone', $this->httpRequest->post('time_zone'), $iProfileId, 'Admins');
+            $oAdminModel->updateProfile('timeZone', $this->httpRequest->post('time_zone'), $iProfileId, 'admins');
         }
 
-        $oAdminModel->setLastEdit($iProfileId, 'Admins');
+        $oAdminModel->setLastEdit($iProfileId, 'admins');
 
         unset($oValidate, $oAdminModel, $oAdmin);
 
-        (new Admin)->clearReadProfileCache($iProfileId, 'Admins');
+        (new Admin)->clearReadProfileCache($iProfileId, 'admins');
 
         if (!$this->bIsErr) {
             \PFBC\Form::setSuccess('form_admin_edit_account', t('Profile successfully updated!'));

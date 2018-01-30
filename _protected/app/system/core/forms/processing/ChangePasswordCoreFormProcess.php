@@ -87,7 +87,7 @@ class ChangePasswordCoreFormProcess extends Form
         }
 
         if ($this->registry->module === PH7_ADMIN_MOD) {
-            return 'Admins';
+            return 'admins';
         }
 
         return 'Affiliates';

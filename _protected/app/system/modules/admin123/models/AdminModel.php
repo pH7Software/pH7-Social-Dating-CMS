@@ -26,7 +26,7 @@ class AdminModel extends AdminCoreModel
     public function adminLogin($sEmail, $sUsername, $sPassword)
     {
         $rStmt = Db::getInstance()->prepare('SELECT password FROM' .
-            Db::prefix('Admins') . 'WHERE email = :email AND username = :username LIMIT 1');
+            Db::prefix('admins') . 'WHERE email = :email AND username = :username LIMIT 1');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $sUsername, \PDO::PARAM_STR);
         $rStmt->execute();
@@ -47,7 +47,7 @@ class AdminModel extends AdminCoreModel
     {
         $sCurrentDate = (new CDateTime)->get()->dateTime('Y-m-d H:i:s');
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Admins') .
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('admins') .
             '(email, username, password, firstName, lastName, sex, timeZone, ip, joinDate, lastActivity)
         VALUES (:email, :username, :password, :firstName, :lastName, :sex, :timeZone, :ip, :joinDate, :lastActivity)');
         $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
@@ -83,7 +83,7 @@ class AdminModel extends AdminCoreModel
         }
 
         $oDb = Db::getInstance();
-        $oDb->exec('DELETE FROM' . Db::prefix('Admins') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
+        $oDb->exec('DELETE FROM' . Db::prefix('admins') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
         unset($oDb);
     }
 
@@ -115,7 +115,7 @@ class AdminModel extends AdminCoreModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Admins') . $sSqlWhere . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('admins') . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 

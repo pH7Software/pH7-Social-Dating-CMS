@@ -130,7 +130,7 @@ class AdminCoreModel extends UserCoreModel
         $this->cache->start(self::CACHE_GROUP, 'rootip', 10368000);
 
         if (!$sIp = $this->cache->get()) {
-            $sIp = $this->orm->getOne('Admins', 'profileId', 1, 'ip')->ip;
+            $sIp = $this->orm->getOne('admins', 'profileId', 1, 'ip')->ip;
             $this->cache->put($sIp);
         }
 
