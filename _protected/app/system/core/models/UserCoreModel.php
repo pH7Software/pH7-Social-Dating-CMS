@@ -936,7 +936,7 @@ class UserCoreModel extends Model
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_BLOG) . 'WHERE sender = ' . $iProfileId);
 
         // DELETE GAME COMMENTS
-        $oDb->exec('DELETE FROM' . Db::prefix('CommentsGame') . 'WHERE sender = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_GAME) . 'WHERE sender = ' . $iProfileId);
 
         // DELETE PICTURES ALBUMS AND PICTURES
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::PICTURE) . 'WHERE profileId = ' . $iProfileId);

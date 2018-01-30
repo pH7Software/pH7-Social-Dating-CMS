@@ -37,7 +37,7 @@ class DbTableName
     const COMMENT_NOTE = 'comments_note';
     const COMMENT_PICTURE = 'comments_picture';
     const COMMENT_VIDEO = 'comments_video';
-
+    const COMMENT_GAME = 'comments_game';
 
     const USER_TABLES = [
         self::ADMIN,
