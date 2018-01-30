@@ -90,7 +90,7 @@ class RatingCoreAjax
         $this->sTable = $this->oHttpRequest->post('table');
         $this->iId = (int)$this->oHttpRequest->post('id');
 
-        if ($this->sTable == 'Members') {
+        if ($this->sTable == 'members') {
             $iProfileId = (int)(new Session)->get('member_id');
 
             if ($iProfileId === $this->iId) {

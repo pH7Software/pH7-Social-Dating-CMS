@@ -29,7 +29,7 @@ define('PH7_DEFAULT_TIMEZONE', 'America/Chicago');
 
 define('PH7_ADMIN_MOD', 'admin123');
 
-/***** PATTERN USERNAME (for 'Members', 'Affiliates' and 'admins') *****/
+/***** PATTERN USERNAME (for 'members', 'Affiliates' and 'admins') *****/
 
 define('PH7_USERNAME_PATTERN', '[\w-]');
 

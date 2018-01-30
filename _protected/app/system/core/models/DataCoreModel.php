@@ -34,7 +34,7 @@ class DataCoreModel extends Model
 
 
         $sSqlQuery = 'SELECT data.*, m.username FROM' . Db::prefix($sTable) . 'AS data INNER JOIN' .
-            Db::prefix('Members') . 'AS m ON data.profileId = m.profileId WHERE data.approved=1 ORDER BY ' .
+            Db::prefix('members') . 'AS m ON data.profileId = m.profileId WHERE data.approved=1 ORDER BY ' .
             $sOrder . ' DESC LIMIT :offset, :limit';
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
@@ -62,7 +62,7 @@ class DataCoreModel extends Model
 
         $sSqlQuery = 'SELECT f.name, t.title, t.message, t.createdDate, t.updatedDate, t.forumId, t.topicId, m.username FROM' .
             Db::prefix('Forums') . 'AS f INNER JOIN' . Db::prefix('ForumsTopics') .
-            'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix('Members') .
+            'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix('members') .
             ' AS m ON t.profileId = m.profileId WHERE t.approved=1 ORDER BY ' . $sOrder . ' DESC LIMIT :offset, :limit';
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);

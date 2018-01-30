@@ -46,7 +46,7 @@ class BirthdayCoreModel
         $sSqlWhere = $bIsSex ? ' AND (sex = :sex) ' : '';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (groupId <> 1) AND (groupId <> 9) AND (birthDate LIKE :date)' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('members') . 'WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (groupId <> 1) AND (groupId <> 9) AND (birthDate LIKE :date)' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
         $rStmt->bindValue(':date', '%' . (new CDateTime)->get()->date('-m-d'), \PDO::PARAM_STR);
         if ($bIsSex) {
             $rStmt->bindValue(':sex', $sGender, \PDO::PARAM_STR);

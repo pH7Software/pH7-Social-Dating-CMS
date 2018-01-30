@@ -71,9 +71,9 @@ class DatabaseCoreCron extends Cron
 
     protected function stat()
     {
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Members') . 'SET views=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Members') . 'SET votes=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Members') . 'SET score=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix('members') . 'SET views=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix('members') . 'SET votes=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix('members') . 'SET score=0');
 
 
         Db::getInstance()->exec('UPDATE' . Db::prefix('Games') . 'SET views=0');

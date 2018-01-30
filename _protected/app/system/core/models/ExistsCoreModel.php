@@ -26,7 +26,7 @@ class ExistsCoreModel
      *
      * @return bool
      */
-    public function email($sEmail, $sTable = 'Members')
+    public function email($sEmail, $sTable = 'members')
     {
         $sEmail = filter_var($sEmail, FILTER_SANITIZE_EMAIL);
         return $this->is('email', $sEmail, $sTable);
@@ -40,7 +40,7 @@ class ExistsCoreModel
      *
      * @return bool
      */
-    public function username($sUsername, $sTable = 'Members')
+    public function username($sUsername, $sTable = 'members')
     {
         return $this->is('username', $sUsername, $sTable);
     }
@@ -53,7 +53,7 @@ class ExistsCoreModel
      *
      * @return bool
      */
-    public function id($iId, $sTable = 'Members')
+    public function id($iId, $sTable = 'members')
     {
         return $this->is('profileId', $iId, $sTable, PDO::PARAM_INT, 'AND profileId <> ' . PH7_GHOST_ID);
     }

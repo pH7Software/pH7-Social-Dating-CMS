@@ -70,11 +70,11 @@ class UserCoreModel extends Model
      *
      * @param string $sEmail Not case sensitive since on lot of mobile devices (such as iPhone), the first letter is uppercase.
      * @param string $sPassword
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default 'members'
      *
      * @return bool|string (boolean "true" or string "message")
      */
-    public function login($sEmail, $sPassword, $sTable = 'Members')
+    public function login($sEmail, $sPassword, $sTable = 'members')
     {
         Various::checkModelTable($sTable);
 
@@ -104,11 +104,11 @@ class UserCoreModel extends Model
      * @param string $sUsername
      * @param string $sFirstName
      * @param string $sTable
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default 'members'
      *
      * @return void
      */
-    public function sessionLog($sEmail, $sUsername, $sFirstName, $sTable = 'Members')
+    public function sessionLog($sEmail, $sUsername, $sFirstName, $sTable = 'members')
     {
         Various::checkModelTable($sTable);
 
@@ -126,11 +126,11 @@ class UserCoreModel extends Model
      * Read Profile Data.
      *
      * @param int $iProfileId The user ID
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default 'members'
      *
      * @return stdClass|bool The data of a member if exists, FALSE otherwise.
      */
-    public function readProfile($iProfileId, $sTable = 'Members')
+    public function readProfile($iProfileId, $sTable = 'members')
     {
         $this->cache->start(self::CACHE_GROUP, 'readProfile' . $iProfileId . $sTable, static::CACHE_TIME);
 
@@ -151,20 +151,20 @@ class UserCoreModel extends Model
     /**
      * Get the total number of members.
      *
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default 'members'
      * @param int $iDay Default '0'
      * @param string $sGender Values ​​available 'all', 'male', 'female'. 'couple' is only available to Members. Default 'all'
      *
      * @return int Total Users
      */
-    public function total($sTable = 'Members', $iDay = 0, $sGender = 'all')
+    public function total($sTable = 'members', $iDay = 0, $sGender = 'all')
     {
         Various::checkModelTable($sTable);
 
         $iDay = (int)$iDay;
 
         $bIsDay = ($iDay > 0);
-        $bIsGender = ($sTable === 'Members' ? ($sGender === 'male' || $sGender === 'female' || $sGender === 'couple') : ($sGender === 'male' || $sGender === 'female'));
+        $bIsGender = ($sTable === 'members' ? ($sGender === 'male' || $sGender === 'female' || $sGender === 'couple') : ($sGender === 'male' || $sGender === 'female'));
 
         $sSqlDay = $bIsDay ? ' AND (joinDate + INTERVAL :day DAY) > NOW()' : '';
         $sSqlGender = $bIsGender ? ' AND sex = :gender' : '';
@@ -190,11 +190,11 @@ class UserCoreModel extends Model
      * @param string $sSection
      * @param string $sValue
      * @param int $iProfileId Profile ID
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default 'members'
      *
      * @return void
      */
-    public function updateProfile($sSection, $sValue, $iProfileId, $sTable = 'Members')
+    public function updateProfile($sSection, $sValue, $iProfileId, $sTable = 'members')
     {
         Various::checkModelTable($sTable);
 
@@ -363,7 +363,7 @@ class UserCoreModel extends Model
         }
 
         $rStmt = Db::getInstance()->prepare(
-            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p USING(profileId)
+            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('members') . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p USING(profileId)
             LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i USING(profileId) WHERE username <> \'' . PH7_GHOST_USERNAME . '\' AND searchProfile = \'yes\'
             AND (groupId <> 1) AND (groupId <> 9) AND (ban = 0)' . $sSqlHideLoggedProfile . $sSqlFirstName . $sSqlMiddleName . $sSqlLastName . $sSqlMatchSex . $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState .
             $sSqlZipCode . $sSqlHeight . $sSqlWeight . $sSqlEmail . $sSqlOnline . $sSqlAvatar . $sSqlOrder . $sSqlLimit
@@ -450,7 +450,7 @@ class UserCoreModel extends Model
         $iProfileId = (int)$iProfileId;
         $iTime = (int)$iTime;
 
-        $rStmt = Db::getInstance()->prepare('SELECT profileId FROM' . Db::prefix('Members') . 'WHERE profileId = :profileId
+        $rStmt = Db::getInstance()->prepare('SELECT profileId FROM' . Db::prefix('members') . 'WHERE profileId = :profileId
             AND userStatus = :userStatus AND lastActivity >= DATE_SUB(:currentTime, INTERVAL :time MINUTE) LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':userStatus', self::ONLINE_STATUS, \PDO::PARAM_INT);
@@ -471,7 +471,7 @@ class UserCoreModel extends Model
      */
     public function setUserStatus($iProfileId, $iStatus)
     {
-        $this->orm->update('Members', 'userStatus', $iStatus, 'profileId', $iProfileId);
+        $this->orm->update('members', 'userStatus', $iStatus, 'profileId', $iProfileId);
     }
 
     /**
@@ -486,7 +486,7 @@ class UserCoreModel extends Model
         $this->cache->start(self::CACHE_GROUP, 'userStatus' . $iProfileId, static::CACHE_TIME);
 
         if (!$iUserStatus = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT userStatus FROM' . Db::prefix('Members') . 'WHERE profileId = :profileId LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT userStatus FROM' . Db::prefix('members') . 'WHERE profileId = :profileId LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
             $iUserStatus = (int)$rStmt->fetchColumn();
@@ -563,11 +563,11 @@ class UserCoreModel extends Model
      * Set the last activity of a user.
      *
      * @param int $iProfileId
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default 'members'
      *
      * @return void
      */
-    public function setLastActivity($iProfileId, $sTable = 'Members')
+    public function setLastActivity($iProfileId, $sTable = 'members')
     {
         Various::checkModelTable($sTable);
 
@@ -578,11 +578,11 @@ class UserCoreModel extends Model
      * Set the last edit account of a user.
      *
      * @param int $iProfileId
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default 'members'
      *
      * @return void
      */
-    public function setLastEdit($iProfileId, $sTable = 'Members')
+    public function setLastEdit($iProfileId, $sTable = 'members')
     {
         Various::checkModelTable($sTable);
 
@@ -594,11 +594,11 @@ class UserCoreModel extends Model
      *
      * @param int $iProfileId
      * @param int $iStatus 1 = apprved | 0 = not approved
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default 'members'
      *
      * @return void
      */
-    public function approve($iProfileId, $iStatus, $sTable = 'Members')
+    public function approve($iProfileId, $iStatus, $sTable = 'members')
     {
         Various::checkModelTable($sTable);
 
@@ -609,11 +609,11 @@ class UserCoreModel extends Model
      * Get member data. The hash of course but also some useful data for sending the activation email. (hash, email, username, firstName).
      *
      * @param string $sEmail User's email address.
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default 'members'
      *
      * @return stdClass|bool Returns the data member (email, username, firstName, hashValidation) on success, otherwise returns false if there is an error.
      */
-    public function getHashValidation($sEmail, $sTable = 'Members')
+    public function getHashValidation($sEmail, $sTable = 'members')
     {
         Various::checkModelTable($sTable);
 
@@ -631,11 +631,11 @@ class UserCoreModel extends Model
      *
      * @param string $sEmail
      * @param string $sHash
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default 'members'
      *
      * @return bool
      */
-    public function validateAccount($sEmail, $sHash, $sTable = 'Members')
+    public function validateAccount($sEmail, $sHash, $sTable = 'members')
     {
         Various::checkModelTable($sTable);
 
@@ -657,7 +657,7 @@ class UserCoreModel extends Model
     {
         $sHashValidation = (!empty($aData['hash_validation']) ? $aData['hash_validation'] : null);
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Members') . '(email, username, password, firstName, lastName, sex, matchSex, birthDate, active, ip, hashValidation, joinDate, lastActivity)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('members') . '(email, username, password, firstName, lastName, sex, matchSex, birthDate, active, ip, hashValidation, joinDate, lastActivity)
             VALUES (:email, :username, :password, :firstName, :lastName, :sex, :matchSex, :birthDate, :active, :ip, :hashValidation, :joinDate, :lastActivity)');
         $rStmt->bindValue(':email', trim($aData['email']), \PDO::PARAM_STR);
         $rStmt->bindValue(':username', trim($aData['username']), \PDO::PARAM_STR);
@@ -746,11 +746,11 @@ class UserCoreModel extends Model
      * @param string $sIp
      * @param int $iWaitTime In minutes!
      * @param string $sCurrentTime In date format: 0000-00-00 00:00:00
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default 'members'
      *
      * @return bool Return TRUE if the weather was fine, FALSE otherwise.
      */
-    public function checkWaitJoin($sIp, $iWaitTime, $sCurrentTime, $sTable = 'Members')
+    public function checkWaitJoin($sIp, $iWaitTime, $sCurrentTime, $sTable = 'members')
     {
         Various::checkModelTable($sTable);
 
@@ -778,7 +778,7 @@ class UserCoreModel extends Model
      */
     public function setAvatar($iProfileId, $sAvatar, $iApproved)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Members') . 'SET avatar = :avatar, approvedAvatar = :approved WHERE profileId = :profileId');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('members') . 'SET avatar = :avatar, approvedAvatar = :approved WHERE profileId = :profileId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':avatar', $sAvatar, \PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
@@ -800,7 +800,7 @@ class UserCoreModel extends Model
 
         if (!$oData = $this->cache->get()) {
             $sSqlApproved = (isset($iApproved)) ? ' AND approvedAvatar = :approved ' : ' ';
-            $rStmt = Db::getInstance()->prepare('SELECT profileId, avatar AS pic, approvedAvatar FROM' . Db::prefix('Members') . 'WHERE profileId = :profileId' . $sSqlApproved . 'LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT profileId, avatar AS pic, approvedAvatar FROM' . Db::prefix('members') . 'WHERE profileId = :profileId' . $sSqlApproved . 'LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             if (isset($iApproved)) $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
             $rStmt->execute();
@@ -988,18 +988,18 @@ class UserCoreModel extends Model
         $oDb->exec('DELETE FROM' . Db::prefix('MembersInfo') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
 
         // DELETE USER
-        $oDb->exec('DELETE FROM' . Db::prefix('Members') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
+        $oDb->exec('DELETE FROM' . Db::prefix('members') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
 
         unset($oDb); // Destruction of the object
     }
 
     /**
      * @param string $sUsernameSearch
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default 'members'
      *
      * @return array data of users (profileId, username, sex)
      */
-    public function getUsernameList($sUsernameSearch, $sTable = 'Members')
+    public function getUsernameList($sUsernameSearch, $sTable = 'members')
     {
         Various::checkModelTable($sTable);
 
@@ -1037,7 +1037,7 @@ class UserCoreModel extends Model
         $sSqlShowOnlyWithAvatars = $bOnlyAvatarsSet ? $this->getUserWithAvatarOnlySql() : '';
 
         $rStmt = Db::getInstance()->prepare(
-            'SELECT * FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p USING(profileId)
+            'SELECT * FROM' . Db::prefix('members') . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p USING(profileId)
             LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i USING(profileId) WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (searchProfile = \'yes\')
             AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL)
             AND (city IS NOT NULL) AND (groupId <> 1) AND (groupId <> 9) AND (ban = 0)' .
@@ -1088,7 +1088,7 @@ class UserCoreModel extends Model
         $sSqlCity = !empty($sCity) ? 'AND (city LIKE :city)' : '';
 
         $rStmt = Db::getInstance()->prepare(
-            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i USING(profileId)
+            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('members') . 'AS m LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i USING(profileId)
             WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (country = :country) ' . $sSqlCity . ' AND (username IS NOT NULL)
             AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL)
             AND (city IS NOT NULL) AND (groupId <> 1) AND (groupId <> 9) AND (ban = 0)' . $sOrder . $sSqlLimit
@@ -1149,11 +1149,11 @@ class UserCoreModel extends Model
      *
      * @param string $sEmail Default NULL
      * @param string $sUsername Default NULL
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default 'members'
      *
      * @return int|bool The Member ID if it is found or FALSE if not found.
      */
-    public function getId($sEmail = null, $sUsername = null, $sTable = 'Members')
+    public function getId($sEmail = null, $sUsername = null, $sTable = 'members')
     {
         $this->cache->start(self::CACHE_GROUP, 'id' . $sEmail . $sUsername . $sTable, static::CACHE_TIME);
 
@@ -1184,11 +1184,11 @@ class UserCoreModel extends Model
 
     /**
      * @param int $iProfileId
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default 'members'
      *
      * @return string The email address of a member
      */
-    public function getEmail($iProfileId, $sTable = 'Members')
+    public function getEmail($iProfileId, $sTable = 'members')
     {
         $this->cache->start(self::CACHE_GROUP, 'email' . $iProfileId . $sTable, static::CACHE_TIME);
 
@@ -1211,11 +1211,11 @@ class UserCoreModel extends Model
      * Retrieves the username from the user ID.
      *
      * @param int $iProfileId
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default 'members'
      *
      * @return string The Username of member
      */
-    public function getUsername($iProfileId, $sTable = 'Members')
+    public function getUsername($iProfileId, $sTable = 'members')
     {
         if ($iProfileId === PH7_ADMIN_ID) {
             return t('Administration of %site_name%');
@@ -1242,11 +1242,11 @@ class UserCoreModel extends Model
      * Retrieves the first name from the user ID.
      *
      * @param int $iProfileId
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default 'members'
      *
      * @return string The first name of member
      */
-    public function getFirstName($iProfileId, $sTable = 'Members')
+    public function getFirstName($iProfileId, $sTable = 'members')
     {
         $this->cache->start(self::CACHE_GROUP, 'firstName' . $iProfileId . $sTable, static::CACHE_TIME);
 
@@ -1270,11 +1270,11 @@ class UserCoreModel extends Model
      *
      * @param int $iProfileId Default NULL
      * @param string $sUsername Default NULL
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default 'members'
      *
      * @return string The sex of a member
      */
-    public function getSex($iProfileId = null, $sUsername = null, $sTable = 'Members')
+    public function getSex($iProfileId = null, $sUsername = null, $sTable = 'members')
     {
         $this->cache->start(self::CACHE_GROUP, 'sex' . $iProfileId . $sUsername . $sTable, static::CACHE_TIME);
 
@@ -1311,7 +1311,7 @@ class UserCoreModel extends Model
         $this->cache->start(self::CACHE_GROUP, 'matchsex' . $iProfileId, static::CACHE_TIME);
 
         if (!$sMatchSex = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT matchSex FROM' . Db::prefix('Members') . 'WHERE profileId = :profileId LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT matchSex FROM' . Db::prefix('members') . 'WHERE profileId = :profileId LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
             $sMatchSex = $rStmt->fetchColumn();
@@ -1327,11 +1327,11 @@ class UserCoreModel extends Model
      * Get Birth Date of a user.
      *
      * @param int $iProfileId
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default 'members'
      *
      * @return string The User's birthdate.
      */
-    public function getBirthDate($iProfileId, $sTable = 'Members')
+    public function getBirthDate($iProfileId, $sTable = 'members')
     {
         $this->cache->start(self::CACHE_GROUP, 'birthdate' . $iProfileId . $sTable, static::CACHE_TIME);
 
@@ -1354,11 +1354,11 @@ class UserCoreModel extends Model
      * Get user's group.
      *
      * @param int $iProfileId
-     * @param string sTable Default 'Members'
+     * @param string sTable Default 'members'
      *
      * @return int The Group ID of a member
      */
-    public function getGroupId($iProfileId, $sTable = 'Members')
+    public function getGroupId($iProfileId, $sTable = 'members')
     {
         $this->cache->start(self::CACHE_GROUP, 'groupId' . $iProfileId . $sTable, static::CACHE_TIME);
 
@@ -1415,7 +1415,7 @@ class UserCoreModel extends Model
         $this->cache->start(self::CACHE_GROUP, 'membershipdetails' . $iProfileId, static::CACHE_TIME);
 
         if (!$oData = $this->cache->get()) {
-            $sSql = 'SELECT m.*, g.expirationDays, g.name AS membershipName FROM' . Db::prefix('Members') . 'AS m INNER JOIN ' . Db::prefix(DbTableName::MEMBERSHIP) .
+            $sSql = 'SELECT m.*, g.expirationDays, g.name AS membershipName FROM' . Db::prefix('members') . 'AS m INNER JOIN ' . Db::prefix(DbTableName::MEMBERSHIP) .
                 'AS g USING(groupId) WHERE profileId = :profileId LIMIT 1';
 
             $rStmt = Db::getInstance()->prepare($sSql);
@@ -1439,7 +1439,7 @@ class UserCoreModel extends Model
      */
     public function checkMembershipExpiration($iProfileId, $sCurrentTime)
     {
-        $sSqlQuery = 'SELECT m.profileId FROM' . Db::prefix('Members') . 'AS m INNER JOIN' .
+        $sSqlQuery = 'SELECT m.profileId FROM' . Db::prefix('members') . 'AS m INNER JOIN' .
             Db::prefix(DbTableName::MEMBERSHIP) . 'AS pay USING(groupId) WHERE
             (pay.expirationDays = 0 OR DATE_ADD(m.membershipDate, INTERVAL pay.expirationDays DAY) >= :currentTime) AND
             (m.profileId = :profileId) LIMIT 1';
@@ -1468,7 +1468,7 @@ class UserCoreModel extends Model
 
         $sSqlTime = $bIsTime ? ',membershipDate = :dateTime ' : ' ';
 
-        $sSqlQuery = 'UPDATE' . Db::prefix('Members') . 'SET groupId = :groupId' .
+        $sSqlQuery = 'UPDATE' . Db::prefix('members') . 'SET groupId = :groupId' .
             $sSqlTime . 'WHERE profileId = :profileId LIMIT 1';
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
