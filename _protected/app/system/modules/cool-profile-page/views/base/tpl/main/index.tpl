@@ -134,7 +134,7 @@
                 {lang 'Last Activity:'} <span class="italic">{last_activity}</span> •
             {/if}
 
-            {lang 'Views:'} <span class="italic">{% Framework\Mvc\Model\Statistic::getView($id,'Members') %}</span>
+            {lang 'Views:'} <span class="italic">{% Framework\Mvc\Model\Statistic::getView($id,DbTableName::MEMBER) %}</span>
         </div>
 
         <p class="center">
