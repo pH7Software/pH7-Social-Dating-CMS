@@ -20,6 +20,7 @@ class DbTableName
     const MEMBER_PRIVACY = 'members_privacy';
     const MEMBER_NOTIFICATION = 'members_notifications';
     const BLOCK_IP = 'block_ip';
+    const AD = 'ads';
 
     const USER_TABLES = [
         self::ADMIN,

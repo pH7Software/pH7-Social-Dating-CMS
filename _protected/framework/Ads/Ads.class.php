@@ -32,7 +32,7 @@ class Ads
     public static function output(stdClass $oData)
     {
         // Stat Advertisement Shows
-        Statistic::setView($oData->adsId, 'Ads');
+        Statistic::setView($oData->adsId, DbTableName::AD);
 
         // Advertisement Clicks
         $oHttpRequest = new HttpRequest;

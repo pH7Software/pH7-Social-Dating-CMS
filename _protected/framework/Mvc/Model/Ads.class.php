@@ -25,7 +25,7 @@ class Ads extends Engine\Model
      */
     public static function setClick($iAdsId)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Ads') . 'SET clicks = clicks+1 WHERE adsId = :id LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::AD) . 'SET clicks = clicks+1 WHERE adsId = :id LIMIT 1');
         $rStmt->bindValue(':id', $iAdsId, \PDO::PARAM_INT);
         $rStmt->execute();
         Db::free($rStmt);
