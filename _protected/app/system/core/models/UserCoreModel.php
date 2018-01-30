@@ -917,8 +917,8 @@ class UserCoreModel extends Model
         $oDb->exec('DELETE FROM' . Db::prefix('Messenger') . 'WHERE toUser = ' . Db::getInstance()->quote($sUsername));
 
         // DELETE PROFILE COMMENTS
-        $oDb->exec('DELETE FROM' . Db::prefix('CommentsProfile') . 'WHERE sender = ' . $iProfileId);
-        $oDb->exec('DELETE FROM' . Db::prefix('CommentsProfile') . 'WHERE recipient = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_PROFILE) . 'WHERE sender = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_PROFILE) . 'WHERE recipient = ' . $iProfileId);
 
         // DELETE PICTURE COMMENTS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_PICTURE) . 'WHERE sender = ' . $iProfileId);
