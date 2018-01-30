@@ -212,11 +212,11 @@ class Validate
      * @param string $sUsername
      * @param integer $iMin Default 3
      * @param integer $iMax Default 40
-     * @param string $sTable Default 'members'
+     * @param string $sTable Default DbTableName::MEMBER
      *
      * @return boolean
      */
-    public function username($sUsername, $iMin = self::DEF_MIN_USERNAME_LENGTH, $iMax = PH7_MAX_USERNAME_LENGTH, $sTable = 'members')
+    public function username($sUsername, $iMin = self::DEF_MIN_USERNAME_LENGTH, $iMax = PH7_MAX_USERNAME_LENGTH, $sTable = DbTableName::MEMBER)
     {
         $sUsername = trim($sUsername);
 

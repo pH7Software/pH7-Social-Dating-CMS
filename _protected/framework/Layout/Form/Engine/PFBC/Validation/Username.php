@@ -15,7 +15,7 @@ class Username extends Validation
     /**
      * @param string $sTable
      */
-    public function __construct($sTable = 'members')
+    public function __construct($sTable = DbTableName::MEMBER)
     {
         parent::__construct();
 
