@@ -65,6 +65,7 @@ class DbTableName
     const SYS_MOD_ENABLED = 'sys_mods_enabled';
     const MODULE = 'modules';
     const REPORT = 'report';
+    const SETTING = 'settings';
 
     const USER_TABLES = [
         self::ADMIN,

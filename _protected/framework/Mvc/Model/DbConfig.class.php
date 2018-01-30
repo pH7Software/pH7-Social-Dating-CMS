@@ -43,7 +43,7 @@ final class DbConfig
         // @return value of config the database
         if (!empty($sSetting)) {
             if (!$sData = $oCache->get()) {
-                $rStmt = Engine\Db::getInstance()->prepare('SELECT settingValue FROM' . Engine\Db::prefix('Settings') . 'WHERE settingName = :setting');
+                $rStmt = Engine\Db::getInstance()->prepare('SELECT settingValue FROM' . Engine\Db::prefix(DbTableName::SETTING) . 'WHERE settingName = :setting');
                 $rStmt->bindParam(':setting', $sSetting, \PDO::PARAM_STR);
                 $rStmt->execute();
                 $sData = $rStmt->fetchColumn();
@@ -53,7 +53,7 @@ final class DbConfig
             $mData = $sData;
         } else {
             if (!$oData = $oCache->get()) {
-                $rStmt = Engine\Db::getInstance()->prepare('SELECT * FROM' . Engine\Db::prefix('Settings'));
+                $rStmt = Engine\Db::getInstance()->prepare('SELECT * FROM' . Engine\Db::prefix(DbTableName::SETTING));
                 $rStmt->execute();
                 $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
                 Engine\Db::free($rStmt);
@@ -75,7 +75,7 @@ final class DbConfig
      */
     public static function setSetting($sValue, $sName)
     {
-        return Engine\Record::getInstance()->update('Settings', 'settingValue', $sValue, 'settingName', $sName);
+        return Engine\Record::getInstance()->update(DbTableName::SETTING, 'settingValue', $sValue, 'settingName', $sName);
     }
 
     public static function getMetaMain($sLangId)
