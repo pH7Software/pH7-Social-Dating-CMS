@@ -67,6 +67,8 @@ class DbTableName
     const REPORT = 'report';
     const SETTING = 'settings';
     const STATIC_FILE = 'static_files';
+    const LICENSE = 'license';
+
 
     const USER_TABLES = [
         self::ADMIN,

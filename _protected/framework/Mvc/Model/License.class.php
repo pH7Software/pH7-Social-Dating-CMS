@@ -21,7 +21,7 @@ class License extends Engine\Model
      */
     public function get($iId = 1)
     {
-        return $this->orm->getOne('License', 'licenseId', $iId, 'licenseKey')->licenseKey;
+        return $this->orm->getOne(DbTableName::LICENSE, 'licenseId', $iId, 'licenseKey')->licenseKey;
     }
 
     /**
@@ -34,6 +34,6 @@ class License extends Engine\Model
      */
     public function save($sKey, $iId = 1)
     {
-        return $this->orm->update('License', 'licenseKey', $sKey, 'licenseId', $iId);
+        return $this->orm->update(DbTableName::LICENSE, 'licenseKey', $sKey, 'licenseId', $iId);
     }
 }
