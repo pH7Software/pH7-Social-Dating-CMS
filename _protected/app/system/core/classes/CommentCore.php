@@ -49,7 +49,7 @@ class CommentCore
         $sTable = strtolower($sTable); // Case insensitivity
 
         if (static::doesTableNameExist($sTable)) {
-            return ucfirst($sTable);
+            return $sTable;
         }
 
         Various::launchErr($sTable);

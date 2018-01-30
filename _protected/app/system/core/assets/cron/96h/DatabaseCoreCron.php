@@ -175,8 +175,8 @@ class DatabaseCoreCron extends Cron
 
         // If the option is enabled for Comments
         if ($iCleanComment > 0) {
-            $aCommentMod = ['Blog', 'Note', 'Picture', 'Video', 'Game', 'Profile'];
-            foreach ($aCommentMod as $sSuffixTable) {
+            $aCommentMods = ['blog', 'note', 'picture', 'video', 'game', 'profile'];
+            foreach ($aCommentMods as $sSuffixTable) {
                 if ($iRow = ($this->pruningDb($iCleanComment, 'comments_' . $sSuffixTable, 'updatedDate') > 0)) {
                     echo t('Deleted %0% %1% comment(s) ... OK!', $iRow, $sSuffixTable) . '<br />';
                 }
