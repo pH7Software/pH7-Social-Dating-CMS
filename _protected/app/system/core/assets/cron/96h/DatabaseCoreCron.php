@@ -145,7 +145,7 @@ class DatabaseCoreCron extends Cron
 
     protected function removeLog()
     {
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('AdminsAttemptsLogin'));
+        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::ADMIN_ATTEMPT_LOGIN));
         Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('MembersAttemptsLogin'));
         Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('AffiliatesAttemptsLogin'));
 

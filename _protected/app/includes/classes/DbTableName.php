@@ -46,6 +46,7 @@ class DbTableName
     const LANGUAGE_INFO = 'languages_info';
     const LIKE = 'likes';
     const LOG_ERROR = 'log_error';
+    const ADMIN_ATTEMPT_LOGIN = 'admins_attempts_login';
 
     const USER_TABLES = [
         self::ADMIN,
