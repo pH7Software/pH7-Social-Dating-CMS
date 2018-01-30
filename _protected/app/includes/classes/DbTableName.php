@@ -42,6 +42,7 @@ class DbTableName
     const FORUM = 'forums';
     const FORUM_CATEGORY = 'forums_categories';
     const FORUM_TOPIC = 'forums_topics';
+    const FORUM_MESSAGE = 'forums_messages';
 
     const USER_TABLES = [
         self::ADMIN,
