@@ -56,7 +56,7 @@ class UserCoreModel extends Model
             $oSession->set('member_group_id', PermissionCore::VISITOR_GROUP_ID);
         }
 
-        $rStmt = Db::getInstance()->prepare('SELECT permissions FROM' . Db::prefix('Memberships') . 'WHERE groupId = :groupId LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('SELECT permissions FROM' . Db::prefix(DbTableName::MEMBERSHIP) . 'WHERE groupId = :groupId LIMIT 1');
         $rStmt->bindValue(':groupId', $oSession->get('member_group_id'), \PDO::PARAM_INT);
         $rStmt->execute();
         $sPermissions = $rStmt->fetchColumn();
@@ -1386,13 +1386,13 @@ class UserCoreModel extends Model
      */
     public function getMemberships($iGroupId = null)
     {
-        $this->cache->start(self::CACHE_GROUP, 'memberships' . $iGroupId, static::CACHE_TIME);
+        $this->cache->start(self::CACHE_GROUP, DbTableName::MEMBERSHIP . $iGroupId, static::CACHE_TIME);
 
         if (!$mData = $this->cache->get()) {
             $bIsGroupId = !empty($iGroupId);
             $sSqlGroup = ($bIsGroupId) ? ' WHERE groupId = :groupId ' : ' ';
 
-            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Memberships') . $sSqlGroup . 'ORDER BY enable DESC, name ASC');
+            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::MEMBERSHIP) . $sSqlGroup . 'ORDER BY enable DESC, name ASC');
             if (!empty($iGroupId)) $rStmt->bindValue(':groupId', $iGroupId, \PDO::PARAM_INT);
             $rStmt->execute();
             $mData = ($bIsGroupId) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
@@ -1415,7 +1415,7 @@ class UserCoreModel extends Model
         $this->cache->start(self::CACHE_GROUP, 'membershipdetails' . $iProfileId, static::CACHE_TIME);
 
         if (!$oData = $this->cache->get()) {
-            $sSql = 'SELECT m.*, g.expirationDays, g.name AS membershipName FROM' . Db::prefix('Members') . 'AS m INNER JOIN ' . Db::prefix('Memberships') .
+            $sSql = 'SELECT m.*, g.expirationDays, g.name AS membershipName FROM' . Db::prefix('Members') . 'AS m INNER JOIN ' . Db::prefix(DbTableName::MEMBERSHIP) .
                 'AS g USING(groupId) WHERE profileId = :profileId LIMIT 1';
 
             $rStmt = Db::getInstance()->prepare($sSql);
@@ -1440,7 +1440,7 @@ class UserCoreModel extends Model
     public function checkMembershipExpiration($iProfileId, $sCurrentTime)
     {
         $sSqlQuery = 'SELECT m.profileId FROM' . Db::prefix('Members') . 'AS m INNER JOIN' .
-            Db::prefix('Memberships') . 'AS pay USING(groupId) WHERE
+            Db::prefix(DbTableName::MEMBERSHIP) . 'AS pay USING(groupId) WHERE
             (pay.expirationDays = 0 OR DATE_ADD(m.membershipDate, INTERVAL pay.expirationDays DAY) >= :currentTime) AND
             (m.profileId = :profileId) LIMIT 1';
 

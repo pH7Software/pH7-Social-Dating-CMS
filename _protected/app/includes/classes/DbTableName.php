@@ -11,5 +11,5 @@ namespace PH7;
 class DbTableName
 {
     const ADMIN = 'admins';
-
+    const MEMBERSHIP = 'memberships';
 }
