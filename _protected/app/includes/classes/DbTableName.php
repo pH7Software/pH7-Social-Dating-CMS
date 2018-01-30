@@ -31,6 +31,7 @@ class DbTableName
     const BLOG_CATEGORY = 'blogs_categories';
     const BLOG_DATA_CATEGORY = 'blogs_data_categories';
     const NOTE = 'notes';
+    const NOTE_CATEGORY = 'notes_categories';
 
     const USER_TABLES = [
         self::ADMIN,

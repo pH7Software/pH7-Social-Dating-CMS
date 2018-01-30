@@ -28,9 +28,9 @@ class NoteModel extends NoteCoreModel
             $iLimit = (int)$iLimit;
 
             if ($bCount) {
-                $sSql = 'SELECT *, COUNT(c.noteId) AS totalCatNotes FROM' . Db::prefix('NotesDataCategories') . 'AS d INNER JOIN' . Db::prefix('NotesCategories') . 'AS c ON d.categoryId = c.categoryId GROUP BY d.name, c.noteId, d.categoryId, c.profileId ASC LIMIT :offset, :limit';
+                $sSql = 'SELECT *, COUNT(c.noteId) AS totalCatNotes FROM' . Db::prefix('NotesDataCategories') . 'AS d INNER JOIN' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON d.categoryId = c.categoryId GROUP BY d.name, c.noteId, d.categoryId, c.profileId ASC LIMIT :offset, :limit';
             } else {
-                $sSqlNoteId = ($iNoteId !== null) ? ' INNER JOIN ' . Db::prefix('NotesCategories') . 'AS c ON d.categoryId = c.categoryId WHERE c.noteId = :noteId ' : ' ';
+                $sSqlNoteId = ($iNoteId !== null) ? ' INNER JOIN ' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON d.categoryId = c.categoryId WHERE c.noteId = :noteId ' : ' ';
                 $sSql = 'SELECT * FROM' . Db::prefix('NotesDataCategories') . 'AS d' . $sSqlNoteId . 'ORDER BY d.name ASC LIMIT :offset, :limit';
             }
 
@@ -90,7 +90,7 @@ class NoteModel extends NoteCoreModel
      */
     public function addCategory($iCategoryId, $iNoteId, $iProfileId)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('NotesCategories') . '(categoryId, noteId, profileId) VALUES(:categoryId, :noteId, :profileId)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::NOTE_CATEGORY) . '(categoryId, noteId, profileId) VALUES(:categoryId, :noteId, :profileId)');
         $rStmt->bindParam(':categoryId', $iCategoryId, \PDO::PARAM_INT);
         $rStmt->bindParam(':noteId', $iNoteId, \PDO::PARAM_INT);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
@@ -114,7 +114,7 @@ class NoteModel extends NoteCoreModel
 
             $sSqlApproved = $bIsApproved ? ' AND approved = :approved' : '';
 
-            $rStmt = Db::getInstance()->prepare('SELECT n.*, c.*, m.username, m.firstName, m.sex FROM' . Db::prefix(DbTableName::NOTE) . 'AS n LEFT JOIN' . Db::prefix('NotesCategories') . 'AS c ON n.noteId = c.noteId INNER JOIN' . Db::prefix(DbTableName::MEMBER) . ' AS m ON n.profileId = m.profileId WHERE n.profileId = :profileId AND n.postId = :postId' . $sSqlApproved . ' LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT n.*, c.*, m.username, m.firstName, m.sex FROM' . Db::prefix(DbTableName::NOTE) . 'AS n LEFT JOIN' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON n.noteId = c.noteId INNER JOIN' . Db::prefix(DbTableName::MEMBER) . ' AS m ON n.profileId = m.profileId WHERE n.profileId = :profileId AND n.postId = :postId' . $sSqlApproved . ' LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->bindValue(':postId', $sPostId, \PDO::PARAM_STR);
             if ($bIsApproved) {
@@ -182,7 +182,7 @@ class NoteModel extends NoteCoreModel
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? 'n.*, c.*, d.*, m.username, m.firstName, m.sex' : 'COUNT(n.noteId) AS totalNotes';
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::NOTE) . 'AS n LEFT JOIN ' . Db::prefix('NotesCategories') . 'AS c ON n.noteId = c.noteId LEFT JOIN' .
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::NOTE) . 'AS n LEFT JOIN ' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON n.noteId = c.noteId LEFT JOIN' .
             Db::prefix('NotesDataCategories') . 'AS d ON c.categoryId = d.categoryId INNER JOIN' . Db::prefix(DbTableName::MEMBER) . 'AS m ON n.profileId = m.profileId WHERE d.name LIKE :name' . $sSqlOrder . $sSqlLimit);
 
         $rStmt->bindValue(':name', '%' . $sCategoryName . '%', \PDO::PARAM_STR);
@@ -391,7 +391,7 @@ class NoteModel extends NoteCoreModel
     {
         $iNoteId = (int)$iNoteId;
 
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('NotesCategories') . 'WHERE noteId = :noteId');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'WHERE noteId = :noteId');
         $rStmt->bindValue(':noteId', $iNoteId, \PDO::PARAM_INT);
         $rStmt->execute();
     }
