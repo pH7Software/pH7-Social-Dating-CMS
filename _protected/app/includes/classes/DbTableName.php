@@ -18,5 +18,5 @@ class DbTableName
     const MEMBER_INFO = 'members_info';
     const AFFILIATE_INFO = 'affiliates_info';
     const MEMBER_PRIVACY = 'members_privacy';
-
+    const MEMBER_NOTIFICATION = 'members_notifications';
 }

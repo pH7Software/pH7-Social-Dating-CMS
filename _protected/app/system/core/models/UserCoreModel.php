@@ -509,7 +509,7 @@ class UserCoreModel extends Model
      */
     public function setNotification($sSection, $sValue, $iProfileId)
     {
-        $this->orm->update('MembersNotifications', $sSection, $sValue, 'profileId', $iProfileId);
+        $this->orm->update(DbTableName::MEMBER_NOTIFICATION, $sSection, $sValue, 'profileId', $iProfileId);
     }
 
     /**
@@ -524,7 +524,7 @@ class UserCoreModel extends Model
         $this->cache->start(self::CACHE_GROUP, 'notification' . $iProfileId, static::CACHE_TIME);
 
         if (!$oData = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('MembersNotifications') . 'WHERE profileId = :profileId LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::MEMBER_NOTIFICATION) . 'WHERE profileId = :profileId LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
             $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -548,7 +548,7 @@ class UserCoreModel extends Model
         $this->cache->start(self::CACHE_GROUP, 'isNotification' . $iProfileId, static::CACHE_TIME);
 
         if (!$bData = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT ' . $sNotifName . ' FROM' . Db::prefix('MembersNotifications') . 'WHERE profileId = :profileId AND ' . $sNotifName . ' = 1 LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT ' . $sNotifName . ' FROM' . Db::prefix(DbTableName::MEMBER_NOTIFICATION) . 'WHERE profileId = :profileId AND ' . $sNotifName . ' = 1 LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
             $bData = ($rStmt->rowCount() === 1);
@@ -732,7 +732,7 @@ class UserCoreModel extends Model
      */
     public function setDefaultNotification()
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersNotifications') .
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER_NOTIFICATION) .
             '(profileId, enableNewsletters, newMsg, friendRequest)
             VALUES (:profileId, 0, 1, 1)');
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
@@ -979,7 +979,7 @@ class UserCoreModel extends Model
         //$oDb->exec('DELETE FROM' . Db::prefix('ForumsTopics') . 'WHERE profileId = ' . $iProfileId);
 
         // DELETE NOTIFICATIONS
-        $oDb->exec('DELETE FROM' . Db::prefix('MembersNotifications') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_NOTIFICATION) . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
 
         // DELETE PRIVACY SETTINGS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_PRIVACY) . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
