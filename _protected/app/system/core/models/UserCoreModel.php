@@ -929,8 +929,8 @@ class UserCoreModel extends Model
         $oDb->exec('DELETE FROM' . Db::prefix('CommentsVideo') . 'WHERE recipient = ' . $iProfileId);
 
         // DELETE NOTE COMMENTS
-        $oDb->exec('DELETE FROM' . Db::prefix('CommentsNote') . 'WHERE sender = ' . $iProfileId);
-        $oDb->exec('DELETE FROM' . Db::prefix('CommentsNote') . 'WHERE recipient = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_NOTE) . 'WHERE sender = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_NOTE) . 'WHERE recipient = ' . $iProfileId);
 
         // DELETE BLOG COMMENTS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_BLOG) . 'WHERE sender = ' . $iProfileId);
