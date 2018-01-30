@@ -121,7 +121,7 @@ class ValidateCoreAjax
     protected function username($sValue, $sTable)
     {
         // Checks and corrects the table if it is incorrect.
-        if ($sTable !== DbTableName::MEMBER && $sTable !== 'Affiliates' && $sTable !== DbTableName::ADMIN) {
+        if ($sTable !== DbTableName::MEMBER && $sTable !== DbTableName::AFFILIATE && $sTable !== DbTableName::ADMIN) {
             $sTable = DbTableName::MEMBER;
         }
 
