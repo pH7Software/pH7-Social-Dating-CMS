@@ -151,7 +151,7 @@ class InstallController extends Controller
                 $_SESSION['db']['hostname'] = 'localhost';
                 $_SESSION['db']['username'] = 'root';
                 $_SESSION['db']['name'] = 'ph7cms';
-                $_SESSION['db']['prefix'] = 'PH7_';
+                $_SESSION['db']['prefix'] = 'ph7_';
                 $_SESSION['db']['port'] = '3306';
                 $_SESSION['db']['charset'] = 'UTF8';
 
