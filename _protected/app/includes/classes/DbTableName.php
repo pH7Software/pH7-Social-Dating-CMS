@@ -48,6 +48,7 @@ class DbTableName
     const LOG_ERROR = 'log_error';
     const ADMIN_ATTEMPT_LOGIN = 'admins_attempts_login';
     const MEMBER_ATTEMPT_LOGIN = 'members_attempts_login';
+    const AFFILIATE_ATTEMPT_LOGIN = 'affiliates_attempts_login';
 
     const USER_TABLES = [
         self::ADMIN,
