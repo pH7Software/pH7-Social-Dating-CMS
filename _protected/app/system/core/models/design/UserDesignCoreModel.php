@@ -176,14 +176,15 @@ class UserDesignCoreModel extends Design
         echo '<div class="user_status">';
 
         if ($oUserModel->isOnline($iProfileId, DbConfig::getSetting('userTimeout'))) {
-            echo '<img src="', PH7_URL_TPL, PH7_TPL_NAME, PH7_SH, PH7_IMG, 'icon/online.png" alt="', t('Online'), '" title="', t('Is Online!'), '" />';
+            $sCssClass = 'green';
+            $sTxt = t('Online!');
         } else {
             $iStatus = $oUserModel->getUserStatus($iProfileId);
-            $sImgName = ($iStatus === UserCoreModel::BUSY_STATUS ? 'busy' : ($iStatus === UserCoreModel::AWAY_STATUS ? 'away' : 'offline'));
+            $sCssClass = ($iStatus === UserCoreModel::BUSY_STATUS ? 'orange' : ($iStatus === UserCoreModel::AWAY_STATUS ? 'red' : 'gray'));
             $sTxt = ($iStatus === UserCoreModel::BUSY_STATUS ? t('Busy') : ($iStatus === UserCoreModel::AWAY_STATUS ? t('Away') : t('Offline')));
-
-            echo '<img src="', PH7_URL_TPL, PH7_TPL_NAME, PH7_SH, PH7_IMG, 'icon/', $sImgName, '.png" alt="', $sTxt, '" title="', $sTxt, '" />';
         }
+
+        echo '<span class="', $sCssClass, '" title="', $sTxt, '">•</span>';
 
         echo '</div>';
 

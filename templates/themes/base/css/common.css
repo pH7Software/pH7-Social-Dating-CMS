@@ -249,15 +249,11 @@ label#percent {
     margin: 16px;
 }
 
-.user_status img {
+.user_status span {
     position: absolute;
-    width: 12px;
-    height: 12px;
-    margin: 5px;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
+    font-size: 2.5rem;
+    line-height: .8rem;
+    margin: .6rem;
 }
 
 .cy_ico img {
