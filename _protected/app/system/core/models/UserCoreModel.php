@@ -212,7 +212,7 @@ class UserCoreModel extends Model
      */
     public function updatePrivacySetting($sSection, $sValue, $iProfileId)
     {
-        $this->orm->update('MembersPrivacy', $sSection, $sValue, 'profileId', $iProfileId);
+        $this->orm->update(DbTableName::MEMBER_PRIVACY, $sSection, $sValue, 'profileId', $iProfileId);
     }
 
     /**
@@ -363,7 +363,7 @@ class UserCoreModel extends Model
         }
 
         $rStmt = Db::getInstance()->prepare(
-            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER) . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p USING(profileId)
+            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER) . 'AS m LEFT JOIN' . Db::prefix(DbTableName::MEMBER_PRIVACY) . 'AS p USING(profileId)
             LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) . 'AS i USING(profileId) WHERE username <> \'' . PH7_GHOST_USERNAME . '\' AND searchProfile = \'yes\'
             AND (groupId <> 1) AND (groupId <> 9) AND (ban = 0)' . $sSqlHideLoggedProfile . $sSqlFirstName . $sSqlMiddleName . $sSqlLastName . $sSqlMatchSex . $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState .
             $sSqlZipCode . $sSqlHeight . $sSqlWeight . $sSqlEmail . $sSqlOnline . $sSqlAvatar . $sSqlOrder . $sSqlLimit
@@ -718,7 +718,7 @@ class UserCoreModel extends Model
      */
     public function setDefaultPrivacySetting()
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersPrivacy') .
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER_PRIVACY) .
             '(profileId, privacyProfile, searchProfile, userSaveViews)
             VALUES (:profileId, \'all\', \'yes\', \'yes\')');
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
@@ -982,7 +982,7 @@ class UserCoreModel extends Model
         $oDb->exec('DELETE FROM' . Db::prefix('MembersNotifications') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
 
         // DELETE PRIVACY SETTINGS
-        $oDb->exec('DELETE FROM' . Db::prefix('MembersPrivacy') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_PRIVACY) . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
 
         // DELETE INFO FIELDS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_INFO) . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
@@ -1037,7 +1037,7 @@ class UserCoreModel extends Model
         $sSqlShowOnlyWithAvatars = $bOnlyAvatarsSet ? $this->getUserWithAvatarOnlySql() : '';
 
         $rStmt = Db::getInstance()->prepare(
-            'SELECT * FROM' . Db::prefix(DbTableName::MEMBER) . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p USING(profileId)
+            'SELECT * FROM' . Db::prefix(DbTableName::MEMBER) . 'AS m LEFT JOIN' . Db::prefix(DbTableName::MEMBER_PRIVACY) . 'AS p USING(profileId)
             LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) . 'AS i USING(profileId) WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (searchProfile = \'yes\')
             AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL)
             AND (city IS NOT NULL) AND (groupId <> 1) AND (groupId <> 9) AND (ban = 0)' .
@@ -1133,7 +1133,7 @@ class UserCoreModel extends Model
         if (!$oData = $this->cache->get()) {
             $iProfileId = (int)$iProfileId;
 
-            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('MembersPrivacy') . 'WHERE profileId = :profileId LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::MEMBER_PRIVACY) . 'WHERE profileId = :profileId LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
             $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
