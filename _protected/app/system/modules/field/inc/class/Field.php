@@ -45,7 +45,7 @@ class Field
      */
     public static function getTable($sMod)
     {
-        return (strtolower($sMod) === 'aff' ? 'Affiliates' : 'members') . 'Info';
+        return (strtolower($sMod) === 'aff' ? 'Affiliates' : DbTableName::MEMBER) . 'Info';
     }
 
     /**

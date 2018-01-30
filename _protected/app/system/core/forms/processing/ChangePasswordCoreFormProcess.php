@@ -83,7 +83,7 @@ class ChangePasswordCoreFormProcess extends Form
     private function getTableName()
     {
         if ($this->registry->module === 'user') {
-            return 'members';
+            return DbTableName::MEMBER;
         }
 
         if ($this->registry->module === PH7_ADMIN_MOD) {

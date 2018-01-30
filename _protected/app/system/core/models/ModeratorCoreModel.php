@@ -54,7 +54,7 @@ class ModeratorCoreModel extends AdminCoreModel
 
     public function totalAvatars()
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(avatar) AS totalAvatars FROM' . Db::prefix('members') . 'WHERE approvedAvatar = \'0\'');
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(avatar) AS totalAvatars FROM' . Db::prefix(DbTableName::MEMBER) . 'WHERE approvedAvatar = \'0\'');
         $rStmt->execute();
         $iTotalAvatars = (int)$rStmt->fetchColumn();
         Db::free($rStmt);

@@ -80,7 +80,7 @@ class WallModel extends Model
 
         $sSqlWallId = !empty($iWallId) ? ' AND wallId=:wallId ' : '';
         $sSqlQuery = 'SELECT * FROM' . Db::prefix('MembersWall') . ' AS w LEFT JOIN' .
-            Db::prefix('members') . 'AS m ON w.profileId = m.profileId WHERE :profileId=:profileId ' .
+            Db::prefix(DbTableName::MEMBER) . 'AS m ON w.profileId = m.profileId WHERE :profileId=:profileId ' .
             $sSqlWallId . ' ORDER BY dateTime DESC LIMIT :offset, :limit';
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);

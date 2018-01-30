@@ -118,7 +118,7 @@ class MainController extends Controller
     private function getLoginUrl($sTableName)
     {
         switch ($sTableName) {
-            case 'members':
+            case DbTableName::MEMBER:
                 return Uri::get('user', 'main', 'index');
 
             case 'Affiliates':

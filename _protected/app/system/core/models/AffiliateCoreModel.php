@@ -36,11 +36,11 @@ class AffiliateCoreModel extends AdminCoreModel
      * Get the Affiliated Id of a User.
      *
      * @param int $iProfileId
-     * @param string $sTable 'members', 'Affiliates' or 'Subscribers'. Default 'members'
+     * @param string $sTable DbTableName::MEMBER, 'Affiliates' or 'Subscribers'. Default DbTableName::MEMBER
      *
      * @return int The Affiliated ID
      */
-    public function getAffiliatedId($iProfileId, $sTable = 'members')
+    public function getAffiliatedId($iProfileId, $sTable = DbTableName::MEMBER)
     {
         $this->cache->start(static::CACHE_GROUP, 'affiliatedId' . $iProfileId . $sTable, static::CACHE_TIME);
 

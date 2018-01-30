@@ -23,14 +23,14 @@ class AdminCoreModel extends UserCoreModel
      *
      * @return array
      */
-    public function browse($iOffset, $iLimit, $sTable = 'members')
+    public function browse($iOffset, $iLimit, $sTable = DbTableName::MEMBER)
     {
         Various::checkModelTable($sTable);
 
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
-        if ($sTable !== 'members') {
+        if ($sTable !== DbTableName::MEMBER) {
             $sSql = 'SELECT * FROM' . Db::prefix($sTable) . 'WHERE username <> \'' . PH7_GHOST_USERNAME . '\' ORDER BY joinDate DESC LIMIT :offset, :limit';
         } else {
             $sSql = 'SELECT m.*, g.name AS membershipName FROM' . Db::prefix($sTable) . 'AS m INNER JOIN ' . Db::prefix(DbTableName::MEMBERSHIP) . 'AS g ON m.groupId = g.groupId LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE username <> \'' . PH7_GHOST_USERNAME . '\' ORDER BY joinDate DESC LIMIT :offset, :limit';
@@ -76,7 +76,7 @@ class AdminCoreModel extends UserCoreModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('members') . 'AS m INNER JOIN ' . Db::prefix(DbTableName::MEMBERSHIP) . 'AS g ON m.groupId = g.groupId LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (m.groupId = :groupId) AND ' . $sSqlQuery . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER) . 'AS m INNER JOIN ' . Db::prefix(DbTableName::MEMBERSHIP) . 'AS g ON m.groupId = g.groupId LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (m.groupId = :groupId) AND ' . $sSqlQuery . $sSqlOrder . $sSqlLimit);
 
         $rStmt->bindValue(':what', '%' . $mWhat . '%', \PDO::PARAM_STR);
         $rStmt->bindParam(':groupId', $iGroupId, \PDO::PARAM_INT);
@@ -106,7 +106,7 @@ class AdminCoreModel extends UserCoreModel
      *
      * @return bool
      */
-    public function ban($iProfileId, $iBan, $sTable = 'members')
+    public function ban($iProfileId, $iBan, $sTable = DbTableName::MEMBER)
     {
         Various::checkModelTable($sTable);
 

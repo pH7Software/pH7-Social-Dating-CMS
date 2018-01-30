@@ -77,32 +77,32 @@ class MainController extends Controller
         //---------- Number of Logins Members ----------//
 
         // All Members
-        $this->view->today_login_members = $oStatModel->totalLogins('members', 1);
-        $this->view->week_login_members = $oStatModel->totalLogins('members', 7);
-        $this->view->month_login_members = $oStatModel->totalLogins('members', 31);
-        $this->view->year_login_members = $oStatModel->totalLogins('members', 365);
+        $this->view->today_login_members = $oStatModel->totalLogins(DbTableName::MEMBER, 1);
+        $this->view->week_login_members = $oStatModel->totalLogins(DbTableName::MEMBER, 7);
+        $this->view->month_login_members = $oStatModel->totalLogins(DbTableName::MEMBER, 31);
+        $this->view->year_login_members = $oStatModel->totalLogins(DbTableName::MEMBER, 365);
         $this->view->login_members = $oStatModel->totalLogins();
 
         // Men Members
-        $this->view->today_login_male_members = $oStatModel->totalLogins('members', 1, 'male');
-        $this->view->week_login_male_members = $oStatModel->totalLogins('members', 7, 'male');
-        $this->view->month_login_male_members = $oStatModel->totalLogins('members', 31, 'male');
-        $this->view->year_login_male_members = $oStatModel->totalLogins('members', 365, 'male');
-        $this->view->login_male_members = $oStatModel->totalLogins('members', 0, 'male');
+        $this->view->today_login_male_members = $oStatModel->totalLogins(DbTableName::MEMBER, 1, 'male');
+        $this->view->week_login_male_members = $oStatModel->totalLogins(DbTableName::MEMBER, 7, 'male');
+        $this->view->month_login_male_members = $oStatModel->totalLogins(DbTableName::MEMBER, 31, 'male');
+        $this->view->year_login_male_members = $oStatModel->totalLogins(DbTableName::MEMBER, 365, 'male');
+        $this->view->login_male_members = $oStatModel->totalLogins(DbTableName::MEMBER, 0, 'male');
 
         // Women Members
-        $this->view->today_login_female_members = $oStatModel->totalLogins('members', 1, 'female');
-        $this->view->week_login_female_members = $oStatModel->totalLogins('members', 7, 'female');
-        $this->view->month_login_female_members = $oStatModel->totalLogins('members', 31, 'female');
-        $this->view->year_login_female_members = $oStatModel->totalLogins('members', 365, 'female');
-        $this->view->login_female_members = $oStatModel->totalLogins('members', 0, 'female');
+        $this->view->today_login_female_members = $oStatModel->totalLogins(DbTableName::MEMBER, 1, 'female');
+        $this->view->week_login_female_members = $oStatModel->totalLogins(DbTableName::MEMBER, 7, 'female');
+        $this->view->month_login_female_members = $oStatModel->totalLogins(DbTableName::MEMBER, 31, 'female');
+        $this->view->year_login_female_members = $oStatModel->totalLogins(DbTableName::MEMBER, 365, 'female');
+        $this->view->login_female_members = $oStatModel->totalLogins(DbTableName::MEMBER, 0, 'female');
 
         // Couple Members
-        $this->view->today_login_couple_members = $oStatModel->totalLogins('members', 1, 'couple');
-        $this->view->week_login_couple_members = $oStatModel->totalLogins('members', 7, 'couple');
-        $this->view->month_login_couple_members = $oStatModel->totalLogins('members', 31, 'couple');
-        $this->view->year_login_couple_members = $oStatModel->totalLogins('members', 365, 'couple');
-        $this->view->login_couple_members = $oStatModel->totalLogins('members', 0, 'couple');
+        $this->view->today_login_couple_members = $oStatModel->totalLogins(DbTableName::MEMBER, 1, 'couple');
+        $this->view->week_login_couple_members = $oStatModel->totalLogins(DbTableName::MEMBER, 7, 'couple');
+        $this->view->month_login_couple_members = $oStatModel->totalLogins(DbTableName::MEMBER, 31, 'couple');
+        $this->view->year_login_couple_members = $oStatModel->totalLogins(DbTableName::MEMBER, 365, 'couple');
+        $this->view->login_couple_members = $oStatModel->totalLogins(DbTableName::MEMBER, 0, 'couple');
 
 
         //---------- Number of Logins Affiliates ----------//

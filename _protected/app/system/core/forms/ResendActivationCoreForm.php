@@ -16,7 +16,7 @@ use PH7\Framework\Url\Header;
 /** For "user" and "affiliate" module **/
 class ResendActivationCoreForm
 {
-    public static function display($sTable = 'members')
+    public static function display($sTable = DbTableName::MEMBER)
     {
         // Show the form only if the activation mode is activated by email
         $sMod = ($sTable == 'Affiliates') ? 'aff' : 'user';

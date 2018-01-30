@@ -40,7 +40,7 @@ class MailFormProcess extends Form
             \PFBC\Form::setError('form_compose_mail', t('Oops! You can not send a message to yourself.'));
         } elseif ($sRecipient === PH7_ADMIN_USERNAME) {
             \PFBC\Form::setError('form_compose_mail', t('Oops! You cannot reply to administrator! If you want to contact us, please use our <a href="%0%">contact form</a>.', Uri::get('contact', 'contact', 'index')));
-        } elseif (!(new ExistsCoreModel)->id($iRecipientId, 'members')) {
+        } elseif (!(new ExistsCoreModel)->id($iRecipientId, DbTableName::MEMBER)) {
             \PFBC\Form::setError('form_compose_mail', t('Oops! The username "%0%" does not exist.', escape(substr($this->httpRequest->post('recipient'), 0, PH7_MAX_USERNAME_LENGTH), true)));
         } elseif (!$bIsAdmin && !$oMailModel->checkWaitSend($iSenderId, $iTimeDelay, $sCurrentTime)) {
             \PFBC\Form::setError('form_compose_mail', Form::waitWriteMsg($iTimeDelay));

@@ -62,7 +62,7 @@ class FriendCoreModel extends Model
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
         $rStmt = Db::getInstance()->prepare(
-            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('MembersFriends') . 'AS f INNER JOIN' . Db::prefix('members') .
+            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('MembersFriends') . 'AS f INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
             'AS m ON m.profileId = (f.profileId + f.friendId - :profileId) WHERE ' . $sSqlWhere . ' AND ' . $sSqlSearchWhere .
             $sSqlOrder . $sSqlLimit
         );

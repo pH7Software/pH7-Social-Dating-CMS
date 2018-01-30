@@ -40,7 +40,7 @@ class NoteCoreModel extends Model
 
             $sSqlApproved = $bIsApproved ? ' WHERE approved = :approved' : '';
             $sOrderBy = SearchCoreModel::order($sOrder, SearchCoreModel::DESC);
-            $rStmt = Db::getInstance()->prepare('SELECT n.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Notes') . ' AS n INNER JOIN ' . Db::prefix('members') . 'AS m ON n.profileId = m.profileId' . $sSqlApproved . $sOrderBy . 'LIMIT :offset, :limit');
+            $rStmt = Db::getInstance()->prepare('SELECT n.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Notes') . ' AS n INNER JOIN ' . Db::prefix(DbTableName::MEMBER) . 'AS m ON n.profileId = m.profileId' . $sSqlApproved . $sOrderBy . 'LIMIT :offset, :limit');
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
             if ($bIsApproved) {

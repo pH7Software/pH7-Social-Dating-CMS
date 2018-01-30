@@ -23,11 +23,11 @@ class Security
      * @param string $sIp IP address
      * @param string $sTo Email address of the user to send the message.
      * @param PH7Tpl $oView
-     * @param string $sTable Default 'members'
+     * @param string $sTable Default DbTableName::MEMBER
      *
      * @return void
      */
-    public function sendAlertLoginAttemptsExceeded($iMaxAttempts, $iAttemptTime, $sIp, $sTo, PH7Tpl $oView, $sTable = 'members')
+    public function sendAlertLoginAttemptsExceeded($iMaxAttempts, $iAttemptTime, $sIp, $sTo, PH7Tpl $oView, $sTable = DbTableName::MEMBER)
     {
         Various::checkModelTable($sTable);
 

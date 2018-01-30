@@ -28,7 +28,7 @@ class DeleteUserCoreFormProcess extends Form
         $this->sSessPrefix = ($this->registry->module === 'user') ? 'member' : 'affiliate';
         $this->sUsername = $this->session->get($this->sSessPrefix . '_username');
         $this->sEmail = $this->session->get($this->sSessPrefix . '_email');
-        $sTable = ($this->registry->module === 'user') ? 'members' : 'Affiliates';
+        $sTable = ($this->registry->module === 'user') ? DbTableName::MEMBER : 'Affiliates';
 
         $mLogin = (new UserCoreModel)->login($this->sEmail, $this->httpRequest->post('password', Http::NO_CLEAN), $sTable);
         if ($mLogin === 'password_does_not_exist') {

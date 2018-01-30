@@ -50,7 +50,7 @@ class StatisticCoreModel extends StatisticModel
      */
     public function totalMembers($iDay = 0, $sGender = 'all')
     {
-        return (new UserCoreModel)->total('members', $iDay, $sGender);
+        return (new UserCoreModel)->total(DbTableName::MEMBER, $iDay, $sGender);
     }
 
     /**
@@ -69,20 +69,20 @@ class StatisticCoreModel extends StatisticModel
     /**
      * Total Logins.
      *
-     * @param string $sTable Default 'members'
+     * @param string $sTable Default DbTableName::MEMBER
      * @param int $iDay Default '0'
      * @param string $sGender Values ​​available 'all', 'male', 'female'. 'couple' is only available to Members. Default 'all'
      *
      * @return int
      */
-    public function totalLogins($sTable = 'members', $iDay = 0, $sGender = 'all')
+    public function totalLogins($sTable = DbTableName::MEMBER, $iDay = 0, $sGender = 'all')
     {
         Various::checkModelTable($sTable);
 
         $iDay = (int)$iDay;
 
         $bIsDay = ($iDay > 0);
-        $bIsGender = ($sTable === 'members' ? ($sGender === 'male' || $sGender === 'female' || $sGender === 'couple') : ($sGender === 'male' || $sGender === 'female'));
+        $bIsGender = ($sTable === DbTableName::MEMBER ? ($sGender === 'male' || $sGender === 'female' || $sGender === 'couple') : ($sGender === 'male' || $sGender === 'female'));
 
         $sSqlDay = $bIsDay ? ' AND (lastActivity + INTERVAL :day DAY) > NOW()' : '';
         $sSqlGender = $bIsGender ? ' AND sex = :gender' : '';

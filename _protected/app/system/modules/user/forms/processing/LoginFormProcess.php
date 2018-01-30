@@ -106,7 +106,7 @@ class LoginFormProcess extends Form implements LoginableForm
     public function updatePwdHashIfNeeded($sPassword, $sUserPasswordHash, $sEmail)
     {
         if ($sNewPwdHash = Security::pwdNeedsRehash($sPassword, $sUserPasswordHash)) {
-            $this->oUserModel->changePassword($sEmail, $sNewPwdHash, 'members');
+            $this->oUserModel->changePassword($sEmail, $sNewPwdHash, DbTableName::MEMBER);
         }
     }
 

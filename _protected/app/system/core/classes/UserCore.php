@@ -478,11 +478,11 @@ class UserCore
      * Clean UserCoreModel / readProfile Cache
      *
      * @param integer $iId Profile ID.
-     * @param string $sTable Default 'members'
+     * @param string $sTable Default DbTableName::MEMBER
      *
      * @return void
      */
-    public function clearReadProfileCache($iId, $sTable = 'members')
+    public function clearReadProfileCache($iId, $sTable = DbTableName::MEMBER)
     {
         $this->clearCache('readProfile', $iId, $sTable);
     }
