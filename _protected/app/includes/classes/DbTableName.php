@@ -70,7 +70,7 @@ class DbTableName
     const LICENSE = 'license';
     const CUSTOM_CODE = 'custom_code';
     const GAME = 'games';
-
+    const GAME_CATEGORY = 'games_categories';
 
     const USER_TABLES = [
         self::ADMIN,

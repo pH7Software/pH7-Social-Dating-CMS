@@ -28,11 +28,11 @@ class GameModel extends GameCoreModel
             $bIsCategoryId = $iCategoryId !== null;
 
             if ($bCount) {
-                $sSql = 'SELECT c.*, COUNT(g.gameId) AS totalCatGames FROM' . Db::prefix('GamesCategories') . 'AS c INNER JOIN' . Db::prefix(DbTableName::GAME) . 'AS g
+                $sSql = 'SELECT c.*, COUNT(g.gameId) AS totalCatGames FROM' . Db::prefix(DbTableName::GAME_CATEGORY) . 'AS c INNER JOIN' . Db::prefix(DbTableName::GAME) . 'AS g
                 ON c.categoryId = g.categoryId GROUP BY c.name ASC LIMIT :offset, :limit';
             } else {
                 $sSqlCategoryId = $bIsCategoryId ? ' WHERE categoryId = :categoryId ' : ' ';
-                $sSql = 'SELECT * FROM' . Db::prefix('GamesCategories') . $sSqlCategoryId . 'ORDER BY name ASC LIMIT :offset, :limit';
+                $sSql = 'SELECT * FROM' . Db::prefix(DbTableName::GAME_CATEGORY) . $sSqlCategoryId . 'ORDER BY name ASC LIMIT :offset, :limit';
             }
 
             $rStmt = Db::getInstance()->prepare($sSql);
@@ -73,7 +73,7 @@ class GameModel extends GameCoreModel
         $sSqlSelect = (!$bCount) ? 'g.*, c.*' : 'COUNT(g.gameId) AS totalGames';
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::GAME) . 'AS g LEFT JOIN ' . Db::prefix('GamesCategories') . 'AS c ON g.categoryId = c.categoryId
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::GAME) . 'AS g LEFT JOIN ' . Db::prefix(DbTableName::GAME_CATEGORY) . 'AS c ON g.categoryId = c.categoryId
         WHERE c.name LIKE :name' . $sSqlOrder . $sSqlLimit);
 
         $rStmt->bindValue(':name', '%' . $sCategoryName . '%', \PDO::PARAM_STR);
