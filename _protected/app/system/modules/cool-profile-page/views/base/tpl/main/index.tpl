@@ -148,6 +148,10 @@
             {map}
         </div>
 
+        <div class="ad_160_600">
+            {{ $designModel->ad(160, 600) }}
+        </div>
+
         {{ CommentDesignCore::link($id, 'Profile') }}
     </div>
 </div>
