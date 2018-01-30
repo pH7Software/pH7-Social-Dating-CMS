@@ -12,7 +12,7 @@
 @sCurrentDate := CURRENT_TIMESTAMP;
 
 
-INSERT INTO pH7_GamesCategories (categoryId, name) VALUES
+INSERT INTO ph7_games_categories (categoryId, name) VALUES
 (1, 'Action'),
 (2, 'Arcade'),
 (3, 'Casino'),
@@ -26,7 +26,7 @@ INSERT INTO pH7_GamesCategories (categoryId, name) VALUES
 (11, 'Sports');
 
 
-INSERT INTO pH7_Games (gameId, name, title, description, keywords, thumb, file, categoryId, addedDate, downloads, votes, score, views) VALUES
+INSERT INTO ph7_games (gameId, name, title, description, keywords, thumb, file, categoryId, addedDate, downloads, votes, score, views) VALUES
 -- Action (1)
 (4, '', 'Flashblox', 'Tetris clone', '', 'tetris_clone.png', 'tetris_clone.swf', 1, @sCurrentDate, 0, 0, 0, 0),
 (5, '', 'Bell Boys', 'Help the bell boy to deliver their orders to the right floor by controling the elevators', '', 'bell_boys.png', 'bell_boys.swf', 1, @sCurrentDate, 0, 0, 0, 0),
