@@ -44,6 +44,7 @@ class DbTableName
     const FORUM_TOPIC = 'forums_topics';
     const FORUM_MESSAGE = 'forums_messages';
     const LANGUAGE_INFO = 'languages_info';
+    const LIKE = 'likes';
 
     const USER_TABLES = [
         self::ADMIN,
