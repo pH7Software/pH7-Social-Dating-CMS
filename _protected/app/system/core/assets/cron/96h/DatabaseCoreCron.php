@@ -155,7 +155,7 @@ class DatabaseCoreCron extends Cron
 
         Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::ADMIN_LOG_SESS));
         Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::MEMBER_LOG_SESS));
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('AffiliatesLogSess'));
+        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::AFFILIATE_LOG_SESS));
 
         Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::LOG_ERROR));
 

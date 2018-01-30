@@ -54,6 +54,7 @@ class DbTableName
     const AFFILIATE_LOG_LOGIN = 'affiliates_log_login';
     const ADMIN_LOG_SESS = 'admins_log_sess';
     const MEMBER_LOG_SESS = 'members_log_sess';
+    const AFFILIATE_LOG_SESS = 'affiliates_log_sess';
 
     const USER_TABLES = [
         self::ADMIN,
