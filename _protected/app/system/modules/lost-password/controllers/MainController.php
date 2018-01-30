@@ -121,7 +121,7 @@ class MainController extends Controller
             case DbTableName::MEMBER:
                 return Uri::get('user', 'main', 'index');
 
-            case 'Affiliates':
+            case DbTableName::AFFILIATE:
                 return Uri::get('affiliate', 'home', 'login');
 
             case DbTableName::ADMIN:

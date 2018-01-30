@@ -90,6 +90,6 @@ class ChangePasswordCoreFormProcess extends Form
             return DbTableName::ADMIN;
         }
 
-        return 'Affiliates';
+        return DbTableName::AFFILIATE;
     }
 }

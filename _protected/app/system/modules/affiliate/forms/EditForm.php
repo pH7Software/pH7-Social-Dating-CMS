@@ -30,7 +30,7 @@ class EditForm
         $oHR = new Http;
         $iProfileId = ($bAdminLogged && $oHR->getExists('profile_id')) ? $oHR->get('profile_id', 'int') : (new Session)->get('affiliate_id');
 
-        $oAff = $oAffModel->readProfile($iProfileId, 'Affiliates');
+        $oAff = $oAffModel->readProfile($iProfileId, DbTableName::AFFILIATE);
 
 
         // Birth date with the date format for the date picker

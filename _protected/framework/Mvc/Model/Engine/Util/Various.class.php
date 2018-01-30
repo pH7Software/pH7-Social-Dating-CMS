@@ -67,7 +67,7 @@ class Various
                 break;
 
             case 'affiliate':
-                $sTable = 'Affiliates';
+                $sTable = DbTableName::AFFILIATE;
                 break;
 
             case 'newsletter':

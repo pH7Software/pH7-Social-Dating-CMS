@@ -55,7 +55,7 @@ class JoinFormProcess extends Form
         $oAffModel = new AffiliateModel;
 
         $iTimeDelay = (int)DbConfig::getSetting('timeDelayUserRegistration');
-        if (!$oAffModel->checkWaitJoin($aData['ip'], $iTimeDelay, $aData['current_date'], 'Affiliates')) {
+        if (!$oAffModel->checkWaitJoin($aData['ip'], $iTimeDelay, $aData['current_date'], DbTableName::AFFILIATE)) {
             \PFBC\Form::setError('form_join_aff', Form::waitRegistrationMsg($iTimeDelay));
         } elseif (!$oAffModel->join($aData)) {
             \PFBC\Form::setError('form_join_aff',

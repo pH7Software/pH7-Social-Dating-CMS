@@ -63,7 +63,7 @@ class StatisticCoreModel extends StatisticModel
      */
     public function totalAffiliates($iDay = 0, $sGender = 'all')
     {
-        return (new UserCoreModel)->total('Affiliates', $iDay, $sGender);
+        return (new UserCoreModel)->total(DbTableName::AFFILIATE, $iDay, $sGender);
     }
 
     /**

@@ -48,7 +48,7 @@ class ResendActivationCoreFormProcess extends Form
      */
     protected function sendMail($oHash, $sTable)
     {
-        $sMod = ($sTable === 'Affiliates') ? 'affiliate' : 'user';
+        $sMod = ($sTable === DbTableName::AFFILIATE) ? 'affiliate' : 'user';
         $sActivateLink = Uri::get($sMod, 'account', 'activate') . PH7_SH . $oHash->email . PH7_SH . $oHash->hashValidation;
 
         $this->view->content = t('Welcome to %site_name%, %0%!', $oHash->firstName) . '<br />' .

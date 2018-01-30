@@ -66,7 +66,7 @@ class ExistsCoreModel
      *
      * @return bool
      */
-    public function bankAccount($sAccount, $sTable = 'Affiliates')
+    public function bankAccount($sAccount, $sTable = DbTableName::AFFILIATE)
     {
         return $this->is('bankAccount', $sAccount, $sTable);
     }

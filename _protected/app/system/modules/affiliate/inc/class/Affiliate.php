@@ -41,7 +41,7 @@ class Affiliate extends AffiliateCore
         $oAffModel = new AffiliateModel;
         $oCookie = new Cookie;
 
-        $iAffId = $oAffModel->getId(null, $sUsername, 'Affiliates');
+        $iAffId = $oAffModel->getId(null, $sUsername, DbTableName::AFFILIATE);
 
         if (!$oCookie->exists(static::COOKIE_NAME)) {
             $this->_setCookie($iAffId, $oCookie); // Set a week
