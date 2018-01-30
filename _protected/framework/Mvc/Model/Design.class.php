@@ -138,7 +138,7 @@ class Design extends HtmlDesign
         $this->oCache->start(self::CACHE_STATIC_GROUP, 'customCode' . $sType, static::CACHE_TIME);
 
         if (!$sData = $this->oCache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT code FROM ' . Db::prefix('CustomCode') . 'WHERE codeType = :type LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT code FROM ' . Db::prefix(DbTableName::CUSTOM_CODE) . 'WHERE codeType = :type LIMIT 1');
             $rStmt->bindValue(':type', $sType, \PDO::PARAM_STR);
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
