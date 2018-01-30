@@ -28,8 +28,9 @@ class CEmail extends \PFBC\Validation
 
     public function isValid($sValue)
     {
-        if ($this->isNotApplicable($sValue) || $this->oValidate->email($sValue))
+        if ($this->isNotApplicable($sValue) || $this->oValidate->email($sValue)) {
             return !($this->sType == 'guest' && (new ExistsCoreModel)->email($sValue, $this->sTable));
+        }
 
         return false;
     }
