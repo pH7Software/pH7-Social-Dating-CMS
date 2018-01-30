@@ -1,7 +1,7 @@
 {if empty($error)}
     {each $a in $album}
         {* Set Video Album Statistics *}
-        {{ Framework\Analytics\Statistic::setView($a->albumId, 'AlbumsVideos') }}
+        {{ Framework\Analytics\Statistic::setView($a->albumId, DbTableName::ALBUM_VIDEO) }}
 
         <div class="m_photo center">
             {{ $absolute_url = Framework\Mvc\Router\Uri::get('video','main','video',"$a->username,$a->albumId,$a->title,$a->videoId") }}

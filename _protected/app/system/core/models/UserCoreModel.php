@@ -944,7 +944,7 @@ class UserCoreModel extends Model
 
         // DELETE VIDEOS ALBUMS AND VIDEOS
         $oDb->exec('DELETE FROM' . Db::prefix('Videos') . 'WHERE profileId = ' . $iProfileId);
-        $oDb->exec('DELETE FROM' . Db::prefix('AlbumsVideos') . 'WHERE profileId = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::ALBUM_VIDEO) . 'WHERE profileId = ' . $iProfileId);
 
         // DELETE FRIENDS
         $oDb->exec('DELETE FROM' . Db::prefix('MembersFriends') . 'WHERE profileId = ' . $iProfileId);

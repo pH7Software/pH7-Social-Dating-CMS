@@ -48,7 +48,7 @@ class ModeratorModel extends ModeratorCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
         $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, a.* FROM' .
-            Db::prefix('AlbumsVideos') . 'AS a INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
+            Db::prefix(DbTableName::ALBUM_VIDEO) . 'AS a INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
             'AS m USING(profileId) WHERE a.approved = \'0\' LIMIT :offset, :limit');
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -120,7 +120,7 @@ class ModeratorModel extends ModeratorCoreModel
 
     public function approvedVideoAlbum($iAlbumId, $iStatus = 1)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('AlbumsVideos') .
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::ALBUM_VIDEO) .
             'SET approved = :status  WHERE albumId = :albumId');
         $rStmt->bindParam(':albumId', $iAlbumId, \PDO::PARAM_INT);
         $rStmt->bindParam(':status', $iStatus, \PDO::PARAM_INT);
@@ -169,7 +169,7 @@ class ModeratorModel extends ModeratorCoreModel
 
     public function deleteVideoAlbum($iAlbumId)
     {
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('AlbumsVideos') .
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::ALBUM_VIDEO) .
             'WHERE albumId = :albumId');
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
 

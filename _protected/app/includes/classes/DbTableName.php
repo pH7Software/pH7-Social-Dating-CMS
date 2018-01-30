@@ -23,6 +23,7 @@ class DbTableName
     const AD = 'ads';
     const AD_AFFILIATE = 'ads_affiliates';
     const ALBUM_PICTURE = 'albums_pictures';
+    const ALBUM_VIDEO = 'albums_videos';
 
     const USER_TABLES = [
         self::ADMIN,
