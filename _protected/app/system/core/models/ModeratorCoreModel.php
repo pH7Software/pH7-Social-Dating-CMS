@@ -14,7 +14,7 @@ class ModeratorCoreModel extends AdminCoreModel
 {
     public function totalPictureAlbums()
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(albumId) AS totalAlbums FROM' . Db::prefix('AlbumsPictures') . 'WHERE approved = \'0\'');
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(albumId) AS totalAlbums FROM' . Db::prefix(DbTableName::ALBUM_PICTURE) . 'WHERE approved = \'0\'');
         $rStmt->execute();
         $iTotalAlbums = (int)$rStmt->fetchColumn();
         Db::free($rStmt);

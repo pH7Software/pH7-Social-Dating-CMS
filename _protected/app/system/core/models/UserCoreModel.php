@@ -940,7 +940,7 @@ class UserCoreModel extends Model
 
         // DELETE PICTURES ALBUMS AND PICTURES
         $oDb->exec('DELETE FROM' . Db::prefix('Pictures') . 'WHERE profileId = ' . $iProfileId);
-        $oDb->exec('DELETE FROM' . Db::prefix('AlbumsPictures') . 'WHERE profileId = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::ALBUM_PICTURE) . 'WHERE profileId = ' . $iProfileId);
 
         // DELETE VIDEOS ALBUMS AND VIDEOS
         $oDb->exec('DELETE FROM' . Db::prefix('Videos') . 'WHERE profileId = ' . $iProfileId);

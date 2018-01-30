@@ -21,7 +21,8 @@ class DbTableName
     const MEMBER_NOTIFICATION = 'members_notifications';
     const BLOCK_IP = 'block_ip';
     const AD = 'ads';
-    const AD_AFFILIATE = 'ad_affiliates';
+    const AD_AFFILIATE = 'ads_affiliates';
+    const ALBUM_PICTURE = 'albums_pictures';
 
     const USER_TABLES = [
         self::ADMIN,

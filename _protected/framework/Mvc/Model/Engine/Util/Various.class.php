@@ -144,7 +144,7 @@ class Various
                 $sId = 'pictureId';
                 break;
 
-            case 'AlbumsPictures':
+            case DbTableName::ALBUM_PICTURE:
                 $sId = 'albumId';
                 break;
 
@@ -199,7 +199,7 @@ class Various
     {
         switch ($sTable) {
             case DbTableName::MEMBER:
-            case 'AlbumsPictures':
+            case DbTableName::ALBUM_PICTURE:
             case 'AlbumsVideos':
             case 'Pictures':
             case 'Videos':
