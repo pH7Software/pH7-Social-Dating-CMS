@@ -66,6 +66,7 @@ class DbTableName
     const MODULE = 'modules';
     const REPORT = 'report';
     const SETTING = 'settings';
+    const STATIC_FILE = 'static_files';
 
     const USER_TABLES = [
         self::ADMIN,

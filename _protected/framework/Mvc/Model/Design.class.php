@@ -165,7 +165,7 @@ class Design extends HtmlDesign
 
         if (!$oData = $this->oCache->get()) {
             $sSqlWhere = $bOnlyActive ? ' AND active=\'1\'' : '';
-            $rStmt = Db::getInstance()->prepare('SELECT file FROM ' . Db::prefix('StaticFiles') . 'WHERE fileType = :type' . $sSqlWhere);
+            $rStmt = Db::getInstance()->prepare('SELECT file FROM ' . Db::prefix(DbTableName::STATIC_FILE) . 'WHERE fileType = :type' . $sSqlWhere);
             $rStmt->bindValue(':type', $sType, \PDO::PARAM_STR);
             $rStmt->execute();
             $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);

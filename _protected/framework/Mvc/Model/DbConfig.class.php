@@ -149,7 +149,7 @@ final class DbConfig
         self::setSetting($sStatus, $sFieldName);
 
         // addthis JS file's staticID is '1'
-        $rStmt = Engine\Db::getInstance()->prepare('UPDATE' . Engine\Db::prefix('StaticFiles') . 'SET active = :status WHERE staticId = 1 AND fileType = \'js\' LIMIT 1');
+        $rStmt = Engine\Db::getInstance()->prepare('UPDATE' . Engine\Db::prefix(DbTableName::STATIC_FILE) . 'SET active = :status WHERE staticId = 1 AND fileType = \'js\' LIMIT 1');
         $rStmt->execute(['status' => $sStatus]);
 
         // Clear "db/design/static" cache. '1' matches with TRUE in Design::files(); (note, don't need to clear DbConfig as it'll always be called in SettingFormProcess class which clears the cache anyway)
