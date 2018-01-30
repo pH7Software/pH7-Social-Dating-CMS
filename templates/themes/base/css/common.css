@@ -359,7 +359,7 @@ img, video, iframe {
         max-width: 500px;
         position: absolute;
         margin-left: 25%;
-        margin-top: -600px;
+        margin-top: -50%;
     }
 }
 
