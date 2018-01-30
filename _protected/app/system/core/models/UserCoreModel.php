@@ -958,7 +958,7 @@ class UserCoreModel extends Model
 
         // DELETE NOTES
         $oDb->exec('DELETE FROM' . Db::prefix('NotesCategories') . 'WHERE profileId = ' . $iProfileId);
-        $oDb->exec('DELETE FROM' . Db::prefix('Notes') . 'WHERE profileId = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::NOTE) . 'WHERE profileId = ' . $iProfileId);
 
         // DELETE LIKE
         $oDb->exec('DELETE FROM' . Db::prefix('Likes') . 'WHERE keyId LIKE ' . Db::getInstance()->quote('%' . $sUsername . '.html'));

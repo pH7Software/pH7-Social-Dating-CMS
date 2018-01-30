@@ -160,7 +160,7 @@ class Various
                 $sId = 'blogId';
                 break;
 
-            case 'Notes':
+            case DbTableName::NOTE:
                 $sId = 'noteId';
                 break;
 
@@ -205,7 +205,7 @@ class Various
             case DbTableName::VIDEO:
             case 'Games':
             case DbTableName::BLOG:
-            case 'Notes':
+            case DbTableName::NOTE:
                 return $sTable;
 
             /** Check Ads Tables **/

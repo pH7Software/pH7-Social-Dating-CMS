@@ -74,7 +74,7 @@ class ModeratorCoreModel extends AdminCoreModel
 
     public function totalNotes()
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(noteId) AS totalNotes FROM' . Db::prefix('Notes') . 'WHERE approved = \'0\'');
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(noteId) AS totalNotes FROM' . Db::prefix(DbTableName::NOTE) . 'WHERE approved = \'0\'');
         $rStmt->execute();
         $iTotalNotes = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
