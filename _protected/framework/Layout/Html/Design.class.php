@@ -15,6 +15,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\AdminCore;
 use PH7\AffiliateCore;
+use PH7\DbTableName;
 use PH7\Framework\Benchmark\Benchmark;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Core\Kernel;

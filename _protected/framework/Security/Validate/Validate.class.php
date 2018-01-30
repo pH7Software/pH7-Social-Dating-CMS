@@ -15,6 +15,7 @@ defined('PH7') or exit('Restricted access');
 
 use DateTime;
 use Exception;
+use PH7\DbTableName;
 use PH7\ExistsCoreModel;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;

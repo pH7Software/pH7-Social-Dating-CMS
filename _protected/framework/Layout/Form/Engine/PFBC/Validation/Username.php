@@ -6,6 +6,7 @@
 namespace PFBC\Validation;
 
 use PFBC\Validation;
+use PH7\DbTableName;
 use PH7\Framework\Mvc\Model\DbConfig;
 
 class Username extends Validation
