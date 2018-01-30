@@ -28,10 +28,10 @@ class NoteModel extends NoteCoreModel
             $iLimit = (int)$iLimit;
 
             if ($bCount) {
-                $sSql = 'SELECT *, COUNT(c.noteId) AS totalCatNotes FROM' . Db::prefix('NotesDataCategories') . 'AS d INNER JOIN' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON d.categoryId = c.categoryId GROUP BY d.name, c.noteId, d.categoryId, c.profileId ASC LIMIT :offset, :limit';
+                $sSql = 'SELECT *, COUNT(c.noteId) AS totalCatNotes FROM' . Db::prefix(DbTableName::NOTE_DATA_CATEGORY) . 'AS d INNER JOIN' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON d.categoryId = c.categoryId GROUP BY d.name, c.noteId, d.categoryId, c.profileId ASC LIMIT :offset, :limit';
             } else {
                 $sSqlNoteId = ($iNoteId !== null) ? ' INNER JOIN ' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON d.categoryId = c.categoryId WHERE c.noteId = :noteId ' : ' ';
-                $sSql = 'SELECT * FROM' . Db::prefix('NotesDataCategories') . 'AS d' . $sSqlNoteId . 'ORDER BY d.name ASC LIMIT :offset, :limit';
+                $sSql = 'SELECT * FROM' . Db::prefix(DbTableName::NOTE_DATA_CATEGORY) . 'AS d' . $sSqlNoteId . 'ORDER BY d.name ASC LIMIT :offset, :limit';
             }
 
             $rStmt = Db::getInstance()->prepare($sSql);
@@ -183,7 +183,7 @@ class NoteModel extends NoteCoreModel
         $sSqlSelect = (!$bCount) ? 'n.*, c.*, d.*, m.username, m.firstName, m.sex' : 'COUNT(n.noteId) AS totalNotes';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::NOTE) . 'AS n LEFT JOIN ' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON n.noteId = c.noteId LEFT JOIN' .
-            Db::prefix('NotesDataCategories') . 'AS d ON c.categoryId = d.categoryId INNER JOIN' . Db::prefix(DbTableName::MEMBER) . 'AS m ON n.profileId = m.profileId WHERE d.name LIKE :name' . $sSqlOrder . $sSqlLimit);
+            Db::prefix(DbTableName::NOTE_DATA_CATEGORY) . 'AS d ON c.categoryId = d.categoryId INNER JOIN' . Db::prefix(DbTableName::MEMBER) . 'AS m ON n.profileId = m.profileId WHERE d.name LIKE :name' . $sSqlOrder . $sSqlLimit);
 
         $rStmt->bindValue(':name', '%' . $sCategoryName . '%', \PDO::PARAM_STR);
 
