@@ -32,7 +32,7 @@ class ForumModel extends ForumCoreModel
         $sSqlLimit = $bIsLimit ? ' LIMIT :offset, :limit' : '';
         $sSqlCategoryId = $bIsCategoryId ? ' WHERE categoryId = :categoryId ' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('ForumsCategories') . $sSqlCategoryId . 'ORDER BY title ASC' . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::FORUM_CATEGORY) . $sSqlCategoryId . 'ORDER BY title ASC' . $sSqlLimit);
         if ($bIsCategoryId) {
             $rStmt->bindParam(':categoryId', $iCategoryId, \PDO::PARAM_INT);
         }
@@ -99,7 +99,7 @@ class ForumModel extends ForumCoreModel
      */
     public function addCategory($sTitle)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('ForumsCategories') . '(title) VALUES(:title)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::FORUM_CATEGORY) . '(title) VALUES(:title)');
         $rStmt->bindValue(':title', $sTitle, \PDO::PARAM_STR);
 
         return $rStmt->execute();
@@ -178,7 +178,7 @@ class ForumModel extends ForumCoreModel
      */
     public function updateCategory($iCategoryId, $sTitle)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('ForumsCategories') .
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::FORUM_CATEGORY) .
             'SET title = :title WHERE categoryId = :categoryId');
 
         $rStmt->bindValue(':categoryId', $iCategoryId, \PDO::PARAM_INT);
@@ -272,7 +272,7 @@ class ForumModel extends ForumCoreModel
         $rStmt->execute();
 
         // Category
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('ForumsCategories') . 'WHERE categoryId = :categoryId LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::FORUM_CATEGORY) . 'WHERE categoryId = :categoryId LIMIT 1');
         $rStmt->bindValue(':categoryId', $iCategoryId, \PDO::PARAM_INT);
 
         return $rStmt->execute();
