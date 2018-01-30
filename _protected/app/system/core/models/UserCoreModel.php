@@ -841,7 +841,7 @@ class UserCoreModel extends Model
 
         if (!$sFile = $this->cache->get()) {
             $sSqlApproved = $iApproved !== null ? ' AND approved = :approved ' : ' ';
-            $rStmt = Db::getInstance()->prepare('SELECT file FROM' . Db::prefix('MembersBackground') . 'WHERE profileId = :profileId' . $sSqlApproved . 'LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT file FROM' . Db::prefix(DbTableName::MEMBER_BACKGROUND) . 'WHERE profileId = :profileId' . $sSqlApproved . 'LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             if ($iApproved !== null) {
                 $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
@@ -867,7 +867,7 @@ class UserCoreModel extends Model
      */
     public function addBackground($iProfileId, $sFile, $iApproved = 1)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersBackground') . '(profileId, file, approved) VALUES (:profileId, :file, :approved)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER_BACKGROUND) . '(profileId, file, approved) VALUES (:profileId, :file, :approved)');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':file', $sFile, \PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
@@ -884,7 +884,7 @@ class UserCoreModel extends Model
      */
     public function deleteBackground($iProfileId)
     {
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('MembersBackground') . 'WHERE profileId = :profileId');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::MEMBER_BACKGROUND) . 'WHERE profileId = :profileId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         return $rStmt->execute();
     }
@@ -954,7 +954,7 @@ class UserCoreModel extends Model
         $oDb->exec('DELETE FROM' . Db::prefix('MembersWall') . 'WHERE profileId = ' . $iProfileId);
 
         // DELETE BACKGROUND
-        $oDb->exec('DELETE FROM' . Db::prefix('MembersBackground') . 'WHERE profileId = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_BACKGROUND) . 'WHERE profileId = ' . $iProfileId);
 
         // DELETE NOTES
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'WHERE profileId = ' . $iProfileId);

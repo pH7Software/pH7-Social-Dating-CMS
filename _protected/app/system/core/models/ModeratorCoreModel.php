@@ -64,7 +64,7 @@ class ModeratorCoreModel extends AdminCoreModel
 
     public function totalBackgrounds()
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(file) AS totalBackgrounds FROM' . Db::prefix('MembersBackground') . 'WHERE approved = \'0\'');
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(file) AS totalBackgrounds FROM' . Db::prefix(DbTableName::MEMBER_BACKGROUND) . 'WHERE approved = \'0\'');
         $rStmt->execute();
         $iTotalBackgrounds = (int)$rStmt->fetchColumn();
         Db::free($rStmt);

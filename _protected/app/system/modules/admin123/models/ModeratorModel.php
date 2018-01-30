@@ -89,7 +89,7 @@ class ModeratorModel extends ModeratorCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
         $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, b.* FROM' .
-            Db::prefix('MembersBackground') . 'AS b INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
+            Db::prefix(DbTableName::MEMBER_BACKGROUND) . 'AS b INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
             'AS m USING(profileId) WHERE approved = \'0\' LIMIT :offset, :limit');
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -150,7 +150,7 @@ class ModeratorModel extends ModeratorCoreModel
 
     public function approvedBackground($iProfileId, $iStatus = 1)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('MembersBackground') .
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::MEMBER_BACKGROUND) .
             'SET approved = :status WHERE profileId = :profileId');
         $rStmt->bindParam(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindParam(':status', $iStatus, \PDO::PARAM_INT);
