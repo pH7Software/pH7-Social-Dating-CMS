@@ -15,6 +15,7 @@ namespace PH7\Framework\Error;
 defined('PH7') or exit('Restricted access');
 
 use Exception;
+use PH7\DbTableName;
 use PH7\Framework\File\File;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Ip\Ip;

@@ -16,6 +16,7 @@ defined('PH7') or exit('Restricted access');
 use DateInterval;
 use DateTime;
 use PDO;
+use PH7\DbTableName;
 use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;

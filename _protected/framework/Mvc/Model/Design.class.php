@@ -13,6 +13,7 @@ namespace PH7\Framework\Mvc\Model;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\DbTableName;
 use PH7\Framework\Ads\Ads as Banner;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Layout\Html\Design as HtmlDesign;

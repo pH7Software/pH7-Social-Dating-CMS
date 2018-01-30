@@ -6,6 +6,7 @@
 
 namespace PFBC\Validation;
 
+use PH7\DbTableName;
 use PH7\ExistsCoreModel;
 use PH7\Framework\Security\Ban\Ban;
 

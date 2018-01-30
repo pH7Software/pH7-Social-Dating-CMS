@@ -12,6 +12,7 @@ namespace PH7\Framework\Mvc\Model;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\DbTableName;
 use PH7\Framework\Mvc\Model\Engine\Db;
 
 class Ads extends Engine\Model

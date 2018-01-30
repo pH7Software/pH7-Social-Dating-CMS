@@ -12,6 +12,7 @@ namespace PH7\Framework\Ads;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\DbTableName;
 use PH7\Framework\Analytics\Statistic;
 use PH7\Framework\Mvc\Model\Ads as ModelAds;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
