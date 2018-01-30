@@ -45,7 +45,7 @@ class VisitorModel
      */
     public function already()
     {
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('members_who_views') .
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::MEMBER_WHO_VIEW) .
             'WHERE profileId = :profileId AND visitorId = :visitorId LIMIT 1');
 
         $rStmt->bindValue(':profileId', $this->iProfileId, \PDO::PARAM_INT);
@@ -84,7 +84,7 @@ class VisitorModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('members_who_views') . 'AS who LEFT JOIN ' . Db::prefix(DbTableName::MEMBER) .
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER_WHO_VIEW) . 'AS who LEFT JOIN ' . Db::prefix(DbTableName::MEMBER) .
             'AS m ON who.visitorId = m.profileId WHERE (who.profileId = :profileId) AND ' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         $rStmt->bindValue(':profileId', $this->iProfileId, \PDO::PARAM_INT);
@@ -115,7 +115,7 @@ class VisitorModel
      */
     public function update()
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('members_who_views') .
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::MEMBER_WHO_VIEW) .
             'SET lastVisit = :dateLastVisit WHERE profileId = :profileId AND visitorId = :visitorId LIMIT 1');
         $rStmt->bindValue(':profileId', $this->iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':visitorId', $this->iVisitorId, \PDO::PARAM_INT);
@@ -131,7 +131,7 @@ class VisitorModel
      */
     public function set()
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('members_who_views') .
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER_WHO_VIEW) .
             '(profileId, visitorId, lastVisit) VALUES(:profileId, :visitorId, :dateVisit)');
         $rStmt->bindValue(':profileId', $this->iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':visitorId', $this->iVisitorId, \PDO::PARAM_INT);
