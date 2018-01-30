@@ -909,12 +909,12 @@ class UserCoreModel extends Model
         $oDb = Db::getInstance();
 
         // DELETE MESSAGES
-        $oDb->exec('DELETE FROM' . Db::prefix('Messages') . 'WHERE sender = ' . $iProfileId);
-        $oDb->exec('DELETE FROM' . Db::prefix('Messages') . 'WHERE recipient = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MESSAGE) . 'WHERE sender = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MESSAGE) . 'WHERE recipient = ' . $iProfileId);
 
         // DELETE MESSAGES OF MESSENGER
-        $oDb->exec('DELETE FROM' . Db::prefix('Messenger') . 'WHERE fromUser = ' . Db::getInstance()->quote($sUsername));
-        $oDb->exec('DELETE FROM' . Db::prefix('Messenger') . 'WHERE toUser = ' . Db::getInstance()->quote($sUsername));
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MESSENGER) . 'WHERE fromUser = ' . Db::getInstance()->quote($sUsername));
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MESSENGER) . 'WHERE toUser = ' . Db::getInstance()->quote($sUsername));
 
         // DELETE PROFILE COMMENTS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_PROFILE) . 'WHERE sender = ' . $iProfileId);

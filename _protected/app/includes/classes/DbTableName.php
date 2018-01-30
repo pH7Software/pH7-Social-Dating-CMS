@@ -59,6 +59,8 @@ class DbTableName
     const MEMBER_WHO_VIEW = 'members_who_views';
     const MEMBER_FRIEND = 'members_friends';
     const MEMBER_WALL = 'members_wall';
+    const MESSAGE = 'messages';
+    const MESSENGER = 'messenger';
 
     const USER_TABLES = [
         self::ADMIN,

@@ -136,7 +136,7 @@ class DatabaseCoreCron extends Cron
 
     protected function removeDeletedMsg()
     {
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Messages') . 'WHERE FIND_IN_SET(\'sender\', toDelete) AND FIND_IN_SET(\'recipient\', toDelete)');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::MESSAGE) . 'WHERE FIND_IN_SET(\'sender\', toDelete) AND FIND_IN_SET(\'recipient\', toDelete)');
 
         if ($rStmt->execute()) {
             echo nt('Deleted %n% temporary message... OK!', 'Deleted %n% temporary messages... OK!', $rStmt->rowCount()) . '<br />';
@@ -185,14 +185,14 @@ class DatabaseCoreCron extends Cron
 
         // If the option is enabled for Messages
         if ($iCleanMsg > 0) {
-            if ($iRow = ($this->pruningDb($iCleanMsg, 'Messages', 'sendDate') > 0)) {
+            if ($iRow = ($this->pruningDb($iCleanMsg, DbTableName::MESSAGE, 'sendDate') > 0)) {
                 echo nt('Deleted %n% message... OK!', 'Deleted %n% messages... OK!', $iRow) . '<br />';
             }
         }
 
         // If the option is enabled for Messenger
         if ($iCleanMessenger > 0) {
-            if ($iRow = ($this->pruningDb($iCleanMessenger, 'Messenger', 'sent') > 0)) {
+            if ($iRow = ($this->pruningDb($iCleanMessenger, DbTableName::MESSENGER, 'sent') > 0)) {
                 echo nt('Deleted %n% IM message... OK!', 'Deleted %n% IM messages... OK!', $iRow) . '<br />';
             }
         }
