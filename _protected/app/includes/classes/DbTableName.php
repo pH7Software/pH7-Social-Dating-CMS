@@ -35,6 +35,7 @@ class DbTableName
     const NOTE_DATA_CATEGORY = 'notes_data_categories';
     const COMMENT_BLOG = 'comments_blog';
     const COMMENT_NOTE = 'comments_note';
+    const COMMENT_PICTURE = 'comments_picture';
 
     const USER_TABLES = [
         self::ADMIN,
