@@ -121,7 +121,7 @@ class ValidateCoreAjax
     protected function username($sValue, $sTable)
     {
         // Checks and corrects the table if it is incorrect.
-        if ($sTable !== DbTableName::MEMBER && $sTable !== DbTableName::AFFILIATE && $sTable !== DbTableName::ADMIN) {
+        if (!in_array($sTable, DbTableName::USER_TABLES, true)) {
             $sTable = DbTableName::MEMBER;
         }
 
@@ -144,7 +144,7 @@ class ValidateCoreAjax
     protected function email($sValue, $sParam, $sTable)
     {
         // Checks and corrects the table if it is incorrect.
-        if ($sTable !== DbTableName::MEMBER && $sTable !== DbTableName::AFFILIATE && $sTable !== DbTableName::ADMIN) {
+        if (!in_array($sTable, DbTableName::USER_TABLES, true)) {
             $sTable = DbTableName::MEMBER;
         }
 

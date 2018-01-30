@@ -19,4 +19,10 @@ class DbTableName
     const AFFILIATE_INFO = 'affiliates_info';
     const MEMBER_PRIVACY = 'members_privacy';
     const MEMBER_NOTIFICATION = 'members_notifications';
+
+    const USER_TABLES = [
+        self::ADMIN,
+        self::MEMBER,
+        self::AFFILIATE
+    ];
 }
