@@ -38,7 +38,7 @@ class MailModel extends MailCoreModel
     {
         $rStmt = Db::getInstance()->prepare(
             'SELECT msg.*, m.profileId, m.username, m.firstName FROM' . Db::prefix('Messages') .
-            'AS msg LEFT JOIN ' . Db::prefix('Members') . 'AS m ON msg.sender = m.profileId
+            'AS msg LEFT JOIN ' . Db::prefix('members') . 'AS m ON msg.sender = m.profileId
             WHERE msg.recipient = :recipient AND msg.messageId = :messageId AND NOT FIND_IN_SET(\'recipient\', msg.trash) LIMIT 1'
         );
 
@@ -59,7 +59,7 @@ class MailModel extends MailCoreModel
     {
         $rStmt = Db::getInstance()->prepare(
             'SELECT msg.*, m.profileId, m.username, m.firstName FROM' . Db::prefix('Messages') .
-            'AS msg LEFT JOIN ' . Db::prefix('Members') . 'AS m ON msg.recipient = m.profileId
+            'AS msg LEFT JOIN ' . Db::prefix('members') . 'AS m ON msg.recipient = m.profileId
             WHERE msg.sender = :sender AND msg.messageId = :messageId AND NOT FIND_IN_SET(\'sender\', msg.toDelete) LIMIT 1'
         );
 
@@ -80,7 +80,7 @@ class MailModel extends MailCoreModel
     {
         $rStmt = Db::getInstance()->prepare(
             'SELECT msg.*, m.profileId, m.username, m.firstName FROM' . Db::prefix('Messages') .
-            'AS msg LEFT JOIN ' . Db::prefix('Members') . 'AS m ON msg.sender = m.profileId
+            'AS msg LEFT JOIN ' . Db::prefix('members') . 'AS m ON msg.sender = m.profileId
             WHERE msg.recipient = :profileId AND msg.messageId = :messageId AND FIND_IN_SET(\'recipient\', msg.trash)
             AND NOT FIND_IN_SET(\'recipient\', msg.toDelete) LIMIT 1'
         );
@@ -249,7 +249,7 @@ class MailModel extends MailCoreModel
                 $sSql = 'msg.sender = m.profileId WHERE ';
         }
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Messages') . 'AS msg LEFT JOIN ' . Db::prefix('Members') . 'AS m ON ' .
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Messages') . 'AS msg LEFT JOIN ' . Db::prefix('members') . 'AS m ON ' .
             $sSql . $sSqlFind . $sSqlOrder . $sSqlLimit);
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);

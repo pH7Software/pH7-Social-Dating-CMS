@@ -133,10 +133,10 @@
       <div class="break"></div>
     {/if}
 
-    <p><span class="bold">{lang 'Views:'}</span> <span class="italic">{% Framework\Mvc\Model\Statistic::getView($id,'Members') %}</span></p>
+    <p><span class="bold">{lang 'Views:'}</span> <span class="italic">{% Framework\Mvc\Model\Statistic::getView($id,'members') %}</span></p>
     <div class="break"></div>
 
-    {{ RatingDesignCore::voting($id,'Members') }}
+    {{ RatingDesignCore::voting($id,'members') }}
 
     {if !empty($description)}
       <div class="profile_desc">

@@ -12,7 +12,7 @@ class CEmail extends \PFBC\Validation
 {
     protected $sTable, $sType;
 
-    public function __construct($sType = '', $sTable = 'Members')
+    public function __construct($sType = '', $sTable = 'members')
     {
         parent::__construct();
         $this->sTable = $sTable;

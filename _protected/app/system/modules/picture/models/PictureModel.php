@@ -79,7 +79,7 @@ class PictureModel extends PictureCoreModel
 
             $sSqlPictureId = (!empty($iPictureId)) ? ' p.pictureId=:pictureId AND ' : ' ';
             $rStmt = Db::getInstance()->prepare('SELECT p.*, a.name, m.username, m.firstName, m.sex FROM' . Db::prefix('Pictures') . 'AS p INNER JOIN' .
-                Db::prefix('AlbumsPictures') . 'AS a ON p.albumId = a.albumId INNER JOIN' . Db::prefix('Members') .
+                Db::prefix('AlbumsPictures') . 'AS a ON p.albumId = a.albumId INNER JOIN' . Db::prefix('members') .
                 'AS m ON p.profileId = m.profileId WHERE p.profileId=:profileId AND p.albumId=:albumId AND' . $sSqlPictureId . 'p.approved=:approved LIMIT :offset, :limit');
 
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
@@ -189,7 +189,7 @@ class PictureModel extends PictureCoreModel
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE p.pictureId = :looking' : ' WHERE p.title LIKE :looking OR p.description LIKE :looking';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ', a.name, m.username, m.firstName, m.sex FROM' . Db::prefix('Pictures') . 'AS p INNER JOIN' .
-            Db::prefix('AlbumsPictures') . 'AS a ON p.albumId = a.albumId INNER JOIN' . Db::prefix('Members') .
+            Db::prefix('AlbumsPictures') . 'AS a ON p.albumId = a.albumId INNER JOIN' . Db::prefix('members') .
             'AS m ON p.profileId = m.profileId' . $sSqlWhere . ' AND p.approved=:approved' . $sSqlOrder . $sSqlLimit);
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);

@@ -62,7 +62,7 @@ class FriendModel extends FriendCoreModel
         // Check if the two existing ID
         $oExistsModel = new ExistsCoreModel;
 
-        if ($oExistsModel->id($iProfileId, 'Members') && $oExistsModel->id($iFriendId, 'Members')) {
+        if ($oExistsModel->id($iProfileId, 'members') && $oExistsModel->id($iFriendId, 'members')) {
             if (!$this->inList($iProfileId, $iFriendId)) {
                 $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersFriends') .
                     '(profileId, friendId, pending, requestDate) VALUES (:profileId, :friendId, :pending, :requestDate)');

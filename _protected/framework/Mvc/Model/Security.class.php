@@ -71,11 +71,11 @@ class Security
      * @param string $sUsername
      * @param string $sPassword
      * @param int $sStatus
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default 'members'
      *
      * @return void
      */
-    public function addLoginLog($sEmail, $sUsername, $sPassword, $sStatus, $sTable = 'Members')
+    public function addLoginLog($sEmail, $sUsername, $sPassword, $sStatus, $sTable = 'members')
     {
         Various::checkModelTable($sTable);
 
@@ -97,11 +97,11 @@ class Security
      * @param int $iAttemptTime
      * @param string $sEmail Email address of member.
      * @param PH7Tpl $oView
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default 'members'
      *
      * @return bool Returns TRUE if attempts are allowed, FALSE otherwise.
      */
-    public function checkLoginAttempt($iMaxAttempts, $iAttemptTime, $sEmail, PH7Tpl $oView, $sTable = 'Members')
+    public function checkLoginAttempt($iMaxAttempts, $iAttemptTime, $sEmail, PH7Tpl $oView, $sTable = 'members')
     {
         Various::checkModelTable($sTable);
 
@@ -141,7 +141,7 @@ class Security
      *
      * @return void
      */
-    public function addLoginAttempt($sTable = 'Members')
+    public function addLoginAttempt($sTable = 'members')
     {
         Various::checkModelTable($sTable);
 
@@ -174,7 +174,7 @@ class Security
      *
      * @return void
      */
-    public function clearLoginAttempts($sTable = 'Members')
+    public function clearLoginAttempts($sTable = 'members')
     {
         Various::checkModelTable($sTable);
 

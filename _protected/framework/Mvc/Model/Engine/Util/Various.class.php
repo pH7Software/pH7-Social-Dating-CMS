@@ -62,7 +62,7 @@ class Various
     {
         switch ($Mod) {
             case 'user':
-                $sTable = 'Members';
+                $sTable = 'members';
                 break;
 
             case 'affiliate':
@@ -98,7 +98,7 @@ class Various
     public static function convertTableToMod($sTable)
     {
         switch ($sTable) {
-            case 'Members':
+            case 'members':
                 $sMod = 'user';
                 break;
 
@@ -135,7 +135,7 @@ class Various
     public static function convertTableToId($sTable)
     {
         switch ($sTable) {
-            case 'Members':
+            case 'members':
                 $sId = 'profileId';
                 break;
 
@@ -197,7 +197,7 @@ class Various
     public static function checkTable($sTable)
     {
         switch ($sTable) {
-            case 'Members':
+            case 'members':
             case 'AlbumsPictures':
             case 'AlbumsVideos':
             case 'Pictures':
@@ -230,7 +230,7 @@ class Various
     public static function checkModelTable($sTable)
     {
         switch ($sTable) {
-            case 'Members':
+            case 'members':
             case 'Affiliates':
             case 'MembersInfo':
             case 'AffiliatesInfo':

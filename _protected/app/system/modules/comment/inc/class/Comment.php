@@ -23,7 +23,7 @@ class Comment extends CommentCore
     {
         switch ($sTable) {
             case 'Profile':
-                $sNewTable = 'Members';
+                $sNewTable = 'members';
                 break;
 
             case 'Picture':

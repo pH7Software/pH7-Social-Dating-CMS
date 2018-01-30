@@ -36,7 +36,7 @@ class EditFormProcess extends Form
             $oUserModel->updateProfile('firstName', $this->httpRequest->post('first_name'), $iProfileId);
             $this->session->set('member_first_name', $this->httpRequest->post('first_name'));
 
-            (new Cache)->start(UserCoreModel::CACHE_GROUP, 'firstName' . $iProfileId . 'Members', null)->clear();
+            (new Cache)->start(UserCoreModel::CACHE_GROUP, 'firstName' . $iProfileId . 'members', null)->clear();
         }
 
         if (!$this->str->equals($this->httpRequest->post('last_name'), $oUser->lastName))
@@ -46,7 +46,7 @@ class EditFormProcess extends Form
             $oUserModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId);
             $this->session->set('member_sex', $this->httpRequest->post('sex'));
 
-            (new Cache)->start(UserCoreModel::CACHE_GROUP, 'sex' . $iProfileId . 'Members', null)->clear();
+            (new Cache)->start(UserCoreModel::CACHE_GROUP, 'sex' . $iProfileId . 'members', null)->clear();
         }
 
         // WARNING: Be careful, you should use the Http::NO_CLEAN constant, otherwise Http::post() method removes the special tags

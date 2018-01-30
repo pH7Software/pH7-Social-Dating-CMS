@@ -15,7 +15,7 @@ class Username extends Validation
     /**
      * @param string $sTable
      */
-    public function __construct($sTable = 'Members')
+    public function __construct($sTable = 'members')
     {
         parent::__construct();
 

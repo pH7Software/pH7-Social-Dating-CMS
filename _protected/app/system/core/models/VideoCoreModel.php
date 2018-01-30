@@ -43,7 +43,7 @@ class VideoCoreModel extends Model
             $sSqlAlbum = $bIsAlbumId ? ' a.albumId=:albumId AND ' : '';
 
             $sSqlQuery = 'SELECT a.*, m.username, m.firstName, m.sex FROM' . Db::prefix('AlbumsVideos') .
-                'AS a INNER JOIN' . Db::prefix('Members') . 'AS m ON a.profileId = m.profileId WHERE' .
+                'AS a INNER JOIN' . Db::prefix('members') . 'AS m ON a.profileId = m.profileId WHERE' .
                 $sSqlProfileId . $sSqlAlbum . ' a.approved=:approved ORDER BY ' .
                 $sOrder . ' DESC LIMIT :offset, :limit';
 
