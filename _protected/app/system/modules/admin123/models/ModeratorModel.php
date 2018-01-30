@@ -34,7 +34,7 @@ class ModeratorModel extends ModeratorCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
         $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, p.* FROM' .
-            Db::prefix('Pictures') . 'AS p INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
+            Db::prefix(DbTableName::PICTURE) . 'AS p INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
             'AS m USING(profileId) WHERE approved = \'0\' LIMIT :offset, :limit');
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -110,7 +110,7 @@ class ModeratorModel extends ModeratorCoreModel
 
     public function approvedPicture($iPictureId, $iStatus = 1)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Pictures') .
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::PICTURE) .
             'SET approved = :status  WHERE pictureId = :pictureId');
         $rStmt->bindParam(':pictureId', $iPictureId, \PDO::PARAM_INT);
         $rStmt->bindParam(':status', $iStatus, \PDO::PARAM_INT);

@@ -172,7 +172,7 @@ class MainController extends Controller
             $this->view->picture = $oPicture;
 
             //Set Photo Statistics
-            Statistic::setView($oPicture->pictureId, 'Pictures');
+            Statistic::setView($oPicture->pictureId, DbTableName::PICTURE);
         }
 
         $this->output();

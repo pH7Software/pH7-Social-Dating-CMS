@@ -29,7 +29,7 @@ class PictureModel extends PictureCoreModel
 
     public function addPhoto($iProfileId, $iAlbumId, $sTitle, $sDescription, $sFile, $sCreatedDate, $iApproved = 1)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Pictures') . '(profileId, albumId, title, description, file, createdDate, approved)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::PICTURE) . '(profileId, albumId, title, description, file, createdDate, approved)
             VALUES (:profileId, :albumId, :title, :description, :file, :createdDate, :approved)');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
@@ -78,7 +78,7 @@ class PictureModel extends PictureCoreModel
             $iLimit = (int)$iLimit;
 
             $sSqlPictureId = (!empty($iPictureId)) ? ' p.pictureId=:pictureId AND ' : ' ';
-            $rStmt = Db::getInstance()->prepare('SELECT p.*, a.name, m.username, m.firstName, m.sex FROM' . Db::prefix('Pictures') . 'AS p INNER JOIN' .
+            $rStmt = Db::getInstance()->prepare('SELECT p.*, a.name, m.username, m.firstName, m.sex FROM' . Db::prefix(DbTableName::PICTURE) . 'AS p INNER JOIN' .
                 Db::prefix(DbTableName::ALBUM_PICTURE) . 'AS a ON p.albumId = a.albumId INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
                 'AS m ON p.profileId = m.profileId WHERE p.profileId=:profileId AND p.albumId=:albumId AND' . $sSqlPictureId . 'p.approved=:approved LIMIT :offset, :limit');
 
@@ -122,7 +122,7 @@ class PictureModel extends PictureCoreModel
         $this->cache->start(self::CACHE_GROUP, 'totalPhotos' . $iProfileId, static::CACHE_TIME);
 
         if (!$iData = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT COUNT(pictureId) AS totalPhotos FROM' . Db::prefix('Pictures') . 'WHERE profileId=:profileId');
+            $rStmt = Db::getInstance()->prepare('SELECT COUNT(pictureId) AS totalPhotos FROM' . Db::prefix(DbTableName::PICTURE) . 'WHERE profileId=:profileId');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -151,7 +151,7 @@ class PictureModel extends PictureCoreModel
 
     public function updatePhoto($iProfileId, $iAlbumId, $iPictureId, $sTitle, $sDescription, $sUpdatedDate)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Pictures') .
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::PICTURE) .
             'SET title =:title, description =:description, updatedDate =:updatedDate WHERE profileId=:profileId AND albumId=:albumId AND pictureId=:pictureId');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
@@ -188,7 +188,7 @@ class PictureModel extends PictureCoreModel
         $sSqlSelect = (!$bCount) ? 'p.*' : 'COUNT(p.pictureId) AS totalPictures';
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE p.pictureId = :looking' : ' WHERE p.title LIKE :looking OR p.description LIKE :looking';
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ', a.name, m.username, m.firstName, m.sex FROM' . Db::prefix('Pictures') . 'AS p INNER JOIN' .
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ', a.name, m.username, m.firstName, m.sex FROM' . Db::prefix(DbTableName::PICTURE) . 'AS p INNER JOIN' .
             Db::prefix(DbTableName::ALBUM_PICTURE) . 'AS a ON p.albumId = a.albumId INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
             'AS m ON p.profileId = m.profileId' . $sSqlWhere . ' AND p.approved=:approved' . $sSqlOrder . $sSqlLimit);
 

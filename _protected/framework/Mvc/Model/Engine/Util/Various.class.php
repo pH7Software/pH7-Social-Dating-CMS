@@ -140,7 +140,7 @@ class Various
                 $sId = 'profileId';
                 break;
 
-            case 'Pictures':
+            case DbTableName::PICTURE:
                 $sId = 'pictureId';
                 break;
 
@@ -201,7 +201,7 @@ class Various
             case DbTableName::MEMBER:
             case DbTableName::ALBUM_PICTURE:
             case DbTableName::ALBUM_VIDEO:
-            case 'Pictures':
+            case DbTableName::PICTURE:
             case 'Videos':
             case 'Games':
             case 'Blogs':

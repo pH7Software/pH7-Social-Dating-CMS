@@ -81,7 +81,7 @@ class PictureCoreModel extends Model
         $bIsPictureId = $iPictureId !== null;
 
         $sSqlPictureId = $bIsPictureId ? ' AND pictureId=:pictureId ' : '';
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Pictures') . 'WHERE profileId=:profileId AND albumId=:albumId' . $sSqlPictureId);
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::PICTURE) . 'WHERE profileId=:profileId AND albumId=:albumId' . $sSqlPictureId);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
         if ($bIsPictureId) {

@@ -24,7 +24,7 @@ class ModeratorCoreModel extends AdminCoreModel
 
     public function totalPictures()
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(pictureId) AS totalPictures FROM' . Db::prefix('Pictures') . 'WHERE approved = \'0\'');
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(pictureId) AS totalPictures FROM' . Db::prefix(DbTableName::PICTURE) . 'WHERE approved = \'0\'');
         $rStmt->execute();
         $iTotalPictures = (int)$rStmt->fetchColumn();
         Db::free($rStmt);

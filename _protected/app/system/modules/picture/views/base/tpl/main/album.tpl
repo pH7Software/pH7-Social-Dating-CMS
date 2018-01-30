@@ -19,7 +19,7 @@
                 </div>
             {/if}
             <p>
-                {{ RatingDesignCore::voting($a->pictureId,'Pictures') }}
+                {{ RatingDesignCore::voting($a->pictureId,DbTableName::PICTURE) }}
                 {{ $design->like($a->username,$a->firstName,$a->sex,$absolute_url) }} | {{ $design->report($a->profileId, $a->username, $a->firstName, $a->sex) }}
             </p>
         </div>
