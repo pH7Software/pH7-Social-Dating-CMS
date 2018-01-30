@@ -168,7 +168,7 @@ class Various
                 $sId = 'GameId';
                 break;
 
-            case 'ForumsTopics':
+            case DbTableName::FORUM_TOPIC:
                 $sId = 'topicId';
                 break;
 

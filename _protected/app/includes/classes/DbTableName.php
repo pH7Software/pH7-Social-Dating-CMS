@@ -41,6 +41,7 @@ class DbTableName
     const COMMENT_PROFILE = 'comments_profile';
     const FORUM = 'forums';
     const FORUM_CATEGORY = 'forums_categories';
+    const FORUM_TOPIC = 'forums_topics';
 
     const USER_TABLES = [
         self::ADMIN,

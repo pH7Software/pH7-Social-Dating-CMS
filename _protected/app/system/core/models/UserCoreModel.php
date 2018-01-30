@@ -976,7 +976,7 @@ class UserCoreModel extends Model
         WARNING: Do not change this part of code without asking permission from Pierre-Henry Soria
         */
         //$oDb->exec('DELETE FROM' . Db::prefix('ForumsMessages') . 'WHERE profileId = ' . $iProfileId);
-        //$oDb->exec('DELETE FROM' . Db::prefix('ForumsTopics') . 'WHERE profileId = ' . $iProfileId);
+        //$oDb->exec('DELETE FROM' . Db::prefix(DbTableName::FORUM_TOPIC) . 'WHERE profileId = ' . $iProfileId);
 
         // DELETE NOTIFICATIONS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_NOTIFICATION) . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');

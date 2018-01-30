@@ -105,7 +105,7 @@ class DatabaseCoreCron extends Cron
         Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::NOTE) . 'SET votes=0');
         Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::NOTE) . 'SET score=0');
 
-        Db::getInstance()->exec('UPDATE' . Db::prefix('ForumsTopics') . 'SET views=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::FORUM_TOPIC) . 'SET views=0');
 
         Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::AD) . 'SET views=0');
         Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::AD) . 'SET clicks=0');

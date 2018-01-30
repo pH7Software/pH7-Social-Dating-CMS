@@ -169,7 +169,7 @@ class ForumController extends Controller
             $this->view->messages = $oMessages;
 
             // Set Topics Views Statistics
-            Statistic::setView($oPost->topicId, 'ForumsTopics');
+            Statistic::setView($oPost->topicId, DbTableName::FORUM_TOPIC);
         }
 
         $this->output();

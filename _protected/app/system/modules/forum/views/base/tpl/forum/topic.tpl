@@ -1,7 +1,7 @@
 <div class="center">
     {if empty($error)}
         {each $topic in $topics}
-            {{ $total_views = Framework\Mvc\Model\Statistic::getView($topic->topicId,'ForumsTopics') }}
+            {{ $total_views = Framework\Mvc\Model\Statistic::getView($topic->topicId,DbTableName::FORUM_TOPIC) }}
             {{ $total_reply = (new ForumModel)->totalMessages($topic->topicId) }}
 
             <h3>
