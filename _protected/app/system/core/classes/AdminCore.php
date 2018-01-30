@@ -86,7 +86,7 @@ class AdminCore extends UserCore
             'admin_token' => Various::genRnd($oAdminData->email),
         ];
         $oSession->set($aSessionData);
-        $oSecurityModel->addLoginLog($oAdminData->email, $oAdminData->username, '*****', 'Logged in!', 'Admins');
-        $oAdminModel->setLastActivity($oAdminData->profileId, 'Admins');
+        $oSecurityModel->addLoginLog($oAdminData->email, $oAdminData->username, '*****', 'Logged in!', DbTableName::ADMIN);
+        $oAdminModel->setLastActivity($oAdminData->profileId, DbTableName::ADMIN);
     }
 }

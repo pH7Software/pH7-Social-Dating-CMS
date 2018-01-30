@@ -9,10 +9,10 @@
 --
 --
 
-CREATE SEQUENCE pH7_Games_seq;
+CREATE SEQUENCE ph7_games_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_Games (
-  gameId int check (gameId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_Games_seq'),
+CREATE TABLE IF NOT EXISTS ph7_games (
+  gameId int check (gameId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_games_seq'),
   name varchar(120) DEFAULT '',
   title varchar(120) NOT NULL,
   description varchar(255) NOT NULL,
@@ -28,16 +28,16 @@ CREATE TABLE IF NOT EXISTS pH7_Games (
   PRIMARY KEY (gameId)
 )  ;
 
-ALTER SEQUENCE pH7_Games_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_games_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE pH7_GamesCategories_seq;
+CREATE SEQUENCE ph7_games_categories_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_GamesCategories (
-  categoryId smallint check (categoryId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_GamesCategories_seq'),
+CREATE TABLE IF NOT EXISTS ph7_games_categories (
+  categoryId smallint check (categoryId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_games_categories_seq'),
   name varchar(40) NOT NULL DEFAULT '',
   PRIMARY KEY (categoryId),
   UNIQUE (name)
 )  ;
 
-ALTER SEQUENCE pH7_GamesCategories_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_games_categories_seq RESTART WITH 1;

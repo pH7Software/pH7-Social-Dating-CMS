@@ -68,7 +68,7 @@ final class DbConfig
 
     /**
      * @param string $sValue Value to set.
-     * @param string $sName Name of the DB pH7_Settings column.
+     * @param string $sName Name of the DB ph7_settings column.
      *
      * @return int 1 on success.
      */

@@ -28,10 +28,10 @@
 @sPassword := SHA1(RAND() + UNIX_TIMESTAMP());
 
 
-CREATE SEQUENCE pH7_Admins_seq;
+CREATE SEQUENCE ph_admins_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_Admins (
-  profileId smallint check (profileId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_Admins_seq'),
+CREATE TABLE IF NOT EXISTS ph_admins (
+  profileId smallint check (profileId > 0) NOT NULL DEFAULT NEXTVAL ('ph_admins_seq'),
   username varchar(40) NOT NULL,
   password varchar(120) NOT NULL,
   email varchar(120) NOT NULL,
@@ -53,13 +53,13 @@ CREATE TABLE IF NOT EXISTS pH7_Admins (
   CONSTRAINT email UNIQUE (email)
 )  ;
 
-ALTER SEQUENCE pH7_Admins_seq RESTART WITH 1;
+ALTER SEQUENCE ph_admins_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE pH7_Memberships_seq;
+CREATE SEQUENCE ph7_memberships_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_Memberships (
-  groupId smallint check (groupId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_Memberships_seq'),
+CREATE TABLE IF NOT EXISTS ph7_memberships (
+  groupId smallint check (groupId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_memberships_seq'),
   name varchar(64) NOT NULL DEFAULT '',
   description varchar(255) NOT NULL,
   permissions text NOT NULL,
@@ -70,9 +70,9 @@ CREATE TABLE IF NOT EXISTS pH7_Memberships (
   PRIMARY KEY (groupId)
 )  ;
 
-ALTER SEQUENCE pH7_Memberships_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_memberships_seq RESTART WITH 1;
 
-INSERT INTO pH7_Memberships (groupId, name, description, permissions, price, expirationDays, enable, orderId) VALUES
+INSERT INTO ph7_memberships (groupId, name, description, permissions, price, expirationDays, enable, orderId) VALUES
 (1, 'Visitor', 'This subscription is offered to all visitors who visit the site.', 'a:24:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"0";s:10:"send_mails";s:1:"0";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"0";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"0";s:17:"instant_messaging";s:1:"0";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"0";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"0";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"0";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"0";s:19:"answer_forum_topics";s:1:"0";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"0";}', 0.00, 0, '1', 1),
 (9, 'Pending', 'Pending subscription provisional migration to a different subscription.', 'a:24:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"0";s:10:"send_mails";s:1:"0";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"0";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"0";s:17:"instant_messaging";s:1:"0";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"0";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"0";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"0";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"0";s:19:"answer_forum_topics";s:1:"0";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"0";}', 0.00, 15, '0', 2),
 (2, 'Regular (Free)', 'Free Membership.', 'a:24:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"1";}', 0.00, 0, '1', 3),
@@ -81,10 +81,10 @@ INSERT INTO pH7_Memberships (groupId, name, description, permissions, price, exp
 (6, 'Gold', 'The must membership! The Gold!!!', 'a:24:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"1";}', 29.99, 30, '1', 6);
 
 
-CREATE SEQUENCE pH7_Members_seq;
+CREATE SEQUENCE ph7_members_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_Members (
-  profileId int check (profileId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_Members_seq'),
+CREATE TABLE IF NOT EXISTS ph7_members (
+  profileId int check (profileId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_members_seq'),
   email varchar(120) NOT NULL,
   username varchar(40) NOT NULL,
   password varchar(120) NOT NULL,
@@ -117,17 +117,17 @@ CREATE TABLE IF NOT EXISTS pH7_Members (
   active tinyint(1) unsigned NOT NULL DEFAULT 1,
   ban tinyint(1) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (profileId),
-  FOREIGN KEY (groupId) REFERENCES pH7_Memberships(groupId),
+  FOREIGN KEY (groupId) REFERENCES ph7_memberships(groupId),
   UNIQUE KEY (username),
   UNIQUE KEY (email),
   KEY birthDate (birthDate)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
-CREATE SEQUENCE pH7_MembersInfo_seq;
+CREATE SEQUENCE ph7_members_info_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_MembersInfo (
-  profileId int check (profileId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_MembersInfo_seq'),
+CREATE TABLE IF NOT EXISTS ph7_members_info (
+  profileId int check (profileId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_members_info_seq'),
   middleName varchar(50) DEFAULT NULL,
   description text DEFAULT NULL,
   address varchar(255) DEFAULT NULL,
@@ -143,48 +143,48 @@ CREATE TABLE IF NOT EXISTS pH7_MembersInfo (
   weight smallint check (weight > 0) DEFAULT NULL,
   PRIMARY KEY (profileId)
  ,
-  FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
+  FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
 )  ;
 
-ALTER SEQUENCE pH7_MembersInfo_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_members_info_seq RESTART WITH 1;
 
-CREATE INDEX country ON pH7_MembersInfo (country);
+CREATE INDEX country ON ph7_members_info (country);
 
 
-CREATE TABLE IF NOT EXISTS pH7_MembersPrivacy (
+CREATE TABLE IF NOT EXISTS ph7_members_privacy (
   profileId int check (profileId > 0) NOT NULL,
   privacyProfile enum('all','only_members','only_me') NOT NULL DEFAULT 'all',
   searchProfile enum('yes','no') NOT NULL DEFAULT 'yes',
   userSaveViews enum('yes','no') NOT NULL DEFAULT 'yes',
   PRIMARY KEY (profileId),
-  FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
+  FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE IF NOT EXISTS pH7_MembersNotifications (
+CREATE TABLE IF NOT EXISTS ph7_members_notifications (
   profileId int check (profileId > 0) NOT NULL,
   enableNewsletters smallint check (enableNewsletters > 0) NOT NULL DEFAULT 1,
   newMsg smallint check (newMsg > 0) NOT NULL DEFAULT 1,
   friendRequest smallint check (friendRequest > 0) NOT NULL DEFAULT 1,
   PRIMARY KEY (profileId),
-  FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
+  FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
 ) ;
 
 -- GHOST User. Do not remove ghost default member!
-INSERT INTO pH7_Members (profileId, email, username, password, firstName, lastName, birthDate, ip, lastActivity, featured, active, userStatus, groupId, joinDate) VALUES
+INSERT INTO ph7_members (profileId, email, username, password, firstName, lastName, birthDate, ip, lastActivity, featured, active, userStatus, groupId, joinDate) VALUES
 (1, 'ghost@ghost', 'ghost', @sPassword, 'Ghost', 'The Ghost', '1001-01-01', '00.000.00.00', @sCurrentDate, 0, 1, 1, 2, @sCurrentDate);
-INSERT INTO pH7_MembersInfo (profileId, description, address, street, city, state, zipCode, country) VALUES
+INSERT INTO ph7_members_info (profileId, description, address, street, city, state, zipCode, country) VALUES
 (1, 'This profile doesn''t exist anymore. So I''m the ghost who replaces him/her during this time', 'The Ghost City', 'Ghost Street', 'Ghost Town', 'Ghost State', '000000', 'US');
 -- Privacy settings
-INSERT INTO pH7_MembersPrivacy (profileId, privacyProfile, searchProfile, userSaveViews) VALUES (1, 'all', 'yes', 'yes');
+INSERT INTO ph7_members_privacy (profileId, privacyProfile, searchProfile, userSaveViews) VALUES (1, 'all', 'yes', 'yes');
 -- Notifications
-INSERT INTO pH7_MembersNotifications (profileId, enableNewsletters, newMsg, friendRequest) VALUES (1, 0, 0, 0);
+INSERT INTO ph7_members_notifications (profileId, enableNewsletters, newMsg, friendRequest) VALUES (1, 0, 0, 0);
 
 
-CREATE SEQUENCE pH7_Affiliates_seq;
+CREATE SEQUENCE ph7_affiliates_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_Affiliates (
-  profileId int check (profileId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_Affiliates_seq'),
+CREATE TABLE IF NOT EXISTS ph7_affiliates (
+  profileId int check (profileId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_affiliates_seq'),
   username varchar(40) NOT NULL,
   firstName varchar(50) NOT NULL,
   lastName varchar(50) NOT NULL,
@@ -215,15 +215,15 @@ CREATE TABLE IF NOT EXISTS pH7_Affiliates (
   CONSTRAINT email UNIQUE (email)
 )  ;
 
-ALTER SEQUENCE pH7_Affiliates_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_affiliates_seq RESTART WITH 1;
 
-CREATE INDEX birthDate ON pH7_Affiliates (birthDate);
+CREATE INDEX birthDate ON ph7_affiliates (birthDate);
 
 
-CREATE SEQUENCE pH7_AffiliatesInfo_seq;
+CREATE SEQUENCE ph7_affiliates_info_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_AffiliatesInfo (
-  profileId int check (profileId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_AffiliatesInfo_seq'),
+CREATE TABLE IF NOT EXISTS ph7_affiliates_info (
+  profileId int check (profileId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_affiliates_info_seq'),
   middleName varchar(50) DEFAULT NULL,
   businessName varchar(100) DEFAULT NULL,
   taxId varchar(40) DEFAULT NULL, -- Tax ID, VAT, SSN, ...
@@ -239,30 +239,30 @@ CREATE TABLE IF NOT EXISTS pH7_AffiliatesInfo (
   website varchar(120) DEFAULT NULL,
   PRIMARY KEY (profileId)
  ,
-  FOREIGN KEY (profileId) REFERENCES pH7_Affiliates(profileId)
+  FOREIGN KEY (profileId) REFERENCES ph7_affiliates(profileId)
 )  ;
 
-ALTER SEQUENCE pH7_AffiliatesInfo_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_affiliates_info_seq RESTART WITH 1;
 
-CREATE INDEX country ON pH7_AffiliatesInfo (country);
+CREATE INDEX country ON ph7_affiliates_info (country);
 
 
-CREATE SEQUENCE pH7_BlockIp_seq;
+CREATE SEQUENCE ph7_block_ip_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_BlockIp (
-  ipId smallint check (ipId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_BlockIp_seq'),
+CREATE TABLE IF NOT EXISTS ph7_block_ip (
+  ipId smallint check (ipId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_block_ip_seq'),
   ip varchar(45) NOT NULL,
   expiration smallint check (expiration > 0) NOT NULL,
   PRIMARY KEY (ip)
 )  ;
 
-CREATE INDEX ipId ON pH7_BlockIp (ipId);
+CREATE INDEX ipId ON ph7_block_ip (ipId);
 
 
-CREATE SEQUENCE pH7_Ads_seq;
+CREATE SEQUENCE ph7_ads_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_Ads (
-  adsId smallint check (adsId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_Ads_seq'),
+CREATE TABLE IF NOT EXISTS ph7_ads (
+  adsId smallint check (adsId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_ads_seq'),
   name varchar(40) DEFAULT NULL,
   code text,
   active enum('1','0') DEFAULT '1',
@@ -273,9 +273,9 @@ CREATE TABLE IF NOT EXISTS pH7_Ads (
   PRIMARY KEY (adsId)
 )  ;
 
-ALTER SEQUENCE pH7_Ads_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_ads_seq RESTART WITH 1;
 
-INSERT INTO pH7_Ads (adsId, name, code, active, width, height, views, clicks) VALUES
+INSERT INTO ph7_ads (adsId, name, code, active, width, height, views, clicks) VALUES
 (1, 'Sponsor pH7CMS 1 (728x90)', '<a href="#0"><img data-src="holder.js/728x90" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 728, 90, 0, 0),
 (2, 'Sponsor pH7CMS 2 (728x90)', '<a href="#0"><img data-src="holder.js/728x90" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 728, 90, 0, 0),
 (3, 'Sponsor pH7CMS 3 (200x200)', '<a href="#0"><img data-src="holder.js/200x200" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 200, 200, 0, 0),
@@ -294,10 +294,10 @@ INSERT INTO pH7_Ads (adsId, name, code, active, width, height, views, clicks) VA
 (16, 'Sponsor pH7CMS 16 (160x600)', '<a href="#0"><img data-src="holder.js/160x600" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 160, 600, 0, 0);
 
 
-CREATE SEQUENCE pH7_AdsAffiliates_seq;
+CREATE SEQUENCE ph7_ads_affiliates_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_AdsAffiliates (
-  adsId smallint check (adsId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_AdsAffiliates_seq'),
+CREATE TABLE IF NOT EXISTS ph7_ads_affiliates (
+  adsId smallint check (adsId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_ads_affiliates_seq'),
   name varchar(40) DEFAULT NULL,
   code text,
   active enum('1','0') DEFAULT '1',
@@ -306,9 +306,9 @@ CREATE TABLE IF NOT EXISTS pH7_AdsAffiliates (
   PRIMARY KEY (adsId)
 )  ;
 
-ALTER SEQUENCE pH7_AdsAffiliates_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_ads_affiliates_seq RESTART WITH 1;
 
-INSERT INTO pH7_AdsAffiliates (adsId, name, code, active, width, height) VALUES
+INSERT INTO ph7_ads_affiliates (adsId, name, code, active, width, height) VALUES
 (1, 'Affiliate Banner 1 (728x90)', '<a href="%affiliate_url%"><img data-src="holder.js/728x90" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 728, 90),
 (2, 'Affiliate Banner 2 (728x90)', '<a href="%affiliate_url%/signup"><img data-src="holder.js/728x90" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 728, 90),
 (3, 'Affiliate Banner 3 (200x200)', '<a href="%affiliate_url%"><img data-src="holder.js/200x200" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 200, 200),
@@ -327,10 +327,10 @@ INSERT INTO pH7_AdsAffiliates (adsId, name, code, active, width, height) VALUES
 (16, 'Affiliate Banner 16 (160x600)', '<a href="%affiliate_url%/signup"><img data-src="holder.js/160x600" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 160, 600);
 
 
-CREATE SEQUENCE pH7_AlbumsPictures_seq;
+CREATE SEQUENCE ph7_albums_pictures_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_AlbumsPictures (
-  albumId int check (albumId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_AlbumsPictures_seq'),
+CREATE TABLE IF NOT EXISTS ph7_albums_pictures (
+  albumId int check (albumId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_albums_pictures_seq'),
   profileId int check (profileId > 0) NOT NULL,
   name varchar(80) NOT NULL,
   thumb char(11) NOT NULL,
@@ -342,16 +342,16 @@ CREATE TABLE IF NOT EXISTS pH7_AlbumsPictures (
   createdDate timestamp(0) NULL,
   updatedDate timestamp(0) DEFAULT NULL,
   PRIMARY KEY (albumId),
-  FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
+  FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
 )  ;
 
-ALTER SEQUENCE pH7_AlbumsPictures_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_albums_pictures_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE pH7_AlbumsVideos_seq;
+CREATE SEQUENCE ph7_albums_videos_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_AlbumsVideos (
-  albumId int check (albumId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_AlbumsVideos_seq'),
+CREATE TABLE IF NOT EXISTS ph7_albums_videos (
+  albumId int check (albumId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_albums_videos_seq'),
   profileId int check (profileId > 0) NOT NULL,
   name varchar(80) NOT NULL,
   thumb char(11) NOT NULL,
@@ -363,16 +363,16 @@ CREATE TABLE IF NOT EXISTS pH7_AlbumsVideos (
   createdDate timestamp(0) NULL,
   updatedDate timestamp(0) DEFAULT NULL,
   PRIMARY KEY (albumId),
-  FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
+  FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
 )  ;
 
-ALTER SEQUENCE pH7_AlbumsVideos_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_albums_videos_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE pH7_Pictures_seq;
+CREATE SEQUENCE ph7_pictures_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_Pictures (
-  pictureId int check (pictureId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_Pictures_seq'),
+CREATE TABLE IF NOT EXISTS ph7_pictures (
+  pictureId int check (pictureId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_pictures_seq'),
   profileId int check (profileId > 0) NOT NULL,
   albumId int check (albumId > 0) NOT NULL,
   title varchar(80) NOT NULL,
@@ -385,17 +385,17 @@ CREATE TABLE IF NOT EXISTS pH7_Pictures (
   createdDate timestamp(0) NULL,
   updatedDate timestamp(0) DEFAULT NULL,
   PRIMARY KEY (pictureId),
-  FOREIGN KEY (albumId) REFERENCES pH7_AlbumsPictures(albumId),
-  FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
+  FOREIGN KEY (albumId) REFERENCES ph7_albums_pictures(albumId),
+  FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
 )  ;
 
-ALTER SEQUENCE pH7_Pictures_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_pictures_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE pH7_Videos_seq;
+CREATE SEQUENCE ph7_videos_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_Videos (
-  videoId int check (videoId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_Videos_seq'),
+CREATE TABLE IF NOT EXISTS ph7_videos (
+  videoId int check (videoId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_videos_seq'),
   profileId int check (profileId > 0) NOT NULL,
   albumId int check (albumId > 0) NOT NULL,
   title varchar(80) DEFAULT NULL,
@@ -410,33 +410,33 @@ CREATE TABLE IF NOT EXISTS pH7_Videos (
   updatedDate timestamp(0) DEFAULT NULL,
   duration int NOT NULL,
   PRIMARY KEY (videoId),
-  FOREIGN KEY (albumId) REFERENCES pH7_AlbumsVideos(albumId),
-  FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
+  FOREIGN KEY (albumId) REFERENCES ph7_albums_videos(albumId),
+  FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
 )  ;
 
-ALTER SEQUENCE pH7_Videos_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_videos_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE pH7_AnalyticsApi_seq;
+CREATE SEQUENCE ph7_analytics_api_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_AnalyticsApi (
-  analyticsId smallint check (analyticsId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_AnalyticsApi_seq'),
+CREATE TABLE IF NOT EXISTS ph7_analytics_api (
+  analyticsId smallint check (analyticsId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_analytics_api_seq'),
   name varchar(32) DEFAULT NULL,
   code text,
   active enum('1','0') DEFAULT '1',
   PRIMARY KEY (analyticsId)
 )  ;
 
-ALTER SEQUENCE pH7_AnalyticsApi_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_analytics_api_seq RESTART WITH 1;
 
-INSERT INTO pH7_AnalyticsApi (analyticsId, name, code, active) VALUES
+INSERT INTO ph7_analytics_api (analyticsId, name, code, active) VALUES
 (1, 'Analytics Code', '', '1');
 
 
-CREATE SEQUENCE pH7_Blogs_seq;
+CREATE SEQUENCE ph7_blogs_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_Blogs (
-  blogId mediumint check (blogId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_Blogs_seq'),
+CREATE TABLE IF NOT EXISTS ph7_blogs (
+  blogId mediumint check (blogId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_blogs_seq'),
   postId varchar(60) NOT NULL,
   langId char(2) NOT NULL DEFAULT '',
   title varchar(100) DEFAULT NULL,
@@ -459,32 +459,32 @@ CREATE TABLE IF NOT EXISTS pH7_Blogs (
   CONSTRAINT postId UNIQUE (postId)
 )  ;
 
-ALTER SEQUENCE pH7_Blogs_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_blogs_seq RESTART WITH 1;
 
 
-CREATE TABLE IF NOT EXISTS pH7_BlogsCategories (
+CREATE TABLE IF NOT EXISTS ph7_blogs_categories (
   categoryId smallint check (categoryId > 0) NOT NULL,
   blogId mediumint check (blogId > 0) NOT NULL
  ,
-  FOREIGN KEY (blogId) REFERENCES pH7_Blogs(blogId)
+  FOREIGN KEY (blogId) REFERENCES ph7_blogs(blogId)
 ) ;
 
 CREATE INDEX (categoryId);
 CREATE INDEX (blogId);
 
 
-CREATE SEQUENCE pH7_BlogsDataCategories_seq;
+CREATE SEQUENCE ph7_blogs_data_categories_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_BlogsDataCategories (
-  categoryId smallint check (categoryId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_BlogsDataCategories_seq'),
+CREATE TABLE IF NOT EXISTS ph7_blogs_data_categories (
+  categoryId smallint check (categoryId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_blogs_data_categories_seq'),
   name varchar(40) DEFAULT NULL,
   PRIMARY KEY (categoryId),
   UNIQUE (name)
 )  ;
 
-ALTER SEQUENCE pH7_BlogsDataCategories_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_blogs_data_categories_seq RESTART WITH 1;
 
-INSERT INTO pH7_BlogsDataCategories (categoryId, name) VALUES
+INSERT INTO ph7_blogs_data_categories (categoryId, name) VALUES
 (1, 'Affiliate'),
 (2, 'Business'),
 (3, 'Company'),
@@ -507,10 +507,10 @@ INSERT INTO pH7_BlogsDataCategories (categoryId, name) VALUES
 (20, 'Travel');
 
 
-CREATE SEQUENCE pH7_Notes_seq;
+CREATE SEQUENCE ph7_notes_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_Notes (
-  noteId int check (noteId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_Notes_seq'),
+CREATE TABLE IF NOT EXISTS ph7_notes (
+  noteId int check (noteId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_notes_seq'),
   profileId int check (profileId > 0) NOT NULL,
   postId varchar(60) NOT NULL,
   langId char(2) NOT NULL DEFAULT '',
@@ -534,39 +534,39 @@ CREATE TABLE IF NOT EXISTS pH7_Notes (
   approved smallint check (approved > 0) NOT NULL DEFAULT '1',
   PRIMARY KEY (noteId),
   CONSTRAINT postId UNIQUE (postId),
-  FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
+  FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
 )  ;
 
-ALTER SEQUENCE pH7_Notes_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_notes_seq RESTART WITH 1;
 
 
-CREATE TABLE IF NOT EXISTS pH7_NotesCategories (
+CREATE TABLE IF NOT EXISTS ph7_notes_categories (
   categoryId smallint check (categoryId > 0) NOT NULL,
   noteId int check (noteId > 0) NOT NULL,
   profileId int check (profileId > 0) NOT NULL
  ,
-  FOREIGN KEY (noteId) REFERENCES pH7_Notes(noteId),
-  FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
+  FOREIGN KEY (noteId) REFERENCES ph7_notes(noteId),
+  FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
 )  ;
 
-ALTER SEQUENCE pH7_NotesCategories_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_notes_categories_seq RESTART WITH 1;
 
 CREATE INDEX (categoryId);
 CREATE INDEX (noteId);
 
 
-CREATE SEQUENCE pH7_NotesDataCategories_seq;
+CREATE SEQUENCE ph7_notes_data_categories_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_NotesDataCategories (
-  categoryId smallint check (categoryId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_NotesDataCategories_seq'),
+CREATE TABLE IF NOT EXISTS ph7_notes_data_categories (
+  categoryId smallint check (categoryId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_notes_data_categories_seq'),
   name varchar(40) DEFAULT NULL,
   PRIMARY KEY (categoryId),
   UNIQUE (name)
 )  ;
 
-ALTER SEQUENCE pH7_NotesDataCategories_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_notes_data_categories_seq RESTART WITH 1;
 
-INSERT INTO pH7_NotesDataCategories (categoryId, name) VALUES
+INSERT INTO ph7_notes_data_categories (categoryId, name) VALUES
 (1, 'Business'),
 (2, 'Companies'),
 (3, 'Dating'),
@@ -589,10 +589,10 @@ INSERT INTO pH7_NotesDataCategories (categoryId, name) VALUES
 (20, 'Travel');
 
 
-CREATE SEQUENCE pH7_CommentsBlog_seq;
+CREATE SEQUENCE ph7_comments_blog_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_CommentsBlog (
-  commentId int check (commentId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_CommentsBlog_seq'),
+CREATE TABLE IF NOT EXISTS ph7_comments_blog (
+  commentId int check (commentId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_comments_blog_seq'),
   sender int check (sender > 0) NOT NULL,
   recipient mediumint check (recipient > 0) NOT NULL,
   comment text NOT NULL,
@@ -601,17 +601,17 @@ CREATE TABLE IF NOT EXISTS pH7_CommentsBlog (
   approved enum('1','0') NOT NULL DEFAULT '1',
   PRIMARY KEY (commentId),
   -- Maybe we'll let the comments of the members even if they are deleted or we will allow administrator to leave a comment, so we comment on this line.
-  -- FOREIGN KEY (sender) REFERENCES pH7_Members(profileId),
-  FOREIGN KEY (recipient) REFERENCES pH7_Blogs(blogId)
+  -- FOREIGN KEY (sender) REFERENCES ph7_members(profileId),
+  FOREIGN KEY (recipient) REFERENCES ph7_blogs(blogId)
 )  ;
 
-ALTER SEQUENCE pH7_CommentsBlog_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_comments_blog_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE pH7_CommentsNote_seq;
+CREATE SEQUENCE ph7_comments_note_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_CommentsNote (
-  commentId int check (commentId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_CommentsNote_seq'),
+CREATE TABLE IF NOT EXISTS ph7_comments_note (
+  commentId int check (commentId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_comments_note_seq'),
   sender int check (sender > 0) NOT NULL,
   recipient int check (recipient > 0) NOT NULL,
   comment text NOT NULL,
@@ -620,17 +620,17 @@ CREATE TABLE IF NOT EXISTS pH7_CommentsNote (
   approved enum('1','0') NOT NULL DEFAULT '1',
   PRIMARY KEY (commentId),
   -- Maybe we'll let the comments of the members even if they are deleted.
-  -- FOREIGN KEY (sender) pH7_Members(profileId),
-  FOREIGN KEY (recipient) REFERENCES pH7_Notes(noteId)
+  -- FOREIGN KEY (sender) ph7_members(profileId),
+  FOREIGN KEY (recipient) REFERENCES ph7_notes(noteId)
 )  ;
 
-ALTER SEQUENCE pH7_CommentsNote_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_comments_note_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE pH7_CommentsPicture_seq;
+CREATE SEQUENCE ph7_comments_picture_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_CommentsPicture (
-  commentId int check (commentId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_CommentsPicture_seq'),
+CREATE TABLE IF NOT EXISTS ph7_comments_picture (
+  commentId int check (commentId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_comments_picture_seq'),
   sender int check (sender > 0) NOT NULL,
   recipient int check (recipient > 0) NOT NULL,
   comment text NOT NULL,
@@ -639,17 +639,17 @@ CREATE TABLE IF NOT EXISTS pH7_CommentsPicture (
   approved enum('1','0') NOT NULL DEFAULT '1',
   PRIMARY KEY (commentId),
   -- Maybe we'll let the comments of the members even if they are deleted.
-  -- FOREIGN KEY (sender) pH7_Members(profileId),
-  FOREIGN KEY (recipient) REFERENCES pH7_Pictures(pictureId)
+  -- FOREIGN KEY (sender) ph7_members(profileId),
+  FOREIGN KEY (recipient) REFERENCES ph7_pictures(pictureId)
 )  ;
 
-ALTER SEQUENCE pH7_CommentsPicture_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_comments_picture_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE pH7_CommentsVideo_seq;
+CREATE SEQUENCE ph7_comments_video_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_CommentsVideo (
-  commentId int check (commentId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_CommentsVideo_seq'),
+CREATE TABLE IF NOT EXISTS ph7_comments_video (
+  commentId int check (commentId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_comments_video_seq'),
   sender int check (sender > 0) NOT NULL,
   recipient int check (recipient > 0) NOT NULL,
   comment text NOT NULL,
@@ -658,17 +658,17 @@ CREATE TABLE IF NOT EXISTS pH7_CommentsVideo (
   approved enum('1','0') NOT NULL DEFAULT '1',
   PRIMARY KEY (commentId),
   -- Maybe we'll let the comments of the members even if they are deleted.
-  -- FOREIGN KEY (sender) pH7_Members(profileId),
-  FOREIGN KEY (recipient) REFERENCES pH7_Videos(videoId)
+  -- FOREIGN KEY (sender) ph7_members(profileId),
+  FOREIGN KEY (recipient) REFERENCES ph7_videos(videoId)
 )  ;
 
-ALTER SEQUENCE pH7_CommentsVideo_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_comments_video_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE pH7_CommentsGame_seq;
+CREATE SEQUENCE ph7_comments_game_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_CommentsGame (
-  commentId int check (commentId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_CommentsGame_seq'),
+CREATE TABLE IF NOT EXISTS ph7_comments_game (
+  commentId int check (commentId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_comments_game_seq'),
   sender int check (sender > 0) NOT NULL,
   recipient int check (recipient > 0) NOT NULL,
   comment text NOT NULL,
@@ -677,17 +677,17 @@ CREATE TABLE IF NOT EXISTS pH7_CommentsGame (
   approved enum('1','0') NOT NULL DEFAULT '1',
   PRIMARY KEY (commentId),
   -- Maybe we'll let the comments of the members even if they are deleted.
-  -- FOREIGN KEY (sender) pH7_Members(profileId),
-  FOREIGN KEY (recipient) REFERENCES pH7_Games(gameId) -- Warning: You must first download the file "pH7_Game.sql" for this table can be inserted because it uses a foreign key.
+  -- FOREIGN KEY (sender) ph7_members(profileId),
+  FOREIGN KEY (recipient) REFERENCES ph7_games(gameId) -- Warning: You must first download the file "pH7_Game.sql" for this table can be inserted because it uses a foreign key.
 )  ;
 
-ALTER SEQUENCE pH7_CommentsGame_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_comments_game_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE pH7_CommentsProfile_seq;
+CREATE SEQUENCE ph7_comments_profile_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_CommentsProfile (
-  commentId int check (commentId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_CommentsProfile_seq'),
+CREATE TABLE IF NOT EXISTS ph7_comments_profile (
+  commentId int check (commentId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_comments_profile_seq'),
   sender int check (sender > 0) NOT NULL,
   recipient int check (recipient > 0) NOT NULL,
   comment text NOT NULL,
@@ -696,55 +696,55 @@ CREATE TABLE IF NOT EXISTS pH7_CommentsProfile (
   approved enum('1','0') DEFAULT '1',
   PRIMARY KEY (commentId),
   -- Maybe we'll let the comments of the members even if they are deleted.
-  -- FOREIGN KEY (sender) pH7_Members(profileId),
-  FOREIGN KEY (recipient) REFERENCES pH7_Members(profileId)
+  -- FOREIGN KEY (sender) ph7_members(profileId),
+  FOREIGN KEY (recipient) REFERENCES ph7_members(profileId)
 )  ;
 
-ALTER SEQUENCE pH7_CommentsProfile_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_comments_profile_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE pH7_ForumsCategories_seq;
+CREATE SEQUENCE ph7_forums_categories_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_ForumsCategories (
-  categoryId smallint check (categoryId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_ForumsCategories_seq'),
+CREATE TABLE IF NOT EXISTS ph7_forums_categories (
+  categoryId smallint check (categoryId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_forums_categories_seq'),
   title varchar(60) DEFAULT NULL,
   PRIMARY KEY (categoryId),
   UNIQUE (title)
 )  ;
 
-ALTER SEQUENCE pH7_ForumsCategories_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_forums_categories_seq RESTART WITH 1;
 
-INSERT INTO pH7_ForumsCategories (categoryId, title) VALUES
+INSERT INTO ph7_forums_categories (categoryId, title) VALUES
 (1, 'General'),
 (2, 'Free Online Dating Site'),
 (3, 'Business');
 
 
-CREATE SEQUENCE pH7_Forums_seq;
+CREATE SEQUENCE ph7_forums_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_Forums (
-  forumId mediumint check (forumId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_Forums_seq'),
+CREATE TABLE IF NOT EXISTS ph7_forums (
+  forumId mediumint check (forumId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_forums_seq'),
   name varchar(80) NOT NULL DEFAULT 'New forum',
   description varchar(255) NOT NULL,
   categoryId smallint check (categoryId > 0) DEFAULT NULL,
   createdDate timestamp(0) NULL,
   updatedDate timestamp(0) DEFAULT NULL,
   PRIMARY KEY (forumId),
-  FOREIGN KEY (categoryId) REFERENCES pH7_ForumsCategories(categoryId)
+  FOREIGN KEY (categoryId) REFERENCES ph7_forums_categories(categoryId)
 )  ;
 
-ALTER SEQUENCE pH7_Forums_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_forums_seq RESTART WITH 1;
 
-INSERT INTO pH7_Forums (forumId, name, description, categoryId) VALUES
+INSERT INTO ph7_forums (forumId, name, description, categoryId) VALUES
 (1, 'Hello', 'Free dating site', 1),
 (2, 'Online Dating', 'Discussion about the online dating websites', 2),
 (3, 'The Best Dating Site', 'The best dating site', 1);
 
 
-CREATE SEQUENCE pH7_ForumsTopics_seq;
+CREATE SEQUENCE ph7_forums_topics_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_ForumsTopics (
-  topicId int check (topicId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_ForumsTopics_seq'),
+CREATE TABLE IF NOT EXISTS ph7_forums_topics (
+  topicId int check (topicId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_forums_topics_seq'),
   forumId mediumint check (forumId > 0) DEFAULT NULL,
   profileId int check (profileId > 0) NOT NULL,
   title varchar(100) NOT NULL,
@@ -754,18 +754,18 @@ CREATE TABLE IF NOT EXISTS pH7_ForumsTopics (
   updatedDate timestamp(0) DEFAULT NULL,
   views int check (views > 0) NOT NULL DEFAULT '0',
   -- Maybe we'll let the topic of member even if the member is deleted
-  -- FOREIGN KEY (profileId) pH7_Members(profileId),
-  FOREIGN KEY (forumId) REFERENCES pH7_Forums(forumId),
+  -- FOREIGN KEY (profileId) ph7_members(profileId),
+  FOREIGN KEY (forumId) REFERENCES ph7_forums(forumId),
   PRIMARY KEY (topicId)
 )  ;
 
-ALTER SEQUENCE pH7_ForumsTopics_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_forums_topics_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE pH7_ForumsMessages_seq;
+CREATE SEQUENCE ph7_forums_messages_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_ForumsMessages (
-  messageId int check (messageId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_ForumsMessages_seq'),
+CREATE TABLE IF NOT EXISTS ph7_forums_messages (
+  messageId int check (messageId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_forums_messages_seq'),
   topicId int check (topicId > 0) NOT NULL,
   profileId int check (profileId > 0) NOT NULL,
   message text NOT NULL,
@@ -773,15 +773,15 @@ CREATE TABLE IF NOT EXISTS pH7_ForumsMessages (
   createdDate timestamp(0) NULL,
   updatedDate timestamp(0) DEFAULT NULL,
   -- Maybe we'll let the topic of member even if the member is deleted
-  -- FOREIGN KEY (profileId) pH7_Members(profileId),
-  FOREIGN KEY (topicId) REFERENCES pH7_ForumsTopics(topicId),
+  -- FOREIGN KEY (profileId) ph7_members(profileId),
+  FOREIGN KEY (topicId) REFERENCES ph7_forums_topics(topicId),
   PRIMARY KEY (messageId)
 )  ;
 
-ALTER SEQUENCE pH7_ForumsMessages_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_forums_messages_seq RESTART WITH 1;
 
 
-CREATE TABLE IF NOT EXISTS pH7_LanguagesInfo (
+CREATE TABLE IF NOT EXISTS ph7_languages_info (
   langId varchar(5) NOT NULL,
   name varchar(60) NOT NULL,
   charset varchar(15) NOT NULL,
@@ -793,11 +793,11 @@ CREATE TABLE IF NOT EXISTS pH7_LanguagesInfo (
   PRIMARY KEY (langId)
 ) ;
 
-INSERT INTO pH7_LanguagesInfo (langId, name, charset, active, direction, author, website, email) VALUES
+INSERT INTO ph7_languages_info (langId, name, charset, active, direction, author, website, email) VALUES
 ('en_US', 'English', 'UTF-8', '1', 'ltr', 'Pierre-Henry Soria', 'http://ph7.me', 'me@ph7.me');
 
 
-CREATE TABLE IF NOT EXISTS pH7_Likes (
+CREATE TABLE IF NOT EXISTS ph7_likes (
   keyId varchar(255) NOT NULL,
   votes int check (votes > 0) NOT NULL,
   lastVote timestamp(0) NOT NULL,
@@ -806,20 +806,20 @@ CREATE TABLE IF NOT EXISTS pH7_Likes (
 ) ;
 
 
-CREATE SEQUENCE pH7_LogError_seq;
+CREATE SEQUENCE ph7_log_error_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_LogError (
-  logId mediumint check (logId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_LogError_seq'),
+CREATE TABLE IF NOT EXISTS ph7_log_error (
+  logId mediumint check (logId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_log_error_seq'),
   logError longtext,
   PRIMARY KEY (logId),
   FULLTEXT KEY logError (logError) -- FULLTEXT is not supported by InnoDB in MySQL < 5.6.4, so set MyISAM engine
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
-CREATE SEQUENCE pH7_AdminsAttemptsLogin_seq;
+CREATE SEQUENCE ph_admins_attempts_login_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_AdminsAttemptsLogin (
-  attemptsId int check (attemptsId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_AdminsAttemptsLogin_seq'),
+CREATE TABLE IF NOT EXISTS ph_admins_attempts_login (
+  attemptsId int check (attemptsId > 0) NOT NULL DEFAULT NEXTVAL ('ph_admins_attempts_login_seq'),
   ip varchar(45) NOT NULL DEFAULT '',
   attempts smallint check (attempts > 0) NOT NULL ,
   lastLogin TIMESTAMP(0) NOT NULL,
@@ -828,10 +828,10 @@ CREATE TABLE IF NOT EXISTS pH7_AdminsAttemptsLogin (
 ) ;
 
 
-CREATE SEQUENCE pH7_MembersAttemptsLogin_seq;
+CREATE SEQUENCE ph7_members_attempts_login_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_MembersAttemptsLogin (
-  attemptsId int check (attemptsId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_MembersAttemptsLogin_seq'),
+CREATE TABLE IF NOT EXISTS ph7_members_attempts_login (
+  attemptsId int check (attemptsId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_members_attempts_login_seq'),
   ip varchar(45) NOT NULL DEFAULT '',
   attempts smallint check (attempts > 0) NOT NULL ,
   lastLogin TIMESTAMP(0) NOT NULL,
@@ -840,10 +840,10 @@ CREATE TABLE IF NOT EXISTS pH7_MembersAttemptsLogin (
 ) ;
 
 
-CREATE SEQUENCE pH7_AffiliatesAttemptsLogin_seq;
+CREATE SEQUENCE ph7_affiliates_attempts_login_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_AffiliatesAttemptsLogin (
-  attemptsId int check (attemptsId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_AffiliatesAttemptsLogin_seq'),
+CREATE TABLE IF NOT EXISTS ph7_affiliates_attempts_login (
+  attemptsId int check (attemptsId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_affiliates_attempts_login_seq'),
   ip varchar(45) NOT NULL DEFAULT '',
   attempts smallint check (attempts > 0) NOT NULL ,
   lastLogin TIMESTAMP(0) NOT NULL,
@@ -852,10 +852,10 @@ CREATE TABLE IF NOT EXISTS pH7_AffiliatesAttemptsLogin (
 ) ;
 
 
-CREATE SEQUENCE pH7_AdminsLogLogin_seq;
+CREATE SEQUENCE ph_admins_log_login_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_AdminsLogLogin (
-  logId mediumint check (logId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_AdminsLogLogin_seq'),
+CREATE TABLE IF NOT EXISTS ph_admins_log_login (
+  logId mediumint check (logId > 0) NOT NULL DEFAULT NEXTVAL ('ph_admins_log_login_seq'),
   email varchar(120) NOT NULL DEFAULT '',
   username varchar(64) NOT NULL DEFAULT '',
   password varchar(40) DEFAULT NULL,
@@ -865,13 +865,13 @@ CREATE TABLE IF NOT EXISTS pH7_AdminsLogLogin (
   PRIMARY KEY (logId)
 )  ;
 
-ALTER SEQUENCE pH7_AdminsLogLogin_seq RESTART WITH 1;
+ALTER SEQUENCE ph_admins_log_login_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE pH7_MembersLogLogin_seq;
+CREATE SEQUENCE ph7_members_log_login_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_MembersLogLogin (
-  logId mediumint check (logId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_MembersLogLogin_seq'),
+CREATE TABLE IF NOT EXISTS ph7_members_log_login (
+  logId mediumint check (logId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_members_log_login_seq'),
   email varchar(120) NOT NULL DEFAULT '',
   username varchar(64) NOT NULL DEFAULT '',
   password varchar(40) DEFAULT NULL,
@@ -881,13 +881,13 @@ CREATE TABLE IF NOT EXISTS pH7_MembersLogLogin (
   PRIMARY KEY (logId)
 )  ;
 
-ALTER SEQUENCE pH7_MembersLogLogin_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_members_log_login_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE pH7_AffiliatesLogLogin_seq;
+CREATE SEQUENCE ph7_affiliates_log_login_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_AffiliatesLogLogin (
-  logId mediumint check (logId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_AffiliatesLogLogin_seq'),
+CREATE TABLE IF NOT EXISTS ph7_affiliates_log_login (
+  logId mediumint check (logId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_affiliates_log_login_seq'),
   email varchar(120) NOT NULL DEFAULT '',
   username varchar(64) NOT NULL DEFAULT '',
   password varchar(40) DEFAULT NULL,
@@ -897,10 +897,10 @@ CREATE TABLE IF NOT EXISTS pH7_AffiliatesLogLogin (
   PRIMARY KEY (logId)
 )  ;
 
-ALTER SEQUENCE pH7_AffiliatesLogLogin_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_affiliates_log_login_seq RESTART WITH 1;
 
 
-CREATE TABLE IF NOT EXISTS pH7_AdminsLogSess (
+CREATE TABLE IF NOT EXISTS ph_admins_log_sess (
   profileId smallint check (profileId > 0) DEFAULT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(240) DEFAULT NULL,
@@ -916,13 +916,13 @@ CREATE TABLE IF NOT EXISTS pH7_AdminsLogSess (
   guest smallint check (guest > 0) NOT NULL DEFAULT 1,
   dateTime timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY profileId (profileId),
-  FOREIGN KEY (profileId) REFERENCES pH7_Admins(profileId),
+  FOREIGN KEY (profileId) REFERENCES ph_admins(profileId),
   KEY sessionHash (sessionHash),
   KEY lastActivity (lastActivity)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE IF NOT EXISTS pH7_MembersLogSess (
+CREATE TABLE IF NOT EXISTS ph7_members_log_sess (
   profileId int check (profileId > 0) DEFAULT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(120) DEFAULT NULL,
@@ -938,13 +938,13 @@ CREATE TABLE IF NOT EXISTS pH7_MembersLogSess (
   guest smallint check (guest > 0) NOT NULL DEFAULT 1,
   dateTime timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY profileId (profileId),
-  FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId),
+  FOREIGN KEY (profileId) REFERENCES ph7_members(profileId),
   KEY sessionHash (sessionHash),
   KEY lastActivity (lastActivity)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE IF NOT EXISTS pH7_AffiliatesLogSess (
+CREATE TABLE IF NOT EXISTS ph7_affiliates_log_sess (
   profileId int check (profileId > 0) DEFAULT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(120) DEFAULT NULL,
@@ -960,67 +960,67 @@ CREATE TABLE IF NOT EXISTS pH7_AffiliatesLogSess (
   guest smallint check (guest > 0) NOT NULL DEFAULT 1,
   dateTime timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY profileId (profileId),
-  FOREIGN KEY (profileId) REFERENCES pH7_Affiliates(profileId),
+  FOREIGN KEY (profileId) REFERENCES ph7_affiliates(profileId),
   KEY sessionHash (sessionHash),
   KEY lastActivity (lastActivity)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE IF NOT EXISTS pH7_MembersBackground (
+CREATE TABLE IF NOT EXISTS ph7_members_background (
   profileId int check (profileId > 0) NOT NULL,
   file varchar(5) NOT NULL,
   approved smallint check (approved > 0) NOT NULL DEFAULT '1',
   PRIMARY KEY profileId (profileId),
-  FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
+  FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE IF NOT EXISTS pH7_MembersWhoViews (
+CREATE TABLE IF NOT EXISTS ph7_members_who_views (
   profileId int check (profileId > 0) NOT NULL,
   visitorId int check (visitorId > 0) NOT NULL,
   lastVisit timestamp(0) NULL
  ,
-  FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId),
-  FOREIGN KEY (visitorId) REFERENCES pH7_Members(profileId)
+  FOREIGN KEY (profileId) REFERENCES ph7_members(profileId),
+  FOREIGN KEY (visitorId) REFERENCES ph7_members(profileId)
 ) ;
 
-CREATE INDEX profileId ON pH7_MembersWhoViews (profileId);
-CREATE INDEX visitorId ON pH7_MembersWhoViews (visitorId);
+CREATE INDEX profileId ON ph7_members_who_views (profileId);
+CREATE INDEX visitorId ON ph7_members_who_views (visitorId);
 
 
-CREATE TABLE IF NOT EXISTS pH7_MembersFriends (
+CREATE TABLE IF NOT EXISTS ph7_members_friends (
   profileId int check (profileId > 0) NOT NULL,
   friendId int check (friendId > 0) NOT NULL,
   requestDate timestamp(0) DEFAULT NULL,
   pending smallint check (pending > 0) NOT NULL DEFAULT '0'
  ,
-  FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId),
-  FOREIGN KEY (friendId) REFERENCES pH7_Members(profileId)
+  FOREIGN KEY (profileId) REFERENCES ph7_members(profileId),
+  FOREIGN KEY (friendId) REFERENCES ph7_members(profileId)
 ) ;
 
-CREATE INDEX profileId ON pH7_MembersFriends (profileId);
-CREATE INDEX friendId ON pH7_MembersFriends (friendId);
+CREATE INDEX profileId ON ph7_members_friends (profileId);
+CREATE INDEX friendId ON ph7_members_friends (friendId);
 
 
-CREATE SEQUENCE pH7_MembersWall_seq;
+CREATE SEQUENCE ph7_members_wall_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_MembersWall (
-  wallId int check (wallId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_MembersWall_seq'),
+CREATE TABLE IF NOT EXISTS ph7_members_wall (
+  wallId int check (wallId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_members_wall_seq'),
   profileId int check (profileId > 0) NOT NULL DEFAULT '0',
   post text CHARACTER SET armscii8,
   createdDate timestamp(0) NULL,
   updatedDate timestamp(0) DEFAULT NULL,
   PRIMARY KEY (wallId),
-  FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
+  FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
 )  ;
 
-ALTER SEQUENCE pH7_MembersWall_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_members_wall_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE pH7_Messages_seq;
+CREATE SEQUENCE ph7_messages_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_Messages (
-  messageId int check (messageId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_Messages_seq'),
+CREATE TABLE IF NOT EXISTS ph7_messages (
+  messageId int check (messageId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_messages_seq'),
   sender int check (sender > 0) NOT NULL DEFAULT '0',
   recipient int check (recipient > 0) NOT NULL DEFAULT '0',
   title varchar(30) NOT NULL DEFAULT '',
@@ -1031,31 +1031,31 @@ CREATE TABLE IF NOT EXISTS pH7_Messages (
   toDelete set('sender','recipient') NOT NULL DEFAULT '',
   PRIMARY KEY (messageId),
   -- This is wrong, because now administrators can also send emails.
-  -- FOREIGN KEY (sender) REFERENCES pH7_Members(profileId),
-  FOREIGN KEY (recipient) REFERENCES pH7_Members(profileId)
+  -- FOREIGN KEY (sender) REFERENCES ph7_members(profileId),
+  FOREIGN KEY (recipient) REFERENCES ph7_members(profileId)
 )  ;
 
-ALTER SEQUENCE pH7_Messages_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_messages_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE pH7_Messenger_seq;
+CREATE SEQUENCE ph7_messenger_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_Messenger (
-  messengerId int check (messengerId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_Messenger_seq'),
+CREATE TABLE IF NOT EXISTS ph7_messenger (
+  messengerId int check (messengerId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_messenger_seq'),
   fromUser varchar(40) NOT NULL DEFAULT '',
   toUser varchar(40) NOT NULL DEFAULT '',
   message text NOT NULL,
   sent timestamp(0) NULL,
   recd int check (recd > 0) NOT NULL DEFAULT '0',
   PRIMARY KEY (messengerId),
-  FOREIGN KEY (fromUser) REFERENCES pH7_Members(username),
-  FOREIGN KEY (toUser) REFERENCES pH7_Members(username)
+  FOREIGN KEY (fromUser) REFERENCES ph7_members(username),
+  FOREIGN KEY (toUser) REFERENCES ph7_members(username)
 )  ;
 
-ALTER SEQUENCE pH7_Messenger_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_messenger_seq RESTART WITH 1;
 
 
-CREATE TABLE IF NOT EXISTS pH7_MetaMain (
+CREATE TABLE IF NOT EXISTS ph7_meta_main (
   langId varchar(5) NOT NULL DEFAULT '',
   pageTitle varchar(100) NOT NULL,
   metaDescription varchar(255) NOT NULL,
@@ -1072,14 +1072,14 @@ CREATE TABLE IF NOT EXISTS pH7_MetaMain (
   PRIMARY KEY (langId)
 ) ;
 
-INSERT INTO pH7_MetaMain (langId, pageTitle, metaDescription, metaKeywords, headline, slogan, promoText, metaRobots, metaAuthor, metaCopyright, metaRating, metaDistribution, metaCategory) VALUES
+INSERT INTO ph7_meta_main (langId, pageTitle, metaDescription, metaKeywords, headline, slogan, promoText, metaRobots, metaAuthor, metaCopyright, metaRating, metaDistribution, metaCategory) VALUES
 ('en_US', 'Home', 'The Best Online Social Dating Service to meet people and keep in touch with your friends', 'meet people, community, single, friends, meet singles, women, men, dating site, dating service, dating website, online dating website', 'Be on the right place!', 'The Place to Meet Lovely People', 'You''re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Social Dating Web Apps or Websites like this one with the #1 <a href="http://ph7cms.com">Dating Web App Builder</a>. It''s Professional, Modern, Open Source, and gives you the Best Way to launch a new Social/Dating Business!', 'index, follow, all', 'Pierre-Henry Soria', 'Copyright Pierre-Henry Soria. All Rights Reserved.', 'general', 'global', 'dating');
 
 
-CREATE SEQUENCE pH7_SysModsEnabled_seq;
+CREATE SEQUENCE ph7_sys_mods_enabled_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_SysModsEnabled (
-  moduleId smallint check (moduleId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_SysModsEnabled_seq'),
+CREATE TABLE IF NOT EXISTS ph7_sys_mods_enabled (
+  moduleId smallint check (moduleId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_sys_mods_enabled_seq'),
   moduleTitle varchar(50) NOT NULL,
   folderName varchar(20) NOT NULL,
   premiumMod enum('0','1') NOT NULL DEFAULT '0',
@@ -1087,9 +1087,9 @@ CREATE TABLE IF NOT EXISTS pH7_SysModsEnabled (
   PRIMARY KEY (moduleId)
 )  ;
 
-ALTER SEQUENCE pH7_SysModsEnabled_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_sys_mods_enabled_seq RESTART WITH 1;
 
-INSERT INTO pH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VALUES
+INSERT INTO ph7_sys_mods_enabled (moduleTitle, folderName, premiumMod, enabled) VALUES
 ('Affiliate', 'affiliate', '0', '1'),
 ('Chat', 'chat', '1', '1'),
 ('Chatroulette', 'chatroulette', '1', '1'),
@@ -1112,10 +1112,10 @@ INSERT INTO pH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VA
 ('Webcam', 'webcam', '0', '0');
 
 
-CREATE SEQUENCE pH7_Modules_seq;
+CREATE SEQUENCE ph7_modules_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_Modules (
-  moduleId smallint check (moduleId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_Modules_seq'),
+CREATE TABLE IF NOT EXISTS ph7_modules (
+  moduleId smallint check (moduleId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_modules_seq'),
   vendorName varchar(40) NOT NULL,
   moduleName varchar(40) NOT NULL,
   version varchar(6) NOT NULL,
@@ -1125,17 +1125,17 @@ CREATE TABLE IF NOT EXISTS pH7_Modules (
   PRIMARY KEY (moduleId)
 )  ;
 
-ALTER SEQUENCE pH7_Modules_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_modules_seq RESTART WITH 1;
 
-INSERT INTO pH7_Modules (vendorName, moduleName, version, active) VALUES
+INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of the SQL schema of pH7CMS (this helps to update and shows whether it is necessary or not to update the database as well) */
 ('pH7CMS', 'SQL System Schema', '1.4.1', 1);
 
 
-CREATE SEQUENCE pH7_Report_seq;
+CREATE SEQUENCE ph7_report_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_Report (
-  reportId smallint check (reportId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_Report_seq'),
+CREATE TABLE IF NOT EXISTS ph7_report (
+  reportId smallint check (reportId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_report_seq'),
   reporterId int check (reporterId > 0) DEFAULT NULL,
   spammerId int check (spammerId > 0) DEFAULT NULL,
   dateTime timestamp(0) DEFAULT NULL,
@@ -1143,14 +1143,14 @@ CREATE TABLE IF NOT EXISTS pH7_Report (
   description varchar(255) DEFAULT NULL,
   url varchar(255) DEFAULT NULL,
   PRIMARY KEY (reportId),
-  FOREIGN KEY (reporterId) REFERENCES pH7_Members(profileId),
-  FOREIGN KEY (spammerId) REFERENCES pH7_Members(profileId)
+  FOREIGN KEY (reporterId) REFERENCES ph7_members(profileId),
+  FOREIGN KEY (spammerId) REFERENCES ph7_members(profileId)
 )  ;
 
-ALTER SEQUENCE pH7_Report_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_report_seq RESTART WITH 1;
 
 
-CREATE TABLE IF NOT EXISTS pH7_Settings (
+CREATE TABLE IF NOT EXISTS ph7_settings (
   settingName varchar(64) NOT NULL,
   settingValue varchar(150) DEFAULT '',
   description varchar(120) DEFAULT '' ,
@@ -1158,7 +1158,7 @@ CREATE TABLE IF NOT EXISTS pH7_Settings (
   PRIMARY KEY (settingName)
 ) ;
 
-INSERT INTO pH7_Settings (settingName, settingValue, description, settingGroup) VALUES
+INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) VALUES
 ('siteName', @sDefaultSiteName, '', 'general'),
 ('adminEmail', @sAdminEmail, '', 'email'),
 ('defaultLanguage', 'en_US', '', 'language'),
@@ -1245,10 +1245,10 @@ INSERT INTO pH7_Settings (settingName, settingValue, description, settingGroup) 
 ('isSoftwareNewsFeed', 1, 'Enable the news feed. 0 = Disable | 1 = Enable', 'general');
 
 
-CREATE SEQUENCE pH7_Subscribers_seq;
+CREATE SEQUENCE ph7_subscribers_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_Subscribers (
-  profileId int check (profileId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_Subscribers_seq'),
+CREATE TABLE IF NOT EXISTS ph7_subscribers (
+  profileId int check (profileId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_subscribers_seq'),
   name varchar(200) NOT NULL,
   email varchar(120) NOT NULL,
   joinDate timestamp(0) DEFAULT NULL,
@@ -1260,13 +1260,13 @@ CREATE TABLE IF NOT EXISTS pH7_Subscribers (
   UNIQUE (email)
 )  ;
 
-ALTER SEQUENCE pH7_Subscribers_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_subscribers_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE pH7_TopMenus_seq;
+CREATE SEQUENCE ph7_top_menus_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_TopMenus (
-  menuId smallint check (menuId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_TopMenus_seq'),
+CREATE TABLE IF NOT EXISTS ph7_top_menus (
+  menuId smallint check (menuId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_top_menus_seq'),
   vendorName varchar(40) NOT NULL,
   moduleName varchar(40) NOT NULL,
   controllerName varchar(40) NOT NULL,
@@ -1279,13 +1279,13 @@ CREATE TABLE IF NOT EXISTS pH7_TopMenus (
   PRIMARY KEY (menuId)
 )  ;
 
-ALTER SEQUENCE pH7_TopMenus_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_top_menus_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE pH7_BottomMenus_seq;
+CREATE SEQUENCE ph7_bottom_menus_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_BottomMenus (
-  menuId smallint check (menuId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_BottomMenus_seq'),
+CREATE TABLE IF NOT EXISTS ph7_bottom_menus (
+  menuId smallint check (menuId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_bottom_menus_seq'),
   vendorName varchar(40) NOT NULL,
   moduleName varchar(40) NOT NULL,
   controllerName varchar(40) NOT NULL,
@@ -1297,44 +1297,44 @@ CREATE TABLE IF NOT EXISTS pH7_BottomMenus (
   PRIMARY KEY (menuId)
 )  ;
 
-ALTER SEQUENCE pH7_BottomMenus_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_bottom_menus_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE pH7_StaticFiles_seq;
+CREATE SEQUENCE ph7_static_files_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_StaticFiles (
-  staticId smallint check (staticId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_StaticFiles_seq'),
+CREATE TABLE IF NOT EXISTS ph7_static_files (
+  staticId smallint check (staticId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_static_files_seq'),
   file varchar(255) NOT NULL,
   fileType enum('css', 'js') NOT NULL,
   active enum('1','0') DEFAULT '1',
   PRIMARY KEY (staticId)
 )  ;
 
-ALTER SEQUENCE pH7_StaticFiles_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_static_files_seq RESTART WITH 1;
 
-INSERT INTO pH7_StaticFiles VALUES (1, '//s7.addthis.com/js/250/addthis_widget.js', 'js', '0');
+INSERT INTO ph7_static_files VALUES (1, '//s7.addthis.com/js/250/addthis_widget.js', 'js', '0');
 
 
-CREATE SEQUENCE pH7_License_seq;
+CREATE SEQUENCE ph7_license_seq;
 
-CREATE TABLE IF NOT EXISTS pH7_License (
-  licenseId smallint check (licenseId > 0) NOT NULL DEFAULT NEXTVAL ('pH7_License_seq'),
+CREATE TABLE IF NOT EXISTS ph7_license (
+  licenseId smallint check (licenseId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_license_seq'),
   licenseKey varchar(40) NOT NULL,
   PRIMARY KEY (licenseId)
 )  ;
 
-ALTER SEQUENCE pH7_License_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_license_seq RESTART WITH 1;
 
-INSERT INTO pH7_License VALUES (1, '');
+INSERT INTO ph7_license VALUES (1, '');
 
 
-CREATE TABLE IF NOT EXISTS pH7_CustomCode (
+CREATE TABLE IF NOT EXISTS ph7_custom_code (
   code text,
   codeType enum('css', 'js') NOT NULL
 )  ;
 
-ALTER SEQUENCE pH7_CustomCode_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_custom_code_seq RESTART WITH 1;
 
-INSERT INTO pH7_CustomCode VALUES
+INSERT INTO ph7_custom_code VALUES
 ('/* Your custom CSS code here */rn', 'css'),
 ('/* Your custom JS code here */rn', 'js');

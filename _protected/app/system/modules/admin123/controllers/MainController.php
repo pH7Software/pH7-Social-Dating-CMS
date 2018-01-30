@@ -132,25 +132,25 @@ class MainController extends Controller
         //---------- Number of Logins Admins ----------//
 
         // All Admins
-        $this->view->today_login_admins = $oStatModel->totalLogins('Admins', 1);
-        $this->view->week_login_admins = $oStatModel->totalLogins('Admins', 7);
-        $this->view->month_login_admins = $oStatModel->totalLogins('Admins', 31);
-        $this->view->year_login_admins = $oStatModel->totalLogins('Admins', 365);
-        $this->view->login_admins = $oStatModel->totalLogins('Admins');
+        $this->view->today_login_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 1);
+        $this->view->week_login_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 7);
+        $this->view->month_login_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 31);
+        $this->view->year_login_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 365);
+        $this->view->login_admins = $oStatModel->totalLogins(DbTableName::ADMIN);
 
         // Men Admins
-        $this->view->today_login_male_admins = $oStatModel->totalLogins('Admins', 1, 'male');
-        $this->view->week_login_male_admins = $oStatModel->totalLogins('Admins', 7, 'male');
-        $this->view->month_login_male_admins = $oStatModel->totalLogins('Admins', 31, 'male');
-        $this->view->year_login_male_admins = $oStatModel->totalLogins('Admins', 365, 'male');
-        $this->view->login_male_admins = $oStatModel->totalLogins('Admins', 0, 'male');
+        $this->view->today_login_male_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 1, 'male');
+        $this->view->week_login_male_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 7, 'male');
+        $this->view->month_login_male_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 31, 'male');
+        $this->view->year_login_male_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 365, 'male');
+        $this->view->login_male_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 0, 'male');
 
         // Women Admins
-        $this->view->today_login_female_admins = $oStatModel->totalLogins('Admins', 1, 'female');
-        $this->view->week_login_female_admins = $oStatModel->totalLogins('Admins', 7, 'female');
-        $this->view->month_login_female_admins = $oStatModel->totalLogins('Admins', 31, 'female');
-        $this->view->year_login_female_admins = $oStatModel->totalLogins('Admins', 365, 'female');
-        $this->view->login_female_admins = $oStatModel->totalLogins('Admins', 0, 'female');
+        $this->view->today_login_female_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 1, 'female');
+        $this->view->week_login_female_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 7, 'female');
+        $this->view->month_login_female_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 31, 'female');
+        $this->view->year_login_female_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 365, 'female');
+        $this->view->login_female_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 0, 'female');
 
 
         //---------- Members Registrations ----------//
