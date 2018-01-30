@@ -28,6 +28,7 @@ class DbTableName
     const ALBUM_VIDEO = 'albums_videos';
     const ANALYTIC_API = 'analytics_api';
     const BLOG = 'blogs';
+    const BLOG_CATEGORY = 'blogs_categories';
 
     const USER_TABLES = [
         self::ADMIN,

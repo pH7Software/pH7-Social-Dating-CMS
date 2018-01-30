@@ -29,9 +29,9 @@ class BlogModel extends BlogCoreModel
             $iLimit = (int)$iLimit;
 
             if ($bCount) {
-                $sSql = 'SELECT *, COUNT(c.blogId) AS totalCatBlogs FROM' . Db::prefix('BlogsDataCategories') . 'AS d INNER JOIN' . Db::prefix('BlogsCategories') . 'AS c ON d.categoryId = c.categoryId GROUP BY d.name, c.blogId, d.categoryId ASC LIMIT :offset, :limit';
+                $sSql = 'SELECT *, COUNT(c.blogId) AS totalCatBlogs FROM' . Db::prefix('BlogsDataCategories') . 'AS d INNER JOIN' . Db::prefix(DbTableName::BLOG_CATEGORY) . 'AS c ON d.categoryId = c.categoryId GROUP BY d.name, c.blogId, d.categoryId ASC LIMIT :offset, :limit';
             } else {
-                $sSqlBlogId = ($iBlogId !== null) ? ' INNER JOIN ' . Db::prefix('BlogsCategories') . 'AS c ON d.categoryId = c.categoryId WHERE c.blogId = :blogId ' : ' ';
+                $sSqlBlogId = ($iBlogId !== null) ? ' INNER JOIN ' . Db::prefix(DbTableName::BLOG_CATEGORY) . 'AS c ON d.categoryId = c.categoryId WHERE c.blogId = :blogId ' : ' ';
                 $sSql = 'SELECT * FROM' . Db::prefix('BlogsDataCategories') . 'AS d' . $sSqlBlogId . 'ORDER BY d.name ASC LIMIT :offset, :limit';
             }
 
@@ -58,7 +58,7 @@ class BlogModel extends BlogCoreModel
      */
     public function addCategory($iCategoryId, $iBlogId)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('BlogsCategories') . '(categoryId, blogId) VALUES(:categoryId, :blogId)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::BLOG_CATEGORY) . '(categoryId, blogId) VALUES(:categoryId, :blogId)');
         $rStmt->bindParam(':categoryId', $iCategoryId, \PDO::PARAM_INT);
         $rStmt->bindParam(':blogId', $iBlogId, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -75,7 +75,7 @@ class BlogModel extends BlogCoreModel
         $this->cache->start(self::CACHE_GROUP, 'readPost' . $sPostId, static::CACHE_TIME);
 
         if (!$oData = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::BLOG) . 'AS b LEFT JOIN' . Db::prefix('BlogsCategories') . 'AS c ON b.blogId = c.blogId WHERE b.postId = :postId LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::BLOG) . 'AS b LEFT JOIN' . Db::prefix(DbTableName::BLOG_CATEGORY) . 'AS c ON b.blogId = c.blogId WHERE b.postId = :postId LIMIT 1');
             $rStmt->bindValue(':postId', $sPostId, \PDO::PARAM_STR);
             $rStmt->execute();
             $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -137,7 +137,7 @@ class BlogModel extends BlogCoreModel
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(b.blogId) AS totalBlogs';
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::BLOG) . 'AS b LEFT JOIN ' . Db::prefix('BlogsCategories') . 'AS c ON b.blogId = c.blogId LEFT JOIN' .
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::BLOG) . 'AS b LEFT JOIN ' . Db::prefix(DbTableName::BLOG_CATEGORY) . 'AS c ON b.blogId = c.blogId LEFT JOIN' .
             Db::prefix('BlogsDataCategories') . 'AS d ON c.categoryId = d.categoryId WHERE d.name LIKE :name' . $sSqlOrder . $sSqlLimit);
 
         $rStmt->bindValue(':name', '%' . $sCategoryName . '%', \PDO::PARAM_STR);
@@ -283,7 +283,7 @@ class BlogModel extends BlogCoreModel
     {
         $iBlogId = (int)$iBlogId;
 
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('BlogsCategories') . 'WHERE blogId = :blogId');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::BLOG_CATEGORY) . 'WHERE blogId = :blogId');
         $rStmt->bindValue(':blogId', $iBlogId, \PDO::PARAM_INT);
         $rStmt->execute();
     }
