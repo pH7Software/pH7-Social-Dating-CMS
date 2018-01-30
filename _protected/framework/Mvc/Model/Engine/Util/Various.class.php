@@ -14,6 +14,7 @@ namespace PH7\Framework\Mvc\Model\Engine\Util;
 defined('PH7') or exit('Restricted access');
 
 use PH7\AdsCore;
+use PH7\DbTableName;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Pattern\Statik;
