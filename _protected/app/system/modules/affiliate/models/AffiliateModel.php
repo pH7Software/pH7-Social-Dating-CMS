@@ -55,7 +55,7 @@ class AffiliateModel extends AffiliateCoreModel
      */
     public function join2(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('AffiliatesInfo') .
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::AFFILIATE_INFO) .
             '(profileId, country, city, state, zipCode) VALUES (:profileId, :country, :city, :state, :zipCode)');
 
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
@@ -112,7 +112,7 @@ class AffiliateModel extends AffiliateCoreModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::AFFILIATE) . 'AS a LEFT JOIN' . Db::prefix('AffiliatesInfo') . 'AS i ON a.profileId = i.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::AFFILIATE) . 'AS a LEFT JOIN' . Db::prefix(DbTableName::AFFILIATE_INFO) . 'AS i ON a.profileId = i.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         if (ctype_digit($mLooking)) {
             $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
@@ -174,7 +174,7 @@ class AffiliateModel extends AffiliateCoreModel
 
     public function setInfoFields(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('AffiliatesInfo') . '(profileId, middleName, country, city, state, zipCode, phone, description, website)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::AFFILIATE_INFO) . '(profileId, middleName, country, city, state, zipCode, phone, description, website)
             VALUES (:profileId, :middleName, :country, :city, :state, :zipCode, :phone, :description, :website)');
 
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);

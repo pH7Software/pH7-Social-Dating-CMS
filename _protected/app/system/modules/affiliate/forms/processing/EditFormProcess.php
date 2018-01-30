@@ -44,11 +44,11 @@ class EditFormProcess extends Form
             $oAffModel->updateProfile('birthDate', $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $iProfileId, DbTableName::AFFILIATE);
 
         // Update dynamic fields.
-        $oFields = $oAffModel->getInfoFields($iProfileId, 'AffiliatesInfo');
+        $oFields = $oAffModel->getInfoFields($iProfileId, DbTableName::AFFILIATE_INFO);
         foreach ($oFields as $sColumn => $sValue) {
             $sHRParam = ($sColumn == 'description') ? Http::ONLY_XSS_CLEAN : null;
             if (!$this->str->equals($this->httpRequest->post($sColumn, $sHRParam), $sValue)) {
-                $oAffModel->updateProfile($sColumn, $this->httpRequest->post($sColumn, $sHRParam), $iProfileId, 'AffiliatesInfo');
+                $oAffModel->updateProfile($sColumn, $this->httpRequest->post($sColumn, $sHRParam), $iProfileId, DbTableName::AFFILIATE_INFO);
             }
         }
         unset($oFields);
@@ -57,7 +57,7 @@ class EditFormProcess extends Form
 
         $oAffCache = new Affiliate;
         $oAffCache->clearReadProfileCache($iProfileId, DbTableName::AFFILIATE);
-        $oAffCache->clearInfoFieldCache($iProfileId, 'AffiliatesInfo');
+        $oAffCache->clearInfoFieldCache($iProfileId, DbTableName::AFFILIATE_INFO);
 
         unset($oAffModel, $oAff, $oAffCache);
 

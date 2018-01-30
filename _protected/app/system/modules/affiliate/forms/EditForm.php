@@ -68,7 +68,7 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
 
         // Generate dynamic fields
-        $oFields = $oAffModel->getInfoFields($iProfileId, 'AffiliatesInfo');
+        $oFields = $oAffModel->getInfoFields($iProfileId, DbTableName::AFFILIATE_INFO);
         foreach ($oFields as $sColumn => $sValue) {
             $oForm = (new DynamicFieldCoreForm($oForm, $sColumn, $sValue))->generate();
         }
