@@ -11,11 +11,16 @@ use PH7\ExistsCoreModel;
 
 class CEmail extends \PFBC\Validation
 {
-    protected $sTable, $sType;
+    /** @var string */
+    protected $sTable;
+
+    /** @var string */
+    protected $sType;
 
     public function __construct($sType = '', $sTable = DbTableName::MEMBER)
     {
         parent::__construct();
+
         $this->sTable = $sTable;
         $this->sType = $sType;
         $this->message = t('Error: Invalid email or already used by another user.');
