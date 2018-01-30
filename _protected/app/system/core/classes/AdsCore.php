@@ -8,15 +8,16 @@
 
 namespace PH7;
 
+use PH7\Framework\Ads\Ads;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Pattern\Statik;
 
-class AdsCore extends Framework\Ads\Ads
+class AdsCore extends Ads
 {
     const ID_COLUMN_NAME = 'adsId';
 
-    const AD_TABLE_NAME = 'Ads';
+    const AD_TABLE_NAME = DbTableName::AD;
     const AFFILIATE_AD_TABLE_NAME = 'AdsAffiliates';
 
     const TABLE_NAMES = [
