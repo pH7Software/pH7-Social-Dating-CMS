@@ -951,7 +951,7 @@ class UserCoreModel extends Model
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_FRIEND) . 'WHERE friendId = ' . $iProfileId);
 
         // DELETE WALL
-        $oDb->exec('DELETE FROM' . Db::prefix('MembersWall') . 'WHERE profileId = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_WALL) . 'WHERE profileId = ' . $iProfileId);
 
         // DELETE BACKGROUND
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_BACKGROUND) . 'WHERE profileId = ' . $iProfileId);

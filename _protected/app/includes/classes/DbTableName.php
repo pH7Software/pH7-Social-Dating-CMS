@@ -58,6 +58,7 @@ class DbTableName
     const MEMBER_BACKGROUND = 'members_background';
     const MEMBER_WHO_VIEW = 'members_who_views';
     const MEMBER_FRIEND = 'members_friends';
+    const MEMBER_WALL = 'members_wall';
 
     const USER_TABLES = [
         self::ADMIN,

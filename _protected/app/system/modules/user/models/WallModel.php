@@ -25,7 +25,7 @@ class WallModel extends Model
      */
     public function add($iProfileId, $sPost, $sCreatedDate)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersWall') . '(profileId, post, createdDate) VALUES (:profileId, :post, :createdDate)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER_WALL) . '(profileId, post, createdDate) VALUES (:profileId, :post, :createdDate)');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':post', $sPost, \PDO::PARAM_STR);
         $rStmt->bindValue(':dateTime', $sCreatedDate, \PDO::PARAM_STR);
@@ -42,7 +42,7 @@ class WallModel extends Model
      */
     public function edit($iProfileId, $sPost, $sUpdatedDate)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('MembersWall') . 'SET post = :post, updatedDate = :updatedDate WHERE profileId = :profileId');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::MEMBER_WALL) . 'SET post = :post, updatedDate = :updatedDate WHERE profileId = :profileId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':post', $sPost, \PDO::PARAM_STR);
         $rStmt->bindValue(':updatedDate', $sUpdatedDate, \PDO::PARAM_STR);
@@ -58,7 +58,7 @@ class WallModel extends Model
      */
     public function delete($iProfileId, $iWallId)
     {
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('MembersWall') . 'WHERE :profileId=:profileId AND wallId=:wallId');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::MEMBER_WALL) . 'WHERE :profileId=:profileId AND wallId=:wallId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':wallId', $iWallId, \PDO::PARAM_INT);
 
@@ -79,7 +79,7 @@ class WallModel extends Model
         $iLimit = (int)$iLimit;
 
         $sSqlWallId = !empty($iWallId) ? ' AND wallId=:wallId ' : '';
-        $sSqlQuery = 'SELECT * FROM' . Db::prefix('MembersWall') . ' AS w LEFT JOIN' .
+        $sSqlQuery = 'SELECT * FROM' . Db::prefix(DbTableName::MEMBER_WALL) . ' AS w LEFT JOIN' .
             Db::prefix(DbTableName::MEMBER) . 'AS m ON w.profileId = m.profileId WHERE :profileId=:profileId ' .
             $sSqlWallId . ' ORDER BY dateTime DESC LIMIT :offset, :limit';
 
