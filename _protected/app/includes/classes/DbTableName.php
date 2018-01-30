@@ -61,6 +61,7 @@ class DbTableName
     const MEMBER_WALL = 'members_wall';
     const MESSAGE = 'messages';
     const MESSENGER = 'messenger';
+    const META_MAIN = 'meta_main';
 
     const USER_TABLES = [
         self::ADMIN,

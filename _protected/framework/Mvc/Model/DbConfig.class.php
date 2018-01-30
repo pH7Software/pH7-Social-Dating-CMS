@@ -83,7 +83,7 @@ final class DbConfig
 
         // @return value of meta tags the database
         if (!$oData = $oCache->get()) {
-            $sSql = 'SELECT * FROM' . Engine\Db::prefix('MetaMain') . 'WHERE langId = :langId';
+            $sSql = 'SELECT * FROM' . Engine\Db::prefix(DbTableName::META_MAIN) . 'WHERE langId = :langId';
 
             // Get meta data with the current language if it exists in the "MetaMain" table ...
             $rStmt = Engine\Db::getInstance()->prepare($sSql);
@@ -109,7 +109,7 @@ final class DbConfig
                     'metaCategory' => 'dating'
                 ];
 
-                Engine\Record::getInstance()->insert('MetaMain', $aData); // Create the new meta data language
+                Engine\Record::getInstance()->insert(DbTableName::META_MAIN, $aData); // Create the new meta data language
                 $oData = (object)$aData;
                 unset($aData);
             }
@@ -132,7 +132,7 @@ final class DbConfig
      */
     public static function setMetaMain($sSection, $sValue, $sLangId)
     {
-        Engine\Record::getInstance()->update('MetaMain', $sSection, $sValue, 'langId', $sLangId);
+        Engine\Record::getInstance()->update(DbTableName::META_MAIN, $sSection, $sValue, 'langId', $sLangId);
     }
 
     /**
