@@ -29,6 +29,7 @@ class DbTableName
     const ANALYTIC_API = 'analytics_api';
     const BLOG = 'blogs';
     const BLOG_CATEGORY = 'blogs_categories';
+    const BLOG_DATA_CATEGORY = 'blogs_data_categories';
 
     const USER_TABLES = [
         self::ADMIN,
