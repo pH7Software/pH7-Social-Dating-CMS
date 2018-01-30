@@ -118,13 +118,13 @@ class MainController extends Controller
     private function getLoginUrl($sTableName)
     {
         switch ($sTableName) {
-            case 'Members':
+            case DbTableName::MEMBER:
                 return Uri::get('user', 'main', 'index');
 
-            case 'Affiliates':
+            case DbTableName::AFFILIATE:
                 return Uri::get('affiliate', 'home', 'login');
 
-            case 'Admins':
+            case DbTableName::ADMIN:
                 return Uri::get(PH7_ADMIN_MOD, 'main', 'login');
         }
     }

@@ -101,7 +101,7 @@ class MainController extends Controller
                 $this->view->assigns($aVars);
 
                 // Set Blogs Post Views Statistics
-                Statistic::setView($oPost->blogId, 'Blogs');
+                Statistic::setView($oPost->blogId, DbTableName::BLOG);
             } else {
                 $this->sTitle = t('No Blog Found');
                 $this->notFound();

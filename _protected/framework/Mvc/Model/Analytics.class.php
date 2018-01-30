@@ -11,6 +11,8 @@
 
 namespace PH7\Framework\Mvc\Model;
 
+use PH7\DbTableName;
+
 defined('PH7') or exit('Restricted access');
 
 class Analytics
@@ -24,6 +26,10 @@ class Analytics
      */
     public function updateApi($sCode)
     {
-        return Engine\Record::getInstance()->update('AnalyticsApi', 'code', $sCode);
+        return Engine\Record::getInstance()->update(
+            DbTableName::ANALYTIC_API,
+            'code',
+            $sCode
+        );
     }
 }

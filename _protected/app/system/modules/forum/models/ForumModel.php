@@ -32,7 +32,7 @@ class ForumModel extends ForumCoreModel
         $sSqlLimit = $bIsLimit ? ' LIMIT :offset, :limit' : '';
         $sSqlCategoryId = $bIsCategoryId ? ' WHERE categoryId = :categoryId ' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('ForumsCategories') . $sSqlCategoryId . 'ORDER BY title ASC' . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::FORUM_CATEGORY) . $sSqlCategoryId . 'ORDER BY title ASC' . $sSqlLimit);
         if ($bIsCategoryId) {
             $rStmt->bindParam(':categoryId', $iCategoryId, \PDO::PARAM_INT);
         }
@@ -69,8 +69,8 @@ class ForumModel extends ForumCoreModel
         $sSqlProfileId = $bIsProfileId ? 'AND t.profileId = :profileId ' : '';
         $sSqlMsg = isset($sTopicSubject, $iTopicId) ? ' AND (t.title LIKE :topicSubject AND t.topicId = :topicId) ' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT f.*, f.createdDate AS forumCreatedDate, f.updatedDate AS forumUpdatedDate, t.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Forums') .
-            'AS f INNER JOIN' . Db::prefix('ForumsTopics') . 'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix('Members') .
+        $rStmt = Db::getInstance()->prepare('SELECT f.*, f.createdDate AS forumCreatedDate, f.updatedDate AS forumUpdatedDate, t.*, m.username, m.firstName, m.sex FROM' . Db::prefix(DbTableName::FORUM) .
+            'AS f INNER JOIN' . Db::prefix(DbTableName::FORUM_TOPIC) . 'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix(DbTableName::MEMBER) .
             ' AS m ON t.profileId = m.profileId WHERE (t.forumId = :forumId AND f.name LIKE :forumName) ' . $sSqlMsg . $sSqlProfileId . ' AND (t.approved = :approved) ORDER BY t.createdDate DESC LIMIT :offset, :limit');
 
         $rStmt->bindValue(':forumName', $sForumName . '%', \PDO::PARAM_STR);
@@ -99,7 +99,7 @@ class ForumModel extends ForumCoreModel
      */
     public function addCategory($sTitle)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('ForumsCategories') . '(title) VALUES(:title)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::FORUM_CATEGORY) . '(title) VALUES(:title)');
         $rStmt->bindValue(':title', $sTitle, \PDO::PARAM_STR);
 
         return $rStmt->execute();
@@ -115,7 +115,7 @@ class ForumModel extends ForumCoreModel
      */
     public function addForum($iCategoryId, $sTitle, $sDescription, $sCreatedDate)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Forums') . '(categoryId, name, description, createdDate)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::FORUM) . '(categoryId, name, description, createdDate)
             VALUES(:categoryId, :title, :description, :createdDate)');
 
         $rStmt->bindValue(':categoryId', $iCategoryId, \PDO::PARAM_INT);
@@ -137,7 +137,7 @@ class ForumModel extends ForumCoreModel
      */
     public function addTopic($iProfileId, $iForumId, $sTitle, $sMessage, $sCreatedDate)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('ForumsTopics') . '(profileId, forumId, title, message, createdDate)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::FORUM_TOPIC) . '(profileId, forumId, title, message, createdDate)
             VALUES(:profileId, :forumId, :title, :message, :createdDate)');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
@@ -159,7 +159,7 @@ class ForumModel extends ForumCoreModel
      */
     public function addMessage($iProfileId, $iTopicId, $sMessage, $sCreatedDate)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('ForumsMessages') . '(profileId, topicId, message, createdDate)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::FORUM_MESSAGE) . '(profileId, topicId, message, createdDate)
             VALUES(:profileId, :topicId, :message, :createdDate)');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
@@ -178,7 +178,7 @@ class ForumModel extends ForumCoreModel
      */
     public function updateCategory($iCategoryId, $sTitle)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('ForumsCategories') .
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::FORUM_CATEGORY) .
             'SET title = :title WHERE categoryId = :categoryId');
 
         $rStmt->bindValue(':categoryId', $iCategoryId, \PDO::PARAM_INT);
@@ -198,7 +198,7 @@ class ForumModel extends ForumCoreModel
      */
     public function updateForum($iForumId, $iCategoryId, $sName, $sDescription, $sUpdatedDate)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Forums') .
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::FORUM) .
             'SET categoryId = :categoryId, name = :name, description = :description, updatedDate = :updatedDate WHERE forumId = :forumId');
 
         $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT);
@@ -221,7 +221,7 @@ class ForumModel extends ForumCoreModel
      */
     public function updateTopic($iProfileId, $iTopicId, $sTitle, $sMessage, $sUpdatedDate)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('ForumsTopics') .
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::FORUM_TOPIC) .
             'SET title = :title, message = :message, updatedDate = :updatedDate WHERE profileId = :profileId AND topicId = :topicId');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
@@ -243,7 +243,7 @@ class ForumModel extends ForumCoreModel
      */
     public function updateMessage($iProfileId, $iMessageId, $sMessage, $sUpdatedDate)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('ForumsMessages') .
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::FORUM_MESSAGE) .
             'SET message = :message, updatedDate = :updatedDate WHERE profileId = :profileId AND messageId = :messageId');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
@@ -267,12 +267,12 @@ class ForumModel extends ForumCoreModel
         $this->delMsgsTopicsFromCatId($iCategoryId);
 
         // Forums of Category
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Forums') . 'WHERE categoryId = :categoryId');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::FORUM) . 'WHERE categoryId = :categoryId');
         $rStmt->bindValue(':categoryId', $iCategoryId, \PDO::PARAM_INT);
         $rStmt->execute();
 
         // Category
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('ForumsCategories') . 'WHERE categoryId = :categoryId LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::FORUM_CATEGORY) . 'WHERE categoryId = :categoryId LIMIT 1');
         $rStmt->bindValue(':categoryId', $iCategoryId, \PDO::PARAM_INT);
 
         return $rStmt->execute();
@@ -291,12 +291,12 @@ class ForumModel extends ForumCoreModel
         $this->delMsgsFromForumId($iForumId);
 
         // Topics of Forum
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('ForumsTopics') . 'WHERE forumId = :forumId');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::FORUM_TOPIC) . 'WHERE forumId = :forumId');
         $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT);
         $rStmt->execute();
 
         // Forum
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Forums') . 'WHERE forumId = :forumId LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::FORUM) . 'WHERE forumId = :forumId LIMIT 1');
         $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT);
 
         return $rStmt->execute();
@@ -313,13 +313,13 @@ class ForumModel extends ForumCoreModel
     public function deleteTopic($iProfileId, $iTopicId)
     {
         // Messages of Topic
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('ForumsMessages') . 'WHERE profileId = :profileId AND topicId = :topicId');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::FORUM_MESSAGE) . 'WHERE profileId = :profileId AND topicId = :topicId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
         $rStmt->execute();
 
         // Topic
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('ForumsTopics') . 'WHERE profileId = :profileId AND topicId = :topicId LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::FORUM_TOPIC) . 'WHERE profileId = :profileId AND topicId = :topicId LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
 
@@ -336,7 +336,7 @@ class ForumModel extends ForumCoreModel
      */
     public function deleteMessage($iProfileId, $iMessageId)
     {
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('ForumsMessages') . 'WHERE profileId = :profileId AND messageId = :messageId LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::FORUM_MESSAGE) . 'WHERE profileId = :profileId AND messageId = :messageId LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
 
@@ -372,7 +372,7 @@ class ForumModel extends ForumCoreModel
             $sSqlWhere = ' WHERE t.topicId = :looking ';
         }
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Forums') . 'AS f INNER JOIN' . Db::prefix('ForumsTopics') . 'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix('Members') . ' AS m ON t.profileId = m.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::FORUM) . 'AS f INNER JOIN' . Db::prefix(DbTableName::FORUM_TOPIC) . 'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix(DbTableName::MEMBER) . ' AS m ON t.profileId = m.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         if (ctype_digit($mLooking)) {
             $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
@@ -413,7 +413,7 @@ class ForumModel extends ForumCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Forums') . ' AS f INNER JOIN ' . Db::prefix('ForumsTopics') .
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::FORUM) . ' AS f INNER JOIN ' . Db::prefix(DbTableName::FORUM_TOPIC) .
             'AS t ON f.forumId = t.forumId WHERE t.profileId = :profileId AND t.approved = :approved GROUP BY t.topicId ORDER BY t.createdDate DESC LIMIT :offset, :limit');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
@@ -433,7 +433,7 @@ class ForumModel extends ForumCoreModel
     public function totalForums($iProfileId = null)
     {
         $sSqlProfileId = (!empty($iProfileId)) ? ' WHERE profileId = :profileId' : '';
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(forumId) AS totalForums FROM' . Db::prefix('Forums') . $sSqlProfileId);
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(forumId) AS totalForums FROM' . Db::prefix(DbTableName::FORUM) . $sSqlProfileId);
         if (!empty($iProfileId)) {
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         }
@@ -455,7 +455,7 @@ class ForumModel extends ForumCoreModel
     public function totalTopics($iForumId = null, $iProfileId = null)
     {
         $sSql = (!empty($iForumId) ? ' WHERE forumId = :forumId' : (!empty($iProfileId) ? ' WHERE profileId = :profileId' : ''));
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(topicId) AS totalTopics FROM' . Db::prefix('ForumsTopics') . $sSql);
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(topicId) AS totalTopics FROM' . Db::prefix(DbTableName::FORUM_TOPIC) . $sSql);
         (!empty($iForumId) ? $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT) : (!empty($iProfileId) ? $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT) : ''));
 
         $rStmt->execute();
@@ -474,7 +474,7 @@ class ForumModel extends ForumCoreModel
     public function totalMessages($iTopicId = null, $iProfileId = null)
     {
         $sSql = (!empty($iTopicId) ? ' WHERE topicId = :topicId' : (!empty($iProfileId) ? ' WHERE profileId = :profileId' : ''));
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(messageId) AS totalMessages FROM' . Db::prefix('ForumsMessages') . $sSql);
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(messageId) AS totalMessages FROM' . Db::prefix(DbTableName::FORUM_MESSAGE) . $sSql);
         if (!empty($iTopicId)) {
             $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
         } elseif (!empty($iProfileId)) {
@@ -497,7 +497,7 @@ class ForumModel extends ForumCoreModel
      */
     public function isDuplicateTopic($iProfileId, $sCheckMsg)
     {
-        return Spam::detectDuplicate($sCheckMsg, 'message', 'topicId', $iProfileId, 'ForumsTopics');
+        return Spam::detectDuplicate($sCheckMsg, 'message', 'topicId', $iProfileId, DbTableName::FORUM_TOPIC);
     }
 
     /**
@@ -510,7 +510,7 @@ class ForumModel extends ForumCoreModel
      */
     public function isDuplicateMessage($iProfileId, $sCheckMsg)
     {
-        return Spam::detectDuplicate($sCheckMsg, 'message', 'messageId', $iProfileId, 'ForumsMessages');
+        return Spam::detectDuplicate($sCheckMsg, 'message', 'messageId', $iProfileId, DbTableName::FORUM_MESSAGE);
     }
 
     /**
@@ -525,7 +525,7 @@ class ForumModel extends ForumCoreModel
      */
     public function checkWaitTopic($iProfileId, $iWaitTime, $sCurrentTime)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT topicId FROM' . Db::prefix('ForumsTopics') .
+        $rStmt = Db::getInstance()->prepare('SELECT topicId FROM' . Db::prefix(DbTableName::FORUM_TOPIC) .
             'WHERE profileId = :profileId AND DATE_ADD(createdDate, INTERVAL :waitTime MINUTE) > :currentTime LIMIT 1');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
@@ -549,7 +549,7 @@ class ForumModel extends ForumCoreModel
      */
     public function checkWaitReply($iTopicId, $iProfileId, $iWaitTime, $sCurrentTime)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT messageId FROM' . Db::prefix('ForumsMessages') .
+        $rStmt = Db::getInstance()->prepare('SELECT messageId FROM' . Db::prefix(DbTableName::FORUM_MESSAGE) .
             'WHERE topicId = :topicId AND profileId = :profileId AND DATE_ADD(createdDate, INTERVAL :waitTime MINUTE) > :currentTime LIMIT 1');
 
         $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
@@ -570,7 +570,7 @@ class ForumModel extends ForumCoreModel
      */
     protected function getTopicIdsFromForumId($iForumId)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT topicId FROM' . Db::prefix('ForumsTopics') . 'WHERE forumId = :forumId');
+        $rStmt = Db::getInstance()->prepare('SELECT topicId FROM' . Db::prefix(DbTableName::FORUM_TOPIC) . 'WHERE forumId = :forumId');
         $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT);
         $rStmt->execute();
 
@@ -586,7 +586,7 @@ class ForumModel extends ForumCoreModel
      */
     protected function getForumIdsFromCatId($iCategoryId)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT forumId FROM' . Db::prefix('Forums') . 'WHERE categoryId = :categoryId');
+        $rStmt = Db::getInstance()->prepare('SELECT forumId FROM' . Db::prefix(DbTableName::FORUM) . 'WHERE categoryId = :categoryId');
         $rStmt->bindValue(':categoryId', $iCategoryId, \PDO::PARAM_INT);
         $rStmt->execute();
 
@@ -607,7 +607,7 @@ class ForumModel extends ForumCoreModel
         foreach ($oTopicIds as $oId) {
             $iId = (int)$oId->topicId;
 
-            $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('ForumsMessages') . 'WHERE topicId = :topicId');
+            $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::FORUM_MESSAGE) . 'WHERE topicId = :topicId');
             $rStmt->bindValue(':topicId', $iId, \PDO::PARAM_INT);
             $rStmt->execute();
         }
@@ -628,7 +628,7 @@ class ForumModel extends ForumCoreModel
             $iId = (int)$oId->forumId;
             $this->delMsgsFromForumId($iId);
 
-            $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('ForumsTopics') . 'WHERE forumId = :forumId');
+            $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::FORUM_TOPIC) . 'WHERE forumId = :forumId');
             $rStmt->bindValue(':forumId', $iId, \PDO::PARAM_INT);
             $rStmt->execute();
         }

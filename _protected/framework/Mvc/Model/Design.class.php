@@ -13,6 +13,7 @@ namespace PH7\Framework\Mvc\Model;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\DbTableName;
 use PH7\Framework\Ads\Ads as Banner;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Layout\Html\Design as HtmlDesign;
@@ -76,7 +77,7 @@ class Design extends HtmlDesign
 
         if (!$oData = $this->oCache->get()) {
             $sSqlActive = ($bOnlyActive) ? ' AND (active=\'1\') ' : ' ';
-            $rStmt = Db::getInstance()->prepare('SELECT * FROM ' . Db::prefix('Ads') . 'WHERE (width=:width) AND (height=:height)' . $sSqlActive . 'ORDER BY RAND() LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT * FROM ' . Db::prefix(DbTableName::AD) . 'WHERE (width=:width) AND (height=:height)' . $sSqlActive . 'ORDER BY RAND() LIMIT 1');
             $rStmt->bindValue(':width', $iWidth, \PDO::PARAM_INT);
             $rStmt->bindValue(':height', $iHeight, \PDO::PARAM_INT);
             $rStmt->execute();
@@ -110,7 +111,7 @@ class Design extends HtmlDesign
 
         if (!$sData = $this->oCache->get()) {
             $sSqlWhere = $bOnlyActive ? 'WHERE active=\'1\'' : '';
-            $rStmt = Db::getInstance()->prepare('SELECT code FROM ' . Db::prefix('AnalyticsApi') . $sSqlWhere . ' LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT code FROM ' . Db::prefix(DbTableName::ANALYTIC_API) . $sSqlWhere . ' LIMIT 1');
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
@@ -138,7 +139,7 @@ class Design extends HtmlDesign
         $this->oCache->start(self::CACHE_STATIC_GROUP, 'customCode' . $sType, static::CACHE_TIME);
 
         if (!$sData = $this->oCache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT code FROM ' . Db::prefix('CustomCode') . 'WHERE codeType = :type LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT code FROM ' . Db::prefix(DbTableName::CUSTOM_CODE) . 'WHERE codeType = :type LIMIT 1');
             $rStmt->bindValue(':type', $sType, \PDO::PARAM_STR);
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -165,7 +166,7 @@ class Design extends HtmlDesign
 
         if (!$oData = $this->oCache->get()) {
             $sSqlWhere = $bOnlyActive ? ' AND active=\'1\'' : '';
-            $rStmt = Db::getInstance()->prepare('SELECT file FROM ' . Db::prefix('StaticFiles') . 'WHERE fileType = :type' . $sSqlWhere);
+            $rStmt = Db::getInstance()->prepare('SELECT file FROM ' . Db::prefix(DbTableName::STATIC_FILE) . 'WHERE fileType = :type' . $sSqlWhere);
             $rStmt->bindValue(':type', $sType, \PDO::PARAM_STR);
             $rStmt->execute();
             $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);

@@ -23,7 +23,7 @@ class RatingDesignCore
     /**
      * Generates design the voting system.
      *
-     * @param int $iId Unique ID of the column of the table. EX: ID of 'profileId' column for the 'Members' table.
+     * @param int $iId Unique ID of the column of the table. EX: ID of 'profileId' column for the 'members' table.
      * @param string $sTable See the list of data tables available in the class: PH7\Framework\Mvc\Model\Engine\Util\Various::checkTable().
      * @param string $sCssClass Default value is empty. You can add the name of a CSS class (attention, only its name) e.g. 'center'.
      *

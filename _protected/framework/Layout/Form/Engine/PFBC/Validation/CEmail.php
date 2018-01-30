@@ -6,15 +6,21 @@
 
 namespace PFBC\Validation;
 
+use PH7\DbTableName;
 use PH7\ExistsCoreModel;
 
 class CEmail extends \PFBC\Validation
 {
-    protected $sTable, $sType;
+    /** @var string */
+    protected $sTable;
 
-    public function __construct($sType = '', $sTable = 'Members')
+    /** @var string */
+    protected $sType;
+
+    public function __construct($sType = '', $sTable = DbTableName::MEMBER)
     {
         parent::__construct();
+
         $this->sTable = $sTable;
         $this->sType = $sType;
         $this->message = t('Error: Invalid email or already used by another user.');
@@ -22,8 +28,9 @@ class CEmail extends \PFBC\Validation
 
     public function isValid($sValue)
     {
-        if ($this->isNotApplicable($sValue) || $this->oValidate->email($sValue))
+        if ($this->isNotApplicable($sValue) || $this->oValidate->email($sValue)) {
             return !($this->sType == 'guest' && (new ExistsCoreModel)->email($sValue, $this->sTable));
+        }
 
         return false;
     }

@@ -15,6 +15,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\AdminCore;
 use PH7\AffiliateCore;
+use PH7\DbTableName;
 use PH7\Framework\Benchmark\Benchmark;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Core\Kernel;
@@ -620,7 +621,7 @@ class Design
 
             if (!is_file($sPath) || $oGetAvatar->approvedAvatar == '0') {
                 /* If sex is empty, it is recovered in the database using information from member */
-                $sSex = !empty($sSex) ? $sSex : $oUserModel->getSex(null, $sUsername, 'Members');
+                $sSex = !empty($sSex) ? $sSex : $oUserModel->getSex(null, $sUsername, DbTableName::MEMBER);
                 $sSex = $this->oStr->lower($sSex);
                 $sIcon = ($sSex === 'male' || $sSex === 'female' || $sSex === 'couple' || $sSex === PH7_ADMIN_USERNAME) ? $sSex : 'visitor';
                 $sUrlTplName = defined('PH7_TPL_NAME') ? PH7_TPL_NAME : PH7_DEFAULT_THEME;
@@ -748,7 +749,7 @@ class Design
     /**
      * Add Normal size Social Media Widgets.
      *
-     * @internal AddThis JS file will be included through 'pH7_StaticFiles' table.
+     * @internal AddThis JS file will be included through 'ph7_static_files' table.
      *
      * @return void HTML output.
      */
@@ -762,7 +763,7 @@ class Design
     /**
      * Add Small size Social Media Widgets.
      *
-     * @internal AddThis JS file will be included through 'pH7_StaticFiles' table.
+     * @internal AddThis JS file will be included through 'ph7_static_files' table.
      *
      * @return void HTML output.
      */

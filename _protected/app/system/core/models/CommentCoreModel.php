@@ -37,7 +37,7 @@ class CommentCoreModel extends Model
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
-        $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Comments' . $sTable) . ' AS c LEFT JOIN' . Db::prefix('Members') . 'AS m ON c.sender = m.profileId WHERE c.approved = :approved ORDER BY ' . $sOrder . ' DESC LIMIT :offset, :limit');
+        $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' . Db::prefix('comments_' . $sTable) . ' AS c LEFT JOIN' . Db::prefix(DbTableName::MEMBER) . 'AS m ON c.sender = m.profileId WHERE c.approved = :approved ORDER BY ' . $sOrder . ' DESC LIMIT :offset, :limit');
 
         $rStmt->bindParam(':approved', $iApproved, PDO::PARAM_INT);
         $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
@@ -67,7 +67,7 @@ class CommentCoreModel extends Model
         $sSqlRecipientId = (!empty($iRecipientId)) ? 'c.recipient =:recipient AND' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' .
-            Db::prefix('Comments' . $sTable) . ' AS c LEFT JOIN' . Db::prefix('Members') .
+            Db::prefix('comments_' . $sTable) . ' AS c LEFT JOIN' . Db::prefix(DbTableName::MEMBER) .
             'AS m ON c.sender = m.profileId WHERE ' . $sSqlRecipientId . ' c.approved =:approved ORDER BY c.createdDate DESC LIMIT :offset, :limit');
 
         if (!empty($iRecipientId)) {
@@ -96,7 +96,7 @@ class CommentCoreModel extends Model
         if (!$iData = $this->cache->get()) {
             $sTable = CommentCore::checkTable($sTable);
 
-            $rStmt = Db::getInstance()->prepare('SELECT COUNT(commentId) AS totalComments FROM' . Db::prefix('Comments' . $sTable) . ' WHERE recipient = :recipient');
+            $rStmt = Db::getInstance()->prepare('SELECT COUNT(commentId) AS totalComments FROM' . Db::prefix('comments_' . $sTable) . ' WHERE recipient = :recipient');
             $rStmt->bindParam(':recipient', $iRecipientId);
             $rStmt->execute();
             $oRow = $rStmt->fetch(PDO::FETCH_OBJ);
@@ -122,7 +122,7 @@ class CommentCoreModel extends Model
         $sTable = CommentCore::checkTable($sTable);
 
         $iRecipientId = (int)$iRecipientId;
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Comments' . $sTable) . 'WHERE recipient = :recipient');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('comments_' . $sTable) . 'WHERE recipient = :recipient');
         $rStmt->bindValue(':recipient', $iRecipientId, PDO::PARAM_INT);
 
         return $rStmt->execute();

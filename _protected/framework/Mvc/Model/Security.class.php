@@ -16,6 +16,7 @@ defined('PH7') or exit('Restricted access');
 use DateInterval;
 use DateTime;
 use PDO;
+use PH7\DbTableName;
 use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
@@ -48,13 +49,13 @@ class Security
     public function blockIp($sIp, $iExpir = 86400)
     {
         $iExpir = time() + (int)$iExpir;
-        $rStmt = Db::getInstance()->prepare('SELECT ip FROM' . Db::prefix('BlockIp') . 'WHERE ip = :ip LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('SELECT ip FROM' . Db::prefix(DbTableName::BLOCK_IP) . 'WHERE ip = :ip LIMIT 1');
         $rStmt->bindValue(':ip', $sIp, PDO::PARAM_STR);
         $rStmt->execute();
 
         // If IP is not found
         if ($rStmt->rowCount() == 0) {
-            $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('BlockIp') . 'VALUES (:ip, :expiration)');
+            $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::BLOCK_IP) . 'VALUES (:ip, :expiration)');
             $rStmt->bindValue(':ip', $sIp, PDO::PARAM_STR);
             $rStmt->bindValue(':expiration', $iExpir, PDO::PARAM_INT);
             $rStmt->execute();
@@ -71,11 +72,11 @@ class Security
      * @param string $sUsername
      * @param string $sPassword
      * @param int $sStatus
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default DbTableName::MEMBER
      *
      * @return void
      */
-    public function addLoginLog($sEmail, $sUsername, $sPassword, $sStatus, $sTable = 'Members')
+    public function addLoginLog($sEmail, $sUsername, $sPassword, $sStatus, $sTable = DbTableName::MEMBER)
     {
         Various::checkModelTable($sTable);
 
@@ -97,11 +98,11 @@ class Security
      * @param int $iAttemptTime
      * @param string $sEmail Email address of member.
      * @param PH7Tpl $oView
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default DbTableName::MEMBER
      *
      * @return bool Returns TRUE if attempts are allowed, FALSE otherwise.
      */
-    public function checkLoginAttempt($iMaxAttempts, $iAttemptTime, $sEmail, PH7Tpl $oView, $sTable = 'Members')
+    public function checkLoginAttempt($iMaxAttempts, $iAttemptTime, $sEmail, PH7Tpl $oView, $sTable = DbTableName::MEMBER)
     {
         Various::checkModelTable($sTable);
 
@@ -141,7 +142,7 @@ class Security
      *
      * @return void
      */
-    public function addLoginAttempt($sTable = 'Members')
+    public function addLoginAttempt($sTable = DbTableName::MEMBER)
     {
         Various::checkModelTable($sTable);
 
@@ -174,7 +175,7 @@ class Security
      *
      * @return void
      */
-    public function clearLoginAttempts($sTable = 'Members')
+    public function clearLoginAttempts($sTable = DbTableName::MEMBER)
     {
         Various::checkModelTable($sTable);
 

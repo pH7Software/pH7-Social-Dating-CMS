@@ -120,9 +120,8 @@ class ValidateCoreAjax
      */
     protected function username($sValue, $sTable)
     {
-        // Checks and corrects the table if it is incorrect.
-        if ($sTable !== 'Members' && $sTable !== 'Affiliates' && $sTable !== 'Admins') {
-            $sTable = 'Members';
+        if (!$this->isDbTableValid($sTable)) {
+            $sTable = DbTableName::MEMBER;
         }
 
         $iMin = DbConfig::getSetting('minUsernameLength');
@@ -143,9 +142,8 @@ class ValidateCoreAjax
      */
     protected function email($sValue, $sParam, $sTable)
     {
-        // Checks and corrects the table if it is incorrect.
-        if ($sTable !== 'Members' && $sTable !== 'Affiliates' && $sTable !== 'Admins') {
-            $sTable = 'Members';
+        if (!$this->isDbTableValid($sTable)) {
+            $sTable = DbTableName::MEMBER;
         }
 
         if (!$this->oValidate->email($sValue)) {
@@ -315,6 +313,16 @@ class ValidateCoreAjax
         } else {
             $this->iStatus = 1;
         }
+    }
+
+    /**
+     * @param string $sTable The table name.
+     *
+     * @return bool
+     */
+    private function isDbTableValid($sTable)
+    {
+        return in_array($sTable, DbTableName::USER_TABLES, true);
     }
 }
 

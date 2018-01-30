@@ -23,7 +23,7 @@ class MailCoreModel extends Model
      */
     public static function countUnreadMsg($iProfileId)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(status) AS unread FROM' . Db::prefix('Messages') .
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(status) AS unread FROM' . Db::prefix(DbTableName::MESSAGE) .
             'WHERE recipient = :recipient AND status = \'1\' AND NOT FIND_IN_SET(\'recipient\', toDelete)');
 
         $rStmt->bindValue(':recipient', $iProfileId, \PDO::PARAM_INT);

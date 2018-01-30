@@ -6,16 +6,24 @@
 namespace PFBC\Validation;
 
 use PFBC\Validation;
+use PH7\DbTableName;
 use PH7\Framework\Mvc\Model\DbConfig;
 
 class Username extends Validation
 {
-    protected $sTable, $iMin, $iMax;
+    /** @var string */
+    protected $sTable;
+
+    /** @var int */
+    protected $iMin;
+
+    /** @var int */
+    protected $iMax;
 
     /**
      * @param string $sTable
      */
-    public function __construct($sTable = 'Members')
+    public function __construct($sTable = DbTableName::MEMBER)
     {
         parent::__construct();
 

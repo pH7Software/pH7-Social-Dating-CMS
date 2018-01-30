@@ -36,10 +36,10 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Your Last Name:'), 'last_name', array('id' => 'name_last', 'onblur' => 'CValid(this.value, this.id)', 'required' => 1, 'validation' => new \PFBC\Validation\Name)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_last"></span>'));
 
-        $oForm->addElement(new \PFBC\Element\Username(t('Username:'), 'username', array('id' => 'username', 'onkeyup' => 'CValid(this.value, this.id,\'Affiliates\')', 'description' => t('Your username will be your unique advertiser ID.'), 'required' => 1, 'validation' => new \PFBC\Validation\Username('Affiliates'))));
+        $oForm->addElement(new \PFBC\Element\Username(t('Username:'), 'username', array('id' => 'username', 'onkeyup' => 'CValid(this.value, this.id,\'Affiliates\')', 'description' => t('Your username will be your unique advertiser ID.'), 'required' => 1, 'validation' => new \PFBC\Validation\Username(DbTableName::AFFILIATE))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error username"></span>'));
 
-        $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('id' => 'email', 'onblur' => 'CValid(this.value, this.id,\'guest\',\'Affiliates\')', 'description' => t('Your Professional Valid Email.'), 'required' => 1, 'validation' => new \PFBC\Validation\CEmail('guest', 'Affiliates'))));
+        $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('id' => 'email', 'onblur' => 'CValid(this.value, this.id,\'guest\',\'Affiliates\')', 'description' => t('Your Professional Valid Email.'), 'required' => 1, 'validation' => new \PFBC\Validation\CEmail('guest', DbTableName::AFFILIATE))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error email"></span>'));
 
         $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', array('id' => 'password', 'onkeyup' => 'checkPassword(this.value)', 'onblur' => 'CValid(this.value, this.id)', 'required' => 1, 'validation' => new \PFBC\Validation\Password)));

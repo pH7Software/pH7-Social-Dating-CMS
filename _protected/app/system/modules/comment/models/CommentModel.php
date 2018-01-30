@@ -27,7 +27,7 @@ class CommentModel extends CommentCoreModel
         if (!$oData = $this->cache->get()) {
             $sTable = CommentCore::checkTable($sTable);
 
-            $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Comments' . $sTable) . ' AS c LEFT JOIN' . Db::prefix('Members') . 'AS m ON c.sender = m.profileId WHERE commentId = :commentId AND c.approved =:approved LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' . Db::prefix('comments_' . $sTable) . ' AS c LEFT JOIN' . Db::prefix(DbTableName::MEMBER) . 'AS m ON c.sender = m.profileId WHERE commentId = :commentId AND c.approved =:approved LIMIT 1');
             $rStmt->bindParam(':commentId', $iCommentId, \PDO::PARAM_INT);
             $rStmt->bindParam(':approved', $iApproved, \PDO::PARAM_INT);
             $rStmt->execute();
@@ -53,7 +53,7 @@ class CommentModel extends CommentCoreModel
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Comments' . $sTable) .
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('comments_' . $sTable) .
             '(comment, recipient, sender, approved, createdDate) VALUES(:comment, :recipient, :sender, :approved, :createdDate)');
 
         $rStmt->bindValue(':comment', $iCommentId, \PDO::PARAM_STR);
@@ -80,7 +80,7 @@ class CommentModel extends CommentCoreModel
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Comments' . $sTable) .
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('comments_' . $sTable) .
             'SET comment = :comment, approved = :approved, updatedDate = :updatedDate WHERE commentId = :commentId AND recipient = :recipient AND sender = :sender LIMIT 1');
 
         $rStmt->bindValue('commentId', $iCommentId, \PDO::PARAM_INT);
@@ -105,7 +105,7 @@ class CommentModel extends CommentCoreModel
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Comments' . $sTable) .
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('comments_' . $sTable) .
             'WHERE commentId = :commentId AND recipient = :recipient AND sender = :sender LIMIT 1');
 
         $rStmt->bindValue(':commentId', $iCommentId, \PDO::PARAM_INT);
@@ -157,7 +157,7 @@ class CommentModel extends CommentCoreModel
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        return Spam::detectDuplicate($sCheckMsg, 'comment', 'sender', $iSenderId, 'Comments' . $sTable);
+        return Spam::detectDuplicate($sCheckMsg, 'comment', 'sender', $iSenderId, 'comments_' . $sTable);
     }
 
     /**
@@ -174,7 +174,7 @@ class CommentModel extends CommentCoreModel
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT commentId FROM' . Db::prefix('Comments' . $sTable) .
+        $rStmt = Db::getInstance()->prepare('SELECT commentId FROM' . Db::prefix('comments_' . $sTable) .
             'WHERE sender = :sender AND DATE_ADD(createdDate, INTERVAL :waitTime MINUTE) > :currentTime LIMIT 1');
 
         $rStmt->bindValue(':sender', $iSenderId, \PDO::PARAM_INT);

@@ -18,7 +18,7 @@ class ReportCoreModel extends Model
      */
     public static function totalReports()
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(reportId) FROM' . Db::prefix('Report'));
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(reportId) FROM' . Db::prefix(DbTableName::REPORT));
         $rStmt->execute();
         $iTotalReports = (int)$rStmt->fetchColumn();
         Db::free($rStmt);

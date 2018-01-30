@@ -50,7 +50,7 @@ class AdsFormProcess extends Form
     {
         (new Cache)
             ->start(DesignModel::CACHE_STATIC_GROUP, null, null)->clear()
-            ->start(AdsCoreModel::CACHE_GROUP, 'totalAds' . ($bIsAffiliate ? 'Affiliates' : ''), null)
+            ->start(AdsCoreModel::CACHE_GROUP, 'totalAds' . ($bIsAffiliate ? DbTableName::AFFILIATE : ''), null)
             ->clear();
     }
 }
