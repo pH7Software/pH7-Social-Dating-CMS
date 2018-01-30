@@ -968,7 +968,7 @@ class UserCoreModel extends Model
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_WHO_VIEW) . 'WHERE visitorId = ' . $iProfileId);
 
         // DELETE REPORT
-        $oDb->exec('DELETE FROM' . Db::prefix('Report') . 'WHERE spammerId = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::REPORT) . 'WHERE spammerId = ' . $iProfileId);
 
         // DELETE TOPICS of FORUMS
         /*
