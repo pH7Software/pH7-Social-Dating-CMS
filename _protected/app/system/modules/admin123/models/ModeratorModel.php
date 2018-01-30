@@ -62,7 +62,7 @@ class ModeratorModel extends ModeratorCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
         $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, v.* FROM' .
-            Db::prefix('Videos') . 'AS v INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
+            Db::prefix(DbTableName::VIDEO) . 'AS v INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
             'AS m USING(profileId) WHERE approved = \'0\' LIMIT :offset, :limit');
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -130,7 +130,7 @@ class ModeratorModel extends ModeratorCoreModel
 
     public function approvedVideo($iVideoId, $iStatus = 1)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Videos') .
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::VIDEO) .
             'SET approved = :status  WHERE videoId = :videoId');
         $rStmt->bindParam(':videoId', $iVideoId, \PDO::PARAM_INT);
         $rStmt->bindParam(':status', $iStatus, \PDO::PARAM_INT);

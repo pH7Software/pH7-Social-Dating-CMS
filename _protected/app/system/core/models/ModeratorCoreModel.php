@@ -44,7 +44,7 @@ class ModeratorCoreModel extends AdminCoreModel
 
     public function totalVideos()
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(videoId) AS totalVideos FROM' . Db::prefix('Videos') . 'WHERE approved = \'0\'');
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(videoId) AS totalVideos FROM' . Db::prefix(DbTableName::VIDEO) . 'WHERE approved = \'0\'');
         $rStmt->execute();
         $iTotalVideos = (int)$rStmt->fetchColumn();
         Db::free($rStmt);

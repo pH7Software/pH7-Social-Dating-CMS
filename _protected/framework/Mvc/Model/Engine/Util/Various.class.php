@@ -148,7 +148,7 @@ class Various
                 $sId = 'albumId';
                 break;
 
-            case 'Videos':
+            case DbTableName::VIDEO:
                 $sId = 'videoId';
                 break;
 
@@ -202,7 +202,7 @@ class Various
             case DbTableName::ALBUM_PICTURE:
             case DbTableName::ALBUM_VIDEO:
             case DbTableName::PICTURE:
-            case 'Videos':
+            case DbTableName::VIDEO:
             case 'Games':
             case 'Blogs':
             case 'Notes':

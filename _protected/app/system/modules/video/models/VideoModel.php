@@ -29,7 +29,7 @@ class VideoModel extends VideoCoreModel
 
     public function addVideo($iProfileId, $iAlbumId, $sTitle, $sDescription, $sFile, $sThumb, $sDuration, $sCreatedDate, $iApproved = 1)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Videos') . '(profileId, albumId, title, description, file, thumb, duration, createdDate, approved)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::VIDEO) . '(profileId, albumId, title, description, file, thumb, duration, createdDate, approved)
             VALUES (:profileId, :albumId, :title, :description, :file, :thumb, :duration, :createdDate, :approved)');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
@@ -80,7 +80,7 @@ class VideoModel extends VideoCoreModel
             $iLimit = (int)$iLimit;
 
             $sSqlVideoId = (!empty($iVideoId)) ? ' v.videoId=:videoId AND ' : ' ';
-            $rStmt = Db::getInstance()->prepare('SELECT v.*, a.name, m.username, m.firstName, m.sex FROM' . Db::prefix('Videos') . 'AS v INNER JOIN'
+            $rStmt = Db::getInstance()->prepare('SELECT v.*, a.name, m.username, m.firstName, m.sex FROM' . Db::prefix(DbTableName::VIDEO) . 'AS v INNER JOIN'
                 . Db::prefix(DbTableName::ALBUM_VIDEO) . 'AS a ON v.albumId = a.albumId INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
                 'AS m ON v.profileId = m.profileId WHERE v.profileId=:profileId AND v.albumId=:albumId AND' . $sSqlVideoId . 'v.approved=:approved LIMIT :offset, :limit');
 
@@ -124,7 +124,7 @@ class VideoModel extends VideoCoreModel
         $this->cache->start(self::CACHE_GROUP, 'totalVideos' . $iProfileId, static::CACHE_TIME);
 
         if (!$iData = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT COUNT(videoId) AS totalVideos FROM' . Db::prefix('Videos') . 'WHERE profileId=:profileId');
+            $rStmt = Db::getInstance()->prepare('SELECT COUNT(videoId) AS totalVideos FROM' . Db::prefix(DbTableName::VIDEO) . 'WHERE profileId=:profileId');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -153,7 +153,7 @@ class VideoModel extends VideoCoreModel
 
     public function updateVideo($iProfileId, $iAlbumId, $iVideoId, $sTitle, $sDescription, $sUpdatedDate)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Videos') . 'SET title =:title, description =:description, updatedDate =:updatedDate
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::VIDEO) . 'SET title =:title, description =:description, updatedDate =:updatedDate
             WHERE profileId=:profileId AND albumId=:albumId AND videoId=:videoId');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
@@ -190,7 +190,7 @@ class VideoModel extends VideoCoreModel
         $sSqlSelect = (!$bCount) ? 'v.*' : 'COUNT(v.videoId) AS totalVideos';
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE v.videoId = :looking' : ' WHERE v.title LIKE :looking OR v.description LIKE :looking';
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ', a.name, m.username, m.firstName, m.sex FROM' . Db::prefix('Videos') . 'AS v INNER JOIN'
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ', a.name, m.username, m.firstName, m.sex FROM' . Db::prefix(DbTableName::VIDEO) . 'AS v INNER JOIN'
             . Db::prefix(DbTableName::ALBUM_VIDEO) . 'AS a ON v.albumId = a.albumId INNER JOIN' . Db::prefix(DbTableName::MEMBER) . 'AS m ON v.profileId = m.profileId' . $sSqlWhere . ' AND v.approved=:approved' . $sSqlOrder . $sSqlLimit);
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);

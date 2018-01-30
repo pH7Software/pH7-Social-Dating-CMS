@@ -15,7 +15,7 @@
                 </div>
             {/if}
             <p>
-                {{ RatingDesignCore::voting($a->videoId,'Videos') }}
+                {{ RatingDesignCore::voting($a->videoId,DbTableName::VIDEO) }}
                 {{ $design->like($a->username,$a->firstName,$a->sex,$absolute_url) }} | {{ $design->report($a->profileId, $a->username, $a->firstName, $a->sex) }}
             </p>
         </div>

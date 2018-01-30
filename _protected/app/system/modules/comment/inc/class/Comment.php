@@ -31,7 +31,7 @@ class Comment extends CommentCore
                 break;
 
             case 'Video':
-                $sNewTable = 'Videos';
+                $sNewTable = DbTableName::VIDEO;
                 break;
 
             case 'Blog':

@@ -14,7 +14,7 @@ use PH7\Framework\Mvc\Model\Engine\Model;
 class DataCoreModel extends Model
 {
     const TB_PICTURE = DbTableName::PICTURE;
-    const TB_VIDEO = 'Videos';
+    const TB_VIDEO = DbTableName::VIDEO;
     const MAX_ITEMS = 1000;
 
     /**
