@@ -32,7 +32,7 @@ class StatisticCoreModel extends StatisticModel
         $oCache = (new Cache)->start(self::CACHE_GROUP, 'dateofcreation', self::CACHE_LIFETIME);
 
         if (!$sSinceDate = $oCache->get()) {
-            $sSinceDate = Record::getInstance()->getOne('admins', 'profileId', 1, 'joinDate')->joinDate;
+            $sSinceDate = Record::getInstance()->getOne(DbTableName::ADMIN, 'profileId', 1, 'joinDate')->joinDate;
             $oCache->put($sSinceDate);
         }
         unset($oCache);
@@ -105,7 +105,7 @@ class StatisticCoreModel extends StatisticModel
      */
     public function totalAdmins($iDay = 0, $sGender = 'all')
     {
-        return (new UserCoreModel)->total('admins', $iDay, $sGender);
+        return (new UserCoreModel)->total(DbTableName::ADMIN, $iDay, $sGender);
     }
 
     public function totalBlogs($iDay = 0)

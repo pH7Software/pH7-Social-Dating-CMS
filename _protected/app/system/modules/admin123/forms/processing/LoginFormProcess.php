@@ -46,7 +46,7 @@ class LoginFormProcess extends Form implements LoginableForm
         $iMaxAttempts = (int)DbConfig::getSetting('maxAdminLoginAttempts');
         $iTimeDelay = (int)DbConfig::getSetting('loginAdminAttemptTime');
 
-        if ($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view, 'admins')) {
+        if ($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view, DbTableName::ADMIN)) {
             \PFBC\Form::setError('form_admin_login', Form::loginAttemptsExceededMsg($iTimeDelay));
             return; // Stop execution of the method.
         }
@@ -60,10 +60,10 @@ class LoginFormProcess extends Form implements LoginableForm
             $this->preventBruteForce(self::BRUTE_FORCE_SLEEP_DELAY);
 
             if (!$bIsLogged) {
-                $oSecurityModel->addLoginLog($sEmail, $sUsername, $sPassword, 'Failed! Incorrect Email, Username or Password', 'admins');
+                $oSecurityModel->addLoginLog($sEmail, $sUsername, $sPassword, 'Failed! Incorrect Email, Username or Password', DbTableName::ADMIN);
 
                 if ($bIsLoginAttempt) {
-                    $oSecurityModel->addLoginAttempt('admins');
+                    $oSecurityModel->addLoginAttempt(DbTableName::ADMIN);
                 }
 
                 $this->enableCaptcha();
@@ -71,13 +71,13 @@ class LoginFormProcess extends Form implements LoginableForm
             } elseif ($bIpNotAllowed) {
                 $this->enableCaptcha();
                 \PFBC\Form::setError('form_admin_login', t('Incorrect Login!'));
-                $oSecurityModel->addLoginLog($sEmail, $sUsername, $sPassword, 'Failed! Wrong IP address', 'admins');
+                $oSecurityModel->addLoginLog($sEmail, $sUsername, $sPassword, 'Failed! Wrong IP address', DbTableName::ADMIN);
             }
         } else {
-            $oSecurityModel->clearLoginAttempts('admins');
+            $oSecurityModel->clearLoginAttempts(DbTableName::ADMIN);
             $this->session->remove('captcha_admin_enabled');
-            $iId = $this->oAdminModel->getId($sEmail, null, 'admins');
-            $oAdminData = $this->oAdminModel->readProfile($iId, 'admins');
+            $iId = $this->oAdminModel->getId($sEmail, null, DbTableName::ADMIN);
+            $oAdminData = $this->oAdminModel->readProfile($iId, DbTableName::ADMIN);
 
             $this->updatePwdHashIfNeeded($sPassword, $oAdminData->password, $sEmail);
 
@@ -101,7 +101,7 @@ class LoginFormProcess extends Form implements LoginableForm
     public function updatePwdHashIfNeeded($sPassword, $sUserPasswordHash, $sEmail)
     {
         if ($sNewPwdHash = Security::pwdNeedsRehash($sPassword, $sUserPasswordHash)) {
-            $this->oAdminModel->changePassword($sEmail, $sNewPwdHash, 'admins');
+            $this->oAdminModel->changePassword($sEmail, $sNewPwdHash, DbTableName::ADMIN);
         }
     }
 

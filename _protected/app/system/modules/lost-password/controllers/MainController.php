@@ -124,7 +124,7 @@ class MainController extends Controller
             case 'Affiliates':
                 return Uri::get('affiliate', 'home', 'login');
 
-            case 'admins':
+            case DbTableName::ADMIN:
                 return Uri::get(PH7_ADMIN_MOD, 'main', 'login');
         }
     }
