@@ -24,6 +24,6 @@ class Analytics
      */
     public function updateApi($sCode)
     {
-        return Engine\Record::getInstance()->update('AnalyticsApi', 'code', $sCode);
+        return Engine\Record::getInstance()->update(DbTableName::ANALYTIC_API, 'code', $sCode);
     }
 }

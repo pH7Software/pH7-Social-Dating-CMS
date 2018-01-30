@@ -110,7 +110,7 @@ class Design extends HtmlDesign
 
         if (!$sData = $this->oCache->get()) {
             $sSqlWhere = $bOnlyActive ? 'WHERE active=\'1\'' : '';
-            $rStmt = Db::getInstance()->prepare('SELECT code FROM ' . Db::prefix('AnalyticsApi') . $sSqlWhere . ' LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT code FROM ' . Db::prefix(DbTableName::ANALYTIC_API) . $sSqlWhere . ' LIMIT 1');
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);

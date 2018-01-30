@@ -26,6 +26,7 @@ class DbTableName
     const VIDEO = 'videos';
     const ALBUM_PICTURE = 'albums_pictures';
     const ALBUM_VIDEO = 'albums_videos';
+    const ANALYTIC_API = 'analytics_api';
 
     const USER_TABLES = [
         self::ADMIN,
