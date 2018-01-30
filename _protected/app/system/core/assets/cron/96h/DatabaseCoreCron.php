@@ -97,9 +97,9 @@ class DatabaseCoreCron extends Cron
         Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::ALBUM_VIDEO) . 'SET votes=0');
         Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::ALBUM_VIDEO) . 'SET score=0');
 
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Blogs') . 'SET views=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Blogs') . 'SET votes=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Blogs') . 'SET score=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::BLOG) . 'SET views=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::BLOG) . 'SET votes=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::BLOG) . 'SET score=0');
 
         Db::getInstance()->exec('UPDATE' . Db::prefix('Notes') . 'SET views=0');
         Db::getInstance()->exec('UPDATE' . Db::prefix('Notes') . 'SET votes=0');

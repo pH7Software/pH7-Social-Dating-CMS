@@ -7,7 +7,7 @@
             {{ BlogDesign::categories($categories, 'blog') }}
 
             <p class="small italic">
-                {lang 'Posted on:'} {created_date} {if !empty($updated_date)} | {lang 'Updated Post:'}{updated_date}{/if} | {lang 'Views:'} {% Framework\Mvc\Model\Statistic::getView($blog_id,'Blogs') %}
+                {lang 'Posted on:'} {created_date} {if !empty($updated_date)} | {lang 'Updated Post:'}{updated_date}{/if} | {lang 'Views:'} {% Framework\Mvc\Model\Statistic::getView($blog_id,DbTableName::BLOG) %}
             </p>
             {if AdminCore::auth()}
                 <p>
@@ -16,7 +16,7 @@
             {/if}
 
             {{ ShareUrlCoreForm::display(Framework\Mvc\Router\Uri::get('blog','main','read',$post_id)) }}
-            {{ RatingDesignCore::voting($blog_id,'Blogs','center') }}
+            {{ RatingDesignCore::voting($blog_id,DbTableName::BLOG,'center') }}
 
             {{ $design->likeApi() }}
 

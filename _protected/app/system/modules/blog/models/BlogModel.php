@@ -75,7 +75,7 @@ class BlogModel extends BlogCoreModel
         $this->cache->start(self::CACHE_GROUP, 'readPost' . $sPostId, static::CACHE_TIME);
 
         if (!$oData = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Blogs') . 'AS b LEFT JOIN' . Db::prefix('BlogsCategories') . 'AS c ON b.blogId = c.blogId WHERE b.postId = :postId LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::BLOG) . 'AS b LEFT JOIN' . Db::prefix('BlogsCategories') . 'AS c ON b.blogId = c.blogId WHERE b.postId = :postId LIMIT 1');
             $rStmt->bindValue(':postId', $sPostId, \PDO::PARAM_STR);
             $rStmt->execute();
             $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -93,7 +93,7 @@ class BlogModel extends BlogCoreModel
      */
     public function addPost(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Blogs') .
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::BLOG) .
             '(postId, langId, title, content, slogan, tags, pageTitle, metaDescription, metaKeywords, metaRobots, metaAuthor, metaCopyright, enableComment, createdDate)
             VALUES (:postId, :langId, :title, :content, :slogan, :tags, :pageTitle, :metaDescription, :metaKeywords, :metaRobots, :metaAuthor, :metaCopyright, :enableComment, :createdDate)');
 
@@ -137,7 +137,7 @@ class BlogModel extends BlogCoreModel
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(b.blogId) AS totalBlogs';
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Blogs') . 'AS b LEFT JOIN ' . Db::prefix('BlogsCategories') . 'AS c ON b.blogId = c.blogId LEFT JOIN' .
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::BLOG) . 'AS b LEFT JOIN ' . Db::prefix('BlogsCategories') . 'AS c ON b.blogId = c.blogId LEFT JOIN' .
             Db::prefix('BlogsDataCategories') . 'AS d ON c.categoryId = d.categoryId WHERE d.name LIKE :name' . $sSqlOrder . $sSqlLimit);
 
         $rStmt->bindValue(':name', '%' . $sCategoryName . '%', \PDO::PARAM_STR);
@@ -190,7 +190,7 @@ class BlogModel extends BlogCoreModel
             $sSqlWhere = ' WHERE blogId = :looking';
         }
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Blogs') . $sSqlWhere . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::BLOG) . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         if (ctype_digit($mLooking)) {
             $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
@@ -228,7 +228,7 @@ class BlogModel extends BlogCoreModel
         $this->cache->start(self::CACHE_GROUP, 'postId' . $iBlogId, static::CACHE_TIME);
 
         if (!$sData = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT postId FROM' . Db::prefix('Blogs') . ' WHERE blogId = :blogId LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT postId FROM' . Db::prefix(DbTableName::BLOG) . ' WHERE blogId = :blogId LIMIT 1');
             $rStmt->bindValue(':blogId', $iBlogId, \PDO::PARAM_INT);
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -251,7 +251,7 @@ class BlogModel extends BlogCoreModel
         $this->cache->start(self::CACHE_GROUP, 'postIdExists' . $sPostId, static::CACHE_TIME);
 
         if (!$bData = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT COUNT(postId) FROM' . Db::prefix('Blogs') . 'WHERE postId = :postId LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT COUNT(postId) FROM' . Db::prefix(DbTableName::BLOG) . 'WHERE postId = :postId LIMIT 1');
             $rStmt->bindValue(':postId', $sPostId, \PDO::PARAM_STR);
             $rStmt->execute();
             $bData = ($rStmt->fetchColumn() == 1);
@@ -270,7 +270,7 @@ class BlogModel extends BlogCoreModel
     public function deletePost($iBlogId)
     {
         $iBlogId = (int)$iBlogId;
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Blogs') . 'WHERE blogId = :blogId');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::BLOG) . 'WHERE blogId = :blogId');
         $rStmt->bindValue(':blogId', $iBlogId, \PDO::PARAM_INT);
 
         return $rStmt->execute();
@@ -296,6 +296,6 @@ class BlogModel extends BlogCoreModel
      */
     public function updatePost($sSection, $sValue, $iBlogId)
     {
-        $this->orm->update('Blogs', $sSection, $sValue, 'blogId', $iBlogId);
+        $this->orm->update(DbTableName::BLOG, $sSection, $sValue, 'blogId', $iBlogId);
     }
 }

@@ -156,7 +156,7 @@ class Various
                 $sId = 'albumId';
                 break;
 
-            case 'Blogs':
+            case DbTableName::BLOG:
                 $sId = 'blogId';
                 break;
 
@@ -204,7 +204,7 @@ class Various
             case DbTableName::PICTURE:
             case DbTableName::VIDEO:
             case 'Games':
-            case 'Blogs':
+            case DbTableName::BLOG:
             case 'Notes':
                 return $sTable;
 
