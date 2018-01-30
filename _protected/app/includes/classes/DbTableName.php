@@ -19,7 +19,7 @@ class DbTableName
     const AFFILIATE_INFO = 'affiliates_info';
     const MEMBER_PRIVACY = 'members_privacy';
     const MEMBER_NOTIFICATION = 'members_notifications';
-    const BLOCK_IP = 'BlockIp';
+    const BLOCK_IP = 'block_ip';
 
     const USER_TABLES = [
         self::ADMIN,
