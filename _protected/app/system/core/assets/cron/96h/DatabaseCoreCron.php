@@ -208,7 +208,7 @@ class DatabaseCoreCron extends Cron
     protected function pruningDb($iOlderThanXDay, $sTable, $sDateColumn)
     {
         if (strstr($sTable, 'comments_') === false &&
-            $sTable !== 'Messages' && $sTable !== 'Messenger') {
+            $sTable !== DbTableName::MESSAGE && $sTable !== DbTableName::MESSENGER) {
             DbVarious::launchErr($sTable);
         }
 
