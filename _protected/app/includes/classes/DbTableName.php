@@ -22,6 +22,8 @@ class DbTableName
     const BLOCK_IP = 'block_ip';
     const AD = 'ads';
     const AD_AFFILIATE = 'ads_affiliates';
+    const PICTURE = 'pictures';
+    const VIDEO = 'videos';
     const ALBUM_PICTURE = 'albums_pictures';
     const ALBUM_VIDEO = 'albums_videos';
 
