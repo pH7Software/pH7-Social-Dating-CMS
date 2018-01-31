@@ -328,7 +328,7 @@ class Analytics extends StoreStats
      *
      * @throws Exception
      */
-    protected function init()
+    private function init()
     {
         // Check and retrieve
         $sOs = $this->checkOs();
@@ -354,7 +354,7 @@ class Analytics extends StoreStats
      *
      * @return bool
      */
-    protected function find($sToFind, $sContents)
+    private function find($sToFind, $sContents)
     {
         return preg_match('/' . $sToFind . '/i', $sContents);
     }
