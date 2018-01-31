@@ -12,7 +12,7 @@
 
 
 <p>
-   pH7CMS is already translated into Spanish, Dutch and French. You can find those translations <a href="https://github.com/pH7Software/pH7-Internationalization">here</a>.<br />
+   pH7CMS is already translated into Spanish, Dutch, Indonesian and French. You can find those translations <a href="https://github.com/pH7Software/pH7-Internationalization">here</a>.<br />
    <a href="https://github.com/pH7Software/pH7-Internationalization#how-to-install-those-languages">How to install them</a> and <a href="https://github.com/pH7Software/pH7-Internationalization#troubleshooting">troubleshooting</a>.
 </p>
 
