@@ -61,7 +61,7 @@ class Ip
      *
      * @param string $sIp The IP address.
      *
-     * @return boolean Returns TRUE is it's a private IP, FALSE otherwite.
+     * @return bool Returns TRUE is it's a private IP, FALSE otherwite.
      */
     public static function isPrivate($sIp)
     {
