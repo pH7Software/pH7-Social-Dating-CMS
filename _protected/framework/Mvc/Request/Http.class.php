@@ -373,18 +373,18 @@ class Http extends \PH7\Framework\Http\Http
      */
     protected function cleanData(&$aType, $sKey, $sParam)
     {
+        // Avoid to use escape() func that converts integer/float to string type
+        if ($this->isUnescapableType($aType[$sKey])) {
+            return $aType[$sKey];
+        }
+
         // For space and others in the address bar
         if ($this->getMethod() === self::METHOD_GET) {
-            $aType[$sKey] = str_replace(self::SPECIAL_CHARS, '', $aType[$sKey]);
+            $aType[$sKey] = $this->cleanGetUrl($aType[$sKey]);
         }
 
         if (!empty($sParam) && $sParam === self::ONLY_XSS_CLEAN) {
             return (new Secty\Validate\Filter)->xssClean($aType[$sKey]);
-        }
-
-        // Avoid to use escape() func that converts integer/float to string type
-        if ($this->isUnescapableType($aType[$sKey])) {
-            return $aType[$sKey];
         }
 
         return escape($aType[$sKey], $this->bStrip);
