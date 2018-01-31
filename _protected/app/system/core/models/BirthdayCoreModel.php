@@ -34,7 +34,7 @@ class BirthdayCoreModel
      */
     public function get($sGender = self::ALL, $bCount = false, $sOrderBy = SearchCoreModel::LAST_ACTIVITY, $iSort = SearchCoreModel::DESC, $iOffset = null, $iLimit = null)
     {
-        $bIsLimit = iOffset !== null && $iLimit !== null;
+        $bIsLimit = $iOffset !== null && $iLimit !== null;
         $bIsSex = $sGender !== self::ALL;
 
         $bCount = (bool)$bCount;
