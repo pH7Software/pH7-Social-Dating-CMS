@@ -115,7 +115,7 @@ class MainController extends Controller
             $this->view->is_own_profile = $this->isOwnProfile();
 
             // Count number of views
-            Statistic::setView($this->iProfileId, 'Members');
+            Statistic::setView($this->iProfileId, DbTableName::MEMBER);
         } else {
             $this->displayPageNotFound();
         }
