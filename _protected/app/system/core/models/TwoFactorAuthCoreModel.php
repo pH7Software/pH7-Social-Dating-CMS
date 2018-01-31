@@ -22,11 +22,18 @@ class TwoFactorAuthCoreModel extends Framework\Mvc\Model\Engine\Model
         $this->sTable = Various::convertModToTable($sMod);
     }
 
+    /**
+     * @param int $iProfileId
+     *
+     * @return bool
+     */
     public function isEnabled($iProfileId)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT isTwoFactorAuth FROM' . Db::prefix($this->sTable) . 'WHERE profileId = :profileId AND isTwoFactorAuth = \'1\' LIMIT 1');
+        $sSql = 'SELECT isTwoFactorAuth FROM' . Db::prefix($this->sTable) . 'WHERE profileId = :profileId AND isTwoFactorAuth = \'1\' LIMIT 1';
+        $rStmt = Db::getInstance()->prepare($sSql);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->fetchColumn() == 1;
     }
 }

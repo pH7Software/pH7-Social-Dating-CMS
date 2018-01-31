@@ -37,7 +37,11 @@ class CommentCoreModel extends Model
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
-        $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' . Db::prefix('comments_' . $sTable) . ' AS c LEFT JOIN' . Db::prefix(DbTableName::MEMBER) . 'AS m ON c.sender = m.profileId WHERE c.approved = :approved ORDER BY ' . $sOrder . ' DESC LIMIT :offset, :limit');
+        $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' .
+            Db::prefix('comments_' . $sTable) . ' AS c LEFT JOIN' . Db::prefix(DbTableName::MEMBER) .
+            'AS m ON c.sender = m.profileId WHERE c.approved = :approved ORDER BY ' .
+            $sOrder . ' DESC LIMIT :offset, :limit'
+        );
 
         $rStmt->bindParam(':approved', $iApproved, PDO::PARAM_INT);
         $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
