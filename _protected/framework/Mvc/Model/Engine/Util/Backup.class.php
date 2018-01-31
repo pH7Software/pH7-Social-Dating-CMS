@@ -193,7 +193,7 @@ class Backup
      */
     public function download()
     {
-        $this->_download();
+        $this->downloadBackup();
     }
 
     /**
@@ -203,7 +203,7 @@ class Backup
      */
     public function downloadArchive()
     {
-        $this->_download(true);
+        $this->downloadBackup(true);
     }
 
     /**
@@ -213,7 +213,7 @@ class Backup
      *
      * @return void
      */
-    private function _download($bArchive = false)
+    private function downloadBackup($bArchive = false)
     {
         ob_start();
         /***** Set Headers *****/
