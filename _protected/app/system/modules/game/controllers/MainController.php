@@ -9,7 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Http\Http;
-use PH7\Framework\Mvc\Model\Statistic as Stat;
+use PH7\Framework\Mvc\Model\Statistic as StatModel;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 
@@ -93,12 +93,12 @@ class MainController extends Controller
             $this->view->meta_keywords = $oGame->keywords . $this->sMetaKeywords;
             $this->view->h2_title = $this->sTitle;
             $this->view->downloads = $this->oGameModel->getDownloadStat($oGame->gameId);
-            $this->view->views = Stat::getView($oGame->gameId, DbTableName::GAME);
+            $this->view->views = StatModel::getView($oGame->gameId, DbTableName::GAME);
 
             $this->view->game = $oGame;
 
             //Set Game Statistics
-            Stat::setView($oGame->gameId, DbTableName::GAME);
+            StatModel::setView($oGame->gameId, DbTableName::GAME);
         }
 
         $this->output();
