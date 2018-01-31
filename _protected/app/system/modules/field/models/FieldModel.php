@@ -16,6 +16,8 @@ use PH7\Framework\Mvc\Request\Http;
 
 class FieldModel extends Model
 {
+    const MAX_VARCHAR_LENGTH = 255;
+
     /** @var string */
     private $sTable;
 
@@ -125,8 +127,8 @@ class FieldModel extends Model
                 if (mb_strlen($this->sDefVal) > $this->iLength) {
                     $this->iLength = mb_strlen($this->sDefVal);
                 }
-                if ($this->iLength === 0 || $this->iLength > 255) {
-                    $this->iLength = 255;
+                if ($this->iLength === 0 || $this->iLength > self::MAX_VARCHAR_LENGTH) {
+                    $this->iLength = self::MAX_VARCHAR_LENGTH;
                 }
                 $this->sSql .= 'VARCHAR(' . $this->iLength . ')';
             } break;
@@ -139,7 +141,7 @@ class FieldModel extends Model
                     $this->iLength = strlen($this->sDefVal);
                 }
                 if ($this->iLength === 0 || $this->iLength > 11) {
-                    $this->iLength = 9; // Set the default maximum length value.
+                    $this->iLength = 9; // Set the default maximum length value
                 }
 
                 $this->sSql .= 'INT(' . $this->iLength . ')';
