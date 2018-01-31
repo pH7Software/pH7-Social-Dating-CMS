@@ -5,7 +5,7 @@
 --
 
 -- Add new module name into SysModsEnabled
-INSERT INTO pH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VALUES
+INSERT INTO ph7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VALUES
 ('Cool Profile Page', 'cool-profile-page', '0', '0');
 
 -- Rename table names to new names
@@ -74,4 +74,4 @@ ALTER TABLE ph7_Games RENAME TO ph7_games;
 ALTER TABLE ph7_GamesCategories RENAME TO ph7_games_categories;
 
 -- Update pH7CMS's SQL schema version
-UPDATE pH7_Modules SET version = '1.4.2' WHERE vendorName = 'pH7CMS';
+UPDATE ph7_Modules SET version = '1.4.2' WHERE vendorName = 'pH7CMS';
