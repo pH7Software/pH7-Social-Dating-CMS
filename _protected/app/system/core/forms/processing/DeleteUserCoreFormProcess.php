@@ -19,7 +19,14 @@ use PH7\Framework\Url\Header;
 /** For "user" and "affiliate" modules **/
 class DeleteUserCoreFormProcess extends Form
 {
-    private $sSessPrefix, $sUsername, $sEmail;
+    /** @var string */
+    private $sSessPrefix;
+
+    /** @var string */
+    private $sUsername;
+
+    /** @var string */
+    private $sEmail;
 
     public function __construct()
     {
