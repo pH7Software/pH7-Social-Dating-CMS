@@ -95,6 +95,9 @@ class DeleteUserCoreFormProcess extends Form
      */
     protected function goSoon()
     {
-        Header::redirect(Uri::get('user', 'main', 'soon'), t('Your account has been removed successfully!'));
+        Header::redirect(
+            Uri::get('user', 'main', 'soon'),
+            t('Your account has been removed successfully!')
+        );
     }
 }
