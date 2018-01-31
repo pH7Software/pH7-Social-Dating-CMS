@@ -567,6 +567,10 @@ class InstallController extends Controller
         require PH7_PATH_FRAMEWORK . 'Error/Debug.class.php';
 
         Framework\Loader\Autoloader::getInstance()->init();
+
+        // Loading Class ~/protected/app/includes/classes/* (for "DbTableName" class)
+        Framework\File\Import::pH7App('includes.classes.Loader.Autoloader');
+        App\Includes\Classes\Loader\Autoloader::getInstance()->init();
     }
 
     /***** Get the loading image *****/
