@@ -8,7 +8,6 @@
 INSERT INTO ph7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VALUES
 ('Cool Profile Page', 'cool-profile-page', '0', '0');
 
-
 -- Rename table names to new names
 ALTER TABLE ph7_Admins RENAME ph7_admins;
 ALTER TABLE ph7_Memberships RENAME ph7_memberships;
@@ -73,7 +72,6 @@ ALTER TABLE ph7_License RENAME ph7_license;
 ALTER TABLE ph7_CustomCode RENAME ph7_custom_code;
 ALTER TABLE ph7_Games RENAME ph7_games;
 ALTER TABLE ph7_GamesCategories RENAME ph7_games_categories;
-
 
 -- Update pH7CMS's SQL schema version
 UPDATE ph7_Modules SET version = '1.4.2' WHERE vendorName = 'pH7CMS';
