@@ -47,7 +47,7 @@ class Various
         $rStmt = Db::getInstance()->exec($sSqlContent);
         unset($sSqlContent);
 
-        return ($rStmt === false) ? $rStmt->errorInfo() : true;
+        return $rStmt === false ? $rStmt->errorInfo() : true;
     }
 
     /**
