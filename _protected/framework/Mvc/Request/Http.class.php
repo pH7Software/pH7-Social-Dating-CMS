@@ -415,6 +415,16 @@ class Http extends \PH7\Framework\Http\Http
     }
 
     /**
+     * @param string $sValue
+     *
+     * @return string
+     */
+    private function cleanGetUrl($sValue)
+    {
+        return str_replace(self::SPECIAL_CHARS, '', $sValue);
+    }
+
+    /**
      * Clear the CSRF token in the request variable name.
      *
      * @param array $aType Request variable type ($_GET, $_POST, $_COOKIE, $_REQUEST).
