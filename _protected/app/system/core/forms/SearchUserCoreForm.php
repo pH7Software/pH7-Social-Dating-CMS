@@ -28,6 +28,9 @@ class SearchUserCoreForm
     private static $aCityOption = ['id' => 'str_city'];
     private static $aStateOption = ['id' => 'str_state'];
     private static $aAgeOption;
+    private static $aLatestOrder = [];
+    private static $aAvatarOnly = [];
+    private static $aOnlineOnly = [];
 
     /**
      * @param integer $iWidth Width of the form in pixel. If null, will be 100%
@@ -50,9 +53,9 @@ class SearchUserCoreForm
         $oForm->addElement(new \PFBC\Element\Age(self::$aAgeOption));
         $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country', self::$aCountryOption));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', self::$aCityOption));
-        $oForm->addElement(new \PFBC\Element\Checkbox('', 'latest', array('1' => '<span class="bold">' . t('Latest members') . '</span>')));
-        $oForm->addElement(new \PFBC\Element\Checkbox('', 'avatar', array('1' => '<span class="bold">' . t('Only with Avatar') . '</span>')));
-        $oForm->addElement(new \PFBC\Element\Checkbox('', 'online', array('1' => '<span class="bold green2">' . t('Only Online') . '</span>')));
+        $oForm->addElement(new \PFBC\Element\Checkbox('', 'latest', array('1' => '<span class="bold">' . t('Latest members') . '</span>'), self::$aLatestOrder));
+        $oForm->addElement(new \PFBC\Element\Checkbox('', 'avatar', array('1' => '<span class="bold">' . t('Only with Avatar') . '</span>'), self::$aAvatarOnly));
+        $oForm->addElement(new \PFBC\Element\Checkbox('', 'online', array('1' => '<span class="bold green2">' . t('Only Online') . '</span>'), self::$aOnlineOnly));
         $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', array('icon' => 'search')));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
         $oForm->render();
@@ -178,5 +181,17 @@ class SearchUserCoreForm
         self::$aCityOption += ['value' => $sCity, 'onfocus' => "if('" . $sCity . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . $sCity . "';"];
 
         self::$aStateOption += ['value' => Geo::getState(), 'onfocus' => "if('" . Geo::getState() . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . Geo::getState() . "';"];
+
+        if ($oHttpRequest->getExists('latest')) {
+            self::$aLatestOrder += ['value' => '1'];
+        }
+
+        if ($oHttpRequest->getExists('avatar')) {
+            self::$aAvatarOnly += ['value' => '1'];
+        }
+
+        if ($oHttpRequest->getExists('online')) {
+            self::$aOnlineOnly += ['value' => '1'];
+        }
     }
 }
