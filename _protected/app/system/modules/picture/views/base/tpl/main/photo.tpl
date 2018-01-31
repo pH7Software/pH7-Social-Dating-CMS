@@ -20,7 +20,7 @@
 
         {{ ShareUrlCoreForm::display(Framework\Mvc\Router\Uri::get('picture','main','photo',"$picture->username,$picture->albumId,$picture->title,$picture->pictureId")) }}
         {{ RatingDesignCore::voting($picture->pictureId,DbTableName::PICTURE,'center') }}
-        {{ CommentDesignCore::link($picture->pictureId, 'Picture') }}
+        {{ CommentDesignCore::link($picture->pictureId, 'picture') }}
 
         <p class="center">
             {{ $design->like($picture->username, $picture->firstName, $picture->sex) }} | {{ $design->report($picture->profileId, $picture->username, $picture->firstName, $picture->sex) }}

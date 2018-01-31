@@ -22,27 +22,27 @@ class Comment extends CommentCore
     public static function getTable($sTable)
     {
         switch ($sTable) {
-            case 'Profile':
+            case 'profile':
                 $sNewTable = DbTableName::MEMBER;
                 break;
 
-            case 'Picture':
+            case 'picture':
                 $sNewTable = DbTableName::PICTURE;
                 break;
 
-            case 'Video':
+            case 'video':
                 $sNewTable = DbTableName::VIDEO;
                 break;
 
-            case 'Blog':
+            case 'blog':
                 $sNewTable = DbTableName::BLOG;
                 break;
 
-            case 'Note':
+            case 'note':
                 $sNewTable = DbTableName::NOTE;
                 break;
 
-            case 'Game':
+            case 'game':
                 $sNewTable = DbTableName::GAME;
                 break;
 

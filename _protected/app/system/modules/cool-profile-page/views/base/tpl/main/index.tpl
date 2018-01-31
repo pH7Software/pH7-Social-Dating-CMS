@@ -152,6 +152,6 @@
             {{ $designModel->ad(160, 600) }}
         </div>
 
-        {{ CommentDesignCore::link($id, 'Profile') }}
+        {{ CommentDesignCore::link($id, 'profile') }}
     </div>
 </div>

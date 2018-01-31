@@ -191,7 +191,7 @@ class MainController extends Controller
     {
         $iVideoId = $this->httpRequest->post('video_id', 'int');
 
-        CommentCoreModel::deleteRecipient($iVideoId, 'Video');
+        CommentCoreModel::deleteRecipient($iVideoId, 'video');
 
         $this->oVideoModel->deleteVideo(
             $this->session->get('member_id'),

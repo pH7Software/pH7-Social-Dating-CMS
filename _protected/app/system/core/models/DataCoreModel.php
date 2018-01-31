@@ -108,62 +108,62 @@ class DataCoreModel extends Model
 
     public function getCommentsProfiles()
     {
-        return (new CommentCoreModel)->gets('Profile');
+        return (new CommentCoreModel)->gets('profile');
     }
 
     public function getCommentsBlogs()
     {
-        return (new CommentCoreModel)->gets('Blog');
+        return (new CommentCoreModel)->gets('blog');
     }
 
     public function getCommentsNotes()
     {
-        return (new CommentCoreModel)->gets('Note');
+        return (new CommentCoreModel)->gets('note');
     }
 
     public function getCommentsPictures()
     {
-        return (new CommentCoreModel)->gets('Picture');
+        return (new CommentCoreModel)->gets('picture');
     }
 
     public function getCommentsVideos()
     {
-        return (new CommentCoreModel)->gets('Video');
+        return (new CommentCoreModel)->gets('video');
     }
 
     public function getCommentsGames()
     {
-        return (new CommentCoreModel)->gets('Game');
+        return (new CommentCoreModel)->gets('game');
     }
 
     public function getRecipientCommentsProfiles($iRecipientId)
     {
-        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'Profile');
+        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'profile');
     }
 
     public function getRecipientCommentsBlogs($iRecipientId)
     {
-        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'Blog');
+        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'blog');
     }
 
     public function getRecipientCommentsNotes($iRecipientId)
     {
-        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'Note');
+        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'note');
     }
 
     public function getRecipientCommentsPictures($iRecipientId)
     {
-        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'Picture');
+        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'picture');
     }
 
     public function getRecipientCommentsVideos($iRecipientId)
     {
-        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'Video');
+        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'video');
     }
 
     public function getRecipientCommentsGames($iRecipientId)
     {
-        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'Game');
+        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'game');
     }
 
     public function getAlbumsPictures()

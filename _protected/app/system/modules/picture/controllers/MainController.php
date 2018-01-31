@@ -182,7 +182,7 @@ class MainController extends Controller
     {
         $iPictureId = $this->httpRequest->post('picture_id', 'int');
 
-        CommentCoreModel::deleteRecipient($iPictureId, 'Picture');
+        CommentCoreModel::deleteRecipient($iPictureId, 'picture');
 
         $this->oPictureModel->deletePhoto(
             $this->session->get('member_id'),

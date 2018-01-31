@@ -26,7 +26,7 @@
 
             {if $post->enableComment}
                 <p>-----------------------------------</p>
-                {{ CommentDesignCore::link($post->noteId,'Note') }}
+                {{ CommentDesignCore::link($post->noteId,'note') }}
             {/if}
 
             {if $is_admin_auth AND !UserCore::isAdminLoggedAs()}

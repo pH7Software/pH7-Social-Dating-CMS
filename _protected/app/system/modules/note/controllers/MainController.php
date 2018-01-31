@@ -295,7 +295,7 @@ class MainController extends Controller
         $iId = $this->httpRequest->post('id');
         $iProfileId = $this->session->get('member_id');
 
-        CommentCoreModel::deleteRecipient($iId, 'Note');
+        CommentCoreModel::deleteRecipient($iId, 'note');
         $this->oNoteModel->deleteCategory($iId);
 
         $this->deleteThumbFile($iId, $iProfileId);

@@ -16,7 +16,7 @@
 
         {{ ShareUrlCoreForm::display(Framework\Mvc\Router\Uri::get('video','main','video',"$video->username,$video->albumId,$video->title,$video->videoId")) }}
         {{ RatingDesignCore::voting($video->videoId,DbTableName::VIDEO,'center') }}
-        {{ CommentDesignCore::link($video->videoId, 'Video') }}
+        {{ CommentDesignCore::link($video->videoId, 'video') }}
 
         <p class="center">
             {{ $design->like($video->username, $video->firstName, $video->sex) }} | {{ $design->report($video->profileId, $video->username, $video->firstName, $video->sex) }}

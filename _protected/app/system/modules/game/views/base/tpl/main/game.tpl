@@ -30,7 +30,7 @@
             </div>
         {/if}
 
-        {{ CommentDesignCore::link($game->gameId, 'Game') }}
+        {{ CommentDesignCore::link($game->gameId, 'game') }}
     {else}
         <p>{error}</p>
     {/if}

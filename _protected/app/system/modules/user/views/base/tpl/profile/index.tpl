@@ -291,7 +291,7 @@
     </p>
     {{ $design->likeApi() }}
 
-    {{ CommentDesignCore::link($id, 'Profile') }}
+    {{ CommentDesignCore::link($id, 'profile') }}
 
     {* Setup the profile tabs *}
     <script src="{url_static_js}tabs.js"></script>
