@@ -127,8 +127,8 @@ class ValidateCoreAjax
         $iMin = DbConfig::getSetting('minUsernameLength');
         $iMax = DbConfig::getSetting('maxUsernameLength');
 
-        $this->iStatus = ($this->oValidate->username($sValue, $iMin, $iMax, $sTable)) ? 1 : 0;
-        $this->sMsg = ($this->iStatus) ? t('This Username is available!') : t('Sorry, but this Username is not available.');
+        $this->iStatus = $this->oValidate->username($sValue, $iMin, $iMax, $sTable) ? 1 : 0;
+        $this->sMsg = $this->iStatus ? t('This Username is available!') : t('Sorry, but this Username is not available.');
     }
 
     /**
