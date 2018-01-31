@@ -375,7 +375,7 @@ class Http extends \PH7\Framework\Http\Http
     {
         // For space and others in the address bar
         if ($this->getMethod() === self::METHOD_GET) {
-            $aType[$sKey] &= str_replace(self::SPECIAL_CHARS, '', $aType[$sKey]);
+            $aType[$sKey] = str_replace(self::SPECIAL_CHARS, '', $aType[$sKey]);
         }
 
         if (!empty($sParam) && $sParam === self::ONLY_XSS_CLEAN) {
