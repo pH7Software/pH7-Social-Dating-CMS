@@ -70,7 +70,7 @@ define('PH7_DDOS_MAX_SESSION_PAGE_LOAD', 1500);
 
 /***** TABLE PREFIX *****/
 
-define('PH7_TABLE_PREFIX', 'pH7_'); // Warning: don't change this value!
+define('PH7_TABLE_PREFIX', 'ph7_'); // Warning: don't change this value!
 
 /***** PAGE *****/
 
