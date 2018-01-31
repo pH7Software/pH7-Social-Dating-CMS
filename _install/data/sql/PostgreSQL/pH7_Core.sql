@@ -28,10 +28,10 @@
 @sPassword := SHA1(RAND() + UNIX_TIMESTAMP());
 
 
-CREATE SEQUENCE ph_admins_seq;
+CREATE SEQUENCE ph7_admins_seq;
 
-CREATE TABLE IF NOT EXISTS ph_admins (
-  profileId smallint check (profileId > 0) NOT NULL DEFAULT NEXTVAL ('ph_admins_seq'),
+CREATE TABLE IF NOT EXISTS ph7_admins (
+  profileId smallint check (profileId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_admins_seq'),
   username varchar(40) NOT NULL,
   password varchar(120) NOT NULL,
   email varchar(120) NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS ph_admins (
   CONSTRAINT email UNIQUE (email)
 )  ;
 
-ALTER SEQUENCE ph_admins_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_admins_seq RESTART WITH 1;
 
 
 CREATE SEQUENCE ph7_memberships_seq;
@@ -816,10 +816,10 @@ CREATE TABLE IF NOT EXISTS ph7_log_error (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
-CREATE SEQUENCE ph_admins_attempts_login_seq;
+CREATE SEQUENCE ph7_admins_attempts_login_seq;
 
-CREATE TABLE IF NOT EXISTS ph_admins_attempts_login (
-  attemptsId int check (attemptsId > 0) NOT NULL DEFAULT NEXTVAL ('ph_admins_attempts_login_seq'),
+CREATE TABLE IF NOT EXISTS ph7_admins_attempts_login (
+  attemptsId int check (attemptsId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_admins_attempts_login_seq'),
   ip varchar(45) NOT NULL DEFAULT '',
   attempts smallint check (attempts > 0) NOT NULL ,
   lastLogin TIMESTAMP(0) NOT NULL,
@@ -852,10 +852,10 @@ CREATE TABLE IF NOT EXISTS ph7_affiliates_attempts_login (
 ) ;
 
 
-CREATE SEQUENCE ph_admins_log_login_seq;
+CREATE SEQUENCE ph7_admins_log_login_seq;
 
-CREATE TABLE IF NOT EXISTS ph_admins_log_login (
-  logId mediumint check (logId > 0) NOT NULL DEFAULT NEXTVAL ('ph_admins_log_login_seq'),
+CREATE TABLE IF NOT EXISTS ph7_admins_log_login (
+  logId mediumint check (logId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_admins_log_login_seq'),
   email varchar(120) NOT NULL DEFAULT '',
   username varchar(64) NOT NULL DEFAULT '',
   password varchar(40) DEFAULT NULL,
@@ -865,7 +865,7 @@ CREATE TABLE IF NOT EXISTS ph_admins_log_login (
   PRIMARY KEY (logId)
 )  ;
 
-ALTER SEQUENCE ph_admins_log_login_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_admins_log_login_seq RESTART WITH 1;
 
 
 CREATE SEQUENCE ph7_members_log_login_seq;
@@ -900,7 +900,7 @@ CREATE TABLE IF NOT EXISTS ph7_affiliates_log_login (
 ALTER SEQUENCE ph7_affiliates_log_login_seq RESTART WITH 1;
 
 
-CREATE TABLE IF NOT EXISTS ph_admins_log_sess (
+CREATE TABLE IF NOT EXISTS ph7_admins_log_sess (
   profileId smallint check (profileId > 0) DEFAULT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(240) DEFAULT NULL,
@@ -916,7 +916,7 @@ CREATE TABLE IF NOT EXISTS ph_admins_log_sess (
   guest smallint check (guest > 0) NOT NULL DEFAULT 1,
   dateTime timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY profileId (profileId),
-  FOREIGN KEY (profileId) REFERENCES ph_admins(profileId),
+  FOREIGN KEY (profileId) REFERENCES ph7_admins(profileId),
   KEY sessionHash (sessionHash),
   KEY lastActivity (lastActivity)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

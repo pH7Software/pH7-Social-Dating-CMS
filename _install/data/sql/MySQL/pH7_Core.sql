@@ -25,7 +25,7 @@ SET @sCurrentDate = CURRENT_TIMESTAMP;
 SET @sPassword = SHA1(RAND() + UNIX_TIMESTAMP());
 
 
-CREATE TABLE IF NOT EXISTS ph_admins (
+CREATE TABLE IF NOT EXISTS ph7_admins (
   profileId tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
   username varchar(40) NOT NULL,
   password varchar(120) NOT NULL,
@@ -691,7 +691,7 @@ CREATE TABLE IF NOT EXISTS ph7_log_error (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
-CREATE TABLE IF NOT EXISTS ph_admins_attempts_login (
+CREATE TABLE IF NOT EXISTS ph7_admins_attempts_login (
   attemptsId int(10) unsigned NOT NULL AUTO_INCREMENT,
   ip varchar(45) NOT NULL DEFAULT '',
   attempts smallint(5) unsigned NOT NULL ,
@@ -721,7 +721,7 @@ CREATE TABLE IF NOT EXISTS ph7_affiliates_attempts_login (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE IF NOT EXISTS ph_admins_log_login (
+CREATE TABLE IF NOT EXISTS ph7_admins_log_login (
   logId mediumint(10) unsigned NOT NULL AUTO_INCREMENT,
   email varchar(120) NOT NULL DEFAULT '',
   username varchar(64) NOT NULL DEFAULT '',
@@ -757,7 +757,7 @@ CREATE TABLE IF NOT EXISTS ph7_affiliates_log_login (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
-CREATE TABLE IF NOT EXISTS ph_admins_log_sess (
+CREATE TABLE IF NOT EXISTS ph7_admins_log_sess (
   profileId tinyint(3) unsigned NOT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(240) DEFAULT NULL,
@@ -773,7 +773,7 @@ CREATE TABLE IF NOT EXISTS ph_admins_log_sess (
   guest smallint(4) unsigned NOT NULL DEFAULT 1,
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY profileId (profileId),
-  FOREIGN KEY (profileId) REFERENCES ph_admins(profileId),
+  FOREIGN KEY (profileId) REFERENCES ph7_admins(profileId),
   KEY sessionHash (sessionHash),
   KEY lastActivity (lastActivity)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
