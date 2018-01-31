@@ -83,7 +83,7 @@ abstract class Cron extends Core
         /**
          * @internal We cast the value into integer type to get only the integer data (without the 'h' character).
          */
-        return (int)$this->oUri->fragment(self::URI_INDEX_DELAY;
+        return (int)$this->oUri->fragment(self::URI_INDEX_DELAY);
     }
 
     /**
