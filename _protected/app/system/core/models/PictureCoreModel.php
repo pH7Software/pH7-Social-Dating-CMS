@@ -72,7 +72,7 @@ class PictureCoreModel extends Model
     /**
      * @param int $iProfileId
      * @param int $iAlbumId
-     * @param nul|intl $iPictureId
+     * @param null|int $iPictureId
      *
      * @return bool
      */
