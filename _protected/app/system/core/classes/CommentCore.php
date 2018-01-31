@@ -80,8 +80,8 @@ class CommentCore
      */
     public static function isRemovalEligible(HttpRequest $oHttpRequest, Session $oSession)
     {
-        return (($oSession->get('member_id') == $oHttpRequest->post('recipient_id')) ||
-                ($oSession->get('member_id') == $oHttpRequest->post('sender_id'))) || AdminCore::auth();
+        return ($oSession->get('member_id') == $oHttpRequest->post('recipient_id') ||
+                $oSession->get('member_id') == $oHttpRequest->post('sender_id')) || AdminCore::auth();
     }
 
     /**
