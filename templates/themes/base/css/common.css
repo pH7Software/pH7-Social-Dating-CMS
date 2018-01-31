@@ -251,9 +251,9 @@ label#percent {
 
 .user_status span {
     position: absolute;
-    font-size: 2.5rem;
-    line-height: .8rem;
-    margin: .6rem;
+    font-size: 3.5rem;
+    line-height: 1rem;
+    margin: .5rem;
 }
 
 .cy_ico img {
