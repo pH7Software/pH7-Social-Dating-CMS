@@ -13,8 +13,12 @@ use PH7\Framework\Mvc\Model\Engine\Util\Various;
 
 class TwoFactorAuthCoreModel extends Framework\Mvc\Model\Engine\Model
 {
+    /** @var string */
     protected $sTable;
 
+    /**
+     * @param string $sMod
+     */
     public function __construct($sMod)
     {
         parent::__construct();
