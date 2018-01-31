@@ -275,7 +275,7 @@ File ID: ' . $this->sId . '
      */
     private function checkCacheDir()
     {
-        $this->sCacheDir = (empty($this->sCacheDir)) ? PH7_PATH_CACHE . static::CACHE_DIR : $this->sCacheDir;
+        $this->sCacheDir = empty($this->sCacheDir) ? PH7_PATH_CACHE . static::CACHE_DIR : $this->sCacheDir;
 
         return $this;
     }
