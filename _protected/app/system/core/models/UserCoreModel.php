@@ -112,7 +112,7 @@ class UserCoreModel extends Model
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix($sTable . 'LogSess') . '(email, username, firstName, ip)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix($sTable . '_log_sess') . '(email, username, firstName, ip)
         VALUES (:email, :username, :firstName, :ip)');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $sUsername, \PDO::PARAM_STR);
