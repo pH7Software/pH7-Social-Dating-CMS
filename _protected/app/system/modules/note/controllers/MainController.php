@@ -371,7 +371,7 @@ class MainController extends Controller
     protected function notFound($b404Status = true)
     {
         if ($b404Status) {
-            Http::setHeadersByCode(404);
+            Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
         }
 
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
