@@ -304,7 +304,7 @@ class UserCoreModel extends Model
         $bIsCity = !$bIsMail && !empty($aParams[SearchQueryCore::CITY]) && Str::noSpaces($aParams[SearchQueryCore::CITY]);
         $bIsState = !$bIsMail && !empty($aParams[SearchQueryCore::STATE]) && Str::noSpaces($aParams[SearchQueryCore::STATE]);
         $bIsZipCode = !$bIsMail && !empty($aParams[SearchQueryCore::ZIP_CODE]) && Str::noSpaces($aParams[SearchQueryCore::ZIP_CODE]);
-        $bIsSex = !$bIsMail && !empty($aParams[SearchQueryCore::SEX]);
+        $bIsSex = !$bIsMail && !empty($aParams[SearchQueryCore::SEX]) && is_array($aParams[SearchQueryCore::SEX]);
         $bIsMatchSex = !$bIsMail && !empty($aParams[SearchQueryCore::MATCH_SEX]);
         $bIsOnline = !$bIsMail && !empty($aParams[SearchQueryCore::ONLINE]);
         $bIsAvatar = !$bIsMail && !empty($aParams[SearchQueryCore::AVATAR]);
