@@ -15,6 +15,7 @@ use PH7\Framework\Mvc\Model\Engine\Util\Various;
 class AdminCoreModel extends UserCoreModel
 {
     const CACHE_GROUP = 'db/sys/mod/admin';
+    const CACHE_TIME = 10368000;
 
     /**
      * @param int $iOffset
@@ -127,7 +128,7 @@ class AdminCoreModel extends UserCoreModel
      */
     public function getRootIp()
     {
-        $this->cache->start(self::CACHE_GROUP, 'rootip', 10368000);
+        $this->cache->start(self::CACHE_GROUP, 'rootip', static::CACHE_TIME);
 
         if (!$sIp = $this->cache->get()) {
             $sIp = $this->orm->getOne(DbTableName::ADMIN, 'profileId', 1, 'ip')->ip;

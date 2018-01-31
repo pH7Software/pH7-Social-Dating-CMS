@@ -14,6 +14,7 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 class AdsCoreModel extends Ads
 {
     const CACHE_GROUP = 'db/sys/core/ads';
+    const CACHE_TIME = 604800;
 
     /**
      * Get Advertisements in the database.
@@ -128,7 +129,7 @@ class AdsCoreModel extends Ads
      */
     public function total($sTable = AdsCore::AD_TABLE_NAME)
     {
-        $this->cache->start(self::CACHE_GROUP, 'total' . $sTable, 604800);
+        $this->cache->start(self::CACHE_GROUP, 'total' . $sTable, static::CACHE_TIME);
 
         if (!$iData = $this->cache->get()) {
             AdsCore::checkTable($sTable);
