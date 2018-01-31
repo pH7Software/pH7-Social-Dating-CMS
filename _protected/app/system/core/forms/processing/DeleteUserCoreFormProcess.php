@@ -45,7 +45,7 @@ class DeleteUserCoreFormProcess extends Form
     /**
      * Send an email to the admin saying the reason why a user wanted to delete their account.
      *
-     * @return integer
+     * @return int
      */
     protected function sendWarnEmail()
     {
@@ -91,7 +91,7 @@ class DeleteUserCoreFormProcess extends Form
     /**
      * Redirect now the user to the soon page (yesss he/she will be back soon... there is never "never").
      *
-     * @return void Header::redirect() will also exit the script.
+     * @return void "Header::redirect()" will also exit the script.
      */
     protected function goSoon()
     {
