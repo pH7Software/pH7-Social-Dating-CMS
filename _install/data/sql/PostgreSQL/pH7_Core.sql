@@ -1105,6 +1105,7 @@ INSERT INTO ph7_sys_mods_enabled (moduleTitle, folderName, premiumMod, enabled) 
 ('Related Profiles', 'related-profile', '0', '1'),
 ('Friends', 'friend', '0', '1'),
 ('User Dashboard', 'user-dashboard', '0', '1'),
+('Dating-Style Profile Page', 'cool-profile-page', '0', '1'),
 ('Game', 'game', '0', '1'),
 ('Newsletter', 'newsletter', '0', '1'),
 ('Invite Friends', 'invite', '0', '1'),
@@ -1129,7 +1130,7 @@ ALTER SEQUENCE ph7_modules_seq RESTART WITH 1;
 
 INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of the SQL schema of pH7CMS (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.4.1', 1);
+('pH7CMS', 'SQL System Schema', '1.4.2', 1);
 
 
 CREATE SEQUENCE ph7_report_seq;

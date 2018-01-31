@@ -255,7 +255,7 @@ class MainController extends Controller
      */
     private function notFound()
     {
-        Http::setHeadersByCode(404);
+        Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
 
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;

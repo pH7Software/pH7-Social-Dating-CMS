@@ -40,6 +40,7 @@ class InstallController extends Controller
         'mail' => '1',
         'im' => '0',
         'user-dashboard' => '0',
+        'cool-profile-page' => '0',
         'related-profile' => '1'
     ];
 
@@ -63,6 +64,7 @@ class InstallController extends Controller
         'mail' => '1',
         'im' => '1',
         'user-dashboard' => '1',
+        'cool-profile-page' => '1',
         'related-profile' => '1'
     ];
 

@@ -26,8 +26,19 @@ class AccountController extends Controller
         Header::redirect($sUrl);
     }
 
+    /**
+     * @param string $sMail
+     * @param string $sHash
+     *
+     * @return void
+     */
     public function activate($sMail, $sHash)
     {
-        (new UserCore)->activateAccount($sMail, $sHash, $this->config, $this->registry);
+        (new UserCore)->activateAccount(
+            $sMail,
+            $sHash,
+            $this->config,
+            $this->registry
+        );
     }
 }
