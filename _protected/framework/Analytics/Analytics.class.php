@@ -188,6 +188,9 @@ class Analytics extends StoreStats
     /** @var string */
     private $sUserLang;
 
+    /**
+     * @throws Exception
+     */
     public function __construct()
     {
         $oBrowser = new Browser;
