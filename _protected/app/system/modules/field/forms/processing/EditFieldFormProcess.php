@@ -34,9 +34,13 @@ class EditFieldFormProcess extends Form
             if ($bRet) {
                 /* Clean UserCoreModel Cache */
                 (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
-                Header::redirect(Uri::get('field', 'field', 'all', $sMod), t('The field has been edited.'));
-            } else
+                Header::redirect(
+                    Uri::get('field', 'field', 'all', $sMod),
+                    t('The field has been edited.')
+                );
+            } else {
                 \PFBC\Form::setError('form_edit_field', t('Oops! An error occurred while adding the field, please try again.'));
+            }
         }
     }
 }
