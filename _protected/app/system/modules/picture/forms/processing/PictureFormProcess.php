@@ -103,11 +103,11 @@ class PictureFormProcess extends Form
             $sFileName = Various::genRnd($oPicture1->getFileName(), 20);
 
             $sFile1 = $sFileName . '-original.' . $oPicture1->getExt(); // Original
-            $sFile2 = $sFileName . '-400.' . $oPicture2->getExt();
-            $sFile3 = $sFileName . '-600.' . $oPicture3->getExt();
-            $sFile4 = $sFileName . '-800.' . $oPicture4->getExt();
-            $sFile5 = $sFileName . '-1000.' . $oPicture5->getExt();
-            $sFile6 = $sFileName . '-1200.' . $oPicture6->getExt();
+            $sFile2 = $sFileName . '-' . self::PICTURE2_SIZE . PH7_DOT . $oPicture2->getExt();
+            $sFile3 = $sFileName . '-' . self::PICTURE3_SIZE . PH7_DOT . $oPicture3->getExt();
+            $sFile4 = $sFileName . '-' . self::PICTURE4_SIZE . PH7_DOT . $oPicture4->getExt();
+            $sFile5 = $sFileName . '-' . self::PICTURE5_SIZE . PH7_DOT . $oPicture5->getExt();
+            $sFile6 = $sFileName . '-' . self::PICTURE6_SIZE . PH7_DOT . $oPicture6->getExt();
 
             $oPicture1->save($sPath . $sFile1);
             $oPicture2->save($sPath . $sFile2);
