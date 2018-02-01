@@ -376,7 +376,11 @@ class ForumController extends Controller
      */
     private function getShortedMessage($sMessage)
     {
-        return substr($this->str->escape(Ban::filterWord($sMessage), true), 0, self::MAX_SUMMARY_MESSAGE_LENGTH);
+        return substr(
+            $this->str->escape(Ban::filterWord($sMessage), true),
+            0,
+            self::MAX_SUMMARY_MESSAGE_LENGTH
+        );
     }
 
     /**
