@@ -390,13 +390,13 @@ class UserCore
         foreach ($aUsernameList as $sUsername) {
             $sUsername = substr($sUsername, 0, $iMaxLen);
 
-            if ((new Validate)->username($sUsername))
-                break;
-            else
-                $sUsername = Various::genRnd('pOH_Pierre-Henry_Soria_Béghin_Rollier', $iMaxLen); // Default value
+            if ((new Validate)->username($sUsername)) {
+                return $sUsername;
+            }
         }
 
-        return $sUsername;
+        // If all other usernames aren't valid, return the default one below
+        return Various::genRnd('pOH_Pierre-Henry_Soria_Béghin_Rollier', $iMaxLen);
     }
 
     /**
