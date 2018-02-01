@@ -28,6 +28,9 @@ class Image
     const GIF = IMAGETYPE_GIF;
     const WEBP = 'image/webp'; // From PHP 7.1, IMAGETYPE_WEBP is available
 
+    const DEFAULT_MAX_WIDTH = 3000;
+    const DEFAULT_MAX_HEIGHT = 3000;
+
     /** @var string */
     private $sFile;
 
@@ -61,7 +64,7 @@ class Image
      * @param int $iMaxWidth Default value 3000.
      * @param int $iMaxHeight Default value 3000.
      */
-    public function __construct($sFile, $iMaxWidth = 3000, $iMaxHeight = 3000)
+    public function __construct($sFile, $iMaxWidth = self::DEFAULT_MAX_WIDTH, $iMaxHeight = self::DEFAULT_MAX_HEIGHT)
     {
         $this->sFile = $sFile;
         $this->iMaxWidth = $iMaxWidth;

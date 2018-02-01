@@ -34,6 +34,20 @@ use stdClass;
 // Abstract Class
 class UserCore
 {
+    const MAX_WIDTH_AVATAR_IMAGE = 600;
+    const MAX_HEIGHT_AVATAR_IMAGE = 800;
+
+    const MAX_WIDTH_BACKGROUND_IMAGE = 600;
+    const MAX_HEIGHT_BACKGROUND_IMAGE = 800;
+
+    const AVATAR2_SIZE = 32;
+    const AVATAR3_SIZE = 64;
+    const AVATAR4_SIZE = 100;
+    const AVATAR5_SIZE = 150;
+    const AVATAR6_SIZE = 200;
+    const AVATAR7_SIZE = 400;
+
+
     /**
      * Users'levels.
      *
@@ -109,7 +123,11 @@ class UserCore
             error_reporting(0);
         }
 
-        $oAvatar1 = new Image($sFile, 600, 800);
+        $oAvatar1 = new Image(
+            $sFile,
+            self::MAX_WIDTH_AVATAR_IMAGE,
+            self::MAX_HEIGHT_AVATAR_IMAGE
+        );
 
         if (!$oAvatar1->validate()) {
             return false; // File type incompatible!
@@ -124,12 +142,12 @@ class UserCore
         $oAvatar5 = clone $oAvatar1;
         $oAvatar6 = clone $oAvatar1;
         $oAvatar7 = clone $oAvatar1;
-        $oAvatar2->square(32);
-        $oAvatar3->square(64);
-        $oAvatar4->square(100);
-        $oAvatar5->square(150);
-        $oAvatar6->square(200);
-        $oAvatar7->resize(400);
+        $oAvatar2->square(self::AVATAR2_SIZE);
+        $oAvatar3->square(self::AVATAR3_SIZE);
+        $oAvatar4->square(self::AVATAR4_SIZE);
+        $oAvatar5->square(self::AVATAR5_SIZE);
+        $oAvatar6->square(self::AVATAR6_SIZE);
+        $oAvatar7->resize(self::AVATAR7_SIZE);
 
         /* Set watermark text on large avatars */
         $sWatermarkText = DbConfig::getSetting('watermarkTextImage');
@@ -229,7 +247,11 @@ class UserCore
             error_reporting(0);
         }
 
-        $oWallpaper = new Image($sFile, 600, 800);
+        $oWallpaper = new Image(
+            $sFile,
+            self::MAX_WIDTH_BACKGROUND_IMAGE,
+            self::MAX_HEIGHT_BACKGROUND_IMAGE
+        );
 
         if (!$oWallpaper->validate()) {
             return false;
