@@ -90,11 +90,11 @@ class Youtube extends Api implements IApi
             shuffle($aThumb);
 
             return 'https://i' . mt_rand(1, 4) . '.ytimg.com/vi/' . $this->getVideoId($sUrl) . PH7_SH . $aThumb[0] . '.jpg';
-        } else {
-            $sParam = $this->bAutoplay ? '?autoplay=1&amp;' : '?';
-
-            return '<iframe width="' . $iWidth . '" height="' . $iHeight . '" src="' . $this->getEmbedUrl($sUrl) . $sParam . 'rel=0" frameborder="0" allowfullscreen></iframe>';
         }
+
+        $sParam = $this->bAutoplay ? '?autoplay=1&amp;' : '?';
+
+        return '<iframe width="' . $iWidth . '" height="' . $iHeight . '" src="' . $this->getEmbedUrl($sUrl) . $sParam . 'rel=0" frameborder="0" allowfullscreen></iframe>';
     }
 
     /**
