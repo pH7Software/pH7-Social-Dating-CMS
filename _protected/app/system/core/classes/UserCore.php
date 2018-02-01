@@ -457,11 +457,19 @@ class UserCore
 
                 Header::redirect($sRedirectLoginUrl, $sSuccessMsg);
             } else {
-                Header::redirect($sRedirectLoginUrl, t('Oops! The URL is either invalid or you already have activated your account.'), 'error');
+                Header::redirect(
+                    $sRedirectLoginUrl,
+                    t('Oops! The URL is either invalid or you already have activated your account.'),
+                    Design::ERROR_TYPE
+                );
             }
             unset($oUserModel);
         } else {
-            Header::redirect($sRedirectIndexUrl, t('Invalid approach, please use the link that has been send to your email.'), 'error');
+            Header::redirect(
+                $sRedirectIndexUrl,
+                t('Invalid approach, please use the link that has been send to your email.'),
+                Design::ERROR_TYPE
+            );
         }
     }
 
