@@ -82,7 +82,7 @@ class VideoFormProcess extends Form
             }
         } elseif (!empty($_FILES['video']['tmp_name'])) {
             try {
-                $oVideo = new V\Video($_FILES['video'], 2500, 2500);
+                $oVideo = new V\Video($_FILES['video']);
             } catch (Framework\File\Exception $oE) {
                 \PFBC\Form::setError('form_video', $oE->getMessage());
                 return;
