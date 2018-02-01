@@ -17,7 +17,7 @@ use PH7\Framework\Mvc\Request\Http;
 class FieldModel extends Model
 {
     const MAX_VARCHAR_LENGTH = 255;
-    const FIELD_TEXTAREA_TYPE = 'textbox';
+    const FIELD_TEXTBOX_TYPE = 'textbox';
     const FIELD_NUMBER_TYPE = 'number';
 
     /** @var string */
@@ -125,7 +125,7 @@ class FieldModel extends Model
     protected function getType()
     {
         switch ($this->sType) {
-            case self::FIELD_TEXTAREA_TYPE: {
+            case self::FIELD_TEXTBOX_TYPE: {
                 if (mb_strlen($this->sDefVal) > $this->iLength) {
                     $this->iLength = mb_strlen($this->sDefVal);
                 }
