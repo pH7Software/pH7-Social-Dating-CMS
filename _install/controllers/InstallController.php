@@ -569,7 +569,7 @@ class InstallController extends Controller
         Framework\Loader\Autoloader::getInstance()->init();
 
         // Loading Class ~/protected/app/includes/classes/* (for "DbTableName" class)
-        Framework\File\Import::pH7App('includes.classes.Loader.Autoloader');
+        require PH7_PATH_APP . 'includes/classes/Loader/Autoloader.php';
         App\Includes\Classes\Loader\Autoloader::getInstance()->init();
     }
 
