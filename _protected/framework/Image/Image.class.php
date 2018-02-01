@@ -89,24 +89,24 @@ class Image
         } else {
             switch ($mImgType) {
                 // JPG
-                case static::JPG:
+                case self::JPG:
                     $this->rImage = imagecreatefromjpeg($this->sFile);
                     $this->sType = 'jpg';
                     break;
 
                 // PNG
-                case static::PNG:
+                case self::PNG:
                     $this->rImage = imagecreatefrompng($this->sFile);
                     $this->sType = 'png';
                     break;
 
                 // GIF
-                case static::GIF:
+                case self::GIF:
                     $this->rImage = imagecreatefromgif($this->sFile);
                     $this->sType = 'gif';
                     break;
 
-                case static::WEBP:
+                case self::WEBP:
                     $this->rImage = imagecreatefromgif($this->sFile);
                     $this->sType = 'webp';
                     break;
