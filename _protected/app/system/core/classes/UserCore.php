@@ -271,7 +271,11 @@ class UserCore
         (new UserCoreModel)->deleteBackground($iProfileId);
 
         /* Clean User Background Cache */
-        (new Cache)->start(UserCoreModel::CACHE_GROUP, 'background' . $iProfileId, null)->clear();
+        (new Cache)->start(
+            UserCoreModel::CACHE_GROUP,
+            'background' . $iProfileId,
+            null
+        )->clear();
     }
 
     /**
