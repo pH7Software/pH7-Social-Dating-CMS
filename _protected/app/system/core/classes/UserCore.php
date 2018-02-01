@@ -47,7 +47,6 @@ class UserCore
     const AVATAR6_SIZE = 200;
     const AVATAR7_SIZE = 400;
 
-
     /**
      * Users'levels.
      *
