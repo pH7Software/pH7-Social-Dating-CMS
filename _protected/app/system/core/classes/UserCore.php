@@ -34,8 +34,8 @@ use stdClass;
 // Abstract Class
 class UserCore
 {
-    const MAX_WIDTH_AVATAR_IMAGE = 600;
-    const MAX_HEIGHT_AVATAR_IMAGE = 800;
+    const MAX_WIDTH_AVATAR = 600;
+    const MAX_HEIGHT_AVATAR = 800;
 
     const MAX_WIDTH_BACKGROUND_IMAGE = 600;
     const MAX_HEIGHT_BACKGROUND_IMAGE = 800;
@@ -129,8 +129,8 @@ class UserCore
 
         $oAvatar1 = new Image(
             $sFile,
-            self::MAX_WIDTH_AVATAR_IMAGE,
-            self::MAX_HEIGHT_AVATAR_IMAGE
+            self::MAX_WIDTH_AVATAR,
+            self::MAX_HEIGHT_AVATAR
         );
 
         if (!$oAvatar1->validate()) {
