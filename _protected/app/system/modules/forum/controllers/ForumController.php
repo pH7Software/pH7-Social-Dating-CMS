@@ -393,7 +393,7 @@ class ForumController extends Controller
     private function notFound($b404Status = true)
     {
         if ($b404Status === true) {
-            Http::setHeadersByCode(404);
+            Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
         }
 
         $sErrMsg = '';
