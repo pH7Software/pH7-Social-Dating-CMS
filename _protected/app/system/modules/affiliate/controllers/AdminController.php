@@ -63,7 +63,9 @@ class AdminController extends Controller
 
     public function banner()
     {
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', 'affiliate'));
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', 'affiliate')
+        );
     }
 
     public function browse()
@@ -146,7 +148,10 @@ class AdminController extends Controller
             $this->sMsg = t('You are now logged in as affiliate: %0%!', $oUser->username);
             unset($oUser, $aSessionData);
 
-            Header::redirect(Uri::get('affiliate', 'account', 'index'), $this->sMsg);
+            Header::redirect(
+                Uri::get('affiliate', 'account', 'index'),
+                $this->sMsg
+            );
         } else {
             Header::redirect(
                 $this->httpRequest->previousPage(),

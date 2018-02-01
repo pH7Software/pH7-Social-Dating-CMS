@@ -35,8 +35,12 @@ class AddFieldFormProcess extends Form
                 /* Clean UserCoreModel Cache */
                 (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
                 Header::redirect(Uri::get('field', 'field', 'all', $sMod), t('The field has been added.'));
-            } else
-                \PFBC\Form::setError('form_add_field', t('Oops! An error occurred while adding the field, please try again.'));
+            } else {
+                \PFBC\Form::setError(
+                    'form_add_field',
+                    t('Oops! An error occurred while adding the field, please try again.')
+                );
+            }
         }
     }
 }
