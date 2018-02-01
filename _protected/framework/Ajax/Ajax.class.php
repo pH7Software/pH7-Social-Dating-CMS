@@ -28,7 +28,6 @@ namespace PH7\Framework\Ajax {
 }
 
 namespace {
-
     use PH7\Framework\Ajax\Ajax;
 
     /**

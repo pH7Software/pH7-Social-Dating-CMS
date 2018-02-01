@@ -67,7 +67,6 @@ namespace PH7\Framework\Error {
 }
 
 namespace {
-
     use PH7\Framework\Error\Debug;
 
     /**

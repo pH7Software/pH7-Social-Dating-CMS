@@ -11,7 +11,6 @@
  */
 
 namespace PH7\Framework\Error\CException {
-
     defined('PH7') or exit('Restricted access');
 
     /**
@@ -47,7 +46,6 @@ namespace PH7\Framework\Error\CException {
 }
 
 namespace {
-
     use PH7\Framework\Error\CException\ErrException;
 
     /**
