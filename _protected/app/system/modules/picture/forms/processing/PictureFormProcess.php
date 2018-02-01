@@ -180,6 +180,7 @@ class PictureFormProcess extends Form
             return $this->httpRequest->post('title');
         }
 
+        // Otherwise get the name from the file name
         return $this->str->upperFirst(
             str_replace(
                 ['-', '_'],
