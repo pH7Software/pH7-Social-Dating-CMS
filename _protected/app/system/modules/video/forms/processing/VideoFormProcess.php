@@ -26,6 +26,9 @@ use PH7\Framework\Video\Api\IApi;
 
 class VideoFormProcess extends Form
 {
+    const THUMBNAIL_VIDEO_WIDTH = 320;
+    const THUMBNAIL_VIDEO_HEIGHT = 240;
+
     public function __construct()
     {
         parent::__construct();
@@ -109,11 +112,35 @@ class VideoFormProcess extends Form
                 $sThumb4 = $sFileName . '-4.jpg';
                 $sFile = $sFileName;
 
-                $oVideo->thumbnail($sPath . $sThumb, 1, 320, 240);
-                $oVideo->thumbnail($sPath . $sThumb1, 4, 320, 240);
-                $oVideo->thumbnail($sPath . $sThumb2, 6, 320, 240);
-                $oVideo->thumbnail($sPath . $sThumb3, 8, 320, 240);
-                $oVideo->thumbnail($sPath . $sThumb4, 10, 320, 240);
+                $oVideo->thumbnail(
+                    $sPath . $sThumb,
+                    1,
+                    self::THUMBNAIL_VIDEO_WIDTH,
+                    self::THUMBNAIL_VIDEO_HEIGHT
+                );
+                $oVideo->thumbnail(
+                    $sPath . $sThumb1,
+                    4,
+                    self::THUMBNAIL_VIDEO_WIDTH,
+                    self::THUMBNAIL_VIDEO_HEIGHT
+                );
+                $oVideo->thumbnail(
+                    $sPath . $sThumb2,
+                    6,
+                    self::THUMBNAIL_VIDEO_WIDTH,
+                    self::THUMBNAIL_VIDEO_HEIGHT
+                );
+                $oVideo->thumbnail($sPath . $sThumb3,
+                    8,
+                    self::THUMBNAIL_VIDEO_WIDTH,
+                    self::THUMBNAIL_VIDEO_HEIGHT
+                );
+                $oVideo->thumbnail(
+                    $sPath . $sThumb4,
+                    10,
+                    self::THUMBNAIL_VIDEO_WIDTH,
+                    self::THUMBNAIL_VIDEO_HEIGHT
+                );
 
                 $oVideo->rename($sPath . $sFile . '.webm');
                 $oVideo->rename($sPath . $sFile . '.mp4');
