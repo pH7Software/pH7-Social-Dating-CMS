@@ -269,7 +269,7 @@ class UserCore
         (new File)->createDir($sPath);
 
         $sFileName = Various::genRnd($oWallpaper->getFileName(), 1);
-        $sFile = $sFileName . '.' . $oWallpaper->getExt();
+        $sFile = $sFileName . PH7_DOT . $oWallpaper->getExt();
 
         // Add the profile background
         (new UserCoreModel)->addBackground($iProfileId, $sFile, $iApproved);
