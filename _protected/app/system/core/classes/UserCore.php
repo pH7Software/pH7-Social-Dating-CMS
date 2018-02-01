@@ -56,7 +56,8 @@ class UserCore
     public static function auth()
     {
         $oSession = new Session;
-        $bIsConnected = ((int)$oSession->exists('member_id')) && $oSession->get('member_ip') === Ip::get() && $oSession->get('member_http_user_agent') === (new Browser)->getUserAgent();
+        $bIsConnected = ((int)$oSession->exists('member_id')) && $oSession->get('member_ip') === Ip::get() &&
+            $oSession->get('member_http_user_agent') === (new Browser)->getUserAgent();
 
         /** Destroy the object to minimize the CPU resources **/
         unset($oSession);
@@ -558,7 +559,11 @@ class UserCore
     {
         VariousModel::checkModelTable($sTable);
 
-        (new Cache)->start(UserCoreModel::CACHE_GROUP, $sId . $iId . $sTable, null)->clear();
+        (new Cache)->start(
+            UserCoreModel::CACHE_GROUP,
+            $sId . $iId . $sTable,
+            null
+        )->clear();
     }
 
     /**
