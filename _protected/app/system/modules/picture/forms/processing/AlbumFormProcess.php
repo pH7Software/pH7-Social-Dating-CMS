@@ -20,6 +20,9 @@ use PH7\Framework\Util\Various;
 
 class AlbumFormProcess extends Form
 {
+    const ALBUM_IMAGE_SIZE = 200;
+
+    /** @var int */
     private $iApproved;
 
     public function __construct()
@@ -56,7 +59,7 @@ class AlbumFormProcess extends Form
             );
             $iLastAlbumId = (int)Db::getInstance()->lastInsertId();
 
-            $oPicture->square(200);
+            $oPicture->square(self::ALBUM_IMAGE_SIZE);
 
             /* Set watermark text on thumbnail */
             $sWatermarkText = DbConfig::getSetting('watermarkTextImage');

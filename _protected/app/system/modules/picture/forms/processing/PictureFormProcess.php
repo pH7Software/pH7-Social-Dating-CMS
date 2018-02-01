@@ -22,6 +22,10 @@ use PH7\Framework\Util\Various;
 
 class PictureFormProcess extends Form
 {
+    const MAX_IMAGE_WIDTH = 2500;
+    const MAX_IMAGE_HEIGHT = 2500;
+
+    /** @var int */
     private $iApproved;
 
     public function __construct()
@@ -52,7 +56,12 @@ class PictureFormProcess extends Form
          */
         $aPhotos = $_FILES['photos']['tmp_name'];
         for ($i = 0, $iNumPhotos = count($aPhotos); $i < $iNumPhotos; $i++) {
-            $oPicture1 = new Image($aPhotos[$i], 2500, 2500);
+            $oPicture1 = new Image(
+                $aPhotos[$i],
+                self::MAX_IMAGE_WIDTH,
+                self::MAX_IMAGE_HEIGHT
+            );
+
             if (!$oPicture1->validate()) {
                 \PFBC\Form::setError('form_picture', Form::wrongImgFileTypeMsg());
                 return; // Stop execution of the method.
