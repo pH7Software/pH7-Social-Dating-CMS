@@ -25,6 +25,12 @@ class PictureFormProcess extends Form
     const MAX_IMAGE_WIDTH = 2500;
     const MAX_IMAGE_HEIGHT = 2500;
 
+    const PICTURE2_SIZE = 400;
+    const PICTURE3_SIZE = 600;
+    const PICTURE4_SIZE = 800;
+    const PICTURE5_SIZE = 1000;
+    const PICTURE6_SIZE = 1200;
+
     /** @var int */
     private $iApproved;
 
@@ -76,11 +82,11 @@ class PictureFormProcess extends Form
             $oPicture5 = clone $oPicture1;
             $oPicture6 = clone $oPicture1;
 
-            $oPicture2->square(400);
-            $oPicture3->square(600);
-            $oPicture4->square(800);
-            $oPicture5->square(1000);
-            $oPicture6->square(1200);
+            $oPicture2->square(self::PICTURE2_SIZE);
+            $oPicture3->square(self::PICTURE3_SIZE);
+            $oPicture4->square(self::PICTURE4_SIZE);
+            $oPicture5->square(self::PICTURE5_SIZE);
+            $oPicture6->square(self::PICTURE6_SIZE);
 
             /* Set watermark text on images */
             $sWatermarkText = DbConfig::getSetting('watermarkTextImage');

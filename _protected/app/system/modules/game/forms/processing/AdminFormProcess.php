@@ -18,6 +18,8 @@ use PH7\Framework\Util\Various;
 
 class AdminFormProcess extends Form
 {
+    const GAME_THUMBNAIL_SIZE = 60;
+
     public function __construct()
     {
         parent::__construct();
@@ -32,7 +34,7 @@ class AdminFormProcess extends Form
         $sThumbFile = Various::genRnd($oImg->getFileName(), 30) . $oImg->getExt();
         $sThumbDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'game/img/thumb/';
 
-        $oImg->square(60);
+        $oImg->square(self::GAME_THUMBNAIL_SIZE);
         $oImg->save($sThumbDir . $sThumbFile);
         unset($oImg);
 
