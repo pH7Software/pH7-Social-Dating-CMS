@@ -24,13 +24,21 @@ class MainController extends Controller
 
     /**
      * @internal Protected access because AdminController derived class uses these attributes
-     *
-     * @var \stdClass $oGameModel
-     * @var \stdClass $sTitle
-     * @var string $$sMetaKeywords
-     * @var int $iTotalGames
      */
-    protected $oGameModel, $oPage, $sTitle, $sMetaKeywords, $iTotalGames;
+    /** @var \stdClass */
+    protected $oGameModel;
+
+    /** @var Page */
+    protected $oPage;
+
+    /** @var string */
+    protected $sTitle;
+
+    /** @var string */
+    protected $sMetaKeywords;
+
+    /** @var int */
+    protected $iTotalGames;
 
     public function __construct()
     {
