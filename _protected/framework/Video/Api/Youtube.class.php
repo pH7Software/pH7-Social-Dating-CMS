@@ -85,7 +85,7 @@ class Youtube extends Api implements IApi
      */
     public function getMeta($sUrl, $sMedia, $iWidth, $iHeight)
     {
-        if ($sMedia == 'preview') {
+        if ($sMedia === 'preview') {
             $aThumb = ['default', 1, 2, 3];
             shuffle($aThumb);
 
