@@ -166,13 +166,13 @@ class UserCore
 
         $sFileName = Various::genRnd($oAvatar1->getFileName(), 1);
 
-        $sFile1 = $sFileName . '.' . $oAvatar1->getExt();  // Original, four characters
-        $sFile2 = $sFileName . '-32.' . $oAvatar2->getExt();
-        $sFile3 = $sFileName . '-64.' . $oAvatar3->getExt();
-        $sFile4 = $sFileName . '-100.' . $oAvatar4->getExt();
-        $sFile5 = $sFileName . '-150.' . $oAvatar5->getExt();
-        $sFile6 = $sFileName . '-200.' . $oAvatar6->getExt();
-        $sFile7 = $sFileName . '-400.' . $oAvatar7->getExt();
+        $sFile1 = $sFileName . PH7_DOT . $oAvatar1->getExt();  // Original, four characters
+        $sFile2 = $sFileName . '-' . self::AVATAR2_SIZE . PH7_DOT . $oAvatar2->getExt();
+        $sFile3 = $sFileName . '-' . self::AVATAR3_SIZE . PH7_DOT . $oAvatar3->getExt();
+        $sFile4 = $sFileName . '-' . self::AVATAR4_SIZE . PH7_DOT . $oAvatar4->getExt();
+        $sFile5 = $sFileName . '-' . self::AVATAR5_SIZE . PH7_DOT . $oAvatar5->getExt();
+        $sFile6 = $sFileName . '-' . self::AVATAR6_SIZE . PH7_DOT . $oAvatar6->getExt();
+        $sFile7 = $sFileName . '-' . self::AVATAR7_SIZE . PH7_DOT . $oAvatar7->getExt();
 
         // Add the avatar
         (new UserCoreModel)->setAvatar($iProfileId, $sFile1, $iApproved);
@@ -213,12 +213,12 @@ class UserCore
         /** Array to the new format (>= PHP5.4) **/
         $aFiles = [
             $sPath . $sFile,
-            $sPath . str_replace($sExt, '-32' . $sExt, $sFile),
-            $sPath . str_replace($sExt, '-64' . $sExt, $sFile),
-            $sPath . str_replace($sExt, '-100' . $sExt, $sFile),
-            $sPath . str_replace($sExt, '-150' . $sExt, $sFile),
-            $sPath . str_replace($sExt, '-200' . $sExt, $sFile),
-            $sPath . str_replace($sExt, '-400' . $sExt, $sFile),
+            $sPath . str_replace($sExt, '-' . self::AVATAR2_SIZE . $sExt, $sFile),
+            $sPath . str_replace($sExt, '-' . self::AVATAR3_SIZE . $sExt, $sFile),
+            $sPath . str_replace($sExt, '-' . self::AVATAR4_SIZE . $sExt, $sFile),
+            $sPath . str_replace($sExt, '-' . self::AVATAR5_SIZE . $sExt, $sFile),
+            $sPath . str_replace($sExt, '-' . self::AVATAR6_SIZE . $sExt, $sFile),
+            $sPath . str_replace($sExt, '-' . self::AVATAR7_SIZE . $sExt, $sFile),
         ];
 
         $oFile->deleteFile($aFiles);
