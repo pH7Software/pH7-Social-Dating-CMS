@@ -28,7 +28,9 @@ class AdminCore extends UserCore
     public static function auth()
     {
         $oSession = new Session;
-        $bIsConnected = ((int)$oSession->exists('admin_id')) && $oSession->get('admin_ip') === Ip::get() && $oSession->get('admin_http_user_agent') === (new Browser)->getUserAgent();
+        $bIsConnected = ((int)$oSession->exists('admin_id')) &&
+            $oSession->get('admin_ip') === Ip::get() &&
+            $oSession->get('admin_http_user_agent') === (new Browser)->getUserAgent();
         unset($oSession);
 
         return $bIsConnected;
@@ -86,7 +88,13 @@ class AdminCore extends UserCore
             'admin_token' => Various::genRnd($oAdminData->email),
         ];
         $oSession->set($aSessionData);
-        $oSecurityModel->addLoginLog($oAdminData->email, $oAdminData->username, '*****', 'Logged in!', DbTableName::ADMIN);
+        $oSecurityModel->addLoginLog(
+            $oAdminData->email,
+            $oAdminData->username,
+            '*****',
+            'Logged in!',
+            DbTableName::ADMIN
+        );
         $oAdminModel->setLastActivity($oAdminData->profileId, DbTableName::ADMIN);
     }
 }

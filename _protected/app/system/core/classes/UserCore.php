@@ -356,8 +356,12 @@ class UserCore
      *
      * @return void
      */
-    public function setAuth(stdClass $oUserData, UserCoreModel $oUserModel, Session $oSession, SecurityModel $oSecurityModel)
-    {
+    public function setAuth(
+        stdClass $oUserData,
+        UserCoreModel $oUserModel,
+        Session $oSession,
+        SecurityModel $oSecurityModel
+    ) {
         // Remove the session if the user is logged on as "affiliate" or "administrator".
         if (AffiliateCore::auth() || AdminCore::auth()) {
             $oSession->destroy();
