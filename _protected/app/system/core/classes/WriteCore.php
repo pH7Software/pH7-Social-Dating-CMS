@@ -13,6 +13,8 @@ use PH7\Framework\File\File;
 
 abstract class WriteCore
 {
+    const BLOG_NAME = 'blog';
+    const NOTE_NAME = 'note';
     const THUMBNAIL_FILENAME = 'thumb.png';
     const DEFAULT_THUMBNAIL_FILENAME = 'default_thumb.jpg';
 
@@ -27,7 +29,7 @@ abstract class WriteCore
     {
         self::checkMod($sMod);
 
-        if ($sMod === 'blog') {
+        if ($sMod === self::BLOG_NAME) {
             $mId .= PH7_DS . static::THUMBNAIL_FILENAME;
         }
 
@@ -43,8 +45,8 @@ abstract class WriteCore
      */
     public static function checkMod($sMod)
     {
-        if ($sMod !== 'blog' && $sMod !== 'note') {
-            throw new PH7InvalidArgumentException('Bad module: ' . $sMod);
+        if ($sMod !== self::BLOG_NAME && $sMod !== self::NOTE_NAME) {
+            throw new PH7InvalidArgumentException('Wrong module: ' . $sMod);
         }
     }
 }
