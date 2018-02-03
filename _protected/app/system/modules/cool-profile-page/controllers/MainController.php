@@ -32,9 +32,6 @@ class MainController extends Controller
     /** @var bool */
     private $bUserAuth;
 
-    /** @var string */
-    private $sUsername;
-
     /** @var int */
     private $iProfileId;
 
@@ -168,9 +165,9 @@ class MainController extends Controller
 
         if (!$this->bUserAuth && $oPrivacyViewsUser->privacyProfile == 'only_members') {
             $this->view->error = t('Whoops! The "%0%" profile is only visible to members. Please <a href="%1%">login</a> or <a href="%2%">register</a> to see this profile.',
-                $this->sUsername, Uri::get('user', 'main', 'login'), Uri::get('user', 'signup', 'step1'));
+                $oUser->username, Uri::get('user', 'main', 'login'), Uri::get('user', 'signup', 'step1'));
         } elseif ($oPrivacyViewsUser->privacyProfile == 'only_me' && !$this->isOwnProfile()) {
-            $this->view->error = t('Whoops! The "%0%" profile is not available to you.', $this->sUsername);
+            $this->view->error = t('Whoops! The "%0%" profile is not available to you.', $oUser->username);
         }
 
         // Update the "Who's Viewed Your Profile"
