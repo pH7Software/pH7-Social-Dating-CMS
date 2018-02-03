@@ -150,7 +150,13 @@ class Session
          */
         if (!Server::isLocalHost()) {
             $iTime = (int)Config::getInstance()->values['session']['expiration'];
-            session_set_cookie_params($iTime, Config::getInstance()->values['session']['path'], Config::getInstance()->values['session']['domain'], (substr(PH7_URL_PROT, 0, 5) === 'https'), true);
+            session_set_cookie_params(
+                $iTime,
+                Config::getInstance()->values['session']['path'],
+                Config::getInstance()->values['session']['domain'],
+                (substr(PH7_URL_PROT, 0, 5) === 'https'),
+                true
+            );
         }
 
         @session_start();
