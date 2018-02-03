@@ -27,6 +27,8 @@ use ZipArchive;
 class File
 {
     const REGEX_BINARY_FILE = '/^(.*?)\.(gif|jpg|jpeg|png|webp|ico|mp3|mp4|mov|avi|flv|mpg|mpeg|wmv|ogg|ogv|webm|pdf|ttf|eot|woff|svg|swf)$/i';
+
+    const READ_CHMOD_OCTAL_DIGIT = 0444;
     const READ_WRITE_CHMOD_OCTAL_DIGIT = 0644;
     const READ_WRITE_EXEC_CHMOD_OCTAL_DIGIT = 0777;
 
