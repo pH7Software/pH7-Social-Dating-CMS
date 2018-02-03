@@ -55,14 +55,16 @@ class MainController extends Controller
             'style.css'
         );
 
+        // Set the Profile ID and Visitor ID
         $this->iProfileId = $this->httpRequest->get('profile_id', 'int');
+        $this->iVisitorId = (int)$this->session->get('member_id');
 
         // Read the profile information
         $oUser = $oUserModel->readProfile($this->iProfileId);
         if ($oUser) {
             // The administrators can view all profiles and profile visits are not saved.
             if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
-                $this->initPrivacy($oUserModel, $this->iProfileId, $this->iVisitorId);
+                $this->initPrivacy($oUserModel, $oUser);
             }
 
             // Gets the Profile background
