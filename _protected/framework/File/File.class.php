@@ -27,6 +27,8 @@ use ZipArchive;
 class File
 {
     const REGEX_BINARY_FILE = '/^(.*?)\.(gif|jpg|jpeg|png|webp|ico|mp3|mp4|mov|avi|flv|mpg|mpeg|wmv|ogg|ogv|webm|pdf|ttf|eot|woff|svg|swf)$/i';
+    const READ_WRITE_CHMOD_OCTAL_DIGIT = 0644;
+    const READ_WRITE_EXEC_CHMOD_OCTAL_DIGIT = 0777;
 
     // End Of Line relative to the operating system
     const EOL = PHP_EOL;
@@ -290,7 +292,7 @@ class File
      *
      * @throws Exception If the file cannot be created.
      */
-    public function createDir($mDir, $iMode = 0777)
+    public function createDir($mDir, $iMode = self::READ_WRITE_EXEC_CHMOD_OCTAL_DIGIT)
     {
         if (is_array($mDir)) {
             foreach ($mDir as $sDir) {
