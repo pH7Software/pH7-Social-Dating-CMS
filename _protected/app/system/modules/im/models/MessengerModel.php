@@ -21,7 +21,7 @@ class MessengerModel extends Model
      *
      * @param string $sTo Username
      *
-     * @return \stdClass SQL content
+     * @return array SQL content
      */
     public function select($sTo)
     {
