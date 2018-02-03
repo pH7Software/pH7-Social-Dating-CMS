@@ -177,11 +177,13 @@ class Design
 
             echo '<script>$(function(){Apprise(\'';
 
-            if ($iMsgNum > 1)
+            if ($iMsgNum > 1) {
                 echo '<strong>', t('You have'), ' <em>', $iMsgNum, '</em> ', nt('message:', 'messages:', $iMsgNum), '</strong><br />';
+            }
 
-            for ($i = 0; $i < $iMsgNum; $i++)
+            for ($i = 0; $i < $iMsgNum; $i++) {
                 echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aMessages[$i])), '<br />';
+            }
 
             echo '\')});</script>';
         }
@@ -220,8 +222,9 @@ class Design
             echo '<script>$(function(){Apprise(\'';
             echo '<strong>', t('You have'), ' <em>', $iErrNum, '</em> ', nt('error:', 'errors:', $iErrNum), '</strong><br />';
 
-            for ($i = 0; $i < $iErrNum; $i++)
+            for ($i = 0; $i < $iErrNum; $i++) {
                 echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aErrors[$i])), '<br />';
+            }
 
             echo '\')});</script>';
         }
