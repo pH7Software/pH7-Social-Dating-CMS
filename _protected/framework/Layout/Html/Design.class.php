@@ -65,6 +65,8 @@ class Design
     const FLASH_MSG = 'flash_msg';
     const FLASH_TYPE = 'flash_type';
 
+    const MAX_MESSAGE_LENGTH = 300;
+
     /** @var boolean */
     protected $bIsDiv = false;
 
@@ -167,7 +169,7 @@ class Design
     public function message()
     {
         if ($this->oHttpRequest->getExists('msg')) {
-            $this->aMessages[] = substr($this->oHttpRequest->get('msg'), 0, 300);
+            $this->aMessages[] = substr($this->oHttpRequest->get('msg'), 0, self::MAX_MESSAGE_LENGTH);
         }
 
         $iMsgNum = count($this->aMessages);
@@ -211,7 +213,7 @@ class Design
     public function error()
     {
         if ($this->oHttpRequest->getExists('err')) {
-            $this->aErrors[] = substr($this->oHttpRequest->get('err'), 0, 300);
+            $this->aErrors[] = substr($this->oHttpRequest->get('err'), 0, self::MAX_MESSAGE_LENGTH);
         }
 
         $iErrNum = count($this->aErrors);
