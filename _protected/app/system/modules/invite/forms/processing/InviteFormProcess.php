@@ -19,11 +19,14 @@ class InviteFormProcess extends Form
     const MAX_EMAIL_ADDRESSES = 10;
     const EMAIL_DELIMITER = ',';
 
+    /**
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
+     */
     public function __construct()
     {
         parent::__construct();
 
-        $aTo = explode(self::EMAIL_DELIMITER, $this->httpRequest->post('to'));
+        $aTo = $this->getEmails();
         if (count($aTo) > self::MAX_EMAIL_ADDRESSES) {
             \PFBC\Form::setError(
                 'form_invite',
@@ -70,5 +73,15 @@ class InviteFormProcess extends Form
         ];
 
         return $oMail->send($aInfo, $sMessageHtml);
+    }
+
+    /**
+     * @return array
+     *
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
+     */
+    private function getEmails()
+    {
+        return explode(self::EMAIL_DELIMITER, $this->httpRequest->post('to'));
     }
 }
