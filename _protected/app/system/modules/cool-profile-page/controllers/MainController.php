@@ -152,11 +152,14 @@ class MainController extends Controller
     /**
      * Privacy Profile.
      *
-     * @param UserModel $oUserModel
+     * @param UserCoreModel $oUserModel
+     * @param stdClass $oUser
      *
      * @return void
+     *
+     * @throws Framework\File\Exception
      */
-    private function initPrivacy(UserCoreModel $oUserModel)
+    private function initPrivacy(UserCoreModel $oUserModel, stdClass $oUser)
     {
         // Check Privacy Profile
         $oPrivacyViewsUser = $oUserModel->getPrivacySetting($this->iProfileId);
