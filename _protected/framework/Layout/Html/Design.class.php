@@ -692,16 +692,16 @@ class Design
      * @param string $sEmail The user email address.
      * @param string $sType The default image type to show. Default: 'wavatar'
      * @param integer $iSize The size of the image. Default: 80
-     * @param character $cRating The max image rating allowed. Default: 'g' (for all)
+     * @param string $sRating The max image rating allowed. Default: 'g' (for all)
      * @param boolean $bSecure Display avatar via HTTPS, for example if the site uses HTTPS, you should use this option to not get a warning with most Web browsers. Default: FALSE
      *
      * @return string The Gravatar Link.
      */
-    public function getGravatarUrl($sEmail, $sType = 'wavatar', $iSize = 80, $cRating = 'g', $bSecure = false)
+    public function getGravatarUrl($sEmail, $sType = 'wavatar', $iSize = 80, $sRating = 'g', $bSecure = false)
     {
         $sProtocol = $bSecure ? 'https' : 'http';
         $bSubDomain = $bSecure ? 'secure' : 'www';
-        return $sProtocol . '://' . $bSubDomain . '.gravatar.com/avatar/' . md5(strtolower($sEmail)) . '?d=' . $sType . '&s=' . $iSize . '&r=' . $cRating;
+        return $sProtocol . '://' . $bSubDomain . '.gravatar.com/avatar/' . md5(strtolower($sEmail)) . '?d=' . $sType . '&s=' . $iSize . '&r=' . $sRating;
     }
 
     /**
