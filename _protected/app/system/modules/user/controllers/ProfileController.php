@@ -199,9 +199,11 @@ class ProfileController extends Controller
     /**
      * Privacy Profile.
      *
-     * @param UserModel $oUserModel
+     * @param UserCoreModel $oUserModel
      *
      * @return void
+     *
+     * @throws Framework\File\Exception
      */
     private function initPrivacy(UserModel $oUserModel)
     {
