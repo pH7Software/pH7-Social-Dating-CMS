@@ -25,7 +25,7 @@ class Ip
     /**
      * Get IP address.
      *
-     * @param string $sIp Allows to speciy another IP address than the client one.
+     * @param string $sIp Allows to specify another IP address than the client one.
      *
      * @return string IP address. If the IP format is invalid, returns '0.0.0.0'
      */
@@ -45,7 +45,7 @@ class Ip
     /**
      * Returns the API IP with the IP address.
      *
-     * @param string $sIp IP address. Allows to speciy a specific IP.
+     * @param string $sIp IP address. Allows to specify a specific IP.
      *
      * @return string API URL with the IP address.
      */

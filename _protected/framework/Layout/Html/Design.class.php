@@ -542,7 +542,7 @@ class Design
      *
      * @internal If it's an IPv6, show only the beginning, otherwise it would be too long in the template.
      *
-     * @param string $sIp Allows to speciy another IP address than the client one.
+     * @param string $sIp Allows to specify another IP address than the client one.
      * @param boolean $bPrint Print or Return the HTML code. Default TRUE
      *
      * @return void|string
