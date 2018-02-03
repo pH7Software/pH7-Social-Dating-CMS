@@ -55,7 +55,8 @@ class UserCore
     public static function auth()
     {
         $oSession = new Session;
-        $bIsConnected = ((int)$oSession->exists('member_id')) && $oSession->get('member_ip') === Ip::get() &&
+        $bIsConnected = ((int)$oSession->exists('member_id')) &&
+            $oSession->get('member_ip') === Ip::get() &&
             $oSession->get('member_http_user_agent') === (new Browser)->getUserAgent();
 
         /** Destroy the object to minimize the CPU resources **/
@@ -338,7 +339,13 @@ class UserCore
                 's' => $sSex
             ];
 
-            $sLink = Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false);
+            $sLink = Uri::get(
+                'user',
+                'signup',
+                'step1',
+                '?' . Url::httpBuildQuery($aHttpParams),
+                false
+            );
         } else {
             $sLink = $this->getProfileLink($sUsername);
         }
@@ -385,7 +392,12 @@ class UserCore
 
         $oSession->set($aSessionData);
 
-        $oSecurityModel->addLoginLog($oUserData->email, $oUserData->username, '*****', 'Logged in!');
+        $oSecurityModel->addLoginLog(
+            $oUserData->email,
+            $oUserData->username,
+            '*****',
+            'Logged in!'
+        );
         $oUserModel->setLastActivity($oUserData->profileId);
     }
 

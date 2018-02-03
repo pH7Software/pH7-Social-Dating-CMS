@@ -60,7 +60,13 @@ class LoginFormProcess extends Form implements LoginableForm
             $this->preventBruteForce(self::BRUTE_FORCE_SLEEP_DELAY);
 
             if (!$bIsLogged) {
-                $oSecurityModel->addLoginLog($sEmail, $sUsername, $sPassword, 'Failed! Incorrect Email, Username or Password', DbTableName::ADMIN);
+                $oSecurityModel->addLoginLog(
+                    $sEmail,
+                    $sUsername,
+                    $sPassword,
+                    'Failed! Incorrect Email, Username or Password',
+                    DbTableName::ADMIN
+                );
 
                 if ($bIsLoginAttempt) {
                     $oSecurityModel->addLoginAttempt(DbTableName::ADMIN);
@@ -71,7 +77,13 @@ class LoginFormProcess extends Form implements LoginableForm
             } elseif ($bIpNotAllowed) {
                 $this->enableCaptcha();
                 \PFBC\Form::setError('form_admin_login', t('Incorrect Login!'));
-                $oSecurityModel->addLoginLog($sEmail, $sUsername, $sPassword, 'Failed! Wrong IP address', DbTableName::ADMIN);
+                $oSecurityModel->addLoginLog(
+                    $sEmail,
+                    $sUsername,
+                    $sPassword,
+                    'Failed! Wrong IP address',
+                    DbTableName::ADMIN
+                );
             }
         } else {
             $oSecurityModel->clearLoginAttempts(DbTableName::ADMIN);
@@ -86,11 +98,18 @@ class LoginFormProcess extends Form implements LoginableForm
                 // Store the admin ID for 2FA
                 $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iId);
 
-                Header::redirect(Uri::get('two-factor-auth', 'main', 'verificationcode', PH7_ADMIN_MOD));
+                Header::redirect(
+                    Uri::get(
+                        'two-factor-auth', 'main', 'verificationcode', PH7_ADMIN_MOD
+                    )
+                );
             } else {
                 (new AdminCore)->setAuth($oAdminData, $this->oAdminModel, $this->session, $oSecurityModel);
 
-                Header::redirect(Uri::get(PH7_ADMIN_MOD, 'main', 'index'), t('You are successfully logged in!'));
+                Header::redirect(
+                    Uri::get(PH7_ADMIN_MOD, 'main', 'index'),
+                    t('You are successfully logged in!')
+                );
             }
         }
     }

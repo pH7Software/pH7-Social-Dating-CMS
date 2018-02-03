@@ -52,9 +52,19 @@ class LoginFormProcess extends Form implements LoginableForm
             if ($sLogin === 'email_does_not_exist') {
                 $this->enableCaptcha();
                 \PFBC\Form::setError('form_login_user', t('Oops! "%0%" is not associated with any %site_name% account.', escape(substr($sEmail, 0, PH7_MAX_EMAIL_LENGTH))));
-                $oSecurityModel->addLoginLog($sEmail, 'Guest', 'No Password', 'Failed! Incorrect Username');
+                $oSecurityModel->addLoginLog(
+                    $sEmail,
+                    'Guest',
+                    'No Password',
+                    'Failed! Incorrect Username'
+                );
             } elseif ($sLogin === 'password_does_not_exist') {
-                $oSecurityModel->addLoginLog($sEmail, 'Guest', $sPassword, 'Failed! Incorrect Password');
+                $oSecurityModel->addLoginLog(
+                    $sEmail,
+                    'Guest',
+                    $sPassword,
+                    'Failed! Incorrect Password'
+                );
 
                 if ($bIsLoginAttempt) {
                     $oSecurityModel->addLoginAttempt();

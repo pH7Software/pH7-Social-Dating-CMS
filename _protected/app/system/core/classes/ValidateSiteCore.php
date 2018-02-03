@@ -37,7 +37,9 @@ class ValidateSiteCore
             !$oValidateSiteModel->is() && VDate::setTime(self::VALIDATE_FORM_PAGE_DELAY) >= $iSinceSiteCreated &&
             !$oSession->exists(self::SESS_IS_VISITED)
         ) {
-            Header::redirect(Uri::get('ph7cms-donation', 'main', 'donationbox'));
+            Header::redirect(
+                Uri::get('ph7cms-donation', 'main', 'donationbox')
+            );
         }
 
         return !$oValidateSiteModel->is() && VDate::setTime(self::VALIDATE_FORM_POPUP_DELAY) >= $iSinceSiteCreated;
