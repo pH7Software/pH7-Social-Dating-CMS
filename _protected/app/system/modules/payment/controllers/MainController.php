@@ -183,7 +183,7 @@ class MainController extends Controller
                         }
                     } elseif ($oResult->transaction) {
                         $sErrMsg = t('Error processing transaction: %0%', $oResult->transaction->processorResponseText);
-                        $this->design->setMessage( $this->str->escape($sErrMsg, true) );
+                        $this->design->setMessage($this->str->escape($sErrMsg, true));
                     }
                 }
             } break;
