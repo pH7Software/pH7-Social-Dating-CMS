@@ -166,6 +166,9 @@ class CommentController extends Controller
      * Set a Not Found Error Message with HTTP 404 Code Status.
      *
      * @return void
+     *
+     * @throws Framework\File\Exception
+     * @throws Framework\Http\Exception
      */
     private function notFound()
     {
