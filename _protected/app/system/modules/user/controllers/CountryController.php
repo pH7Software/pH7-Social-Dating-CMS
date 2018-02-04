@@ -101,13 +101,16 @@ class CountryController extends Controller
      */
     private function setMap()
     {
+        $sFullAddress = $this->registry->country . ' ' . $this->registry->city;
+        $sMarkerText = t('Meet new people here thanks <b>%site_name%</b>!');
+
         $oMap = new Map;
         $oMap->setKey(DbConfig::getSetting('googleApiKey'));
-        $oMap->setCenter($this->registry->country . ' ' . $this->registry->city);
+        $oMap->setCenter($sFullAddress);
         $oMap->setSize(self::MAP_WIDTH_SIZE, self::MAP_HEIGHT_SIZE);
         $oMap->setDivId('country_map');
         $oMap->setZoom(self::MAP_ZOOM_LEVEL);
-        $oMap->addMarkerByAddress($this->registry->country . ' ' . $this->registry->city, t('Meet new people here!'));
+        $oMap->addMarkerByAddress($sFullAddress, $sMarkerText, $sMarkerText);
         $oMap->generate();
         $this->view->map = $oMap->getMap();
         unset($oMap);
