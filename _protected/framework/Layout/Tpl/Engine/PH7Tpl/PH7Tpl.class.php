@@ -981,7 +981,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
         }
 
         // "design->link()" can never be removed. Copyright notices won't be displayed if you bought a license
-        return (false !== strpos($this->sCode, 'design->link()'));
+        return false !== strpos($this->sCode, 'design->link()');
     }
 
     /**
