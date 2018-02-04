@@ -176,10 +176,11 @@ class PH7Tpl extends Kernel
      */
     public function setTemplateDir($sDir)
     {
-        if (is_dir($sDir))
+        if (is_dir($sDir)) {
             $this->sTemplateDir = $this->file->checkExtDir($sDir);
-        else
+        } else {
             throw new PH7InvalidArgumentException('<strong>' . self::NAME . '</strong> Template Engine cannot found the "' . $sDir . '" template directory.');
+        }
     }
 
     /**
@@ -379,8 +380,9 @@ class PH7Tpl extends Kernel
             $this->setErrMsg();
         }
 
-        if ($this->bPhpCompressor)
+        if ($this->bPhpCompressor) {
             $this->sCode = (new Compress)->parsePhp($this->sCode);
+        }
 
         $this->sCode = '<?php ' . $sPhpHeader . '?>' . $this->sCode;
 
@@ -624,8 +626,9 @@ class PH7Tpl extends Kernel
      */
     public function assigns(array $aVars, $bEscape = false, $bEscapeStrip = false)
     {
-        foreach ($aVars as $sKey => $sValue)
+        foreach ($aVars as $sKey => $sValue) {
             $this->assign($sKey, $sValue, $bEscape = false, $bEscapeStrip = false); // Assign a string variable
+        }
     }
 
     /**
