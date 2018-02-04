@@ -48,7 +48,7 @@ class MainController extends Controller
         $oData = $this->oHoNModel->getPicture($iProfileId);
 
         if (empty($oData)) {
-            Http::setHeadersByCode(404);
+            Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
             $this->view->error = t("Sorry, we haven't found any photo to Hot Or Not Party.");
         } else {
             $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
