@@ -28,6 +28,9 @@ class MainController extends Controller
     const ITEMS_MENU_CATEGORIES = 10;
     const MAX_CATEGORIES = 300;
 
+    const MAX_CATEGORY_LENGTH_SHOWN = 60;
+    const MAX_AUTHOR_LENGTH_SHOWN = 60;
+
     /** @var NoteModel */
     protected $oNoteModel;
 
@@ -156,7 +159,7 @@ class MainController extends Controller
 
         $this->setMenuVars();
 
-        $sCategoryTxt = substr($sCategory, 0, 60);
+        $sCategoryTxt = substr($sCategory, 0, self::MAX_CATEGORY_LENGTH_SHOWN);
         if (empty($oSearch)) {
             $this->sTitle = t('Not "%0%" category found!', $sCategoryTxt);
             $this->notFound();
@@ -206,7 +209,7 @@ class MainController extends Controller
 
         $this->setMenuVars();
 
-        $sAuthorTxt = substr($sAuthor, 0, 60);
+        $sAuthorTxt = substr($sAuthor, 0, self::MAX_AUTHOR_LENGTH_SHOWN);
         if (empty($oSearch)) {
             $this->sTitle = t('None "%0%" author was found!', $sAuthorTxt);
             $this->notFound(false); // For the Ajax profile blocks, we can not put HTTP error code 404, so the attribute is "false"
