@@ -390,6 +390,8 @@ class ProfileController extends Controller
 
     /**
      * @return void
+     *
+     * @throws Framework\File\Exception
      */
     private function redirectToOtherProfileStyleIfEnabled()
     {
