@@ -89,7 +89,7 @@ class MainController extends Controller
 
             $this->setMenubar($aData['first_name'], $oUser);
 
-            $this->setMap($aData['city'], $aData['state'], $aData['country'], $oUser);
+            $this->setMap($aData['city'], $aData['country'], $oUser);
 
             $this->view->id = $this->iProfileId;
             $this->view->username = $oUser->username;
@@ -124,24 +124,23 @@ class MainController extends Controller
      * Set the Google Maps code to the view.
      *
      * @param string $sCity
-     * @param string $sState
      * @param string $sCountry
      * @param stdClass $oUser
      *
      * @return void
      */
-    private function setMap($sCity, $sState, $sCountry, stdClass $oUser)
+    private function setMap($sCity, $sCountry, stdClass $oUser)
     {
+        $sFullAddress = $sCity . ' ' . t($sCountry);
+        $sMarkerText = t('Meet <b>%0%</b> near here!', $oUser->username);
+
         $oMap = new Map;
         $oMap->setKey(DbConfig::getSetting('googleApiKey'));
-        $oMap->setCenter($sCity . ' ' . $sState . ' ' . t($sCountry));
+        $oMap->setCenter($sFullAddress);
         $oMap->setSize(self::MAP_WIDTH_SIZE, self::MAP_HEIGHT_SIZE);
         $oMap->setDivId('profile_map');
         $oMap->setZoom(self::MAP_ZOOM_LEVEL);
-        $oMap->addMarkerByAddress(
-            $sCity . ' ' . $sState . ' ' . t($sCountry), t('Meet %0% near here!',
-                $oUser->username)
-        );
+        $oMap->addMarkerByAddress($sFullAddress, $sMarkerText, $sMarkerText);
         $oMap->generate();
         $this->view->map = $oMap->getMap();
         unset($oMap);
