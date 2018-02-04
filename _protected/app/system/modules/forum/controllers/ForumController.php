@@ -20,7 +20,7 @@ class ForumController extends Controller
     const TOPICS_PER_PAGE = 20;
     const FORUMS_PER_PAGE = 20;
     const POSTS_PER_PAGE = 10;
-    const MAX_SUMMARY_MESSAGE_LENGTH = 150;
+    const MAX_SUMMARY_MESSAGE_LENGTH_SHOWN = 150;
 
     /** @var ForumModel */
     private $oForumModel;
@@ -387,7 +387,7 @@ class ForumController extends Controller
         return substr(
             $this->str->escape(Ban::filterWord($sMessage), true),
             0,
-            self::MAX_SUMMARY_MESSAGE_LENGTH
+            self::MAX_SUMMARY_MESSAGE_LENGTH_SHOWN
         );
     }
 
