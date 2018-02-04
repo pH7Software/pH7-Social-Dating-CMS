@@ -331,7 +331,10 @@ class MainController extends Controller
             $this->sMsg = t("Your message doesn't exist anymore in your trash bin.");
         }
 
-        Header::redirect(Uri::get('mail', 'main', 'inbox'), $this->sMsg, $this->getStatusType());
+        Header::redirect(
+            Uri::get('mail', 'main', 'inbox'),
+            $this->sMsg, $this->getStatusType()
+        );
     }
 
     public function setTrashAll()
