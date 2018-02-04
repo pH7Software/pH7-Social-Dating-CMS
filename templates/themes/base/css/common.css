@@ -190,8 +190,8 @@ label#percent {
 }
 
 .thumb_photo, .s_photo, .m_photo, .m_video {
-    float: left;
-    vertical-align: bottom;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .thumb_photo img, .s_photo img, .m_photo img {
