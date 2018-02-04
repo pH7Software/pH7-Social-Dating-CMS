@@ -49,7 +49,10 @@ class AdminController extends Controller
         $this->view->designSecurity = new Security;
 
         // Adding the JS files for the report and form.
-        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'common.js');
+        $this->design->addJs(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
+            'common.js'
+        );
         $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
 
         $iTotalReports = ReportModel::totalReports();
