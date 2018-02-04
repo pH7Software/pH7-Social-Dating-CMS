@@ -4,6 +4,6 @@
     </p>
 
     <p>
-        {lang 'If the problem persists, please <a href="%0%">contact us</a>.', Framework\Mvc\Router\Uri::get('contact', 'contact', 'index')}
+        {lang 'If the problem persists, please contact your payment provider or <a href="%0%">contact us</a>.', Framework\Mvc\Router\Uri::get('contact', 'contact', 'index')}
     </p>
 </div>
