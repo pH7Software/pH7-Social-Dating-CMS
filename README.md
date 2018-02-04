@@ -220,7 +220,7 @@ Just clone the repository, make your changes and then make a push ;-)
 
 *WARNING, your code/modification must be of excellent quality and follow the [Code Convention](http://ph7cms.com/doc/en/code-convention).* I manually validate all the improvements and changes.
 
-**You will also become a pH7CMS VIP member and get all premium contents and modules.**
+**You will also become a pH7CMS VIP member and get all exclusive premium contents and upcoming modules.**
 
 
 ![Beautiful Profile Dating Page](https://user-images.githubusercontent.com/1325411/35778324-abb79172-09b4-11e8-9def-6b537d8a4e9f.png)
