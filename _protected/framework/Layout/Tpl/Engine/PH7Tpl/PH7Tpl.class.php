@@ -661,7 +661,7 @@ class PH7Tpl extends Kernel
      */
     private function checkCompileDir()
     {
-        $this->sCompileDir = (empty($this->sCompileDir)) ? PH7_PATH_CACHE . static::COMPILE_DIR . PH7_DS : $this->sCompileDir;
+        $this->sCompileDir = empty($this->sCompileDir) ? PH7_PATH_CACHE . static::COMPILE_DIR . PH7_DS : $this->sCompileDir;
 
         return $this;
     }
