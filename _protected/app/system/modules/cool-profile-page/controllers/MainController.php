@@ -356,16 +356,6 @@ class MainController extends Controller
     }
 
     /**
-     * Set noindex meta tag to exclude the profile from search engines.
-     *
-     * @return void
-     */
-    private function excludeProfileFromSearchEngines()
-    {
-        $this->view->header = Meta::NOINDEX;
-    }
-
-    /**
      * @return void
      */
     private function addCssFiles()
@@ -389,5 +379,15 @@ class MainController extends Controller
                 'friend.js'
             );
         }
+    }
+
+    /**
+     * Set noindex meta tag to exclude the profile from search engines.
+     *
+     * @return void
+     */
+    private function excludeProfileFromSearchEngines()
+    {
+        $this->view->header = Meta::NOINDEX;
     }
 }
