@@ -84,7 +84,7 @@ class MainController extends Controller
             $this->view->meta_description = t('Meet %0% %1% | %2% - %3%', $aData['first_name'], $aData['last_name'],
                 $oUser->username, substr($aData['description'], 0, 100));
 
-            $this->view->h3_title = t('A <span class="pH1">%0%</span> of <span class="pH3">%1% years</span>, from <span class="pH2">%2%, %3% %4%</span>',
+            $this->view->h1_title = t('A <span class="pH1">%0%</span> of <span class="pH3">%1% years</span>, from <span class="pH2">%2%, %3% %4%</span>',
                 t($oUser->sex), $aData['age'], t($aData['country']), $aData['city'], $aData['state']);
 
             $this->setMenubar($aData['first_name'], $oUser);
