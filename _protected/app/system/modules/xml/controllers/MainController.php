@@ -10,6 +10,8 @@ namespace PH7;
 
 class MainController extends Controller
 {
+    const STATIC_CACHE_LIFETIME = 86400; // 86400 secs = 24 hours
+
     /** @var DataCoreModel */
     protected $oDataModel;
 
@@ -30,7 +32,7 @@ class MainController extends Controller
 
         /* Enable caching for all pages of this module */
         $this->view->setCaching(true);
-        $this->view->setCacheExpire(3600 * 24); // 24 hours
+        $this->view->setCacheExpire(self::STATIC_CACHE_LIFETIME);
     }
 
     public function xslLayout()
