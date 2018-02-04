@@ -150,6 +150,12 @@ button[readonly],
 select[readonly],
 textarea[readonly] {
     background-color: #ddd;
+}
+
+input[disabled],
+button[disabled],
+select[disabled],
+textarea[disabled] {
     cursor: not-allowed !important;
 }
 
