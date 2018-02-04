@@ -69,7 +69,7 @@ class DateFormat
             throw new Exception(self::getExceptionMessage());
         }
 
-        $iTime = (!empty($sDate)) ? strtotime($sDate) : time();
+        $iTime = !empty($sDate) ? strtotime($sDate) : time();
 
         return date($sFormat, $iTime);
     }
