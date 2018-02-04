@@ -128,7 +128,7 @@ class MainController extends Controller
                     $sAmount = $this->httpRequest->post('amount');
 
                     try {
-                        $oCharge = \Stripe\Charge::create(
+                        \Stripe\Charge::create(
                             [
                                 'amount' => Stripe::getAmount($sAmount),
                                 'currency' => $this->config->values['module.setting']['currency'],
