@@ -163,21 +163,23 @@ class ProfileController extends Controller
      * Get the Google Map.
      *
      * @param string $sCity
-     * @param string $sState
      * @param string $sCountry
      * @param stdClass $oUser
      *
      * @return string The Google Maps code.
      */
-    private function getMap($sCity, $sState, $sCountry, stdClass $oUser)
+    private function getMap($sCity, $sCountry, stdClass $oUser)
     {
+        $sFullAddress = $sCity . ' ' . t($sCountry);
+        $sMarkerText = t('Meet <b>%0%</b> near here!', $oUser->username);
+
         $oMap = new Map;
         $oMap->setKey(DbConfig::getSetting('googleApiKey'));
-        $oMap->setCenter($sCity . ' ' . $sState . ' ' . t($sCountry));
+        $oMap->setCenter($sFullAddress);
         $oMap->setSize(self::MAP_WIDTH_SIZE, self::MAP_HEIGHT_SIZE);
         $oMap->setDivId('profile_map');
         $oMap->setZoom(self::MAP_ZOOM_LEVEL);
-        $oMap->addMarkerByAddress($sCity . ' ' . $sState . ' ' . t($sCountry), t('Meet %0% near here!', $oUser->username));
+        $oMap->addMarkerByAddress($sFullAddress, $sMarkerText, $sMarkerText);
         $oMap->generate();
         $sMap = $oMap->getMap();
         unset($oMap);
