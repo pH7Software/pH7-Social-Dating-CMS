@@ -22,6 +22,8 @@ class MainController extends Controller
     const ITEMS_MENU_LATEST = 5;
     const ITEMS_MENU_CATEGORIES = 10;
 
+    const MAX_CATEGORY_LENGTH = 60;
+
     /**
      * @internal Protected access because AdminController derived class uses these attributes
      */
@@ -141,7 +143,7 @@ class MainController extends Controller
         );
         $this->setMenuVars();
 
-        $sCategoryTxt = substr($sCategory, 0, 60);
+        $sCategoryTxt = substr($sCategory, 0, self::MAX_CATEGORY_LENGTH);
         if (empty($oSearch)) {
             $this->sTitle = t('No "%0%" category found.', $sCategoryTxt);
             $this->notFound();
