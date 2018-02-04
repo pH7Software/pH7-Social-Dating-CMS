@@ -59,19 +59,8 @@ class ProfileController extends Controller
     {
         $oUserModel = new UserModel;
 
-        // Add the General and Tabs Menu stylesheets
-        $this->design->addCss(
-            PH7_LAYOUT,
-            PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS . 'tabs.css,' . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS . 'general.css'
-        );
-
-        if (SysMod::isEnabled('friend')) {
-            // Add the JavaScript file for the Ajax Friend block
-            $this->design->addJs(
-                PH7_LAYOUT . PH7_SYS . PH7_MOD . 'friend' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
-                'friend.js'
-            );
-        }
+        $this->addCssFiles();
+        $this->addAdditionalAssetFiles();
 
         // Set the Profile username
         $this->sUsername = $this->httpRequest->get('username', 'string');
@@ -413,9 +402,39 @@ class ProfileController extends Controller
     }
 
     /**
+     * Add the General and Tabs Menu stylesheets.
+     *
+     * @return void
+     */
+    private function addCssFiles()
+    {
+        $this->design->addCss(
+            PH7_LAYOUT,
+            PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS . 'tabs.css,' . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS . 'general.css'
+        );
+    }
+
+    /**
+     * Add the JS file for Friend feature.
+     *
+     * @return void
+     */
+    private function addAdditionalAssetFiles()
+    {
+        if (SysMod::isEnabled('friend')) {
+            $this->design->addJs(
+                PH7_LAYOUT . PH7_SYS . PH7_MOD . 'friend' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
+                'friend.js'
+            );
+        }
+    }
+
+    /**
      * Show a Not Found page.
      *
      * @return void
+     *
+     * @throws Framework\Http\Exception
      */
     private function notFound()
     {
