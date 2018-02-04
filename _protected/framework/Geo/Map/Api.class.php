@@ -494,7 +494,7 @@ class Api
      */
     public function addMarkerByCoords($lat, $lng, $title, $html = '', $category = '', $icon = '', $id = '')
     {
-        if ($icon == '') {
+        if ($icon === '') {
             $icon = 'https://maps.gstatic.com/mapfiles/markers2/marker.png';
         }
 
