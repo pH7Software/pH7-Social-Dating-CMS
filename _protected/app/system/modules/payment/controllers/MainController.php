@@ -27,6 +27,8 @@ class MainController extends Controller
     const TWO_CHECKOUT_GATEWAY_NAME = '2co';
     const CCBILL_GATEWAY_NAME = 'ccbill';
 
+    const REDIRECTION_DELAY = 4; // In seconds
+
     /** @var AffiliateCoreModel */
     protected $oUserModel;
 
@@ -392,7 +394,7 @@ class MainController extends Controller
      */
     private function setAutomaticRedirectionToHomepage()
     {
-        $this->design->setRedirect($this->registry->site_url, null, null, 4);
+        $this->design->setRedirect($this->registry->site_url, null, null, self::REDIRECTION_DELAY);
     }
 
     /**
