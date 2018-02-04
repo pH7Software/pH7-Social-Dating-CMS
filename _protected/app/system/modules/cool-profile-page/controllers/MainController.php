@@ -15,6 +15,7 @@ use PH7\Framework\Date\Various as VDate;
 use PH7\Framework\Geo\Map\Map;
 use PH7\Framework\Layout\Html\Meta;
 use PH7\Framework\Math\Measure\Year;
+use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Parse\Emoticon;
@@ -54,6 +55,14 @@ class MainController extends Controller
             PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
             'style.css'
         );
+
+        if (SysMod::isEnabled('friend')) {
+            // Add JS file for the Ajax Friend Adder feature
+            $this->design->addJs(
+                PH7_LAYOUT . PH7_SYS . PH7_MOD . 'friend' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
+                'friend.js'
+            );
+        }
 
         // Set the Profile ID and Visitor ID
         $this->iProfileId = $this->httpRequest->get('profile_id', 'int');
