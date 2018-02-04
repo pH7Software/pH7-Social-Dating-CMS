@@ -13,6 +13,8 @@ use PH7\Framework\Url\Header;
 
 class AccountController extends Controller
 {
+    const REDIRECTION_DELAY = 4; // In seconds
+
     /** @var string */
     private $sTitle;
 
@@ -61,7 +63,12 @@ class AccountController extends Controller
             Header::redirect(Uri::get('affiliate', 'account', 'yesdelete'));
         } elseif ($this->httpRequest->get('delete_status') === 'nodelete') {
             $this->view->delete_status = false;
-            $this->design->setRedirect(Uri::get('affiliate', 'home', 'index'), null, null, 4);
+            $this->design->setRedirect(
+                Uri::get('affiliate', 'home', 'index'),
+                null,
+                null,
+                self::REDIRECTION_DELAY
+            );
         } else {
             $this->view->delete_status = true;
         }
