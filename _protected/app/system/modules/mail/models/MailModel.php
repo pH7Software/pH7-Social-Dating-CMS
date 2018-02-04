@@ -18,6 +18,9 @@ class MailModel extends MailCoreModel
     const OUTBOX = 2;
     const TRASH = 3;
 
+    const RECIPIENT_DB_FIELD = 'recipient';
+    const SENDER_DB_FIELD = 'sender';
+
     const TRASH_MODE = 'trash';
     const RESTOR_MODE = 'restor';
     const DELETE_MODE = 'delete';
@@ -189,7 +192,7 @@ class MailModel extends MailCoreModel
         }
 
         $oData = $this->getMsg($iMessageId);
-        $sFieldId = ($oData->sender == $iProfileId) ? 'sender' : 'recipient';
+        $sFieldId = $oData->sender == $iProfileId ? self::SENDER_DB_FIELD : self::RECIPIENT_DB_FIELD;
         if ($sMode == self::RESTOR_MODE) {
             $sTrashVal = str_replace(array($sFieldId, ','), '', $oData->trash);
         } else {
