@@ -200,7 +200,7 @@ class MailModel extends MailCoreModel
         }
         unset($oData);
 
-        $sField = ($sMode == self::DELETE_MODE) ? 'toDelete' : 'trash';
+        $sField = $sMode == self::DELETE_MODE ? 'toDelete' : 'trash';
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::MESSAGE) . 'SET ' . $sField . ' = :val WHERE ' . $sFieldId . ' = :profileId AND messageId = :messageId LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
@@ -228,8 +228,8 @@ class MailModel extends MailCoreModel
         $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
 
-        $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(messageId) AS totalMails';
+        $sSqlLimit = !$bCount ? ' LIMIT :offset, :limit' : '';
+        $sSqlSelect = !$bCount ? '*' : 'COUNT(messageId) AS totalMails';
         $sSqlFind = ' ' . (ctype_digit($mLooking) ? '(messageId = :looking)' : '(title LIKE :looking OR message LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)');
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
