@@ -1,7 +1,7 @@
 <div class="center">
     {if empty($error)}
         <h2>{% Framework\Security\Ban\Ban::filterWord($picture->title) %}</h2>
-        <div class="picture_block right">
+        <div class="picture_block">
             <a href="{url_data_sys_mod}picture/img/{% $picture->username %}/{% $picture->albumId %}/{% str_replace('original', 1200, $picture->file) %}" title="{% $picture->title %}" data-popup="image">
                 <img src="{url_data_sys_mod}picture/img/{% $picture->username %}/{% $picture->albumId %}/{% str_replace('original', '600', $picture->file) %}" alt="{% $picture->title %}" title="{% $picture->title %}" class="thumb" />
             </a>
