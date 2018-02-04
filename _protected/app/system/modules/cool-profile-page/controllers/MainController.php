@@ -50,19 +50,8 @@ class MainController extends Controller
     {
         $oUserModel = new UserCoreModel;
 
-        // Add the General and Tabs Menu stylesheets
-        $this->design->addCss(
-            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
-            'style.css'
-        );
-
-        if (SysMod::isEnabled('friend')) {
-            // Add JS file for the Ajax Friend Adder feature
-            $this->design->addJs(
-                PH7_LAYOUT . PH7_SYS . PH7_MOD . 'friend' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
-                'friend.js'
-            );
-        }
+        $this->addCssFiles();
+        $this->addAdditionalAssetFiles();
 
         // Set the Profile ID and Visitor ID
         $this->iProfileId = $this->httpRequest->get('profile_id', 'int');
@@ -374,5 +363,31 @@ class MainController extends Controller
     private function excludeProfileFromSearchEngines()
     {
         $this->view->header = Meta::NOINDEX;
+    }
+
+    /**
+     * @return void
+     */
+    private function addCssFiles()
+    {
+        // Add the General and Tabs Menu stylesheets
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
+            'style.css'
+        );
+    }
+
+    /**
+     * @return void
+     */
+    private function addAdditionalAssetFiles()
+    {
+        if (SysMod::isEnabled('friend')) {
+            // Add JS file for the Ajax Friend Adder feature
+            $this->design->addJs(
+                PH7_LAYOUT . PH7_SYS . PH7_MOD . 'friend' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
+                'friend.js'
+            );
+        }
     }
 }
