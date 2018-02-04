@@ -20,7 +20,7 @@ use PH7\Framework\Str\Str;
 
 class Various
 {
-    const MAX_LENGTH = 40;
+    const DEFAULT_LENGTH = 40;
 
     /**
      * Generate Random.
@@ -30,7 +30,7 @@ class Various
      *
      * @return string
      */
-    public static function genRnd($sStr = null, $iLength = self::MAX_LENGTH)
+    public static function genRnd($sStr = null, $iLength = self::DEFAULT_LENGTH)
     {
         $sPrefix = (string)mt_rand();
         $sStr = !empty($sStr) ? (string)$sStr : '';
@@ -47,7 +47,7 @@ class Various
      *
      * @return string
      */
-    public static function padStr($sStr, $iLength = self::MAX_LENGTH)
+    public static function padStr($sStr, $iLength = self::DEFAULT_LENGTH)
     {
         $iLength = (int)$iLength;
 
