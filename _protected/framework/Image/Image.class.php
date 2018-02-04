@@ -164,10 +164,10 @@ class Image
     public function resize($iX = null, $iY = null)
     {
         if (!$iX) {
-            // Width not given
+            // If width is not given
             $iX = $this->iWidth * ($iY / $this->iHeight);
         } elseif (!$iY) {
-            // Height not given
+            // If height is not given
             $iY = $this->iHeight * ($iX / $this->iWidth);
         }
 
