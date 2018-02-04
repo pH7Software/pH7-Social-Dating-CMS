@@ -65,7 +65,8 @@ class Design
     const FLASH_MSG = 'flash_msg';
     const FLASH_TYPE = 'flash_type';
 
-    const MAX_MESSAGE_LENGTH = 300;
+    const DEFAULT_REDIRECTION_DELAY = 3;
+    const MAX_MESSAGE_LENGTH_SHOWN = 300;
 
     /** @var boolean */
     protected $bIsDiv = false;
@@ -244,7 +245,7 @@ class Design
      *
      * @return void
      */
-    public function setRedirect($sUrl = null, $sMsg = null, $sType = self::SUCCESS_TYPE, $iTime = 3)
+    public function setRedirect($sUrl = null, $sMsg = null, $sType = self::SUCCESS_TYPE, $iTime = self::DEFAULT_REDIRECTION_DELAY)
     {
         if ($sMsg !== null) {
             $this->setFlashMsg($sMsg, $sType);
