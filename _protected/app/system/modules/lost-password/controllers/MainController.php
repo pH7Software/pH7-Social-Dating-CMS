@@ -54,9 +54,17 @@ class MainController extends Controller
             Header::redirect($this->registry->site_url, t('Oops! Email or hash is invalid.'), Design::ERROR_TYPE);
         } else {
             if (!$this->sendMail($sTable, $sEmail)) {
-                Header::redirect($this->registry->site_url, Form::errorSendingEmail(), Design::ERROR_TYPE);
+                Header::redirect(
+                    $this->registry->site_url,
+                    Form::errorSendingEmail(),
+                    Design::ERROR_TYPE
+                );
             } else {
-                Header::redirect($this->registry->site_url, t('Your new password has been emailed to you.'), Design::SUCCESS_TYPE);
+                Header::redirect(
+                    $this->registry->site_url,
+                    t('Your new password has been emailed to you.'),
+                    Design::SUCCESS_TYPE
+                );
             }
         }
     }
