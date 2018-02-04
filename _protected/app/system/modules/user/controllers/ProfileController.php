@@ -128,7 +128,7 @@ class ProfileController extends Controller
                 $this->view->befriend_link = $this->getBeFriendLink($sFirstName, $oUser);
             }
 
-            $this->view->map = $this->getMap($sCity, $sState, $sCountry, $oUser);
+            $this->view->map = $this->getMap($sCity, $sCountry, $oUser);
 
             $this->view->id = $this->iProfileId;
             $this->view->username = $oUser->username;
