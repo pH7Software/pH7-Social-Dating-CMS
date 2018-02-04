@@ -29,7 +29,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 
 * Best Dating Features
 * Advanced Search
-* Blogs
+* Blog
 * Notes
 * Pages Management
 * Friends/Mutual Friends, Visit, Messages, Instant messaging, Views, Like, Rating, Smileys, Geo Map, Avatar, Wallpaper, ...
@@ -38,7 +38,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Comments
 * Hot or Not
 * Love Calculator
-* Geolocation
+* Geo-location
 * People Nearby
 * Photo Albums
 * Videos (and possibility to upload videos from API v3 YouTube, Vimeo, Metacafe and Dailymotion)
