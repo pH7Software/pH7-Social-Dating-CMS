@@ -14,6 +14,6 @@
     {/if}
 
     {if $is_friend_enabled AND !$is_own_profile}
-        <a class="vs_marg" ref="nofollow" href="{befriend_link}" title="{lang 'Add Friend'}"><i class="fa fa-plus-square-o friend"></i></a>
+        <a class="vs_marg" ref="nofollow" href="{befriend_link}" title="{lang 'Add Friend'}"><i class="fa fa-user-plus friend"></i></a>
     {/if}
 </div>
