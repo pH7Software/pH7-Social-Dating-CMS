@@ -495,7 +495,7 @@ class Api
     public function addMarkerByCoords($lat, $lng, $title, $html = '', $category = '', $icon = '', $id = '')
     {
         if ($icon === '') {
-            $icon = 'https://maps.gstatic.com/mapfiles/markers2/marker.png';
+            $icon = PH7_URL_STATIC . PH7_IMG . 'icon/map-marker.svg';
         }
 
         // Save the lat/lon to enable the automatic center/zoom
