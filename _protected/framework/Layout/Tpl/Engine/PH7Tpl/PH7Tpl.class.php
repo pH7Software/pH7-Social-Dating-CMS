@@ -417,8 +417,9 @@ class PH7Tpl extends Kernel
         $this->classicSyntax();
 
         /***** XML Syntax *****/
-        if ($this->bXmlTags)
+        if ($this->bXmlTags) {
             $this->xmlSyntax();
+        }
 
         /***** Variables *****/
         $this->sCode = preg_replace('#{([a-z0-9_]+)}#i', '<?php echo $$1; ?>', $this->sCode);
