@@ -393,7 +393,6 @@ class PH7Tpl extends Kernel
         }
 
         throw new TplException('Could not write compiled file: \'' . $this->sCompileDirFile . '\'');
-        return false;
     }
 
     /**

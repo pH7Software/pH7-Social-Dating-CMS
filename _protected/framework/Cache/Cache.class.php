@@ -351,7 +351,5 @@ File ID: ' . $this->sId . '
         }
 
         throw new Exception('Could not write cache file: \'' . $sFile . '\'');
-
-        return false;
     }
 }
