@@ -31,6 +31,9 @@ class Image
     const DEFAULT_MAX_WIDTH = 3000;
     const DEFAULT_MAX_HEIGHT = 3000;
 
+    const DEFAULT_IMAGE_QUALITY = 100;
+    const DEFAULT_COMPRESSION_LEVEL = 4;
+
     /** @var string */
     private $sFile;
 
@@ -129,11 +132,11 @@ class Image
     }
 
     /**
-     * @param int $iQ
+     * @param int $iQ From 0 (worst quality) to 100 (best quality).
      *
      * @return self
      */
-    public function quality($iQ = 100)
+    public function quality($iQ = self::DEFAULT_IMAGE_QUALITY)
     {
         $this->iQuality = $iQ;
 
@@ -145,7 +148,7 @@ class Image
      *
      * @return self
      */
-    public function compression($iC = 4)
+    public function compression($iC = self::DEFAULT_COMPRESSION_LEVEL)
     {
         $this->iCompression = $iC;
 
