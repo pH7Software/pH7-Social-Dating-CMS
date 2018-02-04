@@ -172,7 +172,7 @@ class CommentController extends Controller
      */
     private function notFound()
     {
-        Http::setHeadersByCode(404);
+        Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
 
         $this->view->page_title = t('Comment Not Found');
         $this->view->error = t('No comments yet, <a class="bold" href="%0%">add one</a>!', Uri::get('comment', 'comment', 'add', $this->sTable . ',' . $this->str->escape($this->httpRequest->get('id'))));
