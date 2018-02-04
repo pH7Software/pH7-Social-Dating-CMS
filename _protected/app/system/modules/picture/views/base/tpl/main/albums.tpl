@@ -20,7 +20,8 @@
                 {/if}
                 <p>
                     {{ RatingDesignCore::voting($album->albumId,DbTableName::ALBUM_PICTURE) }}
-                    {{ $design->like($album->username,$album->firstName,$album->sex,$absolute_url) }} | {{ $design->report($album->profileId, $album->username, $album->firstName, $album->sex) }}
+                    {{ $design->like($album->username,$album->firstName,$album->sex,$absolute_url) }} |
+                    {{ $design->report($album->profileId, $album->username, $album->firstName, $album->sex) }}
                 </p>
             </div>
         {/each}
@@ -30,6 +31,8 @@
     {/if}
 
     <p class="bottom">
-        <a class="btn btn-default btn-md" href="{{ $design->url('picture', 'main', 'addalbum') }}">{lang 'Add a new album'}</a>
+        <a class="btn btn-default btn-md" href="{{ $design->url('picture', 'main', 'addalbum') }}">
+            {lang 'Add a new album'}
+        </a>
     </p>
 </div>
