@@ -14,6 +14,7 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\File\File;
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Url\Header;
 
 class ConfigFileCoreFormProcess extends Form
@@ -47,7 +48,11 @@ class ConfigFileCoreFormProcess extends Form
         if ($this->file->save($sIniFile, $sData)) {
             Header::redirect($sRedirectUrl, t('Configuration updated!'));
         } else {
-            Header::redirect($sRedirectUrl, t('The config file could not be saved. Please check your file permissions (must be in write mode)'), 'error');
+            Header::redirect(
+                $sRedirectUrl,
+                t('The config file could not be saved. Please check your file permissions (must be in write mode)'),
+                Design::ERROR_TYPE
+            );
         }
 
         // Check again and correct the file permission if necessary.
