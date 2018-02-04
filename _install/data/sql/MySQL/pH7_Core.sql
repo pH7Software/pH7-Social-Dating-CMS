@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS ph7_members (
   reference varchar(255) DEFAULT NULL,
   votes int(11) DEFAULT 0,
   score float DEFAULT 0,
-  credits int(6) unsigned NOT NULL DEFAULT 0,
+  credits int(6) unsigned NOT NULL DEFAULT 0, -- Not used for the moment (maybe in the future by the payment module)
   affiliatedId int(10) unsigned NOT NULL DEFAULT 0,
   active tinyint(1) unsigned NOT NULL DEFAULT 1,
   ban tinyint(1) unsigned NOT NULL DEFAULT 0,
