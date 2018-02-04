@@ -170,7 +170,7 @@ class Design
     public function message()
     {
         if ($this->oHttpRequest->getExists('msg')) {
-            $this->aMessages[] = substr($this->oHttpRequest->get('msg'), 0, self::MAX_MESSAGE_LENGTH);
+            $this->aMessages[] = substr($this->oHttpRequest->get('msg'), 0, self::MAX_MESSAGE_LENGTH_SHOWN);
         }
 
         $iMsgNum = count($this->aMessages);
@@ -214,7 +214,7 @@ class Design
     public function error()
     {
         if ($this->oHttpRequest->getExists('err')) {
-            $this->aErrors[] = substr($this->oHttpRequest->get('err'), 0, self::MAX_MESSAGE_LENGTH);
+            $this->aErrors[] = substr($this->oHttpRequest->get('err'), 0, self::MAX_MESSAGE_LENGTH_SHOWN);
         }
 
         $iErrNum = count($this->aErrors);
