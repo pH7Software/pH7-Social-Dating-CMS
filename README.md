@@ -223,7 +223,7 @@ Just clone the repository, make your changes and then make a push ;-)
 **You will also become a pH7CMS VIP member and get all exclusive premium contents and upcoming modules.**
 
 
-![Beautiful Profile Dating Page](https://user-images.githubusercontent.com/1325411/35778324-abb79172-09b4-11e8-9def-6b537d8a4e9f.png)
+![Beautiful Profile Dating Page](https://user-images.githubusercontent.com/1325411/35779585-68f0d5fc-09c7-11e8-91eb-bf793fcfab6e.png)
 
 
 ## Tools/Software Used to Develop pH7CMS
