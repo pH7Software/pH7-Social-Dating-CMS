@@ -89,7 +89,7 @@ class PH7Tpl extends Kernel
     private $bLicense;
 
     /** @var string */
-    private $sTplExt = '.tpl', // Default extension
+    private $sTplExt = '.tpl'; // Default extension
 
     /** @var bool */
     private $bCaching = false;
