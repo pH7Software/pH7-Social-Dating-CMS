@@ -720,8 +720,9 @@ class PH7Tpl extends Kernel
             $sOutput = ob_get_contents();
             ob_end_clean();
 
-            if ($this->bHtmlCompressor)
+            if ($this->bHtmlCompressor) {
                 $sOutput = (new Compress)->parseHtml($sOutput);
+            }
 
             if (!$this->file->putFile($this->sCacheDirFile, $sOutput)) {
                 throw new TplException('Unable to write to cache file: \'' . $this->sCacheDirFile . '\'');
