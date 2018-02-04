@@ -245,18 +245,16 @@ class Various
     }
 
     /**
-     * Set an Error Message with an Exception then exit() function.
+     * Throw an exception with an informative message.
      *
      * @param string $sTable The table value.
-     *
-     * @return void
+
      *
      * @throws PH7InvalidArgumentException Explanatory message.
      */
     public static function launchErr($sTable)
     {
         throw new PH7InvalidArgumentException('Bad data table: "' . $sTable . '"!');
-        exit(1);
     }
 
     /**
