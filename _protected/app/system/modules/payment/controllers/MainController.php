@@ -130,7 +130,7 @@ class MainController extends Controller
                     $sAmount = $this->httpRequest->post('amount');
 
                     try {
-                        \Stripe\Charge::create(
+                        $oCharge = \Stripe\Charge::create(
                             [
                                 'amount' => Stripe::getAmount($sAmount),
                                 'currency' => $this->config->values['module.setting']['currency'],
@@ -139,23 +139,23 @@ class MainController extends Controller
                             ]
                         );
 
-                        $iItemNumber = $this->httpRequest->post('item_number');
-                        if ($this->oUserModel->updateMembership(
-                            $iItemNumber,
-                            $this->iProfileId,
-                            $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
-                        ) {
-                            $this->bStatus = true; // Status is OK
-                            $this->updateUserGroupId($iItemNumber);
-                            $this->notification(Stripe::class, $iItemNumber);
+                        if ($oCharge->paid === true) {
+                            $iItemNumber = $this->httpRequest->post('item_number');
+                            if ($this->oUserModel->updateMembership(
+                                $iItemNumber,
+                                $this->iProfileId,
+                                $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+                            )) {
+                                $this->bStatus = true; // Status is OK
+                                $this->updateUserGroupId($iItemNumber);
+                                $this->notification(Stripe::class, $iItemNumber);
+                            }
                         }
-                    }
-                    catch (\Stripe\Error\Card $oE) {
+                    } catch (\Stripe\Error\Card $oE) {
                         // The card has been declined
                         // Do nothing here as "$this->bStatus" is by default FALSE and so it will display "Error occurred" msg later
-                    }
-                    catch (\Stripe\Error\Base $oE) {
-                        $this->design->setMessage( $this->str->escape($oE->getMessage(), true) );
+                    } catch (\Stripe\Error\Base $oE) {
+                        $this->design->setMessage($this->str->escape($oE->getMessage(), true));
                     }
                 }
             } break;
