@@ -67,7 +67,9 @@ class MainController extends Controller
 
     public function index()
     {
-        Header::redirect(Uri::get('mail', 'main', 'inbox'));
+        Header::redirect(
+            Uri::get('mail', 'main', 'inbox')
+        );
     }
 
     public function compose()
