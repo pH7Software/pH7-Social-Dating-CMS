@@ -52,32 +52,65 @@ class PH7Tpl extends Kernel
     const XML_SITEMAP_COMPILE_PAGE = 'mainlayout.xsl.cpl.php';
     const COMPILE_FILE_EXT = '.cpl.php';
 
-    /**
-     * The attributes must always be private (or protected), so we do not indicate convention ($_var)
-     */
-    private
-    // Objects
-    $designModel,
+    /** @var DesignModel */
+    private $designModel;
 
-    $sTplFile,
-    $sTemplateDir,
-    $sCompileDir,
-    $sCompileDir2,
-    $sCacheDir,
-    $sCacheDir2,
-    $sCode,
-    $sTemplateDirFile,
-    $sCompileDirFile,
-    $sCacheDirFile,
-    $bLicense,
-    $sTplExt = '.tpl', // Default extension
-    $bCaching = false,
-    $bHtmlCompressor,
-    $bPhpCompressor,
-    $mCacheExpire, // @var mixed (integer or null value) $mCacheExpire
-    $bXmlTags = false, // Enable (true) or Disables (false) XML Tags for the Template Engine
-    $_aVars = array(),
-    $_oVars;
+    /** @var string */
+    private $sTplFile;
+
+    /** @var string */
+    private $sTemplateDir;
+
+    /** @var string */
+    private $sCompileDir;
+
+    /** @var string */
+    private $sCompileDir2;
+
+    /** @var string */
+    private $sCacheDir;
+
+    /** @var string */
+    private $sCacheDir2;
+
+    /** @var string */
+    private $sCode;
+
+    /** @var string */
+    private $sTemplateDirFile;
+
+    /** @var string */
+    private $sCompileDirFile;
+
+    /** @var string */
+    private $sCacheDirFile;
+
+    /** @var bool */
+    private $bLicense;
+
+    /** @var string */
+    private $sTplExt = '.tpl', // Default extension
+
+    /** @var bool */
+    private $bCaching = false;
+
+    /** @var bool */
+    private $bHtmlCompressor;
+
+    /** @var bool */
+    private $bPhpCompressor;
+
+    /** @var mixed */
+    private $mCacheExpire; // @var mixed (integer or null value) $mCacheExpire
+
+    /** @var bool */
+    private $bXmlTags = false; // Enable (true) or Disables (false) XML Tags for the Template Engine
+
+    /** @var array */
+    private $_aVars = array();
+
+    /** @var PH7Tpl */
+    private $_oVars;
 
     // Hack that keeps the $config variable in the template
     protected $config;
