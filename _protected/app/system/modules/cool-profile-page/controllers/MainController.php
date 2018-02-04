@@ -356,11 +356,12 @@ class MainController extends Controller
     }
 
     /**
+     * Add the General and Tabs Menu stylesheets.
+     *
      * @return void
      */
     private function addCssFiles()
     {
-        // Add the General and Tabs Menu stylesheets
         $this->design->addCss(
             PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
             'style.css'
@@ -368,12 +369,13 @@ class MainController extends Controller
     }
 
     /**
+     * Add JS file for the Ajax Friend Adder feature.
+     *
      * @return void
      */
     private function addAdditionalAssetFiles()
     {
         if (SysMod::isEnabled('friend')) {
-            // Add JS file for the Ajax Friend Adder feature
             $this->design->addJs(
                 PH7_LAYOUT . PH7_SYS . PH7_MOD . 'friend' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
                 'friend.js'
