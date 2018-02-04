@@ -13,7 +13,7 @@ namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
 
-class VisitorModel
+class VisitorCoreModel
 {
     /** @var int */
     private $iProfileId;
@@ -28,8 +28,8 @@ class VisitorModel
      * Assignment of attributes.
      *
      * @param int $iProfileId Profile ID.
-     * @param int $iVisitorId ID User ID (visitor). Default NULL (this attribute is null only for the get method).
-     * @param string $sDateVisit The date of last visit. Default NULL (this attribute is null only for the get method).
+     * @param int|null $iVisitorId ID User ID (visitor). Default NULL (this attribute is null only for the get method).
+     * @param string|null $sDateVisit The date of last visit. Default NULL (this attribute is null only for the get method).
      */
     public function __construct($iProfileId, $iVisitorId = null, $sDateVisit = null)
     {

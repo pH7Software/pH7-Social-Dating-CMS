@@ -240,7 +240,7 @@ class ProfileController extends Controller
      */
     private function updateVisitorViews()
     {
-        $oVisitorModel = new VisitorModel(
+        $oVisitorModel = new VisitorCoreModel(
             $this->iProfileId,
             $this->iVisitorId,
             $this->dateTime->get()->dateTime('Y-m-d H:i:s')
