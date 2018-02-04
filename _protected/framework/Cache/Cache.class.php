@@ -36,13 +36,13 @@ class Cache
     /** @var string */
     private $sId;
 
-    /** @var integer */
+    /** @var int */
     private $iTtl;
 
     /** @var string */
     private $sPrefix = 'pH7_';
 
-    /** @var boolean */
+    /** @var bool */
     private $bEnabled = true;
 
     public function __construct()
@@ -54,7 +54,7 @@ class Cache
     /**
      * Enabled/Disabled the cache.
      *
-     * @param boolean $bIsEnable
+     * @param bool $bIsEnable
      *
      * @return self
      */
@@ -106,7 +106,7 @@ class Cache
      *
      * @param string $sGroup The Group Cache (This creates a folder).
      * @param string $sId (The ID for the file).
-     * @param integer $iTtl Cache lifetime in seconds. If NULL, the file never expires.
+     * @param int $iTtl Cache lifetime in seconds. If NULL, the file never expires.
      *
      * @return self
      */
@@ -127,7 +127,7 @@ class Cache
     /**
      * Stop the cache.
      *
-     * @param boolean $bPrint TRUE = Display data with ECHO. FALSE = Return data. Default TRUE.
+     * @param bool $bPrint TRUE = Display data with ECHO. FALSE = Return data.
      *
      * @return string|null
      */
@@ -293,7 +293,7 @@ File ID: ' . $this->sId . '
     /**
      * Reads the Cache.
      *
-     * @param boolean $bPrint
+     * @param bool $bPrint
      *
      * @return bool|string Returns TRUE or a string if successful, FALSE otherwise.
      */
@@ -321,7 +321,7 @@ File ID: ' . $this->sId . '
      *
      * @param string $sData
      *
-     * @return boolean
+     * @return bool
      *
      * @throws Exception If the file cannot be written.
      * @throws \PH7\Framework\File\Exception If the file cannot be created.
