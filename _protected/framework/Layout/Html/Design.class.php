@@ -251,7 +251,7 @@ class Design
             $this->setFlashMsg($sMsg, $sType);
         }
 
-        $sUrl = ($sUrl !== null) ? $sUrl : $this->oHttpRequest->currentUrl();
+        $sUrl = $sUrl !== null ? $sUrl : $this->oHttpRequest->currentUrl();
 
         header('Refresh: ' . $iTime . '; URL=' . $this->oHttpRequest->pH7Url($sUrl));
     }
@@ -325,7 +325,7 @@ class Design
      */
     public function popupLinkConfirm($sLabel, $sMod, $sCtrl, $sAct, $mId, $sClass = null)
     {
-        $sClass = ($sClass !== null) ? ' class="' . $sClass . '" ' : ' ';
+        $sClass = $sClass !== null ? ' class="' . $sClass . '" ' : ' ';
 
         $aHttpParams = [
             'label' => Url::encode($sLabel),
@@ -744,8 +744,8 @@ class Design
         ];
 
         $bIsLogged = UserCore::auth();
-        $sLikeLink = ($bIsLogged) ? '#' : Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false);
-        $sLikeId = ($bIsLogged) ? ' id="like"' : '';
+        $sLikeLink = $bIsLogged ? '#' : Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false);
+        $sLikeId = $bIsLogged ? ' id="like"' : '';
 
         $sUrlKey = empty($sForceUrlKey) ? $this->oHttpRequest->currentUrl() : $sForceUrlKey;
         echo '<a rel="nofollow" href="', $sLikeLink, '" data-key="', $sUrlKey, '" title="', t('Like %0%', $sFirstName), '" class="like smooth-pink"', $sLikeId, '>', t('Like %0%', $sFirstName), '</a>';
@@ -942,7 +942,7 @@ class Design
             $sSiteName = Registry::getInstance()->site_name;
 
             // Check if the website's name exists, otherwise we displayed the software's name
-            $sName = (!empty($sSiteName)) ? $sSiteName : Kernel::SOFTWARE_NAME;
+            $sName = !empty($sSiteName) ? $sSiteName : Kernel::SOFTWARE_NAME;
 
             echo '<header>
             <div role="banner" id="logo"><h1><a href="', PH7_URL_ROOT, '" title="', $sName, ' — ', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_COMPANY, '">', $sName, '</a></h1></div>
@@ -982,7 +982,7 @@ class Design
      */
     public function externalCssFile($sFile, $sCssMedia = null)
     {
-        $sCssMedia = ($sCssMedia !== null) ? ' media="' . $sCssMedia . '"' : '';
+        $sCssMedia = $sCssMedia !== null ? ' media="' . $sCssMedia . '"' : '';
         echo '<link rel="stylesheet" href="', $sFile, '"', $sCssMedia, ' />';
     }
 
