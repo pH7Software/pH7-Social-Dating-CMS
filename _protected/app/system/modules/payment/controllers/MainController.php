@@ -272,7 +272,7 @@ class MainController extends Controller
         if ($this->isMembershipExpirable($oInfo)) {
             $oDate = new \DateTime($oInfo->membershipDate);
             $oDate->add(new \DateInterval(sprintf('P%dD', $oInfo->expirationDays)));
-            $this->view->expirationDate = $oDate->format($this->config->values['language.application']['date_time_format']);
+            $this->view->expirationDate = $oDate->format($this->config->values['language.application']['textual_date_format']);
             unset($oDate);
         } else {
             $this->view->expirationDate = t('Never');
