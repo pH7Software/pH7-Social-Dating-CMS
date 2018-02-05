@@ -139,6 +139,7 @@ class MainController extends Controller
                             ]
                         );
 
+                        // Make sure the item has been paid
                         if ($oCharge->paid === true) {
                             $iItemNumber = $this->httpRequest->post('item_number');
                             if ($this->oUserModel->updateMembership(
