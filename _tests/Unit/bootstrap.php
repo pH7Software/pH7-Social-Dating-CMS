@@ -6,6 +6,7 @@
  * @package          PH7 / Test / Unit
  */
 
+use PH7\App\Includes\Classes\Loader\Autoloader as AppLoader;
 use PH7\Framework\Loader\Autoloader as FrameworkLoader;
 
 define('PH7', 1);
@@ -55,9 +56,13 @@ define('PH7_PATH_CACHE', '');
 // Max Values constants
 define('PH7_MAX_URL_LENGTH', 120);
 
+// Loading Framework Classes
 require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
-
 FrameworkLoader::getInstance()->init();
+
+// Loading classes from ~/protected/app/includes/classes/*
+require PH7_PATH_APP . 'includes/classes/Loader/Autoloader.php';
+AppLoader::getInstance()->init();
 
 if (!function_exists('escape')) {
     new \PH7\Framework\Str\Str; // Load class to get escape() function

@@ -23,10 +23,12 @@ class LinkCoreForm
      * @param array $aParams The parameters
      *
      * @return void
+     *
+     * @throws Framework\File\Exception
      */
     public static function display($sLabel, $sModule, $sController, $sAction, array $aParams)
     {
-        $sUrl = (!isset($sModule, $sController, $sAction)) ? (new Http)->currentUrl() : Uri::get($sModule, $sController, $sAction);
+        $sUrl = self::getFormUrl($sModule, $sController, $sAction);
 
         $oForm = new \PFBC\Form('form_link');
         $oForm->configure(array('action' => $sUrl, 'class' => 'form_link'));
@@ -39,5 +41,23 @@ class LinkCoreForm
 
         $oForm->addElement(new \PFBC\Element\Submit($sLabel));
         $oForm->render();
+    }
+
+    /**
+     * @param string $sModule
+     * @param string $sController
+     * @param string $sAction
+     *
+     * @return string
+     *
+     * @throws Framework\File\Exception
+     */
+    private static function getFormUrl($sModule, $sController, $sAction)
+    {
+        if (!isset($sModule, $sController, $sAction)) {
+            return (new Http)->currentUrl();
+        }
+
+        return Uri::get($sModule, $sController, $sAction);
     }
 }

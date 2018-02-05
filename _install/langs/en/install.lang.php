@@ -102,6 +102,8 @@ $LANG = array(
         <p>Don\'t forget to show off YOUR new Social Dating Website to your friends, colleagues and Facebook\'s mates (and even to your haters... why not! :-) ).</p>
         <p><strong>Here is a <a href="' . get_tweet_post(Controller::SOFTWARE_TWITTER, Controller::SOFTWARE_GIT_REPO) . '">pre-written Tweet</a> (which you can edit, of course)</strong>.</p>
         <p>&nbsp;</p>
+        <p><strong>Will you help me to improve the software..? <a href="' . Controller::PATREON_URL . '">Make a donation here</a></strong></p>
+        <p>&nbsp;</p>
         <p>P.S. For any bug reports, suggestions, partnership, translation, contribution or other,
         please visit the <a href="' . Controller::SOFTWARE_WEBSITE . '">official website</a>.</p>
         <p>---</p>

@@ -113,7 +113,7 @@ abstract class Controller extends Core
          * Output our template and encoding.
          */
 
-        $sFile = (!empty($sFile)) ? $sFile : $this->view->getMainPage();
+        $sFile = !empty($sFile) ? $sFile : $this->view->getMainPage();
 
         // header('Content-type: text/html; charset=' . PH7_ENCODING);
         $this->view->display($sFile, PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS);

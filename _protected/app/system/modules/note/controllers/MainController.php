@@ -28,6 +28,9 @@ class MainController extends Controller
     const ITEMS_MENU_CATEGORIES = 10;
     const MAX_CATEGORIES = 300;
 
+    const MAX_CATEGORY_LENGTH_SHOWN = 60;
+    const MAX_AUTHOR_LENGTH_SHOWN = 60;
+
     /** @var NoteModel */
     protected $oNoteModel;
 
@@ -112,7 +115,7 @@ class MainController extends Controller
                 $this->view->assigns($aVars);
 
                 // Set Notes Post Views Statistics
-                Statistic::setView($oPost->noteId, 'Notes');
+                Statistic::setView($oPost->noteId, DbTableName::NOTE);
             } else {
                 $this->sTitle = t('No Note Found.');
                 $this->notFound();
@@ -156,7 +159,7 @@ class MainController extends Controller
 
         $this->setMenuVars();
 
-        $sCategoryTxt = substr($sCategory, 0, 60);
+        $sCategoryTxt = substr($sCategory, 0, self::MAX_CATEGORY_LENGTH_SHOWN);
         if (empty($oSearch)) {
             $this->sTitle = t('Not "%0%" category found!', $sCategoryTxt);
             $this->notFound();
@@ -206,7 +209,7 @@ class MainController extends Controller
 
         $this->setMenuVars();
 
-        $sAuthorTxt = substr($sAuthor, 0, 60);
+        $sAuthorTxt = substr($sAuthor, 0, self::MAX_AUTHOR_LENGTH_SHOWN);
         if (empty($oSearch)) {
             $this->sTitle = t('None "%0%" author was found!', $sAuthorTxt);
             $this->notFound(false); // For the Ajax profile blocks, we can not put HTTP error code 404, so the attribute is "false"
@@ -295,7 +298,7 @@ class MainController extends Controller
         $iId = $this->httpRequest->post('id');
         $iProfileId = $this->session->get('member_id');
 
-        CommentCoreModel::deleteRecipient($iId, 'Note');
+        CommentCoreModel::deleteRecipient($iId, 'note');
         $this->oNoteModel->deleteCategory($iId);
 
         $this->deleteThumbFile($iId, $iProfileId);
@@ -371,7 +374,7 @@ class MainController extends Controller
     protected function notFound($b404Status = true)
     {
         if ($b404Status) {
-            Http::setHeadersByCode(404);
+            Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
         }
 
         $this->view->page_title = $this->view->h2_title = $this->sTitle;

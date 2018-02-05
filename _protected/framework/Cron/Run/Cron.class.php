@@ -18,6 +18,11 @@ use PH7\Framework\Url\Uri;
 
 abstract class Cron extends Core
 {
+    const URI_INDEX_FILENAME = 3;
+    const URI_INDEX_DELAY = 2;
+    const HOUR_IN_SECS = 3600;
+    const DELAY_FILE_EXT = '.txt';
+
     /** @var int */
     protected $iTime;
 
@@ -37,7 +42,7 @@ abstract class Cron extends Core
      */
     public function checkDelay()
     {
-        $sFullPath = PH7_PATH_SYS . 'core/assets/cron/_delay/' . $this->getFileName() . '.txt';
+        $sFullPath = PH7_PATH_SYS . 'core/assets/cron/_delay/' . $this->getFileName() . self::DELAY_FILE_EXT;
         $bStatus = true; // Default status is TRUE
 
         if ($this->file->existFile($sFullPath)) {
@@ -65,7 +70,7 @@ abstract class Cron extends Core
      */
     protected function getFileName()
     {
-        return strtolower($this->oUri->fragment(3));
+        return strtolower($this->oUri->fragment(self::URI_INDEX_FILENAME));
     }
 
     /**
@@ -78,7 +83,7 @@ abstract class Cron extends Core
         /**
          * @internal We cast the value into integer type to get only the integer data (without the 'h' character).
          */
-        return (int)$this->oUri->fragment(2);
+        return (int)$this->oUri->fragment(self::URI_INDEX_DELAY);
     }
 
     /**
@@ -88,6 +93,6 @@ abstract class Cron extends Core
      */
     private function convertHoursToSeconds($iHours)
     {
-        return $iHours * 3600;
+        return $iHours * self::HOUR_IN_SECS;
     }
 }

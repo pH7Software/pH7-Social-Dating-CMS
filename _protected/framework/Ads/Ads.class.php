@@ -12,6 +12,7 @@ namespace PH7\Framework\Ads;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\DbTableName;
 use PH7\Framework\Analytics\Statistic;
 use PH7\Framework\Mvc\Model\Ads as ModelAds;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
@@ -32,7 +33,7 @@ class Ads
     public static function output(stdClass $oData)
     {
         // Stat Advertisement Shows
-        Statistic::setView($oData->adsId, 'Ads');
+        Statistic::setView($oData->adsId, DbTableName::AD);
 
         // Advertisement Clicks
         $oHttpRequest = new HttpRequest;

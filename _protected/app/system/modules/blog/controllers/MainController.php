@@ -101,7 +101,7 @@ class MainController extends Controller
                 $this->view->assigns($aVars);
 
                 // Set Blogs Post Views Statistics
-                Statistic::setView($oPost->blogId, 'Blogs');
+                Statistic::setView($oPost->blogId, DbTableName::BLOG);
             } else {
                 $this->sTitle = t('No Blog Found');
                 $this->notFound();
@@ -231,7 +231,7 @@ class MainController extends Controller
     protected function notFound($b404Status = true)
     {
         if ($b404Status) {
-            Http::setHeadersByCode(404);
+            Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
         }
 
         $this->view->page_title = $this->view->h2_title = $this->sTitle;

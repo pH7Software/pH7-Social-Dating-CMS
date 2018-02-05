@@ -222,7 +222,6 @@ namespace PH7\Framework\Translate {
 }
 
 namespace {
-
     use PH7\Framework\Parse\SysVar;
     use PH7\Framework\Registry\Registry;
 

@@ -22,6 +22,16 @@ use PH7\Framework\Util\Various;
 
 class PictureFormProcess extends Form
 {
+    const MAX_IMAGE_WIDTH = 2500;
+    const MAX_IMAGE_HEIGHT = 2500;
+
+    const PICTURE2_SIZE = 400;
+    const PICTURE3_SIZE = 600;
+    const PICTURE4_SIZE = 800;
+    const PICTURE5_SIZE = 1000;
+    const PICTURE6_SIZE = 1200;
+
+    /** @var int */
     private $iApproved;
 
     public function __construct()
@@ -52,7 +62,12 @@ class PictureFormProcess extends Form
          */
         $aPhotos = $_FILES['photos']['tmp_name'];
         for ($i = 0, $iNumPhotos = count($aPhotos); $i < $iNumPhotos; $i++) {
-            $oPicture1 = new Image($aPhotos[$i], 2500, 2500);
+            $oPicture1 = new Image(
+                $aPhotos[$i],
+                self::MAX_IMAGE_WIDTH,
+                self::MAX_IMAGE_HEIGHT
+            );
+
             if (!$oPicture1->validate()) {
                 \PFBC\Form::setError('form_picture', Form::wrongImgFileTypeMsg());
                 return; // Stop execution of the method.
@@ -67,11 +82,11 @@ class PictureFormProcess extends Form
             $oPicture5 = clone $oPicture1;
             $oPicture6 = clone $oPicture1;
 
-            $oPicture2->square(400);
-            $oPicture3->square(600);
-            $oPicture4->square(800);
-            $oPicture5->square(1000);
-            $oPicture6->square(1200);
+            $oPicture2->square(self::PICTURE2_SIZE);
+            $oPicture3->square(self::PICTURE3_SIZE);
+            $oPicture4->square(self::PICTURE4_SIZE);
+            $oPicture5->square(self::PICTURE5_SIZE);
+            $oPicture6->square(self::PICTURE6_SIZE);
 
             /* Set watermark text on images */
             $sWatermarkText = DbConfig::getSetting('watermarkTextImage');
@@ -88,11 +103,11 @@ class PictureFormProcess extends Form
             $sFileName = Various::genRnd($oPicture1->getFileName(), 20);
 
             $sFile1 = $sFileName . '-original.' . $oPicture1->getExt(); // Original
-            $sFile2 = $sFileName . '-400.' . $oPicture2->getExt();
-            $sFile3 = $sFileName . '-600.' . $oPicture3->getExt();
-            $sFile4 = $sFileName . '-800.' . $oPicture4->getExt();
-            $sFile5 = $sFileName . '-1000.' . $oPicture5->getExt();
-            $sFile6 = $sFileName . '-1200.' . $oPicture6->getExt();
+            $sFile2 = $sFileName . '-' . self::PICTURE2_SIZE . PH7_DOT . $oPicture2->getExt();
+            $sFile3 = $sFileName . '-' . self::PICTURE3_SIZE . PH7_DOT . $oPicture3->getExt();
+            $sFile4 = $sFileName . '-' . self::PICTURE4_SIZE . PH7_DOT . $oPicture4->getExt();
+            $sFile5 = $sFileName . '-' . self::PICTURE5_SIZE . PH7_DOT . $oPicture5->getExt();
+            $sFile6 = $sFileName . '-' . self::PICTURE6_SIZE . PH7_DOT . $oPicture6->getExt();
 
             $oPicture1->save($sPath . $sFile1);
             $oPicture2->save($sPath . $sFile2);
@@ -165,6 +180,7 @@ class PictureFormProcess extends Form
             return $this->httpRequest->post('title');
         }
 
+        // Otherwise get the name from the file name
         return $this->str->upperFirst(
             str_replace(
                 ['-', '_'],

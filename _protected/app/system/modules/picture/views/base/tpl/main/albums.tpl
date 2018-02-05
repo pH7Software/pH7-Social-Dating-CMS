@@ -10,7 +10,7 @@
                     </a>
                 </p>
                 <p>{% nl2br(Framework\Security\Ban\Ban::filterWord($album->description)) %}</p>
-                <p class="italic">{lang 'Views:'} {% Framework\Mvc\Model\Statistic::getView($album->albumId,'AlbumsPictures') %}</p>
+                <p class="italic">{lang 'Views:'} {% Framework\Mvc\Model\Statistic::getView($album->albumId,DbTableName::ALBUM_PICTURE) %}</p>
 
                 {if $is_user_auth AND $member_id == $album->profileId}
                     <div class="small">
@@ -19,8 +19,9 @@
                     </div>
                 {/if}
                 <p>
-                    {{ RatingDesignCore::voting($album->albumId,'AlbumsPictures') }}
-                    {{ $design->like($album->username,$album->firstName,$album->sex,$absolute_url) }} | {{ $design->report($album->profileId, $album->username, $album->firstName, $album->sex) }}
+                    {{ RatingDesignCore::voting($album->albumId,DbTableName::ALBUM_PICTURE) }}
+                    {{ $design->like($album->username,$album->firstName,$album->sex,$absolute_url) }} |
+                    {{ $design->report($album->profileId, $album->username, $album->firstName, $album->sex) }}
                 </p>
             </div>
         {/each}
@@ -30,6 +31,8 @@
     {/if}
 
     <p class="bottom">
-        <a class="btn btn-default btn-md" href="{{ $design->url('picture', 'main', 'addalbum') }}">{lang 'Add a new album'}</a>
+        <a class="btn btn-default btn-md" href="{{ $design->url('picture', 'main', 'addalbum') }}">
+            {lang 'Add a new album'}
+        </a>
     </p>
 </div>

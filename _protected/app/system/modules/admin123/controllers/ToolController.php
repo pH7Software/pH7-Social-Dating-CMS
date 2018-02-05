@@ -14,6 +14,7 @@ namespace PH7;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Layout\Gzip\Gzip;
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Layout\Html\Security as HtmlSecurity;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Mvc\Model\Engine\Db;
@@ -122,7 +123,7 @@ class ToolController extends Controller
 
         if ($this->httpRequest->postExists('backup')) {
             if (!$oSecurityToken->check('backup')) {
-                $this->design->setFlashMsg(Form::errorTokenMsg(), 'error');
+                $this->design->setFlashMsg(Form::errorTokenMsg(), Design::ERROR_TYPE);
             } else {
                 // Clean the site name to avoid bug with the backup path
                 $sSiteName = str_replace([' ', '/', '\\'], '_', $this->registry->site_name);
@@ -154,14 +155,14 @@ class ToolController extends Controller
                         break;
 
                     default:
-                        $this->design->setFlashMsg(t('Please select a field.'), 'error');
+                        $this->design->setFlashMsg(t('Please select a field.'), Design::ERROR_TYPE);
                 }
             }
         }
 
         if ($this->httpRequest->postExists('restore_dump')) {
             if (!$oSecurityToken->check('backup')) {
-                $this->design->setFlashMsg(Form::errorTokenMsg(), 'error');
+                $this->design->setFlashMsg(Form::errorTokenMsg(), Design::ERROR_TYPE);
             } else {
                 $sDumpFile = $this->httpRequest->post('dump_file');
 
@@ -178,14 +179,14 @@ class ToolController extends Controller
                 }
 
                 $sMsg = ($mStatus === true) ? t('Data successfully restored from server!') : $mStatus;
-                $sMsgType = ($mStatus === true) ? 'success' : 'error';
+                $sMsgType = ($mStatus === true) ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
                 $this->design->setFlashMsg($sMsg, $sMsgType);
             }
         }
 
         if ($this->httpRequest->postExists('remove_dump')) {
             if (!$oSecurityToken->check('backup')) {
-                $this->design->setFlashMsg(Form::errorTokenMsg(), 'error');
+                $this->design->setFlashMsg(Form::errorTokenMsg(), Design::ERROR_TYPE);
             } else {
                 $sDumpFile = $this->httpRequest->post('dump_file');
 
@@ -193,7 +194,7 @@ class ToolController extends Controller
                     $this->file->deleteFile(PH7_PATH_BACKUP_SQL . $sDumpFile);
                     $this->design->setFlashMsg(t('Dump file successfully deleted!'));
                 } else {
-                    $this->design->setFlashMsg(t('Please select a dump file.'), 'error');
+                    $this->design->setFlashMsg(t('Please select a dump file.'), Design::ERROR_TYPE);
                 }
             }
         }
@@ -221,7 +222,7 @@ class ToolController extends Controller
             }
 
             $sMsg = ($mStatus === true) ? t('Data successfully restored from desktop!') : $mStatus;
-            $sMsgType = ($mStatus === true) ? 'success' : 'error';
+            $sMsgType = ($mStatus === true) ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
             $this->design->setFlashMsg($sMsg, $sMsgType);
         }
 

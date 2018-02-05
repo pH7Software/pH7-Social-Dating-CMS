@@ -19,6 +19,7 @@ class Note extends WriteCore
 {
     const MAX_CATEGORY_ALLOWED = 3;
     const THUMBNAIL_IMAGE_SIZE = 100;
+    const FILENAME_LENGTH = 20;
 
     /**
      * Sets the Note Thumbnail.
@@ -46,7 +47,7 @@ class Note extends WriteCore
                 $sPathName = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'note/' . PH7_IMG . $oPost->username . PH7_SH;
                 $oFile->deleteFile($sPathName); // It erases the old thumbnail
                 $oFile->createDir($sPathName);
-                $sFileName = Various::genRnd($oImage->getFileName(), 20) . PH7_DOT . $oImage->getExt();
+                $sFileName = Various::genRnd($oImage->getFileName(), self::FILENAME_LENGTH) . PH7_DOT . $oImage->getExt();
                 $oImage->square(static::THUMBNAIL_IMAGE_SIZE);
                 $oImage->save($sPathName . $sFileName);
                 $oNoteModel->updatePost('thumb', $sFileName, $oPost->noteId, $oPost->profileId);

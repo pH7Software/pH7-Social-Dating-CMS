@@ -32,7 +32,7 @@ class StatisticCoreModel extends StatisticModel
         $oCache = (new Cache)->start(self::CACHE_GROUP, 'dateofcreation', self::CACHE_LIFETIME);
 
         if (!$sSinceDate = $oCache->get()) {
-            $sSinceDate = Record::getInstance()->getOne('Admins', 'profileId', 1, 'joinDate')->joinDate;
+            $sSinceDate = Record::getInstance()->getOne(DbTableName::ADMIN, 'profileId', 1, 'joinDate')->joinDate;
             $oCache->put($sSinceDate);
         }
         unset($oCache);
@@ -50,7 +50,7 @@ class StatisticCoreModel extends StatisticModel
      */
     public function totalMembers($iDay = 0, $sGender = 'all')
     {
-        return (new UserCoreModel)->total('Members', $iDay, $sGender);
+        return (new UserCoreModel)->total(DbTableName::MEMBER, $iDay, $sGender);
     }
 
     /**
@@ -63,26 +63,26 @@ class StatisticCoreModel extends StatisticModel
      */
     public function totalAffiliates($iDay = 0, $sGender = 'all')
     {
-        return (new UserCoreModel)->total('Affiliates', $iDay, $sGender);
+        return (new UserCoreModel)->total(DbTableName::AFFILIATE, $iDay, $sGender);
     }
 
     /**
      * Total Logins.
      *
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default DbTableName::MEMBER
      * @param int $iDay Default '0'
      * @param string $sGender Values ​​available 'all', 'male', 'female'. 'couple' is only available to Members. Default 'all'
      *
      * @return int
      */
-    public function totalLogins($sTable = 'Members', $iDay = 0, $sGender = 'all')
+    public function totalLogins($sTable = DbTableName::MEMBER, $iDay = 0, $sGender = 'all')
     {
         Various::checkModelTable($sTable);
 
         $iDay = (int)$iDay;
 
         $bIsDay = ($iDay > 0);
-        $bIsGender = ($sTable === 'Members' ? ($sGender === 'male' || $sGender === 'female' || $sGender === 'couple') : ($sGender === 'male' || $sGender === 'female'));
+        $bIsGender = ($sTable === DbTableName::MEMBER ? ($sGender === 'male' || $sGender === 'female' || $sGender === 'couple') : ($sGender === 'male' || $sGender === 'female'));
 
         $sSqlDay = $bIsDay ? ' AND (lastActivity + INTERVAL :day DAY) > NOW()' : '';
         $sSqlGender = $bIsGender ? ' AND sex = :gender' : '';
@@ -105,7 +105,7 @@ class StatisticCoreModel extends StatisticModel
      */
     public function totalAdmins($iDay = 0, $sGender = 'all')
     {
-        return (new UserCoreModel)->total('Admins', $iDay, $sGender);
+        return (new UserCoreModel)->total(DbTableName::ADMIN, $iDay, $sGender);
     }
 
     public function totalBlogs($iDay = 0)
@@ -123,7 +123,7 @@ class StatisticCoreModel extends StatisticModel
         $iDay = (int)$iDay;
         $sSqlDay = ($iDay > 0) ? ' WHERE (sendDate + INTERVAL ' . $iDay . ' DAY) > NOW()' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(messageId) AS totalMails FROM' . Db::prefix('Messages') . $sSqlDay);
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(messageId) AS totalMails FROM' . Db::prefix(DbTableName::MESSAGE) . $sSqlDay);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
@@ -132,32 +132,32 @@ class StatisticCoreModel extends StatisticModel
 
     public function totalProfileComments($iDay = 0)
     {
-        return $this->totalComments('Profile', $iDay);
+        return $this->totalComments('profile', $iDay);
     }
 
     public function totalPictureComments($iDay = 0)
     {
-        return $this->totalComments('Picture', $iDay);
+        return $this->totalComments('picture', $iDay);
     }
 
     public function totalVideoComments($iDay = 0)
     {
-        return $this->totalComments('Video', $iDay);
+        return $this->totalComments('video', $iDay);
     }
 
     public function totalBlogComments($iDay = 0)
     {
-        return $this->totalComments('Blog', $iDay);
+        return $this->totalComments('blog', $iDay);
     }
 
     public function totalNoteComments($iDay = 0)
     {
-        return $this->totalComments('Note', $iDay);
+        return $this->totalComments('note', $iDay);
     }
 
     public function totalGameComments($iDay = 0)
     {
-        return $this->totalComments('Game', $iDay);
+        return $this->totalComments('game', $iDay);
     }
 
     /**
@@ -173,7 +173,7 @@ class StatisticCoreModel extends StatisticModel
 
         $sSqlDay = ($iDay > 0) ? ' WHERE (createdDate + INTERVAL ' . $iDay . ' DAY) > NOW()' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(commentId) AS totalComments FROM' . Db::prefix('Comments' . $sTable) . $sSqlDay);
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(commentId) AS totalComments FROM' . Db::prefix('comments_' . $sTable) . $sSqlDay);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
 

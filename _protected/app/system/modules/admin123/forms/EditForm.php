@@ -29,7 +29,7 @@ class EditForm
         // Prohibit other admins to edit the Root Administrator (ID 1)
         $iProfileId = ($oHR->getExists('profile_id') && !AdminCore::isRootProfileId($oHR->get('profile_id', 'int'))) ? $oHR->get('profile_id', 'int') : (new Session)->get('admin_id');
 
-        $oAdmin = (new AdminModel)->readProfile($iProfileId, 'Admins');
+        $oAdmin = (new AdminModel)->readProfile($iProfileId, DbTableName::ADMIN);
 
         $oForm = new \PFBC\Form('form_admin_edit_account');
         $oForm->configure(array('action' => ''));

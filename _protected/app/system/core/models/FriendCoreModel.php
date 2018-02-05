@@ -46,10 +46,10 @@ class FriendCoreModel extends Model
         if (!empty($iFriendId)) {
             $sSqlWhere = 'f.profileId IN
            (SELECT * FROM (SELECT (m.profileId)
-           FROM ' . Db::prefix('MembersFriends') . ' AS m
+           FROM ' . Db::prefix(DbTableName::MEMBER_FRIEND) . ' AS m
            WHERE (m.friendId IN(:profileId, :friendId))
            UNION ALL
-               SELECT (f.friendId) FROM ' . Db::prefix('MembersFriends') . ' AS f
+               SELECT (f.friendId) FROM ' . Db::prefix(DbTableName::MEMBER_FRIEND) . ' AS f
                WHERE (f.profileId IN(:profileId, :friendId))) AS fd
                GROUP BY fd.profileId HAVING COUNT(fd.profileId) > 1)';
         }
@@ -62,7 +62,7 @@ class FriendCoreModel extends Model
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
         $rStmt = Db::getInstance()->prepare(
-            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('MembersFriends') . 'AS f INNER JOIN' . Db::prefix('Members') .
+            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER_FRIEND) . 'AS f INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
             'AS m ON m.profileId = (f.profileId + f.friendId - :profileId) WHERE ' . $sSqlWhere . ' AND ' . $sSqlSearchWhere .
             $sSqlOrder . $sSqlLimit
         );
@@ -113,7 +113,7 @@ class FriendCoreModel extends Model
     public static function getPending($iFriendId)
     {
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(pending) AS pendingFds FROM' .
-            Db::prefix('MembersFriends') . 'WHERE friendId = :friendId AND pending = \'1\'');
+            Db::prefix(DbTableName::MEMBER_FRIEND) . 'WHERE friendId = :friendId AND pending = \'1\'');
 
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -132,7 +132,7 @@ class FriendCoreModel extends Model
      */
     public static function total($iProfileId)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(friendId) AS totalFds FROM' . Db::prefix('MembersFriends') .
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(friendId) AS totalFds FROM' . Db::prefix(DbTableName::MEMBER_FRIEND) .
             'WHERE (profileId = :profileId OR friendId= :profileId)');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);

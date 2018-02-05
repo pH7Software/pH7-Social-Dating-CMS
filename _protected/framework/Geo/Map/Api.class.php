@@ -35,6 +35,7 @@ use PH7\Framework\Config\Config;
 class Api
 {
     const API_KEY_MIN_LENGTH = 10;
+    const MARKER_ICON_PATH = PH7_URL_STATIC . PH7_IMG . 'icon/map-marker.svg';
 
     /** GoogleMap ID for the HTML DIV and identifier for all the methods (to have several gmaps) **/
     protected $googleMapId = 'googlemapapi';
@@ -494,8 +495,8 @@ class Api
      */
     public function addMarkerByCoords($lat, $lng, $title, $html = '', $category = '', $icon = '', $id = '')
     {
-        if ($icon == '') {
-            $icon = 'https://maps.gstatic.com/mapfiles/markers2/marker.png';
+        if ($icon === '') {
+            $icon = self::MARKER_ICON_PATH;
         }
 
         // Save the lat/lon to enable the automatic center/zoom

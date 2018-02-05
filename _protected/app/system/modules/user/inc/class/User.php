@@ -19,6 +19,8 @@ class User extends UserCore
      * Logout function for users.
      *
      * @return void
+     *
+     * @throws Framework\File\Exception
      */
     public function logout()
     {

@@ -71,44 +71,44 @@ class DatabaseCoreCron extends Cron
 
     protected function stat()
     {
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Members') . 'SET views=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Members') . 'SET votes=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Members') . 'SET score=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::MEMBER) . 'SET views=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::MEMBER) . 'SET votes=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::MEMBER) . 'SET score=0');
 
 
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Games') . 'SET views=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Games') . 'SET votes=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Games') . 'SET score=0');
-        //Db::getInstance()->exec('UPDATE' . Db::prefix('Games') . 'SET downloads=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::GAME) . 'SET views=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::GAME) . 'SET votes=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::GAME) . 'SET score=0');
+        //Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::GAME) . 'SET downloads=0');
 
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Pictures') . 'SET views=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Pictures') . 'SET votes=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Pictures') . 'SET score=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::PICTURE) . 'SET views=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::PICTURE) . 'SET votes=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::PICTURE) . 'SET score=0');
 
-        Db::getInstance()->exec('UPDATE' . Db::prefix('AlbumsPictures') . 'SET views=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('AlbumsPictures') . 'SET votes=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('AlbumsPictures') . 'SET score=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::ALBUM_PICTURE) . 'SET views=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::ALBUM_PICTURE) . 'SET votes=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::ALBUM_PICTURE) . 'SET score=0');
 
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Videos') . 'SET views=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Videos') . 'SET votes=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Videos') . 'SET score=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::VIDEO) . 'SET views=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::VIDEO) . 'SET votes=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::VIDEO) . 'SET score=0');
 
-        Db::getInstance()->exec('UPDATE' . Db::prefix('AlbumsVideos') . 'SET views=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('AlbumsVideos') . 'SET votes=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('AlbumsVideos') . 'SET score=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::ALBUM_VIDEO) . 'SET views=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::ALBUM_VIDEO) . 'SET votes=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::ALBUM_VIDEO) . 'SET score=0');
 
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Blogs') . 'SET views=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Blogs') . 'SET votes=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Blogs') . 'SET score=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::BLOG) . 'SET views=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::BLOG) . 'SET votes=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::BLOG) . 'SET score=0');
 
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Notes') . 'SET views=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Notes') . 'SET votes=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Notes') . 'SET score=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::NOTE) . 'SET views=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::NOTE) . 'SET votes=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::NOTE) . 'SET score=0');
 
-        Db::getInstance()->exec('UPDATE' . Db::prefix('ForumsTopics') . 'SET views=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::FORUM_TOPIC) . 'SET views=0');
 
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Ads') . 'SET views=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix('Ads') . 'SET clicks=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::AD) . 'SET views=0');
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::AD) . 'SET clicks=0');
 
         echo t('Restart Statistics... OK!') . '<br />';
     }
@@ -136,7 +136,7 @@ class DatabaseCoreCron extends Cron
 
     protected function removeDeletedMsg()
     {
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Messages') . 'WHERE FIND_IN_SET(\'sender\', toDelete) AND FIND_IN_SET(\'recipient\', toDelete)');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::MESSAGE) . 'WHERE FIND_IN_SET(\'sender\', toDelete) AND FIND_IN_SET(\'recipient\', toDelete)');
 
         if ($rStmt->execute()) {
             echo nt('Deleted %n% temporary message... OK!', 'Deleted %n% temporary messages... OK!', $rStmt->rowCount()) . '<br />';
@@ -145,19 +145,19 @@ class DatabaseCoreCron extends Cron
 
     protected function removeLog()
     {
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('AdminsAttemptsLogin'));
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('MembersAttemptsLogin'));
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('AffiliatesAttemptsLogin'));
+        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::ADMIN_ATTEMPT_LOGIN));
+        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::MEMBER_ATTEMPT_LOGIN));
+        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::AFFILIATE_ATTEMPT_LOGIN));
 
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('AdminsLogLogin'));
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('MembersLogLogin'));
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('AffiliatesLogLogin'));
+        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::ADMIN_LOG_LOGIN));
+        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::MEMBER_LOG_LOGIN));
+        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::AFFILIATE_LOG_LOGIN));
 
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('AdminsLogSess'));
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('MembersLogSess'));
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('AffiliatesLogSess'));
+        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::ADMIN_LOG_SESS));
+        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::MEMBER_LOG_SESS));
+        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::AFFILIATE_LOG_SESS));
 
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('LogError'));
+        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::LOG_ERROR));
 
         echo t('Deleting Log... OK!') . '<br />';
     }
@@ -175,9 +175,9 @@ class DatabaseCoreCron extends Cron
 
         // If the option is enabled for Comments
         if ($iCleanComment > 0) {
-            $aCommentMod = ['Blog', 'Note', 'Picture', 'Video', 'Game', 'Profile'];
-            foreach ($aCommentMod as $sSuffixTable) {
-                if ($iRow = ($this->pruningDb($iCleanComment, 'Comments' . $sSuffixTable, 'updatedDate') > 0)) {
+            $aCommentMods = ['blog', 'note', 'picture', 'video', 'game', 'profile'];
+            foreach ($aCommentMods as $sSuffixTable) {
+                if ($iRow = ($this->pruningDb($iCleanComment, 'comments_' . $sSuffixTable, 'updatedDate') > 0)) {
                     echo t('Deleted %0% %1% comment(s) ... OK!', $iRow, $sSuffixTable) . '<br />';
                 }
             }
@@ -185,14 +185,14 @@ class DatabaseCoreCron extends Cron
 
         // If the option is enabled for Messages
         if ($iCleanMsg > 0) {
-            if ($iRow = ($this->pruningDb($iCleanMsg, 'Messages', 'sendDate') > 0)) {
+            if ($iRow = ($this->pruningDb($iCleanMsg, DbTableName::MESSAGE, 'sendDate') > 0)) {
                 echo nt('Deleted %n% message... OK!', 'Deleted %n% messages... OK!', $iRow) . '<br />';
             }
         }
 
         // If the option is enabled for Messenger
         if ($iCleanMessenger > 0) {
-            if ($iRow = ($this->pruningDb($iCleanMessenger, 'Messenger', 'sent') > 0)) {
+            if ($iRow = ($this->pruningDb($iCleanMessenger, DbTableName::MESSENGER, 'sent') > 0)) {
                 echo nt('Deleted %n% IM message... OK!', 'Deleted %n% IM messages... OK!', $iRow) . '<br />';
             }
         }
@@ -207,8 +207,8 @@ class DatabaseCoreCron extends Cron
      */
     protected function pruningDb($iOlderThanXDay, $sTable, $sDateColumn)
     {
-        if (strstr($sTable, 'Comments') === false &&
-            $sTable !== 'Messages' && $sTable !== 'Messenger') {
+        if (strstr($sTable, 'comments_') === false &&
+            $sTable !== DbTableName::MESSAGE && $sTable !== DbTableName::MESSENGER) {
             DbVarious::launchErr($sTable);
         }
 

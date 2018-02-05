@@ -25,6 +25,7 @@ class Backup
 {
     const SQL_FILE_EXT = 'sql';
     const ARCHIVE_FILE_EXT = 'gz';
+    const GZIP_COMPRESS_LEVEL = 9;
 
     /** @var string */
     private $_sPathName;
@@ -193,7 +194,7 @@ class Backup
      */
     public function download()
     {
-        $this->_download();
+        $this->downloadBackup();
     }
 
     /**
@@ -203,7 +204,7 @@ class Backup
      */
     public function downloadArchive()
     {
-        $this->_download(true);
+        $this->downloadBackup(true);
     }
 
     /**
@@ -213,7 +214,7 @@ class Backup
      *
      * @return void
      */
-    private function _download($bArchive = false)
+    private function downloadBackup($bArchive = false)
     {
         ob_start();
         /***** Set Headers *****/
@@ -222,7 +223,7 @@ class Backup
         header('Content-Disposition: attachment; filename=' . $this->_sPathName);
 
         /***** Show the SQL contents *****/
-        echo($bArchive ? gzencode($this->_sSql, 9, FORCE_GZIP) : $this->_sSql);
+        echo($bArchive ? gzencode($this->_sSql, self::GZIP_COMPRESS_LEVEL, FORCE_GZIP) : $this->_sSql);
 
         /***** Catch output *****/
         $sBuffer = ob_get_contents();

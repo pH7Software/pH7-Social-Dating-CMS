@@ -5,7 +5,7 @@
 
         <p>{% nl2br(Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($video->description))) %}</p>
         <p class="italic">{lang 'Album created on %0%.', $video->createdDate} {if !empty($video->updatedDate)} <br />{lang 'Modified on %0%.', $video->updatedDate} {/if}</p>
-        <p class="italic">{lang 'Views:'} {% Framework\Mvc\Model\Statistic::getView($video->videoId,'Videos') %}</p>
+        <p class="italic">{lang 'Views:'} {% Framework\Mvc\Model\Statistic::getView($video->videoId,DbTableName::VIDEO) %}</p>
 
         {if $is_user_auth AND $member_id == $video->profileId}
             <div class="small">
@@ -15,8 +15,8 @@
         {/if}
 
         {{ ShareUrlCoreForm::display(Framework\Mvc\Router\Uri::get('video','main','video',"$video->username,$video->albumId,$video->title,$video->videoId")) }}
-        {{ RatingDesignCore::voting($video->videoId,'Videos','center') }}
-        {{ CommentDesignCore::link($video->videoId, 'Video') }}
+        {{ RatingDesignCore::voting($video->videoId,DbTableName::VIDEO,'center') }}
+        {{ CommentDesignCore::link($video->videoId, 'video') }}
 
         <p class="center">
             {{ $design->like($video->username, $video->firstName, $video->sex) }} | {{ $design->report($video->profileId, $video->username, $video->firstName, $video->sex) }}

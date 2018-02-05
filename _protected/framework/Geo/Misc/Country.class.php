@@ -14,8 +14,11 @@ defined('PH7') or exit('Restricted access');
 
 class Country
 {
+    const UK_COUNTRY_CODE = 'UK';
+    const GB_COUNTRY_CODE = 'GB';
     /**
-     * pH7Framework uses UK instead of GB in its country details, so replace the wrong one if found.
+     * pH7Framework uses UK instead of GB in its country details,
+     * so we replace the wrong one to the correct one if found.
      *
      * @param string $sCountryCode Country code (e.g. GB, FR, US, ES, ...)
      *
@@ -23,6 +26,6 @@ class Country
      */
     public static function fixCode($sCountryCode)
     {
-        return str_ireplace('GB', 'UK', $sCountryCode);
+        return str_ireplace(self::GB_COUNTRY_CODE, self::UK_COUNTRY_CODE, $sCountryCode);
     }
 }

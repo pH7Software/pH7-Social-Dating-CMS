@@ -37,7 +37,7 @@ class ForumCoreModel extends Model
         $sSqlLimit = $bIsLimit ? ' LIMIT :offset, :limit' : '';
         $sSqlForumId = $bIsForumId ? 'WHERE forumId = :forumId ' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Forums') . $sSqlForumId . 'ORDER BY ' . $sOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::FORUM) . $sSqlForumId . 'ORDER BY ' . $sOrder . $sSqlLimit);
 
         if ($bIsForumId) {
             $rStmt->bindParam(':forumId', $iForumId, \PDO::PARAM_INT);
@@ -81,9 +81,9 @@ class ForumCoreModel extends Model
         $sSqlMessageId = $bIsMessageId ? ' AND msg.messageId = :messageId ' : '';
         $sSqlProfileId = $bIsProfileId ? ' AND msg.profileId = :profileId ' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT f.name, t.title, t.forumId, msg.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Forums') .
-            'AS f INNER JOIN' . Db::prefix('ForumsTopics') . 'AS t ON f.forumId = t.forumId INNER JOIN ' . Db::prefix('ForumsMessages') .
-            'AS msg ON t.topicId = msg.topicId LEFT JOIN' . Db::prefix('Members') . 'AS m ON msg.profileId = m.profileId WHERE msg.topicId = :topicId ' .
+        $rStmt = Db::getInstance()->prepare('SELECT f.name, t.title, t.forumId, msg.*, m.username, m.firstName, m.sex FROM' . Db::prefix(DbTableName::FORUM) .
+            'AS f INNER JOIN' . Db::prefix(DbTableName::FORUM_TOPIC) . 'AS t ON f.forumId = t.forumId INNER JOIN ' . Db::prefix(DbTableName::FORUM_MESSAGE) .
+            'AS msg ON t.topicId = msg.topicId LEFT JOIN' . Db::prefix(DbTableName::MEMBER) . 'AS m ON msg.profileId = m.profileId WHERE msg.topicId = :topicId ' .
             $sSqlMessageId . $sSqlProfileId . ' AND msg.approved = :approved ORDER BY msg.createdDate ' . $sSort . ' LIMIT :offset, :limit');
 
         $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);

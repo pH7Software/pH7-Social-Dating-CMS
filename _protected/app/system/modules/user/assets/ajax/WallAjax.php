@@ -75,7 +75,7 @@ class WallAjax extends Core
         } else {
             foreach ($this->mContents as $oRow) {
                 echo '<p>';
-                $this->oAvatarDesign->get($oRow->username, $oRow->firstName, $oRow->sex, 32, 'Members');
+                $this->oAvatarDesign->get($oRow->username, $oRow->firstName, $oRow->sex, 32, DbTableName::MEMBER);
                 echo '</p><p>', Emoticon::init(escape($this->str->extract(Ban::filterWord($oRow->post), 0, 80))), '</p>
                     <p class="small italic">', t('Posted on: %0%', $this->dateTime->get($oRow->createdDate)->dateTime());
 
@@ -95,7 +95,7 @@ class WallAjax extends Core
         } else {
             foreach ($this->mContents as $oRow) {
                 echo '<p>';
-                $this->oAvatarDesign->get($oRow->username, $oRow->firstName, $oRow->sex, 32, 'Members');
+                $this->oAvatarDesign->get($oRow->username, $oRow->firstName, $oRow->sex, 32, DbTableName::MEMBER);
 
                 echo '</p><p>', UserParser::atUsernameToLink(escape($this->str->extract(Ban::filterWord($oRow->comment), 0, 80))), '</p>
                     <p class="small"><a href="', Uri::get('comment', 'comment', 'read', "profile,$oRow->recipient"), '#', $oRow->commentId, '">', t('Read more'), '</a> &bull; ',

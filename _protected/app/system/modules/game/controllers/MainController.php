@@ -9,7 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Http\Http;
-use PH7\Framework\Mvc\Model\Statistic as Stat;
+use PH7\Framework\Mvc\Model\Statistic as StatModel;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 
@@ -22,15 +22,26 @@ class MainController extends Controller
     const ITEMS_MENU_LATEST = 5;
     const ITEMS_MENU_CATEGORIES = 10;
 
+    const MAX_CATEGORY_LENGTH_SHOWN = 60;
+    const MAX_TITLE_LENGTH_SHOWN = 100;
+
     /**
      * @internal Protected access because AdminController derived class uses these attributes
-     *
-     * @var \stdClass $oGameModel
-     * @var \stdClass $sTitle
-     * @var string $$sMetaKeywords
-     * @var int $iTotalGames
      */
-    protected $oGameModel, $oPage, $sTitle, $sMetaKeywords, $iTotalGames;
+    /** @var \stdClass */
+    protected $oGameModel;
+
+    /** @var Page */
+    protected $oPage;
+
+    /** @var string */
+    protected $sTitle;
+
+    /** @var string */
+    protected $sMetaKeywords;
+
+    /** @var int */
+    protected $iTotalGames;
 
     public function __construct()
     {
@@ -86,19 +97,19 @@ class MainController extends Controller
             $this->sTitle = t('No Games Found!');
             $this->notFound();
         } else {
-            $this->sTitle = t('Game - %0%', substr($oGame->description, 0, 100));
+            $this->sTitle = t('Game - %0%', substr($oGame->description, 0, self::MAX_TITLE_LENGTH_SHOWN));
             $this->view->page_title = t('%0% Games Zone - %1%', $oGame->name, $oGame->title);
             $this->view->h1_title = $oGame->title;
             $this->view->meta_description = t('Flash Game - %0%', $this->sTitle);
             $this->view->meta_keywords = $oGame->keywords . $this->sMetaKeywords;
             $this->view->h2_title = $this->sTitle;
             $this->view->downloads = $this->oGameModel->getDownloadStat($oGame->gameId);
-            $this->view->views = Stat::getView($oGame->gameId, 'Games');
+            $this->view->views = StatModel::getView($oGame->gameId, DbTableName::GAME);
 
             $this->view->game = $oGame;
 
             //Set Game Statistics
-            Stat::setView($oGame->gameId, 'Games');
+            StatModel::setView($oGame->gameId, DbTableName::GAME);
         }
 
         $this->output();
@@ -133,7 +144,7 @@ class MainController extends Controller
         );
         $this->setMenuVars();
 
-        $sCategoryTxt = substr($sCategory, 0, 60);
+        $sCategoryTxt = substr($sCategory, 0, self::MAX_CATEGORY_LENGTH_SHOWN);
         if (empty($oSearch)) {
             $this->sTitle = t('No "%0%" category found.', $sCategoryTxt);
             $this->notFound();
@@ -252,10 +263,13 @@ class MainController extends Controller
      * Set a Not Found Error Message with HTTP 404 Code Status.
      *
      * @return void
+     *
+     * @throws Framework\File\Exception
+     * @throws Framework\Http\Exception
      */
     private function notFound()
     {
-        Http::setHeadersByCode(404);
+        Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
 
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;

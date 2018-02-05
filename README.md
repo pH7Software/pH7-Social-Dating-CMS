@@ -3,12 +3,12 @@
 ### The Most Secure, Powerful & Professional Dating Web App Builder
 
 
-[![Build Status](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/build.png?b=master)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/?branch=master) [![PayPal donate button](http://img.shields.io/badge/paypal-donate-orange.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6 "Help keep me off the streets! ;)")
+[![Build Status](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/build.png?b=master)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/?branch=master) [![PayPal donate button](https://img.shields.io/badge/paypal-donate-orange.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6 "Help keep me off the streets! ;)")
 
 
 **pH7 Social Dating CMS** is a **Professional** & **Open Source** Social Dating CMS, fully responsive design, low-resource-intensive, powerful and very secure.
 
-pH7CMS is included with 34 modules and based on its homemade framework (pH7Framework). It is also the first Professional, free and open source European Social Dating Site Builder Software and the first choice for creating enterprise level Dating Apps/Service or social networking sites.
+pH7CMS is included with 35 modules and based on its homemade framework (pH7Framework). It is also the first Professional, free and open source European Social Dating Site Builder Software and the first choice for creating enterprise level Dating Apps/Service or social networking sites.
 
 
 ![Professional PHP Social Dating Builder Software](https://cloud.githubusercontent.com/assets/1325411/19419476/5475b32c-93d0-11e6-9756-8e7db8df129f.png)
@@ -20,7 +20,7 @@ pH7CMS is included with 34 modules and based on its homemade framework (pH7Frame
 
 It is designed with the **KISS** principle in mind, and the all source code can be read and understood in minutes. For a better flexibility, the software uses **PDO** (PHP Data Objects) abstraction which allows the choice of the database. The principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (no duplicate code).
 
-This Free and Open Source **Social Dating Site Builder** wants to be low resource-intensive, powerful, stable and secure. The software also comes with 34 system modules and is based on **pH7Framework** *(written specifically for this project)* that has over 52 packages.
+This Free and Open Source **Social Dating Site Builder** wants to be low resource-intensive, powerful, stable and secure. The software also comes with 35 system modules and is based on **pH7Framework** *(written specifically for this project)* that has over 52 packages.
 
 *To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **best online dating service** or **social networking** website on the World Wide Web!*
 
@@ -29,7 +29,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 
 * Best Dating Features
 * Advanced Search
-* Blogs
+* Blog
 * Notes
 * Pages Management
 * Friends/Mutual Friends, Visit, Messages, Instant messaging, Views, Like, Rating, Smileys, Geo Map, Avatar, Wallpaper, ...
@@ -38,7 +38,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Comments
 * Hot or Not
 * Love Calculator
-* Geolocation
+* Geo-location
 * People Nearby
 * Photo Albums
 * Videos (and possibility to upload videos from API v3 YouTube, Vimeo, Metacafe and Dailymotion)
@@ -67,6 +67,8 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Dynamic Field Forms Management
 * Privacy Settings
 * Banner/Advertisement Management
+* User Dashboard
+* Dating-style Profile page
 * Fake Profile Generator
 * CSV User Importer
 * Support for Multiple Languages, Internationalization and Localization (I18N)
@@ -216,9 +218,12 @@ Finding bugs, improving the CMS/doc or adding translations. Any contribution is 
 
 Just clone the repository, make your changes and then make a push ;-)
 
-*WARNING, your code/modification must be of excellent quality and follow the [Code Convention](http://ph7cms.com/doc/en/code-convention).* I manually validate all the improvements and changes.
+*WARNING, your code/modification must be of excellent quality and follow the [Code Convention](http://ph7cms.com/doc/en/code-convention) and [PSR](https://www.php-fig.org/psr/).* I manually validate all the improvements and changes.
 
-**You will also become a pH7CMS VIP member and get all premium contents and modules.**
+**You will also become a pH7CMS VIP member and get all exclusive premium contents and upcoming modules.**
+
+
+![Beautiful Profile Dating Page](https://user-images.githubusercontent.com/1325411/35779585-68f0d5fc-09c7-11e8-91eb-bf793fcfab6e.png)
 
 
 ## Tools/Software Used to Develop pH7CMS

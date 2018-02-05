@@ -21,6 +21,10 @@ use PH7\Framework\Util\Various;
 
 final class Security
 {
+    const HASH_LENGTH = 80;
+    const COOKIE_HASH_LENGTH = 40;
+    const PBKDF2_ITERATION = 10000;
+
     const PWD_ALGORITHM = PASSWORD_BCRYPT;
     const PWD_WORK_FACTOR = 12;
 
@@ -90,7 +94,7 @@ final class Security
      *
      * @throws PH7InvalidArgumentException
      */
-    public static function hashCookie($sPassword, $iLength = 40)
+    public static function hashCookie($sPassword, $iLength = self::COOKIE_HASH_LENGTH)
     {
         return self::userHash($sPassword, $iLength);
     }
@@ -103,7 +107,7 @@ final class Security
      *
      * @return string
      */
-    public static function hash($sVal, $iLength = 80)
+    public static function hash($sVal, $iLength = self::HASH_LENGTH)
     {
         return Various::padStr(
             hash(self::WHIRLPOOL_ALGORITHM, hash(self::SHA512_ALGORITHM, self::PREFIX_SALT . hash(self::WHIRLPOOL_ALGORITHM, self::PREFIX_SALT)) . hash(self::WHIRLPOOL_ALGORITHM, $sVal) . hash(self::SHA512_ALGORITHM, hash(self::WHIRLPOOL_ALGORITHM, self::SUFFIX_SALT) . self::SUFFIX_SALT)),
@@ -129,6 +133,7 @@ final class Security
         }
 
         $sSalt = self::PREFIX_SALT . Ip::get() . self::SUFFIX_SALT . (new Browser)->getUserAgent();
-        return hash_pbkdf2($sAlgo, $sVal, $sSalt, 10000, $iLength);
+
+        return hash_pbkdf2($sAlgo, $sVal, $sSalt, self::PBKDF2_ITERATION, $iLength);
     }
 }

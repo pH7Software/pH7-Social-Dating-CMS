@@ -181,7 +181,7 @@ class MainController extends Controller
             $this->view->video = $oVideo;
 
             //Set Video Statistics
-            Statistic::setView($oVideo->videoId, 'Videos');
+            Statistic::setView($oVideo->videoId, DbTableName::VIDEO);
         }
 
         $this->output();
@@ -191,7 +191,7 @@ class MainController extends Controller
     {
         $iVideoId = $this->httpRequest->post('video_id', 'int');
 
-        CommentCoreModel::deleteRecipient($iVideoId, 'Video');
+        CommentCoreModel::deleteRecipient($iVideoId, 'video');
 
         $this->oVideoModel->deleteVideo(
             $this->session->get('member_id'),
@@ -294,7 +294,7 @@ class MainController extends Controller
     private function notFound($b404Status = true)
     {
         if ($b404Status === true) {
-            Http::setHeadersByCode(404);
+            Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
         }
 
         $sErrMsg = '';

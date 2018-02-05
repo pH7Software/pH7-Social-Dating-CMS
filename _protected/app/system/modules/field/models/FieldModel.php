@@ -16,6 +16,10 @@ use PH7\Framework\Mvc\Request\Http;
 
 class FieldModel extends Model
 {
+    const MAX_VARCHAR_LENGTH = 255;
+    const FIELD_TEXTBOX_TYPE = 'textbox';
+    const FIELD_NUMBER_TYPE = 'number';
+
     /** @var string */
     private $sTable;
 
@@ -121,17 +125,17 @@ class FieldModel extends Model
     protected function getType()
     {
         switch ($this->sType) {
-            case 'textbox': {
+            case self::FIELD_TEXTBOX_TYPE: {
                 if (mb_strlen($this->sDefVal) > $this->iLength) {
                     $this->iLength = mb_strlen($this->sDefVal);
                 }
-                if ($this->iLength === 0 || $this->iLength > 255) {
-                    $this->iLength = 255;
+                if ($this->iLength === 0 || $this->iLength > self::MAX_VARCHAR_LENGTH) {
+                    $this->iLength = self::MAX_VARCHAR_LENGTH;
                 }
                 $this->sSql .= 'VARCHAR(' . $this->iLength . ')';
             } break;
 
-            case 'number': {
+            case self::FIELD_NUMBER_TYPE: {
                 if (!is_numeric($this->sDefVal)) {
                     $this->sDefVal = 0;
                 }
@@ -139,7 +143,7 @@ class FieldModel extends Model
                     $this->iLength = strlen($this->sDefVal);
                 }
                 if ($this->iLength === 0 || $this->iLength > 11) {
-                    $this->iLength = 9; // Set the default maximum length value.
+                    $this->iLength = 9; // Set the default maximum length value
                 }
 
                 $this->sSql .= 'INT(' . $this->iLength . ')';

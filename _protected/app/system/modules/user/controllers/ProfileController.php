@@ -6,7 +6,6 @@
  * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Controller
- * @version        1.6
  */
 
 namespace PH7;
@@ -23,11 +22,16 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Parse\Emoticon;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Security\CSRF\Token;
+use PH7\Framework\Url\Header;
 use PH7\Framework\Url\Url;
 use stdClass;
 
 class ProfileController extends Controller
 {
+    const MAP_ZOOM_LEVEL = 12;
+    const MAP_WIDTH_SIZE = '100%';
+    const MAP_HEIGHT_SIZE = '300px';
+
     /** @var bool */
     private $bUserAuth;
 
@@ -54,34 +58,25 @@ class ProfileController extends Controller
     {
         $oUserModel = new UserModel;
 
-        // Add the General and Tabs Menu stylesheets
-        $this->design->addCss(
-            PH7_LAYOUT,
-            PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS . 'tabs.css,' . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS . 'general.css'
-        );
-
-        if (SysMod::isEnabled('friend')) {
-            // Add the JavaScript file for the Ajax Friend block
-            $this->design->addJs(
-                PH7_LAYOUT . PH7_SYS . PH7_MOD . 'friend' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
-                'friend.js'
-            );
-        }
+        $this->addCssFiles();
+        $this->addAdditionalAssetFiles();
 
         // Set the Profile username
         $this->sUsername = $this->httpRequest->get('username', 'string');
 
         // Set the Profile ID and Visitor ID
-        $this->iProfileId = $oUserModel->getId(null, $this->sUsername);;
+        $this->iProfileId = $oUserModel->getId(null, $this->sUsername);
         $this->iVisitorId = (int)$this->session->get('member_id');
 
         // Read the Profile information
         $oUser = $oUserModel->readProfile($this->iProfileId);
 
         if ($oUser && $this->doesProfileExist($oUser)) {
+            $this->redirectToOtherProfileStyleIfEnabled();
+
             // The administrators can view all profiles and profile visits are not saved.
             if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
-                $this->initPrivacy($oUserModel, $this->iProfileId, $this->iVisitorId);
+                $this->initPrivacy($oUserModel);
             }
 
             // Gets the Profile background
@@ -118,9 +113,6 @@ class ProfileController extends Controller
             $this->view->h2_title = t('A <span class="pH1">%0%</span> of <span class="pH3">%1% years</span>, from <span class="pH2">%2%, %3% %4%</span>',
                 t($oUser->sex), $iAge, t($sCountry), $sCity, $sState);
 
-
-            $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
-
             // Member Menubar
             $this->view->mail_link = $this->getMailLink($sFirstName, $oUser);
             $this->view->messenger_link = $this->getMessengerLink($sFirstName, $oUser);
@@ -135,8 +127,7 @@ class ProfileController extends Controller
                 $this->view->befriend_link = $this->getBeFriendLink($sFirstName, $oUser);
             }
 
-            // Set parameters Google Map
-            $this->view->map = $this->getMap($sCity, $sState, $sCountry, $oUser);
+            $this->view->map = $this->getMap($sCity, $sCountry, $oUser);
 
             $this->view->id = $this->iProfileId;
             $this->view->username = $oUser->username;
@@ -159,7 +150,7 @@ class ProfileController extends Controller
             $this->view->is_own_profile = $this->isOwnProfile();
 
             // Count number of views
-            Statistic::setView($this->iProfileId, 'Members');
+            Statistic::setView($this->iProfileId, DbTableName::MEMBER);
         } else {
             $this->notFound();
         }
@@ -171,48 +162,52 @@ class ProfileController extends Controller
      * Get the Google Map.
      *
      * @param string $sCity
-     * @param string $sState
      * @param string $sCountry
      * @param stdClass $oUser
      *
      * @return string The Google Maps code.
      */
-    private function getMap($sCity, $sState, $sCountry, stdClass $oUser)
+    private function getMap($sCity, $sCountry, stdClass $oUser)
     {
+        $sFullAddress = $sCity . ' ' . t($sCountry);
+        $sMarkerText = t('Meet <b>%0%</b> near here!', $oUser->username);
+
         $oMap = new Map;
         $oMap->setKey(DbConfig::getSetting('googleApiKey'));
-        $oMap->setCenter($sCity . ' ' . $sState . ' ' . t($sCountry));
-        $oMap->setSize('100%', '300px');
+        $oMap->setCenter($sFullAddress);
+        $oMap->setSize(self::MAP_WIDTH_SIZE, self::MAP_HEIGHT_SIZE);
         $oMap->setDivId('profile_map');
-        $oMap->setZoom(12);
-        $oMap->addMarkerByAddress($sCity . ' ' . $sState . ' ' . t($sCountry), t('Meet %0% near here!', $oUser->username));
+        $oMap->setZoom(self::MAP_ZOOM_LEVEL);
+        $oMap->addMarkerByAddress($sFullAddress, $sMarkerText, $sMarkerText);
         $oMap->generate();
-        $map = $oMap->getMap();
+        $sMap = $oMap->getMap();
         unset($oMap);
 
-        return $map;
+        return $sMap;
     }
 
     /**
      * Privacy Profile.
      *
-     * @param UserModel $oUserModel
+     * @param UserCoreModel $oUserModel
      *
      * @return void
+     *
+     * @throws Framework\File\Exception
      */
     private function initPrivacy(UserModel $oUserModel)
     {
         // Check Privacy Profile
         $oPrivacyViewsUser = $oUserModel->getPrivacySetting($this->iProfileId);
 
-        if ($oPrivacyViewsUser->searchProfile == 'no') {
+        if ($oPrivacyViewsUser->searchProfile === 'no') {
             $this->excludeProfileFromSearchEngines();
         }
 
-        if (!$this->bUserAuth && $oPrivacyViewsUser->privacyProfile == 'only_members') {
+        if (!$this->bUserAuth && $oPrivacyViewsUser->privacyProfile === 'only_members') {
             $this->view->error = t('Whoops! The "%0%" profile is only visible to members. Please <a href="%1%">login</a> or <a href="%2%">register</a> to see this profile.',
                 $this->sUsername, Uri::get('user', 'main', 'login'), Uri::get('user', 'signup', 'step1'));
-        } elseif ($oPrivacyViewsUser->privacyProfile == 'only_me' && !$this->isOwnProfile()) {
+        } elseif ($oPrivacyViewsUser->privacyProfile === 'only_me' && !$this->isOwnProfile()) {
             $this->view->error = t('Whoops! The "%0%" profile is not available to you.', $this->sUsername);
         }
 
@@ -220,7 +215,8 @@ class ProfileController extends Controller
         if ($this->bUserAuth) {
             $oPrivacyViewsVisitor = $oUserModel->getPrivacySetting($this->iVisitorId);
 
-            if ($oPrivacyViewsUser->userSaveViews == 'yes' && $oPrivacyViewsVisitor->userSaveViews == 'yes' &&
+            if ($oPrivacyViewsUser->userSaveViews === 'yes' &&
+                $oPrivacyViewsVisitor->userSaveViews === 'yes' &&
                 !$this->isOwnProfile()
             ) {
                 $this->updateVisitorViews();
@@ -234,7 +230,11 @@ class ProfileController extends Controller
      */
     private function updateVisitorViews()
     {
-        $oVisitorModel = new VisitorModel($this->iProfileId, $this->iVisitorId, $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
+        $oVisitorModel = new VisitorModel(
+            $this->iProfileId,
+            $this->iVisitorId,
+            $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+        );
 
         if (!$oVisitorModel->already()) {
             // Add a new visit
@@ -255,10 +255,10 @@ class ProfileController extends Controller
     }
 
     /**
-     * @param string $sFirstName  User's first name.
-     * @param stdClass $oUser     User data from the DB.
+     * @param string $sFirstName User's first name.
+     * @param stdClass $oUser User data from the DB.
      *
-     * @return string             The anchor for the link.
+     * @return string The anchor for the link.
      */
     private function getMailLink($sFirstName, stdClass $oUser)
     {
@@ -285,10 +285,10 @@ class ProfileController extends Controller
     }
 
     /**
-     * @param string $sFirstName  User's first name.
-     * @param stdClass $oUser     User data from the DB.
+     * @param string $sFirstName User's first name.
+     * @param stdClass $oUser User data from the DB.
      *
-     * @return string             The anchor for the link.
+     * @return string The anchor for the link.
      */
     private function getMessengerLink($sFirstName, stdClass $oUser)
     {
@@ -316,10 +316,10 @@ class ProfileController extends Controller
     }
 
     /**
-     * @param string $sFirstName  User's first name.
-     * @param stdClass $oUser     User data from the DB.
+     * @param string $sFirstName User's first name.
+     * @param stdClass $oUser User data from the DB.
      *
-     * @return string             The anchor for the link.
+     * @return string The anchor for the link.
      */
     private function getBeFriendLink($sFirstName, stdClass $oUser)
     {
@@ -390,13 +390,58 @@ class ProfileController extends Controller
     }
 
     /**
-     * Show a Not Found page.
+     * @return void
+     *
+     * @throws Framework\File\Exception
+     */
+    private function redirectToOtherProfileStyleIfEnabled()
+    {
+        if (SysMod::isEnabled('cool-profile-page')) {
+            // If enabled, redirect to the other profile page style
+            Header::redirect(
+                Uri::get('cool-profile-page', 'main', 'index', $this->iProfileId)
+            );
+        }
+    }
+
+    /**
+     * Add the General and Tabs Menu stylesheets.
      *
      * @return void
      */
+    private function addCssFiles()
+    {
+        $this->design->addCss(
+            PH7_LAYOUT,
+            PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS . 'tabs.css,' . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS . 'general.css'
+        );
+    }
+
+    /**
+     * Add the JS file for Friend feature.
+     *
+     * @return void
+     */
+    private function addAdditionalAssetFiles()
+    {
+        if (SysMod::isEnabled('friend')) {
+            $this->design->addJs(
+                PH7_LAYOUT . PH7_SYS . PH7_MOD . 'friend' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
+                'friend.js'
+            );
+        }
+    }
+
+    /**
+     * Show a Not Found page.
+     *
+     * @return void
+     *
+     * @throws Framework\Http\Exception
+     */
     private function notFound()
     {
-        Http::setHeadersByCode(404);
+        Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
 
         /**
          * @internal We can include HTML tags in the title since the template will automatically escape them before displaying it.

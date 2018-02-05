@@ -100,6 +100,8 @@ $LANG = array(
         </p>
         <p><strong>N\'oubliez pas de vous la péter en montrant votre nouveau service de rencontre à tous vos amis, vos collègues et vos potes de Facebook</strong> (et même à vos ennemis... ou pas).</p>
         <p>&nbsp;</p>
+        <p><strong>Allez-vous m\'aider à améliorer le logiciel ? <a href="' . Controller::PATREON_URL . '">Faire une donation ici</a></strong></p>
+        <p>&nbsp;</p>
         <p>Pour tous rapport de bogues, suggestions, partenariat, participation au développement du logiciel et/ou à sa traduction, etc.,
         veuillez visiter notre <a href="' . Controller::SOFTWARE_WEBSITE . '">site Web</a>.</p>
         <p>---</p>

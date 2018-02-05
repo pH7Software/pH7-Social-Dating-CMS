@@ -20,7 +20,7 @@ class ForumController extends Controller
     const TOPICS_PER_PAGE = 20;
     const FORUMS_PER_PAGE = 20;
     const POSTS_PER_PAGE = 10;
-    const MAX_SUMMARY_MESSAGE_LENGTH = 150;
+    const MAX_SUMMARY_MESSAGE_LENGTH_SHOWN = 150;
 
     /** @var ForumModel */
     private $oForumModel;
@@ -50,7 +50,10 @@ class ForumController extends Controller
         $this->view->meta_keywords = t('forum,discussion,dating forum,social forum,people,meet people,forums,free dating forum,free forum,community forum,social forum');
 
         // Adding Css Style for the Layout Forum
-        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'common.css');
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
+            'common.css'
+        );
     }
 
     public function index()
@@ -169,7 +172,7 @@ class ForumController extends Controller
             $this->view->messages = $oMessages;
 
             // Set Topics Views Statistics
-            Statistic::setView($oPost->topicId, 'ForumsTopics');
+            Statistic::setView($oPost->topicId, DbTableName::FORUM_TOPIC);
         }
 
         $this->output();
@@ -334,7 +337,12 @@ class ForumController extends Controller
         }
 
         Header::redirect(
-            Uri::get('forum', 'forum', 'post', $sForumName . ',' . $iForumId . ',' . $sTopicTitle . ',' . $iTopicId),
+            Uri::get(
+                'forum',
+                'forum',
+                'post',
+                $sForumName . ',' . $iForumId . ',' . $sTopicTitle . ',' . $iTopicId
+            ),
             $this->sMsg
         );
     }
@@ -376,7 +384,11 @@ class ForumController extends Controller
      */
     private function getShortedMessage($sMessage)
     {
-        return substr($this->str->escape(Ban::filterWord($sMessage), true), 0, self::MAX_SUMMARY_MESSAGE_LENGTH);
+        return substr(
+            $this->str->escape(Ban::filterWord($sMessage), true),
+            0,
+            self::MAX_SUMMARY_MESSAGE_LENGTH_SHOWN
+        );
     }
 
     /**
@@ -389,7 +401,7 @@ class ForumController extends Controller
     private function notFound($b404Status = true)
     {
         if ($b404Status === true) {
-            Http::setHeadersByCode(404);
+            Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
         }
 
         $sErrMsg = '';

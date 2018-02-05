@@ -89,9 +89,9 @@ final class Token
      * @param string $sName Name of the Token.
      *
      * @param string $sInputToken The name of the token inserted in the hidden tag of the form.
-     * (e.g. for a from with method "post" and the field "<input type="hidden" name="my_token" />" the name of the token is "$_POST['my_token']" Default NULL
+     * (e.g. for a from with method "post" and the field "<input type="hidden" name="my_token" />" the name of the token is "$_POST['my_token']"
      *
-     * @param int $iTime Lifetime of token in seconds. Default NULL (value specified in the database settings).
+     * @param int $iTime Lifetime of token in seconds (value specified in the database settings).
      *
      * @return bool Returns TRUE if the token is validated, FALSE otherwise.
      */
@@ -145,7 +145,8 @@ final class Token
     public function checkUrl()
     {
         $oHttpRequest = new HttpRequest;
-        $bRet = ( ($this->currentSess() === true) || $oHttpRequest->currentUrl() === PH7_URL_ROOT || ($oHttpRequest->get(static::VAR_NAME) === $this->currentSess()) );
+        $bRet = ( ($this->currentSess() === true) || $oHttpRequest->currentUrl() === PH7_URL_ROOT ||
+            ($oHttpRequest->get(static::VAR_NAME) === $this->currentSess()) );
         unset($oHttpRequest);
 
         return $bRet;

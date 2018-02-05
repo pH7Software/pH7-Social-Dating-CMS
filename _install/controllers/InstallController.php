@@ -40,6 +40,7 @@ class InstallController extends Controller
         'mail' => '1',
         'im' => '0',
         'user-dashboard' => '0',
+        'cool-profile-page' => '0',
         'related-profile' => '1'
     ];
 
@@ -63,6 +64,7 @@ class InstallController extends Controller
         'mail' => '1',
         'im' => '1',
         'user-dashboard' => '1',
+        'cool-profile-page' => '1',
         'related-profile' => '1'
     ];
 
@@ -151,7 +153,7 @@ class InstallController extends Controller
                 $_SESSION['db']['hostname'] = 'localhost';
                 $_SESSION['db']['username'] = 'root';
                 $_SESSION['db']['name'] = 'ph7cms';
-                $_SESSION['db']['prefix'] = 'PH7_';
+                $_SESSION['db']['prefix'] = 'ph7_';
                 $_SESSION['db']['port'] = '3306';
                 $_SESSION['db']['charset'] = 'UTF8';
 
@@ -297,8 +299,8 @@ class InstallController extends Controller
                                                         require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
 
                                                         // SQL EXECUTE
-                                                        $rStmt = $DB->prepare('INSERT INTO ' . $_SESSION['db']['prefix'] . 'Admins
-                                                        (profileId , username, password, email, firstName, lastName, joinDate, lastActivity, ip)
+                                                        $rStmt = $DB->prepare('INSERT INTO ' . $_SESSION['db']['prefix'] . DbTableName::ADMIN .
+                                                        '(profileId , username, password, email, firstName, lastName, joinDate, lastActivity, ip)
                                                         VALUES (1, :username, :password, :email, :firstName, :lastName, :joinDate, :lastActivity, :ip)');
 
                                                         $sCurrentDate = date('Y-m-d H:i:s');
@@ -313,16 +315,16 @@ class InstallController extends Controller
                                                             'ip' => client_ip()
                                                         ]);
 
-                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET settingValue = :siteName WHERE settingName = \'siteName\' LIMIT 1');
+                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . DbTableName::SETTING . ' SET settingValue = :siteName WHERE settingName = \'siteName\' LIMIT 1');
                                                         $rStmt->execute(['siteName' => $_SESSION['val']['site_name']]);
 
-                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET settingValue = :adminEmail WHERE settingName = \'adminEmail\'  LIMIT 1');
+                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . DbTableName::SETTING . ' SET settingValue = :adminEmail WHERE settingName = \'adminEmail\'  LIMIT 1');
                                                         $rStmt->execute(['adminEmail' => $_SESSION['val']['admin_email']]);
 
-                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET settingValue = :feedbackEmail WHERE settingName = \'feedbackEmail\'  LIMIT 1');
+                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . DbTableName::SETTING . ' SET settingValue = :feedbackEmail WHERE settingName = \'feedbackEmail\'  LIMIT 1');
                                                         $rStmt->execute(['feedbackEmail' => $_SESSION['val']['admin_feedback_email']]);
 
-                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET settingValue = :returnEmail WHERE settingName = \'returnEmail\'  LIMIT 1');
+                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . DbTableName::SETTING . ' SET settingValue = :returnEmail WHERE settingName = \'returnEmail\'  LIMIT 1');
                                                         $rStmt->execute(['returnEmail' => $_SESSION['val']['admin_return_email']]);
 
                                                         // We finalise by putting the correct permission to the config files
@@ -427,7 +429,7 @@ class InstallController extends Controller
                             $this->updateSettings($aSettingUpdate);
 
                             // Set the theme for the chosen niche
-                            $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET settingValue = :theme WHERE settingName = \'defaultTemplate\' LIMIT 1';
+                            $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . DbTableName::SETTING . ' SET settingValue = :theme WHERE settingName = \'defaultTemplate\' LIMIT 1';
                             $rStmt = $DB->prepare($sSql);
                             $rStmt->execute(['theme' => $sTheme]);
                         } catch (\PDOException $oE) {
@@ -526,7 +528,7 @@ class InstallController extends Controller
      */
     private function updateMods(Db $oDb, $sModName, $sStatus)
     {
-        $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'SysModsEnabled SET enabled = :status WHERE folderName = :modName LIMIT 1';
+        $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . DbTableName::SYS_MOD_ENABLED . ' SET enabled = :status WHERE folderName = :modName LIMIT 1';
         $rStmt = $oDb->prepare($sSql);
         return $rStmt->execute(['modName' => $sModName, 'status' => $sStatus]);
     }
@@ -565,6 +567,10 @@ class InstallController extends Controller
         require PH7_PATH_FRAMEWORK . 'Error/Debug.class.php';
 
         Framework\Loader\Autoloader::getInstance()->init();
+
+        // Loading Class ~/protected/app/includes/classes/* (for "DbTableName" class)
+        require PH7_PATH_APP . 'includes/classes/Loader/Autoloader.php';
+        App\Includes\Classes\Loader\Autoloader::getInstance()->init();
     }
 
     /***** Get the loading image *****/

@@ -172,7 +172,7 @@ class MainController extends Controller
             $this->view->picture = $oPicture;
 
             //Set Photo Statistics
-            Statistic::setView($oPicture->pictureId, 'Pictures');
+            Statistic::setView($oPicture->pictureId, DbTableName::PICTURE);
         }
 
         $this->output();
@@ -182,7 +182,7 @@ class MainController extends Controller
     {
         $iPictureId = $this->httpRequest->post('picture_id', 'int');
 
-        CommentCoreModel::deleteRecipient($iPictureId, 'Picture');
+        CommentCoreModel::deleteRecipient($iPictureId, 'picture');
 
         $this->oPictureModel->deletePhoto(
             $this->session->get('member_id'),
@@ -284,7 +284,7 @@ class MainController extends Controller
     private function notFound($b404Status = true)
     {
         if ($b404Status === true) {
-            Http::setHeadersByCode(404);
+            Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
         }
 
         $sErrMsg = '';

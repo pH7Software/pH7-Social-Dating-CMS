@@ -6,6 +6,7 @@
 
 namespace PFBC\Validation;
 
+use PH7\DbTableName;
 use PH7\ExistsCoreModel;
 use PH7\Framework\Security\Ban\Ban;
 
@@ -19,7 +20,7 @@ class BankAccount extends \PFBC\Validation
      *
      * @param string $sTable
      */
-    public function __construct($sTable = 'Affiliates')
+    public function __construct($sTable = DbTableName::AFFILIATE)
     {
         parent::__construct();
         $this->sTable = $sTable;

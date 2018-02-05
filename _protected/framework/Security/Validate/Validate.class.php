@@ -15,6 +15,7 @@ defined('PH7') or exit('Restricted access');
 
 use DateTime;
 use Exception;
+use PH7\DbTableName;
 use PH7\ExistsCoreModel;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
@@ -212,11 +213,11 @@ class Validate
      * @param string $sUsername
      * @param integer $iMin Default 3
      * @param integer $iMax Default 40
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default DbTableName::MEMBER
      *
      * @return boolean
      */
-    public function username($sUsername, $iMin = self::DEF_MIN_USERNAME_LENGTH, $iMax = PH7_MAX_USERNAME_LENGTH, $sTable = 'Members')
+    public function username($sUsername, $iMin = self::DEF_MIN_USERNAME_LENGTH, $iMax = PH7_MAX_USERNAME_LENGTH, $sTable = DbTableName::MEMBER)
     {
         $sUsername = trim($sUsername);
 

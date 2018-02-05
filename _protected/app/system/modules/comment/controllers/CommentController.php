@@ -48,7 +48,10 @@ class CommentController extends Controller
         $this->view->meta_keywords = t('comment,comments,social,community,friend,social network,people,dating,post,wall,social dating');
 
         // Adding Css Style for the Comment Post
-        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'common.css');
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
+            'common.css'
+        );
     }
 
     public function index()
@@ -59,7 +62,10 @@ class CommentController extends Controller
     public function read()
     {
         // Adding JavaScript file for Ajax Comment
-        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'comment.js');
+        $this->design->addJs(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
+            'comment.js'
+        );
 
         $this->sTitle = t('Read Comment');
         $this->view->page_title = $this->sTitle;
@@ -160,10 +166,13 @@ class CommentController extends Controller
      * Set a Not Found Error Message with HTTP 404 Code Status.
      *
      * @return void
+     *
+     * @throws Framework\File\Exception
+     * @throws Framework\Http\Exception
      */
     private function notFound()
     {
-        Http::setHeadersByCode(404);
+        Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
 
         $this->view->page_title = t('Comment Not Found');
         $this->view->error = t('No comments yet, <a class="bold" href="%0%">add one</a>!', Uri::get('comment', 'comment', 'add', $this->sTable . ',' . $this->str->escape($this->httpRequest->get('id'))));

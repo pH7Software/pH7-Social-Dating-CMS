@@ -49,7 +49,7 @@ class CommentCore
         $sTable = strtolower($sTable); // Case insensitivity
 
         if (static::doesTableNameExist($sTable)) {
-            return ucfirst($sTable);
+            return $sTable;
         }
 
         Various::launchErr($sTable);
@@ -80,8 +80,8 @@ class CommentCore
      */
     public static function isRemovalEligible(HttpRequest $oHttpRequest, Session $oSession)
     {
-        return (($oSession->get('member_id') == $oHttpRequest->post('recipient_id')) ||
-                ($oSession->get('member_id') == $oHttpRequest->post('sender_id'))) || AdminCore::auth();
+        return ($oSession->get('member_id') == $oHttpRequest->post('recipient_id') ||
+                $oSession->get('member_id') == $oHttpRequest->post('sender_id')) || AdminCore::auth();
     }
 
     /**

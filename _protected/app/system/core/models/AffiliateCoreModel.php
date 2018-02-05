@@ -24,7 +24,7 @@ class AffiliateCoreModel extends AdminCoreModel
      */
     public function updateUserJoinCom($iProfileId, $iAffCom)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Affiliates') . 'SET amount = amount + :amount WHERE profileId = :profileId LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::AFFILIATE) . 'SET amount = amount + :amount WHERE profileId = :profileId LIMIT 1');
         $rStmt->bindValue(':amount', $iAffCom, \PDO::PARAM_INT);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         Db::free($rStmt);
@@ -36,11 +36,11 @@ class AffiliateCoreModel extends AdminCoreModel
      * Get the Affiliated Id of a User.
      *
      * @param int $iProfileId
-     * @param string $sTable 'Members', 'Affiliates' or 'Subscribers'. Default 'Members'
+     * @param string $sTable DbTableName::MEMBER, DbTableName::AFFILIATE or DbTableName::SUBSCRIBER. Default DbTableName::MEMBER
      *
      * @return int The Affiliated ID
      */
-    public function getAffiliatedId($iProfileId, $sTable = 'Members')
+    public function getAffiliatedId($iProfileId, $sTable = DbTableName::MEMBER)
     {
         $this->cache->start(static::CACHE_GROUP, 'affiliatedId' . $iProfileId . $sTable, static::CACHE_TIME);
 
@@ -72,8 +72,8 @@ class AffiliateCoreModel extends AdminCoreModel
         $iProfileId = (int)$iProfileId;
 
         $oDb = Db::getInstance();
-        $oDb->exec('DELETE FROM' . Db::prefix('AffiliatesInfo') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
-        $oDb->exec('DELETE FROM' . Db::prefix('Affiliates') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::AFFILIATE_INFO) . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::AFFILIATE) . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
         unset($oDb);
     }
 }

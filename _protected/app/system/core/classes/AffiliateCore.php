@@ -30,7 +30,9 @@ class AffiliateCore extends UserCore
     public static function auth()
     {
         $oSession = new Session;
-        $bIsConnected = ((int)$oSession->exists('affiliate_id')) && $oSession->get('affiliate_ip') === Ip::get() && $oSession->get('affiliate_http_user_agent') === (new Browser)->getUserAgent();
+        $bIsConnected = ((int)$oSession->exists('affiliate_id')) &&
+            $oSession->get('affiliate_ip') === Ip::get() &&
+            $oSession->get('affiliate_http_user_agent') === (new Browser)->getUserAgent();
         unset($oSession);
 
         return $bIsConnected;
@@ -68,8 +70,14 @@ class AffiliateCore extends UserCore
         ];
 
         $oSession->set($aSessionData);
-        $oSecurityModel->addLoginLog($oAffData->email, $oAffData->username, '*****', 'Logged in!', 'Affiliates');
-        $oAffModel->setLastActivity($oAffData->profileId, 'Affiliates');
+        $oSecurityModel->addLoginLog(
+            $oAffData->email,
+            $oAffData->username,
+            '*****',
+            'Logged in!',
+            DbTableName::AFFILIATE
+        );
+        $oAffModel->setLastActivity($oAffData->profileId, DbTableName::AFFILIATE);
     }
 
     /**

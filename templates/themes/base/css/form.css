@@ -150,7 +150,13 @@ button[readonly],
 select[readonly],
 textarea[readonly] {
     background-color: #ddd;
-    cursor: not-allowed;
+}
+
+input[disabled],
+button[disabled],
+select[disabled],
+textarea[disabled] {
+    cursor: not-allowed !important;
 }
 
 /* Remove .form_link text decoration if bootstrap button is set */

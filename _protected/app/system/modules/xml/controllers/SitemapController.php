@@ -21,6 +21,8 @@ class SitemapController extends MainController implements XmlControllable
 
     public function index()
     {
+        $this->view->setCaching(true);
+
         $this->sTitle = t('Site Map');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Map of Website, Free Online Dating Site with Video Chat Rooms, Meet Single People with %site_name%');
@@ -90,7 +92,7 @@ class SitemapController extends MainController implements XmlControllable
             case 'comment-picture':
             case 'comment-video':
             case 'comment-game':
-                $this->view->setCaching(false); // We disable the cache since they are dynamic pages managed by the router.
+                $this->view->setCaching(false); // Disable the cache since they are dynamic pages managed by the router
                 $this->sAction = 'comment.inc';
                 break;
 

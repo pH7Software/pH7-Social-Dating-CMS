@@ -34,6 +34,19 @@ use stdClass;
 // Abstract Class
 class UserCore
 {
+    const MAX_WIDTH_AVATAR = 600;
+    const MAX_HEIGHT_AVATAR = 800;
+
+    const MAX_WIDTH_BACKGROUND_IMAGE = 600;
+    const MAX_HEIGHT_BACKGROUND_IMAGE = 800;
+
+    const AVATAR2_SIZE = 32;
+    const AVATAR3_SIZE = 64;
+    const AVATAR4_SIZE = 100;
+    const AVATAR5_SIZE = 150;
+    const AVATAR6_SIZE = 200;
+    const AVATAR7_SIZE = 400;
+
     /**
      * Users'levels.
      *
@@ -42,7 +55,9 @@ class UserCore
     public static function auth()
     {
         $oSession = new Session;
-        $bIsConnected = ((int)$oSession->exists('member_id')) && $oSession->get('member_ip') === Ip::get() && $oSession->get('member_http_user_agent') === (new Browser)->getUserAgent();
+        $bIsConnected = ((int)$oSession->exists('member_id')) &&
+            $oSession->get('member_ip') === Ip::get() &&
+            $oSession->get('member_http_user_agent') === (new Browser)->getUserAgent();
 
         /** Destroy the object to minimize the CPU resources **/
         unset($oSession);
@@ -98,6 +113,9 @@ class UserCore
      * @param integer $iApproved (1 = approved 0 = pending)
      *
      * @return bool TRUE if success, FALSE if the extension is wrong.
+     *
+     * @throws Framework\File\Exception
+     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException
      */
     public function setAvatar($iProfileId, $sUsername, $sFile, $iApproved = 1)
     {
@@ -109,7 +127,11 @@ class UserCore
             error_reporting(0);
         }
 
-        $oAvatar1 = new Image($sFile, 600, 800);
+        $oAvatar1 = new Image(
+            $sFile,
+            self::MAX_WIDTH_AVATAR,
+            self::MAX_HEIGHT_AVATAR
+        );
 
         if (!$oAvatar1->validate()) {
             return false; // File type incompatible!
@@ -124,12 +146,12 @@ class UserCore
         $oAvatar5 = clone $oAvatar1;
         $oAvatar6 = clone $oAvatar1;
         $oAvatar7 = clone $oAvatar1;
-        $oAvatar2->square(32);
-        $oAvatar3->square(64);
-        $oAvatar4->square(100);
-        $oAvatar5->square(150);
-        $oAvatar6->square(200);
-        $oAvatar7->resize(400);
+        $oAvatar2->square(self::AVATAR2_SIZE);
+        $oAvatar3->square(self::AVATAR3_SIZE);
+        $oAvatar4->square(self::AVATAR4_SIZE);
+        $oAvatar5->square(self::AVATAR5_SIZE);
+        $oAvatar6->square(self::AVATAR6_SIZE);
+        $oAvatar7->resize(self::AVATAR7_SIZE);
 
         /* Set watermark text on large avatars */
         $sWatermarkText = DbConfig::getSetting('watermarkTextImage');
@@ -144,13 +166,13 @@ class UserCore
 
         $sFileName = Various::genRnd($oAvatar1->getFileName(), 1);
 
-        $sFile1 = $sFileName . '.' . $oAvatar1->getExt();  // Original, four characters
-        $sFile2 = $sFileName . '-32.' . $oAvatar2->getExt();
-        $sFile3 = $sFileName . '-64.' . $oAvatar3->getExt();
-        $sFile4 = $sFileName . '-100.' . $oAvatar4->getExt();
-        $sFile5 = $sFileName . '-150.' . $oAvatar5->getExt();
-        $sFile6 = $sFileName . '-200.' . $oAvatar6->getExt();
-        $sFile7 = $sFileName . '-400.' . $oAvatar7->getExt();
+        $sFile1 = $sFileName . PH7_DOT . $oAvatar1->getExt();  // Original, four characters
+        $sFile2 = $sFileName . '-' . self::AVATAR2_SIZE . PH7_DOT . $oAvatar2->getExt();
+        $sFile3 = $sFileName . '-' . self::AVATAR3_SIZE . PH7_DOT . $oAvatar3->getExt();
+        $sFile4 = $sFileName . '-' . self::AVATAR4_SIZE . PH7_DOT . $oAvatar4->getExt();
+        $sFile5 = $sFileName . '-' . self::AVATAR5_SIZE . PH7_DOT . $oAvatar5->getExt();
+        $sFile6 = $sFileName . '-' . self::AVATAR6_SIZE . PH7_DOT . $oAvatar6->getExt();
+        $sFile7 = $sFileName . '-' . self::AVATAR7_SIZE . PH7_DOT . $oAvatar7->getExt();
 
         // Add the avatar
         (new UserCoreModel)->setAvatar($iProfileId, $sFile1, $iApproved);
@@ -191,12 +213,12 @@ class UserCore
         /** Array to the new format (>= PHP5.4) **/
         $aFiles = [
             $sPath . $sFile,
-            $sPath . str_replace($sExt, '-32' . $sExt, $sFile),
-            $sPath . str_replace($sExt, '-64' . $sExt, $sFile),
-            $sPath . str_replace($sExt, '-100' . $sExt, $sFile),
-            $sPath . str_replace($sExt, '-150' . $sExt, $sFile),
-            $sPath . str_replace($sExt, '-200' . $sExt, $sFile),
-            $sPath . str_replace($sExt, '-400' . $sExt, $sFile),
+            $sPath . str_replace($sExt, '-' . self::AVATAR2_SIZE . $sExt, $sFile),
+            $sPath . str_replace($sExt, '-' . self::AVATAR3_SIZE . $sExt, $sFile),
+            $sPath . str_replace($sExt, '-' . self::AVATAR4_SIZE . $sExt, $sFile),
+            $sPath . str_replace($sExt, '-' . self::AVATAR5_SIZE . $sExt, $sFile),
+            $sPath . str_replace($sExt, '-' . self::AVATAR6_SIZE . $sExt, $sFile),
+            $sPath . str_replace($sExt, '-' . self::AVATAR7_SIZE . $sExt, $sFile),
         ];
 
         $oFile->deleteFile($aFiles);
@@ -229,7 +251,11 @@ class UserCore
             error_reporting(0);
         }
 
-        $oWallpaper = new Image($sFile, 600, 800);
+        $oWallpaper = new Image(
+            $sFile,
+            self::MAX_WIDTH_BACKGROUND_IMAGE,
+            self::MAX_HEIGHT_BACKGROUND_IMAGE
+        );
 
         if (!$oWallpaper->validate()) {
             return false;
@@ -243,7 +269,7 @@ class UserCore
         (new File)->createDir($sPath);
 
         $sFileName = Various::genRnd($oWallpaper->getFileName(), 1);
-        $sFile = $sFileName . '.' . $oWallpaper->getExt();
+        $sFile = $sFileName . PH7_DOT . $oWallpaper->getExt();
 
         // Add the profile background
         (new UserCoreModel)->addBackground($iProfileId, $sFile, $iApproved);
@@ -271,7 +297,11 @@ class UserCore
         (new UserCoreModel)->deleteBackground($iProfileId);
 
         /* Clean User Background Cache */
-        (new Cache)->start(UserCoreModel::CACHE_GROUP, 'background' . $iProfileId, null)->clear();
+        (new Cache)->start(
+            UserCoreModel::CACHE_GROUP,
+            'background' . $iProfileId,
+            null
+        )->clear();
     }
 
     /**
@@ -309,7 +339,13 @@ class UserCore
                 's' => $sSex
             ];
 
-            $sLink = Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false);
+            $sLink = Uri::get(
+                'user',
+                'signup',
+                'step1',
+                '?' . Url::httpBuildQuery($aHttpParams),
+                false
+            );
         } else {
             $sLink = $this->getProfileLink($sUsername);
         }
@@ -327,8 +363,12 @@ class UserCore
      *
      * @return void
      */
-    public function setAuth(stdClass $oUserData, UserCoreModel $oUserModel, Session $oSession, SecurityModel $oSecurityModel)
-    {
+    public function setAuth(
+        stdClass $oUserData,
+        UserCoreModel $oUserModel,
+        Session $oSession,
+        SecurityModel $oSecurityModel
+    ) {
         // Remove the session if the user is logged on as "affiliate" or "administrator".
         if (AffiliateCore::auth() || AdminCore::auth()) {
             $oSession->destroy();
@@ -352,7 +392,12 @@ class UserCore
 
         $oSession->set($aSessionData);
 
-        $oSecurityModel->addLoginLog($oUserData->email, $oUserData->username, '*****', 'Logged in!');
+        $oSecurityModel->addLoginLog(
+            $oUserData->email,
+            $oUserData->username,
+            '*****',
+            'Logged in!'
+        );
         $oUserModel->setLastActivity($oUserData->profileId);
     }
 
@@ -386,13 +431,13 @@ class UserCore
         foreach ($aUsernameList as $sUsername) {
             $sUsername = substr($sUsername, 0, $iMaxLen);
 
-            if ((new Validate)->username($sUsername))
-                break;
-            else
-                $sUsername = Various::genRnd('pOH_Pierre-Henry_Soria_Béghin_Rollier', $iMaxLen); // Default value
+            if ((new Validate)->username($sUsername)) {
+                return $sUsername;
+            }
         }
 
-        return $sUsername;
+        // If all other usernames aren't valid, return the default one below
+        return Various::genRnd('pOH_Pierre-Henry_Soria_Béghin_Rollier', $iMaxLen);
     }
 
     /**
@@ -453,11 +498,19 @@ class UserCore
 
                 Header::redirect($sRedirectLoginUrl, $sSuccessMsg);
             } else {
-                Header::redirect($sRedirectLoginUrl, t('Oops! The URL is either invalid or you already have activated your account.'), 'error');
+                Header::redirect(
+                    $sRedirectLoginUrl,
+                    t('Oops! The URL is either invalid or you already have activated your account.'),
+                    Design::ERROR_TYPE
+                );
             }
             unset($oUserModel);
         } else {
-            Header::redirect($sRedirectIndexUrl, t('Invalid approach, please use the link that has been send to your email.'), 'error');
+            Header::redirect(
+                $sRedirectIndexUrl,
+                t('Invalid approach, please use the link that has been send to your email.'),
+                Design::ERROR_TYPE
+            );
         }
     }
 
@@ -478,11 +531,11 @@ class UserCore
      * Clean UserCoreModel / readProfile Cache
      *
      * @param integer $iId Profile ID.
-     * @param string $sTable Default 'Members'
+     * @param string $sTable Default DbTableName::MEMBER
      *
      * @return void
      */
-    public function clearReadProfileCache($iId, $sTable = 'Members')
+    public function clearReadProfileCache($iId, $sTable = DbTableName::MEMBER)
     {
         $this->clearCache('readProfile', $iId, $sTable);
     }
@@ -492,11 +545,11 @@ class UserCore
      * Clean UserCoreModel / infoFields Cache
      *
      * @param integer $iId Profile ID.
-     * @param string $sTable Default 'MembersInfo'
+     * @param string $sTable Default DbTableName::MEMBER_INFO
      *
      * @return void
      */
-    public function clearInfoFieldCache($iId, $sTable = 'MembersInfo')
+    public function clearInfoFieldCache($iId, $sTable = DbTableName::MEMBER_INFO)
     {
         $this->clearCache('infoFields', $iId, $sTable);
     }
@@ -524,7 +577,11 @@ class UserCore
     {
         VariousModel::checkModelTable($sTable);
 
-        (new Cache)->start(UserCoreModel::CACHE_GROUP, $sId . $iId . $sTable, null)->clear();
+        (new Cache)->start(
+            UserCoreModel::CACHE_GROUP,
+            $sId . $iId . $sTable,
+            null
+        )->clear();
     }
 
     /**

@@ -13,8 +13,12 @@ use PH7\Framework\Mvc\Model\Engine\Util\Various;
 
 class TwoFactorAuthCoreModel extends Framework\Mvc\Model\Engine\Model
 {
+    /** @var string */
     protected $sTable;
 
+    /**
+     * @param string $sMod
+     */
     public function __construct($sMod)
     {
         parent::__construct();
@@ -22,11 +26,18 @@ class TwoFactorAuthCoreModel extends Framework\Mvc\Model\Engine\Model
         $this->sTable = Various::convertModToTable($sMod);
     }
 
+    /**
+     * @param int $iProfileId
+     *
+     * @return bool
+     */
     public function isEnabled($iProfileId)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT isTwoFactorAuth FROM' . Db::prefix($this->sTable) . 'WHERE profileId = :profileId AND isTwoFactorAuth = \'1\' LIMIT 1');
+        $sSql = 'SELECT isTwoFactorAuth FROM' . Db::prefix($this->sTable) . 'WHERE profileId = :profileId AND isTwoFactorAuth = \'1\' LIMIT 1';
+        $rStmt = Db::getInstance()->prepare($sSql);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->fetchColumn() == 1;
     }
 }

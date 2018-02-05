@@ -52,32 +52,65 @@ class PH7Tpl extends Kernel
     const XML_SITEMAP_COMPILE_PAGE = 'mainlayout.xsl.cpl.php';
     const COMPILE_FILE_EXT = '.cpl.php';
 
-    /**
-     * The attributes must always be private (or protected), so we do not indicate convention ($_var)
-     */
-    private
-    // Objects
-    $designModel,
+    /** @var DesignModel */
+    private $designModel;
 
-    $sTplFile,
-    $sTemplateDir,
-    $sCompileDir,
-    $sCompileDir2,
-    $sCacheDir,
-    $sCacheDir2,
-    $sCode,
-    $sTemplateDirFile,
-    $sCompileDirFile,
-    $sCacheDirFile,
-    $bLicense,
-    $sTplExt = '.tpl', // Default extension
-    $bCaching = false,
-    $bHtmlCompressor,
-    $bPhpCompressor,
-    $mCacheExpire, // @var mixed (integer or null value) $mCacheExpire
-    $bXmlTags = false, // Enable (true) or Disables (false) XML Tags for the Template Engine
-    $_aVars = array(),
-    $_oVars;
+    /** @var string */
+    private $sTplFile;
+
+    /** @var string */
+    private $sTemplateDir;
+
+    /** @var string */
+    private $sCompileDir;
+
+    /** @var string */
+    private $sCompileDir2;
+
+    /** @var string */
+    private $sCacheDir;
+
+    /** @var string */
+    private $sCacheDir2;
+
+    /** @var string */
+    private $sCode;
+
+    /** @var string */
+    private $sTemplateDirFile;
+
+    /** @var string */
+    private $sCompileDirFile;
+
+    /** @var string */
+    private $sCacheDirFile;
+
+    /** @var bool */
+    private $bLicense;
+
+    /** @var string */
+    private $sTplExt = '.tpl'; // Default extension
+
+    /** @var bool */
+    private $bCaching = false;
+
+    /** @var bool */
+    private $bHtmlCompressor;
+
+    /** @var bool */
+    private $bPhpCompressor;
+
+    /** @var mixed */
+    private $mCacheExpire; // @var mixed (integer or null value) $mCacheExpire
+
+    /** @var bool */
+    private $bXmlTags = false; // Enable (true) or Disables (false) XML Tags for the Template Engine
+
+    /** @var array */
+    private $_aVars = array();
+
+    /** @var PH7Tpl */
+    private $_oVars;
 
     // Hack that keeps the $config variable in the template
     protected $config;
@@ -143,10 +176,11 @@ class PH7Tpl extends Kernel
      */
     public function setTemplateDir($sDir)
     {
-        if (is_dir($sDir))
+        if (is_dir($sDir)) {
             $this->sTemplateDir = $this->file->checkExtDir($sDir);
-        else
+        } else {
             throw new PH7InvalidArgumentException('<strong>' . self::NAME . '</strong> Template Engine cannot found the "' . $sDir . '" template directory.');
+        }
     }
 
     /**
@@ -346,8 +380,9 @@ class PH7Tpl extends Kernel
             $this->setErrMsg();
         }
 
-        if ($this->bPhpCompressor)
+        if ($this->bPhpCompressor) {
             $this->sCode = (new Compress)->parsePhp($this->sCode);
+        }
 
         $this->sCode = '<?php ' . $sPhpHeader . '?>' . $this->sCode;
 
@@ -358,7 +393,6 @@ class PH7Tpl extends Kernel
         }
 
         throw new TplException('Could not write compiled file: \'' . $this->sCompileDirFile . '\'');
-        return false;
     }
 
     /**
@@ -384,8 +418,9 @@ class PH7Tpl extends Kernel
         $this->classicSyntax();
 
         /***** XML Syntax *****/
-        if ($this->bXmlTags)
+        if ($this->bXmlTags) {
             $this->xmlSyntax();
+        }
 
         /***** Variables *****/
         $this->sCode = preg_replace('#{([a-z0-9_]+)}#i', '<?php echo $$1; ?>', $this->sCode);
@@ -590,8 +625,9 @@ class PH7Tpl extends Kernel
      */
     public function assigns(array $aVars, $bEscape = false, $bEscapeStrip = false)
     {
-        foreach ($aVars as $sKey => $sValue)
+        foreach ($aVars as $sKey => $sValue) {
             $this->assign($sKey, $sValue, $bEscape = false, $bEscapeStrip = false); // Assign a string variable
+        }
     }
 
     /**
@@ -627,7 +663,7 @@ class PH7Tpl extends Kernel
      */
     private function checkCompileDir()
     {
-        $this->sCompileDir = (empty($this->sCompileDir)) ? PH7_PATH_CACHE . static::COMPILE_DIR . PH7_DS : $this->sCompileDir;
+        $this->sCompileDir = empty($this->sCompileDir) ? PH7_PATH_CACHE . static::COMPILE_DIR . PH7_DS : $this->sCompileDir;
 
         return $this;
     }
@@ -660,6 +696,8 @@ class PH7Tpl extends Kernel
      *
      * @return void
      *
+     * @throws Exception
+     * @throws \PH7\Framework\File\Exception
      * @throws TplException If the cache file could not be written.
      */
     protected function cache()
@@ -684,8 +722,9 @@ class PH7Tpl extends Kernel
             $sOutput = ob_get_contents();
             ob_end_clean();
 
-            if ($this->bHtmlCompressor)
+            if ($this->bHtmlCompressor) {
                 $sOutput = (new Compress)->parseHtml($sOutput);
+            }
 
             if (!$this->file->putFile($this->sCacheDirFile, $sOutput)) {
                 throw new TplException('Unable to write to cache file: \'' . $this->sCacheDirFile . '\'');
@@ -941,7 +980,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
         }
 
         // "design->link()" can never be removed. Copyright notices won't be displayed if you bought a license
-        return (false !== strpos($this->sCode, 'design->link()'));
+        return false !== strpos($this->sCode, 'design->link()');
     }
 
     /**

@@ -63,7 +63,9 @@ class AdminController extends Controller
 
     public function banner()
     {
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', 'affiliate'));
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', 'affiliate')
+        );
     }
 
     public function browse()
@@ -130,7 +132,7 @@ class AdminController extends Controller
 
     public function loginUserAs($iId = null)
     {
-        if ($oUser = $this->oAffModel->readProfile($iId, 'Affiliates')) {
+        if ($oUser = $this->oAffModel->readProfile($iId, DbTableName::AFFILIATE)) {
             $aSessionData = [
                 'login_affiliate_as' => 1,
                 'affiliate_id' => $oUser->profileId,
@@ -146,7 +148,10 @@ class AdminController extends Controller
             $this->sMsg = t('You are now logged in as affiliate: %0%!', $oUser->username);
             unset($oUser, $aSessionData);
 
-            Header::redirect(Uri::get('affiliate', 'account', 'index'), $this->sMsg);
+            Header::redirect(
+                Uri::get('affiliate', 'account', 'index'),
+                $this->sMsg
+            );
         } else {
             Header::redirect(
                 $this->httpRequest->previousPage(),
@@ -233,8 +238,8 @@ class AdminController extends Controller
     {
         $iId = $this->httpRequest->post('id');
 
-        if ($this->oAffModel->ban($iId, 1, 'Affiliates')) {
-            $this->oAff->clearReadProfileCache($iId, 'Affiliates');
+        if ($this->oAffModel->ban($iId, 1, DbTableName::AFFILIATE)) {
+            $this->oAff->clearReadProfileCache($iId, DbTableName::AFFILIATE);
             $this->sMsg = t('The affiliate has been banned.');
         } else {
             $this->sMsg = t('Oops! An error has occurred while banishment the affiliate.');
@@ -250,8 +255,8 @@ class AdminController extends Controller
     {
         $iId = $this->httpRequest->post('id');
 
-        if ($this->oAffModel->ban($iId, 0, 'Affiliates')) {
-            $this->oAff->clearReadProfileCache($iId, 'Affiliates');
+        if ($this->oAffModel->ban($iId, 0, DbTableName::AFFILIATE)) {
+            $this->oAff->clearReadProfileCache($iId, DbTableName::AFFILIATE);
             $this->sMsg = t('The affiliate has been unbanned.');
         } else {
             $this->sMsg = t('Oops! An error has occurred while unban the affiliate.');
@@ -284,8 +289,8 @@ class AdminController extends Controller
             foreach ($this->httpRequest->post('action') as $sAction) {
                 $iId = (int)explode('_', $sAction)[0];
 
-                $this->oAffModel->ban($iId, 1, 'Affiliates');
-                $this->oAff->clearReadProfileCache($iId, 'Affiliates');
+                $this->oAffModel->ban($iId, 1, DbTableName::AFFILIATE);
+                $this->oAff->clearReadProfileCache($iId, DbTableName::AFFILIATE);
             }
             $this->sMsg = t('The affiliate(s) has/have been banned.');
         }
@@ -304,8 +309,8 @@ class AdminController extends Controller
             foreach ($this->httpRequest->post('action') as $sAction) {
                 $iId = (int)explode('_', $sAction)[0];
 
-                $this->oAffModel->ban($iId, 0, 'Affiliates');
-                $this->oAff->clearReadProfileCache($iId, 'Affiliates');
+                $this->oAffModel->ban($iId, 0, DbTableName::AFFILIATE);
+                $this->oAff->clearReadProfileCache($iId, DbTableName::AFFILIATE);
             }
             $this->sMsg = t('The affiliate(s) has/have been unbanned.');
         }
@@ -340,17 +345,17 @@ class AdminController extends Controller
     private function moderateRegistration($iId, $iStatus)
     {
         if (isset($iId, $iStatus)) {
-            if ($oUser = $this->oAffModel->readProfile($iId, 'Affiliates')) {
+            if ($oUser = $this->oAffModel->readProfile($iId, DbTableName::AFFILIATE)) {
                 if ($iStatus == 0) {
                     // Set user not active
-                    $this->oAffModel->approve($oUser->profileId, 0, 'Affiliates');
+                    $this->oAffModel->approve($oUser->profileId, 0, DbTableName::AFFILIATE);
 
                     // We leave the user in disapproval (but send an email). After we can ban or delete it.
                     $sSubject = t('Your membership account has been declined');
                     $this->sMsg = t('Sorry, Your membership account has been declined.');
                 } elseif ($iStatus == 1) {
                     // Approve user
-                    $this->oAffModel->approve($oUser->profileId, 1, 'Affiliates');
+                    $this->oAffModel->approve($oUser->profileId, 1, DbTableName::AFFILIATE);
 
                     /** Update the Affiliate Commission **/
                     AffiliateCore::updateJoinCom($oUser->affiliatedId, $this->config, $this->registry);
@@ -375,7 +380,7 @@ class AdminController extends Controller
                     $aInfo = ['to' => $oUser->email, 'subject' => $sSubject];
                     (new Framework\Mail\Mail)->send($aInfo, $sMessageHtml);
 
-                    $this->oAff->clearReadProfileCache($oUser->profileId, 'Affiliates');
+                    $this->oAff->clearReadProfileCache($oUser->profileId, DbTableName::AFFILIATE);
 
                     $sOutputMsg = t('Done!');
                 } else {

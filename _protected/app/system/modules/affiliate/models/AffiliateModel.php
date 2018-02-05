@@ -22,7 +22,7 @@ class AffiliateModel extends AffiliateCoreModel
      */
     public function join(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Affiliates') .
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::AFFILIATE) .
             '(email, username, password, firstName, lastName, sex, birthDate, active, ip, hashValidation, joinDate, lastActivity, affiliatedId)
             VALUES (:email, :username, :password, :firstName, :lastName, :sex, :birthDate, :active, :ip, :hashValidation, :joinDate, :lastActivity, :affiliatedId)');
 
@@ -55,7 +55,7 @@ class AffiliateModel extends AffiliateCoreModel
      */
     public function join2(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('AffiliatesInfo') .
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::AFFILIATE_INFO) .
             '(profileId, country, city, state, zipCode) VALUES (:profileId, :country, :city, :state, :zipCode)');
 
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
@@ -76,7 +76,7 @@ class AffiliateModel extends AffiliateCoreModel
      */
     public function addRefer($iProfileId)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Affiliates') . 'SET refer = refer+1 WHERE profileId = :profileId');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::AFFILIATE) . 'SET refer = refer+1 WHERE profileId = :profileId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         Db::free($rStmt);
 
@@ -112,7 +112,7 @@ class AffiliateModel extends AffiliateCoreModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Affiliates') . 'AS a LEFT JOIN' . Db::prefix('AffiliatesInfo') . 'AS i ON a.profileId = i.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::AFFILIATE) . 'AS a LEFT JOIN' . Db::prefix(DbTableName::AFFILIATE_INFO) . 'AS i ON a.profileId = i.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         if (ctype_digit($mLooking)) {
             $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
@@ -150,7 +150,7 @@ class AffiliateModel extends AffiliateCoreModel
     {
         $sCurrentDate = (new Framework\Date\CDateTime)->get()->dateTime('Y-m-d H:i:s');
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Affiliates') . '(email, username, password, firstName, lastName, sex, birthDate, bankAccount, ip, joinDate, lastActivity)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::AFFILIATE) . '(email, username, password, firstName, lastName, sex, birthDate, bankAccount, ip, joinDate, lastActivity)
         VALUES (:email, :username, :password, :firstName, :lastName, :sex, :birthDate, :bankAccount, :ip, :joinDate, :lastActivity)');
 
         $rStmt->bindValue(':email', trim($aData['email']), \PDO::PARAM_STR);
@@ -174,7 +174,7 @@ class AffiliateModel extends AffiliateCoreModel
 
     public function setInfoFields(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('AffiliatesInfo') . '(profileId, middleName, country, city, state, zipCode, phone, description, website)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::AFFILIATE_INFO) . '(profileId, middleName, country, city, state, zipCode, phone, description, website)
             VALUES (:profileId, :middleName, :country, :city, :state, :zipCode, :phone, :description, :website)');
 
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
@@ -199,7 +199,7 @@ class AffiliateModel extends AffiliateCoreModel
      */
     public function getAmount($iProfileId)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT amount FROM' . Db::prefix('Affiliates') . ' WHERE profileId = :profileId LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('SELECT amount FROM' . Db::prefix(DbTableName::AFFILIATE) . ' WHERE profileId = :profileId LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);

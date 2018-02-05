@@ -16,6 +16,9 @@ defined('PH7') or exit('Restricted access');
 
 class Spam
 {
+    const DEFAULT_MAX_ALLOWED_LINKS = 1;
+    const DEFAULT_MAX_ALLOWED_EMAILS = 1;
+
     const REGEX_URL_FORMAT = '#https?://(?:www\.)?[a-z0-9._-]{2,}\.[a-z]{2,5}/?#i';
     const REGEX_EMAIL_FORMAT = '#[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}#i';
 
@@ -75,7 +78,7 @@ class Spam
      *
      * @return bool TRUE if there are too many emails, FALSE otherwise.
      */
-    public static function areUrls($sText, $iMaxAmount = 1)
+    public static function areUrls($sText, $iMaxAmount = self::DEFAULT_MAX_ALLOWED_LINKS)
     {
         return self::are(self::REGEX_URL_FORMAT, $sText, $iMaxAmount);
     }
@@ -88,7 +91,7 @@ class Spam
      *
      * @return bool TRUE if there are too many links than the accepted amount, FALSE otherwise.
      */
-    public static function areEmails($sText, $iMaxAmount = 1)
+    public static function areEmails($sText, $iMaxAmount = self::DEFAULT_MAX_ALLOWED_EMAILS)
     {
         return self::are(self::REGEX_EMAIL_FORMAT, $sText, $iMaxAmount);
     }

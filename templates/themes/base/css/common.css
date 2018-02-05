@@ -190,8 +190,8 @@ label#percent {
 }
 
 .thumb_photo, .s_photo, .m_photo, .m_video {
-    float: left;
-    vertical-align: bottom;
+    display: inline-block;
+    vertical-align: top;
 }
 
 .thumb_photo img, .s_photo img, .m_photo img {
@@ -249,15 +249,11 @@ label#percent {
     margin: 16px;
 }
 
-.user_status img {
+.user_status span {
     position: absolute;
-    width: 12px;
-    height: 12px;
-    margin: 5px;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
+    font-size: 3.5rem;
+    line-height: 1rem;
+    margin: .5rem;
 }
 
 .cy_ico img {
@@ -293,6 +289,7 @@ label#percent {
 }
 
 .picture_block {
+    display: inline-block;
     margin: 10px 8px 10px;
     overflow: hidden;
 }
@@ -363,7 +360,7 @@ img, video, iframe {
         max-width: 500px;
         position: absolute;
         margin-left: 25%;
-        margin-top: -600px;
+        margin-top: -62rem;
     }
 }
 

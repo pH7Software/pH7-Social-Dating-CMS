@@ -19,7 +19,7 @@ SET @sDefIp = '37.205.56.35';
 
 -- Sample Members --
 
-INSERT INTO pH7_Members (email, username, password, firstName, lastName, birthDate, sex, matchSex, ip, lastActivity, featured, active, userStatus, groupId, joinDate) VALUES
+INSERT INTO ph7_members (email, username, password, firstName, lastName, birthDate, sex, matchSex, ip, lastActivity, featured, active, userStatus, groupId, joinDate) VALUES
 ('demo2@demo.cow', 'garcia', @sPassword, 'Grace', 'Park', '1992-11-21', 'female', 'male', @sDefIp, @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
 ('demo3@demo.cow', 'peter22', @sPassword, 'Peter', 'Backhard', '1977-12-21', 'male', 'female', @sDefIp, @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
 ('demo4@demo.cow', 'katin', @sPassword, 'Katin', 'Layjyr', '1988-12-21', 'female', 'male', @sDefIp, @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
@@ -39,7 +39,7 @@ INSERT INTO pH7_Members (email, username, password, firstName, lastName, birthDa
 SET @iProfileId = LAST_INSERT_ID();
 
 
-INSERT INTO pH7_MembersInfo (profileId, description, city, state, zipCode, country) VALUES
+INSERT INTO ph7_members_info (profileId, description, city, state, zipCode, country) VALUES
 (@iProfileId, 'Hello to all', 'Manhattan', 'Manhattan', '10002', 'US'),
 (@iProfileId+1, 'Hello to all', 'New York', 'New York', '11226', 'US'),
 (@iProfileId+2, 'Hello to all',  'Manhattan', 'Manhattan', '10002', 'US'),
@@ -59,7 +59,7 @@ INSERT INTO pH7_MembersInfo (profileId, description, city, state, zipCode, count
 
 
 
-INSERT INTO pH7_MembersPrivacy (profileId, privacyProfile, searchProfile, userSaveViews) VALUES
+INSERT INTO ph7_members_privacy (profileId, privacyProfile, searchProfile, userSaveViews) VALUES
 (@iProfileId, 'all', 'yes', 'yes'),
 (@iProfileId+1, 'all', 'yes', 'yes'),
 (@iProfileId+2, 'all', 'yes', 'yes'),
@@ -78,7 +78,7 @@ INSERT INTO pH7_MembersPrivacy (profileId, privacyProfile, searchProfile, userSa
 (@iProfileId+15, 'all', 'yes', 'yes');
 
 
-INSERT INTO pH7_MembersNotifications (profileId, enableNewsletters, newMsg, friendRequest) VALUES
+INSERT INTO ph7_members_notifications (profileId, enableNewsletters, newMsg, friendRequest) VALUES
 (@iProfileId, 0, 0, 0),
 (@iProfileId+1, 0, 0, 0),
 (@iProfileId+2, 0, 0, 0),
@@ -102,7 +102,7 @@ DELIMITER |
 
 WHILE (@iTotalMembers > 0) DO
    SET iTotalMembers = @iTotalMembers-1;
-   INSERT INTO pH7_MembersPrivacy (profileId, privacyProfile, searchProfile, userSaveViews) VALUES
+   INSERT INTO ph7_members_privacy (profileId, privacyProfile, searchProfile, userSaveViews) VALUES
    (@iProfileId-@iTotalMembers, 'all', 'yes', 'yes');
 END WHILE;
 
@@ -112,10 +112,10 @@ DELIMITER ;
 
 -- Sample Affiliates --
 
-INSERT INTO pH7_Affiliates (email, username, password, firstName, lastName, bankAccount, birthDate, sex, ip, lastActivity, joinDate) VALUES
+INSERT INTO ph7_affiliates (email, username, password, firstName, lastName, bankAccount, birthDate, sex, ip, lastActivity, joinDate) VALUES
 ('aff@affiliate.cow', 'aff1', @sPassword, 'Matthew', 'Rayen', 'bank_account@demo.cow', '1986-10-13', 'male', @sDefIp, @sCurrentDate, @sCurrentDate);
 SET @iProfileId = LAST_INSERT_ID();
 
 
-INSERT INTO pH7_AffiliatesInfo (profileId, description, website, city, state, zipCode, country) VALUES
+INSERT INTO ph7_affiliates_info (profileId, description, website, city, state, zipCode, country) VALUES
 (@iProfileId, 'My Website is very nice!', 'http://hizup.com', 'New York', 'NYC', '10001', 'US');

@@ -25,13 +25,13 @@ class AddAffiliateForm
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_add_aff', 'form_add_aff'));
         $oForm->addElement(new \PFBC\Element\Token('add_aff'));
-        $oForm->addElement(new \PFBC\Element\Username(t('Username:'), 'username', array('required' => 1, 'validation' => new \PFBC\Validation\Username('Affiliates'))));
-        $oForm->addElement(new \PFBC\Element\Email(t('Login Email:'), 'mail', array('required' => 1, 'validation' => new \PFBC\Validation\CEmail('guest', 'Affiliates'))));
+        $oForm->addElement(new \PFBC\Element\Username(t('Username:'), 'username', array('required' => 1, 'validation' => new \PFBC\Validation\Username(DbTableName::AFFILIATE))));
+        $oForm->addElement(new \PFBC\Element\Email(t('Login Email:'), 'mail', array('required' => 1, 'validation' => new \PFBC\Validation\CEmail('guest', DbTableName::AFFILIATE))));
         $oForm->addElement(new \PFBC\Element\Password(t('Password:'), 'password', array('required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('First Name:'), 'first_name', array('required' => 1, 'validation' => new \PFBC\Validation\Name)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Last Name:'), 'last_name', array('required' => 1, 'validation' => new \PFBC\Validation\Name)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Middle Name:'), 'middle_name', array('validation' => new \PFBC\Validation\Name)));
-        $oForm->addElement(new \PFBC\Element\Radio(t('Gender:'), 'sex', array('male' => t('Man'), 'female' => t('Woman')), array('required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Radio(t('Gender:'), 'sex', array('male' => t('Man'), 'female' => t('Woman')), array('value' => 'male', 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', array('title' => t('Please specify the birth date using the calendar.'), 'required' => 1, 'validation' => new \PFBC\Validation\BirthDate)));
         $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country', array('id' => 'str_country', 'value' => Geo::getCountryCode(), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', array('id' => 'str_city', 'validation' => new \PFBC\Validation\Str(2, 150), 'required' => 1)));

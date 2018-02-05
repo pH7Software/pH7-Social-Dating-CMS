@@ -93,7 +93,11 @@ abstract class Annotation
      */
     protected function initializeAnnotations($sClassName)
     {
-        $this->oCache = (new Cache)->start(static::CACHE_GROUP, $sClassName, null); // The last parameter is NULL, then the cache will never expire
+        $this->oCache = (new Cache)->start(
+            static::CACHE_GROUP,
+            $sClassName,
+            null // The last parameter is NULL, then the cache will never expire
+        );
     }
 
     /**

@@ -15,6 +15,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\AdminCore;
 use PH7\AffiliateCore;
+use PH7\DbTableName;
 use PH7\Framework\Benchmark\Benchmark;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Core\Kernel;
@@ -63,6 +64,9 @@ class Design
 
     const FLASH_MSG = 'flash_msg';
     const FLASH_TYPE = 'flash_type';
+
+    const DEFAULT_REDIRECTION_DELAY = 3;
+    const MAX_MESSAGE_LENGTH_SHOWN = 300;
 
     /** @var boolean */
     protected $bIsDiv = false;
@@ -166,7 +170,7 @@ class Design
     public function message()
     {
         if ($this->oHttpRequest->getExists('msg')) {
-            $this->aMessages[] = substr($this->oHttpRequest->get('msg'), 0, 300);
+            $this->aMessages[] = substr($this->oHttpRequest->get('msg'), 0, self::MAX_MESSAGE_LENGTH_SHOWN);
         }
 
         $iMsgNum = count($this->aMessages);
@@ -176,11 +180,13 @@ class Design
 
             echo '<script>$(function(){Apprise(\'';
 
-            if ($iMsgNum > 1)
+            if ($iMsgNum > 1) {
                 echo '<strong>', t('You have'), ' <em>', $iMsgNum, '</em> ', nt('message:', 'messages:', $iMsgNum), '</strong><br />';
+            }
 
-            for ($i = 0; $i < $iMsgNum; $i++)
+            for ($i = 0; $i < $iMsgNum; $i++) {
                 echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aMessages[$i])), '<br />';
+            }
 
             echo '\')});</script>';
         }
@@ -208,7 +214,7 @@ class Design
     public function error()
     {
         if ($this->oHttpRequest->getExists('err')) {
-            $this->aErrors[] = substr($this->oHttpRequest->get('err'), 0, 300);
+            $this->aErrors[] = substr($this->oHttpRequest->get('err'), 0, self::MAX_MESSAGE_LENGTH_SHOWN);
         }
 
         $iErrNum = count($this->aErrors);
@@ -219,8 +225,9 @@ class Design
             echo '<script>$(function(){Apprise(\'';
             echo '<strong>', t('You have'), ' <em>', $iErrNum, '</em> ', nt('error:', 'errors:', $iErrNum), '</strong><br />';
 
-            for ($i = 0; $i < $iErrNum; $i++)
+            for ($i = 0; $i < $iErrNum; $i++) {
                 echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aErrors[$i])), '<br />';
+            }
 
             echo '\')});</script>';
         }
@@ -238,13 +245,13 @@ class Design
      *
      * @return void
      */
-    public function setRedirect($sUrl = null, $sMsg = null, $sType = self::SUCCESS_TYPE, $iTime = 3)
+    public function setRedirect($sUrl = null, $sMsg = null, $sType = self::SUCCESS_TYPE, $iTime = self::DEFAULT_REDIRECTION_DELAY)
     {
         if ($sMsg !== null) {
             $this->setFlashMsg($sMsg, $sType);
         }
 
-        $sUrl = ($sUrl !== null) ? $sUrl : $this->oHttpRequest->currentUrl();
+        $sUrl = $sUrl !== null ? $sUrl : $this->oHttpRequest->currentUrl();
 
         header('Refresh: ' . $iTime . '; URL=' . $this->oHttpRequest->pH7Url($sUrl));
     }
@@ -318,7 +325,7 @@ class Design
      */
     public function popupLinkConfirm($sLabel, $sMod, $sCtrl, $sAct, $mId, $sClass = null)
     {
-        $sClass = ($sClass !== null) ? ' class="' . $sClass . '" ' : ' ';
+        $sClass = $sClass !== null ? ' class="' . $sClass . '" ' : ' ';
 
         $aHttpParams = [
             'label' => Url::encode($sLabel),
@@ -536,7 +543,7 @@ class Design
      *
      * @internal If it's an IPv6, show only the beginning, otherwise it would be too long in the template.
      *
-     * @param string $sIp Allows to speciy another IP address than the client one.
+     * @param string $sIp Allows to specify another IP address than the client one.
      * @param boolean $bPrint Print or Return the HTML code. Default TRUE
      *
      * @return void|string
@@ -620,7 +627,7 @@ class Design
 
             if (!is_file($sPath) || $oGetAvatar->approvedAvatar == '0') {
                 /* If sex is empty, it is recovered in the database using information from member */
-                $sSex = !empty($sSex) ? $sSex : $oUserModel->getSex(null, $sUsername, 'Members');
+                $sSex = !empty($sSex) ? $sSex : $oUserModel->getSex(null, $sUsername, DbTableName::MEMBER);
                 $sSex = $this->oStr->lower($sSex);
                 $sIcon = ($sSex === 'male' || $sSex === 'female' || $sSex === 'couple' || $sSex === PH7_ADMIN_USERNAME) ? $sSex : 'visitor';
                 $sUrlTplName = defined('PH7_TPL_NAME') ? PH7_TPL_NAME : PH7_DEFAULT_THEME;
@@ -688,16 +695,16 @@ class Design
      * @param string $sEmail The user email address.
      * @param string $sType The default image type to show. Default: 'wavatar'
      * @param integer $iSize The size of the image. Default: 80
-     * @param character $cRating The max image rating allowed. Default: 'g' (for all)
+     * @param string $sRating The max image rating allowed. Default: 'g' (for all)
      * @param boolean $bSecure Display avatar via HTTPS, for example if the site uses HTTPS, you should use this option to not get a warning with most Web browsers. Default: FALSE
      *
      * @return string The Gravatar Link.
      */
-    public function getGravatarUrl($sEmail, $sType = 'wavatar', $iSize = 80, $cRating = 'g', $bSecure = false)
+    public function getGravatarUrl($sEmail, $sType = 'wavatar', $iSize = 80, $sRating = 'g', $bSecure = false)
     {
         $sProtocol = $bSecure ? 'https' : 'http';
         $bSubDomain = $bSecure ? 'secure' : 'www';
-        return $sProtocol . '://' . $bSubDomain . '.gravatar.com/avatar/' . md5(strtolower($sEmail)) . '?d=' . $sType . '&s=' . $iSize . '&r=' . $cRating;
+        return $sProtocol . '://' . $bSubDomain . '.gravatar.com/avatar/' . md5(strtolower($sEmail)) . '?d=' . $sType . '&s=' . $iSize . '&r=' . $sRating;
     }
 
     /**
@@ -737,18 +744,18 @@ class Design
         ];
 
         $bIsLogged = UserCore::auth();
-        $sLikeLink = ($bIsLogged) ? '#' : Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false);
-        $sLikeId = ($bIsLogged) ? ' id="like"' : '';
+        $sLikeLink = $bIsLogged ? '#' : Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false);
+        $sLikeId = $bIsLogged ? ' id="like"' : '';
 
         $sUrlKey = empty($sForceUrlKey) ? $this->oHttpRequest->currentUrl() : $sForceUrlKey;
-        echo '<a rel="nofollow" href="', $sLikeLink, '" data-key="', $sUrlKey, '" title="', t('Like %0%', $sFirstName), '" class="like"', $sLikeId, '>', t('Like %0%', $sFirstName), '</a>';
+        echo '<a rel="nofollow" href="', $sLikeLink, '" data-key="', $sUrlKey, '" title="', t('Like %0%', $sFirstName), '" class="like smooth-pink"', $sLikeId, '>', t('Like %0%', $sFirstName), '</a>';
         $this->staticFiles('js', PH7_STATIC . PH7_JS, 'Like.js');
     }
 
     /**
      * Add Normal size Social Media Widgets.
      *
-     * @internal AddThis JS file will be included through 'pH7_StaticFiles' table.
+     * @internal AddThis JS file will be included through 'ph7_static_files' table.
      *
      * @return void HTML output.
      */
@@ -762,7 +769,7 @@ class Design
     /**
      * Add Small size Social Media Widgets.
      *
-     * @internal AddThis JS file will be included through 'pH7_StaticFiles' table.
+     * @internal AddThis JS file will be included through 'ph7_static_files' table.
      *
      * @return void HTML output.
      */
@@ -816,9 +823,9 @@ class Design
                 $sReportLink = Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aUrlParams), false);
             }
 
-            echo '<a rel="nofollow" href="', $sReportLink, '" title="', t('Report Abuse'), '">', t('Report'), '</a>';
+            echo '<a rel="nofollow" href="', $sReportLink, '" title="', t('Report Abuse'), '"><i class="fa fa-flag smooth-pink"></i></a>';
         } else {
-            echo '<abbr title="' . t('Report feature is not available for this content since the user who posted that content has been deleted.') . '"">' . t('Report') . '</abbr>';
+            echo '<abbr title="' . t('Report feature is not available for this content since the user who posted that content has been deleted.') . '""><i class="fa fa-flag smooth-pink"></i></abbr>';
         }
     }
 
@@ -935,7 +942,7 @@ class Design
             $sSiteName = Registry::getInstance()->site_name;
 
             // Check if the website's name exists, otherwise we displayed the software's name
-            $sName = (!empty($sSiteName)) ? $sSiteName : Kernel::SOFTWARE_NAME;
+            $sName = !empty($sSiteName) ? $sSiteName : Kernel::SOFTWARE_NAME;
 
             echo '<header>
             <div role="banner" id="logo"><h1><a href="', PH7_URL_ROOT, '" title="', $sName, ' — ', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_COMPANY, '">', $sName, '</a></h1></div>
@@ -975,7 +982,7 @@ class Design
      */
     public function externalCssFile($sFile, $sCssMedia = null)
     {
-        $sCssMedia = ($sCssMedia !== null) ? ' media="' . $sCssMedia . '"' : '';
+        $sCssMedia = $sCssMedia !== null ? ' media="' . $sCssMedia . '"' : '';
         echo '<link rel="stylesheet" href="', $sFile, '"', $sCssMedia, ' />';
     }
 

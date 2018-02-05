@@ -26,7 +26,7 @@ class BannerForm
             null,
             $oPage->getFirstItem(),
             $oPage->getNbItemsPerPage(),
-            'AdsAffiliates'
+            DbTableName::AD_AFFILIATE
         );
         unset($oPage, $oAdsModel);
 

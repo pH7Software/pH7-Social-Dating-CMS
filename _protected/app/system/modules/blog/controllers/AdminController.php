@@ -39,7 +39,7 @@ class AdminController extends MainController
     {
         $iId = $this->httpRequest->post('id');
 
-        CommentCoreModel::deleteRecipient($iId, 'Blog');
+        CommentCoreModel::deleteRecipient($iId, 'blog');
         $this->oBlogModel->deleteCategory($iId);
         $this->oBlogModel->deletePost($iId);
         (new Blog)->deleteThumb($iId, 'blog', $this->file);

@@ -54,9 +54,17 @@ class MainController extends Controller
             Header::redirect($this->registry->site_url, t('Oops! Email or hash is invalid.'), Design::ERROR_TYPE);
         } else {
             if (!$this->sendMail($sTable, $sEmail)) {
-                Header::redirect($this->registry->site_url, Form::errorSendingEmail(), Design::ERROR_TYPE);
+                Header::redirect(
+                    $this->registry->site_url,
+                    Form::errorSendingEmail(),
+                    Design::ERROR_TYPE
+                );
             } else {
-                Header::redirect($this->registry->site_url, t('Your new password has been emailed to you.'), Design::SUCCESS_TYPE);
+                Header::redirect(
+                    $this->registry->site_url,
+                    t('Your new password has been emailed to you.'),
+                    Design::SUCCESS_TYPE
+                );
             }
         }
     }
@@ -118,13 +126,13 @@ class MainController extends Controller
     private function getLoginUrl($sTableName)
     {
         switch ($sTableName) {
-            case 'Members':
+            case DbTableName::MEMBER:
                 return Uri::get('user', 'main', 'index');
 
-            case 'Affiliates':
+            case DbTableName::AFFILIATE:
                 return Uri::get('affiliate', 'home', 'login');
 
-            case 'Admins':
+            case DbTableName::ADMIN:
                 return Uri::get(PH7_ADMIN_MOD, 'main', 'login');
         }
     }

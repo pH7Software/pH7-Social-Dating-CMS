@@ -8,10 +8,14 @@
 
 namespace PH7\Framework\Mvc\Model;
 
+use PH7\DbTableName;
+
 defined('PH7') or exit('Restricted access');
 
 class License extends Engine\Model
 {
+    const DEFAULT_LICENSE_ID = 1;
+
     /**
      * Get the license key.
      *
@@ -19,9 +23,9 @@ class License extends Engine\Model
      *
      * @return string
      */
-    public function get($iId = 1)
+    public function get($iId = self::DEFAULT_LICENSE_ID)
     {
-        return $this->orm->getOne('License', 'licenseId', $iId, 'licenseKey')->licenseKey;
+        return $this->orm->getOne(DbTableName::LICENSE, 'licenseId', $iId, 'licenseKey')->licenseKey;
     }
 
     /**
@@ -32,8 +36,8 @@ class License extends Engine\Model
      *
      * @return integer|boolean Returns the number of rows on success or FALSE on failure.
      */
-    public function save($sKey, $iId = 1)
+    public function save($sKey, $iId = self::DEFAULT_LICENSE_ID)
     {
-        return $this->orm->update('License', 'licenseKey', $sKey, 'licenseId', $iId);
+        return $this->orm->update(DbTableName::LICENSE, 'licenseKey', $sKey, 'licenseId', $iId);
     }
 }

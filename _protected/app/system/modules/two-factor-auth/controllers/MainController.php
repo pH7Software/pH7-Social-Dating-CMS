@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Parse\Url;
 use PH7\Framework\Url\Header;
 use RobThree\Auth\TwoFactorAuth as Authenticator;
@@ -156,7 +157,11 @@ class MainController extends Controller
             $this->sMod !== 'affiliate' &&
             $this->sMod !== PH7_ADMIN_MOD
         ) {
-            Header::redirect($this->registry->site_url, t('No module found!'), 'error');
+            Header::redirect(
+                $this->registry->site_url,
+                t('No module found!'),
+                Design::ERROR_TYPE
+            );
         }
     }
 }

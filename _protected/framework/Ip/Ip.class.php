@@ -25,7 +25,7 @@ class Ip
     /**
      * Get IP address.
      *
-     * @param string $sIp Allows to speciy another IP address than the client one.
+     * @param string $sIp Allows to specify another IP address than the client one.
      *
      * @return string IP address. If the IP format is invalid, returns '0.0.0.0'
      */
@@ -45,7 +45,7 @@ class Ip
     /**
      * Returns the API IP with the IP address.
      *
-     * @param string $sIp IP address. Allows to speciy a specific IP.
+     * @param string $sIp IP address. Allows to specify a specific IP.
      *
      * @return string API URL with the IP address.
      */
@@ -61,11 +61,15 @@ class Ip
      *
      * @param string $sIp The IP address.
      *
-     * @return boolean Returns TRUE is it's a private IP, FALSE otherwite.
+     * @return bool Returns TRUE is it's a private IP, FALSE otherwite.
      */
     public static function isPrivate($sIp)
     {
-        return filter_var($sIp, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) ? false : true;
+        return filter_var(
+            $sIp,
+            FILTER_VALIDATE_IP,
+            FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE
+        ) ? false : true;
     }
 
     /**

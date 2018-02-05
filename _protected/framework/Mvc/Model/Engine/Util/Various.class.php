@@ -14,6 +14,7 @@ namespace PH7\Framework\Mvc\Model\Engine\Util;
 defined('PH7') or exit('Restricted access');
 
 use PH7\AdsCore;
+use PH7\DbTableName;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Pattern\Statik;
@@ -46,7 +47,7 @@ class Various
         $rStmt = Db::getInstance()->exec($sSqlContent);
         unset($sSqlContent);
 
-        return ($rStmt === false) ? $rStmt->errorInfo() : true;
+        return $rStmt === false ? $rStmt->errorInfo() : true;
     }
 
     /**
@@ -62,19 +63,19 @@ class Various
     {
         switch ($Mod) {
             case 'user':
-                $sTable = 'Members';
+                $sTable = DbTableName::MEMBER;
                 break;
 
             case 'affiliate':
-                $sTable = 'Affiliates';
+                $sTable = DbTableName::AFFILIATE;
                 break;
 
             case 'newsletter':
-                $sTable = 'Subscribers';
+                $sTable = DbTableName::SUBSCRIBER;
                 break;
 
             case PH7_ADMIN_MOD:
-                $sTable = 'Admins';
+                $sTable = DbTableName::ADMIN;
                 break;
 
             default:
@@ -98,19 +99,19 @@ class Various
     public static function convertTableToMod($sTable)
     {
         switch ($sTable) {
-            case 'Members':
+            case DbTableName::MEMBER:
                 $sMod = 'user';
                 break;
 
-            case 'Affiliates':
+            case DbTableName::AFFILIATE:
                 $sMod = 'affiliate';
                 break;
 
-            case 'Subscribers':
+            case DbTableName::SUBSCRIBER:
                 $sMod = 'newsletter';
                 break;
 
-            case 'Admins':
+            case DbTableName::ADMIN:
                 $sMod = PH7_ADMIN_MOD;
                 break;
 
@@ -135,39 +136,39 @@ class Various
     public static function convertTableToId($sTable)
     {
         switch ($sTable) {
-            case 'Members':
+            case DbTableName::MEMBER:
                 $sId = 'profileId';
                 break;
 
-            case 'Pictures':
+            case DbTableName::PICTURE:
                 $sId = 'pictureId';
                 break;
 
-            case 'AlbumsPictures':
+            case DbTableName::ALBUM_PICTURE:
                 $sId = 'albumId';
                 break;
 
-            case 'Videos':
+            case DbTableName::VIDEO:
                 $sId = 'videoId';
                 break;
 
-            case 'AlbumsVideos':
+            case DbTableName::ALBUM_VIDEO:
                 $sId = 'albumId';
                 break;
 
-            case 'Blogs':
+            case DbTableName::BLOG:
                 $sId = 'blogId';
                 break;
 
-            case 'Notes':
+            case DbTableName::NOTE:
                 $sId = 'noteId';
                 break;
 
-            case 'Games':
+            case DbTableName::GAME:
                 $sId = 'GameId';
                 break;
 
-            case 'ForumsTopics':
+            case DbTableName::FORUM_TOPIC:
                 $sId = 'topicId';
                 break;
 
@@ -197,14 +198,14 @@ class Various
     public static function checkTable($sTable)
     {
         switch ($sTable) {
-            case 'Members':
-            case 'AlbumsPictures':
-            case 'AlbumsVideos':
-            case 'Pictures':
-            case 'Videos':
-            case 'Games':
-            case 'Blogs':
-            case 'Notes':
+            case DbTableName::MEMBER:
+            case DbTableName::ALBUM_PICTURE:
+            case DbTableName::ALBUM_VIDEO:
+            case DbTableName::PICTURE:
+            case DbTableName::VIDEO:
+            case DbTableName::GAME:
+            case DbTableName::BLOG:
+            case DbTableName::NOTE:
                 return $sTable;
 
             /** Check Ads Tables **/
@@ -230,12 +231,12 @@ class Various
     public static function checkModelTable($sTable)
     {
         switch ($sTable) {
-            case 'Members':
-            case 'Affiliates':
-            case 'MembersInfo':
-            case 'AffiliatesInfo':
-            case 'Subscribers':
-            case 'Admins':
+            case DbTableName::MEMBER:
+            case DbTableName::AFFILIATE:
+            case DbTableName::MEMBER_INFO:
+            case DbTableName::AFFILIATE_INFO:
+            case DbTableName::SUBSCRIBER:
+            case DbTableName::ADMIN:
                 return $sTable;
 
             default:
@@ -244,18 +245,16 @@ class Various
     }
 
     /**
-     * Set an Error Message with an Exception then exit() function.
+     * Throw an exception with an informative message.
      *
      * @param string $sTable The table value.
-     *
-     * @return integer 1 (with exit function).
+
      *
      * @throws PH7InvalidArgumentException Explanatory message.
      */
     public static function launchErr($sTable)
     {
         throw new PH7InvalidArgumentException('Bad data table: "' . $sTable . '"!');
-        exit(1);
     }
 
     /**

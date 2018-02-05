@@ -28,6 +28,12 @@ class Image
     const GIF = IMAGETYPE_GIF;
     const WEBP = 'image/webp'; // From PHP 7.1, IMAGETYPE_WEBP is available
 
+    const DEFAULT_MAX_WIDTH = 3000;
+    const DEFAULT_MAX_HEIGHT = 3000;
+
+    const DEFAULT_IMAGE_QUALITY = 100;
+    const DEFAULT_COMPRESSION_LEVEL = 4;
+
     /** @var string */
     private $sFile;
 
@@ -61,7 +67,7 @@ class Image
      * @param int $iMaxWidth Default value 3000.
      * @param int $iMaxHeight Default value 3000.
      */
-    public function __construct($sFile, $iMaxWidth = 3000, $iMaxHeight = 3000)
+    public function __construct($sFile, $iMaxWidth = self::DEFAULT_MAX_WIDTH, $iMaxHeight = self::DEFAULT_MAX_HEIGHT)
     {
         $this->sFile = $sFile;
         $this->iMaxWidth = $iMaxWidth;
@@ -86,24 +92,24 @@ class Image
         } else {
             switch ($mImgType) {
                 // JPG
-                case static::JPG:
+                case self::JPG:
                     $this->rImage = imagecreatefromjpeg($this->sFile);
                     $this->sType = 'jpg';
                     break;
 
                 // PNG
-                case static::PNG:
+                case self::PNG:
                     $this->rImage = imagecreatefrompng($this->sFile);
                     $this->sType = 'png';
                     break;
 
                 // GIF
-                case static::GIF:
+                case self::GIF:
                     $this->rImage = imagecreatefromgif($this->sFile);
                     $this->sType = 'gif';
                     break;
 
-                case static::WEBP:
+                case self::WEBP:
                     $this->rImage = imagecreatefromgif($this->sFile);
                     $this->sType = 'webp';
                     break;
@@ -126,11 +132,11 @@ class Image
     }
 
     /**
-     * @param int $iQ
+     * @param int $iQ From 0 (worst quality) to 100 (best quality).
      *
      * @return self
      */
-    public function quality($iQ = 100)
+    public function quality($iQ = self::DEFAULT_IMAGE_QUALITY)
     {
         $this->iQuality = $iQ;
 
@@ -142,7 +148,7 @@ class Image
      *
      * @return self
      */
-    public function compression($iC = 4)
+    public function compression($iC = self::DEFAULT_COMPRESSION_LEVEL)
     {
         $this->iCompression = $iC;
 
@@ -158,10 +164,10 @@ class Image
     public function resize($iX = null, $iY = null)
     {
         if (!$iX) {
-            // Width not given
+            // If width is not given
             $iX = $this->iWidth * ($iY / $this->iHeight);
         } elseif (!$iY) {
-            // Height not given
+            // If height is not given
             $iY = $this->iHeight * ($iX / $this->iWidth);
         }
 

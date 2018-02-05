@@ -52,18 +52,21 @@ class XmlDesignCore
      * we don't do it since it doesn't really matter for this section.
      *
      * @return void
+     *
+     * @throws Framework\File\Exception
      */
     public static function rssHeaderLinks()
     {
-        echo '<link rel="alternate" type="application/rss+xml" title="', t('Latest Blog Posts'), '" href="', Uri::get('xml', 'rss', 'xmlrouter', 'blog'), '" />
-        <link rel="alternate" type="application/rss+xml" title="', t('Latest Notes'), '" href="', Uri::get('xml', 'rss', 'xmlrouter', 'note'), '" />
-        <link rel="alternate" type="application/rss+xml" title="', t('Latest Forum Topics'), '" href="', Uri::get('xml', 'rss', 'xmlrouter', 'forum-topic'), '" />
-        <link rel="alternate" type="application/rss+xml" title="', t('Latest Profile Comments'), '" href="', Uri::get('xml', 'rss', 'xmlrouter', 'comment-profile'), '" />
-        <link rel="alternate" type="application/rss+xml" title="', t('Latest Blog Comments'), '" href="', Uri::get('xml', 'rss', 'xmlrouter', 'comment-blog'), '" />
-        <link rel="alternate" type="application/rss+xml" title="', t('Latest Note Comments'), '" href="', Uri::get('xml', 'rss', 'xmlrouter', 'comment-note'), '" />
-        <link rel="alternate" type="application/rss+xml" title="', t('Latest Picture Comments'), '" href="', Uri::get('xml', 'rss', 'xmlrouter', 'comment-picture'), '" />
-        <link rel="alternate" type="application/rss+xml" title="', t('Latest Video Comments'), '" href="', Uri::get('xml', 'rss', 'xmlrouter', 'comment-video'), '" />
-        <link rel="alternate" type="application/rss+xml" title="', t('Latest Game Comments'), '" href="', Uri::get('xml', 'rss', 'xmlrouter', 'comment-game'), '" />';
+        self::generateRssTagLink(t('Latest Blog Posts'), Uri::get('xml', 'rss', 'xmlrouter', 'blog'));
+        self::generateRssTagLink(t('Latest Blog Posts'), Uri::get('xml', 'rss', 'xmlrouter', 'blog'));
+        self::generateRssTagLink(t('Latest Notes'), Uri::get('xml', 'rss', 'xmlrouter', 'note'));
+        self::generateRssTagLink(t('Latest Forum Topics'), Uri::get('xml', 'rss', 'xmlrouter', 'forum-topic'));
+        self::generateRssTagLink(t('Latest Profile Comments'), Uri::get('xml', 'rss', 'xmlrouter', 'comment-profile'));
+        self::generateRssTagLink(t('Latest Blog Comments'), Uri::get('xml', 'rss', 'xmlrouter', 'comment-blog'));
+        self::generateRssTagLink(t('Latest Note Comments'),  Uri::get('xml', 'rss', 'xmlrouter', 'comment-note'));
+        self::generateRssTagLink(t('Latest Picture Comments'),  Uri::get('xml', 'rss', 'xmlrouter', 'comment-picture'));
+        self::generateRssTagLink(t('Latest Video Comments'),  Uri::get('xml', 'rss', 'xmlrouter', 'comment-video'));
+        self::generateRssTagLink(t('Latest Game Comments'),  Uri::get('xml', 'rss', 'xmlrouter', 'comment-game'));
     }
 
     /**
@@ -92,5 +95,16 @@ class XmlDesignCore
                 'error'
             );
         }
+    }
+
+    /**
+     * @param string $sTitle
+     * @param string $sUrl
+     *
+     * @return void HTML output.
+     */
+    private static function generateRssTagLink($sTitle, $sUrl)
+    {
+        echo '<link rel="alternate" type="application/rss+xml" title="', $sTitle, '" href="', $sUrl, '" />';
     }
 }

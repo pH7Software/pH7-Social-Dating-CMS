@@ -27,6 +27,8 @@ class MainController extends Controller
     const TWO_CHECKOUT_GATEWAY_NAME = '2co';
     const CCBILL_GATEWAY_NAME = 'ccbill';
 
+    const REDIRECTION_DELAY = 4; // In seconds
+
     /** @var AffiliateCoreModel */
     protected $oUserModel;
 
@@ -137,23 +139,23 @@ class MainController extends Controller
                             ]
                         );
 
-                        $iItemNumber = $this->httpRequest->post('item_number');
-                        if ($this->oUserModel->updateMembership(
-                            $iItemNumber,
-                            $this->iProfileId,
-                            $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
-                        ) {
-                            $this->bStatus = true; // Status is OK
-                            $this->updateUserGroupId($iItemNumber);
-                            $this->notification(Stripe::class, $iItemNumber);
+                        if ($oCharge->paid === true) {
+                            $iItemNumber = $this->httpRequest->post('item_number');
+                            if ($this->oUserModel->updateMembership(
+                                $iItemNumber,
+                                $this->iProfileId,
+                                $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+                            )) {
+                                $this->bStatus = true; // Status is OK
+                                $this->updateUserGroupId($iItemNumber);
+                                $this->notification(Stripe::class, $iItemNumber);
+                            }
                         }
-                    }
-                    catch (\Stripe\Error\Card $oE) {
+                    } catch (\Stripe\Error\Card $oE) {
                         // The card has been declined
                         // Do nothing here as "$this->bStatus" is by default FALSE and so it will display "Error occurred" msg later
-                    }
-                    catch (\Stripe\Error\Base $oE) {
-                        $this->design->setMessage( $this->str->escape($oE->getMessage(), true) );
+                    } catch (\Stripe\Error\Base $oE) {
+                        $this->design->setMessage($this->str->escape($oE->getMessage(), true));
                     }
                 }
             } break;
@@ -181,7 +183,7 @@ class MainController extends Controller
                         }
                     } elseif ($oResult->transaction) {
                         $sErrMsg = t('Error processing transaction: %0%', $oResult->transaction->processorResponseText);
-                        $this->design->setMessage( $this->str->escape($sErrMsg, true) );
+                        $this->design->setMessage($this->str->escape($sErrMsg, true));
                     }
                 }
             } break;
@@ -392,7 +394,7 @@ class MainController extends Controller
      */
     private function setAutomaticRedirectionToHomepage()
     {
-        $this->design->setRedirect($this->registry->site_url, null, null, 4);
+        $this->design->setRedirect($this->registry->site_url, null, null, self::REDIRECTION_DELAY);
     }
 
     /**

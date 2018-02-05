@@ -50,6 +50,11 @@ class BirthdayController extends Controller
         $this->view->meta_keywords = t('birthday,birthdate,anniversary,birth,friend,dating,social networking,profile,social');
     }
 
+    /**
+     * @param string $sGender
+     *
+     * @return void
+     */
     public function index($sGender = BirthdayModel::ALL)
     {
         $this->checkType($sGender);
@@ -66,7 +71,7 @@ class BirthdayController extends Controller
         $this->sTitle = nt('%n% Birthday', '%n% Birthdays', $this->iTotalBirths) . $sHtmlCurrentDate;
         $this->view->page_title = $this->view->h1_title = $this->sTitle;
 
-        if ($sGender != BirthdayModel::ALL) {
+        if ($sGender !== BirthdayModel::ALL) {
             $this->view->h3_title = '<span class="pH0">' . t($sGender) . '</span>';
         }
 
@@ -75,7 +80,12 @@ class BirthdayController extends Controller
         $this->output();
     }
 
-    protected function checkType($sSexType)
+    /**
+     * @param string $sSexType
+     *
+     * @return string|void
+     */
+    private function checkType($sSexType)
     {
         switch ($sSexType) {
             case BirthdayModel::ALL:

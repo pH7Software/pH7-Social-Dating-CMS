@@ -21,11 +21,11 @@ class MessengerModel extends Model
      *
      * @param string $sTo Username
      *
-     * @return \stdClass SQL content
+     * @return array SQL content
      */
     public function select($sTo)
     {
-        $sSqlQuery = 'SELECT * FROM' . Db::prefix('Messenger') .
+        $sSqlQuery = 'SELECT * FROM' . Db::prefix(DbTableName::MESSENGER) .
             'WHERE (toUser = :to AND recd = 0) ORDER BY messengerId ASC';
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
@@ -45,7 +45,7 @@ class MessengerModel extends Model
      */
     public function update($sFrom, $sTo)
     {
-        $sSqlQuery = 'UPDATE' . Db::prefix('Messenger') .
+        $sSqlQuery = 'UPDATE' . Db::prefix(DbTableName::MESSENGER) .
             'SET recd = 1 WHERE (fromUser = :from OR toUser = :to) AND recd = 0';
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
@@ -67,7 +67,7 @@ class MessengerModel extends Model
      */
     public function insert($sFrom, $sTo, $sMessage, $sDate)
     {
-        $sSqlQuery = 'INSERT INTO' . Db::prefix('Messenger') .
+        $sSqlQuery = 'INSERT INTO' . Db::prefix(DbTableName::MESSENGER) .
             '(fromUser, toUser, message, sent) VALUES (:from, :to, :message, :date)';
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
