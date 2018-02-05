@@ -50,7 +50,7 @@ abstract class Controller extends Core
         $this->registry->url_relative = PH7_RELATIVE;
 
         // Site Name
-        $this->registry->site_name = M\DbConfig::getSetting('siteName');
+        $this->registry->site_name = htmlspecialchars(M\DbConfig::getSetting('siteName'));
 
 
         /** PH7Tpl Template Engine initialization **/
