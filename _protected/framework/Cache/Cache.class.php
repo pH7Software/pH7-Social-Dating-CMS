@@ -321,7 +321,7 @@ File ID: ' . $this->sId . '
      *
      * @param string $sData
      *
-     * @return bool
+     * @return bool|null
      *
      * @throws Exception If the file cannot be written.
      * @throws \PH7\Framework\File\Exception If the file cannot be created.
