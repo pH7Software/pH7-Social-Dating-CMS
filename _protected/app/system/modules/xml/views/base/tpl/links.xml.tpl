@@ -1,7 +1,7 @@
 {{ $design->xmlHeader() }}
 
 <url>
-<link title="{lang 'About our Free Online Dating Site'}" url="{{ $design->url('page','main','index') }}" />
+<link title="{lang 'About %site_name%'}" url="{{ $design->url('page','main','index') }}" />
 
 {if $is_webcam_enabled}
   <link title="{lang 'Webcam Picture Party Fun'}" url="{{ $design->url('webcam','webcam','picture') }}" />
