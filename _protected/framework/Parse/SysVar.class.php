@@ -58,7 +58,7 @@ class SysVar
         $oRegistry = Registry::getInstance();
         $this->sVar = str_replace('%site_name%', $oRegistry->site_name, $this->sVar);
         $this->sVar = str_replace('%url_relative%', PH7_RELATIVE, $this->sVar);
-        $this->sVar = str_replace(array('%site_url%', '%url_root%'), $oRegistry->site_url, $this->sVar);
+        $this->sVar = str_replace(['%site_url%', '%url_root%'], $oRegistry->site_url, $this->sVar);
         $this->sVar = str_replace('%url_static%', PH7_URL_STATIC, $this->sVar);
         unset($oRegistry);
     }
