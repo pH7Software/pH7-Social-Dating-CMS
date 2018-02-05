@@ -165,7 +165,7 @@ class Cache
     /**
      * Gets the data cache.
      *
-     * @param bool $bPrint Default FALSE
+     * @param bool $bPrint
      *
      * @return bool|int|float|string|array|object Returns the converted cache value if successful, FALSE otherwise.
      */
