@@ -227,7 +227,7 @@ class MainController extends Controller
             $sMailLink = Uri::get('mail', 'main', 'compose', $oUser->username);
         } else {
             $aUrlParms = [
-                'msg' => t('You need to free register for send a message to %0%.', $sFirstName),
+                'msg' => t('Register now to message %0%!', $sFirstName),
                 'ref' => 'profile',
                 'a' => 'mail',
                 'u' => $oUser->username,
@@ -257,7 +257,7 @@ class MainController extends Controller
             $sMessengerLink = 'javascript:void(0)" onclick="Messenger.chatWith(\'' . $oUser->username . '\')';
         } else {
             $aUrlParms = [
-                'msg' => t('You need to free register for talk to %0%.', $sFirstName),
+                'msg' => t('Register for free to talk to %0%.', $sFirstName),
                 'ref' => 'profile',
                 'a' => 'messenger',
                 'u' => $oUser->username,
