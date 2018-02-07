@@ -17,7 +17,7 @@
      * If so, scroll down to show the "Default Membership Group" first (this is used by the Payment module) */
     var sHash = location.hash.substr(1);
     if (sHash == 'p=registration') {
-        var $target = $('body');
-        $target.animate({scrollTop:$target.height()}, 1000);
+        var $target = $('html, body');
+        $target.animate({scrollTop: $target.height()}, 1000);
     }
 </script>
