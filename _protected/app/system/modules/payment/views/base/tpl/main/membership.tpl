@@ -11,15 +11,17 @@
                                     <h4 class="underline">{% $membership->name %}</h4>
                                     <h5>
                                         {% $config->values['module.setting']['currency_sign'] %}{% $membership->price %}
-                                        {if $membership->expirationDays > 0}
-                                            <span class="small">
+                                        <span class="small">
+                                            {if $membership->expirationDays > 0}
                                                 {if $membership->expirationDays == 1}
                                                     {lang 'per day', $membership->expirationDays}
                                                 {else}
                                                     {lang 'every %0% days', $membership->expirationDays}
                                                 {/if}
-                                            </span>
-                                        {/if}
+                                            {else}
+                                                <span class="underline">{lang 'one-time payment'}</span>
+                                            {/if}
+                                        </span>
                                     </h5>
                                     <p class="italic">{% $membership->description %}</p>
                                 </div>
