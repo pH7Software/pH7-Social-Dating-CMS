@@ -9,7 +9,18 @@
                             <li class="list-group-item clearfix">
                                 <div class="pull-left">
                                     <h4 class="underline">{% $membership->name %}</h4>
-                                    <h5>{% $config->values['module.setting']['currency_sign'] %}{% $membership->price %}</h5>
+                                    <h5>
+                                        {% $config->values['module.setting']['currency_sign'] %}{% $membership->price %}
+                                        {if $membership->expirationDays > 0}
+                                            <span class="small">
+                                                {if $membership->expirationDays == 1}
+                                                    {lang 'per day', $membership->expirationDays}
+                                                {else}
+                                                    {lang 'every %0% days', $membership->expirationDays}
+                                                {/if}
+                                            </span>
+                                        {/if}
+                                    </h5>
                                     <p class="italic">{% $membership->description %}</p>
                                 </div>
                                 <p class="pull-right">
