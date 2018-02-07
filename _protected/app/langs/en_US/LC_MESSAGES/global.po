@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pH7CMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-07 19:49+0000\n"
-"PO-Revision-Date: 2018-02-07 19:49+0000\n"
+"POT-Creation-Date: 2018-02-07 20:02+0000\n"
+"PO-Revision-Date: 2018-02-07 20:02+0000\n"
 "Last-Translator: Pierre-Henry Soria <hi@ph7.me>\n"
 "Language-Team: ¡pH7! - Pierre-Henry Soria <hello@ph7cms.com>\n"
 "Language: en_US\n"
@@ -1245,6 +1245,7 @@ msgstr ""
 #: _protected/app/system/modules/friend/forms/SearchFriendForm.php:26
 #: _protected/app/system/modules/user/forms/SearchVisitorForm.php:23
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
 msgid "Last Activity"
 msgstr ""
 
@@ -3530,8 +3531,10 @@ msgstr ""
 #: _protected/app/system/modules/admin123/forms/UpdateAdsForm.php:62
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/moderator/picturealbum.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/forum_9ffbeb93b37c30a8b86888634696c3d9/base/forum/index.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/friend_cc312bae53eda7de4447632489f082df/base/main/index.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/adminlist.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/mainlist.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/picture_10d1588a50ebee22e4a7c126111489e2/base/main/album.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/picture_10d1588a50ebee22e4a7c126111489e2/base/main/albums.cpl.php:19
@@ -5488,6 +5491,7 @@ msgid "You must have the ONLINE status in order to chat with other users."
 msgstr ""
 
 #: _protected/app/system/modules/invite/controllers/HomeController.php:15
+#: _protected/data/cache/pH7tpl_compile/invite_f2b83119692721a1a11c2ab6e1953c3c/base/home/invitation.cpl.php:19
 msgid "Invite your Friends"
 msgstr ""
 
@@ -5819,6 +5823,7 @@ msgid "Outbox"
 msgstr ""
 
 #: _protected/app/system/modules/mail/forms/SearchMailForm.php:22
+#: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/adminlist.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/mainlist.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Trash"
@@ -7903,20 +7908,24 @@ msgid "These actions can take minutes depending of the database size."
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
 #, fuzzy
 msgid "User ID#"
 msgstr "Search a Subscriber:"
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
 msgid "Email Address"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
 #, fuzzy
 msgid "User"
 msgstr "Search a Subscriber:"
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
 msgid "IP"
 msgstr ""
 
@@ -7926,11 +7935,13 @@ msgid "Membership Group + ID"
 msgstr "Search a Subscriber:"
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
 #, fuzzy
 msgid "Registration Date"
 msgstr "Search a Subscriber:"
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
 msgid "Last Edit"
 msgstr ""
 
@@ -7939,41 +7950,49 @@ msgid "Reference"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/payment_3be0357adb474dd37d96b3d2be060943/base/admin/membershiplist.cpl.php:19
 #, fuzzy
 msgid "Action"
 msgstr "Edit the Comment"
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/public_main/base/browse_user.inc.cpl.php:19
 msgid "Ban"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/public_main/base/browse_user.inc.cpl.php:19
 msgid "UnBan"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/friend_cc312bae53eda7de4447632489f082df/base/main/index.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/note_9f88d4a777f4272034b4b067e1994fbc/base/mainhome.inc.cpl.php:19
 msgid "Approve"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/note_9f88d4a777f4272034b4b067e1994fbc/base/mainhome.inc.cpl.php:19
 msgid "Disapprove"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
 msgid "IP Country"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
 msgid "No login"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
 msgid "No editing"
 msgstr ""
 
@@ -7983,6 +8002,7 @@ msgid "Edit User's Profile"
 msgstr "Edit the Comment"
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/forum_9ffbeb93b37c30a8b86888634696c3d9/base/forum/index.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/payment_3be0357adb474dd37d96b3d2be060943/base/admin/membershiplist.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/picture_10d1588a50ebee22e4a7c126111489e2/base/main/album.cpl.php:19
@@ -8022,17 +8042,34 @@ msgid "Send mail"
 msgstr "Search a Subscriber:"
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
 msgid "Login as a user (to edit all this user account)."
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/public_main/base/browse_user.inc.cpl.php:19
 msgid "Login as"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
 msgid "Disapprove (notified user by email)"
 msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
+msgid "Refers"
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
+#, fuzzy
+msgid "Bank Account"
+msgstr "Edit the Comment"
+
+#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admin/browse.cpl.php:19
+#, fuzzy
+msgid "Edit Affiliate's Account"
+msgstr "Edit the Comment"
 
 #: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/home/index.cpl.php:19
 msgid "Affiliate Platform with %site_name%"
@@ -8081,6 +8118,7 @@ msgid "Top Rated Posts"
 msgstr "Search a Subscriber:"
 
 #: _protected/data/cache/pH7tpl_compile/blog_812cc3a33fa67a9ff1c21fa0be3d2686/base/main/index.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/adminlist.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/mainlist.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/note_9f88d4a777f4272034b4b067e1994fbc/base/mainhome.inc.cpl.php:19
 msgid "See more"
@@ -8233,25 +8271,43 @@ msgid ""
 "you use to sign in to your profile</em>."
 msgstr ""
 
+#: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/adminlist.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/mainlist.inc.cpl.php:19
 #, fuzzy
 msgid "New Message"
 msgstr "Search a Subscriber:"
 
+#: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/adminlist.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/mainlist.inc.cpl.php:19
 msgid "Unread"
 msgstr ""
 
+#: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/adminlist.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/mainlist.inc.cpl.php:19
 msgid "Reply"
 msgstr ""
 
+#: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/adminlist.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/mainlist.inc.cpl.php:19
 msgid "Restor"
 msgstr ""
 
+#: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/adminlist.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/mainlist.inc.cpl.php:19
 msgid "Move to Inbox"
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/newsletter_b0d6d120c6bd1bbc47d1166657db522b/base/admin/index.cpl.php:19
+msgid ""
+"WARNING! Before sending your emails, it is preferable that you have a "
+"dedicated hosting or agreement with your hosting company so that your "
+"hosting account will not be banned because many hosting not tolerate the "
+"sending of mass emails.<br /> Sending can take time! DO NOT interrupt the "
+"script."
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/note_9f88d4a777f4272034b4b067e1994fbc/base/admin/unmoderated.cpl.php:19
+msgid "No Notes found for the moderation treatment."
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/note_9f88d4a777f4272034b4b067e1994fbc/base/mainhome.inc.cpl.php:19
@@ -8277,6 +8333,26 @@ msgstr ""
 #, fuzzy
 msgid "Search a Note"
 msgstr "Search a Subscriber:"
+
+#: _protected/data/cache/pH7tpl_compile/page_1fb6bbd1e3c1c380b80a129f79a6fd30/base/main/about.cpl.php:19
+msgid "Dating CMS - Dating Software, Open Source Dating Script"
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/page_1fb6bbd1e3c1c380b80a129f79a6fd30/base/main/about.cpl.php:19
+msgid "pH7 Social / Dating CMS"
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/page_1fb6bbd1e3c1c380b80a129f79a6fd30/base/main/about.cpl.php:19
+msgid ""
+"is a <a href=\"https://sourceforge.net/projects/ph7socialdating/\">Free</a> "
+"and <a href=\"https://github.com/pH7Software/pH7-Social-Dating-CMS\">Open "
+"Source</a> <strong>Social Dating Software</strong> for building online "
+"dating web apps and social networks."
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/page_1fb6bbd1e3c1c380b80a129f79a6fd30/base/main/about.cpl.php:19
+msgid "pH7CMS is also sometimes called \"CMS-Dating\"."
+msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/page_1fb6bbd1e3c1c380b80a129f79a6fd30/base/main/faq.cpl.php:19
 msgid "I can't login, or I forgot my username or password."
@@ -8685,6 +8761,14 @@ msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/public_main/base/browse_user.inc.cpl.php:19
 msgid "Login As a member"
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/public_main/base/error.inc.cpl.php:19
+msgid "Relax and go"
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/public_main/base/error.inc.cpl.php:19
+msgid "home"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/public_main/base/layout.cpl.php:19
