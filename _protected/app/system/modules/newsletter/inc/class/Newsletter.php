@@ -23,8 +23,14 @@ class Newsletter extends Core
     const MAX_BULK_EMAIL_NUMBER = 250;
     const SLEEP_SEC = 10;
 
+    const MEMBER_DATA = 'getProfiles';
+    const SUBSCRIBER_DATA = 'getSubscribers';
+
     /** @var SubscriptionModel */
     private $oSubscriptionModel;
+
+    /** @var string */
+    private $sSubscribersMethod;
 
     /** @var int */
     private static $iTotalSent = 0;
@@ -32,7 +38,10 @@ class Newsletter extends Core
     public function __construct()
     {
         parent::__construct();
+
         $this->oSubscriptionModel = new SubscriptionModel;
+        $bOnlySubscribers = $this->httpRequest->postExists('only_subscribers');
+        $this->sSubscribersMethod = $bOnlySubscribers ? self::SUBSCRIBER_DATA : self::MEMBER_DATA;
     }
 
     /**
@@ -42,14 +51,19 @@ class Newsletter extends Core
      */
     public function sendMessages()
     {
-        $bOnlySubscribers = $this->httpRequest->postExists('only_subscribers');
+
         $iRes = 0; // Default value
 
-        $sSubscribersMethod = ($bOnlySubscribers) ? 'getSubscribers' : 'getProfiles';
-        $oSubscribers = $this->oSubscriptionModel->$sSubscribersMethod();
+        $oSubscribers = $this->oSubscriptionModel->{$this->sSubscribersMethod}();
 
         $oMail = new Mail;
         foreach ($oSubscribers as $oSubscriber) {
+            if ($this->isMemberData() &&
+                !$this->oSubscriptionModel->isNotification($oSubscriber->profileId, 'enableNewsletters')
+            ) {
+                continue; // Skip that one if it isn't opted-in
+            }
+
             if (!$iRes = $this->sendMail($oSubscriber, $oMail)) {
                 break;
             }
@@ -85,5 +99,13 @@ class Newsletter extends Core
         ];
 
         return $oMail->send($aInfo, $sHtmlMsg);
+    }
+
+    /**
+     * @return bool
+     */
+    private function isMemberData()
+    {
+        return $this->sSubscribersMethod === self::MEMBER_DATA;
     }
 }
