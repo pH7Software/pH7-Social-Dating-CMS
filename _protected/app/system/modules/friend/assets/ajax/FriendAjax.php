@@ -80,9 +80,7 @@ class FriendAjax extends Core
                 $this->sMsg = jsonMsg(1, t('Profile successfully added to your friends list.'));
 
                 $oUserModel = new UserCoreModel;
-                if ($oUserModel->isNotification($iFriendId, 'friendRequest')
-                    && !$oUserModel->isOnline($iFriendId)
-                ) {
+                if ($this->canSendEmail($iFriendId, $oUserModel)) {
                     // Send email if the notification is accepted and if the user isn't online
                     $this->sendMail($iFriendId, $oUserModel);
                 }
@@ -163,6 +161,19 @@ class FriendAjax extends Core
         ];
 
         (new Mail)->send($aInfo, $sMessageHtml);
+    }
+
+    /**
+     * @param int $iFriendId
+     * @param UserCoreModel $oUserModel
+     *
+     * @return bool
+     */
+    private function canSendEmail($iFriendId, UserCoreModel $oUserModel)
+    {
+        return $oUserModel->isNotification($iFriendId, 'friendRequest')
+        && !$oUserModel->isOnline($iFriendId);
+
     }
 }
 

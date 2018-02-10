@@ -21,11 +21,14 @@ class MailFormProcess extends Form
 {
     const MAX_ALLOWED_LINKS = 0;
 
+    /** @var UserCoreModel */
+    private $oUserModel;
+    
     public function __construct()
     {
         parent::__construct();
 
-        $oUserModel = new UserCoreModel;
+        $this->oUserModel = new UserCoreModel;
         $oMailModel = new MailModel;
 
         $bIsAdmin = $this->isAdminEligible();
@@ -33,7 +36,7 @@ class MailFormProcess extends Form
         $sCurrentTime = $this->dateTime->get()->dateTime('Y-m-d H:i:s');
         $iTimeDelay = (int)DbConfig::getSetting('timeDelaySendMail');
         $sRecipient = $this->httpRequest->post('recipient');
-        $iRecipientId = $oUserModel->getId(null, $sRecipient);
+        $iRecipientId = $this->oUserModel->getId(null, $sRecipient);
         $iSenderId = (int)($bIsAdmin ? PH7_ADMIN_ID : $this->session->get('member_id'));
 
         if ($iSenderId === $iRecipientId) {
@@ -54,17 +57,14 @@ class MailFormProcess extends Form
             if (false === $mSendMsg) {
                 \PFBC\Form::setError('form_compose_mail', t('Problem while sending the message. Please try again later.'));
             } else {
-                // If the notification is accepted and if the recipient isn't online, we send a notification email
-                if ($oUserModel->isNotification($iRecipientId, 'newMsg') &&
-                    !$oUserModel->isOnline($iRecipientId)
-                ) {
-                    $this->sendMail($iRecipientId, $mSendMsg, $oUserModel);
+                if ($this->canSendEmail($iRecipientId)) {
+                    $this->sendMail($iRecipientId, $mSendMsg);
                 }
 
                 Header::redirect($this->getRedirectUrl(), t('Your message has been successfully sent!'));
             }
 
-            unset($oUserModel, $oMailModel);
+            unset($oMailModel);
         }
     }
 
@@ -73,17 +73,16 @@ class MailFormProcess extends Form
      *
      * @param int $iRecipientId
      * @param int $iMsgId
-     * @param UserCoreModel $oUserModel
      *
      * @return int Number of recipients who were accepted for delivery.
      */
-    private function sendMail($iRecipientId, $iMsgId, UserCoreModel $oUserModel)
+    private function sendMail($iRecipientId, $iMsgId)
     {
         $this->view->content = t('Hello %0%!', $this->httpRequest->post('recipient')) . '<br />' .
             t('You received a new message from %0%', $this->session->get('member_username')) . '<br />' .
             '<a href="' . Uri::get('mail', 'main', 'inbox', $iMsgId) . '">' . t('Click here') . '</a>' . t('to read your message.');
 
-        $sRecipientEmail = $oUserModel->getEmail($iRecipientId);
+        $sRecipientEmail = $this->oUserModel->getEmail($iRecipientId);
 
         $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/mail/new_msg.tpl', $sRecipientEmail);
 
@@ -93,6 +92,17 @@ class MailFormProcess extends Form
         ];
 
         return (new Mail)->send($aInfo, $sMessageHtml);
+    }
+
+    /**
+     * @param int $iRecipientId
+     *
+     * @return bool TRUE if the email notification is accepted and if the recipient isn't online.
+     */
+    private function canSendEmail($iRecipientId)
+    {
+        return $this->oUserModel->isNotification($iRecipientId, 'newMsg') &&
+        !$this->oUserModel->isOnline($iRecipientId);
     }
 
     /**
