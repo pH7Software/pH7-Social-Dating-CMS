@@ -93,7 +93,7 @@ class FriendAjax extends Core
         echo $this->sMsg;
     }
 
-    protected function approval()
+    private function approval()
     {
         $this->mStatus = $this->oFriendModel->approval(
             $this->session->get('member_id'),
@@ -109,7 +109,7 @@ class FriendAjax extends Core
         echo $this->sMsg;
     }
 
-    protected function delete()
+    private function delete()
     {
         $this->mStatus = $this->oFriendModel->delete(
             $this->session->get('member_id'),
@@ -133,7 +133,7 @@ class FriendAjax extends Core
      *
      * @return void
      */
-    protected function sendMail($iId, UserCoreModel $oUserModel)
+    private function sendMail($iId, UserCoreModel $oUserModel)
     {
         $sFriendEmail = $oUserModel->getEmail($iId);
         $sFriendUsername = $oUserModel->getUsername($iId);
