@@ -27,27 +27,33 @@ class AddFakeProfilesFormProcess extends Form
     const API_URL = 'http://api.randomuser.me';
     const API_VER = '1.1';
 
+    /** @var Validate */
+    private $oValidate;
+
+    /** @var ExistsCoreModel */
+    private $oExistsModel;
+
     public function __construct()
     {
         parent::__construct();
 
         $oUser = new UserCore;
         $oUserModel = new UserCoreModel;
-        $oExistsModel = new ExistsCoreModel;
-        $oValidate = new Validate;
+        $this->oExistsModel = new ExistsCoreModel;
+        $this->oValidate = new Validate;
 
         foreach ($this->getApiClient()['results'] as $aUser) {
             $sEmail = trim($aUser['email']);
             $sUsername = trim($aUser['login']['username']);
 
-            if ($oValidate->email($sEmail) && !$oExistsModel->email($sEmail) && $oValidate->username($sUsername)) {
+            if ($this->isValidProfile($sEmail, $sUsername)) {
                 $aData = $this->storeUserDataIntoArray($sUsername, $sEmail, $aUser, $oUser);
                 $aData['profile_id'] = $oUserModel->add(escape($aData, true));
                 $this->addAvatar($aData, $oUser);
             }
         }
 
-        unset($oUser, $oUserModel, $oExistsModel, $oValidate, $aData);
+        unset($oUser, $oUserModel, $aData);
 
         \PFBC\Form::setSuccess(
             'form_add_fake_profiles',
@@ -152,5 +158,16 @@ class AddFakeProfilesFormProcess extends Form
         $aData['ip'] = Ip::get();
 
         return $aData;
+    }
+
+    /**
+     * @param string $sEmail
+     * @param string $sUsername
+     *
+     * @return bool
+     */
+    private function isValidProfile($sEmail, $sUsername)
+    {
+        return $this->oValidate->email($sEmail) && !$this->oExistsModel->email($sEmail) && $this->oValidate->username($sUsername);
     }
 }
