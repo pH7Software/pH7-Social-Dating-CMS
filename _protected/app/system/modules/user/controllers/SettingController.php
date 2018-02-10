@@ -68,7 +68,7 @@ class SettingController extends Controller
 
     public function edit()
     {
-        $this->sTitle = t('Edit Your Profile');
+        $this->sTitle = t('Edit Profile');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
 
@@ -89,7 +89,7 @@ class SettingController extends Controller
 
     public function design()
     {
-        $this->sTitle = t('Your Wallpaper');
+        $this->sTitle = t('Profile Wallpaper');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
 
@@ -102,7 +102,7 @@ class SettingController extends Controller
 
     public function notification()
     {
-        $this->sTitle = t('Notifications');
+        $this->sTitle = t('Email Notifications');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
 
@@ -179,7 +179,7 @@ class SettingController extends Controller
     {
         (new UserCore)->deleteBackground($this->iProfileId, $this->sUsername);
 
-        Header::redirect(null, t('Your wallpaper has been deleted successfully!'));
+        Header::redirect(null, t('Your wallpaper has been successfully deleted!'));
     }
 
     /**
