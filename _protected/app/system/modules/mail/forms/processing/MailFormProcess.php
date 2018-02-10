@@ -106,12 +106,12 @@ class MailFormProcess extends Form
     /**
      * @param int $iRecipientId
      *
-     * @return bool TRUE if the email notification is accepted and if the recipient isn't online.
+     * @return bool TRUE if the email notification is accepted and the recipient isn't online.
      */
     private function canSendEmail($iRecipientId)
     {
         return $this->oUserModel->isNotification($iRecipientId, 'newMsg') &&
-        !$this->oUserModel->isOnline($iRecipientId);
+            !$this->oUserModel->isOnline($iRecipientId);
     }
 
     /**
