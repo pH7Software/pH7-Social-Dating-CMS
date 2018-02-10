@@ -80,7 +80,7 @@ class FriendAjax extends Core
                 $this->sMsg = jsonMsg(1, t('Profile successfully added to your friends list.'));
 
                 $oUserModel = new UserCoreModel;
-                if (!$oUserModel->isNotification($iFriendId, 'friendRequest')
+                if ($oUserModel->isNotification($iFriendId, 'friendRequest')
                     && !$oUserModel->isOnline($iFriendId)
                 ) {
                     // Send email if the notification is accepted and if the user isn't online
