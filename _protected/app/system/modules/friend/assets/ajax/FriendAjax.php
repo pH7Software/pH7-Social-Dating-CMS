@@ -56,7 +56,7 @@ class FriendAjax extends Core
         }
     }
 
-    protected function add()
+    private function add()
     {
         $iFriendId = $this->httpRequest->post('friendId', 'int');
         $iMemberId = $this->session->get('member_id');
