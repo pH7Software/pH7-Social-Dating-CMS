@@ -23,8 +23,8 @@ class Newsletter extends Core
     const MAX_BULK_EMAIL_NUMBER = 250;
     const SLEEP_SEC = 10;
 
-    const MEMBER_DATA = 'getProfiles';
-    const SUBSCRIBER_DATA = 'getSubscribers';
+    const MEMBER_DATA_METHOD = 'getProfiles';
+    const SUBSCRIBER_DATA_METHOD = 'getSubscribers';
 
     /** @var SubscriptionModel */
     private $oSubscriptionModel;
@@ -41,7 +41,7 @@ class Newsletter extends Core
 
         $this->oSubscriptionModel = new SubscriptionModel;
         $bOnlySubscribers = $this->httpRequest->postExists('only_subscribers');
-        $this->sSubscribersMethod = $bOnlySubscribers ? self::SUBSCRIBER_DATA : self::MEMBER_DATA;
+        $this->sSubscribersMethod = $bOnlySubscribers ? self::SUBSCRIBER_DATA_METHOD : self::MEMBER_DATA_METHOD;
     }
 
     /**
@@ -105,6 +105,6 @@ class Newsletter extends Core
      */
     private function isMemberData()
     {
-        return $this->sSubscribersMethod === self::MEMBER_DATA;
+        return $this->sSubscribersMethod === self::MEMBER_DATA_METHOD;
     }
 }
