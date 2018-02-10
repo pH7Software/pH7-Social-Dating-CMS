@@ -84,7 +84,10 @@ class MailFormProcess extends Form
 
         $sRecipientEmail = $this->oUserModel->getEmail($iRecipientId);
 
-        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/mail/new_msg.tpl', $sRecipientEmail);
+        $sMessageHtml = $this->view->parseMail(
+            PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/mail/new_msg.tpl',
+            $sRecipientEmail
+        );
 
         $aInfo = [
             'to' => $sRecipientEmail,

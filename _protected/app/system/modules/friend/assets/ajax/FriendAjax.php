@@ -153,7 +153,10 @@ class FriendAjax extends Core
         /* Because we work in Ajax, the constant "PH7_TPL_NAME" is not yet defined.
          * So we use the constant "PH7_DEFAULT_THEME" is already defined.
          */
-        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/tpl/mail/sys/mod/friend/friend_request.tpl', $sFriendEmail);
+        $sMessageHtml = $this->view->parseMail(
+            PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/tpl/mail/sys/mod/friend/friend_request.tpl',
+            $sFriendEmail
+        );
 
         $aInfo = [
             'to' => $sFriendEmail,
