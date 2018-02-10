@@ -51,7 +51,6 @@ class Newsletter extends Core
      */
     public function sendMessages()
     {
-
         $iRes = 0; // Default value
 
         $oSubscribers = $this->oSubscriptionModel->{$this->sSubscribersMethod}();
