@@ -81,7 +81,6 @@ class FriendAjax extends Core
 
                 $oUserModel = new UserCoreModel;
                 if ($this->canSendEmail($iFriendId, $oUserModel)) {
-                    // Send email if the notification is accepted and if the user isn't online
                     $this->sendMail($iFriendId, $oUserModel);
                 }
                 unset($oUserModel);
@@ -170,12 +169,12 @@ class FriendAjax extends Core
      * @param int $iFriendId
      * @param UserCoreModel $oUserModel
      *
-     * @return bool
+     * @return bool TRUE if the email notification is accepted and the user isn't online.
      */
     private function canSendEmail($iFriendId, UserCoreModel $oUserModel)
     {
         return $oUserModel->isNotification($iFriendId, 'friendRequest')
-        && !$oUserModel->isOnline($iFriendId);
+            && !$oUserModel->isOnline($iFriendId);
 
     }
 }
