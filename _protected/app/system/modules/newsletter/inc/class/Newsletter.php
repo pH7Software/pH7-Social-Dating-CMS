@@ -86,7 +86,7 @@ class Newsletter extends Core
      *
      * @return int Number of recipients who were accepted for delivery.
      */
-    protected function sendMail(stdClass $oSubscriber, Mail $oMail)
+    private function sendMail(stdClass $oSubscriber, Mail $oMail)
     {
         $this->view->content = $this->httpRequest->post('body', Http::NO_CLEAN);
 
