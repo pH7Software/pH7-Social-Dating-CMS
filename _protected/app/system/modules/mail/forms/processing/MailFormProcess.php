@@ -23,7 +23,7 @@ class MailFormProcess extends Form
 
     /** @var UserCoreModel */
     private $oUserModel;
-    
+
     public function __construct()
     {
         parent::__construct();
