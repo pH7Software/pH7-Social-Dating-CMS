@@ -44,6 +44,9 @@ class AddAffiliateFormProcess extends Form
         ];
         (new AffiliateModel)->add($aData);
 
-        Header::redirect(Uri::get('affiliate', 'admin', 'browse'), t('Affiliate successfully added.'));
+        Header::redirect(
+            Uri::get('affiliate', 'admin', 'browse'),
+            t('Affiliate successfully added.')
+        );
     }
 }

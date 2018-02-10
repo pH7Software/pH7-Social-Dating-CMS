@@ -50,6 +50,9 @@ class AddUserFormProcess extends Form
             (new UserCore)->setAvatar($iProfileId, $aData['username'], $_FILES['avatar']['tmp_name'], 1);
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), t('User successfully added.'));
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
+            t('User successfully added.')
+        );
     }
 }

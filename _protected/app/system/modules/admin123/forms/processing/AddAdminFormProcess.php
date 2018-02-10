@@ -33,6 +33,9 @@ class AddAdminFormProcess extends Form
         ];
         (new AdminModel)->add($aData);
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'), t('Administrator successfully added.'));
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'),
+            t('Administrator successfully added.')
+        );
     }
 }

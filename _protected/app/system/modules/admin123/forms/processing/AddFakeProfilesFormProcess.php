@@ -49,7 +49,10 @@ class AddFakeProfilesFormProcess extends Form
 
         unset($oUser, $oUserModel, $oExistsModel, $oValidate, $aData);
 
-        \PFBC\Form::setSuccess('form_add_fake_profiles', nt('%n% user has successfully been added.', '%n% users have successfully been added.', $this->getUserNumber()));
+        \PFBC\Form::setSuccess(
+            'form_add_fake_profiles',
+            nt('%n% user has successfully been added.', '%n% users have successfully been added.', $this->getUserNumber())
+        );
     }
 
     protected function getUserNumber()
