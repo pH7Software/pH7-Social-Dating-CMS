@@ -78,6 +78,7 @@ INSERT INTO ph7_members_privacy (profileId, privacyProfile, searchProfile, userS
 (@iProfileId+15, 'all', 'yes', 'yes');
 
 
+-- Disable all notifications by default for sample users
 INSERT INTO ph7_members_notifications (profileId, enableNewsletters, newMsg, friendRequest) VALUES
 (@iProfileId, 0, 0, 0),
 (@iProfileId+1, 0, 0, 0),
