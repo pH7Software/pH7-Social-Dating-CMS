@@ -13,7 +13,6 @@ use PH7\Framework\Url\Header;
 
 class NotificationForm
 {
-
     public static function display()
     {
         $oUserModel = new UserCoreModel;
