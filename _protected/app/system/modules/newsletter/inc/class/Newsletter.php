@@ -109,7 +109,7 @@ class Newsletter extends Core
     private function isUserOptedIn(stdClass $oSubscriber)
     {
         return $this->isMemberData($oSubscriber) &&
-        !$this->oSubscriptionModel->isNotification($oSubscriber->profileId, 'enableNewsletters');
+            !$this->oSubscriptionModel->isNotification($oSubscriber->profileId, 'enableNewsletters');
     }
 
     /**

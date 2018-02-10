@@ -55,13 +55,19 @@ class MailFormProcess extends Form
             $mSendMsg = $oMailModel->sendMsg($iSenderId, $iRecipientId, $this->httpRequest->post('title'), $sMessage, $sCurrentTime);
 
             if (false === $mSendMsg) {
-                \PFBC\Form::setError('form_compose_mail', t('Problem while sending the message. Please try again later.'));
+                \PFBC\Form::setError(
+                    'form_compose_mail',
+                    t('Problem while sending the message. Please try again later.')
+                );
             } else {
                 if ($this->canSendEmail($iRecipientId)) {
                     $this->sendMail($iRecipientId, $mSendMsg);
                 }
 
-                Header::redirect($this->getRedirectUrl(), t('Your message has been successfully sent!'));
+                Header::redirect(
+                    $this->getRedirectUrl(),
+                    t('Your message has been successfully sent!')
+                );
             }
 
             unset($oMailModel);
