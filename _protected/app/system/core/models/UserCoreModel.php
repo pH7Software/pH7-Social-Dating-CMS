@@ -737,7 +737,7 @@ class UserCoreModel extends Model
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER_NOTIFICATION) .
             '(profileId, enableNewsletters, newMsg, friendRequest)
-            VALUES (:profileId, 0, 1, 1)');
+            VALUES (:profileId, 1, 1, 1)');
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
         return $rStmt->execute();
     }
