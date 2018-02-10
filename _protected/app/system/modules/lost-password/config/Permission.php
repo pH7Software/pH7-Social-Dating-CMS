@@ -23,7 +23,8 @@ class Permission extends PermissionCore
         if ((UserCore::auth() || AffiliateCore::auth() || AdminCore::auth()) &&
             ($this->registry->action === 'forgot' || $this->registry->action === 'reset')
         ) {
-            Header::redirect(Uri::get('lost-password', 'main', 'account'),
+            Header::redirect(
+                Uri::get('lost-password', 'main', 'account'),
                 $this->alreadyConnectedMsg(),
                 Design::ERROR_TYPE
             );
