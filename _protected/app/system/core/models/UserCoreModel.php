@@ -541,7 +541,7 @@ class UserCoreModel extends Model
      * @param int $iProfileId
      * @param string $sNotifName Notification name.
      *
-     * @return bool
+     * @return bool Returns TRUE if the notification is wanted, FALSE otherwise.
      */
     public function isNotification($iProfileId, $sNotifName)
     {
