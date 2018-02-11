@@ -8,7 +8,7 @@
 
 namespace PH7\Test\Unit\App\System\Module\Xml\Inc\Classes;
 
-require PH7_PATH_SYS_MOD . 'xml/inc/class/DateFormat.php';
+require_once PH7_PATH_SYS_MOD . 'xml/inc/class/DateFormat.php';
 
 use PH7\DateFormat;
 use PHPUnit_Framework_TestCase;

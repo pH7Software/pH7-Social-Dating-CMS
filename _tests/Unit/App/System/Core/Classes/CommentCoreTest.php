@@ -8,7 +8,7 @@
 
 namespace PH7\Test\Unit\App\System\Core\Classes;
 
-require PH7_PATH_SYS . 'core/classes/CommentCore.php';
+require_once PH7_PATH_SYS . 'core/classes/CommentCore.php';
 
 use PH7\CommentCore;
 use PHPUnit_Framework_TestCase;

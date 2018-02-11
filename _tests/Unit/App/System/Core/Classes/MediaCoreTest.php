@@ -8,7 +8,7 @@
 
 namespace PH7\Test\Unit\App\System\Core\Classes;
 
-require PH7_PATH_SYS . 'core/classes/MediaCore.php';
+require_once PH7_PATH_SYS . 'core/classes/MediaCore.php';
 
 use PH7\MediaCore;
 use PHPUnit_Framework_TestCase;
