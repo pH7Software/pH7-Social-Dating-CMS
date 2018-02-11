@@ -74,4 +74,4 @@ ALTER TABLE ph7_Games RENAME ph7_games;
 ALTER TABLE ph7_GamesCategories RENAME ph7_games_categories;
 
 -- Update pH7CMS's SQL schema version
-UPDATE ph7_Modules SET version = '1.4.2' WHERE vendorName = 'pH7CMS';
+UPDATE ph7_modules SET version = '1.4.2' WHERE vendorName = 'pH7CMS';
