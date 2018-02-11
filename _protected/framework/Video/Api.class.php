@@ -154,7 +154,7 @@ class Api
      *
      * @return string
      */
-    protected function clear($sUrl)
+    private function clear($sUrl)
     {
         $oHttp = new Http;
         if ($oHttp->detectSubdomain($sUrl)) {
