@@ -85,7 +85,9 @@ class JoinFormProcess extends Form
             ];
             $this->session->set($aSessData);
 
-            Header::redirect(Uri::get('user', 'signup', 'step2'));
+            Header::redirect(
+                Uri::get('user', 'signup', 'step2')
+            );
         }
     }
 
@@ -117,7 +119,9 @@ class JoinFormProcess extends Form
             );
         } else {
             $this->session->set('mail_step2', $this->session->get('mail_step1'));
-            Header::redirect(Uri::get('user', 'signup', 'step3'));
+            Header::redirect(
+                Uri::get('user', 'signup', 'step3')
+            );
         }
     }
 
@@ -135,7 +139,10 @@ class JoinFormProcess extends Form
             );
         } else {
             $this->session->set('mail_step3', $this->session->get('mail_step1'));
-            Header::redirect(Uri::get('user', 'signup', 'step4'), t('Your account has just been created!'));
+            Header::redirect(
+                Uri::get('user', 'signup', 'step4'),
+                t('Your account has just been created!')
+            );
         }
     }
 
@@ -143,7 +150,9 @@ class JoinFormProcess extends Form
     {
         // If no photo added from the form, automatically skip this step
         if (empty($_FILES['avatar']['tmp_name'])) {
-            Header::redirect(Uri::get('user', 'signup', 'done'));
+            Header::redirect(
+                Uri::get('user', 'signup', 'done')
+            );
         }
 
         $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
@@ -157,7 +166,9 @@ class JoinFormProcess extends Form
         if (!$bAvatar) {
             \PFBC\Form::setError('form_join_user4', Form::wrongImgFileTypeMsg());
         } else {
-            Header::redirect(Uri::get('user', 'signup', 'done'));
+            Header::redirect(
+                Uri::get('user', 'signup', 'done')
+            );
         }
     }
 
