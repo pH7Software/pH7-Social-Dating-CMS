@@ -82,7 +82,7 @@ class AdsCore extends Ads
             return static::ID_COLUMN_NAME;
         }
 
-        Various::launchErr();
+        Various::launchErr($sTable);
     }
 
     /**
