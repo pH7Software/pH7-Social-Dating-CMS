@@ -18,9 +18,9 @@ trait Singleton
     use Statik;
 
     /**
-     * @staticvar object $_oInstance
+     * @staticvar object $oInstance
      */
-    protected static $_oInstance = null;
+    protected static $oInstance = null;
 
     /**
      * Get instance of class.
@@ -29,7 +29,7 @@ trait Singleton
      */
     public static function getInstance()
     {
-        return null === static::$_oInstance ? static::$_oInstance = new static : static::$_oInstance;
+        return null === static::$oInstance ? static::$oInstance = new static : static::$oInstance;
     }
 
     /**
