@@ -50,7 +50,7 @@ class VariousTest extends PHPUnit_Framework_TestCase
      */
     public function testIncorrectModToTable()
     {
-        DbVarious::convertModToTable('wrongmodule');
+        DbVarious::convertModToTable('wrong_module');
     }
 
     public function testCorrectTableToMod()
@@ -63,7 +63,7 @@ class VariousTest extends PHPUnit_Framework_TestCase
      */
     public function testIncorrectTableToMod()
     {
-        DbVarious::convertTableToMod('wrongtable');
+        DbVarious::convertTableToMod('wrong_table');
     }
 
     public function testCorrectTableToId()
@@ -76,6 +76,6 @@ class VariousTest extends PHPUnit_Framework_TestCase
      */
     public function testIncorrectTableToId()
     {
-        DbVarious::convertTableToId('wrongtable');
+        DbVarious::convertTableToId('wrong_table');
     }
 }
