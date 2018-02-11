@@ -37,7 +37,7 @@ trait Factory
         }
 
         throw new PH7RuntimeException(
-            'The "' . $sClass . '" was not found or is not defined.'
+            sprintf('"%s" class was not found or is not defined.', $sClass)
         );
     }
 }
