@@ -84,7 +84,6 @@ class RatingCoreModel extends Model
      */
     public function updateVotes($iId, $sTable)
     {
-
         $sTable = Various::checkTable($sTable);
         $sWhere = Various::convertTableToId($sTable);
 
