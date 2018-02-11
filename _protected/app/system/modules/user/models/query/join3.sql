@@ -1,1 +1,1 @@
-UPDATE [DB_PREFIX]MembersInfo SET description = :description WHERE profileId = :profile_id LIMIT 1;
+UPDATE [DB_PREFIX]members_info SET description = :description WHERE profileId = :profile_id LIMIT 1;
