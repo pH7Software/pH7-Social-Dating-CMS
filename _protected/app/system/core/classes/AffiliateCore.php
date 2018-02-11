@@ -101,7 +101,10 @@ class AffiliateCore extends UserCore
      */
     public static function updateJoinCom($iAffId, Config $oConfig, Registry $oRegistry)
     {
-        if ($iAffId < 1) return; // If there is no valid ID, we stop the method.
+        if ($iAffId < 1) {
+            // If there is no valid ID, we stop the method
+            return;
+        }
 
         // Load the Affiliate config file
         $oConfig->load(PH7_PATH_SYS_MOD . 'affiliate' . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
