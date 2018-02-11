@@ -42,6 +42,7 @@ define('PH7_SH', '/'); // SlasH
 define('PH7_SELF', (substr($sPhp_self, -1) !== PH7_SH) ? $sPhp_self . PH7_SH : $sPhp_self);
 define('PH7_RELATIVE', PH7_SELF);
 
+
 #################### PATH ####################
 
 define('PH7_PATH_ROOT', __DIR__ . PH7_DS);
@@ -49,6 +50,7 @@ define('PH7_PATH_PROTECTED', '%path_protected%');
 define('PH7_PATH_APP', PH7_PATH_PROTECTED . 'app/');
 define('PH7_PATH_FRAMEWORK', PH7_PATH_PROTECTED . 'framework/');
 define('PH7_PATH_LIBRARY', PH7_PATH_PROTECTED . 'library/');
+
 
 #################### URL (PUBLIC) ####################
 
