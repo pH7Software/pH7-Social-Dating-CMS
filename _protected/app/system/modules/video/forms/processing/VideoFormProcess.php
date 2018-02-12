@@ -92,7 +92,7 @@ class VideoFormProcess extends Form
                 \PFBC\Form::setError('form_video', Form::wrongVideoFileTypeMsg());
                 return;
             } elseif (!$oVideo->check()) {
-                \PFBC\Form::setError('form_video', t('File exceeds maximum allowed video filesize of %0%!', F\Various::bytesToSize($oVideo->getMaxSize())));
+                \PFBC\Form::setError('form_video', t('Video file cannot be larger than %0%', F\Various::bytesToSize($oVideo->getMaxSize())));
                 return;
             } else {
                 $sTitle = $this->getVideoTitle($oVideo);
