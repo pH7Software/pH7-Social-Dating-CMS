@@ -50,7 +50,7 @@ class Youtube extends Api implements IApi
             // Use Youtube's API to get the Youtube video's data only if the API key has been set, otherwise it won't work
             if ($this->isApiKeySet()) {
                 if (!empty($oData->error->errors[0]->message)) {
-                    throw new Exception('YouTube API: ' . $oData->error->errors[0]->message);
+                    throw new InvalidApiKeyException('YouTube API: ' . $oData->error->errors[0]->message);
                 } else {
                     $this->oData = $oData->items[0]->snippet;
                     $this->oContentDetails = $oData->items[0]->contentDetails; // Need only for getting the video duration
