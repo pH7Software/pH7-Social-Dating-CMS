@@ -13,8 +13,6 @@ namespace PH7\Framework\Video;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Config\Config;
-use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Http\Http;
 
 class Api
@@ -24,87 +22,35 @@ class Api
     const DEF_VIDEO_WIDTH = 480;
     const DEF_VIDEO_HEIGHT = 295;
 
-    const YOUTUBE_NAMES = [
-        'youtube',
-        'youtu'
-    ];
-    const DAILYMOTION_NAMES = [
-        'dailymotion',
-        'dai'
-    ];
-    const VIMEO_NAME = 'vimeo';
-    const METACAFE_NAME = 'metacafe';
-
     /**
      * @param string $sUrl
      *
-     * @return string Returns the video embed URL.
+     * @return string|bool Returns the video embed URL.
+     *
+     * @throws InvalidApiProviderException
      */
     public function getVideo($sUrl)
     {
         $sClass = $this->clear($sUrl);
+        $oApiProvider = ProviderFactory::create($sClass);
 
-        switch ($sClass) {
-            case in_array($sClass, self::YOUTUBE_NAMES, true):
-                $sClass = (new Api\Youtube)->getVideo($sUrl);
-                break;
-
-            case self::VIMEO_NAME:
-                $sClass = (new Api\Vimeo)->getVideo($sUrl);
-                break;
-
-            case in_array($sClass, self::DAILYMOTION_NAMES, true):
-                $sClass = (new Api\Dailymotion)->getVideo($sUrl);
-                break;
-
-            case self::METACAFE_NAME:
-                $sClass = (new Api\Metacafe)->getVideo($sUrl);
-                break;
-
-            default:
-                return false;
-        }
-
-        return $sClass;
+        return $oApiProvider->getVideo($sUrl);
     }
 
     /**
      * @param string $sUrl The URL video.
      *
-     * @return IApi The Video API class (e.g. Api\Youtube, Api\Vimeo, Api\Dailymotion).
+     * @return Api\IApi|bool The Video API class (e.g. Api\Youtube, Api\Vimeo, ..) or FALSE if the data cannot be retrieved.
      *
-     * @throws PH7InvalidArgumentException If the Api Video is invalid.
+     * @throws InvalidApiProviderException
+     * @throws Api\InvalidApiKeyException If the YouTube API is invalid.
      */
     public function getInfo($sUrl)
     {
         $sClass = $this->clear($sUrl);
+        $oApiProvider = ProviderFactory::create($sClass);
 
-        switch ($sClass) {
-            case in_array($sClass, self::YOUTUBE_NAMES, true):
-                $sKey = Config::getInstance()->values['module.api']['youtube.key'];
-                $oYoutube = new Api\Youtube;
-                $oYoutube->setKey($sKey); // Youtube's API v3+ requires an API key
-                $oClass = $oYoutube->getInfo($sUrl);
-                unset($oYoutube);
-                break;
-
-            case self::VIMEO_NAME:
-                $oClass = (new Api\Vimeo)->getInfo($sUrl);
-                break;
-
-            case in_array($sClass, self::DAILYMOTION_NAMES, true):
-                $oClass = (new Api\Dailymotion)->getInfo($sUrl);
-                break;
-
-            case self::METACAFE_NAME:
-                $oClass = (new Api\Metacafe)->getInfo($sUrl);
-                break;
-
-            default:
-                throw new PH7InvalidArgumentException('Invalid Api Video Type! Bad Type is: \'' . $sClass . '\'');
-        }
-
-        return $oClass;
+        return $oApiProvider->getInfo($sUrl);
     }
 
     /**
@@ -124,29 +70,9 @@ class Api
         $sMedia = isset($sMedia) ? $sMedia : 'movie';
         $iWidth = isset($iWidth) ? $iWidth : self::DEF_VIDEO_WIDTH;
         $iHeight = isset($iHeight) ? $iHeight : self::DEF_VIDEO_HEIGHT;
+        $oApiProvider = ProviderFactory::create($sClass);
 
-        switch ($sClass) {
-            case in_array($sClass, self::YOUTUBE_NAMES, true):
-                $sClass = (new Api\Youtube)->getMeta($sUrl, $sMedia, $iWidth, $iHeight);
-                break;
-
-            case self::VIMEO_NAME:
-                $sClass = (new Api\Vimeo)->getMeta($sUrl, $sMedia, $iWidth, $iHeight);
-                break;
-
-            case in_array($sClass, self::DAILYMOTION_NAMES, true):
-                $sClass = (new Api\Dailymotion)->getMeta($sUrl, $sMedia, $iWidth, $iHeight);
-                break;
-
-            case self::METACAFE_NAME:
-                $sClass = (new Api\Metacafe)->getMeta($sUrl, $sMedia, $iWidth, $iHeight);
-                break;
-
-            default:
-                throw new PH7InvalidArgumentException('Invalid Api Video Type! Bad Type is: \'' . $sClass . '\'');
-        }
-
-        return $sClass;
+        return $oApiProvider->getMeta($sUrl, $sMedia, $iWidth, $iHeight);
     }
 
     /**
