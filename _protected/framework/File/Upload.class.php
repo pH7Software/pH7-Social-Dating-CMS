@@ -25,6 +25,8 @@ abstract class Upload
      * Check if everything is correct.
      *
      * @return bool
+     *
+     * @throws PH7InvalidArgumentException
      */
     public function check()
     {
@@ -51,6 +53,8 @@ abstract class Upload
      * Check the file size.
      *
      * @return bool
+     *
+     * @throws PH7InvalidArgumentException
      */
     protected function checkSize()
     {
