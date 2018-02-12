@@ -40,7 +40,7 @@ class Youtube extends Api implements IApi
      *
      * @return self|bool FALSE if unable to open the API URL, otherwise Youtube
      *
-     * @throws Exception If the is a problem with Youtube API service.
+     * @throws InvalidApiKeyException If there is a problem with Youtube API service.
      */
     public function getInfo($sUrl)
     {
