@@ -37,7 +37,6 @@ use PH7\Framework\Security as Secty;
  * </code>
  *
  */
-
 class Http extends \PH7\Framework\Http\Http
 {
     const METHOD_HEAD = 'HEAD';

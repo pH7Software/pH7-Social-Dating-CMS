@@ -248,7 +248,6 @@ class Various
      * Throw an exception with an informative message.
      *
      * @param string $sTable The table value.
-
      *
      * @throws PH7InvalidArgumentException Explanatory message.
      */

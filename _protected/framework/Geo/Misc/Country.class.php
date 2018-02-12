@@ -16,6 +16,7 @@ class Country
 {
     const UK_COUNTRY_CODE = 'UK';
     const GB_COUNTRY_CODE = 'GB';
+
     /**
      * pH7Framework uses UK instead of GB in its country details,
      * so we replace the wrong one to the correct one if found.
