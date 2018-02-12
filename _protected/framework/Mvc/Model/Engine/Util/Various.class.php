@@ -254,7 +254,7 @@ class Various
      */
     public static function launchErr($sTable)
     {
-        throw new PH7InvalidArgumentException('Bad data table: "' . $sTable . '"!');
+        throw new PH7InvalidArgumentException(sprintf('Invalid data table: "%s"!', $sTable));
     }
 
     /**
