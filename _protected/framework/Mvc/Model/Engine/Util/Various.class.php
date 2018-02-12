@@ -55,7 +55,7 @@ class Various
      *
      * @param string $Mod
      *
-     * @return string|void Returns the table if it is correct.
+     * @return string The table name if the specified module was valid.
      *
      * @throws PH7InvalidArgumentException If the table is not valid.
      */
@@ -129,7 +129,7 @@ class Various
      *
      * @param string $sTable
      *
-     * @return string Returns the table if it is correct.
+     * @return string Returns the DB ID column name.
      *
      * @throws PH7InvalidArgumentException If the table is not valid.
      */
@@ -191,7 +191,7 @@ class Various
      *
      * @param string $sTable
      *
-     * @return string|void Returns the table if it is correct.
+     * @return string Returns the table if it is correct.
      *
      * @throws PH7InvalidArgumentException If the table is not valid.
      */
@@ -224,7 +224,7 @@ class Various
      *
      * @param string $sTable
      *
-     * @return string|void Returns the table if it is correct.
+     * @return string Returns the table if it is correct.
      *
      * @throws PH7InvalidArgumentException If the table is not valid.
      */
