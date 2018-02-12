@@ -59,9 +59,9 @@ class Api
      * @param int $iWidth
      * @param int $iHeight
      *
-     * @throws PH7InvalidArgumentException If the Video Api is invalid.
-     *
      * @return string The HTML video integration code.
+     *
+     * @throws InvalidApiProviderException
      */
     public function getMeta($sUrl, $sMedia, $iWidth, $iHeight)
     {
