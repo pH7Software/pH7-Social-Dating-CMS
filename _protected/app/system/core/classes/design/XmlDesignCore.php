@@ -63,10 +63,10 @@ class XmlDesignCore
         self::generateRssTagLink(t('Latest Forum Topics'), Uri::get('xml', 'rss', 'xmlrouter', 'forum-topic'));
         self::generateRssTagLink(t('Latest Profile Comments'), Uri::get('xml', 'rss', 'xmlrouter', 'comment-profile'));
         self::generateRssTagLink(t('Latest Blog Comments'), Uri::get('xml', 'rss', 'xmlrouter', 'comment-blog'));
-        self::generateRssTagLink(t('Latest Note Comments'),  Uri::get('xml', 'rss', 'xmlrouter', 'comment-note'));
-        self::generateRssTagLink(t('Latest Picture Comments'),  Uri::get('xml', 'rss', 'xmlrouter', 'comment-picture'));
-        self::generateRssTagLink(t('Latest Video Comments'),  Uri::get('xml', 'rss', 'xmlrouter', 'comment-video'));
-        self::generateRssTagLink(t('Latest Game Comments'),  Uri::get('xml', 'rss', 'xmlrouter', 'comment-game'));
+        self::generateRssTagLink(t('Latest Note Comments'), Uri::get('xml', 'rss', 'xmlrouter', 'comment-note'));
+        self::generateRssTagLink(t('Latest Picture Comments'), Uri::get('xml', 'rss', 'xmlrouter', 'comment-picture'));
+        self::generateRssTagLink(t('Latest Video Comments'), Uri::get('xml', 'rss', 'xmlrouter', 'comment-video'));
+        self::generateRssTagLink(t('Latest Game Comments'), Uri::get('xml', 'rss', 'xmlrouter', 'comment-game'));
     }
 
     /**
