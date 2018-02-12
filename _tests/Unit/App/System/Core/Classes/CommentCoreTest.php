@@ -15,9 +15,12 @@ use PHPUnit_Framework_TestCase;
 
 class CommentCoreTest extends PHPUnit_Framework_TestCase
 {
-    public function testCorrectTable()
+    /**
+     * @dataProvider tableNamesProvider
+     */
+    public function testCorrectTable($sTableName)
     {
-        $this->assertSame('profile', CommentCore::checkTable('profile'));
+        $this->assertSame($sTableName, CommentCore::checkTable($sTableName));
     }
 
     /**
@@ -26,5 +29,20 @@ class CommentCoreTest extends PHPUnit_Framework_TestCase
     public function testIncorrectTable()
     {
         CommentCore::checkTable('incorrect_table');
+    }
+
+    /**
+     * @return array
+     */
+    public function tableNamesProvider()
+    {
+        return [
+            ['profile'],
+            ['picture'],
+            ['video'],
+            ['blog'],
+            ['note'],
+            ['game']
+        ];
     }
 }

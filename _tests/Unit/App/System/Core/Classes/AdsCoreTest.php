@@ -28,9 +28,15 @@ class AdsCoreTest extends PHPUnit_Framework_TestCase
         $this->assertSame('ads', AdsCore::getTable());
     }
 
-    public function testCorrectTable()
+    /**
+     * @param string $sTableName
+     * @param string $sExpectedValue
+     *
+     * @dataProvider tableNamesProvider
+     */
+    public function testCorrectTable($sTableName, $sExpectedValue)
     {
-        AdsCore::checkTable('ads');
+        $this->assertSame($sExpectedValue, AdsCore::checkTable($sTableName));
     }
 
     /**
@@ -41,9 +47,14 @@ class AdsCoreTest extends PHPUnit_Framework_TestCase
         AdsCore::checkTable('wrong_table');
     }
 
-    public function testCorrectTableToId()
+    /**
+     * @param string $sTableName
+     *
+     * @dataProvider tableNamesProvider
+     */
+    public function testCorrectTableToId($sTableName)
     {
-        $this->assertSame('adsId', AdsCore::convertTableToId(DbTableName::AD));
+        $this->assertSame('adsId', AdsCore::convertTableToId($sTableName));
     }
 
     /**
@@ -52,5 +63,16 @@ class AdsCoreTest extends PHPUnit_Framework_TestCase
     public function testIncorrectTableToId()
     {
         AdsCore::convertTableToId('wrong_table');
+    }
+
+    /**
+     * @return array
+     */
+    public function tableNamesProvider()
+    {
+        return [
+            [DbTableName::AD, 'ads'],
+            [DbTableName::AD_AFFILIATE, 'ads_affiliates']
+        ];
     }
 }

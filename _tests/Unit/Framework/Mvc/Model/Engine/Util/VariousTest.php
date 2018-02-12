@@ -14,9 +14,15 @@ use PHPUnit_Framework_TestCase;
 
 class VariousTest extends PHPUnit_Framework_TestCase
 {
-    public function testCorrectTable()
+    /**
+     * @param string $sTable
+     * @param string $sExpectedTable
+     *
+     * @dataProvider tablesProvider
+     */
+    public function testCorrectTable($sTable, $sExpectedTable)
     {
-        $this->assertSame('albums_pictures', DbVarious::checkTable(DbTableName::ALBUM_PICTURE));
+        $this->assertSame($sExpectedTable, DbVarious::checkTable($sTable));
     }
 
     /**
@@ -27,9 +33,15 @@ class VariousTest extends PHPUnit_Framework_TestCase
         DbVarious::checkTable('incorrect_table');
     }
 
-    public function testCorrectModelTable()
+    /**
+     * @param string $sTable
+     * @param string $sExpectedTable
+     *
+     * @dataProvider modelTablesProvider
+     */
+    public function testCorrectModelTable($sTable, $sExpectedTable)
     {
-        $this->assertSame('members_info', DbVarious::checkModelTable(DbTableName::MEMBER_INFO));
+        $this->assertSame($sExpectedTable, DbVarious::checkModelTable($sTable));
     }
 
     /**
@@ -40,9 +52,15 @@ class VariousTest extends PHPUnit_Framework_TestCase
         DbVarious::checkModelTable('incorrect_table');
     }
 
-    public function testCorrectModToTable()
+    /**
+     * @param string $sExpectedTable
+     * @param string $sMod
+     *
+     * @dataProvider modsToTablesProvider
+     */
+    public function testCorrectModToTable($sMod, $sExpectedTable)
     {
-        $this->assertSame('members', DbVarious::convertModToTable('user'));
+        $this->assertSame($sExpectedTable, DbVarious::convertModToTable($sMod));
     }
 
     /**
@@ -53,9 +71,15 @@ class VariousTest extends PHPUnit_Framework_TestCase
         DbVarious::convertModToTable('wrong_module');
     }
 
-    public function testCorrectTableToMod()
+    /**
+     * @param string $sTable
+     * @param string $sExpectedMod
+     *
+     * @dataProvider tablesToModsProvider
+     */
+    public function testCorrectTableToMod($sTable, $sExpectedMod)
     {
-        $this->assertSame('user', DbVarious::convertTableToMod(DbTableName::MEMBER));
+        $this->assertSame($sExpectedMod, DbVarious::convertTableToMod($sTable));
     }
 
     /**
@@ -66,9 +90,15 @@ class VariousTest extends PHPUnit_Framework_TestCase
         DbVarious::convertTableToMod('wrong_table');
     }
 
-    public function testCorrectTableToId()
+    /**
+     * @param string $sTable
+     * @param string $sExpectedColumnId
+     *
+     * @dataProvider tablesToIdsProvider
+     */
+    public function testCorrectTableToId($sTable, $sExpectedColumnId)
     {
-        $this->assertSame('profileId', DbVarious::convertTableToId(DbTableName::MEMBER));
+        $this->assertSame($sExpectedColumnId, DbVarious::convertTableToId($sTable));
     }
 
     /**
@@ -77,5 +107,83 @@ class VariousTest extends PHPUnit_Framework_TestCase
     public function testIncorrectTableToId()
     {
         DbVarious::convertTableToId('wrong_table');
+    }
+
+    /**
+     * @return array
+     */
+    public function tablesProvider()
+    {
+        return [
+            [DbTableName::MEMBER, 'members'],
+            [DbTableName::ALBUM_PICTURE, 'albums_pictures'],
+            [DbTableName::ALBUM_VIDEO, 'albums_videos'],
+            [DbTableName::PICTURE, 'pictures'],
+            [DbTableName::VIDEO, 'videos'],
+            [DbTableName::GAME, 'games'],
+            [DbTableName::BLOG, 'blogs'],
+            [DbTableName::NOTE, 'notes'],
+            [DbTableName::AD, 'ads'],
+            [DbTableName::AD_AFFILIATE, 'ads_affiliates']
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function modelTablesProvider()
+    {
+        return [
+            [DbTableName::MEMBER, 'members'],
+            [DbTableName::AFFILIATE, 'affiliates'],
+            [DbTableName::MEMBER_INFO, 'members_info'],
+            [DbTableName::AFFILIATE_INFO, 'affiliates_info'],
+            [DbTableName::SUBSCRIBER, 'subscribers'],
+            [DbTableName::ADMIN, 'admins']
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function modsToTablesProvider()
+    {
+        return [
+            ['user', 'members'],
+            ['affiliate', 'affiliates'],
+            ['newsletter', 'subscribers'],
+            [PH7_ADMIN_MOD, 'admins']
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function tablesToModsProvider()
+    {
+        return [
+            [DbTableName::MEMBER, 'user'],
+            [DbTableName::AFFILIATE, 'affiliate'],
+            [DbTableName::SUBSCRIBER, 'newsletter'],
+            [DbTableName::ADMIN, PH7_ADMIN_MOD]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function tablesToIdsProvider()
+    {
+        return [
+            [DbTableName::MEMBER, 'profileId'],
+            [DbTableName::PICTURE, 'pictureId'],
+            [DbTableName::ALBUM_PICTURE, 'albumId'],
+            [DbTableName::VIDEO, 'videoId'],
+            [DbTableName::ALBUM_VIDEO, 'albumId'],
+            [DbTableName::BLOG, 'blogId'],
+            [DbTableName::NOTE, 'noteId'],
+            [DbTableName::GAME, 'gameId'],
+            [DbTableName::FORUM_TOPIC, 'topicId']
+        ];
     }
 }
