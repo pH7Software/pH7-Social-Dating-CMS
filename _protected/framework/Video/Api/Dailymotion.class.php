@@ -53,7 +53,7 @@ class Dailymotion extends Api implements IApi
      */
     public function getMeta($sUrl, $sMedia, $iWidth, $iHeight)
     {
-        if ($sMedia == 'preview') {
+        if ($sMedia === 'preview') {
             return 'https://dailymotion.com/thumbnail/160x120/video/' . $this->getVideoId($sUrl);
         } else {
             $sParam = $this->bAutoplay ? '?autoPlay=1' : '';

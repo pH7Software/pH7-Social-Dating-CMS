@@ -115,7 +115,7 @@ class Metacafe extends Api implements IApi
         $sIdVideo = $this->getVideoId($sUrl);
         $sVideoUrl = $this->getEmbedUrl($sUrl);
 
-        if ($sMedia == 'preview') {
+        if ($sMedia === 'preview') {
             return 'http://s' . mt_rand(1, 4) . '.mcstatic.com/thumb/' . $sIdVideo . '.jpg';
         }
 

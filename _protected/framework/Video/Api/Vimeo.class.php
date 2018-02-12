@@ -56,7 +56,7 @@ class Vimeo extends Api implements IApi
      */
     public function getMeta($sUrl, $sMedia, $iWidth, $iHeight)
     {
-        if ($sMedia == 'preview') {
+        if ($sMedia === 'preview') {
             // First load the video information.
             $this->getInfo($sUrl);
             // Then retrieve the thumbnail.
