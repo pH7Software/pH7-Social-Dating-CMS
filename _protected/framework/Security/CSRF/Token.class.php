@@ -145,8 +145,8 @@ final class Token
     public function checkUrl()
     {
         $oHttpRequest = new HttpRequest;
-        $bRet = ( ($this->currentSess() === true) || $oHttpRequest->currentUrl() === PH7_URL_ROOT ||
-            ($oHttpRequest->get(static::VAR_NAME) === $this->currentSess()) );
+        $bRet = (($this->currentSess() === true) || $oHttpRequest->currentUrl() === PH7_URL_ROOT ||
+            ($oHttpRequest->get(static::VAR_NAME) === $this->currentSess()));
         unset($oHttpRequest);
 
         return $bRet;
