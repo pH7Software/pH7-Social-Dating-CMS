@@ -14,6 +14,7 @@ namespace PH7\Framework\Video;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Config\Config;
+use PH7\Framework\Registry\Registry;
 
 class ProviderFactory
 {
@@ -39,9 +40,11 @@ class ProviderFactory
     {
         switch ($sClass) {
             case in_array($sClass, self::YOUTUBE_NAMES, true):
-                $sKey = Config::getInstance()->values['module.api']['youtube.key'];
                 $oYoutube = new Api\Youtube;
-                $oYoutube->setKey($sKey); // Youtube's API v3+ requires an API key
+                if (self::isVideoModule()) {
+                    $sKey = Config::getInstance()->values['module.api']['youtube.key'];
+                    $oYoutube->setKey($sKey); // Youtube's API v3+ requires an API key
+                }
                 return $oYoutube;
 
             case self::VIMEO_NAME:
@@ -63,5 +66,13 @@ class ProviderFactory
         }
 
         return new $sClass;
+    }
+
+    /**
+     * @return bool
+     */
+    private static function isVideoModule()
+    {
+        return Registry::getInstance()->module === 'video';
     }
 }
