@@ -207,8 +207,7 @@ class DatabaseCoreCron extends Cron
      */
     protected function pruningDb($iOlderThanXDay, $sTable, $sDateColumn)
     {
-        if (strstr($sTable, 'comments_') === false &&
-            $sTable !== DbTableName::MESSAGE && $sTable !== DbTableName::MESSENGER) {
+        if ($this->isTableInvalid($sTable)) {
             DbVarious::launchErr($sTable);
         }
 
@@ -216,6 +215,17 @@ class DatabaseCoreCron extends Cron
         $rStmt->bindValue(':dayNumber', $iOlderThanXDay, \PDO::PARAM_INT);
         $rStmt->execute();
         return $rStmt->rowCount();
+    }
+
+    /**
+     * @param string $sTable
+     *
+     * @return bool
+     */
+    private function isTableInvalid($sTable)
+    {
+        return strstr($sTable, 'comments_') === false &&
+            $sTable !== DbTableName::MESSAGE && $sTable !== DbTableName::MESSENGER;
     }
 }
 
