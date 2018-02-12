@@ -8,8 +8,8 @@
 
 namespace PH7\Framework\Video\Api;
 
-use PH7\Framework\Error\CException\PH7Exception;
+use PH7\Framework\Error\CException\PH7RuntimeException;
 
-class Exception extends PH7Exception
+class InvalidApiKeyException extends PH7RuntimeException
 {
 }
