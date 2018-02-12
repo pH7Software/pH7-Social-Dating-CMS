@@ -20,6 +20,7 @@ use PH7\Framework\File\File;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Pattern\Statik;
 use PH7\Framework\Video\Api as VideoApi;
+use PH7\Framework\Video\InvalidApiProviderException;
 
 class VideoDesignCore
 {
@@ -47,12 +48,16 @@ class VideoDesignCore
         $sDurationTag = '<div class="video_duration">' . Various::secToTime($oData->duration) . '</div>';
 
         if ((new VideoCore)->isApi($oData->file)) {
-            $oVideo = (new VideoApi)->getMeta($oData->file, $sMedia, $iWidth, $iHeight);
+            try {
+                $oVideo = (new VideoApi)->getMeta($oData->file, $sMedia, $iWidth, $iHeight);
 
-            if ($sMedia === self::PREVIEW_MEDIA_MODE) {
-                echo $sDurationTag, '<a href="', $oData->file, '" title="', $oData->title, '" data-popup="frame-video"><img src="', $oVideo, '" alt="', $oData->title, '" title="', $oData->title, '" /></a>';
-            } else {
-                echo $oVideo;
+                if ($sMedia === self::PREVIEW_MEDIA_MODE) {
+                    echo $sDurationTag, '<a href="', $oData->file, '" title="', $oData->title, '" data-popup="frame-video"><img src="', $oVideo, '" alt="', $oData->title, '" title="', $oData->title, '" /></a>';
+                } else {
+                    echo $oVideo;
+                }
+            } catch (InvalidApiProviderException $oE) {
+                echo $oE->getMessage();
             }
         } else {
             $sDir = 'video/file/' . $oData->username . PH7_SH . $oData->albumId . PH7_SH;
