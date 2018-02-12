@@ -59,34 +59,31 @@ class VideoFormProcess extends Form
 
         $sEmbedUrl = $this->httpRequest->post('embed_code');
         if (!empty($sEmbedUrl)) {
-            if (!$sFile = (new V\Api)->getVideo($sEmbedUrl)) {
-                \PFBC\Form::setError('form_video', t('Oops! The embed video link looks incorrect? Please make sure that the link is correct.'));
-                return;
-            }
-
             try {
-                if (!$oInfo = (new V\Api)->getInfo($sEmbedUrl)) {
-                    \PFBC\Form::setError('form_video', t('Unable to retrieve information from the video. Are you sure that the URL of the video is correct?'));
+                $sFile = (new V\Api)->getVideo($sEmbedUrl);
+
+                try {
+                    if (!$oInfo = (new V\Api)->getInfo($sEmbedUrl)) {
+                        \PFBC\Form::setError('form_video', t('Unable to retrieve information from the video. Are you sure that the URL of the video is correct?'));
+                        return;
+                    }
+                } catch (Framework\Video\Api\InvalidApiKeyException $oE) {
+                    // Problem with the API service from the video platform...? Display the error message.
+                    \PFBC\Form::setError('form_video', $oE->getMessage());
                     return;
                 }
-            } catch (Framework\Video\Api\Exception $oE) {
-                // Problem with the API service from the video platform...? Display the error message.
-                \PFBC\Form::setError('form_video', $oE->getMessage());
+            } catch (V\InvalidApiProviderException $oE) {
+                \PFBC\Form::setError('form_video', t('Oops! The embed video link looks incorrect? Please make sure that the link is correct.'));
                 return;
             }
 
             $sTitle = $this->getApiVideoTitle($oInfo);
             $sDescription = $this->getApiVideoDescription($oInfo);
             $sDuration = ($oInfo->getDuration() ? $oInfo->getDuration() : '0'); // Time in seconds
-
-            if (!$sFile) {
-                \PFBC\Form::setError('form_video', t('Invalid Api Video Type! Choose from Youtube, Vimeo and Dailymotion.'));
-                return;
-            }
         } elseif (!empty($_FILES['video']['tmp_name'])) {
             try {
                 $oVideo = new V\Video($_FILES['video']);
-            } catch (Framework\File\Exception $oE) {
+            } catch (Framework\File\MissingProgramException $oE) {
                 \PFBC\Form::setError('form_video', $oE->getMessage());
                 return;
             }
