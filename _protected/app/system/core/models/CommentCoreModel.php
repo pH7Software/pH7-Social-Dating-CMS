@@ -24,14 +24,14 @@ class CommentCoreModel extends Model
 
     /**
      * @param string $sTable
-     * @param int $iApproved
+     * @param string $sApproved
      * @param string $sOrder
      * @param int $iOffset
      * @param int $iLimit
      *
      * @return array
      */
-    public function gets($sTable, $iApproved = 1, $sOrder = self::UPDATED, $iOffset = 0, $iLimit = 500)
+    public function gets($sTable, $sApproved = '1', $sOrder = self::UPDATED, $iOffset = 0, $iLimit = 500)
     {
         $sTable = CommentCore::checkTable($sTable);
         $iOffset = (int)$iOffset;
@@ -43,7 +43,7 @@ class CommentCoreModel extends Model
             $sOrder . ' DESC LIMIT :offset, :limit'
         );
 
-        $rStmt->bindParam(':approved', $iApproved, PDO::PARAM_INT);
+        $rStmt->bindParam(':approved', $sApproved, PDO::PARAM_STR);
         $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         $rStmt->execute();
@@ -55,14 +55,14 @@ class CommentCoreModel extends Model
 
     /**
      * @param int $iRecipientId
-     * @param int $iApproved
+     * @param string $sApproved
      * @param int $iOffset
      * @param int $iLimit
      * @param string $sTable
      *
      * @return array
      */
-    public function read($iRecipientId, $iApproved, $iOffset, $iLimit, $sTable)
+    public function read($iRecipientId, $sApproved, $iOffset, $iLimit, $sTable)
     {
         $sTable = CommentCore::checkTable($sTable);
         $iOffset = (int)$iOffset;
@@ -77,7 +77,7 @@ class CommentCoreModel extends Model
         if (!empty($iRecipientId)) {
             $rStmt->bindParam(':recipient', $iRecipientId, PDO::PARAM_INT);
         }
-        $rStmt->bindParam(':approved', $iApproved, PDO::PARAM_INT);
+        $rStmt->bindParam(':approved', $sApproved, PDO::PARAM_STR);
         $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         $rStmt->execute();

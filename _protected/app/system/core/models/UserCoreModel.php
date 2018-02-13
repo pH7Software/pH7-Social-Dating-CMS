@@ -793,7 +793,7 @@ class UserCoreModel extends Model
      * Get avatar.
      *
      * @param int $iProfileId
-     * @param int $iApproved (1 = approved | 0 = pending | NULL = approved and pending)
+     * @param string|null $iApproved (1 = approved | 0 = pending | NULL = approved and pending)
      *
      * @return stdClass The Avatar (SQL alias is pic), profileId and approvedAvatar
      */
@@ -802,10 +802,14 @@ class UserCoreModel extends Model
         $this->cache->start(self::CACHE_GROUP, 'avatar' . $iProfileId, static::CACHE_TIME);
 
         if (!$oData = $this->cache->get()) {
-            $sSqlApproved = (isset($iApproved)) ? ' AND approvedAvatar = :approved ' : ' ';
+            $bIsApproved = $iApproved !== null;
+
+            $sSqlApproved = $bIsApproved ? ' AND approvedAvatar = :approved ' : ' ';
             $rStmt = Db::getInstance()->prepare('SELECT profileId, avatar AS pic, approvedAvatar FROM' . Db::prefix(DbTableName::MEMBER) . 'WHERE profileId = :profileId' . $sSqlApproved . 'LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-            if (isset($iApproved)) $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+            if ($bIsApproved) {
+                $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_STR);
+            }
             $rStmt->execute();
             $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
@@ -834,7 +838,7 @@ class UserCoreModel extends Model
      * Get file of a user background.
      *
      * @param int $iProfileId
-     * @param int $iApproved (1 = approved | 0 = pending | NULL = approved and pending) Default NULL
+     * @param int|null $iApproved (1 = approved | 0 = pending | NULL = approved and pending) Default NULL
      *
      * @return string
      */
@@ -843,11 +847,13 @@ class UserCoreModel extends Model
         $this->cache->start(self::CACHE_GROUP, 'background' . $iProfileId, static::CACHE_TIME);
 
         if (!$sFile = $this->cache->get()) {
-            $sSqlApproved = $iApproved !== null ? ' AND approved = :approved ' : ' ';
+            $bIsApproved = $iApproved !== null;
+
+            $sSqlApproved = $bIsApproved ? ' AND approved = :approved ' : ' ';
             $rStmt = Db::getInstance()->prepare('SELECT file FROM' . Db::prefix(DbTableName::MEMBER_BACKGROUND) . 'WHERE profileId = :profileId' . $sSqlApproved . 'LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-            if ($iApproved !== null) {
-                $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+            if ($bIsApproved) {
+                $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_STR);
             }
             $rStmt->execute();
             $sFile = $rStmt->fetchColumn();
@@ -873,7 +879,7 @@ class UserCoreModel extends Model
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER_BACKGROUND) . '(profileId, file, approved) VALUES (:profileId, :file, :approved)');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':file', $sFile, \PDO::PARAM_STR);
-        $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+        $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_STR);
 
         return $rStmt->execute();
     }

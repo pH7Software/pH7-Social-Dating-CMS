@@ -159,7 +159,7 @@ class Google extends Api implements IApi
         $this->sAvatarFile = $this->getAvatar($sUrl);
 
         if ($this->sAvatarFile) {
-            $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
+            $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? 1 : 0;
             (new UserCore)->setAvatar($this->iProfileId, $this->sUsername, $this->sAvatarFile, $iApproved);
         }
 

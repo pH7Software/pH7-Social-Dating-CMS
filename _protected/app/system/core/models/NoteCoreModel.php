@@ -22,21 +22,21 @@ class NoteCoreModel extends Model
      * @param int $iOffset
      * @param int $iLimit
      * @param string $sOrder A constant: SearchCoreModel::CREATED (default value) or SearchCoreModel::UPDATED
-     * @param int $iApproved (0 = Unmoderated | 1 = Approved | NULL = unmoderated and approved) Default 1
+     * @param string|null $sApproved ('0' = Unmoderated | '1' = Approved | NULL = unmoderated and approved) Default 1
      *
      * @return array
      */
-    public function getPosts($iOffset, $iLimit, $sOrder = SearchCoreModel::CREATED, $iApproved = 1)
+    public function getPosts($iOffset, $iLimit, $sOrder = SearchCoreModel::CREATED, $sApproved = '1')
     {
         $this->cache->enabled(false); // Disabled the cache (if you have a few notes, you can enable it to improve performance).
 
         // We do not have a long duration of the cache for the changes of positions to be easily updated on the list of Notes of the home page.
-        $this->cache->start(self::CACHE_GROUP, 'posts' . $iOffset . $iLimit . $sOrder . $iApproved, 3600);
+        $this->cache->start(self::CACHE_GROUP, 'posts' . $iOffset . $iLimit . $sOrder . $sApproved, 3600);
 
         if (!$aData = $this->cache->get()) {
             $iOffset = (int)$iOffset;
             $iLimit = (int)$iLimit;
-            $bIsApproved = isset($iApproved);
+            $bIsApproved = isset($sApproved);
 
             $sSqlApproved = $bIsApproved ? ' WHERE approved = :approved' : '';
             $sOrderBy = SearchCoreModel::order($sOrder, SearchCoreModel::DESC);
@@ -47,7 +47,7 @@ class NoteCoreModel extends Model
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
             if ($bIsApproved) {
-                $rStmt->bindParam(':approved', $iApproved, \PDO::PARAM_INT);
+                $rStmt->bindParam(':approved', $sApproved, \PDO::PARAM_STR);
             }
             $rStmt->execute();
             $aData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
@@ -61,18 +61,18 @@ class NoteCoreModel extends Model
     /**
      * Gets total note posts.
      *
-     * @param int $iApproved (0 = Unmoderated | 1 = Approved | NULL = unmoderated and approved) Default 1
+     * @param string|null $sApproved ('0' = Unmoderated | '1' = Approved | NULL = unmoderated and approved) Default 1
      * @param int $iDay Default 0
      *
      * @return int
      */
-    public function totalPosts($iApproved = 1, $iDay = 0)
+    public function totalPosts($sApproved = '1', $iDay = 0)
     {
         $this->cache->start(self::CACHE_GROUP, 'totalPosts', static::CACHE_TIME);
 
         if (!$iData = $this->cache->get()) {
             $iDay = (int)$iDay;
-            $bIsApproved = isset($iApproved);
+            $bIsApproved = isset($sApproved);
 
             $sSqlWhere = $bIsApproved ? 'WHERE' : '';
             $sSqlAnd = ($bIsApproved && $iDay > 0 ? ' AND' : ($iDay > 0 ? 'WHERE' : ''));
@@ -81,7 +81,7 @@ class NoteCoreModel extends Model
             $sSql = 'SELECT COUNT(postId) AS totalPosts FROM' . Db::prefix(DbTableName::NOTE) . $sSqlWhere . $sSqlApproved . $sSqlAnd . $sSqlDay;
             $rStmt = Db::getInstance()->prepare($sSql);
             if ($bIsApproved) {
-                $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+                $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
             }
 
             $rStmt->execute();

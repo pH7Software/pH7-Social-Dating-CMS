@@ -15,21 +15,21 @@ class CommentModel extends CommentCoreModel
 {
     /**
      * @param int $iCommentId
-     * @param int $iApproved
+     * @param string $sApproved
      * @param string $sTable
      *
-     * @return array|bool|float|int|mixed|object|string
+     * @return array
      */
-    public function get($iCommentId, $iApproved, $sTable)
+    public function get($iCommentId, $sApproved, $sTable)
     {
-        $this->cache->start(static::CACHE_GROUP, 'get' . $iCommentId . $iApproved . $sTable, static::CACHE_TIME);
+        $this->cache->start(static::CACHE_GROUP, 'get' . $iCommentId . $sApproved . $sTable, static::CACHE_TIME);
 
         if (!$oData = $this->cache->get()) {
             $sTable = CommentCore::checkTable($sTable);
 
             $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' . Db::prefix('comments_' . $sTable) . ' AS c LEFT JOIN' . Db::prefix(DbTableName::MEMBER) . 'AS m ON c.sender = m.profileId WHERE commentId = :commentId AND c.approved =:approved LIMIT 1');
             $rStmt->bindParam(':commentId', $iCommentId, \PDO::PARAM_INT);
-            $rStmt->bindParam(':approved', $iApproved, \PDO::PARAM_INT);
+            $rStmt->bindParam(':approved', $sApproved, \PDO::PARAM_STR);
             $rStmt->execute();
             $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
@@ -43,13 +43,13 @@ class CommentModel extends CommentCoreModel
      * @param int $iCommentId
      * @param int $iRecipientId
      * @param int $iSenderId
-     * @param int $iApproved
+     * @param string $sApproved
      * @param string $sCreatedDate
      * @param string $sTable
      *
      * @return bool
      */
-    public function add($iCommentId, $iRecipientId, $iSenderId, $iApproved, $sCreatedDate, $sTable)
+    public function add($iCommentId, $iRecipientId, $iSenderId, $sApproved, $sCreatedDate, $sTable)
     {
         $sTable = CommentCore::checkTable($sTable);
 
@@ -59,7 +59,7 @@ class CommentModel extends CommentCoreModel
         $rStmt->bindValue(':comment', $iCommentId, \PDO::PARAM_STR);
         $rStmt->bindValue('recipient', $iRecipientId, \PDO::PARAM_INT);
         $rStmt->bindValue(':sender', $iSenderId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+        $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
         $rStmt->bindValue(':createdDate', $sCreatedDate, \PDO::PARAM_STR);
 
         return $rStmt->execute();
@@ -70,13 +70,13 @@ class CommentModel extends CommentCoreModel
      * @param int $iRecipientId
      * @param int $iSenderId
      * @param string $sComment
-     * @param int $iApproved
+     * @param string $sApproved
      * @param string $sUpdatedDate
      * @param string $sTable
      *
      * @return bool
      */
-    public function update($iCommentId, $iRecipientId, $iSenderId, $sComment, $iApproved, $sUpdatedDate, $sTable)
+    public function update($iCommentId, $iRecipientId, $iSenderId, $sComment, $sApproved, $sUpdatedDate, $sTable)
     {
         $sTable = CommentCore::checkTable($sTable);
 
@@ -87,7 +87,7 @@ class CommentModel extends CommentCoreModel
         $rStmt->bindValue('recipient', $iRecipientId, \PDO::PARAM_INT);
         $rStmt->bindValue(':sender', $iSenderId, \PDO::PARAM_INT);
         $rStmt->bindValue(':comment', $sComment, \PDO::PARAM_STR);
-        $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+        $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
         $rStmt->bindValue(':updatedDate', $sUpdatedDate, \PDO::PARAM_STR);
 
         return $rStmt->execute();
