@@ -97,7 +97,7 @@ class TwoCheckOut extends Provider implements Api
         ) {
             $sHash = strtoupper(md5($sSecretWord . $sVendorId . $aInsMsg['order_number'] . $aInsMsg['total']));
 
-            if ($sHash != $_REQUEST['key']) {
+            if ($sHash !== $_REQUEST['key']) {
                 $this->bValid = true;
                 $this->sMsg = t('Purchase transaction valid.');
             } else {
