@@ -251,11 +251,11 @@ class VideoModel extends VideoCoreModel
      * @param int $iSort
      * @param int $iOffset
      * @param int $iLimit
-     * @param int $iApproved
+     * @param string $sApproved
      *
      * @return int|\stdClass
      */
-    public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $iApproved = 1)
+    public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $sApproved = '1')
     {
         $bCount = (bool)$bCount;
         $iOffset = (int)$iOffset;
