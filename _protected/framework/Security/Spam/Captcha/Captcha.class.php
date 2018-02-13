@@ -91,7 +91,7 @@ class Captcha
 
         $this->oSession->set('rand_code', $this->sStr);
 
-        $this->sFont = $this->_getFont();
+        $this->sFont = $this->getFont();
         //$sBackground = PH7_PATH_DATA . 'background/' . mt_rand(1, 5) . '.png';
 
         $this->aBox = imagettfbbox($this->iSize, 0, $this->sFont, $this->sStr);
@@ -117,7 +117,7 @@ class Captcha
 
         imagefilledrectangle($this->rImg, 0, 0, 399, 99, $this->rWhite);
 
-        $this->_mixing();
+        $this->mixing();
 
         imageline($this->rImg, mt_rand(2, $this->iWidth + $this->iMargin), mt_rand(1, $this->iWidth + $this->iMargin), mt_rand(1, $this->iHeight + $this->iMargin), mt_rand(2, $this->iWidth + $this->iMargin), $this->rBlack);
         imageline($this->rImg, mt_rand(2, $this->iHeight + $this->iMargin), mt_rand(1, $this->iHeight + $this->iMargin), mt_rand(1, $this->iWidth + $this->iMargin), mt_rand(2, $this->iHeight + $this->iMargin), $this->rRed);
@@ -170,7 +170,7 @@ class Captcha
     /**
      * @return void
      */
-    private function _mixing()
+    private function mixing()
     {
         for ($i = 0, $iLength = strlen($this->sStr); $i < $iLength; ++$i) {
             $sText = $this->sStr[$i]; // A string can be seen as an array
@@ -192,7 +192,7 @@ class Captcha
     /**
      * @return string The font path of captcha.
      */
-    private function _getFont()
+    private function getFont()
     {
         //$count = count(glob(PH7_PATH_DATA . '/font/*.ttf'));
         //return PH7_PATH_DATA . '/font/' . mt_rand(1,$count) . '.ttf';
