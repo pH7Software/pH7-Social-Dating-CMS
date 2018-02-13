@@ -191,7 +191,7 @@ class Paypal extends Provider implements Api
 
         foreach ($aRawPost as $sKeyVal) {
             $aKeyVal = explode('=', $sKeyVal);
-            if (count($aKeyVal) == 2) {
+            if (count($aKeyVal) === 2) {
                 $aPostData[$aKeyVal[0]] = Url::decode($aKeyVal[1]);
             }
         }
