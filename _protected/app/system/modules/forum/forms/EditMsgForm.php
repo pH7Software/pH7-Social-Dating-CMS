@@ -32,7 +32,7 @@ class EditMsgForm
             strstr($oHttpRequest->get('topic_name'), '-', true),
             $oHttpRequest->get('topic_id'),
             (new Session)->get('member_id'),
-            1,
+            '1',
             0,
             1
         );

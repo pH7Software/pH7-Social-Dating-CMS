@@ -99,7 +99,7 @@ class ForumController extends Controller
             null,
             null,
             null,
-            1,
+            '1',
             $this->oPage->getFirstItem(),
             $this->oPage->getNbItemsPerPage()
         );
@@ -129,7 +129,7 @@ class ForumController extends Controller
             strstr($this->httpRequest->get('topic_name'), '-', true),
             $this->httpRequest->get('topic_id', 'int'),
             null,
-            1,
+            '1',
             0,
             1
         );
@@ -146,7 +146,7 @@ class ForumController extends Controller
             $this->httpRequest->get('topic_id', 'int'),
             null,
             null,
-            1,
+            '1',
             $this->oPage->getFirstItem(),
             $this->oPage->getNbItemsPerPage()
         );
@@ -195,7 +195,7 @@ class ForumController extends Controller
 
         $oTopics = $this->oForumModel->getPostByProfile(
             $iId,
-            1,
+            '1',
             $this->oPage->getFirstItem(),
             $this->oPage->getNbItemsPerPage()
         );

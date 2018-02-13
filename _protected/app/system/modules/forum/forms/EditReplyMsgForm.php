@@ -29,7 +29,7 @@ class EditReplyMsgForm
             $oHttpRequest->get('topic_id'),
             $oHttpRequest->get('message_id'),
             (new Session)->get('member_id'),
-            1,
+            '1',
             0,
             1
         );

@@ -103,7 +103,15 @@ class DataCoreModel extends Model
 
     public function getForumsMessages($iTopicId)
     {
-        return (new ForumCoreModel)->getMessage($iTopicId, null, null, 1, 0, static::MAX_ITEMS, Db::DESC);
+        return (new ForumCoreModel)->getMessage(
+            $iTopicId,
+            null,
+            null,
+            '1',
+            0,
+            static::MAX_ITEMS,
+            Db::DESC
+        );
     }
 
     public function getCommentsProfiles()
