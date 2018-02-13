@@ -44,7 +44,7 @@ class CommentFormProcess extends Form
         } elseif (Spam::areEmails($sComment, self::MAX_ALLOWED_EMAILS)) {
             \PFBC\Form::setError('form_comment', Form::tooManyEmailsMsg());
         } else {
-            if (!$oCommentModel->add($sComment, $iRecipientId, $iSenderId, 1, $sCurrentTime, $sTable)) {
+            if (!$oCommentModel->add($sComment, $iRecipientId, $iSenderId, '1', $sCurrentTime, $sTable)) {
                 \PFBC\Form::setError('form_comment', t('Oops! Error occurred when adding comment.'));
             } else {
                 CommentCore::clearCache();
