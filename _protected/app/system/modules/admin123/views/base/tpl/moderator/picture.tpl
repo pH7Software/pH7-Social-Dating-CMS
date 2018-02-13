@@ -9,7 +9,7 @@
                 </a>
                 <p class="italic">
                     {lang 'Posted by'} {{ $design->getProfileLink($picture->username) }}<br />
-                    <small>{lang 'Posted on %0%', $picture->createdDate }</small>
+                    <small>{lang 'Posted on %0%', $picture->createdDate}</small>
                 </p>
 
                 <div>

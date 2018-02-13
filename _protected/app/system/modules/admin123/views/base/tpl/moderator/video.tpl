@@ -7,7 +7,7 @@
                 {{ VideoDesignCore::generate($video, VideoDesignCore::PREVIEW_MEDIA_MODE, 200, 200) }}
                 <p class="italic">
                     {lang 'Posted by'} {{ $design->getProfileLink($video->username) }}<br />
-                    <small>{lang 'Posted on %0%', $video->createdDate }</small>
+                    <small>{lang 'Posted on %0%', $video->createdDate}</small>
                 </p>
 
                 <div>

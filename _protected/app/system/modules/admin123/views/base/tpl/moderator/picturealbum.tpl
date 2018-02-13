@@ -11,7 +11,7 @@
                     </a>
                     <p class="italic">
                         {lang 'Posted by'} {{ $design->getProfileLink($album->username) }}<br />
-                        <small>{lang 'Posted on %0%', $album->createdDate }</small>
+                        <small>{lang 'Posted on %0%', $album->createdDate}</small>
                     </p>
 
                     <div>
