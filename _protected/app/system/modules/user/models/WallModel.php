@@ -106,6 +106,12 @@ class WallModel extends Model
      */
     public function getCommentProfile($iProfileId, $iOffset, $iLimit)
     {
-        return (new CommentCoreModel)->read($iProfileId, 1, $iOffset, $iLimit, 'profile');
+        return (new CommentCoreModel)->read(
+            $iProfileId,
+            '1',
+            $iOffset,
+            $iLimit,
+            'profile'
+        );
     }
 }

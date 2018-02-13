@@ -95,7 +95,7 @@ class MainController extends Controller
         $oAlbums = $this->oVideoModel->album(
             $iProfileId,
             null,
-            1,
+            '1',
             $this->oPage->getFirstItem(),
             $this->oPage->getNbItemsPerPage()
         );

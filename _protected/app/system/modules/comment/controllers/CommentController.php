@@ -79,7 +79,13 @@ class CommentController extends Controller
             $this->oCommentModel->total($this->iId, $this->sTable), self::COMMENTS_PER_PAGE
         );
         $this->view->current_page = $oPage->getCurrentPage();
-        $oComment = $this->oCommentModel->read($this->iId, 1, $oPage->getFirstItem(), $oPage->getNbItemsPerPage(), $this->sTable);
+        $oComment = $this->oCommentModel->read(
+            $this->iId,
+            '1',
+            $oPage->getFirstItem(),
+            $oPage->getNbItemsPerPage(),
+            $this->sTable
+        );
         unset($oPage);
 
         if (!empty($oComment)) {

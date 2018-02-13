@@ -93,7 +93,12 @@ class DataCoreModel extends Model
 
     public function getForums()
     {
-        return (new ForumCoreModel)->getForum(null, 0, static::MAX_ITEMS, ForumCoreModel::UPDATED);
+        return (new ForumCoreModel)->getForum(
+            null,
+            0,
+            static::MAX_ITEMS,
+            ForumCoreModel::UPDATED
+        );
     }
 
     public function getForumsTopics()
@@ -146,56 +151,122 @@ class DataCoreModel extends Model
 
     public function getRecipientCommentsProfiles($iRecipientId)
     {
-        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'profile');
+        return (new CommentCoreModel)->read(
+            $iRecipientId,
+            '1',
+            0,
+            static::MAX_ITEMS,
+            'profile'
+        );
     }
 
     public function getRecipientCommentsBlogs($iRecipientId)
     {
-        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'blog');
+        return (new CommentCoreModel)->read(
+            $iRecipientId,
+            '1',
+            0,
+            static::MAX_ITEMS,
+            'blog'
+        );
     }
 
     public function getRecipientCommentsNotes($iRecipientId)
     {
-        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'note');
+        return (new CommentCoreModel)->read(
+            $iRecipientId,
+            '1',
+            0,
+            static::MAX_ITEMS,
+            'note'
+        );
     }
 
     public function getRecipientCommentsPictures($iRecipientId)
     {
-        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'picture');
+        return (new CommentCoreModel)->read(
+            $iRecipientId,
+            '1',
+            0,
+            static::MAX_ITEMS,
+            'picture'
+        );
     }
 
     public function getRecipientCommentsVideos($iRecipientId)
     {
-        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'video');
+        return (new CommentCoreModel)->read(
+            $iRecipientId,
+            '1',
+            0,
+            static::MAX_ITEMS,
+            'video'
+        );
     }
 
     public function getRecipientCommentsGames($iRecipientId)
     {
-        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'game');
+        return (new CommentCoreModel)->read(
+            $iRecipientId,
+            '1',
+            0,
+            static::MAX_ITEMS,
+            'game'
+        );
     }
 
     public function getAlbumsPictures()
     {
-        return (new PictureCoreModel)->album(null, null, 1, 0, static::MAX_ITEMS, SearchCoreModel::CREATED);
+        return (new PictureCoreModel)->album(
+            null,
+            null,
+            '1',
+            0,
+            static::MAX_ITEMS,
+            SearchCoreModel::CREATED
+        );
     }
 
     public function getPictures()
     {
-        return $this->getPicsVids(static::TB_PICTURE, SearchCoreModel::CREATED, 0, static::MAX_ITEMS);
+        return $this->getPicsVids(
+            static::TB_PICTURE,
+            SearchCoreModel::CREATED,
+            0,
+            static::MAX_ITEMS
+        );
     }
 
     public function getAlbumsVideos()
     {
-        return (new VideoCoreModel)->album(null, null, 1, 0, static::MAX_ITEMS, SearchCoreModel::CREATED);
+        return (new VideoCoreModel)->album(
+            null,
+            null,
+            '1',
+            0,
+            static::MAX_ITEMS,
+            SearchCoreModel::CREATED
+        );
     }
 
     public function getVideos()
     {
-        return $this->getPicsVids(static::TB_VIDEO, SearchCoreModel::CREATED, 0, static::MAX_ITEMS);
+        return $this->getPicsVids(
+            static::TB_VIDEO,
+            SearchCoreModel::CREATED,
+            0,
+            static::MAX_ITEMS
+        );
     }
 
     public function getGames()
     {
-        return (new GameCoreModel)->get(null, null, 0, static::MAX_ITEMS, SearchCoreModel::ADDED_DATE);
+        return (new GameCoreModel)->get(
+            null,
+            null,
+            0,
+            static::MAX_ITEMS,
+            SearchCoreModel::ADDED_DATE
+        );
     }
 }

@@ -25,7 +25,13 @@ class EditAlbumForm
             Header::redirect();
         }
 
-        $oAlbum = (new VideoModel)->album((new Session)->get('member_id'), (new Http)->get('album_id'), 1, 0, 1);
+        $oAlbum = (new VideoModel)->album(
+            (new Session)->get('member_id'),
+            (new Http)->get('album_id'),
+            '1',
+            0,
+            1)
+        ;
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
 
         $oForm = new \PFBC\Form('form_edit_video_album');
