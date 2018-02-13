@@ -155,7 +155,7 @@ class JoinFormProcess extends Form
             );
         }
 
-        $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
+        $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? 1 : 0;
         $bAvatar = (new UserCore)->setAvatar(
             $this->session->get('profile_id'),
             $this->session->get('username'),
