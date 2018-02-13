@@ -92,7 +92,7 @@ class MainController extends Controller
             $iProfileId = (new UserCoreModel)->getId(null, $sUsername);
             $oPost = $this->oNoteModel->readPost($sPostId, $iProfileId, $this->iApproved);
 
-            if ($oPost !== null && $this->doesPostExist($sPostId, $oPost)) {
+            if ($oPost && $this->doesPostExist($sPostId, $oPost)) {
                 $aVars = [
                     /***** META TAGS *****/
                     'page_title' => Ban::filterWord($oPost->pageTitle, false),

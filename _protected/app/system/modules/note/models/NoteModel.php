@@ -103,7 +103,7 @@ class NoteModel extends NoteCoreModel
      * @param int $iProfileId
      * @param int $iApproved
      *
-     * @return \stdClass|null
+     * @return \stdClass|bool Returns the data, or FALSE on failure.
      */
     public function readPost($sPostId, $iProfileId, $iApproved = 1)
     {

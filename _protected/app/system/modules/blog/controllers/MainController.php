@@ -74,7 +74,7 @@ class MainController extends Controller
         if (!empty($sPostId)) {
             $oPost = $this->oBlogModel->readPost($sPostId);
 
-            if ($oPost !== null && $this->doesPostExist($sPostId, $oPost)) {
+            if ($oPost && $this->doesPostExist($sPostId, $oPost)) {
                 $aVars = [
                     /***** META TAGS *****/
                     'page_title' => $oPost->pageTitle,

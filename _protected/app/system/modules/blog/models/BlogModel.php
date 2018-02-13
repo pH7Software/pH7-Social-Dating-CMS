@@ -68,7 +68,7 @@ class BlogModel extends BlogCoreModel
     /**
      * @param string $sPostId
      *
-     * @return \stdClass|null
+     * @return \stdClass|bool Returns the data, or FALSE on failure.
      */
     public function readPost($sPostId)
     {
