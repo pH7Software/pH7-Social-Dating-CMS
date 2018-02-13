@@ -103,7 +103,7 @@ class NoteModel extends NoteCoreModel
      * @param int $iProfileId
      * @param int $iApproved
      *
-     * @return \stdClass
+     * @return \stdClass|null
      */
     public function readPost($sPostId, $iProfileId, $iApproved = 1)
     {
