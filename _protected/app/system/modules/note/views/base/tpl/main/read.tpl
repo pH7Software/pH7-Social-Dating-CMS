@@ -35,7 +35,7 @@
 
                 <fieldset>
                     <legend>{lang 'Moderation Action'}</legend>
-                    <div>{{ LinkCoreForm::display($text, 'note', 'admin', $action, array('note_id'=>$post->noteId)) }} &nbsp; | &nbsp; <a href="{{ $design->url(PH7_ADMIN_MOD,'user','loginuseras',$post->profileId) }}" title="{lang 'Login as this author to edit this post'}">{lang 'Login as this User'}</a></div>
+                    <div>{{ LinkCoreForm::display($text, 'note', 'admin', $action, array('note_id'=>$post->noteId)) }} &nbsp; | &nbsp; <a href="{{ $design->url(PH7_ADMIN_MOD,'user','loginuseras',$post->profileId) }}" title="{lang 'Login as this author to edit/delete this post'}">{lang 'Login as this User'}</a></div>
                 </fieldset>
             {/if}
         </article>

@@ -31,8 +31,8 @@ class PictureFormProcess extends Form
     const PICTURE5_SIZE = 1000;
     const PICTURE6_SIZE = 1200;
 
-    /** @var int */
-    private $iApproved;
+    /** @var string */
+    private $sApproved;
 
     public function __construct()
     {
@@ -116,7 +116,7 @@ class PictureFormProcess extends Form
             $oPicture5->save($sPath . $sFile5);
             $oPicture6->save($sPath . $sFile6);
 
-            $this->iApproved = DbConfig::getSetting('pictureManualApproval') == 0 ? '1' : '0';
+            $this->sApproved = DbConfig::getSetting('pictureManualApproval') == 0 ? '1' : '0';
 
             $this->checkNudityFilter($aPhotos[$i]);
 
@@ -131,7 +131,7 @@ class PictureFormProcess extends Form
                 $this->httpRequest->post('description'),
                 $sFile1,
                 $this->dateTime->get()->dateTime('Y-m-d H:i:s'),
-                $this->iApproved
+                $this->sApproved
             );
         }
 
@@ -139,7 +139,7 @@ class PictureFormProcess extends Form
 
         $sModerationText = t('Your photo(s) has/have been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
         $sText = t('Your photo(s) has/have been successfully added!');
-        $sMsg = ($this->iApproved == '0') ? $sModerationText : $sText;
+        $sMsg = $this->sApproved === '0' ? $sModerationText : $sText;
 
         Header::redirect(
             Uri::get('picture',
@@ -160,7 +160,7 @@ class PictureFormProcess extends Form
     {
         if (DbConfig::getSetting('nudityFilter') && Filter::isNudity($sFile)) {
             // The photo(s) seems to be suitable for adults only, so set for moderation
-            $this->iApproved = '0';
+            $this->sApproved = '0';
         }
     }
 

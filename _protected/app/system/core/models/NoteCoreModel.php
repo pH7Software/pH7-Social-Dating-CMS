@@ -22,7 +22,7 @@ class NoteCoreModel extends Model
      * @param int $iOffset
      * @param int $iLimit
      * @param string $sOrder A constant: SearchCoreModel::CREATED (default value) or SearchCoreModel::UPDATED
-     * @param int $iApproved (0 = Unmoderated | 1 = Approved | NULL = unmoderated and approved) Default 1
+     * @param int|null $iApproved (0 = Unmoderated | 1 = Approved | NULL = unmoderated and approved)
      *
      * @return array
      */
@@ -61,7 +61,7 @@ class NoteCoreModel extends Model
     /**
      * Gets total note posts.
      *
-     * @param int $iApproved (0 = Unmoderated | 1 = Approved | NULL = unmoderated and approved) Default 1
+     * @param int|null $iApproved (0 = Unmoderated | 1 = Approved | NULL = unmoderated and approved) Default 1
      * @param int $iDay Default 0
      *
      * @return int
@@ -83,7 +83,6 @@ class NoteCoreModel extends Model
             if ($bIsApproved) {
                 $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
             }
-
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);

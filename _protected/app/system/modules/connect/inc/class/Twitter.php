@@ -252,7 +252,7 @@ class Twitter extends Api implements IApi
         }
 
         if ($this->sAvatarFile) {
-            $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
+            $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? 1 : 0;
             (new UserCore)->setAvatar($this->iProfileId, $this->sUsername, $this->sAvatarFile, $iApproved);
         }
 

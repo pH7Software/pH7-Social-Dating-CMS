@@ -21,16 +21,16 @@ class VideoCoreModel extends Model
     /**
      * @param null|int $iProfileId
      * @param null|int $iAlbumId
-     * @param int $iApproved
+     * @param string $sApproved
      * @param int $iOffset
      * @param int $iLimit
      * @param string $sOrder
      *
      * @return array|\stdClass
      */
-    public function album($iProfileId = null, $iAlbumId = null, $iApproved = 1, $iOffset, $iLimit, $sOrder = self::CREATED)
+    public function album($iProfileId = null, $iAlbumId = null, $sApproved = '1', $iOffset, $iLimit, $sOrder = self::CREATED)
     {
-        $this->cache->start(self::CACHE_GROUP, 'album' . $iProfileId . $iAlbumId . $iApproved . $iOffset . $iLimit . $sOrder, static::CACHE_TIME);
+        $this->cache->start(self::CACHE_GROUP, 'album' . $iProfileId . $iAlbumId . $sApproved . $iOffset . $iLimit . $sOrder, static::CACHE_TIME);
 
         if (!$mData = $this->cache->get()) {
             $iOffset = (int)$iOffset;
@@ -54,7 +54,7 @@ class VideoCoreModel extends Model
             if ($bIsAlbumId) {
                 $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
             }
-            $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+            $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
 
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);

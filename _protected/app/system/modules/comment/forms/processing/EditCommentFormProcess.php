@@ -55,7 +55,7 @@ class EditCommentFormProcess extends Form
                     $this->iRecipientId,
                     $this->iSenderId,
                     $sComment,
-                    1,
+                    '1',
                     $this->dateTime->get()->dateTime('Y-m-d H:i:s'),
                     $sTable
                 )) {

@@ -103,7 +103,7 @@ class NoteModel extends NoteCoreModel
      * @param int $iProfileId
      * @param int $iApproved
      *
-     * @return \stdClass
+     * @return \stdClass|null
      */
     public function readPost($sPostId, $iProfileId, $iApproved = 1)
     {
@@ -114,7 +114,11 @@ class NoteModel extends NoteCoreModel
 
             $sSqlApproved = $bIsApproved ? ' AND approved = :approved' : '';
 
-            $rStmt = Db::getInstance()->prepare('SELECT n.*, c.*, m.username, m.firstName, m.sex FROM' . Db::prefix(DbTableName::NOTE) . 'AS n LEFT JOIN' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON n.noteId = c.noteId INNER JOIN' . Db::prefix(DbTableName::MEMBER) . ' AS m ON n.profileId = m.profileId WHERE n.profileId = :profileId AND n.postId = :postId' . $sSqlApproved . ' LIMIT 1');
+            $sSqlQuery = 'SELECT n.*, c.*, m.username, m.firstName, m.sex FROM' . Db::prefix(DbTableName::NOTE) .
+                'AS n LEFT JOIN' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON n.noteId = c.noteId INNER JOIN' .
+                Db::prefix(DbTableName::MEMBER) . ' AS m ON n.profileId = m.profileId WHERE n.profileId = :profileId AND n.postId = :postId' .
+                $sSqlApproved . ' LIMIT 1';
+            $rStmt = Db::getInstance()->prepare($sSqlQuery);
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->bindValue(':postId', $sPostId, \PDO::PARAM_STR);
             if ($bIsApproved) {

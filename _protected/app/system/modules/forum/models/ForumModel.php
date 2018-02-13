@@ -53,13 +53,13 @@ class ForumModel extends ForumCoreModel
      * @param string $sTopicSubject
      * @param int $iTopicId
      * @param int $iProfileId
-     * @param int $iApproved
+     * @param string $sApproved
      * @param int $iOffset
      * @param int $iLimit
      *
      * @return array|\stdClass|bool
      */
-    public function getTopic($sForumName, $iForumId, $sTopicSubject, $iTopicId, $iProfileId, $iApproved, $iOffset, $iLimit)
+    public function getTopic($sForumName, $iForumId, $sTopicSubject, $iTopicId, $iProfileId, $sApproved, $iOffset, $iLimit)
     {
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
@@ -84,7 +84,7 @@ class ForumModel extends ForumCoreModel
         if ($bIsProfileId) {
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         }
-        $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+        $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -402,13 +402,13 @@ class ForumModel extends ForumCoreModel
 
     /**
      * @param int $iProfileId
-     * @param int $iApproved
+     * @param string $sApproved
      * @param int $iOffset
      * @param int $iLimit
      *
      * @return array
      */
-    public function getPostByProfile($iProfileId, $iApproved, $iOffset, $iLimit)
+    public function getPostByProfile($iProfileId, $sApproved, $iOffset, $iLimit)
     {
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
@@ -417,7 +417,7 @@ class ForumModel extends ForumCoreModel
             'AS t ON f.forumId = t.forumId WHERE t.profileId = :profileId AND t.approved = :approved GROUP BY t.topicId ORDER BY t.createdDate DESC LIMIT :offset, :limit');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+        $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();

@@ -149,7 +149,7 @@ class VideoFormProcess extends Form
         }
 
         $sTitle = MediaCore::cleanTitle($sTitle);
-        $iApproved = DbConfig::getSetting('videoManualApproval') == 0 ? '1' : '0';
+        $sApproved = DbConfig::getSetting('videoManualApproval') == 0 ? '1' : '0';
 
         (new VideoModel)->addVideo(
             $this->session->get('member_id'),
@@ -160,14 +160,14 @@ class VideoFormProcess extends Form
             $sThumb,
             $sDuration,
             $this->dateTime->get()->dateTime('Y-m-d H:i:s'),
-            $iApproved
+            $sApproved
         );
 
         Video::clearCache();
 
         $sModerationText = t('Your video has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
         $sText = t('Your video has been successfully added!');
-        $sMsg = $iApproved === '0' ? $sModerationText : $sText;
+        $sMsg = $sApproved === '0' ? $sModerationText : $sText;
 
         Header::redirect(
             Uri::get(

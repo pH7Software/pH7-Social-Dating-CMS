@@ -68,7 +68,7 @@ class BlogModel extends BlogCoreModel
     /**
      * @param string $sPostId
      *
-     * @return \stdClass
+     * @return \stdClass|null
      */
     public function readPost($sPostId)
     {

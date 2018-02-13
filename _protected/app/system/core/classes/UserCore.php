@@ -107,10 +107,10 @@ class UserCore
     /**
      * Set the avatar file and add it to the database.
      *
-     * @param integer $iProfileId
-     * @param integer $sUsername
+     * @param int $iProfileId
+     * @param string $sUsername
      * @param string $sFile
-     * @param integer $iApproved (1 = approved 0 = pending)
+     * @param int $iApproved (1 = approved | 0 = pending)
      *
      * @return bool TRUE if success, FALSE if the extension is wrong.
      *
@@ -237,9 +237,11 @@ class UserCore
      * @param integer $iProfileId
      * @param string $sUsername
      * @param string $sFile
-     * @param integer $iApproved (1 = approved 0 = pending)
+     * @param int $iApproved (1 = approved | 0 = pending)
      *
      * @return bool TRUE if success, FALSE if the extension is wrong.
+     *
+     * @throws Framework\File\Exception
      */
     public function setBackground($iProfileId, $sUsername, $sFile, $iApproved = 1)
     {
@@ -327,6 +329,8 @@ class UserCore
      * @param string $sSex
      *
      * @return string The link
+     *
+     * @throws Framework\File\Exception
      */
     public function getProfileSignupLink($sUsername, $sFirstName, $sSex)
     {

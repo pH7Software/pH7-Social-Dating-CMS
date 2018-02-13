@@ -64,14 +64,14 @@ class ForumCoreModel extends Model
      * @param int $iTopicId
      * @param int|null $iMessageId
      * @param int|null $iProfileId
-     * @param int $iApproved
+     * @param string $sApproved
      * @param int $iOffset
      * @param int $iLimit
      * @param string $sSort
      *
      * @return array|\stdClass|false
      */
-    public function getMessage($iTopicId, $iMessageId = null, $iProfileId = null, $iApproved, $iOffset, $iLimit, $sSort = Db::ASC)
+    public function getMessage($iTopicId, $iMessageId = null, $iProfileId = null, $sApproved, $iOffset, $iLimit, $sSort = Db::ASC)
     {
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
@@ -96,7 +96,7 @@ class ForumCoreModel extends Model
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         }
 
-        $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+        $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();

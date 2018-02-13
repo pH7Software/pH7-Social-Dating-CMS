@@ -5,12 +5,15 @@
 
              <div class="m_video">
                 {{ VideoDesignCore::generate($video, VideoDesignCore::PREVIEW_MEDIA_MODE, 200, 200) }}
-                <p class="italic">{lang 'Posted by'} {{ $design->getProfileLink($video->username) }}</p>
+                <p class="italic">
+                    {lang 'Posted by'} {{ $design->getProfileLink($video->username) }}<br />
+                    <small>{lang 'Posted on %0%', $video->createdDate }</small>
+                </p>
 
                 <div>
-                  {{ $text = ($video->approved == 1) ? t('Disapproved') : t('Approved') }}
-                  {{ LinkCoreForm::display($text, PH7_ADMIN_MOD,'moderator',$action, array('video_id'=>$video->videoId)) }} |
-                  {{ LinkCoreForm::display(t('Delete'), PH7_ADMIN_MOD, 'moderator', 'deletevideo', array('album_id'=>$video->albumId, 'video_id'=>$video->videoId, 'id'=>$video->profileId, 'username'=>$video->username, 'video_link'=>$video->file)) }}
+                    {{ $text = ($video->approved == 1) ? t('Disapproved') : t('Approved') }}
+                    {{ LinkCoreForm::display($text, PH7_ADMIN_MOD,'moderator',$action, array('video_id'=>$video->videoId)) }} |
+                    {{ LinkCoreForm::display(t('Delete'), PH7_ADMIN_MOD, 'moderator', 'deletevideo', array('album_id'=>$video->albumId, 'video_id'=>$video->videoId, 'id'=>$video->profileId, 'username'=>$video->username, 'video_link'=>$video->file)) }}
                 </div>
              </div>
         {/each}

@@ -458,7 +458,7 @@ CREATE TABLE IF NOT EXISTS ph7_notes (
   enableComment enum('1','0') DEFAULT '1',
   createdDate datetime NULL,
   updatedDate datetime DEFAULT NULL,
-  approved tinyint(1) unsigned NOT NULL DEFAULT '1',
+  approved tinyint(1) unsigned NOT NULL DEFAULT 1,
   PRIMARY KEY (noteId),
   UNIQUE KEY postId (postId),
   FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
@@ -635,7 +635,7 @@ CREATE TABLE IF NOT EXISTS ph7_forums_topics (
   approved enum('1','0') DEFAULT '1',
   createdDate datetime NULL,
   updatedDate datetime DEFAULT NULL,
-  views int(11) unsigned NOT NULL DEFAULT '0',
+  views int(11) unsigned NOT NULL DEFAULT 0,
   -- Maybe we'll let the topic of member even if the member is deleted
   -- FOREIGN KEY (profileId) ph7_members(profileId),
   FOREIGN KEY (forumId) REFERENCES ph7_forums(forumId),
@@ -826,7 +826,7 @@ CREATE TABLE IF NOT EXISTS ph7_affiliates_log_sess (
 CREATE TABLE IF NOT EXISTS ph7_members_background (
   profileId int(10) unsigned NOT NULL,
   file varchar(5) NOT NULL,
-  approved tinyint(1) unsigned NOT NULL DEFAULT '1',
+  approved tinyint(1) unsigned NOT NULL DEFAULT 1,
   PRIMARY KEY profileId (profileId),
   FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -847,7 +847,7 @@ CREATE TABLE IF NOT EXISTS ph7_members_friends (
   profileId int(10) unsigned NOT NULL,
   friendId int(10) unsigned NOT NULL,
   requestDate datetime DEFAULT NULL,
-  pending tinyint(1) unsigned NOT NULL DEFAULT '0',
+  pending tinyint(1) unsigned NOT NULL DEFAULT 0,
   INDEX profileId (profileId),
   INDEX friendId (friendId),
   FOREIGN KEY (profileId) REFERENCES ph7_members(profileId),
@@ -857,7 +857,7 @@ CREATE TABLE IF NOT EXISTS ph7_members_friends (
 
 CREATE TABLE IF NOT EXISTS ph7_members_wall (
   wallId int(10) unsigned NOT NULL AUTO_INCREMENT,
-  profileId int(10) unsigned NOT NULL DEFAULT '0',
+  profileId int(10) unsigned NOT NULL DEFAULT 0,
   post text CHARACTER SET armscii8,
   createdDate datetime NULL,
   updatedDate datetime DEFAULT NULL,
@@ -868,12 +868,12 @@ CREATE TABLE IF NOT EXISTS ph7_members_wall (
 
 CREATE TABLE IF NOT EXISTS ph7_messages (
   messageId int(10) unsigned NOT NULL AUTO_INCREMENT,
-  sender int(10) unsigned NOT NULL DEFAULT '0',
-  recipient int(10) unsigned NOT NULL DEFAULT '0',
+  sender int(10) unsigned NOT NULL DEFAULT 0,
+  recipient int(10) unsigned NOT NULL DEFAULT 0,
   title varchar(30) NOT NULL DEFAULT '',
   message text NOT NULL,
   sendDate datetime NULL,
-  status tinyint(1) unsigned NOT NULL DEFAULT '1',
+  status tinyint(1) unsigned NOT NULL DEFAULT 1,
   trash set('sender','recipient') NOT NULL DEFAULT '',
   toDelete set('sender','recipient') NOT NULL DEFAULT '',
   PRIMARY KEY (messageId),
@@ -889,7 +889,7 @@ CREATE TABLE IF NOT EXISTS ph7_messenger (
   toUser varchar(40) NOT NULL DEFAULT '',
   message text NOT NULL,
   sent datetime NULL,
-  recd int(10) unsigned NOT NULL DEFAULT '0',
+  recd int(10) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (messengerId),
   FOREIGN KEY (fromUser) REFERENCES ph7_members(username),
   FOREIGN KEY (toUser) REFERENCES ph7_members(username)
