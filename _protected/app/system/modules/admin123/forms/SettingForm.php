@@ -139,7 +139,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Videos Manual Approval:'), 'video_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('videoManualApproval'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Webcam Pictures Manual Approval:'), 'webcam_picture_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('This approval mode is experimental, do not use it in production.'), 'value' => DbConfig::getSetting('webcamPictureManualApproval'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Webcam Pictures Manual Approval:'), 'webcam_picture_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('This approval mode is experimental, do not use it on production.'), 'value' => DbConfig::getSetting('webcamPictureManualApproval'), 'required' => 1)));
 
 
         /********** Email **********/
