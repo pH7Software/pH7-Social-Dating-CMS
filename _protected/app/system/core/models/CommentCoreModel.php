@@ -68,7 +68,7 @@ class CommentCoreModel extends Model
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
-        $sSqlRecipientId = (!empty($iRecipientId)) ? 'c.recipient =:recipient AND' : '';
+        $sSqlRecipientId = !empty($iRecipientId) ? 'c.recipient =:recipient AND' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' .
             Db::prefix('comments_' . $sTable) . ' AS c LEFT JOIN' . Db::prefix(DbTableName::MEMBER) .
