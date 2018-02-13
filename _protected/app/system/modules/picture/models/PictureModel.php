@@ -170,6 +170,11 @@ class PictureModel extends PictureCoreModel
         return $iData;
     }
 
+    /**
+     * @param int $iProfileId
+     *
+     * @return int
+     */
     public function totalPhotos($iProfileId)
     {
         $this->cache->start(self::CACHE_GROUP, 'totalPhotos' . $iProfileId, static::CACHE_TIME);
@@ -188,6 +193,15 @@ class PictureModel extends PictureCoreModel
         return $iData;
     }
 
+    /**
+     * @param int $iProfileId
+     * @param int $iAlbumId
+     * @param string $sTitle
+     * @param string $sDescription
+     * @param string $sUpdatedDate
+     *
+     * @return bool
+     */
     public function updateAlbum($iProfileId, $iAlbumId, $sTitle, $sDescription, $sUpdatedDate)
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::ALBUM_PICTURE) .
@@ -202,6 +216,16 @@ class PictureModel extends PictureCoreModel
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iProfileId
+     * @param int $iAlbumId
+     * @param int $iPictureId
+     * @param string $sTitle
+     * @param string $sDescription
+     * @param string $sUpdatedDate
+     *
+     * @return bool
+     */
     public function updatePhoto($iProfileId, $iAlbumId, $iPictureId, $sTitle, $sDescription, $sUpdatedDate)
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::PICTURE) .

@@ -196,6 +196,15 @@ class VideoModel extends VideoCoreModel
         return $iData;
     }
 
+    /**
+     * @param int $iProfileId
+     * @param int $iAlbumId
+     * @param string $sTitle
+     * @param string $sDescription
+     * @param string $sUpdatedDate
+     *
+     * @return bool
+     */
     public function updateAlbum($iProfileId, $iAlbumId, $sTitle, $sDescription, $sUpdatedDate)
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::ALBUM_VIDEO) . 'SET name =:name, description =:description, updatedDate =:updatedDate
@@ -210,6 +219,16 @@ class VideoModel extends VideoCoreModel
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iProfileId
+     * @param int $iAlbumId
+     * @param int $iVideoId
+     * @param string $sTitle
+     * @param string $sDescription
+     * @param string $sUpdatedDate
+     *
+     * @return bool
+     */
     public function updateVideo($iProfileId, $iAlbumId, $iVideoId, $sTitle, $sDescription, $sUpdatedDate)
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::VIDEO) . 'SET title =:title, description =:description, updatedDate =:updatedDate
