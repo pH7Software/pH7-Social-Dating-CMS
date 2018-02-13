@@ -87,7 +87,7 @@ class EditNoteFormProcess extends Form
             $oNoteModel->updatePost('enableComment', $this->httpRequest->post('enable_comment'), $iNoteId, $iProfileId);
 
         // Updated the approved status
-        $iApproved = (DbConfig::getSetting('noteManualApproval') == 0) ? '1' : '0';
+        $iApproved = (DbConfig::getSetting('noteManualApproval') == 0) ? 1 : 0;
         $oNoteModel->updatePost('approved', $iApproved, $iNoteId, $iProfileId);
 
         // Updated the modification Date
@@ -96,13 +96,16 @@ class EditNoteFormProcess extends Form
 
         Note::clearCache();
 
-        if ($iApproved == '0') {
+        if ($iApproved === 0) {
             $sMsg = t('Your updated note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
         } else {
             $sMsg = t('Post successfully updated!');
         }
 
-        Header::redirect(Uri::get('note', 'main', 'read', $sUsername . ',' . $sPostId), $sMsg);
+        Header::redirect(
+            Uri::get('note', 'main', 'read', $sUsername . ',' . $sPostId),
+            $sMsg
+        );
     }
 
     /**

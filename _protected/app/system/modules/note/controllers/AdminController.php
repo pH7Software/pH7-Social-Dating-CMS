@@ -28,7 +28,7 @@ class AdminController extends MainController
         $this->view->page_title = $this->view->h2_title = t('Notes Moderation');
 
         $this->view->total_pages = $this->oPage->getTotalPages(
-            $this->oNoteModel->totalPosts('0'), self::POSTS_PER_PAGE
+            $this->oNoteModel->totalPosts(0), self::POSTS_PER_PAGE
         );
 
         $this->view->current_page = $this->oPage->getCurrentPage();
@@ -36,7 +36,7 @@ class AdminController extends MainController
             $this->oPage->getFirstItem(),
             $this->oPage->getNbItemsPerPage(),
             SearchCoreModel::CREATED,
-            '0'
+            0
         );
         $this->view->posts = $oPosts;
         $this->setMenuVars();
@@ -61,13 +61,16 @@ class AdminController extends MainController
     {
         $iNoteId = $this->httpRequest->post('note_id', 'int');
 
-        if (isset($iNoteId) && $this->oNoteModel->approved($iNoteId, '0')) {
+        if (isset($iNoteId) && $this->oNoteModel->approved($iNoteId, 0)) {
             Note::clearCache();
             $this->sMsg = t('The Note has been approved!');
         } else {
             $this->sMsg = t('Oops! The Note could not be approved!');
         }
 
-        Header::redirect(Uri::get('note', 'main', 'index'), $this->sMsg);
+        Header::redirect(
+            Uri::get('note', 'main', 'index'),
+            $this->sMsg
+        );
     }
 }

@@ -34,7 +34,7 @@ class NoteFormProcess extends Form
         } elseif (!$oNoteModel->checkWaitSend($this->session->get('member_id'), $iTimeDelay, $sCurrentTime)) {
             \PFBC\Form::setError('form_note', Form::waitWriteMsg($iTimeDelay));
         } else {
-            $iApproved = (DbConfig::getSetting('noteManualApproval') == 0) ? '1' : '0';
+            $iApproved = (DbConfig::getSetting('noteManualApproval') == 0) ? 1 : 0;
 
             $aData = [
                 'profile_id' => $iProfileId,
@@ -67,13 +67,16 @@ class NoteFormProcess extends Form
                 $oNote->setThumb($oPost, $oNoteModel, $this->file);
                 Note::clearCache();
 
-                if ($iApproved == '0') {
+                if ($iApproved === 0) {
                     $sMsg = t('Your note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
                 } else {
                     $sMsg = t('Post successfully created!');
                 }
 
-                Header::redirect(Uri::get('note', 'main', 'read', $this->session->get('member_username') . ',' . $sPostId), $sMsg);
+                Header::redirect(
+                    Uri::get('note', 'main', 'read', $this->session->get('member_username') . ',' . $sPostId),
+                    $sMsg
+                );
             }
         }
     }
