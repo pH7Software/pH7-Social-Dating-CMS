@@ -55,7 +55,10 @@ class AdminBlogFormProcess extends Form
                 $oBlog->setThumb($oPost, $this->file);
 
                 Blog::clearCache();
-                Header::redirect(Uri::get('blog', 'main', 'read', $sPostId), t('Post successfully created!'));
+                Header::redirect(
+                    Uri::get('blog', 'main', 'read', $sPostId),
+                    t('Post successfully created!')
+                );
             }
         }
     }
