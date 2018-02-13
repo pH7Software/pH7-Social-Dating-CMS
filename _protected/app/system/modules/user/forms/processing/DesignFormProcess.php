@@ -15,6 +15,7 @@ use PH7\Framework\Security\Moderation\Filter;
 
 class DesignFormProcess extends Form
 {
+    /** @var int */
     private $iApproved;
 
     public function __construct()
@@ -22,7 +23,7 @@ class DesignFormProcess extends Form
         parent::__construct();
 
         // Number has to be string because in DB it's an "enum" type
-        $this->iApproved = (AdminCore::auth() || DbConfig::getSetting('bgProfileManualApproval') == 0) ? '1' : '0';
+        $this->iApproved = (AdminCore::auth() || DbConfig::getSetting('bgProfileManualApproval') == 0) ? 1 : 0;
 
         if (AdminCore::auth() && !User::auth() && $this->httpRequest->getExists(array('profile_id', 'username'))) {
             $iProfileId = $this->httpRequest->get('profile_id');
@@ -41,7 +42,7 @@ class DesignFormProcess extends Form
         } else {
             $sModerationText = t('Your Wallpaper has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
             $sText = t('Your Wallpaper has been updated successfully!');
-            $sMsg = ($this->iApproved == '0') ? $sModerationText : $sText;
+            $sMsg = $this->iApproved === 0 ? $sModerationText : $sText;
             \PFBC\Form::setSuccess('form_design', $sMsg);
         }
     }
@@ -53,7 +54,7 @@ class DesignFormProcess extends Form
     {
         if (DbConfig::getSetting('nudityFilter') && Filter::isNudity($_FILES['wallpaper']['tmp_name'])) {
             // The wallpaper doesn't seem suitable for everyone. Overwrite "$iApproved" and set the image for approval
-            $this->iApproved = '0';
+            $this->iApproved = 0;
         }
     }
 }

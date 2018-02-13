@@ -12,7 +12,17 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class PictureModel extends PictureCoreModel
 {
-    public function addAlbum($iProfileId, $sTitle, $sDescription, $sThumb, $sCreatedDate, $iApproved = 1)
+    /**
+     * @param int $iProfileId
+     * @param string $sTitle
+     * @param string $sDescription
+     * @param string $sThumb
+     * @param string $sCreatedDate
+     * @param string $sApproved
+     *
+     * @return bool
+     */
+    public function addAlbum($iProfileId, $sTitle, $sDescription, $sThumb, $sCreatedDate, $sApproved = '1')
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::ALBUM_PICTURE) . '(profileId, name, description, thumb, createdDate, approved)
             VALUES (:profileId, :name, :description, :thumb, :createdDate, :approved)');
@@ -22,12 +32,23 @@ class PictureModel extends PictureCoreModel
         $rStmt->bindValue(':description', $sDescription, \PDO::PARAM_STR);
         $rStmt->bindValue(':thumb', $sThumb, \PDO::PARAM_STR);
         $rStmt->bindValue(':createdDate', $sCreatedDate, \PDO::PARAM_STR);
-        $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+        $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
 
-    public function addPhoto($iProfileId, $iAlbumId, $sTitle, $sDescription, $sFile, $sCreatedDate, $iApproved = 1)
+    /**
+     * @param int $iProfileId
+     * @param int $iAlbumId
+     * @param string $sTitle
+     * @param string $sDescription
+     * @param string $sFile
+     * @param string $sCreatedDate
+     * @param string $sApproved
+     *
+     * @return bool
+     */
+    public function addPhoto($iProfileId, $iAlbumId, $sTitle, $sDescription, $sFile, $sCreatedDate, $sApproved = '1')
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::PICTURE) . '(profileId, albumId, title, description, file, createdDate, approved)
             VALUES (:profileId, :albumId, :title, :description, :file, :createdDate, :approved)');
@@ -38,11 +59,17 @@ class PictureModel extends PictureCoreModel
         $rStmt->bindValue(':description', $sDescription, \PDO::PARAM_STR);
         $rStmt->bindValue(':file', $sFile, \PDO::PARAM_STR);
         $rStmt->bindValue(':createdDate', $sCreatedDate, \PDO::PARAM_STR);
-        $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+        $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iProfileId
+     * @param int $iAlbumId
+     *
+     * @return bool
+     */
     public function deleteAlbum($iProfileId, $iAlbumId)
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::ALBUM_PICTURE) . 'WHERE profileId=:profileId AND albumId=:albumId');
@@ -52,26 +79,42 @@ class PictureModel extends PictureCoreModel
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iProfileId
+     *
+     * @return array
+     */
     public function getAlbumsName($iProfileId)
     {
         $this->cache->start(self::CACHE_GROUP, 'albumName' . $iProfileId, static::CACHE_TIME);
 
-        if (!$oData = $this->cache->get()) {
+        if (!$aData = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT albumId, name FROM' . Db::prefix(DbTableName::ALBUM_PICTURE) . ' WHERE profileId = :profileId');
-            (!empty($iProfileId)) ? $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT) : '';
-
+            if (!empty($iProfileId)) {
+                $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+            }
             $rStmt->execute();
-            $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $aData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $this->cache->put($oData);
+            $this->cache->put($aData);
         }
 
-        return $oData;
+        return $aData;
     }
 
-    public function photo($iProfileId, $iAlbumId, $iPictureId = null, $iApproved = 1, $iOffset, $iLimit)
+    /**
+     * @param int $iProfileId
+     * @param int $iAlbumId
+     * @param int|null $iPictureId
+     * @param string $sApproved
+     * @param int $iOffset
+     * @param int $iLimit
+     *
+     * @return array|\stdClass
+     */
+    public function photo($iProfileId, $iAlbumId, $iPictureId = null, $sApproved = '1', $iOffset, $iLimit)
     {
-        $this->cache->start(self::CACHE_GROUP, 'photo' . $iProfileId . $iAlbumId . $iPictureId . $iApproved . $iOffset . $iLimit, static::CACHE_TIME);
+        $this->cache->start(self::CACHE_GROUP, 'photo' . $iProfileId . $iAlbumId . $iPictureId . $sApproved . $iOffset . $iLimit, static::CACHE_TIME);
 
         if (!$oData = $this->cache->get()) {
             $iOffset = (int)$iOffset;
@@ -84,13 +127,15 @@ class PictureModel extends PictureCoreModel
 
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
-            (!empty($iPictureId)) ? $rStmt->bindValue(':pictureId', $iPictureId, \PDO::PARAM_INT) : '';
-            $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+            if (!empty($iPictureId)) {
+                $rStmt->bindValue(':pictureId', $iPictureId, \PDO::PARAM_INT);
+            }
+            $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
             $rStmt->execute();
 
-            $oData = (!empty($iPictureId)) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $oData = !empty($iPictureId) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             $this->cache->put($oData);
         }
@@ -98,14 +143,22 @@ class PictureModel extends PictureCoreModel
         return $oData;
     }
 
+    /**
+     * @param int|null $iProfileId
+     *
+     * @return int
+     */
     public function totalAlbums($iProfileId = null)
     {
         $this->cache->start(self::CACHE_GROUP, 'totalAlbums' . $iProfileId, static::CACHE_TIME);
 
         if (!$iData = $this->cache->get()) {
-            $sSqlProfileId = (!empty($iProfileId)) ? ' WHERE profileId=:profileId' : '';
+            $sSqlProfileId = !empty($iProfileId) ? ' WHERE profileId=:profileId' : '';
+
             $rStmt = Db::getInstance()->prepare('SELECT COUNT(albumId) AS totalAlbums FROM' . Db::prefix(DbTableName::ALBUM_PICTURE) . $sSqlProfileId);
-            (!empty($iProfileId)) ? $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT) : '';
+            if (!empty($iProfileId)) {
+                $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+            }
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
@@ -171,11 +224,11 @@ class PictureModel extends PictureCoreModel
      * @param int $iSort
      * @param int $iOffset
      * @param int $iLimit
-     * @param int $iApproved
+     * @param string $sApproved
      *
      * @return int|\stdClass
      */
-    public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $iApproved = 1)
+    public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $sApproved = '1')
     {
         $bCount = (bool)$bCount;
         $iOffset = (int)$iOffset;
@@ -192,8 +245,12 @@ class PictureModel extends PictureCoreModel
             Db::prefix(DbTableName::ALBUM_PICTURE) . 'AS a ON p.albumId = a.albumId INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
             'AS m ON p.profileId = m.profileId' . $sSqlWhere . ' AND p.approved=:approved' . $sSqlOrder . $sSqlLimit);
 
-        (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
-        $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+        if (ctype_digit($mLooking)) {
+            $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
+        } else {
+            $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+        }
+        $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
 
         if (!$bCount) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);

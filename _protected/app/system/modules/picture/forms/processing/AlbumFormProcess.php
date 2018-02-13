@@ -22,8 +22,8 @@ class AlbumFormProcess extends Form
 {
     const ALBUM_IMAGE_SIZE = 200;
 
-    /** @var int */
-    private $iApproved;
+    /** @var string */
+    private $sApproved;
 
     public function __construct()
     {
@@ -43,7 +43,7 @@ class AlbumFormProcess extends Form
         if (!$oPicture->validate()) {
             \PFBC\Form::setError('form_picture_album', Form::wrongImgFileTypeMsg());
         } else {
-            $this->iApproved = (DbConfig::getSetting('pictureManualApproval') == 0) ? '1' : '0';
+            $this->sApproved = (DbConfig::getSetting('pictureManualApproval') == 0) ? '1' : '0';
 
             $this->checkNudityFilter();
 
@@ -55,7 +55,7 @@ class AlbumFormProcess extends Form
                 $this->httpRequest->post('description'),
                 $sFileName,
                 $this->dateTime->get()->dateTime('Y-m-d H:i:s'),
-                $this->iApproved
+                $this->sApproved
             );
             $iLastAlbumId = (int)Db::getInstance()->lastInsertId();
 
@@ -90,8 +90,8 @@ class AlbumFormProcess extends Form
     protected function checkNudityFilter()
     {
         if (DbConfig::getSetting('nudityFilter') && Filter::isNudity($_FILES['album']['tmp_name'])) {
-            // The photo doesn't seem suitable for everyone. Overwrite "$iApproved" and set for moderation
-            $this->iApproved = '0';
+            // The photo doesn't seem suitable for everyone. Overwrite "$sApproved" and set for moderation
+            $this->sApproved = '0';
         }
     }
 }
