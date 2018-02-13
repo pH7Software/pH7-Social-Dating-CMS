@@ -27,7 +27,9 @@ class CommentModel extends CommentCoreModel
         if (!$oData = $this->cache->get()) {
             $sTable = CommentCore::checkTable($sTable);
 
-            $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' . Db::prefix('comments_' . $sTable) . ' AS c LEFT JOIN' . Db::prefix(DbTableName::MEMBER) . 'AS m ON c.sender = m.profileId WHERE commentId = :commentId AND c.approved =:approved LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' .
+                Db::prefix('comments_' . $sTable) . ' AS c LEFT JOIN' . Db::prefix(DbTableName::MEMBER) .
+                'AS m ON c.sender = m.profileId WHERE commentId = :commentId AND c.approved =:approved LIMIT 1');
             $rStmt->bindParam(':commentId', $iCommentId, \PDO::PARAM_INT);
             $rStmt->bindParam(':approved', $sApproved, \PDO::PARAM_STR);
             $rStmt->execute();
