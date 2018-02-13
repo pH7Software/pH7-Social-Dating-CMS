@@ -16,13 +16,13 @@ defined('PH7') or exit('Restricted access');
 class TwoCheckOut extends Provider implements Api
 {
     /** @var string */
-    private $_sUrl = 'https://www.2checkout.com/checkout/';
+    private $sUrl = 'https://www.2checkout.com/checkout/';
 
     /** @var string */
-    private $_sMsg;
+    private $sMsg;
 
     /** @var bool */
-    private $_bValid = false;
+    private $bValid = false;
 
 
     /**
@@ -48,7 +48,7 @@ class TwoCheckOut extends Provider implements Api
     {
         $sPurchasePage = (true === (bool)$bSinglePage) ? 'spurchase' : 'purchase';
 
-        return $this->_sUrl . $sPurchasePage;
+        return $this->sUrl . $sPurchasePage;
     }
 
     /**
@@ -58,7 +58,7 @@ class TwoCheckOut extends Provider implements Api
      */
     public function getMsg()
     {
-        return $this->_sMsg;
+        return $this->sMsg;
     }
 
     /**
@@ -85,11 +85,11 @@ class TwoCheckOut extends Provider implements Api
             $sHash = strtoupper(md5($aInsMsg['sale_id'] . $sVendorId . $aInsMsg['invoice_id'] . $sSecretWord));
 
             if ($sHash == $aInsMsg['md5_hash']) {
-                $this->_bValid = true;
-                $this->_sMsg = t('Refund transaction valid.');
+                $this->bValid = true;
+                $this->sMsg = t('Refund transaction valid.');
             } else {
-                $this->_bValid = false;
-                $this->_sMsg = t('Invalid refund transaction.');
+                $this->bValid = false;
+                $this->sMsg = t('Invalid refund transaction.');
             }
         } elseif (
             !empty($_REQUEST['key']) && !empty($aInsMsg['order_number']) &&
@@ -98,19 +98,19 @@ class TwoCheckOut extends Provider implements Api
             $sHash = strtoupper(md5($sSecretWord . $sVendorId . $aInsMsg['order_number'] . $aInsMsg['total']));
 
             if ($sHash != $_REQUEST['key']) {
-                $this->_bValid = true;
-                $this->_sMsg = t('Purchase transaction valid.');
+                $this->bValid = true;
+                $this->sMsg = t('Purchase transaction valid.');
             } else {
-                $this->_bValid = false;
-                $this->_sMsg = t('Invalid purchase transaction.');
+                $this->bValid = false;
+                $this->sMsg = t('Invalid purchase transaction.');
             }
         } else {
-            $this->_bValid = false;
-            $this->_sMsg = t('Invalid connection to 2CheckOut.');
+            $this->bValid = false;
+            $this->sMsg = t('Invalid connection to 2CheckOut.');
         }
 
         unset($aInsMsg);
 
-        return $this->_bValid;
+        return $this->bValid;
     }
 }
