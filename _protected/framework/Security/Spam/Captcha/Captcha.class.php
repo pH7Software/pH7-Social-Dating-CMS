@@ -7,7 +7,7 @@
  * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / Framework / Security / Spam / Captcha
- * @version        0.8
+ * @version        0.9
  */
 
 namespace PH7\Framework\Security\Spam\Captcha;
@@ -21,57 +21,57 @@ use PH7\Framework\Util\Various;
 class Captcha
 {
     /** @var Session */
-    private $_oSession;
+    private $oSession;
 
     /** @var Str */
-    private $_sStr;
+    private $sStr;
 
     /** @var string */
-    private $_sFont;
+    private $sFont;
 
     /** @var int */
-    private $_iStringWidth;
+    private $iStringWidth;
 
     /** @var int */
-    private $_iHeight;
+    private $iHeight;
 
     /** @var int */
-    private $_iWidth;
+    private $iWidth;
 
     /** @var int */
-    private $_iSize = 36;
+    private $iSize = 36;
 
     /** @var int */
-    private $_iMargin = 25;
+    private $iMargin = 25;
 
     /** @var array */
-    private $_aBox;
+    private $aBox;
 
     /** @var array */
-    private static $_aMatrixBlur = [
+    private static $aMatrixBlur = [
         [1, 1, 1],
         [1, 1, 1],
         [1, 1, 1]
     ];
 
     /** @var array */
-    private $_aColor = [];
+    private $aColor = [];
 
     /** @var resource */
-    private $_rImg;
+    private $rImg;
 
     /** @var resource */
-    private $_rBlack;
+    private $rBlack;
 
     /** @var resource */
-    private $_rRed;
+    private $rRed;
 
     /** @var resource */
-    private $_rWhite;
+    private $rWhite;
 
     public function __construct()
     {
-        $this->_oSession = new Session;
+        $this->oSession = new Session;
     }
 
     /**
@@ -84,54 +84,54 @@ class Captcha
     public function show($iRandom = null)
     {
         if (!empty($iRandom)) {
-            $this->_sStr = Various::genRnd($iRandom, 5);
+            $this->sStr = Various::genRnd($iRandom, 5);
         } else {
-            $this->_sStr = Various::genRnd('pH7_Pierre-Henry_Soria_Sanz_González_captcha', 5);
+            $this->sStr = Various::genRnd('pH7_Pierre-Henry_Soria_Sanz_González_captcha', 5);
         }
 
-        $this->_oSession->set('rand_code', $this->_sStr);
+        $this->oSession->set('rand_code', $this->sStr);
 
-        $this->_sFont = $this->_getFont();
+        $this->sFont = $this->_getFont();
         //$sBackground = PH7_PATH_DATA . 'background/' . mt_rand(1, 5) . '.png';
 
-        $this->_aBox = imagettfbbox($this->_iSize, 0, $this->_sFont, $this->_sStr);
-        $this->_iWidth = $this->_aBox[2] - $this->_aBox[0];
-        $this->_iHeight = $this->_aBox[1] - $this->_aBox[7];
-        unset($this->_aBox);
+        $this->aBox = imagettfbbox($this->iSize, 0, $this->sFont, $this->sStr);
+        $this->iWidth = $this->aBox[2] - $this->aBox[0];
+        $this->iHeight = $this->aBox[1] - $this->aBox[7];
+        unset($this->aBox);
 
-        $this->_iStringWidth = round($this->_iWidth / strlen($this->_sStr));
+        $this->iStringWidth = round($this->iWidth / strlen($this->sStr));
 
-        //$this->_rImg = imagecreatefrompng($sBackground);
-        $this->_rImg = imagecreate($this->_iWidth + $this->_iMargin, $this->_iHeight + $this->_iMargin);
-        $this->_aColor = [
-            imagecolorallocate($this->_rImg, 0x99, 0x00, 0x66),
-            imagecolorallocate($this->_rImg, 0xCC, 0x00, 0x00),
-            imagecolorallocate($this->_rImg, 0x00, 0x00, 0xCC),
-            imagecolorallocate($this->_rImg, 0x00, 0x00, 0xCC),
-            imagecolorallocate($this->_rImg, 0xBB, 0x88, 0x77)
+        //$this->rImg = imagecreatefrompng($sBackground);
+        $this->rImg = imagecreate($this->iWidth + $this->iMargin, $this->iHeight + $this->iMargin);
+        $this->aColor = [
+            imagecolorallocate($this->rImg, 0x99, 0x00, 0x66),
+            imagecolorallocate($this->rImg, 0xCC, 0x00, 0x00),
+            imagecolorallocate($this->rImg, 0x00, 0x00, 0xCC),
+            imagecolorallocate($this->rImg, 0x00, 0x00, 0xCC),
+            imagecolorallocate($this->rImg, 0xBB, 0x88, 0x77)
         ];
 
-        $this->_rBlack = imagecolorallocate($this->_rImg, 0, 0, 0);
-        $this->_rRed = imagecolorallocate($this->_rImg, 200, 100, 90);
-        $this->_rWhite = imagecolorallocate($this->_rImg, 255, 255, 255);
+        $this->rBlack = imagecolorallocate($this->rImg, 0, 0, 0);
+        $this->rRed = imagecolorallocate($this->rImg, 200, 100, 90);
+        $this->rWhite = imagecolorallocate($this->rImg, 255, 255, 255);
 
-        imagefilledrectangle($this->_rImg, 0, 0, 399, 99, $this->_rWhite);
+        imagefilledrectangle($this->rImg, 0, 0, 399, 99, $this->rWhite);
 
         $this->_mixing();
 
-        imageline($this->_rImg, mt_rand(2, $this->_iWidth + $this->_iMargin), mt_rand(1, $this->_iWidth + $this->_iMargin), mt_rand(1, $this->_iHeight + $this->_iMargin), mt_rand(2, $this->_iWidth + $this->_iMargin), $this->_rBlack);
-        imageline($this->_rImg, mt_rand(2, $this->_iHeight + $this->_iMargin), mt_rand(1, $this->_iHeight + $this->_iMargin), mt_rand(1, $this->_iWidth + $this->_iMargin), mt_rand(2, $this->_iHeight + $this->_iMargin), $this->_rRed);
-        imageline($this->_rImg, mt_rand(2, $this->_iHeight + $this->_iMargin), mt_rand(1, $this->_iWidth + $this->_iMargin), mt_rand(1, $this->_iWidth + $this->_iMargin), mt_rand(2, $this->_iHeight + $this->_iMargin), $this->_aColor[array_rand($this->_aColor)]);
-        unset($this->_rBlack, $this->_rRed, $this->_rWhite);
+        imageline($this->rImg, mt_rand(2, $this->iWidth + $this->iMargin), mt_rand(1, $this->iWidth + $this->iMargin), mt_rand(1, $this->iHeight + $this->iMargin), mt_rand(2, $this->iWidth + $this->iMargin), $this->rBlack);
+        imageline($this->rImg, mt_rand(2, $this->iHeight + $this->iMargin), mt_rand(1, $this->iHeight + $this->iMargin), mt_rand(1, $this->iWidth + $this->iMargin), mt_rand(2, $this->iHeight + $this->iMargin), $this->rRed);
+        imageline($this->rImg, mt_rand(2, $this->iHeight + $this->iMargin), mt_rand(1, $this->iWidth + $this->iMargin), mt_rand(1, $this->iWidth + $this->iMargin), mt_rand(2, $this->iHeight + $this->iMargin), $this->aColor[array_rand($this->aColor)]);
+        unset($this->rBlack, $this->rRed, $this->rWhite);
 
 
-        imageconvolution($this->_rImg, self::$_aMatrixBlur, 9, 0);
-        imageconvolution($this->_rImg, self::$_aMatrixBlur, 9, 0);
+        imageconvolution($this->rImg, self::$aMatrixBlur, 9, 0);
+        imageconvolution($this->rImg, self::$aMatrixBlur, 9, 0);
 
         (new Browser)->noCache();
         header('Content-type: image/png');
-        imagepng($this->_rImg);
-        imagedestroy($this->_rImg);
+        imagepng($this->rImg);
+        imagedestroy($this->rImg);
     }
 
     /**
@@ -145,7 +145,7 @@ class Captcha
             return false;
         }
 
-        if ($sCode === $this->_oSession->get('rand_code')) {
+        if ($sCode === $this->oSession->get('rand_code')) {
             return true;
         }
 
@@ -172,18 +172,18 @@ class Captcha
      */
     private function _mixing()
     {
-        for ($i = 0, $iLength = strlen($this->_sStr); $i < $iLength; ++$i) {
-            $sText = $this->_sStr[$i]; // A string can be seen as an array
+        for ($i = 0, $iLength = strlen($this->sStr); $i < $iLength; ++$i) {
+            $sText = $this->sStr[$i]; // A string can be seen as an array
             $iAngle = mt_rand(-70, 70);
 
             imagettftext(
-                $this->_rImg,
-                mt_rand($this->_iSize / 2, $this->_iSize),
+                $this->rImg,
+                mt_rand($this->iSize / 2, $this->iSize),
                 $iAngle,
-                ($i * $this->_iStringWidth) + $this->_iMargin,
-                $this->_iHeight + mt_rand(1, $this->_iMargin / 2),
-                $this->_aColor[array_rand($this->_aColor)],
-                $this->_sFont,
+                ($i * $this->iStringWidth) + $this->iMargin,
+                $this->iHeight + mt_rand(1, $this->iMargin / 2),
+                $this->aColor[array_rand($this->aColor)],
+                $this->sFont,
                 $sText
             );
         }
