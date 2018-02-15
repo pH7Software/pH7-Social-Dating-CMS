@@ -1,4 +1,4 @@
-<div class="box-left col-md-3 col-lg-2">
+<div class="box-left col-md-3 col-xl-2">
     <div class="design-box">
         <h2>{lang 'Search Games'}</h2>
         {{ SearchGameForm::display(PH7_WIDTH_SEARCH_FORM) }}
@@ -49,7 +49,7 @@
     </div>
 </div>
 
-<div class="box-right col-md-9 col-lg-9 col-lg-offset-1">
+<div class="box-right col-md-9 col-xl-9 col-xl-offset-1">
     <div class="center">
         {if !empty($error)}
             <p>{error}</p>
