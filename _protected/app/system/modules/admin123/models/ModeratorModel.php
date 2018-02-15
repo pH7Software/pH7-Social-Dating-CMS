@@ -76,7 +76,7 @@ class ModeratorModel extends ModeratorCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::MEMBER) .
-            'WHERE approvedAvatar = \'0\' LIMIT :offset, :limit');
+            'WHERE approvedAvatar = 0 LIMIT :offset, :limit');
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -90,7 +90,7 @@ class ModeratorModel extends ModeratorCoreModel
         $iLimit = (int)$iLimit;
         $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, b.* FROM' .
             Db::prefix(DbTableName::MEMBER_BACKGROUND) . 'AS b INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
-            'AS m USING(profileId) WHERE approved = \'0\' LIMIT :offset, :limit');
+            'AS m USING(profileId) WHERE approved = 0 LIMIT :offset, :limit');
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -98,42 +98,42 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function approvedPictureAlbum($iAlbumId, $iStatus = 1)
+    public function approvedPictureAlbum($iAlbumId, $sStatus = '1')
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::ALBUM_PICTURE) .
             'SET approved = :status  WHERE albumId = :albumId');
         $rStmt->bindParam(':albumId', $iAlbumId, \PDO::PARAM_INT);
-        $rStmt->bindParam(':status', $iStatus, \PDO::PARAM_INT);
+        $rStmt->bindParam(':status', $sStatus, \PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
 
-    public function approvedPicture($iPictureId, $iStatus = 1)
+    public function approvedPicture($iPictureId, $sStatus = '1')
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::PICTURE) .
             'SET approved = :status  WHERE pictureId = :pictureId');
         $rStmt->bindParam(':pictureId', $iPictureId, \PDO::PARAM_INT);
-        $rStmt->bindParam(':status', $iStatus, \PDO::PARAM_INT);
+        $rStmt->bindParam(':status', $sStatus, \PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
 
-    public function approvedVideoAlbum($iAlbumId, $iStatus = 1)
+    public function approvedVideoAlbum($iAlbumId, $sStatus = '1')
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::ALBUM_VIDEO) .
             'SET approved = :status  WHERE albumId = :albumId');
         $rStmt->bindParam(':albumId', $iAlbumId, \PDO::PARAM_INT);
-        $rStmt->bindParam(':status', $iStatus, \PDO::PARAM_INT);
+        $rStmt->bindParam(':status', $sStatus, \PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
 
-    public function approvedVideo($iVideoId, $iStatus = 1)
+    public function approvedVideo($iVideoId, $sStatus = '1')
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::VIDEO) .
             'SET approved = :status  WHERE videoId = :videoId');
         $rStmt->bindParam(':videoId', $iVideoId, \PDO::PARAM_INT);
-        $rStmt->bindParam(':status', $iStatus, \PDO::PARAM_INT);
+        $rStmt->bindParam(':status', $sStatus, \PDO::PARAM_STR);
 
         return $rStmt->execute();
     }

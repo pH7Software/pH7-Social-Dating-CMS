@@ -297,7 +297,7 @@ class ModeratorController extends Controller
 
     public function disapprovedAvatar()
     {
-        if ($this->oModeratorModel->approvedAvatar($this->httpRequest->post('id'), '0')) {
+        if ($this->oModeratorModel->approvedAvatar($this->httpRequest->post('id'), 0)) {
             $this->clearAvatarCache();
             $this->sMsg = t('The profile photo has been disapproved!');
         } else {
@@ -309,14 +309,17 @@ class ModeratorController extends Controller
 
     public function disapprovedBackground()
     {
-        if ($this->oModeratorModel->approvedBackground($this->httpRequest->post('id'), '0')) {
+        if ($this->oModeratorModel->approvedBackground($this->httpRequest->post('id'), 0)) {
             $this->clearUserBgCache();
             $this->sMsg = t('The wallpaper has been disapproved!');
         } else {
             $this->sMsg = t('Oops! The wallpaper could not be disapprove!');
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'background'), $this->sMsg);
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'moderator', 'background'),
+            $this->sMsg
+        );
     }
 
     public function deletePictureAlbum()
