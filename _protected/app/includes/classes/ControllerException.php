@@ -8,6 +8,8 @@
 
 namespace PH7;
 
-class ControllerException extends Framework\Mvc\Controller\Exception
+use PH7\Framework\Mvc\Controller\Exception;
+
+class ControllerException extends Exception
 {
 }
