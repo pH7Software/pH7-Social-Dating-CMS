@@ -205,10 +205,10 @@ class ProfileController extends Controller
         }
 
         if (!$this->bUserAuth && $oPrivacyViewsUser->privacyProfile === 'only_members') {
-            $this->view->error = t('Whoops! The "%0%" profile is only visible to members. Please <a href="%1%">login</a> or <a href="%2%">register</a> to see this profile.',
+            $this->view->error = t('Whoops! "%0%" profile is only visible to members. Please <a href="%1%">login</a> or <a href="%2%">register</a> to see this profile.',
                 $this->sUsername, Uri::get('user', 'main', 'login'), Uri::get('user', 'signup', 'step1'));
         } elseif ($oPrivacyViewsUser->privacyProfile === 'only_me' && !$this->isOwnProfile()) {
-            $this->view->error = t('Whoops! The "%0%" profile is not available to you.', $this->sUsername);
+            $this->view->error = t('Whoops! "%0%" profile is not available to you.', $this->sUsername);
         }
 
         // Update the "Who's Viewed Your Profile"
@@ -446,7 +446,7 @@ class ProfileController extends Controller
         /**
          * @internal We can include HTML tags in the title since the template will automatically escape them before displaying it.
          */
-        $this->sTitle = t('Whoops! The "%0%" profile is not found.', substr($this->sUsername, 0, PH7_MAX_USERNAME_LENGTH), true);
+        $this->sTitle = t('Whoops! "%0%" profile is not found.', substr($this->sUsername, 0, PH7_MAX_USERNAME_LENGTH), true);
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
         $this->view->error = '<strong><em>' . t('Suggestions:') . '</em></strong><br />
