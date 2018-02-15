@@ -164,7 +164,7 @@ class UserCore
         $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/avatar/img/' . $sUsername . PH7_SH;
         (new File)->createDir($sPath);
 
-        $sFileName = Various::genRnd($oAvatar1->getFileName(), 1);
+        $sFileName = Various::genRnd($oAvatar1->getFileName(), 1); // Avatar filename is always 1 char-length
 
         $sFile1 = $sFileName . PH7_DOT . $oAvatar1->getExt();  // Original, four characters
         $sFile2 = $sFileName . '-' . self::AVATAR2_SIZE . PH7_DOT . $oAvatar2->getExt();

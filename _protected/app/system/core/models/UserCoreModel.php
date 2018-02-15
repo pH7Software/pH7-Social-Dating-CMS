@@ -774,7 +774,7 @@ class UserCoreModel extends Model
      * Update or add a new avatar.
      *
      * @param int $iProfileId
-     * @param string $sAvatar
+     * @param string|null $sAvatar NULL to remove the avatar.
      * @param int $iApproved
      *
      * @return bool
