@@ -879,7 +879,7 @@ class UserCoreModel extends Model
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER_BACKGROUND) . '(profileId, file, approved) VALUES (:profileId, :file, :approved)');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':file', $sFile, \PDO::PARAM_STR);
-        $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_STR);
+        $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
 
         return $rStmt->execute();
     }
