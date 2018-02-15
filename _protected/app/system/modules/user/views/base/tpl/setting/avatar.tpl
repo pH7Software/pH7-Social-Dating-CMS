@@ -8,7 +8,9 @@
     {/if}
 
     {{ AvatarForm::display() }}
-    <p><span class="underline err_msg">{lang 'Warning:'}</span> {lang 'Your profile photo must contain a photo of you under penalty of banishment of your account!'}</p>
+    <p>
+        <span class="underline err_msg">{lang 'Warning:'}</span> {lang 'Your profile photo must contain a photo of you under penalty of banishment of your account!'}
+    </p>
 
     {if $is_webcam_enabled} {* Check if the module is enabled *}
         <p class="s_tMarg bold"><a href="{{ $design->url('webcam','webcam','picture') }}">{lang 'Want to take a photo of yourself directly with your webcam?'}</a></p>

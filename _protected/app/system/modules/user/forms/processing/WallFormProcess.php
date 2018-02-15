@@ -24,8 +24,15 @@ class WallFormProcess extends Form
     {
         parent::__construct();
 
-        (new WallModel)->add($this->session->get('member_id'), $this->httpRequest->post('post'), $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
+        (new WallModel)->add(
+            $this->session->get('member_id'),
+            $this->httpRequest->post('post'),
+            $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+        );
 
-        Header::redirect(Uri::get('user', 'main', 'index'), t('Your message has been added successfully!'));
+        Header::redirect(
+            Uri::get('user', 'main', 'index'),
+            t('Your message has been added successfully!')
+        );
     }
 }
