@@ -117,7 +117,7 @@ class Import
         }
 
         if (is_file($sFile)) {
-            return require $sFile;
+            return require_once $sFile;
         }
 
         throw new Exception('\'' . $sFile . '\' not found!');

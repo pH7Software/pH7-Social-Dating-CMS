@@ -9,16 +9,18 @@ use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 /*This project's namespace structure is leveraged to autoload requested classes at runtime.*/
-function Load($class)
+function load($class)
 {
     $file = __DIR__ . '/../' . str_replace('\\', PH7_DS, $class) . '.php';
-    if (is_file($file))
+    if (is_file($file)) {
         include $file;
+    }
 }
 
-spl_autoload_register('PFBC\Load');
-if (in_array('__autoload', spl_autoload_functions()))
+spl_autoload_register('PFBC\load');
+if (in_array('__autoload', spl_autoload_functions())) {
     spl_autoload_register('__autoload');
+}
 
 class Form extends Base
 {
