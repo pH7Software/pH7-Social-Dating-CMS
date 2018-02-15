@@ -101,7 +101,10 @@ class ModeratorController extends Controller
 
     public function video()
     {
-        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . 'video/' . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'common.css');
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . 'video/' . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
+            'common.css'
+        );
 
         $this->view->page_title = $this->view->h2_title = t('Videos Moderation');
 
@@ -175,7 +178,10 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The photo album could not be approved!');
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'picturealbum'), $this->sMsg);
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'moderator', 'picturealbum'),
+            $this->sMsg
+        );
     }
 
     public function approvedPhoto()
@@ -223,7 +229,10 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The profile photo could not be approved!');
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'avatar'), $this->sMsg);
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'moderator', 'avatar'),
+            $this->sMsg
+        );
     }
 
     public function approvedBackground()
@@ -324,15 +333,27 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The photo album could not be deleted');
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'picturealbum'), $this->sMsg);
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'moderator', 'picturealbum'),
+            $this->sMsg
+        );
     }
 
     public function deletePhoto()
     {
-        $bPicture = (new PictureCoreModel)->deletePhoto($this->httpRequest->post('id'), $this->httpRequest->post('album_id'), $this->httpRequest->post('picture_id'));
+        $bPicture = (new PictureCoreModel)->deletePhoto(
+            $this->httpRequest->post('id'),
+            $this->httpRequest->post('album_id'),
+            $this->httpRequest->post('picture_id')
+        );
 
         if ($bPicture) {
-            (new PictureCore)->deletePhoto($this->httpRequest->post('album_id'), $this->httpRequest->post('username'), $this->httpRequest->post('picture_link'));
+            (new PictureCore)->deletePhoto(
+                $this->httpRequest->post('album_id'),
+                $this->httpRequest->post('username'),
+                $this->httpRequest->post('picture_link')
+            );
+
             $this->clearPictureCache();
             $this->sMsg = t('The picture has been deleted!');
         } else {
@@ -361,7 +382,11 @@ class ModeratorController extends Controller
 
     public function deleteVideo()
     {
-        $bVideo = (new VideoCoreModel)->deleteVideo($this->httpRequest->post('id'), $this->httpRequest->post('album_id'), $this->httpRequest->post('video_id'));
+        $bVideo = (new VideoCoreModel)->deleteVideo(
+            $this->httpRequest->post('id'),
+            $this->httpRequest->post('album_id'),
+            $this->httpRequest->post('video_id')
+        );
 
         if ($bVideo) {
             (new VideoCore)->deleteVideo($this->httpRequest->post('album_id'), $this->httpRequest->post('username'), $this->httpRequest->post('video_link'));
