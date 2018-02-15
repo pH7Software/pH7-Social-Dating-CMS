@@ -141,7 +141,7 @@ class MainController extends Controller
             $this->sTitle = t('Album not found or is still in pending approval.');
             $this->notFound();
         } else {
-            $this->sTitle = t("%0%s video album", $this->design->getProfileLink($this->sUsername, false));
+            $this->sTitle = t("%0%'s video album", $this->design->getProfileLink($this->sUsername, false));
             $this->view->page_title = $this->sTitle; // We can include HTML tags in the title since the template will erase them before displaying
             $this->view->h2_title = $this->sTitle;
             $this->view->meta_description = t('Browse Videos From %0% | Video Album Social Community - %site_name%', $this->sUsername);
