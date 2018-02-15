@@ -1,4 +1,4 @@
-<div class="box-left col-md-3">
+<div class="box-left col-md-3 col-lg-2">
     <div class="design-box">
         <h2>{lang 'Search Blog Posts'}</h2>
         {{ SearchBlogForm::display(PH7_WIDTH_SEARCH_FORM) }}
@@ -38,7 +38,7 @@
     </div>
 </div>
 
-<div class="box-right col-md-9">
+<div class="box-right col-md-9 col-lg-9 col-lg-offset-1">
     {if !empty($error)}
         <p>{error}</p>
     {else}
