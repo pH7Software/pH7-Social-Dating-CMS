@@ -87,7 +87,7 @@ class MainController extends Controller
 
     public function albums()
     {
-        $iProfileId = ($this->httpRequest->getExists('username')) ? $this->iProfileId : null;
+        $iProfileId = $this->httpRequest->getExists('username') ? $this->iProfileId : null;
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->oVideoModel->totalAlbums($iProfileId), self::ALBUMS_PER_PAGE
         );
@@ -105,7 +105,7 @@ class MainController extends Controller
             $this->notFound(false); // Because the Ajax blocks profile, we cannot put HTTP error code 404, so the attribute is FALSE
         } else {
             // We can include HTML tags in the title since the template will erase them before displaying
-            $this->sTitle = (!empty($iProfileId)) ? t("The %0%'s albums", $this->design->getProfileLink($this->sUsername, false)) : t('Video Gallery Community');
+            $this->sTitle = !empty($iProfileId) ? t("The %0%'s albums", $this->design->getProfileLink($this->sUsername, false)) : t('Video Gallery Community');
             $this->view->page_title = $this->view->h2_title = $this->sTitle;
             $this->view->meta_description = t("%0%'s Albums | Video Albums of the Dating Social Community - %site_name%", $this->sUsername);
             $this->view->albums = $oAlbums;
