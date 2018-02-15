@@ -20,7 +20,7 @@ h2 {
     left: 40px;
     right: 40px;
     content: '';
-    padding-bottom: 4rem;
+    padding-bottom: 2rem;
     border-bottom: 1px solid #ddd;
 }
 
@@ -43,4 +43,8 @@ h2 {
 
 .heart {
     color: #F06;
+}
+
+.bottom {
+    float: none !important;
 }
