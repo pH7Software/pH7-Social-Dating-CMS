@@ -80,7 +80,7 @@ class VideoDesignCore
                 shuffle($aThumb);
                 $sThumbUrl = PH7_URL_DATA_SYS_MOD . $sDir . $sThumbName . $aThumb[0] . PH7_DOT . $sThumbExt;
             } else {
-                $sThumbUrl = PH7_URL_TPL . PH7_TPL_NAME . PH7_SH . PH7_IMG . 'icon/none.jpg';
+                $sThumbUrl = PH7_URL_TPL . PH7_TPL_NAME . PH7_SH . PH7_IMG . 'icon/' . UserDesignCore::NONE_IMG_FILENAME;
             }
 
             $sParam = self::isAutoplayVideo($sMedia) ? 'autoplay="autoplay"' : '';

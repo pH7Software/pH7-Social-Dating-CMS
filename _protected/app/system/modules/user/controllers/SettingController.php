@@ -169,7 +169,7 @@ class SettingController extends Controller
         if (!empty($sBackground)) {
             $sBgFullPath = PH7_URL_DATA_SYS_MOD . 'user/background/img/' . $this->sUsername . PH7_SH . $sBackground;
         } else {
-            $sBgFullPath = PH7_URL_TPL . PH7_TPL_NAME . PH7_SH . PH7_IMG . 'icon/none.jpg';
+            $sBgFullPath = PH7_URL_TPL . PH7_TPL_NAME . PH7_SH . PH7_IMG . 'icon/' . UserDesignCore::NONE_IMG_FILENAME;
         }
 
         return $sBgFullPath;

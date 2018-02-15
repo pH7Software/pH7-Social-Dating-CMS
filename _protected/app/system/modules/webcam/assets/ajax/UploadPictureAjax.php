@@ -151,7 +151,7 @@ class UploadPictureAjax
 
     public function display()
     {
-        $sFile = $this->isWebcamPictureManualApproval() ? '../../pending.jpg' : $this->sFile;
+        $sFile = $this->isWebcamPictureManualApproval() ? '../../' . UserDesignCore::PENDING_IMG_FILENAME : $this->sFile;
 
         return '{"status":1,"message":"Success!","filename":"' . $sFile . '"}';
     }
