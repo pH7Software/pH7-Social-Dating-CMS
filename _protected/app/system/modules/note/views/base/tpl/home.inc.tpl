@@ -69,8 +69,7 @@
                     {{ $action = ($post->approved == 1) ? 'disapproved' : 'approved' }}
                     {{ $text = ($post->approved == 1) ? t('Disapprove') : t('Approve') }}
                     <hr />
-                    <div>{
-                        { LinkCoreForm::display($text, 'note', 'admin', $action, array('note_id'=>$post->noteId)) }} &nbsp; | &nbsp;
+                    <div>{{ LinkCoreForm::display($text, 'note', 'admin', $action, array('note_id'=>$post->noteId)) }} &nbsp; | &nbsp;
                         <a href="{{ $design->url(PH7_ADMIN_MOD,'user','loginuseras',$post->profileId) }}" title="{lang 'Login as this author to edit/delete this post. Please first approve this note as an administrator to be able to edit or delete it.'}">
                             {lang 'Login as this User'}
                         </a>
