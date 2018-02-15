@@ -200,12 +200,10 @@
 
 .box-left {
     float: left;
-    width: 200px;
 }
 
 .box-right {
     float: right;
-    width: 700px;
 }
 
 .icon-wrap i {

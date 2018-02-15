@@ -1,4 +1,4 @@
-<div class="box-left">
+<div class="box-left col-md-3">
     <div class="design-box">
         <h2>{lang 'Search Games'}</h2>
         {{ SearchGameForm::display(PH7_WIDTH_SEARCH_FORM) }}
@@ -49,36 +49,38 @@
     </div>
 </div>
 
-<div class="center box-right">
-    {if !empty($error)}
-        <p>{error}</p>
-    {else}
-        {each $game in $games}
-            <h2>
-                <a href="{{ $design->url('game','main','game',"$game->title,$game->gameId") }}">{% $game->title %}</a>
-            </h2>
+<div class="box-right col-md-9">
+    <div class="center">
+        {if !empty($error)}
+            <p>{error}</p>
+        {else}
+            {each $game in $games}
+                <h2>
+                    <a href="{{ $design->url('game','main','game',"$game->title,$game->gameId") }}">{% $game->title %}</a>
+                </h2>
 
-            <div class="msg_content">
-                <p>
-                    <a rel="nofollow" href="{{ $design->url('game','main','game',"$game->title,$game->gameId") }}">
-                        <img alt="{% $game->title %}" title="{% $game->title %}" src="{url_data_sys_mod}game/img/thumb/{% $game->thumb %}" width="95" height="66" class="thumb_img" />
-                    </a>
-                </p>
-                <p><strong>{% $game->title %}</strong></p>
-                <p>{% $game->description %}</p>
+                <div class="msg_content">
+                    <p>
+                        <a rel="nofollow" href="{{ $design->url('game','main','game',"$game->title,$game->gameId") }}">
+                            <img alt="{% $game->title %}" title="{% $game->title %}" src="{url_data_sys_mod}game/img/thumb/{% $game->thumb %}" width="95" height="66" class="thumb_img" />
+                        </a>
+                    </p>
+                    <p><strong>{% $game->title %}</strong></p>
+                    <p>{% $game->description %}</p>
 
-                {if AdminCore::auth()}
-                    <div>
-                        <a class="btn btn-default btn-sm" href="{{ $design->url('game','admin','edit',"$game->title,$game->gameId") }}">{lang 'Edit Game'}</a> &bull;
-                        <div class="btn btn-default btn-sm inline">
-                            {{ LinkCoreForm::display(t('Delete Game'), 'game', 'admin', 'delete', array('id'=>$game->gameId, 'thumb'=>$game->thumb, 'file'=>$game->file)) }}
+                    {if AdminCore::auth()}
+                        <div>
+                            <a class="btn btn-default btn-sm" href="{{ $design->url('game','admin','edit',"$game->title,$game->gameId") }}">{lang 'Edit Game'}</a> &bull;
+                            <div class="btn btn-default btn-sm inline">
+                                {{ LinkCoreForm::display(t('Delete Game'), 'game', 'admin', 'delete', array('id'=>$game->gameId, 'thumb'=>$game->thumb, 'file'=>$game->file)) }}
+                            </div>
                         </div>
-                    </div>
-                {/if}
-                <hr />
-            </div>
-        {/each}
+                    {/if}
+                    <hr />
+                </div>
+            {/each}
 
-        {main_include 'page_nav.inc.tpl'}
-    {/if}
+            {main_include 'page_nav.inc.tpl'}
+        {/if}
+    </div>
 </div>

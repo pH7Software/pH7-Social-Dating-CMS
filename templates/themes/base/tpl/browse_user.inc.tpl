@@ -1,11 +1,11 @@
-<div class="box-left">
+<div class="box-left col-md-3">
     <div role="search" class="design-box">
         <h2>{lang 'Quick Search'}</h2>
         {{ SearchUserCoreForm::quick(PH7_WIDTH_SEARCH_FORM) }}
     </div>
 </div>
 
-<div class="box-right">
+<div class="box-right col-md-9">
     {if empty($users)}
         <p class="center bold">{lang 'Whoops! No users found.'}</p>
     {else}

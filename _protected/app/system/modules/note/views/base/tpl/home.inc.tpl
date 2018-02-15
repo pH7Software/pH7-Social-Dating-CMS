@@ -1,4 +1,4 @@
-<div class="box-left">
+<div class="box-left col-md-3">
     <div class="design-box">
         <h2>{lang 'Search Note Posts'}</h2>
         {{ SearchNoteForm::display(PH7_WIDTH_SEARCH_FORM) }}
@@ -45,7 +45,7 @@
     </div>
 </div>
 
-<div class="box-right">
+<div class="box-right col-md-9">
     <div class="center" id="note_block">
         {if !empty($error)}
             <p>{error}</p>
