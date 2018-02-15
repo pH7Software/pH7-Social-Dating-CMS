@@ -38,7 +38,7 @@ abstract class Cron extends Core
     }
 
     /**
-     * @return boolean Returns TRUE if the delay is valid, otherwise FALSE.
+     * @return bool Returns TRUE if the delay is valid, otherwise FALSE.
      */
     public function checkDelay()
     {
