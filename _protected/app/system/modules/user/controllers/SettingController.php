@@ -162,6 +162,9 @@ class SettingController extends Controller
         Header::redirect(null, t('Profile photo successfully deleted'));
     }
 
+    /**
+     * @return string The user wallpaper.
+     */
     private function getWallpaper()
     {
         $sBackground = (new UserModel)->getBackground($this->iProfileId, 1);
