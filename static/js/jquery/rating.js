@@ -2,12 +2,12 @@
  *************************************************************************
  pHS pH Star
 
- @Name :           jRating - jQuery Plugin (modified in pHRating by PH)
- @Revison :        2.2
- @Date :           26/01/2011
- @Author:          ALPIXEL - (www.myjqueryplugins.com - www.alpixel.fr)
- @License :        Open Source - MIT License : http://www.opensource.org/licenses/mit-license.php
- @modified :       This code has been modified by PH, pH7 Developers Team.
+ @Name:           jRating - jQuery Plugin (modified in pHRating by PH Soria)
+ @Revison:        2.2
+ @Date:           26/01/2011
+ @Author:         ALPIXEL - (www.myjqueryplugins.com - www.alpixel.fr)
+ @License:        Open Source - MIT License : http://www.opensource.org/licenses/mit-license.php
+ @modified:       This code has been modified by PH (Pierre-Henry Soria).
 
  **************************************************************************
  *************************************************************************/
