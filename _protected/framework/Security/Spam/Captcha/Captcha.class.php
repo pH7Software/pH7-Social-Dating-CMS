@@ -123,9 +123,32 @@ class Captcha
 
         $this->mixing();
 
-        imageline($this->rImg, mt_rand(2, $this->iWidth + $this->iMargin), mt_rand(1, $this->iWidth + $this->iMargin), mt_rand(1, $this->iHeight + $this->iMargin), mt_rand(2, $this->iWidth + $this->iMargin), $this->rBlack);
-        imageline($this->rImg, mt_rand(2, $this->iHeight + $this->iMargin), mt_rand(1, $this->iHeight + $this->iMargin), mt_rand(1, $this->iWidth + $this->iMargin), mt_rand(2, $this->iHeight + $this->iMargin), $this->rRed);
-        imageline($this->rImg, mt_rand(2, $this->iHeight + $this->iMargin), mt_rand(1, $this->iWidth + $this->iMargin), mt_rand(1, $this->iWidth + $this->iMargin), mt_rand(2, $this->iHeight + $this->iMargin), $this->aColor[array_rand($this->aColor)]);
+        imageline(
+            $this->rImg,
+            mt_rand(2, $this->iWidth + $this->iMargin),
+            mt_rand(1, $this->iWidth + $this->iMargin),
+            mt_rand(1, $this->iHeight + $this->iMargin),
+            mt_rand(2, $this->iWidth + $this->iMargin), $this->rBlack
+        );
+
+        imageline(
+            $this->rImg,
+            mt_rand(2, $this->iHeight + $this->iMargin),
+            mt_rand(1, $this->iHeight + $this->iMargin),
+            mt_rand(1, $this->iWidth + $this->iMargin),
+            mt_rand(2, $this->iHeight + $this->iMargin),
+            $this->rRed
+        );
+
+        imageline(
+            $this->rImg,
+            mt_rand(2, $this->iHeight + $this->iMargin),
+            mt_rand(1, $this->iWidth + $this->iMargin),
+            mt_rand(1, $this->iWidth + $this->iMargin),
+            mt_rand(2, $this->iHeight + $this->iMargin),
+            $this->aColor[array_rand($this->aColor)]
+        );
+
         unset($this->rBlack, $this->rRed, $this->rWhite);
 
 
