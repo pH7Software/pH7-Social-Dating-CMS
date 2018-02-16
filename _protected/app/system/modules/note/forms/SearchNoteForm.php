@@ -12,6 +12,11 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class SearchNoteForm
 {
+    /**
+     * @param int|null $iWidth
+     *
+     * @throws Framework\File\Exception
+     */
     public static function display($iWidth = null)
     {
         $aOptions = ['description' => t('Enter Name, Keyword of posts, Author (username, first name, last name) or ID of a note.')];
