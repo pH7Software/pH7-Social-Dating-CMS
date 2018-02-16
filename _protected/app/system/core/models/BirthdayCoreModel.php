@@ -46,7 +46,7 @@ class BirthdayCoreModel
         $sSqlWhere = $bIsSex ? ' AND (sex = :sex) ' : '';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
-        $sSqlQuery = 'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER) . 'WHERE (username <> :ghostUsername) AND 
+        $sSqlQuery = 'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER) . 'WHERE (username <> :ghostUsername) AND
             (groupId <> :visitorGroup) AND (groupId <> :pendingGroup) AND (ban = 0) AND (birthDate LIKE :date)' . $sSqlWhere .
             $sSqlOrder . $sSqlLimit;
 
