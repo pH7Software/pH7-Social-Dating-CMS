@@ -13,6 +13,8 @@ use PH7\Framework\Mvc\Model\Engine\Model;
 
 class FriendCoreModel extends Model
 {
+    const ALL_REQUEST = 'all';
+
     /**
      * "Get" and "Find" "Friends" or "Mutual Friends"
      *
@@ -28,14 +30,14 @@ class FriendCoreModel extends Model
      *
      * @return int|array Integer for the number friends returned or an array containing a stdClass object with the friends list)
      */
-    public function get($iIdProfileId, $iFriendId = null, $mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $mPending = 'all')
+    public function get($iIdProfileId, $iFriendId = null, $mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $mPending = self::ALL_REQUEST)
     {
         $bCount = (bool)$bCount;
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
 
-        $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
+        $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
 
         $sSqlSelect = 'COUNT(f.friendId) AS totalFriends';
         if (!$bCount) {
@@ -79,7 +81,7 @@ class FriendCoreModel extends Model
             $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
         }
 
-        if ($mPending !== 'all') {
+        if ($mPending !== self::ALL_REQUEST) {
             $rStmt->bindValue(':pending', $mPending, \PDO::PARAM_INT);
         }
 
