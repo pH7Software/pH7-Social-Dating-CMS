@@ -65,7 +65,7 @@ class MainController extends Controller
         /**
          *  If the user is logged in, we get their 'member_username' session, otherwise we get the username from the URL
          */
-        $this->sUsername = (!$this->httpRequest->getExists('username')) ? $this->session->get('member_username') : $this->httpRequest->get('username');
+        $this->sUsername = !$this->httpRequest->getExists('username') ? $this->session->get('member_username') : $this->httpRequest->get('username');
 
         /**
          * FIRST USERNAME LETTER IN UPPERCASE

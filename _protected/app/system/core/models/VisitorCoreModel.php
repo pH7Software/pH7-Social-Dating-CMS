@@ -51,7 +51,7 @@ class VisitorCoreModel
         $rStmt->bindValue(':visitorId', $this->iVisitorId, \PDO::PARAM_INT);
         $rStmt->execute();
 
-        return ($rStmt->fetchColumn() > 0);
+        return $rStmt->fetchColumn() > 0;
     }
 
     /**
