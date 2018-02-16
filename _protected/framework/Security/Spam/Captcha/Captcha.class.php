@@ -20,10 +20,13 @@ use PH7\Framework\Util\Various;
 
 class Captcha
 {
+    const NUM_CHARACTER_CAPTCHA = 5;
+    const SESSION_NAME = 'rand_code';
+
     /** @var Session */
     private $oSession;
 
-    /** @var Str */
+    /** @var string */
     private $sStr;
 
     /** @var string */
