@@ -65,7 +65,7 @@ class FriendCoreModel extends Model
 
         $rStmt = Db::getInstance()->prepare(
             'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER_FRIEND) . 'AS f INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
-            'AS m ON m.profileId = (f.profileId + f.friendId - :profileId) WHERE ' . $sSqlWhere . ' AND ' . $sSqlSearchWhere .
+            'AS m ON m.profileId = (f.profileId + f.friendId - :profileId) WHERE m.ban = 0 AND ' . $sSqlWhere . ' AND ' . $sSqlSearchWhere .
             $sSqlOrder . $sSqlLimit
         );
 
