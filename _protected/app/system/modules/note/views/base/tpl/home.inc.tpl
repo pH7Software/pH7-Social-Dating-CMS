@@ -30,7 +30,11 @@
         <h2>{lang 'Top Popular Posts'}</h2>
         <ul>
             {each $views in $top_views}
-              <li><a href="{{ $design->url('note','main','read',"$views->username,$views->postId") }}" title="{% $views->pageTitle %}" data-load="ajax">{% $views->title %}</a></li>
+                <li>
+                    <a href="{{ $design->url('note','main','read',"$views->username,$views->postId") }}" title="{% $views->pageTitle %}" data-load="ajax">
+                        {% $views->title %}
+                    </a>
+                </li>
             {/each}
         </ul>
     </div>
@@ -39,7 +43,11 @@
         <h2>{lang 'Top Rated Posts'}</h2>
         <ul>
             {each $rating in $top_rating}
-              <li><a href="{{ $design->url('note','main','read',"$rating->username,$rating->postId") }}" title="{% $rating->pageTitle %}" data-load="ajax">{% $rating->title %}</a></li>
+                <li>
+                    <a href="{{ $design->url('note','main','read',"$rating->username,$rating->postId") }}" title="{% $rating->pageTitle %}" data-load="ajax">
+                        {% $rating->title %}
+                    </a>
+                </li>
             {/each}
         </ul>
     </div>
@@ -53,7 +61,11 @@
             {each $post in $posts}
                 {{ $content = escape($this->str->extract(Framework\Security\Ban\Ban::filterWord($post->content),0,400), true) }}
 
-                <h1><a href="{{ $design->url('note','main','read',"$post->username,$post->postId") }}" title="{% $post->title %}" data-load="ajax">{% escape(Framework\Security\Ban\Ban::filterWord($post->title)) %}</a></h1>
+                <h1>
+                    <a href="{{ $design->url('note','main','read',"$post->username,$post->postId") }}" title="{% $post->title %}" data-load="ajax">
+                        {% escape(Framework\Security\Ban\Ban::filterWord($post->title)) %}
+                    </a>
+                </h1>
 
                 <div class="left">{{ NoteDesign::thumb($post) }}</div>
                 {content}
