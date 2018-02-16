@@ -175,6 +175,7 @@ class LoadTemplate
      */
     private function isTplParamSet()
     {
-        return !empty($_REQUEST['tpl']) && strlen($_REQUEST['tpl']) <= static::MAX_TPL_FOLDER_LENGTH;
+        return !empty($_REQUEST[self::REQUEST_PARAM_NAME]) &&
+            strlen($_REQUEST[self::REQUEST_PARAM_NAME]) <= static::MAX_TPL_FOLDER_LENGTH;
     }
 }

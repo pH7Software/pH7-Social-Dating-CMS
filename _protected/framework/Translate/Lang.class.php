@@ -20,8 +20,9 @@ namespace PH7\Framework\Translate {
     class Lang
     {
         const COOKIE_NAME = 'pHSLang';
-        const LANG_FOLDER_LENGTH = 5;
         const COOKIE_LIFETIME = 172800;
+        const REQUEST_PARAM_NAME = 'l';
+        const LANG_FOLDER_LENGTH = 5;
         const ISO_LANG_CODE_LENGTH = 2;
 
         /** @var Config */
@@ -42,7 +43,7 @@ namespace PH7\Framework\Translate {
             $oCookie = new Cookie;
 
             if ($this->isLangParamSet()) {
-                $this->sUserLang = $_REQUEST['l'];
+                $this->sUserLang = $_REQUEST[self::REQUEST_PARAM_NAME];
                 $oCookie->set(static::COOKIE_NAME, $this->sUserLang, static::COOKIE_LIFETIME);
             } elseif ($oCookie->exists(static::COOKIE_NAME)) {
                 $this->sUserLang = $oCookie->get(static::COOKIE_NAME);
@@ -216,7 +217,8 @@ namespace PH7\Framework\Translate {
          */
         private function isLangParamSet()
         {
-            return !empty($_REQUEST['l']) && strlen($_REQUEST['l']) === static::LANG_FOLDER_LENGTH;
+            return !empty($_REQUEST[self::REQUEST_PARAM_NAME]) &&
+                strlen($_REQUEST[self::REQUEST_PARAM_NAME]) === static::LANG_FOLDER_LENGTH;
         }
     }
 }
