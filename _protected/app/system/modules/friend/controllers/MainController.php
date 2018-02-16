@@ -169,7 +169,7 @@ class MainController extends Controller
             $this->sTitle = t("%0%'s Mutual Friends:", $this->sUsername);
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
-            $this->view->friend_number = nt('%n% Mutual Friend', '%n% Mutuals Friends', $this->iTotalFriends);
+            $this->view->friend_number = nt('%n% Mutual Friend', '%n% Mutual Friends', $this->iTotalFriends);
             $this->view->friends = $oFriend;
         }
 

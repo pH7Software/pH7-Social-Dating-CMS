@@ -362,9 +362,18 @@ class ProfileController extends Controller
      */
     private function getMutualFriendLinkName()
     {
-        $iNbMutFriend = (new FriendCoreModel)->get($this->iVisitorId, $this->iProfileId, null, true, null, null, null, null);
+        $iNbMutFriend = (new FriendCoreModel)->get(
+            $this->iVisitorId,
+            $this->iProfileId,
+            null,
+            true,
+            null,
+            null,
+            null,
+            null
+        );
         $sNbMutFriend = $iNbMutFriend > 0 ? ' (' . $iNbMutFriend . ')' : '';
-        $sMutFriendTxt = $iNbMutFriend <= 1 ? ($iNbMutFriend == 1) ? t('Mutual Friend:') : t('No Mutual Friends') : t('Mutuals Friends:');
+        $sMutFriendTxt = $iNbMutFriend <= 1 ? ($iNbMutFriend == 1) ? t('Mutual Friend:') : t('No Mutual Friends') : t('Mutual Friends:');
 
         return $sMutFriendTxt . $sNbMutFriend;
     }
