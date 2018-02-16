@@ -68,7 +68,7 @@ class Design
     const DEFAULT_REDIRECTION_DELAY = 3;
     const MAX_MESSAGE_LENGTH_SHOWN = 300;
 
-    /** @var boolean */
+    /** @var bool */
     protected $bIsDiv = false;
 
     /** @var Str */
@@ -241,7 +241,7 @@ class Design
      * @param string $sUrl If NULL, the URL will be the current page. Default NULL
      * @param string $sMsg , Optional, display a message after redirect of the page.
      * @param string $sType Type of message: "success", "info", "warning" or "error". Default: "success".
-     * @param integer $iTime Optional, a time. Default: "3" seconds.
+     * @param int $iTime Optional, a time. Default: "3" seconds.
      *
      * @return void
      */
@@ -300,7 +300,7 @@ class Design
      * @param string $sController
      * @param string $sAction
      * @param null|string $sVars
-     * @param boolean $bClear
+     * @param bool $bClear
      *
      * @return void
      */
@@ -318,7 +318,7 @@ class Design
      * @param string $sMod
      * @param string $sCtrl
      * @param string $sAct
-     * @param integer|string $mId Content ID
+     * @param int|string $mId Content ID
      * @param string $sClass Add a CSS class
      *
      * @return void HTML output.
@@ -544,7 +544,7 @@ class Design
      * @internal If it's an IPv6, show only the beginning, otherwise it would be too long in the template.
      *
      * @param string $sIp Allows to specify another IP address than the client one.
-     * @param boolean $bPrint Print or Return the HTML code. Default TRUE
+     * @param bool $bPrint Print or Return the HTML code. Default TRUE
      *
      * @return void|string
      */
@@ -563,7 +563,7 @@ class Design
     /**
      * Show the geolocation of the user (with link that points to the Country controller).
      *
-     * @param boolean $bPrint Print or Return the HTML code. Default TRUE
+     * @param bool $bPrint Print or Return the HTML code. Default TRUE
      *
      * @return void|string
      */
@@ -586,8 +586,8 @@ class Design
     /**
      * Pagination.
      *
-     * @param integer $iTotalPages
-     * @param integer $iCurrentPage
+     * @param int $iTotalPages
+     * @param int $iCurrentPage
      *
      * @return void The HTML pagination code.
      */
@@ -599,8 +599,8 @@ class Design
     /**
      * @param string $sUsername
      * @param string $sSex
-     * @param integer $iSize
-     * @param boolean $bPrint Print or Return the HTML code.
+     * @param int $iSize
+     * @param bool $bPrint Print or Return the HTML code.
      *
      * @return void|string The default 150px avatar URL or the user avatar URL.
      */
@@ -672,7 +672,7 @@ class Design
      * Get the user profile link.
      *
      * @param string $sUsername
-     * @param boolean $bPrint Print or Return the HTML code.
+     * @param bool $bPrint Print or Return the HTML code.
      *
      * @return void|string The absolute user profile link.
      */
@@ -694,9 +694,9 @@ class Design
      *
      * @param string $sEmail The user email address.
      * @param string $sType The default image type to show. Default: 'wavatar'
-     * @param integer $iSize The size of the image. Default: 80
+     * @param int $iSize The size of the image. Default: 80
      * @param string $sRating The max image rating allowed. Default: 'g' (for all)
-     * @param boolean $bSecure Display avatar via HTTPS, for example if the site uses HTTPS, you should use this option to not get a warning with most Web browsers. Default: FALSE
+     * @param bool $bSecure Display avatar via HTTPS, for example if the site uses HTTPS, you should use this option to not get a warning with most Web browsers. Default: FALSE
      *
      * @return string The Gravatar Link.
      */
@@ -783,7 +783,7 @@ class Design
     /**
      * Generate a Report Link.
      *
-     * @param integer $iId
+     * @param int $iId
      * @param string $sUsername
      * @param string $sFirstName
      * @param string $sSex
@@ -833,7 +833,7 @@ class Design
      * Generate a Link tag.
      *
      * @param string $sLink The link.
-     * @param boolean $bNoFollow Set TRUE to set the link "nofollow", FALSE otherwise. Default TRUE
+     * @param bool $bNoFollow Set TRUE to set the link "nofollow", FALSE otherwise. Default TRUE
      *
      * @return void The HTML link tag.
      */
@@ -878,7 +878,7 @@ class Design
      *
      * @param string $sTag
      * @param array $aAttrs Optional. Default NULL
-     * @param boolean $bPair Optional. Default FALSE
+     * @param bool $bPair Optional. Default FALSE
      * @param string $sText Optional. Add text, available only for pair tag. Default NULL
      *
      * @return string The custom HTML tag.
@@ -905,7 +905,7 @@ class Design
      * Useful HTML Header.
      *
      * @param array $aMeta Default NULL
-     * @param boolean $bLogo Default FALSE
+     * @param bool $bLogo Default FALSE
      *
      * @return void
      */
