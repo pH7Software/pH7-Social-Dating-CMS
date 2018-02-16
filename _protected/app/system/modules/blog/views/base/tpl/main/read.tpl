@@ -21,7 +21,7 @@
             {{ $design->likeApi() }}
 
             {if $enable_comment}
-                <p>--------------------</p>
+                <p>------------------------------</p>
                 {{ CommentDesignCore::link($blog_id,'blog') }}
             {/if}
         </article>

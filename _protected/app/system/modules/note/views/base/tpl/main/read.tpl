@@ -25,7 +25,7 @@
             {{ $design->likeApi() }}
 
             {if $post->enableComment}
-                <p>--------------------</p>
+                <p>------------------------------</p>
                 {{ CommentDesignCore::link($post->noteId,'note') }}
             {/if}
 
