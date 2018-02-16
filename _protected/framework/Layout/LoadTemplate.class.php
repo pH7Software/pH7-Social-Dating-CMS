@@ -19,10 +19,10 @@ use PH7\Framework\Registry\Registry;
 
 class LoadTemplate
 {
-    const MAX_TPL_FOLDER_LENGTH = 50;
     const COOKIE_NAME = 'site_tpl';
     const COOKIE_LIFETIME = 172800;
     const REQUEST_PARAM_NAME = 'tpl';
+    const MAX_TPL_FOLDER_LENGTH = 50;
 
     /** @var Config */
     private $oConfig;
