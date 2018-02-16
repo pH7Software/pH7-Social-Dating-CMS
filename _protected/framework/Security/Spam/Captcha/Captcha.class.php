@@ -136,16 +136,24 @@ class Captcha
 
     /**
      * @param string $sCode The random code.
+     * @param bool $bIsCaseSensitive
      *
      * @return bool
      */
-    public function check($sCode)
+    public function check($sCode, $bIsCaseSensitive = true)
     {
         if ($sCode === null) {
             return false;
         }
 
-        if ($sCode === $this->oSession->get('rand_code')) {
+        $sUserInput = $this->oSession->get(self::SESSION_NAME);
+
+        if (!$bIsCaseSensitive) {
+            $sCode = strtolower($sCode);
+            $sUserInput = strtolower($sUserInput);
+        }
+
+        if ($sCode === $sUserInput) {
             return true;
         }
 
