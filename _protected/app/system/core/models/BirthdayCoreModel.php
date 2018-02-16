@@ -46,8 +46,17 @@ class BirthdayCoreModel
         $sSqlWhere = $bIsSex ? ' AND (sex = :sex) ' : '';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER) . 'WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (groupId <> 1) AND (groupId <> 9) AND (birthDate LIKE :date)' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
+        $sSqlQuery = 'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER) . 'WHERE (username <> :ghostUsername) AND 
+            (groupId <> :visitorGroup) AND (groupId <> :pendingGroup) AND (ban = 0) AND (birthDate LIKE :date)' . $sSqlWhere .
+            $sSqlOrder . $sSqlLimit;
+
+        $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindValue(':date', '%' . (new CDateTime)->get()->date('-m-d'), \PDO::PARAM_STR);
+
+        $rStmt->bindValue(':ghostUsername', PH7_GHOST_USERNAME, \PDO::PARAM_STR);
+        $rStmt->bindValue(':visitorGroup', UserCoreModel::VISITOR_GROUP, \PDO::PARAM_INT);
+        $rStmt->bindValue(':pendingGroup', UserCoreModel::PENDING_GROUP, \PDO::PARAM_INT);
+
         if ($bIsSex) {
             $rStmt->bindValue(':sex', $sGender, \PDO::PARAM_STR);
         }

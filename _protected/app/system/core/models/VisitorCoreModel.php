@@ -84,7 +84,7 @@ class VisitorCoreModel
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER_WHO_VIEW) . 'AS who LEFT JOIN ' . Db::prefix(DbTableName::MEMBER) .
-            'AS m ON who.visitorId = m.profileId WHERE (who.profileId = :profileId) AND ' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
+            'AS m ON who.visitorId = m.profileId WHERE (m.ban = 0) AND (who.profileId = :profileId) AND ' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         $rStmt->bindValue(':profileId', $this->iProfileId, \PDO::PARAM_INT);
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
