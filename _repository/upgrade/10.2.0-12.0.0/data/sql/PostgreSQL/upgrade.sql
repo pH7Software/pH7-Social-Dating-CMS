@@ -4,10 +4,6 @@
 -- License:       GNU General Public License
 --
 
--- Add new module name into SysModsEnabled
-INSERT INTO ph7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VALUES
-('Cool Profile Page', 'cool-profile-page', '0', '0');
-
 -- Rename table names to new names
 ALTER TABLE ph7_Admins RENAME TO ph7_admins;
 ALTER TABLE ph7_Memberships RENAME TO ph7_memberships;
