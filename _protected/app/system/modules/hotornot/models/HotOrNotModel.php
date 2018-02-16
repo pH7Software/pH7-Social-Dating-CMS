@@ -30,7 +30,9 @@ class HotOrNotModel extends Model
     {
         $sSql = !empty($iProfileId) ? ' AND (profileId <> :profileId) ' : ' ';
         $rStmt = Db::getInstance()->prepare('SELECT profileId, username, firstName, sex, avatar FROM' . Db::prefix(DbTableName::MEMBER) .
-            'WHERE (username <> \'' . PH7_GHOST_USERNAME . '\')' . $sSql . 'AND (avatar IS NOT NULL) AND (approvedAvatar = :approved) ORDER BY RAND() LIMIT :offset, :limit');
+            'WHERE (username <> :ghostUsername) AND (ban = 0)' . $sSql . 'AND (avatar IS NOT NULL) AND (approvedAvatar = :approved) ORDER BY RAND() LIMIT :offset, :limit');
+
+        $rStmt->bindValue(':ghostUsername', PH7_GHOST_USERNAME, \PDO::PARAM_STR);
 
         if (!empty($iProfileId)) {
             $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);

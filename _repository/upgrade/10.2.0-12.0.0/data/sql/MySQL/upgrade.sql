@@ -4,10 +4,6 @@
 -- License:       GNU General Public License
 --
 
--- Add new module name into SysModsEnabled
-INSERT INTO ph7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VALUES
-('Cool Profile Page', 'cool-profile-page', '0', '0');
-
 -- Rename table names to new names
 ALTER TABLE ph7_Admins RENAME ph7_admins;
 ALTER TABLE ph7_Memberships RENAME ph7_memberships;
@@ -72,6 +68,18 @@ ALTER TABLE ph7_License RENAME ph7_license;
 ALTER TABLE ph7_CustomCode RENAME ph7_custom_code;
 ALTER TABLE ph7_Games RENAME ph7_games;
 ALTER TABLE ph7_GamesCategories RENAME ph7_games_categories;
+
+
+-- Add new module name into ph7_sys_mods_enabled
+INSERT INTO ph7_sys_mods_enabled (moduleTitle, folderName, premiumMod, enabled) VALUES
+('Cool Profile Page', 'cool-profile-page', '0', '0');
+
+
+-- Add new fields into settings table
+INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) VALUES
+('captchaComplexity', 5, 'number of captcha complexity', 'spam'),
+('captchaCaseSensitive', 1, '1 to enable captcha case sensitive | 0 to enable', 'spam');
+
 
 -- Update pH7CMS's SQL schema version
 UPDATE ph7_modules SET version = '1.4.2' WHERE vendorName = 'pH7CMS';

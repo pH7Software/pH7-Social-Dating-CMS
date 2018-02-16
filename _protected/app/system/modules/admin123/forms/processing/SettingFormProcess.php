@@ -21,6 +21,7 @@ class SettingFormProcess extends Form
     const MIN_CSRF_TOKEN_LIFETIME = 10;
     const LOGO_WIDTH = 50;
     const LOGO_HEIGHT = 45;
+    const MAX_WATERMARK_SIZE = 5;
 
     /** @var boolean */
     private $bIsErr = false;
@@ -106,6 +107,8 @@ class SettingFormProcess extends Form
         'time_delay_send_forum_msg' => 'timeDelaySendForumMsg',
 
         // Captcha
+        'captcha_complexity' => 'captchaComplexity',
+        'captcha_case_sensitive' => 'captchaCaseSensitive',
         'is_captcha_user_signup' => 'isCaptchaUserSignup',
         'is_captcha_affiliate_signup' => 'isCaptchaAffiliateSignup',
         'is_captcha_mail' => 'isCaptchaMail',
@@ -190,7 +193,7 @@ class SettingFormProcess extends Form
 
                     case 'size_watermark_text_image': {
                         if ($this->httpRequest->post('size_watermark_text_image') >= 0 &&
-                            $this->httpRequest->post('size_watermark_text_image') <= 5) {
+                            $this->httpRequest->post('size_watermark_text_image') <= self::MAX_WATERMARK_SIZE) {
                             DbConfig::setSetting($this->httpRequest->post('size_watermark_text_image'), 'sizeWatermarkTextImage');
                         }
                     } break;

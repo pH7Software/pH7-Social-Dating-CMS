@@ -274,7 +274,9 @@ class ValidateCoreAjax
      */
     protected function captcha($sValue)
     {
-        if ((new Captcha)->check($sValue)) {
+        $bIsCaseSensitive = DbConfig::getSetting('captchaCaseSensitive');
+
+        if ((new Captcha)->check($sValue, $bIsCaseSensitive)) {
             $this->iStatus = 1;
             $this->sMsg = t('OK!');
         } else {

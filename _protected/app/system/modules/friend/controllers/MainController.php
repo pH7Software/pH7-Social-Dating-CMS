@@ -65,7 +65,7 @@ class MainController extends Controller
         /**
          *  If the user is logged in, we get their 'member_username' session, otherwise we get the username from the URL
          */
-        $this->sUsername = (!$this->httpRequest->getExists('username')) ? $this->session->get('member_username') : $this->httpRequest->get('username');
+        $this->sUsername = !$this->httpRequest->getExists('username') ? $this->session->get('member_username') : $this->httpRequest->get('username');
 
         /**
          * FIRST USERNAME LETTER IN UPPERCASE
@@ -102,9 +102,16 @@ class MainController extends Controller
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
 
-        $oFriend = $this->oFriendModel->get($this->iId, null, $this->httpRequest->get('looking'), false,
-            $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->
-            getFirstItem(), $this->oPage->getNbItemsPerPage());
+        $oFriend = $this->oFriendModel->get(
+            $this->iId,
+            null,
+            $this->httpRequest->get('looking'),
+            false,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsPerPage()
+        );
 
         if (empty($oFriend)) {
             $this->sTitle = t("No Friend found on %0%'s profile", $this->sUsername);
@@ -127,13 +134,31 @@ class MainController extends Controller
 
     public function mutual()
     {
-        $this->iTotalFriends = $this->oFriendModel->get($this->iMemberId, $this->iId, $this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
+        $this->iTotalFriends = $this->oFriendModel->get(
+            $this->iMemberId,
+            $this->iId,
+            $this->httpRequest->get('looking'),
+            true,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            null,
+            null
+        );
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->iTotalFriends, self::MAX_MUTUAL_FRIEND_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
 
-        $oFriend = $this->oFriendModel->get($this->iMemberId, $this->iId, $this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage());
+        $oFriend = $this->oFriendModel->get(
+            $this->iMemberId,
+            $this->iId,
+            $this->httpRequest->get('looking'),
+            false,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsPerPage()
+        );
 
         if (empty($oFriend)) {
             $this->sTitle = t("No Mutual Friend found on %0%'s profile", $this->sUsername);
@@ -144,7 +169,7 @@ class MainController extends Controller
             $this->sTitle = t("%0%'s Mutual Friends:", $this->sUsername);
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
-            $this->view->friend_number = nt('%n% Mutual Friend', '%n% Mutuals Friends', $this->iTotalFriends);
+            $this->view->friend_number = nt('%n% Mutual Friend', '%n% Mutual Friends', $this->iTotalFriends);
             $this->view->friends = $oFriend;
         }
 

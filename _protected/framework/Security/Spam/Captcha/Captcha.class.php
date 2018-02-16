@@ -20,10 +20,13 @@ use PH7\Framework\Util\Various;
 
 class Captcha
 {
+    const NUM_CHARACTER_CAPTCHA = 5;
+    const SESSION_NAME = 'rand_code';
+
     /** @var Session */
     private $oSession;
 
-    /** @var Str */
+    /** @var string */
     private $sStr;
 
     /** @var string */
@@ -77,19 +80,20 @@ class Captcha
     /**
      * Show the captcha image.
      *
-     * @param int $iRandom
+     * @param int|null $iRandom
+     * @param int $iComplexity
      *
      * @return void
      */
-    public function show($iRandom = null)
+    public function show($iRandom = null, $iComplexity = self::NUM_CHARACTER_CAPTCHA)
     {
         if (!empty($iRandom)) {
-            $this->sStr = Various::genRnd($iRandom, 5);
+            $this->sStr = Various::genRnd($iRandom, $iComplexity);
         } else {
-            $this->sStr = Various::genRnd('pH7_Pierre-Henry_Soria_Sanz_González_captcha', 5);
+            $this->sStr = Various::genRnd('pH7_Pierre-Henry_Soria_Sanz_González_captcha', $iComplexity);
         }
 
-        $this->oSession->set('rand_code', $this->sStr);
+        $this->oSession->set(self::SESSION_NAME, $this->sStr);
 
         $this->sFont = $this->getFont();
         //$sBackground = PH7_PATH_DATA . 'background/' . mt_rand(1, 5) . '.png';
@@ -119,9 +123,32 @@ class Captcha
 
         $this->mixing();
 
-        imageline($this->rImg, mt_rand(2, $this->iWidth + $this->iMargin), mt_rand(1, $this->iWidth + $this->iMargin), mt_rand(1, $this->iHeight + $this->iMargin), mt_rand(2, $this->iWidth + $this->iMargin), $this->rBlack);
-        imageline($this->rImg, mt_rand(2, $this->iHeight + $this->iMargin), mt_rand(1, $this->iHeight + $this->iMargin), mt_rand(1, $this->iWidth + $this->iMargin), mt_rand(2, $this->iHeight + $this->iMargin), $this->rRed);
-        imageline($this->rImg, mt_rand(2, $this->iHeight + $this->iMargin), mt_rand(1, $this->iWidth + $this->iMargin), mt_rand(1, $this->iWidth + $this->iMargin), mt_rand(2, $this->iHeight + $this->iMargin), $this->aColor[array_rand($this->aColor)]);
+        imageline(
+            $this->rImg,
+            mt_rand(2, $this->iWidth + $this->iMargin),
+            mt_rand(1, $this->iWidth + $this->iMargin),
+            mt_rand(1, $this->iHeight + $this->iMargin),
+            mt_rand(2, $this->iWidth + $this->iMargin), $this->rBlack
+        );
+
+        imageline(
+            $this->rImg,
+            mt_rand(2, $this->iHeight + $this->iMargin),
+            mt_rand(1, $this->iHeight + $this->iMargin),
+            mt_rand(1, $this->iWidth + $this->iMargin),
+            mt_rand(2, $this->iHeight + $this->iMargin),
+            $this->rRed
+        );
+
+        imageline(
+            $this->rImg,
+            mt_rand(2, $this->iHeight + $this->iMargin),
+            mt_rand(1, $this->iWidth + $this->iMargin),
+            mt_rand(1, $this->iWidth + $this->iMargin),
+            mt_rand(2, $this->iHeight + $this->iMargin),
+            $this->aColor[array_rand($this->aColor)]
+        );
+
         unset($this->rBlack, $this->rRed, $this->rWhite);
 
 
@@ -136,16 +163,24 @@ class Captcha
 
     /**
      * @param string $sCode The random code.
+     * @param bool $bIsCaseSensitive
      *
      * @return bool
      */
-    public function check($sCode)
+    public function check($sCode, $bIsCaseSensitive = true)
     {
         if ($sCode === null) {
             return false;
         }
 
-        if ($sCode === $this->oSession->get('rand_code')) {
+        $sUserInput = $this->oSession->get(self::SESSION_NAME);
+
+        if (!$bIsCaseSensitive) {
+            $sCode = strtolower($sCode);
+            $sUserInput = strtolower($sUserInput);
+        }
+
+        if ($sCode === $sUserInput) {
             return true;
         }
 
