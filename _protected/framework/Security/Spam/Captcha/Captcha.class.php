@@ -80,19 +80,20 @@ class Captcha
     /**
      * Show the captcha image.
      *
-     * @param int $iRandom
+     * @param int|null $iRandom
+     * @param int $iComplexity
      *
      * @return void
      */
-    public function show($iRandom = null)
+    public function show($iRandom = null, $iComplexity = self::NUM_CHARACTER_CAPTCHA)
     {
         if (!empty($iRandom)) {
-            $this->sStr = Various::genRnd($iRandom, 5);
+            $this->sStr = Various::genRnd($iRandom, $iComplexity);
         } else {
-            $this->sStr = Various::genRnd('pH7_Pierre-Henry_Soria_Sanz_González_captcha', 5);
+            $this->sStr = Various::genRnd('pH7_Pierre-Henry_Soria_Sanz_González_captcha', $iComplexity);
         }
 
-        $this->oSession->set('rand_code', $this->sStr);
+        $this->oSession->set(self::SESSION_NAME, $this->sStr);
 
         $this->sFont = $this->getFont();
         //$sBackground = PH7_PATH_DATA . 'background/' . mt_rand(1, 5) . '.png';
