@@ -20,7 +20,9 @@ use PH7\Framework\Registry\Registry;
 class LoadTemplate
 {
     const MAX_TPL_FOLDER_LENGTH = 50;
+    const COOKIE_NAME = 'site_tpl';
     const COOKIE_LIFETIME = 172800;
+    const REQUEST_PARAM_NAME = 'tpl';
 
     /** @var Config */
     private $oConfig;
@@ -46,10 +48,10 @@ class LoadTemplate
         $oCookie = new Cookie;
 
         if ($this->isTplParamSet()) {
-            $this->sUserTpl = $_REQUEST['tpl'];
-            $oCookie->set('site_tpl', $this->sUserTpl, static::COOKIE_LIFETIME);
-        } elseif ($oCookie->exists('site_tpl')) {
-            $this->sUserTpl = $oCookie->get('site_tpl');
+            $this->sUserTpl = $_REQUEST[self::REQUEST_PARAM_NAME];
+            $oCookie->set(self::COOKIE_NAME, $this->sUserTpl, static::COOKIE_LIFETIME);
+        } elseif ($oCookie->exists(self::COOKIE_NAME)) {
+            $this->sUserTpl = $oCookie->get(self::COOKIE_NAME);
         }
 
         unset($oCookie);
