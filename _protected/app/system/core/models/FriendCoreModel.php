@@ -134,7 +134,8 @@ class FriendCoreModel extends Model
      */
     public static function total($iProfileId)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(friendId) AS totalFds FROM' . Db::prefix(DbTableName::MEMBER_FRIEND) .
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(friendId) AS totalFds FROM' .
+            Db::prefix(DbTableName::MEMBER_FRIEND) .
             'WHERE (profileId = :profileId OR friendId= :profileId)');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);

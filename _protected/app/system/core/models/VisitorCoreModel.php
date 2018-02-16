@@ -104,6 +104,7 @@ class VisitorCoreModel
 
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
+
         return (int)$oRow->totalVisitors;
     }
 
