@@ -219,6 +219,10 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Captcha') . '</h3>'));
 
+        $oForm->addElement(new \PFBC\Element\Select(t('Captcha Complexity:'), 'captcha_complexity', array(5, 7, 9), array('value' => DbConfig::getSetting('captchaComplexity'), 'required' => 1)));
+
+        $oForm->addElement(new \PFBC\Element\Select(t('Captcha Case Sensitive:'), 'captcha_case_sensitive', array('1' => t('Yes'), '0' => t('No')), array('value' => DbConfig::getSetting('captchaCaseSensitive'), 'required' => 1)));
+
         $oForm->addElement(new \PFBC\Element\Select(t('Captcha for User Signup Form:'), 'is_captcha_user_signup', array('1' => t('Activate'), '0' => t('Deactivate')), array('value' => DbConfig::getSetting('isCaptchaUserSignup'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Captcha for Affiliate Signup Form:'), 'is_captcha_affiliate_signup', array('1' => t('Activate'), '0' => t('Deactivate')), array('value' => DbConfig::getSetting('isCaptchaAffiliateSignup'), 'required' => 1)));

@@ -106,6 +106,8 @@ class SettingFormProcess extends Form
         'time_delay_send_forum_msg' => 'timeDelaySendForumMsg',
 
         // Captcha
+        'captcha_complexity' => 'captchaComplexity',
+        'captcha_case_sensitive' => 'captchaCaseSensitive',
         'is_captcha_user_signup' => 'isCaptchaUserSignup',
         'is_captcha_affiliate_signup' => 'isCaptchaAffiliateSignup',
         'is_captcha_mail' => 'isCaptchaMail',

@@ -10,7 +10,10 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Security\Spam\Captcha\Captcha;
 
-(new Captcha)->show((new Http)->getExists('r'));
+$iComplexity = DbConfig::getSetting('captchaComplexity');
+
+(new Captcha)->show((new Http)->getExists('r'), $iComplexity);
