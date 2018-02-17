@@ -82,6 +82,10 @@ class Newsletter extends Core
      * @param Mail $oMail
      *
      * @return int Number of recipients who were accepted for delivery.
+     *
+     * @throws \Swift_RfcComplianceException
+     * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
     private function sendMail(stdClass $oSubscriber, Mail $oMail)
     {
