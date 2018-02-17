@@ -33,8 +33,8 @@ class UserCoreModel extends Model
     const BUSY_STATUS = 2;
     const AWAY_STATUS = 3;
 
-    const PENDING_GROUP = 1;
-    const VISITOR_GROUP = 9;
+    const VISITOR_GROUP = 1;
+    const PENDING_GROUP = 9;
 
     /** @var string */
     protected $sCurrentDate;
