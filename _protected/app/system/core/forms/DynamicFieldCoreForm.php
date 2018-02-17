@@ -105,11 +105,21 @@ class DynamicFieldCoreForm
         return $this->oForm;
     }
 
+    /**
+     * @param string $sType
+     *
+     * @return string
+     */
     protected function getFieldId($sType)
     {
         return $sType . '_' . $this->sColumn;
     }
 
+    /**
+     * @param string $sType
+     *
+     * @return void
+     */
     protected function addCheckErrSpan($sType)
     {
         $this->oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ' . $this->getFieldId($sType) . '"></span>'));
@@ -118,7 +128,7 @@ class DynamicFieldCoreForm
     /**
      * Generate other PFBC fields according to the Field Type.
      *
-     * @return string PFBC Form Type
+     * @return string PFBC form type.
      */
     protected function getFieldType()
     {
