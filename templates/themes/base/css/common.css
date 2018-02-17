@@ -358,9 +358,9 @@ img, video, iframe {
     .profile_desc {
         float: right;
         max-width: 500px;
-        position: absolute;
         margin-left: 25%;
-        margin-top: -58rem;
+        position: absolute;
+        top: 20rem;
     }
 }
 
