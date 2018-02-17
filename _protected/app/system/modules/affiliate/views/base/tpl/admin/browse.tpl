@@ -84,7 +84,7 @@
                         <td>{% $aff->refer %}</td>
                         <td>{% $aff->bankAccount %}</td>
                         <td>
-                            <img src="{{ $design->getSmallFlagIcon(Framework\Geo\Ip\Geo::getCountryCode($aff->ip)) }}" title="{lang 'IP Country'}" alt="{lang 'IP Country'}" /> {{ $design->ip($aff->ip) }}
+                            <img src="{{ $design->getSmallFlagIcon(Framework\Geo\Ip\Geo::getCountryCode($aff->ip)) }}" title="{lang 'Country Flag'}" alt="{lang 'Country Flag'}" /> {{ $design->ip($aff->ip) }}
                         </td>
                         <td class="small">{% $dateTime->get($aff->joinDate)->dateTime() %}</td>
                         <td class="small">

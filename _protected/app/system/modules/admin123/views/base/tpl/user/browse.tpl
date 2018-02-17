@@ -85,7 +85,7 @@
                         </td>
                         <td>{{ $avatarDesign->get($user->username, $user->firstName, null, 32) }}</td>
                         <td>
-                            <img src="{{ $design->getSmallFlagIcon(Framework\Geo\Ip\Geo::getCountryCode($user->ip)) }}" title="{lang 'IP Country'}" alt="{lang 'IP Country'}" /> {{ $design->ip($user->ip) }}
+                            <img src="{{ $design->getSmallFlagIcon(Framework\Geo\Ip\Geo::getCountryCode($user->ip)) }}" title="{lang 'Country Flag'}" alt="{lang 'Country Flag'}" /> {{ $design->ip($user->ip) }}
                         </td>
                         <td>{% $user->membershipName %} ({% $user->groupId %})</td> {* Name of the Membership Group *}
                         <td class="small">{% $dateTime->get($user->joinDate)->dateTime() %}</td>
