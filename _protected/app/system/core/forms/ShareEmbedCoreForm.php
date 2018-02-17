@@ -28,8 +28,8 @@ class ShareEmbedCoreForm
         </object>';
 
         $oForm = new \PFBC\Form('form_share_embed', $iWidth);
-        $oForm->configure(array('class' => 'center'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Embed Code'), 'embed', array('value' => $sEmbedCode, 'readonly' => 'readonly', 'onclick' => 'this.select()')));
+        $oForm->configure(['action' => '', 'class' => 'center']);
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Embed Code'), 'embed', ['value' => $sEmbedCode, 'readonly' => 'readonly', 'onclick' => 'this.select()']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br />'));
         $oForm->render();
     }
