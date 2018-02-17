@@ -21,6 +21,7 @@ use PH7\Framework\Util\Various;
 class Captcha
 {
     const NUM_CHARACTER_CAPTCHA = 5;
+    const RELOAD_ICON_FILENAME = 'reload.svg';
     const SESSION_NAME = 'rand_code';
 
     /** @var Session */
@@ -198,7 +199,7 @@ class Captcha
         echo // The captcha stylesheet that is now in the file form.css
         '<div class="center">
            <img class="border captcha" src="', PH7_URL_ROOT, 'asset/file/captcha/?r=', md5(time()), '" id="captcha" alt="Captcha Image" />
-           <a class="captcha_button" href="#" onclick="document.getElementById(\'captcha\').src =\'', PH7_URL_ROOT, 'asset/file/captcha/?r=\' + Math.random(); return false"><img src="', PH7_URL_STATIC, PH7_IMG, 'icon/reload.svg" onclick="this.blur()" id="refresh" alt="Refresh Image" title="Refresh Image" /></a>
+           <a class="captcha_button" href="#" onclick="document.getElementById(\'captcha\').src =\'', PH7_URL_ROOT, 'asset/file/captcha/?r=\' + Math.random(); return false"><img src="', PH7_URL_STATIC, PH7_IMG, 'icon/', self::RELOAD_ICON_FILENAME, '" onclick="this.blur()" id="refresh" alt="Refresh Image" title="Refresh Image" /></a>
          </div>';
     }
 
