@@ -40,7 +40,7 @@ class ConfigFileCoreForm
         }
 
         $oForm = new \PFBC\Form('form_config');
-        $oForm->configure(array('action' => ''));
+        $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_config', 'form_config'));
         $oForm->addElement(new \PFBC\Element\Token('config'));
 
@@ -49,15 +49,15 @@ class ConfigFileCoreForm
             $sLabel = self::getLabelText($sKey);
 
             if (false !== strpos($sKey, 'enable')) {
-                $oForm->addElement(new \PFBC\Element\Select($sLabel, 'config[' . $sKey . ']', array(1 => t('Enable'), 0 => t('Disable')), array('value' => $sVal)));
+                $oForm->addElement(new \PFBC\Element\Select($sLabel, 'config[' . $sKey . ']', [1 => t('Enable'), 0 => t('Disable')], ['value' => $sVal]));
             } elseif (false !== strpos($sKey, 'email')) {
-                $oForm->addElement(new \PFBC\Element\Email($sLabel, 'config[' . $sKey . ']', array('value' => $sVal)));
+                $oForm->addElement(new \PFBC\Element\Email($sLabel, 'config[' . $sKey . ']', ['value' => $sVal]));
             } elseif (false !== strpos($sKey, 'environment')) {
-                $oForm->addElement(new \PFBC\Element\Select($sLabel, 'config[' . $sKey . ']', array('production' => t('Production'), 'development' => t('Development')), array('description' => t('If you see "Internal Server Error" message on your site, please set to "development" mode in order to see the details of the error. If your site is on production (and visible by everyone) please set it to the production mode for security reason.'), 'value' => $sVal)));
+                $oForm->addElement(new \PFBC\Element\Select($sLabel, 'config[' . $sKey . ']', ['production' => t('Production'), 'development' => t('Development')], ['description' => t('If you see "Internal Server Error" message on your site, please set to "development" mode in order to see the details of the error. If your site is on production (and visible by everyone) please set it to the production mode for security reason.'), 'value' => $sVal]));
             } elseif (ctype_digit($sVal)) {
-                $oForm->addElement(new \PFBC\Element\Number($sLabel, 'config[' . $sKey . ']', array('step' => 'any', 'value' => $sVal)));
+                $oForm->addElement(new \PFBC\Element\Number($sLabel, 'config[' . $sKey . ']', ['step' => 'any', 'value' => $sVal]));
             } else {
-                $oForm->addElement(new \PFBC\Element\Textbox($sLabel, 'config[' . $sKey . ']', array('value' => $sVal)));
+                $oForm->addElement(new \PFBC\Element\Textbox($sLabel, 'config[' . $sKey . ']', ['value' => $sVal]));
             }
         }
         unset($aData);

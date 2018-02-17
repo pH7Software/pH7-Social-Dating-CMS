@@ -31,7 +31,7 @@ class LinkCoreForm
         $sUrl = self::getFormUrl($sModule, $sController, $sAction);
 
         $oForm = new \PFBC\Form('form_link');
-        $oForm->configure(array('action' => $sUrl, 'class' => 'form_link'));
+        $oForm->configure(['action' => $sUrl, 'class' => 'form_link']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_link', 'form_link'));
         $oForm->addElement(new \PFBC\Element\Token(substr($sUrl, -14, -6))); // Create a name token and generate a random token
 
