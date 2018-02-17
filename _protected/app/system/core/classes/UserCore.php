@@ -492,7 +492,7 @@ class UserCore
             $oUserModel = new AffiliateCoreModel;
             if ($oUserModel->validateAccount($sEmail, $sHash, $sTable)) {
                 $iId = $oUserModel->getId($sEmail, null, $sTable);
-                if ($sMod != 'newsletter') {
+                if ($sMod !== 'newsletter') {
                     $this->clearReadProfileCache($iId, $sTable);
                 }
 
