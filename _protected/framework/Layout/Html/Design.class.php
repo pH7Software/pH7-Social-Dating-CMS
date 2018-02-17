@@ -825,7 +825,7 @@ class Design
 
             echo '<a rel="nofollow" href="', $sReportLink, '" title="', t('Report Abuse'), '"><i class="fa fa-flag smooth-pink"></i></a>';
         } else {
-            echo '<abbr title="' . t('Report feature is not available for this content since the user who posted that content has been deleted.') . '""><i class="fa fa-flag smooth-pink"></i></abbr>';
+            echo '<abbr title="' . t('Report feature is not available for this content since the user who posted that content has been removed.') . '""><i class="fa fa-flag smooth-pink"></i></abbr>';
         }
     }
 
