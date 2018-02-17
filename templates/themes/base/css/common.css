@@ -72,11 +72,11 @@ header, #content {
 }
 
 #headings, .loginas, .noscript {
-    margin-top: 65px;
+    margin-top: 6rem;
 }
 
 .loginas {
-    margin-bottom: -40px;
+    margin-bottom: -6rem;
 }
 
 #content::after {
