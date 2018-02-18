@@ -13,7 +13,6 @@ use PH7\Framework\Url\Header;
 
 class ScriptForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_script'])) {
@@ -32,5 +31,4 @@ class ScriptForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }
