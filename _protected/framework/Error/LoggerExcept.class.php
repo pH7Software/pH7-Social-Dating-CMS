@@ -82,11 +82,13 @@ final class LoggerExcept extends Logger
                 $sFullGzipFile = $this->sDir . static::EXCEPT_DIR . static::GZIP_DIR . $this->sFileName . '.gz';
 
                 if ($this->isGzipEligible($sFullFile)) {
-                    $rHandler = @gzopen($sFullGzipFile, 'a') or exit('Unable to write to log gzip file.');
+                    $sErrMsg = Debug::is() ? 'Unable to write: ' . $sFullGzipFile : 'Unable to write to log gzip file';
+                    $rHandler = @gzopen($sFullGzipFile, 'a') or exit($sErrMsg);
                     gzwrite($rHandler, $sContents);
                     gzclose($rHandler);
                 } else {
-                    $rHandler = @fopen($sFullFile, 'a') or exit('Unable to write to log file.');
+                    $sErrMsg = Debug::is() ? 'Unable to write: ' . $sFullFile : 'Unable to write to log file';
+                    $rHandler = @fopen($sFullFile, 'a') or exit($sErrMsg);
                     fwrite($rHandler, $sContents);
                     fclose($rHandler);
                 }
