@@ -86,6 +86,6 @@ class JoinFormProcess extends Form
      */
     private function isUserActivated()
     {
-        return $this->iActiveType == 0;
+        return $this->iActiveType == 1;
     }
 }
