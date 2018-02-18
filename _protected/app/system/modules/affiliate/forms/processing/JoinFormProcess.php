@@ -19,6 +19,7 @@ use PH7\Framework\Util\Various;
 
 class JoinFormProcess extends Form
 {
+    /** @var int */
     private $iActiveType;
 
     public function __construct()
