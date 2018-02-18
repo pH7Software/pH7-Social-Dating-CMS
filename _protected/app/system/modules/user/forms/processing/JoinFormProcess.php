@@ -70,7 +70,7 @@ class JoinFormProcess extends Form
              * Update the Affiliate Commission
              * Only if the user's account is already activated
              */
-            if ($this->iActiveType == 0) {
+            if ($this->isUserActivated()) {
                 AffiliateCore::updateJoinCom($iAffId, $this->config, $this->registry);
             }
 
@@ -182,5 +182,13 @@ class JoinFormProcess extends Form
         $this->session->remove($sVariableName);
 
         return $sRef;
+    }
+
+    /**
+     * @return bool
+     */
+    private function isUserActivated()
+    {
+        return $this->iActiveType == 1;
     }
 }
