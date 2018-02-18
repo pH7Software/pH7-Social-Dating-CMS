@@ -27,7 +27,7 @@ class LoginForm
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_login_aff', 'form_login_aff'));
         $oForm->addElement(new \PFBC\Element\Token('login'));
-        $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('id' => 'email_login', 'onblur' => 'CValid(this.value, this.id,\'user\',\'Affiliates\')', 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('id' => 'email_login', 'onblur' => 'CValid(this.value, this.id,\'user\',\'' . DbTableName::AFFILIATE . '\')', 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error email_login"></span>'));
         $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', array('required' => 1)));
 
