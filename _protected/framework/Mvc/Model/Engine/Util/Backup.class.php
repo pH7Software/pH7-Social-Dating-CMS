@@ -157,7 +157,7 @@ class Backup
     /**
      * Restore SQL backup file.
      *
-     * @return boolean|string Returns TRUE if there are no errors, otherwise returns "the error message".
+     * @return bool|string Returns TRUE if there are no errors, otherwise returns "the error message".
      */
     public function restore()
     {
@@ -168,7 +168,7 @@ class Backup
     /**
      * Restore the gzip compressed archive backup.
      *
-     * @return boolean|string Returns TRUE if there are no errors, otherwise returns "the error message".
+     * @return bool|string Returns TRUE if there are no errors, otherwise returns "the error message".
      */
     public function restoreArchive()
     {
@@ -211,7 +211,7 @@ class Backup
     /**
      * Generic method that allows you to download a file or a SQL gzip file compressed archive.
      *
-     * @param boolean $bArchive If TRUE, the string will be compressed in gzip.
+     * @param bool $bArchive If TRUE, the string will be compressed in gzip.
      *
      * @return void
      */
