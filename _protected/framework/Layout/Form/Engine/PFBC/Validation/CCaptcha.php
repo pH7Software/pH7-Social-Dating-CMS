@@ -15,7 +15,7 @@ class CCaptcha extends \PFBC\Validation
 
     public function __construct()
     {
-        $this->bIsCaseSensitive = DbConfig::getSetting('captchaCaseSensitive');
+        $this->bIsCaseSensitive = (bool)DbConfig::getSetting('captchaCaseSensitive');
         $this->message = t('The code of Captcha entered was incorrect. Please re-try.');
     }
 
