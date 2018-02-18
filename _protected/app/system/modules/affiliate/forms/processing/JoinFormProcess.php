@@ -66,8 +66,9 @@ class JoinFormProcess extends Form
             // Successful registration in the database!
 
             /** Update the Affiliate Commission **/
-            if ($this->iActiveType == 0) // Only if the user's account is already activated.
+            if ($this->isUserActivated()) {
                 AffiliateCore::updateJoinCom($iAffId, $this->config, $this->registry);
+            }
 
             // Send an email and sets the welcome message.
             \PFBC\Form::setSuccess(
@@ -77,5 +78,13 @@ class JoinFormProcess extends Form
         }
 
         unset($oAffModel);
+    }
+
+    /**
+     * @return bool
+     */
+    private function isUserActivated()
+    {
+        return $this->iActiveType == 0;
     }
 }
