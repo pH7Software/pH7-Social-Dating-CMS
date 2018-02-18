@@ -68,7 +68,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Privacy Settings
 * Banner/Advertisement Management
 * User Dashboard
-* Dating-style Profile page
+* Dating-Style Profile Page
 * Fake Profile Generator
 * CSV User Importer
 * Support for Multiple Languages, Internationalization and Localization (I18N)
