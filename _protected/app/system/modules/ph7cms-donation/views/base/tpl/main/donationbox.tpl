@@ -13,5 +13,9 @@
             <a href="https://www.patreon.com/bePatron?u=3534366">{lang 'Become a Patron!'}</a>
         </p>
     </div>
-    <p class="center">{lang}Will You Be Nice Today...? Be like 78% of our users who contribute to the software on a regular basis.{/lang}</p>
+    <p class="center">
+        {lang}Will You Be Nice Today...?{/lang}<br />
+        <span class="bold">{lang}And improve your website with regular updates.{/lang}</span><br />
+        <span class="underline">{lang}Be like 78% of our users who contribute to the software on a regular basis.{/lang}</span>
+    </p>
 </div>
