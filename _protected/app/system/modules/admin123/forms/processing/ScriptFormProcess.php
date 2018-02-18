@@ -33,6 +33,10 @@ class ScriptFormProcess extends Form
 
     private function clearCache()
     {
-        (new Cache)->start(Design::CACHE_STATIC_GROUP, 'customCodejs', null)->clear();
+        (new Cache)->start(
+            Design::CACHE_STATIC_GROUP,
+            'customCodejs',
+            null
+        )->clear();
     }
 }
