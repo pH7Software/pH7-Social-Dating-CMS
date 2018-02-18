@@ -16,7 +16,7 @@
  *
  * @author          Pierre-Henry SORIA <ph7software@gmail.com>
  * @copyright       (c) 2011-2018, Pierre-Henry Soria, All Rights Reserved.
- * @version         Last update 11/15/2017
+ * @version         Last update 02/04/2018
  * @package         pH7CMS
  */
 
