@@ -244,6 +244,20 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\Number(t('Delete old IM Messages:'), 'clean_messenger', array('description' => t('Delete IM messages older than X days. 0 to disable.'), 'value' => DbConfig::getSetting('cleanMessenger'), 'required' => 1)));
 
 
+        /********** Design (Color) **********/
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="design"><div class="col-md-10"><h2 class="underline">' . t('Overwrite Website Colors)') . '</h2>'));
+
+        $oForm->addElement(new \PFBC\Element\Color(t('Website Background:'), 'background_color', array('value' => DbConfig::getSetting('backgroundColor'))));
+
+        $oForm->addElement(new \PFBC\Element\Color(t('Text:'), 'text_color', array('value' => DbConfig::getSetting('textColor'))));
+
+        $oForm->addElement(new \PFBC\Element\Color(t('Links:'), 'link_color', array('value' => DbConfig::getSetting('linkColor'))));
+
+        $oForm->addElement(new \PFBC\Element\Color(t('Footer Links:'), 'footer_link_color', array('value' => DbConfig::getSetting('footerLinkColor'))));
+
+        $oForm->addElement(new \PFBC\Element\Color(t('Links hover:'), 'link_hover_color', array('value' => DbConfig::getSetting('linkHoverColor'))));
+
+
         /********** API **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="api"><div class="col-md-10"><h2 class="underline">' . t('API') . '</h2>'));
 

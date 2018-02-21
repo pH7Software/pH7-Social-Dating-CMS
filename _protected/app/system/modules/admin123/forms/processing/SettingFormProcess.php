@@ -119,6 +119,13 @@ class SettingFormProcess extends Form
         'clean_comment' => 'cleanComment',
         'clean_messenger' => 'cleanMessenger',
 
+        // Design
+        'background_color' => 'backgroundColor',
+        'text_color' => 'textColor',
+        'link_color' => 'linkColor',
+        'footer_link_color' => 'footerLinkColor',
+        'link_hover_color' => 'linkHoverColor',
+
         // API
         'google_api_key' => 'googleApiKey',
         'ip_api' => 'ipApi',
