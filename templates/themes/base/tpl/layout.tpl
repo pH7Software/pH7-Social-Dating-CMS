@@ -39,8 +39,8 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans" />
 
     {* Custom CSS code *}
-    {{ $design->externalCssFile(PH7_RELATIVE.'asset/css/style.css') }}
     {{ $design->externalCssFile(PH7_RELATIVE.'asset/css/color.css') }}
+    {{ $design->externalCssFile(PH7_RELATIVE.'asset/css/style.css') }}
 
     {if $is_user_auth AND $is_im_enabled}
       {{ $design->staticFiles('css', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_CSS, 'messenger.css') }}
