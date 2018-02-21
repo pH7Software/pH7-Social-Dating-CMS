@@ -22,6 +22,7 @@ class SettingFormProcess extends Form
     const LOGO_WIDTH = 50;
     const LOGO_HEIGHT = 45;
     const MAX_WATERMARK_SIZE = 5;
+    const DEFAULT_BROWSER_HEX_CODE = '#000000';
 
     /** @var boolean */
     private $bIsErr = false;
@@ -202,6 +203,16 @@ class SettingFormProcess extends Form
                         if ($this->httpRequest->post('size_watermark_text_image') >= 0 &&
                             $this->httpRequest->post('size_watermark_text_image') <= self::MAX_WATERMARK_SIZE) {
                             DbConfig::setSetting($this->httpRequest->post('size_watermark_text_image'), 'sizeWatermarkTextImage');
+                        }
+                    } break;
+
+                    case 'background_color':
+                    case 'text_color':
+                    case 'footer_link_color':
+                    case 'link_hover_color': {
+                        // Don't update if value wasn't changed by user but was set by browser because field was empty
+                        if ($this->httpRequest->post($sKey) !== self::DEFAULT_BROWSER_HEX_CODE) {
+                            DbConfig::setSetting($this->httpRequest->post($sKey), $sVal);
                         }
                     } break;
 
