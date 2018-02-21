@@ -33,6 +33,10 @@ class Validate
     const MIN_NAME_LENGTH = 2;
     const MAX_NAME_LENGTH = 20;
 
+    const HEX_HASH = '#';
+    const MIN_HEX_LENGTH = 3;
+    const MAX_HEX_LENGTH = 6;
+
     const DEF_MIN_USERNAME_LENGTH = 3;
     const DEF_MIN_PASS_LENGTH = 6;
     const DEF_MAX_PASS_LENGTH = 60;
@@ -364,6 +368,19 @@ class Validate
     public function phone($sNumber)
     {
         return preg_match('#^' . Config::getInstance()->values['validate']['phone.pattern'] . '$#', $sNumber);
+    }
+
+    /**
+     * @param string $sHexCode
+     *
+     * @return bool
+     */
+    public function hex($sHexCode)
+    {
+        $sHexChars = str_replace(self::HEX_HASH, '', $sHexCode);
+        $iLength = strlen($sHexChars);
+
+        return strpos($sHexCode, '#') !== false && $iLength >= self::MIN_HEX_LENGTH && $iLength <= self::MAX_HEX_LENGTH;
     }
 
     /**
