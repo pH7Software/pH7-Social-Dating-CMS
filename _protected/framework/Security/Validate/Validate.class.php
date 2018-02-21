@@ -56,9 +56,9 @@ class Validate
      *
      * @param string $sValue
      * @param string $sType Type whose value should be (case-insensitive).
-     * @param boolean $bRequired Default TRUE
+     * @param bool $bRequired Default TRUE
      *
-     * @return boolean
+     * @return bool
      *
      * @throws PH7InvalidArgumentException If the type doesn't exist.
      */
@@ -120,10 +120,10 @@ class Validate
      * Validate Is String.
      *
      * @param $sValue
-     * @param integer $iMin Default NULL
-     * @param integer $iMax Default NULL
+     * @param int $iMin Default NULL
+     * @param int $iMax Default NULL
      *
-     * @return boolean
+     * @return bool
      */
     public function str($sValue, $iMin = null, $iMax = null)
     {
@@ -143,13 +143,13 @@ class Validate
     }
 
     /**
-     * Validate if it's Integer.
+     * Validate if it's int.
      *
-     * @param integer $iInt
-     * @param integer $iMin Default 0
-     * @param integer $iMax Default 999999999999
+     * @param int $iInt
+     * @param int $iMin Default 0
+     * @param int $iMax Default 999999999999
      *
-     * @return boolean
+     * @return bool
      */
     public function int($iInt, $iMin = 0, $iMax = self::MAX_INT_NUMBER)
     {
@@ -162,9 +162,9 @@ class Validate
     /**
      * Validate if it's Numeric.
      *
-     * @param mixed (numeric string | integer) $mNumeric
+     * @param string|int (numeric string or integer) $mNumeric
      *
-     * @return boolean
+     * @return bool
      */
     public function numeric($mNumeric)
     {
@@ -176,7 +176,7 @@ class Validate
      *
      * @param string (numeric string) $sDigit
      *
-     * @return boolean
+     * @return bool
      */
     public function digitChar($sDigit)
     {
@@ -187,10 +187,10 @@ class Validate
      * Validate if it's Float type.
      *
      * @param float $fFloat
-     * @param float|integer $mMin Default 0
-     * @param float|integer $mMax Default 999999999999
+     * @param float|int $mMin Default 0
+     * @param float|int $mMax Default 999999999999
      *
-     * @return boolean
+     * @return bool
      */
     public function float($fFloat, $mMin = 0, $mMax = self::MAX_INT_NUMBER)
     {
@@ -215,11 +215,11 @@ class Validate
      * Validate Username.
      *
      * @param string $sUsername
-     * @param integer $iMin Default 3
-     * @param integer $iMax Default 40
+     * @param int $iMin Default 3
+     * @param int $iMax Default 40
      * @param string $sTable Default DbTableName::MEMBER
      *
-     * @return boolean
+     * @return bool
      */
     public function username($sUsername, $iMin = self::DEF_MIN_USERNAME_LENGTH, $iMax = PH7_MAX_USERNAME_LENGTH, $sTable = DbTableName::MEMBER)
     {
@@ -236,10 +236,10 @@ class Validate
      * Validate Password.
      *
      * @param string $sPwd
-     * @param integer $iMin Default 6
-     * @param integer $iMax Default 60
+     * @param int $iMin Default 6
+     * @param int $iMax Default 60
      *
-     * @return boolean
+     * @return bool
      */
     public function password($sPwd, $iMin = self::DEF_MIN_PASS_LENGTH, $iMax = self::DEF_MAX_PASS_LENGTH)
     {
@@ -252,9 +252,9 @@ class Validate
      * Validate Email.
      *
      * @param string $sEmail
-     * @param boolean $bRealHost Checks whether the Email Host is valid.
+     * @param bool $bRealHost Checks whether the Email Host is valid.
      *
-     * @return boolean
+     * @return bool
      */
     public function email($sEmail, $bRealHost = false)
     {
@@ -276,10 +276,10 @@ class Validate
      * Validate Birthday.
      *
      * @param string $sValue The date format must be formatted like this: mm/dd/yyyy
-     * @param integer $iMin Default 18
-     * @param integer $iMax Default 99
+     * @param int $iMin Default 18
+     * @param int $iMax Default 99
      *
-     * @return boolean
+     * @return bool
      */
     public function birthDate($sValue, $iMin = self::DEF_MIN_AGE, $iMax = self::DEF_MAX_AGE)
     {
@@ -302,7 +302,7 @@ class Validate
      *
      * @param string $sValue
      *
-     * @return boolean
+     * @return bool
      */
     public function date($sValue)
     {
@@ -318,9 +318,9 @@ class Validate
      * Validate URL.
      *
      * @param string $sUrl
-     * @param boolean $bRealUrl Checks if the current URL exists.
+     * @param bool $bRealUrl Checks if the current URL exists.
      *
-     * @return boolean
+     * @return bool
      */
     public function url($sUrl, $bRealUrl = false)
     {
@@ -351,7 +351,7 @@ class Validate
      *
      * @param string $sIp
      *
-     * @return boolean
+     * @return bool
      */
     public function ip($sIp)
     {
@@ -363,7 +363,7 @@ class Validate
      *
      * @param string $sNumber
      *
-     * @return boolean
+     * @return bool
      */
     public function phone($sNumber)
     {
@@ -387,10 +387,10 @@ class Validate
      * Validate Name.
      *
      * @param string $sName
-     * @param integer $iMin Default 2
-     * @param integer $iMax Default 20
+     * @param int $iMin Default 2
+     * @param int $iMax Default 20
      *
-     * @return boolean
+     * @return bool
      */
     public function name($sName, $iMin = self::MIN_NAME_LENGTH, $iMax = self::MAX_NAME_LENGTH)
     {
@@ -413,7 +413,7 @@ class Validate
      *
      * @param string $sEmail
      *
-     * @return boolean
+     * @return bool
      */
     /*
     public function emailHost($sEmail)
@@ -470,8 +470,8 @@ class Validate
     /**
      * Get option for some filter_var().
      *
-     * @param float|integer $mMin Minimum range.
-     * @param float|integer $mMax Maximum range.
+     * @param float|int $mMin Minimum range.
+     * @param float|int $mMax Maximum range.
      *
      * @return array
      */
