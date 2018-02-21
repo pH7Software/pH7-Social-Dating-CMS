@@ -1,6 +1,6 @@
 <?php
 /**
- * I made changes in this code (by Pierre-Henry SORIA).
+ * I made changes in this file (by Pierre-Henry SORIA).
  */
 
 namespace PFBC\Element;
