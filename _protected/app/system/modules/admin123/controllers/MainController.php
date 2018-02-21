@@ -20,7 +20,10 @@ class MainController extends Controller
     {
         // Add ph7cms-donation JS file if needed
         if (ValidateSiteCore::needInject(new ValidateSiteCoreModel, $this->session)) {
-            $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . 'ph7cms-donation' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'donationbox.js');
+            $this->design->addJs(
+                PH7_LAYOUT . PH7_SYS . PH7_MOD . 'ph7cms-donation' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
+                'donationbox.js'
+            );
         }
 
         $this->view->page_title = t('Admin Panel');
@@ -65,7 +68,10 @@ class MainController extends Controller
     protected function addStats()
     {
         // Adding the common CSS for the chart.
-        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'general.css');
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
+            'general.css'
+        );
 
         $oStatModel = new StatisticCoreModel;
 
@@ -315,7 +321,8 @@ class MainController extends Controller
             $aLatestVerInfo = Version::getLatestInfo();
             $sLatestVer = t('%0% build %1%', $aLatestVerInfo['version'], $aLatestVerInfo['build']);
 
-            $this->design->setMessage(t('%software_name% <strong>%0%</strong> is available! Please <a href="%1%" target="_blank">update it today</a> to keep your site safe and stable.', $sLatestVer, Core::SOFTWARE_LICENSE_KEY_URL));
+            $sMsg = t('%software_name% <strong>%0%</strong> is available! Please <a href="%1%" target="_blank">update it today</a> to keep your site safe and stable.', $sLatestVer, Core::SOFTWARE_LICENSE_KEY_URL);
+            $this->design->setMessage($sMsg);
         }
     }
 }
