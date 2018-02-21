@@ -143,7 +143,7 @@ class Validate
     }
 
     /**
-     * Validate if it's int.
+     * Validate if it's an integer.
      *
      * @param int $iInt
      * @param int $iMin Default 0
@@ -160,7 +160,7 @@ class Validate
     }
 
     /**
-     * Validate if it's Numeric.
+     * Validate if it's a numeric.
      *
      * @param string|int (numeric string or integer) $mNumeric
      *
@@ -172,7 +172,7 @@ class Validate
     }
 
     /**
-     * Validate if it's Digit Character.
+     * Validate if it's a digit character.
      *
      * @param string (numeric string) $sDigit
      *
@@ -184,7 +184,7 @@ class Validate
     }
 
     /**
-     * Validate if it's Float type.
+     * Validate if it's a float type.
      *
      * @param float $fFloat
      * @param float|int $mMin Default 0
@@ -200,11 +200,11 @@ class Validate
     }
 
     /**
-     * Validate if it's Boolean type.
+     * Validate if it's a boolean type.
      *
-     * @param boolean $bBool
+     * @param bool $bBool
      *
-     * @return boolean
+     * @return bool
      */
     public function bool($bBool)
     {
@@ -459,7 +459,7 @@ class Validate
         }
         else
         {
-            // You can display an error message by uncommenting the following two lines or leave the return value of the boolean false.
+            // You can display an error message by uncommenting the following two lines or leave the return value of the false boolean.
             // echo "Cannot connect to the mail server\n";
             // echo "$iErrno - $sErrStr\n";
             return false;
