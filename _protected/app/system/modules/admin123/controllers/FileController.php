@@ -7,7 +7,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  * @version        1.4
- * @history        We have removed the functionality of deletions and adding files for security reasons and to maintain proper operation at CMS
+ * @history        Removed the functionality of deletions and adding files for security reasons and to maintain proper operations.
  */
 
 namespace PH7;
