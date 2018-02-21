@@ -19,7 +19,7 @@ $sFooterLinkColor = DbConfig::getSetting('footerLinkColor');
 $sLinkHoverColor = DbConfig::getSetting('linkHoverColor');
 
 if (!empty($sBackgroundColor)) {
-    printf('body {background-color: %s !important}', $sBackgroundColor);
+    printf('body {background-color: %s !important; background-image: none !important}', $sBackgroundColor);
 }
 
 if (!empty($sTextColor)) {
