@@ -8,6 +8,8 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Model\DbConfig;
+
 defined('PH7') or exit('Restricted access');
 
 $sBackgroundColor = DbConfig::getSetting('backgroundColor');
