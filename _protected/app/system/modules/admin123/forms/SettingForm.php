@@ -246,7 +246,7 @@ class SettingForm
 
 
         /********** Design (Color) **********/
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="design"><div class="col-md-10"><h2 class="underline">' . t('Overwrite Website Colors') . '</h2>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="design"><div class="col-md-10"><h2 class="underline">' . t('Override Website Colors') . '</h2>'));
 
         $oForm->addElement(new \PFBC\Element\Color(t('Website Background:'), 'background_color', array('value' => DbConfig::getSetting('backgroundColor'))));
 
