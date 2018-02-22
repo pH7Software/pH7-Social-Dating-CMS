@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Core\License;
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
@@ -41,15 +42,20 @@ class SettingController extends Controller
 
     public function resetColor()
     {
-        if (!(new SecurityToken)->checkUrl()) {
-            exit(Form::errorTokenMsg());
-        }
+        if ((new SecurityToken)->checkUrl()) {
+            $this->resetColorFields();
 
-        $this->resetColorFields();
+            $sMsg = t('Colors successfully reset!');
+            $sMsgType = Design::SUCCESS_TYPE;
+        } else {
+            $sMsg = Form::errorTokenMsg();
+            $sMsgType = Design::ERROR_TYPE;
+        }
 
         Header::redirect(
             Uri::get(PH7_ADMIN_MOD, 'setting', 'general') . '#p=design',
-            t('Colors successfully reset!')
+            $sMsg,
+            $sMsgType
         );
     }
 

@@ -10,6 +10,7 @@ namespace PH7;
 
 use PH7\Framework\Analytics\Statistic;
 use PH7\Framework\Http\Http;
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\Ban\Ban;
@@ -313,19 +314,23 @@ class MainController extends Controller
 
     public function removeThumb($iId)
     {
-        if (!(new SecurityToken)->checkUrl()) {
-            exit(Form::errorTokenMsg());
+        if ((new SecurityToken)->checkUrl()) {
+            $iProfileId = $this->session->get('member_id');
+            $this->deleteThumbFile($iId, $iProfileId);
+            $this->oNoteModel->deleteThumb($iId, $iProfileId);
+            Note::clearCache();
+
+            $sMsg = t('The thumbnail has been deleted successfully!');
+            $sMsgType = Design::SUCCESS_TYPE;
+        } else {
+            $sMsg = Form::errorTokenMsg();
+            $sMsgType = Design::ERROR_TYPE;
         }
 
-        $iProfileId = $this->session->get('member_id');
-
-        $this->deleteThumbFile($iId, $iProfileId);
-        $this->oNoteModel->deleteThumb($iId, $iProfileId);
-
-        Note::clearCache();
         Header::redirect(
             Uri::get('note', 'main', 'edit', $iId),
-            t('The thumbnail has been deleted successfully!')
+            $sMsg,
+            $sMsgType
         );
     }
 

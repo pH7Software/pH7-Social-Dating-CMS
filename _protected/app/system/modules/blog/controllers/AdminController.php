@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Url\Header;
@@ -54,15 +55,20 @@ class AdminController extends MainController
 
     public function removeThumb($iId)
     {
-        if (!(new SecurityToken)->checkUrl()) {
-            exit(Form::errorTokenMsg());
-        }
+        if ((new SecurityToken)->checkUrl()) {
+            (new Blog)->deleteThumb($iId, 'blog', $this->file);
 
-        (new Blog)->deleteThumb($iId, 'blog', $this->file);
+            $sMsg = t('The thumbnail has been deleted successfully!');
+            $sMsgType = Design::SUCCESS_TYPE;
+        } else {
+            $sMsg = Form::errorTokenMsg();
+            $sMsgType = Design::ERROR_TYPE;
+        }
 
         Header::redirect(
             Uri::get('blog', 'admin', 'edit', $iId),
-            t('The thumbnail has been deleted successfully!')
+            $sMsg,
+            $sMsgType
         );
     }
 }
