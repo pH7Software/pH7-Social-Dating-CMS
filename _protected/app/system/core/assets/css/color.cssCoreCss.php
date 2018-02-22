@@ -23,7 +23,7 @@ if (!empty($sBackgroundColor)) {
 }
 
 if (!empty($sTextColor)) {
-    printf('body {color: %s !important;', $sTextColor);
+    printf('body {color: %s !important}', $sTextColor);
 }
 
 if (!empty($sLinkColor)) {
