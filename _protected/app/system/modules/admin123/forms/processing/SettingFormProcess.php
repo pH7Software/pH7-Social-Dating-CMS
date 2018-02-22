@@ -147,7 +147,7 @@ class SettingFormProcess extends Form
 
         DbConfig::clearCache();
 
-        if (!$this->bIsErr) {
+        if ($this->noErrors()) {
             \PFBC\Form::setSuccess('form_setting', t('Configurations successfully updated!'));
         }
     }
@@ -265,5 +265,13 @@ class SettingFormProcess extends Form
     private function hasDataChanged($sKey, $sVal)
     {
         return !$this->str->equals($this->httpRequest->post($sKey), DbConfig::getSetting($sVal));
+    }
+
+    /**
+     * @return bool
+     */
+    private function noErrors()
+    {
+        return !$this->bIsErr;
     }
 }
