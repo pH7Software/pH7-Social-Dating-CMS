@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans" />
 
     {* Custom CSS code *}
+    {{ $design->externalCssFile(PH7_RELATIVE.'asset/css/color.css') }}
     {{ $design->externalCssFile(PH7_RELATIVE.'asset/css/style.css') }}
 
     {if $is_user_auth AND $is_im_enabled}

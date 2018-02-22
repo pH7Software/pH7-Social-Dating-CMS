@@ -1,6 +1,6 @@
 <?php
 /**
- * This code has been made by pH7 (Pierre-Henry SORIA).
+ * Created by Pierre-Henry Soria
  */
 
 namespace PFBC\Validation;

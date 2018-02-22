@@ -16,6 +16,6 @@ class Phone extends \PFBC\Validation
 
     public function isValid($sValue)
     {
-        return ($this->isNotApplicable($sValue) || $this->oValidate->phone($sValue));
+        return $this->isNotApplicable($sValue) || $this->oValidate->phone($sValue);
     }
 }

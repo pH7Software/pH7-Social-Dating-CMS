@@ -13,6 +13,7 @@ use PHPUnit_Framework_TestCase;
 
 class StrTest extends PHPUnit_Framework_TestCase
 {
+    /** @var Str */
     private $oStr;
 
     protected function setUp()

@@ -22,6 +22,7 @@ class SettingFormProcess extends Form
     const LOGO_WIDTH = 50;
     const LOGO_HEIGHT = 45;
     const MAX_WATERMARK_SIZE = 5;
+    const DEFAULT_BROWSER_HEX_CODE = '#000000';
 
     /** @var boolean */
     private $bIsErr = false;
@@ -119,6 +120,13 @@ class SettingFormProcess extends Form
         'clean_comment' => 'cleanComment',
         'clean_messenger' => 'cleanMessenger',
 
+        // Design
+        'background_color' => 'backgroundColor',
+        'text_color' => 'textColor',
+        'link_color' => 'linkColor',
+        'footer_link_color' => 'footerLinkColor',
+        'link_hover_color' => 'linkHoverColor',
+
         // API
         'google_api_key' => 'googleApiKey',
         'ip_api' => 'ipApi',
@@ -161,7 +169,7 @@ class SettingFormProcess extends Form
                         DbConfig::setSetting($iSecTokenLifetime, 'securityTokenLifetime');
                     }
                 }
-            } elseif (!$this->str->equals($this->httpRequest->post($sKey), DbConfig::getSetting($sVal))) {
+            } elseif ($this->hasDataChanged($sKey, $sVal)) {
                 switch ($sKey) {
                     case 'min_username_length': {
                         $iMaxUsernameLength = $this->httpRequest->post('max_username_length')-1;
@@ -195,6 +203,17 @@ class SettingFormProcess extends Form
                         if ($this->httpRequest->post('size_watermark_text_image') >= 0 &&
                             $this->httpRequest->post('size_watermark_text_image') <= self::MAX_WATERMARK_SIZE) {
                             DbConfig::setSetting($this->httpRequest->post('size_watermark_text_image'), 'sizeWatermarkTextImage');
+                        }
+                    } break;
+
+                    case 'background_color':
+                    case 'text_color':
+                    case 'link_color':
+                    case 'footer_link_color':
+                    case 'link_hover_color': {
+                        // Don't update if value wasn't changed by user but was set by browser because field was empty
+                        if ($this->httpRequest->post($sKey) !== self::DEFAULT_BROWSER_HEX_CODE) {
+                            DbConfig::setSetting($this->httpRequest->post($sKey), $sVal);
                         }
                     } break;
 
@@ -233,5 +252,18 @@ class SettingFormProcess extends Form
                 (new Browser)->noCache();
             }
         }
+    }
+
+    /**
+     * @param string $sKey
+     * @param string $sVal
+     *
+     * @return bool
+     *
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
+     */
+    private function hasDataChanged($sKey, $sVal)
+    {
+        return !$this->str->equals($this->httpRequest->post($sKey), DbConfig::getSetting($sVal));
     }
 }
