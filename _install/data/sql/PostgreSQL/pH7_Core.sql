@@ -1130,7 +1130,7 @@ ALTER SEQUENCE ph7_modules_seq RESTART WITH 1;
 
 INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of the SQL schema of pH7CMS (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.4.2', 1);
+('pH7CMS', 'SQL System Schema', '1.4.3', 1);
 
 
 CREATE SEQUENCE ph7_report_seq;
@@ -1164,6 +1164,11 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('adminEmail', @sAdminEmail, '', 'email'),
 ('defaultLanguage', 'en_US', '', 'language'),
 ('defaultTemplate', 'base', '', 'design'),
+('backgroundColor', '', 'Override background color. Leave empty to disable', 'design'),
+('textColor', '', 'Override text color. Leave empty to disable', 'design'),
+('linkColor', '', 'Override links color. Leave empty to disable', 'design'),
+('footerLinkColor', '', 'Override footer links color. Leave empty to disable', 'design'),
+('linkHoverColor', '', 'Override links hover color. Leave empty to disable', 'design'),
 ('defaultSysModule', 'user', 'The default module running by default on the index page. Recommended to keep the "user" module', 'general'),
 ('emailName', 'pH7CMS', '', 'email'),
 ('feedbackEmail', @sFeedbackEmail, '', 'email'),
@@ -1235,12 +1240,12 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('cleanMsg', 0, 'Delete messages older than X days. 0 = Disable', 'pruning'),
 ('cleanComment', 0, 'Delete comments older than X days. 0 = Disable', 'pruning'),
 ('cleanMessenger', 0, 'Delete IM messages older than X days. 0 = Disable', 'pruning'),
-('cronSecurityHash', 'change_this_secret_cron_word_by_yours', 'The secret word for the URL of the cron', 'automation'),
-('userTimeout', 1, 'User inactivity timeout. The number of minutes that a member becomes inactive (offline)', 'automation'),
 ('ipApi', @sIpApiUrl, 'IP Api URL', 'api'),
 ('chatApi', @sChatApiUrl, 'Chat Api URL', 'api'),
 ('chatrouletteApi', @sChatrouletteApiUrl, 'Chatroulette Api URL', 'api'),
 ('googleApiKey', '', 'Google Maps API key https://developers.google.com/maps/documentation/javascript/get-api-key', 'api'),
+('cronSecurityHash', 'change_this_secret_cron_word_by_yours', 'The secret word for the URL of the cron', 'automation'),
+('userTimeout', 1, 'User inactivity timeout. The number of minutes that a member becomes inactive (offline)', 'automation'),
 ('socialMediaWidgets', 0, 'Enable the Social Media Widgets such as Like and Sharing buttons. 0 = Disable | 1 = Enable', 'general'),
 ('disclaimer', 0, 'Enable a disclaimer to enter to the site. This is useful for sites with adult content. 0 = Disable | 1 = Enable', 'general'),
 ('cookieConsentBar', 0, 'Enable the cookie consent bar to prevent your users that your site uses cookies. 0 = Disable | 1 = Enable', 'general'),
