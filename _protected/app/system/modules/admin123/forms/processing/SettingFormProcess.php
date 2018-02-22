@@ -208,6 +208,7 @@ class SettingFormProcess extends Form
 
                     case 'background_color':
                     case 'text_color':
+                    case 'link_color':
                     case 'footer_link_color':
                     case 'link_hover_color': {
                         // Don't update if value wasn't changed by user but was set by browser because field was empty
