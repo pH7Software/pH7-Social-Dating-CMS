@@ -16,7 +16,7 @@ class Token extends Hidden
 
     public function __construct($sName)
     {
-        if (!$this->_isEnabled())
+        if (!$this->isEnabled())
             return; // If it's disabled, we stop the execution of the class
 
         $this->sName = $sName;
@@ -25,7 +25,7 @@ class Token extends Hidden
 
     public function render()
     {
-        if (!$this->_isEnabled())
+        if (!$this->isEnabled())
             return; // If it's disabled, we stop the execution of the class
 
         $this->validation[] = new ValidationToken($this->sName);
@@ -37,7 +37,7 @@ class Token extends Hidden
      *
      * @return boolean Returns TRUE if the security token is enabled, FALSE otherwise.
      */
-    private function _isEnabled()
+    private function isEnabled()
     {
         // Check if the CSRF security token for forms is enabled
         return DbConfig::getSetting('securityToken');
