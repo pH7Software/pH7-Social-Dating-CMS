@@ -169,7 +169,7 @@ class SettingFormProcess extends Form
                         DbConfig::setSetting($iSecTokenLifetime, 'securityTokenLifetime');
                     }
                 }
-            } elseif (!$this->str->equals($this->httpRequest->post($sKey), DbConfig::getSetting($sVal))) {
+            } elseif ($this->hasDataChanged($sKey, $sVal)) {
                 switch ($sKey) {
                     case 'min_username_length': {
                         $iMaxUsernameLength = $this->httpRequest->post('max_username_length')-1;
@@ -251,5 +251,18 @@ class SettingFormProcess extends Form
                 (new Browser)->noCache();
             }
         }
+    }
+
+    /**
+     * @param string $sKey
+     * @param string $sVal
+     *
+     * @return bool
+     *
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
+     */
+    private function hasDataChanged($sKey, $sVal)
+    {
+        return !$this->str->equals($this->httpRequest->post($sKey), DbConfig::getSetting($sVal));
     }
 }
