@@ -9,8 +9,10 @@
 namespace PH7;
 
 use PH7\Framework\Core\License;
+use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
+use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Header;
 
@@ -35,6 +37,20 @@ class SettingController extends Controller
 
         $this->view->page_title = $this->view->h1_title = t('General Settings');
         $this->output();
+    }
+
+    public function resetColor()
+    {
+        if (!(new SecurityToken)->checkUrl()) {
+            exit(Form::errorTokenMsg());
+        }
+
+        $this->resetColorFields();
+
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'setting', 'general') . '#p=design',
+            t('Colors successfully reset!')
+        );
     }
 
     public function ads()
@@ -115,6 +131,23 @@ class SettingController extends Controller
         }
 
         $this->output();
+    }
+
+    private function resetColorFields()
+    {
+        $aColorFields = [
+            'backgroundColor',
+            'textColor',
+            'linkColor',
+            'footerLinkColor',
+            'linkHoverColor'
+        ];
+
+        foreach ($aColorFields as $sFieldName) {
+            DbConfig::setSetting('', $sFieldName);
+        }
+
+        DbConfig::clearCache();
     }
 
     /**

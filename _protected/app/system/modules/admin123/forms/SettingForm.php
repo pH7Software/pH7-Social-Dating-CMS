@@ -13,6 +13,7 @@ use PH7\Framework\Ip\Ip;
 use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Header;
 
@@ -256,6 +257,10 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\Color(t('Footer Links:'), 'footer_link_color', array('value' => DbConfig::getSetting('footerLinkColor'))));
 
         $oForm->addElement(new \PFBC\Element\Color(t('Links hover:'), 'link_hover_color', array('value' => DbConfig::getSetting('linkHoverColor'))));
+
+        $oForm->addElement(new \PFBC\Element\HTMLExternal(
+            '<div class="right"><a href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'resetcolor', (new SecurityToken)->url(), false) . '">' . t('Reset Colors') . '</a></div>'
+        ));
 
 
         /********** API **********/
