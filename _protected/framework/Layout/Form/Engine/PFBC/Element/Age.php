@@ -30,7 +30,6 @@ class Age extends OptionElement
      *
      * @param array|null $aProperties
      */
-
     public function __construct($aProperties = null)
     {
         parent::__construct('', '', array(), $aProperties);
