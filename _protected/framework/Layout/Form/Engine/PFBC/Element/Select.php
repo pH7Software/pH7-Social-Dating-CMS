@@ -21,7 +21,7 @@ class Select extends \PFBC\OptionElement
             $this->attributes['value'] = array();
         }
 
-        if (!empty($this->attributes['multiple']) && substr($this->attributes['name'], -2) != '[]') {
+        if (!empty($this->attributes['multiple']) && substr($this->attributes['name'], -2) !== '[]') {
             $this->attributes['name'] .= '[]';
         }
 

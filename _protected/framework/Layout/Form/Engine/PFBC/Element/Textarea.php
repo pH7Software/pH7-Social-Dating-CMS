@@ -9,7 +9,6 @@ namespace PFBC\Element;
 
 class Textarea extends \PFBC\Element
 {
-
     protected $attributes = array('class' => 'pfbc-textarea', 'rows' => '5');
 
     public function jQueryDocumentReady()
@@ -29,5 +28,4 @@ class Textarea extends \PFBC\Element
 
         echo '</textarea><p><span id="', $this->attributes['id'], '_rem_len">' . $iLength . '</span> ', t('character(s).'), '</p>';
     }
-
 }

@@ -9,22 +9,38 @@ use PFBC\Element;
 
 class Button extends Element
 {
-    protected $attributes, $icon;
+    /** @var array */
+    protected $attributes;
 
+    /** @var string */
+    protected $icon;
+
+    /**
+     * @param string $sLabel
+     * @param string $sType
+     *
+     * @param array|null $aProperties
+     */
     public function __construct($sLabel = '', $sType = '', array $aProperties = null)
     {
-        if (empty($sLabel)) $sLabel = t('Submit'); // Default translation value
+        if (empty($sLabel)) {
+            // Default translation value
+            $sLabel = t('Submit');
+        }
 
         $this->attributes = array('type' => 'submit', 'value' => t('Submit'));
 
-        if (!is_array($aProperties))
+        if (!is_array($aProperties)) {
             $aProperties = array();
+        }
 
-        if (!empty($sType))
+        if (!empty($sType)) {
             $aProperties['type'] = $sType;
+        }
 
-        if (empty($aProperties['value']))
+        if (empty($aProperties['value'])) {
             $aProperties['value'] = $sLabel;
+        }
 
         parent::__construct($sLabel, '', $aProperties);
     }
@@ -38,8 +54,10 @@ class Button extends Element
             /*Any of the jQueryUI framework icons can be added to your buttons via the icon
             property.  See http://jqueryui.com/themeroller/ for a complete list of available
             icons.*/
-            if (!empty($this->icon))
+            if (!empty($this->icon)) {
                 echo '{ icons: { primary: "ui-icon-', $this->icon, '" } }';
+            }
+
             echo ');';
         }
     }

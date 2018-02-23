@@ -1,15 +1,17 @@
 <?php
+/**
+ * File modified by Pierre-Henry Soria
+ */
 
 namespace PFBC\Element;
 
 class TinyMCE extends Textarea
 {
-
     protected $basic;
 
     public function jQueryDocumentReady()
     {
-        echo 'jQuery("#', $this->attributes["id"], '").width(jQuery("#', $this->attributes["id"], '").width());';
+        echo 'jQuery("#', $this->attributes['id'], '").width(jQuery("#', $this->attributes['id'], '").width());';
     }
 
     public function renderJS()
@@ -17,7 +19,7 @@ class TinyMCE extends Textarea
         echo <<<JS
 tinyMCE.init({
     mode: "exact",
-    elements: "{$this->attributes["id"]}",
+    elements: "{$this->attributes['id']}",
 JS;
         if (empty($this->basic)) {
             echo <<<JS
@@ -53,9 +55,8 @@ JS;
 
     public function getJSFiles()
     {
-        return array(
-            $this->form->getResourcesPath() . "/tiny_mce/tiny_mce.js"
-        );
+        return [
+            $this->form->getResourcesPath() . '/tiny_mce/tiny_mce.js'
+        ];
     }
-
 }

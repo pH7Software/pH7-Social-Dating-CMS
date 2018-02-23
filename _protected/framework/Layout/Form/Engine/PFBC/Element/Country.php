@@ -1,7 +1,6 @@
 <?php
 /**
- * We made this code.
- * By pH7 (Pierre-Henry SORIA).
+ * File created by Pierre-Henry Soria <hi@ph7.me>
  */
 
 namespace PFBC\Element;
@@ -252,6 +251,11 @@ class Country extends Select
         'ZW'
     ];
 
+    /**
+     * @param string $sLabel
+     * @param string $sName
+     * @param array|null $aProperties
+     */
     public function __construct($sLabel, $sName, array $aProperties = null)
     {
         $aOptions = array();

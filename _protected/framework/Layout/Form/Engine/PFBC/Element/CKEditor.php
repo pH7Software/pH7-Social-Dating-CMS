@@ -1,4 +1,7 @@
 <?php
+/**
+ * Some improvements were made by Pierre-Henry Soria
+ */
 
 namespace PFBC\Element;
 
@@ -6,11 +9,14 @@ class CKEditor extends Textarea
 {
     protected $basic;
 
-    function renderJS()
+    public function renderJS()
     {
         echo 'CKEDITOR.replace("', $this->attributes["id"], '"';
-        if (!empty($this->basic))
+
+        if (!empty($this->basic)) {
             echo ', { toolbar: "Basic" }';
+        }
+
         echo ');';
 
         $ajax = $this->form->getAjax();
@@ -24,10 +30,10 @@ JS;
         }
     }
 
-    function getJSFiles()
+    public function getJSFiles()
     {
-        return array(
+        return [
             $this->form->getResourcesPath() . "/ckeditor/ckeditor.js"
-        );
+        ];
     }
 }

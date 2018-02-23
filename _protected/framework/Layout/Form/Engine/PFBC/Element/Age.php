@@ -16,11 +16,21 @@ class Age extends OptionElement
 {
     const MIN_AGE = 'min_age', MAX_AGE = 'max_age';
 
-    protected $sHtmlOutput, $iMinAge, $iMaxAge;
+    /** @var string */
+    protected $sHtmlOutput;
+
+    /** @var int */
+    protected $iMinAge;
+
+    /** @var int */
+    protected $iMaxAge;
 
     /**
      * Generate the select field for age search.
+     *
+     * @param array|null $aProperties
      */
+
     public function __construct($aProperties = null)
     {
         parent::__construct('', '', array(), $aProperties);

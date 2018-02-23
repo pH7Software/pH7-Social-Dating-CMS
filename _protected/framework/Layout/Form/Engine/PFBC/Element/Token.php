@@ -11,13 +11,17 @@ use PH7\Framework\Security\CSRF\Token as SecurityToken;
 
 class Token extends Hidden
 {
-
+    /** @var string */
     private $sName;
 
+    /**
+     * @param string $sName
+     */
     public function __construct($sName)
     {
-        if (!$this->isEnabled())
+        if (!$this->isEnabled()) {
             return; // If it's disabled, we stop the execution of the class
+        }
 
         $this->sName = $sName;
         parent::__construct('security_token', (new SecurityToken)->generate($this->sName));
@@ -25,8 +29,9 @@ class Token extends Hidden
 
     public function render()
     {
-        if (!$this->isEnabled())
+        if (!$this->isEnabled()) {
             return; // If it's disabled, we stop the execution of the class
+        }
 
         $this->validation[] = new ValidationToken($this->sName);
         parent::render();
@@ -35,12 +40,11 @@ class Token extends Hidden
     /**
      * Check if the CSRF security token for forms is enabled.
      *
-     * @return boolean Returns TRUE if the security token is enabled, FALSE otherwise.
+     * @return bool Returns TRUE if the security token is enabled, FALSE otherwise.
      */
     private function isEnabled()
     {
         // Check if the CSRF security token for forms is enabled
         return DbConfig::getSetting('securityToken');
     }
-
 }
