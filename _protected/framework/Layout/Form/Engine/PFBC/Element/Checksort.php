@@ -14,10 +14,11 @@ class Checksort extends Sort
     public function jQueryDocumentReady()
     {
         parent::jQueryDocumentReady();
-        if (!empty($this->inline))
+        if (!empty($this->inline)) {
             echo 'jQuery("#', $this->attributes['id'], ' .pfbc-checkbox:last").css("margin-right", "0");';
-        else
+        } else {
             echo 'jQuery("#', $this->attributes['id'], ' .pfbc-checkbox:last").css({ "padding-bottom": "0", "border-bottom": "none" });';
+        }
 
         if (!empty($this->maxheight) && is_numeric($this->maxheight)) {
             echo <<<JS
@@ -53,8 +54,10 @@ JS;
         foreach ($this->options as $value => $text) {
             $value = $this->getOptionValue($value);
             echo '<div class="pfbc-checkbox"><table cellpadding="0" cellspacing="0"><tr><td valign="top"><input id="', $this->attributes["id"], "-", $count, '"', $this->getAttributes(array("id", "value", "checked", "name", "onclick")), ' value="', $this->filter($value), '"';
-            if (in_array($value, $this->attributes["value"]))
+            if (in_array($value, $this->attributes["value"])) {
                 echo ' checked="checked"';
+            }
+
             echo ' onclick="updateChecksort(this, \'', $this->filter($text), '\');"/></td><td><label for="', $this->attributes["id"], "-", $count, '">', $text, '</label></td></tr></table></div>';
 
             if (in_array($value, $this->attributes['value'])) {
