@@ -50,18 +50,18 @@ JS;
 
         $count = 0;
         $existing = "";
-        echo '<div id="', $this->attributes["id"], '"><div class="pfbc-checkboxes">';
+        echo '<div id="', $this->attributes['id'], '"><div class="pfbc-checkboxes">';
         foreach ($this->options as $value => $text) {
             $value = $this->getOptionValue($value);
-            echo '<div class="pfbc-checkbox"><table cellpadding="0" cellspacing="0"><tr><td valign="top"><input id="', $this->attributes["id"], "-", $count, '"', $this->getAttributes(array("id", "value", "checked", "name", "onclick")), ' value="', $this->filter($value), '"';
-            if (in_array($value, $this->attributes["value"])) {
+            echo '<div class="pfbc-checkbox"><table cellpadding="0" cellspacing="0"><tr><td valign="top"><input id="', $this->attributes['id'], "-", $count, '"', $this->getAttributes(array("id", "value", "checked", "name", "onclick")), ' value="', $this->filter($value), '"';
+            if (in_array($value, $this->attributes['value'])) {
                 echo ' checked="checked"';
             }
 
-            echo ' onclick="updateChecksort(this, \'', $this->filter($text), '\');"/></td><td><label for="', $this->attributes["id"], "-", $count, '">', $text, '</label></td></tr></table></div>';
+            echo ' onclick="updateChecksort(this, \'', $this->filter($text), '\');"/></td><td><label for="', $this->attributes['id'], "-", $count, '">', $text, '</label></td></tr></table></div>';
 
             if (in_array($value, $this->attributes['value'])) {
-                $existing .= '<li id="' . $this->attributes['id'] . "-sort-" . $count . '" class="ui-state-default"><input type="hidden" name="' . $this->attributes["name"] . '" value="' . $value . '"/>' . $text . '</li>';
+                $existing .= '<li id="' . $this->attributes['id'] . "-sort-" . $count . '" class="ui-state-default"><input type="hidden" name="' . $this->attributes['name'] . '" value="' . $value . '"/>' . $text . '</li>';
             }
 
             ++$count;
@@ -78,13 +78,13 @@ JS;
     public function renderJS()
     {
         echo <<<JS
-if(typeof updateChecksort != "function") {
+if(typeof updateChecksort !== 'function') {
     function updateChecksort(element, text) {
         var position = element.id.lastIndexOf("-");
         var id = element.id.substr(0, position);
         var index = element.id.substr(position + 1);
         if(element.checked)
-            jQuery("#" + id + " ul").append('<li id="' + id + '-sort-' + index + '" class="ui-state-default"><input type="hidden" name="{$this->attributes["name"]}" value="' + element.value + '"/>' + text + '</li>');
+            jQuery("#" + id + " ul").append('<li id="' + id + '-sort-' + index + '" class="ui-state-default"><input type="hidden" name="{$this->attributes['name']}" value="' + element.value + '"/>' + text + '</li>');
         else
             jQuery("#" + id + "-sort-" + index).remove();
     }
