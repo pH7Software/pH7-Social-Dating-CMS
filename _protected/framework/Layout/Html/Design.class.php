@@ -374,7 +374,7 @@ class Design
 
         if ($bComment) {
             echo '
-                <!-- ' . sprintf(Kernel::SOFTWARE_COPYRIGHT, date('Y')) . ' -->
+                <!-- ', sprintf(Kernel::SOFTWARE_COPYRIGHT, date('Y')), ' -->
                 <!-- Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->
                 <!-- You must leave this comment.
                 This open source software is distributed for free and you must respect the thousands of days, months and several years it took to develop it.
@@ -928,7 +928,7 @@ class Design
         }
 
         echo '<meta name="author" content="', Kernel::SOFTWARE_COMPANY, '" />
-        <meta name="copyright" content="' . sprintf(Kernel::SOFTWARE_COPYRIGHT, date('Y')) . ' />
+        <meta name="copyright" content="', sprintf(Kernel::SOFTWARE_COPYRIGHT, date('Y')), ' />
         <meta name="creator" content="', Kernel::SOFTWARE_NAME, '" />
         <meta name="designer" content="', Kernel::SOFTWARE_NAME, '" />
         <meta name="generator" content="', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, '" />';
