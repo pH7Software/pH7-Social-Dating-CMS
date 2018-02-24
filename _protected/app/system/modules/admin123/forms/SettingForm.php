@@ -192,7 +192,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Indicate a word that will replace the banned word in the <a href="%0%">list</a>.', Uri::get(PH7_ADMIN_MOD, 'file', 'protectededit', 'app/configs/bans/word.txt', false)), 'ban_word_replace', array('value' => DbConfig::getSetting('banWordReplace'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Enable/Disable the CSRF security tokens for forms:'), 'security_token_forms', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Sometimes this protection can be annoying for users if there are not fast enough to fulfill the forms. However, if disabled, your website can be vulnerable on CSRF attacks in forms.'), 'value' => DbConfig::getSetting('securityToken'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Enable/Disable CSRF security tokens in forms:'), 'security_token_forms', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Sometimes this protection can be annoying for users if there are not fast enough to fulfill the forms. However, if disabled, your website can be vulnerable on CSRF attacks in forms.'), 'value' => DbConfig::getSetting('securityToken'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Number(t('CSRF token lifetime:'), 'security_token_lifetime', array('description' => t('Time in seconds.'), 'value' => DbConfig::getSetting('securityTokenLifetime'), 'required' => 1)));
 
