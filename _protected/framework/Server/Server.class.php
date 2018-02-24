@@ -100,8 +100,8 @@ final class Server
     /**
      * Retrieve a member of the $_SERVER super global.
      *
-     * @param string $sKey If NULL, returns the entire $_SERVER variable. Default NULL
-     * @param mixed $sDefVal The value to use if server key is not found. Default NULL
+     * @param string|null $sKey If NULL, returns the entire $_SERVER variable.
+     * @param string|null $sDefVal A default value to use if server key is not found.
      *
      * @return string|array|null
      */
