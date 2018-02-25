@@ -66,7 +66,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Ajax Site with AjPH:'), 'full_ajax_site', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t("Be careful! 'Full Ajax Navigation' feature is still in <strong>Beta version</strong> and may not be working properly on all pages."), 'value' => DbConfig::getSetting('fullAjaxSite'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Site Status:'), 'site_status', array(DbConfig::ENABLE_SITE => t('Online'), DbConfig::MAINTENANCE_SITE => t('Maintenance')), array('description' => t("Maintenance mode is useful if you are working on your website or update it. Logged admins and admin panel won't be affected by the maintenance page."), 'value' => DbConfig::getSetting('siteStatus'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Site Status:'), 'site_status', array(DbConfig::ENABLE_SITE => t('Online'), DbConfig::MAINTENANCE_SITE => t('Maintenance (offline)')), array('description' => t("Maintenance mode is useful if you are working on your website or update it. Logged admins and admin panel won't be affected by the maintenance page."), 'value' => DbConfig::getSetting('siteStatus'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Social Media Widgets:'), 'social_media_widgets', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Enable the Social Media Sharing such as Like and Sharing buttons.'), 'value' => DbConfig::getSetting('socialMediaWidgets'), 'required' => 1)));
 
