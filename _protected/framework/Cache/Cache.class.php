@@ -337,7 +337,7 @@ File ID: ' . $this->sId . '
 
         $sPhpHeader = $this->getHeaderContents();
 
-        $sData = '<?php ' . $sPhpHeader . '$_mData = <<<\'EOF\'' . File::EOL . $sData . File::EOL . 'EOF;' . File::EOL . '?>';
+        $sData = '<?php ' . $sPhpHeader . '$_mData = <<<\'EOF\'' . File::EOL . $sData . File::EOL . 'EOF;' . File::EOL;
 
         if ($rHandle = @fopen($sFile, 'wb')) {
             if (@flock($rHandle, LOCK_EX)) {
