@@ -39,7 +39,7 @@ class Blog extends WriteCore
                 \PFBC\Form::setError('form_blog', Form::wrongImgFileTypeMsg());
             } else {
                 /**
-                 * The method deleteFile first test if the file exists, if so it delete the file.
+                 * File::deleteFile() tests first if the file exists, and then deletes the file
                  */
                 $sPathName = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'blog' . PH7_DS . PH7_IMG . $oPost->blogId;
                 $oFile->deleteFile($sPathName); // It erases the old thumbnail

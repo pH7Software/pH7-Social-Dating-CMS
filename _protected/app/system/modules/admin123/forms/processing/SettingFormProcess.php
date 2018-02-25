@@ -238,14 +238,14 @@ class SettingFormProcess extends Form
                 $this->bIsErr = true;
             } else {
                 /*
-                 * The method deleteFile first test if the file exists, if so it delete the file.
+                 * File::deleteFile() tests first if the file exists, and then deletes the file
                  */
                 $sPathName = PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . self::LOGO_FILENAME;
                 $this->file->deleteFile($sPathName); // It erases the old logo.
                 $oLogo->dynamicResize(self::LOGO_WIDTH, self::LOGO_HEIGHT);
                 $oLogo->save($sPathName);
 
-                // Clear CSS cache, because the logo is storaged with data URI in the CSS cache file
+                // Clear CSS cache, because the logo is stored with data URI in the CSS cache file
                 $this->file->deleteDir(PH7_PATH_CACHE . Gzip::CACHE_DIR);
 
                 // Clear the Web browser cache
