@@ -38,7 +38,8 @@ class PH7Tpl extends Kernel
     const AUTHOR = 'Pierre-Henry Soria';
     const VERSION = '1.3.0';
     const LICENSE = 'Creative Commons Attribution 3.0 License - http://creativecommons.org/licenses/by/3.0/';
-    const ERR_MSG = 'It seems you have removed some copyright links/notice in the software. If you want to remove them, please email at: %s';
+    const ERR_MSG = 'It seems you have removed the copyright notice(s) in the software. If you really want to remove them, please email: %s';
+    const DATETIME_FORMAT = 'Y-m-d H:i:s';
 
     /**
      * @internal For better compatibility with Windows, we didn't put a slash at the end of the directory constants.
