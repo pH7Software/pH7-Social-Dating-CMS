@@ -27,7 +27,7 @@ use PH7\Framework\Session\Session;
 class MessengerAjax extends PermissionCore
 {
     const DATETIME_FORMAT = 'Y-m-d H:i:s';
-    
+
     /** @var HttpRequest */
     private $oHttpRequest;
 
