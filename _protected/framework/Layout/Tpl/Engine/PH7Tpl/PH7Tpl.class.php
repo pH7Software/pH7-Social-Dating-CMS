@@ -898,7 +898,7 @@ class PH7Tpl extends Kernel
 namespace PH7;
 defined(\'PH7\') or exit(\'Restricted access\');
 /*
-Created on ' . gmdate('Y-m-d H:i:s') . '
+Created on ' . gmdate(self::DATETIME_FORMAT) . '
 Compiled file from: ' . $this->sTemplateDirFile . '
 Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::AUTHOR . '
 */

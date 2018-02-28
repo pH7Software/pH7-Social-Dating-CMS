@@ -21,6 +21,7 @@ use PH7\Framework\File\File;
 
 class Cache
 {
+    const DATETIME_FORMAT = 'Y-m-d H:i:s';
     const CACHE_DIR = 'pH7_cache/';
     const CACHE_FILE_EXT = '.cache.php';
 
@@ -233,7 +234,7 @@ class Cache
     {
         return 'defined(\'PH7\') or exit(\'Restricted access\');
 /*
-Created on ' . gmdate('Y-m-d H:i:s') . '
+Created on ' . gmdate(static::DATETIME_FORMAT) . '
 File ID: ' . $this->sId . '
 */
 /***************************************************************************

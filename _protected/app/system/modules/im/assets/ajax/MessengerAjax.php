@@ -26,6 +26,8 @@ use PH7\Framework\Session\Session;
 
 class MessengerAjax extends PermissionCore
 {
+    const DATETIME_FORMAT = 'Y-m-d H:i:s';
+    
     /** @var HttpRequest */
     private $_oHttpRequest;
 
@@ -173,7 +175,7 @@ class MessengerAjax extends PermissionCore
         $sTo = $_SESSION['messenger_username_to'] = $this->_oHttpRequest->post('to');
         $sMsg = $this->_oHttpRequest->post('message');
 
-        $_SESSION['messenger_openBoxes'][$this->_oHttpRequest->post('to')] = date('Y-m-d H:i:s', time());
+        $_SESSION['messenger_openBoxes'][$this->_oHttpRequest->post('to')] = date(self::DATETIME_FORMAT, time());
 
         $sMsgTransform = $this->sanitize($sMsg);
         $sMsgTransform = Emoticon::init($sMsgTransform, false);
@@ -189,7 +191,7 @@ class MessengerAjax extends PermissionCore
         } elseif (!$this->isOnline($sTo)) {
             $sMsgTransform = '<small><em>' . t("%0% is offline. Send a <a href='%1%'>Private Message</a> instead.", $sTo, Uri::get('mail', 'main', 'compose', $sTo)) . '</em></small>';
         } else {
-            $this->_oMessengerModel->insert($sFrom, $sTo, $sMsg, (new CDateTime)->get()->dateTime('Y-m-d H:i:s'));
+            $this->_oMessengerModel->insert($sFrom, $sTo, $sMsg, (new CDateTime)->get()->dateTime(self::DATETIME_FORMAT));
         }
 
         $_SESSION['messenger_history'][$this->_oHttpRequest->post('to')] .= $this->setJsonContent(['status' => '1', 'user' => $sTo, 'msg' => $sMsgTransform]);
