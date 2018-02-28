@@ -240,6 +240,7 @@ EOD;
         $iProfileId = $oUserModel->getId(null, $sUsername);
         $bIsOnline = $oUserModel->isOnline($iProfileId, DbConfig::getSetting('userTimeout'));
         unset($oUserModel);
+
         return $bIsOnline;
     }
 
@@ -261,5 +262,6 @@ if (UserCore::auth()) {
         $_SESSION['messenger_username'] = $oSession->get('member_username');
     }
     unset($oSession);
+
     new MessengerAjax;
 }
