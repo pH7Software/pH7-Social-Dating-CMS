@@ -88,8 +88,9 @@ class MessengerAjax extends PermissionCore
             $sMsg = $this->sanitize($oData->message);
             $sMsg = Emoticon::init($sMsg, false);
 
-            if (!isset($_SESSION['messenger_openBoxes'][$sFrom]) && isset($_SESSION['messenger_history'][$sFrom]))
+            if (!isset($_SESSION['messenger_openBoxes'][$sFrom]) && isset($_SESSION['messenger_history'][$sFrom])) {
                 $sItems = $_SESSION['messenger_history'][$sFrom];
+            }
 
             $sItems .= $this->setJsonContent(['user' => $sFrom, 'msg' => $sMsg]);
 
@@ -111,8 +112,9 @@ class MessengerAjax extends PermissionCore
                     if ($iNow > 180) {
                         $sItems .= $this->setJsonContent(['status' => '2', 'user' => $sBox, 'msg' => $sMsg]);
 
-                        if (!isset($_SESSION['messenger_history'][$sBox]))
+                        if (!isset($_SESSION['messenger_history'][$sBox])) {
                             $_SESSION['messenger_history'][$sBox] = '';
+                        }
 
                         $_SESSION['messenger_history'][$sBox] .= $this->setJsonContent(['status' => '2', 'user' => $sBox, 'msg' => $sMsg]);
                         $_SESSION['messenger_boxes'][$sBox] = 1;
@@ -142,8 +144,9 @@ class MessengerAjax extends PermissionCore
     {
         $sItems = '';
 
-        if (isset($_SESSION['messenger_history'][$sBox]))
+        if (isset($_SESSION['messenger_history'][$sBox])) {
             $sItems = $_SESSION['messenger_history'][$sBox];
+        }
 
         return $sItems;
     }
