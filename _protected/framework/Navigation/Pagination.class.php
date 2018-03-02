@@ -64,7 +64,7 @@ class Pagination
         $this->iShowItems = (self::$aOptions['range'] * 2) + 1;
 
         // It generates the paging
-        $this->_generate();
+        $this->generate();
     }
 
     /**
@@ -82,7 +82,7 @@ class Pagination
      *
      * @return void
      */
-    private function _generate()
+    private function generate()
     {
         // If you have more than one page, it displays the navigation
         if ($this->iTotalPages > 1) {
