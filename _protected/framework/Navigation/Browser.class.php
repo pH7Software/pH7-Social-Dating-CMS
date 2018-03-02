@@ -30,7 +30,7 @@ class Browser
      * Detect the user's preferred language.
      *
      * @param bool $bFullLangCode If TRUE, returns the full lang code (e.g., en-us, en-gb, en-ie, en-au, fr-fr, fr-be, fr-ca, fr-ch, ...),
-     *     otherwise returns the two letters of the client browser's language (e.g., en, it, fr, ru, ...). Default: FALSE
+     *     otherwise returns the two letters of the client browser's language (e.g., en, it, fr, ru, ...).
      *
      * @return string Client's Language Code (in lowercase).
      */
