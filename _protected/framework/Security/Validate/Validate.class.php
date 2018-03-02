@@ -25,7 +25,7 @@ use PH7\Framework\Str\Str;
 
 class Validate
 {
-    const REGEX_NOT_NAME_PATTERN = '`(?:[\|<>"\=\]\[\}\{\\\\$£€@%~^#\(\):;\?!¿¡\*])|(?:(?:https?|ftps?)://)|(?:[0-9])`';
+    const REGEX_INVALID_NAME_PATTERN = '`(?:[\|<>"\=\]\[\}\{\\\\$€@%~^#\(\):;\?!¿¡\*])|(?:(?:https?|ftps?)://)|(?:[0-9])`';
     const REGEX_DATE_FORMAT = '`^\d\d/\d\d/\d\d\d\d$`';
 
     const MAX_INT_NUMBER = 999999999999;
@@ -400,7 +400,7 @@ class Validate
         }
 
         // Check the name pattern. Name cannot contain any of the below characters
-        if (preg_match(static::REGEX_NOT_NAME_PATTERN, $sName)) {
+        if (preg_match(static::REGEX_INVALID_NAME_PATTERN, $sName)) {
             return false;
         }
 
