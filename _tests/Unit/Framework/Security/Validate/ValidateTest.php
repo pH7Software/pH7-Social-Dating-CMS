@@ -38,6 +38,22 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider validNamesProvider
+     */
+    public function testValidName($sName)
+    {
+        $this->assertTrue($this->oValidate->name($sName));
+    }
+
+    /**
+     * @dataProvider invalidNamesProvider
+     */
+    public function testInvalidName($sName)
+    {
+        $this->assertFalse($this->oValidate->name($sName));
+    }
+
+    /**
      * @return array
      */
     public function validHexCodesProvider()
@@ -58,6 +74,38 @@ class ValidateTest extends PHPUnit_Framework_TestCase
             ['eee'],
             ['#fffffff'],
             ['#cc']
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function validNamesProvider()
+    {
+        return [
+            ['Píėrre'],
+            ['Amélie'],
+            ['Pierre-Henry'],
+            ['Pierre-Henry Soria'],
+            ['Àngel Nøisã'],
+            ['Nôël Großkreutz']
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function invalidNamesProvider()
+    {
+        return [
+            ['o'],
+            ['{NOT A NAME}'],
+            ['*&^'],
+            ['http://affiliate-site.com'],
+            ['https://spam.com'],
+            [4335],
+            ['$money$'],
+            ['James€']
         ];
     }
 }
