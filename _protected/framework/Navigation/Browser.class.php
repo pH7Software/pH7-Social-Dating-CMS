@@ -108,7 +108,9 @@ class Browser
      */
     public function isMobile()
     {
-        if (null !== Server::getVar(Server::HTTP_X_WAP_PROFILE) || null !== Server::getVar(Server::HTTP_PROFILE)) {
+        if (null !== Server::getVar(Server::HTTP_X_WAP_PROFILE) ||
+            null !== Server::getVar(Server::HTTP_PROFILE)
+        ) {
             return true;
         }
 
