@@ -231,7 +231,7 @@ class SettingFormProcess extends Form
      */
     private function updateLogo()
     {
-        if (!empty($_FILES['logo']['tmp_name'])) {
+        if ($this->isLogoUploaded()) {
             $oLogo = new Image($_FILES['logo']['tmp_name']);
             if (!$oLogo->validate()) {
                 \PFBC\Form::setError('form_setting', Form::wrongImgFileTypeMsg());
@@ -273,5 +273,13 @@ class SettingFormProcess extends Form
     private function noErrors()
     {
         return !$this->bIsErr;
+    }
+
+    /**
+     * @return bool
+     */
+    private function isLogoUploaded()
+    {
+        return !empty($_FILES['logo']['tmp_name']);
     }
 }
