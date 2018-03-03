@@ -186,16 +186,14 @@ class Validate
      * Validate if it's a float type.
      *
      * @param float $fFloat
-     * @param float|int $mMin Default 0
-     * @param float|int $mMax Default 999999999999
      *
      * @return bool
      */
-    public function float($fFloat, $mMin = 0, $mMax = self::MAX_INT_NUMBER)
+    public function float($fFloat)
     {
         $fFloat = filter_var($fFloat, FILTER_SANITIZE_NUMBER_FLOAT);
 
-        return filter_var($fFloat, FILTER_VALIDATE_FLOAT, static::getFilterOption($mMin, $mMax)) !== false;
+        return filter_var($fFloat, FILTER_VALIDATE_FLOAT) !== false;
     }
 
     /**
