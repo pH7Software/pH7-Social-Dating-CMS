@@ -100,7 +100,7 @@ class Pagination
             // Management the Previous link
             if (self::$aOptions['text_previous_page']) {
                 if ($this->iCurrentPage > 2 && $this->iShowItems < $this->iTotalPages) {
-                    $this->sHtmlOutput .= '<li><a href="' . $this->sPageName . ($this->iCurrentPage - 1) . '" aria-label="Previous"><span aria-hidden="true">' . self::$aOptions['text_previous_page'] . '</span></a></li>';
+                    $this->sHtmlOutput .= '<li class="previous"><a href="' . $this->sPageName . ($this->iCurrentPage - 1) . '" aria-label="Previous"><span aria-hidden="true">' . self::$aOptions['text_previous_page'] . '</span></a></li>';
                 }
             }
             // Management of other paging buttons...
@@ -113,7 +113,7 @@ class Pagination
             //  Management the "Next" link
             if (self::$aOptions['text_next_page']) {
                 if ($this->iCurrentPage < $this->iTotalPages - 1 && $this->iShowItems < $this->iTotalPages) {
-                    $this->sHtmlOutput .= '<li><a href="' . $this->sPageName . ($this->iCurrentPage + 1) . '" aria-label="Next"><span aria-hidden="true">' . self::$aOptions['text_next_page'] . '</span></a></li>';
+                    $this->sHtmlOutput .= '<li class="next"><a href="' . $this->sPageName . ($this->iCurrentPage + 1) . '" aria-label="Next"><span aria-hidden="true">' . self::$aOptions['text_next_page'] . '</span></a></li>';
                 }
             }
 
