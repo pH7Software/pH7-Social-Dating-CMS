@@ -270,16 +270,16 @@ class SettingFormProcess extends Form
     /**
      * @return bool
      */
-    private function noErrors()
+    private function isLogoUploaded()
     {
-        return !$this->bIsErr;
+        return !empty($_FILES['logo']['tmp_name']);
     }
 
     /**
      * @return bool
      */
-    private function isLogoUploaded()
+    private function noErrors()
     {
-        return !empty($_FILES['logo']['tmp_name']);
+        return !$this->bIsErr;
     }
 }
