@@ -147,7 +147,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
             ['one'],
             ['lalal'],
             [''],
-            [50000]
+            [50000] // Exceed the maximum value set (max_range)
         ];
     }
 }
