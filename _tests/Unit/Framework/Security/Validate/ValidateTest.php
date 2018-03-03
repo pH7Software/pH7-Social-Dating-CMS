@@ -102,7 +102,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
             ['{NOT A NAME}'],
             ['*&^'],
             ['http://affiliate-site.com'],
-            ['https://spam.com'],
+            ['https://spam'],
             [4335],
             ['$money$'],
             ['James€']
