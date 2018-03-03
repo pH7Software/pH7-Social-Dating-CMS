@@ -30,6 +30,6 @@ class Various
             return true;
         }
 
-        return (((int)$oMods->enabled) === 1);
+        return (int)$oMods->enabled === 1;
     }
 }
