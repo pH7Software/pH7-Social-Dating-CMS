@@ -65,7 +65,7 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Last Name:'), 'last_name', array('id' => 'name_last', 'onblur' => 'CValid(this.value,this.id)', 'value' => $oUser->lastName, 'validation' => new \PFBC\Validation\Name)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_last"></span>'));
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Username:'), 'username', array('description' => t('For security reasons, you cannot change your username.'), 'disabled' => 'disabled', 'value' => $oUser->username)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Nickname:'), 'username', array('description' => t('For security reasons, you cannot change your username.'), 'disabled' => 'disabled', 'value' => $oUser->username)));
 
         $oForm->addElement(new \PFBC\Element\Email(t('Email:'), 'mail', array('description' => t('For security reasons and to avoid spam, you cannot change your email address.'), 'disabled' => 'disabled', 'value' => $oUser->email)));
 

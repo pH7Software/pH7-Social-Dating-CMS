@@ -29,7 +29,7 @@ class AddUserForm
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_add_user', 'form_add_user'));
         $oForm->addElement(new \PFBC\Element\Token('add_user'));
-        $oForm->addElement(new \PFBC\Element\Username(t('Username:'), 'username', array('required' => 1, 'validation' => new \PFBC\Validation\Username)));
+        $oForm->addElement(new \PFBC\Element\Username(t('Nickname:'), 'username', array('required' => 1, 'validation' => new \PFBC\Validation\Username)));
         $oForm->addElement(new \PFBC\Element\Email(t('Login Email:'), 'mail', array('required' => 1, 'validation' => new \PFBC\Validation\CEmail('guest'))));
         $oForm->addElement(new \PFBC\Element\Password(t('Password:'), 'password', array('required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('First Name:'), 'first_name', array('required' => 1, 'validation' => new \PFBC\Validation\Name)));
