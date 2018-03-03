@@ -15,6 +15,8 @@ defined('PH7') or exit('Restricted access');
 
 class Pagination
 {
+    const MAX_PAGES = 4;
+
     /** @var string */
     private $sPageName;
 
@@ -32,11 +34,11 @@ class Pagination
 
     /** @var array */
     private static $aOptions = [
-        'range'               => 3, // Number of items to display on each side of the current page
-        'text_first_page'     => '&laquo;', // Button text "First Page"
-        'text_last_page'      => '&raquo;', // Button text "Last Page"
-        'text_next_page'      => '&rsaquo;', //  Button text "Next"
-        'text_previous_page'  => '&lsaquo;' // Button text "Previous"
+        'range' => self::MAX_PAGES - 1, // Number of pages to display on the pagination
+        'text_first_page' => '&laquo;', // Button text "First Page"
+        'text_last_page' => '&raquo;', // Button text "Last Page"
+        'text_next_page' => '&rsaquo;', //  Button text "Next"
+        'text_previous_page' => '&lsaquo;' // Button text "Previous"
     ];
 
     /**
