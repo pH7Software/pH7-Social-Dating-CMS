@@ -70,6 +70,22 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider validFloatsProvider
+     */
+    public function testValidFloat($fFloat)
+    {
+        $this->assertTrue($this->oValidate->float($fFloat));
+    }
+
+    /**
+     * @dataProvider invalidFloatsProvider
+     */
+    public function testInvalidFloat($fFloat)
+    {
+        $this->assertFalse($this->oValidate->float($fFloat));
+    }
+
+    /**
      * @return array
      */
     public function validHexCodesProvider()
@@ -148,6 +164,31 @@ class ValidateTest extends PHPUnit_Framework_TestCase
             ['lalal'],
             [''],
             [50000] // Exceed the maximum value set (max_range)
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function validFloatsProvider()
+    {
+        return [
+            [1.5],
+            [0.54532],
+            [0.0],
+            ['3.0']
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function invalidFloatsProvider()
+    {
+        return [
+            ['one'],
+            ['lalal'],
+            ['']
         ];
     }
 }
