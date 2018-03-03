@@ -156,7 +156,6 @@ class Validate
         $iInt = filter_var($iInt, FILTER_SANITIZE_NUMBER_INT);
 
         return filter_var($iInt, FILTER_VALIDATE_INT, static::getFilterOption($iMin, $iMax)) !== false;
-
     }
 
     /**
