@@ -54,6 +54,22 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider validIntegersProvider
+     */
+    public function testValidInteger($iNumbers)
+    {
+        $this->assertTrue($this->oValidate->int($iNumbers, 0, 60000));
+    }
+
+    /**
+     * @dataProvider invalidIntegersProvider
+     */
+    public function testInvalidInteger($iNumbers)
+    {
+        $this->assertFalse($this->oValidate->int($iNumbers, 0, 40000));
+    }
+
+    /**
      * @return array
      */
     public function validHexCodesProvider()
@@ -106,6 +122,32 @@ class ValidateTest extends PHPUnit_Framework_TestCase
             [4335],
             ['$money$'],
             ['James€']
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function validIntegersProvider()
+    {
+        return [
+            [1],
+            [59868],
+            [0],
+            ['34']
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function invalidIntegersProvider()
+    {
+        return [
+            ['one'],
+            ['lalal'],
+            [''],
+            [50000]
         ];
     }
 }
