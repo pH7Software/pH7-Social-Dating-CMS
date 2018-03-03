@@ -70,6 +70,7 @@ class Page
     public function getTotalPages($iTotalItems, $iNbItemsPerPage = self::DEFAULT_NUMBER_ITEMS)
     {
         $this->totalPages($iTotalItems, $iNbItemsPerPage);
+
         return ($this->iTotalPages < 1) ? 1 : $this->iTotalPages;
     }
 
