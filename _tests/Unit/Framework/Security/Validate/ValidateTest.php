@@ -56,17 +56,17 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider validIntegersProvider
      */
-    public function testValidInteger($iNumbers)
+    public function testValidInteger($iNumber)
     {
-        $this->assertTrue($this->oValidate->int($iNumbers, 0, 60000));
+        $this->assertTrue($this->oValidate->int($iNumber, 0, 60000));
     }
 
     /**
      * @dataProvider invalidIntegersProvider
      */
-    public function testInvalidInteger($iNumbers)
+    public function testInvalidInteger($iNumber)
     {
-        $this->assertFalse($this->oValidate->int($iNumbers, 0, 40000));
+        $this->assertFalse($this->oValidate->int($iNumber, 0, 40000));
     }
 
     /**
