@@ -55,7 +55,7 @@ class VideoForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
 
         $oForm->addElement(new \PFBC\Element\Textarea(t('Video Description:'), 'description', ['validation' => new \PFBC\Validation\Str(2, 200)]));
-        $oForm->addElement(new \PFBC\Element\Button('Upload', 'submit', ['icon' => 'video']));
+        $oForm->addElement(new \PFBC\Element\Button(t('Upload'), 'submit', ['icon' => 'video']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'form.js"></script>'));
         $oForm->render();
     }
