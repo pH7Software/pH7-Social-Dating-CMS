@@ -32,19 +32,19 @@ class MailForm
         }
 
         $oForm = new \PFBC\Form('form_compose_mail');
-        $oForm->configure(array('action' => ''));
+        $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_compose_mail', 'form_compose_mail'));
         $oForm->addElement(new \PFBC\Element\Token('compose_mail'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Recipient:'), 'recipient', ['id' => 'recipient', 'value' => $oHttpRequest->get('recipient'), 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Subject:'), 'title', ['id' => 'str_title', 'onblur' => 'CValid(this.value,this.id,2,60)', 'value' => $sSubjectValue, 'validation' => new \PFBC\Validation\Str(2, 60), 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_title"></span>'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Your message:'), 'message', array('id' => 'str_msg', 'onblur' => 'CValid(this.value,this.id,2,2500)', 'value' => $oHttpRequest->get('message'), 'validation' => new \PFBC\Validation\Str(2, 2500), 'basic' => 1, 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Your message:'), 'message', ['id' => 'str_msg', 'onblur' => 'CValid(this.value,this.id,2,2500)', 'value' => $oHttpRequest->get('message'), 'validation' => new \PFBC\Validation\Str(2, 2500), 'basic' => 1, 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_msg"></span>'));
 
         unset($oHttpRequest);
 
         if (!AdminCore::auth() && DbConfig::getSetting('isCaptchaMail')) {
-            $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha'), 'captcha', array('id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:'))));
+            $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha'), 'captcha', ['id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:')]));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }
 
