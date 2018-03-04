@@ -87,11 +87,17 @@ class StatisticCoreModel extends StatisticModel
         $sSqlDay = $bIsDay ? ' AND (lastActivity + INTERVAL :day DAY) > NOW()' : '';
         $sSqlGender = $bIsGender ? ' AND sex = :gender' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(profileId) AS totalLogins FROM' . Db::prefix($sTable) . 'WHERE username <> \'' . PH7_GHOST_USERNAME . '\'' . $sSqlDay . $sSqlGender);
-        if ($bIsDay) $rStmt->bindValue(':day', $iDay, \PDO::PARAM_INT);
-        if ($bIsGender) $rStmt->bindValue(':gender', $sGender, \PDO::PARAM_STR);
+        $sSqlQuery = 'SELECT COUNT(profileId) AS totalLogins FROM' . Db::prefix($sTable) . 'WHERE username <> \'' . PH7_GHOST_USERNAME . '\'' . $sSqlDay . $sSqlGender;
+        $rStmt = Db::getInstance()->prepare($sSqlQuery);
+        if ($bIsDay) {
+            $rStmt->bindValue(':day', $iDay, \PDO::PARAM_INT);
+        }
+        if ($bIsGender) {
+            $rStmt->bindValue(':gender', $sGender, \PDO::PARAM_STR);
+        }
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+
         return (int)$oRow->totalLogins;
     }
 
