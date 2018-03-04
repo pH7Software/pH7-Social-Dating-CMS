@@ -7,7 +7,7 @@
             <input type="image" name="submit" src="{url_tpl_mod_img}paypal_donate.en.png" alt="Donate" />
         </form>
 
-        <p>{lang 'OR'}</p>
+        <p>{lang '-OR-'}</p>
 
         <p class="s_bMarg">
             <a href="https://www.patreon.com/bePatron?u=3534366">{lang 'Become a Patron!'}</a>
