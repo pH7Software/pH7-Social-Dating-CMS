@@ -37,7 +37,7 @@ class EditForm
         $sBirthDate = (new CDateTime)->get($oUser->birthDate)->date('Y-m-d');
 
         $oForm = new \PFBC\Form('form_user_edit_account');
-        $oForm->configure(array('action' => ''));
+        $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_user_edit_account', 'form_user_edit_account'));
         $oForm->addElement(new \PFBC\Element\Token('edit_account'));
 
@@ -47,33 +47,33 @@ class EditForm
             );
 
             $oGroupId = (new AdminCoreModel)->getMemberships();
-            $aGroupName = array();
+            $aGroupName = [];
             foreach ($oGroupId as $oId) {
                 // Retrieve only the activated memberships
                 if ($oId->enable == 1) {
                     $aGroupName[$oId->groupId] = $oId->name;
                 }
             }
-            $oForm->addElement(new \PFBC\Element\Select(t('Membership Group:'), 'group_id', $aGroupName, array('value' => $oUser->groupId, 'required' => 1)));
+            $oForm->addElement(new \PFBC\Element\Select(t('Membership Group:'), 'group_id', $aGroupName, ['value' => $oUser->groupId, 'required' => 1]));
             unset($aGroupName);
         }
         unset($oHR);
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('First Name:'), 'first_name', array('id' => 'name_first', 'onblur' => 'CValid(this.value,this.id)', 'value' => $oUser->firstName, 'required' => 1, 'validation' => new \PFBC\Validation\Name)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('First Name:'), 'first_name', ['id' => 'name_first', 'onblur' => 'CValid(this.value,this.id)', 'value' => $oUser->firstName, 'required' => 1, 'validation' => new \PFBC\Validation\Name]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_first"></span>'));
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Last Name:'), 'last_name', array('id' => 'name_last', 'onblur' => 'CValid(this.value,this.id)', 'value' => $oUser->lastName, 'validation' => new \PFBC\Validation\Name)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Last Name:'), 'last_name', ['id' => 'name_last', 'onblur' => 'CValid(this.value,this.id)', 'value' => $oUser->lastName, 'validation' => new \PFBC\Validation\Name]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_last"></span>'));
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Nickname:'), 'username', array('description' => t('For security reasons, you cannot change your username.'), 'disabled' => 'disabled', 'value' => $oUser->username)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Nickname:'), 'username', ['description' => t('For security reasons, you cannot change your username.'), 'disabled' => 'disabled', 'value' => $oUser->username]));
 
-        $oForm->addElement(new \PFBC\Element\Email(t('Email:'), 'mail', array('description' => t('For security reasons and to avoid spam, you cannot change your email address.'), 'disabled' => 'disabled', 'value' => $oUser->email)));
+        $oForm->addElement(new \PFBC\Element\Email(t('Email:'), 'mail', ['description' => t('For security reasons and to avoid spam, you cannot change your email address.'), 'disabled' => 'disabled', 'value' => $oUser->email]));
 
-        $oForm->addElement(new \PFBC\Element\Radio(t('Gender:'), 'sex', array('female' => t('Woman'), 'male' => t('Man'), 'couple' => t('Couple')), array('value' => $oUser->sex, 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Radio(t('Gender:'), 'sex', ['female' => t('Woman'), 'male' => t('Man'), 'couple' => t('Couple')], ['value' => $oUser->sex, 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for a:'), 'match_sex', array('male' => t('Man'), 'female' => t('Woman'), 'couple' => t('Couple')), array('value' => Form::getVal($oUser->matchSex), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for a:'), 'match_sex', ['male' => t('Man'), 'female' => t('Woman'), 'couple' => t('Couple')], ['value' => Form::getVal($oUser->matchSex), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', array('id' => 'birth_date', 'onblur' => 'CValid(this.value, this.id)', 'value' => $sBirthDate, 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', ['id' => 'birth_date', 'onblur' => 'CValid(this.value, this.id)', 'value' => $sBirthDate, 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
 
         // Generate dynamic fields
