@@ -26,7 +26,6 @@ class PictureForm
             Header::redirect();
         }
 
-
         $oAlbums = (new PictureModel)->getAlbumsName((new Session)->get('member_id'));
         $aAlbumName = [];
 

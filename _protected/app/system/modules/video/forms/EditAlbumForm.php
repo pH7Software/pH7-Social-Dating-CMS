@@ -32,6 +32,7 @@ class EditAlbumForm
             0,
             1
         );
+
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
 
         $oForm = new \PFBC\Form('form_edit_video_album');
