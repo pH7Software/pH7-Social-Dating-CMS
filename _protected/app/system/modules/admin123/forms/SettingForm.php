@@ -287,7 +287,7 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><script src="' . PH7_URL_STATIC . PH7_JS . 'tabs.js"></script><script>tabs(\'p\', [\'general\',\'logotype\',\'registration\',\'pic_vid\',\'moderation\',\'email\',\'security\',\'spam\',\'design\',\'api\',\'automation\']);</script>'));
 
 
-        $oForm->addElement(new \PFBC\Element\Button);
+        $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'check']));
 
         $oForm->render();
     }
