@@ -127,7 +127,6 @@ class PH7Tpl extends Kernel
         $this->_oVars = $this;
         $this->designModel = new DesignModel;
 
-        // Enable (true) or Disables (false) html comments in the source code of the site that shows information conernant template engine such as name, version, ...
         $this->bLicense = PH7_VALID_LICENSE;
 
         $this->bHtmlCompressor = (bool)$this->config->values['cache']['enable.static.minify'];
