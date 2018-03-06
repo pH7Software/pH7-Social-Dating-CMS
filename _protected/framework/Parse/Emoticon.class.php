@@ -33,14 +33,43 @@ class Emoticon extends EmoticonService
         $aEmoticons = static::get();
 
         foreach ($aEmoticons as $sEmoticonKey => $aEmoticon) {
-            if ($bIsDataUri) {
-                $sSrcImg = Optimization::dataUri(static::getPath($sEmoticonKey), new File);
-            } else {
-                $sSrcImg = static::getUrl($sEmoticonKey);
-            }
-            $sContents = str_ireplace(static::getCode($aEmoticon), '<img src=\'' . $sSrcImg . '\' alt=\'' . static::getName($aEmoticon) . '\' />', $sContents);
+            $sContents = self::replaceSymbolToImg($sEmoticonKey, $aEmoticon, $sContents, $bIsDataUri);
         }
 
         return $sContents;
+    }
+
+    /**
+     * @param string $sEmoticonKey
+     * @param array $aEmoticon
+     * @param string $sContents
+     * @param bool $bIsDataUri
+     *
+     * @return string
+     */
+    private static function replaceSymbolToImg($sEmoticonKey, array $aEmoticon, $sContents, $bIsDataUri)
+    {
+        return str_ireplace(
+            static::getCode($aEmoticon),
+            '<img src=\'' . self::getImage($sEmoticonKey, $bIsDataUri) . '\' alt=\'' . static::getName($aEmoticon) . '\' />',
+            $sContents
+        );
+    }
+
+    /**
+     * @param string $sEmoticonKey
+     * @param bool $bIsDataUri
+     *
+     * @return string
+     */
+    private static function getImage($sEmoticonKey, $bIsDataUri)
+    {
+        if ($bIsDataUri) {
+            $sSrcImg = Optimization::dataUri(static::getPath($sEmoticonKey), new File);
+        } else {
+            $sSrcImg = static::getUrl($sEmoticonKey);
+        }
+
+        return $sSrcImg;
     }
 }
