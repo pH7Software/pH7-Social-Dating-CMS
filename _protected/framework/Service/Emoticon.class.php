@@ -59,7 +59,7 @@ abstract class Emoticon
      *
      * @return Emoticon name.
      */
-    protected static function getName($aVal)
+    protected static function getName(array $aVal)
     {
         return $aVal[1];
     }
@@ -71,7 +71,7 @@ abstract class Emoticon
      *
      * @return Emoticon code.
      */
-    protected static function getCode($aVal)
+    protected static function getCode(array $aVal)
     {
         return $aVal[0];
     }
