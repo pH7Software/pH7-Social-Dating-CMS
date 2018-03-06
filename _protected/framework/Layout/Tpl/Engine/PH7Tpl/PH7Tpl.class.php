@@ -366,7 +366,7 @@ class PH7Tpl extends Kernel
 
         if ($this->isMainCompilePage()) {
             if (!$this->bLicense) {
-                $this->sCode = preg_replace('#<title>(.*?)</title>#is', '<title>$1 (<?php echo t(\'Powered by\') ?>' . ' ' . self::SOFTWARE_NAME . ')</title>', $this->sCode);
+                $this->sCode = preg_replace('#<title>(.*?)</title>#is', '<title>$1 (<?php echo t(\'Powered by %software_name%\') ?>)</title>', $this->sCode);
             }
 
             // It is forbidden to violate the copyright!
