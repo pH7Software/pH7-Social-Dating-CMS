@@ -26,12 +26,12 @@ class AlbumForm
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
 
         $oForm = new \PFBC\Form('form_video_album');
-        $oForm->configure(array('action' => ''));
+        $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_video_album', 'form_video_album'));
         $oForm->addElement(new \PFBC\Element\Token('album'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Album Cover Name:'), 'name', array('required' => 1, 'pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Album Cover Description:'), 'description', array('validation' => new \PFBC\Validation\Str(2, 200))));
-        $oForm->addElement(new \PFBC\Element\File(t('Album Cover Thumbnail:'), 'album', array('accept' => 'image/*', 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Album Cover Name:'), 'name', ['required' => 1, 'pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern)]));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Album Cover Description:'), 'description', ['validation' => new \PFBC\Validation\Str(2, 200)]));
+        $oForm->addElement(new \PFBC\Element\File(t('Album Cover Thumbnail:'), 'album', ['accept' => 'image/*', 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
