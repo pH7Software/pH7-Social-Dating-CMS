@@ -7,7 +7,7 @@
  * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Parse
- * @version          1.7
+ * @version          1.9
  */
 
 namespace PH7\Framework\Parse;
@@ -27,6 +27,17 @@ class SysVar
 
     /** @var string */
     private $sVar;
+
+    /** @var array */
+    private static $aKernelVariables = [
+        '%software_name%' => Kernel::SOFTWARE_NAME,
+        '%software_author%' => 'Pierre-Henry Soria',
+        '%software_version_name%' => Kernel::SOFTWARE_VERSION_NAME,
+        '%software_version%' => Kernel::SOFTWARE_VERSION,
+        '%software_build%' => Kernel::SOFTWARE_BUILD,
+        '%software_email%' => Kernel::SOFTWARE_EMAIL,
+        '%software_website%' => Kernel::SOFTWARE_WEBSITE
+    ];
 
     /**
      * Parser for the System variables.
@@ -78,13 +89,9 @@ class SysVar
 
     private function parseKernelVars()
     {
-        $this->sVar = str_replace('%software_name%', Kernel::SOFTWARE_NAME, $this->sVar);
-        $this->sVar = str_replace('%software_author%', 'Pierre-Henry Soria', $this->sVar);
-        $this->sVar = str_replace('%software_version_name%', Kernel::SOFTWARE_VERSION_NAME, $this->sVar);
-        $this->sVar = str_replace('%software_version%', Kernel::SOFTWARE_VERSION, $this->sVar);
-        $this->sVar = str_replace('%software_build%', Kernel::SOFTWARE_BUILD, $this->sVar);
-        $this->sVar = str_replace('%software_email%', Kernel::SOFTWARE_EMAIL, $this->sVar);
-        $this->sVar = str_replace('%software_website%', Kernel::SOFTWARE_WEBSITE, $this->sVar);
+        foreach (self::$aKernelVariables as $sKey => $sValue) {
+            $this->sVar = str_replace($sKey, $sValue, $this->sVar);
+        }
     }
 
     private function removeNotParsingDelimiters()
