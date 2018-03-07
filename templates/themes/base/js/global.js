@@ -129,4 +129,6 @@ function loadingImg(iStatus, sIdContainer) {
         $("#" + sIdContainer).html('');
 }
 
-$('div[role=alert]').fadeOut(15000);
+if ($('div[role=alert]').length) {
+    $('div[role=alert]').fadeOut(15000);
+}
