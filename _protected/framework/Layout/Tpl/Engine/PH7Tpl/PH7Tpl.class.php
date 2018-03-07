@@ -463,7 +463,7 @@ class PH7Tpl extends Kernel
             $this->sCompileDir2 = $this->sCompileDir . $this->registry->module . '_' . md5($this->registry->path_module) . PH7_DS . PH7_TPL_MOD_NAME . PH7_DS . $this->getCurrentController();
         }
 
-        $this->sCompileDirFile = ($this->isMainDir($sDirPath)) ? $this->sCompileDir2 . $this->file->getFileWithoutExt($this->sTplFile) . static::COMPILE_FILE_EXT : $this->sCompileDir2 .
+        $this->sCompileDirFile = ($this->isMainDir($sDirPath) ? $this->sCompileDir2 . $this->file->getFileWithoutExt($this->sTplFile) . static::COMPILE_FILE_EXT : $this->sCompileDir2) .
             str_replace($this->getCurrentController(), '', $this->file->getFileWithoutExt($this->sTplFile)) . static::COMPILE_FILE_EXT;
 
         if (!$this->file->existFile($this->sTemplateDirFile)) {
@@ -676,7 +676,7 @@ class PH7Tpl extends Kernel
      */
     private function checkCacheDir()
     {
-        $this->sCacheDir = (empty($this->sCacheDir)) ? PH7_PATH_CACHE . static::CACHE_DIR . PH7_DS : $this->sCacheDir;
+        $this->sCacheDir = empty($this->sCacheDir) ? PH7_PATH_CACHE . static::CACHE_DIR . PH7_DS : $this->sCacheDir;
 
         return $this;
     }
