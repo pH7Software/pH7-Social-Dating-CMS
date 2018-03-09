@@ -346,26 +346,9 @@ class UserCoreModel extends Model
 
         $sSqlMatchSex = $bIsMatchSex ? ' AND matchSex LIKE :matchSex ' : '';
 
+        $sSqlSex = '';
         if ($bIsSex) {
-            $sGender = '';
-            $aSex = $aParams[SearchQueryCore::SEX];
-            foreach ($aSex as $sSex) {
-                if ($sSex === 'male') {
-                    $sGender .= '\'male\',';
-                }
-
-                if ($sSex === 'female') {
-                    $sGender .= '\'female\',';
-                }
-
-                if ($sSex === 'couple') {
-                    $sGender .= '\'couple\',';
-                }
-            }
-
-            $sSqlSex = ' AND sex IN (' . rtrim($sGender, ',') . ') ';
-        } else {
-            $sSqlSex = '';
+            $sSqlSex = $this->getSexInClauseSql($aParams[SearchQueryCore::SEX]);
         }
 
         $rStmt = Db::getInstance()->prepare(
@@ -1549,6 +1532,32 @@ class UserCoreModel extends Model
     public function getUserWithAvatarOnlySql()
     {
         return ' AND avatar IS NOT NULL AND approvedAvatar = 1';
+    }
+
+    /**
+     * @param array $aSex
+     *
+     * @return string
+     */
+    private function getSexInClauseSql(array $aSex)
+    {
+        $sGender = '';
+
+        foreach ($aSex as $sSex) {
+            if ($sSex === 'male') {
+                $sGender .= '\'male\',';
+            }
+
+            if ($sSex === 'female') {
+                $sGender .= '\'female\',';
+            }
+
+            if ($sSex === 'couple') {
+                $sGender .= '\'couple\',';
+            }
+        }
+
+        return ' AND sex IN (' . rtrim($sGender, ',') . ') ';
     }
 
     /**
