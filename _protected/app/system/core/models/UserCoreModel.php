@@ -318,16 +318,16 @@ class UserCoreModel extends Model
 
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = !$bCount ? '*' : 'COUNT(m.profileId) AS totalUsers';
-        $sSqlFirstName = $bIsFirstName ? ' AND firstName = :firstName' : '';
-        $sSqlMiddleName = $bIsMiddleName ? ' AND middleName = :middleName' : '';
-        $sSqlLastName = $bIsLastName ? ' AND lastName = :lastName' : '';
+        $sSqlFirstName = $bIsFirstName ? ' AND LOWER(firstName) LIKE LOWER(:firstName)' : '';
+        $sSqlMiddleName = $bIsMiddleName ? ' AND LOWER(middleName) LIKE LOWER(:middleName)' : '';
+        $sSqlLastName = $bIsLastName ? ' AND LOWER(lastName) LIKE LOWER(:lastName)' : '';
         $sSqlSingleAge = $bIsSingleAge ? ' AND birthDate LIKE :birthDate ' : '';
         $sSqlAge = $bIsAge ? ' AND birthDate BETWEEN DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age2 YEAR) AND DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age1 YEAR) ' : '';
         $sSqlHeight = $bIsHeight ? ' AND height = :height ' : '';
         $sSqlWeight = $bIsWeight ? ' AND weight = :weight ' : '';
         $sSqlCountry = $bIsCountry ? ' AND country = :country ' : '';
-        $sSqlCity = $bIsCity ? ' AND city LIKE :city ' : '';
-        $sSqlState = $bIsState ? ' AND state LIKE :state ' : '';
+        $sSqlCity = $bIsCity ? ' AND LOWER(city) LIKE LOWER(:city) ' : '';
+        $sSqlState = $bIsState ? ' AND LOWER(state) LIKE LOWER(:state) ' : '';
         $sSqlZipCode = $bIsZipCode ? ' AND zipCode LIKE :zipCode ' : '';
         $sSqlEmail = $bIsMail ? ' AND email LIKE :email ' : '';
         $sSqlOnline = $bIsOnline ? ' AND userStatus = :userStatus AND lastActivity > DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL ' . DbConfig::getSetting('userTimeout') . ' MINUTE) ' : '';
