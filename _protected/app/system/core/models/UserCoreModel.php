@@ -651,7 +651,7 @@ class UserCoreModel extends Model
      */
     public function add(array $aData)
     {
-        $sHashValidation = (!empty($aData['hash_validation']) ? $aData['hash_validation'] : null);
+        $sHashValidation = !empty($aData['hash_validation']) ? $aData['hash_validation'] : null;
 
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER) . '(email, username, password, firstName, lastName, sex, matchSex, birthDate, active, ip, hashValidation, joinDate, lastActivity)
             VALUES (:email, :username, :password, :firstName, :lastName, :sex, :matchSex, :birthDate, :active, :ip, :hashValidation, :joinDate, :lastActivity)');
