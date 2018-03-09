@@ -93,11 +93,12 @@ class AdminCoreModel extends UserCoreModel
             $aRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             return $aRow;
-        } else {
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
-            return (int)$oRow->totalUsers;
         }
+
+        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        Db::free($rStmt);
+
+        return (int)$oRow->totalUsers;
     }
 
     /**
