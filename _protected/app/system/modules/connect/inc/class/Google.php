@@ -134,13 +134,13 @@ class Google extends Api implements IApi
             'city' => Geo::getCity(),
             'state' => Geo::getState(),
             'zip_code' => Geo::getZipCode(),
-            'description' => (!empty($aProfile['bio'])) ? $aProfile['bio'] : '',
+            'description' => !empty($aProfile['bio']) ? $aProfile['bio'] : '',
             'website' => '',
             'social_network_site' => $aProfile['link'],
             'ip' => Ip::get(),
             'prefix_salt' => Various::genRnd(),
             'suffix_salt' => Various::genRnd(),
-            'hash_validation' => Various::genRnd(),
+            'hash_validation' => Various::genRnd(null, UserCoreModel::HASH_VALIDATION_LENGTH),
             'is_active' => DbConfig::getSetting('userActivationType')
         ];
 

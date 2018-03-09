@@ -138,7 +138,7 @@ class Microsoft extends Api
             'ip' => Ip::get(),
             'prefix_salt' => Various::genRnd(),
             'suffix_salt' => Various::genRnd(),
-            'hash_validation' => Various::genRnd(),
+            'hash_validation' => Various::genRnd(null, UserCoreModel::HASH_VALIDATION_LENGTH),
             'is_active' => DbConfig::getSetting('userActivationType')
         ];
 

@@ -46,7 +46,7 @@ class JoinFormProcess extends Form
             'first_name' => $this->httpRequest->post('first_name'),
             'reference' => $this->getAffiliateReference(),
             'ip' => Ip::get(),
-            'hash_validation' => Various::genRnd(),
+            'hash_validation' => Various::genRnd(null, UserCoreModel::HASH_VALIDATION_LENGTH),
             'current_date' => (new CDateTime)->get()->dateTime('Y-m-d H:i:s'),
             'is_active' => $this->iActiveType,
             'group_id' => (int)DbConfig::getSetting('defaultMembershipGroupId'),

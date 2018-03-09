@@ -36,7 +36,7 @@ class AffiliateModel extends AffiliateCoreModel
         $rStmt->bindValue(':birthDate', $aData['birth_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':active', $aData['is_active'], \PDO::PARAM_INT);
         $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
-        $rStmt->bindParam(':hashValidation', $aData['hash_validation'], \PDO::PARAM_STR, 40);
+        $rStmt->bindParam(':hashValidation', $aData['hash_validation'], \PDO::PARAM_STR, self::HASH_VALIDATION_LENGTH);
         $rStmt->bindValue(':joinDate', $aData['current_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':lastActivity', $aData['current_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':affiliatedId', $aData['affiliated_id'], \PDO::PARAM_INT);

@@ -28,6 +28,8 @@ class UserCoreModel extends Model
     const CACHE_GROUP = 'db/sys/mod/user';
     const CACHE_TIME = 604800;
 
+    const HASH_VALIDATION_LENGTH = 40;
+
     const OFFLINE_STATUS = 0;
     const ONLINE_STATUS = 1;
     const BUSY_STATUS = 2;
@@ -254,7 +256,7 @@ class UserCoreModel extends Model
 
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET hashValidation = :hash WHERE profileId = :profileId LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindParam(':hash', $sHash, \PDO::PARAM_STR, 40);
+        $rStmt->bindParam(':hash', $sHash, \PDO::PARAM_STR, self::HASH_VALIDATION_LENGTH);
 
         return $rStmt->execute();
     }
@@ -274,7 +276,7 @@ class UserCoreModel extends Model
 
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(profileId) FROM' . Db::prefix($sTable) . 'WHERE email = :email AND hashValidation = :hash LIMIT 1');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
-        $rStmt->bindParam(':hash', $sHash, \PDO::PARAM_STR, 40);
+        $rStmt->bindParam(':hash', $sHash, \PDO::PARAM_STR, self::HASH_VALIDATION_LENGTH);
         $rStmt->execute();
 
         return $rStmt->fetchColumn() == 1;
@@ -652,7 +654,7 @@ class UserCoreModel extends Model
 
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET active = 1 WHERE email = :email AND hashValidation = :hash AND active = 2');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
-        $rStmt->bindParam(':hash', $sHash, \PDO::PARAM_STR, 40);
+        $rStmt->bindParam(':hash', $sHash, \PDO::PARAM_STR, self::HASH_VALIDATION_LENGTH);
 
         return $rStmt->execute();
     }
@@ -680,7 +682,7 @@ class UserCoreModel extends Model
         $rStmt->bindValue(':birthDate', $aData['birth_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':active', (!empty($aData['is_active']) ? $aData['is_active'] : 1), \PDO::PARAM_INT);
         $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
-        $rStmt->bindParam(':hashValidation', $sHashValidation, \PDO::PARAM_STR, 40);
+        $rStmt->bindParam(':hashValidation', $sHashValidation, \PDO::PARAM_STR, self::HASH_VALIDATION_LENGTH);
         $rStmt->bindValue(':joinDate', $this->sCurrentDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':lastActivity', $this->sCurrentDate, \PDO::PARAM_STR);
         $rStmt->execute();

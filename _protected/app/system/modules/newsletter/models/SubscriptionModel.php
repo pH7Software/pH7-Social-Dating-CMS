@@ -43,7 +43,7 @@ class SubscriptionModel extends UserCoreModel
         $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
         $rStmt->bindValue(':joinDate', $aData['current_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
-        $rStmt->bindParam(':hashValidation', $aData['hash_validation'], \PDO::PARAM_STR, 40);
+        $rStmt->bindParam(':hashValidation', $aData['hash_validation'], \PDO::PARAM_STR, self::HASH_VALIDATION_LENGTH);
         $rStmt->bindValue(':active', $aData['active'], \PDO::PARAM_INT);
         $rStmt->bindValue(':affiliatedId', $aData['affiliated_id'], \PDO::PARAM_INT);
         $rStmt->execute();

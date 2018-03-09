@@ -38,7 +38,7 @@ class ForgotPasswordFormProcess extends Form
                 t('Oops, this "%0%" is not associated with any %site_name% account. Please, make sure that you entered the e-mail address used in creating your account.', escape(substr($sEmail, 0, PH7_MAX_EMAIL_LENGTH)))
             );
         } else {
-            $this->oUserModel->setNewHashValidation($iProfileId, Various::genRnd(), $sTable);
+            $this->oUserModel->setNewHashValidation($iProfileId, Various::genRnd(null, UserCoreModel::HASH_VALIDATION_LENGTH), $sTable);
             (new UserCore)->clearReadProfileCache($iProfileId, $sTable); // Clean the profile data (for the new hash)
 
             if (!$this->sendMail($sTable, $iProfileId)) {

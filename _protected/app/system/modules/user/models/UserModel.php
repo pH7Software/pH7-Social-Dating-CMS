@@ -41,7 +41,7 @@ class UserModel extends UserCoreModel
         $rStmt->bindValue(':reference', $aData['reference'], \PDO::PARAM_STR);
         $rStmt->bindValue(':is_active', $aData['is_active'], \PDO::PARAM_INT);
         $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
-        $rStmt->bindParam(':hash_validation', $aData['hash_validation'], \PDO::PARAM_STR, 40);
+        $rStmt->bindParam(':hash_validation', $aData['hash_validation'], \PDO::PARAM_STR, self::HASH_VALIDATION_LENGTH);
         $rStmt->bindValue(':current_date', $aData['current_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':affiliated_id', $aData['affiliated_id'], \PDO::PARAM_INT);
         $rStmt->execute();
