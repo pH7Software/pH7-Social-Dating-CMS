@@ -41,18 +41,8 @@ namespace PH7\Framework\Translate {
         public function __construct()
         {
             $this->oConfig = Config::getInstance();
-            $oCookie = new Cookie;
 
-            if ($this->isLangParamSet()) {
-                $this->sUserLang = $_REQUEST[self::REQUEST_PARAM_NAME];
-                $oCookie->set(static::COOKIE_NAME, $this->sUserLang, static::COOKIE_LIFETIME);
-            } elseif ($oCookie->exists(static::COOKIE_NAME)) {
-                $this->sUserLang = $oCookie->get(static::COOKIE_NAME);
-            } else {
-                $this->sUserLang = (new Browser)->getLanguage();
-            }
-
-            unset($oCookie);
+            $this->initializeUserLangOverride();
         }
 
         /**
@@ -195,6 +185,22 @@ namespace PH7\Framework\Translate {
             $this->setEncoding();
 
             return $this;
+        }
+
+        private function initializeUserLangOverride()
+        {
+            $oCookie = new Cookie;
+
+            if ($this->isLangParamSet()) {
+                $this->sUserLang = $_REQUEST[self::REQUEST_PARAM_NAME];
+                $oCookie->set(static::COOKIE_NAME, $this->sUserLang, static::COOKIE_LIFETIME);
+            } elseif ($oCookie->exists(static::COOKIE_NAME)) {
+                $this->sUserLang = $oCookie->get(static::COOKIE_NAME);
+            } else {
+                $this->sUserLang = (new Browser)->getLanguage();
+            }
+
+            unset($oCookie);
         }
 
         /**
