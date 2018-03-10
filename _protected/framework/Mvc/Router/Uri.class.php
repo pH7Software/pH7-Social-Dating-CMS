@@ -20,6 +20,8 @@ use PH7\Framework\Pattern\Statik;
 
 class Uri
 {
+    const ROUTE_FILE_EXT = '.xml';
+
     /** @var bool */
     private static $bFullClean;
 
@@ -105,8 +107,8 @@ class Uri
      */
     private static function getRouteFilePath()
     {
-        $sPathLangName = PH7_PATH_APP_CONFIG . 'routes/' . PH7_LANG_CODE . '.xml';
-        $sPathDefaultLang = PH7_PATH_APP_CONFIG . 'routes/' . PH7_DEFAULT_LANG_CODE . '.xml';
+        $sPathLangName = PH7_PATH_APP_CONFIG . 'routes/' . PH7_LANG_CODE . self::ROUTE_FILE_EXT;
+        $sPathDefaultLang = PH7_PATH_APP_CONFIG . 'routes/' . PH7_DEFAULT_LANG_CODE . self::ROUTE_FILE_EXT;
 
         if (is_file($sPathLangName)) {
             return $sPathLangName;
