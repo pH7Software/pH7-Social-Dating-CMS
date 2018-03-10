@@ -78,6 +78,7 @@ class Uri
     {
         self::$bFullClean = $bFullClean;
 
+        // Caching URI function will speed up the website ~500ms faster (up to 1.4s!)
         $sCacheFileId = 'geturi' . $sModule . $sController . $sAction . $sVars;
         $oCache = (new Cache)->start(self::CACHE_GROUP, $sCacheFileId, self::CACHE_TIME);
         $oCache->enabled(self::URI_CACHE_ENABLED);
