@@ -23,6 +23,8 @@ class Uri
 {
     const CACHE_GROUP = 'str/uri';
     const CACHE_TIME = 86400;
+
+    // Set to FALSE if you got too many files (e.g. if inode files usage is overaged on shared hosting)
     const URI_CACHE_ENABLED = true;
 
     const ROUTE_FILE_EXT = '.xml';
