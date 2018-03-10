@@ -18,6 +18,7 @@ use Smarty;
 abstract class Controller implements Controllable
 {
     const PHP_TIMEZONE_DIRECTIVE = 'date.timezone';
+    const VIEW_CACHE_LIFETIME = 86400; // 86400 seconds = 24h
 
     const SOFTWARE_NAME = 'pH7CMS';
     const DEFAULT_SITE_NAME = 'My Dating WebApp';
@@ -78,7 +79,7 @@ abstract class Controller implements Controllable
 
         // Smarty Cache
         $this->oView->caching = 0; // 0 = Cache disabled |  1 = Cache never expires | 2 = Set the cache duration at "cache_lifetime" attribute
-        $this->oView->cache_lifetime = 86400; // 86400 seconds = 24h
+        $this->oView->cache_lifetime = self::VIEW_CACHE_LIFETIME;
 
         $this->oView->assign('LANG', $LANG);
         $this->oView->assign('software_name', self::SOFTWARE_NAME);
