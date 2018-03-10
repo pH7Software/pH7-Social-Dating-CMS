@@ -12,7 +12,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Http\Http;
-use PH7\Framework\Mvc\Model\Design;
+use PH7\Framework\Mvc\Model\Design as DesignModel;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Security\CSRF\Token;
 
@@ -65,7 +65,7 @@ class AdsAjax
         $this->bStatus = $this->oAdsModel->setStatus($this->oHttpRequest->post('adsId'), 1, $sTable);
 
         if ($this->bStatus) {
-            (new Cache)->start(Design::CACHE_STATIC_GROUP, null, null)->clear();
+            (new Cache)->start(DesignModel::CACHE_STATIC_GROUP, null, null)->clear();
             $this->sMsg = jsonMsg(1, t('The banner has been activated.'));
         } else {
             $this->sMsg = jsonMsg(0, t('Cannot activate the banner. Please try later.'));
@@ -80,7 +80,7 @@ class AdsAjax
         $this->bStatus = $this->oAdsModel->setStatus($this->oHttpRequest->post('adsId'), 0, $sTable);
 
         if ($this->bStatus) {
-            (new Cache)->start(Design::CACHE_STATIC_GROUP, null, null)->clear();
+            (new Cache)->start(DesignModel::CACHE_STATIC_GROUP, null, null)->clear();
             $this->sMsg = jsonMsg(1, t('The banner has been deactivated.'));
         } else {
             $this->sMsg = jsonMsg(0, t('Cannot deactivate the banner. Please try later.'));
@@ -96,7 +96,7 @@ class AdsAjax
 
         if ($this->bStatus) {
             /* Clean AdminCoreModel Ads and Model\Design for STATIC data */
-            (new Cache)->start(Design::CACHE_STATIC_GROUP, null, null)->clear()
+            (new Cache)->start(DesignModel::CACHE_STATIC_GROUP, null, null)->clear()
                 ->start(AdsCoreModel::CACHE_GROUP, 'totalAds', null)->clear()
                 ->start(AdsCoreModel::CACHE_GROUP, 'totalAdsAffiliates', null)->clear();
 
