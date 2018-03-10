@@ -15,11 +15,18 @@ namespace PH7\Framework\Xml;
 defined('PH7') or exit('Restricted access');
 
 use DOMDocument;
+use PH7\Framework\Cache\Cache;
 
 class Link
 {
+    const CACHE_GROUP = 'str/xml';
+    const CACHE_LIFETIME = 604800; // A week
+
     /** @var DOMDocument */
     private $oXml;
+
+    /** @var Cache */
+    private $oCache;
 
     /** @var string */
     private $sPath;
@@ -36,6 +43,7 @@ class Link
     {
         $this->sPath = $sPath;
         $this->oXml = new DOMDocument;
+        $this->oCache = new Cache;
     }
 
     /**
@@ -47,12 +55,17 @@ class Link
      */
     public function get()
     {
-        if (!@$this->oXml->load($this->sPath)) {
-            throw new Exception(t("URL '%0%' doesn't exist or isn't a valid XML file.", $this->sPath));
-        }
+        $this->oCache->start(self::CACHE_GROUP, 'xmlfile', self::CACHE_LIFETIME);
 
-        foreach ($this->oXml->getElementsByTagName('link') as $oTag) {
-            $this->aRet[$oTag->getAttribute('url')] = $oTag->getAttribute('title');
+        if (!$this->aRet = $this->oCache->get()) {
+            if (!@$this->oXml->load($this->sPath)) {
+                throw new Exception(t("URL '%0%' doesn't exist or isn't a valid XML file.", $this->sPath));
+            }
+
+            foreach ($this->oXml->getElementsByTagName('link') as $oTag) {
+                $this->aRet[$oTag->getAttribute('url')] = $oTag->getAttribute('title');
+            }
+            $this->oCache->put($this->aRet);
         }
 
         return $this->aRet;
