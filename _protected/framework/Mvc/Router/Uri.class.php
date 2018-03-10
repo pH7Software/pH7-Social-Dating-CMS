@@ -49,7 +49,7 @@ class Uri
      */
     public static function loadFile(DOMDocument $oDom)
     {
-        $oCache = (new Cache)->start(self::CACHE_GROUP, 'routefile' . PH7_LANG_NAME, self::CACHE_TIME);
+        $oCache = (new Cache)->start(self::CACHE_GROUP, 'routefile' . PH7_LANG_CODE, self::CACHE_TIME);
 
         if (!$sContents = $oCache->get()) {
             $sContents = file_get_contents(self::getRouteFilePath()); // Get the XML contents

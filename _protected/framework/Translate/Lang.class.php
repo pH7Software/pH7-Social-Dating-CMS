@@ -130,7 +130,7 @@ namespace PH7\Framework\Translate {
         /**
          * Get the current language name.
          *
-         * @return string The prefix of the language.
+         * @return string The prefix of the language (e.g., en_US).
          */
         public function getLang()
         {
