@@ -122,7 +122,7 @@ class Bootstrap
      */
     private function loadInitFiles()
     {
-        // Loading Framework Classes
+        // Load Framework Classes
         require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
         FrameworkLoader::getInstance()->init();
 
@@ -132,14 +132,14 @@ class Bootstrap
         // Specific to the current environment
         Import::file(PH7_PATH_APP . 'configs/environment/' . Env::getFileName(Config::getInstance()->values['mode']['environment']));
 
-        // Loading Class ~/protected/app/includes/classes/*
+        // Load Class ~/protected/app/includes/classes/*
         Import::pH7App('includes.classes.Loader.Autoloader');
         AppLoader::getInstance()->init();
 
-        // Loading Debug class
+        // Load Debug class
         Import::pH7FwkClass('Error.Debug');
 
-        // Loading String Class
+        // Load String Class
         Import::pH7FwkClass('Str.Str');
 
         /* Structure/General.class.php functions are not currently used */

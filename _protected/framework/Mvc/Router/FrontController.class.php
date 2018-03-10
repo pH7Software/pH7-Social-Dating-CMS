@@ -456,6 +456,7 @@ final class FrontController
      */
     private function ajaxRouter($sMod = null)
     {
+        // Load Ajax class for jsonMsg() func
         FileImporter::pH7FwkClass('Ajax.Ajax');
 
         // Option for Content Type
@@ -465,9 +466,8 @@ final class FrontController
             }
         }
 
+        // For module only!
         if (!empty($sMod)) {
-            // For module only!
-
             $this->_pathInitialize();
 
             $sFolder = ($this->oUri->fragment(4) && preg_match(self::REGEX_FOLDER_FORMAT, $this->oUri->fragment(4))) ? PH7_DS . $this->oUri->fragment(4) : '';
