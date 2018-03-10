@@ -39,8 +39,7 @@ class SmileCoreAjax extends Emoticon
     {
         $oCache = (new Cache)->start('str/json', 'emoticons', 120 * 48 * 30);
 
-        self::$sData = $oCache->get();
-        if (!self::$sData) {
+        if (!self::$sData = $oCache->get()) {
             $aEmoticons = static::get();
 
             foreach ($aEmoticons as $sEmoticonKey => $aEmoticon) {
