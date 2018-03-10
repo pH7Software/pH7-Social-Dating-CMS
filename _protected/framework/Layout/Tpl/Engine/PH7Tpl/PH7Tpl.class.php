@@ -709,9 +709,7 @@ class PH7Tpl extends Kernel
         $this->file->createDir($this->sCacheDir2);
         $this->sCacheDirFile = $this->sCacheDir2 . str_replace(PH7_DS, '_', $this->file->getFileWithoutExt($this->sTplFile)) . '.cache.html';
 
-        // If the cache has expired
-        if ($this->file->getModifTime($this->sCompileDirFile) > $this->file->getModifTime($this->sCacheDirFile) || (!empty($this->mCacheExpire) && $this->
-                file->getModifTime($this->sCacheDirFile) < time() - $this->mCacheExpire)) {
+        if ($this->hasCacheExpired()) {
             ob_start();
 
             // Extraction Variables
@@ -1001,6 +999,15 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     {
         return false === strpos($this->sTemplateDir, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS) &&
             false !== strpos($this->sCode, '$this->display(\'' . $this->getMainPage() . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS)');
+    }
+
+    /**
+     * @return bool Returns TRUE if the cache has expired, FALSE otherwise.
+     */
+    private function hasCacheExpired()
+    {
+        return $this->file->getModifTime($this->sCompileDirFile) > $this->file->getModifTime($this->sCacheDirFile) ||
+            (!empty($this->mCacheExpire) && $this->file->getModifTime($this->sCacheDirFile) < time() - $this->mCacheExpire);
     }
 
     /**
