@@ -4,7 +4,9 @@
     {elseif sizeof($urls) > 0}
         <ul>
             {each $key => $value in $urls}
-                <li class="underline"><a href="{key}">{value}</a></li>
+                <li class="underline">
+                    <a href="{key}">{value}</a>
+                </li>
             {/each}
         </ul>
         {else}
