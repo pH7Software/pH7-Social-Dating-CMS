@@ -23,6 +23,7 @@ class Uri
 {
     const CACHE_GROUP = 'str/uri';
     const CACHE_TIME = 86400;
+    const URI_CACHE_ENABLED = true;
 
     const ROUTE_FILE_EXT = '.xml';
 
@@ -77,6 +78,7 @@ class Uri
 
         $sCacheFileId = 'geturi' . $sModule . $sController . $sAction . $sVars;
         $oCache = (new Cache)->start(self::CACHE_GROUP, $sCacheFileId, self::CACHE_TIME);
+        $oCache->enabled(self::URI_CACHE_ENABLED);
 
         if (!$sUrl = $oCache->get()) {
             $sUrl = self::uri(['module' => $sModule, 'controller' => $sController, 'action' => $sAction, 'vars' => $sVars]);
