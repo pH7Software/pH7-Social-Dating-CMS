@@ -242,7 +242,7 @@ class UserController extends Controller
         );
     }
 
-    public function approveAll($iId)
+    public function approveAll()
     {
         if (!(new SecurityToken)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
@@ -259,7 +259,7 @@ class UserController extends Controller
         );
     }
 
-    public function disapproveAll($iId)
+    public function disapproveAll()
     {
         if (!(new SecurityToken)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();

@@ -200,7 +200,7 @@ class AdminController extends Controller
         );
     }
 
-    public function approveAll($iId)
+    public function approveAll()
     {
         if (!(new SecurityToken)->check('aff_action')) {
             $this->sMsg = Form::errorTokenMsg();
@@ -217,7 +217,7 @@ class AdminController extends Controller
         );
     }
 
-    public function disapproveAll($iId)
+    public function disapproveAll()
     {
         if (!(new SecurityToken)->check('aff_action')) {
             $this->sMsg = Form::errorTokenMsg();
