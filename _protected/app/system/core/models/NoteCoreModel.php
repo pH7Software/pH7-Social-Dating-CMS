@@ -16,6 +16,8 @@ class NoteCoreModel extends Model
     const CACHE_GROUP = 'db/sys/mod/note';
     const CACHE_TIME = 999990;
 
+    const POSTS_CACHE_ENABLED = false;
+
     /**
      * Gets all note posts.
      *
@@ -28,7 +30,8 @@ class NoteCoreModel extends Model
      */
     public function getPosts($iOffset, $iLimit, $sOrder = SearchCoreModel::CREATED, $iApproved = 1)
     {
-        $this->cache->enabled(false); // Disabled the cache (if you have a few notes, you can enable it to improve performance).
+        // Disabled the cache (if you have a few notes, you can enable it to improve performance).
+        $this->cache->enabled(self::POSTS_CACHE_ENABLED);
 
         // We do not have a long duration of the cache for the changes of positions to be easily updated on the list of Notes of the home page.
         $this->cache->start(self::CACHE_GROUP, 'posts' . $iOffset . $iLimit . $sOrder . $iApproved, 3600);
