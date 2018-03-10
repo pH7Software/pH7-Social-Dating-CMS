@@ -226,9 +226,7 @@ namespace PH7\Framework\Translate {
          */
         private function needToClearUriRoutesCache()
         {
-            $sLangCode = $this->getIsoCode($this->sLangName);
-
-            return Uri::URI_CACHE_ENABLED === true && Uri::doesLangRouteFileExist($sLangCode);
+            return Uri::URI_CACHE_ENABLED === true && $this->isLangParamSet();
         }
 
         /**

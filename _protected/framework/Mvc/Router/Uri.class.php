@@ -93,21 +93,21 @@ class Uri
     }
 
     /**
-     * @param string $sLangCode The two-letter language code. e.g., en, fr, de, ru, ...
-     *
-     * @return bool
-     */
-    public static function doesLangRouteFileExist($sLangCode)
-    {
-        return is_file(PH7_PATH_APP_CONFIG . 'routes/' . $sLangCode . self::ROUTE_FILE_EXT);
-    }
-
-    /**
      * @return void
      */
     public static function clearCache()
     {
         (new Cache)->start(self::CACHE_GROUP, null, null)->clear();
+    }
+
+    /**
+     * @param string $sLangCode The two-letter language code. e.g., en, fr, de, ru, ...
+     *
+     * @return bool
+     */
+    private static function doesLangRouteFileExist($sLangCode)
+    {
+        return is_file(PH7_PATH_APP_CONFIG . 'routes/' . $sLangCode . self::ROUTE_FILE_EXT);
     }
 
     /**
