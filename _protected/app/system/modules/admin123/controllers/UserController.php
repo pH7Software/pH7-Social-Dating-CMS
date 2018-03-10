@@ -387,6 +387,15 @@ class UserController extends Controller
         );
     }
 
+    /**
+     * @param int $iId
+     * @param int $iStatus
+     *
+     * @return string Status message.
+     *
+     * @throws Framework\File\Exception
+     * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
+     */
     private function moderateRegistration($iId, $iStatus)
     {
         if (isset($iId, $iStatus)) {
