@@ -44,6 +44,8 @@ class MainController extends Controller
     protected function xmlLink()
     {
         $this->setContentType(); // Header
+
+        $this->view->setCaching(false);
     }
 
     /**

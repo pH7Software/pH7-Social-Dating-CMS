@@ -21,7 +21,7 @@ class SitemapController extends MainController implements XmlControllable
 
     public function index()
     {
-        $this->view->setCaching(true);
+        $this->view->setCaching(false);
 
         $this->sTitle = t('Site Map');
         $this->view->page_title = $this->sTitle;
