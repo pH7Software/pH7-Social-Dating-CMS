@@ -81,7 +81,7 @@ class Uri
         // Caching URI function will speed up the website ~500ms faster (up to 1.4s!)
         $sCacheId = 'geturi' . $sModule . $sController . $sAction . $sVars;
         $oCache = (new Cache)->start(self::CACHE_GROUP, $sCacheId, self::CACHE_TIME);
-        $oCache->enabled(self::URI_CACHE_ENABLED);
+        $oCache->enabled(static::URI_CACHE_ENABLED);
 
         if (!$sUrl = $oCache->get()) {
             $sUrl = self::uri(['module' => $sModule, 'controller' => $sController, 'action' => $sAction, 'vars' => $sVars]);
@@ -90,6 +90,24 @@ class Uri
         unset($oCache);
 
         return $sUrl;
+    }
+
+    /**
+     * @param string $sLangCode The two-letter language code. e.g., en, fr, de, ru, ...
+     *
+     * @return bool
+     */
+    public static function doesLangRouteFileExist($sLangCode)
+    {
+        return is_file(PH7_PATH_APP_CONFIG . 'routes/' . $sLangCode . self::ROUTE_FILE_EXT);
+    }
+
+    /**
+     * @return void
+     */
+    public static function clearCache()
+    {
+        (new Cache)->start(self::CACHE_GROUP, null, null)->clear();
     }
 
     /**
@@ -131,14 +149,13 @@ class Uri
      */
     private static function getRouteFilePath()
     {
-        $sPathLangName = PH7_PATH_APP_CONFIG . 'routes/' . PH7_LANG_CODE . self::ROUTE_FILE_EXT;
         $sPathDefaultLang = PH7_PATH_APP_CONFIG . 'routes/' . PH7_DEFAULT_LANG_CODE . self::ROUTE_FILE_EXT;
 
-        if (is_file($sPathLangName)) {
-            return $sPathLangName;
+        if (self::doesLangRouteFileExist(PH7_LANG_CODE)) {
+            return PH7_PATH_APP_CONFIG . 'routes/' . PH7_LANG_CODE . self::ROUTE_FILE_EXT;
         }
 
-        if (is_file($sPathDefaultLang)) {
+        if (self::doesLangRouteFileExist(PH7_DEFAULT_LANG_CODE)) {
             return $sPathDefaultLang;
         }
 

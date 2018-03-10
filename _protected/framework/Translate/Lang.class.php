@@ -14,6 +14,7 @@ namespace PH7\Framework\Translate {
 
     use PH7\Framework\Config\Config;
     use PH7\Framework\Cookie\Cookie;
+    use PH7\Framework\Mvc\Router\Uri;
     use PH7\Framework\Navigation\Browser;
     use PH7\Framework\Registry\Registry;
 
@@ -170,6 +171,10 @@ namespace PH7\Framework\Translate {
                 $this->sLangName = $this->sUserLang;
                 include PH7_PATH_APP_LANG . $this->sUserLang . '/language.php';
                 date_default_timezone_set($this->oConfig->values['language.application']['timezone']);
+
+                if ($this->needToClearUriRoutesCache()) {
+                    Uri::clearCache();
+                }
             } elseif ($this->oConfig->load(PH7_PATH_APP_LANG . $this->sDefaultLang . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) &&
                 is_file(PH7_PATH_APP_LANG . $this->sDefaultLang . '/language.php')
             ) {
@@ -208,6 +213,16 @@ namespace PH7\Framework\Translate {
             mb_http_input(PH7_ENCODING);
             mb_language('uni');
             mb_regex_encoding(PH7_ENCODING);
+        }
+
+        /**
+         * @return bool
+         */
+        private function needToClearUriRoutesCache()
+        {
+            $sLangCode = $this->getIsoCode($this->sLangName);
+
+            return Uri::URI_CACHE_ENABLED === true && Uri::doesLangRouteFileExist($sLangCode);
         }
 
         /**
