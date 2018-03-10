@@ -21,8 +21,6 @@ class RssController extends MainController implements XmlControllable
 
     public function index()
     {
-        $this->view->setCaching(false);
-
         $this->sTitle = t('RSS Feed List');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('RSS Feed %site_name%, Free Online Dating Site with Video Chat Rooms, Meet Single People with %site_name%');

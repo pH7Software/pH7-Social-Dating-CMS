@@ -21,8 +21,6 @@ class SitemapController extends MainController implements XmlControllable
 
     public function index()
     {
-        $this->view->setCaching(false);
-
         $this->sTitle = t('Site Map');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Map of Website, Free Online Dating Site with Video Chat Rooms, Meet Single People with %site_name%');
