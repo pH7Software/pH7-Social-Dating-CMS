@@ -20,6 +20,9 @@ class MainController extends Controller
     {
         parent::__construct();
 
+        // Enable caching to all template pages of this module
+        $this->view->setCaching(true);
+
         // Global variable for all template pages of this module
         $this->view->admin_email = DbConfig::getSetting('adminEmail');
     }
