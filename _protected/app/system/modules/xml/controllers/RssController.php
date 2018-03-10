@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Xml\Exception as XmlException;
 use PH7\Framework\Xml\Link;
 
 class RssController extends MainController implements XmlControllable
@@ -29,7 +30,12 @@ class RssController extends MainController implements XmlControllable
 
         /*** Get the links ***/
         $sUrl = Uri::get('xml', 'rss', 'xmllink');
-        $this->view->urls = (new Link($sUrl))->get();
+
+        try {
+            $this->view->urls = (new Link($sUrl))->get();
+        } catch (XmlException $oExcept) {
+            $this->view->error = $oExcept->getMessage();
+        }
 
         $this->output();
     }
