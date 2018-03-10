@@ -21,6 +21,7 @@ use PH7\Framework\Util\Various;
 class UserController extends Controller
 {
     const PROFILES_PER_PAGE = 15;
+    const SEARCH_NOT_FOUND_REDIRECT_DELAY = 2; // Seconds
 
     /** @var AdminCore */
     private $oAdmin;
@@ -154,7 +155,7 @@ class UserController extends Controller
                     Uri::get(PH7_ADMIN_MOD, 'user', 'search'),
                     null,
                     null,
-                    2
+                    self::SEARCH_NOT_FOUND_REDIRECT_DELAY
                 );
 
                 $this->displayPageNotFound('No results found. Please try again with wider/new search criteria');
