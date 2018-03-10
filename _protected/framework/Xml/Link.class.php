@@ -55,7 +55,7 @@ class Link
      */
     public function get()
     {
-        $this->oCache->start(self::CACHE_GROUP, 'xmlfile', self::CACHE_LIFETIME);
+        $this->oCache->start(self::CACHE_GROUP, 'xmlfile' . $this->sPath, self::CACHE_LIFETIME);
 
         if (!$this->aRet = $this->oCache->get()) {
             if (!@$this->oXml->load($this->sPath)) {
