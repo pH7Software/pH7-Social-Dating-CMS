@@ -47,6 +47,7 @@ class Uri
     public static function loadFile(DOMDocument $oDom)
     {
         $oCache = (new Cache)->start(self::CACHE_GROUP, 'routefile' . PH7_LANG_NAME, self::CACHE_TIME);
+
         if (!$sContents = $oCache->get()) {
             $sContents = file_get_contents(self::getRouteFilePath()); // Get the XML contents
             $sContents = self::parseVariable($sContents); // Parse the variables
@@ -76,6 +77,7 @@ class Uri
 
         $sCacheFileId = 'geturi' . $sModule . $sController . $sAction . $sVars;
         $oCache = (new Cache)->start(self::CACHE_GROUP, $sCacheFileId, self::CACHE_TIME);
+
         if (!$sUrl = $oCache->get()) {
             $sUrl = self::uri(['module' => $sModule, 'controller' => $sController, 'action' => $sAction, 'vars' => $sVars]);
             $oCache->put($sUrl);

@@ -66,7 +66,6 @@ class NewsFeedCore
                     break; // If we have the number of news we want, we stop the foreach loop.
                 }
             }
-
             $this->oCache->put($this->aData);
         }
 
