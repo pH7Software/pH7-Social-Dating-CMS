@@ -115,39 +115,11 @@ class Cache
     {
         $this->checkCacheDir();
 
-        if ($this->bEnabled) {
-            $this->sGroup = $sGroup . PH7_DS;
-            $this->sId = $sId;
-            $this->iTtl = (int)$iTtl;
-            ob_start();
-        }
+        $this->sGroup = $sGroup . PH7_DS;
+        $this->sId = $sId;
+        $this->iTtl = (int)$iTtl;
 
         return $this;
-    }
-
-    /**
-     * Stop the cache.
-     *
-     * @param bool $bPrint TRUE = Display data with ECHO. FALSE = Return data.
-     *
-     * @return string|null
-     */
-    public function stop($bPrint = true)
-    {
-        if (!$this->bEnabled) {
-            return null;
-        }
-
-        $sBuffer = ob_get_contents();
-        ob_end_clean();
-        $this->write($sBuffer);
-
-        if ($bPrint) {
-            echo $sBuffer;
-            return null;
-        }
-
-        return $sBuffer;
     }
 
     /**
