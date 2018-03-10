@@ -472,8 +472,7 @@ class PH7Tpl extends Kernel
 
 
         /*** If the file does not exist or if the template has been modified, recompile the makefiles ***/
-        if ($this->file->getModifTime($this->sTemplateDirFile) > $this->file->
-            getModifTime($this->sCompileDirFile)) {
+        if ($this->file->getModifTime($this->sTemplateDirFile) > $this->file->getModifTime($this->sCompileDirFile)) {
             $this->compile();
         }
 
