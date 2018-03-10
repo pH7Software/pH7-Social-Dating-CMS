@@ -705,7 +705,7 @@ class PH7Tpl extends Kernel
         // Create cache folder
         $this->file->createDir($this->sCacheDir);
 
-        $this->sCacheDir2 = $this->sCacheDir . $this->registry->module . '_' . md5($this->
+        $this->sCacheDir2 = $this->sCacheDir . PH7_TPL_NAME . PH7_DS . $this->registry->module . '_' . md5($this->
             registry->path_module) . PH7_DS . PH7_TPL_MOD_NAME . PH7_DS . PH7_LANG_NAME . PH7_DS . $this->getCurrentController() . PH7_DS;
         $this->file->createDir($this->sCacheDir2);
         $this->sCacheDirFile = $this->sCacheDir2 . str_replace(PH7_DS, '_', $this->file->getFileWithoutExt($this->sTplFile)) . '.cache.html';
