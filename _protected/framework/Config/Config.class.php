@@ -52,7 +52,7 @@ class Config implements Configurable
                 ['code' => FileNotFoundException::APP_FILE, 'filename' => $this->sConfigAppFilePath] :
                 ['code' => FileNotFoundException::SYS_FILE, 'filename' => $this->sConfigSysFilePath];
 
-            throw new FileNotFoundException(sprintf('"%s" is not found.', $aFile['filename']), $aFile['code']);
+            throw new FileNotFoundException(sprintf('"%s" config file cannot be found.', $aFile['filename']), $aFile['code']);
         }
 
         $this->read();
