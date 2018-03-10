@@ -238,7 +238,7 @@ class PH7Tpl extends Kernel
      */
     public function isEnableCache()
     {
-        return (bool)$this->bCaching;
+        return $this->bCaching;
     }
 
     /**
