@@ -25,6 +25,7 @@ class ConfigFileCoreForm
 
     const CONFIG_KEYS = [
         'general_cache' => 'enable.general.cache',
+        'html_tpl_cache' => 'enable.html.tpl.cache',
         'static_cache' => 'enable.static.cache',
         'static_data_uri' => 'enable.static.data_uri'
     ];
@@ -98,15 +99,19 @@ class ConfigFileCoreForm
     private static function getCustomLabelText($sKey)
     {
         if ($sKey === self::CONFIG_KEYS['general_cache']) {
-            return t('General Cache. Usually for database contents, but may also involve other data.');
+            return t('Enable General Cache. Database caching and other expensive server calculations');
+        }
+
+        if ($sKey === self::CONFIG_KEYS['html_tpl_cache']) {
+            return t('Enable HTML Cache. Caches some HTML pages (e.g., TOS, privacy, site map, ... pages)');
         }
 
         if ($sKey === self::CONFIG_KEYS['static_cache']) {
-            return t('Static Cache. Used to store compressed/minified JS/CSS files (with images converted to base64)');
+            return t('Enable Static Cache. Used to store compressed/minified JS/CSS files');
         }
 
         if ($sKey === self::CONFIG_KEYS['static_data_uri']) {
-            return t('Will convert images to base64 data-URIs (if file size is lower than %0%)', FileHelper::bytesToSize(Gzip::MAX_IMG_SIZE_BASE64_CONVERTOR));
+            return t('Enable data-URIs; Converts images to base64 (if file size is lower than %0%)', FileHelper::bytesToSize(Gzip::MAX_IMG_SIZE_BASE64_CONVERTOR));
         }
 
         return self::cleanLabelText($sKey);
