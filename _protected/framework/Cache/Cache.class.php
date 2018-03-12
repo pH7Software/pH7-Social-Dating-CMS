@@ -82,7 +82,9 @@ class Cache
         if (is_dir($sCacheDir)) {
             $this->sCacheDir = $sCacheDir;
         } else {
-            throw new PH7InvalidArgumentException('"' . $sCacheDir . '" cache directory cannot be found!');
+            throw new PH7InvalidArgumentException(
+                sprintf('"%s" cache directory cannot be found!', $sCacheDir)
+            );
         }
 
         return $this;
@@ -323,6 +325,6 @@ File ID: ' . $this->sId . '
             return true;
         }
 
-        throw new Exception('Could not write cache file: \'' . $sFile . '\'');
+        throw new Exception('Could not write cache file: "' . $sFile . '"');
     }
 }

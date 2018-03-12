@@ -175,7 +175,9 @@ class PH7Tpl extends Kernel
         if (is_dir($sDir)) {
             $this->sTemplateDir = $this->file->checkExtDir($sDir);
         } else {
-            throw new PH7InvalidArgumentException('<strong>' . self::NAME . '</strong> Template Engine cannot found the "' . $sDir . '" template directory.');
+            throw new PH7InvalidArgumentException(
+                sprintf('<strong>%s</strong> cannot find "%s" template directory.', self::NAME, $sDir)
+            );
         }
     }
 
@@ -193,7 +195,10 @@ class PH7Tpl extends Kernel
         if (is_dir($sDir)) {
             $this->sCompileDir = $this->file->checkExtDir($sDir);
         } else {
-            throw new PH7InvalidArgumentException('<strong>' . self::NAME . '</strong> Template Engine cannot found the "' . $sDir . '" compile directory.');
+            throw new PH7InvalidArgumentException(
+                sprintf(
+                    '<strong>%s</strong> cannot find "%s" compile directory.', self::NAME, $sDir)
+            );
         }
     }
 
@@ -211,7 +216,9 @@ class PH7Tpl extends Kernel
         if (is_dir($sDir)) {
             $this->sCacheDir = $this->file->checkExtDir($sDir);
         } else {
-            throw new PH7InvalidArgumentException('<strong>' . self::NAME . '</strong> Template Engine cannot found the "' . $sDir . '" cache directory.');
+            throw new PH7InvalidArgumentException(
+                sprintf('<strong>%s</strong> cannot find "%s" cache directory.', self::NAME, $sDir)
+            );
         }
     }
 
@@ -341,7 +348,7 @@ class PH7Tpl extends Kernel
         $this->file->createDir($this->sCompileDir2);
 
         if (!$this->sCode = $this->file->getFile($this->sTemplateDirFile)) {
-            throw new TplException('Template Fetch Error: \'' . $this->sTemplateDirFile . '\'');
+            throw new TplException('Template Fetch Error: ' . $this->sTemplateDirFile);
         }
 
         // Parser the predefined variables
@@ -388,7 +395,7 @@ class PH7Tpl extends Kernel
             return true;
         }
 
-        throw new TplException('Could not write compiled file: \'' . $this->sCompileDirFile . '\'');
+        throw new TplException('Could not write compiled file: ' . $this->sCompileDirFile);
     }
 
     /**
@@ -489,7 +496,9 @@ class PH7Tpl extends Kernel
             str_replace($this->getCurrentController(), '', $this->file->getFileWithoutExt($this->sTplFile)) . static::COMPILE_FILE_EXT;
 
         if (!$this->file->existFile($this->sTemplateDirFile)) {
-            throw new TplException('File \'' . $this->sTemplateDirFile . '\' does no exist');
+            throw new TplException(
+                sprintf('%s file does no exist.', $this->sTemplateDirFile)
+            );
         }
 
 
@@ -533,7 +542,9 @@ class PH7Tpl extends Kernel
         }
 
         if (!$sCode = $this->file->getFile($sMailTplFile)) {
-            throw new TplException('Can\'t open file: \'' . $sMailTplFile . '\'');
+            throw new TplException(
+                sprintf('Cannot open "%s" file.', $sMailTplFile)
+            );
         }
 
         /***** Other variables in file "/framework/Parse/SysVar.class.php" with syntax %var% *****/
@@ -746,7 +757,7 @@ class PH7Tpl extends Kernel
             }
 
             if (!$this->file->putFile($this->sCacheDirFile, $sOutput)) {
-                throw new TplException('Unable to write to cache file: \'' . $this->sCacheDirFile . '\'');
+                throw new TplException('Unable to write to cache file: ' . $this->sCacheDirFile);
             }
 
             echo $sOutput;
