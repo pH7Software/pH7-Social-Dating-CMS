@@ -13,8 +13,6 @@
  * @history          Supports now PHP 5 with beautiful object code (POO), (removed all the ugly object code from PHP 4.x).
  * @history          Supports now PHP 5.3 (added namespace and incorporate the template engine into the pH7Framework).
  * @history          Supports PHP 5.4 (added class member access on instantiation, e.g. (new Foo)->bar(), ...).
- *
- *
  ***************************************************************************/
 
 namespace PH7\Framework\Layout\Tpl\Engine\PH7Tpl;
