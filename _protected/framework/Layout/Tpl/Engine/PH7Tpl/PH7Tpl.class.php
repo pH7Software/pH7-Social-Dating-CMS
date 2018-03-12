@@ -10,10 +10,9 @@
  * @version          1.3.0
  * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
  *
- * @history
- * Now supports:     PHP 5 with beautiful object code (POO), (we have removed all the ugly object code of PHP 4.x).
- * Now supports:     PHP 5.3 (Adding namespace and incorporation of the template engine in the pH7 Framework).
- * Now supports:     PHP 5.4 (Adding the class member access on instantiation, e.g. (new Foo)->bar(), ...).
+ * @history          Supports now PHP 5 with beautiful object code (POO), (we have removed all the ugly object code of PHP 4.x).
+ * @history          Supports now PHP 5.3 (Adding namespace and incorporation of the template engine in the pH7 Framework).
+ * @history          Supports PHP 5.4 (Adding the class member access on instantiation, e.g. (new Foo)->bar(), ...).
  *
  *
  ***************************************************************************/
