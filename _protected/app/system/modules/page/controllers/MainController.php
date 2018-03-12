@@ -106,6 +106,9 @@ class MainController extends Controller
     {
         $this->view->header = Meta::NOINDEX;
 
+        // Disable cache since it uses dynamic adminEmail. Otherwise, it won't be updated if done from admin panel
+        $this->view->setCaching(false);
+
         $this->sTitle = t('Legal Notice');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Legal Notice - %site_name%');
