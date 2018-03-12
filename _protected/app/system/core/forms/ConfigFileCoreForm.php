@@ -26,7 +26,7 @@ class ConfigFileCoreForm
     const CONFIG_KEYS = [
         'general_cache' => 'enable.general.cache',
         'static_cache' => 'enable.static.cache',
-        'static_data_uri ' => 'enable.static.data_uri'
+        'static_data_uri' => 'enable.static.data_uri'
     ];
 
     /**
