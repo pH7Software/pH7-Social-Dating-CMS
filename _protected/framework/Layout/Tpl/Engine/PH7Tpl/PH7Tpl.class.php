@@ -399,16 +399,42 @@ class PH7Tpl extends Kernel
     private function parse()
     {
         /***** Includes *****/
-        $this->sCode = str_replace('{auto_include}', '<?php $this->display($this->getCurrentController() . PH7_DS . $this->registry->action . \'' .
-            $this->sTplExt . '\', $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>', $this->sCode);
-        $this->sCode = preg_replace('#{include ([^\{\}\n]+)}#', '<?php $this->display($1); ?>', $this->sCode);
-        $this->sCode = preg_replace('#{main_include ([^\{\}\n]+)}#', '<?php $this->display($1, PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS); ?>', $this->sCode);
-        $this->sCode = preg_replace('#{def_main_auto_include}#', '<?php $this->display(\'' . $this->sTplFile . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>', $this->sCode);
-        $this->sCode = preg_replace('#{def_main_include ([^\{\}\n]+)}#', '<?php $this->display($1, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>', $this->sCode);
-        $this->sCode = preg_replace('#{manual_include ([^\{\}\n]+)}#', '<?php $this->display($this->getCurrentController() . PH7_DS . $1, $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>', $this->sCode);
+        $this->sCode = str_replace(
+            '{auto_include}',
+            '<?php $this->display($this->getCurrentController() . PH7_DS . $this->registry->action . \'' . $this->sTplExt . '\', $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>',
+            $this->sCode
+        );
+        $this->sCode = preg_replace(
+            '#{include ([^\{\}\n]+)}#',
+            '<?php $this->display($1); ?>',
+            $this->sCode
+        );
+        $this->sCode = preg_replace(
+            '#{main_include ([^\{\}\n]+)}#',
+            '<?php $this->display($1, PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS); ?>',
+            $this->sCode
+        );
+        $this->sCode = preg_replace(
+            '#{def_main_auto_include}#',
+            '<?php $this->display(\'' . $this->sTplFile . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
+            $this->sCode
+        );
+        $this->sCode = preg_replace(
+            '#{def_main_include ([^\{\}\n]+)}#',
+            '<?php $this->display($1, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
+            $this->sCode
+        );
+        $this->sCode = preg_replace(
+            '#{manual_include ([^\{\}\n]+)}#',
+            '<?php $this->display($this->getCurrentController() . PH7_DS . $1, $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>',
+            $this->sCode
+        );
 
         /***** Objects *****/
-        $this->sCode = str_replace(array('$browser->', '$designModel->'), array('$this->browser->', '$this->designModel->'), $this->sCode);
+        $this->sCode = str_replace(['$browser->', '$designModel->'],
+            ['$this->browser->', '$this->designModel->'],
+            $this->sCode
+        );
 
         /***** CLassic Syntax *****/
         $this->classicSyntax();
@@ -741,9 +767,9 @@ class PH7Tpl extends Kernel
 
         /***** ?> *****/
         if (!preg_match('#(;[\s]+}} | ;[\s]+%})#', $this->sCode)) {
-            $this->sCode = str_replace(array('}}', '%}'), ';?>', $this->sCode);
+            $this->sCode = str_replace(['}}', '%}'], ';?>', $this->sCode);
         } else {
-            $this->sCode = str_replace(array('}}', '%}'), '?>', $this->sCode);
+            $this->sCode = str_replace(['}}', '%}'], '?>', $this->sCode);
         }
 
         /***** <?php echo *****/
@@ -761,7 +787,11 @@ class PH7Tpl extends Kernel
         /***** for *****/
         /*** Example ***/
         /* {for $sData in $aData} <p>Total items: {% $sData_total %} /><br /> Number: {% $sData_i %}<br /> Name: {% $sData %}</p> {/for} */
-        $this->sCode = preg_replace('#{for ([^\{\}\n]+) in ([^\{\}\n]+)}#', '<?php for($1_i=0,$1_total=count($2);$1_i<$1_total;$1_i++) { $1=$2[$1_i]; ?>', $this->sCode);
+        $this->sCode = preg_replace(
+            '#{for ([^\{\}\n]+) in ([^\{\}\n]+)}#',
+            '<?php for($1_i=0,$1_total=count($2);$1_i<$1_total;$1_i++) { $1=$2[$1_i]; ?>',
+            $this->sCode
+        );
 
         /***** while *****/
         $this->sCode = preg_replace('#{while ([^\{\}\n]+)}#', '<?php while($1) { ?>', $this->sCode);
@@ -770,7 +800,7 @@ class PH7Tpl extends Kernel
         $this->sCode = preg_replace('#{each ([^\{\}\n]+) in ([^\{\}\n]+)}#', '<?php foreach($2 as $1) { ?>', $this->sCode);
 
         /***** endif | endfor | endwhile | endforeach *****/
-        $this->sCode = str_replace(array('{/if}', '{/for}', '{/while}', '{/each}'), '<?php } ?>', $this->sCode);
+        $this->sCode = str_replace(['{/if}', '{/for}', '{/while}', '{/each}'], '<?php } ?>', $this->sCode);
 
         /***** Escape (htmlspecialchars) *****/
         $this->sCode = preg_replace('#{escape ([^\{\}]+)}#', '<?php $this->str->escape($1); ?>', $this->sCode);
@@ -815,7 +845,11 @@ class PH7Tpl extends Kernel
         $this->sCode = preg_replace('#<ph:if-empty test=(?:"|\')([^\<\>"\n]+)(?:"|\')>#', '<?php if(empty($1)) { ?>', $this->sCode);
 
         /***** if equal *****/
-        $this->sCode = preg_replace('#<ph:if-equal test=(?:"|\')([^\{\},"\n]+)(?:"|\'),(?:"|\')([^\{\},"\n]+)(?:"|\')>#', '<?php if($1 == $2) { ?>', $this->sCode);
+        $this->sCode = preg_replace(
+            '#<ph:if-equal test=(?:"|\')([^\{\},"\n]+)(?:"|\'),(?:"|\')([^\{\},"\n]+)(?:"|\')>#',
+            '<?php if($1 == $2) { ?>',
+            $this->sCode
+        );
 
 
         /***** elseif *****/
@@ -827,7 +861,11 @@ class PH7Tpl extends Kernel
         /***** for *****/
         /*** Example ***/
         /* <ph:for test="$sData in $aData"> <p>Total items: <ph:print value="$sData_total" /><br /> Number: <ph:print value="$sData_i" /><br /> Name: <ph:print value="$sData" /></p> </ph:for> */
-        $this->sCode = preg_replace('#<ph:for test=(?:"|\')([^\<\>"\n]+) in ([^\<\>"\n]+)(?:"|\')>#', '<?php for($1_i=0,$1_total=count($2);$1_i<$1_total;$1_i++) { $1=$2[$1_i]; ?>', $this->sCode);
+        $this->sCode = preg_replace(
+            '#<ph:for test=(?:"|\')([^\<\>"\n]+) in ([^\<\>"\n]+)(?:"|\')>#',
+            '<?php for($1_i=0,$1_total=count($2);$1_i<$1_total;$1_i++) { $1=$2[$1_i]; ?>',
+            $this->sCode
+        );
 
         /***** while *****/
         $this->sCode = preg_replace('#<ph:while test=(?:"|\')([^\<\>"\n]+)(?:"|\')>#', '<?php while($1) { ?>', $this->sCode);
@@ -836,7 +874,11 @@ class PH7Tpl extends Kernel
         $this->sCode = preg_replace('#<ph:each test=(?:"|\')([^\<\>"\n]+) in ([^\<\>"\n]+)(?:"|\')>#', '<?php foreach($2 as $1) { ?>', $this->sCode);
 
         /***** endif | endfor | endwhile | endforeach *****/
-        $this->sCode = str_replace(array('</ph:if>', '</ph:else>', '</ph:else-if>', '</ph:for>', '</ph:while>', '</ph:each>', '</ph:if-set>', '</ph:if-empty>', '</ph:if-equal>'), '<?php } ?>', $this->sCode);
+        $this->sCode = str_replace(
+            ['</ph:if>', '</ph:else>', '</ph:else-if>', '</ph:for>', '</ph:while>', '</ph:each>', '</ph:if-set>', '</ph:if-empty>', '</ph:if-equal>'],
+            '<?php } ?>',
+            $this->sCode
+        );
 
         /***** Escape (htmlspecialchars) *****/
         $this->sCode = preg_replace('#<ph:escape value=(?:"|\')([^\{\}]+)(?:"|\') ?/?>#', '<?php this->str->escape($1); ?>', $this->sCode);
@@ -866,7 +908,7 @@ class PH7Tpl extends Kernel
      */
     protected function optimization()
     {
-        $this->sCode = preg_replace(array('#[\t\r\n];?\?>#s', '#\?>[\t\r\n]+?<\?(php)?#si'), '', $this->sCode);
+        $this->sCode = preg_replace(['#[\t\r\n];?\?>#s', '#\?>[\t\r\n]+?<\?(php)?#si'], '', $this->sCode);
         $this->sCode = preg_replace('#;{2,}#s', ';', $this->sCode);
     }
 

@@ -50,7 +50,11 @@ abstract class Predefined
     protected function addVar($sKey, $sValue, $bPrint = true)
     {
         $this->sCode = str_replace('$' . $sKey, $sValue, $this->sCode);
-        $this->sCode = str_replace($this->sLeftDelim . $sKey . $this->sRightDelim, static::PHP_OPEN . ($bPrint ? static::WRITE : '') . $sValue . static::PHP_CLOSE, $this->sCode);
+        $this->sCode = str_replace(
+            $this->sLeftDelim . $sKey . $this->sRightDelim,
+            static::PHP_OPEN . ($bPrint ? static::WRITE : '') . $sValue . static::PHP_CLOSE,
+            $this->sCode
+        );
     }
 
     /**
@@ -63,7 +67,11 @@ abstract class Predefined
      */
     protected function addFunc($sKey, $sValue)
     {
-        $this->sCode = preg_replace('#' . $sKey . '#', static::PHP_OPEN . static::WRITE . $sValue . static::PHP_CLOSE, $this->sCode);
+        $this->sCode = preg_replace(
+            '#' . $sKey . '#',
+            static::PHP_OPEN . static::WRITE . $sValue . static::PHP_CLOSE,
+            $this->sCode
+        );
     }
 
     /**
