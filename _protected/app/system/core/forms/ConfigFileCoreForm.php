@@ -82,7 +82,7 @@ class ConfigFileCoreForm
      */
     private static function getLabelText($sKey)
     {
-        if (self::isLabelTextCstomed($sKey)) {
+        if (self::isLabelTextCustomed($sKey)) {
             return self::getCustomLabelText($sKey);
         }
 
@@ -132,7 +132,7 @@ class ConfigFileCoreForm
      *
      * @return bool
      */
-    private static function isLabelTextCstomed($sKey)
+    private static function isLabelTextCustomed($sKey)
     {
         return in_array($sKey, self::CONFIG_KEYS, true);
     }
