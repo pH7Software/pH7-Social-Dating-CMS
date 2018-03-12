@@ -101,11 +101,11 @@ class PH7Tpl extends Kernel
     /** @var bool */
     private $bPhpCompressor;
 
-    /** @var mixed */
-    private $mCacheExpire; // @var mixed (integer or null value) $mCacheExpire
+    /** @var int|null */
+    private $mCacheExpire;
 
-    /** @var bool */
-    private $bXmlTags = false; // Enable (true) or Disables (false) XML Tags for the Template Engine
+    /** @var bool Enable or Disables XML Tags for the Template Engine */
+    private $bXmlTags = false;
 
     /** @var array */
     private $_aVars = array();
