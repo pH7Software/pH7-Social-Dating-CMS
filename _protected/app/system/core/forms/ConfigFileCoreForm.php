@@ -12,6 +12,8 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\File\Various as FileHelper;
+use PH7\Framework\Layout\Gzip\Gzip;
 use PH7\Framework\Registry\Registry;
 use PH7\Framework\Str\Str;
 use PH7\Framework\Url\Header;
@@ -20,6 +22,12 @@ class ConfigFileCoreForm
 {
     const CONFIG_FILE = 'config.ini';
     const CONFIG_SETTING_SECTION = 'module.setting';
+
+    const CONFIG_KEYS = [
+        'general_cache' => 'enable.general.cache',
+        'static_cache' => 'enable.static.cache',
+        'static_data_uri ' => 'enable.static.data_uri'
+    ];
 
     /**
      * @param string $sConfigVar Specify the variable in the INI file where module options. Default: module.setting
@@ -73,8 +81,54 @@ class ConfigFileCoreForm
      */
     private static function getLabelText($sKey)
     {
-        $sLabel = str_replace(['.', '_'], ' ', $sKey);
+        if (self::isLabelTextCstomed($sKey)) {
+            return self::getCustomLabelText($sKey);
+        }
+
+        $sLabel = self::cleanLabelText($sKey);
 
         return (new Str)->upperFirstWords($sLabel);
+    }
+
+    /**
+     * @param string $sKey
+     *
+     * @return string
+     */
+    private static function getCustomLabelText($sKey)
+    {
+        if ($sKey === self::CONFIG_KEYS['general_cache']) {
+            return t('General Cache. Usually for database contents, but may also involve other data.');
+        }
+
+        if ($sKey === self::CONFIG_KEYS['static_cache']) {
+            return t('Static Cache. Used to store compressed/minified JS/CSS files (with images converted to base64)');
+        }
+
+        if ($sKey === self::CONFIG_KEYS['static_data_uri']) {
+            return t('Will convert images to base64 data-URIs (if file size is lower than %0%)', FileHelper::bytesToSize(Gzip::MAX_IMG_SIZE_BASE64_CONVERTOR));
+        }
+
+        return self::cleanLabelText($sKey);
+    }
+
+    /**
+     * @param string $sKey
+     *
+     * @return string
+     */
+    private static function cleanLabelText($sKey)
+    {
+        return str_replace(['.', '_'], ' ', $sKey);
+    }
+
+    /**
+     * @param string $sKey
+     *
+     * @return bool
+     */
+    private static function isLabelTextCstomed($sKey)
+    {
+        return in_array($sKey, self::CONFIG_KEYS, true);
     }
 }
