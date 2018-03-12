@@ -13,6 +13,8 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class MainController extends Controller
 {
+    const STATIC_CACHE_LIFETIME = 604800; // A week
+
     /** @var string */
     private $sTitle;
 
@@ -22,6 +24,7 @@ class MainController extends Controller
 
         // Enable caching to all template pages of this module
         $this->view->setCaching(true);
+        $this->view->setCacheExpire(self::STATIC_CACHE_LIFETIME);
 
         // Global variable for all template pages of this module
         $this->view->admin_email = DbConfig::getSetting('adminEmail');
