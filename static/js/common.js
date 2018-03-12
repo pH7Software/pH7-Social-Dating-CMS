@@ -61,15 +61,17 @@ function pH7Include(mFile) {
 (function () {
     $('a').click(function () {
         var href = $(this).attr('href');
+
         if (
-            -1 == href.indexOf('ph7cms.com') && -1 == href.indexOf('youtube.com') &&
-            -1 == href.indexOf('youtu.be') && -1 == href.indexOf('vimeo.com') &&
-            -1 == href.indexOf('dailymotion.com') && -1 == href.indexOf('metacafe.com') &&
-            -1 == href.indexOf('gravatar.com') && -1 == href.indexOf('softaculous.com') &&
-            (-1 != href.indexOf('http://') || -1 != href.indexOf('https://'))
+            href.indexOf('ph7cms.com') == -1 && href.indexOf('youtube.com') == -1 &&
+            href.indexOf('youtu.be') == -1 && href.indexOf('vimeo.com') == -1 &&
+            href.indexOf('dailymotion.com') == -1 && href.indexOf('metacafe.com') == -1 &&
+            href.indexOf('gravatar.com') == -1 && href.indexOf('softaculous.com') == -1 &&
+            (href.indexOf('http://') != -1 || href.indexOf('https://') != -1)
+
         ) {
             var host = href.substr(href.indexOf(':') + 3);
-            if (-1 != host.indexOf('/')) {
+            if (host.indexOf('/') != -1) {
                 host = host.substring(0, host.indexOf('/'));
             }
             if (host != window.location.host) {
