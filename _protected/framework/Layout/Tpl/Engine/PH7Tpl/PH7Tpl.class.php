@@ -871,7 +871,11 @@ class PH7Tpl extends Kernel
         $this->sCode = preg_replace('#<ph:while test=(?:"|\')([^\<\>"\n]+)(?:"|\')>#', '<?php while($1) { ?>', $this->sCode);
 
         /***** each (foreach) *****/
-        $this->sCode = preg_replace('#<ph:each test=(?:"|\')([^\<\>"\n]+) in ([^\<\>"\n]+)(?:"|\')>#', '<?php foreach($2 as $1) { ?>', $this->sCode);
+        $this->sCode = preg_replace(
+            '#<ph:each test=(?:"|\')([^\<\>"\n]+) in ([^\<\>"\n]+)(?:"|\')>#',
+            '<?php foreach($2 as $1) { ?>',
+            $this->sCode
+        );
 
         /***** endif | endfor | endwhile | endforeach *****/
         $this->sCode = str_replace(
@@ -881,7 +885,11 @@ class PH7Tpl extends Kernel
         );
 
         /***** Escape (htmlspecialchars) *****/
-        $this->sCode = preg_replace('#<ph:escape value=(?:"|\')([^\{\}]+)(?:"|\') ?/?>#', '<?php this->str->escape($1); ?>', $this->sCode);
+        $this->sCode = preg_replace(
+            '#<ph:escape value=(?:"|\')([^\{\}]+)(?:"|\') ?/?>#',
+            '<?php this->str->escape($1); ?>',
+            $this->sCode
+        );
 
         /***** Translate (Gettext) *****/
         $this->sCode = preg_replace('#<ph:lang value=(?:"|\')([^\{\}]+)(?:"|\') ?/?>#', '<?php echo t($1); ?>', $this->sCode);
@@ -967,7 +975,10 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      */
     final private function isMainCompilePage()
     {
-        return preg_match('#' . $this->addSlashes($this->sCompileDir . static::MAIN_COMPILE_DIR . PH7_DS . PH7_TPL_NAME . PH7_DS . static::MAIN_COMPILE_PAGE) . '#', $this->sCompileDirFile);
+        return preg_match(
+            '#' . $this->addSlashes($this->sCompileDir . static::MAIN_COMPILE_DIR . PH7_DS . PH7_TPL_NAME . PH7_DS . static::MAIN_COMPILE_PAGE) . '#',
+            $this->sCompileDirFile
+        );
     }
 
     /**
