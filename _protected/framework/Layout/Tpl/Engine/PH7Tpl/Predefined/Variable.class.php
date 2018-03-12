@@ -4,7 +4,6 @@
  * @desc             We define variables.
  *                   Predefined variables can save considerable resources and speeds up the code with respect to variables assigned by through the object's template engine (PH7Tpl).
  *
- * @updated          Last Update 07/02/16 11:02
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl / Predefined

@@ -3,7 +3,6 @@
  * @title            PH7 Template Engine
  * @desc             Main Predefined Abstract Class
  *
- * @updated          Last Update 09/14/13 23:22
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl / Predefined
