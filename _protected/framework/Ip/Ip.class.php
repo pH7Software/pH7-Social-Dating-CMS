@@ -79,7 +79,7 @@ class Ip
     {
         $aVars = [Server::HTTP_CLIENT_IP, Server::HTTP_X_FORWARDED_FOR, Server::REMOTE_ADDR];
         foreach ($aVars as $sVar) {
-            if (null !== Server::getVar($sVar)) {
+            if (Server::getVar($sVar) !== null) {
                 return Server::getVar($sVar);
             }
         }
