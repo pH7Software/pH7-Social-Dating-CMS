@@ -79,7 +79,8 @@ abstract class Kernel
         $this->registry = Registry::getInstance();
 
         /**
-         * @internal The "_checkLicense" method cannot be declare more than one time. The "Kernel.class.php" file is included many times in the software, so we need to check that with a constant.
+         * @internal self::initializeLicenseConstants() cannot be declare more than one time.
+         * Because Kernel.class.php file is included many times in the software, we need to check that with a constant.
          */
         if (!defined('PH7_CHECKED_LIC')) {
             define('PH7_CHECKED_LIC', 1); // OK, now we have checked the license key
