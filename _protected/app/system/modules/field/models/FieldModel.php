@@ -121,6 +121,11 @@ class FieldModel extends Model
         return $rStmt === false ? $rStmt->errorInfo() : true;
     }
 
+    /**
+     * @return string
+     *
+     * @throws PH7InvalidArgumentException
+     */
     protected function getType()
     {
         switch ($this->sType) {
