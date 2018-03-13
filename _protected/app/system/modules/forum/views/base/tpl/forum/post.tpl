@@ -1,6 +1,6 @@
 <div class="center">
     {if empty($error)}
-        {* Post *}
+        {* Main Post *}
         <div class="left">
             {{ $avatarDesign->get($post->username, $post->firstName, $post->sex, 64) }}<br />
             <p>
@@ -42,7 +42,7 @@
             | <a class="btn btn-default btn-sm" href="{{ $design->url('forum', 'forum', 'edittopic', "$post->name,$post->forumId,$post->title,$post->topicId") }}" title="{lang 'Edit your topic'}">{lang 'Edit'}</a> |  {{ $design->popupLinkConfirm(t('Delete Topic'), 'forum', 'forum', 'deletetopic', $post->topicId.'_'.$post->forumId.'_'.$post->name, 'btn btn-default btn-sm') }}
         {/if}
 
-        {* Reply *}
+        {* Replies *}
         {if !empty($messages)}
             {each $msg in $messages}
                 {{ $relative_url = Framework\Mvc\Router\Uri::get('forum', 'forum', 'post', "$post->name,$post->forumId,$post->title,$post->topicId") . '#' . $msg->messageId }}
