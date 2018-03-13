@@ -83,49 +83,20 @@ abstract class Kernel
          */
         if (!defined('PH7_CHECKED_LIC')) {
             define('PH7_CHECKED_LIC', 1); // OK, now we have checked the license key
-            $this->checkLicense();
+            $this->initializeLicenseConstants();
         }
     }
 
     /**
      * Check License key.
      *
-     * @return int Returns '1' if the license key is invalid and stops the script with the exit() function.
+     * @return void
      */
-    final private function checkLicense()
+    final private function initializeLicenseConstants()
     {
-        define('PH7_SOFTWARE_STATUS', true);
         define('PH7_LICENSE_STATUS', License::ACTIVE_STATUS);
         define('PH7_LICENSE_NAME', 'pH7Builder, Open License');
         define('PH7_VALID_LICENSE', $this->getLicenseStatus());
-
-        if (!PH7_SOFTWARE_STATUS) {
-            $sLicenseMsg = t('You need to buy a <strong>valid <a href="%0%">pH7CMS</a> License Key</strong> to use the features requiring a license key!', self::SOFTWARE_WEBSITE);
-            Page::message($sLicenseMsg);
-        }
-
-        if (!PH7_VALID_LICENSE && $this->isLicenseFeature()) {
-            $this->licenseErrMsg();
-        }
-    }
-
-    /**
-     * Checks if there's a feature that requires a license key.
-     *
-     * @return bool Returns TRUE if the feature requires a license, FALSE otherwise.
-     */
-    final private function isLicenseFeature()
-    {
-        return (
-            ($this->registry->module === PH7_ADMIN_MOD &&
-                ($this->registry->action === 'ads' ||
-                    $this->registry->action === 'addfakeprofiles' ||
-                    $this->registry->action === 'import')
-            ) ||
-            ($this->registry->module === 'payment' || $this->httpRequest->getExists('mobapp') ||
-                false !== stripos($this->httpRequest->currentUrl(), 'upgrade')
-            )
-        );
     }
 
     /**
@@ -134,26 +105,6 @@ abstract class Kernel
     final private function getLicenseStatus()
     {
         return PH7_LICENSE_STATUS === License::ACTIVE_STATUS;
-    }
-
-    /**
-     * Displays a error message when there is a feature that requires a license key.
-     *
-     * @return void
-     */
-    final private function licenseErrMsg()
-    {
-        if (AdminCore::auth()) {
-            // Message for admins
-            Header::redirect(
-                Uri::get(PH7_ADMIN_MOD, 'setting', 'license'),
-                t("You are still using the Free version. It's now time to switch to the Pro version and get all amazing features and be able to use this module."),
-                Design::ERROR_TYPE
-            );
-        } else {
-            // Message for guests
-            exit(t('#LICENSE ERROR# The owner of this website needs to pay a <a href="%0%">pH7CMS License</a> to use this feature.', self::SOFTWARE_WEBSITE));
-        }
     }
 
     /**
