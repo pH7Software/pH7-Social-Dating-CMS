@@ -95,8 +95,9 @@ class Backup
                 while ($aRow = $oResult->fetch()) {
                     foreach ($aRow as $sColumn => $sValue) {
                         if (!is_numeric($sColumn)) {
-                            if (!is_numeric($sValue) && !empty($sValue))
+                            if (!empty($sValue) && !is_numeric($sValue)) {
                                 $sValue = Db::getInstance()->quote($sValue);
+                            }
 
                             $sValue = str_replace(array("\r", "\n"), array('', '\n'), $sValue);
 
