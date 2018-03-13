@@ -105,7 +105,7 @@ class FieldModel extends Model
      */
     public function total()
     {
-        return (int)count($this->all());
+        return count($this->all());
     }
 
     /**
