@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS ph7_members (
 CREATE SEQUENCE ph7_members_info_seq;
 
 CREATE TABLE IF NOT EXISTS ph7_members_info (
-  profileId int check (profileId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_members_info_seq'),
+  profileId int check (profileId > 0) NOT NULL,
   middleName varchar(50) DEFAULT NULL,
   description text DEFAULT NULL,
   address varchar(255) DEFAULT NULL,
@@ -223,7 +223,7 @@ CREATE INDEX birthDate ON ph7_affiliates (birthDate);
 CREATE SEQUENCE ph7_affiliates_info_seq;
 
 CREATE TABLE IF NOT EXISTS ph7_affiliates_info (
-  profileId int check (profileId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_affiliates_info_seq'),
+  profileId int check (profileId > 0) NOT NULL,
   middleName varchar(50) DEFAULT NULL,
   businessName varchar(100) DEFAULT NULL,
   taxId varchar(40) DEFAULT NULL, -- Tax ID, VAT, SSN, ...
