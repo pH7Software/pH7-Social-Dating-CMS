@@ -19,6 +19,7 @@ class FieldModel extends Model
     const MAX_VARCHAR_LENGTH = 255;
     const FIELD_TEXTBOX_TYPE = 'textbox';
     const FIELD_NUMBER_TYPE = 'number';
+    const PROFILE_ID_COLUMN = 'profileId';
 
     /** @var string */
     private $sTable;
@@ -65,13 +66,11 @@ class FieldModel extends Model
     {
         $rStmt = Db::getInstance()->query('SELECT * FROM' . Db::prefix($this->sTable) . 'LIMIT 1');
 
-        $iNum = (int)$rStmt->rowCount();
         $aColumn = array();
-
-        if ($iNum > 0) {
+        if ($rStmt->rowCount() > 0) {
             while ($aRow = $rStmt->fetch()) {
                 foreach ($aRow as $sColumn => $sValue) {
-                    if (!is_numeric($sColumn) && $sColumn !== 'profileId') {
+                    if ($this->isColumnEligible($sColumn)) {
                         $aColumn[] = $sColumn;
                     }
                 }
@@ -154,5 +153,15 @@ class FieldModel extends Model
         }
 
         return $this->sSql . ' NOT NULL DEFAULT ' . Db::getInstance()->quote($this->sDefVal) . ';';
+    }
+
+    /**
+     * @param string $sColumn
+     *
+     * @return bool
+     */
+    private function isColumnEligible($sColumn)
+    {
+        return !is_numeric($sColumn) && $sColumn !== self::PROFILE_ID_COLUMN;
     }
 }
