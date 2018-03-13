@@ -19,6 +19,7 @@
         </p>
 
         <div class="post-ident">
+            {{ $design->littleLikeApi() }}
             <p class="small italic">
                 {lang 'Posted on %0%', $dateTime->get($post->createdDate)->dateTime()}
                 {if !empty($post->updatedDate)}
