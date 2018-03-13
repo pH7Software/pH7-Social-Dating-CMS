@@ -392,7 +392,7 @@ class Design
      */
     final public function smallLink()
     {
-        echo '<strong>', t('Proudly Powered by'), ' <a href="', Kernel::SOFTWARE_WEBSITE, '" title="', Kernel::SOFTWARE_DESCRIPTION, '">', Kernel::SOFTWARE_NAME, '</a> ', Kernel::SOFTWARE_VERSION, '</strong>';
+        echo '<strong>', t('THANKS to'), ' <a href="', Kernel::SOFTWARE_WEBSITE, '" title="', Kernel::SOFTWARE_DESCRIPTION, '">', Kernel::SOFTWARE_NAME, '</a> ', Kernel::SOFTWARE_VERSION, '!</strong> ❤️';
     }
 
     /**
