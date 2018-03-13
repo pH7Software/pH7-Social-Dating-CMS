@@ -54,14 +54,14 @@ class ReportModel extends ReportCoreModel
      * @param int $iOffset
      * @param $iLimit
      *
-     * @return int array|mixed
+     * @return int array|\stdClass
      */
     public function get($iId = null, $iOffset, $iLimit)
     {
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
-        $sSqlId = (!empty($iId)) ? ' WHERE reportId = :id ' : ' ';
+        $sSqlId = !empty($iId) ? ' WHERE reportId = :id ' : ' ';
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::REPORT) . $sSqlId . 'LIMIT :offset, :limit');
         if (!empty($iId)) {
             $rStmt->bindValue(':id', $iId, PDO::PARAM_INT);
