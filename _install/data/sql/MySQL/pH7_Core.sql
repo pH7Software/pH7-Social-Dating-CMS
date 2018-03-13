@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS ph7_members (
 
 
 CREATE TABLE IF NOT EXISTS ph7_members_info (
-  profileId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  profileId int(10) unsigned NOT NULL,
   middleName varchar(50) DEFAULT NULL,
   description text DEFAULT NULL,
   address varchar(255) DEFAULT NULL,
@@ -200,7 +200,7 @@ CREATE TABLE IF NOT EXISTS ph7_affiliates (
 
 
 CREATE TABLE IF NOT EXISTS ph7_affiliates_info (
-  profileId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  profileId int(10) unsigned NOT NULL,
   middleName varchar(50) DEFAULT NULL,
   businessName varchar(100) DEFAULT NULL,
   taxId varchar(40) DEFAULT NULL, -- Tax ID, VAT, SSN, ...
