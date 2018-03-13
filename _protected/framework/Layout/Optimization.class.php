@@ -35,7 +35,6 @@ class Optimization
         return "data:$sMimeType;base64,$sBase64";
     }
 
-
     /**
      * Scan the path ($sDir) of all file-references found.
      * Note: This function is a slightly modified version from Christian Schepp Schaefer's function (CSS JS booster).
