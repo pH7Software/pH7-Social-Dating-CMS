@@ -133,9 +133,9 @@ class Compress
             $sContent = preg_replace('/[\r\n]+/ims', "\n", $sContent);
             // Constrain multiple whitespaces
             $sContent = preg_replace('/\p{Zs}+/ims', ' ', $sContent);
-            // remove comments
+            // Remove comments
             $sContent = preg_replace("!/\*[^*]*\*+([^/][^*]*\*+)*/!", "", $sContent);
-            // remove tabs, spaces, newlines, etc. */
+            // Remove tabs, spaces, newlines, etc. */
             $aArr = array("\r\n", "\r", "\n", "\t", "  ", "    ", "    ");
             $sContent = str_replace($aArr, "", $sContent);
             // Restore backupped values within single or double quotes
@@ -189,19 +189,18 @@ class Compress
                 while (!feof($rSocket)) $sJsMinified .= fgets($rSocket);
                 fclose($rSocket);
                 $sJsMinified = preg_replace('/^HTTP.+[\r\n]{2}/ims', '', $sJsMinified);
-            } // Switching over to Douglas Crockford's JSMin (which in turn breaks IE's conditional compilation)
-            else {
-                // remove comments
+            } else {
+                // Remove comments
                 //$sContent = preg_replace("/((?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)|(?:\/\/.*))/", "", $sContent);
 
-                // remove tabs, spaces, etc. */
+                // Remove tabs, spaces, etc. */
                 $sContent = str_replace(array("\r", "\t", '  ', '    ', '     '), '', $sContent);
 
-                // remove other spaces before/after ) */
+                // Remove other spaces before/after ) */
                 $sContent = preg_replace(array('(( )+\))', '(\)( )+)'), ')', $sContent);
 
                 /**
-                 * Inclusion of JSMin
+                 * Inclusion of Douglas Crockford's JSMin
                  */
                 $sJsMinified = Minify\Js::minify($sContent);
             }
