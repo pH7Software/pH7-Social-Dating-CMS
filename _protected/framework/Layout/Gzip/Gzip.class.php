@@ -124,7 +124,9 @@ class Gzip
         if (is_dir($sCacheDir)) {
             $this->sCacheDir = $sCacheDir;
         } else {
-            throw new PH7InvalidArgumentException('"' . $sCacheDir . '" cache directory cannot be found!');
+            throw new PH7InvalidArgumentException(
+                sprintf('%s cache directory cannot be found!', $sCacheDir)
+            );
         }
     }
 
