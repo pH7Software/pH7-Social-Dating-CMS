@@ -179,7 +179,7 @@ class Gzip
 
             if ($this->isSourceStaticFileExists($sPath)) {
                 Http::setHeadersByCode(404);
-                exit('The file not found!');
+                exit('File not found!');
             }
         }
 
