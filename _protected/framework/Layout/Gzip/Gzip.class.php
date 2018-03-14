@@ -145,7 +145,7 @@ class Gzip
             !in_array($this->oHttpRequest->get('t'), self::ASSET_FILES_ACCEPTED, true)
         ) {
             Http::setHeadersByCode(503);
-            exit('Invalid type file!');
+            exit('Invalid file type!');
         }
 
         $this->sType = ($this->oHttpRequest->get('t') === self::JS_ABBR_NAME) ? self::JS_NAME : $this->oHttpRequest->get('t');
@@ -271,7 +271,7 @@ class Gzip
 
             default:
                 Http::setHeadersByCode(503);
-                exit('Invalid type file!');
+                exit('Invalid file type!');
         }
 
         unset($oCompress);
