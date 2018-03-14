@@ -175,12 +175,14 @@ class Compress
                 $sHeader = 'Host: ' . self::GOOGLE_CLOSURE_HOST . "\r\n";
                 $sHeader .= "User-Agent: PHP Script\r\n";
                 $sHeader .= "Content-Type: application/x-www-form-urlencoded\r\n";
-                $sHeader .= "Content-Length: " . strlen($sVars) . "\r\n";
+                $sHeader .= 'Content-Length: ' . strlen($sVars) . "\r\n";
                 $sHeader .= "Connection: close\r\n\r\n";
 
                 fputs($rSocket, "POST $sServiceUri  HTTP/1.0\r\n");
                 fputs($rSocket, $sHeader . $sVars);
-                while (!feof($rSocket)) $sJsMinified .= fgets($rSocket);
+                while (!feof($rSocket)) {
+                    $sJsMinified .= fgets($rSocket);
+                }
                 fclose($rSocket);
                 $sJsMinified = preg_replace('/^HTTP.+[\r\n]{2}/ims', '', $sJsMinified);
             } else {
