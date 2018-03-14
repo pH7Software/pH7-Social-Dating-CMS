@@ -21,6 +21,7 @@ class Compress
 {
     const COMPRESSION_LEVEL = 6;
     const COMPRESSION_BYTE_BUFFER_SIZE = 2048;
+    const GOOGLE_CLOSURE_HOST = 'closure-compiler.appspot.com';
 
     const MAX_LIMIT_SIZE_GOOGLE_CLOSURE = 200000; // 200KB
 
