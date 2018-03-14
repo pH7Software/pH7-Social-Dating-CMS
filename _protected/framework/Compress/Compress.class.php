@@ -160,25 +160,19 @@ class Compress
             $sJsMinified = exec("java -jar $this->sYuiCompressorPath $this->sTmpFilePath --type js --charset utf-8");
             unlink($this->sTmpFilePath);
         } else {
-            // If we can open connection to Google Closure
-            // Google Closure has a max limit of 200KB POST size, and will break JS with eval-command
-
             // URL-encoded file contents
             $sContentEncoded = Url::encode($sContent);
-            // Closure Host
-            $sHost = 'closure-compiler.appspot.com';
 
-            if (
-                $this->bIsGoogleClosure && strlen($sContentEncoded) < static::MAX_LIMIT_SIZE_GOOGLE_CLOSURE &&
-                preg_match('/[^a-z]eval\(/ism', $sContent) == 0 && $rSocket = @pfsockopen($sHost, 80)
-            ) {
+            // If we can open connection to Google Closure
+            // Google Closure has a max limit of 200KB POST size, and will break JS with eval-command
+            if ($rSocket = $this->googleClosureEligible($sContent, $sContentEncoded)) {
                 // Working vars
                 $sJsMinified = '';
                 $sServiceUri = '/compile';
                 $sVars = 'js_code=' . $sContentEncoded . '&compilation_level=SIMPLE_OPTIMIZATIONS&output_format=text&output_info=compiled_code';
 
                 // Compose HTTP request header
-                $sHeader = "Host: $sHost\r\n";
+                $sHeader = 'Host: ' . self::GOOGLE_CLOSURE_HOST . "\r\n";
                 $sHeader .= "User-Agent: PHP Script\r\n";
                 $sHeader .= "Content-Type: application/x-www-form-urlencoded\r\n";
                 $sHeader .= "Content-Length: " . strlen($sVars) . "\r\n";
@@ -223,5 +217,22 @@ class Compress
     {
         ini_set('zlib.output_compression', self::COMPRESSION_LEVEL);
         ini_set('zlib.output_compression_level', self::COMPRESSION_BYTE_BUFFER_SIZE);
+    }
+
+    /**
+     * @param string $sContent
+     * @param string $sContentEncoded
+     *
+     * @return resource|bool Returns the resource if eligible, FALSE otherwise.
+     */
+    private function googleClosureEligible($sContent, $sContentEncoded)
+    {
+        if ($this->bIsGoogleClosure && strlen($sContentEncoded) < static::MAX_LIMIT_SIZE_GOOGLE_CLOSURE &&
+            preg_match('/[^a-z]eval\(/ism', $sContent) == 0
+        ) {
+            return @pfsockopen(self::GOOGLE_CLOSURE_HOST, 80);
+        }
+
+        return false;
     }
 }
