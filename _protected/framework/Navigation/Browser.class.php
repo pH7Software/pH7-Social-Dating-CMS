@@ -53,7 +53,6 @@ class Browser
         header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 3600 * 24 * 30) . ' GMT');
         header('Cache-Control: no-cache, must-revalidate');
         header('Pragma: public'); // HTTP 1.0
-        //header ('Not Modified', true, 304);
 
         return $this;
     }
