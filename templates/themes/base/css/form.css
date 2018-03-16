@@ -159,6 +159,11 @@ textarea[disabled] {
     cursor: not-allowed !important;
 }
 
+/* Bugfix: With some Unix Chrome versions, type=image cursor is "default" and not pointer */
+form input[type=image] {
+    cursor: pointer;
+}
+
 /* Remove .form_link text decoration if bootstrap button is set */
 .btn input:hover {
     text-decoration: none !important;
