@@ -42,7 +42,7 @@ class AlbumFormProcess extends Form
         if (!$oPicture->validate()) {
             \PFBC\Form::setError('form_video_album', Form::wrongImgFileTypeMsg());
         } else {
-            $this->sApproved = (DbConfig::getSetting('videoManualApproval') == 0) ? '1' : '0';
+            $this->sApproved = DbConfig::getSetting('videoManualApproval') == 0 ? '1' : '0';
 
             $this->checkNudityFilter();
 

@@ -43,7 +43,7 @@ class AlbumFormProcess extends Form
         if (!$oPicture->validate()) {
             \PFBC\Form::setError('form_picture_album', Form::wrongImgFileTypeMsg());
         } else {
-            $this->sApproved = (DbConfig::getSetting('pictureManualApproval') == 0) ? '1' : '0';
+            $this->sApproved = DbConfig::getSetting('pictureManualApproval') == 0 ? '1' : '0';
 
             $this->checkNudityFilter();
 
