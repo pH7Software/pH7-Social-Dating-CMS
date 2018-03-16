@@ -29,6 +29,14 @@ class File
 {
     const REGEX_BINARY_FILE = '/^(.*?)\.(gif|jpg|jpeg|png|webp|ico|mp3|mp4|mov|avi|flv|mpg|mpeg|wmv|ogg|ogv|webm|pdf|ttf|eot|woff|svg|swf)$/i';
 
+    const RENAME_FUNC_NAME = 'rename';
+    const COPY_FUNC_NAME = 'copy';
+
+    const DIR_HANDLE_FUNC_NAMES = [
+        self::RENAME_FUNC_NAME,
+        self::COPY_FUNC_NAME
+    ];
+
     const READ_CHMOD_OCTAL_DIGIT = 0444;
     const READ_WRITE_CHMOD_OCTAL_DIGIT = 0644;
     const READ_WRITE_EXEC_CHMOD_OCTAL_DIGIT = 0777;
@@ -341,7 +349,7 @@ class File
      */
     public function copyDir($sFrom, $sTo)
     {
-        return $this->recursiveDirIterator($sFrom, $sTo, 'copy');
+        return $this->recursiveDirIterator($sFrom, $sTo, self::COPY_FUNC_NAME);
     }
 
     /**
@@ -391,7 +399,7 @@ class File
      */
     public function renameDir($sFrom, $sTo)
     {
-        return $this->recursiveDirIterator($sFrom, $sTo, 'rename');
+        return $this->recursiveDirIterator($sFrom, $sTo, self::RENAME_FUNC_NAME);
     }
 
     /**
@@ -846,12 +854,14 @@ class File
      *
      * @return bool
      *
-     * @throws PH7InvalidArgumentException If the type is bad.
+     * @throws PH7InvalidArgumentException If the function name is invalid.
+     * @throws PermissionException If the directory cannot be created
+     *
      */
     private function recursiveDirIterator($sFrom, $sTo, $sFuncName)
     {
-        if ($sFuncName !== 'copy' && $sFuncName !== 'rename') {
-            throw new PH7InvalidArgumentException('Bad function name: \'' . $sFuncName . '\'');
+        if (!in_array($sFuncName, self::DIR_HANDLE_FUNC_NAMES, true)) {
+            throw new PH7InvalidArgumentException('Wrong function name: ' . $sFuncName);
         }
 
         if (!is_dir($sFrom)) {
