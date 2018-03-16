@@ -16,7 +16,8 @@ use PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
-    const HASH_VALIDATION = 'b9e67702a6f47dea30477d33160110934a16875c';
+    const HASH_VALIDATION = 'JkdjkPh7Pd5548OOSdgPU_92AIdO';
+    const INTERNAL_VERIFY_HASH = '681cd81b17b71c746e9ab7ac0445d3a3c960c329';
     const HASH_VALIDATION_START_POSITION = 3;
     const HASH_VALIDATION_LENGTH = 24;
 
@@ -41,7 +42,7 @@ class MainController extends Controller
             ->param('cmd', '_donations')
             ->param('item_name', $this->config->values['module.setting']['donation.item_name'])
             ->param('amount', $this->config->values['module.setting']['donation.amount'])
-            ->param('return', Uri::get('ph7cms-donation', 'main', 'validator', 'JkdjkPh7Pd5548OOSdgPU_92AIdO'));
+            ->param('return', Uri::get('ph7cms-donation', 'main', 'validator', self::HASH_VALIDATION));
 
         $this->view->form_action = $oPayPal->getUrl();
         $this->view->form_body = $oPayPal->generate();
@@ -76,6 +77,6 @@ class MainController extends Controller
     {
         $sHash = substr($sHash, self::HASH_VALIDATION_START_POSITION, self::HASH_VALIDATION_LENGTH);
 
-        return self::HASH_VALIDATION === sha1($sHash);
+        return self::INTERNAL_VERIFY_HASH === sha1($sHash);
     }
 }
