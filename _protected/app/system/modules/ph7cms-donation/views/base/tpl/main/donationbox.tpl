@@ -10,7 +10,7 @@
         <p>{lang '-OR-'}</p>
 
         <p class="s_bMarg">
-            <a href="https://www.patreon.com/bePatron?u=3534366">{lang 'Become a Patron!'}</a>
+            <a href="{% $config->values['module.setting']['patreon.link'] %}">{lang 'Become a Patron!'}</a>
         </p>
     </div>
     <p class="center">
