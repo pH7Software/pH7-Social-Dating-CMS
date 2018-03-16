@@ -120,6 +120,6 @@ class Import
             return require_once $sFile;
         }
 
-        throw new Exception('\'' . $sFile . '\' not found!');
+        throw new Exception(sprintf('%s not found!', $sFile));
     }
 }

@@ -84,7 +84,7 @@ class Ftp extends File
         $sConnFuncName = $bSsl ? 'ftp_ssl_connect' : 'ftp_connect';
 
         if (!$this->rStream = $sConnFuncName($this->sHost)) {
-            throw new RuntimeException('Couldn\'t connect to \'' . $this->sHost);
+            throw new RuntimeException('Cannot connect to ' . $this->sHost);
         }
 
         return ftp_login($this->rStream, $this->sUsername, $this->sPassword);
@@ -145,7 +145,9 @@ class Ftp extends File
                 if (@ftp_mkdir($this->rStream, $mDir)) {
                     $this->chmod($mDir, $iMode); // For Unix OS
                 } else {
-                    throw new PermissionException('Error to create file: \'' . $mDir . '\'<br /> Please verify that the directory permission is in writing mode.');
+                    throw new PermissionException(
+                        sprintf('Cannot create "%s" directory.<br /> Please verify that the directory permission is in writing mode.', $mDir)
+                    );
                 }
             }
         }
@@ -166,7 +168,7 @@ class Ftp extends File
         $iType = $this->getFileMode($sTo);
 
         if (!@ftp_get($this->rStream, $sFrom, $sTo, $iType)) {
-            throw new UploadingFileException('There was a problem while uploading \'' . $sFrom);
+            throw new UploadingFileException('There was a problem while uploading from: ' . $sFrom);
         }
     }
 
@@ -188,7 +190,7 @@ class Ftp extends File
         if (@ftp_put($this->rStream, $sTo, $sFrom, $iType)) {
             $this->chmod($sTo, $iMode); // For Unix OS
         } else {
-            throw new UploadingFileException('There was a problem while uploading \'' . $sFrom);
+            throw new UploadingFileException('There was a problem while uploading from: ' . $sFrom);
         }
     }
 

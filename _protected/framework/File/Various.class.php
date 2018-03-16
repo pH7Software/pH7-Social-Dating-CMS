@@ -74,7 +74,9 @@ class Various
                 break;
 
             default:
-                throw new PH7InvalidArgumentException('Bad suffix: \'' . $cSuffix . '\'! Choose between: K, M, G');
+                throw new PH7InvalidArgumentException(
+                    sprintf('Wrong suffix: %s! Choose between: K, M, G', $cSuffix)
+                );
         }
 
         return $iSize;
