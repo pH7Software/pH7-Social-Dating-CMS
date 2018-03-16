@@ -210,7 +210,7 @@ class Gzip
 
         $this->sCacheDir .= $this->oHttpRequest->get('t') . PH7_DS;
         $this->oFile->createDir($this->sCacheDir);
-        $sExt = ($this->bIsGzip) ? 'gz' : 'cache';
+        $sExt = $this->bIsGzip ? 'gz' : 'cache';
         $sCacheFile = md5($this->sType . $this->sDir . $this->sFiles) . PH7_DOT . $sExt;
         $sFullCacheFile = $this->sCacheDir . $sCacheFile;
 
