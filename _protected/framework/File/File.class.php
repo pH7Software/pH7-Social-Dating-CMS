@@ -872,6 +872,7 @@ class File
         $oIterator = new RecursiveIteratorIterator($this->getDirIterator($sFrom), RecursiveIteratorIterator::SELF_FIRST);
 
         foreach ($oIterator as $sFromFile) {
+            // http://php.net/manual/en/recursivedirectoryiterator.getsubpathname.php#example-4559
             $sDest = $sTo . PH7_DS . $oIterator->getSubPathName();
 
             if ($sFromFile->isDir()) {
