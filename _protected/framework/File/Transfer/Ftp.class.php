@@ -17,6 +17,7 @@ namespace PH7\Framework\File\Transfer;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\File\File;
+use PH7\Framework\File\Permission\PermissionException;
 use RuntimeException;
 
 class Ftp extends File

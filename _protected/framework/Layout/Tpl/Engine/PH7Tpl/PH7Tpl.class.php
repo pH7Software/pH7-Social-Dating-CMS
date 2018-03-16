@@ -729,7 +729,7 @@ class PH7Tpl extends Kernel
      * @return void
      *
      * @throws Exception
-     * @throws \PH7\Framework\File\Exception
+     * @throws \PH7\Framework\File\Permission\PermissionException
      * @throws TplException If the cache file could not be written.
      */
     protected function cache()

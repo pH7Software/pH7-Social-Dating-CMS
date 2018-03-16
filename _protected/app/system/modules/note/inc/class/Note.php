@@ -31,7 +31,7 @@ class Note extends WriteCore
      * @return void
      *
      * @throws \PH7\Framework\File\TooLargeException
-     * @throws \PH7\Framework\File\Exception
+     * @throws \PH7\Framework\File\Permission\PermissionException
      * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException
      */
     public function setThumb(stdClass $oPost, NoteModel $oNoteModel, File $oFile)

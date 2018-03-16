@@ -299,7 +299,7 @@ File ID: ' . $this->sId . '
      * @return bool|null
      *
      * @throws Exception If the file cannot be written.
-     * @throws \PH7\Framework\File\Exception If the file cannot be created.
+     * @throws \PH7\Framework\File\Permission\PermissionException If the file cannot be created.
      */
     final private function write($sData)
     {

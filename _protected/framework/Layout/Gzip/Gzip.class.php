@@ -18,6 +18,7 @@ use PH7\Framework\Compress\Compress;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\File\File;
+use PH7\Framework\File\Permission\PermissionException;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Layout\Optimization;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
@@ -196,6 +197,7 @@ class Gzip
      *
      * @return string The cached contents.
      *
+     * @throws PermissionException If the cache directory couldn't be created.
      * @throws Exception If the cache file couldn't be written or read.
      */
     public function cache()

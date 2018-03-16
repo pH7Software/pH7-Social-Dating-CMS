@@ -14,6 +14,7 @@ namespace PH7\Framework\File;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PH7\Framework\File\Permission\PermissionException;
 use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Parse\Url as UrlParser;
 use PH7\Framework\Registry\Registry;
@@ -292,7 +293,7 @@ class File
      *
      * @return void
      *
-     * @throws Exception If the file cannot be created.
+     * @throws PermissionException If the file cannot be created.
      */
     public function createDir($mDir, $iMode = self::READ_WRITE_EXEC_CHMOD_OCTAL_DIGIT)
     {
@@ -303,7 +304,9 @@ class File
         } else {
             if (!is_dir($mDir)) {
                 if (!@mkdir($mDir, $iMode, true)) {
-                    throw new Exception('Error to create file: \'' . $mDir . '\'<br /> Please verify that the directory permission is in writing mode.');
+                    throw new PermissionException(
+                        sprintf('Cannot create "%s" directory.<br /> Please verify that the directory permission is in writing mode.', $mDir)
+                    );
                 }
             }
         }

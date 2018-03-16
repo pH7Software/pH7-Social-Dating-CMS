@@ -114,7 +114,7 @@ class UserCore
      *
      * @return bool TRUE if success, FALSE if the extension is wrong.
      *
-     * @throws Framework\File\Exception
+     * @throws Framework\File\Permission\PermissionException
      * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException
      */
     public function setAvatar($iProfileId, $sUsername, $sFile, $iApproved = 1)
@@ -241,7 +241,7 @@ class UserCore
      *
      * @return bool TRUE if success, FALSE if the extension is wrong.
      *
-     * @throws Framework\File\Exception
+     * @throws Framework\File\Permission\PermissionException
      */
     public function setBackground($iProfileId, $sUsername, $sFile, $iApproved = 1)
     {

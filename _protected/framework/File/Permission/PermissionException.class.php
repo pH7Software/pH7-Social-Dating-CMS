@@ -6,7 +6,7 @@
  * @package          PH7 / Framework / File / Transfer
  */
 
-namespace PH7\Framework\File\Transfer;
+namespace PH7\Framework\File\Permission;
 
 use PH7\Framework\Error\CException\PH7RuntimeException;
 
