@@ -192,15 +192,15 @@ class MailModel extends MailCoreModel
         }
 
         $oData = $this->getMsg($iMessageId);
-        $sFieldId = $oData->sender == $iProfileId ? self::SENDER_DB_FIELD : self::RECIPIENT_DB_FIELD;
-        if ($sMode == self::RESTOR_MODE) {
+        $sFieldId = $oData->sender === $iProfileId ? self::SENDER_DB_FIELD : self::RECIPIENT_DB_FIELD;
+        if ($sMode === self::RESTOR_MODE) {
             $sTrashVal = str_replace(array($sFieldId, ','), '', $oData->trash);
         } else {
-            $sTrashVal = ($oData->sender == $oData->recipient) ? 'sender,recipient' : $sFieldId . (!empty($oData->trash) ? ',' . $oData->trash : '');
+            $sTrashVal = ($oData->sender === $oData->recipient) ? 'sender,recipient' : $sFieldId . (!empty($oData->trash) ? ',' . $oData->trash : '');
         }
         unset($oData);
 
-        $sField = $sMode == self::DELETE_MODE ? 'toDelete' : 'trash';
+        $sField = $sMode === self::DELETE_MODE ? 'toDelete' : 'trash';
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::MESSAGE) . 'SET ' . $sField . ' = :val WHERE ' . $sFieldId . ' = :profileId AND messageId = :messageId LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
