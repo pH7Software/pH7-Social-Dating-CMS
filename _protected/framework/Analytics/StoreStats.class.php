@@ -34,7 +34,7 @@ class StoreStats
         $sFullPath = PH7_PATH_TMP . static::DIR . $sFileName . static::EXT;
 
         if (!$aGetData = @file_get_contents($sFullPath)) {
-            throw new Exception('Couldn\'t get cache file: \'' . $sFullPath . '\'');
+            throw new Exception('Cannot get cache file: ' . $sFullPath);
         }
 
         $aData = !empty($aGetData) ? unserialize($aGetData) : array();
