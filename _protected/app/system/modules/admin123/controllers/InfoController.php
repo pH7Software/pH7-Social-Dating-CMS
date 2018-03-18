@@ -47,7 +47,7 @@ class InfoController extends Controller
         $this->sTitle = t('%software_name% Information');
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
-        $this->view->release_date = $this->dateTime->get(Version::KERNEL_RELASE_DATE)->date();
+        $this->view->release_date = $this->dateTime->get(Version::KERNEL_RELEASE_DATE)->date();
         $this->view->license_form_link = Uri::get(PH7_ADMIN_MOD, 'setting', 'license');
         $this->view->tweet_msg = $this->getTweetPost();
 
