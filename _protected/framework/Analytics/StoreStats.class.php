@@ -55,23 +55,20 @@ class StoreStats
     protected function save($sFileName, $sContents)
     {
         $sFullPath = PH7_PATH_TMP . static::DIR . $sFileName . static::EXT;
-        $sExceptMsg = 'Couldn\'t write cache file: \'' . $sFullPath . '\'';
         $aData = array();
+        $iFlag = 0;
 
-        if (!is_file($sFullPath)) {
-            if (!@file_put_contents($sFullPath, serialize($aData))) {
-                throw new Exception($sExceptMsg);
-            }
-        } else {
+        if (is_file($sFullPath)) {
             $aLine = file($sFullPath);
             $aData = unserialize($aLine[0]);
             $sContents = strtolower($sContents); // Case-insensitive
 
             !empty($aData[$sContents]) ? $aData[$sContents]++ : $aData[$sContents] = 1;
+            $iFlag = FILE_APPEND;
+        }
 
-            if (!@file_put_contents($sFullPath, serialize($aData), FILE_APPEND)) {
-                throw new Exception($sExceptMsg);
-            }
+        if (!@file_put_contents($sFullPath, serialize($aData), $iFlag)) {
+            throw new Exception('Cannot write cache file: ' . $sFullPath);
         }
     }
 }
