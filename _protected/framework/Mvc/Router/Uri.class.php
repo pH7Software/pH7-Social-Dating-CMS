@@ -21,8 +21,8 @@ use PH7\Framework\Pattern\Statik;
 
 class Uri
 {
-    const CACHE_GROUP = 'str/uri';
-    const CACHE_TIME = 86400;
+    const CACHE_GROUP = 'str/uri/' . PH7_LANG_CODE;
+    const CACHE_TIME = 86400; // 24h
 
     // Set to FALSE if you got too many files (e.g. if inode files usage is overaged on shared hosting)
     const URI_CACHE_ENABLED = true;
@@ -49,7 +49,7 @@ class Uri
      */
     public static function loadFile(DOMDocument $oDom)
     {
-        $oCache = (new Cache)->start(self::CACHE_GROUP, 'routefile' . PH7_LANG_CODE, self::CACHE_TIME);
+        $oCache = (new Cache)->start(self::CACHE_GROUP, 'routefile', self::CACHE_TIME);
 
         if (!$sContents = $oCache->get()) {
             $sContents = file_get_contents(self::getRouteFilePath()); // Get the XML contents
@@ -90,14 +90,6 @@ class Uri
         unset($oCache);
 
         return $sUrl;
-    }
-
-    /**
-     * @return void
-     */
-    public static function clearCache()
-    {
-        (new Cache)->start(self::CACHE_GROUP, null, null)->clear();
     }
 
     /**
