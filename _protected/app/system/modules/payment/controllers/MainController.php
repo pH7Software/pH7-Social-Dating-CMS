@@ -12,6 +12,8 @@
 namespace PH7;
 
 use Braintree_Transaction;
+use DateInterval;
+use DateTime;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\File\File;
 use PH7\Framework\Mail\Mail;
@@ -270,8 +272,8 @@ class MainController extends Controller
 
         $oInfo = $this->oUserModel->getMembershipDetails($this->iProfileId);
         if ($this->isMembershipExpirable($oInfo)) {
-            $oDate = new \DateTime($oInfo->membershipDate);
-            $oDate->add(new \DateInterval(sprintf('P%dD', $oInfo->expirationDays)));
+            $oDate = new DateTime($oInfo->membershipDate);
+            $oDate->add(new DateInterval(sprintf('P%dD', $oInfo->expirationDays)));
             $this->view->expirationDate = $oDate->format($this->config->values['language.application']['textual_date_format']);
             unset($oDate);
         } else {
