@@ -91,19 +91,20 @@ $LANG = array(
     'confirm_remove_install_folder_auto' => 'ATTENTION, tous les fichiers du dossiers /_install/ vont être supprimés.',
     'title_email_finish_install' => 'À propos de l\'installation : Informations',
     'content_email_finish_install' => '<p><strong>Félicitations, votre site Web est maintenant installé avec succès !</strong></p>
-        <p>Nous espérons que vous allez avoir beaucoup de plaisir avec <em>' . Controller::SOFTWARE_NAME . '</em> !</p>
+        <p>J\'espère que vous allez avoir beaucoup de plaisir avec <em>' . Controller::SOFTWARE_NAME . '</em> !</p>
         <p>L\'URL de VOTRE Site de Rencontre est : <em><a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></em></p>
         <p>L\'URL du panneau d\'administration est : <em><a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></em><br />
             Votre adresse e-mail pour le panneau d\'administration est : <em>' . (!empty($_SESSION['val']['admin_login_email']) ? $_SESSION['val']['admin_login_email'] : '') . '</em><br />
             Votre nom d\'utilisateur pour le panneau d\'administration est : <em>' . (!empty($_SESSION['val']['admin_username']) ? $_SESSION['val']['admin_username'] : '') . '</em><br />
             Votre mot de passe est : <em>****** (caché pour des raisons de sécurité. C\'est celui choisi durant l\'installation).</em>
         </p>
-        <p><strong>N\'oubliez pas de vous la péter en montrant votre nouveau service de rencontre à tous vos amis, vos collègues et vos potes de Facebook</strong> (et même à vos ennemis... ou pas).</p>
+        <p>N\'oubliez pas de vous la péter en montrant votre nouveau service de rencontre à tous vos amis, vos collègues et vos potes de Facebook (et même à vos ennemis... ou pas).</p>
+        <p><strong>Voici un <a href="' . get_tweet_post("Viens de créer mon #AppDeRencontre avec #pH7CMS ;) %s \n%s #LogicielRencontre", Controller::SOFTWARE_TWITTER, Controller::SOFTWARE_GIT_REPO) . '">un Tweet pré-écrit</a> (que vous pouvez éditer, bien sûr)</strong>.</p>
         <p>&nbsp;</p>
         <p><strong>Allez-vous m\'aider à améliorer le logiciel ? <a href="' . Controller::PATREON_URL . '">Faire une donation ici</a></strong></p>
         <p>&nbsp;</p>
         <p>Pour tous rapport de bogues, suggestions, partenariat, participation au développement du logiciel et/ou à sa traduction, etc.,
-        veuillez visiter notre <a href="' . Controller::SOFTWARE_WEBSITE . '">site Web</a>.</p>
+        veuillez visiter le <a href="' . Controller::SOFTWARE_GIT_REPO . '">dépôt Github</a>.</p>
         <p>---</p>
         <p>Cordialement,<br />
         <a href="' . Controller::AUTHOR_URL . '">Pierre Soria</a></p>',
