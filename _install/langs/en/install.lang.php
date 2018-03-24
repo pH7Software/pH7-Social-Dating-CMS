@@ -91,8 +91,8 @@ $LANG = array(
     'remove_install_folder_auto' => 'Automatically delete the &quot;install&quot; directory (this requires access rights to delete the &quot;install&quot; directory).',
     'confirm_remove_install_folder_auto' => 'WARNING, All files in the /_install/ folder will be removed.',
     'title_email_finish_install' => 'About your installation: Information',
-    'content_email_finish_install' => '<p><strong>Congratulations, your website is now successfully installed!</strong></p>
-        <p>We hope you\'ll enjoy using <em>' . Controller::SOFTWARE_NAME . '</em>!</p>
+    'content_email_finish_install' => '<p><strong>Congratulations! Your website is now successfully installed!</strong></p>
+        <p>I hope you\'ll enjoy <em>' . Controller::SOFTWARE_NAME . '</em> a lot!</p>
         <p>The URL of Your OWN Social/Dating website is: <em><a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></em></p>
         <p>Your Admin Panel URL is: <em><a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></em><br />
             Your Admin Login Email is: <em>' . (!empty($_SESSION['val']['admin_login_email']) ? $_SESSION['val']['admin_login_email'] : '') . '</em><br />
@@ -100,12 +100,12 @@ $LANG = array(
             Your Admin Login Password is: <em>****** (hidden for security reasons. It\'s the one you chose during the installation).</em>
         </p>
         <p>Don\'t forget to show off YOUR new Social Dating Website to your friends, colleagues and Facebook\'s mates (and even to your haters... why not! :-) ).</p>
-        <p><strong>Here is a <a href="' . get_tweet_post(Controller::SOFTWARE_TWITTER, Controller::SOFTWARE_GIT_REPO) . '">pre-written Tweet</a> (which you can edit, of course)</strong>.</p>
+        <p><strong>Here is a <a href="' . get_tweet_post("Just built my social #DatingWebsite with #pH7CMS ;) %s \n%s #DatingSoftware", Controller::SOFTWARE_TWITTER, Controller::SOFTWARE_GIT_REPO) . '">pre-written Tweet</a> (which you can edit, of course)</strong>.</p>
         <p>&nbsp;</p>
         <p><strong>Will you help me to improve the software..? <a href="' . Controller::PATREON_URL . '">Make a donation here</a></strong></p>
         <p>&nbsp;</p>
         <p>P.S. For any bug reports, suggestions, partnership, translation, contribution or other,
-        please visit the <a href="' . Controller::SOFTWARE_WEBSITE . '">official website</a>.</p>
+        please visit the <a href="' . Controller::SOFTWARE_GIT_REPO . '">Github Repo</a>.</p>
         <p>---</p>
         <p>Best regards,<br />
         <a href="' . Controller::AUTHOR_URL . '">Pierre Soria</a></p>',

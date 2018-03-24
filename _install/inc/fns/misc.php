@@ -425,15 +425,16 @@ function check_license($sKey)
 }
 
 /**
+ * @param string $sTweetMsg
  * @param string $sTwitterUsername
  * @param string $sGitRepoUrl
  *
  * @return string
  */
-function get_tweet_post($sTwitterUsername, $sGitRepoUrl)
+function get_tweet_post($sTweetMsg, $sTwitterUsername, $sGitRepoUrl)
 {
     $sTwitterTweetUrl = 'https://twitter.com/intent/tweet?text=';
-    $sMsg = sprintf("Just built my social #DatingWebsite with #pH7CMS ;) %s \n%s #DatingSoftware", $sTwitterUsername, $sGitRepoUrl);
+    $sMsg = sprintf($sTweetMsg, $sTwitterUsername, $sGitRepoUrl);
 
     return $sTwitterTweetUrl . urlencode($sMsg);
 }
