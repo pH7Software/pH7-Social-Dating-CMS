@@ -168,11 +168,11 @@ class ImportUser extends Core
                 $this->aTmpData['username'] = $sKey;
             }
 
-            if ($sVal === 'name' || $sVal === 'firstname' || $sVal === 'forname') {
+            if ($sVal === 'name' || $sVal === 'firstname' || $sVal === 'forname' || $sVal === 'givenname') {
                 $this->aTmpData['first_name'] = $sKey;
             }
 
-            if ($sVal === 'lastname' || $sVal === 'surname') {
+            if ($sVal === 'lastname' || $sVal === 'surname' || $sVal === 'familyname') {
                 $this->aTmpData['last_name'] = $sKey;
             }
 
@@ -207,7 +207,7 @@ class ImportUser extends Core
             }
 
             if ($sVal === 'zip' || $sVal === 'zipcode' || $sVal === 'postal' ||
-                $sVal === 'postalcode' || $sVal === 'eircode') {
+                $sVal === 'postalcode' || $sVal === 'pin' || $sVal === 'pincode' || $sVal === 'eircode') {
                 $this->aTmpData['zip_code'] = $sKey;
             }
 
