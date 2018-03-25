@@ -168,7 +168,7 @@ class ImportUser extends Core
                 $this->aTmpData['username'] = $sKey;
             }
 
-            if ($sVal === 'name' || $sVal === 'firstname' || $sVal === 'forname' || $sVal === 'givenname') {
+            if ($sVal === 'name' || $sVal === 'firstname' || $sVal === 'givenname' || $sVal === 'forname') {
                 $this->aTmpData['first_name'] = $sKey;
             }
 
@@ -215,7 +215,7 @@ class ImportUser extends Core
                 $this->aTmpData['website'] = $sKey;
             }
 
-            if ($sVal === 'birthday' || $sVal === 'birthdate' || $sVal === 'dateofbirth') {
+            if ($sVal === 'birthday' || $sVal === 'birthdate' || $sVal === 'dateofbirth' || $sVal === 'dob') {
                 $this->aTmpData['birth_date'] = $sKey;
             }
         }
