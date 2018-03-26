@@ -29,7 +29,9 @@ class BlogModel extends BlogCoreModel
             $iLimit = (int)$iLimit;
 
             if ($bCount) {
-                $sSql = 'SELECT *, COUNT(c.blogId) AS totalCatBlogs FROM' . Db::prefix(DbTableName::BLOG_DATA_CATEGORY) . 'AS d INNER JOIN' . Db::prefix(DbTableName::BLOG_CATEGORY) . 'AS c ON d.categoryId = c.categoryId GROUP BY d.name, c.blogId, d.categoryId ASC LIMIT :offset, :limit';
+                $sSql = 'SELECT *, COUNT(c.blogId) AS totalCatBlogs FROM' . Db::prefix(DbTableName::BLOG_DATA_CATEGORY) .
+                    'AS d INNER JOIN' . Db::prefix(DbTableName::BLOG_CATEGORY) .
+                    'AS c ON d.categoryId = c.categoryId GROUP BY d.name, c.blogId, d.categoryId ASC LIMIT :offset, :limit';
             } else {
                 $sSqlBlogId = ($iBlogId !== null) ? ' INNER JOIN ' . Db::prefix(DbTableName::BLOG_CATEGORY) . 'AS c ON d.categoryId = c.categoryId WHERE c.blogId = :blogId ' : ' ';
                 $sSql = 'SELECT * FROM' . Db::prefix(DbTableName::BLOG_DATA_CATEGORY) . 'AS d' . $sSqlBlogId . 'ORDER BY d.name ASC LIMIT :offset, :limit';

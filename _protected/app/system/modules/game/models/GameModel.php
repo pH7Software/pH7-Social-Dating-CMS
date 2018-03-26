@@ -28,8 +28,9 @@ class GameModel extends GameCoreModel
             $bIsCategoryId = $iCategoryId !== null;
 
             if ($bCount) {
-                $sSql = 'SELECT c.*, COUNT(g.gameId) AS totalCatGames FROM' . Db::prefix(DbTableName::GAME_CATEGORY) . 'AS c INNER JOIN' . Db::prefix(DbTableName::GAME) . 'AS g
-                ON c.categoryId = g.categoryId GROUP BY c.name ASC LIMIT :offset, :limit';
+                $sSql = 'SELECT c.*, COUNT(g.gameId) AS totalCatGames FROM' . Db::prefix(DbTableName::GAME_CATEGORY) .
+                    'AS c INNER JOIN' . Db::prefix(DbTableName::GAME) . 'AS g
+                    ON c.categoryId = g.categoryId GROUP BY c.name ASC LIMIT :offset, :limit';
             } else {
                 $sSqlCategoryId = $bIsCategoryId ? ' WHERE categoryId = :categoryId ' : ' ';
                 $sSql = 'SELECT * FROM' . Db::prefix(DbTableName::GAME_CATEGORY) . $sSqlCategoryId . 'ORDER BY name ASC LIMIT :offset, :limit';
