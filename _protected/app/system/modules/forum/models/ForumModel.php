@@ -372,7 +372,11 @@ class ForumModel extends ForumCoreModel
             $sSqlWhere = ' WHERE t.topicId = :looking ';
         }
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::FORUM) . 'AS f INNER JOIN' . Db::prefix(DbTableName::FORUM_TOPIC) . 'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix(DbTableName::MEMBER) . ' AS m ON t.profileId = m.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare(
+            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::FORUM) . 'AS f INNER JOIN' .
+            Db::prefix(DbTableName::FORUM_TOPIC) . 'AS t ON f.forumId = t.forumId LEFT JOIN' .
+            Db::prefix(DbTableName::MEMBER) . ' AS m ON t.profileId = m.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit
+        );
 
         if (ctype_digit($mLooking)) {
             $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
@@ -413,8 +417,10 @@ class ForumModel extends ForumCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::FORUM) . ' AS f INNER JOIN ' . Db::prefix(DbTableName::FORUM_TOPIC) .
-            'AS t ON f.forumId = t.forumId WHERE t.profileId = :profileId AND t.approved = :approved GROUP BY t.topicId ORDER BY t.createdDate DESC LIMIT :offset, :limit');
+        $rStmt = Db::getInstance()->prepare(
+            'SELECT * FROM' . Db::prefix(DbTableName::FORUM) . ' AS f INNER JOIN ' . Db::prefix(DbTableName::FORUM_TOPIC) .
+            'AS t ON f.forumId = t.forumId WHERE t.profileId = :profileId AND t.approved = :approved GROUP BY t.topicId ORDER BY t.createdDate DESC LIMIT :offset, :limit'
+        );
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
@@ -432,9 +438,12 @@ class ForumModel extends ForumCoreModel
      */
     public function totalForums($iProfileId = null)
     {
-        $sSqlProfileId = (!empty($iProfileId)) ? ' WHERE profileId = :profileId' : '';
+        $bIsProfileId = $iProfileId !== null;
+
+        $sSqlProfileId = $bIsProfileId ? ' WHERE profileId = :profileId' : '';
+
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(forumId) AS totalForums FROM' . Db::prefix(DbTableName::FORUM) . $sSqlProfileId);
-        if (!empty($iProfileId)) {
+        if ($bIsProfileId) {
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         }
         $rStmt->execute();
@@ -454,9 +463,20 @@ class ForumModel extends ForumCoreModel
      */
     public function totalTopics($iForumId = null, $iProfileId = null)
     {
-        $sSql = (!empty($iForumId) ? ' WHERE forumId = :forumId' : (!empty($iProfileId) ? ' WHERE profileId = :profileId' : ''));
+        $sSql = '';
+        if ($iForumId !== null) {
+            $sSql = ' WHERE forumId = :forumId';
+        } elseif ($iProfileId !== null) {
+            $sSql = ' WHERE profileId = :profileId';
+        }
+
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(topicId) AS totalTopics FROM' . Db::prefix(DbTableName::FORUM_TOPIC) . $sSql);
-        (!empty($iForumId) ? $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT) : (!empty($iProfileId) ? $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT) : ''));
+
+        if ($iForumId !== null) {
+            $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT);
+        } elseif ($iProfileId !== null) {
+            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        }
 
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -473,13 +493,21 @@ class ForumModel extends ForumCoreModel
      */
     public function totalMessages($iTopicId = null, $iProfileId = null)
     {
-        $sSql = (!empty($iTopicId) ? ' WHERE topicId = :topicId' : (!empty($iProfileId) ? ' WHERE profileId = :profileId' : ''));
+        $sSql = '';
+        if ($iTopicId !== null) {
+            $sSql = ' WHERE topicId = :topicId';
+        } elseif ($iProfileId !== null) {
+            $sSql = ' WHERE profileId = :profileId';
+        }
+
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(messageId) AS totalMessages FROM' . Db::prefix(DbTableName::FORUM_MESSAGE) . $sSql);
-        if (!empty($iTopicId)) {
+
+        if ($iTopicId !== null) {
             $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
-        } elseif (!empty($iProfileId)) {
+        } elseif ($iProfileId !== null) {
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         }
+
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);

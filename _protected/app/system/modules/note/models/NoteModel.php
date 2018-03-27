@@ -296,7 +296,10 @@ class NoteModel extends NoteCoreModel
             $sSqlWhere = ' WHERE (noteId = :looking)';
         }
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::NOTE) . 'AS n INNER JOIN' . Db::prefix(DbTableName::MEMBER) . 'AS m ON n.profileId = m.profileId' . $sSqlWhere . $sSqlApproved . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare(
+            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::NOTE) . 'AS n INNER JOIN' .
+            Db::prefix(DbTableName::MEMBER) . 'AS m ON n.profileId = m.profileId' . $sSqlWhere . $sSqlApproved . $sSqlOrder . $sSqlLimit
+        );
 
         if (ctype_digit($mLooking)) {
             $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
@@ -362,7 +365,10 @@ class NoteModel extends NoteCoreModel
         $this->cache->start(self::CACHE_GROUP, 'postIdExists' . $sPostId . $iProfileId, static::CACHE_TIME);
 
         if (!$bData = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT COUNT(postId) FROM' . Db::prefix(DbTableName::NOTE) . 'WHERE postId = :postId AND profileId = :profileId LIMIT 1');
+            $rStmt = Db::getInstance()->prepare(
+                'SELECT COUNT(postId) FROM' . Db::prefix(DbTableName::NOTE) .
+                'WHERE postId = :postId AND profileId = :profileId LIMIT 1'
+            );
             $rStmt->bindValue(':postId', $sPostId, \PDO::PARAM_STR);
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
@@ -401,7 +407,9 @@ class NoteModel extends NoteCoreModel
     {
         $iNoteId = (int)$iNoteId;
 
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'WHERE noteId = :noteId');
+        $rStmt = Db::getInstance()->prepare(
+            'DELETE FROM' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'WHERE noteId = :noteId'
+        );
         $rStmt->bindValue(':noteId', $iNoteId, \PDO::PARAM_INT);
         $rStmt->execute();
     }
@@ -430,7 +438,10 @@ class NoteModel extends NoteCoreModel
      */
     public function updatePost($sSection, $sValue, $iNoteId, $iProfileId)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::NOTE) . 'SET ' . $sSection . ' = :value WHERE noteId = :noteId AND profileId = :profileId');
+        $rStmt = Db::getInstance()->prepare(
+            'UPDATE' . Db::prefix(DbTableName::NOTE) .
+            'SET ' . $sSection . ' = :value WHERE noteId = :noteId AND profileId = :profileId'
+        );
         $rStmt->bindValue(':value', $sValue, \PDO::PARAM_STR);
         $rStmt->bindValue(':noteId', $iNoteId, \PDO::PARAM_INT);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);

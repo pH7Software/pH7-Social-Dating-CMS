@@ -77,7 +77,10 @@ class BlogModel extends BlogCoreModel
         $this->cache->start(self::CACHE_GROUP, 'readPost' . $sPostId, static::CACHE_TIME);
 
         if (!$oData = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::BLOG) . 'AS b LEFT JOIN' . Db::prefix(DbTableName::BLOG_CATEGORY) . 'AS c ON b.blogId = c.blogId WHERE b.postId = :postId LIMIT 1');
+            $rStmt = Db::getInstance()->prepare(
+                'SELECT * FROM' . Db::prefix(DbTableName::BLOG) . 'AS b LEFT JOIN' .
+                Db::prefix(DbTableName::BLOG_CATEGORY) . 'AS c ON b.blogId = c.blogId WHERE b.postId = :postId LIMIT 1'
+            );
             $rStmt->bindValue(':postId', $sPostId, \PDO::PARAM_STR);
             $rStmt->execute();
             $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -139,8 +142,11 @@ class BlogModel extends BlogCoreModel
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(b.blogId) AS totalBlogs';
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::BLOG) . 'AS b LEFT JOIN ' . Db::prefix(DbTableName::BLOG_CATEGORY) . 'AS c ON b.blogId = c.blogId LEFT JOIN' .
-            Db::prefix(DbTableName::BLOG_DATA_CATEGORY) . 'AS d ON c.categoryId = d.categoryId WHERE d.name LIKE :name' . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare(
+            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::BLOG) .
+            'AS b LEFT JOIN ' . Db::prefix(DbTableName::BLOG_CATEGORY) . 'AS c ON b.blogId = c.blogId LEFT JOIN' .
+            Db::prefix(DbTableName::BLOG_DATA_CATEGORY) . 'AS d ON c.categoryId = d.categoryId WHERE d.name LIKE :name' . $sSqlOrder . $sSqlLimit
+        );
 
         $rStmt->bindValue(':name', '%' . $sCategoryName . '%', \PDO::PARAM_STR);
 

@@ -246,7 +246,10 @@ class GameModel extends GameCoreModel
 
     public function update(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::GAME) . 'SET categoryId = :categoryId, name = :name, title = :title, description = :description, keywords = :keywords WHERE gameId = :id LIMIT 1');
+        $rStmt = Db::getInstance()->prepare(
+            'UPDATE' . Db::prefix(DbTableName::GAME) .
+            'SET categoryId = :categoryId, name = :name, title = :title, description = :description, keywords = :keywords WHERE gameId = :id LIMIT 1'
+        );
         $rStmt->bindValue(':id', $aData['id'], \PDO::PARAM_INT);
         $rStmt->bindValue(':categoryId', $aData['category_id'], \PDO::PARAM_INT);
         $rStmt->bindValue(':name', $aData['name'], \PDO::PARAM_STR);
