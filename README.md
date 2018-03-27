@@ -195,7 +195,7 @@ You can find and add other languages on the [I18N repo](https://github.com/pH7So
 
 ## Author
 
-Made with lots of ❤️ by [Pierre-Henry Soria](http://ph7.me). A passionate Belgian software engineer 🍫🍺
+Coded & Designed with lots of ❤️ by [Pierre-Henry Soria](http://ph7.me). A passionate Belgian software engineer 🍫🍺
 
 
 ## Official Website
