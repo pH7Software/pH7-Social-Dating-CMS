@@ -16,8 +16,8 @@ class UrlTest extends PHPUnit_Framework_TestCase
     public function testValidValue()
     {
         $sTestUrl = 'https://ph7cms.com/dating-business-by-steps/';
-        $sUrl = new Url($sTestUrl);
-        $this->assertSame($sTestUrl, $sUrl->getValue());
+        $oUrl = new Url($sTestUrl);
+        $this->assertSame($sTestUrl, $oUrl->getValue());
     }
 
     /**
