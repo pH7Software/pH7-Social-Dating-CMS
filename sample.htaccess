@@ -600,7 +600,9 @@ ServerSignature Off
 
     # Apache >= 2.4
     <IfModule mod_authz_core.c>
-        Require not env bad_bot
+        <RequireAll>
+            Require not env bad_bot
+        </RequireAll>
     </IfModule>
 </IfModule>
 
@@ -614,8 +616,10 @@ ServerSignature Off
 
     # Apache >= 2.4
     <IfModule mod_authz_core.c>
-        Require all granted
-        Require not env bad_bot
+        <RequireAll>
+            Require all granted
+            Require not env bad_bot
+        </RequireAll>
     </IfModule>
 </Limit>
 
