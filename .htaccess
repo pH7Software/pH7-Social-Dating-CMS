@@ -42,19 +42,43 @@ ServerSignature Off
 
 # Deny access to all CGI, Perl, Python, Bash, SQL, Template, INI configuration, cache, log, temporary and text files
 <FilesMatch "\.(cgi|pl|py|sh|bash|sql|tpl|ini|cache|log|tmp|txt)">
-    Deny from all
+    # Apache 2.4+
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+
+    # Apache 2.2
+    <IfModule !mod_authz_core.c>
+        Deny from all
+    </IfModule>
 </FilesMatch>
 
 # Leave open the humans.txt and robots.txt file
 <FilesMatch "humans\.txt|robots\.txt">
-    Allow from all
+    # Apache 2.4+
+    <IfModule mod_authz_core.c>
+        Require all granted
+    </IfModule>
+
+    # Apache 2.2
+    <IfModule !mod_authz_core.c>
+        Allow from all
+    </IfModule>
 </FilesMatch>
 
 # Prevent downloading files .htaccess (Default configuration of Apache)
 <Files ~ "^\.ht">
-    Order allow,deny
-    Deny from all
-    Satisfy all
+    # Apache 2.2
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+        Satisfy all
+    </IfModule>
+
+    # Apache 2.4+
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
 </Files>
 
 # block bots spam
@@ -567,14 +591,32 @@ ServerSignature Off
     SetEnvIfNoCase User-Agent "^zerxbot" bad_bot
     SetEnvIfNoCase User-Agent "^Zeus" bad_bot
     SetEnvIfNoCase User-Agent "^ZyBorg" bad_bot
-    Order deny,allow
-    Deny from env=bad_bot
+
+    # Apache <= 2.2
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from env=bad_bot
+    </IfModule>
+
+    # Apache >= 2.4
+    <IfModule mod_authz_core.c>
+        Require not env bad_bot
+    </IfModule>
 </IfModule>
 
 <Limit GET POST PUT DELETE HEAD>
-    Order allow,deny
-    Allow from all
-    Deny from env=bad_bot
+    # Apache <= 2.2
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Allow from all
+        Deny from env=bad_bot
+    </IfModule>
+
+    # Apache >= 2.4
+    <IfModule mod_authz_core.c>
+        Require all granted
+        Require not env bad_bot
+    </IfModule>
 </Limit>
 
 ErrorDocument 400 /error/http/index?code=400
