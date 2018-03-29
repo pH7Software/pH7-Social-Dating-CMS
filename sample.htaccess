@@ -68,16 +68,16 @@ ServerSignature Off
 
 # Prevent .htaccess/.htpasswd from being downloaded
 <Files ~ "^\.ht">
+    # Apache 2.4+
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+
     # Apache 2.2
     <IfModule !mod_authz_core.c>
         Order allow,deny
         Deny from all
         Satisfy all
-    </IfModule>
-
-    # Apache 2.4+
-    <IfModule mod_authz_core.c>
-        Require all denied
     </IfModule>
 </Files>
 
@@ -592,34 +592,34 @@ ServerSignature Off
     SetEnvIfNoCase User-Agent "^Zeus" bad_bot
     SetEnvIfNoCase User-Agent "^ZyBorg" bad_bot
 
-    # Apache <= 2.2
-    <IfModule !mod_authz_core.c>
-        Order deny,allow
-        Deny from env=bad_bot
-    </IfModule>
-
     # Apache >= 2.4
     <IfModule mod_authz_core.c>
         <RequireAll>
             Require not env bad_bot
         </RequireAll>
     </IfModule>
+
+    # Apache <= 2.2
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from env=bad_bot
+    </IfModule>
 </IfModule>
 
 <Limit GET POST PUT DELETE HEAD>
-    # Apache <= 2.2
-    <IfModule !mod_authz_core.c>
-        Order allow,deny
-        Allow from all
-        Deny from env=bad_bot
-    </IfModule>
-
     # Apache >= 2.4
     <IfModule mod_authz_core.c>
         <RequireAll>
             Require all granted
             Require not env bad_bot
         </RequireAll>
+    </IfModule>
+
+    # Apache <= 2.2
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Allow from all
+        Deny from env=bad_bot
     </IfModule>
 </Limit>
 
