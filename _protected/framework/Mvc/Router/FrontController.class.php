@@ -16,6 +16,7 @@ namespace PH7\Framework\Mvc\Router;
 defined('PH7') or exit('Restricted access');
 
 use DomDocument;
+use DOMElement;
 use PDO;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Error\CException\PH7Exception;
@@ -130,7 +131,7 @@ final class FrontController
         $oUrl = UriRoute::loadFile(new DomDocument);
 
         foreach ($oUrl->getElementsByTagName('route') as $oRoute) {
-            if (preg_match('`^' . $oRoute->getAttribute('url') . self::REGEX_URL_EXTRA_OPTIONS . '$`', $this->oHttpRequest->requestUri(), $aMatches)) {
+            if ($this->isRewrittenUrl($oRoute, $aMatches)) {
                 $this->setRewritingRouter();
 
                 $sPathModule = $oRoute->getAttribute('path') . PH7_SH;
@@ -165,17 +166,7 @@ final class FrontController
                 // Get the default action
                 $this->oRegistry->action = $oRoute->getAttribute('action');
                 if ($oRoute->hasAttribute('vars')) {
-                    $aVars = explode(',', $oRoute->getAttribute('vars'));
-                    $iOffset = count($aVars);
-
-                    foreach ($aMatches as $sKey => $sMatch) {
-                        if ($sKey !== 0) {
-                            $this->oHttpRequest->setGet($aVars[$sKey - 1], $sMatch);
-
-                            /** Request Parameter for the Router Rewriting mode. * */
-                            $this->aRequestParameter = $this->oUri->segments($this->oUri->totalFragment() - $iOffset);
-                        }
-                    }
+                    $this->generateUrlParameters($oRoute, $aMatches);
                 }
                 break;
             }
@@ -295,16 +286,6 @@ final class FrontController
 
         /** Request Parameter for the Simple Module Router mode. **/
         $this->aRequestParameter = $this->oUri->segments(4);
-    }
-
-    /**
-     * If the action is rewriting by the XML route file, set the correct router to be used.
-     *
-     * @return void
-     */
-    private function setRewritingRouter()
-    {
-        $this->bIsRouterRewritten = true;
     }
 
     /**
@@ -587,6 +568,42 @@ final class FrontController
         } else {
             $this->notFound('The <b>' . $this->oRegistry->controller . '</b> controller of the <b>' . $this->oRegistry->module .
                 '</b> module is not found.<br />File: <b>' . $this->oRegistry->path_module . '</b>', 1);
+        }
+    }
+
+    /**
+     * If the action is rewriting by the XML route file, set the correct router to be used.
+     *
+     * @return void
+     */
+    private function setRewritingRouter()
+    {
+        $this->bIsRouterRewritten = true;
+    }
+
+    /**
+     * @param DOMElement $oRoute
+     * @param array $aMatches
+     *
+     * @return bool
+     */
+    private function isRewrittenUrl(DOMElement $oRoute, &$aMatches)
+    {
+        return preg_match('`^' . $oRoute->getAttribute('url') . self::REGEX_URL_EXTRA_OPTIONS . '$`', $this->oHttpRequest->requestUri(), $aMatches);
+    }
+
+    private function generateUrlParameters(DOMElement $oRoute, array $aMatches)
+    {
+        $aVars = explode(',', $oRoute->getAttribute('vars'));
+        $iOffset = count($aVars);
+
+        foreach ($aMatches as $sKey => $sMatch) {
+            if ($sKey !== 0) {
+                $this->oHttpRequest->setGet($aVars[$sKey - 1], $sMatch);
+
+                /** Request Parameter for the Router Rewriting mode. * */
+                $this->aRequestParameter = $this->oUri->segments($this->oUri->totalFragment() - $iOffset);
+            }
         }
     }
 
