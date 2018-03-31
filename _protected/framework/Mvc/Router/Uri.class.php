@@ -93,7 +93,7 @@ class Uri
     }
 
     /**
-     * @param string|int|null $sCacheId
+     * @param string|null $sCacheId
      *
      * @return void
      */
