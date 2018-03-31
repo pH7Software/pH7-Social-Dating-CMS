@@ -15,8 +15,6 @@ use PH7\Framework\Url\Header;
 
 class LoginForm
 {
-    const FORM_WIDTH = 500;
-
     public static function display()
     {
         if (isset($_POST['submit_login'])) {
@@ -27,7 +25,7 @@ class LoginForm
             Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_login', self::FORM_WIDTH);
+        $oForm = new \PFBC\Form('form_login');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_login', 'form_login'));
         $oForm->addElement(new \PFBC\Element\Token('login'));
