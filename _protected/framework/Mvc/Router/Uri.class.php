@@ -93,6 +93,16 @@ class Uri
     }
 
     /**
+     * @param string|int|null $sCacheId
+     *
+     * @return void
+     */
+    public static function clearCache($sCacheId = null)
+    {
+        (new Cache)->start(self::CACHE_GROUP, $sCacheId, null)->clear();
+    }
+
+    /**
      * @param string $sLangCode The two-letter language code. e.g., en, fr, de, ru, ...
      *
      * @return bool

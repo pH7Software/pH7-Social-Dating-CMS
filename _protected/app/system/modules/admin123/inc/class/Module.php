@@ -13,6 +13,7 @@ namespace PH7;
 
 use PH7\Framework\Config\Config;
 use PH7\Framework\File as F;
+use PH7\Framework\Mvc\Router\Uri;
 
 @set_time_limit(0);
 @ini_set('memory_limit', '528M');
@@ -225,6 +226,9 @@ class Module
 
         if (is_file($this->sModRoutePath)) {
             ($sSwitch === static::INSTALL) ? $this->addRoute() : $this->removeRoute();
+
+            // Refresh the route file XML to take into account the new URL rules
+            Uri::clearCache('routefile');
         }
     }
 
