@@ -27,7 +27,7 @@ define('PH7_DEFAULT_TIMEZONE', 'America/Chicago');
 
 /***** ADMIN MODULE NAME *****/
 
-define('PH7_ADMIN_MOD', 'admin123');
+define('PH7_ADMIN_MOD', 'admin123'); // http://ph7cms.com/doc/en/rename-the-admin-folder
 
 /***** PATTERN USERNAME (for 'Members', 'Affiliates' and 'Admins') *****/
 
