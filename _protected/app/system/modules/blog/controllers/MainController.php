@@ -247,7 +247,7 @@ class MainController extends Controller
         $oCache = (new Cache)->start(BlogModel::CACHE_GROUP, 'categorylist', BlogModel::CACHE_TIME);
 
         if (!$aData = $oCache->get()) {
-            $aCategoryList = $this->oBlogModel->getCategory(null, 0, self::ITEMS_MENU_CATEGORIES);
+            $aCategoryList = $this->oBlogModel->getCategory(null, 0, self::MAX_CATEGORIES);
 
             $aData = [];
             foreach ($aCategoryList as $oCategory) {
@@ -257,10 +257,10 @@ class MainController extends Controller
                     SearchCoreModel::TITLE,
                     SearchCoreModel::ASC,
                     0,
-                    self::ITEMS_MENU_CATEGORIES
+                    self::MAX_CATEGORIES
                 );
 
-                if ($iTotalCategories > 0) {
+                if ($iTotalCategories > 0 && count($aData) < self::ITEMS_MENU_CATEGORIES) {
                     $oData = new stdClass();
                     $oData->totalCatBlogs = $iTotalCategories;
                     $oData->name = $oCategory->name;

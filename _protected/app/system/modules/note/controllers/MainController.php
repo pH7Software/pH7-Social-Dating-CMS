@@ -393,7 +393,7 @@ class MainController extends Controller
         $oCache = (new Cache)->start(NoteModel::CACHE_GROUP, 'categorylist', NoteModel::CACHE_TIME);
 
         if (!$aData = $oCache->get()) {
-            $aCategoryList = $this->oNoteModel->getCategory(null, 0, self::ITEMS_MENU_CATEGORIES);
+            $aCategoryList = $this->oNoteModel->getCategory(null, 0, self::MAX_CATEGORIES);
 
             $aData = [];
             foreach ($aCategoryList as $oCategory) {
@@ -403,10 +403,10 @@ class MainController extends Controller
                     SearchCoreModel::TITLE,
                     SearchCoreModel::ASC,
                     0,
-                    self::ITEMS_MENU_CATEGORIES
+                    self::MAX_CATEGORIES
                 );
 
-                if ($iTotalCategories > 0) {
+                if ($iTotalCategories > 0 && count($aData) < self::ITEMS_MENU_CATEGORIES) {
                     $oData = new stdClass();
                     $oData->totalCatNotes = $iTotalCategories;
                     $oData->name = $oCategory->name;
