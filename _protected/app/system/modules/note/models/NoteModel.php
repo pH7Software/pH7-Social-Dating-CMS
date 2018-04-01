@@ -16,26 +16,18 @@ class NoteModel extends NoteCoreModel
      * @param int|null $iNoteId
      * @param int $iOffset
      * @param int $iLimit
-     * @param bool $bCount
      *
      * @return array
      */
-    public function getCategory($iNoteId = null, $iOffset, $iLimit, $bCount = false)
+    public function getCategory($iNoteId = null, $iOffset, $iLimit)
     {
-        $this->cache->start(self::CACHE_GROUP, 'category' . $iNoteId . $iOffset . $iLimit . $bCount, static::CACHE_TIME);
+        $this->cache->start(self::CACHE_GROUP, 'category' . $iNoteId . $iOffset . $iLimit, static::CACHE_TIME);
         if (!$aData = $this->cache->get()) {
             $iOffset = (int)$iOffset;
             $iLimit = (int)$iLimit;
 
-            if ($bCount) {
-                $sSql = 'SELECT *, COUNT(c.noteId) AS totalCatNotes FROM' . Db::prefix(DbTableName::NOTE_DATA_CATEGORY) .
-                    'AS d INNER JOIN' . Db::prefix(DbTableName::NOTE_CATEGORY) .
-                    'AS c ON d.categoryId = c.categoryId GROUP BY d.name ASC, c.noteId, d.categoryId, c.profileId LIMIT :offset, :limit';
-            } else {
-                $sSqlNoteId = ($iNoteId !== null) ? ' INNER JOIN ' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON d.categoryId = c.categoryId WHERE c.noteId = :noteId ' : ' ';
-                $sSql = 'SELECT * FROM' . Db::prefix(DbTableName::NOTE_DATA_CATEGORY) . 'AS d' . $sSqlNoteId . 'ORDER BY d.name ASC LIMIT :offset, :limit';
-            }
-
+            $sSqlNoteId = $iNoteId !== null ? ' INNER JOIN ' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON d.categoryId = c.categoryId WHERE c.noteId = :noteId ' : ' ';
+            $sSql = 'SELECT d.* FROM' . Db::prefix(DbTableName::NOTE_DATA_CATEGORY) . 'AS d' . $sSqlNoteId . 'ORDER BY d.name ASC LIMIT :offset, :limit';
             $rStmt = Db::getInstance()->prepare($sSql);
 
             if ($iNoteId !== null) {
@@ -56,23 +48,20 @@ class NoteModel extends NoteCoreModel
     /**
      * @param int $iOffset
      * @param int $iLimit
-     * @param bool $bCount
      *
      * @return array
      */
-    public function getAuthor($iOffset, $iLimit, $bCount = false)
+    public function getAuthor($iOffset, $iLimit)
     {
-        $this->cache->start(self::CACHE_GROUP, 'author' . $iOffset . $iLimit . $bCount, static::CACHE_TIME);
+        $this->cache->start(self::CACHE_GROUP, 'author' . $iOffset . $iLimit, static::CACHE_TIME);
 
         if (!$aData = $this->cache->get()) {
             $iOffset = (int)$iOffset;
             $iLimit = (int)$iLimit;
 
-            $sSelect = $bCount ? '*, COUNT(n.noteId) AS totalAuthors' : '*';
-
-            $rStmt = Db::getInstance()->prepare('SELECT ' . $sSelect . ' FROM' . Db::prefix(DbTableName::NOTE) .
-                'AS n INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
-                'AS m ON n.profileId = m.profileId GROUP BY m.username ASC, n.noteId LIMIT :offset, :limit');
+            $rStmt = Db::getInstance()->prepare('SELECT DISTINCT m.username FROM' . Db::prefix(DbTableName::MEMBER) .
+                'AS m INNER JOIN' . Db::prefix(DbTableName::NOTE) .
+                'AS n ON m.profileId = n.profileId GROUP BY m.username ASC, n.noteId LIMIT :offset, :limit');
 
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
