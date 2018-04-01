@@ -197,11 +197,33 @@ class MainController extends Controller
     }
 
     /**
+     * Set a custom Not Found Error Message with HTTP 404 Code Status.
+     *
+     * @param bool $b404Status For the Ajax blocks and others, we can not put HTTP error code 404, so the attribute must be set to FALSE
+     *
+     * @return void
+     */
+    protected function notFound($b404Status = true)
+    {
+        if ($b404Status) {
+            Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
+        }
+
+        $this->view->page_title = $this->view->h2_title = $this->sTitle;
+
+        $this->view->error = t("Sorry, we weren't able to find the page you requested.") . '<br />' .
+            t('You can go back on the <a href="%0%">blog homepage</a> or <a href="%1%">search with different keywords</a>.',
+                Uri::get('blog', 'main', 'index'),
+                Uri::get('blog', 'main', 'search')
+            );
+    }
+
+    /**
      * Sets the Menu Variables for the template.
      *
      * @return void
      */
-    protected function setMenuVars()
+    private function setMenuVars()
     {
         $this->view->top_views = $this->oBlogModel->getPosts(
             0,
@@ -250,28 +272,6 @@ class MainController extends Controller
         unset($oCache);
 
         return $aData;
-    }
-
-    /**
-     * Set a custom Not Found Error Message with HTTP 404 Code Status.
-     *
-     * @param bool $b404Status For the Ajax blocks and others, we can not put HTTP error code 404, so the attribute must be set to FALSE
-     *
-     * @return void
-     */
-    protected function notFound($b404Status = true)
-    {
-        if ($b404Status) {
-            Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
-        }
-
-        $this->view->page_title = $this->view->h2_title = $this->sTitle;
-
-        $this->view->error = t("Sorry, we weren't able to find the page you requested.") . '<br />' .
-            t('You can go back on the <a href="%0%">blog homepage</a> or <a href="%1%">search with different keywords</a>.',
-                Uri::get('blog', 'main', 'index'),
-                Uri::get('blog', 'main', 'search')
-            );
     }
 
     /**
