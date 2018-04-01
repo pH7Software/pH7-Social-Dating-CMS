@@ -236,22 +236,22 @@ class MainController extends Controller
             SearchCoreModel::RATING
         );
 
-        $this->view->categories = $this->getCategoriesList();
+        $this->view->categories = $this->getCategoryList();
     }
 
     /**
      * @return array
      */
-    private function getCategoriesList()
+    private function getCategoryList()
     {
-        $oCache = (new Cache)->start(BlogModel::CACHE_GROUP, 'categorieslist', BlogCoreModel::CACHE_TIME);
+        $oCache = (new Cache)->start(BlogModel::CACHE_GROUP, 'categorylist', BlogModel::CACHE_TIME);
 
         if (!$aData = $oCache->get()) {
             $aCategoryList = $this->oBlogModel->getCategory(null, 0, self::ITEMS_MENU_CATEGORIES);
 
             $aData = [];
             foreach ($aCategoryList as $oCategory) {
-                $iTotalCategory = $this->oBlogModel->category(
+                $iTotalCategories = $this->oBlogModel->category(
                     $oCategory->name,
                     true,
                     SearchCoreModel::TITLE,
@@ -260,9 +260,9 @@ class MainController extends Controller
                     self::ITEMS_MENU_CATEGORIES
                 );
 
-                if ($iTotalCategory > 0) {
+                if ($iTotalCategories > 0) {
                     $oData = new stdClass();
-                    $oData->totalCatBlogs = $iTotalCategory;
+                    $oData->totalCatBlogs = $iTotalCategories;
                     $oData->name = $oCategory->name;
                     $aData[] = $oData;
                 }
