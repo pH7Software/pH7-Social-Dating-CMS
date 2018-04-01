@@ -177,8 +177,8 @@ class NoteModel extends NoteCoreModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'n');
 
-        $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ? 'n.*, c.*, d.*, m.username, m.firstName, m.sex' : 'COUNT(n.noteId) AS totalNotes';
+        $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
+        $sSqlSelect = !$bCount ? 'n.*, c.*, d.*, m.username, m.firstName, m.sex' : 'COUNT(n.noteId) AS totalNotes';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::NOTE) .
             'AS n LEFT JOIN' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON n.noteId = c.noteId LEFT JOIN' .
@@ -226,8 +226,8 @@ class NoteModel extends NoteCoreModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'n');
 
-        $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ? 'n.*, m.username, m.firstName, m.sex' : 'COUNT(m.profileId) AS totalNotes';
+        $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
+        $sSqlSelect = !$bCount ? 'n.*, m.username, m.firstName, m.sex' : 'COUNT(m.profileId) AS totalNotes';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::NOTE) . 'AS n
                 INNER JOIN' . Db::prefix(DbTableName::MEMBER) . 'AS m ON n.profileId = m.profileId WHERE m.username LIKE :name' . $sSqlOrder . $sSqlLimit);
@@ -276,8 +276,8 @@ class NoteModel extends NoteCoreModel
         $sSqlApproved = $bIsApproved ? ' AND (approved = :approved)' : '';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'n');
 
-        $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ? 'n.*, m.username, m.firstName, m.sex' : 'COUNT(noteId) AS totalNotes';
+        $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
+        $sSqlSelect = !$bCount ? 'n.*, m.username, m.firstName, m.sex' : 'COUNT(noteId) AS totalNotes';
 
         $sSqlWhere = ' WHERE (postId LIKE :looking OR title LIKE :looking OR
             pageTitle LIKE :looking OR content LIKE :looking OR tags LIKE :looking OR
