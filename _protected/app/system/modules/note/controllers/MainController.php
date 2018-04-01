@@ -123,7 +123,9 @@ class MainController extends Controller
                 $this->notFound();
             }
         } else {
-            Header::redirect(Uri::get('note', 'main', 'index'));
+            Header::redirect(
+                Uri::get('note', 'main', 'index')
+            );
         }
 
         $this->output();
