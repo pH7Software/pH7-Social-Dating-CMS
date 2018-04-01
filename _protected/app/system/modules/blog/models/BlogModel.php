@@ -184,10 +184,10 @@ class BlogModel extends BlogCoreModel
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = !$bCount ? '*' : 'COUNT(blogId) AS totalBlogs';
 
-        $sSqlWhere = ' WHERE postId LIKE :looking OR title LIKE :looking OR
+        $sSqlWhere = 'WHERE postId LIKE :looking OR title LIKE :looking OR
                 pageTitle LIKE :looking OR content LIKE :looking OR tags LIKE :looking';
         if (ctype_digit($mLooking)) {
-            $sSqlWhere = ' WHERE blogId = :looking';
+            $sSqlWhere = 'WHERE blogId = :looking';
         }
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::BLOG) . $sSqlWhere . $sSqlOrder . $sSqlLimit);
