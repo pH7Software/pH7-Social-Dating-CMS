@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Analytics\Statistic;
+use PH7\Framework\Cache\Cache;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
@@ -213,12 +214,42 @@ class MainController extends Controller
             SearchCoreModel::RATING
         );
 
-        $this->view->categories = $this->oBlogModel->getCategory(
-            null,
-            0,
-            self::ITEMS_MENU_CATEGORIES,
-            true
-        );
+        $this->view->categories = $this->getCategoriesList();
+    }
+
+    /**
+     * @return array
+     */
+    private function getCategoriesList()
+    {
+        $oCache = (new Cache)->start(BlogModel::CACHE_GROUP, 'categorieslist', BlogCoreModel::CACHE_TIME);
+
+        if (!$aData = $oCache->get()) {
+            $aCategoryList = $this->oBlogModel->getCategory(null, 0, self::ITEMS_MENU_CATEGORIES);
+
+            $aData = [];
+            foreach ($aCategoryList as $oCategory) {
+                $iTotalCategory = $this->oBlogModel->category(
+                    $oCategory->name,
+                    true,
+                    SearchCoreModel::TITLE,
+                    SearchCoreModel::ASC,
+                    0,
+                    self::ITEMS_MENU_CATEGORIES
+                );
+
+                if ($iTotalCategory > 0) {
+                    $oData = new stdClass();
+                    $oData->totalCatBlogs = $iTotalCategory;
+                    $oData->name = $oCategory->name;
+                    $aData[] = $oData;
+                }
+            }
+            $oCache->put($aData);
+        }
+        unset($oCache);
+
+        return $aData;
     }
 
     /**

@@ -16,27 +16,19 @@ class BlogModel extends BlogCoreModel
      * @param int|null $iBlogId
      * @param int $iOffset
      * @param int $iLimit
-     * @param bool $bCount
      *
      * @return array
      */
-    public function getCategory($iBlogId = null, $iOffset, $iLimit, $bCount = false)
+    public function getCategory($iBlogId = null, $iOffset, $iLimit)
     {
-        $this->cache->start(self::CACHE_GROUP, 'category' . $iBlogId . $iOffset . $iLimit . $bCount, static::CACHE_TIME);
+        $this->cache->start(self::CACHE_GROUP, 'category' . $iBlogId . $iOffset . $iLimit, static::CACHE_TIME);
 
         if (!$aData = $this->cache->get()) {
             $iOffset = (int)$iOffset;
             $iLimit = (int)$iLimit;
 
-            if ($bCount) {
-                $sSql = 'SELECT *, COUNT(c.blogId) AS totalCatBlogs FROM' . Db::prefix(DbTableName::BLOG_DATA_CATEGORY) .
-                    'AS d INNER JOIN' . Db::prefix(DbTableName::BLOG_CATEGORY) .
-                    'AS c ON d.categoryId = c.categoryId GROUP BY d.name ASC, c.blogId, d.categoryId LIMIT :offset, :limit';
-            } else {
-                $sSqlBlogId = ($iBlogId !== null) ? ' INNER JOIN ' . Db::prefix(DbTableName::BLOG_CATEGORY) . 'AS c ON d.categoryId = c.categoryId WHERE c.blogId = :blogId ' : ' ';
-                $sSql = 'SELECT * FROM' . Db::prefix(DbTableName::BLOG_DATA_CATEGORY) . 'AS d' . $sSqlBlogId . 'ORDER BY d.name ASC LIMIT :offset, :limit';
-            }
-
+            $sSqlBlogId = $iBlogId !== null ? ' INNER JOIN ' . Db::prefix(DbTableName::BLOG_CATEGORY) . 'AS c ON d.categoryId = c.categoryId WHERE c.blogId = :blogId ' : ' ';
+            $sSql = 'SELECT d.* FROM' . Db::prefix(DbTableName::BLOG_DATA_CATEGORY) . 'AS d' . $sSqlBlogId . 'ORDER BY d.name ASC LIMIT :offset, :limit';
             $rStmt = Db::getInstance()->prepare($sSql);
 
             if ($iBlogId !== null) {
