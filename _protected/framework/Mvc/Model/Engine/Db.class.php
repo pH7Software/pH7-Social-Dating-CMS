@@ -350,13 +350,13 @@ class Db
      * If table name is empty, only prefix will be returned otherwise the table name with its prefix will be returned.
      *
      * @param string $sTable Table name. Default ''
-     * @param bool $bTrim With or without a space before and after the table name. Default valut is FALSE, so with space before and after table name.
+     * @param bool $bSpace With or without a space before and after the table name. Default value is FALSE, so with space before and after table name.
      *
      * @return string prefixed table name, just prefix if table name is empty.
      */
-    public static function prefix($sTable = '', $bTrim = false)
+    public static function prefix($sTable = '', $bSpace = true)
     {
-        $sSpace = (!$bTrim) ? ' ' : '';
+        $sSpace = $bSpace ? ' ' : '';
 
         return ($sTable !== '') ? $sSpace . self::$sPrefix . $sTable . $sSpace : self::$sPrefix;
     }
