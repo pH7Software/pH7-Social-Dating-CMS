@@ -26,7 +26,7 @@ class MainController extends Controller
     const AUTHORS_PER_PAGE = 10;
     const ITEMS_MENU_TOP_VIEWS = 5;
     const ITEMS_MENU_TOP_RATING = 5;
-    const ITEMS_MENU_AUTHORS = 5;
+    const ITEMS_MENU_AUTHORS = 6;
     const ITEMS_MENU_CATEGORIES = 10;
     const MAX_CATEGORIES = 300;
 
