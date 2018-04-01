@@ -433,7 +433,7 @@ class MainController extends Controller
             $aData = [];
             foreach ($aAuthorList as $oAuthor) {
                 $iTotalAuthors = $this->oNoteModel->author(
-                    $oAuthor->name,
+                    $oAuthor->username,
                     true,
                     SearchCoreModel::TITLE,
                     SearchCoreModel::ASC,
