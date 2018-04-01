@@ -30,8 +30,8 @@ class NoteForm
         $oCategoryData = (new NoteModel)->getCategory(null, 0, self::MAX_CATEGORIES);
 
         $aCategoryNames = array();
-        foreach ($oCategoryData as $oId) {
-            $aCategoryNames[$oId->categoryId] = $oId->name;
+        foreach ($oCategoryData as $oCategory) {
+            $aCategoryNames[$oCategory->categoryId] = $oCategory->name;
         }
 
         $oForm = new \PFBC\Form('form_note');

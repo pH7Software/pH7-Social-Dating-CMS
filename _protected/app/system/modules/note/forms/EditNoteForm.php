@@ -41,16 +41,16 @@ class EditNoteForm
             $oCategoryData = $oNoteModel->getCategory(null, 0, self::MAX_CATEGORIES);
 
             $aCategoryNames = array();
-            foreach ($oCategoryData as $oId) {
-                $aCategoryNames[$oId->categoryId] = $oId->name;
+            foreach ($oCategoryData as $oCategory) {
+                $aCategoryNames[$oCategory->categoryId] = $oCategory->name;
             }
 
             $aSelectedCategories = array();
             $oCategoryIds = $oNoteModel->getCategory($iNoteId, 0, self::MAX_CATEGORIES);
             unset($oNoteModel);
 
-            foreach ($oCategoryIds as $iId) {
-                $aSelectedCategories[] = $iId->categoryId;
+            foreach ($oCategoryIds as $oCategory) {
+                $aSelectedCategories[] = $oCategory->categoryId;
             }
 
             $oForm = new \PFBC\Form('form_edit_note');

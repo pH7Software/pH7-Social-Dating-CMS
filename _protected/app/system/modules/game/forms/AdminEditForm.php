@@ -34,8 +34,8 @@ class AdminEditForm
 
         $oCategoriesData = $oGameModel->getCategory(null, 0, self::MAX_CATEGORIES);
         $aCategoriesName = array();
-        foreach ($oCategoriesData as $oId) {
-            $aCategoriesName[$oId->categoryId] = $oId->name;
+        foreach ($oCategoriesData as $oCategory) {
+            $aCategoriesName[$oCategory->categoryId] = $oCategory->name;
         }
         unset($oHttpRequest, $oGameModel);
 

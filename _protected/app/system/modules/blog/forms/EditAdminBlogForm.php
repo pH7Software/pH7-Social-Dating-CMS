@@ -37,16 +37,16 @@ class EditAdminBlogForm
             $oCategoryData = $oBlogModel->getCategory(null, 0, self::MAX_CATEGORIES);
 
             $aCategoryNames = array();
-            foreach ($oCategoryData as $oId) {
-                $aCategoryNames[$oId->categoryId] = $oId->name;
+            foreach ($oCategoryData as $oCategory) {
+                $aCategoryNames[$oCategory->categoryId] = $oCategory->name;
             }
 
             $aSelectedCategories = array();
             $oCategoryIds = $oBlogModel->getCategory($iBlogId, 0, self::MAX_CATEGORIES);
             unset($oBlogModel);
 
-            foreach ($oCategoryIds as $oId) {
-                $aSelectedCategories[] = $oId->categoryId;
+            foreach ($oCategoryIds as $oCategory) {
+                $aSelectedCategories[] = $oCategory->categoryId;
             }
 
             $oForm = new \PFBC\Form('form_edit_blog');

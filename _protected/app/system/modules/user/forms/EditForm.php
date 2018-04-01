@@ -46,12 +46,12 @@ class EditForm
                 new \PFBC\Element\HTMLExternal('<p class="center"><a class="bold btn btn-default btn-md" href="' . Uri::get(PH7_ADMIN_MOD, 'user', 'browse') . '">' . t('Back to Browse Users') . '</a></p>')
             );
 
-            $oGroupId = (new AdminCoreModel)->getMemberships();
+            $oMemberships = (new AdminCoreModel)->getMemberships();
             $aGroupName = [];
-            foreach ($oGroupId as $oId) {
+            foreach ($oMemberships as $oGroup) {
                 // Retrieve only the activated memberships
-                if ($oId->enable == 1) {
-                    $aGroupName[$oId->groupId] = $oId->name;
+                if ($oGroup->enable == 1) {
+                    $aGroupName[$oGroup->groupId] = $oGroup->name;
                 }
             }
             $oForm->addElement(new \PFBC\Element\Select(t('Membership Group:'), 'group_id', $aGroupName, ['value' => $oUser->groupId, 'required' => 1]));
