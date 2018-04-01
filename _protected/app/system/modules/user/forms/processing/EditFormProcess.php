@@ -43,8 +43,9 @@ class EditFormProcess extends Form
             (new Cache)->start(UserCoreModel::CACHE_GROUP, 'firstName' . $iProfileId . DbTableName::MEMBER, null)->clear();
         }
 
-        if (!$this->str->equals($this->httpRequest->post('last_name'), $oUser->lastName))
+        if (!$this->str->equals($this->httpRequest->post('last_name'), $oUser->lastName)) {
             $oUserModel->updateProfile('lastName', $this->httpRequest->post('last_name'), $iProfileId);
+        }
 
         if (!$this->str->equals($this->httpRequest->post('sex'), $oUser->sex)) {
             $oUserModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId);
@@ -55,11 +56,13 @@ class EditFormProcess extends Form
 
         // WARNING: Be careful, you should use the Http::NO_CLEAN constant, otherwise Http::post() method removes the special tags
         // and damages the SET function SQL for entry into the database.
-        if (!$this->str->equals($this->httpRequest->post('match_sex', Http::NO_CLEAN), $oUser->matchSex))
+        if (!$this->str->equals($this->httpRequest->post('match_sex', Http::NO_CLEAN), $oUser->matchSex)) {
             $oUserModel->updateProfile('matchSex', Form::setVal($this->httpRequest->post('match_sex', Http::NO_CLEAN)), $iProfileId);
+        }
 
-        if (!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oUser->birthDate))
+        if (!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oUser->birthDate)) {
             $oUserModel->updateProfile('birthDate', $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $iProfileId);
+        }
 
         // Update dynamic fields.
         $oFields = $oUserModel->getInfoFields($iProfileId);
