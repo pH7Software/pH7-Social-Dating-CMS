@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Analytics\Statistic;
+use PH7\Framework\Cache\Cache;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Router\Uri;
@@ -355,18 +356,10 @@ class MainController extends Controller
             $this->iApproved
         );
 
-        $this->view->authors = $this->oNoteModel->getAuthor(
-            0,
-            self::ITEMS_MENU_AUTHORS,
-            true
-        );
+        $this->view->authors = $this->getAuthorList();
 
-        $this->view->categories = $this->oNoteModel->getCategory(
-            null,
-            0,
-            self::ITEMS_MENU_CATEGORIES,
-            true
-        );
+
+        $this->view->categories = $this->getCategoryList();
     }
 
     /**
@@ -388,6 +381,76 @@ class MainController extends Controller
             t('You can go back on the <a href="%0%">note homepage</a> or <a href="%1%">search with different keywords</a>.',
                 Uri::get('note', 'main', 'index'), Uri::get('note', 'main', 'search')
             );
+    }
+
+    /**
+     * @return array
+     */
+    private function getCategoryList()
+    {
+        $oCache = (new Cache)->start(NoteModel::CACHE_GROUP, 'categorylist', NoteModel::CACHE_TIME);
+
+        if (!$aData = $oCache->get()) {
+            $aCategoryList = $this->oNoteModel->getCategory(null, 0, self::ITEMS_MENU_CATEGORIES);
+
+            $aData = [];
+            foreach ($aCategoryList as $oCategory) {
+                $iTotalCategories = $this->oNoteModel->category(
+                    $oCategory->name,
+                    true,
+                    SearchCoreModel::TITLE,
+                    SearchCoreModel::ASC,
+                    0,
+                    self::ITEMS_MENU_CATEGORIES
+                );
+
+                if ($iTotalCategories > 0) {
+                    $oData = new stdClass();
+                    $oData->totalCatNotes = $iTotalCategories;
+                    $oData->name = $oCategory->name;
+                    $aData[] = $oData;
+                }
+            }
+            $oCache->put($aData);
+        }
+        unset($oCache);
+
+        return $aData;
+    }
+
+    /**
+     * @return array
+     */
+    private function getAuthorList()
+    {
+        $oCache = (new Cache)->start(NoteModel::CACHE_GROUP, 'authorlist', NoteModel::CACHE_TIME);
+
+        if (!$aData = $oCache->get()) {
+            $aAuthorList = $this->oNoteModel->getAuthor(0, self::ITEMS_MENU_AUTHORS);
+
+            $aData = [];
+            foreach ($aAuthorList as $oAuthor) {
+                $iTotalAuthors = $this->oNoteModel->author(
+                    $oAuthor->name,
+                    true,
+                    SearchCoreModel::TITLE,
+                    SearchCoreModel::ASC,
+                    0,
+                    self::ITEMS_MENU_AUTHORS
+                );
+
+                if ($iTotalAuthors > 0) {
+                    $oData = new stdClass();
+                    $oData->totalAuthors = $iTotalAuthors;
+                    $oData->username = $oAuthor->username;
+                    $aData[] = $oData;
+                }
+            }
+            $oCache->put($aData);
+        }
+        unset($oCache);
+
+        return $aData;
     }
 
     /**
