@@ -397,7 +397,7 @@ class MainController extends Controller
 
             $aData = [];
             foreach ($aCategoryList as $oCategory) {
-                $iTotalCategories = $this->oNoteModel->category(
+                $iTotalPostsPerCat = $this->oNoteModel->category(
                     $oCategory->name,
                     true,
                     SearchCoreModel::TITLE,
@@ -406,9 +406,9 @@ class MainController extends Controller
                     self::MAX_CATEGORIES
                 );
 
-                if ($iTotalCategories > 0 && count($aData) < self::ITEMS_MENU_CATEGORIES) {
+                if ($iTotalPostsPerCat > 0 && count($aData) < self::ITEMS_MENU_CATEGORIES) {
                     $oData = new stdClass();
-                    $oData->totalCatNotes = $iTotalCategories;
+                    $oData->totalNotes = $iTotalPostsPerCat;
                     $oData->name = $oCategory->name;
                     $aData[] = $oData;
                 }
@@ -432,7 +432,7 @@ class MainController extends Controller
 
             $aData = [];
             foreach ($aAuthorList as $oAuthor) {
-                $iTotalAuthors = $this->oNoteModel->author(
+                $iTotalPostsPerAuthor = $this->oNoteModel->author(
                     $oAuthor->username,
                     true,
                     SearchCoreModel::TITLE,
@@ -441,9 +441,9 @@ class MainController extends Controller
                     self::ITEMS_MENU_AUTHORS
                 );
 
-                if ($iTotalAuthors > 0) {
+                if ($iTotalPostsPerAuthor > 0) {
                     $oData = new stdClass();
-                    $oData->totalAuthors = $iTotalAuthors;
+                    $oData->totalNotes = $iTotalPostsPerAuthor;
                     $oData->username = $oAuthor->username;
                     $aData[] = $oData;
                 }

@@ -226,7 +226,7 @@ class NoteModel extends NoteCoreModel
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'n');
 
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ? 'n.*, m.username, m.firstName, m.sex' : 'COUNT(m.profileId) AS totalAuthors';
+        $sSqlSelect = (!$bCount) ? 'n.*, m.username, m.firstName, m.sex' : 'COUNT(m.profileId) AS totalNotes';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::NOTE) . 'AS n
                 INNER JOIN' . Db::prefix(DbTableName::MEMBER) . 'AS m ON n.profileId = m.profileId WHERE m.username LIKE :name' . $sSqlOrder . $sSqlLimit);
@@ -246,7 +246,7 @@ class NoteModel extends NoteCoreModel
         } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $mData = (int)$oRow->totalAuthors;
+            $mData = (int)$oRow->totalNotes;
             unset($oRow);
         }
 

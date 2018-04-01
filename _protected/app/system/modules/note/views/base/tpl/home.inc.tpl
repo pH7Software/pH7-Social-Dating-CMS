@@ -9,7 +9,7 @@
         <ul>
             {each $author in $authors}
                 <li>
-                    <a href="{{ $design->url('note','main','author',$author->username) }}" title="{% $author->username %}" data-load="ajax">{% substr($author->username,0,20) %}</a> - ({% $author->totalAuthors %})
+                    <a href="{{ $design->url('note','main','author',$author->username) }}" title="{% $author->username %}" data-load="ajax">{% substr($author->username,0,20) %}</a> - ({% $author->totalNotes %})
                 </li>
             {/each}
         </ul>
@@ -20,7 +20,7 @@
         <ul>
             {each $category in $categories}
                 <li>
-                    <a href="{{ $design->url('note','main','category',$category->name) }}" title="{% $category->name %}" data-load="ajax">{% $category->name %}</a> - ({% $category->totalCatNotes %})
+                    <a href="{{ $design->url('note','main','category',$category->name) }}" title="{% $category->name %}" data-load="ajax">{% $category->name %}</a> - ({% $category->totalNotes %})
                 </li>
             {/each}
         </ul>

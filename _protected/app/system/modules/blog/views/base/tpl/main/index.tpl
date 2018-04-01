@@ -9,7 +9,7 @@
         <ul>
             {each $category in $categories}
                 <li>
-                    <a href="{{ $design->url('blog','main','category',$category->name) }}" title="{% $category->name %}" data-load="ajax">{% $category->name %}</a> - ({% $category->totalCatBlogs %})
+                    <a href="{{ $design->url('blog','main','category',$category->name) }}" title="{% $category->name %}" data-load="ajax">{% $category->name %}</a> - ({% $category->totalBlogs %})
                 </li>
             {/each}
         </ul>
