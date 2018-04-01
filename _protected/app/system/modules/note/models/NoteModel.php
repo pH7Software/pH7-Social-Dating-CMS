@@ -26,7 +26,7 @@ class NoteModel extends NoteCoreModel
             $iOffset = (int)$iOffset;
             $iLimit = (int)$iLimit;
 
-            $sSqlNoteId = $iNoteId !== null ? ' INNER JOIN ' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON d.categoryId = c.categoryId WHERE c.noteId = :noteId ' : ' ';
+            $sSqlNoteId = $iNoteId !== null ? ' INNER JOIN' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON d.categoryId = c.categoryId WHERE c.noteId = :noteId ' : ' ';
             $sSql = 'SELECT d.* FROM' . Db::prefix(DbTableName::NOTE_DATA_CATEGORY) . 'AS d' . $sSqlNoteId . 'ORDER BY d.name ASC LIMIT :offset, :limit';
             $rStmt = Db::getInstance()->prepare($sSql);
 
@@ -109,7 +109,7 @@ class NoteModel extends NoteCoreModel
 
             $sSqlQuery = 'SELECT n.*, c.*, m.username, m.firstName, m.sex FROM' . Db::prefix(DbTableName::NOTE) .
                 'AS n LEFT JOIN' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON n.noteId = c.noteId INNER JOIN' .
-                Db::prefix(DbTableName::MEMBER) . ' AS m ON n.profileId = m.profileId WHERE n.profileId = :profileId AND n.postId = :postId' .
+                Db::prefix(DbTableName::MEMBER) . 'AS m ON n.profileId = m.profileId WHERE n.profileId = :profileId AND n.postId = :postId' .
                 $sSqlApproved . ' LIMIT 1';
             $rStmt = Db::getInstance()->prepare($sSqlQuery);
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
@@ -180,7 +180,7 @@ class NoteModel extends NoteCoreModel
         $sSqlSelect = (!$bCount) ? 'n.*, c.*, d.*, m.username, m.firstName, m.sex' : 'COUNT(n.noteId) AS totalNotes';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::NOTE) .
-            'AS n LEFT JOIN ' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON n.noteId = c.noteId LEFT JOIN' .
+            'AS n LEFT JOIN' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON n.noteId = c.noteId LEFT JOIN' .
             Db::prefix(DbTableName::NOTE_DATA_CATEGORY) . 'AS d ON c.categoryId = d.categoryId INNER JOIN' .
             Db::prefix(DbTableName::MEMBER) . 'AS m ON n.profileId = m.profileId WHERE d.name LIKE :name' . $sSqlOrder . $sSqlLimit);
 
@@ -330,7 +330,7 @@ class NoteModel extends NoteCoreModel
         $this->cache->start(self::CACHE_GROUP, 'postId' . $iNoteId, static::CACHE_TIME);
 
         if (!$sData = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT postId FROM' . Db::prefix(DbTableName::NOTE) . ' WHERE noteId = :noteId LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT postId FROM' . Db::prefix(DbTableName::NOTE) . 'WHERE noteId = :noteId LIMIT 1');
             $rStmt->bindValue(':noteId', $iNoteId, \PDO::PARAM_INT);
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);

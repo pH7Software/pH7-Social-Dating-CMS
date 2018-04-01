@@ -27,7 +27,7 @@ class BlogModel extends BlogCoreModel
             $iOffset = (int)$iOffset;
             $iLimit = (int)$iLimit;
 
-            $sSqlBlogId = $iBlogId !== null ? ' INNER JOIN ' . Db::prefix(DbTableName::BLOG_CATEGORY) . 'AS c ON d.categoryId = c.categoryId WHERE c.blogId = :blogId ' : ' ';
+            $sSqlBlogId = $iBlogId !== null ? ' INNER JOIN' . Db::prefix(DbTableName::BLOG_CATEGORY) . 'AS c ON d.categoryId = c.categoryId WHERE c.blogId = :blogId ' : ' ';
             $sSql = 'SELECT d.* FROM' . Db::prefix(DbTableName::BLOG_DATA_CATEGORY) . 'AS d' . $sSqlBlogId . 'ORDER BY d.name ASC LIMIT :offset, :limit';
             $rStmt = Db::getInstance()->prepare($sSql);
 
@@ -136,7 +136,7 @@ class BlogModel extends BlogCoreModel
 
         $rStmt = Db::getInstance()->prepare(
             'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::BLOG) .
-            'AS b LEFT JOIN ' . Db::prefix(DbTableName::BLOG_CATEGORY) . 'AS c ON b.blogId = c.blogId LEFT JOIN' .
+            'AS b LEFT JOIN' . Db::prefix(DbTableName::BLOG_CATEGORY) . 'AS c ON b.blogId = c.blogId LEFT JOIN' .
             Db::prefix(DbTableName::BLOG_DATA_CATEGORY) . 'AS d ON c.categoryId = d.categoryId WHERE d.name LIKE :name' . $sSqlOrder . $sSqlLimit
         );
 
@@ -228,7 +228,7 @@ class BlogModel extends BlogCoreModel
         $this->cache->start(self::CACHE_GROUP, 'postId' . $iBlogId, static::CACHE_TIME);
 
         if (!$sData = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT postId FROM' . Db::prefix(DbTableName::BLOG) . ' WHERE blogId = :blogId LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT postId FROM' . Db::prefix(DbTableName::BLOG) . 'WHERE blogId = :blogId LIMIT 1');
             $rStmt->bindValue(':blogId', $iBlogId, \PDO::PARAM_INT);
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
