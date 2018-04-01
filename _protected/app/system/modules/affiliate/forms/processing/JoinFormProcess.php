@@ -48,7 +48,7 @@ class JoinFormProcess extends Form
             'zip_code' => $this->httpRequest->post('zip_code'),
             'ip' => Ip::get(),
             'hash_validation' => Various::genRnd(null, UserCoreModel::HASH_VALIDATION_LENGTH),
-            'current_date' => (new CDateTime)->get()->dateTime('Y-m-d H:i:s'),
+            'current_date' => (new CDateTime)->get()->dateTime(UserCoreModel::DATETIME_FORMAT),
             'is_active' => $this->iActiveType,
             'affiliated_id' => $iAffId
         ];

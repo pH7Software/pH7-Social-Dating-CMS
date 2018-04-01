@@ -38,7 +38,7 @@ abstract class PermissionCore extends Framework\Core\Core
         if (UserCore::auth()) {
             return (new UserCoreModel)->checkMembershipExpiration(
                 $this->session->get('member_id'),
-                $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+                $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
             );
         }
 

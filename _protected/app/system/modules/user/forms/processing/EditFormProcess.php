@@ -26,7 +26,11 @@ class EditFormProcess extends Form
         // For Admins only!
         if ($this->isOnlyAdminLoggedAndUserIdExists()) {
             if (!$this->str->equals($this->httpRequest->post('group_id'), $oUser->groupId)) {
-                $oUserModel->updateMembership($this->httpRequest->post('group_id'), $iProfileId, $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
+                $oUserModel->updateMembership(
+                    $this->httpRequest->post('group_id'),
+                    $iProfileId,
+                    $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
+                );
 
                 (new Cache)->start(UserCoreModel::CACHE_GROUP, 'membershipdetails' . $iProfileId, null)->clear();
             }

@@ -38,6 +38,8 @@ class UserCoreModel extends Model
     const VISITOR_GROUP = 1;
     const PENDING_GROUP = 9;
 
+    const DATETIME_FORMAT = 'Y-m-d H:i:s';
+
     /** @var string */
     protected $sCurrentDate;
 
@@ -48,7 +50,7 @@ class UserCoreModel extends Model
     {
         parent::__construct();
 
-        $this->sCurrentDate = (new CDateTime)->get()->dateTime('Y-m-d H:i:s');
+        $this->sCurrentDate = (new CDateTime)->get()->dateTime(self::DATETIME_FORMAT);
         $this->iProfileId = (new Session)->get('member_id');
     }
 
