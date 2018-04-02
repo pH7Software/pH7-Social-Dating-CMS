@@ -36,14 +36,16 @@ class CDateTime
     /**
      * Get, initialization method.
      *
-     * @param string|int $mTime If specified, you must enter a date/timestamp, otherwise it's the current time.
+     * @param string|int|null $mTime If specified, you must enter a date/timestamp, otherwise it's the current time.
+     * @param string|null $mTimeZone If leave null, it will give the timezone set in the lang config.ini file.
      *
-     * @return CDateTime
+     * @return self
      */
-    public function get($mTime = null)
+    public function get($mTime = null, $mTimeZone = null)
     {
         $sSetTime = $mTime !== null ? date(self::DEFAULT_DATE_FORMAT, (!is_numeric($mTime) ? strtotime($mTime) : $mTime)) : 'now';
-        $this->oDateTime = new DateTime($sSetTime, new DateTimeZone($this->oConfig->values['language.application']['timezone']));
+        $sSetTimeZone = $mTimeZone !== null ? $mTimeZone : $this->oConfig->values['language.application']['timezone'];
+        $this->oDateTime = new DateTime($sSetTime, new DateTimeZone($sSetTimeZone));
 
         return $this;
     }
