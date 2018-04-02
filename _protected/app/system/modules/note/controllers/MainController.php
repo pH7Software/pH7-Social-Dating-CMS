@@ -61,7 +61,7 @@ class MainController extends Controller
 
     public function index()
     {
-        $this->view->page_title = t('The Notes of %site_name%');
+        $this->view->page_title = t('The Note Posts of %site_name%');
 
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->oNoteModel->totalPosts($this->iApproved), self::POSTS_PER_PAGE
