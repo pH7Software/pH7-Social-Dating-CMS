@@ -178,7 +178,7 @@ class NoteModel extends NoteCoreModel
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'n');
 
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = !$bCount ? 'n.*, c.*, d.*, m.username, m.firstName, m.sex' : 'COUNT(n.noteId) AS totalNotes';
+        $sSqlSelect = !$bCount ? 'n.*, d.*, m.username, m.firstName, m.sex' : 'COUNT(n.noteId) AS totalNotes';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::NOTE) .
             'AS n LEFT JOIN' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON n.noteId = c.noteId LEFT JOIN' .

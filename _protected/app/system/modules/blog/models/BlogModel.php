@@ -132,7 +132,7 @@ class BlogModel extends BlogCoreModel
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = !$bCount ? '*' : 'COUNT(b.blogId) AS totalBlogs';
+        $sSqlSelect = !$bCount ? 'b.*, d.*' : 'COUNT(b.blogId) AS totalBlogs';
 
         $rStmt = Db::getInstance()->prepare(
             'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::BLOG) .
