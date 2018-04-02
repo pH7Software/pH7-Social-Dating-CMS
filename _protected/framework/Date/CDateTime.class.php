@@ -59,7 +59,7 @@ class CDateTime
      */
     public function dateTime($sFormat = null)
     {
-        $sFormat = ($sFormat === null) ? $this->oConfig->values['language.application']['date_time_format'] : $sFormat;
+        $sFormat = $sFormat === null ? $this->oConfig->values['language.application']['date_time_format'] : $sFormat;
 
         return $this->oDateTime->format($sFormat);
     }
@@ -73,7 +73,7 @@ class CDateTime
      */
     public function date($sFormat = null)
     {
-        $sFormat = ($sFormat === null) ? $this->oConfig->values['language.application']['date_format'] : $sFormat;
+        $sFormat = $sFormat === null ? $this->oConfig->values['language.application']['date_format'] : $sFormat;
 
         return $this->oDateTime->format($sFormat);
     }
@@ -87,7 +87,7 @@ class CDateTime
      */
     public function time($sFormat = null)
     {
-        $sFormat = ($sFormat === null) ? $this->oConfig->values['language.application']['time_format'] : $sFormat;
+        $sFormat = $sFormat === null ? $this->oConfig->values['language.application']['time_format'] : $sFormat;
 
         return $this->oDateTime->format($sFormat);
     }
