@@ -55,7 +55,9 @@ class MainController extends Controller
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oPosts = $this->oBlogModel->getPosts(
-            $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage()
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsPerPage(),
+            SearchCoreModel::CREATED
         );
         $this->setMenuVars();
 

@@ -71,7 +71,7 @@ class MainController extends Controller
         $oPosts = $this->oNoteModel->getPosts(
             $this->oPage->getFirstItem(),
             $this->oPage->getNbItemsPerPage(),
-            SearchCoreModel::UPDATED,
+            SearchCoreModel::CREATED,
             $this->iApproved
         );
 
