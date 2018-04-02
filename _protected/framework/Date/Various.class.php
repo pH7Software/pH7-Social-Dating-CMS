@@ -49,7 +49,7 @@ class Various
     /**
      * Convert the time (e.g. hour:minutes:seconds) to seconds.
      *
-     * @param int $iHMS Hours/Minutes/Seconds
+     * @param int $iHMS Hours:Minutes:Seconds e.g., 08:02:11
      *
      * @return int
      */
@@ -69,7 +69,7 @@ class Various
      *
      * @param int $iSeconds
      *
-     * @return string Example: 00:00
+     * @return string Example: 09:23
      */
     public static function secToTime($iSeconds)
     {
