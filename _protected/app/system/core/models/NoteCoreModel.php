@@ -14,7 +14,8 @@ use PH7\Framework\Mvc\Model\Engine\Model;
 class NoteCoreModel extends Model
 {
     const CACHE_GROUP = 'db/sys/mod/note';
-    const CACHE_TIME = 999990;
+    const CACHE_LIFETIME = 999990;
+    const CACHE_SHORT_LIFETIME = 3600;
 
     // Disabled cache (if you have a few notes, you can enable it to improve performance)
     const POSTS_CACHE_ENABLED = false;
@@ -33,8 +34,11 @@ class NoteCoreModel extends Model
     {
         $this->cache->enabled(self::POSTS_CACHE_ENABLED);
 
-        // We do not have a long duration of the cache for the changes of positions to be easily updated on the list of Notes of the home page.
-        $this->cache->start(self::CACHE_GROUP, 'posts' . $iOffset . $iLimit . $sOrder . $iApproved, 3600);
+        $this->cache->start(
+            self::CACHE_GROUP,
+            'posts' . $iOffset . $iLimit . $sOrder . $iApproved,
+            self::CACHE_SHORT_LIFETIME
+        );
 
         if (!$aData = $this->cache->get()) {
             $iOffset = (int)$iOffset;
@@ -71,7 +75,7 @@ class NoteCoreModel extends Model
      */
     public function totalPosts($iApproved = 1, $iDay = 0)
     {
-        $this->cache->start(self::CACHE_GROUP, 'totalPosts', static::CACHE_TIME);
+        $this->cache->start(self::CACHE_GROUP, 'totalPosts', static::CACHE_LIFETIME);
 
         if (!$iData = $this->cache->get()) {
             $iDay = (int)$iDay;

@@ -390,7 +390,7 @@ class MainController extends Controller
      */
     private function getCategoryList()
     {
-        $oCache = (new Cache)->start(NoteModel::CACHE_GROUP, 'categorylist', NoteModel::CACHE_TIME);
+        $oCache = (new Cache)->start(NoteModel::CACHE_GROUP, 'categorylist', NoteModel::CACHE_LIFETIME);
 
         if (!$aData = $oCache->get()) {
             $aCategoryList = $this->oNoteModel->getCategory(null, 0, self::MAX_CATEGORIES);
@@ -425,7 +425,7 @@ class MainController extends Controller
      */
     private function getAuthorList()
     {
-        $oCache = (new Cache)->start(NoteModel::CACHE_GROUP, 'authorlist', NoteModel::CACHE_TIME);
+        $oCache = (new Cache)->start(NoteModel::CACHE_GROUP, 'authorlist', NoteModel::CACHE_LIFETIME);
 
         if (!$aData = $oCache->get()) {
             $aAuthorList = $this->oNoteModel->getAuthor(0, self::ITEMS_MENU_AUTHORS);

@@ -66,7 +66,7 @@ class BlogModel extends BlogCoreModel
      */
     public function readPost($sPostId)
     {
-        $this->cache->start(self::CACHE_GROUP, 'readPost' . $sPostId, static::CACHE_TIME);
+        $this->cache->start(self::CACHE_GROUP, 'readPost' . $sPostId, static::CACHE_LIFETIME);
 
         if (!$oData = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare(

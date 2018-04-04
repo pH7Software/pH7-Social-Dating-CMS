@@ -53,7 +53,7 @@ class NoteModel extends NoteCoreModel
      */
     public function getAuthor($iOffset, $iLimit)
     {
-        $this->cache->start(self::CACHE_GROUP, 'author' . $iOffset . $iLimit, static::CACHE_TIME);
+        $this->cache->start(self::CACHE_GROUP, 'author' . $iOffset . $iLimit, static::CACHE_LIFETIME);
 
         if (!$aData = $this->cache->get()) {
             $iOffset = (int)$iOffset;
@@ -101,7 +101,7 @@ class NoteModel extends NoteCoreModel
      */
     public function readPost($sPostId, $iProfileId, $iApproved = 1)
     {
-        $this->cache->start(self::CACHE_GROUP, 'readPost' . $sPostId . $iProfileId . $iApproved, static::CACHE_TIME);
+        $this->cache->start(self::CACHE_GROUP, 'readPost' . $sPostId . $iProfileId . $iApproved, static::CACHE_LIFETIME);
 
         if (!$oData = $this->cache->get()) {
             $bIsApproved = isset($iApproved);
@@ -352,7 +352,7 @@ class NoteModel extends NoteCoreModel
      */
     public function postIdExists($sPostId, $iProfileId)
     {
-        $this->cache->start(self::CACHE_GROUP, 'postIdExists' . $sPostId . $iProfileId, static::CACHE_TIME);
+        $this->cache->start(self::CACHE_GROUP, 'postIdExists' . $sPostId . $iProfileId, static::CACHE_LIFETIME);
 
         if (!$bData = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare(

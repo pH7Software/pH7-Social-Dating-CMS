@@ -14,7 +14,8 @@ use PH7\Framework\Mvc\Model\Engine\Model;
 class BlogCoreModel extends Model
 {
     const CACHE_GROUP = 'db/sys/mod/blog';
-    const CACHE_TIME = 999990;
+    const CACHE_LIFETIME = 999990;
+    const CACHE_SHORT_LIFETIME = 3600;
 
     /**
      * Gets all blog posts.
@@ -27,8 +28,11 @@ class BlogCoreModel extends Model
      */
     public function getPosts($iOffset, $iLimit, $sOrder = SearchCoreModel::CREATED)
     {
-        // We do not have a long duration of the cache for the changes of positions to be easily updated on the list of Blogs of the home page.
-        $this->cache->start(self::CACHE_GROUP, 'posts' . $iOffset . $iLimit . $sOrder, 3600);
+        $this->cache->start(
+            self::CACHE_GROUP,
+            'posts' . $iOffset . $iLimit . $sOrder,
+            self::CACHE_SHORT_LIFETIME
+        );
 
         if (!$aData = $this->cache->get()) {
             $iOffset = (int)$iOffset;

@@ -246,7 +246,7 @@ class MainController extends Controller
      */
     private function getCategoryList()
     {
-        $oCache = (new Cache)->start(BlogModel::CACHE_GROUP, 'categorylist', BlogModel::CACHE_TIME);
+        $oCache = (new Cache)->start(BlogModel::CACHE_GROUP, 'categorylist', BlogModel::CACHE_LIFETIME);
 
         if (!$aData = $oCache->get()) {
             $aCategoryList = $this->oBlogModel->getCategory(null, 0, self::MAX_CATEGORIES);
