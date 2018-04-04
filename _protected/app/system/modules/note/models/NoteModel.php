@@ -21,14 +21,14 @@ class NoteModel extends NoteCoreModel
      */
     public function getCategory($iNoteId = null, $iOffset, $iLimit)
     {
-        $this->cache->start(self::CACHE_GROUP, 'category' . $iNoteId . $iOffset . $iLimit, static::CACHE_TIME);
+        $this->cache->start(self::CACHE_GROUP, 'category' . $iNoteId . $iOffset . $iLimit, static::CACHE_LIFETIME);
         if (!$aData = $this->cache->get()) {
             $iOffset = (int)$iOffset;
             $iLimit = (int)$iLimit;
 
             $sSqlNoteId = $iNoteId !== null ? ' INNER JOIN' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON d.categoryId = c.categoryId WHERE c.noteId = :noteId ' : ' ';
-            $sSql = 'SELECT d.* FROM' . Db::prefix(DbTableName::NOTE_DATA_CATEGORY) . 'AS d' . $sSqlNoteId . 'ORDER BY d.name ASC LIMIT :offset, :limit';
-            $rStmt = Db::getInstance()->prepare($sSql);
+            $sSqlQuery = 'SELECT d.* FROM' . Db::prefix(DbTableName::NOTE_DATA_CATEGORY) . 'AS d' . $sSqlNoteId . 'ORDER BY d.name ASC LIMIT :offset, :limit';
+            $rStmt = Db::getInstance()->prepare($sSqlQuery);
 
             if ($iNoteId !== null) {
                 $rStmt->bindParam(':noteId', $iNoteId, \PDO::PARAM_INT);

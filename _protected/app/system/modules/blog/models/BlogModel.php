@@ -21,15 +21,19 @@ class BlogModel extends BlogCoreModel
      */
     public function getCategory($iBlogId = null, $iOffset, $iLimit)
     {
-        $this->cache->start(self::CACHE_GROUP, 'category' . $iBlogId . $iOffset . $iLimit, static::CACHE_TIME);
+        $this->cache->start(
+            self::CACHE_GROUP,
+            'category' . $iBlogId . $iOffset . $iLimit,
+            static::CACHE_LIFETIME
+        );
 
         if (!$aData = $this->cache->get()) {
             $iOffset = (int)$iOffset;
             $iLimit = (int)$iLimit;
 
             $sSqlBlogId = $iBlogId !== null ? ' INNER JOIN' . Db::prefix(DbTableName::BLOG_CATEGORY) . 'AS c ON d.categoryId = c.categoryId WHERE c.blogId = :blogId ' : ' ';
-            $sSql = 'SELECT d.* FROM' . Db::prefix(DbTableName::BLOG_DATA_CATEGORY) . 'AS d' . $sSqlBlogId . 'ORDER BY d.name ASC LIMIT :offset, :limit';
-            $rStmt = Db::getInstance()->prepare($sSql);
+            $sSqlQuery = 'SELECT d.* FROM' . Db::prefix(DbTableName::BLOG_DATA_CATEGORY) . 'AS d' . $sSqlBlogId . 'ORDER BY d.name ASC LIMIT :offset, :limit';
+            $rStmt = Db::getInstance()->prepare($sSqlQuery);
 
             if ($iBlogId !== null) {
                 $rStmt->bindParam(':blogId', $iBlogId, \PDO::PARAM_INT);
