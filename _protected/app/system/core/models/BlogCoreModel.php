@@ -40,7 +40,9 @@ class BlogCoreModel extends Model
 
             $sOrderBy = SearchCoreModel::order($sOrder, SearchCoreModel::DESC);
 
-            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::BLOG) . $sOrderBy . 'LIMIT :offset, :limit');
+            $rStmt = Db::getInstance()->prepare(
+                'SELECT * FROM' . Db::prefix(DbTableName::BLOG) . $sOrderBy . 'LIMIT :offset, :limit'
+            );
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
             $rStmt->execute();
@@ -61,13 +63,15 @@ class BlogCoreModel extends Model
      */
     public function totalPosts($iDay = 0)
     {
-        $this->cache->start(self::CACHE_GROUP, 'totalPosts', static::CACHE_TIME);
+        $this->cache->start(self::CACHE_GROUP, 'totalPosts', static::CACHE_LIFETIME);
 
         if (!$iData = $this->cache->get()) {
             $iDay = (int)$iDay;
             $sSqlDay = ($iDay > 0) ? ' WHERE (createdDate + INTERVAL ' . $iDay . ' DAY) > NOW()' : '';
 
-            $rStmt = Db::getInstance()->prepare('SELECT COUNT(postId) AS totalPosts FROM' . Db::prefix(DbTableName::BLOG) . $sSqlDay);
+            $rStmt = Db::getInstance()->prepare(
+                'SELECT COUNT(postId) AS totalPosts FROM' . Db::prefix(DbTableName::BLOG) . $sSqlDay
+            );
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
