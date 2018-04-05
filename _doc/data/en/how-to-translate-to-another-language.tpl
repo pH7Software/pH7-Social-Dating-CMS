@@ -36,3 +36,8 @@
     </a>
     <figcaption>Change the Currency Sign on the Membership Page</figcaption>
 </figure>
+
+<p>
+    P.S. <strong>Terms</strong> and <strong>Privacy</strong> pages aren't translatable, because of their big size.<br />
+    However, you can change the text of those pages easily through the <em>Admin Panel -> File/Page -> Page Module</em>.
+</p>
