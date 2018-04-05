@@ -1,6 +1,6 @@
 <div class="center divShow">
 
-  <div class="faq"><a href="#divShow_1">{lang 'I can\'t login, or I forgot my username or password.'}</a></div>
+  <div class="faq"><a href="#divShow_1">{lang "I can't login, or I forgot my username or password."}</a></div>
 
   <div class="hidden" id="divShow_1">
     {lang}If you can\'t login, check to make sure that your "caps lock" key is off. Your username and password are CaSe SeNsItIvE. If you still cannot login, you can request to{/lang} <a href="{{ $design->url('lost-password','main','forgot','user') }}">{lang 'reset your password'}</a> {lang 'or'} <a href="{{ $design->url('contact','contact','index') }}">{lang 'contact us'}</a>.
