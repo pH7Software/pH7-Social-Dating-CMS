@@ -18,6 +18,8 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class Mail
 {
+    const HTML_CONTENT_TYPE = 'text/html';
+
     /**
      * Send an email with Swift library engine.
      *
@@ -45,7 +47,7 @@ class Mail
             ->setSubject(escape($sSubject, true))
             ->setFrom(array(escape($sFromMail, true) => escape($sFromName, true)))
             ->setTo(array(escape($sToMail, true) => escape($sToName, true)));
-        ($bHtmlFormat) ? $oMessage->addPart($sContents, 'text/html') : $oMessage->setBody($sContents);
+        ($bHtmlFormat) ? $oMessage->addPart($sContents, self::HTML_CONTENT_TYPE) : $oMessage->setBody($sContents);
 
         $iResult = $oMailer->send($oMessage);
 
