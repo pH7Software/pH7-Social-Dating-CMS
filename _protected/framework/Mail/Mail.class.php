@@ -58,7 +58,13 @@ class Mail
          * as on some hosts config, Swift Mail doesn't work.
          */
         if (!$iResult) {
-            $aData = ['from' => $sFromMail, 'to' => $sToMail, 'subject' => $sSubject, 'body' => $sContents];
+            $aData = [
+                'from' => $sFromMail,
+                'to' => $sToMail,
+                'subject' => $sSubject,
+                'body' => $sContents
+            ];
+
             $iResult = (int)$this->phpMail($aData);
         }
 
