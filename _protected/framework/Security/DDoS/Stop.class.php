@@ -18,7 +18,7 @@ use PH7\Framework\Cookie\Cookie;
 use PH7\Framework\Session\Session;
 
 /**
- * This class securing the server for DDoS attack only! (Not for the attacks DoS)
+ * This class securing the server against DDoS attack only! (not for DoS attacks)
  */
 final class Stop
 {
@@ -26,7 +26,7 @@ final class Stop
     const COOKIE_NAME = 'sss';
 
     /**
-     * @return bool Return "true" If we believe that this person takes too much request otherwise "false"
+     * @return bool Return TRUE if it believes that we get too many requests from that session, FALSE otherwise.
      */
     public function cookie()
     {
@@ -50,7 +50,7 @@ final class Stop
     }
 
     /**
-     * @return bool Return "true" If we believe that this person takes too much request otherwise "false"
+     * @return bool Return TRUE if it believes that we get too many requests from that session, FALSE otherwise.
      */
     public function session()
     {
