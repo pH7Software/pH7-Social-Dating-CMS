@@ -27,6 +27,9 @@ function run() {
             eval "$exec 's/\s+$/\n/'"
             eval "$exec 's/\t/    /g'"
 
+            # Update Composer itself to the latest version
+            php ./composer.phar self-update
+
             # Install dependencies for production only (without dev packages)
             php ./composer.phar install --no-dev
 
