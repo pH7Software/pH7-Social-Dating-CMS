@@ -146,6 +146,7 @@ class Analytics extends StoreStats
     private static $aRobots = [
         'googlebot' => 'Google',
         'msnbot' => 'Bing',
+        'bingbot' => 'Bing',
         'slurp' => 'Inktomi Slurp',
         'yahoo' => 'Yahoo',
         'askjeeves' => 'AskJeeves',
@@ -154,6 +155,8 @@ class Analytics extends StoreStats
         'facebookexternalhit' => 'Facebook',
         'ph7hizupcrawler' => 'pH7Zup Crawler',
         'infoseek' => 'InfoSeek Robot 1.0',
+        'duckduckbot' => 'DuckDuckGo',
+        'qwantify' => 'Qwant'
     ];
 
     /**
@@ -178,7 +181,8 @@ class Analytics extends StoreStats
         'yahoo',
         'lycos',
         'aol',
-        'dmoz',
+        'duckduck',
+        'qwant'
     ];
 
     /** @var null|string */
