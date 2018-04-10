@@ -145,8 +145,7 @@ class Analytics extends StoreStats
      */
     private static $aRobots = [
         'googlebot' => 'Google',
-        'msnbot' => 'Bing',
-        'bingbot' => 'Bing',
+        'bingbot|msnbot' => 'Bing',
         'slurp' => 'Inktomi Slurp',
         'yahoo' => 'Yahoo',
         'askjeeves' => 'AskJeeves',
