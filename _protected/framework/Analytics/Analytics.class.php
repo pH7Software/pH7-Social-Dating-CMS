@@ -99,7 +99,7 @@ class Analytics extends StoreStats
         'vodafone' => 'Vodafone',
         'docomo' => 'NTT DoCoMo',
         'o2' => 'O2',
-        'mobile' => 'Generic Mobile',
+        'mobile' => 'Generic Mobile'
     ];
 
     /**
@@ -135,7 +135,7 @@ class Analytics extends StoreStats
         'netfront' => 'Netfront Browser',
         'mobilexplorer' => 'Mobile Explorer',
         'icab' => 'iCab',
-        'ibrowse' => 'IBrowse',
+        'ibrowse' => 'IBrowse'
     ];
 
     /**
@@ -163,7 +163,7 @@ class Analytics extends StoreStats
      */
     private static $aIpRobots = [
         '74.125.130.105' => 'Google',
-        '131.253.13.32' => 'Bing',
+        '131.253.13.32' => 'Bing'
     ];
 
     /**
