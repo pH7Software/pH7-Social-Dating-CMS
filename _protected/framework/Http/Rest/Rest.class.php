@@ -23,7 +23,7 @@ class Rest extends Http
 {
     const CONTENT_TYPE = 'application/json';
 
-    /** @var integer */
+    /** @var int */
     private $iCode;
 
     /** @var string */
@@ -42,7 +42,7 @@ class Rest extends Http
 
     /**
      * @param string $sData The data from a request
-     * @param integer $iStatus Status Code. Default 200
+     * @param int $iStatus Status Code. Default 200
      *
      * @return void
      */
