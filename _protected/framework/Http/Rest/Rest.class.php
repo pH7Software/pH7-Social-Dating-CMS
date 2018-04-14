@@ -130,6 +130,6 @@ class Rest extends Http
         static::setHeadersByCode($this->iCode);
         static::setContentType(self::CONTENT_TYPE); //Output format
         echo $this->sData;
-        exit; // Stop the Script
+        exit;
     }
 }
