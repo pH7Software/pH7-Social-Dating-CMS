@@ -3,6 +3,7 @@
 <phpunit
     bootstrap="_tests/Unit/bootstrap.php"
     processIsolation="true"
+    verbose="true"
     colors="true">
     <testsuites>
         <testsuite name="pH7CMS Protected">
