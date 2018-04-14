@@ -64,7 +64,9 @@ namespace PH7\Framework\Translate {
                 return PH7_DEFAULT_LANG_CODE . '.js';
             }
 
-            throw new Exception('Language file \'' . $sPath . PH7_DEFAULT_LANG_CODE . '.js\' not found.');
+            throw new Exception(
+                sprintf('Language file: %s not found.', $sPath . PH7_DEFAULT_LANG_CODE . '.js')
+            );
         }
 
         /**
@@ -173,7 +175,13 @@ namespace PH7\Framework\Translate {
                 include PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . '/language.php';
                 date_default_timezone_set($this->oConfig->values['language.application']['timezone']);
             } else {
-                throw new Exception('Language file \'' . PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '\' and/or Language file \'' . PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . PH7_DS . 'language.php\' not found.');
+                throw new Exception(
+                    sprintf(
+                        'Config Language file "%s" and/or Language fil "%s" not found.',
+                        PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE,
+                        PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . PH7_DS . 'language.php'
+                    )
+                );
             }
 
             // Set the encoding for the specific language set.

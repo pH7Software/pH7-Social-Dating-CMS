@@ -110,7 +110,12 @@ class LoadTemplate
         } elseif ($this->oConfig->load(PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
             $this->sTplName = PH7_DEFAULT_THEME;
         } else {
-            throw new Exception('Template file not found! File: \'' . PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '\' doesn\'t exist.');
+            throw new Exception(
+                sprintf(
+                    "Template file not found! File: %s doesn't exist.",
+                    PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE
+                )
+            );
         }
 
         return $this;
@@ -132,7 +137,12 @@ class LoadTemplate
         } elseif ($this->oConfig->load($oRegistry->path_module_views . PH7_DEFAULT_TPL_MOD . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
             $this->sModTplName = PH7_DEFAULT_TPL_MOD;
         } else {
-            throw new Exception('Module template file not found! File: \'' . $oRegistry->path_module_views . PH7_DEFAULT_TPL_MOD . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '\' doesn\'t exist.');
+            throw new Exception(
+                sprintf(
+                    "Module template file not found! File: %s doesn't exist.",
+                    $oRegistry->path_module_views . PH7_DEFAULT_TPL_MOD . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE
+                )
+            );
         }
 
         unset($oRegistry);
@@ -154,7 +164,12 @@ class LoadTemplate
         } elseif ($this->oConfig->load(PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS . PH7_DEFAULT_THEME . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
             $this->sMailTplName = PH7_DEFAULT_THEME;
         } else {
-            throw new Exception('Mail template file not found! File: \'' . PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS . PH7_DEFAULT_THEME . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '\' doesn\'t exist.');
+            throw new Exception(
+                sprintf(
+                    "Mail template file not found! File: %s doesn't exist.",
+                    PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS . PH7_DEFAULT_THEME . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE
+                )
+            );
         }
 
         return $this;
