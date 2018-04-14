@@ -31,7 +31,7 @@ final class LoggerExcept extends Logger
     public function __construct()
     {
         try {
-            FrontController::getInstance()->_databaseInitialize();
+            FrontController::getInstance()->_initializeDatabase();
         } catch (ModelException $oE) {
             // If we are not in development mode, we display an error message to avoid showing information on the database.
             if (!Debug::is()) {

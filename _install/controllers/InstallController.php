@@ -541,7 +541,7 @@ class InstallController extends Controller
     private function updateSettings(array $aParams)
     {
         // Initialize the site's database to get "\PH7\Framework\Mvc\Model\Engine\Db" class working (as it uses that DB and not the installer one)
-        Framework\Mvc\Router\FrontController::getInstance()->_databaseInitialize();
+        Framework\Mvc\Router\FrontController::getInstance()->_initializeDatabase();
 
         foreach ($aParams as $sName => $sValue) {
             $sMethodName = ($sName === 'socialMediaWidgets' ? 'setSocialWidgets' : 'setSetting');

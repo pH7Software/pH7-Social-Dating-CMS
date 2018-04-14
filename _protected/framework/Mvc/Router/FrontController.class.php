@@ -94,14 +94,14 @@ final class FrontController
          * @internal We initialize the database after the compression of static files (self::gzipRouter() method),
          * so we can always display static files even if there are problems with the database.
          */
-        $this->_databaseInitialize();
+        $this->_initializeDatabase();
 
         /**
-         * @internal "_languageInitialize()" method must be declared before the rest of the code, because it initializes the main language constants for the rest of the code.
+         * @internal "_initializeLanguage()" method must be declared before the rest of the code, because it initializes the main language constants for the rest of the code.
          */
-        $this->_languageInitialize();
+        $this->_initializeLanguage();
 
-        $this->_assetsInitialize();
+        $this->initializeAssets();
 
         $this->launchRewritingRouter();
 
@@ -291,7 +291,7 @@ final class FrontController
     /**
      * @return void
      */
-    public function _databaseInitialize()
+    public function _initializeDatabase()
     {
         $aDriverOptions[PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES ' . $this->oConfig->values['database']['charset'];
 
@@ -324,7 +324,7 @@ final class FrontController
      *
      * @return void
      */
-    public function _languageInitialize()
+    public function _initializeLanguage()
     {
         if (!defined('PH7_PREF_LANG')) {
             define('PH7_PREF_LANG', DbConfig::getSetting('defaultLanguage'));
@@ -347,7 +347,7 @@ final class FrontController
     /**
      * @return void
      */
-    public function _templateInitialize()
+    private function initializeTemplate()
     {
         /***** Start Loading Views and Templates *****/
 
@@ -364,7 +364,7 @@ final class FrontController
     /**
      * @return void
      */
-    public function _pathInitialize()
+    private function initializePaths()
     {
         $this->oRegistry->action = strtolower($this->oRegistry->action);
 
@@ -383,7 +383,7 @@ final class FrontController
      *
      * @return void
      */
-    public function _assetsInitialize()
+    private function initializeAssets()
     {
         if ($this->oUri->fragment(0) === 'asset') {
             switch ($this->oUri->fragment(1)) {
@@ -449,7 +449,7 @@ final class FrontController
 
         // For module only!
         if (!empty($sMod)) {
-            $this->_pathInitialize();
+            $this->initializePaths();
 
             $sFolder = ($this->oUri->fragment(4) && preg_match(self::REGEX_FOLDER_FORMAT, $this->oUri->fragment(4))) ? PH7_DS . $this->oUri->fragment(4) : '';
             if (is_file($sMod . 'assets/ajax/' . $this->oUri->fragment(3) . $sFolder . 'Ajax.php')) {
@@ -532,15 +532,15 @@ final class FrontController
      */
     public function runRouter()
     {
-        $this->_pathInitialize();
+        $this->initializePaths();
 
         /***** FOR FILE CONFIG .INI OF MODULE *****/
         $this->oConfig->load($this->oRegistry->path_module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
 
-        // PH7_DEFAULT_TPL_MOD constant has to be defined before calling "_templateInitialize()"
+        // PH7_DEFAULT_TPL_MOD constant has to be defined before calling "initializeTemplate()"
         define('PH7_DEFAULT_TPL_MOD', $this->oConfig->values['module']['default_theme']);
 
-        $this->_templateInitialize();
+        $this->initializeTemplate();
 
         if (is_file($this->oRegistry->path_module_controllers . $this->oRegistry->controller . '.php')) {
             // For additional options modules
