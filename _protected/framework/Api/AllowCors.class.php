@@ -28,10 +28,10 @@ class AllowCors
     }
 
     /**
-     * Set data key to value
+     * Set data key to value.
      *
-     * @param string $sKey   The data key
-     * @param string  $sValue The data value
+     * @param string $sKey The data key.
+     * @param string $sValue The data value.
      */
     private function set($sKey, $sValue)
     {
