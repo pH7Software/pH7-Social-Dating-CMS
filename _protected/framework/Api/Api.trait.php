@@ -14,10 +14,6 @@ defined('PH7') or exit('Restricted access');
 
 trait Api
 {
-    public function __construct()
-    {
-    }
-
     /**
      * Encode the data to JSON
      *
