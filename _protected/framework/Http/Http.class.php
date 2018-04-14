@@ -87,7 +87,7 @@ class Http
     /**
      * @param int $iStatus The "code" for the HTTP status.
      *
-     * @return string|bool $iStatus Returns the "HTTP status code" if found otherwise returns "false"
+     * @return string|bool $iStatus Returns the "HTTP status code" if found, FALSE otherwise.
      */
     public static function getStatusCodes($iStatus)
     {

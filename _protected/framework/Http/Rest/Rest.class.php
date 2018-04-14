@@ -51,9 +51,9 @@ class Rest extends Http
         $this->sData = $sData;
 
         /**
-         * @internal Http::getStatusCodes() returns FLASE when it doesn't find a GTTP status code.
+         * @internal Http::getStatusCodes() returns FALSE when it doesn't find any valid HTTP codes.
          */
-        $this->iCode = (false !== static::getStatusCodes($iStatus)) ? $iStatus : 500; // If it finds nothing, then we put the 500 HTTP Status Code.
+        $this->iCode = false !== static::getStatusCodes($iStatus) ? $iStatus : 500; // If it finds nothing, give 500 HTTP code.
         $this->output();
     }
 
