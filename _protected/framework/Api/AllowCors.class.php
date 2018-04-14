@@ -13,8 +13,10 @@ class AllowCors
 {
     const ALLOW_CORS_ORIGIN_KEY = 'Access-Control-Allow-Origin';
     const ALLOW_CORS_METHOD_KEY = 'Access-Control-Allow-Methods';
+    const ALLOW_CORS_HEADER_KEY = 'Access-Control-Allow-Headers';
     const ALLOW_CORS_ORIGIN_VALUE = '*';
     const ALLOW_CORS_METHOD_VALUE = 'GET, POST, PUT, DELETE, PATCH, OPTIONS';
+    const ALLOW_CORS_HEADER_VALUE = '';
 
     /**
      * Initialize the Cross-Origin Resource Sharing (CORS) headers.
