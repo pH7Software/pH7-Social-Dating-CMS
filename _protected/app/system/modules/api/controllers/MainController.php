@@ -10,6 +10,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Api\AllowCors;
 use PH7\Framework\Api\Api;
 use PH7\Framework\Http\Rest\Rest;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
@@ -26,6 +27,7 @@ class MainController extends Controller
         parent::__construct();
 
         $this->oRest = new Rest;
+        $this->setCorsHeaders();
     }
 
     /**
@@ -40,5 +42,12 @@ class MainController extends Controller
         } else {
             $this->oRest->response($this->set(['return' => 'It Works!']));
         }
+    }
+
+    private function setCorsHeaders()
+    {
+        $oCors = new AllowCors();
+        $oCors->init();
+        unset($oCors);
     }
 }
