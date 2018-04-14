@@ -21,8 +21,7 @@ use PH7\Framework\Str\Str;
 
 class Rest extends Http
 {
-    /** @var string */
-    private $sContentType;
+    const CONTENT_TYPE = 'application/json';
 
     /** @var integer */
     private $iCode;
@@ -38,7 +37,6 @@ class Rest extends Http
      */
     public function __construct()
     {
-        $this->sContentType = 'application/json'; // Output format
         $this->inputs();
     }
 
@@ -130,7 +128,7 @@ class Rest extends Http
     private function output()
     {
         static::setHeadersByCode($this->iCode);
-        static::setContentType($this->sContentType);
+        static::setContentType(self::CONTENT_TYPE); //Output format
         echo $this->sData;
         exit; // Stop the Script
     }
