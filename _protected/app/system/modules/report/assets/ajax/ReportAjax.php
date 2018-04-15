@@ -45,7 +45,7 @@ class ReportAjax
         }
     }
 
-    protected function delete()
+    private function delete()
     {
         $this->bStatus = $this->oReportModel->delete($this->oHttpRequest->post('reportId'));
 
