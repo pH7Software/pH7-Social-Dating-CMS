@@ -138,7 +138,12 @@ class SettingController extends Controller
             Header::redirect(Uri::get('user', 'setting', 'yesdelete'));
         } elseif ($this->httpRequest->get('delete_status') === 'nodelete') {
             $this->view->delete_status = false;
-            $this->design->setRedirect(Uri::get('user', 'main', 'index'), null, null, 4);
+            $this->design->setRedirect(
+                Uri::get('user', 'main', 'index'),
+                null,
+                null,
+                4
+            );
         } else {
             $this->view->delete_status = true;
         }

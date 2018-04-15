@@ -334,7 +334,10 @@ class MainController extends Controller
         $this->view->browser_info = t('User Web browser info: %0%', $this->browser->getUserAgent());
         $this->view->ip = t('Buyer IP address: %0%', $this->design->ip(null, false));
 
-        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/payment/ipn.tpl', $sTo);
+        $sMessageHtml = $this->view->parseMail(
+            PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/payment/ipn.tpl',
+            $sTo
+        );
 
         $aInfo = [
             'to' => $sTo,
@@ -397,7 +400,12 @@ class MainController extends Controller
      */
     private function setAutomaticRedirectionToHomepage()
     {
-        $this->design->setRedirect($this->registry->site_url, null, null, self::REDIRECTION_DELAY);
+        $this->design->setRedirect(
+            $this->registry->site_url,
+            null,
+            null,
+            self::REDIRECTION_DELAY
+        );
     }
 
     /**
