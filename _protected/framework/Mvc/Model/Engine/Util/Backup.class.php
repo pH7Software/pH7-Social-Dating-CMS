@@ -29,17 +29,17 @@ class Backup
     const GZIP_COMPRESS_LEVEL = 9;
 
     /** @var string */
-    private $_sPathName;
+    private $sPathName;
 
     /** @var string */
-    private $_sSql;
+    private $sSql;
 
     /**
      * @param string $sPathName Can be null for showing the data only ( by using Backup->back()->show() ). Default NULL
      */
     public function __construct($sPathName = null)
     {
-        $this->_sPathName = $sPathName;
+        $this->sPathName = $sPathName;
     }
 
     /**
@@ -49,7 +49,7 @@ class Backup
      */
     public function back()
     {
-        $this->_sSql =
+        $this->sSql =
             "#################### Database Backup ####################\n" .
             '# ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_VERSION . ', Build ' . Kernel::SOFTWARE_BUILD . "\r\n" .
             '# Database name: ' . Config::getInstance()->values['database']['name'] . "\r\n" .
@@ -72,8 +72,8 @@ class Backup
             if ($iNum > 0) {
                 $aRow = $oResult->fetch();
 
-                $this->_sSql .= "#\n# Table: $sTable\r\n#\r\n\r\n";
-                $this->_sSql .= "DROP TABLE IF EXISTS $sTable;\r\n\r\n";
+                $this->sSql .= "#\n# Table: $sTable\r\n#\r\n\r\n";
+                $this->sSql .= "DROP TABLE IF EXISTS $sTable;\r\n\r\n";
 
                 $sValue = $aRow[1];
 
@@ -81,7 +81,7 @@ class Backup
                 $sValue = str_replace('`', '', $sValue);
 
                 /*** Table structure ***/
-                $this->_sSql .= $sValue . ";\r\n\r\n";
+                $this->sSql .= $sValue . ";\r\n\r\n";
 
                 unset($aRow);
             }
@@ -106,11 +106,11 @@ class Backup
                         }
                     }
 
-                    $this->_sSql .= 'INSERT INTO ' . $sTable . ' (' . implode(', ', $aColumns) . ') VALUES(\'' . implode('\', \'', $aValues) . "');\n";
+                    $this->sSql .= 'INSERT INTO ' . $sTable . ' (' . implode(', ', $aColumns) . ') VALUES(\'' . implode('\', \'', $aValues) . "');\n";
 
                     unset($aColumns, $aValues);
                 }
-                $this->_sSql .= "\r\n\r\n";
+                $this->sSql .= "\r\n\r\n";
 
                 unset($aRow);
             }
@@ -128,7 +128,7 @@ class Backup
      */
     public function show()
     {
-        return $this->_sSql;
+        return $this->sSql;
     }
 
     /**
@@ -138,8 +138,8 @@ class Backup
      */
     public function save()
     {
-        $rHandle = fopen($this->_sPathName, 'wb');
-        fwrite($rHandle, $this->_sSql);
+        $rHandle = fopen($this->sPathName, 'wb');
+        fwrite($rHandle, $this->sSql);
         fclose($rHandle);
     }
 
@@ -150,8 +150,8 @@ class Backup
      */
     public function saveArchive()
     {
-        $rArchive = gzopen($this->_sPathName, 'w');
-        gzwrite($rArchive, $this->_sSql);
+        $rArchive = gzopen($this->sPathName, 'w');
+        gzwrite($rArchive, $this->sSql);
         gzclose($rArchive);
     }
 
@@ -162,7 +162,7 @@ class Backup
      */
     public function restore()
     {
-        $mRet = Various::execQueryFile($this->_sPathName);
+        $mRet = Various::execQueryFile($this->sPathName);
         return $mRet !== true ? print_r($mRet, true) : true;
     }
 
@@ -173,11 +173,11 @@ class Backup
      */
     public function restoreArchive()
     {
-        $rArchive = gzopen($this->_sPathName, 'r');
+        $rArchive = gzopen($this->sPathName, 'r');
 
         $sSqlContent = '';
         while (!feof($rArchive)) {
-            $sSqlContent .= gzread($rArchive, filesize($this->_sPathName));
+            $sSqlContent .= gzread($rArchive, filesize($this->sPathName));
         }
 
         gzclose($rArchive);

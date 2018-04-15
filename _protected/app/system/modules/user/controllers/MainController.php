@@ -19,10 +19,10 @@ class MainController extends Controller
     const GUEST_FILE = 'index.guest';
 
     /** @var string */
-    private $_sTitle;
+    private $sTitle;
 
     /** @var bool */
-    private $_bIsMobile;
+    private $bIsMobile;
 
     /**
      * Displaying the main homepage of the website.
@@ -40,12 +40,12 @@ class MainController extends Controller
         // Only visitors
         if (!UserCore::auth()) {
             // To check if the site is called by a Mobile or Mobile Native App
-            $this->_bIsMobile = $this->view->is_mobile = (MobApp::is($this->httpRequest, $this->session) || $this->browser->isMobile());
+            $this->bIsMobile = $this->view->is_mobile = (MobApp::is($this->httpRequest, $this->session) || $this->browser->isMobile());
 
             $this->view->is_users_block = (bool)DbConfig::getSetting('usersBlock');
 
             // Background video is used only for the Splash page
-            if ($this->_getGuestTplPage() === static::GUEST_SPLASH_FILE) {
+            if ($this->getGuestTplPage() === static::GUEST_SPLASH_FILE) {
                 // Enable the Splash Video Background if enabled
                 $bIsBgVideo = (bool)DbConfig::getSetting('bgSplashVideo');
 
@@ -65,7 +65,7 @@ class MainController extends Controller
             // Assigns the promo text to the view
             $this->view->promo_text = DbConfig::getMetaMain(PH7_LANG_NAME)->promoText;
 
-            $this->manualTplInclude($this->_getGuestTplPage() . '.inc.tpl');
+            $this->manualTplInclude($this->getGuestTplPage() . '.inc.tpl');
         } elseif (UserCore::auth()) {
             // Set CSS and JS files
             $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'zoomer.css');
@@ -83,18 +83,18 @@ class MainController extends Controller
     public function login()
     {
         // Display Sign In page
-        $this->_sTitle = t('Sign In to %site_name%');
-        $this->view->page_title = $this->_sTitle;
-        $this->view->h1_title = $this->_sTitle;
+        $this->sTitle = t('Sign In to %site_name%');
+        $this->view->page_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
         $this->output();
     }
 
     public function resendActivation()
     {
         // Display Resend Activation page
-        $this->_sTitle = t('Resend activation email');
-        $this->view->page_title = $this->_sTitle;
-        $this->view->h2_title = $this->_sTitle;
+        $this->sTitle = t('Resend activation email');
+        $this->view->page_title = $this->sTitle;
+        $this->view->h2_title = $this->sTitle;
         $this->output();
     }
 
@@ -103,9 +103,9 @@ class MainController extends Controller
         // If the "member_remember" and "member_id" cookies do not exist, nothing happens.
         (new Cookie)->remove(['member_remember', 'member_id']);
 
-        $this->_sTitle = t('See you soon!');
-        $this->view->page_title = $this->_sTitle;
-        $this->view->h2_title = $this->_sTitle;
+        $this->sTitle = t('See you soon!');
+        $this->view->page_title = $this->sTitle;
+        $this->view->h2_title = $this->sTitle;
         $this->design->setRedirect($this->registry->site_url, null, null, 3);
         $this->output();
     }
@@ -122,11 +122,11 @@ class MainController extends Controller
      *
      * @throws PH7InvalidArgumentException
      */
-    private function _getGuestTplPage()
+    private function getGuestTplPage()
     {
         if (isDebug() && $this->httpRequest->getExists('force')) {
             $sPage = $this->getPageForced();
-        } elseif ($this->_bIsMobile || $this->browser->isMobile()) {
+        } elseif ($this->bIsMobile || $this->browser->isMobile()) {
             /* 'index.guest.inc.tpl' is not responsive enough for very small screen resolutions, so set to 'index.guest_splash.inc.tpl' by default */
             $sPage = static::GUEST_SPLASH_FILE;
         } else {

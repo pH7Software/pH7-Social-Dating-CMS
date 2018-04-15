@@ -35,7 +35,8 @@ final class Security
     const PREFIX_SALT = 'c好，你今Здраврыве ты ў паітаньне е54йте天rt&eh好嗎_dمرحبا أنت بخير ال好嗎attú^u5atá inniu4a,?478привіなたは大丈夫今日はтивпряьоהעלאai54ng_scси днесpt';
     const SUFFIX_SALT = '*éà12_you_è§§=≃ù%µµ££$);&,?µp{èàùf*sxdslut_waruआप नमस्क你好，你今ार ठΓει好嗎α σαςb안녕하세oi요 괜찮은 o नमस्कार ठीnjre;,?*-<καλά σήμεραीक आजсегодняm_54tjהעלאdgezsядкمرحبا';
 
-    private static $_aPwdOptions = ['cost' => self::PWD_WORK_FACTOR];
+    /** @var array */
+    private static $aPwdOptions = ['cost' => self::PWD_WORK_FACTOR];
 
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
@@ -51,7 +52,7 @@ final class Security
      */
     public static function hashPwd($sPassword)
     {
-        return password_hash($sPassword, self::PWD_ALGORITHM, self::$_aPwdOptions);
+        return password_hash($sPassword, self::PWD_ALGORITHM, self::$aPwdOptions);
     }
 
     /**
@@ -77,7 +78,7 @@ final class Security
      */
     public static function pwdNeedsRehash($sPassword, $sHash)
     {
-        if (password_needs_rehash($sHash, self::PWD_ALGORITHM, self::$_aPwdOptions)) {
+        if (password_needs_rehash($sHash, self::PWD_ALGORITHM, self::$aPwdOptions)) {
             return self::hashPwd($sPassword);
         }
 
