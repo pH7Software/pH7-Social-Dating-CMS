@@ -10,43 +10,54 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Security\CSRF\Token;
 
 class ReportAjax
 {
-    private $_oHttpRequest, $_oReportModel, $_bStatus;
+    /** @var HttpRequest */
+    private $oHttpRequest;
+
+    /** @var ReportModel */
+    private $oReportModel;
+
+    /** @var bool */
+    private $bStatus;
 
     public function __construct()
     {
-        if (!(new Framework\Security\CSRF\Token)->check('report'))
+        if (!(new Token)->check('report')) {
             exit(jsonMsg(0, Form::errorTokenMsg()));
+        }
 
-        $this->_oHttpRequest = new Http;
-        $this->_oReportModel = new ReportModel;
+        $this->oHttpRequest = new HttpRequest;
+        $this->oReportModel = new ReportModel;
 
-        switch ($this->_oHttpRequest->post('type')) {
+        switch ($this->oHttpRequest->post('type')) {
             case 'delete':
                 $this->delete();
                 break;
 
             default:
-                Framework\Http\Http::setHeadersByCode(400);
+                Http::setHeadersByCode(400);
                 exit('Bad Request Error');
         }
     }
 
     protected function delete()
     {
-        $this->_bStatus = $this->_oReportModel->delete($this->_oHttpRequest->post('reportId'));
-        echo ($this->_bStatus) ? jsonMsg(1, t('The report has been deleted.')) : jsonMsg(0, t('Cannot remove the report. Please try later.'));
-    }
+        $this->bStatus = $this->oReportModel->delete($this->oHttpRequest->post('reportId'));
 
-    public function __destruct()
-    {
-        unset($this->_oHttpRequest, $this->_oReportModel, $this->_bStatus);
+        if ($this->bStatus) {
+            jsonMsg(1, t('The report has been deleted.'));
+        } else {
+            jsonMsg(0, t('Cannot remove the report. Please try later.'));
+        }
     }
 }
 
 // Only for Admins
-if (AdminCore::auth())
+if (AdminCore::auth()) {
     new ReportAjax;
+}
