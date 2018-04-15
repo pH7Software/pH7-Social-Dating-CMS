@@ -65,7 +65,7 @@ class Design
     const FLASH_MSG = 'flash_msg';
     const FLASH_TYPE = 'flash_type';
 
-    const DEFAULT_REDIRECTION_DELAY = 3;
+    const DEFAULT_REDIRECTION_DELAY = 3; // In secs
     const MAX_MESSAGE_LENGTH_SHOWN = 300;
 
     /** @var bool */
