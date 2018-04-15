@@ -45,6 +45,11 @@ class ReportAjax
         }
     }
 
+    /**
+     * @return string
+     *
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
+     */
     private function delete()
     {
         $this->bStatus = $this->oReportModel->delete($this->oHttpRequest->post('reportId'));
@@ -56,6 +61,11 @@ class ReportAjax
         return jsonMsg(0, t('Cannot remove the report. Please try later.'));
     }
 
+    /**
+     * @return string
+     *
+     * @throws Framework\Http\Exception
+     */
     private function badRequest()
     {
         Http::setHeadersByCode(400);
