@@ -50,10 +50,12 @@ class ReportAjax
         $this->bStatus = $this->oReportModel->delete($this->oHttpRequest->post('reportId'));
 
         if ($this->bStatus) {
-            jsonMsg(1, t('The report has been deleted.'));
+            $sMsg = jsonMsg(1, t('The report has been deleted.'));
         } else {
-            jsonMsg(0, t('Cannot remove the report. Please try later.'));
+            $sMsg = jsonMsg(0, t('Cannot remove the report. Please try later.'));
         }
+
+        echo $sMsg;
     }
 }
 
