@@ -40,8 +40,8 @@ class ReportAjax
                 break;
 
             default:
-                Http::setHeadersByCode(400);
-                exit('Bad Request Error');
+                echo $this->badRequest();
+                exit;
         }
     }
 
@@ -54,6 +54,13 @@ class ReportAjax
         }
 
         return jsonMsg(0, t('Cannot remove the report. Please try later.'));
+    }
+
+    private function badRequest()
+    {
+        Http::setHeadersByCode(400);
+
+        return 'Bad Request Error';
     }
 }
 
