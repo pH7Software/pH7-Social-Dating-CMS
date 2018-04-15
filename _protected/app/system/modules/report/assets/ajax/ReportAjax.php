@@ -36,7 +36,7 @@ class ReportAjax
 
         switch ($this->oHttpRequest->post('type')) {
             case 'delete':
-                $this->delete();
+                echo $this->delete();
                 break;
 
             default:
@@ -50,12 +50,10 @@ class ReportAjax
         $this->bStatus = $this->oReportModel->delete($this->oHttpRequest->post('reportId'));
 
         if ($this->bStatus) {
-            $sMsg = jsonMsg(1, t('The report has been deleted.'));
-        } else {
-            $sMsg = jsonMsg(0, t('Cannot remove the report. Please try later.'));
+            return jsonMsg(1, t('The report has been deleted.'));
         }
 
-        echo $sMsg;
+        return jsonMsg(0, t('Cannot remove the report. Please try later.'));
     }
 }
 
