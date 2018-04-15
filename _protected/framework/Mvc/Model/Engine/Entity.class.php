@@ -16,32 +16,32 @@ defined('PH7') or exit('Restricted access');
 abstract class Entity
 {
     /**
-     * @var integer
+     * @var int
      */
-    private $_iId;
+    private $iId;
 
     /**
      * Get the primary key.
      *
-     * @return integer
+     * @return int
      */
     public function getKeyId()
     {
         $this->checkKeyId();
 
-        return $this->_iId;
+        return $this->iId;
     }
 
     /**
      * Set the primary key.
      *
-     * @param integer $iId
+     * @param int $iId
      *
      * @return void
      */
     public function setKeyId($iId)
     {
-        $this->_iId = (int)$iId;
+        $this->iId = (int)$iId;
     }
 
     /**
@@ -53,7 +53,7 @@ abstract class Entity
      */
     protected function checkKeyId()
     {
-        if (empty($this->_iId)) {
+        if (empty($this->iId)) {
             $this->setKeyId(Db::getInstance()->lastInsertId());
         }
     }
