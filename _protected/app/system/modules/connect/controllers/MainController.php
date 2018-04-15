@@ -17,6 +17,8 @@ class MainController extends Controller
     const TWITTER_PROVIDER = 'twitter';
     const MICROSOFT_PROVIDER = 'microsoft';
 
+    const REDIRECTION_DELAY = 5; // In secs
+
     /**
      * @internal Protected access for the AdminController class derived from this class.
      *
@@ -46,7 +48,7 @@ class MainController extends Controller
         $this->view->page_title = t('You are successfully registered!');
         $this->view->h4_title = t('Loading...');
 
-        $this->design->setRedirect($this->sUrl, null, null, 5);
+        $this->design->setRedirect($this->sUrl, null, null, self::REDIRECTION_DELAY);
 
         $this->manualTplInclude('waiting.inc.tpl');
         $this->output();
