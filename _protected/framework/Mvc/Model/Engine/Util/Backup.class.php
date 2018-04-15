@@ -222,10 +222,10 @@ class Backup
         /***** Set Headers *****/
         (new Browser)->noCache(); // No cache
         header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename=' . $this->_sPathName);
+        header('Content-Disposition: attachment; filename=' . $this->sPathName);
 
         /***** Show the SQL contents *****/
-        echo($bArchive ? gzencode($this->_sSql, self::GZIP_COMPRESS_LEVEL, FORCE_GZIP) : $this->_sSql);
+        echo $bArchive ? gzencode($this->sSql, self::GZIP_COMPRESS_LEVEL, FORCE_GZIP) : $this->sSql;
 
         /***** Catch output *****/
         $sBuffer = ob_get_contents();
