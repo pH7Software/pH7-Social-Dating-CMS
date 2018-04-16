@@ -45,6 +45,9 @@ final class Server
     const HTTP_REFERER = 'HTTP_REFERER';
     const HTTP_X_REQUESTED_WITH = 'HTTP_X_REQUESTED_WITH';
 
+    const LOCAL_IP = '127.0.0.1';
+    const LOCAL_HOSTNAME = 'localhost';
+
     public function __construct()
     {
         /*** Copyright ***/
@@ -134,7 +137,7 @@ final class Server
         $sServerName = self::getName();
         $sHttpHost = self::getVar(self::HTTP_HOST);
 
-        return ($sServerName === 'localhost' || $sServerName === '127.0.0.1' || $sHttpHost === 'localhost' || $sHttpHost === '127.0.0.1');
+        return ($sServerName === self::LOCAL_HOSTNAME || $sServerName === self::LOCAL_IP || $sHttpHost === self::LOCAL_HOSTNAME || $sHttpHost === self::LOCAL_IP);
     }
 
     /**
