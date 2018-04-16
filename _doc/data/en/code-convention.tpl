@@ -118,7 +118,7 @@ $aValues = array(
 </code>
 </pre>
 
-or with PHP 5.4 or higher:
+or with PHP 5.4+:
 
 <pre>
 <code class="php">
