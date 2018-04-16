@@ -118,7 +118,7 @@ $aValues = array(
 </code>
 </pre>
 
-or with PHP 5.4+:
+<p class="italic underline">or with PHP 5.4+:</p>
 
 <pre>
 <code class="php">
