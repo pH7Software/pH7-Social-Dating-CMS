@@ -246,7 +246,7 @@ Just clone the repository, make your changes and then make a push ;-)
 
 ## Contact
 
-You can send me an email for any suggestions or feedback at: *hi {AT} ph7 {D0T} me* OR *hello {AT} ph7cms {D0T} com*
+You can send me an email for any suggestions or feedback at: *hello {AT} ph7cms {D0T} com* OR *hi {AT} ph7 {D0T} me*
 
 
 ## License
