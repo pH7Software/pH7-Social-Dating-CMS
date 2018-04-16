@@ -32,8 +32,14 @@ class MyClass
 </code>
 </pre>
 
-<h4>In the pH7 Framework</h4>
-<p>The classes should end with the extension ".class.php" and interfaces must end with ".interface.php".</p>
+<h4>In pH7Framework</h4>
+<p>The classes should end with ".class.php" extension, traits should end with ".trait.php" extension and interfaces must end with ".interface.php"</p>
+
+<h2>Interface Naming</h2>
+<p>
+    When you are naming your interface, you should use "-ble" suffix as much as possible (in short, use an adjective for naming it).<br />
+    Examples: <cite>Controllable</cite>, <cite>Hashable</cite>, <cite>Configurable</cite>, <cite>Serializable</cite>, <cite>Readable</cite>.
+</p>
 
 <h2>Variable Declarations: Names</h2>
 <p>The variables must be in camelCasee and alphanumeric only.</p>
