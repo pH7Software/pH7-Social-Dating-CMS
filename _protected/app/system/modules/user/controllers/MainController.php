@@ -126,7 +126,7 @@ class MainController extends Controller
     {
         if (isDebug() && $this->httpRequest->getExists('force')) {
             $sPage = $this->getPageForced();
-        } elseif ($this->bIsMobile || $this->browser->isMobile()) {
+        } elseif ($this->bIsMobile) {
             /* 'index.guest.inc.tpl' is not responsive enough for very small screen resolutions, so set to 'index.guest_splash.inc.tpl' by default */
             $sPage = static::GUEST_SPLASH_FILE;
         } else {
