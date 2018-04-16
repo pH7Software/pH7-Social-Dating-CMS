@@ -203,7 +203,7 @@ namespace PH7\Framework\Str {
         }
 
         /**
-         * Cut a piece of string to make an extract.
+         * Cut a piece of string to make an extract (an ellipsis).
          *
          * @param string $sText
          * @param integer $iStart Default: 0
@@ -212,7 +212,7 @@ namespace PH7\Framework\Str {
          *
          * @return string
          */
-        public function extract($sText, $iStart = 0, $iLength = self::DEF_MAX_TEXT_EXTRACT_LENGTH, $sTrimMarker = '...')
+        public function extract($sText, $iStart = 0, $iLength = self::DEF_MAX_TEXT_EXTRACT_LENGTH, $sTrimMarker = PH7_ELLIPSIS)
         {
             if (function_exists('mb_strimwidth')) {
                 $sText = mb_strimwidth($sText, $iStart, $iLength, $sTrimMarker, PH7_ENCODING);

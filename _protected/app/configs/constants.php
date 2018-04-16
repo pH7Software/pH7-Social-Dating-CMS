@@ -21,6 +21,8 @@ defined('PH7') or exit('Restricted access');
 
 define('PH7_DOT', '.');
 
+define('PH7_ELLIPSIS', '...');
+
 /***** TIME ZONE ****/
 
 define('PH7_DEFAULT_TIMEZONE', 'America/Chicago');
