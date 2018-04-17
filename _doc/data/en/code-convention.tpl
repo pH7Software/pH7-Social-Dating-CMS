@@ -129,5 +129,7 @@ $aValues = [
 </code>
 </pre>
 
-<p>PS: We also respect the PSR-0 and PSR-1 coding standards and we try to respect the PSR-2 coding standards but we do not always do that because some things in this new standards<br />
-are not easily followed and we do not find this especially well, but you should still try to respect this standard and the PEAR standard for your modules and pieces of code.</p>
+<p>
+    PS: We also respect the PSR-0 and PSR-1 coding standards and we try to respect the PSR-2 coding standards but we do not always do that because some things in this new standards<br />
+    are not easily followed and we do not find this especially well, but you should still try to respect this standard and the PEAR standard for your modules and pieces of code.
+</p>
