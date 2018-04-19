@@ -611,7 +611,7 @@ class Api
 
         if ($this->includeJs === true) {
             // Google map JS
-            $this->content .= '<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;key=' .
+            $this->content .= '<script src="https://maps.googleapis.com/maps/api/js?key=' .
                 $this->key . '&amp;language=' . $this->lang . '">';
             $this->content .= '</script>' . "\n";
 
