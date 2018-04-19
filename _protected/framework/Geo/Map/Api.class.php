@@ -617,7 +617,7 @@ class Api
 
             // Clusterer JS
             if ($this->useClusterer) {
-                $this->content .= '<script src="' . $this->clustererLibraryPath . '" type="text/javascript"></script>' . "\n";
+                $this->content .= '<script src="' . $this->clustererLibraryPath . '"></script>' . "\n";
             }
         }
 
