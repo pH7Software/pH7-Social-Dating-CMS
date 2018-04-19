@@ -404,7 +404,7 @@ class Api
      *
      * @return void
      */
-    public function setincludeJs($includeJs)
+    public function setIncludeJs($includeJs)
     {
         $this->includeJs = $includeJs;
     }
