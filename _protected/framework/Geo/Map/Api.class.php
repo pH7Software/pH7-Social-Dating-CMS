@@ -511,7 +511,7 @@ class Api
     /**
      * Add marker by his address
      *
-     * @param string $address  an ddress
+     * @param string $address  an address
      * @param string $title    title
      * @param string $content  html code display in the info window
      * @param string $category marker category
@@ -821,7 +821,7 @@ class Api
         $this->content .= "\t\t" . 'mapTypeId: google.maps.MapTypeId.' . $this->mapType . "\n";
         $this->content .= "\t" . '}' . "\n";
 
-        //Goole map Div Id
+        // Google map Div ID
         $this->content .= "\t" . 'map' . $this->googleMapId . ' = new google.maps.Map(document.getElementById("' . $this->googleMapId . '"), myOptions);' . "\n";
 
         // Center
