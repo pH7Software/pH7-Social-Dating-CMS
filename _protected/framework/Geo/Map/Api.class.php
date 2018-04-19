@@ -532,7 +532,7 @@ class Api
     /**
      * Add marker by an array of coord
      *
-     * @param string $coordtab an array of lat,lng,content
+     * @param array $coordtab an array of lat,lng,content
      * @param string $category marker category
      * @param string $icon     an icon url
      *
@@ -548,7 +548,7 @@ class Api
     /**
      * Add marker by an array of address
      *
-     * @param string $coordtab an array of address
+     * @param array $coordtab an array of address
      * @param string $category marker category
      * @param string $icon     an icon url
      *
