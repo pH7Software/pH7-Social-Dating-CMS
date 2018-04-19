@@ -812,7 +812,7 @@ class Api
     {
         $this->init();
 
-        //Fonction init()
+        // init() function
         $this->content .= "\t" . 'function initialize' . $this->googleMapId . '() {' . "\n";
         $this->content .= "\t" . 'var myLatlng = new google.maps.LatLng(48.8792,2.34778);' . "\n";
         $this->content .= "\t" . 'var myOptions = {' . "\n";
@@ -860,21 +860,19 @@ class Api
         $this->content .= "\t" . 'directions.setMap(map' . $this->googleMapId . ');' . "\n";
         $this->content .= "\t" . 'directions.setPanel(document.getElementById("' . $this->googleMapDirectionId . '"))' . "\n";
 
-        // add all the markers
+        // Add all the markers
         $this->content .= $this->contentMarker;
 
-        // Clusterer JS
+        // JS Clusterer
         if ($this->useClusterer) {
             $this->content .= "\t" . 'var markerCluster = new MarkerClusterer(map' . $this->googleMapId . ', gmarkers,{gridSize: ' . $this->gridSize . ', maxZoom: ' . $this->maxZoom . '});' . "\n";
         }
 
         $this->content .= '}' . "\n";
 
-        // Chargement de la map a la fin du HTML
-        //$this->content.= "\t".'window.onload=initialize;'."\n";
+        // Loading the map at the end of the HTML
         $this->content .= "\t" . 'addLoadEvent(initialize' . $this->googleMapId . ');' . "\n";
 
-        //Fermeture du javascript
         $this->content .= '</script>' . "\n";
     }
 
