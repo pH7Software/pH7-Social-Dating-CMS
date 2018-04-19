@@ -160,9 +160,7 @@ class Api
         $this->useClusterer = $useClusterer;
         $this->gridSize = $gridSize;
         $this->maxZoom = $maxZoom;
-        ($clustererLibraryPath == '')
-            ? $this->clustererLibraryPath = 'https://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/1.0/src/markerclusterer_packed.js'
-            : $this->clustererLibraryPath = $clustererLibraryPath;
+        $this->clustererLibraryPath = $clustererLibraryPath == '' ? 'https://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/1.0/src/markerclusterer_packed.js' : $clustererLibraryPath;
     }
 
     /**
