@@ -20,7 +20,11 @@ class Map extends Api
     {
         parent::__construct();
 
-        /***** Initialization of Google Map *****/
+        $this->initializeGoogleMaps();
+    }
+
+    private function initializeGoogleMaps()
+    {
         $this->setEnableWindowZoom(true);
         $this->setMapType(DbConfig::getSetting('mapType'));
         $this->setLang(PH7_LANG_CODE);
