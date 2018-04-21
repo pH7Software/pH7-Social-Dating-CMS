@@ -794,7 +794,7 @@ CREATE TABLE IF NOT EXISTS ph7_languages_info (
 ) ;
 
 INSERT INTO ph7_languages_info (langId, name, charset, active, direction, author, website, email) VALUES
-('en_US', 'English', 'UTF-8', '1', 'ltr', 'Pierre-Henry Soria', 'http://ph7.me', 'me@ph7.me');
+('en_US', 'English', 'UTF-8', '1', 'ltr', 'Pierre-Henry Soria', 'http://ph7.me', 'hi@ph7.me');
 
 
 CREATE TABLE IF NOT EXISTS ph7_likes (
