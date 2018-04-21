@@ -7,5 +7,7 @@
 
 <div class="right col-md-4">
     {{ $design->littleLikeApi() }}
-    <div class="ad_336_280">{{ $designModel->ad(336,280) }}</div>
+    <div role="banner" class="ad_336_280">
+        {{ $designModel->ad(336,280) }}
+    </div>
 </div>
