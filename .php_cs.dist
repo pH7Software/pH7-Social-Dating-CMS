@@ -14,6 +14,7 @@ $aRules = [
     'no_useless_else' => true,
     'no_useless_return' => true,
     'ordered_class_elements' => true,
+    'ordered_imports' => true,
     'phpdoc_add_missing_param_annotation' => true,
     'phpdoc_order' => true,
     'semicolon_after_instruction' => true,
