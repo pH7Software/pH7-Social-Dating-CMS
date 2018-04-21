@@ -87,7 +87,7 @@ class MainController extends Controller
             $this->view->h1_title = t('A <span class="pH1">%0%</span> of <span class="pH3">%1% years</span>, from <span class="pH2">%2%, %3% %4%</span>',
                 t($oUser->sex), $aData['age'], t($aData['country']), $aData['city'], $aData['state']);
 
-            $this->setMenubar($aData['first_name'], $oUser);
+            $this->setMenuBar($aData['first_name'], $oUser);
 
             $this->setMap($aData['city'], $aData['country'], $oUser);
 
