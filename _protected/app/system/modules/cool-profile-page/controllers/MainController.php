@@ -216,6 +216,19 @@ class MainController extends Controller
     }
 
     /**
+     * @param string $sFirstName
+     * @param stdClass $oUser
+     *
+     * @return void
+     */
+    private function setMenuBar($sFirstName, stdClass $oUser)
+    {
+        $this->view->mail_link = $this->getMailLink($sFirstName, $oUser);
+        $this->view->messenger_link = $this->getMessengerLink($sFirstName, $oUser);
+        $this->view->befriend_link = $this->getBeFriendLink($sFirstName, $oUser);
+    }
+
+    /**
      * @param string $sFirstName User's first name.
      * @param stdClass $oUser User data from the DB.
      *
@@ -339,19 +352,6 @@ class MainController extends Controller
             'description' => $sDescription,
             'age' => $iAge
         ];
-    }
-
-    /**
-     * @param string $sFirstName
-     * @param stdClass $oUser
-     *
-     * @return void
-     */
-    private function setMenubar($sFirstName, stdClass $oUser)
-    {
-        $this->view->mail_link = $this->getMailLink($sFirstName, $oUser);
-        $this->view->messenger_link = $this->getMessengerLink($sFirstName, $oUser);
-        $this->view->befriend_link = $this->getBeFriendLink($sFirstName, $oUser);
     }
 
     /**
