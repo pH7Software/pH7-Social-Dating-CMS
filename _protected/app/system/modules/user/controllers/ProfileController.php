@@ -113,19 +113,7 @@ class ProfileController extends Controller
             $this->view->h2_title = t('A <span class="pH1">%0%</span> of <span class="pH3">%1% years</span>, from <span class="pH2">%2%, %3% %4%</span>',
                 t($oUser->sex), $iAge, t($sCountry), $sCity, $sState);
 
-            // Member Menubar
-            $this->view->mail_link = $this->getMailLink($sFirstName, $oUser);
-            $this->view->messenger_link = $this->getMessengerLink($sFirstName, $oUser);
-
-            if (SysMod::isEnabled('friend')) {
-                $this->view->friend_link = $this->getFriendLinkName();
-
-                if ($this->bUserAuth) {
-                    $this->view->mutual_friend_link = $this->getMutualFriendLinkName();
-                }
-
-                $this->view->befriend_link = $this->getBeFriendLink($sFirstName, $oUser);
-            }
+            $this->setMenuBar($sFirstName, $oUser);
 
             $this->view->map = $this->getMap($sCity, $sCountry, $oUser);
 
@@ -252,6 +240,28 @@ class ProfileController extends Controller
     private function isOwnProfile()
     {
         return $this->str->equals($this->iVisitorId, $this->iProfileId);
+    }
+
+    /**
+     * @param string $sFirstName
+     * @param stdClass $oUser
+     *
+     * @return void
+     */
+    private function setMenuBar($sFirstName, stdClass $oUser)
+    {
+        $this->view->mail_link = $this->getMailLink($sFirstName, $oUser);
+        $this->view->messenger_link = $this->getMessengerLink($sFirstName, $oUser);
+
+        if (SysMod::isEnabled('friend')) {
+            $this->view->friend_link = $this->getFriendLinkName();
+
+            if ($this->bUserAuth) {
+                $this->view->mutual_friend_link = $this->getMutualFriendLinkName();
+            }
+
+            $this->view->befriend_link = $this->getBeFriendLink($sFirstName, $oUser);
+        }
     }
 
     /**
