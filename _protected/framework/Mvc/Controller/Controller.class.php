@@ -3,11 +3,12 @@
  * @title            Core Controller Class
  * @desc             Base class for controllers.
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2011-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Controller
- * @version          1.2
+ * @version          2.0
+ * @link             http://pierrehenry.be
  */
 
 namespace PH7\Framework\Mvc\Controller;
@@ -43,50 +44,9 @@ abstract class Controller extends Core
 
         $this->ddosProtection();
 
-        /***** Assign the values for Registry Class *****/
-
-        // URL
-        $this->registry->site_url = PH7_URL_ROOT;
-        $this->registry->url_relative = PH7_RELATIVE;
-
-        // Site Name
-        $this->registry->site_name = htmlspecialchars(M\DbConfig::getSetting('siteName'));
-
-
-        /** PH7Tpl Template Engine initialization **/
-        /* Assign the global variables */
-
-        // Set config and design objects to the template
-        $this->view->config = $this->config;
-        $this->view->design = $this->design;
-
-        $bIsMobApp = MobApp::is($this->httpRequest, $this->session);
-
-        $aAuthViewVars = [
-            'is_admin_auth' => AdminCore::auth(),
-            'is_user_auth' => UserCore::auth(),
-            'is_aff_auth' => AffiliateCore::auth()
-        ];
-        $aGlobalViewVars = [
-            'is_guest_homepage' => $this->isGuestOnHomepage($aAuthViewVars['is_user_auth']),
-            'is_disclaimer' => !$bIsMobApp && (bool)M\DbConfig::getSetting('disclaimer'),
-            'is_cookie_consent_bar' => !$bIsMobApp && (bool)M\DbConfig::getSetting('cookieConsentBar'),
-            'country' => Geo::getCountry(),
-            'city' => Geo::getCity()
-        ];
-
-        $this->view->assigns($aAuthViewVars);
-        $this->view->assigns($aGlobalViewVars);
-
-        // Set other variables
-        $this->setMetaTplVars();
-        $this->setModsStatusTplVars();
-        $this->setUserNotifications();
-
-        /***** Display *****/
+        $this->assignSiteInfoRegistryVars();
+        $this->assignGlobalTplVars();
         $this->view->setTemplateDir($this->registry->path_module_views . PH7_TPL_MOD_NAME);
-
-        /***** End Template Engine PH7Tpl *****/
 
         $this->checkPerms();
         $this->checkModStatus();
@@ -185,6 +145,56 @@ abstract class Controller extends Core
         $this->view->pOH_not_found = 1;
         $this->output();
         exit;
+    }
+
+    /**
+     * Assign site URLs/site name to the Registry class.
+     *
+     * @return void
+     */
+    private function assignSiteInfoRegistryVars()
+    {
+        // Site URL
+        $this->registry->site_url = PH7_URL_ROOT;
+        $this->registry->url_relative = PH7_RELATIVE;
+
+        // Site Name
+        $this->registry->site_name = htmlspecialchars(M\DbConfig::getSetting('siteName'));
+    }
+
+    /**
+     * Assign all global variables to pH7Tpl.
+     *
+     * @return void
+     */
+    private function assignGlobalTplVars()
+    {
+        // Set config and design objects to the template
+        $this->view->config = $this->config;
+        $this->view->design = $this->design;
+
+        $bIsMobApp = MobApp::is($this->httpRequest, $this->session);
+
+        $aAuthViewVars = [
+            'is_admin_auth' => AdminCore::auth(),
+            'is_user_auth' => UserCore::auth(),
+            'is_aff_auth' => AffiliateCore::auth()
+        ];
+        $aGlobalViewVars = [
+            'is_guest_homepage' => $this->isGuestOnHomepage($aAuthViewVars['is_user_auth']),
+            'is_disclaimer' => !$bIsMobApp && (bool)M\DbConfig::getSetting('disclaimer'),
+            'is_cookie_consent_bar' => !$bIsMobApp && (bool)M\DbConfig::getSetting('cookieConsentBar'),
+            'country' => Geo::getCountry(),
+            'city' => Geo::getCity()
+        ];
+
+        $this->view->assigns($aAuthViewVars);
+        $this->view->assigns($aGlobalViewVars);
+
+        // Set other variables
+        $this->setMetaTplVars();
+        $this->setModsStatusTplVars();
+        $this->setUserNotifications();
     }
 
     /**
