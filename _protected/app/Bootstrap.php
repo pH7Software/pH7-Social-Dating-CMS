@@ -95,9 +95,7 @@ class Bootstrap
             $this->startPageBenchmark();
             //Framework\Compress\Compress::setZlipCompression();
 
-            /**
-             * Initialize the FrontController, we are asking the front controller to process the HTTP request
-             */
+            // Initialize the FrontController, we are asking the front controller to process the HTTP request
             FrontController::getInstance()->runRouter();
         /**  When pH7CMS will support PHP 7.1
         } catch (FileNotFoundException | Except\UserException $oE) {
