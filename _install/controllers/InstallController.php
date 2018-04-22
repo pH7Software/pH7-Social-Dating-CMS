@@ -201,7 +201,7 @@ class InstallController extends Controller
                             } else {
                                 if (
                                     !($DB->getAttribute(\PDO::ATTR_DRIVER_NAME) === Db::DSN_MYSQL_PREFIX &&
-                                    version_compare($DB->getAttribute(\PDO::ATTR_SERVER_VERSION), PH7_REQUIRE_SQL_VERSION, '>='))
+                                    version_compare($DB->getAttribute(\PDO::ATTR_SERVER_VERSION), PH7_REQUIRED_SQL_VERSION, '>='))
                                 ) {
                                     $aErrors[] = $LANG['require_mysql_version'];
                                 } else {

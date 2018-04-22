@@ -25,8 +25,8 @@ define('DIRECTIVE_KEY', 'directive');
 
 $aErrors = array();
 
-if (version_compare(PHP_VERSION, PH7_REQUIRE_SERVER_VERSION, '<')) {
-    $aErrors[] = 'Your current PHP version is ' . PHP_VERSION . '. pH7CMS requires PHP ' . PH7_REQUIRE_SERVER_VERSION . ' or newer.<br /> Please ask your Web host to upgrade PHP to ' . PH7_REQUIRE_SERVER_VERSION . ' or newer.';
+if (version_compare(PHP_VERSION, PH7_REQUIRED_SERVER_VERSION, '<')) {
+    $aErrors[] = 'Your current PHP version is ' . PHP_VERSION . '. pH7CMS requires PHP ' . PH7_REQUIRED_SERVER_VERSION . ' or newer.<br /> Please ask your Web host to upgrade PHP to ' . PH7_REQUIRED_SERVER_VERSION . ' or newer.';
 }
 
 $aRequirementsNeeded = array(
