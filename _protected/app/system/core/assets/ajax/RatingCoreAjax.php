@@ -54,7 +54,7 @@ class RatingCoreAjax
             $this->oHttpRequest->postExists('score') &&
             $this->oHttpRequest->postExists('id')
         ) {
-            if ($this->oHttpRequest->post('action') == 'rating') {
+            if ($this->oHttpRequest->post('action') === 'rating') {
                 // Only for the Members
                 if (!UserCore::auth()) {
                     $this->iStatus = 0;
