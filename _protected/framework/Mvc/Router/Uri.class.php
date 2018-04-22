@@ -49,7 +49,11 @@ class Uri
      */
     public static function loadFile(DOMDocument $oDom)
     {
-        $oCache = (new Cache)->start(self::CACHE_GROUP, 'routefile', self::CACHE_TIME);
+        $oCache = (new Cache)->start(
+            self::CACHE_GROUP,
+            'routefile',
+            self::CACHE_TIME
+        );
 
         if (!$sContents = $oCache->get()) {
             $sContents = file_get_contents(self::getRouteFilePath()); // Get the XML contents
@@ -79,8 +83,11 @@ class Uri
         self::$bFullClean = $bFullClean;
 
         // Caching URI function will speed up the website ~500ms faster (up to 1.4s!)
-        $sCacheId = 'geturi' . $sModule . $sController . $sAction . $sVars;
-        $oCache = (new Cache)->start(self::CACHE_GROUP, $sCacheId, self::CACHE_TIME);
+        $oCache = (new Cache)->start(
+            self::CACHE_GROUP,
+            'geturi' . $sModule . $sController . $sAction . $sVars,
+            self::CACHE_TIME
+        );
         $oCache->enabled(static::URI_CACHE_ENABLED);
 
         if (!$sUrl = $oCache->get()) {
