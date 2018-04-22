@@ -94,7 +94,7 @@ try {
         }
         exit;
     }
-} catch(RuntimeException $oExcept) {
+} catch (RuntimeException $oExcept) {
     echo $oExcept->getMessage();
     exit;
 }
