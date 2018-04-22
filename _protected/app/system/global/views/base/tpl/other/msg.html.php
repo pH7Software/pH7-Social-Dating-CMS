@@ -14,6 +14,7 @@ use PH7\Framework\Layout\Html\Design;
 
 $oDesign = new Design;
 $oDesign->htmlHeader();
+
 $aMeta = [
     'title' => Core::SOFTWARE_NAME . ' | ' . Core::SOFTWARE_COMPANY,
     'description' => Core::SOFTWARE_DESCRIPTION,
