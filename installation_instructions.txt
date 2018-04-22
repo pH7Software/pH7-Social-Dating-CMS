@@ -2,17 +2,21 @@
 2. Installation: http://ph7cms.com/doc/en/install
 3. Once you finished the installation, your admin panel URL will be: http://YOUR-PH7CMS-SITE.com/admin123/
 
+
 --- Softaculous Installation ---
 If your web host offers Softaculous with pH7CMS enabled, you can install pH7CMS in one-click.
 Generally, through cPanel -> Softaculous icon -> search for "pH7CMS".
 
+
 --- Good Hosting ---
 http://ph7cms.com/hosting/
+
 
 --- Useful doc ---
 Documentation: http://ph7cms.com/doc/
 Github Wiki: https://github.com/pH7Software/pH7-Social-Dating-CMS/wiki/
 pH7CMS Blog: http://ph7cms.com/blog (if you dig well, you will find several tutorials and helpful posts)
+
 
 --- Troubleshooting ---
 If you got an issue and ca't find the answer anywhere on the web,
