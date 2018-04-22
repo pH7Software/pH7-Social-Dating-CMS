@@ -12,6 +12,7 @@ http://ph7cms.com/hosting/
 --- Useful doc ---
 Documentation: http://ph7cms.com/doc/
 Github Wiki: https://github.com/pH7Software/pH7-Social-Dating-CMS/wiki/
+pH7CMS Blog: http://ph7cms.com/blog (if you dig well, you will find several tutorials and helpful posts)
 
 --- Troubleshooting ---
 If you got an issue and ca't find the answer anywhere on the web,
