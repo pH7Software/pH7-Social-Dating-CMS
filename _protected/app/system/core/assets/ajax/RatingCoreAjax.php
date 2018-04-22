@@ -21,6 +21,8 @@ use PH7\Framework\Session\Session;
 
 class RatingCoreAjax
 {
+    const COOKIE_LIFETIME = 3600 * 24 * 7; // A week
+
     /** @var HttpRequest */
     private $oHttpRequest;
 
@@ -110,7 +112,7 @@ class RatingCoreAjax
             $this->sTxt = t('You have already voted!');
             return;
         } else {
-            $oCookie->set($sCookieName, 1, 3600 * 24 * 7); // A week
+            $oCookie->set($sCookieName, 1, self::COOKIE_LIFETIME);
         }
         unset($oCookie);
 
