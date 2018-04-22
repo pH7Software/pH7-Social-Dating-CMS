@@ -14,23 +14,89 @@ namespace PH7;
 
 define('PH7', 1);
 
-define('PH7_REQUIRE_SERVER_VERSION', '5.6.0');
-define('PH7_REQUIRE_SQL_VERSION', '5.0');
+use RuntimeException;
 
-if (version_compare(PHP_VERSION, PH7_REQUIRE_SERVER_VERSION, '<')) {
-    exit('ERROR: Your current PHP version is ' . PHP_VERSION . '. pH7CMS requires PHP ' . PH7_REQUIRE_SERVER_VERSION . ' or newer.<br /> Please ask your Web host to upgrade PHP to ' . PH7_REQUIRE_SERVER_VERSION . ' or newer.');
-}
+class Root
+{
+    const REQUIRED_SERVER_VERSION = '5.6.0';
+    const REQUIRED_SQL_VERSION = '5.0';
+    const REQUIRED_CONFIG_FILE_NAME = '_constants.php';
+    const INSTALL_FOLDER_NAME = '_install/';
 
-// If no settings found, go to the installer
-if (!is_file(__DIR__ . '/_constants.php')) {
-    if (is_dir(__DIR__ . '/_install/')) {
-        // Clear redirection cache since some folks get it cached
+    /**
+     * @throws RuntimeException
+     */
+    public function checkPhpVersion()
+    {
+        if ($this->isIncompatiblePhpVersion()) {
+            $sMsg = 'ERROR: Your current PHP version is %s. pH7CMS requires PHP %s or newer.<br /> Please ask your Web host to upgrade PHP to %s or newer.';
+            throw new RuntimeException(
+                sprintf(
+                    $sMsg,
+                    PHP_VERSION,
+                    self::REQUIRED_SERVER_VERSION,
+                    self::REQUIRED_SERVER_VERSION
+                )
+            );
+        }
+    }
+
+    /**
+     * Clear redirection cache since some folks get it cached.
+     *
+     * @return void
+     */
+    public function clearHttpCache()
+    {
         header('Cache-Control: no-store, no-cache, must-revalidate');
         header('Expires: Thu, 01 Jan 1970 00:00:00 GMT');
-        header('Location: _install/');
-    } else {
-        echo 'CONFIG FILE NOT FOUND! If you want to make a new installation, please re-upload _install/ folder and clear your database.';
     }
+
+    public function moveToInstaller()
+    {
+        header('Location: ' . self::INSTALL_FOLDER_NAME);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isConfigFileExists()
+    {
+        return is_file(__DIR__ . '/' . self::REQUIRED_CONFIG_FILE_NAME);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isInstallFolderExists()
+    {
+        return is_dir(__DIR__ . '/' . self::INSTALL_FOLDER_NAME);
+    }
+
+    /**
+     * @return bool
+     */
+    private function isIncompatiblePhpVersion()
+    {
+        return version_compare(PHP_VERSION, self::REQUIRED_SERVER_VERSION, '<');
+    }
+}
+
+$oRoot = new Root();
+
+try {
+    $oRoot->checkPhpVersion();
+    if (!$oRoot->isConfigFileExists()) {
+        if ($oRoot->isInstallFolderExists()) {
+            $oRoot->clearHttpCache();
+            $oRoot->moveToInstaller();
+        } else {
+            echo 'CONFIG FILE NOT FOUND! If you want to make a new installation, please re-upload _install/ folder and clear your database.';
+        }
+        exit;
+    }
+} catch(RuntimeException $oExcept) {
+    echo $oExcept->getMessage();
     exit;
 }
 

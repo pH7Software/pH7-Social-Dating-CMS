@@ -420,10 +420,12 @@ class Db
      */
     public static function checkMySqlVersion()
     {
+        $sRequiredMySQLVer = \PH7\Index::REQUIRED_SQL_VERSION;
         $sMySQLVer = self::$oDb->getAttribute(PDO::ATTR_SERVER_VERSION);
 
-        if (version_compare($sMySQLVer, PH7_REQUIRE_SQL_VERSION, '<')) {
-            exit('ERROR: Your MySQL version is ' . $sMySQLVer . '. pH7CMS requires MySQL ' . PH7_REQUIRE_SQL_VERSION . ' or newer.');
+        if (version_compare($sMySQLVer, $sRequiredMySQLVer, '<')) {
+            $sMsg = 'ERROR: Your MySQL version is ' . $sMySQLVer . '. pH7CMS requires MySQL ' . $sRequiredMySQLVer . ' or newer.';
+            exit($sMsg);
         }
     }
 
