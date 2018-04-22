@@ -11,4 +11,10 @@ http://ph7cms.com/hosting/
 
 --- Useful doc ---
 Documentation: http://ph7cms.com/doc/
-Knowledge center: http://clients.hizup.com/knowledgebase.php
+Github Wiki: https://github.com/pH7Software/pH7-Social-Dating-CMS/wiki/
+
+--- Troubleshooting ---
+If you got an issue and ca't find the answer anywhere on the web,
+a good idea is to dig the opened/closed issues
+or open an issue if you couldn't find the answer to your problem.
+Issues: https://github.com/pH7Software/pH7-Social-Dating-CMS/issues
