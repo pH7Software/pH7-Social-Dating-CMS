@@ -148,9 +148,9 @@ class ValidateCoreAjax
 
         if (!$this->oValidate->email($sValue)) {
             $this->sMsg = t('Invalid Email Address!');
-        } elseif ($sParam == 'guest' && $this->oExistsModel->email($sValue, $sTable)) {
+        } elseif ($sParam === 'guest' && $this->oExistsModel->email($sValue, $sTable)) {
             $this->sMsg = t('This email already used by another member.');
-        } elseif ($sParam == 'user' && !$this->oExistsModel->email($sValue, $sTable)) {
+        } elseif ($sParam === 'user' && !$this->oExistsModel->email($sValue, $sTable)) {
             $this->sMsg = sprintf(t('Oops! "%s" is not associated with any %site_name% account.'), substr($sValue, 0, 50));
         } else {
             $this->iStatus = 1;
