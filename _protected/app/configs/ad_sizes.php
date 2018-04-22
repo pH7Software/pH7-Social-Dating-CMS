@@ -17,7 +17,6 @@ defined('PH7') or exit('Restricted access');
 /**
  * Default ad sizes.
  */
-
 return [
     '728x90',
     '200x200',
