@@ -51,7 +51,7 @@ define('PH7_DEFAULT_LANG_CODE', 'en');
 define('PH7_LANG_CODE', 'en');
 
 // Cache constant
-define('PH7_PATH_CACHE', '');
+define('PH7_PATH_CACHE', PH7_PATH_PROTECTED . 'data/cache/');
 
 // Max Values constants
 define('PH7_MAX_URL_LENGTH', 120);
