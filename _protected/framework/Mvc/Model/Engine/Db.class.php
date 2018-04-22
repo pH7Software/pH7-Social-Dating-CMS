@@ -22,6 +22,8 @@ use PDOStatement;
  */
 class Db
 {
+    const REQUIRED_SQL_VERSION = 5.0;
+
     const ASC = 'ASC';
     const DESC = 'DESC';
     const RAND = 'RAND()';
@@ -420,11 +422,10 @@ class Db
      */
     public static function checkMySqlVersion()
     {
-        $sRequiredMySQLVer = \PH7\Index::REQUIRED_SQL_VERSION;
         $sMySQLVer = self::$oDb->getAttribute(PDO::ATTR_SERVER_VERSION);
 
-        if (version_compare($sMySQLVer, $sRequiredMySQLVer, '<')) {
-            $sMsg = 'ERROR: Your MySQL version is ' . $sMySQLVer . '. pH7CMS requires MySQL ' . $sRequiredMySQLVer . ' or newer.';
+        if (version_compare($sMySQLVer, self::REQUIRED_SQL_VERSION, '<')) {
+            $sMsg = 'ERROR: Your MySQL version is ' . $sMySQLVer . '. pH7CMS requires MySQL ' . self::REQUIRED_SQL_VERSION . ' or newer.';
             exit($sMsg);
         }
     }

@@ -19,7 +19,6 @@ use RuntimeException;
 class Root
 {
     const REQUIRED_SERVER_VERSION = '5.6.0';
-    const REQUIRED_SQL_VERSION = '5.0';
     const REQUIRED_CONFIG_FILE_NAME = '_constants.php';
     const INSTALL_FOLDER_NAME = '_install/';
 
