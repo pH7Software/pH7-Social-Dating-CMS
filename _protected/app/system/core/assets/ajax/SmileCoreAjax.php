@@ -19,6 +19,8 @@ use PH7\Framework\Service\Emoticon;
 
 class SmileCoreAjax extends Emoticon
 {
+    const CACHE_LIFETIME = 120 * 48 * 30;
+
     /** @var string */
     private static $sData = '';
 
@@ -37,7 +39,7 @@ class SmileCoreAjax extends Emoticon
 
     private static function retrieve()
     {
-        $oCache = (new Cache)->start('str/json', 'emoticons', 120 * 48 * 30);
+        $oCache = (new Cache)->start('str/json', 'emoticons', self::CACHE_LIFETIME);
 
         if (!self::$sData = $oCache->get()) {
             $aEmoticons = static::get();
