@@ -9,6 +9,7 @@
 namespace PH7\Test\Unit\Framework\Mvc\Request;
 
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Mvc\Request\WrongRequestMethodException;
 use PHPUnit_Framework_TestCase;
 
 class HttpTest extends PHPUnit_Framework_TestCase
@@ -129,12 +130,11 @@ class HttpTest extends PHPUnit_Framework_TestCase
         $this->assertSame('value', $sActual);
     }
 
-    /**
-     * @expectedException \PH7\Framework\Mvc\Request\WrongRequestMethodException
-     * @expectedExceptionCode \PH7\Framework\Mvc\Request\WrongRequestMethodException::POST_METHOD
-     */
     public function testPostMethodWithWrongRequestMethod()
     {
+        $this->expectException(WrongRequestMethodException::class);
+        $this->expectExceptionCode(WrongRequestMethodException::POST_METHOD);
+
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_POST['foo'] = 'bar';
 
