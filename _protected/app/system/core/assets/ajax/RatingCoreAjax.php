@@ -90,7 +90,7 @@ class RatingCoreAjax
         $this->sTable = $this->oHttpRequest->post('table');
         $this->iId = (int)$this->oHttpRequest->post('id');
 
-        if ($this->sTable == DbTableName::MEMBER) {
+        if ($this->isCorrectTable()) {
             $iProfileId = (int)(new Session)->get('member_id');
 
             if ($iProfileId === $this->iId) {
@@ -146,6 +146,14 @@ class RatingCoreAjax
     {
         $this->oRatingModel->updateVotes($this->iId, $this->sTable);
         $this->oRatingModel->updateScore($this->fScore, $this->iId, $this->sTable);
+    }
+
+    /**
+     * @return bool
+     */
+    private function isCorrectTable()
+    {
+        return $this->sTable === DbTableName::MEMBER;
     }
 }
 
