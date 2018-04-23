@@ -16,7 +16,7 @@ define('PH7', 1);
 
 use RuntimeException;
 
-require __DIR__ . 'WebsiteChecker.class.php';
+require __DIR__ . '/WebsiteChecker.class.php';
 
 $oSiteChecker = new WebsiteChecker();
 
