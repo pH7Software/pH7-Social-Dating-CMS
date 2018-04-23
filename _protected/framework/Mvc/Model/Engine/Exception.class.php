@@ -15,7 +15,9 @@ use PH7\Framework\Error\CException\Escape;
 
 class Exception extends PDOException
 {
-    use Escape;
+    use Escape {
+        strip as private;
+    }
 
     /**
      * @param string $sMsg
@@ -24,6 +26,6 @@ class Exception extends PDOException
     {
         parent::__construct($sMsg);
 
-        $this->init($sMsg);
+        $this->strip($sMsg);
     }
 }

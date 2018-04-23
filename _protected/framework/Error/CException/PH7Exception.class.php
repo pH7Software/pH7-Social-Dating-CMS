@@ -21,7 +21,9 @@ use PH7\Framework\Page\Page;
 
 class PH7Exception extends Exception
 {
-    use Escape;
+    use Escape {
+        strip as private;
+    }
 
     /**
      * @param string $sMsg
@@ -29,7 +31,7 @@ class PH7Exception extends Exception
     public function __construct($sMsg)
     {
         parent::__construct($sMsg);
-        $this->init($sMsg);
+        $this->strip($sMsg);
     }
 
     /**

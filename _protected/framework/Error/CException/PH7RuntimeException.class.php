@@ -18,7 +18,9 @@ use RuntimeException;
 
 class PH7RuntimeException extends RuntimeException
 {
-    use Escape;
+    use Escape {
+        strip as private;
+    }
 
     /**
      * @param string $sMsg
@@ -26,6 +28,6 @@ class PH7RuntimeException extends RuntimeException
     public function __construct($sMsg)
     {
         parent::__construct($sMsg);
-        $this->init($sMsg);
+        $this->strip($sMsg);
     }
 }

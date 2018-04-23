@@ -17,7 +17,9 @@ use InvalidArgumentException;
 
 class PH7InvalidArgumentException extends InvalidArgumentException
 {
-    use Escape;
+    use Escape {
+        strip as private;
+    }
 
     /**
      * @param string $sMsg
@@ -25,6 +27,6 @@ class PH7InvalidArgumentException extends InvalidArgumentException
     public function __construct($sMsg)
     {
         parent::__construct($sMsg);
-        $this->init($sMsg);
+        $this->strip($sMsg);
     }
 }

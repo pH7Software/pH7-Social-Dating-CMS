@@ -17,7 +17,9 @@ use Exception;
 
 class UserException extends Exception
 {
-    use Escape;
+    use Escape {
+        strip as private;
+    }
 
     /**
      * @param string $sMsg
@@ -27,6 +29,6 @@ class UserException extends Exception
     {
         parent::__construct($sMsg, $iCode);
 
-        $this->init($sMsg);
+        $this->strip($sMsg);
     }
 }

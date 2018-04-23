@@ -23,7 +23,7 @@ trait Escape
      *
      * @param string $sMsg
      */
-    protected function init($sMsg)
+    protected function strip($sMsg)
     {
         $this->message = strip_tags($sMsg, $this->sAllowTags);
     }

@@ -18,7 +18,9 @@ use BadMethodCallException;
 
 class PH7BadMethodCallException extends BadMethodCallException
 {
-    use Escape;
+    use Escape {
+        strip as private;
+    }
 
     /**
      * @param string $sMsg
@@ -26,6 +28,7 @@ class PH7BadMethodCallException extends BadMethodCallException
     public function __construct($sMsg)
     {
         parent::__construct($sMsg);
-        $this->init($sMsg);
+
+        $this->strip($sMsg);
     }
 }
