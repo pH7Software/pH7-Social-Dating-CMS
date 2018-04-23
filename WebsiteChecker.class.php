@@ -10,7 +10,7 @@
 namespace PH7;
 
 defined('PH7') or exit(header('Location: ./'));
-ini_set('display_errors', 1);
+
 use RuntimeException;
 
 class WebsiteChecker
