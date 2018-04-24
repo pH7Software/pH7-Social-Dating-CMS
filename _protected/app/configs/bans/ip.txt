@@ -1,2 +1,2 @@
-# Contact us at ph7software@gmail.com if you find that some IP address should be added. #
+# Contact me at hello{{AT}}ph7cms{{D0T}}com if you think that some IP address should be added. #
 # Please indicate each the IP addresses to ban on a new line. #
