@@ -71,15 +71,15 @@ abstract class Controller implements Controllable
 
         /* Smarty initialization */
         $this->oView = new Smarty;
-        $this->oView->use_sub_dirs = true;
+        $this->oView->setUseSubDirs(true);
         $this->oView->setTemplateDir(PH7_ROOT_INSTALL . 'views/' . self::DEFAULT_THEME);
         $this->oView->setCompileDir(PH7_ROOT_INSTALL . 'data/caches/smarty_compile');
         $this->oView->setCacheDir(PH7_ROOT_INSTALL . 'data/caches/smarty_cache');
         $this->oView->setPluginsDir(PH7_ROOT_INSTALL . 'library/Smarty/plugins');
 
         // Smarty Cache
-        $this->oView->caching = 0; // 0 = Cache disabled |  1 = Cache never expires | 2 = Set the cache duration at "cache_lifetime" attribute
-        $this->oView->cache_lifetime = self::VIEW_CACHE_LIFETIME;
+        $this->oView->setCaching(Smarty::CACHING_OFF);
+        $this->oView->setCacheLifetime(self::VIEW_CACHE_LIFETIME);
 
         $this->oView->assign('LANG', $LANG);
         $this->oView->assign('software_name', self::SOFTWARE_NAME);
