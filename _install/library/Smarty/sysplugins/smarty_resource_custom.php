@@ -19,9 +19,9 @@ abstract class Smarty_Resource_Custom extends Smarty_Resource
     /**
      * fetch template and its modification time from data source
      *
-     * @param string $name template name
-     * @param string &$source template source
-     * @param integer &$mtime template modification timestamp (epoch)
+     * @param string  $name    template name
+     * @param string  &$source template source
+     * @param integer &$mtime  template modification timestamp (epoch)
      */
     abstract protected function fetch($name, &$source, &$mtime);
 
@@ -42,12 +42,12 @@ abstract class Smarty_Resource_Custom extends Smarty_Resource
     /**
      * populate Source Object with meta data from Resource
      *
-     * @param Smarty_Template_Source $source source object
+     * @param Smarty_Template_Source   $source    source object
      * @param Smarty_Internal_Template $_template template object
      */
     public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template = null)
     {
-        $source->filepath = $source->type . ':' . substr(preg_replace('/[^A-Za-z0-9.]/', '', $source->name), 0, 25);
+        $source->filepath = $source->type . ':' . substr(preg_replace('/[^A-Za-z0-9.]/','',$source->name),0,25);
         $source->uid = sha1($source->type . ':' . $source->name);
 
         $mtime = $this->fetchTimestamp($source->name);
@@ -90,6 +90,6 @@ abstract class Smarty_Resource_Custom extends Smarty_Resource
      */
     public function getBasename(Smarty_Template_Source $source)
     {
-        return basename(substr(preg_replace('/[^A-Za-z0-9.]/', '', $source->name), 0, 25));
+        return basename(substr(preg_replace('/[^A-Za-z0-9.]/','',$source->name),0,25));
     }
 }

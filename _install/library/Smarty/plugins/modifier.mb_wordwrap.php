@@ -11,12 +11,13 @@
  * Name:     mb_wordwrap
  * Purpose:  Wrap a string to a given number of characters
  *
+
  * @link   http://php.net/manual/en/function.wordwrap.php for similarity
  *
- * @param  string $str the string to wrap
- * @param  int $width the width of the output
- * @param  string $break the character used to break the line
- * @param  boolean $cut ignored parameter, just for the sake of
+ * @param  string  $str   the string to wrap
+ * @param  int     $width the width of the output
+ * @param  string  $break the character used to break the line
+ * @param  boolean $cut   ignored parameter, just for the sake of
  *
  * @return string  wrapped string
  * @author Rodney Rehm
@@ -36,9 +37,9 @@ function smarty_modifier_mb_wordwrap($str, $width = 75, $break = "\n", $cut = fa
         if ($token_length > $width) {
             if ($cut) {
                 $_tokens = preg_split('!(.{' . $width . '})!S' . Smarty::$_UTF8_MODIFIER,
-                    $_token,
-                    -1,
-                    PREG_SPLIT_NO_EMPTY + PREG_SPLIT_DELIM_CAPTURE);
+                                      $_token,
+                                      -1,
+                                      PREG_SPLIT_NO_EMPTY + PREG_SPLIT_DELIM_CAPTURE);
             }
         }
 

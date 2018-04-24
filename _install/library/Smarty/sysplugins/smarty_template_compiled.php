@@ -48,22 +48,22 @@ class Smarty_Template_Compiled extends Smarty_Template_Resource_Base
         $this->filepath = $smarty->getCompileDir();
         if (isset($_template->compile_id)) {
             $this->filepath .= preg_replace('![^\w]+!', '_', $_template->compile_id) .
-                ($smarty->use_sub_dirs ? DIRECTORY_SEPARATOR : '^');
+                               ($smarty->use_sub_dirs ? DIRECTORY_SEPARATOR : '^');
         }
         // if use_sub_dirs, break file into directories
         if ($smarty->use_sub_dirs) {
-            $this->filepath .= $source->uid[0] . $source->uid[1] . DIRECTORY_SEPARATOR . $source->uid[2] .
-                $source->uid[3] . DIRECTORY_SEPARATOR . $source->uid[4] . $source->uid[5] .
-                DIRECTORY_SEPARATOR;
+            $this->filepath .= $source->uid[ 0 ] . $source->uid[ 1 ] . DIRECTORY_SEPARATOR . $source->uid[ 2 ] .
+                               $source->uid[ 3 ] . DIRECTORY_SEPARATOR . $source->uid[ 4 ] . $source->uid[ 5 ] .
+                               DIRECTORY_SEPARATOR;
         }
         $this->filepath .= $source->uid . '_';
         if ($source->isConfig) {
             $this->filepath .= (int)$smarty->config_read_hidden + (int)$smarty->config_booleanize * 2 +
-                (int)$smarty->config_overwrite * 4;
+                               (int)$smarty->config_overwrite * 4;
         } else {
             $this->filepath .= (int)$smarty->merge_compiled_includes + (int)$smarty->escape_html * 2 +
-                (($smarty->merge_compiled_includes && $source->type === 'extends') ?
-                    (int)$smarty->extends_recursion * 4 : 0);
+                               (($smarty->merge_compiled_includes && $source->type === 'extends') ?
+                                   (int)$smarty->extends_recursion * 4 : 0);
         }
         $this->filepath .= '.' . $source->type;
         $basename = $source->handler->getBasename($source);
@@ -114,7 +114,7 @@ class Smarty_Template_Compiled extends Smarty_Template_Resource_Base
             $this->getRenderedTemplateCode($_template);
         }
         if ($_template->caching && $this->has_nocache_code) {
-            $_template->cached->hashes[$this->nocache_hash] = true;
+            $_template->cached->hashes[ $this->nocache_hash ] = true;
         }
         if ($_template->smarty->debugging) {
             $_template->smarty->_debug->end_render($_template);
@@ -182,7 +182,8 @@ class Smarty_Template_Compiled extends Smarty_Template_Resource_Base
             // call compiler
             $_template->loadCompiler();
             $this->write($_template, $_template->compiler->compileTemplate($_template));
-        } catch (Exception $e) {
+        }
+        catch (Exception $e) {
             // restore old timestamp in case of error
             if ($saved_timestamp && is_file($this->filepath)) {
                 touch($this->filepath, $saved_timestamp);
@@ -198,7 +199,7 @@ class Smarty_Template_Compiled extends Smarty_Template_Resource_Base
      * Write compiled code by handler
      *
      * @param Smarty_Internal_Template $_template template object
-     * @param string $code compiled code
+     * @param string                   $code      compiled code
      *
      * @return bool success
      * @throws \SmartyException

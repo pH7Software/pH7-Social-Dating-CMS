@@ -7,7 +7,6 @@
  * @author     Uwe Tews
  * @author     Rodney Rehm
  */
-
 /**
  * This class does contain all necessary methods for the HTML cache on file system
  * Implements the file system as resource for the HTML cache Version ussing nocache inserts.
@@ -20,7 +19,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource
     /**
      * populate Cached Object with meta data from Resource
      *
-     * @param Smarty_Template_Cached $cached cached object
+     * @param Smarty_Template_Cached   $cached    cached object
      * @param Smarty_Internal_Template $_template template object
      *
      * @return void
@@ -34,20 +33,20 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource
         $cached->filepath = $smarty->getCacheDir();
         if (isset($_template->cache_id)) {
             $cached->filepath .= preg_replace(array('![^\w|]+!',
-                    '![|]+!'),
-                    array('_',
-                        $_compile_dir_sep),
-                    $_template->cache_id) . $_compile_dir_sep;
+                                                    '![|]+!'),
+                                              array('_',
+                                                    $_compile_dir_sep),
+                                              $_template->cache_id) . $_compile_dir_sep;
         }
         if (isset($_template->compile_id)) {
             $cached->filepath .= preg_replace('![^\w]+!', '_', $_template->compile_id) . $_compile_dir_sep;
         }
         // if use_sub_dirs, break file into directories
         if ($smarty->use_sub_dirs) {
-            $cached->filepath .= $_filepath[0] . $_filepath[1] . DIRECTORY_SEPARATOR . $_filepath[2] .
-                $_filepath[3] .
-                DIRECTORY_SEPARATOR .
-                $_filepath[4] . $_filepath[5] . DIRECTORY_SEPARATOR;
+            $cached->filepath .= $_filepath[ 0 ] . $_filepath[ 1 ] . DIRECTORY_SEPARATOR . $_filepath[ 2 ] .
+                                 $_filepath[ 3 ] .
+                                 DIRECTORY_SEPARATOR .
+                                 $_filepath[ 4 ] . $_filepath[ 5 ] . DIRECTORY_SEPARATOR;
         }
         $cached->filepath .= $_filepath;
         $basename = $source->handler->getBasename($source);
@@ -83,8 +82,8 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource
      * Read the cached template and process its header
      *
      * @param \Smarty_Internal_Template $_smarty_tpl do not change variable name, is used by compiled template
-     * @param Smarty_Template_Cached $cached cached object
-     * @param bool $update flag if called because cache update
+     * @param Smarty_Template_Cached    $cached      cached object
+     * @param bool                      $update      flag if called because cache update
      *
      * @return boolean true or false if the cached content does not exist
      */
@@ -105,7 +104,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource
      * Write the rendered template output to cache
      *
      * @param Smarty_Internal_Template $_template template object
-     * @param string $content content to cache
+     * @param string                   $content   content to cache
      *
      * @return bool success
      * @throws \SmartyException
@@ -113,8 +112,8 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource
     public function writeCachedContent(Smarty_Internal_Template $_template, $content)
     {
         if ($_template->smarty->ext->_writeFile->writeFile($_template->cached->filepath,
-                $content,
-                $_template->smarty) === true
+                                                           $content,
+                                                           $_template->smarty) === true
         ) {
             if (function_exists('opcache_invalidate') &&
                 (!function_exists('ini_get') || strlen(ini_get('opcache.restrict_api'))) < 1
@@ -151,7 +150,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource
     /**
      * Empty cache
      *
-     * @param Smarty $smarty
+     * @param Smarty  $smarty
      * @param integer $exp_time expiration time (number of seconds, not timestamp)
      *
      * @return integer number of cache files deleted
@@ -164,11 +163,11 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource
     /**
      * Empty cache for a specific template
      *
-     * @param Smarty $smarty
-     * @param string $resource_name template name
-     * @param string $cache_id cache id
-     * @param string $compile_id compile id
-     * @param integer $exp_time expiration time (number of seconds, not timestamp)
+     * @param Smarty  $smarty
+     * @param string  $resource_name template name
+     * @param string  $cache_id      cache id
+     * @param string  $compile_id    compile id
+     * @param integer $exp_time      expiration time (number of seconds, not timestamp)
      *
      * @return integer number of cache files deleted
      */
@@ -180,7 +179,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource
     /**
      * Check is cache is locked for this template
      *
-     * @param Smarty $smarty Smarty object
+     * @param Smarty                 $smarty Smarty object
      * @param Smarty_Template_Cached $cached cached object
      *
      * @return boolean true or false if cache is locked
@@ -203,7 +202,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource
     /**
      * Lock cache for this template
      *
-     * @param Smarty $smarty Smarty object
+     * @param Smarty                 $smarty Smarty object
      * @param Smarty_Template_Cached $cached cached object
      *
      * @return bool|void
@@ -217,7 +216,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource
     /**
      * Unlock cache for this template
      *
-     * @param Smarty $smarty Smarty object
+     * @param Smarty                 $smarty Smarty object
      * @param Smarty_Template_Cached $cached cached object
      *
      * @return bool|void

@@ -24,21 +24,21 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase
      */
     public $option_flags = array('nocache', 'noscope');
 
-    /**
+   /**
      * Valid scope names
      *
      * @var array
      */
     public $valid_scopes = array('local' => Smarty::SCOPE_LOCAL, 'parent' => Smarty::SCOPE_PARENT,
-        'root' => Smarty::SCOPE_ROOT, 'global' => Smarty::SCOPE_GLOBAL,
-        'tpl_root' => Smarty::SCOPE_TPL_ROOT, 'smarty' => Smarty::SCOPE_SMARTY);
+                                 'root' => Smarty::SCOPE_ROOT, 'global' => Smarty::SCOPE_GLOBAL,
+                                 'tpl_root' => Smarty::SCOPE_TPL_ROOT, 'smarty' => Smarty::SCOPE_SMARTY);
 
     /**
      * Compiles code for the {assign} tag
      *
-     * @param  array $args array with attributes from parser
-     * @param \Smarty_Internal_TemplateCompilerBase $compiler compiler object
-     * @param  array $parameter array with compilation parameter
+     * @param  array                                $args      array with attributes from parser
+     * @param \Smarty_Internal_TemplateCompilerBase $compiler  compiler object
+     * @param  array                                $parameter array with compilation parameter
      *
      * @return string compiled code
      * @throws \SmartyCompilerException
@@ -54,19 +54,19 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
         // nocache ?
-        if ($_var = $compiler->getId($_attr['var'])) {
+        if ($_var = $compiler->getId($_attr[ 'var' ])) {
             $_var = "'{$_var}'";
         } else {
-            $_var = $_attr['var'];
+            $_var = $_attr[ 'var' ];
         }
         if ($compiler->tag_nocache || $compiler->nocache) {
             $_nocache = true;
             // create nocache var to make it know for further compiling
-            $compiler->setNocacheInVariable($_attr['var']);
+            $compiler->setNocacheInVariable($_attr[ 'var' ]);
         }
         // scope setup
-        if ($_attr['noscope']) {
-            $_scope = -1;
+        if ($_attr[ 'noscope' ]) {
+            $_scope = - 1;
         } else {
             $_scope = $compiler->convertScope($_attr, $this->valid_scopes);
         }
@@ -78,7 +78,7 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase
         if ($_scope) {
             $_params .= ' ,' . $_scope;
         }
-        if (isset($parameter['smarty_internal_index'])) {
+        if (isset($parameter[ 'smarty_internal_index' ])) {
             $output =
                 "<?php \$_tmp_array = isset(\$_smarty_tpl->tpl_vars[{$_var}]) ? \$_smarty_tpl->tpl_vars[{$_var}]->value : array();\n";
             $output .= "if (!is_array(\$_tmp_array) || \$_tmp_array instanceof ArrayAccess) {\n";

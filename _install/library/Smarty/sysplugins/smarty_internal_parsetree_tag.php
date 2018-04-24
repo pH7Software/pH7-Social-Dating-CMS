@@ -30,7 +30,7 @@ class Smarty_Internal_ParseTree_Tag extends Smarty_Internal_ParseTree
      * Create parse tree buffer for Smarty tag
      *
      * @param \Smarty_Internal_Templateparser $parser parser object
-     * @param string $data content
+     * @param string                          $data   content
      */
     public function __construct(Smarty_Internal_Templateparser $parser, $data)
     {

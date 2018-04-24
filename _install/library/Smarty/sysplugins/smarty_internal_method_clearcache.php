@@ -24,12 +24,12 @@ class Smarty_Internal_Method_ClearCache
      * @api  Smarty::clearCache()
      * @link http://www.smarty.net/docs/en/api.clear.cache.tpl
      *
-     * @param \Smarty $smarty
-     * @param  string $template_name template name
-     * @param  string $cache_id cache id
-     * @param  string $compile_id compile id
-     * @param  integer $exp_time expiration time
-     * @param  string $type resource type
+     * @param \Smarty  $smarty
+     * @param  string  $template_name template name
+     * @param  string  $cache_id      cache id
+     * @param  string  $compile_id    compile id
+     * @param  integer $exp_time      expiration time
+     * @param  string  $type          resource type
      *
      * @return int number of cache files deleted
      * @throws \SmartyException

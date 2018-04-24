@@ -70,7 +70,7 @@ class Smarty_Internal_Block
      * - if outer level {block} of child template ($state === 1) save it as child root block
      * - otherwise process inheritance and render
      *
-     * @param string $name block name
+     * @param string   $name     block name
      * @param int|null $tplIndex index of outer level {block} if nested
      */
     public function __construct($name, $tplIndex)

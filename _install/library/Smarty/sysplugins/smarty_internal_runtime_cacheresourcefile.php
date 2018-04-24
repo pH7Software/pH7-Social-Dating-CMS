@@ -6,7 +6,6 @@
  * @subpackage PluginsInternal
  * @author     Uwe Tews
  */
-
 /**
  * Smarty Internal Runtime Cache Resource File Class
  *
@@ -18,11 +17,11 @@ class Smarty_Internal_Runtime_CacheResourceFile
     /**
      * Empty cache for a specific template
      *
-     * @param Smarty $smarty
-     * @param string $resource_name template name
-     * @param string $cache_id cache id
-     * @param string $compile_id compile id
-     * @param integer $exp_time expiration time (number of seconds, not timestamp)
+     * @param Smarty  $smarty
+     * @param string  $resource_name template name
+     * @param string  $cache_id      cache id
+     * @param string  $compile_id    compile id
+     * @param integer $exp_time      expiration time (number of seconds, not timestamp)
      *
      * @return integer number of cache files deleted
      */
@@ -84,13 +83,13 @@ class Smarty_Internal_Runtime_CacheResourceFile
                     $_parts_count = count($_parts);
                     // check name
                     if (isset($resource_name)) {
-                        if ($_parts[$_parts_count - 1] !== $_resourcename_parts) {
+                        if ($_parts[ $_parts_count - 1 ] !== $_resourcename_parts) {
                             continue;
                         }
                     }
                     // check compile id
-                    if (isset($_compile_id) && (!isset($_parts[$_parts_count - 2 - $_compile_id_offset]) ||
-                            $_parts[$_parts_count - 2 - $_compile_id_offset] !== $_compile_id)
+                    if (isset($_compile_id) && (!isset($_parts[ $_parts_count - 2 - $_compile_id_offset ]) ||
+                                                $_parts[ $_parts_count - 2 - $_compile_id_offset ] !== $_compile_id)
                     ) {
                         continue;
                     }
@@ -103,7 +102,7 @@ class Smarty_Internal_Runtime_CacheResourceFile
                             continue;
                         }
                         for ($i = 0; $i < $_cache_id_parts_count; $i++) {
-                            if ($_parts[$i] !== $_cache_id_parts[$i]) {
+                            if ($_parts[ $i ] !== $_cache_id_parts[ $i ]) {
                                 continue 2;
                             }
                         }
@@ -113,7 +112,7 @@ class Smarty_Internal_Runtime_CacheResourceFile
                         if (isset($exp_time)) {
                             if ($exp_time < 0) {
                                 preg_match('#\'cache_lifetime\' =>\s*(\d*)#', file_get_contents($_filepath), $match);
-                                if ($_time < (filemtime($_filepath) + $match[1])) {
+                                if ($_time < (filemtime($_filepath) + $match[ 1 ])) {
                                     continue;
                                 }
                             } else {

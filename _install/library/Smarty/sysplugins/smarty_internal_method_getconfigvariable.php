@@ -22,8 +22,8 @@ class Smarty_Internal_Method_GetConfigVariable
      * gets  a config variable value
      *
      * @param \Smarty|\Smarty_Internal_Data|\Smarty_Internal_Template $data
-     * @param string $varName the name of the config variable
-     * @param bool $errorEnable
+     * @param string                                                  $varName the name of the config variable
+     * @param bool                                                    $errorEnable
      *
      * @return null|string  the value of the config variable
      */

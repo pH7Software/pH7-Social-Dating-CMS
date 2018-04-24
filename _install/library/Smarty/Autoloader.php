@@ -20,7 +20,7 @@
  */
 class Smarty_Autoloader
 {
-    /**
+   /**
      * Filepath to Smarty root
      *
      * @var string
@@ -58,7 +58,7 @@ class Smarty_Autoloader
             set_include_path(get_include_path() . PATH_SEPARATOR . SMARTY_SYSPLUGINS_DIR) !== false
         ) {
             $registeredAutoLoadFunctions = spl_autoload_functions();
-            if (!isset($registeredAutoLoadFunctions['spl_autoload'])) {
+            if (!isset($registeredAutoLoadFunctions[ 'spl_autoload' ])) {
                 spl_autoload_register();
             }
         } else {
@@ -90,12 +90,12 @@ class Smarty_Autoloader
      */
     public static function autoload($class)
     {
-        if ($class[0] !== 'S' && strpos($class, 'Smarty') !== 0) {
+        if ($class[ 0 ] !== 'S' && strpos($class, 'Smarty') !== 0) {
             return;
         }
         $_class = strtolower($class);
-        if (isset(self::$rootClasses[$_class])) {
-            $file = self::$SMARTY_DIR . self::$rootClasses[$_class];
+        if (isset(self::$rootClasses[ $_class ])) {
+            $file = self::$SMARTY_DIR . self::$rootClasses[ $_class ];
             if (is_file($file)) {
                 include $file;
             }

@@ -16,8 +16,8 @@
  * @author Monte Ohrt <monte at ohrt dot com>
  * @author Uwe Tews
  *
- * @param string $string input string
- * @param string $search text to search for
+ * @param string $string  input string
+ * @param string $search  text to search for
  * @param string $replace replacement text
  *
  * @return string
@@ -32,7 +32,7 @@ function smarty_modifier_replace($string, $search, $replace)
             }
             $is_loaded = true;
         }
-        return smarty_mb_str_replace($search, $replace, $string);
+         return smarty_mb_str_replace($search, $replace, $string);
     }
 
     return str_replace($search, $replace, $string);
