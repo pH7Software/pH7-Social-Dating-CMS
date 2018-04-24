@@ -18,7 +18,7 @@ use Smarty;
 abstract class Controller implements Controllable
 {
     const PHP_TIMEZONE_DIRECTIVE = 'date.timezone';
-    const VIEW_CACHE_LIFETIME = 86400; // 86400 seconds = 24h
+    const VIEW_CACHE_LIFETIME = 24 * 3600; //thanks PHP5.6 for scalar expr in consts
 
     const SOFTWARE_NAME = 'pH7CMS';
     const DEFAULT_SITE_NAME = 'My Dating WebApp';
