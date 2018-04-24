@@ -16,7 +16,7 @@ function run() {
         _confirm "Have you made a copy of it before?"
         if [ $? -eq 1 ]; then
             ## Permission
-            sudo chmod 777 -R .
+            sudo chmod -R 777 .
 
             ## TMP files
             find . -type f \( -name '*~' -or -name '*.log' -or -name '*.tmp' -or -name '*.swp' -or -name '.directory' -or -name '._*' -or -name '.DS_Store*' -or -name 'Thumbs.db' \) -exec rm {} \;
