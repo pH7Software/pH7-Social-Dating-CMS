@@ -72,7 +72,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Adult Disclaimer:'), 'disclaimer', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Show an Adult Warning to enter to your website. This is useful for websites with adult content. <br /><strong>Note: this disclaimer offered by a third-party provider may sometimes open a new tab promoting a third-party adult website.</strong>'), 'value' => DbConfig::getSetting('disclaimer'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Cookie Consent Bar:'), 'cookie_consent_bar', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Enable a Cookie Consent Bar to prevent your users that your website uses cookies. This is required for EU Law (if you have visitors from EU countries). The Cookie Bar will only be displayed if the visitor is in the EU.'), 'value' => DbConfig::getSetting('cookieConsentBar'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Cookie Consent Bar:'), 'cookie_consent_bar', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Enable a Cookie Consent Bar to prevent your users that your website uses cookies. This is required by EU Law (if you have visitors from EU countries). The Cookie Bar will only be displayed if the visitor is in the EU.'), 'value' => DbConfig::getSetting('cookieConsentBar'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Show "Powered By" link in footer:'), 'display_powered_by_link', array(1 => t('Enable'), 0 => t('Disable (not recommended)')), array('description' => t('Are you proud of pH7CMS brand? Are you proud to say your dating app has been made by the European Leader Dating software?'), 'value' => DbConfig::getSetting('displayPoweredByLink'), 'required' => 1)));
 
@@ -92,9 +92,9 @@ class SettingForm
         /********** Registration **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="registration"><div class="col-md-10"><h2 class="underline">' . t('Registration') . '</h2>'));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Account activation type for Members:'), 'user_activation_type', array('1' => t('No activation required'), '2' => t('Self activation via email'), '3' => t('Manual activation by administrator')), array('value' => DbConfig::getSetting('userActivationType'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Account activation type for Members:'), 'user_activation_type', array('1' => t('No activation required'), '2' => t('Self-activation via email'), '3' => t('Manual activation by administrator')), array('value' => DbConfig::getSetting('userActivationType'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Account activation type for Affiliates:'), 'aff_activation_type', array('1' => t('No activation required'), '2' => t('Self activation via email'), '3' => t('Manual activation by administrator')), array('value' => DbConfig::getSetting('affActivationType'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Account activation type for Affiliates:'), 'aff_activation_type', array('1' => t('No activation required'), '2' => t('Self-activation via email'), '3' => t('Manual activation by administrator')), array('value' => DbConfig::getSetting('affActivationType'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Number(t('Minimum username length:'), 'min_username_length', array('value' => DbConfig::getSetting('minUsernameLength'), 'max' => DbConfig::getSetting('maxUsernameLength') - 1, 'required' => 1)));
 

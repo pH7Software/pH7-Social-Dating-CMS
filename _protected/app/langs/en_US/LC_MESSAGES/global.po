@@ -3424,7 +3424,7 @@ msgstr ""
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:75
 msgid ""
 "Enable a Cookie Consent Bar to prevent your users that your website uses "
-"cookies. This is required for EU Law (if you have visitors from EU "
+"cookies. This is required by EU Law (if you have visitors from EU "
 "countries). The Cookie Bar will only be displayed if the visitor is in the "
 "EU."
 msgstr ""
@@ -3484,7 +3484,7 @@ msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:95
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:97
-msgid "Self activation via email"
+msgid "Self-activation via email"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:95
