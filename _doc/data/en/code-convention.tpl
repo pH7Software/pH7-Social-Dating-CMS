@@ -1,11 +1,20 @@
 <h1>Coding Conventions for pH7CMS</h1>
 <p>When working with pH7CMS's code, developing extensions and modifications in the code, these coding conventions are highly recommended and will make your code easier to read/understand for other devs.</p>
 
-<h2>Classes And Interfaces: Names</h2>
-<p>Name Class and Interface: UpperCamelCase (<a href="http://en.wikipedia.org/wiki/StudlyCaps">StudlyCaps</a>) and alphanumeric only.<br />
-Method Name: <a href="http://en.wikipedia.org/wiki/CamelCase">camelCasee</a> and alphanumeric only.<br />
-Constant Name: ALL_CAPS and alphanumeric only with the underscores to separate words.</p>
+<h2>Class, Interface and Trait Names</h2>
+<p>UpperCamelCase (<a href="http://en.wikipedia.org/wiki/StudlyCaps">StudlyCaps</a>) and alphanumeric only.</p>
 
+<h3>Interface Naming</h3>
+<p>
+    When you are naming your interface, you should use "-ble" suffix as much as possible (in short, use an adjective for naming it).<br />
+    Examples: <cite>Controllable</cite>, <cite>Hashable</cite>, <cite>Configurable</cite>, <cite>Serializable</cite>, <cite>Readable</cite>.
+</p>
+
+<h3>Method and Constant Names</h3>
+<p>
+    Method Name: <a href="http://en.wikipedia.org/wiki/CamelCase">camelCasee</a> and alphanumeric only.<br />
+    Constant Name: ALL_CAPS and alphanumeric only with the underscores to separate words.
+</p>
 
 <p class="italic underline">Example:</p>
 
@@ -35,13 +44,7 @@ class MyClass
 <h4>In pH7Framework</h4>
 <p>The classes should end with ".class.php" extension, traits should end with ".trait.php" extension and interfaces must end with ".interface.php"</p>
 
-<h2>Interface Naming</h2>
-<p>
-    When you are naming your interface, you should use "-ble" suffix as much as possible (in short, use an adjective for naming it).<br />
-    Examples: <cite>Controllable</cite>, <cite>Hashable</cite>, <cite>Configurable</cite>, <cite>Serializable</cite>, <cite>Readable</cite>.
-</p>
-
-<h2>Variable Declarations: Names</h2>
+<h2>Variable Names</h2>
 <p>The variables must be in camelCasee and alphanumeric only.</p>
 <p>Since PHP is not a typed language, the data found in the variables are fuzzy, so we defined a strict convention for naming variables.<br />
 The first letter of the variable must define the type of this: Here is the list of available types:</p>
@@ -89,7 +92,7 @@ But you can still follow this convention if you want ;-).<br />
 By cons never put members of a class in public (if you do, it means that you do not know enough object-oriented programming to create a module or a code from us).<br />
 Also, we rarely respect the "standard" which requires a line must not exceed 80 characters because we believe this standard and obsolete nowadays screens are larger and have a code too long can become very annoying.</p>
 
-<h2>Functions, Global Variables and Arrays : Names</h2>
+<h2>Function, Global Variable and Array Names</h2>
 Function: lowercase and each word must be separated by underscore.
 
 <p class="italic underline">Example:</p>
