@@ -64,17 +64,17 @@ class Registration extends RegistrationCore
     private function getEmailMsg(array $aData)
     {
         switch ($this->iActiveType) {
-            case 1:
+            case self::NO_ACTIVATION:
                 $sEmailMsg = t('Please %0% to make money from today!', '<a href="' . Uri::get('affiliate', 'home', 'login') . '"><b>' . t('log in') . '</b></a>');
                 break;
 
-            case 2:
+            case self::EMAIL_ACTIVATION:
                 /** We place the text outside of Uri::get() otherwise special characters will be deleted and the parameters passed in the url will be unusable thereafter. **/
                 $sActivateLink = Uri::get('affiliate', 'account', 'activate') . PH7_SH . $aData['email'] . PH7_SH . $aData['hash_validation'];
                 $sEmailMsg = t('Activation link: %0%.', '<a href="' . $sActivateLink . '">' . $sActivateLink . '</a>');
                 break;
 
-            case 3:
+            case self::MANUAL_ACTIVATION:
                 $sEmailMsg = t('Caution! Your account is not activated yet. You will receive an email of any decision.');
                 break;
 
