@@ -6,4 +6,3 @@ It is designed with the <a href="http://en.wikipedia.org/wiki/KISS_principle">KI
 <p>It also wants to be fast, low-resource-intensive, extremely powerful and very secure.</p>
 <p>In addition to being <strong>free</strong>, <strong>open source</strong> and <strong>relatively stable</strong>, the script comes with more than <strong>29 native modules</strong> and based on <strong>pH7Framework</strong> which includes more than 51 packages.</p>
 
-<p><!-- Template Engine is <a href="http://en.wikipedia.org/wiki/XSLT">XSLT</a>.<br /> --></p>
