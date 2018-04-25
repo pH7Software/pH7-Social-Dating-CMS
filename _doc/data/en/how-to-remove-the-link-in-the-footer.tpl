@@ -6,9 +6,11 @@
 <p class="bold">Although you can do it..., we don't really see why you would hide the branding.</p>
 
 <figure>
-    <img
-        src="{site_url}static/img/disable-footer-copyright-link.png"
-        alt="How to remove the Powered By Link from the footer"
-        title="How to remove the Powered By Link from the footer" />
+    <a href="{site_url}static/img/disable-footer-copyright-link.png" target="_blank">
+        <img
+            src="{site_url}static/img/disable-footer-copyright-link.png"
+            alt="How to remove the Powered By Link from the footer"
+            title="How to remove the Powered By Link from the footer" />
+    </a>
     <figcaption>For removing the branding link. <em>Admin Panel -> Settings -> General -> Show "Powered By" link</em></figcaption>
 </figure>

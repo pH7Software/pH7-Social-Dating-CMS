@@ -5,9 +5,11 @@
 <p>You can clear the different caches in <a href="{site_url}en/how-to-go-to-admin-panel" target="_blank">your Admin Panel</a>, -> Tool -> Caches -> Caches Manager</p>
 
 <figure>
-    <img
-        src="{site_url}static/img/how-to-clear-caches.png"
-        alt="How to clear the caches in pH7CMS's Admin Panel"
-        title="How to clear the caches in pH7CMS's Admin Panel" />
+    <a href="{site_url}static/img/how-to-clear-caches.png" target="_blank">
+        <img
+            src="{site_url}static/img/how-to-clear-caches.png"
+            alt="How to clear the caches in pH7CMS's Admin Panel"
+            title="How to clear the caches in pH7CMS's Admin Panel" />
+    </a>
     <figcaption>Clear the caches in <em>Admin Panel -> Tool -> Caches -> Caches Manager</em></figcaption>
 </figure>

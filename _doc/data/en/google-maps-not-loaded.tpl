@@ -13,23 +13,29 @@
     Map's service</p>
 
 <figure>
-    <img src="{site_url}static/img/google-map-not-loaded.png"
-         alt="Google Maps went wrong, not loaded"
-         title="Google Maps went wrong, not loaded" />
+    <a href="{site_url}static/img/google-map-not-loaded.png" target="_blank">
+        <img src="{site_url}static/img/google-map-not-loaded.png"
+             alt="Google Maps went wrong, not loaded"
+             title="Google Maps went wrong, not loaded" />
+    </a>
     <figcaption>Google Maps now requires an API Key</figcaption>
 </figure>
 
 <figure>
-    <img src="{site_url}static/img/google-map-api-form.png"
-         alt="Google Maps Setting Form in pH7CMS Admin Panel"
-         title="Google Maps Setting Form in pH7CMS Admin Panel" />
+    <a href="{site_url}static/img/google-map-api-form.png" target="_blank">
+        <img src="{site_url}static/img/google-map-api-form.png"
+             alt="Google Maps Setting Form in pH7CMS Admin Panel"
+             title="Google Maps Setting Form in pH7CMS Admin Panel" />
+    </a>
     <figcaption>Google Maps Setting Form in pH7CMS Admin Panel</figcaption>
 </figure>
 
 <figure>
-    <img src="{site_url}static/img/get-google-api-key.png"
-         alt="Generate Google API key on Console.Developers.Google.com"
-         title="Generate Google API key on Console.Developers.Google.com" />
+    <a href="{site_url}static/img/get-google-api-key.png" target="_blank">
+        <img src="{site_url}static/img/get-google-api-key.png"
+             alt="Generate Google API key on Console.Developers.Google.com"
+             title="Generate Google API key on Console.Developers.Google.com" />
+    </a>
     <figcaption>
         Generate Google API key on <a href="https://developers.google.com/maps/documentation/javascript/get-api-key">https://developers.google.com/maps/documentation/javascript/get-api-key</a>
         and select "Google Maps JavaScript API" and "Web browser (Javascript)"

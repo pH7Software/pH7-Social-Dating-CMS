@@ -4,9 +4,11 @@
 <p>Click on it, Edit it, Save it. That's it! 😃</p>
 
 <figure>
-    <img
-        src="{site_url}static/img/edit-static-pages.png"
-        alt="How to edit the static pages with pH7CMS"
-        title="How to edit the static pages with pH7CMS" />
+    <a href="{site_url}static/img/edit-static-pages.png" target="_blank">
+        <img
+            src="{site_url}static/img/edit-static-pages.png"
+            alt="How to edit the static pages with pH7CMS"
+            title="How to edit the static pages with pH7CMS" />
+    </a>
     <figcaption>Edit the static pages of your website</figcaption>
 </figure>
