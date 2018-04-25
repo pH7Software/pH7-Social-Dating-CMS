@@ -24,8 +24,10 @@ Attention, les dossiers suivants doivent avoir les permissions <em>777</em> :</p
 <pre>~/VOTRE-DOSSIER-PROTECTED/data/tmp/*</pre>
 <pre>~/VOTRE-DOSSIER-PROTECTED/data/log/*</pre>
 <pre>~/VOTRE-DOSSIER-PROTECTED/framework/Core/*</pre>
-<p><span class="warning">Attention, ces permissions ne permettant pas l'édition et la création de fichiers dans le module File Management du panneau d'administration.</span><br />
-Si vous voulez le permettre, vous devez mettre en valeurs numériques <em>777</em> pour tous les dossiers et <em>666</em> pour tous les fichiers.</p>
+<p>
+    <span class="warning">Attention, ces permissions ne permettant pas l'édition et la création de fichiers dans le module File Management du panneau d'administration.</span><br />
+    Si vous voulez le permettre, vous devez mettre en valeurs numériques <em>777</em> pour tous les dossiers et <em>666</em> pour tous les fichiers.
+</p>
 
 <h3>5. Lancez l'installateur</h3>
 <p>Vous devez simplement vous rendre à l'URL suivante et suivre attentivement les instructions : <em>http://www.VOTRE-SITE.com/<strong>_install</strong>/</em></p>
