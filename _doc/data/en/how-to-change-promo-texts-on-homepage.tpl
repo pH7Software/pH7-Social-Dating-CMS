@@ -1,6 +1,6 @@
 <h2>How to change the promo texts on the front page</h2>
 
- <p>To change the promo text and headings on the splash/guest homepage of your website, please go to your <strong>Admin Panel</strong> (generally <em>mysite.com/admin123</em>) -> Settings -> <strong>Meta Tags/Homepage Texts</strong> -> then you can edit them on the following fields <strong>Headline</strong> / <strong>Slogan</strong> / <strong>SEO text</strong></p>
+<p>To change the promo text and headings on the splash/guest homepage of your website, please go to your <strong>Admin Panel</strong> (generally <em>mysite.com/admin123</em>) -> Settings -> <strong>Meta Tags/Homepage Texts</strong> -> then you can edit them on the following fields <strong>Headline</strong> / <strong>Slogan</strong> / <strong>SEO text</strong></p>
 
 <figure>
     <img
