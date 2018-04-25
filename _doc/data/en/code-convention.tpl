@@ -41,6 +41,12 @@ class MyClass
 </code>
 </pre>
 
+<h2>Database Table Names</h2>
+<p>
+    all_lowercase and alphabetical only with the underscores to separate each words.<br />
+    Table names have to be prefixed with "ph7_" which will be replaced by the user prefix chosen during the installation.
+</p>
+
 <h4>In pH7Framework</h4>
 <p>The classes should end with ".class.php" extension, traits should end with ".trait.php" extension and interfaces must end with ".interface.php"</p>
 
