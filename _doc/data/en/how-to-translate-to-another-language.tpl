@@ -34,7 +34,7 @@
             alt="Language Directory Structure"
             title="Example of where to upload the language folder. Language directory structure" />
     </a>
-    <figcaption>Change the Currency Sign on the Membership Page</figcaption>
+    <figcaption>Example of where to upload the language folder</figcaption>
 </figure>
 
 <p>
