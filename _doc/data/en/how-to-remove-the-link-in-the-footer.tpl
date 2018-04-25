@@ -5,7 +5,6 @@
 
 <p class="bold">Although you can do it..., we don't really see why you would hide the branding.</p>
 
-
 <figure>
     <img
         src="{site_url}static/img/disable-footer-copyright-link.png"
