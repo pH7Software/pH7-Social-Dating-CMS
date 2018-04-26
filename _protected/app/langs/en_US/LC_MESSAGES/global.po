@@ -3412,9 +3412,9 @@ msgstr ""
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:73
 msgid ""
 "Show an Adult Warning to enter to your website. This is useful for websites "
-"with adult content. <br /><strong>Note: this disclaimer offered by a third-"
-"party provider may sometimes open a new tab promoting a third-party adult "
-"website.</strong>"
+"with adult content. <br /><strong>WARNING: this disclaimer offered by a third-"
+"party provider may sometimes open a new tab promoting third-party adult "
+"websites.</strong>"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:75

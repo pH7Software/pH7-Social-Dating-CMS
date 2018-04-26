@@ -70,7 +70,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Social Media Widgets:'), 'social_media_widgets', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Enable the Social Media Sharing such as Like and Sharing buttons.'), 'value' => DbConfig::getSetting('socialMediaWidgets'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Adult Disclaimer:'), 'disclaimer', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Show an Adult Warning to enter to your website. This is useful for websites with adult content. <br /><strong>Note: this disclaimer offered by a third-party provider may sometimes open a new tab promoting a third-party adult website.</strong>'), 'value' => DbConfig::getSetting('disclaimer'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Adult Disclaimer:'), 'disclaimer', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Show an Adult Warning to enter to your website. This is useful for websites with adult content. <br /><strong>WARNING: this disclaimer offered by a third-party provider may sometimes open a new tab promoting third-party adult websites.</strong>'), 'value' => DbConfig::getSetting('disclaimer'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Cookie Consent Bar:'), 'cookie_consent_bar', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Enable a Cookie Consent Bar to prevent your users that your website uses cookies. This is required by EU Law (if you have visitors from EU countries). The Cookie Bar will only be displayed if the visitor is in the EU.'), 'value' => DbConfig::getSetting('cookieConsentBar'), 'required' => 1)));
 
