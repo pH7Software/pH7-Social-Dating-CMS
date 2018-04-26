@@ -26,6 +26,7 @@ require_once PH7_PATH_FRAMEWORK . 'Pattern/Singleton.trait.php';
 final class Autoloader
 {
     const FRAMEWORK_NAMESPACE = 'PH7\Framework';
+    const COMPOSER_AUTOLOAD_FULL_PATH = PH7_PATH_PROTECTED . 'vendor/autoload.php';
     const INFO_INSTALL_COMPOSER_LINK = 'https://github.com/pH7Software/pH7-Social-Dating-CMS#installation';
     const DOWNLOAD_SOFTWARE_LINK = 'https://sourceforge.net/projects/ph7socialdating/files/latest/download';
 
@@ -117,14 +118,12 @@ final class Autoloader
      */
     private function loadComposerLoader()
     {
-        $sComposerLoaderFile = PH7_PATH_PROTECTED . 'vendor/autoload.php';
-
-        if (!is_file($sComposerLoaderFile)) {
+        if (!is_file(self::COMPOSER_AUTOLOAD_FULL_PATH)) {
             $this->showComposerNotInstalledPage();
             exit;
         }
 
-        require_once $sComposerLoaderFile;
+        require_once self::COMPOSER_AUTOLOAD_FULL_PATH;
     }
 
     /**
