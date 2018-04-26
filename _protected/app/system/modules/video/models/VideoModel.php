@@ -155,9 +155,9 @@ class VideoModel extends VideoCoreModel
         $this->cache->start(self::CACHE_GROUP, 'totalAlbums' . $iProfileId, static::CACHE_TIME);
 
         if (!$iData = $this->cache->get()) {
-            $sSqlProfileId = (!empty($iProfileId)) ? ' WHERE profileId=:profileId' : '';
+            $sSqlProfileId = $iProfileId !== null ? ' WHERE profileId=:profileId' : '';
             $rStmt = Db::getInstance()->prepare('SELECT COUNT(albumId) AS totalAlbums FROM' . Db::prefix(DbTableName::ALBUM_VIDEO) . $sSqlProfileId);
-            if (!empty($iProfileId)) {
+            if ($iProfileId !== null) {
                 $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             }
             $rStmt->execute();
