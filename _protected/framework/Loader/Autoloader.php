@@ -50,7 +50,7 @@ final class Autoloader
         spl_autoload_extensions('.class.php, .interface.php, .trait.php');
 
         // Register the loader methods
-        spl_autoload_register(array(__CLASS__, 'loadClass'));
+        spl_autoload_register([__CLASS__, 'loadClass']);
 
         // Include Composer libraries (GeoIp2, Swift, Stripe, ...)
         $this->loadComposerLoader();

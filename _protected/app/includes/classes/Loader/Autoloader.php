@@ -41,10 +41,10 @@ final class Autoloader
         // Specify the extensions that may be loaded
         spl_autoload_extensions('.php');
         /** Register the loader methods **/
-        spl_autoload_register(array(__CLASS__, 'loadController'));
-        spl_autoload_register(array(__CLASS__, 'loadClass'));
-        spl_autoload_register(array(__CLASS__, 'loadModel'));
-        spl_autoload_register(array(__CLASS__, 'loadForm'));
+        spl_autoload_register([__CLASS__, 'loadController']);
+        spl_autoload_register([__CLASS__, 'loadClass']);
+        spl_autoload_register([__CLASS__, 'loadModel']);
+        spl_autoload_register([__CLASS__, 'loadForm']);
     }
 
     /**

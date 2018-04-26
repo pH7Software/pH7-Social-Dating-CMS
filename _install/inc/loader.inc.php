@@ -13,7 +13,7 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-// Autoloading Classes Files
+// Autoloading Class Files
 spl_autoload_register(function ($sClass) {
     // Hack to remove namespace and backslash
     $sClass = str_replace(array(__NAMESPACE__ . '\\', '\\'), '/', $sClass);
