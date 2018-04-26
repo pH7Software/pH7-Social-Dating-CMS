@@ -12,7 +12,7 @@
 
 <h3>Method and Constant Names</h3>
 <p>
-    Method Name: <a href="http://en.wikipedia.org/wiki/CamelCase">camelCasee</a> and alphanumeric only.<br />
+    Method Name: <a href="http://en.wikipedia.org/wiki/CamelCase">camelCase</a> and alphanumeric only.<br />
     Constant Name: ALL_CAPS and alphanumeric only with the underscores to separate words.
 </p>
 
@@ -51,7 +51,7 @@ class MyClass
 <p>The classes should end with ".class.php" extension, traits should end with ".trait.php" extension and interfaces must end with ".interface.php"</p>
 
 <h2>Variable Names</h2>
-<p>The variables must be in camelCasee and alphanumeric only.</p>
+<p>The variables must be in camelCase and alphanumeric only.</p>
 <p>Since PHP is not a typed language, the data found in the variables are fuzzy, so we defined a strict convention for naming variables.<br />
 The first letter of the variable must define the type of this: Here is the list of available types:</p>
 <p class="italic underline">Data type prefixes:</p>
