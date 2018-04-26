@@ -118,7 +118,7 @@ class PictureModel extends PictureCoreModel
             $iOffset = (int)$iOffset;
             $iLimit = (int)$iLimit;
 
-            $sSqlPictureId = (!empty($iPictureId)) ? ' p.pictureId=:pictureId AND ' : ' ';
+            $sSqlPictureId = !empty($iPictureId) ? ' p.pictureId=:pictureId AND ' : ' ';
             $rStmt = Db::getInstance()->prepare('SELECT p.*, a.name, m.username, m.firstName, m.sex FROM' . Db::prefix(DbTableName::PICTURE) . 'AS p INNER JOIN' .
                 Db::prefix(DbTableName::ALBUM_PICTURE) . 'AS a ON p.albumId = a.albumId INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
                 'AS m ON p.profileId = m.profileId WHERE p.profileId=:profileId AND p.albumId=:albumId AND' . $sSqlPictureId . 'p.approved=:approved LIMIT :offset, :limit');
@@ -259,9 +259,9 @@ class PictureModel extends PictureCoreModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
-        $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ? 'p.*' : 'COUNT(p.pictureId) AS totalPictures';
-        $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE p.pictureId = :looking' : ' WHERE p.title LIKE :looking OR p.description LIKE :looking';
+        $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
+        $sSqlSelect = !$bCount ? 'p.*' : 'COUNT(p.pictureId) AS totalPictures';
+        $sSqlWhere = ctype_digit($mLooking) ? ' WHERE p.pictureId = :looking' : ' WHERE p.title LIKE :looking OR p.description LIKE :looking';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ', a.name, m.username, m.firstName, m.sex FROM' . Db::prefix(DbTableName::PICTURE) . 'AS p INNER JOIN' .
             Db::prefix(DbTableName::ALBUM_PICTURE) . 'AS a ON p.albumId = a.albumId INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
