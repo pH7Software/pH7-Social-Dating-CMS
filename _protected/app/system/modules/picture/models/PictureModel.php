@@ -90,9 +90,7 @@ class PictureModel extends PictureCoreModel
 
         if (!$aData = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT albumId, name FROM' . Db::prefix(DbTableName::ALBUM_PICTURE) . ' WHERE profileId = :profileId');
-            if (!empty($iProfileId)) {
-                $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-            }
+            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
             $aData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
