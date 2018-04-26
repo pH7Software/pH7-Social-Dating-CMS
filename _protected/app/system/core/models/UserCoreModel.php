@@ -977,7 +977,7 @@ class UserCoreModel extends Model
         // DELETE TOPICS of FORUMS
         /*
         No! Ghost Profile is ultimately the best solution!
-        WARNING: Do not change this part of code without asking permission from Pierre-Henry Soria
+        WARNING: Do not change this part of code without asking permission to Pierre-Henry Soria
         */
         //$oDb->exec('DELETE FROM' . Db::prefix(DbTableName::FORUM_MESSAGE) . 'WHERE profileId = ' . $iProfileId);
         //$oDb->exec('DELETE FROM' . Db::prefix(DbTableName::FORUM_TOPIC) . 'WHERE profileId = ' . $iProfileId);
