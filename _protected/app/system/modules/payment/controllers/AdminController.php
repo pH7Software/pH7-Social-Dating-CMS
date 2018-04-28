@@ -25,6 +25,7 @@ class AdminController extends MainController
     public function __construct()
     {
         parent::__construct();
+
         $this->iDefMembershipGroup = (int)DbConfig::getSetting('defaultMembershipGroupId');
     }
 

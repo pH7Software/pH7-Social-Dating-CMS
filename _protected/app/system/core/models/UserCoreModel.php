@@ -615,8 +615,9 @@ class UserCoreModel extends Model
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT email, username, firstName, hashValidation FROM' . Db::prefix($sTable) . 'WHERE email = :email AND active = 2');
+        $rStmt = Db::getInstance()->prepare('SELECT email, username, firstName, hashValidation FROM' . Db::prefix($sTable) . 'WHERE email = :email AND active = :emailActivation');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
+        $rStmt->bindValue(':emailActivation', RegistrationCore::EMAIL_ACTIVATION, \PDO::PARAM_INT);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
@@ -637,8 +638,10 @@ class UserCoreModel extends Model
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET active = 1 WHERE email = :email AND hashValidation = :hash AND active = 2');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET active = :noActivation WHERE email = :email AND hashValidation = :hash AND active = :emailActivation');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
+        $rStmt->bindValue(':noActivation', RegistrationCore::NO_ACTIVATION, \PDO::PARAM_INT);
+        $rStmt->bindValue(':emailActivation', RegistrationCore::EMAIL_ACTIVATION, \PDO::PARAM_INT);
         $rStmt->bindParam(':hash', $sHash, \PDO::PARAM_STR, self::HASH_VALIDATION_LENGTH);
 
         return $rStmt->execute();
@@ -665,7 +668,7 @@ class UserCoreModel extends Model
         $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);
         $rStmt->bindValue(':matchSex', Form::setVal($aData['match_sex']), \PDO::PARAM_STR);
         $rStmt->bindValue(':birthDate', $aData['birth_date'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':active', (!empty($aData['is_active']) ? $aData['is_active'] : 1), \PDO::PARAM_INT);
+        $rStmt->bindValue(':active', (!empty($aData['is_active']) ? $aData['is_active'] : RegistrationCore::NO_ACTIVATION), \PDO::PARAM_INT);
         $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
         $rStmt->bindParam(':hashValidation', $sHashValidation, \PDO::PARAM_STR, self::HASH_VALIDATION_LENGTH);
         $rStmt->bindValue(':joinDate', $this->sCurrentDate, \PDO::PARAM_STR);
