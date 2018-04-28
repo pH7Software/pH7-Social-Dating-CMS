@@ -18,6 +18,8 @@ class GroupId
     ];
 
     /**
+     * Checks if a membership group can be deleted or not.
+     *
      * @param int $iMembershipId
      *
      * @return bool
