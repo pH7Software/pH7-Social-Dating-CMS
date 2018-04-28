@@ -13,22 +13,11 @@ namespace PH7;
 use PDOException;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Layout\Html\Design;
-use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
 class AdminController extends MainController
 {
-    /** @var int */
-    private $iDefMembershipGroup;
-
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->iDefMembershipGroup = (int)DbConfig::getSetting('defaultMembershipGroupId');
-    }
-
     public function index()
     {
         $this->sTitle = t('Administration of Payment System');
@@ -56,7 +45,6 @@ class AdminController extends MainController
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
             $this->view->memberships = $oMembership;
-            $this->view->default_group = $this->iDefMembershipGroup;
             $this->output();
         }
     }
@@ -81,7 +69,7 @@ class AdminController extends MainController
     {
         $iMembershipId = $this->httpRequest->post('id', 'int');
 
-        if ($iMembershipId === $this->iDefMembershipGroup) {
+        if (GroupId::undeletable($iMembershipId)) {
             echo t('You cannot delete the default membership group.');
             exit;
         }
