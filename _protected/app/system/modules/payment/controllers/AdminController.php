@@ -10,7 +10,9 @@
 
 namespace PH7;
 
+use PDOException;
 use PH7\Framework\Cache\Cache;
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
@@ -83,13 +85,23 @@ class AdminController extends MainController
             exit;
         }
 
-        $this->oPayModel->deleteMembership($iMembershipId);
+        $bHasError = false;
+        $sMsg = t('The Membership has been removed!');
+
+        try {
+            $this->oPayModel->deleteMembership($iMembershipId);
+        } catch (PDOException $oE) {
+            $bHasError = true;
+            $sMsg = t('This one cannot be deleted.');
+        }
+
         /* Clean UserCoreModel Cache */
         (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
 
         Header::redirect(
             Uri::get('payment', 'admin', 'membershiplist'),
-            t('The Membership has been removed!')
+            $sMsg,
+            ($bHasError ? Design::ERROR_TYPE : Design::SUCCESS_TYPE)
         );
     }
 }
