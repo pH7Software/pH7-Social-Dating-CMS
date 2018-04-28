@@ -40,6 +40,6 @@ class ObjArrTest extends PHPUnit_Framework_TestCase
 
         $aExpected = ['one' => 'abc', 'two' => 'def', 'three' => 'ghi'];
 
-        $this->assertEquals($aExpected, $aResults);
+        $this->assertSame($aExpected, $aResults);
     }
 }
