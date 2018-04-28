@@ -45,9 +45,9 @@ class CArray
      * @param string $sValue The value in the array.
      * @param array $aArray The array.
      *
-     * @return string The name key. If the key is not found, Returns NULL.
+     * @return string|null The name key. If the key is not found, Returns NULL.
      */
-    public static function getKeByVal($sValue, array $aArray)
+    public static function getKeyByValue($sValue, array $aArray)
     {
         $mKey = array_search($sValue, $aArray, true);
 
@@ -60,9 +60,9 @@ class CArray
      * @param string $sValue The value in the array.
      * @param array $aArray The array.
      *
-     * @return string The name key. If the key is not found, Returns NULL.
+     * @return string|null The name key. If the key is not found, Returns NULL.
      */
-    public static function getKeyByValIgnoreCase($sValue, array $aArray)
+    public static function getKeyByValueIgnoreCase($sValue, array $aArray)
     {
         $mKey = array_search(strtolower($sValue), array_map('strtolower', $aArray), true);
 
