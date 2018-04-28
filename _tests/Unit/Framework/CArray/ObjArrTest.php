@@ -16,7 +16,7 @@ class ObjArrTest extends PHPUnit_Framework_TestCase
 {
     public function testToObject()
     {
-        $aData = ['one' => 'abc', 'two' => 'def', 'three' =>'ghi'];
+        $aData = ['one' => 'abc', 'two' => 'def', 'three' => 'ghi'];
 
         $oResults = ObjArr::toObject($aData);
 
@@ -38,9 +38,8 @@ class ObjArrTest extends PHPUnit_Framework_TestCase
 
         $aResults = ObjArr::toArray($oData);
 
-        $aExpected = ['one' => 'abc', 'two' => 'def', 'three' =>'ghi'];
+        $aExpected = ['one' => 'abc', 'two' => 'def', 'three' => 'ghi'];
 
         $this->assertEquals($aExpected, $aResults);
     }
-
 }

@@ -54,7 +54,7 @@ class CArrayTest extends PHPUnit_Framework_TestCase
 
     public function testKeyByValueIgnoreCaseExists()
     {
-        $aData = [ 'pierre' => 'Pierre', 'henry' => 'Henry'];
+        $aData = ['pierre' => 'Pierre', 'henry' => 'Henry'];
 
         $sResult = CArray::getKeyByValueIgnoreCase('PIErrE', $aData);
 
