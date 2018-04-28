@@ -21,16 +21,16 @@ class ObjArr
     /**
      * Converting an Array to an Object.
      *
-     * @param array $aArr The array to convert.
+     * @param mixed $aArr The array to convert.
      *
      * @return stdClass
      */
-    public static function toObject(array $aArr)
+    public static function toObject($mArr)
     {
         $oData = new stdClass;
 
-        if (is_array($aArr)) {
-            foreach ($aArr as $sKey => $mVal) {
+        if (is_array($mArr)) {
+            foreach ($mArr as $sKey => $mVal) {
                 if (is_array($mVal)) {
                     $oData->$sKey = self::toObject($mVal); // Recursive method
                 } else {
