@@ -39,7 +39,7 @@ class Field
     /**
      * Get table.
      *
-     * @param string $sMod
+     * @param string $sMod Mod name ("user" or "aff").
      *
      * @return string
      */
@@ -51,7 +51,7 @@ class Field
     /**
      * Checks if the field exists.
      *
-     * @param string $sMod Mod name.
+     * @param string $sMod Mod name ("user" or "aff").
      * @param string $sField Field name.
      *
      * @return bool
