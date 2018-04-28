@@ -126,9 +126,9 @@ class File
      * Get File Contents.
      *
      * @param string $sFile File name.
-     * @param boolean $bIncPath Default FALSE
+     * @param bool $bIncPath Default FALSE
      *
-     * @return string|boolean Returns the read data or FALSE on failure.
+     * @return string|bool Returns the read data or FALSE on failure.
      */
     public function getFile($sFile, $bIncPath = false)
     {
@@ -140,9 +140,9 @@ class File
      *
      * @param string $sFile File name.
      * @param string $sContents Contents file.
-     * @param integer $iFlag Constant (see http://php.net/manual/function.file-put-contents.php).
+     * @param int $iFlag Constant (see http://php.net/manual/function.file-put-contents.php).
      *
-     * @return integer|boolean Returns the number of bytes that were written to the file, or FALSE on failure.
+     * @return int|bool Returns the number of bytes that were written to the file, or FALSE on failure.
      */
     public function putFile($sFile, $sContents, $iFlag = 0)
     {
@@ -154,7 +154,7 @@ class File
      *
      * @param array|string $mFile
      *
-     * @return boolean TRUE if file exists, FALSE otherwise.
+     * @return bool TRUE if file exists, FALSE otherwise.
      */
     public function existFile($mFile)
     {
@@ -178,7 +178,7 @@ class File
      *
      * @param array|string $mDir
      *
-     * @return boolean TRUE if file exists, FALSE otherwise.
+     * @return bool TRUE if file exists, FALSE otherwise.
      */
     public function existDir($mDir)
     {
@@ -225,7 +225,7 @@ class File
      *
      * @param string $sFile
      *
-     * @return integer The size of the file in bytes.
+     * @return int The size of the file in bytes.
      */
     public function size($sFile)
     {
@@ -297,7 +297,7 @@ class File
      * allows the creation of nested directories specified in the pathname.
      *
      * @param string|array $mDir
-     * @param integer (octal) $iMode Default: 0777
+     * @param int (octal) $iMode Default: 0777
      *
      * @return void
      *
@@ -326,7 +326,7 @@ class File
      * @param string $sFrom File.
      * @param string $sTo File.
      *
-     * @return boolean
+     * @return bool
      */
     public function copy($sFrom, $sTo)
     {
@@ -343,7 +343,7 @@ class File
      * @param string $sFrom Old directory.
      * @param string $sTo New directory.
      *
-     * @return boolean TRUE if everything went well, otherwise FALSE if the "from directory" couldn't be found or if it couldn't be copied.
+     * @return bool TRUE if everything went well, otherwise FALSE if the "from directory" couldn't be found or if it couldn't be copied.
      *
      * @throws PH7InvalidArgumentException
      */
@@ -358,7 +358,7 @@ class File
      * @param string $sFrom File or directory.
      * @param string $sTo File or directory.
      *
-     * @return integer|boolean Returns the last line on success, and FALSE on failure.
+     * @return int|bool Returns the last line on success, and FALSE on failure.
      */
     public function systemCopy($sFrom, $sTo)
     {
@@ -376,7 +376,7 @@ class File
      * @param string $sFrom File or directory.
      * @param string $sTo File or directory.
      *
-     * @return boolean
+     * @return bool
      */
     public function rename($sFrom, $sTo)
     {
@@ -393,7 +393,7 @@ class File
      * @param string $sFrom Old directory.
      * @param string $sTo New directory.
      *
-     * @return boolean TRUE if everything went well, otherwise FALSE if the "from directory" couldn't be found or if it couldn't be renamed.
+     * @return bool TRUE if everything went well, otherwise FALSE if the "from directory" couldn't be found or if it couldn't be renamed.
      *
      * @throws PH7InvalidArgumentException
      */
@@ -408,7 +408,7 @@ class File
      * @param string $sFrom File or directory.
      * @param string $sTo File or directory.
      *
-     * @return integer|boolean Returns the last line on success, and FALSE on failure.
+     * @return int|bool Returns the last line on success, and FALSE on failure.
      */
     public function systemRename($sFrom, $sTo)
     {
@@ -446,7 +446,7 @@ class File
      *
      * @param string $sPath The path
      *
-     * @return boolean
+     * @return bool
      */
     public function deleteDir($sPath)
     {
@@ -476,7 +476,7 @@ class File
      *
      * @param string $sFile Full path of the file.
      *
-     * @return integer|boolean Returns the time the file was last modified, or FALSE if it not found.
+     * @return int|bool Returns the time the file was last modified, or FALSE if it not found.
      */
     public function getModifTime($sFile)
     {
@@ -489,7 +489,7 @@ class File
      *
      * @param string $sFile Full path of the file.
      *
-     * @return integer Returns the latest modification time of the file in Unix timestamp.
+     * @return int Returns the latest modification time of the file in Unix timestamp.
      */
     public static function version($sFile)
     {
@@ -499,9 +499,9 @@ class File
     /**
      * Delay script execution.
      *
-     * @param integer $iSleep Halt time in seconds. Optional parameter, default value is 5.
+     * @param int $iSleep Halt time in seconds. Optional parameter, default value is 5.
      *
-     * @return integer|boolean Returns "0" on success, or "false" on error.
+     * @return int|bool Returns "0" on success, or "false" on error.
      */
     public function sleep($iSleep = null)
     {
@@ -513,9 +513,9 @@ class File
      * Changes permission on a file or directory.
      *
      * @param string $sFile
-     * @param integer $iMode Octal Permission for the file.
+     * @param int $iMode Octal Permission for the file.
      *
-     * @return boolean
+     * @return bool
      */
     public function chmod($sFile, $iMode)
     {
@@ -553,7 +553,7 @@ class File
      *
      * @param string $sPath
      *
-     * @return integer The size of the file in bytes.
+     * @return int The size of the file in bytes.
      */
     public function getDirSize($sPath)
     {
@@ -597,7 +597,7 @@ class File
     /**
      * @param string $sData
      *
-     * @return boolean|integer|float|string|array|object
+     * @return bool|int|float|string|array|object
      */
     public function unpack($sData)
     {
@@ -683,7 +683,7 @@ class File
      * @param string $sFile
      * @param string $sData
      *
-     * @return integer Returns the number of bytes written, or NULL on error.
+     * @return int Returns the number of bytes written, or NULL on error.
      */
     public function save($sFile, $sData)
     {
@@ -732,7 +732,7 @@ class File
      *
      * @param string $sPath
      *
-     * @return array|boolean Returns an ARRAY with the folders or FALSE if the folder could not be opened.
+     * @return array|bool Returns an ARRAY with the folders or FALSE if the folder could not be opened.
      */
     public function readDirs($sPath = './')
     {
@@ -760,7 +760,7 @@ class File
      *
      * @param string $sUrl URL to be read contents.
      *
-     * @return string|boolean Return the result content on success, FALSE on failure.
+     * @return string|bool Return the result content on success, FALSE on failure.
      */
     public function getUrlContents($sUrl)
     {
@@ -782,7 +782,7 @@ class File
      * @param string $sFile Zip file.
      * @param string $sDir Destination to extract the file.
      *
-     * @return boolean
+     * @return bool
      */
     public function zipExtract($sFile, $sDir)
     {
@@ -803,7 +803,7 @@ class File
      *
      * @param string $sFile
      *
-     * @return boolean
+     * @return bool
      */
     public function isBinary($sFile)
     {
