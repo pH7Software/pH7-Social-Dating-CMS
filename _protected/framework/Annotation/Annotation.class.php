@@ -51,12 +51,12 @@ abstract class Annotation
 
         $this->initializeAnnotations($sClassName);
 
-        if (!$aChema = $this->oCache->get()) {
+        if (!$aSchema = $this->oCache->get()) {
             $aClassVars = get_class_vars($sClassName);
 
             $oReflection = new ReflectionClass($this);
 
-            $aChema = array();
+            $aSchema = array();
 
             foreach ($aClassVars as $sName => $sValue) {
                 $oProperty = $oReflection->getProperty($sName);
@@ -66,24 +66,24 @@ abstract class Annotation
                 $aComment = preg_split('/\n/', $sComment);
 
                 $sKey = $sVal = null; // Set default values
-                $aChema[$sName] = array();
+                $aSchema[$sName] = array();
 
                 foreach ($aComment as $sCommentLine) {
                     if (preg_match('/@(.*?): (.*)/i', $sCommentLine, $aMatches)) {
                         $sKey = $aMatches[1];
                         $sVal = $aMatches[2];
 
-                        $aChema[$sName][trim($sKey)] = trim($sVal);
+                        $aSchema[$sName][trim($sKey)] = trim($sVal);
                     }
                 }
             }
 
             unset($oReflection);
 
-            $this->saveAnnotations($aChema);
+            $this->saveAnnotations($aSchema);
         }
 
-        return $aChema;
+        return $aSchema;
     }
 
     /**
