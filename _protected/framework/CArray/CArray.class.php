@@ -87,7 +87,7 @@ class CArray
      *
      * @param string|boolean $mKey The key for needle if it is found in the array, FALSE otherwise.
      *
-     * @return string The name key. If the key is not found, Returns NULL.
+     * @return string|null The name key. If the key is not found, Returns NULL.
      */
     private static function get($mKey)
     {
