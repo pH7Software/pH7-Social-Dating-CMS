@@ -16,7 +16,12 @@
             <td>{% $membership->expirationDays %}</td>
             <td>{if $membership->enable == 1} <span class="green1">{lang 'Enable'}</span> {else} <span class="red">{lang 'Disable'}</span> {/if}</td>
             <td>
-                <a href="{{ $design->url('payment', 'admin', 'editmembership', $membership->groupId) }}">{lang 'Edit'}</a> | {{ $design->popupLinkConfirm(t('Delete (Irreversible!)'), 'payment', 'admin', 'deletemembership', $membership->groupId) }}
+                <a href="{{ $design->url('payment', 'admin', 'editmembership', $membership->groupId) }}">{lang 'Edit'}</a> |
+                {if $default_group == $membership->groupId}
+                    {{ $design->popupLinkConfirm(t('Delete (Irreversible!)'), 'payment', 'admin', 'deletemembership', $membership->groupId) }}
+                {else}
+                    <span class="gray">{lang 'Not deletable'}</span>
+                {/if}
             </td>
         </tr>
     {/each}
