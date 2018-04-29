@@ -21,13 +21,18 @@ class GroupId
      * Checks if a membership group can be deleted or not.
      *
      * @param int $iMembershipId
+     * @param int|null $iDefaultMembershipId Specify another value than the default membership ID set. Optional.
      *
      * @return bool
      */
-    public static function undeletable($iMembershipId)
+    public static function undeletable($iMembershipId, $iDefaultMembershipId = null)
     {
+        if ($iDefaultMembershipId === null) {
+            $iDefaultMembershipId = (int)DbConfig::getSetting('defaultMembershipGroupId');
+        }
+
         $aUndeletableGroups = self::UNDELETABLE_GROUP_IDS;
-        $aUndeletableGroups[] = (int)DbConfig::getSetting('defaultMembershipGroupId');
+        $aUndeletableGroups[] = $iDefaultMembershipId;
         $iMembershipId = (int)$iMembershipId;
 
         return in_array($iMembershipId, $aUndeletableGroups, true);
