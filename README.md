@@ -209,7 +209,7 @@ Coded & Designed with lots of ❤️ by [Pierre-Henry Soria](http://ph7.me). A p
 
 ## Contributing
 
-![I Love Open Source](static/img/logo-lightbg.png)
+![I Love Open Source](static/img/love-open-source-logo.png)
 
 Anyone can contribute on **[pH7CMS GitHub](https://github.com/pH7Software/pH7-Social-Dating-CMS)** repository!
 
