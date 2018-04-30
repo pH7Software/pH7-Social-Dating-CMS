@@ -186,16 +186,17 @@ class Http
      *
      * @param string $sUsr
      * @param string $sPwd
+     * @param string $sMsg
      *
      * @return bool TRUE if the authentication is correct, otherwise FALSE.
      */
-    public static function requireAuth($sUsr, $sPwd)
+    public static function requireAuth($sUsr, $sPwd, $sMsg = 'HTTP Basic Authentication')
     {
         $sAuthUsr = Server::getVar(Server::AUTH_USER);
         $sAuthPwd = Server::getVar(Server::AUTH_PW);
 
         if (!($sAuthUsr === $sUsr && $sAuthPwd === $sPwd)) {
-            header('WWW-Authenticate: Basic realm="HTTP Basic Authentication"');
+            header(sprintf('WWW-Authenticate: Basic realm="%s"', $sMsg));
             static::setHeadersByCode(401);
             echo t('You must enter a valid login ID and password to access this resource.') . "\n";
             exit(false);
