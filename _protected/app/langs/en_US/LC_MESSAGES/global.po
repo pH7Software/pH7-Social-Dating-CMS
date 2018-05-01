@@ -3439,8 +3439,8 @@ msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:77
 msgid ""
-"Are you proud of pH7CMS brand? Are you proud to say your dating app has been "
-"made by the European Leader Dating software?"
+"Are you proud of using pH7CMS brand? Are you proud to say your dating app has been "
+"made by the Leader Dating Software provider?"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:79
