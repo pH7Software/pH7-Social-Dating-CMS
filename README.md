@@ -72,7 +72,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Fake Profile Generator
 * CSV User Importer
 * Support for Multiple Languages, Internationalization and Localization (I18N)
-* American & European for the Time and Date formats
+* European and American Time/Date formats
 * Cache system for the database, pH7Tpl (our template engine), static files (HTML, CSS, JS), string content, ...
 * Maintenance Mode
 * Database Backup
