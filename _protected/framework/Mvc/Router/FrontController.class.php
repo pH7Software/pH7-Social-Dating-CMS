@@ -113,10 +113,11 @@ final class FrontController
     private function launchNonRewritingRouters()
     {
         if (!$this->bIsRouterRewritten) {
-            if ($this->oUri->fragment(0) === 'm')
+            if ($this->oUri->fragment(0) === 'm') {
                 $this->simpleModuleRouter();
-            else
+            } else {
                 $this->simpleRouter();
+            }
         }
     }
 
