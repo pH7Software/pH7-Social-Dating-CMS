@@ -456,7 +456,7 @@ final class FrontController
 
         // Option for Content Type
         if ($this->oHttpRequest->getExists('option')) {
-            if ($this->oHttpRequest->get('option') == 'plain') {
+            if ($this->oHttpRequest->get('option') === 'plain') {
                 header('Content-Type: text/plain; charset=utf-8');
             }
         }
