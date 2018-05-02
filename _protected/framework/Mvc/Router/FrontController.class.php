@@ -124,6 +124,7 @@ final class FrontController
     /**
      *  Router for the modules that are rewriting through the custom XML route file.
      *
+     * @throws PH7Exception
      * @throws \PH7\Framework\File\Exception If the XML route file is not found.
      */
     private function launchRewritingRouter()
@@ -178,6 +179,8 @@ final class FrontController
      * Simple Router.
      *
      * @return void
+     *
+     * @throws PH7Exception
      */
     private function simpleRouter()
     {
@@ -239,6 +242,8 @@ final class FrontController
      * Simple Module Router.
      *
      * @return void
+     *
+     * @throws PH7Exception
      */
     private function simpleModuleRouter()
     {
@@ -323,6 +328,8 @@ final class FrontController
      * Internationalization with Gettext.
      *
      * @return void
+     *
+     * @throws \PH7\Framework\Translate\Exception
      */
     public function _initializeLanguage()
     {
@@ -346,6 +353,8 @@ final class FrontController
 
     /**
      * @return void
+     *
+     * @throws \PH7\Framework\Layout\Exception
      */
     private function initializeTemplate()
     {
@@ -382,6 +391,9 @@ final class FrontController
      * Initialize the resources of the assets folders.
      *
      * @return void
+     *
+     * @throws PH7Exception
+     * @throws \PH7\Framework\Http\Exception
      */
     private function initializeAssets()
     {
@@ -434,6 +446,8 @@ final class FrontController
      * @param string|null $sMod
      *
      * @return void
+     *
+     * @throws PH7Exception
      */
     private function ajaxRouter($sMod = null)
     {
@@ -469,7 +483,7 @@ final class FrontController
     }
 
     /**
-     * @return void
+     * @throws PH7Exception
      */
     private function fileRouter()
     {
@@ -481,7 +495,8 @@ final class FrontController
     }
 
     /**
-     * @return void
+     * @throws PH7Exception
+     * @throws \PH7\Framework\Http\Exception
      */
     private function cronRouter()
     {
@@ -498,7 +513,7 @@ final class FrontController
     }
 
     /**
-     * @return void
+     * @throws PH7Exception
      */
     private function cssRouter()
     {
@@ -511,7 +526,7 @@ final class FrontController
     }
 
     /**
-     * @return void
+     * @throws PH7Exception
      */
     private function jsRouter()
     {
@@ -523,6 +538,9 @@ final class FrontController
         }
     }
 
+    /**
+     * @throws PH7Exception
+     */
     public function runRouter()
     {
         $this->initializePaths();
@@ -696,6 +714,8 @@ final class FrontController
      * @see self::notFound()
      *
      * @return void
+     *
+     * @throws PH7Exception
      */
     private function indexFileRouter()
     {
