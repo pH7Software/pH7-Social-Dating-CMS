@@ -8,10 +8,12 @@
 ## Note: You can remove some lines below if your Apache server already supports one of the parameters below (this will relieve Apache since this file is read on every request). ##
 ## Finally, if your host allows it, you are strongly advised to put these settings in your Apache configuration file (httpd.conf). ##
 
-Options -MultiViews -Indexes
-Options +FollowSymLinks
-
 <IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+    Options +FollowSymLinks
+
     RewriteEngine On
 
     ## Uncomment the below "#RewriteBase /" (remove "#") if pH7CMS is installed in a folder, and add the folder name after the slash "/"
