@@ -549,8 +549,9 @@ final class FrontController
                 } else {
                     $this->notFound('The <b>' . $this->oRegistry->action . '</b> method is not public!', 1);
                 }
-                unset($oMvc); // Destruct the object to minimize CPU resources
+                unset($oMvc); // Destruct object to minimize CPU resources
             } catch (ReflectionException $oExcept) {
+                // If the class or method doesn't exist
                 $this->notFound($oExcept->getMessage());
             }
         } else {
