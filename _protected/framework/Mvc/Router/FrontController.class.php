@@ -32,7 +32,6 @@ use PH7\Framework\Registry\Registry;
 use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Url\Uri;
-use ReflectionClass;
 use ReflectionException;
 use ReflectionMethod;
 
@@ -550,18 +549,14 @@ final class FrontController
 
             $sController = self::PROJECT_NAMESPACE . $this->oRegistry->controller;
             try {
-                if (class_exists($sController) && (new ReflectionClass($sController))->hasMethod($this->oRegistry->action)) {
-                    $oMvc = new ReflectionMethod($sController, $this->oRegistry->action);
-                    if ($oMvc->isPublic()) {
-                        // And finally we perform the controller's action
-                        $oMvc->invokeArgs(new $sController, $this->getRequestParameter());
-                    } else {
-                        $this->notFound('The <b>' . $this->oRegistry->action . '</b> method is not public!', 1);
-                    }
-                    unset($oMvc); // Destruct the object to minimize CPU resources
+                $oMvc = new ReflectionMethod($sController, $this->oRegistry->action);
+                if ($oMvc->isPublic()) {
+                    // And finally we perform the controller's action
+                    $oMvc->invokeArgs(new $sController, $this->getRequestParameter());
                 } else {
-                    $this->notFound('The <b>' . $this->oRegistry->action . '</b> method of the <b>' . $this->oRegistry->controller . '</b> controller does not exist.', 1);
+                    $this->notFound('The <b>' . $this->oRegistry->action . '</b> method is not public!', 1);
                 }
+                unset($oMvc); // Destruct the object to minimize CPU resources
             } catch (ReflectionException $oExcept) {
                 $this->notFound($oExcept->getMessage());
             }
