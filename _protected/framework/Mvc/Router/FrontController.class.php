@@ -535,17 +535,16 @@ final class FrontController
 
         $this->initializeTemplate();
 
-        if (is_file($this->oRegistry->path_module_controllers . $this->oRegistry->controller . '.php')) {
-            // For additional options modules
-            if (is_file($this->oRegistry->path_module . 'Bootstrap.php')) {
-                require_once $this->oRegistry->path_module . 'Bootstrap.php'; // Include Bootstrap Module if there exists
+        if ($this->doesControllerModuleExist()) {
+            if ($this->hasModuleBootstrap()) {
+                require_once $this->oRegistry->path_module . 'Bootstrap.php';
             }
 
             $sController = self::PROJECT_NAMESPACE . $this->oRegistry->controller;
             try {
                 $oMvc = new ReflectionMethod($sController, $this->oRegistry->action);
                 if ($oMvc->isPublic()) {
-                    // And finally we perform the controller's action
+                    // And finally, perform the controller's action
                     $oMvc->invokeArgs(new $sController, $this->getRequestParameter());
                 } else {
                     $this->notFound('The <b>' . $this->oRegistry->action . '</b> method is not public!', 1);
@@ -672,6 +671,22 @@ final class FrontController
     private function clearRequestParameter()
     {
         unset($this->aRequestParameter);
+    }
+
+    /**
+     * @return bool
+     */
+    private function doesControllerModuleExist()
+    {
+        return is_file($this->oRegistry->path_module_controllers . $this->oRegistry->controller . '.php');
+    }
+
+    /**
+     * @return bool
+     */
+    private function hasModuleBootstrap()
+    {
+        return is_file($this->oRegistry->path_module . 'Bootstrap.php');
     }
 
     /**
