@@ -522,13 +522,6 @@ final class FrontController
         }
     }
 
-    /**
-     * Run Router!
-     *
-     * @return void
-     *
-     * @throws ReflectionException If the class or method doesn't exist.
-     */
     public function runRouter()
     {
         $this->initializePaths();
