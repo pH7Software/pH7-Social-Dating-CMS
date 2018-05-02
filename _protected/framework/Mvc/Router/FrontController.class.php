@@ -96,9 +96,9 @@ final class FrontController
         $this->_initializeDatabase();
 
         /**
-         * @internal "_initializeLanguage()" method must be declared before the rest of the code, because it initializes the main language constants for the rest of the code.
+         * @internal self::initializeLanguage() method must be declared before the others, because it initializes the main language constants for the rest of the code.
          */
-        $this->_initializeLanguage();
+        $this->initializeLanguage();
 
         $this->initializeAssets();
 
@@ -331,7 +331,7 @@ final class FrontController
      *
      * @throws \PH7\Framework\Translate\Exception
      */
-    public function _initializeLanguage()
+    private function initializeLanguage()
     {
         if (!defined('PH7_PREF_LANG')) {
             define('PH7_PREF_LANG', DbConfig::getSetting('defaultLanguage'));
