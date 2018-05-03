@@ -554,7 +554,7 @@ final class FrontController
         $this->initializeTemplate();
 
         if ($this->doesControllerModuleExist()) {
-            if ($this->hasModuleBootstrap()) {
+            if ($this->doesModuleHaveBootstrap()) {
                 require_once $this->oRegistry->path_module . 'Bootstrap.php';
             }
 
@@ -702,7 +702,7 @@ final class FrontController
     /**
      * @return bool
      */
-    private function hasModuleBootstrap()
+    private function doesModuleHaveBootstrap()
     {
         return is_file($this->oRegistry->path_module . 'Bootstrap.php');
     }
