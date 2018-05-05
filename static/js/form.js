@@ -33,7 +33,7 @@ $('input[name=all_action]').on('click', function () {
  */
 function checkChecked(bIsConfirmAlert) {
     if (typeof bIsConfirmAlert == "undefined")
-        var bIsConfirmAlert = true; // Default value
+        bIsConfirmAlert = true; // Default value
 
     var iCountChecked = 0;
     $('input[name="action[]"]').each(function () {
@@ -43,8 +43,10 @@ function checkChecked(bIsConfirmAlert) {
     if (iCountChecked == 0) {
         alert(pH7LangCore.select_least_one);
         return false;
-    } else if (bIsConfirmAlert)
+    }
+    if (bIsConfirmAlert) {
         return confirm(pH7LangCore.warning_irreversible_action);
+    }
 
     return true;
 }
