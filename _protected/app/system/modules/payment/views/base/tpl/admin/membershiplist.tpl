@@ -26,3 +26,10 @@
         </tr>
     {/each}
 </table>
+
+<div class="s_tMarg center">
+    <hr />
+    <p>
+        <a class="btn btn-default btn-sm"  href="{{ $design->url('payment', 'admin', 'addmembership') }}">{lang 'Add new Membership'}</a>
+    </p>
+</div>
