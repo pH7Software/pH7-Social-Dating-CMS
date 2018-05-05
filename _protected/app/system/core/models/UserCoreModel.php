@@ -346,7 +346,7 @@ class UserCoreModel extends Model
 
         $sSqlOrder = SearchCoreModel::order($aParams[SearchQueryCore::ORDER], $aParams[SearchQueryCore::SORT]);
 
-        $sSqlMatchSex = $bIsMatchSex ? ' AND matchSex LIKE :matchSex ' : '';
+        $sSqlMatchSex = $bIsMatchSex ? ' AND FIND_IN_SET(:matchSex, matchSex)' : '';
 
         $sSqlSex = '';
         if ($bIsSex) {
@@ -365,7 +365,7 @@ class UserCoreModel extends Model
         $rStmt->bindValue(':pendingGroup', self::PENDING_GROUP, \PDO::PARAM_INT);
 
         if ($bIsMatchSex) {
-            $rStmt->bindValue(':matchSex', '%' . $aParams[SearchQueryCore::MATCH_SEX] . '%', \PDO::PARAM_STR);
+            $rStmt->bindValue(':matchSex', $aParams[SearchQueryCore::MATCH_SEX], \PDO::PARAM_STR);
         }
         if ($bIsFirstName) {
             $rStmt->bindValue(':firstName', '%' . $aParams[SearchQueryCore::FIRST_NAME] . '%', \PDO::PARAM_STR);
