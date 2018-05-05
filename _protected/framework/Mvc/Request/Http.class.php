@@ -289,8 +289,9 @@ class Http extends \PH7\Framework\Http\Http
     {
         $sUri = $this->getUri();
 
-        $sRequestUri = substr($sUri, 0, 1) === PH7_SH ? substr($sUri, 1) : $sUri;
-        $sRelative = substr(PH7_RELATIVE, 0, 1) === PH7_SH ? substr(PH7_RELATIVE, 1) : PH7_RELATIVE;
+        // Remove the relative subfolder path and the first (left) slash
+        $sRequestUri = ltrim($sUri, PH7_SH);
+        $sRelative = ltrim(PH7_RELATIVE, PH7_SH);
 
         return str_replace($sRelative, '', $sRequestUri);
     }
