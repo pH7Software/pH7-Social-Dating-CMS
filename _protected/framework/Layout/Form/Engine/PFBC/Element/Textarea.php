@@ -18,7 +18,7 @@ class Textarea extends \PFBC\Element
 
     public function render()
     {
-        $iLength = (!empty($this->attributes['value'])) ? (new \PH7\Framework\Str\Str)->length($this->attributes['value']) : '0';
+        $iLength = !empty($this->attributes['value']) ? (new \PH7\Framework\Str\Str)->length($this->attributes['value']) : 0;
 
         echo '<textarea onkeyup="textCounter(\'', $this->attributes['id'], '\',\'', $this->attributes['id'], '_rem_len\')"', $this->getAttributes('value'), $this->getHtmlRequiredIfApplicable(), '>';
 
