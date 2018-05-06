@@ -1,7 +1,6 @@
 <?php
 /**
- * We made many changes in this code.
- * By pH7 (Pierre-Henry SORIA).
+ * Changes made by Pierre-Henry Soria.
  */
 
 // JavaScript file is located in the directory ~static/js/str.js which is included in the file ~templates/themes/base/tpl/layout.tpl
