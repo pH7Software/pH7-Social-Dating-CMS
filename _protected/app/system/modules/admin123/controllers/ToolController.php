@@ -26,7 +26,7 @@ class ToolController extends Controller
 {
     const BACKUP_FILE_EXTS = ['.sql', '.gz'];
 
-    /** @var  string */
+    /** @var string */
     private $sTitle;
 
     public function index()

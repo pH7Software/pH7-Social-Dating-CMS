@@ -26,7 +26,7 @@ class MainController extends Controller
     /** @var Page */
     protected $oPage;
 
-    /** @var  string */
+    /** @var string */
     protected $sTitle;
 
     /** @var string */

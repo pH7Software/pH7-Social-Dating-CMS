@@ -28,7 +28,7 @@ class Db
     const DESC = 'DESC';
     const RAND = 'RAND()';
 
-    /** @var  string */
+    /** @var string */
     private static $sDsn;
 
     /** @var string */
