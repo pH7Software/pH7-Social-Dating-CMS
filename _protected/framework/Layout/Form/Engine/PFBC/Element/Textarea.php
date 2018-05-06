@@ -8,7 +8,8 @@ namespace PFBC\Element;
 
 class Textarea extends \PFBC\Element
 {
-    protected $attributes = array('class' => 'pfbc-textarea', 'rows' => '5');
+    /** @var array */
+    protected $attributes = array('class' => 'pfbc-textarea');
 
     public function jQueryDocumentReady()
     {
