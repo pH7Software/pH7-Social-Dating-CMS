@@ -42,6 +42,8 @@ border:hover, border:active {
 }
 
 textarea {
+    width: 100% !important;
+    height: 10rem !important;
     white-space: pre-line !important;
 }
 
