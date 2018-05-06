@@ -40,12 +40,18 @@ class ToolController extends Controller
 
     public function cache()
     {
-        // Adding a CSRF token for the remove ajax cache.
+        // Add a CSRF token for the remove ajax cache request
         $this->view->csrf_token = (new Token)->generate('cache');
 
-        // Adding the common CSS and JS files for the ajax cache and the chart.
-        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'general.css');
-        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'common.js');
+        // Add the common CSS and JS files for the ajax cache and the chart
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
+            'general.css'
+        );
+        $this->design->addJs(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
+            'common.js'
+        );
 
         $this->sTitle = t('Caches Management');
         $this->view->page_title = $this->sTitle;
@@ -72,7 +78,7 @@ class ToolController extends Controller
 
     public function freeSpace()
     {
-        // Adding the common CSS for the chart.
+        // Add the module CSS file for the chart
         $this->design->addCss(
             PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
             'general.css'
@@ -154,7 +160,10 @@ class ToolController extends Controller
                         break;
 
                     default:
-                        $this->design->setFlashMsg(t('Please select a field.'), Design::ERROR_TYPE);
+                        $this->design->setFlashMsg(
+                            t('Please select a field.'),
+                            Design::ERROR_TYPE
+                        );
                 }
             }
         }
@@ -193,7 +202,10 @@ class ToolController extends Controller
                     $this->file->deleteFile(PH7_PATH_BACKUP_SQL . $sDumpFile);
                     $this->design->setFlashMsg(t('Dump file successfully deleted!'));
                 } else {
-                    $this->design->setFlashMsg(t('Please select a dump file.'), Design::ERROR_TYPE);
+                    $this->design->setFlashMsg(
+                        t('Please select a dump file.'),
+                        Design::ERROR_TYPE
+                    );
                 }
             }
         }
