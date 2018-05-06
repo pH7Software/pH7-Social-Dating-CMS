@@ -21,3 +21,8 @@
 table, td, th {
     border: 1px solid gray;
 }
+
+textarea#backup {
+    width: 98% !important;
+    min-height: 30rem !important;
+}

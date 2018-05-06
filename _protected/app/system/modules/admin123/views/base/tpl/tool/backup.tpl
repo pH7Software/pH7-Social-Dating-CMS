@@ -64,7 +64,7 @@
 
             <tr>
                 <td class="border vs_padd">
-                    <textarea cols="100" rows="30">{sql_content}</textarea>
+                    <textarea id="backup">{sql_content}</textarea>
                 </td>
             </tr>
         {/if}

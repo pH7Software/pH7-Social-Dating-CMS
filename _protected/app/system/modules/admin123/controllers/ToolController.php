@@ -109,6 +109,12 @@ class ToolController extends Controller
 
     public function backup()
     {
+        // Add the module CSS file for backup textarea field size
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
+            'general.css'
+        );
+
         $this->view->designSecurity = new HtmlSecurity; // Security Design Class
 
         $this->sTitle = t('Backup Management');
