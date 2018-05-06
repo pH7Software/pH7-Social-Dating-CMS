@@ -11,11 +11,6 @@ class Textarea extends \PFBC\Element
     /** @var array */
     protected $attributes = array('class' => 'pfbc-textarea');
 
-    public function jQueryDocumentReady()
-    {
-        echo 'jQuery("#', $this->attributes['id'], '").outerWidth(jQuery("#', $this->attributes['id'], '").width());';
-    }
-
     public function render()
     {
         $iLength = !empty($this->attributes['value']) ? (new \PH7\Framework\Str\Str)->length($this->attributes['value']) : 0;
