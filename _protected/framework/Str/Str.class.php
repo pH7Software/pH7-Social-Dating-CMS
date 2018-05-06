@@ -125,7 +125,7 @@ namespace PH7\Framework\Str {
          * @param string $sText1
          * @param string $sText2
          *
-         * @return boolean
+         * @return bool
          */
         public function equals($sText1, $sText2)
         {
@@ -139,7 +139,7 @@ namespace PH7\Framework\Str {
          * @param string $sText1
          * @param string $sText2
          *
-         * @return boolean
+         * @return bool
          */
         public function equalsIgnoreCase($sText1, $sText2)
         {
@@ -154,9 +154,9 @@ namespace PH7\Framework\Str {
          *
          * @param string $sText The string to search in.
          * @param string $sFindText Value to search.
-         * @param integer $iOffset Default: 0
+         * @param int $iOffset Default: 0
          *
-         * @return integer The position of the first occurrence or -1 if the value to search is not found.
+         * @return int The position of the first occurrence or -1 if the value to search is not found.
          */
         public function indexOf($sText, $sFindText, $iOffset = 0)
         {
@@ -174,9 +174,9 @@ namespace PH7\Framework\Str {
          *
          * @param string $sText The string to search in.
          * @param string $sFindText Value to search.
-         * @param integer $iOffset Default: 0
+         * @param int $iOffset Default: 0
          *
-         * @return integer The position of the last occurrence or -1 if the value to search is not found.
+         * @return int The position of the last occurrence or -1 if the value to search is not found.
          */
         public function lastIndexOf($sText, $sFindText, $iOffset = 0)
         {
@@ -206,8 +206,8 @@ namespace PH7\Framework\Str {
          * Cut a piece of string to make an extract (an ellipsis).
          *
          * @param string $sText
-         * @param integer $iStart Default: 0
-         * @param integer $iLength Default: 150
+         * @param int $iStart Default: 0
+         * @param int $iLength Default: 150
          * @param string $sTrimMarker Default: '...'
          *
          * @return string
@@ -274,7 +274,7 @@ namespace PH7\Framework\Str {
          *
          * @param string $sValue
          *
-         * @return boolean
+         * @return bool
          */
         public static function noSpaces($sValue)
         {
@@ -285,7 +285,7 @@ namespace PH7\Framework\Str {
          * Escape function, uses the PHP native htmlspecialchars but improved.
          *
          * @param array|string $mText
-         * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities. Less secure. Default: FALSE
+         * @param bool $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities. Less secure. Default: FALSE
          *
          * @return array|string The escaped string.
          */
@@ -298,7 +298,7 @@ namespace PH7\Framework\Str {
          * Escape an array of any dimension.
          *
          * @param array $aData
-         * @param boolean $bStrip
+         * @param bool $bStrip
          *
          * @return array The array escaped.
          */
@@ -313,7 +313,7 @@ namespace PH7\Framework\Str {
 
         /**
          * @param string $sText
-         * @param boolean $bStrip
+         * @param bool $bStrip
          *
          * @return string The text parsed with Str::stripTags() method if $bStrip parameter is TRUE, otherwise with Str::htmlSpecialChars method.
          */
