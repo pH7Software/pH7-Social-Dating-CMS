@@ -84,7 +84,7 @@ namespace PH7\Framework\Str {
          *
          * @param string $sText
          *
-         * @return string
+         * @return int
          */
         public function length($sText)
         {
