@@ -27,7 +27,7 @@ class ReportForm
             HeaderUrl::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_report', '310px');
+        $oForm = new \PFBC\Form('form_report');
         $oForm->configure(['action' => $oHttpRequest->currentUrl()]);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_report', 'form_report'));
         $oForm->addElement(new \PFBC\Element\Token('report'));
