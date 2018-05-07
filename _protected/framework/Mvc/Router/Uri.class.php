@@ -21,11 +21,11 @@ use PH7\Framework\Pattern\Statik;
 
 class Uri
 {
-    const CACHE_GROUP = 'str/uri/' . PH7_LANG_CODE;
-    const CACHE_TIME = 86400; // 24h
-
     // Set to FALSE if you got too many files (e.g. if inode files usage is overaged on shared hosting)
     const URI_CACHE_ENABLED = true;
+
+    const CACHE_GROUP = 'str/uri/' . PH7_LANG_CODE;
+    const CACHE_TIME = 86400; // 24h
 
     const ROUTE_FILE_EXT = '.xml';
 
