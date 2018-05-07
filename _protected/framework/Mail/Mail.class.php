@@ -45,8 +45,8 @@ class Mail
         $oMailer = \Swift_Mailer::newInstance($oTransport);
         $oMessage = \Swift_Message::newInstance()
             ->setSubject(escape($sSubject, true))
-            ->setFrom(array(escape($sFromMail, true) => escape($sFromName, true)))
-            ->setTo(array(escape($sToMail, true) => escape($sToName, true)));
+            ->setFrom([escape($sFromMail, true) => escape($sFromName, true)])
+            ->setTo([escape($sToMail, true) => escape($sToName, true)]);
 
         if ($bHtmlFormat) {
             $oMessage->addPart($sContents, self::HTML_CONTENT_TYPE);
