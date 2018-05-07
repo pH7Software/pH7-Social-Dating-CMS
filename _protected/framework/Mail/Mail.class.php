@@ -47,7 +47,12 @@ class Mail
             ->setSubject(escape($sSubject, true))
             ->setFrom(array(escape($sFromMail, true) => escape($sFromName, true)))
             ->setTo(array(escape($sToMail, true) => escape($sToName, true)));
-        ($bHtmlFormat) ? $oMessage->addPart($sContents, self::HTML_CONTENT_TYPE) : $oMessage->setBody($sContents);
+
+        if ($bHtmlFormat) {
+            $oMessage->addPart($sContents, self::HTML_CONTENT_TYPE);
+        } else {
+            $oMessage->setBody($sContents);
+        }
 
         $iResult = $oMailer->send($oMessage);
 
