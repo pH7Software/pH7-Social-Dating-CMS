@@ -42,7 +42,7 @@ abstract class Entity
     }
 
     /**
-     * Check if the $_iId attribute is not empty, otherwise we set the last insert ID.
+     * Check if the self::$iId attribute is not empty, otherwise we set the last insert ID.
      *
      * @see Db::lastInsertId()
      *
