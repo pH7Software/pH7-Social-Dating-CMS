@@ -14,9 +14,7 @@ defined('PH7') or exit('Restricted access');
 
 abstract class Entity
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     private $iId;
 
     /**
