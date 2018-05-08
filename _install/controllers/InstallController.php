@@ -299,9 +299,9 @@ class InstallController extends Controller
                                                         require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
 
                                                         // SQL EXECUTE
-                                                        $rStmt = $DB->prepare('INSERT INTO ' . $_SESSION['db']['prefix'] . DbTableName::ADMIN .
-                                                        '(profileId , username, password, email, firstName, lastName, joinDate, lastActivity, ip)
-                                                        VALUES (1, :username, :password, :email, :firstName, :lastName, :joinDate, :lastActivity, :ip)');
+                                                        $sSql = 'INSERT INTO %s (profileId , username, password, email, firstName, lastName, joinDate, lastActivity, ip)
+                                                            VALUES (1, :username, :password, :email, :firstName, :lastName, :joinDate, :lastActivity, :ip)';
+                                                        $rStmt = $DB->prepare(sprintf($sSql, $_SESSION['db']['prefix'] . DbTableName::ADMIN));
 
                                                         $sCurrentDate = date('Y-m-d H:i:s');
                                                         $rStmt->execute([
@@ -429,9 +429,9 @@ class InstallController extends Controller
                             $this->updateSettings($aSettingUpdate);
 
                             // Set the theme for the chosen niche
-                            $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . DbTableName::SETTING . ' SET settingValue = :theme WHERE settingName = \'defaultTemplate\' LIMIT 1';
-                            $rStmt = $DB->prepare($sSql);
-                            $rStmt->execute(['theme' => $sTheme]);
+                            $sSql = 'UPDATE %s SET settingValue = :theme WHERE settingName = :setting LIMIT 1';
+                            $rStmt = $DB->prepare(sprintf($sSql, $_SESSION['db']['prefix'] . DbTableName::SETTING));
+                            $rStmt->execute(['theme' => $sTheme, 'setting' => 'defaultTemplate']);
                         } catch (\PDOException $oE) {
                             $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                         }
@@ -528,8 +528,8 @@ class InstallController extends Controller
      */
     private function updateMods(Db $oDb, $sModName, $sStatus)
     {
-        $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . DbTableName::SYS_MOD_ENABLED . ' SET enabled = :status WHERE folderName = :modName LIMIT 1';
-        $rStmt = $oDb->prepare($sSql);
+        $sSql = 'UPDATE %s SET enabled = :status WHERE folderName = :modName LIMIT 1';
+        $rStmt = $oDb->prepare(sprintf($sSql, $_SESSION['db']['prefix'] . DbTableName::SYS_MOD_ENABLED));
         return $rStmt->execute(['modName' => $sModName, 'status' => $sStatus]);
     }
 
