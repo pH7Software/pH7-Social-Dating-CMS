@@ -28,7 +28,7 @@
 
     <p>
         <a href="{{ $design->url('xml','rss','xmlrouter','forum-topic') }}">
-            <img src="{url_static_img}icon/feed.png" alt="RSS Feed" />
+            <img src="{url_static_img}icon/feed.svg" alt="RSS Feed" />
         </a>
     </p>
 </div>

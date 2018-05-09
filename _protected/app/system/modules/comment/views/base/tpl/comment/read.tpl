@@ -36,7 +36,7 @@
         <p class="s_tMarg bold italic">
             <a href="{{ $design->url('comment','comment','add',"$table,$com->recipient") }}">{lang 'Add a comment'}</a> &nbsp;
             <a href="{{ $design->url('xml','rss','xmlrouter',"comment-$table,$com->recipient") }}">
-                <img src="{url_static_img}icon/feed.png" alt="{lang 'RSS Feed'}" />
+                <img src="{url_static_img}icon/feed.svg" alt="{lang 'RSS Feed'}" />
             </a>
         </p>
 

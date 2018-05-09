@@ -5,7 +5,7 @@
         <ul>
             {each $key => $value in $urls}
                 <li>
-                    <img src="{url_static_img}icon/feed.png" alt="RSS Feed" />&nbsp;
+                    <img src="{url_static_img}icon/feed.svg" alt="RSS Feed" />&nbsp;
                     <span class="underline"><a href="{key}">{value}</a></span>
                 </li>
             {/each}
