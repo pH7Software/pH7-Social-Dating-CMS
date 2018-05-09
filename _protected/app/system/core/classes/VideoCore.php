@@ -15,6 +15,7 @@ use PH7\Framework\File\File;
 
 class VideoCore
 {
+    const DEFAULT_THUMBNAIL_EXT = '.jpg';
     const REGEX_API_URL_FORMAT = '#(^https?://(www\.)?.+\.[a-z]{2,8})#i';
 
     /**
@@ -38,8 +39,13 @@ class VideoCore
      *
      * @return void
      */
-    public function deleteVideo($iAlbumId, $sUsername, $sVideoLink, $sVideoExt = '.webm,.mp4', $sThumbExt = '.jpg')
-    {
+    public function deleteVideo(
+        $iAlbumId,
+        $sUsername,
+        $sVideoLink,
+        $sVideoExt = '.webm,.mp4',
+        $sThumbExt = self::DEFAULT_THUMBNAIL_EXT
+    ) {
         $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $sUsername . PH7_DS . $iAlbumId . PH7_DS;
 
         $oFile = new File;
