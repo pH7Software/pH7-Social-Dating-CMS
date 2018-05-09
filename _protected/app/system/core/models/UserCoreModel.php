@@ -371,7 +371,7 @@ class UserCoreModel extends Model
             $rStmt->bindValue(':firstName', '%' . $aParams[SearchQueryCore::FIRST_NAME] . '%', \PDO::PARAM_STR);
         }
         if ($bIsMiddleName) {
-            $rStmt->bindValue(':middleName', '%' . $aParams[SearchQueryCore::MIDDLE_NAME]. '%', \PDO::PARAM_STR);
+            $rStmt->bindValue(':middleName', '%' . $aParams[SearchQueryCore::MIDDLE_NAME] . '%', \PDO::PARAM_STR);
         }
         if ($bIsLastName) {
             $rStmt->bindValue(':lastName', '%' . $aParams[SearchQueryCore::LAST_NAME] . '%', \PDO::PARAM_STR);
