@@ -15,18 +15,13 @@ namespace PH7\Framework\Core;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\AdminCore;
 use PH7\Framework\Config\Config;
 use PH7\Framework\File\File;
-use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Request\Http;
-use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Browser;
-use PH7\Framework\Page\Page;
 use PH7\Framework\Registry\Registry;
 use PH7\Framework\Security\Version;
 use PH7\Framework\Str\Str;
-use PH7\Framework\Url\Header;
 
 abstract class Kernel
 {
