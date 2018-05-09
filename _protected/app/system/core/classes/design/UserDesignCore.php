@@ -13,7 +13,7 @@ use PH7\Framework\Layout\Html\Design;
 class UserDesignCore extends Design
 {
     const NONE_IMG_FILENAME = 'none.svg';
-    const PENDING_IMG_FILENAME = 'pending.jpg';
+    const PENDING_IMG_FILENAME = 'pending.svg';
 
     /**
      * Ajax counter endpoint to count the number of users registered on the site.
