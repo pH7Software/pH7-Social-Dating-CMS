@@ -12,7 +12,7 @@ use PH7\Framework\Layout\Html\Design;
 
 class UserDesignCore extends Design
 {
-    const NONE_IMG_FILENAME = 'none.jpg';
+    const NONE_IMG_FILENAME = 'none.svg';
     const PENDING_IMG_FILENAME = 'pending.jpg';
 
     /**
