@@ -3,11 +3,10 @@
  * @title          Mail Check File
  * @desc           This file allows suggests a right domain when your users misspell it in an email address.
  *
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Asset / Js
- * @version        1.0
  */
 
 namespace PH7;
