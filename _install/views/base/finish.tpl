@@ -17,7 +17,7 @@
     <span class="small"><a href="{$paypal_donate_url}" target="_blank" rel="noopener noreferrer">{$LANG.or_paypal_donation}</a></span>
 </p>
 
-<p>&nbsp;</p>
+<hr />
 
 <form action="{$smarty.const.PH7_URL_SLUG_INSTALL}finish" method="post">
     <p>

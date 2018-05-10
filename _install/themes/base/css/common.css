@@ -185,11 +185,18 @@ footer {
 }
 
 .img_thumb > img {
-    max-width: 100%;
     margin-right: auto;
     margin-left: auto;
 }
 
 .img_thumb, .img_thumb > img {
     border-radius: 4px;
+}
+
+img, video, iframe {
+    max-width: 100%;
+}
+
+hr {
+    border-top: 1px solid #c8c8c8;
 }
