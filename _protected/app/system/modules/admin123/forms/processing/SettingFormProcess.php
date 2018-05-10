@@ -19,7 +19,7 @@ class SettingFormProcess extends Form
 {
     const LOGO_FILENAME = 'logo.png';
     const MIN_CSRF_TOKEN_LIFETIME = 10;
-    const LOGO_WIDTH = 50;
+    const LOGO_WIDTH = 47;
     const LOGO_HEIGHT = 45;
     const MAX_WATERMARK_SIZE = 5;
     const DEFAULT_BROWSER_HEX_CODE = '#000000';
