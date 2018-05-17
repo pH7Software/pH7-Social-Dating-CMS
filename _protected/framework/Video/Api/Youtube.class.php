@@ -17,7 +17,7 @@ defined('PH7') or exit('Restricted access');
 
 class Youtube extends Api implements IApi
 {
-    const API_URL = 'https://www.googleapis.com/youtube/v3/videos?id=';
+    const API_URL = 'https://www.googleapis.com/youtube/v3/videos?id=%s&key=%s&part=snippet,contentDetails,statistics,status';
     const PLAYER_URL = 'https://youtube.com/v/';
     const THUMBNAIL_URL = 'https://i%d.ytimg.com/vi/%s.jpg';
     const REGEX_TIME_FORMAT = '/[0-9]+[HMS]/';
@@ -45,7 +45,7 @@ class Youtube extends Api implements IApi
      */
     public function getInfo($sUrl)
     {
-        $sDataUrl = static::API_URL . $this->getVideoId($sUrl) . '&key=' . $this->sApiKey . '&part=snippet,contentDetails,statistics,status';
+        $sDataUrl = sprintf(static::API_URL, $this->getVideoId($sUrl), $this->sApiKey);
 
         if ($oData = $this->getData($sDataUrl)) {
             // Use Youtube's API to get the Youtube video's data only if the API key has been set, otherwise it won't work
