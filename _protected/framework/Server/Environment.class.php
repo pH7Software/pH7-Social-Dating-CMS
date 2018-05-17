@@ -27,7 +27,7 @@ class Environment
      */
     public static function getFileName($sEnvName)
     {
-        $sFileName = in_array($sEnvName, self::MODES, true) ? $sEnvName : self::MODES[0];
+        $sFileName = in_array($sEnvName, self::MODES, true) ? $sEnvName : self::PRODUCTION_MODE;
 
         return $sFileName . '.env';
     }
