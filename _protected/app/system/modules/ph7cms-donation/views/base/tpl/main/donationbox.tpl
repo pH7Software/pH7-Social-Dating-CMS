@@ -18,4 +18,9 @@
         <span class="bold">{lang}And make your website better with regular updates.{/lang}</span><br />
         <span class="underline">{lang}Be like 78% of our users who contribute to the software on a regular basis.{/lang}</span>
     </p>
+
+    <figure class="center">
+        <img src="{url_tpl_mod_img}eye.svg" alt="Staring Eyes" />
+        <figcaption><em>We believe in you :-)</em></figcaption>
+    </figure>
 </div>
