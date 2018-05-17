@@ -15,6 +15,7 @@ namespace PH7\Framework\Error {
 
     use Exception;
     use PH7\Framework\Config\Config;
+    use PH7\Framework\Server\Environment;
 
     final class Debug
     {
@@ -54,7 +55,7 @@ namespace PH7\Framework\Error {
          */
         public static function is()
         {
-            return Config::getInstance()->values['mode']['environment'] === 'development';
+            return Config::getInstance()->values['mode']['environment'] === Environment::DEVELOPMENT_MODE;
         }
 
         /**
