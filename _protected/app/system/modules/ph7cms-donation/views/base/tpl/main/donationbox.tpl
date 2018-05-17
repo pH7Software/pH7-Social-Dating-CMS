@@ -4,7 +4,7 @@
 
         <form action="{form_action}" method="post">
             {form_body}
-            <input type="image" name="submit" src="{url_tpl_mod_img}paypal_donate.en.png" alt="Donate" />
+            <input type="image" name="submit" src="{url_tpl_mod_img}paypal-donate.en.png" alt="Donate" />
         </form>
 
         <p>{lang '-OR-'}</p>
