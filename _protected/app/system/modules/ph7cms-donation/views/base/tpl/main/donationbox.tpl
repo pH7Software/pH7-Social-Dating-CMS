@@ -9,7 +9,7 @@
 
         <p>{lang '-OR-'}</p>
 
-        <p class="s_bMarg">
+        <p class="s_bMarg bold">
             <a href="{% $config->values['module.setting']['patreon.link'] %}">{lang 'Become a Patron!'}</a>
         </p>
     </div>
