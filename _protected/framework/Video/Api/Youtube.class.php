@@ -19,6 +19,7 @@ class Youtube extends Api implements IApi
 {
     const API_URL = 'https://www.googleapis.com/youtube/v3/videos?id=';
     const PLAYER_URL = 'https://youtube.com/v/';
+    const THUMBNAIL_URL = 'https://i%d.ytimg.com/vi/%s.jpg';
     const REGEX_TIME_FORMAT = '/[0-9]+[HMS]/';
     const API_KEY_MIN_LENGTH = 10;
 
@@ -89,7 +90,7 @@ class Youtube extends Api implements IApi
             $aThumb = ['default', 1, 2, 3];
             shuffle($aThumb);
 
-            return 'https://i' . mt_rand(1, 4) . '.ytimg.com/vi/' . $this->getVideoId($sUrl) . PH7_SH . $aThumb[0] . '.jpg';
+            return sprintf(self::THUMBNAIL_URL, mt_rand(1, 4), $this->getVideoId($sUrl) . PH7_SH . $aThumb[0]);
         }
 
         $sParam = $this->bAutoplay ? '?autoplay=1&amp;' : '?';
