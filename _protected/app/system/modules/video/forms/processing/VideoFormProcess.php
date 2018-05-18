@@ -127,7 +127,8 @@ class VideoFormProcess extends Form
                     self::THUMBNAIL_VIDEO_WIDTH,
                     self::THUMBNAIL_VIDEO_HEIGHT
                 );
-                $oVideo->thumbnail($sPath . $sThumb3,
+                $oVideo->thumbnail(
+                    $sPath . $sThumb3,
                     6,
                     self::THUMBNAIL_VIDEO_WIDTH,
                     self::THUMBNAIL_VIDEO_HEIGHT
