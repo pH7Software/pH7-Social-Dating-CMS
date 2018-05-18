@@ -117,24 +117,24 @@ class VideoFormProcess extends Form
                 );
                 $oVideo->thumbnail(
                     $sPath . $sThumb1,
-                    4,
+                    3,
                     self::THUMBNAIL_VIDEO_WIDTH,
                     self::THUMBNAIL_VIDEO_HEIGHT
                 );
                 $oVideo->thumbnail(
                     $sPath . $sThumb2,
-                    6,
+                    4,
                     self::THUMBNAIL_VIDEO_WIDTH,
                     self::THUMBNAIL_VIDEO_HEIGHT
                 );
                 $oVideo->thumbnail($sPath . $sThumb3,
-                    8,
+                    6,
                     self::THUMBNAIL_VIDEO_WIDTH,
                     self::THUMBNAIL_VIDEO_HEIGHT
                 );
                 $oVideo->thumbnail(
                     $sPath . $sThumb4,
-                    10,
+                    8,
                     self::THUMBNAIL_VIDEO_WIDTH,
                     self::THUMBNAIL_VIDEO_HEIGHT
                 );
