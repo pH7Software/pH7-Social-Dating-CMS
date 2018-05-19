@@ -16,6 +16,6 @@ class Numeric extends \PFBC\Validation
 
     public function isValid($sValue)
     {
-        return ($this->isNotApplicable($sValue) || $this->oValidate->numeric($sValue));
+        return $this->isNotApplicable($sValue) || $this->oValidate->numeric($sValue);
     }
 }

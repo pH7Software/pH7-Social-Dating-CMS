@@ -16,6 +16,6 @@ class Name extends \PFBC\Validation
 
     public function isValid($sValue)
     {
-        return ($this->isNotApplicable($sValue) || $this->oValidate->name($sValue));
+        return $this->isNotApplicable($sValue) || $this->oValidate->name($sValue);
     }
 }

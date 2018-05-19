@@ -16,6 +16,6 @@ class Email extends \PFBC\Validation
 
     public function isValid($sValue)
     {
-        return ($this->isNotApplicable($sValue) || $this->oValidate->email($sValue));
+        return $this->isNotApplicable($sValue) || $this->oValidate->email($sValue);
     }
 }

@@ -16,6 +16,6 @@ class Url extends \PFBC\Validation
 
     public function isValid($sValue)
     {
-        return ($this->isNotApplicable($sValue) || $this->oValidate->url($sValue));
+        return $this->isNotApplicable($sValue) || $this->oValidate->url($sValue);
     }
 }
