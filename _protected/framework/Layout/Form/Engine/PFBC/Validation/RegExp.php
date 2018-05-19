@@ -24,8 +24,10 @@ class RegExp extends \PFBC\Validation
 
     public function isValid($sValue)
     {
-        if ($this->isNotApplicable($sValue) || preg_match('#^' . $this->pattern . '$#', $sValue))
+        if ($this->isNotApplicable($sValue) || preg_match('#^' . $this->pattern . '$#', $sValue)) {
             return true;
+        }
+
         return false;
     }
 }
