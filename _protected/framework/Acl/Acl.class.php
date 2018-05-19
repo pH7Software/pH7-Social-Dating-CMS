@@ -65,7 +65,7 @@ class Acl
      */
     public function isAllowed(Role $oRole, AclResource $oResource)
     {
-        return in_array($oRole->sName, $oResource->aAllowed);
+        return in_array($oRole->sName, $oResource->aAllowed, true);
     }
 
 
