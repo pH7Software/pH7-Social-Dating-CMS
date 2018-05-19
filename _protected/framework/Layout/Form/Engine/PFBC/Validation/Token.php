@@ -23,7 +23,7 @@ class Token extends \PFBC\Validation
     }
 
     /**
-     * @return boolean Returns TRUE if the token is validated, FALSE otherwise.
+     * @return bool Returns TRUE if the token is validated, FALSE otherwise.
      */
     public function isValid($sValue)
     {
