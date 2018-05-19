@@ -22,6 +22,7 @@ class Compress
     const COMPRESSION_LEVEL = 6;
     const COMPRESSION_BYTE_BUFFER_SIZE = 2048;
     const GOOGLE_CLOSURE_HOST = 'closure-compiler.appspot.com';
+    const GOOGLE_CLOSURE_PARAMS = 'js_code=%s&compilation_level=SIMPLE_OPTIMIZATIONS&output_format=text&output_info=compiled_code';
     const GOOGLE_CLOSURE_PORT = 80;
 
     const MAX_LIMIT_SIZE_GOOGLE_CLOSURE = 200000; // 200KB
@@ -170,7 +171,7 @@ class Compress
                 // Working vars
                 $sJsMinified = '';
                 $sServiceUri = '/compile';
-                $sVars = 'js_code=' . $sContentEncoded . '&compilation_level=SIMPLE_OPTIMIZATIONS&output_format=text&output_info=compiled_code';
+                $sVars = sprintf(self::GOOGLE_CLOSURE_PARAMS, $sContentEncoded);
 
                 // Compose HTTP request header
                 $sHeader = 'Host: ' . self::GOOGLE_CLOSURE_HOST . "\r\n";
