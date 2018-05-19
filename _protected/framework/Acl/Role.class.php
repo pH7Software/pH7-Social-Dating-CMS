@@ -30,7 +30,9 @@ class Role
                 return $this->sName;
 
             default:
-                throw new Exception("Unable to get \"$sName\".");
+                throw new Exception(
+                    sprintf('Unable to get "%s"', $sName)
+                );
         }
     }
 
@@ -50,7 +52,9 @@ class Role
                 break;
 
             default:
-                throw new Exception("Unable to set \"$sName\".");
+                throw new Exception(
+                    sprintf('Unable to set "%s"', $sName)
+                );
         }
     }
 
