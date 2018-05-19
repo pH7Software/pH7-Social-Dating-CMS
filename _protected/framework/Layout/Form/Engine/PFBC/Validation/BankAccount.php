@@ -12,12 +12,10 @@ use PH7\Framework\Security\Ban\Ban;
 
 class BankAccount extends \PFBC\Validation
 {
-
+    /** @var string */
     protected $sTable;
 
     /**
-     * Constructor of class.
-     *
      * @param string $sTable
      */
     public function __construct($sTable = DbTableName::AFFILIATE)

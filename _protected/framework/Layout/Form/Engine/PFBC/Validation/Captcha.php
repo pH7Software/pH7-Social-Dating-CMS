@@ -7,15 +7,16 @@ namespace PFBC\Validation;
 
 class Captcha extends \PFBC\Validation
 {
-    protected $message;
+    /** @var string */
     protected $privateKey;
 
     public function __construct($privateKey, $message = '')
     {
         $this->privateKey = $privateKey;
 
-        if (!empty($message))
+        if (!empty($message)) {
             $this->message = t('The code of Captcha entered was incorrect. Please re-try.');
+        }
     }
 
     public function isValid($value)

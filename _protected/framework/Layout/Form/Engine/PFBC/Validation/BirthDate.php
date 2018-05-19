@@ -10,7 +10,11 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class BirthDate extends \PFBC\Validation
 {
-    protected $iMin, $iMax;
+    /** @var int */
+    protected $iMin;
+
+    /** @var int */
+    protected $iMax;
 
     public function __construct()
     {
@@ -22,7 +26,7 @@ class BirthDate extends \PFBC\Validation
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isValid($sValue)
     {
