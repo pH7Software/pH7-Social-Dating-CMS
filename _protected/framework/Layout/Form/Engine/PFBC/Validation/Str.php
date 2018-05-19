@@ -20,8 +20,8 @@ class Str extends \PFBC\Validation
     protected $iMax;
 
     /**
-     * @param integer $iMin Default NULL
-     * @param integer $iMax Default NULL
+     * @param int|null $iMin
+     * @param int|null $iMax
      */
     public function __construct($iMin = null, $iMax = null)
     {

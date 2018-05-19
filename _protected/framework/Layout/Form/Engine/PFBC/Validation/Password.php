@@ -10,7 +10,11 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class Password extends \PFBC\Validation
 {
-    protected $iMin, $iMax;
+    /** @var int */
+    protected $iMin;
+
+    /** @var int */
+    protected $iMax;
 
     public function __construct()
     {

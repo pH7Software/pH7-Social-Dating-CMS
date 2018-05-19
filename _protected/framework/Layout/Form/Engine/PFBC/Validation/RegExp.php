@@ -8,8 +8,13 @@ namespace PFBC\Validation;
 
 class RegExp extends \PFBC\Validation
 {
+    /** @var string */
     protected $pattern;
 
+    /**
+     * @param string $sPattern
+     * @param string $sMsg
+     */
     public function __construct($sPattern, $sMsg = '')
     {
         $this->pattern = $sPattern;
