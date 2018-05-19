@@ -179,8 +179,8 @@ class Compress
                 $sHeader .= 'Content-Length: ' . strlen($sVars) . "\r\n";
                 $sHeader .= "Connection: close\r\n\r\n";
 
-                fputs($rSocket, "POST $sServiceUri  HTTP/1.0\r\n");
-                fputs($rSocket, $sHeader . $sVars);
+                fwrite($rSocket, "POST $sServiceUri  HTTP/1.0\r\n");
+                fwrite($rSocket, $sHeader . $sVars);
                 while (!feof($rSocket)) {
                     $sJsMinified .= fgets($rSocket);
                 }
