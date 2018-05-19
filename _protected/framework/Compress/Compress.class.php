@@ -22,6 +22,7 @@ class Compress
     const COMPRESSION_LEVEL = 6;
     const COMPRESSION_BYTE_BUFFER_SIZE = 2048;
     const GOOGLE_CLOSURE_HOST = 'closure-compiler.appspot.com';
+    const GOOGLE_CLOSURE_PORT = 80;
 
     const MAX_LIMIT_SIZE_GOOGLE_CLOSURE = 200000; // 200KB
 
@@ -232,7 +233,7 @@ class Compress
         if ($this->bIsGoogleClosure && strlen($sContentEncoded) < static::MAX_LIMIT_SIZE_GOOGLE_CLOSURE &&
             preg_match('/[^a-z]eval\(/ism', $sContent) == 0
         ) {
-            return @pfsockopen(self::GOOGLE_CLOSURE_HOST, 80);
+            return @pfsockopen(self::GOOGLE_CLOSURE_HOST, self::GOOGLE_CLOSURE_PORT);
         }
 
         return false;
