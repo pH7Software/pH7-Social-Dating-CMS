@@ -35,7 +35,7 @@ class DisableModuleFormProcess extends Form
         \PFBC\Form::setSuccess('form_module', t('Module Status saved!'));
     }
 
-    protected function disableMods(ModuleModel $oModuleModel)
+    private function disableMods(ModuleModel $oModuleModel)
     {
         foreach ($oModuleModel->get() as $oMod) {
             // Need to be string because in DB it's an "enum" type
