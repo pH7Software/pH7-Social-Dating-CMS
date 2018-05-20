@@ -81,7 +81,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Multilingual URLs
 * Check that all UGC (User-Generated Content) are Unique (to avoid spam and malicious users)
 * RSS Feed
-* Block easily any IPs, emails, username, affiliated bank accounts, etc.
+* Block easily any IPs, emails, usernames, affiliated bank accounts, etc.
 * Country Blocker (block easily any countries where you don't want your website to be accessible)
 * Fully API for integration from an external app (iOS/Android, ...), website, program, ...
 * Feedback
