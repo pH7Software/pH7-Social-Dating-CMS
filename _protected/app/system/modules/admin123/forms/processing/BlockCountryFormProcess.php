@@ -15,24 +15,49 @@ use PH7\Framework\Mvc\Model\BlockCountry as BlockCountryModel;
 
 class BlockCountryFormProcess extends Form
 {
+    const COUNTRY_CODE_LENGTH = 2;
+
     public function __construct()
     {
         parent::__construct();
 
         $oBlockCountryModel = new BlockCountryModel;
 
-        // First of all, clear everything
+        // First, clear everything
         $oBlockCountryModel->clear();
 
         // Then, reindex the table
         foreach ($this->httpRequest->post('countries') as $sCountry) {
-            $oBlockCountryModel->add($sCountry);
+            if ($this->isEligibleToAdd($sCountry)) {
+                $oBlockCountryModel->add($sCountry);
+            }
         }
         unset($oBlockCountryModel);
 
         $this->clearCache();
 
         \PFBC\Form::setSuccess('form_country_blocklist', t('Successfully saved!'));
+    }
+
+    /**
+     * @param string $sCountryCode
+     *
+     * @return bool
+     */
+    private function isEligibleToAdd($sCountryCode)
+    {
+        return !empty(trim($sCountryCode)) && strlen($sCountryCode) === self::COUNTRY_CODE_LENGTH &&
+            $this->isCountryCodeUppercase($sCountryCode);
+    }
+
+    /**
+     * @param string $sCountryCode
+     *
+     * @return bool
+     */
+    private function isCountryCodeUppercase($sCountryCode)
+    {
+        return strtoupper($sCountryCode) === $sCountryCode;
     }
 
     private function clearCache()
