@@ -107,6 +107,14 @@ class ToolController extends Controller
         $this->output();
     }
 
+    public function blockCountry()
+    {
+        $this->view->page_title = t('Country Blacklist');
+        $this->view->h1_title = t('Block Countries');
+
+        $this->output();
+    }
+
     public function backup()
     {
         // Add the module CSS file for backup textarea field size
