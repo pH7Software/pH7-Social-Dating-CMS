@@ -16,7 +16,7 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 class Module extends Engine\Model
 {
     const CACHE_GROUP = 'db/sys/core/enabled_modules';
-    const CACHE_TIME = 172800;
+    const CACHE_TIME = 172800; // 2 days
 
     /**
      * Get all modules status (enabled & disabled).
