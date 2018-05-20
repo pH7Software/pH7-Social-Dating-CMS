@@ -1130,7 +1130,7 @@ ALTER SEQUENCE ph7_modules_seq RESTART WITH 1;
 
 INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of the SQL schema of pH7CMS (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.4.3', 1);
+('pH7CMS', 'SQL System Schema', '1.4.4', 1);
 
 
 CREATE SEQUENCE ph7_report_seq;
@@ -1346,3 +1346,15 @@ ALTER SEQUENCE ph7_custom_code_seq RESTART WITH 1;
 INSERT INTO ph7_custom_code VALUES
 ('/* Your custom CSS code here */rn', 'css'),
 ('/* Your custom JS code here */rn', 'js');
+
+
+CREATE SEQUENCE ph7_block_countries_seq;
+
+CREATE TABLE IF NOT EXISTS ph7_block_countries (
+  countryId smallint check (countryId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_block_countries_seq'),
+  countryCode char(2) NOT NULL,
+  PRIMARY KEY (countryId),
+  UNIQUE (countryCode)
+);
+
+ALTER SEQUENCE ph7_block_countries_seq RESTART WITH 1;
