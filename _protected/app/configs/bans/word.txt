@@ -1,4 +1,4 @@
-# Contact me at hello{{AT}}ph7cms{{D0T}}com if you find that some words should be added or deleted. #
+# Contact me at hello{{AT}}ph7cms{{D0T}}com if you find that some words should be added or deleted #
 # NOTE: Words are case insensitive #
 fucking
 fuckin

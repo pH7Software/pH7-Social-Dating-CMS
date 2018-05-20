@@ -1,2 +1,2 @@
-# Contact me at hello{{AT}}ph7cms{{D0T}}com if you think that some IP address should be added. #
-# Please indicate each the IP addresses to ban on a new line. #
+# Visitors with these IPs won't be able to access to your website #
+# Indicate each IP on a new line #

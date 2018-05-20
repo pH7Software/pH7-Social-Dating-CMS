@@ -967,7 +967,7 @@ CREATE TABLE IF NOT EXISTS ph7_modules (
 
 INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of the SQL schema of pH7CMS (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.4.3', 1);
+('pH7CMS', 'SQL System Schema', '1.4.4', 1);
 
 
 CREATE TABLE IF NOT EXISTS ph7_report (
@@ -1157,3 +1157,11 @@ CREATE TABLE IF NOT EXISTS ph7_custom_code (
 INSERT INTO ph7_custom_code VALUES
 ('/* Your custom CSS code here */\r\n', 'css'),
 ('/* Your custom JS code here */\r\n', 'js');
+
+
+CREATE TABLE IF NOT EXISTS ph7_block_countries (
+  countryId smallint(4) unsigned NOT NULL AUTO_INCREMENT,
+  countryCode char(2) NOT NULL,
+  PRIMARY KEY (countryId),
+  UNIQUE KEY (countryCode)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;

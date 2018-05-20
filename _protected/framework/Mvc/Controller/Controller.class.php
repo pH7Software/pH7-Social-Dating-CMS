@@ -19,11 +19,13 @@ use PH7\AdminCore;
 use PH7\AffiliateCore;
 use PH7\Framework\Core\Core;
 use PH7\Framework\Geo\Ip\Geo;
+use PH7\Framework\Geo\Misc\Country;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mobile\MobApp;
 use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Model as M;
+use PH7\Framework\Mvc\Model\BlockCountry as BlockCountryModel;
 use PH7\Framework\Mvc\Router\FrontController;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Page\Page;
@@ -51,6 +53,7 @@ abstract class Controller extends Core
         $this->checkPerms();
         $this->checkModStatus();
         $this->checkBanStatus();
+        $this->checkCountryBlacklist();
         $this->checkSiteStatus();
     }
 
@@ -315,6 +318,14 @@ abstract class Controller extends Core
         }
     }
 
+    private function checkCountryBlacklist()
+    {
+        if ($this->isBlockedCountryPageEligible()) {
+            $sMessage = t('You are too far away from us :( Unfortunately, we are not available in your country.');
+            Page::message($sMessage);
+        }
+    }
+
     /**
      * The maintenance page is not displayed for the "Admin" module and if the administrator is logged in.
      *
@@ -355,6 +366,18 @@ abstract class Controller extends Core
     {
         return $this->registry->module !== PH7_ADMIN_MOD &&
             M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE &&
+            !AdminCore::auth();
+    }
+
+    /**
+     * @return bool
+     */
+    private function isBlockedCountryPageEligible()
+    {
+        $sCountryCode = Country::fixCode(Geo::getCountryCode());
+
+        return $this->registry->module !== PH7_ADMIN_MOD &&
+            (new BlockCountryModel)->isBlocked($sCountryCode) &&
             !AdminCore::auth();
     }
 }
