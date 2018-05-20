@@ -43,6 +43,9 @@ class BlockCountry extends Engine\Model
         return $bIsBlocked;
     }
 
+    /**
+     * @return array
+     */
     public function getBlockedCountries()
     {
         $this->cache->start(static::CACHE_GROUP, 'blocked_countries', static::CACHE_TIME);
