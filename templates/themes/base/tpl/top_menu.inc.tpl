@@ -431,6 +431,7 @@
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'info','language') }}" title="{lang 'PHP Info'}">{lang 'PHP'}</a></li>
               </ul>
             </li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','blockcountry') }}" title="{lang 'Block Countries'}"><i class="fa fa-ban"></i> {lang 'Block Countries'}</a></li>
           </ul>
         </li>
 
