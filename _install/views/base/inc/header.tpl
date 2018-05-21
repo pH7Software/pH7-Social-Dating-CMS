@@ -43,5 +43,5 @@
             <!-- End Header -->
 
             <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:{$sept_number*14}%">{$sept_number*12.5}%</div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:{$sept_number*14}%">{$sept_number*14.3}%</div>
             </div>
