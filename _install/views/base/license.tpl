@@ -10,20 +10,22 @@
 
 <form method="post" action="{$smarty.const.PH7_URL_SLUG_INSTALL}license">
     <p>
-        <input type="checkbox" name="license_agreed" id="license_agreed" onclick="checkLicenseStatus()"/> <label for="license_agreed">{$LANG.agree_license}</label>
+        <input type="checkbox" name="license_agreed" id="license_agreed" onclick="checkLicenseStatus()"/> <label
+            for="license_agreed">{$LANG.agree_license}</label>
     </p>
 
     <p>
-        <button type="submit" name="license_submit" id="next_btn" value="1" disabled="disabled" class="btn btn-primary btn-lg">{$LANG.next}</button>
+        <button type="submit" name="license_submit" id="next_btn" value="1" disabled="disabled"
+            class="btn btn-primary btn-lg">{$LANG.next}</button>
     </p>
 </form>
 
 {literal}
-<script>
-    function checkLicenseStatus() {
-        document.getElementById('next_btn').disabled = (document.getElementById('license_agreed').checked) ? false : true;
-    }
-</script>
+    <script>
+        function checkLicenseStatus() {
+            document.getElementById('next_btn').disabled = (document.getElementById('license_agreed').checked) ? false : true;
+        }
+    </script>
 {/literal}
 
 {include file="inc/footer.tpl"}
