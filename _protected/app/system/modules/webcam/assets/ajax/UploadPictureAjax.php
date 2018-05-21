@@ -66,14 +66,13 @@ class UploadPictureAjax
 
     public function generatePath()
     {
-        $sApprovalFolder = $this->getUploadFolder();
+        $sUploadFolder = $this->getUploadFolder();
 
         $this->sFile = Various::genRnd() . self::IMAGE_EXTENSION;
-
         $this->sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'webcam/picture/';
         $this->sTmpPathFile = $this->sPath . 'tmp/' . $this->sFile;
-        $this->sOriginalPathFile = $this->sPath . $sApprovalFolder . '/original/' . $this->sFile;
-        $this->sThumbPathFile = $this->sPath . $sApprovalFolder . '/thumb/' . $this->sFile;
+        $this->sOriginalPathFile = $this->sPath . $sUploadFolder . '/original/' . $this->sFile;
+        $this->sThumbPathFile = $this->sPath . $sUploadFolder . '/thumb/' . $this->sFile;
 
         return $this;
     }
