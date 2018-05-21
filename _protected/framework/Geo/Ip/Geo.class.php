@@ -28,7 +28,7 @@ class Geo
     }
 
     /**
-     * Get the country ISO Code (e.g., en, it, es, ru, fr, ...).
+     * Get the country ISO Code (e.g., GB, IT, ES, RU, FR, ...).
      *
      * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
      *
