@@ -102,6 +102,8 @@ class InstallController extends Controller
     /********************* STEP 2 *********************/
     public function license()
     {
+        $_SESSION['step2'] = 1;
+
         $this->oView->assign('sept_number', 2);
         $this->oView->display('license.tpl');
     }
@@ -111,33 +113,37 @@ class InstallController extends Controller
     {
         global $LANG;
 
-        if (empty($_SESSION['val']['path_protected'])) {
-            $_SESSION['val']['path_protected'] = PH7_ROOT_PUBLIC . '_protected' . PH7_DS;
-        }
+        if (!empty($_SESSION['step2'])) {
+            if (empty($_SESSION['val']['path_protected'])) {
+                $_SESSION['val']['path_protected'] = PH7_ROOT_PUBLIC . '_protected' . PH7_DS;
+            }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['path_protected'])) {
-            $_SESSION['val']['path_protected'] = check_ext_start(check_ext_end(trim($_POST['path_protected'])));
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['path_protected'])) {
+                $_SESSION['val']['path_protected'] = check_ext_start(check_ext_end(trim($_POST['path_protected'])));
 
-            if (is_dir($_SESSION['val']['path_protected'])) {
-                if (is_readable($_SESSION['val']['path_protected'])) {
-                    $sConstantContent = file_get_contents(PH7_ROOT_INSTALL . 'data/configs/constants.php');
+                if (is_dir($_SESSION['val']['path_protected'])) {
+                    if (is_readable($_SESSION['val']['path_protected'])) {
+                        $sConstantContent = file_get_contents(PH7_ROOT_INSTALL . 'data/configs/constants.php');
 
-                    $sConstantContent = str_replace('%path_protected%', addslashes($_SESSION['val']['path_protected']), $sConstantContent);
+                        $sConstantContent = str_replace('%path_protected%', addslashes($_SESSION['val']['path_protected']), $sConstantContent);
 
-                    if (!@file_put_contents(PH7_ROOT_PUBLIC . '_constants.php', $sConstantContent)) {
-                        $aErrors[] = $LANG['no_public_writable'];
+                        if (!@file_put_contents(PH7_ROOT_PUBLIC . '_constants.php', $sConstantContent)) {
+                            $aErrors[] = $LANG['no_public_writable'];
+                        } else {
+                            $_SESSION['step3'] = 1;
+                            unset($_SESSION['val']);
+
+                            redirect(PH7_URL_SLUG_INSTALL . 'config_system');
+                        }
                     } else {
-                        $_SESSION['step2'] = 1;
-                        unset($_SESSION['val']);
-
-                        redirect(PH7_URL_SLUG_INSTALL . 'config_system');
+                        $aErrors[] = $LANG['no_protected_readable'];
                     }
                 } else {
-                    $aErrors[] = $LANG['no_protected_readable'];
+                    $aErrors[] = $LANG['no_protected_exist'];
                 }
-            } else {
-                $aErrors[] = $LANG['no_protected_exist'];
             }
+        } else {
+            redirect(PH7_URL_SLUG_INSTALL . 'license');
         }
 
         $this->oView->assign('sept_number', 3);
