@@ -64,7 +64,7 @@ class UploadPictureAjax
 
     public function generatePath()
     {
-        $sApprovalFolder = $this->getApprovalFolder();
+        $sApprovalFolder = $this->getUploadFolder();
 
         $this->sFile = Various::genRnd() . self::IMAGE_EXTENSION;
 
@@ -157,7 +157,7 @@ class UploadPictureAjax
     /**
      * @return string
      */
-    private function getApprovalFolder()
+    private function getUploadFolder()
     {
         return $this->isWebcamPictureManualApproval() ? 'pending' : 'img';
     }
