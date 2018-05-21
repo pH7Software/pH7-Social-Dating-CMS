@@ -16,6 +16,8 @@ use PH7\Framework\Url\Header;
 
 class SignupController extends Controller
 {
+    const TOTAL_SIGNUP_STEPS = 3;
+
     public function step1()
     {
         // Add CSS and JavaScript files for the left profiles block
@@ -123,6 +125,7 @@ class SignupController extends Controller
     {
         $this->view->progressbar_percentage = $iPercentage;
         $this->view->progressbar_step = $iStep;
+        $this->view->progressbar_total_steps = self::TOTAL_SIGNUP_STEPS;
     }
 
     /**
