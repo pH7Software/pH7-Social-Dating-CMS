@@ -13,7 +13,7 @@
 </p>
 
 <p>
-    <button type="button" onclick="window.location='{$smarty.const.PH7_URL_SLUG_INSTALL}config_system'"
+    <button type="button" onclick="window.location='{$smarty.const.PH7_URL_SLUG_INSTALL}config_path'"
         id="license-agreed" disabled="disabled" class="btn btn-primary btn-lg">{$LANG.next}</button>
 </p>
 
