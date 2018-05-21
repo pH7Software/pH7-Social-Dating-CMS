@@ -140,13 +140,13 @@ class InstallController extends Controller
             }
         }
 
-        $this->oView->assign('sept_number', 2);
+        $this->oView->assign('sept_number', 3);
         $this->oView->assign('errors', @$aErrors);
         unset($aErrors);
         $this->oView->display('config_path.tpl');
     }
 
-    /********************* STEP 3 *********************/
+    /********************* STEP 4 *********************/
     public function config_system()
     {
         global $LANG;
@@ -260,14 +260,14 @@ class InstallController extends Controller
             redirect(PH7_URL_SLUG_INSTALL . 'config_path');
         }
 
-        $this->oView->assign('sept_number', 3);
+        $this->oView->assign('sept_number', 4);
         $this->oView->assign('errors', @$aErrors);
         unset($aErrors);
 
         $this->oView->display('config_system.tpl');
     }
 
-    /********************* STEP 4 *********************/
+    /********************* STEP 5 *********************/
     public function config_site()
     {
         global $LANG;
@@ -386,13 +386,13 @@ class InstallController extends Controller
         }
 
         $this->oView->assign('def_site_name', Controller::DEFAULT_SITE_NAME);
-        $this->oView->assign('sept_number', 4);
+        $this->oView->assign('sept_number', 5);
         $this->oView->assign('errors', @$aErrors);
         unset($aErrors);
         $this->oView->display('config_site.tpl');
     }
 
-    /********************* STEP 5 *********************/
+    /********************* STEP 6 *********************/
     public function niche()
     {
         global $LANG;
@@ -454,13 +454,13 @@ class InstallController extends Controller
             redirect(PH7_URL_SLUG_INSTALL . 'finish');
         }
 
-        $this->oView->assign('sept_number', 5);
+        $this->oView->assign('sept_number', 6);
         $this->oView->assign('errors', @$aErrors);
         unset($aErrors);
         $this->oView->display('niche.tpl');
     }
 
-    /********************* STEP 6 *********************/
+    /********************* STEP 7 *********************/
     public function finish()
     {
         @require_once PH7_ROOT_PUBLIC . '_constants.php';
@@ -487,7 +487,7 @@ class InstallController extends Controller
             exit(header('Location: ' . PH7_URL_ROOT));
         }
 
-        $this->oView->assign('sept_number', 6);
+        $this->oView->assign('sept_number', 7);
         $this->oView->display('finish.tpl');
     }
 
