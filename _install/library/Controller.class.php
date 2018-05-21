@@ -24,7 +24,6 @@ abstract class Controller implements Controllable
     const DEFAULT_SITE_NAME = 'My Dating WebApp';
     const SOFTWARE_PREFIX_COOKIE_NAME = 'pH7';
     const SOFTWARE_WEBSITE = 'http://ph7cms.com';
-    const SOFTWARE_LICENSE_URL = 'http://ph7cms.com/legal/license';
     const SOFTWARE_REQUIREMENTS_URL = 'http://ph7cms.com/doc/en/requirements';
     const PAYPAL_DONATE_URL = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6';
     const PATREON_URL = 'https://www.patreon.com/bePatron?u=3534366';
@@ -85,7 +84,6 @@ abstract class Controller implements Controllable
         $this->oView->assign('software_name', self::SOFTWARE_NAME);
         $this->oView->assign('software_version', self::SOFTWARE_VERSION . ' ' . self::SOFTWARE_VERSION_NAME . ' - Build ' . self::SOFTWARE_BUILD);
         $this->oView->assign('software_website', self::SOFTWARE_WEBSITE);
-        $this->oView->assign('software_license_url', self::SOFTWARE_LICENSE_URL);
         $this->oView->assign('paypal_donate_url', self::PAYPAL_DONATE_URL);
         $this->oView->assign('patreon_url', self::PATREON_URL);
         $this->oView->assign('software_author', self::SOFTWARE_AUTHOR);
