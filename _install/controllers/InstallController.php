@@ -151,7 +151,7 @@ class InstallController extends Controller
     {
         global $LANG;
 
-        if (!empty($_SESSION['step2']) && is_file(PH7_ROOT_PUBLIC . '_constants.php')) {
+        if (!empty($_SESSION['step3']) && is_file(PH7_ROOT_PUBLIC . '_constants.php')) {
             session_regenerate_id(true);
 
             if (empty($_SESSION['val'])) {
@@ -240,7 +240,7 @@ class InstallController extends Controller
 
                                     unset($DB);
 
-                                    $_SESSION['step3'] = 1;
+                                    $_SESSION['step4'] = 1;
                                     unset($_SESSION['val']);
 
                                     redirect(PH7_URL_SLUG_INSTALL . 'config_site');
@@ -272,8 +272,8 @@ class InstallController extends Controller
     {
         global $LANG;
 
-        if (empty($_SESSION['step4'])) {
-            if (!empty($_SESSION['step3']) && is_file(PH7_ROOT_PUBLIC . '_constants.php')) {
+        if (empty($_SESSION['step5'])) {
+            if (!empty($_SESSION['step4']) && is_file(PH7_ROOT_PUBLIC . '_constants.php')) {
                 session_regenerate_id(true);
 
                 if (empty($_SESSION['val'])) {
@@ -337,7 +337,7 @@ class InstallController extends Controller
                                                         // We finalise by putting the correct permission to the config files
                                                         $this->chmodConfigFiles();
 
-                                                        $_SESSION['step4'] = 1;
+                                                        $_SESSION['step5'] = 1;
 
                                                         redirect(PH7_URL_SLUG_INSTALL . 'niche');
                                                     } catch (\PDOException $oE) {
@@ -397,8 +397,8 @@ class InstallController extends Controller
     {
         global $LANG;
 
-        if (empty($_SESSION['step5'])) {
-            if (!empty($_SESSION['step4']) && is_file(PH7_ROOT_PUBLIC . '_constants.php')) {
+        if (empty($_SESSION['step6'])) {
+            if (!empty($_SESSION['step5']) && is_file(PH7_ROOT_PUBLIC . '_constants.php')) {
                 session_regenerate_id(true);
 
                 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['niche_submit'])) {
@@ -443,7 +443,7 @@ class InstallController extends Controller
                             $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                         }
                     }
-                    $_SESSION['step5'] = 1;
+                    $_SESSION['step6'] = 1;
 
                     redirect(PH7_URL_SLUG_INSTALL . 'finish');
                 }
