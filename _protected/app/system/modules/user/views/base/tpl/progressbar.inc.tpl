@@ -6,6 +6,6 @@
         aria-valuemin="0"
         aria-valuemax="100"
         style="width:{progressbar_percentage}%"
-    >{progressbar_percentage}% - STEP {progressbar_step}/3
+    >{progressbar_percentage}% - {lang 'STEP'} {progressbar_step}/3
     </div>
 </div>
