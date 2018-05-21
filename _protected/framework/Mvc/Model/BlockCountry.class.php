@@ -28,7 +28,7 @@ class BlockCountry extends Engine\Model
      */
     public function isBlocked($sCountryCode)
     {
-        $this->cache->start(static::CACHE_GROUP, 'blocked' . $sCountryCode, static::CACHE_TIME);
+        $this->cache->start(static::CACHE_GROUP, 'lookup' . $sCountryCode, static::CACHE_TIME);
 
         if (!$bIsBlocked = $this->cache->get()) {
             $sSqlQuery = 'SELECT COUNT(countryCode) FROM' . Db::prefix(DbTableName::BLOCK_COUNTRY) . 'WHERE countryCode = :countryCode LIMIT 1';
