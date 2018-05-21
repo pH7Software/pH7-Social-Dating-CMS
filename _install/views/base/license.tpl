@@ -5,7 +5,7 @@
 <p>{$LANG.license_desc}</p>
 
 <p>
-    <iframe src="{$software_license_url}?l={$current_lang}">{$LANG.need_frame}</iframe>
+    <iframe src="{$smarty.const.PH7_URL_INSTALL}langs/{$current_lang}/license.html">{$LANG.need_frame}</iframe>
 </p>
 
 <p>
