@@ -25,6 +25,8 @@ use PH7\Framework\Util\Various;
 
 class UploadPictureAjax
 {
+    const PENDING_FOLDER_NAME = 'pending';
+    const APPROVED_FOLDER_NAME = 'img';
     const MD5_BLANK_IMAGE = '7d4df9cc423720b7f1f3d672b89362be';
     const IMAGE_EXTENSION = '.jpg';
 
@@ -159,7 +161,7 @@ class UploadPictureAjax
      */
     private function getUploadFolder()
     {
-        return $this->isWebcamPictureManualApproval() ? 'pending' : 'img';
+        return $this->isWebcamPictureManualApproval() ? self::PENDING_FOLDER_NAME : self::APPROVED_FOLDER_NAME;
     }
 
     /**
