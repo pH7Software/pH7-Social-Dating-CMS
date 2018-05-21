@@ -26,6 +26,7 @@ use PH7\Framework\Util\Various;
 class UploadPictureAjax
 {
     const MD5_BLANK_IMAGE = '7d4df9cc423720b7f1f3d672b89362be';
+    const IMAGE_EXTENSION = '.jpg';
 
     /** @var string */
     private $sPath;
@@ -65,7 +66,7 @@ class UploadPictureAjax
     {
         $sApprovalFolder = $this->getApprovalFolder();
 
-        $this->sFile = Various::genRnd() . '.jpg';
+        $this->sFile = Various::genRnd() . self::IMAGE_EXTENSION;
 
         $this->sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'webcam/picture/';
         $this->sTmpPathFile = $this->sPath . 'tmp/' . $this->sFile;
