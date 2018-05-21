@@ -43,7 +43,7 @@ abstract class Controller implements Controllable
      * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa" and 12.* is "PHS"
      */
     const SOFTWARE_VERSION_NAME = 'PHS';
-    const SOFTWARE_VERSION = '12.6.0';
+    const SOFTWARE_VERSION = '12.9.0';
     const SOFTWARE_BUILD = '1';
 
     const DEFAULT_LANG = 'en';

@@ -31,9 +31,9 @@ final class Version
      * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa" and 12.* is "PHS"
      */
     const KERNEL_VERSION_NAME = 'PHS';
-    const KERNEL_VERSION = '12.6.0';
+    const KERNEL_VERSION = '12.9.0';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELEASE_DATE = '2018-05-21';
+    const KERNEL_RELEASE_DATE = '2018-05-28';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1'; // Ph7 Technology
