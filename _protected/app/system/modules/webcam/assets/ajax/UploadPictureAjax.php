@@ -42,9 +42,6 @@ class UploadPictureAjax
     /** @var string */
     private $sFile;
 
-    /** @var string */
-    private $sIsManualApproval;
-
     /**
      * @return self
      *
@@ -66,14 +63,14 @@ class UploadPictureAjax
 
     public function generatePath()
     {
-        $this->sIsManualApproval = $this->isWebcamPictureManualApproval() ? 'pending' : 'img';
+        $sApprovalFolder = $this->getApprovalFolder();
 
         $this->sFile = Various::genRnd() . '.jpg';
 
         $this->sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'webcam/picture/';
         $this->sTmpPathFile = $this->sPath . 'tmp/' . $this->sFile;
-        $this->sOriginalPathFile = $this->sPath . $this->sIsManualApproval . '/original/' . $this->sFile;
-        $this->sThumbPathFile = $this->sPath . $this->sIsManualApproval . '/thumb/' . $this->sFile;
+        $this->sOriginalPathFile = $this->sPath . $sApprovalFolder . '/original/' . $this->sFile;
+        $this->sThumbPathFile = $this->sPath . $sApprovalFolder . '/thumb/' . $this->sFile;
 
         return $this;
     }
@@ -154,6 +151,14 @@ class UploadPictureAjax
         $sFile = $this->isWebcamPictureManualApproval() ? '../../' . UserDesignCore::PENDING_IMG_FILENAME : $this->sFile;
 
         return '{"status":1,"message":"Success!","filename":"' . $sFile . '"}';
+    }
+
+    /**
+     * @return string
+     */
+    private function getApprovalFolder()
+    {
+        return $this->isWebcamPictureManualApproval() ? 'pending' : 'img';
     }
 
     /**
