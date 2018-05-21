@@ -100,6 +100,13 @@ class InstallController extends Controller
     }
 
     /********************* STEP 2 *********************/
+    public function license()
+    {
+        $this->oView->assign('sept_number', 2);
+        $this->oView->display('license.tpl');
+    }
+
+    /********************* STEP 3 *********************/
     public function config_path()
     {
         global $LANG;

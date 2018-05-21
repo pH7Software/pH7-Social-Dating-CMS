@@ -30,6 +30,8 @@ $LANG = array(
     'next' => 'Suivant',
     'go' => 'Étape Suivante =>',
     'later' => 'Pas maintenant',
+    'license' => 'Licence',
+    'license_desc' => 'Veuillez lire la licence attentivement et l\'accepter avant de continuer l\'installation du logiciel.',
     'register' => 'Enregistrer !',
     'site_name' => 'Nom de votre site',
     'agree_license' => 'J\'ai lu et j\'accepte les Termes de licence ci-dessus.',
