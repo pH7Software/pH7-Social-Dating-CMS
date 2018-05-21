@@ -102,7 +102,15 @@ class InstallController extends Controller
     /********************* STEP 2 *********************/
     public function license()
     {
-        $_SESSION['step2'] = 1;
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['license_submit'])) {
+            if (!empty($_POST['license_agreed'])) {
+                $_SESSION['step2'] = 1;
+
+                redirect(PH7_URL_SLUG_INSTALL . 'config_path');
+            } else {
+                $this->oView->assign('failure', 1);
+            }
+        }
 
         $this->oView->assign('sept_number', 2);
         $this->oView->display('license.tpl');
