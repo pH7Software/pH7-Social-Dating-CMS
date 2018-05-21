@@ -570,7 +570,7 @@ final class FrontController
                 unset($oMvc); // Destruct object to minimize CPU resources
             } catch (ReflectionException $oExcept) {
                 // If the class or method doesn't exist
-                $this->notFound($oExcept->getMessage());
+                $this->notFound($oExcept->getMessage(), 1);
             }
         } else {
             $this->notFound('The <b>' . $this->oRegistry->controller . '</b> controller of the <b>' . $this->oRegistry->module .
