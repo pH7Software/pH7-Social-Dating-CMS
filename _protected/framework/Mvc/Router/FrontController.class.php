@@ -740,7 +740,7 @@ final class FrontController
     }
 
     /**
-     * This method has two different behavior compared to the mode site.
+     * This method has two different behaviors depending of the environment mode site.
      * 1. In production mode: Displays the page not found using the system module "error".
      * 2. In development mode: It throws an Exception with displaying an explanatory message that indicates why this page was not found.
      *
