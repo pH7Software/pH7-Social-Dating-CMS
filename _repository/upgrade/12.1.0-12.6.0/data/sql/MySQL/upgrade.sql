@@ -5,7 +5,7 @@
 --
 
 CREATE TABLE IF NOT EXISTS ph7_block_countries (
-  countryId smallint(4) unsigned NOT NULL AUTO_INCREMENT,
+  countryId tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
   countryCode char(2) NOT NULL,
   PRIMARY KEY (countryId),
   UNIQUE KEY (countryCode)
