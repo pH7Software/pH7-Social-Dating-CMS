@@ -123,6 +123,7 @@ class InstallController extends Controller
 
         if (!empty($_SESSION['step2'])) {
             if (empty($_SESSION['val']['path_protected'])) {
+                // If not set, set a default value for the field used in Smarty tpl
                 $_SESSION['val']['path_protected'] = PH7_ROOT_PUBLIC . '_protected' . PH7_DS;
             }
 
