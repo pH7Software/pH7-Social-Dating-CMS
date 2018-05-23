@@ -14,7 +14,7 @@ pH7CMS is included with 35 modules and based on its homemade framework (pH7Frame
 ![Professional PHP Social Dating Builder Software](https://cloud.githubusercontent.com/assets/1325411/19419476/5475b32c-93d0-11e6-9756-8e7db8df129f.png)
 
 
-## Overview
+## Software Overview
 
 **pH7 Dating CMS** is a **Social/Dating CMS** written in **Object-Oriented** PHP (*OOP*), fully compatible and highly optimised for PHP 7+ and based on **MVC** architecture (Model-View-Controller).
 
@@ -25,7 +25,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 *To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **best online dating service** or **social networking** website on the World Wide Web!*
 
 
-## How Powerful is your future Dating App?
+## How Powerful Your Social-Dating App Will Be? 🚀
 
 * Best Dating Features
 * Advanced Search
