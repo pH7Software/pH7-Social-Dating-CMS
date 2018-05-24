@@ -491,8 +491,8 @@ class InstallController extends Controller
         $this->removeCookies();
 
         if (
-            $_SERVER['REQUEST_METHOD'] == 'POST'
-            && !empty($_POST['confirm_remove_install'])
+            $_SERVER['REQUEST_METHOD'] == 'POST' &&
+            !empty($_POST['confirm_remove_install'])
         ) {
             remove_install_dir();
             clearstatcache(); // We remove the files status cache as the "_install" folder doesn't exist anymore by now.
