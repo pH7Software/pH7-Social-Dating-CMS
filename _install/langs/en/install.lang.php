@@ -110,7 +110,7 @@ $LANG = array(
         please visit the <a href="' . Controller::SOFTWARE_GIT_REPO . '">Github Repo</a>.</p>
         <p>---</p>
         <p>Best regards,<br />
-        <a href="' . Controller::AUTHOR_URL . '">Pierre Soria</a></p>',
+        <strong><a href="' . Controller::AUTHOR_URL . '">Pierre Soria</a></strong></p>',
     'yes_dir' => 'The directory was found successfully!',
     'no_dir' => 'The directory does not exist.',
     'wait_importing_database' => 'Please wait while importing the database.<br />
