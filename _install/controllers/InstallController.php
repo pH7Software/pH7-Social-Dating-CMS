@@ -480,7 +480,7 @@ class InstallController extends Controller
     {
         @require_once PH7_ROOT_PUBLIC . '_constants.php';
 
-        if ($this->emailCanBeSent()) {
+        if ($this->canEmailBeSent()) {
             $this->sendWelcomeEmail();
 
             $this->oView->assign('admin_login_email', $_SESSION['val']['admin_login_email']);
@@ -525,7 +525,7 @@ class InstallController extends Controller
      *
      * @return bool
      */
-    private function emailCanBeSent()
+    private function canEmailBeSent()
     {
         return !empty($_SESSION['val']['admin_login_email']) &&
             !empty($_SESSION['val']['admin_email']) &&
