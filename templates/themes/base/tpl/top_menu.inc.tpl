@@ -239,7 +239,7 @@
                 <li><a href="{{ $design->url('report','admin','index') }}" title="{lang 'Report Abuse'}"><i class="fa fa-flag"></i> {lang 'Reports'} {if $count_total_reports}<span class="badge">{count_total_reports}</span>{/if}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','addfakeprofiles') }}" title="{lang 'Fake Profiles Automatic Generator'}"><i class="fa fa-user-plus"></i> {lang 'Fake Profile Generator'}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','import') }}" title="{lang 'Import Users'}"><i class="fa fa-user-plus"></i> {lang 'Import Users'}</a></li>
-                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','countryrestriction') }}" title="{lang 'Country Restrictions for Registration and Search form'}"><i class="fa fa-ban"></i> {lang 'Country Restriction'}</a></li>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','countryrestriction') }}" title="{lang 'Country Restrictions for Registration and Search form'}"><i class="fa fa-globe"></i> {lang 'Country Restriction'}</a></li>
                 <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('field','field','all','user') }}" title="{lang 'User Fields'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-check-circle-o"></i> {lang 'User Fields'}</a>
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="{{ $design->url('field','field','all','user') }}" title="{lang 'Fields List'}">{lang 'Fields List'}</a></li>
