@@ -27,7 +27,18 @@ class BlockCountryForm
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_country_blocklist', 'form_country_blocklist'));
         $oForm->addElement(new \PFBC\Element\Token('block_country'));
-        $oForm->addElement(new \PFBC\Element\Country(t('Countries to exclude'), 'countries[]', ['description' => t("Visitors who come from one of those selected countries will receive a friendly message saying that the service isn't available in they country. Logged admins and admin panel won't be affected, so you will still be able to login to your admin panel from anywhere."), 'multiple' => 'multiple', 'size' => 20, 'value' => (new BlockCountryModel)->getBlockedCountries()]));
+        $oForm->addElement(
+            new \PFBC\Element\Country(
+                t('Countries to exclude'),
+                'countries[]',
+                [
+                    'description' => t("Visitors who come from one of those selected countries will receive a friendly message saying that the service isn't available in they country. Logged admins and admin panel won't be affected, so you will still be able to login to your admin panel from anywhere."),
+                    'multiple' => 'multiple',
+                    'size' => 20,
+                    'value' => (new BlockCountryModel)->getBlockedCountries()
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'check']));
         $oForm->render();
     }
