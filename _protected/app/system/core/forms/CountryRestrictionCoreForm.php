@@ -35,11 +35,28 @@ class CountryRestrictionCoreForm
                     'description' => t('You can limit the amount of countries to be displayed on the registration form and user search forms.<br /> If you need to block your entire website to be accessible from a country, please <a href="%0%">go here</a>.', Uri::get(PH7_ADMIN_MOD, 'tool', 'blockcountry')),
                     'multiple' => 'multiple',
                     'size' => 20,
-                    'value' => (new UserCoreModel)->getCountries($sTable)
+                    'value' => self::getSelectedCountries($sTable)
                 ]
             )
         );
         $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'check']));
         $oForm->render();
+    }
+
+    /**
+     * @param string $sTable
+     *
+     * @return array
+     */
+    private static function getSelectedCountries($sTable)
+    {
+        $aSelectedCountries = [];
+
+        $aCountries = (new UserCoreModel)->getCountries($sTable);
+        foreach ($aCountries as $oCountry) {
+            $aSelectedCountries[] = $oCountry->countryCode;
+        }
+
+        return $aSelectedCountries;
     }
 }

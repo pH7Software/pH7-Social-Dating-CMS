@@ -1547,7 +1547,7 @@ class UserCoreModel extends Model
         $iNinetyDaysTime = 7776000;
         $this->cache->start(static::CACHE_GROUP, 'countriesList' . $sTable, $iNinetyDaysTime);
 
-        if (!$aSelectedCountries = $this->cache->get()) {
+        if (!$aCountries = $this->cache->get()) {
             Various::checkModelTable($sTable);
 
             $sSqlQuery = 'SELECT countryCode FROM' . Db::prefix(DbTableName::MEMBER_COUNTRY);
@@ -1555,16 +1555,10 @@ class UserCoreModel extends Model
             $rStmt->execute();
             $aCountries = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-
-            $aSelectedCountries = [];
-            foreach ($aCountries as $oCountry) {
-                $aSelectedCountries[] = $oCountry->countryCode;
-            }
-
-            $this->cache->put($aSelectedCountries);
+            $this->cache->put($aCountries);
         }
 
-        return $aSelectedCountries;
+        return $aCountries;
     }
 
     /**
