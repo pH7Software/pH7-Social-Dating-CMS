@@ -235,6 +235,8 @@ class Various
             case DbTableName::AFFILIATE:
             case DbTableName::MEMBER_INFO:
             case DbTableName::AFFILIATE_INFO:
+            case DbTableName::MEMBER_COUNTRY:
+            case DbTableName::AFFILIATE_COUNTRY:
             case DbTableName::SUBSCRIBER:
             case DbTableName::ADMIN:
                 return $sTable;
