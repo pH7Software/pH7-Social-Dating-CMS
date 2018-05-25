@@ -95,7 +95,7 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\Date(t('Your Date of Birth'), 'birth_date', array('id' => 'birth_date', 'description' => t('Please specify your birth date using the calendar.'), 'onblur' => 'CValid(this.value, this.id)', 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
 
-        $oForm->addElement(new \PFBC\Element\Country(t('Your Country'), 'country', array('id' => 'str_country', 'value' => Geo::getCountryCode(), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Your Country'), 'country', (new UserCoreModel)->getCountries(), array('id' => 'str_country', 'value' => Geo::getCountryCode(), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Your City'), 'city', array('id' => 'str_city', 'value' => Geo::getCity(), 'onblur' => 'CValid(this.value,this.id,2,150)', 'description' => t('Select the city where you live/where you want to meet people.'), 'validation' => new \PFBC\Validation\Str(2, 150), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_city"></span>'));
