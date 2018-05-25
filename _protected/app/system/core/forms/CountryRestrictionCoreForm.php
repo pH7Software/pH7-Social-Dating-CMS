@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
 class CountryRestrictionCoreForm
@@ -26,7 +27,18 @@ class CountryRestrictionCoreForm
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_country_restriction', 'form_country_restriction'));
         $oForm->addElement(new \PFBC\Element\Token('block_country'));
-        $oForm->addElement(new \PFBC\Element\Country(t('Countries showing on forms'), 'countries[]', ['description' => t('You can limit the amount of countries to be displayed on the registration form and search forms.'), 'multiple' => 'multiple', 'size' => 20, 'value' => (new UserCoreModel)->getCountries()]));
+        $oForm->addElement(
+            new \PFBC\Element\Country(
+                t('Countries showing on forms'),
+                'countries[]',
+                [
+                    'description' => t('You can limit the amount of countries to be displayed on the registration form and user search forms.<br /> If you need to block your entire website to be accessible from a country, please <a href="%0%">go here</a>.', Uri::get(PH7_ADMIN_MOD, 'tool', 'blockcountry')),
+                    'multiple' => 'multiple',
+                    'size' => 20,
+                    'value' => (new UserCoreModel)->getCountries($sTable)
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'check']));
         $oForm->render();
     }
