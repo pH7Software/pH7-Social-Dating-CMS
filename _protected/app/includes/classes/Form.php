@@ -61,7 +61,7 @@ class Form extends Framework\Layout\Form\Form
 
         $aCountries = (new UserCoreModel)->getCountries($sTable);
         foreach ($aCountries as $oCountry) {
-            $aSelectedCountries[] = t($oCountry->countryCode); // Translate country ID
+            $aSelectedCountries[$oCountry->countryCode] = t($oCountry->countryCode); // Translate country ID
         }
 
         return $aSelectedCountries;
