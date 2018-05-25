@@ -29,7 +29,7 @@ class CountryRestrictionCoreForm
         $oForm->addElement(new \PFBC\Element\Token('block_country'));
         $oForm->addElement(
             new \PFBC\Element\Country(
-                t('Countries showing on forms'),
+                t('Countries to be showed on registration forms'),
                 'countries[]',
                 [
                     'description' => t('You can limit the amount of countries to be displayed on the registration form and user search forms.<br /> If you need to block your entire website to be accessible from a country, please <a href="%0%">go here</a>.', Uri::get(PH7_ADMIN_MOD, 'tool', 'blockcountry')),
