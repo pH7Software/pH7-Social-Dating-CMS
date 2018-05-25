@@ -51,6 +51,23 @@ class Form extends Framework\Layout\Form\Form
     }
 
     /**
+     * @param string $sTable The DB country table name.
+     *
+     * @return array
+     */
+    public static function getCountryValues($sTable = DbTableName::MEMBER_COUNTRY)
+    {
+        $aSelectedCountries = [];
+
+        $aCountries = (new UserCoreModel)->getCountries($sTable);
+        foreach ($aCountries as $oCountry) {
+            $aSelectedCountries[] = t($oCountry->countryCode); // Translate country ID
+        }
+
+        return $aSelectedCountries;
+    }
+
+    /**
      * Prevent against brute-force attack to avoid drowning the server and database.
      *
      * @param int $iDelayInSec Delay in seconds.
