@@ -1360,18 +1360,18 @@ CREATE TABLE IF NOT EXISTS ph7_block_countries (
 ALTER SEQUENCE ph7_block_countries_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE ph7_members_registration_countries_seq;
+CREATE SEQUENCE ph7_members_countries_seq;
 
-CREATE TABLE IF NOT EXISTS ph7_members_registration_countries (
-  countryId smallint check (countryId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_members_registration_countries_seq'),
+CREATE TABLE IF NOT EXISTS ph7_members_countries (
+  countryId smallint check (countryId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_members_countries_seq'),
   countryCode char(2) NOT NULL,
   PRIMARY KEY (countryId),
   UNIQUE (countryCode)
 );
 
-ALTER SEQUENCE ph7_members_registration_countries_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_members_countries_seq RESTART WITH 1;
 
-INSERT INTO ph7_members_registration_countries (countryCode) VALUES
+INSERT INTO ph7_members_countries (countryCode) VALUES
 ('AD'),
 ('AE'),
 ('AF'),
@@ -1614,18 +1614,18 @@ INSERT INTO ph7_members_registration_countries (countryCode) VALUES
 ('ZW');
 
 
-CREATE SEQUENCE ph7_affiliates_registration_countries_seq;
+CREATE SEQUENCE ph7_affiliates_countries_seq;
 
-CREATE TABLE IF NOT EXISTS ph7_affiliates_registration_countries (
-  countryId smallint check (countryId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_affiliates_registration_countries_seq'),
+CREATE TABLE IF NOT EXISTS ph7_affiliates_countries (
+  countryId smallint check (countryId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_affiliates_countries_seq'),
   countryCode char(2) NOT NULL,
   PRIMARY KEY (countryId),
   UNIQUE (countryCode)
 );
 
-ALTER SEQUENCE ph7_affiliates_registration_countries_seq RESTART WITH 1;
+ALTER SEQUENCE ph7_affiliates_countries_seq RESTART WITH 1;
 
-INSERT INTO ph7_affiliates_registration_countries (countryCode) VALUES
+INSERT INTO ph7_affiliates_countries (countryCode) VALUES
 ('AD'),
 ('AE'),
 ('AF'),

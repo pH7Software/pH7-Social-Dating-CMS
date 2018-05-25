@@ -1167,14 +1167,14 @@ CREATE TABLE IF NOT EXISTS ph7_block_countries (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
-CREATE TABLE IF NOT EXISTS ph7_members_registration_countries (
+CREATE TABLE IF NOT EXISTS ph7_members_countries (
   countryId tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
   countryCode char(2) NOT NULL,
   PRIMARY KEY (countryId),
   UNIQUE KEY (countryCode)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
-INSERT INTO ph7_members_registration_countries (countryCode) VALUES
+INSERT INTO ph7_members_countries (countryCode) VALUES
 ('AD'),
 ('AE'),
 ('AF'),
@@ -1417,14 +1417,14 @@ INSERT INTO ph7_members_registration_countries (countryCode) VALUES
 ('ZW');
 
 
-CREATE TABLE IF NOT EXISTS ph7_affiliates_registration_countries (
+CREATE TABLE IF NOT EXISTS ph7_affiliates_countries (
   countryId tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
   countryCode char(2) NOT NULL,
   PRIMARY KEY (countryId),
   UNIQUE KEY (countryCode)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
-INSERT INTO ph7_affiliates_registration_countries (countryCode) VALUES
+INSERT INTO ph7_affiliates_countries (countryCode) VALUES
 ('AD'),
 ('AE'),
 ('AF'),
