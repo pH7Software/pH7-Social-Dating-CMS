@@ -1545,7 +1545,7 @@ class UserCoreModel extends Model
     public function getCountries($sTable = DbTableName::MEMBER_COUNTRY)
     {
         $iNinetyDaysTime = 7776000;
-        $this->cache->start(static::CACHE_GROUP, 'countriesList' . $sTable, $iNinetyDaysTime);
+        $this->cache->start(self::CACHE_GROUP, 'countriesList' . $sTable, $iNinetyDaysTime);
 
         if (!$aCountries = $this->cache->get()) {
             Various::checkModelTable($sTable);
