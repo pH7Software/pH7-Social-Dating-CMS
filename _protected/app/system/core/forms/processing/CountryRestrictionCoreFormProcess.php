@@ -16,19 +16,23 @@ class CountryRestrictionCoreFormProcess extends Form
 {
     const COUNTRY_CODE_LENGTH = 2;
 
+    /** @var string */
+    private $sTable;
+
     public function __construct($sTable)
     {
         parent::__construct();
 
+        $this->sTable = $sTable;
         $oUserModel = new UserCoreModel;
 
         // First, clear everything
-        $oUserModel->clearCountries($sTable);
+        $oUserModel->clearCountries($this->sTable);
 
         // Then, reindex the table
         foreach ($this->httpRequest->post('countries') as $sCountry) {
             if ($this->isEligibleToAdd($sCountry)) {
-                $oUserModel->addCountry($sCountry, $sTable);
+                $oUserModel->addCountry($sCountry, $this->sTable);
             }
         }
         unset($oUserModel);
@@ -62,6 +66,10 @@ class CountryRestrictionCoreFormProcess extends Form
 
     private function clearCache()
     {
-        (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
+        (new Cache)->start(
+            UserCoreModel::CACHE_GROUP,
+            'countriesList' . $this->sTable,
+            null
+        )->clear();
     }
 }
