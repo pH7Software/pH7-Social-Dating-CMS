@@ -1550,7 +1550,7 @@ class UserCoreModel extends Model
         if (!$aCountries = $this->cache->get()) {
             Various::checkModelTable($sTable);
 
-            $sSqlQuery = 'SELECT countryCode FROM' . Db::prefix(DbTableName::MEMBER_COUNTRY);
+            $sSqlQuery = 'SELECT countryCode FROM' . Db::prefix($sTable);
             $rStmt = Db::getInstance()->prepare($sSqlQuery);
             $rStmt->execute();
             $aCountries = $rStmt->fetchAll(\PDO::FETCH_OBJ);
