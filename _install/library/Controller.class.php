@@ -27,7 +27,6 @@ abstract class Controller implements Controllable
     const SOFTWARE_REQUIREMENTS_URL = 'http://ph7cms.com/doc/en/requirements';
     const PAYPAL_DONATE_URL = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6';
     const PATREON_URL = 'https://www.patreon.com/bePatron?u=3534366';
-    const SOFTWARE_EMAIL = 'hello@ph7cms.com';
     const SOFTWARE_AUTHOR = 'Pierre-Henry Soria';
     const AUTHOR_URL = 'https://github.com/pH-7';
     const SOFTWARE_GIT_REPO = 'https://github.com/pH7Software/pH7-Social-Dating-CMS';
@@ -88,7 +87,6 @@ abstract class Controller implements Controllable
         $this->oView->assign('patreon_url', self::PATREON_URL);
         $this->oView->assign('software_author', self::SOFTWARE_AUTHOR);
         $this->oView->assign('software_copyright', sprintf(self::SOFTWARE_COPYRIGHT, date('Y')));
-        $this->oView->assign('software_email', self::SOFTWARE_EMAIL);
         $this->oView->assign('tpl_name', self::DEFAULT_THEME);
         $this->oView->assign('current_lang', $this->sCurrentLang);
         $this->oView->assign('total_install_steps', self::TOTAL_INSTALL_STEPS);

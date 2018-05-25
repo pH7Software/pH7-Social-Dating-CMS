@@ -42,7 +42,7 @@ $LANG = array(
     'config_system' => 'Database/System Configuration',
     'finish' => 'Woohoo! pH7CMS is now installed! 😋',
     'go_your_site' => 'Go to your new website!',
-    'go_your_admin_panel' => 'Go to your admin panel!',
+    'go_your_admin_panel' => 'Go to your admin panel',
     'error_page_not_found' => 'Page not found',
     'error_page_not_found_desc' => 'Sorry, the page you are looking for could not be found.',
     'no_protected_exist' => 'Sorry, we haven\'t found the &quot;protected&quot; directory.',
@@ -110,7 +110,7 @@ $LANG = array(
         please visit the <a href="' . Controller::SOFTWARE_GIT_REPO . '">Github Repo</a>.</p>
         <p>---</p>
         <p>Best regards,<br />
-        <a href="' . Controller::AUTHOR_URL . '">Pierre Soria</a></p>',
+        <strong><a href="' . Controller::AUTHOR_URL . '">Pierre Soria</a></strong></p>',
     'yes_dir' => 'The directory was found successfully!',
     'no_dir' => 'The directory does not exist.',
     'wait_importing_database' => 'Please wait while importing the database.<br />

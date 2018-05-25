@@ -42,7 +42,7 @@ $LANG = array(
     'config_system' => 'Configuration du système du CMS !',
     'finish' => 'Installation terminée !',
     'go_your_site' => 'Aller sur votre site !',
-    'go_your_admin_panel' => 'Allez à votre panneau d\'administration !',
+    'go_your_admin_panel' => 'Allez à votre panneau d\'administration',
     'error_page_not_found' => 'Page introuvable',
     'error_page_not_found_desc' => 'Désolé, mais la page que vous cherchez est introuvable.',
     'no_protected_exist' => 'Désolé, mais nous n\'avons pas trouvé le répertoire &laquo; protected &raquo;',
@@ -109,7 +109,7 @@ $LANG = array(
         veuillez visiter le <a href="' . Controller::SOFTWARE_GIT_REPO . '">dépôt Github</a>.</p>
         <p>---</p>
         <p>Cordialement,<br />
-        <a href="' . Controller::AUTHOR_URL . '">Pierre Soria</a></p>',
+        <strong><a href="' . Controller::AUTHOR_URL . '">Pierre Soria</a></strong></p>',
     'yes_dir' => 'Le répertoire a été trouvé avec succès !',
     'no_dir' => 'Le répertoire n\'existe pas.',
     'wait_importing_database' => 'Veuillez patienter pendant l\'importation de la base de donnée.<br />
