@@ -50,16 +50,16 @@ class BlockCountry extends Engine\Model
     {
         $this->cache->start(static::CACHE_GROUP, 'blocked_countries', static::CACHE_TIME);
 
-        if (!$aBlockedCountries = $this->cache->get()) {
+        if (!$oBlockedCountries = $this->cache->get()) {
             $sSqlQuery = 'SELECT countryCode FROM' . Db::prefix(DbTableName::BLOCK_COUNTRY);
             $rStmt = Db::getInstance()->prepare($sSqlQuery);
             $rStmt->execute();
-            $aBlockedCountries = $rStmt->fetchAll(PDO::FETCH_OBJ);
+            $oBlockedCountries = $rStmt->fetchAll(PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $this->cache->put($aBlockedCountries);
+            $this->cache->put($oBlockedCountries);
         }
 
-        return $aBlockedCountries;
+        return $oBlockedCountries;
     }
 
     /**
