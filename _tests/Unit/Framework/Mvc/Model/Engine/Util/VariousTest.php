@@ -138,6 +138,8 @@ class VariousTest extends PHPUnit_Framework_TestCase
             [DbTableName::AFFILIATE, 'affiliates'],
             [DbTableName::MEMBER_INFO, 'members_info'],
             [DbTableName::AFFILIATE_INFO, 'affiliates_info'],
+            [DbTableName::MEMBER_COUNTRY, 'members_countries'],
+            [DbTableName::AFFILIATE_COUNTRY, 'affiliates_countries'],
             [DbTableName::SUBSCRIBER, 'subscribers'],
             [DbTableName::ADMIN, 'admins']
         ];

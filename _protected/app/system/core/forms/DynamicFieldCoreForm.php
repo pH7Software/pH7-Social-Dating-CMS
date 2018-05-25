@@ -82,15 +82,15 @@ class DynamicFieldCoreForm
 
             case 'website':
             case 'socialNetworkSite':
-                $sLang = ($this->sColumn == 'socialNetworkSite') ? t('Social Media Profile:') : t('Your Website:');
-                $sDesc = ($this->sColumn == 'socialNetworkSite') ? t('The URL of your social profile like Facebook, Snapchat, Instagram, Google+, etc.') : t('Your Personal Website/Blog (any promotional/affiliated contents will be banned)');
+                $sLang = $this->sColumn === 'socialNetworkSite' ? t('Social Media Profile:') : t('Your Website:');
+                $sDesc = $this->sColumn === 'socialNetworkSite' ? t('The URL of your social profile like Facebook, Snapchat, Instagram, Google+, etc.') : t('Your Personal Website/Blog (any promotional/affiliated contents will be removed)');
                 $this->oForm->addElement(new \PFBC\Element\Url($sLang, $this->sColumn, array('id' => $this->getFieldId('url'), 'onblur' => 'CValid(this.value,this.id)', 'description' => $sDesc, 'value' => $this->sVal)));
                 $this->addCheckErrSpan('url');
                 break;
 
             case 'phone':
             case 'fax':
-                $sLang = ($this->sColumn == 'fax') ? t('Your Fax Number:') : t('Your Phone Number:');
+                $sLang = $this->sColumn === 'fax' ? t('Your Fax Number:') : t('Your Phone Number:');
                 $this->oForm->addElement(new \PFBC\Element\Phone($sLang, $this->sColumn, array('id' => $this->getFieldId('phone'), 'onblur' => 'CValid(this.value, this.id)', 'title' => t('Enter full number with area code.'), 'value' => $this->sVal)));
                 $this->addCheckErrSpan('phone');
                 break;

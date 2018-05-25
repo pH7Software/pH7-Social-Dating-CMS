@@ -26,7 +26,6 @@ class Form extends Base
 {
     private static $sFormId;
     protected $ajax;
-    protected $ajaxCallback;
     protected $attributes;
     protected $error;
     protected $jQueryUITheme = 'smoothness';
@@ -40,6 +39,7 @@ class Form extends Base
     included jQuery, jQueryUI, jQueryUIButtons, focus, and style.*/
     private $prefix = 'http';
     private $values = array();
+    private $ajaxCallback;
     private $widthSuffix = 'px';
 
     public function __construct($id = 'pfbc', $width = '')

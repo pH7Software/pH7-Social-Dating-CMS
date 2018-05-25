@@ -1067,7 +1067,7 @@ msgstr ""
 #: _protected/app/system/core/forms/DynamicFieldCoreForm.php:86
 msgid ""
 "Your Personal Website/Blog (any promotional/affiliated contents will be "
-"banned)"
+"removed)"
 msgstr ""
 
 #: _protected/app/system/core/forms/DynamicFieldCoreForm.php:93
@@ -17507,7 +17507,7 @@ msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Username.php:33
 msgid ""
-"Error: Username has to be from %0% to %1% characters long, or it is not "
+"Error: Nickname has to be from %0% to %1% characters long, or it is not "
 "available or already used by other user."
 msgstr ""
 

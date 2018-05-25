@@ -12,6 +12,7 @@ namespace PH7;
 
 use PH7\Framework\CArray\ObjArr;
 use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Engine\Db;
@@ -1431,7 +1432,7 @@ class UserCoreModel extends Model
      */
     public function getMembershipDetails($iProfileId)
     {
-        $this->cache->start(self::CACHE_GROUP, 'membershipdetails' . $iProfileId, static::CACHE_TIME);
+        $this->cache->start(self::CACHE_GROUP, 'membershipDetails' . $iProfileId, static::CACHE_TIME);
 
         if (!$oData = $this->cache->get()) {
             $sSql = 'SELECT m.*, g.expirationDays, g.name AS membershipName FROM' . Db::prefix(DbTableName::MEMBER) . 'AS m INNER JOIN ' . Db::prefix(DbTableName::MEMBERSHIP) .
@@ -1531,6 +1532,63 @@ class UserCoreModel extends Model
         }
 
         return $oData;
+    }
+
+
+    /**
+     * @param string $sTable DB country table name.
+     *
+     * @return array
+     *
+     * @throws PH7InvalidArgumentException
+     */
+    public function getCountries($sTable = DbTableName::MEMBER_COUNTRY)
+    {
+        $iNinetyDaysTime = 7776000;
+        $this->cache->start(self::CACHE_GROUP, 'countriesList' . $sTable, $iNinetyDaysTime);
+
+        if (!$aCountries = $this->cache->get()) {
+            Various::checkModelTable($sTable);
+
+            $sSqlQuery = 'SELECT countryCode FROM' . Db::prefix($sTable);
+            $rStmt = Db::getInstance()->prepare($sSqlQuery);
+            $rStmt->execute();
+            $aCountries = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            Db::free($rStmt);
+            $this->cache->put($aCountries);
+        }
+
+        return $aCountries;
+    }
+
+    /**
+     * Add countries for members
+     *
+     * @param string $sCountryCode e.g. en, fr, be, ru, nl, ...
+     *
+     * @return bool|int
+     *
+     * @throws PH7InvalidArgumentException If the table arg is incorrect.
+     */
+    public function addCountry($sCountryCode, $sTable = DbTableName::MEMBER_COUNTRY)
+    {
+        Various::checkModelTable($sTable);
+
+        return $this->orm->insert($sTable, ['countryCode' => $sCountryCode]);
+    }
+
+    /**
+     * @param string $sTable
+     *
+     * @throws PH7InvalidArgumentException If the table arg is incorrect.
+     */
+    public function clearCountries($sTable = DbTableName::MEMBER_COUNTRY)
+    {
+        Various::checkModelTable($sTable);
+
+        $oDb = Db::getInstance();
+        $oDb->exec('TRUNCATE' . Db::prefix($sTable));
+        unset($oDb);
     }
 
     /**
