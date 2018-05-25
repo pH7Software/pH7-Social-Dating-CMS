@@ -323,7 +323,7 @@
                   <li><a href="{{ $design->url('affiliate','admin','search') }}" title="{lang 'Search an Affiliate'}">{lang 'Search an Affiliate'}</a></li>
                   <li><a href="{{ $design->url('affiliate','admin','add') }}" title="{lang 'Add an Affiliate'}">{lang 'Add Affiliate'}</a></li>
                   <li><a href="{{ $design->url('affiliate','admin','config') }}" title="{lang 'Affiliate Settings'}">{lang 'Settings'}</a></li>
-                  <li><a href="{{ $design->url('affiliate','admin','countryrestriction') }}" title="{lang 'Country Restrictions for Registration form'}"><i class="fa fa-ban"></i> {lang 'Country Restriction'}</a></li>
+                  <li><a href="{{ $design->url('affiliate','admin','countryrestriction') }}" title="{lang 'Country Restrictions for Registration form'}">{lang 'Country Restriction'}</a></li>
                   <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('field','field','all','aff') }}" title="{lang 'Affiliate Fields'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Affiliate Fields'}</a>
                     <ul class="dropdown-menu" role="menu">
                       <li><a href="{{ $design->url('field','field','all','aff') }}" title="{lang 'Fields List'}">{lang 'Fields List'}</a></li>
