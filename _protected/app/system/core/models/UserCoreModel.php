@@ -1432,7 +1432,7 @@ class UserCoreModel extends Model
      */
     public function getMembershipDetails($iProfileId)
     {
-        $this->cache->start(self::CACHE_GROUP, 'membershipdetails' . $iProfileId, static::CACHE_TIME);
+        $this->cache->start(self::CACHE_GROUP, 'membershipDetails' . $iProfileId, static::CACHE_TIME);
 
         if (!$oData = $this->cache->get()) {
             $sSql = 'SELECT m.*, g.expirationDays, g.name AS membershipName FROM' . Db::prefix(DbTableName::MEMBER) . 'AS m INNER JOIN ' . Db::prefix(DbTableName::MEMBERSHIP) .
