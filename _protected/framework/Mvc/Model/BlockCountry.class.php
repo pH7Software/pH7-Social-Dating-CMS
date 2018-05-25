@@ -54,8 +54,13 @@ class BlockCountry extends Engine\Model
             $sSqlQuery = 'SELECT countryCode FROM' . Db::prefix(DbTableName::BLOCK_COUNTRY);
             $rStmt = Db::getInstance()->prepare($sSqlQuery);
             $rStmt->execute();
-            $aBlockedCountries = $rStmt->fetchAll(PDO::FETCH_OBJ);
+            $aCountries = $rStmt->fetchAll(PDO::FETCH_OBJ);
             Db::free($rStmt);
+
+            $aBlockedCountries = [];
+            foreach ($aCountries as $oCountry) {
+                $aBlockedCountries[] = $oCountry->countryCode;
+            }
             $this->cache->put($aBlockedCountries);
         }
 
