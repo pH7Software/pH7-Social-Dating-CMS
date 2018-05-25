@@ -12,6 +12,7 @@ namespace PH7;
 
 use PH7\Framework\CArray\ObjArr;
 use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Engine\Db;
@@ -1531,6 +1532,69 @@ class UserCoreModel extends Model
         }
 
         return $oData;
+    }
+
+
+    /**
+     * @param string $sTable DB country table name.
+     *
+     * @return array
+     *
+     * @throws PH7InvalidArgumentException
+     */
+    public function getCountries($sTable = DbTableName::MEMBER_COUNTRY)
+    {
+        $iNinetyDaysTime = 7776000;
+        $this->cache->start(static::CACHE_GROUP, 'countriesList' . $sTable, $iNinetyDaysTime);
+
+        if (!$aSelectedCountries = $this->cache->get()) {
+            Various::checkModelTable($sTable);
+
+            $sSqlQuery = 'SELECT countryCode FROM' . Db::prefix(DbTableName::MEMBER_COUNTRY);
+            $rStmt = Db::getInstance()->prepare($sSqlQuery);
+            $rStmt->execute();
+            $aCountries = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            Db::free($rStmt);
+
+            $aSelectedCountries = [];
+            foreach ($aCountries as $oCountry) {
+                $aSelectedCountries[] = $oCountry->countryCode;
+            }
+
+            $this->cache->put($aSelectedCountries);
+        }
+
+        return $aSelectedCountries;
+    }
+
+    /**
+     * Add countries for members
+     *
+     * @param string $sCountryCode e.g. en, fr, be, ru, nl, ...
+     *
+     * @return bool|int
+     *
+     * @throws PH7InvalidArgumentException If the table arg is incorrect.
+     */
+    public function addCountry($sCountryCode, $sTable = DbTableName::MEMBER_COUNTRY)
+    {
+        Various::checkModelTable($sTable);
+
+        return $this->orm->insert($sTable, ['countryCode' => $sCountryCode]);
+    }
+
+    /**
+     * @param string $sTable
+     *
+     * @throws PH7InvalidArgumentException If the table arg is incorrect.
+     */
+    public function clearCountries($sTable = DbTableName::MEMBER_COUNTRY)
+    {
+        Various::checkModelTable($sTable);
+
+        $oDb = Db::getInstance();
+        $oDb->exec('TRUNCATE' . Db::prefix($sTable));
+        unset($oDb);
     }
 
     /**
