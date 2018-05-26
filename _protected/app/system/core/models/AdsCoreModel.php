@@ -68,18 +68,18 @@ class AdsCoreModel extends Ads
 
     /**
      * @param int $iId
-     * @param int $iStatus
+     * @param string $sStatus
      * @param string $sTable
      *
      * @return bool
      */
-    public function setStatus($iId, $iStatus, $sTable = AdsCore::AD_TABLE_NAME)
+    public function setStatus($iId, $sStatus, $sTable = AdsCore::AD_TABLE_NAME)
     {
         AdsCore::checkTable($sTable);
 
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET active = :status WHERE adsId = :adsId');
         $rStmt->bindValue(':adsId', $iId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':status', $iStatus, \PDO::PARAM_STR);
+        $rStmt->bindValue(':status', $sStatus, \PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
