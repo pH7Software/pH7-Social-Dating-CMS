@@ -33,7 +33,7 @@ class Lang
         $oCache = (new Cache)->start(self::CACHE_GROUP, 'list' . $bOnlyActive, 172800);
 
         if (!$aData = $oCache->get()) {
-            $sSqlWhere = $bOnlyActive ? 'WHERE active=\'1\'' : '';
+            $sSqlWhere = $bOnlyActive ? 'WHERE active = \'1\'' : '';
             $sSqlQuery = 'SELECT * FROM ' . DB::prefix(DbTableName::LANGUAGE_INFO) . $sSqlWhere . ' ORDER BY name ASC';
             $rStmt = Db::getInstance()->prepare($sSqlQuery);
             $rStmt->execute();
