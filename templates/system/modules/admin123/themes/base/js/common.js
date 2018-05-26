@@ -15,15 +15,16 @@ function cache(sType, sCSRFToken) {
     }, 'json');
 }
 
-function ads(sType, iAdsId, sCSRFToken) {
+function ads(sType, iAdId, sTable, sCSRFToken) {
     $.post(pH7Url.base + pH7Url.admin_mod + 'asset/ajax/Ads', {
         type: sType,
-        adsId: iAdsId,
+        adId: iAdId,
+        table: sTable,
         security_token: sCSRFToken
     }, function (oResponseData) {
         if (oResponseData.status == 1) {
             $('.msg').addClass('alert alert-success');
-            $('#ad_' + iAdsId).hide("slow");
+            $('#ad_' + iAdId).hide('slow');
         }
         else {
             $('.msg').addClass('alert alert-danger');

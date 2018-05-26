@@ -59,12 +59,12 @@ class UpdateAdsForm
                 $oForm->addElement(new \PFBC\Element\HTMLExternal(t('Views: %0% | Clicks: %1%', $oRow->views, $oRow->clicks) . ' | '));
             }
 
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<a href="javascript:void(0)" onclick="ads(\'delete\',' . $oRow->adsId . ',\'' . $sCSRFToken . '\')">' . t('Delete') . '</a> | '));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<a href="javascript:void(0)" onclick="ads(\'delete\',' . $oRow->adsId . ',\'' . $sTable . '\',\'' . $sCSRFToken . '\')">' . t('Delete') . '</a> | '));
 
             if ($oRow->active == 1) {
-                $oForm->addElement(new \PFBC\Element\HTMLExternal('<a href="javascript:void(0)" onclick="ads(\'deactivate\',' . $oRow->adsId . ',\'' . $sCSRFToken . '\')">' . t('Deactivate') . '</a>'));
+                $oForm->addElement(new \PFBC\Element\HTMLExternal('<a href="javascript:void(0)" onclick="ads(\'deactivate\',' . $oRow->adsId . ',\'' . $sTable . '\',\'' . $sCSRFToken . '\')">' . t('Deactivate') . '</a>'));
             } else {
-                $oForm->addElement(new \PFBC\Element\HTMLExternal('<a href="javascript:void(0)" onclick="ads(\'activate\',' . $oRow->adsId . ',\'' . $sCSRFToken . '\')">' . t('Activate') . '</a>'));
+                $oForm->addElement(new \PFBC\Element\HTMLExternal('<a href="javascript:void(0)" onclick="ads(\'activate\',' . $oRow->adsId . ',\'' . $sTable . '\',\'' . $sCSRFToken . '\')">' . t('Activate') . '</a>'));
             }
 
             // End ads div tags
