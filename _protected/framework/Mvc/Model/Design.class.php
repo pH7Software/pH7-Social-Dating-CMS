@@ -76,7 +76,7 @@ class Design extends HtmlDesign
         $this->oCache->start(self::CACHE_STATIC_GROUP, 'ads' . $iWidth . $iHeight . $bOnlyActive, static::CACHE_TIME);
 
         if (!$oData = $this->oCache->get()) {
-            $sSqlActive = $bOnlyActive ? ' AND (active=\'1\') ' : ' ';
+            $sSqlActive = $bOnlyActive ? ' AND (active = \'1\') ' : ' ';
             $rStmt = Db::getInstance()->prepare('SELECT * FROM ' . Db::prefix(DbTableName::AD) . 'WHERE (width=:width) AND (height=:height)' . $sSqlActive . 'ORDER BY RAND() LIMIT 1');
             $rStmt->bindValue(':width', $iWidth, \PDO::PARAM_INT);
             $rStmt->bindValue(':height', $iHeight, \PDO::PARAM_INT);
