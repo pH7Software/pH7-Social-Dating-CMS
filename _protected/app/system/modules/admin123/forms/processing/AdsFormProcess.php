@@ -36,7 +36,10 @@ class AdsFormProcess extends Form
         $this->clearCache($bIsAff);
 
         $sSlug = $bIsAff ? 'affiliate' : '';
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', $sSlug), t('The banner has been added!'));
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', $sSlug),
+            t('The banner has been added!')
+        );
     }
 
     /**
