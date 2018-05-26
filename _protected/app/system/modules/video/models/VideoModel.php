@@ -76,7 +76,7 @@ class VideoModel extends VideoCoreModel
      */
     public function deleteAlbum($iProfileId, $iAlbumId)
     {
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::ALBUM_VIDEO) . 'WHERE profileId=:profileId AND albumId=:albumId');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::ALBUM_VIDEO) . 'WHERE profileId = :profileId AND albumId = :albumId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
 
@@ -118,14 +118,14 @@ class VideoModel extends VideoCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'video' . $iProfileId . $iAlbumId . $iVideoId . $sApproved . $iOffset . $iLimit, static::CACHE_TIME);
 
-        if (!$oData = $this->cache->get()) {
+        if (!$mData = $this->cache->get()) {
             $iOffset = (int)$iOffset;
             $iLimit = (int)$iLimit;
 
-            $sSqlVideoId = !empty($iVideoId) ? ' v.videoId=:videoId AND ' : ' ';
+            $sSqlVideoId = !empty($iVideoId) ? ' v.videoId = :videoId AND ' : ' ';
             $rStmt = Db::getInstance()->prepare('SELECT v.*, a.name, m.username, m.firstName, m.sex FROM' . Db::prefix(DbTableName::VIDEO) . 'AS v INNER JOIN'
                 . Db::prefix(DbTableName::ALBUM_VIDEO) . 'AS a ON v.albumId = a.albumId INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
-                'AS m ON v.profileId = m.profileId WHERE v.profileId=:profileId AND v.albumId=:albumId AND' . $sSqlVideoId . 'v.approved=:approved LIMIT :offset, :limit');
+                'AS m ON v.profileId = m.profileId WHERE v.profileId = :profileId AND v.albumId = :albumId AND' . $sSqlVideoId . 'v.approved = :approved LIMIT :offset, :limit');
 
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
@@ -205,8 +205,8 @@ class VideoModel extends VideoCoreModel
      */
     public function updateAlbum($iProfileId, $iAlbumId, $sTitle, $sDescription, $sUpdatedDate)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::ALBUM_VIDEO) . 'SET name =:name, description =:description, updatedDate =:updatedDate
-            WHERE profileId=:profileId AND albumId=:albumId');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::ALBUM_VIDEO) . 'SET name = :name, description = :description, updatedDate = :updatedDate
+            WHERE profileId = :profileId AND albumId = :albumId');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
@@ -229,8 +229,8 @@ class VideoModel extends VideoCoreModel
      */
     public function updateVideo($iProfileId, $iAlbumId, $iVideoId, $sTitle, $sDescription, $sUpdatedDate)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::VIDEO) . 'SET title =:title, description =:description, updatedDate =:updatedDate
-            WHERE profileId=:profileId AND albumId=:albumId AND videoId=:videoId');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::VIDEO) . 'SET title = :title, description = :description, updatedDate = :updatedDate
+            WHERE profileId = :profileId AND albumId = :albumId AND videoId = :videoId');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);

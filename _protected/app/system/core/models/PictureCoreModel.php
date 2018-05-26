@@ -40,10 +40,10 @@ class PictureCoreModel extends Model
             $bIsAlbumId = $iAlbumId !== null;
 
             $sSqlProfileId = $bIsProfileId ? ' a.profileId = :profileId AND ' : '';
-            $sSqlAlbum = $bIsAlbumId ? ' a.albumId=:albumId AND ' : '';
+            $sSqlAlbum = $bIsAlbumId ? ' a.albumId = :albumId AND ' : '';
             $sSqlQuery = 'SELECT a.*, m.username, m.firstName, m.sex FROM' . Db::prefix(DbTableName::ALBUM_PICTURE) . 'AS a INNER JOIN' .
                 Db::prefix(DbTableName::MEMBER) . 'AS m ON a.profileId = m.profileId WHERE' . $sSqlProfileId . $sSqlAlbum .
-                ' a.approved=:approved ORDER BY ' . $sOrder . ' DESC LIMIT :offset, :limit';
+                ' a.approved = :approved ORDER BY ' . $sOrder . ' DESC LIMIT :offset, :limit';
 
             $rStmt = Db::getInstance()->prepare($sSqlQuery);
             if ($bIsProfileId) {
@@ -80,8 +80,8 @@ class PictureCoreModel extends Model
     {
         $bIsPictureId = $iPictureId !== null;
 
-        $sSqlPictureId = $bIsPictureId ? ' AND pictureId=:pictureId ' : '';
-        $sSql = 'DELETE FROM' . Db::prefix(DbTableName::PICTURE) . 'WHERE profileId=:profileId AND albumId=:albumId' . $sSqlPictureId;
+        $sSqlPictureId = $bIsPictureId ? ' AND pictureId = :pictureId ' : '';
+        $sSql = 'DELETE FROM' . Db::prefix(DbTableName::PICTURE) . 'WHERE profileId = :profileId AND albumId = :albumId' . $sSqlPictureId;
         $rStmt = Db::getInstance()->prepare($sSql);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
