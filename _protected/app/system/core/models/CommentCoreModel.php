@@ -81,36 +81,35 @@ class CommentCoreModel extends Model
         $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         $rStmt->execute();
-        $oData = $rStmt->fetchAll(PDO::FETCH_OBJ);
+        $aData = $rStmt->fetchAll(PDO::FETCH_OBJ);
         Db::free($rStmt);
 
-        return $oData;
+        return $aData;
     }
 
     /**
      * @param int $iRecipientId
      * @param string $sTable
      *
-     * @return array|bool|float|int|object|string
+     * @return int
      */
     public function total($iRecipientId, $sTable)
     {
         $this->cache->start(static::CACHE_GROUP, 'total' . $iRecipientId . $sTable, static::CACHE_TIME);
 
-        if (!$iData = $this->cache->get()) {
+        if (!$iTotalComments = $this->cache->get()) {
             $sTable = CommentCore::checkTable($sTable);
 
-            $rStmt = Db::getInstance()->prepare('SELECT COUNT(commentId) AS totalComments FROM' . Db::prefix('comments_' . $sTable) . ' WHERE recipient = :recipient');
+            $rStmt = Db::getInstance()->prepare('SELECT COUNT(commentId) FROM' . Db::prefix('comments_' . $sTable) . ' WHERE recipient = :recipient');
             $rStmt->bindParam(':recipient', $iRecipientId);
             $rStmt->execute();
-            $oRow = $rStmt->fetch(PDO::FETCH_OBJ);
+            $iTotalComments = (int)$rStmt->fetchColumn();
             Db::free($rStmt);
-            $iData = (int)$oRow->totalComments;
             unset($oRow);
-            $this->cache->put($iData);
+            $this->cache->put($iTotalComments);
         }
 
-        return $iData;
+        return $iTotalComments;
     }
 
     /**
