@@ -31,7 +31,12 @@ class UpdateAdsForm
         $sTable = AdsCore::getTable();
         $sCSRFToken = (new Framework\Security\CSRF\Token)->generate('ads');
         $oPage->getTotalPages($oAdsModel->total($sTable), self::ADS_PER_PAGE);
-        $oAds = $oAdsModel->get(null, $oPage->getFirstItem(), $oPage->getNbItemsPerPage(), $sTable);
+        $oAds = $oAdsModel->get(
+            null,
+            $oPage->getFirstItem(),
+            $oPage->getNbItemsPerPage(),
+            $sTable
+        );
         unset($oPage, $oAdsModel);
 
         $oSysVar = new SysVar;
