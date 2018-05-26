@@ -164,23 +164,23 @@ class Design extends HtmlDesign
     {
         $this->oCache->start(self::CACHE_STATIC_GROUP, 'files' . $sType . $bOnlyActive, static::CACHE_TIME);
 
-        if (!$oData = $this->oCache->get()) {
+        if (!$aData = $this->oCache->get()) {
             $sSqlWhere = $bOnlyActive ? ' AND active=\'1\'' : '';
             $rStmt = Db::getInstance()->prepare('SELECT file FROM ' . Db::prefix(DbTableName::STATIC_FILE) . 'WHERE fileType = :type' . $sSqlWhere);
             $rStmt->bindValue(':type', $sType, \PDO::PARAM_STR);
             $rStmt->execute();
-            $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $aData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $this->oCache->put($oData);
+            $this->oCache->put($aData);
         }
 
-        if (!empty($oData)) {
-            foreach ($oData as $oFile) {
+        if (!empty($aData)) {
+            foreach ($aData as $oFile) {
                 $sFullPath = (new SysVar)->parse($oFile->file);
                 $sMethodName = 'external' . ($sType === 'js' ? 'Js' : 'Css') . 'File';
                 $this->$sMethodName($sFullPath);
             }
         }
-        unset($oData);
+        unset($aData);
     }
 }

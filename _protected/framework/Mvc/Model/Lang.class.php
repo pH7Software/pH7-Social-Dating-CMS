@@ -26,22 +26,23 @@ class Lang
      *
      * @param bool $bOnlyActive Only active lang
      *
-     * @return \stdClass Language data.
+     * @return array Language data.
      */
     public function getInfos($bOnlyActive = true)
     {
         $oCache = (new Cache)->start(self::CACHE_GROUP, 'list' . $bOnlyActive, 172800);
 
-        if (!$oData = $oCache->get()) {
-            $sSqlWhere = ($bOnlyActive) ? 'WHERE active=\'1\'' : '';
-            $rStmt = Db::getInstance()->prepare('SELECT * FROM ' . DB::prefix(DbTableName::LANGUAGE_INFO) . $sSqlWhere . ' ORDER BY name ASC');
+        if (!$aData = $oCache->get()) {
+            $sSqlWhere = $bOnlyActive ? 'WHERE active=\'1\'' : '';
+            $sSqlQuery = 'SELECT * FROM ' . DB::prefix(DbTableName::LANGUAGE_INFO) . $sSqlWhere . ' ORDER BY name ASC';
+            $rStmt = Db::getInstance()->prepare($sSqlQuery);
             $rStmt->execute();
-            $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $aData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $oCache->put($oData);
+            $oCache->put($aData);
         }
         unset($oCache);
 
-        return $oData;
+        return $aData;
     }
 }

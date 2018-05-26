@@ -15,16 +15,16 @@ class SubscriptionModel extends UserCoreModel
     /**
      * Get all Active Subscribers (it is required by the law to send emails only to the confirmed opt-in subscribers).
      *
-     * @return \stdClass
+     * @return array
      */
     public function getSubscribers()
     {
         $rStmt = Db::getInstance()->prepare('SELECT email, name AS firstName FROM' . Db::prefix(DbTableName::SUBSCRIBER) . 'WHERE active = 1');
         $rStmt->execute();
-        $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        $aRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);
 
-        return $oRow;
+        return $aRow;
     }
 
     /**

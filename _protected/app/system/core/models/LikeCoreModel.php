@@ -25,17 +25,17 @@ class LikeCoreModel extends Model
     {
         $this->cache->start(self::CACHE_GROUP, 'select' . $sKey, 3600 * 168);
 
-        if (!$oData = $this->cache->get()) {
+        if (!$aData = $this->cache->get()) {
             $sSqlQuery = 'SELECT * FROM' . Db::prefix(DbTableName::LIKE) . 'WHERE keyId =:key LIMIT 1';
             $rStmt = Db::getInstance()->prepare($sSqlQuery);
             $rStmt->bindValue(':key', $sKey, \PDO::PARAM_STR);
             $rStmt->execute();
-            $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $aData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $this->cache->put($oData);
+            $this->cache->put($aData);
         }
 
-        return $oData;
+        return $aData;
     }
 
     /**

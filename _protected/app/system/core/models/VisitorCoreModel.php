@@ -97,9 +97,9 @@ class VisitorCoreModel
         $rStmt->execute();
 
         if (!$bCount) {
-            $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $aRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            return $oRow;
+            return $aRow;
         }
 
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);

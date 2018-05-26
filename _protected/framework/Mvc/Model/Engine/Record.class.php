@@ -240,13 +240,13 @@ class Record
 
             $rStmt = $oDb->prepare($sSql);
             $rStmt->execute();
-            $oRow = $rStmt->fetchAll(PDO::FETCH_OBJ);
+            $aRow = $rStmt->fetchAll(PDO::FETCH_OBJ);
 
             // If all goes well, we commit the transaction.
             $oDb->commit();
 
             Db::free($rStmt);
-            return $oRow;
+            return $aRow;
         } catch (Exception $oE) {
             $this->aErrors[] = $oE->getMessage();
 
@@ -344,10 +344,10 @@ class Record
                 $rStmt->bindParam(':id', $sId);
             }
             $rStmt->execute();
-            $oRow = $rStmt->fetchAll(PDO::FETCH_OBJ);
+            $aRow = $rStmt->fetchAll(PDO::FETCH_OBJ);
             Db::free($rStmt);
 
-            return $oRow;
+            return $aRow;
         } catch (Exception $oE) {
             $this->aErrors[] = $oE->getMessage();
         }
