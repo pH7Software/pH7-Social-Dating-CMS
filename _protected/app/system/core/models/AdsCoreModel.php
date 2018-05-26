@@ -8,10 +8,10 @@
 
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\Ads;
+use PH7\Framework\Mvc\Model\Ads as AdsModel;
 use PH7\Framework\Mvc\Model\Engine\Db;
 
-class AdsCoreModel extends Ads
+class AdsCoreModel extends AdsModel
 {
     const CACHE_GROUP = 'db/sys/core/ads';
     const CACHE_TIME = 604800;
