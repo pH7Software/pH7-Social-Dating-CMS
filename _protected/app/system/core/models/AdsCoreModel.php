@@ -31,7 +31,7 @@ class AdsCoreModel extends AdsModel
         $iLimit = (int)$iLimit;
 
         $sSqlActive = !empty($mActive) ? 'WHERE active= :active' : '';
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sTable) . $sSqlActive . ' ORDER BY active ASC, name ASC LIMIT :offset, :limit');
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sTable) . $sSqlActive . ' ORDER BY active ASC LIMIT :offset, :limit');
         if (!empty($mActive)) {
             $rStmt->bindValue(':active', $mActive, \PDO::PARAM_STR);
         }
