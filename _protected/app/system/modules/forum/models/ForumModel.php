@@ -442,15 +442,15 @@ class ForumModel extends ForumCoreModel
 
         $sSqlProfileId = $bIsProfileId ? ' WHERE profileId = :profileId' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(forumId) AS totalForums FROM' . Db::prefix(DbTableName::FORUM) . $sSqlProfileId);
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(forumId) FROM' . Db::prefix(DbTableName::FORUM) . $sSqlProfileId);
         if ($bIsProfileId) {
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         }
         $rStmt->execute();
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        $iTotalForums = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
 
-        return (int)$oRow->totalForums;
+        return $iTotalForums;
     }
 
     /**
@@ -470,7 +470,7 @@ class ForumModel extends ForumCoreModel
             $sSql = ' WHERE profileId = :profileId';
         }
 
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(topicId) AS totalTopics FROM' . Db::prefix(DbTableName::FORUM_TOPIC) . $sSql);
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(topicId) FROM' . Db::prefix(DbTableName::FORUM_TOPIC) . $sSql);
 
         if ($iForumId !== null) {
             $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT);
@@ -479,10 +479,10 @@ class ForumModel extends ForumCoreModel
         }
 
         $rStmt->execute();
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        $iTotalTopics = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
 
-        return (int)$oRow->totalTopics;
+        return $iTotalTopics;
     }
 
     /**
@@ -500,7 +500,7 @@ class ForumModel extends ForumCoreModel
             $sSql = ' WHERE profileId = :profileId';
         }
 
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(messageId) AS totalMessages FROM' . Db::prefix(DbTableName::FORUM_MESSAGE) . $sSql);
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(messageId) FROM' . Db::prefix(DbTableName::FORUM_MESSAGE) . $sSql);
 
         if ($iTopicId !== null) {
             $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
@@ -509,10 +509,10 @@ class ForumModel extends ForumCoreModel
         }
 
         $rStmt->execute();
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        $iTotalMessages = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
 
-        return (int)$oRow->totalMessages;
+        return $iTotalMessages;
     }
 
     /**
