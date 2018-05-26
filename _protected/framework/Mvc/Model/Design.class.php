@@ -144,7 +144,7 @@ class Design extends HtmlDesign
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $sData = (!empty($oRow->code)) ? $oRow->code : null;
+            $sData = !empty($oRow->code) ? $oRow->code : null;
             unset($oRow);
             $this->oCache->put($sData);
         }
