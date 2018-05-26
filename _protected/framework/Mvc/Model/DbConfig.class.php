@@ -75,7 +75,13 @@ final class DbConfig
      */
     public static function setSetting($sValue, $sName)
     {
-        return Engine\Record::getInstance()->update(DbTableName::SETTING, 'settingValue', $sValue, 'settingName', $sName);
+        return Engine\Record::getInstance()->update(
+            DbTableName::SETTING,
+            'settingValue',
+            $sValue,
+            'settingName',
+            $sName
+        );
     }
 
     public static function getMetaMain($sLangId)
@@ -133,7 +139,13 @@ final class DbConfig
      */
     public static function setMetaMain($sSection, $sValue, $sLangId)
     {
-        Engine\Record::getInstance()->update(DbTableName::META_MAIN, $sSection, $sValue, 'langId', $sLangId);
+        Engine\Record::getInstance()->update(
+            DbTableName::META_MAIN,
+            $sSection,
+            $sValue,
+            'langId',
+            $sLangId
+        );
     }
 
     /**
@@ -181,6 +193,10 @@ final class DbConfig
      */
     public static function clearCache()
     {
-        (new Cache)->start(self::CACHE_GROUP, null, null)->clear();
+        (new Cache)->start(
+            self::CACHE_GROUP,
+            null,
+            null
+        )->clear();
     }
 }
