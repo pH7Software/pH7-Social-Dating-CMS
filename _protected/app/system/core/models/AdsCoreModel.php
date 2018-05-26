@@ -19,12 +19,12 @@ class AdsCoreModel extends Ads
     /**
      * Get Advertisements in the database.
      *
-     * @param int|null $mActive 1 = active otherwise null. Default value is 1.
+     * @param string|null $mActive 1 = active otherwise null. Default value is '1'
      * @param string $sTable The table.
      *
      * @return array The advertisements data.
      */
-    public function get($mActive = 1, $iOffset, $iLimit, $sTable = AdsCore::AD_TABLE_NAME)
+    public function get($mActive = '1', $iOffset, $iLimit, $sTable = AdsCore::AD_TABLE_NAME)
     {
         AdsCore::checkTable($sTable);
         $iOffset = (int)$iOffset;
@@ -33,7 +33,7 @@ class AdsCoreModel extends Ads
         $sSqlActive = !empty($mActive) ? 'WHERE active= :active' : '';
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sTable) . $sSqlActive . ' ORDER BY active ASC, name ASC LIMIT :offset, :limit');
         if (!empty($mActive)) {
-            $rStmt->bindValue(':active', $mActive, \PDO::PARAM_INT);
+            $rStmt->bindValue(':active', $mActive, \PDO::PARAM_STR);
         }
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -77,9 +77,9 @@ class AdsCoreModel extends Ads
     {
         AdsCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET active = :status WHERE adsId =:adsId');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET active = :status WHERE adsId = :adsId');
         $rStmt->bindValue(':adsId', $iId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':status', $iStatus, \PDO::PARAM_INT);
+        $rStmt->bindValue(':status', $iStatus, \PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
