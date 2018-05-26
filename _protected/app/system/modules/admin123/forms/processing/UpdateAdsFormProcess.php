@@ -36,6 +36,10 @@ class UpdateAdsFormProcess extends Form
 
     private function clearCache()
     {
-        (new Cache)->start(Design::CACHE_STATIC_GROUP, null, null)->clear();
+        (new Cache)->start(
+            Design::CACHE_STATIC_GROUP,
+            null,
+            null
+        )->clear();
     }
 }
