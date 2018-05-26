@@ -38,10 +38,10 @@ class AdsCoreModel extends Ads
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
-        $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        $aRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);
 
-        return $oRow;
+        return $aRow;
     }
 
     /**
