@@ -18,14 +18,17 @@ use PH7\Framework\Security\CSRF\Token;
 
 class AdsAjax
 {
-    /** @var HttpRequest */
-    private $oHttpRequest;
-
     /** @var AdsCoreModel */
     private $oAdsModel;
 
     /** @var string */
     private $sMsg;
+
+    /** @var string */
+    private $sTable;
+
+    /** @var int */
+    private $iAdId;
 
     /** @var bool */
     private $bStatus;
@@ -36,10 +39,12 @@ class AdsAjax
             exit(jsonMsg(0, Form::errorTokenMsg()));
         }
 
-        $this->oHttpRequest = new HttpRequest;
+        $oHttpRequest = new HttpRequest;
         $this->oAdsModel = new AdsCoreModel;
+        $this->sTable = $oHttpRequest->post('table');
+        $this->iAdId = $oHttpRequest->post('adId');
 
-        switch ($this->oHttpRequest->post('type')) {
+        switch ($oHttpRequest->post('type')) {
             case 'activate':
                 $this->activate();
                 break;
@@ -60,9 +65,7 @@ class AdsAjax
 
     protected function activate()
     {
-        $sTable = AdsCore::getTable();
-
-        $this->bStatus = $this->oAdsModel->setStatus($this->oHttpRequest->post('adsId'), 1, $sTable);
+        $this->bStatus = $this->oAdsModel->setStatus($this->iAdId, 1, $this->sTable);
 
         if ($this->bStatus) {
             (new Cache)->start(DesignModel::CACHE_STATIC_GROUP, null, null)->clear();
@@ -75,9 +78,7 @@ class AdsAjax
 
     protected function deactivate()
     {
-        $sTable = AdsCore::getTable();
-
-        $this->bStatus = $this->oAdsModel->setStatus($this->oHttpRequest->post('adsId'), 0, $sTable);
+        $this->bStatus = $this->oAdsModel->setStatus($this->iAdId, 0, $this->sTable);
 
         if ($this->bStatus) {
             (new Cache)->start(DesignModel::CACHE_STATIC_GROUP, null, null)->clear();
@@ -90,9 +91,7 @@ class AdsAjax
 
     protected function delete()
     {
-        $sTable = AdsCore::getTable();
-
-        $this->bStatus = $this->oAdsModel->delete($this->oHttpRequest->post('adsId'), $sTable);
+        $this->bStatus = $this->oAdsModel->delete($this->iAdId, $this->sTable);
 
         if ($this->bStatus) {
             /* Clean AdminCoreModel Ads and Model\Design for STATIC data */
