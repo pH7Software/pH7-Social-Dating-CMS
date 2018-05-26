@@ -406,7 +406,7 @@ class Record
      */
     public function updates($sTable, array $aValues)
     {
-        $aValues = ($aValues === null) ? $this->aValues : $aValues;
+        $aValues = $aValues === null ? $this->aValues : $aValues;
         $this->sSql = 'UPDATE' . Db::prefix($sTable) . 'SET ';
 
         $oCachingIterator = new CachingIterator(new ArrayIterator($aValues));

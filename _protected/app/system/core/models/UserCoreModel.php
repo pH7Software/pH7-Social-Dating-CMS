@@ -1415,7 +1415,7 @@ class UserCoreModel extends Model
                 $rStmt->bindValue(':groupId', $iGroupId, \PDO::PARAM_INT);
             }
             $rStmt->execute();
-            $mData = ($bIsGroupId) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = $bIsGroupId ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             $this->cache->put($mData);
         }
