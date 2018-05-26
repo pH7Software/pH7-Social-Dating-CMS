@@ -23,7 +23,7 @@ class Module extends Engine\Model
      *
      * @param string $sFolderName Name of the module folder. Default: NULL
      *
-     * @return \stdClass
+     * @return \stdClass|array
      */
     public function get($sFolderName = null)
     {
