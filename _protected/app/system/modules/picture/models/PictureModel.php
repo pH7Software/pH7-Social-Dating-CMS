@@ -114,7 +114,7 @@ class PictureModel extends PictureCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'photo' . $iProfileId . $iAlbumId . $iPictureId . $sApproved . $iOffset . $iLimit, static::CACHE_TIME);
 
-        if (!$oData = $this->cache->get()) {
+        if (!$mData = $this->cache->get()) {
             $iOffset = (int)$iOffset;
             $iLimit = (int)$iLimit;
 
@@ -133,12 +133,12 @@ class PictureModel extends PictureCoreModel
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
             $rStmt->execute();
 
-            $oData = !empty($iPictureId) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = !empty($iPictureId) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $this->cache->put($oData);
+            $this->cache->put($mData);
         }
 
-        return $oData;
+        return $mData;
     }
 
     /**
