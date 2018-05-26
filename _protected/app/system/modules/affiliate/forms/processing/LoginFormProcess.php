@@ -39,7 +39,15 @@ class LoginFormProcess extends Form implements LoginableForm
         $iMaxAttempts = (int)DbConfig::getSetting('maxAffiliateLoginAttempts');
         $iTimeDelay = (int)DbConfig::getSetting('loginAffiliateAttemptTime');
 
-        if ($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view, DbTableName::AFFILIATE)) {
+        if ($bIsLoginAttempt &&
+            !$oSecurityModel->checkLoginAttempt(
+                $iMaxAttempts,
+                $iTimeDelay,
+                $sEmail,
+                $this->view,
+                DbTableName::AFFILIATE
+            )
+        ) {
             \PFBC\Form::setError('form_login_aff', Form::loginAttemptsExceededMsg($iTimeDelay));
             return; // Stop execution of the method.
         }

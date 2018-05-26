@@ -46,7 +46,15 @@ class LoginFormProcess extends Form implements LoginableForm
         $iMaxAttempts = (int)DbConfig::getSetting('maxAdminLoginAttempts');
         $iTimeDelay = (int)DbConfig::getSetting('loginAdminAttemptTime');
 
-        if ($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view, DbTableName::ADMIN)) {
+        if ($bIsLoginAttempt &&
+            !$oSecurityModel->checkLoginAttempt(
+                $iMaxAttempts,
+                $iTimeDelay,
+                $sEmail,
+                $this->view,
+                DbTableName::ADMIN
+            )
+        ) {
             \PFBC\Form::setError('form_admin_login', Form::loginAttemptsExceededMsg($iTimeDelay));
             return; // Stop execution of the method.
         }

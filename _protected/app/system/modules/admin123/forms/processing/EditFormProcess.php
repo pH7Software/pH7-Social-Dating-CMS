@@ -91,7 +91,9 @@ class EditFormProcess extends Form
     private function getProfileId()
     {
         // Prohibit other admins to edit the Root Administrator (ID 1)
-        if ($this->httpRequest->getExists('profile_id') && !AdminCore::isRootProfileId($this->httpRequest->get('profile_id', 'int'))) {
+        if ($this->httpRequest->getExists('profile_id') &&
+            !AdminCore::isRootProfileId($this->httpRequest->get('profile_id', 'int'))
+        ) {
             return $this->httpRequest->get('profile_id', 'int');
         }
 
