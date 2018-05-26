@@ -154,21 +154,19 @@ class VideoModel extends VideoCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'totalAlbums' . $iProfileId, static::CACHE_TIME);
 
-        if (!$iData = $this->cache->get()) {
-            $sSqlProfileId = $iProfileId !== null ? ' WHERE profileId=:profileId' : '';
-            $rStmt = Db::getInstance()->prepare('SELECT COUNT(albumId) AS totalAlbums FROM' . Db::prefix(DbTableName::ALBUM_VIDEO) . $sSqlProfileId);
+        if (!$iTotalAlbums = $this->cache->get()) {
+            $sSqlProfileId = $iProfileId !== null ? ' WHERE profileId = :profileId' : '';
+            $rStmt = Db::getInstance()->prepare('SELECT COUNT(albumId) FROM' . Db::prefix(DbTableName::ALBUM_VIDEO) . $sSqlProfileId);
             if ($iProfileId !== null) {
                 $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             }
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $iTotalAlbums = (int)$rStmt->fetchColumn();
             Db::free($rStmt);
-            $iData = (int)$oRow->totalAlbums;
-            unset($oRow);
-            $this->cache->put($iData);
+            $this->cache->put($iTotalAlbums);
         }
 
-        return $iData;
+        return $iTotalAlbums;
     }
 
     /**
@@ -180,18 +178,16 @@ class VideoModel extends VideoCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'totalVideos' . $iProfileId, static::CACHE_TIME);
 
-        if (!$iData = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT COUNT(videoId) AS totalVideos FROM' . Db::prefix(DbTableName::VIDEO) . 'WHERE profileId=:profileId');
+        if (!$iTotalVideos = $this->cache->get()) {
+            $rStmt = Db::getInstance()->prepare('SELECT COUNT(videoId) FROM' . Db::prefix(DbTableName::VIDEO) . 'WHERE profileId = :profileId');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $iTotalVideos = (int)$rStmt->fetchColumn();
             Db::free($rStmt);
-            $iData = (int)$oRow->totalVideos;
-            unset($oRow);
-            $this->cache->put($iData);
+            $this->cache->put($iTotalVideos);
         }
 
-        return $iData;
+        return $iTotalVideos;
     }
 
     /**

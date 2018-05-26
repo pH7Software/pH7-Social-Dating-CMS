@@ -150,22 +150,20 @@ class PictureModel extends PictureCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'totalAlbums' . $iProfileId, static::CACHE_TIME);
 
-        if (!$iData = $this->cache->get()) {
+        if (!$iTotalAlbums = $this->cache->get()) {
             $sSqlProfileId = $iProfileId !== null ? ' WHERE profileId=:profileId' : '';
 
-            $rStmt = Db::getInstance()->prepare('SELECT COUNT(albumId) AS totalAlbums FROM' . Db::prefix(DbTableName::ALBUM_PICTURE) . $sSqlProfileId);
+            $rStmt = Db::getInstance()->prepare('SELECT COUNT(albumId) FROM' . Db::prefix(DbTableName::ALBUM_PICTURE) . $sSqlProfileId);
             if ($iProfileId !== null) {
                 $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             }
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $iTotalAlbums = (int)$rStmt->fetchColumn();
             Db::free($rStmt);
-            $iData = (int)$oRow->totalAlbums;
-            unset($oRow);
-            $this->cache->put($iData);
+            $this->cache->put($iTotalAlbums);
         }
 
-        return $iData;
+        return $iTotalAlbums;
     }
 
     /**
@@ -177,18 +175,16 @@ class PictureModel extends PictureCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'totalPhotos' . $iProfileId, static::CACHE_TIME);
 
-        if (!$iData = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT COUNT(pictureId) AS totalPhotos FROM' . Db::prefix(DbTableName::PICTURE) . 'WHERE profileId=:profileId');
+        if (!$iTotalPhotos = $this->cache->get()) {
+            $rStmt = Db::getInstance()->prepare('SELECT COUNT(pictureId) FROM' . Db::prefix(DbTableName::PICTURE) . 'WHERE profileId = :profileId');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $iTotalPhotos = (int)$rStmt->fetchColumn();
             Db::free($rStmt);
-            $iData = (int)$oRow->totalPhotos;
-            unset($oRow);
-            $this->cache->put($iData);
+            $this->cache->put($iTotalPhotos);
         }
 
-        return $iData;
+        return $iTotalPhotos;
     }
 
     /**
