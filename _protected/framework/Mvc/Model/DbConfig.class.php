@@ -116,7 +116,8 @@ final class DbConfig
                     'metaCategory' => 'dating'
                 ];
 
-                Engine\Record::getInstance()->insert(DbTableName::META_MAIN, $aData); // Create the new meta data language
+                // Create the new meta data language
+                Engine\Record::getInstance()->insert(DbTableName::META_MAIN, $aData);
                 $oData = (object)$aData;
                 unset($aData);
             }
