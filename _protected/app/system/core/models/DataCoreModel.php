@@ -32,7 +32,6 @@ class DataCoreModel extends Model
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
-
         $sSqlQuery = 'SELECT data.*, m.username FROM' . Db::prefix($sTable) . 'AS data INNER JOIN' .
             Db::prefix(DbTableName::MEMBER) . 'AS m ON data.profileId = m.profileId WHERE data.approved = 1 ORDER BY ' .
             $sOrder . ' DESC LIMIT :offset, :limit';
