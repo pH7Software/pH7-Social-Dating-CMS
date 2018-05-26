@@ -22,11 +22,11 @@ class Lang
     const CACHE_GROUP = 'db/lang';
 
     /**
-     * Get information about the language.
+     * Get information about the language(s).
      *
      * @param bool $bOnlyActive Only active lang
      *
-     * @return array Language data.
+     * @return array Get the info of the available languages.
      */
     public function getInfos($bOnlyActive = true)
     {
