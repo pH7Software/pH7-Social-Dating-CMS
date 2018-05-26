@@ -105,7 +105,6 @@ class CommentCoreModel extends Model
             $rStmt->execute();
             $iTotalComments = (int)$rStmt->fetchColumn();
             Db::free($rStmt);
-            unset($oRow);
             $this->cache->put($iTotalComments);
         }
 
