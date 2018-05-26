@@ -41,10 +41,10 @@ class DataCoreModel extends Model
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
 
         $rStmt->execute();
-        $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        $aData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);
 
-        return $oData;
+        return $aData;
     }
 
     /**
@@ -69,10 +69,10 @@ class DataCoreModel extends Model
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
 
         $rStmt->execute();
-        $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        $aData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);
 
-        return $oData;
+        return $aData;
     }
 
     public function getProfiles()
