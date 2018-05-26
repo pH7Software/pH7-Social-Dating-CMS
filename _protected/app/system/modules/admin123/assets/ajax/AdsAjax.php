@@ -96,9 +96,10 @@ class AdsAjax
 
         if ($this->bStatus) {
             /* Clean AdminCoreModel Ads and Model\Design for STATIC data */
-            (new Cache)->start(DesignModel::CACHE_STATIC_GROUP, null, null)->clear()
-                ->start(AdsCoreModel::CACHE_GROUP, 'totalAds', null)->clear()
-                ->start(AdsCoreModel::CACHE_GROUP, 'totalAdsAffiliates', null)->clear();
+            (new Cache)
+                ->start(DesignModel::CACHE_STATIC_GROUP, null, null)->clear()
+                ->start(AdsCoreModel::CACHE_GROUP, 'totalads', null)->clear()
+                ->start(AdsCoreModel::CACHE_GROUP, 'totalads_affiliates', null)->clear();
 
             $this->sMsg = jsonMsg(1, t('The banner has been deleted.'));
         } else {
