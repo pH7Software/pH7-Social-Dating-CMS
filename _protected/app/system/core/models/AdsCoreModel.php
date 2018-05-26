@@ -13,6 +13,9 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class AdsCoreModel extends AdsModel
 {
+    const ACTIVE = '1';
+    const DEACTIVATE = '0';
+
     const CACHE_GROUP = 'db/sys/core/ads';
     const CACHE_TIME = 604800;
 
@@ -24,7 +27,7 @@ class AdsCoreModel extends AdsModel
      *
      * @return array The advertisements data.
      */
-    public function get($mActive = '1', $iOffset, $iLimit, $sTable = AdsCore::AD_TABLE_NAME)
+    public function get($mActive = self::ACTIVE, $iOffset, $iLimit, $sTable = AdsCore::AD_TABLE_NAME)
     {
         AdsCore::checkTable($sTable);
         $iOffset = (int)$iOffset;

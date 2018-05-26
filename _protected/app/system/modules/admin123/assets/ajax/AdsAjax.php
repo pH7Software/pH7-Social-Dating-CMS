@@ -65,7 +65,7 @@ class AdsAjax
 
     protected function activate()
     {
-        $this->bStatus = $this->oAdsModel->setStatus($this->iAdId, 1, $this->sTable);
+        $this->bStatus = $this->oAdsModel->setStatus($this->iAdId, AdsCoreModel::ACTIVE, $this->sTable);
 
         if ($this->bStatus) {
             (new Cache)->start(DesignModel::CACHE_STATIC_GROUP, null, null)->clear();
@@ -78,7 +78,7 @@ class AdsAjax
 
     protected function deactivate()
     {
-        $this->bStatus = $this->oAdsModel->setStatus($this->iAdId, 0, $this->sTable);
+        $this->bStatus = $this->oAdsModel->setStatus($this->iAdId, AdsCoreModel::DEACTIVATE, $this->sTable);
 
         if ($this->bStatus) {
             (new Cache)->start(DesignModel::CACHE_STATIC_GROUP, null, null)->clear();
