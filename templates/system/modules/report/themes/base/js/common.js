@@ -12,7 +12,7 @@ function report(sType, iReportId, sCSRFToken) {
     }, function (oResponseData) {
         if (oResponseData.status == 1) {
             $('.msg').addClass('alert alert-success');
-            $('#report_' + iReportId).hide("slow");
+            $('#report_' + iReportId).hide('slow');
         } else {
             $('.msg').addClass('alert alert-danger');
         }

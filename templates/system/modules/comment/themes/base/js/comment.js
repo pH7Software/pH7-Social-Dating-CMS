@@ -19,7 +19,7 @@ function comment(sType, iCommentId, iRecipientId, iSenderId, sTable, sCSRFToken)
         if (oResponseData.status == 1) {
             $('.msg').show();
             $('.msg').addClass('alert alert-success');
-            $('#' + iCommentId).hide("slow");
+            $('#' + iCommentId).hide('slow');
         } else {
             $('.msg').addClass('alert alert-danger');
         }

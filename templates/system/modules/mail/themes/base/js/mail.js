@@ -13,7 +13,7 @@ function mail(sType, iMsgId, sCSRFToken) {
     }, function (oResponseData) {
         if (oResponseData.status == 1) {
             $('.msg').addClass('alert alert-success');
-            $('#mail_' + iMsgId).hide("slow");
+            $('#mail_' + iMsgId).hide('slow');
         } else {
             $('.msg').addClass('alert alert-danger');
         }
