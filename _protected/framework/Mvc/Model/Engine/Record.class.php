@@ -227,8 +227,7 @@ class Record
      *
      * @param string $sSql
      *
-     * @return stdClass|bool Returns stdClass on success or FALSE on failure.
-     *
+     * @return array|bool Returns stdClass on success or FALSE on failure.
      */
     public function query($sSql)
     {
@@ -301,7 +300,7 @@ class Record
      * @param array $aJoin Default: NULL
      * @param string $sOptions Default: NULL
      *
-     * @return stdClass|bool Returns stdClass on success or throw PDOException on failure.
+     * @return array|bool Returns stdClass on success or throw PDOException on failure.
      */
     public function getAllInOne($mTable, $sField = null, $sId = null, $mWhat = '*', array $aJoin = null, $sOptions = null)
     {

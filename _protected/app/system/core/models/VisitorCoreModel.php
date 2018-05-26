@@ -64,7 +64,7 @@ class VisitorCoreModel
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return int|stdClass An object for the visitors list or an integer for the total number visitors returned
+     * @return int|array|\stdClass An object for the visitors list or an integer for the total number visitors returned
      */
     public function get($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
