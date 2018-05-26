@@ -39,7 +39,9 @@ class AdsCore extends Ads
     public static function getTable()
     {
         $oHttpRequest = new Http;
-        if ($oHttpRequest->getExists('ads_type') && $oHttpRequest->get('ads_type') == 'affiliate') {
+        if ($oHttpRequest->getExists('ads_type') &&
+            $oHttpRequest->get('ads_type') === 'affiliate'
+        ) {
             $sTable = self::AFFILIATE_AD_TABLE_NAME;
         } else {
             $sTable = self::AD_TABLE_NAME;
