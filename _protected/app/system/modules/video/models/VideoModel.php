@@ -137,12 +137,12 @@ class VideoModel extends VideoCoreModel
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
             $rStmt->execute();
 
-            $oData = !empty($iVideoId) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = !empty($iVideoId) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $this->cache->put($oData);
+            $this->cache->put($mData);
         }
 
-        return $oData;
+        return $mData;
     }
 
     /**
