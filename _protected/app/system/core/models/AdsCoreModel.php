@@ -131,18 +131,16 @@ class AdsCoreModel extends Ads
     {
         $this->cache->start(self::CACHE_GROUP, 'total' . $sTable, static::CACHE_TIME);
 
-        if (!$iData = $this->cache->get()) {
+        if (!$iTotalAds = $this->cache->get()) {
             AdsCore::checkTable($sTable);
 
-            $rStmt = Db::getInstance()->prepare('SELECT COUNT(adsId) AS totalAds FROM' . Db::prefix($sTable));
+            $rStmt = Db::getInstance()->prepare('SELECT COUNT(adsId) FROM' . Db::prefix($sTable));
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $iTotalAds = (int)$rStmt->fetchColumn();
             Db::free($rStmt);
-            $iData = (int)$oRow->totalAds;
-            unset($oRow);
-            $this->cache->put($iData);
+            $this->cache->put($iTotalAds);
         }
 
-        return $iData;
+        return $iTotalAds;
     }
 }
