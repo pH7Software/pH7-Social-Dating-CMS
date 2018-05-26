@@ -94,7 +94,7 @@ class AdsCoreModel extends Ads
     {
         AdsCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix($sTable) . 'WHERE adsId =:adsId');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix($sTable) . 'WHERE adsId = :adsId');
         $rStmt->bindValue(':adsId', $iId, \PDO::PARAM_INT);
 
         return $rStmt->execute();
@@ -112,7 +112,7 @@ class AdsCoreModel extends Ads
     {
         AdsCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET name =:name, code = :code WHERE adsId =:adsId');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET name = :name, code = :code WHERE adsId = :adsId');
         $rStmt->bindValue(':adsId', $iId, \PDO::PARAM_INT);
         $rStmt->bindValue(':name', $sName, \PDO::PARAM_STR);
         $rStmt->bindValue(':code', $sCode, \PDO::PARAM_STR);
