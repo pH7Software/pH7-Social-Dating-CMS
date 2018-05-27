@@ -65,12 +65,12 @@ class Backup
 
         // Loop through tables
         foreach ($aTables as $sTable) {
-            $oResult = $oDb->query('SHOW CREATE TABLE ' . $sTable);
+            $rResult = $oDb->query('SHOW CREATE TABLE ' . $sTable);
 
-            $iNum = (int)$oResult->rowCount();
+            $iNum = (int)$rResult->rowCount();
 
             if ($iNum > 0) {
-                $aRow = $oResult->fetch();
+                $aRow = $rResult->fetch();
 
                 $this->sSql .= "#\n# Table: $sTable\r\n#\r\n\r\n";
                 $this->sSql .= "DROP TABLE IF EXISTS $sTable;\r\n\r\n";
@@ -85,14 +85,14 @@ class Backup
 
                 unset($aRow);
             }
-            unset($oResult);
+            unset($rResult);
 
-            $oResult = $oDb->query('SELECT * FROM ' . $sTable);
+            $rResult = $oDb->query('SELECT * FROM ' . $sTable);
 
-            $iNum = (int)$oResult->rowCount();
+            $iNum = (int)$rResult->rowCount();
 
             if ($iNum > 0) {
-                while ($aRow = $oResult->fetch()) {
+                while ($aRow = $rResult->fetch()) {
                     foreach ($aRow as $sColumn => $sValue) {
                         if (!is_numeric($sColumn)) {
                             if (!empty($sValue) && !is_numeric($sValue)) {
@@ -114,7 +114,7 @@ class Backup
 
                 unset($aRow);
             }
-            unset($oResult);
+            unset($rResult);
         }
         unset($oDb);
 
