@@ -29,7 +29,7 @@ class YoutubeTest extends PHPUnit_Framework_TestCase
 
     public function testWrongApiKeySet()
     {
-        $this->oYoutube->setKey('invalid_key');
+        $this->oYoutube->setKey('invalid');
         $this->assertFalse($this->oYoutube->isApiKeySet());
     }
 
