@@ -40,11 +40,11 @@ class FieldModel extends Model
     private $sSql;
 
     /**
-     * @param string $sTable Table name.
-     * @param string $sName Field name.
-     * @param string $sType Field type.
-     * @param int $iLength Length field.
-     * @param string $sDefVal Default field value.
+     * @param string|null $sTable Table name.
+     * @param string|null $sName Field name.
+     * @param string|null $sType Field type.
+     * @param int|null $iLength Length field.
+     * @param string|null $sDefVal Default field value.
      */
     public function __construct($sTable, $sName = null, $sType = null, $iLength = null, $sDefVal = null)
     {
