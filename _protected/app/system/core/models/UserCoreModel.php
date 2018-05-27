@@ -1025,8 +1025,8 @@ class UserCoreModel extends Model
      * Get (all) profile data.
      *
      * @param string $sOrder
-     * @param int $iOffset
-     * @param int $iLimit
+     * @param int|null $iOffset
+     * @param int|null $iLimit
      *
      * @return array Data of users
      */
@@ -1080,8 +1080,8 @@ class UserCoreModel extends Model
      * @param string $sCity
      * @param bool $bCount
      * @param string $sOrder
-     * @param int $iOffset
-     * @param int $iLimit
+     * @param int|null $iOffset
+     * @param int|null $iLimit
      *
      * @return array|stdClass|int Object with the users list returned or integer for the total number users returned.
      */
@@ -1165,8 +1165,8 @@ class UserCoreModel extends Model
     /**
      * Get the Profile ID of a user.
      *
-     * @param string $sEmail Default NULL
-     * @param string $sUsername Default NULL
+     * @param string|null $sEmail Default NULL
+     * @param string|null $sUsername Default NULL
      * @param string $sTable Default DbTableName::MEMBER
      *
      * @return int|bool The Member ID if it is found or FALSE if not found.
@@ -1286,7 +1286,7 @@ class UserCoreModel extends Model
     /**
      * Get Gender (sex) of a user.
      *
-     * @param int $iProfileId Default NULL
+     * @param int|null $iProfileId Default NULL
      * @param string $sUsername Default NULL
      * @param string $sTable Default DbTableName::MEMBER
      *
@@ -1478,7 +1478,7 @@ class UserCoreModel extends Model
      *
      * @param int $iNewGroupId The new ID of membership group.
      * @param int $iProfileId The user ID.
-     * @param string $sDateTime In date format: 0000-00-00 00:00:00
+     * @param string|null $sDateTime In date format: 0000-00-00 00:00:00
      *
      * @return bool Returns TRUE on success or FALSE on failure.
      */
