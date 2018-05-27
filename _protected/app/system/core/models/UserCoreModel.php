@@ -1408,7 +1408,7 @@ class UserCoreModel extends Model
 
         if (!$mData = $this->cache->get()) {
             $bIsGroupId = !empty($iGroupId);
-            $sSqlGroup = ($bIsGroupId) ? ' WHERE groupId = :groupId ' : ' ';
+            $sSqlGroup = $bIsGroupId ? ' WHERE groupId = :groupId ' : ' ';
 
             $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::MEMBERSHIP) . $sSqlGroup . 'ORDER BY enable DESC, name ASC');
             if (!empty($iGroupId)) {
