@@ -62,7 +62,7 @@ abstract class Model extends Entity
     {
         $sFullPath = $sPath . $sFile . static::SQL_FILE_EXT;
         $this->sContents = (new File)->getFile($sFullPath);
-        $this->_parseVar();
+        $this->parseVar();
 
         return $this->sContents;
     }
@@ -72,7 +72,7 @@ abstract class Model extends Entity
      *
      * @return void
      */
-    private function _parseVar()
+    private function parseVar()
     {
         $this->sContents = str_replace('[DB_PREFIX]', Db::prefix(), $this->sContents);
     }
