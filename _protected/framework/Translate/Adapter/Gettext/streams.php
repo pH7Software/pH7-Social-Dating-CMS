@@ -61,8 +61,8 @@ class StreamReader
 
 class StringReader
 {
-    var $_pos;
-    var $_str;
+    private $_pos;
+    private $_str;
 
     public function __construct($str = '')
     {
@@ -102,9 +102,9 @@ class StringReader
 
 class FileReader
 {
-    var $_pos;
-    var $_fd;
-    var $_length;
+    private $_pos;
+    private $_fd;
+    private $_length;
 
     public function __construct($filename)
     {
