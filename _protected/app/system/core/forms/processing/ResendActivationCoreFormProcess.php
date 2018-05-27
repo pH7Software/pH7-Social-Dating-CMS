@@ -12,6 +12,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Router\Uri;
+use stdClass;
 
 /** For "user" and "affiliate" module **/
 class ResendActivationCoreFormProcess extends Form
@@ -45,12 +46,12 @@ class ResendActivationCoreFormProcess extends Form
     /**
      * Send the confirmation email.
      *
-     * @param \stdClass $oHash User data from the DB.
+     * @param stdClass $oHash User data from the DB.
      * @param string $sTable Table name.
      *
      * @return int Number of recipients who were accepted for delivery.
      */
-    protected function sendMail($oHash, $sTable)
+    protected function sendMail(stdClass $oHash, $sTable)
     {
         $sMod = ($sTable === DbTableName::AFFILIATE) ? 'affiliate' : 'user';
         $sActivateLink = Uri::get($sMod, 'account', 'activate') . PH7_SH . $oHash->email . PH7_SH . $oHash->hashValidation;
