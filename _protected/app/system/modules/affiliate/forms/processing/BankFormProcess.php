@@ -35,5 +35,4 @@ class BankFormProcess extends Form
 
         \PFBC\Form::setSuccess('form_bank_account', t('Your bank information has been successfully updated!'));
     }
-
 }

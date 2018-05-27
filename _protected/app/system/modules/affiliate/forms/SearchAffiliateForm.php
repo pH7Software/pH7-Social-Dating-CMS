@@ -12,7 +12,6 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class SearchAffiliateForm
 {
-
     public static function display()
     {
         $oForm = new \PFBC\Form('form_search');
