@@ -24,7 +24,7 @@ class EditForm
             Framework\Url\Header::redirect();
         }
 
-        $bAdminLogged = (AdminCore::auth() && !Affiliate::auth()); // Check if the admin is logged.
+        $bAdminLogged = (AdminCore::auth() && !Affiliate::auth()); // Check if the admin is logged
 
         $oAffModel = new AffiliateModel;
         $oHR = new Http;

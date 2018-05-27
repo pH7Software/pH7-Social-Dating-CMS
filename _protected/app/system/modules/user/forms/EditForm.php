@@ -25,7 +25,7 @@ class EditForm
             Header::redirect();
         }
 
-        $bAdminLogged = (AdminCore::auth() && !User::auth()); // Check if the admin is logged.
+        $bAdminLogged = (AdminCore::auth() && !User::auth()); // Check if the admin is logged
 
         $oUserModel = new UserModel;
         $oHR = new HttpRequest;
