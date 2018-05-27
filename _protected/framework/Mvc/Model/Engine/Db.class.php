@@ -290,7 +290,7 @@ class Db
      *
      * @return string
      */
-    public function quote($sInput, $iParameterType = 0)
+    public function quote($sInput, $iParameterType = PDO::PARAM_NULL)
     {
         return self::$oDb->quote($sInput, $iParameterType);
     }
