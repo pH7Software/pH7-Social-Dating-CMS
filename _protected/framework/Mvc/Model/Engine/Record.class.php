@@ -177,8 +177,8 @@ class Record
      * @param string $sTable
      * @param string $sField The field to be updated
      * @param string $sValue The new value
-     * @param string $sPk The primary key. Default: NULL
-     * @param string $sId The id. Default: NULL
+     * @param string|null $sPk The primary key. Default: NULL
+     * @param string|null $sId The id. Default: NULL
      *
      * @return int|bool Returns the number of rows on success or FALSE on failure.
      */
@@ -294,11 +294,11 @@ class Record
      * Select "All In One" in a SQL's query.
      *
      * @param array|string $mTable
-     * @param string $sField Default: NULL
-     * @param string $sId Default: NULL
+     * @param string|null $sField Default: NULL
+     * @param string|null $sId Default: NULL
      * @param array|string $mWhat Default: '*'
-     * @param array $aJoin Default: NULL
-     * @param string $sOptions Default: NULL
+     * @param array|null $aJoin Default: NULL
+     * @param string|null $sOptions Default: NULL
      *
      * @return array|bool Returns stdClass on success or throw PDOException on failure.
      */
@@ -356,10 +356,10 @@ class Record
      * Select query and return one value result.
      *
      * @param string $sTable
-     * @param string $sField Default: NULL
-     * @param string $sId Default: NULL
+     * @param string|null $sField Default: NULL
+     * @param string|null $sId Default: NULL
      * @param string $sWhat Default: '*'
-     * @param string $sOptions Default: NULL
+     * @param string|null $sOptions Default: NULL
      *
      * @return string|stdClass|bool SQL query on success (returns string or stdClass values) or throw PDOException on failure (returns a false boolean).
      *
