@@ -348,7 +348,9 @@ class PH7Tpl extends Kernel
         $this->file->createDir($this->sCompileDir2);
 
         if (!$this->sCode = $this->file->getFile($this->sTemplateDirFile)) {
-            throw new TplException('Template Fetch Error: ' . $this->sTemplateDirFile);
+            throw new TplException(
+                sprintf('Impossible to fetch template file "%s"', $this->sTemplateDirFile)
+            );
         }
 
         // Parser the predefined variables
@@ -395,7 +397,9 @@ class PH7Tpl extends Kernel
             return true;
         }
 
-        throw new TplException('Could not write compiled file: ' . $this->sCompileDirFile);
+        throw new TplException(
+            sprintf('Could not write template compiled file "%s"', $this->sCompileDirFile)
+        );
     }
 
     /**
@@ -757,7 +761,9 @@ class PH7Tpl extends Kernel
             }
 
             if (!$this->file->putFile($this->sCacheDirFile, $sOutput)) {
-                throw new TplException('Unable to write to cache file: ' . $this->sCacheDirFile);
+                throw new TplException(
+                    sprintf('Unable to write HTML cached file "%s"', $this->sCacheDirFile)
+                );
             }
 
             echo $sOutput;
