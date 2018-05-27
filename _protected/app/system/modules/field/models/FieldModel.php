@@ -80,18 +80,27 @@ class FieldModel extends Model
         return $aColumn;
     }
 
+    /**
+     * @return bool
+     */
     public function insert()
     {
         $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'ADD ' . $this->sName . ' ' . $this->getType();
         return $this->execute();
     }
 
+    /**
+     * @return bool
+     */
     public function update()
     {
         $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'CHANGE ' . (new Http)->get('name') . ' ' . $this->sName . ' ' . $this->getType();
         return $this->execute();
     }
 
+    /**
+     * @return bool
+     */
     public function delete()
     {
         $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'DROP ' . $this->sName;
