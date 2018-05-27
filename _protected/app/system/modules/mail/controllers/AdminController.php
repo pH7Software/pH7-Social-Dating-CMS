@@ -17,7 +17,9 @@ class AdminController extends MainController
 
     public function index()
     {
-        Header::redirect(Uri::get('mail', 'admin', 'msglist'));
+        Header::redirect(
+            Uri::get('mail', 'admin', 'msglist')
+        );
     }
 
     public function msgList()
@@ -30,7 +32,10 @@ class AdminController extends MainController
             null,
             null
         );
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalMails, self::EMAILS_PER_PAGE);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->iTotalMails,
+            self::EMAILS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oAllMsg = $this->oMailModel->search(
