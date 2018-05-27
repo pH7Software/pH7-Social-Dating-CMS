@@ -26,7 +26,7 @@ class BankForm
         }
 
         $oHR = new Http;
-        $iProfileId = (AdminCore::auth() && !Affiliate::auth() && $oHR->getExists('profile_id')) ? $oHR->get('profile_id', 'int') : (new Session)->get('affiliate_id');
+        $iProfileId = (self::isAdminLogged() && $oHR->getExists('profile_id')) ? $oHR->get('profile_id', 'int') : (new Session)->get('affiliate_id');
         $oAff = (new AffiliateModel)->readProfile($iProfileId, DbTableName::AFFILIATE);
 
         $oForm = new \PFBC\Form('form_bank_account');
@@ -46,5 +46,13 @@ class BankForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
+    }
+
+    /**
+     * @return bool
+     */
+    private static function isAdminLogged()
+    {
+        return AdminCore::auth() && !Affiliate::auth();
     }
 }
