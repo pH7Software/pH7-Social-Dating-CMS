@@ -25,6 +25,11 @@ class Password extends \PFBC\Validation
         $this->message = t('Error: Your password has to be from %0% to %1% characters long.', $this->iMin, $this->iMax);
     }
 
+    /**
+     * @param string $sValue
+     *
+     * @return bool
+     */
     public function isValid($sValue)
     {
         if ($this->isNotApplicable($sValue)) {
