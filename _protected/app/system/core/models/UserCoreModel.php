@@ -1410,7 +1410,7 @@ class UserCoreModel extends Model
             $bIsGroupId = !empty($iGroupId);
             $sSqlGroup = $bIsGroupId ? ' WHERE groupId = :groupId ' : ' ';
 
-            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::MEMBERSHIP) . $sSqlGroup . 'ORDER BY enable DESC, name ASC');
+            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::MEMBERSHIP) . $sSqlGroup . 'ORDER BY enable ASC, groupId ASC');
             if (!empty($iGroupId)) {
                 $rStmt->bindValue(':groupId', $iGroupId, \PDO::PARAM_INT);
             }
