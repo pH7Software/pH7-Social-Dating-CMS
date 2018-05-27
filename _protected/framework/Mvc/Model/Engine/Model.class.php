@@ -46,6 +46,7 @@ abstract class Model extends Entity
         $rStmt = Db::getInstance()->prepare($this->getQuery($sFile, $sPath));
         $bRet = $rStmt->execute($aParams);
         Db::free($rStmt);
+
         return $bRet;
     }
 
