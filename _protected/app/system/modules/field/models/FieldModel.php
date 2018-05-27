@@ -126,8 +126,10 @@ class FieldModel extends Model
      */
     protected function execute()
     {
-        $rStmt = Db::getInstance()->exec($this->sSql);
-        return $rStmt === false ? $rStmt->errorInfo() : true;
+        $oDb = Db::getInstance();
+        $rStmt = $oDb->exec($this->sSql);
+
+        return $rStmt === false ? $oDb->errorInfo() : true;
     }
 
     /**

@@ -228,7 +228,7 @@ function exec_query_file(Db $oDb, $sSqlFile)
     $rStmt = $oDb->exec($sSqlContent);
     unset($sSqlContent);
 
-    return ($rStmt === false) ? $rStmt->errorInfo() : true;
+    return ($rStmt === false) ? $oDb->errorInfo() : true;
 }
 
 /**

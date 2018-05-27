@@ -42,12 +42,13 @@ class Various
             return false;
         }
 
+        $oDb = Db::getInstance();
         $sSqlContent = file_get_contents($sSqlFile);
         $sSqlContent = static::renameTablePrefix($sSqlContent);
-        $rStmt = Db::getInstance()->exec($sSqlContent);
+        $rStmt = $oDb->exec($sSqlContent);
         unset($sSqlContent);
 
-        return $rStmt === false ? $rStmt->errorInfo() : true;
+        return $rStmt === false ? $oDb->errorInfo() : true;
     }
 
     /**

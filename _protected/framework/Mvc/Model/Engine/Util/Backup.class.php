@@ -183,10 +183,11 @@ class Backup
         gzclose($rArchive);
 
         $sSqlContent = str_replace(PH7_TABLE_PREFIX, Db::prefix(), $sSqlContent);
-        $oDb = Db::getInstance()->exec($sSqlContent);
+        $oDb = Db::getInstance();
+        $rStmt = $oDb->exec($sSqlContent);
         unset($sSqlContent);
 
-        return $oDb === false ? print_r($oDb->errorInfo(), true) : true;
+        return $rStmt === false ? print_r($oDb->errorInfo(), true) : true;
     }
 
     /**
