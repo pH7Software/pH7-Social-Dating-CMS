@@ -22,7 +22,7 @@ class Form extends Framework\Layout\Form\Form
      */
     public static function getVal($sValue)
     {
-        $aVal = array(); // Default Value
+        $aVal = [];
         $aValue = explode(',', $sValue);
 
         foreach ($aValue as $sVal) {
