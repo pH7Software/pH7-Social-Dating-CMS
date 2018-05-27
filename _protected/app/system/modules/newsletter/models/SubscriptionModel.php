@@ -32,7 +32,7 @@ class SubscriptionModel extends UserCoreModel
      *
      * @param array $aData
      *
-     * @return integer The ID of the Subscriber.
+     * @return int The ID of the Subscriber.
      */
     public function add(array $aData)
     {
@@ -54,9 +54,9 @@ class SubscriptionModel extends UserCoreModel
     /**
      * Delete a Subscriber.
      *
-     * @param integer $sEmail
+     * @param int $sEmail
      *
-     * @return boolean Returns TRUE on success or FALSE on failure.
+     * @return bool Returns TRUE on success or FALSE on failure.
      */
     public function unsubscribe($sEmail)
     {
@@ -69,14 +69,14 @@ class SubscriptionModel extends UserCoreModel
     /**
      * Browse Subscribers.
      *
-     * @param integer|string $mLooking Integer for profile ID or string for a keyword
-     * @param boolean $bCount Put 'true' for count the subscribers or 'false' for the result of subscribers.
+     * @param int|string $mLooking Integer for profile ID or string for a keyword
+     * @param bool $bCount Put 'true' for count the subscribers or 'false' for the result of subscribers.
      * @param string $sOrderBy
-     * @param integer $iSort
-     * @param integer $iOffset
-     * @param integer $iLimit
+     * @param int $iSort
+     * @param int $iOffset
+     * @param int $iLimit
      *
-     * @return integer|\stdClass Integer for the number subscribers returned or string for the subscribers list returned
+     * @return int|\stdClass Integer for the number subscribers returned or string for the subscribers list returned
      */
     public function browse($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
