@@ -87,7 +87,7 @@ class WallAjax extends Core
         }
     }
 
-    protected function showCommentProfile()
+    private function showCommentProfile()
     {
         $this->mContents = $this->oWallModel->getCommentProfile(null, 0, 20);
         if (!$this->mContents) {
@@ -109,7 +109,7 @@ class WallAjax extends Core
         }
     }
 
-    protected function add()
+    private function add()
     {
         $this->bStatus = $this->oWallModel->add($this->session->get('member_id'), $this->httpRequest->post('post'));
         if (!$this->bStatus) {
@@ -121,7 +121,7 @@ class WallAjax extends Core
         echo $this->sMsg;
     }
 
-    protected function edit()
+    private function edit()
     {
         $this->bStatus = $this->oWallModel->edit($this->session->get('member_id'), $this->httpRequest->post('post'));
         if (!$this->bStatus) {
@@ -133,7 +133,7 @@ class WallAjax extends Core
         echo $this->sMsg;
     }
 
-    protected function delete()
+    private function delete()
     {
         $this->bStatus = $this->oWallModel->delete($this->session->get('member_id'), $this->httpRequest->post('post'));
         if (!$this->bStatus) {
