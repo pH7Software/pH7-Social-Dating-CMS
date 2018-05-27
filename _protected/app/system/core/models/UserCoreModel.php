@@ -1398,7 +1398,7 @@ class UserCoreModel extends Model
     /**
      * Get the membership(s) data.
      *
-     * @param int $iGroupId Group ID. Select only the specific membership from a group ID.
+     * @param int|null $iGroupId Group ID. Select only the specific membership from a group ID.
      *
      * @return stdClass|array The membership(s) data.
      */
