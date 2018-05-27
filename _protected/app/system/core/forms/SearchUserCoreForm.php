@@ -142,7 +142,7 @@ class SearchUserCoreForm
     /**
      * Set the default values for the fields in search forms.
      *
-     * @param return void
+     * @return void
      */
     protected static function setAttrVals()
     {
