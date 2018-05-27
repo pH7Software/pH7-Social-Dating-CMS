@@ -76,8 +76,7 @@ abstract class Api
         if (true === ($sErrMsg = $oUser->checkAccountStatus($oUserData))) {
             $oUser->setAuth($oUserData, $oUserModel, new Session, new SecurityModel);
         }
-
-        unset($oUser, $oUserModel);
+        unset($oUser);
 
         (true !== $sErrMsg) ? $this->oDesign->setFlashMsg($sErrMsg) : t('Hi %0%, welcome to %site_name%', '<em>' . $oUserData->firstName . '</em>');
     }
