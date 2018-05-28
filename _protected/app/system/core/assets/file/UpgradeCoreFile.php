@@ -243,19 +243,19 @@ class UpgradeCore extends Kernel
 
     private function run()
     {
-        //$this->file(); // For stability reasons, we don't automatically replace the files by new ones
+        $this->file();
         $this->sql();
     }
 
     private function file()
     {
-        $sPathPublicDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::FILE_DIR . PH7_DS . static::PUBLIC_DIR . PH7_DS;
+        $sPathPublicDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::FILE_DIR . PH7_DS . static::PUBLIC_DIR . PH7_DS;
         if (is_dir($sPathPublicDir)) {
             $this->oFile->systemRename($sPathPublicDir, PH7_PATH_ROOT);
             $this->oFile->chmod(PH7_PATH_ROOT, 0777);
         }
 
-        $sPathProtectedDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::FILE_DIR . PH7_DS . static::PROTECTED_DIR . PH7_DS;
+        $sPathProtectedDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder. static::DATA_DIR . PH7_DS . static::FILE_DIR . PH7_DS . static::PROTECTED_DIR . PH7_DS;
         if (is_dir($sPathProtectedDir)) {
             $this->oFile->systemRename($sPathProtectedDir, PH7_PATH_PROTECTED);
             $this->oFile->chmod(PH7_PATH_PROTECTED, 0777);
