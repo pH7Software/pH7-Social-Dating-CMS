@@ -138,7 +138,6 @@ class UpgradeCore extends Kernel
             // Download the next upgrade patch to "~/_repository/" folder
             $this->download($this->getNextVersion());
 
-            // If not found error
             if (!$this->showAvailableUpgrades()) {
                 $this->sHtml .= '<h2>' . t('No upgrade patch for %software_name%!') . '</h2>';
             } else {
@@ -163,11 +162,9 @@ class UpgradeCore extends Kernel
                             $sMsg = t('Upgrade <span class="bold italic">%software_version_name% %software_version% Build %software_build%</span> to version <span class="bold italic">%0%</span>', '<span class="bold italic">' . $sVerName . ' ' . $sVerNumber . ' Build ' . $iVerBuild . '</span>');
                             $this->sHtml .= '<button type="submit" class="success" name="submit_upgrade" value="' . $this->sUpgradesDirUpgradeFolder . '" onclick="return confirm(\'' . t('Have you made a backup of your website files, folders and database?') . '\');">' . $sMsg . '</button>';
 
-                            // Description upgrade path
                             $this->sHtml .= '<p class="underline">' . t('Description of the upgrade patch:') . '</p>';
                             $this->sHtml .= $sDesc;
 
-                            // Introduction file
                             $this->sHtml .= '<p class="bold underline">' . t('Instruction:') . '</p>';
                             $this->sHtml .= $this->readInstruction(static::INST_INTRO_FILE);
                         } else {
@@ -200,9 +197,8 @@ class UpgradeCore extends Kernel
                         $this->oConfig->setDevelopmentMode();
                         usleep(100000);
 
-                        $this->check(); // Checking
+                        $this->check();
 
-                        // If not found error
                         if (!$this->hasErrors()) {
                             $this->run(); // Run Upgrade!
 
@@ -225,7 +221,6 @@ class UpgradeCore extends Kernel
                                     $this->sHtml .= '<p>' . t('Please delete the upgrade folder using an FTP client or SSH.') . '</p>';
                                 }
 
-                                // Conclusion file
                                 $this->sHtml .= '<p class="bold underline">' . t('Conclusion:') . '</p>';
                                 $this->sHtml .= $this->readInstruction(static::INST_CONCL_FILE);
                             } else {
