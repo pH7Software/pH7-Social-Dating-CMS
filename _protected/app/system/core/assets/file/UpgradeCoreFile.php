@@ -134,7 +134,7 @@ class UpgradeCore extends Kernel
             $this->aErrors[] = t('You must be logged in as administrator to upgrade your site.');
         }
 
-        if (!$this->displayIfErr()) {
+        if (!$this->displayIfErrors()) {
             // Download the next upgrade patch to "~/_repository/" folder
             $this->download($this->getNextVersion());
 
@@ -203,11 +203,11 @@ class UpgradeCore extends Kernel
                         $this->check(); // Checking
 
                         // If not found error
-                        if (!$this->displayIfErr()) {
+                        if (!$this->displayIfErrors()) {
                             $this->run(); // Run Upgrade!
 
                             // If no error
-                            if (!$this->displayIfErr()) {
+                            if (!$this->displayIfErrors()) {
                                 /**
                                  * It resets the HTML variable ($this->sHtml) to not display versions upgrade available.
                                  * The user can refresh the page to réaficher the upgrade available.
@@ -334,7 +334,7 @@ class UpgradeCore extends Kernel
      *
      * @return bool TRUE if there are errors else FALSE
      */
-    private function displayIfErr()
+    private function displayIfErrors()
     {
         if ($this->hasErrors()) {
             $iErrors = count($this->aErrors);
