@@ -91,7 +91,7 @@ class Design extends HtmlDesign
          */
         if (!(Registry::getInstance()->module === PH7_ADMIN_MOD) && $oData) {
             echo '<div class="inline" onclick="$(\'#ad_' . $oData->adsId . '\').attr(\'src\',\'' . PH7_URL_ROOT . '?' . Banner::PARAM_URL . '=' . $oData->adsId . '\');return true;">';
-            echo Banner::output($oData);
+            echo Banner::output($oData, $this->oHttpRequest);
             echo '<img src="' . PH7_URL_STATIC . PH7_IMG . 'useful/blank.gif" style="border:0;width:0px;height:0px;" alt="" id="ad_' . $oData->adsId . '" /></div>';
         }
         unset($oData);
