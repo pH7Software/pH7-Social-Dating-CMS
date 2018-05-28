@@ -79,7 +79,7 @@ class UpgradeCore extends Kernel
     private $bAutoRemoveUpgradeDir = false;
 
     /** @var array */
-    private $aErrors = array();
+    private $aErrors = [];
 
     public function __construct()
     {
@@ -387,7 +387,7 @@ class UpgradeCore extends Kernel
 
     private function showAvailableUpgrades()
     {
-        $aFolders = array();
+        $aFolders = [];
 
         foreach ($this->readUpgrades() as $sFolder) {
             $aFolders[$sFolder] = $sFolder;
