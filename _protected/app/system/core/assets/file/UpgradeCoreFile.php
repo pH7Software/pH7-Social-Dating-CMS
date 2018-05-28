@@ -168,7 +168,7 @@ class UpgradeCore extends Kernel
                             $this->sHtml .= $sDesc;
 
                             // Introduction file
-                            $this->sHtml .= '<p class="bold underline">' . t('Introductory instruction:') . '</p>';
+                            $this->sHtml .= '<p class="bold underline">' . t('Instruction:') . '</p>';
                             $this->sHtml .= $this->readInstruction(static::INST_INTRO_FILE);
                         } else {
                             $sMsg = t('Bad "version name, version number or version build" of upgrade path!');
@@ -227,7 +227,7 @@ class UpgradeCore extends Kernel
                                 }
 
                                 // Conclusion file
-                                $this->sHtml .= '<p class="bold underline">' . t('Conclusion of Instruction:') . '</p>';
+                                $this->sHtml .= '<p class="bold underline">' . t('Conclusion:') . '</p>';
                                 $this->sHtml .= $this->readInstruction(static::INST_CONCL_FILE);
                             }
                         }
