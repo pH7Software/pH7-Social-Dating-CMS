@@ -324,7 +324,7 @@ class UpgradeCore extends Kernel
      *
      * @return bool
      */
-    private function isErr()
+    private function hasErrors()
     {
         return !empty($this->aErrors);
     }
@@ -336,7 +336,7 @@ class UpgradeCore extends Kernel
      */
     private function displayIfErr()
     {
-        if ($this->isErr()) {
+        if ($this->hasErrors()) {
             $iErrors = count($this->aErrors);
 
             $this->sHtml .= '<h3 class="error underline italic">' . t('You have %0% error(s):', $iErrors) . '</h3>';
