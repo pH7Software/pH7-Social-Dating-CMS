@@ -52,6 +52,6 @@ class Ads
         $oHttpRequest = new HttpRequest;
 
         return $oHttpRequest->getExists(static::PARAM_URL) &&
-            $oHttpRequest->get(static::PARAM_URL) == $oData->adsId
+            $oHttpRequest->get(static::PARAM_URL) == $oData->adsId;
     }
 }
