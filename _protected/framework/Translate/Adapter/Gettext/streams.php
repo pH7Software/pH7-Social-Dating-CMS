@@ -62,7 +62,7 @@ class StreamReader
 class StringReader
 {
     private $_pos;
-    private $_str;
+    protected $_str;
 
     public function __construct($str = '')
     {
