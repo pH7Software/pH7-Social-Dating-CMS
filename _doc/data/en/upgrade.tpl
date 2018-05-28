@@ -30,9 +30,6 @@ If you want to allow it, you need to set in numerical values <em>777</em> for al
 <h3>Run the upgrade wizard</h3>
 <p>You must login as administrator and go to the following URL and follow the instructions carefully: <em>http://YOUR-DOMAIN.COM/<strong>asset/file/Upgrade</strong></em></p>
 
-<h3>Clear caches</h3>
-<p>Clear all caches through <a href="{site_url}en/how-to-clear-caches">your admin panel</a>.</p>
-
 
 <h3>Put back your modifications (optional)</h3>
 <p>Put them back any modifications you did from your latest backup since they could have been erase from the update.</p>

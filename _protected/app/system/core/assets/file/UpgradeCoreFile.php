@@ -14,9 +14,12 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Cache\Cache;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\File as F;
+use PH7\Framework\Layout\Gzip\Gzip;
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Security\Version;
@@ -250,6 +253,7 @@ class UpgradeCore extends Kernel
         $this->file();
         $this->sql();
         $this->setNewVersionToKernel();
+        $this->clearAllCacheFolders();
     }
 
     private function file()
@@ -473,6 +477,25 @@ class UpgradeCore extends Kernel
             return F\Import::file(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::INFO_DIR . PH7_DS . $sInstFile);
         } catch (F\Exception $e) {
             return '<p class="error">' . t('Instruction file not found!') . '</p>';
+        }
+    }
+
+    /**
+     * Clear all cache folders.
+     *
+     * Quite often, the changes from newer versions can break the website if older data are still saved in cache.
+     */
+    private function clearAllCacheFolders()
+    {
+        $aCacheFolders = [
+            PH7_PATH_CACHE . Cache::CACHE_DIR,
+            PH7_PATH_CACHE . PH7Tpl::COMPILE_DIR,
+            PH7_PATH_CACHE . PH7Tpl::CACHE_DIR,
+            PH7_PATH_CACHE . Gzip::CACHE_DIR
+        ];
+
+        foreach ($aCacheFolders as $sFolder) {
+            $this->file->deleteDir($sFolder);
         }
     }
 
