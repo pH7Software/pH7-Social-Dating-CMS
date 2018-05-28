@@ -47,7 +47,7 @@ final class Version
     }
 
     /**
-     * Gets information on the lastest software version.
+     * Gets information on the latest software version.
      *
      * @return array|bool Returns version information in an array or FALSE if an error occurred.
      */

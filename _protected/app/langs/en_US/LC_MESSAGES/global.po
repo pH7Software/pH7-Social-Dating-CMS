@@ -24091,7 +24091,7 @@ msgid "Wall"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/main/index.user.inc.cpl.php:19
-msgid "The lastest news"
+msgid "The latest news"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/main/login.cpl.php:19
