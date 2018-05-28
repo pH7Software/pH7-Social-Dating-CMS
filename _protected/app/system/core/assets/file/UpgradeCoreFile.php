@@ -200,7 +200,7 @@ class UpgradeCore extends Kernel
                         $this->check();
 
                         if (!$this->hasErrors()) {
-                            $this->run(); // Run Upgrade!
+                            $this->run(); // Run the upgrade patch!
 
                             if (!$this->hasErrors()) {
                                 /**
