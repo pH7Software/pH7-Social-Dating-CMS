@@ -188,57 +188,55 @@ class UpgradeCore extends Kernel
 
                 $this->sHtml .= '</form>';
 
-                if ($this->oHttpRequest->postExists('submit_upgrade')) {
-                    if ($this->checkUpgradeFolder($this->oHttpRequest->post('submit_upgrade'))) {
-                        $this->sUpgradesDirUpgradeFolder = $this->oHttpRequest->post('submit_upgrade'); // Upgrade Directory Path
+                if ($this->isUpgradeRequested() && $this->checkUpgradeFolder($this->oHttpRequest->post('submit_upgrade'))) {
+                    $this->sUpgradesDirUpgradeFolder = $this->oHttpRequest->post('submit_upgrade'); // Upgrade Directory Path
 
-                        $this->readConfig();
+                    $this->readConfig();
 
-                        $this->sVerName = $this->oConfig->values['upgrade.version']['name']; // Version name upgrade
-                        $this->sVerNumber = $this->oConfig->values['upgrade.version']['number']; // Version number upgrade
-                        $this->iVerBuild = $this->oConfig->values['upgrade.version']['build']; // Version build upgrade
+                    $this->sVerName = $this->oConfig->values['upgrade.version']['name']; // Version name upgrade
+                    $this->sVerNumber = $this->oConfig->values['upgrade.version']['number']; // Version number upgrade
+                    $this->iVerBuild = $this->oConfig->values['upgrade.version']['build']; // Version build upgrade
 
-                        DbConfig::setSiteMode(DbConfig::MAINTENANCE_SITE);
-                        $this->oConfig->setDevelopmentMode();
-                        usleep(100000);
+                    DbConfig::setSiteMode(DbConfig::MAINTENANCE_SITE);
+                    $this->oConfig->setDevelopmentMode();
+                    usleep(100000);
 
-                        $this->check();
+                    $this->check();
+
+                    if (!$this->hasErrors()) {
+                        $this->run(); // Run the upgrade patch!
 
                         if (!$this->hasErrors()) {
-                            $this->run(); // Run the upgrade patch!
+                            /**
+                             * It resets the HTML variable ($this->sHtml) to not display versions upgrade available.
+                             * The user can refresh the page to réaficher the upgrade available.
+                             */
+                            $this->sHtml = '<h3 class="success">' . t('Your update ran successfully!') . '</h3>';
 
-                            if (!$this->hasErrors()) {
-                                /**
-                                 * It resets the HTML variable ($this->sHtml) to not display versions upgrade available.
-                                 * The user can refresh the page to réaficher the upgrade available.
-                                 */
-                                $this->sHtml = '<h3 class="success">' . t('Your update ran successfully!') . '</h3>';
-
-                                if ($this->bAutoRemoveUpgradeDir) {
-                                    if ($this->removeUpgradeDir()) {
-                                        $this->sHtml .= '<p class="success">' . t('The upgrade directory <em>(~%0%)</em> has been deleted!', PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder) . '</p>';
-                                        $this->sHtml .= '<p class="success">' . t('Status... OK!') . '</p>';
-                                    } else {
-                                        $this->sHtml .= '<p class="error">' . t('The upgrade directory <em>(~%0%)</em> could not be deleted, please delete it manually using an FTP client or SSH.', PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder) . '</p>';
-                                        $this->sHtml .= '<p class="error">' . t('Status... Failure!') . '</p>';
-                                    }
+                            if ($this->bAutoRemoveUpgradeDir) {
+                                if ($this->removeUpgradeDir()) {
+                                    $this->sHtml .= '<p class="success">' . t('The upgrade directory <em>(~%0%)</em> has been deleted!', PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder) . '</p>';
+                                    $this->sHtml .= '<p class="success">' . t('Status... OK!') . '</p>';
                                 } else {
-                                    $this->sHtml .= '<p>' . t('Please delete the upgrade folder using an FTP client or SSH.') . '</p>';
+                                    $this->sHtml .= '<p class="error">' . t('The upgrade directory <em>(~%0%)</em> could not be deleted, please delete it manually using an FTP client or SSH.', PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder) . '</p>';
+                                    $this->sHtml .= '<p class="error">' . t('Status... Failure!') . '</p>';
                                 }
-
-                                $this->sHtml .= '<p class="bold underline">' . t('Conclusion:') . '</p>';
-                                $this->sHtml .= $this->readInstruction(static::INST_CONCL_FILE);
                             } else {
-                                $this->addErrorMessagesToLayout();
+                                $this->sHtml .= '<p>' . t('Please delete the upgrade folder using an FTP client or SSH.') . '</p>';
                             }
+
+                            $this->sHtml .= '<p class="bold underline">' . t('Conclusion:') . '</p>';
+                            $this->sHtml .= $this->readInstruction(static::INST_CONCL_FILE);
                         } else {
                             $this->addErrorMessagesToLayout();
                         }
-
-                        $this->oConfig->setProductionMode();
-                        DbConfig::setSiteMode(DbConfig::ENABLED_SITE);
-                        usleep(100000);
+                    } else {
+                        $this->addErrorMessagesToLayout();
                     }
+
+                    $this->oConfig->setProductionMode();
+                    DbConfig::setSiteMode(DbConfig::ENABLED_SITE);
+                    usleep(100000);
                 }
             }
         } else {
@@ -449,6 +447,14 @@ class UpgradeCore extends Kernel
         } catch (F\Exception $e) {
             return '<p class="error">' . t('Instruction file not found!') . '</p>';
         }
+    }
+
+    /**
+     * @return bool
+     */
+    private function isUpgradeRequested()
+    {
+        return $this->oHttpRequest->postExists('submit_upgrade');
     }
 }
 
