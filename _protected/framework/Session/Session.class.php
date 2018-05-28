@@ -19,7 +19,7 @@ use PH7\Framework\Server\Server;
 class Session
 {
     /**
-     * @param bool $bDisableSessCache Disable PHP's session cache. Default FALSE
+     * @param bool|null $bDisableSessCache Disable PHP's session cache.
      */
     public function __construct($bDisableSessCache = false)
     {
@@ -36,7 +36,7 @@ class Session
      * Set a PHP session.
      *
      * @param array|string $mName Name of the session.
-     * @param string $sValue Value of the session, Optional if the session data is in a array.
+     * @param string|null $sValue Value of the session, Optional if the session data is in a array.
      *
      * @return void
      */
@@ -55,7 +55,7 @@ class Session
      * Get a session value by giving its name.
      *
      * @param string $sName Name of the session.
-     * @param bool $bEscape Default TRUE
+     * @param bool|null $bEscape
      *
      * @return string If the session exists, returns the session with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the session doesn't exist.
      */

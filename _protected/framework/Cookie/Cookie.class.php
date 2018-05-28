@@ -22,9 +22,9 @@ class Cookie
      * Set a PHP cookie.
      *
      * @param array|string $mName Name of the cookie.
-     * @param string $sValue value of the cookie, Optional if the cookie data is in a array.
-     * @param int $iTime The time the cookie expires. This is a Unix timestamp.
-     * @param bool $bSecure If TRUE cookie will only be sent over a secure HTTPS connection from the client.
+     * @param string|null $sValue value of the cookie, Optional if the cookie data is in a array.
+     * @param int|null $iTime The time the cookie expires. This is a Unix timestamp.
+     * @param bool|null $bSecure If TRUE cookie will only be sent over a secure HTTPS connection from the client.
      *
      * @return void
      */
@@ -53,7 +53,7 @@ class Cookie
      * Get the cookie value by giving its name.
      *
      * @param string $sName Name of the cookie.
-     * @param bool $bEscape Default TRUE
+     * @param bool|null $bEscape
      *
      * @return string If the cookie exists, returns the cookie with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the cookie doesn't exist.
      */
