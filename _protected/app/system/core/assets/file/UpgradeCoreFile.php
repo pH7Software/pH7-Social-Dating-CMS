@@ -453,5 +453,4 @@ class UpgradeCore extends Kernel
     }
 }
 
-// Go
 (new UpgradeCore)->display();
