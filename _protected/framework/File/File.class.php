@@ -244,20 +244,21 @@ class File
         $sDir = $this->checkExtDir($sDir);
 
         if (is_dir($sDir) && $rHandle = opendir($sDir)) {
-            while (false !== ($sF = readdir($rHandle))) {
-                if ($sF !== '.' && $sF !== '..') {
-                    if (is_dir($sDir . $sF)) {
+            while (false !== ($sFile = readdir($rHandle))) {
+                if ($sFile !== '.' && $sFile !== '..') {
+                    if (is_dir($sDir . $sFile)) {
                         $aTree = array_merge($aTree, $this->getFileList($sDir . $sF, $mExt));
                     } else {
                         if (!empty($mExt)) {
                             $aExt = (array)$mExt;
 
                             foreach ($aExt as $sExt) {
-                                if (substr($sF, -strlen($sExt)) === $sExt)
-                                    $aTree[] = $sDir . $sF;
+                                if (substr($sFile, -strlen($sExt)) === $sExt) {
+                                    $aTree[] = $sDir . $sFile;
+                                }
                             }
                         } else {
-                            $aTree[] = $sDir . $sF;
+                            $aTree[] = $sDir . $sFile;
                         }
                     }
                 }
