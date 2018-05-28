@@ -134,7 +134,7 @@ class UpgradeCore extends Kernel
             $this->aErrors[] = t('You must be logged in as administrator to upgrade your site.');
         }
 
-        if (!$this->displayIfErrors()) {
+        if (!$this->hasErrors()) {
             // Download the next upgrade patch to "~/_repository/" folder
             $this->download($this->getNextVersion());
 
@@ -203,11 +203,10 @@ class UpgradeCore extends Kernel
                         $this->check(); // Checking
 
                         // If not found error
-                        if (!$this->displayIfErrors()) {
+                        if (!$this->hasErrors()) {
                             $this->run(); // Run Upgrade!
 
-                            // If no error
-                            if (!$this->displayIfErrors()) {
+                            if (!$this->hasErrors()) {
                                 /**
                                  * It resets the HTML variable ($this->sHtml) to not display versions upgrade available.
                                  * The user can refresh the page to réaficher the upgrade available.
@@ -229,7 +228,11 @@ class UpgradeCore extends Kernel
                                 // Conclusion file
                                 $this->sHtml .= '<p class="bold underline">' . t('Conclusion:') . '</p>';
                                 $this->sHtml .= $this->readInstruction(static::INST_CONCL_FILE);
+                            } else {
+                                $this->addErrorMessagesToLayout();
                             }
+                        } else {
+                            $this->addErrorMessagesToLayout();
                         }
 
                         $this->oConfig->setProductionMode();
@@ -238,6 +241,8 @@ class UpgradeCore extends Kernel
                     }
                 }
             }
+        } else {
+            $this->addErrorMessagesToLayout();
         }
     }
 
@@ -330,25 +335,19 @@ class UpgradeCore extends Kernel
     }
 
     /**
-     * Check and return HTML contents errors.
+     * Assign the error messages to the current HTML code.
      *
-     * @return bool TRUE if there are errors else FALSE
+     * @return void
      */
-    private function displayIfErrors()
+    private function addErrorMessagesToLayout()
     {
-        if ($this->hasErrors()) {
-            $iErrors = count($this->aErrors);
+        $iErrors = count($this->aErrors);
 
-            $this->sHtml .= '<h3 class="error underline italic">' . t('You have %0% error(s):', $iErrors) . '</h3>';
+        $this->sHtml .= '<h3 class="error underline italic">' . t('You have %0% error(s):', $iErrors) . '</h3>';
 
-            for ($i = 0; $i < $iErrors; $i++) {
-                $this->sHtml .= '<p class="error">' . t('%0%) %1%', $i + 1, $this->aErrors[$i]) . '</p>';
-            }
-
-            return true;
+        for ($i = 0; $i < $iErrors; $i++) {
+            $this->sHtml .= '<p class="error">' . t('%0%) %1%', $i + 1, $this->aErrors[$i]) . '</p>';
         }
-
-        return false;
     }
 
     /**
