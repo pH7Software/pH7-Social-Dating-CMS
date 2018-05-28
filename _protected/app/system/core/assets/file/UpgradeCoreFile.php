@@ -243,7 +243,7 @@ class UpgradeCore extends Kernel
 
     private function run()
     {
-        //$this->file();
+        //$this->file(); // For stability reasons, we don't automatically replace the files by new ones
         $this->sql();
     }
 
