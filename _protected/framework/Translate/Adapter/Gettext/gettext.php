@@ -1,6 +1,6 @@
 <?php
 /*
- * Notice: This file has been modified by the pH7CMS development team (well by Pierre-Henry Soria) <http://ph7cms.com>.
+ * Notice: This file has been modified by the pH7CMS development team (well by Pierre-Henry Soria) <http://ph7cms.com>
  * Version now compatible with PHP 5+ and PHP 7+ (like PHP4 constructors have been move to PHP5 constructors because the old one wasn't working anymore with the new PHP version).
  */
 
@@ -25,7 +25,6 @@ defined('PH7') or exit('Restricted access');
    You should have received a copy of the GNU General Public License
    along with PHP-gettext; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
 */
 
 /**
