@@ -140,7 +140,7 @@ class UpgradeCore extends Kernel
 
             // If not found error
             if (!$this->showAvailableUpgrades()) {
-                $this->sHtml .= '<h2>' . t('No upgrade path for %software_name%!') . '</h2>';
+                $this->sHtml .= '<h2>' . t('No upgrade patch for %software_name%!') . '</h2>';
             } else {
                 $this->sHtml .= '<h2>' . t('Upgrade available for %software_name%:') . '</h2>';
 
@@ -175,7 +175,7 @@ class UpgradeCore extends Kernel
                             $this->sHtml .= '<button type="submit" class="error" disabled="disabled">' . $sMsg . '</button>';
                         }
                     } else {
-                        $sMsg = t('Upgrade path is not valid!');
+                        $sMsg = t('Upgrade patch is not valid!');
                         $this->sHtml .= '<button type="submit" class="error" disabled="disabled">' . $sMsg . '</button>';
                     }
 
