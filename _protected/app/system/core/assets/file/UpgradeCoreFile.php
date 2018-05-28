@@ -50,6 +50,7 @@ class UpgradeCore extends Kernel
     const INST_CONCL_FILE = 'conclusion';
     const UPGRADE_FILE = 'upgrade.sql';
     const VERSION_LIST_FILE = 'all_versions.txt';
+    const VERSION_FILE = 'Version.class.php';
 
 
     /** @var Http */
@@ -248,6 +249,7 @@ class UpgradeCore extends Kernel
     {
         $this->file();
         $this->sql();
+        $this->setNewVersionToKernel();
     }
 
     private function file()
@@ -391,6 +393,31 @@ class UpgradeCore extends Kernel
         }
 
         return $aFolders;
+    }
+
+    /**
+     * Set new version to the Version, kernel constants.
+     *
+     * @return void
+     */
+    private function setNewVersionToKernel()
+    {
+        $sVersionPathFile = PH7_PATH_FRAMEWORK . 'Security/' . self::VERSION_FILE;
+        $sContents = $this->oFile->getFile($sVersionPathFile);
+
+        if ($this->sVerName != Version::KERNEL_VERSION_NAME) {
+            $sNewContents = str_replace('KERNEL_VERSION_NAME = \'' . Version::KERNEL_VERSION_NAME . '\'', 'KERNEL_VERSION_NAME = \'' . $this->sVerName . '\'', $sContents);
+        }
+
+        if ($this->sVerNumber != Version::KERNEL_VERSION) {
+            $sNewContents = str_replace('KERNEL_VERSION = \'' . Version::KERNEL_VERSION . '\'', 'KERNEL_VERSION = \'' . $this->sVerNumber . '\'', $sContents);
+        }
+
+        if ($this->iVerBuild != Version::KERNEL_BUILD) {
+            $sNewContents = str_replace('KERNEL_BUILD = \'' . Version::KERNEL_BUILD . '\'', 'KERNEL_BUILD = \'' . $this->iVerBuild . '\'', $sContents);
+        }
+
+        $this->oFile->putFile($sVersionPathFile, $sNewContents);
     }
 
     /**
