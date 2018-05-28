@@ -204,7 +204,7 @@ class File
      */
     public function getDirList($sDir)
     {
-        $aDirList = array();
+        $aDirList = [];
 
         if ($rHandle = opendir($sDir)) {
             while (false !== ($sFile = readdir($rHandle))) {
@@ -240,7 +240,7 @@ class File
      */
     public function getFileList($sDir, $mExt = null)
     {
-        $aTree = array();
+        $aTree = [];
         $sDir = $this->checkExtDir($sDir);
 
         if (is_dir($sDir) && $rHandle = opendir($sDir)) {
