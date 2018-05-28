@@ -264,10 +264,10 @@ class UpgradeCore extends Kernel
 
     private function sql()
     {
-        $sPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::SQL_DIR . PH7_DS . $this->oConfig->values['database']['type_name'] . PH7_DS . static::UPGRADE_FILE;
+        $sFullPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::SQL_DIR . PH7_DS . $this->oConfig->values['database']['type_name'] . PH7_DS . static::UPGRADE_FILE;
 
-        if (is_file($sPath) && filesize($sPath) > static::MIN_SQL_FILE_SIZE) {
-            $mQuery = (new UpgradeCoreModel)->run($sPath);
+        if (is_file($sFullPath) && filesize($sFullPath) > static::MIN_SQL_FILE_SIZE) {
+            $mQuery = (new UpgradeCoreModel)->run($sFullPath);
 
             if ($mQuery !== true) {
                 $this->aErrors[] = t('Unable to execute the upgrade of the database SQL.<br />Error Message: %0%', '<pre>' . print_r($mQuery) . '</pre>');
