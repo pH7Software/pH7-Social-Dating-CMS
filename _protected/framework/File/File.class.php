@@ -499,13 +499,12 @@ class File
     /**
      * Delay script execution.
      *
-     * @param int $iSleep Halt time in seconds. Optional parameter, default value is 5.
+     * @param int $iSleep Halt time in seconds.
      *
-     * @return int|bool Returns "0" on success, or "false" on error.
+     * @return int|bool Returns 0 on success, or FALSE on error.
      */
-    public function sleep($iSleep = null)
+    public function sleep($iSleep = 5)
     {
-        $iSleep = (!empty($iSleep)) ? $iSleep : 5;
         return sleep($iSleep);
     }
 
