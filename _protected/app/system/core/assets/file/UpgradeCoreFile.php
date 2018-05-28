@@ -30,6 +30,7 @@ class UpgradeCore extends Kernel
      * Remote update URL.
      */
     const REMOTE_URL = 'http://update.ph7cms.com/';
+    const ARCHIVE_EXT = '.zip';
     const MIN_SQL_FILE_SIZE = 12; // Size in bytes
 
     /**
@@ -309,7 +310,7 @@ class UpgradeCore extends Kernel
      */
     private function download($sNewVersion)
     {
-        $sZipFileName = $sNewVersion . '.zip';
+        $sZipFileName = $sNewVersion . self::ARCHIVE_EXT;
         $sDestinationPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS;
 
         $rFile = $this->oFile->getUrlContents(self::REMOTE_URL . $sZipFileName);
