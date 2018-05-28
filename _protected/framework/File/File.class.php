@@ -266,6 +266,7 @@ class File
             sort($aTree);
         }
         closedir($rHandle);
+
         return $aTree;
     }
 
