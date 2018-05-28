@@ -233,7 +233,7 @@ class UpgradeCore extends Kernel
                         }
 
                         $this->oConfig->setProductionMode();
-                        DbConfig::setSiteMode(DbConfig::ENABLE_SITE);
+                        DbConfig::setSiteMode(DbConfig::ENABLED_SITE);
                         usleep(100000);
                     }
                 }

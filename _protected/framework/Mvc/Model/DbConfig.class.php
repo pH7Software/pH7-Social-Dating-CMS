@@ -21,7 +21,7 @@ final class DbConfig
 {
     const CACHE_GROUP = 'db/config';
     const CACHE_TIME = 999000;
-    const ENABLE_SITE = 'enable';
+    const ENABLED_SITE = 'enable';
     const MAINTENANCE_SITE = 'maintenance';
 
     /**
@@ -170,14 +170,14 @@ final class DbConfig
     }
 
     /**
-     * @param string $sStatus The constant 'DbConfig::ENABLE_SITE' or 'DbConfig::MAINTENANCE_SITE'
+     * @param string $sStatus The constant 'DbConfig::ENABLED_SITE' or 'DbConfig::MAINTENANCE_SITE'
      * @param string $sFieldName
      *
      * @return void
      */
     public static function setSiteMode($sStatus, $sFieldName = 'siteStatus')
     {
-        if ($sStatus !== self::MAINTENANCE_SITE && $sStatus !== self::ENABLE_SITE) {
+        if ($sStatus !== self::MAINTENANCE_SITE && $sStatus !== self::ENABLED_SITE) {
             exit('Wrong maintenance mode type!');
         }
 
