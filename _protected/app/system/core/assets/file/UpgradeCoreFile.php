@@ -223,7 +223,7 @@ class UpgradeCore extends Kernel
                                         $this->sHtml .= '<p class="error">' . t('Status... Failure!') . '</p>';
                                     }
                                 } else {
-                                    $this->sHtml .= '<p>' . t('Please delete the upgrade file using an FTP client or SSH.') . '</p>';
+                                    $this->sHtml .= '<p>' . t('Please delete the upgrade folder using an FTP client or SSH.') . '</p>';
                                 }
 
                                 // Conclusion file
