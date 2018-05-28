@@ -40,7 +40,6 @@ class AdminController extends Controller
     {
         parent::__construct();
 
-        // Objects
         $this->oAff = new Affiliate;
         $this->oAffModel = new AffiliateModel;
     }
