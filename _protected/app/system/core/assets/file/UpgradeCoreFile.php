@@ -410,18 +410,18 @@ class UpgradeCore extends Kernel
         $sContents = $this->oFile->getFile($sVersionPathFile);
 
         if ($this->sVerName != Version::KERNEL_VERSION_NAME) {
-            $sNewContents = str_replace('KERNEL_VERSION_NAME = \'' . Version::KERNEL_VERSION_NAME . '\'', 'KERNEL_VERSION_NAME = \'' . $this->sVerName . '\'', $sContents);
+            $sContents = str_replace('KERNEL_VERSION_NAME = \'' . Version::KERNEL_VERSION_NAME . '\'', 'KERNEL_VERSION_NAME = \'' . $this->sVerName . '\'', $sContents);
         }
 
         if ($this->sVerNumber != Version::KERNEL_VERSION) {
-            $sNewContents = str_replace('KERNEL_VERSION = \'' . Version::KERNEL_VERSION . '\'', 'KERNEL_VERSION = \'' . $this->sVerNumber . '\'', $sContents);
+            $sContents = str_replace('KERNEL_VERSION = \'' . Version::KERNEL_VERSION . '\'', 'KERNEL_VERSION = \'' . $this->sVerNumber . '\'', $sContents);
         }
 
         if ($this->iVerBuild != Version::KERNEL_BUILD) {
-            $sNewContents = str_replace('KERNEL_BUILD = \'' . Version::KERNEL_BUILD . '\'', 'KERNEL_BUILD = \'' . $this->iVerBuild . '\'', $sContents);
+            $sContents = str_replace('KERNEL_BUILD = \'' . Version::KERNEL_BUILD . '\'', 'KERNEL_BUILD = \'' . $this->iVerBuild . '\'', $sContents);
         }
 
-        $this->oFile->putFile($sVersionPathFile, $sNewContents);
+        $this->oFile->putFile($sVersionPathFile, $sContents);
     }
 
     /**
