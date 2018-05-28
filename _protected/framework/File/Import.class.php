@@ -30,6 +30,8 @@ class Import
      * @param string $sExt Optional, the file extension without the dot.
      *
      * @return mixed (resource, string, boolean, void, ...)
+     *
+     * @throws Exception
      */
     public static function pH7FwkClass($sClassName, $sNameSpace = null, $sExt = 'php')
     {
@@ -46,6 +48,8 @@ class Import
      * @param string $sExt Optional, the file extension without the dot.
      *
      * @return mixed (resource, string, boolean, void, ...)
+     *
+     * @throws Exception
      */
     public static function pH7App($sClassName, $sNameSpace = null, $sExt = 'php')
     {
@@ -62,6 +66,8 @@ class Import
      * @param string $sExt Optional, the file extension without the dot.
      *
      * @return mixed (resource, string, boolean, void, ...)
+     *
+     * @throws Exception
      */
     public static function file($sFile, $sNameSpace = null, $sExt = 'php')
     {
@@ -76,6 +82,8 @@ class Import
      * @param string $sExt Optional, the file extension without the dot.
      *
      * @return mixed (resource, string, boolean, void, ...)
+     *
+     * @throws Exception
      */
     public static function lib($sFile, $sNameSpace = null, $sExt = 'php')
     {
