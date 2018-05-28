@@ -41,7 +41,7 @@ class UpgradeCore extends Kernel
     const DIR = 'upgrade';
     const FILE_DIR = 'file';
     const PUBLIC_DIR = 'public';
-    const PROTECTED_DIR = '_protected';
+    const PROTECTED_DIR = 'protected';
     const DATA_DIR = 'data';
     const SQL_DIR = 'sql';
     const INFO_DIR = 'info';
