@@ -138,7 +138,7 @@ class Compress
             // Remove comments
             $sContent = preg_replace("!/\*[^*]*\*+([^/][^*]*\*+)*/!", "", $sContent);
             // Remove tabs, spaces, newlines, etc. */
-            $aArr = array("\r\n", "\r", "\n", "\t", "  ", "    ", "    ");
+            $aArr = ["\r\n", "\r", "\n", "\t", "  ", "    ", "    "];
             $sContent = str_replace($aArr, "", $sContent);
             // Restore backupped values within single or double quotes
 
@@ -192,10 +192,10 @@ class Compress
                 //$sContent = preg_replace("/((?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)|(?:\/\/.*))/", "", $sContent);
 
                 // Remove tabs, spaces, etc. */
-                $sContent = str_replace(array("\r", "\t", '  ', '    ', '     '), '', $sContent);
+                $sContent = str_replace(["\r", "\t", '  ', '    ', '     '], '', $sContent);
 
                 // Remove other spaces before/after ) */
-                $sContent = preg_replace(array('(( )+\))', '(\)( )+)'), ')', $sContent);
+                $sContent = preg_replace(['(( )+\))', '(\)( )+)'], ')', $sContent);
 
                 /**
                  * Inclusion of Douglas Crockford's JSMin

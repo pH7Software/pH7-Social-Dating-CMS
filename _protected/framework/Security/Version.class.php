@@ -72,7 +72,7 @@ final class Version
             }
             unset($oDom);
 
-            $mData = array('is_alert' => $bIsAlert, 'name' => $sVerName, 'version' => $sVerNumber, 'build' => $sVerBuild);
+            $mData = ['is_alert' => $bIsAlert, 'name' => $sVerName, 'version' => $sVerNumber, 'build' => $sVerBuild];
             $oCache->put($mData);
         }
         unset($oCache);
