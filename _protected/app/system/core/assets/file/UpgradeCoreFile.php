@@ -396,7 +396,7 @@ class UpgradeCore
             $aFolders[$sFolder] = $sFolder;
         }
 
-        return $aFolders;
+        return rsort($aFolders, SORT_NUMERIC);
     }
 
     /**
