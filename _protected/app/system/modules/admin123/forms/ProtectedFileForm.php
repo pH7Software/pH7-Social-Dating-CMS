@@ -30,10 +30,10 @@ class ProtectedFileForm
         }
 
         $oForm = new \PFBC\Form('form_file');
-        $oForm->configure(array('action' => ''));
+        $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_file', 'form_file'));
         $oForm->addElement(new \PFBC\Element\Token('file'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('File Contents'), 'content', array('value' => $rData, 'style' => 'height:50rem', 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('File Contents'), 'content', ['value' => $rData, 'style' => 'height:50rem', 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

@@ -24,7 +24,7 @@ class BlockCountryForm
         }
 
         $oForm = new \PFBC\Form('form_country_blocklist');
-        $oForm->configure(array('action' => ''));
+        $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_country_blocklist', 'form_country_blocklist'));
         $oForm->addElement(new \PFBC\Element\Token('block_country'));
         $oForm->addElement(
