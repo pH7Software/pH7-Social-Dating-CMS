@@ -364,6 +364,9 @@ class File
      */
     public function systemCopy($sFrom, $sTo)
     {
+        // Clean the path if wildcard is used at the end
+        $sFrom = rtrim($sFrom, '*');
+
         if (file_exists($sFrom)) {
             return system("cp -r $sFrom $sTo");
         }
