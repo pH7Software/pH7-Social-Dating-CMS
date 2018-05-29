@@ -188,8 +188,6 @@ class UpgradeCore
                     }
 
                     $this->sHtml .= '<br /><hr /><br />';
-
-                    unset($sVerName, $sVerNumber, $iVerBuild);
                 }
 
                 $this->sHtml .= '</form>';
