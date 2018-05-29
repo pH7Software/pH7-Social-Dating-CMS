@@ -247,7 +247,7 @@ class File
             while (false !== ($sFile = readdir($rHandle))) {
                 if ($sFile !== '.' && $sFile !== '..') {
                     if (is_dir($sDir . $sFile)) {
-                        $aTree = array_merge($aTree, $this->getFileList($sDir . $sF, $mExt));
+                        $aTree = array_merge($aTree, $this->getFileList($sDir . $sFile, $mExt));
                     } else {
                         if (!empty($mExt)) {
                             $aExt = (array)$mExt;
