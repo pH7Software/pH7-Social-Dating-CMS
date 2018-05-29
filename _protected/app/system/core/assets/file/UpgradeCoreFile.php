@@ -27,7 +27,7 @@ use PH7\Framework\Security\Version;
 @set_time_limit(0);
 @ini_set('memory_limit', '528M');
 
-class UpgradeCore extends Kernel
+class UpgradeCore
 {
     /**
      * Remote update URL.
@@ -90,8 +90,6 @@ class UpgradeCore extends Kernel
 
     public function __construct()
     {
-        parent::__construct();
-
         $this->oHttpRequest = new Http;
         $this->oFile = new F\File;
         $this->oConfig = Config::getInstance();
@@ -498,7 +496,7 @@ class UpgradeCore extends Kernel
         ];
 
         foreach ($aCacheFolders as $sFolder) {
-            $this->file->deleteDir($sFolder);
+            $this->oFile->deleteDir($sFolder);
         }
     }
 
