@@ -237,10 +237,10 @@ class Twitter extends Api implements IApi
     public function setAvatar($aUserData)
     {
         // Request user's 'bigger' profile image
-        $this->oTwOAuth->request('GET', $this->oTwOAuth->url('1/users/profile_image/' . $aUserData['screen_name']), array(
+        $this->oTwOAuth->request('GET', $this->oTwOAuth->url('1/users/profile_image/' . $aUserData['screen_name']), [
             'screen_name' => $aUserData['screen_name'],
             'size' => 'bigger'
-        ));
+        ]);
 
         // Try to get the URL for the avatar size standard
         if ($this->oTwOAuth->response['code'] == 302) {
@@ -268,10 +268,10 @@ class Twitter extends Api implements IApi
     private function getRequestToken()
     {
         // send request for a request token
-        $this->oTwOAuth->request('POST', $this->oTwOAuth->url('oauth/request_token', ''), array(
+        $this->oTwOAuth->request('POST', $this->oTwOAuth->url('oauth/request_token', ''), [
             // pass a variable to set the callback
             'oauth_callback' => tmhUtilities::php_self()
-        ));
+        ]);
 
         if ($this->oTwOAuth->response['code'] == 200) {
             // get and store the request token
@@ -302,10 +302,10 @@ class Twitter extends Api implements IApi
         $this->oTwOAuth->config['user_secret'] = $_SESSION['authsecret'];
 
         // send request for an access token
-        $this->oTwOAuth->request('POST', $this->oTwOAuth->url('oauth/access_token', ''), array(
+        $this->oTwOAuth->request('POST', $this->oTwOAuth->url('oauth/access_token', ''), [
             // pass the oauth_verifier received from Twitter
             'oauth_verifier' => $_GET['oauth_verifier']
-        ));
+        ]);
 
         if ($this->oTwOAuth->response['code'] == 200) {
             // get the access token and store it in a cookie

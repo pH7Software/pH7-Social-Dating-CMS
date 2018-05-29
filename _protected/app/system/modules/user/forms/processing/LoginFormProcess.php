@@ -94,7 +94,7 @@ class LoginFormProcess extends Form implements LoginableForm
             if ($this->httpRequest->postExists('remember')) {
                 // We hash again the password
                 (new Framework\Cookie\Cookie)->set(
-                    array('member_remember' => Security::hashCookie($oUserData->password), 'member_id' => $oUserData->profileId)
+                    ['member_remember' => Security::hashCookie($oUserData->password), 'member_id' => $oUserData->profileId]
                 );
             }
 

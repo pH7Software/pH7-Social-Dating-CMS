@@ -24,14 +24,14 @@ class CommentForm
         }
 
         $oForm = new \PFBC\Form('form_comment');
-        $oForm->configure(array('action' => ''));
+        $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_comment', 'form_comment'));
         $oForm->addElement(new \PFBC\Element\Token('comment'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Your comment:'), 'comment', array('id' => 'str_com', 'onblur' => 'CValid(this.value,this.id,2,2500)', 'required' => 1, 'validation' => new \PFBC\Validation\Str(2, 2500))));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Your comment:'), 'comment', ['id' => 'str_com', 'onblur' => 'CValid(this.value,this.id,2,2500)', 'required' => 1, 'validation' => new \PFBC\Validation\Str(2, 2500)]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_com"></span>'));
 
         if (DbConfig::getSetting('isCaptchaComment')) {
-            $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha'), 'captcha', array('id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:'))));
+            $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha'), 'captcha', ['id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:')]));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }
 

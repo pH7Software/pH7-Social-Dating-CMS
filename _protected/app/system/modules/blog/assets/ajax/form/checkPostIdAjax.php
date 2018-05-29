@@ -19,5 +19,5 @@ if ($oHttpRequest->postExists('post_id')) {
     $iStatus = (new Blog)->checkPostId($iPostId, new BlogModel) ? 1 : 0;
 }
 
-echo json_encode(array('status' => $iStatus));
+echo json_encode(['status' => $iStatus]);
 unset($oHttpRequest);

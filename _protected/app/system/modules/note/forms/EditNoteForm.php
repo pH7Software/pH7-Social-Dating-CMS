@@ -40,12 +40,12 @@ class EditNoteForm
         if (!empty($oPost) && (new Str)->equals($iNoteId, (int)$oPost->noteId)) {
             $oCategoryData = $oNoteModel->getCategory(null, 0, self::MAX_CATEGORIES);
 
-            $aCategoryNames = array();
+            $aCategoryNames = [];
             foreach ($oCategoryData as $oCategory) {
                 $aCategoryNames[$oCategory->categoryId] = $oCategory->name;
             }
 
-            $aSelectedCategories = array();
+            $aSelectedCategories = [];
             $oCategoryIds = $oNoteModel->getCategory($iNoteId, 0, self::MAX_CATEGORIES);
             unset($oNoteModel);
 
@@ -54,32 +54,32 @@ class EditNoteForm
             }
 
             $oForm = new \PFBC\Form('form_edit_note');
-            $oForm->configure(array('action' => ''));
+            $oForm->configure(['action' => '']);
             $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_note', 'form_edit_note'));
             $oForm->addElement(new \PFBC\Element\Token('edit_note'));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Article name:'), 'title', array('value' => $oPost->title, 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Article ID:'), 'post_id', array('value' => $oPost->postId, 'description' => Uri::get('note', 'main', 'read', (new Session)->get('member_username')) . '/<strong><span class="your-address">' . $oPost->postId . '</span><span class="post_id"></span></strong>', 'title' => t('Article ID will be the name of the URL.'), 'data-profile_id' => $iProfileId, 'id' => 'post_id', 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Article name:'), 'title', ['value' => $oPost->title, 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Article ID:'), 'post_id', ['value' => $oPost->postId, 'description' => Uri::get('note', 'main', 'read', (new Session)->get('member_username')) . '/<strong><span class="your-address">' . $oPost->postId . '</span><span class="post_id"></span></strong>', 'title' => t('Article ID will be the name of the URL.'), 'data-profile_id' => $iProfileId, 'id' => 'post_id', 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1]));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="label_flow">'));
-            $oForm->addElement(new \PFBC\Element\Checkbox(t('Categories:'), 'category_id', $aCategoryNames, array('description' => t('Select a category that fits the best for your article. You can select up to three different categories'), 'value' => $aSelectedCategories, 'required' => 1)));
+            $oForm->addElement(new \PFBC\Element\Checkbox(t('Categories:'), 'category_id', $aCategoryNames, ['description' => t('Select a category that fits the best for your article. You can select up to three different categories'), 'value' => $aSelectedCategories, 'required' => 1]));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
-            $oForm->addElement(new \PFBC\Element\CKEditor(t('Body:'), 'content', array('value' => $oPost->content, 'validation' => new \PFBC\Validation\Str(30), 'required' => 1)));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('The language of your post:'), 'lang_id', array('value' => $oPost->langId, 'description' => t('e.g., "en", "fr", "es", "js"'), 'pattern' => '[a-z]{2}', 'validation' => new \PFBC\Validation\Str(2, 2), 'required' => 1)));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Slogan:'), 'slogan', array('value' => $oPost->slogan, 'validation' => new \PFBC\Validation\Str(2, 200))));
-            $oForm->addElement(new \PFBC\Element\File(t('Thumbnail:'), 'thumb', array('accept' => 'image/*')));
+            $oForm->addElement(new \PFBC\Element\CKEditor(t('Body:'), 'content', ['value' => $oPost->content, 'validation' => new \PFBC\Validation\Str(30), 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('The language of your post:'), 'lang_id', ['value' => $oPost->langId, 'description' => t('e.g., "en", "fr", "es", "js"'), 'pattern' => '[a-z]{2}', 'validation' => new \PFBC\Validation\Str(2, 2), 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Slogan:'), 'slogan', ['value' => $oPost->slogan, 'validation' => new \PFBC\Validation\Str(2, 200)]));
+            $oForm->addElement(new \PFBC\Element\File(t('Thumbnail:'), 'thumb', ['accept' => 'image/*']));
 
             if (!empty($oPost->thumb)) {
                 $oForm->addElement(new \PFBC\Element\HTMLExternal('<p><br /><img src="' . PH7_URL_DATA_SYS_MOD . 'note/' . PH7_IMG . $oPost->username . PH7_SH . $oPost->thumb . '" alt="' . t('Thumbnail') . '" title="' . t('The current thumbnail of your post.') . '" class="avatar" /></p>'));
                 $oForm->addElement(new \PFBC\Element\HTMLExternal('<a href="' . Uri::get('note', 'main', 'removethumb', $oPost->noteId . (new Token)->url(), false) . '">' . t('Remove this thumbnail?') . '</a>'));
             }
 
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Tags:'), 'tags', array('value' => $oPost->tags, 'description' => t('Separate keywords by commas and without spaces between the commas.'), 'validation' => new \PFBC\Validation\Str(2, 200))));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Title (meta tag):'), 'page_title', array('value' => $oPost->pageTitle, 'validation' => new \PFBC\Validation\Str(2, 100), 'required' => 1)));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Description (meta tag):'), 'meta_description', array('validation' => new \PFBC\Validation\Str(2, 200), 'value' => $oPost->metaDescription)));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Keywords (meta tag):'), 'meta_keywords', array('description' => t('Separate keywords by commas and without spaces between the commas.'), 'validation' => new \PFBC\Validation\Str(2, 200), 'value' => $oPost->metaKeywords)));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Robots (meta tag):'), 'meta_robots', array('validation' => new \PFBC\Validation\Str(2, 50), 'value' => $oPost->metaRobots)));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Author (meta tag):'), 'meta_author', array('validation' => new \PFBC\Validation\Str(2, 50), 'value' => $oPost->metaAuthor)));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Copyright (meta tag):'), 'meta_copyright', array('validation' => new \PFBC\Validation\Str(2, 50), 'value' => $oPost->metaCopyright)));
-            $oForm->addElement(new \PFBC\Element\Radio(t('Enable Comment:'), 'enable_comment', array('1' => t('Enable'), '0' => t('Disable')), array('value' => $oPost->enableComment, 'required' => 1)));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Tags:'), 'tags', ['value' => $oPost->tags, 'description' => t('Separate keywords by commas and without spaces between the commas.'), 'validation' => new \PFBC\Validation\Str(2, 200)]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Title (meta tag):'), 'page_title', ['value' => $oPost->pageTitle, 'validation' => new \PFBC\Validation\Str(2, 100), 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Description (meta tag):'), 'meta_description', ['validation' => new \PFBC\Validation\Str(2, 200), 'value' => $oPost->metaDescription]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Keywords (meta tag):'), 'meta_keywords', ['description' => t('Separate keywords by commas and without spaces between the commas.'), 'validation' => new \PFBC\Validation\Str(2, 200), 'value' => $oPost->metaKeywords]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Robots (meta tag):'), 'meta_robots', ['validation' => new \PFBC\Validation\Str(2, 50), 'value' => $oPost->metaRobots]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Author (meta tag):'), 'meta_author', ['validation' => new \PFBC\Validation\Str(2, 50), 'value' => $oPost->metaAuthor]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Copyright (meta tag):'), 'meta_copyright', ['validation' => new \PFBC\Validation\Str(2, 50), 'value' => $oPost->metaCopyright]));
+            $oForm->addElement(new \PFBC\Element\Radio(t('Enable Comment:'), 'enable_comment', ['1' => t('Enable'), '0' => t('Disable')], ['value' => $oPost->enableComment, 'required' => 1]));
             $oForm->addElement(new \PFBC\Element\Button);
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_TPL_SYS_MOD . 'note/' . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS . 'common.js"></script>'));
             $oForm->render();

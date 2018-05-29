@@ -299,7 +299,7 @@ class SettingForm
      */
     private static function getTpls(File $oFile)
     {
-        $aTpls = array();
+        $aTpls = [];
 
         $aTplIds = $oFile->getDirList(PH7_PATH_TPL);
         foreach ($aTplIds as $sTpl) {
@@ -316,7 +316,7 @@ class SettingForm
      */
     private static function getLangs(File $oFile)
     {
-        $aLangs = array();
+        $aLangs = [];
 
         $aLangIds = $oFile->getDirList(PH7_PATH_APP_LANG);
         foreach ($aLangIds as $sLang) {
@@ -332,7 +332,7 @@ class SettingForm
      */
     private static function getDefMods()
     {
-        $aMods = array();
+        $aMods = [];
 
         foreach (self::getActivatableDefMods() as $sMod) {
             // Skip the disable module (would be impossible to set a disabled module as the default one)
@@ -351,7 +351,7 @@ class SettingForm
      */
     private static function getMembershipGroups()
     {
-        $aGroupNames = array();
+        $aGroupNames = [];
 
         $oGroupIds = (new AdminCoreModel)->getMemberships();
         foreach ($oGroupIds as $iId) {

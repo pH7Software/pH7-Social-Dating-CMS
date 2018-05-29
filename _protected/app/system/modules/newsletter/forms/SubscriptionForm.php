@@ -26,22 +26,22 @@ class SubscriptionForm
         }
 
         $oForm = new \PFBC\Form('form_subscription');
-        $oForm->configure(array('action' => $sActUrl));
+        $oForm->configure(['action' => $sActUrl]);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_subscription', 'form_subscription'));
         $oForm->addElement(new \PFBC\Element\Token('subscription'));
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your full name:'), 'name', array('id' => 'str_name', 'onblur' => 'CValid(this.value, this.id,4,80)', 'validation' => new \PFBC\Validation\Str(4, 80), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your full name:'), 'name', ['id' => 'str_name', 'onblur' => 'CValid(this.value, this.id,4,80)', 'validation' => new \PFBC\Validation\Str(4, 80), 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_name"></span>'));
 
-        $oForm->addElement(new \PFBC\Element\Email(t('Your email:'), 'email', array('id' => 'email', 'onblur' => 'CValid(this.value, this.id)', 'required' => 1), false));
+        $oForm->addElement(new \PFBC\Element\Email(t('Your email:'), 'email', ['id' => 'email', 'onblur' => 'CValid(this.value, this.id)', 'required' => 1], false));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error email"></span>'));
 
-        $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha'), 'captcha', array('id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:'))));
+        $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha'), 'captcha', ['id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:')]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
 
         $oForm->addElement(new \PFBC\Element\Hidden('direction', ''));
-        $oForm->addElement(new \PFBC\Element\Button(t('Subscribe'), 'submit', array('onclick' => '$("#form_subscription [name=direction]").val("subscrire");')));
-        $oForm->addElement(new \PFBC\Element\Button(t('Unsubscribe'), 'submit', array('onclick' => '$("#form_subscription [name=direction]").val("unsubscribe");')));
+        $oForm->addElement(new \PFBC\Element\Button(t('Subscribe'), 'submit', ['onclick' => '$("#form_subscription [name=direction]").val("subscrire");']));
+        $oForm->addElement(new \PFBC\Element\Button(t('Unsubscribe'), 'submit', ['onclick' => '$("#form_subscription [name=direction]").val("unsubscribe");']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
     }

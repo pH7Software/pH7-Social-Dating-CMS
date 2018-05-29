@@ -36,10 +36,10 @@ class EditReplyMsgForm
         unset($oHttpRequest);
 
         $oForm = new \PFBC\Form('form_edit_reply_msg');
-        $oForm->configure(array('action' => ''));
+        $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_reply_msg', 'form_edit_reply_msg'));
         $oForm->addElement(new \PFBC\Element\Token('edit_reply_msg'));
-        $oForm->addElement(new \PFBC\Element\CKEditor(t('Message:'), 'message', array('value' => $oMsg->message, 'required' => 1, 'validation' => new \PFBC\Validation\Str(4))));
+        $oForm->addElement(new \PFBC\Element\CKEditor(t('Message:'), 'message', ['value' => $oMsg->message, 'required' => 1, 'validation' => new \PFBC\Validation\Str(4)]));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

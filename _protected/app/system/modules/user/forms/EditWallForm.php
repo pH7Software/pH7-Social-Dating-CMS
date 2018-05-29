@@ -31,10 +31,10 @@ class EditWallForm
         $oWallData = (new WallModel)->get((new Session)->get('member_id'), (new Http)->get('wall_id'), 0, 1);
 
         $oForm = new \PFBC\Form('form_edit_wall');
-        $oForm->configure(array('action' => ''));
+        $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_wall', 'form_edit_wall'));
         $oForm->addElement(new \PFBC\Element\Token('edit_wall'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Content:'), 'post', array('value' => $oWallData->post, 'validation' => new \PFBC\Validation\Str(1, 900))));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Content:'), 'post', ['value' => $oWallData->post, 'validation' => new \PFBC\Validation\Str(1, 900)]));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

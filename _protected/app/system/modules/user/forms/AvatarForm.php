@@ -24,7 +24,7 @@ class AvatarForm
         }
 
         $oForm = new \PFBC\Form('form_avatar');
-        $oForm->configure(array('action' => ''));
+        $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_avatar', 'form_avatar'));
         $oForm->addElement(new \PFBC\Element\Token('avatar'));
 
@@ -34,7 +34,7 @@ class AvatarForm
             );
         }
 
-        $oForm->addElement(new \PFBC\Element\File(t('Your Profile Photo'), 'avatar', array('accept' => 'image/*', 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\File(t('Your Profile Photo'), 'avatar', ['accept' => 'image/*', 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

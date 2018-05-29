@@ -43,7 +43,7 @@ class AdminFormProcess extends Form
         $sGameDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'game/file/';
 
         // If the folders is not created (games not installed), yet we will create.
-        $this->file->createDir(array($sThumbDir, $sGameDir));
+        $this->file->createDir([$sThumbDir, $sGameDir]);
 
         if (!@move_uploaded_file($_FILES['file']['tmp_name'], $sGameDir . $sGameFile)) {
             \PFBC\Form::setError('form_game', t('Impossible to upload the game. Please check if the folder "%0%" has the write permission (CHMOD 755) or contact your host to check it.', PH7_PATH_PUBLIC_DATA_SYS_MOD . 'game/file/'));

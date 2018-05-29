@@ -33,7 +33,7 @@ class AdminEditForm
         $oGame = $oGameModel->get(strstr($oHttpRequest->get('title'), '-', true), $iGameId, 0, 1);
 
         $oCategoriesData = $oGameModel->getCategory(null, 0, self::MAX_CATEGORIES);
-        $aCategoriesName = array();
+        $aCategoriesName = [];
         foreach ($oCategoriesData as $oCategory) {
             $aCategoriesName[$oCategory->categoryId] = $oCategory->name;
         }
@@ -43,14 +43,14 @@ class AdminEditForm
 
         if (!empty($oGame) && (new Str)->equals($iGameId, (int)$oGame->gameId)) {
             $oForm = new \PFBC\Form('form_edit');
-            $oForm->configure(array('action' => ''));
+            $oForm->configure(['action' => '']);
             $oForm->addElement(new \PFBC\Element\Hidden('submit_edit', 'form_edit'));
             $oForm->addElement(new \PFBC\Element\Token('edit'));
-            $oForm->addElement(new \PFBC\Element\Select(t('Category Name:'), 'category_id', $aCategoriesName, array('value' => $oGame->categoryId, 'required' => 1)));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Name of the Game:'), 'name', array('value' => $oGame->name, 'pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern), 'required' => 1)));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Title of the Game:'), 'title', array('value' => $oGame->title, 'validation' => new \PFBC\Validation\Str(2, 120), 'required' => 1)));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Description:'), 'description', array('value' => $oGame->description, 'validation' => new \PFBC\Validation\Str(2, 255), 'required' => 1)));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Keywords:'), 'keywords', array('value' => $oGame->keywords, 'validation' => new \PFBC\Validation\Str(2, 255), 'required' => 1)));
+            $oForm->addElement(new \PFBC\Element\Select(t('Category Name:'), 'category_id', $aCategoriesName, ['value' => $oGame->categoryId, 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Name of the Game:'), 'name', ['value' => $oGame->name, 'pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern), 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Title of the Game:'), 'title', ['value' => $oGame->title, 'validation' => new \PFBC\Validation\Str(2, 120), 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Description:'), 'description', ['value' => $oGame->description, 'validation' => new \PFBC\Validation\Str(2, 255), 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Keywords:'), 'keywords', ['value' => $oGame->keywords, 'validation' => new \PFBC\Validation\Str(2, 255), 'required' => 1]));
             $oForm->addElement(new \PFBC\Element\Button);
             $oForm->render();
         } else {

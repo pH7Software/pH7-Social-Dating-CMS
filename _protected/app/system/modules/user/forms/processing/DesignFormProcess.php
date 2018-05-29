@@ -25,7 +25,7 @@ class DesignFormProcess extends Form
         // Number has to be string because in DB it's an "enum" type
         $this->iApproved = (AdminCore::auth() || DbConfig::getSetting('bgProfileManualApproval') == 0) ? 1 : 0;
 
-        if (AdminCore::auth() && !User::auth() && $this->httpRequest->getExists(array('profile_id', 'username'))) {
+        if (AdminCore::auth() && !User::auth() && $this->httpRequest->getExists(['profile_id', 'username'])) {
             $iProfileId = $this->httpRequest->get('profile_id');
             $sUsername = $this->httpRequest->get('username');
         } else {
