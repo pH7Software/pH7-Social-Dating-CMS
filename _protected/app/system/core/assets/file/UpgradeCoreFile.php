@@ -153,9 +153,9 @@ class UpgradeCore
                 $this->sHtml .= '<h2>' . t('No upgrade patch for %software_name%!') . '</h2>';
             } else {
                 $this->sHtml .= '<h2>' . t('Upgrade available for %software_name%:') . '</h2>';
-
                 $this->sHtml .= '<form method="post">';
 
+                rsort($aAvailableUpgrades, SORT_NUMERIC);
                 foreach ($aAvailableUpgrades as $sFolder) {
                     $this->sUpgradesDirUpgradeFolder = $this->oFile->checkExtDir($sFolder);
 
@@ -389,6 +389,9 @@ class UpgradeCore
         return $this->oFile->deleteDir(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder);
     }
 
+    /**
+     * @return array
+     */
     private function showAvailableUpgrades()
     {
         $aFolders = [];
@@ -397,7 +400,7 @@ class UpgradeCore
             $aFolders[$sFolder] = $sFolder;
         }
 
-        return rsort($aFolders, SORT_NUMERIC);
+        return $aFolders;
     }
 
     /**
