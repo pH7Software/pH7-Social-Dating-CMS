@@ -179,7 +179,7 @@ class UpgradeCore
                             $this->sHtml .= '<p class="bold underline">' . t('Instruction:') . '</p>';
                             $this->sHtml .= $this->readInstruction(static::INST_INTRO_FILE);
                         } else {
-                            $sMsg = t('Bad "version name, version number or version build" of upgrade path!');
+                            $sMsg = t('Wrong "version name/number or version build"');
                             $this->sHtml .= '<button type="submit" class="error" disabled="disabled">' . $sMsg . '</button>';
                         }
                     } else {
