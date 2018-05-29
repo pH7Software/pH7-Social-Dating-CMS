@@ -311,9 +311,9 @@ class UpgradeCore
     }
 
     /**
-     * Download the new version path from HiZup remote server to the client server.
-     * Then, extract the file to "_repository" folder to set it available for the next update.
-     * Then, remove zip archive file as we don't need it anymore.
+     * Download the new version patches from pH7CMS remote server to the client server.
+     * Then, extract the file to "_repository/upgrade/" directory to set it as available for the next update.
+     * Then, remove zip archive file, as we don't need it anymore.
      *
      * @param string $sNewVersion Version number (e.g. "1.3.6")
      */
