@@ -261,7 +261,7 @@ class UpgradeCore extends Kernel
 
     private function file()
     {
-        $sPathPublicDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::FILE_DIR . PH7_DS . static::PUBLIC_DIR ;
+        $sPathPublicDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::FILE_DIR . PH7_DS . static::PUBLIC_DIR;
         if (is_dir($sPathPublicDir)) {
             $this->oFile->systemCopy($sPathPublicDir, PH7_PATH_ROOT);
             $this->oFile->chmod(PH7_PATH_ROOT, 0777);
