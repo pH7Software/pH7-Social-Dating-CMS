@@ -22,6 +22,6 @@ if ($oHttpRequest->postExists('username')) {
     $iStatus = ((new Validate)->username($oHttpRequest->post('username'), DbConfig::getSetting('minUsernameLength'), DbConfig::getSetting('maxUsernameLength'))) ? 1 : 0;
 }
 
-echo json_encode(array('status' => $iStatus));
+echo json_encode(['status' => $iStatus]);
 
 unset($oHttpRequest);

@@ -20,5 +20,5 @@ if ($oHttpRequest->postExists('post_id')) {
     $iStatus = (new Note)->checkPostId($iPostId, $iProfileId, new NoteModel) ? 1 : 0;
 }
 
-echo json_encode(array('status' => $iStatus));
+echo json_encode(['status' => $iStatus]);
 unset($oHttpRequest);

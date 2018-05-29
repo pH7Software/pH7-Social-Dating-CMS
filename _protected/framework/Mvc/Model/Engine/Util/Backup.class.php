@@ -95,7 +95,7 @@ class Backup implements GenerableFile
                                 $sValue = Db::getInstance()->quote($sValue);
                             }
 
-                            $sValue = str_replace(array("\r", "\n"), array('', '\n'), $sValue);
+                            $sValue = str_replace(["\r", "\n"], ['', '\n'], $sValue);
 
                             $aColumns[] = $sColumn;
                             $aValues[] = $sValue;

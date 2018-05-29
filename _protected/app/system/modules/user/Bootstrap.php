@@ -19,7 +19,7 @@ use PH7\Framework\Session\Session;
 // Automatic connection
 if (!UserCore::auth() && Registry::getInstance()->action !== 'soon') {
     $oCookie = new Cookie;
-    if ($oCookie->exists(array('member_remember', 'member_id'))) {
+    if ($oCookie->exists(['member_remember', 'member_id'])) {
         if ((new ExistsCoreModel)->id($oCookie->get('member_id'))) {
             $oUserModel = new UserCoreModel;
             $oUser = $oUserModel->readProfile($oCookie->get('member_id'));

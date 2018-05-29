@@ -26,7 +26,7 @@ class SignupController extends Controller
         /*** Display Sign Up page ***/
 
         $bRef = $this->httpRequest->getExists('ref');
-        $bUserRef = $this->httpRequest->getExists(array('ref', 'a', 'u', 'f_n', 's'));
+        $bUserRef = $this->httpRequest->getExists(['ref', 'a', 'u', 'f_n', 's']);
 
         if ($bRef || $bUserRef) {
             $sRef = $this->httpRequest->get('ref'); // For the statistics
