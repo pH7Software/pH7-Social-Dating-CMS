@@ -259,12 +259,21 @@ class UpgradeCore
 
     private function file()
     {
+        $this->copyPublicPathToRoot();
+        $this->copyProtectedPathToRoot();
+    }
+
+    private function copyPublicPathToRoot()
+    {
         $sPathPublicDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::FILE_DIR . PH7_DS . static::PUBLIC_DIR;
         if (is_dir($this->oFile->removeWildcards($sPathPublicDir))) {
             $this->oFile->systemCopy($sPathPublicDir, PH7_PATH_ROOT);
             $this->oFile->chmod(PH7_PATH_ROOT, 0777);
         }
+    }
 
+    private function copyProtectedPathToRoot()
+    {
         $sPathProtectedDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::FILE_DIR . PH7_DS . static::PROTECTED_DIR;
         if (is_dir($this->oFile->removeWildcards($sPathProtectedDir))) {
             $this->oFile->systemCopy($sPathProtectedDir, PH7_PATH_PROTECTED);
