@@ -751,7 +751,6 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
             $this->sCode
         );
 
-
         /***** elseif *****/
         $this->sCode = preg_replace('#<ph:else-if test=(?:"|\')([^\<\>"\n]+)(?:"|\')>#', '<?php elseif($1) { ?>', $this->sCode);
 
