@@ -148,14 +148,15 @@ class UpgradeCore
             // Download the next upgrade patch to "~/_repository/" folder
             $this->download($this->getNextVersion());
 
-            if (!$this->showAvailableUpgrades()) {
+            $aAvailableUpgrades = $this->showAvailableUpgrades();
+            if (empty($aAvailableUpgrades)) {
                 $this->sHtml .= '<h2>' . t('No upgrade patch for %software_name%!') . '</h2>';
             } else {
                 $this->sHtml .= '<h2>' . t('Upgrade available for %software_name%:') . '</h2>';
 
                 $this->sHtml .= '<form method="post">';
 
-                foreach ($this->showAvailableUpgrades() as $sFolder) {
+                foreach ($aAvailableUpgrades as $sFolder) {
                     $this->sUpgradesDirUpgradeFolder = $this->oFile->checkExtDir($sFolder);
 
                     $this->readConfig();
