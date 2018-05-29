@@ -50,6 +50,14 @@ class PH7Tpl extends Kernel implements GenerableFile
     const XML_SITEMAP_COMPILE_PAGE = 'mainlayout.xsl.cpl.php';
     const COMPILE_FILE_EXT = '.cpl.php';
 
+    const RESERVED_WORDS = [
+        'auto_include',
+        'def_main_auto_include',
+        'else',
+        'literal',
+        'lang'
+    ];
+
     /** @var DesignModel */
     private $designModel;
 
@@ -568,7 +576,7 @@ class PH7Tpl extends Kernel implements GenerableFile
      */
     public function getReservedWords()
     {
-        return ['auto_include', 'def_main_auto_include', 'else', 'literal', 'lang'];
+        return self::RESERVED_WORDS;
     }
 
     /**
