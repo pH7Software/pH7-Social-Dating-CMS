@@ -22,13 +22,14 @@ defined('PH7') or exit('Restricted access');
 use PH7\Framework\Compress\Compress;
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PH7\Framework\File\GenerableFile;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Layout\Html\Mail as MailLayout;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception as TplException;
 use PH7\Framework\Mvc\Model\Design as DesignModel;
 use PH7\Framework\Parse\SysVar;
 
-class PH7Tpl extends Kernel
+class PH7Tpl extends Kernel implements GenerableFile
 {
     const NAME = 'PH7Tpl';
     const AUTHOR = 'Pierre-Henry Soria';
@@ -691,6 +692,34 @@ class PH7Tpl extends Kernel
     }
 
     /**
+     * Get the header content to put in the file.
+     *
+     * @return string
+     */
+    final public function getHeaderContents()
+    {
+        return '
+namespace PH7;
+defined(\'PH7\') or exit(\'Restricted access\');
+/*
+Created on ' . gmdate(self::DATETIME_FORMAT) . '
+Compiled file from: ' . $this->sTemplateDirFile . '
+Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::AUTHOR . '
+*/
+/***************************************************************************
+ *     ' . self::SOFTWARE_NAME . ' ' . self::SOFTWARE_COMPANY . '
+ *               --------------------
+ * @since      Mon Mar 21 2011
+ * @author     SORIA Pierre-Henry
+ * @email      ' . self::SOFTWARE_EMAIL . '
+ * @link       ' . self::SOFTWARE_WEBSITE . '
+ * @copyright  ' . sprintf(self::SOFTWARE_COPYRIGHT, date('Y')) . '
+ * @license    ' . self::LICENSE . '
+ ***************************************************************************/
+';
+    }
+
+    /**
      * Checks if the compile directory has been defined otherwise we create a default directory.
      *
      * If the folder compile does not exist, it creates a folder.
@@ -945,34 +974,6 @@ class PH7Tpl extends Kernel
     protected function getCurrentController()
     {
         return $this->httpRequest->currentController();
-    }
-
-    /**
-     * Get the header content to put in the file.
-     *
-     * @return string
-     */
-    final protected function getHeaderContents()
-    {
-        return '
-namespace PH7;
-defined(\'PH7\') or exit(\'Restricted access\');
-/*
-Created on ' . gmdate(self::DATETIME_FORMAT) . '
-Compiled file from: ' . $this->sTemplateDirFile . '
-Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::AUTHOR . '
-*/
-/***************************************************************************
- *     ' . self::SOFTWARE_NAME . ' ' . self::SOFTWARE_COMPANY . '
- *               --------------------
- * @since      Mon Mar 21 2011
- * @author     SORIA Pierre-Henry
- * @email      ' . self::SOFTWARE_EMAIL . '
- * @link       ' . self::SOFTWARE_WEBSITE . '
- * @copyright  ' . sprintf(self::SOFTWARE_COPYRIGHT, date('Y')) . '
- * @license    ' . self::LICENSE . '
- ***************************************************************************/
-';
     }
 
     /**

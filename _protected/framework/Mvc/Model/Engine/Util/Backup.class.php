@@ -19,10 +19,11 @@ defined('PH7') or exit('Restricted access');
 use PH7\Framework\Config\Config;
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\Date\CDateTime;
+use PH7\Framework\File\GenerableFile;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Navigation\Browser;
 
-class Backup
+class Backup implements GenerableFile
 {
     const SQL_FILE_EXT = 'sql';
     const ARCHIVE_FILE_EXT = 'gz';
