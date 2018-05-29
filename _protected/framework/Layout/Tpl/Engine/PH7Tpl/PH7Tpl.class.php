@@ -105,7 +105,7 @@ class PH7Tpl extends Kernel implements GenerableFile
     private $bXmlTags = false;
 
     /** @var array */
-    private $_aVars = array();
+    private $_aVars = [];
 
     /** @var PH7Tpl */
     private $_oVars;
