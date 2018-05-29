@@ -150,7 +150,7 @@ class UpgradeCore
 
             $aAvailableUpgrades = $this->showAvailableUpgrades();
             if (empty($aAvailableUpgrades)) {
-                $this->sHtml .= '<h2>' . t('No upgrade patch for %software_name%!') . '</h2>';
+                $this->sHtml .= '<h2>' . t('No upgrade patches available for %software_name%.') . '</h2>';
             } else {
                 $this->sHtml .= '<h2>' . t('Upgrade available for %software_name%:') . '</h2>';
                 $this->sHtml .= '<form method="post">';
