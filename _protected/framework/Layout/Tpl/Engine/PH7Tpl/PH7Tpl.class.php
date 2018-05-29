@@ -521,8 +521,9 @@ class PH7Tpl extends Kernel implements GenerableFile
      */
     public function assign($sName, $mValue, $bEscape = false, $bEscapeStrip = false)
     {
-        if ($bEscape === true)
+        if ($bEscape === true) {
             $mValue = $this->str->escape($mValue, $bEscapeStrip);
+        }
 
         $this->_aVars[$sName] = $mValue;
     }
