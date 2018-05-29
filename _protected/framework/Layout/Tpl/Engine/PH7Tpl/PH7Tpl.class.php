@@ -870,10 +870,11 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
         $this->sCode = str_replace('<ph:code>', '<?php ', $this->sCode);
 
         /***** ?> *****/
-        if (!preg_match('#;[\s]+</ph:code>$#', $this->sCode))
+        if (!preg_match('#;[\s]+</ph:code>$#', $this->sCode)) {
             $this->sCode = str_replace('</ph:code>', ';?>', $this->sCode);
-        else
+        } else {
             $this->sCode = str_replace('</ph:code>', '?>', $this->sCode);
+        }
 
         /***** <?php ?> *****/
         $this->sCode = preg_replace('#<ph:code value=(?:"|\')(.+)(?:"|\') ?/?>#', '<?php $1 ?>', $this->sCode);
