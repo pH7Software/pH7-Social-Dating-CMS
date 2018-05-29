@@ -24,7 +24,7 @@ class CountryRestrictionCoreForm
         }
 
         $oForm = new \PFBC\Form('form_country_restriction');
-        $oForm->configure(array('action' => ''));
+        $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_country_restriction', 'form_country_restriction'));
         $oForm->addElement(new \PFBC\Element\Token('block_country'));
         $oForm->addElement(
