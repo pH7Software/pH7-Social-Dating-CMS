@@ -193,7 +193,7 @@ class UpgradeCore
                 $this->sHtml .= '</form>';
 
                 if ($this->isUpgradeRequested() && $this->checkUpgradeFolder($this->oHttpRequest->post('submit_upgrade'))) {
-                    $this->sUpgradesDirUpgradeFolder = $this->oHttpRequest->post('submit_upgrade'); // Upgrade Directory Path
+                    $this->sUpgradesDirUpgradeFolder = $this->oHttpRequest->post('submit_upgrade');
 
                     $this->readConfig();
 
