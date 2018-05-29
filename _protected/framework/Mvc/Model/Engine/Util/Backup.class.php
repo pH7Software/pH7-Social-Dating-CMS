@@ -49,12 +49,7 @@ class Backup
      */
     public function back()
     {
-        $this->sSql =
-            "#################### Database Backup ####################\n" .
-            '# ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_VERSION . ', Build ' . Kernel::SOFTWARE_BUILD . "\r\n" .
-            '# Database name: ' . Config::getInstance()->values['database']['name'] . "\r\n" .
-            '# Created on ' . (new CDateTime)->get()->dateTime() . "\r\n" .
-            "#########################################################\r\n\r\n";
+        $this->sSql = $this->getHeaderContents();
 
         $aTables = $aColumns = $aValues = array();
         $oAllTables = Db::showTables();
@@ -208,6 +203,22 @@ class Backup
     public function downloadArchive()
     {
         $this->downloadBackup(true);
+    }
+
+    /**
+     * Returns the SQL header containing useful information relative to the backup.
+     *
+     * @return string
+     */
+    public function getHeaderContents()
+    {
+        $sSql = "#################### Database Backup ####################\n" .
+            '# ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_VERSION . ', Build ' . Kernel::SOFTWARE_BUILD . "\r\n" .
+            '# Database name: ' . Config::getInstance()->values['database']['name'] . "\r\n" .
+            '# Created on ' . (new CDateTime)->get()->dateTime() . "\r\n" .
+            "#########################################################\r\n\r\n";
+
+        return $sSql;
     }
 
     /**
