@@ -148,7 +148,7 @@ class UpgradeCore
             // Download the next upgrade patch to "~/_repository/" folder
             $this->download($this->getNextVersion());
 
-            $aAvailableUpgrades = $this->showAvailableUpgrades();
+            $aAvailableUpgrades = $this->getAvailableUpgrades();
             if (empty($aAvailableUpgrades)) {
                 $this->sHtml .= '<h2>' . t('No upgrade patches available for %software_name%.') . '</h2>';
             } else {
@@ -392,7 +392,7 @@ class UpgradeCore
     /**
      * @return array
      */
-    private function showAvailableUpgrades()
+    private function getAvailableUpgrades()
     {
         $aFolders = [];
 
