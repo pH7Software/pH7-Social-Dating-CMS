@@ -168,7 +168,7 @@ class UpgradeCore
                     if ($this->checkUpgradeFolder($this->sUpgradesDirUpgradeFolder)) {
                         $this->sHtml .= '<p class="underline italic">' . t('Version Name: %0%, Version Number: %1%, Version Build: %2%', $sVerName, $sVerNumber, $iVerBuild) . '</p>';
 
-                        if ($this->checkVersion($sVerName, $sVerNumber, $iVerBuild)) {
+                        if ($this->isValidVersion($sVerName, $sVerNumber, $iVerBuild)) {
                             $sMsg = t('Upgrade <span class="bold italic">%software_version_name% %software_version% Build %software_build%</span> to version <span class="bold italic">%0%</span>', '<span class="bold italic">' . $sVerName . ' ' . $sVerNumber . ' Build ' . $iVerBuild . '</span>');
                             $this->sHtml .= '<button type="submit" class="success" name="submit_upgrade" value="' . $this->sUpgradesDirUpgradeFolder . '" onclick="return confirm(\'' . t('Have you made a backup of your website files, folders and database?') . '\');">' . $sMsg . '</button>';
 
@@ -434,7 +434,7 @@ class UpgradeCore
      *
      * @return bool Returns TRUE if the version name is correct, FALSE otherwise.
      */
-    private function checkVersion($sName, $sNumber, $iBuild)
+    private function isValidVersion($sName, $sNumber, $iBuild)
     {
         if (!is_string($sName) || !preg_match('#^' . Version::VERSION_PATTERN . '$#', $sNumber)) {
             return false;
