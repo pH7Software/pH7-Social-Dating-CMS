@@ -478,7 +478,7 @@ class File
     /**
      * Clean paths if wildcard is found in order to get valid paths.
      *
-     * @param $sPath
+     * @param string $sPath
      *
      * @return string
      */
