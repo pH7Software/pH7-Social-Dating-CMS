@@ -337,136 +337,6 @@ class PH7Tpl extends Kernel implements GenerableFile
     }
 
     /**
-     * Compiler template.
-     *
-     * @return boolean
-     *
-     * @throws TplException If the template file could not be recovered or cannot be written.
-     */
-    final private function compile()
-    {
-        // Create compile folder
-        $this->file->createDir($this->sCompileDir2);
-
-        if (!$this->sCode = $this->file->getFile($this->sTemplateDirFile)) {
-            throw new TplException(
-                sprintf('Impossible to fetch template file "%s"', $this->sTemplateDirFile)
-            );
-        }
-
-        // Parser the predefined variables
-        $this->sCode = (new Predefined\Variable($this->sCode))->assign()->get();
-
-        // Parser the predefined template functions
-        $this->sCode = (new Predefined\Func($this->sCode))->assign()->get();
-
-        // Parser the language constructs
-        $this->parse();
-
-        $sPhpHeader = $this->getHeaderContents();
-
-        // Check if the "$design" variable is actually part of the \PH7\Framework\Layout\Html\Design class
-        if (!$this->checkDesignInstance()) {
-            $this->setErrMsg();
-        }
-
-        if ($this->isMainCompilePage()) {
-            if (!$this->bLicense) {
-                $this->sCode = preg_replace('#<title>(.*?)</title>#is', '<title>$1 (<?php echo t(\'Powered by %software_name%\') ?>)</title>', $this->sCode);
-            }
-
-            // It is forbidden to violate the copyright!
-            // Thought for me who has spent years for developing a professional, high-quality software and done their best to help developers!
-            if (!$this->isMarkCopyright()) {
-                $this->setErrMsg();
-            }
-        }
-
-        if ($this->isXmlSitemapCompilePage() && !$this->isSmallMarkCopyright()) {
-            $this->setErrMsg();
-        }
-
-        if ($this->bPhpCompressor) {
-            $this->sCode = (new Compress)->parsePhp($this->sCode);
-        }
-
-        $this->sCode = '<?php ' . $sPhpHeader . '?>' . $this->sCode;
-
-        if ($rHandle = @fopen($this->sCompileDirFile, 'wb')) {
-            fwrite($rHandle, $this->sCode);
-            fclose($rHandle);
-            return true;
-        }
-
-        throw new TplException(
-            sprintf('Could not write template compiled file "%s"', $this->sCompileDirFile)
-        );
-    }
-
-    /**
-     * Parse the general code for translating the template language.
-     *
-     * @return void
-     */
-    private function parse()
-    {
-        /***** Includes *****/
-        $this->sCode = str_replace(
-            '{auto_include}',
-            '<?php $this->display($this->getCurrentController() . PH7_DS . $this->registry->action . \'' . $this->sTplExt . '\', $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>',
-            $this->sCode
-        );
-        $this->sCode = preg_replace(
-            '#{include ([^\{\}\n]+)}#',
-            '<?php $this->display($1); ?>',
-            $this->sCode
-        );
-        $this->sCode = preg_replace(
-            '#{main_include ([^\{\}\n]+)}#',
-            '<?php $this->display($1, PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS); ?>',
-            $this->sCode
-        );
-        $this->sCode = preg_replace(
-            '#{def_main_auto_include}#',
-            '<?php $this->display(\'' . $this->sTplFile . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
-            $this->sCode
-        );
-        $this->sCode = preg_replace(
-            '#{def_main_include ([^\{\}\n]+)}#',
-            '<?php $this->display($1, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
-            $this->sCode
-        );
-        $this->sCode = preg_replace(
-            '#{manual_include ([^\{\}\n]+)}#',
-            '<?php $this->display($this->getCurrentController() . PH7_DS . $1, $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>',
-            $this->sCode
-        );
-
-        /***** Objects *****/
-        $this->sCode = str_replace(['$browser->', '$designModel->'],
-            ['$this->browser->', '$this->designModel->'],
-            $this->sCode
-        );
-
-        /***** CLassic Syntax *****/
-        $this->classicSyntax();
-
-        /***** XML Syntax *****/
-        if ($this->bXmlTags) {
-            $this->xmlSyntax();
-        }
-
-        /***** Variables *****/
-        $this->sCode = preg_replace('#{([a-z0-9_]+)}#i', '<?php echo $$1; ?>', $this->sCode);
-
-        /***** Clears comments {* comment *} *****/
-        $this->sCode = preg_replace('#{\*.+\*}#isU', null, $this->sCode);
-
-        /***** Code optimization *****/
-        $this->optimization();
-    }
-
-    /**
      * Display template.
      *
      * @param string $sTplFile Default NULL
@@ -692,6 +562,16 @@ class PH7Tpl extends Kernel implements GenerableFile
     }
 
     /**
+     * Get the reserved variables.
+     *
+     * @return array
+     */
+    public function getReservedWords()
+    {
+        return ['auto_include', 'def_main_auto_include', 'else', 'literal', 'lang'];
+    }
+
+    /**
      * Get the header content to put in the file.
      *
      * @return string
@@ -717,33 +597,6 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
  * @license    ' . self::LICENSE . '
  ***************************************************************************/
 ';
-    }
-
-    /**
-     * Checks if the compile directory has been defined otherwise we create a default directory.
-     *
-     * If the folder compile does not exist, it creates a folder.
-     *
-     * @return self
-     */
-    private function checkCompileDir()
-    {
-        $this->sCompileDir = empty($this->sCompileDir) ? PH7_PATH_CACHE . static::COMPILE_DIR . PH7_DS : $this->sCompileDir;
-
-        return $this;
-    }
-
-    /**
-     * Checks if the cache directory has been defined otherwise we create a default directory.
-     * If the folder cache does not exist, it creates a folder.
-     *
-     * @return self
-     */
-    private function checkCacheDir()
-    {
-        $this->sCacheDir = empty($this->sCacheDir) ? PH7_PATH_CACHE . static::CACHE_DIR . PH7_DS : $this->sCacheDir;
-
-        return $this;
     }
 
     /**
@@ -947,16 +800,6 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     }
 
     /**
-     * Get the reserved variables.
-     *
-     * @return array
-     */
-    public function getReservedWords()
-    {
-        return ['auto_include', 'def_main_auto_include', 'else', 'literal', 'lang'];
-    }
-
-    /**
      * Optimizes the code generated by the compiler php template.
      *
      * @return void
@@ -975,6 +818,136 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     protected function getCurrentController()
     {
         return $this->httpRequest->currentController();
+    }
+
+    /**
+     * Compiler template.
+     *
+     * @return boolean
+     *
+     * @throws TplException If the template file could not be recovered or cannot be written.
+     */
+    final private function compile()
+    {
+        // Create compile folder
+        $this->file->createDir($this->sCompileDir2);
+
+        if (!$this->sCode = $this->file->getFile($this->sTemplateDirFile)) {
+            throw new TplException(
+                sprintf('Impossible to fetch template file "%s"', $this->sTemplateDirFile)
+            );
+        }
+
+        // Parser the predefined variables
+        $this->sCode = (new Predefined\Variable($this->sCode))->assign()->get();
+
+        // Parser the predefined template functions
+        $this->sCode = (new Predefined\Func($this->sCode))->assign()->get();
+
+        // Parser the language constructs
+        $this->parse();
+
+        $sPhpHeader = $this->getHeaderContents();
+
+        // Check if the "$design" variable is actually part of the \PH7\Framework\Layout\Html\Design class
+        if (!$this->checkDesignInstance()) {
+            $this->setErrMsg();
+        }
+
+        if ($this->isMainCompilePage()) {
+            if (!$this->bLicense) {
+                $this->sCode = preg_replace('#<title>(.*?)</title>#is', '<title>$1 (<?php echo t(\'Powered by %software_name%\') ?>)</title>', $this->sCode);
+            }
+
+            // It is forbidden to violate the copyright!
+            // Thought for me who has spent years for developing a professional, high-quality software and done their best to help developers!
+            if (!$this->isMarkCopyright()) {
+                $this->setErrMsg();
+            }
+        }
+
+        if ($this->isXmlSitemapCompilePage() && !$this->isSmallMarkCopyright()) {
+            $this->setErrMsg();
+        }
+
+        if ($this->bPhpCompressor) {
+            $this->sCode = (new Compress)->parsePhp($this->sCode);
+        }
+
+        $this->sCode = '<?php ' . $sPhpHeader . '?>' . $this->sCode;
+
+        if ($rHandle = @fopen($this->sCompileDirFile, 'wb')) {
+            fwrite($rHandle, $this->sCode);
+            fclose($rHandle);
+            return true;
+        }
+
+        throw new TplException(
+            sprintf('Could not write template compiled file "%s"', $this->sCompileDirFile)
+        );
+    }
+
+    /**
+     * Parse the general code for translating the template language.
+     *
+     * @return void
+     */
+    private function parse()
+    {
+        /***** Includes *****/
+        $this->sCode = str_replace(
+            '{auto_include}',
+            '<?php $this->display($this->getCurrentController() . PH7_DS . $this->registry->action . \'' . $this->sTplExt . '\', $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>',
+            $this->sCode
+        );
+        $this->sCode = preg_replace(
+            '#{include ([^\{\}\n]+)}#',
+            '<?php $this->display($1); ?>',
+            $this->sCode
+        );
+        $this->sCode = preg_replace(
+            '#{main_include ([^\{\}\n]+)}#',
+            '<?php $this->display($1, PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS); ?>',
+            $this->sCode
+        );
+        $this->sCode = preg_replace(
+            '#{def_main_auto_include}#',
+            '<?php $this->display(\'' . $this->sTplFile . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
+            $this->sCode
+        );
+        $this->sCode = preg_replace(
+            '#{def_main_include ([^\{\}\n]+)}#',
+            '<?php $this->display($1, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
+            $this->sCode
+        );
+        $this->sCode = preg_replace(
+            '#{manual_include ([^\{\}\n]+)}#',
+            '<?php $this->display($this->getCurrentController() . PH7_DS . $1, $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>',
+            $this->sCode
+        );
+
+        /***** Objects *****/
+        $this->sCode = str_replace(['$browser->', '$designModel->'],
+            ['$this->browser->', '$this->designModel->'],
+            $this->sCode
+        );
+
+        /***** CLassic Syntax *****/
+        $this->classicSyntax();
+
+        /***** XML Syntax *****/
+        if ($this->bXmlTags) {
+            $this->xmlSyntax();
+        }
+
+        /***** Variables *****/
+        $this->sCode = preg_replace('#{([a-z0-9_]+)}#i', '<?php echo $$1; ?>', $this->sCode);
+
+        /***** Clears comments {* comment *} *****/
+        $this->sCode = preg_replace('#{\*.+\*}#isU', null, $this->sCode);
+
+        /***** Code optimization *****/
+        $this->optimization();
     }
 
     /**
@@ -1088,6 +1061,33 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     private function addSlashes($sStr)
     {
         return addslashes($sStr);
+    }
+
+    /**
+     * Checks if the compile directory has been defined otherwise we create a default directory.
+     *
+     * If the folder compile does not exist, it creates a folder.
+     *
+     * @return self
+     */
+    private function checkCompileDir()
+    {
+        $this->sCompileDir = empty($this->sCompileDir) ? PH7_PATH_CACHE . static::COMPILE_DIR . PH7_DS : $this->sCompileDir;
+
+        return $this;
+    }
+
+    /**
+     * Checks if the cache directory has been defined otherwise we create a default directory.
+     * If the folder cache does not exist, it creates a folder.
+     *
+     * @return self
+     */
+    private function checkCacheDir()
+    {
+        $this->sCacheDir = empty($this->sCacheDir) ? PH7_PATH_CACHE . static::CACHE_DIR . PH7_DS : $this->sCacheDir;
+
+        return $this;
     }
 
     /**
