@@ -41,6 +41,8 @@ class File
     const READ_WRITE_CHMOD_OCTAL_DIGIT = 0644;
     const READ_WRITE_EXEC_CHMOD_OCTAL_DIGIT = 0777;
 
+    const WILDCARD_FLAG = '*';
+
     // End Of Line relative to the operating system
     const EOL = PHP_EOL;
 
@@ -364,10 +366,7 @@ class File
      */
     public function systemCopy($sFrom, $sTo)
     {
-        // Clean the path if wildcard is used at the end
-        $sFrom = rtrim($sFrom, '*');
-
-        if (file_exists($sFrom)) {
+        if (file_exists($this->removeWildcards($sFrom))) {
             return system("cp -r $sFrom $sTo");
         }
 
@@ -474,6 +473,18 @@ class File
         }
 
         @rmdir($sDir);
+    }
+
+    /**
+     * Clean paths if wildcard is found in order to get valid paths.
+     *
+     * @param $sPath
+     *
+     * @return string
+     */
+    public function removeWildcards($sPath)
+    {
+        return str_replace(self::WILDCARD_FLAG, '', $sPath);
     }
 
     /**
