@@ -43,8 +43,6 @@ class UpgradeCore extends Kernel
      */
     const DIR = 'upgrade';
     const FILE_DIR = 'file';
-    const PUBLIC_DIR = 'public';
-    const PROTECTED_DIR = 'protected';
     const DATA_DIR = 'data';
     const SQL_DIR = 'sql';
     const INFO_DIR = 'info';
@@ -54,6 +52,11 @@ class UpgradeCore extends Kernel
     const UPGRADE_FILE = 'upgrade.sql';
     const VERSION_LIST_FILE = 'all_versions.txt';
     const VERSION_FILE = 'Version.class.php';
+
+    // Use UNIX wildcard to be able to select only the sub-directories present in "public/"
+    const PUBLIC_DIR = 'public/*';
+    // Use UNIX wildcard to be able to select only the sub-directories present in "protected/"
+    const PROTECTED_DIR = 'protected/*';
 
 
     /** @var Http */
@@ -258,15 +261,15 @@ class UpgradeCore extends Kernel
 
     private function file()
     {
-        $sPathPublicDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::FILE_DIR . PH7_DS . static::PUBLIC_DIR . PH7_DS;
+        $sPathPublicDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::FILE_DIR . PH7_DS . static::PUBLIC_DIR ;
         if (is_dir($sPathPublicDir)) {
-            $this->oFile->systemRename($sPathPublicDir, PH7_PATH_ROOT);
+            $this->oFile->systemCopy($sPathPublicDir, PH7_PATH_ROOT);
             $this->oFile->chmod(PH7_PATH_ROOT, 0777);
         }
 
-        $sPathProtectedDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::FILE_DIR . PH7_DS . static::PROTECTED_DIR . PH7_DS;
+        $sPathProtectedDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::FILE_DIR . PH7_DS . static::PROTECTED_DIR;
         if (is_dir($sPathProtectedDir)) {
-            $this->oFile->systemRename($sPathProtectedDir, PH7_PATH_PROTECTED);
+            $this->oFile->systemCopy($sPathProtectedDir, PH7_PATH_PROTECTED);
             $this->oFile->chmod(PH7_PATH_PROTECTED, 0777);
         }
     }
