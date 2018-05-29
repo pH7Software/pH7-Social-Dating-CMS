@@ -416,7 +416,7 @@ class File
      */
     public function systemRename($sFrom, $sTo)
     {
-        if (file_exists($sFrom)) {
+        if (file_exists($this->removeWildcards($sFrom))) {
             return system("mv $sFrom $sTo");
         }
 
