@@ -17,6 +17,7 @@ use PH7\Framework\File\File;
 
 abstract class Model extends Entity
 {
+    const DB_PREFIX_FLAG = '[DB_PREFIX]';
     const SQL_FILE_EXT = '.sql';
 
     /** @var Record */
@@ -74,6 +75,6 @@ abstract class Model extends Entity
      */
     private function parseVar()
     {
-        $this->sContents = str_replace('[DB_PREFIX]', Db::prefix(), $this->sContents);
+        $this->sContents = str_replace(self::DB_PREFIX_FLAG, Db::prefix(), $this->sContents);
     }
 }
