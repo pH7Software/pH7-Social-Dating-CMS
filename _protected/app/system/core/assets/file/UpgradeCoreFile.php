@@ -166,7 +166,7 @@ class UpgradeCore
                     $iVerBuild = $this->oConfig->values['upgrade.version']['build'];
                     $sDesc = $this->oConfig->values['upgrade.information']['description'];
 
-                    if ($this->checkUpgradeFolder($this->sUpgradesDirUpgradeFolder)) {
+                    if ($this->isValidUpgradeFolder($this->sUpgradesDirUpgradeFolder)) {
                         $bIsValidVer = $this->isValidVersion($sVerName, $sVerNumber, $iVerBuild);
                         $this->sHtml .= '<p class="underline italic ' . ($bIsValidVer ? 'bold' : '') . '">' . t('Version Name: %0%, Version Number: %1%, Version Build: %2%', $sVerName, $sVerNumber, $iVerBuild) . '</p>';
 
@@ -193,7 +193,7 @@ class UpgradeCore
 
                 $this->sHtml .= '</form>';
 
-                if ($this->isUpgradeRequested() && $this->checkUpgradeFolder($this->oHttpRequest->post('submit_upgrade'))) {
+                if ($this->isUpgradeRequested() && $this->isValidUpgradeFolder($this->oHttpRequest->post('submit_upgrade'))) {
                     $this->sUpgradesDirUpgradeFolder = $this->oHttpRequest->post('submit_upgrade');
 
                     $this->readConfig();
@@ -362,7 +362,7 @@ class UpgradeCore
      *
      * @return bool Returns TRUE if it is correct, FALSE otherwise.
      */
-    private function checkUpgradeFolder($sFolder)
+    private function isValidUpgradeFolder($sFolder)
     {
         $sFullPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sFolder;
 
