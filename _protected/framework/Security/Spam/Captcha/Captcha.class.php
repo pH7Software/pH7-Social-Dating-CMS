@@ -21,6 +21,7 @@ use PH7\Framework\Util\Various;
 class Captcha
 {
     const NUM_CHARACTER_CAPTCHA = 5;
+    const NAX_CHARACTER_CAPTCHA = 14;
     const RELOAD_ICON_FILENAME = 'reload.svg';
     const SESSION_NAME = 'rand_code';
 
@@ -88,6 +89,8 @@ class Captcha
      */
     public function show($iRandom = null, $iComplexity = self::NUM_CHARACTER_CAPTCHA)
     {
+        $iComplexity = $this->getCorrectStringLength($iComplexity);
+
         if (!empty($iRandom)) {
             $this->sStr = Various::genRnd($iRandom, $iComplexity);
         } else {
@@ -223,6 +226,24 @@ class Captcha
                 $sText
             );
         }
+    }
+
+    /**
+     * @param int $iStringLength
+     *
+     * @return int
+     */
+    private function getCorrectStringLength($iStringLength)
+    {
+        if ($iStringLength < self::NUM_CHARACTER_CAPTCHA) {
+            return self::NUM_CHARACTER_CAPTCHA;
+        }
+
+        if ($iStringLength > self::NAX_CHARACTER_CAPTCHA) {
+            return self::NAX_CHARACTER_CAPTCHA;
+        }
+
+        return $iStringLength;
     }
 
     /**
