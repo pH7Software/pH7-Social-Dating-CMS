@@ -41,7 +41,7 @@ class File
     const READ_WRITE_CHMOD_OCTAL_DIGIT = 0644;
     const READ_WRITE_EXEC_CHMOD_OCTAL_DIGIT = 0777;
 
-    const WILDCARD_FLAG = '*';
+    const WILDCARD_SYMBOL = '*';
 
     // End Of Line relative to the operating system
     const EOL = PHP_EOL;
@@ -484,7 +484,7 @@ class File
      */
     public function removeWildcards($sPath)
     {
-        return str_replace(self::WILDCARD_FLAG, '', $sPath);
+        return str_replace(self::WILDCARD_SYMBOL, '', $sPath);
     }
 
     /**
