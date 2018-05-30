@@ -22,6 +22,11 @@ class Captcha
 {
     const NUM_CHARACTER_CAPTCHA = 5;
     const NAX_CHARACTER_CAPTCHA = 14;
+
+    const COMPLEXITY_LOW = 5;
+    const COMPLEXITY_MEDIUM = 7;
+    const COMPLEXITY_HIGH = 9;
+
     const RELOAD_ICON_FILENAME = 'reload.svg';
     const SESSION_NAME = 'rand_code';
 

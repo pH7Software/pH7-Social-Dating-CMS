@@ -14,6 +14,7 @@ use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
+use PH7\Framework\Security\Spam\Captcha\Captcha;
 use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Header;
 
@@ -220,7 +221,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Captcha') . '</h3>'));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Captcha Complexity:'), 'captcha_complexity', [5, 7, 9], ['value' => DbConfig::getSetting('captchaComplexity'), 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Select(t('Captcha Complexity:'), 'captcha_complexity', [Captcha::COMPLEXITY_LOW, Captcha::COMPLEXITY_MEDIUM, Captcha::COMPLEXITY_HIGH], ['value' => DbConfig::getSetting('captchaComplexity'), 'required' => 1]));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Captcha Case Sensitive:'), 'captcha_case_sensitive', ['1' => t('Yes'), '0' => t('No')], ['value' => DbConfig::getSetting('captchaCaseSensitive'), 'required' => 1]));
 
