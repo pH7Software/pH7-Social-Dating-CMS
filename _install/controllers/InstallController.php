@@ -511,7 +511,6 @@ class InstallController extends Controller
         global $LANG;
 
         $aParams = [
-            'from' => $_SESSION['val']['admin_email'],
             'to' => $_SESSION['val']['admin_login_email'],
             'subject' => $LANG['title_email_finish_install'],
             'body' => $LANG['content_email_finish_install']
@@ -528,7 +527,6 @@ class InstallController extends Controller
     private function canEmailBeSent()
     {
         return !empty($_SESSION['val']['admin_login_email']) &&
-            !empty($_SESSION['val']['admin_email']) &&
             !empty($_SESSION['val']['admin_username']);
     }
 
