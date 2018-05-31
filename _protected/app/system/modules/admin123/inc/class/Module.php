@@ -99,7 +99,7 @@ class Module
     public function showAvailableMods($sSwitch)
     {
         $sValue = $this->checkParam($sSwitch);
-        $aFolders = array();
+        $aFolders = [];
 
         foreach ($this->readMods($sValue) as $sFolder) {
             $aFolders[$sFolder] = $sFolder;
