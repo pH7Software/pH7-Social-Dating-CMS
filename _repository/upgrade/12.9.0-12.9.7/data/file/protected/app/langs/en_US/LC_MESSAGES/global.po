@@ -3600,7 +3600,7 @@ msgid "File Contents"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/ScriptForm.php:30
-msgid "Your custon JavaScript code"
+msgid "Your custom JavaScript code"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/ScriptForm.php:30
@@ -4546,7 +4546,7 @@ msgid "The number of minutes that a member becomes inactive (offline)."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/StyleForm.php:30
-msgid "Your custon CSS code"
+msgid "Your custom CSS code"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/UpdateAdsForm.php:54
