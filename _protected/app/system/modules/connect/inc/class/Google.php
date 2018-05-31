@@ -128,7 +128,7 @@ class Google extends Api implements IApi
             'first_name' => !empty($aProfile['given_name']) ? $aProfile['given_name'] : '',
             'last_name' => !empty($aProfile['family_name']) ? $aProfile['family_name'] : '',
             'sex' => $sSex,
-            'match_sex' => array($sMatchSex),
+            'match_sex' => [$sMatchSex],
             'birth_date' => (new CDateTime)->get($sBirthDate)->date('Y-m-d'),
             'country' => Geo::getCountryCode(),
             'city' => Geo::getCity(),
