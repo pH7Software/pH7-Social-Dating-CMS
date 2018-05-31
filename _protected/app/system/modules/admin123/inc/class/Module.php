@@ -294,6 +294,11 @@ class Module
             return static::UNINSTALL;
         }
 
-        exit('Wrong value in the parameter of the method: ' . __METHOD__ . ' in the class: ' . __CLASS__);
+        $sMsg = sprintf(
+            'Wrong value in the parameter of the method: %s in the class: %s',
+            __METHOD__,
+            __CLASS__
+        );
+        exit($sMsg);
     }
 }
