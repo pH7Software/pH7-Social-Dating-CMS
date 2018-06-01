@@ -14,6 +14,7 @@ namespace PH7\Framework\Security;
 defined('PH7') or exit('Restricted access');
 
 use DOMDocument;
+use DOMElement;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Security\Validate\Validate;
 
@@ -61,7 +62,9 @@ final class Version
                 return false;
             }
 
+            /** @var DOMElement $oSoft */
             foreach ($oDom->getElementsByTagName('ph7') as $oSoft) {
+                /** @var DOMElement $oInfo */
                 foreach ($oSoft->getElementsByTagName('social-dating-cms') as $oInfo) {
                     // "Validate::bool()" returns TRUE for "1", "true", "on" and "yes", FALSE otherwise
                     $bIsAlert = (new Validate)->bool($oInfo->getElementsByTagName('upd-alert')->item(0)->nodeValue);
