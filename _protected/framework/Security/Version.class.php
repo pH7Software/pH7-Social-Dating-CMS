@@ -66,8 +66,6 @@ final class Version
             foreach ($oDom->getElementsByTagName('ph7') as $oSoft) {
                 /** @var DOMElement $oInfo */
                 foreach ($oSoft->getElementsByTagName('social-dating-cms') as $oInfo) {
-                    // "Validate::bool()" returns TRUE for "1", "true", "on" and "yes", FALSE otherwise
-                    $bIsAlert = (new Validate)->bool($oInfo->getElementsByTagName('upd-alert')->item(0)->nodeValue);
                     $sVerName = $oInfo->getElementsByTagName('name')->item(0)->nodeValue;
                     $sVerNumber = $oInfo->getElementsByTagName('version')->item(0)->nodeValue;
                     $sVerBuild = $oInfo->getElementsByTagName('build')->item(0)->nodeValue;
@@ -75,7 +73,12 @@ final class Version
             }
             unset($oDom);
 
-            $mData = ['is_alert' => $bIsAlert, 'name' => $sVerName, 'version' => $sVerNumber, 'build' => $sVerBuild];
+            $mData = [
+                'is_alert' => self::isUpdateAlertEnabled(),
+                'name' => $sVerName,
+                'version' => $sVerNumber,
+                'build' => $sVerBuild
+            ];
             $oCache->put($mData);
         }
         unset($oCache);
@@ -115,5 +118,16 @@ final class Version
         }
 
         return false;
+    }
+
+    /**
+     * @param DOMElement $oInfo
+     *
+     * @return bool
+     */
+    private static function isUpdateAlertEnabled(DOMElement $oInfo)
+    {
+        // "Validate::bool()" returns TRUE for "1", "true", "on" and "yes", FALSE otherwise
+        return (new Validate)->bool($oInfo->getElementsByTagName('upd-alert')->item(0)->nodeValue);
     }
 }
