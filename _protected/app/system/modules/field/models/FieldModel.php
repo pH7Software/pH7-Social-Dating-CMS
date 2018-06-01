@@ -66,7 +66,7 @@ class FieldModel extends Model
     {
         $rStmt = Db::getInstance()->query('SELECT * FROM' . Db::prefix($this->sTable) . 'LIMIT 1');
 
-        $aColumn = array();
+        $aColumn = [];
         if ($rStmt->rowCount() > 0) {
             while ($aRow = $rStmt->fetch()) {
                 foreach ($aRow as $sColumn => $sValue) {

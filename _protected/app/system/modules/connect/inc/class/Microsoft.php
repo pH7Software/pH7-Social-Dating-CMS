@@ -126,7 +126,7 @@ class Microsoft extends Api
             'first_name' => (!empty($oProfile->first_name)) ? $oProfile->first_name : '',
             'last_name' => (!empty($oProfile->last_name)) ? $oProfile->last_name : '',
             'sex' => $sSex,
-            'match_sex' => array($sMatchSex),
+            'match_sex' => [$sMatchSex],
             'birth_date' => (new CDateTime)->get($sBirthDate)->date('Y-m-d'),
             'country' => Geo::getCountryCode(),
             'city' => Geo::getCity(),

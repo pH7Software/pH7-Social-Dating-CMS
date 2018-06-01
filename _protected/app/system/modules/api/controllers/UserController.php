@@ -91,7 +91,7 @@ class UserController extends MainController
                     'first_name' => $aData['first_name'],
                     'last_name' => $aData['last_name'],
                     'sex' => $aData['sex'],
-                    'match_sex' => is_array($aData['match_sex']) ?: array($aData['match_sex']), // PHP 5.3 short ternary operator "?:"
+                    'match_sex' => is_array($aData['match_sex']) ?: [$aData['match_sex']], // PHP 5.3 short ternary operator "?:"
                     'birth_date' => $this->dateTime->get($aData['birth_date'])->date('Y-m-d'),
                     'country' => $aData['country'],
                     'city' => $aData['city'],

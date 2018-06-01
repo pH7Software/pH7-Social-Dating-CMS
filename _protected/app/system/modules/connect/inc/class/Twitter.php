@@ -179,9 +179,9 @@ class Twitter extends Api implements IApi
         $sText = substr($sText, 0, 140);
 
         // POST the text to the statuses/update method
-        $this->oTwOAuth->request('POST', $this->oTwOAuth->url('1/statuses/update'), array(
+        $this->oTwOAuth->request('POST', $this->oTwOAuth->url('1/statuses/update'), [
             'status' => $sText
-        ));
+        ]);
 
         return $this->oTwOAuth->response['code'] == 200;
     }
@@ -208,7 +208,7 @@ class Twitter extends Api implements IApi
             'first_name' => (!empty($aProfile['given_name'])) ? $aProfile['given_name'] : '',
             'last_name' => (!empty($aProfile['family_name'])) ? $aProfile['family_name'] : '',
             'sex' => $sSex,
-            'match_sex' => array($sMatchSex),
+            'match_sex' => [$sMatchSex],
             'birth_date' => (new CDateTime)->get($sBirthDate)->date('Y-m-d'),
             'country' => Geo::getCountryCode(),
             'city' => Geo::getCity(),

@@ -2,11 +2,11 @@
 /**
  * @title          Module Management
  *
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Inc / Class
- * @version        1.1
+ * @version        1.2
  */
 
 namespace PH7;
@@ -99,7 +99,7 @@ class Module
     public function showAvailableMods($sSwitch)
     {
         $sValue = $this->checkParam($sSwitch);
-        $aFolders = array();
+        $aFolders = [];
 
         foreach ($this->readMods($sValue) as $sFolder) {
             $aFolders[$sFolder] = $sFolder;
@@ -294,6 +294,11 @@ class Module
             return static::UNINSTALL;
         }
 
-        exit('Wrong value in the parameter of the method: ' . __METHOD__ . ' in the class: ' . __CLASS__);
+        $sMsg = sprintf(
+            'Wrong value in the parameter of the method: %s in the class: %s',
+            __METHOD__,
+            __CLASS__
+        );
+        exit($sMsg);
     }
 }

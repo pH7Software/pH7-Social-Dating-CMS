@@ -152,7 +152,7 @@ class Facebook extends Api implements IApi
             'last_name' => $this->oProfile->getLastName(),
             'middle_name' => $this->oProfile->getMiddleName(),
             'sex' => $sSex,
-            'match_sex' => array($sMatchSex),
+            'match_sex' => [$sMatchSex],
             'birth_date' => (new CDateTime)->get($sBirthDate)->date('Y-m-d'),
             'country' => Geo::getCountryCode(),
             'city' => !empty($this->oLocation->getCity()) ? $this->oLocation->getCity() : Geo::getCity(),
