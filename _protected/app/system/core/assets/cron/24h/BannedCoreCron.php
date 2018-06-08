@@ -61,10 +61,10 @@ class BannedCoreCron extends Cron
      *
      * @var array
      */
-    const svcUrl = array(
+    const SVC_URL = [
         'https://www.blocklist.de/downloads/export-ips_all.txt',
         'http://www.badips.com/get/list/ssh/2'
-    );
+    ];
 
     public function __construct()
     {
@@ -94,7 +94,7 @@ class BannedCoreCron extends Cron
         /**
          * Process each web url we have in the $svcUrl array
          */
-        foreach ($this->svcUrl as $url) {
+        foreach ($this->SVC_URL as $url) {
             /**
              * Each url we have for Web Service
              *
