@@ -319,7 +319,7 @@ final class FrontController
      *
      * @return void
      */
-    public function _removeDatabaseInfo()
+    public function _unsetDatabaseInfo()
     {
         unset($this->oConfig->values['database']);
     }
