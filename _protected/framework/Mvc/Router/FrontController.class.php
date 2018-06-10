@@ -759,7 +759,13 @@ final class FrontController
             if ($iRedirect === null) {
                 $this->oRegistry->module = 'error';
             } else {
-                Header::redirect(UriRoute::get('error', 'http', 'index'));
+                Header::redirect(
+                    UriRoute::get(
+                        'error',
+                        'http',
+                        'index'
+                    )
+                );
             }
         }
     }
