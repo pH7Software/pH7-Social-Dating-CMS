@@ -27,10 +27,10 @@ class WallForm
         }
 
         $oForm = new \PFBC\Form('form_wall', 500);
-        $oForm->configure(array('action' => ''));
+        $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_wall', 'form_wall'));
         $oForm->addElement(new \PFBC\Element\Token('wall'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Content:'), 'post', array('validation' => new \PFBC\Validation\Str(1, 900))));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Content:'), 'post', ['validation' => new \PFBC\Validation\Str(1, 900)]));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

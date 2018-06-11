@@ -17,6 +17,7 @@ use PH7\Framework\File\File;
 
 abstract class Model extends Entity
 {
+    const DB_PREFIX_FLAG = '[DB_PREFIX]';
     const SQL_FILE_EXT = '.sql';
 
     /** @var Record */
@@ -46,6 +47,7 @@ abstract class Model extends Entity
         $rStmt = Db::getInstance()->prepare($this->getQuery($sFile, $sPath));
         $bRet = $rStmt->execute($aParams);
         Db::free($rStmt);
+
         return $bRet;
     }
 
@@ -61,7 +63,7 @@ abstract class Model extends Entity
     {
         $sFullPath = $sPath . $sFile . static::SQL_FILE_EXT;
         $this->sContents = (new File)->getFile($sFullPath);
-        $this->_parseVar();
+        $this->parseVar();
 
         return $this->sContents;
     }
@@ -71,8 +73,8 @@ abstract class Model extends Entity
      *
      * @return void
      */
-    private function _parseVar()
+    private function parseVar()
     {
-        $this->sContents = str_replace('[DB_PREFIX]', Db::prefix(), $this->sContents);
+        $this->sContents = str_replace(self::DB_PREFIX_FLAG, Db::prefix(), $this->sContents);
     }
 }

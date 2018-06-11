@@ -26,12 +26,12 @@ class AdsForm
         $aAdSizes = Import::file(PH7_PATH_APP_CONFIG . 'ad_sizes');
 
         $oForm = new \PFBC\Form('form_ads');
-        $oForm->configure(array('action' => ''));
+        $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_ads', 'form_ads'));
         $oForm->addElement(new \PFBC\Element\Token('ads'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Title:'), 'title', array('required' => 1, 'validation' => new \PFBC\Validation\Str(2, 40))));
-        $oForm->addElement(new \PFBC\Element\Select(t('Size of the Banner:'), 'size', $aAdSizes, array('required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Banner:'), 'code', array('description' => self::getBannerDesc(), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Title:'), 'title', ['required' => 1, 'validation' => new \PFBC\Validation\Str(2, 40)]));
+        $oForm->addElement(new \PFBC\Element\Select(t('Size of the Banner:'), 'size', $aAdSizes, ['required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Banner:'), 'code', ['description' => self::getBannerDesc(), 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

@@ -194,7 +194,7 @@ class MailModel extends MailCoreModel
         $oData = $this->getMsg($iMessageId);
         $sFieldId = $oData->sender === $iProfileId ? self::SENDER_DB_FIELD : self::RECIPIENT_DB_FIELD;
         if ($sMode === self::RESTOR_MODE) {
-            $sTrashVal = str_replace(array($sFieldId, ','), '', $oData->trash);
+            $sTrashVal = str_replace([$sFieldId, ','], '', $oData->trash);
         } else {
             $sTrashVal = ($oData->sender === $oData->recipient) ? 'sender,recipient' : $sFieldId . (!empty($oData->trash) ? ',' . $oData->trash : '');
         }

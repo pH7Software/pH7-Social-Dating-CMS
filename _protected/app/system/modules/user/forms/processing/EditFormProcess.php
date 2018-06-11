@@ -32,7 +32,7 @@ class EditFormProcess extends Form
                     $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
                 );
 
-                (new Cache)->start(UserCoreModel::CACHE_GROUP, 'membershipdetails' . $iProfileId, null)->clear();
+                (new Cache)->start(UserCoreModel::CACHE_GROUP, 'membershipDetails' . $iProfileId, null)->clear();
             }
         }
 

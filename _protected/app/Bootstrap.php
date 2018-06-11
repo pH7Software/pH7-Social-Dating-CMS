@@ -1,8 +1,6 @@
 <?php
 /**
- * @title          Bootstrap
- *
- * @author         Pierre-Henry Soria <hi@ph7.me>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @link           http://ph7cms.com
@@ -97,7 +95,7 @@ class Bootstrap
 
             // Initialize the FrontController, we are asking the front controller to process the HTTP request
             FrontController::getInstance()->runRouter();
-        /**  When pH7CMS will support PHP 7.1
+        /**  TODO: When pH7CMS will support PHP 7.1
         } catch (FileNotFoundException | Except\UserException $oE) {
         //*/
         } catch (FileNotFoundException $oE) {

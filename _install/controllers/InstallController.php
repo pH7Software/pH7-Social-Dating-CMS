@@ -480,10 +480,7 @@ class InstallController extends Controller
     {
         @require_once PH7_ROOT_PUBLIC . '_constants.php';
 
-        if (
-            !empty($_SESSION['val']['admin_login_email'])
-            && !empty($_SESSION['val']['admin_username'])
-        ) {
+        if ($this->canEmailBeSent()) {
             $this->sendWelcomeEmail();
 
             $this->oView->assign('admin_login_email', $_SESSION['val']['admin_login_email']);
@@ -494,8 +491,8 @@ class InstallController extends Controller
         $this->removeCookies();
 
         if (
-            $_SERVER['REQUEST_METHOD'] == 'POST'
-            && !empty($_POST['confirm_remove_install'])
+            $_SERVER['REQUEST_METHOD'] == 'POST' &&
+            !empty($_POST['confirm_remove_install'])
         ) {
             remove_install_dir();
             clearstatcache(); // We remove the files status cache as the "_install" folder doesn't exist anymore by now.
@@ -514,13 +511,23 @@ class InstallController extends Controller
         global $LANG;
 
         $aParams = [
-            'from' => Controller::SOFTWARE_EMAIL,
             'to' => $_SESSION['val']['admin_login_email'],
             'subject' => $LANG['title_email_finish_install'],
             'body' => $LANG['content_email_finish_install']
         ];
 
         send_mail($aParams);
+    }
+
+    /**
+     * Verify if the email can be sent (has all necessary global variables).
+     *
+     * @return bool
+     */
+    private function canEmailBeSent()
+    {
+        return !empty($_SESSION['val']['admin_login_email']) &&
+            !empty($_SESSION['val']['admin_username']);
     }
 
     private function removeSessions()

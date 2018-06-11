@@ -24,14 +24,12 @@ class EditForm
             Framework\Url\Header::redirect();
         }
 
-        $bAdminLogged = (AdminCore::auth() && !Affiliate::auth()); // Check if the admin is logged.
+        $bAdminLogged = (AdminCore::auth() && !Affiliate::auth()); // Check if the admin is logged
 
         $oAffModel = new AffiliateModel;
         $oHR = new Http;
         $iProfileId = ($bAdminLogged && $oHR->getExists('profile_id')) ? $oHR->get('profile_id', 'int') : (new Session)->get('affiliate_id');
-
         $oAff = $oAffModel->readProfile($iProfileId, DbTableName::AFFILIATE);
-
 
         // Birth date with the date format for the date picker
         $sBirthDate = (new CDateTime)->get($oAff->birthDate)->date('Y-m-d');

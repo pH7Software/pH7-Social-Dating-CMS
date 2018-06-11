@@ -24,11 +24,19 @@ class LicenseFormProcess extends Form
 
         if (!$this->str->equals($sKey, $oLicenseModel->get($iLicenseId))) {
             $oLicenseModel->save($sKey, $iLicenseId);
-
-            // Clean caches to remove the copyright notices
-            $this->file->deleteDir(PH7_PATH_CACHE . PH7Tpl::COMPILE_DIR);
-            $this->file->deleteDir(PH7_PATH_CACHE . PH7Tpl::CACHE_DIR);
+            $this->clearTemplateCacheFolders();
         }
         unset($oLicenseModel);
+    }
+
+    /**
+     * Clear all template caches to make sure all copyright notices are removed.
+     *
+     * @return void
+     */
+    private function clearTemplateCacheFolders()
+    {
+        $this->file->deleteDir(PH7_PATH_CACHE . PH7Tpl::COMPILE_DIR);
+        $this->file->deleteDir(PH7_PATH_CACHE . PH7Tpl::CACHE_DIR);
     }
 }

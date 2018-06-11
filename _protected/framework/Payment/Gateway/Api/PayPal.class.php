@@ -25,6 +25,7 @@ class Paypal extends Provider implements Api
 {
     const SANDBOX_PAYMENT_URL = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
     const PAYMENT_URL = 'https://www.paypal.com/cgi-bin/webscr';
+    const PAYPAL_HOST = 'www.paypal.com';
 
     /* Should we accept valid transactions but hasn't been completed yet? */
     const ACCEPT_VALID_PAYMENT_NOT_COMPLETED = true;
@@ -135,7 +136,7 @@ class Paypal extends Provider implements Api
         curl_setopt($rCh, CURLOPT_POSTFIELDS, $this->sRequest);
         curl_setopt($rCh, CURLOPT_SSL_VERIFYPEER, 1);
         curl_setopt($rCh, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($rCh, CURLOPT_HTTPHEADER, array('Host: www.paypal.com'));
+        curl_setopt($rCh, CURLOPT_HTTPHEADER, [sprintf('Host: %s', self::PAYPAL_HOST)]);
         $mRes = curl_exec($rCh);
 
         if (curl_errno($rCh) == 60) {

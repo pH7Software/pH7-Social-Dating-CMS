@@ -26,13 +26,13 @@ class DeleteUserCoreForm
         }
 
         $oForm = new \PFBC\Form('form_delete_account');
-        $oForm->configure(array('action' => ''));
+        $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_delete_account', 'form_delete_account'));
         $oForm->addElement(new \PFBC\Element\Token('delete_account'));
-        $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', array('required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Your Reason:'), 'message', array('description' => t('Please be specific why you want to leave us.') . '<br />' . t('It will hep us to improve our service and make it the best one for you!'), 'required' => 1, 'validation' => new \PFBC\Validation\Str(5, 500))));
-        $oForm->addElement(new \PFBC\Element\Radio(t('Why:'), 'why_delete', array(t("I'm not happy with the service."), t('I met someone.'), t('Other. I said the reason above.')), array('required' => 1)));
-        $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha'), 'captcha', array('description' => t('Enter the below code:'))));
+        $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', ['required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Your Reason:'), 'message', ['description' => t('Please be specific why you want to leave us.') . '<br />' . t('It will hep us to improve our service and make it the best one for you!'), 'required' => 1, 'validation' => new \PFBC\Validation\Str(5, 500)]));
+        $oForm->addElement(new \PFBC\Element\Radio(t('Why:'), 'why_delete', [t("I'm not happy with the service."), t('I met someone.'), t('Other. I said the reason above.')], ['required' => 1]));
+        $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha'), 'captcha', ['description' => t('Enter the below code:')]));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

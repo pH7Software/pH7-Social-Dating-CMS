@@ -16,10 +16,11 @@ use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 abstract class Upload
 {
-    /**
-     * @internal Protected access because these attributes are used in \PH7\Framework\Video\Video class
-     */
-    protected $sMaxSize, $iFileSize;
+    /** @var string */
+    protected $sMaxSize;
+
+    /** @var int */
+    protected $iFileSize;
 
     /**
      * Check if everything is correct.

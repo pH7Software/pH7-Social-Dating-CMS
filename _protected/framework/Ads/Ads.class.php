@@ -27,23 +27,31 @@ class Ads
      * Output Advertisement.
      *
      * @param stdClass $oData Db query.
+     * @param HttpRequest $oHttpRequest
      *
      * @return string
      */
-    public static function output(stdClass $oData)
+    public static function output(stdClass $oData, HttpRequest $oHttpRequest)
     {
         // Stat Advertisement Shows
         Statistic::setView($oData->adsId, DbTableName::AD);
 
-        // Advertisement Clicks
-        $oHttpRequest = new HttpRequest;
-        if ($oHttpRequest->getExists(static::PARAM_URL) &&
-            $oHttpRequest->get(static::PARAM_URL) == $oData->adsId
-        ) {
+        if (self::hasAdBeenClicked($oData, $oHttpRequest)) {
             ModelAds::setClick($oData->adsId);
         }
-        unset($oHttpRequest);
 
         return (new SysVar)->parse($oData->code);
+    }
+
+    /**
+     * @param stdClass $oData
+     * @param HttpRequest $oHttpRequest
+     *
+     * @return bool
+     */
+    private static function hasAdBeenClicked(stdClass $oData, HttpRequest $oHttpRequest)
+    {
+        return $oHttpRequest->getExists(static::PARAM_URL) &&
+            $oHttpRequest->get(static::PARAM_URL) == $oData->adsId;
     }
 }

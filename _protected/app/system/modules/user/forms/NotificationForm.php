@@ -29,12 +29,12 @@ class NotificationForm
         $oNotification = $oUserModel->getNotification($iProfileId);
 
         $oForm = new \PFBC\Form('form_notification');
-        $oForm->configure(array('action' => ''));
+        $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_notification', 'form_notification'));
         $oForm->addElement(new \PFBC\Element\Token('notification'));
-        $oForm->addElement(new \PFBC\Element\Select(t('Newsletters'), 'enable_newsletters', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('By enabling this option, you would be likely to receive occasional news on our website and our services and offers, promotions and other benefits to our partners.'), 'value' => $oNotification->enableNewsletters, 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Select(t('Messages'), 'new_msg', array('1' => t('Yes'), '0' => t('No')), array('value' => $oNotification->newMsg, 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Select(t('Friend requests'), 'friend_request', array('1' => t('Yes'), '0' => t('No')), array('value' => $oNotification->friendRequest, 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Newsletters'), 'enable_newsletters', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('By enabling this option, you would be likely to receive occasional news on our website and our services and offers, promotions and other benefits to our partners.'), 'value' => $oNotification->enableNewsletters, 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Select(t('Messages'), 'new_msg', ['1' => t('Yes'), '0' => t('No')], ['value' => $oNotification->newMsg, 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Select(t('Friend requests'), 'friend_request', ['1' => t('Yes'), '0' => t('No')], ['value' => $oNotification->friendRequest, 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

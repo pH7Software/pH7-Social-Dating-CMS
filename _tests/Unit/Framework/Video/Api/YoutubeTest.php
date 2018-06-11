@@ -13,23 +13,28 @@ use PHPUnit_Framework_TestCase;
 
 class YoutubeTest extends PHPUnit_Framework_TestCase
 {
+    /** @var Youtube */
+    private $oYoutube;
+
+    protected function setUp()
+    {
+        $this->oYoutube = new Youtube;
+    }
+
     public function testApiKeyIsSet()
     {
-        $oYoutube = new Youtube;
-        $oYoutube->setKey('OIzaSyBu-916IsoKajomJNIgngS6HL_kDIKU0aU');
-        $this->assertTrue($oYoutube->isApiKeySet());
+        $this->oYoutube->setKey('OIzaSyBu-916IsoKajomJNIgngS6HL_kDIKU0aU');
+        $this->assertTrue($this->oYoutube->isApiKeySet());
     }
 
     public function testWrongApiKeySet()
     {
-        $oYoutube = new Youtube;
-        $oYoutube->setKey('invalid_key');
-        $this->assertFalse($oYoutube->isApiKeySet());
+        $this->oYoutube->setKey('invalid');
+        $this->assertFalse($this->oYoutube->isApiKeySet());
     }
 
     public function testApiKeyIsNotSet()
     {
-        $oYoutube = new Youtube;
-        $this->assertFalse($oYoutube->isApiKeySet());
+        $this->assertFalse($this->oYoutube->isApiKeySet());
     }
 }

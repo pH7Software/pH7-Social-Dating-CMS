@@ -11,17 +11,22 @@ defined('PH7') or exit('Restricted access');
 
 class BankFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
 
+        if (AdminCore::auth() && !Affiliate::auth() && $this->httpRequest->getExists('profile_id')) {
+            $iProfileId = $this->httpRequest->get('profile_id', 'int');
+        } else {
+            $iProfileId = $this->session->get('affiliate_id');
+        }
+
         $oAffModel = new AffiliateModel;
-        $iProfileId = (AdminCore::auth() && !Affiliate::auth() && $this->httpRequest->getExists('profile_id')) ? $this->httpRequest->get('profile_id', 'int') : $this->session->get('affiliate_id');
         $oAff = $oAffModel->readProfile($iProfileId, DbTableName::AFFILIATE);
 
-        if (!$this->str->equals($this->httpRequest->post('bank_account'), $oAff->bankAccount))
+        if (!$this->str->equals($this->httpRequest->post('bank_account'), $oAff->bankAccount)) {
             $oAffModel->updateProfile('bankAccount', $this->httpRequest->post('bank_account'), $iProfileId, DbTableName::AFFILIATE);
+        }
 
         unset($oAffModel, $oAff);
 
@@ -30,5 +35,4 @@ class BankFormProcess extends Form
 
         \PFBC\Form::setSuccess('form_bank_account', t('Your bank information has been successfully updated!'));
     }
-
 }

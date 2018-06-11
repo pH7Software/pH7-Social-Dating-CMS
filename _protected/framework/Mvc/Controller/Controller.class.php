@@ -65,7 +65,7 @@ abstract class Controller extends Core
         /**
          * Remove database information for the tpl files in order to prevent any attack attempt.
          **/
-        FrontController::getInstance()->_removeDatabaseInfo();
+        FrontController::getInstance()->_unsetDatabaseInfo();
 
         /**
          * Destroy all object instances of PDO and close the connection to the database before the display and the start of the template and free memory

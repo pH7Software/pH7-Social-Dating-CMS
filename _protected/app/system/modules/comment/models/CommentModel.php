@@ -159,7 +159,13 @@ class CommentModel extends CommentCoreModel
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        return Spam::detectDuplicate($sCheckMsg, 'comment', 'sender', $iSenderId, 'comments_' . $sTable);
+        return Spam::detectDuplicate(
+            $sCheckMsg,
+            'comment',
+            'sender',
+            $iSenderId,
+            'comments_' . $sTable
+        );
     }
 
     /**

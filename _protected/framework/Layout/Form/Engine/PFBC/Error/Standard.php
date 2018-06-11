@@ -59,7 +59,7 @@ JS;
         $errors = $this->parse($this->form->getErrors());
         if (!empty($errors)) {
             Http::setContentType('application/json');
-            echo json_encode(array('errors' => $errors));
+            echo json_encode(['errors' => $errors]);
         }
     }
 }

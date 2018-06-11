@@ -116,18 +116,8 @@ function my_function() {}
 <pre><code class="php">$GLOBALS['my_values'];</code></pre>
 
 <p>Arrays: lowercase and each word must be separated by underscore.</p>
+<p>Arrays should be declared with the shortened syntax "[]"</p>
 <p class="italic underline">Example:</p>
-
-<pre>
-<code class="php">
-$aValues = array(
-   'my_key' => 'Value',
-   'my_key2' => 'Value 2'
-);
-</code>
-</pre>
-
-<p class="italic underline">or with PHP 5.4+:</p>
 
 <pre>
 <code class="php">

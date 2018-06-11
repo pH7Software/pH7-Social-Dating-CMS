@@ -245,7 +245,7 @@ class Ftp extends File
      */
     public function deleteDir($sPath)
     {
-        return $this->existFile($sPath) ? $this->deleteFile($sPath) : array_map(array($this, 'deleteDir'), glob($sPath . '/*')) === @ftp_rmdir($this->rStream, $sPath);
+        return $this->existFile($sPath) ? $this->deleteFile($sPath) : array_map([$this, 'deleteDir'], glob($sPath . '/*')) === @ftp_rmdir($this->rStream, $sPath);
     }
 
     /**

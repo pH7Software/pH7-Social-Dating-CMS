@@ -28,7 +28,7 @@ class NewsFeedCore
     private $oCache;
 
     /** @var array */
-    private $aData = array();
+    private $aData = [];
 
     public function __construct()
     {

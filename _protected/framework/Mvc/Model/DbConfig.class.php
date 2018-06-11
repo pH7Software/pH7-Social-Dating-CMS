@@ -21,7 +21,7 @@ final class DbConfig
 {
     const CACHE_GROUP = 'db/config';
     const CACHE_TIME = 999000;
-    const ENABLE_SITE = 'enable';
+    const ENABLED_SITE = 'enable';
     const MAINTENANCE_SITE = 'maintenance';
 
     /**
@@ -75,7 +75,13 @@ final class DbConfig
      */
     public static function setSetting($sValue, $sName)
     {
-        return Engine\Record::getInstance()->update(DbTableName::SETTING, 'settingValue', $sValue, 'settingName', $sName);
+        return Engine\Record::getInstance()->update(
+            DbTableName::SETTING,
+            'settingValue',
+            $sValue,
+            'settingName',
+            $sName
+        );
     }
 
     public static function getMetaMain($sLangId)
@@ -110,7 +116,8 @@ final class DbConfig
                     'metaCategory' => 'dating'
                 ];
 
-                Engine\Record::getInstance()->insert(DbTableName::META_MAIN, $aData); // Create the new meta data language
+                // Create the new meta data language
+                Engine\Record::getInstance()->insert(DbTableName::META_MAIN, $aData);
                 $oData = (object)$aData;
                 unset($aData);
             }
@@ -133,7 +140,13 @@ final class DbConfig
      */
     public static function setMetaMain($sSection, $sValue, $sLangId)
     {
-        Engine\Record::getInstance()->update(DbTableName::META_MAIN, $sSection, $sValue, 'langId', $sLangId);
+        Engine\Record::getInstance()->update(
+            DbTableName::META_MAIN,
+            $sSection,
+            $sValue,
+            'langId',
+            $sLangId
+        );
     }
 
     /**
@@ -157,14 +170,14 @@ final class DbConfig
     }
 
     /**
-     * @param string $sStatus The constant 'DbConfig::ENABLE_SITE' or 'DbConfig::MAINTENANCE_SITE'
+     * @param string $sStatus The constant 'DbConfig::ENABLED_SITE' or 'DbConfig::MAINTENANCE_SITE'
      * @param string $sFieldName
      *
      * @return void
      */
     public static function setSiteMode($sStatus, $sFieldName = 'siteStatus')
     {
-        if ($sStatus !== self::MAINTENANCE_SITE && $sStatus !== self::ENABLE_SITE) {
+        if ($sStatus !== self::MAINTENANCE_SITE && $sStatus !== self::ENABLED_SITE) {
             exit('Wrong maintenance mode type!');
         }
 
@@ -181,6 +194,10 @@ final class DbConfig
      */
     public static function clearCache()
     {
-        (new Cache)->start(self::CACHE_GROUP, null, null)->clear();
+        (new Cache)->start(
+            self::CACHE_GROUP,
+            null,
+            null
+        )->clear();
     }
 }

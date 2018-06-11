@@ -228,7 +228,7 @@ function exec_query_file(Db $oDb, $sSqlFile)
     $rStmt = $oDb->exec($sSqlContent);
     unset($sSqlContent);
 
-    return ($rStmt === false) ? $rStmt->errorInfo() : true;
+    return ($rStmt === false) ? $oDb->errorInfo() : true;
 }
 
 /**
@@ -473,7 +473,7 @@ EOF;
     }
 
     /*** Headers ***/
-    // To avoid the email goes in the spam folder of email client.
+    // To avoid the email goes to spam folder of email client.
     $sHeaders = "From: \"{$_SERVER['HTTP_HOST']}\" <{$_SERVER['SERVER_ADMIN']}>\r\n";
 
     $sHeaders .= "Reply-To: <{$aParams['from']}>\r\n";

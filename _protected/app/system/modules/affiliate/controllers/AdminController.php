@@ -40,7 +40,6 @@ class AdminController extends Controller
     {
         parent::__construct();
 
-        // Objects
         $this->oAff = new Affiliate;
         $this->oAffModel = new AffiliateModel;
     }
@@ -66,6 +65,12 @@ class AdminController extends Controller
         Header::redirect(
             Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', 'affiliate')
         );
+    }
+
+    public function countryRestriction()
+    {
+        $this->view->page_title = $this->view->h1_title = t('Country Restrictions');
+        $this->output();
     }
 
     public function browse()

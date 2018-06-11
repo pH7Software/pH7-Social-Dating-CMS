@@ -14,6 +14,7 @@ namespace PH7\Framework\Security;
 defined('PH7') or exit('Restricted access');
 
 use DOMDocument;
+use DOMElement;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Security\Validate\Validate;
 
@@ -31,9 +32,9 @@ final class Version
      * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa" and 12.* is "PHS"
      */
     const KERNEL_VERSION_NAME = 'PHS';
-    const KERNEL_VERSION = '12.9.0';
+    const KERNEL_VERSION = '12.9.7';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELEASE_DATE = '2018-05-28';
+    const KERNEL_RELEASE_DATE = '2018-05-31';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1'; // Ph7 Technology
@@ -47,7 +48,7 @@ final class Version
     }
 
     /**
-     * Gets information on the lastest software version.
+     * Gets information on the latest software version.
      *
      * @return array|bool Returns version information in an array or FALSE if an error occurred.
      */
@@ -61,10 +62,10 @@ final class Version
                 return false;
             }
 
+            /** @var DOMElement $oSoft */
             foreach ($oDom->getElementsByTagName('ph7') as $oSoft) {
+                /** @var DOMElement $oInfo */
                 foreach ($oSoft->getElementsByTagName('social-dating-cms') as $oInfo) {
-                    // "Validate::bool()" returns TRUE for "1", "true", "on" and "yes", FALSE otherwise
-                    $bIsAlert = (new Validate)->bool($oInfo->getElementsByTagName('upd-alert')->item(0)->nodeValue);
                     $sVerName = $oInfo->getElementsByTagName('name')->item(0)->nodeValue;
                     $sVerNumber = $oInfo->getElementsByTagName('version')->item(0)->nodeValue;
                     $sVerBuild = $oInfo->getElementsByTagName('build')->item(0)->nodeValue;
@@ -72,7 +73,12 @@ final class Version
             }
             unset($oDom);
 
-            $mData = array('is_alert' => $bIsAlert, 'name' => $sVerName, 'version' => $sVerNumber, 'build' => $sVerBuild);
+            $mData = [
+                'is_alert' => self::isUpdateAlertEnabled(),
+                'name' => $sVerName,
+                'version' => $sVerNumber,
+                'build' => $sVerBuild
+            ];
             $oCache->put($mData);
         }
         unset($oCache);
@@ -112,5 +118,16 @@ final class Version
         }
 
         return false;
+    }
+
+    /**
+     * @param DOMElement $oInfo
+     *
+     * @return bool
+     */
+    private static function isUpdateAlertEnabled(DOMElement $oInfo)
+    {
+        // "Validate::bool()" returns TRUE for "1", "true", "on" and "yes", FALSE otherwise
+        return (new Validate)->bool($oInfo->getElementsByTagName('upd-alert')->item(0)->nodeValue);
     }
 }

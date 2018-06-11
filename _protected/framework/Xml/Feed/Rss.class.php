@@ -65,7 +65,6 @@ class Rss extends DomDocument
      */
     public function addItem($aItems)
     {
-        // Create an item
         $oItem = $this->createElement('item');
 
         foreach ($aItems as $sElement => $mValue) {

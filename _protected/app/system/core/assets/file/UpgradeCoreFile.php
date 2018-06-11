@@ -3,20 +3,23 @@
  * @title            Upgrade Class
  * @desc             Allows you to make updated the software (SQL, files, ...).
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / App / System / Core / Asset / File
- * @version          1.5
+ * @version          1.8
  */
 
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Cache\Cache;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\File as F;
+use PH7\Framework\Layout\Gzip\Gzip;
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Security\Version;
@@ -24,12 +27,13 @@ use PH7\Framework\Security\Version;
 @set_time_limit(0);
 @ini_set('memory_limit', '528M');
 
-class UpgradeCore extends Kernel
+class UpgradeCore
 {
     /**
      * Remote update URL.
      */
     const REMOTE_URL = 'http://update.ph7cms.com/';
+    const ARCHIVE_EXT = '.zip';
     const MIN_SQL_FILE_SIZE = 12; // Size in bytes
 
     /**
@@ -39,8 +43,6 @@ class UpgradeCore extends Kernel
      */
     const DIR = 'upgrade';
     const FILE_DIR = 'file';
-    const PUBLIC_DIR = 'public';
-    const PROTECTED_DIR = '_protected';
     const DATA_DIR = 'data';
     const SQL_DIR = 'sql';
     const INFO_DIR = 'info';
@@ -49,6 +51,12 @@ class UpgradeCore extends Kernel
     const INST_CONCL_FILE = 'conclusion';
     const UPGRADE_FILE = 'upgrade.sql';
     const VERSION_LIST_FILE = 'all_versions.txt';
+    const VERSION_FILE = 'Version.class.php';
+
+    // Use UNIX wildcard to be able to select only the sub-directories present in "public/"
+    const PUBLIC_DIR = 'public/*';
+    // Use UNIX wildcard to be able to select only the sub-directories present in "protected/"
+    const PROTECTED_DIR = 'protected/*';
 
 
     /** @var Http */
@@ -78,12 +86,10 @@ class UpgradeCore extends Kernel
     private $bAutoRemoveUpgradeDir = false;
 
     /** @var array */
-    private $aErrors = array();
+    private $aErrors = [];
 
     public function __construct()
     {
-        parent::__construct();
-
         $this->oHttpRequest = new Http;
         $this->oFile = new F\File;
         $this->oConfig = Config::getInstance();
@@ -94,9 +100,14 @@ class UpgradeCore extends Kernel
         $this->prepare(); // Preparation and verification for software upgrade
     }
 
+    /**
+     * Output the HTML layout of the upgrade wizard.
+     *
+     * @return void
+     */
     public function display()
     {
-        echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>', t('Upgrade %software_name% | Version %0%', $this->sVerNumber), '</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><style>body{background:#EFEFEF;color:#555;font:normal 10pt Arial,Helvetica,sans-serif;margin:0;padding:0}.center{margin-left:auto;margin-right:auto;text-align:center;width:80%}.bold,.error{font-weight:bold;font-size:13px}.red,.error{color:red}.success{color:green}.italic{font-style:italic}.underline{text-decoration:underline}pre{margin:2px;font-style:italic}code{font-style:italic;font-size:11px}</style></head><body><div class="center">';
+        echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>', t('Upgrade %software_name% | Version %0%', $this->sVerNumber), '</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><style>body{background:#EFEFEF;color:#555;font:normal 10pt Arial,Helvetica,sans-serif;margin:0;padding:0}.center{margin-left:auto;margin-right:auto;text-align:center;width:80%}.bold{font-weight:bold;font-size:13px}.red,.error{color:red}.success{color:green}.italic{font-style:italic}.underline{text-decoration:underline}pre{margin:2px;font-style:italic}code{font-style:italic;font-size:11px}</style></head><body><div class="center">';
         echo $this->sHtml;
         echo '</div></body></html>';
     }
@@ -133,19 +144,19 @@ class UpgradeCore extends Kernel
             $this->aErrors[] = t('You must be logged in as administrator to upgrade your site.');
         }
 
-        if (!$this->displayIfErr()) {
+        if (!$this->hasErrors()) {
             // Download the next upgrade patch to "~/_repository/" folder
             $this->download($this->getNextVersion());
 
-            // If not found error
-            if (!$this->showAvailableUpgrades()) {
-                $this->sHtml .= '<h2>' . t('No upgrade path for %software_name%!') . '</h2>';
+            $aAvailableUpgrades = $this->getAvailableUpgrades();
+            if (empty($aAvailableUpgrades)) {
+                $this->sHtml .= '<h2>' . t('No upgrade patches available for %software_name%.') . '</h2>';
             } else {
                 $this->sHtml .= '<h2>' . t('Upgrade available for %software_name%:') . '</h2>';
-
                 $this->sHtml .= '<form method="post">';
 
-                foreach ($this->showAvailableUpgrades() as $sFolder) {
+                rsort($aAvailableUpgrades, SORT_NUMERIC);
+                foreach ($aAvailableUpgrades as $sFolder) {
                     $this->sUpgradesDirUpgradeFolder = $this->oFile->checkExtDir($sFolder);
 
                     $this->readConfig();
@@ -155,118 +166,127 @@ class UpgradeCore extends Kernel
                     $iVerBuild = $this->oConfig->values['upgrade.version']['build'];
                     $sDesc = $this->oConfig->values['upgrade.information']['description'];
 
-                    if ($this->checkUpgradeFolder($this->sUpgradesDirUpgradeFolder)) {
-                        $this->sHtml .= '<p class="underline italic">' . t('Version Name: %0%, Version Number: %1%, Version Build: %2%', $sVerName, $sVerNumber, $iVerBuild) . '</p>';
+                    if ($this->isValidUpgradeFolder($this->sUpgradesDirUpgradeFolder)) {
+                        $bIsValidVer = $this->isValidVersion($sVerName, $sVerNumber, $iVerBuild);
+                        $this->sHtml .= '<p class="underline italic ' . ($bIsValidVer ? 'bold' : '') . '">' . t('Version Name: %0%, Version Number: %1%, Version Build: %2%', $sVerName, $sVerNumber, $iVerBuild) . '</p>';
 
-                        if ($this->checkVersion($sVerName, $sVerNumber, $iVerBuild)) {
+                        if ($bIsValidVer) {
                             $sMsg = t('Upgrade <span class="bold italic">%software_version_name% %software_version% Build %software_build%</span> to version <span class="bold italic">%0%</span>', '<span class="bold italic">' . $sVerName . ' ' . $sVerNumber . ' Build ' . $iVerBuild . '</span>');
                             $this->sHtml .= '<button type="submit" class="success" name="submit_upgrade" value="' . $this->sUpgradesDirUpgradeFolder . '" onclick="return confirm(\'' . t('Have you made a backup of your website files, folders and database?') . '\');">' . $sMsg . '</button>';
 
-                            // Description upgrade path
                             $this->sHtml .= '<p class="underline">' . t('Description of the upgrade patch:') . '</p>';
                             $this->sHtml .= $sDesc;
 
-                            // Introduction file
-                            $this->sHtml .= '<p class="bold underline">' . t('Introductory instruction:') . '</p>';
+                            $this->sHtml .= '<p class="bold underline">' . t('Instruction:') . '</p>';
                             $this->sHtml .= $this->readInstruction(static::INST_INTRO_FILE);
                         } else {
-                            $sMsg = t('Bad "version name, version number or version build" of upgrade path!');
+                            $sMsg = t('Wrong "version name/number or version build"');
                             $this->sHtml .= '<button type="submit" class="error" disabled="disabled">' . $sMsg . '</button>';
                         }
                     } else {
-                        $sMsg = t('Upgrade path is not valid!');
+                        $sMsg = t('Upgrade patch is not valid!');
                         $this->sHtml .= '<button type="submit" class="error" disabled="disabled">' . $sMsg . '</button>';
                     }
 
                     $this->sHtml .= '<br /><hr /><br />';
-
-                    unset($sVerName, $sVerNumber, $iVerBuild);
                 }
 
                 $this->sHtml .= '</form>';
 
-                if ($this->oHttpRequest->postExists('submit_upgrade')) {
-                    if ($this->checkUpgradeFolder($this->oHttpRequest->post('submit_upgrade'))) {
-                        $this->sUpgradesDirUpgradeFolder = $this->oHttpRequest->post('submit_upgrade'); // Upgrade Directory Path
+                if ($this->isUpgradeRequested() && $this->isValidUpgradeFolder($this->oHttpRequest->post('submit_upgrade'))) {
+                    $this->sUpgradesDirUpgradeFolder = $this->oHttpRequest->post('submit_upgrade');
 
-                        $this->readConfig();
+                    $this->readConfig();
 
-                        $this->sVerName = $this->oConfig->values['upgrade.version']['name']; // Version name upgrade
-                        $this->sVerNumber = $this->oConfig->values['upgrade.version']['number']; // Version number upgrade
-                        $this->iVerBuild = $this->oConfig->values['upgrade.version']['build']; // Version build upgrade
+                    $this->sVerName = $this->oConfig->values['upgrade.version']['name']; // Version name upgrade
+                    $this->sVerNumber = $this->oConfig->values['upgrade.version']['number']; // Version number upgrade
+                    $this->iVerBuild = $this->oConfig->values['upgrade.version']['build']; // Version build upgrade
 
-                        DbConfig::setSiteMode(DbConfig::MAINTENANCE_SITE);
-                        $this->oConfig->setDevelopmentMode();
-                        usleep(100000);
+                    DbConfig::setSiteMode(DbConfig::MAINTENANCE_SITE);
+                    $this->oConfig->setDevelopmentMode();
+                    usleep(100000);
 
-                        $this->check(); // Checking
+                    $this->check();
 
-                        // If not found error
-                        if (!$this->displayIfErr()) {
-                            $this->run(); // Run Upgrade!
+                    if (!$this->hasErrors()) {
+                        $this->run(); // Run the upgrade patch!
 
-                            // If no error
-                            if (!$this->displayIfErr()) {
-                                /**
-                                 * It resets the HTML variable ($this->sHtml) to not display versions upgrade available.
-                                 * The user can refresh the page to réaficher the upgrade available.
-                                 */
-                                $this->sHtml = '<h3 class="success">' . t('Your update ran successfully!') . '</h3>';
+                        if (!$this->hasErrors()) {
+                            /**
+                             * It resets the HTML variable ($this->sHtml) to not display versions upgrade available.
+                             * The user can refresh the page to réaficher the upgrade available.
+                             */
+                            $this->sHtml = '<h3 class="success">' . t('Your update ran successfully!') . '</h3>';
 
-                                if ($this->bAutoRemoveUpgradeDir) {
-                                    if ($this->removeUpgradeDir()) {
-                                        $this->sHtml .= '<p class="success">' . t('The upgrade directory <em>(~%0%)</em> has been deleted!', PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder) . '</p>';
-                                        $this->sHtml .= '<p class="success">' . t('Status... OK!') . '</p>';
-                                    } else {
-                                        $this->sHtml .= '<p class="error">' . t('The upgrade directory <em>(~%0%)</em> could not be deleted, please delete it manually using an FTP client or SSH.', PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder) . '</p>';
-                                        $this->sHtml .= '<p class="error">' . t('Status... Failure!') . '</p>';
-                                    }
+                            if ($this->bAutoRemoveUpgradeDir) {
+                                if ($this->removeUpgradeDir()) {
+                                    $this->sHtml .= '<p class="success">' . t('The upgrade directory <em>(~%0%)</em> has been deleted!', PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder) . '</p>';
+                                    $this->sHtml .= '<p class="success">' . t('Status... OK!') . '</p>';
                                 } else {
-                                    $this->sHtml .= '<p>' . t('Please delete the upgrade file using an FTP client or SSH.') . '</p>';
+                                    $this->sHtml .= '<p class="error">' . t('The upgrade directory <em>(~%0%)</em> could not be deleted, please delete it manually using an FTP client or SSH.', PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder) . '</p>';
+                                    $this->sHtml .= '<p class="error">' . t('Status... Failure!') . '</p>';
                                 }
-
-                                // Conclusion file
-                                $this->sHtml .= '<p class="bold underline">' . t('Conclusion of Instruction:') . '</p>';
-                                $this->sHtml .= $this->readInstruction(static::INST_CONCL_FILE);
+                            } else {
+                                $this->sHtml .= '<p>' . t('Please delete the upgrade folder using an FTP client or SSH.') . '</p>';
                             }
-                        }
 
-                        $this->oConfig->setProductionMode();
-                        DbConfig::setSiteMode(DbConfig::ENABLE_SITE);
-                        usleep(100000);
+                            $this->sHtml .= '<p class="bold underline">' . t('Conclusion:') . '</p>';
+                            $this->sHtml .= $this->readInstruction(static::INST_CONCL_FILE);
+                        } else {
+                            $this->addErrorMessagesToLayout();
+                        }
+                    } else {
+                        $this->addErrorMessagesToLayout();
                     }
+
+                    $this->oConfig->setProductionMode();
+                    DbConfig::setSiteMode(DbConfig::ENABLED_SITE);
+                    usleep(100000);
                 }
             }
+        } else {
+            $this->addErrorMessagesToLayout();
         }
     }
 
     private function run()
     {
-        //$this->file();
+        $this->file();
         $this->sql();
+        $this->setNewVersionToKernel();
+        $this->clearAllCacheFolders();
     }
 
     private function file()
     {
-        $sPathPublicDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::FILE_DIR . PH7_DS . static::PUBLIC_DIR . PH7_DS;
-        if (is_dir($sPathPublicDir)) {
-            $this->oFile->systemRename($sPathPublicDir, PH7_PATH_ROOT);
+        $this->copyPublicPathToRoot();
+        $this->copyProtectedPathToRoot();
+    }
+
+    private function copyPublicPathToRoot()
+    {
+        $sPathPublicDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::FILE_DIR . PH7_DS . static::PUBLIC_DIR;
+        if (is_dir($this->oFile->removeWildcards($sPathPublicDir))) {
+            $this->oFile->systemCopy($sPathPublicDir, PH7_PATH_ROOT);
             $this->oFile->chmod(PH7_PATH_ROOT, 0777);
         }
+    }
 
-        $sPathProtectedDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::FILE_DIR . PH7_DS . static::PROTECTED_DIR . PH7_DS;
-        if (is_dir($sPathProtectedDir)) {
-            $this->oFile->systemRename($sPathProtectedDir, PH7_PATH_PROTECTED);
+    private function copyProtectedPathToRoot()
+    {
+        $sPathProtectedDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::FILE_DIR . PH7_DS . static::PROTECTED_DIR;
+        if (is_dir($this->oFile->removeWildcards($sPathProtectedDir))) {
+            $this->oFile->systemCopy($sPathProtectedDir, PH7_PATH_PROTECTED);
             $this->oFile->chmod(PH7_PATH_PROTECTED, 0777);
         }
     }
 
     private function sql()
     {
-        $sPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::SQL_DIR . PH7_DS . $this->oConfig->values['database']['type_name'] . PH7_DS . static::UPGRADE_FILE . PH7_DS;
+        $sFullPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::SQL_DIR . PH7_DS . $this->oConfig->values['database']['type_name'] . PH7_DS . static::UPGRADE_FILE;
 
-        if (is_file($sPath) && filesize($sPath) > static::MIN_SQL_FILE_SIZE) {
-            $mQuery = (new UpgradeCoreModel)->run($sPath);
+        if (is_file($sFullPath) && filesize($sFullPath) > static::MIN_SQL_FILE_SIZE) {
+            $mQuery = (new UpgradeCoreModel)->run($sFullPath);
 
             if ($mQuery !== true) {
                 $this->aErrors[] = t('Unable to execute the upgrade of the database SQL.<br />Error Message: %0%', '<pre>' . print_r($mQuery) . '</pre>');
@@ -301,15 +321,15 @@ class UpgradeCore extends Kernel
     }
 
     /**
-     * Download the new version path from HiZup remote server to the client server.
-     * Then, extract the file to "_repository" folder to set it available for the next update.
-     * Then, remove zip archive file as we don't need it anymore.
+     * Download the new version patches from pH7CMS remote server to the client server.
+     * Then, extract the file to "_repository/upgrade/" directory to set it as available for the next update.
+     * Then, remove zip archive file, as we don't need it anymore.
      *
      * @param string $sNewVersion Version number (e.g. "1.3.6")
      */
     private function download($sNewVersion)
     {
-        $sZipFileName = $sNewVersion . '.zip';
+        $sZipFileName = $sNewVersion . self::ARCHIVE_EXT;
         $sDestinationPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS;
 
         $rFile = $this->oFile->getUrlContents(self::REMOTE_URL . $sZipFileName);
@@ -323,31 +343,25 @@ class UpgradeCore extends Kernel
      *
      * @return bool
      */
-    private function isErr()
+    private function hasErrors()
     {
         return !empty($this->aErrors);
     }
 
     /**
-     * Check and return HTML contents errors.
+     * Assign the error messages to the current HTML code.
      *
-     * @return bool TRUE if there are errors else FALSE
+     * @return void
      */
-    private function displayIfErr()
+    private function addErrorMessagesToLayout()
     {
-        if ($this->isErr()) {
-            $iErrors = count($this->aErrors);
+        $iErrors = count($this->aErrors);
 
-            $this->sHtml .= '<h3 class="error underline italic">' . t('You have %0% error(s):', $iErrors) . '</h3>';
+        $this->sHtml .= '<h3 class="error underline italic">' . t('You have %0% error(s):', $iErrors) . '</h3>';
 
-            for ($i = 0; $i < $iErrors; $i++) {
-                $this->sHtml .= '<p class="error">' . t('%0%) %1%', $i + 1, $this->aErrors[$i]) . '</p>';
-            }
-
-            return true;
+        for ($i = 0; $i < $iErrors; $i++) {
+            $this->sHtml .= '<p class="error">' . t('%0%) %1%', $i + 1, $this->aErrors[$i]) . '</p>';
         }
-
-        return false;
     }
 
     /**
@@ -357,7 +371,7 @@ class UpgradeCore extends Kernel
      *
      * @return bool Returns TRUE if it is correct, FALSE otherwise.
      */
-    private function checkUpgradeFolder($sFolder)
+    private function isValidUpgradeFolder($sFolder)
     {
         $sFullPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sFolder;
 
@@ -384,15 +398,43 @@ class UpgradeCore extends Kernel
         return $this->oFile->deleteDir(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder);
     }
 
-    private function showAvailableUpgrades()
+    /**
+     * @return array
+     */
+    private function getAvailableUpgrades()
     {
-        $aFolders = array();
+        $aFolders = [];
 
         foreach ($this->readUpgrades() as $sFolder) {
             $aFolders[$sFolder] = $sFolder;
         }
 
         return $aFolders;
+    }
+
+    /**
+     * Set new version to the Version, kernel constants.
+     *
+     * @return void
+     */
+    private function setNewVersionToKernel()
+    {
+        $sVersionPathFile = PH7_PATH_FRAMEWORK . 'Security/' . self::VERSION_FILE;
+        $sContents = $this->oFile->getFile($sVersionPathFile);
+
+        if ($this->sVerName != Version::KERNEL_VERSION_NAME) {
+            $sContents = str_replace('KERNEL_VERSION_NAME = \'' . Version::KERNEL_VERSION_NAME . '\'', 'KERNEL_VERSION_NAME = \'' . $this->sVerName . '\'', $sContents);
+        }
+
+        if ($this->sVerNumber != Version::KERNEL_VERSION) {
+            $sContents = str_replace('KERNEL_VERSION = \'' . Version::KERNEL_VERSION . '\'', 'KERNEL_VERSION = \'' . $this->sVerNumber . '\'', $sContents);
+        }
+
+        if ($this->iVerBuild != Version::KERNEL_BUILD) {
+            $sContents = str_replace('KERNEL_BUILD = \'' . Version::KERNEL_BUILD . '\'', 'KERNEL_BUILD = \'' . $this->iVerBuild . '\'', $sContents);
+        }
+
+        $this->oFile->putFile($sVersionPathFile, $sContents);
     }
 
     /**
@@ -404,7 +446,7 @@ class UpgradeCore extends Kernel
      *
      * @return bool Returns TRUE if the version name is correct, FALSE otherwise.
      */
-    private function checkVersion($sName, $sNumber, $iBuild)
+    private function isValidVersion($sName, $sNumber, $iBuild)
     {
         if (!is_string($sName) || !preg_match('#^' . Version::VERSION_PATTERN . '$#', $sNumber)) {
             return false;
@@ -450,7 +492,33 @@ class UpgradeCore extends Kernel
             return '<p class="error">' . t('Instruction file not found!') . '</p>';
         }
     }
+
+    /**
+     * Clear all cache folders.
+     *
+     * Quite often, the changes from newer versions can break the website if older data are still saved in cache.
+     */
+    private function clearAllCacheFolders()
+    {
+        $aCacheFolders = [
+            PH7_PATH_CACHE . Cache::CACHE_DIR,
+            PH7_PATH_CACHE . PH7Tpl::COMPILE_DIR,
+            PH7_PATH_CACHE . PH7Tpl::CACHE_DIR,
+            PH7_PATH_CACHE . Gzip::CACHE_DIR
+        ];
+
+        foreach ($aCacheFolders as $sFolder) {
+            $this->oFile->deleteDir($sFolder);
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    private function isUpgradeRequested()
+    {
+        return $this->oHttpRequest->postExists('submit_upgrade');
+    }
 }
 
-// Go
 (new UpgradeCore)->display();

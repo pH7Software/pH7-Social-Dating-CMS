@@ -41,6 +41,8 @@ class File
     const READ_WRITE_CHMOD_OCTAL_DIGIT = 0644;
     const READ_WRITE_EXEC_CHMOD_OCTAL_DIGIT = 0777;
 
+    const WILDCARD_SYMBOL = '*';
+
     // End Of Line relative to the operating system
     const EOL = PHP_EOL;
 
@@ -204,7 +206,7 @@ class File
      */
     public function getDirList($sDir)
     {
-        $aDirList = array();
+        $aDirList = [];
 
         if ($rHandle = opendir($sDir)) {
             while (false !== ($sFile = readdir($rHandle))) {
@@ -240,24 +242,25 @@ class File
      */
     public function getFileList($sDir, $mExt = null)
     {
-        $aTree = array();
+        $aTree = [];
         $sDir = $this->checkExtDir($sDir);
 
         if (is_dir($sDir) && $rHandle = opendir($sDir)) {
-            while (false !== ($sF = readdir($rHandle))) {
-                if ($sF !== '.' && $sF !== '..') {
-                    if (is_dir($sDir . $sF)) {
-                        $aTree = array_merge($aTree, $this->getFileList($sDir . $sF, $mExt));
+            while (false !== ($sFile = readdir($rHandle))) {
+                if ($sFile !== '.' && $sFile !== '..') {
+                    if (is_dir($sDir . $sFile)) {
+                        $aTree = array_merge($aTree, $this->getFileList($sDir . $sFile, $mExt));
                     } else {
                         if (!empty($mExt)) {
                             $aExt = (array)$mExt;
 
                             foreach ($aExt as $sExt) {
-                                if (substr($sF, -strlen($sExt)) === $sExt)
-                                    $aTree[] = $sDir . $sF;
+                                if (substr($sFile, -strlen($sExt)) === $sExt) {
+                                    $aTree[] = $sDir . $sFile;
+                                }
                             }
                         } else {
-                            $aTree[] = $sDir . $sF;
+                            $aTree[] = $sDir . $sFile;
                         }
                     }
                 }
@@ -265,6 +268,7 @@ class File
             sort($aTree);
         }
         closedir($rHandle);
+
         return $aTree;
     }
 
@@ -362,7 +366,7 @@ class File
      */
     public function systemCopy($sFrom, $sTo)
     {
-        if (file_exists($sFrom)) {
+        if (file_exists($this->removeWildcards($sFrom))) {
             return system("cp -r $sFrom $sTo");
         }
 
@@ -412,7 +416,7 @@ class File
      */
     public function systemRename($sFrom, $sTo)
     {
-        if (file_exists($sFrom)) {
+        if (file_exists($this->removeWildcards($sFrom))) {
             return system("mv $sFrom $sTo");
         }
 
@@ -472,6 +476,18 @@ class File
     }
 
     /**
+     * Clean paths if wildcard is found in order to get valid paths.
+     *
+     * @param string $sPath
+     *
+     * @return string
+     */
+    public function removeWildcards($sPath)
+    {
+        return str_replace(self::WILDCARD_SYMBOL, '', $sPath);
+    }
+
+    /**
      * Get the creation/modification time of a file in the Unix timestamp.
      *
      * @param string $sFile Full path of the file.
@@ -499,13 +515,12 @@ class File
     /**
      * Delay script execution.
      *
-     * @param int $iSleep Halt time in seconds. Optional parameter, default value is 5.
+     * @param int $iSleep Halt time in seconds.
      *
-     * @return int|bool Returns "0" on success, or "false" on error.
+     * @return int|bool Returns 0 on success, or FALSE on error.
      */
-    public function sleep($iSleep = null)
+    public function sleep($iSleep = 5)
     {
-        $iSleep = (!empty($iSleep)) ? $iSleep : 5;
         return sleep($iSleep);
     }
 
@@ -737,22 +752,21 @@ class File
     public function readDirs($sPath = './')
     {
         if (!($rHandle = opendir($sPath))) {
-            return false; // Return when yield is used will be OK with PHP 7
+            return false; // TODO: Return when yield is used will be OK with PHP 7
         }
 
-        $aRet = array();//remove it for yield
-
+        $aRet = []; // TODO: Remove it once yield is used
         while (false !== ($sFolder = readdir($rHandle))) {
             if ('.' == $sFolder || '..' == $sFolder || !is_dir($sPath . $sFolder)) {
                 continue;
             }
 
-            //yield $sFolder; // PHP 7
-            $aRet[] = $sFolder;//remove it for yield
+            //yield $sFolder; // TODO: For PHP 7
+            $aRet[] = $sFolder; // TODO: Remove it for yield
         }
         closedir($rHandle);
 
-        return $aRet;//remove it for yield
+        return $aRet; // TODO: Remove it for yield
     }
 
     /**

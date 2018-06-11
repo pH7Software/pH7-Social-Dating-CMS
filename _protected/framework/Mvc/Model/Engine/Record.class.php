@@ -177,8 +177,8 @@ class Record
      * @param string $sTable
      * @param string $sField The field to be updated
      * @param string $sValue The new value
-     * @param string $sPk The primary key. Default: NULL
-     * @param string $sId The id. Default: NULL
+     * @param string|null $sPk The primary key. Default: NULL
+     * @param string|null $sId The id. Default: NULL
      *
      * @return int|bool Returns the number of rows on success or FALSE on failure.
      */
@@ -227,8 +227,7 @@ class Record
      *
      * @param string $sSql
      *
-     * @return stdClass|bool Returns stdClass on success or FALSE on failure.
-     *
+     * @return array|bool Returns stdClass on success or FALSE on failure.
      */
     public function query($sSql)
     {
@@ -240,13 +239,13 @@ class Record
 
             $rStmt = $oDb->prepare($sSql);
             $rStmt->execute();
-            $oRow = $rStmt->fetchAll(PDO::FETCH_OBJ);
+            $aRow = $rStmt->fetchAll(PDO::FETCH_OBJ);
 
             // If all goes well, we commit the transaction.
             $oDb->commit();
 
             Db::free($rStmt);
-            return $oRow;
+            return $aRow;
         } catch (Exception $oE) {
             $this->aErrors[] = $oE->getMessage();
 
@@ -295,13 +294,13 @@ class Record
      * Select "All In One" in a SQL's query.
      *
      * @param array|string $mTable
-     * @param string $sField Default: NULL
-     * @param string $sId Default: NULL
+     * @param string|null $sField Default: NULL
+     * @param string|null $sId Default: NULL
      * @param array|string $mWhat Default: '*'
-     * @param array $aJoin Default: NULL
-     * @param string $sOptions Default: NULL
+     * @param array|null $aJoin Default: NULL
+     * @param string|null $sOptions Default: NULL
      *
-     * @return stdClass|bool Returns stdClass on success or throw PDOException on failure.
+     * @return array|bool Returns stdClass on success or throw PDOException on failure.
      */
     public function getAllInOne($mTable, $sField = null, $sId = null, $mWhat = '*', array $aJoin = null, $sOptions = null)
     {
@@ -344,10 +343,10 @@ class Record
                 $rStmt->bindParam(':id', $sId);
             }
             $rStmt->execute();
-            $oRow = $rStmt->fetchAll(PDO::FETCH_OBJ);
+            $aRow = $rStmt->fetchAll(PDO::FETCH_OBJ);
             Db::free($rStmt);
 
-            return $oRow;
+            return $aRow;
         } catch (Exception $oE) {
             $this->aErrors[] = $oE->getMessage();
         }
@@ -357,10 +356,10 @@ class Record
      * Select query and return one value result.
      *
      * @param string $sTable
-     * @param string $sField Default: NULL
-     * @param string $sId Default: NULL
+     * @param string|null $sField Default: NULL
+     * @param string|null $sId Default: NULL
      * @param string $sWhat Default: '*'
-     * @param string $sOptions Default: NULL
+     * @param string|null $sOptions Default: NULL
      *
      * @return string|stdClass|bool SQL query on success (returns string or stdClass values) or throw PDOException on failure (returns a false boolean).
      *
@@ -407,7 +406,7 @@ class Record
      */
     public function updates($sTable, array $aValues)
     {
-        $aValues = ($aValues === null) ? $this->aValues : $aValues;
+        $aValues = $aValues === null ? $this->aValues : $aValues;
         $this->sSql = 'UPDATE' . Db::prefix($sTable) . 'SET ';
 
         $oCachingIterator = new CachingIterator(new ArrayIterator($aValues));

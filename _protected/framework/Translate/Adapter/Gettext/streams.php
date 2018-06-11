@@ -1,7 +1,7 @@
 <?php
 /*
- * Notice: This file has been modified by the pH7CMS development team => Pierre-Henry Soria <http://ph7cms.com>.
- * Version now compatible with PHP 5+ and PHP 7+ (like PHP4 constructors have been move to PHP5 constructors because the old one wasn't working anymore with the new PHP version).
+ * Notice: This file has been modified by the pH7CMS development team => Pierre-Henry Soria <http://ph7cms.com>
+ * Version now compatible with PHP 5+ and PHP 7+ (like PHP4 constructors have been move to PHP5 constructors because the old one wasn't working anymore with newer PHP version).
  */
 
 namespace PH7\Framework\Translate\Adapter\Gettext;
@@ -26,7 +26,6 @@ defined('PH7') or exit('Restricted access');
    You should have received a copy of the GNU General Public License
    along with PHP-gettext; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
 */
 
 
@@ -61,8 +60,8 @@ class StreamReader
 
 class StringReader
 {
-    var $_pos;
-    var $_str;
+    private $_pos;
+    protected $_str;
 
     public function __construct($str = '')
     {
@@ -102,9 +101,9 @@ class StringReader
 
 class FileReader
 {
-    var $_pos;
-    var $_fd;
-    var $_length;
+    private $_pos;
+    private $_fd;
+    private $_length;
 
     public function __construct($filename)
     {

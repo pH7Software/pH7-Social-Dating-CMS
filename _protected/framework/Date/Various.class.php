@@ -20,7 +20,7 @@ class Various
     /**
      * Get the Unix timestamp representing the date.
      *
-     * @param string $sTime A date/time string valid formats (http://php.net/manual/en/datetime.formats.php). Default: 'now'
+     * @param string $sTime A date/time string valid formats (http://php.net/manual/en/datetime.formats.php).
      *
      * @return int
      */

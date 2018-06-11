@@ -28,10 +28,10 @@ class EditCategoryForm
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
 
         $oForm = new \PFBC\Form('form_category_edit');
-        $oForm->configure(array('action' => ''));
+        $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_category_edit', 'form_category_edit'));
         $oForm->addElement(new \PFBC\Element\Token('category_edit'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Category Name:'), 'title', array('id' => 'str_category', 'value' => $oCategoryData->title, 'onblur' => 'CValid(this.value,this.id,2,60)', 'pattern' => $sTitlePattern, 'required' => 1, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Category Name:'), 'title', ['id' => 'str_category', 'value' => $oCategoryData->title, 'onblur' => 'CValid(this.value,this.id,2,60)', 'pattern' => $sTitlePattern, 'required' => 1, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern)]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_category"></span>'));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));

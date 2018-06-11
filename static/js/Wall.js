@@ -105,7 +105,7 @@ function Wall() {
     this._output = function (oData) {
         if (oData.status == 1) {
             $('.msg').addClass('alert alert-success');
-            $('#wall_' + oData.msgId).hide("slow");
+            $('#wall_' + oData.msgId).hide('slow');
         } else {
             $('.msg').addClass('alert alert-danger');
         }

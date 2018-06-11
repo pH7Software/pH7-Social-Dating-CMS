@@ -32,7 +32,7 @@ class EditForm
         $oAdmin = (new AdminModel)->readProfile($iProfileId, DbTableName::ADMIN);
 
         $oForm = new \PFBC\Form('form_admin_edit_account');
-        $oForm->configure(array('action' => ''));
+        $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_admin_edit_account', 'form_admin_edit_account'));
         $oForm->addElement(new \PFBC\Element\Token('edit_account'));
 
@@ -43,12 +43,12 @@ class EditForm
         }
         unset($oHR);
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Login Username:'), 'username', array('value' => $oAdmin->username, 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Email(t('Login Email:'), 'mail', array('value' => $oAdmin->email, 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('First Name:'), 'first_name', array('value' => $oAdmin->firstName, 'required' => 1, 'validation' => new \PFBC\Validation\Name)));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Last Name:'), 'last_name', array('value' => $oAdmin->lastName, 'required' => 1, 'validation' => new \PFBC\Validation\Name)));
-        $oForm->addElement(new \PFBC\Element\Radio(t('Gender:'), 'sex', array('male' => t('Man'), 'female' => t('Female')), array('value' => $oAdmin->sex, 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Timezone('Time Zone:', 'time_zone', array('value' => $oAdmin->timeZone, 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Login Username:'), 'username', ['value' => $oAdmin->username, 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Email(t('Login Email:'), 'mail', ['value' => $oAdmin->email, 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('First Name:'), 'first_name', ['value' => $oAdmin->firstName, 'required' => 1, 'validation' => new \PFBC\Validation\Name]));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Last Name:'), 'last_name', ['value' => $oAdmin->lastName, 'required' => 1, 'validation' => new \PFBC\Validation\Name]));
+        $oForm->addElement(new \PFBC\Element\Radio(t('Gender:'), 'sex', ['male' => t('Man'), 'female' => t('Female')], ['value' => $oAdmin->sex, 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Timezone('Time Zone:', 'time_zone', ['value' => $oAdmin->timeZone, 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'check']));
         $oForm->render();
     }

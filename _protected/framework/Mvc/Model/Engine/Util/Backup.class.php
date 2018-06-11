@@ -19,10 +19,11 @@ defined('PH7') or exit('Restricted access');
 use PH7\Framework\Config\Config;
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\Date\CDateTime;
+use PH7\Framework\File\GenerableFile;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Navigation\Browser;
 
-class Backup
+class Backup implements GenerableFile
 {
     const SQL_FILE_EXT = 'sql';
     const ARCHIVE_FILE_EXT = 'gz';
@@ -49,12 +50,7 @@ class Backup
      */
     public function back()
     {
-        $this->sSql =
-            "#################### Database Backup ####################\n" .
-            '# ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_VERSION . ', Build ' . Kernel::SOFTWARE_BUILD . "\r\n" .
-            '# Database name: ' . Config::getInstance()->values['database']['name'] . "\r\n" .
-            '# Created on ' . (new CDateTime)->get()->dateTime() . "\r\n" .
-            "#########################################################\r\n\r\n";
+        $this->sSql = $this->getHeaderContents();
 
         $aTables = $aColumns = $aValues = array();
         $oAllTables = Db::showTables();
@@ -65,12 +61,12 @@ class Backup
 
         // Loop through tables
         foreach ($aTables as $sTable) {
-            $oResult = $oDb->query('SHOW CREATE TABLE ' . $sTable);
+            $rResult = $oDb->query('SHOW CREATE TABLE ' . $sTable);
 
-            $iNum = (int)$oResult->rowCount();
+            $iNum = (int)$rResult->rowCount();
 
             if ($iNum > 0) {
-                $aRow = $oResult->fetch();
+                $aRow = $rResult->fetch();
 
                 $this->sSql .= "#\n# Table: $sTable\r\n#\r\n\r\n";
                 $this->sSql .= "DROP TABLE IF EXISTS $sTable;\r\n\r\n";
@@ -85,21 +81,21 @@ class Backup
 
                 unset($aRow);
             }
-            unset($oResult);
+            unset($rResult);
 
-            $oResult = $oDb->query('SELECT * FROM ' . $sTable);
+            $rResult = $oDb->query('SELECT * FROM ' . $sTable);
 
-            $iNum = (int)$oResult->rowCount();
+            $iNum = (int)$rResult->rowCount();
 
             if ($iNum > 0) {
-                while ($aRow = $oResult->fetch()) {
+                while ($aRow = $rResult->fetch()) {
                     foreach ($aRow as $sColumn => $sValue) {
                         if (!is_numeric($sColumn)) {
                             if (!empty($sValue) && !is_numeric($sValue)) {
                                 $sValue = Db::getInstance()->quote($sValue);
                             }
 
-                            $sValue = str_replace(array("\r", "\n"), array('', '\n'), $sValue);
+                            $sValue = str_replace(["\r", "\n"], ['', '\n'], $sValue);
 
                             $aColumns[] = $sColumn;
                             $aValues[] = $sValue;
@@ -114,7 +110,7 @@ class Backup
 
                 unset($aRow);
             }
-            unset($oResult);
+            unset($rResult);
         }
         unset($oDb);
 
@@ -183,10 +179,11 @@ class Backup
         gzclose($rArchive);
 
         $sSqlContent = str_replace(PH7_TABLE_PREFIX, Db::prefix(), $sSqlContent);
-        $oDb = Db::getInstance()->exec($sSqlContent);
+        $oDb = Db::getInstance();
+        $rStmt = $oDb->exec($sSqlContent);
         unset($sSqlContent);
 
-        return $oDb === false ? print_r($oDb->errorInfo(), true) : true;
+        return $rStmt === false ? print_r($oDb->errorInfo(), true) : true;
     }
 
     /**
@@ -207,6 +204,22 @@ class Backup
     public function downloadArchive()
     {
         $this->downloadBackup(true);
+    }
+
+    /**
+     * Returns the SQL header containing useful information relative to the backup.
+     *
+     * @return string
+     */
+    public function getHeaderContents()
+    {
+        $sSql = "#################### Database Backup ####################\n" .
+            '# ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_VERSION . ', Build ' . Kernel::SOFTWARE_BUILD . "\r\n" .
+            '# Database name: ' . Config::getInstance()->values['database']['name'] . "\r\n" .
+            '# Created on ' . (new CDateTime)->get()->dateTime() . "\r\n" .
+            "#########################################################\r\n\r\n";
+
+        return $sSql;
     }
 
     /**

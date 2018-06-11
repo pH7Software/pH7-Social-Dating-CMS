@@ -40,11 +40,11 @@ class FieldModel extends Model
     private $sSql;
 
     /**
-     * @param string $sTable Table name.
-     * @param string $sName Field name.
-     * @param string $sType Field type.
-     * @param int $iLength Length field.
-     * @param string $sDefVal Default field value.
+     * @param string|null $sTable Table name.
+     * @param string|null $sName Field name.
+     * @param string|null $sType Field type.
+     * @param int|null $iLength Length field.
+     * @param string|null $sDefVal Default field value.
      */
     public function __construct($sTable, $sName = null, $sType = null, $iLength = null, $sDefVal = null)
     {
@@ -66,7 +66,7 @@ class FieldModel extends Model
     {
         $rStmt = Db::getInstance()->query('SELECT * FROM' . Db::prefix($this->sTable) . 'LIMIT 1');
 
-        $aColumn = array();
+        $aColumn = [];
         if ($rStmt->rowCount() > 0) {
             while ($aRow = $rStmt->fetch()) {
                 foreach ($aRow as $sColumn => $sValue) {
@@ -80,18 +80,27 @@ class FieldModel extends Model
         return $aColumn;
     }
 
+    /**
+     * @return bool
+     */
     public function insert()
     {
         $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'ADD ' . $this->sName . ' ' . $this->getType();
         return $this->execute();
     }
 
+    /**
+     * @return bool
+     */
     public function update()
     {
         $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'CHANGE ' . (new Http)->get('name') . ' ' . $this->sName . ' ' . $this->getType();
         return $this->execute();
     }
 
+    /**
+     * @return bool
+     */
     public function delete()
     {
         $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'DROP ' . $this->sName;
@@ -117,8 +126,10 @@ class FieldModel extends Model
      */
     protected function execute()
     {
-        $rStmt = Db::getInstance()->exec($this->sSql);
-        return $rStmt === false ? $rStmt->errorInfo() : true;
+        $oDb = Db::getInstance();
+        $rStmt = $oDb->exec($this->sSql);
+
+        return $rStmt === false ? $oDb->errorInfo() : true;
     }
 
     /**

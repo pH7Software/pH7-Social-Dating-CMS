@@ -39,7 +39,14 @@ class LoginFormProcess extends Form implements LoginableForm
         $iMaxAttempts = (int)DbConfig::getSetting('maxUserLoginAttempts');
         $iTimeDelay = (int)DbConfig::getSetting('loginUserAttemptTime');
 
-        if ($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view)) {
+        if ($bIsLoginAttempt &&
+            !$oSecurityModel->checkLoginAttempt(
+                $iMaxAttempts,
+                $iTimeDelay,
+                $sEmail,
+                $this->view
+            )
+        ) {
             \PFBC\Form::setError('form_login_user', Form::loginAttemptsExceededMsg($iTimeDelay));
             return; // Stop execution of the method.
         }
@@ -87,7 +94,7 @@ class LoginFormProcess extends Form implements LoginableForm
             if ($this->httpRequest->postExists('remember')) {
                 // We hash again the password
                 (new Framework\Cookie\Cookie)->set(
-                    array('member_remember' => Security::hashCookie($oUserData->password), 'member_id' => $oUserData->profileId)
+                    ['member_remember' => Security::hashCookie($oUserData->password), 'member_id' => $oUserData->profileId]
                 );
             }
 

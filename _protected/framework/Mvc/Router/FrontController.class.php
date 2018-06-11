@@ -319,7 +319,7 @@ final class FrontController
      *
      * @return void
      */
-    public function _removeDatabaseInfo()
+    public function _unsetDatabaseInfo()
     {
         unset($this->oConfig->values['database']);
     }
@@ -759,7 +759,13 @@ final class FrontController
             if ($iRedirect === null) {
                 $this->oRegistry->module = 'error';
             } else {
-                Header::redirect(UriRoute::get('error', 'http', 'index'));
+                Header::redirect(
+                    UriRoute::get(
+                        'error',
+                        'http',
+                        'index'
+                    )
+                );
             }
         }
     }

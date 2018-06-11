@@ -57,7 +57,12 @@ class Comment
     protected function delete()
     {
         if (CommentCore::isRemovalEligible($this->oHttpRequest, $this->oSession)) {
-            $this->bStatus = $this->oCommentModel->delete($this->oHttpRequest->post('id'), $this->oHttpRequest->post('recipient_id'), $this->oHttpRequest->post('sender_id'), $this->oHttpRequest->post('table'));
+            $this->bStatus = $this->oCommentModel->delete(
+                $this->oHttpRequest->post('id'),
+                $this->oHttpRequest->post('recipient_id'),
+                $this->oHttpRequest->post('sender_id'),
+                $this->oHttpRequest->post('table')
+            );
 
             if ($this->bStatus) {
                 CommentCore::clearCache();

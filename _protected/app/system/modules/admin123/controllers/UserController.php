@@ -101,6 +101,12 @@ class UserController extends Controller
         $this->output();
     }
 
+    public function countryRestriction()
+    {
+        $this->view->page_title = $this->view->h1_title = t('Country Restrictions');
+        $this->output();
+    }
+
     public function search()
     {
         $this->view->page_title = $this->view->h1_title = t('User Search');

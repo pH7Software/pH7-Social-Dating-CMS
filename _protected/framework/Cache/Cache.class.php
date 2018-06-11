@@ -18,8 +18,9 @@ use PH7\Framework\Config\Config;
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\File\File;
+use PH7\Framework\File\GenerableFile;
 
-class Cache
+class Cache implements GenerableFile
 {
     const DATETIME_FORMAT = 'Y-m-d H:i:s';
     const CACHE_DIR = 'pH7_cache/';
@@ -204,7 +205,7 @@ class Cache
      *
      * @return string
      */
-    final protected function getHeaderContents()
+    final public function getHeaderContents()
     {
         return 'defined(\'PH7\') or exit(\'Restricted access\');
 /*

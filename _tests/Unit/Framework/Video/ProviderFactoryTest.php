@@ -12,6 +12,7 @@ use PH7\Framework\Video\Api\Dailymotion;
 use PH7\Framework\Video\Api\Metacafe;
 use PH7\Framework\Video\Api\Vimeo;
 use PH7\Framework\Video\Api\Youtube;
+use PH7\Framework\Video\InvalidApiProviderException;
 use PH7\Framework\Video\ProviderFactory;
 use PHPUnit_Framework_TestCase;
 
@@ -29,11 +30,10 @@ class ProviderFactoryTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf($sExpectedClass, $oProvider);
     }
 
-    /**
-     * @expectedException \PH7\Framework\Video\InvalidApiProviderException
-     */
     public function testCreateWrongApiProvider()
     {
+        $this->expectException(InvalidApiProviderException::class);
+
         ProviderFactory::create('invalidVideoApiProvider');
     }
 
