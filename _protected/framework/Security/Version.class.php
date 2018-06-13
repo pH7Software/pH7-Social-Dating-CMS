@@ -66,6 +66,7 @@ final class Version
             foreach ($oDom->getElementsByTagName('ph7') as $oSoft) {
                 /** @var DOMElement $oInfo */
                 foreach ($oSoft->getElementsByTagName('social-dating-cms') as $oInfo) {
+                    $bIsAlert = self::isUpdateAlertEnabled($oInfo);
                     $sVerName = $oInfo->getElementsByTagName('name')->item(0)->nodeValue;
                     $sVerNumber = $oInfo->getElementsByTagName('version')->item(0)->nodeValue;
                     $sVerBuild = $oInfo->getElementsByTagName('build')->item(0)->nodeValue;
@@ -74,7 +75,7 @@ final class Version
             unset($oDom);
 
             $mData = [
-                'is_alert' => self::isUpdateAlertEnabled(),
+                'is_alert' => $bIsAlert,
                 'name' => $sVerName,
                 'version' => $sVerNumber,
                 'build' => $sVerBuild
