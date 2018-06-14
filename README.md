@@ -200,6 +200,11 @@ You can find and add other languages on the [I18N repo](https://github.com/pH7So
 Coded & Designed with lots of ❤️ by [Pierre-Henry Soria](http://ph7.me). A passionate Belgian software engineer 🍫🍺
 
 
+## Hire Me At Your Company?
+
+Do you need someone like me (and willing to relocate) at your company..? [Let's chat together](https://www.linkedin.com/in/ph7enry/)!
+
+
 ## Official Website
 
 [pH7CMS.com](http://ph7cms.com)
