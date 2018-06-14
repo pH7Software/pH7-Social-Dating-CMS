@@ -261,7 +261,9 @@ You can send me an email for any suggestions or feedback at: *hello {AT} ph7cms 
 
 ![Eco Friendly. Love the World and Love the Nature](static/img/love-nature.svg)
 
-[pH7CMS.com](http://ph7cms.com) has been built to reduce the power and CPU from the servers in order to decrease the resources and energies for preserving our nature.
+[pH7CMS.com](http://ph7cms.com) has been built to reduce the power and CPU usage of your server in order to preserve the nature and help to save our environment.
+
+Finally, **please consider using green Web hosting** (which use Green Power supply).
 
 
 ## License
