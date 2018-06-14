@@ -257,6 +257,13 @@ Just clone the repository, make your changes and then make a push ;-)
 You can send me an email for any suggestions or feedback at: *hello {AT} ph7cms {D0T} com* OR *hi {AT} ph7 {D0T} me*
 
 
+## pH7CMS; The Eco-Friendly CMS ❤️
+
+![Eco Friendly. Love the World and Love the Nature](static/img/love-nature.svg)
+
+[pH7CMS.com](http://ph7cms.com) has been built to reduce the power and CPU from the servers in order to decrease the resources and energies for preserving our nature.
+
+
 ## License
 
 **pH7CMS** is under **Open Source Free** License.
