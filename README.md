@@ -202,7 +202,7 @@ Coded & Designed with lots of ❤️ by [Pierre-Henry Soria](http://ph7.me). A p
 
 ## Hire Me At Your Company?
 
-Do you need someone like me (and willing to relocate) at your company..? [Let's chat together](https://www.linkedin.com/in/ph7enry/)!
+Do you need someone like me (and willing to relocate) at your company..? **[Let's chat together](https://www.linkedin.com/in/ph7enry/)**!
 
 
 ## Official Website
