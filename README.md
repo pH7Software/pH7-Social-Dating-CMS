@@ -263,7 +263,12 @@ You can send me an email for any suggestions or feedback at: *hello {AT} ph7cms 
 
 [pH7CMS.com](http://ph7cms.com) has been built to reduce the power and CPU usage of your server in order to preserve the nature and help to save our environment.
 
+pH7CMS's templates also use lighter colors since LCD monitors use less electricity to display them.
+
 Finally, **please consider using green Web hosting** (which use Green Power supply).
+
+
+Other [10 Easy Ways to Green Your Web Site](https://mashable.com/2010/01/01/green-your-web-site/) 😉
 
 
 ## License
