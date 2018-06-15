@@ -127,7 +127,7 @@ class Video extends Upload
             $sParams = '-c copy -copyts';
         }
 
-        exec("$this->sFfmpegPath -i {$this->aFile['tmp_name']} $sParams $sFile");
+        $this->executeFfmpegCommand('-i', "{$this->aFile['tmp_name']} $sParams $sFile");
 
         return $sFile;
     }
@@ -144,7 +144,10 @@ class Video extends Upload
      */
     public function thumbnail($sPicturePath, $iSeconds, $iWidth, $iHeight)
     {
-        exec($this->sFfmpegPath . ' -itsoffset -' . $iSeconds . ' -i ' . $this->aFile['tmp_name'] . '  -vcodec mjpeg -vframes 1 -an -f rawvideo -s ' . $iWidth . 'x' . $iHeight . ' ' . $sPicturePath);
+        $this->executeFfmpegCommand(
+            '-itsoffset',
+            "-$iSeconds -i {$this->aFile['tmp_name']} -vcodec mjpeg -vframes 1 -an -f rawvideo -s {$iWidth}x{$iHeight} $sPicturePath"
+        );
 
         return $sPicturePath;
     }
@@ -156,7 +159,10 @@ class Video extends Upload
      */
     public function getDuration()
     {
-        $sTime = exec($this->sFfmpegPath . ' -i ' . $this->aFile['tmp_name'] . ' 2>&1 | grep "Duration" | cut -d \' \' -f 4 | sed s/,//');
+        $sTime = $this->executeFfmpegCommand(
+            '-i ',
+            "{$this->aFile['tmp_name']} 2>&1 | grep -i 'duration' | cut -d ' ' -f 4 | sed s/,//"
+        );
 
         return Various::timeToSec($sTime);
     }
@@ -169,6 +175,24 @@ class Video extends Upload
     public function getExt()
     {
         return $this->sType;
+    }
+
+    /**
+     * @param string $sFlag
+     * @param string $sArgument
+     *
+     * @return void
+     */
+    private function executeFfmpegCommand($sFlag, $sArgument)
+    {
+        exec(
+            sprintf(
+                '%s %s %s',
+                $this->sFfmpegPath,
+                $sFlag,
+                $sArgument
+            )
+        );
     }
 
     /**
