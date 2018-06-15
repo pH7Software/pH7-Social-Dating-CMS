@@ -127,7 +127,7 @@ class Video extends Upload
             $sParams = '-c copy -copyts';
         }
 
-        $this->executeFfmpegCommand('-i', "{$this->aFile['tmp_name']} $sParams $sFile");
+        $this->executeCommand('-i', "{$this->aFile['tmp_name']} $sParams $sFile");
 
         return $sFile;
     }
@@ -144,7 +144,7 @@ class Video extends Upload
      */
     public function thumbnail($sPicturePath, $iSeconds, $iWidth, $iHeight)
     {
-        $this->executeFfmpegCommand(
+        $this->executeCommand(
             '-itsoffset',
             "-$iSeconds -i {$this->aFile['tmp_name']} -vcodec mjpeg -vframes 1 -an -f rawvideo -s {$iWidth}x{$iHeight} $sPicturePath"
         );
@@ -159,7 +159,7 @@ class Video extends Upload
      */
     public function getDuration()
     {
-        $sTime = $this->executeFfmpegCommand(
+        $sTime = $this->executeCommand(
             '-i ',
             "{$this->aFile['tmp_name']} 2>&1 | grep -i 'duration' | cut -d ' ' -f 4 | sed s/,//"
         );
@@ -178,12 +178,14 @@ class Video extends Upload
     }
 
     /**
+     * Execute a FFmpeg command.
+     *
      * @param string $sFlag
      * @param string $sArgument
      *
      * @return void
      */
-    private function executeFfmpegCommand($sFlag, $sArgument)
+    private function executeCommand($sFlag, $sArgument)
     {
         exec(
             sprintf(
