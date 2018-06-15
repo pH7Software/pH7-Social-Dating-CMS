@@ -13,7 +13,7 @@
   {/if}
 
   {if $this->config->values['module.api']['microsoft.enabled']}
-    <a href="{{ $design->url('connect','main','login','microsoft') }}" rel="nofollow" target="_blank"><img src="{url_tpl_mod_img}microsoft.png" alt="Microsoft Live" /></a>
+    <a href="{{ $design->url('connect','main','login','microsoft') }}" rel="nofollow" target="_blank"><img src="{url_tpl_mod_img}microsoft.svg" alt="Microsoft" /></a>
   {/if}
 
 </div>
