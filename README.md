@@ -268,7 +268,7 @@ pH7CMS's templates also use lighter colors since LCD monitors use less electrici
 Finally, **please consider using green Web hosting** (which use Green Power supply).
 
 
-Other [10 Easy Ways to Green Your Web Site](https://mashable.com/2010/01/01/green-your-web-site/) 😉
+-> Other [10 Easy Ways to Green Your Social Community](https://mashable.com/2010/01/01/green-your-web-site/) 😉 <-
 
 
 ## License
