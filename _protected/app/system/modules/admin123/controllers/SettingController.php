@@ -8,7 +8,6 @@
 
 namespace PH7;
 
-use PH7\Framework\Core\License;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
@@ -127,18 +126,6 @@ class SettingController extends Controller
         $this->output();
     }
 
-    public function license()
-    {
-        $this->view->page_title = $this->view->h1_title = t('License Key');
-
-        if ($this->httpRequest->getExists('set_msg')) {
-            $aData = $this->getLicStatusMsg();
-            $this->design->setFlashMsg($aData['msg'], ($aData['is_err'] ? 'error' : 'success'));
-        }
-
-        $this->output();
-    }
-
     private function resetColorFields()
     {
         $aColorFields = [
@@ -154,40 +141,6 @@ class SettingController extends Controller
         }
 
         DbConfig::clearCache();
-    }
-
-    /**
-     * Get the status and the message for the license key.
-     *
-     * @return array ['is_err' => BOOLEAN, 'msg' => STRING];
-     */
-    private function getLicStatusMsg()
-    {
-        $bIsErr = true; // Set default value
-
-        switch (PH7_LICENSE_STATUS) {
-            case License::ACTIVE_STATUS:
-                $sMsg = t('Hurrah! Your License Key has been successfully enabled!');
-                $bIsErr = false;
-                break;
-
-            case License::INVALID_STATUS:
-                $sMsg = t('Oops! Your license key is Invalid.');
-                break;
-
-            case License::EXPIRED_STATUS:
-                $sMsg = t('Oops! Your license key is Expired.');
-                break;
-
-            case License::SUSPENDED_STATUS:
-                $sMsg = t('We are sorry, but your license key is Suspended.');
-                break;
-
-            default:
-                $sMsg = t('Oops! We have received an invalid response from the server. Please try again later.');
-        }
-
-        return ['is_err' => $bIsErr, 'msg' => $sMsg];
     }
 
     private function langNameFromUrlDoesNotExist()
