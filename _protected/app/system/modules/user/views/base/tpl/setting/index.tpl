@@ -4,11 +4,7 @@
     <li><a href="#design"><span>{lang 'Profile Wallpaper'}</span></a></li>
     <li><a href="#notification"><span>{lang 'Email Notification'}</span></a></li>
     <li><a href="#privacy"><span>{lang 'Privacy'}</span></a></li>
-
-    {* Payment module is only available if pH7CMSPro license is enabled *}
-    {if $is_valid_license}
-        <li><a href="{{ $design->url('payment','main','info') }}"><span>{lang 'Membership Details'}</span></a></li>
-    {/if}
+    <li><a href="{{ $design->url('payment','main','info') }}"><span>{lang 'Membership Details'}</span></a></li>
     <li><a href="#pwd"><span>{lang 'Password'}</span></a></li>
 </ol>
 

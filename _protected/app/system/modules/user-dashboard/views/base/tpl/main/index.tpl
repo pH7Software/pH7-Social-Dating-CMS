@@ -20,12 +20,12 @@
                 <li>
                     <a href="{{ $design->url('user','setting','privacy') }}" title="{lang 'My Privacy Settings'}"><i class="fa fa-user-secret"></i> {lang 'Privacy Setting'}</a>
                 </li>
-                {if $is_valid_license}
-                    <li>
-                        <a href="{{ $design->url('payment','main','info') }}" title="{lang 'My Membership'}"><i class="fa fa-credit-card"></i> {lang 'Membership Details'}</a>
-                    </li>
-                {/if}
-                <li><a href="{{ $design->url('user','setting','password') }}" title="{lang 'Change My Password'}"><i class="fa fa-key fa-fw"></i> {lang 'Change Password'}</a></li>
+                <li>
+                    <a href="{{ $design->url('payment','main','info') }}" title="{lang 'My Membership'}"><i class="fa fa-credit-card"></i> {lang 'Membership Details'}</a>
+                </li>
+                <li>
+                    <a href="{{ $design->url('user','setting','password') }}" title="{lang 'Change My Password'}"><i class="fa fa-key fa-fw"></i> {lang 'Change Password'}</a>
+                </li>
             </ul>
         </div>
     {/if}
