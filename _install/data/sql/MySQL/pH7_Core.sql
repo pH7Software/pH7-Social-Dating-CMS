@@ -1140,15 +1140,6 @@ CREATE TABLE IF NOT EXISTS ph7_static_files (
 INSERT INTO ph7_static_files VALUES (1, '//s7.addthis.com/js/250/addthis_widget.js', 'js', '0');
 
 
-CREATE TABLE IF NOT EXISTS ph7_license (
-  licenseId tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
-  licenseKey varchar(40) NOT NULL,
-  PRIMARY KEY (licenseId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-
-INSERT INTO ph7_license VALUES (1, '');
-
-
 CREATE TABLE IF NOT EXISTS ph7_custom_code (
   code text,
   codeType enum('css', 'js') NOT NULL
