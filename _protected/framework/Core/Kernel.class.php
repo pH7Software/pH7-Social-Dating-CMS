@@ -92,15 +92,6 @@ abstract class Kernel
     {
         define('PH7_LICENSE_STATUS', License::ACTIVE_STATUS);
         define('PH7_LICENSE_NAME', 'pH7Builder, Open License');
-        define('PH7_VALID_LICENSE', $this->getLicenseStatus());
-    }
-
-    /**
-     * @return bool
-     */
-    final private function getLicenseStatus()
-    {
-        return PH7_LICENSE_STATUS === License::ACTIVE_STATUS;
     }
 
     /**
