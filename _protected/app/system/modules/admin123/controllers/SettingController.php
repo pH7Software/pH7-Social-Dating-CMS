@@ -147,6 +147,10 @@ class SettingController extends Controller
     {
         $aLangs = $this->file->getDirList(PH7_PATH_APP_LANG);
 
-        return !in_array(substr($this->httpRequest->currentUrl(), -Lang::LANG_FOLDER_LENGTH), $aLangs, true);
+        return !in_array(
+            substr($this->httpRequest->currentUrl(), -Lang::LANG_FOLDER_LENGTH),
+            $aLangs,
+            true
+        );
     }
 }
