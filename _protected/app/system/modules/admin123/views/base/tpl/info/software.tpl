@@ -19,7 +19,6 @@
         <p>{lang 'Version Name: %software_version_name%'}</p>
         <p>{lang 'Version Build: %software_build%'}</p>
         <p>{lang 'Release Date: %0%', $release_date}</p>
-        <p>{lang 'License Type: <a href="%0%">%1%</a>', $license_form_link, PH7_LICENSE_NAME}</p>
     </div>
 
     <div class="s_bMarg"></div>
