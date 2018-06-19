@@ -72,26 +72,6 @@ abstract class Kernel
         $this->httpRequest = new Http;
         $this->browser = new Browser;
         $this->registry = Registry::getInstance();
-
-        /**
-         * @internal self::initializeLicenseConstants() cannot be declare more than one time.
-         * Because Kernel.class.php file is included many times in the software, we need to check that with a constant.
-         */
-        if (!defined('PH7_CHECKED_LIC')) {
-            define('PH7_CHECKED_LIC', 1); // OK, now we have checked the license key
-            $this->initializeLicenseConstants();
-        }
-    }
-
-    /**
-     * Check License key.
-     *
-     * @return void
-     */
-    final private function initializeLicenseConstants()
-    {
-        define('PH7_LICENSE_STATUS', License::ACTIVE_STATUS);
-        define('PH7_LICENSE_NAME', 'pH7Builder, Open License');
     }
 
     /**
