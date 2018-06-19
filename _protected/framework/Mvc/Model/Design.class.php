@@ -69,10 +69,6 @@ class Design extends HtmlDesign
      */
     public function ad($iWidth, $iHeight, $bOnlyActive = true)
     {
-        if (!PH7_VALID_LICENSE) {
-            return false;
-        }
-
         $this->oCache->start(self::CACHE_STATIC_GROUP, 'ads' . $iWidth . $iHeight . $bOnlyActive, static::CACHE_TIME);
 
         if (!$oData = $this->oCache->get()) {

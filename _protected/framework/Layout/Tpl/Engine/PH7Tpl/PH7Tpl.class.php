@@ -91,9 +91,6 @@ class PH7Tpl extends Kernel implements GenerableFile
     /** @var string */
     private $sCacheDirFile;
 
-    /** @var bool */
-    private $bLicense;
-
     /** @var string */
     private $sTplExt = '.tpl'; // Default extension
 
@@ -131,8 +128,6 @@ class PH7Tpl extends Kernel implements GenerableFile
         /** Instance objects for the class * */
         $this->_oVars = $this;
         $this->designModel = new DesignModel;
-
-        $this->bLicense = PH7_VALID_LICENSE;
 
         $this->bHtmlCompressor = (bool)$this->config->values['cache']['enable.static.minify'];
         $this->bPhpCompressor = (bool)$this->config->values['cache']['enable.static.minify'];
@@ -863,12 +858,8 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
         }
 
         if ($this->isMainCompilePage()) {
-            if (!$this->bLicense) {
-                $this->sCode = preg_replace('#<title>(.*?)</title>#is', '<title>$1 (<?php echo t(\'Powered by %software_name%\') ?>)</title>', $this->sCode);
-            }
-
             // It is forbidden to violate the copyright!
-            // Thought for me who has spent years for developing a professional, high-quality software and done their best to help developers!
+            // Think to me, who has spent years to develop a professional, high-quality software and done my best to help other developers!
             if (!$this->isMarkCopyright()) {
                 $this->setErrMsg();
             }
@@ -1025,7 +1016,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
             return true;
         }
 
-        // "design->link()" can never be removed. Copyright notices won't be displayed if you bought a license
+        // "design->link()" can never be removed
         return false !== strpos($this->sCode, 'design->link()');
     }
 

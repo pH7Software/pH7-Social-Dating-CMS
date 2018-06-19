@@ -150,7 +150,7 @@
                 <li><a href="{{ $design->url('user','setting','design') }}">{lang 'Design Profile'}</a></li>
                 <li><a href="{{ $design->url('user','setting','notification') }}">{lang 'Notifications'}</a></li>
                 <li><a href="{{ $design->url('user','setting','privacy') }}">{lang 'Privacy Settings'}</a></li>
-                {if $is_valid_license}<li><a href="{{ $design->url('payment','main','info') }}">{lang 'Membership Details'}</a></li>{/if}
+                <li><a href="{{ $design->url('payment','main','info') }}">{lang 'Membership Details'}</a></li>
                 <li><a href="{{ $design->url('user','setting','password') }}">{lang 'Change Password'}</a></li>
               </ul>
             </li>
@@ -266,7 +266,6 @@
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','analyticsapi') }}" title="{lang 'Analytics Code'}"><i class="fa fa-bar-chart"></i> {lang 'Analytics Code'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'style') }}" title="{lang 'Custom CSS Style'}"><i class="fa fa-code"></i> {lang 'CSS Style'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'script') }}" title="{lang 'JavaScript Injection'}"><i class="fa fa-code"></i> {lang 'JavaScript'}</a></li>
-            {*<li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'license') }}" title="{lang 'License Key'}"><i class="fa fa-key"></i> {lang 'License'}</a></li>*}
           </ul>
         </li>
 
@@ -439,9 +438,6 @@
 
         <li class="dropdown"><a class="bold dropdown-toggle" href="{software_doc_url}" title="{lang 'Need some Helps?'}" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-life-ring"></i> {lang 'Help'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            {if !$is_valid_license}
-                <li><a class="bold underline" href="{software_license_url}" title="{lang 'Buy a License Key'}"><i class="fa fa-key"></i> {lang 'Switch to pH7CMSPro'}</a></li>
-            {/if}
             <li><a class="bold underline" href="{{ $design->url('ph7cms-donation','main','donationbox') }}" title="{lang 'Will You Be Nice Today? Like 78% of our users who contribute on a regular basis.'}"><i class="fa fa-trophy"></i> {lang 'Will You Help pH7CMS?'}</a></li>
             <li><a href="{software_doc_url}" title="{lang 'Software Documentation'}"><i class="fa fa-book"></i> {lang 'Documentation'}</a></li>
             <li><a href="{software_review_url}" title="{lang 'Help pH7CMS by giving a nice review! Highly appreciated :)'}"><i class="fa fa-heart"></i> {lang 'Give Nice Review'}</a></li>
