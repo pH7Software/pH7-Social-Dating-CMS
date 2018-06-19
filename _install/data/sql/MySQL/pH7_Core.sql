@@ -967,7 +967,7 @@ CREATE TABLE IF NOT EXISTS ph7_modules (
 
 INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of the SQL schema of pH7CMS (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.4.5', 1);
+('pH7CMS', 'SQL System Schema', '1.4.6', 1);
 
 
 CREATE TABLE IF NOT EXISTS ph7_report (
@@ -1138,15 +1138,6 @@ CREATE TABLE IF NOT EXISTS ph7_static_files (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 INSERT INTO ph7_static_files VALUES (1, '//s7.addthis.com/js/250/addthis_widget.js', 'js', '0');
-
-
-CREATE TABLE IF NOT EXISTS ph7_license (
-  licenseId tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
-  licenseKey varchar(40) NOT NULL,
-  PRIMARY KEY (licenseId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-
-INSERT INTO ph7_license VALUES (1, '');
 
 
 CREATE TABLE IF NOT EXISTS ph7_custom_code (

@@ -321,7 +321,7 @@ class MainController extends Controller
             $aLatestVerInfo = Version::getLatestInfo();
             $sLatestVer = t('%0% build %1%', $aLatestVerInfo['version'], $aLatestVerInfo['build']);
 
-            $sMsg = t('%software_name% <strong>%0%</strong> is available! Please <a href="%1%" target="_blank">update it today</a> to keep your site safe and stable.', $sLatestVer, Core::SOFTWARE_LICENSE_KEY_URL);
+            $sMsg = t('%software_name% <strong>%0%</strong> is available! Please <a href="%1%" target="_blank">update it today</a> to keep your site safe and stable.', $sLatestVer, Core::SOFTWARE_WEBSITE);
             $this->design->setMessage($sMsg);
         }
     }
