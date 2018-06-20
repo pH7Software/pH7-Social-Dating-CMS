@@ -125,6 +125,6 @@ class MainController extends Controller
      */
     private function doesViewExist($sViewName)
     {
-        return in_array($sViewName, self::VIEW_OPTIONS);
+        return in_array($sViewName, self::VIEW_OPTIONS, true);
     }
 }
