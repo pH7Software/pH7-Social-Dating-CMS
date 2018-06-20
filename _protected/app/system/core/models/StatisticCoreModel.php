@@ -32,7 +32,7 @@ class StatisticCoreModel extends StatisticModel
         $oCache = (new Cache)->start(self::CACHE_GROUP, 'dateofcreation', self::CACHE_LIFETIME);
 
         if (!$sSinceDate = $oCache->get()) {
-            $sSinceDate = Record::getInstance()->getOne(DbTableName::ADMIN, 'profileId', 1, 'joinDate')->joinDate;
+            $sSinceDate = Record::getInstance()->getOne(DbTableName::ADMIN, 'profileId', AdminCore::ROOT_PROILE_ID, 'joinDate')->joinDate;
             $oCache->put($sSinceDate);
         }
         unset($oCache);
