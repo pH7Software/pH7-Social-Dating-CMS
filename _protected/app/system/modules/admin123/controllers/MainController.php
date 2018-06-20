@@ -18,11 +18,11 @@ class MainController extends Controller
 {
     public function index()
     {
-        // Add ph7cms-donation JS file if needed
+        // Add ph7cms-helper's JS file if needed
         if (ValidateSiteCore::needInject(new ValidateSiteCoreModel, $this->session)) {
             $this->design->addJs(
-                PH7_LAYOUT . PH7_SYS . PH7_MOD . 'ph7cms-donation' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
-                'donationbox.js'
+                PH7_LAYOUT . PH7_SYS . PH7_MOD . 'ph7cms-helper' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
+                'suggestionbox.js'
             );
         }
 

@@ -4,8 +4,8 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
-var $donationBox = (function () {
-    $.get(pH7Url.base + 'ph7cms-donation/main/donationbox', function (oData) {
+var $suggestionBox = (function () {
+    $.get(pH7Url.base + 'ph7cms-helper/main/suggestionbox', function (oData) {
         $.colorbox({
             width: '240px',
             height: '220px',
@@ -16,4 +16,4 @@ var $donationBox = (function () {
     })
 });
 
-$donationBox();
+$suggestionBox();
