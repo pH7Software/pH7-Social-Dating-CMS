@@ -5,7 +5,7 @@
         <p>&nbsp;</p>
 
         <iframe
-            src="https://ghbtns.com/github-btn.html?user={% $config->values['module.setting']['github.username'] %}&repo={% $config->values['module.setting']['github.repo_name'] %}&type=fork&count=true&size=large"
+            src="https://ghbtns.com/github-btn.html?user={% $config->values['module.setting']['github.username'] %}&amp;repo={% $config->values['module.setting']['github.repo_name'] %}&amp;type=fork&amp;count=true&amp;size=large"
             frameborder="0"
             scrolling="0"
             width="158px"
