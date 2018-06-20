@@ -438,7 +438,7 @@
 
         <li class="dropdown"><a class="bold dropdown-toggle" href="{software_doc_url}" title="{lang 'Need some Helps?'}" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-life-ring"></i> {lang 'Help'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a class="bold underline" href="{{ $design->url('ph7cms-helper','main','suggestionbox') }}" title="{lang 'Will You Be Nice Today? Like 78% of our users who contribute on a regular basis.'}"><i class="fa fa-trophy"></i> {lang 'Will You Help pH7CMS?'}</a></li>
+            <li><a class="bold underline" href="{{ $design->url('ph7cms-helper','main','suggestionbox','?box=donationbox') }}" title="{lang 'Will You Be Nice Today? Like 78% of our users who contribute on a regular basis.'}"><i class="fa fa-trophy"></i> {lang 'Will You Help pH7CMS?'}</a></li>
             <li><a href="{software_doc_url}" title="{lang 'Software Documentation'}"><i class="fa fa-book"></i> {lang 'Documentation'}</a></li>
             <li><a href="{software_review_url}" title="{lang 'Help pH7CMS by giving a nice review! Highly appreciated :)'}"><i class="fa fa-heart"></i> {lang 'Give Nice Review'}</a></li>
             <li><a href="{software_issue_url}" title="{lang 'Report a Problem'}"><i class="fa fa-bug"></i> {lang 'Report a Bug'}</a></li>
