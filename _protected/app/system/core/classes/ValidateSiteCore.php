@@ -17,7 +17,7 @@ class ValidateSiteCore
 {
     const SESS_IS_VISITED = 'suggestionbox_visited';
     const VALIDATE_FORM_PAGE_DELAY = '-2 months';
-    const VALIDATE_FORM_POPUP_DELAY = '-3 days';
+    const VALIDATE_FORM_POPUP_DELAY = '-2 days';
 
     /**
      * Check if the JS donation box has to be added and redirect if the site hasn't been validated yet for a while.
