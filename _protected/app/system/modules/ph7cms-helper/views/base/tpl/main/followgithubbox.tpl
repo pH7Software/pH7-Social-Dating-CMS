@@ -5,10 +5,10 @@
         <p>&nbsp;</p>
 
         <iframe
-            src="https://ghbtns.com/github-btn.html?user={% $config->values['module.setting']['github.personal_username'] %}&type=follow&count=true&size=large"
+            src="https://ghbtns.com/github-btn.html?user={% $config->values['module.setting']['github.personal_username'] %}&amp;type=follow&amp;count=true&amp;size=large"
             frameborder="0"
             scrolling="0"
-            width="220px"
+            width="210px"
             height="30px"
         >
         </iframe>
