@@ -63,7 +63,7 @@ class MainController extends Controller
                 ->param('cmd', '_donations')
                 ->param('item_name', $this->config->values['module.setting']['donation.item_name'])
                 ->param('amount', self::DONATION_AMOUNTS[mt_rand(0, count(self::DONATION_AMOUNTS) - 1)])
-                ->param('return', Uri::get('ph7cms-helper', 'main', 'validator', self::HASH_VALIDATION));
+                ->param('return', Uri::get('ph7cms-helper', 'main', 'donationvalidator', self::HASH_VALIDATION));
 
             $this->view->form_action = $oPayPal->getUrl();
             $this->view->form_body = $oPayPal->generate();
@@ -74,9 +74,9 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function validator($sHash = null)
+    public function donationValidator($sHash = null)
     {
-        if (!empty($sHash) && $this->checkHash($sHash)) {
+        if (!empty($sHash) && $this->donationCheckHash($sHash)) {
             if (!$this->oValidateModel->is()) {
                 // Set the site to "validated" status
                 $this->oValidateModel->set();
@@ -122,7 +122,7 @@ class MainController extends Controller
     /**
      * @return bool
      */
-    private function checkHash($sHash)
+    private function donationCheckHash($sHash)
     {
         $sHash = substr($sHash, self::HASH_VALIDATION_START_POSITION, self::HASH_VALIDATION_LENGTH);
 
