@@ -25,7 +25,10 @@ class MainController extends Controller
     const VIEW_OPTIONS = [
         'donationbox',
         'reviewbox',
-        'githubbox'
+        'githubbox',
+        'stargithubbox',
+        'forkgithubbox',
+        'followgithubbox'
     ];
 
     const DONATION_AMOUNTS = [
