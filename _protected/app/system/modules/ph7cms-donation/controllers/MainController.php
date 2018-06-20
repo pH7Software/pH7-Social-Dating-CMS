@@ -21,6 +21,15 @@ class MainController extends Controller
     const HASH_VALIDATION_START_POSITION = 3;
     const HASH_VALIDATION_LENGTH = 24;
 
+    const DONATION_AMOUNTS = [
+        10,
+        19,
+        39,
+        49,
+        77,
+        99
+    ];
+
     /** @var ValidateSiteModel */
     private $oValidateModel;
 
@@ -41,7 +50,7 @@ class MainController extends Controller
             ->param('currency_code', $this->config->values['module.setting']['currency'])
             ->param('cmd', '_donations')
             ->param('item_name', $this->config->values['module.setting']['donation.item_name'])
-            ->param('amount', $this->config->values['module.setting']['donation.amount'])
+            ->param('amount', self::DONATION_AMOUNTS[mt_rand(0, count(self::DONATION_AMOUNTS)-1)])
             ->param('return', Uri::get('ph7cms-donation', 'main', 'validator', self::HASH_VALIDATION));
 
         $this->view->form_action = $oPayPal->getUrl();
