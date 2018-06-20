@@ -38,7 +38,7 @@ class ValidateSiteCore
             !$oSession->exists(self::SESS_IS_VISITED)
         ) {
             Header::redirect(
-                Uri::get('ph7cms-donation', 'main', 'donationbox')
+                Uri::get('ph7cms-helper', 'main', 'donationbox')
             );
         }
 

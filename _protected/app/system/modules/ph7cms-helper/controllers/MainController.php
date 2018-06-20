@@ -51,7 +51,7 @@ class MainController extends Controller
             ->param('cmd', '_donations')
             ->param('item_name', $this->config->values['module.setting']['donation.item_name'])
             ->param('amount', self::DONATION_AMOUNTS[mt_rand(0, count(self::DONATION_AMOUNTS)-1)])
-            ->param('return', Uri::get('ph7cms-donation', 'main', 'validator', self::HASH_VALIDATION));
+            ->param('return', Uri::get('ph7cms-helper', 'main', 'validator', self::HASH_VALIDATION));
 
         $this->view->form_action = $oPayPal->getUrl();
         $this->view->form_body = $oPayPal->generate();
