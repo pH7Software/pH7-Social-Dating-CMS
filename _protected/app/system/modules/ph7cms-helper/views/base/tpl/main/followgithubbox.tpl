@@ -2,6 +2,8 @@
     <div id="box_block" class="center">
         <h1>{lang 'Follow pH7CMS on Github!'}</h1>
 
+        <p>&nbsp;</p>
+
         <iframe
             src="https://ghbtns.com/github-btn.html?user={% $config->values['module.setting']['github.personal_username'] %}&type=follow&count=true&size=large"
             frameborder="0"
