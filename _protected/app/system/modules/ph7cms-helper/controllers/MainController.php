@@ -95,6 +95,16 @@ class MainController extends Controller
     }
 
     /**
+     * @return bool
+     */
+    private function donationCheckHash($sHash)
+    {
+        $sHash = substr($sHash, self::HASH_VALIDATION_START_POSITION, self::HASH_VALIDATION_LENGTH);
+
+        return self::INTERNAL_VERIFY_HASH === sha1($sHash);
+    }
+
+    /**
      * @return string
      */
     private function getSuggestionBox()
@@ -117,15 +127,5 @@ class MainController extends Controller
     private function doesViewExist($sViewName)
     {
         return in_array($sViewName, self::VIEW_OPTIONS);
-    }
-
-    /**
-     * @return bool
-     */
-    private function donationCheckHash($sHash)
-    {
-        $sHash = substr($sHash, self::HASH_VALIDATION_START_POSITION, self::HASH_VALIDATION_LENGTH);
-
-        return self::INTERNAL_VERIFY_HASH === sha1($sHash);
     }
 }
