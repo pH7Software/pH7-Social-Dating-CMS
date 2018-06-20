@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <div id="box_block" class="center">
-        <h1>{lang 'Follow pH7CMS on Github!'}</h1>
+        <h1>{lang 'Follow pH7CMS on <a href="%0%">Github</a>!', $config->values['module.setting']['github.repository_link']}</h1>
 
         <p>&nbsp;</p>
 
