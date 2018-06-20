@@ -33,8 +33,8 @@ class ValidateSiteCore
 
         // After over 2 months, if the site is still not validated, maybe the validation box doesn't really work...,
         // so we redirect directly to the page form
-        if (
-            !$oValidateSiteModel->is() && VDate::setTime(self::VALIDATE_FORM_PAGE_DELAY) >= $iSinceSiteCreated &&
+        if (!$oValidateSiteModel->is() &&
+            VDate::setTime(self::VALIDATE_FORM_PAGE_DELAY) >= $iSinceSiteCreated &&
             !$oSession->exists(self::SESS_IS_VISITED)
         ) {
             Header::redirect(
