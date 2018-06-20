@@ -91,8 +91,8 @@ class PH7Tpl extends Kernel implements GenerableFile
     /** @var string */
     private $sCacheDirFile;
 
-    /** @var string */
-    private $sTplExt = '.tpl'; // Default extension
+    /** @var string Template extension */
+    private $sTplExt = '.tpl';
 
     /** @var bool */
     private $bCaching = false;
@@ -115,7 +115,7 @@ class PH7Tpl extends Kernel implements GenerableFile
     /** @var PH7Tpl */
     private $_oVars;
 
-    // Hack that keeps the $config variable in the template
+    // Hack that keeps the $config variable in the template files
     protected $config;
 
     public function __construct()
