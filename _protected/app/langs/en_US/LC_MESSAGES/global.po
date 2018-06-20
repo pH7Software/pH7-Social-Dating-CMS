@@ -23893,27 +23893,27 @@ msgstr ""
 msgid "Add new Membership"
 msgstr ""
 
-#: _protected/data/cache/pH7tpl_compile/ph7cms-helper_b13ebfad73877e8b3c6c20bb96b30b6d/base/main/donationbox.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/ph7cms-helper_b13ebfad73877e8b3c6c20bb96b30b6d/base/main/suggestionbox.cpl.php:19
 msgid "Make Your Website Better!"
 msgstr ""
 
-#: _protected/data/cache/pH7tpl_compile/ph7cms-helper_b13ebfad73877e8b3c6c20bb96b30b6d/base/main/donationbox.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/ph7cms-helper_b13ebfad73877e8b3c6c20bb96b30b6d/base/main/suggestionbox.cpl.php:19
 msgid "-OR-"
 msgstr ""
 
-#: _protected/data/cache/pH7tpl_compile/ph7cms-helper_b13ebfad73877e8b3c6c20bb96b30b6d/base/main/donationbox.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/ph7cms-helper_b13ebfad73877e8b3c6c20bb96b30b6d/base/main/suggestionbox.cpl.php:19
 msgid "Become a Patron!"
 msgstr ""
 
-#: _protected/data/cache/pH7tpl_compile/ph7cms-helper_b13ebfad73877e8b3c6c20bb96b30b6d/base/main/donationbox.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/ph7cms-helper_b13ebfad73877e8b3c6c20bb96b30b6d/base/main/suggestionbox.cpl.php:19
 msgid "Will You Be Nice Today...?"
 msgstr ""
 
-#: _protected/data/cache/pH7tpl_compile/ph7cms-helper_b13ebfad73877e8b3c6c20bb96b30b6d/base/main/donationbox.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/ph7cms-helper_b13ebfad73877e8b3c6c20bb96b30b6d/base/main/suggestionbox.cpl.php:19
 msgid "And make your website better with regular updates."
 msgstr ""
 
-#: _protected/data/cache/pH7tpl_compile/ph7cms-helper_b13ebfad73877e8b3c6c20bb96b30b6d/base/main/donationbox.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/ph7cms-helper_b13ebfad73877e8b3c6c20bb96b30b6d/base/main/suggestionbox.cpl.php:19
 #, php-format
 msgid ""
 "Be like 78% of our users who contribute to the software on a regular basis."

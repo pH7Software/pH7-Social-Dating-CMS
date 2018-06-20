@@ -22,7 +22,7 @@ class MainController extends Controller
         if (ValidateSiteCore::needInject(new ValidateSiteCoreModel, $this->session)) {
             $this->design->addJs(
                 PH7_LAYOUT . PH7_SYS . PH7_MOD . 'ph7cms-helper' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
-                'donationbox.js'
+                'suggestionbox.js'
             );
         }
 

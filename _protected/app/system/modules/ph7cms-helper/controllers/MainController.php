@@ -40,7 +40,7 @@ class MainController extends Controller
         $this->oValidateModel = new ValidateSiteModel;
     }
 
-    public function donationBox()
+    public function suggestionBox()
     {
         $this->session->set(ValidateSiteCore::SESS_IS_VISITED, 1);
         $this->view->page_title = t('Will You Help pH7CMS?');
