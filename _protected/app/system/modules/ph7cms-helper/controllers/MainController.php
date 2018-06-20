@@ -109,8 +109,7 @@ class MainController extends Controller
      */
     private function getSuggestionBox()
     {
-        if (
-            $this->httpRequest->getExists('box') &&
+        if ($this->httpRequest->getExists('box') &&
             $this->doesViewExist($this->httpRequest->get('box'))
         ) {
             return $this->httpRequest->get('box');
