@@ -12,10 +12,8 @@ namespace PH7;
 
 use PH7\Framework\Analytics\Statistic;
 use PH7\Framework\Date\Various as VDate;
-use PH7\Framework\Geo\Map\Map;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Module\Various as SysMod;
-use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 use stdClass;
@@ -87,8 +85,7 @@ class ProfileController extends ProfileBaseController
                 t($oUser->sex), $aData['age'], t($aData['country']), $aData['city'], $aData['state']);
 
             $this->setMenuBar($aData['first_name'], $oUser);
-
-            $this->view->map = $this->getMap($aData['city'], $aData['country'], $oUser);
+            $this->setMap($aData['city'], $aData['country'], $oUser);
 
             $this->view->id = $this->iProfileId;
             $this->view->username = $oUser->username;
@@ -117,34 +114,6 @@ class ProfileController extends ProfileBaseController
         }
 
         $this->output();
-    }
-
-    /**
-     * Get the Google Map.
-     *
-     * @param string $sCity
-     * @param string $sCountry
-     * @param stdClass $oUser
-     *
-     * @return string The Google Maps code.
-     */
-    private function getMap($sCity, $sCountry, stdClass $oUser)
-    {
-        $sFullAddress = $sCity . ' ' . t($sCountry);
-        $sMarkerText = t('Meet <b>%0%</b> near here!', $oUser->username);
-
-        $oMap = new Map;
-        $oMap->setKey(DbConfig::getSetting('googleApiKey'));
-        $oMap->setCenter($sFullAddress);
-        $oMap->setSize(self::MAP_WIDTH_SIZE, self::MAP_HEIGHT_SIZE);
-        $oMap->setDivId('profile_map');
-        $oMap->setZoom(self::MAP_ZOOM_LEVEL);
-        $oMap->addMarkerByAddress($sFullAddress, $sMarkerText, $sMarkerText);
-        $oMap->generate();
-        $sMap = $oMap->getMap();
-        unset($oMap);
-
-        return $sMap;
     }
 
     /**

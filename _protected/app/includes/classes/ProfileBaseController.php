@@ -8,9 +8,11 @@
 
 namespace PH7;
 
+use PH7\Framework\Geo\Map\Map;
 use PH7\Framework\Layout\Html\Meta;
 use PH7\Framework\Math\Measure\Year;
 use PH7\Framework\Module\Various as SysMod;
+use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Parse\Emoticon;
 use PH7\Framework\Security\Ban\Ban;
@@ -20,6 +22,10 @@ use stdClass;
 
 abstract class ProfileBaseController extends Controller
 {
+    const MAP_ZOOM_LEVEL = 10;
+    const MAP_WIDTH_SIZE = '100%';
+    const MAP_HEIGHT_SIZE = '300px';
+
     /** @var int */
     protected $iProfileId;
 
@@ -87,6 +93,31 @@ abstract class ProfileBaseController extends Controller
         $this->view->mail_link = $this->getMailLink($sFirstName, $oUser);
         $this->view->messenger_link = $this->getMessengerLink($sFirstName, $oUser);
         $this->view->befriend_link = $this->getBeFriendLink($sFirstName, $oUser);
+    }
+
+    /**
+     * Set the Google Maps code to the view.
+     *
+     * @param string $sCity
+     * @param string $sCountry
+     * @param stdClass $oUser
+     *
+     * @return void
+     */
+    protected function setMap($sCity, $sCountry, stdClass $oUser)
+    {
+        $sFullAddress = $sCity . ' ' . t($sCountry);
+        $sMarkerText = t('Meet <b>%0%</b> near here!', $oUser->username);
+        $oMap = new Map;
+        $oMap->setKey(DbConfig::getSetting('googleApiKey'));
+        $oMap->setCenter($sFullAddress);
+        $oMap->setSize(static::MAP_WIDTH_SIZE, static::MAP_HEIGHT_SIZE);
+        $oMap->setDivId('profile_map');
+        $oMap->setZoom(static::MAP_ZOOM_LEVEL);
+        $oMap->addMarkerByAddress($sFullAddress, $sMarkerText, $sMarkerText);
+        $oMap->generate();
+        $this->view->map = $oMap->getMap();
+        unset($oMap);
     }
 
     /**
