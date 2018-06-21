@@ -14,6 +14,7 @@ use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Parse\Emoticon;
 use PH7\Framework\Security\Ban\Ban;
+use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Url\Url;
 use stdClass;
 
