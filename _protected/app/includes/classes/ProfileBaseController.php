@@ -30,6 +30,13 @@ abstract class ProfileBaseController extends Controller
     protected $bUserAuth;
 
     /**
+     * Index displaying the user profile page.
+     *
+     * @return void
+     */
+    abstract public function index();
+
+    /**
      * Privacy Profile.
      *
      * @param UserCoreModel $oUserModel
