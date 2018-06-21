@@ -22,6 +22,11 @@ use stdClass;
 
 abstract class ProfileBaseController extends Controller
 {
+    /**
+     * Default Map settings.
+     * These constants are likely to be modified in the child class
+     * thanks static:: keyword to use late static binding.
+     */
     const MAP_ZOOM_LEVEL = 10;
     const MAP_WIDTH_SIZE = '100%';
     const MAP_HEIGHT_SIZE = '300px';
