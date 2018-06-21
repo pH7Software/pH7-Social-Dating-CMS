@@ -153,10 +153,9 @@ class ProfileController extends ProfileBaseController
      *
      * @return void
      */
-    private function setMenuBar($sFirstName, stdClass $oUser)
+    protected function setMenuBar($sFirstName, stdClass $oUser)
     {
-        $this->view->mail_link = $this->getMailLink($sFirstName, $oUser);
-        $this->view->messenger_link = $this->getMessengerLink($sFirstName, $oUser);
+        parent::setMenuBar($sFirstName, $oUser);
 
         if (SysMod::isEnabled('friend')) {
             $this->view->friend_link = $this->getFriendLinkName();
@@ -164,8 +163,6 @@ class ProfileController extends ProfileBaseController
             if ($this->bUserAuth) {
                 $this->view->mutual_friend_link = $this->getMutualFriendLinkName();
             }
-
-            $this->view->befriend_link = $this->getBeFriendLink($sFirstName, $oUser);
         }
     }
 

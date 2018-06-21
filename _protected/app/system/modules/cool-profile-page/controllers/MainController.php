@@ -130,19 +130,6 @@ class MainController extends ProfileBaseController
     }
 
     /**
-     * @param string $sFirstName
-     * @param stdClass $oUser
-     *
-     * @return void
-     */
-    private function setMenuBar($sFirstName, stdClass $oUser)
-    {
-        $this->view->mail_link = $this->getMailLink($sFirstName, $oUser);
-        $this->view->messenger_link = $this->getMessengerLink($sFirstName, $oUser);
-        $this->view->befriend_link = $this->getBeFriendLink($sFirstName, $oUser);
-    }
-
-    /**
      * Add the General and Tabs Menu stylesheets.
      *
      * @return void
