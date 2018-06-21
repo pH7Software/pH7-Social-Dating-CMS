@@ -20,7 +20,7 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 use stdClass;
 
-class ProfileController extends UserBaseController
+class ProfileController extends ProfileBaseController
 {
     const MAP_ZOOM_LEVEL = 12;
     const MAP_WIDTH_SIZE = '100%';

@@ -16,7 +16,7 @@ use PH7\Framework\Geo\Map\Map;
 use PH7\Framework\Mvc\Model\DbConfig;
 use stdClass;
 
-class MainController extends UserBaseController
+class MainController extends ProfileBaseController
 {
     const MAP_ZOOM_LEVEL = 10;
     const MAP_WIDTH_SIZE = '100%';
