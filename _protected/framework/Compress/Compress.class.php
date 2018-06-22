@@ -14,6 +14,7 @@ namespace PH7\Framework\Compress;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Compress\ValueObject\FileType;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Url\Url;
 
@@ -108,7 +109,7 @@ class Compress
     {
         if ($this->bJavaCompiler) {
             file_put_contents($this->sTmpFilePath, $sContent);
-            $sCssMinified = exec("java -jar $this->sYuiCompressorPath $this->sTmpFilePath --type css --charset utf-8");
+            $sCssMinified = $this->executeYuiCompressor(FileType::CSS_TYPE);
             unlink($this->sTmpFilePath);
         } else {
             // Backup any values within single or double quotes
@@ -159,7 +160,7 @@ class Compress
     {
         if ($this->bJavaCompiler) {
             file_put_contents($this->sTmpFilePath, $sContent);
-            $sJsMinified = exec("java -jar $this->sYuiCompressorPath $this->sTmpFilePath --type js --charset utf-8");
+            $sJsMinified = $this->executeYuiCompressor(FileType::JS_TYPE);
             unlink($this->sTmpFilePath);
         } else {
             // URL-encoded file contents
@@ -238,5 +239,22 @@ class Compress
         }
 
         return false;
+    }
+
+    /**
+     * @param FileType $oType
+     *
+     * @return void
+     */
+    private function executeYuiCompressor(FileType $oType)
+    {
+        exec(
+            sprintf(
+                'java -jar %s %s --type %s --charset utf-8',
+                $this->sYuiCompressorPath,
+                $this->sTmpFilePath,
+                $oType->getValue()
+            )
+        );
     }
 }
