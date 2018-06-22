@@ -33,7 +33,6 @@
 <ul>
     <li>Version - 5.6 or higher</li>
     <li>PDO extension</li>
-    <li>exec() PHP (system program execution) must be allowed</li>
     <li>GD complied with your PHP Build</li>
     <li>PHP CURL extension</li>
     <li>Zip compression PHP module</li>
@@ -50,6 +49,11 @@
     <li>file_uploads - On</li>
     <li>allow_url_fopen - On</li>
     <li>allow_url_include - Off</li>
+    <li>
+        exec() function is needed if "Video" module is enabled (to execute FFmpeg program),<br />
+        exec() function is needed if you use the "Upgrade"/"Third-Party Module" installation wizard,<br />
+        exec() function is needed if the minify Java compiler is enabled (disabled by default).
+    </li>
 </ul>
 
 <h3>Recommended:</h3>
