@@ -375,10 +375,11 @@ class Design
             echo '
                 <!-- ', sprintf(Kernel::SOFTWARE_COPYRIGHT, date('Y')), ' -->
                 <!-- Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->
-                <!-- You must leave this comment.
+                <!-- This notice cannot be removed in any case.
                 This open source software is distributed for free and you must respect the thousands of days, months and several years it took to develop it.
+                Think to the developer who worked hard for years coding what you use.
                 All rights reserved to ', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_COMPANY, '
-                You can never claim that you took, developed, or helped in any other way in this software if it is wrong -->';
+                You can never claim that you own the code, developed or helped the software if it is not the case -->';
         }
 
         echo '<!-- "Powered by ', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_VERSION_NAME, ', ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->';
