@@ -10,21 +10,22 @@ namespace PH7\Framework\Service\SearchImage;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Service\SearchImage\Url as ImageUrl;
 use PH7\Framework\Url\Url as UrlHelper;
 
 class Google implements Imageable
 {
     const SEARCH_IMAGE_LINK = 'https://www.google.com/searchbyimage?image_url=';
 
-    /** @var string */
+    /** @var ImageUrl */
     private $oImageUrl;
 
     /**
-     * @param Url $oImageUrl
+     * @param ImageUrl $oImageUrl
      *
      * @throws InvalidUrlException
      */
-    public function __construct(Url $oImageUrl)
+    public function __construct(ImageUrl $oImageUrl)
     {
         $this->oImageUrl = $oImageUrl;
     }
