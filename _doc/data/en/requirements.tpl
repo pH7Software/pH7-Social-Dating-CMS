@@ -51,7 +51,7 @@
     <li>allow_url_include - Off</li>
     <li>
         exec() function is needed if "Video" module is enabled (to execute FFmpeg program),<br />
-        exec() function is needed if you use the "Upgrade"/"Third-Party Module" installation wizard,<br />
+        exec() function is needed if you use the "Upgrade"/"3rd-party Mods Manager" installation wizard,<br />
         exec() function is needed if the minify Java compiler is enabled (disabled by default).
     </li>
 </ul>
