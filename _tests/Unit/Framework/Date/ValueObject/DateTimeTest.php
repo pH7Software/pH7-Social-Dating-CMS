@@ -14,18 +14,18 @@ use PHPUnit_Framework_TestCase;
 
 class DateTimeTest extends PHPUnit_Framework_TestCase
 {
-    public function testInvalidDateTime()
-    {
-        $this->expectException(InvalidDateFormatException::class);
-
-        new VODateTime('31-05-2018 10:00:05');
-    }
-
     public function testGetDateTimeValue()
     {
         $sDateValue = '2018-05-31 10:00:05';
 
         $oDatetime = new VODateTime($sDateValue);
         $this->assertSame($sDateValue, $oDatetime->asString());
+    }
+
+    public function testInvalidDateTime()
+    {
+        $this->expectException(InvalidDateFormatException::class);
+
+        new VODateTime('31-05-2018 10:00:05');
     }
 }
