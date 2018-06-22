@@ -35,7 +35,7 @@ abstract class Kernel
     const SOFTWARE_EMAIL = 'hello@ph7cms.com';
     const SOFTWARE_TWITTER = '@pH7Soft';
     const SOFTWARE_AUTHOR = 'Pierre-Henry Soria';
-    const SOFTWARE_COMPANY = 'Social Dating CMS | Pierre-Henry Soria';
+    const SOFTWARE_COMPANY = 'Pierre-Henry Soria';
     const SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.';
     const SOFTWARE_COPYRIGHT = '(c) 2011-%s, Pierre-Henry Soria. All Rights Reserved.';
     const SOFTWARE_VERSION_NAME = Version::KERNEL_VERSION_NAME;
