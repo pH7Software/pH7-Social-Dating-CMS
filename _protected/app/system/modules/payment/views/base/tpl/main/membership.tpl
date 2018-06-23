@@ -29,8 +29,17 @@
                                     <a class="btn btn-default" href="{{ $design->url('payment', 'main', 'pay', $membership->groupId) }}" title="{lang 'Purchase this membership!'}">{lang 'Choose It'}</a>
                                 </p>
                             </li>
+                        {else}
+                            {{ $not_found = true }}
                         {/if}
                     {/each}
+
+                    {if isset($not_found)}
+                        <li class="red">
+                            {lang 'There are no other memberships available for the moment.'}<br />
+                            {lang 'Please come back later on.'}
+                        </li>
+                    {/if}
                 </ul>
             </div>
         </div>
