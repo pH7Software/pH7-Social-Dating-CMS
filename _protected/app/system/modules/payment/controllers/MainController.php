@@ -31,6 +31,13 @@ class MainController extends Controller
 
     const REDIRECTION_DELAY = 4; // In seconds
 
+    const PAYMENT_GATEWAYS = [
+        PayPal::class,
+        Braintree::class,
+        Stripe::class,
+        TwoCO::class
+    ];
+
     /** @var AffiliateCoreModel */
     protected $oUserModel;
 
@@ -116,8 +123,8 @@ class MainController extends Controller
                     if ($this->oUserModel->updateMembership(
                         $iItemNumber,
                         $this->iProfileId,
-                        $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
-                    ) {
+                        $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+                    )) {
                         $this->bStatus = true; // Status is OK
                         $this->updateUserGroupId($iItemNumber);
                         // PayPal will call automatically the "notification()" method thanks its IPN feature and "notify_url" form attribute.
@@ -178,8 +185,8 @@ class MainController extends Controller
                         if ($this->oUserModel->updateMembership(
                             $iItemNumber,
                             $this->iProfileId,
-                            $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
-                        ) {
+                            $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+                        )) {
                             $this->bStatus = true; // Status is OK
                             $this->updateUserGroupId($iItemNumber);
                             $this->notification(Braintree::class, $iItemNumber);
@@ -203,9 +210,9 @@ class MainController extends Controller
                     if ($this->oUserModel->updateMembership(
                         $iItemNumber,
                         $this->iProfileId,
-                        $this->dateTime->get()
-                            ->dateTime('Y-m-d H:i:s')
-                    )) {
+                        $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+                        )
+                    ) {
                         $this->bStatus = true; // Status is OK
                         $this->updateUserGroupId($iItemNumber);
                         $this->notification(TwoCO::class, $iItemNumber);
@@ -252,9 +259,7 @@ class MainController extends Controller
     public function notification($sGatewayName = '', $iItemNumber = 0)
     {
         // Save buyer information to a log file
-        if ($sGatewayName === PayPal::class || $sGatewayName === Braintree::class ||
-            $sGatewayName === Stripe::class || $sGatewayName === TwoCO::class
-        ) {
+        if ($this->isValidPaymentGateway($sGatewayName)) {
             // Add payment info into the log file
             $this->log(new $sGatewayName(false), t('%0% payment was made with the following information:', $sGatewayName));
         }
@@ -391,6 +396,16 @@ class MainController extends Controller
     private function isMembershipExpirable(stdClass $oInfo)
     {
         return $oInfo->expirationDays != 0 && !empty($oInfo->membershipDate);
+    }
+
+    /**
+     * @param string $sGatewayName
+     *
+     * @return bool
+     */
+    private function isValidPaymentGateway($sGatewayName)
+    {
+        return in_array($sGatewayName, self::PAYMENT_GATEWAYS, true);
     }
 
     /**
