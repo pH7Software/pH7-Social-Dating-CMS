@@ -123,7 +123,7 @@ class MainController extends Controller
                     if ($this->oUserModel->updateMembership(
                         $iItemNumber,
                         $this->iProfileId,
-                        $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+                        $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
                     )) {
                         $this->bStatus = true; // Status is OK
                         $this->updateUserGroupId($iItemNumber);
@@ -154,7 +154,7 @@ class MainController extends Controller
                             if ($this->oUserModel->updateMembership(
                                 $iItemNumber,
                                 $this->iProfileId,
-                                $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+                                $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
                             )) {
                                 $this->bStatus = true; // Status is OK
                                 $this->updateUserGroupId($iItemNumber);
@@ -185,7 +185,7 @@ class MainController extends Controller
                         if ($this->oUserModel->updateMembership(
                             $iItemNumber,
                             $this->iProfileId,
-                            $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+                            $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
                         )) {
                             $this->bStatus = true; // Status is OK
                             $this->updateUserGroupId($iItemNumber);
@@ -210,7 +210,7 @@ class MainController extends Controller
                     if ($this->oUserModel->updateMembership(
                         $iItemNumber,
                         $this->iProfileId,
-                        $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+                        $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
                         )
                     ) {
                         $this->bStatus = true; // Status is OK
