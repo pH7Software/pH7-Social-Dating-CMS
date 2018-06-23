@@ -310,6 +310,7 @@ class MainController extends Controller
         $iAffCom = ($iAmount * $this->config->values['module.setting']['rate.user_membership_payment'] / 100);
 
         if ($iAffCom > 0) {
+            $this->log(null, t("Update affiliated #%0%'s commission."));
             $this->oUserModel->updateUserJoinCom($iAffId, $iAffCom);
         }
     }
