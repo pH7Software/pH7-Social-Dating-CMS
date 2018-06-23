@@ -231,7 +231,7 @@ class MainController extends Controller
         }
 
         // Set the page titles
-        $this->sTitle = ($this->bStatus) ? t('Thank you!') : t('Error occurred!');
+        $this->sTitle = $this->bStatus ? t('Thank you!') : t('Error occurred!');
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
 
         if ($this->bStatus) {
