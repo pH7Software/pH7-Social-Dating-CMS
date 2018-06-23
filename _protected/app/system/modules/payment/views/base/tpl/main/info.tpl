@@ -4,6 +4,6 @@
         <li  class="bold">{lang 'Expiration: %0%', '<span class="italic">' . $expirationDate . '</span>'}</li>
     </ul>
     <p>
-        <a class="btn btn-primary btn-md" href="{{ $design->url('payment', 'main', 'membership') }}">{lang 'Renew your membership'}</a>
+        <a class="btn btn-primary btn-md" href="{{ $design->url('payment', 'main', 'membership') }}">{lang 'Renew/Upgrade your Membership'}</a>
     </p>
 </div>
