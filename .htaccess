@@ -68,6 +68,19 @@ ServerSignature Off
     </IfModule>
 </FilesMatch>
 
+# Deny access for composer.json and sample htaccess file (since they won't be removed after packaging by _tools/deployment.sh)
+<FilesMatch "composer\.json|sample\.htaccess">
+    # Apache 2.4+
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+
+    # Apache 2.2
+    <IfModule !mod_authz_core.c>
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
 # Prevent .htaccess/.htpasswd from being downloaded
 <Files ~ "^\.ht">
     # Apache 2.4+
