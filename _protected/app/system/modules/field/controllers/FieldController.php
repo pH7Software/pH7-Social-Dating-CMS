@@ -69,9 +69,8 @@ class FieldController extends Controller
             $bStatus = false;
         } else {
             $bStatus = (new FieldModel(Field::getTable($sMod), $sName))->delete();
-            /* Clean UserCoreModel Cache */
             if ($bStatus) {
-                (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
+                Field::clearCache();
             }
         }
 

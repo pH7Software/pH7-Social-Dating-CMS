@@ -8,6 +8,8 @@
 
 namespace PH7;
 
+use PH7\Framework\Cache\Cache;
+
 class Field
 {
     const UNMODIFIABLE_FIELDS = [
@@ -73,6 +75,15 @@ class Field
     public static function unmodifiable($sField)
     {
         return in_array(strtolower($sField), static::UNMODIFIABLE_FIELDS, true);
+    }
 
+    /**
+     * Clean UserCoreModel cache.
+     *
+     * @return void
+     */
+    public static function clearCache()
+    {
+        (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
     }
 }

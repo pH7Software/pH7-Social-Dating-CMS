@@ -32,8 +32,8 @@ class EditFieldFormProcess extends Form
             $bRet = (new FieldModel(Field::getTable($sMod), $sName, $sType, $iLength, $sDefVal))->update();
 
             if ($bRet) {
-                /* Clean UserCoreModel Cache */
-                (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
+                Field::clearCache();
+
                 Header::redirect(
                     Uri::get('field', 'field', 'all', $sMod),
                     t('The field has been edited.')
