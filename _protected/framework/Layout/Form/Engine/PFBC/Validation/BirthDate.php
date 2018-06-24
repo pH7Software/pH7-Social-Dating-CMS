@@ -26,16 +26,18 @@ class BirthDate extends \PFBC\Validation
     }
 
     /**
+     * @param string $sDate
+     *
      * @return bool
      */
-    public function isValid($sValue)
+    public function isValid($sDate)
     {
-        if ($this->isNotApplicable($sValue)) {
+        if ($this->isNotApplicable($sDate)) {
             return true;
         }
 
-        $sValue = (new CDateTime)->get($sValue)->date('m/d/Y');
+        $sDate = (new CDateTime)->get($sDate)->date('m/d/Y');
 
-        return $this->oValidate->birthDate($sValue, $this->iMin, $this->iMax);
+        return $this->oValidate->birthDate($sDate, $this->iMin, $this->iMax);
     }
 }
