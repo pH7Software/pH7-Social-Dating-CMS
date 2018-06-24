@@ -84,13 +84,21 @@ class AdminController extends MainController
             $sMsg = t('This one cannot be deleted.');
         }
 
-        /* Clean UserCoreModel Cache */
-        (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
-
+        $this->clearCache();
         Header::redirect(
             Uri::get('payment', 'admin', 'membershiplist'),
             $sMsg,
             ($bHasError ? Design::ERROR_TYPE : Design::SUCCESS_TYPE)
         );
+    }
+
+    /**
+     * Clean UserCoreModel cache.
+     *
+     * @return void
+     */
+    private function clearCache()
+    {
+        (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
     }
 }
