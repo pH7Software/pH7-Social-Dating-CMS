@@ -1,6 +1,6 @@
 # pH7 Social Dating CMS
 
-### The Most Secure, Powerful & Professional Dating Web App Builder
+### The Most Secure, Powerful & Professional Social Dating Web App Builder
 
 
 [![Build Status](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/build.png?b=master)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/?branch=master) [![PayPal donate button](https://img.shields.io/badge/paypal-donate-orange.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6 "Help keep me off the streets! ;)")
@@ -38,7 +38,8 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Comments
 * Hot or Not
 * Love Calculator
-* Geo-location
+* Matchmaking System
+* Geo-Location
 * People Nearby
 * Photo Albums
 * Videos (and possibility to upload videos from API v3 YouTube, Vimeo, Metacafe and Dailymotion)
