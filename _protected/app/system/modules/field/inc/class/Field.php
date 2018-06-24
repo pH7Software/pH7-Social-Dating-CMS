@@ -84,6 +84,10 @@ class Field
      */
     public static function clearCache()
     {
-        (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
+        (new Cache)->start(
+            UserCoreModel::CACHE_GROUP,
+            null,
+            null
+        )->clear();
     }
 }

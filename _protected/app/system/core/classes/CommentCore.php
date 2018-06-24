@@ -89,7 +89,11 @@ class CommentCore
      */
     public static function clearCache()
     {
-        (new Cache)->start(CommentCoreModel::CACHE_GROUP, null, null)->clear();
+        (new Cache)->start(
+            CommentCoreModel::CACHE_GROUP,
+            null,
+            null
+        )->clear();
     }
 
     /**
