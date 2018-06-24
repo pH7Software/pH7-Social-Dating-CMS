@@ -246,7 +246,6 @@ class MainController extends Controller
             $this->setAutomaticRedirectionToHomepage();
         }
 
-        // Output
         $this->output();
     }
 
