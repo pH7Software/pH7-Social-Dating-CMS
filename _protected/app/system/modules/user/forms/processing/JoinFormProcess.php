@@ -10,6 +10,7 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use DateTime;
 use PH7\Framework\Cookie\Cookie;
 use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Ip\Ip;
@@ -94,7 +95,14 @@ class JoinFormProcess extends Form
     public function step2()
     {
         $iProfileId = $this->oUserModel->getId($this->session->get('mail_step1'));
-        $sBirthDate = $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d');
+        if (JoinForm::FULL_USER_BIRTHDATE_REQUIRED) {
+            $sBirthDate = $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d');
+        } else {
+            $iAge = $this->httpRequest->post('age', 'int');
+            $oDate = new DateTime;
+            $oDate->modify(sprintf('- %d year', $iAge));
+            $sBirthDate = $oDate->format('Y-m-d');
+        }
 
         // WARNING FOT "matchSex" FIELD: Be careful, you should use the Http::NO_CLEAN constant, otherwise Http::post() method removes the special tags
         // and damages the SET function SQL for entry into the database

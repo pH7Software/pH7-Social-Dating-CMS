@@ -17,6 +17,9 @@ use PH7\Framework\Url\Header;
 
 class JoinForm
 {
+    /** @var bool Require users to enter their exact birth date, or just how old they are */
+    const FULL_USER_BIRTHDATE_REQUIRED = false;
+
     public static function step1()
     {
         if ((new Session)->exists('mail_step1')) {
@@ -92,8 +95,16 @@ class JoinForm
 
         $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for a'), 'match_sex', ['male' => t('Man') . ' <i class="fa fa-mars"></i>', 'female' => t('Woman') . ' <i class="fa fa-venus"></i>', 'couple' => t('Couple') . ' <i class="fa fa-venus-mars"></i>'], ['value' => 'male', 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Date(t('Your Date of Birth'), 'birth_date', ['id' => 'birth_date', 'description' => t('Please specify your birth date using the calendar.'), 'onblur' => 'CValid(this.value, this.id)', 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
+        if (self::FULL_USER_BIRTHDATE_REQUIRED) {
+            $oForm->addElement(new \PFBC\Element\Date(t('Your Date of Birth'), 'birth_date', ['id' => 'birth_date', 'description' => t('Please specify your birth date using the calendar.'), 'onblur' => 'CValid(this.value, this.id)', 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
+        } else {
+            $iCurrentYear = date('Y');
+            $iMin = $iCurrentYear - DbConfig::getSetting('maxAgeRegistration');
+            $iMax = $iCurrentYear - DbConfig::getSetting('minAgeRegistration');
+
+            $oForm->addElement(new \PFBC\Element\Range(t('How Old Are You?'), 'age', ['value' => 30, 'min' => $iMin, 'max' => $iMax, 'required' => 1]));
+        }
 
         $oForm->addElement(new \PFBC\Element\Select(t('Your Country'), 'country', Form::getCountryValues(), ['id' => 'str_country', 'value' => Geo::getCountryCode(), 'required' => 1]));
 
