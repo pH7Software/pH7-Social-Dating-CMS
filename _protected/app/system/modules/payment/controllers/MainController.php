@@ -48,7 +48,7 @@ class MainController extends Controller
     protected $sTitle;
 
     /** @var int */
-    protected $iProfileId;
+    private $iProfileId;
 
     /** @var bool Payment status. Default is failure (FALSE) */
     private $bStatus = false;
@@ -295,7 +295,7 @@ class MainController extends Controller
      *
      * @return void
      */
-    protected function updateAffCom()
+    private function updateAffCom()
     {
         // Load the Affiliate config file
         $this->config->load(PH7_PATH_SYS_MOD . 'affiliate' . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
@@ -321,7 +321,7 @@ class MainController extends Controller
      *
      * @return int Number of recipients who were accepted for delivery.
      */
-    protected function sendNotifyMail($iMembershipId)
+    private function sendNotifyMail($iMembershipId)
     {
         $oMembershipData = $this->oPayModel->getMemberships($iMembershipId);
 
@@ -360,7 +360,7 @@ class MainController extends Controller
      *
      * @return void
      */
-    protected function log(ApiInterface $oProvider, $sMsg)
+    private function log(ApiInterface $oProvider, $sMsg)
     {
         if ($this->config->values['module.setting']['log_file.enabled']) {
             $sLogTxt = $sMsg . File::EOL . File::EOL . File::EOL;
@@ -373,7 +373,7 @@ class MainController extends Controller
      *
      * @return void
      */
-    protected function clearCache()
+    private function clearCache()
     {
         (new Cache)->start(UserCoreModel::CACHE_GROUP, 'membershipDetails' . $this->iProfileId, null)->clear();
     }
