@@ -78,5 +78,4 @@ class EditMembershipFormProcess extends Form
         $aPerms = serialize($this->httpRequest->post('perms'));
         $oPayModel->updateMembershipGroup('permissions', $aPerms, $iGroupId);
     }
-
 }
