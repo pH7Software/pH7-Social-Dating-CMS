@@ -52,7 +52,7 @@ class NewsFeedCore
 
         if (!$this->aData = $this->oCache->get()) {
             if (!@$this->oXml->load(static::NEWS_URL)) {
-                throw new PH7Exception('Unable to retrieve news feeds for the URL: "' . static::NEWS_URL . '"');
+                throw new PH7Exception('Unable to retrieve news feeds for the URL: ' . static::NEWS_URL);
             }
 
             $iCount = 0;
