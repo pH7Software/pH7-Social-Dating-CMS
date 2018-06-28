@@ -12,6 +12,7 @@
 namespace PH7;
 
 use DOMDocument;
+use DOMElement;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Error\CException\PH7Exception;
 
@@ -55,6 +56,8 @@ class NewsFeedCore
             }
 
             $iCount = 0;
+
+            /** @var DOMElement $oItem */
             foreach ($this->oXml->getElementsByTagName('item') as $oItem) {
                 $sLink = $oItem->getElementsByTagName('link')->item(0)->nodeValue;
 
