@@ -49,7 +49,7 @@ class NewsFeedCore
      */
     public function getSoftware($iNum = self::DEFAULT_NUMBER_ITEMS)
     {
-        $this->oCache->start(self::CACHE_GROUP, 'software_feed_news' . $iNum, self::CACHE_LIFETIME);
+        $this->oCache->start(self::CACHE_GROUP, 'softwareNewsFeed' . $iNum, self::CACHE_LIFETIME);
 
         if (!$this->aData = $this->oCache->get()) {
             if (!@$this->oXml->load(static::NEWS_URL)) {
