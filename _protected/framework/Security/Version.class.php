@@ -23,6 +23,8 @@ final class Version
     const CACHE_TIME = 86400; // 1 day
     const LATEST_VERSION_URL = 'http://xml.ph7cms.com/software-info.xml';
     const VERSION_PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
+    const FRAMEWORK_TAG_NAME = 'ph7';
+    const PACKAGE_TAG_NAME = 'social-dating-cms';
 
     /**
      * Framework Kernel.
@@ -63,14 +65,13 @@ final class Version
             }
 
             /** @var DOMElement $oSoft */
-            foreach ($oDom->getElementsByTagName('ph7') as $oSoft) {
+            foreach ($oDom->getElementsByTagName(self::FRAMEWORK_TAG_NAME) as $oSoft) {
                 /** @var DOMElement $oInfo */
-                foreach ($oSoft->getElementsByTagName('social-dating-cms') as $oInfo) {
-                    $bIsAlert = self::isUpdateAlertEnabled($oInfo);
-                    $sVerName = $oInfo->getElementsByTagName('name')->item(0)->nodeValue;
-                    $sVerNumber = $oInfo->getElementsByTagName('version')->item(0)->nodeValue;
-                    $sVerBuild = $oInfo->getElementsByTagName('build')->item(0)->nodeValue;
-                }
+                $oInfo = $oSoft->getElementsByTagName(self::PACKAGE_TAG_NAME)->item(0); // Get info for "social-dating-cms" package
+                $bIsAlert = self::isUpdateAlertEnabled($oInfo);
+                $sVerName = $oInfo->getElementsByTagName('name')->item(0)->nodeValue;
+                $sVerNumber = $oInfo->getElementsByTagName('version')->item(0)->nodeValue;
+                $sVerBuild = $oInfo->getElementsByTagName('build')->item(0)->nodeValue;
             }
             unset($oDom);
 
