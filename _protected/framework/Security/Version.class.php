@@ -66,8 +66,9 @@ final class Version
 
             /** @var DOMElement $oSoft */
             foreach ($oDom->getElementsByTagName(self::FRAMEWORK_TAG_NAME) as $oSoft) {
-                /** @var DOMElement $oInfo */
-                $oInfo = $oSoft->getElementsByTagName(self::PACKAGE_TAG_NAME)->item(0); // Get info for "social-dating-cms" package
+                // Get info for "social-dating-cms" package
+                $oInfo = $oSoft->getElementsByTagName(self::PACKAGE_TAG_NAME)->item(0);
+
                 $bIsAlert = self::isUpdateAlertEnabled($oInfo);
                 $sVerName = $oInfo->getElementsByTagName('name')->item(0)->nodeValue;
                 $sVerNumber = $oInfo->getElementsByTagName('version')->item(0)->nodeValue;
