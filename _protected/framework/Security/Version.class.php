@@ -24,7 +24,7 @@ final class Version
     const LATEST_VERSION_URL = 'http://xml.ph7cms.com/software-info.xml';
     const VERSION_PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
     const FRAMEWORK_TAG_NAME = 'ph7';
-    const PACKAGE_TAG_NAME = 'social-dating-cms';
+    const PACKAGE_TAG_NAME = 'ph7builder';
 
     /**
      * Framework Kernel.
@@ -66,7 +66,7 @@ final class Version
 
             /** @var DOMElement $oSoft */
             foreach ($oDom->getElementsByTagName(self::FRAMEWORK_TAG_NAME) as $oSoft) {
-                // Get info for "social-dating-cms" package
+                // Get info for "ph7builder" package
                 $oInfo = $oSoft->getElementsByTagName(self::PACKAGE_TAG_NAME)->item(0);
 
                 $bIsAlert = self::isUpdateAlertEnabled($oInfo);
