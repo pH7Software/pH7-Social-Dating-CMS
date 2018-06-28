@@ -18,7 +18,7 @@ use PH7\Framework\Error\CException\PH7Exception;
 
 class NewsFeedCore
 {
-    const DEF_NUM_NEWS = 10;
+    const DEFAULT_NUMBER_ITEMS = 10;
     const NEWS_URL = 'http://ph7cms.com/feed/';
     const CACHE_GROUP = 'str/sys/mod/admin';
     const CACHE_LIFETIME = 3600 * 24;
@@ -47,7 +47,7 @@ class NewsFeedCore
      *
      * @throws PH7Exception If the Feed URL is not valid.
      */
-    public function getSoftware($iNum = self::DEF_NUM_NEWS)
+    public function getSoftware($iNum = self::DEFAULT_NUMBER_ITEMS)
     {
         $this->oCache->start(self::CACHE_GROUP, 'software_feed_news' . $iNum, self::CACHE_LIFETIME);
 
