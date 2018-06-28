@@ -67,7 +67,7 @@ class NewsFeedCore
                 $this->aData[$sLink]['description'] = $oItem->getElementsByTagName('description')->item(0)->nodeValue;
 
                 if (++$iCount === $iNum) {
-                    break; // If we have the number of news we want, we stop the foreach loop.
+                    break; // If we have the number of news wanted, we stop the foreach loop
                 }
             }
             $this->oCache->put($this->aData);
