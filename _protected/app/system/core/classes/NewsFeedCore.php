@@ -21,6 +21,7 @@ class NewsFeedCore
     const DEF_NUM_NEWS = 10;
     const NEWS_URL = 'http://ph7cms.com/feed/';
     const CACHE_GROUP = 'str/sys/mod/admin';
+    const CACHE_LIFETIME = 3600 * 24;
 
     /** @var DOMDocument */
     private $oXml;
@@ -48,7 +49,7 @@ class NewsFeedCore
      */
     public function getSoftware($iNum = self::DEF_NUM_NEWS)
     {
-        $this->oCache->start(self::CACHE_GROUP, 'software_feed_news' . $iNum, 3600 * 24);
+        $this->oCache->start(self::CACHE_GROUP, 'software_feed_news' . $iNum, self::CACHE_LIFETIME);
 
         if (!$this->aData = $this->oCache->get()) {
             if (!@$this->oXml->load(static::NEWS_URL)) {
