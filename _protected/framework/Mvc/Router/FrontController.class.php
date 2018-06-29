@@ -558,20 +558,7 @@ final class FrontController
                 require_once $this->oRegistry->path_module . 'Bootstrap.php';
             }
 
-            $sController = self::PROJECT_NAMESPACE . $this->oRegistry->controller;
-            try {
-                $oMvc = new ReflectionMethod($sController, $this->oRegistry->action);
-                if ($oMvc->isPublic()) {
-                    // And finally, perform the controller's action
-                    $oMvc->invokeArgs(new $sController, $this->getRequestParameter());
-                } else {
-                    $this->notFound('The <b>' . $this->oRegistry->action . '</b> method is not public!', 1);
-                }
-                unset($oMvc); // Destruct object to minimize CPU resources
-            } catch (ReflectionException $oExcept) {
-                // If the class or method doesn't exist
-                $this->notFound($oExcept->getMessage(), 1);
-            }
+            $this->runController();
         } else {
             $this->notFound('The <b>' . $this->oRegistry->controller . '</b> controller of the <b>' . $this->oRegistry->module .
                 '</b> module is not found.<br />File: <b>' . $this->oRegistry->path_module . '</b>', 1);
@@ -586,6 +573,31 @@ final class FrontController
     private function setRewritingRouter()
     {
         $this->bIsRouterRewritten = true;
+    }
+
+    /**
+     * Run the module's controller (or display an error message if the controller doesn't exist).
+     *
+     * @return void
+     */
+    private function runController()
+    {
+        $sController = self::PROJECT_NAMESPACE . $this->oRegistry->controller;
+        try {
+            $oMvc = new ReflectionMethod($sController, $this->oRegistry->action);
+            if ($oMvc->isPublic()) {
+                // Perform the controller's action
+                $oMvc->invokeArgs(new $sController, $this->getRequestParameter());
+            } else {
+                $this->notFound('The <b>' . $this->oRegistry->action . '</b> method is not public!', 1);
+            }
+
+            // Destruct object to minimize CPU resources
+            unset($oMvc);
+        } catch (ReflectionException $oExcept) {
+            // If the class or method doesn't exist
+            $this->notFound($oExcept->getMessage(), 1);
+        }
     }
 
     /**
