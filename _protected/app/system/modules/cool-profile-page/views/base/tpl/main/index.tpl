@@ -14,7 +14,11 @@
         <p>
             <i class="fa fa-{sex}"></i>
             <span class="bold">{lang 'I am a:'}</span>
-            <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&match_sex='.$sex) }}">{lang $sex}</a></span>
+            <span class="italic">
+                <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&match_sex='.$sex) }}">
+                    {lang $sex}
+                </a>
+            </span>
         </p>
 
         <div class="break"></div>
@@ -23,7 +27,11 @@
             <p>
                 <i class="fa fa-{match_sex}"></i>
                 <span class="bold">{lang 'Looking for a:'}</span>
-                <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}{match_sex_search}">{lang $match_sex}</a></span>
+                <span class="italic">
+                    <a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}{match_sex_search}">
+                        {lang $match_sex}
+                    </a>
+                </span>
             </p>
             <div class="break"></div>
         {/if}
@@ -31,7 +39,12 @@
         {if !empty($age)}
             <p>
                 <span class="bold">{lang 'Age:'}</span>
-                <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$birth_date) }}">{age}</a> <span class="gray">({birth_date_formatted})</span></span>
+                <span class="italic">
+                    <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$birth_date) }}">
+                        {age}
+                    </a>
+                    <span class="gray">({birth_date_formatted})</span>
+                </span>
             </p>
             <div class="break"></div>
         {/if}
@@ -43,46 +56,80 @@
 
                 {if $key == 'height'}
                     <p>
-                        <span class="bold">{lang 'Height:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&height='.$val) }}">{{ (new Framework\Math\Measure\Height($val))->display(true) }}</a></span>
+                        <span class="bold">{lang 'Height:'}</span>
+                        <span class="italic">
+                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&height='.$val) }}">
+                                {{ (new Framework\Math\Measure\Height($val))->display(true) }}
+                            </a>
+                        </span>
                     </p>
                 {elseif $key == 'weight'}
                     <p>
-                        <span class="bold">{lang 'Weight:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&weight='.$val) }}">{{ (new Framework\Math\Measure\Weight($val))->display(true) }}</a></span>
+                        <span class="bold">{lang 'Weight:'}</span>
+                        <span class="italic">
+                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&weight='.$val) }}">
+                                {{ (new Framework\Math\Measure\Weight($val))->display(true) }}
+                            </a>
+                        </span>
                     </p>
                 {elseif $key == 'country'}
                     <p>
-                        <span class="bold">{lang 'Country:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}">{country}</a></span>&nbsp;&nbsp;<img src="{{ $design->getSmallFlagIcon($country_code) }}" title="{country}" alt="{country}" />
+                        <span class="bold">{lang 'Country:'}</span>
+                        <span class="italic">
+                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}">
+                                {country}
+                            </a>
+                        </span>&nbsp;&nbsp;<img src="{{ $design->getSmallFlagIcon($country_code) }}" title="{country}" alt="{country}" />
                     </p>
                 {elseif $key == 'city'}
                     <p>
-                        <span class="bold">{lang 'City/Town:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&city='.$city) }}">{city}</a></span>
+                        <span class="bold">{lang 'City/Town:'}</span>
+                        <span class="italic">
+                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&city='.$city) }}">
+                                {city}
+                            </a>
+                        </span>
                     </p>
                 {elseif $key == 'state'}
                     <p>
-                        <span class="bold">{lang 'State/Province:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&state='.$state) }}">{state}</a></span>
+                        <span class="bold">{lang 'State/Province:'}</span>
+                        <span class="italic">
+                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&state='.$state) }}">
+                                {state}
+                            </a>
+                        </span>
                     </p>
                 {elseif $key == 'zipCode'}
                     <p>
-                        <span class="bold">{lang 'Postal Code:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&zip_code='.$val) }}">{val}</a></span>
+                        <span class="bold">{lang 'Postal Code:'}</span>
+                        <span class="italic">
+                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&zip_code='.$val) }}">
+                                {val}
+                            </a>
+                        </span>
                     </p>
                 {elseif $key == 'website'}
                     <p>
-                        {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Site/Blog:'}</span> <span class="italic">{{ $design->urlTag($val) }}</span>
+                        {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Site/Blog:'}</span>
+                        <span class="italic">{{ $design->urlTag($val) }}</span>
                     </p>
                 {elseif $key == 'socialNetworkSite'}
                     <p>
-                        {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Social Profile:'}</span> <span class="italic">{{ $design->urlTag($val) }}</span>
+                        {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Social Profile:'}</span>
+                        <span class="italic">{{ $design->urlTag($val) }}</span>
                     </p>
                 {else}
                     {{ $lang_key = strtolower($key) }}
 
                     {if strstr($key, 'url')}
                         <p>
-                            {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang $lang_key}</span> <span class="italic">{{ $design->urlTag($val) }}</span>
+                            {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang $lang_key}</span>
+                            <span class="italic">{{ $design->urlTag($val) }}</span>
                         </p>
                     {else}
                         <p>
-                            <span class="bold">{lang $lang_key}</span> <span class="italic">{val}</span>
+                            <span class="bold">{lang $lang_key}</span>
+                            <span class="italic">{val}</span>
                         </p>
                     {/if}
                 {/if}
