@@ -34,10 +34,11 @@ class MainController extends Controller
     const DONATION_AMOUNTS = [
         10,
         19,
+        29,
         39,
         49,
         77,
-        99
+        99,
     ];
 
     /** @var ValidateSiteModel */
