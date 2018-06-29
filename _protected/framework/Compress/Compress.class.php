@@ -109,7 +109,8 @@ class Compress
     {
         if ($this->bJavaCompiler) {
             file_put_contents($this->sTmpFilePath, $sContent);
-            $sCssMinified = $this->executeYuiCompressor(FileType::CSS_TYPE);
+            $oFileType = new FileType(FileType::CSS_TYPE);
+            $sCssMinified = $this->executeYuiCompressor($oFileType);
             unlink($this->sTmpFilePath);
         } else {
             // Backup any values within single or double quotes
@@ -160,7 +161,8 @@ class Compress
     {
         if ($this->bJavaCompiler) {
             file_put_contents($this->sTmpFilePath, $sContent);
-            $sJsMinified = $this->executeYuiCompressor(FileType::JS_TYPE);
+            $oFileType = new FileType(FileType::JS_TYPE);
+            $sJsMinified = $this->executeYuiCompressor($oFileType);
             unlink($this->sTmpFilePath);
         } else {
             // URL-encoded file contents
