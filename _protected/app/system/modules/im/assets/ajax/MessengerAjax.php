@@ -108,7 +108,7 @@ class MessengerAjax extends PermissionCore
             foreach ($_SESSION['messenger_openBoxes'] as $sBox => $sTime) {
                 if (!isset($_SESSION['messenger_boxes'][$sBox])) {
                     $iNow = time() - strtotime($sTime);
-                    $sMsg = t('Sent at %0%', VDate::textTimeStamp($sTime));
+                    $sMsg = t('Sent %0%', VDate::textTimeStamp($sTime));
                     if ($iNow > 180) {
                         $sItems .= $this->setJsonContent(['status' => '2', 'user' => $sBox, 'msg' => $sMsg]);
 

@@ -7,9 +7,9 @@
             {% nl2br(Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($video->description))) %}
         </p>
         <p class="italic">
-            {lang 'Album created on %0%', Framework\Date\Various::textTimeStamp($video->createdDate)}
+            {lang 'Album created %0%', Framework\Date\Various::textTimeStamp($video->createdDate)}
             {if !empty($video->updatedDate)}
-                <br />{lang 'Modified on %0%', Framework\Date\Various::textTimeStamp($video->updatedDate)}
+                <br />{lang 'Modified %0%', Framework\Date\Various::textTimeStamp($video->updatedDate)}
             {/if}
         </p>
         <p class="italic">
