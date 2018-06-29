@@ -15,19 +15,19 @@ defined('PH7') or die('Restricted access');
 class Language
 {
     /** @var string */
-    private $_sLang;
+    private $sLang;
 
     public function __construct()
     {
         if (!empty($_GET['l']) && is_file(PH7_ROOT_INSTALL . 'langs/' . $_GET['l'] . '/install.lang.php')) {
             setcookie(Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang', $_GET['l'], time() + 60 * 60 * 24 * 365, null, null, false, true);
-            $this->_sLang = $_GET['l'];
+            $this->sLang = $_GET['l'];
         } elseif (isset($_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang']) && is_file(PH7_ROOT_INSTALL . 'langs/' . $_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang'] . '/install.lang.php')) {
-            $this->_sLang = $_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang'];
+            $this->sLang = $_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang'];
         } elseif (is_file(PH7_ROOT_INSTALL . 'langs/' . $this->getBrowser() . '/install.lang.php')) {
-            $this->_sLang = $this->getBrowser();
+            $this->sLang = $this->getBrowser();
         } else {
-            $this->_sLang = Controller::DEFAULT_LANG;
+            $this->sLang = Controller::DEFAULT_LANG;
         }
     }
 
@@ -39,11 +39,12 @@ class Language
     public function getBrowser()
     {
         $sLang = explode(',', @$_SERVER['HTTP_ACCEPT_LANGUAGE']);
+
         return htmlspecialchars(strtolower(substr(chop($sLang[0]), 0, 2)), ENT_QUOTES);
     }
 
     public function get()
     {
-        return $this->_sLang;
+        return $this->sLang;
     }
 }
