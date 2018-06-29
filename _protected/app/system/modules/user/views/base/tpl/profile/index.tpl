@@ -205,7 +205,7 @@
                 <p class="bold">{lang 'Description:'}</p>
                 <div class="quote italic">{description}</div>
                 <div class="ad_336_280">
-                    {{ $designModel->ad(336,280) }}
+                    {{ $designModel->ad(336, 280) }}
                 </div>
             </div>
         {/if}
