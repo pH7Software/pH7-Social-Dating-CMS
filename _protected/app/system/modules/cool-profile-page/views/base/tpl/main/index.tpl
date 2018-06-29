@@ -9,6 +9,7 @@
         {{ (new AvatarDesignCore)->lightBox($username, $first_name, $sex, 400) }}
         <h3>{first_name} {middle_name} {last_name}
             {if empty($last_name) || empty($middle_name)}
+                {* show username if middle or last name isn't set *}
                 <span class="italic">({username})</span>
             {/if}
             {{ $design->report($id, $username, $first_name, $sex) }}
