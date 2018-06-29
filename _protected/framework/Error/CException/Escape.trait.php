@@ -16,7 +16,8 @@ defined('PH7') or exit('Restricted access');
 
 trait Escape
 {
-    protected $sAllowTags = '<br><i><em><b><strong><u>';
+    /** @var string */
+    private $sAllowTags = '<br><i><em><b><strong><u>';
 
     /**
      * Escape the exception message.
