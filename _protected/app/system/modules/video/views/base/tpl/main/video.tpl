@@ -7,8 +7,10 @@
             {% nl2br(Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($video->description))) %}
         </p>
         <p class="italic">
-            {lang 'Album created on %0%.', $video->createdDate}
-            {if !empty($video->updatedDate)} <br />{lang 'Modified on %0%.', $video->updatedDate}{/if}
+            {lang 'Album created on %0%', Framework\Date\Various::textTimeStamp($video->createdDate)}
+            {if !empty($video->updatedDate)}
+                <br />{lang 'Modified on %0%', Framework\Date\Various::textTimeStamp($video->updatedDate)}
+            {/if}
         </p>
         <p class="italic">
             {lang 'Views:'} {% Framework\Mvc\Model\Statistic::getView($video->videoId,DbTableName::VIDEO) %}

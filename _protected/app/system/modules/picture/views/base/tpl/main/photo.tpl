@@ -11,8 +11,10 @@
             {% nl2br(Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($picture->description))) %}
         </p>
         <p class="italic">
-            {lang 'Album created on %0%.', $picture->createdDate}
-            {if !empty($picture->updatedDate)} <br />{lang 'Modified on %0%.', $picture->updatedDate}{/if}
+            {lang 'Album created on %0%', Framework\Date\Various::textTimeStamp($picture->createdDate)}
+            {if !empty($picture->updatedDate)}
+                <br />{lang 'Modified on %0%', Framework\Date\Various::textTimeStamp($picture->updatedDate)}
+            {/if}
         </p>
         <p class="italic">
             {lang 'Views:'} {% Framework\Mvc\Model\Statistic::getView($picture->pictureId,DbTableName::PICTURE) %}
