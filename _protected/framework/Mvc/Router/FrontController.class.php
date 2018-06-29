@@ -65,7 +65,7 @@ final class FrontController
     /** @var array */
     private $aRequestParameter = [];
 
-    /** @var boolean */
+    /** @var bool */
     private $bIsRouterRewritten = false;
 
     use Singleton; // Import the Singleton trait
