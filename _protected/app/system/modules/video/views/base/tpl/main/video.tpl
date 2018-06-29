@@ -3,9 +3,16 @@
         <h2 class="s_bMarg">{% Framework\Security\Ban\Ban::filterWord($video->title) %}</h2>
         {{ VideoDesign::generate($video, VideoDesign::MOVIE_MEDIA_MODE, '100%', 440) }}
 
-        <p>{% nl2br(Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($video->description))) %}</p>
-        <p class="italic">{lang 'Album created on %0%.', $video->createdDate} {if !empty($video->updatedDate)} <br />{lang 'Modified on %0%.', $video->updatedDate} {/if}</p>
-        <p class="italic">{lang 'Views:'} {% Framework\Mvc\Model\Statistic::getView($video->videoId,DbTableName::VIDEO) %}</p>
+        <p>
+            {% nl2br(Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($video->description))) %}
+        </p>
+        <p class="italic">
+            {lang 'Album created on %0%.', $video->createdDate}
+            {if !empty($video->updatedDate)} <br />{lang 'Modified on %0%.', $video->updatedDate}{/if}
+        </p>
+        <p class="italic">
+            {lang 'Views:'} {% Framework\Mvc\Model\Statistic::getView($video->videoId,DbTableName::VIDEO) %}
+        </p>
 
         {if $is_user_auth AND $member_id == $video->profileId}
             <div class="small">

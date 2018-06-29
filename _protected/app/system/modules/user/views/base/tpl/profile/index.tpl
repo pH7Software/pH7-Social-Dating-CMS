@@ -284,7 +284,9 @@
 
         <p>
             <span class="bold">{lang 'Views:'}</span>
-            <span class="italic">{% Framework\Mvc\Model\Statistic::getView($id,DbTableName::MEMBER) %}</span>
+            <span class="italic">
+                {% Framework\Mvc\Model\Statistic::getView($id,DbTableName::MEMBER) %}
+            </span>
         </p>
         <div class="break"></div>
 
