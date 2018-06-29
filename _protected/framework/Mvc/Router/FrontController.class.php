@@ -112,7 +112,7 @@ final class FrontController
      */
     private function launchNonRewritingRouters()
     {
-        if (!$this->bIsRouterRewritten) {
+        if (!$this->isRouterRewritten()) {
             if ($this->oUri->fragment(0) === 'm') {
                 $this->simpleModuleRouter();
             } else {
@@ -563,6 +563,16 @@ final class FrontController
             $this->notFound('The <b>' . $this->oRegistry->controller . '</b> controller of the <b>' . $this->oRegistry->module .
                 '</b> module is not found.<br />File: <b>' . $this->oRegistry->path_module . '</b>', 1);
         }
+    }
+
+    /**
+     * Check if the module's action is rewriting by the XML route file or not.
+     *
+     * @return bool
+     */
+    private function isRouterRewritten()
+    {
+        return $this->bIsRouterRewritten;
     }
 
     /**
