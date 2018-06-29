@@ -39,6 +39,7 @@ class MainController extends Controller
         49,
         77,
         99,
+        120
     ];
 
     /** @var ValidateSiteModel */
