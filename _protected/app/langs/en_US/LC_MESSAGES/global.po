@@ -6845,7 +6845,7 @@ msgid "Sorry, we haven't found any photo to Hot Or Not Party."
 msgstr ""
 
 #: _protected/app/system/modules/im/assets/ajax/MessengerAjax.php:111
-msgid "Sent at %0%"
+msgid "Sent %0%"
 msgstr ""
 
 #: _protected/app/system/modules/im/assets/ajax/MessengerAjax.php:127
@@ -23934,11 +23934,11 @@ msgid "in"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/picture_10d1588a50ebee22e4a7c126111489e2/base/main/index.cpl.php:19
-msgid "Album created on %0%."
+msgid "Album created on %0%"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/picture_10d1588a50ebee22e4a7c126111489e2/base/main/index.cpl.php:19
-msgid "Modified on %0%."
+msgid "Modified on %0%"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/related-profile_1f49dc6dff4cb24cff4eb7ff1c16c993/base/main/index.cpl.php:19

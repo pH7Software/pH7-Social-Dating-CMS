@@ -9,7 +9,7 @@
                 </p>
 
                 <p>
-                    {lang 'by'} {{ $design->getProfileLink($album->username) }} {lang 'in'} <a href="{{ $design->url('picture', 'main', 'album', "$album->username,$album->name,$album->albumId") }}" title="{lang 'Album created on %0%.', $album->createdDate} {if !empty($album->updatedDate)}<br /> {lang 'Modified on %0%.', $album->updatedDate} {/if}">{% $album->name %}</a>
+                    {lang 'by'} {{ $design->getProfileLink($album->username) }} {lang 'in'} <a href="{{ $design->url('picture', 'main', 'album', "$album->username,$album->name,$album->albumId") }}" title="{lang 'Album created on %0%', $album->createdDate}{if !empty($album->updatedDate)}<br /> {lang 'Modified on %0%', $album->updatedDate}{/if}">{% $album->name %}</a>
                 </p>
             </div>
         {/each}
