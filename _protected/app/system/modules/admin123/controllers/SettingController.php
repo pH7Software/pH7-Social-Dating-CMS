@@ -143,6 +143,11 @@ class SettingController extends Controller
         DbConfig::clearCache();
     }
 
+    /**
+     * Check if the locale language name (eg "en_US") specified in the URL path exists in pH7CMS.
+     *
+     * @return bool
+     */
     private function langNameFromUrlDoesNotExist()
     {
         $aLangs = $this->file->getDirList(PH7_PATH_APP_LANG);
