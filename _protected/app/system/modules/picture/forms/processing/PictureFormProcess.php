@@ -39,7 +39,7 @@ class PictureFormProcess extends Form
         parent::__construct();
 
         /**
-         * @desc This can cause minor errors (eg if a user sent a file that is not a photo).
+         * This can cause minor errors (eg if a user sent a file that is not a photo).
          * So we hide the errors if we are not in development mode.
          */
         if (!isDebug()) {
@@ -47,7 +47,6 @@ class PictureFormProcess extends Form
         }
 
         /**
-         * @desc
          * Check if the photo album ID is valid. The value must be numeric.
          * This test is necessary because when the selection exists but that no option is available (this can when a user wants to add photos but he has no album)
          * the return value is of type "string" and the value is "1".

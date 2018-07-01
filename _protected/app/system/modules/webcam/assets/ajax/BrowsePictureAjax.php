@@ -56,8 +56,8 @@ class BrowsePictureAjax
 
     public function display()
     {
-        /*
-         * @desc In this file we are scanning the image folders and
+        /**
+         * In this file we are scanning the image folders and
          * return a JSON object with file names. It is used by
          * jQuery to display the images on the front page:
          */
