@@ -104,9 +104,9 @@ class Pagination
                 }
             }
             // Management of other paging buttons...
-            for ($i = 1; $i <= $this->iTotalPages; $i++) {
-                if (($i >= $this->iCurrentPage - self::$aOptions['range'] && $i <= $this->iCurrentPage + self::$aOptions['range']) || $this->iTotalPages <= $this->iShowItems) {
-                    $this->sHtmlOutput .= '<li' . ($this->iCurrentPage == $i ? ' class="active"' : '') . '><a href="' . $this->sPageName . $i . '">' . $i . '</a></li>';
+            for ($iCurrentPage = 1; $iCurrentPage <= $this->iTotalPages; $iCurrentPage++) {
+                if (($iCurrentPage >= $this->iCurrentPage - self::$aOptions['range'] && $iCurrentPage <= $this->iCurrentPage + self::$aOptions['range']) || $this->iTotalPages <= $this->iShowItems) {
+                    $this->sHtmlOutput .= '<li' . ($this->iCurrentPage === $iCurrentPage ? ' class="active"' : '') . '><a href="' . $this->sPageName . $iCurrentPage . '">' . $iCurrentPage . '</a></li>';
                 }
             }
 
