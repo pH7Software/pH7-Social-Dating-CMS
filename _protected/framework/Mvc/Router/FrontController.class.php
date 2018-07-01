@@ -643,7 +643,7 @@ final class FrontController
      */
     private function getRequestParameter()
     {
-        $aRequest = array();
+        $aRequest = [];
 
         if (count($this->aRequestParameter) > 0) {
             foreach ($this->aRequestParameter as $sVal) {
