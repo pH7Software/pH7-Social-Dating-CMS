@@ -371,7 +371,7 @@ class Db
      *
      * @return void
      */
-    public static function free(PDOStatement $rStmt = null, $bCloseConnection = false)
+    public static function free(PDOStatement &$rStmt = null, $bCloseConnection = false)
     {
         // Close Cursor
         if ($rStmt !== null) {
