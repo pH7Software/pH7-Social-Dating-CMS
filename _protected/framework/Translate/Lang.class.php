@@ -260,8 +260,8 @@ namespace {
         $sToken = $aTokens[0];
         $sToken = (Registry::getInstance()->lang !== '' && array_key_exists($sToken, Registry::getInstance()->lang) ? Registry::getInstance()->lang[$sToken] : gettext($sToken));
 
-        for ($i = 1, $iFuncArgs = count($aTokens); $i < $iFuncArgs; $i++) {
-            $sToken = str_replace('%' . ($i - 1) . '%', $aTokens[$i], $sToken);
+        for ($iArg = 1, $iFuncArgs = count($aTokens); $iArg < $iFuncArgs; $iArg++) {
+            $sToken = str_replace('%' . ($iArg - 1) . '%', $aTokens[$iArg], $sToken);
         }
 
         return (new SysVar)->parse($sToken);

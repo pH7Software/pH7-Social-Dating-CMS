@@ -61,9 +61,9 @@ class PictureFormProcess extends Form
          * Resizing and saving some photos
          */
         $aPhotos = $_FILES['photos']['tmp_name'];
-        for ($i = 0, $iNumPhotos = count($aPhotos); $i < $iNumPhotos; $i++) {
+        for ($iPhotoIndex = 0, $iNumPhotos = count($aPhotos); $iPhotoIndex < $iNumPhotos; $iPhotoIndex++) {
             $oPicture1 = new Image(
-                $aPhotos[$i],
+                $aPhotos[$iPhotoIndex],
                 self::MAX_IMAGE_WIDTH,
                 self::MAX_IMAGE_HEIGHT
             );
@@ -118,10 +118,10 @@ class PictureFormProcess extends Form
 
             $this->sApproved = DbConfig::getSetting('pictureManualApproval') == 0 ? '1' : '0';
 
-            $this->checkNudityFilter($aPhotos[$i]);
+            $this->checkNudityFilter($aPhotos[$iPhotoIndex]);
 
             // It creates a nice title if no title is specified.
-            $sTitle = $this->getImageTitle($i, $oPicture1);
+            $sTitle = $this->getImageTitle($iPhotoIndex, $oPicture1);
             $sTitle = MediaCore::cleanTitle($sTitle);
 
             (new PictureModel)->addPhoto(
@@ -167,12 +167,12 @@ class PictureFormProcess extends Form
     /**
      * Create a nice picture title if no title is specified.
      *
-     * @param int $i
+     * @param int $iPhotoIndex
      * @param Image $oPicture
      *
      * @return string
      */
-    private function getImageTitle($i, Image $oPicture)
+    private function getImageTitle($iPhotoIndex, Image $oPicture)
     {
         if ($this->httpRequest->postExists('title') &&
             $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2
@@ -185,7 +185,11 @@ class PictureFormProcess extends Form
             str_replace(
                 ['-', '_'],
                 ' ',
-                str_ireplace(PH7_DOT . $oPicture->getExt(), '', escape($_FILES['photos']['name'][$i], true))
+                str_ireplace(
+                    PH7_DOT . $oPicture->getExt(),
+                    '',
+                    escape($_FILES['photos']['name'][$iPhotoIndex], true)
+                )
             )
         );
     }

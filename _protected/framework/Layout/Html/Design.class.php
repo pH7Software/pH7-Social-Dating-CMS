@@ -183,8 +183,8 @@ class Design
                 echo '<strong>', t('You have'), ' <em>', $iMsgNum, '</em> ', nt('message:', 'messages:', $iMsgNum), '</strong><br />';
             }
 
-            for ($i = 0; $i < $iMsgNum; $i++) {
-                echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aMessages[$i])), '<br />';
+            for ($iKey = 0; $iKey < $iMsgNum; $iKey++) {
+                echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aMessages[$iKey])), '<br />';
             }
 
             echo '\')});</script>';
@@ -224,8 +224,8 @@ class Design
             echo '<script>$(function(){Apprise(\'';
             echo '<strong>', t('You have'), ' <em>', $iErrNum, '</em> ', nt('error:', 'errors:', $iErrNum), '</strong><br />';
 
-            for ($i = 0; $i < $iErrNum; $i++) {
-                echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aErrors[$i])), '<br />';
+            for ($iKey = 0; $iKey < $iErrNum; $iKey++) {
+                echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aErrors[$iKey])), '<br />';
             }
 
             echo '\')});</script>';
@@ -480,8 +480,8 @@ class Design
      */
     public function css()
     {
-        for ($i = 0, $iCount = count($this->aCssDir); $i < $iCount; $i++) {
-            $this->staticFiles('css', $this->aCssDir[$i], $this->aCssFiles[$i], $this->aCssMedia[$i]);
+        for ($iKey = 0, $iCount = count($this->aCssDir); $iKey < $iCount; $iKey++) {
+            $this->staticFiles('css', $this->aCssDir[$iKey], $this->aCssFiles[$iKey], $this->aCssMedia[$iKey]);
         }
 
         unset($this->aCssDir, $this->aCssFiles, $this->aCssMedia);
@@ -492,8 +492,9 @@ class Design
      */
     public function js()
     {
-        for ($i = 0, $iCount = count($this->aJsDir); $i < $iCount; $i++)
-            $this->staticFiles('js', $this->aJsDir[$i], $this->aJsFiles[$i]);
+        for ($iKey = 0, $iCount = count($this->aJsDir); $iKey < $iCount; $iKey++) {
+            $this->staticFiles('js', $this->aJsDir[$iKey], $this->aJsFiles[$iKey]);
+        }
 
         unset($this->aJsDir, $this->aJsFiles);
     }

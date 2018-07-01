@@ -85,14 +85,13 @@ class BrowsePictureAjax
             $aG = array();
         }
 
-        // We loop though the file names returned by glob,
-        // and we populate a second file with modifed timestamps.
+        // Loop though the filenames returned by glob,
+        // and populate a second file with modifed timestamps
+        for ($iIndex = 0, $iCount = count($aG); $iIndex < $iCount; $iIndex++) {
+            $this->aPath = explode('/', $aG[$iIndex]);
+            $this->aNames[$iIndex] = array_pop($this->aPath);
 
-        for ($i = 0, $iCount = count($aG); $i < $iCount; $i++) {
-            $this->aPath = explode('/', $aG[$i]);
-            $this->aNames[$i] = array_pop($this->aPath);
-
-            $this->aModified[$i] = filemtime($aG[$i]);
+            $this->aModified[$iIndex] = filemtime($aG[$iIndex]);
         }
 
         // Multisort will sort the array with the filenames
