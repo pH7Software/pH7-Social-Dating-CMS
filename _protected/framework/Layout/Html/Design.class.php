@@ -80,25 +80,25 @@ class Design
     protected $oHttpRequest;
 
     /** @var array */
-    protected $aCssDir = array();
+    protected $aCssDir = [];
 
     /** @var array */
-    protected $aCssFiles = array();
+    protected $aCssFiles = [];
 
     /** @var array */
-    protected $aCssMedia = array();
+    protected $aCssMedia = [];
 
     /** @var array */
-    protected $aJsDir = array();
+    protected $aJsDir = [];
 
     /** @var array */
-    protected $aJsFiles = array();
+    protected $aJsFiles = [];
 
     /** @var array */
-    protected $aMessages = array();
+    protected $aMessages = [];
 
     /** @var array */
-    protected $aErrors = array();
+    protected $aErrors = [];
 
     public function __construct()
     {

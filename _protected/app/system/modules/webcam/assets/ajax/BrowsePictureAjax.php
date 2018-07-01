@@ -34,10 +34,10 @@ class BrowsePictureAjax
     private $sMsg;
 
     /** @var array */
-    private $aNames = array();
+    private $aNames = [];
 
     /** @var array */
-    private $aModified = array();
+    private $aModified = [];
 
     /** @var int|bool */
     private $mStart = 0;
