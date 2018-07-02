@@ -179,13 +179,13 @@ class Filter
     public function csrf_set_cookie()
     {
         $expire = time() + $this->_csrf_expire;
-        $secure_cookie = (config_item('cookie_secure') === TRUE) ? 1 : 0;
+        $secure_cookie = (config_item('cookie_secure') === true) ? 1 : 0;
 
         if ($secure_cookie) {
-            $req = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : FALSE;
+            $req = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : false;
 
             if (!$req OR $req == 'off') {
-                return FALSE;
+                return false;
             }
         }
 
@@ -265,7 +265,7 @@ class Filter
      *
      * @return    string
      */
-    public function xssClean($str, $is_image = FALSE)
+    public function xssClean($str, $is_image = false)
     {
         /*
          * Is the string an array?
@@ -326,7 +326,7 @@ class Filter
          * large blocks of data, so we use str_replace.
          */
 
-        if (strpos($str, "\t") !== FALSE) {
+        if (strpos($str, "\t") !== false) {
             $str = str_replace("\t", ' ', $str);
         }
 
@@ -448,8 +448,8 @@ class Filter
          * code found and removed/changed during processing.
          */
 
-        if ($is_image === TRUE) {
-            return ($str == $converted_string) ? TRUE : FALSE;
+        if ($is_image === true) {
+            return ($str == $converted_string) ? true : false;
         }
 
         //log_message('debug', "XSS Filtering completed");
@@ -493,7 +493,7 @@ class Filter
      */
     public function entity_decode($str, $charset = 'UTF-8')
     {
-        if (stristr($str, '&') === FALSE) {
+        if (stristr($str, '&') === false) {
             return $str;
         }
 

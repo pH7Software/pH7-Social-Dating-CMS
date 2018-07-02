@@ -96,7 +96,7 @@ class GoogleKeywordsRankAPI
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_TIMEOUT, 10);
         curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 5);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_URL, $url);
         $this->response = curl_exec($curl);
         $infos = curl_getinfo($curl);
