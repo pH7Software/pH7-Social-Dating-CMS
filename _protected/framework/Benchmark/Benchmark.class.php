@@ -36,13 +36,13 @@ class Benchmark
     const SIZE_MODE = 1024;
 
     /** @var float */
-    protected $fStartTime;
+    private $fStartTime;
 
     /** @var float */
-    protected $fEndTime;
+    private $fEndTime;
 
     /** @var int */
-    protected $iMemoryUsage;
+    private $iMemoryUsage;
 
     /**
      * Sets start microtime
