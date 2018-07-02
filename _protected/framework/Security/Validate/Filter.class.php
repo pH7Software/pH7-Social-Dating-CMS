@@ -449,7 +449,7 @@ class Filter
          */
 
         if ($is_image === true) {
-            return ($str == $converted_string) ? true : false;
+            return $str === $converted_string;
         }
 
         //log_message('debug', "XSS Filtering completed");
