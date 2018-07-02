@@ -107,7 +107,7 @@ class Rest extends Http
     private function cleanInputs($mData)
     {
         if (is_array($mData)) {
-            $aCleanInput = array();
+            $aCleanInput = [];
 
             foreach ($mData as $sKey => $sValue) {
                 $aCleanInput[$sKey] = $this->cleanInputs($sValue);

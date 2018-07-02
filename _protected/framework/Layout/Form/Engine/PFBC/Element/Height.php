@@ -19,7 +19,7 @@ class Height extends Select
      */
     public function __construct($sLabel, $sName, array $aProperties = null)
     {
-        $aOptions = array();
+        $aOptions = [];
 
         for ($iHeight = self::MIN_HEIGHT; $iHeight <= self::MAX_HEIGHT; $iHeight += 2) {
             $aOptions[$iHeight] = (new H($iHeight))->display();

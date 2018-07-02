@@ -21,7 +21,7 @@ class YesNo extends Radio
     public function __construct($sLabel, $sName, array $aProperties = null)
     {
         if (!is_array($aProperties)) {
-            $aProperties = array('inline' => 1);
+            $aProperties = ['inline' => 1];
         } elseif (!array_key_exists('inline', $aProperties)) {
             $aProperties['inline'] = 1;
         }

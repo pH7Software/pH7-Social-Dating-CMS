@@ -32,7 +32,7 @@ class Link
     private $sPath;
 
     /** @var array */
-    private $aRet = array();
+    private $aRet = [];
 
     /**
      * Constructor with the instance of the DOMDocument object.

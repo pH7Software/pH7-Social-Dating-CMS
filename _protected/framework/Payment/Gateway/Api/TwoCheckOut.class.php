@@ -72,7 +72,7 @@ class TwoCheckOut extends Provider implements Api
     public function valid($sVendorId = '', $sSecretWord = '')
     {
         // Instant Notification Service Messages
-        $aInsMsg = array();
+        $aInsMsg = [];
 
         foreach ($_POST as $sKey => $sVal) {
             $aInsMsg[$sKey] = $sVal;

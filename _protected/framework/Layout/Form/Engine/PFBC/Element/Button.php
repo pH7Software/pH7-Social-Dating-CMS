@@ -28,10 +28,10 @@ class Button extends Element
             $sLabel = t('Submit');
         }
 
-        $this->attributes = array('type' => 'submit', 'value' => t('Submit'));
+        $this->attributes = ['type' => 'submit', 'value' => t('Submit')];
 
         if (!is_array($aProperties)) {
-            $aProperties = array();
+            $aProperties = [];
         }
 
         if (!empty($sType)) {

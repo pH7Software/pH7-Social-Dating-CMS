@@ -16,7 +16,7 @@ abstract class Base
             /*The property_reference lookup array is created so that properties can be set
             case-insensitively.*/
             $available = array_keys(get_class_vars($class));
-            $property_reference = array();
+            $property_reference = [];
             foreach ($available as $property) {
                 $property_reference[strtolower($property)] = $property;
             }
@@ -24,7 +24,7 @@ abstract class Base
             /*The method reference lookup array is created so that "set" methods can be called
             case-insensitively.*/
             $available = get_class_methods($class);
-            $method_reference = array();
+            $method_reference = [];
             foreach ($available as $method)
                 $method_reference[strtolower($method)] = $method;
 
@@ -73,7 +73,7 @@ abstract class Base
         $str = '';
         if (!empty($this->attributes)) {
             if (!is_array($ignore)) {
-                $ignore = array($ignore);
+                $ignore = [$ignore];
             }
 
             $attributes = array_diff(array_keys($this->attributes), $ignore);

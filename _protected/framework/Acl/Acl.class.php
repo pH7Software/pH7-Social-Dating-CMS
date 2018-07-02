@@ -18,12 +18,12 @@ class Acl
     /**
      * @var array $aRoles
      */
-    protected $aRoles = array();
+    protected $aRoles = [];
 
     /**
      * @var array $aResources
      */
-    protected $aResources = array();
+    protected $aResources = [];
 
     /**
      * @param string $sName

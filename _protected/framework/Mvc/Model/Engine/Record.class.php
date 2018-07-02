@@ -26,13 +26,13 @@ use stdClass;
 class Record
 {
     /** @var array */
-    private $aErrors = array();
+    private $aErrors = [];
 
     /** @var string */
     private $sSql;
 
     /** @var array */
-    private $aValues = array();
+    private $aValues = [];
 
     /** Import the Singleton trait */
     use Singleton;
@@ -275,7 +275,7 @@ class Record
     {
         // Set to default values
         $this->sSql = '';
-        $this->aValues = array();
+        $this->aValues = [];
     }
 
     /**

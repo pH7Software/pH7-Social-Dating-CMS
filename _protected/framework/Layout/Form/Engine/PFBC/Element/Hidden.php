@@ -9,12 +9,12 @@ namespace PFBC\Element;
 class Hidden extends \PFBC\Element
 {
     /** @var array */
-    protected $attributes = array('type' => 'hidden');
+    protected $attributes = ['type' => 'hidden'];
 
     public function __construct($sName, $sValue = '', array $aProperties = null)
     {
         if (!is_array($aProperties))
-            $aProperties = array();
+            $aProperties = [];
 
         if (isset($sValue)) {
             $aProperties['value'] = $sValue;

@@ -9,7 +9,7 @@ namespace PFBC\Element;
 class Textarea extends \PFBC\Element
 {
     /** @var array */
-    protected $attributes = array('class' => 'pfbc-textarea');
+    protected $attributes = ['class' => 'pfbc-textarea'];
 
     public function render()
     {

@@ -53,7 +53,7 @@ class Timezone extends Select
      */
     public function __construct($sLabel, $sName, array $aProperties = null)
     {
-        $aOptions = array();
+        $aOptions = [];
 
         foreach (self::TIMEZONES as $sValue) {
             $aOptions[$sValue] = t($sValue);

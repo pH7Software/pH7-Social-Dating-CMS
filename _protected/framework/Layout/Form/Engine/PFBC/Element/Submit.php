@@ -14,10 +14,10 @@ class Submit extends \PFBC\Element
      */
     public function __construct($sLabel, array $aProperties = null)
     {
-        $this->attributes = array('type' => 'submit', 'value' => $sLabel);
+        $this->attributes = ['type' => 'submit', 'value' => $sLabel];
 
         if (!is_array($aProperties)) {
-            $aProperties = array();
+            $aProperties = [];
         }
 
         parent::__construct('', '', $aProperties);

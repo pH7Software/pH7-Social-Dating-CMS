@@ -56,7 +56,7 @@ abstract class Annotation
 
             $oReflection = new ReflectionClass($this);
 
-            $aSchema = array();
+            $aSchema = [];
 
             foreach ($aClassVars as $sName => $sValue) {
                 $oProperty = $oReflection->getProperty($sName);

@@ -15,7 +15,7 @@ defined('PH7') or exit('Restricted access');
 
 abstract class Provider
 {
-    protected $aParams = array();
+    protected $aParams = [];
 
     /**
      * @param string $sName

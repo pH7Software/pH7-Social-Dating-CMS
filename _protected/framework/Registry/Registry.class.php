@@ -22,7 +22,7 @@ use PH7\Framework\Pattern\Singleton;
 final class Registry
 {
     /** @var array */
-    private static $aData = array();
+    private static $aData = [];
 
     /**
      * Import the Singleton trait.

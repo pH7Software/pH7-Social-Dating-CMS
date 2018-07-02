@@ -20,7 +20,7 @@ class Apc
     private $iDefaultTtl;
 
     /** @var array */
-    private $aTtlOverride = array();
+    private $aTtlOverride = [];
 
     /**
      * @param int $iDefaultTtl

@@ -19,7 +19,7 @@ class Weight extends Select
      */
     public function __construct($sLabel, $sName, array $aProperties = null)
     {
-        $aOptions = array();
+        $aOptions = [];
 
         for ($iWeight = self::MIN_WEIGHT; $iWeight <= self::MAX_WEIGHT; $iWeight += 2) {
             $aOptions[$iWeight] = (new W($iWeight))->display();

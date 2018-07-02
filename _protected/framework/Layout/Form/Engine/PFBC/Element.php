@@ -12,11 +12,11 @@ abstract class Element extends Base
     protected $form;
     protected $label;
     protected $description;
-    protected $validation = array();
+    protected $validation = [];
     protected $preHTML;
     protected $postHTML;
     protected $width;
-    private $errors = array();
+    private $errors = [];
 
     public function __construct($label, $name, array $properties = null)
     {
@@ -40,7 +40,7 @@ abstract class Element extends Base
      */
     public function __sleep()
     {
-        return array('attributes', 'label', 'validation');
+        return ['attributes', 'label', 'validation'];
     }
 
     /**
@@ -286,7 +286,7 @@ abstract class Element extends Base
     {
         /*If a single validation class is provided, an array is created in order to reuse the same logic.*/
         if (!is_array($validation)) {
-            $validation = array($validation);
+            $validation = [$validation];
         }
 
         foreach ($validation as $object) {

@@ -7,7 +7,7 @@ namespace PFBC\Element;
 
 class Checksort extends Sort
 {
-    protected $attributes = array('type' => 'checkbox');
+    protected $attributes = ['type' => 'checkbox'];
     protected $inline;
     protected $maxheight;
 
@@ -38,10 +38,10 @@ JS;
     {
         if (isset($this->attributes['value'])) {
             if (!is_array($this->attributes['value'])) {
-                $this->attributes['value'] = array($this->attributes['value']);
+                $this->attributes['value'] = [$this->attributes['value']];
             }
         } else {
-            $this->attributes['value'] = array();
+            $this->attributes['value'] = [];
         }
 
         if (substr($this->attributes['name'], -2) !== '[]') {
@@ -53,7 +53,7 @@ JS;
         echo '<div id="', $this->attributes['id'], '"><div class="pfbc-checkboxes">';
         foreach ($this->options as $value => $text) {
             $value = $this->getOptionValue($value);
-            echo '<div class="pfbc-checkbox"><table cellpadding="0" cellspacing="0"><tr><td valign="top"><input id="', $this->attributes['id'], "-", $count, '"', $this->getAttributes(array("id", "value", "checked", "name", "onclick")), ' value="', $this->filter($value), '"';
+            echo '<div class="pfbc-checkbox"><table cellpadding="0" cellspacing="0"><tr><td valign="top"><input id="', $this->attributes['id'], "-", $count, '"', $this->getAttributes(["id", "value", "checked", "name", "onclick"]), ' value="', $this->filter($value), '"';
             if (in_array($value, $this->attributes['value'])) {
                 echo ' checked="checked"';
             }

@@ -32,7 +32,7 @@ class Age extends OptionElement
      */
     public function __construct($aProperties = null)
     {
-        parent::__construct('', '', array(), $aProperties);
+        parent::__construct('', '', [], $aProperties);
 
         $this->iMinAge = DbConfig::getSetting('minAgeRegistration');
         $this->iMaxAge = DbConfig::getSetting('maxAgeRegistration');

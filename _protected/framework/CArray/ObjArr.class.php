@@ -51,7 +51,7 @@ class ObjArr
     public static function toArray($oObj)
     {
         if (is_array($oObj) || is_object($oObj)) {
-            $aRes = array();
+            $aRes = [];
             foreach ($oObj as $sKey => $sVal) {
                 $aRes[$sKey] = self::toArray($sVal); // Recursive method
             }

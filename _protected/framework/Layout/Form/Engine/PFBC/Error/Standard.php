@@ -42,7 +42,7 @@ JS;
 
     private function parse($errors)
     {
-        $list = array();
+        $list = [];
         if (!empty($errors)) {
             $keys = array_keys($errors);
             $keySize = sizeof($keys);

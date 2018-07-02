@@ -30,27 +30,27 @@ class Form extends Base
     protected $error;
     protected $jQueryUITheme = 'smoothness';
     protected $resourcesPath;
-    protected $prevent = array();
+    protected $prevent = [];
     protected $view;
     /*jQueryUI themes can be previewed at http://jqueryui.com/themeroller/.*/
     protected $width;
-    private $elements = array();
+    private $elements = [];
     /*Prevents various automated from being automatically applied.  Current options for this array
     included jQuery, jQueryUI, jQueryUIButtons, focus, and style.*/
     private $prefix = 'http';
-    private $values = array();
+    private $values = [];
     private $ajaxCallback;
     private $widthSuffix = 'px';
 
     public function __construct($id = 'pfbc', $width = '')
     {
         self::$sFormId = $id;
-        $this->configure(array(
+        $this->configure([
             'width' => $width,
             'action' => basename($_SERVER['SCRIPT_NAME']),
             'id' => preg_replace("/\W/", '-', $id),
             'method' => 'post'
-        ));
+        ]);
 
         if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
             $this->prefix = 'https';
@@ -172,11 +172,11 @@ class Form extends Base
     public static function setError($id, $messages, $element = '')
     {
         if (!is_array($messages)) {
-            $messages = array($messages);
+            $messages = [$messages];
         }
 
         if (empty($_SESSION['pfbc'][$id]['errors'][$element])) {
-            $_SESSION['pfbc'][$id]['errors'][$element] = array();
+            $_SESSION['pfbc'][$id]['errors'][$element] = [];
         }
 
         foreach ($messages as $message) {
@@ -217,7 +217,7 @@ class Form extends Base
      */
     public function __sleep()
     {
-        return array('attributes', 'elements', 'error');
+        return ['attributes', 'elements', 'error'];
     }
 
     public function addElement(Element $element)
@@ -272,11 +272,11 @@ class Form extends Base
 
     public function getErrors()
     {
-        $errors = array();
+        $errors = [];
         if (session_status() !== PHP_SESSION_ACTIVE) {
-            $errors[''] = array('Error: pH7CMS requires an active session to work properly.  Simply add session_start() to your script before any output has been sent to the browser.');
+            $errors[''] = ['Error: pH7CMS requires an active session to work properly.  Simply add session_start() to your script before any output has been sent to the browser.'];
         } else {
-            $errors = array();
+            $errors = [];
             $id = $this->attributes['id'];
             if (!empty($_SESSION['pfbc'][$id]['errors'])) {
                 $errors = $_SESSION['pfbc'][$id]['errors'];
@@ -330,7 +330,7 @@ class Form extends Base
 
     public static function getSessionValues($id = 'pfbc')
     {
-        $values = array();
+        $values = [];
         if (!empty($_SESSION['pfbc'][$id]['values']))
             $values = $_SESSION['pfbc'][$id]['values'];
         return $values;
@@ -482,7 +482,7 @@ JS;
 
     private function renderJSFiles()
     {
-        $urls = array();
+        $urls = [];
         /**
          * These files are already included by default in layout.tpl, therefore it is unnecessary to include them again.
          *
@@ -517,7 +517,7 @@ JS;
 
     private function renderCSSFiles()
     {
-        $urls = array();
+        $urls = [];
         /**
          * These files are already included by default in layout.tpl, therefore it is unnecessary to include them again.
          *

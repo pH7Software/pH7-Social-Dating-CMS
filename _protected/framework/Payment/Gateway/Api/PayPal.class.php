@@ -188,7 +188,7 @@ class Paypal extends Provider implements Api
     {
         $rRawPost = Stream::getInput();
         $aRawPost = explode('&', $rRawPost);
-        $aPostData = array();
+        $aPostData = [];
 
         foreach ($aRawPost as $sKeyVal) {
             $aKeyVal = explode('=', $sKeyVal);

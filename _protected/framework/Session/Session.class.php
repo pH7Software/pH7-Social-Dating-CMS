@@ -129,7 +129,7 @@ class Session
     public function destroy()
     {
         if (!empty($_SESSION)) {
-            $_SESSION = array();
+            $_SESSION = [];
             session_unset();
             session_destroy();
         }

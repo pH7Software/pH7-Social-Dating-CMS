@@ -14,7 +14,7 @@ class Grid extends \PFBC\View
         if (!empty($properties))
             $properties["grid"] = $grid;
         else
-            $properties = array("grid" => $grid);
+            $properties = ["grid" => $grid];
 
         parent::__construct($properties);
     }
@@ -112,7 +112,7 @@ JS;
 CSS;
 
         $elements = $this->form->getElements();
-        $gridElements = array();
+        $gridElements = [];
         foreach ($elements as $element) {
             /*Hidden, HTMLExternal, and Button element classes aren't included in the grid.*/
             if (!$element instanceof \PFBC\Element\Hidden && !$element instanceof \PFBC\Element\HTMLExternal && !$element instanceof \PFBC\Element\Button) {
@@ -123,7 +123,7 @@ CSS;
 
         /*If the grid array contains more elements than the form has available, it is revised.*/
         if (array_sum($this->grid) > $this->gridIncludedElements) {
-            $gridRevised = array();
+            $gridRevised = [];
             foreach ($this->grid as $grid) {
                 $gridRemaining = $this->gridIncludedElements - array_sum($gridRevised);
                 if (!empty($gridRemaining))
@@ -138,7 +138,7 @@ CSS;
         }
 
         $gridSize = sizeof($this->grid);
-        $elementWidths = array();
+        $elementWidths = [];
         for ($g = 0; $g < $gridSize; ++$g) {
             $gridSum = array_sum(array_slice($this->grid, 0, $g));
             if ($widthSuffix == "px")

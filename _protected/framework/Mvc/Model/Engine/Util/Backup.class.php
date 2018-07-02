@@ -52,7 +52,7 @@ class Backup implements GenerableFile
     {
         $this->sSql = $this->getHeaderContents();
 
-        $aTables = $aColumns = $aValues = array();
+        $aTables = $aColumns = $aValues = [];
         $oAllTables = Db::showTables();
         while ($aRow = $oAllTables->fetch()) $aTables[] = $aRow[0];
         unset($oAllTables);

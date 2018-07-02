@@ -17,7 +17,7 @@ defined('PH7') or exit('Restricted access');
 final class HashList extends File implements HashListable, Hashable
 {
     /** @var array */
-    private static $aData = array();
+    private static $aData = [];
 
     /**
      * {@inheritDoc}
