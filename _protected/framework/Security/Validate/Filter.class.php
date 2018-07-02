@@ -114,7 +114,7 @@ class Filter
     {
         // CSRF config
         foreach (array('csrf_expire', 'csrf_token_name', 'csrf_cookie_name') as $key) {
-            if (FALSE !== ($val = config_item($key))) {
+            if (false !== ($val = config_item($key))) {
                 $this->{'_' . $key} = $val;
             }
         }
@@ -347,7 +347,7 @@ class Filter
          *
          * But it doesn't seem to pose a problem.
          */
-        if ($is_image === TRUE) {
+        if ($is_image === true) {
             // Images have a tendency to have the PHP short opening and
             // closing tags every so often so we skip those and only
             // do the long opening tags.
@@ -512,7 +512,7 @@ class Filter
      *
      * @return    string
      */
-    public function sanitize_filename($str, $relative_path = FALSE)
+    public function sanitize_filename($str, $relative_path = false)
     {
         $bad = array(
             "../",
@@ -553,7 +553,7 @@ class Filter
             $bad[] = '/';
         }
 
-        $str = remove_invisible_characters($str, FALSE);
+        $str = remove_invisible_characters($str, false);
         return stripslashes(str_replace($bad, '', $str));
     }
 
@@ -603,7 +603,7 @@ class Filter
          */
         $evil_attributes = array('on\w*', 'xmlns', 'formaction');
 
-        if ($is_image === TRUE) {
+        if ($is_image === true) {
             /*
              * Adobe Photoshop puts XML metadata into JFIF images,
              * including namespacing, so we have to allow this for images.
@@ -911,7 +911,7 @@ function config_item($item)
         $config =& get_config();
 
         if (!isset($config[$item])) {
-            return FALSE;
+            return false;
         }
         $_config_item[$item] = $config[$item];
     }
@@ -933,7 +933,7 @@ function config_item($item)
  *
  * @return    string
  */
-function remove_invisible_characters($str, $url_encoded = TRUE)
+function remove_invisible_characters($str, $url_encoded = true)
 {
     $non_displayables = array();
 

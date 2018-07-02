@@ -25,10 +25,10 @@ $config['charset'] = PH7_ENCODING;
 | 'cookie_secure' =  Cookies will only be set if a secure HTTPS connection exists.
 |
 */
-$config['cookie_prefix']    = 'pHS';
-$config['cookie_domain']    = PH7_DOMAIN_COOKIE;
-$config['cookie_path']        = '/';
-$config['cookie_secure']    = FALSE;
+$config['cookie_prefix'] = 'pHS';
+$config['cookie_domain'] = PH7_DOMAIN_COOKIE;
+$config['cookie_path'] = '/';
+$config['cookie_secure'] = false;
 
 /*
 |--------------------------------------------------------------------------
