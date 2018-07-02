@@ -84,10 +84,10 @@ function get_list_of_locales($locale)
      * sr_CS.UTF-8@latin, sr_CS@latin, sr@latin, sr_CS.UTF-8, sr_CS, sr.
      */
     $locale_names = array();
-    $lang = NULL;
-    $country = NULL;
-    $charset = NULL;
-    $modifier = NULL;
+    $lang = null;
+    $country = null;
+    $charset = null;
+    $modifier = null;
     if ($locale) {
         if (preg_match("/^(?P<lang>[a-z]{2,3})"              // language code
             . "(?:_(?P<country>[A-Z]{2}))?"           // country code

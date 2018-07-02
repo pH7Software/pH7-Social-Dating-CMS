@@ -46,16 +46,16 @@ class gettext_reader
 
     //private:
     var $BYTEORDER = 0;        // 0: low endian, 1: big endian
-    var $STREAM = NULL;
+    var $STREAM = null;
     var $short_circuit = false;
     var $enable_cache = false;
-    var $originals = NULL;      // offset of original table
-    var $translations = NULL;    // offset of translation table
-    var $pluralheader = NULL;    // cache header field for plural forms
+    var $originals = null;      // offset of original table
+    var $translations = null;    // offset of translation table
+    var $pluralheader = null;    // cache header field for plural forms
     var $total = 0;          // total string count
-    var $table_originals = NULL;  // table for original strings (offsets)
-    var $table_translations = NULL;  // table for translated strings (offsets)
-    var $cache_translations = NULL;  // original -> translation mapping
+    var $table_originals = null;  // table for original strings (offsets)
+    var $table_translations = null;  // table for translated strings (offsets)
+    var $cache_translations = null;  // original -> translation mapping
 
 
     /* Methods */
