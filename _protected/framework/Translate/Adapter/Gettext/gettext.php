@@ -244,7 +244,7 @@ class gettext_reader
                 return $start;
             else
                 return -1;
-        } else if ($start > $end) {
+        } elseif ($start > $end) {
             // start > end -> turn around and start over
             return $this->find_string($string, $end, $start);
         } else {
@@ -254,7 +254,7 @@ class gettext_reader
             if ($cmp == 0)
                 // string is exactly in the middle => return it
                 return $half;
-            else if ($cmp < 0)
+            elseif ($cmp < 0)
                 // The string is in the upper half
                 return $this->find_string($string, $start, $half);
             else
