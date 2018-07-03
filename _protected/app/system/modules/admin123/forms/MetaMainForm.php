@@ -12,6 +12,7 @@ use PH7\Framework\File\File;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Header;
 
 class MetaMainForm
@@ -43,7 +44,7 @@ class MetaMainForm
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<ul class="hidden" id="showDiv_listLang">'));
 
             for ($iLangIndex = 0; $iLangIndex < $iTotalLangs; $iLangIndex++) {
-                $sAbbrLang = substr($aLangs[$iLangIndex], 0, 2);
+                $sAbbrLang = Lang::getIsoCode($aLangs[$iLangIndex]);
                 $oForm->addElement(new \PFBC\Element\HTMLExternal('<li>' . ($iLangIndex + 1) . ') ' . '<a class="bold" href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'metamain', $aLangs[$iLangIndex], false) . '" title="' . t($sAbbrLang) . '">' . t($sAbbrLang) . ' (' . $aLangs[$iLangIndex] . ')</a></li>'));
             }
             $oForm->addElement(new \PFBC\Element\HTMLExternal('</ul></div>'));
