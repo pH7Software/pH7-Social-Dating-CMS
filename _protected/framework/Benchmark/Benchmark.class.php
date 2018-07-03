@@ -69,7 +69,7 @@ class Benchmark
      * Returns the elapsed time, readable or not
      *
      * @param bool $raw Whether the result must be human readable
-     * @param string $format The format to display (printf format)
+     * @param string|null $format The format to display (printf format)
      *
      * @return string|float
      */
@@ -84,7 +84,7 @@ class Benchmark
      * Returns a human readable elapsed time
      *
      * @param float $microtime
-     * @param string $format The format to display (printf format)
+     * @param string|null $format The format to display (printf format)
      * @param int $round
      *
      * @return string
@@ -112,7 +112,7 @@ class Benchmark
      * Returns the memory usage at the end checkpoint
      *
      * @param bool $raw Whether the result must be human readable
-     * @param string $format The format to display (printf format)
+     * @param string|null $format The format to display (printf format)
      *
      * @return string|float
      */
@@ -125,7 +125,7 @@ class Benchmark
      * Returns a human readable memory size
      *
      * @param int $size
-     * @param string $format The format to display (printf format)
+     * @param string|null $format The format to display (printf format)
      * @param int $round
      *
      * @return string
@@ -153,7 +153,7 @@ class Benchmark
      * Returns the memory peak, readable or not
      *
      * @param bool $raw Whether the result must be human readable
-     * @param string $format The format to display (printf format)
+     * @param string|null $format The format to display (printf format)
      *
      * @return string|float
      */
