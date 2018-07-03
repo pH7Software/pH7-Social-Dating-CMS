@@ -15,9 +15,6 @@ namespace PH7;
 class Calculator
 {
     /** @var string */
-    private $sName;
-
-    /** @var string */
     private $iStat;
 
     /**
