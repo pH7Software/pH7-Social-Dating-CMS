@@ -92,8 +92,8 @@ if ($iErrors > 0) {
 
     printf('<h3 class="error underline italic">You have %d error(s):</h3>', $iErrors);
 
-    for ($i = 0; $i < $iErrors; $i++) {
-        printf('<p class="error">%d) %s</p>', $i + 1, $aErrors[$i]);
+    for ($iKey = 0; $iKey < $iErrors; $iKey++) {
+        printf('<p class="error">%d) %s</p>', $iKey + 1, $aErrors[$iKey]);
     }
 
     display_html_footer();

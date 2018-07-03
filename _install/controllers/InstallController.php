@@ -249,8 +249,8 @@ class InstallController extends Controller
                                         'pH7_SampleData'
                                     ];
 
-                                    for ($i = 0, $iCount = count($aDumps); $i < $iCount; $i++) {
-                                        exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/' . $_SESSION['db']['type_name'] . '/' . $aDumps[$i] . '.sql');
+                                    for ($iFileKey = 0, $iCount = count($aDumps); $iFileKey < $iCount; $iFileKey++) {
+                                        exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/' . $_SESSION['db']['type_name'] . '/' . $aDumps[$iFileKey] . '.sql');
                                     }
 
                                     unset($DB);
