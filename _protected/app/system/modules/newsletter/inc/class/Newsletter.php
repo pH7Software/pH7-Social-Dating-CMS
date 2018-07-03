@@ -51,7 +51,7 @@ class Newsletter extends Core
      */
     public function sendMessages()
     {
-        $iRes = 0; // Default value
+        $iStatus = 0; // Default value
 
         $oSubscribers = $this->oSubscriptionModel->{$this->sSubscribersMethod}();
 
@@ -61,7 +61,7 @@ class Newsletter extends Core
                 continue; // Skip that one if it isn't opted-in
             }
 
-            if (!$iRes = $this->sendMail($oSubscriber, $oMail)) {
+            if (!$iStatus = $this->sendMail($oSubscriber, $oMail)) {
                 break;
             }
 
@@ -72,7 +72,7 @@ class Newsletter extends Core
         }
         unset($oMail, $oSubscribers);
 
-        return ['status' => $iRes, 'nb_mail_sent' => self::$iTotalSent];
+        return ['status' => $iStatus, 'nb_mail_sent' => self::$iTotalSent];
     }
 
     /**

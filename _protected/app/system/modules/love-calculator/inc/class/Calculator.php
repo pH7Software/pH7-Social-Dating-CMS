@@ -29,14 +29,14 @@ class Calculator
         $this->sName = strtolower(escape($sName . $sSecondName));
         $aName = count_chars($this->sName);
 
-        for ($i = 97; $i <= 122; $i++) {
-            if ($aName[$i] != false) {
-                $iName2 = strlen($aName[$i]);
+        for ($iIndex = 97; $iIndex <= 122; $iIndex++) {
+            if ($aName[$iIndex] != false) {
+                $iName2 = strlen($aName[$iIndex]);
                 if ($iName2 < 2) {
-                    $aCalc[] = $aName[$i];
+                    $aCalc[] = $aName[$iIndex];
                 } else {
                     for ($iA = 0; $iA < $iName2; $iA++) {
-                        $aCalc[] = substr($aName[$i], $iA, 1);
+                        $aCalc[] = substr($aName[$iIndex], $iA, 1);
                     }
                 }
             }
@@ -44,7 +44,7 @@ class Calculator
 
         while (($iLetter = count($aCalc)) > 2) {
             $iCenterLetter = ceil($iLetter / 2);
-            for ($i = 0; $i < $iCenterLetter; $i++) {
+            for ($iQuantity = 0; $iQuantity < $iCenterLetter; $iQuantity++) {
                 $sSum = array_shift($aCalc) + array_shift($aCalc);
                 $iD = strlen($sSum);
                 if ($iD < 2) {

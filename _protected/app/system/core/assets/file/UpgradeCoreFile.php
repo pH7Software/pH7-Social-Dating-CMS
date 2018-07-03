@@ -359,8 +359,8 @@ class UpgradeCore
 
         $this->sHtml .= '<h3 class="error underline italic">' . t('You have %0% error(s):', $iErrors) . '</h3>';
 
-        for ($i = 0; $i < $iErrors; $i++) {
-            $this->sHtml .= '<p class="error">' . t('%0%) %1%', $i + 1, $this->aErrors[$i]) . '</p>';
+        for ($iKey = 0; $iKey < $iErrors; $iKey++) {
+            $this->sHtml .= '<p class="error">' . t('%0%) %1%', $iKey + 1, $this->aErrors[$iKey]) . '</p>';
         }
     }
 

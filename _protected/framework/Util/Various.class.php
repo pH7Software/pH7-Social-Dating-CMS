@@ -67,7 +67,7 @@ class Various
         $aSpecialChars = ['-', '_', '~', '|', '%', '^', '!', '$', '#', '@', '?'];
         $aKeys = array_merge(range(0, 9), range('a', 'z'), $aSpecialChars);
 
-        for ($i = 0; $i < $iLength; $i++) {
+        for ($iQuantity = 0; $iQuantity < $iLength; $iQuantity++) {
             $sWord .= $aKeys[array_rand($aKeys)];
         }
 

@@ -42,9 +42,9 @@ class MetaMainForm
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<h3 class="underline"><a href="#showDiv_listLang" title="' . t('Click here to show/hide the languages') . '">' . t('Change language for the Meta Tags') . '</a></h3>'));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<ul class="hidden" id="showDiv_listLang">'));
 
-            for ($i = 0; $i < $iTotalLangs; $i++) {
-                $sAbbrLang = substr($aLangs[$i], 0, 2);
-                $oForm->addElement(new \PFBC\Element\HTMLExternal('<li>' . ($i + 1) . ') ' . '<a class="bold" href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'metamain', $aLangs[$i], false) . '" title="' . t($sAbbrLang) . '">' . t($sAbbrLang) . ' (' . $aLangs[$i] . ')</a></li>'));
+            for ($iLangIndex = 0; $iLangIndex < $iTotalLangs; $iLangIndex++) {
+                $sAbbrLang = substr($aLangs[$iLangIndex], 0, 2);
+                $oForm->addElement(new \PFBC\Element\HTMLExternal('<li>' . ($iLangIndex + 1) . ') ' . '<a class="bold" href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'metamain', $aLangs[$iLangIndex], false) . '" title="' . t($sAbbrLang) . '">' . t($sAbbrLang) . ' (' . $aLangs[$iLangIndex] . ')</a></li>'));
             }
             $oForm->addElement(new \PFBC\Element\HTMLExternal('</ul></div>'));
         }
