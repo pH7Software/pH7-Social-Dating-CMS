@@ -437,7 +437,7 @@ class InstallController extends Controller
                             $aSettingUpdate = self::DATING_SETTINGS;
                             break;
 
-                        // Or for 'base', don't do anything. Just use the default settings already setup in the database
+                        // For 'base' niche (template), don't do anything. Just use the default settings already setup in the database
                     }
 
                     if ($bUpdateNeeded) {
