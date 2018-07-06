@@ -43,6 +43,9 @@ class Language
         return htmlspecialchars(strtolower(substr(chop($sLang[0]), 0, 2)), ENT_QUOTES);
     }
 
+    /**
+     * @return string
+     */
     public function get()
     {
         return $this->sLang;
