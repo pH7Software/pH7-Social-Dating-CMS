@@ -79,9 +79,16 @@ class Compress
         $this->bIsGoogleClosure = (bool)Config::getInstance()->values['cache']['enable.js.closure_compiler_service'];
     }
 
+    /**
+     * Removing PHP comments.
+     *
+     * @param string $sPhp
+     *
+     * @return string
+     */
     public function parsePhp($sPhp)
     {
-        $sPhp = preg_replace('#/\*.*+\*#', '', $sPhp); # Removing PHP comments
+        $sPhp = preg_replace('#/\*.*+\*#', '', $sPhp);
         $sPhp = $this->parseHtml($sPhp);
 
         return $sPhp;
@@ -89,16 +96,16 @@ class Compress
 
     public function parseHtml($sHtml)
     {
-        preg_match_all('!(<(?:code|pre).*>[^<]+</(?:code|pre)>)!', $sHtml, $aPre); # Exclude pre or code tags
-        $sHtml = preg_replace('!<(?:code|pre).*>[^<]+</(?:code|pre)>!', '#pre#', $sHtml); # Removing all pre or code tags
-        $sHtml = preg_replace('#<!--[^\[].+-->#', '', $sHtml); # Removing HTML comments
-        $sHtml = preg_replace('/[\n\t\r]+/', '', $sHtml); # Remove new lines, spaces, tabs
-        $sHtml = preg_replace('/>[\s]+</', '> <', $sHtml); # Remove new lines, spaces, tabs
-        $sHtml = preg_replace('/[\s]+/', ' ', $sHtml); # Remove new lines, spaces, tabs
+        preg_match_all('!(<(?:code|pre).*>[^<]+</(?:code|pre)>)!', $sHtml, $aPre); // Exclude pre or code tags
+        $sHtml = preg_replace('!<(?:code|pre).*>[^<]+</(?:code|pre)>!', '#pre#', $sHtml); // Removing all pre or code tags
+        $sHtml = preg_replace('#<!--[^\[].+-->#', '', $sHtml); // Removing HTML comments
+        $sHtml = preg_replace('/[\n\t\r]+/', '', $sHtml); // Remove new lines, spaces, tabs
+        $sHtml = preg_replace('/>[\s]+</', '> <', $sHtml); // Remove new lines, spaces, tabs
+        $sHtml = preg_replace('/[\s]+/', ' ', $sHtml); // Remove new lines, spaces, tabs
         $sHtml = preg_replace('#(?ix)(?>[^\S ]\s*|\s{2,})(?=(?:(?:[^<]++|<(?!/?(?:textarea|pre)\b))*+)(?:<(?>textarea|pre)\b|\z))#', '', $sHtml);
         if (!empty($aPre[0])) {
             foreach ($aPre[0] as $sTag) {
-                $sHtml = preg_replace('!#pre#!', $sTag, $sHtml, 1);# Putting back pre|code tags
+                $sHtml = preg_replace('!#pre#!', $sTag, $sHtml, 1); // Putting back pre|code tags
             }
         }
 
