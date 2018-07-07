@@ -82,16 +82,16 @@ class Compress
     /**
      * Removing PHP comments.
      *
-     * @param string $sPhp
+     * @param string $sPhpCode
      *
      * @return string
      */
-    public function parsePhp($sPhp)
+    public function parsePhp($sPhpCode)
     {
-        $sPhp = preg_replace('#/\*.*+\*#', '', $sPhp);
-        $sPhp = $this->parseHtml($sPhp);
+        $sPhpCode = preg_replace('#/\*.*+\*#', '', $sPhpCode);
+        $sPhpCode = $this->parseHtml($sPhpCode);
 
-        return $sPhp;
+        return $sPhpCode;
     }
 
     public function parseHtml($sHtml)
