@@ -11,8 +11,6 @@ namespace PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax;
 
 use PH7\Framework\Error\CException\PH7RuntimeException;
 
-defined('PH7') or exit('Restricted access');
-
 class EmptyCodeException extends PH7RuntimeException
 {
     const CURLY_SYNTAX = 1;
