@@ -24,10 +24,11 @@ class PH7BadMethodCallException extends BadMethodCallException
 
     /**
      * @param string $sMsg
+     * @param int $iCode
      */
-    public function __construct($sMsg)
+    public function __construct($sMsg, $iCode = 0)
     {
-        parent::__construct($sMsg);
+        parent::__construct($sMsg, $iCode);
 
         $this->strip($sMsg);
     }
