@@ -24,6 +24,8 @@ abstract class Syntax
     abstract public function parse();
 
     /**
+     * Get the converted PHP code from template engine's syntax.
+     *
      * @return string
      */
     public function get()
@@ -32,6 +34,8 @@ abstract class Syntax
     }
 
     /**
+     * Set the template contents.
+     *
      * @param string $sCode
      */
     public function set($sCode)
