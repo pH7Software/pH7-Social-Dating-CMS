@@ -126,7 +126,7 @@ class PH7Tpl extends Kernel implements GenerableFile
         $this->checkCompileDir();
         $this->checkCacheDir();
 
-        /** Instance objects to the class * */
+        /** Instance objects to the class **/
         $this->_oVars = $this;
         $this->designModel = new DesignModel;
         $this->oSyntaxEngine = new $oSyntaxEngine;
