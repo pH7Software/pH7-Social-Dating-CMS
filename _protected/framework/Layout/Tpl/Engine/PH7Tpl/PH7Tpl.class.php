@@ -7,7 +7,7 @@
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
  * @copyright        (c) 2011-2018, Pierre-Henry Soria. All Rights Reserved.
- * @version          1.3.0
+ * @version          1.4.0
  * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
  *
  * @history          Supports now PHP 5 with beautiful object code (POO), (removed all the ugly object code from PHP 4.x).
