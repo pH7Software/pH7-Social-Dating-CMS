@@ -1,7 +1,6 @@
 <?php
 /***************************************************************************
  * @title            Default Curly syntax for pH7TPl template engine.
-
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl / Syntax
