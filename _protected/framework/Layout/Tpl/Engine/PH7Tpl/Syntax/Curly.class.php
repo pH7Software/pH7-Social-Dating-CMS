@@ -20,7 +20,10 @@ class Curly extends Syntax
     public function parse()
     {
         if (empty($this->sCode)) {
-            throw new EmptyCodeException('Parsing code unset!', EmptyCodeException::CURLY_SYNTAX);
+            throw new EmptyCodeException(
+                'Parsing code unset!',
+                EmptyCodeException::CURLY_SYNTAX
+            );
         }
 
         /***** <?php *****/

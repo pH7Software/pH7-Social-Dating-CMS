@@ -24,7 +24,10 @@ class Tal extends Syntax
     public function parse()
     {
         if (empty($this->sCode)) {
-            throw new EmptyCodeException('Parsing code unset!', EmptyCodeException::TAL_SYNTAX);
+            throw new EmptyCodeException(
+                'Parsing code unset!',
+                EmptyCodeException::TAL_SYNTAX
+            );
         }
 
         /***** <?php *****/
@@ -38,19 +41,39 @@ class Tal extends Syntax
         }
 
         /***** <?php ?> *****/
-        $this->sCode = preg_replace('#<ph:code value=(?:"|\')(.+)(?:"|\') ?/?>#', '<?php $1 ?>', $this->sCode);
+        $this->sCode = preg_replace(
+            '#<ph:code value=(?:"|\')(.+)(?:"|\') ?/?>#',
+            '<?php $1 ?>',
+            $this->sCode
+        );
 
         /***** <?php echo *****/
-        $this->sCode = preg_replace('#<ph:print value=(?:"|\')(.+)(?:"|\') ?/?>#', '<?php echo ', $this->sCode);
+        $this->sCode = preg_replace(
+            '#<ph:print value=(?:"|\')(.+)(?:"|\') ?/?>#',
+            '<?php echo ',
+            $this->sCode
+        );
 
         /***** if *****/
-        $this->sCode = preg_replace('#<ph:if test=(?:"|\')([^\<\>"\n]+)(?:"|\')>#', '<?php if($1) { ?>', $this->sCode);
+        $this->sCode = preg_replace(
+            '#<ph:if test=(?:"|\')([^\<\>"\n]+)(?:"|\')>#',
+            '<?php if($1) { ?>',
+            $this->sCode
+        );
 
         /***** if isset *****/
-        $this->sCode = preg_replace('#<ph:if-set test=(?:"|\')([^\<\>"\n]+)(?:"|\')>#', '<?php if(!empty($1)) { ?>', $this->sCode);
+        $this->sCode = preg_replace(
+            '#<ph:if-set test=(?:"|\')([^\<\>"\n]+)(?:"|\')>#',
+            '<?php if(!empty($1)) { ?>',
+            $this->sCode
+        );
 
         /***** if empty *****/
-        $this->sCode = preg_replace('#<ph:if-empty test=(?:"|\')([^\<\>"\n]+)(?:"|\')>#', '<?php if(empty($1)) { ?>', $this->sCode);
+        $this->sCode = preg_replace(
+            '#<ph:if-empty test=(?:"|\')([^\<\>"\n]+)(?:"|\')>#',
+            '<?php if(empty($1)) { ?>',
+            $this->sCode
+        );
 
         /***** if equal *****/
         $this->sCode = preg_replace(
@@ -60,7 +83,11 @@ class Tal extends Syntax
         );
 
         /***** elseif *****/
-        $this->sCode = preg_replace('#<ph:else-if test=(?:"|\')([^\<\>"\n]+)(?:"|\')>#', '<?php elseif($1) { ?>', $this->sCode);
+        $this->sCode = preg_replace(
+            '#<ph:else-if test=(?:"|\')([^\<\>"\n]+)(?:"|\')>#',
+            '<?php elseif($1) { ?>',
+            $this->sCode
+        );
 
         /***** else *****/
         $this->sCode = str_replace('<ph:else>', '<?php else { ?>', $this->sCode);
@@ -75,7 +102,11 @@ class Tal extends Syntax
         );
 
         /***** while *****/
-        $this->sCode = preg_replace('#<ph:while test=(?:"|\')([^\<\>"\n]+)(?:"|\')>#', '<?php while($1) { ?>', $this->sCode);
+        $this->sCode = preg_replace(
+            '#<ph:while test=(?:"|\')([^\<\>"\n]+)(?:"|\')>#',
+            '<?php while($1) { ?>',
+            $this->sCode
+        );
 
         /***** each (foreach) *****/
         $this->sCode = preg_replace(
