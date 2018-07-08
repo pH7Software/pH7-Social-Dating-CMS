@@ -26,6 +26,7 @@ use PH7\Framework\File\GenerableFile;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Layout\Html\Mail as MailLayout;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception as TplException;
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax\Syntax;
 use PH7\Framework\Mvc\Model\Design as DesignModel;
 use PH7\Framework\Parse\SysVar;
 
@@ -60,6 +61,9 @@ class PH7Tpl extends Kernel implements GenerableFile
 
     /** @var DesignModel */
     private $designModel;
+
+    /** @var Syntax */
+    private $oSyntaxEngine;
 
     /** @var string */
     private $sTplFile;
@@ -106,9 +110,6 @@ class PH7Tpl extends Kernel implements GenerableFile
     /** @var int|null */
     private $mCacheExpire;
 
-    /** @var bool Enable or Disables XML Tags for the Template Engine */
-    private $bXmlTags = false;
-
     /** @var array */
     private $_aVars = [];
 
@@ -118,16 +119,17 @@ class PH7Tpl extends Kernel implements GenerableFile
     // Hack that keeps the $config variable in the template files
     protected $config;
 
-    public function __construct()
+    public function __construct(Syntax $oSyntaxEngine)
     {
         parent::__construct();
 
         $this->checkCompileDir();
         $this->checkCacheDir();
 
-        /** Instance objects for the class * */
+        /** Instance objects to the class * */
         $this->_oVars = $this;
         $this->designModel = new DesignModel;
+        $this->oSyntaxEngine = new $oSyntaxEngine;
 
         $this->bHtmlCompressor = (bool)$this->config->values['cache']['enable.static.minify'];
         $this->bPhpCompressor = (bool)$this->config->values['cache']['enable.static.minify'];
@@ -282,18 +284,6 @@ class PH7Tpl extends Kernel implements GenerableFile
     public function setCacheExpire($iLifeTime)
     {
         $this->mCacheExpire = (int)$iLifeTime; // 3600 seconds = 1 hour cache duration
-    }
-
-    /**
-     * Enable or Disable the alternate syntax (XML). Default is "false"
-     *
-     * @param boolean $bIsActive
-     *
-     * @return void
-     */
-    public function setXmlSyntax($bIsActive)
-    {
-        $this->bXmlTags = (bool)$bIsActive;
     }
 
     /**
@@ -659,152 +649,6 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     }
 
     /**
-     * Classic syntax.
-     *
-     * @return void
-     */
-    protected function classicSyntax()
-    {
-        /***** <?php *****/
-        $this->sCode = str_replace('{{', '<?php ', $this->sCode);
-
-        /***** ?> *****/
-        if (!preg_match('#(;[\s]+}} | ;[\s]+%})#', $this->sCode)) {
-            $this->sCode = str_replace(['}}', '%}'], ';?>', $this->sCode);
-        } else {
-            $this->sCode = str_replace(['}}', '%}'], '?>', $this->sCode);
-        }
-
-        /***** <?php echo *****/
-        $this->sCode = str_replace('{%', '<?php echo ', $this->sCode);
-
-        /***** if *****/
-        $this->sCode = preg_replace('#{if ([^\{\}\n]+)}#', '<?php if($1) { ?>', $this->sCode);
-
-        /***** elseif *****/
-        $this->sCode = preg_replace('#{elseif ([^\{\}\n]+)}#', '<?php } elseif($1) { ?>', $this->sCode);
-
-        /***** else *****/
-        $this->sCode = str_replace('{else}', '<?php } else { ?>', $this->sCode);
-
-        /***** for *****/
-        /*** Example ***/
-        /* {for $sData in $aData} <p>Total items: {% $sData_total %} /><br /> Number: {% $sData_i %}<br /> Name: {% $sData %}</p> {/for} */
-        $this->sCode = preg_replace(
-            '#{for ([^\{\}\n]+) in ([^\{\}\n]+)}#',
-            '<?php for($1_i=0,$1_total=count($2);$1_i<$1_total;$1_i++) { $1=$2[$1_i]; ?>',
-            $this->sCode
-        );
-
-        /***** while *****/
-        $this->sCode = preg_replace('#{while ([^\{\}\n]+)}#', '<?php while($1) { ?>', $this->sCode);
-
-        /***** each (foreach) *****/
-        $this->sCode = preg_replace('#{each ([^\{\}\n]+) in ([^\{\}\n]+)}#', '<?php foreach($2 as $1) { ?>', $this->sCode);
-
-        /***** endif | endfor | endwhile | endforeach *****/
-        $this->sCode = str_replace(['{/if}', '{/for}', '{/while}', '{/each}'], '<?php } ?>', $this->sCode);
-
-        /***** Escape (htmlspecialchars) *****/
-        $this->sCode = preg_replace('#{escape ([^\{\}]+)}#', '<?php $this->str->escape($1); ?>', $this->sCode);
-
-        /***** Language *****/
-        $this->sCode = preg_replace('#{lang ([^\{\}]+)}#', '<?php echo t($1); ?>', $this->sCode);
-        $this->sCode = preg_replace('#{lang}([^\{\}]+){/lang}#', '<?php echo t(\'$1\'); ?>', $this->sCode);
-
-        /***** {literal} JavaScript Code {/literal} *****/
-        $this->sCode = preg_replace('#{literal}(.+){/literal}#', '$1', $this->sCode);
-    }
-
-    /**
-     * Parse XML-style syntax.
-     *
-     * This alternative pH7Tpl syntax is a sort of Template Attribute Language.
-     *
-     * @return void
-     */
-    protected function xmlSyntax()
-    {
-        /***** <?php *****/
-        $this->sCode = str_replace('<ph:code>', '<?php ', $this->sCode);
-
-        /***** ?> *****/
-        if (!preg_match('#;[\s]+</ph:code>$#', $this->sCode)) {
-            $this->sCode = str_replace('</ph:code>', ';?>', $this->sCode);
-        } else {
-            $this->sCode = str_replace('</ph:code>', '?>', $this->sCode);
-        }
-
-        /***** <?php ?> *****/
-        $this->sCode = preg_replace('#<ph:code value=(?:"|\')(.+)(?:"|\') ?/?>#', '<?php $1 ?>', $this->sCode);
-
-        /***** <?php echo *****/
-        $this->sCode = preg_replace('#<ph:print value=(?:"|\')(.+)(?:"|\') ?/?>#', '<?php echo ', $this->sCode);
-
-        /***** if *****/
-        $this->sCode = preg_replace('#<ph:if test=(?:"|\')([^\<\>"\n]+)(?:"|\')>#', '<?php if($1) { ?>', $this->sCode);
-
-        /***** if isset *****/
-        $this->sCode = preg_replace('#<ph:if-set test=(?:"|\')([^\<\>"\n]+)(?:"|\')>#', '<?php if(!empty($1)) { ?>', $this->sCode);
-
-        /***** if empty *****/
-        $this->sCode = preg_replace('#<ph:if-empty test=(?:"|\')([^\<\>"\n]+)(?:"|\')>#', '<?php if(empty($1)) { ?>', $this->sCode);
-
-        /***** if equal *****/
-        $this->sCode = preg_replace(
-            '#<ph:if-equal test=(?:"|\')([^\{\},"\n]+)(?:"|\'),(?:"|\')([^\{\},"\n]+)(?:"|\')>#',
-            '<?php if($1 == $2) { ?>',
-            $this->sCode
-        );
-
-        /***** elseif *****/
-        $this->sCode = preg_replace('#<ph:else-if test=(?:"|\')([^\<\>"\n]+)(?:"|\')>#', '<?php elseif($1) { ?>', $this->sCode);
-
-        /***** else *****/
-        $this->sCode = str_replace('<ph:else>', '<?php else { ?>', $this->sCode);
-
-        /***** for *****/
-        /*** Example ***/
-        /* <ph:for test="$sData in $aData"> <p>Total items: <ph:print value="$sData_total" /><br /> Number: <ph:print value="$sData_i" /><br /> Name: <ph:print value="$sData" /></p> </ph:for> */
-        $this->sCode = preg_replace(
-            '#<ph:for test=(?:"|\')([^\<\>"\n]+) in ([^\<\>"\n]+)(?:"|\')>#',
-            '<?php for($1_i=0,$1_total=count($2);$1_i<$1_total;$1_i++) { $1=$2[$1_i]; ?>',
-            $this->sCode
-        );
-
-        /***** while *****/
-        $this->sCode = preg_replace('#<ph:while test=(?:"|\')([^\<\>"\n]+)(?:"|\')>#', '<?php while($1) { ?>', $this->sCode);
-
-        /***** each (foreach) *****/
-        $this->sCode = preg_replace(
-            '#<ph:each test=(?:"|\')([^\<\>"\n]+) in ([^\<\>"\n]+)(?:"|\')>#',
-            '<?php foreach($2 as $1) { ?>',
-            $this->sCode
-        );
-
-        /***** endif | endfor | endwhile | endforeach *****/
-        $this->sCode = str_replace(
-            ['</ph:if>', '</ph:else>', '</ph:else-if>', '</ph:for>', '</ph:while>', '</ph:each>', '</ph:if-set>', '</ph:if-empty>', '</ph:if-equal>'],
-            '<?php } ?>',
-            $this->sCode
-        );
-
-        /***** Escape (htmlspecialchars) *****/
-        $this->sCode = preg_replace(
-            '#<ph:escape value=(?:"|\')([^\{\}]+)(?:"|\') ?/?>#',
-            '<?php this->str->escape($1); ?>',
-            $this->sCode
-        );
-
-        /***** Translate (Gettext) *****/
-        $this->sCode = preg_replace('#<ph:lang value=(?:"|\')([^\{\}]+)(?:"|\') ?/?>#', '<?php echo t($1); ?>', $this->sCode);
-        $this->sCode = preg_replace('#<ph:lang>([^\{\}]+)</ph:lang>#', '<?php echo t(\'$1\'); ?>', $this->sCode);
-
-        /***** literal JavaScript Code *****/
-        $this->sCode = preg_replace('#<ph:literal>(.+)</ph:literal>#', '$1', $this->sCode);
-    }
-
-    /**
      * Optimizes the code generated by the compiler php template.
      *
      * @return void
@@ -889,7 +733,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     }
 
     /**
-     * Parse the general code for translating the template language.
+     * Parse the generic code for translating the template language.
      *
      * @return void
      */
@@ -928,18 +772,15 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
         );
 
         /***** Objects *****/
-        $this->sCode = str_replace(['$browser->', '$designModel->'],
+        $this->sCode = str_replace(
+            ['$browser->', '$designModel->'],
             ['$this->browser->', '$this->designModel->'],
             $this->sCode
         );
 
-        /***** CLassic Syntax *****/
-        $this->classicSyntax();
-
-        /***** XML Syntax *****/
-        if ($this->bXmlTags) {
-            $this->xmlSyntax();
-        }
+        /***** Parse pH7Tpl syntax *****/
+        $this->oSyntaxEngine->parse($this->sCode);
+        $this->sCode = $this->oSyntaxEngine->get();
 
         /***** Variables *****/
         $this->sCode = preg_replace('#{([a-z0-9_]+)}#i', '<?php echo $$1; ?>', $this->sCode);
