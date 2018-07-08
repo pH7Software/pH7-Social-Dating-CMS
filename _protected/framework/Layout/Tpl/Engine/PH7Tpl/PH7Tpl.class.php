@@ -717,7 +717,9 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     }
 
     /**
-     * Parse XML style syntax.
+     * Parse XML-style syntax.
+     *
+     * This alternative pH7Tpl syntax is a sort of Template Attribute Language.
      *
      * @return void
      */
