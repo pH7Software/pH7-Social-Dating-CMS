@@ -19,13 +19,13 @@ class Tal extends Syntax
     /**
      * Parse XHTML-style syntax.
      *
-     * @param string $sCode
-     *
      * @return void
      */
-    public function parse($sCode)
+    public function parse()
     {
-        $this->sCode = $sCode;
+        if (empty($this->sCode)) {
+            throw new EmptyCodeException('Parsing code unset!', EmptyCodeException::TAL_SYNTAX);
+        }
 
         /***** <?php *****/
         $this->sCode = str_replace('<ph:code>', '<?php ', $this->sCode);

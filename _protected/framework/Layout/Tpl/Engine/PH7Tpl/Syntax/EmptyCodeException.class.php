@@ -9,33 +9,12 @@
 
 namespace PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax;
 
+use PH7\Framework\Error\CException\PH7RuntimeException;
+
 defined('PH7') or exit('Restricted access');
 
-abstract class Syntax
+class EmptyCodeException extends PH7RuntimeException
 {
-    /** @var string */
-    protected $sCode;
-
-    /**
-     * Parse pH7Tpl's language syntax.
-     *
-     * @return void
-     */
-    abstract public function parse();
-
-    /**
-     * @return string
-     */
-    public function get()
-    {
-        return $this->sCode;
-    }
-
-    /**
-     * @param string $sCode
-     */
-    public function set($sCode)
-    {
-        $this->sCode = $sCode;
-    }
+    const CURLY_SYNTAX = 1;
+    const TAL_SYNTAX = 2;
 }

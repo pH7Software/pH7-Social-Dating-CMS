@@ -18,9 +18,11 @@ class Curly extends Syntax
     /**
      * {@inheritdoc}
      */
-    public function parse($sCode)
+    public function parse()
     {
-        $this->sCode = $sCode;
+        if (empty($this->sCode)) {
+            throw new EmptyCodeException('Parsing code unset!', EmptyCodeException::CURLY_SYNTAX);
+        }
 
         /***** <?php *****/
         $this->sCode = str_replace('{{', '<?php ', $this->sCode);
