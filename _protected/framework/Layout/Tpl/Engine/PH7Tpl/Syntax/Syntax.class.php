@@ -17,11 +17,9 @@ abstract class Syntax
     /**
      * Parse pH7Tpl's language syntax.
      *
-     * @param string $sCode
-     *
      * @return void
      */
-    abstract public function parse($sCode);
+    abstract public function parse();
 
     /**
      * @return string
@@ -29,5 +27,13 @@ abstract class Syntax
     public function get()
     {
         return $this->sCode;
+    }
+
+    /**
+     * @param string $sCode
+     */
+    public function set($sCode)
+    {
+        $this->sCode = $sCode;
     }
 }

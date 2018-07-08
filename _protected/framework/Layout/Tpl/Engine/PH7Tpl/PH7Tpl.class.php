@@ -779,7 +779,8 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
         );
 
         /***** Parse pH7Tpl syntax *****/
-        $this->oSyntaxEngine->parse($this->sCode);
+        $this->oSyntaxEngine->set($this->sCode);
+        $this->oSyntaxEngine->parse();
         $this->sCode = $this->oSyntaxEngine->get();
 
         /***** Variables *****/
