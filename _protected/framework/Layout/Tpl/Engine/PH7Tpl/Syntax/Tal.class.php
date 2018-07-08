@@ -1,7 +1,8 @@
 <?php
 /***************************************************************************
  * @title            Template Attribute Language (TAL) syntax for pH7TPl template engine.
-
+ * @desc             This alternative pH7Tpl syntax is a sort of Template Attribute Language.
+ *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl / Syntax
@@ -16,9 +17,7 @@ defined('PH7') or exit('Restricted access');
 class Tal extends Syntax
 {
     /**
-     * Parse XML-style syntax.
-     *
-     * This alternative pH7Tpl syntax is a sort of Template Attribute Language.
+     * Parse XHTML-style syntax.
      *
      * @param string $sCode
      *
