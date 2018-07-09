@@ -15,10 +15,10 @@ abstract class SyntaxTestCase extends PHPUnit_Framework_TestCase
 {
     const FIXTURE_PATH = __DIR__  . '/fixtures/';
 
-    abstract public function getInputDirectory();
-    abstract public function getOutputDirectory();
-    abstract public function getInputTemplateFileExtension();
-    abstract public function getOutputPhpFileExtension();
+    abstract protected function getInputDirectory();
+    abstract protected function getOutputDirectory();
+    abstract protected function getInputTemplateFileExtension();
+    abstract protected function getOutputPhpFileExtension();
 
     /**
      * @param string $sName

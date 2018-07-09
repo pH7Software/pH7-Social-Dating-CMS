@@ -97,22 +97,22 @@ class CurlyTest extends SyntaxTestCase
         $this->assertFile('literal', $this->oCurlySyntax);
     }
 
-    public function getInputDirectory()
+    protected function getInputDirectory()
     {
         return self::INPUT_DIR;
     }
 
-    public function getOutputDirectory()
+    protected function getOutputDirectory()
     {
         return self::OUTPUT_DIR;
     }
 
-    public function getInputTemplateFileExtension()
+    protected function getInputTemplateFileExtension()
     {
         return self::INPUT_TPL_FILE_EXT;
     }
 
-    public function getOutputPhpFileExtension()
+    protected function getOutputPhpFileExtension()
     {
         return self::OUTPUT_PHP_FILE_EXT;
     }
