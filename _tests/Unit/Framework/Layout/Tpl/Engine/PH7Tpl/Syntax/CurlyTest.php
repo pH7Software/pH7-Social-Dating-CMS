@@ -12,9 +12,8 @@ use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax\Curly as CurlySyntax;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax\EmptyCodeException;
 use PHPUnit_Framework_TestCase;
 
-class CurlyTest extends PHPUnit_Framework_TestCase
+class CurlyTest extends SyntaxTestCase
 {
-    const FIXTURE_PATH = __DIR__  . '/fixtures/';
     const INPUT_DIR = 'input/curly/';
     const OUTPUT_DIR = 'output/curly/';
     const INPUT_TPL_FILE_EXT = '.curly.tpl';
@@ -25,6 +24,8 @@ class CurlyTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
+        parent::setUp();
+
         $this->oCurlySyntax = new CurlySyntax;
     }
 

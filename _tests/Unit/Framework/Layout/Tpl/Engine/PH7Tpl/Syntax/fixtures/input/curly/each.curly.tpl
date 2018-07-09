@@ -1,3 +1,3 @@
 {each $sData in $aData}
-    {% data %}
+    {% $sData %}
 {/each}
