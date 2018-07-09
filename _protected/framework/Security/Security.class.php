@@ -25,6 +25,7 @@ final class Security
     const COOKIE_HASH_LENGTH = 40;
     const PBKDF2_ITERATION = 10000;
 
+    // TODO: Use PASSWORD_ARGON2I instead when PHP 7.2 will be supported
     const PWD_ALGORITHM = PASSWORD_BCRYPT;
     const PWD_WORK_FACTOR = 12;
 
