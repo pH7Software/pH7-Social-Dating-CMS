@@ -13,11 +13,14 @@ use PHPUnit_Framework_TestCase;
 
 abstract class SyntaxTestCase extends PHPUnit_Framework_TestCase
 {
-    const FIXTURE_PATH = __DIR__  . '/fixtures/';
+    const FIXTURE_PATH = __DIR__ . '/fixtures/';
 
     abstract protected function getInputDirectory();
+
     abstract protected function getOutputDirectory();
+
     abstract protected function getInputTemplateFileExtension();
+
     abstract protected function getOutputPhpFileExtension();
 
     /**
@@ -29,7 +32,7 @@ abstract class SyntaxTestCase extends PHPUnit_Framework_TestCase
     protected function assertFile($sName, Syntax $oSyntaxEngine)
     {
         $sTplCode = file_get_contents(static::FIXTURE_PATH . $this->getInputDirectory() . $sName . $this->getInputTemplateFileExtension());
-        $sPhpCode = file_get_contents(static::FIXTURE_PATH  . $this->getOutputDirectory() . $sName . $this->getOutputPhpFileExtension());
+        $sPhpCode = file_get_contents(static::FIXTURE_PATH . $this->getOutputDirectory() . $sName . $this->getOutputPhpFileExtension());
         $oSyntaxEngine->set($sTplCode);
         $oSyntaxEngine->parse();
 
