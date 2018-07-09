@@ -1,0 +1,1 @@
+<ph:lang value="Bonjour !" />
