@@ -30,9 +30,10 @@ class Curly extends Syntax
         $this->sCode = str_replace('{{', '<?php ', $this->sCode);
 
         /***** ?> *****/
-        if (!preg_match('#(;[\s]+}} | ;[\s]+%})#', $this->sCode)) {
+        if (!preg_match('#(;(?:\s+)?}}|;(?:\s+)?%})#', $this->sCode)) {
             $this->sCode = str_replace(['}}', '%}'], ';?>', $this->sCode);
         } else {
+            // Don't put a semicolon if there is already one
             $this->sCode = str_replace(['}}', '%}'], '?>', $this->sCode);
         }
 

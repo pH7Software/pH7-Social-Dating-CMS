@@ -34,9 +34,10 @@ class Tal extends Syntax
         $this->sCode = str_replace('<ph:code>', '<?php ', $this->sCode);
 
         /***** ?> *****/
-        if (!preg_match('#;[\s]+</ph:code>$#', $this->sCode)) {
+        if (!preg_match('#;(?:\s+)?</ph:code>$#', $this->sCode)) {
             $this->sCode = str_replace('</ph:code>', ';?>', $this->sCode);
         } else {
+            // Don't put a semicolon if there is already one
             $this->sCode = str_replace('</ph:code>', '?>', $this->sCode);
         }
 
