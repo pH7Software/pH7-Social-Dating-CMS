@@ -41,6 +41,11 @@ class TalTest extends SyntaxTestCase
         $this->assertFile('php-code', $this->oTalSyntax);
     }
 
+    public function testPhpCodeWithSemicolon()
+    {
+        $this->assertFile('php-code-semicolon', $this->oTalSyntax);
+    }
+
     public function testInlinePhpCode()
     {
         $this->assertFile('php-code-inline', $this->oTalSyntax);

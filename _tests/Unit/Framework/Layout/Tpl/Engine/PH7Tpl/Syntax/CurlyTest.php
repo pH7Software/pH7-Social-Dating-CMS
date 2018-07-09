@@ -41,9 +41,19 @@ class CurlyTest extends SyntaxTestCase
         $this->assertFile('php-code', $this->oCurlySyntax);
     }
 
+    public function testPhpCodeWithSemicolon()
+    {
+        $this->assertFile('php-code-semicolon', $this->oCurlySyntax);
+    }
+
     public function testEcho()
     {
         $this->assertFile('echo', $this->oCurlySyntax);
+    }
+
+    public function testEchoWithSemicolon()
+    {
+        $this->assertFile('echo-semicolon', $this->oCurlySyntax);
     }
 
     public function testIfStatement()
