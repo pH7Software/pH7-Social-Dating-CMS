@@ -14,6 +14,12 @@ use PHPUnit_Framework_TestCase;
 
 class CurlyTest extends PHPUnit_Framework_TestCase
 {
+    const FIXTURE_PATH = __DIR__  . '/fixtures/';
+    const INPUT_DIR = 'input/curly/';
+    const OUTPUT_DIR = 'output/curly/';
+    const INPUT_TPL_FILE_EXT = '.curly.tpl';
+    const OUTPUT_PHP_FILE_EXT = '.curly.output';
+
     /** @var CurlySyntax */
     private $oCurlySyntax;
 
@@ -30,22 +36,71 @@ class CurlyTest extends PHPUnit_Framework_TestCase
         $this->oCurlySyntax->parse();
     }
 
-    public function testParseValidEchoCode()
+    public function testPhpCode()
     {
-        $sCurlyCode = <<<CURLY
-{% 'Hello World' %}
-{if true}
-    {lang 'Bonjour'}
-{/if}
-CURLY;
-        $sPhpCode = <<<PHP
-<?php echo  'Hello World' ;?>
-<?php if(true) { ?>
-    <?php echo t('Bonjour'); ?>
-<?php } ?>
-PHP;
+        $this->assertFile('php-code');
+    }
 
-        $this->oCurlySyntax->set($sCurlyCode);
+    public function testEcho()
+    {
+        $this->assertFile('echo');
+    }
+
+    public function testIfStatement()
+    {
+        $this->assertFile('if');
+    }
+
+    public function testElseifStatement()
+    {
+        $this->assertFile('elseif');
+    }
+
+    public function testElseStatement()
+    {
+        $this->assertFile('else');
+    }
+
+    public function testForLoop()
+    {
+        $this->assertFile('for');
+    }
+
+    public function testWhileLoop()
+    {
+        $this->assertFile('while');
+    }
+
+    public function testEachLoop()
+    {
+        $this->assertFile('each');
+    }
+
+    public function testEscapeFunction()
+    {
+        $this->assertFile('escape');
+    }
+
+    public function testInlineLangFunction()
+    {
+        $this->assertFile('lang-inline');
+    }
+
+    public function testLangFunction()
+    {
+        $this->assertFile('lang');
+    }
+
+    public function testLiteralFunction()
+    {
+        $this->assertFile('literal');
+    }
+
+    private function assertFile($sName)
+    {
+        $sTplCode = file_get_contents(self::FIXTURE_PATH . self::INPUT_DIR . $sName . self::INPUT_TPL_FILE_EXT);
+        $sPhpCode = file_get_contents(self::FIXTURE_PATH  . self::OUTPUT_DIR . $sName . self::OUTPUT_PHP_FILE_EXT);
+        $this->oCurlySyntax->set($sTplCode);
         $this->oCurlySyntax->parse();
 
         $this->assertSame($sPhpCode, $this->oCurlySyntax->get());
