@@ -10,15 +10,21 @@ namespace PH7\Test\Unit\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax;
 
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax\EmptyCodeException;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax\Tal as TalSyntax;
-use PHPUnit_Framework_TestCase;
 
-class TalTest extends PHPUnit_Framework_TestCase
+class TalTest extends SyntaxTestCase
 {
+    const INPUT_DIR = 'input/tal/';
+    const OUTPUT_DIR = 'output/tal/';
+    const INPUT_TPL_FILE_EXT = '.tal.tpl';
+    const OUTPUT_PHP_FILE_EXT = '.tal.output';
+
     /** @var TalSyntax */
     private $oTalSyntax;
 
     protected function setUp()
     {
+        parent::setUp();
+
         $this->oTalSyntax = new TalSyntax;
     }
 
@@ -30,24 +36,103 @@ class TalTest extends PHPUnit_Framework_TestCase
         $this->oTalSyntax->parse();
     }
 
-    public function testParseValidEchoCode()
+    public function testPhpCode()
     {
-        $sTalCode = <<<TAL
-<ph:print value="Hello World" />
-<ph:if test="true">
-    <ph:lang value="Bonjour !" />
-</ph:if>
-TAL;
-        $sPhpCode = <<<PHP
-<?php echo "Hello World"  ?>
-<?php if(true) { ?>
-    <?php echo t("Bonjour !" ); ?>
-<?php } ?>
-PHP;
+        $this->assertFile('php-code', $this->oTalSyntax);
+    }
 
-        $this->oTalSyntax->set($sTalCode);
-        $this->oTalSyntax->parse();
+    public function testInlinePhpCode()
+    {
+        $this->assertFile('php-code-inline', $this->oTalSyntax);
+    }
 
-        $this->assertSame($sPhpCode, $this->oTalSyntax->get());
+    public function testEcho()
+    {
+        $this->assertFile('echo', $this->oTalSyntax);
+    }
+
+    public function testIfStatement()
+    {
+        $this->assertFile('if', $this->oTalSyntax);
+    }
+
+    public function testElseifStatement()
+    {
+        $this->assertFile('elseif', $this->oTalSyntax);
+    }
+
+    public function testElseStatement()
+    {
+        $this->assertFile('else', $this->oTalSyntax);
+    }
+
+    public function testIfISet()
+    {
+        $this->assertFile('if-set', $this->oTalSyntax);
+    }
+
+    public function testIfEmpty()
+    {
+        $this->assertFile('if-empty', $this->oTalSyntax);
+    }
+
+    public function testIfEqual()
+    {
+        $this->assertFile('if-equal', $this->oTalSyntax);
+    }
+
+    public function testForLoop()
+    {
+        $this->assertFile('for', $this->oTalSyntax);
+    }
+
+    public function testWhileLoop()
+    {
+        $this->assertFile('while', $this->oTalSyntax);
+    }
+
+    public function testEachLoop()
+    {
+        $this->assertFile('each', $this->oTalSyntax);
+    }
+
+    public function testEscapeFunction()
+    {
+        $this->assertFile('escape', $this->oTalSyntax);
+    }
+
+    public function testInlineLangFunction()
+    {
+        $this->assertFile('lang-inline', $this->oTalSyntax);
+    }
+
+    public function testLangFunction()
+    {
+        $this->assertFile('lang', $this->oTalSyntax);
+    }
+
+    public function testLiteralFunction()
+    {
+        $this->assertFile('literal', $this->oTalSyntax);
+    }
+
+    protected function getInputDirectory()
+    {
+        return self::INPUT_DIR;
+    }
+
+    protected function getOutputDirectory()
+    {
+        return self::OUTPUT_DIR;
+    }
+
+    protected function getInputTemplateFileExtension()
+    {
+        return self::INPUT_TPL_FILE_EXT;
+    }
+
+    protected function getOutputPhpFileExtension()
+    {
+        return self::OUTPUT_PHP_FILE_EXT;
     }
 }
