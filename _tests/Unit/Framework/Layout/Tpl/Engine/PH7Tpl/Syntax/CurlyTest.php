@@ -39,71 +39,81 @@ class CurlyTest extends SyntaxTestCase
 
     public function testPhpCode()
     {
-        $this->assertFile('php-code');
+        $this->assertFile('php-code', $this->oCurlySyntax);
     }
 
     public function testEcho()
     {
-        $this->assertFile('echo');
+        $this->assertFile('echo', $this->oCurlySyntax);
     }
 
     public function testIfStatement()
     {
-        $this->assertFile('if');
+        $this->assertFile('if', $this->oCurlySyntax);
     }
 
     public function testElseifStatement()
     {
-        $this->assertFile('elseif');
+        $this->assertFile('elseif', $this->oCurlySyntax);
     }
 
     public function testElseStatement()
     {
-        $this->assertFile('else');
+        $this->assertFile('else', $this->oCurlySyntax);
     }
 
     public function testForLoop()
     {
-        $this->assertFile('for');
+        $this->assertFile('for', $this->oCurlySyntax);
     }
 
     public function testWhileLoop()
     {
-        $this->assertFile('while');
+        $this->assertFile('while', $this->oCurlySyntax);
     }
 
     public function testEachLoop()
     {
-        $this->assertFile('each');
+        $this->assertFile('each', $this->oCurlySyntax);
     }
 
     public function testEscapeFunction()
     {
-        $this->assertFile('escape');
+        $this->assertFile('escape', $this->oCurlySyntax);
     }
 
     public function testInlineLangFunction()
     {
-        $this->assertFile('lang-inline');
+        $this->assertFile('lang-inline', $this->oCurlySyntax);
     }
 
     public function testLangFunction()
     {
-        $this->assertFile('lang');
+        $this->assertFile('lang', $this->oCurlySyntax);
     }
 
     public function testLiteralFunction()
     {
-        $this->assertFile('literal');
+        $this->assertFile('literal', $this->oCurlySyntax);
     }
 
-    private function assertFile($sName)
+    public function getInputDirectory()
     {
-        $sTplCode = file_get_contents(self::FIXTURE_PATH . self::INPUT_DIR . $sName . self::INPUT_TPL_FILE_EXT);
-        $sPhpCode = file_get_contents(self::FIXTURE_PATH  . self::OUTPUT_DIR . $sName . self::OUTPUT_PHP_FILE_EXT);
-        $this->oCurlySyntax->set($sTplCode);
-        $this->oCurlySyntax->parse();
+        return self::INPUT_DIR;
+    }
 
-        $this->assertSame($sPhpCode, $this->oCurlySyntax->get());
+    public function getOutputDirectory()
+    {
+        return self::OUTPUT_DIR;
+    }
+
+    public function getInputTemplateFileExtension()
+    {
+        return self::INPUT_TPL_FILE_EXT;
+    }
+
+    public function getOutputPhpFileExtension()
+    {
+        return self::OUTPUT_PHP_FILE_EXT;
     }
 }
