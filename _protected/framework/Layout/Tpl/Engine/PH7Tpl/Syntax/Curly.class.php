@@ -82,6 +82,6 @@ class Curly extends Syntax
         $this->sCode = preg_replace('#{lang}([^\{\}]+){/lang}#', '<?php echo t(\'$1\'); ?>', $this->sCode);
 
         /***** {literal} JavaScript Code {/literal} *****/
-        $this->sCode = preg_replace('#{literal}(.+){/literal}#', '$1', $this->sCode);
+        $this->sCode = preg_replace('#{literal}(.*){/literal}#sU', '$1', $this->sCode);
     }
 }

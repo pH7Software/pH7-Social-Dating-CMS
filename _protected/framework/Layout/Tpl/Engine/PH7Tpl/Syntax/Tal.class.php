@@ -142,6 +142,6 @@ class Tal extends Syntax
         );
 
         /***** literal JavaScript Code *****/
-        $this->sCode = preg_replace('#<ph:literal>(.+)</ph:literal>#', '$1', $this->sCode);
+        $this->sCode = preg_replace('#<ph:literal>(.+)</ph:literal>#sU', '$1', $this->sCode);
     }
 }
