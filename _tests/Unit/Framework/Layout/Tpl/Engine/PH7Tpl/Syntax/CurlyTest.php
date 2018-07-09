@@ -10,7 +10,6 @@ namespace PH7\Test\Unit\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax;
 
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax\Curly as CurlySyntax;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax\EmptyCodeException;
-use PHPUnit_Framework_TestCase;
 
 class CurlyTest extends SyntaxTestCase
 {
