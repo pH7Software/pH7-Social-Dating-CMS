@@ -183,6 +183,6 @@ class Tal extends Syntax
         $this->sCode = preg_replace('#{([a-z0-9_]+)}#i', '<?php echo $$1; ?>', $this->sCode);
 
         /***** Clears comments: ### comment here ### *****/
-        $this->sCode = preg_replace('/###\*.+\###/sU', null, $this->sCode);
+        $this->sCode = preg_replace('/###.+###/sU', null, $this->sCode);
     }
 }
