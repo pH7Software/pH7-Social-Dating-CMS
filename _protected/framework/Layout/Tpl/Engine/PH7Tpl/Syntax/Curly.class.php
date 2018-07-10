@@ -21,12 +21,44 @@ class Curly extends Syntax
      */
     public function parse()
     {
-        if (empty($this->sCode)) {
+        if ($this->isCodeUnset()) {
             throw new EmptyCodeException(
                 'Parsing code unset!',
                 EmptyCodeException::CURLY_SYNTAX
             );
         }
+
+        /***** Includes *****/
+        $this->sCode = str_replace(
+            '{auto_include}',
+            '<?php $this->display($this->getCurrentController() . PH7_DS . $this->registry->action . \'' . PH7Tpl::TEMPLATE_FILE_EXT . '\', $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>',
+            $this->sCode
+        );
+        $this->sCode = preg_replace(
+            '#{include ([^\{\}\n]+)}#',
+            '<?php $this->display($1); ?>',
+            $this->sCode
+        );
+        $this->sCode = preg_replace(
+            '#{main_include ([^\{\}\n]+)}#',
+            '<?php $this->display($1, PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS); ?>',
+            $this->sCode
+        );
+        $this->sCode = preg_replace(
+            '#{def_main_auto_include}#',
+            '<?php $this->display(\'' . $this->sTplFile . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
+            $this->sCode
+        );
+        $this->sCode = preg_replace(
+            '#{def_main_include ([^\{\}\n]+)}#',
+            '<?php $this->display($1, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
+            $this->sCode
+        );
+        $this->sCode = preg_replace(
+            '#{manual_include ([^\{\}\n]+)}#',
+            '<?php $this->display($this->getCurrentController() . PH7_DS . $1, $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>',
+            $this->sCode
+        );
 
         /***** <?php *****/
         $this->sCode = str_replace('{{', '<?php ', $this->sCode);
@@ -86,5 +118,11 @@ class Curly extends Syntax
 
         /***** {literal} JavaScript Code {/literal} *****/
         $this->sCode = preg_replace('#{literal}(.*){/literal}#sU', '$1', $this->sCode);
+
+        /***** Variables *****/
+        $this->sCode = preg_replace('#{([a-z0-9_]+)}#i', '<?php echo $$1; ?>', $this->sCode);
+
+        /***** Clears comments {* comment *} *****/
+        $this->sCode = preg_replace('#{\*.+\*}#isU', null, $this->sCode);
     }
 }

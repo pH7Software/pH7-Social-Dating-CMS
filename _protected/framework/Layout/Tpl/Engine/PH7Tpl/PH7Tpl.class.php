@@ -709,61 +709,24 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     }
 
     /**
-     * Parse the generic code for translating the template language.
+     * Parse the template syntax code for translating the language template to PHP.
      *
      * @return void
      */
     private function parse()
     {
-        /***** Includes *****/
-        $this->sCode = str_replace(
-            '{auto_include}',
-            '<?php $this->display($this->getCurrentController() . PH7_DS . $this->registry->action . \'' . $this->sTplExt . '\', $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>',
-            $this->sCode
-        );
-        $this->sCode = preg_replace(
-            '#{include ([^\{\}\n]+)}#',
-            '<?php $this->display($1); ?>',
-            $this->sCode
-        );
-        $this->sCode = preg_replace(
-            '#{main_include ([^\{\}\n]+)}#',
-            '<?php $this->display($1, PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS); ?>',
-            $this->sCode
-        );
-        $this->sCode = preg_replace(
-            '#{def_main_auto_include}#',
-            '<?php $this->display(\'' . $this->sTplFile . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
-            $this->sCode
-        );
-        $this->sCode = preg_replace(
-            '#{def_main_include ([^\{\}\n]+)}#',
-            '<?php $this->display($1, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
-            $this->sCode
-        );
-        $this->sCode = preg_replace(
-            '#{manual_include ([^\{\}\n]+)}#',
-            '<?php $this->display($this->getCurrentController() . PH7_DS . $1, $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>',
-            $this->sCode
-        );
-
-        /***** Objects *****/
+        /***** Object shortcuts *****/
         $this->sCode = str_replace(
             ['$browser->', '$designModel->'],
             ['$this->browser->', '$this->designModel->'],
             $this->sCode
         );
 
-        /***** Parse pH7Tpl syntax *****/
-        $this->oSyntaxEngine->set($this->sCode);
+        /***** Parse pH7Tpl's syntax *****/
+        $this->oSyntaxEngine->setCode($this->sCode);
+        $this->oSyntaxEngine->setTemplateFile($this->sTplFile);
         $this->oSyntaxEngine->parse();
-        $this->sCode = $this->oSyntaxEngine->get();
-
-        /***** Variables *****/
-        $this->sCode = preg_replace('#{([a-z0-9_]+)}#i', '<?php echo $$1; ?>', $this->sCode);
-
-        /***** Clears comments {* comment *} *****/
-        $this->sCode = preg_replace('#{\*.+\*}#isU', null, $this->sCode);
+        $this->sCode = $this->oSyntaxEngine->getParsedCode();
 
         /***** Code optimization *****/
         $this->optimization();

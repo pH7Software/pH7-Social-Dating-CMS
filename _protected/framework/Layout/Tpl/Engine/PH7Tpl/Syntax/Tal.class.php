@@ -12,6 +12,8 @@
 
 namespace PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax;
 
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
+
 defined('PH7') or exit('Restricted access');
 
 class Tal extends Syntax
@@ -23,12 +25,44 @@ class Tal extends Syntax
      */
     public function parse()
     {
-        if (empty($this->sCode)) {
+        if ($this->isCodeUnset()) {
             throw new EmptyCodeException(
                 'Parsing code unset!',
                 EmptyCodeException::TAL_SYNTAX
             );
         }
+
+        /***** Includes *****/
+        $this->sCode = str_replace(
+            '<ph:auto_include ?/?>',
+            '<?php $this->display($this->getCurrentController() . PH7_DS . $this->registry->action . \'' . PH7Tpl::TEMPLATE_FILE_EXT . '\', $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>',
+            $this->sCode
+        );
+        $this->sCode = preg_replace(
+            '#<ph:include ([^\{\}\n]+) ?/?>#',
+            '<?php $this->display($1); ?>',
+            $this->sCode
+        );
+        $this->sCode = preg_replace(
+            '#<ph:main_include ([^\{\}\n]+) ?/?>#',
+            '<?php $this->display($1, PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS); ?>',
+            $this->sCode
+        );
+        $this->sCode = preg_replace(
+            '#<ph:def_main_auto_include ?/?>#',
+            '<?php $this->display(\'' . $this->sTplFile . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
+            $this->sCode
+        );
+        $this->sCode = preg_replace(
+            '#<ph:def_main_include ([^\{\}\n]+) ?/?>#',
+            '<?php $this->display($1, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
+            $this->sCode
+        );
+        $this->sCode = preg_replace(
+            '#<ph:manual_include ([^\{\}\n]+) ?/?>#',
+            '<?php $this->display($this->getCurrentController() . PH7_DS . $1, $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>',
+            $this->sCode
+        );
 
         /***** <?php *****/
         $this->sCode = str_replace('<ph:code>', '<?php ', $this->sCode);
@@ -144,5 +178,11 @@ class Tal extends Syntax
 
         /***** literal JavaScript Code *****/
         $this->sCode = preg_replace('#<ph:literal>(.+)</ph:literal>#sU', '$1', $this->sCode);
+
+        /***** Variables *****/
+        $this->sCode = preg_replace('#{([a-z0-9_]+)}#i', '<?php echo $$1; ?>', $this->sCode);
+
+        /***** Clears comments: ### comment here ### *****/
+        $this->sCode = preg_replace('/###\*.+\###/sU', null, $this->sCode);
     }
 }

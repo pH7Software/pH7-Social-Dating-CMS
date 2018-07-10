@@ -16,6 +16,9 @@ abstract class Syntax
     /** @var string */
     protected $sCode;
 
+    /** @var string */
+    protected $sTplFile;
+
     /**
      * Parse pH7Tpl's language syntax.
      *
