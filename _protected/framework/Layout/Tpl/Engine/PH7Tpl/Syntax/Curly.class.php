@@ -123,6 +123,6 @@ class Curly extends Syntax
         $this->sCode = preg_replace('#{([a-z0-9_]+)}#i', '<?php echo $$1; ?>', $this->sCode);
 
         /***** Clears comments {* comment *} *****/
-        $this->sCode = preg_replace('#{\*.+\*}#isU', null, $this->sCode);
+        $this->sCode = preg_replace('#{\*.+\*}#sU', null, $this->sCode);
     }
 }
