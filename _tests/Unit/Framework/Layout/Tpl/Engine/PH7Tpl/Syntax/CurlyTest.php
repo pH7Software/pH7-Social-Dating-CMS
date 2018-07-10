@@ -136,6 +136,21 @@ class CurlyTest extends SyntaxTestCase
         $this->assertFile('literal', $this->oCurlySyntax);
     }
 
+    public function testVariable()
+    {
+        $this->assertFile('variable', $this->oCurlySyntax);
+    }
+
+    public function testSingleLineComment()
+    {
+        $this->assertFile('comment-single-line', $this->oCurlySyntax);
+    }
+
+    public function testComment()
+    {
+        $this->assertFile('comment', $this->oCurlySyntax);
+    }
+
     protected function getInputDirectory()
     {
         return self::INPUT_DIR;
