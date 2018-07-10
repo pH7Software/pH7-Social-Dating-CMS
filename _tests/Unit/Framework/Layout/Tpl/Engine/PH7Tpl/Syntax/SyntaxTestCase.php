@@ -45,9 +45,10 @@ abstract class SyntaxTestCase extends PHPUnit_Framework_TestCase
     {
         $sTplCode = file_get_contents(static::FIXTURE_PATH . $this->getInputDirectory() . $sName . $this->getInputTemplateFileExtension());
         $sPhpCode = file_get_contents(static::FIXTURE_PATH . $this->getOutputDirectory() . $sName . $this->getOutputPhpFileExtension());
-        $oSyntaxEngine->set($sTplCode);
+        $oSyntaxEngine->setCode($sTplCode);
+        $oSyntaxEngine->setTemplateFile('layout.tpl');
         $oSyntaxEngine->parse();
 
-        $this->assertSame($sPhpCode, $oSyntaxEngine->get());
+        $this->assertSame($sPhpCode, $oSyntaxEngine->getParsedCode());
     }
 }

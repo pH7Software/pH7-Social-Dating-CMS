@@ -31,7 +31,7 @@ abstract class Syntax
      *
      * @return string
      */
-    public function get()
+    public function getParsedCode()
     {
         return $this->sCode;
     }
@@ -41,8 +41,24 @@ abstract class Syntax
      *
      * @param string $sCode
      */
-    public function set($sCode)
+    public function setCode($sCode)
     {
         $this->sCode = $sCode;
+    }
+
+    /**
+     * @param string $sTplFile
+     */
+    public function setTemplateFile($sTplFile)
+    {
+        $this->sTplFile = $sTplFile;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isCodeUnset()
+    {
+        return empty($this->sCode);
     }
 }
