@@ -33,19 +33,19 @@ class Tal extends Syntax
         }
 
         /***** Includes *****/
-        $this->sCode = str_replace(
-            '<ph:auto_include ?/?>',
+        $this->sCode = preg_replace(
+            '#<ph:auto_include ?/?>#',
             '<?php $this->display($this->getCurrentController() . PH7_DS . $this->registry->action . \'' . PH7Tpl::TEMPLATE_FILE_EXT . '\', $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>',
             $this->sCode
         );
         $this->sCode = preg_replace(
-            '#<ph:include ([^\{\}\n]+) ?/?>#',
-            '<?php $this->display($1); ?>',
+            '#<ph:include (?:"|\')([^\<\>"\'\n]+)(?:"|\') ?/?>#',
+            '<?php $this->display(\'$1\'); ?>',
             $this->sCode
         );
         $this->sCode = preg_replace(
-            '#<ph:main_include ([^\{\}\n]+) ?/?>#',
-            '<?php $this->display($1, PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS); ?>',
+            '#<ph:main_include (?:"|\')([^\<\>"\'\n]+)(?:"|\') ?/?>#',
+            '<?php $this->display(\'$1\', PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS); ?>',
             $this->sCode
         );
         $this->sCode = preg_replace(
@@ -54,13 +54,13 @@ class Tal extends Syntax
             $this->sCode
         );
         $this->sCode = preg_replace(
-            '#<ph:def_main_include ([^\{\}\n]+) ?/?>#',
-            '<?php $this->display($1, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
+            '#<ph:def_main_include (?:"|\')([^\<\>"\'\n]+)(?:"|\') ?/?>#',
+            '<?php $this->display(\'$1\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
             $this->sCode
         );
         $this->sCode = preg_replace(
-            '#<ph:manual_include ([^\{\}\n]+) ?/?>#',
-            '<?php $this->display($this->getCurrentController() . PH7_DS . $1, $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>',
+            '#<ph:manual_include (?:"|\')([^\<\>"\'\n]+)(?:"|\') ?/?>#',
+            '<?php $this->display($this->getCurrentController() . PH7_DS . \'$1\', $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>',
             $this->sCode
         );
 
