@@ -16,6 +16,7 @@ use DateInterval;
 use DateTime;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\File\File;
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Payment\Gateway\Api\Api as ApiInterface;
@@ -240,7 +241,7 @@ class MainController extends Controller
         }
 
         // Set the valid template page
-        $this->manualTplInclude($this->getTemplatePageName() . $this->view->getTplExt());
+        $this->manualTplInclude($this->getTemplatePageName() . PH7Tpl::TEMPLATE_FILE_EXT);
 
         if ($this->bStatus) {
             $this->setAutomaticRedirectionToHomepage();

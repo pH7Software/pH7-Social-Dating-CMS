@@ -49,6 +49,7 @@ class PH7Tpl extends Kernel implements GenerableFile
     const MAIN_PAGE = 'layout';
     const MAIN_COMPILE_PAGE = 'layout.cpl.php';
     const XML_SITEMAP_COMPILE_PAGE = 'mainlayout.xsl.cpl.php';
+    const TEMPLATE_FILE_EXT = '.tpl';
     const COMPILE_FILE_EXT = '.cpl.php';
 
     const RESERVED_WORDS = [
@@ -95,9 +96,6 @@ class PH7Tpl extends Kernel implements GenerableFile
     /** @var string */
     private $sCacheDirFile;
 
-    /** @var string Template extension */
-    private $sTplExt = '.tpl';
-
     /** @var bool */
     private $bCaching = false;
 
@@ -142,29 +140,7 @@ class PH7Tpl extends Kernel implements GenerableFile
      */
     public function getMainPage()
     {
-        return static::MAIN_PAGE . $this->sTplExt;
-    }
-
-    /**
-     * Get the template extension.
-     *
-     * @return string The extension with the dot.
-     */
-    public function getTplExt()
-    {
-        return $this->sTplExt;
-    }
-
-    /**
-     * Set the template extension.
-     *
-     * @param string $sExt The extension with the dot.
-     *
-     * @return void
-     */
-    public function setTplExt($sExt)
-    {
-        $this->sTplExt = $sExt;
+        return static::MAIN_PAGE . self::TEMPLATE_FILE_EXT;
     }
 
     /**

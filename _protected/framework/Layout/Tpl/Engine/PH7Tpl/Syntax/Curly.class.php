@@ -10,6 +10,8 @@
 
 namespace PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax;
 
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
+
 defined('PH7') or exit('Restricted access');
 
 class Curly extends Syntax
