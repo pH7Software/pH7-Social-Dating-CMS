@@ -36,6 +36,36 @@ class CurlyTest extends SyntaxTestCase
         $this->oCurlySyntax->parse();
     }
 
+    public function testAutoIncludeStatement()
+    {
+        $this->assertFile('auto-include', $this->oCurlySyntax);
+    }
+
+    public function testIncludeStatement()
+    {
+        $this->assertFile('include', $this->oCurlySyntax);
+    }
+
+    public function testMainIncludeStatement()
+    {
+        $this->assertFile('main-include', $this->oCurlySyntax);
+    }
+
+    public function testDefMainAutoIncludeStatement()
+    {
+        $this->assertFile('def-main-auto-include', $this->oCurlySyntax);
+    }
+
+    public function testDefMainIncludeStatement()
+    {
+        $this->assertFile('def-main-include', $this->oCurlySyntax);
+    }
+
+    public function testManualIncludeStatement()
+    {
+        $this->assertFile('manual-include', $this->oCurlySyntax);
+    }
+
     public function testPhpCode()
     {
         $this->assertFile('php-code', $this->oCurlySyntax);
