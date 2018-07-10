@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
     <!-- Begin Title and Meta info -->
-    <title>{if $page_title}{% $this->str->escape($this->str->upperFirst($page_title), true) %} - {site_name}{else}{site_name} - {slogan}{/if}</title>
-    <meta name="description" content="{% $this->str->escape($this->str->upperFirst($meta_description), true) %}" />
-    <meta name="keywords" content="{% $this->str->escape($meta_keywords, true) %}" />
+    <title>{if $page_title}{% $str->escape($str->upperFirst($page_title), true) %} - {site_name}{else}{site_name} - {slogan}{/if}</title>
+    <meta name="description" content="{% $str->escape($str->upperFirst($meta_description), true) %}" />
+    <meta name="keywords" content="{% $str->escape($meta_keywords, true) %}" />
     <meta name="robots" content="{meta_robots}" />
     <link rel="icon" href="{url_relative}favicon.ico" />
     <link rel="canonical" href="{current_url}" />

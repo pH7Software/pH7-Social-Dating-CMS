@@ -173,7 +173,6 @@ abstract class Controller extends Core
     private function assignGlobalTplVars()
     {
         // Set config and design objects to the template
-        $this->view->config = $this->config;
         $this->view->design = $this->design;
 
         $bIsMobApp = MobApp::is($this->httpRequest, $this->session);

@@ -717,8 +717,18 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     {
         /***** Object shortcuts *****/
         $this->sCode = str_replace(
-            ['$browser->', '$designModel->'],
-            ['$this->browser->', '$this->designModel->'],
+            [
+                '$browser->',
+                '$registry->',
+                '$str->',
+                '$config->'
+            ],
+            [
+                '$this->browser->',
+                '$this->registry->',
+                '$this->str->',
+                '$this->config->'
+            ],
             $this->sCode
         );
 
