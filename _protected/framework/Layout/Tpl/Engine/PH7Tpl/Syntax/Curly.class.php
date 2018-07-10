@@ -44,8 +44,8 @@ class Curly extends Syntax
             '<?php $this->display($1, PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS); ?>',
             $this->sCode
         );
-        $this->sCode = preg_replace(
-            '#{def_main_auto_include}#',
+        $this->sCode = str_replace(
+            '{def_main_auto_include}',
             '<?php $this->display(\'' . $this->sTplFile . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
             $this->sCode
         );
