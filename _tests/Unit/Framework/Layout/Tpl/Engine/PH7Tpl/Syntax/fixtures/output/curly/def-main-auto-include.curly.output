@@ -1,0 +1,1 @@
+<?php $this->display('layout.tpl', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>
