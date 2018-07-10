@@ -151,6 +151,21 @@ class TalTest extends SyntaxTestCase
         $this->assertFile('literal', $this->oTalSyntax);
     }
 
+    public function testVariable()
+    {
+        $this->assertFile('variable', $this->oTalSyntax);
+    }
+
+    public function testSingleLineComment()
+    {
+        $this->assertFile('comment-single-line', $this->oTalSyntax);
+    }
+
+    public function testComment()
+    {
+        $this->assertFile('comment', $this->oTalSyntax);
+    }
+
     protected function getInputDirectory()
     {
         return self::INPUT_DIR;
