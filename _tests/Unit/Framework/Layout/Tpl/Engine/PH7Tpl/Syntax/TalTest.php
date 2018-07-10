@@ -36,6 +36,36 @@ class TalTest extends SyntaxTestCase
         $this->oTalSyntax->parse();
     }
 
+    public function testAutoIncludeStatement()
+    {
+        $this->assertFile('auto-include', $this->oTalSyntax);
+    }
+
+    public function testIncludeStatement()
+    {
+        $this->assertFile('include', $this->oTalSyntax);
+    }
+
+    public function testMainIncludeStatement()
+    {
+        $this->assertFile('main-include', $this->oTalSyntax);
+    }
+
+    public function testDefMainAutoIncludeStatement()
+    {
+        $this->assertFile('def-main-auto-include', $this->oTalSyntax);
+    }
+
+    public function testDefMainIncludeStatement()
+    {
+        $this->assertFile('def-main-include', $this->oTalSyntax);
+    }
+
+    public function testManualIncludeStatement()
+    {
+        $this->assertFile('manual-include', $this->oTalSyntax);
+    }
+
     public function testPhpCode()
     {
         $this->assertFile('php-code', $this->oTalSyntax);
