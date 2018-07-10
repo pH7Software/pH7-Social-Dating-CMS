@@ -4,5 +4,5 @@
 </p>
 
 <div role="banner" class="center ad_728_90">
-    {{ $designModel->ad(728,90) }}
+    {designModel.ad(728, 90)}
 </div>

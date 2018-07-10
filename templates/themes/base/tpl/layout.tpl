@@ -48,7 +48,7 @@
 
     <!-- Other sheet CSS for modules etc. -->
     {{ $design->css() }}
-    {{ $designModel->files('css') }}
+    {designModel.files('css')}
     <!-- End CSS -->
 
     <!-- Begin Header JavaScript -->
@@ -67,7 +67,7 @@
     {{ XmlDesignCore::sitemapHeaderLink() }}
     {{ XmlDesignCore::rssHeaderLinks() }}
 
-    {{ $designModel->analyticsApi() }}
+    {designModel.analyticsApi()}
   </head>
   <body>
 
@@ -112,7 +112,7 @@
       {* Don't display the top middle banner on the the splash page *}
       {if !$is_guest_homepage}
           <div role="banner" class="center ad_468_60">
-              {{ $designModel->ad(468, 60) }}
+              {designModel.ad(468, 60)}
           </div>
       {/if}
 
@@ -152,14 +152,14 @@
       </div>
     </div>
     <div role="banner" class="center ad_468_60">
-        {{ $designModel->ad(468, 60) }}
+        {designModel.ad(468, 60)}
     </div>
     <!-- End Content -->
 
     <!-- Begin Footer -->
     <footer>
       <div role="banner" class="center ad_728_90">
-          {{ $designModel->ad(728, 90) }}
+          {designModel.ad(728, 90)}
       </div>
 
       {* To avoid scammers *}
@@ -227,7 +227,7 @@
 
     <!-- Other JavaScript files for modules etc. -->
     {{ $design->js() }}
-    {{ $designModel->files('js') }}
+    {designModel.files('js')}
 
     {if $is_user_auth}
       {main_include 'favicon_alert.inc.tpl'}
