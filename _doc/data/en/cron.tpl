@@ -21,6 +21,6 @@
 
 <p>
     Do this for the rest of the URLs with the time corresponding to the folder name.<br />
-    All cron jobs are located in the following directory: <code>"/YOUR-PATH/YOUR-PROTECTED-FOLDER/app/system/assets/cron/"</code><br />
+    All cron jobs are located in the following directory: <code>"/YOUR-PATH/YOUR-PROTECTED-FOLDER/app/system/core/assets/cron/"</code><br />
     <strong>Be Careful! Don't specify the end of the file: Cron.php in the executor of the cron job.</strong>
 </p>

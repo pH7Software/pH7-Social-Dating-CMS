@@ -12,6 +12,6 @@ Vous avez aussi des paramètres GET "option" qui sont facultatifs. Exemple : <co
 
 Faites ceci pour le reste des URLs avec l'heure correspondent au nom du dossier.<br />
 
-Toutes les tâches cron se trouvent dans le répertoire suivant : <code>"/CHEMIN-DU-SERVEUR/VOTRE-DOSSIER-PROTECTED/app/system/assets/cron/"</code><br />
+Toutes les tâches cron se trouvent dans le répertoire suivant : <code>"/CHEMIN-DU-SERVEUR/VOTRE-DOSSIER-PROTECTED/app/system/core/assets/cron/"</code><br />
 
 <strong>Attention, vous ne devez pas mettre la fin du fichier : "Cron.php" dans l'exécuteur des tâches cron.</strong></p>
