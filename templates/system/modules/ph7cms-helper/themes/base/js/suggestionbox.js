@@ -17,7 +17,7 @@ var $suggestionBox = (function () {
 });
 
 var $amendBoxBgColor = (function () {
-    var aHexBgdColors = [
+    var aHexColors = [
         '#ffffff',
         '#eceff1',
         '#ffdcd8',
@@ -32,10 +32,8 @@ var $amendBoxBgColor = (function () {
         '#b2dfdb'
     ];
 
-    $('#cboxContent').css(
-        'background-color',
-        aHexBgdColors[Math.floor((Math.random() * aHexBgdColors.length))] + ' !important'
-    );
+    var sRandomHexColor = aHexColors[Math.floor((Math.random() * aHexColors.length))];
+    $('#cboxContent').css('background-color', sRandomHexColor + ' !important')
 });
 
 $(document).ready(function () {
