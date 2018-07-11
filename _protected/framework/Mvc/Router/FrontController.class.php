@@ -75,7 +75,7 @@ final class FrontController
      */
     private function __construct()
     {
-        /** Objects are created for the functioning of the class. * */
+        /** Objects are created for the functioning of the class **/
         $this->oConfig = Config::getInstance();
         $this->oRegistry = Registry::getInstance();
         $this->oHttpRequest = new Http;
@@ -630,7 +630,7 @@ final class FrontController
             if ($sKey !== 0) {
                 $this->oHttpRequest->setGet($aVars[$sKey - 1], $sMatch);
 
-                /** Request Parameter for the Router Rewriting mode. * */
+                /** Request Parameter for the Router Rewriting mode **/
                 $this->aRequestParameter = $this->oUri->segments($this->oUri->totalFragment() - $iOffset);
             }
         }

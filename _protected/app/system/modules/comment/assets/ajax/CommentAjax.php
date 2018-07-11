@@ -38,7 +38,7 @@ class Comment
             exit(jsonMsg(0, Form::errorTokenMsg()));
         }
 
-        /** Instance objects for the class * */
+        /** Instance objects for the class **/
         $this->oSession = new Session;
         $this->oHttpRequest = new HttpRequest;
         $this->oCommentModel = new CommentModel;
