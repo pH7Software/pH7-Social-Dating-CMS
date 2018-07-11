@@ -37,7 +37,7 @@ class StoreStats
             throw new Exception('Cannot get cache file: ' . $sFullPath);
         }
 
-        $aData = !empty($aGetData) ? unserialize($aGetData) : array();
+        $aData = !empty($aGetData) ? unserialize($aGetData) : [];
 
         return $aData;
     }
@@ -55,7 +55,7 @@ class StoreStats
     protected function save($sFileName, $sContents)
     {
         $sFullPath = PH7_PATH_TMP . static::DIR . $sFileName . static::EXT;
-        $aData = array();
+        $aData = [];
         $iFlag = 0;
 
         if (is_file($sFullPath)) {

@@ -44,7 +44,7 @@ class SysVar
      *
      * @param string $sVar
      *
-     * @return The new parsed text
+     * @return string The new parsed text
      */
     public function parse($sVar)
     {

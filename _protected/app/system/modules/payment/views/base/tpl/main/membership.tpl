@@ -1,3 +1,5 @@
+{{ $num_enabled_membership = 0 }}
+
 <div class="center">
     <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
@@ -6,6 +8,7 @@
                 <ul class="list-group">
                     {each $membership in $memberships}
                         {if $membership->enable == 1 AND $membership->price != 0}
+                            {{ $num_enabled_membership++ }}
                             <li class="list-group-item clearfix">
                                 <div class="pull-left">
                                     <h4 class="underline">{% $membership->name %}</h4>
@@ -29,12 +32,10 @@
                                     <a class="btn btn-default" href="{{ $design->url('payment', 'main', 'pay', $membership->groupId) }}" title="{lang 'Purchase this membership!'}">{lang 'Choose It'}</a>
                                 </p>
                             </li>
-                        {else}
-                            {{ $not_found = true }}
                         {/if}
                     {/each}
 
-                    {if isset($not_found)}
+                    {if $num_enabled_membership === 0}
                         <li class="red">
                             {lang 'There are no other memberships available for the moment.'}<br />
                             {lang 'Please come back later on.'}
