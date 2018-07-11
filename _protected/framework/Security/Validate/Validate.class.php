@@ -377,7 +377,7 @@ class Validate
         $sHexChars = str_replace(self::HEX_HASH, '', $sHexCode);
         $iLength = strlen($sHexChars);
 
-        return strpos($sHexCode, '#') !== false && $iLength >= self::MIN_HEX_LENGTH && $iLength <= self::MAX_HEX_LENGTH;
+        return strpos($sHexCode, self::HEX_HASH) !== false && $iLength >= self::MIN_HEX_LENGTH && $iLength <= self::MAX_HEX_LENGTH;
     }
 
     /**
