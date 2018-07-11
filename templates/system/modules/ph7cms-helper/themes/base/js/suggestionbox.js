@@ -16,4 +16,22 @@ var $suggestionBox = (function () {
     })
 });
 
-$suggestionBox();
+var $amendBoxBgColor = (function () {
+    var aHexBgdColors = [
+        '#fff',
+        '#eceff1',
+        '#defec8',
+        '#ffdcd8'
+
+    ];
+
+    $('#cboxContent').css(
+        'background-color',
+        aHexBgdColors[Math.floor((Math.random() * aHexBgdColors.length))] + ' !important'
+    );
+});
+
+$(document).ready(function () {
+    $suggestionBox();
+    $amendBoxBgColor();
+});
