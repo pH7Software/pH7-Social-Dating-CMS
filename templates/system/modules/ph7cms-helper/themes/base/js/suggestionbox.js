@@ -18,11 +18,18 @@ var $suggestionBox = (function () {
 
 var $amendBoxBgColor = (function () {
     var aHexBgdColors = [
-        '#fff',
+        '#ffffff',
         '#eceff1',
-        '#defec8',
-        '#ffdcd8'
-
+        '#ffdcd8',
+        '#d1dce5',
+        '#f9fbe7',
+        '#ffe0b2',
+        '#ffecb3',
+        '#fff9c4',
+        '#ffccbc',
+        '#e0f7fa',
+        '#fce4ec',
+        '#b2dfdb'
     ];
 
     $('#cboxContent').css(
