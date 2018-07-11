@@ -116,6 +116,11 @@ class CurlyTest extends SyntaxTestCase
         $this->assertFile('each', $this->oCurlySyntax);
     }
 
+    public function testDesignModelObject()
+    {
+        $this->assertFile('design-model', $this->oCurlySyntax);
+    }
+
     public function testEscapeFunction()
     {
         $this->assertFile('escape', $this->oCurlySyntax);
