@@ -9,7 +9,7 @@
                 {{ $comment = nl2br(
                     Framework\Parse\User::atUsernameToLink(
                         Framework\Parse\Emoticon::init(
-                            escape($this->str->extract(Framework\Security\Ban\Ban::filterWord($com->comment)), true)
+                            escape($str->extract(Framework\Security\Ban\Ban::filterWord($com->comment)), true)
                         )
                     )
                 ) }}

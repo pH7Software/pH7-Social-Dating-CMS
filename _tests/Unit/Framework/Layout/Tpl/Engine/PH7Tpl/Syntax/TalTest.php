@@ -131,6 +131,11 @@ class TalTest extends SyntaxTestCase
         $this->assertFile('each', $this->oTalSyntax);
     }
 
+    public function testDesignModelObject()
+    {
+        $this->assertFile('design-model', $this->oTalSyntax);
+    }
+
     public function testEscapeFunction()
     {
         $this->assertFile('escape', $this->oTalSyntax);

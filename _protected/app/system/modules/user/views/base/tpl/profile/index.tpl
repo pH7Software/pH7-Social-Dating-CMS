@@ -297,7 +297,7 @@
                 <p class="bold">{lang 'Description:'}</p>
                 <div class="quote italic">{description}</div>
                 <div class="ad_336_280">
-                    {{ $designModel->ad(336, 280) }}
+                    {designModel.ad(336, 280)}
                 </div>
             </div>
         {/if}
@@ -413,7 +413,7 @@
 
     {* Signup Popup *}
     {if !$is_logged AND !AdminCore::auth()}
-        {{ $design->staticFiles('js', PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'signup_popup.js') }}
+        {{ $design->staticFiles('js', PH7_LAYOUT . PH7_SYS . PH7_MOD . $registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'signup_popup.js') }}
     {/if}
 {else}
     <p class="center">{error}</p>

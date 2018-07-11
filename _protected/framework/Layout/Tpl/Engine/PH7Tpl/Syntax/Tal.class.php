@@ -157,6 +157,13 @@ class Tal extends Syntax
             $this->sCode
         );
 
+        /***** <ph:designmodel value=[a-z0-9_]+()" /> *****/
+        $this->sCode = preg_replace(
+            '#<ph:designmodel value=(?:"|\')([a-z0-9_]+)\((.*)\)(?:"|\') ?/?>#i',
+            '<?php $this->designModel->$1($2) ?>',
+            $this->sCode
+        );
+
         /***** Escape (htmlspecialchars) *****/
         $this->sCode = preg_replace(
             '#<ph:escape value=([^\<\>/\n]+) ?/?>#',

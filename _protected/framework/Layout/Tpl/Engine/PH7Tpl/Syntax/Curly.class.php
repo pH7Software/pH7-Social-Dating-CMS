@@ -105,6 +105,13 @@ class Curly extends Syntax
         /***** endif | endfor | endwhile | endforeach *****/
         $this->sCode = str_replace(['{/if}', '{/for}', '{/while}', '{/each}'], '<?php } ?>', $this->sCode);
 
+        /***** {designModel.[a-z0-9_]+()} *****/
+        $this->sCode = preg_replace(
+            '#{designModel\.([a-z0-9_]+)\((.*)\)}#i',
+            '<?php $this->designModel->$1($2) ?>',
+            $this->sCode
+        );
+
         /***** Escape (htmlspecialchars) *****/
         $this->sCode = preg_replace(
             '#{escape ([^\{\}]+)}#',

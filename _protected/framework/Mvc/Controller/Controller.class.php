@@ -172,8 +172,10 @@ abstract class Controller extends Core
      */
     private function assignGlobalTplVars()
     {
-        // Set config and design objects to the template
-        $this->view->config = $this->config;
+        /**
+         * Set design object to the template.
+         * @internal Warning: This one won't work if directly used as shortcut in pH7Tpl parser.
+         */
         $this->view->design = $this->design;
 
         $bIsMobApp = MobApp::is($this->httpRequest, $this->session);

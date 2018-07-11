@@ -984,6 +984,7 @@ class Design
     public function externalCssFile($sFile, $sCssMedia = null)
     {
         $sCssMedia = $sCssMedia !== null ? ' media="' . $sCssMedia . '"' : '';
+
         echo '<link rel="stylesheet" href="', $sFile, '"', $sCssMedia, ' />';
     }
 
