@@ -93,7 +93,7 @@ function run() {
             rm cookie_log.txt
 
             echo "Done!"
-            echo "Remove \"_tools/\" folder (containing this file) before packaging pH7CMS"
+            echo "Remove \"_tools/\" folder (containing this file) before packaging pH7Builder"
         else
             echo "You must make a copy of all the software before running the deployement. Go back!"
             exit 1

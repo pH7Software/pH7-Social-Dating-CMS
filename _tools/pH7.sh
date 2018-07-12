@@ -174,7 +174,7 @@ function backup() {
         echo "The path is not a valid directory."
         exit 1
     fi
-    file="PH7CMS-backup.tar.bz2"
+    file="pH7Builder-backup.tar.bz2"
     full_path=$path$file
     if [ -e  $full_path ]; then
         _confirm "A backup already exists in this directory, do you want to delete it?"
