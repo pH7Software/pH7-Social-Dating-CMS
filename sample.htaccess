@@ -173,7 +173,6 @@ ServerSignature Off
     SetEnvIfNoCase User-Agent "^Crescent" bad_bot
     SetEnvIfNoCase User-Agent "^c-spider" bad_bot
     SetEnvIfNoCase User-Agent "^Winnie Poh" bad_bot
-    SetEnvIfNoCase User-Agent "^curl" bad_bot
     SetEnvIfNoCase User-Agent "^Akregator" bad_bot
     SetEnvIfNoCase User-Agent "^ac-baidu" bad_bot
     SetEnvIfNoCase User-Agent "^(Ubuntu-feisty)$" bad_bot
