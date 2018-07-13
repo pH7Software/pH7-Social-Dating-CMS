@@ -169,6 +169,11 @@ class Tal extends Syntax implements Parsable
         );
     }
 
+    public function elseStatement()
+    {
+        $this->sCode = str_replace('<ph:else>', '<?php else { ?>', $this->sCode);
+    }
+
     public function elseifStatement()
     {
         $this->sCode = preg_replace(
@@ -176,11 +181,6 @@ class Tal extends Syntax implements Parsable
             '<?php elseif($1) { ?>',
             $this->sCode
         );
-    }
-
-    public function elseStatement()
-    {
-        $this->sCode = str_replace('<ph:else>', '<?php else { ?>', $this->sCode);
     }
 
     public function forLoopStatement()
