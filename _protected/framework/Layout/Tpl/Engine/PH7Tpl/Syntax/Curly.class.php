@@ -38,7 +38,6 @@ class Curly extends Syntax implements Parsable
         $this->elseStatement();
         $this->elseifStatement();
 
-        /***** Loops *****/
         $this->forLoopStatement();
         $this->whileLoopStatement();
         $this->eachLoopStatement();
@@ -120,14 +119,14 @@ class Curly extends Syntax implements Parsable
         $this->sCode = preg_replace('#{if ([^\{\}\n]+)}#', '<?php if($1) { ?>', $this->sCode);
     }
 
-    public function elseifStatement()
-    {
-        $this->sCode = preg_replace('#{elseif ([^\{\}\n]+)}#', '<?php } elseif($1) { ?>', $this->sCode);
-    }
-
     public function elseStatement()
     {
         $this->sCode = str_replace('{else}', '<?php } else { ?>', $this->sCode);
+    }
+
+    public function elseifStatement()
+    {
+        $this->sCode = preg_replace('#{elseif ([^\{\}\n]+)}#', '<?php } elseif($1) { ?>', $this->sCode);
     }
 
     public function forLoopStatement()

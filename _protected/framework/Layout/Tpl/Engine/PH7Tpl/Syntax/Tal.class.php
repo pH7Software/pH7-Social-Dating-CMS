@@ -40,18 +40,16 @@ class Tal extends Syntax implements Parsable
         $this->phpCode();
 
         $this->ifStatement();
+        $this->elseStatement();
+        $this->elseifStatement();
+
         $this->ifSetStatement();
         $this->ifEmptyStatement();
         $this->ifEqualStatement();
 
-        $this->elseStatement();
-        $this->elseifStatement();
-
-        /***** Loops *****/
         $this->forLoopStatement();
         $this->whileLoopStatement();
         $this->eachLoopStatement();
-
         $this->closingBlockStructures();
 
         $this->designModelFunction();
@@ -233,7 +231,7 @@ class Tal extends Syntax implements Parsable
     }
 
     /**
-     * ph:designmodel value=[a-z0-9_]+()
+     * <ph:designmodel value="[a-z0-9_]+()">
      *
      * @return void
      */
