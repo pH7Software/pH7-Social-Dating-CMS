@@ -197,6 +197,11 @@ class Curly extends Syntax implements Parsable
         );
     }
 
+    /**
+     * Translation (with gettext).
+     *
+     * @return void
+     */
     public function langFunctions()
     {
         $this->sCode = preg_replace('#{lang ([^\{\}]+)}#', '<?php echo t($1); ?>', $this->sCode);
