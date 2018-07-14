@@ -72,7 +72,7 @@ abstract class Form extends Core
     /**
      * Number of connection attempts exceeded.
      *
-     * @param integer $iWaitTime
+     * @param int $iWaitTime
      *
      * @return string
      */
@@ -109,7 +109,7 @@ abstract class Form extends Core
     /**
      * Wait to write a new message (mainly to reduce spam).
      *
-     * @param integer $iWaitTime (in munutes)
+     * @param int $iWaitTime (in munutes)
      *
      * @return string
      */
@@ -121,7 +121,7 @@ abstract class Form extends Core
     /**
      * Wait to new registration (mainly to reduce spam).
      *
-     * @param integer $iWaitTime (in munutes)
+     * @param int $iWaitTime (in munutes)
      *
      * @return string
      */
@@ -133,9 +133,9 @@ abstract class Form extends Core
     /**
      * Get Time text.
      *
-     * @param integer $iWaitTime
+     * @param int $iWaitTime
      *
-     * @return integer
+     * @return int
      */
     private static function _getTimeText($iWaitTime)
     {
@@ -147,9 +147,9 @@ abstract class Form extends Core
     /**
      * Conversion time if necessary (we do not do the conversion of minutes so you should rather take hours sharp (same thing for days).
      *
-     * @param integer $iWaitTime
+     * @param int $iWaitTime
      *
-     * @return integer
+     * @return int
      */
     private static function convertTime($iWaitTime)
     {
