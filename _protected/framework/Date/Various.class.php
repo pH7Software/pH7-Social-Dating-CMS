@@ -134,7 +134,7 @@ class Various
      *
      * @return int
      */
-    protected static function checkSecToTime($iVal)
+    private static function checkSecToTime($iVal)
     {
         return strlen($iVal) === 1 ? 0 . $iVal : $iVal;
     }
