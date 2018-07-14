@@ -13,6 +13,8 @@ defined('PH7') or exit('Restricted access');
 
 interface Parsable
 {
+    public function autoIncludeStatements();
+
     public function includeStatements();
 
     public function phpOpeningTag();

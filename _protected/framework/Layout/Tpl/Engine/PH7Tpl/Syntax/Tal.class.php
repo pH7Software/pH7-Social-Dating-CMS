@@ -32,6 +32,7 @@ class Tal extends Syntax implements Parsable
             );
         }
 
+        $this->autoIncludeStatements();
         $this->includeStatements();
 
         $this->phpOpeningTag();
@@ -65,14 +66,23 @@ class Tal extends Syntax implements Parsable
         $this->clearComment();
     }
 
-    public function includeStatements()
+    public function autoIncludeStatements()
     {
-        /***** Includes *****/
         $this->sCode = preg_replace(
             '#<ph:auto_include ?/?>#',
             '<?php $this->display($this->getCurrentController() . PH7_DS . $this->registry->action . \'' . PH7Tpl::TEMPLATE_FILE_EXT . '\', $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>',
             $this->sCode
         );
+
+        $this->sCode = preg_replace(
+            '#<ph:def_main_auto_include ?/?>#',
+            '<?php $this->display(\'' . $this->sTplFile . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
+            $this->sCode
+        );
+    }
+
+    public function includeStatements()
+    {
         $this->sCode = preg_replace(
             '#<ph:include (?:"|\')([^\<\>"\'\n]+)(?:"|\') ?/?>#',
             '<?php $this->display(\'$1\'); ?>',
@@ -81,11 +91,6 @@ class Tal extends Syntax implements Parsable
         $this->sCode = preg_replace(
             '#<ph:main_include (?:"|\')([^\<\>"\'\n]+)(?:"|\') ?/?>#',
             '<?php $this->display(\'$1\', PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS); ?>',
-            $this->sCode
-        );
-        $this->sCode = preg_replace(
-            '#<ph:def_main_auto_include ?/?>#',
-            '<?php $this->display(\'' . $this->sTplFile . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
             $this->sCode
         );
         $this->sCode = preg_replace(

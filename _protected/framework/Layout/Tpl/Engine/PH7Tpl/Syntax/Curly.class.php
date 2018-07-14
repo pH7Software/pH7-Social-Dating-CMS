@@ -28,6 +28,7 @@ class Curly extends Syntax implements Parsable
             );
         }
 
+        $this->autoIncludeStatements();
         $this->includeStatements();
 
         $this->phpOpeningTag();
@@ -57,13 +58,23 @@ class Curly extends Syntax implements Parsable
         $this->clearComment();
     }
 
-    public function includeStatements()
+    public function autoIncludeStatements()
     {
         $this->sCode = str_replace(
             '{auto_include}',
             '<?php $this->display($this->getCurrentController() . PH7_DS . $this->registry->action . \'' . PH7Tpl::TEMPLATE_FILE_EXT . '\', $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>',
             $this->sCode
         );
+
+        $this->sCode = str_replace(
+            '{def_main_auto_include}',
+            '<?php $this->display(\'' . $this->sTplFile . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
+            $this->sCode
+        );
+    }
+
+    public function includeStatements()
+    {
         $this->sCode = preg_replace(
             '#{include ([^\{\}\n]+)}#',
             '<?php $this->display($1); ?>',
@@ -72,11 +83,6 @@ class Curly extends Syntax implements Parsable
         $this->sCode = preg_replace(
             '#{main_include ([^\{\}\n]+)}#',
             '<?php $this->display($1, PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS); ?>',
-            $this->sCode
-        );
-        $this->sCode = str_replace(
-            '{def_main_auto_include}',
-            '<?php $this->display(\'' . $this->sTplFile . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
             $this->sCode
         );
         $this->sCode = preg_replace(
