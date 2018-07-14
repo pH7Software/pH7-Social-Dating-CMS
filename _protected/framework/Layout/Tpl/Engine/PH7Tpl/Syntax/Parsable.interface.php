@@ -9,8 +9,6 @@
 
 namespace PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax;
 
-defined('PH7') or exit('Restricted access');
-
 interface Parsable
 {
     public function autoIncludeStatements();
