@@ -98,13 +98,11 @@ class Curly extends Syntax implements Parsable
 
     public function phpOpeningTag()
     {
-        /***** <?php *****/
         $this->sCode = str_replace('{{', '<?php ', $this->sCode);
     }
 
     public function phpClosingTag()
     {
-        /***** ?> *****/
         if (!preg_match('#(;(?:\s+)?}}|;(?:\s+)?%})#', $this->sCode)) {
             $this->sCode = str_replace(
                 ['}}', '%}'],
@@ -123,7 +121,6 @@ class Curly extends Syntax implements Parsable
 
     public function phpOpeningTagWithEchoFunction()
     {
-        /***** <?php echo *****/
         $this->sCode = str_replace(
             '{%',
             '<?php echo ',
