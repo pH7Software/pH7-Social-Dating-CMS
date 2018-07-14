@@ -65,7 +65,6 @@ class Curly extends Syntax implements Parsable
             '<?php $this->display($this->getCurrentController() . PH7_DS . $this->registry->action . \'' . PH7Tpl::TEMPLATE_FILE_EXT . '\', $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>',
             $this->sCode
         );
-
         $this->sCode = str_replace(
             '{def_main_auto_include}',
             '<?php $this->display(\'' . $this->sTplFile . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
@@ -107,32 +106,56 @@ class Curly extends Syntax implements Parsable
     {
         /***** ?> *****/
         if (!preg_match('#(;(?:\s+)?}}|;(?:\s+)?%})#', $this->sCode)) {
-            $this->sCode = str_replace(['}}', '%}'], ';?>', $this->sCode);
+            $this->sCode = str_replace(
+                ['}}', '%}'],
+                ';?>',
+                $this->sCode
+            );
         } else {
             // Don't put a semicolon if there is already one
-            $this->sCode = str_replace(['}}', '%}'], '?>', $this->sCode);
+            $this->sCode = str_replace(
+                ['}}', '%}'],
+                '?>',
+                $this->sCode
+            );
         }
     }
 
     public function phpOpeningTagWithEchoFunction()
     {
         /***** <?php echo *****/
-        $this->sCode = str_replace('{%', '<?php echo ', $this->sCode);
+        $this->sCode = str_replace(
+            '{%',
+            '<?php echo ',
+            $this->sCode
+        );
     }
 
     public function ifStatement()
     {
-        $this->sCode = preg_replace('#{if ([^\{\}\n]+)}#', '<?php if($1) { ?>', $this->sCode);
+        $this->sCode = preg_replace(
+            '#{if ([^\{\}\n]+)}#',
+            '<?php if($1) { ?>',
+            $this->sCode
+        );
     }
 
     public function elseStatement()
     {
-        $this->sCode = str_replace('{else}', '<?php } else { ?>', $this->sCode);
+        $this->sCode = str_replace(
+            '{else}',
+            '<?php } else { ?>',
+            $this->sCode
+        );
     }
 
     public function elseifStatement()
     {
-        $this->sCode = preg_replace('#{elseif ([^\{\}\n]+)}#', '<?php } elseif($1) { ?>', $this->sCode);
+        $this->sCode = preg_replace(
+            '#{elseif ([^\{\}\n]+)}#',
+            '<?php } elseif($1) { ?>',
+            $this->sCode
+        );
     }
 
     public function forLoopStatement()
@@ -147,7 +170,11 @@ class Curly extends Syntax implements Parsable
 
     public function whileLoopStatement()
     {
-        $this->sCode = preg_replace('#{while ([^\{\}\n]+)}#', '<?php while($1) { ?>', $this->sCode);
+        $this->sCode = preg_replace(
+            '#{while ([^\{\}\n]+)}#',
+            '<?php while($1) { ?>',
+            $this->sCode
+        );
     }
 
     public function eachLoopStatement()
@@ -166,12 +193,20 @@ class Curly extends Syntax implements Parsable
      */
     public function closingBlockStructures()
     {
-        $this->sCode = str_replace(['{/if}', '{/for}', '{/while}', '{/each}'], '<?php } ?>', $this->sCode);
+        $this->sCode = str_replace(
+            ['{/if}', '{/for}', '{/while}', '{/each}'],
+            '<?php } ?>',
+            $this->sCode
+        );
     }
 
     public function variable()
     {
-        $this->sCode = preg_replace('#{([a-z0-9_]+)}#i', '<?php echo $$1; ?>', $this->sCode);
+        $this->sCode = preg_replace(
+            '#{([a-z0-9_]+)}#i',
+            '<?php echo $$1; ?>',
+            $this->sCode
+        );
     }
 
     /**
@@ -209,8 +244,17 @@ class Curly extends Syntax implements Parsable
      */
     public function langFunctions()
     {
-        $this->sCode = preg_replace('#{lang ([^\{\}]+)}#', '<?php echo t($1); ?>', $this->sCode);
-        $this->sCode = preg_replace('#{lang}([^\{\}]+){/lang}#', '<?php echo t(\'$1\'); ?>', $this->sCode);
+        $this->sCode = preg_replace(
+            '#{lang ([^\{\}]+)}#',
+            '<?php echo t($1); ?>',
+            $this->sCode
+        );
+
+        $this->sCode = preg_replace(
+            '#{lang}([^\{\}]+){/lang}#',
+            '<?php echo t(\'$1\'); ?>',
+            $this->sCode
+        );
     }
 
     /**
@@ -220,7 +264,11 @@ class Curly extends Syntax implements Parsable
      */
     public function literalFunction()
     {
-        $this->sCode = preg_replace('#{literal}(.*){/literal}#sU', '$1', $this->sCode);
+        $this->sCode = preg_replace(
+            '#{literal}(.*){/literal}#sU',
+            '$1',
+            $this->sCode
+        );
     }
 
     /**
@@ -230,6 +278,10 @@ class Curly extends Syntax implements Parsable
      */
     public function clearComment()
     {
-        $this->sCode = preg_replace('#{\*.+\*}#sU', null, $this->sCode);
+        $this->sCode = preg_replace(
+            '#{\*.+\*}#sU',
+            null,
+            $this->sCode
+        );
     }
 }

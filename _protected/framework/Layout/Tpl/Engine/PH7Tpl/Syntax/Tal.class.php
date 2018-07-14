@@ -73,7 +73,6 @@ class Tal extends Syntax implements Parsable
             '<?php $this->display($this->getCurrentController() . PH7_DS . $this->registry->action . \'' . PH7Tpl::TEMPLATE_FILE_EXT . '\', $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>',
             $this->sCode
         );
-
         $this->sCode = preg_replace(
             '#<ph:def_main_auto_include ?/?>#',
             '<?php $this->display(\'' . $this->sTplFile . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>',
@@ -107,16 +106,28 @@ class Tal extends Syntax implements Parsable
 
     public function phpOpeningTag()
     {
-        $this->sCode = str_replace('<ph:code>', '<?php ', $this->sCode);
+        $this->sCode = str_replace(
+            '<ph:code>',
+            '<?php ',
+            $this->sCode
+        );
     }
 
     public function phpClosingTag()
     {
         if (!preg_match('#;(?:\s+)?</ph:code>$#', $this->sCode)) {
-            $this->sCode = str_replace('</ph:code>', ';?>', $this->sCode);
+            $this->sCode = str_replace(
+                '</ph:code>',
+                ';?>',
+                $this->sCode
+            );
         } else {
             // Don't put a semicolon if there is already one
-            $this->sCode = str_replace('</ph:code>', '?>', $this->sCode);
+            $this->sCode = str_replace(
+                '</ph:code>',
+                '?>',
+                $this->sCode
+            );
         }
     }
 
@@ -176,7 +187,11 @@ class Tal extends Syntax implements Parsable
 
     public function elseStatement()
     {
-        $this->sCode = str_replace('<ph:else>', '<?php else { ?>', $this->sCode);
+        $this->sCode = str_replace(
+            '<ph:else>',
+            '<?php else { ?>',
+            $this->sCode
+        );
     }
 
     public function elseifStatement()
@@ -232,7 +247,11 @@ class Tal extends Syntax implements Parsable
 
     public function variable()
     {
-        $this->sCode = preg_replace('#\[\[([a-z0-9_]+)\]\]#i', '<?php echo $$1; ?>', $this->sCode);
+        $this->sCode = preg_replace(
+            '#\[\[([a-z0-9_]+)\]\]#i',
+            '<?php echo $$1; ?>',
+            $this->sCode
+        );
     }
 
     /**
@@ -275,6 +294,7 @@ class Tal extends Syntax implements Parsable
             '<?php echo t($1); ?>',
             $this->sCode
         );
+
         $this->sCode = preg_replace(
             '#<ph:lang>([^\<\>/\n]+)</ph:lang>#',
             '<?php echo t(\'$1\'); ?>',
@@ -284,7 +304,11 @@ class Tal extends Syntax implements Parsable
 
     public function literalFunction()
     {
-        $this->sCode = preg_replace('#<ph:literal>(.+)</ph:literal>#sU', '$1', $this->sCode);
+        $this->sCode = preg_replace(
+            '#<ph:literal>(.+)</ph:literal>#sU',
+            '$1',
+            $this->sCode
+        );
     }
 
     /**
@@ -292,6 +316,10 @@ class Tal extends Syntax implements Parsable
      */
     public function clearComment()
     {
-        $this->sCode = preg_replace('/###.+###/sU', null, $this->sCode);
+        $this->sCode = preg_replace(
+            '/###.+###/sU',
+            null,
+            $this->sCode
+        );
     }
 }
