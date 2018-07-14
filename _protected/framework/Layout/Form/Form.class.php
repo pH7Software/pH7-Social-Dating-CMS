@@ -109,7 +109,7 @@ abstract class Form extends Core
     /**
      * Wait to write a new message (mainly to reduce spam).
      *
-     * @param int $iWaitTime (in munutes)
+     * @param int $iWaitTime (in minutes)
      *
      * @return string
      */
@@ -121,7 +121,7 @@ abstract class Form extends Core
     /**
      * Wait to new registration (mainly to reduce spam).
      *
-     * @param int $iWaitTime (in munutes)
+     * @param int $iWaitTime (in minutes)
      *
      * @return string
      */
