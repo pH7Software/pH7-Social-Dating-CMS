@@ -22,8 +22,13 @@ class Func extends Predefined
      */
     public function assign()
     {
-        $this->addFunc('<ph:date value="(\w+)" ?/?>', 'date(\'$1\')');
+        $this->dataFunction();
 
         return $this;
+    }
+
+    private function dataFunction()
+    {
+        $this->addFunc('<ph:date value="(\w+)" ?/?>', 'date(\'$1\')');
     }
 }
