@@ -69,8 +69,8 @@ class Variable extends Predefined
     {
         $this->addVar('url_data', 'PH7_URL_DATA');
         $this->addVar('url_data_sys', 'PH7_URL_DATA_SYS');
-        $this->addVar('url_data_sys_mod', 'PH7_URL_DATA_SYS_MOD');
         $this->addVar('url_data_mod', 'PH7_URL_DATA_MOD');
+        $this->addVar('url_data_sys_mod', 'PH7_URL_DATA_SYS_MOD');
     }
 
     private function systemTemplateUrlVariables()

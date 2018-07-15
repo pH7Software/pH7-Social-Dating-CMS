@@ -43,7 +43,7 @@ abstract class Predefined
      *
      * @param string $sKey
      * @param string $sValue
-     * @param boolean Print the variable. Default TRUE
+     * @param bool Print the variable. Default TRUE
      *
      * @return void
      */
