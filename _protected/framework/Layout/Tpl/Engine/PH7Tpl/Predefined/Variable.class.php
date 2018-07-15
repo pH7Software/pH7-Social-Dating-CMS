@@ -2,7 +2,7 @@
 /***************************************************************************
  * @title            PH7 Template Engine
  * @desc             Define variables.
- *                   Predefined variables can save considerable resources and speeds up the code with respect to variables assigned by through the object's template engine (PH7Tpl).
+ *                   Predefined variables can save considerable resources and speeds up the code with respect to variables assigned through the object's template engine (PH7Tpl).
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @category         PH7 Template Engine
