@@ -14,6 +14,8 @@ use PHPUnit_Framework_TestCase;
 class FuncTest extends PHPUnit_Framework_TestCase
 {
     /**
+     * @param string $sDateFormat
+     *
      * @dataProvider dateFormatsProvider
      */
     public function testDataFunction($sDateFormat)
