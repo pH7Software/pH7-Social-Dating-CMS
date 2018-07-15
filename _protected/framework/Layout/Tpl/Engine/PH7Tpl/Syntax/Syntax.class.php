@@ -23,6 +23,8 @@ abstract class Syntax
      * Parse pH7Tpl's language syntax.
      *
      * @return void
+     *
+     * @throws EmptyCodeException
      */
     abstract public function parse();
 
@@ -40,6 +42,8 @@ abstract class Syntax
      * Set the template contents.
      *
      * @param string $sCode
+     *
+     * @return void
      */
     public function setCode($sCode)
     {
@@ -48,6 +52,8 @@ abstract class Syntax
 
     /**
      * @param string $sTplFile
+     *
+     * @return void
      */
     public function setTemplateFile($sTplFile)
     {
