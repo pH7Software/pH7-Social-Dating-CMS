@@ -13,17 +13,35 @@ use PHPUnit_Framework_TestCase;
 
 class FuncTest extends PHPUnit_Framework_TestCase
 {
-    public function testDataFunction()
+    /**
+     * @dataProvider dateFormatsProvider
+     */
+    public function testDataFunction($sDateFormat)
     {
-        $oPredefinedFunc = new PredefinedFunc('<ph:date value="Y/m/d" />');
+        $oPredefinedFunc = new PredefinedFunc('<ph:date value="' . $sDateFormat . '" />');
         $this->assertAttributeSame(
-            '<ph:date value="Y/m/d" />',
+            '<ph:date value="' . $sDateFormat . '" />',
             'sCode',
             $oPredefinedFunc
         );
         $this->assertSame(
-            '<?php echo date(\'Y/m/d\')?>',
+            '<?php echo date(\'' . $sDateFormat . '\')?>',
             $oPredefinedFunc->assign()->get()
         );
+    }
+
+    /**
+     * @return array
+     */
+    public function dateFormatsProvider()
+    {
+        return [
+            ['Y/m/d'],
+            ['Y'],
+            ['F j, Y, g:i a'],
+            ['\i\t \i\s \t\h\e jS \d\a\y'],
+            ['h-i-s, j-m-y, it is w Day'],
+            ['m.d.y']
+        ];
     }
 }
