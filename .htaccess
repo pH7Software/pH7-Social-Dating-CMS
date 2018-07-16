@@ -43,7 +43,7 @@
 ServerSignature Off
 
 # Deny access to all CGI, Perl, Python, Bash, SQL, Template, INI configuration, cache, log, temporary and text files
-<FilesMatch "\.(cgi|pl|py|sh|bash|sql|tpl|ini|cache|log|tmp|txt)">
+<FilesMatch "\.(cgi|pl|py|sh|bash|sql|tpl|ini|cache|log|tmp|txt)$">
     # Apache 2.4+
     <IfModule mod_authz_core.c>
         Require all denied
