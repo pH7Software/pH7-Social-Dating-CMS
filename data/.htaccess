@@ -1,24 +1,13 @@
 # Deny all other file extensions to prevent any compromised files to be executed
 
-<IfModule mod_authz_core.c>
-    # Apache >= 2.4
-    Require all denied
-</IfModule>
-
-<IfModule !mod_authz_core.c>
-    # Apache <= 2.2
-    Deny from all
-</IfModule>
-
-<FilesMatch "\.(jpe?g|png|gif|webp|mp3|mp4|flv|webm|swf)$">
+<FilesMatch "(?<!jpg|jpeg|png|gif|webp|mp3|mp4|flv|webm|swf)$">
     <IfModule mod_authz_core.c>
         # Apache >= 2.4
-        Require all granted
+        Require all denied
     </IfModule>
 
     <IfModule !mod_authz_core.c>
         # Apache <= 2.2
-        Order deny,allow
-        Allow from all
+        Deny from all
     </IfModule>
 </FilesMatch>
