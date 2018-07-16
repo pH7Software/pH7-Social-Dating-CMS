@@ -39,6 +39,23 @@ abstract class Predefined
     }
 
     /**
+     * Assign the global variables/functions.
+     *
+     * @return self
+     */
+    abstract public function assign();
+
+    /**
+     * Gets the parsed variables.
+     *
+     * @return string
+     */
+    public function get()
+    {
+        return $this->sCode;
+    }
+
+    /**
      * Adding Variable.
      *
      * @param string $sKey
@@ -73,21 +90,4 @@ abstract class Predefined
             $this->sCode
         );
     }
-
-    /**
-     * Gets the parsed variables.
-     *
-     * @return string
-     */
-    public function get()
-    {
-        return $this->sCode;
-    }
-
-    /**
-     * Assign the global variables/functions.
-     *
-     * @return self
-     */
-    abstract public function assign();
 }
