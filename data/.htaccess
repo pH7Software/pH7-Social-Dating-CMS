@@ -1,6 +1,6 @@
 # Deny all other file extensions to prevent any compromised files to be executed
 
-<FilesMatch "(?<!jpg|jpeg|png|gif|webp|mp3|mp4|flv|webm|swf)$">
+<FilesMatch "(?<!\.jpg|\.jpeg|\.png|\.gif|\.webp|\.mp3|\.mp4|\.flv|\.webm|\.swf)$">
     <IfModule mod_authz_core.c>
         # Apache >= 2.4
         Require all denied
