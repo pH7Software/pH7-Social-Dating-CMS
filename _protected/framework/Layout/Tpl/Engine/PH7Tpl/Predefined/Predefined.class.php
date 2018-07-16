@@ -7,7 +7,6 @@
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl / Predefined
  * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
- * @version          1.0.1
  * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
  ***************************************************************************/
 
