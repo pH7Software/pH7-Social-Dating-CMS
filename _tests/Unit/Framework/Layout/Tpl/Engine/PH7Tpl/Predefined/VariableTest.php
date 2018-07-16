@@ -27,6 +27,23 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function testSoftwareNameWithTalVariableDelimiters()
+    {
+        $oPredefinedVar = new PredefinedVariable('[[software_name]]');
+        $oPredefinedVar->setLeftDelimiter('[[');
+        $oPredefinedVar->setRightDelimiter(']]');
+
+        $this->assertAttributeSame(
+            '[[software_name]]',
+            'sCode',
+            $oPredefinedVar
+        );
+        $this->assertSame(
+            '<?php echo self::SOFTWARE_NAME?>',
+            $oPredefinedVar->assign()->get()
+        );
+    }
+
     public function testSoftwareUrlVariable()
     {
         $oPredefinedVar = new PredefinedVariable('{software_url}');
