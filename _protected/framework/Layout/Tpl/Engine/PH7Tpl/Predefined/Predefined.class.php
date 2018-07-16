@@ -22,13 +22,13 @@ abstract class Predefined
     const WRITE = 'echo ';
 
     /** @var string */
-    protected $sCode;
+    private $sCode;
 
     /** @var string */
-    protected $sLeftDelim = '{';
+    private $sLeftDelimiter = '{';
 
     /** @var string */
-    protected $sRightDelim = '}';
+    private $sRightDelimiter = '}';
 
     /**
      * @param string $sCode
@@ -51,7 +51,7 @@ abstract class Predefined
     {
         $this->sCode = str_replace('$' . $sKey, $sValue, $this->sCode);
         $this->sCode = str_replace(
-            $this->sLeftDelim . $sKey . $this->sRightDelim,
+            $this->sLeftDelimiter . $sKey . $this->sRightDelimiter,
             static::PHP_OPEN . ($bPrint ? static::WRITE : '') . $sValue . static::PHP_CLOSE,
             $this->sCode
         );
