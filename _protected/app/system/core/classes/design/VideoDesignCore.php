@@ -27,6 +27,9 @@ class VideoDesignCore
     const PREVIEW_MEDIA_MODE = 'preview';
     const MOVIE_MEDIA_MODE = 'movie';
 
+    const WEBM_EXT = '.webm';
+    const MP4_EXT = '.mp4';
+
     /**
      * @internal Import the trait to set the class static.
      * The trait sets constructor/clone private to prevent instantiation.
@@ -61,8 +64,8 @@ class VideoDesignCore
             }
         } else {
             $sDir = 'video/file/' . $oData->username . PH7_SH . $oData->albumId . PH7_SH;
-            $sVidPath1 = $sDir . $oData->file . '.webm';
-            $sVidPath2 = $sDir . $oData->file . '.mp4';
+            $sVidPath1 = $sDir . $oData->file . self::WEBM_EXT;
+            $sVidPath2 = $sDir . $oData->file . self::MP4_EXT;
 
             // If the video is not found on the server, we show a video that shows an appropriate message.
             if (!(is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . $sVidPath1) && is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . $sVidPath2))) {

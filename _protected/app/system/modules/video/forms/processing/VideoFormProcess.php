@@ -29,6 +29,9 @@ class VideoFormProcess extends Form
     const THUMBNAIL_VIDEO_WIDTH = 320;
     const THUMBNAIL_VIDEO_HEIGHT = 240;
 
+    const WEBM_EXT = '.webm';
+    const MP4_EXT = '.mp4';
+
     public function __construct()
     {
         parent::__construct();
@@ -140,8 +143,8 @@ class VideoFormProcess extends Form
                     self::THUMBNAIL_VIDEO_HEIGHT
                 );
 
-                $oVideo->rename($sPath . $sFile . '.webm');
-                $oVideo->rename($sPath . $sFile . '.mp4');
+                $oVideo->rename($sPath . $sFile . self::WEBM_EXT);
+                $oVideo->rename($sPath . $sFile . self::MP4_EXT);
                 //$oVideo->save($sPath . $sFile); // Original file type
             }
         } else {
