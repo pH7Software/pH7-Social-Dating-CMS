@@ -56,6 +56,22 @@ abstract class Predefined
     }
 
     /**
+     * @param string $sDelimiter
+     */
+    public function setLeftDelimiter($sDelimiter)
+    {
+        $this->sLeftDelimiter = $sDelimiter;
+    }
+
+    /**
+     * @param string $sDelimiter
+     */
+    public function setRightDelimiter($sDelimiter)
+    {
+        $this->sRightDelimiter = $sDelimiter;
+    }
+
+    /**
      * Adding Variable.
      *
      * @param string $sKey
