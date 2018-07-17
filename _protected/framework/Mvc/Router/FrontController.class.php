@@ -44,8 +44,8 @@ final class FrontController
     const INDEX_FILE = 'index.php';
 
     const REGEX_MODULE_FORMAT = '#^[a-z0-9\.\-_]+$#i';
-    const REGEX_CONTROLLER_FORMAT = '#^[a-z0-9\_]+$#i';
-    const REGEX_ACTION_FORMAT = '#^[a-z0-9\_]+$#i';
+    const REGEX_CONTROLLER_FORMAT = '#^[a-z0-9_]+$#i';
+    const REGEX_ACTION_FORMAT = '#^[a-z0-9_]+$#i';
     const REGEX_FOLDER_FORMAT = '#^[\w]+$#';
     const REGEX_URL_EXTRA_OPTIONS = '/?(?:\?[^/]+\=[^/]+)?';
     const REGEX_URL_PARAMS = '#&[^/]+\=[^/]+$#';
