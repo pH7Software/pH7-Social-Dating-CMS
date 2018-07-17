@@ -6,7 +6,7 @@
  * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Parse
- * @version          0.8
+ * @version          1.0
  */
 
 namespace PH7\Framework\Parse;
@@ -46,7 +46,8 @@ class Markdown extends Code
         $this->img();
         $this->link();
         $this->blockquote();
-        $this->heading();
+        $this->headings();
+        $this->alternativeHeadings();
         $this->paragraph();
         $this->br();
         $this->hr();
@@ -97,7 +98,7 @@ class Markdown extends Code
     }
 
     /**
-     * Code
+     * HTML code tag
      *
      * @return void
      */
@@ -111,7 +112,7 @@ class Markdown extends Code
     }
 
     /**
-     * Links
+     * Hyperlink tag
      *
      * @return void
      */
@@ -207,20 +208,85 @@ class Markdown extends Code
      *
      * @return void
      */
-    protected function heading()
+    protected function headings()
     {
-        $this->sText = preg_replace('/##### (.+?)\n/', '<h5>\1</h5>', $this->sText); //h5
-        $this->sText = preg_replace('/#### (.+?)\n/', '<h4>\1</h4>', $this->sText); //h4
-        $this->sText = preg_replace('/### (.+?)\n/', '<h3>\1</h3>', $this->sText); //h3
-        $this->sText = preg_replace('/## (.+?)\n/', '<h2>\1</h2>', $this->sText); //h2
-        $this->sText = preg_replace('/# (.+?)\n/', '<h1>\1</h1>', $this->sText); //h1
+        // h1
+        $this->sText = preg_replace(
+            '/# (.+?)\n/',
+            '<h1>\1</h1>',
+            $this->sText
+        );
 
-        // Alternative syntax
-        $this->sText = preg_replace('/=======(.+?)=======/s', '<h1>\1</h1>', $this->sText); //h1
-        $this->sText = preg_replace('/======(.+?)======/s', '<h2>\1</h2>', $this->sText); //h2
-        $this->sText = preg_replace('/=====(.+?)=====/s', '<h3>\1</h3>', $this->sText); //h3
-        $this->sText = preg_replace('/====(.+?)====/s', '<h4>\1</h4>', $this->sText); //h4
-        $this->sText = preg_replace('/===(.+?)===/s', '<h5>\1</h5>', $this->sText); //h5
+        // h2
+        $this->sText = preg_replace(
+            '/## (.+?)\n/',
+            '<h2>\1</h2>',
+            $this->sText
+        );
+
+        // h3
+        $this->sText = preg_replace(
+            '/### (.+?)\n/',
+            '<h3>\1</h3>',
+            $this->sText
+        );
+
+        // h4
+        $this->sText = preg_replace(
+            '/#### (.+?)\n/',
+            '<h4>\1</h4>',
+            $this->sText
+        );
+
+        // h5
+        $this->sText = preg_replace(
+            '/##### (.+?)\n/',
+            '<h5>\1</h5>',
+            $this->sTex
+        );
+    }
+
+    /**
+     * Alternative heading syntaxes
+     *
+     * @return void
+     */
+    private function alternativeHeadings()
+    {
+        // h1
+        $this->sText = preg_replace(
+            '/=======(.+?)=======/s',
+            '<h1>\1</h1>',
+            $this->sText
+        );
+
+        // h2
+        $this->sText = preg_replace(
+            '/======(.+?)======/s',
+            '<h2>\1</h2>',
+            $this->sText
+        );
+
+        // h3
+        $this->sText = preg_replace(
+            '/=====(.+?)=====/s',
+            '<h3>\1</h3>',
+            $this->sText
+        );
+
+        // h4
+        $this->sText = preg_replace(
+            '/====(.+?)====/s',
+            '<h4>\1</h4>',
+            $this->sText
+        );
+
+        // h5
+        $this->sText = preg_replace(
+            '/===(.+?)===/s',
+            '<h5>\1</h5>',
+            $this->sText
+        );
     }
 }
 
