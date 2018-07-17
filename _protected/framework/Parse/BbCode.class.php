@@ -27,7 +27,7 @@ class BbCode extends Code
     }
 
     /**
-     * @return string The code parsed
+     * @return string The parsed code
      */
     public function __toString()
     {
