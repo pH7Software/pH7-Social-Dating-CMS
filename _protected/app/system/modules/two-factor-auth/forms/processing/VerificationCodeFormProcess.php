@@ -21,7 +21,7 @@ class VerificationCodeFormProcess extends Form
     /**
      * Every OPT is valid for 30 sec.
      * If somebody provides OTP at 29th sec, by the time it reaches the server OTP is expired.
-     * So we can give OTP_TOLERANCE=1, it will check current  & previous OTP.
+     * So we can give OTP_TOLERANCE=1, it will check current & previous OTP.
      * OTP_TOLERANCE=2, verifies current and last two OTPS
      * - Text from: http://hayageek.com/two-factor-authentication-with-google-authenticator-php/
      */
