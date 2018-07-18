@@ -6,7 +6,7 @@
             <a href="{% $config->values['module.setting']['review.link'] %}">
                 <img src="{url_tpl_mod_img}review.svg" alt="Sourceforge Reviews" />
             </a>
-            <figcaption><em>I will really appreciate that :-)</em></figcaption>
+            <figcaption><em>{lang 'I will really appreciate that :-)'}</em></figcaption>
         </figure>
     </div>
 </div>

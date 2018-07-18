@@ -21,6 +21,6 @@
 
     <figure class="center">
         <img src="{url_tpl_mod_img}eye.svg" alt="Staring Eye" />
-        <figcaption><em>We believe in you :-)</em></figcaption>
+        <figcaption><em>{lang 'We believe in you :-)'}</em></figcaption>
     </figure>
 </div>

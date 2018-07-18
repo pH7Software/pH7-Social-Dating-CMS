@@ -6,7 +6,7 @@
             <a href="{% $config->values['module.setting']['github.repository_link'] %}">
                 <img src="{url_tpl_mod_img}github.svg" alt="pH7CMS on Github" />
             </a>
-            <figcaption><em>I will really appreciate it :-)</em></figcaption>
+            <figcaption><em>{lang 'I will really appreciate it :-)'}</em></figcaption>
         </figure>
     </div>
 </div>
