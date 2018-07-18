@@ -16,16 +16,16 @@ defined('PH7') or exit('Restricted access');
 class Year implements Measurable
 {
     /** @var int */
-    protected $iYear;
+    private $iYear;
 
     /** @var int */
-    protected $iMonth;
+    private $iMonth;
 
     /** @var int */
-    protected $iDay;
+    private $iDay;
 
     /** @var int */
-    protected $iTimestamp;
+    private $iTimestamp;
 
     /**
      * Calculating the age of a user relative to their date of birth.
