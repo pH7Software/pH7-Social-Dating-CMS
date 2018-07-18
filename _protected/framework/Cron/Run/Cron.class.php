@@ -52,9 +52,7 @@ abstract class Cron extends Core
             $iHours = $this->getCronDelay();
             $iCronTime = $iSavedTime + $this->convertHoursToSeconds($iHours);
 
-            // Status is FALSE if the delay has not yet elapsed
-            $bStatus = ($iCronTime <= $this->iTime);
-
+            $bStatus = $this->hasDelayPassed($iCronTime);
             if ($bStatus) {
                 $this->file->deleteFile($this->sDelayPathFile);
             }
@@ -98,6 +96,16 @@ abstract class Cron extends Core
          * @internal We cast the value into integer type to get only the integer data (without the 'h' character).
          */
         return (int)$this->oUri->fragment(self::URI_DELAY_INDEX);
+    }
+
+    /**
+     * @param int $iCronTime
+     *
+     * @return bool Returns FALSE if the delay hasn't yet elapsed, TRUE otherwise.
+     */
+    private function hasDelayPassed($iCronTime)
+    {
+        return $iCronTime <= $this->iTime;
     }
 
     /**
