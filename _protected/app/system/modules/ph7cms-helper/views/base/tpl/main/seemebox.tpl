@@ -5,11 +5,11 @@
         <p>Sorry, just need your attention :) Don't forget to Star the software you ❤️</p>
 
         <iframe
-                src="https://ghbtns.com/github-btn.html?user={% $config->values['module.setting']['github.username'] %}&amp;repo={% $config->values['module.setting']['github.repo_name'] %}&amp;type=star&amp;count=true&amp;size=large"
-                frameborder="0"
-                scrolling="0"
-                width="160px"
-                height="30px"
+            src="https://ghbtns.com/github-btn.html?user={% $config->values['module.setting']['github.username'] %}&amp;repo={% $config->values['module.setting']['github.repo_name'] %}&amp;type=star&amp;count=true&amp;size=large"
+            frameborder="0"
+            scrolling="0"
+            width="160px"
+            height="30px"
         >
         </iframe>
     </div>
