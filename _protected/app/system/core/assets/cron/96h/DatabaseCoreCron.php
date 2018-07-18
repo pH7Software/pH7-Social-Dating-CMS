@@ -214,6 +214,7 @@ class DatabaseCoreCron extends Cron
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix($sTable) . 'WHERE (' . $sDateColumn . ' < NOW() - INTERVAL :dayNumber DAY)');
         $rStmt->bindValue(':dayNumber', $iOlderThanXDay, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->rowCount();
     }
 
