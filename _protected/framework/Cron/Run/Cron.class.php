@@ -24,10 +24,13 @@ abstract class Cron extends Core
     const DELAY_FILE_EXT = '.txt';
 
     /** @var int */
-    protected $iTime;
+    private $iTime;
 
     /** @var Uri */
     private $oUri;
+
+    /** @var string */
+    private $sDelayPathFile;
 
     public function __construct()
     {
@@ -35,6 +38,7 @@ abstract class Cron extends Core
 
         $this->iTime = time();
         $this->oUri = Uri::getInstance();
+        $this->sDelayPathFile = PH7_PATH_SYS . 'core/assets/cron/_delay/' . $this->getFileName() . self::DELAY_FILE_EXT;
     }
 
     /**
@@ -42,33 +46,43 @@ abstract class Cron extends Core
      */
     public function checkDelay()
     {
-        $sFullPath = PH7_PATH_SYS . 'core/assets/cron/_delay/' . $this->getFileName() . self::DELAY_FILE_EXT;
         $bStatus = true; // Default status is TRUE
 
-        if ($this->file->existFile($sFullPath)) {
-            $iSavedTime = $this->file->getFile($sFullPath);
-            $iHours = $this->getDelay();
+        if ($iSavedTime = $this->getSavedDelay()) {
+            $iHours = $this->getCronDelay();
             $iCronTime = $iSavedTime + $this->convertHoursToSeconds($iHours);
 
             // Status is FALSE if the delay has not yet elapsed
             $bStatus = ($iCronTime <= $this->iTime);
 
             if ($bStatus) {
-                $this->file->deleteFile($sFullPath);
+                $this->file->deleteFile($this->sDelayPathFile);
             }
         }
 
         if ($bStatus) {
-            $this->file->putFile($sFullPath, $this->iTime);
+            $this->file->putFile($this->sDelayPathFile, $this->iTime);
         }
 
         return $bStatus;
     }
 
     /**
+     * @return bool|string The file contents if exists, FALSE otherwise.
+     */
+    private function getSavedDelay()
+    {
+        if ($this->file->existFile($this->sDelayPathFile)) {
+            return $this->file->getFile($this->sDelayPathFile);
+        }
+
+        return false;
+    }
+
+    /**
      * @return string File name.
      */
-    protected function getFileName()
+    private function getFileName()
     {
         return strtolower($this->oUri->fragment(self::URI_FILENAME_INDEX));
     }
@@ -78,7 +92,7 @@ abstract class Cron extends Core
      *
      * @return int Delay in hour.
      */
-    protected function getDelay()
+    private function getCronDelay()
     {
         /**
          * @internal We cast the value into integer type to get only the integer data (without the 'h' character).
