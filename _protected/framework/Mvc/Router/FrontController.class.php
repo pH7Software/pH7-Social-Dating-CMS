@@ -500,7 +500,7 @@ final class FrontController
      */
     private function cronRouter()
     {
-        if (strcmp($this->oHttpRequest->get('secret_word'), DbConfig::getSetting('cronSecurityHash')) === 0) {
+        if ($this->isCronHashValid()) {
             if (is_file(PH7_PATH_SYS . 'core/assets/cron/' . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php')) {
                 require PH7_PATH_SYS . 'core/assets/cron/' . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php';
             } else {
@@ -510,6 +510,16 @@ final class FrontController
             Http::setHeadersByCode(403);
             exit('Secret word is invalid for the cron hash!');
         }
+    }
+
+    /**
+     * Check if the cron's security string is valid or not.
+     *
+     * @return bool
+     */
+    private function isCronHashValid()
+    {
+        return strcmp($this->oHttpRequest->get('secret_word'), DbConfig::getSetting('cronSecurityHash')) === 0;
     }
 
     /**
