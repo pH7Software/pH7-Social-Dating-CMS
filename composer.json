@@ -24,7 +24,7 @@
         "geoip2/geoip2": "~2.0",
         "stripe/stripe-php": "^5.9",
         "swiftmailer/swiftmailer": "^5.4",
-        "ph-7/qrcode-generator-php-class": "^2.0",
+        "ph-7/qrcode-generator-php-class": "^2.1",
         "robthree/twofactorauth": "^1.6",
         "facebook/graph-sdk": "^5.6",
         "ext-curl": "*",
