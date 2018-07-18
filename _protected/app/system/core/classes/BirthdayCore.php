@@ -23,6 +23,8 @@ class BirthdayCore extends Core
      * Sent Birthday emails.
      *
      * @return int Total emails sent.
+     *
+     * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
     public function sendMails()
     {
