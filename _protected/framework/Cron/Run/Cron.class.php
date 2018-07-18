@@ -18,8 +18,8 @@ use PH7\Framework\Url\Uri;
 
 abstract class Cron extends Core
 {
-    const URI_INDEX_FILENAME = 3;
-    const URI_INDEX_DELAY = 2;
+    const URI_FILENAME_INDEX = 3;
+    const URI_DELAY_INDEX = 2;
     const HOUR_IN_SECS = 3600;
     const DELAY_FILE_EXT = '.txt';
 
@@ -70,7 +70,7 @@ abstract class Cron extends Core
      */
     protected function getFileName()
     {
-        return strtolower($this->oUri->fragment(self::URI_INDEX_FILENAME));
+        return strtolower($this->oUri->fragment(self::URI_FILENAME_INDEX));
     }
 
     /**
@@ -83,7 +83,7 @@ abstract class Cron extends Core
         /**
          * @internal We cast the value into integer type to get only the integer data (without the 'h' character).
          */
-        return (int)$this->oUri->fragment(self::URI_INDEX_DELAY);
+        return (int)$this->oUri->fragment(self::URI_DELAY_INDEX);
     }
 
     /**
