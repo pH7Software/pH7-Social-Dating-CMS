@@ -24,6 +24,8 @@ abstract class Cron extends Framework\Cron\Run\Cron
      * Check if the cron has already been executed.
      *
      * @return void If cron has already been executed, the script stops with exit() function and an explanatory message.
+     *
+     * @throws Framework\Http\Exception
      */
     public function isAlreadyExec()
     {
