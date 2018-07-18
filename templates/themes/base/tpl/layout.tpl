@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
     <!-- Begin Title and Meta info -->
-    <title>{if $page_title}{% $this->str->escape($this->str->upperFirst($page_title), true) %} - {site_name}{else}{site_name} - {slogan}{/if}</title>
-    <meta name="description" content="{% $this->str->escape($this->str->upperFirst($meta_description), true) %}" />
-    <meta name="keywords" content="{% $this->str->escape($meta_keywords, true) %}" />
+    <title>{if $page_title}{% $str->escape($str->upperFirst($page_title), true) %} - {site_name}{else}{site_name} - {slogan}{/if}</title>
+    <meta name="description" content="{% $str->escape($str->upperFirst($meta_description), true) %}" />
+    <meta name="keywords" content="{% $str->escape($meta_keywords, true) %}" />
     <meta name="robots" content="{meta_robots}" />
     <link rel="icon" href="{url_relative}favicon.ico" />
     <link rel="canonical" href="{current_url}" />
@@ -48,7 +48,7 @@
 
     <!-- Other sheet CSS for modules etc. -->
     {{ $design->css() }}
-    {{ $designModel->files('css') }}
+    {designModel.files('css')}
     <!-- End CSS -->
 
     <!-- Begin Header JavaScript -->
@@ -67,7 +67,7 @@
     {{ XmlDesignCore::sitemapHeaderLink() }}
     {{ XmlDesignCore::rssHeaderLinks() }}
 
-    {{ $designModel->analyticsApi() }}
+    {designModel.analyticsApi()}
   </head>
   <body>
 
@@ -112,7 +112,7 @@
       {* Don't display the top middle banner on the the splash page *}
       {if !$is_guest_homepage}
           <div role="banner" class="center ad_468_60">
-              {{ $designModel->ad(468, 60) }}
+              {designModel.ad(468, 60)}
           </div>
       {/if}
 
@@ -152,14 +152,14 @@
       </div>
     </div>
     <div role="banner" class="center ad_468_60">
-        {{ $designModel->ad(468, 60) }}
+        {designModel.ad(468, 60)}
     </div>
     <!-- End Content -->
 
     <!-- Begin Footer -->
     <footer>
       <div role="banner" class="center ad_728_90">
-          {{ $designModel->ad(728, 90) }}
+          {designModel.ad(728, 90)}
       </div>
 
       {* To avoid scammers *}
@@ -227,7 +227,7 @@
 
     <!-- Other JavaScript files for modules etc. -->
     {{ $design->js() }}
-    {{ $designModel->files('js') }}
+    {designModel.files('js')}
 
     {if $is_user_auth}
       {main_include 'favicon_alert.inc.tpl'}

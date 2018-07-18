@@ -7,7 +7,6 @@
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl / Predefined
  * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
- * @version          1.0.1
  * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
  ***************************************************************************/
 
@@ -22,13 +21,13 @@ abstract class Predefined
     const WRITE = 'echo ';
 
     /** @var string */
-    protected $sCode;
+    private $sCode;
 
     /** @var string */
-    protected $sLeftDelim = '{';
+    private $sLeftDelimiter = '{';
 
     /** @var string */
-    protected $sRightDelim = '}';
+    private $sRightDelimiter = '}';
 
     /**
      * @param string $sCode
@@ -39,11 +38,44 @@ abstract class Predefined
     }
 
     /**
+     * Assign the global variables/functions.
+     *
+     * @return self
+     */
+    abstract public function assign();
+
+    /**
+     * Gets the parsed variables.
+     *
+     * @return string
+     */
+    public function get()
+    {
+        return $this->sCode;
+    }
+
+    /**
+     * @param string $sDelimiter
+     */
+    public function setLeftDelimiter($sDelimiter)
+    {
+        $this->sLeftDelimiter = $sDelimiter;
+    }
+
+    /**
+     * @param string $sDelimiter
+     */
+    public function setRightDelimiter($sDelimiter)
+    {
+        $this->sRightDelimiter = $sDelimiter;
+    }
+
+    /**
      * Adding Variable.
      *
      * @param string $sKey
      * @param string $sValue
-     * @param boolean Print the variable. Default TRUE
+     * @param bool Print the variable. Default TRUE
      *
      * @return void
      */
@@ -51,7 +83,7 @@ abstract class Predefined
     {
         $this->sCode = str_replace('$' . $sKey, $sValue, $this->sCode);
         $this->sCode = str_replace(
-            $this->sLeftDelim . $sKey . $this->sRightDelim,
+            $this->sLeftDelimiter . $sKey . $this->sRightDelimiter,
             static::PHP_OPEN . ($bPrint ? static::WRITE : '') . $sValue . static::PHP_CLOSE,
             $this->sCode
         );
@@ -73,21 +105,4 @@ abstract class Predefined
             $this->sCode
         );
     }
-
-    /**
-     * Gets the parsed variables.
-     *
-     * @return string
-     */
-    public function get()
-    {
-        return $this->sCode;
-    }
-
-    /**
-     * Assign the global variables/functions.
-     *
-     * @return self
-     */
-    abstract public function assign();
 }

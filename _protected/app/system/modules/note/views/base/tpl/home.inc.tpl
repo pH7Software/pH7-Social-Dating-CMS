@@ -59,7 +59,7 @@
             <p>{error}</p>
         {else}
             {each $post in $posts}
-                {{ $content = escape($this->str->extract(Framework\Security\Ban\Ban::filterWord($post->content),0,400), true) }}
+                {{ $content = escape($str->extract(Framework\Security\Ban\Ban::filterWord($post->content),0,400), true) }}
 
                 <h1>
                     <a href="{{ $design->url('note','main','read',"$post->username,$post->postId") }}" title="{% $post->title %}" data-load="ajax">

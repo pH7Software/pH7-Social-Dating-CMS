@@ -17,6 +17,7 @@ defined('PH7') or exit('Restricted access');
 use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax\Curly as CurlySyntax;
 use PH7\Framework\Session\Session;
 
 abstract class Core extends Kernel
@@ -40,6 +41,6 @@ abstract class Core extends Kernel
         $this->session = new Session;
         $this->design = new Design;
         $this->dateTime = new CDateTime;
-        $this->view = new PH7Tpl;
+        $this->view = new PH7Tpl(new CurlySyntax);
     }
 }

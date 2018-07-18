@@ -1,5 +1,4 @@
 <div class="center">
-    {lang}
     <p>
         {lang}%site_name% is a free online dating site between singles.{/lang}<br />
         <strong>{lang}Meet Singles and Find now Love on %site_name%!{/lang}</strong><br />

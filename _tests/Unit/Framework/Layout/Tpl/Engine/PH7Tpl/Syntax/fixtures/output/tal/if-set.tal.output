@@ -1,0 +1,3 @@
+<?php if(!empty($var)) { ?>
+    $var is set!
+<?php } ?>
