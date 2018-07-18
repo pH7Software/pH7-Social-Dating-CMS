@@ -24,7 +24,7 @@ abstract class Code
     public function __construct()
     {
         $this->sanitize();
-        $this->convert();
+        $this->convertSpaces();
         $this->run();
     }
 
@@ -34,7 +34,7 @@ abstract class Code
     protected function sanitize()
     {
         $this->sText = preg_replace(static::REGEX_SCRIPT_BLOCK_PATTERN, '', $this->sText);
-        $this->convert();
+        $this->convertSpaces();
     }
 
     /**
@@ -52,7 +52,7 @@ abstract class Code
      *
      * @return void
      */
-    protected function convert()
+    protected function convertSpaces()
     {
         // Convert Windows (\r\n) to Unix (\n)
         $this->sText = str_replace("\r\n", "\n", $this->sText);

@@ -6,7 +6,7 @@
  * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Parse
- * @version          0.8
+ * @version          1.0
  */
 
 namespace PH7\Framework\Parse;
@@ -46,7 +46,8 @@ class Markdown extends Code
         $this->img();
         $this->link();
         $this->blockquote();
-        $this->heading();
+        $this->headings();
+        $this->alternativeHeadings();
         $this->paragraph();
         $this->br();
         $this->hr();
@@ -60,10 +61,18 @@ class Markdown extends Code
     protected function strong()
     {
         // Strong emphasis
-        $this->sText = preg_replace('/__(.+?)__/s', '<strong>\1</strong>', $this->sText);
+        $this->sText = preg_replace(
+            '/__(.+?)__/s',
+            '<strong>\1</strong>',
+            $this->sText
+        );
 
         // Alternative syntax
-        $this->sText = preg_replace('/\*\*(.+?)\*\*/s', '<strong>\1</strong>', $this->sText);
+        $this->sText = preg_replace(
+            '/\*\*(.+?)\*\*/s',
+            '<strong>\1</strong>',
+            $this->sText
+        );
     }
 
     /**
@@ -74,37 +83,61 @@ class Markdown extends Code
     protected function italic()
     {
         // Emphasis
-        $this->sText = preg_replace('/_([^_]+)_/', '<em>\1</em>', $this->sText);
+        $this->sText = preg_replace(
+            '/_([^_]+)_/',
+            '<em>\1</em>',
+            $this->sText
+        );
 
         // Alternative syntax
-        $this->sText = preg_replace('/\*([^\*]+)\*/', '<em>\1</em>', $this->sText);
+        $this->sText = preg_replace(
+            '/\*([^\*]+)\*/',
+            '<em>\1</em>',
+            $this->sText
+        );
     }
 
     /**
-     * Code
+     * HTML code tag
      *
      * @return void
      */
     protected function code()
     {
-        $this->sText = preg_replace('/`(.+?)`/s', '<code>\1</code>', $this->sText);
+        $this->sText = preg_replace(
+            '/`(.+?)`/s',
+            '<code>\1</code>',
+            $this->sText
+        );
     }
 
     /**
-     * Links
+     * Hyperlink tag
      *
      * @return void
      */
     protected function link()
     {
         // [linked text](link URL)
-        $this->sText = preg_replace('/\[([^\]]+)]\(([-a-z0-9._~:\/?#@!$&\'()*+,;=%]+)\)/i', '<a href="\2">\1</a>', $this->sText);
+        $this->sText = preg_replace(
+            '/\[([^\]]+)]\(([-a-z0-9._~:\/?#@!$&\'()*+,;=%]+)\)/i',
+            '<a href="\2">\1</a>',
+            $this->sText
+        );
 
         // [linked text][link URL] (alternative syntax)
-        $this->sText = preg_replace('/\[([^\]]+)]\[([-a-z0-9._~:\/?#@!$&\'()*+,;=%]+)\]/i', '<a href="\2">\1</a>', $this->sText);
+        $this->sText = preg_replace(
+            '/\[([^\]]+)]\[([-a-z0-9._~:\/?#@!$&\'()*+,;=%]+)\]/i',
+            '<a href="\2">\1</a>',
+            $this->sText
+        );
 
         // [linked text]: link URL "title" (alternative syntax)
-        $this->sText = preg_replace('/\[([^\]]+)]: ([-a-z0-9._~:\/?#@!$&\'()*+,;=%]+) "([^"]+)"/i', '<a href="\2" title="\3">\1</a>', $this->sText);
+        $this->sText = preg_replace(
+            '/\[([^\]]+)]: ([-a-z0-9._~:\/?#@!$&\'()*+,;=%]+) "([^"]+)"/i',
+            '<a href="\2" title="\3">\1</a>',
+            $this->sText
+        );
     }
 
     /**
@@ -116,10 +149,18 @@ class Markdown extends Code
     protected function img()
     {
         // With title ![alt image](url image) "title of image"
-        $this->sText = preg_replace('/!\[([^\]]+)]\(([-a-z0-9._~:\/?#@!$&\'()*+,;=%]+)\) "([^"]+)"/', '<img src="\2" alt="\1" title="\3" />', $this->sText);
+        $this->sText = preg_replace(
+            '/!\[([^\]]+)]\(([-a-z0-9._~:\/?#@!$&\'()*+,;=%]+)\) "([^"]+)"/',
+            '<img src="\2" alt="\1" title="\3" />',
+            $this->sText
+        );
 
         // Without title ![alt image](url image)
-        $this->sText = preg_replace('/!\[([^\]]+)]\(([-a-z0-9._~:\/?#@!$&\'()*+,;=%]+)\)/', '<img src="\2" alt="\1" />', $this->sText);
+        $this->sText = preg_replace(
+            '/!\[([^\]]+)]\(([-a-z0-9._~:\/?#@!$&\'()*+,;=%]+)\)/',
+            '<img src="\2" alt="\1" />',
+            $this->sText
+        );
     }
 
     /**
@@ -130,7 +171,11 @@ class Markdown extends Code
     protected function blockquote()
     {
         // Blockquotes
-        $this->sText = preg_replace('/> "(.+?)"/', '<blockquotes><p>\1</p></blockquote>', $this->sText);
+        $this->sText = preg_replace(
+            '/> "(.+?)"/',
+            '<blockquotes><p>\1</p></blockquote>',
+            $this->sText
+        );
     }
 
     /**
@@ -151,7 +196,11 @@ class Markdown extends Code
      */
     protected function hr()
     {
-        $this->sText = preg_replace('/^(\s)*----+(\s*)$/m', '<hr />', $this->sText);
+        $this->sText = preg_replace(
+            '/^(\s)*----+(\s*)$/m',
+            '<hr />',
+            $this->sText
+        );
     }
 
     /**
@@ -159,20 +208,85 @@ class Markdown extends Code
      *
      * @return void
      */
-    protected function heading()
+    protected function headings()
     {
-        $this->sText = preg_replace('/##### (.+?)\n/', '<h5>\1</h5>', $this->sText); //h5
-        $this->sText = preg_replace('/#### (.+?)\n/', '<h4>\1</h4>', $this->sText); //h4
-        $this->sText = preg_replace('/### (.+?)\n/', '<h3>\1</h3>', $this->sText); //h3
-        $this->sText = preg_replace('/## (.+?)\n/', '<h2>\1</h2>', $this->sText); //h2
-        $this->sText = preg_replace('/# (.+?)\n/', '<h1>\1</h1>', $this->sText); //h1
+        // h1
+        $this->sText = preg_replace(
+            '/# (.+?)\n/',
+            '<h1>\1</h1>',
+            $this->sText
+        );
 
-        // Alternative syntax
-        $this->sText = preg_replace('/=======(.+?)=======/s', '<h1>\1</h1>', $this->sText); //h1
-        $this->sText = preg_replace('/======(.+?)======/s', '<h2>\1</h2>', $this->sText); //h2
-        $this->sText = preg_replace('/=====(.+?)=====/s', '<h3>\1</h3>', $this->sText); //h3
-        $this->sText = preg_replace('/====(.+?)====/s', '<h4>\1</h4>', $this->sText); //h4
-        $this->sText = preg_replace('/===(.+?)===/s', '<h5>\1</h5>', $this->sText); //h5
+        // h2
+        $this->sText = preg_replace(
+            '/## (.+?)\n/',
+            '<h2>\1</h2>',
+            $this->sText
+        );
+
+        // h3
+        $this->sText = preg_replace(
+            '/### (.+?)\n/',
+            '<h3>\1</h3>',
+            $this->sText
+        );
+
+        // h4
+        $this->sText = preg_replace(
+            '/#### (.+?)\n/',
+            '<h4>\1</h4>',
+            $this->sText
+        );
+
+        // h5
+        $this->sText = preg_replace(
+            '/##### (.+?)\n/',
+            '<h5>\1</h5>',
+            $this->sTex
+        );
+    }
+
+    /**
+     * Alternative heading syntaxes
+     *
+     * @return void
+     */
+    private function alternativeHeadings()
+    {
+        // h1
+        $this->sText = preg_replace(
+            '/=======(.+?)=======/s',
+            '<h1>\1</h1>',
+            $this->sText
+        );
+
+        // h2
+        $this->sText = preg_replace(
+            '/======(.+?)======/s',
+            '<h2>\1</h2>',
+            $this->sText
+        );
+
+        // h3
+        $this->sText = preg_replace(
+            '/=====(.+?)=====/s',
+            '<h3>\1</h3>',
+            $this->sText
+        );
+
+        // h4
+        $this->sText = preg_replace(
+            '/====(.+?)====/s',
+            '<h4>\1</h4>',
+            $this->sText
+        );
+
+        // h5
+        $this->sText = preg_replace(
+            '/===(.+?)===/s',
+            '<h5>\1</h5>',
+            $this->sText
+        );
     }
 }
 
