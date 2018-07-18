@@ -16,6 +16,8 @@ use RobThree\Auth\TwoFactorAuth as Authenticator;
 
 class MainController extends Controller
 {
+    const TWO_FACTOR_SECRET_STRING_LENGTH = 10;
+
     /** @var TwoFactorAuthModel */
     private $o2FactorModel;
 
@@ -68,8 +70,8 @@ class MainController extends Controller
 
         $sSecret = $this->o2FactorModel->getSecret($this->iProfileId);
 
-        // If not setup yet, create a new 2FA secret code for the profile.
-        if (empty($sSecret) || strlen($sSecret) < 10) {
+        // If not setup yet, create a new 2FA secret code for the profile
+        if (!$this->isTwoFactorSet($sSecret)) {
             $sSecret = $this->oAuthenticator->createSecret();
             $this->o2FactorModel->setSecret($sSecret, $this->iProfileId);
         }
@@ -148,6 +150,16 @@ class MainController extends Controller
     private function getAuthenticatorName()
     {
         return str_replace('/', '-', Url::name($this->registry->site_url)) . '-' . $this->sMod;
+    }
+
+    /**
+     * @param string $sSecret
+     *
+     * @return bool
+     */
+    private function isTwoFactorSet($sSecret)
+    {
+        return !empty($sSecret) && strlen($sSecret) > self::TWO_FACTOR_SECRET_STRING_LENGTH;
     }
 
     private function checkMod()
