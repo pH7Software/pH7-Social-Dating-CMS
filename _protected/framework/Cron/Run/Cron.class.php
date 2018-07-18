@@ -51,7 +51,7 @@ abstract class Cron extends Core
             $iCronTime = $iSavedTime + $this->convertHoursToSeconds($iHours);
 
             // Status is FALSE if the delay has not yet elapsed
-            $bStatus = ($iCronTime < $this->iTime);
+            $bStatus = ($iCronTime <= $this->iTime);
 
             if ($bStatus) {
                 $this->file->deleteFile($sFullPath);
