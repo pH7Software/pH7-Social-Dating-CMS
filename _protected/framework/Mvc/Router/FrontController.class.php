@@ -519,7 +519,10 @@ final class FrontController
      */
     private function isCronHashValid()
     {
-        return strcmp($this->oHttpRequest->get('secret_word'), DbConfig::getSetting('cronSecurityHash')) === 0;
+        return strcmp(
+                $this->oHttpRequest->get('secret_word'),
+                DbConfig::getSetting('cronSecurityHash')
+            ) === 0;
     }
 
     /**
