@@ -8,7 +8,7 @@ var $suggestionBox = (function () {
     $.get(pH7Url.base + 'ph7cms-helper/main/suggestionbox', function (oData) {
         $.colorbox({
             width: '240px',
-            height: '220px',
+            height: '235px',
             speed: 500,
             scrolling: false,
             html: $(oData).find('#box_block')
