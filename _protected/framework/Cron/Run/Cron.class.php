@@ -105,7 +105,13 @@ abstract class Cron extends Core
      */
     private function hasDelayPassed($iCronTime)
     {
-        return $iCronTime <= $this->iTime;
+        /**
+         * If the server takes time loading the script,
+         * we add 5 secs to make sure it won't be seen as "already ran within the cron delay"
+         */
+        $iFiveSeconds = 5;
+
+        return $iCronTime <= $this->iTime + $iFiveSeconds;
     }
 
     /**
