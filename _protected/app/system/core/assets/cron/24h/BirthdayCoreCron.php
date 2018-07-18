@@ -27,12 +27,12 @@ class BirthdayCoreCron extends Cron
 
     protected function send()
     {
-        $$this->iNum = (new BirthdayCore)->sendMails();
+        $this->iNum = (new BirthdayCore)->sendMails();
 
         if ($this->hasBirthdays()) {
             echo t('No birthday today.');
         } else {
-            echo nt('%n% email sent.', '%n% emails sent.', $iNum);
+            echo nt('%n% email sent.', '%n% emails sent.', $this->iNum);
         }
     }
 
