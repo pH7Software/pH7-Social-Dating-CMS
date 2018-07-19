@@ -10,10 +10,11 @@ class Range extends Textbox
     public function render()
     {
         $this->attributes['type'] = 'range'; // Range Type
-        $this->attributes['name'] = 'rangeInput';
+        $this->attributes['id'] = 'rangeInput';
         $this->attributes['oninput'] = 'rangeOutput.value = rangeInput.value';
         $this->validation[] = new \PFBC\Validation\Numeric;
         parent::render();
-        echo '<strong><output name="rangeOutput"></output></strong>';
+        echo '<strong><output id="rangeOutput"></output></strong>';
+        echo '<script>$(function(){$("#rangeOutput").val($("#rangeInput").val())});</script>';
     }
 }
