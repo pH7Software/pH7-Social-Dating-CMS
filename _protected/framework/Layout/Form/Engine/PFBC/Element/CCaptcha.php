@@ -12,6 +12,7 @@ class CCaptcha extends Textbox
     public function render()
     {
         $this->attributes['required'] = 'required'; // Captcha field is always required!
+        $this->attributes['autocomplete'] = 'off';
 
         $this->validation[] = new \PFBC\Validation\CCaptcha;
         echo (new Captcha)->display();
