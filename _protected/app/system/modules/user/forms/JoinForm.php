@@ -190,12 +190,8 @@ class JoinForm
             $iMinAge = DbConfig::getSetting('minAgeRegistration');
             $iMaxAge = DbConfig::getSetting('maxAgeRegistration');
             $iDefRegistrationAge = $iMinAge + 16;
-            $iCurrentYear = date('Y');
 
-            $iMin = $iCurrentYear - $iMaxAge;
-            $iMax = $iCurrentYear - $iMinAge;
-
-            $oForm->addElement(new \PFBC\Element\Range(t('How Old Are You?'), 'age', ['value' => $iDefRegistrationAge, 'min' => $iMin, 'max' => $iMax, 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\Range(t('How Old Are You?'), 'age', ['value' => $iDefRegistrationAge, 'min' => $iMinAge, 'max' => $iMaxAge, 'required' => 1]));
         }
     }
 }
