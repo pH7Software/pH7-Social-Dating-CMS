@@ -73,12 +73,14 @@ class InstallController extends Controller
      */
     const SOCIAL_SETTINGS = [
         'socialMediaWidgets' => '1',
-        'requireRegistrationAvatar' => '0'
+        'requireRegistrationAvatar' => '0',
+        'isUserAgeRangeField' => '0'
     ];
 
     const DATING_SETTINGS = [
         'socialMediaWidgets' => '0',
-        'requireRegistrationAvatar' => '1'
+        'requireRegistrationAvatar' => '1',
+        'isUserAgeRangeField' => '1'
     ];
 
 
