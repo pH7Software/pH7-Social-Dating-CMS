@@ -342,7 +342,7 @@ class UserCoreModel extends Model
         }
 
         if (empty($aParams[SearchQueryCore::SORT])) {
-            $aParams[SearchQueryCore::SORT] = SearchCoreModel::ASC; // Default is "ascending"
+            $aParams[SearchQueryCore::SORT] = SearchCoreModel::DESC; // Default is "descending"
         }
 
         $sSqlOrder = SearchCoreModel::order($aParams[SearchQueryCore::ORDER], $aParams[SearchQueryCore::SORT]);
