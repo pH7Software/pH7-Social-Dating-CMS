@@ -95,14 +95,7 @@ class JoinFormProcess extends Form
     public function step2()
     {
         $iProfileId = $this->oUserModel->getId($this->session->get('mail_step1'));
-        if (JoinForm::FULL_USER_BIRTHDATE_REQUIRED) {
-            $sBirthDate = $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d');
-        } else {
-            $iAge = $this->httpRequest->post('age', 'int');
-            $oDate = new DateTime;
-            $oDate->modify(sprintf('- %d year', $iAge));
-            $sBirthDate = $oDate->format('Y-m-d');
-        }
+        $sBirthDate = $this->getUserBirthDateValue();
 
         // WARNING FOT "matchSex" FIELD: Be careful, you should use the Http::NO_CLEAN constant, otherwise Http::post() method removes the special tags
         // and damages the SET function SQL for entry into the database
@@ -178,6 +171,23 @@ class JoinFormProcess extends Form
                 Uri::get('user', 'signup', 'done')
             );
         }
+    }
+
+    /**
+     * @return string Returns the birthdate depending of what field type is used in the form.
+     */
+    private function getUserBirthDateValue()
+    {
+        if (JoinForm::FULL_USER_BIRTHDATE_REQUIRED) {
+            $sBirthDate = $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d');
+        } else {
+            $iAge = $this->httpRequest->post('age', 'int');
+            $oDate = new DateTime;
+            $oDate->modify(sprintf('- %d year', $iAge));
+            $sBirthDate = $oDate->format('Y-m-d');
+        }
+
+        return $sBirthDate;
     }
 
     /**
