@@ -4,9 +4,9 @@
 -- License:       GNU General Public License
 --
 
--- Add field to give option for date-picker calandar or just age range
+-- Add field to give option for date-picker calendar or just age range
 INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) VALUES
-('isAgeRangeType', 1, '', '0 to disable or 1 to enable');
+('isUserAgeRangeField', 1, '', '0 to disable or 1 to enable');
 
 
 -- Update pH7CMS's SQL schema version

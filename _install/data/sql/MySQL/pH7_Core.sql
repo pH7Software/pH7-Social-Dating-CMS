@@ -1029,7 +1029,7 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('isCaptchaNote', 0, '0 to disable or 1 to enable', 'spam'),
 ('mailType', 'mail', '', 'email'),
 ('mapType', 'roadmap', 'Choose between: ''roadmap'', ''hybrid'', ''terrain'', ''satellite''', 'map'),
-('isAgeRangeType', 1, '', '0 to disable or 1 to enable'),
+('isUserAgeRangeField', 1, '', '0 to disable or 1 to enable'),
 ('maxAgeRegistration', 99, '', 'registration'),
 ('minAgeRegistration', 18, '', 'registration'),
 ('minUsernameLength', 3, '', 'registration'),
