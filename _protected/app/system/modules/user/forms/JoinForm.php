@@ -172,7 +172,8 @@ class JoinForm
 
         if (!$bIsAvatarRequired) {
             $oForm->addElement(
-                new \PFBC\Element\Button(t('Skip'),
+                new \PFBC\Element\Button(
+                    t('Skip'),
                     'submit',
                     ['formaction' => Uri::get('user', 'signup', 'done')]
                 )
@@ -191,7 +192,13 @@ class JoinForm
             $iMaxAge = DbConfig::getSetting('maxAgeRegistration');
             $iDefRegistrationAge = $iMinAge + 16;
 
-            $oForm->addElement(new \PFBC\Element\Range(t('How Old Are You?'), 'age', ['value' => $iDefRegistrationAge, 'min' => $iMinAge, 'max' => $iMaxAge, 'required' => 1]));
+            $oForm->addElement(
+                new \PFBC\Element\Range(
+                    t('How Old Are You?'),
+                    'age',
+                    ['value' => $iDefRegistrationAge, 'min' => $iMinAge, 'max' => $iMaxAge, 'required' => 1]
+                )
+            );
         }
     }
 }
