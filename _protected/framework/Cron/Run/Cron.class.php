@@ -27,7 +27,7 @@ abstract class Cron extends Core
      * If the server takes time loading the script,
      * we add 10 secs to make sure it won't be seen as "already ran within the cron delay"
      */
-    const CRON_INTERVAL_TOLERANCE = 10;
+    const DELAY_TOLERANCE_INTERVAL_IN_SEC = 10;
 
     /** @var int */
     private $iTime;
@@ -111,7 +111,7 @@ abstract class Cron extends Core
      */
     private function hasDelayPassed($iCronTime)
     {
-        return $iCronTime <= $this->iTime + self::CRON_INTERVAL_TOLERANCE;
+        return $iCronTime <= $this->iTime + self::DELAY_TOLERANCE_INTERVAL_IN_SEC;
     }
 
     /**
