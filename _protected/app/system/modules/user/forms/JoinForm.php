@@ -17,9 +17,6 @@ use PH7\Framework\Url\Header;
 
 class JoinForm
 {
-    /** @var bool Require users to enter their exact birth date, or just how old they are */
-    const FULL_USER_BIRTHDATE_REQUIRED = false;
-
     public static function step1()
     {
         if ((new Session)->exists('mail_step1')) {
@@ -184,10 +181,7 @@ class JoinForm
 
     private static function generateBirthDateField(\PFBC\Form $oForm)
     {
-        if (self::FULL_USER_BIRTHDATE_REQUIRED) {
-            $oForm->addElement(new \PFBC\Element\Date(t('Your Date of Birth'), 'birth_date', ['id' => 'birth_date', 'description' => t('Please specify your birth date using the calendar.'), 'onblur' => 'CValid(this.value, this.id)', 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1]));
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
-        } else {
+        if (DbConfig::getSetting('isUserAgeRangeField')) {
             $iMinAge = DbConfig::getSetting('minAgeRegistration');
             $iMaxAge = DbConfig::getSetting('maxAgeRegistration');
             $iDefRegistrationAge = $iMinAge + 16;
@@ -199,6 +193,9 @@ class JoinForm
                     ['value' => $iDefRegistrationAge, 'min' => $iMinAge, 'max' => $iMaxAge, 'required' => 1]
                 )
             );
+        } else {
+            $oForm->addElement(new \PFBC\Element\Date(t('Your Date of Birth'), 'birth_date', ['id' => 'birth_date', 'description' => t('Please specify your birth date using the calendar.'), 'onblur' => 'CValid(this.value, this.id)', 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
         }
     }
 }

@@ -61,6 +61,7 @@ class SettingFormProcess extends Form
         'max_username_length' => 'maxUsernameLength',
         'min_age_registration' => 'minAgeRegistration',
         'max_age_registration' => 'maxAgeRegistration',
+        'is_user_age_range_field' => 'isUserAgeRangeField',
         'require_registration_avatar' => 'requireRegistrationAvatar',
         'default_membership_group_id' => 'defaultMembershipGroupId',
 

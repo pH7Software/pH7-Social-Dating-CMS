@@ -178,13 +178,13 @@ class JoinFormProcess extends Form
      */
     private function getUserBirthDateValue()
     {
-        if (JoinForm::FULL_USER_BIRTHDATE_REQUIRED) {
-            $sBirthDate = $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d');
-        } else {
+        if (DbConfig::getSetting('isUserAgeRangeField')) {
             $iAge = $this->httpRequest->post('age', 'int');
             $oDate = new DateTime;
             $oDate->modify(sprintf('- %d year', $iAge));
             $sBirthDate = $oDate->format('Y-m-d');
+        } else {
+            $sBirthDate = $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d');
         }
 
         return $sBirthDate;

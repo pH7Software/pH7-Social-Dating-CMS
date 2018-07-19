@@ -105,6 +105,8 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Number(t('Maximum age for registration:'), 'max_age_registration', ['value' => DbConfig::getSetting('maxAgeRegistration'), 'min' => DbConfig::getSetting('minAgeRegistration') + 1, 'validation' => new \PFBC\Validation\Str(1, 3), 'required' => 1]));
 
+        $oForm->addElement(new \PFBC\Element\Select(t('BirthDate User Field Type:'), 'is_user_age_range_field', ['1' => t('Age Range (without month and day of birth )'), '0' => t('Date-picker calendar (full birth date)')], ['value' => DbConfig::getSetting('isUserAgeRangeField'), 'required' => 1]));
+
         $oForm->addElement(new \PFBC\Element\Select(t('Require photo to be uploaded:'), 'require_registration_avatar', ['1' => t('Yes'), '0' => t('No')], ['description' => t('Require Members to upload a profile photo during sign up.') . '<br /><small>' . t("Doesn't guarantee that all users will have a profile photo because users can still close the page and not finish the registration process.") . '</small>', 'value' => DbConfig::getSetting('requireRegistrationAvatar'), 'required' => 1]));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Default Membership Group:'), 'default_membership_group_id', self::getMembershipGroups(), ['value' => DbConfig::getSetting('defaultMembershipGroupId'), 'required' => 1]));
