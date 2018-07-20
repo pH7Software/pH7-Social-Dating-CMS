@@ -47,7 +47,7 @@ class JoinForm
 
         $oForm->addElement(new \PFBC\Element\Radio(t('Your Gender:'), 'sex', ['male' => t('Man'), 'female' => t('Woman')], ['required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Date(t('Your Date of birth:'), 'birth_date', ['id' => 'birth_date', 'description' => t('Please specify your date of birth using the calendar.'), 'onblur' => 'CValid(this.value, this.id)', 'required' => 1, 'validation' => new \PFBC\Validation\BirthDate]));
+        $oForm->addElement(new \PFBC\Element\Date(t('Your Date of Birth:'), 'birth_date', ['id' => 'birth_date', 'description' => t('Please specify your date of birth using the calendar.'), 'onblur' => 'CValid(this.value, this.id)', 'required' => 1, 'validation' => new \PFBC\Validation\BirthDate]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Your Country:'), 'country', Form::getCountryValues(DbTableName::AFFILIATE_COUNTRY), ['id' => 'str_country', 'value' => Geo::getCountryCode(), 'description' => t('Select the country where you are legally resident.'), 'required' => 1]));
