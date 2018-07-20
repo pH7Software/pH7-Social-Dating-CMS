@@ -1342,7 +1342,7 @@ class UserCoreModel extends Model
     }
 
     /**
-     * Get Birth Date of a user.
+     * Get Date of Birth of a user.
      *
      * @param int $iProfileId
      * @param string $sTable Default DbTableName::MEMBER

@@ -3291,7 +3291,7 @@ msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/AddUserForm.php:40
 #: _protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:35
-msgid "Please specify the birth date using the calendar."
+msgid "Please specify the date of birth using the calendar."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/AddUserForm.php:46
@@ -5172,7 +5172,7 @@ msgstr ""
 
 #: _protected/app/system/modules/affiliate/forms/JoinForm.php:50
 #: _protected/app/system/modules/user/forms/JoinForm.php:95
-msgid "Please specify your birth date using the calendar."
+msgid "Please specify your date of birth using the calendar."
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/forms/JoinForm.php:53
