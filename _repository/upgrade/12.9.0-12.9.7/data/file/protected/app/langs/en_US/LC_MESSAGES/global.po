@@ -5155,7 +5155,7 @@ msgstr ""
 
 #: _protected/app/system/modules/affiliate/forms/EditForm.php:65
 #: _protected/app/system/modules/affiliate/forms/JoinForm.php:50
-msgid "Your Date of Birth:"
+msgid "Your Date of birth:"
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/forms/JoinForm.php:39
