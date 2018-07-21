@@ -207,7 +207,7 @@ class PH7Tpl extends Kernel implements GenerableFile
     /**
      * Enabled the cache.
      *
-     * @param boolean $bCaching
+     * @param bool $bCaching
      *
      * @return void
      */
@@ -219,7 +219,7 @@ class PH7Tpl extends Kernel implements GenerableFile
     /**
      * Check if the cache is enabled.
      *
-     * @return boolean
+     * @return bool
      */
     public function isEnableCache()
     {
@@ -229,7 +229,7 @@ class PH7Tpl extends Kernel implements GenerableFile
     /**
      * Set the HTML Compressor.
      *
-     * @param boolean $bCompressor
+     * @param bool $bCompressor
      *
      * @return void
      */
@@ -241,7 +241,7 @@ class PH7Tpl extends Kernel implements GenerableFile
     /**
      * Set the PHP Compressor.
      *
-     * @param boolean $bCompressor
+     * @param bool $bCompressor
      *
      * @return void
      */
@@ -253,7 +253,7 @@ class PH7Tpl extends Kernel implements GenerableFile
     /**
      * Set the time of expire cache.
      *
-     * @param integer $iLifeTime In seconds.
+     * @param int $iLifeTime In seconds.
      *
      * @return void
      */
@@ -298,7 +298,7 @@ class PH7Tpl extends Kernel implements GenerableFile
      *
      * @param string $sKey
      *
-     * @return boolean
+     * @return bool
      */
     public function __isset($sKey)
     {
@@ -475,8 +475,8 @@ class PH7Tpl extends Kernel implements GenerableFile
      *
      * @param string $sName Variable name
      * @param mixed $mValue (string, object, array, integer, ...) Value Variable
-     * @param boolean $bEscape Specify "true" if you want to protect your variables against XSS.
-     * @param boolean $bEscapeStrip If you use escape method, you can also set this parameter to "true" to strip HTML and PHP tags from a string.
+     * @param bool $bEscape Specify "true" if you want to protect your variables against XSS.
+     * @param bool $bEscapeStrip If you use escape method, you can also set this parameter to "true" to strip HTML and PHP tags from a string.
      *
      * @return void
      */
@@ -495,8 +495,8 @@ class PH7Tpl extends Kernel implements GenerableFile
      * @see assign()
      *
      * @param array $aVars
-     * @param boolean $bEscape Specify TRUE if you want to protect your variables against XSS.
-     * @param boolean $bEscapeStrip If you use escape method, you can also set this parameter to "true" to strip HTML and PHP tags from a string.
+     * @param bool $bEscape Specify TRUE if you want to protect your variables against XSS.
+     * @param bool $bEscapeStrip If you use escape method, you can also set this parameter to "true" to strip HTML and PHP tags from a string.
      *
      * @return void
      */
@@ -648,7 +648,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     /**
      * Compiler template.
      *
-     * @return boolean
+     * @return bool
      *
      * @throws TplException If the template file could not be recovered or cannot be written.
      */
@@ -745,7 +745,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     /**
      * Checks if the template file in the $this->sTemplateDirFile attribute is the main page (layout.tpl).
      *
-     * @return boolean
+     * @return bool
      */
     private function isMainPage()
     {
@@ -755,7 +755,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     /**
      * Checks if the compile file in the $this->sCompileDirFile attribute is the main page (layout.cpl.php).
      *
-     * @return boolean
+     * @return bool
      */
     final private function isMainCompilePage()
     {
@@ -768,7 +768,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     /**
      * Checks if the compile file in the $this->sCompileDirFile attribute is the XML (with XSL layout) Sitemap page (mainlayout.xsl.cpl.php).
      *
-     * @return boolean
+     * @return bool
      */
     final private function isXmlSitemapCompilePage()
     {
@@ -780,7 +780,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      *
      * @param string $sDirPath
      *
-     * @return boolean
+     * @return bool
      */
     final private function isMainDir($sDirPath)
     {
@@ -790,7 +790,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     /**
      * Check that the variable "$design" is actually parts of the Design class.
      *
-     * @return boolean
+     * @return bool
      */
     final private function checkDesignInstance()
     {
@@ -800,7 +800,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     /**
      * Checks if the marks licensing, copyright has not been removed.
      *
-     * @return boolean
+     * @return bool
      */
     final private function isMarkCopyright()
     {
@@ -816,7 +816,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     /**
      * Checks if the small links copyright has not been removed.
      *
-     * @return boolean
+     * @return bool
      */
     final private function isSmallMarkCopyright()
     {
@@ -826,7 +826,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     /**
      * Check if it's not the base theme.
      *
-     * @return boolean Returns TRUE if it's not the base theme, FALSE otherwise.
+     * @return bool Returns TRUE if it's not the base theme, FALSE otherwise.
      */
     final private function notBaseTheme()
     {
