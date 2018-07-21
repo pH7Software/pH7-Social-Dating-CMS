@@ -57,9 +57,10 @@ class AddFakeProfilesForm
             'IR' => t('Iranian'),
             'IE' => t('Irish'),
             'NZ' => t('New Zealander'),
+            'NO' => t('Norwegian'),
             'ES' => t('Spanish'),
             'CH' => t('Swiss'),
-            'TR' => t('Turkish'),
+            'TR' => t('Turkish')
         ];
     }
 }
