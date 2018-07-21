@@ -88,8 +88,6 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Fully API for integration from an external app (iOS/Android, ...), website, program, ...
 * Feedback
 * Fully Responsive Templates
-* CSV User Importer
-* Fake Profile Generator
 * Memberships/Groups Manager
 * Publishable easily into Android/iPhone/iOS webview mobile app thanks its Mobile-Optimized Templates
 * Multiple-Themes and many customization possible
