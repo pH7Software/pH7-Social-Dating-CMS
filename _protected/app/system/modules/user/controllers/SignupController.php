@@ -102,7 +102,8 @@ class SignupController extends Controller
             Header::redirect(Uri::get('user', 'signup', 'step3'));
         }
 
-        $this->session->destroy(); // Remove all sessions created pending registration
+        // Remove all sessions created during registration
+        $this->session->destroy();
 
         Header::redirect(
             Uri::get(
