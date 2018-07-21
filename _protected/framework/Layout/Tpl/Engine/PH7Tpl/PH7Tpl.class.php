@@ -354,7 +354,7 @@ class PH7Tpl extends Kernel implements GenerableFile
         if ($bInclude) {
             $bCaching = (bool)$this->config->values['cache']['enable.html.tpl.cache'];
 
-            if ($this->isEnableCache() === true && $bCaching === true && !$this->isMainCompilePage()) {
+            if ($bCaching === true && $this->isEnableCache() === true && !$this->isMainCompilePage()) {
                 $this->cache();
             } else {
                 // Extraction Variables
