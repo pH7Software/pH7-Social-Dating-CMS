@@ -153,7 +153,7 @@ class AddFakeProfilesFormProcess extends Form
         $aData['city'] = $aUser['location']['city'];
         $aData['state'] = $aUser['location']['state'];
         $aData['zip_code'] = $aUser['location']['postcode'];
-        $aData['birth_date'] = $this->dateTime->get($aUser['dob'])->date('Y-m-d');
+        $aData['birth_date'] = $this->dateTime->get($aUser['dob']['date'])->date('Y-m-d');
         $aData['avatar'] = $aUser['picture']['large'];
         $aData['ip'] = Ip::get();
 
