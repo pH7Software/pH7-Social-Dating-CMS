@@ -310,7 +310,7 @@ class PH7Tpl extends Kernel implements GenerableFile
      *
      * @param string $sTplFile Default NULL
      * @param string $sDirPath Default NULL
-     * @param integer $_bInclude Default 1 (TRUE)
+     * @param integer $bInclude Default TRUE
      *
      * @return string
      *
@@ -318,7 +318,7 @@ class PH7Tpl extends Kernel implements GenerableFile
      *
      * @throws PH7InvalidArgumentException
      */
-    public function display($sTplFile = null, $sDirPath = null, $_bInclude = 1)
+    public function display($sTplFile = null, $sDirPath = null, $bInclude = true)
     {
         $this->sTplFile = $sTplFile;
 
@@ -351,7 +351,7 @@ class PH7Tpl extends Kernel implements GenerableFile
             $this->compile();
         }
 
-        if (!empty($_bInclude)) {
+        if ($bInclude) {
             $bCaching = (bool)$this->config->values['cache']['enable.html.tpl.cache'];
 
             if ($this->isEnableCache() === true && $bCaching === true && !$this->isMainCompilePage()) {
