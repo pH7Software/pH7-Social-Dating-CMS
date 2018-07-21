@@ -310,7 +310,7 @@ class PH7Tpl extends Kernel implements GenerableFile
      *
      * @param string $sTplFile Default NULL
      * @param string $sDirPath Default NULL
-     * @param integer $bInclude Default TRUE
+     * @param bool $bInclude Default TRUE
      *
      * @return string
      *
