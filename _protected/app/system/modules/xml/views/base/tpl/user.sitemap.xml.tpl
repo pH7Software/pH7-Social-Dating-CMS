@@ -1,7 +1,6 @@
 {{ $design->xmlHeader() }}
 {{ XmlDesign::xslHeader() }}
 
-
 {each $user in $members}
   <url>
     <loc>{% (new UserCore)->getProfileLink($user->username) %}</loc>
@@ -10,6 +9,5 @@
     <priority>0.5</priority>
   </url>
 {/each}
-
 
 {{ XmlDesign::xslFooter() }}

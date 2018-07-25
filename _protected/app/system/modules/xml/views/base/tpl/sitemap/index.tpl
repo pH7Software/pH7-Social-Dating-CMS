@@ -9,8 +9,7 @@
                 </li>
             {/each}
         </ul>
-        {else}
-
-    <p>{lang 'Oops! No links to display. Come back later ;)'}</p>
+    {else}
+        <p>{lang 'Oops! No links to display. Come back later ;)'}</p>
     {/if}
 </div>

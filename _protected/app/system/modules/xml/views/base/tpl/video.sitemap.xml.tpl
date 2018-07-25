@@ -1,7 +1,6 @@
 {{ $design->xmlHeader() }}
 {{ XmlDesign::xslHeader() }}
 
-
 {each $album in $albums_videos}
   <url>
     <loc>{{ $design->url('video','main','album',"$album->username,$album->name,$album->albumId") }}</loc>
@@ -19,6 +18,5 @@
     <priority>0.6</priority>
   </url>
 {/each}
-
 
 {{ XmlDesign::xslFooter() }}

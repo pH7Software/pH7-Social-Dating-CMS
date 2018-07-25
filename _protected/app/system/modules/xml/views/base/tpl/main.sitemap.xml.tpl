@@ -1,7 +1,6 @@
 {{ $design->xmlHeader() }}
 {{ XmlDesign::xslHeader() }}
 
-
 <url>
   <loc>{url_root}</loc>
   <lastmod>{current_date}</lastmod>
@@ -113,6 +112,5 @@
   <changefreq>monthly</changefreq>
   <priority>0.4</priority>
 </url>
-
 
 {{ XmlDesign::xslFooter() }}

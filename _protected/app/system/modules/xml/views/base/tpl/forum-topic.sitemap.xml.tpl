@@ -1,7 +1,6 @@
 {{ $design->xmlHeader() }}
 {{ XmlDesign::xslHeader() }}
 
-
 {each $topic in $forums_topics}
   <url>
     <loc>{{ $design->url('forum','forum','post', escape("$topic->name,$topic->forumId,$topic->title,$topic->topicId") ) }}</loc>
@@ -10,6 +9,5 @@
     <priority>0.6</priority>
   </url>
 {/each}
-
 
 {{ XmlDesign::xslFooter() }}

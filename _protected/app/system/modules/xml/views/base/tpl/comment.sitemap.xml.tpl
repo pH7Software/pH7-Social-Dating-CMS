@@ -1,7 +1,6 @@
 {{ $design->xmlHeader() }}
 {{ XmlDesign::xslHeader() }}
 
-
 <url>
   <loc>{{ $design->url('xml','sitemap','xmlrouter','comment-profile') }}</loc>
   <lastmod>{current_date}</lastmod>
@@ -43,6 +42,5 @@
   <changefreq>weekly</changefreq>
   <priority>0.5</priority>
 </url>
-
 
 {{ XmlDesign::xslFooter() }}
