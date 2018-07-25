@@ -18,6 +18,8 @@ use PH7\Framework\Security\Ban\Ban;
 
 class WallAjax extends Core
 {
+    const MAX_ITEMS_SHOWN = 20;
+
     /** @var WallModel */
     private $oWallModel;
 
@@ -68,7 +70,8 @@ class WallAjax extends Core
 
     private function show()
     {
-        $this->mContents = $this->oWallModel->get($this->session->get('member_id'), null, 0, 20);
+        $this->mContents = $this->oWallModel->get($this->session->get('member_id'), null, 0, self::MAX_ITEMS_SHOWN);
+
         if (!$this->mContents) {
             echo '<p class="alert alert-danger">', t('Oops...! No news feed available at the moment.'), '</p>';
         } else {
@@ -88,7 +91,8 @@ class WallAjax extends Core
 
     private function showCommentProfile()
     {
-        $this->mContents = $this->oWallModel->getCommentProfile(null, 0, 20);
+        $this->mContents = $this->oWallModel->getCommentProfile(null, 0, self::MAX_ITEMS_SHOWN);
+
         if (!$this->mContents) {
             echo '<p class="alert alert-danger">', t('No news feed available at the moment. Start commenting some profiles!'), '</p>';
         } else {
