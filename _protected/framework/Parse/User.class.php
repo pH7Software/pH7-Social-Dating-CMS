@@ -68,7 +68,7 @@ class User
      *
      * @return false|int
      */
-    private static function areProfileFound($sContents, array &$aMatches)
+    private static function areProfileFound($sContents, &$aMatches)
     {
         return preg_match_all(
             '#' . static::AT . '(' . PH7_USERNAME_PATTERN . '{' . DbConfig::getSetting('minUsernameLength') . ',' . DbConfig::getSetting('maxUsernameLength') . '})#u',
