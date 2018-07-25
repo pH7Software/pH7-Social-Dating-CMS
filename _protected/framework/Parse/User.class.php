@@ -30,7 +30,7 @@ class User
      */
     public static function atUsernameToLink($sContents)
     {
-        foreach (static::getAtUsernames($sContents) as $sUsername) {
+        foreach (self::getAtUsernames($sContents) as $sUsername) {
             $sUsernameLink = (new UserCore)->getProfileLink($sUsername);
 
             $sContents = str_replace(
@@ -52,7 +52,7 @@ class User
      */
     private static function getAtUsernames($sContents)
     {
-        if (preg_match_all('#' . static::AT . '(' . PH7_USERNAME_PATTERN . '{' . DbConfig::getSetting('minUsernameLength') . ',' . DbConfig::getSetting('maxUsernameLength') . '})#u', $sContents, $aMatches, PREG_PATTERN_ORDER)) {
+        if (self::areProfileFound($sContents, $aMatches)) {
             $aMatches[1] = array_unique($aMatches[1]); // Delete duplicate usernames.
             foreach ($aMatches[1] as $sUsername) {
                 if ((new ExistsCoreModel)->username($sUsername)) {
@@ -60,5 +60,21 @@ class User
                 }
             }
         }
+    }
+
+    /**
+     * @param string $sContents
+     * @param array $aMatches
+     *
+     * @return false|int
+     */
+    private static function areProfileFound($sContents, array &$aMatches)
+    {
+        return preg_match_all(
+            '#' . static::AT . '(' . PH7_USERNAME_PATTERN . '{' . DbConfig::getSetting('minUsernameLength') . ',' . DbConfig::getSetting('maxUsernameLength') . '})#u',
+            $sContents,
+            $aMatches,
+            PREG_PATTERN_ORDER
+        );
     }
 }
