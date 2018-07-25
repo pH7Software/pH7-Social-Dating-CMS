@@ -224,7 +224,7 @@ class Validate
 
         return (
             preg_match('#^' . PH7_USERNAME_PATTERN . '{' . $iMin . ',' . $iMax . '}$#', $sUsername) &&
-            !is_file(PH7_PATH_ROOT . $sUsername . PH7_PAGE_EXT) && !Ban::isUsername($sUsername) &&
+            !file_exists(PH7_PATH_ROOT . $sUsername . PH7_PAGE_EXT) && !Ban::isUsername($sUsername) &&
             !(new ExistsCoreModel)->username($sUsername, $sTable)
         );
     }
