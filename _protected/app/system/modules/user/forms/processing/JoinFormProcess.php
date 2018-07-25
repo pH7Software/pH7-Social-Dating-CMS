@@ -149,8 +149,8 @@ class JoinFormProcess extends Form
 
     public function step4()
     {
-        // If no photo added from the form, automatically skip this step
-        if (empty($_FILES['avatar']['tmp_name'])) {
+        // If no photo was uploaded, automatically skip this step
+        if (!$this->isAvatarUploaded()) {
             Header::redirect(
                 Uri::get('user', 'signup', 'done')
             );
@@ -200,6 +200,14 @@ class JoinFormProcess extends Form
         $this->session->remove($sVariableName);
 
         return $sRef;
+    }
+
+    /**
+     * @return bool
+     */
+    private function isAvatarUploaded()
+    {
+        return !empty($_FILES['avatar']['tmp_name']);
     }
 
     /**

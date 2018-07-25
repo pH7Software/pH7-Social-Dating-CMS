@@ -6,7 +6,6 @@
  * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Controller
- * @version        1.0
  */
 
 namespace PH7;
@@ -103,7 +102,8 @@ class SignupController extends Controller
             Header::redirect(Uri::get('user', 'signup', 'step3'));
         }
 
-        $this->session->destroy(); // Remove all sessions created pending registration
+        // Remove all sessions created during registration
+        $this->session->destroy();
 
         Header::redirect(
             Uri::get(
