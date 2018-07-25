@@ -342,6 +342,11 @@ namespace PH7\Framework\Str {
             return htmlspecialchars($sText, ENT_QUOTES, static::ENCODING);
         }
 
+        /**
+         * @param string $sPattern
+         *
+         * @return string
+         */
         private static function regexNormalize($sPattern)
         {
             return self::REGEX_DELIMITER . trim($sPattern, self::REGEX_DELIMITER) . self::REGEX_DELIMITER;
