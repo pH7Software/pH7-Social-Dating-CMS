@@ -160,13 +160,13 @@ namespace PH7\Framework\Str {
          */
         public function indexOf($sText, $sFindText, $iOffset = 0)
         {
-            $mPos = strpos($sText, $sFindText, $iOffset);
+            $mPosition = strpos($sText, $sFindText, $iOffset);
 
-            if (!is_int($mPos)) {
+            if (!is_int($mPosition)) {
                 return -1;
             }
 
-            return $mPos;
+            return $mPosition;
         }
 
         /**
@@ -180,13 +180,13 @@ namespace PH7\Framework\Str {
          */
         public function lastIndexOf($sText, $sFindText, $iOffset = 0)
         {
-            $mPos = strrpos($sText, $sFindText, $iOffset);
+            $mPosition = strrpos($sText, $sFindText, $iOffset);
 
-            if (!is_int($mPos)) {
+            if (!is_int($mPosition)) {
                 return -1;
             }
 
-            return $mPos;
+            return $mPosition;
         }
 
         /**
