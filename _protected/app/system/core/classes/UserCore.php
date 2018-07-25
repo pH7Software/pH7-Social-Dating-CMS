@@ -316,9 +316,9 @@ class UserCore
     public function getProfileLink($sUsername)
     {
         $sUsername = (new Str)->lower($sUsername);
-        //return (strlen($sUsername) >1) ? PH7_URL_ROOT . $sUsername . PH7_PAGE_EXT : '#';
+        //return (strlen($sUsername) > 1) ? PH7_URL_ROOT . '@' . $sUsername : '#';
 
-        return PH7_URL_ROOT . $sUsername . PH7_PAGE_EXT;
+        return PH7_URL_ROOT . '@' . $sUsername;
     }
 
     /**
