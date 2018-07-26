@@ -47,6 +47,8 @@ class Design
     const CACHE_GROUP = 'str/design';
     const CACHE_AVATAR_GROUP = 'str/design/avatar/'; // We put a slash for after creating a directory for each username
 
+    const NONE_FLAG_FILENAME = 'none.gif';
+    const FLAG_ICON_EXT = '.gif';
     const AVATAR_IMG_EXT = '.svg';
 
     const SUCCESS_TYPE = 'success';
@@ -123,7 +125,7 @@ class Design
             // Get the two-letter country code
             $sAbbrLang = Lang::getIsoCode($sLang);
 
-            echo '<a href="', $sCurrentPage, $sLang, '" hreflang="', $sAbbrLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>&nbsp;';
+            echo '<a href="', $sCurrentPage, $sLang, '" hreflang="', $sAbbrLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, self::FLAG_ICON_EXT, '" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>&nbsp;';
         }
 
         unset($aLangs);
@@ -344,10 +346,10 @@ class Design
      */
     public function getSmallFlagIcon($sCountryCode)
     {
-        $sIcon = $this->oStr->lower($sCountryCode) . '.gif';
+        $sIcon = $this->oStr->lower($sCountryCode) . self::FLAG_ICON_EXT;
         $sDir = PH7_URL_STATIC . PH7_IMG . 'flag/s/';
 
-        echo is_file(PH7_PATH_STATIC . PH7_IMG . 'flag/s/' . $sIcon) ? $sDir . $sIcon : $sDir . 'none.gif';
+        echo is_file(PH7_PATH_STATIC . PH7_IMG . 'flag/s/' . $sIcon) ? $sDir . $sIcon : $sDir . self::NONE_FLAG_FILENAME;
     }
 
     /**
