@@ -677,6 +677,7 @@ class UserCoreModel extends Model
         $rStmt->execute();
         $this->setKeyId(Db::getInstance()->lastInsertId()); // Set the user's ID
         Db::free($rStmt);
+
         $this->setInfoFields($aData);
         $this->setDefaultPrivacySetting();
         $this->setDefaultNotification();
