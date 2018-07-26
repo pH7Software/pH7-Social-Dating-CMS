@@ -48,7 +48,7 @@ class UserModel extends UserCoreModel
         $this->setKeyId(Db::getInstance()->lastInsertId()); // Set the user's ID
         Db::free($rStmt);
 
-        $this->setInfoFields(array());
+        $this->setInfoFields(array()); // Insert an empty "members_info" entry with the user's ID
         $this->setDefaultPrivacySetting();
         $this->setDefaultNotification();
 
