@@ -241,7 +241,8 @@ class Compress
      */
     private function googleClosureEligible($sContent, $sContentEncoded)
     {
-        if ($this->bIsGoogleClosure && strlen($sContentEncoded) < static::MAX_LIMIT_SIZE_GOOGLE_CLOSURE &&
+        if ($this->bIsGoogleClosure &&
+            strlen($sContentEncoded) < static::MAX_LIMIT_SIZE_GOOGLE_CLOSURE &&
             preg_match('/[^a-z]eval\(/ism', $sContent) == 0
         ) {
             return @pfsockopen(self::GOOGLE_CLOSURE_HOST, self::GOOGLE_CLOSURE_PORT);
