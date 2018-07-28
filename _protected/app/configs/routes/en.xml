@@ -7,7 +7,7 @@
     <!-- BEGIN SYSTEM MODULES -->
 
     <!-- User -->
-      <route url="([a-zA-Z0-9_-]+)[$page_ext]" path="system/modules" module="user" controller="profile" action="index" vars="username" />
+      <route url="@([a-zA-Z0-9_-]+)" path="system/modules" module="user" controller="profile" action="index" vars="username" />
       <route url="signup" path="system/modules" module="user" controller="signup" action="step1" />
       <route url="login" path="system/modules" module="user" controller="main" action="login" />
       <route url="resend-activation" path="system/modules" module="user" controller="main" action="resendactivation" />

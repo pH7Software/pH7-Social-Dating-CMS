@@ -22,6 +22,7 @@ use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Math\Measure\Year as YearMeasure;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Str\Str;
+use PH7\UserCore;
 
 class Validate
 {
@@ -224,7 +225,8 @@ class Validate
 
         return (
             preg_match('#^' . PH7_USERNAME_PATTERN . '{' . $iMin . ',' . $iMax . '}$#', $sUsername) &&
-            !file_exists(PH7_PATH_ROOT . $sUsername . PH7_PAGE_EXT) && !Ban::isUsername($sUsername) &&
+            !file_exists(PH7_PATH_ROOT . UserCore::PROFILE_PAGE_PREFIX . $sUsername) &&
+            !Ban::isUsername($sUsername) &&
             !(new ExistsCoreModel)->username($sUsername, $sTable)
         );
     }

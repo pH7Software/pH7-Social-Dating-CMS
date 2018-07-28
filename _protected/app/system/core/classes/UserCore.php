@@ -34,6 +34,9 @@ use stdClass;
 // Abstract Class
 class UserCore
 {
+    /** The prefix of the profile page URI path (eg https://mysite.com/@<USERNAME>) */
+    const PROFILE_PAGE_PREFIX = '@';
+
     const MAX_WIDTH_AVATAR = 600;
     const MAX_HEIGHT_AVATAR = 800;
 
@@ -316,9 +319,9 @@ class UserCore
     public function getProfileLink($sUsername)
     {
         $sUsername = (new Str)->lower($sUsername);
-        //return (strlen($sUsername) >1) ? PH7_URL_ROOT . $sUsername . PH7_PAGE_EXT : '#';
+        //return (strlen($sUsername) > 1) ? PH7_URL_ROOT . '@' . $sUsername : '#';
 
-        return PH7_URL_ROOT . $sUsername . PH7_PAGE_EXT;
+        return PH7_URL_ROOT . self::PROFILE_PAGE_PREFIX . $sUsername;
     }
 
     /**
