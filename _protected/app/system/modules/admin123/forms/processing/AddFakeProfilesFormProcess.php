@@ -169,7 +169,8 @@ class AddFakeProfilesFormProcess extends Form
      */
     private function isValidProfile($sEmail, $sUsername)
     {
-        return $this->oValidate->email($sEmail) && !$this->oExistsModel->email($sEmail) &&
+        return $this->oValidate->email($sEmail) &&
+            !$this->oExistsModel->email($sEmail) &&
             $this->oValidate->username($sUsername);
     }
 }
