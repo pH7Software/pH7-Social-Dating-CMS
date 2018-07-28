@@ -1,7 +1,6 @@
 {{ $design->xmlHeader() }}
 {{ XmlDesign::xslHeader() }}
 
-
 {each $com in $comments}
   <url>
     <loc>{{ $design->url('comment','comment','read',"$table,$com->recipient") }}</loc>
@@ -10,6 +9,5 @@
     <priority>0.5</priority>
   </url>
 {/each}
-
 
 {{ XmlDesign::xslFooter() }}
