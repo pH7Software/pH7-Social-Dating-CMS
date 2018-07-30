@@ -94,21 +94,9 @@
           </div>
       {/if}
 
-      {* Headings group *}
-      <div class="center" id="headings">
-        {if !empty($h1_title )}
-          <h1>{h1_title}</h1>
-        {/if}
-        {if !empty($h2_title )}
-          <h2>{h2_title}</h2>
-        {/if}
-        {if !empty($h3_title )}
-          <h3>{h3_title}</h3>
-        {/if}
-        {if !empty($h4_title )}
-          <h4>{h4_title}</h4>
-        {/if}
-      </div>
+      {* Heading groups *}
+      {main_include 'headings.inc.tpl'}
+
       {* Don't display the top middle banner on the the splash page *}
       {if !$is_guest_homepage}
           <div role="banner" class="center ad_468_60">
