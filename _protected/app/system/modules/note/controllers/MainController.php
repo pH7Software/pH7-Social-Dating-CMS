@@ -62,7 +62,7 @@ class MainController extends Controller
     public function index()
     {
         $this->view->page_title = t('Note Posts of %site_name% community');
-        $this->view->h1_title = t('Community Blog. Let Users talk!');
+        $this->view->h1_title = '<span class="cinnabar-red">' . t('Community Blog. Let Users talk!') . '</span>';
 
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->oNoteModel->totalPosts($this->iApproved), self::POSTS_PER_PAGE

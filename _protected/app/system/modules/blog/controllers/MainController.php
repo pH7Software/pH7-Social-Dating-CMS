@@ -49,7 +49,7 @@ class MainController extends Controller
     public function index()
     {
         $this->view->page_title = t("%site_name%'s Blog. The latest %site_name%'s news and articles");
-        $this->view->h1_title = t('Company Blog. %site_name% News');
+        $this->view->h1_title = '<span class="cinnabar-red">' . t('Company Blog. %site_name% News') . '</span>';
 
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->oBlogModel->totalPosts(), self::POSTS_PER_PAGE
