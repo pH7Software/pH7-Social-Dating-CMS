@@ -107,7 +107,7 @@ class MainController extends Controller
                 // Set Blogs Post Views Statistics
                 Statistic::setView($oPost->blogId, DbTableName::BLOG);
             } else {
-                $this->sTitle = t('No Blog Found');
+                $this->sTitle = t('Blog post not found.');
                 $this->notFound();
             }
         } else {

@@ -120,7 +120,7 @@ class MainController extends Controller
                 // Set Notes Post Views Statistics
                 Statistic::setView($oPost->noteId, DbTableName::NOTE);
             } else {
-                $this->sTitle = t('No Note Found.');
+                $this->sTitle = t('Note not found.');
                 $this->notFound();
             }
         } else {
