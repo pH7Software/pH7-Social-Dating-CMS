@@ -71,7 +71,7 @@ class ForumController extends Controller
         );
 
         if (empty($oCategories) && empty($oForums)) {
-            $this->sTitle = t('No Forums found.');
+            $this->sTitle = t('Nothing found!');
             $this->notFound();
         } else {
             $this->view->page_title = t('Discussion Forums - %site_name%');

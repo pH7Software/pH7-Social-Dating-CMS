@@ -63,7 +63,7 @@ class MainController extends Controller
         $this->setMenuVars();
 
         if (empty($oPosts)) {
-            $this->sTitle = t('No Posts');
+            $this->sTitle = t('No posts found.');
             $this->notFound(false); // We disable the HTTP error code 404 for Ajax requests running
             $this->view->error = t('Oops! There are no posts at the moment. Please come back soon 😉'); // We change the error message
         } else {
