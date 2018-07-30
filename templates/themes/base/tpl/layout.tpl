@@ -139,7 +139,6 @@
 
       <div id="ajph">
         <div id="sub_ajph">
-
           {if !empty($manual_include)}
             {manual_include $manual_include}
           {elseif !empty($pOH_not_found)}
@@ -147,7 +146,6 @@
           {else}
             {auto_include}
           {/if}
-
         </div>
       </div>
     </div>

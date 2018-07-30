@@ -6,7 +6,7 @@
   {/if}
 
   {if $is_note_enabled}
-  <link title="{lang 'Notes'}" url="{{ $design->url('xml','rss','xmlrouter','note') }}" />
+    <link title="{lang 'Notes'}" url="{{ $design->url('xml','rss','xmlrouter','note') }}" />
   {/if}
 
   {if $is_forum_enabled}

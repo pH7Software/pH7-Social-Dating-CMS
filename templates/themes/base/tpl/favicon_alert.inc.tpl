@@ -4,11 +4,11 @@
 {{ $favicon_alert = 0 }}
 
 {if !empty($count_unread_mail)}
-   {{ $favicon_alert += $count_unread_mail }}
+  {{ $favicon_alert += $count_unread_mail }}
 {/if}
 
 {if !empty($count_pen_friend_request)}
-   {{ $favicon_alert += $count_pen_friend_request }}
+  {{ $favicon_alert += $count_pen_friend_request }}
 {/if}
 
 {* Run Favicon Alert *}
