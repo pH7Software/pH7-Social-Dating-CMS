@@ -715,25 +715,10 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      */
     private function parse()
     {
-        /***** Object shortcuts *****/
-        $this->sCode = str_replace(
-            [
-                '$browser->',
-                '$registry->',
-                '$str->',
-                '$config->'
-            ],
-            [
-                '$this->browser->',
-                '$this->registry->',
-                '$this->str->',
-                '$this->config->'
-            ],
-            $this->sCode
-        );
+        $this->oSyntaxEngine->setCode($this->sCode);
+        $this->oSyntaxEngine->setShortcutsToObjects();
 
         /***** Parse pH7Tpl's syntax *****/
-        $this->oSyntaxEngine->setCode($this->sCode);
         $this->oSyntaxEngine->setTemplateFile($this->sTplFile);
         $this->oSyntaxEngine->parse();
         $this->sCode = $this->oSyntaxEngine->getParsedCode();

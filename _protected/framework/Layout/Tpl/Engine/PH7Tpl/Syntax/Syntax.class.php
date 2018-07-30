@@ -51,6 +51,28 @@ abstract class Syntax
     }
 
     /**
+     * @return void
+     */
+    public function setShortcutsToObjects()
+    {
+        $this->sCode = str_replace(
+            [
+                '$browser->',
+                '$registry->',
+                '$str->',
+                '$config->'
+            ],
+            [
+                '$this->browser->',
+                '$this->registry->',
+                '$this->str->',
+                '$this->config->'
+            ],
+            $this->sCode
+        );
+    }
+
+    /**
      * @param string $sTplFile
      *
      * @return void
