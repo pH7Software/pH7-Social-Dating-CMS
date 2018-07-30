@@ -146,6 +146,11 @@ class CurlyTest extends SyntaxTestCase
         $this->assertFile('variable', $this->oCurlySyntax);
     }
 
+    public function testObjectShortcuts()
+    {
+        $this->assertFile('shortcuts', $this->oCurlySyntax);
+    }
+
     public function testSingleLineComment()
     {
         $this->assertFile('comment-single-line', $this->oCurlySyntax);

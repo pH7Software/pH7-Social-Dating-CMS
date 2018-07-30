@@ -161,6 +161,11 @@ class TalTest extends SyntaxTestCase
         $this->assertFile('variable', $this->oTalSyntax);
     }
 
+    public function testObjectShortcuts()
+    {
+        $this->assertFile('shortcuts', $this->oTalSyntax);
+    }
+
     public function testSingleLineComment()
     {
         $this->assertFile('comment-single-line', $this->oTalSyntax);
