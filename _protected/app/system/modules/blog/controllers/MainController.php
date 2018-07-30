@@ -65,7 +65,7 @@ class MainController extends Controller
         if (empty($oPosts)) {
             $this->sTitle = t('No posts found.');
             $this->notFound(false); // We disable the HTTP error code 404 for Ajax requests running
-            $this->view->error = t('Oops! There are no posts at the moment. Please come back soon 😉'); // We change the error message
+            $this->view->error = t('Oops! There are no posts at the moment. Please come back soon 😉'); // Amend the error message
         } else {
             $this->view->posts = $oPosts;
         }

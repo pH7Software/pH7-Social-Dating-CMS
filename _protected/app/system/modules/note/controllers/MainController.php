@@ -81,7 +81,7 @@ class MainController extends Controller
         if (empty($oPosts)) {
             $this->sTitle = t('No notes found.');
             $this->notFound(false); // We disable the HTTP error code 404 for Ajax requests running
-            $this->view->error = t('Oops! There are no notes at the moment.'); // We change the error message
+            $this->view->error = t('Oops! There are no notes at the moment. Please come back soon 😉'); // Amend the error message
         } else {
             $this->view->posts = $oPosts;
         }
@@ -218,7 +218,7 @@ class MainController extends Controller
         if (empty($oSearch)) {
             $this->sTitle = t('None "%0%" author was found!', $sAuthorTxt);
             $this->notFound(false); // For the Ajax profile blocks, we can not put HTTP error code 404, so the attribute is "false"
-            $this->view->error = t("No %0%'s posts found.", $sAuthor); // We change the error message
+            $this->view->error = t("No %0%'s posts found.", $sAuthor); // Amend the error message
         } else {
             $this->sTitle = t('Search by Author: "%0%" Note', $sAuthorTxt);
             $this->view->page_title = $this->view->h2_title = $this->sTitle;
