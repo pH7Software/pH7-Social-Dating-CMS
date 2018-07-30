@@ -233,10 +233,10 @@
       {main_include 'favicon_alert.inc.tpl'}
     {/if}
 
-    <!-- Common Dialog -->
+    <!-- Common Dialogs -->
     {{ $design->message() }}
     {{ $design->error() }}
-    {if $is_disclaimer AND !$is_admin_auth}
+    {if $is_disclaimer AND !$is_admin_auth AND $registry->module !== PH7_ADMIN_MOD}
       {main_include 'disclaimer.inc.tpl'}
     {/if}
     <!-- End Footer JavaScript -->
