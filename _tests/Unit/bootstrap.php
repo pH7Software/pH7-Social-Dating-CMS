@@ -43,6 +43,13 @@ define('PH7_CONFIG', 'config/');
 define('PH7_PATH_APP_CONFIG', PH7_PATH_APP . 'configs/');
 define('PH7_CONFIG_FILE', 'config.ini');
 
+// Modules constants
+define('PH7_MODELS', 'models/');
+define('PH7_FORMS', 'forms/');
+
+// Templates & Assets constants
+define('PH7_IMG', 'img/');
+
 // Admin constant
 define('PH7_ADMIN_MOD', 'admin123');
 
