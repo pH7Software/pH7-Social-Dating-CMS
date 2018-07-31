@@ -636,7 +636,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     }
 
     /**
-     * Get current controller of the pH7CMS.
+     * Get current pH7CMS's controller.
      *
      * @return string The current controller
      */
