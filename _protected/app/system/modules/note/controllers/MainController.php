@@ -62,7 +62,7 @@ class MainController extends Controller
     public function index()
     {
         $this->view->page_title = t('Note Posts of %site_name% community');
-        $this->view->h1_title = t('Community Blog. Let Users talk!');
+        $this->view->h1_title = '<span class="cinnabar-red">' . t('Community Blog. Let Users talk!') . '</span>';
 
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->oNoteModel->totalPosts($this->iApproved), self::POSTS_PER_PAGE
@@ -79,9 +79,9 @@ class MainController extends Controller
         $this->setMenuVars();
 
         if (empty($oPosts)) {
-            $this->sTitle = t('No Notes');
+            $this->sTitle = t('No notes found.');
             $this->notFound(false); // We disable the HTTP error code 404 for Ajax requests running
-            $this->view->error = t('Oops! There are no notes at the moment.'); // We change the error message
+            $this->view->error = t('Oops! There are no notes at the moment. Please come back soon 😉'); // Amend the error message
         } else {
             $this->view->posts = $oPosts;
         }
@@ -120,7 +120,7 @@ class MainController extends Controller
                 // Set Notes Post Views Statistics
                 Statistic::setView($oPost->noteId, DbTableName::NOTE);
             } else {
-                $this->sTitle = t('No Note Found.');
+                $this->sTitle = t('Note not found.');
                 $this->notFound();
             }
         } else {
@@ -218,7 +218,7 @@ class MainController extends Controller
         if (empty($oSearch)) {
             $this->sTitle = t('None "%0%" author was found!', $sAuthorTxt);
             $this->notFound(false); // For the Ajax profile blocks, we can not put HTTP error code 404, so the attribute is "false"
-            $this->view->error = t("No %0%'s posts found.", $sAuthor); // We change the error message
+            $this->view->error = t("No %0%'s posts found.", $sAuthor); // Amend the error message
         } else {
             $this->sTitle = t('Search by Author: "%0%" Note', $sAuthorTxt);
             $this->view->page_title = $this->view->h2_title = $this->sTitle;

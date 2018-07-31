@@ -49,7 +49,7 @@ class MainController extends Controller
     public function index()
     {
         $this->view->page_title = t("%site_name%'s Blog. The latest %site_name%'s news and articles");
-        $this->view->h1_title = t('Company Blog. %site_name% News');
+        $this->view->h1_title = '<span class="cinnabar-red">' . t('Company Blog. %site_name% News') . '</span>';
 
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->oBlogModel->totalPosts(), self::POSTS_PER_PAGE
@@ -63,9 +63,9 @@ class MainController extends Controller
         $this->setMenuVars();
 
         if (empty($oPosts)) {
-            $this->sTitle = t('No Posts');
+            $this->sTitle = t('No posts found.');
             $this->notFound(false); // We disable the HTTP error code 404 for Ajax requests running
-            $this->view->error = t('Oops! There are no posts at the moment. Please come back soon 😉'); // We change the error message
+            $this->view->error = t('Oops! There are no posts at the moment. Please come back soon 😉'); // Amend the error message
         } else {
             $this->view->posts = $oPosts;
         }
@@ -107,7 +107,7 @@ class MainController extends Controller
                 // Set Blogs Post Views Statistics
                 Statistic::setView($oPost->blogId, DbTableName::BLOG);
             } else {
-                $this->sTitle = t('No Blog Found');
+                $this->sTitle = t('Blog post not found.');
                 $this->notFound();
             }
         } else {

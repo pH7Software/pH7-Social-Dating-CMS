@@ -175,8 +175,8 @@
         <div class="ft">
           <p><small>{{ $design->stat() }}</small></p>
         </div>
-        <p class="small darkred">
-          {lang 'WARNING: Your site is in development mode! You can change the mode'} <a href="{{ $design->url(PH7_ADMIN_MOD,'tool','envmode') }}" title="{lang 'Change the Environment Mode'}" class="darkred">{lang 'here'}</a>
+        <p class="small dark-red">
+          {lang 'WARNING: Your site is in development mode! You can change the mode'} <a href="{{ $design->url(PH7_ADMIN_MOD,'tool','envmode') }}" title="{lang 'Change the Environment Mode'}" class="dark-red">{lang 'here'}</a>
         </p>
       {/if}
     </footer>
