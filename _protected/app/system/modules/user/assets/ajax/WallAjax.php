@@ -19,6 +19,7 @@ use PH7\Framework\Security\Ban\Ban;
 class WallAjax extends Core
 {
     const MAX_ITEMS_SHOWN = 20;
+    const MAX_STRING_LENGTH_SHOWN = 80;
 
     /** @var WallModel */
     private $oWallModel;
@@ -78,7 +79,7 @@ class WallAjax extends Core
             foreach ($this->mContents as $oRow) {
                 echo '<p>';
                 $this->oAvatarDesign->get($oRow->username, $oRow->firstName, $oRow->sex, 32, DbTableName::MEMBER);
-                echo '</p><p>', Emoticon::init(escape($this->str->extract(Ban::filterWord($oRow->post), 80))), '</p>
+                echo '</p><p>', Emoticon::init(escape($this->str->extract(Ban::filterWord($oRow->post), self::MAX_STRING_LENGTH_SHOWN))), '</p>
                     <p class="small italic">', t('Posted on: %0%', $this->dateTime->get($oRow->createdDate)->dateTime());
 
                 if (!empty($oRow->updatedDate)) {
@@ -100,9 +101,9 @@ class WallAjax extends Core
                 echo '<p>';
                 $this->oAvatarDesign->get($oRow->username, $oRow->firstName, $oRow->sex, 32, DbTableName::MEMBER);
 
-                echo '</p><p>', UserParser::atUsernameToLink(escape($this->str->extract(Ban::filterWord($oRow->comment), 80))), '</p>
+                echo '</p><p>', UserParser::atUsernameToLink(escape($this->str->extract(Ban::filterWord($oRow->comment), self::MAX_STRING_LENGTH_SHOWN))), '</p>
                     <p class="small"><a href="', Uri::get('comment', 'comment', 'read', "profile,$oRow->recipient"), '#', $oRow->commentId, '">', t('Read more'), '</a> &bull; ',
-                    t('Posted on: %0%', $this->dateTime->get($oRow->createdDate)->dateTime());
+                t('Posted on: %0%', $this->dateTime->get($oRow->createdDate)->dateTime());
 
                 if (!empty($oRow->updatedDate)) {
                     echo ' &bull; ', t('Last Edited %0%', $this->dateTime->get($oRow->updatedDate)->dateTime());

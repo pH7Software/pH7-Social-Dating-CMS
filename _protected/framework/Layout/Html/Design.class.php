@@ -68,6 +68,7 @@ class Design
 
     const DEFAULT_REDIRECTION_DELAY = 3; // In secs
     const MAX_MESSAGE_LENGTH_SHOWN = 300;
+    const MAX_IP_LENGTH_SHOWN = 15;
 
     /** @var bool */
     protected $bIsDiv = false;
@@ -554,7 +555,7 @@ class Design
     public function ip($sIp = null, $bPrint = true)
     {
         $sIp = Ip::get($sIp);
-        $sHtml = '<a href="' . Ip::api($sIp) . '" title="' . t('See info of this IP, %0%', $sIp) . '" target="_blank">' . $this->oStr->extract($sIp, 15) . '</a>';
+        $sHtml = '<a href="' . Ip::api($sIp) . '" title="' . t('See info of this IP, %0%', $sIp) . '" target="_blank">' . $this->oStr->extract($sIp, self::MAX_IP_LENGTH_SHOWN) . '</a>';
 
         if (!$bPrint) {
             return $sHtml;
