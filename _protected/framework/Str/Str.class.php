@@ -215,6 +215,10 @@ namespace PH7\Framework\Str {
         {
             $iStart = 0;
 
+            if ($this->length($sText) <= $iLimit) {
+                return $sText;
+            }
+
             if (function_exists('mb_strimwidth')) {
                 $sText = rtrim(
                     mb_strimwidth(
