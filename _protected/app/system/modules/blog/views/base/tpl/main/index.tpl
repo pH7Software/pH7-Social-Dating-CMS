@@ -55,7 +55,7 @@
                 </div>
 
                 {* Don't check the post with \PH7\Framework\Security\Ban\Ban::filterWord() since this blog is only allowed for administrators *}
-                {% escape($str->extract($post->content,0,400), true) %}
+                {% escape($str->extract($post->content, 400), true) %}
                 <p><a href="{{ $design->url('blog','main','read',$post->postId) }}" data-load="ajax">{lang 'See more'}</a></p>
 
                 {if AdminCore::auth()}

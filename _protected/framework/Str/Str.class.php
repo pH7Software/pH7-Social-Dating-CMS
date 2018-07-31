@@ -206,27 +206,28 @@ namespace PH7\Framework\Str {
          * Cut a piece of string to make an extract (an ellipsis).
          *
          * @param string $sText
-         * @param int $iStart Default: 0
-         * @param int $iLength Default: 150
+         * @param int $iLimit Default: 150
          * @param string $sTrimMarker Default: '...'
          *
          * @return string
          */
-        public function extract($sText, $iStart = 0, $iLength = self::DEF_MAX_TEXT_EXTRACT_LENGTH, $sTrimMarker = PH7_ELLIPSIS)
+        public function extract($sText, $iLimit = self::DEF_MAX_TEXT_EXTRACT_LENGTH, $sTrimMarker = PH7_ELLIPSIS)
         {
-            if (function_exists('mb_strimwidth')) {
-                $sText = mb_strimwidth($sText, $iStart, $iLength, $sTrimMarker, PH7_ENCODING);
-            } else {
-                // Recovers a portion of our content.
-                $sExtract = substr($sText, $iStart, $iLength);
+            $iStart = 0;
 
-                // Find the last space after the last word of the extract.
+            if (function_exists('mb_strimwidth')) {
+                $sText = mb_strimwidth($sText, $iStart, $iLimit, $sTrimMarker, PH7_ENCODING);
+            } else {
+                // Recovers a portion of the string
+                $sExtract = substr($sText, $iStart, $iLimit);
+
+                // Find the last space after the last word of the extract
                 if ($iLastSpace = strrpos($sExtract, ' ')) {
                     // Cut the chain to the last space.
                     $sText = substr($sText, $iStart, $iLastSpace);
                 } else {
-                    // If the string doesn't contain any spaces, we cut the chain with the maximum number of characters given.
-                    $sText = substr($sText, $iStart, $iLength);
+                    // If the string doesn't contain any spaces, cut the string with the max number of the given characters
+                    $sText = substr($sText, $iStart, $iLimit);
                 }
 
                 $sText .= $sTrimMarker;

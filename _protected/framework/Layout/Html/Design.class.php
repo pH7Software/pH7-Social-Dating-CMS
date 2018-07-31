@@ -554,7 +554,7 @@ class Design
     public function ip($sIp = null, $bPrint = true)
     {
         $sIp = Ip::get($sIp);
-        $sHtml = '<a href="' . Ip::api($sIp) . '" title="' . t('See info of this IP, %0%', $sIp) . '" target="_blank">' . $this->oStr->extract($sIp, 0, 15) . '</a>';
+        $sHtml = '<a href="' . Ip::api($sIp) . '" title="' . t('See info of this IP, %0%', $sIp) . '" target="_blank">' . $this->oStr->extract($sIp, 15) . '</a>';
 
         if (!$bPrint) {
             return $sHtml;
