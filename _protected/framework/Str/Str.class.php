@@ -216,7 +216,15 @@ namespace PH7\Framework\Str {
             $iStart = 0;
 
             if (function_exists('mb_strimwidth')) {
-                $sText = mb_strimwidth($sText, $iStart, $iLimit, $sTrimMarker, PH7_ENCODING);
+                $sText = rtrim(
+                    mb_strimwidth(
+                        $sText,
+                        $iStart,
+                        $iLimit,
+                        '',
+                        PH7_ENCODING
+                    )
+                );
             } else {
                 // Recovers a portion of the string
                 $sExtract = substr($sText, $iStart, $iLimit);
@@ -229,11 +237,9 @@ namespace PH7\Framework\Str {
                     // If the string doesn't contain any spaces, cut the string with the max number of the given characters
                     $sText = substr($sText, $iStart, $iLimit);
                 }
-
-                $sText .= $sTrimMarker;
             }
 
-            return $sText;
+            return rtrim($sText) . $sTrimMarker;
         }
 
         /**
