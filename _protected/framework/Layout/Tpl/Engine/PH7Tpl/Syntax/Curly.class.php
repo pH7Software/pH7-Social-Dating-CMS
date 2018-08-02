@@ -197,6 +197,11 @@ class Curly extends Syntax implements Parsable
         );
     }
 
+    /**
+     * {VARIABLE_NAME}
+     *
+     * @return void
+     */
     public function variable()
     {
         $this->sCode = preg_replace(

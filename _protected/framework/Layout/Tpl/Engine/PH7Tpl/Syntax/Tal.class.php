@@ -245,6 +245,11 @@ class Tal extends Syntax implements Parsable
         );
     }
 
+    /**
+     * [[VARIABLE_NAME]]
+     *
+     * @return void
+     */
     public function variable()
     {
         $this->sCode = preg_replace(
@@ -302,6 +307,12 @@ class Tal extends Syntax implements Parsable
         );
     }
 
+    /**
+     * Allow data blocks to be taken literally.
+     * <ph:literal></ph:literal> block is typically used around JS or CSS code.
+     *
+     * @return void
+     */
     public function literalFunction()
     {
         $this->sCode = preg_replace(
