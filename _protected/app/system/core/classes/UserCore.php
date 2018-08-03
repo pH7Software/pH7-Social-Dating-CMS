@@ -318,8 +318,7 @@ class UserCore
      */
     public function getProfileLink($sUsername)
     {
-        $sUsername = (new Str)->lower($sUsername);
-        //return (strlen($sUsername) > 1) ? PH7_URL_ROOT . '@' . $sUsername : '#';
+        $sUsername = strlen($sUsername) > 1 ? (new Str)->lower($sUsername) : PH7_GHOST_USERNAME;
 
         return PH7_URL_ROOT . self::PROFILE_PAGE_PREFIX . $sUsername;
     }
