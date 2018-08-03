@@ -45,7 +45,8 @@ class VideoCore
         $sVideoLink,
         $sVideoExt = '.webm,.mp4',
         $sThumbExt = self::DEFAULT_THUMBNAIL_EXT
-    ) {
+    )
+    {
         $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $sUsername . PH7_DS . $iAlbumId . PH7_DS;
 
         $oFile = new File;
