@@ -50,7 +50,7 @@ class AvatarDesignCore extends Design
         }
 
         // The profile does not exist, so it creates a fake profile = ghost
-        if (empty($sUsername)) {
+        if (empty($sUsername) || $sUsername === PH7_GHOST_USERNAME) {
             list($sUsername, $sFirstName, $sSex) = $this->getGhostAvatarDetails();
         }
 

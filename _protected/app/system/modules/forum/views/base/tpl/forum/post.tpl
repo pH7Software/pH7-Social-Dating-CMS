@@ -1,5 +1,9 @@
 <div class="center">
     {if empty($error)}
+        {if empty($post->username)}
+            {{ $post->username = PH7_GHOST_USERNAME }}
+        {/if}
+
         {* Main Post *}
         <div class="left">
             {{ $avatarDesign->get($post->username, $post->firstName, $post->sex, 64) }}<br />
