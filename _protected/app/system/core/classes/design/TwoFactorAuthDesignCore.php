@@ -22,15 +22,16 @@ class TwoFactorAuthDesignCore
     /**
      * Get the "Enable Two-Factor Authentication" link.
      *
-     * @param string $sMod
+     * @param string $sMod Module name (user, affiliate, admin123).
      *
-     * @return void
+     * @return void HTML output.
      */
     public static function link($sMod)
     {
-        echo
-        '<p class="center">
-            <a class="s_marg btn btn-primary" href="' . Uri::get('two-factor-auth', 'main', 'setup', $sMod) . '">' . t('Two-Factor Authentication') . '</a>
-        </p>';
+        $sHtml = '<p class="center">';
+        $sHtml .= '<a class="s_marg btn btn-primary" href="' . Uri::get('two-factor-auth', 'main', 'setup', $sMod) . '">' . t('Two-Factor Authentication') . '</a>';
+        $sHtml .= '</p>';
+
+        echo $sHtml;
     }
 }
