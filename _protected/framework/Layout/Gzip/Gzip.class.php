@@ -140,11 +140,7 @@ class Gzip
      */
     public function run()
     {
-        // Determine the directory and type we should use
-        if (
-            !$this->oHttpRequest->getExists('t') ||
-            !in_array($this->oHttpRequest->get('t'), self::ASSET_FILES_ACCEPTED, true)
-        ) {
+        if ($this->isValidStaticTypeFile()) {
             Http::setHeadersByCode(503);
             exit('Invalid file type!');
         }
@@ -511,6 +507,17 @@ class Gzip
             ($this->sType === self::HTML_NAME && substr($sPath, -5) !== '.html') ||
             ($this->sType === self::JS_NAME && substr($sPath, -3) !== '.js') ||
             ($this->sType === self::CSS_NAME && substr($sPath, -4) !== '.css');
+    }
+
+    /**
+     * Checks if the static type file is valid.
+     *
+     * @return bool
+     */
+    private function isValidStaticTypeFile()
+    {
+        return $this->oHttpRequest->getExists('t') &&
+            in_array($this->oHttpRequest->get('t'), self::ASSET_FILES_ACCEPTED, true);
     }
 
     /**
