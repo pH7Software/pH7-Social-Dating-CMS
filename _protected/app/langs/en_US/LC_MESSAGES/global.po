@@ -9049,7 +9049,7 @@ msgid "Verification Code - Two-Factor Authentication"
 msgstr ""
 
 #: _protected/app/system/modules/two-factor-auth/controllers/MainController.php:99
-msgid "BACKUP VERIFICATION CODE - %site_url% | %0% area"
+msgid "BACKUP VERIFICATION CODE - %site_url% | %0% area."
 msgstr ""
 
 #: _protected/app/system/modules/two-factor-auth/controllers/MainController.php:100
