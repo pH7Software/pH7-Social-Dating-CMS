@@ -238,7 +238,7 @@ class Gzip
         if ($this->oHttpRequest->getMethod() !== HttpRequest::METHOD_HEAD) {
             $oBrowser->cache();
 
-            // Warning: It can causes problems (ERR_FILE_NOT_FOUND)
+            // Warning: following can cause problems (ERR_FILE_NOT_FOUND error)
             // Http::setHeadersByCode(304); // Not Modified header
         }
 
