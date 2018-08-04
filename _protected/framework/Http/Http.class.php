@@ -196,7 +196,7 @@ class Http
 
         if (!($sAuthUsr === $sUsr && $sAuthPwd === $sPwd)) {
             header(sprintf('WWW-Authenticate: Basic realm="%s"', $sMsg));
-            static::setHeadersByCode(401);
+            static::setHeadersByCode(StatusCode::UNAUTHORIZED);
             echo t('You must enter a valid login ID and password to access this resource.') . "\n";
             exit(false);
         }

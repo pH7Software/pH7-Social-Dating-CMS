@@ -14,6 +14,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Http\Http;
 use PH7\Framework\Navigation\Browser;
+use Teapot\StatusCode;
 
 class Page
 {
@@ -70,7 +71,7 @@ class Page
     public static function banned()
     {
         // Set the "forbidden" status code
-        Http::setHeadersByCode(403);
+        Http::setHeadersByCode(StatusCode::FORBIDDEN);
 
         // Inclusion of the HTML IP Banned page
         include PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/tpl/other/banned.html.php';
@@ -89,7 +90,7 @@ class Page
     public static function exception(\Exception $oExcept)
     {
         // Set 500 HTTP status code
-        Http::setHeadersByCode(500);
+        Http::setHeadersByCode(StatusCode::INTERNAL_SERVER_ERROR);
 
         // Prevent caching in the browser
         (new Browser)->noCache();
@@ -106,7 +107,7 @@ class Page
     public static function error500()
     {
         // Set 500 HTTP status code
-        Http::setHeadersByCode(500);
+        Http::setHeadersByCode(StatusCode::INTERNAL_SERVER_ERROR);
 
         // Prevent caching in the browser
         (new Browser)->noCache();

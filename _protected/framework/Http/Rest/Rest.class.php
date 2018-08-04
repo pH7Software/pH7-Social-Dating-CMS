@@ -18,6 +18,7 @@ use PH7\Framework\File\Stream;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Str\Str;
+use Teapot\StatusCode;
 
 class Rest extends Http
 {
@@ -46,14 +47,15 @@ class Rest extends Http
      *
      * @return void
      */
-    public function response($sData, $iStatus = 200)
+    public function response($sData, $iStatus = StatusCode::OK)
     {
         $this->sData = $sData;
 
         /**
          * @internal Http::getStatusCodes() returns FALSE when it doesn't find any valid HTTP codes.
          */
-        $this->iCode = false !== static::getStatusCodes($iStatus) ? $iStatus : 500; // If it finds nothing, give 500 HTTP code.
+        // If it finds nothing, give 500 HTTP code
+        $this->iCode = false !== static::getStatusCodes($iStatus) ? $iStatus : StatusCode::INTERNAL_SERVER_ERROR;
         $this->output();
     }
 
@@ -94,7 +96,7 @@ class Rest extends Http
                 break;
 
             default:
-                $this->response('', 406);
+                $this->response('', StatusCode::NOT_ACCEPTABLE);
                 break;
         }
     }
