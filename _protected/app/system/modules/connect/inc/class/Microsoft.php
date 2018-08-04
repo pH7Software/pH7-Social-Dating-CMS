@@ -64,8 +64,8 @@ class Microsoft extends Api
                     $bSuccess = $this->oClient->CallAPI(
                         self::API_URL,
                         'GET',
-                        array(),
-                        array('FailOnAccessError' => true),
+                        [],
+                        ['FailOnAccessError' => true],
                         $oUserData
                     );
                 }
