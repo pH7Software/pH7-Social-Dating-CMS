@@ -454,7 +454,7 @@ class Gzip
     }
 
     /**
-     * @param string $sSourcePath The source (uncached) static file.
+     * @param string $sSourcePath The (uncached) source static file.
      *
      * @return bool
      */
