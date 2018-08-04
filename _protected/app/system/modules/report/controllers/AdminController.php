@@ -73,7 +73,12 @@ class AdminController extends Controller
         $this->output();
     }
 
-    public function report($iId = '')
+    /**
+     * @param int $iId
+     *
+     * @return void
+     */
+    public function report($iId = 0)
     {
         $iId = (int)$iId;
 
