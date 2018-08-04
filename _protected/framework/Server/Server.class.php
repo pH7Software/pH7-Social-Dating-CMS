@@ -155,7 +155,7 @@ final class Server
         if (!strtolower(getenv('HTTP_MOD_REWRITE')) === 'on') {
             $sOutputMsg = 'mod_rewrite Works!';
 
-            if (Uri::getInstance()->fragment(0) == 'test_mod_rewrite') {
+            if (Uri::getInstance()->fragment(0) === 'test_mod_rewrite') {
                 exit($sOutputMsg);
             }
 
