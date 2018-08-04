@@ -72,7 +72,12 @@ class WallAjax extends Core
 
     private function show()
     {
-        $this->mContents = $this->oWallModel->get($this->session->get('member_id'), null, 0, self::MAX_ITEMS_SHOWN);
+        $this->mContents = $this->oWallModel->get(
+            $this->session->get('member_id'),
+            null,
+            0,
+            self::MAX_ITEMS_SHOWN
+        );
 
         if (!$this->mContents) {
             echo '<p class="alert alert-danger">', t('Oops...! No news feed available at the moment.'), '</p>';
@@ -93,7 +98,11 @@ class WallAjax extends Core
 
     private function showCommentProfile()
     {
-        $this->mContents = $this->oWallModel->getCommentProfile(null, 0, self::MAX_ITEMS_SHOWN);
+        $this->mContents = $this->oWallModel->getCommentProfile(
+            null,
+            0,
+            self::MAX_ITEMS_SHOWN
+        );
 
         if (!$this->mContents) {
             echo '<p class="alert alert-danger">', t('No news feed available at the moment. Start commenting some profiles!'), '</p>';
@@ -116,7 +125,11 @@ class WallAjax extends Core
 
     private function add()
     {
-        $this->bStatus = $this->oWallModel->add($this->session->get('member_id'), $this->httpRequest->post('post'));
+        $this->bStatus = $this->oWallModel->add(
+            $this->session->get('member_id'),
+            $this->httpRequest->post('post')
+        );
+
         if (!$this->bStatus) {
             $this->sMsg = jsonMsg(0, t('Oops, your post could not be sent. Please try again later.'));
         } else {
@@ -128,7 +141,11 @@ class WallAjax extends Core
 
     private function edit()
     {
-        $this->bStatus = $this->oWallModel->edit($this->session->get('member_id'), $this->httpRequest->post('post'));
+        $this->bStatus = $this->oWallModel->edit(
+            $this->session->get('member_id'),
+            $this->httpRequest->post('post')
+        );
+
         if (!$this->bStatus) {
             $this->sMsg = jsonMsg(0, t('Oops, your post could not be saved. Please try again later.'));
         } else {
@@ -140,7 +157,11 @@ class WallAjax extends Core
 
     private function delete()
     {
-        $this->bStatus = $this->oWallModel->delete($this->session->get('member_id'), $this->httpRequest->post('post'));
+        $this->bStatus = $this->oWallModel->delete(
+            $this->session->get('member_id'),
+            $this->httpRequest->post('post')
+        );
+
         if (!$this->bStatus) {
             $this->sMsg = jsonMsg(0, t('Your post does not exist anymore.'));
         } else {
