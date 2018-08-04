@@ -15,6 +15,7 @@ use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Security\Validate\Validate;
+use Teapot\StatusCode;
 
 class UserController extends MainController
 {
@@ -39,7 +40,7 @@ class UserController extends MainController
     public function createAccount()
     {
         if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_POST) {
-            $this->oRest->response('', 406);
+            $this->oRest->response('', StatusCode::NOT_ACCEPTABLE);
         } else {
             $aData = json_decode($this->oRest->getBody(), true);
 
@@ -70,19 +71,19 @@ class UserController extends MainController
             ];
             if (!$this->areFieldsExist($aData, $aRequiredFields)) {
                 $aResults = ['status' => 'failed', 'msg' => t('One or several profile fields are empty.')];
-                $this->oRest->response($this->set($aResults), 400);
+                $this->oRest->response($this->set($aResults), StatusCode::BAD_REQUEST);
             } elseif (!$this->oValidate->email($aData['email'])) {
                 $aResults = ['status' => 'form_error', 'msg' => t('The Email is not valid.')];
-                $this->oRest->response($this->set($aResults), 400);
+                $this->oRest->response($this->set($aResults), StatusCode::BAD_REQUEST);
             } elseif (!$this->oValidate->username($aData['username'], $iMinUsr, $iMaxUsr)) {
                 $aResults = ['status' => 'form_error', 'msg' => t('The Username must contain from %0% to %1% characters, the Username is not available or it is already used by other member.', $iMinUsr, $iMaxUsr)];
-                $this->oRest->response($this->set($aResults), 400);
+                $this->oRest->response($this->set($aResults), StatusCode::BAD_REQUEST);
             } elseif (!$this->oValidate->password($aData['password'], $iMinPwd, $iMaxPwd)) {
                 $aResults = ['status' => 'form_error', 'msg' => t('The Password must contain from %0% to %1% characters.', $iMinPwd, $iMaxPwd)];
-                $this->oRest->response($this->set($aResults), 400);
+                $this->oRest->response($this->set($aResults), StatusCode::BAD_REQUEST);
             } elseif (!$this->oValidate->birthDate($sBirthDate, $iMinAge, $iMaxAge)) {
                 $aResults = ['status' => 'form_error', 'msg' => t('You must be %0% to %1% years to register on the site.', $iMinAge, $iMinAge)];
-                $this->oRest->response($this->set($aResults), 400);
+                $this->oRest->response($this->set($aResults), StatusCode::BAD_REQUEST);
             } else {
                 $aValidData = [
                     'email' => $aData['email'],
@@ -114,13 +115,16 @@ class UserController extends MainController
     public function login()
     {
         if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_POST) {
-            $this->oRest->response('', 406);
+            $this->oRest->response('', StatusCode::NOT_ACCEPTABLE);
         } else {
             $aData = json_decode($this->oRest->getBody(), true);
 
             if (empty($aData['email']) || empty($aData['password'])) {
-                $aResults = ['status' => 'failed', 'msg' => t('The Email and/or the password is empty.')];
-                $this->oRest->response($this->set([$aResults]), 400);
+                $aResults = [
+                    'status' => 'failed',
+                    'msg' => t('The Email and/or the password is empty.')
+                ];
+                $this->oRest->response($this->set([$aResults]), StatusCode::BAD_REQUEST);
             } // Check Login
             elseif ($this->oUserModel->login($aData['email'], $aData['password']) === true) {
                 $iId = $this->oUserModel->getId($aData['email']);
@@ -130,7 +134,7 @@ class UserController extends MainController
                 $this->oRest->response($this->set($aData));
             } else {
                 $aResults = ['status' => 'failed', 'msg' => t('Password or Email was incorrect.')];
-                $this->oRest->response($this->set($aResults), 400);
+                $this->oRest->response($this->set($aResults), StatusCode::BAD_REQUEST);
             }
         }
     }
@@ -145,11 +149,11 @@ class UserController extends MainController
     public function user($iId)
     {
         if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_GET) {
-            $this->oRest->response('', 406);
+            $this->oRest->response('', StatusCode::NOT_ACCEPTABLE);
         } else {
             if (empty($iId)) {
                 $aResults = ['status' => 'failed', 'msg' => t('Profile ID Empty')];
-                $this->oRest->response($this->set($aResults), 400);
+                $this->oRest->response($this->set($aResults), StatusCode::BAD_REQUEST);
             } else {
                 $oUser = $this->oUserModel->readProfile($iId);
 
@@ -157,7 +161,7 @@ class UserController extends MainController
                     $this->oRest->response($this->set([$oUser]));
                 } else {
                     $aResults = ['status' => 'failed', 'msg' => t('Profile Not Found')];
-                    $this->oRest->response($this->set($aResults), 404);
+                    $this->oRest->response($this->set($aResults), StatusCode::NOT_FOUND);
                 }
             }
         }
@@ -175,7 +179,7 @@ class UserController extends MainController
     public function users($sOrder = SearchCoreModel::LAST_ACTIVITY, $iOffset = null, $iLimit = null)
     {
         if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_GET) {
-            $this->oRest->response('', 406);
+            $this->oRest->response('', StatusCode::NOT_ACCEPTABLE);
         } else {
             $oUsers = $this->oUserModel->getProfiles($sOrder, $iOffset, $iLimit);
 
@@ -183,7 +187,7 @@ class UserController extends MainController
                 $this->oRest->response($this->set([$oUsers]));
             } else {
                 $aResults = ['status' => 'failed', 'msg' => t('No Profiles Found')];
-                $this->oRest->response($this->set($aResults), 404);
+                $this->oRest->response($this->set($aResults), StatusCode::NOT_FOUND);
             }
         }
     }
@@ -202,15 +206,18 @@ class UserController extends MainController
     public function usersFromLocation($sCountryCode, $sCity, $sOrder = SearchCoreModel::LAST_ACTIVITY, $iOffset = null, $iLimit = null)
     {
         if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_GET) {
-            $this->oRest->response('', 406);
+            $this->oRest->response('', StatusCode::NOT_ACCEPTABLE);
         } else {
             $oUsers = $this->oUserModel->getGeoProfiles($sCountryCode, $sCity, false, $sOrder, $iOffset, $iLimit);
 
             if (!empty($oUsers)) {
                 $this->oRest->response($this->set([$oUsers]));
             } else {
-                $aResults = ['status' => 'failed', 'msg' => t('No profiles found in %1%, %0%', $sCity, $sCountryCode)];
-                $this->oRest->response($this->set($aResults), 404);
+                $aResults = [
+                    'status' => 'failed',
+                    'msg' => t('No profiles found in %1%, %0%', $sCity, $sCountryCode)
+                ];
+                $this->oRest->response($this->set($aResults), StatusCode::NOT_FOUND);
             }
         }
     }
