@@ -173,7 +173,7 @@ class WallAjax extends Core
 
     private function badRequest()
     {
-        Http::setHeadersByCode(400);
+        Http::setHeadersByCode(StatusCode::BAD_REQUEST);
         exit('Bad Request Error!');
     }
 }
