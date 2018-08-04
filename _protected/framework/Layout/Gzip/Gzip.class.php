@@ -169,12 +169,12 @@ class Gzip
         foreach ($this->aElements as $sElement) {
             $sPath = realpath($this->sBase . $sElement);
 
-            if ($this->isValidStaticFileExtension($sPath)) {
+            if (!$this->isValidStaticFileExtension($sPath)) {
                 Http::setHeadersByCode(403);
-                exit('Invalid file extension.');
+                exit('Invalid file extension!');
             }
 
-            if ($this->isSourceStaticFileExists($sPath)) {
+            if (!$this->isSourceStaticFileExists($sPath)) {
                 Http::setHeadersByCode(404);
                 exit('File not found!');
             }
@@ -460,7 +460,7 @@ class Gzip
      */
     private function isSourceStaticFileExists($sSourcePath)
     {
-        return substr($sSourcePath, 0, strlen($this->sBase)) !== $this->sBase || !($sSourcePath);
+        return is_file($sSourcePath) && substr($sSourcePath, 0, strlen($this->sBase)) === $this->sBase;
     }
 
     /**
@@ -504,9 +504,9 @@ class Gzip
     private function isValidStaticFileExtension($sPath)
     {
         return
-            ($this->sType === self::HTML_NAME && substr($sPath, -5) !== '.html') ||
-            ($this->sType === self::JS_NAME && substr($sPath, -3) !== '.js') ||
-            ($this->sType === self::CSS_NAME && substr($sPath, -4) !== '.css');
+            ($this->sType === self::HTML_NAME && substr($sPath, -5) === '.html') ||
+            ($this->sType === self::JS_NAME && substr($sPath, -3) === '.js') ||
+            ($this->sType === self::CSS_NAME && substr($sPath, -4) === '.css');
     }
 
     /**
