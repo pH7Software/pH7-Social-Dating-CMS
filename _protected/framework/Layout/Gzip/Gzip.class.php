@@ -140,7 +140,7 @@ class Gzip
      */
     public function run()
     {
-        if ($this->isValidStaticTypeFile()) {
+        if (!$this->isValidStaticTypeFile()) {
             Http::setHeadersByCode(503);
             exit('Invalid file type!');
         }
