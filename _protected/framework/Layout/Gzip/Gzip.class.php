@@ -198,7 +198,7 @@ class Gzip
      */
     public function cache()
     {
-        $this->checkCacheDir();
+        $this->setCacheDir();
 
         $oBrowser = new Browser;
 
@@ -448,7 +448,7 @@ class Gzip
      *
      * @return void
      */
-    private function checkCacheDir()
+    private function setCacheDir()
     {
         $this->sCacheDir = empty($this->sCacheDir) ? PH7_PATH_CACHE . static::CACHE_DIR : $this->sCacheDir;
     }
