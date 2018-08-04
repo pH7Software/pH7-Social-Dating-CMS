@@ -13,10 +13,11 @@ use PH7\Framework\File\File;
 
 abstract class WriteCore
 {
-    const BLOG_NAME = 'blog';
-    const NOTE_NAME = 'note';
     const THUMBNAIL_FILENAME = 'thumb.png';
     const DEFAULT_THUMBNAIL_FILENAME = 'default_thumb.jpg';
+
+    const BLOG_NAME = 'blog';
+    const NOTE_NAME = 'note';
 
     const ALLOWED_MODULES = [
         self::BLOG_NAME,
