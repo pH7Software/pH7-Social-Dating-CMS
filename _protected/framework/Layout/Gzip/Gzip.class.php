@@ -23,6 +23,7 @@ use PH7\Framework\Http\Http;
 use PH7\Framework\Layout\Optimization;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Navigation\Browser;
+use Teapot\StatusCode;
 
 class Gzip
 {
@@ -141,7 +142,7 @@ class Gzip
     public function run()
     {
         if (!$this->isValidStaticTypeFile()) {
-            Http::setHeadersByCode(503);
+            Http::setHeadersByCode(StatusCode::SERVICE_UNAVAILABLE);
             exit('Invalid file type!');
         }
 
@@ -149,7 +150,7 @@ class Gzip
 
         // Directory
         if (!$this->oHttpRequest->getExists('d')) {
-            Http::setHeadersByCode(503);
+            Http::setHeadersByCode(StatusCode::SERVICE_UNAVAILABLE);
             exit('No directory specified!');
         }
 
@@ -159,7 +160,7 @@ class Gzip
 
         // The Files
         if (!$this->oHttpRequest->getExists('f')) {
-            Http::setHeadersByCode(503);
+            Http::setHeadersByCode(StatusCode::SERVICE_UNAVAILABLE);
             exit('No file specified!');
         }
 
@@ -170,12 +171,12 @@ class Gzip
             $sPath = realpath($this->sBase . $sElement);
 
             if (!$this->isValidStaticFileExtension($sPath)) {
-                Http::setHeadersByCode(403);
+                Http::setHeadersByCode(StatusCode::FORBIDDEN);
                 exit('Invalid file extension!');
             }
 
             if (!$this->isSourceStaticFileExists($sPath)) {
-                Http::setHeadersByCode(404);
+                Http::setHeadersByCode(StatusCode::NOT_FOUND);
                 exit('File not found!');
             }
         }
@@ -235,7 +236,7 @@ class Gzip
             $oBrowser->cache();
 
             // Warning: following can cause problems (ERR_FILE_NOT_FOUND error)
-            // Http::setHeadersByCode(304); // Not Modified header
+            // Http::setHeadersByCode(StatusCode::NOT_MODIFIED); // Not Modified header
         }
 
         unset($oBrowser);
@@ -268,7 +269,7 @@ class Gzip
                 break;
 
             default:
-                Http::setHeadersByCode(503);
+                Http::setHeadersByCode(StatusCode::SERVICE_UNAVAILABLE);
                 exit('Invalid file type!');
         }
 

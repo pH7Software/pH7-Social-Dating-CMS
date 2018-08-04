@@ -23,6 +23,7 @@ use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Parse\Emoticon;
 use PH7\Framework\Session\Session;
+use Teapot\StatusCode;
 
 class MessengerAjax extends PermissionCore
 {
@@ -61,7 +62,7 @@ class MessengerAjax extends PermissionCore
                 break;
 
             default:
-                Http::setHeadersByCode(400);
+                Http::setHeadersByCode(StatusCode::BAD_REQUEST);
                 exit('Bad Request Error!');
         }
 

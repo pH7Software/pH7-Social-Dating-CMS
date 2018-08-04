@@ -15,6 +15,7 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Parse\Emoticon;
 use PH7\Framework\Parse\User as UserParser;
 use PH7\Framework\Security\Ban\Ban;
+use Teapot\StatusCode;
 
 class WallAjax extends Core
 {
