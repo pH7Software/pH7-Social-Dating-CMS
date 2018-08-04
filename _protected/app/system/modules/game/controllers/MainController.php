@@ -12,6 +12,7 @@ use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Model\Statistic as StatModel;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
+use Teapot\StatusCode;
 
 class MainController extends Controller
 {
@@ -269,7 +270,7 @@ class MainController extends Controller
      */
     private function notFound()
     {
-        Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
+        Http::setHeadersByCode(StatusCode::NOT_FOUND);
 
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;

@@ -18,6 +18,7 @@ use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Url\Header;
 use stdClass;
+use Teapot\StatusCode;
 
 class MainController extends Controller
 {
@@ -375,7 +376,7 @@ class MainController extends Controller
     protected function notFound($b404Status = true)
     {
         if ($b404Status) {
-            Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
+            Http::setHeadersByCode(StatusCode::NOT_FOUND);
         }
 
         $this->view->page_title = $this->view->h2_title = $this->sTitle;

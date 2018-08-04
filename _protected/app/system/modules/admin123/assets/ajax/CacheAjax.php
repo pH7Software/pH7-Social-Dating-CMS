@@ -16,6 +16,7 @@ use PH7\Framework\Http\Http;
 use PH7\Framework\Layout\Gzip\Gzip;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Security\CSRF\Token;
+use Teapot\StatusCode;
 
 class CacheAjax extends Kernel
 {
@@ -50,7 +51,7 @@ class CacheAjax extends Kernel
                 break;
 
             default:
-                Http::setHeadersByCode(400);
+                Http::setHeadersByCode(StatusCode::BAD_REQUEST);
                 exit('Bad Request Error');
         }
 

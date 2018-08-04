@@ -17,6 +17,7 @@ use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Util\Various;
+use Teapot\StatusCode;
 
 class SubscriptionFormProcess extends Form
 {
@@ -63,7 +64,7 @@ class SubscriptionFormProcess extends Form
             } break;
 
             default:
-                Http::setHeadersByCode(400);
+                Http::setHeadersByCode(StatusCode::BAD_REQUEST);
                 exit('Bad Request Error!');
         }
         unset($oSubscriptionModel);
