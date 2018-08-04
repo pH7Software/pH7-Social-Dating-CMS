@@ -464,7 +464,7 @@ class Gzip
     }
 
     /**
-     * @param string $sSourcePath The source (uncached) static file.
+     * @param string $sSourcePath The (uncached) source static file.
      * @param string $sFullCacheFile
      *
      * @return bool Returns TRUE if the cache has expired, FALSE otherwise.
@@ -475,7 +475,7 @@ class Gzip
     }
 
     /**
-     * @param string $sSourcePath The source (uncached) static file.
+     * @param string $sSourcePath The (uncached) source static file.
      *
      * @return bool
      */
