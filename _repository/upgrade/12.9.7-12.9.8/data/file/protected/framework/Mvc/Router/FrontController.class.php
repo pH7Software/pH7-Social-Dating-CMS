@@ -34,7 +34,6 @@ use PH7\Framework\Url\Header;
 use PH7\Framework\Url\Uri;
 use ReflectionException;
 use ReflectionMethod;
-use Teapot\StatusCode;
 
 /**
  * @class Singleton Class
@@ -508,7 +507,7 @@ final class FrontController
                 $this->notFound('Error while loading the Cron Jobs file<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'cron' . PH7_DS . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php does not exist', 1);
             }
         } else {
-            Http::setHeadersByCode(StatusCode::FORBIDDEN);
+            Http::setHeadersByCode(403);
             exit('Secret word is invalid for the cron hash!');
         }
     }

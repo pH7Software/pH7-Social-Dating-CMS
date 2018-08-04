@@ -15,7 +15,6 @@ use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Model\Design as DesignModel;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Security\CSRF\Token;
-use Teapot\StatusCode;
 
 class AdsAjax
 {
@@ -59,7 +58,7 @@ class AdsAjax
                 break;
 
             default:
-                Http::setHeadersByCode(StatusCode::BAD_REQUEST);
+                Http::setHeadersByCode(400);
                 exit('Bad Request Error');
         }
     }

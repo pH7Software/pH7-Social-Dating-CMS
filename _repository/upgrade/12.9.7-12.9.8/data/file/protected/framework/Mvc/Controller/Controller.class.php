@@ -34,7 +34,6 @@ use PH7\Framework\Security\DDoS\Stop as DDoSStoper;
 use PH7\FriendCoreModel;
 use PH7\MailCoreModel;
 use PH7\UserCore;
-use Teapot\StatusCode;
 
 abstract class Controller extends Core
 {
@@ -138,7 +137,7 @@ abstract class Controller extends Core
     public function displayPageDenied($b403Status = true)
     {
         if ($b403Status) {
-            Http::setHeadersByCode(StatusCode::FORBIDDEN);
+            Http::setHeadersByCode(403);
         }
 
         $sTitle = t('Access Denied!');
