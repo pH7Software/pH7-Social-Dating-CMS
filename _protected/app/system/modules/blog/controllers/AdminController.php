@@ -53,7 +53,7 @@ class AdminController extends MainController
         );
     }
 
-    public function removeThumb($iId)
+    public function removeThumb($iId = 0)
     {
         if ((new SecurityToken)->checkUrl()) {
             (new Blog)->deleteThumb($iId, 'blog', $this->file);
