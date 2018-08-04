@@ -5322,7 +5322,7 @@ msgid "The Email and/or the password is empty."
 msgstr ""
 
 #: _protected/app/system/modules/api/controllers/UserController.php:132
-msgid "The Password or Email was incorrected."
+msgid "Password or Email was incorrect."
 msgstr ""
 
 #: _protected/app/system/modules/api/controllers/UserController.php:151

@@ -129,7 +129,7 @@ class UserController extends MainController
 
                 $this->oRest->response($this->set($aData));
             } else {
-                $aResults = ['status' => 'failed', 'msg' => t('The Password or Email was incorrected.')];
+                $aResults = ['status' => 'failed', 'msg' => t('Password or Email was incorrect.')];
                 $this->oRest->response($this->set($aResults), 400);
             }
         }
