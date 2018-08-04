@@ -493,7 +493,8 @@ class Gzip
      */
     private function isDataUriEligible($sImgPath)
     {
-        return $this->bDataUri && is_file($sImgPath) && $this->oFile->size($sImgPath) < self::MAX_IMG_SIZE_BASE64_CONVERTOR;
+        return $this->bDataUri && is_file($sImgPath) &&
+            $this->oFile->size($sImgPath) < self::MAX_IMG_SIZE_BASE64_CONVERTOR;
     }
 
     /**
