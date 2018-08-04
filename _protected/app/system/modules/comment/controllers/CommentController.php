@@ -14,6 +14,7 @@ use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Security\CSRF\Token as CSRFToken;
 use PH7\Framework\Url\Header;
+use Teapot\StatusCode;
 
 class CommentController extends Controller
 {
@@ -178,7 +179,7 @@ class CommentController extends Controller
      */
     private function notFound()
     {
-        Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
+        Http::setHeadersByCode(StatusCode::NOT_FOUND);
 
         $this->view->page_title = t('Comment Not Found');
         $this->view->error = t('No comments yet, <a class="bold" href="%0%">add one</a>!', Uri::get('comment', 'comment', 'add', $this->sTable . ',' . $this->str->escape($this->httpRequest->get('id'))));

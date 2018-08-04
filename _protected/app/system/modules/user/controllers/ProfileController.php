@@ -17,6 +17,7 @@ use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 use stdClass;
+use Teapot\StatusCode;
 
 class ProfileController extends ProfileBaseController
 {
@@ -215,7 +216,7 @@ class ProfileController extends ProfileBaseController
      */
     private function notFound()
     {
-        Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
+        Http::setHeadersByCode(StatusCode::NOT_FOUND);
 
         /**
          * @internal We can include HTML tags in the title since the template will automatically escape them before displaying it.

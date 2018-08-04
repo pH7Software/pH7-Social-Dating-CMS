@@ -23,6 +23,7 @@ use PH7\Framework\Math\Measure\Year as YearMeasure;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Str\Str;
 use PH7\UserCore;
+use Teapot\StatusCode;
 
 class Validate
 {
@@ -43,6 +44,12 @@ class Validate
     const DEF_MAX_PASS_LENGTH = 60;
     const DEF_MIN_AGE = 18;
     const DEF_MAX_AGE = 99;
+
+    const VALID_HTTP_WEBSITE_RESPONSES = [
+        StatusCode::OK,
+        StatusCode::MOVED_PERMANENTLY,
+        StatusCode::FOUND
+    ];
 
     /** @var Str */
     private $oStr;
@@ -339,7 +346,7 @@ class Validate
             $iResponse = (int)curl_getinfo($rCurl, CURLINFO_HTTP_CODE);
             curl_close($rCurl);
 
-            return $iResponse === 200 || $iResponse === 301 || $iResponse === 302;
+            return in_array($iResponse, self::VALID_HTTP_WEBSITE_RESPONSES, true);
         }
 
         return true;

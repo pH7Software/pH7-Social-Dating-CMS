@@ -25,6 +25,7 @@ use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Util\Various;
+use Teapot\StatusCode;
 use tmhOAuth;
 use tmhUtilities;
 
@@ -183,7 +184,7 @@ class Twitter extends Api implements IApi
             'status' => $sText
         ]);
 
-        return $this->oTwOAuth->response['code'] == 200;
+        return $this->oTwOAuth->response['code'] == StatusCode::OK;
     }
 
     /**
@@ -243,7 +244,7 @@ class Twitter extends Api implements IApi
         ]);
 
         // Try to get the URL for the avatar size standard
-        if ($this->oTwOAuth->response['code'] == 302) {
+        if ($this->oTwOAuth->response['code'] == StatusCode::FOUND) {
             // the direct URL is in the Location header
             $this->sAvatarFile = $this->getAvatar($this->oTwOAuth->response['headers']['location']);
         } else {
@@ -273,7 +274,7 @@ class Twitter extends Api implements IApi
             'oauth_callback' => tmhUtilities::php_self()
         ]);
 
-        if ($this->oTwOAuth->response['code'] == 200) {
+        if ($this->oTwOAuth->response['code'] == StatusCode::OK) {
             // get and store the request token
             $aResponse = $this->oTwOAuth->extract_params($this->oTwOAuth->response['response']);
             $_SESSION['authtoken'] = $aResponse['oauth_token'];
@@ -307,7 +308,7 @@ class Twitter extends Api implements IApi
             'oauth_verifier' => $_GET['oauth_verifier']
         ]);
 
-        if ($this->oTwOAuth->response['code'] == 200) {
+        if ($this->oTwOAuth->response['code'] == StatusCode::OK) {
             // get the access token and store it in a cookie
             $aResponse = $this->oTwOAuth->extract_params($this->oTwOAuth->response['response']);
             setcookie('access_token', $aResponse['oauth_token'], time() + 3600 * 24 * 30);
@@ -341,6 +342,6 @@ class Twitter extends Api implements IApi
         $this->userdata = json_decode($this->oTwOAuth->response['response']);
 
         // HTTP 200 means we were successful
-        return $this->oTwOAuth->response['code'] == 200;
+        return $this->oTwOAuth->response['code'] == StatusCode::OK;
     }
 }

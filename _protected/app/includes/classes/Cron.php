@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Http\Http;
+use Teapot\StatusCode;
 
 abstract class Cron extends Framework\Cron\Run\Cron
 {
@@ -30,7 +31,7 @@ abstract class Cron extends Framework\Cron\Run\Cron
     public function isAlreadyExec()
     {
         if (!$this->checkDelay()) {
-            Http::setHeadersByCode(403);
+            Http::setHeadersByCode(StatusCode::FORBIDDEN);
 
             exit(t('This cron has already been executed.'));
         }

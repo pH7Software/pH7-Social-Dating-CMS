@@ -16,6 +16,7 @@ use PH7\Framework\Navigation\Page;
 use PH7\Framework\Parse\Emoticon;
 use PH7\Framework\Url\Header;
 use stdClass;
+use Teapot\StatusCode;
 
 class MainController extends Controller
 {
@@ -209,7 +210,7 @@ class MainController extends Controller
     protected function notFound($b404Status = true)
     {
         if ($b404Status) {
-            Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
+            Http::setHeadersByCode(StatusCode::NOT_FOUND);
         }
 
         $this->view->page_title = $this->view->h2_title = $this->sTitle;

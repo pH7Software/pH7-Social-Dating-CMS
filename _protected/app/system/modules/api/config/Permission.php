@@ -14,6 +14,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Api\Tool;
 use PH7\Framework\Http\Http;
+use Teapot\StatusCode;
 
 class Permission extends PermissionCore
 {
@@ -22,7 +23,7 @@ class Permission extends PermissionCore
         parent::__construct();
 
         if (!Tool::checkAccess($this->config, $this->httpRequest)) {
-            Http::setHeadersByCode(403);
+            Http::setHeadersByCode(StatusCode::FORBIDDEN);
             t("Your API key and/or the URL of your external application don't match with the one in your pH7CMS's configuration system!");
             exit;
         }

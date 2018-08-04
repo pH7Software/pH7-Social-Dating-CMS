@@ -13,6 +13,7 @@ defined('PH7') or exit('Restricted access');
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Security\CSRF\Token;
+use Teapot\StatusCode;
 
 class ReportAjax
 {
@@ -68,7 +69,7 @@ class ReportAjax
      */
     private function badRequest()
     {
-        Http::setHeadersByCode(400);
+        Http::setHeadersByCode(StatusCode::BAD_REQUEST);
 
         return 'Bad Request Error';
     }

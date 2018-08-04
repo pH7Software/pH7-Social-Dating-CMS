@@ -14,6 +14,7 @@ use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Session\Session;
+use Teapot\StatusCode;
 
 class Comment
 {
@@ -49,7 +50,7 @@ class Comment
                 break;
 
             default:
-                Http::setHeadersByCode(400);
+                Http::setHeadersByCode(StatusCode::BAD_REQUEST);
                 exit('Bad Request Error!');
         }
     }

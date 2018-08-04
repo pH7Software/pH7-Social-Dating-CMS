@@ -34,10 +34,10 @@ use PH7\Framework\Security\DDoS\Stop as DDoSStoper;
 use PH7\FriendCoreModel;
 use PH7\MailCoreModel;
 use PH7\UserCore;
+use Teapot\StatusCode;
 
 abstract class Controller extends Core
 {
-    const HTTP_NOT_FOUND_CODE = 404;
     const MAINTENANCE_DURATION_SECONDS = 3600;
 
     public function __construct()
@@ -102,7 +102,7 @@ abstract class Controller extends Core
     public function displayPageNotFound($sMsg = '', $b404Status = true)
     {
         if ($b404Status) {
-            Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
+            Http::setHeadersByCode(StatusCode::NOT_FOUND);
         }
 
         $this->view->page_title = (!empty($sMsg)) ? t('%0% - Page Not Found', $sMsg) : t('Page Not Found');
@@ -137,7 +137,7 @@ abstract class Controller extends Core
     public function displayPageDenied($b403Status = true)
     {
         if ($b403Status) {
-            Http::setHeadersByCode(403);
+            Http::setHeadersByCode(StatusCode::FORBIDDEN);
         }
 
         $sTitle = t('Access Denied!');

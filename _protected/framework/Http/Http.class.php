@@ -14,11 +14,10 @@ namespace PH7\Framework\Http;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Server\Server;
+use Teapot\StatusCode;
 
 class Http
 {
-    const HTTP_OK_CODE = 200;
-
     const STATUS_CODE = [
         100 => '100 Continue',
         101 => '101 Switching Protocols',
@@ -148,10 +147,10 @@ class Http
      *
      * @throws Exception
      */
-    public static function setHeadersByCode($iCode = self::HTTP_OK_CODE)
+    public static function setHeadersByCode($iCode = StatusCode::OK)
     {
         if (!static::getStatusCodes($iCode)) {
-            $iCode = self::HTTP_OK_CODE;
+            $iCode = StatusCode::OK;
         }
 
         // Set header
@@ -197,7 +196,7 @@ class Http
 
         if (!($sAuthUsr === $sUsr && $sAuthPwd === $sPwd)) {
             header(sprintf('WWW-Authenticate: Basic realm="%s"', $sMsg));
-            static::setHeadersByCode(401);
+            static::setHeadersByCode(StatusCode::UNAUTHORIZED);
             echo t('You must enter a valid login ID and password to access this resource.') . "\n";
             exit(false);
         }

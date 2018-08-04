@@ -20,6 +20,7 @@ use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Util\Backup;
 use PH7\Framework\Mvc\Model\Engine\Util\Various as DbVarious;
+use Teapot\StatusCode;
 
 class DatabaseCoreCron extends Cron
 {
@@ -51,7 +52,7 @@ class DatabaseCoreCron extends Cron
                     break;
 
                 default:
-                    Http::setHeadersByCode(400);
+                    Http::setHeadersByCode(StatusCode::BAD_REQUEST);
                     exit('Bad Request Error!');
             }
         }
