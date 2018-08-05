@@ -97,10 +97,10 @@ final class Token
      */
     public function check($sName, $sInputToken = null, $iTime = null)
     {
-        $iTime = ($iTime === null) ? DbConfig::getSetting('securityTokenLifetime') : $iTime;
+        $iTime = $iTime === null ? DbConfig::getSetting('securityTokenLifetime') : $iTime;
 
         // The default tag name for the security token
-        $sInputToken = (empty($sInputToken)) ? (new HttpRequest)->post('security_token') : $sInputToken;
+        $sInputToken = empty($sInputToken) ? (new HttpRequest)->post('security_token') : $sInputToken;
 
         $aCheckSession = [
             'security_token_' . $sName,
@@ -134,7 +134,7 @@ final class Token
      */
     public function url()
     {
-        return ($this->currentSess() !== true ? '?' . static::VAR_NAME . '=' . $this->currentSess() : '');
+        return $this->currentSess() !== true ? '?' . static::VAR_NAME . '=' . $this->currentSess() : '';
     }
 
     /**
