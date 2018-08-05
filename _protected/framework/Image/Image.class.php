@@ -156,23 +156,33 @@ class Image
     }
 
     /**
-     * @param int $iX
-     * @param int $iY
+     * @param int $iX Width
+     * @param int $iY Height
      *
      * @return self
      */
     public function resize($iX = null, $iY = null)
     {
-        if (!$iX) {
-            // If width is not given
+        if (!$iX) { // If height is not given
             $iX = $this->iWidth * ($iY / $this->iHeight);
-        } elseif (!$iY) {
-            // If height is not given
+        } elseif (!$iY) { // If width is not given
             $iY = $this->iHeight * ($iX / $this->iWidth);
         }
 
         $rTmp = imagecreatetruecolor($iX, $iY);
-        imagecopyresampled($rTmp, $this->rImage, 0, 0, 0, 0, $iX, $iY, $this->iWidth, $this->iHeight);
+        imagecopyresampled(
+            $rTmp,
+            $this->rImage,
+            0,
+            0,
+            0,
+            0,
+            $iX,
+            $iY,
+            $this->iWidth,
+            $this->iHeight
+        );
+
         $this->rImage = &$rTmp;
 
         $this->iWidth = $iX;
@@ -209,7 +219,10 @@ class Image
      */
     public function dynamicResize($iNewWidth, $iNewHeight)
     {
-        if ($iNewHeight > $iNewWidth || ($iNewHeight == $iNewWidth && $this->iHeight < $this->iWidth)) {
+        if (
+            $iNewHeight > $iNewWidth ||
+            ($iNewHeight == $iNewWidth && $this->iHeight < $this->iWidth)
+        ) {
             // Taller image
             $this->resize(null, $iNewHeight);
 
