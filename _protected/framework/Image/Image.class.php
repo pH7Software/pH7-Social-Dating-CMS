@@ -111,7 +111,7 @@ class Image
                     $this->sType = self::GIF_NAME;
                     break;
 
-                case self::WEBP:
+                case self::WEBP: // Will only work with PHP >= 7.1
                     $this->rImage = imagecreatefromwebp($this->sFile);
                     $this->sType = self::WEBP_NAME;
                     break;
