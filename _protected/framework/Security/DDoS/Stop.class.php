@@ -25,6 +25,8 @@ final class Stop
     // SSS = Stop for Server Security
     const COOKIE_NAME = 'sss';
 
+    const COOKIE_LIFETIME = 60 * 60 * 48;
+
     /**
      * @return bool Return TRUE if it believes that we get too many requests from that session, FALSE otherwise.
      */
@@ -33,7 +35,7 @@ final class Stop
         $oCookie = new Cookie;
 
         if (!$oCookie->exists(static::COOKIE_NAME)) {
-            $oCookie->set(static::COOKIE_NAME, 1, 60 * 60 * 48);
+            $oCookie->set(static::COOKIE_NAME, 1, self::COOKIE_LIFETIME);
         } else {
             $oCookie->set(static::COOKIE_NAME, ($oCookie->get(static::COOKIE_NAME) + 1));
         }
@@ -46,6 +48,7 @@ final class Stop
         }
 
         unset($oCookie);
+
         return $bStatus;
     }
 
