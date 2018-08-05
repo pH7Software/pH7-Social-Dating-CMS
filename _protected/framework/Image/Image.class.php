@@ -26,7 +26,7 @@ class Image
     const JPG = IMAGETYPE_JPEG;
     const PNG = IMAGETYPE_PNG;
     const GIF = IMAGETYPE_GIF;
-    const WEBP = 'image/webp'; // From PHP 7.1, IMAGETYPE_WEBP is available
+    const WEBP = 18; // From PHP 7.1, IMAGETYPE_WEBP is available
 
     const JPG_NAME = 'jpg';
     const PNG_NAME = 'png';
