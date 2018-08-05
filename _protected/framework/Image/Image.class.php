@@ -28,6 +28,11 @@ class Image
     const GIF = IMAGETYPE_GIF;
     const WEBP = 'image/webp'; // From PHP 7.1, IMAGETYPE_WEBP is available
 
+    const JPG_NAME = 'jpg';
+    const PNG_NAME = 'png';
+    const GIF_NAME = 'gif';
+    const WEBP_NAME = 'webp';
+
     const DEFAULT_MAX_WIDTH = 3000;
     const DEFAULT_MAX_HEIGHT = 3000;
 
@@ -94,24 +99,24 @@ class Image
                 // JPG
                 case self::JPG:
                     $this->rImage = imagecreatefromjpeg($this->sFile);
-                    $this->sType = 'jpg';
+                    $this->sType = self::JPG_NAME;
                     break;
 
                 // PNG
                 case self::PNG:
                     $this->rImage = imagecreatefrompng($this->sFile);
-                    $this->sType = 'png';
+                    $this->sType = self::PNG_NAME;
                     break;
 
                 // GIF
                 case self::GIF:
                     $this->rImage = imagecreatefromgif($this->sFile);
-                    $this->sType = 'gif';
+                    $this->sType = self::GIF_NAME;
                     break;
 
                 case self::WEBP:
-                    $this->rImage = imagecreatefromgif($this->sFile);
-                    $this->sType = 'webp';
+                    $this->rImage = imagecreatefromwebp($this->sFile);
+                    $this->sType = self::WEBP_NAME;
                     break;
 
                 // Invalid Zone
@@ -396,18 +401,23 @@ class Image
     {
         switch ($this->sType) {
             // JPG
-            case 'jpg':
+            case self::JPG_NAME:
                 imagejpeg($this->rImage, $sFile, $this->iQuality);
                 break;
 
             // PNG
-            case 'png':
+            case self::PNG_NAME:
                 imagepng($this->rImage, $sFile, $this->iCompression);
                 break;
 
             // GIF
-            case 'gif':
+            case self::GIF_NAME:
                 imagegif($this->rImage, $sFile, $this->iQuality);
+                break;
+
+            // WEBP
+            case self::WEBP_NAME:
+                imagewebp($this->rImage, $sFile, $this->iQuality);
                 break;
 
             // Invalid Zone
@@ -429,21 +439,27 @@ class Image
     {
         switch ($this->sType) {
             // JPG
-            case 'jpg':
+            case self::JPG_NAME:
                 header('Content-type: image/jpeg');
                 imagejpeg($this->rImage, null, $this->iQuality);
                 break;
 
+            // PNG
+            case self::PNG_NAME:
+                header('Content-type: image/png');
+                imagepng($this->rImage, null, $this->iCompression);
+                break;
+
             // GIF
-            case 'gif':
+            case self::GIF_NAME:
                 header('Content-type: image/gif');
                 imagegif($this->rImage, null, $this->iQuality);
                 break;
 
-            // PNG
-            case 'png':
-                header('Content-type: image/png');
-                imagepng($this->rImage, null, $this->iCompression);
+            // WEBP
+            case self::WEBP_NAME:
+                header('Content-type: image/webp');
+                imagewebp($this->rImage, null, $this->iQuality);
                 break;
 
             // Invalid Zone
