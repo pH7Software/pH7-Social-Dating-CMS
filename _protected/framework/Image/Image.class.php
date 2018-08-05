@@ -96,19 +96,16 @@ class Image
             }
         } else {
             switch ($mImgType) {
-                // JPG
                 case self::JPG:
                     $this->rImage = imagecreatefromjpeg($this->sFile);
                     $this->sType = self::JPG_NAME;
                     break;
 
-                // PNG
                 case self::PNG:
                     $this->rImage = imagecreatefrompng($this->sFile);
                     $this->sType = self::PNG_NAME;
                     break;
 
-                // GIF
                 case self::GIF:
                     $this->rImage = imagecreatefromgif($this->sFile);
                     $this->sType = self::GIF_NAME;
@@ -400,22 +397,18 @@ class Image
     public function save($sFile)
     {
         switch ($this->sType) {
-            // JPG
             case self::JPG_NAME:
                 imagejpeg($this->rImage, $sFile, $this->iQuality);
                 break;
 
-            // PNG
             case self::PNG_NAME:
                 imagepng($this->rImage, $sFile, $this->iCompression);
                 break;
 
-            // GIF
             case self::GIF_NAME:
                 imagegif($this->rImage, $sFile, $this->iQuality);
                 break;
 
-            // WEBP
             case self::WEBP_NAME:
                 imagewebp($this->rImage, $sFile, $this->iQuality);
                 break;
@@ -438,25 +431,21 @@ class Image
     public function show()
     {
         switch ($this->sType) {
-            // JPG
             case self::JPG_NAME:
                 header('Content-type: image/jpeg');
                 imagejpeg($this->rImage, null, $this->iQuality);
                 break;
 
-            // PNG
             case self::PNG_NAME:
                 header('Content-type: image/png');
                 imagepng($this->rImage, null, $this->iCompression);
                 break;
 
-            // GIF
             case self::GIF_NAME:
                 header('Content-type: image/gif');
                 imagegif($this->rImage, null, $this->iQuality);
                 break;
 
-            // WEBP
             case self::WEBP_NAME:
                 header('Content-type: image/webp');
                 imagewebp($this->rImage, null, $this->iQuality);
