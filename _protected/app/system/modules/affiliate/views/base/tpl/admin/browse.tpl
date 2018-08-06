@@ -87,6 +87,8 @@
                         <td>
                             {if !empty($aff->website)}
                                 <a href="{% $aff->website %}">{% $aff->website %}</a>
+                            {else}
+                                {lang 'No website'}
                             {/if}
                         </td>
                         <td>
