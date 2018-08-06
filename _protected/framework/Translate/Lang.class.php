@@ -83,7 +83,13 @@ namespace PH7\Framework\Translate {
         public static function getIsoCode($sLocaleName, $sPositionLangCode = self::FIRST_ISO_CODE)
         {
             if ($sPositionLangCode === self::LAST_ISO_CODE) {
-                return strtolower(substr($sLocaleName, 3, 5));
+                return strtolower(
+                    substr(
+                        $sLocaleName,
+                        self::ISO_LANG_CODE_LENGTH + 1,
+                        self::LANG_FOLDER_LENGTH
+                    )
+                );
             }
 
             return substr($sLocaleName, 0, static::ISO_LANG_CODE_LENGTH);
