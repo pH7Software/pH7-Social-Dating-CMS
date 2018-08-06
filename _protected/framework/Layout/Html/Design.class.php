@@ -123,7 +123,7 @@ class Design
                 continue;
             }
 
-            // Get the two-letter country code
+            // Get the first|last two-letter country code
             $sAbbrLang = Lang::getIsoCode($sLang, Lang::FIRST_ISO_CODE);
             $sFlagCountryCode = Lang::getIsoCode($sLang, Lang::LAST_ISO_CODE);
 
