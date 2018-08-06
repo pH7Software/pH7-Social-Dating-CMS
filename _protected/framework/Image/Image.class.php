@@ -88,7 +88,7 @@ class Image
     {
         $mImgType = $this->getType();
 
-        if (!is_file($this->sFile) || !$mImgType) {
+        if (!$mImgType || !is_file($this->sFile)) {
             if (isDebug()) {
                 throw new TooLargeException('The file could not be uploaded. Possibly too large.');
             } else {
