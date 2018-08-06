@@ -11,6 +11,7 @@
                     <th>{lang 'User'}</th>
                     <th>{lang 'Refers'}</th>
                     <th>{lang 'Bank Account'}</th>
+                    <th>{lang 'Website'}</th>
                     <th>{lang 'IP'}</th>
                     <th>{lang 'Registration Date'}</th>
                     <th>{lang 'Last Activity'}</th>
@@ -83,6 +84,11 @@
                         </td>
                         <td>{% $aff->refer %}</td>
                         <td>{% $aff->bankAccount %}</td>
+                        <td>
+                            {if !empty($aff->website)}
+                                <a href="{% $aff->website %}">{% $aff->website %}</a>
+                            {/if}
+                        </td>
                         <td>
                             <img src="{{ $design->getSmallFlagIcon(Framework\Geo\Ip\Geo::getCountryCode($aff->ip)) }}" title="{lang 'Country Flag'}" alt="{lang 'Country Flag'}" /> {{ $design->ip($aff->ip) }}
                         </td>
