@@ -223,7 +223,7 @@ class Image
     {
         if (
             $iNewHeight > $iNewWidth ||
-            ($iNewHeight == $iNewWidth && $this->iHeight < $this->iWidth)
+            ($iNewHeight === $iNewWidth && $this->iHeight < $this->iWidth)
         ) {
             // Taller image
             $this->resize(null, $iNewHeight);
@@ -345,7 +345,7 @@ class Image
     }
 
     /**
-     * Create a Watermark text.
+     * Create a Watermark text on the image.
      *
      * @param string $sText Text of watermark.
      * @param int $iSize The size of text. Between 0 to 5.
