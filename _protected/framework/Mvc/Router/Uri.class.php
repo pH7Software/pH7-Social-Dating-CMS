@@ -91,7 +91,14 @@ class Uri
         $oCache->enabled(static::URI_CACHE_ENABLED);
 
         if (!$sUrl = $oCache->get()) {
-            $sUrl = self::uri(['module' => $sModule, 'controller' => $sController, 'action' => $sAction, 'vars' => $sVars]);
+            $sUrl = self::uri(
+                [
+                    'module' => $sModule,
+                    'controller' => $sController,
+                    'action' => $sAction,
+                    'vars' => $sVars
+                ]
+            );
             $oCache->put($sUrl);
         }
         unset($oCache);

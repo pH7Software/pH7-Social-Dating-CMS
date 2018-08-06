@@ -708,6 +708,7 @@ class Design
     {
         $sProtocol = $bSecure ? 'https' : 'http';
         $bSubDomain = $bSecure ? 'secure' : 'www';
+
         return $sProtocol . '://' . $bSubDomain . '.gravatar.com/avatar/' . md5(strtolower($sEmail)) . '?d=' . $sType . '&s=' . $iSize . '&r=' . $sRating;
     }
 

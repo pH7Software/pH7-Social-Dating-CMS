@@ -258,7 +258,7 @@ EOD;
 
 // Go only if the user is logged
 if (UserCore::auth()) {
-    $oSession = new Session; // Go start_session() function.
+    $oSession = new Session; // Initialize session & start_session() func
     if (empty($_SESSION['messenger_username'])) {
         $_SESSION['messenger_username'] = $oSession->get('member_username');
     }

@@ -19,17 +19,15 @@ use PH7\Framework\Server\Server;
 class Session
 {
     /**
-     * @param bool|null $bDisableSessCache Disable PHP's session cache.
+     * @param bool|null $bDisableSessionCache Disable PHP's session cache.
      */
-    public function __construct($bDisableSessCache = false)
+    public function __construct($bDisableSessionCache = false)
     {
-        if (!$this->isSessionActivated()) {
-            if ($bDisableSessCache) {
-                session_cache_limiter(false);
-            }
-
-            $this->initializePHPSession();
+        if ($bDisableSessionCache && !$this->isSessionActivated()) {
+            session_cache_limiter(false);
         }
+
+        $this->initializePHPSession();
     }
 
     /**
