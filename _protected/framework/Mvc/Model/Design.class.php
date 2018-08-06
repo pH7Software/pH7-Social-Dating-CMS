@@ -49,10 +49,11 @@ class Design extends HtmlDesign
                 continue;
             }
 
-            // Get the two-letter country code
-            $sAbbrLang = Lang::getIsoCode($sLang->langId);
+            // Get the first|last two-letter country code
+            $sAbbrLang = Lang::getIsoCode($sLang->langId, Lang::FIRST_ISO_CODE);
+            $sFlagCountryCode = Lang::getIsoCode($sLang, Lang::LAST_ISO_CODE);
 
-            echo '<a href="', $sCurrentPage, $sLang->langId, '" hreflang="', $sAbbrLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>&nbsp;';
+            echo '<a href="', $sCurrentPage, $sLang->langId, '" hreflang="', $sAbbrLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sFlagCountryCode, Design::FLAG_ICON_EXT, '" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>&nbsp;';
         }
         unset($aLangs);
     }

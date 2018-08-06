@@ -25,6 +25,9 @@ namespace PH7\Framework\Translate {
         const LANG_FOLDER_LENGTH = 5;
         const ISO_LANG_CODE_LENGTH = 2;
 
+        const FIRST_ISO_CODE = 1;
+        const LAST_ISO_CODE = 2;
+
         /** @var Config */
         private $oConfig;
 
@@ -73,11 +76,22 @@ namespace PH7\Framework\Translate {
          * Get the two-letter country code; ISO 3166-1 alpha-2
          *
          * @param string $sLocaleName Locale language name (e.g., locale such as "en_US", ..).
+         * @param int $iPositionLangCode
          *
          * @return string e.g., "en"
          */
-        public static function getIsoCode($sLocaleName)
+        public static function getIsoCode($sLocaleName, $iPositionLangCode = self::FIRST_ISO_CODE)
         {
+            if ($iPositionLangCode === self::LAST_ISO_CODE) {
+                return strtolower(
+                    substr(
+                        $sLocaleName,
+                        self::ISO_LANG_CODE_LENGTH + 1,
+                        self::LANG_FOLDER_LENGTH
+                    )
+                );
+            }
+
             return substr($sLocaleName, 0, static::ISO_LANG_CODE_LENGTH);
         }
 
