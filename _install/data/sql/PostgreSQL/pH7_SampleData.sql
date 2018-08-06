@@ -105,4 +105,4 @@ INSERT INTO ph7_affiliates (email, username, password, firstName, lastName, bank
 
 
 INSERT INTO ph7_affiliates_info (profileId, description, website, city, state, zipCode, country) VALUES
-(@iProfileId, 'My Website is very nice!', 'http://hizup.com', 'New York', 'NYC', '10001', 'US');
+(@iProfileId, 'My Website is very nice!', 'http://pierrehenry.be', 'New York', 'NYC', '10001', 'US');

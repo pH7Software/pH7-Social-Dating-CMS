@@ -27,7 +27,7 @@ $apiConfig = array(
     // OAuth2 Settings, you can get these keys at https://code.google.com/apis/console
     'oauth2_client_id' => 'client id',
     'oauth2_client_secret' => 'client secret',
-    'oauth2_redirect_uri' => 'http://hizup.com/',
+    'oauth2_redirect_uri' => 'http://ph7.me/',
 
     // The developer key, you get this at https://code.google.com/apis/console
     'developer_key' => '',
