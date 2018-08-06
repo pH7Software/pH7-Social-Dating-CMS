@@ -97,7 +97,10 @@ final class Server
      */
     public static function getIp()
     {
-        return self::getVar(self::SERVER_ADDR, self::getVar(self::LOCAL_ADDR, gethostbyname(self::getName())));
+        return self::getVar(
+            self::SERVER_ADDR,
+            self::getVar(self::LOCAL_ADDR, gethostbyname(self::getName()))
+        );
     }
 
     /**
@@ -137,7 +140,8 @@ final class Server
         $sServerName = self::getName();
         $sHttpHost = self::getVar(self::HTTP_HOST);
 
-        return ($sServerName === self::LOCAL_HOSTNAME || $sServerName === self::LOCAL_IP || $sHttpHost === self::LOCAL_HOSTNAME || $sHttpHost === self::LOCAL_IP);
+        return ($sServerName === self::LOCAL_HOSTNAME || $sServerName === self::LOCAL_IP ||
+            $sHttpHost === self::LOCAL_HOSTNAME || $sHttpHost === self::LOCAL_IP);
     }
 
     /**
@@ -151,7 +155,7 @@ final class Server
         if (!strtolower(getenv('HTTP_MOD_REWRITE')) === 'on') {
             $sOutputMsg = 'mod_rewrite Works!';
 
-            if (Uri::getInstance()->fragment(0) == 'test_mod_rewrite') {
+            if (Uri::getInstance()->fragment(0) === 'test_mod_rewrite') {
                 exit($sOutputMsg);
             }
 

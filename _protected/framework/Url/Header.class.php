@@ -17,11 +17,10 @@ defined('PH7') or exit('Restricted access');
 use PH7\Framework\Http\Http;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use Teapot\StatusCode;
 
 class Header
 {
-    const HTTP_MOVED_PERMANENTLY_CODE = 301;
-
     /**
      * Allows a redirection URL respecting the HTTP status code for search engines friendly.
      *
@@ -35,7 +34,7 @@ class Header
     public static function redirect($sUrl = null, $sMessage = null, $sType = Design::SUCCESS_TYPE, $iRedirectCode = null)
     {
         if (!Http::getStatusCodes($iRedirectCode)) {
-            $iRedirectCode = self::HTTP_MOVED_PERMANENTLY_CODE;
+            $iRedirectCode = StatusCode::MOVED_PERMANENTLY;
         }
 
         Http::setHeadersByCode(Http::getStatusCodes($iRedirectCode));

@@ -21,6 +21,7 @@ use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Security\Spam\Captcha\Captcha;
 use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Str\Str;
+use Teapot\StatusCode;
 
 class ValidateCoreAjax
 {
@@ -101,7 +102,7 @@ class ValidateCoreAjax
 
                 // If we receive another invalid value, we display a message with a HTTP header.
                 default:
-                    Http::setHeadersByCode(400);
+                    Http::setHeadersByCode(StatusCode::BAD_REQUEST);
                     exit('Bad Request Error!');
             }
         }

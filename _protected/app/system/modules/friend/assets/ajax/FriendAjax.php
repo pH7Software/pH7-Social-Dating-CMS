@@ -15,6 +15,7 @@ use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\CSRF\Token;
+use Teapot\StatusCode;
 
 class FriendAjax extends Core
 {
@@ -51,7 +52,7 @@ class FriendAjax extends Core
                 break;
 
             default:
-                Http::setHeadersByCode(400);
+                Http::setHeadersByCode(StatusCode::BAD_REQUEST);
                 exit('Bad Request Error!');
         }
     }

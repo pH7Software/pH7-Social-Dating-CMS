@@ -18,6 +18,8 @@ class MainController extends Controller
     const GUEST_SPLASH_FILE = 'index.guest_splash';
     const GUEST_FILE = 'index.guest';
 
+    const REDIRECTION_DELAY_IN_SEC = 3;
+
     /** @var string */
     private $sTitle;
 
@@ -106,7 +108,14 @@ class MainController extends Controller
         $this->sTitle = t('See you soon!');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
-        $this->design->setRedirect($this->registry->site_url, null, null, 3);
+
+        $this->design->setRedirect(
+            $this->registry->site_url,
+            null,
+            null,
+            self::REDIRECTION_DELAY_IN_SEC
+        );
+
         $this->output();
     }
 

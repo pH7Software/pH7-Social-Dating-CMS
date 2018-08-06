@@ -13,6 +13,7 @@ use PH7\Framework\Geo\Map\Map;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Navigation\Page;
+use Teapot\StatusCode;
 
 class CountryController extends Controller
 {
@@ -56,7 +57,7 @@ class CountryController extends Controller
             $this->setMetaTags($iTotalUsers);
         } else {
             // Not found page
-            Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
+            Http::setHeadersByCode(StatusCode::NOT_FOUND);
             $this->view->error = t('Error, country is empty.');
         }
 

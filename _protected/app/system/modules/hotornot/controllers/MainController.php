@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Http\Http;
+use Teapot\StatusCode;
 
 class MainController extends Controller
 {
@@ -48,7 +49,7 @@ class MainController extends Controller
         $oData = $this->oHoNModel->getPicture($iProfileId);
 
         if (empty($oData)) {
-            Http::setHeadersByCode(self::HTTP_NOT_FOUND_CODE);
+            Http::setHeadersByCode(StatusCode::NOT_FOUND);
             $this->view->error = t("Sorry, we haven't found any photo to Hot Or Not Party.");
         } else {
             $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class

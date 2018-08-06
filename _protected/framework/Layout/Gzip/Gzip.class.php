@@ -23,6 +23,7 @@ use PH7\Framework\Http\Http;
 use PH7\Framework\Layout\Optimization;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Navigation\Browser;
+use Teapot\StatusCode;
 
 class Gzip
 {
@@ -140,8 +141,8 @@ class Gzip
      */
     public function run()
     {
-        if ($this->isValidStaticTypeFile()) {
-            Http::setHeadersByCode(503);
+        if (!$this->isValidStaticTypeFile()) {
+            Http::setHeadersByCode(StatusCode::SERVICE_UNAVAILABLE);
             exit('Invalid file type!');
         }
 
@@ -149,7 +150,7 @@ class Gzip
 
         // Directory
         if (!$this->oHttpRequest->getExists('d')) {
-            Http::setHeadersByCode(503);
+            Http::setHeadersByCode(StatusCode::SERVICE_UNAVAILABLE);
             exit('No directory specified!');
         }
 
@@ -159,7 +160,7 @@ class Gzip
 
         // The Files
         if (!$this->oHttpRequest->getExists('f')) {
-            Http::setHeadersByCode(503);
+            Http::setHeadersByCode(StatusCode::SERVICE_UNAVAILABLE);
             exit('No file specified!');
         }
 
@@ -169,13 +170,13 @@ class Gzip
         foreach ($this->aElements as $sElement) {
             $sPath = realpath($this->sBase . $sElement);
 
-            if ($this->isValidStaticFileExtension($sPath)) {
-                Http::setHeadersByCode(403);
-                exit('Invalid file extension.');
+            if (!$this->isValidStaticFileExtension($sPath)) {
+                Http::setHeadersByCode(StatusCode::FORBIDDEN);
+                exit('Invalid file extension!');
             }
 
-            if ($this->isSourceStaticFileExists($sPath)) {
-                Http::setHeadersByCode(404);
+            if (!$this->isSourceStaticFileExists($sPath)) {
+                Http::setHeadersByCode(StatusCode::NOT_FOUND);
                 exit('File not found!');
             }
         }
@@ -235,7 +236,7 @@ class Gzip
             $oBrowser->cache();
 
             // Warning: following can cause problems (ERR_FILE_NOT_FOUND error)
-            // Http::setHeadersByCode(304); // Not Modified header
+            // Http::setHeadersByCode(StatusCode::NOT_MODIFIED); // Not Modified header
         }
 
         unset($oBrowser);
@@ -268,7 +269,7 @@ class Gzip
                 break;
 
             default:
-                Http::setHeadersByCode(503);
+                Http::setHeadersByCode(StatusCode::SERVICE_UNAVAILABLE);
                 exit('Invalid file type!');
         }
 
@@ -454,17 +455,17 @@ class Gzip
     }
 
     /**
-     * @param string $sSourcePath The source (uncached) static file.
+     * @param string $sSourcePath The (uncached) source static file.
      *
      * @return bool
      */
     private function isSourceStaticFileExists($sSourcePath)
     {
-        return substr($sSourcePath, 0, strlen($this->sBase)) !== $this->sBase || !($sSourcePath);
+        return is_file($sSourcePath) && substr($sSourcePath, 0, strlen($this->sBase)) === $this->sBase;
     }
 
     /**
-     * @param string $sSourcePath The source (uncached) static file.
+     * @param string $sSourcePath The (uncached) source static file.
      * @param string $sFullCacheFile
      *
      * @return bool Returns TRUE if the cache has expired, FALSE otherwise.
@@ -475,7 +476,7 @@ class Gzip
     }
 
     /**
-     * @param string $sSourcePath The source (uncached) static file.
+     * @param string $sSourcePath The (uncached) source static file.
      *
      * @return bool
      */
@@ -493,7 +494,8 @@ class Gzip
      */
     private function isDataUriEligible($sImgPath)
     {
-        return $this->bDataUri && is_file($sImgPath) && $this->oFile->size($sImgPath) < self::MAX_IMG_SIZE_BASE64_CONVERTOR;
+        return $this->bDataUri && is_file($sImgPath) &&
+            $this->oFile->size($sImgPath) < self::MAX_IMG_SIZE_BASE64_CONVERTOR;
     }
 
     /**
@@ -504,9 +506,9 @@ class Gzip
     private function isValidStaticFileExtension($sPath)
     {
         return
-            ($this->sType === self::HTML_NAME && substr($sPath, -5) !== '.html') ||
-            ($this->sType === self::JS_NAME && substr($sPath, -3) !== '.js') ||
-            ($this->sType === self::CSS_NAME && substr($sPath, -4) !== '.css');
+            ($this->sType === self::HTML_NAME && substr($sPath, -5) === '.html') ||
+            ($this->sType === self::JS_NAME && substr($sPath, -3) === '.js') ||
+            ($this->sType === self::CSS_NAME && substr($sPath, -4) === '.css');
     }
 
     /**

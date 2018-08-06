@@ -18,6 +18,7 @@ use PH7\Framework\Cookie\Cookie;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Session\Session;
+use Teapot\StatusCode;
 
 class RatingCoreAjax
 {
@@ -66,7 +67,7 @@ class RatingCoreAjax
                 }
             }
         } else {
-            Http::setHeadersByCode(400);
+            Http::setHeadersByCode(StatusCode::BAD_REQUEST);
             exit('Bad Request Error!');
         }
     }

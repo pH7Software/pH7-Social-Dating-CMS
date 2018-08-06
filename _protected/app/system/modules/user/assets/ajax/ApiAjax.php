@@ -14,6 +14,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use Teapot\StatusCode;
 
 class ApiAjax
 {
@@ -48,7 +49,7 @@ class ApiAjax
 
             // If we receive another invalid value, we display a message with a HTTP header.
             default:
-                Http::setHeadersByCode(400);
+                Http::setHeadersByCode(StatusCode::BAD_REQUEST);
                 exit('Bad Request Error!');
         }
     }

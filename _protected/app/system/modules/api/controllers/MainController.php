@@ -14,6 +14,7 @@ use PH7\Framework\Api\AllowCors;
 use PH7\Framework\Api\Api;
 use PH7\Framework\Http\Rest\Rest;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use Teapot\StatusCode;
 
 class MainController extends Controller
 {
@@ -38,7 +39,7 @@ class MainController extends Controller
     public function test()
     {
         if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_POST) {
-            $this->oRest->response('', 406);
+            $this->oRest->response('', StatusCode::NOT_ACCEPTABLE);
         } else {
             $this->oRest->response($this->set(['return' => 'It Works!']));
         }

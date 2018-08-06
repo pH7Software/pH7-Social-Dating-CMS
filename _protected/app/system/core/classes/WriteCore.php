@@ -13,10 +13,16 @@ use PH7\Framework\File\File;
 
 abstract class WriteCore
 {
-    const BLOG_NAME = 'blog';
-    const NOTE_NAME = 'note';
     const THUMBNAIL_FILENAME = 'thumb.png';
     const DEFAULT_THUMBNAIL_FILENAME = 'default_thumb.jpg';
+
+    const BLOG_NAME = 'blog';
+    const NOTE_NAME = 'note';
+
+    const ALLOWED_MODULES = [
+        self::BLOG_NAME,
+        self::NOTE_NAME
+    ];
 
     /**
      * @param int|string $mId Put the username + the PH7_DS constant + the image file for the Note module or just the post ID for the Blog module.
@@ -45,7 +51,7 @@ abstract class WriteCore
      */
     public static function checkMod($sMod)
     {
-        if ($sMod !== self::BLOG_NAME && $sMod !== self::NOTE_NAME) {
+        if (!in_array($sMod, self::ALLOWED_MODULES, true)) {
             throw new PH7InvalidArgumentException('Wrong module: ' . $sMod);
         }
     }
