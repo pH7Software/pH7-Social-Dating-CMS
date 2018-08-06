@@ -76,13 +76,13 @@ namespace PH7\Framework\Translate {
          * Get the two-letter country code; ISO 3166-1 alpha-2
          *
          * @param string $sLocaleName Locale language name (e.g., locale such as "en_US", ..).
-         * @param int $sPositionLangCode
+         * @param int $iPositionLangCode
          *
          * @return string e.g., "en"
          */
-        public static function getIsoCode($sLocaleName, $sPositionLangCode = self::FIRST_ISO_CODE)
+        public static function getIsoCode($sLocaleName, $iPositionLangCode = self::FIRST_ISO_CODE)
         {
-            if ($sPositionLangCode === self::LAST_ISO_CODE) {
+            if ($iPositionLangCode === self::LAST_ISO_CODE) {
                 return strtolower(
                     substr(
                         $sLocaleName,
