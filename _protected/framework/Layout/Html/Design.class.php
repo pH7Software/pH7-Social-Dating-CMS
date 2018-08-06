@@ -125,9 +125,9 @@ class Design
 
             // Get the two-letter country code
             $sAbbrLang = Lang::getIsoCode($sLang);
-            $sFlagIcon = strtolower(substr($sLang, 3, 5)) . self::FLAG_ICON_EXT;
+            $sFlagCountryCode = strtolower(substr($sLang, 3, 5));
 
-            echo '<a href="', $sCurrentPage, $sLang, '" hreflang="', $sAbbrLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sFlagIcon, '" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>&nbsp;';
+            echo '<a href="', $sCurrentPage, $sLang, '" hreflang="', $sAbbrLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sFlagCountryCode, self::FLAG_ICON_EXT, '" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>&nbsp;';
         }
 
         unset($aLangs);
