@@ -23,11 +23,13 @@ class Session
      */
     public function __construct($bDisableSessionCache = false)
     {
-        if ($bDisableSessionCache && !$this->isSessionActivated()) {
-            session_cache_limiter(false);
-        }
+        if (!$this->isSessionActivated()) {
+            if ($bDisableSessionCache) {
+                session_cache_limiter(false);
+            }
 
-        $this->initializePHPSession();
+            $this->initializePHPSession();
+        }
     }
 
     /**
@@ -140,27 +142,21 @@ class Session
      */
     private function initializePHPSession()
     {
-        /**
-         * Make sure we change Session Name/Session Cookie Parameters when session is only active.
-         * It makes no sense to intend to change them.
-         */
-        if (!$this->isSessionActivated()) {
-            session_name(Config::getInstance()->values['session']['cookie_name']);
+        session_name(Config::getInstance()->values['session']['cookie_name']);
 
-            /**
-             * In localhost mode, security session_set_cookie_params causing problems in the sessions, so we disable this if we are in localhost mode.
-             * Otherwise if we are in production mode, we activate this.
-             */
-            if (!Server::isLocalHost()) {
-                $iTime = (int)Config::getInstance()->values['session']['expiration'];
-                session_set_cookie_params(
-                    $iTime,
-                    Config::getInstance()->values['session']['path'],
-                    Config::getInstance()->values['session']['domain'],
-                    (substr(PH7_URL_PROT, 0, 5) === 'https'),
-                    true
-                );
-            }
+        /**
+         * In localhost mode, security session_set_cookie_params causing problems in the sessions, so we disable this if we are in localhost mode.
+         * Otherwise if we are in production mode, we activate this.
+         */
+        if (!Server::isLocalHost()) {
+            $iTime = (int)Config::getInstance()->values['session']['expiration'];
+            session_set_cookie_params(
+                $iTime,
+                Config::getInstance()->values['session']['path'],
+                Config::getInstance()->values['session']['domain'],
+                (substr(PH7_URL_PROT, 0, 5) === 'https'),
+                true
+            );
         }
 
         @session_start();
