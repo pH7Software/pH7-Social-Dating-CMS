@@ -6,7 +6,7 @@
 
 -- Add field to give option for date-picker calendar or just age range
 INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) VALUES
-('isUserAgeRangeField', 1, '', '0 to disable or 1 to enable');
+('isUserAgeRangeField', 1, '0 to disable or 1 to enable', 'registration');
 
 
 -- Update pH7CMS's SQL schema version
