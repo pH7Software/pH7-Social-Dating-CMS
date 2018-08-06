@@ -16,8 +16,17 @@ use PH7\Framework\Url\Header;
 class ValidateSiteCore
 {
     const SESS_IS_VISITED = 'suggestionbox_visited';
-    const VALIDATE_FORM_PAGE_DELAY = '-2 months';
-    const VALIDATE_FORM_POPUP_DELAY = '-2 days';
+    const VALIDATE_FORM_PAGE_DELAY = '2 months';
+    const VALIDATE_FORM_POPUP_DELAYS = [
+        '4 hours',
+        '1 day',
+        '3 days',
+        '5 days',
+        '10 days',
+        '15 days',
+        '21 days',
+        '40 days'
+    ];
 
     /**
      * Check if the JS donation box has to be added and redirect if the site hasn't been validated yet for a while.
@@ -34,7 +43,7 @@ class ValidateSiteCore
         // After over 2 months, if the site is still not validated, maybe the validation box doesn't really work...,
         // so we redirect directly to the page form
         if (!$oValidateSiteModel->is() &&
-            VDate::setTime(self::VALIDATE_FORM_PAGE_DELAY) >= $iSinceSiteCreated &&
+            self::removeTime(self::VALIDATE_FORM_PAGE_DELAY) >= $iSinceSiteCreated &&
             !$oSession->exists(self::SESS_IS_VISITED)
         ) {
             Header::redirect(
@@ -47,6 +56,18 @@ class ValidateSiteCore
             );
         }
 
-        return !$oValidateSiteModel->is() && VDate::setTime(self::VALIDATE_FORM_POPUP_DELAY) >= $iSinceSiteCreated;
+        $sTime = self::VALIDATE_FORM_POPUP_DELAYS[mt_rand(0, count(self::VALIDATE_FORM_POPUP_DELAYS) - 1)];
+
+        return !$oValidateSiteModel->is() && self::removeTime($sTime) >= $iSinceSiteCreated;
+    }
+
+    /**
+     * @param $sTime
+     *
+     * @return int The changed timestamp.
+     */
+    private static function removeTime($sTime)
+    {
+        return VDate::setTime('-' . $sTime);
     }
 }
