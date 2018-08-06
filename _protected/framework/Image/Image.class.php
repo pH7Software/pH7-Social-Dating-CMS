@@ -7,7 +7,7 @@
  * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Image
- * @version          1.1
+ * @version          1.2
  * @link             http://ph7.me
  * @linkGD           http://php.net/manual/book.image.php
  */
@@ -26,7 +26,12 @@ class Image
     const JPG = IMAGETYPE_JPEG;
     const PNG = IMAGETYPE_PNG;
     const GIF = IMAGETYPE_GIF;
-    const WEBP = 'image/webp'; // From PHP 7.1, IMAGETYPE_WEBP is available
+    const WEBP = 18; // TODO: From PHP 7.1, IMAGETYPE_WEBP is available
+
+    const JPG_NAME = 'jpg';
+    const PNG_NAME = 'png';
+    const GIF_NAME = 'gif';
+    const WEBP_NAME = 'webp';
 
     const DEFAULT_MAX_WIDTH = 3000;
     const DEFAULT_MAX_HEIGHT = 3000;
@@ -83,7 +88,7 @@ class Image
     {
         $mImgType = $this->getType();
 
-        if (!is_file($this->sFile) || !$mImgType) {
+        if (!$mImgType || !is_file($this->sFile)) {
             if (isDebug()) {
                 throw new TooLargeException('The file could not be uploaded. Possibly too large.');
             } else {
@@ -91,27 +96,24 @@ class Image
             }
         } else {
             switch ($mImgType) {
-                // JPG
                 case self::JPG:
                     $this->rImage = imagecreatefromjpeg($this->sFile);
-                    $this->sType = 'jpg';
+                    $this->sType = self::JPG_NAME;
                     break;
 
-                // PNG
                 case self::PNG:
                     $this->rImage = imagecreatefrompng($this->sFile);
-                    $this->sType = 'png';
+                    $this->sType = self::PNG_NAME;
                     break;
 
-                // GIF
                 case self::GIF:
                     $this->rImage = imagecreatefromgif($this->sFile);
-                    $this->sType = 'gif';
+                    $this->sType = self::GIF_NAME;
                     break;
 
-                case self::WEBP:
-                    $this->rImage = imagecreatefromgif($this->sFile);
-                    $this->sType = 'webp';
+                case self::WEBP: // Will only work with PHP >= 7.1
+                    $this->rImage = imagecreatefromwebp($this->sFile);
+                    $this->sType = self::WEBP_NAME;
                     break;
 
                 // Invalid Zone
@@ -156,23 +158,33 @@ class Image
     }
 
     /**
-     * @param int $iX
-     * @param int $iY
+     * @param int $iX Width
+     * @param int $iY Height
      *
      * @return self
      */
     public function resize($iX = null, $iY = null)
     {
-        if (!$iX) {
-            // If width is not given
+        if (!$iX) { // If height is not given
             $iX = $this->iWidth * ($iY / $this->iHeight);
-        } elseif (!$iY) {
-            // If height is not given
+        } elseif (!$iY) { // If width is not given
             $iY = $this->iHeight * ($iX / $this->iWidth);
         }
 
         $rTmp = imagecreatetruecolor($iX, $iY);
-        imagecopyresampled($rTmp, $this->rImage, 0, 0, 0, 0, $iX, $iY, $this->iWidth, $this->iHeight);
+        imagecopyresampled(
+            $rTmp,
+            $this->rImage,
+            0,
+            0,
+            0,
+            0,
+            $iX,
+            $iY,
+            $this->iWidth,
+            $this->iHeight
+        );
+
         $this->rImage = &$rTmp;
 
         $this->iWidth = $iX;
@@ -209,7 +221,10 @@ class Image
      */
     public function dynamicResize($iNewWidth, $iNewHeight)
     {
-        if ($iNewHeight > $iNewWidth || ($iNewHeight == $iNewWidth && $this->iHeight < $this->iWidth)) {
+        if (
+            $iNewHeight > $iNewWidth ||
+            ($iNewHeight === $iNewWidth && $this->iHeight < $this->iWidth)
+        ) {
             // Taller image
             $this->resize(null, $iNewHeight);
 
@@ -330,7 +345,7 @@ class Image
     }
 
     /**
-     * Create a Watermark text.
+     * Create a Watermark text on the image.
      *
      * @param string $sText Text of watermark.
      * @param int $iSize The size of text. Between 0 to 5.
@@ -382,19 +397,20 @@ class Image
     public function save($sFile)
     {
         switch ($this->sType) {
-            // JPG
-            case 'jpg':
+            case self::JPG_NAME:
                 imagejpeg($this->rImage, $sFile, $this->iQuality);
                 break;
 
-            // PNG
-            case 'png':
+            case self::PNG_NAME:
                 imagepng($this->rImage, $sFile, $this->iCompression);
                 break;
 
-            // GIF
-            case 'gif':
+            case self::GIF_NAME:
                 imagegif($this->rImage, $sFile, $this->iQuality);
+                break;
+
+            case self::WEBP_NAME:
+                imagewebp($this->rImage, $sFile, $this->iQuality);
                 break;
 
             // Invalid Zone
@@ -415,22 +431,24 @@ class Image
     public function show()
     {
         switch ($this->sType) {
-            // JPG
-            case 'jpg':
+            case self::JPG_NAME:
                 header('Content-type: image/jpeg');
                 imagejpeg($this->rImage, null, $this->iQuality);
                 break;
 
-            // GIF
-            case 'gif':
+            case self::PNG_NAME:
+                header('Content-type: image/png');
+                imagepng($this->rImage, null, $this->iCompression);
+                break;
+
+            case self::GIF_NAME:
                 header('Content-type: image/gif');
                 imagegif($this->rImage, null, $this->iQuality);
                 break;
 
-            // PNG
-            case 'png':
-                header('Content-type: image/png');
-                imagepng($this->rImage, null, $this->iCompression);
+            case self::WEBP_NAME:
+                header('Content-type: image/webp');
+                imagewebp($this->rImage, null, $this->iQuality);
                 break;
 
             // Invalid Zone
