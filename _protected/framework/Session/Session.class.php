@@ -23,11 +23,13 @@ class Session
      */
     public function __construct($bDisableSessionCache = false)
     {
-        if ($bDisableSessionCache && !$this->isSessionActivated()) {
-            session_cache_limiter(false);
-        }
+        if (!$this->isSessionActivated()) {
+            if ($bDisableSessionCache) {
+                session_cache_limiter(false);
+            }
 
-        $this->initializePHPSession();
+            $this->initializePHPSession();
+        }
     }
 
     /**

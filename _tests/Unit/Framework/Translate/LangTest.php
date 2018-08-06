@@ -25,11 +25,27 @@ class LangTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('Hello Pierre-Henry', t('Hello %0%', $sName));
     }
 
-    public function testIsoCode()
+    public function testIsoCodeWithDefaultIsoCodePosition()
     {
-        $sLocaleName = 'en_US';
+        $sLocaleName = 'nl_NL';
         $sLangCode = Lang::getIsoCode($sLocaleName);
 
+        $this->assertSame('nl', $sLangCode);
+    }
+
+    public function testIsoCodeWithFirstIsoCode()
+    {
+        $sLocaleName = 'en_US';
+        $sLangCode = Lang::getIsoCode($sLocaleName, Lang::FIRST_ISO_CODE);
+
         $this->assertSame('en', $sLangCode);
+    }
+
+    public function testIsoCodeWithLastIsoCode()
+    {
+        $sLocaleName = 'en_US';
+        $sLangCode = Lang::getIsoCode($sLocaleName, Lang::LAST_ISO_CODE);
+
+        $this->assertSame('us', $sLangCode);
     }
 }

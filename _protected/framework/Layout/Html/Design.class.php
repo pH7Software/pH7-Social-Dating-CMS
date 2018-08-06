@@ -123,10 +123,11 @@ class Design
                 continue;
             }
 
-            // Get the two-letter country code
-            $sAbbrLang = Lang::getIsoCode($sLang);
+            // Get the first|last two-letter country code
+            $sAbbrLang = Lang::getIsoCode($sLang, Lang::FIRST_ISO_CODE);
+            $sFlagCountryCode = Lang::getIsoCode($sLang, Lang::LAST_ISO_CODE);
 
-            echo '<a href="', $sCurrentPage, $sLang, '" hreflang="', $sAbbrLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, self::FLAG_ICON_EXT, '" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>&nbsp;';
+            echo '<a href="', $sCurrentPage, $sLang, '" hreflang="', $sAbbrLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sFlagCountryCode, self::FLAG_ICON_EXT, '" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>&nbsp;';
         }
 
         unset($aLangs);
