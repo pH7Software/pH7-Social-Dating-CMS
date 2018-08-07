@@ -43,14 +43,9 @@ class ValidateSiteCore
             return false;
         }
 
-        $iSinceSiteCreated = VDate::getTime(StatisticCoreModel::getDateOfCreation());
+        $iSiteCreationDate = VDate::getTime(StatisticCoreModel::getDateOfCreation());
 
-        // After over 2 months, if the site is still not validated, maybe the validation box doesn't really work...,
-        // so we redirect directly to the page form
-        if (!$oValidateSiteModel->is() &&
-            VDate::setTime(self::VALIDATE_FORM_PAGE_DELAY) >= $iSinceSiteCreated &&
-            !$oSession->exists(self::SESS_IS_VISITED)
-        ) {
+        if (self::shouldUserBeRedirected($iSiteCreationDate, $oValidateSiteModel, $oSession)) {
             Header::redirect(
                 Uri::get(
                     'ph7cms-helper',
@@ -61,6 +56,27 @@ class ValidateSiteCore
             );
         }
 
-        return !$oValidateSiteModel->is() && VDate::setTime(self::VALIDATE_FORM_POPUP_DELAY) >= $iSinceSiteCreated;
+        return !$oValidateSiteModel->is() && VDate::setTime(self::VALIDATE_FORM_POPUP_DELAY) >= $iSiteCreationDate;
+    }
+
+    /**
+     * After over 2 months, if the site is still not validated, maybe the validation box doesn't really work...,
+     * so we redirect directly to the page form.
+     *
+     * @param int $iSiteCreationDate
+     * @param ValidateSiteCoreModel $oValidateSiteModel
+     * @param Session $oSession
+     *
+     * @return bool
+     */
+    private static function shouldUserBeRedirected(
+        $iSiteCreationDate,
+        ValidateSiteCoreModel $oValidateSiteModel,
+        Session $oSession
+    )
+    {
+        return !$oValidateSiteModel->is() &&
+            VDate::setTime(self::VALIDATE_FORM_PAGE_DELAY) >= $iSiteCreationDate &&
+            !$oSession->exists(self::SESS_IS_VISITED);
     }
 }
