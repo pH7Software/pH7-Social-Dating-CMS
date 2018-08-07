@@ -63,8 +63,8 @@ class LoginFormProcess extends Form implements LoginableForm
         $bIsLogged = $this->oAdminModel->adminLogin($sEmail, $sUsername, $sPassword);
         $bIpNotAllowed = !empty($sIpLogin) && $sIpLogin !== $sIp;
 
-        if (!$bIsLogged || $bIpNotAllowed) // If the login is failed or if the IP address is not allowed
-        {
+        // If the login is failed or if the IP address is not allowed
+        if (!$bIsLogged || $bIpNotAllowed) {
             $this->preventBruteForce(self::BRUTE_FORCE_SLEEP_DELAY);
 
             if (!$bIsLogged) {
