@@ -31,12 +31,12 @@ class ValidateSiteCore
     const VALIDATE_FORM_POPUP_DELAYS = [
         '4 hours',
         '1 day',
+        '2 days',
         '3 days',
         '5 days',
-        '10 days',
-        '15 days',
-        '21 days',
-        '40 days'
+        '8 days',
+        '13 days',
+        '21 days'
     ];
 
     /**
