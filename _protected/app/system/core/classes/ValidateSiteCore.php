@@ -15,6 +15,16 @@ use PH7\Framework\Url\Header;
 
 class ValidateSiteCore
 {
+    /**
+     * Add more "true" or "false" to give
+     * more/less probability of showing up the dialog.
+     */
+    const STATUS = [
+        true,
+        true,
+        false
+    ];
+
     const SESS_IS_VISITED = 'suggestionbox_visited';
     const VALIDATE_FORM_PAGE_DELAY = '-2 months';
     const VALIDATE_FORM_POPUP_DELAY = '-2 days';
@@ -29,6 +39,10 @@ class ValidateSiteCore
      */
     public static function needInject(ValidateSiteCoreModel $oValidateSiteModel, Session $oSession)
     {
+        if (self::STATUS[mt_rand(0, count(self::STATUS) - 1)] === false) {
+            return false;
+        }
+
         $iSinceSiteCreated = VDate::getTime(StatisticCoreModel::getDateOfCreation());
 
         // After over 2 months, if the site is still not validated, maybe the validation box doesn't really work...,
