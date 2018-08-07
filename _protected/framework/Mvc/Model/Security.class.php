@@ -22,7 +22,7 @@ use PH7\Framework\Ip\Ip;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
-use PH7\Security as SecurityCore;
+use PH7\SecurityCore;
 
 class Security
 {

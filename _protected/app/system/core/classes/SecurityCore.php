@@ -13,7 +13,7 @@ use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 use PH7\Framework\Mvc\Router\Uri;
 
-class Security
+class SecurityCore
 {
     /**
      * Send a Security Alert Login Attempts email.
