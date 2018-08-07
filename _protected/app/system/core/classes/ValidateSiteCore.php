@@ -93,7 +93,7 @@ class ValidateSiteCore
     }
 
     /**
-     * @param $sTime
+     * @param string $sTime
      *
      * @return int The changed timestamp.
      */
