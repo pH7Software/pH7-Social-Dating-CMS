@@ -25,6 +25,7 @@ class ValidateSiteCore
     const STATUS = [
         true,
         true,
+        true,
         false
     ];
 
