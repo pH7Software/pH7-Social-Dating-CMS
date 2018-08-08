@@ -46,10 +46,14 @@ class ValidateSiteCore
     /** @var Session */
     private $oSession;
 
+    /** @var int */
+    private $iSiteCreationDate;
+
     public function __construct(ValidateSiteCoreModel $oValidateSiteModel, Session $oSession)
     {
         $this->oValidateSiteModel = $oValidateSiteModel;
         $this->oSession = $oSession;
+        $this->iSiteCreationDate = VDate::getTime(StatisticCoreModel::getDateOfCreation());
     }
 
     /**
@@ -63,9 +67,7 @@ class ValidateSiteCore
             return false;
         }
 
-        $iSiteCreationDate = VDate::getTime(StatisticCoreModel::getDateOfCreation());
-
-        if ($this->shouldUserBeRedirected($iSiteCreationDate)) {
+        if ($this->shouldUserBeRedirected()) {
             $this->redirectUserToDonationBox();
         }
 
@@ -76,27 +78,23 @@ class ValidateSiteCore
      * After over 2 months, if the site is still not validated, maybe the validation box doesn't really work...,
      * so we redirect directly to the page form.
      *
-     * @param int $iSiteCreationDate
-     *
      * @return bool
      */
-    private function shouldUserBeRedirected($iSiteCreationDate)
+    private function shouldUserBeRedirected()
     {
         return !$this->oValidateSiteModel->is() &&
-            $this->removeTime(self::VALIDATE_FORM_PAGE_DELAY) >= $iSiteCreationDate &&
+            $this->removeTime(self::VALIDATE_FORM_PAGE_DELAY) >= $this->iSiteCreationDate &&
             !$this->oSession->exists(self::SESS_IS_VISITED);
     }
 
     /**
-     * @param int $iSiteCreationDate
-     *
      * @return bool
      */
-    private function shouldUserSeeDialog($iSiteCreationDate)
+    private function shouldUserSeeDialog()
     {
         $sTime = self::VALIDATE_FORM_POPUP_DELAYS[mt_rand(0, count(self::VALIDATE_FORM_POPUP_DELAYS) - 1)];
 
-        return !$this->oValidateSiteModel->is() && $this->removeTime($sTime) >= $iSiteCreationDate;
+        return !$this->oValidateSiteModel->is() && $this->removeTime($sTime) >= $this->iSiteCreationDate;
     }
 
     private function redirectUserToDonationBox()
