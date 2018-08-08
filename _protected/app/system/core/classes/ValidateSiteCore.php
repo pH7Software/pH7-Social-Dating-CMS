@@ -40,15 +40,24 @@ class ValidateSiteCore
         '21 days'
     ];
 
+    /** @var ValidateSiteCoreModel */
+    private $oValidateSiteModel;
+
+    /** @var Session */
+    private $oSession;
+
+    public function __construct(ValidateSiteCoreModel $oValidateSiteModel, Session $oSession)
+    {
+        $this->oValidateSiteModel = $oValidateSiteModel;
+        $this->oSession = $oSession;
+    }
+
     /**
      * Check if the JS donation box has to be added and redirect if the site hasn't been validated yet for a while.
      *
-     * @param ValidateSiteCoreModel $oValidateSiteModel
-     * @param Session $oSession
-     *
      * @return bool
      */
-    public static function needInject(ValidateSiteCoreModel $oValidateSiteModel, Session $oSession)
+    public function needInject()
     {
         if (self::STATUS[mt_rand(0, count(self::STATUS) - 1)] === false) {
             return false;
@@ -56,20 +65,11 @@ class ValidateSiteCore
 
         $iSiteCreationDate = VDate::getTime(StatisticCoreModel::getDateOfCreation());
 
-        if (self::shouldUserBeRedirected($iSiteCreationDate, $oValidateSiteModel, $oSession)) {
-            Header::redirect(
-                Uri::get(
-                    'ph7cms-helper',
-                    'main',
-                    'suggestionbox',
-                    '?box=donationbox'
-                )
-            );
+        if ($this->shouldUserBeRedirected($iSiteCreationDate)) {
+            $this->redirectUserToDonationBox();
         }
 
-        $sTime = self::VALIDATE_FORM_POPUP_DELAYS[mt_rand(0, count(self::VALIDATE_FORM_POPUP_DELAYS) - 1)];
-
-        return !$oValidateSiteModel->is() && self::removeTime($sTime) >= $iSiteCreationDate;
+        return $this->shouldUserSeeDialog();
     }
 
     /**
@@ -77,20 +77,38 @@ class ValidateSiteCore
      * so we redirect directly to the page form.
      *
      * @param int $iSiteCreationDate
-     * @param ValidateSiteCoreModel $oValidateSiteModel
-     * @param Session $oSession
      *
      * @return bool
      */
-    private static function shouldUserBeRedirected(
-        $iSiteCreationDate,
-        ValidateSiteCoreModel $oValidateSiteModel,
-        Session $oSession
-    )
+    private function shouldUserBeRedirected($iSiteCreationDate)
     {
-        return !$oValidateSiteModel->is() &&
-            self::removeTime(self::VALIDATE_FORM_PAGE_DELAY) >= $iSiteCreationDate &&
-            !$oSession->exists(self::SESS_IS_VISITED);
+        return !$this->oValidateSiteModel->is() &&
+            $this->removeTime(self::VALIDATE_FORM_PAGE_DELAY) >= $iSiteCreationDate &&
+            !$this->oSession->exists(self::SESS_IS_VISITED);
+    }
+
+    /**
+     * @param int $iSiteCreationDate
+     *
+     * @return bool
+     */
+    private function shouldUserSeeDialog($iSiteCreationDate)
+    {
+        $sTime = self::VALIDATE_FORM_POPUP_DELAYS[mt_rand(0, count(self::VALIDATE_FORM_POPUP_DELAYS) - 1)];
+
+        return !$this->oValidateSiteModel->is() && $this->removeTime($sTime) >= $iSiteCreationDate;
+    }
+
+    private function redirectUserToDonationBox()
+    {
+        Header::redirect(
+            Uri::get(
+                'ph7cms-helper',
+                'main',
+                'suggestionbox',
+                '?box=donationbox'
+            )
+        );
     }
 
     /**
@@ -98,7 +116,7 @@ class ValidateSiteCore
      *
      * @return int The changed timestamp.
      */
-    private static function removeTime($sTime)
+    private function removeTime($sTime)
     {
         return VDate::setTime('-' . $sTime);
     }

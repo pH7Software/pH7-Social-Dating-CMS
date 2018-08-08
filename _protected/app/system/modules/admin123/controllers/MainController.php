@@ -19,7 +19,8 @@ class MainController extends Controller
     public function index()
     {
         // Add ph7cms-helper's JS file if needed
-        if (ValidateSiteCore::needInject(new ValidateSiteCoreModel, $this->session)) {
+        $oValidateSite = new ValidateSiteCore(new ValidateSiteCoreModel, $this->session);
+        if ($oValidateSite->needInject()) {
             $this->design->addJs(
                 PH7_LAYOUT . PH7_SYS . PH7_MOD . 'ph7cms-helper' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
                 'suggestionbox.js'
