@@ -42,19 +42,19 @@ class ValidateSiteCore
         '21 days'
     ];
 
-    /** @var ValidateSiteCoreModel */
-    private $oValidateSiteModel;
-
     /** @var Session */
     private $oSession;
+
+    /** @var ValidateSiteCoreModel */
+    private $oValidateSiteModel;
 
     /** @var int */
     private $iSiteCreationDate;
 
-    public function __construct(ValidateSiteCoreModel $oValidateSiteModel, Session $oSession)
+    public function __construct(Session $oSession)
     {
-        $this->oValidateSiteModel = $oValidateSiteModel;
         $this->oSession = $oSession;
+        $this->oValidateSiteModel = new ValidateSiteCoreModel;
         $this->iSiteCreationDate = VDate::getTime(StatisticCoreModel::getDateOfCreation());
     }
 
