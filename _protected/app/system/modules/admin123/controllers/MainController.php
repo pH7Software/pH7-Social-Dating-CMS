@@ -20,11 +20,8 @@ class MainController extends Controller
     {
         // Add ph7cms-helper's JS file if needed
         $oValidateSite = new ValidateSiteCore(new ValidateSiteCoreModel, $this->session);
-        if ($oValidateSite->needInject()) {
-            $this->design->addJs(
-                PH7_LAYOUT . PH7_SYS . PH7_MOD . 'ph7cms-helper' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
-                'suggestionbox.js'
-            );
+        if ($oValidateSite->needToInject()) {
+            $oValidateSite->injectJsSuggestionBox($this->design);
         }
 
         $this->view->page_title = t('Admin Panel');

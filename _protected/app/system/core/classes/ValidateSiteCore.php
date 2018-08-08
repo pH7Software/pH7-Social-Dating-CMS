@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Date\Various as VDate;
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Url\Header;
@@ -17,6 +18,7 @@ class ValidateSiteCore
 {
     const SESS_IS_VISITED = 'suggestionbox_visited';
     const VALIDATE_FORM_PAGE_DELAY = '2 months';
+    const SUGGESTION_BOX_JS_FILENAME = 'suggestionbox.js';
 
     /**
      * Add more "true" or "false" to give
@@ -61,7 +63,7 @@ class ValidateSiteCore
      *
      * @return bool
      */
-    public function needInject()
+    public function needToInject()
     {
         if (self::STATUS[mt_rand(0, count(self::STATUS) - 1)] === false) {
             return false;
@@ -72,6 +74,14 @@ class ValidateSiteCore
         }
 
         return $this->shouldUserSeeDialog();
+    }
+
+    public function injectJsSuggestionBox(Design $oDesign)
+    {
+        $oDesign->addJs(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . 'ph7cms-helper' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
+            self::SUGGESTION_BOX_JS_FILENAME
+        );
     }
 
     /**
