@@ -18,8 +18,8 @@ class SecurityCore
     /**
      * Send a Security Alert Login Attempts email.
      *
-     * @param integer $iMaxAttempts
-     * @param integer $iAttemptTime
+     * @param int $iMaxAttempts
+     * @param int $iAttemptTime
      * @param string $sIp IP address
      * @param string $sTo Email address of the user to send the message.
      * @param PH7Tpl $oView
