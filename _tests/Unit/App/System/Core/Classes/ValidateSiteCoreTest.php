@@ -14,12 +14,11 @@ use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Session\Session;
 use PH7\ValidateSiteCore;
 use Phake;
-use Phake_IMock;
 use PHPUnit_Framework_TestCase;
 
 class ValidateSiteCoreTest extends PHPUnit_Framework_TestCase
 {
-    /** @var ValidateSiteCore|Phake_IMock */
+    /** @var ValidateSiteCore */
     private $oValidateSite;
 
     protected function setUp(): void
