@@ -33,7 +33,7 @@ class Contact extends Core
      *
      * @return integer Number of recipients who were accepted for delivery.
      *
-     * @throws \PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception
+     * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
     public function sendMessage()
     {
@@ -50,10 +50,8 @@ class Contact extends Core
      * Send the email.
      *
      * @return int Number of recipients who were accepted for delivery.
-     *
-     * @throws \PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
-    protected function goMail()
+    private function goMail()
     {
         $this->view->last_name = t('Last Name: %0%', $this->httpRequest->post('last_name'));
         $this->view->first_name = t('First Name: %0%', $this->httpRequest->post('first_name'));
