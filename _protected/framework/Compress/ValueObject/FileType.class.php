@@ -32,7 +32,10 @@ class FileType
     {
         if (!$this->isValid($sFileType)) {
             throw new InvalidFileTypeException(
-                sprintf('The filetype is invalid. Must be "%s".', implode('" or "', self::VALID_TYPES))
+                sprintf(
+                    'The filetype is invalid. Must be "%s".',
+                    implode('" or "', self::VALID_TYPES)
+                )
             );
         }
 
