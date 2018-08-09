@@ -102,7 +102,13 @@ class Security
      *
      * @return bool Returns TRUE if attempts are allowed, FALSE otherwise.
      */
-    public function checkLoginAttempt($iMaxAttempts, $iAttemptTime, $sEmail, PH7Tpl $oView, $sTable = DbTableName::MEMBER)
+    public function checkLoginAttempt(
+        $iMaxAttempts,
+        $iAttemptTime,
+        $sEmail,
+        PH7Tpl $oView,
+        $sTable = DbTableName::MEMBER
+    )
     {
         Various::checkModelTable($sTable);
 

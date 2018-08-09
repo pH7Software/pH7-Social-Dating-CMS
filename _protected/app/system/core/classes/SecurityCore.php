@@ -31,12 +31,7 @@ class SecurityCore
     {
         Various::checkModelTable($sTable);
 
-        // Get the first name of the user from their email
-        $oUserModel = new UserCoreModel;
-        $iProfileId = $oUserModel->getId($sTo, null, $sTable);
-        $sFirstName = $oUserModel->getFirstName($iProfileId, $sTable);
-        unset($oUserModel);
-
+        $sFirstName = $this->getUserFirstNameFromEmail($sTo, $sTable);
         $sForgotPwdLink = Uri::get('lost-password', 'main', 'forgot', Various::convertTableToMod($sTable));
 
         $oView->content = t('Dear, %0%', $sFirstName) . '<br />' .
@@ -47,7 +42,10 @@ class SecurityCore
             t('We also recommend that you change the password of your emailbox, because it is with this emalbox we send a potential new password in case you forget it.') . '</li></ol><br /><hr />' .
             t('Have a nice day!');
 
-        $sMessageHtml = $oView->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/alert_login_attempt.tpl', $sTo);
+        $sMessageHtml = $oView->parseMail(
+            PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/alert_login_attempt.tpl',
+            $sTo
+        );
 
         $aInfo = [
             'to' => $sTo,
@@ -55,5 +53,23 @@ class SecurityCore
         ];
 
         (new Mail)->send($aInfo, $sMessageHtml);
+    }
+
+    /**
+     * Get the first name of the user from their email.
+     *
+     * @param string $sEmail
+     * @param string $sTable
+     *
+     * @return string
+     */
+    private function getUserFirstNameFromEmail($sEmail, $sTable)
+    {
+        $oUserModel = new UserCoreModel;
+        $iProfileId = $oUserModel->getId($sEmail, null, $sTable);
+        $sFirstName = $oUserModel->getFirstName($iProfileId, $sTable);
+        unset($oUserModel);
+
+        return $sFirstName;
     }
 }
