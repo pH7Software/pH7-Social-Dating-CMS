@@ -41,6 +41,7 @@
                 {/if}
             </header>
             <!-- End Header -->
+            <div id="particles-js"></div>
 
             <div class="progress">
                 <div

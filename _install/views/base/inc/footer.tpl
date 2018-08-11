@@ -8,5 +8,7 @@
             </footer>
             <!-- End Footer -->
         </div>
+        <script src="{$smarty.const.PH7_URL_INSTALL}static/js/particles.js"></script>
+        <script src="{$smarty.const.PH7_URL_INSTALL}static/js/common.js"></script>
     </body>
 </html>
