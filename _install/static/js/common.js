@@ -4,7 +4,7 @@ particlesJS('particles-js', {
             "value": 500
         },
         "color": {
-            "value": "#ccc"
+            "value": "#ddd"
         },
         "size": {
             "value": 5,
