@@ -16,7 +16,7 @@ particlesJS('particles-js', {
             "color": "#ddd"
         },
         "move": {
-            "speed": 2
+            "speed": 5
         }
     }
 });
