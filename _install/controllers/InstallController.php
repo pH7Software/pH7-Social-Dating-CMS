@@ -483,29 +483,31 @@ class InstallController extends Controller
     /********************* STEP 7 *********************/
     public function finish()
     {
-        @require_once PH7_ROOT_PUBLIC . '_constants.php';
+        $sConstantsPath = PH7_ROOT_PUBLIC . '_constants.php';
+        if (is_file($sConstantsPath)) {
+            require_once $sConstantsPath;
 
-        if ($this->canEmailBeSent()) {
-            $this->sendWelcomeEmail();
+            if ($this->canEmailBeSent()) {
+                $this->sendWelcomeEmail();
 
-            $this->oView->assign('admin_login_email', $_SESSION['val']['admin_login_email']);
-            $this->oView->assign('admin_username', $_SESSION['val']['admin_username']);
+                $this->oView->assign('admin_login_email', $_SESSION['val']['admin_login_email']);
+                $this->oView->assign('admin_username', $_SESSION['val']['admin_username']);
+            }
+
+            $this->removeSessions();
+            $this->removeCookies();
+
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['confirm_remove_install'])) {
+                remove_install_dir();
+                clearstatcache(); // We remove the files status cache as the "_install" folder doesn't exist anymore by now.
+                exit(header('Location: ' . PH7_URL_ROOT));
+            }
+
+            $this->oView->assign('sept_number', 7);
+            $this->oView->display('finish.tpl');
+        } else {
+            redirect(PH7_URL_SLUG_INSTALL . 'config_path');
         }
-
-        $this->removeSessions();
-        $this->removeCookies();
-
-        if (
-            $_SERVER['REQUEST_METHOD'] == 'POST' &&
-            !empty($_POST['confirm_remove_install'])
-        ) {
-            remove_install_dir();
-            clearstatcache(); // We remove the files status cache as the "_install" folder doesn't exist anymore by now.
-            exit(header('Location: ' . PH7_URL_ROOT));
-        }
-
-        $this->oView->assign('sept_number', 7);
-        $this->oView->display('finish.tpl');
     }
 
     /**
