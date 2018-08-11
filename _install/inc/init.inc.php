@@ -24,8 +24,7 @@ $sMainCtrlClass = MainController::class;
 $sAction = !empty($_GET['a']) ? $_GET['a'] : 'index';
 
 if (is_file(PH7_ROOT_PUBLIC . '_constants.php') &&
-    $sCtrlName === 'InstallController' &&
-    ($sAction === 'index' || $sAction === 'license')
+    $sCtrlName === 'InstallController' && in_array($sAction, array('index', 'license'))
 ) {
     exit('Your site is already installed.<br /> If you want to redo a clean installation, please delete your "_constants.php" file and delete all the content of your database.');
 }
