@@ -49,12 +49,15 @@ class AdminController extends MainController
 
         if (isset($iNoteId) && $this->oNoteModel->approved($iNoteId)) {
             Note::clearCache();
-            $this->sMsg = t('The Note has been approved!');
+            $sMsg = t('The Note has been approved!');
         } else {
-            $this->sMsg = t('Oops! The Note could not be approved!');
+            $sMsg = t('Oops! The Note could not be approved!');
         }
 
-        Header::redirect(Uri::get('note', 'admin', 'unmoderated'), $this->sMsg);
+        Header::redirect(
+            Uri::get('note', 'admin', 'unmoderated'),
+            $sMsg
+        );
     }
 
     public function disapproved()
@@ -63,14 +66,14 @@ class AdminController extends MainController
 
         if (isset($iNoteId) && $this->oNoteModel->approved($iNoteId, 0)) {
             Note::clearCache();
-            $this->sMsg = t('The Note has been approved!');
+            $sMsg = t('The Note has been approved!');
         } else {
-            $this->sMsg = t('Oops! The Note could not be approved!');
+            $sMsg = t('Oops! The Note could not be approved!');
         }
 
         Header::redirect(
             Uri::get('note', 'main', 'index'),
-            $this->sMsg
+            $sMsg
         );
     }
 }
