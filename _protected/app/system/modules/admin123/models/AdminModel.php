@@ -117,7 +117,11 @@ class AdminModel extends AdminCoreModel
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::ADMIN) . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
-        (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+        if (ctype_digit($mLooking)) {
+            $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
+        } else {
+            $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+        }
 
         if (!$bCount) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);

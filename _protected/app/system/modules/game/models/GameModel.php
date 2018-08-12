@@ -74,8 +74,10 @@ class GameModel extends GameCoreModel
         $sSqlSelect = (!$bCount) ? 'g.*, c.*' : 'COUNT(g.gameId) AS totalGames';
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::GAME) . 'AS g LEFT JOIN ' . Db::prefix(DbTableName::GAME_CATEGORY) . 'AS c ON g.categoryId = c.categoryId
-        WHERE c.name LIKE :name' . $sSqlOrder . $sSqlLimit);
+        $sSql = 'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::GAME) . 'AS g LEFT JOIN ' .
+            Db::prefix(DbTableName::GAME_CATEGORY) .
+            'AS c ON g.categoryId = c.categoryId WHERE c.name LIKE :name' . $sSqlOrder . $sSqlLimit;
+        $rStmt = Db::getInstance()->prepare($sSql);
 
         $rStmt->bindValue(':name', '%' . $sCategoryName . '%', \PDO::PARAM_STR);
 
@@ -232,7 +234,9 @@ class GameModel extends GameCoreModel
 
     public function add(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::GAME) . '(categoryId, name, title, description, keywords, thumb, file) VALUES(:categoryId, :name, :title, :description, :keywords, :thumb, :file)');
+        $sSql = 'INSERT INTO' . Db::prefix(DbTableName::GAME) .
+            '(categoryId, name, title, description, keywords, thumb, file) VALUES(:categoryId, :name, :title, :description, :keywords, :thumb, :file)';
+        $rStmt = Db::getInstance()->prepare($sSql);
         $rStmt->bindValue(':categoryId', $aData['category_id'], \PDO::PARAM_INT);
         $rStmt->bindValue(':name', $aData['name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':title', $aData['title'], \PDO::PARAM_STR);

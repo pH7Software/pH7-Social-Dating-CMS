@@ -58,7 +58,8 @@ class MainController extends Controller
     public function index()
     {
         $this->view->total_pages = $this->oPage->getTotalPages(
-            $this->oGameModel->totalGames(), self::GAMES_PER_PAGE
+            $this->oGameModel->totalGames(),
+            self::GAMES_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oGames = $this->oGameModel->get(
@@ -183,7 +184,8 @@ class MainController extends Controller
         );
 
         $this->view->total_pages = $this->oPage->getTotalPages(
-            $this->iTotalGames, self::GAMES_PER_PAGE
+            $this->iTotalGames,
+            self::GAMES_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
 
@@ -247,16 +249,31 @@ class MainController extends Controller
     protected function setMenuVars()
     {
         $this->view->top_views = $this->oGameModel->get(
-            null, null, 0, self::ITEMS_MENU_TOP_VIEWS, SearchCoreModel::VIEWS
+            null,
+            null,
+            0,
+            self::ITEMS_MENU_TOP_VIEWS,
+            SearchCoreModel::VIEWS
         );
         $this->view->top_rating = $this->oGameModel->get(
-            null, null, 0, self::ITEMS_MENU_TOP_RATING, SearchCoreModel::RATING
+            null,
+            null,
+            0,
+            self::ITEMS_MENU_TOP_RATING,
+            SearchCoreModel::RATING
         );
         $this->view->latest = $this->oGameModel->get(
-            null, null, 0, self::ITEMS_MENU_LATEST, SearchCoreModel::ADDED_DATE
+            null,
+            null,
+            0,
+            self::ITEMS_MENU_LATEST,
+            SearchCoreModel::ADDED_DATE
         );
         $this->view->categories = $this->oGameModel->getCategory(
-            null, 0, self::ITEMS_MENU_CATEGORIES, true
+            null,
+            0,
+            self::ITEMS_MENU_CATEGORIES,
+            true
         );
     }
 

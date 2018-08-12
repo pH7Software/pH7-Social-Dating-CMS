@@ -236,7 +236,8 @@ class MainController extends Controller
         );
 
         $this->view->top_rating = $this->oBlogModel->getPosts(
-            0, self::ITEMS_MENU_TOP_RATING,
+            0,
+            self::ITEMS_MENU_TOP_RATING,
             SearchCoreModel::RATING
         );
 
