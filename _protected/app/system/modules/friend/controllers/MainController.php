@@ -96,10 +96,21 @@ class MainController extends Controller
 
     public function index()
     {
-        $this->iTotalFriends = $this->oFriendModel->get($this->iId, null, $this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
-        $this->view->total_pages = $this->oPage->getTotalPages(
-            $this->iTotalFriends, self::MAX_FRIEND_PER_PAGE
+        $this->iTotalFriends = $this->oFriendModel->get(
+            $this->iId,
+            null,
+            $this->httpRequest->get('looking'),
+            true,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            null,
+            null
         );
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->iTotalFriends,
+            self::MAX_FRIEND_PER_PAGE
+        );
+
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oFriend = $this->oFriendModel->get(
