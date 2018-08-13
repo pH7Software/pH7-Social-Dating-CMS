@@ -26,7 +26,6 @@ class EditNoteFormProcess extends Form
         $oNoteModel = new NoteModel;
         $iNoteId = $this->httpRequest->get('id');
         $sPostId = $oNoteModel->getPostId($iNoteId);
-        $sUsername = $this->session->get('member_username');
         $iProfileId = $this->session->get('member_id');
         $oPost = $oNoteModel->readPost($sPostId, $iProfileId);
 
@@ -96,16 +95,7 @@ class EditNoteFormProcess extends Form
 
         Note::clearCache();
 
-        if ($iApproved === 0) {
-            $sMsg = t('Your updated note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
-        } else {
-            $sMsg = t('Post successfully updated!');
-        }
-
-        Header::redirect(
-            Uri::get('note', 'main', 'read', $sUsername . ',' . $sPostId),
-            $sMsg
-        );
+        $this->redirectToPostPage($sPostId, $iApproved);
     }
 
     /**
@@ -136,5 +126,28 @@ class EditNoteFormProcess extends Form
         }
 
         return true;
+    }
+
+    /**
+     * @param string $sPostId
+     * @param int $iApproved
+     */
+    private function redirectToPostPage($sPostId, $iApproved)
+    {
+        if ($iApproved === 0) {
+            $sMsg = t('Your updated note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
+        } else {
+            $sMsg = t('Post successfully updated!');
+        }
+
+        Header::redirect(
+            Uri::get(
+                'note',
+                'main',
+                'read',
+                $this->session->get('member_username') . ',' . $sPostId
+            ),
+            $sMsg
+        );
     }
 }

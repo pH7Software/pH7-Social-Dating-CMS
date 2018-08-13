@@ -55,10 +55,8 @@ class AdminBlogFormProcess extends Form
                 $oBlog->setThumb($oPost, $this->file);
 
                 Blog::clearCache();
-                Header::redirect(
-                    Uri::get('blog', 'main', 'read', $sPostId),
-                    t('Post successfully created!')
-                );
+
+                $this->redirectToPostPage($sPostId);
             }
         }
     }
@@ -80,5 +78,16 @@ class AdminBlogFormProcess extends Form
         foreach ($this->httpRequest->post('category_id', Http::NO_CLEAN) as $iCategoryId) {
             $oBlogModel->addCategory($iCategoryId, $iBlogId);
         }
+    }
+
+    /**
+     * @param string $sPostId
+     */
+    private function redirectToPostPage($sPostId)
+    {
+        Header::redirect(
+            Uri::get('blog', 'main', 'read', $sPostId),
+            t('Post successfully created!')
+        );
     }
 }

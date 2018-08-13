@@ -68,18 +68,10 @@ class NoteFormProcess extends Form
                 /*** Set the thumbnail if there's one ***/
                 $oPost = $oNoteModel->readPost($aData['post_id'], $iProfileId, null);
                 $oNote->setThumb($oPost, $oNoteModel, $this->file);
+
                 Note::clearCache();
 
-                if ($iApproved === 0) {
-                    $sMsg = t('Your note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
-                } else {
-                    $sMsg = t('Post successfully created!');
-                }
-
-                Header::redirect(
-                    Uri::get('note', 'main', 'read', $this->session->get('member_username') . ',' . $sPostId),
-                    $sMsg
-                );
+                $this->redirectToPostPage($sPostId, $iApproved);
             }
         }
     }
@@ -102,5 +94,28 @@ class NoteFormProcess extends Form
         foreach ($this->httpRequest->post('category_id', Http::NO_CLEAN) as $iCategoryId) {
             $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
         }
+    }
+
+    /**
+     * @param string $sPostId
+     * @param int $iApproved
+     */
+    private function redirectToPostPage($sPostId, $iApproved)
+    {
+        if ($iApproved === 0) {
+            $sMsg = t('Your note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
+        } else {
+            $sMsg = t('Post successfully created!');
+        }
+
+        Header::redirect(
+            Uri::get(
+                'note',
+                'main',
+                'read',
+                $this->session->get('member_username') . ',' . $sPostId
+            ),
+            $sMsg
+        );
     }
 }

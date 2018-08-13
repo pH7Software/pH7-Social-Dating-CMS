@@ -87,7 +87,7 @@ class EditAdminBlogFormProcess extends Form
 
         Blog::clearCache();
 
-        Header::redirect(Uri::get('blog', 'main', 'read', $sPostId), t('Post successfully updated!'));
+        $this->redirectToPostPage($sPostId);
     }
 
     /**
@@ -111,5 +111,21 @@ class EditAdminBlogFormProcess extends Form
                 $oBlogModel->addCategory($iCategoryId, $iBlogId);
             }
         }
+    }
+
+    /**
+     * @param string $sPostId
+     */
+    private function redirectToPostPage($sPostId)
+    {
+        Header::redirect(
+            Uri::get(
+                'blog',
+                'main',
+                'read',
+                $sPostId
+            ),
+            t('Post successfully updated!')
+        );
     }
 }
