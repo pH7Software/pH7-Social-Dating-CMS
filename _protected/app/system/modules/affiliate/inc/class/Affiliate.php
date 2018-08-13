@@ -15,6 +15,8 @@ use PH7\Framework\Url\Header;
 
 class Affiliate extends AffiliateCore
 {
+    const COOKIE_LIFETIME = 3600 * 24 * 7;
+
     /**
      * Logout function for affiliate.
      *
@@ -66,6 +68,10 @@ class Affiliate extends AffiliateCore
      */
     private function setCookie($iAffId, Cookie $oCookie)
     {
-        $oCookie->set(static::COOKIE_NAME, $iAffId, 3600 * 24 * 7);
+        $oCookie->set(
+            static::COOKIE_NAME,
+            $iAffId,
+            self::COOKIE_LIFETIME
+        );
     }
 }
