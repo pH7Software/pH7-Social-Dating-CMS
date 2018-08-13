@@ -24,7 +24,10 @@ class Affiliate extends AffiliateCore
     {
         (new Session)->destroy();
 
-        Header::redirect(Uri::get('affiliate', 'home', 'index'), t('You are successfully logged out.'));
+        Header::redirect(
+            Uri::get('affiliate', 'home', 'index'),
+            t('You are successfully logged out.')
+        );
     }
 
     /**
