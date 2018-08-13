@@ -12,6 +12,8 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class NoteDesign extends WriteDesignCoreModel
 {
+    const POST_AVATAR_SIZE = 100;
+
     /**
      * @param object $oNoteModel
      *
@@ -27,7 +29,7 @@ class NoteDesign extends WriteDesignCoreModel
                 $oNoteModel->username,
                 $oNoteModel->firstName,
                 $oNoteModel->sex,
-                100
+                self::POST_AVATAR_SIZE
             );
         }
         echo '</div>';
