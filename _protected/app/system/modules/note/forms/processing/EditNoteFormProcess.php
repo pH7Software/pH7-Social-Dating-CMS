@@ -111,7 +111,7 @@ class EditNoteFormProcess extends Form
      * @internal WARNING: Be careful, you should use Http::NO_CLEAN constant,
      * otherwise Http::post() method removes the special tags and damages the SET function SQL for entry into the database.
      */
-    protected function updateCategories($iNoteId, $iProfileId, stdClass $oPost, NoteModel $oNoteModel)
+    private function updateCategories($iNoteId, $iProfileId, stdClass $oPost, NoteModel $oNoteModel)
     {
         if (!$this->str->equals($this->httpRequest->post('category_id', Http::NO_CLEAN), $oPost->categoryId)) {
             if (count($this->httpRequest->post('category_id', Http::NO_CLEAN)) > Note::MAX_CATEGORY_ALLOWED) {

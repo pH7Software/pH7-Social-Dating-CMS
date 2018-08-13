@@ -102,7 +102,7 @@ class EditAdminBlogFormProcess extends Form
      * @internal WARNING: Be careful, you should use Http::NO_CLEAN constant,
      * otherwise Http::post() method removes the special tags and damages the SET function SQL for entry into the database.
      */
-    protected function updateCategories($iBlogId, stdClass $oPost, BlogModel $oBlogModel)
+    private function updateCategories($iBlogId, stdClass $oPost, BlogModel $oBlogModel)
     {
         if (!$this->str->equals($this->httpRequest->post('category_id', Http::NO_CLEAN), $oPost->categoryId)) {
             $oBlogModel->deleteCategory($iBlogId);

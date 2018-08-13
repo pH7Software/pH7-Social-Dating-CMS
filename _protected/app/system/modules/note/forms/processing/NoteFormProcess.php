@@ -87,7 +87,7 @@ class NoteFormProcess extends Form
      * @internal WARNING: Be careful, you should use Http::NO_CLEAN constant,
      * otherwise Http::post() method removes the special tags and damages the SQL queries for entry into the database.
      */
-    protected function setCategories($iProfileId, NoteModel $oNoteModel)
+    private function setCategories($iProfileId, NoteModel $oNoteModel)
     {
         $iNoteId = Db::getInstance()->lastInsertId();
 

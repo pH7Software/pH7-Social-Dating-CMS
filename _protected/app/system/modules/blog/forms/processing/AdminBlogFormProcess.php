@@ -71,7 +71,7 @@ class AdminBlogFormProcess extends Form
      * @internal WARNING: Be careful, you should use Http::NO_CLEAN constant,
      * otherwise Http::post() method removes the special tags and damages the SQL queries for entry into the database.
      */
-    protected function setCategories(BlogModel $oBlogModel)
+    private function setCategories(BlogModel $oBlogModel)
     {
         $iBlogId = Db::getInstance()->lastInsertId();
 
