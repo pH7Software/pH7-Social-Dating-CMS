@@ -60,9 +60,7 @@ class MainController extends Controller
 
         $this->view->member_id = $this->iProfileId;
 
-        // Add Css Style Content and JavaScript for Mail and Form functions
-        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'mail.css');
-        $this->design->addJs(PH7_DOT, PH7_STATIC . PH7_JS . 'form.js,' . PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS . 'mail.js');
+        $this->addAssetFiles();
     }
 
     public function index()
@@ -357,7 +355,10 @@ class MainController extends Controller
             }
         }
 
-        Header::redirect(Uri::get('mail', 'main', 'inbox'), $this->sMsg);
+        Header::redirect(
+            Uri::get('mail', 'main', 'inbox'),
+            $this->sMsg
+        );
     }
 
     public function setRestor()
@@ -374,7 +375,10 @@ class MainController extends Controller
             $this->sMsg = t("Your message doesn't exist anymore in your inbox.");
         }
 
-        Header::redirect(Uri::get('mail', 'main', 'trash'), $this->sMsg, $this->getStatusType());
+        Header::redirect(
+            Uri::get('mail', 'main', 'trash'),
+            $this->sMsg, $this->getStatusType()
+        );
     }
 
     public function setRestorAll()
@@ -395,7 +399,10 @@ class MainController extends Controller
             }
         }
 
-        Header::redirect(Uri::get('mail', 'main', 'trash'), $this->sMsg);
+        Header::redirect(
+            Uri::get('mail', 'main', 'trash'),
+            $this->sMsg
+        );
     }
 
     public function setDelete()
@@ -462,6 +469,24 @@ class MainController extends Controller
             t('Please <a href="%0%">research with different keywords</a>.',
                 Uri::get('mail', 'main', 'search')
             );
+    }
+
+    /**
+     * Add stylesheets and JavaScript for Mail and Form.
+     *
+     * @return void
+     */
+    private function addAssetFiles()
+    {
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
+            'mail.css'
+        );
+
+        $this->design->addJs(
+            PH7_DOT,
+            PH7_STATIC . PH7_JS . 'form.js,' . PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS . 'mail.js'
+        );
     }
 
     /**

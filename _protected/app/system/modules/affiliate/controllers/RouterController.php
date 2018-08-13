@@ -25,6 +25,18 @@ class RouterController extends Controller
             }
         }
 
-        Header::redirect($this->registry->site_url . $this->httpRequest->get('action'));
+        $this->redirectToWebsite();
+    }
+
+    /**
+     * Redirect the user to the website's homepage or a specific page if GET 'action' is specified.
+     *
+     * @return void
+     */
+    private function redirectToWebsite()
+    {
+        $sUrl = $this->registry->site_url . $this->httpRequest->get('action');
+
+        Header::redirect($sUrl);
     }
 }
