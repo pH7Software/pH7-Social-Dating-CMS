@@ -47,10 +47,10 @@ class Affiliate extends AffiliateCore
         $iAffId = $oAffModel->getId(null, $sUsername, DbTableName::AFFILIATE);
 
         if (!$oCookie->exists(static::COOKIE_NAME)) {
-            $this->_setCookie($iAffId, $oCookie); // Set a week
+            $this->setCookie($iAffId, $oCookie); // Set a week
             $oAffModel->addRefer($iAffId); // Add a reference only for new clicks (if the cookie does not exist)
         } else {
-            $this->_setCookie($iAffId, $oCookie); // Add an extra week
+            $this->setCookie($iAffId, $oCookie); // Add an extra week
         }
 
         unset($oAffModel, $oCookie);
@@ -64,7 +64,7 @@ class Affiliate extends AffiliateCore
      *
      * @return void
      */
-    private function _setCookie($iAffId, Cookie $oCookie)
+    private function setCookie($iAffId, Cookie $oCookie)
     {
         $oCookie->set(static::COOKIE_NAME, $iAffId, 3600 * 24 * 7);
     }
