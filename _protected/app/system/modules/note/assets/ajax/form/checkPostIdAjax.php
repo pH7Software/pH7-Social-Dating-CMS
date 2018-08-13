@@ -7,6 +7,7 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Request\Http;
@@ -21,4 +22,3 @@ if ($oHttpRequest->postExists('post_id')) {
 }
 
 echo json_encode(['status' => $iStatus]);
-unset($oHttpRequest);

@@ -23,5 +23,3 @@ if ($oHttpRequest->postExists('username')) {
 }
 
 echo json_encode(['status' => $iStatus]);
-
-unset($oHttpRequest);
