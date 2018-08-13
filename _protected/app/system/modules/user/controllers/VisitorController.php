@@ -39,10 +39,7 @@ class VisitorController extends Controller
     {
         parent::__construct();
 
-        /**
-         *  If the user is logged in, we get their 'member_username' session, otherwise we get the username from the URL
-         */
-        $this->sUsername = !$this->httpRequest->getExists('username') ? $this->session->get('member_username') : $this->httpRequest->get('username');
+        $this->sUsername = $this->getUsername();
 
         /**
          * FIRST USERNAME LETTER IN UPPERCASE
@@ -106,5 +103,19 @@ class VisitorController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
         $this->output();
+    }
+
+    /**
+     * If the user is logged in, get 'member_username' session, otherwise get username from URL.
+     *
+     * @return string
+     */
+    private function getUsername()
+    {
+        if (!$this->httpRequest->getExists('username')) {
+            return $this->session->get('member_username');
+        }
+
+        return $this->httpRequest->get('username');
     }
 }
