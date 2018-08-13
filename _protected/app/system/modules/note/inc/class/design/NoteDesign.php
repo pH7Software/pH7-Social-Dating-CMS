@@ -23,7 +23,12 @@ class NoteDesign extends WriteDesignCoreModel
         if (!empty($oNoteModel->thumb)) {
             echo '<a href="', Uri::get('note', 'main', 'read', $oNoteModel->username . ',' . $oNoteModel->postId), '" class="pic thumb" data-load="ajax"><img src="', PH7_URL_DATA_SYS_MOD, 'note/', PH7_IMG, $oNoteModel->username, PH7_SH, $oNoteModel->thumb, '" alt="', $oNoteModel->pageTitle, '" title="', $oNoteModel->pageTitle, '" /></a>';
         } else {
-            (new AvatarDesignCore)->get($oNoteModel->username, $oNoteModel->firstName, $oNoteModel->sex, 100);
+            (new AvatarDesignCore)->get(
+                $oNoteModel->username,
+                $oNoteModel->firstName,
+                $oNoteModel->sex,
+                100
+            );
         }
         echo '</div>';
     }

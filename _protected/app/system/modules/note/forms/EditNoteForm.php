@@ -38,7 +38,11 @@ class EditNoteForm
         $oPost = $oNoteModel->readPost($sPostId, $iProfileId);
 
         if (!empty($oPost) && (new Str)->equals($iNoteId, (int)$oPost->noteId)) {
-            $oCategoryData = $oNoteModel->getCategory(null, 0, self::MAX_CATEGORIES);
+            $oCategoryData = $oNoteModel->getCategory(
+                null,
+                0,
+                self::MAX_CATEGORIES
+            );
 
             $aCategoryNames = [];
             foreach ($oCategoryData as $oCategory) {
@@ -46,7 +50,11 @@ class EditNoteForm
             }
 
             $aSelectedCategories = [];
-            $oCategoryIds = $oNoteModel->getCategory($iNoteId, 0, self::MAX_CATEGORIES);
+            $oCategoryIds = $oNoteModel->getCategory(
+                $iNoteId,
+                0,
+                self::MAX_CATEGORIES
+            );
             unset($oNoteModel);
 
             foreach ($oCategoryIds as $oCategory) {

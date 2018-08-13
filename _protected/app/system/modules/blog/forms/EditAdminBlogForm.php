@@ -34,7 +34,11 @@ class EditAdminBlogForm
         $oPost = $oBlogModel->readPost($sPostId);
 
         if (!empty($oPost) && (new Str)->equals($iBlogId, (int)$oPost->blogId)) {
-            $oCategoryData = $oBlogModel->getCategory(null, 0, self::MAX_CATEGORIES);
+            $oCategoryData = $oBlogModel->getCategory(
+                null,
+                0,
+                self::MAX_CATEGORIES
+            );
 
             $aCategoryNames = [];
             foreach ($oCategoryData as $oCategory) {
@@ -42,7 +46,11 @@ class EditAdminBlogForm
             }
 
             $aSelectedCategories = [];
-            $oCategoryIds = $oBlogModel->getCategory($iBlogId, 0, self::MAX_CATEGORIES);
+            $oCategoryIds = $oBlogModel->getCategory(
+                $iBlogId,
+                0,
+                self::MAX_CATEGORIES
+            );
             unset($oBlogModel);
 
             foreach ($oCategoryIds as $oCategory) {

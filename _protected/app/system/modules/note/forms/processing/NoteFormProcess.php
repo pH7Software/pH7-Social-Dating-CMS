@@ -56,7 +56,10 @@ class NoteFormProcess extends Form
             ];
 
             if (count($this->httpRequest->post('category_id')) > Note::MAX_CATEGORY_ALLOWED) {
-                \PFBC\Form::setError('form_note', t('You cannot select more than %0% categories.', Note::MAX_CATEGORY_ALLOWED));
+                \PFBC\Form::setError(
+                    'form_note',
+                    t('You cannot select more than %0% categories.', Note::MAX_CATEGORY_ALLOWED)
+                );
             } elseif (!$oNoteModel->addPost($aData)) {
                 \PFBC\Form::setError('form_note', t('An error occurred while adding the post.'));
             } else {

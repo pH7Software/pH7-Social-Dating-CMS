@@ -25,7 +25,11 @@ class AdminBlogForm
             Header::redirect();
         }
 
-        $oCategoryData = (new BlogModel)->getCategory(null, 0, self::MAX_CATEGORIES);
+        $oCategoryData = (new BlogModel)->getCategory(
+            null,
+            0,
+            self::MAX_CATEGORIES
+        );
 
         $aCategoryNames = [];
         foreach ($oCategoryData as $oCategory) {

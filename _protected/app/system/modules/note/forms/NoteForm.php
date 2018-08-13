@@ -27,7 +27,11 @@ class NoteForm
             Header::redirect();
         }
 
-        $oCategoryData = (new NoteModel)->getCategory(null, 0, self::MAX_CATEGORIES);
+        $oCategoryData = (new NoteModel)->getCategory(
+            null,
+            0,
+            self::MAX_CATEGORIES
+        );
 
         $aCategoryNames = [];
         foreach ($oCategoryData as $oCategory) {
