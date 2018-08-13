@@ -42,7 +42,7 @@ class VisitorController extends Controller
         /**
          *  If the user is logged in, we get their 'member_username' session, otherwise we get the username from the URL
          */
-        $this->sUsername = (!$this->httpRequest->getExists('username')) ? $this->session->get('member_username') : $this->httpRequest->get('username');
+        $this->sUsername = !$this->httpRequest->getExists('username') ? $this->session->get('member_username') : $this->httpRequest->get('username');
 
         /**
          * FIRST USERNAME LETTER IN UPPERCASE
@@ -81,7 +81,7 @@ class VisitorController extends Controller
         $this->iTotalVisitors = $this->oVisitorModel->get($this->httpRequest->get('looking'), true, SearchCoreModel::LAST_VISIT, SearchCoreModel::DESC, null, null);
         $oVisitor = $this->oVisitorModel->get($this->httpRequest->get('looking'), false, SearchCoreModel::LAST_VISIT, SearchCoreModel::DESC, $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage());
 
-        $this->view->user_views_setting = (UserCore::auth()) ? $this->oUserModel->getPrivacySetting($this->session->get('member_id'))->userSaveViews : '';
+        $this->view->user_views_setting = UserCore::auth() ? $this->oUserModel->getPrivacySetting($this->session->get('member_id'))->userSaveViews : '';
 
         if (empty($oVisitor)) {
             $this->sTitle = t('No one has seen "%0%"', $this->sUsername);
