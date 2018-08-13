@@ -14,7 +14,7 @@ class SearchBlogForm
 {
     public static function display($iWidth = null)
     {
-        $aOptions = (!empty($iWidth)) ? ['style' => 'width:' . ((int)$iWidth * 1.09) . 'px'] : null;
+        $aOptions = !empty($iWidth) ? ['style' => 'width:' . ((int)$iWidth * 1.09) . 'px'] : null;
 
         $oForm = new \PFBC\Form('form_search', $iWidth);
         $oForm->configure(['action' => Uri::get('blog', 'main', 'result') . PH7_SH, 'method' => 'get']);
