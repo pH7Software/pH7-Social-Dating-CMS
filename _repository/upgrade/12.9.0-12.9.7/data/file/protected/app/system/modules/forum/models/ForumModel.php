@@ -525,13 +525,7 @@ class ForumModel extends ForumCoreModel
      */
     public function isDuplicateTopic($iProfileId, $sCheckMsg)
     {
-        return Spam::detectDuplicate(
-            $sCheckMsg,
-            'message',
-            'topicId',
-            $iProfileId,
-            DbTableName::FORUM_TOPIC
-        );
+        return Spam::detectDuplicate($sCheckMsg, 'message', 'topicId', $iProfileId, DbTableName::FORUM_TOPIC);
     }
 
     /**
@@ -544,13 +538,7 @@ class ForumModel extends ForumCoreModel
      */
     public function isDuplicateMessage($iProfileId, $sCheckMsg)
     {
-        return Spam::detectDuplicate(
-            $sCheckMsg,
-            'message',
-            'messageId',
-            $iProfileId,
-            DbTableName::FORUM_MESSAGE
-        );
+        return Spam::detectDuplicate($sCheckMsg, 'message', 'messageId', $iProfileId, DbTableName::FORUM_MESSAGE);
     }
 
     /**
