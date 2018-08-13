@@ -25,9 +25,7 @@ $sCtrlClass = 'PH7\\' . $sCtrlName;
 $sMainCtrlClass = MainController::class;
 $sAction = !empty($_GET['a']) ? $_GET['a'] : 'index';
 
-if (is_file(PH7_ROOT_PUBLIC . '_constants.php') &&
-    $sCtrlName === 'InstallController' && in_array($sAction, array('index', 'license'))
-) {
+if (is_software_installed($sCtrlName, $sAction)) {
     exit(WEBSITE_ALREADY_INSTALLED_MESSAGE);
 }
 

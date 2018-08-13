@@ -411,6 +411,18 @@ function check_url($sUrl)
 }
 
 /**
+ * @param string $sCtrlName
+ * @param string $sAction
+ *
+ * @return bool
+ */
+function is_software_installed($sCtrlName, $sAction)
+{
+    return is_file(PH7_ROOT_PUBLIC . '_constants.php') &&
+        $sCtrlName === 'InstallController' && in_array($sAction, array('index', 'license'));
+}
+
+/**
  * Check license key.
  *
  * @param string $sKey The License Key.
