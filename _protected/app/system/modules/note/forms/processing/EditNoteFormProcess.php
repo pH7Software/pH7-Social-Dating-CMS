@@ -41,7 +41,10 @@ class EditNoteFormProcess extends Form
         }
 
         if (!$this->updateCategories($iNoteId, $iProfileId, $oPost, $oNoteModel)) {
-            \PFBC\Form::setError('form_edit_note', t('You cannot select more than %0% categories.', Note::MAX_CATEGORY_ALLOWED));
+            \PFBC\Form::setError(
+                'form_edit_note',
+                t('You cannot select more than %0% categories.', Note::MAX_CATEGORY_ALLOWED)
+            );
             return; // Stop execution of the method
         }
 
