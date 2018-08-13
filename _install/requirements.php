@@ -86,7 +86,7 @@ foreach ($aRequirementsNeeded as $sType => $aRequirements) {
     }
 }
 
-$iErrors = (!empty($aErrors)) ? count($aErrors) : 0;
+$iErrors = !empty($aErrors) ? count($aErrors) : 0;
 if ($iErrors > 0) {
     display_html_header('Requirements - pH7CMS Installation');
 
