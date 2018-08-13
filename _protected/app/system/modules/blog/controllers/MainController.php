@@ -265,7 +265,7 @@ class MainController extends Controller
                     self::MAX_CATEGORIES
                 );
 
-                if ($iTotalPostsPerCat > 0 && count($aData) < self::ITEMS_MENU_CATEGORIES) {
+                if ($iTotalPostsPerCat > 0 && count($aData) <= self::ITEMS_MENU_CATEGORIES) {
                     $oData = new stdClass();
                     $oData->totalBlogs = $iTotalPostsPerCat;
                     $oData->name = $oCategory->name;
