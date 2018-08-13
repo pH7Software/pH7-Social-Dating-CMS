@@ -57,12 +57,7 @@ class MainController extends Controller
             'friend.js'
         );
 
-        /**
-         * Assign member ID to $iMemberId class attribute
-         */
         $this->iMemberId = $this->session->get('member_id');
-
-
         $this->sUsername = $this->getUsername();
 
         /**
