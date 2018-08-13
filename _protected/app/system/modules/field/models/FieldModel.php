@@ -17,6 +17,8 @@ use PH7\Framework\Mvc\Request\Http;
 class FieldModel extends Model
 {
     const MAX_VARCHAR_LENGTH = 255;
+    const MAX_INT_LENGTH = 11;
+    const DEF_INT_LENGTH = 9;
     const FIELD_TEXTBOX_TYPE = 'textbox';
     const FIELD_NUMBER_TYPE = 'number';
     const PROFILE_ID_COLUMN = 'profileId';
@@ -157,8 +159,8 @@ class FieldModel extends Model
                 if (strlen($this->sDefVal) > $this->iLength) {
                     $this->iLength = strlen($this->sDefVal);
                 }
-                if ($this->iLength === 0 || $this->iLength > 11) {
-                    $this->iLength = 9; // Set the default maximum length value
+                if ($this->iLength === 0 || $this->iLength > self::MAX_INT_LENGTH) {
+                    $this->iLength = self::DEF_INT_LENGTH; // Set the default INT() length value
                 }
 
                 $this->sSql .= 'INT(' . $this->iLength . ')';
