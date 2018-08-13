@@ -355,7 +355,10 @@ class MainController extends Controller
             }
         }
 
-        Header::redirect(Uri::get('mail', 'main', 'inbox'), $this->sMsg);
+        Header::redirect(
+            Uri::get('mail', 'main', 'inbox'),
+            $this->sMsg
+        );
     }
 
     public function setRestor()
@@ -372,7 +375,10 @@ class MainController extends Controller
             $this->sMsg = t("Your message doesn't exist anymore in your inbox.");
         }
 
-        Header::redirect(Uri::get('mail', 'main', 'trash'), $this->sMsg, $this->getStatusType());
+        Header::redirect(
+            Uri::get('mail', 'main', 'trash'),
+            $this->sMsg, $this->getStatusType()
+        );
     }
 
     public function setRestorAll()
@@ -393,7 +399,10 @@ class MainController extends Controller
             }
         }
 
-        Header::redirect(Uri::get('mail', 'main', 'trash'), $this->sMsg);
+        Header::redirect(
+            Uri::get('mail', 'main', 'trash'),
+            $this->sMsg
+        );
     }
 
     public function setDelete()
