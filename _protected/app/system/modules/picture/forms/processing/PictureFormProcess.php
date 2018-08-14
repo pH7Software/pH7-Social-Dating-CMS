@@ -155,7 +155,7 @@ class PictureFormProcess extends Form
      *
      * @return void
      */
-    protected function checkNudityFilter($sFile)
+    private function checkNudityFilter($sFile)
     {
         if (DbConfig::getSetting('nudityFilter') && Filter::isNudity($sFile)) {
             // The photo(s) seems to be suitable for adults only, so set for moderation
