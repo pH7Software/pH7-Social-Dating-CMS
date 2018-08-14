@@ -44,7 +44,9 @@ class AlbumFormProcess extends Form
         } else {
             $this->sApproved = DbConfig::getSetting('videoManualApproval') == 0 ? '1' : '0';
 
-            $this->checkNudityFilter();
+            if ($this->sApproved === '1') {
+                $this->checkNudityFilter();
+            }
 
             $sFileName = Various::genRnd($oPicture->getFileName(), 1) . '-thumb.' . $oPicture->getExt();
 

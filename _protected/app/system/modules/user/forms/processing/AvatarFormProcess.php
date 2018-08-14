@@ -33,7 +33,10 @@ class AvatarFormProcess extends Form
             $sUsername = $this->session->get('member_username');
         }
 
-        $this->checkNudityFilter();
+        if ($this->iApproved === 1 || !AdminCore::auth()) {
+            $this->checkNudityFilter();
+        }
+
         $bAvatar = (new UserCore)->setAvatar($iProfileId, $sUsername, $_FILES['avatar']['tmp_name'], $this->iApproved);
 
         if (!$bAvatar) {

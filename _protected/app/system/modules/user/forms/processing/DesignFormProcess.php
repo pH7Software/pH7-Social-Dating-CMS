@@ -33,7 +33,9 @@ class DesignFormProcess extends Form
             $sUsername = $this->session->get('member_username');
         }
 
-        $this->checkNudityFilter();
+        if ($this->iApproved === 1 || !AdminCore::auth()) {
+            $this->checkNudityFilter();
+        }
 
         $bWallpaper = (new UserCore)->setBackground($iProfileId, $sUsername, $_FILES['wallpaper']['tmp_name'], $this->iApproved);
 

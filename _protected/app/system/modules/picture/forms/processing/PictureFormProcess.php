@@ -117,7 +117,9 @@ class PictureFormProcess extends Form
 
             $this->sApproved = DbConfig::getSetting('pictureManualApproval') == 0 ? '1' : '0';
 
-            $this->checkNudityFilter($aPhotos[$iPhotoIndex]);
+            if ($this->sApproved === '1') {
+                $this->checkNudityFilter($aPhotos[$iPhotoIndex]);
+            }
 
             // It creates a nice title if no title is specified.
             $sTitle = $this->getImageTitle($iPhotoIndex, $oPicture1);
