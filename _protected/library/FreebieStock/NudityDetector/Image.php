@@ -1,47 +1,49 @@
 <?php
 
 /**
-* @author FreebieVectors.com
-*
-* General image utilities
-*/
-class Image {
+ * @author FreebieVectors.com
+ *
+ * Modified by Pierre-Henry Soria <hello@ph7cms.com>
+ *
+ * General image utilities
+ */
+class Image
+{
+    /**
+     * Full path to the image file
+     *
+     * @var String
+     */
+    private $file;
 
     /**
-    * Full path to the image file
-    *
-    * @var String
-    */
-    var $file;
+     * Image extension
+     *
+     * @var String
+     */
+    private $extension;
 
     /**
-    * Image extension
-    *
-    * @var String
-    */
-    var $extension;
+     * Image information
+     *
+     * @var mixed
+     */
+    private $info;
 
     /**
-    * Image information
-    *
-    * @var mixed
-    */
-    var $info;
+     * Image GD PHP resource
+     *
+     * @var resource
+     */
+    private $resource;
 
     /**
-    * Image GD PHP resource
-    *
-    * @var resource
-    */
-    var $resource;
-
-    /**
-    * Constructor
-    *
-    * @param string $file File path
-    * @return Image
-    */
-    function __construct($file) {
+     * @param string $file File path
+     *
+     * @return Image
+     */
+    public function __construct($file)
+    {
         $this->file = $file;
         $this->extension = substr($file, strrpos($file, '.') + 1);
         $this->info = getimagesize($file);
@@ -50,71 +52,84 @@ class Image {
     }
 
     /**
-    * Destroy the image resource / close the file
-    *
-    */
-    public function close() {
+     * Destroy the image resource / close the file
+     *
+     */
+    public function close()
+    {
         imagedestroy($this->resource);
     }
 
     /**
-    * Get image type if it is one of: .gif, .jpg or .png
-    *
-    * @param string $file Full path to file
-    * @return string|boolean
-    */
-    static public function type($file) {
+     * Get image type if it is one of: .gif, .jpg or .png
+     *
+     * @param string $file Full path to file
+     *
+     * @return string|boolean
+     */
+    static public function type($file)
+    {
         $type = getimagesize($file);
         $type = $type[2];
-        switch($type) {
-            case IMAGETYPE_GIF:     return 'gif';
-            case IMAGETYPE_JPEG:    return 'jpg';
-            case IMAGETYPE_PNG:     return 'png';
+        switch ($type) {
+            case IMAGETYPE_GIF:
+                return 'gif';
+            case IMAGETYPE_JPEG:
+                return 'jpg';
+            case IMAGETYPE_PNG:
+                return 'png';
         }
-        return FALSE;
+        return false;
     }
 
     /**
-    * Returns an integer representation of a color
-    *
-    * @param int $r Red
-    * @param int $g Green
-    * @param int $b Blue
-    * @param int $a Alpha
-    * @return int
-    */
-    static public function color($r, $g, $b, $a = 0) {
+     * Returns an integer representation of a color
+     *
+     * @param int $r Red
+     * @param int $g Green
+     * @param int $b Blue
+     * @param int $a Alpha
+     *
+     * @return int
+     */
+    static public function color($r, $g, $b, $a = 0)
+    {
         return ($a << 24) + ($r << 16) + ($g << 8) + $b;
     }
 
     /**
-    * Get color of a pixel
-    *
-    * @param int $x X coordinate
-    * @param int $y Y coordinate
-    * @return int
-    */
-    public function colorXY($x, $y) {
+     * Get color of a pixel
+     *
+     * @param int $x X coordinate
+     * @param int $y Y coordinate
+     *
+     * @return int
+     */
+    public function colorXY($x, $y)
+    {
         return imagecolorat($this->resource, $x, $y);
     }
 
     /**
-    * Returns RGB array of pixel's color
-    *
-    * @param int $x
-    * @param int $y
-    */
-    public function rgbXY($x, $y) {
+     * Returns RGB array of pixel's color
+     *
+     * @param int $x
+     * @param int $y
+     */
+    public function rgbXY($x, $y)
+    {
         $color = $this->colorXY($x, $y);
-        return array(($color >> 16) & 0xFF, ($color >> 8) & 0xFF, $color & 0xFF);
+
+        return [($color >> 16) & 0xFF, ($color >> 8) & 0xFF, $color & 0xFF];
     }
 
     /**
-    * Create an image resource
-    *
-    */
-    public function create() {
-        switch($this->info[2]) {
+     * Create an image resource
+     *
+     */
+    public function create()
+    {
+        switch ($this->info[2]) {
             case IMAGETYPE_JPEG:
                 $this->resource = imagecreatefromjpeg($this->file);
                 break;
@@ -131,43 +146,44 @@ class Image {
     }
 
     /**
-    * Get image width
-    *
-    * @return int Image width
-    */
-    public function width() {
+     * Get image width
+     *
+     * @return int Image width
+     */
+    public function width()
+    {
         return imagesx($this->resource);
     }
 
     /**
-    * Get image heights
-    *
-    * @return int Image height
-    */
-    public function height() {
+     * Get image heights
+     *
+     * @return int Image height
+     */
+    public function height()
+    {
         return imagesy($this->resource);
     }
 
     /**
-    * Save image to file
-    *
-    * @param string $file File path
-    * @param int $type Image type constant
-    * @param int $quality JPEG compression quality from 0 to 100
-    * @param int $permissions Unix file permissions
-    */
-    public function save($file, $type = IMAGETYPE_JPEG, $quality = 75,
-        $permissions = false) {
-
+     * Save image to file
+     *
+     * @param string $file File path
+     * @param int $type Image type constant
+     * @param int $quality JPEG compression quality from 0 to 100
+     * @param int $permissions Unix file permissions
+     */
+    public function save($file, $type = IMAGETYPE_JPEG, $quality = 75, $permissions = false)
+    {
         // create directory if necessary
         $dir = dirname($file);
-        if(!file_exists($dir)) {
+        if (!file_exists($dir)) {
             $mask = umask();
             mkdir($dir, 0777, true);
             umask($mask);
         }
 
-        switch($type) {
+        switch ($type) {
             case IMAGETYPE_JPEG:
                 imagejpeg($this->resource, $file, $quality);
                 break;
@@ -183,23 +199,24 @@ class Image {
         }
 
         // change image rights
-        if($permissions !== false) chmod($file, $permissions);
+        if ($permissions !== false) chmod($file, $permissions);
 
         // for method chaining
         return $this;
     }
 
     /**
-    * Crop image
-    *
-    * @param int $x
-    * @param int $y
-    * @param int $w
-    * @param int $h
-    * @return Image
-    */
-    public function crop($x, $y, $w, $h) {
-
+     * Crop image
+     *
+     * @param int $x
+     * @param int $y
+     * @param int $w
+     * @param int $h
+     *
+     * @return Image
+     */
+    public function crop($x, $y, $w, $h)
+    {
         $new = @imagecreatetruecolor($w, $h);
 
         // This needed to deal with .png transparency
@@ -208,7 +225,7 @@ class Image {
         $transparent = imagecolorallocatealpha($new, 255, 255, 255, 127);
         imagefilledrectangle($new, 0, 0, $w, $h, $transparent);
 
-        if($new === FALSE) {
+        if ($new === false) {
             throw new Exception('Cannot Initialize new GD image stream');
             return;
         }
@@ -220,13 +237,13 @@ class Image {
     }
 
     /**
-    * Resize image
-    *
-    * @param int $width New width
-    * @param int $height New height
-    */
-    public function resize($width, $height) {
-
+     * Resize image
+     *
+     * @param int $width New width
+     * @param int $height New height
+     */
+    public function resize($width, $height)
+    {
         $new = @imagecreatetruecolor($width, $height);
 
         // This needed to deal with .png transparency
@@ -244,18 +261,20 @@ class Image {
     }
 
     /**
-    * Fit the image with the same proportion into an area
-    *
-    * @param int $max_width
-    * @param int $max_height
-    * @param int $min_width
-    * @param int $min_height
-    * @return Image
-    */
-    public function fitResize($max_width = 150, $max_height = 150, $min_width = 20, $min_height = 20) {
+     * Fit the image with the same proportion into an area
+     *
+     * @param int $max_width
+     * @param int $max_height
+     * @param int $min_width
+     * @param int $min_height
+     *
+     * @return Image
+     */
+    public function fitResize($max_width = 150, $max_height = 150, $min_width = 20, $min_height = 20)
+    {
         $kw = $max_width / $this->width();
         $kh = $max_height / $this->height();
-        if($kw > $kh) {
+        if ($kw > $kh) {
             $new_h = $max_height;
             $new_w = round($kh * $this->width());
         } else {
@@ -269,18 +288,19 @@ class Image {
     }
 
     /**
-    * Resize image correctly scaled and than crop
-    * the necessary area
-    *
-    * @param int $width New width
-    * @param int $height New height
-    */
-    public function scaleResize($width, $height) {
+     * Resize image correctly scaled and than crop
+     * the necessary area
+     *
+     * @param int $width New width
+     * @param int $height New height
+     */
+    public function scaleResize($width, $height)
+    {
 
         // calculate source coordinates
         $kw = $this->width() / $width;
         $kh = $this->height() / $height;
-        if($kh < $kw) {
+        if ($kh < $kw) {
             $src_h = $this->height();
             $src_y = 0;
             $src_w = round($kh * $width);
@@ -301,5 +321,4 @@ class Image {
         // for method chaining
         return $this;
     }
-
 }
