@@ -18,7 +18,7 @@ function load($class)
 }
 
 spl_autoload_register('PFBC\load');
-if (in_array('__autoload', spl_autoload_functions())) {
+if (in_array('__autoload', spl_autoload_functions(), true)) {
     spl_autoload_register('__autoload');
 }
 
@@ -551,6 +551,6 @@ JS;
     private function isFormFocusNotOnHomepage()
     {
         return ((new HttpRequest)->currentUrl() !== PH7_URL_ROOT) &&
-            !in_array('focus', $this->prevent);
+            !in_array('focus', $this->prevent, true);
     }
 }
