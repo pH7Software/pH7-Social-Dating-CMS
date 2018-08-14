@@ -65,11 +65,7 @@ class MainController extends Controller
 
     protected function addStats()
     {
-        // Adding the common CSS for the chart.
-        $this->design->addCss(
-            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
-            'general.css'
-        );
+        $this->addCssFile();
 
         $oStatModel = new StatisticCoreModel;
 
@@ -322,5 +318,18 @@ class MainController extends Controller
             $sMsg = t('%software_name% <strong>%0%</strong> is available! Please <a href="%1%" target="_blank">update it today</a> to keep your site safe and stable.', $sLatestVer, Core::SOFTWARE_WEBSITE);
             $this->design->setMessage($sMsg);
         }
+    }
+
+    /**
+     * Adding the common CSS for the statistic chart.
+     *
+     * @return void
+     */
+    private function addCssFile()
+    {
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
+            'general.css'
+        );
     }
 }
