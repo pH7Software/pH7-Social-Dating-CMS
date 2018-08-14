@@ -34,7 +34,7 @@ class CountryRestrictionCoreForm
                 t('Countries to be showed on registration forms'),
                 'countries[]',
                 [
-                    'description' => t('You can limit the amount of countries to be displayed on the registration form and user search forms.<br /> If you need to block your entire website to be accessible from a country, please use <a href="%0%">Country Blocker</a> tool.', Uri::get(PH7_ADMIN_MOD, 'tool', 'blockcountry')),
+                    'description' => self::getCountryFieldDesc($sTable),
                     'multiple' => 'multiple',
                     'size' => self::FORM_COUNTRY_FIELD_SIZE,
                     'value' => self::getSelectedCountries($sTable)
@@ -60,5 +60,24 @@ class CountryRestrictionCoreForm
         }
 
         return $aSelectedCountries;
+    }
+
+    /**
+     * @param string $sModuleType
+     *
+     * @return string
+     */
+    private static function getCountryFieldDesc($sModuleType)
+    {
+        if ($sModuleType === DbTableName::MEMBER_COUNTRY) {
+            $sMessage = t('You can limit the amount of countries to be displayed on the registration form and user search forms.');
+        } else {
+            $sMessage = t('You can limit the amount of countries to be displayed on the registration form.');
+        }
+
+        $sMessage .= '<br />';
+        $sMessage .= t('If you need to block your entire website to be accessible from a country, please use <a href="%0%">Country Blocker</a> tool.', Uri::get(PH7_ADMIN_MOD, 'tool', 'blockcountry'));
+
+        return $sMessage;
     }
 }
