@@ -74,10 +74,10 @@ class Twitter extends Api implements IApi
             $this->iState = (int)$_SESSION['authstate'];
         }
 
-        if ($this->iState == 1) {
+        if ($this->iState === 1) {
             // if we are in the process of authentication we continue
             $this->auth();
-        } elseif ($this->iState == 2 && !$this->auth()) {
+        } elseif ($this->iState === 2 && !$this->auth()) {
             // verify authentication, clearing cookies if it fails
             $this->endSession();
         }
@@ -128,15 +128,15 @@ class Twitter extends Api implements IApi
     public function auth()
     {
         // state 1 requires a GET variable to exist
-        if ($this->iState == 1 && !isset($_GET['oauth_verifier'])) {
+        if ($this->iState === 1 && !isset($_GET['oauth_verifier'])) {
             $this->iState = 0;
         }
 
         // Step 1: Get a request token
-        if ($this->iState == 0) {
+        if ($this->iState === 0) {
             return $this->getRequestToken();
         } // Step 2: Get an access token
-        elseif ($this->iState == 1) {
+        elseif ($this->iState === 1) {
             return $this->getAccessToken();
         }
 
@@ -151,7 +151,7 @@ class Twitter extends Api implements IApi
      */
     public function isAuthed()
     {
-        return $this->iState == 2;
+        return $this->iState === 2;
     }
 
     /**
