@@ -264,7 +264,7 @@ class VideoModel extends VideoCoreModel
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ', a.name, m.username, m.firstName, m.sex FROM' . Db::prefix(DbTableName::VIDEO) . 'AS v INNER JOIN'
             . Db::prefix(DbTableName::ALBUM_VIDEO) . 'AS a ON v.albumId = a.albumId INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
-            'AS m ON v.profileId = m.profileId' . $sSqlWhere . ' AND v.approved = :approved' . $sSqlOrder . $sSqlLimit
+            'AS m ON v.profileId = m.profileId' . $sSqlWhere . ' AND v.approved = :approved GROUP BY v.videoId, v.title, a.name, m.username' . $sSqlOrder . $sSqlLimit
         );
 
         if (ctype_digit($mLooking)) {

@@ -261,7 +261,7 @@ class PictureModel extends PictureCoreModel
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ', a.name, m.username, m.firstName, m.sex FROM' . Db::prefix(DbTableName::PICTURE) . 'AS p INNER JOIN' .
             Db::prefix(DbTableName::ALBUM_PICTURE) . 'AS a ON p.albumId = a.albumId INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
-            'AS m ON p.profileId = m.profileId' . $sSqlWhere . ' AND p.approved=:approved' . $sSqlOrder . $sSqlLimit);
+            'AS m ON p.profileId = m.profileId' . $sSqlWhere . ' AND p.approved = :approved GROUP BY p.pictureId, p.title, a.name, m.username' . $sSqlOrder . $sSqlLimit);
 
         if (ctype_digit($mLooking)) {
             $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
