@@ -47,7 +47,7 @@ textarea {
     white-space: pre-line !important;
 }
 
-input:not([type=image]), textarea, select {
+input:not([type=image]):not([type=range]), textarea, select {
     box-sizing: content-box; /* Bugfix with Botstrap for transition in forms */
     font-size: 14px;
     border: 1px solid #ccc;
@@ -71,7 +71,7 @@ input:not([type=image]), textarea, select {
     white-space: nowrap;
 }
 
-input:focus:not([type=image]), textarea:focus, select:focus {
+input:focus:not([type=image]):not([type=range]), textarea:focus, select:focus {
     outline: 0;
     border-color: rgba(82, 168, 236, .8);
     box-shadow: 1px 1px 4px #aaa inset, 0 0 8px rgba(82, 168, 236, .6);
