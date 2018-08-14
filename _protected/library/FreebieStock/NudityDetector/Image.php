@@ -67,7 +67,7 @@ class Image
      *
      * @return string|boolean
      */
-    static public function type($file)
+    public static function type($file)
     {
         $type = getimagesize($file);
         $type = $type[2];
@@ -92,7 +92,7 @@ class Image
      *
      * @return int
      */
-    static public function color($r, $g, $b, $a = 0)
+    public static function color($r, $g, $b, $a = 0)
     {
         return ($a << 24) + ($r << 16) + ($g << 8) + $b;
     }
