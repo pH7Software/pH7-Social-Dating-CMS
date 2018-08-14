@@ -52,7 +52,7 @@ class DesignFormProcess extends Form
     /**
      * @return void
      */
-    protected function checkNudityFilter()
+    private function checkNudityFilter()
     {
         if (DbConfig::getSetting('nudityFilter') && Filter::isNudity($_FILES['wallpaper']['tmp_name'])) {
             // The wallpaper doesn't seem suitable for everyone. Overwrite "$iApproved" and set the image for approval

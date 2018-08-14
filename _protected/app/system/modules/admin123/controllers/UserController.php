@@ -103,7 +103,7 @@ class UserController extends Controller
 
     public function countryRestriction()
     {
-        $this->view->page_title = $this->view->h1_title = t('Country Restrictions');
+        $this->view->page_title = $this->view->h1_title = t('Country Restrictions - User');
         $this->output();
     }
 
