@@ -256,7 +256,7 @@ class VideoModel extends VideoCoreModel
         $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
 
-        $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
+        $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'v');
 
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = !$bCount ? 'v.*' : 'COUNT(v.videoId) AS totalVideos';

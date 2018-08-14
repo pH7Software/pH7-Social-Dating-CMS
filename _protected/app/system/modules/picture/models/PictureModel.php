@@ -253,7 +253,7 @@ class PictureModel extends PictureCoreModel
         $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
 
-        $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
+        $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'p');
 
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = !$bCount ? 'p.*' : 'COUNT(p.pictureId) AS totalPictures';
