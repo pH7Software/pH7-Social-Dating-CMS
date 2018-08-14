@@ -290,7 +290,7 @@ class MainController extends Controller
 
         $sErrMsg = '';
         if ($b404Status === true) {
-            $sErrMsg = '<br />' . t('Please return to <a href="%1%">the previous page</a> or <a href="%1%">add new photos</a> in this album.', 'javascript:history.back();', Uri::get('picture', 'main', 'addphoto', $this->httpRequest->get('album_id')));
+            $sErrMsg = '<br />' . t('Please return to <a href="%0%">the previous page</a> or <a href="%1%">add new photos</a> in this album.', 'javascript:history.back();', Uri::get('picture', 'main', 'addphoto', $this->httpRequest->get('album_id')));
         }
 
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
