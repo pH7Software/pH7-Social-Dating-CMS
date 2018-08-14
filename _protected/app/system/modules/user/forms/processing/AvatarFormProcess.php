@@ -22,7 +22,7 @@ class AvatarFormProcess extends Form
     {
         parent::__construct();
 
-        $this->iApproved = AdminCore::auth() || DbConfig::getSetting('avatarManualApproval') == 0 ? 1 : 0;
+        $this->iApproved = (AdminCore::auth() || DbConfig::getSetting('avatarManualApproval') == 0) ? 1 : 0;
 
         if ($this->doesAdminEdit()) {
             $iProfileId = $this->httpRequest->get('profile_id');
@@ -63,7 +63,7 @@ class AvatarFormProcess extends Form
     private function checkNudityFilter()
     {
         if (Filter::isNudity($_FILES['avatar']['tmp_name'])) {
-            // Avatar doesn't seem suitable for everyone. Overwrite "$iApproved" to set it for moderation
+            // Avatar doesn't seem suitable for anyone. Overwrite "$iApproved" to set it for moderation
             $this->iApproved = 0;
         }
     }

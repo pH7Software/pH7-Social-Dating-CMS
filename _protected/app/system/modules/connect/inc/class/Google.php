@@ -116,7 +116,7 @@ class Google extends Api implements IApi
      */
     public function add(array $aProfile, UserCoreModel $oUserModel)
     {
-        $sBirthDate = (!empty($aProfile['birthday'])) ? $aProfile['birthday'] : date('m/d/Y', strtotime('-30 year'));
+        $sBirthDate = !empty($aProfile['birthday']) ? $aProfile['birthday'] : date('m/d/Y', strtotime('-30 year'));
         $sSex = $this->checkGender($aProfile['gender']);
         $sMatchSex = ($sSex == 'male' ? 'female' : ($sSex == 'female' ? 'male' : 'couple'));
         $this->sUsername = (new UserCore)->findUsername($aProfile['given_name'], $aProfile['name'], $aProfile['family_name']);
@@ -159,7 +159,7 @@ class Google extends Api implements IApi
         $this->sAvatarFile = $this->getAvatar($sUrl);
 
         if ($this->sAvatarFile) {
-            $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? 1 : 0;
+            $iApproved = DbConfig::getSetting('avatarManualApproval') == 0 ? 1 : 0;
             (new UserCore)->setAvatar($this->iProfileId, $this->sUsername, $this->sAvatarFile, $iApproved);
         }
 

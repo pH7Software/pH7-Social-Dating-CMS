@@ -55,7 +55,7 @@ class MainController extends Controller
 
         $this->oNoteModel = new NoteModel;
         $this->oPage = new Page;
-        $this->iApproved = (AdminCore::auth() && !UserCore::isAdminLoggedAs()) ? null : 1;
+        $this->iApproved = AdminCore::auth() && !UserCore::isAdminLoggedAs() ? null : 1;
 
         $this->view->member_id = $this->session->get('member_id');
     }

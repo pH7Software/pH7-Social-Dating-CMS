@@ -196,7 +196,7 @@ class Twitter extends Api implements IApi
     public function add(array $aProfile, UserCoreModel $oUserModel)
     {
         $oUser = new UserCore;
-        $sBirthDate = (!empty($aProfile['birthday'])) ? $aProfile['birthday'] : date('m/d/Y', strtotime('-30 year'));
+        $sBirthDate = !empty($aProfile['birthday']) ? $aProfile['birthday'] : date('m/d/Y', strtotime('-30 year'));
         $sSex = $this->checkGender($aProfile['gender']);
         $sMatchSex = $oUser->getMatchSex($sSex);
         $this->sUsername = $oUser->findUsername($aProfile['given_name'], $aProfile['name'], $aProfile['family_name']);
@@ -253,7 +253,7 @@ class Twitter extends Api implements IApi
         }
 
         if ($this->sAvatarFile) {
-            $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? 1 : 0;
+            $iApproved = DbConfig::getSetting('avatarManualApproval') == 0 ? 1 : 0;
             (new UserCore)->setAvatar($this->iProfileId, $this->sUsername, $this->sAvatarFile, $iApproved);
         }
 

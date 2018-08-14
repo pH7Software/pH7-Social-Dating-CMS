@@ -184,7 +184,7 @@ class Facebook extends Api implements IApi
         $this->sAvatarFile = $this->getAvatar(static::GRAPH_URL . $sUserId . '/picture?type=large');
 
         if ($this->sAvatarFile) {
-            $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
+            $iApproved = DbConfig::getSetting('avatarManualApproval') == 0 ? '1' : '0';
             (new UserCore)->setAvatar($this->iProfileId, $this->sUsername, $this->sAvatarFile, $iApproved);
         }
 
