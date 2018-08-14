@@ -45,7 +45,9 @@ class AlbumFormProcess extends Form
         } else {
             $this->sApproved = DbConfig::getSetting('pictureManualApproval') == 0 ? '1' : '0';
 
-            $this->checkNudityFilter();
+            if ($this->isNudityFilterEligible()) {
+                $this->checkNudityFilter();
+            }
 
             $sFileName = Various::genRnd($oPicture->getFileName(), 1) . '-thumb.' . $oPicture->getExt();
 
@@ -85,11 +87,19 @@ class AlbumFormProcess extends Form
     }
 
     /**
+     * @return bool
+     */
+    private function isNudityFilterEligible()
+    {
+        return $this->sApproved === '1' && DbConfig::getSetting('nudityFilter');
+    }
+
+    /**
      * @return void
      */
     private function checkNudityFilter()
     {
-        if (DbConfig::getSetting('nudityFilter') && Filter::isNudity($_FILES['album']['tmp_name'])) {
+        if (Filter::isNudity($_FILES['album']['tmp_name'])) {
             // The photo doesn't seem suitable for everyone. Overwrite "$sApproved" and set for moderation
             $this->sApproved = '0';
         }

@@ -33,7 +33,9 @@ class DesignFormProcess extends Form
             $sUsername = $this->session->get('member_username');
         }
 
-        $this->checkNudityFilter();
+        if ($this->isNudityFilterEligible()) {
+            $this->checkNudityFilter();
+        }
 
         $bWallpaper = (new UserCore)->setBackground($iProfileId, $sUsername, $_FILES['wallpaper']['tmp_name'], $this->iApproved);
 
@@ -48,11 +50,19 @@ class DesignFormProcess extends Form
     }
 
     /**
+     * @return bool
+     */
+    private function isNudityFilterEligible()
+    {
+        return ($this->iApproved === 1 || !AdminCore::auth()) && DbConfig::getSetting('nudityFilter');
+    }
+
+    /**
      * @return void
      */
     private function checkNudityFilter()
     {
-        if (DbConfig::getSetting('nudityFilter') && Filter::isNudity($_FILES['wallpaper']['tmp_name'])) {
+        if (Filter::isNudity($_FILES['wallpaper']['tmp_name'])) {
             // The wallpaper doesn't seem suitable for everyone. Overwrite "$iApproved" and set the image for approval
             $this->iApproved = 0;
         }

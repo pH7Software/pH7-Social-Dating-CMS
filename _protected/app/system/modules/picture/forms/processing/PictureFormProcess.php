@@ -117,7 +117,9 @@ class PictureFormProcess extends Form
 
             $this->sApproved = DbConfig::getSetting('pictureManualApproval') == 0 ? '1' : '0';
 
-            $this->checkNudityFilter($aPhotos[$iPhotoIndex]);
+            if ($this->isNudityFilterEligible()) {
+                $this->checkNudityFilter($aPhotos[$iPhotoIndex]);
+            }
 
             // It creates a nice title if no title is specified.
             $sTitle = $this->getImageTitle($iPhotoIndex, $oPicture1);
@@ -151,13 +153,21 @@ class PictureFormProcess extends Form
     }
 
     /**
+     * @return bool
+     */
+    private function isNudityFilterEligible()
+    {
+        return $this->sApproved === '1' && DbConfig::getSetting('nudityFilter');
+    }
+
+    /**
      * @param string $sFile File path.
      *
      * @return void
      */
     private function checkNudityFilter($sFile)
     {
-        if (DbConfig::getSetting('nudityFilter') && Filter::isNudity($sFile)) {
+        if (Filter::isNudity($sFile)) {
             // The photo(s) seems to be suitable for adults only, so set for moderation
             $this->sApproved = '0';
         }
