@@ -481,6 +481,7 @@ JS;
     private function renderJSFiles()
     {
         $urls = [];
+
         /**
          * These files are already included by default in layout.tpl, therefore it is unnecessary to include them again.
          *
@@ -524,8 +525,9 @@ JS;
          */
         foreach ($this->elements as $element) {
             $elementUrls = $element->getCSSFiles();
-            if (is_array($elementUrls))
+            if (is_array($elementUrls)) {
                 $urls = array_merge($urls, $elementUrls);
+            }
         }
 
         //*This section prevents duplicate css files from being loaded.*/
