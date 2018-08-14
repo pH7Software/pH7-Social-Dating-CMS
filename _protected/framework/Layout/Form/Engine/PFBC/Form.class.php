@@ -411,7 +411,7 @@ class Form extends Base
 
         /*When the form is submitted, disable all submit buttons to prevent duplicate submissions.*/
         echo 'jQuery("#', $id, '").bind("submit", function() {';
-        if (!in_array('jQueryUIButtons', $this->prevent)) {
+        if ($this->isNotJQueryUiButtons()) {
             echo 'jQuery(this).find("button[type=submit]").button("disable");';
             echo 'jQuery(this).find("button[type=submit] span.ui-button-text").css("padding-right", "2.1em").append(\'<img class="pfbc-loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAIiIiAAAAGdnZyMjIwAAADQ0NEVFRU5OTiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" alt="Loading..."/>\');';
         } else {
@@ -456,7 +456,7 @@ JS;
 
             echo '}';
 
-            if (!in_array('jQueryUIButtons', $this->prevent)) {
+            if ($this->isNotJQueryUiButtons()) {
                 echo 'jQuery("#', $id, ' button[type=submit] span.ui-button-text").css("padding-right", "1em").find("img").remove();';
                 echo 'jQuery("#', $id, ' button[type=submit]").button("enable");';
             } else {
@@ -535,6 +535,14 @@ JS;
                 echo '<link rel="stylesheet" href="', $url, '"/>';
             }
         }
+    }
+
+    /**
+     * @return bool
+     */
+    private function isNotJQueryUiButtons()
+    {
+        return !in_array('jQueryUIButtons', $this->prevent, true);
     }
 
     /**
