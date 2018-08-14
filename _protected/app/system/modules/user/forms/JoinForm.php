@@ -104,7 +104,7 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Your Postal Code'), 'zip_code', ['id' => 'str_zip_code', 'value' => Geo::getZipCode(), 'onblur' => 'CValid(this.value,this.id,2,15)', 'validation' => new \PFBC\Validation\Str(2, 15)]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_zip_code"></span>'));
 
-        $oForm->addElement(new \PFBC\Element\Button(t('Next')));
+        $oForm->addElement(new \PFBC\Element\Button(t('Next'), 'submit', ['icon' => 'seek-next']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script><script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
         $oForm->render();
     }
@@ -135,7 +135,7 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\Textarea(t('About Me'), 'description', ['id' => 'str_description', 'description' => t('Describe yourself in a few words. Your description should be at least 20 characters long.'), 'onblur' => 'CValid(this.value,this.id,20,4000)', 'validation' => new \PFBC\Validation\Str(20, 4000), 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_description"></span>'));
 
-        $oForm->addElement(new \PFBC\Element\Button(t('Next')));
+        $oForm->addElement(new \PFBC\Element\Button(t('Next'), 'submit', ['icon' => 'seek-next']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
     }
