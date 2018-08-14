@@ -17,6 +17,7 @@ use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\Moderation\Filter;
 use PH7\Framework\Security\Security;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Util\Various;
@@ -154,22 +155,31 @@ class JoinFormProcess extends Form
             Header::redirect(
                 Uri::get('user', 'signup', 'done')
             );
-        }
-
-        $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? 1 : 0;
-        $bAvatar = (new UserCore)->setAvatar(
-            $this->session->get('profile_id'),
-            $this->session->get('username'),
-            $_FILES['avatar']['tmp_name'],
-            $iApproved
-        );
-
-        if (!$bAvatar) {
-            \PFBC\Form::setError('form_join_user4', Form::wrongImgFileTypeMsg());
         } else {
-            Header::redirect(
-                Uri::get('user', 'signup', 'done')
+            $iApproved = DbConfig::getSetting('avatarManualApproval') == 0 ? 1 : 0;
+
+            if (
+                $iApproved === 1 && DbConfig::getSetting('nudityFilter') &&
+                Filter::isNudity($_FILES['avatar']['tmp_name'])
+            ) {
+                // Overwrite "$iApproved" if avatar doesn't look suitable for anyone
+                $iApproved = 0;
+            }
+
+            $bAvatar = (new UserCore)->setAvatar(
+                $this->session->get('profile_id'),
+                $this->session->get('username'),
+                $_FILES['avatar']['tmp_name'],
+                $iApproved
             );
+
+            if (!$bAvatar) {
+                \PFBC\Form::setError('form_join_user4', Form::wrongImgFileTypeMsg());
+            } else {
+                Header::redirect(
+                    Uri::get('user', 'signup', 'done')
+                );
+            }
         }
     }
 

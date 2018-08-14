@@ -36,24 +36,30 @@ class Note extends WriteCore
      */
     public function setThumb(stdClass $oPost, NoteModel $oNoteModel, File $oFile)
     {
-        if (!empty($_FILES['thumb']['tmp_name'])) {
-            $oImage = new Image($_FILES['thumb']['tmp_name']);
-            if (!$oImage->validate()) {
-                \PFBC\Form::setError('form_note', Form::wrongImgFileTypeMsg());
-            } else {
-                /**
-                 * File::deleteFile() tests first if the file exists, and then deletes the file
-                 */
-                $sPathName = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'note/' . PH7_IMG . $oPost->username . PH7_SH;
-                $oFile->deleteFile($sPathName); // It erases the old thumbnail
-                $oFile->createDir($sPathName);
-                $sFileName = Various::genRnd($oImage->getFileName(), self::FILENAME_LENGTH) . PH7_DOT . $oImage->getExt();
-                $oImage->square(static::THUMBNAIL_IMAGE_SIZE);
-                $oImage->save($sPathName . $sFileName);
-                $oNoteModel->updatePost('thumb', $sFileName, $oPost->noteId, $oPost->profileId);
-            }
-            unset($oImage);
+        $oImage = new Image($_FILES['thumb']['tmp_name']);
+        if (!$oImage->validate()) {
+            \PFBC\Form::setError('form_note', Form::wrongImgFileTypeMsg());
+        } else {
+            /**
+             * File::deleteFile() tests first if the file exists, and then deletes the file
+             */
+            $sPathName = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'note/' . PH7_IMG . $oPost->username . PH7_SH;
+            $oFile->deleteFile($sPathName); // It erases the old thumbnail
+            $oFile->createDir($sPathName);
+            $sFileName = Various::genRnd($oImage->getFileName(), self::FILENAME_LENGTH) . PH7_DOT . $oImage->getExt();
+            $oImage->square(static::THUMBNAIL_IMAGE_SIZE);
+            $oImage->save($sPathName . $sFileName);
+            $oNoteModel->updatePost('thumb', $sFileName, $oPost->noteId, $oPost->profileId);
         }
+        unset($oImage);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isThumbnailUploaded()
+    {
+        return !empty($_FILES['thumb']['tmp_name']);
     }
 
     /**

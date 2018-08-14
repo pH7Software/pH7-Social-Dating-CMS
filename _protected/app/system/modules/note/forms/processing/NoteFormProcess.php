@@ -14,13 +14,19 @@ use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\Moderation\Filter;
 use PH7\Framework\Url\Header;
 
 class NoteFormProcess extends Form
 {
+    /** @var int */
+    private $iApproved;
+
     public function __construct()
     {
         parent::__construct();
+
+        $this->iApproved = DbConfig::getSetting('noteManualApproval') == 0 ? 1 : 0;
 
         $oNote = new Note;
         $oNoteModel = new NoteModel;
@@ -34,9 +40,11 @@ class NoteFormProcess extends Form
         } elseif (!$oNoteModel->checkWaitSend($this->session->get('member_id'), $iTimeDelay, $sCurrentTime)) {
             \PFBC\Form::setError('form_note', Form::waitWriteMsg($iTimeDelay));
         } else {
-            $iApproved = (DbConfig::getSetting('noteManualApproval') == 0) ? 1 : 0;
+            if ($oNote->isThumbnailUploaded() && $this->isNudityFilterEligible()) {
+                $this->checkNudityFilter();
+            }
 
-            $aData = [
+            $aNoteData = [
                 'profile_id' => $iProfileId,
                 'post_id' => $sPostId,
                 'lang_id' => $this->httpRequest->post('lang_id'),
@@ -52,7 +60,7 @@ class NoteFormProcess extends Form
                 'meta_copyright' => $this->httpRequest->post('meta_copyright'),
                 'enable_comment' => $this->httpRequest->post('enable_comment'),
                 'created_date' => $sCurrentTime,
-                'approved' => $iApproved
+                'approved' => $this->iApproved
             ];
 
             if (count($this->httpRequest->post('category_id')) > Note::MAX_CATEGORY_ALLOWED) {
@@ -60,18 +68,21 @@ class NoteFormProcess extends Form
                     'form_note',
                     t('You cannot select more than %0% categories.', Note::MAX_CATEGORY_ALLOWED)
                 );
-            } elseif (!$oNoteModel->addPost($aData)) {
+            } elseif (!$oNoteModel->addPost($aNoteData)) {
                 \PFBC\Form::setError('form_note', t('An error occurred while adding the post.'));
             } else {
                 $this->setCategories($iProfileId, $oNoteModel);
 
                 /*** Set the thumbnail if there's one ***/
-                $oPost = $oNoteModel->readPost($aData['post_id'], $iProfileId, null);
-                $oNote->setThumb($oPost, $oNoteModel, $this->file);
+                $oPost = $oNoteModel->readPost($aNoteData['post_id'], $iProfileId, null);
+
+                if ($oNote->isThumbnailUploaded()) {
+                    $oNote->setThumb($oPost, $oNoteModel, $this->file);
+                }
 
                 Note::clearCache();
 
-                $this->redirectToPostPage($sPostId, $iApproved);
+                $this->redirectToPostPage($sPostId);
             }
         }
     }
@@ -97,12 +108,31 @@ class NoteFormProcess extends Form
     }
 
     /**
-     * @param string $sPostId
-     * @param int $iApproved
+     * @return bool
      */
-    private function redirectToPostPage($sPostId, $iApproved)
+    private function isNudityFilterEligible()
     {
-        if ($iApproved === 0) {
+        return $this->iApproved === 1 && DbConfig::getSetting('nudityFilter');
+    }
+
+    /**
+     * Overwrite self::$iApproved if note's thumbnail doesn't look suitable for everyone.
+     *
+     * @return void
+     */
+    private function checkNudityFilter()
+    {
+        if (Filter::isNudity($_FILES['thumb']['tmp_name'])) {
+            $this->iApproved = 0;
+        }
+    }
+
+    /**
+     * @param string $sPostId
+     */
+    private function redirectToPostPage($sPostId)
+    {
+        if ($this->iApproved === 0) {
             $sMsg = t('Your note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
         } else {
             $sMsg = t('Post successfully created!');

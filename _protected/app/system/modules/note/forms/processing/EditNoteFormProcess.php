@@ -13,14 +13,20 @@ defined('PH7') or die('Restricted access');
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\Moderation\Filter;
 use PH7\Framework\Url\Header;
 use stdClass;
 
 class EditNoteFormProcess extends Form
 {
+    /** @var int */
+    private $iApproved;
+
     public function __construct()
     {
         parent::__construct();
+
+        $this->iApproved = DbConfig::getSetting('noteManualApproval') == 0 ? 1 : 0;
 
         $oNote = new Note;
         $oNoteModel = new NoteModel;
@@ -49,7 +55,13 @@ class EditNoteFormProcess extends Form
         }
 
         // Thumbnail
-        $oNote->setThumb($oPost, $oNoteModel, $this->file);
+        if ($oNote->isThumbnailUploaded()) {
+            $oNote->setThumb($oPost, $oNoteModel, $this->file);
+
+            if ($this->isNudityFilterEligible()) {
+                $this->checkNudityFilter();
+            }
+        }
 
         if (!$this->str->equals($this->httpRequest->post('title'), $oPost->title))
             $oNoteModel->updatePost('title', $this->httpRequest->post('title'), $iNoteId, $iProfileId);
@@ -89,8 +101,7 @@ class EditNoteFormProcess extends Form
             $oNoteModel->updatePost('enableComment', $this->httpRequest->post('enable_comment'), $iNoteId, $iProfileId);
 
         // Updated the approved status
-        $iApproved = (DbConfig::getSetting('noteManualApproval') == 0) ? 1 : 0;
-        $oNoteModel->updatePost('approved', $iApproved, $iNoteId, $iProfileId);
+        $oNoteModel->updatePost('approved', $this->iApproved, $iNoteId, $iProfileId);
 
         // Updated the modification Date
         $oNoteModel->updatePost('updatedDate', $this->dateTime->get()->dateTime('Y-m-d H:i:s'), $iNoteId, $iProfileId);
@@ -98,7 +109,7 @@ class EditNoteFormProcess extends Form
 
         Note::clearCache();
 
-        $this->redirectToPostPage($sPostId, $iApproved);
+        $this->redirectToPostPage($sPostId);
     }
 
     /**
@@ -132,12 +143,31 @@ class EditNoteFormProcess extends Form
     }
 
     /**
-     * @param string $sPostId
-     * @param int $iApproved
+     * @return bool
      */
-    private function redirectToPostPage($sPostId, $iApproved)
+    private function isNudityFilterEligible()
     {
-        if ($iApproved === 0) {
+        return $this->iApproved === 1 && DbConfig::getSetting('nudityFilter');
+    }
+
+    /**
+     * Overwrite self::$iApproved if note's thumbnail doesn't look suitable for everyone.
+     *
+     * @return void
+     */
+    private function checkNudityFilter()
+    {
+        if (Filter::isNudity($_FILES['thumb']['tmp_name'])) {
+            $this->iApproved = 0;
+        }
+    }
+
+    /**
+     * @param string $sPostId
+     */
+    private function redirectToPostPage($sPostId)
+    {
+        if ($this->iApproved === 0) {
             $sMsg = t('Your updated note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
         } else {
             $sMsg = t('Post successfully updated!');
