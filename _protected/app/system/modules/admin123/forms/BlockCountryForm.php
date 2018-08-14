@@ -13,6 +13,8 @@ use PH7\Framework\Url\Header;
 
 class BlockCountryForm
 {
+    const FORM_COUNTRY_FIELD_SIZE = 20;
+
     public static function display()
     {
         if (isset($_POST['submit_country_blocklist'])) {
@@ -34,7 +36,7 @@ class BlockCountryForm
                 [
                     'description' => t("Visitors who come from one of those selected countries will receive a friendly message saying that the service isn't available in they country. Logged admins and admin panel won't be affected, so you will still be able to login to your admin panel from anywhere."),
                     'multiple' => 'multiple',
-                    'size' => 20,
+                    'size' => self::FORM_COUNTRY_FIELD_SIZE,
                     'value' => (new BlockCountryModel)->getBlockedCountries()
                 ]
             )
