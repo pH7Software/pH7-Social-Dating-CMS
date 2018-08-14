@@ -33,7 +33,7 @@ class AvatarFormProcess extends Form
             $sUsername = $this->session->get('member_username');
         }
 
-        if ($this->iApproved === 1 || !AdminCore::auth()) {
+        if ($this->isNudityFilterEligible()) {
             $this->checkNudityFilter();
         }
 
@@ -51,11 +51,19 @@ class AvatarFormProcess extends Form
     }
 
     /**
+     * @return bool
+     */
+    private function isNudityFilterEligible()
+    {
+        return ($this->iApproved === 1 || !AdminCore::auth()) && DbConfig::getSetting('nudityFilter');
+    }
+
+    /**
      * @return void
      */
     private function checkNudityFilter()
     {
-        if (DbConfig::getSetting('nudityFilter') && Filter::isNudity($_FILES['avatar']['tmp_name'])) {
+        if (Filter::isNudity($_FILES['avatar']['tmp_name'])) {
             // Avatar doesn't seem suitable for everyone. Overwrite "$iApproved" to set it for moderation
             $this->iApproved = 0;
         }
