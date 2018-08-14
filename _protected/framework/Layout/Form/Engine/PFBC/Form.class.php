@@ -419,11 +419,9 @@ class Form extends Base
         }
         echo '});';
 
-        /*jQuery is used to set the focus of the form's initial element.*/
-        // We don't want the focus in the form field if we are on the home page.
-        if (((new HttpRequest)->currentUrl() !== PH7_URL_ROOT) &&
-            !in_array('focus', $this->prevent)
-        ) {
+        // Don't want to focus the first form field on the homepage
+        if ($this->isFormFocusNotOnHomepage()) {
+            // Use jQuery to set the focus of the form's initial element
             echo 'jQuery("#', $id, ' :input:visible:enabled:first").focus();';
         }
 
@@ -537,5 +535,14 @@ JS;
                 echo '<link rel="stylesheet" href="', $url, '"/>';
             }
         }
+    }
+
+    /**
+     * @return bool
+     */
+    private function isFormFocusNotOnHomepage()
+    {
+        return ((new HttpRequest)->currentUrl() !== PH7_URL_ROOT) &&
+            !in_array('focus', $this->prevent);
     }
 }
