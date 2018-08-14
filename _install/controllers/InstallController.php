@@ -485,7 +485,7 @@ class InstallController extends Controller
     {
         $sConstantsPath = PH7_ROOT_PUBLIC . '_constants.php';
         if (is_file($sConstantsPath)) {
-            require_once $sConstantsPath;
+            @require_once $sConstantsPath;
 
             if ($this->canEmailBeSent()) {
                 $this->sendWelcomeEmail();
