@@ -14,7 +14,10 @@ class Range extends Textbox
         $this->attributes['oninput'] = 'rangeOutput.value = rangeInput.value';
         $this->validation[] = new \PFBC\Validation\Numeric;
         parent::render();
-        echo '<strong><output id="rangeOutput"></output></strong>';
-        echo '<script>$(function(){$("#rangeOutput").val($("#rangeInput").val())});</script>';
+
+        echo <<<'HTML'
+            <strong><output id="rangeOutput"></output></strong>
+            <script>$(function(){$("#rangeOutput").val($("#rangeInput").val())});</script>
+HTML;
     }
 }
