@@ -28,7 +28,7 @@ class AdminBlogFormProcess extends Form
         if (!$oBlog->checkPostId($sPostId, $oBlogModel)) {
             \PFBC\Form::setError('form_blog', t('The post ID already exists or is incorrect.'));
         } else {
-            $aData = [
+            $aPostData = [
                 'post_id' => $sPostId,
                 'lang_id' => $this->httpRequest->post('lang_id'),
                 'title' => $this->httpRequest->post('title'),
@@ -45,13 +45,13 @@ class AdminBlogFormProcess extends Form
                 'created_date' => $this->dateTime->get()->dateTime('Y-m-d H:i:s')
             ];
 
-            if (!$oBlogModel->addPost($aData)) {
+            if (!$oBlogModel->addPost($aPostData)) {
                 \PFBC\Form::setError('form_blog', t('An error occurred while adding the post.'));
             } else {
                 $this->setCategories($oBlogModel);
 
                 /*** Set the thumbnail if there's one ***/
-                $oPost = $oBlogModel->readPost($aData['post_id']);
+                $oPost = $oBlogModel->readPost($aPostData['post_id']);
                 $oBlog->setThumb($oPost, $this->file);
 
                 Blog::clearCache();
