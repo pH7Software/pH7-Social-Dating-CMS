@@ -30,7 +30,7 @@ class MainController extends ProfileBaseController
     {
         $oUserModel = new UserCoreModel;
 
-        $this->addCssFiles();
+        $this->addCssFile();
         $this->addAdditionalAssetFiles();
 
         // Set the Profile ID and Visitor ID
@@ -104,7 +104,7 @@ class MainController extends ProfileBaseController
      *
      * @return void
      */
-    private function addCssFiles()
+    private function addCssFile()
     {
         $this->design->addCss(
             PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
