@@ -22,7 +22,6 @@ class AvatarFormProcess extends Form
     {
         parent::__construct();
 
-        // Number has to be string because in DB it's an "enum" type
         $this->iApproved = AdminCore::auth() || DbConfig::getSetting('avatarManualApproval') == 0 ? 1 : 0;
 
         if ($this->doesAdminEdit()) {
