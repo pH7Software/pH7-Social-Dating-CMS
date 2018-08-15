@@ -9,6 +9,8 @@
  */
 class Image
 {
+    const IMAGETYPE_WEBP = 18; // TODO: From PHP 7.1, IMAGETYPE_WEBP is available
+
     /**
      * Full path to the image file
      *
@@ -77,7 +79,10 @@ class Image
                 return 'jpg';
             case IMAGETYPE_PNG:
                 return 'png';
+            case self::IMAGETYPE_WEBP:
+                return 'webp';
         }
+
         return false;
     }
 
@@ -125,6 +130,7 @@ class Image
     /**
      * Create an image resource
      *
+     * @throws Exception
      */
     public function create()
     {
@@ -138,6 +144,10 @@ class Image
             case IMAGETYPE_PNG:
                 $this->resource = imagecreatefrompng($this->file);
                 break;
+            case self::IMAGETYPE_WEBP:
+                $this->resource = imagecreatefromwebp($this->file);
+                break;
+
             default:
                 throw new Exception('Image type is not supported');
                 break;
@@ -191,6 +201,9 @@ class Image
                 break;
             case IMAGETYPE_PNG:
                 imagepng($this->resource, $file);
+                break;
+            case self::IMAGETYPE_WEBP:
+                imagewebp($this->resource, $file);
                 break;
             default:
                 throw new Exception('Image type is not supported');
