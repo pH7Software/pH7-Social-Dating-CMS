@@ -17,7 +17,7 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Moderation\Filter;
 use PH7\Framework\Url\Header;
 
-class NoteFormProcess extends Form
+class NoteFormProcess extends Form implements NudityDetectable
 {
     /** @var int */
     private $iApproved;
@@ -87,6 +87,18 @@ class NoteFormProcess extends Form
         }
     }
 
+    public function isNudityFilterEligible()
+    {
+        return $this->iApproved === 1 && DbConfig::getSetting('nudityFilter');
+    }
+
+    public function checkNudityFilter()
+    {
+        if (Filter::isNudity($_FILES['thumb']['tmp_name'])) {
+            $this->iApproved = 0;
+        }
+    }
+
     /**
      * Set the categorie(s).
      *
@@ -104,26 +116,6 @@ class NoteFormProcess extends Form
 
         foreach ($this->httpRequest->post('category_id', Http::NO_CLEAN) as $iCategoryId) {
             $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
-        }
-    }
-
-    /**
-     * @return bool
-     */
-    private function isNudityFilterEligible()
-    {
-        return $this->iApproved === 1 && DbConfig::getSetting('nudityFilter');
-    }
-
-    /**
-     * Overwrite self::$iApproved if note's thumbnail doesn't look suitable for everyone.
-     *
-     * @return void
-     */
-    private function checkNudityFilter()
-    {
-        if (Filter::isNudity($_FILES['thumb']['tmp_name'])) {
-            $this->iApproved = 0;
         }
     }
 

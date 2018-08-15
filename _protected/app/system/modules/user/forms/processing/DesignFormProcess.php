@@ -13,7 +13,7 @@ defined('PH7') or die('Restricted access');
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Security\Moderation\Filter;
 
-class DesignFormProcess extends Form
+class DesignFormProcess extends Form implements NudityDetectable
 {
     /** @var int */
     private $iApproved;
@@ -48,18 +48,12 @@ class DesignFormProcess extends Form
         }
     }
 
-    /**
-     * @return bool
-     */
-    private function isNudityFilterEligible()
+    public function isNudityFilterEligible()
     {
         return ($this->iApproved === 1 || !AdminCore::auth()) && DbConfig::getSetting('nudityFilter');
     }
 
-    /**
-     * @return void
-     */
-    private function checkNudityFilter()
+    public function checkNudityFilter()
     {
         if (Filter::isNudity($_FILES['wallpaper']['tmp_name'])) {
             // The wallpaper doesn't seem suitable for everyone. Overwrite "$iApproved" and set the image for approval

@@ -18,7 +18,7 @@ use PH7\Framework\Security\Moderation\Filter;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Util\Various;
 
-class AlbumFormProcess extends Form
+class AlbumFormProcess extends Form implements NudityDetectable
 {
     const ALBUM_IMAGE_SIZE = 200;
 
@@ -86,15 +86,12 @@ class AlbumFormProcess extends Form
         }
     }
 
-    /**
-     * @return bool
-     */
-    private function isNudityFilterEligible()
+    public function isNudityFilterEligible()
     {
         return $this->sApproved === '1' && DbConfig::getSetting('nudityFilter');
     }
 
-    private function checkNudityFilter()
+    public function checkNudityFilter()
     {
         if (Filter::isNudity($_FILES['album']['tmp_name'])) {
             // The image doesn't seem suitable for everyone. Overwrite "$sApproved" and set the image for approval

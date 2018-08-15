@@ -17,7 +17,7 @@ use PH7\Framework\Security\Moderation\Filter;
 use PH7\Framework\Url\Header;
 use stdClass;
 
-class EditNoteFormProcess extends Form
+class EditNoteFormProcess extends Form implements NudityDetectable
 {
     /** @var int */
     private $iApproved;
@@ -122,6 +122,18 @@ class EditNoteFormProcess extends Form
         $this->redirectToPostPage($sPostId);
     }
 
+    public function isNudityFilterEligible()
+    {
+        return $this->iApproved === 1 && DbConfig::getSetting('nudityFilter');
+    }
+
+    public function checkNudityFilter()
+    {
+        if (Filter::isNudity($_FILES['thumb']['tmp_name'])) {
+            $this->iApproved = 0;
+        }
+    }
+
     /**
      * Update categories.
      *
@@ -164,27 +176,9 @@ class EditNoteFormProcess extends Form
     }
 
     /**
-     * @return bool
-     */
-    private function isNudityFilterEligible()
-    {
-        return $this->iApproved === 1 && DbConfig::getSetting('nudityFilter');
-    }
-
-    /**
-     * Overwrite self::$iApproved if note's thumbnail doesn't look suitable for everyone.
+     * @param string $sPostId
      *
      * @return void
-     */
-    private function checkNudityFilter()
-    {
-        if (Filter::isNudity($_FILES['thumb']['tmp_name'])) {
-            $this->iApproved = 0;
-        }
-    }
-
-    /**
-     * @param string $sPostId
      */
     private function redirectToPostPage($sPostId)
     {

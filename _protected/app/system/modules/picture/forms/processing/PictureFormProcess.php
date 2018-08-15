@@ -20,7 +20,7 @@ use PH7\Framework\Security\Moderation\Filter;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Util\Various;
 
-class PictureFormProcess extends Form
+class PictureFormProcess extends Form implements NudityDetectable
 {
     const MAX_IMAGE_WIDTH = 2500;
     const MAX_IMAGE_HEIGHT = 2500;
@@ -31,8 +31,14 @@ class PictureFormProcess extends Form
     const PICTURE5_SIZE = 1000;
     const PICTURE6_SIZE = 1200;
 
+    /** @var array */
+    private $aPhotos;
+
     /** @var string */
     private $sApproved;
+
+    /** @var int */
+    private $iPhotoIndex;
 
     public function __construct()
     {
@@ -59,10 +65,10 @@ class PictureFormProcess extends Form
         /**
          * Resizing and saving some photos
          */
-        $aPhotos = $_FILES['photos']['tmp_name'];
-        for ($iPhotoIndex = 0, $iNumPhotos = count($aPhotos); $iPhotoIndex < $iNumPhotos; $iPhotoIndex++) {
+        $this->aPhotos = $_FILES['photos']['tmp_name'];
+        for ($this->iPhotoIndex = 0, $iNumPhotos = count($this->aPhotos); $this->iPhotoIndex < $iNumPhotos; $this->iPhotoIndex++) {
             $oPicture1 = new Image(
-                $aPhotos[$iPhotoIndex],
+                $this->aPhotos[$this->iPhotoIndex],
                 self::MAX_IMAGE_WIDTH,
                 self::MAX_IMAGE_HEIGHT
             );
@@ -118,11 +124,11 @@ class PictureFormProcess extends Form
             $this->sApproved = DbConfig::getSetting('pictureManualApproval') == 0 ? '1' : '0';
 
             if ($this->isNudityFilterEligible()) {
-                $this->checkNudityFilter($aPhotos[$iPhotoIndex]);
+                $this->checkNudityFilter();
             }
 
             // It creates a nice title if no title is specified.
-            $sTitle = $this->getImageTitle($iPhotoIndex, $oPicture1);
+            $sTitle = $this->getImageTitle($oPicture1);
             $sTitle = MediaCore::cleanTitle($sTitle);
 
             (new PictureModel)->addPhoto(
@@ -152,22 +158,14 @@ class PictureFormProcess extends Form
         );
     }
 
-    /**
-     * @return bool
-     */
-    private function isNudityFilterEligible()
+    public function isNudityFilterEligible()
     {
         return $this->sApproved === '1' && DbConfig::getSetting('nudityFilter');
     }
 
-    /**
-     * @param string $sFile File path.
-     *
-     * @return void
-     */
-    private function checkNudityFilter($sFile)
+    public function checkNudityFilter()
     {
-        if (Filter::isNudity($sFile)) {
+        if (Filter::isNudity($this->aPhotos[$this->iPhotoIndex])) {
             // The photo(s) seems to be suitable for adults only, so set for moderation
             $this->sApproved = '0';
         }
@@ -176,12 +174,11 @@ class PictureFormProcess extends Form
     /**
      * Create a nice picture title if no title is specified.
      *
-     * @param int $iPhotoIndex
      * @param Image $oPicture
      *
      * @return string
      */
-    private function getImageTitle($iPhotoIndex, Image $oPicture)
+    private function getImageTitle(Image $oPicture)
     {
         if ($this->httpRequest->postExists('title') &&
             $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2
@@ -197,7 +194,7 @@ class PictureFormProcess extends Form
                 str_ireplace(
                     PH7_DOT . $oPicture->getExt(),
                     '',
-                    escape($_FILES['photos']['name'][$iPhotoIndex], true)
+                    escape($this->aPhotos[$this->iPhotoIndex], true)
                 )
             )
         );
