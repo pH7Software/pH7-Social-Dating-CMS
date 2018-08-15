@@ -54,14 +54,7 @@ class EditNoteFormProcess extends Form
             return; // Stop execution of the method
         }
 
-        // Thumbnail
-        if ($oNote->isThumbnailUploaded()) {
-            $oNote->setThumb($oPost, $oNoteModel, $this->file);
-
-            if ($this->isNudityFilterEligible()) {
-                $this->checkNudityFilter();
-            }
-        }
+        $this->thumbnail($oPost, $oNoteModel, $oNote);
 
         if (!$this->str->equals($this->httpRequest->post('title'), $oPost->title))
             $oNoteModel->updatePost('title', $this->httpRequest->post('title'), $iNoteId, $iProfileId);
@@ -140,6 +133,17 @@ class EditNoteFormProcess extends Form
         }
 
         return true;
+    }
+
+    private function thumbnail(stdClass $oPost, NoteModel $oNoteModel, Note $oNote)
+    {
+        if ($oNote->isThumbnailUploaded()) {
+            $oNote->setThumb($oPost, $oNoteModel, $this->file);
+
+            if ($this->isNudityFilterEligible()) {
+                $this->checkNudityFilter();
+            }
+        }
     }
 
     /**
