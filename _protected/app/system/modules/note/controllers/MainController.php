@@ -394,10 +394,10 @@ class MainController extends Controller
     {
         $oCache = (new Cache)->start(NoteModel::CACHE_GROUP, 'categorylist', NoteModel::CACHE_LIFETIME);
 
-        if (!$aData = $oCache->get()) {
+        if (!$aCategories = $oCache->get()) {
             $aCategoryList = $this->oNoteModel->getCategory(null, 0, self::MAX_CATEGORIES);
 
-            $aData = [];
+            $aCategories = [];
             foreach ($aCategoryList as $oCategory) {
                 $iTotalPostsPerCat = $this->oNoteModel->category(
                     $oCategory->name,
@@ -408,18 +408,18 @@ class MainController extends Controller
                     self::MAX_CATEGORIES
                 );
 
-                if ($iTotalPostsPerCat > 0 && count($aData) <= self::ITEMS_MENU_CATEGORIES) {
+                if ($iTotalPostsPerCat > 0 && count($aCategories) <= self::ITEMS_MENU_CATEGORIES) {
                     $oData = new stdClass();
                     $oData->totalNotes = $iTotalPostsPerCat;
                     $oData->name = $oCategory->name;
-                    $aData[] = $oData;
+                    $aCategories[] = $oData;
                 }
             }
-            $oCache->put($aData);
+            $oCache->put($aCategories);
         }
         unset($oCache);
 
-        return $aData;
+        return $aCategories;
     }
 
     /**
@@ -429,10 +429,10 @@ class MainController extends Controller
     {
         $oCache = (new Cache)->start(NoteModel::CACHE_GROUP, 'authorlist', NoteModel::CACHE_LIFETIME);
 
-        if (!$aData = $oCache->get()) {
+        if (!$aAuthors = $oCache->get()) {
             $aAuthorList = $this->oNoteModel->getAuthor(0, self::ITEMS_MENU_AUTHORS);
 
-            $aData = [];
+            $aAuthors = [];
             foreach ($aAuthorList as $oAuthor) {
                 $iTotalPostsPerAuthor = $this->oNoteModel->author(
                     $oAuthor->username,
@@ -447,14 +447,14 @@ class MainController extends Controller
                     $oData = new stdClass();
                     $oData->totalNotes = $iTotalPostsPerAuthor;
                     $oData->username = $oAuthor->username;
-                    $aData[] = $oData;
+                    $aAuthors[] = $oData;
                 }
             }
-            $oCache->put($aData);
+            $oCache->put($aAuthors);
         }
         unset($oCache);
 
-        return $aData;
+        return $aAuthors;
     }
 
     /**

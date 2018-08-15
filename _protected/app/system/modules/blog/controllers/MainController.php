@@ -251,10 +251,10 @@ class MainController extends Controller
     {
         $oCache = (new Cache)->start(BlogModel::CACHE_GROUP, 'categorylist', BlogModel::CACHE_LIFETIME);
 
-        if (!$aData = $oCache->get()) {
+        if (!$aCategories = $oCache->get()) {
             $aCategoryList = $this->oBlogModel->getCategory(null, 0, self::MAX_CATEGORIES);
 
-            $aData = [];
+            $aCategories = [];
             foreach ($aCategoryList as $oCategory) {
                 $iTotalPostsPerCat = $this->oBlogModel->category(
                     $oCategory->name,
@@ -265,18 +265,18 @@ class MainController extends Controller
                     self::MAX_CATEGORIES
                 );
 
-                if ($iTotalPostsPerCat > 0 && count($aData) <= self::ITEMS_MENU_CATEGORIES) {
+                if ($iTotalPostsPerCat > 0 && count($aCategories) <= self::ITEMS_MENU_CATEGORIES) {
                     $oData = new stdClass();
                     $oData->totalBlogs = $iTotalPostsPerCat;
                     $oData->name = $oCategory->name;
-                    $aData[] = $oData;
+                    $aCategories[] = $oData;
                 }
             }
-            $oCache->put($aData);
+            $oCache->put($aCategories);
         }
         unset($oCache);
 
-        return $aData;
+        return $aCategories;
     }
 
     /**
