@@ -194,7 +194,7 @@ class PictureFormProcess extends Form implements NudityDetectable
                 str_ireplace(
                     PH7_DOT . $oPicture->getExt(),
                     '',
-                    escape($this->aPhotos[$this->iPhotoIndex], true)
+                    escape($_FILES['photos']['name'][$this->iPhotoIndex], true)
                 )
             )
         );
