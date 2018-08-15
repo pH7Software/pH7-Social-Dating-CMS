@@ -24,11 +24,11 @@ class Image
     private $extension;
 
     /**
-     * Image information
+     * Image type
      *
-     * @var mixed
+     * @var int|bool
      */
-    private $info;
+    private $imageType;
 
     /**
      * Image GD PHP resource
@@ -46,7 +46,7 @@ class Image
     {
         $this->file = $file;
         $this->extension = substr($file, strrpos($file, '.') + 1);
-        $this->info = getimagesize($file);
+        $this->imageType = exif_imagetype($file);
 
         $this->create();
     }
@@ -69,8 +69,7 @@ class Image
      */
     public static function type($file)
     {
-        $type = getimagesize($file);
-        $type = $type[2];
+        $type = exif_imagetype($file);
         switch ($type) {
             case IMAGETYPE_GIF:
                 return 'gif';
@@ -129,7 +128,7 @@ class Image
      */
     public function create()
     {
-        switch ($this->info[2]) {
+        switch ($this->imageType) {
             case IMAGETYPE_JPEG:
                 $this->resource = imagecreatefromjpeg($this->file);
                 break;
