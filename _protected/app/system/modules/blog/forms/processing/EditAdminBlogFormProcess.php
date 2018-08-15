@@ -44,42 +44,58 @@ class EditAdminBlogFormProcess extends Form
         // Thumbnail
         $oBlog->setThumb($oPost, $this->file);
 
-        if (!$this->str->equals($this->httpRequest->post('title'), $oPost->title))
+        if (!$this->str->equals($this->httpRequest->post('title'), $oPost->title)) {
             $oBlogModel->updatePost('title', $this->httpRequest->post('title'), $iBlogId);
+        }
 
         // HTML contents, So we use Http::ONLY_XSS_CLEAN constant
-        if (!$this->str->equals($this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), $oPost->content))
-            $oBlogModel->updatePost('content', $this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), $iBlogId);
+        if (!$this->str->equals($this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), $oPost->content)) {
+            $oBlogModel->updatePost(
+                'content',
+                $this->httpRequest->post('content', Http::ONLY_XSS_CLEAN),
+                $iBlogId
+            );
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('lang_id'), $oPost->langId))
+        if (!$this->str->equals($this->httpRequest->post('lang_id'), $oPost->langId)) {
             $oBlogModel->updatePost('langId', $this->httpRequest->post('lang_id'), $iBlogId);
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('slogan'), $oPost->slogan))
+        if (!$this->str->equals($this->httpRequest->post('slogan'), $oPost->slogan)) {
             $oBlogModel->updatePost('slogan', $this->httpRequest->post('slogan'), $iBlogId);
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('tags'), $oPost->tags))
+        if (!$this->str->equals($this->httpRequest->post('tags'), $oPost->tags)) {
             $oBlogModel->updatePost('tags', $this->httpRequest->post('tags'), $iBlogId);
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('page_title'), $oPost->pageTitle))
+        if (!$this->str->equals($this->httpRequest->post('page_title'), $oPost->pageTitle)) {
             $oBlogModel->updatePost('pageTitle', $this->httpRequest->post('page_title'), $iBlogId);
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('meta_description'), $oPost->metaDescription))
+        if (!$this->str->equals($this->httpRequest->post('meta_description'), $oPost->metaDescription)) {
             $oBlogModel->updatePost('metaDescription', $this->httpRequest->post('meta_description'), $iBlogId);
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('meta_keywords'), $oPost->metaKeywords))
+        if (!$this->str->equals($this->httpRequest->post('meta_keywords'), $oPost->metaKeywords)) {
             $oBlogModel->updatePost('metaKeywords', $this->httpRequest->post('meta_keywords'), $iBlogId);
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('meta_robots'), $oPost->metaRobots))
+        if (!$this->str->equals($this->httpRequest->post('meta_robots'), $oPost->metaRobots)) {
             $oBlogModel->updatePost('metaRobots', $this->httpRequest->post('meta_robots'), $iBlogId);
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('meta_author'), $oPost->metaAuthor))
+        if (!$this->str->equals($this->httpRequest->post('meta_author'), $oPost->metaAuthor)) {
             $oBlogModel->updatePost('metaAuthor', $this->httpRequest->post('meta_author'), $iBlogId);
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('meta_copyright'), $oPost->metaCopyright))
+        if (!$this->str->equals($this->httpRequest->post('meta_copyright'), $oPost->metaCopyright)) {
             $oBlogModel->updatePost('metaCopyright', $this->httpRequest->post('meta_copyright'), $iBlogId);
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('enable_comment'), $oPost->enableComment))
+        if (!$this->str->equals($this->httpRequest->post('enable_comment'), $oPost->enableComment)) {
             $oBlogModel->updatePost('enableComment', $this->httpRequest->post('enable_comment'), $iBlogId);
+        }
 
         // Updated the modification Date
         $oBlogModel->updatePost('updatedDate', $this->dateTime->get()->dateTime('Y-m-d H:i:s'), $sPostId);

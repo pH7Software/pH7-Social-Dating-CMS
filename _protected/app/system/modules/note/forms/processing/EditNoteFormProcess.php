@@ -56,42 +56,59 @@ class EditNoteFormProcess extends Form
 
         $this->thumbnail($oPost, $oNoteModel, $oNote);
 
-        if (!$this->str->equals($this->httpRequest->post('title'), $oPost->title))
+        if (!$this->str->equals($this->httpRequest->post('title'), $oPost->title)) {
             $oNoteModel->updatePost('title', $this->httpRequest->post('title'), $iNoteId, $iProfileId);
+        }
 
         // HTML contents, So we use Http::ONLY_XSS_CLEAN constant
-        if (!$this->str->equals($this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), $oPost->content))
-            $oNoteModel->updatePost('content', $this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), $iNoteId, $iProfileId);
+        if (!$this->str->equals($this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), $oPost->content)) {
+            $oNoteModel->updatePost(
+                'content',
+                $this->httpRequest->post('content', Http::ONLY_XSS_CLEAN),
+                $iNoteId,
+                $iProfileId
+            );
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('lang_id'), $oPost->langId))
+        if (!$this->str->equals($this->httpRequest->post('lang_id'), $oPost->langId)) {
             $oNoteModel->updatePost('langId', $this->httpRequest->post('lang_id'), $iNoteId, $iProfileId);
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('slogan'), $oPost->slogan))
+        if (!$this->str->equals($this->httpRequest->post('slogan'), $oPost->slogan)) {
             $oNoteModel->updatePost('slogan', $this->httpRequest->post('slogan'), $iNoteId, $iProfileId);
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('tags'), $oPost->tags))
+        if (!$this->str->equals($this->httpRequest->post('tags'), $oPost->tags)) {
             $oNoteModel->updatePost('tags', $this->httpRequest->post('tags'), $iNoteId, $iProfileId);
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('page_title'), $oPost->pageTitle))
+        if (!$this->str->equals($this->httpRequest->post('page_title'), $oPost->pageTitle)) {
             $oNoteModel->updatePost('pageTitle', $this->httpRequest->post('page_title'), $iNoteId, $iProfileId);
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('meta_description'), $oPost->metaDescription))
+        if (!$this->str->equals($this->httpRequest->post('meta_description'), $oPost->metaDescription)) {
             $oNoteModel->updatePost('metaDescription', $this->httpRequest->post('meta_description'), $iNoteId, $iProfileId);
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('meta_keywords'), $oPost->metaKeywords))
+        if (!$this->str->equals($this->httpRequest->post('meta_keywords'), $oPost->metaKeywords)) {
             $oNoteModel->updatePost('metaKeywords', $this->httpRequest->post('meta_keywords'), $iNoteId, $iProfileId);
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('meta_robots'), $oPost->metaRobots))
+        if (!$this->str->equals($this->httpRequest->post('meta_robots'), $oPost->metaRobots)) {
             $oNoteModel->updatePost('metaRobots', $this->httpRequest->post('meta_robots'), $iNoteId, $iProfileId);
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('meta_author'), $oPost->metaAuthor))
+        if (!$this->str->equals($this->httpRequest->post('meta_author'), $oPost->metaAuthor)) {
             $oNoteModel->updatePost('metaAuthor', $this->httpRequest->post('meta_author'), $iNoteId, $iProfileId);
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('meta_copyright'), $oPost->metaCopyright))
+        if (!$this->str->equals($this->httpRequest->post('meta_copyright'), $oPost->metaCopyright)) {
             $oNoteModel->updatePost('metaCopyright', $this->httpRequest->post('meta_copyright'), $iNoteId, $iProfileId);
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('enable_comment'), $oPost->enableComment))
+        if (!$this->str->equals($this->httpRequest->post('enable_comment'), $oPost->enableComment)) {
             $oNoteModel->updatePost('enableComment', $this->httpRequest->post('enable_comment'), $iNoteId, $iProfileId);
+        }
 
         // Updated the approved status
         $oNoteModel->updatePost('approved', $this->iApproved, $iNoteId, $iProfileId);
