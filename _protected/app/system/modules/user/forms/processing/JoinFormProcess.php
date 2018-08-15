@@ -188,7 +188,7 @@ class JoinFormProcess extends Form
     private function hasAvatarNudity($iApproved)
     {
         return $iApproved === 1 && DbConfig::getSetting('nudityFilter') &&
-            Filter::isNudity($_FILES['avatar']['tmp_name'])
+            Filter::isNudity($_FILES['avatar']['tmp_name']);
     }
 
     /**
