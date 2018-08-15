@@ -51,7 +51,7 @@ class AvatarFormProcess extends Form implements NudityDetectable
 
     public function isNudityFilterEligible()
     {
-        return ($this->iApproved === 1 || !AdminCore::auth()) && DbConfig::getSetting('nudityFilter');
+        return $this->iApproved === 1 && !AdminCore::auth() && DbConfig::getSetting('nudityFilter');
     }
 
     public function checkNudityFilter()
