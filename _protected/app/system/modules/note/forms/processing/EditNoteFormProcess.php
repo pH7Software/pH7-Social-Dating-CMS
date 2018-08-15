@@ -155,11 +155,11 @@ class EditNoteFormProcess extends Form
     private function thumbnail(stdClass $oPost, NoteModel $oNoteModel, Note $oNote)
     {
         if ($oNote->isThumbnailUploaded()) {
-            $oNote->setThumb($oPost, $oNoteModel, $this->file);
-
             if ($this->isNudityFilterEligible()) {
                 $this->checkNudityFilter();
             }
+
+            $oNote->setThumb($oPost, $oNoteModel, $this->file);
         }
     }
 
