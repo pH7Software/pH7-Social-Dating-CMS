@@ -158,7 +158,7 @@ class JoinFormProcess extends Form
         } else {
             $iApproved = DbConfig::getSetting('avatarManualApproval') == 0 ? 1 : 0;
 
-            if ($this->hasAvatarNudity($iApproved)) {
+            if ($this->isNudityFilterEligible($iApproved) && $this->hasAvatarNudity()) {
                 // Overwrite "$iApproved" if avatar doesn't look suitable for anyone
                 $iApproved = 0;
             }
@@ -185,10 +185,17 @@ class JoinFormProcess extends Form
      *
      * @return bool
      */
-    private function hasAvatarNudity($iApproved)
+    private function isNudityFilterEligible($iApproved)
     {
-        return $iApproved === 1 && DbConfig::getSetting('nudityFilter') &&
-            Filter::isNudity($_FILES['avatar']['tmp_name']);
+        return $iApproved === 1 && DbConfig::getSetting('nudityFilter');
+    }
+
+    /**
+     * @return bool
+     */
+    private function hasAvatarNudity()
+    {
+        return Filter::isNudity($_FILES['avatar']['tmp_name']);
     }
 
     /**
