@@ -210,8 +210,10 @@ class Image
                 break;
         }
 
-        // change image rights
-        if ($permissions !== false) chmod($file, $permissions);
+        // Change image rights
+        if ($permissions !== false) {
+            chmod($file, $permissions);
+        }
 
         // for method chaining
         return $this;
