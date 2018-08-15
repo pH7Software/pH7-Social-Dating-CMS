@@ -34,7 +34,7 @@ class DesignForm
         }
 
         $oForm->addElement(new \PFBC\Element\File(t('Your Wallpaper for your Profile'), 'wallpaper', ['accept' => 'image/*', 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Button);
+        $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'check']));
         $oForm->render();
     }
 }
