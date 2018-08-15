@@ -39,7 +39,7 @@ class LinkCoreForm
             $oForm->addElement(new \PFBC\Element\Hidden($sKey, $sVal));
         }
 
-        $oForm->addElement(new \PFBC\Element\Submit($sLabel));
+        $oForm->addElement(new \PFBC\Element\Submit($sLabel, ['class' => 'form_link']));
         $oForm->render();
     }
 
