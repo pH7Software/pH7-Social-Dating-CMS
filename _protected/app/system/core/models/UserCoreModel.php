@@ -177,7 +177,7 @@ class UserCoreModel extends Model
         $sSqlDay = $bIsDay ? ' AND (joinDate + INTERVAL :day DAY) > NOW()' : '';
         $sSqlGender = $bIsGender ? ' AND sex = :gender' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(profileId) AS totalUsers FROM' . Db::prefix($sTable) . 'WHERE username <> :ghostUsername' . $sSqlDay . $sSqlGender);
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(profileId) FROM' . Db::prefix($sTable) . 'WHERE username <> :ghostUsername' . $sSqlDay . $sSqlGender);
         $rStmt->bindValue(':ghostUsername', PH7_GHOST_USERNAME, \PDO::PARAM_STR);
         if ($bIsDay) {
             $rStmt->bindValue(':day', $iDay, \PDO::PARAM_INT);
@@ -187,10 +187,10 @@ class UserCoreModel extends Model
         }
         $rStmt->execute();
 
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        $iTotalUsers = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
 
-        return (int)$oRow->totalUsers;
+        return $iTotalUsers;
     }
 
     /**
@@ -320,7 +320,7 @@ class UserCoreModel extends Model
         $bHideUserLogged = !$bIsMail && !empty($this->iProfileId);
 
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = !$bCount ? '*' : 'COUNT(m.profileId) AS totalUsers';
+        $sSqlSelect = !$bCount ? '*' : 'COUNT(m.profileId)';
         $sSqlFirstName = $bIsFirstName ? ' AND LOWER(firstName) LIKE LOWER(:firstName)' : '';
         $sSqlMiddleName = $bIsMiddleName ? ' AND LOWER(middleName) LIKE LOWER(:middleName)' : '';
         $sSqlLastName = $bIsLastName ? ' AND LOWER(lastName) LIKE LOWER(:lastName)' : '';
@@ -427,10 +427,10 @@ class UserCoreModel extends Model
             return $aRow;
         }
 
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        $iTotalUsers = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
 
-        return (int)$oRow->totalUsers;
+        return $iTotalUsers;
     }
 
     /**
@@ -1097,7 +1097,7 @@ class UserCoreModel extends Model
         $sOrder = !$bCount ? SearchCoreModel::order($sOrder, SearchCoreModel::DESC) : '';
 
         $sSqlLimit = (!$bCount || $bLimit) ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = !$bCount ? '*' : 'COUNT(m.profileId) AS totalUsers';
+        $sSqlSelect = !$bCount ? '*' : 'COUNT(m.profileId)';
 
         $sSqlCity = !empty($sCity) ? 'AND (city LIKE :city)' : '';
 
@@ -1132,10 +1132,10 @@ class UserCoreModel extends Model
             return $aRow;
         }
 
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        $iTotalUsers = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
 
-        return (int)$oRow->totalUsers;
+        return $iTotalUsers;
     }
 
     /**
