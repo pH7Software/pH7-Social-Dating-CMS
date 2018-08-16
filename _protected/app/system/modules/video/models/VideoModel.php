@@ -258,10 +258,12 @@ class VideoModel extends VideoCoreModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'v');
 
+        $sSqlSelect = !$bCount ? 'v.*, a.name, m.username, m.firstName, m.sex' : 'COUNT(v.videoId)';
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
         $sSqlWhere = ctype_digit($mLooking) ? ' WHERE v.videoId = :looking' : ' WHERE v.title LIKE :looking OR v.description LIKE :looking';
 
-        $rStmt = Db::getInstance()->prepare('SELECT v.*, a.name, m.username, m.firstName, m.sex FROM' . Db::prefix(DbTableName::VIDEO) . 'AS v INNER JOIN'
+        $rStmt = Db::getInstance()->prepare(
+            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::VIDEO) . 'AS v INNER JOIN'
             . Db::prefix(DbTableName::ALBUM_VIDEO) . 'AS a ON v.albumId = a.albumId INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
             'AS m ON v.profileId = m.profileId' . $sSqlWhere . ' AND v.approved = :approved' . $sSqlOrder . $sSqlLimit
         );
@@ -285,7 +287,7 @@ class VideoModel extends VideoCoreModel
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
         } else {
-            $iTotalVideos = $rStmt->rowCount();
+            $iTotalVideos = (int)$rStmt->fetchColumn();
             Db::free($rStmt);
             $mData = $iTotalVideos;
             unset($oRow);

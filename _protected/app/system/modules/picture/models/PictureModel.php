@@ -255,10 +255,12 @@ class PictureModel extends PictureCoreModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'p');
 
+        $sSqlSelect = !$bCount ? 'p.*, a.name, m.username, m.firstName, m.sex' : 'COUNT(p.pictureId)';
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
         $sSqlWhere = ctype_digit($mLooking) ? ' WHERE p.pictureId = :looking' : ' WHERE p.title LIKE :looking OR p.description LIKE :looking';
 
-        $rStmt = Db::getInstance()->prepare('SELECT p.*, a.name, m.username, m.firstName, m.sex FROM' . Db::prefix(DbTableName::PICTURE) . 'AS p INNER JOIN' .
+        $rStmt = Db::getInstance()->prepare(
+            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::PICTURE) . 'AS p INNER JOIN' .
             Db::prefix(DbTableName::ALBUM_PICTURE) . 'AS a ON p.albumId = a.albumId INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
             'AS m ON p.profileId = m.profileId' . $sSqlWhere . ' AND p.approved = :approved' . $sSqlOrder . $sSqlLimit);
 
@@ -280,7 +282,7 @@ class PictureModel extends PictureCoreModel
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
         } else {
-            $iTotalPictures = $rStmt->rowCount();
+            $iTotalPictures = (int)$rStmt->fetchColumn();
             Db::free($rStmt);
             $mData = $iTotalPictures;
             unset($oRow);
