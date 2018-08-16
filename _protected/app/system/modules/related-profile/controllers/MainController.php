@@ -32,7 +32,7 @@ class MainController extends Controller
         if (!empty($iProfileId)) {
             $oProfileData = $this->oUserModel->readProfile($iProfileId);
             $oProfileFields = $this->oUserModel->getInfoFields($iProfileId);
-            $oRelatedProfiles = $this->relatedProdiles($oProfileData, $oProfileFields);
+            $oRelatedProfiles = $this->relatedProfiles($oProfileData, $oProfileFields);
 
             if (!empty($oRelatedProfiles)) {
                 $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
@@ -52,7 +52,7 @@ class MainController extends Controller
      *
      * @return array|int Related profiles.
      */
-    private function relatedProdiles(stdClass $oProfile, stdClass $oProfileFields)
+    private function relatedProfiles(stdClass $oProfile, stdClass $oProfileFields)
     {
         $aParams = [
             SearchQueryCore::AGE => $oProfile->birthDate,
