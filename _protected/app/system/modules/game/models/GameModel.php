@@ -71,7 +71,7 @@ class GameModel extends GameCoreModel
         $sCategoryName = trim($sCategoryName);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'n');
-        $sSqlSelect = (!$bCount) ? 'g.*, c.*' : 'COUNT(g.gameId) AS totalGames';
+        $sSqlSelect = (!$bCount) ? 'g.*, c.*' : 'COUNT(g.gameId)';
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
 
         $sSql = 'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::GAME) . 'AS g LEFT JOIN ' .
@@ -90,13 +90,11 @@ class GameModel extends GameCoreModel
 
         if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
         } else {
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
-            $mData = (int)$oRow->totalGames;
-            unset($oRow);
+            $mData = (int)$rStmt->fetchColumn();
         }
+
+        Db::free($rStmt);
 
         return $mData;
     }
@@ -110,18 +108,16 @@ class GameModel extends GameCoreModel
     {
         $this->cache->start(static::CACHE_GROUP, 'file' . $iGameId, static::CACHE_TIME);
 
-        if (!$sData = $this->cache->get()) {
+        if (!$sFile = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT file FROM' . Db::prefix(DbTableName::GAME) . 'WHERE gameId = :gameId LIMIT 1');
             $rStmt->bindValue(':gameId', $iGameId, \PDO::PARAM_INT);
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $sFile = $rStmt->fetchColumn();
             Db::free($rStmt);
-            $sData = $oRow->file;
-            unset($oRow);
-            $this->cache->put($sData);
+            $this->cache->put($sFile);
         }
 
-        return $sData;
+        return $sFile;
     }
 
     /**
@@ -144,7 +140,7 @@ class GameModel extends GameCoreModel
         $mLooking = trim($mLooking);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
-        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(gameId) AS totalGames';
+        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(gameId)';
 
         $sSqlWhere = ' WHERE title LIKE :looking OR name LIKE :looking OR description LIKE :looking OR keywords LIKE :looking';
         if (ctype_digit($mLooking)) {
@@ -170,32 +166,29 @@ class GameModel extends GameCoreModel
 
         if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
         } else {
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
-            $mData = (int)$oRow->totalGames;
-            unset($oRow);
+            $mData = (int)$rStmt->fetchColumn();
         }
 
         return $mData;
     }
 
+    /**
+     * @return int
+     */
     public function totalGames()
     {
         $this->cache->start(static::CACHE_GROUP, 'totalGames', static::CACHE_TIME);
 
-        if (!$sData = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT COUNT(gameId) AS totalGames FROM' . Db::prefix(DbTableName::GAME));
+        if (!$iTotalGames = $this->cache->get()) {
+            $rStmt = Db::getInstance()->prepare('SELECT COUNT(gameId) FROM' . Db::prefix(DbTableName::GAME));
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $iTotalGames = (int)$rStmt->fetchColumn();
             Db::free($rStmt);
-            $sData = (int)$oRow->totalGames;
-            unset($oRow);
-            $this->cache->put($sData);
+            $this->cache->put($iTotalGames);
         }
 
-        return $sData;
+        return $iTotalGames;
     }
 
     /**
