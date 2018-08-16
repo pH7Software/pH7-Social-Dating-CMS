@@ -40,17 +40,17 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider validNamesProvider
      */
-    public function testValidName($sName)
+    public function testValidName($sName, $iMinLength, $iMaxLength)
     {
-        $this->assertTrue($this->oValidate->name($sName));
+        $this->assertTrue($this->oValidate->name($sName, $iMinLength, $iMaxLength));
     }
 
     /**
      * @dataProvider invalidNamesProvider
      */
-    public function testInvalidName($sName)
+    public function testInvalidName($sName, $iMinLength, $iMaxLength)
     {
-        $this->assertFalse($this->oValidate->name($sName));
+        $this->assertFalse($this->oValidate->name($sName, $iMinLength, $iMaxLength));
     }
 
     /**
@@ -131,12 +131,14 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     public function validNamesProvider()
     {
         return [
-            ['Píėrre'],
-            ['Amélie'],
-            ['Pierre-Henry'],
-            ['Pierre-Henry Soria'],
-            ['Àngel Nøisã'],
-            ['Nôël Großkreutz']
+            ['Píėrre', 2, 20],
+            ['Amélie', 2, 20],
+            ['Pierre-Henry', 2, 20],
+            ['Pierre-Henry Soria', 2, 20],
+            ['Pierre-Théodore Rollier', 10, 25],
+            ['Àngel Nøisã', 2, 20],
+            ['Nôël Großkreutz', 2, 20],
+            ['Camarón de la Isla', 2, 20]
         ];
     }
 
@@ -146,14 +148,15 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     public function invalidNamesProvider()
     {
         return [
-            ['o'],
-            ['{NOT A NAME}'],
-            ['*&^'],
-            ['http://affiliate-site.com'],
-            ['https://spam'],
-            [4335],
-            ['$money$'],
-            ['James€']
+            ['abcdef', 2, 4],
+            ['o', 2, 20],
+            ['{NOT A NAME}', 2, 20],
+            ['*&^', 2, 20],
+            ['http://affiliate-site.com', 2, 20],
+            ['https://spam', 2, 20],
+            [4335, 2, 20],
+            ['$money$', 2, 20],
+            ['James€', 2, 20]
         ];
     }
 
