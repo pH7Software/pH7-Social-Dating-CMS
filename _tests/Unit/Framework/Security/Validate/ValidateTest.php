@@ -86,6 +86,22 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider validDateOfBirthsProvider
+     */
+    public function testBirthDate($sDate, $iMinAge, $iMaxAge)
+    {
+        $this->assertTrue($this->oValidate->birthDate($sDate, $iMinAge, $iMaxAge));
+    }
+
+    /**
+     * @dataProvider invalidDateOfBirthsProvider
+     */
+    public function testInvalidBirthDate($sDate, $iMinAge, $iMaxAge)
+    {
+        $this->assertFalse($this->oValidate->birthDate($sDate, $iMinAge, $iMaxAge));
+    }
+
+    /**
      * @return array
      */
     public function validHexCodesProvider()
@@ -189,6 +205,34 @@ class ValidateTest extends PHPUnit_Framework_TestCase
             ['one'],
             ['lalal'],
             ['']
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function validDateOfBirthsProvider()
+    {
+        return [
+            ['02/02/1989', 18, 99],
+            ['02/22/1990', 20, 90],
+            ['12/10/1998', 18, 80],
+            ['12/10/1998', 18, 99]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function invalidDateOfBirthsProvider()
+    {
+        return [
+            ['00/00/0000', 18, 99],
+            ['01/10/1980', 18, 20],
+            ['01/03/01990', 18, 99],
+            ['01/03/1990/03', 18, 99],
+            ['03/00/1986', 18, 99],
+            ['03-10-1986', 18, 99],
         ];
     }
 }
