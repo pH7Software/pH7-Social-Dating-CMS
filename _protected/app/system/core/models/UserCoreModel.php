@@ -543,19 +543,19 @@ class UserCoreModel extends Model
     {
         $this->cache->start(self::CACHE_GROUP, 'isNotification' . $iProfileId, static::CACHE_TIME);
 
-        if (!$bData = $this->cache->get()) {
+        if (!$bNotification = $this->cache->get()) {
             $sSql = 'SELECT ' . $sNotifName . ' FROM' . Db::prefix(DbTableName::MEMBER_NOTIFICATION) .
                 'WHERE profileId = :profileId AND ' . $sNotifName . ' = 1 LIMIT 1';
 
             $rStmt = Db::getInstance()->prepare($sSql);
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
-            $bData = ($rStmt->rowCount() === 1);
+            $bNotification = $rStmt->rowCount() === 1;
             Db::free($rStmt);
-            $this->cache->put($bData);
+            $this->cache->put($bNotification);
         }
 
-        return $bData;
+        return $bNotification;
     }
 
     /**

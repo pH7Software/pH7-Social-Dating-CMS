@@ -22,7 +22,7 @@ class NoteModel extends NoteCoreModel
     public function getCategory($iNoteId = null, $iOffset, $iLimit)
     {
         $this->cache->start(self::CACHE_GROUP, 'category' . $iNoteId . $iOffset . $iLimit, static::CACHE_LIFETIME);
-        if (!$aData = $this->cache->get()) {
+        if (!$aCategories = $this->cache->get()) {
             $iOffset = (int)$iOffset;
             $iLimit = (int)$iLimit;
 
@@ -37,12 +37,13 @@ class NoteModel extends NoteCoreModel
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
             $rStmt->execute();
-            $aData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+
+            $aCategories = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $this->cache->put($aData);
+            $this->cache->put($aCategories);
         }
 
-        return $aData;
+        return $aCategories;
     }
 
     /**
@@ -55,7 +56,7 @@ class NoteModel extends NoteCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'author' . $iOffset . $iLimit, static::CACHE_LIFETIME);
 
-        if (!$aData = $this->cache->get()) {
+        if (!$aAuthors = $this->cache->get()) {
             $iOffset = (int)$iOffset;
             $iLimit = (int)$iLimit;
 
@@ -67,12 +68,13 @@ class NoteModel extends NoteCoreModel
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
             $rStmt->execute();
-            $aData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+
+            $aAuthors = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $this->cache->put($aData);
+            $this->cache->put($aAuthors);
         }
 
-        return $aData;
+        return $aAuthors;
     }
 
     /**
@@ -103,7 +105,7 @@ class NoteModel extends NoteCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'readPost' . $sPostId . $iProfileId . $iApproved, static::CACHE_LIFETIME);
 
-        if (!$oData = $this->cache->get()) {
+        if (!$oPost = $this->cache->get()) {
             $bIsApproved = isset($iApproved);
 
             $sSqlApproved = $bIsApproved ? ' AND approved = :approved' : '';
@@ -119,42 +121,42 @@ class NoteModel extends NoteCoreModel
                 $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
             }
             $rStmt->execute();
-            $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $oPost = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $this->cache->put($oData);
+            $this->cache->put($oPost);
         }
 
-        return $oData;
+        return $oPost;
     }
 
     /**
-     * @param array $aData
+     * @param array $aPost
      *
      * @return bool
      */
-    public function addPost(array $aData)
+    public function addPost(array $aPost)
     {
         $sSqlQuery = 'INSERT INTO' . Db::prefix(DbTableName::NOTE) .
             '(profileId, postId, langId, title, content, slogan, tags, pageTitle, metaDescription, metaKeywords, metaRobots, metaAuthor, metaCopyright, enableComment, createdDate, approved)
             VALUES (:profileId, :postId, :langId, :title, :content, :slogan, :tags, :pageTitle, :metaDescription, :metaKeywords, :metaRobots, :metaAuthor, :metaCopyright, :enableComment, :createdDate, :approved)';
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
 
-        $rStmt->bindValue(':profileId', $aData['profile_id'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':postId', $aData['post_id'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':langId', $aData['lang_id'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':title', $aData['title'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':content', $aData['content'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':slogan', $aData['slogan'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':tags', $aData['tags'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':pageTitle', $aData['page_title'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':metaDescription', $aData['meta_description'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':metaKeywords', $aData['meta_keywords'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':metaRobots', $aData['meta_robots'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':metaAuthor', $aData['meta_author'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':metaCopyright', $aData['meta_copyright'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':enableComment', $aData['enable_comment'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':createdDate', $aData['created_date'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':approved', $aData['approved'], \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $aPost['profile_id'], \PDO::PARAM_INT);
+        $rStmt->bindValue(':postId', $aPost['post_id'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':langId', $aPost['lang_id'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':title', $aPost['title'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':content', $aPost['content'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':slogan', $aPost['slogan'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':tags', $aPost['tags'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':pageTitle', $aPost['page_title'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':metaDescription', $aPost['meta_description'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':metaKeywords', $aPost['meta_keywords'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':metaRobots', $aPost['meta_robots'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':metaAuthor', $aPost['meta_author'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':metaCopyright', $aPost['meta_copyright'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':enableComment', $aPost['enable_comment'], \PDO::PARAM_INT);
+        $rStmt->bindValue(':createdDate', $aPost['created_date'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':approved', $aPost['approved'], \PDO::PARAM_INT);
 
         return $rStmt->execute();
     }
@@ -360,7 +362,7 @@ class NoteModel extends NoteCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'postIdExists' . $sPostId . $iProfileId, static::CACHE_LIFETIME);
 
-        if (!$bData = $this->cache->get()) {
+        if (!$bPostExists = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare(
                 'SELECT COUNT(postId) FROM' . Db::prefix(DbTableName::NOTE) .
                 'WHERE postId = :postId AND profileId = :profileId LIMIT 1'
@@ -368,12 +370,13 @@ class NoteModel extends NoteCoreModel
             $rStmt->bindValue(':postId', $sPostId, \PDO::PARAM_STR);
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
-            $bData = ($rStmt->fetchColumn() == 1);
+
+            $bPostExists = $rStmt->fetchColumn() == 1;
             Db::free($rStmt);
-            $this->cache->put($bData);
+            $this->cache->put($bPostExists);
         }
 
-        return $bData;
+        return $bPostExists;
     }
 
     /**

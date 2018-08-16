@@ -129,7 +129,7 @@ class CommentModel extends CommentCoreModel
     {
         $this->cache->start(static::CACHE_GROUP, 'idExists' . $iId . $sTable, static::CACHE_TIME);
 
-        if (!$bData = $this->cache->get()) {
+        if (!$bExists = $this->cache->get()) {
             $iId = (int)$iId;
             $sTable = CommentCore::checkTable($sTable);
             $sRealTable = Comment::getTable($sTable);
@@ -138,12 +138,12 @@ class CommentModel extends CommentCoreModel
             $rStmt = Db::getInstance()->prepare('SELECT COUNT(' . $sProfileIdColumn . ') FROM' . Db::prefix($sRealTable) . 'WHERE ' . $sProfileIdColumn . ' = :id LIMIT 1');
             $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
             $rStmt->execute();
-            $bData = ($rStmt->fetchColumn() == 1);
+            $bExists = $rStmt->fetchColumn() == 1;
             Db::free($rStmt);
-            $this->cache->put($bData);
+            $this->cache->put($bExists);
         }
 
-        return $bData;
+        return $bExists;
     }
 
     /**

@@ -54,9 +54,9 @@ class Statistic
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
         $rStmt->execute();
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        $iViews = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
 
-        return (int)@$oRow->views;
+        return $iViews;
     }
 }

@@ -47,10 +47,10 @@ class CommentCoreModel extends Model
         $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         $rStmt->execute();
-        $aData = $rStmt->fetchAll(PDO::FETCH_OBJ);
+        $aComments = $rStmt->fetchAll(PDO::FETCH_OBJ);
         Db::free($rStmt);
 
-        return $aData;
+        return $aComments;
     }
 
     /**
@@ -81,10 +81,10 @@ class CommentCoreModel extends Model
         $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         $rStmt->execute();
-        $aData = $rStmt->fetchAll(PDO::FETCH_OBJ);
+        $aComments = $rStmt->fetchAll(PDO::FETCH_OBJ);
         Db::free($rStmt);
 
-        return $aData;
+        return $aComments;
     }
 
     /**
