@@ -628,7 +628,7 @@ class Design
             $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . $sDir . $sAvatar;
             $sUrl = PH7_URL_DATA_SYS_MOD . $sDir . str_replace($sExt, $sSize . $sExt, $sAvatar);
 
-            $bIsModerate = (Registry::getInstance()->module === PH7_ADMIN_MOD);
+            $bIsModerationMode = Registry::getInstance()->module === PH7_ADMIN_MOD;
 
             if (!is_file($sPath) || $oGetAvatar->approvedAvatar == '0') {
                 /* If sex is empty, it is recovered in the database using information from member */
@@ -651,7 +651,7 @@ class Design
                         // If there is no Gravatar, we set the default pH7CMS's avatar
                         $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/' . $sIcon . '_no_picture' . $sSize . self::AVATAR_IMG_EXT;
                     }
-                } elseif (!$bIsModerate) { // We don't display pending approval image when admins are on the panel admin
+                } elseif (!$bIsModerationMode) { // We don't display pending approval image when admins are on the panel admin
                     $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/pending' . $sSize . self::AVATAR_IMG_EXT;
                 }
             }
