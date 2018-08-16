@@ -16,8 +16,7 @@
             </span>
         </p>
 
-
-        <br /><hr /><br />
+        <hr />
         <p class="center">
             {{ $design->like($data->username, $data->firstName, $data->sex, (new UserCore)->getProfileLink($data->username)) }} | {{ $design->report($data->profileId, $data->username, $data->firstName, $data->sex) }}
         </p>
