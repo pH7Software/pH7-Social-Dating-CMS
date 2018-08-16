@@ -211,11 +211,23 @@ function update-geoip()
     echo "Temporary saving GeoIp DB to $full_tmp_path"
     wget $database_geo_lite_url -O $full_tmp_path
 
-    echo "Removing previous Geo DB version at $full_db_path"
-    rm $full_db_path
+    if [ ! -f $full_tmp_path ]; then
+        echo "$full_tmp_path wasn't found."
+        exit 1
+    fi
+
+    if [ ! -f $full_db_path ]; then
+        echo "Removing previous Geo DB version at $full_db_path"
+        rm $full_db_path
+    fi
 
     echo "Extracting archive to $full_tmp_path"
     tar -xvzf $full_tmp_path -C $target_path --strip-components 1
+
+    if [ ! -f $full_db_path ]; then
+        echo "$full_db_path not found! Please try to install GeoIP DB manually (${database_geo_lite_url})"
+        exit 1
+    fi
 
     echo "Removing temporary file $full_tmp_path"
     rm $full_tmp_path
