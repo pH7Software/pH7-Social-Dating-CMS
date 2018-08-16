@@ -419,7 +419,8 @@ function check_url($sUrl)
 function is_software_installed($sCtrlName, $sAction)
 {
     return is_file(PH7_ROOT_PUBLIC . '_constants.php') &&
-        $sCtrlName === 'InstallController' && in_array($sAction, array('index', 'license'));
+        $sCtrlName === 'InstallController' &&
+        in_array($sAction, array('index', 'license'), true);
 }
 
 /**
