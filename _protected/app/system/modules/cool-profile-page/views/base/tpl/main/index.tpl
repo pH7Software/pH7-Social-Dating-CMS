@@ -188,6 +188,7 @@
                     </script>
                 </div>
             </div>
+            <div class="clear"></div>
         {/if}
 
         <div class="center small">
