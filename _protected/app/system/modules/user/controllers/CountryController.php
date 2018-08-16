@@ -91,8 +91,8 @@ class CountryController extends Controller
         $this->view->meta_description = t('Free online dating in %0% with single women & men. Personals, meet people & find friends in %1% on internet dating site. Find sweet love or sex dating and flirt in %2%, %3% with %site_name%', $this->registry->country, $this->registry->country, $this->registry->country, $this->registry->city);
         $this->view->meta_keywords = t('meeting woman, meeting man, %0%, %1%, meet people, networking, friends, communicate, meet online, online community, clubs, announces meeting, free dating, dating, %2% dating, communication, matrimonial meeting, sharing photos, flirt, finding friends, classifieds, personals, online, social networking', $this->registry->country, $this->registry->city, $this->registry->country);
         $this->view->h1_title = t('Meet new people in %0% %1%', '<span class="pH1">' . $this->registry->country . '</span>', '<span class="pH1">' . $this->registry->city . '</span>');
-        $sMemberTxt = nt('%n% member', '%n% members', $iTotalUsers);
-        $this->view->h3_title = t('%0% lives near %1% %2%', $sMemberTxt, $this->registry->country, $this->registry->city);
+        $sMemberTxt = nt('%n% member lives', '%n% members live', $iTotalUsers);
+        $this->view->h3_title = t('%0% near %1% %2%', $sMemberTxt, $this->registry->country, $this->registry->city);
     }
 
     /**
