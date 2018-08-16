@@ -92,8 +92,8 @@ class UserCoreModel extends Model
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
 
-        $sDbEmail = (!empty($oRow->email)) ? $oRow->email : '';
-        $sDbPassword = (!empty($oRow->password)) ? $oRow->password : '';
+        $sDbEmail = !empty($oRow->email) ? $oRow->email : '';
+        $sDbPassword = !empty($oRow->password) ? $oRow->password : '';
 
         if (strtolower($sEmail) !== strtolower($sDbEmail)) {
             return 'email_does_not_exist';
