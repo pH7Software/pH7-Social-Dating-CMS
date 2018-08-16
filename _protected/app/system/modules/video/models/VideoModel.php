@@ -285,13 +285,11 @@ class VideoModel extends VideoCoreModel
 
         if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
         } else {
-            $iTotalVideos = (int)$rStmt->fetchColumn();
-            Db::free($rStmt);
-            $mData = $iTotalVideos;
-            unset($oRow);
+            $mData = (int)$rStmt->fetchColumn();
         }
+
+        Db::free($rStmt);
 
         return $mData;
     }

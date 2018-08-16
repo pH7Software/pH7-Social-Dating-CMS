@@ -181,7 +181,7 @@ class NoteModel extends NoteCoreModel
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'n');
 
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = !$bCount ? 'n.*, d.*, m.username, m.firstName, m.sex' : 'COUNT(n.noteId) AS totalNotes';
+        $sSqlSelect = !$bCount ? 'n.*, d.*, m.username, m.firstName, m.sex' : 'COUNT(n.noteId)';
 
         $sSqlQuery = 'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::NOTE) .
             'AS n LEFT JOIN' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'AS c ON n.noteId = c.noteId LEFT JOIN' .
@@ -200,13 +200,11 @@ class NoteModel extends NoteCoreModel
 
         if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
         } else {
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
-            $mData = (int)$oRow->totalNotes;
-            unset($oRow);
+            $mData = (int)$rStmt->fetchColumn();
         }
+
+        Db::free($rStmt);
 
         return $mData;
     }
@@ -231,7 +229,7 @@ class NoteModel extends NoteCoreModel
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'n');
 
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = !$bCount ? 'n.*, m.username, m.firstName, m.sex' : 'COUNT(m.profileId) AS totalNotes';
+        $sSqlSelect = !$bCount ? 'n.*, m.username, m.firstName, m.sex' : 'COUNT(m.profileId)';
 
         $sSqlQuery = 'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::NOTE) . 'AS n
             INNER JOIN' . Db::prefix(DbTableName::MEMBER) . 'AS m ON n.profileId = m.profileId WHERE m.username LIKE :name' .
@@ -249,13 +247,11 @@ class NoteModel extends NoteCoreModel
 
         if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
         } else {
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
-            $mData = (int)$oRow->totalNotes;
-            unset($oRow);
+            $mData = (int)$rStmt->fetchColumn();
         }
+
+        Db::free($rStmt);
 
         return $mData;
     }
@@ -283,7 +279,7 @@ class NoteModel extends NoteCoreModel
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'n');
 
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = !$bCount ? 'n.*, m.username, m.firstName, m.sex' : 'COUNT(noteId) AS totalNotes';
+        $sSqlSelect = !$bCount ? 'n.*, m.username, m.firstName, m.sex' : 'COUNT(noteId)';
 
         $sSqlWhere = ' WHERE (postId LIKE :looking OR title LIKE :looking OR
             pageTitle LIKE :looking OR content LIKE :looking OR tags LIKE :looking OR
@@ -316,13 +312,11 @@ class NoteModel extends NoteCoreModel
 
         if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
         } else {
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
-            $mData = (int)$oRow->totalNotes;
-            unset($oRow);
+            $mData = (int)$rStmt->fetchColumn();
         }
+
+        Db::free($rStmt);
 
         return $mData;
     }
@@ -336,20 +330,19 @@ class NoteModel extends NoteCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'postId' . $iNoteId, static::CACHE_LIFETIME);
 
-        if (!$sData = $this->cache->get()) {
+        if (!$sPostId = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare(
                 'SELECT postId FROM' . Db::prefix(DbTableName::NOTE) . 'WHERE noteId = :noteId LIMIT 1'
             );
             $rStmt->bindValue(':noteId', $iNoteId, \PDO::PARAM_INT);
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+
+            $sPostId = $rStmt->fetchColumn();
             Db::free($rStmt);
-            $sData = @$oRow->postId;
-            unset($oRow);
-            $this->cache->put($sData);
+            $this->cache->put($sPostId);
         }
 
-        return $sData;
+        return $sPostId;
     }
 
     /**

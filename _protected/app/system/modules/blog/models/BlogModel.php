@@ -138,7 +138,7 @@ class BlogModel extends BlogCoreModel
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = !$bCount ? 'b.*, d.*' : 'COUNT(b.blogId) AS totalBlogs';
+        $sSqlSelect = !$bCount ? 'b.*, d.*' : 'COUNT(b.blogId)';
 
         $sSqlQuery =
             'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::BLOG) .
@@ -158,13 +158,11 @@ class BlogModel extends BlogCoreModel
 
         if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
         } else {
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
-            $mData = (int)$oRow->totalBlogs;
-            unset($oRow);
+            $mData = (int)$rStmt->fetchColumn();
         }
+
+        Db::free($rStmt);
 
         return $mData;
     }
@@ -189,7 +187,7 @@ class BlogModel extends BlogCoreModel
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = !$bCount ? '*' : 'COUNT(blogId) AS totalBlogs';
+        $sSqlSelect = !$bCount ? '*' : 'COUNT(blogId)';
 
         $sSqlWhere = 'WHERE postId LIKE :looking OR title LIKE :looking OR
                 pageTitle LIKE :looking OR content LIKE :looking OR tags LIKE :looking';
@@ -216,13 +214,11 @@ class BlogModel extends BlogCoreModel
 
         if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
         } else {
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
-            $mData = (int)$oRow->totalBlogs;
-            unset($oRow);
+            $mData = (int)$rStmt->fetchColumn();
         }
+
+        Db::free($rStmt);
 
         return $mData;
     }

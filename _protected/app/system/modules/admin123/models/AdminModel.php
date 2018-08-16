@@ -30,10 +30,10 @@ class AdminModel extends AdminCoreModel
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $sUsername, \PDO::PARAM_STR);
         $rStmt->execute();
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        $sHashedPassword = $rStmt->fetchColumn();
         Db::free($rStmt);
 
-        return Security::checkPwd($sPassword, @$oRow->password);
+        return Security::checkPwd($sPassword, $sHashedPassword);
     }
 
     /**
@@ -105,7 +105,7 @@ class AdminModel extends AdminCoreModel
         $mLooking = trim($mLooking);
 
         $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(profileId) AS totalUsers';
+        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(profileId)';
 
         if (ctype_digit($mLooking)) {
             $sSqlWhere = ' WHERE profileId = :looking';
@@ -132,13 +132,11 @@ class AdminModel extends AdminCoreModel
 
         if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
         } else {
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
-            $mData = (int)$oRow->totalUsers;
-            unset($oRow);
+            $mData = (int)$rStmt->fetchColumn();
         }
+
+        Db::free($rStmt);
 
         return $mData;
     }

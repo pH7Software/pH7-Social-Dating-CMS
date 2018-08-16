@@ -280,13 +280,11 @@ class PictureModel extends PictureCoreModel
 
         if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
         } else {
-            $iTotalPictures = (int)$rStmt->fetchColumn();
-            Db::free($rStmt);
-            $mData = $iTotalPictures;
-            unset($oRow);
+            $mData = (int)$rStmt->fetchColumn();
         }
+
+        Db::free($rStmt);
 
         return $mData;
     }

@@ -229,7 +229,7 @@ class MailModel extends MailCoreModel
         $mLooking = trim($mLooking);
 
         $sSqlLimit = !$bCount ? ' LIMIT :offset, :limit' : '';
-        $sSqlSelect = !$bCount ? '*' : 'COUNT(messageId) AS totalMails';
+        $sSqlSelect = !$bCount ? '*' : 'COUNT(messageId)';
         $sSqlFind = ' ' . (ctype_digit($mLooking) ? '(messageId = :looking)' : '(title LIKE :looking OR message LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)');
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
@@ -272,9 +272,7 @@ class MailModel extends MailCoreModel
         if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         } else {
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-            $mData = (int)$oRow->totalMails;
-            unset($oRow);
+            $mData = (int)$rStmt->fetchColumn();
         }
 
         Db::free($rStmt);

@@ -32,19 +32,17 @@ class RatingCoreModel extends Model
         $sTable = Various::checkTable($sTable);
         $sWhere = Various::convertTableToId($sTable);
 
-        if (!$iData = $this->cache->get()) {
+        if (!$iVote = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT votes FROM' . Db::prefix($sTable) .
                 'WHERE ' . $sWhere . ' = :id LIMIT 1');
             $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $iVote = (int)$rStmt->fetchColumn();
             Db::free($rStmt);
-            $iData = (int)@$oRow->votes;
-            unset($oRow);
-            $this->cache->put($iData);
+            $this->cache->put($iVote);
         }
 
-        return $iData;
+        return $iVote;
     }
 
     /**
@@ -61,19 +59,17 @@ class RatingCoreModel extends Model
         $sTable = Various::checkTable($sTable);
         $sWhere = Various::convertTableToId($sTable);
 
-        if (!$fData = $this->cache->get()) {
+        if (!$fScore = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT score FROM' . Db::prefix($sTable) .
                 'WHERE ' . $sWhere . ' = :id LIMIT 1');
             $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $fScore = (float)$rStmt->fetchColumn();
             Db::free($rStmt);
-            $fData = (float)@$oRow->score;
-            unset($oRow);
-            $this->cache->put($fData);
+            $this->cache->put($fScore);
         }
 
-        return $fData;
+        return $fScore;
     }
 
     /**
