@@ -179,6 +179,17 @@
             <div class="clear"></div>
         {/if}
 
+        {if $is_relatedprofile_enabled}
+            <div class="profile-section">
+                <div class="content" id="related_profile">
+                    <script>
+                        var url_related_profile_block = '{{ $design->url('related-profile','main','index',$id) }}';
+                        $('#related_profile').load(url_related_profile_block + ' #related_profile_block');
+                    </script>
+                </div>
+            </div>
+        {/if}
+
         <div class="center small">
             {if !empty($join_date)}
                 {lang 'Join Date:'} <span class="italic">{join_date}</span> •
