@@ -27,6 +27,7 @@ function init() {
     echo "13) file strict permissions"
     echo "14) save code"
     echo "15) backup"
+    echo "16) update geoip"
 
 
     read option
@@ -45,6 +46,7 @@ function init() {
       "file permissions") file-permissions;;
       "file strict permissions") file-strict-permissions;;
       "save code") save-code;;
+      "update geoip") update-geoip;;
       "backup") backup;;
       *) _error
     esac
@@ -192,6 +194,33 @@ function backup() {
 
     tar -jcvf $full_path .
     echo "Backup project successfully created into: $full_path"
+}
+
+# Update GeoIP database
+function update-geoip()
+{
+    geo_archive_filename="GeoLite2-City.tar.gz"
+    database_geo_lite_url="http://geolite.maxmind.com/download/geoip/database/$geo_archive_filename"
+    target_path="./_protected/framework/Geo/Ip/"
+    db_filename="GeoLite2-City.mmdb"
+    tmp_filename="tmp_db.tar.gz"
+    full_tmp_path=$target_path$tmp_filename
+    full_db_path=$target_path$db_filename
+
+    echo "Downloading GeoIP Lite DB from $database_geo_lite_url"
+    echo "Temporary saving GeoIp DB to $full_tmp_path"
+    wget $database_geo_lite_url -O $full_tmp_path
+
+    echo "Removing previous Geo DB version at $full_db_path"
+    rm $full_db_path
+
+    echo "Extracting archive to $full_tmp_path"
+    tar -xvzf $full_tmp_path -C $target_path --strip-components 1
+
+    echo "Removing temporary file $full_tmp_path"
+    rm $full_tmp_path
+
+    echo "GeoIP DB successfully updated at $full_db_path"
 }
 
 
