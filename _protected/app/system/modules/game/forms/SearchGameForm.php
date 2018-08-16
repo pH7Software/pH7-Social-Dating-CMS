@@ -23,7 +23,7 @@ class SearchGameForm
         $oForm->configure(['action' => Uri::get('game', 'main', 'result') . PH7_SH, 'method' => 'get']);
         $oForm->addElement(new \PFBC\Element\Search(t('Search Games'), 'looking', $aOptions));
         $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', [SearchCoreModel::TITLE => t('Title'), SearchCoreModel::VIEWS => t('Popular'), SearchCoreModel::RATING => t('Rated'), SearchCoreModel::DOWNLOADS => t('Downloaded')]));
-        $oForm->addElement(new \PFBC\Element\Select(t('Direction:'), 'sort', [SearchCoreModel::ASC => t('Ascending'), SearchCoreModel::DESC => t('Descending')]));
+        $oForm->addElement(new \PFBC\Element\Select(t('Direction:'), 'sort', [SearchCoreModel::ASC => t('Ascending'), SearchCoreModel::DESC => t('Descending')], ['value' => SearchCoreModel::DESC]));
         $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', ['icon' => 'search']));
         $oForm->render();
     }
