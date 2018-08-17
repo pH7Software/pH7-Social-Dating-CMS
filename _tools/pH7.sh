@@ -216,7 +216,7 @@ function update-geoip-db()
         exit 1
     fi
 
-    if [ ! -f $full_db_path ]; then
+    if [ -f $full_db_path ]; then
         echo "Removing previous Geo DB version at $full_db_path"
         rm $full_db_path
     fi
