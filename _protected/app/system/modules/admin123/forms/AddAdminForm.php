@@ -31,7 +31,7 @@ class AddAdminForm
         $oForm->addElement(new \PFBC\Element\Password(t('Password:'), 'password', ['required' => 1]));
         $oForm->addElement(new \PFBC\Element\Textbox(t('First Name:'), 'first_name', ['required' => 1, 'validation' => new \PFBC\Validation\Name]));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Last Name:'), 'last_name', ['required' => 1, 'validation' => new \PFBC\Validation\Name]));
-        $oForm->addElement(new \PFBC\Element\Radio(t('Gender:'), 'sex', ['male' => t('Man'), 'female' => t('Woman'), 'couple' => t('Couple')], ['value' => 'male', 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Radio(t('Gender:'), 'sex', ['male' => t('Man'), 'female' => t('Woman')], ['value' => 'male', 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\Timezone('Time Zone:', 'time_zone', ['description' => t('With your time zone, the other administrators may know when they can contact you easily.'), 'value' => '-6', 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
