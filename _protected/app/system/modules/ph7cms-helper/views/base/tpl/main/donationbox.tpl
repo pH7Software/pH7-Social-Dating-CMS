@@ -19,6 +19,7 @@
             {/if}
         </p>
     </div>
+
     <p class="center">
         {lang}Will You Be Nice Today...?{/lang}<br />
         <span class="bold">{lang}And make your website better with regular updates.{/lang}</span><br />
