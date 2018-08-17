@@ -24,7 +24,7 @@ class CommentModel extends CommentCoreModel
     {
         $this->cache->start(static::CACHE_GROUP, 'get' . $iCommentId . $sApproved . $sTable, static::CACHE_TIME);
 
-        if (!$oData = $this->cache->get()) {
+        if (!$oComment = $this->cache->get()) {
             $sTable = CommentCore::checkTable($sTable);
 
             $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' .
@@ -33,12 +33,12 @@ class CommentModel extends CommentCoreModel
             $rStmt->bindParam(':commentId', $iCommentId, \PDO::PARAM_INT);
             $rStmt->bindParam(':approved', $sApproved, \PDO::PARAM_STR);
             $rStmt->execute();
-            $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $oComment = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $this->cache->put($oData);
+            $this->cache->put($oComment);
         }
 
-        return $oData;
+        return $oComment;
     }
 
     /**
