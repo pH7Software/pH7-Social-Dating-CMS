@@ -10,7 +10,7 @@
         <p>{lang '-OR-'}</p>
 
         <p class="s_bMarg bold">
-            {if mt_rand(0,1) === 1}
+            {if mt_rand(0,1) === 1} {* gives random boolean *}
                 <a href="{% $config->values['module.setting']['patreon.link'] %}">{lang 'Become a Patron!'}</a>
             {else}
                 <a href="{% $config->values['module.setting']['patreon.link'] %}">
