@@ -10,6 +10,7 @@ namespace PH7;
 
 use PH7\Framework\Date\Various as VDate;
 use PH7\Framework\Layout\Html\Design;
+use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Url\Header;
@@ -92,9 +93,8 @@ class ValidateSiteCore
      */
     private function shouldUserBeRedirected()
     {
-        return !$this->oValidateSiteModel->is() &&
-            $this->removeTime(self::VALIDATE_FORM_PAGE_DELAY) >= $this->iSiteCreationDate &&
-            !$this->oSession->exists(self::SESS_IS_VISITED);
+        return !$this->oValidateSiteModel->is() && !$this->oSession->exists(self::SESS_IS_VISITED) &&
+            ($this->isSoftwareNoticeRemoved() || $this->removeTime(self::VALIDATE_FORM_PAGE_DELAY) >= $this->iSiteCreationDate);
     }
 
     /**
@@ -117,6 +117,14 @@ class ValidateSiteCore
                 '?box=donationbox'
             )
         );
+    }
+
+    /**
+     * @return bool
+     */
+    private function isSoftwareNoticeRemoved()
+    {
+        return (bool)DbConfig::getSetting('displayPoweredByLink');
     }
 
     /**
