@@ -65,8 +65,8 @@ class AdminCoreModel extends UserCoreModel
         $iLimit = (int)$iLimit;
         $mWhat = trim($mWhat);
 
-        $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ? 'm.*, g.name AS membershipName' : 'COUNT(m.profileId) AS totalUsers';
+        $sSqlLimit = !$bCount ? ' LIMIT :offset, :limit' : '';
+        $sSqlSelect = !$bCount ? 'm.*, g.name AS membershipName' : 'COUNT(m.profileId)';
 
         $sSqlQuery = !empty($iBanned) ? '(ban = 1) AND ' : '';
         if ($sWhere === 'all') {
@@ -90,15 +90,13 @@ class AdminCoreModel extends UserCoreModel
         $rStmt->execute();
 
         if (!$bCount) {
-            $aRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
-            return $aRow;
+            $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        } else {
+            $mData = (int)$rStmt->fetchColumn();
         }
-
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
 
-        return (int)$oRow->totalUsers;
+        return $mData;
     }
 
     /**
