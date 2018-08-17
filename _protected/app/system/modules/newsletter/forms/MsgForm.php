@@ -30,7 +30,7 @@ class MsgForm
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'only_subscribers', ['1' => t('Only subscribers registered from the newsletter list')]));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Subject:'), 'subject', ['validation' => new \PFBC\Validation\Str(5, 80), 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\CKEditor(t('Body:'), 'body', ['required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Button(t('Send!'), 'submit'));
+        $oForm->addElement(new \PFBC\Element\Button(t('Send!'), 'submit', ['icon' => 'mail-closed']));
         $oForm->render();
     }
 }
