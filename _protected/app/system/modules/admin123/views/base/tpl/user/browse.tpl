@@ -111,7 +111,7 @@
                             {if $is_mail_enabled}
                                 | <a href="{{ $design->url('mail','main','compose',$user->username) }}" title="{lang 'Send a message to this user'}">{lang 'Send Mail'}</a>
                             {/if}
-                            | <a href="{{ $design->url(PH7_ADMIN_MOD,'user','loginuseras',$user->profileId) }}" title="{lang 'Login as a user (to edit all this user account).'}">{lang 'Login as'}</a> |
+                            | <a href="{{ $design->url(PH7_ADMIN_MOD,'user','loginuseras',$user->profileId) }}" title="{lang 'Login as a user (to edit all this user account).'}">{lang 'Login As'}</a> |
 
                             {if $user->ban == 0}
                                 {{ $design->popupLinkConfirm(t('Ban'), PH7_ADMIN_MOD, 'user', 'ban', $user->profileId) }}
