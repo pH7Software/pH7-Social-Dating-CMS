@@ -59,7 +59,7 @@ class SubscriptionFormProcess extends Form
                     $oSubscriptionModel->unsubscribe($sEmail);
                     \PFBC\Form::setSuccess('form_subscription', t('Your subscription was successfully canceled.'));
                 } else {
-                    \PFBC\Form::setError('form_subscription', t('We have not found any subscriber with the email address.'));
+                    \PFBC\Form::setError('form_subscription', t("We didn't find any subscribers with this email address."));
                 }
             } break;
 
