@@ -78,7 +78,11 @@ class SysVar
     {
         $oSession = new Session;
         $sAffUsername = $oSession->exists('affiliate_username') ? $oSession->get('affiliate_username') : 'aid';
-        $this->sVar = str_replace('%affiliate_url%', Uri::get('affiliate', 'router', 'refer', $sAffUsername), $this->sVar);
+        $this->sVar = str_replace(
+            '%affiliate_url%',
+            Uri::get('affiliate', 'router', 'refer', $sAffUsername),
+            $this->sVar
+        );
         unset($oSession);
     }
 
