@@ -27,7 +27,7 @@ function init() {
     echo "13) file strict permissions"
     echo "14) save code"
     echo "15) backup"
-    echo "16) update geoip"
+    echo "16) update geoip db"
 
 
     read option
@@ -46,7 +46,7 @@ function init() {
       "file permissions") file-permissions;;
       "file strict permissions") file-strict-permissions;;
       "save code") save-code;;
-      "update geoip") update-geoip;;
+      "update geoip db") update-geoip-db;;
       "backup") backup;;
       *) _error
     esac
@@ -197,7 +197,7 @@ function backup() {
 }
 
 # Update GeoIP database
-function update-geoip()
+function update-geoip-db()
 {
     geo_archive_filename="GeoLite2-City.tar.gz"
     database_geo_lite_url="http://geolite.maxmind.com/download/geoip/database/$geo_archive_filename"
