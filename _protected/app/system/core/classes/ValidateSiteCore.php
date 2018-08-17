@@ -93,7 +93,7 @@ class ValidateSiteCore
      */
     private function shouldUserBeRedirected()
     {
-        return !$this->oValidateSiteModel->is() && !$this->oSession->exists(self::SESS_IS_VISITED) &&
+        return $this->isNotValidated() && $this->hasPageNotBeenSeenYet() &&
             ($this->isSoftwareNoticeHidden() || $this->removeTime(self::VALIDATE_FORM_PAGE_DELAY) >= $this->iSiteCreationDate);
     }
 
@@ -122,9 +122,25 @@ class ValidateSiteCore
     /**
      * @return bool
      */
+    private function hasPageNotBeenSeenYet()
+    {
+        return !$this->oSession->exists(self::SESS_IS_VISITED);
+    }
+
+    /**
+     * @return bool
+     */
     private function isSoftwareNoticeHidden()
     {
         return !(bool)DbConfig::getSetting('displayPoweredByLink');
+    }
+
+    /**
+     * @return bool
+     */
+    private function isNotValidated()
+    {
+        return !$this->oValidateSiteModel->is();
     }
 
     /**

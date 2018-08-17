@@ -55,7 +55,8 @@ class MainController extends Controller
 
     public function suggestionBox()
     {
-        $this->session->set(ValidateSiteCore::SESS_IS_VISITED, 1);
+        $this->setPageVisit();
+
         $this->view->page_title = t('Will You Help pH7CMS?');
 
         $sBoxType = $this->getSuggestionBox();
@@ -119,6 +120,11 @@ class MainController extends Controller
         }
 
         return self::VIEW_OPTIONS[mt_rand(0, count(self::VIEW_OPTIONS) - 1)];
+    }
+
+    private function setPageVisit()
+    {
+        $this->session->set(ValidateSiteCore::SESS_IS_VISITED, 1);
     }
 
     /**
