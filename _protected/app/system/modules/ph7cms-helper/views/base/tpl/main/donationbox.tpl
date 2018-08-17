@@ -1,13 +1,13 @@
 <div class="col-md-12">
     <div id="box_block" class="center">
-        <h1>{lang 'Make Your Website Better!'}</h1>
+        <h1>{lang 'Make Your Website Better!'} ❤️</h1>
 
         <form action="{form_action}" method="post">
             {form_body}
             <input type="image" name="submit" src="{url_tpl_mod_img}paypal-donate.en.png" alt="Donate" />
         </form>
 
-        <p>{lang '-OR-'}</p>
+        <p>{lang '~OR~'}</p>
 
         <p class="s_bMarg bold">
             {if mt_rand(0,1) === 1} {* gives random boolean *}
