@@ -86,8 +86,8 @@ class Url
     public static function name($sLink)
     {
         $oStr = new Str;
-        $sDomainName = preg_replace(self::REGEX_URL_FORMAT, '', $oStr->lower($sLink));
-        $sLink = $oStr->upperFirst($sDomainName);
+        $sUrlName = preg_replace(self::REGEX_URL_FORMAT, '', $oStr->lower($sLink));
+        $sLink = $oStr->upperFirst($sUrlName);
         unset($oStr);
 
         return $sLink;
