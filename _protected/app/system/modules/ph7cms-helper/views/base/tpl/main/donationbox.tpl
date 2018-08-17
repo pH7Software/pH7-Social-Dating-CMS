@@ -10,7 +10,13 @@
         <p>{lang '-OR-'}</p>
 
         <p class="s_bMarg bold">
-            <a href="{% $config->values['module.setting']['patreon.link'] %}">{lang 'Become a Patron!'}</a>
+            {if mt_rand(0,1) === 1}
+                <a href="{% $config->values['module.setting']['patreon.link'] %}">{lang 'Become a Patron!'}</a>
+            {else}
+                <a href="{% $config->values['module.setting']['patreon.link'] %}">
+                    <img class="img-rounded" src="{url_tpl_mod_img}patreon-button.en.png" alt="Patreon" />
+                </a>
+            {/if}
         </p>
     </div>
     <p class="center">
