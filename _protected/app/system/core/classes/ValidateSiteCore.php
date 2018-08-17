@@ -124,7 +124,7 @@ class ValidateSiteCore
      */
     private function isSoftwareNoticeHidden()
     {
-        return (bool)DbConfig::getSetting('displayPoweredByLink');
+        return !(bool)DbConfig::getSetting('displayPoweredByLink');
     }
 
     /**
