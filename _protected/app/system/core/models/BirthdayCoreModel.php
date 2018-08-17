@@ -42,7 +42,7 @@ class BirthdayCoreModel
         $iLimit = (int)$iLimit;
 
         $sSqlLimit = (!$bCount && $bIsLimit) ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = !$bCount ? '*' : 'COUNT(profileId) AS totalBirths';
+        $sSqlSelect = !$bCount ? '*' : 'COUNT(profileId)';
         $sSqlWhere = $bIsSex ? ' AND (sex = :sex) ' : '';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
@@ -69,15 +69,12 @@ class BirthdayCoreModel
         $rStmt->execute();
 
         if (!$bCount) {
-            $aRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
-
-            return $aRow;
+            $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        } else {
+            $mData = (int)$rStmt->fetchColumn();
         }
-
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
 
-        return (int)$oRow->totalBirths;
+        return $mData;
     }
 }

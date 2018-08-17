@@ -74,7 +74,7 @@ class VisitorCoreModel
         $mLooking = trim($mLooking);
 
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(who.profileId) AS totalVisitors';
+        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(who.profileId)';
 
         $sSqlWhere = '(m.username LIKE :looking OR m.firstName LIKE :looking OR m.lastName LIKE :looking OR m.email LIKE :looking)';
         if (ctype_digit($mLooking)) {
@@ -97,15 +97,13 @@ class VisitorCoreModel
         $rStmt->execute();
 
         if (!$bCount) {
-            $aRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
-            return $aRow;
+            $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        } else {
+            $mData = (int)$rStmt->fetchColumn();
         }
-
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
 
-        return (int)$oRow->totalVisitors;
+        return $mData;
     }
 
     /**
