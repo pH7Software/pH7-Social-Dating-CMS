@@ -73,8 +73,8 @@ class VisitorCoreModel
         $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
 
-        $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(who.profileId)';
+        $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
+        $sSqlSelect = !$bCount ? '*' : 'COUNT(who.profileId)';
 
         $sSqlWhere = '(m.username LIKE :looking OR m.firstName LIKE :looking OR m.lastName LIKE :looking OR m.email LIKE :looking)';
         if (ctype_digit($mLooking)) {
@@ -87,7 +87,11 @@ class VisitorCoreModel
             'AS m ON who.visitorId = m.profileId WHERE (m.ban = 0) AND (who.profileId = :profileId) AND ' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         $rStmt->bindValue(':profileId', $this->iProfileId, \PDO::PARAM_INT);
-        (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+        if (ctype_digit($mLooking)) {
+            $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
+        } else {
+            $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+        }
 
         if (!$bCount) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);

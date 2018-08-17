@@ -364,8 +364,8 @@ class ForumModel extends ForumCoreModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 't');
 
-        $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ? 'f.*, f.createdDate AS forumCreatedDate, f.updatedDate AS forumUpdatedDate, t.*, m.username, m.firstName, m.sex' : 'COUNT(t.topicId)';
+        $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
+        $sSqlSelect = !$bCount ? 'f.*, f.createdDate AS forumCreatedDate, f.updatedDate AS forumUpdatedDate, t.*, m.username, m.firstName, m.sex' : 'COUNT(t.topicId)';
 
         $sSqlWhere = ' WHERE t.message LIKE :looking OR t.title LIKE :looking OR m.username LIKE :looking';
         if (ctype_digit($mLooking)) {

@@ -103,8 +103,8 @@ class AffiliateModel extends AffiliateCoreModel
         $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
 
-        $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(a.profileId)';
+        $sSqlLimit = !$bCount ? ' LIMIT :offset, :limit' : '';
+        $sSqlSelect = !$bCount ? '*' : 'COUNT(a.profileId)';
 
         $sSqlWhere = ' WHERE username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking OR email LIKE :looking OR bankAccount LIKE :looking OR sex LIKE :looking OR ip LIKE :looking';
         if (ctype_digit($mLooking)) {

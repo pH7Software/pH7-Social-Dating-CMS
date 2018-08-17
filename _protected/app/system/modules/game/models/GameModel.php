@@ -71,8 +71,8 @@ class GameModel extends GameCoreModel
         $sCategoryName = trim($sCategoryName);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'n');
-        $sSqlSelect = (!$bCount) ? 'g.*, c.*' : 'COUNT(g.gameId)';
-        $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
+        $sSqlSelect = !$bCount ? 'g.*, c.*' : 'COUNT(g.gameId)';
+        $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
 
         $sSql = 'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::GAME) . 'AS g LEFT JOIN ' .
             Db::prefix(DbTableName::GAME_CATEGORY) .
@@ -140,7 +140,7 @@ class GameModel extends GameCoreModel
         $mLooking = trim($mLooking);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
-        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(gameId)';
+        $sSqlSelect = !$bCount ? '*' : 'COUNT(gameId)';
 
         $sSqlWhere = ' WHERE title LIKE :looking OR name LIKE :looking OR description LIKE :looking OR keywords LIKE :looking';
         if (ctype_digit($mLooking)) {

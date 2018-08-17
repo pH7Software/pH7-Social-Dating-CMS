@@ -104,8 +104,8 @@ class AdminModel extends AdminCoreModel
         $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
 
-        $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(profileId)';
+        $sSqlLimit = !$bCount ? ' LIMIT :offset, :limit' : '';
+        $sSqlSelect = !$bCount ? '*' : 'COUNT(profileId)';
 
         if (ctype_digit($mLooking)) {
             $sSqlWhere = ' WHERE profileId = :looking';
