@@ -50,6 +50,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Watermark Branding
 * Chat Rooms
 * Chatroulette
+* Instant Messenger (IM module)
 * Games (with high quality and viral games installed)
 * Webcam Shot
 * Affiliate
@@ -65,8 +66,9 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Registration delay (to avoid spam)
 * File Management
 * Dynamic Field Forms Management
-* Privacy Settings
+* Profile Privacy Settings
 * Banner/Advertisement Management
+* Banner Ad Monetization
 * User Dashboard
 * Dating-Style Profile Page
 * Fake Profile Generator
@@ -86,6 +88,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Country Restrictions for Member and Affiliate registration forms
 * Fully API for integration from an external app (iOS/Android, ...), website, program, ...
 * Feedback
+* Full Homepage Customization (profiles block, slogan, SEO text, headline)
 * Fully Responsive Templates
 * Memberships/Groups Manager
 * Publishable easily into Android/iPhone/iOS webview mobile app thanks its Mobile-Optimized Templates
@@ -96,6 +99,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Allow to sign in to your site with Facebook, Google and Twitter thanks pH7CMS's Connect module
 * Invite Friends
 * Social Bookmark (Social Media Sharing Buttons)
+* Login Attempt Protection
 * Powerful Anti-Spam System
 * Full Security system against XSS, CSRF, SQL injection, authentication hacking, session fixation, brute-force, reverse tabnabbing phishing attacks, ... and can even prevent some DDoS attacks!
 * Two-Factor Authentication Option available for Admins, Users and Affiliates
