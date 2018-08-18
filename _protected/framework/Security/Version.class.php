@@ -58,30 +58,7 @@ final class Version
     {
         $oCache = (new Cache)->start('str/security', 'version-info', self::CACHE_TIME);
         if (!$mData = $oCache->get()) {
-            $oDom = new DOMDocument;
-
-            if (!@$oDom->load(self::LATEST_VERSION_URL)) {
-                return false;
-            }
-
-            /** @var DOMElement $oSoft */
-            foreach ($oDom->getElementsByTagName(self::FRAMEWORK_TAG_NAME) as $oSoft) {
-                // Get info for "ph7builder" package
-                $oInfo = $oSoft->getElementsByTagName(self::PACKAGE_TAG_NAME)->item(0);
-
-                $bIsAlert = self::isUpdateAlertEnabled($oInfo);
-                $sVerName = $oInfo->getElementsByTagName('name')->item(0)->nodeValue;
-                $sVerNumber = $oInfo->getElementsByTagName('version')->item(0)->nodeValue;
-                $sVerBuild = $oInfo->getElementsByTagName('build')->item(0)->nodeValue;
-            }
-            unset($oDom);
-
-            $mData = [
-                'is_alert' => $bIsAlert,
-                'name' => $sVerName,
-                'version' => $sVerNumber,
-                'build' => $sVerBuild
-            ];
+            $mData = self::retrieveXmlInfoFromRemoteServer();
             $oCache->put($mData);
         }
         unset($oCache);
@@ -121,6 +98,39 @@ final class Version
         }
 
         return false;
+    }
+
+    /**
+     * @return array|bool
+     */
+    private static function retrieveXmlInfoFromRemoteServer()
+    {
+        $oDom = new DOMDocument;
+
+        if (!@$oDom->load(self::LATEST_VERSION_URL)) {
+            return false;
+        }
+
+        /** @var DOMElement $oSoft */
+        foreach ($oDom->getElementsByTagName(self::FRAMEWORK_TAG_NAME) as $oSoft) {
+            // Get info for "ph7builder" package
+            $oInfo = $oSoft->getElementsByTagName(self::PACKAGE_TAG_NAME)->item(0);
+
+            $bIsAlert = self::isUpdateAlertEnabled($oInfo);
+            $sVerName = $oInfo->getElementsByTagName('name')->item(0)->nodeValue;
+            $sVerNumber = $oInfo->getElementsByTagName('version')->item(0)->nodeValue;
+            $sVerBuild = $oInfo->getElementsByTagName('build')->item(0)->nodeValue;
+        }
+        unset($oDom);
+
+        $mData = [
+            'is_alert' => $bIsAlert,
+            'name' => $sVerName,
+            'version' => $sVerNumber,
+            'build' => $sVerBuild
+        ];
+
+        return $mData;
     }
 
     /**
