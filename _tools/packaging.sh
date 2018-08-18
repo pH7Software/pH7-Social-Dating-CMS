@@ -11,7 +11,7 @@
 ##
 
 function run() {
-    _confirm "Are you sure you want to run the DEPLOYMENT process (Irreversible Action)?"
+    _confirm "Are you sure you want to run the PACKAGING process (Irreversible Action)?"
     if [ $? -eq 1 ]; then
         _confirm "Have you made a copy of it before?"
         if [ $? -eq 1 ]; then
@@ -95,7 +95,7 @@ function run() {
             echo "Done!"
             echo "Remove \"_tools/\" folder (containing this file) before packaging pH7Builder"
         else
-            echo "You must make a copy of all the software before running the deployement. Go back!"
+            echo "You must backup the software before running the packaging script. Go back!"
             exit 1
         fi
     fi
