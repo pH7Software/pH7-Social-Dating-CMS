@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ##
-# Title:           Deployment Automation
-# Description:     pH7CMS Deployment Automation. It is used to clean the script before distribution to customers.
+# Title:           Packaging Automation Tool
+# Description:     It is used to clean up the script before distribution to customers (e.g. before uploading it to SourceForge).
 #                  To work correctly, you have to execute this script when you're in the project root with your terminal (generally the parent folder of "_tools/").
 #                  (e.g., you@you:/path/to/root-project$ bash _tools/pH7.sh).
 # Author:          Pierre-Henry Soria <hello@ph7cms.com>
