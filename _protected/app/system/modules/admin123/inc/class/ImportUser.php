@@ -146,7 +146,7 @@ class ImportUser extends Core
             'last_name' => 'Rolli' . $sFiveChars,
             'sex' => self::$aGenderList[mt_rand(0, 2)], // Generate randomly it
             'match_sex' => self::$aGenderList[mt_rand(0, 2)], // Generate randomly it
-            'birth_date' => date('Y') - mt_rand(20, 50) . '-' . mt_rand(1, 12) . '-' . mt_rand(1, 28), // Generate randomly the anniversary date
+            'birth_date' => $this->getRandomDate(),
             'country' => 'US',
             'city' => 'Virginia',
             'state' => 'Doswell',
@@ -312,6 +312,16 @@ class ImportUser extends Core
                 'msg' => nt('%n% user has been successfully added.', '%n% users has been successfully added.', $iRow)
             ];
         }
+    }
+
+    /**
+     * Generates a random (birth) date.
+     *
+     * @return string
+     */
+    private function getRandomDate()
+    {
+        return date('Y') - mt_rand(20, 50) . '-' . mt_rand(1, 12) . '-' . mt_rand(1, 28);
     }
 
     /**
