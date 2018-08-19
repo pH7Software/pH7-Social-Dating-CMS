@@ -44,7 +44,10 @@ class SubscriptionFormProcess extends Form
                     ];
 
                     if ($this->sendMail($aData)) {
-                        \PFBC\Form::setSuccess('form_subscription', t('Please activate your subscription by clicking the activation link you received by email. If you can not find the email, please look in your SPAM FOLDER and mark as not spam.'));
+                        \PFBC\Form::setSuccess(
+                            'form_subscription',
+                            t('Please activate your subscription by clicking the activation link you received by email. If you can not find the email, please look in your SPAM FOLDER and mark as not spam.')
+                        );
                         $oSubscriptionModel->add($aData);
                     } else {
                         \PFBC\Form::setError('form_subscription', Form::errorSendingEmail());

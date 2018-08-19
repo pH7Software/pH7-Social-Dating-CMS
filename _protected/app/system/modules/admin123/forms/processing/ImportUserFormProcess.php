@@ -27,7 +27,10 @@ class ImportUserFormProcess
         if (!$aData['status']) {
             \PFBC\Form::setError('form_import_user', $aData['msg']);
         } else {
-            Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $aData['msg']);
+            Header::redirect(
+                Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
+                $aData['msg']
+            );
         }
     }
 }
