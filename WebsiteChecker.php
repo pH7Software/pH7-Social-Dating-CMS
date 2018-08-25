@@ -58,7 +58,7 @@ class WebsiteChecker
     /**
      * @return bool
      */
-    public function isConfigFileExists()
+    public function doesConfigFileExist()
     {
         return is_file(__DIR__ . '/' . self::REQUIRED_CONFIG_FILE_NAME);
     }
@@ -74,7 +74,7 @@ class WebsiteChecker
     /**
      * @return bool
      */
-    public function isInstallFolderExists()
+    public function doesInstallFolderExist()
     {
         return is_dir(__DIR__ . '/' . self::INSTALL_FOLDER_NAME);
     }
