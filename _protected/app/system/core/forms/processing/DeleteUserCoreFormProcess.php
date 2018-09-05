@@ -54,7 +54,7 @@ class DeleteUserCoreFormProcess extends Form
      *
      * @return int
      */
-    protected function sendWarnEmail()
+    private function sendWarnEmail()
     {
         $sMembershipType = ($this->registry->module === 'affiliate') ? t('Affiliate') : t('Member');
 
@@ -88,7 +88,7 @@ class DeleteUserCoreFormProcess extends Form
      *
      * @return void
      */
-    protected function removeAccount()
+    private function removeAccount()
     {
         $oUserModel = ($this->registry->module === 'user') ? new UserCore : new AffiliateCore;
         $oUserModel->delete($this->session->get($this->sSessPrefix . '_id'), $this->sUsername);
