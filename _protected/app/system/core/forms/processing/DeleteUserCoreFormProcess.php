@@ -90,7 +90,7 @@ class DeleteUserCoreFormProcess extends Form
      */
     private function removeAccount()
     {
-        $oUserModel = ($this->registry->module === 'user') ? new UserCore : new AffiliateCore;
+        $oUserModel = $this->registry->module === 'user' ? new UserCore : new AffiliateCore;
         $oUserModel->delete($this->session->get($this->sSessPrefix . '_id'), $this->sUsername);
         unset($oUserModel);
     }
