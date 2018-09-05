@@ -12,6 +12,8 @@ use PH7\Framework\Cookie\Cookie;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mobile\MobApp;
 use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
@@ -31,7 +33,9 @@ class MainController extends Controller
      */
     public function index()
     {
-        // We don't have to put the title here as it's the homepage, so it's the default title that is used.
+        /**
+         * @internal We don't have to put the title here as it's the homepage, so it's the default title that is used.
+         */
 
         // For Profiles Carousel
         $this->view->userDesignModel = new UserDesignCoreModel;
@@ -102,7 +106,10 @@ class MainController extends Controller
 
     public function soon()
     {
-        // If the "member_remember" and "member_id" cookies do not exist, nothing happens.
+        /**
+         * Remove "Remember Me" cookie, because "soon" action can be called even if "logout" action isn't called
+         */
+        // If the "member_remember" and "member_id" cookies don't exist, nothing happens
         (new Cookie)->remove(['member_remember', 'member_id']);
 
         $this->sTitle = t('See you soon!');
@@ -121,7 +128,12 @@ class MainController extends Controller
 
     public function logout()
     {
-        (new User)->logout();
+        (new User)->logout($this->session);
+
+        Header::redirect(
+            Uri::get('user', 'main', 'soon'),
+            t('You are now logged out. Hope to see you again very soon!')
+        );
     }
 
     /**

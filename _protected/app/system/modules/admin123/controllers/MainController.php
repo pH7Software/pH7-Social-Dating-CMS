@@ -12,7 +12,9 @@ namespace PH7;
 
 use PH7\Framework\Layout\Html\Meta;
 use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Version;
+use PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
@@ -60,7 +62,12 @@ class MainController extends Controller
 
     public function logout()
     {
-        (new Admin)->logout();
+        (new Admin)->logout($this->session);
+
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'main', 'login'),
+            t('You are successfully logged out.')
+        );
     }
 
     protected function addStats()

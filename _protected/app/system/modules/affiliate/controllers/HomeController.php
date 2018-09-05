@@ -8,8 +8,12 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
+
 class HomeController extends Controller
 {
+    /** @var string */
     private $sTitle;
 
     public function __construct()
@@ -56,6 +60,11 @@ class HomeController extends Controller
 
     public function logout()
     {
-        (new Affiliate)->logout();
+        (new Affiliate)->logout($this->session);
+
+        Header::redirect(
+            Uri::get('affiliate', 'home', 'index'),
+            t('You are successfully logged out.')
+        );
     }
 }

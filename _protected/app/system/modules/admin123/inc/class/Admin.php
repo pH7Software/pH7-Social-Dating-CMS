@@ -8,25 +8,20 @@
 
 namespace PH7;
 
-use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Session\Session;
-use PH7\Framework\Url\Header;
 
 class Admin extends AdminCore
 {
     /**
      * Logout function for admins.
      *
+     * @param Session $oSession
+     *
      * @return void
      */
-    public function logout()
+    public function logout(Session $oSession)
     {
-        (new Session)->destroy();
-
-        Header::redirect(
-            Uri::get(PH7_ADMIN_MOD, 'main', 'login'),
-            t('You are successfully logged out.')
-        );
+        $oSession->destroy();
     }
 
     /**
