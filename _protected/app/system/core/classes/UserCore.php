@@ -456,21 +456,21 @@ class UserCore
      */
     public function checkAccountStatus(stdClass $oDbProfileData)
     {
-        $mRet = true; // Default value
+        $mStatus = true; // Default value
 
         if ($oDbProfileData->active != 1) {
             if ($oDbProfileData->active == 2) {
-                $mRet = t('Sorry, your account has not been activated yet. Please activate it by clicking the activation link that was emailed.');
+                $mStatus = t('Sorry, your account has not been activated yet. Please activate it by clicking the activation link that was emailed.');
             } elseif ($oDbProfileData->active == 3) {
-                $mRet = t('Sorry, your account has not been activated yet. An administrator must validate your account.');
+                $mStatus = t('Sorry, your account has not been activated yet. An administrator must validate your account.');
             } else {
-                $mRet = t('Your account does not have a valid activation status. Please contact the database administrator so that it solves this problem.');
+                $mStatus = t('Your account does not have a valid activation status. Please contact the database administrator so that it solves this problem.');
             }
         } elseif ($oDbProfileData->ban == 1) {
-            $mRet = t('Sorry, Your account has been banned.');
+            $mStatus = t('Sorry, Your account has been banned.');
         }
 
-        return $mRet;
+        return $mStatus;
     }
 
     /**
