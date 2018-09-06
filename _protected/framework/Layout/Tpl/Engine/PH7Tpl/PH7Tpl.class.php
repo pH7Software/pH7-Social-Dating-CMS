@@ -315,7 +315,6 @@ class PH7Tpl extends Kernel implements GenerableFile
      * @return string
      *
      * @throws TplException If the template file does no exist.
-     *
      * @throws PH7InvalidArgumentException
      */
     public function display($sTplFile = null, $sDirPath = null, $bInclude = true)
