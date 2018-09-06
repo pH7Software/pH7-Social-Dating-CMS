@@ -46,7 +46,7 @@ class DeleteUserCoreFormProcess extends Form
             $this->removeAccount();
             $this->session->destroy();
 
-            $this->redirectToDeletedPage();
+            $this->redirectToGoodbyePage();
         }
     }
 
@@ -97,9 +97,11 @@ class DeleteUserCoreFormProcess extends Form
     }
 
     /**
-     * Redirect now the user to the soon page (yesss he/she will be back soon... there is never "never").
+     * Redirect the user to the goodbye page.
+     *
+     * @return void
      */
-    private function redirectToDeletedPage()
+    private function redirectToGoodbyePage()
     {
         Header::redirect(
             Uri::get('user', 'main', 'accountdeleted')
