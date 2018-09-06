@@ -12,6 +12,7 @@ namespace PH7;
 
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Config\Config;
+use PH7\Framework\Cookie\Cookie;
 use PH7\Framework\File\File;
 use PH7\Framework\Image\Image;
 use PH7\Framework\Ip\Ip;
@@ -532,6 +533,36 @@ class UserCore
     public function getMatchSex($sSex)
     {
         return ($sSex === 'male' ? 'female' : ($sSex === 'female' ? 'male' : 'couple'));
+    }
+
+    /**
+     * Logout a user.
+     *
+     * @param Session $oSession
+     *
+     * @return void
+     */
+    public function logout(Session $oSession)
+    {
+        $oSession->destroy();
+        $this->revokeRememberMeSession();
+    }
+
+    /**
+     * Revoke the "Remember Me" cookies (if exist) in order to completely logout the user.
+     *
+     * @return void
+     */
+    public function revokeRememberMeSession()
+    {
+        $oCookie = new Cookie;
+        $aRememberMeCookieNames = ['member_remember', 'member_id'];
+
+        // If "Remember Me" checkbox has been checked
+        if ($oCookie->exists($aRememberMeCookieNames)) {
+            $oCookie->remove($aRememberMeCookieNames);
+        }
+        unset($oCookie);
     }
 
     /**

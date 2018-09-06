@@ -121,8 +121,6 @@ class MainController extends Controller
 
     public function accountDeleted()
     {
-        User::revokeRememberMeSession();
-
         $this->sTitle = t('Sad to see you leaving us! :(');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;

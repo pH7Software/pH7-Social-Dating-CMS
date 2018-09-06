@@ -44,7 +44,7 @@ class DeleteUserCoreFormProcess extends Form
             $this->session->regenerateId();
             $this->sendWarnEmail();
             $this->removeAccount();
-            $this->session->destroy();
+            (new UserCore)->logout($this->session);
 
             $this->redirectToGoodbyePage();
         }
