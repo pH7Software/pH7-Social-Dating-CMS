@@ -10,6 +10,7 @@ namespace PH7;
 
 class SignupController extends Controller
 {
+    /** @var string */
     private $sTitle;
 
     public function step1()
