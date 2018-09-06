@@ -481,9 +481,9 @@ class UserCore
      * @param Registry $oRegistry
      * @param string $sMod (user, affiliate, newsletter).
      *
-     * @throws Framework\File\Exception
-     *
      * @return void
+     *
+     * @throws Framework\File\Exception
      */
     public function activateAccount($sEmail, $sHash, Config $oConfig, Registry $oRegistry, $sMod = 'user')
     {

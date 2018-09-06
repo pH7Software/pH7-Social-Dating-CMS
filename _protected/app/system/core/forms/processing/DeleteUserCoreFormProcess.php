@@ -54,6 +54,9 @@ class DeleteUserCoreFormProcess extends Form
      * Send an email to the admin saying the reason why a user wanted to delete their account.
      *
      * @return int
+     *
+     * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
     private function sendWarnEmail()
     {
@@ -97,9 +100,11 @@ class DeleteUserCoreFormProcess extends Form
     }
 
     /**
-     * Redirect the user to the goodbye page.
+     * Redirect the user to the goodbye (accountdeleted) page.
      *
      * @return void
+     *
+     * @throws Framework\File\Exception
      */
     private function redirectToGoodbyePage()
     {
