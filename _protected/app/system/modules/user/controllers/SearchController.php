@@ -15,7 +15,13 @@ class SearchController extends Controller
 {
     public function index()
     {
-        Header::redirect(Uri::get('user', 'search', 'quick'));
+        Header::redirect(
+            Uri::get(
+                'user',
+                'search',
+                'quick'
+            )
+        );
     }
 
     public function quick()
