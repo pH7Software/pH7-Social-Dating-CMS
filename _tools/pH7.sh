@@ -89,6 +89,19 @@ function remove-log-file() {
     fi
 }
 
+# Remove the sensitive data (such as DB details, filesystem paths, ...)
+function remove-sensitive-data() {
+    _confirm "Are you sure to remove the config details? Your website won't work anymore after this action."
+    if [ $? -eq 1 ]; then
+        rm ./_protected/app/configs/config.ini
+        rm ./_constants.php
+        rm -rf ./_protected/data/backup/file/*
+        rm -rf ./_protected/data/backup/sql/*
+
+        echo "Sensitive data removed!"
+    fi
+}
+
 # Clean up the code
 function clean-code() {
     _confirm "Are you sure you want to clean up the code?"
@@ -187,7 +200,8 @@ function backup() {
             exit 2
         fi
     fi
-    # Remove cache data, tmp and log files before backing up the project
+    # Remove sensitive data, cache data, tmp and log files before backing up the project
+    remove-sensitive-data
     clear-cache
     remove-tmp-file
     remove-log-file
