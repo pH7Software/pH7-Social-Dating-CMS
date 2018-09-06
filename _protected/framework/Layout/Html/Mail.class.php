@@ -20,8 +20,6 @@ class Mail
     /** @var bool */
     private $bSubFooter = false;
 
-    /*** Headers ***/
-
     /**
      * Header tags HTML.
      *
@@ -70,8 +68,6 @@ class Mail
             <div id="sub_container">
             <h1 class="logo"><a href="' . Registry::getInstance()->site_url . '">' . Registry::getInstance()->site_name . '</a></h1>';
     }
-
-    /*** Footers ***/
 
     /**
      * Footer HTML.
