@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Cookie\Cookie;
 use PH7\Framework\Session\Session;
 
 class User extends UserCore
@@ -22,6 +23,23 @@ class User extends UserCore
     public function logout(Session $oSession)
     {
         $oSession->destroy();
-        UserCore::revokeRememberMeSession();
+        self::revokeRememberMeSession();
+    }
+
+    /**
+     * Revoke the "Remember Me" cookies (if exist) in order to completely logout the user.
+     *
+     * @return void
+     */
+    public static function revokeRememberMeSession()
+    {
+        $oCookie = new Cookie;
+        $aRememberMeCookieNames = ['member_remember', 'member_id'];
+
+        // If "Remember Me" checkbox has been checked
+        if ($oCookie->exists($aRememberMeCookieNames)) {
+            $oCookie->remove($aRememberMeCookieNames);
+        }
+        unset($oCookie);
     }
 }

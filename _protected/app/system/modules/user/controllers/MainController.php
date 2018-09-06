@@ -108,7 +108,7 @@ class MainController extends Controller
         /**
          * Remove "Remember Me" cookie, because "soon" action can be called even if "logout" action isn't called
          */
-        UserCore::revokeRememberMeSession();
+        User::revokeRememberMeSession();
 
         $this->sTitle = t('See you soon!');
         $this->view->page_title = $this->sTitle;
