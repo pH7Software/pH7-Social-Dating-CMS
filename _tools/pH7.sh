@@ -27,7 +27,8 @@ function init() {
     echo "13) file strict permissions"
     echo "14) save code"
     echo "15) backup"
-    echo "16) update geoip db"
+    echo "16) remove sensitive data"
+    echo "17) update geoip db"
 
 
     read option
@@ -46,8 +47,9 @@ function init() {
       "file permissions") file-permissions;;
       "file strict permissions") file-strict-permissions;;
       "save code") save-code;;
-      "update geoip db") update-geoip-db;;
       "backup") backup;;
+      "remove sensitive data") remove-sensitive-data;;
+      "update geoip db") update-geoip-db;;
       *) _error
     esac
 }
