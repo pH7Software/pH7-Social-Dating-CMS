@@ -30,7 +30,7 @@ class AffiliateCore extends UserCore
     public static function auth()
     {
         $oSession = new Session;
-        $bIsConnected = ((int)$oSession->exists('affiliate_id')) &&
+        $bIsConnected = (int)$oSession->exists('affiliate_id') &&
             $oSession->get('affiliate_ip') === Ip::get() &&
             $oSession->get('affiliate_http_user_agent') === (new Browser)->getUserAgent();
         unset($oSession);

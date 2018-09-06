@@ -28,7 +28,7 @@ class AdminCore extends UserCore
     public static function auth()
     {
         $oSession = new Session;
-        $bIsConnected = ((int)$oSession->exists('admin_id')) &&
+        $bIsConnected = (int)$oSession->exists('admin_id') &&
             $oSession->get('admin_ip') === Ip::get() &&
             $oSession->get('admin_http_user_agent') === (new Browser)->getUserAgent();
         unset($oSession);
