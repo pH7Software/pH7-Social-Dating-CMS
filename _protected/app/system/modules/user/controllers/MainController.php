@@ -8,7 +8,6 @@
 
 namespace PH7;
 
-use PH7\Framework\Cookie\Cookie;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mobile\MobApp;
 use PH7\Framework\Mvc\Model\DbConfig;
@@ -109,8 +108,7 @@ class MainController extends Controller
         /**
          * Remove "Remember Me" cookie, because "soon" action can be called even if "logout" action isn't called
          */
-        // If the "member_remember" and "member_id" cookies don't exist, nothing happens
-        (new Cookie)->remove(['member_remember', 'member_id']);
+        UserCore::revokeRememberMeSession();
 
         $this->sTitle = t('See you soon!');
         $this->view->page_title = $this->sTitle;
@@ -130,6 +128,11 @@ class MainController extends Controller
     {
         (new User)->logout($this->session);
 
+        $this->redirectToSoonPage();
+    }
+
+    private function redirectToSoonPage()
+    {
         Header::redirect(
             Uri::get('user', 'main', 'soon'),
             t('You are now logged out. Hope to see you again very soon!')
