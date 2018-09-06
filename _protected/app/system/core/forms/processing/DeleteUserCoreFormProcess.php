@@ -45,7 +45,8 @@ class DeleteUserCoreFormProcess extends Form
             $this->sendWarnEmail();
             $this->removeAccount();
             $this->session->destroy();
-            $this->redirectToSoonPage();
+
+            $this->redirectToDeletedPage();
         }
     }
 
@@ -97,14 +98,11 @@ class DeleteUserCoreFormProcess extends Form
 
     /**
      * Redirect now the user to the soon page (yesss he/she will be back soon... there is never "never").
-     *
-     * @return void "Header::redirect()" will also exit the script.
      */
-    private function redirectToSoonPage()
+    private function redirectToDeletedPage()
     {
         Header::redirect(
-            Uri::get('user', 'main', 'soon'),
-            t('Your account has been removed successfully!')
+            Uri::get('user', 'main', 'accountdeleted')
         );
     }
 }

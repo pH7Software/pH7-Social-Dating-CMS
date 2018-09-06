@@ -105,12 +105,25 @@ class MainController extends Controller
 
     public function soon()
     {
-        /**
-         * Remove "Remember Me" cookie, because "soon" action can be called even if "logout" action isn't called
-         */
+        $this->sTitle = t('See you soon!');
+        $this->view->page_title = $this->sTitle;
+        $this->view->h2_title = $this->sTitle;
+
+        $this->design->setRedirect(
+            $this->registry->site_url,
+            null,
+            null,
+            self::REDIRECTION_DELAY_IN_SEC
+        );
+
+        $this->output();
+    }
+
+    public function accountDeleted()
+    {
         User::revokeRememberMeSession();
 
-        $this->sTitle = t('See you soon!');
+        $this->sTitle = t('Sad to see you leaving us! :(');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
 
