@@ -27,6 +27,7 @@ class Mail
     /** @var MailModel */
     private $oMailModel;
 
+    /** @var string */
     private $sMsg;
 
     /** @var bool */
