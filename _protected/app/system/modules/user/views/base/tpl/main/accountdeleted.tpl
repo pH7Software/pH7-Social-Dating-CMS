@@ -4,7 +4,7 @@
     </p>
 
     <p class="underline">
-        {lang}Hopefully, we will se you back very soon on %site_name%{/lang}
+        {lang}Hopefully, we will see you back very soon at %site_name%!{/lang}
     </p>
 </div>
 
