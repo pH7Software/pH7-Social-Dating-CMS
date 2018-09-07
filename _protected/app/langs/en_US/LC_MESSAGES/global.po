@@ -8158,7 +8158,7 @@ msgid "Administration of Payment System"
 msgstr ""
 
 #: _protected/app/system/modules/payment/controllers/AdminController.php:31
-msgid "Config Payment Gateway"
+msgid "Config Payment Gateways"
 msgstr ""
 
 #: _protected/app/system/modules/payment/controllers/AdminController.php:42
