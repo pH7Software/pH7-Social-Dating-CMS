@@ -306,8 +306,7 @@ class MainController extends Controller
             return;
         }
 
-        $iAmount = $this->oUserModel->readProfile($this->iProfileId)->price;
-        $iAffCom = ($iAmount * $this->config->values['module.setting']['rate.user_membership_payment'] / 100);
+        $iAffCom = $this->getAffiliateCommissionAmount();
 
         if ($iAffCom > 0) {
             $this->oUserModel->updateUserJoinCom($iAffId, $iAffCom);
@@ -406,6 +405,18 @@ class MainController extends Controller
     private function isValidPaymentGateway($sGatewayName)
     {
         return in_array($sGatewayName, self::PAYMENT_GATEWAYS, true);
+    }
+
+    /**
+     * Get the affiliate's commission amount.
+     *
+     * @return float|int
+     */
+    private function getAffiliateCommissionAmount()
+    {
+        $iAmount = $this->oUserModel->readProfile($this->iProfileId)->price;
+
+        return $iAmount * $this->config->values['module.setting']['rate.user_membership_payment'] / 100;
     }
 
     /**
