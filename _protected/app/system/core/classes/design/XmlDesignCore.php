@@ -83,7 +83,7 @@ class XmlDesignCore
 
             if (count($aNews) > 0) {
                 foreach ($aNews as $aItems) {
-                    echo '<h4><a href="', $aItems['link'], '" target="_blank">', escape($aItems['title'], true), '</a></h4>';
+                    echo '<h4><a href="', $aItems['link'], '" target="_blank" rel="noopener">', escape($aItems['title'], true), '</a></h4>';
                     echo '<p>', escape($aItems['description'], true), '</p>';
                 }
             } else {
