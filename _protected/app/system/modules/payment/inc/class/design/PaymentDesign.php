@@ -37,7 +37,7 @@ class PaymentDesign extends Framework\Core\Core
             ->param('item_name', $this->setMaxValueLengthToField($this->registry->site_name . ' ' . $oMembership->name))
             ->param('no_note', 1)
             ->param('no_shipping', 1)
-            ->param('currency_code', $this->config->values['module.setting']['currency'])
+            ->param('currency_code', $this->config->values['module.setting']['currency_code'])
             ->param('tax_cart', $this->config->values['module.setting']['vat_rate'])
             ->param('return', Uri::get('payment', 'main', 'process', 'paypal'))
             ->param('rm', 2)// Auto redirection in POST data
@@ -73,7 +73,7 @@ class PaymentDesign extends Framework\Core\Core
                 data-name="', $this->registry->site_name, '"
                 data-description="', $oMembership->name, '"
                 data-amount="', Stripe::getAmount($oMembership->price), '"
-                data-currency="', $this->config->values['module.setting']['currency'], '"
+                data-currency="', $this->config->values['module.setting']['currency_code'], '"
                 data-allow-remember-me="true"
                 data-bitcoin="true">
             </script>
@@ -92,7 +92,7 @@ class PaymentDesign extends Framework\Core\Core
     public function buttonBraintree(stdClass $oMembership)
     {
         $fPrice = $oMembership->price;
-        $sCurrency = $this->config->values['module.setting']['currency'];
+        $sCurrency = $this->config->values['module.setting']['currency_code'];
         $sLocale = PH7_LANG_NAME;
 
         Braintree::init($this->config);
@@ -136,7 +136,7 @@ class PaymentDesign extends Framework\Core\Core
             ->param('c_price', $oMembership->price)
             ->param('total', $oMembership->price)
             ->param('c_name', $this->registry->site_name . ' ' . $oMembership->name)
-            ->param('tco_currency', $this->config->values['module.setting']['currency'])
+            ->param('tco_currency', $this->config->values['module.setting']['currency_code'])
             ->param('c_tangible', 'N')
             ->param('x_receipt_link_url', Uri::get('payment', 'main', 'process', '2co'));
 

@@ -28,7 +28,7 @@ class ConfigFileCoreForm
         'html_tpl_cache' => 'enable.html.tpl.cache',
         'static_cache' => 'enable.static.cache',
         'static_data_uri' => 'enable.static.data_uri',
-        'currency' => 'currency'
+        'currency_sign' => 'currency_sign'
     ];
 
     /**
@@ -64,6 +64,8 @@ class ConfigFileCoreForm
                 $oForm->addElement(new \PFBC\Element\Email($sLabel, 'config[' . $sKey . ']', ['value' => $sVal]));
             } elseif (false !== strpos($sKey, 'environment')) {
                 $oForm->addElement(new \PFBC\Element\Select($sLabel, 'config[' . $sKey . ']', ['production' => t('Production'), 'development' => t('Development')], ['description' => t('If you see "Internal Server Error" message on your site, please set to "development" mode in order to see the details of the error. If your site is on production (and visible by everyone) please set it to the production mode for security reason.'), 'value' => $sVal]));
+            } elseif (false !== strpos($sKey, 'currency_code')) {
+                $oForm->addElement(new \PFBC\Element\Currency($sLabel, 'config[' . $sKey . ']', ['value' => $sVal]));
             } elseif (ctype_digit($sVal)) {
                 $oForm->addElement(new \PFBC\Element\Number($sLabel, 'config[' . $sKey . ']', ['step' => 'any', 'value' => $sVal]));
             } else {
@@ -115,8 +117,8 @@ class ConfigFileCoreForm
             return t('Enable data-URIs; Converts images to base64 (if file size is lower than %0%)', FileHelper::bytesToSize(Gzip::MAX_IMG_SIZE_BASE64_CONVERTOR));
         }
 
-        if ($sKey === self::CONFIG_KEYS['currency']) {
-            return t('Currency. Choose a valid <a href="%0%" target="_blank" rel="noopener">three-character currency code</a> (e.g. GBP, USD, EUR, CAD, AUD, BRL, ...).', 'https://en.wikipedia.org/wiki/ISO_4217#Active_codes');
+        if ($sKey === self::CONFIG_KEYS['currency_sign']) {
+            return t('Currency sign (for display purposes only)');
         }
 
         return self::cleanLabelText($sKey);

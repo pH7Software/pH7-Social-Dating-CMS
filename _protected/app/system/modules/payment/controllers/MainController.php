@@ -143,7 +143,7 @@ class MainController extends Controller
                         $oCharge = \Stripe\Charge::create(
                             [
                                 'amount' => Stripe::getAmount($sAmount),
-                                'currency' => $this->config->values['module.setting']['currency'],
+                                'currency' => $this->config->values['module.setting']['currency_code'],
                                 'source' => $this->httpRequest->post('stripeToken'),
                                 'description' => t('Membership charged for %0%', $this->httpRequest->post('stripeEmail'))
                             ]

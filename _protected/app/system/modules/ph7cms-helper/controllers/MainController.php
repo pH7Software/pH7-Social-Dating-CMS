@@ -63,7 +63,7 @@ class MainController extends Controller
         if ($sBoxType === self::VIEW_OPTIONS[0]) {
             $oPayPal = new PayPal();
             $oPayPal->param('business', base64_decode($this->config->values['module.setting']['paypal.donation_email']))
-                ->param('currency_code', $this->config->values['module.setting']['currency'])
+                ->param('currency_code', $this->config->values['module.setting']['currency_code'])
                 ->param('cmd', '_donations')
                 ->param('item_name', $this->config->values['module.setting']['donation.item_name'])
                 ->param('amount', self::DONATION_AMOUNTS[mt_rand(0, count(self::DONATION_AMOUNTS) - 1)])

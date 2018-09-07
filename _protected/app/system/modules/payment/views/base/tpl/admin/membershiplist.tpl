@@ -2,7 +2,7 @@
     <tr>
         <th>{lang 'Group ID#'}</th>
         <th>{lang 'Name'}</th>
-        <th>{lang 'Price (%0%)', $config->values['module.setting']['currency']}</th>
+        <th>{lang 'Price (%0%)', $config->values['module.setting']['currency_code']}</th>
         <th>{lang 'Expiration Days'}</th>
         <th>{lang 'Active'}</th>
         <th>{lang 'Action'}</th>
