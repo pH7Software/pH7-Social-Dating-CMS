@@ -27,7 +27,8 @@ class ConfigFileCoreForm
         'general_cache' => 'enable.general.cache',
         'html_tpl_cache' => 'enable.html.tpl.cache',
         'static_cache' => 'enable.static.cache',
-        'static_data_uri' => 'enable.static.data_uri'
+        'static_data_uri' => 'enable.static.data_uri',
+        'currency' => 'currency'
     ];
 
     /**
@@ -112,6 +113,10 @@ class ConfigFileCoreForm
 
         if ($sKey === self::CONFIG_KEYS['static_data_uri']) {
             return t('Enable data-URIs; Converts images to base64 (if file size is lower than %0%)', FileHelper::bytesToSize(Gzip::MAX_IMG_SIZE_BASE64_CONVERTOR));
+        }
+
+        if ($sKey === self::CONFIG_KEYS['currency']) {
+            return t('Currency. Choose a valid <a href="%0%" target="_blank" rel="noopener">three-character currency code</a> (e.g. GBP, USD, EUR, CAD, AUD, BRL, ...).', 'https://en.wikipedia.org/wiki/ISO_4217#Active_codes');
         }
 
         return self::cleanLabelText($sKey);
