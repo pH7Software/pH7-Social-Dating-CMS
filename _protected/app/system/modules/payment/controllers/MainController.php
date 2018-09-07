@@ -236,7 +236,7 @@ class MainController extends Controller
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
 
         if ($this->bStatus) {
-            $this->updateAffCom();
+            $this->updateAffiliateCommission();
             $this->clearCache();
         }
 
@@ -295,7 +295,7 @@ class MainController extends Controller
      *
      * @return void
      */
-    private function updateAffCom()
+    private function updateAffiliateCommission()
     {
         // Load the Affiliate config file
         $this->config->load(PH7_PATH_SYS_MOD . 'affiliate' . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
