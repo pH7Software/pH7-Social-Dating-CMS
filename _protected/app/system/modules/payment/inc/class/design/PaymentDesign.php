@@ -18,6 +18,7 @@ use stdClass;
 class PaymentDesign extends Framework\Core\Core
 {
     const DIV_CONTAINER_NAME = 'payment-form';
+    const MAX_STRING_FIELD_LENGTH = 127;
 
     /**
      * @param stdClass $oMembership
@@ -33,7 +34,7 @@ class PaymentDesign extends Framework\Core\Core
             ->param('custom', base64_encode($oMembership->groupId . '|' . $oMembership->price))// Use base64_encode() to discourage curious people
             ->param('amount', $oMembership->price)
             ->param('item_number', $oMembership->groupId)
-            ->param('item_name', $this->registry->site_name . ' ' . $oMembership->name)
+            ->param('item_name', $this->setMaxValueLengthToField($this->registry->site_name . ' ' . $oMembership->name))
             ->param('no_note', 1)
             ->param('no_shipping', 1)
             ->param('currency_code', $this->config->values['module.setting']['currency'])
@@ -194,5 +195,15 @@ class PaymentDesign extends Framework\Core\Core
     private function getDivFormContainer()
     {
         return '<div id="' . self::DIV_CONTAINER_NAME . '"></div>';
+    }
+
+    /**
+     * @param string $sValue
+     *
+     * @return string
+     */
+    private function setMaxValueLengthToField($sValue)
+    {
+        return substr($sValue, 0, self::MAX_STRING_FIELD_LENGTH);
     }
 }
