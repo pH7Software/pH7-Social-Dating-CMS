@@ -11,6 +11,6 @@ namespace PH7;
 defined('PH7') or die('Restricted access');
 
 /**
- * This file is not required, it is only used to include or add more lines of code to your module.
- * pH7CMS includes this file only if it exists and it is included before any other file of the module.
+ * This file is not required. It is only used to add checks or functions before the module's controller is invoked.
+ * pH7CMS includes this file only if it exists and it is called before any other file of the module.
  */
