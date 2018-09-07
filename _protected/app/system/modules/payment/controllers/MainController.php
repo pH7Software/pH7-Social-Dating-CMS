@@ -374,7 +374,11 @@ class MainController extends Controller
      */
     private function clearCache()
     {
-        (new Cache)->start(UserCoreModel::CACHE_GROUP, 'membershipDetails' . $this->iProfileId, null)->clear();
+        (new Cache)->start(
+            UserCoreModel::CACHE_GROUP,
+            'membershipDetails' . $this->iProfileId,
+            null
+        )->clear();
     }
 
     /**
