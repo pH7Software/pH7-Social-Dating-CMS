@@ -429,7 +429,7 @@
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'main','stat') }}" title="{lang 'Site Statistics'}">{lang 'Site Stats'}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'info','software') }}" title="{lang 'Software'}">{lang 'Software'}</a></li>
-                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'info','language') }}" title="{lang 'PHP Info'}">{lang 'PHP'}</a></li>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'info','language') }}" title="{lang 'PHP Info'}">{lang 'PHP Configuration'}</a></li>
               </ul>
             </li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','blockcountry') }}" title="{lang 'Block Countries'}"><i class="fa fa-ban"></i> {lang 'Block Countries'}</a></li>
