@@ -17,18 +17,17 @@ abstract class Cron extends Framework\Cron\Run\Cron
     {
         parent::__construct();
 
-        // Check delay
-        $this->isAlreadyExec();
+        $this->isAlreadyExecuted();
     }
 
     /**
-     * Check if the cron has already been executed.
+     * Check the delay and see if the cron has already been executed.
      *
      * @return void If cron has already been executed, the script stops with exit() function and an explanatory message.
      *
      * @throws Framework\Http\Exception
      */
-    public function isAlreadyExec()
+    private function isAlreadyExecuted()
     {
         if (!$this->checkDelay()) {
             Http::setHeadersByCode(StatusCode::FORBIDDEN);
