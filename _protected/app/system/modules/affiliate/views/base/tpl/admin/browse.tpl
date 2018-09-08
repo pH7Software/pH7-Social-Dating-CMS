@@ -77,7 +77,11 @@
                     <tr>
                         <td><input type="checkbox" name="action[]" value="{% $aff->profileId %}_{% $aff->username %}" /></td>
                         <td>{% $aff->profileId %}</td>
-                        <td>{% $aff->email %}</td>
+                        <td>
+                            <a href="mailto:{% $aff->email %}" title="{lang 'Email the Affiliate'}">
+                                {% $aff->email %}
+                            </a>
+                        </td>
                         <td>
                             {% $aff->username %}<br />
                             <span class="small gray">{% $aff->firstName %} {% $aff->lastName %}</span>

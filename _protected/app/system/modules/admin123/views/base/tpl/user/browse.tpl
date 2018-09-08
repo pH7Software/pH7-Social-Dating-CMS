@@ -78,7 +78,11 @@
                     <tr>
                         <td><input type="checkbox" name="action[]" value="{% $user->profileId %}_{% $user->username %}" /></td>
                         <td>{% $user->profileId %}</td>
-                        <td>{% $user->email %}</td>
+                        <td>
+                            <a href="mailto:{% $user->email %}" title="{lang 'Email the User'}">
+                                {% $user->email %}
+                            </a>
+                        </td>
                         <td>
                             {{ $design->getProfileLink($user->username) }}<br />
                             <span class="gray">{% $user->firstName %}</span>

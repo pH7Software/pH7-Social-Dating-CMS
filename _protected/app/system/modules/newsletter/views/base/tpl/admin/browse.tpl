@@ -42,7 +42,11 @@
                     <tr>
                         <td><input type="checkbox" name="action[]" value="{% $user->email %}" /></td>
                         <td>{% $user->profileId %}</td>
-                        <td>{% $user->email %}</td>
+                        <td>
+                            <a href="mailto:{% $user->email %}" title="{lang 'Email the Subscriber'}">
+                                {% $user->email %}
+                            </a>
+                        </td>
                         <td>{% $user->name %}</td>
                         <td>
                             <img src="{{ $design->getSmallFlagIcon(Framework\Geo\Ip\Geo::getCountryCode($user->ip)) }}" title="{lang 'Country Flag'}" alt="{lang 'Country Flag'}" /> {{ $design->ip($user->ip) }}
