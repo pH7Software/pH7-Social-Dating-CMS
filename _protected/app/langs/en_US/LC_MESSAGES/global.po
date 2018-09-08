@@ -8158,7 +8158,7 @@ msgid "Administration of Payment System"
 msgstr ""
 
 #: _protected/app/system/modules/payment/controllers/AdminController.php:31
-msgid "Config Payment Gateways"
+msgid "Configure Payment Gateways"
 msgstr ""
 
 #: _protected/app/system/modules/payment/controllers/AdminController.php:42
@@ -18808,7 +18808,7 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/video_f6fa126c5efdb5b591bfcfd28780c0a0/base/maintop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/webcam_5997640355582ea85cab83ee43d385f8/base/webcamtop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/xml_42c1ecd1699b844fe824fa84999eaee0/base/sitemaptop_menu.inc.cpl.php:19
-msgid "Payment Gateway Config"
+msgid "Payment Gateways Settings"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/accounttop_menu.inc.cpl.php:19
@@ -18865,7 +18865,7 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/video_f6fa126c5efdb5b591bfcfd28780c0a0/base/maintop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/webcam_5997640355582ea85cab83ee43d385f8/base/webcamtop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/xml_42c1ecd1699b844fe824fa84999eaee0/base/sitemaptop_menu.inc.cpl.php:19
-msgid "Gateway Config"
+msgid "Gateways Configuration"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/accounttop_menu.inc.cpl.php:19
@@ -19321,7 +19321,7 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/video_f6fa126c5efdb5b591bfcfd28780c0a0/base/maintop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/webcam_5997640355582ea85cab83ee43d385f8/base/webcamtop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/xml_42c1ecd1699b844fe824fa84999eaee0/base/sitemaptop_menu.inc.cpl.php:19
-msgid "Universal Login Config"
+msgid "Universal Login Setting"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/accounttop_menu.inc.cpl.php:19

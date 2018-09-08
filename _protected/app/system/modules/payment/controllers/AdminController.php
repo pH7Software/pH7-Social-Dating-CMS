@@ -28,7 +28,7 @@ class AdminController extends MainController
 
     public function config()
     {
-        $this->sTitle = t('Config Payment Gateways');
+        $this->sTitle = t('Configure Payment Gateways');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
         $this->output();

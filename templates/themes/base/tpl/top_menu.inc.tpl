@@ -338,7 +338,7 @@
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','general') }}#p=registration" title="{lang 'Set the Default Membership Group for new Users'}">{lang 'Default Membership Group'}</a></li>
                 <li><a href="{{ $design->url('payment','admin','membershiplist') }}" title="{lang 'Membership Manager'}">{lang 'Memberships List'}</a></li>
                 <li><a href="{{ $design->url('payment','admin','addmembership') }}" title="{lang 'Add a new Membership'}">{lang 'Add Membership'}</a></li>
-                <li><a href="{{ $design->url('payment','admin','config') }}" title="{lang 'Payment Gateway Config'}">{lang 'Gateway Config'}</a></li>
+                <li><a href="{{ $design->url('payment','admin','config') }}" title="{lang 'Payment Gateways Settings'}">{lang 'Gateways Configuration'}</a></li>
               </ul>
             </li>
 
@@ -356,7 +356,7 @@
             {/if}
 
             {if $is_connect_enabled}
-              <li><a href="{{ $design->url('connect', 'admin', 'config') }}"><i class="fa fa-share-alt-square"></i> {lang 'Universal Login Config'}</a></li>
+              <li><a href="{{ $design->url('connect', 'admin', 'config') }}"><i class="fa fa-share-alt-square"></i> {lang 'Universal Login Setting'}</a></li>
             {/if}
 
           </ul>
