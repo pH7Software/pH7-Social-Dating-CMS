@@ -16,6 +16,12 @@ use PH7\Framework\Url\Header;
 
 class ModeratorController extends Controller
 {
+    const STR_APPROVE_STATUS = '1';
+    const STR_DISAPPROVE_STATUS = '0';
+
+    const INT_APPROVE_STATUS = 1;
+    const INT_DISAPPROVE_STATUS = 0;
+
     const ITEMS_PER_PAGE = 20;
 
     /** @var ModeratorModel */
@@ -178,7 +184,10 @@ class ModeratorController extends Controller
 
     public function approvedPictureAlbum()
     {
-        if ($this->oModeratorModel->approvedPictureAlbum($this->httpRequest->post('album_id'))) {
+        if ($this->oModeratorModel->approvedPictureAlbum(
+            $this->httpRequest->post('album_id'),
+            self::STR_APPROVE_STATUS
+        )) {
             PictureCore::clearCache();
 
             $this->sMsg = t('The photo album has been approved!');
@@ -201,7 +210,10 @@ class ModeratorController extends Controller
 
     public function approvedPhoto()
     {
-        if ($this->oModeratorModel->approvedPicture($this->httpRequest->post('picture_id'))) {
+        if ($this->oModeratorModel->approvedPicture(
+            $this->httpRequest->post('picture_id'),
+            self::STR_APPROVE_STATUS
+        )) {
             PictureCore::clearCache();
 
             $this->sMsg = t('The picture has been approved!');
@@ -224,7 +236,10 @@ class ModeratorController extends Controller
 
     public function approvedVideoAlbum()
     {
-        if ($this->oModeratorModel->approvedVideoAlbum($this->httpRequest->post('album_id'))) {
+        if ($this->oModeratorModel->approvedVideoAlbum(
+            $this->httpRequest->post('album_id'),
+            self::STR_APPROVE_STATUS
+        )) {
             VideoCore::clearCache();
 
             $this->sMsg = t('The video album has been approved!');
@@ -247,7 +262,10 @@ class ModeratorController extends Controller
 
     public function approvedVideo()
     {
-        if ($this->oModeratorModel->approvedVideo($this->httpRequest->post('video_id'))) {
+        if ($this->oModeratorModel->approvedVideo(
+            $this->httpRequest->post('video_id'),
+            self::STR_APPROVE_STATUS
+        )) {
             VideoCore::clearCache();
 
             $this->sMsg = t('The video has been approved!');
@@ -270,7 +288,10 @@ class ModeratorController extends Controller
 
     public function approvedAvatar()
     {
-        if ($this->oModeratorModel->approvedAvatar($this->httpRequest->post('id'))) {
+        if ($this->oModeratorModel->approvedAvatar(
+            $this->httpRequest->post('id'),
+            self::INT_APPROVE_STATUS
+        )) {
             $this->clearAvatarCache();
 
             $this->sMsg = t('The profile photo has been approved!');
@@ -293,7 +314,10 @@ class ModeratorController extends Controller
 
     public function approvedBackground()
     {
-        if ($this->oModeratorModel->approvedBackground($this->httpRequest->post('id'))) {
+        if ($this->oModeratorModel->approvedBackground(
+            $this->httpRequest->post('id'),
+            self::INT_APPROVE_STATUS
+        )) {
             $this->clearUserBgCache();
 
             $this->sMsg = t('The wallpaper has been approved!');
@@ -316,7 +340,10 @@ class ModeratorController extends Controller
 
     public function disapprovedPictureAlbum()
     {
-        if ($this->oModeratorModel->approvedPictureAlbum($this->httpRequest->post('album_id'), '0')) {
+        if ($this->oModeratorModel->approvedPictureAlbum(
+            $this->httpRequest->post('album_id'),
+            self::STR_DISAPPROVE_STATUS
+        )) {
             PictureCore::clearCache();
 
             $this->sMsg = t('The photo album has been disapproved!');
@@ -339,7 +366,10 @@ class ModeratorController extends Controller
 
     public function disapprovedPhoto()
     {
-        if ($this->oModeratorModel->approvedPicture($this->httpRequest->post('picture_id'), '0')) {
+        if ($this->oModeratorModel->approvedPicture(
+            $this->httpRequest->post('picture_id'),
+            self::STR_DISAPPROVE_STATUS
+        )) {
             PictureCore::clearCache();
 
             $this->sMsg = t('The picture has been disapproved!');
@@ -362,7 +392,10 @@ class ModeratorController extends Controller
 
     public function disapprovedVideoAlbum()
     {
-        if ($this->oModeratorModel->approvedVideoAlbum($this->httpRequest->post('album_id'), '0')) {
+        if ($this->oModeratorModel->approvedVideoAlbum(
+            $this->httpRequest->post('album_id'),
+            self::STR_DISAPPROVE_STATUS
+        )) {
             VideoCore::clearCache();
 
             $this->sMsg = t('The video album has been disapproved!');
@@ -385,7 +418,10 @@ class ModeratorController extends Controller
 
     public function disapprovedVideo()
     {
-        if ($this->oModeratorModel->approvedVideo($this->httpRequest->post('video_id'), '0')) {
+        if ($this->oModeratorModel->approvedVideo(
+            $this->httpRequest->post('video_id'),
+            self::STR_DISAPPROVE_STATUS
+        )) {
             VideoCore::clearCache();
 
             $this->sMsg = t('The video has been disapproved!');
@@ -408,7 +444,10 @@ class ModeratorController extends Controller
 
     public function disapprovedAvatar()
     {
-        if ($this->oModeratorModel->approvedAvatar($this->httpRequest->post('id'), 0)) {
+        if ($this->oModeratorModel->approvedAvatar(
+            $this->httpRequest->post('id'),
+            self::INT_DISAPPROVE_STATUS
+        )) {
             $this->clearAvatarCache();
 
             $this->sMsg = t('The profile photo has been disapproved!');
@@ -431,7 +470,10 @@ class ModeratorController extends Controller
 
     public function disapprovedBackground()
     {
-        if ($this->oModeratorModel->approvedBackground($this->httpRequest->post('id'), 0)) {
+        if ($this->oModeratorModel->approvedBackground(
+            $this->httpRequest->post('id'),
+            self::INT_DISAPPROVE_STATUS
+        )) {
             $this->clearUserBgCache();
 
             $this->sMsg = t('The wallpaper has been disapproved!');
