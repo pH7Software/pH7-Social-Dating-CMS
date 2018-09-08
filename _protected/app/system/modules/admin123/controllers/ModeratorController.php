@@ -179,7 +179,7 @@ class ModeratorController extends Controller
     public function approvedPictureAlbum()
     {
         if ($this->oModeratorModel->approvedPictureAlbum($this->httpRequest->post('album_id'))) {
-            $this->clearPictureCache();
+            PictureCore::clearCache();
 
             $this->sMsg = t('The photo album has been approved!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -202,7 +202,7 @@ class ModeratorController extends Controller
     public function approvedPhoto()
     {
         if ($this->oModeratorModel->approvedPicture($this->httpRequest->post('picture_id'))) {
-            $this->clearPictureCache();
+            PictureCore::clearCache();
 
             $this->sMsg = t('The picture has been approved!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -225,7 +225,7 @@ class ModeratorController extends Controller
     public function approvedVideoAlbum()
     {
         if ($this->oModeratorModel->approvedVideoAlbum($this->httpRequest->post('album_id'))) {
-            $this->clearVideoCache();
+            VideoCore::clearCache();
 
             $this->sMsg = t('The video album has been approved!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -248,7 +248,7 @@ class ModeratorController extends Controller
     public function approvedVideo()
     {
         if ($this->oModeratorModel->approvedVideo($this->httpRequest->post('video_id'))) {
-            $this->clearVideoCache();
+            VideoCore::clearCache();
 
             $this->sMsg = t('The video has been approved!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -317,7 +317,7 @@ class ModeratorController extends Controller
     public function disapprovedPictureAlbum()
     {
         if ($this->oModeratorModel->approvedPictureAlbum($this->httpRequest->post('album_id'), '0')) {
-            $this->clearPictureCache();
+            PictureCore::clearCache();
 
             $this->sMsg = t('The photo album has been disapproved!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -340,7 +340,7 @@ class ModeratorController extends Controller
     public function disapprovedPhoto()
     {
         if ($this->oModeratorModel->approvedPicture($this->httpRequest->post('picture_id'), '0')) {
-            $this->clearPictureCache();
+            PictureCore::clearCache();
 
             $this->sMsg = t('The picture has been disapproved!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -363,7 +363,7 @@ class ModeratorController extends Controller
     public function disapprovedVideoAlbum()
     {
         if ($this->oModeratorModel->approvedVideoAlbum($this->httpRequest->post('album_id'), '0')) {
-            $this->clearVideoCache();
+            VideoCore::clearCache();
 
             $this->sMsg = t('The video album has been disapproved!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -386,7 +386,7 @@ class ModeratorController extends Controller
     public function disapprovedVideo()
     {
         if ($this->oModeratorModel->approvedVideo($this->httpRequest->post('video_id'), '0')) {
-            $this->clearVideoCache();
+            VideoCore::clearCache();
 
             $this->sMsg = t('The video has been disapproved!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -460,7 +460,7 @@ class ModeratorController extends Controller
         ) {
             $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'picture/img/' . $this->httpRequest->post('username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
             $this->file->deleteDir($sDir);
-            $this->clearPictureCache();
+            PictureCore::clearCache();
 
             $this->sMsg = t('The photo album has been deleted!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -494,7 +494,7 @@ class ModeratorController extends Controller
                 $this->httpRequest->post('username'),
                 $this->httpRequest->post('picture_link')
             );
-            $this->clearPictureCache();
+            PictureCore::clearCache();
 
             $this->sMsg = t('The picture has been deleted!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -522,7 +522,7 @@ class ModeratorController extends Controller
         ) {
             $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $this->httpRequest->post('username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
             $this->file->deleteDir($sDir);
-            $this->clearVideoCache();
+            VideoCore::clearCache();
 
             $this->sMsg = t('The video album has been deleted!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -556,7 +556,7 @@ class ModeratorController extends Controller
                 $this->httpRequest->post('username'),
                 $this->httpRequest->post('video_link')
             );
-            $this->clearVideoCache();
+            VideoCore::clearCache();
 
             $this->sMsg = t('The video has been deleted!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -604,26 +604,6 @@ class ModeratorController extends Controller
             ),
             $this->sMsg
         );
-    }
-
-    /**
-     * Clear PictureCoreModel Cache
-     *
-     * @return void
-     */
-    private function clearPictureCache()
-    {
-        (new Cache)->start(PictureCoreModel::CACHE_GROUP, null, null)->clear();
-    }
-
-    /**
-     * Clear VideoCoreModel Cache
-     *
-     * @return void
-     */
-    private function clearVideoCache()
-    {
-        (new Cache)->start(VideoCoreModel::CACHE_GROUP, null, null)->clear();
     }
 
     /**

@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Cache\Cache;
 use PH7\Framework\File\File;
 
 class PictureCore
@@ -35,5 +36,14 @@ class PictureCore
 
         (new File)->deleteFile($aFiles);
         unset($aFiles);
+    }
+
+    public static function clearCache()
+    {
+        (new Cache)->start(
+            PictureCoreModel::CACHE_GROUP,
+            null,
+            null
+        )->clear();
     }
 }

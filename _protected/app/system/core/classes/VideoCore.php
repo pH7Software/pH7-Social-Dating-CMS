@@ -11,6 +11,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Cache\Cache;
 use PH7\Framework\File\File;
 
 class VideoCore
@@ -65,5 +66,14 @@ class VideoCore
         $oFile->deleteFile($sDir . $sThumbName . '-3' . $sThumbExt);
         $oFile->deleteFile($sDir . $sThumbName . '-4' . $sThumbExt);
         unset($oFile);
+    }
+
+    public static function clearCache()
+    {
+        (new Cache)->start(
+            VideoModel::CACHE_GROUP,
+            null,
+            null
+        )->clear();
     }
 }
