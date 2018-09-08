@@ -18,7 +18,6 @@ class ModeratorController extends Controller
 {
     const STR_APPROVE_STATUS = '1';
     const STR_DISAPPROVE_STATUS = '0';
-
     const INT_APPROVE_STATUS = 1;
     const INT_DISAPPROVE_STATUS = 0;
 
