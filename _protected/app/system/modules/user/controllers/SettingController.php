@@ -35,11 +35,11 @@ class SettingController extends Controller
     {
         parent::__construct();
 
-        $this->bAdminLogged = (AdminCore::auth() && !User::auth());
+        $this->bAdminLogged = AdminCore::auth() && !User::auth();
         $this->iProfileId = $this->getProfileId();
-        $this->sUsername = ($this->bAdminLogged && $this->httpRequest->getExists('username')) ? $this->httpRequest->get('username') : $this->session->get('member_username');
-        $this->sFirstName = ($this->bAdminLogged && $this->httpRequest->getExists('first_name')) ? $this->httpRequest->get('first_name') : $this->session->get('member_first_name');
-        $this->sSex = ($this->bAdminLogged && $this->httpRequest->getExists('sex')) ? $this->httpRequest->get('sex') : $this->session->get('member_sex');
+        $this->sUsername = $this->bAdminLogged && $this->httpRequest->getExists('username') ? $this->httpRequest->get('username') : $this->session->get('member_username');
+        $this->sFirstName = $this->bAdminLogged && $this->httpRequest->getExists('first_name') ? $this->httpRequest->get('first_name') : $this->session->get('member_first_name');
+        $this->sSex = $this->bAdminLogged && $this->httpRequest->getExists('sex') ? $this->httpRequest->get('sex') : $this->session->get('member_sex');
 
         /** For the avatar on the index and avatar page **/
         $this->view->username = $this->sUsername;
