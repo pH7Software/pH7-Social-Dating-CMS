@@ -184,9 +184,9 @@ class ForumController extends Controller
         $sUsername = $this->httpRequest->get('username');
         $this->view->username = $sUsername;
 
-        $iId = (new UserCoreModel)->getId(null, $sUsername);
+        $iProfileId = (new UserCoreModel)->getId(null, $sUsername);
 
-        $this->iTotalTopics = $this->oForumModel->totalTopics(null, $iId);
+        $this->iTotalTopics = $this->oForumModel->totalTopics(null, $iProfileId);
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->iTotalTopics, self::TOPICS_PER_PAGE
         );
@@ -195,7 +195,7 @@ class ForumController extends Controller
         $this->view->topic_number = nt('%n% Topic:', '%n% Topics:', $this->iTotalTopics);
 
         $oTopics = $this->oForumModel->getPostByProfile(
-            $iId,
+            $iProfileId,
             '1',
             $this->oPage->getFirstItem(),
             $this->oPage->getNbItemsPerPage()
