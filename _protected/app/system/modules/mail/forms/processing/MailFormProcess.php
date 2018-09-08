@@ -85,7 +85,7 @@ class MailFormProcess extends Form
     private function sendMail($iRecipientId, $iMsgId)
     {
         $this->view->content = t('Hello %0%!', $this->httpRequest->post('recipient')) . '<br />' .
-            t('You received a new message from %0%', $this->session->get('member_username')) . '<br />' .
+            t('You received a new message from %0%', $this->getSenderUsername()) . '<br />' .
             '<a href="' . Uri::get('mail', 'main', 'inbox', $iMsgId) . '">' . t('Click here') . '</a>' . t('to read your message.');
 
         $sRecipientEmail = $this->oUserModel->getEmail($iRecipientId);
@@ -97,10 +97,34 @@ class MailFormProcess extends Form
 
         $aInfo = [
             'to' => $sRecipientEmail,
-            'subject' => t('New private message from %0% on %site_name%', $this->session->get('member_first_name'))
+            'subject' => t('New private message from %0% on %site_name%', $this->getSenderFirstName())
         ];
 
         return (new Mail)->send($aInfo, $sMessageHtml);
+    }
+
+    /**
+     * @return string
+     */
+    private function getSenderUsername()
+    {
+        if ($this->isAdminEligible()) {
+            return ucfirst(PH7_ADMIN_USERNAME);
+        }
+
+        return $this->session->get('member_username');
+    }
+
+    /**
+     * @return string
+     */
+    private function getSenderFirstName()
+    {
+        if ($this->isAdminEligible()) {
+            return ucfirst(PH7_ADMIN_USERNAME);
+        }
+
+        return $this->session->get('member_first_name');
     }
 
     /**
