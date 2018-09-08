@@ -104,7 +104,8 @@ class UserCore
         (new UserCoreModel)->delete($iProfileId, $sUsername);
 
         /* Clean UserCoreModel and Avatar Cache */
-        (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear()
+        (new Cache)
+            ->start(UserCoreModel::CACHE_GROUP, null, null)->clear()
             ->start(Design::CACHE_AVATAR_GROUP . $sUsername, null, null)->clear();
     }
 
@@ -231,7 +232,8 @@ class UserCore
         (new UserCoreModel)->deleteAvatar($iProfileId);
 
         /* Clean User Avatar Cache */
-        (new Cache)->start(Design::CACHE_AVATAR_GROUP . $sUsername, null, null)->clear()
+        (new Cache)
+            ->start(Design::CACHE_AVATAR_GROUP . $sUsername, null, null)->clear()
             ->start(UserCoreModel::CACHE_GROUP, 'avatar' . $iProfileId, null)->clear();
     }
 

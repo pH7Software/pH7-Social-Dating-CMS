@@ -27,6 +27,9 @@ class ModeratorController extends Controller
     /** @var string */
     private $sMsg;
 
+    /** @var string */
+    private $sMsgType;
+
     public function __construct()
     {
         parent::__construct();
@@ -164,7 +167,11 @@ class ModeratorController extends Controller
     public function pictureWebcam()
     {
         Header::redirect(
-            Uri::get('webcam', 'webcam', 'picture'),
+            Uri::get(
+                'webcam',
+                'webcam',
+                'picture'
+            ),
             t('Welcome to the Picture Webcam in "administrator mode"')
         );
     }
@@ -173,14 +180,22 @@ class ModeratorController extends Controller
     {
         if ($this->oModeratorModel->approvedPictureAlbum($this->httpRequest->post('album_id'))) {
             $this->clearPictureCache();
+
             $this->sMsg = t('The photo album has been approved!');
+            $this->sMsgType = Design::SUCCESS_TYPE;
         } else {
             $this->sMsg = t('Oops! The photo album could not be approved!');
+            $this->sMsgType = Design::ERROR_TYPE;
         }
 
         Header::redirect(
-            Uri::get(PH7_ADMIN_MOD, 'moderator', 'picturealbum'),
-            $this->sMsg
+            Uri::get(
+                PH7_ADMIN_MOD,
+                'moderator',
+                'picturealbum'
+            ),
+            $this->sMsg,
+            $this->sMsgType
         );
     }
 
@@ -188,50 +203,91 @@ class ModeratorController extends Controller
     {
         if ($this->oModeratorModel->approvedPicture($this->httpRequest->post('picture_id'))) {
             $this->clearPictureCache();
+
             $this->sMsg = t('The picture has been approved!');
+            $this->sMsgType = Design::SUCCESS_TYPE;
         } else {
             $this->sMsg = t('Oops! The picture could not be approved!');
+            $this->sMsgType = Design::ERROR_TYPE;
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'picture'), $this->sMsg);
+        Header::redirect(
+            Uri::get(
+                PH7_ADMIN_MOD,
+                'moderator',
+                'picture'
+            ),
+            $this->sMsg,
+            $this->sMsgType
+        );
     }
 
     public function approvedVideoAlbum()
     {
         if ($this->oModeratorModel->approvedVideoAlbum($this->httpRequest->post('album_id'))) {
             $this->clearVideoCache();
+
             $this->sMsg = t('The video album has been approved!');
+            $this->sMsgType = Design::SUCCESS_TYPE;
         } else {
             $this->sMsg = t('Oops! The video album could not be approved!');
+            $this->sMsgType = Design::ERROR_TYPE;
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'videoalbum'), $this->sMsg);
+        Header::redirect(
+            Uri::get(
+                PH7_ADMIN_MOD,
+                'moderator',
+                'videoalbum'
+            ),
+            $this->sMsg,
+            $this->sMsgType
+        );
     }
 
     public function approvedVideo()
     {
         if ($this->oModeratorModel->approvedVideo($this->httpRequest->post('video_id'))) {
             $this->clearVideoCache();
+
             $this->sMsg = t('The video has been approved!');
+            $this->sMsgType = Design::SUCCESS_TYPE;
         } else {
             $this->sMsg = t('Oops! The video could not be approved!');
+            $this->sMsgType = Design::ERROR_TYPE;
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'video'), $this->sMsg);
+        Header::redirect(
+            Uri::get(
+                PH7_ADMIN_MOD,
+                'moderator',
+                'video'
+            ),
+            $this->sMsg,
+            $this->sMsgType
+        );
     }
 
     public function approvedAvatar()
     {
         if ($this->oModeratorModel->approvedAvatar($this->httpRequest->post('id'))) {
             $this->clearAvatarCache();
+
             $this->sMsg = t('The profile photo has been approved!');
+            $this->sMsgType = Design::SUCCESS_TYPE;
         } else {
             $this->sMsg = t('Oops! The profile photo could not be approved!');
+            $this->sMsgType = Design::ERROR_TYPE;
         }
 
         Header::redirect(
-            Uri::get(PH7_ADMIN_MOD, 'moderator', 'avatar'),
-            $this->sMsg
+            Uri::get(
+                PH7_ADMIN_MOD,
+                'moderator',
+                'avatar'
+            ),
+            $this->sMsg,
+            $this->sMsgType
         );
     }
 
@@ -239,106 +295,188 @@ class ModeratorController extends Controller
     {
         if ($this->oModeratorModel->approvedBackground($this->httpRequest->post('id'))) {
             $this->clearUserBgCache();
+
             $this->sMsg = t('The wallpaper has been approved!');
+            $this->sMsgType = Design::SUCCESS_TYPE;
         } else {
             $this->sMsg = t('Oops! The wallpaper could not be approved!');
+            $this->sMsgType = Design::ERROR_TYPE;
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'background'), $this->sMsg);
+        Header::redirect(
+            Uri::get(
+                PH7_ADMIN_MOD,
+                'moderator',
+                'background'
+            ),
+            $this->sMsg,
+            $this->sMsgType
+        );
     }
 
     public function disapprovedPictureAlbum()
     {
         if ($this->oModeratorModel->approvedPictureAlbum($this->httpRequest->post('album_id'), '0')) {
             $this->clearPictureCache();
+
             $this->sMsg = t('The photo album has been disapproved!');
+            $this->sMsgType = Design::SUCCESS_TYPE;
         } else {
             $this->sMsg = t('Oops! The photo album could not be disapproved!');
+            $this->sMsgType = Design::ERROR_TYPE;
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'picturealbum'), $this->sMsg);
+        Header::redirect(
+            Uri::get(
+                PH7_ADMIN_MOD,
+                'moderator',
+                'picturealbum'
+            ),
+            $this->sMsg,
+            $this->sMsgType
+        );
     }
 
     public function disapprovedPhoto()
     {
         if ($this->oModeratorModel->approvedPicture($this->httpRequest->post('picture_id'), '0')) {
             $this->clearPictureCache();
+
             $this->sMsg = t('The picture has been disapproved!');
+            $this->sMsgType = Design::SUCCESS_TYPE;
         } else {
             $this->sMsg = t('Oops! The picture could not be disapproved!');
+            $this->sMsgType = Design::ERROR_TYPE;
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'picture'), $this->sMsg);
+        Header::redirect(
+            Uri::get(
+                PH7_ADMIN_MOD,
+                'moderator',
+                'picture'
+            ),
+            $this->sMsg,
+            $this->sMsgType
+        );
     }
 
     public function disapprovedVideoAlbum()
     {
         if ($this->oModeratorModel->approvedVideoAlbum($this->httpRequest->post('album_id'), '0')) {
             $this->clearVideoCache();
+
             $this->sMsg = t('The video album has been disapproved!');
+            $this->sMsgType = Design::SUCCESS_TYPE;
         } else {
             $this->sMsg = t('Oops! The video album could not be disapproved!');
+            $this->sMsgType = Design::ERROR_TYPE;
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'videoalbum'), $this->sMsg);
+        Header::redirect(
+            Uri::get(
+                PH7_ADMIN_MOD,
+                'moderator',
+                'videoalbum'
+            ),
+            $this->sMsg,
+            $this->sMsgType
+        );
     }
 
     public function disapprovedVideo()
     {
         if ($this->oModeratorModel->approvedVideo($this->httpRequest->post('video_id'), '0')) {
             $this->clearVideoCache();
+
             $this->sMsg = t('The video has been disapproved!');
+            $this->sMsgType = Design::SUCCESS_TYPE;
         } else {
             $this->sMsg = t('Oops! The video could not be disapproved!');
+            $this->sMsgType = Design::ERROR_TYPE;
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'video'), $this->sMsg);
+        Header::redirect(
+            Uri::get(
+                PH7_ADMIN_MOD,
+                'moderator',
+                'video'
+            ),
+            $this->sMsg,
+            $this->sMsgType
+        );
     }
 
     public function disapprovedAvatar()
     {
         if ($this->oModeratorModel->approvedAvatar($this->httpRequest->post('id'), 0)) {
             $this->clearAvatarCache();
+
             $this->sMsg = t('The profile photo has been disapproved!');
+            $this->sMsgType = Design::SUCCESS_TYPE;
         } else {
             $this->sMsg = t('Oops! The profile photo could not be disapprove!');
+            $this->sMsgType = Design::ERROR_TYPE;
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'avatar'), $this->sMsg);
+        Header::redirect(
+            Uri::get(
+                PH7_ADMIN_MOD,
+                'moderator',
+                'avatar'
+            ),
+            $this->sMsg,
+            $this->sMsgType
+        );
     }
 
     public function disapprovedBackground()
     {
         if ($this->oModeratorModel->approvedBackground($this->httpRequest->post('id'), 0)) {
             $this->clearUserBgCache();
+
             $this->sMsg = t('The wallpaper has been disapproved!');
+            $this->sMsgType = Design::SUCCESS_TYPE;
         } else {
             $this->sMsg = t('Oops! The wallpaper could not be disapprove!');
+            $this->sMsgType = Design::ERROR_TYPE;
         }
 
         Header::redirect(
-            Uri::get(PH7_ADMIN_MOD, 'moderator', 'background'),
-            $this->sMsg
+            Uri::get(
+                PH7_ADMIN_MOD,
+                'moderator',
+                'background'
+            ),
+            $this->sMsg,
+            $this->sMsgType
         );
     }
 
     public function deletePictureAlbum()
     {
         if (
-            (new PictureCoreModel)->deletePhoto($this->httpRequest->post('id'), $this->httpRequest->post('album_id'))
-            && $this->oModeratorModel->deletePictureAlbum($this->httpRequest->post('album_id'))
+            (new PictureCoreModel)->deletePhoto($this->httpRequest->post('id'), $this->httpRequest->post('album_id')) &&
+            $this->oModeratorModel->deletePictureAlbum($this->httpRequest->post('album_id'))
         ) {
             $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'picture/img/' . $this->httpRequest->post('username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
             $this->file->deleteDir($sDir);
             $this->clearPictureCache();
+
             $this->sMsg = t('The photo album has been deleted!');
+            $this->sMsgType = Design::SUCCESS_TYPE;
         } else {
             $this->sMsg = t('Oops! The photo album could not be deleted');
+            $this->sMsgType = Design::ERROR_TYPE;
         }
 
         Header::redirect(
-            Uri::get(PH7_ADMIN_MOD, 'moderator', 'picturealbum'),
-            $this->sMsg
+            Uri::get(
+                PH7_ADMIN_MOD,
+                'moderator',
+                'picturealbum'
+            ),
+            $this->sMsg,
+            $this->sMsgType
         );
     }
 
@@ -356,31 +494,52 @@ class ModeratorController extends Controller
                 $this->httpRequest->post('username'),
                 $this->httpRequest->post('picture_link')
             );
-
             $this->clearPictureCache();
+
             $this->sMsg = t('The picture has been deleted!');
+            $this->sMsgType = Design::SUCCESS_TYPE;
         } else {
             $this->sMsg = t('Oops! The picture could not be deleted!');
+            $this->sMsgType = Design::ERROR_TYPE;
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'picture'), $this->sMsg);
+        Header::redirect(
+            Uri::get(
+                PH7_ADMIN_MOD,
+                'moderator',
+                'picture'
+            ),
+            $this->sMsg,
+            $this->sMsgType
+        );
     }
 
     public function deleteVideoAlbum()
     {
         if (
-            (new VideoCoreModel)->deleteVideo($this->httpRequest->post('id'), $this->httpRequest->post('album_id'))
-            && $this->oModeratorModel->deleteVideoAlbum($this->httpRequest->post('album_id'))
+            (new VideoCoreModel)->deleteVideo($this->httpRequest->post('id'), $this->httpRequest->post('album_id')) &&
+            $this->oModeratorModel->deleteVideoAlbum($this->httpRequest->post('album_id'))
         ) {
             $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $this->httpRequest->post('username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
             $this->file->deleteDir($sDir);
             $this->clearVideoCache();
+
             $this->sMsg = t('The video album has been deleted!');
+            $this->sMsgType = Design::SUCCESS_TYPE;
         } else {
             $this->sMsg = t('Oops! The video album could not be deleted');
+            $this->sMsgType = Design::ERROR_TYPE;
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'videoalbum'), $this->sMsg);
+        Header::redirect(
+            Uri::get(
+                PH7_ADMIN_MOD,
+                'moderator',
+                'videoalbum'
+            ),
+            $this->sMsg,
+            $this->sMsgType
+        );
     }
 
     public function deleteVideo()
@@ -392,14 +551,29 @@ class ModeratorController extends Controller
         );
 
         if ($bVideo) {
-            (new VideoCore)->deleteVideo($this->httpRequest->post('album_id'), $this->httpRequest->post('username'), $this->httpRequest->post('video_link'));
+            (new VideoCore)->deleteVideo(
+                $this->httpRequest->post('album_id'),
+                $this->httpRequest->post('username'),
+                $this->httpRequest->post('video_link')
+            );
             $this->clearVideoCache();
+
             $this->sMsg = t('The video has been deleted!');
+            $this->sMsgType = Design::SUCCESS_TYPE;
         } else {
             $this->sMsg = t('Oops! The video could not be deleted!');
+            $this->sMsgType = Design::ERROR_TYPE;
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'video'), $this->sMsg);
+        Header::redirect(
+            Uri::get(
+                PH7_ADMIN_MOD,
+                'moderator',
+                'video'
+            ),
+            $this->sMsg,
+            $this->sMsgType
+        );
     }
 
     public function deleteAvatar()
@@ -407,7 +581,14 @@ class ModeratorController extends Controller
         (new Admin)->deleteAvatar($this->httpRequest->post('id'), $this->httpRequest->post('username'));
         $this->clearAvatarCache();
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'avatar'), $this->sMsg);
+        Header::redirect(
+            Uri::get(
+                PH7_ADMIN_MOD,
+                'moderator',
+                'avatar'
+            ),
+            $this->sMsg
+        );
     }
 
     public function deleteBackground()
@@ -415,7 +596,14 @@ class ModeratorController extends Controller
         (new Admin)->deleteBackground($this->httpRequest->post('id'), $this->httpRequest->post('username'));
         $this->clearUserBgCache();
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'background'), $this->sMsg);
+        Header::redirect(
+            Uri::get(
+                PH7_ADMIN_MOD,
+                'moderator',
+                'background'
+            ),
+            $this->sMsg
+        );
     }
 
     /**
