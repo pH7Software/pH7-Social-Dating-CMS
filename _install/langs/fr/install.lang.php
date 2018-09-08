@@ -20,7 +20,7 @@ $LANG = array(
     'CMS_desc' => '<p>Bienvenue à l\'installation de ' . Controller::SOFTWARE_NAME . '.<br />
         Nous vous remercions d\'avoir choisis notre CMS et nous espérons qu\'il va vous plaire.</p>',
     'choose_install_lang' => 'Veuillez choisir votre langue pour commencer l\'installation',
-    'requirements_desc' => 'ATTENTION ! Veuillez être sûr que <abbr title="Votre serveur distant ou votre machine/PC si vous êtes en localhost">vous êtes</abbr> connecté à Internet et que votre serveur a les <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">exigences nécessaires</a> pour faire fonctionner pH7CMS.',
+    'requirements_desc' => 'ATTENTION ! Veuillez être sûr que <abbr title="Votre serveur distant ou votre machine/PC si vous êtes en localhost">vous êtes</abbr> connecté à Internet et que votre serveur a les <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank" rel="noopener">exigences nécessaires</a> pour faire fonctionner pH7CMS.',
     'requirements2_desc' => 'Avant toute chose, veuillez créer une base de données MySQL et affecter un utilisateur à elle avec tous les privilèges. Une fois que vous avez créé la base de données MySQL et son utilisateur, assurez-vous d\'écrire le nom de la base de données, le nom d\'utilisateur et le mot de passe, car vous en aurez besoin pour l\'installation.',
     'config_path' => 'Chemin du répertoire &laquo; protected &raquo;',
     'desc_config_path' => 'Veuillez indiquer le chemin complet de votre répertoire &laquo; protected &raquo;<br />

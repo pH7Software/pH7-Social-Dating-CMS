@@ -173,7 +173,7 @@ class Bootstrap
     {
         $sMsg = '<p class="warning"><a href="' . Kernel::SOFTWARE_WEBSITE . '">pH7CMS</a> requires Apache "mod_rewrite".</p>
         <p>Firstly, please <strong>make sure the ".htaccess" file has been uploaded to the root directory where pH7CMS is installed</strong>. If not, use your FTP client (such as Filezilla) and upload it again from pH7CMS unziped package and try again.<br />
-        Secondly, please <strong>make sure "mod_rewrite" is correctly installed</strong>.<br /> Click <a href="http://ph7cms.com/doc/en/how-to-install-rewrite-module" target="_blank">here</a> if you want to get more information on how to install the rewrite module.<br /><br />
+        Secondly, please <strong>make sure "mod_rewrite" is correctly installed</strong>.<br /> Click <a href="http://ph7cms.com/doc/en/how-to-install-rewrite-module" target="_blank" rel="noopener">here</a> if you want to get more information on how to install the rewrite module.<br /><br />
         After that, please <a href="' . PH7_URL_ROOT . '">retry</a>.</p>';
 
         echo html_body("Apache's mod_rewrite is required", $sMsg);
