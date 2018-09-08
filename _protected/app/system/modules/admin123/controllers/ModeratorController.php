@@ -579,7 +579,6 @@ class ModeratorController extends Controller
     public function deleteAvatar()
     {
         (new Admin)->deleteAvatar($this->httpRequest->post('id'), $this->httpRequest->post('username'));
-        $this->clearAvatarCache();
 
         Header::redirect(
             Uri::get(
@@ -594,7 +593,6 @@ class ModeratorController extends Controller
     public function deleteBackground()
     {
         (new Admin)->deleteBackground($this->httpRequest->post('id'), $this->httpRequest->post('username'));
-        $this->clearUserBgCache();
 
         Header::redirect(
             Uri::get(
