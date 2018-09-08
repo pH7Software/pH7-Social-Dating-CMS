@@ -12,33 +12,33 @@ class Currency extends Select
      * https://en.wikipedia.org/wiki/ISO_4217#Active_codes
      */
     const CURRENCY_CODES = [
-        'AUD' => '(AUD) Australian Dollar',
-        'BRL' => '(BRL) Brazilian Real',
-        'CAD' => '(CAD) Canadian Dollar',
-        'CLP' => '(CLP) Chilean Peso',
-        'CZK' => '(CZK) Czech Koruna',
-        'DKK' => '(DKK) Danish Krone',
-        'EUR' => '(EUR) Euro',
-        'HKD' => '(HKD) Hong Kong Dollar',
-        'HUF' => '(HUF) Hungarian Forint',
-        'INR' => '(INR) Indian Rupee',
-        'ILS' => '(ILS) Israeli New Sheqel',
-        'JPY' => '(JPY) Japanese Yen',
-        'MYR' => '(MYR) Malaysian Ringgit',
-        'MXN' => '(MXN) Mexican Peso',
-        'NOK' => '(NOK) Norwegian Krone',
-        'NZD' => '(NZD) New Zealand Dollar',
-        'PHP' => '(PHP) Philippine Peso',
-        'PLN' => '(PLN) Polish Zloty',
-        'GBP' => '(GBP) Pound Sterling',
-        'RUB' => '(RUB) Russian Ruble',
-        'SGD' => '(SGD) Singapore Dollar',
-        'SEK' => '(SEK) Swedish Krona',
-        'CHF' => '(CHF) Swiss Franc',
-        'TWD' => '(TWD) Taiwan New Dollar',
-        'THB' => '(THB) Thai Baht',
-        'TRY' => '(TRY) Turkish Lira',
-        'USD' => '(USD) U.S. Dollar'
+        'AUD',
+        'BRL',
+        'CAD',
+        'CLP',
+        'CZK',
+        'DKK',
+        'EUR',
+        'HKD',
+        'HUF',
+        'INR',
+        'ILS',
+        'JPY',
+        'MYR',
+        'MXN',
+        'NOK',
+        'NZD',
+        'PHP',
+        'PLN',
+        'GBP',
+        'RUB',
+        'SGD',
+        'SEK',
+        'CHF',
+        'TWD',
+        'THB',
+        'TRY',
+        'USD'
     ];
 
     /**
@@ -50,8 +50,8 @@ class Currency extends Select
     {
         $aOptions = [];
 
-        foreach (static::CURRENCY_CODES as $sCurrencyCode => $sCurrencyName) {
-            $aOptions[$sCurrencyCode] = t($sCurrencyName);
+        foreach (static::CURRENCY_CODES as $sCurrencyCode) {
+            $aOptions[$sCurrencyCode] = t($sCurrencyCode);
         }
 
         parent::__construct($sLabel, $sName, $aOptions, $aProperties);
