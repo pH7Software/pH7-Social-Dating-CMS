@@ -118,7 +118,7 @@ class ConfigFileCoreForm
         }
 
         if ($sKey === self::CONFIG_KEYS['currency_sign']) {
-            return t('Currency sign (for display purposes only)');
+            return t('Currency Sign (for display purposes only)');
         }
 
         return self::cleanLabelText($sKey);
