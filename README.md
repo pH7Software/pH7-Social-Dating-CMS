@@ -86,7 +86,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Block easily any IPs, emails, usernames, affiliated bank accounts, etc.
 * Country Blocker (block easily any countries where you don't want your website to be accessible)
 * Country Restrictions for Member and Affiliate registration forms
-* Fully API for integration from an external app (iOS/Android, ...), website, program, ...
+* RESTFul API for integration from an external app (iOS/Android, ...), website, program, ...
 * Feedback
 * Full Homepage Customization (profiles block, slogan, SEO text, headline)
 * Fully Responsive Templates
