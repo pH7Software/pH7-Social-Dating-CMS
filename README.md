@@ -2,7 +2,7 @@
 
 ### The Most Secure, Powerful & Professional Social Dating Web App Builder
 
-[![PayPal](https://img.shields.io/badge/paypal-donate-orange.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6 "Help keep me off the streets! ;)") [![Build Status](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/build.png?b=master)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/build-status/master) [![GPL v3 Licence](https://badges.frapsoft.com/os/gpl/gpl.svg?v=103)](https://opensource.org/licenses/gpl-3.0.html) [![Patreon](https://img.shields.io/badge/patreon-donate-red.svg)](https://www.patreon.com/bePatron?u=3534366 "Become a Patron Today!")
+[![PayPal](https://img.shields.io/badge/Donate-PayPal-orange.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6 "Help keep me off the streets! ;)") [![Build Status](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/build.png?b=master)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/build-status/master) [![GPL v3 Licence](https://img.shields.io/aur/license/yaourt.svg)](https://opensource.org/licenses/gpl-3.0.html) [![Patreon](https://img.shields.io/badge/Subscribe-Patreon-red.svg)](https://www.patreon.com/bePatron?u=3534366 "Become a Patron Today!")
 
 The **pH7 Social Dating CMS**™ is a **Professional** & **Open Source** Social Dating CMS, fully responsive design, low-resource-intensive, powerful and very secure.
 
@@ -202,7 +202,7 @@ You can find and add other languages on the [I18N repo](https://github.com/pH7So
 Coded & Designed with lots of ❤️ by [Pierre-Henry Soria](http://ph7.me). A passionate Belgian software engineer 🍫🍺
 
 
-## Offer Me A Cup of Tea (or more...) 🍵
+## Offer Me A Cup of Tea? (or more...) 🍵
 
 [![Paypal](templates/system/modules/ph7cms-helper/themes/base/img/paypal-donate.en.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6)
 [![Patreon](templates/system/modules/ph7cms-helper/themes/base/img/support-patreon.en.png)](https://www.patreon.com/bePatron?u=3534366 "Become a Patron")
