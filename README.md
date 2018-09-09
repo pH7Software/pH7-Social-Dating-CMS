@@ -241,6 +241,20 @@ Just clone the repository, make your changes and then make a push ;-)
 ![Beautiful Profile Dating Page](https://user-images.githubusercontent.com/1325411/35779585-68f0d5fc-09c7-11e8-91eb-bf793fcfab6e.png)
 
 
+## pH7CMS; The Eco-Friendly CMS ❤️
+
+![Eco Friendly. Love the World and Love the Nature](static/img/love-nature.svg)
+
+[pH7CMS](http://ph7cms.com) has been built to reduce the power and CPU usage of your server in order to preserve the nature and help to save our environment.
+
+pH7CMS's templates also use lighter colors since LCD monitors use less electricity to display them.
+
+Finally, **please consider using green Web hosting** (which use Green Power supply).
+
+
+-> Other [10 Easy Ways to Green Your Social Community](https://mashable.com/2010/01/01/green-your-web-site/) 😉 <-
+
+
 ## Tools/Software Used to Develop pH7CMS
 
 * LAMP on **Fedora/Ubuntu** (and Windows/Mac with WampServer/MAMP for testing purpose)
@@ -262,21 +276,7 @@ Just clone the repository, make your changes and then make a push ;-)
 
 ## Contact
 
-You can send me an email for any suggestions or feedback at: *hello {AT} ph7cms {D0T} com* OR *hi {AT} ph7 {D0T} me*
-
-
-## pH7CMS; The Eco-Friendly CMS ❤️
-
-![Eco Friendly. Love the World and Love the Nature](static/img/love-nature.svg)
-
-[pH7CMS](http://ph7cms.com) has been built to reduce the power and CPU usage of your server in order to preserve the nature and help to save our environment.
-
-pH7CMS's templates also use lighter colors since LCD monitors use less electricity to display them.
-
-Finally, **please consider using green Web hosting** (which use Green Power supply).
-
-
--> Other [10 Easy Ways to Green Your Social Community](https://mashable.com/2010/01/01/green-your-web-site/) 😉 <-
+You can send me an email for any suggestions or feedback at: *hello {AT} ph7cms {D0T} com*
 
 
 ## License
