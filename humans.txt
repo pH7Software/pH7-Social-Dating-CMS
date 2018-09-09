@@ -15,8 +15,8 @@ Thank you!
 
 Pierre-Henry Soria (the developer of pH7CMS).
 pH7CMS Website: http://ph7cms.com
-Personal Github: http://github.com/pH-7
-pH7CMS Github: http://github.com/pH7Software
+Personal GitHub: http://github.com/pH-7
+pH7CMS GitHub: http://github.com/pH7Software
 
 
 P.S. Moreover, a contribution to an open source project like pH7CMS looks great on your CV!
