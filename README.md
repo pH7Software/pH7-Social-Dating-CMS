@@ -202,7 +202,7 @@ You can find and add other languages on the [I18N repo](https://github.com/pH7So
 Coded & Designed with lots of ❤️ by [Pierre-Henry Soria](http://ph7.me). A passionate Belgian software engineer 🍫🍺
 
 
-## Offer Me A Cup of Tea? (or more...) 🍵
+## Offer Me A Cup of Tea? (...or tea bags...) 🍵
 
 [![Paypal](templates/system/modules/ph7cms-helper/themes/base/img/paypal-donate.en.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6)
 [![Patreon](templates/system/modules/ph7cms-helper/themes/base/img/support-patreon.en.png)](https://www.patreon.com/bePatron?u=3534366 "Become a Patron")
