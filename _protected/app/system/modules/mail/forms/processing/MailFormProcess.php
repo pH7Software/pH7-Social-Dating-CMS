@@ -37,7 +37,7 @@ class MailFormProcess extends Form
         $iTimeDelay = (int)DbConfig::getSetting('timeDelaySendMail');
         $sRecipient = $this->httpRequest->post('recipient');
         $iRecipientId = $this->oUserModel->getId(null, $sRecipient);
-        $iSenderId = (int)($bIsAdmin ? PH7_ADMIN_ID : $this->session->get('member_id'));
+        $iSenderId = $this->getSenderId();
 
         if ($iSenderId === $iRecipientId) {
             \PFBC\Form::setError('form_compose_mail', t('Oops! You can not send a message to yourself.'));
@@ -101,6 +101,18 @@ class MailFormProcess extends Form
         ];
 
         return (new Mail)->send($aInfo, $sMessageHtml);
+    }
+
+    /**
+     * @return int
+     */
+    private function getSenderId()
+    {
+        if ($this->isAdminEligible()) {
+            return PH7_ADMIN_ID;
+        }
+
+        return (int)$this->session->get('member_id');
     }
 
     /**
