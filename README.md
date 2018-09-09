@@ -205,7 +205,7 @@ Coded & Designed with lots of ❤️ by [Pierre-Henry Soria](http://ph7.me). A p
 ## Offer Me A Cup of Tea (or more...) 🍵
 
 [![Paypal](templates/system/modules/ph7cms-helper/themes/base/img/paypal-donate.en.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6)
-[![Patreon](static/img/patreon.png)](https://www.patreon.com/bePatron?u=3534366 "Become a Patron")
+[![Patreon](templates/system/modules/ph7cms-helper/themes/base/img/support-patreon.en.png)](https://www.patreon.com/bePatron?u=3534366 "Become a Patron")
 
 
 ## Hire Me At Your Company?
