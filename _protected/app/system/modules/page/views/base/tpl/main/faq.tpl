@@ -3,7 +3,7 @@
   <div class="faq"><a href="#divShow_1">{lang "I can't login, or I forgot my username or password."}</a></div>
 
   <div class="hidden" id="divShow_1">
-    {lang}If you can\'t login, check to make sure that your "caps lock" key is off. Your username and password are CaSe SeNsItIvE. If you still cannot login, you can request to{/lang} <a href="{{ $design->url('lost-password','main','forgot','user') }}">{lang 'reset your password'}</a> {lang 'or'} <a href="{{ $design->url('contact','contact','index') }}">{lang 'contact us'}</a>.
+    {lang}If you cannot login, check to make sure that your "caps lock" key is off. Your username and password are CaSe SeNsItIvE. If you still cannot login, you can request to{/lang} <a href="{{ $design->url('lost-password','main','forgot','user') }}">{lang 'reset your password'}</a> {lang 'or'} <a href="{{ $design->url('contact','contact','index') }}">{lang 'contact us'}</a>.
   </div>
 
 
@@ -17,7 +17,7 @@
   <div class="faq"><a href="#divShow_3">{lang 'How can I delete my account?'}</a></div>
 
   <div class="hidden" id="divShow_3">
-    {lang}If you are aboslutely sure that you want to delete your account, you can do so in your privacy settings. Please note that your account will be permanently deleted and irrecoverable!{/lang}
+    {lang}If you are absolutely sure that you want to delete your account, you can do so in your privacy settings. Please note that your account will be permanently deleted and irrecoverable!{/lang}
   </div>
 
 
@@ -37,8 +37,7 @@
   <div class="faq"><a href="#divShow_6">{lang 'By who this Web App has been developed?'}</a></div>
 
   <div class="hidden" id="divShow_6">
-    This whole social dating website has been developed by <a href="http://ph7.me" title="The author of pH7CMS software">Pierre-Henry Soria</a> (<em><a href="https://github.com/pH-7
-" title="The author of pH7CMS software">Github profile</a></em>). Now he is a Senior Software Engineer and continues to update and develop his "<abbr title='pH7CMS; Formerly known as "pH7 Social Dating CMS"'>baby</abbr>" during his free time. <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS" title="pH7CMS is a Free and Open Source Social Dating App/Site Builder">pH7CMS</a> is his first "big" project he made when he was still a student.
+    This whole social dating website has been developed by <a href="http://ph7.me" title="Author of the Open Source Social Networking Project: 'pH7CMS'">Pierre-Henry Soria</a> (<em><a href="https://github.com/pH-7" title="Author of pH7CMS software">Github</a>/<a href="https://www.linkedin.com/in/ph7enry/">LinkedIn</a></em>). Now he is a Senior Software Engineer and continues to update and develop his "<abbr title='pH7Builder; Formerly known as "pH7CMS" or "pH7 Social Dating CMS"'>open source project</abbr>" during his free time. <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS" title="pH7CMS is a Free and Open Source Social Dating App/Site Builder">pH7Builder (formerly pH7CMS)</a> is his first "big" project he made when he was still a student.
   </div>
 
 </div>
