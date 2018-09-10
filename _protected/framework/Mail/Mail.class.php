@@ -16,7 +16,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Model\DbConfig;
 
-class Mail
+class Mail implements Mailable
 {
     const HTML_CONTENT_TYPE = 'text/html';
 

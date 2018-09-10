@@ -17,7 +17,7 @@
 
                     <div>
                         {{ $text = ($album->approved == 1) ? t('Disapproved') : t('Approved') }}
-                        {{ LinkCoreForm::display($text, PH7_ADMIN_MOD, 'moderator', $action, array('album_id'=>$album->albumId)) }} |
+                        {{ LinkCoreForm::display($text, PH7_ADMIN_MOD, 'moderator', $action, array('album_id'=>$album->albumId, 'id'=>$album->profileId)) }} |
                         {{ LinkCoreForm::display(t('Delete'), PH7_ADMIN_MOD, 'moderator', 'deletevideoalbum', array('album_id'=>$album->albumId, 'id'=>$album->profileId, 'username'=>$album->username)) }}
                     </div>
                 </div>

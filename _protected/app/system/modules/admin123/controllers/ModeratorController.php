@@ -10,6 +10,7 @@ namespace PH7;
 
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Layout\Html\Design;
+use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Url\Header;
@@ -23,11 +24,14 @@ class ModeratorController extends Controller
 
     const ITEMS_PER_PAGE = 20;
 
+    /** @var Page */
+    private $oPage;
+
     /** @var ModeratorModel */
     private $oModeratorModel;
 
-    /** @var Page */
-    private $oPage;
+    /** @var UserNotifier */
+    private $oUserNotifier;
 
     /** @var string */
     private $sMsg;
@@ -39,7 +43,8 @@ class ModeratorController extends Controller
     {
         parent::__construct();
 
-        $this->oPage = new Page();
+        $this->oPage = new Page;
+        $this->oUserNotifier = new UserNotifier(new Mail, $this->view);
         $this->oModeratorModel = new ModeratorModel;
     }
 
@@ -188,6 +193,7 @@ class ModeratorController extends Controller
             self::STR_APPROVE_STATUS
         )) {
             PictureCore::clearCache();
+            $this->notifyUserForApprovedContent();
 
             $this->sMsg = t('The photo album has been approved!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -214,6 +220,7 @@ class ModeratorController extends Controller
             self::STR_APPROVE_STATUS
         )) {
             PictureCore::clearCache();
+            $this->notifyUserForApprovedContent();
 
             $this->sMsg = t('The picture has been approved!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -240,6 +247,7 @@ class ModeratorController extends Controller
             self::STR_APPROVE_STATUS
         )) {
             VideoCore::clearCache();
+            $this->notifyUserForApprovedContent();
 
             $this->sMsg = t('The video album has been approved!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -266,6 +274,7 @@ class ModeratorController extends Controller
             self::STR_APPROVE_STATUS
         )) {
             VideoCore::clearCache();
+            $this->notifyUserForApprovedContent();
 
             $this->sMsg = t('The video has been approved!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -292,6 +301,7 @@ class ModeratorController extends Controller
             self::INT_APPROVE_STATUS
         )) {
             $this->clearAvatarCache();
+            $this->notifyUserForApprovedContent();
 
             $this->sMsg = t('The profile photo has been approved!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -318,6 +328,7 @@ class ModeratorController extends Controller
             self::INT_APPROVE_STATUS
         )) {
             $this->clearUserBgCache();
+            $this->notifyUserForApprovedContent();
 
             $this->sMsg = t('The wallpaper has been approved!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -344,6 +355,7 @@ class ModeratorController extends Controller
             self::STR_DISAPPROVE_STATUS
         )) {
             PictureCore::clearCache();
+            $this->notifyUserForDisapprovedContent();
 
             $this->sMsg = t('The photo album has been disapproved!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -370,6 +382,7 @@ class ModeratorController extends Controller
             self::STR_DISAPPROVE_STATUS
         )) {
             PictureCore::clearCache();
+            $this->notifyUserForDisapprovedContent();
 
             $this->sMsg = t('The picture has been disapproved!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -396,6 +409,7 @@ class ModeratorController extends Controller
             self::STR_DISAPPROVE_STATUS
         )) {
             VideoCore::clearCache();
+            $this->notifyUserForDisapprovedContent();
 
             $this->sMsg = t('The video album has been disapproved!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -422,6 +436,7 @@ class ModeratorController extends Controller
             self::STR_DISAPPROVE_STATUS
         )) {
             VideoCore::clearCache();
+            $this->notifyUserForDisapprovedContent();
 
             $this->sMsg = t('The video has been disapproved!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -448,6 +463,7 @@ class ModeratorController extends Controller
             self::INT_DISAPPROVE_STATUS
         )) {
             $this->clearAvatarCache();
+            $this->notifyUserForDisapprovedContent();
 
             $this->sMsg = t('The profile photo has been disapproved!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -474,6 +490,7 @@ class ModeratorController extends Controller
             self::INT_DISAPPROVE_STATUS
         )) {
             $this->clearUserBgCache();
+            $this->notifyUserForDisapprovedContent();
 
             $this->sMsg = t('The wallpaper has been disapproved!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -643,6 +660,24 @@ class ModeratorController extends Controller
             ),
             $this->sMsg
         );
+    }
+
+    private function notifyUserForApprovedContent()
+    {
+        $sUserEmail = $this->oModeratorModel->getEmail($this->httpRequest->post('id'));
+        $this->oUserNotifier
+            ->setUserEmail($sUserEmail)
+            ->approvedContent()
+            ->send();
+    }
+
+    private function notifyUserForDisapprovedContent()
+    {
+        $sUserEmail = $this->oModeratorModel->getEmail($this->httpRequest->post('id'));
+        $this->oUserNotifier
+            ->setUserEmail($sUserEmail)
+            ->disapprovedContent()
+            ->send();
     }
 
     /**
