@@ -26,7 +26,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 
 ## How Powerful Your Social-Dating WebApp Will Be? 🚀
 
-* Boosted Social-Dating Streams™
+* Outsmarted Social-Dating Streams™
 * Smart Intuitive Search Engine™ (SISE System)
 * Advanced Search
 * Blog
