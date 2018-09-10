@@ -139,7 +139,7 @@ class FileController extends Controller
      * Prototype method to show the public and protected files.
      *
      * @param string $sFile Full path.
-     * @param string|array $mExt Retrieves only files with specific extensions. Default NULL
+     * @param string|array|null $mExt Retrieves only files with specific extensions.
      *
      * @return void
      */

@@ -236,7 +236,7 @@ class File
 
     /**
      * @param string $sDir
-     * @param string|array $mExt Optional, retrieves only files with specific extensions. Default value is NULL.
+     * @param string|array|null $mExt Retrieves only files with specific extensions.
      *
      * @return array List of files sorted alphabetically.
      */
@@ -251,7 +251,7 @@ class File
                     if (is_dir($sDir . $sFile)) {
                         $aTree = array_merge($aTree, $this->getFileList($sDir . $sFile, $mExt));
                     } else {
-                        if (!empty($mExt)) {
+                        if ($mExt !== null) {
                             $aExt = (array)$mExt;
 
                             foreach ($aExt as $sExt) {
@@ -624,7 +624,7 @@ class File
      *
      * @param string $sFile File to download.
      * @param string $sName A name for the file to download.
-     * @param string $sMimeType Optional, default value is NULL.
+     * @param string|null $sMimeType
      *
      * @return void
      */
@@ -644,8 +644,6 @@ class File
         $sName = Url::decode($sName); // Clean the name file
 
         /* Figure out the MIME type (if not specified) */
-
-
         if (empty($sMimeType)) {
             $sFileExtension = $this->getFileExt($sFile);
 
