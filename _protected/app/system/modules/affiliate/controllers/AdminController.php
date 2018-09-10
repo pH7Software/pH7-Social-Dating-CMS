@@ -11,6 +11,7 @@ namespace PH7;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Layout\Html\Security as HtmlSecurity;
+use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
@@ -392,7 +393,7 @@ class AdminController extends Controller
                     // Send email
                     $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/moderate_registration.tpl', $oUser->email);
                     $aInfo = ['to' => $oUser->email, 'subject' => $sSubject];
-                    (new Framework\Mail\Mail)->send($aInfo, $sMessageHtml);
+                    (new Mail)->send($aInfo, $sMessageHtml);
 
                     $this->oAff->clearReadProfileCache($oUser->profileId, DbTableName::AFFILIATE);
 
