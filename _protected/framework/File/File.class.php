@@ -676,7 +676,7 @@ class File
      *
      * @return void
      */
-    public function writeHeader($sHeader, $aFile = array())
+    public function writeHeader($sHeader, array $aFile = [])
     {
         for ($i = 0, $iCountFiles = count($aFile); $i < $iCountFiles; $i++) {
             $rHandle = fopen($aFile[$i], 'wb+');
