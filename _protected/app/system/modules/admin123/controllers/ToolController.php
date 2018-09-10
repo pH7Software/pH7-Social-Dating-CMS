@@ -43,11 +43,9 @@ class ToolController extends Controller
         // Add a CSRF token for the remove ajax cache request
         $this->view->csrf_token = (new Token)->generate('cache');
 
-        // Add the common CSS and JS files for the ajax cache and the chart
-        $this->design->addCss(
-            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
-            'general.css'
-        );
+        $this->addGeneralCssFile();
+
+        // Add JS file for the ajax cache feature
         $this->design->addJs(
             PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
             'common.js'
@@ -78,11 +76,7 @@ class ToolController extends Controller
 
     public function freeSpace()
     {
-        // Add the module CSS file for the chart
-        $this->design->addCss(
-            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
-            'general.css'
-        );
+        $this->addGeneralCssFile();
 
         $this->sTitle = t('Free Space of Server');
         $this->view->page_title = $this->sTitle;
@@ -117,11 +111,7 @@ class ToolController extends Controller
 
     public function backup()
     {
-        // Add the module CSS file for backup textarea field size
-        $this->design->addCss(
-            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
-            'general.css'
-        );
+        $this->addGeneralCssFile();
 
         $this->view->designSecurity = new HtmlSecurity; // Security Design Class
 
@@ -273,6 +263,19 @@ class ToolController extends Controller
         Header::redirect(
             Uri::get(PH7_ADMIN_MOD, 'tool', 'index'),
             t('All tables have been repaired!')
+        );
+    }
+
+    /**
+     * Includes the CSS file for the chart and/or for backup textarea field size.
+     *
+     * @return void
+     */
+    private function addGeneralCssFile()
+    {
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
+            'general.css'
         );
     }
 
