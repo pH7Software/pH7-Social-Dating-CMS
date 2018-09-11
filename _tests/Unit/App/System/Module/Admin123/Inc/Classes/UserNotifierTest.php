@@ -21,6 +21,8 @@ use PHPUnit_Framework_TestCase;
 
 class UserNotifierTest extends PHPUnit_Framework_TestCase
 {
+    const VALID_EMAIL = 'hi@ph7.me';
+
     /** @var UserNotifier */
     private $oUserNotifier;
 
@@ -37,19 +39,10 @@ class UserNotifierTest extends PHPUnit_Framework_TestCase
         $this->oUserNotifier = new UserNotifier($this->oMailMock, $this->oViewMock);
     }
 
-    public function testThrowsExceptionWhenContentStatusIsMissing()
-    {
-        $this->expectException(PH7RuntimeException::class);
-
-        $this->oUserNotifier
-            ->setUserEmail('hi@ph7.me')
-            ->send();
-    }
-
     public function testSendApprovedContent()
     {
         $this->oUserNotifier
-            ->setUserEmail(null)
+            ->setUserEmail(self::VALID_EMAIL)
             ->approvedContent()
             ->send();
 
@@ -60,12 +53,21 @@ class UserNotifierTest extends PHPUnit_Framework_TestCase
     public function testSendDisapprovedContent()
     {
         $this->oUserNotifier
-            ->setUserEmail(null)
+            ->setUserEmail(self::VALID_EMAIL)
             ->disapprovedContent()
             ->send();
 
         Phake::verify($this->oViewMock)->parseMail();
         Phake::verify($this->oMail)->send();
+    }
+
+    public function testThrowsExceptionWhenContentStatusIsMissing()
+    {
+        $this->expectException(PH7RuntimeException::class);
+
+        $this->oUserNotifier
+            ->setUserEmail(self::VALID_EMAIL)
+            ->send();
     }
 
     public function testThrowsExceptionWhenEmailIsNull()
