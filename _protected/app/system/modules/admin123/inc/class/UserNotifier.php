@@ -89,7 +89,7 @@ class UserNotifier
      */
     private function sendMessage()
     {
-        $this->oView->content = $this->getNotifierMessage();
+        $this->oView->body = $this->getNotifierMessage();
         $sRecipientEmail = $this->getEmail();
 
         $sMessageHtml = $this->oView->parseMail(
