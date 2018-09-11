@@ -103,7 +103,7 @@ class UserNotifier
             'subject' => $this->getNotifierSubject()
         ];
 
-        return $this->oMail->send($aInfo, $sMessageHtml);
+        return $this->oMail->send($aInfo, $sMessageHtml, Mailable::HTML_FORMAT);
     }
 
     /**

@@ -10,12 +10,15 @@ namespace PH7\Framework\Mail;
 
 interface Mailable
 {
+    const HTML_FORMAT = 1;
+    const TEXT_FORMAT = 2;
+
     /**
      * @param array $aInfo
      * @param string $sContents
-     * @param bool $bHtmlFormat
+     * @param int $iFormatType
      *
      * @return int Number of recipients who were accepted for delivery.
      */
-    public function send(array $aInfo, $sContents, $bHtmlFormat);
+    public function send(array $aInfo, $sContents, $iFormatType);
 }
