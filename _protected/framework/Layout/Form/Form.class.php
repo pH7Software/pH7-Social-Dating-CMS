@@ -78,7 +78,7 @@ abstract class Form extends Core
      */
     public static function loginAttemptsExceededMsg($iWaitTime)
     {
-        return t('Oops! You have exceeded allowed login attemts. Please try again in %0% %1%.', static::convertTime($iWaitTime), static::_getTimeText($iWaitTime));
+        return t('Oops! You have exceeded allowed login attemts. Please try again in %0% %1%.', static::convertTime($iWaitTime), static::getTimeText($iWaitTime));
     }
 
     /**
@@ -115,7 +115,7 @@ abstract class Form extends Core
      */
     public static function waitWriteMsg($iWaitTime)
     {
-        return t('Oops! You have to wait %0% %1% before you can send another.', static::convertTime($iWaitTime), static::_getTimeText($iWaitTime));
+        return t('Oops! You have to wait %0% %1% before you can send another.', static::convertTime($iWaitTime), static::getTimeText($iWaitTime));
     }
 
     /**
@@ -127,7 +127,7 @@ abstract class Form extends Core
      */
     public static function waitRegistrationMsg($iWaitTime)
     {
-        return t('Oops! Somebody has recently registered with the same IP address. You have to wait %0% %1% before try again.', static::convertTime($iWaitTime), static::_getTimeText($iWaitTime));
+        return t('Oops! Somebody has recently registered with the same IP address. You have to wait %0% %1% before try again.', static::convertTime($iWaitTime), static::getTimeText($iWaitTime));
     }
 
     /**
@@ -137,7 +137,7 @@ abstract class Form extends Core
      *
      * @return int
      */
-    private static function _getTimeText($iWaitTime)
+    private static function getTimeText($iWaitTime)
     {
         $iWaitTime = (int)$iWaitTime;
 
