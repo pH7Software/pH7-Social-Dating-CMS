@@ -46,12 +46,15 @@ define('PH7_CONFIG_FILE', 'config.ini');
 // Modules constants
 define('PH7_MOD', 'modules/');
 define('PH7_MODELS', 'models/');
+define('PH7_VIEWS', 'views/');
 define('PH7_FORMS', 'forms/');
 
 // Templates & Assets constants
 define('PH7_LAYOUT', 'templates/');
 define('PH7_TPL', 'themes/');
+define('PH7_TPL_NAME', 'base');
 define('PH7_TPL_MOD_NAME', 'base');
+define('PH7_TPL_MAIL_NAME', 'base');
 define('PH7_CSS', 'css/');
 define('PH7_JS', 'js/');
 define('PH7_IMG', 'img/');
