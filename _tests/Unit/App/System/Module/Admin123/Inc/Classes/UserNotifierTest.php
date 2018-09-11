@@ -17,6 +17,7 @@ use PH7\Framework\Mail\InvalidEmailException;
 use PH7\Framework\Mail\Mailable;
 use PH7\UserNotifier;
 use Phake;
+use Phake_IMock;
 use PHPUnit_Framework_TestCase;
 
 class UserNotifierTest extends PHPUnit_Framework_TestCase
