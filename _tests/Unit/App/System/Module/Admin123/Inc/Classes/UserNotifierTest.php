@@ -47,8 +47,7 @@ class UserNotifierTest extends PHPUnit_Framework_TestCase
             ->approvedContent()
             ->send();
 
-        Phake::verify($this->oViewMock)->parseMail();
-        Phake::verify($this->oMail)->send();
+        $this->assertSendMethodsCalled();
     }
 
     public function testSendDisapprovedContent()
@@ -58,8 +57,7 @@ class UserNotifierTest extends PHPUnit_Framework_TestCase
             ->disapprovedContent()
             ->send();
 
-        Phake::verify($this->oViewMock)->parseMail();
-        Phake::verify($this->oMail)->send();
+        $this->assertSendMethodsCalled();
     }
 
     public function testThrowsExceptionWhenContentStatusIsMissing()
@@ -89,5 +87,16 @@ class UserNotifierTest extends PHPUnit_Framework_TestCase
             ->setUserEmail('pierrehenry.be')
             ->approvedContent()
             ->send();
+    }
+
+    private function assertSendMethodsCalled()
+    {
+        Phake::inOrder(
+            Phake::verify($this->oViewMock)->parseMail(
+                PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . UserNotifier::MAIL_TEMPLATE_FILE,
+                self::VALID_EMAIL
+            ),
+            Phake::verify($this->oMailMock)->send(Phake::anyParameters())
+        );
     }
 }
