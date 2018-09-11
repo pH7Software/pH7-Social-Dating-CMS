@@ -519,6 +519,7 @@ class ModeratorController extends Controller
             $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'picture/img/' . $this->httpRequest->post('username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
             $this->file->deleteDir($sDir);
             PictureCore::clearCache();
+            $this->notifyUserForDisapprovedContent();
 
             $this->sMsg = t('The photo album has been deleted!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -553,6 +554,7 @@ class ModeratorController extends Controller
                 $this->httpRequest->post('picture_link')
             );
             PictureCore::clearCache();
+            $this->notifyUserForDisapprovedContent();
 
             $this->sMsg = t('The picture has been deleted!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -581,6 +583,7 @@ class ModeratorController extends Controller
             $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $this->httpRequest->post('username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
             $this->file->deleteDir($sDir);
             VideoCore::clearCache();
+            $this->notifyUserForDisapprovedContent();
 
             $this->sMsg = t('The video album has been deleted!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -615,6 +618,7 @@ class ModeratorController extends Controller
                 $this->httpRequest->post('video_link')
             );
             VideoCore::clearCache();
+            $this->notifyUserForDisapprovedContent();
 
             $this->sMsg = t('The video has been deleted!');
             $this->sMsgType = Design::SUCCESS_TYPE;
@@ -636,7 +640,11 @@ class ModeratorController extends Controller
 
     public function deleteAvatar()
     {
-        (new Admin)->deleteAvatar($this->httpRequest->post('id'), $this->httpRequest->post('username'));
+        (new Admin)->deleteAvatar(
+            $this->httpRequest->post('id'),
+            $this->httpRequest->post('username')
+        );
+        $this->notifyUserForDisapprovedContent();
 
         Header::redirect(
             Uri::get(
@@ -650,7 +658,11 @@ class ModeratorController extends Controller
 
     public function deleteBackground()
     {
-        (new Admin)->deleteBackground($this->httpRequest->post('id'), $this->httpRequest->post('username'));
+        (new Admin)->deleteBackground(
+            $this->httpRequest->post('id'),
+            $this->httpRequest->post('username')
+        );
+        $this->notifyUserForDisapprovedContent();
 
         Header::redirect(
             Uri::get(
