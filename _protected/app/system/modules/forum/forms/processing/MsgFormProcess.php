@@ -38,16 +38,27 @@ class MsgFormProcess extends Form
         } else {
             $oForumModel->addTopic($iProfileId, $iForumId, $sTitle, $sMessage, $sCurrentTime);
 
-            Header::redirect(
-                Uri::get(
-                    'forum',
-                    'forum',
-                    'post',
-                    $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $sTitle . ',' . Db::getInstance()->lastInsertId()
-                ),
-                t('Message posted!')
-            );
+            $this->redirectUserToTopicPost($iForumId, $sTitle);
         }
         unset($oForumModel);
+    }
+
+    /**
+     * @param int $iForumId
+     * @param string $sTopicTitle
+     *
+     * @throws Framework\File\Exception
+     */
+    private function redirectUserToTopicPost($iForumId, $sTopicTitle)
+    {
+        Header::redirect(
+            Uri::get(
+                'forum',
+                'forum',
+                'post',
+                $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $sTopicTitle . ',' . Db::getInstance()->lastInsertId()
+            ),
+            t('Message posted!')
+        );
     }
 }

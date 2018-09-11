@@ -37,16 +37,27 @@ class ReplyMsgFormProcess extends Form
         } else {
             $oForumModel->addMessage($iProfileId, $iTopicId, $sMessage, $sCurrentTime);
 
-            Header::redirect(
-                Uri::get(
-                    'forum',
-                    'forum',
-                    'post',
-                    $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $this->httpRequest->get('topic_name') . ',' . $iTopicId
-                ),
-                t('Reply posted!')
-            );
+            $this->redirectUserToTopicPost($iForumId, $iTopicId);
         }
         unset($oForumModel);
+    }
+
+    /**
+     * @param int $iForumId
+     * @param int $iTopicId
+     *
+     * @throws Framework\File\Exception
+     */
+    private function redirectUserToTopicPost($iForumId, $iTopicId)
+    {
+        Header::redirect(
+            Uri::get(
+                'forum',
+                'forum',
+                'post',
+                $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $this->httpRequest->get('topic_name') . ',' . $iTopicId
+            ),
+            t('Reply posted!')
+        );
     }
 }

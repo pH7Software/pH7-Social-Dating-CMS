@@ -32,6 +32,18 @@ class EditMsgFormProcess extends Form
             $this->dateTime->get()->dateTime('Y-m-d H:i:s')
         );
 
+        $this->redirectUserToTopicPost($iForumId, $sTopicTitle, $iTopicId);
+    }
+
+    /**
+     * @param int $iForumId
+     * @param int $sTopicTitle
+     * @param int $iTopicId
+     *
+     * @throws Framework\File\Exception
+     */
+    private function redirectUserToTopicPost($iForumId, $sTopicTitle, $iTopicId)
+    {
         Header::redirect(
             Uri::get(
                 'forum',
