@@ -126,7 +126,7 @@ class UserNotifier
      */
     private function getNotifierSubject()
     {
-        if ($this->iType === self::DISAPPROVED_STATUS) {
+        if ($this->isContentDisapproved()) {
             return UserNotifierString::getDisapprovedSubject();
         }
 
@@ -140,11 +140,19 @@ class UserNotifier
      */
     private function getNotifierMessage()
     {
-        if ($this->iType === self::DISAPPROVED_STATUS) {
+        if ($this->isContentDisapproved()) {
             return UserNotifierString::getDisapprovedMessage();
         }
 
         return UserNotifierString::getApprovedMessage();
+    }
+
+    /**
+     * @return bool
+     */
+    private function isContentDisapproved()
+    {
+        return $this->iType === self::DISAPPROVED_STATUS;
     }
 
     /**
