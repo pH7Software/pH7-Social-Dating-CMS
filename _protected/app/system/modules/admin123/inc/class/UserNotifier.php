@@ -153,6 +153,5 @@ class UserNotifier
     private function isValidEmail()
     {
         return !empty($this->sEmail) && filter_var($this->sEmail, FILTER_VALIDATE_EMAIL) !== false;
-
     }
 }
