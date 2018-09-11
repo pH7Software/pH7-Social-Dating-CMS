@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Error\CException\PH7RuntimeException;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Mail\InvalidEmailException;
 use PH7\Framework\Mail\Mail;
@@ -122,6 +123,20 @@ class UserNotifier
     }
 
     /**
+     * @return int
+     *
+     * @throws PH7RuntimeException
+     */
+    private function getContentStatus()
+    {
+        if (empty($this->iType)) {
+            throw new PH7RuntimeException('Content Status hasn\'t been set with "approvedContent()" or "disapprovedContent() method.');
+        }
+
+        return $this->iType;
+    }
+
+    /**
      * @return string
      */
     private function getNotifierSubject()
@@ -152,7 +167,7 @@ class UserNotifier
      */
     private function isContentDisapproved()
     {
-        return $this->iType === self::DISAPPROVED_STATUS;
+        return $this->getContentStatus() === self::DISAPPROVED_STATUS;
     }
 
     /**
