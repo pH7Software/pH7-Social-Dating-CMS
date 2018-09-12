@@ -64,7 +64,10 @@ class UserCoreModel extends Model
             $oSession->set('member_group_id', PermissionCore::VISITOR_GROUP_ID);
         }
 
-        $rStmt = Db::getInstance()->prepare('SELECT permissions FROM' . Db::prefix(DbTableName::MEMBERSHIP) . 'WHERE groupId = :groupId LIMIT 1');
+        $rStmt = Db::getInstance()->prepare(
+            'SELECT permissions FROM' . Db::prefix(DbTableName::MEMBERSHIP) .
+            'WHERE groupId = :groupId LIMIT 1'
+        );
         $rStmt->bindValue(':groupId', $oSession->get('member_group_id'), \PDO::PARAM_INT);
         $rStmt->execute();
         $sPermissions = $rStmt->fetchColumn();
