@@ -22,7 +22,6 @@ class EditFormProcess extends Form
     {
         parent::__construct();
 
-        $oValidate = new Validate;
         $oAdminModel = new AdminModel;
 
         $iProfileId = $this->getProfileId();
@@ -32,7 +31,7 @@ class EditFormProcess extends Form
             $iMinUsernameLength = DbConfig::getSetting('minUsernameLength');
             $iMaxUsernameLength = DbConfig::getSetting('maxUsernameLength');
 
-            if (!$oValidate->username($this->httpRequest->post('username'), $iMinUsernameLength, $iMaxUsernameLength, DbTableName::ADMIN)) {
+            if (!(new Validate)->username($this->httpRequest->post('username'), $iMinUsernameLength, $iMaxUsernameLength, DbTableName::ADMIN)) {
                 \PFBC\Form::setError('form_admin_edit_account', t('Username has to be from %0% to %1% characters long, or it is not available, or already taken by another admin.', $iMinUsernameLength, $iMaxUsernameLength));
                 $this->bIsErr = true;
             } else {
@@ -76,7 +75,7 @@ class EditFormProcess extends Form
 
         $oAdminModel->setLastEdit($iProfileId, DbTableName::ADMIN);
 
-        unset($oValidate, $oAdminModel, $oAdmin);
+        unset($oAdminModel, $oAdmin);
 
         (new Admin)->clearReadProfileCache($iProfileId, DbTableName::ADMIN);
 
