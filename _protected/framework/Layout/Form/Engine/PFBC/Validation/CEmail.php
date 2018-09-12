@@ -11,6 +11,8 @@ use PH7\ExistsCoreModel;
 
 class CEmail extends \PFBC\Validation
 {
+    const GUEST_MODE = 'guest';
+
     /** @var string */
     protected $sTable;
 
@@ -29,7 +31,7 @@ class CEmail extends \PFBC\Validation
     public function isValid($sValue)
     {
         if ($this->isNotApplicable($sValue) || $this->oValidate->email($sValue)) {
-            return !($this->sType == 'guest' && (new ExistsCoreModel)->email($sValue, $this->sTable));
+            return !($this->sType === self::GUEST_MODE && (new ExistsCoreModel)->email($sValue, $this->sTable));
         }
 
         return false;

@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PFBC\Validation\CEmail;
 use PH7\Framework\Geo\Ip\Geo;
 use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Model\DbConfig;
@@ -46,7 +47,7 @@ class JoinForm
 
         $oForm->addElement(new \PFBC\Element\Username(t('Your Nickname'), 'username', ['placeholder' => t('Nickname'), 'description' => PH7_URL_ROOT . UserCore::PROFILE_PAGE_PREFIX . '<strong><span class="your-user-name">' . t('your-user-name') . '</span><span class="username"></span></strong>', 'id' => 'username', 'required' => 1, 'validation' => new \PFBC\Validation\Username]));
 
-        $oForm->addElement(new \PFBC\Element\Email(t('Your Email'), 'mail', ['placeholder' => t('Email'), 'id' => 'email', 'onblur' => 'CValid(this.value, this.id,\'guest\')', 'required' => 1, 'validation' => new \PFBC\Validation\CEmail('guest')]));
+        $oForm->addElement(new \PFBC\Element\Email(t('Your Email'), 'mail', ['placeholder' => t('Email'), 'id' => 'email', 'onblur' => 'CValid(this.value, this.id,\'guest\')', 'required' => 1, 'validation' => new CEmail(CEmail::GUEST_MODE)]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error email"></span>'));
 
         $oForm->addElement(new \PFBC\Element\Password(t('Your Password'), 'password', ['placeholder' => t('Password'), 'id' => 'password', 'onkeyup' => 'checkPassword(this.value)', 'onblur' => 'CValid(this.value, this.id)', 'required' => 1, 'validation' => new \PFBC\Validation\Password]));

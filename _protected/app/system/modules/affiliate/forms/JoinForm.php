@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PFBC\Validation\CEmail;
 use PH7\Framework\Geo\Ip\Geo;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
@@ -39,7 +40,7 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\Username(t('Username:'), 'username', ['id' => 'username', 'onkeyup' => 'CValid(this.value, this.id,\'Affiliates\')', 'description' => t('Your username will be your unique advertiser ID.'), 'required' => 1, 'validation' => new \PFBC\Validation\Username(DbTableName::AFFILIATE)]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error username"></span>'));
 
-        $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', ['id' => 'email', 'onblur' => 'CValid(this.value, this.id,\'guest\',\'Affiliates\')', 'description' => t('Your Professional Valid Email.'), 'required' => 1, 'validation' => new \PFBC\Validation\CEmail('guest', DbTableName::AFFILIATE)]));
+        $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', ['id' => 'email', 'onblur' => 'CValid(this.value, this.id,\'guest\',\'Affiliates\')', 'description' => t('Your Professional Valid Email.'), 'required' => 1, 'validation' => new CEmail(CEmail::GUEST_MODE, DbTableName::AFFILIATE)]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error email"></span>'));
 
         $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', ['id' => 'password', 'onkeyup' => 'checkPassword(this.value)', 'onblur' => 'CValid(this.value, this.id)', 'required' => 1, 'validation' => new \PFBC\Validation\Password]));
