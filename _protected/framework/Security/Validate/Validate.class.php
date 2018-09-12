@@ -230,12 +230,20 @@ class Validate
     {
         $sUsername = trim($sUsername);
 
-        return (
-            preg_match('#^' . PH7_USERNAME_PATTERN . '{' . $iMin . ',' . $iMax . '}$#', $sUsername) &&
+        /**
+         * Do quicker check for admin profiles,
+         * because they don't have profile page URL (www.mysite.com/@<username>)
+         * and don't need to check banned usernames for them.
+         */
+        if ($sTable === DbTableName::ADMIN) {
+            return preg_match('#^' . PH7_USERNAME_PATTERN . '{' . $iMin . ',' . $iMax . '}$#', $sUsername) &&
+                !(new ExistsCoreModel)->username($sUsername, $sTable);
+        }
+
+        return preg_match('#^' . PH7_USERNAME_PATTERN . '{' . $iMin . ',' . $iMax . '}$#', $sUsername) &&
             !file_exists(PH7_PATH_ROOT . UserCore::PROFILE_PAGE_PREFIX . $sUsername) &&
             !Ban::isUsername($sUsername) &&
-            !(new ExistsCoreModel)->username($sUsername, $sTable)
-        );
+            !(new ExistsCoreModel)->username($sUsername, $sTable);
     }
 
     /**
