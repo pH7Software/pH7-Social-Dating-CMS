@@ -32,8 +32,8 @@ class EditFormProcess extends Form
             $iMinUsernameLength = DbConfig::getSetting('minUsernameLength');
             $iMaxUsernameLength = DbConfig::getSetting('maxUsernameLength');
 
-            if (!$oValidate->username($this->httpRequest->post('username'), $iMinUsernameLength, $iMaxUsernameLength)) {
-                \PFBC\Form::setError('form_admin_edit_account', t('Your username has to contain from %0% to %1% characters, your username is not available or your username already used by other admin.', $iMinUsernameLength, $iMaxUsernameLength));
+            if (!$oValidate->username($this->httpRequest->post('username'), $iMinUsernameLength, $iMaxUsernameLength, DbTableName::ADMIN)) {
+                \PFBC\Form::setError('form_admin_edit_account', t('Username has to be from %0% to %1% characters long, or it is not available, or already taken by another admin.', $iMinUsernameLength, $iMaxUsernameLength));
                 $this->bIsErr = true;
             } else {
                 $oAdminModel->updateProfile('username', $this->httpRequest->post('username'), $iProfileId, DbTableName::ADMIN);
@@ -44,8 +44,8 @@ class EditFormProcess extends Form
         }
 
         if (!$this->str->equals($this->httpRequest->post('mail'), $oAdmin->email)) {
-            if ((new ExistsCoreModel)->email($this->httpRequest->post('mail'))) {
-                \PFBC\Form::setError('form_admin_edit_account', t('Invalid email address or this email is already used by another admin.'));
+            if ((new ExistsCoreModel)->email($this->httpRequest->post('mail'), DbTableName::ADMIN)) {
+                \PFBC\Form::setError('form_admin_edit_account', t('Invalid email or already used by another admin.'));
                 $this->bIsErr = true;
             } else {
                 $oAdminModel->updateProfile('email', $this->httpRequest->post('mail'), $iProfileId, DbTableName::ADMIN);
