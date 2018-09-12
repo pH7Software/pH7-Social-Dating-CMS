@@ -32,6 +32,7 @@ abstract class Kernel
     const SOFTWARE_GIT_REPO = 'https://github.com/pH7Software/pH7-Social-Dating-CMS';
     const SOFTWARE_ISSUE_URL = self::SOFTWARE_GIT_REPO . '/issues';
     const SOFTWARE_REVIEW_URL = 'https://sourceforge.net/projects/ph7socialdating/reviews/';
+    const PATREON_URL = 'https://www.patreon.com/bePatron?u=3534366';
     const SOFTWARE_EMAIL = 'hello@ph7cms.com';
     const SOFTWARE_TWITTER = '@pH7Soft';
     const SOFTWARE_AUTHOR = 'Pierre-Henry Soria';

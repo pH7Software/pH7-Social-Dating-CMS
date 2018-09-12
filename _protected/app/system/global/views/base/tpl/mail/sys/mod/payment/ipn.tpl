@@ -12,4 +12,6 @@
 <p>{ip}</p>
 <p>&nbsp;</p>
 
+<p><strong>{become_patron}</strong></p>
+
 {inc_footer}

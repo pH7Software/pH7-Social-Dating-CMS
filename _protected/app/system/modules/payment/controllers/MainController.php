@@ -15,6 +15,7 @@ use Braintree_Transaction;
 use DateInterval;
 use DateTime;
 use PH7\Framework\Cache\Cache;
+use PH7\Framework\Core\Kernel;
 use PH7\Framework\File\File;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Mail\Mail;
@@ -337,6 +338,8 @@ class MainController extends Controller
         $this->view->membership_duration = nt('Membership duration: %n% day', 'Membership duration: %n% days', $oMembershipData->expirationDays);
         $this->view->browser_info = t('User Web browser info: %0%', $this->browser->getUserAgent());
         $this->view->ip = t('Buyer IP address: %0%', $this->design->ip(null, false));
+
+        $this->view->become_patron = t('It might be now the perfect time to <a href="%0%">become a Patron</a> and support the development of the software?', Kernel::PATREON_URL);
 
         $sMessageHtml = $this->view->parseMail(
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/payment/ipn.tpl',
