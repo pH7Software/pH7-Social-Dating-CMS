@@ -4,7 +4,7 @@ CREATED, DEVELOPED, PRODUCTED AND POWERED BY PIERRE-HENRY SORIA, All Rights Rese
 
 ==============================================
 
-All (This means all files and folders of this software) of this code (software) was coded (created) by the development pH7 team (Pierre-Henry Soria), all rights reserved.
+All (This means all files and folders of this software) of this code (software) was coded (created) by the pH7 development team (Pierre-Henry Soria), all rights reserved.
 Except certain files and library (JavaScript, PHP, or other) whose license and/or the author is identified in the file or a text file next to the file.
 
 ==============================================

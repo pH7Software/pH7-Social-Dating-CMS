@@ -1,4 +1,4 @@
-All (This means all files and folders of this software) of this code (software) was coded (created) by the development pH7 team (Pierre-Henry Soria), all rights reserved.
+All (this means all files and folders of this software) of this code (software) was coded (created) by the pH7 development team (Pierre-Henry Soria), all rights reserved.
 Except certain files and libraries (JavaScript, PHP, or other) whose license and/or the author is identified in the file or a text file next to it.
 
 All the Copyright Notice, Links and Copyright Comments can never be removed from the source code!
@@ -16,4 +16,4 @@ See the License file for more details.
 ------------------------------------------------------------
 
 
-The all text written and displayed (except third libraries and files where license is given their own) in this software in licensed: Attribution-ShareAlike 3.0 or later (http://creativecommons.org/licenses/by-sa/3.0/).
+The all text written and displayed (except third libraries and files where license is given their own) in this software is licensed under Attribution-ShareAlike 3.0 or later (http://creativecommons.org/licenses/by-sa/3.0/).
