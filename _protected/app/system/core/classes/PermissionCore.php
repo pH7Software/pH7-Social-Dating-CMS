@@ -18,6 +18,9 @@ abstract class PermissionCore extends Framework\Core\Core
 {
     const VISITOR_GROUP_ID = 1;
 
+    /** @var UserCoreModel */
+    private $oUserModel;
+
     /** @var \stdClass */
     protected $group;
 
@@ -25,7 +28,8 @@ abstract class PermissionCore extends Framework\Core\Core
     {
         parent::__construct();
 
-        $this->group = UserCoreModel::checkGroup();
+        $this->oUserModel = new UserCoreModel;
+        $this->group = $this->oUserModel->checkGroup($this->session);
     }
 
     /**
@@ -36,7 +40,7 @@ abstract class PermissionCore extends Framework\Core\Core
     public function checkMembership()
     {
         if (UserCore::auth()) {
-            return (new UserCoreModel)->checkMembershipExpiration(
+            return $this->oUserModel->checkMembershipExpiration(
                 $this->session->get('member_id'),
                 $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
             );

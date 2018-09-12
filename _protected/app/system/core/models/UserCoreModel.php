@@ -55,25 +55,35 @@ class UserCoreModel extends Model
         $this->iProfileId = (new Session)->get('member_id');
     }
 
-    public static function checkGroup()
+    /**
+     * @param Session $oSession
+     *
+     * @return string
+     */
+    public function checkGroup(Session $oSession)
     {
-        $oSession = new Session;
-
+        // Set default group ID if no user is logged in (and so, 'member_group_id' session doesn't exist)
         if (!$oSession->exists('member_group_id')) {
             $oSession->regenerateId();
             $oSession->set('member_group_id', PermissionCore::VISITOR_GROUP_ID);
         }
+        $iMemberGroupId = (int)$oSession->get('member_group_id');
 
-        $rStmt = Db::getInstance()->prepare(
-            'SELECT permissions FROM' . Db::prefix(DbTableName::MEMBERSHIP) .
-            'WHERE groupId = :groupId LIMIT 1'
-        );
-        $rStmt->bindValue(':groupId', $oSession->get('member_group_id'), \PDO::PARAM_INT);
-        $rStmt->execute();
-        $sPermissions = $rStmt->fetchColumn();
-        Db::free($rStmt);
+        $this->cache->start(self::CACHE_GROUP, 'membership_groups' . $iMemberGroupId, static::CACHE_TIME);
 
-        return ObjArr::toObject(unserialize($sPermissions));
+        if (!$sPermissions = $this->cache->get()) {
+            $rStmt = Db::getInstance()->prepare(
+                'SELECT permissions FROM' . Db::prefix(DbTableName::MEMBERSHIP) .
+                'WHERE groupId = :groupId LIMIT 1'
+            );
+            $rStmt->bindValue(':groupId', $iMemberGroupId, \PDO::PARAM_INT);
+            $rStmt->execute();
+            $sPermissions = $rStmt->fetchColumn();
+            Db::free($rStmt);
+            $this->cache->put(ObjArr::toObject(unserialize($sPermissions)));
+        }
+
+        return $sPermissions;
     }
 
     /**
