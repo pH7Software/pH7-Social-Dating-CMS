@@ -1,7 +1,7 @@
 <?php
 /**
  * @title            Import Class
- * @desc             Generic Importer Class for the pH7CMS.
+ * @desc             Generic Importer Class to import data from other platforms (such as phpFox, SocialEngine, mooSocial, Skadate, DatingScript, DatingPro) to pH7CMS.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
@@ -21,6 +21,5 @@ abstract class Import
     public function __construct()
     {
         $this->db = Db::getInstance();
-
     }
 }
