@@ -10,6 +10,7 @@ namespace PH7;
 
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Layout\Html\Design;
+use PH7\Framework\Mail\InvalidEmailException;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
@@ -676,24 +677,38 @@ class ModeratorController extends Controller
 
     private function notifyUserForApprovedContent()
     {
-        $iProfileId = (int)$this->httpRequest->post('id');
-        $sUserEmail = $this->oModeratorModel->getEmail($iProfileId);
+        try {
+            $iProfileId = (int)$this->httpRequest->post('id');
+            $sUserEmail = $this->oModeratorModel->getEmail($iProfileId);
 
-        $this->oUserNotifier
-            ->setUserEmail($sUserEmail)
-            ->approvedContent()
-            ->send();
+            $this->oUserNotifier
+                ->setUserEmail($sUserEmail)
+                ->approvedContent()
+                ->send();
+        } catch (InvalidEmailException $oExcept) {
+            $this->design->setFlashMsg(
+                t("Notifier email couldn't be sent to user. Their email wasn't valid."),
+                Design::ERROR_TYPE
+            );
+        }
     }
 
     private function notifyUserForDisapprovedContent()
     {
-        $iProfileId = (int)$this->httpRequest->post('id');
-        $sUserEmail = $this->oModeratorModel->getEmail($iProfileId);
+        try {
+            $iProfileId = (int)$this->httpRequest->post('id');
+            $sUserEmail = $this->oModeratorModel->getEmail($iProfileId);
 
-        $this->oUserNotifier
-            ->setUserEmail($sUserEmail)
-            ->disapprovedContent()
-            ->send();
+            $this->oUserNotifier
+                ->setUserEmail($sUserEmail)
+                ->disapprovedContent()
+                ->send();
+        } catch (InvalidEmailException $oExcept) {
+            $this->design->setFlashMsg(
+                t("Notifier email couldn't be sent to user. Their email wasn't valid."),
+                Design::ERROR_TYPE
+            );
+        }
     }
 
     /**
