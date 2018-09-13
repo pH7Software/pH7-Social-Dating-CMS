@@ -92,7 +92,7 @@ class XmlDesignCore
         } catch (PH7Exception $oE) {
             (new Design)->setFlashMsg(
                 t("It seems you don't have Internet (or pH7CMS feed news is temporarily unavailable). Some features on the dashboard won't be available."),
-                'error'
+                Design::ERROR_TYPE
             );
         }
     }
