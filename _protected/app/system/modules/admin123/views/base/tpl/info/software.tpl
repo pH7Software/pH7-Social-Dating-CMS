@@ -1,6 +1,6 @@
 <div class="center">
     <h2 class="underline">{lang 'Let others know about pH7CMS'}</h2>
-    <p class="italic">{lang 'Here is a <a class="bold" href="%0%">pre-written Tweet</a> (which you can edit, of course).', $tweet_msg}</p>
+    <p class="italic">{lang 'Here is a <a class="bold" href="%0%">pre-written Tweet</a> (which you can edit, of course).', $tweet_msg_url}</p>
 
     <div class="s_bMarg"></div>
 

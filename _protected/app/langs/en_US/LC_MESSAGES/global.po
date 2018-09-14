@@ -9589,7 +9589,7 @@ msgid "Sign up - Step 3/3"
 msgstr ""
 
 #: _protected/app/system/modules/user/controllers/SignupController.php:93
-msgid "Now, Upload a Profile Photo of you!"
+msgid "Now, Upload a Profile Photo of You!"
 msgstr ""
 
 #: _protected/app/system/modules/user/controllers/VisitorController.php:65

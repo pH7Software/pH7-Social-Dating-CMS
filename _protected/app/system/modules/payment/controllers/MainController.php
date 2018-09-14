@@ -325,7 +325,7 @@ class MainController extends Controller
     {
         $oMembershipData = $this->oPayModel->getMemberships($iMembershipId);
 
-        $sTo = DbConfig::getSetting('adminEmail');
+        $sAdminEmail = DbConfig::getSetting('adminEmail');
 
         $sUsername = $this->session->get('member_username');
         $sProfileLink = ' (' . $this->design->getProfileLink($sUsername, false) . ')';
@@ -343,11 +343,11 @@ class MainController extends Controller
 
         $sMessageHtml = $this->view->parseMail(
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/payment/ipn.tpl',
-            $sTo
+            $sAdminEmail
         );
 
         $aInfo = [
-            'to' => $sTo,
+            'to' => $sAdminEmail,
             'subject' => t('New Payment Received from %0%', $sBuyer)
         ];
 

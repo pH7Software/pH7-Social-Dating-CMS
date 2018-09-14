@@ -90,7 +90,7 @@ class SignupController extends Controller
 
     public function step4()
     {
-        $this->setTitle(t('Now, Upload a Profile Photo of you!'));
+        $this->setTitle(t('Now, Upload a Profile Photo of You!'));
         $this->view->avatarDesign = new AvatarDesignCore; // Add AvatarDesign Class for displaying the avatar lightBox
 
         $this->output();
@@ -99,20 +99,39 @@ class SignupController extends Controller
     public function done()
     {
         if (!$this->session->exists('mail_step3')) {
-            Header::redirect(Uri::get('user', 'signup', 'step3'));
+            Header::redirect(
+                Uri::get(
+                    'user',
+                    'signup',
+                    'step3'
+                )
+            );
+        } else {
+            $sRegistrationStatusMsg = (new Registration($this->view))->getMsg();
+
+            if ((new UserMilestoneCore)->isTotalUserReached()) {
+                Header::redirect(
+                    Uri::get(
+                        'milestone-celebration',
+                        'main',
+                        'awesome'
+                    ),
+                    $sRegistrationStatusMsg
+                );
+            } else {
+                // Remove all sessions created during registration
+                $this->session->destroy();
+
+                Header::redirect(
+                    Uri::get(
+                        'user',
+                        'main',
+                        'login'
+                    ),
+                    $sRegistrationStatusMsg
+                );
+            }
         }
-
-        // Remove all sessions created during registration
-        $this->session->destroy();
-
-        Header::redirect(
-            Uri::get(
-                'user',
-                'main',
-                'login'
-            ),
-            (new Registration($this->view))->getMsg()
-        );
     }
 
     /**
