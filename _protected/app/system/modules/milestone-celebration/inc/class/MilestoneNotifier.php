@@ -51,7 +51,7 @@ class MilestoneNotifier
         );
 
         $aInfo = [
-            'subject' => t('Your Website Reached %0% users!!!🍾', $iTotalUsers)
+            'subject' => t('Your Website Reached %0% users!!! 🎉', $iTotalUsers)
         ];
 
         return $this->oMail->send(
