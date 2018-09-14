@@ -391,8 +391,14 @@ class AdminController extends Controller
                         t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
                     // Send email
-                    $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/moderate_registration.tpl', $oUser->email);
-                    $aInfo = ['to' => $oUser->email, 'subject' => $sSubject];
+                    $sMessageHtml = $this->view->parseMail(
+                        PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/moderate_registration.tpl',
+                        $oUser->email
+                    );
+                    $aInfo = [
+                        'to' => $oUser->email,
+                        'subject' => $sSubject
+                    ];
                     (new Mail)->send($aInfo, $sMessageHtml);
 
                     $this->oAff->clearReadProfileCache($oUser->profileId, DbTableName::AFFILIATE);
