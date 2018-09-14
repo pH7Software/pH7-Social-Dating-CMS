@@ -8,8 +8,13 @@
 
 namespace PH7;
 
+use PH7\Framework\Url\Url;
+
 class MainController extends Controller
 {
+    const TWITTER_TWEET_URL = 'https://twitter.com/intent/tweet?text=';
+    const TWITTER_TWEET_MSG = "#WOW! I'm the %0%th user on %site_url%! #milestone succeeded!!!";
+
     /** @var UserCoreModel */
     private $oUserModel;
 
@@ -20,9 +25,12 @@ class MainController extends Controller
 
     public function awesome()
     {
+        $iTotalUsers = $this->oUserModel->total();
         $this->view->page_title = $this->view->h1_title = t('You are AWESOME!!! 🎉');
 
-        $this->view->message = t('Wow! You are the %0%th! YOU ARE AWESOME! 😍', $this->oUserModel->total());
+        $this->view->message = t('Wow! You are the %0%th! YOU ARE AWESOME! 😍', $iTotalUsers);
+        $this->view->tweet_msg_url = $this->getTweetPost($iTotalUsers);
+
         $this->notifyAdmin();
         $this->output();
     }
@@ -31,5 +39,17 @@ class MainController extends Controller
     {
         (new MilestoneNotifier($this->oUserModel, new Mail, $this->view))
             ->sendEmailToAdmin();
+    }
+
+    /**
+     * @param int $iTotalUsers
+     *
+     * @return string
+     */
+    private function getTweetPost($iTotalUsers)
+    {
+        $sMsg = t(self::TWITTER_TWEET_MSG, $iTotalUsers);
+
+        return self::TWITTER_TWEET_URL . Url::encode($sMsg);
     }
 }
