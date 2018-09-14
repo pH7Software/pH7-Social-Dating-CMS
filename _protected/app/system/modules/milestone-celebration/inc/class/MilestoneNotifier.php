@@ -38,16 +38,19 @@ class MilestoneNotifier
      */
     public function sendEmailToAdmin()
     {
-        $this->oView->body = $this->getNotifierMessage();
-        $sAdminEmail = DbConfig::getSetting('adminEmail');
+        $iTotalUsers = $this->oUserModel->total();
+
+        $this->view->content = t('Hi there! Some AMAZING just happened to your website!') . '<br />';
+        $this->view->content .= t('Indeed, your website reached the %0% users!!! Congratulations 🎈', $iTotalUsers);
+        $this->view->become_patron = t('It might be now the perfect time to <a href="%0%">become a Patron</a> and support the development of the software?', Kernel::PATREON_URL);
 
         $sMessageHtml = $this->oView->parseMail(
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . self::MAIL_TEMPLATE_FILE_PATH,
-            $sAdminEmail
+            DbConfig::getSetting('adminEmail')
         );
+
         $aInfo = [
-            'to' => $sAdminEmail,
-            'subject' => t('Your Website Reached % 0 % users!🍾', $this->oUserModel->total())
+            'subject' => t('Your Website Reached %0% users!!!🍾', $iTotalUsers)
         ];
 
         return $this->oMail->send(
