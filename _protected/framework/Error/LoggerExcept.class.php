@@ -20,6 +20,7 @@ use PH7\Framework\File\File;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mail\Mail;
+use PH7\Framework\Mail\Mailable;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Exception as ModelException;
 use PH7\Framework\Mvc\Router\FrontController;
@@ -106,7 +107,7 @@ final class LoggerExcept extends Logger
                     'subject' => t('Errors Reporting of pH7Framework')
                 ];
 
-                (new Mail)->send($aInfo, $sContents, false);
+                (new Mail)->send($aInfo, $sContents, Mailable::TEXT_FORMAT);
             } break;
 
             default:

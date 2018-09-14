@@ -12,7 +12,7 @@
 
                 <div>
                     {{ $text = ($video->approved == 1) ? t('Disapproved') : t('Approved') }}
-                    {{ LinkCoreForm::display($text, PH7_ADMIN_MOD,'moderator',$action, array('video_id'=>$video->videoId)) }} |
+                    {{ LinkCoreForm::display($text, PH7_ADMIN_MOD,'moderator',$action, array('video_id'=>$video->videoId, 'id'=>$video->profileId)) }} |
                     {{ LinkCoreForm::display(t('Delete'), PH7_ADMIN_MOD, 'moderator', 'deletevideo', array('album_id'=>$video->albumId, 'video_id'=>$video->videoId, 'id'=>$video->profileId, 'username'=>$video->username, 'video_link'=>$video->file)) }}
                 </div>
              </div>

@@ -13,6 +13,7 @@ namespace PH7;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mail\Mail;
+use PH7\Framework\Mail\Mailable;
 use PH7\Framework\Security\Ban\Ban;
 
 class Logger extends Core
@@ -92,7 +93,7 @@ class Logger extends Core
             'subject' => t('Reporting of the Fake Admin Honeypot')
         ];
 
-        return (new Mail)->send($aInfo, $this->sContents, false);
+        return (new Mail)->send($aInfo, $this->sContents, Mailable::TEXT_FORMAT);
     }
 
     /**

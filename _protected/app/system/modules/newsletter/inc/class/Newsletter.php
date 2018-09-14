@@ -83,7 +83,6 @@ class Newsletter extends Core
      *
      * @return int Number of recipients who were accepted for delivery.
      *
-     * @throws \Swift_RfcComplianceException
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */

@@ -14,7 +14,7 @@
 
                 <div>
                     {{ $text = ($picture->approved == 1) ? t('Disapproved') : t('Approved') }}
-                    {{ LinkCoreForm::display($text, PH7_ADMIN_MOD,'moderator', $action, array('picture_id'=>$picture->pictureId)) }} |
+                    {{ LinkCoreForm::display($text, PH7_ADMIN_MOD,'moderator', $action, array('picture_id'=>$picture->pictureId, 'id'=>$picture->profileId)) }} |
                     {{ LinkCoreForm::display(t('Delete'), PH7_ADMIN_MOD, 'moderator', 'deletephoto', array('album_id'=>$picture->albumId, 'picture_id'=>$picture->pictureId, 'id'=>$picture->profileId, 'username'=>$picture->username, 'picture_link'=>$picture->file)) }}
                 </div>
             </div>

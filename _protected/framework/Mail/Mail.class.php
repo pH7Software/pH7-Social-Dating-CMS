@@ -16,7 +16,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Model\DbConfig;
 
-class Mail
+class Mail implements Mailable
 {
     const HTML_CONTENT_TYPE = 'text/html';
 
@@ -25,11 +25,11 @@ class Mail
      *
      * @param array $aInfo
      * @param string $sContents
-     * @param bool $bHtmlFormat
+     * @param int $iFormatType
      *
      * @return int Number of recipients who were accepted for delivery.
      */
-    public function send(array $aInfo, $sContents, $bHtmlFormat = true)
+    public function send(array $aInfo, $sContents, $iFormatType = Mailable::HTML_FORMAT)
     {
         /*** Default values ***/
         $sFromMail = empty($aInfo['from']) ? DbConfig::getSetting('returnEmail') : $aInfo['from'];
@@ -48,7 +48,7 @@ class Mail
             ->setFrom([escape($sFromMail, true) => escape($sFromName, true)])
             ->setTo([escape($sToMail, true) => escape($sToName, true)]);
 
-        if ($bHtmlFormat) {
+        if ($iFormatType === Mailable::HTML_FORMAT) {
             $oMessage->addPart($sContents, self::HTML_CONTENT_TYPE);
         } else {
             $oMessage->setBody($sContents);
