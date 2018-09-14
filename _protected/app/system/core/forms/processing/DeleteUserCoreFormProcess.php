@@ -73,7 +73,10 @@ class DeleteUserCoreFormProcess extends Form
         $this->view->ip = t('User IP: %0%', $this->session->get($this->sSessPrefix . '_ip'));
         $this->view->browser_info = t('Browser info: %0%', $this->session->get($this->sSessPrefix . '_http_user_agent'));
 
-        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/delete_account.tpl', DbConfig::getSetting('adminEmail'));
+        $sMessageHtml = $this->view->parseMail(
+            PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/delete_account.tpl',
+            DbConfig::getSetting('adminEmail')
+        );
 
         $sMembershipName = $this->registry->module === 'user' ? t('Member') : t('Affiliate');
 
