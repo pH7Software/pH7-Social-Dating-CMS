@@ -331,7 +331,7 @@ class MainController extends Controller
         $sProfileLink = ' (' . $this->design->getProfileLink($sUsername, false) . ')';
         $sBuyer = $this->session->get('member_first_name') . $sProfileLink;
 
-        $this->view->intro = t('Hello!') . '<br />' . t('Congratulation! You received a new payment from %0%', $sBuyer);
+        $this->view->intro = t('Hello!') . '<br />' . t('Congratulations! You received a new payment from %0%', $sBuyer);
         $this->view->date = t('Date of the payment: %0%', $this->dateTime->get()->date());
         $this->view->membership_name = t('Membership name: %0%', $oMembershipData->name);
         $this->view->membership_price = t('Amount: %1%%0%', $oMembershipData->price, $this->config->values['module.setting']['currency_sign']);

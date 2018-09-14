@@ -8396,7 +8396,7 @@ msgid "Never"
 msgstr ""
 
 #: _protected/app/system/modules/payment/controllers/MainController.php:334
-msgid "Congratulation! You received a new payment from %0%"
+msgid "Congratulations! You received a new payment from %0%"
 msgstr ""
 
 #: _protected/app/system/modules/payment/controllers/MainController.php:335
