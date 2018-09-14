@@ -49,7 +49,7 @@ class InfoController extends Controller
         $this->view->h1_title = $this->sTitle;
         $this->view->release_date = $this->dateTime->get(Version::KERNEL_RELEASE_DATE)->date();
         $this->view->license_form_link = Uri::get(PH7_ADMIN_MOD, 'setting', 'license');
-        $this->view->tweet_msg = $this->getTweetPost();
+        $this->view->tweet_msg_url = $this->getTweetPost();
 
         $this->output();
     }
