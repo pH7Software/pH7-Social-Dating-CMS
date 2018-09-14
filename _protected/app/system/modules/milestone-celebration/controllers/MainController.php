@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Mail\Mail;
 use PH7\Framework\Url\Url;
 
 class MainController extends Controller

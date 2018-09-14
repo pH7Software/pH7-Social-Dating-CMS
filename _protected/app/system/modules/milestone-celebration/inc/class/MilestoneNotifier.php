@@ -8,7 +8,9 @@
 
 namespace PH7;
 
+use PH7\Framework\Core\Kernel;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
+use PH7\Framework\Mail\Mailable;
 use PH7\Framework\Mvc\Model\DbConfig;
 
 class MilestoneNotifier
