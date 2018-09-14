@@ -100,12 +100,23 @@ class SignupController extends Controller
     {
         if (!$this->session->exists('mail_step3')) {
             Header::redirect(
-                Uri::get('user', 'signup', 'step3')
+                Uri::get(
+                    'user',
+                    'signup',
+                    'step3'
+                )
             );
         } else {
+            $sRegistrationStatusMsg = (new Registration($this->view))->getMsg();
+
             if ((new UserMilestoneCore)->isTotalUserReached()) {
                 Header::redirect(
-                    Uri::get('milestone-celebration', 'main', 'awesome')
+                    Uri::get(
+                        'milestone-celebration',
+                        'main',
+                        'awesome'
+                    ),
+                    $sRegistrationStatusMsg
                 );
             } else {
                 // Remove all sessions created during registration
@@ -117,7 +128,7 @@ class SignupController extends Controller
                         'main',
                         'login'
                     ),
-                    (new Registration($this->view))->getMsg()
+                    $sRegistrationStatusMsg
                 );
             }
         }
