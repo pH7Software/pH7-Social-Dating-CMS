@@ -2,7 +2,7 @@
 {inc_sub_header}
 
 <p>{greeting}</p>
-<p>{message}</p>
+<p>{content}</p>
 <p><strong>{become_patron}</strong></p>
 
 {inc_footer}

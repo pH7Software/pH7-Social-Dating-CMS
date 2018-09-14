@@ -43,8 +43,8 @@ class MilestoneNotifier
         $iTotalUsers = $this->oUserModel->total();
 
         $this->oView->greeting = t('Hi there!');
-        $this->oView->message = t('Some AMAZING just happened to your website!') . '<br />';
-        $this->oView->message .= t('Indeed, your website reached the %0% users!!! Congratulations 🎈', $iTotalUsers);
+        $this->oView->content = t('Something AMAZING just happened to your website!') . '<br />';
+        $this->oView->content .= t('Indeed, your website reached the %0% users!!! Congratulations 🎈', $iTotalUsers);
         $this->oView->become_patron = t('It might be now the perfect time to <a href="%0%">become a Patron</a> and support the development of the software?', Kernel::PATREON_URL);
 
         $sMessageHtml = $this->oView->parseMail(
