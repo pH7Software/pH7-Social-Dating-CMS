@@ -150,7 +150,7 @@ class JoinFormProcess extends Form
 
     public function step4()
     {
-        // If no photo was uploaded, automatically skip this step
+        // If no photo was uploaded, automatically skip the uploading process
         if (!$this->isAvatarUploaded()) {
             Header::redirect(
                 Uri::get('user', 'signup', 'done')
