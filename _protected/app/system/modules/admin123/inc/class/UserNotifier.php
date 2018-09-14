@@ -11,7 +11,6 @@ namespace PH7;
 use PH7\Framework\Error\CException\PH7RuntimeException;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Mail\InvalidEmailException;
-use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mail\Mailable;
 
 class UserNotifier
@@ -21,7 +20,7 @@ class UserNotifier
 
     const MAIL_TEMPLATE_FILE = '/tpl/mail/sys/core/moderation/content_notifier.tpl';
 
-    /** @var Mail */
+    /** @var Mailable */
     private $oMail;
 
     /** @var PH7Tpl */
