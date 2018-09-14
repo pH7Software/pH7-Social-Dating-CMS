@@ -13,9 +13,10 @@ use stdClass;
 
 class MainController extends Controller
 {
-    public function awesome($iProfileId = null)
+    public function awesome()
     {
         $this->view->page_title = $this->view->h1_title = t('You are AWESOME!!! 🎉');
+
         $this->notifyAdmin();
         $this->output();
     }
