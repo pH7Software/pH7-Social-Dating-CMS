@@ -40,9 +40,9 @@ class MilestoneNotifier
     {
         $iTotalUsers = $this->oUserModel->total();
 
-        $this->view->content = t('Hi there! Some AMAZING just happened to your website!') . '<br />';
-        $this->view->content .= t('Indeed, your website reached the %0% users!!! Congratulations 🎈', $iTotalUsers);
-        $this->view->become_patron = t('It might be now the perfect time to <a href="%0%">become a Patron</a> and support the development of the software?', Kernel::PATREON_URL);
+        $this->oView->content = t('Hi there! Some AMAZING just happened to your website!') . '<br />';
+        $this->oView->content .= t('Indeed, your website reached the %0% users!!! Congratulations 🎈', $iTotalUsers);
+        $this->oView->become_patron = t('It might be now the perfect time to <a href="%0%">become a Patron</a> and support the development of the software?', Kernel::PATREON_URL);
 
         $sMessageHtml = $this->oView->parseMail(
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . self::MAIL_TEMPLATE_FILE_PATH,
