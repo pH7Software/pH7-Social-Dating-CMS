@@ -99,20 +99,28 @@ class SignupController extends Controller
     public function done()
     {
         if (!$this->session->exists('mail_step3')) {
-            Header::redirect(Uri::get('user', 'signup', 'step3'));
+            Header::redirect(
+                Uri::get('user', 'signup', 'step3')
+            );
+        } else {
+            if ((new UserMilestoneCore)->isTotalUserReached()) {
+                Header::redirect(
+                    Uri::get('milestone-celebration', 'main', 'awesome')
+                );
+            } else {
+                // Remove all sessions created during registration
+                $this->session->destroy();
+
+                Header::redirect(
+                    Uri::get(
+                        'user',
+                        'main',
+                        'login'
+                    ),
+                    (new Registration($this->view))->getMsg()
+                );
+            }
         }
-
-        // Remove all sessions created during registration
-        $this->session->destroy();
-
-        Header::redirect(
-            Uri::get(
-                'user',
-                'main',
-                'login'
-            ),
-            (new Registration($this->view))->getMsg()
-        );
     }
 
     /**
