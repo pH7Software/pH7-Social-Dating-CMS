@@ -14,7 +14,7 @@ use PH7\Framework\Url\Url;
 class MainController extends Controller
 {
     const TWITTER_TWEET_URL = 'https://twitter.com/intent/tweet?text=';
-    const TWITTER_TWEET_MSG = "#WOW! I'm the %0%th user on %site_url%! #milestone succeeded!!!";
+    const TWITTER_TWEET_MSG = "#WOW! I'm the %0%th member on %site_url%! #milestone succeeded!!!";
 
     /** @var UserCoreModel */
     private $oUserModel;
@@ -31,7 +31,7 @@ class MainController extends Controller
         $iTotalUsers = $this->oUserModel->total();
         $this->view->page_title = $this->view->h1_title = t('You are AWESOME!!! 🎉');
 
-        $this->view->message = t('Wow! You are the %0%th! YOU ARE AWESOME! 😍', $iTotalUsers);
+        $this->view->message = t('Wow! You are the %0%th member! YOU ARE AWESOME! 😍', $iTotalUsers);
         $this->view->tweet_msg_url = $this->getTweetPost($iTotalUsers);
 
         $this->notifyAdmin();
