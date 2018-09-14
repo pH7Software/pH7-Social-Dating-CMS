@@ -102,7 +102,11 @@ class UserNotifier
             'subject' => $this->getNotifierSubject()
         ];
 
-        return $this->oMail->send($aInfo, $sMessageHtml, Mailable::HTML_FORMAT);
+        return $this->oMail->send(
+            $aInfo,
+            $sMessageHtml,
+            Mailable::HTML_FORMAT
+        );
     }
 
     /**
@@ -174,6 +178,7 @@ class UserNotifier
      */
     private function isValidEmail()
     {
-        return !empty($this->sEmail) && filter_var($this->sEmail, FILTER_VALIDATE_EMAIL) !== false;
+        return !empty($this->sEmail) &&
+            filter_var($this->sEmail, FILTER_VALIDATE_EMAIL) !== false;
     }
 }
