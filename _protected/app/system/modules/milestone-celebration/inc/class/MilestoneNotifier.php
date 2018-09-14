@@ -15,7 +15,7 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class MilestoneNotifier
 {
-    const MAIL_TEMPLATE_FILE_PATH = '/tpl/mail/sys/core/milestone-celebration/admin-notifier.tpl';
+    const MAIL_TEMPLATE_FILE_PATH = '/tpl/mail/sys/mod/milestone-celebration/admin-notifier.tpl';
 
     /** @var UserCoreModel */
     private $oUserModel;
