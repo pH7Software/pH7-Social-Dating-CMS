@@ -26,6 +26,7 @@ use PH7\Framework\Error\CException\PH7Exception;
 use PH7\Framework\File\File;
 use PH7\Framework\Geo\Ip\Geo;
 use PH7\Framework\Ip\Ip;
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Util\Various;
@@ -125,7 +126,10 @@ class Facebook extends Api implements IApi
             unset($oUserModel);
         } else {
             // For testing purposes, if there was an error, let's kill the script
-            $this->oDesign->setFlashMsg(t('Oops! An error has occurred. Please try again later.'));
+            $this->oDesign->setFlashMsg(
+                t('Oops! An error has occurred. Please try again later.'),
+                Design::ERROR_TYPE
+            );
             $this->sUrl = Uri::get('connect', 'main', 'index');
         }
 
