@@ -98,18 +98,18 @@ class AdminController extends Controller
     public function deleteAll()
     {
         if (!(new Framework\Security\CSRF\Token)->check('subscriber_action')) {
-            $this->sMsg = Form::errorTokenMsg();
+            $sMsg = Form::errorTokenMsg();
         } elseif (count($this->httpRequest->post('action')) > 0) {
             foreach ($this->httpRequest->post('action') as $sEmail) {
                 $this->oSubscriptionModel->unsubscribe($sEmail);
             }
 
-            $this->sMsg = t('The subscribers(s) has/have been removed.');
+            $sMsg = t('The subscribers(s) has/have been removed.');
         }
 
         Header::redirect(
             Uri::get('newsletter', 'admin', 'browse'),
-            $this->sMsg
+            $sMsg
         );
     }
 }
