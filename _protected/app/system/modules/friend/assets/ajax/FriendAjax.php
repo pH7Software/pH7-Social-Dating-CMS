@@ -150,8 +150,9 @@ class FriendAjax extends Core
             t('<strong>%0%</strong> sent you a friendship request on %1%.', $this->session->get('member_username'), $sSiteName) . '<br />' .
             t('<a href="%0%">Click here</a> to see your friend request.', Uri::get('friend', 'main', 'index'));
 
-        /* Because we work in Ajax, the constant "PH7_TPL_NAME" is not yet defined.
-         * So we use the constant "PH7_DEFAULT_THEME" is already defined.
+        /**
+         * @internal Because this class is called through ajax router, "PH7_TPL_NAME" isn't defined yet.
+         * So, it uses the "PH7_DEFAULT_THEME" constant, which is already defined.
          */
         $sMessageHtml = $this->view->parseMail(
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/tpl/mail/sys/mod/friend/friend_request.tpl',
