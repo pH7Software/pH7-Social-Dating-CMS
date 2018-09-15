@@ -59,7 +59,7 @@ class HttpController extends Controller
                 $this->sTitle = t('Forbidden');
                 $this->view->page_title = $this->sTitle;
                 $this->view->h1_title = $this->sTitle;
-                $this->view->error_desc = t('Your IP address or the username/password you entered were not correct. Your request was denied as you have no permission to access the data.<br />OR<br />The server was unable to serve the data that was requested.');
+                $this->view->error_desc = t("You don't have permissions to access this page at the moment.");
                 break;
 
             case self::HTTP_METHOD_NOT_ALLOWED_CODE:
