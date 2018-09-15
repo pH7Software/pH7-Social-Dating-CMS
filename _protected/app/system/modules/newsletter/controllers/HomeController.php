@@ -19,8 +19,20 @@ class HomeController extends Controller
         $this->output();
     }
 
+    /**
+     * @param string $sMail
+     * @param string $sHash
+     *
+     * @throws Framework\File\Exception
+     */
     public function activate($sMail, $sHash)
     {
-        (new UserCore)->activateAccount($sMail, $sHash, $this->config, $this->registry, 'newsletter');
+        (new UserCore)->activateAccount(
+            $sMail,
+            $sHash,
+            $this->config,
+            $this->registry,
+            'newsletter'
+        );
     }
 }

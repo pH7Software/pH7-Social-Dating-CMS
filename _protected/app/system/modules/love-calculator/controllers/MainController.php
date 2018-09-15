@@ -81,7 +81,9 @@ class MainController extends Controller
             // Display
             $this->output();
         } else {
-            $this->displayPageNotFound(t('No Name Found for the Love Calculator!'));
+            $this->displayPageNotFound(
+                t('No Name Found for the Love Calculator!')
+            );
         }
     }
 }
