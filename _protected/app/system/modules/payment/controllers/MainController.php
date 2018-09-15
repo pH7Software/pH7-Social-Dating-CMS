@@ -323,9 +323,8 @@ class MainController extends Controller
      */
     private function sendNotifyMail($iMembershipId)
     {
-        $oMembershipData = $this->oPayModel->getMemberships($iMembershipId);
-
         $sAdminEmail = DbConfig::getSetting('adminEmail');
+        $oMembershipData = $this->oPayModel->getMemberships($iMembershipId);
 
         $sUsername = $this->session->get('member_username');
         $sProfileLink = ' (' . $this->design->getProfileLink($sUsername, false) . ')';

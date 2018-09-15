@@ -60,6 +60,8 @@ class DeleteUserCoreFormProcess extends Form
      */
     private function sendWarnEmail()
     {
+        $sAdminEmail = DbConfig::getSetting('adminEmail');
+
         $sMembershipType = $this->registry->module === 'affiliate' ? t('Affiliate') : t('Member');
 
         $this->view->membership = t('User Type: %0%.', $sMembershipType);
@@ -75,7 +77,7 @@ class DeleteUserCoreFormProcess extends Form
 
         $sMessageHtml = $this->view->parseMail(
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/delete_account.tpl',
-            DbConfig::getSetting('adminEmail')
+            $sAdminEmail
         );
 
         $sMembershipName = $this->registry->module === 'user' ? t('Member') : t('Affiliate');
@@ -84,6 +86,7 @@ class DeleteUserCoreFormProcess extends Form
          * Set the details for sending the email, then send it.
          */
         $aInfo = [
+            'to' => $sAdminEmail,
             'subject' => t('Unsubscribe %0% - User: %1%', $sMembershipName, $this->sUsername)
         ];
 
