@@ -45,6 +45,14 @@ class MainController extends Controller
             ->sendEmailToAdmin();
     }
 
+    /**
+     * Removes sessions created during the user singup process.
+     *
+     * In that case, if the module is requested, but "mail_step3" session doesn't exist, it won't run.
+     * Otherwise, admin would receive several times the "milestone succeeded" email.
+     *
+     * @return void
+     */
     private function removeSessionsFromRegistrationProcess()
     {
         $this->session->destroy();
