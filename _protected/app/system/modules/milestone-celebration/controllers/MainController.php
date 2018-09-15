@@ -34,6 +34,8 @@ class MainController extends Controller
         $this->view->tweet_msg_url = $this->getTweetPost($iTotalUsers);
 
         $this->notifyAdmin();
+        $this->removeSessionsFromRegistrationProcess();
+
         $this->output();
     }
 
@@ -41,6 +43,11 @@ class MainController extends Controller
     {
         (new MilestoneNotifier($this->oUserModel, new Mail, $this->view))
             ->sendEmailToAdmin();
+    }
+
+    private function removeSessionsFromRegistrationProcess()
+    {
+        $this->session->destroy();
     }
 
     /**
