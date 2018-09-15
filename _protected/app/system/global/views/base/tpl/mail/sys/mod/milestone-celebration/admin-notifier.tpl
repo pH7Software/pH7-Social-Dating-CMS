@@ -1,5 +1,4 @@
 {inc_header}
-{inc_sub_header}
 
 <p>{greeting}</p>
 <p>{content}</p>
