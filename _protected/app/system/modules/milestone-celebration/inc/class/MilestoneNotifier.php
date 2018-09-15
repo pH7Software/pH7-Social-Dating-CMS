@@ -26,9 +26,9 @@ class MilestoneNotifier
     /** @var PH7Tpl */
     private $oView;
 
-    public function __construct(UserCoreModel $oUserModel, Mailable $oMail, PH7Tpl $oView)
+    public function __construct(UserCoreModel $oUserModel, Mailable $oMailEngine, PH7Tpl $oView)
     {
-        $this->oMail = $oMail;
+        $this->oMail = $oMailEngine;
         $this->oUserModel = $oUserModel;
         $this->oView = $oView;
     }
