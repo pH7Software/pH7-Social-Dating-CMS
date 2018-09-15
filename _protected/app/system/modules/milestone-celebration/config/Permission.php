@@ -8,7 +8,9 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
+use Teapot\StatusCode;
 
 defined('PH7') or die('Restricted access');
 
@@ -22,7 +24,14 @@ class Permission extends PermissionCore
          * Make sure the page is requested directly through the signup process.
          */
         if (!$this->session->exists('mail_step3')) {
-            Header::redirect(PH7_URL_ROOT);
+            Header::redirect(
+                Uri::get(
+                    'error',
+                    'http',
+                    'index',
+                    StatusCode::FORBIDDEN
+                )
+            );
         }
     }
 }
