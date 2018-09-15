@@ -39,6 +39,10 @@ class UserMilestoneCore
      */
     public function isTotalUserReached()
     {
-        return in_array($this->oUserModel->total(), self::NUMBER_USERS, true);
+        return in_array(
+            $this->oUserModel->total(),
+            self::NUMBER_USERS,
+            true
+        );
     }
 }
