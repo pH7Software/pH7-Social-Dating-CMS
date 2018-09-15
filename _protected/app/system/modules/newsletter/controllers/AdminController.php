@@ -98,6 +98,8 @@ class AdminController extends Controller
 
     public function deleteAll()
     {
+        $sMsg = ''; // Default msg value
+
         if (!(new SecurityToken)->check('subscriber_action')) {
             $sMsg = Form::errorTokenMsg();
         } elseif (count($this->httpRequest->post('action')) > 0) {
