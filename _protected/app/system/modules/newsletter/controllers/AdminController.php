@@ -75,7 +75,13 @@ class AdminController extends Controller
         unset($oPage);
 
         if (empty($oBrowse)) {
-            $this->design->setRedirect(Uri::get('newsletter', 'admin', 'browse'));
+            $this->design->setRedirect(
+                Uri::get(
+                    'newsletter',
+                    'admin',
+                    'browse'
+                )
+            );
             $this->displayPageNotFound(t('Sorry, Your search returned no results!'));
         } else {
             // Add the js file necessary for the browse form

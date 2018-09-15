@@ -60,9 +60,15 @@ class UserController extends Controller
         $this->iTotalUsers = $this->oAdminModel->total();
 
         $oPage = new Page;
-        $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, self::PROFILES_PER_PAGE);
+        $this->view->total_pages = $oPage->getTotalPages(
+            $this->iTotalUsers,
+            self::PROFILES_PER_PAGE
+        );
         $this->view->current_page = $oPage->getCurrentPage();
-        $oBrowse = $this->oAdminModel->browse($oPage->getFirstItem(), $oPage->getNbItemsPerPage());
+        $oBrowse = $this->oAdminModel->browse(
+            $oPage->getFirstItem(),
+            $oPage->getNbItemsPerPage()
+        );
         unset($oPage);
 
         if (empty($oBrowse)) {
@@ -141,7 +147,10 @@ class UserController extends Controller
             );
 
             $oPage = new Page;
-            $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, self::PROFILES_PER_PAGE);
+            $this->view->total_pages = $oPage->getTotalPages(
+                $this->iTotalUsers,
+                self::PROFILES_PER_PAGE
+            );
             $this->view->current_page = $oPage->getCurrentPage();
             $oSearch = $this->oAdminModel->searchUser(
                 $sWhat,

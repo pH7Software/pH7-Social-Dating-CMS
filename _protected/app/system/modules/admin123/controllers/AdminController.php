@@ -48,15 +48,29 @@ class AdminController extends Controller
 
     public function browse()
     {
-        $this->iTotalAdmins = $this->oAdminModel->searchAdmin($this->httpRequest->get('looking'), true,
-            $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
+        $this->iTotalAdmins = $this->oAdminModel->searchAdmin(
+            $this->httpRequest->get('looking'),
+            true,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            null,
+            null
+        );
 
         $oPage = new Page;
-        $this->view->total_pages = $oPage->getTotalPages($this->iTotalAdmins, self::PROFILES_PER_PAGE);
+        $this->view->total_pages = $oPage->getTotalPages(
+            $this->iTotalAdmins,
+            self::PROFILES_PER_PAGE
+        );
         $this->view->current_page = $oPage->getCurrentPage();
-        $oSearch = $this->oAdminModel->searchAdmin($this->httpRequest->get('looking'), false,
-            $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $oPage->
-            getFirstItem(), $oPage->getNbItemsPerPage());
+        $oSearch = $this->oAdminModel->searchAdmin(
+            $this->httpRequest->get('looking'),
+            false,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            $oPage->getFirstItem(),
+            $oPage->getNbItemsPerPage()
+        );
         unset($oPage);
 
         if (empty($oSearch)) {
