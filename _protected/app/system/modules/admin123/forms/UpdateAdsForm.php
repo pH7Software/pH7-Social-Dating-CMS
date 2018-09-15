@@ -10,6 +10,7 @@ namespace PH7;
 
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Parse\SysVar;
+use PH7\Framework\Security\CSRF\Token as CSRFToken;
 use PH7\Framework\Url\Header;
 
 class UpdateAdsForm
@@ -29,7 +30,7 @@ class UpdateAdsForm
         $oPage = new Page;
         $oAdsModel = new AdsCoreModel;
         $sTable = AdsCore::getTable();
-        $sCSRFToken = (new Framework\Security\CSRF\Token)->generate('ads');
+        $sCSRFToken = (new CSRFToken)->generate('ads');
         $oPage->getTotalPages($oAdsModel->total($sTable), self::ADS_PER_PAGE);
         $oAds = $oAdsModel->get(
             null,
