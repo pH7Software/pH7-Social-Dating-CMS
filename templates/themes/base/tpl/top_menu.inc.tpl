@@ -27,8 +27,16 @@
 
     {* Guest Menu *}
       {if !$is_user_auth AND !$is_aff_auth AND !$is_admin_auth}
-        <li><a class="bold" href="{{ $design->url('user','signup','step1') }}" title="{lang 'Join Now!'}"><i class="fa fa-user-plus"></i> {lang 'Join Now!'}</a></li>
-        <li><a href="{{ $design->url('user', 'main','login') }}" title="{lang 'Login'}" data-load="ajax"><i class="fa fa-sign-in"></i> {lang 'Login'}</a></li>
+        <li>
+          <a class="bold" href="{{ $design->url('user', 'signup', 'step1') }}" title="{lang 'Join Now!'}">
+            <i class="fa fa-user-plus"></i> {lang 'Join Now!'}
+          </a>
+        </li>
+        <li>
+          <a href="{{ $design->url('user', 'main', 'login') }}" title="{lang 'Login'}" data-load="ajax">
+            <i class="fa fa-sign-in"></i> {lang 'Login'}
+          </a>
+        </li>
       {/if}
 
 
