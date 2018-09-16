@@ -58,7 +58,7 @@ class UserCoreModel extends Model
     /**
      * @param Session $oSession
      *
-     * @return string
+     * @return stdClass
      */
     public function checkGroup(Session $oSession)
     {
@@ -71,7 +71,7 @@ class UserCoreModel extends Model
 
         $this->cache->start(self::CACHE_GROUP, 'membership_groups' . $iMemberGroupId, static::CACHE_TIME);
 
-        if (!$sPermissions = $this->cache->get()) {
+        if (!$oPermissions = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare(
                 'SELECT permissions FROM' . Db::prefix(DbTableName::MEMBERSHIP) .
                 'WHERE groupId = :groupId LIMIT 1'
@@ -80,10 +80,11 @@ class UserCoreModel extends Model
             $rStmt->execute();
             $sPermissions = $rStmt->fetchColumn();
             Db::free($rStmt);
-            $this->cache->put(ObjArr::toObject(unserialize($sPermissions)));
+            $oPermissions = ObjArr::toObject(unserialize($sPermissions));
+            $this->cache->put($oPermissions);
         }
 
-        return $sPermissions;
+        return $oPermissions;
     }
 
     /**
