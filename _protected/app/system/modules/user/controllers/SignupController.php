@@ -107,7 +107,7 @@ class SignupController extends Controller
                 )
             );
         } else {
-            if ((new UserMilestoneCore)->isTotalUserReached()) {
+            if ((new UserMilestoneCore(new UserCoreModel))->isTotalUserReached()) {
                 $sUrl = Uri::get(
                     'milestone-celebration',
                     'main',
