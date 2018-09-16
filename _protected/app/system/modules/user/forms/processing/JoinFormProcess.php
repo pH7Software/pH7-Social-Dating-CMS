@@ -179,7 +179,11 @@ class JoinFormProcess extends Form
     private function redirectUserToDonePage()
     {
         Header::redirect(
-            Uri::get('user', 'signup', 'done')
+            Uri::get(
+                'user',
+                'signup',
+                'done'
+            )
         );
     }
 
@@ -212,7 +216,10 @@ class JoinFormProcess extends Form
             $oDate->modify(sprintf('- %d year', $iAge));
             $sBirthDate = $oDate->format('Y-m-d');
         } else {
-            $sBirthDate = $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d');
+            $sBirthDate = $this->dateTime
+                ->get(
+                    $this->httpRequest->post('birth_date')
+                )->date('Y-m-d');
         }
 
         return $sBirthDate;
