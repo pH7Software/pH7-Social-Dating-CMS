@@ -107,30 +107,27 @@ class SignupController extends Controller
                 )
             );
         } else {
-            $sRegistrationStatusMsg = (new Registration($this->view))->getMsg();
-
             if ((new UserMilestoneCore)->isTotalUserReached()) {
-                Header::redirect(
-                    Uri::get(
-                        'milestone-celebration',
-                        'main',
-                        'awesome'
-                    ),
-                    $sRegistrationStatusMsg
+                $sUrl = Uri::get(
+                    'milestone-celebration',
+                    'main',
+                    'awesome'
                 );
             } else {
                 // Remove all sessions created during registration
                 $this->session->destroy();
 
-                Header::redirect(
-                    Uri::get(
-                        'user',
-                        'main',
-                        'login'
-                    ),
-                    $sRegistrationStatusMsg
+                $sUrl = Uri::get(
+                    'user',
+                    'main',
+                    'login'
                 );
             }
+
+            Header::redirect(
+                $sUrl,
+                (new Registration($this->view))->getMsg()
+            );
         }
     }
 
