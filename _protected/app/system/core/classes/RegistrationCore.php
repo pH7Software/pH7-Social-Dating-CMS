@@ -47,6 +47,9 @@ abstract class RegistrationCore
      * @param bool $bIsUniversalLogin
      *
      * @return self
+     *
+     * @throws Framework\File\Exception
+     * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
     public function sendMail(array $aInfo, $bIsUniversalLogin = false)
     {
