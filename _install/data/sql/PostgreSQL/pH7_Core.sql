@@ -130,7 +130,6 @@ CREATE TABLE IF NOT EXISTS ph7_members_info (
   middleName varchar(50) DEFAULT NULL,
   description text DEFAULT NULL,
   address varchar(255) DEFAULT NULL,
-  street varchar(200) DEFAULT NULL,
   city varchar(150) DEFAULT NULL,
   state varchar(150) DEFAULT NULL,
   zipCode varchar(20) DEFAULT NULL,
@@ -172,8 +171,8 @@ CREATE TABLE IF NOT EXISTS ph7_members_notifications (
 -- GHOST User. Do not remove ghost default member!
 INSERT INTO ph7_members (profileId, email, username, password, firstName, lastName, birthDate, ip, lastActivity, featured, active, userStatus, groupId, joinDate) VALUES
 (1, 'ghost@ghost', 'ghost', @sPassword, 'Ghost', 'The Ghost', '1001-01-01', '00.000.00.00', @sCurrentDate, 0, 1, 1, 2, @sCurrentDate);
-INSERT INTO ph7_members_info (profileId, description, address, street, city, state, zipCode, country) VALUES
-(1, 'This profile doesn''t exist anymore. So I''m the ghost who replaces him/her during this time', 'The Ghost City', 'Ghost Street', 'Ghost Town', 'Ghost State', '000000', 'US');
+INSERT INTO ph7_members_info (profileId, description, address, city, state, zipCode, country) VALUES
+(1, 'This profile doesn''t exist anymore. So I''m the ghost who replaces him/her during this time', 'The Ghost City', 'Ghost Town', 'Ghost State', '000000', 'US');
 -- Privacy settings
 INSERT INTO ph7_members_privacy (profileId, privacyProfile, searchProfile, userSaveViews) VALUES (1, 'all', 'yes', 'yes');
 -- Notifications
@@ -227,7 +226,6 @@ CREATE TABLE IF NOT EXISTS ph7_affiliates_info (
   businessName varchar(100) DEFAULT NULL,
   taxId varchar(40) DEFAULT NULL, -- Tax ID, VAT, SSN, ...
   address varchar(255) DEFAULT NULL,
-  street varchar(200) DEFAULT NULL,
   country char(2) DEFAULT NULL,
   city varchar(150) DEFAULT NULL,
   state varchar(150) DEFAULT NULL,

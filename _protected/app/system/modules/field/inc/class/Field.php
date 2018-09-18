@@ -18,7 +18,6 @@ class Field
         'description',
         'businessname',
         'address',
-        'street',
         'city',
         'state',
         'zipcode',
