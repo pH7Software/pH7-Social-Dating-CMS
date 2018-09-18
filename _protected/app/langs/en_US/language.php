@@ -370,7 +370,6 @@ Framework\Registry\Registry::getInstance()->lang = [
 
     /***** USER'S INFO FIELDS *****/
     'address' => 'Address:',
-    'street' => 'Street:',
     'middlename' => 'Middle Name:',
     'businessname' => 'Business Name:',
     'taxid' => 'Tax ID, VAT or SSN:',
