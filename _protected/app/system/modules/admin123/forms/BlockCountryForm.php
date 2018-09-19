@@ -34,7 +34,7 @@ class BlockCountryForm
                 t('Countries to exclude'),
                 'countries[]',
                 [
-                    'description' => t("Visitors who come from one of those selected countries will receive a friendly message saying that the service isn't available in they country. Logged admins and admin panel won't be affected, so you will still be able to login to your admin panel from anywhere in the world."),
+                    'description' => t("Visitors who come from one of those selected countries will receive a friendly message saying that the service isn't available in their country. Logged admins and admin panel won't be affected, so you will still be able to login to your admin panel from anywhere in the world."),
                     'multiple' => 'multiple',
                     'size' => self::FORM_COUNTRY_FIELD_SIZE,
                     'value' => (new BlockCountryModel)->getBlockedCountries()
