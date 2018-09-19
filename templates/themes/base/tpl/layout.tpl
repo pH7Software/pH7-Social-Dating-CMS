@@ -9,6 +9,7 @@
     <title>{if $page_title}{% $str->escape($str->upperFirst($page_title), true) %} - {site_name}{else}{site_name} - {slogan}{/if}</title>
     <meta name="description" content="{% $str->escape($str->upperFirst($meta_description), true) %}" />
     <meta name="keywords" content="{% $str->escape($meta_keywords, true) %}" />
+    {main_include 'social-meta-tags.inc.tpl'}
     <meta name="robots" content="{meta_robots}" />
     <link rel="icon" href="{url_relative}favicon.ico" />
     <link rel="canonical" href="{current_url}" />
