@@ -35,7 +35,10 @@ class HomeController extends Controller
         }
 
         if (!Affiliate::auth()) {
-            $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'style.css');
+            $this->design->addCss(
+                PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
+                'style.css'
+            );
         }
 
         $this->output();
