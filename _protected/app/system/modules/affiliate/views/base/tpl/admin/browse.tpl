@@ -69,6 +69,7 @@
                   <th> </th>
                   <th> </th>
                   <th> </th>
+                  <th> </th>
                 </tr>
             </tfoot>
 
