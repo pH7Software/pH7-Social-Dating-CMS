@@ -75,7 +75,9 @@
             <tbody>
                 {each $aff in $browse}
                     <tr>
-                        <td><input type="checkbox" name="action[]" value="{% $aff->profileId %}_{% $aff->username %}" /></td>
+                        <td>
+                            <input type="checkbox" name="action[]" value="{% $aff->profileId %}_{% $aff->username %}" />
+                        </td>
                         <td>{% $aff->profileId %}</td>
                         <td>
                             <a href="mailto:{% $aff->email %}" title="{lang 'Email the Affiliate'}">
