@@ -9,7 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Date\CDateTime;
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Url\Header;
@@ -25,12 +25,9 @@ class EditForm
             Header::redirect();
         }
 
-        $bAdminLogged = (AdminCore::auth() && !Affiliate::auth()); // Check if the admin is logged
-
         $oAffModel = new AffiliateModel;
-        $oHR = new Http;
-        $iProfileId = ($bAdminLogged && $oHR->getExists('profile_id')) ? $oHR->get('profile_id', 'int') : (new Session)->get('affiliate_id');
-        $oAff = $oAffModel->readProfile($iProfileId, DbTableName::AFFILIATE);
+        $oHttpRequest = new HttpRequest;
+        $oAff = $oAffModel->readProfile(self::getProfileId($oHttpRequest), DbTableName::AFFILIATE);
 
         // Birth date with the date format for the date picker
         $sBirthDate = (new CDateTime)->get($oAff->birthDate)->date('Y-m-d');
@@ -40,12 +37,11 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_aff_edit_account', 'form_aff_edit_account'));
         $oForm->addElement(new \PFBC\Element\Token('edit_account'));
 
-        if ($bAdminLogged && $oHR->getExists('profile_id')) {
+        if (self::isAdminLogged() && $oHttpRequest->getExists('profile_id')) {
             $oForm->addElement(
                 new \PFBC\Element\HTMLExternal('<p class="center"><a class="bold btn btn-default btn-md" href="' . Uri::get('affiliate', 'admin', 'browse') . '">' . t('Back to Browse Affiliates') . '</a></p>')
             );
         }
-        unset($oHR);
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<h2 class="underline">' . t('Global Information:') . '</h2>'));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="error">' . t('All your information must be accurate and valid.') . '</p>'));
@@ -67,7 +63,7 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
 
         // Generate dynamic fields
-        $oFields = $oAffModel->getInfoFields($iProfileId, DbTableName::AFFILIATE_INFO);
+        $oFields = $oAffModel->getInfoFields(self::getProfileId($oHttpRequest), DbTableName::AFFILIATE_INFO);
         foreach ($oFields as $sColumn => $sValue) {
             $oForm = (new DynamicFieldCoreForm($oForm, $sColumn, $sValue))->generate();
         }
@@ -75,5 +71,29 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'check']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
+    }
+
+    /**
+     * @param HttpRequest $oHttpRequest
+     *
+     * @return int
+     */
+    private static function getProfileId(HttpRequest $oHttpRequest)
+    {
+        if (self::isAdminLogged() && $oHttpRequest->getExists('profile_id')) {
+            return $oHttpRequest->get('profile_id', 'int');
+        }
+
+        return (new Session)->get('affiliate_id');
+    }
+
+    /**
+     * Check if the admin is logged.
+     *
+     * @return bool
+     */
+    private static function isAdminLogged()
+    {
+        return AdminCore::auth() && !Affiliate::auth();
     }
 }
