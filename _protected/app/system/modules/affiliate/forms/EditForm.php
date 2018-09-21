@@ -39,7 +39,7 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_aff_edit_account', 'form_aff_edit_account'));
         $oForm->addElement(new \PFBC\Element\Token('edit_account'));
 
-        if (self::isAdminLogged() && $oHttpRequest->getExists('profile_id')) {
+        if (self::isAdminLoggedAndUserIdExists($oHttpRequest)) {
             $oForm->addElement(
                 new \PFBC\Element\HTMLExternal('<p class="center"><a class="bold btn btn-default btn-md" href="' . Uri::get('affiliate', 'admin', 'browse') . '">' . t('Back to Browse Affiliates') . '</a></p>')
             );
@@ -82,7 +82,7 @@ class EditForm
      */
     private static function getProfileId(HttpRequest $oHttpRequest)
     {
-        if (self::isAdminLogged() && $oHttpRequest->getExists('profile_id')) {
+        if (self::isAdminLoggedAndUserIdExists($oHttpRequest)) {
             return $oHttpRequest->get('profile_id', 'int');
         }
 
@@ -92,10 +92,13 @@ class EditForm
     /**
      * Check if the admin is logged.
      *
+     * @param HttpRequest $oHttpRequest
+     *
      * @return bool
      */
-    private static function isAdminLogged()
+    private static function isAdminLoggedAndUserIdExists(HttpRequest $oHttpRequest)
     {
-        return AdminCore::auth() && !Affiliate::auth();
+        return AdminCore::auth() && !Affiliate::auth() &&
+            $oHttpRequest->getExists('profile_id');
     }
 }
