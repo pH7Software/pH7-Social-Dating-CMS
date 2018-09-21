@@ -91,18 +91,6 @@ class EditFormProcess extends Form
     }
 
     /**
-     * @return int
-     */
-    private function getProfileId()
-    {
-        if ($this->isOnlyAdminLoggedAndUserIdExists()) {
-            return $this->httpRequest->get('profile_id', 'int');
-        }
-
-        return $this->session->get('member_id');
-    }
-
-    /**
      * @return bool
      */
     private function isOnlyAdminLoggedAndUserIdExists()

@@ -18,19 +18,17 @@ class EditForm
 {
     public static function display()
     {
+        $oHttpRequest = new HttpRequest;
+        $iProfileId = self::getProfileId($oHttpRequest);
+
         if (isset($_POST['submit_user_edit_account'])) {
             if (\PFBC\Form::isValid($_POST['submit_user_edit_account'])) {
-                new EditFormProcess;
+                new EditFormProcess($iProfileId);
             }
             Header::redirect();
         }
 
-        $bAdminLogged = (AdminCore::auth() && !User::auth()); // Check if the admin is logged
-
         $oUserModel = new UserModel;
-        $oHR = new HttpRequest;
-        $iProfileId = ($bAdminLogged && $oHR->getExists('profile_id')) ? $oHR->get('profile_id', 'int') : (new Session)->get('member_id');
-
         $oUser = $oUserModel->readProfile($iProfileId);
 
         // Birth Date with the date format for the date picker
@@ -41,7 +39,7 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_user_edit_account', 'form_user_edit_account'));
         $oForm->addElement(new \PFBC\Element\Token('edit_account'));
 
-        if ($bAdminLogged && $oHR->getExists('profile_id')) {
+        if (self::isAdminLoggedAndUserIdExists($oHttpRequest)) {
             $oForm->addElement(
                 new \PFBC\Element\HTMLExternal('<p class="center"><a class="bold btn btn-default btn-md" href="' . Uri::get(PH7_ADMIN_MOD, 'user', 'browse') . '">' . t('Back to Browse Users') . '</a></p>')
             );
@@ -85,5 +83,29 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'check']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script><script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
         $oForm->render();
+    }
+
+    /**
+     * @param HttpRequest $oHttpRequest
+     *
+     * @return int
+     */
+    private static function getProfileId(HttpRequest $oHttpRequest)
+    {
+        if (self::isAdminLoggedAndUserIdExists($oHttpRequest)) {
+            return $oHttpRequest->get('profile_id', 'int');
+        }
+
+        return (new Session)->get('member_id');
+    }
+
+    /**
+     * @param HttpRequest $oHttpRequest
+     *
+     * @return bool
+     */
+    private static function isAdminLoggedAndUserIdExists(HttpRequest $oHttpRequest)
+    {
+        return AdminCore::auth() && !User::auth() && $oHttpRequest->getExists('profile_id');
     }
 }
