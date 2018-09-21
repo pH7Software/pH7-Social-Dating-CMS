@@ -98,6 +98,8 @@ class AccountController extends Controller
     /**
      * @param string $sMail
      * @param string $sHash
+     *
+     * @throws Framework\File\Exception
      */
     public function activate($sMail, $sHash)
     {
