@@ -19,7 +19,7 @@ class BankForm
     {
         if (isset($_POST['submit_bank_account'])) {
             if (\PFBC\Form::isValid($_POST['submit_bank_account'])) {
-                new BankFormProcess();
+                new BankFormProcess(self::getProfileId());
             }
 
             UrlHeader::redirect();

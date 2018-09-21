@@ -11,15 +11,14 @@ defined('PH7') or exit('Restricted access');
 
 class BankFormProcess extends Form
 {
-    public function __construct()
+    /**
+     * @param int $iProfileId
+     *
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
+     */
+    public function __construct($iProfileId)
     {
         parent::__construct();
-
-        if (AdminCore::auth() && !Affiliate::auth() && $this->httpRequest->getExists('profile_id')) {
-            $iProfileId = $this->httpRequest->get('profile_id', 'int');
-        } else {
-            $iProfileId = $this->session->get('affiliate_id');
-        }
 
         $oAffModel = new AffiliateModel;
         $oAff = $oAffModel->readProfile($iProfileId, DbTableName::AFFILIATE);
