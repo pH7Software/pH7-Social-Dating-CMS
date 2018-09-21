@@ -52,12 +52,26 @@ class BankForm
      */
     private static function getAffiliateBankAccount(HttpRequest $oHttpRequest)
     {
-        $iProfileId = self::isAdminLogged() && $oHttpRequest->getExists('profile_id') ? $oHttpRequest->get('profile_id', 'int') : (new Session)->get('affiliate_id');
+        $iProfileId = self::getProfileId($oHttpRequest);
 
         return (new AffiliateModel)->readProfile(
             $iProfileId,
             DbTableName::AFFILIATE
         )->bankAccount;
+    }
+
+    /**
+     * @param HttpRequest $oHttpRequest
+     *
+     * @return int
+     */
+    private static function getProfileId(HttpRequest $oHttpRequest)
+    {
+        if (self::isAdminLogged() && $oHttpRequest->getExists('profile_id')) {
+            return $oHttpRequest->get('profile_id', 'int');
+        }
+
+        return (new Session)->get('affiliate_id');
     }
 
     /**
