@@ -15,12 +15,16 @@ use PH7\Framework\Mvc\Request\Http;
 
 class EditFormProcess extends Form
 {
-    public function __construct()
+    /**
+     * @param int $iProfileId
+     *
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
+     */
+    public function __construct($iProfileId)
     {
         parent::__construct();
 
         $oAffModel = new AffiliateModel;
-        $iProfileId = (AdminCore::auth() && !Affiliate::auth() && $this->httpRequest->getExists('profile_id')) ? $this->httpRequest->get('profile_id', 'int') : $this->session->get('affiliate_id');
         $oAff = $oAffModel->readProfile($iProfileId, DbTableName::AFFILIATE);
 
         if (!$this->str->equals($this->httpRequest->post('first_name'), $oAff->firstName)) {

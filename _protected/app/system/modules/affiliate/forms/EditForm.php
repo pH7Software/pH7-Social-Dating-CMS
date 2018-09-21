@@ -18,16 +18,18 @@ class EditForm
 {
     public static function display()
     {
+        $oHttpRequest = new HttpRequest;
+        $iProfileId = self::getProfileId($oHttpRequest);
+
         if (isset($_POST['submit_aff_edit_account'])) {
             if (\PFBC\Form::isValid($_POST['submit_aff_edit_account'])) {
-                new EditFormProcess;
+                new EditFormProcess($iProfileId);
             }
             Header::redirect();
         }
 
         $oAffModel = new AffiliateModel;
-        $oHttpRequest = new HttpRequest;
-        $oAff = $oAffModel->readProfile(self::getProfileId($oHttpRequest), DbTableName::AFFILIATE);
+        $oAff = $oAffModel->readProfile($iProfileId, DbTableName::AFFILIATE);
 
         // Birth date with the date format for the date picker
         $sBirthDate = (new CDateTime)->get($oAff->birthDate)->date('Y-m-d');
@@ -63,7 +65,7 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
 
         // Generate dynamic fields
-        $oFields = $oAffModel->getInfoFields(self::getProfileId($oHttpRequest), DbTableName::AFFILIATE_INFO);
+        $oFields = $oAffModel->getInfoFields($iProfileId, DbTableName::AFFILIATE_INFO);
         foreach ($oFields as $sColumn => $sValue) {
             $oForm = (new DynamicFieldCoreForm($oForm, $sColumn, $sValue))->generate();
         }
