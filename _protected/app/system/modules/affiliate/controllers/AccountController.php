@@ -37,7 +37,10 @@ class AccountController extends Controller
     public function edit()
     {
         // Adding Css Style for Tabs
-        $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'tabs.css');
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS,
+            'tabs.css'
+        );
 
         $this->sTitle = t('Edit your profile');
         $this->view->page_title = $this->sTitle;
@@ -80,7 +83,13 @@ class AccountController extends Controller
     public function yesDelete()
     {
         if (!$this->session->exists('yes_delete')) {
-            Header::redirect(Uri::get('affiliate', 'account', 'delete'));
+            Header::redirect(
+                Uri::get(
+                    'affiliate',
+                    'account',
+                    'delete'
+                )
+            );
         } else {
             $this->output();
         }

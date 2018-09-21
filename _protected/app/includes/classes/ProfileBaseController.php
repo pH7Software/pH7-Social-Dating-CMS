@@ -134,7 +134,12 @@ abstract class ProfileBaseController extends Controller
     protected function getMailLink($sFirstName, stdClass $oUser)
     {
         if ($this->bUserAuth) {
-            $sMailLink = Uri::get('mail', 'main', 'compose', $oUser->username);
+            $sMailLink = Uri::get(
+                'mail',
+                'main',
+                'compose',
+                $oUser->username
+            );
         } else {
             $aUrlParms = [
                 'msg' => t('Register now to message %0%!', $sFirstName),

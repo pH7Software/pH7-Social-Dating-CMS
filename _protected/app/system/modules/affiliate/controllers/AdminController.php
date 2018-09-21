@@ -86,7 +86,10 @@ class AdminController extends Controller
         );
 
         $oPage = new Page;
-        $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, self::PROFILES_PER_PAGE);
+        $this->view->total_pages = $oPage->getTotalPages(
+            $this->iTotalUsers,
+            self::PROFILES_PER_PAGE
+        );
         $this->view->current_page = $oPage->getCurrentPage();
         $oSearch = $this->oAffModel->searchAff(
             $this->httpRequest->get('looking'),
@@ -184,6 +187,7 @@ class AdminController extends Controller
         ];
 
         $this->session->remove($aSessionData);
+
         Header::redirect(
             Uri::get('affiliate', 'admin', 'browse'),
             $this->sMsg
