@@ -17,15 +17,15 @@ class BankForm
 {
     public static function display()
     {
+        $oHttpRequest = new HttpRequest;
+
         if (isset($_POST['submit_bank_account'])) {
             if (\PFBC\Form::isValid($_POST['submit_bank_account'])) {
-                new BankFormProcess(self::getProfileId());
+                new BankFormProcess(self::getProfileId($oHttpRequest));
             }
 
             UrlHeader::redirect();
         }
-
-        $oHttpRequest = new HttpRequest;
 
         $oForm = new \PFBC\Form('form_bank_account');
         $oForm->configure(['action' => '']);
