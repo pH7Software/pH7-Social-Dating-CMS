@@ -25,6 +25,10 @@ trait Api
      */
     public function saveLog($mData, Registry $oRegistry)
     {
-        return file_put_contents($oRegistry->path_module_inc . '_log/' . Ip::get() . '.log', $mData, FILE_APPEND);
+        return file_put_contents(
+            $oRegistry->path_module_inc . '_log/' . Ip::get() . '.log',
+            $mData,
+            FILE_APPEND
+        );
     }
 }
