@@ -29,9 +29,20 @@ class BankFormProcess extends Form
 
         unset($oAffModel, $oAff);
 
-        /* Clean Affiliate UserCoreModel / readProfile Cache */
-        (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'readProfile' . $iProfileId . DbTableName::AFFILIATE, null)->clear();
+        $this->clearCache($iProfileId);
 
         \PFBC\Form::setSuccess('form_bank_account', t('Your bank information has been successfully updated!'));
+    }
+
+    /**
+     * @param int $iProfileId
+     */
+    private function clearCache($iProfileId)
+    {
+        (new Framework\Cache\Cache)->start(
+            UserCoreModel::CACHE_GROUP,
+            'readProfile' . $iProfileId . DbTableName::AFFILIATE,
+            null
+        )->clear();
     }
 }
