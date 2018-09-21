@@ -16,20 +16,21 @@ use PH7\Framework\Security\Validate\Validate;
 
 class EditFormProcess extends Form
 {
-    /** @var int */
-    private $iProfileId;
-
     /** @var bool */
     private $bIsErr = false;
 
-    public function __construct()
+    /**
+     * @param int $iProfileId
+     *
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
+     */
+    public function __construct($iProfileId)
     {
         parent::__construct();
 
         $oAdminModel = new AdminModel;
 
-        $this->iProfileId = $this->getProfileId();
-        $oAdmin = $oAdminModel->readProfile($this->iProfileId, DbTableName::ADMIN);
+        $oAdmin = $oAdminModel->readProfile($iProfileId, DbTableName::ADMIN);
 
         if (!$this->str->equals($this->httpRequest->post('username'), $oAdmin->username)) {
             $iMinUsernameLength = DbConfig::getSetting('minUsernameLength');
@@ -39,10 +40,10 @@ class EditFormProcess extends Form
                 \PFBC\Form::setError('form_admin_edit_account', t('Username has to be from %0% to %1% characters long, or it is not available, or already taken by another admin.', $iMinUsernameLength, $iMaxUsernameLength));
                 $this->bIsErr = true;
             } else {
-                $oAdminModel->updateProfile('username', $this->httpRequest->post('username'), $this->iProfileId, DbTableName::ADMIN);
+                $oAdminModel->updateProfile('username', $this->httpRequest->post('username'), $iProfileId, DbTableName::ADMIN);
                 $this->session->set('admin_username', $this->httpRequest->post('username'));
 
-                $this->clearFieldCache('username');
+                $this->clearFieldCache('username', $iProfileId);
             }
         }
 
@@ -51,37 +52,37 @@ class EditFormProcess extends Form
                 \PFBC\Form::setError('form_admin_edit_account', t('Invalid email or already used by another admin.'));
                 $this->bIsErr = true;
             } else {
-                $oAdminModel->updateProfile('email', $this->httpRequest->post('mail'), $this->iProfileId, DbTableName::ADMIN);
+                $oAdminModel->updateProfile('email', $this->httpRequest->post('mail'), $iProfileId, DbTableName::ADMIN);
                 $this->session->set('admin_email', $this->httpRequest->post('mail'));
             }
         }
 
         if (!$this->str->equals($this->httpRequest->post('first_name'), $oAdmin->firstName)) {
-            $oAdminModel->updateProfile('firstName', $this->httpRequest->post('first_name'), $this->iProfileId, DbTableName::ADMIN);
+            $oAdminModel->updateProfile('firstName', $this->httpRequest->post('first_name'), $iProfileId, DbTableName::ADMIN);
             $this->session->set('admin_first_name', $this->httpRequest->post('first_name'));
 
-            $this->clearFieldCache('firstName');
+            $this->clearFieldCache('firstName', $iProfileId);
         }
 
         if (!$this->str->equals($this->httpRequest->post('last_name'), $oAdmin->lastName)) {
-            $oAdminModel->updateProfile('lastName', $this->httpRequest->post('last_name'), $this->iProfileId, DbTableName::ADMIN);
+            $oAdminModel->updateProfile('lastName', $this->httpRequest->post('last_name'), $iProfileId, DbTableName::ADMIN);
         }
 
         if (!$this->str->equals($this->httpRequest->post('sex'), $oAdmin->sex)) {
-            $oAdminModel->updateProfile('sex', $this->httpRequest->post('sex'), $this->iProfileId, DbTableName::ADMIN);
+            $oAdminModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId, DbTableName::ADMIN);
 
-            $this->clearFieldCache('sex');
+            $this->clearFieldCache('sex', $iProfileId);
         }
 
         if (!$this->str->equals($this->httpRequest->post('time_zone'), $oAdmin->timeZone)) {
-            $oAdminModel->updateProfile('timeZone', $this->httpRequest->post('time_zone'), $this->iProfileId, DbTableName::ADMIN);
+            $oAdminModel->updateProfile('timeZone', $this->httpRequest->post('time_zone'), $iProfileId, DbTableName::ADMIN);
         }
 
-        $oAdminModel->setLastEdit($this->iProfileId, DbTableName::ADMIN);
+        $oAdminModel->setLastEdit($iProfileId, DbTableName::ADMIN);
 
         unset($oAdminModel, $oAdmin);
 
-        (new Admin)->clearReadProfileCache($this->iProfileId, DbTableName::ADMIN);
+        (new Admin)->clearReadProfileCache($iProfileId, DbTableName::ADMIN);
 
         if (!$this->bIsErr) {
             \PFBC\Form::setSuccess('form_admin_edit_account', t('Profile successfully updated!'));
@@ -89,34 +90,16 @@ class EditFormProcess extends Form
     }
 
     /**
-     * @return string
-     */
-    private function getProfileId()
-    {
-        if ($this->isNotRootAdmin()) { // Prohibit other admins to edit Root Admin (ID 1)
-            return $this->httpRequest->get('profile_id', 'int');
-        }
-
-        return $this->session->get('admin_id');
-    }
-
-    /**
-     * @return bool
-     */
-    private function isNotRootAdmin()
-    {
-        return $this->httpRequest->getExists('profile_id') &&
-            !AdminCore::isRootProfileId($this->httpRequest->get('profile_id', 'int'));
-    }
-
-    /**
      * @param string $sCacheId
+     * @param int $iProfileId
+     *
+     * @return void
      */
-    private function clearFieldCache($sCacheId)
+    private function clearFieldCache($sCacheId, $iProfileId)
     {
         (new Cache)->start(
             UserCoreModel::CACHE_GROUP,
-            $sCacheId . $this->iProfileId . DbTableName::ADMIN,
+            $sCacheId . $iProfileId . DbTableName::ADMIN,
             null
         )->clear();
     }

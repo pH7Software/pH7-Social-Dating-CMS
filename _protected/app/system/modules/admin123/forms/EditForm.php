@@ -8,7 +8,7 @@
 
 namespace PH7;
 
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Url\Header;
@@ -17,17 +17,16 @@ class EditForm
 {
     public static function display()
     {
+        $oHttpRequest = new HttpRequest;
+        $iProfileId = self::getProfileId($oHttpRequest);
+
         if (isset($_POST['submit_admin_edit_account'])) {
             if (\PFBC\Form::isValid($_POST['submit_admin_edit_account'])) {
-                new EditFormProcess;
+                new EditFormProcess($iProfileId);
             }
 
             Header::redirect();
         }
-
-        $oHR = new Http;
-        // Prohibit other admins to edit the Root Administrator (ID 1)
-        $iProfileId = ($oHR->getExists('profile_id') && !AdminCore::isRootProfileId($oHR->get('profile_id', 'int'))) ? $oHR->get('profile_id', 'int') : (new Session)->get('admin_id');
 
         $oAdmin = (new AdminModel)->readProfile($iProfileId, DbTableName::ADMIN);
 
@@ -36,12 +35,11 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_admin_edit_account', 'form_admin_edit_account'));
         $oForm->addElement(new \PFBC\Element\Token('edit_account'));
 
-        if ($oHR->getExists('profile_id') && !AdminCore::isRootProfileId($oHR->get('profile_id', 'int'))) {
+        if (self::isNotRootAdmin($oHttpRequest)) {
             $oForm->addElement(
                 new \PFBC\Element\HTMLExternal('<p class="center"><a class="bold btn btn-default btn-md" href="' . Uri::get(PH7_ADMIN_MOD, 'admin', 'browse') . '">' . t('Back to Browse Admins') . '</a></p>')
             );
         }
-        unset($oHR);
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Login Username:'), 'username', ['value' => $oAdmin->username, 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\Email(t('Login Email:'), 'mail', ['value' => $oAdmin->email, 'required' => 1]));
@@ -51,5 +49,30 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Timezone('Time Zone:', 'time_zone', ['value' => $oAdmin->timeZone, 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'check']));
         $oForm->render();
+    }
+
+    /**
+     * @param HttpRequest $oHttpRequest
+     *
+     * @return int
+     */
+    private static function getProfileId(HttpRequest $oHttpRequest)
+    {
+        if (self::isNotRootAdmin($oHttpRequest)) { // Prohibit other admins to edit Root Admin (ID 1)
+            return $oHttpRequest->get('profile_id', 'int');
+        }
+
+        return (new Session)->get('admin_id');
+    }
+
+    /**
+     * @param HttpRequest $oHttpRequest
+     *
+     * @return bool
+     */
+    private static function isNotRootAdmin(HttpRequest $oHttpRequest)
+    {
+        return $oHttpRequest->getExists('profile_id') &&
+            !AdminCore::isRootProfileId($oHttpRequest->get('profile_id', 'int'));
     }
 }
