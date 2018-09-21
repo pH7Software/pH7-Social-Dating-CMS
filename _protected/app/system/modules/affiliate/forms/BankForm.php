@@ -39,17 +39,14 @@ class BankForm
                 )
             );
         }
-
         $oForm->addElement(
             new \PFBC\Element\HTMLExternal(
                 '<h2 class="underline">' . t('Bank Information:') . '</h2>'
             )
         );
-
-        $sHtmlPayPalIcon = '<a href="https://www.paypal.com" rel="noopener" target="_blank"><img src="' . PH7_URL_STATIC . PH7_IMG . 'icon/paypal-small.svg" alt="PayPal" title="PayPal"></a><br />';
         $oForm->addElement(
             new \PFBC\Element\Email(
-                $sHtmlPayPalIcon . t('Your Bank Account:'),
+                AffiliateDesign::getPayPalIcon() . t('Your Bank Account:'),
                 'bank_account',
                 [
                     'id' => 'email_paypal',
