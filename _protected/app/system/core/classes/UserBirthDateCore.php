@@ -24,14 +24,14 @@ class UserBirthDateCore
     {
         $aAge = explode(self::BIRTHDATE_DELIMITER, $sBirthDate);
 
-        if (self::isBirthDateInvalid($aAge)) {
+        if (self::isInvalidBirthDate($aAge)) {
             return self::DEFAULT_AGE;
         }
 
         return (new YearMeasure($aAge[0], $aAge[1], $aAge[2]))->get();
     }
 
-    private static function isBirthDateInvalid(array $aAge)
+    private static function isInvalidBirthDate(array $aAge)
     {
         return count($aAge) < 3;
     }
