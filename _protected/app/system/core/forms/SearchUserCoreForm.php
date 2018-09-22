@@ -11,7 +11,6 @@
 namespace PH7;
 
 use PH7\Framework\Geo\Ip\Geo;
-use PH7\Framework\Math\Measure\Year;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
@@ -130,8 +129,8 @@ class SearchUserCoreForm
 
         if (UserCore::auth()) {
             $sBirthDate = $oUserModel->getBirthDate($oSession->get('member_id'));
-            $aAge = explode('-', $sBirthDate);
-            $iAge = (new Year($aAge[0], $aAge[1], $aAge[2]))->get();
+            $iAge = UserBirthDateCore::getAgeFromBirthDate($sBirthDate);
+
             $iMinAge = ($iAge - 5 < $iMinAge) ? $iMinAge : $iAge - 5;
             $iMaxAge = ($iAge + 5 > $iMaxAge) ? $iMaxAge : $iAge + 5;
         }

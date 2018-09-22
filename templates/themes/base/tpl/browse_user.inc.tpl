@@ -13,7 +13,7 @@
             {{ $country_name = t($user->country) }}
 
             {* Members Age *}
-            {{ $aAge = explode('-', $user->birthDate); $age = (new Framework\Math\Measure\Year($aAge[0], $aAge[1], $aAge[2]))->get() }}
+            {{ $age = UserBirthDateCore::getAgeFromBirthDate($user->birthDate) }}
 
             <div class="thumb_photo">
                 {{ UserDesignCoreModel::userStatus($user->profileId) }}

@@ -240,10 +240,6 @@ abstract class ProfileBaseController extends Controller
         $sState = !empty($oFields->state) ? $this->str->escape($this->str->upperFirst($oFields->state), true) : '';
         $sDescription = !empty($oFields->description) ? Emoticon::init(Ban::filterWord($oFields->description)) : '';
 
-
-        $aAge = explode('-', $oUser->birthDate);
-        $iAge = (new Year($aAge[0], $aAge[1], $aAge[2]))->get();
-
         return [
             'first_name' => $sFirstName,
             'last_name' => $sLastName,
@@ -252,7 +248,7 @@ abstract class ProfileBaseController extends Controller
             'city' => $sCity,
             'state' => $sState,
             'description' => $sDescription,
-            'age' => $iAge
+            'age' => UserBirthDateCore::getAgeFromBirthDate($oUser->birthDate)
         ];
     }
 
