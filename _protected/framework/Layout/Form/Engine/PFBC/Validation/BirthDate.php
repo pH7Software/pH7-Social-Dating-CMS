@@ -10,6 +10,8 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class BirthDate extends \PFBC\Validation
 {
+    const DATE_PATTERN = 'm/d/Y';
+
     /** @var int */
     protected $iMin;
 
@@ -36,7 +38,7 @@ class BirthDate extends \PFBC\Validation
             return true;
         }
 
-        $sDate = (new CDateTime)->get($sDate)->date('m/d/Y');
+        $sDate = (new CDateTime)->get($sDate)->date(self::DATE_PATTERN);
 
         return $this->oValidate->birthDate($sDate, $this->iMin, $this->iMax);
     }
