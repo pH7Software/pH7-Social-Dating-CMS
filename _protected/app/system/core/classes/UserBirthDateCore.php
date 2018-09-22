@@ -14,6 +14,7 @@ class UserBirthDateCore
 {
     const DEFAULT_AGE = 30;
     const BIRTHDATE_DELIMITER = '-';
+    const NUMBER_ARRAY_ELEMENTS = 3;
 
     /**
      * @param string $sBirthDate YYYY-MM-DD format.
@@ -33,6 +34,6 @@ class UserBirthDateCore
 
     private static function isInvalidBirthDate(array $aAge)
     {
-        return count($aAge) < 3;
+        return count($aAge) < self::NUMBER_ARRAY_ELEMENTS;
     }
 }
