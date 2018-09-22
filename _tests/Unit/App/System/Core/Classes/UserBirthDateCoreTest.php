@@ -15,10 +15,27 @@ use PHPUnit_Framework_TestCase;
 
 class UserBirthDateCoreTest extends PHPUnit_Framework_TestCase
 {
-    public function testInvalidAgeFromBirthDate()
+    /**
+     * @param string $sBirthDate
+     *
+     * @dataProvider invalidBirthDateProvider
+     */
+    public function testInvalidAgeFromBirthDate($sBirthDate)
     {
-        $iAge = UserBirthDateCore::getAgeFromBirthDate('01902');
+        $iAge = UserBirthDateCore::getAgeFromBirthDate($sBirthDate);
 
         $this->assertSame($iAge, UserBirthDateCore::DEFAULT_AGE);
+    }
+
+    /**
+     * @return array
+     */
+    public function invalidBirthDateProvider()
+    {
+        return [
+            ['01902'],
+            ['01-20-2919-29'],
+            [null]
+        ];
     }
 }

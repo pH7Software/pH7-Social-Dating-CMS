@@ -34,6 +34,9 @@ class UserBirthDateCore
 
     private static function isInvalidBirthDate(array $aAge)
     {
-        return count($aAge) < self::NUMBER_ARRAY_ELEMENTS;
+        $iAgeElements = count($aAge);
+
+        return count($aAge) < self::NUMBER_ARRAY_ELEMENTS ||
+            $iAgeElements > self::NUMBER_ARRAY_ELEMENTS;
     }
 }
