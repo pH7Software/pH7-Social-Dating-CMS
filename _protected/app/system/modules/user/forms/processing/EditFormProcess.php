@@ -15,12 +15,16 @@ use PH7\Framework\Mvc\Request\Http;
 
 class EditFormProcess extends Form
 {
-    public function __construct()
+    /**
+     * @param int $iProfileId
+     *
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
+     */
+    public function __construct($iProfileId)
     {
         parent::__construct();
 
         $oUserModel = new UserModel;
-        $iProfileId = $this->getProfileId();
         $oUser = $oUserModel->readProfile($iProfileId);
 
         // For Admins only!
