@@ -12,6 +12,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Mvc\Request\Http;
+use stdClass;
 
 class EditFormProcess extends Form
 {
@@ -27,17 +28,8 @@ class EditFormProcess extends Form
         $oUserModel = new UserModel;
         $oUser = $oUserModel->readProfile($iProfileId);
 
-        // For Admins only!
         if ($this->isOnlyAdminLoggedAndUserIdExists()) {
-            if (!$this->str->equals($this->httpRequest->post('group_id'), $oUser->groupId)) {
-                $oUserModel->updateMembership(
-                    $this->httpRequest->post('group_id'),
-                    $iProfileId,
-                    $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
-                );
-
-                $this->clearFieldCache('membershipDetails', $iProfileId);
-            }
+            $this->updateUserMembership($iProfileId, $oUser, $oUserModel);
         }
 
         if (!$this->str->equals($this->httpRequest->post('first_name'), $oUser->firstName)) {
@@ -68,7 +60,7 @@ class EditFormProcess extends Form
             $oUserModel->updateProfile('birthDate', $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $iProfileId);
         }
 
-        // Update dynamic fields.
+        // Update dynamic fields
         $oFields = $oUserModel->getInfoFields($iProfileId);
         foreach ($oFields as $sColumn => $sValue) {
             $sHRParam = ($sColumn == 'description') ? Http::ONLY_XSS_CLEAN : null;
@@ -95,6 +87,36 @@ class EditFormProcess extends Form
     }
 
     /**
+     * Allow admins to update user's membership.
+     *
+     * @param int $iProfileId
+     * @param stdClass $oUser
+     * @param UserModel $oUserModel
+     *
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
+     */
+    private function updateUserMembership($iProfileId, stdClass $oUser, UserModel $oUserModel)
+    {
+        if (!$this->str->equals($this->httpRequest->post('group_id'), $oUser->groupId)) {
+            $oUserModel->updateMembership(
+                $this->httpRequest->post('group_id'),
+                $iProfileId,
+                $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
+            );
+
+            $this->clearFieldCache('membershipDetails', $iProfileId);
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    private function isOnlyAdminLoggedAndUserIdExists()
+    {
+        return AdminCore::auth() && !User::auth() && $this->httpRequest->getExists('profile_id');
+    }
+
+    /**
      * @param string $sCacheId
      * @param int $iProfileId
      *
@@ -107,13 +129,5 @@ class EditFormProcess extends Form
             $sCacheId . $iProfileId . DbTableName::MEMBER,
             null
         )->clear();
-    }
-
-    /**
-     * @return bool
-     */
-    private function isOnlyAdminLoggedAndUserIdExists()
-    {
-        return AdminCore::auth() && !User::auth() && $this->httpRequest->getExists('profile_id');
     }
 }
