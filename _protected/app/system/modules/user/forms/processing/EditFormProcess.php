@@ -36,7 +36,7 @@ class EditFormProcess extends Form
                     $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
                 );
 
-                (new Cache)->start(UserCoreModel::CACHE_GROUP, 'membershipDetails' . $iProfileId, null)->clear();
+                $this->clearFieldCache('membershipDetails', $iProfileId);
             }
         }
 
@@ -44,7 +44,7 @@ class EditFormProcess extends Form
             $oUserModel->updateProfile('firstName', $this->httpRequest->post('first_name'), $iProfileId);
             $this->session->set('member_first_name', $this->httpRequest->post('first_name'));
 
-            (new Cache)->start(UserCoreModel::CACHE_GROUP, 'firstName' . $iProfileId . DbTableName::MEMBER, null)->clear();
+            $this->clearFieldCache('firstName', $iProfileId);
         }
 
         if (!$this->str->equals($this->httpRequest->post('last_name'), $oUser->lastName)) {
@@ -55,7 +55,7 @@ class EditFormProcess extends Form
             $oUserModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId);
             $this->session->set('member_sex', $this->httpRequest->post('sex'));
 
-            (new Cache)->start(UserCoreModel::CACHE_GROUP, 'sex' . $iProfileId . DbTableName::MEMBER, null)->clear();
+            $this->clearFieldCacheField('sex', $iProfileId);
         }
 
         // WARNING: Be careful, you should use the Http::NO_CLEAN constant, otherwise Http::post() method removes the special tags
@@ -92,6 +92,21 @@ class EditFormProcess extends Form
             'form_user_edit_account',
             t('The profile has been successfully updated')
         );
+    }
+
+    /**
+     * @param string $sCacheId
+     * @param int $iProfileId
+     *
+     * @return void
+     */
+    private function clearFieldCache($sCacheId, $iProfileId)
+    {
+        (new Cache)->start(
+            UserCoreModel::CACHE_GROUP,
+            $sCacheId . $iProfileId . DbTableName::MEMBER,
+            null
+        )->clear();
     }
 
     /**
