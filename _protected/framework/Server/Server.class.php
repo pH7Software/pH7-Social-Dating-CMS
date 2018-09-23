@@ -175,4 +175,12 @@ final class Server
     {
         return is_internet();
     }
+
+    /**
+     * @return bool
+     */
+    public static function isHttps()
+    {
+        return substr(PH7_URL_PROT, 0, 5) === 'https';
+    }
 }

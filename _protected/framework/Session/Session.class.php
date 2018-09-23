@@ -155,7 +155,7 @@ class Session
                 $iTime,
                 Config::getInstance()->values['session']['path'],
                 Config::getInstance()->values['session']['domain'],
-                (substr(PH7_URL_PROT, 0, 5) === 'https'),
+                Server::isHttps(),
                 true
             );
         }
