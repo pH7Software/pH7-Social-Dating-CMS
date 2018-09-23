@@ -108,7 +108,11 @@ class Cookie
             $_COOKIE[$sCookieName] = array();
 
             // We ask the browser to delete the cookie
-            setcookie($sCookieName, 0, 0);
+            if (!Server::isLocalHost()) {
+                setcookie($sCookieName, 0, 0, Config::getInstance()->values['cookie']['path'], Config::getInstance()->values['cookie']['domain'], Server::isHttps(), true);
+            } else {
+                setcookie($sCookieName, 0, 0, PH7_SH);
+            }
 
             // then, we delete the cookie value locally to avoid using it by mistake in following our script
             unset($_COOKIE[$sCookieName]);
