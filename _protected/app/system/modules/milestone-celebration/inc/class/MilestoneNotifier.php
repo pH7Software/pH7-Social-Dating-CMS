@@ -44,7 +44,7 @@ class MilestoneNotifier
         $sAdminEmail = DbConfig::getSetting('adminEmail');
 
         $this->oView->greeting = t('Hi there! 😊');
-        $this->oView->content = t('Something AMAZING amd AWESOME just happened to your website!!!') . '<br />';
+        $this->oView->content = t('Something AMAZING and AWESOME just happened to your website!!!') . '<br />';
         $this->oView->content .= t('Indeed, your website reached the %0% users!!! Congratulations! 😍', $iTotalUsers);
         $this->oView->become_patron = $this->getPatreonParagraph();
 
