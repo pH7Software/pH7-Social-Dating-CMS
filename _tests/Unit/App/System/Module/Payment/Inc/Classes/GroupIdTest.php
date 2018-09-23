@@ -8,7 +8,6 @@
 
 namespace PH7\Test\Unit\App\System\Module\Payment\Inc\Classes;
 
-require_once PH7_PATH_SYS . 'core/models/UserCoreModel.php';
 require_once PH7_PATH_SYS_MOD . 'payment/inc/class/GroupId.php';
 
 use PH7\GroupId;
