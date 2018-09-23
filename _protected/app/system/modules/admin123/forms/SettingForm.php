@@ -193,7 +193,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('IP Restriction for Admin Panel Access:'), 'ip_login', ['description' => t('By entering <a href="%0%" title="Get your current IP address">your IP</a>, you will get a higher security and exclude all other people and bots that tried to login with another IP address even if the login is correct! Leave blank to disable this feature. Be careful, for using this feature you need to have a static IP (not a dynamic one). If you are not sure, please contact your ISP.', Ip::api()), 'value' => DbConfig::getSetting('ipLogin')]));
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Indicate a word that will replace the banned word in the <a href="%0%">list</a>.', Uri::get(PH7_ADMIN_MOD, 'file', 'protectededit', 'app/configs/bans/word.txt', false)), 'ban_word_replace', ['value' => DbConfig::getSetting('banWordReplace'), 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Indicate a word that will replace the banned word in <a href="%0%">the list</a>.', Uri::get(PH7_ADMIN_MOD, 'file', 'protectededit', 'app/configs/bans/word.txt', false)), 'ban_word_replace', ['value' => DbConfig::getSetting('banWordReplace'), 'required' => 1]));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Enable/Disable CSRF security tokens in forms:'), 'security_token_forms', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('Sometimes this protection can be annoying for users if there are not fast enough to fulfill the forms. However, if disabled, your website can be vulnerable on CSRF attacks in forms.'), 'value' => DbConfig::getSetting('securityToken'), 'required' => 1]));
 
