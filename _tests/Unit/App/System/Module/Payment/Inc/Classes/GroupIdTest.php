@@ -22,28 +22,40 @@ class GroupIdTest extends PHPUnit_Framework_TestCase
 
     public function testUndeletableWithVisitorGroup()
     {
-        $bResult = GroupId::undeletable(self::VISITOR_GROUP, self::DEFAULT_MEMBERSHIP_ID);
+        $bResult = GroupId::undeletable(
+            self::VISITOR_GROUP,
+            self::DEFAULT_MEMBERSHIP_ID
+        );
 
         $this->assertTrue($bResult);
     }
 
     public function testUndeletableWithPendingGroup()
     {
-        $bResult = GroupId::undeletable(self::PENDING_GROUP, self::DEFAULT_MEMBERSHIP_ID);
+        $bResult = GroupId::undeletable(
+            self::PENDING_GROUP,
+            self::DEFAULT_MEMBERSHIP_ID
+        );
 
         $this->assertTrue($bResult);
     }
 
     public function testUndeletableWithDefaultGroup()
     {
-        $bResult = GroupId::undeletable(self::DEFAULT_MEMBERSHIP_ID, self::DEFAULT_MEMBERSHIP_ID);
+        $bResult = GroupId::undeletable(
+            self::DEFAULT_MEMBERSHIP_ID,
+            self::DEFAULT_MEMBERSHIP_ID
+        );
 
         $this->assertTrue($bResult);
     }
 
     public function testUndeletableWithCustomGroup()
     {
-        $bResult = GroupId::undeletable(self::CUSTOM_GROUP, self::DEFAULT_MEMBERSHIP_ID);
+        $bResult = GroupId::undeletable(
+            self::CUSTOM_GROUP,
+            self::DEFAULT_MEMBERSHIP_ID
+        );
 
         $this->assertFalse($bResult);
     }
