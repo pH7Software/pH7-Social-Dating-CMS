@@ -42,9 +42,22 @@ class Cookie
 
             /* Check if we are not in localhost mode, otherwise may not work. */
             if (!Server::isLocalHost()) {
-                setcookie($sCookieName, $sValue, $iTime, Config::getInstance()->values['cookie']['path'], Config::getInstance()->values['cookie']['domain'], $bSecure, true);
+                setcookie(
+                    $sCookieName,
+                    $sValue,
+                    $iTime,
+                    Config::getInstance()->values['cookie']['path'],
+                    Config::getInstance()->values['cookie']['domain'],
+                    $bSecure,
+                    true
+                );
             } else {
-                setcookie($sCookieName, $sValue, $iTime, PH7_SH);
+                setcookie(
+                    $sCookieName,
+                    $sValue,
+                    $iTime,
+                    PH7_SH
+                );
             }
         }
     }
@@ -109,7 +122,15 @@ class Cookie
 
             // We ask the browser to delete the cookie
             if (!Server::isLocalHost()) {
-                setcookie($sCookieName, 0, 0, Config::getInstance()->values['cookie']['path'], Config::getInstance()->values['cookie']['domain'], Server::isHttps(), true);
+                setcookie(
+                    $sCookieName,
+                    0,
+                    0,
+                    Config::getInstance()->values['cookie']['path'],
+                    Config::getInstance()->values['cookie']['domain'],
+                    Server::isHttps(),
+                    true
+                );
             } else {
                 setcookie($sCookieName, 0, 0, PH7_SH);
             }
