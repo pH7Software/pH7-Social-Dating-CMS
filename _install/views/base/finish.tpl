@@ -26,4 +26,7 @@
     </p>
 </form>
 
+<!-- Add "completion" sound -->
+<audio style="display:none" autoplay="autoplay" src="{$smarty.const.PH7_URL_ROOT}static/sound/welcome.mp3"></audio>
+
 {include file="inc/footer.tpl"}
