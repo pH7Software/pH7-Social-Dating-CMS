@@ -30,7 +30,15 @@ if (AdminCore::auth() || UserCore::auth() || AffiliateCore::auth()) {
         $sAct = $oHttpRequest->get('act');
         $mId = $oHttpRequest->get('id');
 
-        ConfirmCoreForm::display(['label' => Url::decode($sLabel), 'module' => $sMod, 'controller' => $sCtrl, 'action' => $sAct, 'id' => $mId]);
+        ConfirmCoreForm::display(
+            [
+                'label' => Url::decode($sLabel),
+                'module' => $sMod,
+                'controller' => $sCtrl,
+                'action' => $sAct,
+                'id' => $mId
+            ]
+        );
     } else {
         echo '<p>' . t('Wrong parameters in the URL!') . '</p>';
     }
