@@ -25,7 +25,7 @@ class BirthdayCoreCron extends Cron
         $this->send();
     }
 
-    protected function send()
+    private function send()
     {
         $this->iNum = (new BirthdayCore)->sendMails();
 

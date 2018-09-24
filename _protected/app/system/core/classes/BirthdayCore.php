@@ -56,7 +56,7 @@ class BirthdayCore extends Core
      *
      * @throws \PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
-    protected function sendMail(stdClass $oUser, Mail $oMail)
+    private function sendMail(stdClass $oUser, Mail $oMail)
     {
         $this->view->content = t('Hi %0%!', $oUser->firstName) . '<br />' .
             t("The %site_name%'s team wish you a very happy birthday!") . '<br />' .

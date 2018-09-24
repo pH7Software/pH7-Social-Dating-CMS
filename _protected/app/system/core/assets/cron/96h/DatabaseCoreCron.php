@@ -70,7 +70,7 @@ class DatabaseCoreCron extends Cron
         echo t('The Jobs Cron is working to complete successfully!');
     }
 
-    protected function stat()
+    private function stat()
     {
         Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::MEMBER) . 'SET views=0');
         Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::MEMBER) . 'SET votes=0');
@@ -114,28 +114,28 @@ class DatabaseCoreCron extends Cron
         echo t('Restart Statistics... OK!') . '<br />';
     }
 
-    protected function backup()
+    private function backup()
     {
         (new Backup(PH7_PATH_BACKUP_SQL . 'Periodic-database-update.' . (new CDateTime)->get()->date() . '.sql.gz'))->back()->saveArchive();
 
         echo t('Backup of the Database... Ok!') . '<br />';
     }
 
-    protected function optimize()
+    private function optimize()
     {
         Db::optimize();
 
         echo t('Optimizing tables... OK!') . '<br />';
     }
 
-    protected function repair()
+    private function repair()
     {
         Db::repair();
 
         echo t('Repair Database... Ok!') . '<br />';
     }
 
-    protected function removeDeletedMsg()
+    private function removeDeletedMsg()
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::MESSAGE) . 'WHERE FIND_IN_SET(\'sender\', toDelete) AND FIND_IN_SET(\'recipient\', toDelete)');
 
@@ -144,7 +144,7 @@ class DatabaseCoreCron extends Cron
         }
     }
 
-    protected function removeLog()
+    private function removeLog()
     {
         Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::ADMIN_ATTEMPT_LOGIN));
         Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::MEMBER_ATTEMPT_LOGIN));
@@ -168,7 +168,7 @@ class DatabaseCoreCron extends Cron
      *
      * @return void
      */
-    protected function cleanData()
+    private function cleanData()
     {
         $iCleanComment = (int)DbConfig::getSetting('cleanComment');
         $iCleanMsg = (int)DbConfig::getSetting('cleanMsg');
@@ -206,7 +206,7 @@ class DatabaseCoreCron extends Cron
      *
      * @return int Returns the number of rows.
      */
-    protected function pruningDb($iOlderThanXDay, $sTable, $sDateColumn)
+    private function pruningDb($iOlderThanXDay, $sTable, $sDateColumn)
     {
         if ($this->isTableInvalid($sTable)) {
             DbVarious::launchErr($sTable);

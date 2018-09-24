@@ -31,7 +31,7 @@ class GeneralCoreCron extends Cron
      *
      * @return void
      */
-    protected function chmod()
+    private function chmod()
     {
         /** Check and correct the file permissions if necessary **/
         $this->file->chmod(PH7_PATH_ROOT . '_constants.php', 0644);

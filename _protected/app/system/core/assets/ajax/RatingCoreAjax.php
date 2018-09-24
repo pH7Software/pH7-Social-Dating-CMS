@@ -87,7 +87,7 @@ class RatingCoreAjax
      *
      * @return void
      */
-    protected function initialize()
+    private function initialize()
     {
         $this->oRatingModel = new RatingCoreModel;
         $this->sTable = $this->oHttpRequest->post('table');
@@ -129,7 +129,7 @@ class RatingCoreAjax
      *
      * @return void
      */
-    protected function select()
+    private function select()
     {
         $iVotes = $this->oRatingModel->getVote($this->iId, $this->sTable);
         $fRate = $this->oRatingModel->getScore($this->iId, $this->sTable);
@@ -145,7 +145,7 @@ class RatingCoreAjax
      *
      * @return void
      */
-    protected function update()
+    private function update()
     {
         $this->oRatingModel->updateVotes($this->iId, $this->sTable);
         $this->oRatingModel->updateScore($this->fScore, $this->iId, $this->sTable);
