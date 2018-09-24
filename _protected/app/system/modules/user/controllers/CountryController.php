@@ -29,7 +29,10 @@ class CountryController extends Controller
     public function index()
     {
         // Add Stylesheet tooltip
-        $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'tooltip.css');
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS,
+            'tooltip.css'
+        );
 
         if ($this->httpRequest->getExists('country')) {
             // Get the country and city, limited to 50 characters and remove dashes automatically added from the URL
@@ -47,7 +50,14 @@ class CountryController extends Controller
 
             // Pagination
             $oPage = new Page;
-            $iTotalUsers = (new UserCoreModel)->getGeoProfiles($sCountryCode, $this->registry->city, true, null, null, null);
+            $iTotalUsers = (new UserCoreModel)->getGeoProfiles(
+                $sCountryCode,
+                $this->registry->city,
+                true,
+                null,
+                null,
+                null
+            );
             $this->view->total_pages = $oPage->getTotalPages($iTotalUsers, self::MAX_PROFILE_PER_PAGE);
             $this->view->current_page = $oPage->getCurrentPage();
             $this->view->first_user = $oPage->getFirstItem();
