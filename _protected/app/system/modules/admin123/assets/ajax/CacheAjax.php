@@ -36,18 +36,22 @@ class CacheAjax extends Kernel
         switch ($this->httpRequest->post('type')) {
             case 'general':
                 $this->file->deleteDir(PH7_PATH_CACHE . Cache::CACHE_DIR);
+                $this->clearBrowserCache();
                 break;
 
             case 'tpl_compile':
                 $this->file->deleteDir(PH7_PATH_CACHE . PH7Tpl::COMPILE_DIR);
+                $this->clearBrowserCache();
                 break;
 
             case 'tpl_html':
                 $this->file->deleteDir(PH7_PATH_CACHE . PH7Tpl::CACHE_DIR);
+                $this->clearBrowserCache();
                 break;
 
             case 'static':
                 $this->file->deleteDir(PH7_PATH_CACHE . Gzip::CACHE_DIR);
+                $this->clearBrowserCache();
                 break;
 
             default:
@@ -56,6 +60,16 @@ class CacheAjax extends Kernel
         }
 
         echo jsonMsg(1, t('The cache has been deleted!'));
+    }
+
+    /**
+     * Clear the Web browser's cache.
+     *
+     * @return void
+     */
+    private function clearBrowserCache()
+    {
+        $this->browser->noCache();
     }
 }
 
