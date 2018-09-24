@@ -814,7 +814,7 @@ class Api
 
         // init() function
         $this->content .= "\t" . 'function initialize' . $this->googleMapId . '() {' . "\n";
-        $this->content .= "\t" . 'var defLatLng = new google.maps.LatLng(40.730610,-73.935242);' . "\n";
+        $this->content .= "\t" . 'var defLatLng = new google.maps.LatLng(40.785091,-73.968285);' . "\n";
         $this->content .= "\t" . 'var defOptions = {' . "\n";
         $this->content .= "\t\t" . 'zoom: ' . $this->zoom . ',' . "\n";
         $this->content .= "\t\t" . 'center: defLatLng,' . "\n";
