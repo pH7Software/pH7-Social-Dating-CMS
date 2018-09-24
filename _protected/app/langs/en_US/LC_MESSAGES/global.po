@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pH7CMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-24 00:44+1200\n"
-"PO-Revision-Date: 2018-09-24 00:44+1200\n"
+"POT-Creation-Date: 2018-09-24 22:14+1200\n"
+"PO-Revision-Date: 2018-09-24 22:15+1200\n"
 "Last-Translator: Pierre-Henry Soria <hi@ph7.me>\n"
 "Language-Team: ¡pH7! - Pierre-Henry Soria <hello@ph7cms.com>\n"
 "Language: en_US\n"
@@ -1709,7 +1709,7 @@ msgstr ""
 msgid "Cannot remove the banner. Please try later."
 msgstr ""
 
-#: _protected/app/system/modules/admin123/assets/ajax/CacheAjax.php:58
+#: _protected/app/system/modules/admin123/assets/ajax/CacheAjax.php:62
 msgid "The cache has been deleted!"
 msgstr ""
 
@@ -3692,23 +3692,23 @@ msgstr ""
 msgid "The JS code has been successfully updated!"
 msgstr ""
 
-#: _protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:152
+#: _protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:151
 msgid "Configurations successfully updated!"
 msgstr ""
 
-#: _protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:167
+#: _protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:166
 msgid "The token lifetime cannot be below %0% seconds."
 msgstr ""
 
-#: _protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:178
+#: _protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:177
 msgid "The minimum length of the username cannot exceed %0% characters."
 msgstr ""
 
-#: _protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:187
+#: _protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:186
 msgid "The maximum length of the username cannot exceed %0% characters."
 msgstr ""
 
-#: _protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:196
+#: _protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:195
 msgid "You cannot specify a minimum age higher than the maximum age."
 msgstr ""
 
@@ -9980,6 +9980,10 @@ msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/user-dashboard_4fa7a211b543fff185f114c0462e4609/base/main/index.cpl.php:19
 msgid "The Latest News"
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/user_1e41a325ff56b8a65f2bf92e114bb789/base/birthday/index.cpl.php:19
+msgid "No users who have a birthday today. Come back tomorrow 😉"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/user_1e41a325ff56b8a65f2bf92e114bb789/base/main/index.guest.inc.cpl.php:19
