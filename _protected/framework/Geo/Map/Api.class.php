@@ -721,7 +721,7 @@ class Api
         $this->content .= "\t\t\t\t" . 'if (status == google.maps.GeocoderStatus.OK) {' . "\n";
         $this->content .= "\t\t\t\t" . 'map' . $this->googleMapId . '.setCenter(results[0].geometry.location);' . "\n";
         $this->content .= "\t\t\t\t" . '} else {' . "\n";
-        $this->content .= "\t\t\t\t" . 'console.error("' . t('Oops! Geo Map was not successful for the following reason:') . '" + status);' . "\n";
+        $this->content .= "\t\t\t\t" . 'console.error("' . t('Oops! Google Maps was not successful for the following reason:') . '" + status);' . "\n";
         $this->content .= "\t\t\t\t" . '}' . "\n";
         $this->content .= "\t\t\t" . '});' . "\n";
         $this->content .= "\t\t" . '}' . "\n";

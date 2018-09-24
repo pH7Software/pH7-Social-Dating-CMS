@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pH7CMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-24 22:14+1200\n"
-"PO-Revision-Date: 2018-09-24 22:15+1200\n"
+"POT-Creation-Date: 2018-09-24 22:39+1200\n"
+"PO-Revision-Date: 2018-09-24 22:39+1200\n"
 "Last-Translator: Pierre-Henry Soria <hi@ph7.me>\n"
 "Language-Team: ¡pH7! - Pierre-Henry Soria <hello@ph7cms.com>\n"
 "Language: en_US\n"
@@ -10249,7 +10249,7 @@ msgid ""
 msgstr ""
 
 #: _protected/framework/Geo/Map/Api.class.php:724
-msgid "Oops! Geo Map was not successful for the following reason:"
+msgid "Oops! Google Maps was not successful for the following reason:"
 msgstr ""
 
 #: _protected/framework/Http/Http.class.php:200
