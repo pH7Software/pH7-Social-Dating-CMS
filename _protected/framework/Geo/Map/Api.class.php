@@ -814,15 +814,15 @@ class Api
 
         // init() function
         $this->content .= "\t" . 'function initialize' . $this->googleMapId . '() {' . "\n";
-        $this->content .= "\t" . 'var myLatlng = new google.maps.LatLng(48.8792,2.34778);' . "\n";
-        $this->content .= "\t" . 'var myOptions = {' . "\n";
+        $this->content .= "\t" . 'var defLatLng = new google.maps.LatLng(40.730610,-73.935242);' . "\n";
+        $this->content .= "\t" . 'var defOptions = {' . "\n";
         $this->content .= "\t\t" . 'zoom: ' . $this->zoom . ',' . "\n";
-        $this->content .= "\t\t" . 'center: myLatlng,' . "\n";
+        $this->content .= "\t\t" . 'center: defLatLng,' . "\n";
         $this->content .= "\t\t" . 'mapTypeId: google.maps.MapTypeId.' . $this->mapType . "\n";
         $this->content .= "\t" . '}' . "\n";
 
         // Google map Div ID
-        $this->content .= "\t" . 'map' . $this->googleMapId . ' = new google.maps.Map(document.getElementById("' . $this->googleMapId . '"), myOptions);' . "\n";
+        $this->content .= "\t" . 'map' . $this->googleMapId . ' = new google.maps.Map(document.getElementById("' . $this->googleMapId . '"), defOptions);' . "\n";
 
         // Center
         if ($this->enableAutomaticCenterZoom) {
