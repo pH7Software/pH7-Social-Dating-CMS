@@ -13,7 +13,6 @@ defined('PH7') or exit('Restricted access');
 use PH7\Framework\Image\Image;
 use PH7\Framework\Layout\Gzip\Gzip;
 use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\Framework\Navigation\Browser;
 
 class SettingFormProcess extends Form
 {
