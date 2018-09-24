@@ -31,7 +31,7 @@ class CacheAjax extends Kernel
         $this->clearCache();
     }
 
-    protected function clearCache()
+    private function clearCache()
     {
         switch ($this->httpRequest->post('type')) {
             case 'general':
