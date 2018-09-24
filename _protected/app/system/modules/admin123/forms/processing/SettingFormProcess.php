@@ -249,8 +249,8 @@ class SettingFormProcess extends Form
                 // Clear CSS cache, because the logo is stored with data URI in the CSS cache file
                 $this->file->deleteDir(PH7_PATH_CACHE . Gzip::CACHE_DIR);
 
-                // Clear the Web browser cache
-                (new Browser)->noCache();
+                // Clear the Web browser's cache
+                $this->browser->noCache();
             }
         }
     }
