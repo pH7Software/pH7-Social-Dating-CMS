@@ -23,8 +23,9 @@
 </p>
 
 <p>
-    Finally, we recommend that you use <a href="https://poedit.net">PoEdit software</a>. It allows to translate the GetText files very easily.
-    It is available on Windows, Linux and Mac OS.
+    Finally, we recommend that you use <a href="https://poedit.net">PoEdit software</a>. It allows to translate GetText files very easily.
+    It is available on Windows, Linux and Mac OS.<br />
+    You can also find paid solutions such as <a href="https://phraseapp.com">PhraseApp</a> or <a href="https://www.transifex.com">Transifex</a>.
 </p>
 
 <figure>
