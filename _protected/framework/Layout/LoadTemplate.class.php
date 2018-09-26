@@ -100,14 +100,11 @@ class LoadTemplate
      */
     public function tpl()
     {
-        if (
-            !empty($this->sUserTpl) &&
-            $this->oConfig->load(PH7_PATH_TPL . $this->sUserTpl . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)
-        ) {
+        if ($this->doesUserTplExists()) {
             $this->sTplName = $this->sUserTpl;
-        } elseif ($this->oConfig->load(PH7_PATH_TPL . $this->sDefaultTpl . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
+        } elseif ($this->doesDefaultSettingTplExists()) {
             $this->sTplName = $this->sDefaultTpl;
-        } elseif ($this->oConfig->load(PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
+        } elseif ($this->doesSystemTplExists()) {
             $this->sTplName = PH7_DEFAULT_THEME;
         } else {
             throw new Exception(
@@ -187,6 +184,31 @@ class LoadTemplate
         }
 
         unset($oCookie);
+    }
+
+    /**
+     * @return bool
+     */
+    private function doesUserTplExists()
+    {
+        return !empty($this->sUserTpl) &&
+            $this->oConfig->load(PH7_PATH_TPL . $this->sUserTpl . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
+    }
+
+    /**
+     * @return bool
+     */
+    private function doesDefaultSettingTplExists()
+    {
+        return $this->oConfig->load(PH7_PATH_TPL . $this->sDefaultTpl . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
+    }
+
+    /**
+     * @return bool
+     */
+    private function doesSystemTplExists()
+    {
+        return $this->oConfig->load(PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
     }
 
     /**
