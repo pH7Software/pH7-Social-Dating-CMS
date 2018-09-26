@@ -44,14 +44,16 @@
             <!-- End Header -->
             <div id="particles-js"></div>
 
-            <div class="progress">
-                <div
-                    class="progress-bar progress-bar-striped active"
-                    role="progressbar"
-                    aria-valuenow="60"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                    style="width:{$sept_number*14.3}%"
-                >{$sept_number*14.3}%
+            {if !empty($sept_number)}
+                <div class="progress">
+                    <div
+                        class="progress-bar progress-bar-striped active"
+                        role="progressbar"
+                        aria-valuenow="60"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        style="width:{$sept_number*14.3}%"
+                    >{$sept_number*14.3}%
+                    </div>
                 </div>
-            </div>
+            {/if}
