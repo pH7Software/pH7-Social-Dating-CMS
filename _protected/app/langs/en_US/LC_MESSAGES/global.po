@@ -232,11 +232,11 @@ msgstr ""
 msgid "You must read and approve the terms of use!"
 msgstr ""
 
-#: _protected/app/system/core/assets/ajax/popup/confirmCoreAjax.php:35
+#: _protected/app/system/core/assets/ajax/popup/confirmCoreAjax.php:43
 msgid "Wrong parameters in the URL!"
 msgstr ""
 
-#: _protected/app/system/core/assets/ajax/popup/confirmCoreAjax.php:46
+#: _protected/app/system/core/assets/ajax/popup/confirmCoreAjax.php:54
 msgid "You must be registered to report an abuse."
 msgstr ""
 
@@ -1003,23 +1003,23 @@ msgstr ""
 msgid "It will hep us to improve our service and make it the best one for you!"
 msgstr ""
 
-#: _protected/app/system/core/forms/DeleteUserCoreForm.php:34
+#: _protected/app/system/core/forms/DeleteUserCoreForm.php:35
 msgid "Why:"
 msgstr ""
 
-#: _protected/app/system/core/forms/DeleteUserCoreForm.php:34
+#: _protected/app/system/core/forms/DeleteUserCoreForm.php:35
 msgid "I'm not happy with the service."
 msgstr ""
 
-#: _protected/app/system/core/forms/DeleteUserCoreForm.php:34
+#: _protected/app/system/core/forms/DeleteUserCoreForm.php:35
 msgid "I met someone."
 msgstr ""
 
-#: _protected/app/system/core/forms/DeleteUserCoreForm.php:34
+#: _protected/app/system/core/forms/DeleteUserCoreForm.php:35
 msgid "Other. I said the reason above."
 msgstr ""
 
-#: _protected/app/system/core/forms/DeleteUserCoreForm.php:35
+#: _protected/app/system/core/forms/DeleteUserCoreForm.php:36
 #: _protected/app/system/core/forms/ResendActivationCoreForm.php:38
 #: _protected/app/system/modules/admin123/forms/LoginForm.php:35
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:224
@@ -1040,7 +1040,7 @@ msgstr ""
 msgid "Captcha"
 msgstr ""
 
-#: _protected/app/system/core/forms/DeleteUserCoreForm.php:35
+#: _protected/app/system/core/forms/DeleteUserCoreForm.php:36
 #: _protected/app/system/core/forms/ResendActivationCoreForm.php:38
 #: _protected/app/system/modules/admin123/forms/LoginForm.php:35
 #: _protected/app/system/modules/affiliate/forms/JoinForm.php:66
@@ -2581,8 +2581,8 @@ msgstr ""
 #: _protected/app/system/modules/admin123/forms/ImportUserForm.php:29
 msgid ""
 "Import members into your site from a <strong><abbr title=\"Comma Separated "
-"Values\">CSV</abbr></strong> file. You can find database users <strong><a "
-"href=\"%0%\">here</a></strong>."
+"Values\">CSV</abbr></strong> file. You should be able to find websites that "
+"offer dating profiles database. Make sure they offer CSV format."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/ImportUserForm.php:32
@@ -3609,6 +3609,7 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/field_4f9e98f259844c164de95f62ce0d0d45/base/field/all.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/forum_ed188410e39e8a8dfc6567fc15ab1bf0/base/forum/index.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/friend_8e1d084e2359b68c73a719207fffed22/base/main/index.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/mail_79c69700322483cb206b62e72a19135a/base/mainlist.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/picture_53fdc8e693fabf0f21af7c2db17d86f2/base/main/album.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/picture_53fdc8e693fabf0f21af7c2db17d86f2/base/main/albums.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/public_main/base/browse_user.inc.cpl.php_user.inc.cpl.php:19
@@ -5848,6 +5849,7 @@ msgid "Outbox"
 msgstr ""
 
 #: _protected/app/system/modules/mail/forms/SearchMailForm.php:22
+#: _protected/data/cache/pH7tpl_compile/mail_79c69700322483cb206b62e72a19135a/base/mainlist.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.phptop_menu.inc.cpl.php:19
 msgid "Trash"
 msgstr ""
@@ -6968,24 +6970,24 @@ msgstr ""
 msgid "Meet new People and Friends near you with %site_name% - Browse Members"
 msgstr ""
 
-#: _protected/app/system/modules/user/controllers/CountryController.php:61
+#: _protected/app/system/modules/user/controllers/CountryController.php:71
 msgid "Error, country is empty."
 msgstr ""
 
-#: _protected/app/system/modules/user/controllers/CountryController.php:90
+#: _protected/app/system/modules/user/controllers/CountryController.php:100
 msgid ""
 "Free online dating in %0% %1%, meet people, find friends. Single men & women "
 "in %2% %3%"
 msgstr ""
 
-#: _protected/app/system/modules/user/controllers/CountryController.php:91
+#: _protected/app/system/modules/user/controllers/CountryController.php:101
 msgid ""
 "Free online dating in %0% with single women & men. Personals, meet people & "
 "find friends in %1% on internet dating site. Find sweet love or sex dating "
 "and flirt in %2%, %3% with %site_name%"
 msgstr ""
 
-#: _protected/app/system/modules/user/controllers/CountryController.php:92
+#: _protected/app/system/modules/user/controllers/CountryController.php:102
 msgid ""
 "meeting woman, meeting man, %0%, %1%, meet people, networking, friends, "
 "communicate, meet online, online community, clubs, announces meeting, free "
@@ -6994,21 +6996,21 @@ msgid ""
 "networking"
 msgstr ""
 
-#: _protected/app/system/modules/user/controllers/CountryController.php:93
+#: _protected/app/system/modules/user/controllers/CountryController.php:103
 msgid "Meet new people in %0% %1%"
 msgstr ""
 
-#: _protected/app/system/modules/user/controllers/CountryController.php:94
+#: _protected/app/system/modules/user/controllers/CountryController.php:104
 msgid "%n% member lives"
 msgid_plural "%n% members live"
 msgstr[0] ""
 msgstr[1] ""
 
-#: _protected/app/system/modules/user/controllers/CountryController.php:95
+#: _protected/app/system/modules/user/controllers/CountryController.php:105
 msgid "%0% near %1% %2%"
 msgstr ""
 
-#: _protected/app/system/modules/user/controllers/CountryController.php:106
+#: _protected/app/system/modules/user/controllers/CountryController.php:116
 msgid "Meet new people here thanks <b>%site_name%</b>!"
 msgstr ""
 
@@ -8449,6 +8451,7 @@ msgid "Top Rated Posts"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/blog_5166db24b81eb84e1d818e459e527433/base/main/index.cpl.php:19
+#: _protected/data/cache/pH7tpl_compile/mail_79c69700322483cb206b62e72a19135a/base/mainlist.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/note_26aeb979a65fd551fbe7c4af51c96b08/base/adminhome.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/note_26aeb979a65fd551fbe7c4af51c96b08/base/mainhome.inc.cpl.php:19
 msgid "See more"
@@ -8648,6 +8651,26 @@ msgid ""
 "will send<br /> you an email containing a special link that will help you "
 "create a new password.<br /> Make sure you enter the <em>same email address "
 "you use to sign in to your profile</em>."
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/mail_79c69700322483cb206b62e72a19135a/base/mainlist.inc.cpl.php:19
+msgid "New Message"
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/mail_79c69700322483cb206b62e72a19135a/base/mainlist.inc.cpl.php:19
+msgid "Unread"
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/mail_79c69700322483cb206b62e72a19135a/base/mainlist.inc.cpl.php:19
+msgid "Reply"
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/mail_79c69700322483cb206b62e72a19135a/base/mainlist.inc.cpl.php:19
+msgid "Restor"
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/mail_79c69700322483cb206b62e72a19135a/base/mainlist.inc.cpl.php:19
+msgid "Move to Inbox"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/milestone-celebration_2612c257de19271fced9df463d69fdef/base/main/awesome.cpl.php:19
@@ -9986,6 +10009,14 @@ msgstr ""
 msgid "No users who have a birthday today. Come back tomorrow 😉"
 msgstr ""
 
+#: _protected/data/cache/pH7tpl_compile/user_1e41a325ff56b8a65f2bf92e114bb789/base/main/accountdeleted.cpl.php:19
+msgid "Your account has been removed successfully!"
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/user_1e41a325ff56b8a65f2bf92e114bb789/base/main/accountdeleted.cpl.php:19
+msgid "Hopefully, we will see you back very soon at %site_name%!"
+msgstr ""
+
 #: _protected/data/cache/pH7tpl_compile/user_1e41a325ff56b8a65f2bf92e114bb789/base/main/index.guest.inc.cpl.php:19
 msgid "People love us! Realtime users using our service"
 msgstr ""
@@ -10087,6 +10118,31 @@ msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/user_1e41a325ff56b8a65f2bf92e114bb789/base/setting/avatar.cpl.php:19
 msgid "Want to take a photo of yourself directly with your webcam?"
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/user_1e41a325ff56b8a65f2bf92e114bb789/base/setting/delete.cpl.php:19
+msgid "Excellent choice!"
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/user_1e41a325ff56b8a65f2bf92e114bb789/base/setting/delete.cpl.php:19
+msgid "You will see, you will not regret it!"
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/user_1e41a325ff56b8a65f2bf92e114bb789/base/setting/delete.cpl.php:19
+msgid ""
+"At %site_name%, we work hard to give you one of the best social service!"
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/user_1e41a325ff56b8a65f2bf92e114bb789/base/setting/delete.cpl.php:19
+msgid "Are you really sure you want to delete your account?"
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/user_1e41a325ff56b8a65f2bf92e114bb789/base/setting/delete.cpl.php:19
+msgid "No, I changed my mind and want to stay with you!"
+msgstr ""
+
+#: _protected/data/cache/pH7tpl_compile/user_1e41a325ff56b8a65f2bf92e114bb789/base/setting/delete.cpl.php:19
+msgid "Yes, I really want to delete my account"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/user_1e41a325ff56b8a65f2bf92e114bb789/base/setting/design.cpl.php:19
