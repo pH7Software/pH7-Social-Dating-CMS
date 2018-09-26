@@ -20,7 +20,15 @@ class Language
     public function __construct()
     {
         if (!empty($_GET['l']) && is_file(PH7_ROOT_INSTALL . 'langs/' . $_GET['l'] . '/install.lang.php')) {
-            setcookie(Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang', $_GET['l'], time() + 60 * 60 * 24 * 365, null, null, false, true);
+            setcookie(
+                Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang',
+                $_GET['l'],
+                time() + 60 * 60 * 24 * 365,
+                null,
+                null,
+                false,
+                true
+            );
             $this->sLang = $_GET['l'];
         } elseif (isset($_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang']) && is_file(PH7_ROOT_INSTALL . 'langs/' . $_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang'] . '/install.lang.php')) {
             $this->sLang = $_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang'];
