@@ -3,6 +3,7 @@
 $aRules = [
     '@PSR2' => true,
     '@Symfony' => true,
+    'concat_space' => ['spacing' => 'one'],
     'array_syntax' => ['syntax' => 'short'],
     'combine_consecutive_unsets' => true,
     'general_phpdoc_annotation_remove' => ['expectedException', 'expectedExceptionMessage', 'expectedExceptionMessageRegExp'],
