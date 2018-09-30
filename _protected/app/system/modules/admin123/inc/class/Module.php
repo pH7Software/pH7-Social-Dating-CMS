@@ -156,7 +156,7 @@ class Module
         try {
             return F\Import::file($sPath);
         } catch (F\Exception $e) {
-            return '<p class="error">' . t('Instruction file not found!') . '</p>';
+            return '<p class="err_msg">' . t('Instruction file not found!') . '</p>';
         }
     }
 

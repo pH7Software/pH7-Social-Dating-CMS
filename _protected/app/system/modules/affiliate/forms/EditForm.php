@@ -46,7 +46,7 @@ class EditForm
         }
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<h2 class="underline">' . t('Global Information:') . '</h2>'));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="error">' . t('All your information must be accurate and valid.') . '</p>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="cinnabar-red">' . t('All your information must be accurate and valid.') . '</p>'));
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', ['id' => 'name_first', 'onblur' => 'CValid(this.value,this.id)', 'value' => $oAff->firstName, 'required' => 1, 'validation' => new \PFBC\Validation\Name]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_first"></span>'));
