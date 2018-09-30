@@ -36,7 +36,7 @@ class ProtectedFileForm
             $oForm->addElement(new \PFBC\Element\Hidden('submit_file', 'form_file'));
             $oForm->addElement(new \PFBC\Element\Token('file'));
             $oForm->addElement(new \PFBC\Element\Textarea(t('File Contents'), 'content', ['value' => $rData, 'style' => 'height:50rem', 'required' => 1]));
-            $oForm->addElement(new \PFBC\Element\Button);
+            $oForm->addElement(new \PFBC\Element\Button(t('Save')));
             $oForm->render();
         } catch (RuntimeException $oExcept) {
             echo '<p class="col-md-6 col-md-offset-4 red">' . $oExcept->getMessage() . '</p>';
