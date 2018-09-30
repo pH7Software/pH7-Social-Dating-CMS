@@ -39,7 +39,7 @@ class PublicFileForm
             $oForm->addElement(new \PFBC\Element\Button);
             $oForm->render();
         } catch (RuntimeException $oExcept) {
-            echo '<p class="center error">' . $oExcept->getMessage() . '</p>';
+            echo '<p class="col-md-6 col-md-offset-4 red">' . $oExcept->getMessage() . '</p>';
         }
     }
 
