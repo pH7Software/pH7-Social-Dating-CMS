@@ -24,7 +24,7 @@ class PublicFileForm
             Header::redirect();
         }
 
-        if (!$rData = @file_get_contents(PH7_PATH_ROOT . $_GET['file'])) {
+        if (!$rData = @file_get_contents(self::getRealPath())) {
             \PFBC\Form::clearErrors('form_file'); // First, remove the previous error message (if existing) to avoid duplicate error messages
             \PFBC\Form::setError('form_file', t('The following requested file was not found: %0%', escape(PH7_PATH_ROOT . $_GET['file'])));
         }
@@ -36,5 +36,17 @@ class PublicFileForm
         $oForm->addElement(new \PFBC\Element\Textarea(t('File Contents'), 'content', ['value' => $rData, 'style' => 'height:50rem', 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
+    }
+
+    /**
+     * Get the full file path and prevent path traversal and the null byte attacks.
+     *
+     * @return bool|string
+     */
+    private static function getRealPath()
+    {
+        $sFullPath = PH7_PATH_ROOT . $_GET['file'];
+
+        return realpath($sFullPath);
     }
 }
