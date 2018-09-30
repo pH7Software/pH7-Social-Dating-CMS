@@ -20,9 +20,13 @@ class PublicFileFormProcess extends Form
     {
         parent::__construct();
 
-        $bStatus = $this->file->save(PH7_PATH_ROOT . $this->httpRequest->get('file'), $this->httpRequest->post('content', Http::NO_CLEAN));
-        $sMsg = ($bStatus) ? t('Changes saved!') : t('The file could not be saved. Please check your file permissions (must be in  write mode)');
-        $sMsgType = ($bStatus) ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
+        $bStatus = $this->file->save(
+            PH7_PATH_ROOT . $this->httpRequest->get('file'),
+            $this->httpRequest->post('content', Http::NO_CLEAN)
+        );
+
+        $sMsg = $bStatus ? t('Changes saved!') : t('The file could not be saved. Please check your file permissions (must be in  write mode)');
+        $sMsgType = $bStatus ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
 
         Header::redirect($this->httpRequest->previousPage(), $sMsg, $sMsgType);
     }
