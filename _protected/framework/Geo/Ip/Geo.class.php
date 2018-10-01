@@ -72,48 +72,6 @@ class Geo
     }
 
     /**
-     * Get the latitude.
-     *
-     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
-     *
-     * @return float|null Latitude.
-     */
-    public static function getLatitude($sIpAddress = null)
-    {
-        try {
-            $fLatitude = static::get($sIpAddress)->location->latitude;
-            // TODO: When support PHP7.1, specify multiple exceptions using "|" pipe
-        } catch (AddressNotFoundException $oE) {
-            $fLatitude = 0.0;
-        } catch (InvalidDatabaseException $oE) {
-            $fLatitude = null;
-        }
-
-        return $fLatitude;
-    }
-
-    /**
-     * Get the longitude.
-     *
-     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
-     *
-     * @return float|null Longitude.
-     */
-    public static function getLongitude($sIpAddress = null)
-    {
-        try {
-            $fLongitude = static::get($sIpAddress)->location->longitude;
-            // TODO: When support PHP7.1, specify multiple exceptions using "|" pipe
-        } catch (AddressNotFoundException $oE) {
-            $fLongitude = 0.0;
-        } catch (InvalidDatabaseException $oE) {
-            $fLongitude = null;
-        }
-
-        return $fLongitude;
-    }
-
-    /**
      * Get the country name.
      *
      * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
