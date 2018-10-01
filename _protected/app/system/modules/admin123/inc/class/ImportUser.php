@@ -184,7 +184,7 @@ class ImportUser extends Core
                 $this->aTmpData['sex'] = $sKey;
             }
 
-            if ($sVal === 'email' || $sVal === 'mail') {
+            if ($sVal === 'email' || $sVal === 'mail' || $sVal === 'emailid') {
                 $this->aTmpData['email'] = $sKey;
             }
 
@@ -206,8 +206,10 @@ class ImportUser extends Core
                 $this->aTmpData['state'] = $sKey;
             }
 
-            if ($sVal === 'zip' || $sVal === 'zipcode' || $sVal === 'postal' ||
-                $sVal === 'postalcode' || $sVal === 'pin' || $sVal === 'pincode' || $sVal === 'eircode') {
+            if (
+                $sVal === 'zip' || $sVal === 'zipcode' || $sVal === 'postal' || $sVal === 'postcode' ||
+                $sVal === 'postalcode' || $sVal === 'pin' || $sVal === 'pincode' || $sVal === 'eircode'
+            ) {
                 $this->aTmpData['zip_code'] = $sKey;
             }
 
