@@ -179,7 +179,7 @@ class Geo
      * @throws AddressNotFoundException
      * @throws InvalidDatabaseException
      */
-    protected static function get($sIpAddress = null)
+    private static function get($sIpAddress = null)
     {
         $sIpAddr = ($sIpAddress !== null ? $sIpAddress : Ip::get());
 
