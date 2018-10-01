@@ -14,6 +14,8 @@ namespace PH7\Framework\Geo\Ip;
 defined('PH7') or exit('Restricted access');
 
 use GeoIp2\Database\Reader;
+use GeoIp2\Exception\AddressNotFoundException;
+use MaxMind\Db\Reader\InvalidDatabaseException;
 use PH7\Framework\Ip\Ip;
 
 class Geo
@@ -32,11 +34,20 @@ class Geo
      *
      * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
      *
-     * @return string Country Code.
+     * @return string|null Country Code.
      */
     public static function getCountryCode($sIpAddress = null)
     {
-        return static::get($sIpAddress)->country->isoCode;
+        try {
+            $sCountryCode = static::get($sIpAddress)->country->isoCode;
+            // TODO: When support PHP7.1, specify multiple exceptions using "|" pipe
+        } catch (AddressNotFoundException $oE) {
+            $sCountryCode = '';
+        } catch (InvalidDatabaseException $oE) {
+            $sCountryCode = null;
+        }
+
+        return $sCountryCode;
     }
 
     /**
@@ -44,11 +55,20 @@ class Geo
      *
      * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
      *
-     * @return integer Zip Code.
+     * @return string|null Zip Code.
      */
     public static function getZipCode($sIpAddress = null)
     {
-        return static::get($sIpAddress)->postal->code;
+        try {
+            $sZipCode = static::get($sIpAddress)->postal->code;
+            // TODO: When support PHP7.1, specify multiple exceptions using "|" pipe
+        } catch (AddressNotFoundException $oE) {
+            $sZipCode = '';
+        } catch (InvalidDatabaseException $oE) {
+            $sZipCode = null;
+        }
+
+        return $sZipCode;
     }
 
     /**
@@ -56,11 +76,20 @@ class Geo
      *
      * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
      *
-     * @return float Latitude.
+     * @return float|null Latitude.
      */
     public static function getLatitude($sIpAddress = null)
     {
-        return static::get($sIpAddress)->location->latitude;
+        try {
+            $fLatitude = static::get($sIpAddress)->location->latitude;
+            // TODO: When support PHP7.1, specify multiple exceptions using "|" pipe
+        } catch (AddressNotFoundException $oE) {
+            $fLatitude = 0.0;
+        } catch (InvalidDatabaseException $oE) {
+            $fLatitude = null;
+        }
+
+        return $fLatitude;
     }
 
     /**
@@ -68,11 +97,20 @@ class Geo
      *
      * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
      *
-     * @return float Longitude.
+     * @return float|null Longitude.
      */
     public static function getLongitude($sIpAddress = null)
     {
-        return static::get($sIpAddress)->location->longitude;
+        try {
+            $fLongitude = static::get($sIpAddress)->location->longitude;
+            // TODO: When support PHP7.1, specify multiple exceptions using "|" pipe
+        } catch (AddressNotFoundException $oE) {
+            $fLongitude = 0.0;
+        } catch (InvalidDatabaseException $oE) {
+            $fLongitude = null;
+        }
+
+        return $fLongitude;
     }
 
     /**
@@ -80,12 +118,21 @@ class Geo
      *
      * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
      *
-     * @return string Country Name.
+     * @return string|null Country Name.
      */
     public static function getCountry($sIpAddress = null)
     {
-        // Encode to UTF8 for Latin and other characters of the GeoIP database are displayed correctly.
-        return utf8_encode(static::get($sIpAddress)->country->name);
+        try {
+            // Encode to UTF8 for Latin and other characters of the GeoIP database are displayed correctly.
+            $sCountryName = utf8_encode(static::get($sIpAddress)->country->name);
+            // TODO: When support PHP7.1, specify multiple exceptions using "|" pipe
+        } catch (AddressNotFoundException $oE) {
+            $sCountryName = '';
+        } catch (InvalidDatabaseException $oE) {
+            $sCountryName = null;
+        }
+
+        return $sCountryName;
     }
 
     /**
@@ -93,12 +140,21 @@ class Geo
      *
      * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
      *
-     * @return string City Name.
+     * @return string|null City Name.
      */
     public static function getCity($sIpAddress = null)
     {
-        // Encode to UTF8 for Latin and other characters of the GeoIP database are displayed correctly.
-        return utf8_encode(static::get($sIpAddress)->city->name);
+        try {
+            // Encode to UTF8 for Latin and other characters of the GeoIP database are displayed correctly.
+            $sCity = utf8_encode(static::get($sIpAddress)->city->name);
+            // TODO: When support PHP7.1, specify multiple exceptions using "|" pipe
+        } catch (AddressNotFoundException $oE) {
+            $sCity = '';
+        } catch (InvalidDatabaseException $oE) {
+            $sCity = null;
+        }
+
+        return $sCity;
     }
 
     /**
@@ -118,7 +174,10 @@ class Geo
      *
      * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
      *
-     * @return string|\GeoIp2\Model\City
+     * @return \GeoIp2\Model\City
+     *
+     * @throws AddressNotFoundException
+     * @throws InvalidDatabaseException
      */
     protected static function get($sIpAddress = null)
     {
