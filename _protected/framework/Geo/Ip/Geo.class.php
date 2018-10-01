@@ -19,6 +19,7 @@ use PH7\Framework\Ip\Ip;
 
 class Geo
 {
+    const DATABASE_FILENAME = 'GeoLite2-City.mmdb';
     const DEFAULT_VALID_IP = '128.101.101.101';
 
     /**
@@ -145,7 +146,7 @@ class Geo
             $sIpAddr = self::DEFAULT_VALID_IP;
         }
 
-        $oReader = new Reader(__DIR__ . '/GeoLite2-City.mmdb');
+        $oReader = new Reader(__DIR__ . PH7_DS . self::DATABASE_FILENAME);
 
         return @$oReader->city($sIpAddr);
     }
