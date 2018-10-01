@@ -10376,7 +10376,7 @@ msgid "Error: %element% must contain a valid date."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Email.php:14
-msgid "Error: %element% must contain an email address."
+msgid "Error: %element% must be a valid email address."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/HexColor.php:13
