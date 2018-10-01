@@ -40,7 +40,7 @@ class Geo
     {
         try {
             $sCountryCode = static::get($sIpAddress)->country->isoCode;
-            // TODO: When support PHP7.1, specify multiple exceptions using "|" pipe
+            // TODO: When support PHP 7.1, specify multiple exceptions using "|" pipe
         } catch (AddressNotFoundException $oE) {
             $sCountryCode = '';
         } catch (InvalidDatabaseException $oE) {
@@ -61,7 +61,7 @@ class Geo
     {
         try {
             $sZipCode = static::get($sIpAddress)->postal->code;
-            // TODO: When support PHP7.1, specify multiple exceptions using "|" pipe
+            // TODO: When support PHP 7.1, specify multiple exceptions using "|" pipe
         } catch (AddressNotFoundException $oE) {
             $sZipCode = '';
         } catch (InvalidDatabaseException $oE) {
@@ -83,7 +83,7 @@ class Geo
         try {
             // Encode to UTF8 for Latin and other characters of the GeoIP database are displayed correctly.
             $sCountryName = utf8_encode(static::get($sIpAddress)->country->name);
-            // TODO: When support PHP7.1, specify multiple exceptions using "|" pipe
+            // TODO: When support PHP 7.1, specify multiple exceptions using "|" pipe
         } catch (AddressNotFoundException $oE) {
             $sCountryName = '';
         } catch (InvalidDatabaseException $oE) {
@@ -105,7 +105,7 @@ class Geo
         try {
             // Encode to UTF8 for Latin and other characters of the GeoIP database are displayed correctly.
             $sCity = utf8_encode(static::get($sIpAddress)->city->name);
-            // TODO: When support PHP7.1, specify multiple exceptions using "|" pipe
+            // TODO: When support PHP 7.1, specify multiple exceptions using "|" pipe
         } catch (AddressNotFoundException $oE) {
             $sCity = '';
         } catch (InvalidDatabaseException $oE) {
