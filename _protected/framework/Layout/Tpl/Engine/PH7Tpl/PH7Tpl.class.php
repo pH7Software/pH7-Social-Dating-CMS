@@ -30,7 +30,7 @@ use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax\Syntax;
 use PH7\Framework\Mvc\Model\Design as DesignModel;
 use PH7\Framework\Parse\SysVar;
 
-class PH7Tpl extends Kernel implements GenerableFile
+class PH7Tpl extends Kernel implements Templatable, GenerableFile
 {
     const NAME = 'PH7Tpl';
     const AUTHOR = 'Pierre-Henry Soria';
@@ -306,8 +306,6 @@ class PH7Tpl extends Kernel implements GenerableFile
     }
 
     /**
-     * Display template.
-     *
      * @param string $sTplFile Default NULL
      * @param string $sDirPath Default NULL
      * @param bool $bInclude Default TRUE
