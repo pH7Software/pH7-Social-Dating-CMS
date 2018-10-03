@@ -502,7 +502,7 @@ class PH7Tpl extends Kernel implements GenerableFile
     public function assigns(array $aVars, $bEscape = false, $bEscapeStrip = false)
     {
         foreach ($aVars as $sKey => $sValue) {
-            $this->assign($sKey, $sValue, $bEscape = false, $bEscapeStrip = false); // Assign a string variable
+            $this->assign($sKey, $sValue, $bEscape, $bEscapeStrip); // Assign a string variable
         }
     }
 
