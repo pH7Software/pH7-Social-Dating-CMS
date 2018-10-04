@@ -73,7 +73,7 @@ class UserNotifier
     /**
      * @return int Number of recipients who were accepted for delivery.
      *
-     * @throws Framework\File\Exception
+     * @throws Framework\File\IOException
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
     public function send()
@@ -84,7 +84,7 @@ class UserNotifier
     /**
      * @return int
      *
-     * @throws Framework\File\Exception
+     * @throws Framework\File\IOException
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
     private function sendMessage()
@@ -154,7 +154,7 @@ class UserNotifier
     /**
      * @return string
      *
-     * @throws Framework\File\Exception
+     * @throws Framework\File\IOException
      */
     private function getNotifierMessage()
     {

@@ -40,7 +40,7 @@ class EditMsgFormProcess extends Form
      * @param int $sTopicTitle
      * @param int $iTopicId
      *
-     * @throws Framework\File\Exception
+     * @throws Framework\File\IOException
      */
     private function redirectUserToTopicPost($iForumId, $sTopicTitle, $iTopicId)
     {

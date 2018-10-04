@@ -48,7 +48,7 @@ abstract class RegistrationCore
      *
      * @return self
      *
-     * @throws Framework\File\Exception
+     * @throws Framework\File\IOException
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
     public function sendMail(array $aInfo, $bIsUniversalLogin = false)

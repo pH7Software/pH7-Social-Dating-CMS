@@ -53,7 +53,7 @@ class XmlDesignCore
      *
      * @return void
      *
-     * @throws Framework\File\Exception
+     * @throws Framework\File\IOException
      */
     public static function rssHeaderLinks()
     {

@@ -13,7 +13,7 @@ namespace PH7\Framework\Analytics;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Cache\Exception;
+use PH7\Framework\Cache\IOException;
 
 class StoreStats
 {
@@ -27,14 +27,14 @@ class StoreStats
      *
      * @return array Cache data.
      *
-     * @throws Exception If the file cannot be gotten.
+     * @throws IOException If the file cannot be gotten.
      */
     protected function read($sFileName)
     {
         $sFullPath = PH7_PATH_TMP . static::DIR . $sFileName . static::EXT;
 
         if (!$aGetData = @file_get_contents($sFullPath)) {
-            throw new Exception('Cannot get cache file: ' . $sFullPath);
+            throw new IOException('Cannot get cache file: ' . $sFullPath);
         }
 
         $aData = !empty($aGetData) ? unserialize($aGetData) : [];
@@ -50,7 +50,7 @@ class StoreStats
      *
      * @return void
      *
-     * @throws Exception If the file cannot be written.
+     * @throws IOException If the file cannot be written.
      */
     protected function save($sFileName, $sContents)
     {
@@ -68,7 +68,7 @@ class StoreStats
         }
 
         if (!@file_put_contents($sFullPath, serialize($aData), $iFlag)) {
-            throw new Exception('Cannot write cache file: ' . $sFullPath);
+            throw new IOException('Cannot write cache file: ' . $sFullPath);
         }
     }
 }

@@ -408,7 +408,7 @@ class UserController extends Controller
      *
      * @return string Status message.
      *
-     * @throws Framework\File\Exception
+     * @throws Framework\File\IOException
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
     private function moderateRegistration($iId, $iStatus)
