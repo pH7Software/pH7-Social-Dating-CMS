@@ -4,13 +4,13 @@
 <h2>Class, Interface and Trait Names</h2>
 <p>UpperCamelCase (<a href="http://en.wikipedia.org/wiki/StudlyCaps">StudlyCaps</a>) and alphanumeric only.</p>
 
-<h3>Interface Naming</h3>
+<h3 id="interface-names">Interface Naming</h3>
 <p>
     When you are naming your interface, you should use "-ble" suffix as much as possible (in short, use an adjective for naming it).<br />
     Examples: <cite>Controllable</cite>, <cite>Hashable</cite>, <cite>Configurable</cite>, <cite>Serializable</cite>, <cite>Readable</cite>.
 </p>
 
-<h3>Method and Constant Names</h3>
+<h3 id="method-constant-names">Method and Constant Names</h3>
 <p>
     Method Name: <a href="http://en.wikipedia.org/wiki/CamelCase">camelCase</a> and alphanumeric only.<br />
     Constant Name: ALL_CAPS and alphanumeric only with the underscores to separate words.
@@ -41,7 +41,7 @@ class MyClass
 </code>
 </pre>
 
-<h2>Database Table Names</h2>
+<h2 id="database-table-names">Database Table Names</h2>
 <p>
     all_lowercase and alphabetical only with the underscores to separate each words.<br />
     Table names have to be prefixed with "ph7_" which will be replaced by the user prefix chosen during the installation.
@@ -50,7 +50,7 @@ class MyClass
 <h4>In pH7Framework</h4>
 <p>The classes should end with ".class.php" extension, traits should end with ".trait.php" extension and interfaces must end with ".interface.php"</p>
 
-<h2>Variable Names</h2>
+<h2 id="variable-names">Variable Names</h2>
 <p>The variables must be in camelCase and alphanumeric only.</p>
 <p>Since PHP is not a typed language, the data found in the variables are fuzzy, so we defined a strict convention for naming variables.<br />
 The first letter of the variable must define the type of this: Here is the list of available types:</p>
@@ -98,7 +98,7 @@ But you can still follow this convention if you want ;-).<br />
 By cons never put members of a class in public (if you do, it means that you do not know enough object-oriented programming to create a module or a code from us).<br />
 Also, we rarely respect the "standard" which requires a line must not exceed 80 characters because we believe this standard and obsolete nowadays screens are larger and have a code too long can become very annoying.</p>
 
-<h2>Function, Global Variable and Array Names</h2>
+<h2 id="function-global-variable-array-names">Function, Global Variable and Array Names</h2>
 Function: lowercase and each word must be separated by underscore.
 
 <p class="italic underline">Example:</p>
