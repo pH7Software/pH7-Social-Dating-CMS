@@ -8,8 +8,8 @@
 
 namespace PH7\Framework\File\Transfer;
 
-use PH7\Framework\Error\CException\PH7RuntimeException;
+use PH7\Framework\File\IOException;
 
-class UploadingFileException extends PH7RuntimeException
+class UploadingFileException extends IOException
 {
 }

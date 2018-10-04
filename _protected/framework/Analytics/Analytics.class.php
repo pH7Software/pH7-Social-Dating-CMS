@@ -14,7 +14,7 @@ namespace PH7\Framework\Analytics;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Cache\Exception;
+use PH7\Framework\Cache\IOException;
 use PH7\Framework\Navigation\Browser;
 
 class Analytics extends StoreStats
@@ -192,7 +192,7 @@ class Analytics extends StoreStats
     private $sUserLang;
 
     /**
-     * @throws Exception
+     * @throws IOException
      */
     public function __construct()
     {
@@ -306,7 +306,7 @@ class Analytics extends StoreStats
      *
      * @return void
      *
-     * @throws Exception
+     * @throws IOException
      */
     public function add($sType, $sData)
     {
@@ -320,7 +320,7 @@ class Analytics extends StoreStats
      *
      * @return array Analytics data.
      *
-     * @throws Exception
+     * @throws IOException
      */
     public function get($sFileName)
     {
@@ -332,7 +332,7 @@ class Analytics extends StoreStats
      *
      * @return void
      *
-     * @throws Exception
+     * @throws IOException
      */
     private function init()
     {

@@ -110,7 +110,7 @@ class DeleteUserCoreFormProcess extends Form
      *
      * @return void
      *
-     * @throws Framework\File\Exception
+     * @throws Framework\File\IOException
      */
     private function redirectToGoodbyePage()
     {

@@ -31,7 +31,7 @@ class Import
      *
      * @return mixed (resource, string, boolean, void, ...)
      *
-     * @throws Exception
+     * @throws IOException
      */
     public static function pH7FwkClass($sClassName, $sNameSpace = null, $sExt = 'php')
     {
@@ -49,7 +49,7 @@ class Import
      *
      * @return mixed (resource, string, boolean, void, ...)
      *
-     * @throws Exception
+     * @throws IOException
      */
     public static function pH7App($sClassName, $sNameSpace = null, $sExt = 'php')
     {
@@ -67,7 +67,7 @@ class Import
      *
      * @return mixed (resource, string, boolean, void, ...)
      *
-     * @throws Exception
+     * @throws IOException
      */
     public static function file($sFile, $sNameSpace = null, $sExt = 'php')
     {
@@ -83,7 +83,7 @@ class Import
      *
      * @return mixed (resource, string, boolean, void, ...)
      *
-     * @throws Exception
+     * @throws IOException
      */
     public static function lib($sFile, $sNameSpace = null, $sExt = 'php')
     {
@@ -113,7 +113,7 @@ class Import
      *
      * @return mixed (resource, string, boolean, void, ...)
      *
-     * @throws Exception If the file is not found.
+     * @throws IOException If the file is not found.
      */
     private static function load($sFile, $sExt, $sNameSpace)
     {
@@ -128,6 +128,6 @@ class Import
             return require_once $sFile;
         }
 
-        throw new Exception(sprintf('%s not found!', $sFile));
+        throw new IOException(sprintf('%s not found!', $sFile));
     }
 }

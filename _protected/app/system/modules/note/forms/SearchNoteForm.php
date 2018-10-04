@@ -15,7 +15,7 @@ class SearchNoteForm
     /**
      * @param int|null $iWidth
      *
-     * @throws Framework\File\Exception
+     * @throws Framework\File\IOException
      */
     public static function display($iWidth = null)
     {

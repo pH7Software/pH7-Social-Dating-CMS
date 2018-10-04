@@ -55,7 +55,7 @@ abstract class ProfileBaseController extends Controller
      *
      * @return void
      *
-     * @throws Framework\File\Exception
+     * @throws Framework\File\IOException
      */
     protected function initPrivacy(UserCoreModel $oUserModel, stdClass $oUser)
     {

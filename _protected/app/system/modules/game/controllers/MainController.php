@@ -282,7 +282,7 @@ class MainController extends Controller
      *
      * @return void
      *
-     * @throws Framework\File\Exception
+     * @throws Framework\File\IOException
      * @throws Framework\Http\Exception
      */
     private function notFound()

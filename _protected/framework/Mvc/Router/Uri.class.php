@@ -15,7 +15,7 @@ defined('PH7') or exit('Restricted access');
 use DOMDocument;
 use DOMElement;
 use PH7\Framework\Cache\Cache;
-use PH7\Framework\File\Exception as FileException;
+use PH7\Framework\File\IOException;
 use PH7\Framework\Parse\Url;
 use PH7\Framework\Pattern\Statik;
 
@@ -45,7 +45,7 @@ class Uri
      *
      * @return DOMDocument
      *
-     * @throws FileException If the file is not found.
+     * @throws IOException If the file is not found.
      */
     public static function loadFile(DOMDocument $oDom)
     {
@@ -76,7 +76,7 @@ class Uri
      *
      * @return string
      *
-     * @throws FileException
+     * @throws IOException
      */
     public static function get($sModule, $sController, $sAction, $sVars = null, $bFullClean = true)
     {
@@ -131,7 +131,7 @@ class Uri
      *
      * @return string
      *
-     * @throws FileException If the XML file is not found.
+     * @throws IOException If the XML file is not found.
      */
     private static function uri(array $aParams)
     {
@@ -161,7 +161,7 @@ class Uri
     /**
      * @return string XML route filename.
      *
-     * @throws FileException If the file is not found.
+     * @throws IOException If the file is not found.
      */
     private static function getRouteFilePath()
     {
@@ -175,7 +175,7 @@ class Uri
             return $sPathDefaultLang;
         }
 
-        throw new FileException('XML route file not found: ' . $sPathDefaultLang);
+        throw new IOException('XML route file not found: ' . $sPathDefaultLang);
     }
 
     /**

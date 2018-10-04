@@ -182,7 +182,7 @@ class ProfileController extends ProfileBaseController
     /**
      * @return void
      *
-     * @throws Framework\File\Exception
+     * @throws Framework\File\IOException
      */
     private function redirectToOtherProfileStyleIfEnabled()
     {

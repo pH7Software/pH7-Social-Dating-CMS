@@ -47,7 +47,7 @@ class MsgFormProcess extends Form
      * @param int $iForumId
      * @param string $sTopicTitle
      *
-     * @throws Framework\File\Exception
+     * @throws Framework\File\IOException
      */
     private function redirectUserToTopicPost($iForumId, $sTopicTitle)
     {

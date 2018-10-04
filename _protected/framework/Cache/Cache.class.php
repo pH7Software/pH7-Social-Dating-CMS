@@ -162,6 +162,8 @@ class Cache implements GenerableFile
      * @param string $sData
      *
      * @return string|null|self If the cache is disabled, returns null, otherwise returns this class.
+     *
+     * @throws IOException
      */
     public function put($sData)
     {
@@ -299,7 +301,7 @@ File ID: ' . $this->sId . '
      *
      * @return bool|null
      *
-     * @throws Exception If the file cannot be written.
+     * @throws IOException If the file cannot be written.
      * @throws \PH7\Framework\File\Permission\PermissionException If the file cannot be created.
      */
     final private function write($sData)
@@ -326,6 +328,6 @@ File ID: ' . $this->sId . '
             return true;
         }
 
-        throw new Exception('Could not write cache file: "' . $sFile . '"');
+        throw new IOException('Could not write cache file: ' . $sFile);
     }
 }

@@ -24,7 +24,7 @@ class LinkCoreForm
      *
      * @return void
      *
-     * @throws Framework\File\Exception
+     * @throws Framework\File\IOException
      */
     public static function display($sLabel, $sModule, $sController, $sAction, array $aParams)
     {
@@ -50,7 +50,7 @@ class LinkCoreForm
      *
      * @return string
      *
-     * @throws Framework\File\Exception
+     * @throws Framework\File\IOException
      */
     private static function getFormUrl($sModule, $sController, $sAction)
     {

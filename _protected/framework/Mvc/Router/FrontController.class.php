@@ -126,7 +126,7 @@ final class FrontController
      *  Router for the modules that are rewriting through the custom XML route file.
      *
      * @throws PH7Exception
-     * @throws \PH7\Framework\File\Exception If the XML route file is not found.
+     * @throws \PH7\Framework\File\IOException If the XML route file is not found.
      */
     private function launchRewritingRouter()
     {

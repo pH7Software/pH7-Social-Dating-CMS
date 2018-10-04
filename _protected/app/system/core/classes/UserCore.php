@@ -335,7 +335,7 @@ class UserCore
      *
      * @return string The link
      *
-     * @throws Framework\File\Exception
+     * @throws Framework\File\IOException
      */
     public function getProfileSignupLink($sUsername, $sFirstName, $sSex)
     {
@@ -486,7 +486,7 @@ class UserCore
      *
      * @return void
      *
-     * @throws Framework\File\Exception
+     * @throws Framework\File\IOException
      */
     public function activateAccount($sEmail, $sHash, Config $oConfig, Registry $oRegistry, $sMod = 'user')
     {

@@ -49,7 +49,7 @@ final class UserNotifierString
     /**
      * @return string
      *
-     * @throws Framework\File\Exception
+     * @throws Framework\File\IOException
      */
     public static function getDisapprovedMessage()
     {

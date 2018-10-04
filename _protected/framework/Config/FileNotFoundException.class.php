@@ -11,11 +11,11 @@
 
 namespace PH7\Framework\Config;
 
+use PH7\Framework\File\IOException;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Error\CException\PH7Exception;
-
-class FileNotFoundException extends PH7Exception
+class FileNotFoundException extends IOException
 {
     const APP_FILE = 1;
     const SYS_FILE = 2;
