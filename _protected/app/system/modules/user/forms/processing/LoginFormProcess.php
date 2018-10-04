@@ -111,7 +111,10 @@ class LoginFormProcess extends Form implements LoginableForm
                 } else {
                     $oUser->setAuth($oUserData, $this->oUserModel, $this->session, $oSecurityModel);
 
-                    Header::redirect(Uri::get('user', 'account', 'index'), t('You are successfully logged in!'));
+                    Header::redirect(
+                        Uri::get('user', 'account', 'index'),
+                        t('You are successfully logged in!')
+                    );
                 }
             }
         }
