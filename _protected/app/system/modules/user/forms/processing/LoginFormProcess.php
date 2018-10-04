@@ -26,6 +26,8 @@ class LoginFormProcess extends Form implements LoginableForm
 
     public function __construct()
     {
+        $sUrlRelocateAfterLogin = Uri::get('user', 'account', 'index');
+
         parent::__construct();
 
         $this->oUserModel = new UserCoreModel;
@@ -107,12 +109,19 @@ class LoginFormProcess extends Form implements LoginableForm
                     // Store the user ID for 2FA
                     $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iId);
 
-                    Header::redirect(Uri::get('two-factor-auth', 'main', 'verificationcode', 'user'));
+                    Header::redirect(
+                        Uri::get(
+                            'two-factor-auth',
+                            'main',
+                            'verificationcode',
+                            'user'
+                        )
+                    );
                 } else {
                     $oUser->setAuth($oUserData, $this->oUserModel, $this->session, $oSecurityModel);
 
                     Header::redirect(
-                        Uri::get('user', 'account', 'index'),
+                        $sUrlRelocateAfterLogin,
                         t('You are successfully logged in!')
                     );
                 }
