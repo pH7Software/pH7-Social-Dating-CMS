@@ -328,6 +328,6 @@ File ID: ' . $this->sId . '
             return true;
         }
 
-        throw new IOException('Could not write cache file: "' . $sFile . '"');
+        throw new IOException('Could not write cache file: ' . $sFile);
     }
 }
