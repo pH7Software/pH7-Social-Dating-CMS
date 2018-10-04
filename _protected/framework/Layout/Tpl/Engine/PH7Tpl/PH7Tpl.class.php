@@ -27,6 +27,7 @@ use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Layout\Html\Mail as MailLayout;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception as TplException;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax\Syntax;
+use PH7\Framework\Layout\Tpl\Engine\Templatable;
 use PH7\Framework\Mvc\Model\Design as DesignModel;
 use PH7\Framework\Parse\SysVar;
 

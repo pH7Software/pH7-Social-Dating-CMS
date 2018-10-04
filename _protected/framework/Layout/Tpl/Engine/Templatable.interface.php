@@ -6,7 +6,7 @@
  * @package          PH7 / Framework / Layout / Tpl / Engine
  */
 
-namespace PH7\Framework\Layout\Tpl\Engine\PH7Tpl;
+namespace PH7\Framework\Layout\Tpl\Engine;
 
 interface Templatable
 {
