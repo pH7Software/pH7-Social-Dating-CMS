@@ -488,7 +488,7 @@ class UpgradeCore
     {
         try {
             return F\Import::file(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::INFO_DIR . PH7_DS . $sInstFile);
-        } catch (F\IOException $e) {
+        } catch (F\IOException $oExcept) {
             return '<p class="error">' . t('Instruction file not found!') . '</p>';
         }
     }
