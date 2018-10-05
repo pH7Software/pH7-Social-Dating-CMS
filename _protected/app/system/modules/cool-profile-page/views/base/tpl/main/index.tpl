@@ -154,8 +154,8 @@
             </div>
         {/if}
 
-        <h2 class="center">{lang 'Photos & Videos'}</h2>
         {if $is_picture_enabled}
+            <h2 class="center">{lang 'Photos'}</h2>
             <div class="profile-section">
                 <div class="content" id="picture">
                     <script>
@@ -168,6 +168,7 @@
         {/if}
 
         {if $is_video_enabled}
+            <h2 class="center">{lang 'Videos'}</h2>
             <div class="profile-section">
                 <div class="content" id="video">
                     <script>
