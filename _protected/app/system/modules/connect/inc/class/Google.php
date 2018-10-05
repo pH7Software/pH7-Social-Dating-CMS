@@ -116,7 +116,7 @@ class Google extends Api implements IApi
      */
     public function add(array $aProfile, UserCoreModel $oUserModel)
     {
-        $sBirthDate = !empty($aProfile['birthday']) ? $aProfile['birthday'] : date('m/d/Y', strtotime('-30 year'));
+        $sBirthDate = !empty($aProfile['birthday']) ? $aProfile['birthday'] : $this->getDefaultUserBirthDate();
         $sSex = $this->checkGender($aProfile['gender']);
         $sMatchSex = ($sSex == 'male' ? 'female' : ($sSex == 'female' ? 'male' : 'couple'));
         $this->sUsername = (new UserCore)->findUsername($aProfile['given_name'], $aProfile['name'], $aProfile['family_name']);
@@ -129,7 +129,7 @@ class Google extends Api implements IApi
             'last_name' => !empty($aProfile['family_name']) ? $aProfile['family_name'] : '',
             'sex' => $sSex,
             'match_sex' => [$sMatchSex],
-            'birth_date' => (new CDateTime)->get($sBirthDate)->date('Y-m-d'),
+            'birth_date' => (new CDateTime)->get($sBirthDate)->date(static::BIRTH_DATE_FORMAT),
             'country' => Geo::getCountryCode(),
             'city' => Geo::getCity(),
             'state' => Geo::getState(),

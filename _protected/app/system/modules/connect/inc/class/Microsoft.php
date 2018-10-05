@@ -131,7 +131,7 @@ class Microsoft extends Api
             'last_name' => !empty($oProfile->last_name) ? $oProfile->last_name : '',
             'sex' => $sSex,
             'match_sex' => [$sMatchSex],
-            'birth_date' => (new CDateTime)->get($sBirthDate)->date('Y-m-d'),
+            'birth_date' => (new CDateTime)->get($sBirthDate)->date(static::BIRTH_DATE_FORMAT),
             'country' => Geo::getCountryCode(),
             'city' => Geo::getCity(),
             'state' => Geo::getState(),
@@ -172,6 +172,6 @@ class Microsoft extends Api
     {
         return isset($oProfile->birth_month, $oProfile->birth_day, $oProfile->birth_year) ?
             $oProfile->birth_month . '/' . $oProfile->birth_day . '/' . $oProfile->birth_year :
-            date('m/d/Y', strtotime('-30 year'));
+            $this->getDefaultUserBirthDate();
     }
 }
