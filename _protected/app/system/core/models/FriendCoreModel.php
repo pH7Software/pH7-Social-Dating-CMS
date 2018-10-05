@@ -90,13 +90,10 @@ class FriendCoreModel extends Model
 
         if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
         } else {
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
-            $mData = (int)$oRow->totalFriends;
-            unset($oRow);
+            $mData = (int)$rStmt->fetchColumn();
         }
+        Db::free($rStmt);
 
         return $mData;
     }
