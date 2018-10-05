@@ -71,7 +71,7 @@ abstract class Api
      *
      * @return void
      */
-    public function setLogin($iId, UserCoreModel $oUserModel)
+    protected function setLogin($iId, UserCoreModel $oUserModel)
     {
         $oUserData = $oUserModel->readProfile($iId);
         $oUser = new UserCore;

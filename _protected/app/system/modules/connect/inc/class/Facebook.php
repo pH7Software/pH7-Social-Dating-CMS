@@ -199,7 +199,7 @@ class Facebook extends Api implements IApi
      *
      * @return void
      */
-    protected function setLoginUrl(FacebookRedirectLoginHelper $oHelper)
+    private function setLoginUrl(FacebookRedirectLoginHelper $oHelper)
     {
         $this->sUrl = $oHelper->getLoginUrl(
             Uri::get(
