@@ -143,7 +143,7 @@ class ProfileController extends ProfileBaseController
     {
         $iNbFriend = FriendCoreModel::total($this->iProfileId);
         $sNbFriend = $iNbFriend > 0 ? ' (' . $iNbFriend . ')' : '';
-        $sFriendTxt = $iNbFriend <= 1 ? ($iNbFriend == 1) ? t('Friend:') : t('No Friends') : t('Friends:');
+        $sFriendTxt = $iNbFriend <= 1 ? $iNbFriend === 1 ? t('Friend:') : t('No Friends') : t('Friends:');
 
         return $sFriendTxt . $sNbFriend;
     }
@@ -164,7 +164,7 @@ class ProfileController extends ProfileBaseController
             null
         );
         $sNbMutFriend = $iNbMutFriend > 0 ? ' (' . $iNbMutFriend . ')' : '';
-        $sMutFriendTxt = $iNbMutFriend <= 1 ? ($iNbMutFriend == 1) ? t('Mutual Friend:') : t('No Mutual Friends') : t('Mutual Friends:');
+        $sMutFriendTxt = $iNbMutFriend <= 1 ? $iNbMutFriend === 1 ? t('Mutual Friend:') : t('No Mutual Friends') : t('Mutual Friends:');
 
         return $sMutFriendTxt . $sNbMutFriend;
     }
