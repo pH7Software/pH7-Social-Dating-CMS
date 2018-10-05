@@ -37,12 +37,8 @@ class FriendCoreModel extends Model
         $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
 
+        $sSqlSelect = !$bCount ? '(f.profileId + f.friendId - :profileId) AS fdId, f.*, m.username, m.firstName, m.sex' : 'COUNT(f.friendId)';
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
-
-        $sSqlSelect = 'COUNT(f.friendId) AS totalFriends';
-        if (!$bCount) {
-            $sSqlSelect = '(f.profileId + f.friendId - :profileId) AS fdId, f.*, m.username, m.firstName, m.sex';
-        }
 
         $sSqlWhere = '(f.profileId = :profileId OR f.friendId = :profileId)';
         if (!empty($iFriendId)) {
