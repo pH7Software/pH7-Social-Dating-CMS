@@ -13,7 +13,6 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use Facebook\Facebook as FB;
 use Facebook\FacebookResponse;
@@ -21,7 +20,6 @@ use Facebook\GraphNodes\GraphLocation;
 use Facebook\GraphNodes\GraphUser;
 use Facebook\Helpers\FacebookRedirectLoginHelper;
 use PH7\Framework\Config\Config;
-use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Error\CException\PH7Exception;
 use PH7\Framework\File\File;
 use PH7\Framework\Geo\Ip\Geo;
@@ -35,10 +33,10 @@ class Facebook extends Api implements IApi
 {
     const GRAPH_URL = 'https://graph.facebook.com/';
 
-    /** @var \Facebook\GraphNodes\GraphObject */
+    /** @var \Facebook\GraphNodes\GraphUser */
     private $oProfile;
 
-    /** @var \Facebook\GraphNodes\GraphObject */
+    /** @var \Facebook\GraphNodes\GraphLocation */
     private $oLocation;
 
     /** @var string */
@@ -96,10 +94,9 @@ class Facebook extends Api implements IApi
         try {
             $oResponse = $oFb->get('/me');
             $this->initClassAttrs($oResponse);
-        } catch (FacebookResponseException $oE) {
+        } catch (FacebookSDKException $oE) {
             PH7Exception::launch($oE);
         }
-
 
         // If we have GraphUser object
         if (!empty($this->oProfile)) {
@@ -144,7 +141,7 @@ class Facebook extends Api implements IApi
     public function add(UserCoreModel $oUserModel)
     {
         $oUser = new UserCore;
-        $sBirthDate = !empty($this->oProfile->getBirthday()) ? $this->oProfile->getBirthday() : date('m/d/Y', strtotime('-30 year'));
+        $sBirthDate = $this->oProfile->getBirthday() !== null ? $this->oProfile->getBirthday()->format(static::BIRTH_DATE_FORMAT) : $this->getDefaultUserBirthDate();
         $sSex = $this->checkGender($this->oProfile->getGender());
         $sMatchSex = $oUser->getMatchSex($sSex);
         $this->sUsername = $oUser->findUsername($this->oProfile->getId(), $this->oProfile->getFirstName(), $this->oProfile->getLastName());
@@ -159,12 +156,11 @@ class Facebook extends Api implements IApi
             'middle_name' => $this->oProfile->getMiddleName(),
             'sex' => $sSex,
             'match_sex' => [$sMatchSex],
-            'birth_date' => (new CDateTime)->get($sBirthDate)->date('Y-m-d'),
+            'birth_date' => $sBirthDate,
             'country' => Geo::getCountryCode(),
             'city' => !empty($this->oLocation->getCity()) ? $this->oLocation->getCity() : Geo::getCity(),
             'state' => !empty($this->oLocation->getState()) ? $this->oLocation->getState() : Geo::getState(),
             'zip_code' => !empty($this->oLocation->getZip()) ? $this->oLocation->getZip() : Geo::getZipCode(),
-            'description' => $this->oProfile->getDescription(),
             'social_network_site' => $this->oProfile->getLink(),
             'ip' => Ip::get(),
             'prefix_salt' => Various::genRnd(),
@@ -219,10 +215,12 @@ class Facebook extends Api implements IApi
      * @param FacebookResponse $oResponse
      *
      * @return void
+     *
+     * @throws FacebookSDKException
      */
     private function initClassAttrs(FacebookResponse $oResponse)
     {
-        $this->oProfile = $oResponse->getGraphObject(GraphUser::className());
-        $this->oLocation = $oResponse->getGraphObject(GraphLocation::className());
+        $this->oProfile = $oResponse->getGraphNode(GraphUser::class);
+        $this->oLocation = $oResponse->getGraphNode(GraphLocation::class);
     }
 }
