@@ -107,7 +107,7 @@ class FriendCoreModel extends Model
      */
     public static function getPending($iFriendId)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(pending) AS pendingFds FROM' .
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(pending) FROM' .
             Db::prefix(DbTableName::MEMBER_FRIEND) . 'WHERE friendId = :friendId AND pending = \'1\'');
 
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
@@ -127,7 +127,7 @@ class FriendCoreModel extends Model
      */
     public static function total($iProfileId)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(friendId) AS totalFds FROM' .
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(friendId) FROM' .
             Db::prefix(DbTableName::MEMBER_FRIEND) .
             'WHERE (profileId = :profileId OR friendId= :profileId)');
 
