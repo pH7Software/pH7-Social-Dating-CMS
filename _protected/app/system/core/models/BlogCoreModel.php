@@ -65,21 +65,20 @@ class BlogCoreModel extends Model
     {
         $this->cache->start(self::CACHE_GROUP, 'totalPosts', static::CACHE_LIFETIME);
 
-        if (!$iData = $this->cache->get()) {
+        if (!$iTotalPosts = $this->cache->get()) {
             $iDay = (int)$iDay;
             $sSqlDay = ($iDay > 0) ? ' WHERE (createdDate + INTERVAL ' . $iDay . ' DAY) > NOW()' : '';
 
             $rStmt = Db::getInstance()->prepare(
-                'SELECT COUNT(postId) AS totalPosts FROM' . Db::prefix(DbTableName::BLOG) . $sSqlDay
+                'SELECT COUNT(postId) FROM' . Db::prefix(DbTableName::BLOG) . $sSqlDay
             );
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+
+            $iTotalPosts = (int)$rStmt->fetchColumn();
             Db::free($rStmt);
-            $iData = (int)$oRow->totalPosts;
-            unset($oRow);
-            $this->cache->put($iData);
+            $this->cache->put($iTotalPosts);
         }
 
-        return $iData;
+        return $iTotalPosts;
     }
 }

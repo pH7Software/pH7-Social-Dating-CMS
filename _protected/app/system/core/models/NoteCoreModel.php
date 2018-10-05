@@ -77,7 +77,7 @@ class NoteCoreModel extends Model
     {
         $this->cache->start(self::CACHE_GROUP, 'totalPosts', static::CACHE_LIFETIME);
 
-        if (!$iData = $this->cache->get()) {
+        if (!$iTotalPosts = $this->cache->get()) {
             $iDay = (int)$iDay;
             $bIsApproved = isset($iApproved);
 
@@ -85,19 +85,18 @@ class NoteCoreModel extends Model
             $sSqlAnd = ($bIsApproved && $iDay > 0 ? ' AND' : ($iDay > 0 ? 'WHERE' : ''));
             $sSqlApproved = $bIsApproved ? ' approved = :approved' : '';
             $sSqlDay = ($iDay > 0) ? ' (createdDate + INTERVAL ' . $iDay . ' DAY) > NOW()' : '';
-            $sSqlQuery = 'SELECT COUNT(postId) AS totalPosts FROM' . Db::prefix(DbTableName::NOTE) . $sSqlWhere . $sSqlApproved . $sSqlAnd . $sSqlDay;
+            $sSqlQuery = 'SELECT COUNT(postId) FROM' . Db::prefix(DbTableName::NOTE) . $sSqlWhere . $sSqlApproved . $sSqlAnd . $sSqlDay;
             $rStmt = Db::getInstance()->prepare($sSqlQuery);
             if ($bIsApproved) {
                 $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
             }
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+
+            $iTotalPosts = (int)$rStmt->fetchColumn();
             Db::free($rStmt);
-            $iData = (int)$oRow->totalPosts;
-            unset($oRow);
-            $this->cache->put($iData);
+            $this->cache->put($iTotalPosts);
         }
 
-        return $iData;
+        return $iTotalPosts;
     }
 }
