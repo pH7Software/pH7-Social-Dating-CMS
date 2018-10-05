@@ -22,6 +22,8 @@ use PH7\Framework\Util\Various;
 
 abstract class Api
 {
+    const BIRTH_DATE_FORMAT = 'Y-m-d';
+
     /** @var Design */
     protected $oDesign;
 
@@ -80,6 +82,14 @@ abstract class Api
         unset($oUser);
 
         (true !== $sErrMsg) ? $this->oDesign->setFlashMsg($sErrMsg) : t('Hi %0%, welcome to %site_name%', '<em>' . $oUserData->firstName . '</em>');
+    }
+
+    /**
+     * @return string
+     */
+    protected function getDefaultUserBirthDate()
+    {
+        return date(self::BIRTH_DATE_FORMAT, strtotime('-30 year'));
     }
 
     /**
