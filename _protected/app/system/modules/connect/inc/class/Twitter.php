@@ -238,10 +238,13 @@ class Twitter extends Api implements IApi
     public function setAvatar($aUserData)
     {
         // Request user's 'bigger' profile image
-        $this->oTwOAuth->request('GET', $this->oTwOAuth->url('1/users/profile_image/' . $aUserData['screen_name']), [
-            'screen_name' => $aUserData['screen_name'],
-            'size' => 'bigger'
-        ]);
+        $this->oTwOAuth->request(
+            'GET',
+            $this->oTwOAuth->url('1/users/profile_image/' . $aUserData['screen_name']),
+            [
+                'screen_name' => $aUserData['screen_name'],
+                'size' => 'bigger'
+            ]);
 
         // Try to get the URL for the avatar size standard
         if ($this->oTwOAuth->response['code'] == StatusCode::FOUND) {
