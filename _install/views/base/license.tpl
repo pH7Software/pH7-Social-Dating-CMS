@@ -10,12 +10,12 @@
 
 <form method="post" action="{$smarty.const.PH7_URL_SLUG_INSTALL}license">
     <p>
-        <input type="checkbox" name="license_agreed" id="license_agreed" onclick="checkLicenseStatus()"/>
+        <input type="checkbox" name="license_agreed" id="license_agreed" onclick="checkAgreementStatus()"/>
         <label for="license_agreed">{$LANG.agree_license}</label>
     </p>
 
     <p>
-        <input type="checkbox" name="disclaimer" id="disclaimer" onclick="checkLicenseStatus()"/> {$LANG.responsibility_agreement}
+        <input type="checkbox" name="disclaimer" id="disclaimer" onclick="checkAgreementStatus()"/> {$LANG.responsibility_agreement}
     </p>
 
     <p>
@@ -26,7 +26,7 @@
 
 {literal}
     <script>
-        function checkLicenseStatus() {
+        function checkAgreementStatus() {
             document.getElementById('next_btn').disabled = (document.getElementById('license_agreed').checked && document.getElementById('disclaimer').checked) ? false : true;
         }
     </script>
