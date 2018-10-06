@@ -248,7 +248,7 @@ class MainController extends Controller
         $this->manualTplInclude($this->getTemplatePageName() . PH7Tpl::TEMPLATE_FILE_EXT);
 
         if ($this->bStatus) {
-            $this->setAutomaticRedirectionToHomepage();
+            $this->setAutoRedirectionToHomepage();
         }
 
         $this->output();
@@ -440,7 +440,7 @@ class MainController extends Controller
      *
      * @return void
      */
-    private function setAutomaticRedirectionToHomepage()
+    private function setAutoRedirectionToHomepage()
     {
         $this->design->setRedirect(
             $this->registry->site_url,
