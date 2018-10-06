@@ -15,8 +15,7 @@
     </p>
 
     <p>
-        <input type="checkbox" name="disclaimer" id="disclaimer" onclick="checkLicenseStatus()"/>
-        <label for="disclaimer">{$LANG.responsibility_agreement}</label>
+        <input type="checkbox" name="disclaimer" id="disclaimer" onclick="checkLicenseStatus()"/> {$LANG.responsibility_agreement}
     </p>
 
     <p>
