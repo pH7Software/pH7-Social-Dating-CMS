@@ -2,6 +2,7 @@
         </section>
       </div>
     </div>
+    <hr />
 
     <footer>
       {menu_langs}
