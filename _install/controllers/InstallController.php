@@ -105,11 +105,7 @@ class InstallController extends Controller
     public function license()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['license_submit'])) {
-            if (
-                !empty($_POST['license_agreed']) &&
-                !empty($_POST['conform_laws_agreed']) &&
-                !empty($_POST['responsibilities_agreed'])
-            ) {
+            if ($this->isAgreementsAgreed()) {
                 $_SESSION['step2'] = 1;
 
                 redirect(PH7_URL_SLUG_INSTALL . 'config_path');
@@ -597,6 +593,17 @@ class InstallController extends Controller
             $sMethodName = ($sName === 'socialMediaWidgets' ? 'setSocialWidgets' : 'setSetting');
             Framework\Mvc\Model\DbConfig::$sMethodName($sValue, $sName);
         }
+    }
+
+    /**
+     * @return bool
+     */
+    private function isAgreementsAgreed()
+    {
+        return
+            !empty($_POST['license_agreed']) &&
+            !empty($_POST['conform_laws_agreed']) &&
+            !empty($_POST['responsibilities_agreed']);
     }
 
     /***** Set the correct permission to the config files *****/
