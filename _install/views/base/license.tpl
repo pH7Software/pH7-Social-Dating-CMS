@@ -15,7 +15,11 @@
     </p>
 
     <p>
-        <input type="checkbox" name="disclaimer" id="disclaimer" onclick="checkAgreementStatus()"/> {$LANG.responsibility_agreement}
+        <input type="checkbox" name="conform_laws_agreed" id="conform_laws_agreed" onclick="checkAgreementStatus()"/> {$LANG.conform_to_laws}
+    </p>
+
+    <p>
+        <input type="checkbox" name="responsibilities_agreed" id="responsibilities_agreed" onclick="checkAgreementStatus()"/> {$LANG.responsibilities_agreement}
     </p>
 
     <p>
@@ -27,7 +31,11 @@
 {literal}
     <script>
         function checkAgreementStatus() {
-            document.getElementById('next_btn').disabled = (document.getElementById('license_agreed').checked && document.getElementById('disclaimer').checked) ? false : true;
+            document.getElementById('next_btn').disabled =
+                document.getElementById('license_agreed').checked &&
+                document.getElementById('conform_laws_agreed').checked &&
+                document.getElementById('responsibilities_agreed').checked
+            ? false : true;
         }
     </script>
 {/literal}
