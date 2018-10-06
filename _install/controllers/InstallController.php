@@ -606,14 +606,22 @@ class InstallController extends Controller
             !empty($_POST['responsibilities_agreed']);
     }
 
-    /***** Set the correct permission to the config files *****/
+    /**
+     * Set the correct permission to the config files.
+     *
+     * @return void
+     */
     private function chmodConfigFiles()
     {
         @chmod(PH7_PATH_APP_CONFIG . 'config.ini', 0644);
         @chmod(PH7_ROOT_PUBLIC . '_constants.php', 0644);
     }
 
-    /***** Require & Initialize the classes *****/
+    /**
+     * Require & Initialize the classes.
+     *
+     * @return void
+     */
     private function initializeClasses()
     {
         @require_once PH7_ROOT_PUBLIC . '_constants.php';
@@ -630,7 +638,11 @@ class InstallController extends Controller
         App\Includes\Classes\Loader\Autoloader::getInstance()->init();
     }
 
-    /***** Get the loading image *****/
+    /**
+     * Get the loading HTML <img src="" /> gif image.
+     *
+     * @return string
+     */
     private function loadImg()
     {
         global $LANG;
