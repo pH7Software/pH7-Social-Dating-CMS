@@ -115,6 +115,7 @@ class MainController extends Controller
      * @return void
      *
      * @throws Framework\Mvc\Request\WrongRequestMethodException
+     * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
     public function process($sProvider = '')
     {
@@ -258,6 +259,8 @@ class MainController extends Controller
      * @param int $iItemNumber
      *
      * @return void
+     *
+     * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
     public function notification($sGatewayName = '', $iItemNumber = 0)
     {
