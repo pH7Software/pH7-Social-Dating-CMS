@@ -264,7 +264,10 @@ class MainController extends Controller
         // Save buyer information to a log file
         if ($this->isValidPaymentGateway($sGatewayName)) {
             // Add payment info into the log file
-            $this->log(new $sGatewayName(false), t('%0% payment was made with the following information:', $sGatewayName));
+            $this->log(
+                new $sGatewayName(false),
+                t('%0% payment was made with the following information:', $sGatewayName)
+            );
         }
 
         // Send a notification email
