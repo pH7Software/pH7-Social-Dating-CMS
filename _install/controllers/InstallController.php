@@ -570,7 +570,7 @@ class InstallController extends Controller
      * @param string $sModName Module Name.
      * @param string $sStatus '1' = Enabled | '0' = Disabled (need to be string because in DB it is an "enum").
      *
-     * @return integer|boolean Returns the number of rows on success or FALSE on failure.
+     * @return int|bool Returns the number of rows on success or FALSE on failure.
      */
     private function updateMods(Db $oDb, $sModName, $sStatus)
     {
