@@ -35,6 +35,7 @@ $LANG = array(
     'register' => '¡Guárdelo!',
     'site_name' => 'Nombre de tu sitio',
     'agree_license' => 'He leído y acepto los términos anteriores.',
+    'responsibility_agreement' => 'Este software se distribuye SIN NINGUNA GARANTÍA.<br /> Acepto usarlo bajo mi propio riesgo y que el autor de este software no puede, en ningún caso, ser considerado responsable por daños directos o indirectos, ni por ningún otro daño de ningún tipo, como resultado del uso de este software o la imposibilidad de Úsalo por cualquier motivo.',
     'step' => 'Paso',
     'welcome' => 'Bienvenido a la instalación de',
     'welcome_to_installer' => 'Instalación de',

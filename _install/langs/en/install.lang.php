@@ -35,6 +35,7 @@ $LANG = array(
     'register' => 'Save It!',
     'site_name' => 'Site Name',
     'agree_license' => 'I have read and agree to the above Terms.',
+    'responsibility_agreement' => 'This software is distributed WITHOUT ANY WARRANTY.<br /> I agree to use it at my own risk and that the author of this software cannot in any case be held liable for direct or indirect damage, nor for any other damage of any kind whatsoever, resulting from the use of this software or the impossibility to use it for any reason whatsoever.',
     'step' => 'Step',
     'welcome' => 'Welcome to the installation of',
     'welcome_to_installer' => 'Installation of',

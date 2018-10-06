@@ -35,6 +35,7 @@ $LANG = array(
     'register' => 'Enregistrer !',
     'site_name' => 'Nom de votre site',
     'agree_license' => 'J\'ai lu et j\'accepte les Termes de licence ci-dessus.',
+    'responsibility_agreement' => 'Ce logiciel est distribué SANS AUCUNE GARANTIE.<br /> J\'accepte d\'utiliser ce logiciel à mes risques et périls et que l\'auteur de ce logiciel ne pourra en aucun cas être tenu responsable des dommages directs ou indirects, ni de tout autre dommage de quelque nature que ce soit, résultant de l\'utilisation de ce logiciel ou de l\'impossibilité d\'utiliser le logiciel pour quelque raison que ce soit.',
     'step' => 'Étape',
     'welcome' => 'Bienvenue sur l\'installation de',
     'welcome_to_installer' => 'Installation de',
