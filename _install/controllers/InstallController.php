@@ -105,7 +105,7 @@ class InstallController extends Controller
     public function license()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['license_submit'])) {
-            if (!empty($_POST['license_agreed'])) {
+            if (!empty($_POST['license_agreed']) && !empty($_POST['disclaimer'])) {
                 $_SESSION['step2'] = 1;
 
                 redirect(PH7_URL_SLUG_INSTALL . 'config_path');
