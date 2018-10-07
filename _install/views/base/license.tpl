@@ -23,7 +23,7 @@
     </p>
 
     <p>
-        <button type="submit" name="license_submit" id="next_btn" value="1" disabled="disabled"
+        <button type="submit" name="license_agreements_submit" id="next_btn" value="1" disabled="disabled"
             class="btn btn-primary btn-lg">{$LANG.next}</button>
     </p>
 </form>

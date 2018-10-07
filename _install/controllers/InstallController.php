@@ -104,7 +104,7 @@ class InstallController extends Controller
     /********************* STEP 2 *********************/
     public function license()
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['license_submit'])) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['license_agreements_submit'])) {
             if ($this->isAgreementsAgreed()) {
                 $_SESSION['step2'] = 1;
 
