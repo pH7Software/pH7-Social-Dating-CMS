@@ -1,8 +1,8 @@
 {include file="inc/header.tpl"}
 
-<h2>{$LANG.license}</h2>
+<h2>{$LANG.license_agreements}</h2>
 
-<p {if !empty($failure)}class="error"{/if}>{$LANG.license_desc}</p>
+<p {if !empty($failure)}class="error"{/if}>{$LANG.license_agreements_desc}</p>
 
 <p>
     <iframe src="{$smarty.const.PH7_URL_INSTALL}langs/{$current_lang}/license.html">{$LANG.need_frame}</iframe>
