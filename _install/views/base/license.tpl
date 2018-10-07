@@ -10,8 +10,7 @@
 
 <form method="post" action="{$smarty.const.PH7_URL_SLUG_INSTALL}license">
     <p>
-        <input type="checkbox" name="license_agreed" id="license_agreed" onclick="checkAgreementStatus()"/>
-        <label for="license_agreed">{$LANG.agree_license}</label>
+        <input type="checkbox" name="license_agreed" id="license_agreed" onclick="checkAgreementStatus()"/> {$LANG.agree_license}
     </p>
 
     <p>
