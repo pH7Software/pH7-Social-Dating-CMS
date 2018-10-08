@@ -36,7 +36,7 @@ $LANG = array(
     'site_name' => 'Nom de votre site',
     'agree_license' => 'J\'ai lu et j\'accepte les Termes de licence ci-dessus.',
     'conform_to_laws' => 'J\'accepte de toujours garder mon site web entièrement légal et de me conformer à toutes lois et régulations applicables susceptibles de s\'appliquer à moi, à mon entreprise, à mon site web et ses utilisateurs, et de vérifier et <a href="https://ph7cms.com/doc/en/how-to-edit-the-static-and-legal-pages" target="_blank" rel="noopener">mettre à jour les "CGU", "charte de confidentialité", "mentions légales" (et toutes autres pages légales nécessaires)</a> afin de me conformer pleinement aux lois et régulations applicables.',
-    'responsibilities_agreement' => 'J\'accepte d\'utiliser ce logiciel à mes risques et périls et que l\'auteur de ce logiciel ne pourra en aucun cas être tenu responsable des dommages et intérets directs ou indirects, ni de tout autre dommage de quelque nature que ce soit, résultant de l\'utilisation de ce logiciel ou de l\'impossibilité d\'utiliser le logiciel pour quelque raison que ce soit.',
+    'responsibilities_agreement' => 'J\'accepte d\'utiliser ce logiciel à mes risques et périls et que l\'auteur de ce logiciel ne pourra en aucun cas être tenu responsable des dommages-intérêts directs ou indirects, ni de tout autre dommage de quelque nature que ce soit, résultant de l\'utilisation de ce logiciel ou de l\'impossibilité d\'utiliser le logiciel pour quelque raison que ce soit.',
     'step' => 'Étape',
     'welcome' => 'Bienvenue sur l\'installation de',
     'welcome_to_installer' => 'Installation de',
