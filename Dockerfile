@@ -58,10 +58,11 @@ RUN docker-php-ext-install bz2 && \
     docker-php-ext-install zip
 
 
-# Run Composer
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-RUN php composer-setup.php --install-dir=/usr/bin --filename=composer
-RUN php -r "unlink('composer-setup.php');"
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/ \
+    && ln -s /usr/local/bin/composer.phar /usr/local/bin/composer
+ENV PATH="~/.composer/vendor/bin:./vendor/bin:${PATH}"
 
 # Expose ports
 EXPOSE 80
