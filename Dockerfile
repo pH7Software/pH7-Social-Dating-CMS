@@ -1,3 +1,7 @@
+# Set the wanted PHP version
+ARG PHP_VERSION=7.2
+
+
 # Set the base image to Ubuntu
 FROM ubuntu:latest
 
@@ -40,7 +44,7 @@ ADD ph7cms.conf /etc/nginx/
 RUN echo "daemon off;" >> /etc/nginx/ph7cms.conf
 
 # Install PHP!
-FROM php:5.6-fpm
+FROM php:${PHP_VERSION}-fpm
 
 RUN docker-php-ext-install bz2 && \
     docker-php-ext-configure gd \
