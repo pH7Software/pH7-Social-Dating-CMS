@@ -1,9 +1,10 @@
-# Set the wanted PHP version
+# Set the wanted Ubuntu & PHP versions
+ARG UBUNTU_VERSION=18.04
 ARG PHP_VERSION=7.2
 
 
 # Set the base image to Ubuntu
-FROM ubuntu:latest
+FROM ubuntu:${UBUNTU_VERSION}
 
 # Install Nginx
 
