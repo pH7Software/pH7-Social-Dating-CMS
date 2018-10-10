@@ -67,6 +67,7 @@ ENV PATH="~/.composer/vendor/bin:./vendor/bin:${PATH}"
 
 # Expose ports
 EXPOSE 80
+EXPOSE 443
 
 # Set the default command to execute
 # when creating a new container
