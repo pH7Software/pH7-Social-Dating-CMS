@@ -22,7 +22,7 @@
         default and uses our homemade compressor instead. However, if you have Java installed on your server, it would
         be nicer to enable that option).
     </li>
-    <li>mod_security/mod_security2 disabled - pH7CMS may not work correctly if enabled so we advise to disable it for
+    <li>Apache mod_security/mod_security2 disabled - pH7CMS may not work correctly if enabled, so it's advisable to disable it for
         your domain (just ask your Web host or do it through cPanel).
     </li>
 </ul>
