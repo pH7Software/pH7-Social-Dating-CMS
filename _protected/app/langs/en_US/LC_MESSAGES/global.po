@@ -2386,8 +2386,11 @@ msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/AddAdminForm.php:36
 msgid ""
-"With your time zone, the other administrators may know when they can contact "
-"you easily."
+"Knowing the time zone, the other administrators may know when they can contact you easily."
+msgstr ""
+
+#: _protected/app/system/modules/admin123/forms/EditForm.php:49
+msgid "With your time zone, the other administrators may know when they can contact you easily."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/AddFakeProfilesForm.php:31
