@@ -1121,19 +1121,20 @@ msgid "Social Media Profile:"
 msgstr ""
 
 #: _protected/app/system/core/forms/DynamicFieldCoreForm.php:85
-#: _protected/app/system/modules/admin123/forms/AddUserForm.php:48
 #: _protected/app/system/modules/contact/forms/ContactForm.php:41
 msgid "Your Website:"
 msgstr ""
 
-#: _protected/app/system/core/forms/DynamicFieldCoreForm.php:86
-msgid ""
-"The URL of your social profile, such as Facebook, Instagram, Snapchat, ..."
+#: _protected/app/system/modules/admin123/forms/AddUserForm.php:48
+msgid "Personal Website:"
 msgstr ""
 
 #: _protected/app/system/core/forms/DynamicFieldCoreForm.php:86
-msgid ""
-"Your Personal Website/Blog (any promotional/affiliated contents will be "
+msgid "The URL of your social profile, such as Facebook, Instagram, Snapchat, LinkedIn, ..."
+msgstr ""
+
+#: _protected/app/system/core/forms/DynamicFieldCoreForm.php:86
+msgid "Your Personal Website/Blog (any promotional/affiliated contents will be "
 "removed)"
 msgstr ""
 
@@ -2516,7 +2517,7 @@ msgid "Social Network Site:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/AddUserForm.php:49
-msgid "The URL of your social profile, such as Facebook, Instagram, Snapchat, ..."
+msgid "The URL of the social profile, such as Facebook, Instagram, Snapchat, ..."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/AdsForm.php:32
