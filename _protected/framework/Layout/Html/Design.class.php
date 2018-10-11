@@ -768,7 +768,7 @@ class Design
     public function likeApi()
     {
         if ((bool)DbConfig::getSetting('socialMediaWidgets')) {
-            echo '<div class="s_tMarg center addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like"></a><a class="addthis_button_tweet" tw:count="horizontal"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_counter addthis_pill_style"></a></div>';
+            echo '<div class="s_tMarg center addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like"></a><a class="addthis_button_tweet" tw:count="horizontal"></a><a class="addthis_counter addthis_pill_style"></a></div>';
         }
     }
 
@@ -782,7 +782,7 @@ class Design
     public function littleLikeApi()
     {
         if ((bool)DbConfig::getSetting('socialMediaWidgets')) {
-            echo '<div class="addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_button_tweet" tw:count="horizontal"></a></div>';
+            echo '<div class="addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like"></a><a class="addthis_button_tweet" tw:count="horizontal"></a></div>';
         }
     }
 

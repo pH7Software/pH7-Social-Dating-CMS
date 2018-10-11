@@ -46,7 +46,7 @@ class AddUserForm
         $oForm->addElement(new \PFBC\Element\CKEditor(t('Description:'), 'description', ['validation' => new \PFBC\Validation\Str(10, 2000), 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\File(t('Profile Photo:'), 'avatar', ['accept' => 'image/*']));
         $oForm->addElement(new \PFBC\Element\Url(t('Your Website:'), 'website'));
-        $oForm->addElement(new \PFBC\Element\Url(t('Social Network Site:'), 'social_network_site', ['description' => t('The url of your profile Facebook, Twitter, Google+, etc.')]));
+        $oForm->addElement(new \PFBC\Element\Url(t('Social Network Site:'), 'social_network_site', ['description' => t('The URL of your social profile, such as Facebook, Instagram, Snapchat, ...')]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
