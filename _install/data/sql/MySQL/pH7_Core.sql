@@ -1135,7 +1135,7 @@ CREATE TABLE IF NOT EXISTS ph7_static_files (
   PRIMARY KEY (staticId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
-INSERT INTO ph7_static_files VALUES (1, '//s7.addthis.com/js/250/addthis_widget.js', 'js', '0');
+INSERT INTO ph7_static_files VALUES (1, '//static.addtoany.com/menu/page.js', 'js', '0');
 
 
 CREATE TABLE IF NOT EXISTS ph7_custom_code (
