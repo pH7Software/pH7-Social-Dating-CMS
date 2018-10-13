@@ -284,7 +284,7 @@ You can send me an email for any suggestions or feedback at: *hello {AT} ph7cms 
 
 ## License
 
-**pH7CMS** is under **Open Source Free** License.
+**pH7CMS** is generously distributed under **Open Source, Free** License.
 
 License: [General Public License 3](http://www.gnu.org/licenses/gpl.html) or later; See the *PH7.LICENSE.txt* and *PH7.COPYRIGHT.txt* files for more details.
 
