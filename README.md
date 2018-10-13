@@ -29,26 +29,23 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Boosted Social-Dating Streams™
 * Smart Intuitive Search Engine™ (SISE System)
 * Advanced Search
-* Blog
-* Notes
-* Pages Management
 * Friends/Mutual Friends, Visit, Messages, Instant messaging, Views, Like, Rating, Smileys, Geo Map, Avatar, Wallpaper, ...
 * Related Profiles (for better user experience and faster match)
 * Custom Profile (Background profile)
 * Comments
+* Outsmarted Moderation Tools™
 * Hot or Not
 * Love Calculator
 * Matchmaking System
-* Geo-Location
+* Geo-Location System
 * People Nearby
-* Outsmarted Moderation Tools™
+* The FASTEST Social Dating WebApp thanks to the Deep Memoization Tunnel™ 4.0
 * Photo Albums
-* Videos (and possibility to upload videos from API v3 YouTube, Vimeo, Metacafe and Dailymotion)
+* Videos (with possibility to upload videos from v3 YouTube API, Vimeo, Metacafe and Dailymotion)
 * Forums
-* Full Moderation of all contents posted by your users
 * Nudity Filter Option for all images uploaded by users
 * Dating Scammer Detector (see if profile photos aren't used by scammers)
-* Anti-Scam Tools
+* Full Moderation of all contents posted by your users
 * Watermark Branding
 * Chat Rooms
 * Chatroulette
@@ -75,6 +72,9 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Dating-Style Profile Page
 * Fake Profile Generator
 * CSV User Importer
+* Blog
+* Notes
+* Pages Management
 * Support for Multiple Languages, Internationalization and Localization (I18N)
 * European and American Time/Date formats
 * Cache system for the database, pH7Tpl (our template engine), static files (HTML, CSS, JS), string content, ...
@@ -89,7 +89,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Country Blocker (block easily any countries where you don't want your website to be accessible)
 * Country Restrictions for Member and Affiliate registration forms
 * RESTful API for integration from an external app (iOS iPhone, Apple Watch, Android, ...), website, program, ...
-* Feedback
+* Feedback Module
 * Full Homepage Customization (profiles block, slogan, SEO text, headline)
 * Fully Responsive Templates
 * Memberships/Groups Manager
@@ -101,6 +101,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Allow to sign in to your site with Facebook, Google and Twitter thanks pH7CMS's Connect module
 * Invite Friends
 * Social Bookmark (Social Media Sharing Buttons)
+* Anti-Scam Tools
 * Login Attempt Protection
 * Powerful Anti-Spam System (and detects duplicate contents) powered by the Invisible Intelligent Spam Detection System™
 * pCO8 SECURITY pH7Framework™ (offers one of the highest protection for your webapp)
