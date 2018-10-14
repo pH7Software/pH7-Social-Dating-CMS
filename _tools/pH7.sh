@@ -248,6 +248,11 @@ function update-geoip-db()
     echo "Removing temporary file $full_tmp_path"
     rm $full_tmp_path
 
+    if [ -f ${target_path}LICENSE.txt ] && [ -f ${target_path}COPYRIGHT.txt ] && [ -f ${target_path}README.txt ]; then
+    echo "Removing not necessary txt files."
+        rm ${target_path}LICENSE.txt ${target_path}COPYRIGHT.txt ${target_path}README.txt
+    fi
+
     echo "GeoIP DB successfully updated at $full_db_path"
 }
 
