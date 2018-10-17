@@ -14,6 +14,7 @@ namespace PH7\Framework\Config;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\File\Chmod;
 use PH7\Framework\File\File;
 use PH7\Framework\Pattern\Singleton;
 

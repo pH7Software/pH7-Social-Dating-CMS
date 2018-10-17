@@ -14,6 +14,7 @@ namespace PH7\Framework\File;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PH7\Framework\File\Permission\Chmod;
 use PH7\Framework\File\Permission\PermissionException;
 use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Parse\Url as UrlParser;

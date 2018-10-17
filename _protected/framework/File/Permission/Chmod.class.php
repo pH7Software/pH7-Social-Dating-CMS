@@ -6,7 +6,7 @@
  * @package          PH7 / Framework / File
  */
 
-namespace PH7\Framework\File;
+namespace PH7\Framework\File\Permission;
 
 final class Chmod
 {
