@@ -268,7 +268,7 @@ class UpgradeCore
         $sPathPublicDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::FILE_DIR . PH7_DS . static::PUBLIC_DIR;
         if (is_dir($this->oFile->removeWildcards($sPathPublicDir))) {
             $this->oFile->systemCopy($sPathPublicDir, PH7_PATH_ROOT);
-            $this->oFile->chmod(PH7_PATH_ROOT, 0777);
+            $this->oFile->chmod(PH7_PATH_ROOT, F\Chmod::MODE_ALL_EXEC);
         }
     }
 
@@ -277,7 +277,7 @@ class UpgradeCore
         $sPathProtectedDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::FILE_DIR . PH7_DS . static::PROTECTED_DIR;
         if (is_dir($this->oFile->removeWildcards($sPathProtectedDir))) {
             $this->oFile->systemCopy($sPathProtectedDir, PH7_PATH_PROTECTED);
-            $this->oFile->chmod(PH7_PATH_PROTECTED, 0777);
+            $this->oFile->chmod(PH7_PATH_PROTECTED, F\Chmod::MODE_ALL_EXEC);
         }
     }
 

@@ -185,10 +185,10 @@ class Module
     {
         if ($sSwitch === static::INSTALL) {
             $this->oFile->systemRename(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sModsDirModFolder, PH7_PATH_MOD); // Files of module
-            $this->oFile->chmod(PH7_PATH_MOD . $this->sModsDirModFolder, 0777);
+            $this->oFile->chmod(PH7_PATH_MOD . $this->sModsDirModFolder, F\Chmod::MODE_ALL_EXEC);
         } else {
             $this->oFile->systemRename(PH7_PATH_MOD . $this->sModsDirModFolder, PH7_PATH_REPOSITORY . static::DIR . PH7_DS); // Files of module
-            $this->oFile->chmod(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sModsDirModFolder, 0777);
+            $this->oFile->chmod(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->sModsDirModFolder, F\Chmod::MODE_ALL_EXEC);
         }
     }
 

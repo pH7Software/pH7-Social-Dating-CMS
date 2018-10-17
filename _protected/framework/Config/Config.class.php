@@ -138,7 +138,7 @@ class Config implements Configurable
         $oFile = new File;
 
         // Check and correct the file permission if necessary.
-        $oFile->chmod($this->sConfigAppFilePath, 0666);
+        $oFile->chmod($this->sConfigAppFilePath, Chmod::MODE_ALL_WRITE);
 
         $sFileContents = $oFile->getFile($this->sConfigAppFilePath);
         $sSearchContents = 'environment = ' . $sSearch;
