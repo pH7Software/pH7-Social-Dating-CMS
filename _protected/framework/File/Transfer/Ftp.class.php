@@ -17,6 +17,7 @@ namespace PH7\Framework\File\Transfer;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\File\File;
+use PH7\Framework\File\Permission\Chmod;
 use PH7\Framework\File\Permission\PermissionException;
 use RuntimeException;
 
@@ -183,7 +184,7 @@ class Ftp extends File
      *
      * @throws UploadingFileException If the file cannot be transferred to the server.
      */
-    public function put($sFrom, $sTo, $iMode = 0644)
+    public function put($sFrom, $sTo, $iMode = Chmod::MODE_READ_WRITE)
     {
         $iType = $this->getFileMode($sTo);
 

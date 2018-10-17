@@ -14,7 +14,7 @@ namespace PH7\Framework\Config;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\File\Chmod;
+use PH7\Framework\File\Permission\Chmod;
 use PH7\Framework\File\File;
 use PH7\Framework\Pattern\Singleton;
 
@@ -148,7 +148,7 @@ class Config implements Configurable
         $oFile->putFile($this->sConfigAppFilePath, $sNewContents);
 
         // Check and correct the file permission if necessary.
-        $oFile->chmod($this->sConfigAppFilePath, 0644);
+        $oFile->chmod($this->sConfigAppFilePath, Chmod::MODE_READ_WRITE);
 
         unset($oFile, $sFileContents);
     }
