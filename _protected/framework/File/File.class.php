@@ -37,10 +37,6 @@ class File
         self::COPY_FUNC_NAME
     ];
 
-    const READ_CHMOD_OCTAL_DIGIT = 0444;
-    const READ_WRITE_CHMOD_OCTAL_DIGIT = 0644;
-    const READ_WRITE_EXEC_CHMOD_OCTAL_DIGIT = 0777;
-
     const WILDCARD_SYMBOL = '*';
 
     // End Of Line relative to the operating system
@@ -307,7 +303,7 @@ class File
      *
      * @throws PermissionException If the file cannot be created.
      */
-    public function createDir($mDir, $iMode = self::READ_WRITE_EXEC_CHMOD_OCTAL_DIGIT)
+    public function createDir($mDir, $iMode = Chmod::MODE_ALL_EXEC)
     {
         if (is_array($mDir)) {
             foreach ($mDir as $sDir) {

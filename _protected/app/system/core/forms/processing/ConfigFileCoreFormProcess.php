@@ -13,7 +13,7 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\File\File;
+use PH7\Framework\File\Chmod;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Url\Header;
 
@@ -42,7 +42,7 @@ class ConfigFileCoreFormProcess extends Form
         }
 
         // Check and correct the file permission if necessary.
-        $this->file->chmod($sIniFile, File::READ_WRITE_CHMOD_OCTAL_DIGIT);
+        $this->file->chmod($sIniFile, Chmod::MODE_READ_WRITE);
 
         $sRedirectUrl = $this->httpRequest->previousPage();
         if ($this->file->save($sIniFile, $sData)) {
@@ -56,6 +56,6 @@ class ConfigFileCoreFormProcess extends Form
         }
 
         // Check again and correct the file permission if necessary.
-        $this->file->chmod($sIniFile, File::READ_WRITE_CHMOD_OCTAL_DIGIT);
+        $this->file->chmod($sIniFile, Chmod::MODE_READ_WRITE);
     }
 }
