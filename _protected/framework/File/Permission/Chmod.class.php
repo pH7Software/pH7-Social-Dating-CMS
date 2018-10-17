@@ -12,6 +12,7 @@ final class Chmod
 {
     const MODE_ALL_READ = 0444;
     const MODE_ALL_WRITE = 0666;
-    const MODE_READ_WRITE = 0644;
+    const MODE_WRITE_READ = 0644;
+    const MODE_EXEC_READ = 0755;
     const MODE_ALL_EXEC = 0777;
 }

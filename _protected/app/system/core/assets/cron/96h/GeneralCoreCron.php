@@ -36,8 +36,8 @@ class GeneralCoreCron extends Cron
     private function chmod()
     {
         /** Check and correct the file permissions if necessary **/
-        $this->file->chmod(PH7_PATH_ROOT . '_constants.php', Chmod::MODE_READ_WRITE);
-        $this->file->chmod(PH7_PATH_APP_CONFIG . 'config.ini', Chmod::MODE_READ_WRITE);
+        $this->file->chmod(PH7_PATH_ROOT . '_constants.php', Chmod::MODE_WRITE_READ);
+        $this->file->chmod(PH7_PATH_APP_CONFIG . 'config.ini', Chmod::MODE_WRITE_READ);
 
         echo t('Chmod file... Ok!') . '<br />';
     }

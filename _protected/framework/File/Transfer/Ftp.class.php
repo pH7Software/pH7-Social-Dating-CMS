@@ -135,7 +135,7 @@ class Ftp extends File
      *
      * @throws PermissionException If the file cannot be created.
      */
-    public function createDir($mDir, $iMode = 0755)
+    public function createDir($mDir, $iMode = Chmod::MODE_EXEC_READ)
     {
         if (is_array($mDir)) {
             foreach ($mDir as $sD) {
@@ -184,7 +184,7 @@ class Ftp extends File
      *
      * @throws UploadingFileException If the file cannot be transferred to the server.
      */
-    public function put($sFrom, $sTo, $iMode = Chmod::MODE_READ_WRITE)
+    public function put($sFrom, $sTo, $iMode = Chmod::MODE_WRITE_READ)
     {
         $iType = $this->getFileMode($sTo);
 
