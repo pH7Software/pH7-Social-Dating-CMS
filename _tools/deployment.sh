@@ -60,6 +60,7 @@ function run() {
             rm ./phpunit.phar
             rm ./phpunit.xml.dist
             rm ./_protected/app/configs/config.ini
+            rm ./nginx.conf
             rm -rf ./.idea/ # PHPStorm
 
             ## Other
@@ -76,6 +77,11 @@ function run() {
             rm ./.php_cs
             rm ./.php_cs.cache
             rm ./.php_cs.dist
+
+            ## Docker
+            rm ./Dockerfile
+            rm ./docker-compose.yml
+            rm ./.dockerignore
 
             ## TMP folders
             # elFinder cache folders
