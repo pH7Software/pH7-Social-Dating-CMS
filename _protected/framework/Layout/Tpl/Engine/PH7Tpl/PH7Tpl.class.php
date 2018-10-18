@@ -823,7 +823,8 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      */
     private function hasCacheExpired()
     {
-        return $this->file->getModifTime($this->sCompileDirFile) > $this->file->getModifTime($this->sCacheDirFile) ||
+        return
+            $this->file->getModifTime($this->sCompileDirFile) > $this->file->getModifTime($this->sCacheDirFile) ||
             (!empty($this->mCacheExpire) && $this->file->getModifTime($this->sCacheDirFile) < time() - $this->mCacheExpire);
     }
 

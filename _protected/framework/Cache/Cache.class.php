@@ -234,15 +234,24 @@ File ID: ' . $this->sId . '
      */
     private function check()
     {
-        $sFile = $this->getFile();
-
-        if (!$this->bEnabled || !is_file($sFile) || (!empty($this->iTtl) && $this->oFile->getModifTime($sFile) < time())) {
-            // If the cache has expired
+        if ($this->hasCacheExpired()) {
             $this->oFile->deleteFile($this->getFile());
             return false;
         }
 
         return true;
+    }
+
+    /**
+     * Check if the cache has expired.
+     *
+     * @return bool
+     */
+    private function hasCacheExpired()
+    {
+        $sFile = $this->getFile();
+
+        return !$this->bEnabled || !is_file($sFile) || (!empty($this->iTtl) && $this->oFile->getModifTime($sFile) < time());
     }
 
     /**
