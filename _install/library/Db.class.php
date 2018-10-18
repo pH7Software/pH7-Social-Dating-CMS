@@ -25,7 +25,13 @@ class Db extends PDO
     public function __construct(array $aParams)
     {
         $aDriverOptions[PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES ' . $aParams['db_charset'];
-        parent::__construct("{$aParams['db_type']}:host={$aParams['db_hostname']};dbname={$aParams['db_name']};", $aParams['db_username'], $aParams['db_password'], $aDriverOptions);
+        parent::__construct(
+            "{$aParams['db_type']}:host={$aParams['db_hostname']};dbname={$aParams['db_name']};",
+            $aParams['db_username'],
+            $aParams['db_password'],
+            $aDriverOptions
+        );
+
         $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 }
