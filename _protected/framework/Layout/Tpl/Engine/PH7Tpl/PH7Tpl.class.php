@@ -793,8 +793,9 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
             return true;
         }
 
-        // "design->link()" can never be removed
-        return false !== strpos($this->sCode, 'design->link()');
+        // "link()" and "softwareComment()" can never be removed
+        return false !== strpos($this->sCode, 'design->link()') &&
+            false !== strpos($this->sCode, 'design->softwareComment()');
     }
 
     /**
