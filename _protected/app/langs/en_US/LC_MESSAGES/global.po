@@ -3003,7 +3003,7 @@ msgid "Show \"Powered By\" link in footer:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:78
-msgid "Disable (not recommended)"
+msgid "Disable (NOT recommended)"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:78
