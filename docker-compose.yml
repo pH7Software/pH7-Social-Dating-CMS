@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+    web:
+        image: nginx:latest
+        ports:
+            - "8080:80"
+        volumes:
+            - .:/var/www:/var/www/
+            - ./sites:/etc/nginx/conf.d
+            - ./nginx.conf:/etc/nginx/ph7cms.conf
+        depends_on:
+            - php
+        links:
+            - php
+    php:
+        image: php:7.2-fpm
+        volumes:
+            - .:/var/www:/var/www/
+        command: bash -c "composer install"
+        working_dir: /var/www:/var/www/
+    db:
+        image: mysql
+        ports:
+          - "8001:5432"
