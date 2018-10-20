@@ -49,7 +49,7 @@ class DynamicFieldCoreForm
                 break;
 
             case 'punchline':
-                $this->oForm->addElement(new \PFBC\Element\Textbox(t('Punchline/Headline:'), 'punchline', ['id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,5,100)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(5, 100)]));
+                $this->oForm->addElement(new \PFBC\Element\Textbox(t('Punchline/Headline:'), 'punchline', ['id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,5,150)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(5, 150)]));
                 $this->addCheckErrSpan('str');
                 break;
 
