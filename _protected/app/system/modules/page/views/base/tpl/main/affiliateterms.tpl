@@ -56,7 +56,7 @@ This Agreement contains the complete terms and conditions that apply to you beco
 <br />
 4. Termination<br />
 <br />
-Either you or we may end this Agreement AT ANY TIME, with or without cause, by giving the other party written notice. Written notice can be in the form of mail, email or fax. In addition, this Agreement will terminate immediately upon any breach of this Agreement by you.<br />
+Either you or we may end this Agreement AT ANY TIME, with or without cause, by giving the other party written notice. Written notice can be in the form of mail or email. In addition, this Agreement will terminate immediately upon any breach of this Agreement by you.<br />
 <br />
 5. Modification<br />
 <br />
