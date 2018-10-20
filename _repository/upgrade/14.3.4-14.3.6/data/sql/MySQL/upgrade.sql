@@ -7,6 +7,9 @@
 -- Remove outdated field (fax is really, really dead by now! Even for affiliates)
 ALTER TABLE ph7_affiliates_info DROP COLUMN fax;
 
+-- Add new members' field
+ALTER TABLE ph7_members_info ADD COLUMN punchline varchar(255) DEFAULT NULL;
+
 
 -- Update pH7CMS's SQL schema version
 UPDATE ph7_modules SET version = '1.5.0' WHERE vendorName = 'pH7CMS';

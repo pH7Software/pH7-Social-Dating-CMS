@@ -83,6 +83,7 @@ class MainController extends ProfileBaseController
             $this->view->country_code = $aData['country'];
             $this->view->city = $aData['city'];
             $this->view->state = $aData['state'];
+            $this->view->punchline = $aData['punchline'];
             $this->view->description = nl2br($aData['description']);
             $this->view->join_date = VDate::textTimeStamp($oUser->joinDate);
             $this->view->last_activity = VDate::textTimeStamp($oUser->lastActivity);

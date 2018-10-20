@@ -129,6 +129,7 @@ CREATE TABLE IF NOT EXISTS ph7_members_info (
   profileId int check (profileId > 0) NOT NULL,
   middleName varchar(50) DEFAULT NULL,
   description text DEFAULT NULL,
+  punchline varchar(255) DEFAULT NULL,
   address varchar(255) DEFAULT NULL,
   city varchar(150) DEFAULT NULL,
   state varchar(150) DEFAULT NULL,

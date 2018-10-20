@@ -44,7 +44,12 @@ class DynamicFieldCoreForm
     {
         switch ($this->sColumn) {
             case 'description':
-                $this->oForm->addElement(new \PFBC\Element\Textarea(t('Description:'), $this->sColumn, ['id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,10,2000)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(20, 4000), 'required' => 1]));
+                $this->oForm->addElement(new \PFBC\Element\Textarea(t('Description:'), $this->sColumn, ['id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,20,4000)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(20, 4000), 'required' => 1]));
+                $this->addCheckErrSpan('str');
+                break;
+
+            case 'punchline':
+                $this->oForm->addElement(new \PFBC\Element\Textbox(t('Punchline/Headline:'), 'punchline', ['id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,5,100)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(5, 100)]));
                 $this->addCheckErrSpan('str');
                 break;
 

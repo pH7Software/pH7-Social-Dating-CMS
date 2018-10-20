@@ -238,6 +238,7 @@ abstract class ProfileBaseController extends Controller
         $sCountry = !empty($oFields->country) ? $oFields->country : '';
         $sCity = !empty($oFields->city) ? $this->str->escape($this->str->upperFirst($oFields->city), true) : '';
         $sState = !empty($oFields->state) ? $this->str->escape($this->str->upperFirst($oFields->state), true) : '';
+        $sPunchline = !empty($oFields->punchline) ? $this->str->escape(Ban::filterWord($oFields->punchline)) : '';
         $sDescription = !empty($oFields->description) ? Emoticon::init(Ban::filterWord($oFields->description)) : '';
 
         return [
@@ -247,6 +248,7 @@ abstract class ProfileBaseController extends Controller
             'country' => $sCountry,
             'city' => $sCity,
             'state' => $sState,
+            'punchline' => $sPunchline,
             'description' => $sDescription,
             'age' => UserBirthDateCore::getAgeFromBirthDate($oUser->birthDate)
         ];

@@ -180,7 +180,7 @@
 
         {* Profile's Fields *}
         {each $key => $val in $fields}
-            {if $key != 'description' AND $key != 'middleName' AND !empty($val)}
+            {if $key != 'description' AND $key != 'middleName' AND $key != 'punchline' AND !empty($val)}
                 {{ $val = escape($val, true) }}
 
                 {if $key == 'height'}
@@ -292,15 +292,19 @@
 
         {{ RatingDesignCore::voting($id,DbTableName::MEMBER) }}
 
-        {if !empty($description)}
-            <div class="profile_desc">
+        <div class="profile_desc">
+            {if !empty($punchline)}
+                <h1 class="center cinnabar-red">{punchline}</h1>
+            {/if}
+
+            {if !empty($description)}
                 <p class="bold">{lang 'Description:'}</p>
                 <div class="quote italic">{description}</div>
                 <div class="ad_336_280">
                     {designModel.ad(336, 280)}
                 </div>
-            </div>
-        {/if}
+            {/if}
+        </div>
     </div>
 
     <div class="content" id="map">
