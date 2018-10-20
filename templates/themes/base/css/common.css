@@ -362,10 +362,18 @@ img, video, iframe {
         position: absolute;
         top: 20rem;
     }
+
+    .profile_desc .punchline {
+        margin-top: 2px;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 18px;
+        color: #E33D41;
+    }
 }
 
-/* 900px or less */
-@media (max-width: 600px) {
+/* less than 900px  */
+@media (max-width: 899px) {
     .right {
         float: inherit !important;
     }
@@ -376,5 +384,9 @@ img, video, iframe {
 
     .profile_desc {
         margin: 20px 0 20px;
+    }
+
+    .profile_desc .punchline {
+        display: none;
     }
 }
