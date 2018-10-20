@@ -32,4 +32,4 @@ If you want to allow it, you need to set in numerical values <em>777</em> for al
 
 
 <h3>Put back your modifications (optional)</h3>
-<p>Put them back any modifications you did from your latest backup since they could have been erase from the update.</p>
+<p>Put back any modifications you did from your latest backup since they could have been erase from the update.</p>
