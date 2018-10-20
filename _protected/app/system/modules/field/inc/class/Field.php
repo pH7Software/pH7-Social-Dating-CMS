@@ -23,7 +23,6 @@ class Field
         'zipcode',
         'country',
         'phone',
-        'fax',
         'website',
         'socialnetworksite',
         'height',

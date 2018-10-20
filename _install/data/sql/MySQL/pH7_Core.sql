@@ -209,7 +209,6 @@ CREATE TABLE IF NOT EXISTS ph7_affiliates_info (
   state varchar(150) DEFAULT NULL,
   zipCode varchar(20) DEFAULT NULL,
   phone varchar(100) DEFAULT NULL,
-  fax varchar(100) DEFAULT NULL,
   description text DEFAULT NULL,
   website varchar(120) DEFAULT NULL,
   PRIMARY KEY (profileId),

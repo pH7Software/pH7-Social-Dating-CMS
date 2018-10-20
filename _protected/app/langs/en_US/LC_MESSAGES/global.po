@@ -1139,10 +1139,6 @@ msgid "Your Personal Website/Blog (any promotional/affiliated contents will be "
 msgstr ""
 
 #: _protected/app/system/core/forms/DynamicFieldCoreForm.php:93
-msgid "Your Fax Number:"
-msgstr ""
-
-#: _protected/app/system/core/forms/DynamicFieldCoreForm.php:93
 #: _protected/app/system/modules/contact/forms/ContactForm.php:39
 msgid "Your Phone Number:"
 msgstr ""
