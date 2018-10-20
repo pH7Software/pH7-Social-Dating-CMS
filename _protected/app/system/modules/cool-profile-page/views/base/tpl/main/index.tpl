@@ -149,7 +149,7 @@
     <div class="col-xs-12 col-sm-6 col-md-6">
         {if !empty($punchline)}
             <div class="profile-section">
-                <h1 class="center cinnabar-red">{punchline}</h1>
+                <h1 class="cinnabar-red italic center">{punchline}</h1>
             </div>
         {/if}
 
