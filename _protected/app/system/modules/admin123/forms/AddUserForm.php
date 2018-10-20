@@ -43,7 +43,7 @@ class AddUserForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', ['id' => 'str_city', 'validation' => new \PFBC\Validation\Str(2, 150), 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\Textbox(t('State/Province:'), 'state', ['id' => 'str_state', 'validation' => new \PFBC\Validation\Str(2, 150)]));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Postal Code:'), 'zip_code', ['id' => 'str_zip_code', 'validation' => new \PFBC\Validation\Str(2, 15)]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Punchline/Headline:'), 'punchline', ['validation' => new \PFBC\Validation\Str(2, 150)]));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Punchline/Headline:'), 'punchline', ['validation' => new \PFBC\Validation\Str(5, 150)]));
         $oForm->addElement(new \PFBC\Element\CKEditor(t('Description:'), 'description', ['validation' => new \PFBC\Validation\Str(10, 2000), 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\File(t('Profile Photo:'), 'avatar', ['accept' => 'image/*']));
         $oForm->addElement(new \PFBC\Element\Url(t('Personal Website:'), 'website'));
