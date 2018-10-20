@@ -54,16 +54,16 @@ class DynamicFieldCoreForm
                 break;
 
             case 'country':
-                $this->oForm->addElement(new \PFBC\Element\Country(t('Your Country:'), $this->sColumn, ['id' => $this->getFieldId('str'), 'value' => $this->sVal, 'required' => 1]));
+                $this->oForm->addElement(new \PFBC\Element\Country(t('Country:'), $this->sColumn, ['id' => $this->getFieldId('str'), 'value' => $this->sVal, 'required' => 1]));
                 break;
 
             case 'city':
-                $this->oForm->addElement(new \PFBC\Element\Textbox(t('Your City:'), $this->sColumn, ['id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,2,150)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(2, 150), 'required' => 1]));
+                $this->oForm->addElement(new \PFBC\Element\Textbox(t('City:'), $this->sColumn, ['id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,2,150)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(2, 150), 'required' => 1]));
                 $this->addCheckErrSpan('str');
                 break;
 
             case 'state':
-                $this->oForm->addElement(new \PFBC\Element\Textbox(t('Your State/Province:'), $this->sColumn, ['id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,2,150)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(2, 150)]));
+                $this->oForm->addElement(new \PFBC\Element\Textbox(t('State/Province:'), $this->sColumn, ['id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,2,150)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(2, 150)]));
                 $this->addCheckErrSpan('str');
                 break;
 
@@ -87,14 +87,14 @@ class DynamicFieldCoreForm
 
             case 'website':
             case 'socialNetworkSite':
-                $sLabel = $this->sColumn === 'socialNetworkSite' ? t('Social Media Profile:') : t('Your Website:');
+                $sLabel = $this->sColumn === 'socialNetworkSite' ? t('Social Media Profile:') : t('Website:');
                 $sDesc = $this->sColumn === 'socialNetworkSite' ? t('The URL of your social profile, such as Facebook, Instagram, Snapchat, LinkedIn, ...') : t('Your Personal Website/Blog (any promotional/affiliated contents will be removed)');
                 $this->oForm->addElement(new \PFBC\Element\Url($sLabel, $this->sColumn, ['id' => $this->getFieldId('url'), 'onblur' => 'CValid(this.value,this.id)', 'description' => $sDesc, 'value' => $this->sVal]));
                 $this->addCheckErrSpan('url');
                 break;
 
             case 'phone':
-                $this->oForm->addElement(new \PFBC\Element\Phone(t('Your Phone Number:'), $this->sColumn, ['id' => $this->getFieldId('phone'), 'onblur' => 'CValid(this.value, this.id)', 'title' => t('Enter full number with area code.'), 'value' => $this->sVal]));
+                $this->oForm->addElement(new \PFBC\Element\Phone(t('Phone Number:'), $this->sColumn, ['id' => $this->getFieldId('phone'), 'onblur' => 'CValid(this.value, this.id)', 'title' => t('Enter full number with area code.'), 'value' => $this->sVal]));
                 $this->addCheckErrSpan('phone');
                 break;
 
