@@ -61,20 +61,14 @@ class MainController extends Controller
                 $this->view->number_profiles = DbConfig::getSetting('numberProfileSplashPage');
             }
 
-            $sIsCssVidSplashFile = (!empty($bIsBgVideo) && $bIsBgVideo) ? 'video_splash.css,' : '';
-
-            // Set CSS and JS files
-            $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, $sIsCssVidSplashFile . 'splash.css,tooltip.css,js/jquery/carousel.css');
-            $this->design->addJs(PH7_DOT, PH7_STATIC . PH7_JS . 'jquery/carouFredSel.js,' . PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_JS . 'splash.js');
+            $this->addGuestAssetFiles($bIsBgVideo);
 
             // Assigns the promo text to the view
             $this->view->promo_text = DbConfig::getMetaMain(PH7_LANG_NAME)->promoText;
 
             $this->manualTplInclude($this->getGuestTplPage() . '.inc.tpl');
         } elseif (UserCore::auth()) {
-            // Set CSS and JS files
-            $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'zoomer.css');
-            $this->design->addJs(PH7_STATIC . PH7_JS, 'Wall.js');
+            $this->addUserAssetFiles();
 
             // Assigns the user's first name to the view for the Welcome Message
             $this->view->first_name = $this->session->get('member_first_name');
@@ -170,6 +164,31 @@ class MainController extends Controller
         }
 
         return $sPage;
+    }
+
+    /**
+     * Add CSS and JS files for visitor's homepage.
+     *
+     * @param bool $bIsBgVideo
+     *
+     * @return void
+     */
+    private function addGuestAssetFiles($bIsBgVideo)
+    {
+        $sIsCssVidSplashFile = !empty($bIsBgVideo) && $bIsBgVideo ? 'video_splash.css,' : '';
+        $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, $sIsCssVidSplashFile . 'splash.css,tooltip.css,js/jquery/carousel.css');
+        $this->design->addJs(PH7_DOT, PH7_STATIC . PH7_JS . 'jquery/carouFredSel.js,' . PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_JS . 'splash.js');
+    }
+
+    /**
+     * Add the asset files for logged in users' homepage.
+     *
+     * @return void
+     */
+    private function addUserAssetFiles()
+    {
+        $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'zoomer.css');
+        $this->design->addJs(PH7_STATIC . PH7_JS, 'Wall.js');
     }
 
     /**
