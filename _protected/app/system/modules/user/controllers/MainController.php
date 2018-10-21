@@ -49,6 +49,7 @@ class MainController extends Controller
 
             $this->view->is_users_block = (bool)DbConfig::getSetting('usersBlock');
 
+            $bIsBgVideo = false;
             // Background video is used only for the Splash page
             if ($this->getGuestTplPage() === static::GUEST_SPLASH_FILE) {
                 // Enable the Splash Video Background if enabled
@@ -175,7 +176,7 @@ class MainController extends Controller
      */
     private function addGuestAssetFiles($bIsBgVideo)
     {
-        $sIsCssVidSplashFile = !empty($bIsBgVideo) && $bIsBgVideo ? 'video_splash.css,' : '';
+        $sIsCssVidSplashFile = $bIsBgVideo === true ? 'video_splash.css,' : '';
         $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, $sIsCssVidSplashFile . 'splash.css,tooltip.css,js/jquery/carousel.css');
 
         $this->design->addJs(PH7_DOT, PH7_STATIC . PH7_JS . 'jquery/carouFredSel.js,' . PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_JS . 'splash.js');
