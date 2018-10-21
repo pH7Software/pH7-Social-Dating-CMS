@@ -67,7 +67,7 @@ class MainController extends Controller
             $this->view->promo_text = DbConfig::getMetaMain(PH7_LANG_NAME)->promoText;
 
             $this->manualTplInclude($this->getGuestTplPage() . '.inc.tpl');
-        } elseif (UserCore::auth()) {
+        } else {
             $this->addUserAssetFiles();
 
             // Assigns the user's first name to the view for the Welcome Message
