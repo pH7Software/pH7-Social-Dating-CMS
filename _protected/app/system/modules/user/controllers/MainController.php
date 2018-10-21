@@ -167,7 +167,7 @@ class MainController extends Controller
     }
 
     /**
-     * Add CSS and JS files for visitor's homepage.
+     * Add CSS/JS files for visitor's homepage.
      *
      * @param bool $bIsBgVideo
      *
@@ -177,11 +177,12 @@ class MainController extends Controller
     {
         $sIsCssVidSplashFile = !empty($bIsBgVideo) && $bIsBgVideo ? 'video_splash.css,' : '';
         $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, $sIsCssVidSplashFile . 'splash.css,tooltip.css,js/jquery/carousel.css');
+
         $this->design->addJs(PH7_DOT, PH7_STATIC . PH7_JS . 'jquery/carouFredSel.js,' . PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_JS . 'splash.js');
     }
 
     /**
-     * Add the asset files for logged in users' homepage.
+     * Add CSS/JS files for logged in users' homepage.
      *
      * @return void
      */
