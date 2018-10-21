@@ -25,9 +25,12 @@ class MainController extends Controller
 
     public function rating()
     {
-        /*** JS File Only to Members. For its part, the Rating System will redirect the visitors who are not connected to the registration form. ***/
+        /**
+         * Add JS file only for Members.
+         * Otherwise, the Rating System will redirect visitors who aren't logged in to the registration form.
+         */
         if (UserCore::auth()) {
-            $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'script.js');
+            $this->addJsFile();
         }
 
         /*** Meta Tags ***/
@@ -57,5 +60,13 @@ class MainController extends Controller
         }
 
         $this->output();
+    }
+
+    private function addJsFile()
+    {
+        $this->design->addJs(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
+            'script.js'
+        );
     }
 }
