@@ -154,7 +154,7 @@ class MainController extends Controller
     private function getGuestTplPage()
     {
         if (isDebug() && $this->httpRequest->getExists('force')) {
-            $sPage = $this->getPageForced();
+            $sPage = $this->getGuestForcedPage();
         } elseif ($this->bIsMobile) {
             /* 'index.guest.inc.tpl' is not responsive enough for very small screen resolutions, so set to 'index.guest_splash.inc.tpl' by default */
             $sPage = static::GUEST_SPLASH_FILE;
@@ -199,7 +199,7 @@ class MainController extends Controller
      *
      * @throws PH7InvalidArgumentException
      */
-    private function getPageForced()
+    private function getGuestForcedPage()
     {
         switch ($this->httpRequest->get('force')) {
             case 'classic':
