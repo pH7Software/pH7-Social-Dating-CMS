@@ -111,6 +111,9 @@ final class Version
             return false;
         }
 
+        // Set default values to variables (if nothing in foreach loop)
+        $bIsAlert = $sVerName = $sVerNumber = $sVerBuild = null;
+
         /** @var DOMElement $oSoft */
         foreach ($oDom->getElementsByTagName(self::FRAMEWORK_TAG_NAME) as $oSoft) {
             // Get info for "ph7builder" package
