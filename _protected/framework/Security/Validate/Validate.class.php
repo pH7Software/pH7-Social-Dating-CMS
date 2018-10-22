@@ -377,7 +377,7 @@ class Validate
      *
      * @param string $sNumber
      *
-     * @return bool
+     * @return int|false Returns 1 if valid, 0 if invalid, or FALSE in case of error.
      */
     public function phone($sNumber)
     {
