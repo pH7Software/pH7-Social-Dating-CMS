@@ -54,6 +54,22 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider validPhoneNumbersProvider
+     */
+    public function testValidPhoneNumber($sPhoneNumber)
+    {
+        $this->assertSame(1, $this->oValidate->phone($sPhoneNumber));
+    }
+
+    /**
+     * @dataProvider invalidPhoneNumbersProvider
+     */
+    public function testInvalidPhoneNumber($sPhoneNumber)
+    {
+        $this->assertSame(0, $this->oValidate->phone($sPhoneNumber));
+    }
+
+    /**
      * @dataProvider validIntegersProvider
      */
     public function testValidInteger($iNumber)
@@ -157,6 +173,34 @@ class ValidateTest extends PHPUnit_Framework_TestCase
             [4335, 2, 20],
             ['$money$', 2, 20],
             ['James€', 2, 20]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function validPhoneNumbersProvider()
+    {
+        return [
+            ['+44768374890'],
+            ['+41446681810'],
+            ['0041446681810'],
+            ['+336123436489'],
+            ['+16502530001'],
+            ['0016502530001']
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function invalidPhoneNumbersProvider()
+    {
+        return [
+            ['0768374890'],
+            ['0485'],
+            ['zerozerozero'],
+            ['']
         ];
     }
 
