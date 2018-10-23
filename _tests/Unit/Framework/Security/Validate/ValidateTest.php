@@ -70,6 +70,22 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider validPasswordsProvider
+     */
+    public function testValidPassword($sPassword, $iMinLength, $iMaxLength)
+    {
+        $this->assertTrue($this->oValidate->password($sPassword, $iMinLength, $iMaxLength));
+    }
+
+    /**
+     * @dataProvider invalidPasswordsProvider
+     */
+    public function testInvalidPassword($sPassword, $iMinLength, $iMaxLength)
+    {
+        $this->assertFalse($this->oValidate->password($sPassword, $iMinLength, $iMaxLength));
+    }
+
+    /**
      * @dataProvider validIntegersProvider
      */
     public function testValidInteger($iNumber)
@@ -201,6 +217,29 @@ class ValidateTest extends PHPUnit_Framework_TestCase
             ['0485'],
             ['zerozerozero'],
             ['']
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function validPasswordsProvider()
+    {
+        return [
+            ['8374878*&@*#*5r8hjvfj^', 2, 40],
+            ['12345678', 4, 8]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function invalidPasswordsProvider()
+    {
+        return [
+            ['1234567', 10, 30],
+            ['itititkfjgk9*(&$*#&*(8342', 5, 10],
+            ['', 6, 40]
         ];
     }
 
