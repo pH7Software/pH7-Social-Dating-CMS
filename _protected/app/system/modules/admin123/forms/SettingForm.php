@@ -207,9 +207,9 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Time Delay') . '</h3>'));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Registration delay for Users:'), 'time_delay_user_registration', ['description' => t('Number of minutes for a new registration with the same IP address.'), 'value' => DbConfig::getSetting('timeDelayUserRegistration'), 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Number(t('Registration delay for Users:'), 'time_delay_user_registration', ['description' => t('Number of minutes that has to pass before a user with the same IP address can register again.'), 'value' => DbConfig::getSetting('timeDelayUserRegistration'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Registration delay for Affiliates:'), 'time_delay_aff_registration', ['description' => t('Number of minutes for a new registration with the same IP address.'), 'value' => DbConfig::getSetting('timeDelayAffRegistration'), 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Number(t('Registration delay for Affiliates:'), 'time_delay_aff_registration', ['description' => t('Number of minutes that has to pass before an affiliate with the same IP address can register again.'), 'value' => DbConfig::getSetting('timeDelayAffRegistration'), 'required' => 1]));
 
         $oForm->addElement(new \PFBC\Element\Number(t('Send Note delay:'), 'time_delay_send_note', ['description' => t('Number of minutes for the same user to post a new note.'), 'value' => DbConfig::getSetting('timeDelaySendNote'), 'required' => 1]));
 
