@@ -116,10 +116,12 @@ class Google extends Api implements IApi
      */
     public function add(array $aProfile, UserCoreModel $oUserModel)
     {
+        $oUser = new UserCore;
         $sBirthDate = !empty($aProfile['birthday']) ? $aProfile['birthday'] : $this->getDefaultUserBirthDate();
         $sSex = $this->checkGender($aProfile['gender']);
-        $sMatchSex = ($sSex == 'male' ? 'female' : ($sSex == 'female' ? 'male' : 'couple'));
-        $this->sUsername = (new UserCore)->findUsername($aProfile['given_name'], $aProfile['name'], $aProfile['family_name']);
+        $sMatchSex = $oUser->getMatchSex($sSex);;
+        $this->sUsername = $oUser->findUsername($aProfile['given_name'], $aProfile['name'], $aProfile['family_name']);
+        unset($oUser);
 
         $this->aUserInfo = [
             'email' => $aProfile['email'],
