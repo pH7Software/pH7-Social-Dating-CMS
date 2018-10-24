@@ -370,7 +370,7 @@ class Design
      #
      "
 
-     Everything you need to Create & Launch Your Own Social/Dating WebApp => http://pH7CMS.com
+     Everything you Need to Create & Launch Your Own Social/Dating WebApp => http://pH7CMS.com
      https://github.com/pH7Software/pH7-Social-Dating-CMS
 
 -->\n
