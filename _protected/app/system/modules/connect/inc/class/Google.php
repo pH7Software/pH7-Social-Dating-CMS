@@ -119,7 +119,7 @@ class Google extends Api implements IApi
         $oUser = new UserCore;
         $sBirthDate = !empty($aProfile['birthday']) ? $aProfile['birthday'] : $this->getDefaultUserBirthDate();
         $sSex = $this->checkGender($aProfile['gender']);
-        $sMatchSex = $oUser->getMatchSex($sSex);;
+        $sMatchSex = $oUser->getMatchSex($sSex);
         $this->sUsername = $oUser->findUsername($aProfile['given_name'], $aProfile['name'], $aProfile['family_name']);
         unset($oUser);
 
