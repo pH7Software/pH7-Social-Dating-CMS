@@ -534,7 +534,7 @@ class UserCore
      */
     public function getMatchSex($sSex)
     {
-        return ($sSex === 'male' ? 'female' : ($sSex === 'female' ? 'male' : 'couple'));
+        return ($sSex === GenderTypeUserCoreModel::MALE ? GenderTypeUserCoreModel::FEMALE : ($sSex === GenderTypeUserCoreModel::FEMALE ? GenderTypeUserCoreModel::MALE : GenderTypeUserCoreModel::COUPLE));
     }
 
     /**

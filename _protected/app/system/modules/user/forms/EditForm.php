@@ -67,9 +67,29 @@ class EditForm
 
         $oForm->addElement(new \PFBC\Element\Email(t('Email:'), 'mail', ['description' => t('For security reasons and to avoid spam, you cannot change your email address.'), 'disabled' => 'disabled', 'value' => $oUser->email]));
 
-        $oForm->addElement(new \PFBC\Element\Radio(t('Gender:'), 'sex', ['female' => t('Woman'), 'male' => t('Man'), 'couple' => t('Couple')], ['value' => $oUser->sex, 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Radio(
+                t('Gender:'),
+                'sex',
+                [
+                    GenderTypeUserCoreModel::FEMALE => t('Woman'),
+                    GenderTypeUserCoreModel::MALE => t('Man'),
+                    GenderTypeUserCoreModel::COUPLE => t('Couple')
+                ],
+                ['value' => $oUser->sex, 'required' => 1]
+            )
+        );
 
-        $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for a:'), 'match_sex', ['male' => t('Man'), 'female' => t('Woman'), 'couple' => t('Couple')], ['value' => Form::getVal($oUser->matchSex), 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Checkbox(
+                t('Looking for a:'),
+                'match_sex',
+                [
+                    GenderTypeUserCoreModel::MALE => t('Man'),
+                    GenderTypeUserCoreModel::FEMALE => t('Woman'),
+                    GenderTypeUserCoreModel::COUPLE => t('Couple')
+                ],
+                ['value' => Form::getVal($oUser->matchSex), 'required' => 1]
+            )
+        );
 
         $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', ['id' => 'birth_date', 'onblur' => 'CValid(this.value, this.id)', 'value' => $sBirthDate, 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
