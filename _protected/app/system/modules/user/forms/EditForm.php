@@ -67,7 +67,8 @@ class EditForm
 
         $oForm->addElement(new \PFBC\Element\Email(t('Email:'), 'mail', ['description' => t('For security reasons and to avoid spam, you cannot change your email address.'), 'disabled' => 'disabled', 'value' => $oUser->email]));
 
-        $oForm->addElement(new \PFBC\Element\Radio(
+        $oForm->addElement(
+            new \PFBC\Element\Radio(
                 t('Gender:'),
                 'sex',
                 [
@@ -79,7 +80,8 @@ class EditForm
             )
         );
 
-        $oForm->addElement(new \PFBC\Element\Checkbox(
+        $oForm->addElement(
+            new \PFBC\Element\Checkbox(
                 t('Looking for a:'),
                 'match_sex',
                 [

@@ -91,9 +91,31 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user2', 'form_join_user2'));
         $oForm->addElement(new \PFBC\Element\Token('join2'));
 
-        $oForm->addElement(new \PFBC\Element\Radio(t('I am a'), 'sex', ['female' => t('Woman') . ' <i class="fa fa-venus"></i>', 'male' => t('Man') . ' <i class="fa fa-mars"></i>', 'couple' => t('Couple') . ' <i class="fa fa-venus-mars"></i>'], ['value' => 'female', 'required' => 1]));
+        $oForm->addElement(
+            new \PFBC\Element\Radio(
+                t('I am a'),
+                'sex',
+                [
+                    GenderTypeUserCoreModel::FEMALE => t('Woman') . ' <i class="fa fa-venus"></i>',
+                    GenderTypeUserCoreModel::MALE => t('Man') . ' <i class="fa fa-mars"></i>',
+                    GenderTypeUserCoreModel::COUPLE => t('Couple') . ' <i class="fa fa-venus-mars"></i>'
+                ],
+                ['value' => GenderTypeUserCoreModel::FEMALE, 'required' => 1]
+            )
+        );
 
-        $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for a'), 'match_sex', ['male' => t('Man') . ' <i class="fa fa-mars"></i>', 'female' => t('Woman') . ' <i class="fa fa-venus"></i>', 'couple' => t('Couple') . ' <i class="fa fa-venus-mars"></i>'], ['value' => 'male', 'required' => 1]));
+        $oForm->addElement(
+            new \PFBC\Element\Checkbox(
+                t('Looking for a'),
+                'match_sex',
+                [
+                    GenderTypeUserCoreModel::MALE => t('Man') . ' <i class="fa fa-mars"></i>',
+                    GenderTypeUserCoreModel::FEMALE => t('Woman') . ' <i class="fa fa-venus"></i>',
+                    GenderTypeUserCoreModel::COUPLE => t('Couple') . ' <i class="fa fa-venus-mars"></i>'
+                ],
+                ['value' => GenderTypeUserCoreModel::MALE, 'required' => 1]
+            )
+        );
 
         self::generateBirthDateField($oForm);
 
