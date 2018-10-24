@@ -12,7 +12,7 @@ require_once PH7_PATH_SYS_MOD . 'admin123/inc/class/UserNotifier.php';
 require_once PH7_PATH_SYS_MOD . 'admin123/inc/class/UserNotifierString.php';
 
 use PH7\Framework\Error\CException\PH7RuntimeException;
-use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
+use PH7\Framework\Layout\Tpl\Engine\Templatable;
 use PH7\Framework\Mail\InvalidEmailException;
 use PH7\Framework\Mail\Mailable;
 use PH7\UserNotifier;
@@ -30,13 +30,13 @@ class UserNotifierTest extends PHPUnit_Framework_TestCase
     /** @var Mailable|Phake_IMock */
     private $oMailMock;
 
-    /** @var PH7Tpl|Phake_IMock */
+    /** @var Templatable|Phake_IMock */
     private $oViewMock;
 
     protected function setUp()
     {
         $this->oMailMock = Phake::mock(Mailable::class);
-        $this->oViewMock = Phake::mock(PH7Tpl::class);
+        $this->oViewMock = Phake::mock(Templatable::class);
         $this->oUserNotifier = new UserNotifier($this->oMailMock, $this->oViewMock);
     }
 

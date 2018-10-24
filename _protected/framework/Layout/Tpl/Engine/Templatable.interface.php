@@ -39,4 +39,12 @@ interface Templatable
      * @return void
      */
     public function assigns(array $aVars, $bEscape, $bEscapeStrip);
+
+    /**
+     * @param string $sMailTplFile
+     * @param string $sEmailAddress
+     *
+     * @return string
+     */
+    public function parseMail($sMailTplFile, $sEmailAddress);
 }
