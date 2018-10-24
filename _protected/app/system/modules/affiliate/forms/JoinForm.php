@@ -46,7 +46,17 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', ['id' => 'password', 'onkeyup' => 'checkPassword(this.value)', 'onblur' => 'CValid(this.value, this.id)', 'required' => 1, 'validation' => new \PFBC\Validation\Password]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error password"></span>'));
 
-        $oForm->addElement(new \PFBC\Element\Radio(t('Your Gender:'), 'sex', ['male' => t('Man'), 'female' => t('Woman')], ['required' => 1]));
+        $oForm->addElement(
+            new \PFBC\Element\Radio(
+                t('Your Gender:'),
+                'sex',
+                [
+                    GenderTypeUserCoreModel::MALE => t('Man'),
+                    GenderTypeUserCoreModel::FEMALE => t('Woman')
+                ],
+                ['required' => 1]
+            )
+        );
 
         $oForm->addElement(new \PFBC\Element\Date(t('Your Date of Birth:'), 'birth_date', ['id' => 'birth_date', 'description' => t('Please specify your date of birth using the calendar.'), 'onblur' => 'CValid(this.value, this.id)', 'required' => 1, 'validation' => new \PFBC\Validation\BirthDate]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));

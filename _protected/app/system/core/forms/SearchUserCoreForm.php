@@ -47,8 +47,30 @@ class SearchUserCoreForm
         $oForm = new \PFBC\Form('form_search', $iWidth);
         $oForm->configure(['action' => Uri::get('user', 'browse', 'index') . PH7_SH, 'method' => 'get']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
-        $oForm->addElement(new \PFBC\Element\Select(t('I am a:'), 'match_sex', ['male' => t('Man'), 'female' => t('Woman'), 'couple' => t('Couple')], self::$aSexOption));
-        $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for a:'), 'sex', ['female' => t('Woman'), 'male' => t('Man'), 'couple' => t('Couple')], self::$aMatchSexOption));
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('I am a:'),
+                'match_sex',
+                [
+                    GenderTypeUserCoreModel::MALE => t('Man'),
+                    GenderTypeUserCoreModel::FEMALE => t('Woman'),
+                    GenderTypeUserCoreModel::COUPLE => t('Couple')
+                ],
+                self::$aSexOption
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Checkbox(
+                t('Looking for a:'),
+                'sex',
+                [
+                    GenderTypeUserCoreModel::FEMALE => t('Woman'),
+                    GenderTypeUserCoreModel::MALE => t('Man'),
+                    GenderTypeUserCoreModel::COUPLE => t('Couple')
+                ],
+                self::$aMatchSexOption
+            )
+        );
         $oForm->addElement(new \PFBC\Element\Age(self::$aAgeOption));
         $oForm->addElement(new \PFBC\Element\Select(t('Country:'), 'country', Form::getCountryValues(), self::$aCountryOption));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', self::$aCityOption));
@@ -76,8 +98,30 @@ class SearchUserCoreForm
         $oForm = new \PFBC\Form('form_search', $iWidth);
         $oForm->configure(['action' => Uri::get('user', 'browse', 'index') . PH7_SH, 'method' => 'get']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
-        $oForm->addElement(new \PFBC\Element\Select(t('I am a:'), 'match_sex', ['male' => t('Male'), 'female' => t('Woman'), 'couple' => t('Couple')], self::$aSexOption));
-        $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for:'), 'sex', ['female' => t('Woman'), 'male' => t('Male'), 'couple' => t('Couple')], self::$aMatchSexOption));
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('I am a:'),
+                'match_sex',
+                [
+                    GenderTypeUserCoreModel::MALE => t('Male'),
+                    GenderTypeUserCoreModel::FEMALE => t('Woman'),
+                    GenderTypeUserCoreModel::COUPLE => t('Couple')
+                ],
+                self::$aSexOption
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Checkbox(
+                t('Looking for:'),
+                'sex',
+                [
+                    GenderTypeUserCoreModel::FEMALE => t('Woman'),
+                    GenderTypeUserCoreModel::MALE => t('Male'),
+                    GenderTypeUserCoreModel::COUPLE => t('Couple')
+                ],
+                self::$aMatchSexOption
+            )
+        );
         $oForm->addElement(new \PFBC\Element\Age(self::$aAgeOption));
         $oForm->addElement(new \PFBC\Element\Select(t('Country:'), 'country', Form::getCountryValues(), self::$aCountryOption));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', self::$aCityOption));

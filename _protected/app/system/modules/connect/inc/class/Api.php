@@ -102,6 +102,6 @@ abstract class Api
     protected function checkGender($sGender)
     {
         // Default 'female'
-        return $sGender !== 'male' && $sGender !== 'female' && $sGender !== 'couple' ? 'female' : $sGender;
+        return !GenderTypeUserCoreModel::isGenderValid($sGender) ? GenderTypeUserCoreModel::FEMALE : $sGender;
     }
 }

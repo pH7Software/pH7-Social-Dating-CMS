@@ -8,7 +8,7 @@
 
 namespace PH7;
 
-class SearchQueryCore
+final class SearchQueryCore
 {
     const BIRTH_DATE = 'birth_date';
     const SEX = 'sex';
