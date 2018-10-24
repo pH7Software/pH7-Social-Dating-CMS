@@ -59,7 +59,8 @@ class SearchUserCoreForm
                 self::$aSexOption
             )
         );
-        $oForm->addElement(new \PFBC\Element\Checkbox(
+        $oForm->addElement(
+            new \PFBC\Element\Checkbox(
                 t('Looking for a:'),
                 'sex',
                 [
