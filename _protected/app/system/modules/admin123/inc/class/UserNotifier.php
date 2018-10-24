@@ -9,7 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Error\CException\PH7RuntimeException;
-use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
+use PH7\Framework\Layout\Tpl\Engine\Templatable;
 use PH7\Framework\Mail\InvalidEmailException;
 use PH7\Framework\Mail\Mailable;
 
@@ -23,7 +23,7 @@ class UserNotifier
     /** @var Mailable */
     private $oMail;
 
-    /** @var PH7Tpl */
+    /** @var Templatable */
     private $oView;
 
     /** @var string */
@@ -32,7 +32,7 @@ class UserNotifier
     /** @var int */
     private $iType;
 
-    public function __construct(Mailable $oMailEngine, PH7Tpl $oView)
+    public function __construct(Mailable $oMailEngine, Templatable $oView)
     {
         $this->oMail = $oMailEngine;
         $this->oView = $oView;
