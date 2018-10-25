@@ -129,8 +129,7 @@ function get_edit_page_url()
         return '';
     }
 
-    $sUrl = GITHUB_REPO;
-    $sUrl .= 'blob/master/_doc/data/';
+    $sUrl = GITHUB_REPO . '/blob/master/_doc/data/';
     $sUrl .= LANG . '/';
     $sUrl .= strip_tags($_GET['p']);
     $sUrl .= '.tpl';
