@@ -8,7 +8,7 @@
 
 namespace PH7;
 
-class GenderTypeUserCoreModel
+final class GenderTypeUserCoreModel
 {
     const CONSIDER_COUPLE_GENDER = true;
     const IGNORE_COUPLE_GENDER = false;
