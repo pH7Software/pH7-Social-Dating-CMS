@@ -31,6 +31,33 @@ final class PageDna
 -->\n
 COMMENT;
 
+    const COMMENT_FOR_YOU = <<<COMMENT
+        \n<!--
+
+    mmmmmmm #        "          
+       #    # mm   mmm     mmm  
+       #    #"  #    #    #   " 
+       #    #   #    #     """m 
+       #    #   #  mm#mm  "mmm" 
+              
+    m     m        #               "      m          
+    #  #  #  mmm   #mmm    mmm   mmm    mm#mm   mmm  
+    " #"# # #"  #  #" "#  #   "    #      #    #"  # 
+     ## ##" #""""  #   #   """m    #      #    #"""" 
+     #   #  "#mm"  ##m#"  "mmm"  mm#mm    "mm  "#mm" 
+                                   
+     mmmmmm                     m     m                 m   
+     #       mmm    m mm         "m m"   mmm   m   m    #   
+     #mmmmm #" "#   #"  "         "#"   #" "#  #   #    #   
+     #      #   #   #              #    #   #  #   #    "   
+     #      "#m#"   #              #    "#m#"  "mm"#    #   
+
+     Here you go! => http://pH7CMS.com
+     https://github.com/pH7Software/pH7-Social-Dating-CMS
+
+-->\n
+COMMENT;
+
     const COMMENT_SOCIAL_DATING_SOFTWARE = <<<COMMENT
         \n<!--
                           
@@ -63,6 +90,7 @@ COMMENT;
 
     const COMMENTS = [
         self::COMMENT_PH7CMS,
+        self::COMMENT_FOR_YOU,
         self::COMMENT_SOCIAL_DATING_SOFTWARE
     ];
 
