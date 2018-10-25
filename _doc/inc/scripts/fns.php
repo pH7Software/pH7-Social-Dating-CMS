@@ -27,7 +27,7 @@ function get_browser_lang()
  *
  * @param string $sPage The page.
  *
- * @return string The page contents
+ * @return string The content of the page.
  */
 function get_page($sPage)
 {
@@ -180,5 +180,5 @@ function escape($sVal)
 function error_404()
 {
     header('HTTP/1.1 404 Not Found');
-    get_page(DATA_PATH . LANG . '/core/404-error.tpl');
+    echo get_page(DATA_PATH . LANG . '/core/404-error.tpl');
 }
