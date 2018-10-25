@@ -22,8 +22,8 @@ function get_links_html()
     for ($i = 0, $iCount = count($aFiles); $i < $iCount; $i++) {
         $sLink = $aFiles[$i];
 
-        $sLink = htmlentities(str_replace(array('.tpl', DATA_PATH, LANG . '/'), '', $sLink));
-        $sName = ucfirst(str_replace(array('/', '-'), array('', ' '), $sLink));
+        $sLink = htmlentities(str_replace(['.tpl', DATA_PATH, LANG . '/'], '', $sLink));
+        $sName = ucfirst(str_replace(['/', '-'], ['', ' '], $sLink));
 
         $sHtml .= '<li>' . ($i + 1) . ') <a href="' . RELATIVE . LANG . '/' . $sLink . '" title="' . $sName . '" data-load="ajax">' . $sName . '</a>.</li>';
     }

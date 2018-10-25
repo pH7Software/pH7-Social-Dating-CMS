@@ -71,7 +71,7 @@ function get_page_name()
     if (empty($_GET['p'])) {
         $sName = SITE_SLOGAN;
     } else {
-        $sPageName = str_replace(array('-', '_'), ' ', $_GET['p']);
+        $sPageName = str_replace(['-', '_'], ' ', $_GET['p']);
         $sName = ucfirst($sPageName);
     }
 
@@ -94,7 +94,7 @@ function get_lang()
  */
 function get_dir_list($sDir)
 {
-    $aDirList = array();
+    $aDirList = [];
 
     if ($rHandle = opendir($sDir)) {
         while (false !== ($sFile = readdir($rHandle))) {
