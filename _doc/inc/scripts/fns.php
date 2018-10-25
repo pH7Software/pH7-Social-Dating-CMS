@@ -11,6 +11,8 @@ namespace PH7\Doc;
 
 defined('PH7') or exit('Restricted access');
 
+const GITHUB_REPO = 'https://github.com/pH7Software/pH7-Social-Dating-CMS';
+
 /**
  * Detect the user's preferred language.
  *
@@ -27,13 +29,13 @@ function get_browser_lang()
  *
  * @param string $sPage The page.
  *
- * @return void
+ * @return string The content of the page.
  */
 function get_page($sPage)
 {
     if (is_file($sPage)) {
         $sPage = file_get_contents($sPage);
-        echo parse_var($sPage);
+        return parse_var($sPage);
     } else {   // Set the Not Found page
         error_404();
     }
@@ -57,6 +59,7 @@ function parse_var($sContent)
     $sContent = str_replace('{menu_links}', get_links_html(), $sContent);
     $sContent = str_replace('{menu_langs}', get_langs_html(), $sContent);
     $sContent = str_replace('{year}', date('Y'), $sContent);
+    $sContent = str_replace('{edit_page_url}', get_edit_page_url(), $sContent);
 
     return $sContent;
 }
@@ -118,6 +121,23 @@ function get_current_url()
 }
 
 /**
+ * @return string The GitHub URL to edit the current doc page.
+ */
+function get_edit_page_url()
+{
+    if (empty($_GET['p'])) {
+        return '';
+    }
+
+    $sUrl = GITHUB_REPO . '/blob/master/_doc/data/';
+    $sUrl .= LANG . '/';
+    $sUrl .= strip_tags($_GET['p']);
+    $sUrl .= '.tpl';
+
+    return $sUrl;
+}
+
+/**
  * Check if the language folder and the language core folder exists.
  *
  * @return string The language available.
@@ -158,5 +178,5 @@ function escape($sVal)
 function error_404()
 {
     header('HTTP/1.1 404 Not Found');
-    get_page(DATA_PATH . LANG . '/core/404-error.tpl');
+    echo get_page(DATA_PATH . LANG . '/core/404-error.tpl');
 }

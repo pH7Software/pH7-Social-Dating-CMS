@@ -19,18 +19,19 @@ define('LANG', get_lang());
 
 ob_start();
 
-get_page(ROOT_PATH . 'themes/' . TPL . '/tpl/header.tpl');
-get_page(ROOT_PATH . 'themes/' . TPL . '/tpl/ads/header.tpl');
+echo get_page(ROOT_PATH . 'themes/' . TPL . '/tpl/header.tpl');
+echo get_page(ROOT_PATH . 'themes/' . TPL . '/tpl/ads/header.tpl');
 
 if (!empty($_GET['p'])) {
     $sPage = DATA_PATH . LANG . '/' . $_GET['p'] . '.tpl';
-    get_page($sPage);
+    echo get_page($sPage);
+    echo get_page(DATA_PATH . LANG . '/core/include/github-edit-page.tpl');
 } else {
-    get_page(DATA_PATH . LANG . '/core/welcome.tpl');
-    get_page(ROOT_PATH . 'themes/' . TPL . '/tpl/menu.tpl');
+    echo get_page(DATA_PATH . LANG . '/core/welcome.tpl');
+    echo get_page(ROOT_PATH . 'themes/' . TPL . '/tpl/menu.tpl');
 }
 
-get_page(ROOT_PATH . 'themes/' . TPL . '/tpl/ads/footer.tpl');
-get_page(ROOT_PATH . 'themes/' . TPL . '/tpl/footer.tpl');
+echo get_page(ROOT_PATH . 'themes/' . TPL . '/tpl/ads/footer.tpl');
+echo get_page(ROOT_PATH . 'themes/' . TPL . '/tpl/footer.tpl');
 
 ob_end_flush();
