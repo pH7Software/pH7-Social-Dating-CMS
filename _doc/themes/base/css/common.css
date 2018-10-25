@@ -80,6 +80,7 @@ abbr {
 .left {
     float: left;
 }
+
 .success, .error, .warning, .mandatory, .bold {
     font-weight: bold;
 }
