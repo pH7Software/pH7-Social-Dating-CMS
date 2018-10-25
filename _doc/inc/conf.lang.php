@@ -11,7 +11,7 @@ namespace PH7\Doc;
 
 defined('PH7') or exit('Restricted access');
 
-return array(
+return [
     'en' => 'English',
     'fr' => 'Français',
     'de' => 'Deutsch',
@@ -37,4 +37,4 @@ return array(
     'hr' => 'Hrvatski',
     'rs' => 'Srpski',
     'si' => 'Slovenski'
-);
+];
