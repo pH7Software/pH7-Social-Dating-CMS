@@ -27,13 +27,13 @@ function get_browser_lang()
  *
  * @param string $sPage The page.
  *
- * @return void
+ * @return string The page contents
  */
 function get_page($sPage)
 {
     if (is_file($sPage)) {
         $sPage = file_get_contents($sPage);
-        echo parse_var($sPage);
+        return parse_var($sPage);
     } else {   // Set the Not Found page
         error_404();
     }
@@ -57,6 +57,11 @@ function parse_var($sContent)
     $sContent = str_replace('{menu_links}', get_links_html(), $sContent);
     $sContent = str_replace('{menu_langs}', get_langs_html(), $sContent);
     $sContent = str_replace('{year}', date('Y'), $sContent);
+
+    if (!empty($_GET['p'])) {
+        $sContent = str_replace('{edit_page_url}', get_edit_page_url(), $sContent);
+        $sContent = str_replace('{edit_page_html}', get_edit_page_html(), $sContent);
+    }
 
     return $sContent;
 }
@@ -115,6 +120,19 @@ function get_dir_list($sDir)
 function get_current_url()
 {
     return PROT_URL . escape($_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']);
+}
+
+/**
+ * @return string The GitHub URL to edit the current doc page.
+ */
+function get_edit_page_url()
+{
+    $sUrl = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/master/_doc/data/';
+    $sUrl .= LANG . '/';
+    $sUrl .= strip_tags($_GET['p']);
+    $sUrl .= '.tpl';
+
+    return $sUrl;
 }
 
 /**
