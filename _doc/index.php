@@ -25,6 +25,7 @@ echo get_page(ROOT_PATH . 'themes/' . TPL . '/tpl/ads/header.tpl');
 if (!empty($_GET['p'])) {
     $sPage = DATA_PATH . LANG . '/' . $_GET['p'] . '.tpl';
     echo get_page($sPage);
+    echo get_page(DATA_PATH . LANG . '/core/include/github-edit-page.tpl');
 } else {
     echo get_page(DATA_PATH . LANG . '/core/welcome.tpl');
     echo get_page(ROOT_PATH . 'themes/' . TPL . '/tpl/menu.tpl');

@@ -57,11 +57,7 @@ function parse_var($sContent)
     $sContent = str_replace('{menu_links}', get_links_html(), $sContent);
     $sContent = str_replace('{menu_langs}', get_langs_html(), $sContent);
     $sContent = str_replace('{year}', date('Y'), $sContent);
-
-    if (!empty($_GET['p'])) {
-        $sContent = str_replace('{edit_page_url}', get_edit_page_url(), $sContent);
-        $sContent = str_replace('{edit_page_html}', get_edit_page_html(), $sContent);
-    }
+    $sContent = str_replace('{edit_page_url}', get_edit_page_url(), $sContent);
 
     return $sContent;
 }

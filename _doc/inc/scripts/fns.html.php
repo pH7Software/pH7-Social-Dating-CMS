@@ -49,11 +49,3 @@ function get_langs_html()
 
     return $sHtml;
 }
-
-/**
- * @return string The GitHub URL to edit the current doc page.
- */
-function get_edit_page_html()
-{
-    return get_page(DATA_PATH . LANG . '/core/include/github-edit-page.tpl');
-}
