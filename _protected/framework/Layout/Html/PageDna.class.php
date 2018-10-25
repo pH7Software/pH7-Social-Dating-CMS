@@ -34,23 +34,23 @@ COMMENT;
     const COMMENT_FOR_YOU = <<<COMMENT
         \n<!--
 
-    mmmmmmm #        "          
-       #    # mm   mmm     mmm  
-       #    #"  #    #    #   " 
-       #    #   #    #     """m 
-       #    #   #  mm#mm  "mmm" 
-              
-    m     m        #               "      m          
-    #  #  #  mmm   #mmm    mmm   mmm    mm#mm   mmm  
-    " #"# # #"  #  #" "#  #   "    #      #    #"  # 
-     ## ##" #""""  #   #   """m    #      #    #"""" 
-     #   #  "#mm"  ##m#"  "mmm"  mm#mm    "mm  "#mm" 
-                                   
-     mmmmmm                     m     m                 m   
-     #       mmm    m mm         "m m"   mmm   m   m    #   
-     #mmmmm #" "#   #"  "         "#"   #" "#  #   #    #   
-     #      #   #   #              #    #   #  #   #    "   
-     #      "#m#"   #              #    "#m#"  "mm"#    #   
+    mmmmmmm #        "
+       #    # mm   mmm     mmm
+       #    #"  #    #    #   "
+       #    #   #    #     """m
+       #    #   #  mm#mm  "mmm"
+
+    m     m        #               "      m
+    #  #  #  mmm   #mmm    mmm   mmm    mm#mm   mmm
+    " #"# # #"  #  #" "#  #   "    #      #    #"  #
+     ## ##" #""""  #   #   """m    #      #    #""""
+     #   #  "#mm"  ##m#"  "mmm"  mm#mm    "mm  "#mm"
+
+     mmmmmm                     m     m                 m
+     #       mmm    m mm         "m m"   mmm   m   m    #
+     #mmmmm #" "#   #"  "         "#"   #" "#  #   #    #
+     #      #   #   #              #    #   #  #   #    "
+     #      "#m#"   #              #    "#m#"  "mm"#    #
 
      Here you go! => http://pH7CMS.com
      https://github.com/pH7Software/pH7-Social-Dating-CMS
@@ -60,27 +60,26 @@ COMMENT;
 
     const COMMENT_SOCIAL_DATING_SOFTWARE = <<<COMMENT
         \n<!--
-                          
-      mmmm                  "           ""#   
-     #"   "  mmm    mmm   mmm     mmm     #   
-     "#mmm  #" "#  #"  "    #    "   #    #   
-         "# #   #  #        #    m"""#    #   
+
+      mmmm                  "           ""#
+     #"   "  mmm    mmm   mmm     mmm     #
+     "#mmm  #" "#  #"  "    #    "   #    #
+         "# #   #  #        #    m"""#    #
      "mmm#" "#m#"  "#mm"  mm#mm  "mm"#    "mm
-                                   
-     mmmm            m      "                 
-     #   "m  mmm   mm#mm  mmm    m mm    mmmm 
-     #    # "   #    #      #    #"  #  #" "# 
-     #    # m"""#    #      #    #   #  #   # 
-     #mmm"  "mm"#    "mm  mm#mm  #   #  "#m"# 
-                                         m  # 
-                                          ""  
-                                   
-      mmmm           m""    m                               
-     #"   "  mmm   mm#mm  mm#mm m     m  mmm    m mm   mmm  
-     "#mmm  #" "#    #      #   "m m m" "   #   #"  " #"  # 
-         "# #   #    #      #    #m#m#  m"""#   #     #"""" 
-     "mmm#" "#m#"    #      "mm   # #   "mm"#   #     "#mm" 
-                                          
+
+     mmmm            m      "
+     #   "m  mmm   mm#mm  mmm    m mm    mmmm
+     #    # "   #    #      #    #"  #  #" "#
+     #    # m"""#    #      #    #   #  #   #
+     #mmm"  "mm"#    "mm  mm#mm  #   #  "#m"#
+                                         m  #
+                                          ""
+
+      mmmm           m""    m
+     #"   "  mmm   mm#mm  mm#mm m     m  mmm    m mm   mmm
+     "#mmm  #" "#    #      #   "m m m" "   #   #"  " #"  #
+         "# #   #    #      #    #m#m#  m"""#   #     #""""
+     "mmm#" "#m#"    #      "mm   # #   "mm"#   #     "#mm"
 
      EVERYTHING Your BUSINESS Needs to Create & Launch a SOCIAL/DATING WebApp => http://pH7CMS.com
      https://github.com/pH7Software/pH7-Social-Dating-CMS
