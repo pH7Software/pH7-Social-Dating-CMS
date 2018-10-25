@@ -127,6 +127,10 @@ function get_current_url()
  */
 function get_edit_page_url()
 {
+    if (empty($_GET['p'])) {
+        return '';
+    }
+
     $sUrl = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/master/_doc/data/';
     $sUrl .= LANG . '/';
     $sUrl .= strip_tags($_GET['p']);
