@@ -360,24 +360,7 @@ class Design
      */
     final public function softwareComment()
     {
-        $sComment = <<<COMMENT
-        \n<!--
-
-            m    m mmmmmm   mmm  m    m  mmmm
-     mmmm   #    #     #" m"   " ##  ## #"   "
-     #" "#  #mmmm#    m"  #      # ## # "#mmm
-     #   #  #    #   m"   #      # "" #     "#
-     ##m#"  #    #  m"     "mmm" #    # "mmm#"
-     #
-     "
-
-     Everything you Need to Create & Launch Your Own Social/Dating WebApp => http://pH7CMS.com
-     https://github.com/pH7Software/pH7-Social-Dating-CMS
-
--->\n
-COMMENT;
-
-        echo $sComment;
+        echo PageDna::generateHtmlComment();
     }
 
     /**
