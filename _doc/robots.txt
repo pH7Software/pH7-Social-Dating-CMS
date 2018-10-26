@@ -1,9 +1,0 @@
-####################
-# Nav Doc Script (by Pierre-Henry Soria)
-# URL: https://github.com/pH-7/Nav-Doc-Script-V2
-#
-# To work, this file has to be in the root of the domain (e.g. doc.ph7cms.com)
-####################
-
-# Don't index the get params to avoid duplicate contents due to the URL rewriting
-Disallow: /*?*
