@@ -1,5 +1,0 @@
----------- V2 ----------
-This version requires a Web server that supports URL rewriting (like Apache, ...).
-It includes a complete rewrite of URL with language support.
-A better integration of template files.
-
