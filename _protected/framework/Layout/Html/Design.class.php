@@ -418,7 +418,7 @@ class Design
 
         // Default links, set to English
         $aSites = [
-            ['title' => 'Free Dating CMS', 'link' => Kernel::SOFTWARE_GIT_REPO],
+            ['title' => 'Free Dating CMS', 'link' => Kernel::SOFTWARE_GIT_REPO_URL],
             ['title' => 'Flirt Hot Girls', 'link' => 'http://01script.com/p/dooba'],
             ['title' => 'Romance Dating', 'link' => 'http://love-rencontre.wekiss.net'],
             ['title' => 'Date your Friends', 'link' => 'http://01script.com/p/dooba']

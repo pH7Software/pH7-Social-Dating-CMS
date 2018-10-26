@@ -103,12 +103,12 @@ $LANG = array(
             Votre mot de passe est : <em>****** (caché pour des raisons de sécurité. C\'est celui choisi durant l\'installation).</em>
         </p>
         <p>N\'oubliez pas de vous la péter en montrant votre nouveau service de rencontre à tous vos amis, vos collègues et vos potes de Facebook (et même à vos ennemis... ou pas).</p>
-        <p><strong>Voici un <a href="' . get_tweet_post("Viens de créer mon #AppDeRencontre avec #pH7CMS ;) %s \n%s #LogicielRencontre", Controller::SOFTWARE_TWITTER, Controller::SOFTWARE_GIT_REPO) . '">un Tweet pré-écrit</a> (que vous pouvez éditer, bien sûr)</strong>.</p>
+        <p><strong>Voici un <a href="' . get_tweet_post("Viens de créer mon #AppDeRencontre avec #pH7CMS ;) %s \n%s #LogicielRencontre", Controller::SOFTWARE_TWITTER, Controller::SOFTWARE_GIT_REPO_URL) . '">un Tweet pré-écrit</a> (que vous pouvez éditer, bien sûr)</strong>.</p>
         <p>&nbsp;</p>
         <p><strong>Allez-vous m\'aider à améliorer le logiciel ? <a href="' . Controller::PATREON_URL . '">Faire une donation ici</a></strong></p>
         <p>&nbsp;</p>
         <p>Pour tous rapport de bogues, suggestions, partenariat, participation au développement du logiciel et/ou à sa traduction, etc.,
-        veuillez visiter le <a href="' . Controller::SOFTWARE_GIT_REPO . '">dépôt Github</a>.</p>
+        veuillez visiter le <a href="' . Controller::SOFTWARE_GIT_REPO_URL . '">dépôt GitHub</a>.</p>
         <p>---</p>
         <p>Cordialement,<br />
         <strong><a href="' . Controller::AUTHOR_URL . '">Pierre Soria</a></strong></p>',
