@@ -112,7 +112,7 @@ namespace PH7\Framework\Translate {
         /**
          * Set the user language name.
          *
-         * @param string $sNewUserLang Prefix of the language.
+         * @param string $sNewUserLang The locale language name.
          *
          * @return self
          */
@@ -124,7 +124,7 @@ namespace PH7\Framework\Translate {
         }
 
         /**
-         * Get the default language name.
+         * Get the default locale language name.
          *
          * @return string The locale language name (e.g., locale such as "en_US", ..).
          */
@@ -136,7 +136,7 @@ namespace PH7\Framework\Translate {
         /**
          * Get the current language name.
          *
-         * @return string The prefix of the language (e.g., en_US).
+         * @return string The locale language name (e.g., en_US).
          */
         public function getLang()
         {
