@@ -340,7 +340,9 @@ final class FrontController
 
         if (!defined('PH7_LANG_NAME')) {
             // Set the default language of the site and load the default language path
-            define('PH7_LANG_NAME', (new Lang)->setDefaultLang(PH7_PREF_LANG)->init()->load('global', PH7_PATH_APP_LANG)->getLang());
+            $sLangName = (new Lang)->setDefaultLang(PH7_PREF_LANG)->init()->load('global', PH7_PATH_APP_LANG)->getLang();
+
+            define('PH7_LANG_NAME', $sLangName);
         }
 
         /*** Get the ISO language code (the two first letters) ***/
