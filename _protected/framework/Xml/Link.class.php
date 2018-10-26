@@ -37,7 +37,7 @@ class Link
     /**
      * Constructor with the instance of the DOMDocument object.
      *
-     * @param string $sPath The path to the XML file. You can also specify an URL if the "allow_url_fopen" PHP directive is enabled.
+     * @param string $sPath The path to the XML file. You can also specify a URL if the "allow_url_fopen" PHP directive is enabled.
      */
     public function __construct($sPath)
     {
