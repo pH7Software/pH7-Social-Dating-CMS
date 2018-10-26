@@ -45,7 +45,7 @@ class VideoForm
 
         $oForm->addElement(new \PFBC\Element\Hidden('album_title', @$oAlbums[0]->name));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Video Name:'), 'title', ['pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern)]));
-        $oForm->addElement(new \PFBC\Element\Select('Video Type:', 'type', [t('Choose...'), 'embed' => t('Embed'), 'regular' => t('Regular')], ['id' => 'video-type', 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Select('Video Type:', 'type', [t('Choose...'), 'embed' => t('Embed (from video platform)'), 'regular' => t('Regular (from device/computer)')], ['id' => 'video-type', 'required' => 1]));
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="hidden" id="regular">'));
         $oForm->addElement(new \PFBC\Element\File(t('Video:'), 'video', ['description' => '<span class="bold">' . t('Note:') . '</span> ' . t('Please be patient while downloading video, this may take time (especially if you download a long video).') . '</em>', 'accept' => 'video/*']));
