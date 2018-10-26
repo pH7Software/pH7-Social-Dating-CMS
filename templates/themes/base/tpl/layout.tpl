@@ -164,10 +164,11 @@
 
       <div role="contentinfo">
         <div class="ft_copy">
+          {{ $design->littleLikeApi() }}
+
           <p>
             &copy; <ph:date value="Y" /> <strong>{site_name}</strong>  {{ $design->link() }}
           </p>
-          {{ $design->littleLikeApi() }}
         </div>
         {{ $design->langList() }}
         {main_include 'bottom_menu.inc.tpl'}
