@@ -103,11 +103,24 @@ class LoginFormProcess extends Form implements LoginableForm
                     // Store the affiliate ID for 2FA
                     $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iId);
 
-                    Header::redirect(Uri::get('two-factor-auth', 'main', 'verificationcode', 'affiliate'));
+                    Header::redirect(
+                        Uri::get(
+                            'two-factor-auth',
+                            'main',
+                            'verificationcode',
+                            'affiliate')
+                    );
                 } else {
                     $oAff->setAuth($oAffData, $this->oAffModel, $this->session, $oSecurityModel);
 
-                    Header::redirect(Uri::get('affiliate', 'account', 'index'), t('You are successfully logged in!'));
+                    Header::redirect(
+                        Uri::get(
+                            'affiliate',
+                            'account',
+                            'index'
+                        ),
+                        t('You are successfully logged in!')
+                    );
                 }
             }
         }
