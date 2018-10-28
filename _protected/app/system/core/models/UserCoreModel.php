@@ -610,7 +610,7 @@ class UserCoreModel extends Model
      * Approve a profile.
      *
      * @param int $iProfileId
-     * @param int $iStatus 1 = apprved | 0 = not approved
+     * @param int $iStatus 1 = approved | 0 = not approved
      * @param string $sTable Default DbTableName::MEMBER
      *
      * @return void
