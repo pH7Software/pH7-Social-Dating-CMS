@@ -20,7 +20,9 @@ class LoginFormProcess extends Form
 
         (new Logger)->init($_POST);
 
-        sleep(self::BRUTE_FORCE_SLEEP_DELAY); // Security against brute-force attack and this will irritate hackers
+        // Security against brute-force attack and this will irritate hackers
+        $this->preventBruteForce(self::BRUTE_FORCE_SLEEP_DELAY);
+
         $this->session->set('captcha_admin_enabled', 1); // Enable Captcha
         \PFBC\Form::setError('form_login', t('"Email", "Username" or "Password" is Incorrect'));
     }
