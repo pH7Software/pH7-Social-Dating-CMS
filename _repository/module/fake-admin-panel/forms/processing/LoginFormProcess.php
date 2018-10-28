@@ -12,13 +12,15 @@ namespace PH7;
 
 class LoginFormProcess extends Form
 {
+    const BRUTE_FORCE_SLEEP_DELAY = 6;
+
     public function __construct()
     {
         parent::__construct();
 
         (new Logger)->init($_POST);
 
-        sleep(6); // Security against brute-force attack and this will irritate the hacker
+        sleep(self::BRUTE_FORCE_SLEEP_DELAY); // Security against brute-force attack and this will irritate hackers
         $this->session->set('captcha_admin_enabled', 1); // Enable Captcha
         \PFBC\Form::setError('form_login', t('"Email", "Username" or "Password" is Incorrect'));
     }
