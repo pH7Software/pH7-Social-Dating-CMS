@@ -462,11 +462,11 @@ class UserCore
 
         if ($oDbProfileData->active != 1) {
             if ($oDbProfileData->active == 2) {
-                $mStatus = t('Sorry, your account has not been activated yet. Please activate it by clicking the activation link that was emailed.');
+                $mStatus = t('Sorry, your account has not been activated yet. Please activate it by clicking on the activation link you received by email.');
             } elseif ($oDbProfileData->active == 3) {
-                $mStatus = t('Sorry, your account has not been activated yet. An administrator must validate your account.');
+                $mStatus = t('Sorry, your account has not been activated yet. An administrator has to review it manually.');
             } else {
-                $mStatus = t('Your account does not have a valid activation status. Please contact the database administrator so that it solves this problem.');
+                $mStatus = t('Your account does not have a valid activation status. Please <a href="%0%">contact the database administrator</a> in order to fix the issue with your account.', Uri::get('contact', 'contact', 'index'));
             }
         } elseif ($oDbProfileData->ban == 1) {
             $mStatus = t('Sorry, Your account has been banned.');
