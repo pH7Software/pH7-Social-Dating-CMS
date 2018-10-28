@@ -38,6 +38,8 @@ class UserCore
     /** The prefix of the profile page URI path (eg https://mysite.com/@<USERNAME>) */
     const PROFILE_PAGE_PREFIX = '@';
 
+    const BAN_STATUS = 1;
+
     const MAX_WIDTH_AVATAR = 600;
     const MAX_HEIGHT_AVATAR = 800;
 
@@ -460,15 +462,15 @@ class UserCore
     {
         $mStatus = true; // Default value
 
-        if ($oDbProfileData->active != 1) {
-            if ($oDbProfileData->active == 2) {
+        if ($oDbProfileData->active != RegistrationCore::NO_ACTIVATION) {
+            if ($oDbProfileData->active == RegistrationCore::EMAIL_ACTIVATION) {
                 $mStatus = t('Sorry, your account has not been activated yet. Please activate it by clicking on the activation link you received by email.');
-            } elseif ($oDbProfileData->active == 3) {
+            } elseif ($oDbProfileData->active == RegistrationCore::MANUAL_ACTIVATION) {
                 $mStatus = t('Sorry, your account has not been activated yet. An administrator has to review it manually.');
             } else {
                 $mStatus = t('Your account does not have a valid activation status. Please <a href="%0%">contact the database administrator</a> in order to fix the issue with your account.', Uri::get('contact', 'contact', 'index'));
             }
-        } elseif ($oDbProfileData->ban == 1) {
+        } elseif ($oDbProfileData->ban == self::BAN_STATUS) {
             $mStatus = t('Sorry, Your account has been banned.');
         }
 
