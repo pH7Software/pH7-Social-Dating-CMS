@@ -20,10 +20,13 @@ class VerificationFormProcess extends Form
         if ($this->isVerificationCodeValid()) {
             Header::redirect(
                 Uri::get('user', 'main', 'login'),
-                t('Congratulations! Your phone number has been successfully verified.')
+                t('Congratulations! Your phone number has been successfully verified. You can now login.')
             );
         } else {
-            \PFBC\Form::setError('form_sms_verification', t('The SMS verification code is invalid. <a href="%0%">Try to resend a new one?</a>', Uri::get('sms-verifier', 'main', 'send')));
+            \PFBC\Form::setError(
+                'form_sms_verification',
+                t('The SMS verification code is invalid. <a href="%0%">Try to resend a new one?</a>', Uri::get('sms-verifier', 'main', 'send'))
+            );
         }
     }
 
