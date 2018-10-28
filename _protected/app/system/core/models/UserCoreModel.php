@@ -623,7 +623,7 @@ class UserCoreModel extends Model
     }
 
     /**
-     * Get member data. The validation hash, and other useful data for sending the activation email. (hash, email, username, firstName).
+     * Get member data. The validation hash, and other useful data for sending the activation email (hash, email, username, firstName).
      *
      * @param string $sEmail User's email address.
      * @param string $sTable Default DbTableName::MEMBER
