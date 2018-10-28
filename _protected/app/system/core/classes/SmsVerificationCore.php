@@ -11,4 +11,5 @@ namespace PH7;
 class SmsVerificationCore
 {
     const PROFILE_ID_SESS_NAME = 'sms_verification_profile_id';
+    const PHONE_NUMBER_SESS_NAME = 'user_phone_number';
 }

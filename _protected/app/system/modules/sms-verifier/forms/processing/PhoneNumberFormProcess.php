@@ -17,13 +17,16 @@ class PhoneNumberFormProcess extends Form
     {
         parent::__construct();
 
+        $sPhoneNumber = $this->httpRequest->get('phone_number');
         $oSmsApi = SmsGatewayFactory::create($this->config->values['module.setting']['default_sms_gateway']);
         $bResult = $oSmsApi->send(
-            $this->httpRequest->get('phone_number'),
+            $sPhoneNumber,
             t('Your verification code is: %0% Thanks! %site_name% Team', Verification::getVerificationCode())
         );
 
         if ($bResult) {
+            $this->session->set(SmsVerificationCore::PHONE_NUMBER_SESS_NAME, $sPhoneNumber);
+
             Header::redirect(
                 Uri::get('sms-verifier', 'main', 'verification')
             );
