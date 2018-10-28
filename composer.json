@@ -39,7 +39,8 @@
         "ext-hash": "*",
         "ext-pdo_mysql": "*",
         "braintree/braintree_php": "^3.27",
-        "shrikeh/teapot": "^2.3"
+        "shrikeh/teapot": "^2.3",
+        "twilio/sdk": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7",
