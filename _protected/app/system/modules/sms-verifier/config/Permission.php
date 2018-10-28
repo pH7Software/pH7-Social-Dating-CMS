@@ -16,7 +16,7 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if (!UserCore::auth()) {
+        if (!$this->session->exists(SmsVerificationCore::PROFILE_ID_SESS_NAME)) {
             $this->signUpRedirect();
         }
 
