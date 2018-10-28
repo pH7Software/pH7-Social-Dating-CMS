@@ -31,14 +31,14 @@ class Api
      */
     public function getVideo($sUrl)
     {
-        $sClass = $this->clear($sUrl);
-        $oApiProvider = ProviderFactory::create($sClass);
+        $sVideoPlatform = $this->getVideoPlatformNameFromUrl($sUrl);
+        $oApiProvider = ProviderFactory::create($sVideoPlatform);
 
         return $oApiProvider->getVideo($sUrl);
     }
 
     /**
-     * @param string $sUrl The URL video.
+     * @param string $sUrl The video URL.
      *
      * @return Api\IApi|bool The Video API class (e.g. Api\Youtube, Api\Vimeo, ..) or FALSE if the data cannot be retrieved.
      *
@@ -47,8 +47,8 @@ class Api
      */
     public function getInfo($sUrl)
     {
-        $sClass = $this->clear($sUrl);
-        $oApiProvider = ProviderFactory::create($sClass);
+        $sVideoPlatform = $this->getVideoPlatformNameFromUrl($sUrl);
+        $oApiProvider = ProviderFactory::create($sVideoPlatform);
 
         return $oApiProvider->getInfo($sUrl);
     }
@@ -65,22 +65,22 @@ class Api
      */
     public function getMeta($sUrl, $sMedia, $iWidth, $iHeight)
     {
-        $sClass = $this->clear($sUrl);
-
         $sMedia = isset($sMedia) ? $sMedia : 'movie';
         $iWidth = isset($iWidth) ? $iWidth : self::DEF_VIDEO_WIDTH;
         $iHeight = isset($iHeight) ? $iHeight : self::DEF_VIDEO_HEIGHT;
-        $oApiProvider = ProviderFactory::create($sClass);
+
+        $sVideoPlatform = $this->getVideoPlatformNameFromUrl($sUrl);
+        $oApiProvider = ProviderFactory::create($sVideoPlatform);
 
         return $oApiProvider->getMeta($sUrl, $sMedia, $iWidth, $iHeight);
     }
 
     /**
-     * @param string $sUrl
+     * @param string $sUrl The embed URL of the video.
      *
-     * @return string
+     * @return string The name for the specific video platform.
      */
-    private function clear($sUrl)
+    private function getVideoPlatformNameFromUrl($sUrl)
     {
         $oHttp = new Http;
         if ($oHttp->detectSubdomain($sUrl)) {

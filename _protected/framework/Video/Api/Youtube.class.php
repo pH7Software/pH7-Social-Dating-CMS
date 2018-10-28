@@ -37,7 +37,7 @@ class Youtube extends Api implements IApi
     }
 
     /**
-     * @param string $sUrl URL video (e.g., https://www.youtube.com/watch?v=q-1eHnBOg4A).
+     * @param string $sUrl The video URL (e.g., https://www.youtube.com/watch?v=q-1eHnBOg4A).
      *
      * @return self|bool FALSE if unable to open the API URL, otherwise Youtube
      *

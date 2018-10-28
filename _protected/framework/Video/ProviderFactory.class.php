@@ -30,16 +30,16 @@ class ProviderFactory
     const METACAFE_NAME = 'metacafe';
 
     /**
-     * @param string $sClass
+     * @param string $sVideoPlatform
      *
      * @return Api\IApi
      *
      * @throws InvalidApiProviderException
      */
-    public static function create($sClass)
+    public static function create($sVideoPlatform)
     {
-        switch ($sClass) {
-            case in_array($sClass, self::YOUTUBE_NAMES, true):
+        switch ($sVideoPlatform) {
+            case in_array($sVideoPlatform, self::YOUTUBE_NAMES, true):
                 $oYoutube = new Api\Youtube;
                 if (self::isVideoModule()) {
                     $sKey = Config::getInstance()->values['module.api']['youtube.key'];
@@ -51,7 +51,7 @@ class ProviderFactory
                 $sClass = Api\Vimeo::class;
                 break;
 
-            case in_array($sClass, self::DAILYMOTION_NAMES, true):
+            case in_array($sVideoPlatform, self::DAILYMOTION_NAMES, true):
                 $sClass = Api\Dailymotion::class;
                 break;
 
@@ -61,7 +61,7 @@ class ProviderFactory
 
             default:
                 throw new InvalidApiProviderException(
-                    sprintf('Invalid API video type. Wrong specified type: %s', $sClass)
+                    sprintf('Invalid API video type. Wrong specified type: %s', $sVideoPlatform)
                 );
         }
 
