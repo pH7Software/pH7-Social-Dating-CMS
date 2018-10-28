@@ -365,14 +365,14 @@ class AdminController extends Controller
     {
         if (isset($iId, $iStatus)) {
             if ($oUser = $this->oAffModel->readProfile($iId, DbTableName::AFFILIATE)) {
-                if ($iStatus == 0) {
+                if ($iStatus === 0) {
                     // Set user not active
                     $this->oAffModel->approve($oUser->profileId, 0, DbTableName::AFFILIATE);
 
                     // We leave the user in disapproval (but send an email). After we can ban or delete it.
                     $sSubject = t('Your membership account has been declined');
                     $this->sMsg = t('Sorry, Your membership account has been declined.');
-                } elseif ($iStatus == 1) {
+                } elseif ($iStatus === 1) {
                     // Approve user
                     $this->oAffModel->approve($oUser->profileId, 1, DbTableName::AFFILIATE);
 
