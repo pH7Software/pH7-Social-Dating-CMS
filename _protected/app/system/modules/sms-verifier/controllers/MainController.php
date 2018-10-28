@@ -16,9 +16,16 @@ use PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
+    public function send()
+    {
+        $this->view->page_title = $this->view->h1_title = t('Verify your Phone Number');
+
+        $this->output();
+    }
+
     public function verification()
     {
-        $this->view->page_title = t('Verify your Account');
+        $this->view->page_title = $this->view->h1_title = t('Phone Number Verification');
 
         $this->output();
     }

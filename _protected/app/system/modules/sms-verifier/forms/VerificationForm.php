@@ -26,7 +26,7 @@ class VerificationForm
         $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_sms_verification', 'form_sms_verification'));
         $oForm->addElement(new \PFBC\Element\Token('sms_verification'));
-        $oForm->addElement(new \PFBC\Element\Phone(t('Your Cell Phone Number'), 'phone_number', ['description' => t('In order to validate your account, please specify your phone number and we will text you with a verification code.'), 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Phone(t('Verification Code'), 'verification_code', ['required' => 1]));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

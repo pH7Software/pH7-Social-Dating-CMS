@@ -8,26 +8,30 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
+
 class VerificationFormProcess extends Form
 {
     public function __construct()
     {
         parent::__construct();
 
-        $oSmsApi = SmsGatewayFactory::create($this->config->values['module.setting']['default_sms_gateway']);
-        $oSmsApi->send(
-            $this->httpRequest->get('phone_number'),
-            t('Your %site_name% verification code is: %0%', $this->getVerificationCode())
-        );
+        if ($this->isVerificationCodeValid()) {
+            Header::redirect(
+                Uri::get('user', 'main', 'login'),
+                t('Congratulations! Your phone number has been successfully verified.')
+            );
+        } else {
+            \PFBC\Form::setError('form_sms_verification', t('The SMS verification code is invalid. <a href="%0%">Try to resend a new one?</a>', Uri::get('sms-verifier', 'main', 'send')));
+        }
     }
 
     /**
-     * @return string
+     * @return bool
      */
-    private function getVerificationCode()
+    private function isVerificationCodeValid()
     {
-        $sUserHashValidation = (new UserCoreModel)->getHashValidation();
-
-        return substr($sUserHashValidation, 0, 4);
+        return $this->httpRequest->get('verification_code') === Verification::getVerificationCode();
     }
 }
