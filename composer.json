@@ -45,8 +45,10 @@
         "phpunit/phpunit": "^5.7",
         "phake/phake": "^2.3",
         "friendsofphp/php-cs-fixer": "^2.2",
-        "guzzlehttp/guzzle": "^6.3",
-        "symfony/thanks": "^1.1"
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "suggest": {
+        "symfony/thanks": "Thank your favorite PHP projects on GitHub (in the form of GitHub stars) using the CLI"
     },
     "autoload-dev": {
         "psr-4": {
