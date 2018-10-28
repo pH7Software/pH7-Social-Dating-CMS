@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Layout\Html\Design;
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Payment\Gateway\Api\PayPal;
@@ -20,7 +21,6 @@ class MainController extends Controller
     const INTERNAL_VERIFY_HASH = '681cd81b17b71c746e9ab7ac0445d3a3c960c329';
     const HASH_VALIDATION_START_POSITION = 3;
     const HASH_VALIDATION_LENGTH = 24;
-    const VIEW_EXT = '.tpl';
 
     const VIEW_OPTIONS = [
         'donationbox',
@@ -73,7 +73,7 @@ class MainController extends Controller
             $this->view->form_body = $oPayPal->generate();
         }
 
-        $this->manualTplInclude($sBoxType . self::VIEW_EXT);
+        $this->manualTplInclude($sBoxType . PH7Tpl::TEMPLATE_FILE_EXT);
 
         $this->output();
     }
