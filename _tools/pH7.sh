@@ -171,16 +171,7 @@ function file-strict-permissions() {
 
 # Push the project into GitHub and Bitbucket repos
 function save-code() {
-    # Bitbucket repo
-    _save-project-to-repo git@bitbucket.org:pH_7/ph7cms-social-dating-app-site-builder.git
-
-    # GitLab repo
-    _save-project-to-repo git@gitlab.com:pH-7/pH7CMS.git
-
-    # GitHub repo
-    _save-project-to-repo git@github.com:pH7Software/pH7-Social-Dating-CMS.git
-
-    echo "Yaaay! Changes successfully saved into remote repos!"
+    _save-project-to-repo git@github.com:pH-7/Acquireutah.git
 }
 
 # Backup. Create a compressed archive of the project
