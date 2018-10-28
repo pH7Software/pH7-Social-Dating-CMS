@@ -9,22 +9,22 @@
 namespace PH7;
 
 use PH7\Framework\Date\CDateTime;
-use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
+use PH7\Framework\Layout\Tpl\Engine\Templatable;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
 
 class Report
 {
-    /** @var PH7Tpl */
+    /** @var Templatable */
     private $oView;
 
     /** @var string|bool */
     private $mStatus = false;
 
     /**
-     * @param PH7Tpl $oView
+     * @param Templatable $oView
      */
-    public function __construct(PH7Tpl $oView)
+    public function __construct(Templatable $oView)
     {
         $this->oView = $oView;
     }

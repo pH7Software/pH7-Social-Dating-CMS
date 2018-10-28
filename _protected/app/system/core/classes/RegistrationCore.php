@@ -8,7 +8,7 @@
 
 namespace PH7;
 
-use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
+use PH7\Framework\Layout\Tpl\Engine\Templatable;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
@@ -30,10 +30,10 @@ abstract class RegistrationCore
     /** @var int */
     protected $iActiveType;
 
-    /** @var PH7Tpl */
+    /** @var Templatable */
     protected $oView;
 
-    public function __construct(PH7Tpl $oView)
+    public function __construct(Templatable $oView)
     {
         $this->oView = $oView;
 

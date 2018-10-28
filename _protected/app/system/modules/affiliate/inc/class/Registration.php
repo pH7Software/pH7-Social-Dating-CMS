@@ -8,14 +8,14 @@
 
 namespace PH7;
 
-use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
+use PH7\Framework\Layout\Tpl\Engine\Templatable;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 
 class Registration extends RegistrationCore
 {
-    public function __construct(PH7Tpl $oView)
+    public function __construct(Templatable $oView)
     {
         parent::__construct($oView);
 
