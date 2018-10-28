@@ -634,7 +634,7 @@ class UserCoreModel extends Model
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT email, username, firstName, hashValidation FROM' . Db::prefix($sTable) . 'WHERE email = :email AND active = :emailActivation');
+        $rStmt = Db::getInstance()->prepare('SELECT email, username, firstName, hashValidation FROM' . Db::prefix($sTable) . 'WHERE email = :email AND active = :emailActivation LIMIT 1');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->bindValue(':emailActivation', RegistrationCore::EMAIL_ACTIVATION, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -657,7 +657,7 @@ class UserCoreModel extends Model
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET active = :noActivation WHERE email = :email AND hashValidation = :hash AND active = :emailActivation');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET active = :noActivation WHERE email = :email AND hashValidation = :hash AND active = :emailActivation LIMIT 1');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->bindValue(':noActivation', RegistrationCore::NO_ACTIVATION, \PDO::PARAM_INT);
         $rStmt->bindValue(':emailActivation', RegistrationCore::EMAIL_ACTIVATION, \PDO::PARAM_INT);
