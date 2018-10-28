@@ -18,6 +18,8 @@ use PH7\Framework\Registry\Registry;
 
 class ProviderFactory
 {
+    const EXCEPTION_ERROR_MESSAGE = 'Invalid API video type. Wrong specified type is: %s';
+
     const YOUTUBE_NAMES = [
         'youtube',
         'youtu'
@@ -61,7 +63,7 @@ class ProviderFactory
 
             default:
                 throw new InvalidApiProviderException(
-                    sprintf('Invalid API video type. Wrong specified type: %s', $sVideoPlatform)
+                    sprintf(self::EXCEPTION_ERROR_MESSAGE, $sVideoPlatform)
                 );
         }
 
