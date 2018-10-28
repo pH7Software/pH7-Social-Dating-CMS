@@ -12,6 +12,8 @@ defined('PH7') or exit('Restricted access');
 
 class Environment
 {
+    const ENV_FILE_EXT = '.env';
+
     const PRODUCTION_MODE = 'production';
     const DEVELOPMENT_MODE = 'development';
 
@@ -29,6 +31,6 @@ class Environment
     {
         $sFileName = in_array($sEnvName, self::MODES, true) ? $sEnvName : self::PRODUCTION_MODE;
 
-        return $sFileName . '.env';
+        return $sFileName . self::ENV_FILE_EXT;
     }
 }
