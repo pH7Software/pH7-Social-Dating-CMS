@@ -14,10 +14,8 @@ class SmsGatewayFactory
 {
     const EXCEPTION_ERROR_MESSAGE = '"%s" is an invalid SMS gateway specified.';
 
-    const GATEWAYS = [
-        'clickatell' => ClickatellProvider::class,
-        'twilio' => TwilioProvider::class
-    ];
+    const CLICKATELL_NAME = 'clickatell';
+    const TWILIO_NAME = 'twilio';
 
     /**
      * @param string $sSmsGateway
@@ -28,25 +26,23 @@ class SmsGatewayFactory
      */
     public static function create($sSmsGateway)
     {
-        if (!self::isGatewayValid($sSmsGateway)) {
-            throw new InvalidSmsGatewayException(
-                sprintf(self::EXCEPTION_ERROR_MESSAGE, $sSmsGateway)
-            );
+        switch ($sSmsGateway) {
+            case self::CLICKATELL_NAME:
+                $sSenderNumber = Config::getInstance()->values['module.setting']['sender.phone_number'];
+                $sApiToken = Config::getInstance()->values['module.setting']['clickatell.api_token'];
+                return new ClickatellProvider($sSenderNumber, $sApiToken);
+                break;
+
+            case self::TWILIO_NAME:
+                $sSenderNumber = Config::getInstance()->values['module.setting']['sender.phone_number'];
+                $sApiToken = Config::getInstance()->values['module.setting']['twilio.api_token'];
+                $sApiId = Config::getInstance()->values['module.setting']['twilio.api_id'];
+                return new ClickatellProvider($sSenderNumber, $sApiToken, $sApiId);
+
+            default:
+                throw new InvalidSmsGatewayException(
+                    sprintf(self::EXCEPTION_ERROR_MESSAGE, $sSmsGateway)
+                );
         }
-
-        $sApiToken = Config::getInstance()->values['module.setting']['clickatell.api_token'];
-
-        $sClassName = self::GATEWAYS[$sSmsGateway];
-        return new $sClassName($sApiToken);
-    }
-
-    /**
-     * @param string $sSmsGateway
-     *
-     * @return bool
-     */
-    private static function isGatewayValid($sSmsGateway)
-    {
-        return in_array($sSmsGateway, self::GATEWAYS, true);
     }
 }

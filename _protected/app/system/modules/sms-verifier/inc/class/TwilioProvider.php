@@ -17,14 +17,16 @@ class TwilioProvider extends SmsProvider implements SmsProvidable
      */
     public function send($sPhoneNumber, $sTextMessage)
     {
-        $oClient = new Client($sPhoneNumber, $this->sTokenApi);
+        $oClient = new Client($this->sApiId, $this->sApiToken);
 
-        return $oClient->messages->create(
+        $oMessage = $oClient->messages->create(
             $sPhoneNumber,
             [
-                'from' => $this->sFromSenderName,
+                'from' => $this->sSenderNumber,
                 'body' => $sTextMessage
             ]
         );
+
+        return isset($oMessage->sid);
     }
 }

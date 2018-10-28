@@ -11,18 +11,23 @@ namespace PH7;
 class SmsProvider
 {
     /** @var string */
-    protected $sFromSenderName;
+    protected $sSenderNumber;
 
     /** @var string */
-    protected $sTokenApi;
+    protected $sApiToken;
+
+    /** @var string */
+    protected $sApiId;
 
     /**
-     * @param string $sFromSenderName
-     * @param string $sTokenApi
+     * @param string $sSenderNumber
+     * @param string $sApiToken
+     * @param string|null $sApiId
      */
-    public function __construct($sFromSenderName, $sTokenApi)
+    public function __construct($sSenderNumber, $sApiToken, $sApiId = null)
     {
-        $this->sFromSenderName = $sFromSenderName;
-        $this->sTokenApi = $sTokenApi;
+        $this->sSenderNumber = $sSenderNumber;
+        $this->sApiToken = $sApiToken;
+        $this->sApiId = $sApiId;
     }
 }
