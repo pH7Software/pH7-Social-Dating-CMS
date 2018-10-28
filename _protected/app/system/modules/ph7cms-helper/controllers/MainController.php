@@ -60,7 +60,7 @@ class MainController extends Controller
         $this->view->page_title = t('Will You Help pH7CMS?');
 
         $sBoxType = $this->getSuggestionBox();
-        if ($sBoxType === self::VIEW_OPTIONS[0]) {
+        if ($this->doesSuggestionBoxIsDonation()) {
             $oPayPal = new PayPal();
             $oPayPal->param('business', base64_decode($this->config->values['module.setting']['paypal.donation_email']))
                 ->param('currency_code', $this->config->values['module.setting']['currency_code'])
@@ -125,6 +125,16 @@ class MainController extends Controller
     private function setPageVisit()
     {
         $this->session->set(ValidateSiteCore::SESS_IS_VISITED, 1);
+    }
+
+    /**
+     * @param string $sBoxType
+     *
+     * @return bool
+     */
+    private function doesSuggestionBoxIsDonation($sBoxType)
+    {
+        return $sBoxType === self::VIEW_OPTIONS[0];
     }
 
     /**
