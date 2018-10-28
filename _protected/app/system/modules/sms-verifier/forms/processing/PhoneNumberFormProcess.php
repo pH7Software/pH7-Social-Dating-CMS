@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
 class PhoneNumberFormProcess extends Form
@@ -27,7 +28,10 @@ class PhoneNumberFormProcess extends Form
                 Uri::get('sms-verifier', 'main', 'verification')
             );
         } else {
-            \PFBC\Form::setError('form_phone_number_verification', t('An error occurred while sending the verification text. Please retry.'));
+            \PFBC\Form::setError(
+                'form_phone_number_verification',
+                t('An error occurred while sending the verification text. Please retry.')
+            );
         }
     }
 }
