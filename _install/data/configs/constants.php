@@ -23,7 +23,7 @@ defined('PH7') or exit(header('Location: ./'));
 $sHttp = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') ? 'https://' : 'http://';
 // Determine the domain name, with the port if necessary
 $sServerName = $_SERVER['SERVER_NAME'] !== $_SERVER['HTTP_HOST'] ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
-$sDomain = ($_SERVER['SERVER_PORT'] != '80' && $_SERVER['SERVER_PORT'] != '443') ? $sServerName . ':' . $_SERVER['SERVER_PORT'] : $sServerName;
+$sDomain = ($_SERVER['SERVER_PORT'] != '80' && $_SERVER['SERVER_PORT'] != '443' && strpos($sServerName, ':') === false) ? $sServerName . ':' . $_SERVER['SERVER_PORT'] : $sServerName;
 
 // Get the domain that the cookie and cookie session is available (Set-Cookie: domain=your_site_name.com)
 // $sDomain_cookie = (substr($_SERVER['HTTP_HOST'], 0, 4) === 'www.') ? '.' . substr($_SERVER['HTTP_HOST'], 4) : '.' . $_SERVER['HTTP_HOST'];
