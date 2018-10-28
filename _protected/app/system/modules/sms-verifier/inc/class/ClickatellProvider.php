@@ -6,7 +6,15 @@
  * @package        PH7 / App / System / Module / SMS Verifier / Inc / Class
  */
 
-class SmsFactory
-{
+namespace PH7;
 
+class ClickatellProvider extends SmsProvider implements SmsProvidable
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function send($sPhoneNumber, $sTextMessage)
+    {
+        $oClickatell = new Client();
+    }
 }
