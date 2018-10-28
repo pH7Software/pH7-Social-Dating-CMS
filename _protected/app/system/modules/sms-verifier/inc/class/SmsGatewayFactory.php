@@ -12,7 +12,7 @@ use PH7\Framework\Config\Config;
 
 class SmsGatewayFactory
 {
-    const EXCEPTION_ERROR_MESSAGE = '"%s" is an invalid SMS gateway specified.';
+    const INVALID_SMS_GATEWAY_MESSAGE = '"%s" is an invalid SMS gateway specified.';
 
     const CLICKATELL_NAME = 'clickatell';
     const TWILIO_NAME = 'twilio';
@@ -41,7 +41,7 @@ class SmsGatewayFactory
 
             default:
                 throw new InvalidSmsGatewayException(
-                    sprintf(self::EXCEPTION_ERROR_MESSAGE, $sSmsGateway)
+                    sprintf(self::INVALID_SMS_GATEWAY_MESSAGE, $sSmsGateway)
                 );
         }
     }
