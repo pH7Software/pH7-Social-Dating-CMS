@@ -102,34 +102,37 @@ class LoginFormProcess extends Form implements LoginableForm
 
             $oUser = new UserCore;
             if ($oUserData->active == RegistrationCore::SMS_ACTIVATION) {
+                // Store the user ID before redirecting to sms-verifier module
+                $this->session->set(SmsVerificationCore::PROFILE_ID_SESS_NAME, $iId);
+
                 Header::redirect(
                     Uri::get('sms-verifier', 'main', 'send')
                 );
-            }
-
-            if (true !== ($mStatus = $oUser->checkAccountStatus($oUserData))) {
-                \PFBC\Form::setError('form_login_user', $mStatus);
             } else {
-                $o2FactorModel = new TwoFactorAuthCoreModel('user');
-                if ($o2FactorModel->isEnabled($iId)) {
-                    // Store the user ID for 2FA
-                    $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iId);
-
-                    Header::redirect(
-                        Uri::get(
-                            'two-factor-auth',
-                            'main',
-                            'verificationcode',
-                            'user'
-                        )
-                    );
+                if (true !== ($mStatus = $oUser->checkAccountStatus($oUserData))) {
+                    \PFBC\Form::setError('form_login_user', $mStatus);
                 } else {
-                    $oUser->setAuth($oUserData, $this->oUserModel, $this->session, $oSecurityModel);
+                    $o2FactorModel = new TwoFactorAuthCoreModel('user');
+                    if ($o2FactorModel->isEnabled($iId)) {
+                        // Store the user ID for 2FA
+                        $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iId);
 
-                    Header::redirect(
-                        $sUrlRelocateAfterLogin,
-                        t('You are successfully logged in!')
-                    );
+                        Header::redirect(
+                            Uri::get(
+                                'two-factor-auth',
+                                'main',
+                                'verificationcode',
+                                'user'
+                            )
+                        );
+                    } else {
+                        $oUser->setAuth($oUserData, $this->oUserModel, $this->session, $oSecurityModel);
+
+                        Header::redirect(
+                            $sUrlRelocateAfterLogin,
+                            t('You are successfully logged in!')
+                        );
+                    }
                 }
             }
         }

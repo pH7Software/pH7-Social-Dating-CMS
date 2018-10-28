@@ -18,6 +18,11 @@ class VerificationFormProcess extends Form
         parent::__construct();
 
         if ($this->isVerificationCodeValid()) {
+            (new UserCoreModel)->approve(
+                $this->session->get(SmsVerificationCore::PROFILE_ID_SESS_NAME),
+                1
+            );
+
             Header::redirect(
                 Uri::get('user', 'main', 'login'),
                 t('Congratulations! Your phone number has been successfully verified. You can now login.')
