@@ -23,6 +23,7 @@ abstract class RegistrationCore
     const NO_ACTIVATION = 1;
     const EMAIL_ACTIVATION = 2;
     const MANUAL_ACTIVATION = 3;
+    const SMS_ACTIVATION = 4;
 
     /**
      * @internal Set protected visibility because this attribute is used in child classes.

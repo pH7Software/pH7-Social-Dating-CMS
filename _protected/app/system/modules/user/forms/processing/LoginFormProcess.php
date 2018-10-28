@@ -101,6 +101,12 @@ class LoginFormProcess extends Form implements LoginableForm
             }
 
             $oUser = new UserCore;
+            if ($oUserData->active == RegistrationCore::SMS_ACTIVATION) {
+                Header::redirect(
+                    Uri::get('sms-verifier', 'main', 'send')
+                );
+            }
+
             if (true !== ($mStatus = $oUser->checkAccountStatus($oUserData))) {
                 \PFBC\Form::setError('form_login_user', $mStatus);
             } else {
