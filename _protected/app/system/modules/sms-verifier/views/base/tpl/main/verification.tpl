@@ -1,4 +1,3 @@
-<div class="col-md-12">
-
-
+<div class="col-md-8">
+    {{ VerificationForm::display() }}
 </div>
