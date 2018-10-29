@@ -50,7 +50,10 @@ class MainController extends Controller
             $this->view->is_users_block = (bool)DbConfig::getSetting('usersBlock');
 
             $bIsBgVideo = false;
-            if ($this->isBackgroundVideoEligible()) {
+            if ($this->isGuestSplashPage()) {
+                /**
+                 * Background video is only available on the guest splash page.
+                 */
                 // Enable the Splash Video Background if enabled
                 $bIsBgVideo = (bool)DbConfig::getSetting('bgSplashVideo');
 
@@ -219,12 +222,11 @@ class MainController extends Controller
     }
 
     /**
-     * Background video is only used on the guest splash page.
-     * Returns TRUE if it is the case, FALSE otherwise.
+     * Returns TRUE if it's the guest splash page, FALSE otherwise.
      *
      * @return bool
      */
-    private function isBackgroundVideoEligible()
+    private function isGuestSplashPage()
     {
         return $this->getGuestTplPage() === static::GUEST_SPLASH_FILE;
     }
