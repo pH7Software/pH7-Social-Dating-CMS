@@ -71,7 +71,7 @@ class VideoCore
     public static function clearCache()
     {
         (new Cache)->start(
-            VideoModel::CACHE_GROUP,
+            VideoCoreModel::CACHE_GROUP,
             null,
             null
         )->clear();
