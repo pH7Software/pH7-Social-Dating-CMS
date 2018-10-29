@@ -42,9 +42,9 @@ class SettingFormProcess extends Form
         'full_ajax_site' => 'fullAjaxSite',
         'site_status' => 'siteStatus',
         'social_media_widgets' => 'socialMediaWidgets',
-        'disclaimer' => 'disclaimer',
+        //'disclaimer' => 'disclaimer',
         'cookie_consent_bar' => 'cookieConsentBar',
-        'display_powered_by_link' => 'displayPoweredByLink',
+        //'display_powered_by_link' => 'displayPoweredByLink',
         'is_software_news_feed' => 'isSoftwareNewsFeed',
 
         // Email
