@@ -16,6 +16,7 @@ SET @sDefaultSiteName = 'My Dating WebApp';
 SET @sAdminEmail = 'admin@yoursite.com';
 SET @sFeedbackEmail = 'feedback@yoursite.com';
 SET @sNoReplyEmail = 'noreply@yoursite.com';
+SET @sDefaultSysModule = 'user';
 SET @sIpApiUrl = 'https://whatismyipaddress.com/ip/';
 SET @sDefaultVideoUrl = 'https://www.youtube.com/watch?v=q-1eHnBOg4A';
 SET @sChatApiUrl = 'https://ph7cms.com/addons/chat/?name=%site_name%&url=%site_url%&skin=4';
@@ -999,7 +1000,7 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('linkColor', '', 'Override links color. Leave empty to disable', 'design'),
 ('footerLinkColor', '', 'Override footer links color. Leave empty to disable', 'design'),
 ('linkHoverColor', '', 'Override links hover color. Leave empty to disable', 'design'),
-('defaultSysModule', 'user', 'The default module running by default on the index page. Recommended to keep the "user" module', 'general'),
+('defaultSysModule', @sDefaultSysModule, 'The default module running by default on the index page. Recommended to keep the "user" module', 'general'),
 ('emailName', 'pH7CMS', '', 'email'),
 ('feedbackEmail', @sFeedbackEmail, '', 'email'),
 ('splashPage', 1, 'Use Splash Page | enable = 1 or disable = 0', 'homepage'),
