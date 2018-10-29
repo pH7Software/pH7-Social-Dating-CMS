@@ -36,7 +36,7 @@ class MainController extends Controller
          * @internal We don't have to put the title here as it's the homepage, so it's the default title that is used.
          */
 
-        // For Profiles Carousel
+        // Used for profiles carousel/user block promo
         $this->view->userDesignModel = new UserDesignCoreModel;
 
         // For user counter
