@@ -61,7 +61,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Background Splash Video:'), 'bg_splash_vid', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('Enable/Disable the "Animated Video" on the Splash Homepage. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('bgSplashVideo'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Display Profiles on Guest Homepage:'), 'users_block', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('Display or not the newest users on the homepage for visitors. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('usersBlock'), 'required' => 1]));
+       //$oForm->addElement(new \PFBC\Element\Select(t('Display Profiles on Guest Homepage:'), 'users_block', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('Display or not the newest users on the homepage for visitors. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('usersBlock'), 'required' => 1]));
 
         $oForm->addElement(new \PFBC\Element\Number(t('Number of Profiles on Splash Page:'), 'number_profile_splash_page', ['description' => t('The number of profiles to display on the Splash Homepage. <br /><em>Available only if "Profiles on Guest Homepage" is enabled and if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('numberProfileSplashPage'), 'validation' => new \PFBC\Validation\Str(1, 2), 'required' => 1]));
 
