@@ -372,7 +372,7 @@ class SettingForm
     private static function getActivatableDefMods()
     {
         return [
-            'user',
+            'realestate',
             'affiliate',
             'blog',
             'note',
