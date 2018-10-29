@@ -57,7 +57,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Profiles with Photo Only:'), 'profile_with_avatars', ['1' => t('Yes'), '0' => t('No')], ['description' => t('Display only the profiles with a profile photo on profile blocks (such as the homepage).'), 'value' => DbConfig::getSetting('profileWithAvatarSet'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Splash Homepage:'), 'splash_page', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('Use the Splash Page (recommended) for visitors (not logged), otherwise the classic page will be used. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('splashPage'), 'required' => 1]));
+        //$oForm->addElement(new \PFBC\Element\Select(t('Splash Homepage:'), 'splash_page', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('Use the Splash Page (recommended) for visitors (not logged), otherwise the classic page will be used. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('splashPage'), 'required' => 1]));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Background Splash Video:'), 'bg_splash_vid', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('Enable/Disable the "Animated Video" on the Splash Homepage. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('bgSplashVideo'), 'required' => 1]));
 
