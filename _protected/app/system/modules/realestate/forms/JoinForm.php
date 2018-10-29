@@ -37,10 +37,17 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user', 'form_join_user'));
         $oForm->addElement(new \PFBC\Element\Token('join'));
 
-        // Check if the Connect module is enabled
-        if (SysMod::isEnabled('connect')) {
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="center s_tMarg"><a href="' . Uri::get('connect', 'main', 'index') . '" class="btn btn-primary"><strong>' . t('Universal Login') . '</strong></a></div>'));
-        }
+        $oForm->addElement(
+            new \PFBC\Element\Radio(
+                t('Are you?'),
+                'sex',
+                [
+                    'buyer' => t('Buyer') . ' <i class="fa fa-venus"></i>',
+                    'seller' => t('Seller') . ' <i class="fa fa-mars"></i>'
+                ],
+                ['value' => 'buyer', 'required' => 1]
+            )
+        );
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name'), 'first_name', ['placeholder' => t('First Name'), 'id' => 'name_first', 'onblur' => 'CValid(this.value,this.id)', 'required' => 1, 'validation' => new \PFBC\Validation\Name]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_first"></span>'));
@@ -71,16 +78,16 @@ class JoinForm
     public static function step2()
     {
         $oSession = new Session;
-        if (!$oSession->exists('mail_step1')) {
-            Header::redirect(Uri::get('user', 'signup', 'step1'));
-        } elseif ($oSession->exists('mail_step2')) {
-            Header::redirect(Uri::get('user', 'signup', 'step3'));
+        if (!$oSession->exists('mail_step2')) {
+            Header::redirect(Uri::get('user', 'signup', 'step2'));
+        } elseif ($oSession->exists('mail_step3')) {
+            Header::redirect(Uri::get('user', 'signup', 'step4'));
         }
         unset($oSession);
 
         if (isset($_POST['submit_join_user2'])) {
             if (\PFBC\Form::isValid($_POST['submit_join_user2'])) {
-                (new JoinFormProcess)->step2();
+                (new JoinFormProcess)->step3();
             }
 
             Header::redirect();
@@ -89,70 +96,6 @@ class JoinForm
         $oForm = new \PFBC\Form('form_join_user2');
         $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user2', 'form_join_user2'));
-        $oForm->addElement(new \PFBC\Element\Token('join2'));
-
-        $oForm->addElement(
-            new \PFBC\Element\Radio(
-                t('I am a'),
-                'sex',
-                [
-                    GenderTypeUserCoreModel::FEMALE => t('Woman') . ' <i class="fa fa-venus"></i>',
-                    GenderTypeUserCoreModel::MALE => t('Man') . ' <i class="fa fa-mars"></i>',
-                    GenderTypeUserCoreModel::COUPLE => t('Couple') . ' <i class="fa fa-venus-mars"></i>'
-                ],
-                ['value' => GenderTypeUserCoreModel::FEMALE, 'required' => 1]
-            )
-        );
-
-        $oForm->addElement(
-            new \PFBC\Element\Checkbox(
-                t('Looking for a'),
-                'match_sex',
-                [
-                    GenderTypeUserCoreModel::MALE => t('Man') . ' <i class="fa fa-mars"></i>',
-                    GenderTypeUserCoreModel::FEMALE => t('Woman') . ' <i class="fa fa-venus"></i>',
-                    GenderTypeUserCoreModel::COUPLE => t('Couple') . ' <i class="fa fa-venus-mars"></i>'
-                ],
-                ['value' => GenderTypeUserCoreModel::MALE, 'required' => 1]
-            )
-        );
-
-        self::generateBirthDateField($oForm);
-
-        $oForm->addElement(new \PFBC\Element\Select(t('Your Country'), 'country', Form::getCountryValues(), ['id' => 'str_country', 'value' => Geo::getCountryCode(), 'required' => 1]));
-
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your City'), 'city', ['id' => 'str_city', 'value' => Geo::getCity(), 'onblur' => 'CValid(this.value,this.id,2,150)', 'description' => t('Select the city where you live/where you want to meet people.'), 'validation' => new \PFBC\Validation\Str(2, 150), 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_city"></span>'));
-
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Postal Code'), 'zip_code', ['id' => 'str_zip_code', 'value' => Geo::getZipCode(), 'onblur' => 'CValid(this.value,this.id,2,15)', 'validation' => new \PFBC\Validation\Str(2, 15)]));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_zip_code"></span>'));
-
-        $oForm->addElement(new \PFBC\Element\Button(t('Next'), 'submit', ['icon' => 'seek-next']));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script><script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
-        $oForm->render();
-    }
-
-    public static function step3()
-    {
-        $oSession = new Session;
-        if (!$oSession->exists('mail_step2')) {
-            Header::redirect(Uri::get('user', 'signup', 'step2'));
-        } elseif ($oSession->exists('mail_step3')) {
-            Header::redirect(Uri::get('user', 'signup', 'step4'));
-        }
-        unset($oSession);
-
-        if (isset($_POST['submit_join_user3'])) {
-            if (\PFBC\Form::isValid($_POST['submit_join_user3'])) {
-                (new JoinFormProcess)->step3();
-            }
-
-            Header::redirect();
-        }
-
-        $oForm = new \PFBC\Form('form_join_user3');
-        $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user3', 'form_join_user3'));
         $oForm->addElement(new \PFBC\Element\Token('join3'));
 
         $oForm->addElement(new \PFBC\Element\Textarea(t('About Me'), 'description', ['id' => 'str_description', 'description' => t('Describe yourself in a few words. Your description should be at least 20 characters long.'), 'onblur' => 'CValid(this.value,this.id,20,4000)', 'validation' => new \PFBC\Validation\Str(20, 4000), 'required' => 1]));
@@ -163,14 +106,14 @@ class JoinForm
         $oForm->render();
     }
 
-    public static function step4()
+    public static function step3()
     {
         if (!(new Session)->exists('mail_step3')) {
             Header::redirect(Uri::get('user', 'signup', 'step3'));
         }
 
-        if (isset($_POST['submit_join_user4'])) {
-            if (\PFBC\Form::isValid($_POST['submit_join_user4'])) {
+        if (isset($_POST['submit_join_user2'])) {
+            if (\PFBC\Form::isValid($_POST['submit_join_user2'])) {
                 (new JoinFormProcess)->step4();
             }
 
@@ -183,9 +126,9 @@ class JoinForm
             $aAvatarFieldOption += ['required' => 1];
         }
 
-        $oForm = new \PFBC\Form('form_join_user4');
+        $oForm = new \PFBC\Form('form_join_user2');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user4', 'form_join_user4'));
+        $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user2', 'form_join_user2'));
         $oForm->addElement(new \PFBC\Element\Token('join4'));
         $oForm->addElement(new \PFBC\Element\File(t('Your Profile Photo'), 'avatar', $aAvatarFieldOption));
         $oForm->addElement(new \PFBC\Element\Button(t('Add My Photo')));
@@ -200,25 +143,5 @@ class JoinForm
             );
         }
         $oForm->render();
-    }
-
-    private static function generateBirthDateField(\PFBC\Form $oForm)
-    {
-        if (DbConfig::getSetting('isUserAgeRangeField')) {
-            $iMinAge = DbConfig::getSetting('minAgeRegistration');
-            $iMaxAge = DbConfig::getSetting('maxAgeRegistration');
-            $iDefRegistrationAge = $iMinAge + 16;
-
-            $oForm->addElement(
-                new \PFBC\Element\Range(
-                    t('How Old Are You?'),
-                    'age',
-                    ['value' => $iDefRegistrationAge, 'min' => $iMinAge, 'max' => $iMaxAge, 'required' => 1]
-                )
-            );
-        } else {
-            $oForm->addElement(new \PFBC\Element\Date(t('Your Date of Birth'), 'birth_date', ['id' => 'birth_date', 'description' => t('Please specify your date of birth using the calendar.'), 'onblur' => 'CValid(this.value, this.id)', 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1]));
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
-        }
     }
 }

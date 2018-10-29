@@ -44,6 +44,7 @@ class JoinFormProcess extends Form
 
         $aData = [
             'email' => $this->httpRequest->post('mail'),
+            'sex' => $this->httpRequest->post('sex'),
             'username' => $this->httpRequest->post('username'),
             'first_name' => $this->httpRequest->post('first_name'),
             'reference' => $this->getAffiliateReference(),
@@ -92,29 +93,15 @@ class JoinFormProcess extends Form
             );
         }
     }
-
+    
     public function step2()
     {
-        $iProfileId = $this->oUserModel->getId($this->session->get('mail_step1'));
-        $sBirthDate = $this->getUserBirthDateValue();
-
-        // WARNING FOT "matchSex" FIELD: Be careful, you should use the Http::NO_CLEAN constant, otherwise Http::post() method removes the special tags
-        // and damages the SET function SQL for entry into the database
-        $aData1 = [
-            'sex' => $this->httpRequest->post('sex'),
-            'match_sex' => Form::setVal($this->httpRequest->post('match_sex', Http::NO_CLEAN)),
-            'birth_date' => $sBirthDate,
-            'profile_id' => $iProfileId
+        $aData = [
+            'description' => $this->httpRequest->post('description', Http::ONLY_XSS_CLEAN),
+            'profile_id' => $this->oUserModel->getId($this->session->get('mail_step2'))
         ];
 
-        $aData2 = [
-            'country' => $this->httpRequest->post('country'),
-            'city' => $this->httpRequest->post('city'),
-            'zip_code' => $this->httpRequest->post('zip_code'),
-            'profile_id' => $iProfileId
-        ];
-
-        if (!$this->oUserModel->exe($aData1, '2_1') || !$this->oUserModel->exe($aData2, '2_2')) {
+        if (!$this->oUserModel->exe($aData, '2')) {
             \PFBC\Form::setError('form_join_user2',
                 t('An error occurred during registration!') . '<br />' .
                 t('Please try again with new information in the form fields or come back later.')
@@ -122,33 +109,13 @@ class JoinFormProcess extends Form
         } else {
             $this->session->set('mail_step2', $this->session->get('mail_step1'));
             Header::redirect(
-                Uri::get('user', 'signup', 'step3')
-            );
-        }
-    }
-
-    public function step3()
-    {
-        $aData = [
-            'description' => $this->httpRequest->post('description', Http::ONLY_XSS_CLEAN),
-            'profile_id' => $this->oUserModel->getId($this->session->get('mail_step2'))
-        ];
-
-        if (!$this->oUserModel->exe($aData, '3')) {
-            \PFBC\Form::setError('form_join_user3',
-                t('An error occurred during registration!') . '<br />' .
-                t('Please try again with new information in the form fields or come back later.')
-            );
-        } else {
-            $this->session->set('mail_step3', $this->session->get('mail_step1'));
-            Header::redirect(
-                Uri::get('user', 'signup', 'step4'),
+                Uri::get('user', 'signup', 'step3'),
                 t('Your account has just been created!')
             );
         }
     }
 
-    public function step4()
+    public function step3()
     {
         // If no photo was uploaded, automatically skip the uploading process
         if (!$this->isAvatarUploaded()) {
@@ -169,7 +136,7 @@ class JoinFormProcess extends Form
             );
 
             if (!$bAvatar) {
-                \PFBC\Form::setError('form_join_user4', Form::wrongImgFileTypeMsg());
+                \PFBC\Form::setError('form_join_user2', Form::wrongImgFileTypeMsg());
             } else {
                 $this->redirectUserToDonePage();
             }
