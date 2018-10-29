@@ -1005,7 +1005,7 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('splashPage', 1, 'Use Splash Page | enable = 1 or disable = 0', 'homepage'),
 ('usersBlock', 0, '0 to disable | 1 to enable the profile photos on the homepage', 'homepage'),
 ('profileWithAvatarSet', 0, '1 to display only the profiles with a profile photo.', 'homepage'),
-('bgSplashVideo', 1, '0 to disable or 1 to enable the background splash video', 'homepage'),
+('bgSplashVideo', 0, '0 to disable or 1 to enable the background splash video', 'homepage'),
 ('numberProfileSplashPage', 44, 'Number of profiles to display on the splash homepage', 'homepage'),
 ('fullAjaxSite', 0, 'enable = 1 or disable = 0', 'general'),
 ('ipLogin', '', '', 'security'),
