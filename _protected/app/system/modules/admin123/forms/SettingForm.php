@@ -49,7 +49,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Default Theme:'), 'default_template', self::getTpls($oFile), ['value' => DbConfig::getSetting('defaultTemplate'), 'required' => 1]));
 
-        //$oForm->addElement(new \PFBC\Element\Select(t('Default Module:'), 'default_sys_module', self::getDefMods(), ['description' => t('The default module is the one running by default on the homepage (recommended to keep the "user" module).'), 'value' => DbConfig::getSetting('defaultSysModule'), 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Select(t('Default Module:'), 'default_sys_module', self::getDefMods(), ['description' => t('The default module is the one running by default on the homepage (recommended to keep the "user" module).'), 'value' => DbConfig::getSetting('defaultSysModule'), 'required' => 1]));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Default Language:'), 'default_language', self::getLangs($oFile), ['description' => t('Documentation: <a href="%0%">Translate your site to another language</a>.', self::I18N_DOC_URL), 'value' => DbConfig::getSetting('defaultLanguage'), 'validation' => new \PFBC\Validation\Str(5, 5), 'required' => 1]));
 
@@ -61,9 +61,9 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Background Splash Video:'), 'bg_splash_vid', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('Enable/Disable the "Animated Video" on the Splash Homepage. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('bgSplashVideo'), 'required' => 1]));
 
-       //$oForm->addElement(new \PFBC\Element\Select(t('Display Profiles on Guest Homepage:'), 'users_block', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('Display or not the newest users on the homepage for visitors. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('usersBlock'), 'required' => 1]));
+        //$oForm->addElement(new \PFBC\Element\Select(t('Display Profiles on Guest Homepage:'), 'users_block', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('Display or not the newest users on the homepage for visitors. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('usersBlock'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Number of Profiles on Splash Page:'), 'number_profile_splash_page', ['description' => t('The number of profiles to display on the Splash Homepage. <br /><em>Available only if "Profiles on Guest Homepage" is enabled and if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('numberProfileSplashPage'), 'validation' => new \PFBC\Validation\Str(1, 2), 'required' => 1]));
+        //$oForm->addElement(new \PFBC\Element\Number(t('Number of Profiles on Splash Page:'), 'number_profile_splash_page', ['description' => t('The number of profiles to display on the Splash Homepage. <br /><em>Available only if "Profiles on Guest Homepage" is enabled and if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('numberProfileSplashPage'), 'validation' => new \PFBC\Validation\Str(1, 2), 'required' => 1]));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Ajax Site with AjPH:'), 'full_ajax_site', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t("Be careful! 'Full Ajax Navigation' feature is still in <strong>Beta version</strong> and may not be working properly on all pages."), 'value' => DbConfig::getSetting('fullAjaxSite'), 'required' => 1]));
 
