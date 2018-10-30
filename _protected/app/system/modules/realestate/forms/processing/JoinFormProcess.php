@@ -176,26 +176,6 @@ class JoinFormProcess extends Form
     }
 
     /**
-     * @return string Returns the birthdate depending of what field type is used in the form.
-     */
-    private function getUserBirthDateValue()
-    {
-        if (DbConfig::getSetting('isUserAgeRangeField')) {
-            $iAge = $this->httpRequest->post('age', 'int');
-            $oDate = new DateTime;
-            $oDate->modify(sprintf('- %d year', $iAge));
-            $sBirthDate = $oDate->format('Y-m-d');
-        } else {
-            $sBirthDate = $this->dateTime
-                ->get(
-                    $this->httpRequest->post('birth_date')
-                )->date('Y-m-d');
-        }
-
-        return $sBirthDate;
-    }
-
-    /**
      * @return string
      */
     private function getAffiliateReference()
