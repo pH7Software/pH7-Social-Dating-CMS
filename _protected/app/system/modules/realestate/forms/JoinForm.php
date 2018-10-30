@@ -60,6 +60,14 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\Password(t('Your Password'), 'password', ['placeholder' => t('Password'), 'id' => 'password', 'onkeyup' => 'checkPassword(this.value)', 'onblur' => 'CValid(this.value, this.id)', 'required' => 1, 'validation' => new \PFBC\Validation\Password]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error password"></span>'));
 
+        $oForm->addElement(new \PFBC\Element\Select(t('Your Country'), 'country', Form::getCountryValues(), ['id' => 'str_country', 'value' => Geo::getCountryCode(), 'required' => 1]));
+
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your City'), 'city', ['id' => 'str_city', 'value' => Geo::getCity(), 'onblur' => 'CValid(this.value,this.id,2,150)', 'description' => t('Select the city where you live/where you want to meet people.'), 'validation' => new \PFBC\Validation\Str(2, 150), 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_city"></span>'));
+
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Postal Code'), 'zip_code', ['id' => 'str_zip_code', 'value' => Geo::getZipCode(), 'onblur' => 'CValid(this.value,this.id,2,15)', 'validation' => new \PFBC\Validation\Str(2, 15)]));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_zip_code"></span>'));
+
         if (DbConfig::getSetting('isCaptchaUserSignup')) {
             $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha'), 'captcha', ['placeholder' => t('Captcha'), 'id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:')]));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
@@ -78,16 +86,16 @@ class JoinForm
     public static function step2()
     {
         $oSession = new Session;
-        if (!$oSession->exists('mail_step2')) {
-            Header::redirect(Uri::get('user', 'signup', 'step2'));
-        } elseif ($oSession->exists('mail_step3')) {
-            Header::redirect(Uri::get('user', 'signup', 'step4'));
+        if (!$oSession->exists('mail_step1')) {
+            Header::redirect(Uri::get('user', 'signup', 'step1'));
+        } elseif ($oSession->exists('mail_step2')) {
+            Header::redirect(Uri::get('user', 'signup', 'step3'));
         }
         unset($oSession);
 
         if (isset($_POST['submit_join_user2'])) {
             if (\PFBC\Form::isValid($_POST['submit_join_user2'])) {
-                (new JoinFormProcess)->step3();
+                (new JoinFormProcess)->step2();
             }
 
             Header::redirect();
@@ -96,11 +104,9 @@ class JoinForm
         $oForm = new \PFBC\Form('form_join_user2');
         $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user2', 'form_join_user2'));
-        $oForm->addElement(new \PFBC\Element\Token('join3'));
-
+        $oForm->addElement(new \PFBC\Element\Token('join2'));
         $oForm->addElement(new \PFBC\Element\Textarea(t('About Me'), 'description', ['id' => 'str_description', 'description' => t('Describe yourself in a few words. Your description should be at least 20 characters long.'), 'onblur' => 'CValid(this.value,this.id,20,4000)', 'validation' => new \PFBC\Validation\Str(20, 4000), 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_description"></span>'));
-
         $oForm->addElement(new \PFBC\Element\Button(t('Next'), 'submit', ['icon' => 'seek-next']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
@@ -112,8 +118,8 @@ class JoinForm
             Header::redirect(Uri::get('user', 'signup', 'step3'));
         }
 
-        if (isset($_POST['submit_join_user2'])) {
-            if (\PFBC\Form::isValid($_POST['submit_join_user2'])) {
+        if (isset($_POST['submit_join_user3'])) {
+            if (\PFBC\Form::isValid($_POST['submit_join_user3'])) {
                 (new JoinFormProcess)->step4();
             }
 
@@ -128,8 +134,8 @@ class JoinForm
 
         $oForm = new \PFBC\Form('form_join_user2');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user2', 'form_join_user2'));
-        $oForm->addElement(new \PFBC\Element\Token('join4'));
+        $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user3', 'form_join_user2'));
+        $oForm->addElement(new \PFBC\Element\Token('join3'));
         $oForm->addElement(new \PFBC\Element\File(t('Your Profile Photo'), 'avatar', $aAvatarFieldOption));
         $oForm->addElement(new \PFBC\Element\Button(t('Add My Photo')));
 

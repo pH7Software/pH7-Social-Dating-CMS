@@ -47,6 +47,9 @@ class JoinFormProcess extends Form
             'sex' => $this->httpRequest->post('sex'),
             'username' => $this->httpRequest->post('username'),
             'first_name' => $this->httpRequest->post('first_name'),
+            'country' =>  $this->httpRequest->post('country'),
+            'city' =>  $this->httpRequest->post('city'),
+            'zipCode' =>  $this->httpRequest->post('zipCode'),
             'reference' => $this->getAffiliateReference(),
             'ip' => Ip::get(),
             'hash_validation' => Various::genRnd(null, UserCoreModel::HASH_VALIDATION_LENGTH),
@@ -93,7 +96,7 @@ class JoinFormProcess extends Form
             );
         }
     }
-    
+
     public function step2()
     {
         $aData = [
@@ -104,7 +107,7 @@ class JoinFormProcess extends Form
         if (!$this->oUserModel->exe($aData, '2')) {
             \PFBC\Form::setError('form_join_user2',
                 t('An error occurred during registration!') . '<br />' .
-                t('Please try again with new information in the form fields or come back later.')
+                t('Please try againc with new information in the form fields or come back later.')
             );
         } else {
             $this->session->set('mail_step2', $this->session->get('mail_step1'));
@@ -136,7 +139,7 @@ class JoinFormProcess extends Form
             );
 
             if (!$bAvatar) {
-                \PFBC\Form::setError('form_join_user2', Form::wrongImgFileTypeMsg());
+                \PFBC\Form::setError('form_join_user3', Form::wrongImgFileTypeMsg());
             } else {
                 $this->redirectUserToDonePage();
             }
