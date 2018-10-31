@@ -46,14 +46,14 @@
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ $design->url('realestate', 'browse', 'index') }}" rel="nofollow" title="{lang 'Members'}" data-load="ajax"><i class="fa fa-users"></i> {lang 'People'}</a></li>
 
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('user','search', 'index') }}" title="{lang 'Search the members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search'}</a>
+            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('realestate','search', 'index') }}" title="{lang 'Search the members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search'}</a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ $design->url('realestate', 'search', 'quick') }}" title="{lang 'Quick Search'}" data-load="ajax">{lang 'Quick Search'}</a></li>
                 <li><a href="{{ $design->url('realestate', 'search', 'advanced') }}" title="{lang 'Advanced Search'}" data-load="ajax">{lang 'Advanced Search'}</a></li>
               </ul>
             </li>
 
-            <li><a href="{{ $design->url('user','country','index',$country.PH7_SH.$city) }}" title="{lang 'Users in %0% through the Map!',$city}"><i class="fa fa-map-marker"></i> {lang 'People Nearby'}</a></li>
+            <li><a href="{{ $design->url('realestate','country','index',$country.PH7_SH.$city) }}" title="{lang 'Users in %0% through the Map!',$city}"><i class="fa fa-map-marker"></i> {lang 'People Nearby'}</a></li>
           </ul>
         </li>
       {/if}
@@ -143,23 +143,23 @@
           {/if}
 
           <noscript>
-            <li class="dropdown"><a href="{{ $design->url('user','setting','edit') }}" title="{lang 'Settings'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Settings'} <span class="caret"></span></a>
+            <li class="dropdown"><a href="{{ $design->url('realestate','setting','edit') }}" title="{lang 'Settings'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Settings'} <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="{{ $design->url('user','setting','edit') }}">{lang 'Edit Profile'}</a></li>
-                <li><a href="{{ $design->url('user','setting','design') }}">{lang 'Design Profile'}</a></li>
-                <li><a href="{{ $design->url('user','setting','notification') }}">{lang 'Notifications'}</a></li>
-                <li><a href="{{ $design->url('user','setting','privacy') }}">{lang 'Privacy Settings'}</a></li>
+                <li><a href="{{ $design->url('realestate','setting','edit') }}">{lang 'Edit Profile'}</a></li>
+                <li><a href="{{ $design->url('realestate','setting','design') }}">{lang 'Design Profile'}</a></li>
+                <li><a href="{{ $design->url('realestate','setting','notification') }}">{lang 'Notifications'}</a></li>
+                <li><a href="{{ $design->url('realestate','setting','privacy') }}">{lang 'Privacy Settings'}</a></li>
                 <li><a href="{{ $design->url('payment','main','info') }}">{lang 'Membership Details'}</a></li>
-                <li><a href="{{ $design->url('user','setting','password') }}">{lang 'Change Password'}</a></li>
+                <li><a href="{{ $design->url('realestate','setting','password') }}">{lang 'Change Password'}</a></li>
               </ul>
             </li>
           </noscript>
 
-          <li class="dropdown"><a href="{{ $design->url('user','account','index') }}" title="{lang 'My Account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-cog"></i> {lang 'Account'} <span class="caret"></span></a>
+          <li class="dropdown"><a href="{{ $design->url('realestate','account','index') }}" title="{lang 'My Account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-cog"></i> {lang 'Account'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="{{ $design->url('user','setting','index') }}" title="{lang 'My Settings'}"><i class="fa fa-cog fa-fw"></i> {lang 'Edit Profile'}</a></li>
+              <li><a href="{{ $design->url('realestate','setting','index') }}" title="{lang 'My Settings'}"><i class="fa fa-cog fa-fw"></i> {lang 'Edit Profile'}</a></li>
               <li><a href="{% (new UserCore)->getProfileLink($oSession->get('member_username')) %}" title="{lang 'See My Profile'}"><i class="fa fa-user fa-fw"></i> {lang 'See My Profile'}</a></li>
-              <li><a href="{{ $design->url('user','setting','avatar') }}" title="{lang 'Change Profile Photo'}"><i class="fa fa-upload"></i> {lang 'Change Profile Photo'}</a></li>
+              <li><a href="{{ $design->url('realestate','setting','avatar') }}" title="{lang 'Change Profile Photo'}"><i class="fa fa-upload"></i> {lang 'Change Profile Photo'}</a></li>
 
               {if $is_picture_enabled}
                 <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('picture','main','index') }}" title="{lang 'Photo Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-picture-o"></i> {lang 'Photo Gallery'}</a>
@@ -197,14 +197,14 @@
                 </li>
               {/if}
 
-              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('user','visitor','index') }}" title="{lang 'Who Visited My Profile'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-eye"></i> {lang 'Who See Me'}</a>
+              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('realestate','visitor','index') }}" title="{lang 'Who Visited My Profile'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-eye"></i> {lang 'Who See Me'}</a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="{{ $design->url('user','visitor','index') }}" title="{lang 'Who Visited My Profile'}">{lang 'Who See Me'}</a></li>
-                  <li><a href="{{ $design->url('user','visitor','search') }}" title="{lang 'Find who visited my profile'}">{lang 'Find Visitor(s)'}</a></li>
+                  <li><a href="{{ $design->url('realestate','visitor','index') }}" title="{lang 'Who Visited My Profile'}">{lang 'Who See Me'}</a></li>
+                  <li><a href="{{ $design->url('realestate','visitor','search') }}" title="{lang 'Find who visited my profile'}">{lang 'Find Visitor(s)'}</a></li>
                 </ul>
               </li>
 
-              <li><a href="{{ $design->url('user','main','logout') }}" title="{lang 'Logout'}"><i class="fa fa-sign-out"></i> {lang 'Logout'}</a></li>
+              <li><a href="{{ $design->url('realestate','main','logout') }}" title="{lang 'Logout'}"><i class="fa fa-sign-out"></i> {lang 'Logout'}</a></li>
             </ul>
           </li>
       {/if}

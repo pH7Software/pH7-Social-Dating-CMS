@@ -2,6 +2,6 @@
     {{ PrivacyForm::display() }}
 
     <p class="s_tMarg small">
-        <a href="{{ $design->url('user','setting','delete') }}">{lang 'Want to delete your account...?'}</a>
+        <a href="{{ $design->url('realestate','setting','delete') }}">{lang 'Want to delete your account...?'}</a>
     </p>
 </div>

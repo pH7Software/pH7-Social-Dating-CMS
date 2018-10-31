@@ -112,7 +112,7 @@
         <p>
             <span class="bold">{lang 'I am a:'}</span>
             <span class="italic">
-                <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&match_sex='.$sex) }}">
+                <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&match_sex='.$sex) }}">
                     {lang $sex}
                 </a>
             </span>
@@ -123,7 +123,7 @@
             <p>
                 <span class="bold">{lang 'Looking for a:'}</span>
                 <span class="italic">
-                    <a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}{match_sex_search}">
+                    <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code) }}{match_sex_search}">
                         {lang $match_sex}
                     </a>
                 </span>
@@ -134,7 +134,7 @@
         <p>
             <span class="bold">{lang 'First name:'}</span>
             <span class="italic">
-                <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&first_name='.$first_name) }}">
+                <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&first_name='.$first_name) }}">
                     {first_name}
                 </a>
             </span>
@@ -145,7 +145,7 @@
             <p>
                 <span class="bold">{lang 'Middle name:'}</span>
                 <span class="italic">
-                    <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&middle_name='.$middle_name) }}">
+                    <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&middle_name='.$middle_name) }}">
                         {middle_name}
                     </a>
                 </span>
@@ -157,7 +157,7 @@
             <p>
                 <span class="bold">{lang 'Last name:'}</span>
                 <span class="italic">
-                    <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&last_name='.$last_name) }}">
+                    <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&last_name='.$last_name) }}">
                         {last_name}
                     </a>
                 </span>
@@ -169,7 +169,7 @@
             <p>
                 <span class="bold">{lang 'Age:'}</span>
                 <span class="italic">
-                    <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$birth_date) }}">
+                    <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&age='.$birth_date) }}">
                         {age}
                     </a>
                     <span class="gray">({birth_date_formatted})</span>
@@ -187,7 +187,7 @@
                     <p>
                         <span class="bold">{lang 'Height:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&height='.$val) }}">
+                            <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&height='.$val) }}">
                                 {{ (new Framework\Math\Measure\Height($val))->display(true) }}
                             </a>
                         </span>
@@ -196,7 +196,7 @@
                     <p>
                         <span class="bold">{lang 'Weight:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&weight='.$val) }}">
+                            <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&weight='.$val) }}">
                                 {{ (new Framework\Math\Measure\Weight($val))->display(true) }}
                             </a>
                         </span>
@@ -205,7 +205,7 @@
                     <p>
                         <span class="bold">{lang 'Country:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}">
+                            <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code) }}">
                                 {country}
                             </a>
                         </span>&nbsp;&nbsp;<img src="{{ $design->getSmallFlagIcon($country_code) }}" title="{country}" alt="{country}" />
@@ -214,7 +214,7 @@
                     <p>
                         <span class="bold">{lang 'City/Town:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&city='.$city) }}">
+                            <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&city='.$city) }}">
                                 {city}
                             </a>
                         </span>
@@ -223,7 +223,7 @@
                     <p>
                         <span class="bold">{lang 'State/Province:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&state='.$state) }}">
+                            <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&state='.$state) }}">
                                 {state}
                             </a>
                         </span>
@@ -232,7 +232,7 @@
                     <p>
                         <span class="bold">{lang 'Postal Code:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&zip_code='.$val) }}">
+                            <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&zip_code='.$val) }}">
                                 {val}
                             </a>
                         </span>
@@ -375,7 +375,7 @@
 
     <div class="content" id="visitor">
         <script>
-            var url_visitor_block = '{{ $design->url('user','visitor','index',$username) }}';
+            var url_visitor_block = '{{ $design->url('realestate','visitor','index',$username) }}';
             $('#visitor').load(url_visitor_block + ' #visitor_block');
         </script>
     </div>

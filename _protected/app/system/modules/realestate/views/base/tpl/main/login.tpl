@@ -1,7 +1,7 @@
 <div class="col-md-8">
     <p>
         {lang 'Not registered yet?'}<br />
-        <a href="{{ $design->url('user','signup','step1') }}"><strong>{lang 'Join Us Today!'}</strong></a>
+        <a href="{{ $design->url('realestate','signup','step1') }}"><strong>{lang 'Join Us Today!'}</strong></a>
     </p>
 
     {{ LoginForm::display() }}
@@ -9,7 +9,7 @@
     <p>
         {{ LostPwdDesignCore::link('user') }}
         {if Framework\Mvc\Model\DbConfig::getSetting('userActivationType') == 2}
-            | <a rel="nofollow" href="{{ $design->url('user','main','resendactivation') }}">{lang 'Resend activation email'}</a>
+            | <a rel="nofollow" href="{{ $design->url('realestate','main','resendactivation') }}">{lang 'Resend activation email'}</a>
         {/if}
     </p>
 </div>

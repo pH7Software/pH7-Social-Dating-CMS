@@ -4,7 +4,7 @@
 </div>
 
 <div class="right col-md-4 animated fadeInRight">
-    <p>{lang 'Already registered?'} <a href="{{ $design->url('user','main','login') }}"><strong>{lang 'Sign In!'}</strong></a></p>
+    <p>{lang 'Already registered?'} <a href="{{ $design->url('realestate','main','login') }}"><strong>{lang 'Sign In!'}</strong></a></p>
     {if !empty($user_ref)}
         <div class="center">
             <a href="{{ $design->getUserAvatar($username, $sex, 400) }}" title="{first_name}" data-popup="image">

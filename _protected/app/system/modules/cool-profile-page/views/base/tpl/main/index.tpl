@@ -26,7 +26,7 @@
                     <p>
                         <span class="bold">{lang 'Height:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&height='.$val) }}">
+                            <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&height='.$val) }}">
                                 {{ (new Framework\Math\Measure\Height($val))->display(true) }}
                             </a>
                         </span>
@@ -35,7 +35,7 @@
                     <p>
                         <span class="bold">{lang 'Weight:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&weight='.$val) }}">
+                            <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&weight='.$val) }}">
                                 {{ (new Framework\Math\Measure\Weight($val))->display(true) }}
                             </a>
                         </span>
@@ -44,7 +44,7 @@
                     <p>
                         <span class="bold">{lang 'Country:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}">
+                            <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code) }}">
                                 {country}
                             </a>
                         </span>&nbsp;&nbsp;<img src="{{ $design->getSmallFlagIcon($country_code) }}" title="{country}" alt="{country}" />
@@ -53,7 +53,7 @@
                     <p>
                         <span class="bold">{lang 'City/Town:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&city='.$city) }}">
+                            <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&city='.$city) }}">
                                 {city}
                             </a>
                         </span>
@@ -62,7 +62,7 @@
                     <p>
                         <span class="bold">{lang 'State/Province:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&state='.$state) }}">
+                            <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&state='.$state) }}">
                                 {state}
                             </a>
                         </span>
@@ -71,7 +71,7 @@
                     <p>
                         <span class="bold">{lang 'Postal Code:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&zip_code='.$val) }}">
+                            <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&zip_code='.$val) }}">
                                 {val}
                             </a>
                         </span>
