@@ -28,12 +28,12 @@
     {* Guest Menu *}
       {if !$is_user_auth AND !$is_aff_auth AND !$is_admin_auth}
         <li>
-          <a class="bold" href="{{ $design->url('user', 'signup', 'step1') }}" title="{lang 'Join Now!'}">
+          <a class="bold" href="{{ $design->url('realestate', 'signup', 'step1') }}" title="{lang 'Join Now!'}">
             <i class="fa fa-user-plus"></i> {lang 'Join Now!'}
           </a>
         </li>
         <li>
-          <a href="{{ $design->url('user', 'main', 'login') }}" title="{lang 'Login'}" data-load="ajax">
+          <a href="{{ $design->url('realestate', 'main', 'login') }}" title="{lang 'Login'}" data-load="ajax">
             <i class="fa fa-sign-in"></i> {lang 'Login'}
           </a>
         </li>
@@ -42,14 +42,14 @@
 
     {* Menu Guest, Member and Admin *}
       {if !$is_aff_auth}
-        <li class="dropdown"><a href="{{ $design->url('user', 'browse', 'index') }}" title="{lang 'Members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-user fa-fw"></i> {lang 'People'} <span class="caret"></span></a>
+        <li class="dropdown"><a href="{{ $design->url('realestate', 'browse', 'index') }}" title="{lang 'Members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-user fa-fw"></i> {lang 'People'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url('user', 'browse', 'index') }}" rel="nofollow" title="{lang 'Members'}" data-load="ajax"><i class="fa fa-users"></i> {lang 'People'}</a></li>
+            <li><a href="{{ $design->url('realestate', 'browse', 'index') }}" rel="nofollow" title="{lang 'Members'}" data-load="ajax"><i class="fa fa-users"></i> {lang 'People'}</a></li>
 
             <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('user','search', 'index') }}" title="{lang 'Search the members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search'}</a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="{{ $design->url('user', 'search', 'quick') }}" title="{lang 'Quick Search'}" data-load="ajax">{lang 'Quick Search'}</a></li>
-                <li><a href="{{ $design->url('user', 'search', 'advanced') }}" title="{lang 'Advanced Search'}" data-load="ajax">{lang 'Advanced Search'}</a></li>
+                <li><a href="{{ $design->url('realestate', 'search', 'quick') }}" title="{lang 'Quick Search'}" data-load="ajax">{lang 'Quick Search'}</a></li>
+                <li><a href="{{ $design->url('realestate', 'search', 'advanced') }}" title="{lang 'Advanced Search'}" data-load="ajax">{lang 'Advanced Search'}</a></li>
               </ul>
             </li>
 

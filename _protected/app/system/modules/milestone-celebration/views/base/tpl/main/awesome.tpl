@@ -5,7 +5,7 @@
     <img src="{url_tpl_mod_img}smile.svg" alt="{lang 'So Happy!'}" height="250" />
 
     <p>
-        <a class="btn btn-primary" href="{{ $design->url('user', 'main', 'login') }}">
+        <a class="btn btn-primary" href="{{ $design->url('realestate', 'main', 'login') }}">
             <strong>{lang 'Sign In'}</strong>
         </a>
     </p>
