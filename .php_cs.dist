@@ -7,6 +7,7 @@ $aRules = [
     'array_syntax' => ['syntax' => 'short'],
     'no_trailing_comma_in_singleline_array' => true,
     'trailing_comma_in_multiline_array' => false,
+    'cast_spaces' => false,
     'combine_consecutive_unsets' => true,
     'general_phpdoc_annotation_remove' => ['expectedException', 'expectedExceptionMessage', 'expectedExceptionMessageRegExp'],
     'heredoc_to_nowdoc' => true,
