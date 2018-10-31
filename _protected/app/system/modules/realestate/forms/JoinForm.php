@@ -136,7 +136,7 @@ class JoinForm
         $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user3', 'form_join_user2'));
         $oForm->addElement(new \PFBC\Element\Token('join3'));
-        $oForm->addElement(new \PFBC\Element\File(t('Your Profile Photo'), 'avatar', $aAvatarFieldOption));
+        $oForm->addElement(new \PFBC\Element\File(t('Photo'), 'avatar', $aAvatarFieldOption));
         $oForm->addElement(new \PFBC\Element\Button(t('Add My Photo')));
 
         if (!$bIsAvatarRequired) {
