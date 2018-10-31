@@ -1090,7 +1090,7 @@ INSERT INTO ph7_sys_mods_enabled (moduleTitle, folderName, premiumMod, enabled) 
 ('Affiliate', 'affiliate', '0', '1'),
 ('Chat', 'chat', '1', '1'),
 ('Chatroulette', 'chatroulette', '1', '1'),
-('Picture', 'picture', '0', '1'),
+('Photo', 'picture', '0', '1'),
 ('Video', 'video', '0', '1'),
 ('Hot or Not', 'hotornot', '0', '1'),
 ('Forum', 'forum', '0', '1'),
