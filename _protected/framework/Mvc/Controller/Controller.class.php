@@ -38,8 +38,8 @@ use Teapot\StatusCode;
 
 abstract class Controller extends Core
 {
-    const MAINTENANCE_DURATION_SECONDS = 3600;
     const CORE_MAIN_MODULE = 'realestate';
+    const MAINTENANCE_DURATION_SECONDS = 3600;
 
     public function __construct()
     {
