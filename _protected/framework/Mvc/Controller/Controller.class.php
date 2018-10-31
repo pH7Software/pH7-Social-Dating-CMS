@@ -39,6 +39,7 @@ use Teapot\StatusCode;
 abstract class Controller extends Core
 {
     const MAINTENANCE_DURATION_SECONDS = 3600;
+    const CORE_MAIN_MODULE = 'realestate';
 
     public function __construct()
     {
@@ -277,7 +278,7 @@ abstract class Controller extends Core
      */
     private function isGuestOnHomepage($bIsUserLogged)
     {
-        return !$bIsUserLogged && $this->registry->module === 'user' &&
+        return !$bIsUserLogged && $this->registry->module === self::CORE_MAIN_MODULE &&
             $this->registry->controller === 'MainController' &&
             $this->registry->action === 'index';
     }
