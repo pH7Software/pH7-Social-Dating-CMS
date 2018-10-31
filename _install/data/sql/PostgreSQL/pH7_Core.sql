@@ -1103,7 +1103,7 @@ INSERT INTO ph7_sys_mods_enabled (moduleTitle, folderName, premiumMod, enabled) 
 ('Friends', 'friend', '0', '1'),
 ('User Dashboard', 'user-dashboard', '0', '1'),
 ('Dating-Style Profile Page', 'cool-profile-page', '0', '1'),
-('Let''s Celebrate Users'' Birthdays', 'birthday', '0', '1'),
+('Birthday: Let''s Celebrate Birthdays', 'birthday', '0', '1'),
 ('Game', 'game', '0', '1'),
 ('Newsletter', 'newsletter', '0', '1'),
 ('Invite Friends', 'invite', '0', '1'),
