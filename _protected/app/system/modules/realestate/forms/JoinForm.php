@@ -21,7 +21,7 @@ class JoinForm
     public static function step1()
     {
         if ((new Session)->exists('mail_step1')) {
-            Header::redirect(Uri::get('user', 'signup', 'step2'));
+            Header::redirect(Uri::get('realestate', 'signup', 'step2'));
         }
 
         if (isset($_POST['submit_join_user'])) {
@@ -87,9 +87,9 @@ class JoinForm
     {
         $oSession = new Session;
         if (!$oSession->exists('mail_step1')) {
-            Header::redirect(Uri::get('user', 'signup', 'step1'));
+            Header::redirect(Uri::get('realestate', 'signup', 'step1'));
         } elseif ($oSession->exists('mail_step2')) {
-            Header::redirect(Uri::get('user', 'signup', 'step3'));
+            Header::redirect(Uri::get('realestate', 'signup', 'step3'));
         }
         unset($oSession);
 
@@ -115,7 +115,7 @@ class JoinForm
     public static function step3()
     {
         if (!(new Session)->exists('mail_step3')) {
-            Header::redirect(Uri::get('user', 'signup', 'step3'));
+            Header::redirect(Uri::get('realestate', 'signup', 'step3'));
         }
 
         if (isset($_POST['submit_join_user3'])) {
@@ -144,7 +144,7 @@ class JoinForm
                 new \PFBC\Element\Button(
                     t('Skip'),
                     'submit',
-                    ['formaction' => Uri::get('user', 'signup', 'done')]
+                    ['formaction' => Uri::get('realestate', 'signup', 'done')]
                 )
             );
         }

@@ -49,7 +49,7 @@ class RatingDesignCore
          * For security reason, a check on the server-side is already present, because this JS code allows users to login easily by modifying it.
          */
         if (!UserCore::auth()) {
-            $sUrl = Uri::get('user', 'signup', 'step1', '?msg=' . t('You need to be a member for voting.'), false);
+            $sUrl = Uri::get('realestate', 'signup', 'step1', '?msg=' . t('You need to be a member for voting.'), false);
             echo '<script>$(".', $sPHSClass, '").click(function(){window.location=\'', $sUrl, '\'});</script>';
         }
     }

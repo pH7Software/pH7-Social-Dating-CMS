@@ -45,7 +45,7 @@ class SearchUserCoreForm
 
         // Generate the Quick Search form
         $oForm = new \PFBC\Form('form_search', $iWidth);
-        $oForm->configure(['action' => Uri::get('user', 'browse', 'index') . PH7_SH, 'method' => 'get']);
+        $oForm->configure(['action' => Uri::get('realestate', 'browse', 'index') . PH7_SH, 'method' => 'get']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
         $oForm->addElement(
             new \PFBC\Element\Select(
@@ -96,7 +96,7 @@ class SearchUserCoreForm
 
         // Generate the Advanced Search form
         $oForm = new \PFBC\Form('form_search', $iWidth);
-        $oForm->configure(['action' => Uri::get('user', 'browse', 'index') . PH7_SH, 'method' => 'get']);
+        $oForm->configure(['action' => Uri::get('realestate', 'browse', 'index') . PH7_SH, 'method' => 'get']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
         $oForm->addElement(
             new \PFBC\Element\Select(

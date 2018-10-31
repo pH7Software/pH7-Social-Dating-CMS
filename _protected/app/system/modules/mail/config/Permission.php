@@ -37,7 +37,7 @@ class Permission extends PermissionCore
         if (!$bAdminAuth && $this->registry->controller === 'AdminController') {
             // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
             Header::redirect(
-                Uri::get('user', 'main', 'login'),
+                Uri::get('realestate', 'main', 'login'),
                 $this->adminSignInMsg(),
                 Design::ERROR_TYPE
             );

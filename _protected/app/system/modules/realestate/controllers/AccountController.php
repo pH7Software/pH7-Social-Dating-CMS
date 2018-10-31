@@ -20,7 +20,7 @@ class AccountController extends Controller
         if (SysMod::isEnabled('user-dashboard')) {
             $sUrl = Uri::get('user-dashboard', 'main', 'index');
         } else {
-            $sUrl = Uri::get('user', 'main', 'index');
+            $sUrl = Uri::get('realestate', 'main', 'index');
         }
 
         Header::redirect($sUrl);

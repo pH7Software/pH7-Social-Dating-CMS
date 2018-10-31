@@ -142,7 +142,7 @@ class MainController extends Controller
     private function redirectToSoonPage()
     {
         Header::redirect(
-            Uri::get('user', 'main', 'soon'),
+            Uri::get('realestate', 'main', 'soon'),
             t('You are now logged out. Hope to see you again very soon!')
         );
     }

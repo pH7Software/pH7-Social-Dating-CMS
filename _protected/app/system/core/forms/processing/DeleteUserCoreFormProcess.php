@@ -115,7 +115,7 @@ class DeleteUserCoreFormProcess extends Form
     private function redirectToGoodbyePage()
     {
         Header::redirect(
-            Uri::get('user', 'main', 'accountdeleted')
+            Uri::get('realestate', 'main', 'accountdeleted')
         );
     }
 }

@@ -52,7 +52,7 @@ abstract class PermissionCore extends Framework\Core\Core
     public function signUpRedirect()
     {
         Header::redirect(
-            Uri::get('user', 'signup', 'step1'),
+            Uri::get('realestate', 'signup', 'step1'),
             $this->signUpMsg(),
             Design::ERROR_TYPE
         );
@@ -66,7 +66,7 @@ abstract class PermissionCore extends Framework\Core\Core
     public function signInRedirect()
     {
         Header::redirect(
-            Uri::get('user', 'main', 'login'),
+            Uri::get('realestate', 'main', 'login'),
             $this->signInMsg(),
             Design::ERROR_TYPE
         );
@@ -80,7 +80,7 @@ abstract class PermissionCore extends Framework\Core\Core
     public function alreadyConnectedRedirect()
     {
         Header::redirect(
-            Uri::get('user', 'account', 'index'),
+            Uri::get('realestate', 'account', 'index'),
             $this->alreadyConnectedMsg(),
             Design::ERROR_TYPE
         );

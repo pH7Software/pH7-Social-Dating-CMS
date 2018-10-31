@@ -23,7 +23,7 @@ class Permission extends PermissionCore
          * Example of Code:
          * if (!UserCore::auth() && ($this->registry->controller === 'HelloWorldController')) {
          *     Header::redirect(
-         *         Uri::get('user','main','login'),
+         *         Uri::get('realestate','main','login'),
          *         $this->signInMsg(),
          *         Design::ERROR_TYPE
          *     );

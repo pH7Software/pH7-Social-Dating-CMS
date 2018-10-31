@@ -48,7 +48,7 @@ if (AdminCore::auth() || UserCore::auth() || AffiliateCore::auth()) {
     unset($oHttpRequest, $oDesign);
 } else {
     Header::redirect(
-        Uri::get('user',
+        Uri::get('realestate',
             'signup',
             'step1'),
         t('You must be registered to report an abuse.')

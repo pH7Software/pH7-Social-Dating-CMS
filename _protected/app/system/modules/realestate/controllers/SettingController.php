@@ -135,11 +135,11 @@ class SettingController extends Controller
 
         if ($this->httpRequest->get('delete_status') === 'yesdelete') {
             $this->session->set('yes_delete', 1);
-            Header::redirect(Uri::get('user', 'setting', 'yesdelete'));
+            Header::redirect(Uri::get('realestate', 'setting', 'yesdelete'));
         } elseif ($this->httpRequest->get('delete_status') === 'nodelete') {
             $this->view->delete_status = false;
             $this->design->setRedirect(
-                Uri::get('user', 'main', 'index'),
+                Uri::get('realestate', 'main', 'index'),
                 null,
                 null,
                 4
@@ -154,7 +154,7 @@ class SettingController extends Controller
     public function yesDelete()
     {
         if (!$this->session->exists('yes_delete')) {
-            Header::redirect(Uri::get('user', 'setting', 'delete'));
+            Header::redirect(Uri::get('realestate', 'setting', 'delete'));
         } else {
             $this->output();
         }

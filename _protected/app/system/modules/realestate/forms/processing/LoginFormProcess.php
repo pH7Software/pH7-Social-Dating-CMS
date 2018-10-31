@@ -26,7 +26,7 @@ class LoginFormProcess extends Form implements LoginableForm
 
     public function __construct()
     {
-        $sUrlRelocateAfterLogin = Uri::get('user', 'account', 'index');
+        $sUrlRelocateAfterLogin = Uri::get('realestate', 'account', 'index');
 
         parent::__construct();
 

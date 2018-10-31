@@ -25,6 +25,6 @@ class EditWallFormProcess extends Form
         parent::__construct();
 
         (new WallModel)->edit($this->session->get('member_id'), $this->httpRequest->post('post'), $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
-        Header::redirect(Uri::get('user', 'main', 'index'), t('Your message has been added successfully!'));
+        Header::redirect(Uri::get('realestate', 'main', 'index'), t('Your message has been added successfully!'));
     }
 }

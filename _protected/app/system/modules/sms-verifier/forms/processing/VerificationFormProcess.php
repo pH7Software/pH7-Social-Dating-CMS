@@ -31,7 +31,7 @@ class VerificationFormProcess extends Form
             unset($oUserModel);
 
             Header::redirect(
-                Uri::get('user', 'main', 'login'),
+                Uri::get('realestate', 'main', 'login'),
                 t('Congratulations! Your phone number has been successfully verified. You can now login.')
             );
         } else {

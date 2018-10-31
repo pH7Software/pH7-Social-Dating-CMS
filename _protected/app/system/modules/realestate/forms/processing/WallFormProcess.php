@@ -31,7 +31,7 @@ class WallFormProcess extends Form
         );
 
         Header::redirect(
-            Uri::get('user', 'main', 'index'),
+            Uri::get('realestate', 'main', 'index'),
             t('Your message has been added successfully!')
         );
     }

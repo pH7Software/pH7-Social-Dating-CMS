@@ -18,7 +18,7 @@ class SearchVisitorForm
         $sUsername = (new HttpRequest)->get('username');
 
         $oForm = new \PFBC\Form('form_search');
-        $oForm->configure(['action' => Uri::get('user', 'visitor', 'index', $sUsername) . PH7_SH, 'method' => 'get']);
+        $oForm->configure(['action' => Uri::get('realestate', 'visitor', 'index', $sUsername) . PH7_SH, 'method' => 'get']);
         $oForm->addElement(new \PFBC\Element\Search(t('Find Search a Visitor of "%0%"', $sUsername), 'looking', ['description' => t('Enter the First/Last Name, Username, Email or ID of your friend.')]));
         $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', [SearchCoreModel::LAST_VISIT => t('Last Seen on your profile'), SearchCoreModel::USERNAME => t('Username'), SearchCoreModel::FIRST_NAME => t('First Name'), SearchCoreModel::LAST_NAME => t('Last Name'), SearchCoreModel::EMAIL => t('Email'), SearchCoreModel::LATEST => t('Latest'), SearchCoreModel::LAST_ACTIVITY => t('Last Activity'), SearchCoreModel::VIEWS => t('Popular'), SearchCoreModel::RATING => t('Rated')]));
         $oForm->addElement(new \PFBC\Element\Select(t('Direction:'), 'sort', [SearchCoreModel::DESC => t('Descending'), SearchCoreModel::ASC => t('Ascending')]));

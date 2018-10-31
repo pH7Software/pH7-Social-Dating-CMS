@@ -588,7 +588,7 @@ class Design
         $sCountryLang = t($sCountryCode); // Country name translated into the user language
         $sCity = Geo::getCity();
 
-        $sHtml = '<a href="' . Uri::get('user', 'country', 'index', $sCountry . PH7_SH . $sCity) . '" title="' . t('Meet New People in %0%, %1% with %site_name%!', $sCountryLang, $sCity) . '">' . $sCity . '</a>';
+        $sHtml = '<a href="' . Uri::get('realestate', 'country', 'index', $sCountry . PH7_SH . $sCity) . '" title="' . t('Meet New People in %0%, %1% with %site_name%!', $sCountryLang, $sCity) . '">' . $sCity . '</a>';
 
         if (!$bPrint) {
             return $sHtml;
@@ -759,7 +759,7 @@ class Design
         ];
 
         $bIsLogged = UserCore::auth();
-        $sLikeLink = $bIsLogged ? '#' : Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false);
+        $sLikeLink = $bIsLogged ? '#' : Uri::get('realestate', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false);
         $sLikeId = $bIsLogged ? ' id="like"' : '';
 
         $sUrlKey = empty($sForceUrlKey) ? $this->oHttpRequest->currentUrl() : $sForceUrlKey;
@@ -853,7 +853,7 @@ HTML;
                     'f_n' => $sFirstName,
                     's' => $sSex
                 ];
-                $sReportLink = Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aUrlParams), false);
+                $sReportLink = Uri::get('realestate', 'signup', 'step1', '?' . Url::httpBuildQuery($aUrlParams), false);
             }
 
             echo '<a rel="nofollow" href="', $sReportLink, '" title="', t('Report Abuse'), '"><i class="fa fa-flag smooth-pink"></i></a>';

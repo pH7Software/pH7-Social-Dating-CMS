@@ -23,14 +23,14 @@ class Permission extends PermissionCore
         if (UserCore::auth() && $this->registry->controller === 'HomeController') {
             // Newsletter subscription is only for visitors, not for members since they can subscribe into their account
             Header::redirect(
-                Uri::get('user', 'main', 'index')
+                Uri::get('realestate', 'main', 'index')
             );
         }
 
         if (!AdminCore::auth() && $this->registry->controller === 'AdminController') {
             // For security reasons, we don't redirect the user to the admin panel URL
             Header::redirect(
-                Uri::get('user', 'main', 'login'),
+                Uri::get('realestate', 'main', 'login'),
                 $this->adminSignInMsg(),
                 Design::ERROR_TYPE
             );

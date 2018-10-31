@@ -24,7 +24,7 @@ class LoginSplashForm
         }
 
         $oForm = new \PFBC\Form('form_login_user');
-        $oForm->configure(['view' => new \PFBC\View\Horizontal, 'action' => Uri::get('user', 'main', 'login')]);
+        $oForm->configure(['view' => new \PFBC\View\Horizontal, 'action' => Uri::get('realestate', 'main', 'login')]);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_login_user', 'form_login_user'));
         $oForm->addElement(new \PFBC\Element\Token('login'));
         $oForm->addElement(new \PFBC\Element\Email('', 'mail', ['placeholder' => t('Your Email'), 'style' => 'width:190px', 'required' => 1], false));

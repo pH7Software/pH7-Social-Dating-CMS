@@ -431,7 +431,7 @@ class UserController extends Controller
 
                     $sSubject = t('Your membership account has been activated');
                     $this->sMsg = t('Congratulations! Your account has been approved by our team of administrators.<br />You can now %0% to meeting new people!',
-                        '<a href="' . Uri::get('user', 'main', 'login') . '"><b>' . t('log in') . '</b></a>');
+                        '<a href="' . Uri::get('realestate', 'main', 'login') . '"><b>' . t('log in') . '</b></a>');
                 } else {
                     // Error...
                     $this->sMsg = null;

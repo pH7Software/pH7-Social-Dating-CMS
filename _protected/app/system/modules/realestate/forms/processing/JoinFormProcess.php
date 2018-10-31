@@ -92,7 +92,7 @@ class JoinFormProcess extends Form
             $this->session->set($aSessData);
 
             Header::redirect(
-                Uri::get('user', 'signup', 'step2')
+                Uri::get('realestate', 'signup', 'step2')
             );
         }
     }
@@ -112,7 +112,7 @@ class JoinFormProcess extends Form
         } else {
             $this->session->set('mail_step2', $this->session->get('mail_step1'));
             Header::redirect(
-                Uri::get('user', 'signup', 'step3'),
+                Uri::get('realestate', 'signup', 'step3'),
                 t('Your account has just been created!')
             );
         }

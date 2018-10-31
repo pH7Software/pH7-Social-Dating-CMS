@@ -75,7 +75,7 @@ class MainController extends Controller
     public function account()
     {
         if (UserCore::auth()) {
-            $sUrl = Uri::get('user', 'account', 'index');
+            $sUrl = Uri::get('realestate', 'account', 'index');
         } elseif (AffiliateCore::auth()) {
             $sUrl = Uri::get('affiliate', 'account', 'index');
         } elseif (AdminCore::auth()) {
@@ -127,7 +127,7 @@ class MainController extends Controller
     {
         switch ($sTableName) {
             case DbTableName::MEMBER:
-                return Uri::get('user', 'main', 'index');
+                return Uri::get('realestate', 'main', 'index');
 
             case DbTableName::AFFILIATE:
                 return Uri::get('affiliate', 'home', 'login');

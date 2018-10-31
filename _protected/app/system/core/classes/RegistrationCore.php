@@ -122,12 +122,12 @@ abstract class RegistrationCore
     {
         switch ($this->iActiveType) {
             case self::NO_ACTIVATION:
-                $sEmailMsg = t('Please %0% to meet new people from today!', '<a href="' . Uri::get('user', 'main', 'login') . '"><b>' . t('log in') . '</b></a>');
+                $sEmailMsg = t('Please %0% to meet new people from today!', '<a href="' . Uri::get('realestate', 'main', 'login') . '"><b>' . t('log in') . '</b></a>');
                 break;
 
             case self::EMAIL_ACTIVATION:
                 /** We place the text outside of Uri::get() otherwise special characters will be deleted and the parameters passed in the url will be unusable thereafter. **/
-                $sActivateLink = Uri::get('user', 'account', 'activate') . PH7_SH . $aData['email'] . PH7_SH . $aData['hash_validation'];
+                $sActivateLink = Uri::get('realestate', 'account', 'activate') . PH7_SH . $aData['email'] . PH7_SH . $aData['hash_validation'];
                 $sEmailMsg = t('Activation link: %0%.', '<a href="' . $sActivateLink . '">' . $sActivateLink . '</a>');
                 break;
 

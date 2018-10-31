@@ -22,7 +22,7 @@ class Permission extends PermissionCore
 
         if (UserCore::auth() && ($this->registry->action === 'index' || $this->registry->action === 'login' || $this->registry->action === 'register')) {
             Header::redirect(
-                Uri::get('user', 'account', 'index'),
+                Uri::get('realestate', 'account', 'index'),
                 $this->alreadyConnectedMsg(),
                 Design::ERROR_TYPE
             );
@@ -31,7 +31,7 @@ class Permission extends PermissionCore
         if (!AdminCore::auth() && $this->registry->controller === 'AdminController') {
             // For security reasons, we don't redirect the user to the admin panel URL
             Header::redirect(
-                Uri::get('user', 'main', 'login'),
+                Uri::get('realestate', 'main', 'login'),
                 $this->adminSignInMsg(),
                 Design::ERROR_TYPE
             );
