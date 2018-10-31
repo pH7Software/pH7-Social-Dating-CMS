@@ -19,6 +19,11 @@ class CountryRestrictionCoreFormProcess extends Form
     /** @var string */
     private $sTable;
 
+    /**
+     * @param string $sTable
+     *
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
+     */
     public function __construct($sTable)
     {
         parent::__construct();
