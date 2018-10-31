@@ -21,6 +21,7 @@ $aRules = [
     'semicolon_after_instruction' => true,
     'psr4' => true,
     'strict_comparison' => true,
+    'yoda_style' => false,
     'strict_param' => true,
     'standardize_not_equals' => true
 ];
