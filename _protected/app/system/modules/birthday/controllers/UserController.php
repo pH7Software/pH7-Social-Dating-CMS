@@ -10,7 +10,7 @@ namespace PH7;
 
 use PH7\Framework\Navigation\Page;
 
-class BirthdayController extends Controller
+class UserController extends Controller
 {
     const MAX_PROFILE_PER_PAGE = 20;
 
