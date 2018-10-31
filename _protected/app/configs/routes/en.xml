@@ -32,7 +32,7 @@
       <route url="user/visitors/?([a-zA-Z0-9_-]+)?" path="system/modules" module="user" controller="visitor" action="index" vars="username" />
       <route url="user/visitors/search/?([a-zA-Z0-9_-]+)" path="system/modules" module="user" controller="visitor" action="search" vars="username" />
       <!-- birthday -->
-      <route url="user/birthday-people/?([a-z]{3,6})?" path="system/modules" module="user" controller="birthday" action="index" vars="gender" />
+      <route url="user/birthday-people/?([a-z]{3,6})?" path="system/modules" module="birthday" controller="birthday" action="index" vars="gender" />
 
       <route url="see-you-soon" path="system/modules" module="user" controller="main" action="soon" />
 
