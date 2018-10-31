@@ -55,6 +55,10 @@ class Various
      */
     public static function timeToSec($iHMS)
     {
+        if (strpos($iHMS, ':') === false) {
+            return 0;
+        }
+
         list($iH, $iM, $iS) = explode(':', $iHMS);
         $iSeconds = 0;
         $iSeconds += ((int)$iH * 3600);
