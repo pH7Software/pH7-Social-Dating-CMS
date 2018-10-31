@@ -17,44 +17,6 @@
 
         {manual_include 'profile_links.inc.tpl'}
 
-        <p>
-            <i class="fa fa-{sex}"></i>
-            <span class="bold">{lang 'I am a:'}</span>
-            <span class="italic">
-                <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&match_sex='.$sex) }}">
-                    {lang $sex}
-                </a>
-            </span>
-        </p>
-
-        <div class="break"></div>
-
-        {if !empty($match_sex)}
-            <p>
-                <i class="fa fa-{match_sex}"></i>
-                <span class="bold">{lang 'Looking for a:'}</span>
-                <span class="italic">
-                    <a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}{match_sex_search}">
-                        {lang $match_sex}
-                    </a>
-                </span>
-            </p>
-            <div class="break"></div>
-        {/if}
-
-        {if !empty($age)}
-            <p>
-                <span class="bold">{lang 'Age:'}</span>
-                <span class="italic">
-                    <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$birth_date) }}">
-                        {age}
-                    </a>
-                    <span class="gray">({birth_date_formatted})</span>
-                </span>
-            </p>
-            <div class="break"></div>
-        {/if}
-
         {* Profile's Fields *}
         {each $key => $val in $fields}
             {if $key != 'description' AND $key != 'middleName' AND $key != 'punchline' AND !empty($val)}
@@ -117,11 +79,6 @@
                 {elseif $key == 'website'}
                     <p>
                         {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Site/Blog:'}</span>
-                        <span class="italic">{{ $design->urlTag($val) }}</span>
-                    </p>
-                {elseif $key == 'socialNetworkSite'}
-                    <p>
-                        {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Social Profile:'}</span>
                         <span class="italic">{{ $design->urlTag($val) }}</span>
                     </p>
                 {else}
