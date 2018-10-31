@@ -39,7 +39,10 @@
         <link title="{lang 'Games Zone Party'}" url="{{ $design->url('game','main','index') }}" />
     {/if}
 
-    <link title="{lang 'Users Birthday'}" url="{{ $design->url('user','birthday','index') }}" />
+    {if $is_birthday_enabled}
+        <link title="{lang 'Users Birthday'}" url="{{ $design->url('user','birthday','index') }}" />
+    {/if}
+
     <link title="{lang 'About Us'}" url="{{ $design->url('page','main','about') }}" />
     <link title="{lang 'Help Us'}" url="{{ $design->url('page','main','helpus') }}" />
     <link title="{lang 'Share %site_name%'}" url="{{ $design->url('page','main','sharesite') }}" />
