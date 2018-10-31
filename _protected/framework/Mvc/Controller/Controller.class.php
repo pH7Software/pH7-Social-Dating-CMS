@@ -249,11 +249,12 @@ abstract class Controller extends Core
             'is_blog_enabled' => SysMod::isEnabled('blog'),
             'is_newsletter_enabled' => SysMod::isEnabled('newsletter'),
             'is_invite_enabled' => SysMod::isEnabled('invite'),
-            'is_webcam_enabled' => SysMod::isEnabled('webcam'),
             'is_mail_enabled' => SysMod::isEnabled('mail'),
             'is_im_enabled' => SysMod::isEnabled('im'),
             'is_relatedprofile_enabled' => SysMod::isEnabled('related-profile'),
-            'is_friend_enabled' => SysMod::isEnabled('friend')
+            'is_birthday_enabled' => SysMod::isEnabled('birthday'),
+            'is_friend_enabled' => SysMod::isEnabled('friend'),
+            'is_webcam_enabled' => SysMod::isEnabled('webcam')
         ];
 
         $this->view->assigns($aModsEnabled);

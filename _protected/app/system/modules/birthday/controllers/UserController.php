@@ -1,16 +1,16 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2013-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
- * @package        PH7 / App / System / Module / User / Controller
+ * @package        PH7 / App / System / Module / Birthday / Controller
  */
 
 namespace PH7;
 
 use PH7\Framework\Navigation\Page;
 
-class BirthdayController extends Controller
+class UserController extends Controller
 {
     const MAX_PROFILE_PER_PAGE = 20;
 
