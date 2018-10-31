@@ -42,8 +42,8 @@ class JoinForm
                 t('Are you?'),
                 'sex',
                 [
-                    'buyer' => t('Buyer') . ' <i class="fa fa-venus"></i>',
-                    'seller' => t('Seller') . ' <i class="fa fa-mars"></i>'
+                    'buyer' => t('Buyer'),
+                    'seller' => t('Seller')
                 ],
                 ['value' => 'buyer', 'required' => 1]
             )
