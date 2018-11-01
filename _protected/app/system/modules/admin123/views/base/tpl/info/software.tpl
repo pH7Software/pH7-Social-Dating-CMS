@@ -4,7 +4,9 @@
             <h2 class="panel-heading underline">{lang 'Let others know about pH7CMS'}</h2>
             <div class="panel-body">
                 <ul class="list-group">
-                    <li class="list-group-item">{lang 'Here is a <a class="bold" href="%0%">pre-written Tweet</a> (which you can edit, of course).', $tweet_msg_url}</li>
+                    <li class="list-group-item">
+                        {lang 'Here is a <a class="bold" href="%0%">pre-written Tweet</a> (which you can edit, of course).', $tweet_msg_url}
+                    </li>
                 </ul>
             </div>
         </div>
@@ -13,9 +15,15 @@
             <h2 class="panel-heading underline">{lang 'Software Information'}</h2>
             <div class="panel-body">
                 <ul class="list-group">
-                    <li class="list-group-item">{lang 'Name: %0%', '<a href="%software_website%">%software_name%</a>'}</li>
-                    <li class="list-group-item">Github: <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS">https://github.com/pH7Software/pH7-Social-Dating-CMS</a></li>
-                    <li class="list-group-item">{lang 'Author: %0%', '<a href="http://ph7.me">Pierre-Henry Soria</a>'}</li>
+                    <li class="list-group-item">
+                        {lang 'Name: %0%', '<a href="%software_website%">%software_name%</a>'}
+                    </li>
+                    <li class="list-group-item">
+                        Github: <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS">https://github.com/pH7Software/pH7-Social-Dating-CMS</a>
+                    </li>
+                    <li class="list-group-item">
+                        {lang 'Author: %0%', '<a href="http://ph7.me">Pierre-Henry Soria</a>'}
+                    </li>
                 </ul>
             </div>
         </div>
