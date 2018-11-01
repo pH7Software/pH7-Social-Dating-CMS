@@ -42,14 +42,14 @@
 
     {* Menu Guest, Member and Admin *}
       {if !$is_aff_auth}
-        <li class="dropdown"><a href="{{ $design->url('realestate', 'browse', 'index') }}" title="{lang 'Members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-user fa-fw"></i> {lang 'People'} <span class="caret"></span></a>
+        <li class="dropdown"><a href="{{ $design->url('realestate', 'browse', 'index') }}" title="{lang 'Members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-users"></i> {lang 'Seller|Buyer'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url('realestate', 'browse', 'index') }}" rel="nofollow" title="{lang 'Members'}" data-load="ajax"><i class="fa fa-users"></i> {lang 'People'}</a></li>
+            <li><a href="{{ $design->url('realestate', 'browse', 'index') }}" rel="nofollow" title="{lang 'Browse Members'}" data-load="ajax"><i class="fa fa-users"></i> {lang 'Browse'}</a></li>
 
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('realestate','search', 'index') }}" title="{lang 'Search the members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search'}</a>
+            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('realestate','search', 'index') }}" title="{lang 'Search the members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search (Buyer/Seller)'}</a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="{{ $design->url('realestate', 'search', 'quick') }}" title="{lang 'Quick Search'}" data-load="ajax">{lang 'Quick Search'}</a></li>
-                <li><a href="{{ $design->url('realestate', 'search', 'advanced') }}" title="{lang 'Advanced Search'}" data-load="ajax">{lang 'Advanced Search'}</a></li>
+                <li><a href="{{ $design->url('realestate', 'search', 'buyer') }}" title="{lang 'Buyer Search'}" data-load="ajax">{lang 'Buyer Search'}</a></li>
+                <li><a href="{{ $design->url('realestate', 'search', 'seller') }}" title="{lang 'Seller Search'}" data-load="ajax">{lang 'Seller Search'}</a></li>
               </ul>
             </li>
 

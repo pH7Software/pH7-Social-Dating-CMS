@@ -17,22 +17,22 @@ class SearchController extends Controller
     {
         Header::redirect(
             Uri::get(
-                'user',
+                'realestate',
                 'search',
-                'quick'
+                'buyer'
             )
         );
     }
 
-    public function quick()
+    public function buyer()
     {
-        $this->view->page_title = $this->view->h1_title = t('Quick Search');
+        $this->view->page_title = $this->view->h1_title = t('Buyer Search');
         $this->output();
     }
 
-    public function advanced()
+    public function seller()
     {
-        $this->view->page_title = $this->view->h1_title = t('Advanced Search');
+        $this->view->page_title = $this->view->h1_title = t('Seller Search');
         $this->output();
     }
 }
