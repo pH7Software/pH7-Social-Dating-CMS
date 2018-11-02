@@ -42,9 +42,18 @@
 
     {* Menu Guest, Member and Admin *}
       {if !$is_aff_auth}
-        <li class="dropdown"><a href="{{ $design->url('realestate', 'browse', 'index') }}" title="{lang 'Members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-users fa-fw"></i> {lang 'Seller|Buyer'} <span class="caret"></span></a>
+        <li class="dropdown"><a href="#" title="{lang 'Members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-users fa-fw"></i> {lang 'Seller|Buyer'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url('realestate', 'browse', 'index') }}" rel="nofollow" title="{lang 'Browse Members'}" data-load="ajax"><i class="fa fa-user"></i> {lang 'Browse'}</a></li>
+            <li>
+              <a href="{{ $design->url('realestate', 'browse', 'seller') }}" rel="nofollow" title="{lang 'Browse Sellers'}" data-load="ajax">
+                <i class="fa fa-user"></i> {lang 'Browse Sellers'}
+              </a>
+            </li>
+            <li>
+              <a href="{{ $design->url('realestate', 'browse', 'buyer') }}" rel="nofollow" title="{lang 'Browse Buyers'}" data-load="ajax">
+                <i class="fa fa-user"></i> {lang 'Browse Buyers'}
+              </a>
+            </li>
 
             <li class="menu-item dropdown dropdown-submenu"><a href="#" title="{lang 'Search the members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search (Buyer/Seller)'}</a>
               <ul class="dropdown-menu" role="menu">
