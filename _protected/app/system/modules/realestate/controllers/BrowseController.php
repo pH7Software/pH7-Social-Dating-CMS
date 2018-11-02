@@ -56,10 +56,10 @@ class BrowseController extends Controller
             );
         } else {
             // We can put HTML tags in the <title> tag as our template engine will remove all HTML tags present in the title tag, ...
-            $this->view->page_title = t('Browse Members');
-            $this->view->h1_title = '<span class="pH1">' . t('Browse Members') . '</span>';
+            $this->view->page_title = t('Browse Sellers');
+            $this->view->h1_title = '<span class="pH1">' . t('Browse Sellers') . '</span>';
             $this->view->h3_title = t('Find Sellers with %0%', '<span class="pH0">' . $this->registry->site_name . '</span>');
-            $this->view->meta_description = t('Meet new People and Friends near you with %site_name% - Browse Members');
+            $this->view->meta_description = t('Find the best properties with %site_name% - Browse Properties');
             $this->view->avatarDesign = new AvatarDesignCore;
             $this->view->users = $oUsers;
 
@@ -89,10 +89,10 @@ class BrowseController extends Controller
             );
         } else {
             // We can put HTML tags in the <title> tag as our template engine will remove all HTML tags present in the title tag, ...
-            $this->view->page_title = t('Browse Members');
-            $this->view->h1_title = '<span class="pH1">' . t('Browse Members') . '</span>';
+            $this->view->page_title = t('Browse Buyers');
+            $this->view->h1_title = '<span class="pH1">' . t('Browse Buyers') . '</span>';
             $this->view->h3_title = t('Find Buyers with %0%', '<span class="pH0">' . $this->registry->site_name . '</span>');
-            $this->view->meta_description = t('Meet new People and Friends near you with %site_name% - Browse Members');
+            $this->view->meta_description = t('Find Buyers near you with %site_name% - Browse Buyers');
             $this->view->avatarDesign = new AvatarDesignCore;
             $this->view->users = $oUsers;
 
