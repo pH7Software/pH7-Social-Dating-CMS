@@ -13,30 +13,22 @@ final class GenderTypeUserCoreModel
     const CONSIDER_COUPLE_GENDER = true;
     const IGNORE_COUPLE_GENDER = false;
 
-    const FEMALE = 'female';
-    const MALE = 'male';
-    const COUPLE = 'couple';
+    const FEMALE = 'buyer';
+    const MALE = 'seller';
+    const COUPLE = 'visitor';
 
     const GENDERS = [
-        self::FEMALE,
-        self::MALE,
-        self::COUPLE
+        'seller',
+        'buyer'
     ];
 
     /**
      * @param string $sGender
-     * @param bool $bIncludeCoupleGender
      *
      * @return bool
      */
-    public static function isGenderValid($sGender, $bIncludeCoupleGender = self::CONSIDER_COUPLE_GENDER)
+    public static function isGenderValid($sGender)
     {
-        $aGenders = self::GENDERS;
-
-        if (!$bIncludeCoupleGender) {
-            unset($aGenders[self::COUPLE]);
-        }
-
         return in_array($sGender, self::GENDERS, true);
     }
 }
