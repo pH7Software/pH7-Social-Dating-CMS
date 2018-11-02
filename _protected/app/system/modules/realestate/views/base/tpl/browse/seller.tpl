@@ -12,7 +12,7 @@
         {each $user in $users}
         {{ $country_name = t($user->country) }}
 
-            {* Members Age *}
+        {* Members Age *}
         {{ $age = UserBirthDateCore::getAgeFromBirthDate($user->birthDate) }}
 
             <div class="thumb_photo">
