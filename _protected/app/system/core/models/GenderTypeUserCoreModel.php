@@ -18,9 +18,9 @@ final class GenderTypeUserCoreModel
     const COUPLE = 'couple';
 
     const GENDERS = [
-        self::FEMALE,
-        self::MALE,
-        self::COUPLE
+        self::FEMALE => self::FEMALE,
+        self::MALE => self::MALE,
+        self::COUPLE => self::COUPLE
     ];
 
     /**
@@ -37,6 +37,6 @@ final class GenderTypeUserCoreModel
             unset($aGenders[self::COUPLE]);
         }
 
-        return in_array($sGender, self::GENDERS, true);
+        return in_array($sGender, $aGenders, true);
     }
 }
