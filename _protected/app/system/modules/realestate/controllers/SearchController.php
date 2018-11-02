@@ -13,17 +13,6 @@ use PH7\Framework\Url\Header;
 
 class SearchController extends Controller
 {
-    public function index()
-    {
-        Header::redirect(
-            Uri::get(
-                'realestate',
-                'search',
-                'buyer'
-            )
-        );
-    }
-
     public function buyer()
     {
         $this->view->page_title = $this->view->h1_title = t('Buyer Search');

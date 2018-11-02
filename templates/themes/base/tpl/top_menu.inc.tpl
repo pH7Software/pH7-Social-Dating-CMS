@@ -46,7 +46,7 @@
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ $design->url('realestate', 'browse', 'index') }}" rel="nofollow" title="{lang 'Browse Members'}" data-load="ajax"><i class="fa fa-user"></i> {lang 'Browse'}</a></li>
 
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('realestate','search', 'index') }}" title="{lang 'Search the members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search (Buyer/Seller)'}</a>
+            <li class="menu-item dropdown dropdown-submenu"><a href="#" title="{lang 'Search the members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search (Buyer/Seller)'}</a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ $design->url('realestate', 'search', 'buyer') }}" title="{lang 'Buyer Search'}" data-load="ajax">{lang 'Buyer Search'}</a></li>
                 <li><a href="{{ $design->url('realestate', 'search', 'seller') }}" title="{lang 'Seller Search'}" data-load="ajax">{lang 'Seller Search'}</a></li>

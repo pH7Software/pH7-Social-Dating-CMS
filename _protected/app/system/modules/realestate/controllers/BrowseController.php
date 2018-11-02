@@ -34,7 +34,7 @@ class BrowseController extends Controller
         $this->oPage = new Page;
     }
 
-    public function index()
+    public function buyer()
     {
         $this->iTotalUsers = $this->oUserModel->search($_GET, true, null, null);
         $this->view->total_pages = $this->oPage->getTotalPages(
@@ -50,7 +50,7 @@ class BrowseController extends Controller
 
         if (empty($oUsers)) {
             Header::redirect(
-                Uri::get('realestate', 'search', 'index'),
+                Uri::get('realestate', 'search', 'buyer'),
                 t('No results. Please try again with wider or new search criteria.'),
                 Design::WARNING_TYPE
             );
