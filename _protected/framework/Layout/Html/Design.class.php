@@ -288,7 +288,7 @@ class Design
             if (SysMod::isEnabled('user-dashboard')) {
                 $this->url('user-dashboard', 'main', 'index');
             } else {
-                $this->url('realestate', 'browse', 'index');
+                $this->url('realestate', 'main', 'index');
             }
         } elseif (AdminCore::auth()) {
             $this->url(PH7_ADMIN_MOD, 'main', 'index');
