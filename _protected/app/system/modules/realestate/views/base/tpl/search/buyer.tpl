@@ -1,5 +1,5 @@
 <div class="left col-md-8">
-    {{ SearchBuyerForm::quick() }}
+    {{ SearchBuyerForm::display() }}
 </div>
 
 <div class="right col-md-2 col-md-offset-2 ad_160_600">
