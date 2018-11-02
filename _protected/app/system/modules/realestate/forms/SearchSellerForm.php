@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Geo\Ip\Geo;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 
