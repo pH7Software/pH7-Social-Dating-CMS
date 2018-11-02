@@ -12,7 +12,7 @@ namespace PH7;
 
 use PH7\Framework\Geo\Ip\Geo;
 use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Session\Session;
 
@@ -189,7 +189,7 @@ class SearchUserCoreForm
      */
     protected static function setAttrVals()
     {
-        $oHttpRequest = new Http;
+        $oHttpRequest = new HttpRequest;
         $oSession = new Session;
         $oUserModel = new UserCoreModel;
 
