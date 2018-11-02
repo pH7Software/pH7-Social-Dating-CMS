@@ -16,8 +16,6 @@
       <route url="user/edit/?([0-9]+)?" path="system/modules" module="realestate" controller="setting" action="edit" vars="profile_id" />
       <route url="user/avatar/?([0-9]+)?/?([a-zA-Z0-9_-]+)?/?([^/]+)?/?([a-z]+)?" path="system/modules" module="realestate" controller="setting" action="avatar" vars="profile_id,username,first_name,sex" />
       <route url="user/design/?([0-9]+)?/?([a-zA-Z0-9_-]+)?/?([^/]+)?/?([a-z]+)?" path="system/modules" module="realestate" controller="setting" action="design" vars="profile_id,username,first_name,sex" />
-
-      <route url="meet-people" path="system/modules" module="realestate" controller="browse" action="index" />
       <!-- search -->
       <route url="search-people" path="system/modules" module="realestate" controller="search" action="index" />
       <route url="quick-search-people" path="system/modules" module="realestate" controller="search" action="quick" />
