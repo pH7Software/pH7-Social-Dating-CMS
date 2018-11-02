@@ -7,32 +7,32 @@
     <!-- BEGIN SYSTEM MODULES -->
 
     <!-- User -->
-      <route url="@([a-zA-Z0-9_-]+)" path="system/modules" module="user" controller="profile" action="index" vars="username" />
-      <route url="signup" path="system/modules" module="user" controller="signup" action="step1" />
-      <route url="login" path="system/modules" module="user" controller="main" action="login" />
-      <route url="resend-activation" path="system/modules" module="user" controller="main" action="resendactivation" />
-      <route url="user/setting/delete-account/?([a-z]+)?" path="system/modules" module="user" controller="setting" action="delete" vars="delete_status" />
+      <route url="@([a-zA-Z0-9_-]+)" path="system/modules" module="realestate" controller="profile" action="index" vars="username" />
+      <route url="signup" path="system/modules" module="realestate" controller="signup" action="step1" />
+      <route url="login" path="system/modules" module="realestate" controller="main" action="login" />
+      <route url="resend-activation" path="system/modules" module="realestate" controller="main" action="resendactivation" />
+      <route url="user/setting/delete-account/?([a-z]+)?" path="system/modules" module="realestate" controller="setting" action="delete" vars="delete_status" />
       <!-- admin -->
-      <route url="user/edit/?([0-9]+)?" path="system/modules" module="user" controller="setting" action="edit" vars="profile_id" />
-      <route url="user/avatar/?([0-9]+)?/?([a-zA-Z0-9_-]+)?/?([^/]+)?/?([a-z]+)?" path="system/modules" module="user" controller="setting" action="avatar" vars="profile_id,username,first_name,sex" />
-      <route url="user/design/?([0-9]+)?/?([a-zA-Z0-9_-]+)?/?([^/]+)?/?([a-z]+)?" path="system/modules" module="user" controller="setting" action="design" vars="profile_id,username,first_name,sex" />
+      <route url="user/edit/?([0-9]+)?" path="system/modules" module="realestate" controller="setting" action="edit" vars="profile_id" />
+      <route url="user/avatar/?([0-9]+)?/?([a-zA-Z0-9_-]+)?/?([^/]+)?/?([a-z]+)?" path="system/modules" module="realestate" controller="setting" action="avatar" vars="profile_id,username,first_name,sex" />
+      <route url="user/design/?([0-9]+)?/?([a-zA-Z0-9_-]+)?/?([^/]+)?/?([a-z]+)?" path="system/modules" module="realestate" controller="setting" action="design" vars="profile_id,username,first_name,sex" />
 
-      <route url="meet-people" path="system/modules" module="user" controller="browse" action="index" />
+      <route url="meet-people" path="system/modules" module="realestate" controller="browse" action="index" />
       <!-- search -->
-      <route url="search-people" path="system/modules" module="user" controller="search" action="index" />
-      <route url="quick-search-people" path="system/modules" module="user" controller="search" action="quick" />
-      <route url="advanced-search-people" path="system/modules" module="user" controller="search" action="advanced" />
+      <route url="search-people" path="system/modules" module="realestate" controller="search" action="index" />
+      <route url="quick-search-people" path="system/modules" module="realestate" controller="search" action="quick" />
+      <route url="advanced-search-people" path="system/modules" module="realestate" controller="search" action="advanced" />
 
-      <route url="dating/([a-zA-Z0-9_-]+)/?([^/]+)?" path="system/modules" module="user" controller="country" action="index" vars="country,city" />
+      <route url="dating/([a-zA-Z0-9_-]+)/?([^/]+)?" path="system/modules" module="realestate" controller="country" action="index" vars="country,city" />
       <!-- friend -->
       <route url="friends/?([a-zA-Z0-9_-]+)?" path="system/modules" module="friend" controller="main" action="index" vars="username" />
       <route url="mutual-friends/?([a-zA-Z0-9_-]+)?" path="system/modules" module="friend" controller="main" action="mutual" vars="username" />
       <route url="friends/search/([a-zA-Z0-9_-]+)/?(mutual)?" path="system/modules" module="friend" controller="main" action="search" vars="username,action" />
       <!-- visitor -->
-      <route url="user/visitors/?([a-zA-Z0-9_-]+)?" path="system/modules" module="user" controller="visitor" action="index" vars="username" />
-      <route url="user/visitors/search/?([a-zA-Z0-9_-]+)" path="system/modules" module="user" controller="visitor" action="search" vars="username" />
+      <route url="user/visitors/?([a-zA-Z0-9_-]+)?" path="system/modules" module="realestate" controller="visitor" action="index" vars="username" />
+      <route url="user/visitors/search/?([a-zA-Z0-9_-]+)" path="system/modules" module="realestate" controller="visitor" action="search" vars="username" />
 
-      <route url="see-you-soon" path="system/modules" module="user" controller="main" action="soon" />
+      <route url="see-you-soon" path="system/modules" module="realestate" controller="main" action="soon" />
 
     <!-- Cool Profile Page -->
       <route url="new-profile/([0-9]+)?" path="system/modules" module="cool-profile-page" controller="main" action="index" vars="profile_id" />
