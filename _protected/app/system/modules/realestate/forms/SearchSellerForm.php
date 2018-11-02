@@ -8,7 +8,7 @@
 
 namespace PH7;
 
-use PH7\Framework\Http\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 
 class SearchSellerForm
@@ -54,7 +54,7 @@ class SearchSellerForm
      */
     protected static function setAttrVals()
     {
-        $oHttpRequest = new Http;
+        $oHttpRequest = new HttpRequest;
 
         if ($oHttpRequest->getExists('country')) {
             self::$aCountryOption += ['value' => $oHttpRequest->get('country')];
