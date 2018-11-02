@@ -30,7 +30,7 @@ class SearchBuyerForm
         }
 
         $oForm = new \PFBC\Form('form_search', $iWidth);
-        $oForm->configure(['action' => Uri::get('realestate', 'search', 'buyer') . PH7_SH, 'method' => 'get']);
+        $oForm->configure(['action' => Uri::get('realestate', 'browse', 'index') . PH7_SH, 'method' => 'get']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
         $oForm->addElement(new \PFBC\Element\Hidden('sex', 'buyer'));
         $oForm->addElement(new \PFBC\Element\Hidden('match_sex', 'seller'));
