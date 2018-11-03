@@ -44,8 +44,8 @@ class JoinFormProcess extends Form
 
         $aData = [
             'email' => $this->httpRequest->post('mail'),
-            'sex' => $this->httpRequest->post('sex'),
             'username' => $this->httpRequest->post('username'),
+            'sex' => $this->httpRequest->post('sex'),
             'first_name' => $this->httpRequest->post('first_name'),
             'country' =>  $this->httpRequest->post('country'),
             'city' =>  $this->httpRequest->post('city'),

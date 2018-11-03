@@ -37,6 +37,7 @@ class UserModel extends UserCoreModel
         $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $aData['username'], \PDO::PARAM_STR);
         $rStmt->bindValue(':password', $aData['password'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);
         $rStmt->bindValue(':first_name', $aData['first_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':reference', $aData['reference'], \PDO::PARAM_STR);
         $rStmt->bindValue(':is_active', $aData['is_active'], \PDO::PARAM_INT);
@@ -48,7 +49,7 @@ class UserModel extends UserCoreModel
         $this->setKeyId(Db::getInstance()->lastInsertId()); // Set the user's ID
         Db::free($rStmt);
 
-        $this->setInfoFields(array()); // Insert an empty "members_info" entry with the user's ID
+        $this->setInfoFields($aData);
         $this->setDefaultPrivacySetting();
         $this->setDefaultNotification();
 
