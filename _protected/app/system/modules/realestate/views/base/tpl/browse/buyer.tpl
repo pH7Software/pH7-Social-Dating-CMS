@@ -11,25 +11,12 @@
     {else}
         {each $user in $users}
         {{ $country_name = t($user->country) }}
-
-        {* Members Age *}
-        {{ $age = UserBirthDateCore::getAgeFromBirthDate($user->birthDate) }}
-
             <div class="thumb_photo">
                 {{ UserDesignCoreModel::userStatus($user->profileId) }}
 
-                {* Sex Icon *}
-                {if $user->sex === 'male'}
-                    {{ $sex_ico = ' <span class=green>&#9794;</span>' }}
-                {elseif $user->sex === 'female'}
-                    {{ $sex_ico = ' <span class=pink>&#9792;</span>' }}
-                {else}
-                    {{ $sex_ico = '' }}
-                {/if}
-
                 {{ $avatarDesign->get($user->username, $user->firstName, $user->sex, 64, true) }}
                 <p class="cy_ico">
-                    <a href="{% (new UserCore)->getProfileLink($user->username) %}" title="{lang 'Name: %0%', $user->firstName}<br> {lang 'Gender: %0% %1%', t($user->sex), $sex_ico}<br> {lang 'Seeking: %0%', t($user->matchSex)}<br> {lang 'Age: %0%', $age}<br> {lang 'From: %0%', $country_name}<br> {lang 'City: %0%', $str->upperFirst($user->city)}<br> {lang 'State: %0%', $str->upperFirst($user->state)}">
+                    <a href="{% (new UserCore)->getProfileLink($user->username) %}" title="{lang 'Name: %0%', $user->firstName}<br> {lang 'From: %0%', $country_name}<br> {lang 'City: %0%', $str->upperFirst($user->city)}<br> {lang 'State: %0%', $str->upperFirst($user->state)}">
                         <strong>{% $str->extract($user->username, PH7_MAX_USERNAME_LENGTH_SHOWN, PH7_ELLIPSIS) %}</strong>
                     </a> <img src="{{ $design->getSmallFlagIcon($user->country) }}" alt="{country_name}" title="{lang 'From %0%', $country_name}" />
                 </p>
