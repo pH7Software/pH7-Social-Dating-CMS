@@ -22,6 +22,9 @@ class AvatarDesignCore extends Design
     const DEF_AVATAR_SIZE = 32;
     const DEF_LIGHTBOX_AVATAR_SIZE = 400;
 
+    const BROWSE_SELLER_AVATAR_SIZE = 400;
+    const BROWSE_BUYER_AVATAR_SIZE = 64;
+
     /** @var UserCore */
     private $oUser;
 

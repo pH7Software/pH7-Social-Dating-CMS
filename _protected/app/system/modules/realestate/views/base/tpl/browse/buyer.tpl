@@ -14,7 +14,7 @@
             <div class="thumb_photo">
                 {{ UserDesignCoreModel::userStatus($user->profileId) }}
 
-                {{ $avatarDesign->get($user->username, $user->firstName, $user->sex, 64, true) }}
+                {{ $avatarDesign->get($user->username, $user->firstName, $user->sex, AvatarDesignCore::BROWSE_BUYER_AVATAR_SIZE, true) }}
                 <p class="cy_ico">
                     <a href="{% (new UserCore)->getProfileLink($user->username) %}" title="{lang 'Name: %0%', $user->firstName}<br> {lang 'From: %0%', $country_name}<br> {lang 'City: %0%', $str->upperFirst($user->city)}<br> {lang 'State: %0%', $str->upperFirst($user->state)}">
                         <strong>{% $str->extract($user->username, PH7_MAX_USERNAME_LENGTH_SHOWN, PH7_ELLIPSIS) %}</strong>
