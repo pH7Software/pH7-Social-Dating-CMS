@@ -966,13 +966,13 @@ msgstr ""
 
 #: _protected/app/system/core/forms/CountryRestrictionCoreForm.php:73
 msgid ""
-"You can limit the amount of countries to be displayed on the registration "
+"You can select/multi-select the amount of countries to be displayed on the registration "
 "form and user search forms."
 msgstr ""
 
 #: _protected/app/system/core/forms/CountryRestrictionCoreForm.php:75
 msgid ""
-"You can limit the amount of countries to be displayed on the registration "
+"You can select/multi-select the amount of countries to be displayed on the registration "
 "form."
 msgstr ""
 

@@ -70,9 +70,9 @@ class CountryRestrictionCoreForm
     private static function getCountryFieldDesc($sModuleType)
     {
         if ($sModuleType === DbTableName::MEMBER_COUNTRY) {
-            $sMessage = t('You can limit the amount of countries to be displayed on the registration form and user search forms.');
+            $sMessage = t('You can select/multi-select the amount of countries to be displayed on the registration form and user search forms.');
         } else {
-            $sMessage = t('You can limit the amount of countries to be displayed on the registration form.');
+            $sMessage = t('You can select/multi-select the amount of countries to be displayed on the registration form.');
         }
 
         $sMessage .= '<br />';
