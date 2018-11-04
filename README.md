@@ -141,7 +141,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 ## Installation
 
   * Github:
-    * Clone pH7CMS from Github `git clone git@github.com:pH7Software/pH7-Social-Dating-CMS.git`   
+    * Clone pH7CMS from Github `git clone git@github.com:pH7Software/pH7-Social-Dating-CMS.git`
       (use `--depth=1` if you don't need the history)
     * [Install Composer](https://getcomposer.org/doc/00-intro.md)
     * From a command line opened in the folder, run `composer install` to install pH7CMS's dependencies.
