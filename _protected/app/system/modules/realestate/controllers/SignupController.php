@@ -101,7 +101,7 @@ class SignupController extends Controller
         if (!$this->session->exists('mail_step3')) {
             Header::redirect(
                 Uri::get(
-                    'user',
+                    'realestate',
                     'signup',
                     'step3'
                 )
@@ -118,7 +118,7 @@ class SignupController extends Controller
                 $this->session->destroy();
 
                 $sUrl = Uri::get(
-                    'user',
+                    'realestate',
                     'main',
                     'login'
                 );

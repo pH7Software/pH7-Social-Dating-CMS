@@ -150,7 +150,7 @@ class JoinFormProcess extends Form
     {
         Header::redirect(
             Uri::get(
-                'user',
+                'realestate',
                 'signup',
                 'done'
             )

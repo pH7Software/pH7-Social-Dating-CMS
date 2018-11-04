@@ -150,7 +150,7 @@ abstract class ProfileBaseController extends Controller
                 's' => $oUser->sex
             ];
             $sMailLink = Uri::get(
-                'user',
+                'realestate',
                 'signup',
                 'step1', '?' . Url::httpBuildQuery($aUrlParms),
                 false
@@ -180,7 +180,7 @@ abstract class ProfileBaseController extends Controller
                 's' => $oUser->sex
             ];
             $sMessengerLink = Uri::get(
-                'user',
+                'realestate',
                 'signup',
                 'step1',
                 '?' . Url::httpBuildQuery($aUrlParms),
@@ -211,7 +211,7 @@ abstract class ProfileBaseController extends Controller
                 's' => $oUser->sex
             ];
             $sBefriendLink = Uri::get(
-                'user',
+                'realestate',
                 'signup',
                 'step1', '?' . Url::httpBuildQuery($aUrlParms),
                 false

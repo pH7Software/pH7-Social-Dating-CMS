@@ -349,7 +349,7 @@ class UserCore
             ];
 
             $sLink = Uri::get(
-                'user',
+                'realestate',
                 'signup',
                 'step1',
                 '?' . Url::httpBuildQuery($aHttpParams),
