@@ -7,7 +7,7 @@
 
 <div class="box-right col-md-9 col-lg-9 col-xl-9 col-xl-offset-1">
     {if empty($users)}
-        <p class="center bold">{lang 'Whoops! No property found.'}</p>
+        <p class="center bold">{lang 'Whoops! No properties (sellers) found.'}</p>
     {else}
         {each $user in $users}
         {{ $country_name = t($user->country) }}
