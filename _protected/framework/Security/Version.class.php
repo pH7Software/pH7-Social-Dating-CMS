@@ -36,7 +36,7 @@ final class Version
     const KERNEL_VERSION_NAME = 'pKb';
     const KERNEL_VERSION = '14.7.0';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELEASE_DATE = '2018-10-29';
+    const KERNEL_RELEASE_DATE = '2018-11-12';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1'; // Ph7 Technology
