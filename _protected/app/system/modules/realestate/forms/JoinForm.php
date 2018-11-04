@@ -86,7 +86,7 @@ class JoinForm
     public static function step2()
     {
         $oSession = new Session;
-        if (!$oSession->exists('mail_step1')) {
+        if (!$oSession->exists('mail_step2')) {
             Header::redirect(Uri::get('realestate', 'signup', 'step1'));
         } elseif ($oSession->exists('mail_step2')) {
             Header::redirect(Uri::get('realestate', 'signup', 'step3'));
@@ -114,8 +114,8 @@ class JoinForm
 
     public static function step3()
     {
-        if (!(new Session)->exists('mail_step3')) {
-            Header::redirect(Uri::get('realestate', 'signup', 'step3'));
+        if (!(new Session)->exists('mail_step2')) {
+            Header::redirect(Uri::get('realestate', 'signup', 'step2'));
         }
 
         if (isset($_POST['submit_join_user3'])) {
