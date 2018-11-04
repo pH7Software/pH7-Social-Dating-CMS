@@ -992,7 +992,7 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('siteName', @sDefaultSiteName, '', 'general'),
 ('adminEmail', @sAdminEmail, '', 'email'),
 ('defaultLanguage', 'en_US', '', 'language'),
-('defaultTemplate', 'base', '', 'design'),
+('defaultTemplate', 'zendate', '', 'design'),
 ('backgroundColor', '', 'Override background color. Leave empty to disable', 'design'),
 ('textColor', '', 'Override text color. Leave empty to disable', 'design'),
 ('linkColor', '', 'Override links color. Leave empty to disable', 'design'),
