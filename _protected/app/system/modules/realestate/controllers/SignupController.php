@@ -91,7 +91,7 @@ class SignupController extends Controller
 
     public function done()
     {
-        if (!$this->session->exists('mail_step3')) {
+        if (!$this->session->exists('mail_step2')) {
             Header::redirect(
                 Uri::get(
                     'realestate',
