@@ -12,7 +12,7 @@
 --
 -- Set the variables --
 --
-SET @sDefaultSiteName = 'Acquireutah: Real Estate, community website';
+SET @sDefaultSiteName = 'Acquireutah: Real Estate';
 SET @sAdminEmail = 'admin@yoursite.com';
 SET @sFeedbackEmail = 'feedback@yoursite.com';
 SET @sNoReplyEmail = 'noreply@yoursite.com';
