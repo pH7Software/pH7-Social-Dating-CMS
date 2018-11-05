@@ -248,7 +248,7 @@ class InstallController extends Controller
                                         'pH7_GeoCity8',
                                         'pH7_GeoState',
                                         // --- Execute this file if there is something --- //
-                                        'pH7_SampleData'
+                                        //'pH7_SampleData'
                                     ];
 
                                     for ($iFileKey = 0, $iCount = count($aDumps); $iFileKey < $iCount; $iFileKey++) {
