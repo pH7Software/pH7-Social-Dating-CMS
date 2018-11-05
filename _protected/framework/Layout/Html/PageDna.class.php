@@ -98,6 +98,6 @@ COMMENT;
      */
     public static function generateHtmlComment()
     {
-        return self::COMMENTS[mt_rand(0, count(self::COMMENTS) - 1)];
+        return self::COMMENTS[array_rand(self::COMMENTS)];
     }
 }

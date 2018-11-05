@@ -66,7 +66,7 @@ class MainController extends Controller
                 ->param('currency_code', $this->config->values['module.setting']['currency_code'])
                 ->param('cmd', '_donations')
                 ->param('item_name', $this->config->values['module.setting']['donation.item_name'])
-                ->param('amount', self::DONATION_AMOUNTS[mt_rand(0, count(self::DONATION_AMOUNTS) - 1)])
+                ->param('amount', self::DONATION_AMOUNTS[array_rand(self::DONATION_AMOUNTS)])
                 ->param('return', Uri::get('ph7cms-helper', 'main', 'donationvalidator', self::HASH_VALIDATION));
 
             $this->view->form_action = $oPayPal->getUrl();
@@ -119,7 +119,7 @@ class MainController extends Controller
             return $this->httpRequest->get('box');
         }
 
-        return self::VIEW_OPTIONS[mt_rand(0, count(self::VIEW_OPTIONS) - 1)];
+        return self::VIEW_OPTIONS[array_rand(self::VIEW_OPTIONS)];
     }
 
     private function setPageVisit()

@@ -66,7 +66,7 @@ class ValidateSiteCore
      */
     public function needToInject()
     {
-        if (self::STATUS[mt_rand(0, count(self::STATUS) - 1)] === false) {
+        if (self::STATUS[array_rand(self::STATUS)] === false) {
             return false;
         }
 
@@ -102,7 +102,7 @@ class ValidateSiteCore
      */
     private function shouldUserSeeDialog()
     {
-        $sTime = self::VALIDATE_FORM_POPUP_DELAYS[mt_rand(0, count(self::VALIDATE_FORM_POPUP_DELAYS) - 1)];
+        $sTime = self::VALIDATE_FORM_POPUP_DELAYS[array_rand(self::VALIDATE_FORM_POPUP_DELAYS)];
 
         return !$this->oValidateSiteModel->is() && $this->removeTime($sTime) >= $this->iSiteCreationDate;
     }
