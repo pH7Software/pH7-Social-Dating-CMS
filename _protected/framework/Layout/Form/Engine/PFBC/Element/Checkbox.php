@@ -50,7 +50,7 @@ JS;
         echo '<div id="', $this->attributes['id'], '"><div class="pfbc-checkboxes">';
         foreach ($this->options as $value => $text) {
             $value = $this->getOptionValue($value);
-            echo '<div class="pfbc-checkbox"><table cellpadding="0" cellspacing="0"><tr><td valign="top"><input id="', $this->attributes["id"], "-", $count, '"', $this->getAttributes(['id', 'value', 'checked']), ' value="', $this->filter($value), '"';
+            echo '<div class="pfbc-checkbox"><table cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top"><input id="', $this->attributes["id"], "-", $count, '"', $this->getAttributes(['id', 'value', 'checked']), ' value="', $this->filter($value), '"';
             if (in_array($value, $this->attributes['value'])) {
                 echo ' checked="checked"';
             }

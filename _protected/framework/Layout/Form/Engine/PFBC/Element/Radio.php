@@ -41,7 +41,7 @@ JS;
 
         foreach ($this->options as $value => $text) {
             $value = $this->getOptionValue($value);
-            echo '<div class="pfbc-radio"><table cellpadding="0" cellspacing="0"><tr><td valign="top"><input id="', $this->attributes["id"], "-", $count, '"', $this->getAttributes(['id', 'value', 'checked']), ' value="', $this->filter($value), '"';
+            echo '<div class="pfbc-radio"><table cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top"><input id="', $this->attributes["id"], "-", $count, '"', $this->getAttributes(['id', 'value', 'checked']), ' value="', $this->filter($value), '"';
             if (isset($this->attributes["value"]) && $this->attributes["value"] == $value)
                 echo ' checked="checked"';
             echo '/></td><td><label for="', $this->attributes['id'], '-', $count, '">', $text, '</label></td></tr></table></div>';
