@@ -23,7 +23,7 @@ class Permission extends PermissionCore
         /**
          * Make sure the page is requested directly through the signup process.
          */
-        if (!$this->session->exists('mail_step3')) {
+        if (!$this->session->exists('mail_step2')) {
             Header::redirect(
                 Uri::get(
                     'error',
