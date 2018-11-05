@@ -441,8 +441,8 @@ class Design
             ];
         }
 
-        $iRand = mt_rand(0, count($aSites) - 1);
-        echo '<a href="', $aSites[$iRand]['link'], '">', $aSites[$iRand]['title'], '</a>';
+        $aSite = $aSites[array_rand($aSites)];
+        echo '<a href="', $aSite['link'], '">', $aSite['title'], '</a>';
     }
 
     /**
