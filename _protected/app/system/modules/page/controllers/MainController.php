@@ -137,34 +137,4 @@ class MainController extends Controller
 
         $this->output();
     }
-
-    public function partner()
-    {
-        $this->sTitle = t('Partners of %site_name%');
-        $this->view->page_title = $this->sTitle;
-        $this->view->meta_description = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
-
-        $this->output();
-    }
-
-    public function job()
-    {
-        $this->sTitle = t('Jobs - Careers @ %site_name%');
-        $this->view->page_title = $this->sTitle;
-        $this->view->meta_description = $this->sTitle;
-        $this->view->h1_title = t('Careers, Jobs and Internships at %site_name%');
-
-        $this->output();
-    }
-
-    public function link()
-    {
-        $this->sTitle = t('Links and Partners of %site_name%');
-        $this->view->page_title = $this->sTitle;
-        $this->view->meta_description = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
-
-        $this->output();
-    }
 }

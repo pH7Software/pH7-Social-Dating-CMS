@@ -47,7 +47,6 @@
     {if $is_affiliate_enabled}
         <link title="{lang 'Affiliate'}" url="{{ $design->url('affiliate','home','index') }}" />
     {/if}
-    <link title="{lang 'Jobs'}" url="{{ $design->url('page','main','job') }}" />
     <link title="{lang 'RSS Feed List'}" url="{{ $design->url('xml','rss','index') }}" />
     <link title="{lang 'XML Site Map'}" url="{{ $design->url('xml','sitemap','xmlrouter') }}" />
 </url>

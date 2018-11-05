@@ -115,13 +115,6 @@
   <priority>0.4</priority>
 </url>
 
-<url>
-  <loc>{{ $design->url('page','main','job') }}</loc>
-  <lastmod>{current_date}</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.4</priority>
-</url>
-
 {if $is_affiliate_enabled}
   <url>
     <loc>{{ $design->url('affiliate','home','index') }}</loc>

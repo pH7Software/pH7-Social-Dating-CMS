@@ -16,9 +16,6 @@
           {/if}
 
           <li><a href="{{ $design->url('contact','contact','index') }}" title="{lang 'Contact Us'}">{lang 'Contact'}</a></li>
-          <li><a href="{{ $design->url('page','main','partner') }}" title="{lang 'Our Partners'}" data-load="ajax">{lang 'Partners'}</a></li>
-          <li><a href="{{ $design->url('page','main','link') }}" title="{lang 'Links'}" data-load="ajax">{lang 'Links'}</a></li>
-          <li><a href="{{ $design->url('page','main','job') }}" title="{lang 'Jobs | Careers'}" data-load="ajax">{lang 'Jobs'}</a></li>
           <li class="dm_self"><span class="dropdown_item">{lang 'About'}</span><i></i></li>
         </ul>
       </div> |
