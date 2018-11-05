@@ -71,7 +71,6 @@ function run() {
             rm -f ./_protected/app/system/core/assets/cron/_delay/*
             rm -rf ./_repository/import/*
             rm -rf ./_repository/module/*
-            rm -rf ./_repository/upgrade/*
             rm -rf ./_tests/
             rm -rf ./.git/
 
