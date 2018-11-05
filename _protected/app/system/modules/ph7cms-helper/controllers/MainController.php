@@ -60,7 +60,7 @@ class MainController extends Controller
         $this->view->page_title = t('Will You Help pH7CMS?');
 
         $sBoxType = $this->getSuggestionBox();
-        if ($this->doesSuggestionBoxIsDonation()) {
+        if ($this->doesSuggestionBoxIsDonation($sBoxType)) {
             $oPayPal = new PayPal();
             $oPayPal->param('business', base64_decode($this->config->values['module.setting']['paypal.donation_email']))
                 ->param('currency_code', $this->config->values['module.setting']['currency_code'])
