@@ -39,7 +39,6 @@ use PH7\Framework\Session\Session;
 use PH7\Framework\Str\Str;
 use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Url;
-use PH7\GenderTypeUserCoreModel;
 use PH7\UserCore;
 use PH7\UserCoreModel;
 
@@ -643,7 +642,7 @@ class Design
                 /* If sex is empty, it is recovered in the database using information from member */
                 $sSex = !empty($sSex) ? $sSex : $oUserModel->getSex(null, $sUsername, DbTableName::MEMBER);
                 $sSex = $this->oStr->lower($sSex);
-                $sIcon = (GenderTypeUserCoreModel::isGenderValid($sSex) || $sSex === PH7_ADMIN_USERNAME) ? $sSex : 'visitor';
+                $sIcon = ($sSex === 'male' || $sSex === 'female' || $sSex === 'couple' || $sSex === PH7_ADMIN_USERNAME) ? $sSex : 'visitor';
                 $sUrlTplName = defined('PH7_TPL_NAME') ? PH7_TPL_NAME : PH7_DEFAULT_THEME;
 
                 /*** If the user doesn't have an avatar ***/
