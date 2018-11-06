@@ -19,7 +19,7 @@ use PDO;
 use PH7\DbTableName;
 use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Ip\Ip;
-use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
+use PH7\Framework\Layout\Tpl\Engine\Templatable;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 use PH7\SecurityCore;
@@ -97,7 +97,7 @@ class Security
      * @param int $iMaxAttempts
      * @param int $iAttemptTime
      * @param string $sEmail Email address of member.
-     * @param PH7Tpl $oView
+     * @param Templatable $oView
      * @param string $sTable Default DbTableName::MEMBER
      *
      * @return bool Returns TRUE if attempts are allowed, FALSE otherwise.
@@ -106,7 +106,7 @@ class Security
         $iMaxAttempts,
         $iAttemptTime,
         $sEmail,
-        PH7Tpl $oView,
+        Templatable $oView,
         $sTable = DbTableName::MEMBER
     )
     {

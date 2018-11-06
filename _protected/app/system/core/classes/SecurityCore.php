@@ -8,7 +8,7 @@
 
 namespace PH7;
 
-use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
+use PH7\Framework\Layout\Tpl\Engine\Templatable;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 use PH7\Framework\Mvc\Router\Uri;
@@ -22,12 +22,12 @@ class SecurityCore
      * @param int $iAttemptTime
      * @param string $sIp IP address
      * @param string $sTo Email address of the user to send the message.
-     * @param PH7Tpl $oView
+     * @param Templatable $oView
      * @param string $sTable Default DbTableName::MEMBER
      *
      * @return void
      */
-    public function sendAlertLoginAttemptsExceeded($iMaxAttempts, $iAttemptTime, $sIp, $sTo, PH7Tpl $oView, $sTable = DbTableName::MEMBER)
+    public function sendAlertLoginAttemptsExceeded($iMaxAttempts, $iAttemptTime, $sIp, $sTo, Templatable $oView, $sTable = DbTableName::MEMBER)
     {
         Various::checkModelTable($sTable);
 
