@@ -33,7 +33,7 @@ class Year implements Measurable
      * @param int $iBirthYear
      * @param int $iBirthMonth
      * @param int $iBirthDay
-     * @param int $iTimestamp You can optionally set another date for the calculation of the age. By default age is checked against the current date.
+     * @param int|null $iTimestamp You can optionally set another date for the calculation of the age. By default age is checked against the current date.
      */
     public function __construct($iBirthYear, $iBirthMonth, $iBirthDay, $iTimestamp = null)
     {
