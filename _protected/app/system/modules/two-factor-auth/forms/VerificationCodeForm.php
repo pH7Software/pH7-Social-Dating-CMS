@@ -33,7 +33,7 @@ class VerificationCodeForm
                 t('Authentication Code:'),
                 'verification_code',
                 [
-                    'description' => t('Open your two-factor authentication app on your device to view, and enter your authentication code here.'),
+                    'description' => '<i class="fa fa-mobile"></i> ' . t('Open your two-factor authentication app on your device to view, and enter your authentication code here.'),
                     'maxlength' => 6,
                     'autocomplete' => 'off',
                     'required' => 1
