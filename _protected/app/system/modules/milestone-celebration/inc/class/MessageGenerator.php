@@ -19,7 +19,7 @@ final class MessageGenerator
     {
         $aParagraphs = self::getParagraphs();
 
-        return $aParagraphs[mt_rand(0, count($aParagraphs) - 1)];
+        return $aParagraphs[array_rand($aParagraphs)];
     }
 
     /**
