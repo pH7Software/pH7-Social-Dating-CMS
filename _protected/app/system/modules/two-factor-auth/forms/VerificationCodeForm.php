@@ -28,7 +28,18 @@ class VerificationCodeForm
         $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_verification_code', 'form_verification_code'));
         $oForm->addElement(new \PFBC\Element\Token('verification_code'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Verification Code:'), 'verification_code', ['maxlength' => 6, 'autocomplete' => 'off', 'required' => 1]));
+        $oForm->addElement(
+            new \PFBC\Element\Textbox(
+                t('Authentication Code:'),
+                'verification_code',
+                [
+                    'description' => t('Open your two-factor authentication app on your device to view, and enter your authentication code here.'),
+                    'maxlength' => 6,
+                    'autocomplete' => 'off',
+                    'required' => 1
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
