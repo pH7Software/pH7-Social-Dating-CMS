@@ -60,7 +60,7 @@ class Year implements Measurable
 
         // Taken out a year if the birthday is not over yet
         if ($this->iMonth > $iCurrentMonth ||
-            ($this->iMonth == $iCurrentMonth && $this->iDay > date('j', $this->iTimestamp))
+            ($this->iMonth === $iCurrentMonth && $this->iDay > date('j', $this->iTimestamp))
         ) {
             $iAge--;
         }
