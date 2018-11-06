@@ -46,7 +46,7 @@ class MilestoneNotifier
         $this->oView->greeting = t('Hi there! 😊');
         $this->oView->content = t('Something AMAZING and AWESOME just happened to your website!!!') . '<br />';
         $this->oView->content .= t('Indeed, your website reached the %0% users!!! Congratulations! 😍', $iTotalUsers);
-        $this->oView->become_patron = $this->getPatreonParagraph();
+        $this->oView->become_patron = MessageGenerator::getPatreonParagraph();
 
         $sMessageHtml = $this->oView->parseMail(
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . self::MAIL_TEMPLATE_FILE_PATH,
@@ -63,20 +63,5 @@ class MilestoneNotifier
             $sMessageHtml,
             Mailable::HTML_FORMAT
         );
-    }
-
-    /**
-     * @return string A random patron paragraph.
-     */
-    private function getPatreonParagraph()
-    {
-        $aParagraphs = [
-            t('Do you think it is the right time to <a href="%0%">Become a Patron</a> and support the development of the software?', Kernel::PATREON_URL),
-            t('Are you generous enough to thank the development of the software? <a href="%0%">Become a patron</a> today.', Kernel::PATREON_URL),
-            t('Subscribe to <a href="%0%">pH7CMS Patreon</a>.', Kernel::PATREON_URL),
-            t('<a href="%0%">Subscribe to be a patron</a>.', Kernel::PATREON_URL)
-        ];
-
-        return $aParagraphs[mt_rand(0, count($aParagraphs) - 1)];
     }
 }
