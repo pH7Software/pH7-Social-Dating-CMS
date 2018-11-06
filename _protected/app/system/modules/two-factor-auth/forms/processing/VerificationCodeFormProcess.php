@@ -77,7 +77,9 @@ class VerificationCodeFormProcess extends Form
                 break;
 
             default:
-                throw new PH7InvalidArgumentException('Wrong "' . $sMod . '" module specified to get the class name');
+                throw new PH7InvalidArgumentException(
+                    sprintf('Wrong "%s" module specified to get the class name', $sMod)
+                );
         }
 
         return $sFullClassName;
