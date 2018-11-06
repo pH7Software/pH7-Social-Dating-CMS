@@ -7,6 +7,12 @@
 
     {{ $text = !$is_enabled ? t('Turn On Two-Factor Authentication') : t('Turn Off Two-Factor Authentication') }}
     <div class="bold">
-        {{ LinkCoreForm::display($text, 'two-factor-auth', 'main', 'setup/' . $mod, array('status' => $is_enabled)) }}
+        {{ LinkCoreForm::display(
+            $text,
+            'two-factor-auth',
+            'main',
+            'setup/' . $mod,
+            ['status' => $is_enabled]
+        ) }}
     </div>
 </div>
