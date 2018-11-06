@@ -176,12 +176,13 @@ class InstallController extends Controller
             if (empty($_SESSION['val'])) {
                 $_SESSION['db']['type_name'] = Db::DBMS_MYSQL_NAME;
                 $_SESSION['db']['type'] = Db::DSN_MYSQL_PREFIX;
-                $_SESSION['db']['hostname'] = 'localhost';
-                $_SESSION['db']['username'] = 'root';
-                $_SESSION['db']['name'] = 'ph7cms';
-                $_SESSION['db']['prefix'] = 'ph7_';
-                $_SESSION['db']['port'] = 3306;
-                $_SESSION['db']['charset'] = 'UTF8';
+
+                $_SESSION['db']['hostname'] = DbDefaultConfig::HOSTNAME;
+                $_SESSION['db']['username'] = DbDefaultConfig::USERNAME;
+                $_SESSION['db']['name'] = DbDefaultConfig::NAME;
+                $_SESSION['db']['prefix'] = DbDefaultConfig::PREFIX;
+                $_SESSION['db']['port'] = DbDefaultConfig::PORT;
+                $_SESSION['db']['charset'] = DbDefaultConfig::CHARSET;
 
                 $_SESSION['val']['bug_report_email'] = '';
                 $_SESSION['val']['ffmpeg_path'] = ffmpeg_path();
@@ -281,6 +282,14 @@ class InstallController extends Controller
         } else {
             redirect(PH7_URL_SLUG_INSTALL . 'config_path');
         }
+
+        // Assign the sample DB config values to the template
+        $this->oView->assign('def_db_hostname', DbDefaultConfig::HOSTNAME);
+        $this->oView->assign('def_db_username', DbDefaultConfig::USERNAME);
+        $this->oView->assign('def_db_name', DbDefaultConfig::NAME);
+        $this->oView->assign('def_db_prefix', DbDefaultConfig::PREFIX);
+        $this->oView->assign('def_db_port', DbDefaultConfig::PORT);
+        $this->oView->assign('def_db_charset', DbDefaultConfig::CHARSET);
 
         $this->oView->assign('sept_number', 4);
         $this->oView->assign('errors', @$aErrors);

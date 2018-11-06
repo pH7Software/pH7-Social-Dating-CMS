@@ -12,12 +12,12 @@
         <p>
             <span class="mandatory">*</span> <label for="db_hostname">{$LANG.db_hostname}:</label><br />
             <span class="small">{$LANG.desc_db_hostname}</span><br />
-            <input type="text" name="db_hostname" id="db_hostname" onfocus="if ('localhost' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'localhost';" value="{$smarty.session.db.hostname|escape}" required="required" />
+            <input type="text" name="db_hostname" id="db_hostname" onfocus="if ('{$def_db_hostname}' == this.value) this.value='';" onblur="if ('' == this.value) this.value = '{$def_db_hostname}';" value="{$smarty.session.db.hostname|escape}" required="required" />
         </p>
 
         <p>
             <span class="mandatory">*</span> <label for="db_username">{$LANG.db_username}:</label><br />
-            <input type="text" name="db_username" id="db_username" onfocus="if ('root' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'root';" value="{$smarty.session.db.username|escape}" required="required" />
+            <input type="text" name="db_username" id="db_username" onfocus="if ('{$def_db_username}' == this.value) this.value='';" onblur="if ('' == this.value) this.value = '{$def_db_username}';" value="{$smarty.session.db.username|escape}" required="required" />
         </p>
 
         <p>
@@ -27,25 +27,25 @@
 
         <p>
             <span class="mandatory">*</span> <label for="db_name">{$LANG.db_name}:</label><br />
-            <input type="text" name="db_name" id="db_name" onfocus="if ('ph7cms' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'ph7cms';" value="{$smarty.session.db.name|escape}" required="required" />
+            <input type="text" name="db_name" id="db_name" onfocus="if ('{$def_db_name}' == this.value) this.value='';" onblur="if ('' == this.value) this.value = '{$def_db_name}';" value="{$smarty.session.db.name|escape}" required="required" />
         </p>
 
         <p>
             <span class="mandatory">*</span> <label for="db_prefix">{$LANG.db_prefix}:</label><br />
             <span class="small">{$LANG.desc_db_prefix}</span><br />
-            <input type="text" name="db_prefix" id="db_prefix" pattern="[\w_]+" onfocus="if ('ph7_' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'ph7_';" value="{$smarty.session.db.prefix|escape}" required="required" />
+            <input type="text" name="db_prefix" id="db_prefix" pattern="[\w_]+" onfocus="if ('{$def_db_prefix}' == this.value) this.value='';" onblur="if ('' == this.value) this.value = '{$def_db_prefix}';" value="{$smarty.session.db.prefix|escape}" required="required" />
         </p>
 
         <p>
             <span class="mandatory">*</span> <label for="db_charset">{$LANG.db_encoding}:</label><br />
             <span class="small">{$LANG.desc_db_encoding}</span><br />
-            <input type="text" name="db_charset" id="db_charset" onfocus="if ('UTF8' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'UTF8';" value="{$smarty.session.db.charset|escape}" required="required" />
+            <input type="text" name="db_charset" id="db_charset" onfocus="if ('{$def_db_charset}' == this.value) this.value='';" onblur="if ('' == this.value) this.value = '{$def_db_charset}';" value="{$smarty.session.db.charset|escape}" required="required" />
         </p>
 
         <p>
             <span class="mandatory">*</span> <label for="db_port">{$LANG.db_port}:</label><br />
             <span class="small">{$LANG.desc_db_port}</span><br />
-            <input type="text" name="db_port" id="db_port" onfocus="if ('3306' == this.value) this.value='';" onblur="if ('' == this.value) this.value = '3306';" value="{$smarty.session.db.port|escape}" required="required" />
+            <input type="text" name="db_port" id="db_port" onfocus="if ('{$def_db_port}' == this.value) this.value='';" onblur="if ('' == this.value) this.value = '{$def_db_port}';" value="{$smarty.session.db.port|escape}" required="required" />
         </p>
 
         <p>
