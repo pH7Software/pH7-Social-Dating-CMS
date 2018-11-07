@@ -1,6 +1,6 @@
 <div class="box-left col-md-3 col-lg-3 col-xl-2">
     <div role="search" class="design-box">
-        <h2>{lang 'Buyer Search'}</h2>
+        <h2>{lang 'Search Buyers'}</h2>
         {{ SearchBuyerForm::display(PH7_WIDTH_SEARCH_FORM) }}
     </div>
 </div>
