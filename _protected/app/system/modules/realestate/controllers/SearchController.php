@@ -15,13 +15,13 @@ class SearchController extends Controller
 {
     public function buyer()
     {
-        $this->view->page_title = $this->view->h1_title = t('Buyer Search');
+        $this->view->page_title = $this->view->h1_title = t('Search Buyers');
         $this->output();
     }
 
     public function seller()
     {
-        $this->view->page_title = $this->view->h1_title = t('Seller Search');
+        $this->view->page_title = $this->view->h1_title = t('Search Sellers');
         $this->output();
     }
 }
