@@ -117,7 +117,7 @@
     <!-- End Popups -->
 
     <!-- Begin Content -->
-    <div role="main" class="container" id="content">
+    <main role="main" class="container" id="content">
       {* Alert Message *}
       {{ $design->flashMsg() }}
       <div class="msg"></div>
@@ -138,7 +138,7 @@
           {/if}
         </div>
       </div>
-    </div>
+    </main>
     <div role="banner" class="center ad_468_60">
         {designModel.ad(468, 60)}
     </div>
