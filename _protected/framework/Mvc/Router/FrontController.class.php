@@ -746,7 +746,7 @@ final class FrontController
     }
 
     /**
-     * We display an error page if someone request "index.php" filename in order to avoid disclosing and explicitly request the PHP index filename.
+     * We display an error page if someone request "index.php" filename in order to avoid disclosing and explicitly request the PHP index filename (e.g. for security reasons...).
      * Otherwise, if the URL rewrite extension is not enabled, we redirect the page to index.php file (then [URL]/index.php/[REQUEST]/ ).
      *
      * @see self::notFound()
@@ -759,7 +759,7 @@ final class FrontController
     {
         // The following code will be useless when pH7CMS will be able to work without mod_rewrite \\
         if ($this->oHttpRequest->currentUrl() === PH7_URL_ROOT . static::INDEX_FILE) {
-            $this->notFound('In "production" mode, it displays an error page if the index.php filename is called, to avoid disclosing and explicitly request the language index filename.');
+            $this->notFound('In "production" mode, it simulates "404 page not found" if the index.php filename is called, to avoid disclosing the language index filename (e.g. for security reasons...).');
         }
 
         /*
@@ -771,7 +771,7 @@ final class FrontController
         }
         elseif (\PH7\Framework\Server\Server::isRewriteMod() && false !== strpos($this->oHttpRequest->currentUrl(), static::INDEX_FILE))
         {
-            $this->notFound('If we are in production mode, we display an error page if it is on the index.php file to indicate no file extension in order to avoid utilization of a security vulnerability in the PHP programming language.');
+            $this->notFound('In "production" mode, it simulates "404 page not found" if the index.php filename is called, to avoid disclosing the language index filename (e.g. for security reasons...).');
         }
 
         */

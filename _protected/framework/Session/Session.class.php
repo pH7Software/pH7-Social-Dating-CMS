@@ -147,7 +147,7 @@ class Session
 
         /**
          * In localhost mode, security session_set_cookie_params causing problems in the sessions, so we disable this if we are in localhost mode.
-         * Otherwise if we are in production mode, we activate this.
+         * Otherwise, if we are in production mode, we activate it.
          */
         if (!Server::isLocalHost()) {
             $iTime = (int)Config::getInstance()->values['session']['expiration'];
