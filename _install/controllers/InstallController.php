@@ -308,12 +308,12 @@ class InstallController extends Controller
                 session_regenerate_id(true);
 
                 if (empty($_SESSION['val'])) {
-                    $_SESSION['val']['site_name'] = Controller::DEFAULT_SITE_NAME;
+                    $_SESSION['val']['site_name'] = self::DEFAULT_SITE_NAME;
                     $_SESSION['val']['admin_login_email'] = '';
                     $_SESSION['val']['admin_email'] = '';
                     $_SESSION['val']['admin_feedback_email'] = '';
                     $_SESSION['val']['admin_return_email'] = '';
-                    $_SESSION['val']['admin_username'] = Controller::DEFAULT_ADMIN_USERNAME;
+                    $_SESSION['val']['admin_username'] = self::DEFAULT_ADMIN_USERNAME;
                     $_SESSION['val']['admin_first_name'] = '';
                     $_SESSION['val']['admin_last_name'] = '';
                 }
@@ -417,8 +417,8 @@ class InstallController extends Controller
         }
 
 
-        $this->oView->assign('def_site_name', Controller::DEFAULT_SITE_NAME);
-        $this->oView->assign('def_admin_username', Controller::DEFAULT_ADMIN_USERNAME);
+        $this->oView->assign('def_site_name', self::DEFAULT_SITE_NAME);
+        $this->oView->assign('def_admin_username', self::DEFAULT_ADMIN_USERNAME);
         $this->oView->assign('sept_number', 5);
         $this->oView->assign('errors', @$aErrors);
         unset($aErrors);
@@ -559,7 +559,7 @@ class InstallController extends Controller
 
     private function removeCookies()
     {
-        $sCookieName = Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang';
+        $sCookieName = self::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang';
 
         // We are asking the browser to delete the cookie.
         setcookie(
