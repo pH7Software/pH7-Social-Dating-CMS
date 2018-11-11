@@ -18,6 +18,8 @@ use PH7\Framework\Registry\Registry;
 
 class ProviderFactory
 {
+    const VIDEO_MODULE_NAME = 'video';
+
     const INVALID_API_PROVIDER_MESSAGE = 'Invalid API video type. Wrong specified type is: %s';
 
     const YOUTUBE_NAMES = [
@@ -75,6 +77,6 @@ class ProviderFactory
      */
     private static function isVideoModule()
     {
-        return Registry::getInstance()->module === 'video';
+        return Registry::getInstance()->module === self::VIDEO_MODULE_NAME;
     }
 }
