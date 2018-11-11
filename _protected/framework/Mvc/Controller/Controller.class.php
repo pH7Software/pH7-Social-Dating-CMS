@@ -36,7 +36,7 @@ use PH7\MailCoreModel;
 use PH7\UserCore;
 use Teapot\StatusCode;
 
-abstract class Controller extends Core
+abstract class Controller extends Core implements Controllable
 {
     const CORE_MAIN_MODULE = 'user';
     const MAINTENANCE_DURATION_SECONDS = 3600;
