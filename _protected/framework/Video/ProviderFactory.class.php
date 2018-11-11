@@ -73,6 +73,8 @@ class ProviderFactory
     }
 
     /**
+     * Check if the page request is done from the "video" module.
+     *
      * @return bool
      */
     private static function isVideoModule()
