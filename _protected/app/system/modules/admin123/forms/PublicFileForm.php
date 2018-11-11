@@ -44,9 +44,9 @@ class PublicFileForm
     }
 
     /**
-     * Get the full file path and prevent path traversal and the null byte attacks.
+     * Get the full file path and prevent path traversal and null byte attacks.
      *
-     * @return bool|string
+     * @return bool|string The canonicalized absolute path, or FALSE on failure.
      */
     private static function getRealPath()
     {
