@@ -273,9 +273,11 @@ abstract class Controller extends Core implements Controllable
     }
 
     /**
+     * Check if a "not logged in" visitor is on the website's homepage.
+     *
      * @param bool $bIsUserLogged
      *
-     * @return bool TRUE if visitor is on the homepage (index).
+     * @return bool TRUE if visitor is on the homepage (index), FALSE otherwise.
      */
     private function isGuestOnHomepage($bIsUserLogged)
     {
