@@ -14,7 +14,7 @@
         <p>
             <span class="mandatory">*</span> <label for="admin_username">{$LANG.admin_username}:</label><br />
             <span class="small italic">{$smarty.const.PH7_URL_ROOT}<strong>{$smarty.const.PH7_ADMIN_MOD}</strong></span><br />
-            <input type="text" name="admin_username" id="admin_username" onfocus="if('administrator' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'administrator';" value="{$smarty.session.val.admin_username|escape}" required="required" />
+            <input type="text" name="admin_username" id="admin_username" onfocus="if('{$def_admin_username}' == this.value) this.value='';" onblur="if ('' == this.value) this.value = '{$def_admin_username}';" value="{$smarty.session.val.admin_username|escape}" required="required" />
         </p>
 
         <p>

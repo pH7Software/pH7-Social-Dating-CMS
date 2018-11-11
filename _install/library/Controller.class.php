@@ -22,6 +22,7 @@ abstract class Controller implements Controllable
 
     const SOFTWARE_NAME = 'pH7CMS';
     const DEFAULT_SITE_NAME = 'My Dating WebApp';
+    const DEFAULT_ADMIN_USERNAME = 'administrator';
     const SOFTWARE_PREFIX_COOKIE_NAME = 'pH7';
     const SOFTWARE_WEBSITE = 'http://ph7cms.com';
     const SOFTWARE_REQUIREMENTS_URL = 'http://ph7cms.com/doc/en/requirements';

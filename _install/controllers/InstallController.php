@@ -313,7 +313,7 @@ class InstallController extends Controller
                     $_SESSION['val']['admin_email'] = '';
                     $_SESSION['val']['admin_feedback_email'] = '';
                     $_SESSION['val']['admin_return_email'] = '';
-                    $_SESSION['val']['admin_username'] = 'administrator';
+                    $_SESSION['val']['admin_username'] = Controller::DEFAULT_ADMIN_USERNAME;
                     $_SESSION['val']['admin_first_name'] = '';
                     $_SESSION['val']['admin_last_name'] = '';
                 }
@@ -416,7 +416,9 @@ class InstallController extends Controller
             redirect(PH7_URL_SLUG_INSTALL . 'niche');
         }
 
+
         $this->oView->assign('def_site_name', Controller::DEFAULT_SITE_NAME);
+        $this->oView->assign('def_admin_username', Controller::DEFAULT_ADMIN_USERNAME);
         $this->oView->assign('sept_number', 5);
         $this->oView->assign('errors', @$aErrors);
         unset($aErrors);
