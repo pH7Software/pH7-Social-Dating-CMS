@@ -11,6 +11,7 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Record;
@@ -90,13 +91,13 @@ class StatisticCoreModel extends StatisticModel
         $sSqlQuery = 'SELECT COUNT(profileId) AS totalLogins FROM' . Db::prefix($sTable) . 'WHERE username <> \'' . PH7_GHOST_USERNAME . '\'' . $sSqlDay . $sSqlGender;
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
         if ($bIsDay) {
-            $rStmt->bindValue(':day', $iDay, \PDO::PARAM_INT);
+            $rStmt->bindValue(':day', $iDay, PDO::PARAM_INT);
         }
         if ($bIsGender) {
-            $rStmt->bindValue(':gender', $sGender, \PDO::PARAM_STR);
+            $rStmt->bindValue(':gender', $sGender, PDO::PARAM_STR);
         }
         $rStmt->execute();
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        $oRow = $rStmt->fetch(PDO::FETCH_OBJ);
 
         return (int)$oRow->totalLogins;
     }
@@ -131,7 +132,7 @@ class StatisticCoreModel extends StatisticModel
 
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(messageId) AS totalMails FROM' . Db::prefix(DbTableName::MESSAGE) . $sSqlDay);
         $rStmt->execute();
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        $oRow = $rStmt->fetch(PDO::FETCH_OBJ);
         Db::free($rStmt);
         return (int)$oRow->totalMails;
     }
@@ -181,7 +182,7 @@ class StatisticCoreModel extends StatisticModel
 
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(commentId) AS totalComments FROM' . Db::prefix(CommentCoreModel::TABLE_PREFIX_NAME . $sTable) . $sSqlDay);
         $rStmt->execute();
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        $oRow = $rStmt->fetch(PDO::FETCH_OBJ);
 
         return (int)$oRow->totalComments;
     }
