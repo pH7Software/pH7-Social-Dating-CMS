@@ -31,6 +31,23 @@ final class PageDna
 -->\n
 COMMENT;
 
+    const COMMENT_BUILT_WITH_PH7CMS = <<<COMMENT
+        \n<!--
+     BUILT WITH pH7CMS – http://ph7cms.com
+     https://github.com/pH7Software/pH7-Social-Dating-CMS
+
+
+            m    m mmmmmm   mmm  m    m  mmmm
+     mmmm   #    #     #" m"   " ##  ## #"   "
+     #" "#  #mmmm#    m"  #      # ## # "#mmm
+     #   #  #    #   m"   #      # "" #     "#
+     ##m#"  #    #  m"     "mmm" #    # "mmm#"
+     #
+     "
+
+-->\n
+COMMENT;
+
     const COMMENT_FOR_YOU = <<<COMMENT
         \n<!--
 
@@ -89,11 +106,14 @@ COMMENT;
 
     const COMMENTS = [
         self::COMMENT_PH7CMS,
+        self::COMMENT_BUILT_WITH_PH7CMS,
         self::COMMENT_FOR_YOU,
         self::COMMENT_SOCIAL_DATING_SOFTWARE
     ];
 
     /**
+     * Generates HTML DNA comments.
+     *
      * @return string
      */
     public static function generateHtmlComment()
