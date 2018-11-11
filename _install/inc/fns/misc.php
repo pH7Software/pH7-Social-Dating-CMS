@@ -295,7 +295,15 @@ function generate_hash($iLength = 80)
 {
     $sPrefix = (string)mt_rand();
 
-    return substr(hash('whirlpool', time() . hash('sha512', getenv('REMOTE_ADDR') . uniqid($sPrefix, true) . microtime(true) * 999999999999)), 0, $iLength);
+    return substr(
+        hash(
+            'whirlpool',
+            time() . hash('sha512',
+                getenv('REMOTE_ADDR') . uniqid($sPrefix, true) . microtime(true) * 999999999999)
+        ),
+        0,
+        $iLength
+    );
 }
 
 /**
