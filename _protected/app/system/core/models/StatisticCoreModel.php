@@ -179,7 +179,7 @@ class StatisticCoreModel extends StatisticModel
 
         $sSqlDay = ($iDay > 0) ? ' WHERE (createdDate + INTERVAL ' . $iDay . ' DAY) > NOW()' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(commentId) AS totalComments FROM' . Db::prefix('comments_' . $sTable) . $sSqlDay);
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(commentId) AS totalComments FROM' . Db::prefix(CommentCoreModel::TABLE_PREFIX_NAME . $sTable) . $sSqlDay);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
 

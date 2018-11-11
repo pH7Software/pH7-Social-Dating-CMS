@@ -178,7 +178,7 @@ class DatabaseCoreCron extends Cron
         if ($iCleanComment > 0) {
             $aCommentMods = ['blog', 'note', 'picture', 'video', 'game', 'profile'];
             foreach ($aCommentMods as $sSuffixTable) {
-                if ($iRow = ($this->pruningDb($iCleanComment, 'comments_' . $sSuffixTable, 'updatedDate') > 0)) {
+                if ($iRow = ($this->pruningDb($iCleanComment, CommentCoreModel::TABLE_PREFIX_NAME . $sSuffixTable, 'updatedDate') > 0)) {
                     echo t('Deleted %0% %1% comment(s) ... OK!', $iRow, $sSuffixTable) . '<br />';
                 }
             }
@@ -226,7 +226,7 @@ class DatabaseCoreCron extends Cron
      */
     private function isTableInvalid($sTable)
     {
-        return strstr($sTable, 'comments_') === false &&
+        return strstr($sTable, CommentCoreModel::TABLE_PREFIX_NAME) === false &&
             $sTable !== DbTableName::MESSAGE && $sTable !== DbTableName::MESSENGER;
     }
 }
