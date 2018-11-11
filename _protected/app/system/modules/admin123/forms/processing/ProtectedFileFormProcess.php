@@ -28,6 +28,10 @@ class ProtectedFileFormProcess extends Form
         $sMsg = $bStatus ? t('Changes saved!') : t('The file could not be saved. Please check your file permissions (must be in  write mode)');
         $sMsgType = $bStatus ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
 
-        Header::redirect($this->httpRequest->previousPage(), $sMsg, $sMsgType);
+        Header::redirect(
+            $this->httpRequest->previousPage(),
+            $sMsg,
+            $sMsgType
+        );
     }
 }
