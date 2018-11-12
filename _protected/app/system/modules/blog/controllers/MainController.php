@@ -18,8 +18,10 @@ use PH7\Framework\Url\Header;
 use stdClass;
 use Teapot\StatusCode;
 
-class MainController extends Controller implements ImageTaggable
+class MainController extends Controller
 {
+    use ImageTaggable;
+
     const POSTS_PER_PAGE = 10;
     const CATEGORIES_PER_PAGE = 10;
     const ITEMS_MENU_TOP_VIEWS = 5;
@@ -201,7 +203,7 @@ class MainController extends Controller implements ImageTaggable
         $this->output();
     }
 
-    public function imageToSocialMetaTags(stdClass $oPost)
+    protected function imageToSocialMetaTags(stdClass $oPost)
     {
         $this->view->image_social_meta_tag = Blog::getThumb($oPost->blogId);
     }

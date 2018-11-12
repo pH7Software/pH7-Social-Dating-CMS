@@ -17,8 +17,10 @@ use PH7\Framework\Url\Header;
 use stdClass;
 use Teapot\StatusCode;
 
-class MainController extends Controller implements ImageTaggable
+class MainController extends Controller
 {
+    use ImageTaggable;
+
     const ALBUMS_PER_PAGE = 16;
     const PHOTOS_PER_PAGE = 10;
 
@@ -277,7 +279,7 @@ class MainController extends Controller implements ImageTaggable
         $this->output();
     }
 
-    public function imageToSocialMetaTags(stdClass $oPicture)
+    protected function imageToSocialMetaTags(stdClass $oPicture)
     {
         $sFilename = str_replace('original', '600', $oPicture->file);
         $sImageUrl = PH7_URL_DATA_SYS_MOD . 'picture/img/' . $oPicture->username . '/' . $oPicture->albumId . '/' . $sFilename;

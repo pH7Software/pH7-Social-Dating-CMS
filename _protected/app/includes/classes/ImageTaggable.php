@@ -10,7 +10,7 @@ namespace PH7;
 
 use stdClass;
 
-interface ImageTaggable
+trait ImageTaggable
 {
     /**
      * Add an image to the social meta tags (for FB, Twitter, Google, ...).
@@ -19,5 +19,5 @@ interface ImageTaggable
      *
      * @return void
      */
-    public function imageToSocialMetaTags(stdClass $oData);
+    abstract protected function imageToSocialMetaTags(stdClass $oData);
 }

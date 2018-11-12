@@ -17,8 +17,10 @@ use PH7\Framework\Url\Header;
 use stdClass;
 use Teapot\StatusCode;
 
-class MainController extends Controller implements ImageTaggable
+class MainController extends Controller
 {
+    use ImageTaggable;
+
     const ALBUMS_PER_PAGE = 14;
     const VIDEOS_PER_PAGE = 10;
 
@@ -287,7 +289,7 @@ class MainController extends Controller implements ImageTaggable
         $this->output();
     }
 
-    public function imageToSocialMetaTags(stdClass $oVideo)
+    protected function imageToSocialMetaTags(stdClass $oVideo)
     {
         $sImageUrl = PH7_URL_DATA_SYS_MOD . 'video/file/' . $oVideo->username . '/' . $oVideo->albumId . '/' . $oVideo->thumb;
         $this->view->image_social_meta_tag = $sImageUrl;

@@ -19,8 +19,10 @@ use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Url\Url;
 use stdClass;
 
-abstract class ProfileBaseController extends Controller implements ImageTaggable
+abstract class ProfileBaseController extends Controller
 {
+    use ImageTaggable;
+
     /**
      * Default Map settings.
      * These constants are likely to be modified in the child class
@@ -61,7 +63,7 @@ abstract class ProfileBaseController extends Controller implements ImageTaggable
      *
      * @return void
      */
-    public function imageToSocialMetaTags(stdClass $oUser)
+    protected function imageToSocialMetaTags(stdClass $oUser)
     {
         $sAvatarImageUrl = $this->design->getUserAvatar($oUser->username, $oUser->sex, 400, false);
         $this->view->image_social_meta_tag = $sAvatarImageUrl;
