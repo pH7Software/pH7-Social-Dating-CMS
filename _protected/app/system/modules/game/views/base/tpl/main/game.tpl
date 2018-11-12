@@ -25,7 +25,7 @@
             <div>
                 <a class="btn btn-default btn-sm" href="{{ $design->url('game','admin','edit',"$game->title,$game->gameId") }}">{lang 'Edit this Game'}</a> |
                 <div class="btn btn-default btn-sm inline">
-                    {{ LinkCoreForm::display(t('Delete this Game'), 'game', 'admin', 'delete', array('id'=>$game->gameId, 'thumb'=>$game->thumb, 'file'=>$game->file)) }}
+                    {{ LinkCoreForm::display(t('Delete this Game'), 'game', 'admin', 'delete', ['id'=>$game->gameId, 'thumb'=>$game->thumb, 'file'=>$game->file]) }}
                 </div>
             </div>
         {/if}
