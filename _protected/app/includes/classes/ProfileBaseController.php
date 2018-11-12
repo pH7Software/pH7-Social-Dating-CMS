@@ -295,13 +295,10 @@ abstract class ProfileBaseController extends Controller
         $this->view->header .= Meta::NOINDEX;
     }
 
-    protected function setProfilePhotoToSocialMetaTags(stdClass $oUser)
+    protected function profilePhotoToSocialMetaTags(stdClass $oUser)
     {
         $sAvatarImageUrl = $this->design->getUserAvatar($oUser->username, $oUser->sex, 400, false);
-
-        $this->view->header .= '<meta name="thumbnail" content="' . $sAvatarImageUrl . '" />';
-        $this->view->header .= '<meta name="twitter:image" content="' . $sAvatarImageUrl . '" />';
-        $this->view->header .= '<meta property="og:image" content="' . $sAvatarImageUrl . '" />';
+        $this->view->image_social_meta_tag = $sAvatarImageUrl;
     }
 
     /**
