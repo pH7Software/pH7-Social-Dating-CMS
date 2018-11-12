@@ -12,9 +12,10 @@ use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Model\Statistic as StatModel;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
+use stdClass;
 use Teapot\StatusCode;
 
-class MainController extends Controller
+class MainController extends Controller implements ImageTaggable
 {
     const GAMES_PER_PAGE = 10;
     const CATEGORIES_PER_PAGE = 10;
@@ -29,7 +30,7 @@ class MainController extends Controller
     /**
      * @internal Protected access because AdminController derived class uses these attributes
      */
-    /** @var \stdClass */
+    /** @var stdClass */
     protected $oGameModel;
 
     /** @var Page */
@@ -107,6 +108,7 @@ class MainController extends Controller
             $this->view->h2_title = $this->sTitle;
             $this->view->downloads = $this->oGameModel->getDownloadStat($oGame->gameId);
             $this->view->views = StatModel::getView($oGame->gameId, DbTableName::GAME);
+            $this->imageToSocialMetaTags($oGame);
 
             $this->view->game = $oGame;
 
@@ -239,6 +241,12 @@ class MainController extends Controller
         $this->notFound();
         $this->manualTplInclude('game.tpl');
         $this->output();
+    }
+
+    public function imageToSocialMetaTags(stdClass $oGame)
+    {
+        $sThumbnailUrl = PH7_URL_DATA_SYS_MOD . 'game/img/thumb/' . $oGame->thumb;
+        $this->view->image_social_meta_tag = $sThumbnailUrl;
     }
 
     /**

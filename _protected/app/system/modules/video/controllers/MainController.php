@@ -14,9 +14,10 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Url\Header;
+use stdClass;
 use Teapot\StatusCode;
 
-class MainController extends Controller
+class MainController extends Controller implements ImageTaggable
 {
     const ALBUMS_PER_PAGE = 14;
     const VIDEOS_PER_PAGE = 10;
@@ -180,6 +181,7 @@ class MainController extends Controller
             $this->view->meta_keywords = t('video,movie,videos,video sharing,music,gallery,%0%,%1%,%2%', str_replace(' ', ',', $sTitle), $oVideo->firstName, $oVideo->username);
             $this->view->h1_title = $this->sTitle;
             $this->view->video = $oVideo;
+            $this->imageToSocialMetaTags($oVideo);
 
             //Set Video Statistics
             Statistic::setView($oVideo->videoId, DbTableName::VIDEO);
@@ -283,6 +285,12 @@ class MainController extends Controller
 
         $this->manualTplInclude('album.tpl');
         $this->output();
+    }
+
+    public function imageToSocialMetaTags(stdClass $oVideo)
+    {
+        $sImageUrl = PH7_URL_DATA_SYS_MOD . 'video/file/' . $oVideo->username . '/' . $oVideo->albumId . '/' . $oVideo->thumb;
+        $this->view->image_social_meta_tag = $sImageUrl;
     }
 
     /**

@@ -14,9 +14,10 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Url\Header;
+use stdClass;
 use Teapot\StatusCode;
 
-class MainController extends Controller
+class MainController extends Controller implements ImageTaggable
 {
     const ALBUMS_PER_PAGE = 16;
     const PHOTOS_PER_PAGE = 10;
@@ -171,6 +172,7 @@ class MainController extends Controller
             $this->view->meta_keywords = t('picture,photo,pictures,photos,album,albums,photo album,picture album,gallery,%0%,%1%,%2%', str_replace(' ', ',', $sTitle), $oPicture->firstName, $oPicture->username);
             $this->view->h1_title = $this->sTitle;
             $this->view->picture = $oPicture;
+            $this->imageToSocialMetaTags($oPicture);
 
             //Set Photo Statistics
             Statistic::setView($oPicture->pictureId, DbTableName::PICTURE);
@@ -273,6 +275,13 @@ class MainController extends Controller
 
         $this->manualTplInclude('album.tpl');
         $this->output();
+    }
+
+    public function imageToSocialMetaTags(stdClass $oPicture)
+    {
+        $sFilename = str_replace('original', '600', $oPicture->file);
+        $sImageUrl = PH7_URL_DATA_SYS_MOD . 'picture/img/' . $oPicture->username . '/' . $oPicture->albumId . '/' . $sFilename;
+        $this->view->image_social_meta_tag = $sImageUrl;
     }
 
     /**
