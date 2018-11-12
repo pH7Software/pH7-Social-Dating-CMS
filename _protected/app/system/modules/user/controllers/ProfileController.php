@@ -60,14 +60,14 @@ class ProfileController extends ProfileBaseController
                 $this->initPrivacy($oUserModel, $oUser);
             }
 
-            // Gets the Profile background
+            // Assign the profile background image to the view
             $this->view->img_background = $oUserModel->getBackground($this->iProfileId, 1);
 
             $oFields = $oUserModel->getInfoFields($this->iProfileId);
 
             unset($oUserModel);
 
-            // Age
+            // Date of birth
             $this->view->birth_date = $oUser->birthDate;
             $this->view->birth_date_formatted = $this->dateTime->get($oUser->birthDate)->date();
 
