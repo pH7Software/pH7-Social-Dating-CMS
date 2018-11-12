@@ -18,7 +18,7 @@ use PH7\Framework\Url\Header;
 use stdClass;
 use Teapot\StatusCode;
 
-class MainController extends Controller
+class MainController extends Controller implements ImageTaggable
 {
     const POSTS_PER_PAGE = 10;
     const CATEGORIES_PER_PAGE = 10;
@@ -104,6 +104,8 @@ class MainController extends Controller
                     'updated_date' => $this->dateTime->get($oPost->updatedDate)->dateTime()
                 ];
                 $this->view->assigns($aVars);
+
+                $this->imageToSocialMetaTags($oPost);
 
                 // Set Blogs Post Views Statistics
                 Statistic::setView($oPost->blogId, DbTableName::BLOG);
@@ -198,6 +200,11 @@ class MainController extends Controller
 
         $this->manualTplInclude('index.tpl');
         $this->output();
+    }
+
+    public function imageToSocialMetaTags(stdClass $oPost)
+    {
+        $this->view->image_social_meta_tag = Blog::getThumb($oPost->blogId);
     }
 
     /**
