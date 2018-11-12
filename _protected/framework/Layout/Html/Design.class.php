@@ -381,7 +381,7 @@ class Design
                 $bSoftwareName = true;
             }
 
-            echo ($bSoftwareName ? '<span class="italic">' . t('Big thanks to') : ''), ' <strong>', ($bLink ? '<a class="underline" href="' . Kernel::SOFTWARE_WEBSITE . '" title="' . Kernel::SOFTWARE_DESCRIPTION . '">' : ''), ($bSoftwareName ? Kernel::SOFTWARE_NAME : ''), ($bVersion ? ' ' . Kernel::SOFTWARE_VERSION : ''), ($bLink ? '</a>' : ''), ($bSoftwareName ? '</strong>❤️</span>' : '');
+            echo ($bSoftwareName ? '<span class="italic">' . t('Big thanks to') : ''), ' <strong>', ($bLink ? '<a class="underline" href="' . Kernel::SOFTWARE_WEBSITE . '" title="' . Kernel::SOFTWARE_DESCRIPTION . '">' : ''), ($bSoftwareName ? Kernel::SOFTWARE_NAME : ''), ($bVersion ? ' ' . Kernel::SOFTWARE_VERSION : ''), ($bLink ? '</a>' : ''), ($bSoftwareName ? '</strong><span role="img" aria-label="love">❤️</span></span>' : '');
         }
 
         if ($bComment) {
@@ -405,7 +405,7 @@ class Design
      */
     final public function smallLink()
     {
-        echo '<strong>', t('THANKS to'), ' <a href="', Kernel::SOFTWARE_WEBSITE, '" title="', Kernel::SOFTWARE_DESCRIPTION, '">', Kernel::SOFTWARE_NAME, '</a> ', Kernel::SOFTWARE_VERSION, '!</strong> ❤️';
+        echo '<strong>', t('THANKS to'), ' <a href="', Kernel::SOFTWARE_WEBSITE, '" title="', Kernel::SOFTWARE_DESCRIPTION, '">', Kernel::SOFTWARE_NAME, '</a> ', Kernel::SOFTWARE_VERSION, '!</strong> <span role="img" aria-label="love">❤️</span>';
     }
 
     /**
