@@ -295,6 +295,13 @@ abstract class ProfileBaseController extends Controller
         $this->view->header .= Meta::NOINDEX;
     }
 
+    /**
+     * Enable the social meta tags (FB, Twitter, ...) with the profile photo.
+     *
+     * @param stdClass $oUser
+     *
+     * @return void
+     */
     protected function profilePhotoToSocialMetaTags(stdClass $oUser)
     {
         $sAvatarImageUrl = $this->design->getUserAvatar($oUser->username, $oUser->sex, 400, false);
