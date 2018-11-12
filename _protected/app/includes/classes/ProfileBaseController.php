@@ -47,6 +47,14 @@ abstract class ProfileBaseController extends Controller
      */
     abstract public function index();
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        // Initialize header tpl variable, to make sure it won't be overwritten later on
+        $this->view->header = '';
+    }
+
     /**
      * Privacy Profile.
      *
@@ -284,7 +292,16 @@ abstract class ProfileBaseController extends Controller
      */
     protected function excludeProfileFromSearchEngines()
     {
-        $this->view->header = Meta::NOINDEX;
+        $this->view->header .= Meta::NOINDEX;
+    }
+
+    protected function setProfilePhotoToSocialMetaTags(stdClass $oUser)
+    {
+        $sAvatarImageUrl = $this->design->getUserAvatar($oUser->username, $oUser->sex, 400, false);
+
+        $this->view->header .= '<meta name="thumbnail" content="' . $sAvatarImageUrl . '" />';
+        $this->view->header .= '<meta name="twitter:image" content="' . $sAvatarImageUrl . '" />';
+        $this->view->header .= '<meta property="og:image" content="' . $sAvatarImageUrl . '" />';
     }
 
     /**
