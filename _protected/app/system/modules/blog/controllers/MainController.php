@@ -104,7 +104,6 @@ class MainController extends Controller implements ImageTaggable
                     'updated_date' => $this->dateTime->get($oPost->updatedDate)->dateTime()
                 ];
                 $this->view->assigns($aVars);
-
                 $this->imageToSocialMetaTags($oPost);
 
                 // Set Blogs Post Views Statistics
