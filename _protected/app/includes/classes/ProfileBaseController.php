@@ -19,7 +19,7 @@ use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Url\Url;
 use stdClass;
 
-abstract class ProfileBaseController extends Controller
+abstract class ProfileBaseController extends Controller implements ImageTaggable
 {
     /**
      * Default Map settings.
@@ -52,6 +52,19 @@ abstract class ProfileBaseController extends Controller
 
         // Initialize header tpl variable, to make sure it won't be overwritten later on
         $this->view->header = '';
+    }
+
+    /**
+     * Enable the social meta tags (FB, Twitter, ...) with the profile photo.
+     *
+     * @param stdClass $oUser
+     *
+     * @return void
+     */
+    public function imageToSocialMetaTags(stdClass $oUser)
+    {
+        $sAvatarImageUrl = $this->design->getUserAvatar($oUser->username, $oUser->sex, 400, false);
+        $this->view->image_social_meta_tag = $sAvatarImageUrl;
     }
 
     /**
@@ -292,19 +305,6 @@ abstract class ProfileBaseController extends Controller
     protected function excludeProfileFromSearchEngines()
     {
         $this->view->header .= Meta::NOINDEX;
-    }
-
-    /**
-     * Enable the social meta tags (FB, Twitter, ...) with the profile photo.
-     *
-     * @param stdClass $oUser
-     *
-     * @return void
-     */
-    protected function profilePhotoToSocialMetaTags(stdClass $oUser)
-    {
-        $sAvatarImageUrl = $this->design->getUserAvatar($oUser->username, $oUser->sex, 400, false);
-        $this->view->image_social_meta_tag = $sAvatarImageUrl;
     }
 
     /**
