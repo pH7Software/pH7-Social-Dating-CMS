@@ -57,19 +57,6 @@ abstract class ProfileBaseController extends Controller
     }
 
     /**
-     * Enable the social meta tags (FB, Twitter, ...) with the profile photo.
-     *
-     * @param stdClass $oUser
-     *
-     * @return void
-     */
-    protected function imageToSocialMetaTags(stdClass $oUser)
-    {
-        $sAvatarImageUrl = $this->design->getUserAvatar($oUser->username, $oUser->sex, 400, false);
-        $this->view->image_social_meta_tag = $sAvatarImageUrl;
-    }
-
-    /**
      * Privacy Profile.
      *
      * @param UserCoreModel $oUserModel
@@ -307,6 +294,19 @@ abstract class ProfileBaseController extends Controller
     protected function excludeProfileFromSearchEngines()
     {
         $this->view->header .= Meta::NOINDEX;
+    }
+
+    /**
+     * Enable the social meta tags (FB, Twitter, ...) with the profile photo.
+     *
+     * @param stdClass $oUser
+     *
+     * @return void
+     */
+    protected function imageToSocialMetaTags(stdClass $oUser)
+    {
+        $sAvatarImageUrl = $this->design->getUserAvatar($oUser->username, $oUser->sex, 400, false);
+        $this->view->image_social_meta_tag = $sAvatarImageUrl;
     }
 
     /**
