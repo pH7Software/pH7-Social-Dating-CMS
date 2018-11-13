@@ -106,8 +106,8 @@ abstract class Controller extends Core implements Controllable
             Http::setHeadersByCode(StatusCode::NOT_FOUND);
         }
 
-        $this->view->page_title = (!empty($sMsg)) ? t('%0% - Page Not Found', $sMsg) : t('Page Not Found');
-        $this->view->h1_title = (!empty($sMsg)) ? $sMsg : t('Whoops! The page you requested was not found.');
+        $this->view->page_title = !empty($sMsg) ? t('%0% - Page Not Found', $sMsg) : t('Page Not Found');
+        $this->view->h1_title = !empty($sMsg) ? $sMsg : t('Whoops! The page you requested was not found.');
 
         $sErrorDesc = t('You may have clicked an expired link or mistyped the address. Some web addresses are case sensitive.') .
             '<br /><strong><em>' . t('Suggestions:') .
