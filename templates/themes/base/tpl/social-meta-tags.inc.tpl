@@ -11,8 +11,12 @@
 <meta name="twitter:description" content="{social_meta_desc}" />
 <meta name="twitter:url" content="{current_url}" />
 
+<meta itemprop="name" content="{social_meta_title}" />
+<meta itemprop="description" content="{social_meta_desc}" />
+
 {if !empty($image_social_meta_tag)}
     <meta name="thumbnail" content="{image_social_meta_tag}" />
     <meta name="twitter:image" content="{image_social_meta_tag}" />
     <meta property="og:image" content="{image_social_meta_tag}" />
+    <meta itemprop="image" content="{image_social_meta_tag}" />
 {/if}
