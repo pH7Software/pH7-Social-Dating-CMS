@@ -14,7 +14,7 @@ $sHtml = '';
 
 /*** Begin Contents ***/
 
-$sHtml .= t('Done!');
+$sHtml .= t("Hooray! It's all done :)");
 
 /*** End Contents ***/
 
