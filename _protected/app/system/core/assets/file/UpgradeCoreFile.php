@@ -231,7 +231,7 @@ class UpgradeCore
                                 $this->sHtml .= '<p>' . t('Please delete the upgrade folder using an FTP client or SSH.') . '</p>';
                             }
 
-                            $this->sHtml .= '<p class="bold underline">' . t('Conclusion:') . '</p>';
+                            $this->sHtml .= '<p class="bold underline">' . t('Conclusion Message:') . '</p>';
                             $this->sHtml .= $this->readInstruction(static::INST_CONCL_FILE);
                         } else {
                             $this->addErrorMessagesToLayout();

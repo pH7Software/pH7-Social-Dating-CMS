@@ -413,7 +413,7 @@ msgid "Please delete the upgrade folder using an FTP client or SSH."
 msgstr ""
 
 #: _protected/app/system/core/assets/file/UpgradeCoreFile.php:233
-msgid "Conclusion:"
+msgid "Conclusion Message:"
 msgstr ""
 
 #: _protected/app/system/core/assets/file/UpgradeCoreFile.php:292
