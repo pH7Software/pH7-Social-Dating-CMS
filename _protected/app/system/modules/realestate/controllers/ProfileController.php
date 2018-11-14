@@ -53,6 +53,14 @@ class ProfileController extends ProfileBaseController
         $oUser = $oUserModel->readProfile($this->iProfileId);
 
         if ($oUser && $this->doesProfileExist($oUser)) {
+            if (!empty($this->iVisitorId) && $this->iVisitorId !== $this->iProfileId) {
+                UserSpyCoreModel::addUserAction(
+                    $this->iVisitorId,
+                    (new UserCore)->getProfileLink($oUser->username),
+                    t('#%0% user is viewing %1% profile', $this->iVisitorId, $oUser->username)
+                );
+            }
+
             $this->redirectToOtherProfileStyleIfEnabled();
 
             // The administrators can view all profiles and profile visits are not saved.
