@@ -139,6 +139,19 @@ class ProfileController extends ProfileBaseController
     }
 
     /**
+     * Add the General and Tabs Menu stylesheets.
+     *
+     * @return void
+     */
+    protected function addCssFiles()
+    {
+        $this->design->addCss(
+            PH7_LAYOUT,
+            PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS . 'tabs.css,' . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS . 'general.css'
+        );
+    }
+
+    /**
      * @return string
      */
     private function getFriendLinkName()
@@ -194,19 +207,6 @@ class ProfileController extends ProfileBaseController
                 Uri::get('cool-profile-page', 'main', 'index', $this->iProfileId)
             );
         }
-    }
-
-    /**
-     * Add the General and Tabs Menu stylesheets.
-     *
-     * @return void
-     */
-    private function addCssFiles()
-    {
-        $this->design->addCss(
-            PH7_LAYOUT,
-            PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS . 'tabs.css,' . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS . 'general.css'
-        );
     }
 
     /**

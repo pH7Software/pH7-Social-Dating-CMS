@@ -48,6 +48,13 @@ abstract class ProfileBaseController extends Controller
      */
     abstract public function index();
 
+    /**
+     * Add CSS files for the profile page's design.
+     *
+     * @return void
+     */
+    abstract protected function addCssFiles();
+
     public function __construct()
     {
         parent::__construct();
