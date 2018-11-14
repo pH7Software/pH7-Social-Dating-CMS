@@ -32,9 +32,29 @@ class ForgotPasswordForm
         $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_forgot_password', 'form_forgot_password'));
         $oForm->addElement(new \PFBC\Element\Token('forgot_password'));
-        $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', ['id' => 'email', 'onblur' => 'CValid(this.value, this.id,\'user\',\'' . $sTable . '\')', 'required' => 1]));
+        $oForm->addElement(
+            new \PFBC\Element\Email(
+                t('Your Email:'),
+                'mail',
+                [
+                    'id' => 'email',
+                    'onblur' => 'CValid(this.value, this.id,\'user\',\'' . $sTable . '\')',
+                    'required' => 1
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error email"></span>'));
-        $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha'), 'captcha', ['id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:')]));
+        $oForm->addElement(
+            new \PFBC\Element\CCaptcha(
+                t('Captcha'),
+                'captcha',
+                [
+                    'id' => 'ccaptcha',
+                    'onkeyup' => 'CValid(this.value, this.id)',
+                    'description' => t('Enter the below code:')
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         $oForm->addElement(new \PFBC\Element\Button(t('Get a new password'), 'submit', ['icon' => 'key']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
