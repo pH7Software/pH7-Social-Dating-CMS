@@ -58,7 +58,7 @@ class DisableModuleForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_module', 'form_module'));
         $oForm->addElement(new \PFBC\Element\Token('module'));
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'module_id', $aModuleNames, ['value' => $aSelectedMods]));
-        $oForm->addElement(new \PFBC\Element\Button(t('Save')));
+        $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'check']));
         $oForm->render();
     }
 }
