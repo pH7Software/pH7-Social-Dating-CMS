@@ -12,6 +12,13 @@ use PH7\Framework\Date\CDateTime;
 
 class UserSpyCoreModel
 {
+    /**
+     * @param int $iUserId Profile user ID.
+     * @param string $sUrl
+     * @param string $sAction
+     *
+     * @return mixed
+     */
     public static function addUserAction($iUserId, $sUrl, $sAction)
     {
         $sCurrentDate = (new CDateTime)->get()->dateTime('Y-m-d H:i:s');
