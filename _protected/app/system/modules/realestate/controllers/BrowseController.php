@@ -63,6 +63,12 @@ class BrowseController extends Controller
             $this->view->avatarDesign = new AvatarDesignCore;
             $this->view->users = $oUsers;
 
+            UserSpyCoreModel::addUserAction(
+                $this->session->get('member_id'),
+                Uri::get('realestate', 'browse', 'seller'),
+                t('#%0% is searching for sellers.', $this->session->get('member_username'))
+            );
+
             $this->output();
         }
     }
@@ -95,6 +101,12 @@ class BrowseController extends Controller
             $this->view->meta_description = t('Find Buyers near you with %site_name% - Browse Buyers');
             $this->view->avatarDesign = new AvatarDesignCore;
             $this->view->users = $oUsers;
+
+            UserSpyCoreModel::addUserAction(
+                $this->session->get('member_id'),
+                Uri::get('realestate', 'browse', 'buyer'),
+                t('#%0% is searching for buyers.', $this->session->get('member_username'))
+            );
 
             $this->output();
         }
