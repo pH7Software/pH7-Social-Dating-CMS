@@ -14,8 +14,8 @@ class UserSpyCoreModel
 {
     /**
      * @param int $iUserId Profile user ID.
-     * @param string $sUrl
-     * @param string $sAction
+     * @param string $sUrl Use Uri::get() to get the full accurate URL.
+     * @param string $sAction What the user does right now. That's the "action".
      *
      * @return mixed
      */
