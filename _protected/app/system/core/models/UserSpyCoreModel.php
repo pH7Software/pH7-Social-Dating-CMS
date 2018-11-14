@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Mvc\Model\Engine\Db;
 
 class UserSpyCoreModel
 {
