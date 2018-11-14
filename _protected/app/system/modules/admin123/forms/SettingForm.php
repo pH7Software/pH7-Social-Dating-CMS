@@ -75,12 +75,11 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Cookie Consent Bar:'), 'cookie_consent_bar', [1 => t('Enable'), 0 => t('Disable')], ['description' => t('Enable a Cookie Consent Bar to prevent your users that your website uses cookies. This is required by EU Law (if you have visitors from EU countries). The Cookie Bar will only be displayed if the visitor is in the EU.'), 'value' => DbConfig::getSetting('cookieConsentBar'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Show "Powered By" link in footer:'), 'display_powered_by_link', [1 => t('Enable'), 0 => t('Disable (NOT recommended)')], ['description' => t('Are you proud of using pH7CMS brand? Are you proud to say your dating app has been made by the Leader Dating Software provider?'), 'value' => DbConfig::getSetting('displayPoweredByLink'), 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Select(t('Show "Powered By" link in footer:'), 'display_powered_by_link', [1 => t('Enable'), 0 => t('Disable (NOT recommended)')], ['description' => t('Are you proud of using <a href="%0%">pH7CMS</a> brand? Are you proud to say your dating app has been made by the Leader Dating Software provider?', Core::SOFTWARE_WEBSITE), 'value' => DbConfig::getSetting('displayPoweredByLink'), 'required' => 1]));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Show the News Feed:'), 'is_software_news_feed', [1 => t('Enable'), 0 => t('Disable')], ['description' => t('Show the latest news about the software in the admin dashboard (recommend).'), 'value' => DbConfig::getSetting('isSoftwareNewsFeed'), 'required' => 1]));
 
         unset($oFile);
-
 
         /********** Logo Settings **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="logotype"><div class="col-md-10"><h2 class="underline">' . t('Icon Logo') . '</h2>'));
