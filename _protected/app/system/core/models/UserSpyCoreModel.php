@@ -22,6 +22,10 @@ class UserSpyCoreModel
      */
     public static function addUserAction($iUserId, $sUrl, $sAction)
     {
+        if (!UserCore::auth()) {
+            return false;
+        }
+
         $sCurrentDate = (new CDateTime)->get()->dateTime('Y-m-d H:i:s');
 
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER_SPY) . '(profileId, url, userAction, lastActivity) VALUES(:profileId, :url, :userAction, :lastActivity)');
