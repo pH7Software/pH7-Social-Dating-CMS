@@ -5633,7 +5633,7 @@ msgid "Module not found!"
 msgstr ""
 
 #: _protected/app/system/modules/lost-password/forms/ForgotPasswordForm.php:39
-msgid "Generate a new password!"
+msgid "Get a new password"
 msgstr ""
 
 #: _protected/app/system/modules/lost-password/forms/processing/ForgotPasswordFormProcess.php:47
