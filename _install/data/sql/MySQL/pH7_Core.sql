@@ -1653,3 +1653,12 @@ INSERT INTO ph7_affiliates_countries (countryCode) VALUES
 ('ZA'),
 ('ZM'),
 ('ZW');
+
+
+CREATE TABLE IF NOT EXISTS ph7_members_spy (
+  profileId int(10) unsigned NOT NULL,
+  url varchar(255) NOT NULL,
+  userAction varchar(255) NOT NULL,
+  lastActivity datetime DEFAULT NULL,
+  FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

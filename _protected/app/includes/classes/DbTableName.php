@@ -20,6 +20,7 @@ final class DbTableName
     const MEMBER_PRIVACY = 'members_privacy';
     const MEMBER_NOTIFICATION = 'members_notifications';
     const MEMBER_COUNTRY = 'members_countries';
+    const MEMBER_SPY = 'members_spy';
     const AFFILIATE_COUNTRY = 'affiliates_countries';
     const BLOCK_IP = 'block_ip';
     const BLOCK_COUNTRY = 'block_countries';
