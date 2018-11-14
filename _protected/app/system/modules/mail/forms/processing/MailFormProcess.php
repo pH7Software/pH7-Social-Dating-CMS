@@ -62,6 +62,14 @@ class MailFormProcess extends Form
             } else {
                 if ($this->canSendEmail($iRecipientId)) {
                     $this->sendMail($iRecipientId, $mSendMsg);
+
+                    if (!$this->isAdminEligible()) {
+                        UserSpyCoreModel::addUserAction(
+                            $iSenderId,
+                            Uri::get('mail', 'main', 'compose'),
+                            t('#%0% has sent a message to %1%', $this->getSenderUsername(), $sRecipient)
+                        );
+                    }
                 }
 
                 Header::redirect(
