@@ -35,13 +35,13 @@ class MailFormProcess extends Form
         $sMessage = $this->httpRequest->post('message', Http::ONLY_XSS_CLEAN);
         $sCurrentTime = $this->dateTime->get()->dateTime('Y-m-d H:i:s');
         $iTimeDelay = (int)DbConfig::getSetting('timeDelaySendMail');
-        $sRecipient = $this->httpRequest->post('recipient');
-        $iRecipientId = $this->oUserModel->getId(null, $sRecipient);
+        $sRecipientUsername = $this->httpRequest->post('recipient');
+        $iRecipientId = $this->oUserModel->getId(null, $sRecipientUsername);
         $iSenderId = $this->getSenderId();
 
         if ($iSenderId === $iRecipientId) {
             \PFBC\Form::setError('form_compose_mail', t('Oops! You can not send a message to yourself.'));
-        } elseif ($sRecipient === PH7_ADMIN_USERNAME) {
+        } elseif ($sRecipientUsername === PH7_ADMIN_USERNAME) {
             \PFBC\Form::setError('form_compose_mail', t('Oops! You cannot reply to administrator! If you want to contact us, please use our <a href="%0%">contact form</a>.', Uri::get('contact', 'contact', 'index')));
         } elseif (!(new ExistsCoreModel)->id($iRecipientId, DbTableName::MEMBER)) {
             \PFBC\Form::setError('form_compose_mail', t('Oops! The username "%0%" does not exist.', escape(substr($this->httpRequest->post('recipient'), 0, PH7_MAX_USERNAME_LENGTH), true)));
@@ -88,15 +88,15 @@ class MailFormProcess extends Form
             t('You received a new message from %0%', $this->getSenderUsername()) . '<br />' .
             '<a href="' . Uri::get('mail', 'main', 'inbox', $iMsgId) . '">' . t('Click here') . '</a>' . t('to read your message.');
 
-        $sRecipientEmail = $this->oUserModel->getEmail($iRecipientId);
+        $sRecipientUsernameEmail = $this->oUserModel->getEmail($iRecipientId);
 
         $sMessageHtml = $this->view->parseMail(
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/mail/new_msg.tpl',
-            $sRecipientEmail
+            $sRecipientUsernameEmail
         );
 
         $aInfo = [
-            'to' => $sRecipientEmail,
+            'to' => $sRecipientUsernameEmail,
             'subject' => t('New private message from %0% on %site_name%', $this->getSenderFirstName())
         ];
 
