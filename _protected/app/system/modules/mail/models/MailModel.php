@@ -255,8 +255,11 @@ class MailModel extends MailCoreModel
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MESSAGE) . 'AS msg LEFT JOIN ' . Db::prefix(DbTableName::MEMBER) . 'AS m ON ' .
             $sSql . $sSqlFind . $sSqlOrder . $sSqlLimit);
 
-        ctype_digit($mLooking) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
-
+        if ($bDigitSearch) {
+            $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
+        } else {
+            $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+        }
 
         if (!empty($iProfileId)) {
             $rStmt->bindParam(':profileId', $iProfileId, \PDO::PARAM_INT);
