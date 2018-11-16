@@ -36,7 +36,7 @@ class Backup implements GenerableFile
     private $sSql;
 
     /**
-     * @param string $sPathName Can be null for showing the data only ( by using Backup->back()->show() ). Default NULL
+     * @param string $sPathName Can be null for showing the data only ( by using Backup->back()->show() ).
      */
     public function __construct($sPathName = null)
     {
