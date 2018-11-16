@@ -36,4 +36,37 @@ class UserSpyCoreModel
 
         return $rStmt->execute();
     }
+
+    public static function getData($bCount, $iOffset = null, $iLimit = null)
+    {
+        $bCount = (bool)$bCount;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
+
+        $sSqlLimit = !$bCount ? ' LIMIT :offset, :limit' : '';
+        $sSqlSelect = !$bCount ? '*' : 'COUNT(profileId)';
+
+        $sSql = 'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER_SPY) . 'AS spy LEFT JOIN ' .
+            Db::prefix(DbTableName::MEMBER) .
+            'AS m ON spy.profileId = m.profileId ORDER BY lastActivity DESC' . $sSqlLimit;
+
+        $rStmt = Db::getInstance()->prepare($sSql);
+
+        if (!$bCount) {
+            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+        }
+
+        $rStmt->execute();
+
+        if (!$bCount) {
+            $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        } else {
+            $mData = (int)$rStmt->fetchColumn();
+        }
+
+        Db::free($rStmt);
+
+        return $mData;
+    }
 }

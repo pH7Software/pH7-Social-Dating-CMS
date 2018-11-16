@@ -99,7 +99,7 @@ class UserController extends Controller
     {
         $this->view->page_title = $this->view->h1_title = t('See User Interactions');
 
-        $this->iTotalUsers = $this->oAdminModel->total();
+        $this->iTotalUsers = UserSpyCoreModel::getData(true);
 
         $oPage = new Page;
         $this->view->total_pages = $oPage->getTotalPages(
@@ -107,11 +107,14 @@ class UserController extends Controller
             self::PROFILES_PER_PAGE
         );
         $this->view->current_page = $oPage->getCurrentPage();
-        $oBrowse = $this->oAdminModel->browse(
+        $oData = UserSpyCoreModel::getData(
             $oPage->getFirstItem(),
-            $oPage->getNbItemsPerPage()
+            $oPage->getNbItemsPerPage(),
+            false
         );
         unset($oPage);
+
+        $this->view->data = $oData;
 
         $this->output();
     }
