@@ -69,27 +69,13 @@ class EditForm
 
         $oForm->addElement(
             new \PFBC\Element\Radio(
-                t('Gender:'),
+                t('Are you?'),
                 'sex',
                 [
-                    GenderTypeUserCoreModel::FEMALE => t('Woman'),
-                    GenderTypeUserCoreModel::MALE => t('Man'),
-                    GenderTypeUserCoreModel::COUPLE => t('Couple')
+                    'buyer' => t('Home Buyer'),
+                    'seller' => t('Home Seller')
                 ],
-                ['value' => $oUser->sex, 'required' => 1]
-            )
-        );
-
-        $oForm->addElement(
-            new \PFBC\Element\Checkbox(
-                t('Looking for a:'),
-                'match_sex',
-                [
-                    GenderTypeUserCoreModel::MALE => t('Man'),
-                    GenderTypeUserCoreModel::FEMALE => t('Woman'),
-                    GenderTypeUserCoreModel::COUPLE => t('Couple')
-                ],
-                ['value' => Form::getVal($oUser->matchSex), 'required' => 1]
+                ['value' => 'buyer', 'required' => 1]
             )
         );
 

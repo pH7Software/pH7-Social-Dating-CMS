@@ -38,26 +38,13 @@ class AddUserForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Middle Name:'), 'middle_name', ['validation' => new \PFBC\Validation\Name]));
         $oForm->addElement(
             new \PFBC\Element\Radio(
-                t('Gender:'),
+                t('Are you?'),
                 'sex',
                 [
-                    GenderTypeUserCoreModel::FEMALE => t('Woman'),
-                    GenderTypeUserCoreModel::MALE => t('Man'),
-                    GenderTypeUserCoreModel::COUPLE => t('Couple')
+                    'buyer' => t('Home Buyer'),
+                    'seller' => t('Home Seller')
                 ],
-                ['value' => GenderTypeUserCoreModel::FEMALE, 'required' => 1]
-            )
-        );
-        $oForm->addElement(
-            new \PFBC\Element\Checkbox(
-                t('Looking for:'),
-                'match_sex',
-                [
-                    GenderTypeUserCoreModel::MALE => t('Man'),
-                    GenderTypeUserCoreModel::FEMALE => t('Woman'),
-                    GenderTypeUserCoreModel::COUPLE => t('Couple')
-                ],
-                ['value' => GenderTypeUserCoreModel::MALE, 'required' => 1]
+                ['value' => 'buyer', 'required' => 1]
             )
         );
         $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', ['title' => t('Please specify the date of birth using the calendar.'), 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1]));
@@ -69,7 +56,6 @@ class AddUserForm
         $oForm->addElement(new \PFBC\Element\CKEditor(t('Description:'), 'description', ['validation' => new \PFBC\Validation\Str(10, 2000), 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\File(t('Profile Photo:'), 'avatar', ['accept' => 'image/*']));
         $oForm->addElement(new \PFBC\Element\Url(t('Personal Website:'), 'website'));
-        $oForm->addElement(new \PFBC\Element\Url(t('Social Network Site:'), 'social_network_site', ['description' => t('The URL of the social profile, such as Facebook, Instagram, Snapchat, ...')]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
