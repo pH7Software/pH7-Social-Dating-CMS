@@ -36,6 +36,7 @@ class FriendCoreModel extends Model
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
+        $bDigitSearch = ctype_digit($mLooking);
 
         $sSqlSelect = !$bCount ? '(f.profileId + f.friendId - :profileId) AS fdId, f.*, m.username, m.firstName, m.sex' : 'COUNT(f.friendId)';
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
@@ -53,7 +54,7 @@ class FriendCoreModel extends Model
         }
 
         $sSqlSearchWhere = '(m.username LIKE :looking OR m.firstName LIKE :looking OR m.lastName LIKE :looking OR m.email LIKE :looking)';
-        if (ctype_digit($mLooking)) {
+        if ($bDigitSearch) {
             $sSqlSearchWhere = '(m.profileId = :profileId AND f.friendId= :profileId) OR (m.profileId = :friendId OR f.friendId= :friendId)';
         }
 
@@ -67,7 +68,7 @@ class FriendCoreModel extends Model
 
         $rStmt->bindValue(':profileId', $iIdProfileId, \PDO::PARAM_INT);
 
-        if (ctype_digit($mLooking)) {
+        if ($bDigitSearch) {
             $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
         } else {
             $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);

@@ -183,6 +183,7 @@ class BlogModel extends BlogCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
+        $bDigitSearch = ctype_digit($mLooking);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
@@ -191,7 +192,7 @@ class BlogModel extends BlogCoreModel
 
         $sSqlWhere = 'WHERE postId LIKE :looking OR title LIKE :looking OR
                 pageTitle LIKE :looking OR content LIKE :looking OR tags LIKE :looking';
-        if (ctype_digit($mLooking)) {
+        if ($bDigitSearch) {
             $sSqlWhere = 'WHERE blogId = :looking';
         }
 
@@ -199,7 +200,7 @@ class BlogModel extends BlogCoreModel
             'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::BLOG) . $sSqlWhere . $sSqlOrder . $sSqlLimit
         );
 
-        if (ctype_digit($mLooking)) {
+        if ($bDigitSearch) {
             $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
         } else {
             $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);

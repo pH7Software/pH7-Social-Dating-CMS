@@ -227,10 +227,11 @@ class MailModel extends MailCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
+        $bDigitSearch = ctype_digit($mLooking);
 
         $sSqlLimit = !$bCount ? ' LIMIT :offset, :limit' : '';
         $sSqlSelect = !$bCount ? '*' : 'COUNT(messageId)';
-        $sSqlFind = ' ' . (ctype_digit($mLooking) ? '(messageId = :looking)' : '(title LIKE :looking OR message LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)');
+        $sSqlFind = ' ' . ($bDigitSearch ? '(messageId = :looking)' : '(title LIKE :looking OR message LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)');
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
         switch ($sType) {

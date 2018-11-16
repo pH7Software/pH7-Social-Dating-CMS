@@ -102,12 +102,13 @@ class AffiliateModel extends AffiliateCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
+        $bDigitSearch = ctype_digit($mLooking);
 
         $sSqlLimit = !$bCount ? ' LIMIT :offset, :limit' : '';
         $sSqlSelect = !$bCount ? '*' : 'COUNT(a.profileId)';
 
         $sSqlWhere = ' WHERE username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking OR email LIKE :looking OR bankAccount LIKE :looking OR sex LIKE :looking OR ip LIKE :looking';
-        if (ctype_digit($mLooking)) {
+        if ($bDigitSearch) {
             $sSqlWhere = ' WHERE a.profileId = :looking';
         }
 
@@ -115,7 +116,7 @@ class AffiliateModel extends AffiliateCoreModel
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::AFFILIATE) . 'AS a LEFT JOIN' . Db::prefix(DbTableName::AFFILIATE_INFO) . 'AS i ON a.profileId = i.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
-        if (ctype_digit($mLooking)) {
+        if ($bDigitSearch) {
             $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
         } else {
             $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);

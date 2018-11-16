@@ -252,19 +252,20 @@ class PictureModel extends PictureCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
+        $bDigitSearch = ctype_digit($mLooking);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'p');
 
         $sSqlSelect = !$bCount ? 'p.*, a.name, m.username, m.firstName, m.sex' : 'COUNT(p.pictureId)';
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
-        $sSqlWhere = ctype_digit($mLooking) ? ' WHERE p.pictureId = :looking' : ' WHERE p.title LIKE :looking OR p.description LIKE :looking';
+        $sSqlWhere = $bDigitSearch ? ' WHERE p.pictureId = :looking' : ' WHERE p.title LIKE :looking OR p.description LIKE :looking';
 
         $rStmt = Db::getInstance()->prepare(
             'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::PICTURE) . 'AS p INNER JOIN' .
             Db::prefix(DbTableName::ALBUM_PICTURE) . 'AS a ON p.albumId = a.albumId INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
             'AS m ON p.profileId = m.profileId' . $sSqlWhere . ' AND p.approved = :approved' . $sSqlOrder . $sSqlLimit);
 
-        if (ctype_digit($mLooking)) {
+        if ($bDigitSearch) {
             $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
         } else {
             $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);

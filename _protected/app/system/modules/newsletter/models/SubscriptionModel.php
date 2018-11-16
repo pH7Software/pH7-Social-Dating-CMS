@@ -84,15 +84,16 @@ class SubscriptionModel extends UserCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
+        $bDigitSearch = ctype_digit($mLooking);
 
         $sSqlLimit = !$bCount ? ' LIMIT :offset, :limit' : '';
         $sSqlSelect = !$bCount ? '*' : 'COUNT(profileId)';
-        $sSqlWhere = ctype_digit($mLooking) ? ' WHERE profileId = :looking' : ' WHERE name LIKE :looking OR email LIKE :looking OR ip LIKE :looking';
+        $sSqlWhere = $bDigitSearch ? ' WHERE profileId = :looking' : ' WHERE name LIKE :looking OR email LIKE :looking OR ip LIKE :looking';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::SUBSCRIBER) . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
-        if (ctype_digit($mLooking)) {
+        if ($bDigitSearch) {
             $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
         } else {
             $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);

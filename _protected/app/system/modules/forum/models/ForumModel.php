@@ -361,6 +361,7 @@ class ForumModel extends ForumCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
+        $bDigitSearch = ctype_digit($mLooking);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 't');
 
@@ -368,7 +369,7 @@ class ForumModel extends ForumCoreModel
         $sSqlSelect = !$bCount ? 'f.*, f.createdDate AS forumCreatedDate, f.updatedDate AS forumUpdatedDate, t.*, m.username, m.firstName, m.sex' : 'COUNT(t.topicId)';
 
         $sSqlWhere = ' WHERE t.message LIKE :looking OR t.title LIKE :looking OR m.username LIKE :looking';
-        if (ctype_digit($mLooking)) {
+        if ($bDigitSearch) {
             $sSqlWhere = ' WHERE t.topicId = :looking ';
         }
 
@@ -378,7 +379,7 @@ class ForumModel extends ForumCoreModel
             Db::prefix(DbTableName::MEMBER) . ' AS m ON t.profileId = m.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit
         );
 
-        if (ctype_digit($mLooking)) {
+        if ($bDigitSearch) {
             $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
         } else {
             $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);

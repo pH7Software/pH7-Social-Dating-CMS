@@ -138,12 +138,13 @@ class GameModel extends GameCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
+        $bDigitSearch = ctype_digit($mLooking);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
         $sSqlSelect = !$bCount ? '*' : 'COUNT(gameId)';
 
         $sSqlWhere = ' WHERE title LIKE :looking OR name LIKE :looking OR description LIKE :looking OR keywords LIKE :looking';
-        if (ctype_digit($mLooking)) {
+        if ($bDigitSearch) {
             $sSqlWhere = ' WHERE gameId = :looking';
         }
 
@@ -151,7 +152,7 @@ class GameModel extends GameCoreModel
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::GAME) . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
-        if (ctype_digit($mLooking)) {
+        if ($bDigitSearch) {
             $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
         } else {
             $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);

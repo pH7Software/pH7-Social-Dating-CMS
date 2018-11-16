@@ -273,6 +273,7 @@ class NoteModel extends NoteCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
+        $bIsDigitSearch = ctype_digit($mLooking);
         $bIsApproved = isset($iApproved);
 
         $sSqlApproved = $bIsApproved ? ' AND (approved = :approved)' : '';
@@ -284,7 +285,7 @@ class NoteModel extends NoteCoreModel
         $sSqlWhere = ' WHERE (postId LIKE :looking OR title LIKE :looking OR
             pageTitle LIKE :looking OR content LIKE :looking OR tags LIKE :looking OR
             username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)';
-        if (ctype_digit($mLooking)) {
+        if ($bIsDigitSearch) {
             $sSqlWhere = ' WHERE (noteId = :looking)';
         }
 
@@ -293,7 +294,7 @@ class NoteModel extends NoteCoreModel
             Db::prefix(DbTableName::MEMBER) . 'AS m ON n.profileId = m.profileId' . $sSqlWhere . $sSqlApproved . $sSqlOrder . $sSqlLimit
         );
 
-        if (ctype_digit($mLooking)) {
+        if ($bIsDigitSearch) {
             $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
         } else {
             $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);

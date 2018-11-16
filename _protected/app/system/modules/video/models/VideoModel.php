@@ -255,12 +255,13 @@ class VideoModel extends VideoCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
+        $bDigitSearch = ctype_digit($mLooking);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'v');
 
         $sSqlSelect = !$bCount ? 'v.*, a.name, m.username, m.firstName, m.sex' : 'COUNT(v.videoId)';
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
-        $sSqlWhere = ctype_digit($mLooking) ? ' WHERE v.videoId = :looking' : ' WHERE v.title LIKE :looking OR v.description LIKE :looking';
+        $sSqlWhere = $bDigitSearch ? ' WHERE v.videoId = :looking' : ' WHERE v.title LIKE :looking OR v.description LIKE :looking';
 
         $rStmt = Db::getInstance()->prepare(
             'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::VIDEO) . 'AS v INNER JOIN'
@@ -268,7 +269,7 @@ class VideoModel extends VideoCoreModel
             'AS m ON v.profileId = m.profileId' . $sSqlWhere . ' AND v.approved = :approved' . $sSqlOrder . $sSqlLimit
         );
 
-        if (ctype_digit($mLooking)) {
+        if ($bDigitSearch) {
             $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
         } else {
             $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
