@@ -95,6 +95,27 @@ class UserController extends Controller
         $this->output();
     }
 
+    public function spy()
+    {
+        $this->view->page_title = $this->view->h1_title = t('See User Interactions');
+
+        $this->iTotalUsers = $this->oAdminModel->total();
+
+        $oPage = new Page;
+        $this->view->total_pages = $oPage->getTotalPages(
+            $this->iTotalUsers,
+            self::PROFILES_PER_PAGE
+        );
+        $this->view->current_page = $oPage->getCurrentPage();
+        $oBrowse = $this->oAdminModel->browse(
+            $oPage->getFirstItem(),
+            $oPage->getNbItemsPerPage()
+        );
+        unset($oPage);
+
+        $this->output();
+    }
+
     public function import()
     {
         $this->view->page_title = $this->view->h1_title = t('Import Users');
