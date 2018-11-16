@@ -59,17 +59,20 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', ['description' => t('For security reasons and to avoid spam, you cannot change your email address.'), 'disabled' => 'disabled', 'value' => $oAff->email]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error phone"></span>'));
 
-        $oForm->addElement(
-            new \PFBC\Element\Radio(
-                t('Gender:'),
-                'sex',
-                [
-                    GenderTypeUserCoreModel::MALE => t('Man'),
-                    GenderTypeUserCoreModel::FEMALE => t('Woman')
-                ],
-                ['value' => $oAff->sex, 'required' => 1]
-            )
-        );
+        if (AdminCore::auth()) {
+            // For security reason, only admins are able to change profile gender
+            $oForm->addElement(
+                new \PFBC\Element\Radio(
+                    t('Gender:'),
+                    'sex',
+                    [
+                        GenderTypeUserCoreModel::MALE => t('Man'),
+                        GenderTypeUserCoreModel::FEMALE => t('Woman')
+                    ],
+                    ['value' => $oAff->sex, 'required' => 1]
+                )
+            );
+        }
 
         $oForm->addElement(new \PFBC\Element\Date(t('Your Date of Birth:'), 'birth_date', ['id' => 'birth_date', 'onblur' => 'CValid(this.value, this.id)', 'value' => $sBirthDate, 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));

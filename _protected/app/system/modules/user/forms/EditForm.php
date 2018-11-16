@@ -67,18 +67,21 @@ class EditForm
 
         $oForm->addElement(new \PFBC\Element\Email(t('Email:'), 'mail', ['description' => t('For security reasons and to avoid spam, you cannot change your email address.'), 'disabled' => 'disabled', 'value' => $oUser->email]));
 
-        $oForm->addElement(
-            new \PFBC\Element\Radio(
-                t('Gender:'),
-                'sex',
-                [
-                    GenderTypeUserCoreModel::FEMALE => t('Woman'),
-                    GenderTypeUserCoreModel::MALE => t('Man'),
-                    GenderTypeUserCoreModel::COUPLE => t('Couple')
-                ],
-                ['value' => $oUser->sex, 'required' => 1]
-            )
-        );
+        if (AdminCore::auth()) {
+            // For security reason, only admins are able to change profile gender
+            $oForm->addElement(
+                new \PFBC\Element\Radio(
+                    t('Gender:'),
+                    'sex',
+                    [
+                        GenderTypeUserCoreModel::FEMALE => t('Woman'),
+                        GenderTypeUserCoreModel::MALE => t('Man'),
+                        GenderTypeUserCoreModel::COUPLE => t('Couple')
+                    ],
+                    ['value' => $oUser->sex, 'required' => 1]
+                )
+            );
+        }
 
         $oForm->addElement(
             new \PFBC\Element\Checkbox(
