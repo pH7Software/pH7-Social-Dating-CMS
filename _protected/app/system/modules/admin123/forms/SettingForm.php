@@ -77,7 +77,7 @@ class SettingForm
 
         //$oForm->addElement(new \PFBC\Element\Select(t('Show "Powered By" link in footer:'), 'display_powered_by_link', [1 => t('Enable'), 0 => t('Disable (NOT recommended)')], ['description' => t('Are you proud of using pH7CMS brand? Are you proud to say your dating app has been made by the Leader Dating Software provider?'), 'value' => DbConfig::getSetting('displayPoweredByLink'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Show the News Feed:'), 'is_software_news_feed', [1 => t('Enable'), 0 => t('Disable')], ['description' => t('Show the latest news about the software in the admin dashboard (recommend).'), 'value' => DbConfig::getSetting('isSoftwareNewsFeed'), 'required' => 1]));
+        //$oForm->addElement(new \PFBC\Element\Select(t('Show the News Feed:'), 'is_software_news_feed', [1 => t('Enable'), 0 => t('Disable')], ['description' => t('Show the latest news about the software in the admin dashboard (recommend).'), 'value' => DbConfig::getSetting('isSoftwareNewsFeed'), 'required' => 1]));
 
         unset($oFile);
 

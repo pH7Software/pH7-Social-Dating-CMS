@@ -45,7 +45,7 @@ class SettingFormProcess extends Form
         //'disclaimer' => 'disclaimer',
         'cookie_consent_bar' => 'cookieConsentBar',
         //'display_powered_by_link' => 'displayPoweredByLink',
-        'is_software_news_feed' => 'isSoftwareNewsFeed',
+        //'is_software_news_feed' => 'isSoftwareNewsFeed',
 
         // Email
         'email_name' => 'emailName',
