@@ -1080,7 +1080,7 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('disclaimer', 0, 'Enable a disclaimer to enter to the site. This is useful for sites with adult content. 0 = Disable | 1 = Enable', 'general'),
 ('cookieConsentBar', 0, 'Enable the cookie consent bar to prevent your users that your site uses cookies. 0 = Disable | 1 = Enable', 'general'),
 ('displayPoweredByLink', 0, 'Show or not the branding link in the footer.', 'general'),
-('isSoftwareNewsFeed', 1, 'Enable the news feed. 0 = Disable | 1 = Enable', 'general');
+('isSoftwareNewsFeed', 0, 'Enable the news feed. 0 = Disable | 1 = Enable', 'general');
 
 
 CREATE TABLE IF NOT EXISTS ph7_subscribers (
