@@ -80,7 +80,7 @@ define('PH7_PAGE_EXT', '.html');
 
 /***** DATA *****/
 
-define('PH7_DATA', 'data/');
+define('PH7_DATA', 'data/'); // Don't use "PH7_DS", because also used in URLs
 define('PH7_LOG', 'log' . PH7_DS);
 define('PH7_TMP', 'tmp' . PH7_DS);
 define('PH7_CACHE', 'cache' . PH7_DS);
