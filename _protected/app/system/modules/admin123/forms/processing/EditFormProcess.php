@@ -37,7 +37,10 @@ class EditFormProcess extends Form
             $iMaxUsernameLength = DbConfig::getSetting('maxUsernameLength');
 
             if (!(new Validate)->username($this->httpRequest->post('username'), $iMinUsernameLength, $iMaxUsernameLength, DbTableName::ADMIN)) {
-                \PFBC\Form::setError('form_admin_edit_account', t('Username has to be from %0% to %1% characters long, or it is not available, or already taken by another admin.', $iMinUsernameLength, $iMaxUsernameLength));
+                \PFBC\Form::setError(
+                    'form_admin_edit_account',
+                    t('Username has to be from %0% to %1% characters long, or it is not available, or already taken by another admin.', $iMinUsernameLength, $iMaxUsernameLength)
+                );
                 $this->bIsErr = true;
             } else {
                 $oAdminModel->updateProfile('username', $this->httpRequest->post('username'), $iProfileId, DbTableName::ADMIN);
@@ -49,7 +52,10 @@ class EditFormProcess extends Form
 
         if (!$this->str->equals($this->httpRequest->post('mail'), $oAdmin->email)) {
             if ((new ExistsCoreModel)->email($this->httpRequest->post('mail'), DbTableName::ADMIN)) {
-                \PFBC\Form::setError('form_admin_edit_account', t('Invalid email or already used by another admin.'));
+                \PFBC\Form::setError(
+                    'form_admin_edit_account',
+                    t('Invalid email or already used by another admin.')
+                );
                 $this->bIsErr = true;
             } else {
                 $oAdminModel->updateProfile('email', $this->httpRequest->post('mail'), $iProfileId, DbTableName::ADMIN);
@@ -85,7 +91,10 @@ class EditFormProcess extends Form
         (new Admin)->clearReadProfileCache($iProfileId, DbTableName::ADMIN);
 
         if (!$this->bIsErr) {
-            \PFBC\Form::setSuccess('form_admin_edit_account', t('Profile successfully updated!'));
+            \PFBC\Form::setSuccess(
+                'form_admin_edit_account',
+                t('Profile successfully updated!')
+            );
         }
     }
 
