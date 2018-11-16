@@ -58,7 +58,7 @@ class MainController extends ProfileBaseController
 
             $aData = $this->getFilteredData($oUser, $oFields);
 
-            $this->view->page_title = t('Meet %0%, A %1% looking for %2% - %3% years - %4% - %5% %6%',
+            $this->view->page_title = t('Meet %0%. A %1% looking for %2% - %3% years - %4% - %5% %6%',
                 $aData['first_name'], t($oUser->sex), t($oUser->matchSex), $aData['age'], t($aData['country']), $aData['city'], $aData['state']);
 
             $this->view->meta_description = t('Meet %0% %1% | %2% - %3%', $aData['first_name'], $aData['last_name'],

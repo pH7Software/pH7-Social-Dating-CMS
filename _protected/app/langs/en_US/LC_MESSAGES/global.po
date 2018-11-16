@@ -4728,7 +4728,7 @@ msgstr ""
 
 #: _protected/app/system/modules/cool-profile-page/controllers/MainController.php:61
 #: _protected/app/system/modules/user/controllers/ProfileController.php:76
-msgid "Meet %0%, A %1% looking for %2% - %3% years - %4% - %5% %6%"
+msgid "Meet %0%. A %1% looking for %2% - %3% years - %4% - %5% %6%"
 msgstr ""
 
 #: _protected/app/system/modules/cool-profile-page/controllers/MainController.php:64
