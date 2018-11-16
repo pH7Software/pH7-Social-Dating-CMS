@@ -31,7 +31,7 @@ class EditFormProcess extends Form
             $oAffModel->updateProfile('firstName', $this->httpRequest->post('first_name'), $iProfileId, DbTableName::AFFILIATE);
             $this->session->set('affiliate_first_name', $this->httpRequest->post('first_name'));
 
-            (new Cache)->start(UserCoreModel::CACHE_GROUP, 'firstName' . $iProfileId . DbTableName::AFFILIATE, null)->clear();
+            $this->clearFieldCache('firstName', $iProfileId);
         }
 
         if (!$this->str->equals($this->httpRequest->post('last_name'), $oAff->lastName))
@@ -41,7 +41,7 @@ class EditFormProcess extends Form
             $oAffModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId, DbTableName::AFFILIATE);
             $this->session->set('affiliate_sex', $this->httpRequest->post('sex'));
 
-            (new Cache)->start(UserCoreModel::CACHE_GROUP, 'sex' . $iProfileId . DbTableName::AFFILIATE, null)->clear();
+            $this->clearFieldCache('sex', $iProfileId);
         }
 
         if (!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oAff->birthDate))
@@ -69,5 +69,20 @@ class EditFormProcess extends Form
             'form_aff_edit_account',
             t('The profile has been successfully updated')
         );
+    }
+
+    /**
+     * @param string $sCacheId
+     * @param int $iProfileId
+     *
+     * @return void
+     */
+    private function clearFieldCache($sCacheId, $iProfileId)
+    {
+        (new Cache)->start(
+            UserCoreModel::CACHE_GROUP,
+            $sCacheId . $iProfileId . DbTableName::AFFILIATE,
+            null
+        )->clear();
     }
 }
