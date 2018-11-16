@@ -7152,7 +7152,7 @@ msgstr ""
 
 #: _protected/app/system/modules/user/controllers/SignupController.php:62
 msgid ""
-"Register for Free to Meet <span class=\"pink2\">%0%</span> (<span class="
+"Register for Free to Meet <span class=\"pink2\">%0%</span> (a.k.a <span class="
 "\"pink1\">%1%</span>) on <span class=\"pink2\">%site_name%</span>!"
 msgstr ""
 
