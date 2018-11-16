@@ -47,7 +47,7 @@ class EditFormProcess extends Form
             $oUserModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId);
             $this->session->set('member_sex', $this->httpRequest->post('sex'));
 
-            $this->clearFieldCacheField('sex', $iProfileId);
+            $this->clearFieldCache('sex', $iProfileId);
         }
 
         // WARNING: Be careful, you should use the Http::NO_CLEAN constant, otherwise Http::post() method removes the special tags
