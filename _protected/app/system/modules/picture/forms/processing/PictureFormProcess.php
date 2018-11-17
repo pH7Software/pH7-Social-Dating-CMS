@@ -58,7 +58,10 @@ class PictureFormProcess extends Form implements NudityDetectable
          * the return value is of type "string" and the value is "1".
          */
         if (!is_numeric($this->httpRequest->post('album_id'))) {
-            \PFBC\Form::setError('form_picture', t('Please add a category before you add some photos.'));
+            \PFBC\Form::setError(
+                'form_picture',
+                t('Please add a category before you add some photos.')
+            );
             return; // Stop execution of the method.
         }
 
