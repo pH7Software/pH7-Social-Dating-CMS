@@ -1,5 +1,5 @@
 <h1 class="red3 italic underline s_bMarg">{slogan}</h1>
-<h2>{lang 'The best house matching service for real estate 🏘'}</h2>
+<h2 class="underline">{lang 'The best house matching service for real estate 🏘'}</h2>
 
 <div class="s_tMarg" id="promo_text">
     <h2>{lang '🏡 Real Estate Community Website Made Simple', $design->geoIp(false)}</h2>
