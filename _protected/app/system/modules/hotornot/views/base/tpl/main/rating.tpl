@@ -9,21 +9,18 @@
         <div class="hon_click">
             {{ RatingDesignCore::voting($data->profileId,DbTableName::MEMBER,'center') }}
         </div>
-        <div class="s_tMarg">
-            <div class="col-md-5">
-                <a class="bold btn btn-success" rel="nofollow" href="{{ $design->url('mail', 'main', 'compose', $data->username) }}">
-                    {lang 'Interested 👍'}
-                </a>
-            </div>
-            <div class="col-md-5">
-                <a class="bold btn btn-danger" rel="nofollow" href="{{ $design->url('hotornot', 'main', 'rating') }}">
-                    {lang 'Not Interested 👎'}
-                </a>
-            </div>
 
-            <span class="italic small">
+        <div>
+            <a class="s_tMarg btn btn-success" rel="nofollow" href="{{ $design->url('mail', 'main', 'compose', $data->username) }}">
+                {lang 'Interested 👍'}
+            </a>
+            <a class="s_tMarg btn btn-danger" rel="nofollow" href="{{ $design->url('hotornot', 'main', 'rating') }}">
+                {lang 'Not Interested 👎'}
+            </a>
+
+            <p class="s_tMarg italic small">
                 {lang}If the photo does not match your sexual preference please be respectful and press the SKIP button below.{/lang}
-            </span>
+            </p>
         </div>
 
         <hr />
