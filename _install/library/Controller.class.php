@@ -21,7 +21,7 @@ abstract class Controller implements Controllable
     const VIEW_CACHE_LIFETIME = 24 * 3600; //thanks PHP5.6 for scalar expr in consts
 
     const SOFTWARE_NAME = 'pH7CMS';
-    const DEFAULT_SITE_NAME = 'Acquireutah: Real Estate';
+    const DEFAULT_SITE_NAME = 'Acquireutah';
     const SOFTWARE_PREFIX_COOKIE_NAME = 'pH7';
     const SOFTWARE_WEBSITE = 'http://ph7cms.com';
     const SOFTWARE_REQUIREMENTS_URL = 'http://ph7cms.com/doc/en/requirements';
