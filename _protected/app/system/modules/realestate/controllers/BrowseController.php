@@ -66,7 +66,7 @@ class BrowseController extends Controller
             UserSpyCoreModel::addUserAction(
                 $this->session->get('member_id'),
                 Uri::get('realestate', 'browse', 'seller'),
-                t('#%0% is searching for sellers.', $this->session->get('member_username'))
+                t('%0% is searching for sellers.', $this->session->get('member_username'))
             );
 
             $this->output();
@@ -105,7 +105,7 @@ class BrowseController extends Controller
             UserSpyCoreModel::addUserAction(
                 $this->session->get('member_id'),
                 Uri::get('realestate', 'browse', 'buyer'),
-                t('#%0% is searching for buyers.', $this->session->get('member_username'))
+                t('%0% is searching for buyers.', $this->session->get('member_username'))
             );
 
             $this->output();

@@ -102,7 +102,7 @@ class MainController extends Controller
                     UserSpyCoreModel::addUserAction(
                         $this->session->get('member_id'),
                         Uri::get('mail', 'main', 'inbox', $iMessageId),
-                        t('#%0% has read a message.', $this->session->get('member_username'))
+                        t('%0% has read a message.', $this->session->get('member_username'))
                     );
                 }
 

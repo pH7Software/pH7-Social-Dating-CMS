@@ -57,7 +57,7 @@ class ProfileController extends ProfileBaseController
                 UserSpyCoreModel::addUserAction(
                     $this->iVisitorId,
                     (new UserCore)->getProfileLink($oUser->username),
-                    t('#%0% user has viewed %1% profile', $this->iVisitorId, $oUser->username)
+                    t('%0% user has viewed %1% profile', $this->iVisitorId, $oUser->username)
                 );
             }
 

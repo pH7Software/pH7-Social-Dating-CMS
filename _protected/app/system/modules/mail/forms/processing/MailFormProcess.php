@@ -67,7 +67,7 @@ class MailFormProcess extends Form
                         UserSpyCoreModel::addUserAction(
                             $iSenderId,
                             Uri::get('mail', 'main', 'compose'),
-                            t('#%0% has sent a message to %1%', $this->getSenderUsername(), $sRecipient)
+                            t('%0% has sent a message to %1%', $this->getSenderUsername(), $sRecipient)
                         );
                     }
                 }
