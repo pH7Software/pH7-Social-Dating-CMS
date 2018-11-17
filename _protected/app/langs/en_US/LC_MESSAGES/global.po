@@ -10026,7 +10026,7 @@ msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/user_1e41a325ff56b8a65f2bf92e114bb789/base/main/index.guest.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/user_1e41a325ff56b8a65f2bf92e114bb789/base/main/user_promo_block.inc.cpl.php:19
-msgid "🚀 Meet amazing people near %0%!"
+msgid "🚀 Meet amazing people near %0%! 🎉"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/user_1e41a325ff56b8a65f2bf92e114bb789/base/main/index.user.inc.cpl.php:19

@@ -6,6 +6,6 @@
 {/if}
 
 <div class="s_tMarg" id="promo_text">
-    <h2>{lang '🚀 Meet amazing people near %0%!', $design->geoIp(false)}</h2>
+    <h2>{lang '🚀 Meet amazing people near %0%! 🎉', $design->geoIp(false)}</h2>
     {promo_text}
 </div>
