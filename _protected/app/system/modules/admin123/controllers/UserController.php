@@ -21,6 +21,7 @@ use PH7\Framework\Util\Various;
 class UserController extends Controller
 {
     const PROFILES_PER_PAGE = 15;
+    const USER_INTERACTIONS_PER_PAGE = 50;
     const SEARCH_NOT_FOUND_REDIRECT_DELAY = 2; // Seconds
 
     /** @var AdminCore */
@@ -104,7 +105,7 @@ class UserController extends Controller
         $oPage = new Page;
         $this->view->total_pages = $oPage->getTotalPages(
             $iTotalData,
-            50
+            self::USER_INTERACTIONS_PER_PAGE
         );
         $this->view->current_page = $oPage->getCurrentPage();
         $oData = UserSpyCoreModel::getData(
