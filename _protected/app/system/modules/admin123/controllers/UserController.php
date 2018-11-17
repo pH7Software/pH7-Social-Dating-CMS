@@ -98,7 +98,7 @@ class UserController extends Controller
 
     public function spy()
     {
-        $this->view->page_title = $this->view->h1_title = t('See User Interactions');
+        $this->view->page_title = $this->view->h1_title = t('User Interactions');
 
         $iTotalData = UserSpyCoreModel::getData(true);
 
