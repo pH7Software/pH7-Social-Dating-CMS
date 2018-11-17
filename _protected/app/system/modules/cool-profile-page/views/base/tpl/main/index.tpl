@@ -16,20 +16,6 @@
         </h3>
 
         {manual_include 'profile_links.inc.tpl'}
-        {if $sex === 'seller'}
-            <p>
-                <a class="btn btn-success btn-lg" href="{{ $design->url('realestate', 'browse', 'seller') }}">
-                    {lang 'Not Interested 👎'}
-                </a>
-            </p>
-
-            <p>
-                <a class="btn btn-danger btn-lg" href="{mail_link}" rel="nofollow">
-                    {lang 'Interested 👍'}
-                </a>
-            </p>
-        {/if}
-
 
         {* Profile's Fields *}
         {each $key => $val in $fields}
@@ -187,6 +173,17 @@
         <p class="center">
             {{ $design->like($username, $first_name, $sex) }}
         </p>
+
+        {if $sex === 'seller'}
+            <div class="center">
+                <a class="s_tMarg btn btn-success btn-lg" rel="nofollow" href="{mail_link}">
+                    {lang 'Interested 👍'}
+                </a>
+                <a class="s_tMarg btn btn-danger btn-lg" href="{{ $design->url('realestate', 'browse', 'seller') }}">
+                    {lang 'Not Interested 👎'}
+                </a>
+            </div>
+        {/if}
     </div>
 
     <div class="col-xs-12 col-sm-2 col-md-3">
