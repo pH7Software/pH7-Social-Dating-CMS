@@ -11,7 +11,7 @@
                 {lang 'User action:'} <a href="{{ $userSpy->userAction }}">{{ $userSpy->userAction }}</a>
             </div>
             <div class="col-md-2">
-                {lang 'Date':} <a href="{{ $userSpy->lastActivity }}">{{ $userSpy->lastActivity }}</a>
+                {lang 'Date:'} <a href="{{ $userSpy->lastActivity }}">{{ $userSpy->lastActivity }}</a>
             </div>
         </div>
     {/each}
