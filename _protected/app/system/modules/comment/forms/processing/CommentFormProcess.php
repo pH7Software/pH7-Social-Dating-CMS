@@ -47,6 +47,14 @@ class CommentFormProcess extends Form
             if (!$oCommentModel->add($sComment, $iRecipientId, $iSenderId, '1', $sCurrentTime, $sTable)) {
                 \PFBC\Form::setError('form_comment', t('Oops! Error occurred when adding comment.'));
             } else {
+
+                $sRecipientUrl = Uri::get('cool-profile-page', 'main', 'index', $iRecipientId);
+                    UserSpyCoreModel::addUserAction(
+                    $iSenderId,
+                    Uri::get('comment', 'comment', 'post', 'profile,' . $iRecipientId),
+                    t('%0% has sent a comment to <a href="%1%">#%2%</a>', $this->session->get('member_username'), $sRecipientUrl, $iRecipientId)
+                );
+
                 CommentCore::clearCache();
 
                 Header::redirect(
