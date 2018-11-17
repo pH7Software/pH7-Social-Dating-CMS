@@ -44,11 +44,11 @@ class UserSpyCoreModel
         $iLimit = (int)$iLimit;
 
         $sSqlLimit = !$bCount ? ' LIMIT :offset, :limit' : '';
-        $sSqlSelect = !$bCount ? '*' : 'COUNT(profileId)';
+        $sSqlSelect = !$bCount ? '*' : 'COUNT(spy.profileId)';
 
         $sSql = 'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER_SPY) . 'AS spy LEFT JOIN ' .
             Db::prefix(DbTableName::MEMBER) .
-            'AS m ON spy.profileId = m.profileId ORDER BY lastActivity DESC' . $sSqlLimit;
+            'AS m ON spy.profileId = m.profileId ORDER BY spy.lastActivity DESC' . $sSqlLimit;
 
         $rStmt = Db::getInstance()->prepare($sSql);
 
