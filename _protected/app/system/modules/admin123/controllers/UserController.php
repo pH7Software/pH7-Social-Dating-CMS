@@ -99,18 +99,18 @@ class UserController extends Controller
     {
         $this->view->page_title = $this->view->h1_title = t('See User Interactions');
 
-        $this->iTotalUsers = UserSpyCoreModel::getData(true);
+        $iTotalData = UserSpyCoreModel::getData(true);
 
         $oPage = new Page;
         $this->view->total_pages = $oPage->getTotalPages(
-            $this->iTotalUsers,
-            self::PROFILES_PER_PAGE
+            $iTotalData,
+            50
         );
         $this->view->current_page = $oPage->getCurrentPage();
         $oData = UserSpyCoreModel::getData(
+            false,
             $oPage->getFirstItem(),
-            $oPage->getNbItemsPerPage(),
-            false
+            $oPage->getNbItemsPerPage()
         );
         unset($oPage);
 
