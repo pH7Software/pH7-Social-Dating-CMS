@@ -87,13 +87,20 @@ class MainController extends Controller
         $this->view->h2_title = $this->sTitle;
 
         if ($this->httpRequest->getExists('id')) {
-            $oMsg = $this->oMailModel->readMsg($this->iProfileId, $this->httpRequest->get('id'));
+            $iMessageId = $this->httpRequest->get('id');
+            $oMsg = $this->oMailModel->readMsg($this->iProfileId, $iMessageId);
 
             if (empty($oMsg)) {
                 $this->sTitle = t('No Messages Found!');
                 $this->notFound();
             } else {
                 $this->setRead($oMsg);
+
+                UserSpyCoreModel::addUserAction(
+                    $this->session->get('member_id'),
+                    Uri::get('mail', 'main', 'inbox', $iMessageId),
+                    t('#%0% has read a message.', $this->session->get('member_username'))
+                );
 
                 $this->view->page_title = $oMsg->title . ' - ' . $this->view->page_title;
                 $this->view->msg = $oMsg;
