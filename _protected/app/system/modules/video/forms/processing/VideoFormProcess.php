@@ -50,7 +50,10 @@ class VideoFormProcess extends Form
          * the return value is of type "string" and the value is "1".
          */
         if (!is_numeric($this->httpRequest->post('album_id'))) {
-            \PFBC\Form::setError('form_video', t('Please add a category before you add a video.'));
+            \PFBC\Form::setError(
+                'form_video',
+                t('Please add a category before you add a video.')
+            );
             return; // Stop execution of the method.
         }
 
@@ -67,7 +70,10 @@ class VideoFormProcess extends Form
 
                 try {
                     if (!$oInfo = (new V\Api)->getInfo($sEmbedUrl)) {
-                        \PFBC\Form::setError('form_video', t('Unable to retrieve information from the video. Are you sure that the URL of the video is correct?'));
+                        \PFBC\Form::setError(
+                            'form_video',
+                            t('Unable to retrieve information from the video. Are you sure that the URL of the video is correct?')
+                        );
                         return;
                     }
                 } catch (Framework\Video\Api\InvalidApiKeyException $oE) {
@@ -76,7 +82,10 @@ class VideoFormProcess extends Form
                     return;
                 }
             } catch (V\InvalidApiProviderException $oE) {
-                \PFBC\Form::setError('form_video', t('Oops! The embed video link looks incorrect? Please make sure that the link is correct.'));
+                \PFBC\Form::setError(
+                    'form_video',
+                    t('Oops! The embed video link looks incorrect? Please make sure that the link is correct.')
+                );
                 return;
             }
 
@@ -95,7 +104,10 @@ class VideoFormProcess extends Form
                 \PFBC\Form::setError('form_video', Form::wrongVideoFileTypeMsg());
                 return;
             } elseif (!$oVideo->check()) {
-                \PFBC\Form::setError('form_video', t('Video file cannot be larger than %0%', F\Various::bytesToSize($oVideo->getMaxSize())));
+                \PFBC\Form::setError(
+                    'form_video',
+                    t('Video file cannot be larger than %0%', F\Various::bytesToSize($oVideo->getMaxSize()))
+                );
                 return;
             } else {
                 $sTitle = $this->getVideoTitle($oVideo);
