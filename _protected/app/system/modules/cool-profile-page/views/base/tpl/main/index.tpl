@@ -179,7 +179,7 @@
                 <a class="s_tMarg btn btn-success btn-lg" rel="nofollow" href="{mail_link}">
                     {lang 'Interested 👍'}
                 </a>
-                <a class="s_tMarg btn btn-danger btn-lg" href="{{ $design->url('realestate', 'browse', 'seller') }}">
+                <a class="s_tMarg btn btn-danger btn-lg" href="{{ $design->url('realestate', 'browse', 'seller', '?country='.$country_code.'&match_sex='.$sex) }}">
                     {lang 'Not Interested 👎'}
                 </a>
             </div>
