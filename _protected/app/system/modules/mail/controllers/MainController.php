@@ -96,11 +96,15 @@ class MainController extends Controller
             } else {
                 $this->setRead($oMsg);
 
-                UserSpyCoreModel::addUserAction(
-                    $this->session->get('member_id'),
-                    Uri::get('mail', 'main', 'inbox', $iMessageId),
-                    t('#%0% has read a message.', $this->session->get('member_username'))
-                );
+                if ($oMsg->status == 1) {
+                    // Make sure that the message hasn't been read yet
+
+                    UserSpyCoreModel::addUserAction(
+                        $this->session->get('member_id'),
+                        Uri::get('mail', 'main', 'inbox', $iMessageId),
+                        t('#%0% has read a message.', $this->session->get('member_username'))
+                    );
+                }
 
                 $this->view->page_title = $oMsg->title . ' - ' . $this->view->page_title;
                 $this->view->msg = $oMsg;
