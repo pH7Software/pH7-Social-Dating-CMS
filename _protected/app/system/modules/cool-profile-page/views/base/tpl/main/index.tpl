@@ -24,7 +24,7 @@
             </p>
 
             <p>
-                <a class="btn btn-danger btn-lg" href="{mail_link}">
+                <a class="btn btn-danger btn-lg" href="{mail_link}" rel="nofollow">
                     {lang 'Interested 👍'}
                 </a>
             </p>
