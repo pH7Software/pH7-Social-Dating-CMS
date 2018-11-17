@@ -199,3 +199,8 @@
         {{ CommentDesignCore::link($id, 'profile') }}
     </div>
 </div>
+
+{* Signup Popup *}
+{if !$is_logged AND !AdminCore::auth()}
+    {{ $design->staticFiles('js', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'realestate' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'signup_popup.js') }}
+{/if}
