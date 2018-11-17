@@ -16,6 +16,20 @@
         </h3>
 
         {manual_include 'profile_links.inc.tpl'}
+        {if $sex === 'seller'}
+            <p>
+                <a class="btn btn-success btn-lg" href="{{ $design->url('realestate', 'browse', 'seller') }}">
+                    {lang 'Not Interested 👎'}
+                </a>
+            </p>
+
+            <p>
+                <a class="btn btn-danger btn-lg" href="{mail_link}">
+                    {lang 'Interested 👍'}
+                </a>
+            </p>
+        {/if}
+
 
         {* Profile's Fields *}
         {each $key => $val in $fields}
