@@ -19,13 +19,6 @@ class MainController extends ProfileBaseController
     const MAP_WIDTH_SIZE = '100%';
     const MAP_HEIGHT_SIZE = '200px';
 
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->bUserAuth = UserCore::auth();
-    }
-
     public function index()
     {
         $oUserModel = new UserCoreModel;

@@ -28,13 +28,6 @@ class ProfileController extends ProfileBaseController
     /** @var string */
     private $sUsername;
 
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->bUserAuth = User::auth();
-    }
-
     public function index()
     {
         $oUserModel = new UserModel;

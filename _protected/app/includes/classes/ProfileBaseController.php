@@ -47,6 +47,13 @@ abstract class ProfileBaseController extends Controller
      */
     abstract public function index();
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->bUserAuth = UserCore::auth();
+    }
+
     /**
      * Privacy Profile.
      *
