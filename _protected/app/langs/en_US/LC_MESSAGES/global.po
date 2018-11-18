@@ -8640,8 +8640,7 @@ msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/hotornot_fbbaf5173839db5403f08cf6c53a35ee/base/main/rating.cpl.php:19
 msgid ""
-"If the photo does not match your sexual preference please be respectful and "
-"press the SKIP button below."
+"If the photo does not match your sexual preference please be respectful and press the Not Interested button."
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/lost-password_321af48a6511f2661ae580cbf0c602e6/base/main/forgot.cpl.php:19
