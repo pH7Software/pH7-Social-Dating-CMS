@@ -5,6 +5,7 @@
   "dir": "ltr",
   "lang": "{% $config->values['language']['lang'] %}",
   "start_url": "{url_relative}",
+  "homepage_url": "{url_root}",
   "orientation": "portrait",
   "scope": "/",
   "theme_color": "transparent",
