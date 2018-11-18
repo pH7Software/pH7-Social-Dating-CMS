@@ -42,7 +42,8 @@ class InstallController extends Controller
         'user-dashboard' => '0',
         'cool-profile-page' => '0',
         'related-profile' => '1',
-        'birthday' => '1'
+        'birthday' => '1',
+        'pwa' => 0
     ];
 
     const DATING_MODS = [
@@ -67,7 +68,8 @@ class InstallController extends Controller
         'user-dashboard' => '1',
         'cool-profile-page' => '1',
         'related-profile' => '1',
-        'birthday' => '0'
+        'birthday' => '0',
+        'pwa' => 0
     ];
 
     /**
