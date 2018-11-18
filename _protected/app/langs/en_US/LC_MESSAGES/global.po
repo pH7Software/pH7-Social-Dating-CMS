@@ -7715,7 +7715,7 @@ msgstr ""
 
 #: _protected/app/system/modules/xml/controllers/SitemapController.php:26
 msgid ""
-"Map of Website, Free Online Dating Site with Video Chat Rooms, Meet Single "
+"Map of Website, Free Online Social Dating Website with Video Chat Rooms, Meet Single "
 "People with %site_name%"
 msgstr ""
 

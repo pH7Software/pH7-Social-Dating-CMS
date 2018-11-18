@@ -23,7 +23,7 @@ class SitemapController extends MainController implements XmlControllable
     {
         $this->sTitle = t('Site Map');
         $this->view->page_title = $this->sTitle;
-        $this->view->meta_description = t('Map of Website, Free Online Dating Site with Video Chat Rooms, Meet Single People with %site_name%');
+        $this->view->meta_description = t('Map of Website, Free Online Social Dating Website with Video Chat Rooms, Meet Single People with %site_name%');
         $this->view->h1_title = $this->sTitle;
 
         /*** Get the links ***/
