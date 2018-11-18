@@ -42,7 +42,9 @@ final class Security
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
      */
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     /**
      * Generate Random Salt for Password encryption.
