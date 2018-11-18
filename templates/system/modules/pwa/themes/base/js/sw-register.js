@@ -1,10 +1,16 @@
+/*
+ * Author:        Pierre-Henry Soria <hello@ph7cms.com>
+ * Copyright:     (c) 2018, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('[$url_root]service-worker.js', {
         scope: '/'
-    }).then(function (reg) {
-        console.log('Service Worker registered on scope:' + reg.scope);
-    }).catch(function (err) {
-        console.log('Service Worker registration has failed: ', err);
+    }).then(function (registration) {
+        console.log('Service Worker registered on scope:' + registration.scope);
+    }).catch(function (error) {
+        console.log('Service Worker registration has failed: ', error);
     });
 
     navigator.serviceWorker.getRegistrations().then(function (registrations) {
