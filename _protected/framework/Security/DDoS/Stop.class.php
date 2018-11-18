@@ -87,5 +87,7 @@ final class Stop
         sleep(PH7_DDOS_DELAY_SLEEP);
     }
 
-    private function __clone() {}
+    private function __clone()
+    {
+    }
 }
