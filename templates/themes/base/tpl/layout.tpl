@@ -23,6 +23,11 @@
     <meta name="distribution" content="{meta_distribution}" />
     {if $header}{header}{/if}
 
+    {if $is_pwa_enabled}
+      <link rel="manifest" href="{{ $design->url('pwa','main','manifest') }}" />
+      {{ $design->staticFiles('js', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_JS, 'sw-register.js') }}
+    {/if}
+
     <!-- Begin Copyright pH7 Dating/Social CMS by Pierre-Henry SORIA, All Rights Reserved -->
     <!-- Do not modify or remove this code! Think of those who spend a lot of time to develop this CMS & Framework for you -->
     <meta name="creator" content="pH7CMS, Pierre-Henry Soria - {software_url}" />

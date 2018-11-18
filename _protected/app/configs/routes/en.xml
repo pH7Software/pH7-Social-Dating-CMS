@@ -6,6 +6,9 @@
 
     <!-- BEGIN SYSTEM MODULES -->
 
+    <!-- Progressive Web App (PWA) -->
+    <route url="manifest\.json" path="system/modules" module="pwa" controller="main" action="manifest" />
+
     <!-- User -->
       <route url="@([a-zA-Z0-9_-]+)" path="system/modules" module="user" controller="profile" action="index" vars="username" />
       <route url="signup" path="system/modules" module="user" controller="signup" action="step1" />

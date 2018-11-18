@@ -1108,7 +1108,8 @@ INSERT INTO ph7_sys_mods_enabled (moduleTitle, folderName, premiumMod, enabled) 
 ('Newsletter', 'newsletter', '0', '1'),
 ('Invite Friends', 'invite', '0', '1'),
 ('Social Media Auth (connect module)', 'connect', '0', '0'),
-('Webcam', 'webcam', '0', '0');
+('Webcam', 'webcam', '0', '0'),
+('Progressive Web App (https required)', 'pwa', '0', '0');
 
 
 CREATE SEQUENCE ph7_modules_seq;
@@ -1128,7 +1129,7 @@ ALTER SEQUENCE ph7_modules_seq RESTART WITH 1;
 
 INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of pH7CMS SQL schema (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.5.0', 1);
+('pH7CMS', 'SQL System Schema', '1.5.1', 1);
 
 
 CREATE SEQUENCE ph7_report_seq;

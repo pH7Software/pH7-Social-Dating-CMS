@@ -71,7 +71,7 @@ class MainController extends Controller
 
     protected function xmlOutput()
     {
-        /* Compression damages the XML files, so we disable them */
+        /* Compression damages the XML files, so disable them */
         $this->view->setHtmlCompress(false);
         $this->view->setPhpCompress(false);
 
