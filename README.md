@@ -107,7 +107,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * pCO8 SECURITY pH7Framework™ (offers one of the highest protection for your webapp)
 * Full Security system against XSS, CSRF, SQL injection, authentication hacking, session fixation, brute-force, reverse tabnabbing phishing attacks, ... and can even prevent some DDoS attacks!
 * Two-Factor Authentication Option available for Admins, Users and Affiliates
-* Progressive Web App (PWA) support (required https).
+* Progressive Web App (PWA) support (requires HTTPS).
 * Admin Panel - Block Access with IP Restriction
 * Beautiful Code: Very thoroughly commented about what's happening throughout the PHP code, beautiful indentation and very readable, even for non-programmers
 * Anyone can easily contribute to pH7CMS project thanks the [GitHub repository](https://github.com/pH7Software/pH7-Social-Dating-CMS)
