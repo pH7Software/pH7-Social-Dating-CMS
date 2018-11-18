@@ -10,8 +10,8 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use RuntimeException;
 use PH7\Framework\Url\Header;
+use RuntimeException;
 
 class ProtectedFileForm
 {

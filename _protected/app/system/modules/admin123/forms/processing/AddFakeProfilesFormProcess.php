@@ -148,7 +148,7 @@ class AddFakeProfilesFormProcess extends Form
         $aData['last_name'] = $this->str->upperFirst($aUser['name']['last']);
         $aData['password'] = $aUser['login']['password'];
         $aData['sex'] = $aUser['gender'];
-        $aData['match_sex'] = array($oUser->getMatchSex($aData['sex']));
+        $aData['match_sex'] = [$oUser->getMatchSex($aData['sex'])];
         $aData['country'] = Country::fixCode($aUser['nat']);
         $aData['city'] = $this->str->upperFirst($aUser['location']['city']);
         $aData['state'] = $this->str->upperFirst($aUser['location']['state']);
