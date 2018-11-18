@@ -127,7 +127,7 @@ class BrowsePictureAjax
 
                 $this->sMsg = t('The photo has been deleted!');
             } else {
-                $this->sMsg = t("Sorry, we haven't found any photo!");
+                $this->sMsg = t("Sorry, we haven't found any photos!");
             }
 
             Header::redirect(

@@ -5503,7 +5503,7 @@ msgid ""
 msgstr ""
 
 #: _protected/app/system/modules/hotornot/controllers/MainController.php:53
-msgid "Sorry, we haven't found any photo to Hot Or Not Party."
+msgid "Sorry, we haven't found any photos for the HotOrNot Party :("
 msgstr ""
 
 #: _protected/app/system/modules/im/assets/ajax/MessengerAjax.php:112
@@ -7664,7 +7664,7 @@ msgid "The photo has been deleted!"
 msgstr ""
 
 #: _protected/app/system/modules/webcam/assets/ajax/BrowsePictureAjax.php:130
-msgid "Sorry, we haven't found any photo!"
+msgid "Sorry, we haven't found any photos!"
 msgstr ""
 
 #: _protected/app/system/modules/webcam/controllers/WebcamController.php:26

@@ -53,7 +53,7 @@ class MainController extends Controller
 
         if (empty($oData)) {
             Http::setHeadersByCode(StatusCode::NOT_FOUND);
-            $this->view->error = t("Sorry, we haven't found any photo to Hot Or Not Party.");
+            $this->view->error = t("Sorry, we haven't found any photos for the HotOrNot Party :(");
         } else {
             $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
             $this->view->data = $oData;
