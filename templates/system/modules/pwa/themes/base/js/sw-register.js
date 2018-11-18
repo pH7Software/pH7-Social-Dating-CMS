@@ -17,6 +17,6 @@ if ('serviceWorker' in navigator) {
 }
 
 function isBaseUrl(scope) {
-    var url = new URL(scope);
+    const url = new URL(scope);
     return url.pathname === '/';
 }
