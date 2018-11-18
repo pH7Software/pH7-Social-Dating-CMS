@@ -171,6 +171,7 @@ function file-strict-permissions() {
 
 # Push the project into GitHub and Bitbucket repos
 function save-code() {
+    _save-project-to-repo git@gitlab.com:pH-7/acquireutah.git
     _save-project-to-repo git@github.com:pH-7/Acquireutah.git
 }
 
