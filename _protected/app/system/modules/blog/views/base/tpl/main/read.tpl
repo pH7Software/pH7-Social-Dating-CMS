@@ -1,8 +1,12 @@
-<div class="center">
+<div class="center" itemscope="itemscope" itemtype="http://schema.org/NewsArticle">
     {if empty($error)}
         <article>
-            <time datetime="{if !empty($updated_date)} {updated_date} {else} {created_date} {/if}" pubdate="pubdate"></time>
-            {content}
+            <time {if !empty($updated_date)}itemprop="dateModified" datetime="{updated_date}"{else}itemprop="datePublished" datetime="{created_date}" pubdate="pubdate"{/if}></time>
+
+            <div itemprop="articleBody">
+                {content}
+            </div>
+
             <br /><br /><hr />
             {{ BlogDesign::categories($categories, 'blog') }}
 
