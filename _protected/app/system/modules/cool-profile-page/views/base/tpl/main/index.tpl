@@ -3,11 +3,11 @@
     {manual_include 'profile_background.inc.tpl'}
 {/if}
 
-<div class="row">
+<div class="row" itemscope="itemscope" itemtype="http://schema.org/Person">
     <div class="col-xs-12 col-sm-4 col-md-3">
         {{ UserDesignCoreModel::userStatus($id) }}
         {{ (new AvatarDesignCore)->lightBox($username, $first_name, $sex, 400) }}
-        <h3>{first_name} {middle_name} {last_name}
+        <h3 itemprop="name">{first_name} {middle_name} {last_name}
             {if empty($last_name) OR empty($middle_name)}
                 {* show username if middle or last name isn't set *}
                 <span class="italic">({username})</span>
@@ -46,7 +46,7 @@
             <p>
                 <span class="bold">{lang 'Age:'}</span>
                 <span class="italic">
-                    <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$birth_date) }}">
+                    <a itemprop="age" href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$birth_date) }}">
                         {age}
                     </a>
                     <span class="gray">({birth_date_formatted})</span>

@@ -105,7 +105,7 @@
         {/if}
     </ol>
 
-    <div class="content" id="general">
+    <div class="content" id="general" itemscope="itemscope" itemtype="http://schema.org/Person">
         {{ UserDesignCoreModel::userStatus($id) }}
         {{ (new AvatarDesignCore)->lightBox($username, $first_name, $sex, 400) }}
 
@@ -134,7 +134,7 @@
         <p>
             <span class="bold">{lang 'First name:'}</span>
             <span class="italic">
-                <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&first_name='.$first_name) }}">
+                <a itemprop="name" href="{{ $design->url('user','browse','index', '?country='.$country_code.'&first_name='.$first_name) }}">
                     {first_name}
                 </a>
             </span>
@@ -145,7 +145,7 @@
             <p>
                 <span class="bold">{lang 'Middle name:'}</span>
                 <span class="italic">
-                    <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&middle_name='.$middle_name) }}">
+                    <a itemprop="additionalName" href="{{ $design->url('user','browse','index', '?country='.$country_code.'&middle_name='.$middle_name) }}">
                         {middle_name}
                     </a>
                 </span>
@@ -169,7 +169,7 @@
             <p>
                 <span class="bold">{lang 'Age:'}</span>
                 <span class="italic">
-                    <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$birth_date) }}">
+                    <a itemprop="age" href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$birth_date) }}">
                         {age}
                     </a>
                     <span class="gray">({birth_date_formatted})</span>

@@ -2,7 +2,10 @@
     {if empty($error)}
         <article>
             <time datetime="{% (!empty($post->updatedDate)) ? $dateTime->get($post->updatedDate)->dateTime() : $dateTime->get($post->createdDate)->dateTime() %}" pubdate="pubdate"></time>
-            {{ $content = Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($post->content)) }}
+
+            <div itemprop="articleBody">
+                {{ $content = Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($post->content)) }}
+            </div>
 
             <div class="left">
                 <h4>{lang 'Author: <a href="%0%" data-load="ajax">%1%</a>', (new UserCore)->getProfileSignupLink($post->username, $post->firstName, $post->sex), $post->firstName}</h4>{{ NoteDesign::thumb($post) }}
