@@ -42,7 +42,7 @@ abstract class Controller implements Controllable
      * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa", 12.* was "PHS" and 14.* is "pKb"
      */
     const SOFTWARE_VERSION_NAME = 'pKb';
-    const SOFTWARE_VERSION = '14.7.0';
+    const SOFTWARE_VERSION = '14.8.0';
     const SOFTWARE_BUILD = '1';
 
     const DEFAULT_LANG = 'en';
