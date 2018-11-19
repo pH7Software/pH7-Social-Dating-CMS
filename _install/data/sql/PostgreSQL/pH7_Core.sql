@@ -1129,7 +1129,7 @@ ALTER SEQUENCE ph7_modules_seq RESTART WITH 1;
 
 INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of pH7CMS SQL schema (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.5.1', 1);
+('pH7CMS', 'SQL System Schema', '1.5.2', 1);
 
 
 CREATE SEQUENCE ph7_report_seq;
