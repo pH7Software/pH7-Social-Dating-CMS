@@ -28,8 +28,10 @@ class AdminCore extends UserCore
     public static function auth()
     {
         $oSession = new Session;
+        $bSessIpCheck = (DbConfig::getSetting('isAdminSessionIpCheck')) ? $oSession->get('admin_ip') === Ip::get() : true;
+
         $bIsConnected = (int)$oSession->exists('admin_id') &&
-            $oSession->get('admin_ip') === Ip::get() &&
+            $bSessIpCheck &&
             $oSession->get('admin_http_user_agent') === (new Browser)->getUserAgent();
         unset($oSession);
 

@@ -94,8 +94,16 @@ class SettingFormProcess extends Form
         'send_report_mail' => 'sendReportMail',
         'ip_login' => 'ipLogin',
         'ban_word_replace' => 'banWordReplace',
+
+        // CSRF
         'security_token_forms' => 'securityToken',
         'security_token_lifetime' => 'securityTokenLifetime',
+
+        // Session hijacking protection
+        'is_user_session_ip_check' => 'isUserSessionIpCheck',
+        'is_affiliate_session_ip_check' => 'isAffiliateSessionIpCheck',
+        'is_admin_session_ip_check' => 'isAdminSessionIpCheck',
+
         'stop_DDoS' => 'DDoS',
 
         // Spam
