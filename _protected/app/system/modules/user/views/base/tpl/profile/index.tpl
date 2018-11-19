@@ -240,12 +240,12 @@
                 {elseif $key == 'website'}
                     <p>
                         {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Site/Blog:'}</span>
-                        <span class="italic">{{ $design->urlTag($val) }}</span>
+                        <span itemprop="url" class="italic">{{ $design->urlTag($val) }}</span>
                     </p>
                 {elseif $key == 'socialNetworkSite'}
                     <p>
                         {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Social Profile:'}</span>
-                        <span class="italic">{{ $design->urlTag($val) }}</span>
+                        <span itemprop="url" class="italic">{{ $design->urlTag($val) }}</span>
                     </p>
                 {else}
                     {{ $lang_key = strtolower($key) }}
@@ -253,7 +253,7 @@
                      {if strstr($key, 'url')}
                          <p>
                              {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang $lang_key}</span>
-                             <span class="italic">{{ $design->urlTag($val) }}</span>
+                             <span itemprop="url" class="italic">{{ $design->urlTag($val) }}</span>
                          </p>
                     {else}
                         <p>
