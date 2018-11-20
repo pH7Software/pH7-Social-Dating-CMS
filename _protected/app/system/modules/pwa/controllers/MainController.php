@@ -36,8 +36,8 @@ class MainController extends Controller
         $this->view->setHtmlCompress(false);
         $this->view->setPhpCompress(false);
 
-        // Display
-        $this->setContentType(); // Header
+        $this->setContentType(); // Header, output format
+
         $this->view->display($this->httpRequest->currentController() . PH7_DS . $this->registry->action . self::JSON_TPL_EXT);
     }
 
@@ -48,6 +48,6 @@ class MainController extends Controller
      */
     private function setContentType()
     {
-        Http::setContentType(self::CONTENT_TYPE); //Output format
+        Http::setContentType(self::CONTENT_TYPE);
     }
 }
