@@ -15,7 +15,6 @@
             </div>
 
             <hr />
-
             {{ NoteDesign::categories($categories, 'note') }}
 
             {{ $design->like($post->username,$post->firstName,$post->sex) }} | {{ $design->report($post->profileId,$post->username,$post->firstName,$post->sex) }}

@@ -3,11 +3,11 @@
         <article>
             <time {if !empty($updated_date)}itemprop="dateModified" datetime="{updated_date}"{else}itemprop="datePublished" datetime="{created_date}" pubdate="pubdate"{/if}></time>
 
-            <div itemprop="articleBody">
+            <div itemprop="articleBody" class="s_bMarg">
                 {content}
             </div>
 
-            <br /><br /><hr />
+            <hr />
             {{ BlogDesign::categories($categories, 'blog') }}
 
             <p class="small italic">
