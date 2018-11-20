@@ -1215,7 +1215,7 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('loginUserAttemptTime', 60, 'Time before a new connection attempt, in minutes!', 'security'),
 ('loginAffiliateAttemptTime', 60, 'Time before a new connection attempt, in minutes!', 'security'),
 ('loginAdminAttemptTime', 120, 'Time before a new connection attempt, in minutes!', 'security'),
-('isUserSessionIpCheck', 1, 'Enable it to Protect against session hijacking. Disable it if use dynamic IPs', 'security'),
+('isUserSessionIpCheck', 0, 'Enable it to Protect against session hijacking. Disable it if use dynamic IPs', 'security'),
 ('isAffiliateSessionIpCheck', 1, 'Enable it to Protect against session hijacking. Disable it if use dynamic IPs', 'security'),
 ('isAdminSessionIpCheck', 1, 'Enable it to Protect against session hijacking. Disable it if use dynamic IPs', 'security'),
 ('avatarManualApproval', 0, '0 to disable or 1 to enable ', 'moderation'),
