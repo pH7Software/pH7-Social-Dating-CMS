@@ -26,6 +26,10 @@ staleLabel:
 
 # Comment to post when marking as stale. Set to `false` to disable
 markComment: >
-  This issue has been automatically marked as stale because it has not had
-  recent activity. It will be closed if no further activity occurs. Thank you
+  Hi there, it looks like there has been no activity on this issue recently. For this reason, this issue has been marked as stale.
+  It will be closed in 7 days if no further activity occurs. Thank you
   for your contributions. Pierre-Henry
+
+closeComment: >
+  Since you didn't get back to me, I assume the problem is fixed. I'm closing it by now. If it isn't the case, please feel free to open a new issue.
+only: issues
