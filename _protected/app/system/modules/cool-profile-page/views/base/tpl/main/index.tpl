@@ -7,10 +7,10 @@
     <div class="col-xs-12 col-sm-4 col-md-3">
         {{ UserDesignCoreModel::userStatus($id) }}
         {{ (new AvatarDesignCore)->lightBox($username, $first_name, $sex, 400) }}
-        <h3 itemprop="name">{first_name} {middle_name} {last_name}
+        <h3 itemprop="name"><span itemprop="name">{first_name}</span> {middle_name} <span itemprop="familyName">{last_name}</span>
             {if empty($last_name) OR empty($middle_name)}
                 {* show username if middle or last name isn't set *}
-                <span class="italic">({username})</span>
+                <span itemprop="additionalName" class="italic">({username})</span>
             {/if}
             {{ $design->report($id, $username, $first_name, $sex) }}
         </h3>
@@ -21,7 +21,7 @@
             <i class="fa fa-{sex}"></i>
             <span class="bold">{lang 'I am a:'}</span>
             <span class="italic">
-                <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&match_sex='.$sex) }}">
+                <a itemprop="gender" href="{{ $design->url('user','browse','index', '?country='.$country_code.'&match_sex='.$sex) }}">
                     {lang $sex}
                 </a>
             </span>
@@ -46,7 +46,7 @@
             <p>
                 <span class="bold">{lang 'Age:'}</span>
                 <span class="italic">
-                    <a itemprop="age" href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$birth_date) }}">
+                    <a itemprop="birthDate" href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$birth_date) }}">
                         {age}
                     </a>
                     <span class="gray">({birth_date_formatted})</span>
@@ -64,7 +64,7 @@
                     <p>
                         <span class="bold">{lang 'Height:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&height='.$val) }}">
+                            <a itemprop="height" href="{{ $design->url('user','browse','index', '?country='.$country_code.'&height='.$val) }}">
                                 {{ (new Framework\Math\Measure\Height($val))->display(true) }}
                             </a>
                         </span>
@@ -73,7 +73,7 @@
                     <p>
                         <span class="bold">{lang 'Weight:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&weight='.$val) }}">
+                            <a itemprop="weight" href="{{ $design->url('user','browse','index', '?country='.$country_code.'&weight='.$val) }}">
                                 {{ (new Framework\Math\Measure\Weight($val))->display(true) }}
                             </a>
                         </span>
@@ -82,7 +82,7 @@
                     <p>
                         <span class="bold">{lang 'Country:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}">
+                            <a itemprop="nationality" href="{{ $design->url('user','browse','index', '?country='.$country_code) }}">
                                 {country}
                             </a>
                         </span>&nbsp;&nbsp;<img src="{{ $design->getSmallFlagIcon($country_code) }}" title="{country}" alt="{country}" />
@@ -91,7 +91,7 @@
                     <p>
                         <span class="bold">{lang 'City/Town:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&city='.$city) }}">
+                            <a itemprop="homeLocation" href="{{ $design->url('user','browse','index', '?country='.$country_code.'&city='.$city) }}">
                                 {city}
                             </a>
                         </span>
@@ -156,7 +156,7 @@
         {if !empty($description)}
             <div class="profile-section">
                 <h2 class="center">{lang 'A Little About Me'}</h2>
-                <div class="quote italic center">{description}</div>
+                <div itemprop="description" class="quote italic center">{description}</div>
             </div>
         {/if}
 
