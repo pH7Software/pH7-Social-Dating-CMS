@@ -3,16 +3,19 @@
         <article>
             <time {if !empty($post->updatedDate)}itemprop="dateModified" datetime="{% $dateTime->get($post->updatedDate)->dateTime() %}{else}itemprop="datePublished" datetime="{% $dateTime->get($post->createdDate)->dateTime() %}" pubdate="pubdate"{/if}></time>
 
-            <div itemprop="articleBody">
-                {{ $content = Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($post->content)) }}
-            </div>
+            {{ $content = Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($post->content)) }}
 
             <div class="left">
                 <h4 itemprop="author">{lang 'Author: <a href="%0%" data-load="ajax">%1%</a>', (new UserCore)->getProfileSignupLink($post->username, $post->firstName, $post->sex), $post->firstName}</h4>
                 {{ NoteDesign::thumb($post) }}
             </div>
-            {content}
-            <br /><hr />
+
+            <div itemprop="articleBody" class="s_bMarg">
+                {content}
+            </div>
+
+            <hr />
+
             {{ NoteDesign::categories($categories, 'note') }}
 
             {{ $design->like($post->username,$post->firstName,$post->sex) }} | {{ $design->report($post->profileId,$post->username,$post->firstName,$post->sex) }}
