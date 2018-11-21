@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
 use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Session\Session;
