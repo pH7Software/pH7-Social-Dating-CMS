@@ -43,8 +43,9 @@ class RatingDesignCore
 
         echo '<div itemscope="itemscope" itemtype="http://schema.org/AggregateRating">';
 
-        echo '<div class="', $sCssClass, ' ', $sPHSClass, '" id="', $fRate, '_', $iId, '_', $sTable, '"></div><p itemprop="ratingValue" content="', $fRate, '" itemprop="ratingCount" content="', $aRating['votes'], '" class="', $sPHSClass, '_txt">', t('Score: %0% - Votes: %1%', $fRate, $aRating['votes']), '</p>
-              <script>$(".', $sPHSClass, '").pHRating({length:5,decimalLength:1,rateMax:5});</script>';
+        echo '<div class="', $sCssClass, ' ', $sPHSClass, '" id="', $fRate, '_', $iId, '_', $sTable, '"></div>';
+        echo '<p itemprop="ratingValue" content="', $fRate, '" itemprop="ratingCount" content="', $aRating['votes'], '" class="', $sPHSClass, '_txt">', t('Score: %0% - Votes: %1%', $fRate, $aRating['votes']), '</p>';
+        echo '<script>$(".', $sPHSClass, '").pHRating({length:5,decimalLength:1,rateMax:5});</script>';
 
         /**
          * Redirect the member to the registration page if not logged in.
