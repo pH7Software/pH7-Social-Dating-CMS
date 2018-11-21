@@ -39,7 +39,7 @@ final class Version
     const KERNEL_RELEASE_DATE = '2018-11-19';
 
     /***** Framework Server *****/
-    const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1';
+    const KERNEL_TECHNOLOGY_NAME = 'pH7CMS.com';
     const KERNEL_SERVER_NAME = 'pH7WS/1.0.0';
 
     /**
