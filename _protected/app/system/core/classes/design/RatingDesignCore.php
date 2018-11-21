@@ -41,7 +41,9 @@ class RatingDesignCore
 
         $sPHSClass = 'pHS' . $iId . $sTable;
 
-        echo '<div class="', $sCssClass, ' ', $sPHSClass, '" id="', $fRate, '_', $iId, '_', $sTable, '"></div><p class="', $sPHSClass, '_txt">', t('Score: %0% - Votes: %1%', $fRate, $aRating['votes']), '</p>
+        echo '<div itemscope="itemscope" itemtype="http://schema.org/AggregateRating">';
+
+        echo '<div class="', $sCssClass, ' ', $sPHSClass, '" id="', $fRate, '_', $iId, '_', $sTable, '"></div><p itemprop="', $fRate, '" content="ratingCount" class="', $sPHSClass, '_txt">', t('Score: %0% - Votes: %1%', $fRate, $aRating['votes']), '</p>
               <script>$(".', $sPHSClass, '").pHRating({length:5,decimalLength:1,rateMax:5});</script>';
 
         /**
@@ -52,6 +54,8 @@ class RatingDesignCore
             $sUrl = Uri::get('user', 'signup', 'step1', '?msg=' . t('You need to be a member for voting.'), false);
             echo '<script>$(".', $sPHSClass, '").click(function(){window.location=\'', $sUrl, '\'});</script>';
         }
+
+        echo '</div>';
     }
 
     /**
