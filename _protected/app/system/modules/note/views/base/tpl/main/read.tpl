@@ -10,8 +10,8 @@
                 {{ NoteDesign::thumb($post) }}
             </div>
 
-            <div itemprop="articleBody" class="s_bMarg">
-                {content}
+            <div itemprop="articleBody">
+                {content}<br />
             </div>
 
             <hr />

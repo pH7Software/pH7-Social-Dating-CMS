@@ -3,8 +3,8 @@
         <article>
             <time {if !empty($updated_date)}itemprop="dateModified" datetime="{updated_date}"{else}itemprop="datePublished" datetime="{created_date}" pubdate="pubdate"{/if}></time>
 
-            <div itemprop="articleBody" class="s_bMarg">
-                {content}
+            <div itemprop="articleBody">
+                {content}<br /><br />
             </div>
 
             <hr />
