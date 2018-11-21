@@ -50,8 +50,6 @@ final class Server
 
     public function __construct()
     {
-        /*** Copyright ***/
-        // Especially not to use the header_remove(); function no arguments if the sessions do not work correctly
         header('Server: ' . Kernel::SOFTWARE_SERVER_NAME);
         header('X-Powered-By: ' . Kernel::SOFTWARE_TECHNOLOGY_NAME);
         header('X-Content-Encoded-By: ' . Kernel::SOFTWARE_NAME . ' - ' . Kernel::SOFTWARE_COMPANY . ' ' . Kernel::SOFTWARE_VERSION . ' Build ' . Kernel::SOFTWARE_BUILD);

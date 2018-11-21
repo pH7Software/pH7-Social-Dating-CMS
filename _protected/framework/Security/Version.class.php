@@ -39,8 +39,8 @@ final class Version
     const KERNEL_RELEASE_DATE = '2018-11-19';
 
     /***** Framework Server *****/
-    const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1'; // Ph7 Technology
-    const KERNEL_SERVER_NAME = 'pH7WS/1.0.0'; // pH7 Web Server
+    const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1';
+    const KERNEL_SERVER_NAME = 'pH7WS/1.0.0';
 
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
