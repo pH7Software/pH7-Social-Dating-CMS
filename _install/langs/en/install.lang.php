@@ -61,7 +61,7 @@ $LANG = array(
     'db_name' => 'Database name',
     'db_username' => 'Database username',
     'db_password' => 'Database password',
-    'db_prefix' => 'Prefix for tables in database',
+    'db_prefix' => 'Table name prefix',
     'desc_db_prefix' => 'This option is useful when you have multiple installations of pH7CMS on the same database.
         We recommend that you change the default values ​​in order to increase the security of your website.',
     'db_encoding' => 'Encoding',
