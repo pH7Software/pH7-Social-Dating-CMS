@@ -43,7 +43,7 @@ class RatingDesignCore
 
         echo '<div itemscope="itemscope" itemtype="http://schema.org/AggregateRating">';
 
-        echo '<div class="', $sCssClass, ' ', $sPHSClass, '" id="', $fRate, '_', $iId, '_', $sTable, '"></div><p itemprop="', $fRate, '" content="ratingCount" class="', $sPHSClass, '_txt">', t('Score: %0% - Votes: %1%', $fRate, $aRating['votes']), '</p>
+        echo '<div class="', $sCssClass, ' ', $sPHSClass, '" id="', $fRate, '_', $iId, '_', $sTable, '"></div><p itemprop="ratingValue" content="', $fRate, '" itemprop="ratingCount" content="', $aRating['votes'], '" class="', $sPHSClass, '_txt">', t('Score: %0% - Votes: %1%', $fRate, $aRating['votes']), '</p>
               <script>$(".', $sPHSClass, '").pHRating({length:5,decimalLength:1,rateMax:5});</script>';
 
         /**
