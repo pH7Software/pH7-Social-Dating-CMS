@@ -1,5 +1,4 @@
 {{ $design->htmlHeader() }}
-{{ $design->softwareComment() }}
 <html lang="{% $config->values['language']['lang'] %}">
   <head>
     <meta charset="{% $config->values['language']['charset'] %}" />

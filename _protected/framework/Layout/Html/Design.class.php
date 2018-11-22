@@ -355,14 +355,6 @@ class Design
     }
 
     /**
-     * @return string
-     */
-    final public function softwareComment()
-    {
-        echo PageDna::generateHtmlComment();
-    }
-
-    /**
      * Provide a "Powered By" link.
      *
      * @param bool $bLink To include a link to pH7CMS or pH7Framework.
@@ -964,7 +956,6 @@ HTML;
         <meta name="creator" content="', Kernel::SOFTWARE_NAME, '" />
         <meta name="designer" content="', Kernel::SOFTWARE_NAME, '" />
         <meta name="generator" content="', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, '" />';
-        $this->softwareComment();
         $this->externalCssFile(PH7_URL_STATIC . PH7_CSS . 'js/jquery/smoothness/jquery-ui.css');
         $this->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_CSS, 'common.css,style.css,form.css');
         $this->externalJsFile(PH7_URL_STATIC . PH7_JS . 'jquery/jquery.js');
