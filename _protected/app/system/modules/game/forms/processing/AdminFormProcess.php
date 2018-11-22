@@ -19,6 +19,7 @@ use PH7\Framework\Util\Various;
 class AdminFormProcess extends Form
 {
     const GAME_THUMBNAIL_SIZE = 60;
+    const RANDOM_STRING_LENGTH = 30;
 
     public function __construct()
     {
@@ -31,7 +32,7 @@ class AdminFormProcess extends Form
             return; // Stop execution of the method.
         }
 
-        $sThumbFile = Various::genRnd($oImg->getFileName(), 30) . PH7_DOT . $oImg->getExt();
+        $sThumbFile = Various::genRnd($oImg->getFileName(), self::RANDOM_STRING_LENGTH) . PH7_DOT . $oImg->getExt();
         $sThumbDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'game/img/thumb/';
 
         $oImg->square(self::GAME_THUMBNAIL_SIZE);
@@ -39,7 +40,7 @@ class AdminFormProcess extends Form
         unset($oImg);
 
         // Game
-        $sGameFile = Various::genRnd($_FILES['file']['name'], 30) . PH7_DOT . $this->file->getFileExt($_FILES['file']['name']);
+        $sGameFile = Various::genRnd($_FILES['file']['name'], self::RANDOM_STRING_LENGTH) . PH7_DOT . $this->file->getFileExt($_FILES['file']['name']);
         $sGameDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'game/file/';
 
         // If the folders is not created (games not installed), yet we will create.
