@@ -69,6 +69,7 @@ $LANG = array(
     'desc_db_port' => 'Veuillez laisser la valeur à "3306" si vous ne savez pas.',
     'ffmpeg_path' => 'Le chemin vers l\'exécutable FFmpeg (si vous ne le savez pas où il se trouve, veuillez vous renseigner auprès de votre hébergeur)',
     'bug_report_email' => 'E-mail de rapport de bogues',
+    'bug_report_email_placeholder' => 'bug@yourdomain.com',
     'admin_first_name' => 'Votre prénom',
     'admin_last_name' => 'Votre nom de famille',
     'admin_username' => 'Votre nom d\'utilisateur pour vous connecter au panneau d\'administration de votre site',

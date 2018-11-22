@@ -70,6 +70,7 @@ $LANG = array(
     'desc_db_port' => 'Please leave to "3306" if you don\'t know.',
     'ffmpeg_path' => 'The path to the FFmpeg executable (if you don\'t know where it is, please ask your hosting)',
     'bug_report_email' => 'Bug reports email',
+    'bug_report_email_placeholder' => 'error_log@yourdomain.com',
     'admin_first_name' => 'Your first name',
     'admin_last_name' => 'Your last name',
     'admin_username' => 'Your username (to login into the admin panel)',

@@ -55,7 +55,7 @@
 
         <p>
             <span class="mandatory">*</span> <label for="bug_report_email">{$LANG.bug_report_email}:</label><br />
-            <input type="email" name="bug_report_email" id="bug_report_email" value="{$smarty.session.val.bug_report_email|escape}" required="required" />
+            <input type="email" name="bug_report_email" id="bug_report_email" value="{$smarty.session.val.bug_report_email|escape}" placeholder="{$LANG.bug_report_email_placeholder}" required="required" />
         </p>
 
         <p>
