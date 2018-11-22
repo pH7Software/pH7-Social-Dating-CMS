@@ -30,9 +30,7 @@ class MainController extends Controller
 
         $this->oDataModel = new DataCoreModel;
 
-        /* Enable caching for all pages of this module */
-        $this->view->setCaching(true);
-        $this->view->setCacheExpire(self::STATIC_CACHE_LIFETIME);
+        $this->enableStaticTplCache();
     }
 
     public function xslLayout()
@@ -134,5 +132,16 @@ class MainController extends Controller
                 $this->view->comments = $this->isParamValid($mParam) ? $this->oDataModel->getRecipientCommentsGames($mParam) : $this->view->comments = $this->oDataModel->getCommentsGames();
                 break;
         }
+    }
+
+    /**
+     * Enable caching for all pages of this module.
+     *
+     * @return void
+     */
+    private function enableStaticTplCache()
+    {
+        $this->view->setCaching(true);
+        $this->view->setCacheExpire(self::STATIC_CACHE_LIFETIME);
     }
 }
