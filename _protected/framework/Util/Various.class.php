@@ -23,7 +23,7 @@ class Various
     const DEFAULT_LENGTH = 40;
 
     /**
-     * Generate Random.
+     * Generate Random string.
      *
      * @param string|null $sStr
      * @param int $iLength Default is 40 Characters.
