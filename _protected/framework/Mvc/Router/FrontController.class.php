@@ -42,6 +42,7 @@ use Teapot\StatusCode;
 final class FrontController
 {
     const PROJECT_NAMESPACE = 'PH7\\';
+    const CONTROLLER_SUFFIX = 'Controller';
     const INDEX_FILE = 'index.php';
 
     const REGEX_MODULE_FORMAT = '#^[a-z0-9\.\-_]+$#i';
@@ -163,7 +164,7 @@ final class FrontController
                 $this->oRegistry->url_themes_module = PH7_RELATIVE . PH7_LAYOUT . $sPathModule . $this->oRegistry->module . PH7_SH . PH7_TPL;
 
                 // Get the default controller
-                $this->oRegistry->controller = ucfirst($oRoute->getAttribute('controller')) . 'Controller';
+                $this->oRegistry->controller = ucfirst($oRoute->getAttribute('controller')) . self::CONTROLLER_SUFFIX;
 
                 // Get the default action
                 $this->oRegistry->action = $oRoute->getAttribute('action');
@@ -221,10 +222,10 @@ final class FrontController
 
         } elseif ($this->oUri->fragment(1) && preg_match(self::REGEX_CONTROLLER_FORMAT, $this->oUri->fragment(1))) {
             // Set the controller
-            $this->oRegistry->controller = ucfirst($this->oUri->fragment(1)) . 'Controller';
+            $this->oRegistry->controller = ucfirst($this->oUri->fragment(1)) . self::CONTROLLER_SUFFIX;
         } else {
             // Get the default controller
-            $this->oRegistry->controller = ucfirst($this->oConfig->values['module']['default_controller']) . 'Controller';
+            $this->oRegistry->controller = ucfirst($this->oConfig->values['module']['default_controller']) . self::CONTROLLER_SUFFIX;
         }
 
         if ($this->oUri->fragment(2) && preg_match(self::REGEX_ACTION_FORMAT, $this->oUri->fragment(2))) {
@@ -276,10 +277,10 @@ final class FrontController
             exit;
         } elseif ($this->oUri->fragment(2) && preg_match(self::REGEX_CONTROLLER_FORMAT, $this->oUri->fragment(2))) {
             // Set the controller
-            $this->oRegistry->controller = ucfirst($this->oUri->fragment(2)) . 'Controller';
+            $this->oRegistry->controller = ucfirst($this->oUri->fragment(2)) . self::CONTROLLER_SUFFIX;
         } else {
             // Get the default controller
-            $this->oRegistry->controller = ucfirst($this->oConfig->values['module']['default_controller']) . 'Controller';
+            $this->oRegistry->controller = ucfirst($this->oConfig->values['module']['default_controller']) . self::CONTROLLER_SUFFIX;
         }
 
         if ($this->oUri->fragment(3) && preg_match(self::REGEX_ACTION_FORMAT, $this->oUri->fragment(3))) {
