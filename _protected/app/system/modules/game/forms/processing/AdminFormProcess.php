@@ -31,7 +31,7 @@ class AdminFormProcess extends Form
             return; // Stop execution of the method.
         }
 
-        $sThumbFile = Various::genRnd($oImg->getFileName(), 30) . $oImg->getExt();
+        $sThumbFile = Various::genRnd($oImg->getFileName(), 30) . PH7_DOT . $oImg->getExt();
         $sThumbDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'game/img/thumb/';
 
         $oImg->square(self::GAME_THUMBNAIL_SIZE);
