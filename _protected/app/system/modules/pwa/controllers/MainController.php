@@ -14,10 +14,12 @@ class MainController extends Controller
 {
     const CONTENT_TYPE = 'application/json';
     const JSON_TPL_EXT = '.json.tpl';
+    const STATIC_CACHE_LIFETIME = 86400; // 86400 secs = 24 hours
 
     public function manifest()
     {
         $this->setContentType();
+        $this->enableStaticTplCache();
 
         $this->view->bg_color = $this->config->values['module.setting']['background_color'];
 
@@ -39,6 +41,12 @@ class MainController extends Controller
         $this->setContentType(); // Header, output format
 
         $this->view->display($this->httpRequest->currentController() . PH7_DS . $this->registry->action . self::JSON_TPL_EXT);
+    }
+
+    private function enableStaticTplCache()
+    {
+        $this->view->setCaching(true);
+        $this->view->setCacheExpire(self::STATIC_CACHE_LIFETIME);
     }
 
     /**
