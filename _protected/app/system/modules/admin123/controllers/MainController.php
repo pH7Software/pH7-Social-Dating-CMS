@@ -13,7 +13,6 @@ namespace PH7;
 use PH7\Framework\Layout\Html\Meta;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
-use PH7\Framework\Security\Version;
 use PH7\Framework\Url\Header;
 
 class MainController extends Controller
@@ -32,8 +31,6 @@ class MainController extends Controller
         $this->view->h3_title = t('How are you doing today?');
 
         $this->view->is_news_feed = (bool)DbConfig::getSetting('isSoftwareNewsFeed');
-
-        $this->checkUpdates();
 
         $this->addStats();
 
@@ -311,20 +308,6 @@ class MainController extends Controller
 
 
         unset($oStatModel);
-    }
-
-    /**
-     * @return void
-     */
-    protected function checkUpdates()
-    {
-        if (Version::isUpdateEligible()) {
-            $aLatestVerInfo = Version::getLatestInfo();
-            $sLatestVer = t('%0% build %1%', $aLatestVerInfo['version'], $aLatestVerInfo['build']);
-
-            $sMsg = t('%software_name% <strong>%0%</strong> is available! Please <a href="%1%" target="_blank" rel="noopener">update it today</a> to keep your site safe and stable.', $sLatestVer, Core::SOFTWARE_WEBSITE);
-            $this->design->setMessage($sMsg);
-        }
     }
 
     /**
