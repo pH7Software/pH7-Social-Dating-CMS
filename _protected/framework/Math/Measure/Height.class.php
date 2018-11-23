@@ -26,7 +26,11 @@ class Height extends Measure implements Measurable
         $iFoot = floor($iInch / 12);
         $iInch = ($iInch % 12);
 
-        return ['cm' => $this->iUnit, 'ft' => $iFoot, 'in' => $iInch];
+        return [
+            'cm' => $this->iUnit,
+            'ft' => $iFoot,
+            'in' => $iInch
+        ];
     }
 
     /**

@@ -25,7 +25,11 @@ class Weight extends Measure implements Measurable
         $iStone = round($this->iUnit * 0.157473);
         $iPound = round($this->iUnit * 2.20462);
 
-        return ['kg' => $this->iUnit, 'st' => $iStone, 'lb' => $iPound];
+        return [
+            'kg' => $this->iUnit,
+            'st' => $iStone,
+            'lb' => $iPound
+        ];
     }
 
     /**
