@@ -1855,7 +1855,7 @@ msgid "You are successfully logged out."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/MainController.php:323
-msgid "%0% build %1%"
+msgid "%0%, build %1%"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/MainController.php:325
