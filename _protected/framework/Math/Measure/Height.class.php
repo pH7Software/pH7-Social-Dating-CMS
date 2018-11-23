@@ -45,7 +45,7 @@ class Height extends Measure implements Measurable
     public function display($bPrint = false)
     {
         $aData = $this->get();
-        $sHeightTxt = t('%0% &prime; %1% &Prime; &ndash; %2% cm', $aData['ft'], $aData['in'], $aData['cm']);
+        $sHeightTxt = t('%0% ′ %1% ″ – %2% cm', $aData['ft'], $aData['in'], $aData['cm']);
 
         if (!$bPrint) {
             return $sHeightTxt;

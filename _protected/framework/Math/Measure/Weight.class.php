@@ -44,7 +44,7 @@ class Weight extends Measure implements Measurable
     public function display($bPrint = false)
     {
         $aData = $this->get();
-        $sWeightTxt = t('%0% sts &ndash; %1% lbs &ndash; %2% kgs', $aData['st'], $aData['lb'], $aData['kg']);
+        $sWeightTxt = t('%0% sts – %1% lbs – %2% kgs', $aData['st'], $aData['lb'], $aData['kg']);
 
         if (!$bPrint) {
             return $sWeightTxt;

@@ -10596,11 +10596,11 @@ msgid ""
 msgstr ""
 
 #: _protected/framework/Math/Measure/Height.class.php:44
-msgid "%0% &prime; %1% &Prime; &ndash; %2% cm"
+msgid "%0% ′ %1% ″ – %2% cm"
 msgstr ""
 
 #: _protected/framework/Math/Measure/Weight.class.php:43
-msgid "%0% sts &ndash; %1% lbs &ndash; %2% kgs"
+msgid "%0% sts – %1% lbs – %2% kgs"
 msgstr ""
 
 #: _protected/framework/Mvc/Controller/Controller.class.php:108
