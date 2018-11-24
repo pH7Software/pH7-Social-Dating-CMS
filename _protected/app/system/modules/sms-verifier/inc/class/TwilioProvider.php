@@ -27,6 +27,6 @@ class TwilioProvider extends SmsProvider implements SmsProvidable
             ]
         );
 
-        return isset($oMessage->sid);
+        return strlen($oMessage->sid) > 1;
     }
 }
