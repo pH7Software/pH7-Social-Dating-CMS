@@ -10,6 +10,7 @@ namespace PH7;
 
 use PH7\Framework\Config\Config;
 use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
 use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Registry\Registry;
@@ -30,8 +31,10 @@ class AffiliateCore extends UserCore
     public static function auth()
     {
         $oSession = new Session;
+        $bSessionIpCheck = ((bool)DbConfig::getSetting('isAffiliateSessionIpCheck')) ? $oSession->get('affiliate_ip') === Ip::get() : true;
+
         $bIsConnected = (int)$oSession->exists('affiliate_id') &&
-            $oSession->get('affiliate_ip') === Ip::get() &&
+            $bSessionIpCheck &&
             $oSession->get('affiliate_http_user_agent') === (new Browser)->getUserAgent();
         unset($oSession);
 

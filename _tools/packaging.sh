@@ -64,6 +64,7 @@ function run() {
             rm ./phpunit.xml.dist
             rm ./_protected/app/configs/config.ini
             rm ./nginx.conf
+            rm -rf ./.github/
             rm -rf ./coverage/ # PHPUnit coverage reports
             rm -rf ./.idea/ # PHPStorm
 
