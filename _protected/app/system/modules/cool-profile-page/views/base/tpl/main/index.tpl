@@ -221,10 +221,12 @@
     </div>
 
     <div class="col-xs-12 col-sm-2 col-md-3">
-        <div class="s_bMarg">
-            <h2>{lang 'Location'}</h2>
-            {map}
-        </div>
+        {if $is_map_enabled}
+            <div class="s_bMarg">
+                <h2>{lang 'Location'}</h2>
+                {map}
+            </div>
+        {/if}
 
         <div class="ad_160_600">
             {designModel.ad(160, 600)}

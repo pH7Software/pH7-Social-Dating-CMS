@@ -43,6 +43,10 @@
         <link title="{lang 'Users Birthday'}" url="{{ $design->url('birthday','user','index') }}" />
     {/if}
 
+    {if $is_map_enabled}
+        <link title="{lang 'People Nearby'}" url="{{ $design->url('map','country','index') }}" />
+    {/if}
+
     <link title="{lang 'About Us'}" url="{{ $design->url('page','main','about') }}" />
     <link title="{lang 'Help Us'}" url="{{ $design->url('page','main','helpus') }}" />
     <link title="{lang 'Share %site_name%'}" url="{{ $design->url('page','main','sharesite') }}" />
