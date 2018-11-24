@@ -17,7 +17,7 @@ class PhoneNumberFormProcess extends Form
     {
         parent::__construct();
 
-        $sPhoneNumber = $this->httpRequest->get('phone_number');
+        $sPhoneNumber = $this->httpRequest->post('phone_number');
         $sEmail = $this->session->get(SmsVerificationCore::USER_EMAIL_SESS_NAME);
         $oSmsApi = SmsGatewayFactory::create($this->config->values['module.setting']['default_sms_gateway']);
         $bResult = $oSmsApi->send(

@@ -49,6 +49,6 @@ class VerificationFormProcess extends Form
     {
         $sEmail = $this->session->get(SmsVerificationCore::USER_EMAIL_SESS_NAME);
 
-        return $this->httpRequest->get('verification_code') === Verification::getVerificationCode($sEmail);
+        return $this->httpRequest->post('verification_code') === Verification::getVerificationCode($sEmail);
     }
 }
