@@ -37,7 +37,7 @@ class SmsGatewayFactory
                 $sSenderNumber = Config::getInstance()->values['module.setting']['sender.phone_number'];
                 $sApiToken = Config::getInstance()->values['module.setting']['twilio.api_token'];
                 $sApiId = Config::getInstance()->values['module.setting']['twilio.api_id'];
-                return new ClickatellProvider($sSenderNumber, $sApiToken, $sApiId);
+                return new TwilioProvider($sSenderNumber, $sApiToken, $sApiId);
 
             default:
                 throw new InvalidSmsGatewayException(

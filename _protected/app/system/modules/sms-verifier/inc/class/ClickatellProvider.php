@@ -9,6 +9,7 @@
 namespace PH7;
 
 use Clickatell\ClickatellException;
+use Clickatell\Rest as Client;
 
 class ClickatellProvider extends SmsProvider implements SmsProvidable
 {
@@ -17,7 +18,7 @@ class ClickatellProvider extends SmsProvider implements SmsProvidable
      */
     public function send($sPhoneNumber, $sTextMessage)
     {
-        $oClickatell = new Rest($this->sApiToken);
+        $oClickatell = new Client($this->sApiToken);
 
         try {
             $aResponse = $oClickatell->sendMessage(
