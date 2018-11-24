@@ -28,13 +28,13 @@ class SmsGatewayFactory
     {
         switch ($sSmsGateway) {
             case self::CLICKATELL_NAME:
-                $sSenderNumber = Config::getInstance()->values['module.setting']['sender.phone_number'];
+                $sSenderNumber = Config::getInstance()->values['module.setting']['clickatell.sender.phone_number'];
                 $sApiToken = Config::getInstance()->values['module.setting']['clickatell.api_token'];
                 return new ClickatellProvider($sSenderNumber, $sApiToken);
                 break;
 
             case self::TWILIO_NAME:
-                $sSenderNumber = Config::getInstance()->values['module.setting']['sender.phone_number'];
+                $sSenderNumber = Config::getInstance()->values['module.setting']['twilio.sender.phone_number'];
                 $sApiToken = Config::getInstance()->values['module.setting']['twilio.api_token'];
                 $sApiId = Config::getInstance()->values['module.setting']['twilio.api_id'];
                 return new TwilioProvider($sSenderNumber, $sApiToken, $sApiId);
