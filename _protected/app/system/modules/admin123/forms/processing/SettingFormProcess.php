@@ -31,7 +31,6 @@ class SettingFormProcess extends Form
         // General Settings
         'site_name' => 'siteName',
         'default_template' => 'defaultTemplate',
-        //'default_sys_module' => 'defaultSysModule',
         'default_language' => 'defaultLanguage',
         'map_type' => 'mapType',
         'profile_with_avatars' => 'profileWithAvatarSet',
