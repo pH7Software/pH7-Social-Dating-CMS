@@ -19,11 +19,13 @@ class Verification
     use Statik;
 
     /**
+     * @param string $sEmail
+     *
      * @return string
      */
-    public static function getVerificationCode()
+    public static function getVerificationCode($sEmail)
     {
-        $sUserHashValidation = (new UserCoreModel)->getHashValidation();
+        $sUserHashValidation = (new UserCoreModel)->getHashValidation($sEmail);
 
         return substr(
             $sUserHashValidation,

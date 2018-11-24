@@ -102,8 +102,9 @@ class LoginFormProcess extends Form implements LoginableForm
 
             $oUser = new UserCore;
             if ($oUserData->active == RegistrationCore::SMS_ACTIVATION) {
-                // Store the user ID before redirecting to sms-verifier module
+                // Store the user ID/email before redirecting to sms-verifier module
                 $this->session->set(SmsVerificationCore::PROFILE_ID_SESS_NAME, $iId);
+                $this->session->set(SmsVerificationCore::USER_EMAIL_SESS_NAME, $oUserData->email);
 
                 Header::redirect(
                     Uri::get('sms-verifier', 'main', 'send')

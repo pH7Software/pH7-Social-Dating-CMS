@@ -47,6 +47,8 @@ class VerificationFormProcess extends Form
      */
     private function isVerificationCodeValid()
     {
-        return $this->httpRequest->get('verification_code') === Verification::getVerificationCode();
+        $sEmail = $this->session->get(SmsVerificationCore::USER_EMAIL_SESS_NAME);
+
+        return $this->httpRequest->get('verification_code') === Verification::getVerificationCode($sEmail);
     }
 }
