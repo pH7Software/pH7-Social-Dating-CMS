@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
 use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Session\Session;
@@ -28,8 +29,10 @@ class AdminCore extends UserCore
     public static function auth()
     {
         $oSession = new Session;
+        $bSessionIpCheck = ((bool)DbConfig::getSetting('isAdminSessionIpCheck')) ? $oSession->get('admin_ip') === Ip::get() : true;
+
         $bIsConnected = (int)$oSession->exists('admin_id') &&
-            $oSession->get('admin_ip') === Ip::get() &&
+            $bSessionIpCheck &&
             $oSession->get('admin_http_user_agent') === (new Browser)->getUserAgent();
         unset($oSession);
 

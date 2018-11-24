@@ -1130,7 +1130,7 @@ ALTER SEQUENCE ph7_modules_seq RESTART WITH 1;
 
 INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of pH7CMS SQL schema (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.5.1', 1);
+('pH7CMS', 'SQL System Schema', '1.5.2', 1);
 
 
 CREATE SEQUENCE ph7_report_seq;
@@ -1216,6 +1216,9 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('loginUserAttemptTime', 60, 'Time before a new connection attempt, in minutes!', 'security'),
 ('loginAffiliateAttemptTime', 60, 'Time before a new connection attempt, in minutes!', 'security'),
 ('loginAdminAttemptTime', 120, 'Time before a new connection attempt, in minutes!', 'security'),
+('isUserSessionIpCheck', 0, 'Enable it to Protect against session hijacking. Disable it if use dynamic IPs', 'security'),
+('isAffiliateSessionIpCheck', 1, 'Enable it to Protect against session hijacking. Disable it if use dynamic IPs', 'security'),
+('isAdminSessionIpCheck', 1, 'Enable it to Protect against session hijacking. Disable it if use dynamic IPs', 'security'),
 ('avatarManualApproval', 0, '0 to disable or 1 to enable ', 'moderation'),
 ('bgProfileManualApproval', 0, 'Background Profile Manual Approval. 0 to disable or 1 to enable ', 'moderation'),
 ('noteManualApproval', 0, '0 to disable or 1 to enable ', 'moderation'),
