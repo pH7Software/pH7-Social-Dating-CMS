@@ -275,10 +275,13 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Url(t('IP API:'), 'ip_api', ['description' => t('The URL must end with a slash.'), 'value' => DbConfig::getSetting('ipApi'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Url(t('Chat API:'), 'chat_api', ['description' => t('Documentation: <a href="%0%">Change the default chat service by your real one</a>.<br /> <small>Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).</small>', self::CHANGE_CHAT_DOC_URL, '<strong>%site_url%</strong>', '<strong>%site_name%</strong>'), 'value' => DbConfig::getSetting('chatApi'), 'required' => 1]));
+        if (SysMod::isEnabled('chat')) {
+            $oForm->addElement(new \PFBC\Element\Url(t('Chat API:'), 'chat_api', ['description' => t('Documentation: <a href="%0%">Change the default chat service by your real one</a>.<br /> <small>Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).</small>', self::CHANGE_CHAT_DOC_URL, '<strong>%site_url%</strong>', '<strong>%site_name%</strong>'), 'value' => DbConfig::getSetting('chatApi'), 'required' => 1]));
+        }
 
-        $oForm->addElement(new \PFBC\Element\Url(t('Chatroulette API:'), 'chatroulette_api', ['description' => t('Documentation: <a href="%0%">Change the default chatroulette provider by yours</a>.<br /> <small>Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).</small>', self::CHANGE_CHAT_DOC_URL, '<strong>%site_url%</strong>', '<strong>%site_name%</strong>'), 'value' => DbConfig::getSetting('chatrouletteApi'), 'required' => 1]));
-
+        if (SysMod::isEnabled('chatroulette')) {
+            $oForm->addElement(new \PFBC\Element\Url(t('Chatroulette API:'), 'chatroulette_api', ['description' => t('Documentation: <a href="%0%">Change the default chatroulette provider by yours</a>.<br /> <small>Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).</small>', self::CHANGE_CHAT_DOC_URL, '<strong>%site_url%</strong>', '<strong>%site_name%</strong>'), 'value' => DbConfig::getSetting('chatrouletteApi'), 'required' => 1]));
+        }
 
         /********** Automation **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="automation"><div class="col-md-10"><h2 class="underline">' . t('Automation') . '</h2>'));
