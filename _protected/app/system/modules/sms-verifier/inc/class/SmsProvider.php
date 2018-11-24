@@ -22,7 +22,7 @@ class SmsProvider
     /**
      * @param string $sSenderNumber
      * @param string $sApiToken
-     * @param string|null $sApiId
+     * @param string|null $sApiId At the moment, used only by Twilio API.
      */
     public function __construct($sSenderNumber, $sApiToken, $sApiId = null)
     {
