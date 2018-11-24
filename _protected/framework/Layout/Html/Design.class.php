@@ -589,7 +589,7 @@ class Design
         $sCity = Geo::getCity();
 
         if (SysMod::isEnabled('map')) {
-            $sHtml = '<a href="' . Uri::get('user', 'country', 'index', $sCountry . PH7_SH . $sCity) . '" title="' . t('Meet New People in %0%, %1% with %site_name%!', $sCountryLang, $sCity) . '">' . $sCity . '</a>';
+            $sHtml = '<a href="' . Uri::get('map', 'country', 'index', $sCountry . PH7_SH . $sCity) . '" title="' . t('Meet New People in %0%, %1% with %site_name%!', $sCountryLang, $sCity) . '">' . $sCity . '</a>';
         } else {
             $sHtml = '<abbr title="' . t('Meet New People in %0%, %1% thanks %site_name%!', $sCountryLang, $sCity) . '">' . $sCity . '</abbr>';
         }
