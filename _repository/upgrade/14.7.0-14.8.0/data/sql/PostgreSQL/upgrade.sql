@@ -11,5 +11,10 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('isAdminSessionIpCheck', 1, 'Enable it to Protect against session hijacking. Disable it if use dynamic IPs', 'security');
 
 
+-- Allow to disable Google Maps
+INSERT INTO ph7_sys_mods_enabled (moduleTitle, folderName, premiumMod, enabled) VALUES
+('Google Maps', 'map', '0', '1');
+
+
 -- Update pH7CMS's SQL schema version
 UPDATE ph7_modules SET version = '1.5.2' WHERE vendorName = 'pH7CMS';
