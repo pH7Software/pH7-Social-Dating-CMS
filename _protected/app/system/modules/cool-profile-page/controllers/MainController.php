@@ -12,6 +12,7 @@ namespace PH7;
 
 use PH7\Framework\Analytics\Statistic;
 use PH7\Framework\Date\Various as VDate;
+use PH7\Framework\Module\Various as SysMod;
 
 class MainController extends ProfileBaseController
 {
@@ -62,7 +63,10 @@ class MainController extends ProfileBaseController
 
             $this->imageToSocialMetaTags($oUser);
             $this->setMenuBar($aData['first_name'], $oUser);
-            $this->setMap($aData['city'], $aData['country'], $oUser);
+
+            if (SysMod::isEnabled('map')) {
+                $this->setMap($aData['city'], $aData['country'], $oUser);
+            }
 
             $this->view->id = $this->iProfileId;
             $this->view->username = $oUser->username;
