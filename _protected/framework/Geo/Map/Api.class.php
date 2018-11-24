@@ -31,6 +31,7 @@ use PH7\Framework\Config\Config;
  * Class to use the Google Maps v3 API
  *
  * @author Yohann CERDAN <cerdanyohann@yahoo.fr>
+ * @author Pierre-Henry SORIA <ph7software@gmail.com>
  */
 class Api
 {

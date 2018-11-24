@@ -588,7 +588,11 @@ class Design
         $sCountryLang = t($sCountryCode); // Country name translated into the user language
         $sCity = Geo::getCity();
 
-        $sHtml = '<a href="' . Uri::get('user', 'country', 'index', $sCountry . PH7_SH . $sCity) . '" title="' . t('Meet New People in %0%, %1% with %site_name%!', $sCountryLang, $sCity) . '">' . $sCity . '</a>';
+        if (SysMod::isEnabled('map')) {
+            $sHtml = '<a href="' . Uri::get('map', 'country', 'index', $sCountry . PH7_SH . $sCity) . '" title="' . t('Meet New People in %0%, %1% with %site_name%!', $sCountryLang, $sCity) . '">' . $sCity . '</a>';
+        } else {
+            $sHtml = '<abbr title="' . t('Meet New People in %0%, %1% thanks %site_name%!', $sCountryLang, $sCity) . '">' . $sCity . '</abbr>';
+        }
 
         if (!$bPrint) {
             return $sHtml;

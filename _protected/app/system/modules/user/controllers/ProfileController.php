@@ -80,7 +80,10 @@ class ProfileController extends ProfileBaseController
 
             $this->imageToSocialMetaTags($oUser);
             $this->setMenuBar($aData['first_name'], $oUser);
-            $this->setMap($aData['city'], $aData['country'], $oUser);
+
+            if (SysMod::isEnabled('map')) {
+                $this->setMap($aData['city'], $aData['country'], $oUser);
+            }
 
             $this->view->id = $this->iProfileId;
             $this->view->username = $oUser->username;

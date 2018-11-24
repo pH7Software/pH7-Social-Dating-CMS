@@ -15,11 +15,13 @@
                 <span>{lang 'Info'}</span>
             </a>
         </li>
-        <li>
-            <a href="#map">
-                <span>{lang 'Map'}</span>
-            </a>
-        </li>
+        {if $is_map_enabled}
+            <li>
+                <a href="#map">
+                    <span>{lang 'Map'}</span>
+                </a>
+            </li>
+        {/if}
         {if $is_relatedprofile_enabled}
             <li>
                 <a href="#related_profile">
@@ -306,9 +308,11 @@
         </div>
     </div>
 
-    <div class="content" id="map">
-        <span class="bold">{lang 'Profile Map:'}</span>{map}
-    </div>
+    {if $is_map_enabled}
+        <div class="content" id="map">
+            <span class="bold">{lang 'Profile Map:'}</span>{map}
+        </div>
+    {/if}
 
     {if $is_relatedprofile_enabled}
         <div class="content" id="related_profile">
@@ -393,7 +397,7 @@
     <script>
         tabs('p', [
             'general',
-            'map',
+            {if $is_map_enabled}'map',{/if}
             {if $is_relatedprofile_enabled}'related_profile',{/if}
             {if $is_friend_enabled}
                 'friend',
