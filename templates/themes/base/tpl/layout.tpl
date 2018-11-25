@@ -94,7 +94,7 @@
       {if $is_guest_homepage}
           <div class="row">
               <div role="banner" id="logo" class="col-md-8">
-                  <h1>
+                  <h1 itemprop="name">
                       <a href="{{ $design->homePageUrl() }}" title="{slogan}">{site_name}</a>
                   </h1>
               </div>

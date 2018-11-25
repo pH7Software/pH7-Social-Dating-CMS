@@ -41,8 +41,11 @@ class RatingDesignCore
 
         $sPHSClass = 'pHS' . $iId . $sTable;
 
-        echo '<div class="', $sCssClass, ' ', $sPHSClass, '" id="', $fRate, '_', $iId, '_', $sTable, '"></div><p class="', $sPHSClass, '_txt">', t('Score: %0% - Votes: %1%', $fRate, $aRating['votes']), '</p>
-              <script>$(".', $sPHSClass, '").pHRating({length:5,decimalLength:1,rateMax:5});</script>';
+        echo '<div itemscope="itemscope" itemtype="http://schema.org/AggregateRating">';
+
+        echo '<div class="', $sCssClass, ' ', $sPHSClass, '" id="', $fRate, '_', $iId, '_', $sTable, '"></div>';
+        echo '<p itemprop="ratingValue" content="', $fRate, '" itemprop="ratingCount" content="', $aRating['votes'], '" class="', $sPHSClass, '_txt">', t('Score: %0% - Votes: %1%', $fRate, $aRating['votes']), '</p>';
+        echo '<script>$(".', $sPHSClass, '").pHRating({length:5,decimalLength:1,rateMax:5});</script>';
 
         /**
          * Redirect the member to the registration page if not logged in.
@@ -52,6 +55,8 @@ class RatingDesignCore
             $sUrl = Uri::get('user', 'signup', 'step1', '?msg=' . t('You need to be a member for voting.'), false);
             echo '<script>$(".', $sPHSClass, '").click(function(){window.location=\'', $sUrl, '\'});</script>';
         }
+
+        echo '</div>';
     }
 
     /**

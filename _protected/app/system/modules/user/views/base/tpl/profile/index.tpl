@@ -107,14 +107,14 @@
         {/if}
     </ol>
 
-    <div class="content" id="general">
+    <div class="content" id="general" itemscope="itemscope" itemtype="http://schema.org/Person">
         {{ UserDesignCoreModel::userStatus($id) }}
         {{ (new AvatarDesignCore)->lightBox($username, $first_name, $sex, 400) }}
 
         <p>
             <span class="bold">{lang 'I am a:'}</span>
             <span class="italic">
-                <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&match_sex='.$sex) }}">
+                <a itemprop="gender" href="{{ $design->url('user','browse','index', '?country='.$country_code.'&match_sex='.$sex) }}">
                     {lang $sex}
                 </a>
             </span>
@@ -136,7 +136,7 @@
         <p>
             <span class="bold">{lang 'First name:'}</span>
             <span class="italic">
-                <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&first_name='.$first_name) }}">
+                <a itemprop="name" href="{{ $design->url('user','browse','index', '?country='.$country_code.'&first_name='.$first_name) }}">
                     {first_name}
                 </a>
             </span>
@@ -147,7 +147,7 @@
             <p>
                 <span class="bold">{lang 'Middle name:'}</span>
                 <span class="italic">
-                    <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&middle_name='.$middle_name) }}">
+                    <a itemprop="additionalName" href="{{ $design->url('user','browse','index', '?country='.$country_code.'&middle_name='.$middle_name) }}">
                         {middle_name}
                     </a>
                 </span>
@@ -159,7 +159,7 @@
             <p>
                 <span class="bold">{lang 'Last name:'}</span>
                 <span class="italic">
-                    <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&last_name='.$last_name) }}">
+                    <a itemprop="familyName" href="{{ $design->url('user','browse','index', '?country='.$country_code.'&last_name='.$last_name) }}">
                         {last_name}
                     </a>
                 </span>
@@ -171,7 +171,7 @@
             <p>
                 <span class="bold">{lang 'Age:'}</span>
                 <span class="italic">
-                    <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$birth_date) }}">
+                    <a itemprop="birthDate" href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$birth_date) }}">
                         {age}
                     </a>
                     <span class="gray">({birth_date_formatted})</span>
@@ -189,7 +189,7 @@
                     <p>
                         <span class="bold">{lang 'Height:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&height='.$val) }}">
+                            <a itemprop="height" href="{{ $design->url('user','browse','index', '?country='.$country_code.'&height='.$val) }}">
                                 {{ (new Framework\Math\Measure\Height($val))->display(true) }}
                             </a>
                         </span>
@@ -198,7 +198,7 @@
                     <p>
                         <span class="bold">{lang 'Weight:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&weight='.$val) }}">
+                            <a itemprop="weight" href="{{ $design->url('user','browse','index', '?country='.$country_code.'&weight='.$val) }}">
                                 {{ (new Framework\Math\Measure\Weight($val))->display(true) }}
                             </a>
                         </span>
@@ -207,7 +207,7 @@
                     <p>
                         <span class="bold">{lang 'Country:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}">
+                            <a itemprop="nationality" href="{{ $design->url('user','browse','index', '?country='.$country_code) }}">
                                 {country}
                             </a>
                         </span>&nbsp;&nbsp;<img src="{{ $design->getSmallFlagIcon($country_code) }}" title="{country}" alt="{country}" />
@@ -216,7 +216,7 @@
                     <p>
                         <span class="bold">{lang 'City/Town:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&city='.$city) }}">
+                            <a itemprop="homeLocation" href="{{ $design->url('user','browse','index', '?country='.$country_code.'&city='.$city) }}">
                                 {city}
                             </a>
                         </span>
@@ -242,12 +242,12 @@
                 {elseif $key == 'website'}
                     <p>
                         {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Site/Blog:'}</span>
-                        <span class="italic">{{ $design->urlTag($val) }}</span>
+                        <span itemprop="url" class="italic">{{ $design->urlTag($val) }}</span>
                     </p>
                 {elseif $key == 'socialNetworkSite'}
                     <p>
                         {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Social Profile:'}</span>
-                        <span class="italic">{{ $design->urlTag($val) }}</span>
+                        <span itemprop="url" class="italic">{{ $design->urlTag($val) }}</span>
                     </p>
                 {else}
                     {{ $lang_key = strtolower($key) }}
@@ -255,7 +255,7 @@
                      {if strstr($key, 'url')}
                          <p>
                              {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang $lang_key}</span>
-                             <span class="italic">{{ $design->urlTag($val) }}</span>
+                             <span itemprop="url" class="italic">{{ $design->urlTag($val) }}</span>
                          </p>
                     {else}
                         <p>
@@ -300,7 +300,7 @@
             {/if}
 
             {if !empty($description)}
-                <div class="quote italic">{description}</div>
+                <div itemprop="description" class="quote italic">{description}</div>
                 <div class="ad_336_280">
                     {designModel.ad(336, 280)}
                 </div>
