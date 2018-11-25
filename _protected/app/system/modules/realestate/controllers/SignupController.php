@@ -15,7 +15,7 @@ use PH7\Framework\Url\Header;
 
 class SignupController extends Controller
 {
-    const TOTAL_SIGNUP_STEPS = 3;
+    const TOTAL_SIGNUP_STEPS = 2;
 
     public function step1()
     {
@@ -66,23 +66,15 @@ class SignupController extends Controller
 
         $this->view->h1_title = '<div class="animated fadeInDown">' . $sH1Txt . '</div>';
 
-        $this->setupProgressbar(1, 33);
+        $this->setupProgressbar(1, 50);
 
         $this->output();
     }
 
     public function step2()
     {
-        $this->setTitle(t('Sign up - Step 2/3'));
-        $this->setupProgressbar(2, 66);
-
-        $this->output();
-    }
-
-    public function step3()
-    {
-        $this->setTitle(t('Sign up - Step 3/3'));
-        $this->setupProgressbar(3, 99);
+        $this->setTitle(t('Sign up - Step 2/2'));
+        $this->setupProgressbar(2, 75);
 
         $this->view->avatarDesign = new AvatarDesignCore; // Add AvatarDesign Class for displaying the avatar lightBox
 
@@ -91,37 +83,20 @@ class SignupController extends Controller
 
     public function done()
     {
-        if (!$this->session->exists('mail_step2')) {
-            Header::redirect(
-                Uri::get(
-                    'realestate',
-                    'signup',
-                    'step3'
-                )
-            );
-        } else {
-            if ((new UserMilestoneCore(new UserCoreModel))->isTotalUserReached()) {
-                $sUrl = Uri::get(
-                    'milestone-celebration',
-                    'main',
-                    'awesome'
-                );
-            } else {
-                // Remove all sessions created during registration
-                $this->session->destroy();
+        // Remove all sessions created during registration
+        $this->session->destroy();
 
-                $sUrl = Uri::get(
-                    'realestate',
-                    'main',
-                    'login'
-                );
-            }
+        $sUrl = Uri::get(
+            'realestate',
+            'main',
+            'login'
+        );
 
-            Header::redirect(
-                $sUrl,
-                (new Registration($this->view))->getMsg()
-            );
-        }
+        Header::redirect(
+            $sUrl,
+            (new Registration($this->view))->getMsg()
+        );
+
     }
 
     /**

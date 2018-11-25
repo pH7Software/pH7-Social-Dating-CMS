@@ -63,7 +63,7 @@ abstract class RegistrationCore
         $this->oView->content = t('Welcome to %site_name%, %0%!', $aInfo['first_name']) . '<br />' .
             t('Hi %0%! We are proud to welcome you as a member of %site_name%!', $aInfo['first_name']) . '<br />' .
             $this->getEmailMsg($aInfo) . '<br />' .
-            '<br /><span style="text-decoration:underline">' . t('Please save the following information for future refenrence:') . '</span><br /><em>' .
+            '<br /><span style="text-decoration:underline">' . t('Please save the following information for future reference:') . '</span><br /><em>' .
             t('Email: %0%.', $aInfo['email']) . '<br />' .
             t('Username: %0%.', $aInfo['username']) . '<br />' .
             $sPwdMsg . '</em>';
@@ -102,6 +102,10 @@ abstract class RegistrationCore
 
             case self::MANUAL_ACTIVATION:
                 $sMsg = t('Your account must be approved by an administrator. You will receive an email of any decision.');
+                break;
+
+            case self::SMS_ACTIVATION:
+                $sMsg = t('You have been successfully registered!');
                 break;
 
             default:

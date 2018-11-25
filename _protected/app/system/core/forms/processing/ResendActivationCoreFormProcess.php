@@ -59,7 +59,7 @@ class ResendActivationCoreFormProcess extends Form
         $this->view->content = t('Welcome to %site_name%, %0%!', $oHash->firstName) . '<br />' .
             t('Hi %0%! We are proud to welcome you as a member of %site_name%!', $oHash->firstName) . '<br />' .
             t('Your activation link is <em>"%0%"</em>.', '<a href="' . $sActivateLink . '">' . $sActivateLink . '</a>') . '<br />' .
-            t('Please save the following information for future refenrence:') . '<br /><em>' .
+            t('Please save the following information for future reference:') . '<br /><em>' .
             t('Email: %0%.', $oHash->email) . '<br />' .
             t('Username: %0%.', $oHash->username) . '<br />' .
             t('Password: ***** (this field is hidden to protect against theft of your account).') . '</em>';
