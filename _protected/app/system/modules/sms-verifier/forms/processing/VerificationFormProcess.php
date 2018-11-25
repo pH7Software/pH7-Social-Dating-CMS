@@ -27,7 +27,15 @@ class VerificationFormProcess extends Form
                 $iProfileId,
                 1
             );
-            $oUserModel->updateProfile('phone', $sPhoneNumber, $iProfileId, DbTableName::MEMBER_INFO);
+
+            // Add phone number to DB field
+            $oUserModel->updateProfile(
+                'phone',
+                $sPhoneNumber,
+                $iProfileId,
+                DbTableName::MEMBER_INFO
+            );
+
             unset($oUserModel);
 
             Header::redirect(
