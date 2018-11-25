@@ -46,6 +46,9 @@ final class FrontController
     const INDEX_FILE = 'index.php';
 
     const SIMPLE_MOD_REQUEST_PARAM_NAME = 'm';
+    const ASSET_REQUEST_PARAM_NAME = 'asset';
+    const AJAX_REQUEST_PARAM_NAME = 'ajax';
+    const GZIP_REQUEST_PARAM_NAME = 'gzip';
 
     const REGEX_MODULE_FORMAT = '#^[a-z0-9\.\-_]+$#i';
     const REGEX_CONTROLLER_FORMAT = '#^[a-z0-9_]+$#i';
@@ -87,7 +90,7 @@ final class FrontController
 
         $this->indexFileRouter();
 
-        if ($this->oUri->fragment(0) === 'asset' && $this->oUri->fragment(1) === 'gzip') {
+        if ($this->isAssetRequest(0) && $this->isGzipRequest(1)) {
             // Loading and compress CSS and JavaScript files
             $this->gzipRouter();
             exit;
@@ -218,7 +221,7 @@ final class FrontController
         /***** URL THE TEMPLATE *****/
         $this->oRegistry->url_themes_module = PH7_URL_TPL_SYS_MOD . $this->oRegistry->module . PH7_SH . PH7_TPL;
 
-        if ($this->oUri->fragment(1) === 'asset' && $this->oUri->fragment(2) === 'ajax') {
+        if ($this->isAssetRequest(1) && $this->isAjaxRequest(2)) {
             // Loading files Asynchronous Ajax
             $this->ajaxRouter($this->oRegistry->path_module);
             exit;
@@ -275,7 +278,7 @@ final class FrontController
         /***** URL THE TEMPLATE *****/
         $this->oRegistry->url_themes_module = PH7_URL_TPL_MOD . $this->oRegistry->module . PH7_SH . PH7_TPL;
 
-        if ($this->oUri->fragment(2) === 'asset' && $this->oUri->fragment(3) === 'ajax') {
+        if ($this->isAssetRequest(2) && $this->isAjaxRequest(3)) {
             // Loading files Asynchronous Ajax
             $this->ajaxRouter($this->oRegistry->path_module);
             exit;
@@ -405,9 +408,9 @@ final class FrontController
      */
     private function initializeAssets()
     {
-        if ($this->oUri->fragment(0) === 'asset') {
+        if ($this->isAssetRequest(0)) {
             switch ($this->oUri->fragment(1)) {
-                case 'ajax':
+                case self::AJAX_REQUEST_PARAM_NAME:
                     // Loading Asynchronous Ajax files
                     $this->ajaxRouter();
                     break;
@@ -740,6 +743,36 @@ final class FrontController
     private function isSimpleModuleRequest()
     {
         return $this->oUri->fragment(0) === self::SIMPLE_MOD_REQUEST_PARAM_NAME;
+    }
+
+    /**
+     * @param int $iKey
+     *
+     * @return bool
+     */
+    private function isAssetRequest($iKey)
+    {
+        return $this->oUri->fragment($iKey) === self::ASSET_REQUEST_PARAM_NAME;
+    }
+
+    /**
+     * @param int $iKey
+     *
+     * @return bool
+     */
+    private function isAjaxRequest($iKey)
+    {
+        return $this->oUri->fragment($iKey) === self::AJAX_REQUEST_PARAM_NAME;
+    }
+
+    /**
+     * @param int $iKey
+     *
+     * @return bool
+     */
+    private function isGzipRequest($iKey)
+    {
+        return $this->oUri->fragment($iKey) === self::GZIP_REQUEST_PARAM_NAME;
     }
 
     /**

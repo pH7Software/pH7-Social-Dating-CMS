@@ -57,7 +57,7 @@ class Uri
     /**
      * Gets URI fragment.
      *
-     * @param integer $iKey The uri key.
+     * @param integer $iKey The URI key.
      *
      * @return boolean|string Returns FALSE if key is not found, otherwise STRING of the URI fragment if success.
      */
