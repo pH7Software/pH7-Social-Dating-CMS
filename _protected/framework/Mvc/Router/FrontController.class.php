@@ -45,6 +45,8 @@ final class FrontController
     const CONTROLLER_SUFFIX = 'Controller';
     const INDEX_FILE = 'index.php';
 
+    const SIMPLE_MOD_REQUEST_PARAM_NAME = 'm';
+
     const REGEX_MODULE_FORMAT = '#^[a-z0-9\.\-_]+$#i';
     const REGEX_CONTROLLER_FORMAT = '#^[a-z0-9_]+$#i';
     const REGEX_ACTION_FORMAT = '#^[a-z0-9_]+$#i';
@@ -115,7 +117,7 @@ final class FrontController
     private function launchNonRewritingRouters()
     {
         if (!$this->isRouterRewritten()) {
-            if ($this->oUri->fragment(0) === 'm') {
+            if ($this->isSimpleModuleRequest()) {
                 $this->simpleModuleRouter();
             } else {
                 $this->simpleRouter();
@@ -730,6 +732,14 @@ final class FrontController
     private function clearRequestParameter()
     {
         unset($this->aRequestParameter);
+    }
+
+    /**
+     * @return bool
+     */
+    private function isSimpleModuleRequest()
+    {
+        return $this->oUri->fragment(0) === self::SIMPLE_MOD_REQUEST_PARAM_NAME;
     }
 
     /**
