@@ -87,39 +87,14 @@ class JoinForm
     {
         $oSession = new Session;
         if (!$oSession->exists('mail_step1')) {
-            Header::redirect(Uri::get('realestate', 'signup', 'step1'));
+            Header::redirect(Uri::get('user', 'signup', 'step1'));
         } elseif ($oSession->exists('mail_step2')) {
-            Header::redirect(Uri::get('realestate', 'signup', 'step3'));
+            Header::redirect(Uri::get('user', 'signup', 'done'));
         }
         unset($oSession);
 
         if (isset($_POST['submit_join_user2'])) {
             if (\PFBC\Form::isValid($_POST['submit_join_user2'])) {
-                (new JoinFormProcess)->step2();
-            }
-
-            Header::redirect();
-        }
-
-        $oForm = new \PFBC\Form('form_join_user2');
-        $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user2', 'form_join_user2'));
-        $oForm->addElement(new \PFBC\Element\Token('join2'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('About Me'), 'description', ['id' => 'str_description', 'description' => t('Describe yourself in a few words. Your description should be at least 20 characters long.'), 'onblur' => 'CValid(this.value,this.id,20,4000)', 'validation' => new \PFBC\Validation\Str(20, 4000), 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_description"></span>'));
-        $oForm->addElement(new \PFBC\Element\Button(t('Next'), 'submit', ['icon' => 'seek-next']));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
-        $oForm->render();
-    }
-
-    public static function step3()
-    {
-        if (!(new Session)->exists('mail_step2')) {
-            Header::redirect(Uri::get('realestate', 'signup', 'step2'));
-        }
-
-        if (isset($_POST['submit_join_user3'])) {
-            if (\PFBC\Form::isValid($_POST['submit_join_user3'])) {
                 (new JoinFormProcess)->step4();
             }
 
@@ -134,8 +109,8 @@ class JoinForm
 
         $oForm = new \PFBC\Form('form_join_user2');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user3', 'form_join_user2'));
-        $oForm->addElement(new \PFBC\Element\Token('join3'));
+        $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user2', 'form_join_user2'));
+        $oForm->addElement(new \PFBC\Element\Token('join2'));
         $oForm->addElement(new \PFBC\Element\File(t('Photo'), 'avatar', $aAvatarFieldOption));
         $oForm->addElement(new \PFBC\Element\Button(t('Add My Photo')));
 
