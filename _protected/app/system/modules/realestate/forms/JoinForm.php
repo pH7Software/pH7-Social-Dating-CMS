@@ -87,9 +87,9 @@ class JoinForm
     {
         $oSession = new Session;
         if (!$oSession->exists('mail_step1')) {
-            Header::redirect(Uri::get('user', 'signup', 'step1'));
+            Header::redirect(Uri::get('realestate', 'signup', 'step1'));
         } elseif ($oSession->exists('mail_step2')) {
-            Header::redirect(Uri::get('user', 'signup', 'done'));
+            Header::redirect(Uri::get('realestate', 'signup', 'done'));
         }
         unset($oSession);
 
