@@ -104,7 +104,7 @@ abstract class RegistrationCore
                 break;
 
             default:
-                $sMsg = '';
+                $sMsg = t('You have been successfully registered!');
         }
 
         return $sMsg;
