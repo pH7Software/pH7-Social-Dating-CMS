@@ -21,7 +21,7 @@ class NoteDesign extends WriteDesignCoreModel
      */
     public static function thumb($oNoteModel)
     {
-        echo '<div>';
+        echo '<div itemprop="image">';
         if (!empty($oNoteModel->thumb)) {
             echo '<a href="', Uri::get('note', 'main', 'read', $oNoteModel->username . ',' . $oNoteModel->postId), '" class="pic thumb" data-load="ajax">';
             echo '<img src="', PH7_URL_DATA_SYS_MOD, 'note/', PH7_IMG, $oNoteModel->username, PH7_SH, $oNoteModel->thumb, '" alt="', $oNoteModel->pageTitle, '" title="', $oNoteModel->pageTitle, '" />';
