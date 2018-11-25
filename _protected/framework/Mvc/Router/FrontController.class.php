@@ -617,6 +617,7 @@ final class FrontController
     private function runController()
     {
         $sController = self::PROJECT_NAMESPACE . $this->oRegistry->controller;
+
         try {
             $oMvc = new ReflectionMethod($sController, $this->oRegistry->action);
             if ($oMvc->isPublic()) {
@@ -669,7 +670,7 @@ final class FrontController
     {
         $aRequest = [];
 
-        if (count($this->aRequestParameter) > 0) {
+        if ($this->doParametersExist()) {
             foreach ($this->aRequestParameter as $sVal) {
                 $sVal = trim($this->secureRequestParameter($sVal));
 
@@ -735,6 +736,14 @@ final class FrontController
     private function clearRequestParameter()
     {
         unset($this->aRequestParameter);
+    }
+
+    /**
+     * @return bool
+     */
+    private function doParametersExist()
+    {
+        return count($this->aRequestParameter) > 0;
     }
 
     /**
