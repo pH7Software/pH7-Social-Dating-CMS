@@ -165,9 +165,13 @@ class JoinForm
 
     public static function step4()
     {
-        if (!(new Session)->exists('mail_step3')) {
+        $oSession = new Session;
+        if (!$oSession->exists('mail_step3')) {
             Header::redirect(Uri::get('user', 'signup', 'step3'));
+        } elseif ($oSession->exists('mail_step4')) {
+            Header::redirect(Uri::get('user', 'signup', 'done'));
         }
+        unset($oSession);
 
         if (isset($_POST['submit_join_user4'])) {
             if (\PFBC\Form::isValid($_POST['submit_join_user4'])) {
