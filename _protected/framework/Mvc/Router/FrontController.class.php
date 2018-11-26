@@ -51,13 +51,14 @@ final class FrontController
     const ASSET_REQUEST_PARAM_NAME = 'asset';
     const AJAX_REQUEST_PARAM_NAME = 'ajax';
     const GZIP_REQUEST_PARAM_NAME = 'gzip';
-
     const REGEX_MODULE_FORMAT = '#^[a-z0-9\.\-_]+$#i';
+
     const REGEX_CONTROLLER_FORMAT = '#^[a-z0-9_]+$#i';
     const REGEX_ACTION_FORMAT = '#^[a-z0-9_]+$#i';
     const REGEX_FOLDER_FORMAT = '#^[\w]+$#';
     const REGEX_URL_EXTRA_OPTIONS = '/?(?:\?[^/]+\=[^/]+)?';
     const REGEX_URL_PARAMS = '#&[^/]+\=[^/]+$#';
+    const VARS_PARAM_DELIMITER = ',';
 
     /** @var Config */
     private $oConfig;
@@ -670,7 +671,7 @@ final class FrontController
 
     private function generateRequestParameters(DOMElement $oRoute, array $aMatches)
     {
-        $aVars = explode(',', $oRoute->getAttribute('vars'));
+        $aVars = explode(self::VARS_PARAM_DELIMITER, $oRoute->getAttribute('vars'));
         $iOffset = count($aVars);
 
         foreach ($aMatches as $sKey => $sMatch) {
