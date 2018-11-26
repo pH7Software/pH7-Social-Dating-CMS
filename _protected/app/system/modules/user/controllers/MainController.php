@@ -179,9 +179,15 @@ class MainController extends Controller
     private function addGuestAssetFiles($bIsBgVideo)
     {
         $sIsCssVidSplashFile = $bIsBgVideo === true ? 'video_splash.css,' : '';
-        $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, $sIsCssVidSplashFile . 'splash.css,tooltip.css,js/jquery/carousel.css');
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS,
+            $sIsCssVidSplashFile . 'splash.css,tooltip.css,js/jquery/carousel.css'
+        );
 
-        $this->design->addJs(PH7_DOT, PH7_STATIC . PH7_JS . 'jquery/carouFredSel.js,' . PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_JS . 'splash.js');
+        $this->design->addJs(
+            PH7_DOT,
+            PH7_STATIC . PH7_JS . 'jquery/carouFredSel.js,' . PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_JS . 'splash.js'
+        );
     }
 
     /**
@@ -191,8 +197,14 @@ class MainController extends Controller
      */
     private function addUserAssetFiles()
     {
-        $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'zoomer.css');
-        $this->design->addJs(PH7_STATIC . PH7_JS, 'Wall.js');
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS,
+            'zoomer.css'
+        );
+        $this->design->addJs(
+            PH7_STATIC . PH7_JS,
+            'Wall.js'
+        );
     }
 
     /**
