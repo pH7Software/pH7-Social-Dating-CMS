@@ -19,7 +19,9 @@ class VerificationFormProcess extends Form
 
         $iProfileId = $this->session->get(SmsVerificationCore::PROFILE_ID_SESS_NAME);
         if ($this->isVerificationCodeValid($iProfileId)) {
+            $oUser = new UserCore;
             $oUserModel = new UserCoreModel;
+
             $sPhoneNumber = $this->session->get(SmsVerificationCore::PHONE_NUMBER_SESS_NAME);
 
             $oUserModel->approve(
@@ -36,14 +38,17 @@ class VerificationFormProcess extends Form
             );
 
             // Clear "active" DB field from the cache
-            (new UserCore)->clearReadProfileCache($iProfileId);
+            $oUser->clearReadProfileCache($iProfileId);
 
+            $oUserData = $oUserModel->readProfile($iProfileId);
+            $oUser->setAuth($oUserData, $oUserModel, $this->session, new Framework\Mvc\Model\Security);
             unset($oUserModel);
 
             Header::redirect(
-                Uri::get('realestate', 'main', 'login'),
-                t('Congratulations! Your phone number has been successfully verified. You can now login.')
+                Uri::get('realestate', 'account', 'index'),
+                t('Congratulations! Your phone number has been successfully verified.')
             );
+
         } else {
             \PFBC\Form::setError(
                 'form_sms_verification',
