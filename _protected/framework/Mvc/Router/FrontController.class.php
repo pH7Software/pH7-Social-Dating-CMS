@@ -816,20 +816,6 @@ final class FrontController
         if ($this->oHttpRequest->currentUrl() === PH7_URL_ROOT . static::INDEX_FILE) {
             $this->notFound('In "production" mode, it simulates "404 page not found" if the index.php filename is called, to avoid disclosing the language index filename (e.g. for security reasons...).');
         }
-
-        /*
-
-        // The following code will be useful when pH7CMS will be able to work without mod_rewrite \\
-        if (!\PH7\Framework\Server\Server::isRewriteMod() && false === strpos($this->oHttpRequest->currentUrl(), static::INDEX_FILE))
-        {
-            Header::redirect(PH7_URL_ROOT . static::INDEX_FILE);
-        }
-        elseif (\PH7\Framework\Server\Server::isRewriteMod() && false !== strpos($this->oHttpRequest->currentUrl(), static::INDEX_FILE))
-        {
-            $this->notFound('In "production" mode, it simulates "404 page not found" if the index.php filename is called, to avoid disclosing the language index filename (e.g. for security reasons...).');
-        }
-
-        */
     }
 
     /**
