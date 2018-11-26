@@ -174,7 +174,7 @@ final class FrontController
                 // Get the default action
                 $this->oRegistry->action = $oRoute->getAttribute('action');
                 if ($oRoute->hasAttribute('vars')) {
-                    $this->generateUrlParameters($oRoute, $aMatches);
+                    $this->generateRequestParameters($oRoute, $aMatches);
                 }
                 break;
             }
@@ -668,7 +668,7 @@ final class FrontController
         return preg_match('`^' . $oRoute->getAttribute('url') . self::REGEX_URL_EXTRA_OPTIONS . '$`', $this->oHttpRequest->requestUri(), $aMatches);
     }
 
-    private function generateUrlParameters(DOMElement $oRoute, array $aMatches)
+    private function generateRequestParameters(DOMElement $oRoute, array $aMatches)
     {
         $aVars = explode(',', $oRoute->getAttribute('vars'));
         $iOffset = count($aVars);
