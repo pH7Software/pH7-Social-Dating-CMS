@@ -860,7 +860,7 @@ final class FrontController
             if ($iRedirect === null) {
                 $this->oRegistry->module = 'error';
 
-                $this->oConfig->load(PH7_PATH_MOD . 'error' . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
+                $this->oConfig->load(PH7_PATH_SYS . PH7_MOD . 'error' . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
             } else {
                 Header::redirect(
                     UriRoute::get(
