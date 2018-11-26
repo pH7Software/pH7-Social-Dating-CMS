@@ -18,11 +18,11 @@ class PhoneNumberFormProcess extends Form
         parent::__construct();
 
         $sPhoneNumber = $this->httpRequest->post('phone_number');
-        $sEmail = $this->session->get(SmsVerificationCore::USER_EMAIL_SESS_NAME);
+        $iProfileId = $this->session->get(SmsVerificationCore::PROFILE_ID_SESS_NAME);
         $oSmsApi = SmsGatewayFactory::create($this->config->values['module.setting']['default_sms_gateway']);
         $bResult = $oSmsApi->send(
             $sPhoneNumber,
-            t('Your verification code is: %0% Thanks! %site_name% Team', Verification::getVerificationCode($sEmail))
+            t('Your verification code is: %0% Thanks! %site_name% Team', Verification::getVerificationCode($iProfileId))
         );
 
         if ($bResult) {

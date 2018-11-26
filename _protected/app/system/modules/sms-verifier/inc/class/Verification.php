@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Config\Config;
+use PH7\Framework\Mvc\Model\Engine\Record;
 use PH7\Framework\Pattern\Statik;
 
 class Verification
@@ -19,13 +20,18 @@ class Verification
     use Statik;
 
     /**
-     * @param string $sEmail
+     * @param int $iProfileId
      *
      * @return string
      */
-    public static function getVerificationCode($sEmail)
+    public static function getVerificationCode($iProfileId)
     {
-        $sUserHashValidation = (new UserCoreModel)->getHashValidation($sEmail);
+        $sUserHashValidation = Record::getInstance()->getOne(
+            DbTableName::MEMBER,
+            'profileId',
+            $iProfileId,
+            'hashValidation'
+        )->hashValidation;
 
         return substr(
             $sUserHashValidation,
