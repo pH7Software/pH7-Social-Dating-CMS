@@ -692,7 +692,7 @@ final class FrontController
     {
         $aRequest = [];
 
-        if ($this->doParametersExist()) {
+        if ($this->doRequestParameterExist()) {
             foreach ($this->aRequestParameter as $sVal) {
                 $sVal = trim($this->secureRequestParameter($sVal));
 
@@ -763,7 +763,7 @@ final class FrontController
     /**
      * @return bool
      */
-    private function doParametersExist()
+    private function doRequestParameterExist()
     {
         return count($this->aRequestParameter) > 0;
     }
