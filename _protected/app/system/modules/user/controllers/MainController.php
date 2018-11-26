@@ -16,6 +16,9 @@ use PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
+    const GUEST_CLASSIC_PAGE_TYPE = 'classic';
+    const GUEST_SPLASH_PAGE_TYPE = 'splash';
+
     const GUEST_SPLASH_FILE = 'index.guest_splash';
     const GUEST_FILE = 'index.guest';
 
@@ -218,11 +221,11 @@ class MainController extends Controller
     private function getGuestForcedPage()
     {
         switch ($this->httpRequest->get('force')) {
-            case 'classic':
+            case self::GUEST_CLASSIC_PAGE_TYPE:
                 $sPage = static::GUEST_FILE;
                 break;
 
-            case 'splash':
+            case self::GUEST_SPLASH_PAGE_TYPE:
                 $sPage = static::GUEST_SPLASH_FILE;
                 break;
 
