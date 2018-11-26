@@ -239,7 +239,7 @@ final class FrontController
         }
 
         /** Request Parameter for the Simple Router mode. **/
-        $this->aRequestParameter = $this->oUri->segments(3);
+        $this->addRequestParameter($this->oUri->segments(3));
     }
 
     /**
@@ -292,7 +292,7 @@ final class FrontController
         }
 
         /** Request Parameter for the Simple Module Router mode. **/
-        $this->aRequestParameter = $this->oUri->segments(4);
+        $this->addRequestParameter($this->oUri->segments(4));
     }
 
     /**
@@ -678,7 +678,9 @@ final class FrontController
                 $this->oHttpRequest->setGet($aVars[$sKey - 1], $sMatch);
 
                 /** Request Parameter for the Router Rewriting mode **/
-                $this->aRequestParameter = $this->oUri->segments($this->oUri->totalFragment() - $iOffset);
+                $this->addRequestParameter(
+                    $this->oUri->segments($this->oUri->totalFragment() - $iOffset)
+                );
             }
         }
     }
@@ -758,6 +760,11 @@ final class FrontController
     private function clearRequestParameter()
     {
         unset($this->aRequestParameter);
+    }
+
+    private function addRequestParameter(array $aRequestParameter)
+    {
+        $this->aRequestParameter = $aRequestParameter;
     }
 
     /**
