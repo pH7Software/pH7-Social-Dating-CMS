@@ -873,6 +873,7 @@ final class FrontController
             if ($iRedirect === null) {
                 $this->oRegistry->module = 'error';
 
+                // Reload the config.ini file for the "error" module
                 $this->oConfig->load(PH7_PATH_SYS . PH7_MOD . 'error' . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
             } else {
                 Header::redirect(
