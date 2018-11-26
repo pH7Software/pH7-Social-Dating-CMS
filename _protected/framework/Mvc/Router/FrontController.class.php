@@ -152,9 +152,6 @@ final class FrontController
                     $this->notFound('The <b>' . $this->oRegistry->module .
                         '</b> system module is not found.<br />File: <b>' . PH7_PATH_APP . $sPathModule . $this->oRegistry->module . PH7_DS .
                         '</b><br /> or the <b>' . PH7_CONFIG_FILE . '</b> file is not found.<br />File: <b>' . PH7_PATH_APP . $sPathModule . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '</b>');
-
-                    // Reload the config.ini file for the new "error" module
-                    $this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
                 }
 
                 /***** PATH THE MODULE *****/
@@ -204,9 +201,6 @@ final class FrontController
         if (!$this->oConfig->load(PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
             $this->notFound('The <b>' . $this->oRegistry->module . '</b> system module is not found.<br />File: <b>' . PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS .
                 '</b><br /> or the <b>' . PH7_CONFIG_FILE . '</b> file is not found.<br />File: <b>' . PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '</b>');
-
-            // Reload the config.ini file for the new "error" module
-            $this->oConfig->load(PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
         }
 
         /***** PATH THE MODULE *****/
@@ -264,9 +258,6 @@ final class FrontController
         if (!$this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
             $this->notFound('The <b>' . $this->oRegistry->module . '</b> module is not found.<br />File: <b>' . PH7_PATH_MOD . $this->oRegistry->module . PH7_DS .
                 '</b><br /> or the <b>' . PH7_CONFIG_FILE . '</b> file is not found.<br />File: <b>' . PH7_PATH_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '</b>');
-
-            // Reload the config.ini file for the new "error" module
-            $this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
         }
 
         /***** PATH THE MODULE *****/
@@ -837,6 +828,8 @@ final class FrontController
         } else {
             if ($iRedirect === null) {
                 $this->oRegistry->module = 'error';
+
+                $this->oConfig->load(PH7_PATH_MOD . 'error' . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
             } else {
                 Header::redirect(
                     UriRoute::get(
