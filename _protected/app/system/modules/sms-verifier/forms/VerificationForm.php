@@ -26,7 +26,7 @@ class VerificationForm
         $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_sms_verification', 'form_sms_verification'));
         $oForm->addElement(new \PFBC\Element\Token('sms_verification'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Verification Code'), 'verification_code', ['required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Verification Code'), 'verification_code', ['autocomplete' => 'off', 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
