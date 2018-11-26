@@ -735,23 +735,24 @@ final class FrontController
         $sVar = escape($sVar, true);
 
         // Convert characters to entities and return them
+        $aBadCharacters = [
+            '$',
+            '(',
+            ')',
+            '%28',
+            '%29'
+        ];
+        $aGoodCharacters = [
+            '&#36;',
+            '&#40;',
+            '&#41;',
+            '&#40;',
+            '&#41;'
+        ];
+
         return str_replace(
-            [
-                // Bad
-                '$',
-                '(',
-                ')',
-                '%28',
-                '%29'
-            ],
-            [
-                // Good
-                '&#36;',
-                '&#40;',
-                '&#41;',
-                '&#40;',
-                '&#41;'
-            ],
+            $aBadCharacters,
+            $aGoodCharacters,
             $sVar
         );
     }
