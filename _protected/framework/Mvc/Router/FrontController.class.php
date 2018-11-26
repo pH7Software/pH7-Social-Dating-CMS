@@ -45,6 +45,8 @@ final class FrontController
     const CONTROLLER_SUFFIX = 'Controller';
     const INDEX_FILE = 'index.php';
 
+    const REDIRECT_ERROR_MOD = 1;
+
     const SIMPLE_MOD_REQUEST_PARAM_NAME = 'm';
     const ASSET_REQUEST_PARAM_NAME = 'asset';
     const AJAX_REQUEST_PARAM_NAME = 'ajax';
@@ -427,7 +429,10 @@ final class FrontController
                     break;
 
                 default:
-                    $this->notFound('Asset file not found!', 1);
+                    $this->notFound(
+                        'Asset file not found!',
+                        self::REDIRECT_ERROR_MOD
+                    );
             }
             exit;
         }
@@ -471,7 +476,10 @@ final class FrontController
             if (is_file($sMod . 'assets/ajax/' . $this->oUri->fragment(3) . $sFolder . 'Ajax.php')) {
                 include_once $sMod . 'assets/ajax/' . $this->oUri->fragment(3) . $sFolder . 'Ajax.php';
             } else {
-                $this->notFound('Error while loading the library of module ajax<br />File: ' . $sMod . 'assets' . PH7_DS . 'ajax' . PH7_DS . $this->oUri->fragment(3) . $sFolder . 'Ajax.php does not exist', 1);
+                $this->notFound(
+                    'Error while loading the library of module ajax<br />File: ' . $sMod . 'assets' . PH7_DS . 'ajax' . PH7_DS . $this->oUri->fragment(3) . $sFolder . 'Ajax.php does not exist',
+                    self::REDIRECT_ERROR_MOD
+                );
             }
         } else {
             $sFolder = ($this->oUri->fragment(3) && preg_match(self::REGEX_FOLDER_FORMAT, $this->oUri->fragment(3))) ? PH7_DS . $this->oUri->fragment(3) : '';
@@ -479,7 +487,10 @@ final class FrontController
             if (is_file(PH7_PATH_SYS . 'core/assets/ajax/' . $this->oUri->fragment(2) . $sFolder . 'CoreAjax.php')) {
                 include_once PH7_PATH_SYS . 'core/assets/ajax/' . $this->oUri->fragment(2) . $sFolder . 'CoreAjax.php';
             } else {
-                $this->notFound('Error while loading the library of ajax<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'ajax' . PH7_DS . $this->oUri->fragment(2) . $sFolder . 'CoreAjax.php does not exist', 1);
+                $this->notFound(
+                    'Error while loading the library of ajax<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'ajax' . PH7_DS . $this->oUri->fragment(2) . $sFolder . 'CoreAjax.php does not exist',
+                    self::REDIRECT_ERROR_MOD
+                );
             }
         }
     }
@@ -492,7 +503,10 @@ final class FrontController
         if (is_file(PH7_PATH_SYS . 'core/assets/file/' . $this->oUri->fragment(2) . 'CoreFile.php')) {
             include_once PH7_PATH_SYS . 'core/assets/file/' . $this->oUri->fragment(2) . 'CoreFile.php';
         } else {
-            $this->notFound('Error while loading the file<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'file' . PH7_DS . $this->oUri->fragment(2) . 'CoreFile.php does not exist', 1);
+            $this->notFound(
+                'Error while loading the file<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'file' . PH7_DS . $this->oUri->fragment(2) . 'CoreFile.php does not exist',
+                self::REDIRECT_ERROR_MOD
+            );
         }
     }
 
@@ -506,7 +520,10 @@ final class FrontController
             if (is_file(PH7_PATH_SYS . 'core/assets/cron/' . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php')) {
                 require PH7_PATH_SYS . 'core/assets/cron/' . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php';
             } else {
-                $this->notFound('Error while loading the Cron Jobs file<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'cron' . PH7_DS . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php does not exist', 1);
+                $this->notFound(
+                    'Error while loading the Cron Jobs file<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'cron' . PH7_DS . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php does not exist',
+                    self::REDIRECT_ERROR_MOD
+                );
             }
         } else {
             Http::setHeadersByCode(StatusCode::FORBIDDEN);
@@ -536,7 +553,10 @@ final class FrontController
             header('Content-Type: text/css');
             include_once PH7_PATH_SYS . 'core/assets/css/' . $this->oUri->fragment(2) . 'CoreCss.php';
         } else {
-            $this->notFound('Error while loading the Javascript file<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'css' . PH7_DS . $this->oUri->fragment(2) . 'CoreCss.php does not exist', 1);
+            $this->notFound(
+                'Error while loading the Javascript file<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'css' . PH7_DS . $this->oUri->fragment(2) . 'CoreCss.php does not exist',
+                self::REDIRECT_ERROR_MOD
+            );
         }
     }
 
@@ -549,7 +569,10 @@ final class FrontController
             header('Content-Type: text/javascript');
             include_once PH7_PATH_SYS . 'core/assets/js/' . $this->oUri->fragment(2) . 'CoreJs.php';
         } else {
-            $this->notFound('Error while loading the Javascript file<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'js' . PH7_DS . $this->oUri->fragment(2) . 'CoreJs.php does not exist', 1);
+            $this->notFound(
+                'Error while loading the Javascript file<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'js' . PH7_DS . $this->oUri->fragment(2) . 'CoreJs.php does not exist',
+                self::REDIRECT_ERROR_MOD
+            );
         }
     }
 
@@ -576,7 +599,9 @@ final class FrontController
             $this->runController();
         } else {
             $this->notFound('The <b>' . $this->oRegistry->controller . '</b> controller of the <b>' . $this->oRegistry->module .
-                '</b> module is not found.<br />File: <b>' . $this->oRegistry->path_module . '</b>', 1);
+                '</b> module is not found.<br />File: <b>' . $this->oRegistry->path_module . '</b>',
+                self::REDIRECT_ERROR_MOD
+            );
         }
     }
 
@@ -615,14 +640,20 @@ final class FrontController
                 // Perform the controller's action
                 $oMvc->invokeArgs(new $sController, $this->getRequestParameter());
             } else {
-                $this->notFound('The <b>' . $this->oRegistry->action . '</b> method is not public!', 1);
+                $this->notFound(
+                    'The <b>' . $this->oRegistry->action . '</b> method is not public!',
+                    self::REDIRECT_ERROR_MOD
+                );
             }
 
             // Destruct object to minimize CPU resources
             unset($oMvc);
         } catch (ReflectionException $oExcept) {
             // If the class or method doesn't exist
-            $this->notFound($oExcept->getMessage(), 1);
+            $this->notFound(
+                $oExcept->getMessage(),
+                self::REDIRECT_ERROR_MOD
+            );
         }
     }
 
