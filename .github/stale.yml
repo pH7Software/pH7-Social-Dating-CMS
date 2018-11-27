@@ -20,9 +20,7 @@ exemptLabels:
 exemptMilestones: true
 
 # Label to use when marking as stale
-staleLabel:
-  - wontfix
-  - stale
+staleLabel: archived
 
 # Comment to post when marking as stale. Set to `false` to disable
 markComment: >
