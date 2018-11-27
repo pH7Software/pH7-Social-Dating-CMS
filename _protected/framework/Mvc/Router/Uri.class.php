@@ -27,9 +27,9 @@ class Uri
     const CACHE_GROUP = 'str/uri/' . PH7_LANG_CODE;
     const CACHE_TIME = 86400; // 24h
 
-    const ROUTE_FILE_EXT = '.xml';
-
     const VARS_PARAM_DELIMITER = ',';
+
+    const ROUTE_FILE_EXT = '.xml';
 
     /** @var bool */
     private static $bFullClean;
