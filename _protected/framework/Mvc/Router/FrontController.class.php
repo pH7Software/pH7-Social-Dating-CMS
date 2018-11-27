@@ -58,7 +58,6 @@ final class FrontController
     const REGEX_FOLDER_FORMAT = '#^[\w]+$#';
     const REGEX_URL_EXTRA_OPTIONS = '/?(?:\?[^/]+\=[^/]+)?';
     const REGEX_URL_PARAMS = '#&[^/]+\=[^/]+$#';
-    const VARS_PARAM_DELIMITER = ',';
 
     /** @var Config */
     private $oConfig;
@@ -670,7 +669,7 @@ final class FrontController
 
     private function generateRequestParameters(DOMElement $oRoute, array $aMatches)
     {
-        $aVars = explode(self::VARS_PARAM_DELIMITER, $oRoute->getAttribute('vars'));
+        $aVars = explode(UriRoute::VARS_PARAM_DELIMITER, $oRoute->getAttribute('vars'));
         $iOffset = count($aVars);
 
         foreach ($aMatches as $sKey => $sMatch) {

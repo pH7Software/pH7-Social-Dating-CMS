@@ -29,6 +29,8 @@ class Uri
 
     const ROUTE_FILE_EXT = '.xml';
 
+    const VARS_PARAM_DELIMITER = ',';
+
     /** @var bool */
     private static $bFullClean;
 
@@ -216,7 +218,7 @@ class Uri
         $sVariables = str_replace([', ', ' ,'], '', $sVariables);
 
         $sVars = '';
-        $aVars = explode(',', $sVariables);
+        $aVars = explode(self::VARS_PARAM_DELIMITER, $sVariables);
         foreach ($aVars as $sVar) {
             $sVars .= PH7_SH . $sVar;
         }
