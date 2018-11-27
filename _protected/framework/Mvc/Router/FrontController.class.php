@@ -364,7 +364,6 @@ final class FrontController
     private function initializeTemplate()
     {
         /***** Start Loading Views and Templates *****/
-
         $oLoadTpl = (new LoadTemplate)->setDefaultTpl(DbConfig::getSetting('defaultTemplate'));
         $oLoadTpl->tpl();
         $oLoadTpl->modTpl();
