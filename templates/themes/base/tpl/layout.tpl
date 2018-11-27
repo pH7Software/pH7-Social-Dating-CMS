@@ -76,7 +76,7 @@
 
     {designModel.analyticsApi()}
   </head>
-  <body>
+  <body itemscope="itemscope" itemtype="http://schema.org/WebPage">
 
     <!-- Begin Header -->
     <header>
