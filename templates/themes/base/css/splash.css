@@ -161,6 +161,12 @@ video#bgvid {
     width: 590px;
 }
 
+/* Make sure Bootstrap "alert" message is always well displayed */
+.alert {
+    z-index: 999;
+    position: absolute;
+}
+
 /*** Media Queries ***/
 
 /* 1185px or less */
