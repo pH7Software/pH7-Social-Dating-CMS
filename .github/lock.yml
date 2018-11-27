@@ -11,6 +11,6 @@ lockLabel: false
 
 # Comment to post before locking. Set to `false` to disable
 lockComment: >
-  This thread has been automatically locked since there has not been
+  Hi there, I locked the thread since there has not been
   any recent activity after it was closed. Please open a new issue for
-  related bugs. Thanks, Pierre-Henry
+  related bugs. Thank you, Pierre-Henry
