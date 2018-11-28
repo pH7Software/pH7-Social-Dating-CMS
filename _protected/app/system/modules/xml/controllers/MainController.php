@@ -31,7 +31,7 @@ class MainController extends Controller
         $this->oDataModel = new DataCoreModel;
 
         /* Enable caching for all pages of this module */
-        $this->view->setCaching(true);
+        $this->view->setCaching(false); // Disable it
         $this->view->setCacheExpire(self::STATIC_CACHE_LIFETIME);
     }
 
