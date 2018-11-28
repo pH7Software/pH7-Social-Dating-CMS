@@ -9211,23 +9211,23 @@ msgid "User Birthdays"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.phptop_menu.inc.cpl.php:19
-msgid "Birthday"
+msgid "Birthdays"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.phptop_menu.inc.cpl.php:19
-msgid "All Birthday"
+msgid "All Birthdays"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.phptop_menu.inc.cpl.php:19
-msgid "Men Birthday"
+msgid "Men Birthdays"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.phptop_menu.inc.cpl.php:19
-msgid "Women Birthday"
+msgid "Women Birthdays"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.phptop_menu.inc.cpl.php:19
-msgid "Couples Birthday"
+msgid "Couple Birthdays"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.phptop_menu.inc.cpl.php:19
