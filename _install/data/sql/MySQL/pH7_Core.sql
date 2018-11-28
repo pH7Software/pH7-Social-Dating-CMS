@@ -126,8 +126,6 @@ CREATE TABLE IF NOT EXISTS ph7_members_info (
   country char(2) DEFAULT NULL,
   phone varchar(100) DEFAULT NULL,
   website varchar(120) DEFAULT NULL,
-  height tinyint(3) unsigned DEFAULT NULL,
-  weight tinyint(3) unsigned DEFAULT NULL,
   PRIMARY KEY (profileId),
   KEY country (country),
   FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
