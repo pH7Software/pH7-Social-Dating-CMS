@@ -24,10 +24,7 @@ class Field
         'zipcode',
         'country',
         'phone',
-        'website',
-        'socialnetworksite',
-        'height',
-        'weight'
+        'website'
     ];
 
     /**
