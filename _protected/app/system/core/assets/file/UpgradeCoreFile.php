@@ -86,6 +86,9 @@ class UpgradeCore
     /** @var bool */
     private $bAutoRemoveUpgradeDir = false;
 
+    /** @var bool */
+    private $bUpgradePatchAvailable = false;
+
     /** @var array */
     private $aErrors = [];
 
@@ -169,9 +172,11 @@ class UpgradeCore
 
                     if ($this->isValidUpgradeFolder($this->sUpgradesDirUpgradeFolder)) {
                         $bIsValidVer = $this->isValidVersion($sVerName, $sVerNumber, $iVerBuild);
-                        $this->sHtml .= '<p class="underline italic ' . ($bIsValidVer ? 'bold' : '') . '">' . t('Version Name: %0%, Version Number: %1%, Version Build: %2%', $sVerName, $sVerNumber, $iVerBuild) . '</p>';
-
                         if ($bIsValidVer) {
+                            $this->bUpgradePatchAvailable = true;
+
+                            $this->sHtml .= '<p class="underline italic ' . ($bIsValidVer ? 'bold' : '') . '">' . t('Version Name: %0%, Version Number: %1%, Version Build: %2%', $sVerName, $sVerNumber, $iVerBuild) . '</p>';
+
                             $sMsg = t('Upgrade <span class="bold italic">%software_version_name% %software_version% Build %software_build%</span> to version <span class="bold italic">%0%</span>', '<span class="bold italic">' . $sVerName . ' ' . $sVerNumber . ' Build ' . $iVerBuild . '</span>');
                             $this->sHtml .= '<button type="submit" class="success" name="submit_upgrade" value="' . $this->sUpgradesDirUpgradeFolder . '" onclick="return confirm(\'' . t('Have you made a backup of your website files, folders and database?') . '\');">' . $sMsg . '</button>';
 
@@ -180,16 +185,20 @@ class UpgradeCore
 
                             $this->sHtml .= '<p class="bold underline">' . t('Instruction:') . '</p>';
                             $this->sHtml .= $this->readInstruction(static::INST_INTRO_FILE);
+
+                            $this->sHtml .= '<br /><hr /><br />';
                         }
                     } else {
                         $sMsg = t('Upgrade patch is not valid!');
                         $this->sHtml .= '<button type="submit" class="error" disabled="disabled">' . $sMsg . '</button>';
                     }
-
-                    $this->sHtml .= '<br /><hr /><br />';
                 }
 
                 $this->sHtml .= '</form>';
+
+                if (!$this->bUpgradePatchAvailable) {
+                    $this->sHtml .= '<h3>' . t('No upgrade patches available for your current version: %software_version%, build %software_build%') . '</h3>';
+                }
 
                 if ($this->isUpgradeRequested() && $this->isValidUpgradeFolder($this->oHttpRequest->post('submit_upgrade'))) {
                     $this->sUpgradesDirUpgradeFolder = $this->oHttpRequest->post('submit_upgrade');
