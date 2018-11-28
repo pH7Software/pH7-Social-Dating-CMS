@@ -9207,7 +9207,7 @@ msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.phptop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/xml_17e2617e9b1147214f140b865f7f7cce/base/sitemaplinks.xml.cpl.php:19
-msgid "Users Birthday"
+msgid "User Birthdays"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.phptop_menu.inc.cpl.php:19

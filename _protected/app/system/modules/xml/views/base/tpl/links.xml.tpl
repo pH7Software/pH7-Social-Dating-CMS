@@ -40,7 +40,7 @@
     {/if}
 
     {if $is_birthday_enabled}
-        <link title="{lang 'Users Birthday'}" url="{{ $design->url('birthday','user','index') }}" />
+        <link title="{lang 'User Birthday'}" url="{{ $design->url('birthday','user','index') }}" />
     {/if}
 
     {if $is_map_enabled}
