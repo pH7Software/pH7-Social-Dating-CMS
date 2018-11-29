@@ -442,7 +442,7 @@
             <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url(PH7_ADMIN_MOD,'info','index') }}" title="{lang 'Information'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-info-circle"></i> {lang 'Info'}</a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'main','stat') }}" title="{lang 'Site Statistics'}">{lang 'Site Stats'}</a></li>
-                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'info','software') }}" title="{lang 'Software'}">{lang 'Software'}</a></li>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'info','software') }}" title="{lang 'Information about the Software'}">{lang 'Software'}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'info','language') }}" title="{lang 'PHP Info'}">{lang 'PHP Configuration'}</a></li>
               </ul>
             </li>
