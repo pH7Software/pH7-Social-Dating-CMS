@@ -58,7 +58,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testSoftwareUrlDocVariable()
+    public function testSoftwareDocUrlVariable()
     {
         $oPredefinedVar = new PredefinedVariable('{software_doc_url}');
         $this->assertAttributeSame(
@@ -72,7 +72,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testSoftwareIssueVariable()
+    public function testSoftwareIssueUrlVariable()
     {
         $oPredefinedVar = new PredefinedVariable('{software_issue_url}');
         $this->assertAttributeSame(
@@ -86,7 +86,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testSoftwareReviewVariable()
+    public function testSoftwareReviewUrlVariable()
     {
         $oPredefinedVar = new PredefinedVariable('{software_review_url}');
         $this->assertAttributeSame(
@@ -100,7 +100,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testSoftwareVersionVariable()
+    public function testSoftwareVersionUrlVariable()
     {
         $oPredefinedVar = new PredefinedVariable('{software_version}');
         $this->assertAttributeSame(
