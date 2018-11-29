@@ -322,7 +322,7 @@ class MainController extends Controller
             $aLatestVerInfo = Version::getLatestInfo();
             $sLatestVer = t('%0%, build %1%', $aLatestVerInfo['version'], $aLatestVerInfo['build']);
 
-            $sMsg = '<h3>' . t('🍰 A New Release 🎁 just for YOU, %0% 😍!', $this->session->get('admin_first_name')) . '</h3>';
+            $sMsg = '<h3>' . t('🍰 A New Release 🎁 just for YOU! 😍') . '</h3>';
             $sMsg .= t('%software_name% <strong>%0%</strong> is available! Please <a href="%software_website%" target="_blank" rel="noopener">update it today</a> to keep your site safe and stable.', $sLatestVer);
             $sMsg .= '<br /><br />';
             $sMsg .= t('Read <a href="%0%" target="_blank" rel="noopener">here</a> to learn how to upgrade your site, step-by-step. Once you follow the steps, run the upgrade wizard <a href="%1%" target="_blank" rel="noopener">here</a>.', 'https://ph7cms.com/doc/en/upgrade', PH7_URL_ROOT . 'asset/file/Upgrade');
