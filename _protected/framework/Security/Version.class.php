@@ -26,6 +26,8 @@ final class Version
     const FRAMEWORK_TAG_NAME = 'ph7';
     const PACKAGE_TAG_NAME = 'ph7builder';
 
+    const UPGRADE_DOC_URL = 'https://ph7cms.com/doc/en/upgrade';
+
     /**
      * Framework Kernel.
      *

@@ -113,7 +113,7 @@ class UpgradeCore
     {
         echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>', t('Upgrade %software_name% | Version %0%', $this->sVerNumber), '</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="robots" content="noindex"><style>body{background:#EFEFEF;color:#555;font:normal 10pt Arial,Helvetica,sans-serif;margin:0;padding:0}.center{margin-left:auto;margin-right:auto;text-align:center;width:80%}.bold{font-weight:bold;font-size:13px}.red,.error{color:red}.success{color:green}.italic{font-style:italic}.underline{text-decoration:underline}pre{margin:2px;font-style:italic}code{font-style:italic;font-size:11px}</style></head><body><div class="center">';
         echo $this->sHtml;
-        echo '<p>' . t('Psst! Do not forget to read the <a href="%0%">documentation page</a> before proceeding with the update.', 'https://ph7cms.com/doc/en/upgrade') . '</p>';
+        echo '<p>' . t('Psst! Do not forget to read the <a href="%0%">documentation page</a> before proceeding with the update.', Version::UPGRADE_DOC_URL) . '</p>';
         echo '</div></body></html>';
     }
 
