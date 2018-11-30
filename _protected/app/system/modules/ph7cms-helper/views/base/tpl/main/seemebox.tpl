@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <div id="box_block" class="center">
-        <h1>{lang 'Sex!'}</h1>
+        <h1>{lang 'Sex!'} ❤️</h1>
 
         <p>{lang 'Sorry, just need your attention :)'} {lang "Don't forget to Star the software you ❤"}️</p>
 
