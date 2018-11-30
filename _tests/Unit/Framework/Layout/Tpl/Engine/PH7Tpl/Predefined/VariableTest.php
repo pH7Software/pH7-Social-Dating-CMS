@@ -100,7 +100,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testSoftwareVersionUrlVariable()
+    public function testSoftwareVersionVariable()
     {
         $oPredefinedVar = new PredefinedVariable('{software_version}');
         $this->assertAttributeSame(
