@@ -97,7 +97,7 @@
         {/if}
 
         <h2 class="center underline italic s_tMarg">{lang 'Quick User Search'}</h2>
-        {# if profiles are buyers, show the seller form #}
+        {* if profiles are buyers, show the seller form *}
         {if $sex == 'buyer'}
             {{ SearchSellerForm::display() }}
         {/if}
