@@ -574,12 +574,12 @@ class Design
      */
     public function geoIp($bPrint = true)
     {
-        $sCountry = Geo::getCountry();
+        //$sCountry = Geo::getCountry();
         $sCountryCode = Country::fixCode(Geo::getCountryCode());
         $sCountryLang = t($sCountryCode); // Country name translated into the user language
         $sCity = Geo::getCity();
 
-        $sHtml = '<a href="' . Uri::get('realestate', 'country', 'index', $sCountry . PH7_SH . $sCity) . '" title="' . t('Meet New People in %0%, %1% with %site_name%!', $sCountryLang, $sCity) . '">' . $sCity . '</a>';
+        $sHtml = '<abbr title="' . t('Meet New People in %0%, %1% with %site_name%!', $sCountryLang, $sCity) . '">' . $sCity . '</a></abbr>';
 
         if (!$bPrint) {
             return $sHtml;

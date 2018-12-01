@@ -61,8 +61,6 @@
                 <li><a href="{{ $design->url('realestate', 'search', 'seller') }}" title="{lang 'Seller Search'}" data-load="ajax">{lang 'Seller Search'}</a></li>
               </ul>
             </li>
-
-            <li><a href="{{ $design->url('realestate','country','index',$country.PH7_SH.$city) }}" title="{lang 'Users in %0% through the Map!',$city}"><i class="fa fa-map-marker"></i> {lang 'People Nearby'}</a></li>
           </ul>
         </li>
       {/if}
