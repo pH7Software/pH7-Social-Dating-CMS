@@ -97,7 +97,10 @@
         {/if}
 
         <h2 class="center underline italic s_tMarg">{lang 'Quick User Search'}</h2>
-        {{ SearchUserCoreForm::quick() }}
+        {# if profiles are buyers, show the seller form #}
+        {if $sex == 'buyer'}
+            {{ SearchSellerForm::display() }}
+        {/if}
     </div>
 
     <div class="left col-xs-12 col-sm-2 col-md-3">
