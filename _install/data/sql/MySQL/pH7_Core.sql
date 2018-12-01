@@ -1653,7 +1653,7 @@ INSERT INTO ph7_affiliates_countries (countryCode) VALUES
 
 
 CREATE TABLE IF NOT EXISTS ph7_members_spy (
-  spyId int(10) unsigned NOT NULL,
+  spyId int(10) unsigned NOT NULL AUTO_INCREMENT,
   profileId int(10) unsigned NOT NULL,
   url varchar(255) NOT NULL,
   userAction varchar(255) NOT NULL,
