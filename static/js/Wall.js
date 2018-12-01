@@ -21,7 +21,7 @@ function Wall() {
      * @property sUrl
      * @type {String}
      */
-    this.sUrl = 'user/asset/ajax/Wall';
+    this.sUrl = 'realestate/asset/ajax/Wall';
 
     /**
      * Show wall messages.
