@@ -90,9 +90,15 @@ class JoinFormProcess extends Form
             ];
             $this->session->set($aSessData);
 
-            Header::redirect(
-                Uri::get('realestate', 'signup', 'step2')
-            );
+            // Don't show avatar field for Buyers
+            if ($aData['sex'] === 'buyer') {
+                $this->session->set('mail_step2', $this->session->get('mail_step1'));
+                $this->redirectUserToDonePage();
+            } else {
+                Header::redirect(
+                    Uri::get('realestate', 'signup', 'step2')
+                );
+            }
         }
     }
 
