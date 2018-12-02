@@ -34,24 +34,6 @@
         <h2 class="center underline">{lang 'The Latest Users'}</h2>
         {{ $userDesignModel->profilesBlock() }}
 
-        <h2 class="center underline">{lang 'My friends'}</h2>
-        <div class="content" id="friend">
-            <script>
-                var url_friend_block = '{{ $design->url('friend','main','index',$username) }}';
-                $('#friend').load(url_friend_block + ' #friend_block');
-            </script>
-        </div>
-        <div class="clear"></div>
-
-        <h2 class="center underline">{lang 'Visitors who visited my profile'}</h2>
-        <div class="content" id="visitor">
-            <script>
-                var url_visitor_block = '{{ $design->url('realestate','visitor','index',$username) }}';
-                $('#visitor').load(url_visitor_block + ' #visitor_block');
-            </script>
-        </div>
-        <div class="clear"></div>
-
         {if $is_picture_enabled}
             <h2 class="center underline">{lang 'My photo albums'}</h2>
             <div class="content" id="picture">
