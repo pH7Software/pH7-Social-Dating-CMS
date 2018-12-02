@@ -5,7 +5,7 @@
  */
 
 function updateActivity() {
-    $.get(pH7Url.base + 'user/asset/ajax/setActivity');
+    $.get(pH7Url.base + 'realestate/asset/ajax/setActivity');
     setTimeout('updateActivity()', 10000)
 }
 updateActivity();
