@@ -31,9 +31,6 @@
     {/if}
 
     <div class="left col-xs-12 col-sm-6 col-md-6">
-        <h2 class="center underline">{lang 'The Latest Users'}</h2>
-        {{ $userDesignModel->profilesBlock() }}
-
         {if $is_picture_enabled}
             <h2 class="center underline">{lang 'My photo albums'}</h2>
             <div class="content" id="picture">
