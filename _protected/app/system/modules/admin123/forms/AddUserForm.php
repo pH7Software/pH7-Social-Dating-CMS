@@ -48,7 +48,6 @@ class AddUserForm
             )
         );
         $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', ['title' => t('Please specify the date of birth using the calendar.'), 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country', ['id' => 'str_country', 'value' => Geo::getCountryCode(), 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', ['id' => 'str_city', 'validation' => new \PFBC\Validation\Str(2, 150), 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\Textbox(t('State/Province:'), 'state', ['id' => 'str_state', 'validation' => new \PFBC\Validation\Str(2, 150)]));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Postal Code:'), 'zip_code', ['id' => 'str_zip_code', 'validation' => new \PFBC\Validation\Str(2, 15)]));

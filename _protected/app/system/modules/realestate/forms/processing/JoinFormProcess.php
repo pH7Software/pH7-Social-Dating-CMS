@@ -46,7 +46,6 @@ class JoinFormProcess extends Form
             'username' => $this->httpRequest->post('username'),
             'sex' => $this->httpRequest->post('sex'),
             'first_name' => $this->httpRequest->post('first_name'),
-            'country' => $this->httpRequest->post('country'),
             'city' => $this->httpRequest->post('city'),
             'zipCode' => $this->httpRequest->post('zipCode'),
             'reference' => $this->getAffiliateReference(),

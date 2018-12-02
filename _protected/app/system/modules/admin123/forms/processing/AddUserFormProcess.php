@@ -35,7 +35,6 @@ class AddUserFormProcess extends Form
             'sex' => $this->httpRequest->post('sex'),
             'match_sex' => $this->httpRequest->post('match_sex'),
             'birth_date' => $sBirthDate,
-            'country' => $this->httpRequest->post('country'),
             'city' => $this->httpRequest->post('city'),
             'state' => $this->httpRequest->post('state'),
             'zip_code' => $this->httpRequest->post('zip_code'),
