@@ -34,14 +34,16 @@
         <h2 class="center underline">{lang 'The Latest Users'}</h2>
         {{ $userDesignModel->profilesBlock() }}
 
-        <h2 class="center underline">{lang 'My friends'}</h2>
-        <div class="content" id="friend">
-            <script>
-                var url_friend_block = '{{ $design->url('friend','main','index',$username) }}';
-                $('#friend').load(url_friend_block + ' #friend_block');
-            </script>
-        </div>
-        <div class="clear"></div>
+        {if $is_friend_enabled}
+            <h2 class="center underline">{lang 'My friends'}</h2>
+            <div class="content" id="friend">
+                <script>
+                    var url_friend_block = '{{ $design->url('friend','main','index',$username) }}';
+                    $('#friend').load(url_friend_block + ' #friend_block');
+                </script>
+            </div>
+            <div class="clear"></div>
+        {/if}
 
         <h2 class="center underline">{lang 'Visitors who visited my profile'}</h2>
         <div class="content" id="visitor">
