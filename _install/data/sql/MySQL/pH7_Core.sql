@@ -953,7 +953,7 @@ INSERT INTO ph7_sys_mods_enabled (moduleTitle, folderName, premiumMod, enabled) 
 ('Invite Friends', 'invite', '0', '1'),
 ('Social Media Auth (connect module)', 'connect', '0', '0'),
 ('Webcam', 'webcam', '0', '0'),
-('Progressive Web App (https required)', 'pwa', '0', '0');
+('Progressive Web App (HTTPS required)', 'pwa', '0', '0');
 
 
 CREATE TABLE IF NOT EXISTS ph7_modules (
