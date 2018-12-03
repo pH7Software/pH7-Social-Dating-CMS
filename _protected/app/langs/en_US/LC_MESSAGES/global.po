@@ -6970,7 +6970,7 @@ msgid "Meet new People and Friends near you with %site_name% - Browse Members"
 msgstr ""
 
 #: _protected/app/system/modules/user/controllers/CountryController.php:71
-msgid "Error, country is empty."
+msgid "Oops! The country name is not specified."
 msgstr ""
 
 #: _protected/app/system/modules/user/controllers/CountryController.php:100

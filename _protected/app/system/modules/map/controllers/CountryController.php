@@ -68,7 +68,7 @@ class CountryController extends Controller
         } else {
             // Not found page
             Http::setHeadersByCode(StatusCode::NOT_FOUND);
-            $this->view->error = t('Error, country is empty.');
+            $this->view->error = t('Oops! The country name is not specified.');
         }
 
         $this->output();
