@@ -845,7 +845,7 @@ final class FrontController
      */
     private function indexFileRouter()
     {
-        // The following code will be useless when pH7CMS will be able to work without mod_rewrite \\
+        // The following code will be useless if pH7CMS will be able to work without mod_rewrite
         if ($this->oHttpRequest->currentUrl() === PH7_URL_ROOT . static::INDEX_FILE) {
             $this->notFound('In "production" mode, it simulates "404 page not found" if the index.php filename is called, to avoid disclosing the language index filename (e.g. for security reasons...).');
         }
