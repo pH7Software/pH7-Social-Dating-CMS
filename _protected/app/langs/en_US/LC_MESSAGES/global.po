@@ -809,7 +809,7 @@ msgid "Latest Game Comments"
 msgstr ""
 
 #: _protected/app/system/core/classes/design/XmlDesignCore.php:90
-msgid "No News Software."
+msgid "No %software_name%'s news found."
 msgstr ""
 
 #: _protected/app/system/core/classes/design/XmlDesignCore.php:94

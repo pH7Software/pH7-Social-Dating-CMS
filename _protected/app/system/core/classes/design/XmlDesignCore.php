@@ -87,7 +87,7 @@ class XmlDesignCore
                     echo '<p>', escape($aItems['description'], true), '</p>';
                 }
             } else {
-                echo '<p>', t('No News Software.'), '</p>';
+                echo '<p>', t("No %software_name%'s news found."), '</p>';
             }
         } catch (PH7Exception $oE) {
             (new Design)->setFlashMsg(
