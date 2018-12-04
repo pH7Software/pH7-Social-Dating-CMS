@@ -24,9 +24,9 @@ staleLabel: archived
 
 # Comment to post when marking as stale. Set to `false` to disable
 markComment: >
-  Hi there, it looks like there has been no activity on this issue recently. For this reason, this issue has been marked as stale.
+  Hi there :) It looks like there has been no activity on this issue recently. For this reason, this issue has been marked as archived.
   It will be closed in 7 days if no further activity occurs. Thank you
-  for your contributions. Pierre-Henry
+  for your contribution! Pierre-Henry
 
 closeComment: >
-  Hi again, since you didn't get back to me, I assume the problem is fixed. I'm closing it by now. If it isn't the case, please feel free to open a new issue.
+  Hi again, since you didn't get back to me, I assume the problem is fixed. I'm closing it by now. If it isn't the case, please feel free to open a new issue. Thank you
