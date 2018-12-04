@@ -15,6 +15,9 @@ use RuntimeException;
 
 class ProtectedFileForm
 {
+    const TERMS_FILENAME = 'terms.tpl';
+    const PRIVACY_FILENAME = 'privacy.tpl';
+
     public static function display()
     {
         if (isset($_POST['submit_file'])) {
@@ -26,7 +29,9 @@ class ProtectedFileForm
         }
 
         try {
-            if (!$rData = @file_get_contents(self::getRealPath())) {
+            $sFullPath = self::getRealPath();
+
+            if (!$rData = @file_get_contents($sFullPath)) {
                 \PFBC\Form::clearErrors('form_file'); // First, remove the previous error message (if existing) to avoid duplicate error messages
                 \PFBC\Form::setError('form_file', t('The following requested file was not found: %0%', escape(PH7_PATH_PROTECTED . $_GET['file'])));
             }
@@ -36,11 +41,32 @@ class ProtectedFileForm
             $oForm->addElement(new \PFBC\Element\Hidden('submit_file', 'form_file'));
             $oForm->addElement(new \PFBC\Element\Token('file'));
             $oForm->addElement(new \PFBC\Element\Textarea(t('File Contents'), 'content', ['value' => $rData, 'style' => 'height:50rem', 'required' => 1]));
+            if (self::isLegalPage($sFullPath)) {
+                $oForm->addElement(
+                    new \PFBC\Element\HTMLExternal(
+                        '<p class="red">' .
+                        t('There is no warranty that the default terms/privacy pages meets the legal requirements for your website.') . '<br />' .
+                        t('You need to review it and modify it if needed.') .
+                        '</p>'
+                    )
+                );
+            }
             $oForm->addElement(new \PFBC\Element\Button(t('Save')));
             $oForm->render();
         } catch (RuntimeException $oExcept) {
             echo '<p class="col-md-6 col-md-offset-4 red">' . $oExcept->getMessage() . '</p>';
         }
+    }
+
+    /**
+     * @param string $sFullPath
+     *
+     * @return bool
+     */
+    private static function isLegalPage($sFullPath)
+    {
+        return strpos($sFullPath, self::TERMS_FILENAME) !== false ||
+            strpos($sFullPath, self::PRIVACY_FILENAME) !== false;
     }
 
     /**
