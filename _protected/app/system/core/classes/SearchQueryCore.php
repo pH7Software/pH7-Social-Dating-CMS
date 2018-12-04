@@ -22,6 +22,8 @@ final class SearchQueryCore
     const ZIP_CODE = 'zip_code';
     const HEIGHT = 'height';
     const WEIGHT = 'weight';
+    const PRICE = 'propertyPrice';
+    const SIZE = 'propertySize';
     const FIRST_NAME = 'first_name';
     const LAST_NAME = 'last_name';
     const MIDDLE_NAME = 'middle_name';

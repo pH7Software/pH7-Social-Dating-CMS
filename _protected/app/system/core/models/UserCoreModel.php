@@ -320,8 +320,8 @@ class UserCoreModel extends Model
         $bIsLastName = !$bIsMail && !empty($aParams[SearchQueryCore::LAST_NAME]) && Str::noSpaces($aParams[SearchQueryCore::LAST_NAME]);
         $bIsSingleAge = !$bIsMail && !empty($aParams[SearchQueryCore::AGE]);
         $bIsAge = !$bIsMail && empty($aParams[SearchQueryCore::AGE]) && !empty($aParams[SearchQueryCore::MIN_AGE]) && !empty($aParams[SearchQueryCore::MAX_AGE]);
-        $bIsHeight = !$bIsMail && !empty($aParams[SearchQueryCore::HEIGHT]);
-        $bIsWeight = !$bIsMail && !empty($aParams[SearchQueryCore::WEIGHT]);
+        $bIsPrice = !$bIsMail && !empty($aParams[SearchQueryCore::PRICE]);
+        $bIsSize = !$bIsMail && !empty($aParams[SearchQueryCore::SIZE]);
         $bIsCountry = !$bIsMail && !empty($aParams[SearchQueryCore::COUNTRY]) && Str::noSpaces($aParams[SearchQueryCore::COUNTRY]);
         $bIsCity = !$bIsMail && !empty($aParams[SearchQueryCore::CITY]) && Str::noSpaces($aParams[SearchQueryCore::CITY]);
         $bIsState = !$bIsMail && !empty($aParams[SearchQueryCore::STATE]) && Str::noSpaces($aParams[SearchQueryCore::STATE]);
@@ -339,8 +339,8 @@ class UserCoreModel extends Model
         $sSqlLastName = $bIsLastName ? ' AND LOWER(lastName) LIKE LOWER(:lastName)' : '';
         $sSqlSingleAge = $bIsSingleAge ? ' AND birthDate LIKE :birthDate ' : '';
         $sSqlAge = $bIsAge ? ' AND birthDate BETWEEN DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age2 YEAR) AND DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age1 YEAR) ' : '';
-        $sSqlHeight = $bIsHeight ? ' AND height = :height ' : '';
-        $sSqlWeight = $bIsWeight ? ' AND weight = :weight ' : '';
+        $sSqlHeight = $bIsPrice ? ' AND propertyPrice = :price ' : '';
+        $sSqlWeight = $bIsSize ? ' AND propertySize = :size ' : '';
         $sSqlCountry = $bIsCountry ? ' AND country = :country ' : '';
         $sSqlCity = $bIsCity ? ' AND LOWER(city) LIKE LOWER(:city) ' : '';
         $sSqlState = $bIsState ? ' AND LOWER(state) LIKE LOWER(:state) ' : '';
@@ -399,11 +399,11 @@ class UserCoreModel extends Model
         if ($bIsAge) {
             $rStmt->bindValue(':age2', $aParams[SearchQueryCore::MAX_AGE], \PDO::PARAM_INT);
         }
-        if ($bIsHeight) {
-            $rStmt->bindValue(':height', $aParams[SearchQueryCore::HEIGHT], \PDO::PARAM_INT);
+        if ($bIsPrice) {
+            $rStmt->bindValue(':price', $aParams[SearchQueryCore::PRICE], \PDO::PARAM_INT);
         }
-        if ($bIsWeight) {
-            $rStmt->bindValue(':weight', $aParams[SearchQueryCore::WEIGHT], \PDO::PARAM_INT);
+        if ($bIsSize) {
+            $rStmt->bindValue(':size', $aParams[SearchQueryCore::SIZE], \PDO::PARAM_INT);
         }
         if ($bIsCountry) {
             $rStmt->bindParam(':country', $aParams[SearchQueryCore::COUNTRY], \PDO::PARAM_STR, 2);
