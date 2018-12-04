@@ -272,7 +272,11 @@ class SettingForm
 
 
         /********** API **********/
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="api"><div class="col-md-10"><h2 class="underline">' . t('API') . '</h2>'));
+        $oForm->addElement(
+            new \PFBC\Element\HTMLExternal(
+                '</div></div><div class="content" id="api"><div class="col-md-10"><h2 class="underline">' . t('API') . '</h2>'
+            )
+        );
 
         if (SysMod::isEnabled('map')) {
             $sGoogleApiKeyDesc = t('You can get your key <a href="%0%">here</a>. Then, select "<strong>Google Maps JavaScript API</strong>" for "<em>Which API are you using</em>" and "<strong>Web browser (Javascript)</strong>" for "<em>Where will you be calling the API from</em>", then you will get your API key to paste here. ', self::GOOGLE_API_KEY_URL);
