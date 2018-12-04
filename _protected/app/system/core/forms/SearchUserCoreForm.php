@@ -10,6 +10,7 @@
 
 namespace PH7;
 
+use Couchbase\SearchQuery;
 use PH7\Framework\Geo\Ip\Geo;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
@@ -72,11 +73,11 @@ class SearchUserCoreForm
             )
         );
         $oForm->addElement(new \PFBC\Element\Age(self::$aAgeOption));
-        $oForm->addElement(new \PFBC\Element\Select(t('Country:'), 'country', Form::getCountryValues(), self::$aCountryOption));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', self::$aCityOption));
-        $oForm->addElement(new \PFBC\Element\Checkbox('', 'latest', ['1' => '<span class="bold">' . t('Latest members') . '</span>'], self::$aLatestOrder));
-        $oForm->addElement(new \PFBC\Element\Checkbox('', 'avatar', ['1' => '<span class="bold">' . t('Only with Avatar') . '</span>'], self::$aAvatarOnly));
-        $oForm->addElement(new \PFBC\Element\Checkbox('', 'online', ['1' => '<span class="bold green2">' . t('Only Online') . '</span>'], self::$aOnlineOnly));
+        $oForm->addElement(new \PFBC\Element\Select(t('Country:'), SearchQueryCore::COUNTRY, Form::getCountryValues(), self::$aCountryOption));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), SearchQueryCore::CITY, self::$aCityOption));
+        $oForm->addElement(new \PFBC\Element\Checkbox('', SearchQueryCore::ORDER, [SearchCoreModel::LATEST => '<span class="bold">' . t('Latest members') . '</span>'], self::$aLatestOrder));
+        $oForm->addElement(new \PFBC\Element\Checkbox('', SearchQueryCore::AVATAR, ['1' => '<span class="bold">' . t('Only with Avatar') . '</span>'], self::$aAvatarOnly));
+        $oForm->addElement(new \PFBC\Element\Checkbox('', SearchQueryCore::ONLINE, ['1' => '<span class="bold green2">' . t('Only Online') . '</span>'], self::$aOnlineOnly));
         $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', ['icon' => 'search']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
         $oForm->render();
@@ -123,15 +124,15 @@ class SearchUserCoreForm
             )
         );
         $oForm->addElement(new \PFBC\Element\Age(self::$aAgeOption));
-        $oForm->addElement(new \PFBC\Element\Select(t('Country:'), 'country', Form::getCountryValues(), self::$aCountryOption));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', self::$aCityOption));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('State/Province:'), 'state', self::$aStateOption));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Postal Code:'), 'zip_code', ['id' => 'str_zip_code']));
-        $oForm->addElement(new \PFBC\Element\Email(t('Email Address:'), 'mail'));
-        $oForm->addElement(new \PFBC\Element\Checkbox('', 'avatar', ['1' => '<span class="bold">' . t('Only with Avatar') . '</span>']));
-        $oForm->addElement(new \PFBC\Element\Checkbox('', 'online', ['1' => '<span class="bold green2">' . t('Only Online') . '</span>']));
-        $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', [SearchCoreModel::LATEST => t('Latest Members'), SearchCoreModel::LAST_ACTIVITY => t('Last Activity'), SearchCoreModel::VIEWS => t('Most Popular'), SearchCoreModel::RATING => t('Top Rated'), SearchCoreModel::USERNAME => t('Username'), SearchCoreModel::FIRST_NAME => t('First Name'), SearchCoreModel::LAST_NAME => t('Last Name'), SearchCoreModel::EMAIL => t('Email')]));
-        $oForm->addElement(new \PFBC\Element\Select(t('Direction:'), 'sort', [SearchCoreModel::DESC => t('Descending'), SearchCoreModel::ASC => t('Ascending')]));
+        $oForm->addElement(new \PFBC\Element\Select(t('Country:'), SearchQueryCore::COUNTRY, Form::getCountryValues(), self::$aCountryOption));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), SearchQueryCore::CITY, self::$aCityOption));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('State/Province:'), SearchQueryCore::STATE, self::$aStateOption));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Postal Code:'), SearchQueryCore::ZIP_CODE, ['id' => 'str_zip_code']));
+        $oForm->addElement(new \PFBC\Element\Email(t('Email Address:'), SearchQueryCore::EMAIL));
+        $oForm->addElement(new \PFBC\Element\Checkbox('', SearchQueryCore::AVATAR, ['1' => '<span class="bold">' . t('Only with Avatar') . '</span>']));
+        $oForm->addElement(new \PFBC\Element\Checkbox('', SearchQueryCore::ONLINE, ['1' => '<span class="bold green2">' . t('Only Online') . '</span>']));
+        $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), SearchQueryCore::ORDER, [SearchCoreModel::LATEST => t('Latest Members'), SearchCoreModel::LAST_ACTIVITY => t('Last Activity'), SearchCoreModel::VIEWS => t('Most Popular'), SearchCoreModel::RATING => t('Top Rated'), SearchCoreModel::USERNAME => t('Username'), SearchCoreModel::FIRST_NAME => t('First Name'), SearchCoreModel::LAST_NAME => t('Last Name'), SearchCoreModel::EMAIL => t('Email')]));
+        $oForm->addElement(new \PFBC\Element\Select(t('Direction:'), SearchQueryCore::SORT, [SearchCoreModel::DESC => t('Descending'), SearchCoreModel::ASC => t('Ascending')]));
         $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', ['icon' => 'search']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
         $oForm->render();
@@ -210,14 +211,14 @@ class SearchUserCoreForm
             self::$aAgeOption = ['value' => ['min_age' => $oHttpRequest->get('age1'), 'max_age' => $oHttpRequest->get('age2')]];
         }
 
-        if ($oHttpRequest->getExists('country')) {
-            self::$aCountryOption += ['value' => $oHttpRequest->get('country')];
+        if ($oHttpRequest->getExists(SearchQueryCore::COUNTRY)) {
+            self::$aCountryOption += ['value' => $oHttpRequest->get(SearchQueryCore::COUNTRY)];
         } else {
             self::$aCountryOption += ['value' => Geo::getCountryCode()];
         }
 
-        if ($oHttpRequest->getExists('city')) {
-            $sCity = $oHttpRequest->get('city');
+        if ($oHttpRequest->getExists(SearchQueryCore::CITY)) {
+            $sCity = $oHttpRequest->get(SearchQueryCore::CITY);
         } else {
             $sCity = Geo::getCity();
         }
@@ -225,15 +226,15 @@ class SearchUserCoreForm
 
         self::$aStateOption += ['value' => Geo::getState(), 'onfocus' => "if('" . Geo::getState() . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . Geo::getState() . "';"];
 
-        if ($oHttpRequest->getExists('latest')) {
-            self::$aLatestOrder += ['value' => '1'];
+        if ($oHttpRequest->getExists(SearchQueryCore::ORDER)) {
+            self::$aLatestOrder += ['value' => SearchCoreModel::LATEST];
         }
 
-        if ($oHttpRequest->getExists('avatar')) {
+        if ($oHttpRequest->getExists(SearchQueryCore::AVATAR)) {
             self::$aAvatarOnly += ['value' => '1'];
         }
 
-        if ($oHttpRequest->getExists('online')) {
+        if ($oHttpRequest->getExists(SearchQueryCore::ONLINE)) {
             self::$aOnlineOnly += ['value' => '1'];
         }
     }
