@@ -18,6 +18,8 @@ use PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
+    const SOFTWARE_BLOG_URL = 'http://ph7cms.com/blog/';
+
     public function index()
     {
         // Add ph7cms-helper's JS file if needed
@@ -32,6 +34,7 @@ class MainController extends Controller
         $this->view->h3_title = t('How are you doing today?');
 
         $this->view->is_news_feed = (bool)DbConfig::getSetting('isSoftwareNewsFeed');
+        $this->view->software_blog_url = self::SOFTWARE_BLOG_URL;
 
         $this->checkUpdates();
 
