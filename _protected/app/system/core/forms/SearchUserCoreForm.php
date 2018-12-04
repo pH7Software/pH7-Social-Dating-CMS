@@ -131,8 +131,32 @@ class SearchUserCoreForm
         $oForm->addElement(new \PFBC\Element\Email(t('Email Address:'), SearchQueryCore::EMAIL));
         $oForm->addElement(new \PFBC\Element\Checkbox('', SearchQueryCore::AVATAR, ['1' => '<span class="bold">' . t('Only with Avatar') . '</span>']));
         $oForm->addElement(new \PFBC\Element\Checkbox('', SearchQueryCore::ONLINE, ['1' => '<span class="bold green2">' . t('Only Online') . '</span>']));
-        $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), SearchQueryCore::ORDER, [SearchCoreModel::LATEST => t('Latest Members'), SearchCoreModel::LAST_ACTIVITY => t('Last Activity'), SearchCoreModel::VIEWS => t('Most Popular'), SearchCoreModel::RATING => t('Top Rated'), SearchCoreModel::USERNAME => t('Username'), SearchCoreModel::FIRST_NAME => t('First Name'), SearchCoreModel::LAST_NAME => t('Last Name'), SearchCoreModel::EMAIL => t('Email')]));
-        $oForm->addElement(new \PFBC\Element\Select(t('Direction:'), SearchQueryCore::SORT, [SearchCoreModel::DESC => t('Descending'), SearchCoreModel::ASC => t('Ascending')]));
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('Browse By:'),
+                SearchQueryCore::ORDER,
+                [
+                    SearchCoreModel::LATEST => t('Latest Members'),
+                    SearchCoreModel::LAST_ACTIVITY => t('Last Activity'),
+                    SearchCoreModel::VIEWS => t('Most Popular'),
+                    SearchCoreModel::RATING => t('Top Rated'),
+                    SearchCoreModel::USERNAME => t('Username'),
+                    SearchCoreModel::FIRST_NAME => t('First Name'),
+                    SearchCoreModel::LAST_NAME => t('Last Name'),
+                    SearchCoreModel::EMAIL => t('Email')
+                ]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('Direction:'),
+                SearchQueryCore::SORT,
+                [
+                    SearchCoreModel::DESC => t('Descending'),
+                    SearchCoreModel::ASC => t('Ascending')
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', ['icon' => 'search']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
         $oForm->render();
@@ -208,7 +232,12 @@ class SearchUserCoreForm
 
         self::$aAgeOption = ['value' => self::getAgeVals($oUserModel, $oSession)];
         if ($oHttpRequest->getExists(['age1', 'age2'])) {
-            self::$aAgeOption = ['value' => ['min_age' => $oHttpRequest->get('age1'), 'max_age' => $oHttpRequest->get('age2')]];
+            self::$aAgeOption = [
+                'value' => [
+                    'min_age' => $oHttpRequest->get('age1'),
+                    'max_age' => $oHttpRequest->get('age2')
+                ]
+            ];
         }
 
         if ($oHttpRequest->getExists(SearchQueryCore::COUNTRY)) {
