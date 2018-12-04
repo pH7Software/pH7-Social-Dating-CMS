@@ -16,7 +16,6 @@ class Field
         'profileid',
         'middlename',
         'description',
-        'punchline',
         'businessname',
         'address',
         'city',
