@@ -82,7 +82,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Database Backup
 * Report Abuse
 * SEO-Friendly (Title, Content, Code, ...), Sitemap module, [hreflang](https://support.google.com/webmasters/answer/189077), possibility to translate each URL, ...
-* [Schema.org markup](https://moz.com/learn/seo/schema-structured-data) on webapp considerably increases the ranking in search engines results and enable great features such as Google Rich Snippets
+* [Schema.org markup](https://moz.com/learn/seo/schema-structured-data) on your webapp considerably increases the ranking in search engines results and enable great features such as Google Rich Snippets
 * Multilingual URLs
 * Check that all UGC (User-Generated Content) are Unique (to avoid spam and malicious users)
 * RSS Feed
