@@ -35,7 +35,16 @@ class ConfirmCoreForm
          * Bug Ajax jQuery -> https://github.com/jquery/jquery-mobile/issues/3202
          * $oForm->addElement(new \PFBC\Element\Button($aParam['label'], 'submit', ['formaction'=>$sUrl]));
          */
-        $oForm->addElement(new \PFBC\Element\Button(t('Cancel'), 'cancel', ['onclick' => '$("form").attr("action", "");parent.$.colorbox.close();return false', 'icon' => 'cancel']));
+        $oForm->addElement(
+            new \PFBC\Element\Button(
+                t('Cancel'),
+                'cancel',
+                [
+                    'onclick' => '$("form").attr("action", "");parent.$.colorbox.close();return false',
+                    'icon' => 'cancel'
+                ]
+            )
+        );
         $oForm->render();
     }
 }
