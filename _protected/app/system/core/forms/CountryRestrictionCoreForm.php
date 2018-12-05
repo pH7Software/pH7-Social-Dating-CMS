@@ -76,7 +76,7 @@ class CountryRestrictionCoreForm
         }
 
         $sMessage .= '<br />';
-        $sMessage .= t('If you need to block your entire website to be accessible from a country, please use <a href="%0%">Country Blocker</a> tool.', Uri::get(PH7_ADMIN_MOD, 'tool', 'blockcountry'));
+        $sMessage .= t('If you need to block all Internet traffic to your website from a specific country, please use <a href="%0%">Country Blocker</a> tool.', Uri::get(PH7_ADMIN_MOD, 'tool', 'blockcountry'));
 
         return $sMessage;
     }
