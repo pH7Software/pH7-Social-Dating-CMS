@@ -82,7 +82,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Database Backup
 * Report Abuse
 * SEO-Friendly (Title, Content, Code, ...), Sitemap module, [hreflang](https://support.google.com/webmasters/answer/189077), possibility to translate each URL, ...
-* [Schema.org markup](https://moz.com/learn/seo/schema-structured-data) on webapp considerably increases the ranking in search engines results and enable great features such as Google Rich Snippets.
+* [Schema.org markup](https://moz.com/learn/seo/schema-structured-data) on webapp considerably increases the ranking in search engines results and enable great features such as Google Rich Snippets
 * Multilingual URLs
 * Check that all UGC (User-Generated Content) are Unique (to avoid spam and malicious users)
 * RSS Feed
@@ -108,7 +108,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * pCO8 SECURITY pH7Framework™ (offers one of the highest protection for your webapp)
 * Full Security system against XSS, CSRF, SQL injection, authentication hacking, session fixation, brute-force, reverse tabnabbing phishing attacks, ... and can even prevent some DDoS attacks!
 * Two-Factor Authentication (2FA) available for Admins, Users and Affiliates
-* Progressive Web App (PWA) support (requires HTTPS).
+* Progressive Web App (PWA) support (requires HTTPS)
 * Admin Panel - Block Access with IP Restriction
 * Beautiful Code: Very thoroughly commented about what's happening throughout the PHP code, beautiful indentation and very readable, even for non-programmers
 * Anyone can easily contribute to pH7CMS project thanks the [GitHub repository](https://github.com/pH7Software/pH7-Social-Dating-CMS)
