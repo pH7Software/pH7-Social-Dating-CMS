@@ -65,8 +65,11 @@ class ProtectedFileForm
      */
     private static function isLegalPage($sFullPath)
     {
-        return strpos($sFullPath, self::TERMS_FILENAME) !== false ||
-            strpos($sFullPath, self::PRIVACY_FILENAME) !== false;
+        $cIsFound = function ($sPageFilename) use ($sFullPath) {
+            return strpos($sFullPath, $sPageFilename) !== false;
+        };
+
+        return $cIsFound(self::TERMS_FILENAME) || $cIsFound(self::PRIVACY_FILENAME);
     }
 
     /**
