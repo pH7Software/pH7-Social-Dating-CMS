@@ -42,8 +42,8 @@ class JoinForm
                 t('Are you?'),
                 'sex',
                 [
-                    'buyer' => t('Home Buyer 👨‍👩'),
-                    'seller' => t('Home Seller ‍🏡'),
+                    'buyer' => t('Home Buyer'),
+                    'seller' => t('Home Seller'),
                     'both' => t('Both')
                 ],
                 ['value' => 'buyer', 'required' => 1]
