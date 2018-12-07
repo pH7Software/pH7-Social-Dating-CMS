@@ -36,7 +36,8 @@ class SearchSellerForm
         $oForm->addElement(new \PFBC\Element\Hidden('sex', 'buyer'));
         $oForm->addElement(new \PFBC\Element\Hidden('match_sex', 'seller'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', self::$aCityOption));
-        $oForm->addElement(new \PFBC\Element\Number(t('Price:'), SearchQueryCore::PRICE));
+        $oForm->addElement(new \PFBC\Element\Number(t('Price Range:'), SearchQueryCore::PRICE));
+        $oForm->addElement(new \PFBC\Element\Number(t('Min Bedrooms:'), SearchQueryCore::BEDROOM));
         $oForm->addElement(new \PFBC\Element\Number(t('Size:'), SearchQueryCore::SIZE));
         $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', [SearchCoreModel::LATEST => t('Latest Members'), SearchCoreModel::LAST_ACTIVITY => t('Last Activity'), SearchCoreModel::VIEWS => t('Most Popular'), SearchCoreModel::RATING => t('Top Rated'), SearchCoreModel::USERNAME => t('Username'), SearchCoreModel::FIRST_NAME => t('First Name'), SearchCoreModel::LAST_NAME => t('Last Name'), SearchCoreModel::EMAIL => t('Email')]));
         $oForm->addElement(new \PFBC\Element\Select(t('Direction:'), 'sort', [SearchCoreModel::DESC => t('Descending'), SearchCoreModel::ASC => t('Ascending')]));

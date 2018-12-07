@@ -24,6 +24,7 @@ final class SearchQueryCore
     const WEIGHT = 'weight';
     const PRICE = 'propertyPrice';
     const SIZE = 'propertySize';
+    const BEDROOM = 'propertyBedrooms';
     const FIRST_NAME = 'first_name';
     const LAST_NAME = 'last_name';
     const MIDDLE_NAME = 'middle_name';

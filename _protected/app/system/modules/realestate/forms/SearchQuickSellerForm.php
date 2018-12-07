@@ -36,7 +36,7 @@ class SearchSellerForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
         $oForm->addElement(new \PFBC\Element\Hidden('sex', 'buyer'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City'), 'city', self::$aCityOption));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Min Bedrooms'), 'bedrooms', ['id' => 'str_zip_code']));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Min Bedrooms'), SearchQueryCore::BEDROOM));
         $oForm->addElement(new \PFBC\Element\Number(t('Price Range'), SearchQueryCore::PRICE));
         $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', ['icon' => 'search']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
