@@ -16,7 +16,7 @@ class SearchQuickSellerForm
 {
     const MIN_PRICE = 500;
     const MAX_PRICE = 5000000;
-    const VALUE_PRICE = self::MAX_PRICE /2;
+    const VALUE_PRICE = self::MAX_PRICE / 2;
     const RANGE_NUMBER_INTERVAL = 100;
     /**
      * Default field attributes.
