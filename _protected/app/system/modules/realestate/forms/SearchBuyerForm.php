@@ -14,6 +14,11 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class SearchBuyerForm
 {
+    const MIN_PRICE = 500;
+    const MAX_PRICE = 5000000;
+    const VALUE_PRICE = self::MAX_PRICE /2;
+    const RANGE_NUMBER_INTERVAL = 100;
+
     /**
      * Default field attributes.
      */
@@ -29,16 +34,16 @@ class SearchBuyerForm
             self::setAttrVals();
         }
 
-        $oForm = new \PFBC\Form('form_search', $iWidth);
+        $oForm = new \PFBC\Form('form_buyer_search', $iWidth);
         $oForm->configure(['action' => Uri::get('realestate', 'browse', 'buyer') . PH7_SH, 'method' => 'get']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
+        $oForm->addElement(new \PFBC\Element\Hidden('submit_buyer_search', 'form_buyer_search'));
         $oForm->addElement(new \PFBC\Element\Hidden('sex', 'buyer'));
         $oForm->addElement(new \PFBC\Element\Hidden('match_sex', 'seller'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', self::$aCityOption));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Postal Code:'), 'zip_code', ['id' => 'str_zip_code']));
         $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', [SearchCoreModel::LATEST => t('Latest Members'), SearchCoreModel::LAST_ACTIVITY => t('Last Activity'), SearchCoreModel::VIEWS => t('Most Popular'), SearchCoreModel::RATING => t('Top Rated'), SearchCoreModel::USERNAME => t('Username'), SearchCoreModel::FIRST_NAME => t('First Name'), SearchCoreModel::LAST_NAME => t('Last Name'), SearchCoreModel::EMAIL => t('Email')]));
         $oForm->addElement(new \PFBC\Element\Select(t('Direction:'), 'sort', [SearchCoreModel::DESC => t('Descending'), SearchCoreModel::ASC => t('Ascending')]));
-        $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', ['icon' => 'search']));
+        $oForm->addElement(new \PFBC\Element\Range(t('Price Range'), SearchQueryCore::PRICE, ['min' => self::MIN_PRICE, 'max' => self::MAX_PRICE, 'step' => self::RANGE_NUMBER_INTERVAL, 'value' => self::VALUE_PRICE]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
         $oForm->render();
     }

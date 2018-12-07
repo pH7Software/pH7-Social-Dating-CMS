@@ -16,7 +16,7 @@ class Range extends Textbox
         parent::render();
 
         echo <<<'HTML'
-            <strong><output id="rangeOutput"></output></strong>
+            <strong>$<output id="rangeOutput" class="inline"></output></strong>
             <script>$(function(){$("#rangeOutput").val($("#rangeInput").val())});</script>
 HTML;
     }

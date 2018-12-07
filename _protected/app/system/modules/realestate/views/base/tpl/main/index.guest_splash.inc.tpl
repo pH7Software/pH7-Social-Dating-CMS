@@ -35,13 +35,21 @@
 
 <div class="left col-md-4 animated fadeInRight">
     {* For small devices, the following will be activated through /templates/themes/base/css/splash.css *}
-    <div class="login_button hidden center">
+    <div class="login_button hidden center s_bMarg">
         <a href="{{ $design->url('realestate','main','login') }}" class="btn btn-primary btn-lg">
             <strong>{lang 'Login'}</strong>
         </a>
     </div>
 
-    {{ JoinForm::step1() }}
+    <div class="login_button center">
+        <a href="{{ $design->url('realestate','signup','step1') }}" class="btn btn-primary btn-lg">
+            <strong>{lang 'Signup'}</strong>
+        </a>
+    </div>
+
+    {{ SearchQuickSellerForm::display() }}
+
+    {{ SearchQuickBuyerForm::display() }}
 
     {if $is_mobile}
         <div class="s_tMarg"></div>
