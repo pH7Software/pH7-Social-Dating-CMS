@@ -913,7 +913,7 @@ CREATE TABLE IF NOT EXISTS ph7_meta_main (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO ph7_meta_main (langId, pageTitle, metaDescription, metaKeywords, headline, slogan, promoText, metaRobots, metaAuthor, metaCopyright, metaRating, metaDistribution, metaCategory) VALUES
-('en_US', 'Home', 'The Real Estate Community', 'real estate, community, house, rent, sell, seller, buyer', 'Be on the right place!', 'The Place to Buy and Sell Properties', 'You are on the right place to rent and sell properties for buyers and sellers.', 'index, follow, all', '', 'All Rights Reserved.', 'general', 'global', 'real estate');
+('en_US', 'Home', 'The Real Estate Community', 'real estate, community, house, rent, sell, seller, buyer', 'Where Home Buyers and Sellers meet', 'The Place to Buy and Sell Properties', 'You are on the right place to rent and sell properties for buyers and sellers.', 'index, follow, all', '', 'All Rights Reserved.', 'general', 'global', 'real estate');
 
 
 CREATE TABLE IF NOT EXISTS ph7_sys_mods_enabled (

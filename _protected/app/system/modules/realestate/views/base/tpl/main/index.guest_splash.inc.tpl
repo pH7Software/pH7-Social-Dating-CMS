@@ -34,8 +34,6 @@
 {/if}
 
 <div class="left col-md-4 animated fadeInRight">
-    <h1 class="red3 italic underline">{headline}</h1>
-
     {* For small devices, the following will be activated through /templates/themes/base/css/splash.css *}
     <div class="login_button hidden center">
         <a href="{{ $design->url('realestate','main','login') }}" class="btn btn-primary btn-lg">
