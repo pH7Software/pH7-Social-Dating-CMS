@@ -38,12 +38,13 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\Token('join'));
 
         $oForm->addElement(
-            new \PFBC\Element\Radio(
+            new \PFBC\Element\Select(
                 t('Are you?'),
                 'sex',
                 [
                     'buyer' => t('Home Buyer 👨‍👩'),
-                    'seller' => t('Home Seller ‍🏡')
+                    'seller' => t('Home Seller ‍🏡'),
+                    'both' => t('Both')
                 ],
                 ['value' => 'buyer', 'required' => 1]
             )
