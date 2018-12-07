@@ -8,6 +8,8 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Util\Various as DbVarious;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mobile\MobApp;
 use PH7\Framework\Mvc\Model\DbConfig;
@@ -239,9 +241,12 @@ class MainController extends Controller
         $oDb = Db::getInstance();
         $sSqlContent = <<<SQL
 ALTER TABLE ph7_members MODIFY sex enum('buyer','seller', 'both') NOT NULL DEFAULT 'buyer';
+ALTER TABLE ph7_members_info ADD COLUMN propertyPrice int(10) unsigned DEFAULT NULL;
+ALTER TABLE ph7_members_info propertySize varchar(20) DEFAULT NULL;
+ALTER TABLE ph7_members_info propertyBed int(5) DEFAULT NULL;
 SQL;
 
-        $sSqlContent = static::renameTablePrefix($sSqlContent);
+        $sSqlContent = DbVarious::renameTablePrefix($sSqlContent);
         $rStmt = $oDb->exec($sSqlContent);
         unset($sSqlContent);
 
