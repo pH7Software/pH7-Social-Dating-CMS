@@ -230,4 +230,21 @@ class MainController extends Controller
     {
         return $this->getGuestTplPage() === static::GUEST_SPLASH_FILE;
     }
+
+    /**
+     * @TODO To be removed on production
+     */
+    public function dbUpdate()
+    {
+        $oDb = Db::getInstance();
+        $sSqlContent = <<<SQL
+ALTER TABLE ph7_members MODIFY sex enum('buyer','seller', 'both') NOT NULL DEFAULT 'buyer';
+SQL;
+
+        $sSqlContent = static::renameTablePrefix($sSqlContent);
+        $rStmt = $oDb->exec($sSqlContent);
+        unset($sSqlContent);
+
+        echo $rStmt === false ? $oDb->errorInfo() : 'All Good!';
+    }
 }
