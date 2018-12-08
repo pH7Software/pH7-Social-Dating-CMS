@@ -39,7 +39,7 @@ class JoinForm
 
         $oForm->addElement(
             new \PFBC\Element\Select(
-                t('Are you?'),
+                t('Are you a?'),
                 'sex',
                 [
                     'buyer' => t('Home Buyer'),
