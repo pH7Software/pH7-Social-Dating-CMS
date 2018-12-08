@@ -181,6 +181,10 @@ function save-code() {
     _save-project-to-repo git@github.com:pH7Software/pH7-Social-Dating-CMS.git
 
     echo "Yaaay! Changes successfully saved into remote repos!"
+
+    # Save the latest GitHub changes on Internet Archive for the record
+    _save-project-to-ia https://github.com/pH7Software/pH7-Social-Dating-CMS
+    echo "GitHub repo also saved on Internet Archive.org"
 }
 
 # Backup. Create a compressed archive of the project
@@ -297,6 +301,11 @@ function _save-project-to-repo() {
     git remote rm origin
     git remote add origin $1
     git push
+}
+
+# Save repo on Internet Archive
+function _save-project-to-ia() {
+    curl -s https://web.archive.org/save/$1 > /dev/null
 }
 
 # Confirmation of orders entered
