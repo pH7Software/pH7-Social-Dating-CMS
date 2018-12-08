@@ -305,7 +305,9 @@ function _save-project-to-repo() {
 
 # Save repo on Internet Archive
 function _save-project-to-ia() {
-    curl -s https://web.archive.org/save/$1 > /dev/null
+    ia_saver_url="https://web.archive.org/save/"
+
+    curl -s $ia_saver_url$1 > /dev/null
 }
 
 # Confirmation of orders entered
