@@ -85,6 +85,18 @@ class DynamicFieldCoreForm
                 $this->oForm->addElement(new \PFBC\Element\Weight(t('Weight:'), $this->sColumn, ['value' => $this->sVal]));
                 break;
 
+            case 'propertyPrice':
+                $this->oForm->addElement(new \PFBC\Element\Range(t('Price Range'), SearchQueryCore::PRICE, ['min' => Form::MIN_PRICE, 'max' => Form::MAX_PRICE, 'step' => Form::RANGE_NUMBER_INTERVAL, 'value' => Form::VALUE_PRICE]));
+                break;
+
+            case 'propertyBedrooms'
+                $this->oForm->addElement(new \PFBC\Element\Number(t('Min Bedrooms:'), SearchQueryCore::BEDROOM));
+                break;
+
+            case 'propertySize':
+                $this->oForm->addElement(new \PFBC\Element\Number(t('Size:'), SearchQueryCore::SIZE));
+                break;
+
             case 'website':
             case 'socialNetworkSite':
                 $sLabel = $this->sColumn === 'socialNetworkSite' ? t('Social Media Profile:') : t('Website:');
