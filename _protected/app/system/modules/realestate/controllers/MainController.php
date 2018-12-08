@@ -236,14 +236,14 @@ class MainController extends Controller
     /**
      * @TODO To be removed on production
      */
-    public function dbUpdate()
+    public function updateDb()
     {
         $oDb = Db::getInstance();
         $sSqlContent = <<<SQL
 ALTER TABLE ph7_members MODIFY sex enum('buyer','seller', 'both') NOT NULL DEFAULT 'buyer';
 ALTER TABLE ph7_members_info ADD COLUMN propertyPrice int(10) unsigned DEFAULT NULL;
-ALTER TABLE ph7_members_info propertySize varchar(20) DEFAULT NULL;
-ALTER TABLE ph7_members_info propertyBed int(5) DEFAULT NULL;
+ALTER TABLE ph7_members_info ADD COLUMN propertySize varchar(20) DEFAULT NULL;
+ALTER TABLE ph7_members_info ADD COLUMN propertyBedrooms int(5) DEFAULT NULL;
 SQL;
 
         $sSqlContent = DbVarious::renameTablePrefix($sSqlContent);
