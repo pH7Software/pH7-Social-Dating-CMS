@@ -110,11 +110,10 @@ class DynamicFieldCoreForm
                 $this->addCheckErrSpan('phone');
                 break;
 
-            default: {
+            default:
                 $sLangKey = strtolower($this->sColumn);
                 $sClass = '\PFBC\Element\\' . $this->getFieldType();
                 $this->oForm->addElement(new $sClass(t($sLangKey), $this->sColumn, ['value' => $this->sVal]));
-            }
         }
 
         return $this->oForm;
