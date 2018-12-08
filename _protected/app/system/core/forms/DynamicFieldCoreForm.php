@@ -25,7 +25,7 @@ class DynamicFieldCoreForm
 
     /**
      * @param \PFBC\Form $oForm
-     * @param string $sValue Column name
+     * @param string $sColumn Column name
      * @param string $sValue Field value
      */
     public function __construct(\PFBC\Form $oForm, $sColumn, $sValue)
