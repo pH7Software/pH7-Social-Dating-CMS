@@ -41,14 +41,20 @@
         </a>
     </div>
 
-    <div class="login_button center">
+    {#
+    <div class="login_button center s_bMarg">
         <a href="{{ $design->url('realestate','signup','step1') }}" class="btn btn-primary btn-lg">
             <strong>{lang 'Signup'}</strong>
         </a>
     </div>
+    #}
 
+    <hr />
+
+    <h1>{lang 'Search Home for Sale'}</h1>
     {{ SearchQuickSellerForm::display() }}
 
+    <h1>{lang 'Search Buyers'}</h1>
     {{ SearchQuickBuyerForm::display() }}
 
     {if $is_mobile}
