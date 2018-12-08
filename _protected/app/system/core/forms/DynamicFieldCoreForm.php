@@ -94,7 +94,7 @@ class DynamicFieldCoreForm
                 break;
 
             case 'propertySize':
-                $this->oForm->addElement(new \PFBC\Element\Number(t('Size:'), SearchQueryCore::SIZE, ['value' => $this->sVal]));
+                $this->oForm->addElement(new \PFBC\Element\Number(t('Size:'), SearchQueryCore::SIZE, ['value' => $this->sVal, 'min' => 0]));
                 break;
 
             case 'website':
