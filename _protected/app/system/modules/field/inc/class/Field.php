@@ -21,7 +21,6 @@ class Field
         'city',
         'state',
         'zipcode',
-        'country',
         'phone',
         'website'
     ];

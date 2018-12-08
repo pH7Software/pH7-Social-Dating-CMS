@@ -244,6 +244,7 @@ ALTER TABLE ph7_members MODIFY sex enum('buyer','seller', 'both') NOT NULL DEFAU
 ALTER TABLE ph7_members_info ADD COLUMN propertyPrice int(10) unsigned DEFAULT NULL;
 ALTER TABLE ph7_members_info ADD COLUMN propertySize varchar(20) DEFAULT NULL;
 ALTER TABLE ph7_members_info ADD COLUMN propertyBedrooms int(5) DEFAULT NULL;
+ALTER TABLE ph7_members_info DROP COLUMN country;
 SQL;
 
         $sSqlContent = DbVarious::renameTablePrefix($sSqlContent);

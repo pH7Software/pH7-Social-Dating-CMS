@@ -125,7 +125,6 @@ CREATE TABLE IF NOT EXISTS ph7_members_info (
   propertyBedrooms int(5) DEFAULT NULL,
   state varchar(150) DEFAULT NULL,
   zipCode varchar(20) DEFAULT NULL,
-  country char(2) DEFAULT NULL,
   phone varchar(100) DEFAULT NULL,
   website varchar(120) DEFAULT NULL,
   PRIMARY KEY (profileId),
