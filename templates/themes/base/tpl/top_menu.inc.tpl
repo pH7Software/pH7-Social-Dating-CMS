@@ -19,7 +19,11 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <div role="banner" id="logo" class="navbar-brand"><h1><a href="{{ $design->homePageUrl() }}" title="{slogan}">{site_name}</a></h1></div>
+            <div role="banner" id="logo" class="navbar-brand">
+              <h1>
+                <a href="{{ $design->homePageUrl() }}" title="{slogan}">{site_name}</a>
+              </h1>
+            </div>
           </div>
 
           <div id="navbar" class="navbar-collapse collapse">
