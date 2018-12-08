@@ -87,7 +87,7 @@ class ProfileController extends ProfileBaseController
                 t($oUser->sex), $aData['age'], t($aData['country']), $aData['city'], $aData['state']);
 
             $this->setMenuBar($aData['first_name'], $oUser);
-            $this->setMap($aData['city'], $aData['country'], $oUser);
+            $this->setMap($aData['city'], $oUser);
 
             $this->view->id = $this->iProfileId;
             $this->view->username = $oUser->username;

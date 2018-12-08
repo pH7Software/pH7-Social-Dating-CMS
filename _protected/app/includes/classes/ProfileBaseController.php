@@ -111,14 +111,13 @@ abstract class ProfileBaseController extends Controller
      * Set the Google Maps code to the view.
      *
      * @param string $sCity
-     * @param string $sCountry
      * @param stdClass $oUser
      *
      * @return void
      */
-    protected function setMap($sCity, $sCountry, stdClass $oUser)
+    protected function setMap($sCity, stdClass $oUser)
     {
-        $sFullAddress = $sCity . ' ' . t($sCountry);
+        $sFullAddress = $sCity;
         $sMarkerText = t('Meet <b>%0%</b> near here!', $oUser->username);
         $oMap = new Map;
         $oMap->setKey(DbConfig::getSetting('googleApiKey'));

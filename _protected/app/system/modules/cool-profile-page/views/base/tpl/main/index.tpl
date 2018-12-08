@@ -22,38 +22,11 @@
             {if $key != 'description' AND $key != 'middleName' AND $key != 'punchline' AND !empty($val)}
                 {{ $val = escape($val, true) }}
 
-                {if $key == 'height'}
-                    <p>
-                        <span class="bold">{lang 'Height:'}</span>
-                        <span class="italic">
-                            <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&height='.$val) }}">
-                                {{ (new Framework\Math\Measure\Height($val))->display(true) }}
-                            </a>
-                        </span>
-                    </p>
-                {elseif $key == 'weight'}
-                    <p>
-                        <span class="bold">{lang 'Weight:'}</span>
-                        <span class="italic">
-                            <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&weight='.$val) }}">
-                                {{ (new Framework\Math\Measure\Weight($val))->display(true) }}
-                            </a>
-                        </span>
-                    </p>
-                {elseif $key == 'country'}
-                    <p>
-                        <span class="bold">{lang 'Country:'}</span>
-                        <span class="italic">
-                            <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code) }}">
-                                {country}
-                            </a>
-                        </span>&nbsp;&nbsp;<img src="{{ $design->getSmallFlagIcon($country_code) }}" title="{country}" alt="{country}" />
-                    </p>
-                {elseif $key == 'city'}
+                {if $key == 'city'}
                     <p>
                         <span class="bold">{lang 'City/Town:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&city='.$city) }}">
+                            <a href="{{ $design->url('realestate','browse','index', '?city='.$city) }}">
                                 {city}
                             </a>
                         </span>
@@ -62,7 +35,7 @@
                     <p>
                         <span class="bold">{lang 'State/Province:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&state='.$state) }}">
+                            <a href="{{ $design->url('realestate','browse','index', '?state='.$state) }}">
                                 {state}
                             </a>
                         </span>
@@ -71,7 +44,7 @@
                     <p>
                         <span class="bold">{lang 'Postal Code:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&zip_code='.$val) }}">
+                            <a href="{{ $design->url('realestate','browse','index', '?zip_code='.$val) }}">
                                 {val}
                             </a>
                         </span>
@@ -179,7 +152,7 @@
                 <a class="s_tMarg btn btn-success btn-lg" rel="nofollow" href="{mail_link}">
                     {lang 'Interested 👍'}
                 </a>
-                <a class="s_tMarg btn btn-danger btn-lg" href="{{ $design->url('realestate', 'browse', 'seller', '?country='.$country_code.'&match_sex='.$sex) }}">
+                <a class="s_tMarg btn btn-danger btn-lg" href="{{ $design->url('realestate', 'browse', 'seller', '?city='.$city) }}">
                     {lang 'Not Interested 👎'}
                 </a>
             </div>
