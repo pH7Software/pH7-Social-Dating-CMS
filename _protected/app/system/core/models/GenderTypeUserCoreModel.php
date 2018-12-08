@@ -15,11 +15,12 @@ final class GenderTypeUserCoreModel
 
     const FEMALE = 'buyer';
     const MALE = 'seller';
-    const COUPLE = 'visitor';
+    const COUPLE = 'both';
 
     const GENDERS = [
         'seller',
-        'buyer'
+        'buyer',
+        'both'
     ];
 
     /**
