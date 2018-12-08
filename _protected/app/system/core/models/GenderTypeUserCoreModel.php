@@ -18,9 +18,9 @@ final class GenderTypeUserCoreModel
     const COUPLE = 'both';
 
     const GENDERS = [
-        'seller',
-        'buyer',
-        'both'
+        self::FEMALE,
+        self::MALE,
+        self::COUPLE
     ];
 
     /**
