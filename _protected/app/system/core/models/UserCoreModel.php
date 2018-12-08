@@ -323,7 +323,6 @@ class UserCoreModel extends Model
         $bIsPrice = !$bIsMail && !empty($aParams[SearchQueryCore::PRICE]);
         $bIsBedroom = !$bIsMail && !empty($aParams[SearchQueryCore::BEDROOM]);
         $bIsSize = !$bIsMail && !empty($aParams[SearchQueryCore::SIZE]);
-        $bIsCountry = !$bIsMail && !empty($aParams[SearchQueryCore::COUNTRY]) && Str::noSpaces($aParams[SearchQueryCore::COUNTRY]);
         $bIsCity = !$bIsMail && !empty($aParams[SearchQueryCore::CITY]) && Str::noSpaces($aParams[SearchQueryCore::CITY]);
         $bIsState = !$bIsMail && !empty($aParams[SearchQueryCore::STATE]) && Str::noSpaces($aParams[SearchQueryCore::STATE]);
         $bIsZipCode = !$bIsMail && !empty($aParams[SearchQueryCore::ZIP_CODE]) && Str::noSpaces($aParams[SearchQueryCore::ZIP_CODE]);
@@ -343,7 +342,6 @@ class UserCoreModel extends Model
         $sSqlPrice = $bIsPrice ? ' AND propertyPrice = :price ' : '';
         $sSqlBedroom = $bIsBedroom ? ' AND propertyBedrooms = :bedrooms ' : '';
         $sSqlSize = $bIsSize ? ' AND propertySize = :size ' : '';
-        $sSqlCountry = $bIsCountry ? ' AND country = :country ' : '';
         $sSqlCity = $bIsCity ? ' AND LOWER(city) LIKE LOWER(:city) ' : '';
         $sSqlState = $bIsState ? ' AND LOWER(state) LIKE LOWER(:state) ' : '';
         $sSqlZipCode = $bIsZipCode ? ' AND zipCode LIKE :zipCode ' : '';
@@ -372,7 +370,7 @@ class UserCoreModel extends Model
         $rStmt = Db::getInstance()->prepare(
             'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER) . 'AS m LEFT JOIN' . Db::prefix(DbTableName::MEMBER_PRIVACY) . 'AS p USING(profileId)
             LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) . 'AS i USING(profileId) WHERE username <> :ghostUsername AND searchProfile = \'yes\'
-            AND (groupId <> :visitorGroup) AND (groupId <> :pendingGroup) AND (ban = 0)' . $sSqlHideLoggedProfile . $sSqlFirstName . $sSqlMiddleName . $sSqlLastName . $sSqlMatchSex . $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState .
+            AND (groupId <> :visitorGroup) AND (groupId <> :pendingGroup) AND (ban = 0)' . $sSqlHideLoggedProfile . $sSqlFirstName . $sSqlMiddleName . $sSqlLastName . $sSqlMatchSex . $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCity . $sSqlState .
             $sSqlZipCode . $sSqlPrice . $sSqlBedroom . $sSqlSize . $sSqlEmail . $sSqlOnline . $sSqlAvatar . $sSqlOrder . $sSqlLimit
         );
 
@@ -409,9 +407,6 @@ class UserCoreModel extends Model
         }
         if ($bIsSize) {
             $rStmt->bindValue(':size', $aParams[SearchQueryCore::SIZE]);
-        }
-        if ($bIsCountry) {
-            $rStmt->bindParam(':country', $aParams[SearchQueryCore::COUNTRY], \PDO::PARAM_STR, 2);
         }
         if ($bIsCity) {
             $rStmt->bindValue(':city', '%' . str_replace('-', ' ', $aParams[SearchQueryCore::CITY]) . '%', \PDO::PARAM_STR);
@@ -717,11 +712,10 @@ class UserCoreModel extends Model
      */
     public function setInfoFields(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER_INFO) . '(profileId, middleName, country, city, state, address, zipCode, description, punchline, website)
-            VALUES (:profileId, :middleName, :country, :city, :state, :address, :zipCode, :description, :punchline, :website)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER_INFO) . '(profileId, middleName, city, state, address, zipCode, description, punchline, website)
+            VALUES (:profileId, :middleName, :city, :state, :address, :zipCode, :description, :punchline, :website)');
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
         $rStmt->bindValue(':middleName', (!empty($aData['middle_name']) ? $aData['middle_name'] : ''), \PDO::PARAM_STR);
-        $rStmt->bindValue(':country', (!empty($aData['country']) ? $aData['country'] : ''), \PDO::PARAM_STR);
         $rStmt->bindValue(':city', (!empty($aData['city']) ? $aData['city'] : ''), \PDO::PARAM_STR);
         $rStmt->bindValue(':state', (!empty($aData['state']) ? $aData['state'] : ''), \PDO::PARAM_STR);
         $rStmt->bindValue(':address', (!empty($aData['address']) ? $aData['address'] : ''), \PDO::PARAM_STR);
@@ -1068,7 +1062,7 @@ class UserCoreModel extends Model
         $rStmt = Db::getInstance()->prepare(
             'SELECT * FROM' . Db::prefix(DbTableName::MEMBER) . 'AS m LEFT JOIN' . Db::prefix(DbTableName::MEMBER_PRIVACY) . 'AS p USING(profileId)
             LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) . 'AS i USING(profileId) WHERE (username <> :ghostUsername) AND (searchProfile = \'yes\')
-            AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL)
+            AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL)
             AND (city IS NOT NULL) AND (groupId <> :visitorGroup) AND (groupId <> :pendingGroup) AND (ban = 0)' .
             $sSqlHideLoggedProfile . $sSqlShowOnlyWithAvatars . $sOrder . $sSqlLimit
         );
@@ -1105,7 +1099,7 @@ class UserCoreModel extends Model
      *
      * @return array|stdClass|int Object with the users list returned or integer for the total number users returned.
      */
-    public function getGeoProfiles($sCountryCode, $sCity, $bCount, $sOrder, $iOffset = null, $iLimit = null)
+    public function getGeoProfiles($sCountryCode = '', $sCity, $bCount, $sOrder, $iOffset = null, $iLimit = null)
     {
         $bLimit = $iOffset !== null && $iLimit !== null;
 
@@ -1122,16 +1116,14 @@ class UserCoreModel extends Model
 
         $rStmt = Db::getInstance()->prepare(
             'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER) . 'AS m LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) . 'AS i USING(profileId)
-            WHERE (username <> :ghostUsername) AND (country = :country) ' . $sSqlCity . ' AND (username IS NOT NULL)
-            AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL)
+            WHERE (username <> :ghostUsername) ' . $sSqlCity . ' AND (username IS NOT NULL)
+            AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) 
             AND (city IS NOT NULL) AND (groupId <> :visitorGroup) AND (groupId <> :pendingGroup) AND (ban = 0)' . $sOrder . $sSqlLimit
         );
 
         $rStmt->bindValue(':ghostUsername', PH7_GHOST_USERNAME, \PDO::PARAM_STR);
         $rStmt->bindValue(':visitorGroup', self::VISITOR_GROUP, \PDO::PARAM_INT);
         $rStmt->bindValue(':pendingGroup', self::PENDING_GROUP, \PDO::PARAM_INT);
-
-        $rStmt->bindParam(':country', $sCountryCode, \PDO::PARAM_STR, 2);
 
         if (!empty($sCity)) {
             $rStmt->bindValue(':city', '%' . $sCity . '%', \PDO::PARAM_STR);
