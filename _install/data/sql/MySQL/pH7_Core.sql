@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS ph7_members (
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
   birthDate date NULL,
-  sex enum('buyer','seller', 'both') NOT NULL DEFAULT 'buyer',
+  sex enum('buyer','seller', 'both') NOT NULL DEFAULT 'both',
   matchSex set('buyer','seller') NOT NULL DEFAULT 'seller',
   ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
   bankAccount varchar(150) DEFAULT NULL,
