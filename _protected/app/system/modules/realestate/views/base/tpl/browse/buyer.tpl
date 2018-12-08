@@ -10,15 +10,14 @@
         <p class="center bold">{lang 'Whoops! No buyers found.'}</p>
     {else}
         {each $user in $users}
-        {{ $country_name = t($user->country) }}
             <div class="thumb_photo">
                 {{ UserDesignCoreModel::userStatus($user->profileId) }}
 
                 {{ $avatarDesign->get($user->username, $user->firstName, $user->sex, AvatarDesignCore::BROWSE_BUYER_AVATAR_SIZE, true) }}
                 <p class="cy_ico">
-                    <a href="{% (new UserCore)->getProfileLink($user->username) %}" title="{lang 'Name: %0%', $user->firstName}<br> {lang 'From: %0%', $country_name}<br> {lang 'City: %0%', $str->upperFirst($user->city)}<br> {lang 'State: %0%', $str->upperFirst($user->state)}">
+                    <a href="{% (new UserCore)->getProfileLink($user->username) %}" title="{lang 'Name: %0%', $user->firstName}<br> {lang 'From %0%', $str->upperFirst($user->city)}<br> {lang 'State: %0%', $str->upperFirst($user->state)}">
                         <strong>{% $str->extract($user->username, PH7_MAX_USERNAME_LENGTH_SHOWN, PH7_ELLIPSIS) %}</strong>
-                    </a> <img src="{{ $design->getSmallFlagIcon($user->country) }}" alt="{country_name}" title="{lang 'From %0%', $country_name}" />
+                    </a>
                 </p>
 
                 {if $is_admin_auth}

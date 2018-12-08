@@ -579,7 +579,7 @@ class Design
         $sCountryLang = t($sCountryCode); // Country name translated into the user language
         $sCity = Geo::getCity();
 
-        $sHtml = '<abbr title="' . t('Meet New People in %0%, %1% with %site_name%!', $sCountryLang, $sCity) . '">' . $sCity . '</a></abbr>';
+        $sHtml = '<abbr title="' . t('Meet New Buyers and Sellers in %0% with %site_name%!', $sCity) . '">' . $sCity . '</a></abbr>';
 
         if (!$bPrint) {
             return $sHtml;
