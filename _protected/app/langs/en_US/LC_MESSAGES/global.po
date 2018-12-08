@@ -2825,9 +2825,7 @@ msgid "Default Module:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:52
-msgid ""
-"The default module is the one running by default on the homepage "
-"(recommended to keep the \"user\" module)."
+msgid "The default module is the one running by default on the homepage."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:54
