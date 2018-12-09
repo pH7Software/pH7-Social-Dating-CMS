@@ -339,7 +339,7 @@ class UserCoreModel extends Model
         $sSqlLastName = $bIsLastName ? ' AND LOWER(lastName) LIKE LOWER(:lastName)' : '';
         $sSqlSingleAge = $bIsSingleAge ? ' AND birthDate LIKE :birthDate ' : '';
         $sSqlAge = $bIsAge ? ' AND birthDate BETWEEN DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age2 YEAR) AND DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age1 YEAR) ' : '';
-        $sSqlPrice = $bIsPrice ? ' AND propertyPrice = :price ' : '';
+        $sSqlPrice = $bIsPrice ? ' AND (propertyPrice BETWEEN 100 AND :price) ' : '';
         $sSqlBedroom = $bIsBedroom ? ' AND propertyBedrooms = :bedrooms ' : '';
         $sSqlSize = $bIsSize ? ' AND propertySize = :size ' : '';
         $sSqlCity = $bIsCity ? ' AND LOWER(city) LIKE LOWER(:city) ' : '';
@@ -400,7 +400,7 @@ class UserCoreModel extends Model
             $rStmt->bindValue(':age2', $aParams[SearchQueryCore::MAX_AGE], \PDO::PARAM_INT);
         }
         if ($bIsPrice) {
-            $rStmt->bindValue(':price', $aParams[SearchQueryCore::PRICE], \PDO::PARAM_INT);
+            $rStmt->bindValue(':price', $aParams[SearchQueryCore::PRICE] + 1000, \PDO::PARAM_INT);
         }
         if ($bIsBedroom) {
             $rStmt->bindValue(':bedrooms', $aParams[SearchQueryCore::BEDROOM], \PDO::PARAM_INT);

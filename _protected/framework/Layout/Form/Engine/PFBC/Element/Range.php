@@ -19,7 +19,7 @@ class Range extends Textbox
         $this->validation[] = new \PFBC\Validation\Numeric;
         parent::render();
 
-        echo '<strong>$<output id="' . $sOutputIdName . '" class="inline"></output></strong>';
+        echo '<strong>~ $<output id="' . $sOutputIdName . '" class="inline"></output></strong>';
         echo '<script>$(function(){$("#' . $sOutputIdName . '").val($("#' . $sRangeInputIdName . '").val())});</script>';
     }
 
