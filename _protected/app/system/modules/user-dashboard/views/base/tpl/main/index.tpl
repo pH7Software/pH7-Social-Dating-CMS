@@ -13,8 +13,6 @@
                     <a href="{{ $design->url('realestate','setting','edit') }}" title="{lang 'Edit My Profile'}"><i class="fa fa-cog fa-fw"></i> {lang 'Edit Profile'}</a>
                 </li>
                 <li>
-                    <a href="{{ $design->url('realestate','setting','design') }}" title="{lang 'My Wallpaper'}"><i class="fa fa-picture-o"></i> {lang 'Design Profile'}</a></li>
-                <li>
                     <a href="{{ $design->url('realestate','setting','notification') }}" title="{lang 'My Email Notification Settings'}"><i class="fa fa-envelope-o"></i> {lang 'Notifications'}</a>
                 </li>
                 <li>

@@ -384,7 +384,6 @@
             $count_moderate_total_video_album = $oModeratorModel->totalVideoAlbums();
             $count_moderate_total_video = $oModeratorModel->totalVideos();
             $count_moderate_total_avatar = $oModeratorModel->totalAvatars();
-            $count_moderate_total_background = $oModeratorModel->totalBackgrounds();
             $count_moderate_total_note = $oModeratorModel->totalNotes();
 
             unset($oModeratorModel);
@@ -397,7 +396,6 @@
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','videoalbum') }}" title="{lang 'Moderate Video Albums'}"><i class="fa fa-youtube-play"></i> {lang 'Video Albums'} {if $count_moderate_total_video_album }<span class="badge">{count_moderate_total_video_album}</span>{/if}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','video') }}" title="{lang 'Moderate Videos'}"><i class="fa fa-youtube-play"></i> {lang 'Videos'} {if $count_moderate_total_video }<span class="badge">{count_moderate_total_video}</span>{/if}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','avatar') }}" title="{lang 'Moderate Profile Photos'}"><i class="fa fa-picture-o"></i> {lang 'Profile Photos'} {if $count_moderate_total_avatar }<span class="badge">{count_moderate_total_avatar}</span>{/if}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','background') }}" title="{lang 'Moderate Profile Background'}"><i class="fa fa-picture-o"></i> {lang 'Profile Backgrounds'} {if $count_moderate_total_background}<span class="badge">{count_moderate_total_background}</span>{/if}</a></li>
 
             {if $is_note_enabled}
               <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-newspaper-o"></i> {lang 'Notes'} {if $count_moderate_total_note}<span class="badge">{count_moderate_total_note}</span>{/if}</a>
