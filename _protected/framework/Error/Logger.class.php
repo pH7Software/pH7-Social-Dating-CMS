@@ -23,6 +23,8 @@ class Logger extends Core
     const EXCEPT_DIR = 'except/';
     const GZIP_DIR = 'gzip/';
 
+    const FILE_MESSAGE_TYPE = 3;
+
     /** @var string */
     protected $sDir;
 
@@ -39,7 +41,11 @@ class Logger extends Core
 
     public function msg($sMsg)
     {
-        error_log($sMsg . File::EOL, 3, $this->sDir . $this->sFileName . '.log');
+        error_log(
+            $sMsg . File::EOL,
+            self::FILE_MESSAGE_TYPE,
+            $this->sDir . $this->sFileName . '.log'
+        );
     }
 
     /**
