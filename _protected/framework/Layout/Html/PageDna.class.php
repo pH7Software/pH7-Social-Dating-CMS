@@ -78,7 +78,7 @@ COMMENT;
 
     const COMMENT_SOCIAL_DATING_SOFTWARE = <<<COMMENT
         \n<!--
-     BUILT WITH pH7CMS – http://ph7cms.com
+     💪 BUILT WITH pH7CMS ❤️ – http://ph7cms.com
 
       mmmm                  "           ""#
      #"   "  mmm    mmm   mmm     mmm     #
