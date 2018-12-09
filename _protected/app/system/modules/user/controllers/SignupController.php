@@ -137,6 +137,8 @@ class SignupController extends Controller
     }
 
     /**
+     * Returns the appropriate sign up heading for the registration page.
+     *
      * @param bool $bUserRef
      *
      * @return string
