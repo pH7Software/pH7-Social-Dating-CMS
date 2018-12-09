@@ -49,6 +49,11 @@ class DisableModuleForm
                 $sAdditionalText .= '<span class="small"> • <a class="underline" href="http://ph7cms.com/better-not-enable-connect-mod/">' . t('not recommended to enable it') . '</a></span>';
             }
 
+            if ($oData->folderName === 'cool-profile-page') {
+                // Skip "cool-profile" since it is the only compatible one and cannot be disabled
+                continue;
+            }
+
             $aModuleNames[$oData->moduleId] = $oData->moduleTitle . $sAdditionalText;
         }
         unset($oModuleData);
