@@ -7162,7 +7162,7 @@ msgstr ""
 msgid ""
 "Sign Up today to meet friends, sex friends, singles, families, neighbors and "
 "many others people near or far from you! %site_name% is a free social dating "
-"with profiles, blogs, rating, hot or not, video chat rooms"
+"with profiles, blog, rating, hot or not, video chat rooms"
 msgstr ""
 
 #: _protected/app/system/modules/user/controllers/SignupController.php:77

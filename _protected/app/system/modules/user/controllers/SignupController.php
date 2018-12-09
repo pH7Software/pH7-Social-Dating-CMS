@@ -57,7 +57,7 @@ class SignupController extends Controller
         $this->view->page_title = ($bUserRef) ? t('Register for free to meet %0% on %site_name%. The Real Social Dating app!', $sFirstName) : t('Free Sign Up to Meet Lovely People!');
 
         $this->view->h1_title = '<div class="animated fadeInDown">' . $this->getSignupHeading($bUserRef) . '</div>';
-        $this->view->meta_description = t('Sign Up today to meet friends, sex friends, singles, families, neighbors and many others people near or far from you! %site_name% is a free social dating with profiles, blogs, rating, hot or not, video chat rooms');
+        $this->view->meta_description = t('Sign Up today to meet friends, sex friends, singles, families, neighbors and many others people near or far from you! %site_name% is a free social dating with profiles, blog, rating, hot or not, video chat rooms');
 
         $this->setupProgressbar(1, 33);
 
