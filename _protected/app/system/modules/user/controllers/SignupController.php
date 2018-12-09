@@ -50,6 +50,9 @@ class SignupController extends Controller
         }
 
         if (!$bUserRef) {
+            // Default values if "user reference" was not set
+            $sFirstName = $sUsername = '';
+
             // For the "Members Block"
             $this->view->userDesignModel = new UserDesignCoreModel();
         }
