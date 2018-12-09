@@ -6,7 +6,7 @@
 
 // Only for visitors
 $(document).ready(function () {
-    var $oDialog = $('div#box').html('<iframe style="border:0px" src="' + pH7Url.base + 'user/asset/ajax/popup/signup" width="100%" height="100%"></iframe>').dialog
+    var $oDialog = $('div#box').html('<iframe style="border:0px" src="' + pH7Url.base + 'realestate/asset/ajax/popup/signup" width="100%" height="100%"></iframe>').dialog
     ({
         open: function () {
             $('.ui-dialog-titlebar-close').hide()

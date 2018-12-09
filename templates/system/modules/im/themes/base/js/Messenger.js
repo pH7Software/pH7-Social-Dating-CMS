@@ -91,7 +91,7 @@ var Messenger = {
 
         $("#chatbox_" + sBoxTitle).css('bottom', '0px');
 
-        $.post(pH7Url.base + 'user/asset/ajax/Api', {type: 'profile_link', param: sBoxTitle}, function (sUserLink) {
+        $.post(pH7Url.base + 'realestate/asset/ajax/Api', {type: 'profile_link', param: sBoxTitle}, function (sUserLink) {
             $("#chatbox_" + sBoxTitle + ' .chatboxhead .chatboxtitle').html('<a href="' + sUserLink + '" target="_blank">' + sBoxTitle + '</a>');
         });
 

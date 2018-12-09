@@ -14,7 +14,7 @@ $('#username').keyup(function () {
     $('.your-user-name').hide();
     var sUsername = $('#username').val();
 
-    $.post(pH7Url.base + 'user/asset/ajax/form/checkUsername', {'username': sUsername}, function (oData) {
+    $.post(pH7Url.base + 'realestate/asset/ajax/form/checkUsername', {'username': sUsername}, function (oData) {
         if (oData.status == 1) {
             $('.username').fadeIn();
             $('#username').css('border', 'solid #00cc00 1px');
