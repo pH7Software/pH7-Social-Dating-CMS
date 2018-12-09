@@ -10,7 +10,7 @@ namespace PH7;
 
 final class SearchQueryCore
 {
-    const PRICE_SEARCH_TOLERANCE = 1500;
+    const PRICE_RESULT_TOLERANCE = 1500;
 
     const BIRTH_DATE = 'birth_date';
     const SEX = 'sex';
