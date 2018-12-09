@@ -22,9 +22,7 @@ $(document).ready(function () {
         title: pH7LangCore.join_now
     });
 
-    setTimeout(function () {
-        $('.ui-front').css('z-index', 10999); // z-index!!! Otherwise, the menu of the site will be in front.
-        $('title').text(pH7LangCore.join_now); // Set an attractive title
-        $oDialog.dialog('open');
-    }, 5E3);
+    $('.ui-front').css('z-index', 10999); // z-index!!! Otherwise, the menu of the site will be in front.
+    $('title').text(pH7LangCore.join_now); // Set an attractive title
+    $oDialog.dialog('open');
 });
