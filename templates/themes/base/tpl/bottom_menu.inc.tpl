@@ -18,7 +18,7 @@
           <li><a href="{{ $design->url('contact','contact','index') }}" title="{lang 'Contact Us'}">{lang 'Contact'}</a></li>
           <li class="dm_self"><span class="dropdown_item">{lang 'About'}</span><i></i></li>
         </ul>
-      </div> |
+      </div> ~
 
       <div role="listbox" class="dropdown_menu ft_dm">
         <span class="dropdown_item_css">
@@ -31,13 +31,16 @@
           <li><a href="{{ $design->url('page','main','legalnotice') }}" title="{lang 'Legal Notice'}" data-load="ajax">{lang 'Legal Notice'}</a></li>
           <li class="dm_self"><span class="dropdown_item">{lang 'Help'}</span><i></i></li>
         </ul>
-      </div> |
+      </div> ~
 
       {if !$is_user_auth AND $is_newsletter_enabled}
-        <a href="{{ $design->url('newsletter','home','subscription') }}" title="{lang 'Subscribe to our newsletter!'}" data-popup="block-page">{lang 'Newsletter'}</a> |
+        <a href="{{ $design->url('newsletter','home','subscription') }}" title="{lang 'Subscribe to our newsletter!'}" data-popup="block-page">{lang 'Newsletter'}</a> ~
       {/if}
       {if $is_invite_enabled}
-        <a rel="nofollow" href="{{ $design->url('invite','home','invitation') }}" title="{lang 'Invite your friends!'}" data-popup="block-page">{lang 'Invite'}</a> |
+        <a rel="nofollow" href="{{ $design->url('invite','home','invitation') }}" title="{lang 'Invite your friends!'}" data-popup="block-page">{lang 'Invite'}</a>
       {/if}
-      <a href="{{ $design->url('xml','sitemap','index') }}" title="{lang 'Site Map'}" data-load="ajax">{lang 'Site Map'}</a>
+
+      <strong>
+        <a href="{{ $design->url('realestate','signup','step1') }}" title="{lang 'Signup NOW'}">{lang 'Signup'}</a>
+      </strong>
   </nav>
