@@ -155,19 +155,6 @@
             </li>
           {/if}
 
-          <noscript>
-            <li class="dropdown"><a href="{{ $design->url('realestate','setting','edit') }}" title="{lang 'Settings'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Settings'} <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="{{ $design->url('realestate','setting','edit') }}">{lang 'Edit Profile'}</a></li>
-                <li><a href="{{ $design->url('realestate','setting','design') }}">{lang 'Design Profile'}</a></li>
-                <li><a href="{{ $design->url('realestate','setting','notification') }}">{lang 'Notifications'}</a></li>
-                <li><a href="{{ $design->url('realestate','setting','privacy') }}">{lang 'Privacy Settings'}</a></li>
-                <li><a href="{{ $design->url('payment','main','info') }}">{lang 'Membership Details'}</a></li>
-                <li><a href="{{ $design->url('realestate','setting','password') }}">{lang 'Change Password'}</a></li>
-              </ul>
-            </li>
-          </noscript>
-
           <li class="dropdown"><a href="{{ $design->url('realestate','account','index') }}" title="{lang 'My Account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-cog"></i> {lang 'Account'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="{{ $design->url('realestate','setting','index') }}" title="{lang 'My Settings'}"><i class="fa fa-cog fa-fw"></i> {lang 'Edit Profile'}</a></li>
