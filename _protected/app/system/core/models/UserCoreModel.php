@@ -400,7 +400,7 @@ class UserCoreModel extends Model
             $rStmt->bindValue(':age2', $aParams[SearchQueryCore::MAX_AGE], \PDO::PARAM_INT);
         }
         if ($bIsPrice) {
-            $rStmt->bindValue(':price', $aParams[SearchQueryCore::PRICE] + 1000, \PDO::PARAM_INT);
+            $rStmt->bindValue(':price', $aParams[SearchQueryCore::PRICE] + SearchQueryCore::PRICE_SEARCH_TOLERANCE, \PDO::PARAM_INT);
         }
         if ($bIsBedroom) {
             $rStmt->bindValue(':bedrooms', $aParams[SearchQueryCore::BEDROOM], \PDO::PARAM_INT);
