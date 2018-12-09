@@ -46,7 +46,6 @@ class MainController extends Controller
         $this->view->desc_for_man = $sMenDesc;
         $this->view->desc_for_woman = $sWomenDesc;
 
-        /*** Display ***/
         // If the user is logged in, we do not display its own avatar since the user cannot vote for himself.
         $iProfileId = UserCore::auth() ? $this->session->get('member_id') : null;
         $oData = $this->oHoNModel->getPicture($iProfileId);
