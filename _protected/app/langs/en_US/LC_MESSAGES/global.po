@@ -9534,7 +9534,7 @@ msgid "Custom CSS Style"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.phptop_menu.inc.cpl.php:19
-msgid "CSS Style"
+msgid "Custom CSS"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.phptop_menu.inc.cpl.php:19
@@ -9542,7 +9542,7 @@ msgid "JavaScript Injection"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.phptop_menu.inc.cpl.php:19
-msgid "JavaScript"
+msgid "Custom JavaScript"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.phptop_menu.inc.cpl.php:19
