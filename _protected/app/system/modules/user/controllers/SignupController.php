@@ -35,7 +35,7 @@ class SignupController extends Controller
             $sUsername = $this->httpRequest->get('u'); // For the statistics and user image block
             $sSex = $this->httpRequest->get('s'); // For the statistics and user image block
 
-            /* Enable the user image block in the view */
+            // Enable the user image block in the view
             $this->view->user_ref = 1;
 
             $sFirstName = str_replace('-', ' ', $this->str->upperFirst($this->httpRequest->get('f_n'))); // For user image block
