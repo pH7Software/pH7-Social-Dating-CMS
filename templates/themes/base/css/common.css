@@ -34,9 +34,10 @@ body {
 }
 
 #logo {
-    padding-left: 50px;
     background: url(../img/logo.png) no-repeat;
+    height: 45px;
     overflow: hidden;
+    padding-left: 50px;
     margin-left: 20px;
 }
 
