@@ -35,13 +35,6 @@ class SignupController extends Controller
             $sUsername = $this->httpRequest->get('u'); // For the statistics and user image block
             $sSex = $this->httpRequest->get('s'); // For the statistics and user image block
 
-            $sSessContents = $sRefTxt . ' | ' . t('Action: %0%', $sAction) . ' | ' . t('Sex: %0%', $sSex) . ' | ' . t('Username: %0%', $sUsername);
-            $this->session->set(Registration::REFERENCE_VAR_NAME, $sSessContents);
-        } elseif ($bRef) {
-            $this->session->set(Registration::REFERENCE_VAR_NAME, $sRefTxt);
-        }
-
-        if ($bUserRef) {
             /* Enable the user image block in the view */
             $this->view->user_ref = 1;
 
@@ -49,8 +42,15 @@ class SignupController extends Controller
             $this->view->username = $sUsername;
             $this->view->first_name = $sFirstName;
             $this->view->sex = $sSex;
-        } else {
-            /* For Members Block */
+
+            $sSessContents = $sRefTxt . ' | ' . t('Action: %0%', $sAction) . ' | ' . t('Sex: %0%', $sSex) . ' | ' . t('Username: %0%', $sUsername);
+            $this->session->set(Registration::REFERENCE_VAR_NAME, $sSessContents);
+        } elseif ($bRef) {
+            $this->session->set(Registration::REFERENCE_VAR_NAME, $sRefTxt);
+        }
+
+        if (!$bUserRef) {
+            // For the "Members Block"
             $this->view->userDesignModel = new UserDesignCoreModel();
         }
 
