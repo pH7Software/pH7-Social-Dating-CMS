@@ -102,7 +102,6 @@ COMMENT;
 
      EVERYTHING Your BUSINESS NEEDS to Create & Launch a SOCIAL/DATING WebApp => http://pH7CMS.com
      https://github.com/pH7Software/pH7-Social-Dating-CMS
-
 -->\n
 COMMENT;
 
