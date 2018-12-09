@@ -7,6 +7,6 @@
     </a>
 
     <p class="s_tMarg italic small">
-        {lang}If the photo does not match your sexual preference please be respectful and press the Not Interested button.{/lang}
+        {lang}If the photo does not match your sexual preference, please be respectful and press Not Interested{/lang}
     </p>
 </div>
