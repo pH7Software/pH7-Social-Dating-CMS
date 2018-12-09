@@ -57,11 +57,11 @@ class SignupController extends Controller
             $this->view->userDesignModel = new UserDesignCoreModel();
         }
 
-        $this->view->page_title = ($bUserRef) ? t('Register for free to meet %0% on %site_name%. The Real Social Dating app!', $sFirstName) : t('Free Sign Up to Meet Lovely People!');
+        $this->view->page_title = $this->getSignupPageTitle($bUserRef, $sFirstName);
+        $this->view->meta_description = t('Sign Up today to meet friends, sex friends, singles, families, neighbors and many others people near or far from you! %site_name% is a free social dating with profiles, blog, rating, hot or not, video chat rooms');
 
         $sH1Txt = $this->getSignupHeading($bUserRef, $sFirstName, $sUsername);
         $this->view->h1_title = '<div class="animated fadeInDown">' . $sH1Txt . '</div>';
-        $this->view->meta_description = t('Sign Up today to meet friends, sex friends, singles, families, neighbors and many others people near or far from you! %site_name% is a free social dating with profiles, blog, rating, hot or not, video chat rooms');
 
         $this->setupProgressbar(1, 33);
 
@@ -138,6 +138,25 @@ class SignupController extends Controller
         $this->view->progressbar_percentage = $iPercentage;
         $this->view->progressbar_step = $iStep;
         $this->view->progressbar_total_steps = self::TOTAL_SIGNUP_STEPS;
+    }
+
+    /**
+     * Returns the appropriate sign up page title for the registration page.
+     *
+     * @param bool $bUserRef
+     * @param string $sFirstName
+     *
+     * @return string
+     */
+    private function getSignupPageTitle($bUserRef, $sFirstName)
+    {
+        if ($bUserRef) {
+            $sPageTitle = t('Register for free to meet %0% on %site_name%. The Real Social Dating app!', $sFirstName);
+        } else {
+            $sPageTitle = t('Free Sign Up to Meet Lovely People!');
+        }
+
+        return $sPageTitle;
     }
 
     /**
