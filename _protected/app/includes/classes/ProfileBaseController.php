@@ -256,7 +256,7 @@ abstract class ProfileBaseController extends Controller
             'state' => $sState,
             'punchline' => $sPunchline,
             'description' => $sDescription,
-            'age' => UserBirthDateCore::getAgeFromBirthDate($oUser->birthDate)
+            //'age' => UserBirthDateCore::getAgeFromBirthDate($oUser->birthDate)
         ];
     }
 

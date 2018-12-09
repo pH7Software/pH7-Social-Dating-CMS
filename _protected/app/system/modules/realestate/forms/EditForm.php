@@ -73,14 +73,12 @@ class EditForm
                 'sex',
                 [
                     'buyer' => t('Home Buyer'),
-                    'seller' => t('Home Seller')
+                    'seller' => t('Home Seller'),
+                    'both' => t('Both')
                 ],
                 ['value' => 'buyer', 'required' => 1]
             )
         );
-
-        $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', ['id' => 'birth_date', 'onblur' => 'CValid(this.value, this.id)', 'value' => $sBirthDate, 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
 
         // Generate dynamic fields
         $oFields = $oUserModel->getInfoFields($iProfileId);
