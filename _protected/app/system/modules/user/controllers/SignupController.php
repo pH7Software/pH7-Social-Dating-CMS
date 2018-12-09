@@ -171,12 +171,12 @@ class SignupController extends Controller
     private function getSignupHeading($bUserRef, $sFirstName, $sUsername)
     {
         if ($bUserRef) {
-            $sH1Txt = t('😍 Register for Free to Meet <span class="pink2">%0%</span> (a.k.a <span class="pink1">%1%</span>) on <span class="pink2">%site_name%</span>!', $sFirstName, $this->str->upperFirst($sUsername));
+            $sHeading = t('😍 Register for Free to Meet <span class="pink2">%0%</span> (a.k.a <span class="pink1">%1%</span>) on <span class="pink2">%site_name%</span>!', $sFirstName, $this->str->upperFirst($sUsername));
         } else {
-            $sH1Txt = t('Sign Up on %site_name%! 🎉');
+            $sHeading = t('Sign Up on %site_name%! 🎉');
         }
 
-        return $sH1Txt;
+        return $sHeading;
     }
 
     /**
