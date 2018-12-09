@@ -45,10 +45,6 @@ class MainController extends ProfileBaseController
 
             unset($oUserModel);
 
-            // Age
-            $this->view->birth_date = $oUser->birthDate;
-            $this->view->birth_date_formatted = $this->dateTime->get($oUser->birthDate)->date();
-
             $aData = $this->getFilteredData($oUser, $oFields);
 
             $this->view->page_title = t('Meet %0%, A %1% - %2% %3%',
@@ -71,7 +67,6 @@ class MainController extends ProfileBaseController
             $this->view->sex = $oUser->sex;
             $this->view->match_sex = $oUser->matchSex;
             $this->view->match_sex_search = str_replace(['[code]', ','], '&sex[]=', '[code]' . $oUser->matchSex);
-            $this->view->age = $aData['age'];
             $this->view->city = $aData['city'];
             $this->view->state = $aData['state'];
             $this->view->punchline = $aData['punchline'];
