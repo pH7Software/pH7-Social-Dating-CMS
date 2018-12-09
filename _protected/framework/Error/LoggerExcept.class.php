@@ -29,6 +29,11 @@ final class LoggerExcept extends Logger
 {
     const MAX_UNCOMPRESSED_SIZE = 5; // Size in megabytes
 
+    /*** Log handler types ***/
+    const FILE_LOG_HANDLER_TYPE = 'file';
+    const DATABASE_LOG_HANDLER_TYPE = 'database';
+    const EMAIL_LOG_HANDLER_TYPE = 'email';
+
     public function __construct()
     {
         try {
@@ -78,7 +83,7 @@ final class LoggerExcept extends Logger
         // Encode the line
         $sContents = json_encode($aLog) . File::EOL . File::EOL . File::EOL;
         switch ($this->config->values['logging']['log_handler']) {
-            case 'file': {
+            case self::FILE_LOG_HANDLER_TYPE: {
                 $sFullFile = $this->sDir . static::EXCEPT_DIR . $this->sFileName . '.json';
                 $sFullGzipFile = $this->sDir . static::EXCEPT_DIR . static::GZIP_DIR . $this->sFileName . '.gz';
 
@@ -95,13 +100,13 @@ final class LoggerExcept extends Logger
                 }
             } break;
 
-            case 'database': {
+            case self::DATABASE_LOG_HANDLER_TYPE: {
                 $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::LOG_ERROR) . 'SET logError = :line');
                 $rStmt->execute(array(':line' => $sContents));
                 Db::free($rStmt);
             } break;
 
-            case 'email': {
+            case self::EMAIL_LOG_HANDLER_TYPE: {
                 $aInfo = [
                     'to' => $this->config->values['logging']['bug_report_email'],
                     'subject' => t('Errors Reporting of pH7Framework')
