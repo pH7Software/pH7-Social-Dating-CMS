@@ -59,9 +59,9 @@ class SignupController extends Controller
         $this->view->page_title = ($bUserRef) ? t('Register for free to find %0% on %site_name%. The "Real" Real Estate Website!', $sFirstName) : t('Free Sign Up to Meet Lovely People!');
 
         if ($bUserRef) {
-            $sH1Txt = t('Register for Free to Meet <span class="pink2">%0%</span> (<span class="pink1">%1%</span>) on <span class="pink2">%site_name%</span>!', $sFirstName, $this->str->upperFirst($sUsername));
+            $sH1Txt = t('We take the privacy and information of our clients seriously. For access to their information you must register');
         } else {
-            $sH1Txt = t('Sign Up on %site_name%!');
+            $sH1Txt = t('Sign Up on %site_name%! 🎉');
         }
 
         $this->view->h1_title = '<div class="animated fadeInDown">' . $sH1Txt . '</div>';
