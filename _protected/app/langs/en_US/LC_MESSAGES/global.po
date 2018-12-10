@@ -1706,7 +1706,7 @@ msgid "Cannot remove the banner. Please try later."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/assets/ajax/CacheAjax.php:62
-msgid "The cache has been deleted!"
+msgid "The cache has been cleared."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/config/Permission.php:40

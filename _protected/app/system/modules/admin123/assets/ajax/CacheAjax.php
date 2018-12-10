@@ -59,7 +59,7 @@ class CacheAjax extends Kernel
                 exit('Bad Request Error');
         }
 
-        echo jsonMsg(1, t('The cache has been deleted!'));
+        echo jsonMsg(1, t('The cache has been cleared.'));
     }
 
     /**
