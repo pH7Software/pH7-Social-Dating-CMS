@@ -9,7 +9,7 @@
         <li><a href="{{ $design->url(PH7_ADMIN_MOD, 'setting', 'general') }}#p=icon">{lang 'Icon Logo'}</a></li>
         <li><a href="{{ $design->url(PH7_ADMIN_MOD, 'setting', 'general') }}#p=design">{lang "Website's Color"}</a></li>
         <li><a href="{{ $design->url(PH7_ADMIN_MOD, 'setting', 'general') }}#p=email">{lang 'Email'}</a></li>
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD, 'file', 'pagedisplay') }}">{lang 'Page'}</a></li>
+        <li><a href="{{ $design->url(PH7_ADMIN_MOD, 'file', 'pagedisplay') }}">{lang 'Edit Static Pages'}</a></li>
         <li><a href="{patreon_url}" target="_blank" rel="noopener noreferrer">{lang 'Become a Patron TODAY'}</a> 🚀</li>
     </ul>
 </div>
