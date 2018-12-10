@@ -8303,7 +8303,7 @@ msgid "Country Flag"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_f5e1563574ea44d60fdfdf225d89ec8f/base/user/browse.cpl.php:19
-msgid "Edit User's Profile"
+msgid "Edit User's Profile Information"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_f5e1563574ea44d60fdfdf225d89ec8f/base/user/browse.cpl.php:19
