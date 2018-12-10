@@ -1,6 +1,6 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Controller
@@ -21,9 +21,6 @@ class SettingController extends Controller
 
     /** @var string */
     private $sSex;
-
-    /** @var string */
-    private $sTitle;
 
     /** @var int */
     private $iProfileId;
@@ -59,19 +56,14 @@ class SettingController extends Controller
         // Add Css Style for Tabs
         $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'tabs.css');
 
-        $this->sTitle = t('Account Settings');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->setTitle(t('Account Settings'));
 
         $this->output();
     }
 
     public function edit()
     {
-        $this->sTitle = t('Edit Profile');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
-
+        $this->setTitle(t('Edit Profile'));
         $this->output();
     }
 
@@ -89,9 +81,7 @@ class SettingController extends Controller
 
     public function design()
     {
-        $this->sTitle = t('Profile Wallpaper');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->setTitle(t('Profile Wallpaper'));
 
         if ($this->httpRequest->postExists('del')) {
             $this->removeWallpaper();
@@ -102,36 +92,25 @@ class SettingController extends Controller
 
     public function notification()
     {
-        $this->sTitle = t('Email Notifications');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
-
+        $this->setTitle(t('Email Notifications'));
         $this->output();
     }
 
     public function privacy()
     {
-        $this->sTitle = t('Privacy Settings');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
-
+        $this->setTitle(t('Privacy Settings'));
         $this->output();
     }
 
     public function password()
     {
-        $this->sTitle = t('Change Password');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
-
+        $this->setTitle(t('Change Password'));
         $this->output();
     }
 
     public function delete()
     {
-        $this->sTitle = t('Delete Account');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->setTitle(t('Delete Account'));
 
         if ($this->httpRequest->get('delete_status') === 'yesdelete') {
             $this->session->set('yes_delete', 1);
@@ -202,5 +181,17 @@ class SettingController extends Controller
         }
 
         return (int)$iId;
+    }
+
+    /**
+     * Set title and heading.
+     *
+     * @param string $sTitle
+     *
+     * @return void
+     */
+    private function setTitle($sTitle)
+    {
+        $this->view->page_title = $this->view->h2_title = $sTitle;
     }
 }
