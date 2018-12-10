@@ -34,7 +34,7 @@ class EditCommentForm
         $oForm->addElement(new \PFBC\Element\Textarea(t('Edit your comment:'), 'comment', ['value' => $oData->comment, 'required' => 1, 'validation' => new \PFBC\Validation\Str(2, 2000)]));
         unset($oHttpRequest, $oData);
 
-        $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'pencil']));
+        $oForm->addElement(new \PFBC\Element\Button(t('Save')));
         $oForm->render();
     }
 }
