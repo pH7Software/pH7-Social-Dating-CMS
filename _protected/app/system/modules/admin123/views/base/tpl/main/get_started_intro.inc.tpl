@@ -8,37 +8,37 @@
         <ul>
             <li>
                 <a href="{{ $design->url(PH7_ADMIN_MOD, 'setting', 'general') }}#p=general">
-                    {lang 'General Useful Settings'}
+                    {lang 'Review the general settings'}
                 </a>
             </li>
 
             <li>
                 <a href="{{ $design->url(PH7_ADMIN_MOD, 'setting', 'metamain') }}">
-                    {lang 'Homepage texts and other site information'}
+                    {lang 'Update homepage texts & site info'}
                 </a>
             </li>
 
             <li>
                 <a href="{{ $design->url(PH7_ADMIN_MOD, 'setting', 'general') }}#p=icon">
-                    {lang 'Icon Logo'}
+                    {lang 'Upload site icon'}
                 </a>
             </li>
 
             <li>
                 <a href="{{ $design->url(PH7_ADMIN_MOD, 'setting', 'general') }}#p=design">
-                    {lang "Website's Colors"}
+                    {lang "Update website's colors"}
                 </a>
             </li>
 
             <li>
                 <a href="{{ $design->url(PH7_ADMIN_MOD, 'setting', 'general') }}#p=email">
-                    {lang 'Email Settings'}
+                    {lang 'Update email settings'}
                 </a>
             </li>
 
             <li>
                 <a href="{{ $design->url(PH7_ADMIN_MOD, 'file', 'pagedisplay') }}">
-                    {lang 'Edit Static Pages'}
+                    {lang 'Edit static pages'}
                 </a>
             </li>
 
