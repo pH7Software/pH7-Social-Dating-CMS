@@ -38,7 +38,7 @@ final class Version
     const KERNEL_VERSION_NAME = 'pKb';
     const KERNEL_VERSION = '14.8.8';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELEASE_DATE = '2018-12-10';
+    const KERNEL_RELEASE_DATE = '2018-12-24';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7CMS.com';
