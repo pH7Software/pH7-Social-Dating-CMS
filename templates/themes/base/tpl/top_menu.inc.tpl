@@ -279,7 +279,7 @@
         <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','index') }}" title="{lang 'Settings'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-cog fa-fw"></i> {lang 'Setting'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','index') }}" title="{lang 'General Settings'}"><i class="fa fa-tachometer"></i> {lang 'General'}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD, 'setting','metamain') }}" title="{lang 'Meta Tags/Homepage Texts'}"><i class="fa fa-tag"></i> {lang 'Meta Tags/Homepage Texts'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','metamain') }}" title="{lang 'Meta Tags/Homepage Texts'}"><i class="fa fa-tag"></i> {lang 'Meta Tags/Homepage Texts'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','ads') }}" title="{lang 'Add Banners on the best click-through-rate locations'}"><i class="fa fa-money"></i> {lang 'Ad Banners'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','analyticsapi') }}" title="{lang 'Analytics Code'}"><i class="fa fa-bar-chart"></i> {lang 'Analytics Code'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'style') }}" title="{lang 'Custom CSS Style'}"><i class="fa fa-code"></i> {lang 'Custom CSS'}</a></li>
