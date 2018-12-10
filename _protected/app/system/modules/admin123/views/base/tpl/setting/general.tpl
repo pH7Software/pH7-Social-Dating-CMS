@@ -1,6 +1,6 @@
 <ol id="toc">
     <li><a href="#general"><span>{lang 'General Settings'}</span></a></li>
-    <li><a href="#logo"><span>{lang 'Logo'}</span></a></li>
+    <li><a href="#icon"><span>{lang 'Logo'}</span></a></li>
     <li><a href="#registration"><span>{lang 'Registration'}</span></a></li>
     <li><a href="#pic_vid"><span>{lang 'Picture and Video'}</span></a></li>
     <li><a href="#moderation"><span>{lang 'Moderation'}</span></a></li>
