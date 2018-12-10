@@ -1,5 +1,5 @@
 <div class="center">
-    <div class="border">
+    <div class="s_bMarg border">
         <h2 class="underline">{lang 'Getting Started Smoothly'}</h2>
 
         <p>{lang 'Welcome to your admin dashboard! You will find everything you need to customize and manage your website in here 🙂'}</p>
