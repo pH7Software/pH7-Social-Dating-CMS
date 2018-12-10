@@ -1,6 +1,7 @@
 <div class="center">
     <div class="border">
         <h2 class="underline">{lang 'Getting Started Smoothly'}</h2>
+
         <p>{lang 'Welcome to your admin dashboard! You will find everything you need to customize and manage your website in here 🙂'}</p>
         <p class="underline">{lang 'Below are a few steps to start well your webapp!'}</p>
 
