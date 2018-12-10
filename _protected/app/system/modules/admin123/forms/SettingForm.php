@@ -82,7 +82,7 @@ class SettingForm
         unset($oFile);
 
         /********** Logo Settings **********/
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="logotype"><div class="col-md-10"><h2 class="underline">' . t('Icon Logo') . '</h2>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="icon"><div class="col-md-10"><h2 class="underline">' . t('Icon Logo') . '</h2>'));
 
         $oForm->addElement(new \PFBC\Element\File('', 'logo', ['description' => t('Add your small logo/icon that represents/distinguishes the best your site/concept/brand.'), 'accept' => 'image/*']));
 
@@ -300,7 +300,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Number(t('User inactivity timeout:'), 'user_timeout', ['description' => t('The number of minutes that a member becomes inactive (offline).'), 'value' => DbConfig::getSetting('userTimeout'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><script src="' . PH7_URL_STATIC . PH7_JS . 'tabs.js"></script><script>tabs(\'p\', [\'general\',\'logotype\',\'registration\',\'pic_vid\',\'moderation\',\'email\',\'security\',\'spam\',\'design\',\'api\',\'automation\']);</script>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><script src="' . PH7_URL_STATIC . PH7_JS . 'tabs.js"></script><script>tabs(\'p\', [\'general\',\'icon\',\'registration\',\'pic_vid\',\'moderation\',\'email\',\'security\',\'spam\',\'design\',\'api\',\'automation\']);</script>'));
 
 
         $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'check']));

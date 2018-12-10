@@ -1,6 +1,6 @@
 <ol id="toc">
     <li><a href="#general"><span>{lang 'General Settings'}</span></a></li>
-    <li><a href="#logotype"><span>{lang 'Logo'}</span></a></li>
+    <li><a href="#icon"><span>{lang 'Logo'}</span></a></li>
     <li><a href="#registration"><span>{lang 'Registration'}</span></a></li>
     <li><a href="#pic_vid"><span>{lang 'Picture and Video'}</span></a></li>
     <li><a href="#moderation"><span>{lang 'Moderation'}</span></a></li>
@@ -17,7 +17,7 @@
     /* Check if the Setting page is loading from 'p=registration'
      * If so, scroll down to show the "Default Membership Group" first (this is used by the Payment module) */
     var sHash = location.hash.substr(1);
-    if (sHash == 'p=registration') {
+    if (sHash === 'p=registration') {
         var $target = $('html, body');
         $target.animate({scrollTop: $target.height()}, 1000);
     }

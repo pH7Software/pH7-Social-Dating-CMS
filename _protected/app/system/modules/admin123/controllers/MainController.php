@@ -10,14 +10,17 @@
 
 namespace PH7;
 
+use PH7\Framework\Core\Kernel;
 use PH7\Framework\Layout\Html\Meta;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Version;
+use PH7\Framework\Date\Various as VDate;
 use PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
+    const DURATION_SITE_CONSIDERED_NEW = '15 days';
     const SOFTWARE_BLOG_URL = 'http://ph7cms.com/blog/';
 
     public function index()
@@ -35,9 +38,10 @@ class MainController extends Controller
 
         $this->view->is_news_feed = (bool)DbConfig::getSetting('isSoftwareNewsFeed');
         $this->view->software_blog_url = self::SOFTWARE_BLOG_URL;
+        $this->view->show_get_started_section = $this->isWebsiteNew();
+        $this->view->patreon_url = Kernel::PATREON_URL;
 
         $this->checkUpdates();
-
         $this->addStats();
 
         $this->output();
@@ -332,6 +336,16 @@ class MainController extends Controller
 
             $this->design->setMessage($sMsg);
         }
+    }
+
+    /**
+     * @return bool
+     */
+    private function isWebsiteNew()
+    {
+        $iSiteCreationDate = VDate::getTime(StatisticCoreModel::getDateOfCreation());
+
+        return VDate::setTime('-' . self::DURATION_SITE_CONSIDERED_NEW) <= $iSiteCreationDate;
     }
 
     /**
