@@ -10,6 +10,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Core\Kernel;
 use PH7\Framework\Layout\Html\Meta;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
@@ -38,9 +39,9 @@ class MainController extends Controller
         $this->view->is_news_feed = (bool)DbConfig::getSetting('isSoftwareNewsFeed');
         $this->view->software_blog_url = self::SOFTWARE_BLOG_URL;
         $this->view->show_get_started_section = $this->isWebsiteNew();
+        $this->view->patreon_url = Kernel::PATREON_URL;
 
         $this->checkUpdates();
-
         $this->addStats();
 
         $this->output();
