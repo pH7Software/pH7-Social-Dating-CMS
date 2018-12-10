@@ -28,7 +28,7 @@ class StyleForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_style', 'form_style'));
         $oForm->addElement(new \PFBC\Element\Token('style'));
         $oForm->addElement(new \PFBC\Element\Textarea(t('Your custom CSS code'), 'code', ['value' => (new Design)->customCode('css'), 'description' => t("WARNING! Here you don't have to add %0% tags.", '<b><i>&lt;style&gt;&lt;/style&gt;</i></b>'), 'style' => 'height:35rem']));
-        $oForm->addElement(new \PFBC\Element\Button);
+        $oForm->addElement(new \PFBC\Element\Button(t('Save Changes'), 'submit', ['icon' => 'check']));
         $oForm->render();
     }
 }

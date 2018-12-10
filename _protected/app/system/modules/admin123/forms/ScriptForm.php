@@ -28,7 +28,7 @@ class ScriptForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_script', 'form_script'));
         $oForm->addElement(new \PFBC\Element\Token('script'));
         $oForm->addElement(new \PFBC\Element\Textarea(t('Your custom JavaScript code'), 'code', ['value' => (new Design)->customCode('js'), 'description' => t("WARNING! Here you don't have to add %0% tags.", '<b><i>&lt;script&gt;&lt;/script&gt;</i></b>'), 'style' => 'height:35rem']));
-        $oForm->addElement(new \PFBC\Element\Button);
+        $oForm->addElement(new \PFBC\Element\Button(t('Save Changes'), 'submit', ['icon' => 'check']));
         $oForm->render();
     }
 }

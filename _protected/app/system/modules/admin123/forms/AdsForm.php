@@ -32,7 +32,7 @@ class AdsForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Title:'), 'title', ['required' => 1, 'validation' => new \PFBC\Validation\Str(2, 40)]));
         $oForm->addElement(new \PFBC\Element\Select(t('Size of the Banner:'), 'size', $aAdSizes, ['required' => 1]));
         $oForm->addElement(new \PFBC\Element\Textarea(t('Banner:'), 'code', ['description' => self::getBannerDesc(), 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Button);
+        $oForm->addElement(new \PFBC\Element\Button(t('Save')));
         $oForm->render();
     }
 
