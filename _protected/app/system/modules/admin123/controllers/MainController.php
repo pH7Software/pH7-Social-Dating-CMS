@@ -344,7 +344,7 @@ class MainController extends Controller
     {
         $iSiteCreationDate = VDate::getTime(StatisticCoreModel::getDateOfCreation());
 
-        return VDate::setTime('-' . self::DURATION_SITE_CONSIDERED_NEW) >= $iSiteCreationDate;
+        return VDate::setTime('-' . self::DURATION_SITE_CONSIDERED_NEW) <= $iSiteCreationDate;
     }
 
     /**
