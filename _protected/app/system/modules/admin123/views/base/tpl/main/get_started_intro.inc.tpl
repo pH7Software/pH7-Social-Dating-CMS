@@ -47,6 +47,12 @@
                     {lang 'Become a Patron TODAY'}
                 </a> 🚀
             </li>
+
+            <li>
+                <a href="{tweet_msg_url}" target="_blank" rel="noopener noreferrer">
+                    {lang 'Share it on Twitter'}
+                </a> 💙
+            </li>
         </ul>
     </div>
 </div>
