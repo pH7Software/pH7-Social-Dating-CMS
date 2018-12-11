@@ -3,8 +3,7 @@
         <h2>🍰 <span class="underline">{lang 'Getting Started Smoothly'}</span> 👌</h2>
 
         <p>{lang 'Welcome to your admin dashboard! You will find everything you need to customize and manage your website in here 🙂'}</p>
-        <p class="underline">{lang 'Here are a few steps to start well your site!'}</p>
-
+        <p class="underline">{lang 'Here are a few steps to start well your site:'}</p>
         <ul>
             <li>
                 <a href="{{ $design->url(PH7_ADMIN_MOD, 'setting', 'general') }}#p=general">
