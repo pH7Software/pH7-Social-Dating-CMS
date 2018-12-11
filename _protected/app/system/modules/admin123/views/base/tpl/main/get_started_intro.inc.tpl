@@ -20,7 +20,7 @@
 
             <li>
                 <a href="{{ $design->url(PH7_ADMIN_MOD, 'setting', 'general') }}#p=icon">
-                    {lang 'Upload site icon'}
+                    {lang "Upload website's icon"}
                 </a>
             </li>
 
