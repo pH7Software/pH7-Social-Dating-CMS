@@ -101,8 +101,9 @@ final class LoggerExcept extends Logger
             } break;
 
             case self::DATABASE_LOG_HANDLER_TYPE: {
-                $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::LOG_ERROR) . 'SET logError = :line');
-                $rStmt->execute(array(':line' => $sContents));
+                $sSql = 'INSERT INTO' . Db::prefix(DbTableName::LOG_ERROR) . 'SET logError = :line';
+                $rStmt = Db::getInstance()->prepare($sSql);
+                $rStmt->execute([':line' => $sContents]);
                 Db::free($rStmt);
             } break;
 
