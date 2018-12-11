@@ -15,14 +15,9 @@ class AccountController extends Controller
 {
     const REDIRECTION_DELAY = 4; // In seconds
 
-    /** @var string */
-    private $sTitle;
-
     public function index()
     {
-        $this->sTitle = t('Account - Affiliate');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->setTitle(t('Account - Affiliate'));
 
         $this->view->currency_sign = $this->config->values['module.setting']['currency_sign'];
         $this->view->currency_code = $this->config->values['module.setting']['currency_code'];
@@ -42,29 +37,29 @@ class AccountController extends Controller
             'tabs.css'
         );
 
-        $this->sTitle = t('Edit your profile');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->setTitle(t('Edit your profile'));
         $this->output();
     }
 
     public function password()
     {
-        $this->sTitle = t('Change Password');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->setTitle(t('Change Password'));
         $this->output();
     }
 
     public function delete()
     {
-        $this->sTitle = t('Delete Affiliate Account');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->setTitle(t('Delete Affiliate Account'));
 
         if ($this->httpRequest->get('delete_status') === 'yesdelete') {
             $this->session->set('yes_delete', 1);
-            Header::redirect(Uri::get('affiliate', 'account', 'yesdelete'));
+            Header::redirect(
+                Uri::get(
+                    'affiliate',
+                    'account',
+                    'yesdelete'
+                )
+            );
         } elseif ($this->httpRequest->get('delete_status') === 'nodelete') {
             $this->view->delete_status = false;
             $this->design->setRedirect(
@@ -110,5 +105,17 @@ class AccountController extends Controller
             $this->registry,
             'affiliate'
         );
+    }
+
+    /**
+     * Set title and heading.
+     *
+     * @param string $sTitle
+     *
+     * @return void
+     */
+    private function setTitle($sTitle)
+    {
+        $this->view->page_title = $this->view->h1_title = $sTitle;
     }
 }
