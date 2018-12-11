@@ -16,9 +16,6 @@ use PH7\Framework\Url\Url;
 
 class InfoController extends Controller
 {
-    const TWITTER_TWEET_URL = 'https://twitter.com/intent/tweet?text=';
-    const TWITTER_TWEET_MSG = "I built my social #DatingBusiness with #pH7CMS, #DatingSoftware -> %0% \n%1%";
-
     /** @var string */
     private $sTitle;
 
@@ -49,15 +46,8 @@ class InfoController extends Controller
         $this->view->h1_title = $this->sTitle;
         $this->view->release_date = $this->dateTime->get(Version::KERNEL_RELEASE_DATE)->date();
         $this->view->license_form_link = Uri::get(PH7_ADMIN_MOD, 'setting', 'license');
-        $this->view->tweet_msg_url = $this->getTweetPost();
+        $this->view->tweet_msg_url = TweetSharing::getMessage();
 
         $this->output();
-    }
-
-    private function getTweetPost()
-    {
-        $sMsg = t(self::TWITTER_TWEET_MSG, Kernel::SOFTWARE_TWITTER, Kernel::SOFTWARE_GIT_REPO_URL);
-
-        return self::TWITTER_TWEET_URL . Url::encode($sMsg);
     }
 }
