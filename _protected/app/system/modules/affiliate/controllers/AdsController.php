@@ -14,9 +14,6 @@ class AdsController extends Controller
 {
     const ADS_PER_PAGE = 10;
 
-    /** @var string */
-    private $sTitle;
-
     public function index()
     {
         $iTotalAds = (new AdsCoreModel)->total(AdsCore::AFFILIATE_AD_TABLE_NAME);
@@ -26,9 +23,7 @@ class AdsController extends Controller
         $this->view->current_page = $oPage->getCurrentPage();
         unset($oPage);
 
-        $this->sTitle = t('Banners');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = t('Banners');
         $this->view->h3_title = nt('%n% Banner', '%n% Banners', $iTotalAds);
 
         $this->output();
