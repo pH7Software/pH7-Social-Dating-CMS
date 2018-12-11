@@ -125,7 +125,14 @@ class Mail
     final protected function link()
     {
         ob_start();
-        (new Design)->link(true, true, false, false, true);
+        (new Design)->link(
+            true,
+            true,
+            false,
+            false,
+            true
+        );
+
         $sOutputLink = ob_get_contents();
         ob_end_clean();
 

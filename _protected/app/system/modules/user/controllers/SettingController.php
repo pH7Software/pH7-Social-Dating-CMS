@@ -50,16 +50,21 @@ class SettingController extends Controller
         $this->view->path_img_background = $this->getWallpaper();
 
         /** For the 'display_status' function on the index and privacy page **/
-        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'common.js');
+        $this->design->addJs(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
+            'common.js'
+        );
     }
 
     public function index()
     {
         // Add Css Style for Tabs
-        $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'tabs.css');
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS,
+            'tabs.css'
+        );
 
         $this->setTitle(t('Account Settings'));
-
         $this->output();
     }
 
@@ -141,7 +146,13 @@ class SettingController extends Controller
     public function yesDelete()
     {
         if (!$this->session->exists('yes_delete')) {
-            Header::redirect(Uri::get('user', 'setting', 'delete'));
+            Header::redirect(
+                Uri::get(
+                    'user',
+                    'setting',
+                    'delete'
+                )
+            );
         } else {
             $this->output();
         }

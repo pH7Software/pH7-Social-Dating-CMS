@@ -112,7 +112,11 @@ final class LoggerExcept extends Logger
                     'subject' => t('Errors Reporting of pH7Framework')
                 ];
 
-                (new Mail)->send($aInfo, $sContents, Mailable::TEXT_FORMAT);
+                (new Mail)->send(
+                    $aInfo,
+                    $sContents,
+                    Mailable::TEXT_FORMAT
+                );
             } break;
 
             default:
