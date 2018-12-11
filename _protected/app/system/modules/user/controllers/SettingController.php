@@ -13,6 +13,8 @@ use PH7\Framework\Url\Header;
 
 class SettingController extends Controller
 {
+    const REDIRECTION_SEC_DELAY = 4;
+
     /** @var string */
     private $sUsername;
 
@@ -114,14 +116,20 @@ class SettingController extends Controller
 
         if ($this->httpRequest->get('delete_status') === 'yesdelete') {
             $this->session->set('yes_delete', 1);
-            Header::redirect(Uri::get('user', 'setting', 'yesdelete'));
+            Header::redirect(
+                Uri::get(
+                    'user',
+                    'setting',
+                    'yesdelete'
+                )
+            );
         } elseif ($this->httpRequest->get('delete_status') === 'nodelete') {
             $this->view->delete_status = false;
             $this->design->setRedirect(
                 Uri::get('user', 'main', 'index'),
                 null,
                 null,
-                4
+                self::REDIRECTION_SEC_DELAY
             );
         } else {
             $this->view->delete_status = true;
