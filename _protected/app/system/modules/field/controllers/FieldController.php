@@ -64,7 +64,7 @@ class FieldController extends Controller
         $sMod = $this->httpRequest->post('mod');
         $sName = $this->httpRequest->post('name');
 
-        if (Field::unmodifiable($sName) || !Field::isExists($sMod, $sName)) {
+        if (Field::unmodifiable($sMod, $sName) || !Field::isExists($sMod, $sName)) {
             $bStatus = false;
         } else {
             $bStatus = (new FieldModel(Field::getTable($sMod), $sName))->delete();

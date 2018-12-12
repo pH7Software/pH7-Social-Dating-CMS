@@ -16,6 +16,7 @@ use PHPUnit_Framework_TestCase;
 class FieldTest extends PHPUnit_Framework_TestCase
 {
     const PHONE_FIELD_NAME = 'phone';
+    const PUNCHLINE_FIELD_NAME = 'punchline';
     const CUSTOM_FIELD_NAME = 'myownfield';
 
     public function testAffTable()
@@ -32,16 +33,30 @@ class FieldTest extends PHPUnit_Framework_TestCase
         $this->assertSame('members_info', $sResult);
     }
 
-    public function testModifiableField()
+    public function testUserModifiableField()
     {
-        $bResult = Field::unmodifiable(self::CUSTOM_FIELD_NAME);
+        $bResult = Field::unmodifiable('user', self::CUSTOM_FIELD_NAME);
 
         $this->assertFalse($bResult);
     }
 
-    public function testUnmodifiableField()
+    public function testAffiliateModifiableField()
     {
-        $bResult = Field::unmodifiable(self::PHONE_FIELD_NAME);
+        $bResult = Field::unmodifiable('aff', self::PUNCHLINE_FIELD_NAME);
+
+        $this->assertFalse($bResult);
+    }
+
+    public function testUserUnmodifiableField()
+    {
+        $bResult = Field::unmodifiable('user', self::PUNCHLINE_FIELD_NAME);
+
+        $this->assertTrue($bResult);
+    }
+
+    public function testAffiliateUnmodifiableField()
+    {
+        $bResult = Field::unmodifiable('aff', self::PHONE_FIELD_NAME);
 
         $this->assertTrue($bResult);
     }

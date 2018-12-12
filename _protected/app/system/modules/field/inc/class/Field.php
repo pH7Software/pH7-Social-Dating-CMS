@@ -12,22 +12,33 @@ use PH7\Framework\Cache\Cache;
 
 class Field
 {
-    const UNMODIFIABLE_FIELDS = [
+    const MEMBER_UNMODIFIABLE_FIELDS = [
         'profileid',
         'middlename',
         'description',
         'punchline',
-        'businessname',
-        'address',
         'city',
         'state',
         'zipcode',
         'country',
-        'phone',
         'website',
         'socialnetworksite',
         'height',
         'weight'
+    ];
+
+    const AFFILIATE_UNMODIFIABLE_FIELDS = [
+        'profileid',
+        'middlename',
+        'description',
+        'businessname',
+        'address',
+        'phone',
+        'city',
+        'state',
+        'zipcode',
+        'country',
+        'website'
     ];
 
     /**
@@ -67,13 +78,16 @@ class Field
     /**
      * Checks if the field is editable.
      *
+     * @param string $sMod Mod name ("user" or "aff").
      * @param string $sField
      *
      * @return bool
      */
-    public static function unmodifiable($sField)
+    public static function unmodifiable($sMod, $sField)
     {
-        return in_array(strtolower($sField), static::UNMODIFIABLE_FIELDS, true);
+        $aFields = $sMod === 'aff' ? self::AFFILIATE_UNMODIFIABLE_FIELDS : static::MEMBER_UNMODIFIABLE_FIELDS;
+
+        return in_array(strtolower($sField), $aFields, true);
     }
 
     /**
