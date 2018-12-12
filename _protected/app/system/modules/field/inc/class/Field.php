@@ -68,7 +68,7 @@ class Field
      *
      * @return bool
      */
-    public static function isExists($sMod, $sField)
+    public static function doesExist($sMod, $sField)
     {
         $aFields = (new FieldModel(static::getTable($sMod)))->all();
 

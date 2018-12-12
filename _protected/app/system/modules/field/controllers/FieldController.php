@@ -48,7 +48,7 @@ class FieldController extends Controller
 
     public function edit($sMod = '', $sName = '')
     {
-        if (Field::isExists($sMod, $sName)) {
+        if (Field::doesExist($sMod, $sName)) {
             $this->sTitle = t('Edit a Field');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
@@ -64,7 +64,7 @@ class FieldController extends Controller
         $sMod = $this->httpRequest->post('mod');
         $sName = $this->httpRequest->post('name');
 
-        if (Field::unmodifiable($sMod, $sName) || !Field::isExists($sMod, $sName)) {
+        if (Field::unmodifiable($sMod, $sName) || !Field::doesExist($sMod, $sName)) {
             $bStatus = false;
         } else {
             $bStatus = (new FieldModel(Field::getTable($sMod), $sName))->delete();
