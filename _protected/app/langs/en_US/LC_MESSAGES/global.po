@@ -2895,7 +2895,7 @@ msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:60
 msgid ""
-"Use the Splash Page (recommended) for visitors (not logged), otherwise the "
+"Use the Splash Page for visitors (not logged), otherwise the "
 "classic page will be used. <br /><em>Available only if \"User\" is the "
 "Default Module.</em>"
 msgstr ""
