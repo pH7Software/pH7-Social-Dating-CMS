@@ -19,18 +19,18 @@ class FieldTest extends PHPUnit_Framework_TestCase
     const PUNCHLINE_FIELD_NAME = 'punchline';
     const CUSTOM_FIELD_NAME = 'myownfield';
 
-    public function testAffTable()
-    {
-        $sResult = Field::getTable('aff');
-
-        $this->assertSame('affiliates_info', $sResult);
-    }
-
     public function testUserTable()
     {
         $sResult = Field::getTable('user');
 
         $this->assertSame('members_info', $sResult);
+    }
+
+    public function testAffiliateTable()
+    {
+        $sResult = Field::getTable('aff');
+
+        $this->assertSame('affiliates_info', $sResult);
     }
 
     public function testUserModifiableField()
