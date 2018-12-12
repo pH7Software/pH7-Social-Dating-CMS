@@ -85,7 +85,7 @@ class Field
      */
     public static function unmodifiable($sMod, $sField)
     {
-        $aFields = $sMod === 'aff' ? self::AFFILIATE_UNMODIFIABLE_FIELDS : static::MEMBER_UNMODIFIABLE_FIELDS;
+        $aFields = $sMod === 'aff' ? static::AFFILIATE_UNMODIFIABLE_FIELDS : static::MEMBER_UNMODIFIABLE_FIELDS;
 
         return in_array(strtolower($sField), $aFields, true);
     }
