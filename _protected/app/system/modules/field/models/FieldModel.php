@@ -12,7 +12,7 @@ use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Model;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 class FieldModel extends Model
 {
@@ -96,7 +96,7 @@ class FieldModel extends Model
      */
     public function update()
     {
-        $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'CHANGE ' . (new Http)->get('name') . ' ' . $this->sName . ' ' . $this->getType();
+        $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'CHANGE ' . (new HttpRequest)->get('name') . ' ' . $this->sName . ' ' . $this->getType();
         return $this->execute();
     }
 
