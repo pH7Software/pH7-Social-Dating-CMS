@@ -322,6 +322,7 @@ class UserCoreModel extends Model
         $bIsAge = !$bIsMail && empty($aParams[SearchQueryCore::AGE]) && !empty($aParams[SearchQueryCore::MIN_AGE]) && !empty($aParams[SearchQueryCore::MAX_AGE]);
         $bIsPrice = !$bIsMail && !empty($aParams[SearchQueryCore::PRICE]);
         $bIsBedroom = !$bIsMail && !empty($aParams[SearchQueryCore::BEDROOM]);
+        $bIsBathroom = !$bIsMail && !empty($aParams[SearchQueryCore::BATHROOM]);
         $bIsSize = !$bIsMail && !empty($aParams[SearchQueryCore::SIZE]);
         $bIsCity = !$bIsMail && !empty($aParams[SearchQueryCore::CITY]) && Str::noSpaces($aParams[SearchQueryCore::CITY]);
         $bIsState = !$bIsMail && !empty($aParams[SearchQueryCore::STATE]) && Str::noSpaces($aParams[SearchQueryCore::STATE]);
@@ -340,8 +341,9 @@ class UserCoreModel extends Model
         $sSqlSingleAge = $bIsSingleAge ? ' AND birthDate LIKE :birthDate ' : '';
         $sSqlAge = $bIsAge ? ' AND birthDate BETWEEN DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age2 YEAR) AND DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age1 YEAR) ' : '';
         $sSqlPrice = $bIsPrice ? ' AND (propertyPrice BETWEEN 100 AND :price) ' : '';
-        $sSqlBedroom = $bIsBedroom ? ' AND propertyBedrooms = :bedrooms ' : '';
-        $sSqlSize = $bIsSize ? ' AND propertySize = :size ' : '';
+        $sSqlBedroom = $bIsBedroom ? ' AND propertyBedrooms <= :bedrooms ' : '';
+        $sSqlBathroom = $bIsBathroom ? ' AND propertyBathrooms <= :bathrooms ' : '';
+        $sSqlSize = $bIsSize ? ' AND propertySize >= :size ' : '';
         $sSqlCity = $bIsCity ? ' AND LOWER(city) LIKE LOWER(:city) ' : '';
         $sSqlState = $bIsState ? ' AND LOWER(state) LIKE LOWER(:state) ' : '';
         $sSqlZipCode = $bIsZipCode ? ' AND zipCode LIKE :zipCode ' : '';
@@ -371,7 +373,7 @@ class UserCoreModel extends Model
             'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER) . 'AS m LEFT JOIN' . Db::prefix(DbTableName::MEMBER_PRIVACY) . 'AS p USING(profileId)
             LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) . 'AS i USING(profileId) WHERE username <> :ghostUsername AND searchProfile = \'yes\'
             AND (groupId <> :visitorGroup) AND (groupId <> :pendingGroup) AND (ban = 0)' . $sSqlHideLoggedProfile . $sSqlFirstName . $sSqlMiddleName . $sSqlLastName . $sSqlMatchSex . $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCity . $sSqlState .
-            $sSqlZipCode . $sSqlPrice . $sSqlBedroom . $sSqlSize . $sSqlEmail . $sSqlOnline . $sSqlAvatar . $sSqlOrder . $sSqlLimit
+            $sSqlZipCode . $sSqlPrice . $sSqlBedroom . $sSqlBathroom . $sSqlSize . $sSqlEmail . $sSqlOnline . $sSqlAvatar . $sSqlOrder . $sSqlLimit
         );
 
         $rStmt->bindValue(':ghostUsername', PH7_GHOST_USERNAME, \PDO::PARAM_STR);
@@ -404,6 +406,9 @@ class UserCoreModel extends Model
         }
         if ($bIsBedroom) {
             $rStmt->bindValue(':bedrooms', $aParams[SearchQueryCore::BEDROOM], \PDO::PARAM_INT);
+        }
+        if ($bIsBathroom) {
+            $rStmt->bindValue(':bathrooms', $aParams[SearchQueryCore::BATHROOM], \PDO::PARAM_INT);
         }
         if ($bIsSize) {
             $rStmt->bindValue(':size', $aParams[SearchQueryCore::SIZE]);

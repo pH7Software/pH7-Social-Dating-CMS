@@ -93,6 +93,10 @@ class DynamicFieldCoreForm
                 $this->oForm->addElement(new \PFBC\Element\Number(t('Min Bedrooms:'), SearchQueryCore::BEDROOM, ['value' => $this->sVal, 'min' => 0]));
                 break;
 
+            case 'propertyBathrooms':
+                $this->oForm->addElement(new \PFBC\Element\Number(t('Min Bathrooms:'), SearchQueryCore::BATHROOM, ['value' => $this->sVal, 'min' => 0]));
+                break;
+
             case 'propertySize':
                 $this->oForm->addElement(new \PFBC\Element\Number(t('Size:'), SearchQueryCore::SIZE, ['value' => $this->sVal, 'min' => 0]));
                 break;

@@ -27,6 +27,7 @@ final class SearchQueryCore
     const PRICE = 'propertyPrice';
     const SIZE = 'propertySize';
     const BEDROOM = 'propertyBedrooms';
+    const BATHROOM = 'propertyBathrooms';
     const FIRST_NAME = 'first_name';
     const LAST_NAME = 'last_name';
     const MIDDLE_NAME = 'middle_name';
