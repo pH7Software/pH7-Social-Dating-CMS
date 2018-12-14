@@ -10,7 +10,7 @@ $(".paging a:first").addClass("active");
 
 // Get size of images, how many there are, then determine the size of the image reel.
 var iImgWidth = $(".img_reel").width();
-var iImgSum = $(".img_reel img").size();
+var iImgSum = $(".img_reel img").size() + 1;
 var iImgReelWidth = iImgWidth * iImgSum;
 
 // Adjust the image reel to its new size
