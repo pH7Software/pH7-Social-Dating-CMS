@@ -99,8 +99,8 @@ class UserDesignCoreModel extends Design
             return;
         }
 
-        echo '<script>$(function(){$("#profile-container").carouFredSel()});</script>
-        <div class="transparent p1"><div class="img_carousel"><div id="profile-container">';
+        echo '<script>$(function(){$("#profile_container").carouFredSel()});</script>
+        <div class="transparent p1"><div class="img_carousel"><div id="profile_container">';
 
         foreach ($oUsers as $oUser) {
             $sFirstName = $this->oStr->upperFirst($oUser->firstName);
