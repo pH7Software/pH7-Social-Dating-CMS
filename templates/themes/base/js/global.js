@@ -90,7 +90,15 @@ $('a[title],img[title],abbr[title]').each(function () {
         if (oE.hasClass("ttleft")) pos = "left";
         if (oE.hasClass("ttright")) pos = "right";
         oE.tipTip({defaultPosition: pos});
-        $(this).tipTip({maxWidth: 'auto', edgeOffset: 5, fadeIn: 400, fadeOut: 400, defaultPosition: pos});
+        $(this).tipTip(
+            {
+                maxWidth: 'auto',
+                edgeOffset: 5,
+                fadeIn: 400,
+                fadeOut: 400,
+                defaultPosition: pos
+            }
+        );
     }
 });
 
