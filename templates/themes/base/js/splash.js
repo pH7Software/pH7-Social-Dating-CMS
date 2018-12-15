@@ -24,7 +24,7 @@ rotate = function () {
     $(".paging a").removeClass('active'); // Remove all active class
     $active.addClass('active'); // Add active class (the $active is declared in the rotateSwitch function)
 
-    //Slider Animation
+    // Animate the slides
     $(".img_reel").animate({
         left: -iImgRealPosition
     }, 500);
@@ -33,18 +33,17 @@ rotate = function () {
 
 // Rotation + Timing Event
 rotateSwitch = function () {
-    play = setInterval(function () { // Set timer - this will repeat itself every 3 seconds
+    play = setInterval(function () { // Set timer - this will repeat itself every 7 secs
         $active = $('.paging a.active').next();
-        if ($active.length === 0) { // If paging reaches the end...
-            $active = $('.paging a:first'); //go back to first
+        if ($active.length === 0) { // If paging reaches the end, go back to first one
+            $active = $('.paging a:first');
         }
         rotate(); // Trigger the paging and slider function
-    }, 7000); // Timer speed in milliseconds (3 seconds)
+    }, 7000); // Timer speed in milliseconds (7 seconds)
 };
 
 rotateSwitch(); // Run function on launch
 
-//On Hover
 $(".img_reel a").hover(function () {
         clearInterval(play); // Stop the rotation
     }, function () {
@@ -52,7 +51,7 @@ $(".img_reel a").hover(function () {
     }
 );
 
-// On Click
+// When click on slide's navigation menu
 $(".paging a").click(function () {
     $active = $(this); // Activate the clicked paging
     // Reset Timer
