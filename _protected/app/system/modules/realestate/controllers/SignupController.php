@@ -61,7 +61,7 @@ class SignupController extends Controller
         if ($bUserRef) {
             $sH1Txt = t('We take the privacy and information of our clients seriously. For access to their information you must register');
         } else {
-            $sH1Txt = t('Sign Up on %site_name%! 🏡');
+            $sH1Txt = t('🏘 Sign Up on %site_name%! 🏡');
         }
 
         $this->view->h1_title = '<div class="animated fadeInDown">' . $sH1Txt . '</div>';
