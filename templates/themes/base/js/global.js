@@ -12,7 +12,7 @@ function showField(sName, mShow) {
     }
 }
 
-var $goBox = (function () {
+const $goBox = (function () {
     // Video Popup (video tag)
     $("a[data-popup=video]").colorbox({
         speed: 500,
@@ -80,16 +80,26 @@ $goBox();
 
 $('a[title],img[title],abbr[title]').each(function () {
     // "bIsDataPopup" checks that only for links that do not possess the attribute "data-popup", otherwise not the title of the popup (colorbox) cannot appear because of the plugin (tipTip).
-    var bIsDataPopup = $(this).data('popup');
+    const bIsDataPopup = $(this).data('popup');
 
     if (!bIsDataPopup) {
-        var oE = $(this);
-        var pos = "top";
-        if (oE.hasClass("tttop")) pos = "top";
-        if (oE.hasClass("ttbottom")) pos = "bottom";
-        if (oE.hasClass("ttleft")) pos = "left";
-        if (oE.hasClass("ttright")) pos = "right";
+        const oE = $(this);
+        let pos = "top";
+
+        if (oE.hasClass("tttop")) {
+            pos = "top";
+        }
+        if (oE.hasClass("ttbottom")) {
+            pos = "bottom";
+        }
+        if (oE.hasClass("ttleft")) {
+            pos = "left";
+        }
+        if (oE.hasClass("ttright")) {
+            pos = "right";
+        }
         oE.tipTip({defaultPosition: pos});
+
         $(this).tipTip(
             {
                 maxWidth: 'auto',
@@ -131,10 +141,12 @@ function openBox(sFile) {
 }
 
 function loadingImg(iStatus, sIdContainer) {
-    if (iStatus)
-        $("#" + sIdContainer).html('<img src="' + pH7Url.tplImg + 'icon/loading2.gif" alt="' + pH7LangCore.loading + '" border="0" />');
-    else
+    if (iStatus) {
+        const sHtml = '<img src="' + pH7Url.tplImg + 'icon/loading2.gif" alt="' + pH7LangCore.loading + '" border="0" />';
+        $("#" + sIdContainer).html(sHtml);
+    } else {
         $("#" + sIdContainer).html('');
+    }
 }
 
 if ($('div[role=alert]').length) {
