@@ -49,6 +49,42 @@
                             </a>
                         </span>
                     </p>
+                {elseif $key == 'propertyPrice'}
+                    <p>
+                        <span class="bold">{lang 'Price:'}</span>
+                        <span class="italic">
+                            <a href="{{ $design->url('realestate','browse','index', '?propertyPrice='.$val) }}">
+                                {val}
+                            </a>
+                        </span>
+                    </p>
+                {elseif $key == 'propertyBedrooms'}
+                    <p>
+                        <span class="bold">{lang 'Bedrooms:'}</span>
+                        <span class="italic">
+                            <a href="{{ $design->url('realestate','browse','index', '?propertyBedrooms='.$val) }}">
+                                {val}
+                            </a>
+                        </span>
+                    </p>
+                {elseif $key == 'propertyBathrooms'}
+                    <p>
+                        <span class="bold">{lang 'Bedrooms:'}</span>
+                        <span class="italic">
+                            <a href="{{ $design->url('realestate','browse','index', '?propertyBathrooms='.$val) }}">
+                                {val}
+                            </a>
+                        </span>
+                    </p>
+                {elseif $key == 'propertySize'}
+                    <p>
+                        <span class="bold">{lang 'Size:'}</span>
+                        <span class="italic">
+                            <a href="{{ $design->url('realestate','browse','index', '?propertySize='.$val) }}">
+                                {val}
+                            </a>
+                        </span>
+                    </p>
                 {elseif $key == 'website'}
                     <p>
                         {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Site/Blog:'}</span>
