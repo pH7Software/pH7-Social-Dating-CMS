@@ -86,7 +86,7 @@ class DynamicFieldCoreForm
                 break;
 
             case 'propertyPrice':
-                $this->oForm->addElement(new \PFBC\Element\Range(t('Price Range'), SearchQueryCore::PRICE, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => Form::MIN_PRICE, 'max' => Form::MAX_PRICE, 'step' => Form::RANGE_NUMBER_INTERVAL, 'required' => 1]));
+                $this->oForm->addElement(new \PFBC\Element\Range(t('Price Range'), SearchQueryCore::PRICE, ['value' => $this->sVal, 'min' => Form::MIN_PRICE, 'max' => Form::MAX_PRICE, 'step' => Form::RANGE_NUMBER_INTERVAL, 'required' => 1]));
                 break;
 
             case 'propertyBedrooms':
