@@ -86,19 +86,19 @@ class DynamicFieldCoreForm
                 break;
 
             case 'propertyPrice':
-                $this->oForm->addElement(new \PFBC\Element\Range(t('Price Range'), SearchQueryCore::PRICE, ['value' => $this->sVal, 'min' => Form::MIN_PRICE, 'max' => Form::MAX_PRICE, 'step' => Form::RANGE_NUMBER_INTERVAL, 'required' => 1]));
+                $this->oForm->addElement(new \PFBC\Element\Range(t('Price Range'), SearchQueryCore::PRICE, ['value' => $this->sVal, 'min' => Form::MIN_PRICE, 'max' => Form::MAX_PRICE, 'step' => Form::RANGE_NUMBER_INTERVAL]));
                 break;
 
             case 'propertyBedrooms':
-                $this->oForm->addElement(new \PFBC\Element\Number(t('Min Bedrooms:'), SearchQueryCore::BEDROOM, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0, 'required' => 1]));
+                $this->oForm->addElement(new \PFBC\Element\Number(t('Min Bedrooms:'), SearchQueryCore::BEDROOM, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
                 break;
 
             case 'propertyBathrooms':
-                $this->oForm->addElement(new \PFBC\Element\Number(t('Min Bathrooms:'), SearchQueryCore::BATHROOM, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0, 'required' => 1]));
+                $this->oForm->addElement(new \PFBC\Element\Number(t('Min Bathrooms:'), SearchQueryCore::BATHROOM, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
                 break;
 
             case 'propertySize':
-                $this->oForm->addElement(new \PFBC\Element\Number(t('Size:'), SearchQueryCore::SIZE, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0, 'required' => 1]));
+                $this->oForm->addElement(new \PFBC\Element\Number(t('Size:'), SearchQueryCore::SIZE, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
                 break;
 
             case 'website':
