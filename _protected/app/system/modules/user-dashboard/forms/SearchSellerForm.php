@@ -38,8 +38,7 @@ class SearchSellerForm
         $oForm->configure(['action' => Uri::get('realestate', 'browse', 'seller') . PH7_SH, 'method' => 'get']);
         $oForm->addElement(new \PFBC\Element\Hidden('sex', 'seller'));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
-        $oForm->addElement(new \PFBC\Element\Hidden('sex', 'buyer'));
-        $oForm->addElement(new \PFBC\Element\Hidden('match_sex', 'seller'));
+        $oForm->addElement(new \PFBC\Element\Hidden('sex', 'seller'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', self::$aCityOption));
         $oForm->addElement(new \PFBC\Element\Range(t('Price Range'), SearchQueryCore::PRICE, ['min' => self::MIN_PRICE, 'max' => self::MAX_PRICE, 'step' => self::RANGE_NUMBER_INTERVAL, 'value' => self::VALUE_PRICE]));
         $oForm->addElement(new \PFBC\Element\Number(t('Min Bedrooms:'), SearchQueryCore::BEDROOM, ['min' => 0]));

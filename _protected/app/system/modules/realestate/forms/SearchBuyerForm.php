@@ -33,7 +33,6 @@ class SearchBuyerForm
         $oForm->configure(['action' => Uri::get('realestate', 'browse', 'buyer') . PH7_SH, 'method' => 'get']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_buyer_search', 'form_buyer_search'));
         $oForm->addElement(new \PFBC\Element\Hidden('sex', 'buyer'));
-        $oForm->addElement(new \PFBC\Element\Hidden('match_sex', 'seller'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City'), 'city', self::$aCityOption));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Postal Code'), 'zip_code', ['id' => 'str_zip_code']));
         $oForm->addElement(new \PFBC\Element\Range(t('Price Range'), SearchQueryCore::PRICE, ['min' => Form::MIN_PRICE, 'max' => Form::MAX_PRICE, 'step' => Form::RANGE_NUMBER_INTERVAL, 'value' => Form::VALUE_PRICE]));
