@@ -26,63 +26,49 @@
                     <p>
                         <span class="bold">{lang 'City/Town:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('realestate','browse','index', '?city='.$city) }}">
-                                {city}
-                            </a>
+                            {city}
                         </span>
                     </p>
                 {elseif $key == 'state'}
                     <p>
                         <span class="bold">{lang 'State/Province:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('realestate','browse','index', '?state='.$state) }}">
-                                {state}
-                            </a>
+                            {state}
                         </span>
                     </p>
                 {elseif $key == 'zipCode'}
                     <p>
                         <span class="bold">{lang 'Postal Code:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('realestate','browse','index', '?zip_code='.$val) }}">
-                                {val}
-                            </a>
+                            {val}
                         </span>
                     </p>
                 {elseif $key == 'propertyPrice'}
                     <p>
                         <span class="bold">{lang 'Price:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('realestate','browse','index', '?propertyPrice='.$val) }}">
-                                {val}
-                            </a>
+                            {val}
                         </span>
                     </p>
                 {elseif $key == 'propertyBedrooms'}
                     <p>
                         <span class="bold">{lang 'Bedrooms:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('realestate','browse','index', '?propertyBedrooms='.$val) }}">
-                                {val}
-                            </a>
+                            {val}
                         </span>
                     </p>
                 {elseif $key == 'propertyBathrooms'}
                     <p>
                         <span class="bold">{lang 'Bedrooms:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('realestate','browse','index', '?propertyBathrooms='.$val) }}">
-                                {val}
-                            </a>
+                            {val}
                         </span>
                     </p>
                 {elseif $key == 'propertySize'}
                     <p>
                         <span class="bold">{lang 'Size:'}</span>
                         <span class="italic">
-                            <a href="{{ $design->url('realestate','browse','index', '?propertySize='.$val) }}">
-                                {val}
-                            </a>
+                            {val}
                         </span>
                     </p>
                 {elseif $key == 'website'}
