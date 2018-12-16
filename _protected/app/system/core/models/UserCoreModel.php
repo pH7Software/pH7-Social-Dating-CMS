@@ -341,9 +341,9 @@ class UserCoreModel extends Model
         $sSqlSingleAge = $bIsSingleAge ? ' AND birthDate LIKE :birthDate ' : '';
         $sSqlAge = $bIsAge ? ' AND birthDate BETWEEN DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age2 YEAR) AND DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age1 YEAR) ' : '';
         $sSqlPrice = $bIsPrice ? ' AND (propertyPrice BETWEEN 100 AND :price) ' : '';
-        $sSqlBedroom = $bIsBedroom ? ' AND propertyBedrooms <= :bedrooms ' : '';
-        $sSqlBathroom = $bIsBathroom ? ' AND propertyBathrooms <= :bathrooms ' : '';
-        $sSqlSize = $bIsSize ? ' AND propertySize >= :size ' : '';
+        $sSqlBedroom = $bIsBedroom ? ' AND (propertyBedrooms <= :bedrooms) ' : '';
+        $sSqlBathroom = $bIsBathroom ? ' AND (propertyBathrooms <= :bathrooms) ' : '';
+        $sSqlSize = $bIsSize ? ' AND (propertySize >= :size) ' : '';
         $sSqlCity = $bIsCity ? ' AND LOWER(city) LIKE LOWER(:city) ' : '';
         $sSqlState = $bIsState ? ' AND LOWER(state) LIKE LOWER(:state) ' : '';
         $sSqlZipCode = $bIsZipCode ? ' AND zipCode LIKE :zipCode ' : '';
