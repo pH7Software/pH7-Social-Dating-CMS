@@ -104,7 +104,7 @@ class DynamicFieldCoreForm
             case 'website':
             case 'socialNetworkSite':
                 $sLabel = $this->sColumn === 'socialNetworkSite' ? t('Social Media Profile:') : t('Website:');
-                $sDesc = $this->sColumn === 'socialNetworkSite' ? t('The URL of your social profile, such as Facebook, Instagram, Snapchat, LinkedIn, ...') : t('Your Personal Website/Blog (any promotional/affiliated contents will be removed)');
+                $sDesc = $this->sColumn === 'socialNetworkSite' ? t('The URL of your social profile, such as Facebook, Twitter or LinkedIn.') : t('Your Personal Website/Blog (any promotional/affiliated contents will be removed)');
                 $this->oForm->addElement(new \PFBC\Element\Url($sLabel, $this->sColumn, ['id' => $this->getFieldId('url'), 'onblur' => 'CValid(this.value,this.id)', 'description' => $sDesc, 'value' => $this->sVal]));
                 $this->addCheckErrSpan('url');
                 break;
