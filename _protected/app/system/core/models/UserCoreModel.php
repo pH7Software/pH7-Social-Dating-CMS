@@ -320,7 +320,7 @@ class UserCoreModel extends Model
         $bIsLastName = !$bIsMail && !empty($aParams[SearchQueryCore::LAST_NAME]) && Str::noSpaces($aParams[SearchQueryCore::LAST_NAME]);
         $bIsSingleAge = !$bIsMail && !empty($aParams[SearchQueryCore::AGE]);
         $bIsAge = !$bIsMail && empty($aParams[SearchQueryCore::AGE]) && !empty($aParams[SearchQueryCore::MIN_AGE]) && !empty($aParams[SearchQueryCore::MAX_AGE]);
-        $bIsPrice = !$bIsMail && !empty($aParams[SearchQueryCore::PRICE]);
+        $bIsPrice = !$bIsMail && !empty($aParams[SearchQueryCore::MIN_PRICE]) && !empty($aParams[SearchQueryCore::MAX_PRICE]);
         $bIsBedroom = !$bIsMail && !empty($aParams[SearchQueryCore::BEDROOM]);
         $bIsBathroom = !$bIsMail && !empty($aParams[SearchQueryCore::BATHROOM]);
         $bIsSize = !$bIsMail && !empty($aParams[SearchQueryCore::SIZE]);
@@ -340,7 +340,7 @@ class UserCoreModel extends Model
         $sSqlLastName = $bIsLastName ? ' AND LOWER(lastName) LIKE LOWER(:lastName)' : '';
         $sSqlSingleAge = $bIsSingleAge ? ' AND birthDate LIKE :birthDate ' : '';
         $sSqlAge = $bIsAge ? ' AND birthDate BETWEEN DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age2 YEAR) AND DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age1 YEAR) ' : '';
-        $sSqlPrice = $bIsPrice ? ' AND (propertyPrice BETWEEN 100 AND :price) ' : '';
+        $sSqlPrice = $bIsPrice ? ' AND (propertyPrice BETWEEN :minPrice AND :maxPrice) ' : '';
         $sSqlBedroom = $bIsBedroom ? ' AND (propertyBedrooms <= :bedrooms) ' : '';
         $sSqlBathroom = $bIsBathroom ? ' AND (propertyBathrooms <= :bathrooms) ' : '';
         $sSqlSize = $bIsSize ? ' AND (propertySize >= :size) ' : '';
@@ -402,7 +402,8 @@ class UserCoreModel extends Model
             $rStmt->bindValue(':age2', $aParams[SearchQueryCore::MAX_AGE], \PDO::PARAM_INT);
         }
         if ($bIsPrice) {
-            $rStmt->bindValue(':price', $aParams[SearchQueryCore::PRICE] + SearchQueryCore::PRICE_RESULT_TOLERANCE, \PDO::PARAM_INT);
+            $rStmt->bindValue(':minPrice', $aParams[SearchQueryCore::MIN_PRICE], \PDO::PARAM_INT);
+            $rStmt->bindValue(':maxPrice', $aParams[SearchQueryCore::MAX_PRICE], \PDO::PARAM_INT);
         }
         if ($bIsBedroom) {
             $rStmt->bindValue(':bedrooms', $aParams[SearchQueryCore::BEDROOM], \PDO::PARAM_INT);

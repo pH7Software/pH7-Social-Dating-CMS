@@ -25,6 +25,8 @@ final class SearchQueryCore
     const HEIGHT = 'height';
     const WEIGHT = 'weight';
     const PRICE = 'propertyPrice';
+    const MIN_PRICE = 'minPrice';
+    const MAX_PRICE = 'maxPrice';
     const SIZE = 'propertySize';
     const BEDROOM = 'propertyBedrooms';
     const BATHROOM = 'propertyBathrooms';

@@ -40,7 +40,7 @@ class SearchSellerForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
         $oForm->addElement(new \PFBC\Element\Hidden('sex', 'seller'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', self::$aCityOption));
-        $oForm->addElement(new \PFBC\Element\Range(t('Price Range'), SearchQueryCore::PRICE, ['min' => self::MIN_PRICE, 'max' => self::MAX_PRICE, 'step' => self::RANGE_NUMBER_INTERVAL, 'value' => self::VALUE_PRICE]));
+        $oForm->addElement(new \PFBC\Element\Price(t('Price Range'), SearchQueryCore::PRICE));
         $oForm->addElement(new \PFBC\Element\Number(t('Min Bedrooms:'), SearchQueryCore::BEDROOM, ['min' => 0]));
         $oForm->addElement(new \PFBC\Element\Number(t('Min Bathrooms:'), SearchQueryCore::BATHROOM, ['min' => 0]));
         $oForm->addElement(new \PFBC\Element\Number(t('Size:'), SearchQueryCore::SIZE, ['min' => 0]));
