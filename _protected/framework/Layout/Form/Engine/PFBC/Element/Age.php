@@ -14,8 +14,8 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class Age extends OptionElement
 {
-    const MIN_AGE = 'min_age';
-    const MAX_AGE = 'max_age';
+    const MIN_AGE_TYPE = 'min_age';
+    const MAX_AGE_TYPE = 'max_age';
 
     /** @var string */
     private $sHtmlOutput;
@@ -38,8 +38,8 @@ class Age extends OptionElement
         $this->iMinAge = (int)DbConfig::getSetting('minAgeRegistration');
         $this->iMaxAge = (int)DbConfig::getSetting('maxAgeRegistration');
 
-        $sSelect1 = static::getOptions(static::MIN_AGE);
-        $sSelect2 = static::getOptions(static::MAX_AGE);
+        $sSelect1 = static::getOptions(static::MIN_AGE_TYPE);
+        $sSelect2 = static::getOptions(static::MAX_AGE_TYPE);
 
         $this->sHtmlOutput = '<div class="pfbc-label"><label><strong>*</strong>' . t('Age') . '</label></div><select name="age1">' . $sSelect1 . '</select> - <select name="age2">' . $sSelect2 . '</select> &nbsp; ' . t('years');
     }
@@ -79,7 +79,7 @@ class Age extends OptionElement
      */
     private function isValueSelected($iAge, $sType)
     {
-        $sAttrName = $sType === static::MIN_AGE ? 'iMinAge' : 'iMaxAge';
+        $sAttrName = $sType === static::MIN_AGE_TYPE ? 'iMinAge' : 'iMaxAge';
 
         return !empty($this->attributes['value'][$sType]) && $iAge === $this->attributes['value'][$sType] ||
             empty($this->attributes['value'][$sType]) && $iAge === $this->$sAttrName;
