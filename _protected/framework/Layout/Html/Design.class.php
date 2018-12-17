@@ -716,7 +716,7 @@ class Design
      * Get the Gravatar URL.
      *
      * @param string $sEmail The user email address.
-     * @param string $sType The default image type to show. Default: 'wavatar'
+     * @param string $sType Default image type to show [ 404 | mp | identicon | monsterid | wavatar ]
      * @param int $iSize The size of the image. Default: 80
      * @param string $sRating The max image rating allowed. Default: 'g' (for all)
      * @param bool $bSecure Display avatar via HTTPS, for example if the site uses HTTPS, you should use this option to not get a warning with most Web browsers. Default: FALSE
