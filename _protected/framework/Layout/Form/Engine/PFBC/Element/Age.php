@@ -35,8 +35,8 @@ class Age extends OptionElement
     {
         parent::__construct('', '', [], $aProperties);
 
-        $this->iMinAge = DbConfig::getSetting('minAgeRegistration');
-        $this->iMaxAge = DbConfig::getSetting('maxAgeRegistration');
+        $this->iMinAge = (int)DbConfig::getSetting('minAgeRegistration');
+        $this->iMaxAge = (int)DbConfig::getSetting('maxAgeRegistration');
 
         $sSelect1 = static::getOptions(static::MIN_AGE);
         $sSelect2 = static::getOptions(static::MAX_AGE);
@@ -57,14 +57,11 @@ class Age extends OptionElement
     private function getOptions($sType)
     {
         $sSelect = '';
-        $sAttrName = $sType === static::MIN_AGE ? 'iMinAge' : 'iMaxAge';
 
         for ($iAge = $this->iMinAge; $iAge <= $this->iMaxAge; $iAge++) {
             $sSelect .= '<option value="' . $iAge . '"';
 
-            if (!empty($this->attributes['value'][$sType]) && $iAge == $this->attributes['value'][$sType]
-                || empty($this->attributes['value'][$sType]) && $iAge == $this->$sAttrName
-            ) {
+            if ($this->isValueSelected($iAge, $sType)) {
                 $sSelect .= ' selected="selected"';
             }
 
@@ -72,5 +69,19 @@ class Age extends OptionElement
         }
 
         return $sSelect;
+    }
+
+    /**
+     * @param int $iAge
+     * @param string $sType
+     *
+     * @return bool
+     */
+    private function isValueSelected($iAge, $sType)
+    {
+        $sAttrName = $sType === static::MIN_AGE ? 'iMinAge' : 'iMaxAge';
+
+        return !empty($this->attributes['value'][$sType]) && $iAge === $this->attributes['value'][$sType] ||
+            empty($this->attributes['value'][$sType]) && $iAge === $this->$sAttrName;
     }
 }
