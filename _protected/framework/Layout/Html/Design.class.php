@@ -47,6 +47,7 @@ class Design
 {
     const CACHE_GROUP = 'str/design';
     const CACHE_AVATAR_GROUP = 'str/design/avatar/'; // We put a slash for after creating a directory for each username
+    const CACHE_AVATAR_LIFETIME = 3600;
 
     const NONE_FLAG_FILENAME = 'none.gif';
     const FLAG_ICON_EXT = '.gif';
@@ -624,7 +625,11 @@ class Design
      */
     public function getUserAvatar($sUsername, $sSex = '', $iSize = null, $bPrint = true)
     {
-        $oCache = (new Cache)->start(self::CACHE_AVATAR_GROUP . $sUsername, $sSex . $iSize, 3600);
+        $oCache = (new Cache)->start(
+            self::CACHE_AVATAR_GROUP . $sUsername,
+            $sSex . $iSize,
+            self::CACHE_AVATAR_LIFETIME
+        );
 
         if (!$sUrl = $oCache->get()) {
             $oUserModel = new UserCoreModel;
