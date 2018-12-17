@@ -57,21 +57,28 @@ class Price extends OptionElement
      */
     private function getOptions($sType)
     {
-       Cache::CACHE_DIR
-        $sSelect = '';
-        $sAttrName = ($sType == static::MIN_PRICE) ? 'iMinPrice' : 'iMaxPrice';
+        $oCache = (new Cache)->start('str/form/pfbc', $sType, 31536000);
 
-        for ($iPrice = $this->iMinPrice; $iPrice <= $this->iMaxPrice; $iPrice++) {
-            $sSelect .= '<option value="' . $iPrice . '"';
+        if (!$sSelect = $oCache->get()) {
+            $sSelect = '';
+            $sAttrName = $sType === static::MIN_PRICE ? 'iMinPrice' : 'iMaxPrice';
 
-            if (!empty($this->attributes['value'][$sType]) && $iPrice == $this->attributes['value'][$sType]
-                || empty($this->attributes['value'][$sType]) && $iPrice == $this->$sAttrName
-            ) {
-                $sSelect .= ' selected="selected"';
+            for ($iPrice = $this->iMinPrice; $iPrice <= $this->iMaxPrice; $iPrice++) {
+                $sSelect .= '<option value="' . $iPrice . '"';
+
+                if (
+                    !empty($this->attributes['value'][$sType]) && $iPrice === $this->attributes['value'][$sType] ||
+                    $iPrice === $this->$sAttrName
+                ) {
+                    $sSelect .= ' selected="selected"';
+                }
+
+                $sSelect .= '>' . number_format($iPrice) . '</option>';
             }
 
-            $sSelect .= '>' . number_format($iPrice) . '</option>';
+            $oCache->put($sSelect);
         }
+        unset($oCache);
 
         return $sSelect;
     }
