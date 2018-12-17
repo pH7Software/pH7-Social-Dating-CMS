@@ -16,7 +16,15 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class Price extends OptionElement
 {
-    const MIN_PRICE = 'min_price', MAX_PRICE = 'max_price';
+    const MIN_PRICE_TYPE = 'min_price';
+    const MAX_PRICE_TYPE = 'max_price';
+
+    const CACHE_GROUP = 'str/form/pfbc';
+    const CACHE_LIFETIME = 31536000;
+
+    const MIN_PRICE = 500;
+    const MAX_PRICE = 100000;
+    const RANGE_NUMBER_INTERVAL = 500;
 
     /** @var string */
     private $sHtmlOutput;
@@ -36,11 +44,11 @@ class Price extends OptionElement
     {
         parent::__construct('', '', [], $aProperties);
 
-        $this->iMinPrice = 500;
-        $this->iMaxPrice = 100000;
+        $this->iMinPrice = self::MIN_PRICE;
+        $this->iMaxPrice = self::MAX_PRICE;
 
-        $sSelect1 = static::getOptions(static::MIN_PRICE);
-        $sSelect2 = static::getOptions(static::MAX_PRICE);
+        $sSelect1 = static::getOptions(static::MIN_PRICE_TYPE);
+        $sSelect2 = static::getOptions(static::MAX_PRICE_TYPE);
 
         $this->sHtmlOutput = '<div class="pfbc-label"><label>' . t('Price Range') . '</label></div><select name="minPrice">' . $sSelect1 . '</select> - <select name="maxPrice">' . $sSelect2 . '</select>';
     }
@@ -57,13 +65,17 @@ class Price extends OptionElement
      */
     private function getOptions($sType)
     {
-        $oCache = (new Cache)->start('str/form/pfbc', $sType, 31536000);
+        $oCache = (new Cache)->start(
+            self::CACHE_GROUP,
+            $sType,
+            self::CACHE_LIFETIME
+        );
 
         if (!$sSelect = $oCache->get()) {
             $sSelect = '';
-            $sAttrName = $sType === static::MIN_PRICE ? 'iMinPrice' : 'iMaxPrice';
+            $sAttrName = $sType === static::MIN_PRICE_TYPE ? 'iMinPrice' : 'iMaxPrice';
 
-            for ($iPrice = $this->iMinPrice; $iPrice <= $this->iMaxPrice; $iPrice++) {
+            for ($iPrice = $this->iMinPrice; $iPrice <= $this->iMaxPrice; $iPrice += self::RANGE_NUMBER_INTERVAL) {
                 $sSelect .= '<option value="' . $iPrice . '"';
 
                 if (
