@@ -637,7 +637,7 @@ class Design
             $iProfileId = $oUserModel->getId(null, $sUsername);
             $oGetAvatar = $oUserModel->getAvatar($iProfileId);
 
-            $sSize = ($iSize == '32' || $iSize == '64' || $iSize == '100' || $iSize == '150' || $iSize == '200' || $iSize == '400') ? '-' . $iSize : '';
+            $sSize = ($iSize == 32 || $iSize == 64 || $iSize == 100 || $iSize == 150 || $iSize == 200 || $iSize == 400) ? '-' . $iSize : '';
 
             $sAvatar = @$oGetAvatar->pic;
             $sExt = PH7_DOT . (new File)->getFileExt($sAvatar);
