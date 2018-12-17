@@ -21,13 +21,13 @@ class Price extends OptionElement
     protected $sHtmlOutput;
 
     /** @var int */
-    protected $iMinAge;
+    protected $iMinPrice;
 
     /** @var int */
-    protected $iMaxAge;
+    protected $iMaxPrice;
 
     /**
-     * Generate the select field for age search.
+     * Generate the select field for price search.
      *
      * @param array|null $aProperties
      */
@@ -35,8 +35,8 @@ class Price extends OptionElement
     {
         parent::__construct('', '', [], $aProperties);
 
-        $this->iMinAge = Form::MIN_PRICE;
-        $this->iMaxAge = Form::MAX_PRICE;
+        $this->iMinPrice = Form::MIN_PRICE;
+        $this->iMaxPrice = Form::MAX_PRICE;
 
         $sSelect1 = static::getOptions(static::MIN_PRICE);
         $sSelect2 = static::getOptions(static::MAX_PRICE);
@@ -59,7 +59,7 @@ class Price extends OptionElement
         $sSelect = '';
         $sAttrName = ($sType == static::MIN_PRICE) ? 'iMinPrice' : 'iMaxPrice';
 
-        for ($iPrice = $this->iMinAge; $iPrice <= $this->iMaxAge; $iPrice++) {
+        for ($iPrice = $this->iMinPrice; $iPrice <= $this->iMaxPrice; $iPrice++) {
             $sSelect .= '<option value="' . $iPrice . '"';
 
             if (!empty($this->attributes['value'][$sType]) && $iPrice == $this->attributes['value'][$sType]
