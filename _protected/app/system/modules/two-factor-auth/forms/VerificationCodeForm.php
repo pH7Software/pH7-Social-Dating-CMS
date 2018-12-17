@@ -11,6 +11,7 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Url\Header;
 
 class VerificationCodeForm
 {
@@ -21,7 +22,7 @@ class VerificationCodeForm
                 new VerificationCodeFormProcess((new Http)->get('mod'));
             }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_verification_code');
