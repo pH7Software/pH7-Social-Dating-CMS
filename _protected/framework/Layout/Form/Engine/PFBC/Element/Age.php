@@ -54,7 +54,7 @@ class Age extends OptionElement
      *
      * @return string The age field with the default selected minimum and maximum age registration.
      */
-    protected function getOptions($sType)
+    private function getOptions($sType)
     {
         $sSelect = '';
         $sAttrName = ($sType == static::MIN_AGE) ? 'iMinAge' : 'iMaxAge';
