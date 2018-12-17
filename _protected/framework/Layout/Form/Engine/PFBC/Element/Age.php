@@ -18,13 +18,13 @@ class Age extends OptionElement
     const MAX_AGE = 'max_age';
 
     /** @var string */
-    protected $sHtmlOutput;
+    private $sHtmlOutput;
 
     /** @var int */
-    protected $iMinAge;
+    private $iMinAge;
 
     /** @var int */
-    protected $iMaxAge;
+    private $iMaxAge;
 
     /**
      * Generate the select field for age search.
