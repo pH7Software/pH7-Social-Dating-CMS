@@ -57,7 +57,7 @@ class Age extends OptionElement
     private function getOptions($sType)
     {
         $sSelect = '';
-        $sAttrName = ($sType == static::MIN_AGE) ? 'iMinAge' : 'iMaxAge';
+        $sAttrName = $sType === static::MIN_AGE ? 'iMinAge' : 'iMaxAge';
 
         for ($iAge = $this->iMinAge; $iAge <= $this->iMaxAge; $iAge++) {
             $sSelect .= '<option value="' . $iAge . '"';
