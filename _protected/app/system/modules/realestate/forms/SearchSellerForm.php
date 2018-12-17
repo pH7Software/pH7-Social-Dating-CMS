@@ -41,7 +41,7 @@ class SearchSellerForm
         $oForm->addElement(new \PFBC\Element\Hidden('sex', 'seller'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City'), 'city', self::$aCityOption));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Postal Code'), 'zip_code', ['id' => 'str_zip_code']));
-        $oForm->addElement(new \PFBC\Element\Price(['value' => ['minPrice' => 500, 'maxPrice' => 100000]]));
+        $oForm->addElement(new \PFBC\Element\Price);
         $oForm->addElement(new \PFBC\Element\Number(t('Min Bedrooms'), SearchQueryCore::BEDROOM, ['min' => 0]));
         $oForm->addElement(new \PFBC\Element\Number(t('Min Bathrooms'), SearchQueryCore::BATHROOM, ['min' => 0]));
         $oForm->addElement(new \PFBC\Element\Number(t('Size'), SearchQueryCore::SIZE, ['size' => 0]));
