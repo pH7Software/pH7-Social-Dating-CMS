@@ -11,6 +11,7 @@ namespace PFBC\Element;
 
 use PFBC\OptionElement;
 use PH7\Form;
+use PH7\Framework\Cache\Cache;
 use PH7\Framework\Mvc\Model\DbConfig;
 
 class Price extends OptionElement
@@ -18,13 +19,13 @@ class Price extends OptionElement
     const MIN_PRICE = 'min_price', MAX_PRICE = 'max_price';
 
     /** @var string */
-    protected $sHtmlOutput;
+    private $sHtmlOutput;
 
     /** @var int */
-    protected $iMinPrice;
+    private $iMinPrice;
 
     /** @var int */
-    protected $iMaxPrice;
+    private $iMaxPrice;
 
     /**
      * Generate the select field for price search.
@@ -35,8 +36,8 @@ class Price extends OptionElement
     {
         parent::__construct('', '', [], $aProperties);
 
-        $this->iMinPrice = Form::MIN_PRICE;
-        $this->iMaxPrice = Form::MAX_PRICE;
+        $this->iMinPrice = 500;
+        $this->iMaxPrice = 100000;
 
         $sSelect1 = static::getOptions(static::MIN_PRICE);
         $sSelect2 = static::getOptions(static::MAX_PRICE);
@@ -54,8 +55,9 @@ class Price extends OptionElement
      *
      * @return string The price field with the default selected minimum and maximum price range.
      */
-    protected function getOptions($sType)
+    private function getOptions($sType)
     {
+       Cache::CACHE_DIR
         $sSelect = '';
         $sAttrName = ($sType == static::MIN_PRICE) ? 'iMinPrice' : 'iMaxPrice';
 
@@ -68,7 +70,7 @@ class Price extends OptionElement
                 $sSelect .= ' selected="selected"';
             }
 
-            $sSelect .= '>' . $iPrice . '</option>';
+            $sSelect .= '>' . number_format($iPrice) . '</option>';
         }
 
         return $sSelect;
