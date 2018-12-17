@@ -12,10 +12,9 @@ namespace PFBC\Element;
 use PFBC\OptionElement;
 use PH7\Framework\Mvc\Model\DbConfig;
 
-class Age extends OptionElement
+class Price extends OptionElement
 {
-    const MIN_AGE = 'min_age';
-    const MAX_AGE = 'max_age';
+    const MIN_AGE = 'min_age', MAX_AGE = 'max_age';
 
     /** @var string */
     protected $sHtmlOutput;
