@@ -400,8 +400,6 @@ class UserCoreModel extends Model
         }
         if ($bIsAge) {
             $rStmt->bindValue(':age1', $aParams[SearchQueryCore::MIN_AGE], \PDO::PARAM_INT);
-        }
-        if ($bIsAge) {
             $rStmt->bindValue(':age2', $aParams[SearchQueryCore::MAX_AGE], \PDO::PARAM_INT);
         }
         if ($bIsHeight) {
