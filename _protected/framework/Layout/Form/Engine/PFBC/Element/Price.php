@@ -22,9 +22,9 @@ class Price extends OptionElement
     const CACHE_GROUP = 'str/form/pfbc';
     const CACHE_LIFETIME = 31536000;
 
-    const MIN_PRICE = 500;
-    const MAX_PRICE = 100000;
-    const RANGE_NUMBER_INTERVAL = 500;
+    const MIN_PRICE = 0;
+    const MAX_PRICE = 1000000;
+    const RANGE_NUMBER_INTERVAL = 1000;
 
     /** @var string */
     private $sHtmlOutput;
