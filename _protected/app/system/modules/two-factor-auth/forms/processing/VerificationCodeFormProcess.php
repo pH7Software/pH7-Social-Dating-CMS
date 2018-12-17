@@ -48,7 +48,10 @@ class VerificationCodeFormProcess extends Form
             $sUrl = ($sMod === PH7_ADMIN_MOD) ? Uri::get(PH7_ADMIN_MOD, 'main', 'index') : Uri::get($sMod, 'account', 'index');
             Header::redirect($sUrl, t('You are successfully logged in!'));
         } else {
-            \PFBC\Form::setError('form_verification_code', t('Oops! The Verification Code is incorrect. Please try again.'));
+            \PFBC\Form::setError(
+                'form_verification_code',
+                t('Oops! The Verification Code is incorrect. Please try again.')
+            );
         }
     }
 
