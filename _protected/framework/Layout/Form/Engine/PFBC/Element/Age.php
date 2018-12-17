@@ -52,7 +52,7 @@ class Age extends OptionElement
     /**
      * @param string $sType 'min_age' or 'max_age'
      *
-     * @return string The field age with the default selected minimum and maximum registration age.
+     * @return string The age field with the default selected minimum and maximum age registration.
      */
     protected function getOptions($sType)
     {
