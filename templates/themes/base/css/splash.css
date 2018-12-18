@@ -124,6 +124,10 @@ h1:hover {
     color: #F55959 !important;
 }
 
+#form_login_user label {
+    font-weight: normal !important;
+}
+
 video#bgvid {
     position: fixed;
     top: 50%;
