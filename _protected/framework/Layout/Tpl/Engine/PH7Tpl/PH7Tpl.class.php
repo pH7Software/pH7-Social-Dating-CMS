@@ -792,12 +792,9 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      */
     final private function isMarkCopyright()
     {
-        $cIsFound = function ($sTplFuncName) {
-            return strpos($this->sCode, $sTplFuncName) !== false;
-        };
-
         // "link()" and "softwareComment()" can never be removed
-        return $cIsFound('design->link()') && $cIsFound('design->softwareComment()');
+        return $this->isKeywordFoundInCode('design->link()') &&
+            $this->isKeywordFoundInCode('design->softwareComment()');
     }
 
     /**
@@ -807,7 +804,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      */
     final private function isSmallMarkCopyright()
     {
-        return false !== strpos($this->sCode, 'design->smallLink()');
+        return $this->isKeywordFoundInCode('design->smallLink()');
     }
 
     /**
@@ -818,7 +815,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     final private function notBaseTheme()
     {
         return false === strpos($this->sTemplateDir, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS) &&
-            false !== strpos($this->sCode, '$this->display(\'' . $this->getMainPage() . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS)');
+           $this->isKeywordFoundInCode('$this->display(\'' . $this->getMainPage() . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS)');
     }
 
     /**
@@ -868,6 +865,16 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
         $this->sCacheDir = empty($this->sCacheDir) ? PH7_PATH_CACHE . static::CACHE_DIR . PH7_DS : $this->sCacheDir;
 
         return $this;
+    }
+
+    /**
+     * @param string $sKeyword
+     *
+     * @return bool
+     */
+    private function isKeywordFoundInCode($sKeyword)
+    {
+        return strpos($this->sCode, $sKeyword) !== false;
     }
 
     /**
