@@ -677,7 +677,11 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
             $this->setErrMsg();
         }
 
-        if ($this->isMainCompilePage()) {
+        /**
+         * Skip this step if it's not layout.tpl file or if it's not the base template
+         * (because there isn't "link()" in layout.tpl of other templates as it includes the "base" one).
+         */
+        if ($this->isMainCompilePage() && !$this->notBaseTheme()) {
             // It is forbidden to violate the copyright!
             // Think to me, who has spent years to develop a professional, high-quality software and done my best to help other developers!
             if (!$this->isMarkCopyright()) {
@@ -788,14 +792,12 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      */
     final private function isMarkCopyright()
     {
-        // Skip this step if it's not the base template (because there is no "link()" in layout.tpl of other templates as it includes the "base" one)
-        if ($this->notBaseTheme()) {
-            return true;
-        }
+        $cIsFound = function ($sTplFunc) {
+            return strpos($this->sCode, $sTplFunc) !== false;
+        };
 
         // "link()" and "softwareComment()" can never be removed
-        return false !== strpos($this->sCode, 'design->link()') &&
-            false !== strpos($this->sCode, 'design->softwareComment()');
+        return $cIsFound('design->link()') && $cIsFound('design->softwareComment()');
     }
 
     /**
