@@ -142,7 +142,7 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
      */
     public function getMainPage()
     {
-        return static::MAIN_PAGE . self::TEMPLATE_FILE_EXT;
+        return static::MAIN_PAGE . static::TEMPLATE_FILE_EXT;
     }
 
     /**
