@@ -52,6 +52,7 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
     const XML_SITEMAP_COMPILE_PAGE = 'mainlayout.xsl.cpl.php';
     const TEMPLATE_FILE_EXT = '.tpl';
     const COMPILE_FILE_EXT = '.cpl.php';
+    const CACHE_FILE_EXT = '.cache.html';
 
     const RESERVED_WORDS = [
         'auto_include',
@@ -594,7 +595,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
         $this->sCacheDir2 = $this->sCacheDir . PH7_TPL_NAME . PH7_DS . $this->registry->module . '_' . md5($this->
             registry->path_module) . PH7_DS . PH7_TPL_MOD_NAME . PH7_DS . PH7_LANG_NAME . PH7_DS . $this->getCurrentController() . PH7_DS;
         $this->file->createDir($this->sCacheDir2);
-        $this->sCacheDirFile = $this->sCacheDir2 . str_replace(PH7_DS, '_', $this->file->getFileWithoutExt($this->sTplFile)) . '.cache.html';
+        $this->sCacheDirFile = $this->sCacheDir2 . str_replace(PH7_DS, '_', $this->file->getFileWithoutExt($this->sTplFile)) . static::CACHE_FILE_EXT;
 
         if ($this->hasCacheExpired()) {
             ob_start();
