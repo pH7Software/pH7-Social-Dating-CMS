@@ -41,7 +41,8 @@ class Age extends OptionElement
         $sSelect1 = static::getOptions(static::MIN_AGE_TYPE);
         $sSelect2 = static::getOptions(static::MAX_AGE_TYPE);
 
-        $this->sHtmlOutput = '<div class="pfbc-label"><label><strong>*</strong>' . t('Age') . '</label></div><select name="age1">' . $sSelect1 . '</select> - <select name="age2">' . $sSelect2 . '</select> &nbsp; ' . t('years');
+        $this->sHtmlOutput = '<div class="pfbc-label"><label><strong>*</strong>' . t('Age Range') . '</label></div>';
+        $this->sHtmlOutput .= '<select name="age1">' . $sSelect1 . '</select> - <select name="age2">' . $sSelect2 . '</select>';
     }
 
     public function render()

@@ -10309,7 +10309,7 @@ msgid "You must enter a valid login ID and password to access this resource."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Element/Age.php:43
-msgid "Age"
+msgid "Age Range"
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Element/Age.php:43
