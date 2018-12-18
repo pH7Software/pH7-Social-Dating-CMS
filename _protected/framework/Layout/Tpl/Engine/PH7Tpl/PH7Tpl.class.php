@@ -792,8 +792,8 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      */
     final private function isMarkCopyright()
     {
-        $cIsFound = function ($sTplFunc) {
-            return strpos($this->sCode, $sTplFunc) !== false;
+        $cIsFound = function ($sTplFuncName) {
+            return strpos($this->sCode, $sTplFuncName) !== false;
         };
 
         // "link()" and "softwareComment()" can never be removed
