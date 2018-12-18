@@ -36,9 +36,9 @@ class SearchSellerForm
         $oForm->addElement(new \PFBC\Element\Hidden('sex', 'seller'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', self::$aCityOption));
         $oForm->addElement(new \PFBC\Element\Price);
-        $oForm->addElement(new \PFBC\Element\Number(t('Min Bedrooms:'), SearchQueryCore::BEDROOM, ['min' => 0]));
-        $oForm->addElement(new \PFBC\Element\Number(t('Min Bathrooms:'), SearchQueryCore::BATHROOM, ['min' => 0]));
-        $oForm->addElement(new \PFBC\Element\Number(t('Size:'), SearchQueryCore::SIZE, ['min' => 0]));
+        $oForm->addElement(new \PFBC\Element\Number(t('Min Bedrooms:'), SearchQueryCore::BEDROOM, ['value' => 0, 'min' => 0]));
+        $oForm->addElement(new \PFBC\Element\Number(t('Min Bathrooms:'), SearchQueryCore::BATHROOM, ['value' => 0, 'min' => 0]));
+        $oForm->addElement(new \PFBC\Element\Number(t('Size:'), SearchQueryCore::SIZE, ['value' => 0, 'min' => 0]));
         //$oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', [SearchCoreModel::LATEST => t('Latest Members'), SearchCoreModel::LAST_ACTIVITY => t('Last Activity'), SearchCoreModel::VIEWS => t('Most Popular'), SearchCoreModel::RATING => t('Top Rated'), SearchCoreModel::USERNAME => t('Username'), SearchCoreModel::FIRST_NAME => t('First Name'), SearchCoreModel::LAST_NAME => t('Last Name'), SearchCoreModel::EMAIL => t('Email')]));
         $oForm->addElement(new \PFBC\Element\Select(t('Search Direction:'), 'sort', [SearchCoreModel::DESC => t('Descending'), SearchCoreModel::ASC => t('Ascending')]));
         $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', ['icon' => 'search']));
