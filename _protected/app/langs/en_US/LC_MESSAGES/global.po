@@ -1583,14 +1583,14 @@ msgstr ""
 #: _protected/app/system/core/models/design/UserDesignCoreModel.php:83
 #: _protected/app/system/core/models/design/UserDesignCoreModel.php:121
 #: _protected/app/system/core/models/design/UserDesignCoreModel.php:123
-msgid "I am a %0% and I am looking %1%."
+msgid "I'm a %0% and I'm looking for %1%."
 msgstr ""
 
 #: _protected/app/system/core/models/design/UserDesignCoreModel.php:81
 #: _protected/app/system/core/models/design/UserDesignCoreModel.php:83
 #: _protected/app/system/core/models/design/UserDesignCoreModel.php:121
 #: _protected/app/system/core/models/design/UserDesignCoreModel.php:123
-msgid "I from %0%, %1%."
+msgid "I'm from %0%, %1%."
 msgstr ""
 
 #: _protected/app/system/core/models/design/UserDesignCoreModel.php:81
