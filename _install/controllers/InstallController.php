@@ -138,7 +138,7 @@ class InstallController extends Controller
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['path_protected'])) {
                 $_SESSION['val']['path_protected'] = check_ext_start(check_ext_end(trim($_POST['path_protected'])));
 
-                if (is_dir($_SESSION['val']['path_protected'])) {
+                if (is_file($_SESSION['val']['path_protected'] . 'app/configs/constants.php')) {
                     if (is_readable($_SESSION['val']['path_protected'])) {
                         $sConstantContent = file_get_contents(PH7_ROOT_INSTALL . 'data/configs/constants.php');
 
