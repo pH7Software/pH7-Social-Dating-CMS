@@ -88,8 +88,8 @@ class UserDesignCoreModel extends Design
     }
 
     /**
-     * @param integer $iOffset
-     * @param integer $iLimit
+     * @param int $iOffset
+     * @param int $iLimit
      */
     public function carouselProfiles($iOffset = UserCoreModel::OFFLINE_STATUS, $iLimit = self::CAROUSEL_PROFILE_LIMIT)
     {
@@ -130,8 +130,8 @@ class UserDesignCoreModel extends Design
     }
 
     /**
-     * @param integer $iOffset
-     * @param integer $iLimit
+     * @param int $iOffset
+     * @param int $iLimit
      */
     public function profilesBlock($iOffset = UserCoreModel::OFFLINE_STATUS, $iLimit = self::PROFILE_BLOCK_LIMIT)
     {
@@ -156,8 +156,8 @@ class UserDesignCoreModel extends Design
     }
 
     /**
-     * @param integer $iOffset
-     * @param integer $iLimit
+     * @param int $iOffset
+     * @param int $iLimit
      */
     public function profiles($iOffset = UserCoreModel::OFFLINE_STATUS, $iLimit = self::PROFILE_LIMIT)
     {
@@ -172,7 +172,7 @@ class UserDesignCoreModel extends Design
     }
 
     /**
-     * @param integer $iProfileId
+     * @param int $iProfileId
      */
     public static function userStatus($iProfileId)
     {
