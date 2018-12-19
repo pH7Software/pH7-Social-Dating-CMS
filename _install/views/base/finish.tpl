@@ -8,7 +8,7 @@
 
 {if !empty($admin_login_email) && !empty($admin_username)}
     <ul>
-        <li>{$LANG.admin_url}: <a href="{$smarty.const.PH7_URL_ROOT}{$smarty.const.PH7_ADMIN_MOD}" target="_blank"><strong class="text-info">{$smarty.const.PH7_URL_ROOT}{$smarty.const.PH7_ADMIN_MOD}</strong></a></li>
+        <li>{$LANG.admin_url}: <a class="underline" href="{$smarty.const.PH7_URL_ROOT}{$smarty.const.PH7_ADMIN_MOD}" target="_blank"><strong class="text-info">{$smarty.const.PH7_URL_ROOT}{$smarty.const.PH7_ADMIN_MOD}</strong></a></li>
         <li>{$LANG.admin_login_email}: <strong class="text-info">{$admin_login_email|escape}</strong></li>
         <li>{$LANG.admin_username}: <strong class="text-info">{$admin_username|escape}</strong></li>
     </ul>
