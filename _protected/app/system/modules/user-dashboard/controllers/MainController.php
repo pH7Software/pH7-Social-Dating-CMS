@@ -26,8 +26,7 @@ class MainController extends Controller
         );
 
         if (SysMod::isEnabled('friend')) {
-            // Add the JavaScript file for the Ajax Friend block
-            $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . 'friend' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'friend.js');
+            $this->addFriendJsFile();
         }
 
         $this->view->username = $this->session->get('member_username');
@@ -37,5 +36,18 @@ class MainController extends Controller
         $this->view->userDesignModel = new UserDesignModel; // For the profilesBlock
 
         $this->output();
+    }
+
+    /**
+     * Add the JS file for the Ajax Friend block (if friend module is enabled).
+     *
+     * @return void
+     */
+    private function addFriendJsFile()
+    {
+        $this->design->addJs(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . 'friend' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
+            'friend.js'
+        );
     }
 }
