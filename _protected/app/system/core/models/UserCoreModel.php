@@ -1065,9 +1065,9 @@ class UserCoreModel extends Model
 
         $rStmt = Db::getInstance()->prepare(
             'SELECT * FROM' . Db::prefix(DbTableName::MEMBER) . 'AS m LEFT JOIN' . Db::prefix(DbTableName::MEMBER_PRIVACY) . 'AS p USING(profileId)
-            LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) . 'AS i USING(profileId) WHERE (username <> :ghostUsername) AND (searchProfile = \'yes\')
-            AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL)
-            AND (city IS NOT NULL) AND (groupId <> :visitorGroup) AND (groupId <> :pendingGroup) AND (ban = 0)' .
+            LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) . 'AS i USING(profileId) WHERE (username <> :ghostUsername) AND
+            (searchProfile = \'yes\') AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND
+            (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId <> :visitorGroup) AND (groupId <> :pendingGroup) AND (ban = 0)' .
             $sSqlHideLoggedProfile . $sSqlShowOnlyWithAvatars . $sOrder . $sSqlLimit
         );
 
