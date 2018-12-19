@@ -145,7 +145,11 @@ class UserDesignCoreModel extends Design
         foreach ($oUsers as $oUser) {
             $sFirstName = $this->oStr->upperFirst($oUser->firstName);
 
-            echo '<li><a rel="nofollow" href="', $this->oUser->getProfileSignupLink($oUser->username, $sFirstName, $oUser->sex), '"><img src="', $this->getUserAvatar($oUser->username, $oUser->sex, self::PROFILE_BLOCK_AVATAR_SIZE), '" alt="', t('Meet %0% on %site_name%', $oUser->username), '" /></a></li>';
+            echo '<li>';
+            echo '<a rel="nofollow" href="', $this->oUser->getProfileSignupLink($oUser->username, $sFirstName, $oUser->sex), '">';
+            echo '<img src="', $this->getUserAvatar($oUser->username, $oUser->sex, self::PROFILE_BLOCK_AVATAR_SIZE), '" alt="', t('Meet %0% on %site_name%', $oUser->username), '" />';
+            echo '</a>';
+            echo '</li>';
         }
 
         echo '</ul>';
