@@ -27,8 +27,8 @@ class UserDesignModel extends UserDesignCoreModel
                 $sTitleInfo = t('Meet %0%, from %1%', $oRow->username, $sCity);
 
                 echo '<li>
-                    <a title="', $sTitleInfo, '" href="', $this->oUser->getProfileSignupLink($oRow->username, $sFirstName, $oRow->sex), '">
-                        <img src="', $this->getUserAvatar($oRow->username, $oRow->sex, $iSize), '" width="', $iSize, '" height="', $iSize, '" alt="', $sTitleInfo, '" class="avatar" />
+                    <a href="', $this->oUser->getProfileSignupLink($oRow->username, $sFirstName, $oRow->sex), '">
+                        <img title="', $sTitleInfo, '" src="', $this->getUserAvatar($oRow->username, $oRow->sex, $iSize), '" width="', $iSize, '" height="', $iSize, '" alt="', $sTitleInfo, '" class="avatar" />
                     </a>
                 </li>';
             }
