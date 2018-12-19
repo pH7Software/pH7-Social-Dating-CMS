@@ -28,7 +28,7 @@ class UserDesignModel extends UserDesignCoreModel
 
                 echo '<li>
                     <a href="', $this->oUser->getProfileSignupLink($oRow->username, $sFirstName, $oRow->sex), '">
-                        <img title="', $sTitleInfo, '" src="', $this->getUserAvatar($oRow->username, $oRow->sex, $iSize), '" width="', $iSize, '" height="', $iSize, '" alt="', $sTitleInfo, '" class="avatar" />
+                        <img src="', $this->getUserAvatar($oRow->username, $oRow->sex, $iSize), '" alt="', $sTitleInfo, '" title="', $sTitleInfo, '" width="', $iSize, '" height="', $iSize, '" class="avatar" />
                     </a>
                 </li>';
             }
