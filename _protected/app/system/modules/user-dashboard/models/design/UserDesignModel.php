@@ -24,10 +24,11 @@ class UserDesignModel extends UserDesignCoreModel
             foreach ($oUser as $oRow) {
                 $sFirstName = $this->oStr->upperFirst($oRow->firstName);
                 $sCity = $this->oStr->upperFirst($oRow->city);
+                $sTitleInfo = t('Meet %0%, from %1%', $oRow->username, $sCity);
 
                 echo '<li>
-                    <a rel="nofollow" href="', $this->oUser->getProfileSignupLink($oRow->username, $sFirstName, $oRow->sex), '">
-                        <img src="', $this->getUserAvatar($oRow->username, $oRow->sex, $iSize), '" width="', $iSize, '" height="', $iSize, '" alt="', t('Meet %0% on %site_name%', $oRow->username), '" class="avatar" />
+                    <a title="', $sTitleInfo, '" href="', $this->oUser->getProfileSignupLink($oRow->username, $sFirstName, $oRow->sex), '">
+                        <img src="', $this->getUserAvatar($oRow->username, $oRow->sex, $iSize), '" width="', $iSize, '" height="', $iSize, '" alt="', $sTitleInfo, '" class="avatar" />
                     </a>
                 </li>';
             }
