@@ -313,8 +313,10 @@ class File
         } else {
             if (!is_dir($mDir)) {
                 if (!@mkdir($mDir, $iMode, true)) {
+                    $sExceptMessage = 'Cannot create "%s" directory.<br /> Please verify that the directory permission is in writing mode.';
+
                     throw new PermissionException(
-                        sprintf('Cannot create "%s" directory.<br /> Please verify that the directory permission is in writing mode.', $mDir)
+                        sprintf($sExceptMessage, $mDir)
                     );
                 }
             }
