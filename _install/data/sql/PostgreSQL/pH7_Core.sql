@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS ph7_members (
   UNIQUE KEY (username),
   UNIQUE KEY (email),
   KEY birthDate (birthDate)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ;
 
 
 CREATE SEQUENCE ph7_members_info_seq;
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS ph7_members_privacy (
   userSaveViews enum('yes','no') NOT NULL DEFAULT 'yes',
   PRIMARY KEY (profileId),
   FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ;
 
 
 CREATE TABLE IF NOT EXISTS ph7_members_notifications (
@@ -437,7 +437,7 @@ CREATE TABLE IF NOT EXISTS ph7_blogs (
   postId varchar(60) NOT NULL,
   langId char(2) NOT NULL DEFAULT '',
   title varchar(100) DEFAULT NULL,
-  content longtext NOT NULL,
+  content text NOT NULL,
   pageTitle varchar(100) NOT NULL,
   metaDescription varchar(255) NOT NULL,
   metaKeywords varchar(255) NOT NULL,
@@ -512,7 +512,7 @@ CREATE TABLE IF NOT EXISTS ph7_notes (
   postId varchar(60) NOT NULL,
   langId char(2) NOT NULL DEFAULT '',
   title varchar(100) DEFAULT NULL,
-  content longtext NOT NULL,
+  content text NOT NULL,
   pageTitle varchar(100) NOT NULL,
   metaDescription varchar(255) NOT NULL,
   metaKeywords varchar(255) NOT NULL,
@@ -807,10 +807,10 @@ CREATE SEQUENCE ph7_log_error_seq;
 
 CREATE TABLE IF NOT EXISTS ph7_log_error (
   logId mediumint check (logId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_log_error_seq'),
-  logError longtext,
+  logError text,
   PRIMARY KEY (logId),
-  FULLTEXT KEY logError (logError) -- FULLTEXT is not supported by InnoDB in MySQL < 5.6.4, so set MyISAM engine
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+  KEY logError (logError)
+) ;
 
 
 CREATE SEQUENCE ph7_admins_attempts_login_seq;
@@ -916,7 +916,7 @@ CREATE TABLE IF NOT EXISTS ph7_admins_log_sess (
   FOREIGN KEY (profileId) REFERENCES ph7_admins(profileId),
   KEY sessionHash (sessionHash),
   KEY lastActivity (lastActivity)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ;
 
 
 CREATE TABLE IF NOT EXISTS ph7_members_log_sess (
@@ -938,7 +938,7 @@ CREATE TABLE IF NOT EXISTS ph7_members_log_sess (
   FOREIGN KEY (profileId) REFERENCES ph7_members(profileId),
   KEY sessionHash (sessionHash),
   KEY lastActivity (lastActivity)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ;
 
 
 CREATE TABLE IF NOT EXISTS ph7_affiliates_log_sess (
@@ -960,7 +960,7 @@ CREATE TABLE IF NOT EXISTS ph7_affiliates_log_sess (
   FOREIGN KEY (profileId) REFERENCES ph7_affiliates(profileId),
   KEY sessionHash (sessionHash),
   KEY lastActivity (lastActivity)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ;
 
 
 CREATE TABLE IF NOT EXISTS ph7_members_background (
@@ -969,7 +969,7 @@ CREATE TABLE IF NOT EXISTS ph7_members_background (
   approved smallint check (approved > 0) NOT NULL DEFAULT '1',
   PRIMARY KEY profileId (profileId),
   FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ;
 
 
 CREATE TABLE IF NOT EXISTS ph7_members_who_views (
