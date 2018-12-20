@@ -263,7 +263,10 @@ class Http extends \PH7\Framework\Http\Http
     public function post($sKey, $sParam = null, $bStrip = true)
     {
         if ($this->getMethod() !== self::METHOD_POST) {
-            throw new WrongRequestMethodException('POST', WrongRequestMethodException::POST_METHOD);
+            throw new WrongRequestMethodException(
+                'POST',
+                WrongRequestMethodException::POST_METHOD
+            );
         }
 
         if (!isset($this->aPost[$sKey])) {
@@ -317,7 +320,11 @@ class Http extends \PH7\Framework\Http\Http
      */
     public function currentController()
     {
-        return str_replace('controller', '', strtolower(Registry::getInstance()->controller));
+        return str_replace(
+            'controller',
+            '',
+            strtolower(Registry::getInstance()->controller)
+        );
     }
 
     /**
@@ -434,6 +441,10 @@ class Http extends \PH7\Framework\Http\Http
      */
     private function clearCSRFToken(&$aType, $sKey)
     {
-        return preg_replace('#(\?|&)' . Secty\CSRF\Token::VAR_NAME . '\=[^/]+$#', '', $aType[$sKey]);
+        return preg_replace(
+            '#(\?|&)' . Secty\CSRF\Token::VAR_NAME . '\=[^/]+$#',
+            '',
+            $aType[$sKey]
+        );
     }
 }
