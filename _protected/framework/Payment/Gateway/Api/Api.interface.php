@@ -36,7 +36,7 @@ interface Api
      * @param string $sOptionalParam1 Default ''
      * @param string $sOptionalParam2 Default ''
      *
-     * @return boolean
+     * @return bool
      */
     public function valid($sOptionalParam1 = '', $sOptionalParam2 = '');
 }

@@ -44,7 +44,7 @@ class Paypal extends Provider implements Api
 
 
     /**
-     * @param boolean $bSandbox Default FALSE
+     * @param bool $bSandbox Default FALSE
      */
     public function __construct($bSandbox = false)
     {
@@ -63,6 +63,7 @@ class Paypal extends Provider implements Api
      * @param string $sParam
      *
      * @return string
+     *
      * @internal We added an empty parameter for the method only to be compatible with the API interface.
      */
     public function getUrl($sParam = '')
@@ -86,7 +87,8 @@ class Paypal extends Provider implements Api
      * @param string $sParam1
      * @param string $sParam2
      *
-     * @return boolean
+     * @return bool
+     *
      * @internal We added two empty parameters for the method only to be compatible with the API interface.
      */
     public function valid($sParam1 = '', $sParam2 = '')
@@ -126,7 +128,7 @@ class Paypal extends Provider implements Api
     /**
      * Connect to PayPal.
      *
-     * @return boolean|string Message from the transaction status on success or FALSE on failure.
+     * @return bool|string Message from the transaction status on success or FALSE on failure.
      */
     protected function getStatus()
     {
