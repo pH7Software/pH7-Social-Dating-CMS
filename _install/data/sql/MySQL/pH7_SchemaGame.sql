@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS ph7_games (
   score float unsigned DEFAULT '0',
   views int(10) unsigned DEFAULT '0',
   PRIMARY KEY (gameId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS ph7_games_categories (
@@ -32,4 +32,4 @@ CREATE TABLE IF NOT EXISTS ph7_games_categories (
   name varchar(40) NOT NULL DEFAULT '',
   PRIMARY KEY (categoryId),
   UNIQUE KEY (name)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
