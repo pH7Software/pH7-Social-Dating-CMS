@@ -392,9 +392,11 @@ class Validate
     public function hex($sHexCode)
     {
         $sHexChars = str_replace(self::HEX_HASH, '', $sHexCode);
-        $iLength = strlen($sHexChars);
+        $iHexCharsLength = strlen($sHexChars);
 
-        return strpos($sHexCode, self::HEX_HASH) !== false && $iLength >= self::MIN_HEX_LENGTH && $iLength <= self::MAX_HEX_LENGTH;
+        return strpos($sHexCode, self::HEX_HASH) !== false &&
+            $iHexCharsLength >= self::MIN_HEX_LENGTH &&
+            $iHexCharsLength <= self::MAX_HEX_LENGTH;
     }
 
     /**
