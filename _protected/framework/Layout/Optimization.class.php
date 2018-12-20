@@ -32,6 +32,7 @@ class Optimization
         $sMimeType = $oFile->getMimeType($sExt);
 
         $sBase64 = base64_encode(file_get_contents($sFile));
+
         return "data:$sMimeType;base64,$sBase64";
     }
 
