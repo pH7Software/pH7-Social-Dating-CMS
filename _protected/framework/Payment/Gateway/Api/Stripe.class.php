@@ -20,13 +20,20 @@ class Stripe extends Provider implements Api
     /**
      * Get the Form Action URL.
      *
+     * @param string $sParam
+     *
      * @return string
      *
-     * @internal We add an empty parameter for the method to be compatible with the API interface.
+     * @internal We add an empty $sParam param for the method to be compatible with the API interface.
      */
     public function getUrl($sParam = '')
     {
-        return Uri::get('payment', 'main', 'process', 'stripe');
+        return Uri::get(
+            'payment',
+            'main',
+            'process',
+            'stripe'
+        );
     }
 
     public function getMsg()

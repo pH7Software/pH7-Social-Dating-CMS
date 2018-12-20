@@ -33,7 +33,7 @@ abstract class Provider
     /**
      * Generate Output.
      *
-     * @return string HTML tags
+     * @return string HTML tags.
      */
     public function generate()
     {
