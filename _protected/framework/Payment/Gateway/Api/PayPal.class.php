@@ -178,6 +178,7 @@ class Paypal extends Provider implements Api
     protected function setUrlData($sName, $sValue)
     {
         $this->sRequest .= '&' . $sName . '=' . Url::encode($sValue);
+
         return $this;
     }
 
