@@ -4900,7 +4900,7 @@ msgstr ""
 
 #: _protected/app/system/modules/field/forms/AddFieldForm.php:34
 #: _protected/app/system/modules/field/forms/EditFieldForm.php:35
-msgid "Length of the field in numeric number (e.g., 250)."
+msgid "Length of the field in numeric number (e.g., 150)."
 msgstr ""
 
 #: _protected/app/system/modules/field/forms/AddFieldForm.php:35
@@ -4925,7 +4925,7 @@ msgstr ""
 
 #: _protected/app/system/modules/field/forms/EditFieldForm.php:35
 msgid ""
-"Note: The field will always have the default value (255) even if you updated "
+"Note: The field will always have the default value (%0%) even if you updated "
 "to another value. Your change is saved, but cannot be retrieve on the form."
 msgstr ""
 
