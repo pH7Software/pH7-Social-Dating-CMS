@@ -77,7 +77,8 @@ class EditNoteForm
                 )
             );
             $oForm->addElement(
-                new \PFBC\Element\Textbox(t('Article ID:'),
+                new \PFBC\Element\Textbox(
+                    t('Article ID:'),
                     'post_id',
                     ['value' => $oPost->postId,
                         'description' => Uri::get('note', 'main', 'read', (new Session)->get('member_username')) . '/<strong><span class="your-address">' . $oPost->postId . '</span><span class="post_id"></span></strong>',
