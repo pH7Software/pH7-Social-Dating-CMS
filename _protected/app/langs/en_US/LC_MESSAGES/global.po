@@ -2937,7 +2937,7 @@ msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:68
 msgid ""
-"Be careful! 'Full Ajax Navigation' feature is still in <strong>Beta version</"
+"Be careful! 'Full Ajax Navigation' feature is still in <strong>beta version</"
 "strong> and may not be working properly on all pages."
 msgstr ""
 
