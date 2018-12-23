@@ -36,9 +36,9 @@ final class Version
      * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa", 12.* was "PHS" and 14.* is "pKb"
      */
     const KERNEL_VERSION_NAME = 'pKb';
-    const KERNEL_VERSION = '14.8.8';
+    const KERNEL_VERSION = '14.8.9';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELEASE_DATE = '2018-12-24';
+    const KERNEL_RELEASE_DATE = '2018-12-28';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7CMS.com';
