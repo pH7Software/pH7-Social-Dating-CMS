@@ -65,7 +65,7 @@ $LANG = array(
     'desc_db_prefix' => 'This option is useful when you have multiple installations of pH7CMS on the same database.
         We also recommend that you change the default value ​​in order to increase the security of your website.',
     'db_encoding' => 'Encoding',
-    'desc_db_encoding' => 'Database encoding. Usually UTF8 encoding for international.',
+    'desc_db_encoding' => 'Database encoding. Leave utf8mb4 for international encoding (supporting emojis).',
     'db_port' => 'Database host port number',
     'desc_db_port' => 'Please leave to "3306" if you don\'t know.',
     'ffmpeg_path' => 'The path to the FFmpeg executable (if you don\'t know where it is, please ask your hosting)',

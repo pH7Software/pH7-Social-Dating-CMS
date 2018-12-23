@@ -17,5 +17,5 @@ final class DbDefaultConfig
     const NAME = 'ph7cms';
     const PREFIX = 'ph7_';
     const PORT = 3306;
-    const CHARSET = 'UTF8';
+    const CHARSET = 'utf8mb4';
 }

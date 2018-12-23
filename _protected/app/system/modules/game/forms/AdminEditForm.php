@@ -49,8 +49,8 @@ class AdminEditForm
             $oForm->addElement(new \PFBC\Element\Select(t('Category Name:'), 'category_id', $aCategoriesName, ['value' => $oGame->categoryId, 'required' => 1]));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Name of the Game:'), 'name', ['value' => $oGame->name, 'pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern), 'required' => 1]));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Title of the Game:'), 'title', ['value' => $oGame->title, 'validation' => new \PFBC\Validation\Str(2, 120), 'required' => 1]));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Description:'), 'description', ['value' => $oGame->description, 'validation' => new \PFBC\Validation\Str(2, 255), 'required' => 1]));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Keywords:'), 'keywords', ['value' => $oGame->keywords, 'validation' => new \PFBC\Validation\Str(2, 255), 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Description:'), 'description', ['value' => $oGame->description, 'validation' => new \PFBC\Validation\Str(2, 190), 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Keywords:'), 'keywords', ['value' => $oGame->keywords, 'validation' => new \PFBC\Validation\Str(2, 190), 'required' => 1]));
             $oForm->addElement(new \PFBC\Element\Button);
             $oForm->render();
         } else {
