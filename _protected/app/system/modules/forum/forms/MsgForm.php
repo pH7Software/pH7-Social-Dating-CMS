@@ -39,7 +39,19 @@ class MsgForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_msg', 'form_msg'));
         $oForm->addElement(new \PFBC\Element\Token('msg'));
         $oForm->addElement(new \PFBC\Element\Select(t('Forum:'), 'forum', $aForumsName, ['value' => (new Http)->get('forum_id')]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Subject:'), 'title', ['id' => 'str_title', 'onblur' => 'CValid(this.value,this.id,2,60)', 'pattern' => $sTitlePattern, 'required' => 1, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern)]));
+        $oForm->addElement(
+            new \PFBC\Element\Textbox(
+                t('Subject:'),
+                'title',
+                [
+                    'id' => 'str_title',
+                    'onblur' => 'CValid(this.value,this.id,2,60)',
+                    'pattern' => $sTitlePattern,
+                    'required' => 1,
+                    'validation' => new \PFBC\Validation\RegExp($sTitlePattern)
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_title"></span>'));
         $oForm->addElement(new \PFBC\Element\CKEditor(t('Message:'), 'message', ['required' => 1, 'validation' => new \PFBC\Validation\Str(4)]));
 
