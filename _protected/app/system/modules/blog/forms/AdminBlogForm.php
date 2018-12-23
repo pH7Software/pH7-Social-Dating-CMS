@@ -41,7 +41,19 @@ class AdminBlogForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_blog', 'form_blog'));
         $oForm->addElement(new \PFBC\Element\Token('blog'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Article name:'), 'title', ['validation' => new \PFBC\Validation\Str(2, 60), 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Article ID:'), 'post_id', ['description' => Uri::get('blog', 'main', 'index') . '/<strong><span class="your-address">' . t('your-address') . '</span><span class="post_id"></span></strong>', 'title' => t('Article ID will be the name of the URL.'), 'id' => 'post_id', 'validation' => new \PFBC\Validation\Str(2, 60), 'required' => 1]));
+        $oForm->addElement(
+            new \PFBC\Element\Textbox(
+                t('Article ID:'),
+                'post_id',
+                [
+                    'description' => Uri::get('blog', 'main', 'index') . '/<strong><span class="your-address">' . t('your-address') . '</span><span class="post_id"></span></strong>',
+                    'title' => t('Article ID will be the name of the URL.'),
+                    'id' => 'post_id',
+                    'validation' => new \PFBC\Validation\Str(2, 60),
+                    'required' => 1
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="label_flow">'));
         $oForm->addElement(new \PFBC\Element\Checkbox(t('Categories:'), 'category_id', $aCategoryNames, ['description' => t('Select a category that fits the best for your article.'), 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));

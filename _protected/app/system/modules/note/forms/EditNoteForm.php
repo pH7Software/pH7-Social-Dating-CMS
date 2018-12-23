@@ -65,8 +65,30 @@ class EditNoteForm
             $oForm->configure(['action' => '']);
             $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_note', 'form_edit_note'));
             $oForm->addElement(new \PFBC\Element\Token('edit_note'));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Article name:'), 'title', ['value' => $oPost->title, 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1]));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Article ID:'), 'post_id', ['value' => $oPost->postId, 'description' => Uri::get('note', 'main', 'read', (new Session)->get('member_username')) . '/<strong><span class="your-address">' . $oPost->postId . '</span><span class="post_id"></span></strong>', 'title' => t('Article ID will be the name of the URL.'), 'data-profile_id' => $iProfileId, 'id' => 'post_id', 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1]));
+            $oForm->addElement(
+                new \PFBC\Element\Textbox(
+                    t('Article name:'),
+                    'title',
+                    [
+                        'value' => $oPost->title,
+                        'validation' => new \PFBC\Validation\Str(2, 50),
+                        'required' => 1
+                    ]
+                )
+            );
+            $oForm->addElement(
+                new \PFBC\Element\Textbox(t('Article ID:'),
+                    'post_id',
+                    ['value' => $oPost->postId,
+                        'description' => Uri::get('note', 'main', 'read', (new Session)->get('member_username')) . '/<strong><span class="your-address">' . $oPost->postId . '</span><span class="post_id"></span></strong>',
+                        'title' => t('Article ID will be the name of the URL.'),
+                        'data-profile_id' => $iProfileId,
+                        'id' => 'post_id',
+                        'validation' => new \PFBC\Validation\Str(2, 50),
+                        'required' => 1
+                    ]
+                )
+            );
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="label_flow">'));
             $oForm->addElement(new \PFBC\Element\Checkbox(t('Categories:'), 'category_id', $aCategoryNames, ['description' => t('Select a category that fits the best for your article. You can select up to three different categories'), 'value' => $aSelectedCategories, 'required' => 1]));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));

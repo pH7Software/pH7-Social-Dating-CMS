@@ -43,7 +43,20 @@ class NoteForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_note', 'form_note'));
         $oForm->addElement(new \PFBC\Element\Token('note'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Article name:'), 'title', ['validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Article ID:'), 'post_id', ['description' => Uri::get('note', 'main', 'read', (new Session)->get('member_username')) . '/<strong><span class="your-address">' . t('your-address') . '</span><span class="post_id"></span></strong>', 'title' => t('Article ID will be the name of the URL.'), 'data-profile_id' => (new Session)->get('member_id'), 'id' => 'post_id', 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1]));
+        $oForm->addElement(
+            new \PFBC\Element\Textbox(
+                t('Article ID:'),
+                'post_id',
+                [
+                    'description' => Uri::get('note', 'main', 'read', (new Session)->get('member_username')) . '/<strong><span class="your-address">' . t('your-address') . '</span><span class="post_id"></span></strong>',
+                    'title' => t('Article ID will be the name of the URL.'),
+                    'data-profile_id' => (new Session)->get('member_id'),
+                    'id' => 'post_id',
+                    'validation' => new \PFBC\Validation\Str(2, 50),
+                    'required' => 1
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="label_flow">'));
         $oForm->addElement(new \PFBC\Element\Checkbox(t('Categories:'), 'category_id', $aCategoryNames, ['description' => t('Select a category that fits the best for your article. You can select up to three different categories'), 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
