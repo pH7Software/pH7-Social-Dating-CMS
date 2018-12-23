@@ -50,7 +50,7 @@ class EditMembershipForm
                 [
                     'value' => $oMembership->description,
                     'required' => 1,
-                    'validation' => new \PFBC\Validation\Str(5, 255)
+                    'validation' => new \PFBC\Validation\Str(5, 190)
                 ]
             )
         );
