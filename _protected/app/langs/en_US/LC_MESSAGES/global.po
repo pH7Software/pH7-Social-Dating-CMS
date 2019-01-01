@@ -906,7 +906,7 @@ msgid ""
 "If you see \"Internal Server Error\" message on your site, please set to "
 "\"development\" mode in order to see the details of the error. If your site "
 "is on production (and visible by everyone) please set it to the production "
-"mode for security reason."
+"mode for security reasons."
 msgstr ""
 
 #: _protected/app/system/core/forms/ConfigFileCoreForm.php:105
