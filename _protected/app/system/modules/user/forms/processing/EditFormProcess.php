@@ -116,7 +116,8 @@ class EditFormProcess extends Form
      */
     private function isOnlyAdminLoggedAndUserIdExists()
     {
-        return AdminCore::auth() && !User::auth() && $this->httpRequest->getExists('profile_id');
+        return AdminCore::auth() && !User::auth() &&
+            $this->httpRequest->getExists('profile_id');
     }
 
     /**
