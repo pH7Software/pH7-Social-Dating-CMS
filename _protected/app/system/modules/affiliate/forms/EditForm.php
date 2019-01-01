@@ -59,8 +59,8 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', ['description' => t('For security reasons and to avoid spam, you cannot change your email address.'), 'disabled' => 'disabled', 'value' => $oAff->email]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error phone"></span>'));
 
-        if (AdminCore::auth()) {
-            // For security reason, only admins are able to change profile gender
+        if (self::isAdminLoggedAndUserIdExists($oHttpRequest)) {
+            // For security reasons, only admins are able to change profile gender
             $oForm->addElement(
                 new \PFBC\Element\Radio(
                     t('Gender:'),
