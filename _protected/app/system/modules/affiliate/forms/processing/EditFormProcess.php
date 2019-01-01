@@ -37,11 +37,14 @@ class EditFormProcess extends Form
         if (!$this->str->equals($this->httpRequest->post('last_name'), $oAff->lastName))
             $oAffModel->updateProfile('lastName', $this->httpRequest->post('last_name'), $iProfileId, DbTableName::AFFILIATE);
 
-        if (!$this->str->equals($this->httpRequest->post('sex'), $oAff->sex)) {
-            $oAffModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId, DbTableName::AFFILIATE);
-            $this->session->set('affiliate_sex', $this->httpRequest->post('sex'));
+        if (AdminCore::auth()) {
+            // For security reasons, only admins are able to change profile gender
+            if (!$this->str->equals($this->httpRequest->post('sex'), $oAff->sex)) {
+                $oAffModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId, DbTableName::AFFILIATE);
+                $this->session->set('affiliate_sex', $this->httpRequest->post('sex'));
 
-            $this->clearFieldCache('sex', $iProfileId);
+                $this->clearFieldCache('sex', $iProfileId);
+            }
         }
 
         if (!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oAff->birthDate))

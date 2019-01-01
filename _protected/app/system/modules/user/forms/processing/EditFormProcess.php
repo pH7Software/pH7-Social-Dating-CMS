@@ -43,11 +43,14 @@ class EditFormProcess extends Form
             $oUserModel->updateProfile('lastName', $this->httpRequest->post('last_name'), $iProfileId);
         }
 
-        if (!$this->str->equals($this->httpRequest->post('sex'), $oUser->sex)) {
-            $oUserModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId);
-            $this->session->set('member_sex', $this->httpRequest->post('sex'));
+        if ($this->isOnlyAdminLoggedAndUserIdExists()) {
+            // For security reasons, only admins are able to change profile gender
+            if (!$this->str->equals($this->httpRequest->post('sex'), $oUser->sex)) {
+                $oUserModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId);
+                $this->session->set('member_sex', $this->httpRequest->post('sex'));
 
-            $this->clearFieldCache('sex', $iProfileId);
+                $this->clearFieldCache('sex', $iProfileId);
+            }
         }
 
         // WARNING: Be careful, you should use the Http::NO_CLEAN constant, otherwise Http::post() method removes the special tags
