@@ -6,7 +6,7 @@
 
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('[$url_root]service-worker.js', {
-        scope: '/'
+        scope: '[$url_relative]'
     }).then(function (registration) {
         console.log('Service Worker registered on scope: ' + registration.scope);
     }).catch(function (error) {
@@ -24,5 +24,5 @@ if ('serviceWorker' in navigator) {
 
 function isBaseUrl(scope) {
     const url = new URL(scope);
-    return url.pathname === '/';
+    return url.pathname === '[$url_relative]';
 }
