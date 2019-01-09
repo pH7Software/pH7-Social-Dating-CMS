@@ -9,7 +9,7 @@
 pH7CMS (now known as pH7Builder) offers 38 modules and based on its homemade framework (pH7Framework). It is also the first Professional, Free and Open Source Social Dating Site Builder Software and the first choice for creating enterprise level Dating Apps/Service or social networking sites.
 
 
-*Imagine in 3 months' time, you have a well-known successful online community with thousands of happy users and without spending a dime for it! Instead, you spent money on advertising, user-acquisition and promotion... Imagine the time you have saved. The amazing business and freedom you have now created.*
+*Imagine in 3 months' time, you have a well-known successful online community with thousands of happy users and without spending a dime for it! Instead, you spent money on advertising, user acquisition and other marketing strategies... Imagine the time you have saved. The amazing business and freedom you have now created.*
 
 With **[pH7CMS](https://sourceforge.net/projects/ph7socialdating/files/latest/download)**, *THIS IS TOTALLY POSSIBLE!* (however, you have to be motivated! Nothing comes as magic).
 
