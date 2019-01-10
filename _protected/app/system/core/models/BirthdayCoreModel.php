@@ -41,7 +41,7 @@ class BirthdayCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
-        $sSqlLimit = (!$bCount && $bIsLimit) ? 'LIMIT :offset, :limit' : '';
+        $sSqlLimit = !$bCount && $bIsLimit ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = !$bCount ? '*' : 'COUNT(profileId)';
         $sSqlWhere = $bIsSex ? ' AND (sex = :sex) ' : '';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
