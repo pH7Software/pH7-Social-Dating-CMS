@@ -29,6 +29,9 @@ class Func extends Predefined
 
     private function dataFunction()
     {
-        $this->addFunc('<ph:date value="([\w\s\-/\|\.,:\\\\]+)" ?/?>', 'date(\'$1\')');
+        $this->addFunc(
+            '<ph:date value="([\w\s\-/\|\.,:\\\\]+)" ?/?>',
+            'date(\'$1\')'
+        );
     }
 }

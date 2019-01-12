@@ -59,6 +59,10 @@ class Tool
      */
     private static function isUrlAllowed($sUrl, Config $oConfig)
     {
-        return in_array($sUrl, $oConfig->values['ph7cms.api']['allow_domains'], true);
+        return in_array(
+            $sUrl,
+            $oConfig->values['ph7cms.api']['allow_domains'],
+            true
+        );
     }
 }

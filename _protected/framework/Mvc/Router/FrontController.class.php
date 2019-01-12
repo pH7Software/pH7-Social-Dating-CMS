@@ -664,7 +664,11 @@ final class FrontController
      */
     private function isRewrittenUrl(DOMElement $oRoute, &$aMatches)
     {
-        return preg_match('`^' . $oRoute->getAttribute('url') . self::REGEX_URL_EXTRA_OPTIONS . '$`', $this->oHttpRequest->requestUri(), $aMatches);
+        return preg_match(
+            '`^' . $oRoute->getAttribute('url') . self::REGEX_URL_EXTRA_OPTIONS . '$`',
+            $this->oHttpRequest->requestUri(),
+            $aMatches
+        );
     }
 
     private function generateRequestParameters(DOMElement $oRoute, array $aMatches)
