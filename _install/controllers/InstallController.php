@@ -93,7 +93,7 @@ class InstallController extends Controller
     /********************* STEP 1 *********************/
     public function index()
     {
-        $aLangs = get_dir_list(PH7_ROOT_INSTALL . 'langs/');
+        $aLangs = get_dir_list(PH7_ROOT_INSTALL . Language::LANG_FOLDER_NAME);
         $aLangsList = include PH7_ROOT_INSTALL . 'inc/lang_list.inc.php';
         $sLangSelect = '';
 

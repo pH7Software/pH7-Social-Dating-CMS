@@ -15,4 +15,4 @@ require_once PH7_ROOT_INSTALL . 'inc/fns/misc.php';
 require_once PH7_ROOT_INSTALL . 'library/Controllable.class.php';
 require_once PH7_ROOT_INSTALL . 'library/Controller.class.php';
 require_once PH7_ROOT_INSTALL . 'library/Language.class.php';
-include_once PH7_ROOT_INSTALL . 'langs/' . (new Language)->get() . '/install.lang.php';
+include_once PH7_ROOT_INSTALL . Language::LANG_FOLDER_NAME . (new Language)->get() . PH7_DS . Language::LANG_FILENAME;

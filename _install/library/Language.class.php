@@ -14,6 +14,9 @@ defined('PH7') or die('Restricted access');
 
 class Language
 {
+    const LANG_FILENAME = 'install.lang.php';
+    const LANG_FOLDER_NAME = 'langs/';
+
     /** @var string */
     private $sLang;
 
@@ -64,7 +67,7 @@ class Language
      */
     private function doesUserLangExists()
     {
-        return !empty($_GET['l']) && is_file(PH7_ROOT_INSTALL . 'langs/' . $_GET['l'] . '/install.lang.php');
+        return !empty($_GET['l']) && is_file(PH7_ROOT_INSTALL . self::LANG_FOLDER_NAME . $_GET['l'] . PH7_DS . self::LANG_FILENAME);
     }
 
     /**
@@ -73,7 +76,7 @@ class Language
     private function doesCookieLangExists()
     {
         return isset($_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang']) &&
-            is_file(PH7_ROOT_INSTALL . 'langs/' . $_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang'] . '/install.lang.php');
+            is_file(PH7_ROOT_INSTALL . self::LANG_FOLDER_NAME . $_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang'] . PH7_DS . self::LANG_FILENAME);
     }
 
     /**
@@ -81,6 +84,6 @@ class Language
      */
     private function doesBrowserLangExists()
     {
-        return is_file(PH7_ROOT_INSTALL . 'langs/' . $this->getBrowser() . '/install.lang.php');
+        return is_file(PH7_ROOT_INSTALL . self::LANG_FOLDER_NAME . $this->getBrowser() . PH7_DS . self::LANG_FILENAME);
     }
 }

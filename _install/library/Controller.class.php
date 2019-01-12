@@ -66,7 +66,7 @@ abstract class Controller implements Controllable
 
         // Language initialization
         $this->sCurrentLang = (new Language)->get();
-        include_once PH7_ROOT_INSTALL . 'langs/' . $this->sCurrentLang . '/install.lang.php';
+        include_once PH7_ROOT_INSTALL . Language::LANG_FOLDER_NAME . $this->sCurrentLang . PH7_DS . Language::LANG_FILENAME;
 
         /* Smarty initialization */
         $this->oView = new Smarty;
