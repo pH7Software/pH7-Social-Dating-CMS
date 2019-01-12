@@ -235,6 +235,11 @@ EOD;
         return $bEndComma ? $sJsonData . ',' : $sJsonData;
     }
 
+    /**
+     * @param string $sUsername
+     *
+     * @return bool
+     */
     protected function isOnline($sUsername)
     {
         $oUserModel = new UserCoreModel;
@@ -245,6 +250,11 @@ EOD;
         return $bIsOnline;
     }
 
+    /**
+     * @param string $sText
+     *
+     * @return string
+     */
     protected function sanitize($sText)
     {
         $sText = escape($sText, true);
