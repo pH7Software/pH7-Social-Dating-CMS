@@ -11,6 +11,9 @@
 
 namespace PH7\Framework\Video\Api;
 
+use DOMDocument;
+use DOMXPath;
+
 defined('PH7') or exit('Restricted access');
 
 class Metacafe extends Api implements IApi
@@ -36,12 +39,12 @@ class Metacafe extends Api implements IApi
      */
     public function getInfo($sUrl)
     {
-        $oDom = new \DOMDocument;
+        $oDom = new DOMDocument;
         if (!@$oDom->load(static::API_URL . $this->getVideoId($sUrl))) {
             return false;
         }
 
-        $this->oData = new \DOMXPath($oDom);
+        $this->oData = new DOMXPath($oDom);
         $sRootNameSpace = $oDom->lookupNamespaceUri($oDom->namespaceURI);
         $this->oData->registerNamespace('media', $sRootNameSpace);
 
