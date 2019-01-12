@@ -151,7 +151,7 @@ class Browser
      */
     public function isFullAjaxSite()
     {
-        return DbConfig::getSetting('fullAjaxSite') ? true : false;
+        return (bool)DbConfig::getSetting('fullAjaxSite');
     }
 
     /**
