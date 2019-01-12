@@ -51,7 +51,16 @@ class Language
     {
         $sLang = explode(',', @$_SERVER['HTTP_ACCEPT_LANGUAGE']);
 
-        return htmlspecialchars(strtolower(substr(chop($sLang[0]), 0, 2)), ENT_QUOTES);
+        return htmlspecialchars(
+            strtolower(
+                substr(
+                    chop($sLang[0]),
+                    0,
+                    2
+                )
+            ),
+            ENT_QUOTES
+        );
     }
 
     /**
