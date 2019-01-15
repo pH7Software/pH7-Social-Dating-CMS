@@ -1859,10 +1859,7 @@ msgid "%0%, build %1%"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/MainController.php:325
-msgid ""
-"%software_name% <strong>%0%</strong> is available! Please <a href=\"%1%\" "
-"target=\"_blank\" rel=\"noopener\">update it today</a> to keep your site "
-"safe and stable."
+msgid "%software_name% <strong>%0%</strong> is available! Please update it today to keep your site safe and stable."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/ModeratorController.php:54
