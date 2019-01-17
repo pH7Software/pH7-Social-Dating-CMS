@@ -372,9 +372,9 @@ abstract class Controller extends Core implements Controllable
      */
     private function isMaintenancePageEligible()
     {
-        return $this->registry->module !== PH7_ADMIN_MOD &&
-            M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE &&
-            !AdminCore::auth();
+        return M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE &&
+            !AdminCore::auth() &&
+            !AdminCore::isAdminPanel();
     }
 
     /**

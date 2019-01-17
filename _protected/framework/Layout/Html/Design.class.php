@@ -646,7 +646,7 @@ class Design
             $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . $sDir . $sAvatar;
             $sUrl = PH7_URL_DATA_SYS_MOD . $sDir . str_replace($sExt, $sSize . $sExt, $sAvatar);
 
-            $bIsModerationMode = Registry::getInstance()->module === PH7_ADMIN_MOD;
+            $bIsModerationMode = AdminCore::isAdminPanel();
 
             if (!is_file($sPath) || $oGetAvatar->approvedAvatar == '0') {
                 /* If sex is empty, it is recovered in the database using information from member */

@@ -13,6 +13,7 @@ namespace PH7\Framework\Mvc\Model;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\AdminCore;
 use PH7\DbTableName;
 use PH7\Framework\Ads\Ads as Banner;
 use PH7\Framework\Cache\Cache;
@@ -86,7 +87,7 @@ class Design extends HtmlDesign
         /**
          * Don't display ads on the admin panel.
          */
-        if (!(Registry::getInstance()->module === PH7_ADMIN_MOD) && $oData) {
+        if ($oData && !AdminCore::isAdminPanel()) {
             echo '<div class="inline" onclick="$(\'#ad_' . $oData->adsId . '\').attr(\'src\',\'' . PH7_URL_ROOT . '?' . Banner::PARAM_URL . '=' . $oData->adsId . '\');return true;">';
             echo Banner::output($oData, $this->oHttpRequest);
             echo '<img src="' . PH7_URL_STATIC . PH7_IMG . 'useful/blank.gif" style="border:0;width:0px;height:0px;" alt="" id="ad_' . $oData->adsId . '" /></div>';
