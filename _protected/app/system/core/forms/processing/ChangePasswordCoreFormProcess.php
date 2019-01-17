@@ -15,6 +15,9 @@ use PH7\Framework\Mvc\Request\Http;
 /** For "user", "affiliate" and "admin" modules **/
 class ChangePasswordCoreFormProcess extends Form
 {
+    /** @var bool */
+    private $bIsAdminModule;
+
     /**
      * @internal Need to use Http::NO_CLEAN arg in Http::post() since password might contains special character like "<" and will otherwise be converted to HTML entities
      */
@@ -22,15 +25,25 @@ class ChangePasswordCoreFormProcess extends Form
     {
         parent::__construct();
 
-        // PH7\UserCoreModel::login() method of the UserCoreModel Class works only for "user" and "affiliate" module.
-        $sClassName = ($this->registry->module === PH7_ADMIN_MOD) ? AdminModel::class : UserCoreModel::class;
-        $oPasswordModel = new $sClassName;
+        $this->bIsAdminModule = AdminCore::isAdminPanel($this->registry);
+
+        $this->executePasswordChanging();
+    }
+
+    /**
+     * @return void
+     *
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
+     */
+    private function executePasswordChanging()
+    {
+        $oPasswordModel = $this->getPasswordModel();
 
         $sEmail = $this->getUserEmail();
         $sTable = $this->getTableName();
 
         // Login
-        if ($this->registry->module === PH7_ADMIN_MOD) {
+        if ($this->bIsAdminModule) {
             $mLogin = $oPasswordModel->adminLogin(
                 $sEmail,
                 $this->session->get('admin_username'),
@@ -70,7 +83,7 @@ class ChangePasswordCoreFormProcess extends Form
             return $this->session->get('member_email');
         }
 
-        if ($this->registry->module === PH7_ADMIN_MOD) {
+        if ($this->bIsAdminModule) {
             return $this->session->get('admin_email');
         }
 
@@ -86,10 +99,22 @@ class ChangePasswordCoreFormProcess extends Form
             return DbTableName::MEMBER;
         }
 
-        if ($this->registry->module === PH7_ADMIN_MOD) {
+        if ($this->bIsAdminModule) {
             return DbTableName::ADMIN;
         }
 
         return DbTableName::AFFILIATE;
+    }
+
+    /**
+     * @return UserCoreModel
+     *
+     * @internal PH7\UserCoreModel::login() method of the UserCoreModel works only for "user" and "affiliate" module.
+     */
+    private function getPasswordModel()
+    {
+        $sClassName = $this->bIsAdminModule ? AdminModel::class : UserCoreModel::class;
+
+        return new $sClassName;
     }
 }
