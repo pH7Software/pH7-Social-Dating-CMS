@@ -41,7 +41,7 @@ class AdminCore extends UserCore
     }
 
     /**
-     * @return bool
+     * @return bool TRUE if the user is on the "admin" module, FALSE otherwise.
      */
     public static function isAdminPanel()
     {
