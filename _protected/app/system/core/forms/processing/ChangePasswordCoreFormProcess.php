@@ -25,7 +25,7 @@ class ChangePasswordCoreFormProcess extends Form
     {
         parent::__construct();
 
-        $this->bIsAdminModule = AdminCore::isAdminPanel($this->registry);
+        $this->bIsAdminModule = AdminCore::isAdminPanel();
 
         $this->executePasswordChanging();
     }

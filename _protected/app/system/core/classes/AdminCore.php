@@ -41,13 +41,11 @@ class AdminCore extends UserCore
     }
 
     /**
-     * @param Registry $oRegistry
-     *
      * @return bool
      */
-    public static function isAdminPanel(Registry $oRegistry)
+    public static function isAdminPanel()
     {
-        return $oRegistry->module === PH7_ADMIN_MOD;
+        return Registry::getInstance()->module === PH7_ADMIN_MOD;
     }
 
     /**
