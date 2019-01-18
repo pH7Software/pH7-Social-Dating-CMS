@@ -4,7 +4,7 @@
 
 [![PayPal](https://img.shields.io/badge/Donate-PayPal-lightgrey.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6 "Help keep me off the streets! ;)") [![Build Status](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/build.png?b=master)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/build-status/master) [![GPL v3 Licence](https://img.shields.io/aur/license/yaourt.svg)](https://opensource.org/licenses/gpl-3.0.html) [![SourceForge](https://img.shields.io/badge/Download-SourceForge-orange.svg)](https://sourceforge.net/projects/ph7socialdating/files/latest/download) [![Patreon](https://img.shields.io/badge/Subscribe-Patreon-red.svg)](https://www.patreon.com/bePatron?u=3534366 "Become a Patron Today!")
 
-**pH7 Social Dating CMS Solution™** is a **Professional**, **Free** & **Open Source** Social Dating CMS, fully responsive design, low-resource-intensive, powerful and very secure.
+**pH7, Social Dating CMS Solution™** is a **Professional**, **Free** & **Open Source** Social Dating CMS, fully responsive design, low-resource-intensive, powerful and very secure.
 
 pH7CMS (now known as pH7Builder) offers 38 modules and based on its homemade framework (pH7Framework). It is also the first Professional, Free and Open Source Social Dating Site Builder Software and the first choice for creating enterprise level Dating Apps/Service or social networking sites.
 
@@ -21,7 +21,7 @@ With **[pH7CMS](https://sourceforge.net/projects/ph7socialdating/files/latest/do
 
 **pH7 Dating CMS** is a **Social/Dating CMS** written in **Object-Oriented** PHP (*OOP*), fully compatible and highly optimised for PHP 7+ and based on **MVC** architecture (Model-View-Controller).
 
-It is designed with the **KISS** principle in mind, and the all source code can be read and understood in minutes. For a better flexibility, the software uses **PDO** (PHP Data Objects) abstraction which allows the choice of the database. The principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (no duplicate code).
+It is designed with the **KISS** principle in mind, and the whole source code can be read and understood in minutes. For a better flexibility, the software uses **PDO** (PHP Data Objects) abstraction which allows the choice of the database. The principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (no duplicate code).
 
 This Free and Open Source **Social Dating Site Builder** wants to be low resource-intensive, powerful, stable and secure. The software also comes with 38 system modules and is based on **pH7Framework** *(written specifically for this project)* that has over 52 packages.
 
