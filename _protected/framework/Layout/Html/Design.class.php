@@ -666,7 +666,7 @@ class Design
                     $sUrl = $this->getGravatarUrl($sEmail, '404', $iSize, 'g', $bSecuredGravatar);
 
                     if (!(new Validate)->url($sUrl, true)) {
-                        // If there is no Gravatar, we set the default pH7CMS's avatar
+                        // If no Gravatar set, it returns 404, and we then set the default pH7CMS's avatar
                         $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/' . $sIcon . '_no_picture' . $sSize . self::AVATAR_IMG_EXT;
                     }
                 } elseif (!$bIsModerationMode) { // We don't display pending approval image when admins are on the panel admin
