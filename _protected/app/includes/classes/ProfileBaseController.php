@@ -80,14 +80,14 @@ abstract class ProfileBaseController extends Controller
         // Check Privacy Profile
         $oPrivacyViewsUser = $oUserModel->getPrivacySetting($this->iProfileId);
 
-        if ($oPrivacyViewsUser->searchProfile === 'no') {
+        if ($oPrivacyViewsUser->searchProfile === PrivacyCore::NO) {
             $this->excludeProfileFromSearchEngines();
         }
 
-        if (!$this->bUserAuth && $oPrivacyViewsUser->privacyProfile === 'only_members') {
+        if (!$this->bUserAuth && $oPrivacyViewsUser->privacyProfile === PrivacyCore::ONLY_USERS) {
             $this->view->error = t('Whoops! "%0%" profile is only visible to members. Please <a href="%1%">login</a> or <a href="%2%">register</a> to see this profile.',
                 $oUser->username, Uri::get('user', 'main', 'login'), Uri::get('user', 'signup', 'step1'));
-        } elseif ($oPrivacyViewsUser->privacyProfile === 'only_me' && !$this->isOwnProfile()) {
+        } elseif ($oPrivacyViewsUser->privacyProfile === PrivacyCore::ONLY_ME && !$this->isOwnProfile()) {
             $this->view->error = t('Whoops! "%0%" profile is not available to you.', $oUser->username);
         }
 
@@ -95,8 +95,8 @@ abstract class ProfileBaseController extends Controller
         if ($this->bUserAuth) {
             $oPrivacyViewsVisitor = $oUserModel->getPrivacySetting($this->iVisitorId);
 
-            if ($oPrivacyViewsUser->userSaveViews === 'yes' &&
-                $oPrivacyViewsVisitor->userSaveViews === 'yes' &&
+            if ($oPrivacyViewsUser->userSaveViews === PrivacyCore::YES &&
+                $oPrivacyViewsVisitor->userSaveViews === PrivacyCore::YES &&
                 !$this->isOwnProfile()
             ) {
                 $this->updateVisitorViews();
