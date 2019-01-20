@@ -16,7 +16,7 @@ class FriendModel extends FriendCoreModel
     private $sStatus;
 
     /**
-     * Check exists in the friends list
+     * Check exists in the friends list.
      *
      * @param int $iProfileId
      * @param int $iFriendId
@@ -45,7 +45,7 @@ class FriendModel extends FriendCoreModel
     }
 
     /**
-     * Add a friend
+     * Add a friend.
      *
      * @param int $iProfileId = user Id
      * @param int $iFriendId friend id
@@ -91,7 +91,7 @@ class FriendModel extends FriendCoreModel
     }
 
     /**
-     * Approve friends
+     * Approve friends.
      *
      * @param int $iProfileId
      * @param int $iFriendId
@@ -113,7 +113,7 @@ class FriendModel extends FriendCoreModel
     }
 
     /**
-     * Delete a friend
+     * Delete a friend :-(
      *
      * @param int $iProfileId
      * @param int $iFriendId
