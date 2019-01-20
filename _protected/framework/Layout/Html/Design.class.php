@@ -740,10 +740,11 @@ class Design
      */
     public function favicon($sUrl)
     {
+        $iFaviconSize = 16;
         $sImg = Browser::favicon($sUrl);
         $sName = Http::getHostName($sUrl);
 
-        $this->imgTag($sImg, $sName, ['width' => 16, 'height' => 16]);
+        $this->imgTag($sImg, $sName, ['width' => $iFaviconSize, 'height' => $iFaviconSize]);
     }
 
     /**
