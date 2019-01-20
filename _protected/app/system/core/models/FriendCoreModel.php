@@ -14,6 +14,8 @@ use PH7\Framework\Mvc\Model\Engine\Model;
 class FriendCoreModel extends Model
 {
     const ALL_REQUEST = 'all';
+    const APPROVED_REQUEST = 1;
+    const PENDING_REQUEST = 0;
 
     /**
      * "Get" and "Find" "Friends" or "Mutual Friends"
@@ -26,7 +28,7 @@ class FriendCoreModel extends Model
      * @param int $iSort
      * @param int $iOffset
      * @param int $iLimit
-     * @param int|string $mPending 'all' = approved and pending, 1 = approved or 0 = pending friend requests. Default value is 'all'
+     * @param int|string $mPending 'all' = [approved and pending], 1 = approved or 0 = pending friend requests. Default value: 'all'
      *
      * @return int|array Integer for the number friends returned or an array containing a stdClass object with the friends list)
      */
