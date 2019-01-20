@@ -24,19 +24,19 @@ class FriendModel extends FriendCoreModel
      *
      * @return bool
      */
-    public function inList($iProfileId, $iFriendId, $iPending = FriendCoreModel::ALL_REQUEST)
+    public function inList($iProfileId, $iFriendId, $iPending = self::ALL_REQUEST)
     {
         $iProfileId = (int)$iProfileId;
         $iFriendId = (int)$iFriendId;
 
-        $sSqlPending = ($iPending !== FriendCoreModel::ALL_REQUEST) ? 'AND pending = :pending' : '';
+        $sSqlPending = ($iPending !== self::ALL_REQUEST) ? 'AND pending = :pending' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::MEMBER_FRIEND) .
             'WHERE profileId = :profileId AND friendId = :friendId ' . $sSqlPending . ' LIMIT 1');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
-        if ($iPending !== FriendCoreModel::ALL_REQUEST) {
+        if ($iPending !== self::ALL_REQUEST) {
             $rStmt->bindValue(':pending', $iPending, \PDO::PARAM_INT);
         }
         $rStmt->execute();
@@ -54,7 +54,7 @@ class FriendModel extends FriendCoreModel
      *
      * @return string Status in word: 'error', 'id_does_not_exist', 'friend_exists' or 'success'
      */
-    public function add($iProfileId, $iFriendId, $sRequestDate, $iPending = FriendCoreModel::PENDING_REQUEST)
+    public function add($iProfileId, $iFriendId, $sRequestDate, $iPending = self::PENDING_REQUEST)
     {
         $iProfileId = (int)$iProfileId;
         $iFriendId = (int)$iFriendId;
