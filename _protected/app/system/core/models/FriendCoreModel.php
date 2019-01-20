@@ -13,9 +13,9 @@ use PH7\Framework\Mvc\Model\Engine\Model;
 
 class FriendCoreModel extends Model
 {
-    const ALL_REQUEST = 'all';
-    const APPROVED_REQUEST = 1;
-    const PENDING_REQUEST = 0;
+    const ALL_REQUEST = 2;
+    const APPROVED_REQUEST = 0;
+    const PENDING_REQUEST = 1;
 
     /**
      * "Get" and "Find" "Friends" or "Mutual Friends"
@@ -28,11 +28,11 @@ class FriendCoreModel extends Model
      * @param int $iSort
      * @param int $iOffset
      * @param int $iLimit
-     * @param int|string $mPending 'all' = [approved and pending], 1 = approved or 0 = pending friend requests. Default value: 'all'
+     * @param int $iPending 2 = [approved and pending], 0 = approved or 1 = pending friend requests. Default value: 'all'
      *
      * @return int|array Integer for the number friends returned or an array containing a stdClass object with the friends list)
      */
-    public function get($iIdProfileId, $iFriendId = null, $mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $mPending = self::ALL_REQUEST)
+    public function get($iIdProfileId, $iFriendId = null, $mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $iPending = self::ALL_REQUEST)
     {
         $bCount = (bool)$bCount;
         $iOffset = (int)$iOffset;
@@ -80,8 +80,8 @@ class FriendCoreModel extends Model
             $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
         }
 
-        if ($mPending !== self::ALL_REQUEST) {
-            $rStmt->bindValue(':pending', $mPending, \PDO::PARAM_INT);
+        if ($iPending !== self::ALL_REQUEST) {
+            $rStmt->bindValue(':pending', $iPending, \PDO::PARAM_INT);
         }
 
         if (!$bCount) {
@@ -111,9 +111,10 @@ class FriendCoreModel extends Model
     public static function getPending($iFriendId)
     {
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(pending) FROM' .
-            Db::prefix(DbTableName::MEMBER_FRIEND) . 'WHERE friendId = :friendId AND pending = \'1\'');
+            Db::prefix(DbTableName::MEMBER_FRIEND) . 'WHERE friendId = :friendId AND pending = :pending');
 
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':pending', self::PENDING_REQUEST, \PDO::PARAM_INT);
         $rStmt->execute();
         $iPendingFriends = (int)$rStmt->fetchColumn();
         Db::free($rStmt);

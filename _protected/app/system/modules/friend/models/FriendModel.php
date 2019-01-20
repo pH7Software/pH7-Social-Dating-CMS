@@ -20,24 +20,24 @@ class FriendModel extends FriendCoreModel
      *
      * @param int $iProfileId
      * @param int $iFriendId
-     * @param int|string $mPending 'all' = select the friends that are approved and pending, 1 = approved or 0 = pending friend requests.
+     * @param int $iPending 2 = select the friends that are approved and pending, 0 = approved or 1 = pending friend requests.
      *
      * @return bool
      */
-    public function inList($iProfileId, $iFriendId, $mPending = 'all')
+    public function inList($iProfileId, $iFriendId, $iPending = FriendCoreModel::ALL_REQUEST)
     {
         $iProfileId = (int)$iProfileId;
         $iFriendId = (int)$iFriendId;
 
-        $sSqlPending = ($mPending !== 'all') ? 'AND pending = :pending' : '';
+        $sSqlPending = ($iPending !== FriendCoreModel::ALL_REQUEST) ? 'AND pending = :pending' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::MEMBER_FRIEND) .
             'WHERE profileId = :profileId AND friendId = :friendId ' . $sSqlPending . ' LIMIT 1');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
-        if ($mPending !== 'all') {
-            $rStmt->bindValue(':pending', $mPending, \PDO::PARAM_INT);
+        if ($iPending !== FriendCoreModel::ALL_REQUEST) {
+            $rStmt->bindValue(':pending', $iPending, \PDO::PARAM_INT);
         }
         $rStmt->execute();
 
@@ -50,11 +50,11 @@ class FriendModel extends FriendCoreModel
      * @param int $iProfileId = user Id
      * @param int $iFriendId friend id
      * @param string $sRequestDate Date of the Request Friend.
-     * @param int $iPending 1 = approved or 0 = pending friend requests.
+     * @param int $iPending 0 = approved or 1 = pending friend requests.
      *
      * @return string Status in word: 'error', 'id_does_not_exist', 'friend_exists' or 'success'
      */
-    public function add($iProfileId, $iFriendId, $sRequestDate, $iPending = 1)
+    public function add($iProfileId, $iFriendId, $sRequestDate, $iPending = FriendCoreModel::PENDING_REQUEST)
     {
         $iProfileId = (int)$iProfileId;
         $iFriendId = (int)$iFriendId;
@@ -104,9 +104,10 @@ class FriendModel extends FriendCoreModel
         $iFriendId = (int)$iFriendId;
 
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::MEMBER_FRIEND) .
-            'SET pending = 0 WHERE profileId = :friendId AND friendId = :profileId');
+            'SET pending = :approved WHERE profileId = :friendId AND friendId = :profileId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':approved', self::APPROVED_REQUEST, \PDO::PARAM_INT);
 
         return $rStmt->execute();
     }
