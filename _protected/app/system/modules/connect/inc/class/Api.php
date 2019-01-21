@@ -23,6 +23,7 @@ use PH7\Framework\Util\Various;
 abstract class Api
 {
     const BIRTH_DATE_FORMAT = 'Y-m-d';
+    const DEFAULT_GENDER = GenderTypeUserCoreModel::FEMALE;
 
     /** @var Design */
     protected $oDesign;
@@ -101,7 +102,6 @@ abstract class Api
      */
     protected function checkGender($sGender)
     {
-        // Default 'female'
-        return !GenderTypeUserCoreModel::isGenderValid($sGender) ? GenderTypeUserCoreModel::FEMALE : $sGender;
+        return !GenderTypeUserCoreModel::isGenderValid($sGender) ? self::DEFAULT_GENDER : $sGender;
     }
 }
