@@ -116,12 +116,13 @@ class VideoFormProcess extends Form
 
                 $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $this->session->get('member_username') . PH7_DS . $iAlbumId . PH7_DS;
                 $sFileName = Various::genRnd($oVideo->getFileName(), 20);
+                $sThumbExt = VideoCore::DEFAULT_THUMBNAIL_EXT;
 
-                $sThumb = $sFileName . '.jpg';
-                $sThumb1 = $sFileName . '-1.jpg';
-                $sThumb2 = $sFileName . '-2.jpg';
-                $sThumb3 = $sFileName . '-3.jpg';
-                $sThumb4 = $sFileName . '-4.jpg';
+                $sThumb = $sFileName . $sThumbExt;
+                $sThumb1 = $sFileName . '-1' . $sThumbExt;
+                $sThumb2 = $sFileName . '-2' . $sThumbExt;
+                $sThumb3 = $sFileName . '-3' . $sThumbExt;
+                $sThumb4 = $sFileName . '-4' . $sThumbExt;
                 $sFile = $sFileName;
 
                 $oVideo->thumbnail(
