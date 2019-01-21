@@ -24,6 +24,7 @@ abstract class Api
 {
     const BIRTH_DATE_FORMAT = 'Y-m-d';
     const DEFAULT_GENDER = GenderTypeUserCoreModel::FEMALE;
+    const DEFAULT_AVATAR_EXTENSION = '.jpg';
 
     /** @var Design */
     protected $oDesign;
@@ -59,7 +60,7 @@ abstract class Api
      */
     public function getAvatar($sUrl)
     {
-        $sTmpDest = PH7_PATH_TMP . Various::genRnd() . '.jpg';
+        $sTmpDest = PH7_PATH_TMP . Various::genRnd() . self::DEFAULT_AVATAR_EXTENSION;
         @copy($sUrl, $sTmpDest);
         return $sTmpDest;
     }
