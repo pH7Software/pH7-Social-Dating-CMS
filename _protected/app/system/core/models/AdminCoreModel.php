@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
@@ -31,10 +31,14 @@ class AdminCoreModel extends UserCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
+        $sSql = 'SELECT m.*, g.name AS membershipName FROM' . Db::prefix($sTable) .
+            'AS m INNER JOIN ' . Db::prefix(DbTableName::MEMBERSHIP) .
+            'AS g ON m.groupId = g.groupId LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) .
+            'AS i ON m.profileId = i.profileId WHERE username <> \'' . PH7_GHOST_USERNAME . '\' ORDER BY joinDate DESC LIMIT :offset, :limit';
         if ($sTable !== DbTableName::MEMBER) {
-            $sSql = 'SELECT * FROM' . Db::prefix($sTable) . 'WHERE username <> \'' . PH7_GHOST_USERNAME . '\' ORDER BY joinDate DESC LIMIT :offset, :limit';
-        } else {
-            $sSql = 'SELECT m.*, g.name AS membershipName FROM' . Db::prefix($sTable) . 'AS m INNER JOIN ' . Db::prefix(DbTableName::MEMBERSHIP) . 'AS g ON m.groupId = g.groupId LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) . 'AS i ON m.profileId = i.profileId WHERE username <> \'' . PH7_GHOST_USERNAME . '\' ORDER BY joinDate DESC LIMIT :offset, :limit';
+            // Redefine query if it isn't the "members" table
+            $sSql = 'SELECT * FROM' . Db::prefix($sTable) .
+                'WHERE username <> \'' . PH7_GHOST_USERNAME . '\' ORDER BY joinDate DESC LIMIT :offset, :limit';
         }
 
         $rStmt = Db::getInstance()->prepare($sSql);
