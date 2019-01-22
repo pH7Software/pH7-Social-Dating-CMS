@@ -82,7 +82,11 @@ class CountryController extends Controller
         $sCountryCode = CArray::getKeyByValueIgnoreCase($this->registry->country, $this->registry->lang);
 
         if (strlen($sCountryCode) !== self::COUNTRY_CODE_LENGTH) {
-            return substr($this->registry->country, 0, self::COUNTRY_CODE_LENGTH);
+            return substr(
+                $this->registry->country,
+                0,
+                self::COUNTRY_CODE_LENGTH
+            );
         }
 
         return $sCountryCode;
