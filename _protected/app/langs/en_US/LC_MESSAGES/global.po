@@ -8334,12 +8334,6 @@ msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_f5e1563574ea44d60fdfdf225d89ec8f/base/user/browse.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/affiliate_7410dfc9fda3773397c9feeb9f96ef35/base/admin/browse.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/public_main/base/browse_user.inc.cpl.php_user.inc.cpl.php:19
-msgid "Login"
-msgstr ""
-
-#: _protected/data/cache/pH7tpl_compile/admin123_f5e1563574ea44d60fdfdf225d89ec8f/base/user/browse.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/affiliate_7410dfc9fda3773397c9feeb9f96ef35/base/admin/browse.cpl.php:19
 msgid "Disapprove (notified user by email)"
 msgstr ""
 
