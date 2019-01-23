@@ -272,7 +272,9 @@ class SettingFormProcess extends Form
      */
     private function hasDataChanged($sKey, $sVal)
     {
-        return !$this->str->equals($this->httpRequest->post($sKey), DbConfig::getSetting($sVal));
+        return
+            isset($_POST[$sKey])
+            && !$this->str->equals($this->httpRequest->post($sKey), DbConfig::getSetting($sVal));
     }
 
     /**
