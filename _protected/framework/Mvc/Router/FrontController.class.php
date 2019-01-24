@@ -47,12 +47,13 @@ final class FrontController
 
     const REDIRECT_ERROR_MOD = 1;
 
+    const MAIN_GETTEXT_FILENAME = 'global';
     const SIMPLE_MOD_REQUEST_PARAM_NAME = 'm';
     const ASSET_REQUEST_PARAM_NAME = 'asset';
     const AJAX_REQUEST_PARAM_NAME = 'ajax';
     const GZIP_REQUEST_PARAM_NAME = 'gzip';
-    const REGEX_MODULE_FORMAT = '#^[a-z0-9\.\-_]+$#i';
 
+    const REGEX_MODULE_FORMAT = '#^[a-z0-9\.\-_]+$#i';
     const REGEX_CONTROLLER_FORMAT = '#^[a-z0-9_]+$#i';
     const REGEX_ACTION_FORMAT = '#^[a-z0-9_]+$#i';
     const REGEX_FOLDER_FORMAT = '#^[\w]+$#';
@@ -341,7 +342,11 @@ final class FrontController
 
         if (!defined('PH7_LANG_NAME')) {
             // Set the default language of the site and load the default language path
-            $sLangName = (new Lang)->setDefaultLang(PH7_PREF_LANG)->init()->load('global', PH7_PATH_APP_LANG)->getLang();
+            $sLangName = (new Lang)
+                ->setDefaultLang(PH7_PREF_LANG)
+                ->init()
+                ->load(self::MAIN_GETTEXT_FILENAME, PH7_PATH_APP_LANG)
+                ->getLang();
 
             define('PH7_LANG_NAME', $sLangName);
         }
