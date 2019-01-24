@@ -85,35 +85,40 @@ final class DbConfig
         );
     }
 
+    /**
+     * @param string $sLangId
+     *
+     * @return \stdClass
+     */
     public static function getMetaMain($sLangId)
     {
         $oCache = (new Cache)->start(self::CACHE_GROUP, 'metaMain' . $sLangId, self::CACHE_TIME);
 
         // @return value of meta tags the database
-        if (!$oData = $oCache->get()) {
+        if (!$oMetaData = $oCache->get()) {
             $sSql = 'SELECT * FROM' . Engine\Db::prefix(DbTableName::META_MAIN) . 'WHERE langId = :langId';
 
             // Get meta data with the current language if it exists in the "MetaMain" table ...
             $rStmt = Engine\Db::getInstance()->prepare($sSql);
             $rStmt->bindParam(':langId', $sLangId, \PDO::PARAM_STR);
             $rStmt->execute();
-            $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $oMetaData = $rStmt->fetch(\PDO::FETCH_OBJ);
 
             // If the current language doesn't exist in the "MetaMain" table, we create a new table for the new language with default value
-            if (empty($oData)) {
+            if (empty($oMetaData)) {
                 $aData = MetaData::getDefaultMeta();
 
                 // Create the new meta data language
                 Engine\Record::getInstance()->insert(DbTableName::META_MAIN, $aData);
-                $oData = (object)$aData;
+                $oMetaData = (object)$aData;
                 unset($aData);
             }
             Engine\Db::free($rStmt);
-            $oCache->put($oData);
+            $oCache->put($oMetaData);
         }
         unset($oCache);
 
-        return $oData;
+        return $oMetaData;
     }
 
     /**
