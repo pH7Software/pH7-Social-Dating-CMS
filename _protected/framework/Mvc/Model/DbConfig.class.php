@@ -16,6 +16,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\DbTableName;
 use PH7\Framework\Cache\Cache;
+use PH7\Framework\Seo\Data\MetaData;
 
 final class DbConfig
 {
@@ -100,21 +101,7 @@ final class DbConfig
 
             // If the current language doesn't exist in the "MetaMain" table, we create a new table for the new language with default value
             if (empty($oData)) {
-                $aData = [
-                    'langId' => $sLangId, // The new language key (e.g., de_DE)
-                    'pageTitle' => 'Home',
-                    'metaDescription' => 'The Best Online Social Dating Service to meet people and keep in touch with your friends',
-                    'metaKeywords' => 'meet people, community, single, friends, meet singles, women, men, dating site, dating service, dating website, online dating website',
-                    'headline' => 'Be on the right place!',
-                    'slogan' => 'Online Dating Community with Chat Rooms',
-                    'promoText' => 'You\'re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Dating Sites like that with <a href="http://ph7cms.com">pH7CMS</a>. It is Professional, Free, Open Source, ...',
-                    'metaRobots' => 'index, follow, all',
-                    'metaAuthor' => 'Pierre-Henry Soria',
-                    'metaCopyright' => 'Copyright Pierre-Henry Soria. All Rights Reserved.',
-                    'metaRating' => 'general',
-                    'metaDistribution' => 'global',
-                    'metaCategory' => 'dating'
-                ];
+                $aData = MetaData::getDefaultMeta();
 
                 // Create the new meta data language
                 Engine\Record::getInstance()->insert(DbTableName::META_MAIN, $aData);
