@@ -41,28 +41,29 @@ final class DbConfig
     {
         $oCache = (new Cache)->start(self::CACHE_GROUP, 'setting' . $sSetting, self::CACHE_TIME);
 
-        // @return value of config the database
-        if (!empty($sSetting)) {
-            if (!$sData = $oCache->get()) {
-                $rStmt = Engine\Db::getInstance()->prepare('SELECT settingValue FROM' . Engine\Db::prefix(DbTableName::SETTING) . 'WHERE settingName = :setting');
+        if (!$mData = $oCache->get()) {
+            // @return value of config the database
+            if (!empty($sSetting)) {
+                $rStmt = Engine\Db::getInstance()->prepare(
+                    'SELECT settingValue FROM' . Engine\Db::prefix(DbTableName::SETTING) . 'WHERE settingName = :setting'
+                );
                 $rStmt->bindParam(':setting', $sSetting, \PDO::PARAM_STR);
                 $rStmt->execute();
                 $sData = $rStmt->fetchColumn();
                 Engine\Db::free($rStmt);
-                $oCache->put($sData);
-            }
-            $mData = $sData;
-        } else {
-            if (!$oData = $oCache->get()) {
-                $rStmt = Engine\Db::getInstance()->prepare('SELECT * FROM' . Engine\Db::prefix(DbTableName::SETTING));
+                $mData = $sData;
+            } else {
+                $rStmt = Engine\Db::getInstance()->prepare(
+                    'SELECT * FROM' . Engine\Db::prefix(DbTableName::SETTING)
+                );
                 $rStmt->execute();
                 $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
                 Engine\Db::free($rStmt);
-                $oCache->put($oData);
+                $mData = $oData;
             }
-            $mData = $oData;
-        }
 
+            $oCache->put($mData);
+        }
         unset($oCache);
 
         return empty($mData) ? 0 : $mData;
