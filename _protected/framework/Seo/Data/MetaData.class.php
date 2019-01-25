@@ -15,7 +15,7 @@ final class MetaData
      *
      * @return array
      */
-    public static function getDefaultMeta($sLangId)
+    public static function getDefault($sLangId)
     {
         $aData = [
             'langId' => $sLangId,
