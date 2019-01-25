@@ -787,7 +787,7 @@ class Design
     /**
      * Add Normal size Social Media Widgets.
      *
-     * @internal AddThis JS file will be included through 'ph7_static_files' table.
+     * @internal AddToAny JS file will be included through 'ph7_static_files' table.
      *
      * @return void HTML output.
      */
@@ -811,7 +811,7 @@ HTML;
     /**
      * Add Small size Social Media Widgets.
      *
-     * @internal AddThis JS file will be included through 'ph7_static_files' table.
+     * @internal AddToAny JS file will be included through 'ph7_static_files' table.
      *
      * @return void HTML output.
      */
