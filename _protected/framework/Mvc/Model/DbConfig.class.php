@@ -105,7 +105,7 @@ final class DbConfig
 
             // If the current language doesn't exist in the "MetaMain" table, we create a new table for the new language with default value
             if (empty($oMetaData)) {
-                $aData = MetaData::getDefault();
+                $aData = MetaData::getDefault($sLangId);
 
                 // Create the new meta data language
                 Engine\Record::getInstance()->insert(DbTableName::META_MAIN, $aData);
