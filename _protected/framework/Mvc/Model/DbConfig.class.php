@@ -152,7 +152,7 @@ final class DbConfig
 
         self::setSetting($sStatus, $sFieldName);
 
-        // addthis JS file's staticID is '1'
+        // AddToAny JS file's staticID is '1'
         $rStmt = Engine\Db::getInstance()->prepare('UPDATE' . Engine\Db::prefix(DbTableName::STATIC_FILE) . 'SET active = :status WHERE staticId = 1 AND fileType = \'js\' LIMIT 1');
         $rStmt->execute(['status' => $sStatus]);
 
