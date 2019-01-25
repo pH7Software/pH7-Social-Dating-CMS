@@ -42,7 +42,6 @@ final class DbConfig
         $oCache = (new Cache)->start(self::CACHE_GROUP, 'setting' . $sSetting, self::CACHE_TIME);
 
         if (!$mData = $oCache->get()) {
-            // @return value of config the database
             if (!empty($sSetting)) {
                 $rStmt = Engine\Db::getInstance()->prepare(
                     'SELECT settingValue FROM' . Engine\Db::prefix(DbTableName::SETTING) . 'WHERE settingName = :setting'
@@ -89,13 +88,12 @@ final class DbConfig
     /**
      * @param string $sLangId
      *
-     * @return \stdClass
+     * @return \stdClass The meta data fields.
      */
     public static function getMetaMain($sLangId)
     {
         $oCache = (new Cache)->start(self::CACHE_GROUP, 'metaMain' . $sLangId, self::CACHE_TIME);
 
-        // @return value of meta tags the database
         if (!$oMetaData = $oCache->get()) {
             $sSql = 'SELECT * FROM' . Engine\Db::prefix(DbTableName::META_MAIN) . 'WHERE langId = :langId';
 
