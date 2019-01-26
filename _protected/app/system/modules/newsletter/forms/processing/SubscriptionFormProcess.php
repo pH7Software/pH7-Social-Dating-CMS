@@ -31,7 +31,7 @@ class SubscriptionFormProcess extends Form
         $bIsSubscriber = (new ExistsCoreModel)->email($sEmail, DbTableName::SUBSCRIBER);
 
         switch ($this->httpRequest->post('direction')) {
-            case 'subscrire': {
+            case 'subscribe': {
                 if (!$bIsSubscriber) {
                     $aData = [
                         'name' => $sName,

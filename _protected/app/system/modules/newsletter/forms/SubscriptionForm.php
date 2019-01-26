@@ -40,7 +40,7 @@ class SubscriptionForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
 
         $oForm->addElement(new \PFBC\Element\Hidden('direction', ''));
-        $oForm->addElement(new \PFBC\Element\Button(t('Subscribe'), 'submit', ['onclick' => '$("#form_subscription [name=direction]").val("subscrire");', 'icon' => 'check']));
+        $oForm->addElement(new \PFBC\Element\Button(t('Subscribe'), 'submit', ['onclick' => '$("#form_subscription [name=direction]").val("subscribe");', 'icon' => 'check']));
         $oForm->addElement(new \PFBC\Element\Button(t('Unsubscribe'), 'submit', ['onclick' => '$("#form_subscription [name=direction]").val("unsubscribe");', 'icon' => 'closethick']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
