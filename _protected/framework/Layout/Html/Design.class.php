@@ -988,6 +988,7 @@ HTML;
         $this->externalJsFile(PH7_URL_STATIC . PH7_JS . 'jquery/jquery.js');
         $this->externalJsFile(PH7_URL_STATIC . PH7_JS . 'jquery/jquery-ui.js');
         echo '<script>var pH7Url={base:\'', PH7_URL_ROOT, '\'}</script></head><body>';
+
         if ($bLogo) {
             // Website's name
             $sSiteName = Registry::getInstance()->site_name;
@@ -999,8 +1000,8 @@ HTML;
             <div role="banner" id="logo"><h1><a href="', PH7_URL_ROOT, '" title="', $sName, ' — ', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_COMPANY, '">', $sName, '</a></h1></div>
             </header>';
         }
-        echo $this->flashMsg(),
-        '<div class="msg"></div><div class="m_marg">';
+
+        echo $this->flashMsg(), '<div class="msg"></div><div class="m_marg">';
     }
 
     public function htmlFooter()
