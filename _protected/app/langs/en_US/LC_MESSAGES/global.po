@@ -3946,7 +3946,7 @@ msgstr ""
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:78
 msgid ""
 "Are you proud of using <a href=\"%software_website%\">pH7CMS</a> brand? Are "
-"you proud to say your dating app has been made by the Leader Dating Software "
+"you proud to say your dating app has been made by the Leading Dating Software "
 "provider?"
 msgstr ""
 
