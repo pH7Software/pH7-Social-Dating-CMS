@@ -179,7 +179,7 @@ class Design
         }
 
         $iMsgNum = count($this->aMessages);
-        /*** Check if there are any messages in the aMessages array ***/
+        /** Check if there are any messages in $aMessages array **/
         if ($iMsgNum > 0) {
             $this->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/apprise.js');
 
@@ -223,7 +223,7 @@ class Design
         }
 
         $iErrNum = count($this->aErrors);
-        /*** Check if there are any errors in the aErrors array ***/
+        /** Check if there are any errors in $aErrors array **/
         if ($iErrNum > 0) {
             $this->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/apprise.js');
 
