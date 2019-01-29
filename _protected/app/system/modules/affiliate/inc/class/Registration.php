@@ -39,7 +39,8 @@ class Registration extends RegistrationCore
             t('Email: %0%.', $aInfo['email']) . '<br />' .
             t('Username: %0%.', $aInfo['username']) . '<br />' .
             t('Password: ****** (This field is hidden to protect against theft of your account. If you have forgotten your password, please request a new one <a href="%0%">here</a>).', Uri::get('lost-password', 'main', 'forgot', 'affiliate')) . '</em>';
-            $this->oView->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $aInfo['email']) . '<br />' .
+
+        $this->oView->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $aInfo['email']) . '<br />' .
             t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
         $sMsgHtml = $this->oView->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/affiliate/registration.tpl', $aInfo['email']);
