@@ -37,7 +37,7 @@ abstract class RegistrationCore
     {
         $this->oView = $oView;
 
-        $this->iActiveType = DbConfig::getSetting('userActivationType');
+        $this->iActiveType = (int)DbConfig::getSetting('userActivationType');
     }
 
     /**

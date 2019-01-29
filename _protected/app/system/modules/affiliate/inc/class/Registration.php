@@ -19,7 +19,7 @@ class Registration extends RegistrationCore
     {
         parent::__construct($oView);
 
-        $this->iActiveType = DbConfig::getSetting('affActivationType');
+        $this->iActiveType = (int)DbConfig::getSetting('affActivationType');
     }
 
     /**
