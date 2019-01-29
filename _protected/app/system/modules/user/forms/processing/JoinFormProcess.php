@@ -35,7 +35,7 @@ class JoinFormProcess extends Form
         parent::__construct();
 
         $this->oUserModel = new UserModel;
-        $this->iActiveType = DbConfig::getSetting('userActivationType');
+        $this->iActiveType = (int)DbConfig::getSetting('userActivationType');
     }
 
     public function step1()
@@ -252,6 +252,6 @@ class JoinFormProcess extends Form
      */
     private function isUserActivated()
     {
-        return $this->iActiveType == 1;
+        return $this->iActiveType === RegistrationCore::NO_ACTIVATION;
     }
 }

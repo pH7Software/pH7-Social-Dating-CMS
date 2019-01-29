@@ -26,7 +26,7 @@ class JoinFormProcess extends Form
     {
         parent::__construct();
 
-        $this->iActiveType = DbConfig::getSetting('affActivationType');
+        $this->iActiveType = (int)DbConfig::getSetting('affActivationType');
     }
 
     public function step1()
@@ -86,6 +86,6 @@ class JoinFormProcess extends Form
      */
     private function isUserActivated()
     {
-        return $this->iActiveType == 1;
+        return $this->iActiveType === RegistrationCore::NO_ACTIVATION;
     }
 }
