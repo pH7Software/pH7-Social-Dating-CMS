@@ -50,8 +50,6 @@ class AdminController extends Controller
 
     public function browse()
     {
-        $oSubscriptionModel = new SubscriptionModel;
-
         $iTotal = $this->oSubscriptionModel->browse(
             $this->httpRequest->get('looking'),
             true,
