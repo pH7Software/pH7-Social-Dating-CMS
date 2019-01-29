@@ -16,13 +16,11 @@ use GeoIp2\Database\Reader;
 use GeoIp2\Exception\AddressNotFoundException;
 use MaxMind\Db\Reader\InvalidDatabaseException;
 use PH7\Framework\Ip\Ip;
-use PH7\Framework\Str\Str;
 
 class Geo
 {
     const DATABASE_FILENAME = 'GeoLite2-City.mmdb';
     const DEFAULT_VALID_IP = '128.101.101.101';
-    const ENCODING = 'UTF-8';
 
     /**
      * Static Class.
@@ -84,7 +82,7 @@ class Geo
     {
         try {
             // Encode to UTF8 for Latin and other characters of the GeoIP database are displayed correctly
-            $sCountryName = mb_convert_encoding(static::get($sIpAddress)->country->name, static::ENCODING);
+            $sCountryName = utf8_encode(static::get($sIpAddress)->country->name);
 
             // TODO: When support PHP 7.1, specify multiple exceptions using "|" pipe
         } catch (AddressNotFoundException $oE) {
@@ -107,7 +105,7 @@ class Geo
     {
         try {
             // Encode to UTF8 for Latin and other characters of the GeoIP database are displayed correctly
-            $sCity = mb_convert_encoding(static::get($sIpAddress)->city->name, static::ENCODING);
+            $sCity = utf8_encode(static::get($sIpAddress)->city->name);
 
             // TODO: When support PHP 7.1, specify multiple exceptions using "|" pipe
         } catch (AddressNotFoundException $oE) {
