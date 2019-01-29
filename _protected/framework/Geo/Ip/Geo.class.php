@@ -16,6 +16,7 @@ use GeoIp2\Database\Reader;
 use GeoIp2\Exception\AddressNotFoundException;
 use MaxMind\Db\Reader\InvalidDatabaseException;
 use PH7\Framework\Ip\Ip;
+use PH7\Framework\Str\Str;
 
 class Geo
 {
@@ -81,8 +82,9 @@ class Geo
     public static function getCountry($sIpAddress = null)
     {
         try {
-            // Encode to UTF8 for Latin and other characters of the GeoIP database are displayed correctly.
-            $sCountryName = utf8_encode(static::get($sIpAddress)->country->name);
+            // Encode to UTF8 for Latin and other characters of the GeoIP database are displayed correctly
+            $sCountryName = Str::fixEncoding(static::get($sIpAddress)->country->name);
+
             // TODO: When support PHP 7.1, specify multiple exceptions using "|" pipe
         } catch (AddressNotFoundException $oE) {
             $sCountryName = '';
@@ -103,8 +105,9 @@ class Geo
     public static function getCity($sIpAddress = null)
     {
         try {
-            // Encode to UTF8 for Latin and other characters of the GeoIP database are displayed correctly.
-            $sCity = utf8_encode(static::get($sIpAddress)->city->name);
+            // Encode to UTF8 for Latin and other characters of the GeoIP database are displayed correctly
+            $sCity = Str::fixEncoding(static::get($sIpAddress)->city->name);
+
             // TODO: When support PHP 7.1, specify multiple exceptions using "|" pipe
         } catch (AddressNotFoundException $oE) {
             $sCity = '';
