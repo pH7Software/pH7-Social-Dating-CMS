@@ -293,22 +293,6 @@ namespace PH7\Framework\Str {
         }
 
         /**
-         * Encodes to UTF8 for Latin and other characters that aren't already encoded in UTF8
-         *
-         * @param string $sValue
-         *
-         * @return string
-         */
-        public static function fixEncoding($sValue)
-        {
-            if (mb_check_encoding($sValue, 'UTF-8') === false) {
-                return utf8_encode($sValue);
-            }
-
-            return $sValue;
-        }
-
-        /**
          * Escape function, uses the PHP native htmlspecialchars but improved.
          *
          * @param array|string $mText

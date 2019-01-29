@@ -22,6 +22,7 @@ class Geo
 {
     const DATABASE_FILENAME = 'GeoLite2-City.mmdb';
     const DEFAULT_VALID_IP = '128.101.101.101';
+    const ENCODING = 'UTF-8';
 
     /**
      * Static Class.
@@ -83,7 +84,7 @@ class Geo
     {
         try {
             // Encode to UTF8 for Latin and other characters of the GeoIP database are displayed correctly
-            $sCountryName = Str::fixEncoding(static::get($sIpAddress)->country->name);
+            $sCountryName = mb_convert_encoding(static::get($sIpAddress)->country->name, static::ENCODING);
 
             // TODO: When support PHP 7.1, specify multiple exceptions using "|" pipe
         } catch (AddressNotFoundException $oE) {
@@ -106,7 +107,7 @@ class Geo
     {
         try {
             // Encode to UTF8 for Latin and other characters of the GeoIP database are displayed correctly
-            $sCity = Str::fixEncoding(static::get($sIpAddress)->city->name);
+            $sCity = mb_convert_encoding(static::get($sIpAddress)->city->name, static::ENCODING);
 
             // TODO: When support PHP 7.1, specify multiple exceptions using "|" pipe
         } catch (AddressNotFoundException $oE) {
