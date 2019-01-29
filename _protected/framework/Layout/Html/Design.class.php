@@ -145,7 +145,7 @@ class Design
         $sCurrentPage = Page::cleanDynamicUrl('l');
         $aLangs = (new File)->getDirList(PH7_PATH_APP_LANG);
 
-        echo '<link rel="alternate" hreflang="x-default" href="', PH7_URL_ROOT, '">'; // For pages that are not specifically targeted
+        echo '<link rel="alternate" hreflang="x-default" href="', PH7_URL_ROOT, '">'; // For pages that aren't specifically targeted
         foreach ($aLangs as $sLang) {
             // Get only the two-letter country code
             $sAbbrLang = Lang::getIsoCode($sLang);
@@ -655,7 +655,7 @@ class Design
                 $sIcon = (GenderTypeUserCoreModel::isGenderValid($sSex) || $sSex === PH7_ADMIN_USERNAME) ? $sSex : 'visitor';
                 $sUrlTplName = defined('PH7_TPL_NAME') ? PH7_TPL_NAME : PH7_DEFAULT_THEME;
 
-                /*** If the user doesn't have an avatar ***/
+                /** If the user doesn't have an avatar **/
                 if (!is_file($sPath)) {
                     /* The user has no avatar, we try to get a Gravatar */
 
