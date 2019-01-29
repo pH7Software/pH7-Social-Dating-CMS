@@ -33,8 +33,6 @@ class SubscriptionFormProcess extends Form
         switch ($this->httpRequest->post('direction')) {
             case 'subscribe': {
                 if (!$bIsSubscriber) {
-                    $iAffId = (int)(new Cookie)->get(AffiliateCore::COOKIE_NAME);
-
                     $aData = [
                         'name' => $sName,
                         'email' => $sEmail,
@@ -42,7 +40,7 @@ class SubscriptionFormProcess extends Form
                         'ip' => Ip::get(),
                         'hash_validation' => Various::genRnd(null, UserCoreModel::HASH_VALIDATION_LENGTH),
                         'active' => '0',
-                        'affiliated_id' => $iAffId
+                        'affiliated_id' => (int)(new Cookie)->get(AffiliateCore::COOKIE_NAME)
                     ];
 
                     if ($this->sendMail($aData)) {
@@ -51,9 +49,6 @@ class SubscriptionFormProcess extends Form
                             t('Please activate your subscription by clicking the activation link you received by email. If you can not find the email, please look in your SPAM FOLDER and mark as not spam.')
                         );
                         $oSubscriptionModel->add($aData);
-
-                        // Update affiliate commission
-                        AffiliateCore::updateJoinCom($iAffId, $this->config, $this->registry);
                     } else {
                         \PFBC\Form::setError('form_subscription', Form::errorSendingEmail());
                     }
