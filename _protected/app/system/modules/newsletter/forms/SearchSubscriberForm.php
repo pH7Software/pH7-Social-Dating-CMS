@@ -17,8 +17,27 @@ class SearchSubscriberForm
         $oForm = new \PFBC\Form('form_search');
         $oForm->configure(['action' => Uri::get('newsletter', 'admin', 'browse') . PH7_SH, 'method' => 'get']);
         $oForm->addElement(new \PFBC\Element\Search(t('Search an Subscriber:'), 'looking', ['description' => t('Enter their ID, Name, Email or IP address.')]));
-        $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', [SearchCoreModel::EMAIL => t('Email'), SearchCoreModel::NAME => t('Name'), SearchCoreModel::LATEST => t('Latest')]));
-        $oForm->addElement(new \PFBC\Element\Select(t('Direction:'), 'sort', [SearchCoreModel::ASC => t('Ascending'), SearchCoreModel::DESC => t('Descending')]));
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('Browse By:'),
+                'order',
+                [
+                    SearchCoreModel::EMAIL => t('Email'),
+                    SearchCoreModel::NAME => t('Name'),
+                    SearchCoreModel::LATEST => t('Latest')
+                ]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('Direction:'),
+                'sort',
+                [
+                    SearchCoreModel::ASC => t('Ascending'),
+                    SearchCoreModel::DESC => t('Descending')
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', ['icon' => 'search']));
         $oForm->render();
     }
