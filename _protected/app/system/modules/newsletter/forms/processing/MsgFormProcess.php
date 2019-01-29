@@ -18,21 +18,21 @@ class MsgFormProcess
     {
         try {
             $aData = (new Newsletter)->sendMessages();
+
+            if (!$aData['status']) {
+                \PFBC\Form::setError('form_msg', Form::errorSendingEmail());
+            } else {
+                \PFBC\Form::setSuccess(
+                    'form_msg',
+                    nt(
+                        '%n% newsletter has been successfully sent',
+                        '%n% newsletters were successfully sent!',
+                        $aData['nb_mail_sent']
+                    )
+                );
+            }
         } catch (Swift_RfcComplianceException $oE) {
             \PFBC\Form::setError('form_msg', $oE->getMessage());
-        }
-
-        if (!$aData['status']) {
-            \PFBC\Form::setError('form_msg', Form::errorSendingEmail());
-        } else {
-            \PFBC\Form::setSuccess(
-                'form_msg',
-                nt(
-                    '%n% newsletter has been successfully sent',
-                    '%n% newsletters were successfully sent!',
-                    $aData['nb_mail_sent']
-                )
-            );
         }
     }
 }
