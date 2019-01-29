@@ -57,19 +57,20 @@ class ConfigFileCoreForm
         $aData = parse_ini_file($sIniFile, true);
         foreach ($aData[$sConfigVar] as $sKey => $sVal) {
             $sLabel = self::getLabelText($sKey);
+            $sFieldName = 'config[' . $sKey . ']';
 
             if (false !== strpos($sKey, 'enable')) {
-                $oForm->addElement(new \PFBC\Element\Select($sLabel, 'config[' . $sKey . ']', [1 => t('Enable'), 0 => t('Disable')], ['value' => $sVal]));
+                $oForm->addElement(new \PFBC\Element\Select($sLabel, $sFieldName, [1 => t('Enable'), 0 => t('Disable')], ['value' => $sVal]));
             } elseif (false !== strpos($sKey, 'email')) {
-                $oForm->addElement(new \PFBC\Element\Email($sLabel, 'config[' . $sKey . ']', ['value' => $sVal]));
+                $oForm->addElement(new \PFBC\Element\Email($sLabel, $sFieldName, ['value' => $sVal]));
             } elseif (false !== strpos($sKey, 'environment')) {
-                $oForm->addElement(new \PFBC\Element\Select($sLabel, 'config[' . $sKey . ']', ['production' => t('Production'), 'development' => t('Development')], ['description' => t('If you see "Internal Server Error" message on your site, please set to "development" mode in order to see the details of the error. If your site is on production (and visible by everyone) please set it to the production mode for security reasons.'), 'value' => $sVal]));
+                $oForm->addElement(new \PFBC\Element\Select($sLabel, $sFieldName, ['production' => t('Production'), 'development' => t('Development')], ['description' => t('If you see "Internal Server Error" message on your site, please set to "development" mode in order to see the details of the error. If your site is on production (and visible by everyone) please set it to the production mode for security reasons.'), 'value' => $sVal]));
             } elseif (false !== strpos($sKey, 'currency_code')) {
-                $oForm->addElement(new \PFBC\Element\Currency($sLabel, 'config[' . $sKey . ']', ['value' => $sVal]));
+                $oForm->addElement(new \PFBC\Element\Currency($sLabel, $sFieldName, ['value' => $sVal]));
             } elseif (is_numeric($sVal)) {
-                $oForm->addElement(new \PFBC\Element\Number($sLabel, 'config[' . $sKey . ']', ['step' => 'any', 'value' => $sVal]));
+                $oForm->addElement(new \PFBC\Element\Number($sLabel, $sFieldName, ['step' => 'any', 'value' => $sVal]));
             } else {
-                $oForm->addElement(new \PFBC\Element\Textbox($sLabel, 'config[' . $sKey . ']', ['value' => $sVal]));
+                $oForm->addElement(new \PFBC\Element\Textbox($sLabel, $sFieldName, ['value' => $sVal]));
             }
         }
         unset($aData);
