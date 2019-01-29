@@ -66,7 +66,7 @@ class ConfigFileCoreForm
                 $oForm->addElement(new \PFBC\Element\Select($sLabel, 'config[' . $sKey . ']', ['production' => t('Production'), 'development' => t('Development')], ['description' => t('If you see "Internal Server Error" message on your site, please set to "development" mode in order to see the details of the error. If your site is on production (and visible by everyone) please set it to the production mode for security reasons.'), 'value' => $sVal]));
             } elseif (false !== strpos($sKey, 'currency_code')) {
                 $oForm->addElement(new \PFBC\Element\Currency($sLabel, 'config[' . $sKey . ']', ['value' => $sVal]));
-            } elseif (ctype_digit($sVal)) {
+            } elseif (is_numeric($sVal)) {
                 $oForm->addElement(new \PFBC\Element\Number($sLabel, 'config[' . $sKey . ']', ['step' => 'any', 'value' => $sVal]));
             } else {
                 $oForm->addElement(new \PFBC\Element\Textbox($sLabel, 'config[' . $sKey . ']', ['value' => $sVal]));
