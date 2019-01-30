@@ -7,7 +7,7 @@
 
 <p>
     {{ LostPwdDesignCore::link('affiliate') }}
-    {if Framework\Mvc\Model\DbConfig::getSetting('affActivationType') == RegistrationCore::EMAIL_ACTIVATION}
+    {if Framework\Mvc\Model\DbConfig::getSetting('affActivationType') == Registration::EMAIL_ACTIVATION}
         | <a rel="nofollow" href="{{ $design->url('affiliate','home','resendactivation') }}">{lang 'Resend activation email'}</a>
     {/if}
 </p>
