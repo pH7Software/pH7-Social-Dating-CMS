@@ -369,7 +369,7 @@ class SettingForm
         $aMods = [];
 
         foreach (self::getActivatableDefMods() as $sMod) {
-            // Skip the disable module (would be impossible to set a disabled module as the default one)
+            // Skip the disabled module (would be impossible to set a disabled module as the default one)
             if (!SysMod::isEnabled($sMod)) {
                 continue;
             }
