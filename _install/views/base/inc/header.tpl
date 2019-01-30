@@ -45,15 +45,17 @@
             <div id="particles-js"></div>
 
             {if !empty($sept_number)}
+                {assign var="progressbar_percentage" value=$sept_number*14.3}
+
                 <div class="progress">
                     <div
                         class="progress-bar progress-bar-striped active"
                         role="progressbar"
-                        aria-valuenow="{$sept_number*14.3}"
+                        aria-valuenow="{$progressbar_percentage}"
                         aria-valuemin="0"
                         aria-valuemax="100"
-                        style="width:{$sept_number*14.3}%"
-                    >{$sept_number*14.3}%
+                        style="width:{$progressbar_percentage}%"
+                    >{$progressbar_percentage}%
                     </div>
                 </div>
             {/if}
