@@ -236,9 +236,11 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Number(t('Send Comment delay:'), 'time_delay_send_comment', ['description' => t('Number of minutes for the same user can send a new comment.'), 'value' => DbConfig::getSetting('timeDelaySendComment'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Send Forum Topic delay:'), 'time_delay_send_forum_topic', ['description' => t('Number of minutes for the same user can send a new topic in the forum.'), 'value' => DbConfig::getSetting('timeDelaySendForumTopic'), 'required' => 1]));
+        if (SysMod::isEnabled('forum')) {
+            $oForm->addElement(new \PFBC\Element\Number(t('Send Forum Topic delay:'), 'time_delay_send_forum_topic', ['description' => t('Number of minutes for the same user can send a new topic in the forum.'), 'value' => DbConfig::getSetting('timeDelaySendForumTopic'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Send Forum Message delay:'), 'time_delay_send_forum_msg', ['description' => t('Number of minutes for the same user can send a reply message in the same topic.'), 'value' => DbConfig::getSetting('timeDelaySendForumMsg'), 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\Number(t('Send Forum Message delay:'), 'time_delay_send_forum_msg', ['description' => t('Number of minutes for the same user can send a reply message in the same topic.'), 'value' => DbConfig::getSetting('timeDelaySendForumMsg'), 'required' => 1]));
+        }
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Captcha') . '</h3>'));
 
