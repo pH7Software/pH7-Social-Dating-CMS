@@ -1,7 +1,7 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Form
  */
@@ -16,11 +16,13 @@ use PH7\Framework\Url\Header;
 /** For "user" and "affiliate" module **/
 class ResendActivationCoreForm
 {
+    /**
+     * @param string $sTable
+     */
     public static function display($sTable = DbTableName::MEMBER)
     {
         // Show the form only if the activation mode is activated by email
-        $sMod = $sTable === DbTableName::AFFILIATE ? 'aff' : 'user';
-        if (DbConfig::getSetting($sMod . 'ActivationType') == 2) {
+        if (self::isEmailActivation($sTable)) {
             if (isset($_POST['submit_resend_activation'])) {
                 if (\PFBC\Form::isValid($_POST['submit_resend_activation'])) {
                     new ResendActivationCoreFormProcess($sTable);
@@ -41,5 +43,17 @@ class ResendActivationCoreForm
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
             $oForm->render();
         }
+    }
+
+    /**
+     * @param string $sTable
+     *
+     * @return bool
+     */
+    private static function isEmailActivation($sTable)
+    {
+        $sMod = $sTable === DbTableName::AFFILIATE ? 'aff' : 'user';
+
+        return DbConfig::getSetting($sMod . 'ActivationType') == RegistrationCore::EMAIL_ACTIVATION;
     }
 }
