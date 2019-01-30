@@ -49,7 +49,7 @@
                     <div
                         class="progress-bar progress-bar-striped active"
                         role="progressbar"
-                        aria-valuenow="60"
+                        aria-valuenow="{$sept_number*14.3}"
                         aria-valuemin="0"
                         aria-valuemax="100"
                         style="width:{$sept_number*14.3}%"
