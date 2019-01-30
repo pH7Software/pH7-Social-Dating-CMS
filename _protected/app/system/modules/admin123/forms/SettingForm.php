@@ -34,6 +34,8 @@ class SettingForm
             Header::redirect();
         }
 
+        $bIsAffiliateEnabled = SysMod::isEnabled('affiliate');
+
         $oForm = new \PFBC\Form('form_setting');
         $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_setting', 'form_setting'));
@@ -94,7 +96,9 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Account activation type for Members:'), 'user_activation_type', ['1' => t('No activation required'), '2' => t('Self-activation via email'), '3' => t('Manual activation by administrator')], ['value' => DbConfig::getSetting('userActivationType'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Account activation type for Affiliates:'), 'aff_activation_type', ['1' => t('No activation required'), '2' => t('Self-activation via email'), '3' => t('Manual activation by administrator')], ['value' => DbConfig::getSetting('affActivationType'), 'required' => 1]));
+        if ($bIsAffiliateEnabled) {
+            $oForm->addElement(new \PFBC\Element\Select(t('Account activation type for Affiliates:'), 'aff_activation_type', ['1' => t('No activation required'), '2' => t('Self-activation via email'), '3' => t('Manual activation by administrator')], ['value' => DbConfig::getSetting('affActivationType'), 'required' => 1]));
+        }
 
         $oForm->addElement(new \PFBC\Element\Number(t('Minimum username length:'), 'min_username_length', ['value' => DbConfig::getSetting('minUsernameLength'), 'max' => DbConfig::getSetting('maxUsernameLength') - 1, 'required' => 1]));
 
@@ -170,19 +174,25 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Blocking login attempts exceeded for Users:'), 'is_user_login_attempt', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('isUserLoginAttempt'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Blocking login attempts exceeded for Affiliates:'), 'is_affiliate_login_attempt', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('isAffiliateLoginAttempt'), 'required' => 1]));
+        if ($bIsAffiliateEnabled) {
+            $oForm->addElement(new \PFBC\Element\Select(t('Blocking login attempts exceeded for Affiliates:'), 'is_affiliate_login_attempt', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('isAffiliateLoginAttempt'), 'required' => 1]));
+        }
 
         $oForm->addElement(new \PFBC\Element\Select(t('Blocking login attempts exceeded for Admins:'), 'is_admin_login_attempt', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('isAdminLoginAttempt'), 'required' => 1]));
 
         $oForm->addElement(new \PFBC\Element\Number(t('Max number of login attempts before blocking for Users:'), 'max_user_login_attempts', ['value' => DbConfig::getSetting('maxUserLoginAttempts'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Max number of login attempts before blocking for Affiliates:'), 'max_affiliate_login_attempts', ['value' => DbConfig::getSetting('maxAffiliateLoginAttempts'), 'required' => 1]));
+        if ($bIsAffiliateEnabled) {
+            $oForm->addElement(new \PFBC\Element\Number(t('Max number of login attempts before blocking for Affiliates:'), 'max_affiliate_login_attempts', ['value' => DbConfig::getSetting('maxAffiliateLoginAttempts'), 'required' => 1]));
+        }
 
         $oForm->addElement(new \PFBC\Element\Number(t('Max number of login attempts before blocking for Admins:'), 'max_admin_login_attempts', ['value' => DbConfig::getSetting('maxAdminLoginAttempts'), 'required' => 1]));
 
         $oForm->addElement(new \PFBC\Element\Number(t('Time interval blocking for Users:'), 'login_user_attempt_time', ['description' => t('Time in minutes.'), 'value' => DbConfig::getSetting('loginUserAttemptTime'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Time interval blocking for Affiliates:'), 'login_affiliate_attempt_time', ['description' => t('Time in minutes.'), 'value' => DbConfig::getSetting('loginAffiliateAttemptTime'), 'required' => 1]));
+        if ($bIsAffiliateEnabled) {
+            $oForm->addElement(new \PFBC\Element\Number(t('Time interval blocking for Affiliates:'), 'login_affiliate_attempt_time', ['description' => t('Time in minutes.'), 'value' => DbConfig::getSetting('loginAffiliateAttemptTime'), 'required' => 1]));
+        }
 
         $oForm->addElement(new \PFBC\Element\Number(t('Time interval blocking for Admins:'), 'login_admin_attempt_time', ['description' => t('Time in minutes.'), 'value' => DbConfig::getSetting('loginAdminAttemptTime'), 'required' => 1]));
 
@@ -200,7 +210,9 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Protect for Users against session cookies hijacking:'), 'is_user_session_ip_check', ['1' => t('Yes (recommended for security reasons)'), '0' => t('No')], ['description' => t('This protection can cause problems for logged in users with dynamic IPs. Please disable if their IP changes frequently during the session.'), 'value' => DbConfig::getSetting('isUserSessionIpCheck'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Protect for Affiliates against session cookies hijacking:'), 'is_affiliate_session_ip_check', ['1' => t('Yes (recommended for security reasons)'), '0' => t('No')], ['description' => t('This protection can cause problems for affiliates with dynamic IPs. Please disable if their IP changes frequently during the session.'), 'value' => DbConfig::getSetting('isAffiliateSessionIpCheck'), 'required' => 1]));
+        if ($bIsAffiliateEnabled) {
+            $oForm->addElement(new \PFBC\Element\Select(t('Protect for Affiliates against session cookies hijacking:'), 'is_affiliate_session_ip_check', ['1' => t('Yes (recommended for security reasons)'), '0' => t('No')], ['description' => t('This protection can cause problems for affiliates with dynamic IPs. Please disable if their IP changes frequently during the session.'), 'value' => DbConfig::getSetting('isAffiliateSessionIpCheck'), 'required' => 1]));
+        }
 
         $oForm->addElement(new \PFBC\Element\Select(t('Protect for Admins against session cookies hijacking:'), 'is_admin_session_ip_check', ['1' => t('Yes (highly recommended for security reasons)'), '0' => t('No')], ['description' => t('This protection can cause problems for admins with dynamic IPs. Please disable if their IP changes frequently during the session.'), 'value' => DbConfig::getSetting('isAdminSessionIpCheck'), 'required' => 1]));
 
@@ -214,7 +226,9 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Number(t('Registration delay for Users:'), 'time_delay_user_registration', ['description' => t('Number of minutes that has to pass before a user with the same IP address can register again.'), 'value' => DbConfig::getSetting('timeDelayUserRegistration'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Registration delay for Affiliates:'), 'time_delay_aff_registration', ['description' => t('Number of minutes that has to pass before an affiliate with the same IP address can register again.'), 'value' => DbConfig::getSetting('timeDelayAffRegistration'), 'required' => 1]));
+        if ($bIsAffiliateEnabled) {
+            $oForm->addElement(new \PFBC\Element\Number(t('Registration delay for Affiliates:'), 'time_delay_aff_registration', ['description' => t('Number of minutes that has to pass before an affiliate with the same IP address can register again.'), 'value' => DbConfig::getSetting('timeDelayAffRegistration'), 'required' => 1]));
+        }
 
         $oForm->addElement(new \PFBC\Element\Number(t('Send Note delay:'), 'time_delay_send_note', ['description' => t('Number of minutes for the same user to post a new note.'), 'value' => DbConfig::getSetting('timeDelaySendNote'), 'required' => 1]));
 
@@ -234,7 +248,9 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Captcha for User Signup Form:'), 'is_captcha_user_signup', ['1' => t('Activate'), '0' => t('Deactivate')], ['value' => DbConfig::getSetting('isCaptchaUserSignup'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Captcha for Affiliate Signup Form:'), 'is_captcha_affiliate_signup', ['1' => t('Activate'), '0' => t('Deactivate')], ['value' => DbConfig::getSetting('isCaptchaAffiliateSignup'), 'required' => 1]));
+        if ($bIsAffiliateEnabled) {
+            $oForm->addElement(new \PFBC\Element\Select(t('Captcha for Affiliate Signup Form:'), 'is_captcha_affiliate_signup', ['1' => t('Activate'), '0' => t('Deactivate')], ['value' => DbConfig::getSetting('isCaptchaAffiliateSignup'), 'required' => 1]));
+        }
 
         $oForm->addElement(new \PFBC\Element\Select(t('Captcha for sending Messages between users:'), 'is_captcha_mail', ['1' => t('Activate'), '0' => t('Deactivate')], ['value' => DbConfig::getSetting('isCaptchaMail'), 'required' => 1]));
 
