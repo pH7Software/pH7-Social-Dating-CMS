@@ -52,11 +52,7 @@ class RatingCoreAjax
     {
         $this->oHttpRequest = new HttpRequest;
 
-        if ($this->oHttpRequest->postExists('action') &&
-            $this->oHttpRequest->postExists('table') &&
-            $this->oHttpRequest->postExists('score') &&
-            $this->oHttpRequest->postExists('id')
-        ) {
+        if ($this->isValidRequestToRate()) {
             if ($this->oHttpRequest->post('action') === 'rating') {
                 // Only for the Members
                 if (!UserCore::auth()) {
@@ -149,6 +145,17 @@ class RatingCoreAjax
     {
         $this->oRatingModel->updateVotes($this->iId, $this->sTable);
         $this->oRatingModel->updateScore($this->fScore, $this->iId, $this->sTable);
+    }
+
+    /**
+     * @return bool
+     */
+    private function isValidRequestToRate()
+    {
+        return $this->oHttpRequest->postExists('action') &&
+            $this->oHttpRequest->postExists('table') &&
+            $this->oHttpRequest->postExists('score') &&
+            $this->oHttpRequest->postExists('id');
     }
 
     /**
