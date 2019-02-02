@@ -74,17 +74,7 @@ class AdminController extends Controller
         unset($oPage);
 
         if (empty($oBrowse)) {
-            $this->design->setRedirect(
-                Uri::get(
-                    'newsletter',
-                    'admin',
-                    'browse'
-                ),
-                null,
-                null,
-                self::REDIRECTION_DELAY_IN_SEC
-            );
-            $this->displayPageNotFound(t('Sorry, Your search returned no results!'));
+            $this->setNotFoundPage();
         } else {
             // Add the js file necessary for the browse form
             $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
@@ -122,5 +112,25 @@ class AdminController extends Controller
             Uri::get('newsletter', 'admin', 'browse'),
             $sMsg
         );
+    }
+
+    /**
+     * Redirects to admin browse page, then displays the default "Not Found" page.
+     *
+     * @return void
+     */
+    private function setNotFoundPage()
+    {
+        $this->design->setRedirect(
+            Uri::get(
+                'newsletter',
+                'admin',
+                'browse'
+            ),
+            null,
+            null,
+            self::REDIRECTION_DELAY_IN_SEC
+        );
+        $this->displayPageNotFound(t('Sorry, Your search returned no results!'));
     }
 }
