@@ -16,6 +16,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Session\Session;
 
 class LikeCoreAjax
 {
@@ -92,9 +93,11 @@ class LikeCoreAjax
 
             if ($this->isUserVoting()) {
                 $this->update();
+                $this->storeUserInteraction();
             }
         } elseif ($this->isUserVoting()) {
             $this->insert();
+            $this->storeUserInteraction();
         }
     }
 
@@ -138,6 +141,25 @@ class LikeCoreAjax
     private function isUserVoting()
     {
         return $this->iVote && $this->checkPerm();
+    }
+
+    /**
+     * @return void
+     */
+    private function storeUserInteraction()
+    {
+        $oSession = new Session;
+
+        $iProfileId = 0;
+        if ($oSession->exists('member_id')) {
+            $iProfileId = $oSession->get('member_id');
+        }
+
+        UserSpyCoreModel::addUserAction(
+            $iProfileId,
+            $this->sKey,
+            t('%0% likes <a href="%1%">%1%</a>', $oSession->get('member_username'), $$this->sKey)
+        );
     }
 }
 
