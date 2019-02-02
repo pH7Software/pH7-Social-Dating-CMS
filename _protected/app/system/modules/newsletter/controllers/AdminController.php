@@ -16,7 +16,6 @@ use PH7\Framework\Url\Header;
 class AdminController extends Controller
 {
     const SUBSCRIBERS_PER_PAGE = 30;
-
     const REDIRECTION_DELAY_IN_SEC = 5;
 
     /** @var SubscriptionModel */
