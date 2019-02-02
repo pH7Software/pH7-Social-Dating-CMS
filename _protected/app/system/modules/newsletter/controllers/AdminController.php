@@ -17,6 +17,8 @@ class AdminController extends Controller
 {
     const SUBSCRIBERS_PER_PAGE = 30;
 
+    const REDIRECTION_DELAY_IN_SEC = 5;
+
     /** @var SubscriptionModel */
     private $oSubscriptionModel;
 
@@ -78,7 +80,10 @@ class AdminController extends Controller
                     'newsletter',
                     'admin',
                     'browse'
-                )
+                ),
+                null,
+                null,
+                self::REDIRECTION_DELAY_IN_SEC
             );
             $this->displayPageNotFound(t('Sorry, Your search returned no results!'));
         } else {
