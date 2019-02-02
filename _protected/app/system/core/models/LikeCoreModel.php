@@ -51,7 +51,7 @@ class LikeCoreModel extends Model
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindValue(':key', $sKey, \PDO::PARAM_STR);
-        $rStmt->bindValue(':lastIp', $fLastIp, \PDO::PARAM_INT);
+        $rStmt->bindValue(':lastIp', $fLastIp, \PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -69,7 +69,7 @@ class LikeCoreModel extends Model
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindValue(':key', $sKey, \PDO::PARAM_STR);
-        $rStmt->bindValue(':lastIp', $fLastIp, \PDO::PARAM_INT);
+        $rStmt->bindValue(':lastIp', $fLastIp, \PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
