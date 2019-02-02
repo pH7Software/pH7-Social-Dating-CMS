@@ -54,7 +54,7 @@ class UserCore
     const AVATAR7_SIZE = 400;
 
     /**
-     * Users'levels.
+     * Check if a user is authenticated.
      *
      * @return bool
      */
@@ -63,14 +63,14 @@ class UserCore
         $oSession = new Session;
         $bSessionIpCheck = ((bool)DbConfig::getSetting('isUserSessionIpCheck')) ? $oSession->get('member_ip') === Ip::get() : true;
 
-        $bIsConnected = (int)$oSession->exists('member_id') &&
+        $bIsLogged = (bool)$oSession->exists('member_id') &&
             $bSessionIpCheck &&
             $oSession->get('member_http_user_agent') === (new Browser)->getUserAgent();
 
         /** Destroy the object to minimize the CPU resources **/
         unset($oSession);
 
-        return $bIsConnected;
+        return $bIsLogged;
     }
 
     /**

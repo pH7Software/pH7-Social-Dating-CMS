@@ -23,7 +23,7 @@ class AdminCore extends UserCore
     const ROOT_PROILE_ID = 1;
 
     /**
-     * Admins'levels.
+     * Check if an admin is authenticated.
      *
      * @return bool
      */
@@ -32,12 +32,12 @@ class AdminCore extends UserCore
         $oSession = new Session;
         $bSessionIpCheck = ((bool)DbConfig::getSetting('isAdminSessionIpCheck')) ? $oSession->get('admin_ip') === Ip::get() : true;
 
-        $bIsConnected = (int)$oSession->exists('admin_id') &&
+        $bIsLogged = (bool)$oSession->exists('admin_id') &&
             $bSessionIpCheck &&
             $oSession->get('admin_http_user_agent') === (new Browser)->getUserAgent();
         unset($oSession);
 
-        return $bIsConnected;
+        return $bIsLogged;
     }
 
     /**
