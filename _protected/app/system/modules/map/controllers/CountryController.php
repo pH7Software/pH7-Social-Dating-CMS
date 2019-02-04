@@ -28,12 +28,6 @@ class CountryController extends Controller
 
     public function index()
     {
-        // Add Stylesheet tooltip
-        $this->design->addCss(
-            PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS,
-            'tooltip.css'
-        );
-
         if ($this->httpRequest->getExists('country')) {
             // Get the country and city, limited to 50 characters and remove dashes automatically added from the URL
             $this->registry->country = $this->getCountry();
@@ -62,6 +56,8 @@ class CountryController extends Controller
             $this->view->current_page = $oPage->getCurrentPage();
             $this->view->first_user = $oPage->getFirstItem();
             $this->view->nb_user_by_page = $oPage->getNbItemsPerPage();
+
+            $this->addTooltipCssFile();
 
             // SEO Meta
             $this->setMetaTags($iTotalUsers);
@@ -152,6 +148,19 @@ class CountryController extends Controller
             '-',
             ' ',
             substr($this->str->upperFirst($this->httpRequest->get('city')), 0, self::MAX_CITY_LENGTH)
+        );
+    }
+
+    /**
+     * Add the stylesheet for the tooltips on the page.
+     *
+     * @return void
+     */
+    private function addTooltipCssFile()
+    {
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS,
+            'tooltip.css'
         );
     }
 }
