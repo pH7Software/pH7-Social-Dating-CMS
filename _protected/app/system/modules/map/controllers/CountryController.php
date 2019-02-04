@@ -58,8 +58,6 @@ class CountryController extends Controller
             $this->view->nb_user_by_page = $oPage->getNbItemsPerPage();
 
             $this->addTooltipCssFile();
-
-            // SEO Meta
             $this->setMetaTags($iTotalUsers);
         } else {
             // Not found page
