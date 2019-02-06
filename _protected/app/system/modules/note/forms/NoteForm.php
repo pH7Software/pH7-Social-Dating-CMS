@@ -70,7 +70,7 @@ class NoteForm
         $oForm->addElement(new \PFBC\Element\Checkbox(t('Categories:'), 'category_id', $aCategoryNames, ['description' => t('Select a category that fits the best for your article. You can select up to three different categories'), 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
         $oForm->addElement(new \PFBC\Element\CKEditor(t('Body:'), 'content', ['validation' => new \PFBC\Validation\Str(30), 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('The language of the post:'), 'lang_id', ['description' => t('e.g., "en", "fr", "es", "js"'), 'pattern' => '[a-z]{2}', 'validation' => new \PFBC\Validation\Str(2, 2), 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('The language of the post:'), 'lang_id', ['description' => t('e.g., "en", "fr", "es", "js"'), 'value' => PH7_LANG_CODE, 'pattern' => '[a-z]{2}', 'validation' => new \PFBC\Validation\Str(2, 2), 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Slogan:'), 'slogan', ['validation' => new \PFBC\Validation\Str(2, 190)]));
         $oForm->addElement(new \PFBC\Element\File(t('Thumbnail:'), 'thumb', ['accept' => 'image/*']));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Tags:'), 'tags', ['description' => t('Separate keywords by commas and without spaces between the commas.'), 'validation' => new \PFBC\Validation\Str(2, 190)]));
