@@ -95,7 +95,7 @@ class EditNoteForm
             $oForm->addElement(new \PFBC\Element\Checkbox(t('Categories:'), 'category_id', $aCategoryNames, ['description' => t('Select a category that fits the best for your article. You can select up to three different categories'), 'value' => $aSelectedCategories, 'required' => 1]));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
             $oForm->addElement(new \PFBC\Element\CKEditor(t('Body:'), 'content', ['value' => $oPost->content, 'validation' => new \PFBC\Validation\Str(30), 'required' => 1]));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('The language of your post:'), 'lang_id', ['value' => $oPost->langId, 'description' => t('e.g., "en", "fr", "es", "js"'), 'pattern' => '[a-z]{2}', 'validation' => new \PFBC\Validation\Str(2, 2), 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Language of your post:'), 'lang_id', ['value' => $oPost->langId, 'description' => t('e.g., "en", "fr", "es", "js"'), 'pattern' => '[a-z]{2}', 'validation' => new \PFBC\Validation\Str(2, 2), 'required' => 1]));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Slogan:'), 'slogan', ['value' => $oPost->slogan, 'validation' => new \PFBC\Validation\Str(2, 190)]));
             $oForm->addElement(new \PFBC\Element\File(t('Thumbnail:'), 'thumb', ['accept' => 'image/*']));
 

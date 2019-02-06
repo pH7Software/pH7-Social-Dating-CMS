@@ -5729,7 +5729,7 @@ msgid "Body:"
 msgstr ""
 
 #: _protected/app/system/modules/blog/forms/AdminBlogForm.php:61
-msgid "The language of the article:"
+msgid "Language of the article:"
 msgstr ""
 
 #: _protected/app/system/modules/blog/forms/AdminBlogForm.php:61
@@ -5776,7 +5776,7 @@ msgid "Enable Comment:"
 msgstr ""
 
 #: _protected/app/system/modules/blog/forms/EditAdminBlogForm.php:82
-msgid "The language of your article:"
+msgid "Language of your article:"
 msgstr ""
 
 #: _protected/app/system/modules/blog/forms/EditAdminBlogForm.php:82
@@ -8065,11 +8065,11 @@ msgid ""
 msgstr ""
 
 #: _protected/app/system/modules/note/forms/EditNoteForm.php:97
-msgid "The language of your post:"
+msgid "Language of your post:"
 msgstr ""
 
 #: _protected/app/system/modules/note/forms/NoteForm.php:64
-msgid "The language of the post:"
+msgid "Language of the post:"
 msgstr ""
 
 #: _protected/app/system/modules/note/forms/SearchNoteForm.php:22
