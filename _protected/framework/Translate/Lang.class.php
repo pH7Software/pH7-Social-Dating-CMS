@@ -73,7 +73,7 @@ namespace PH7\Framework\Translate {
         }
 
         /**
-         * Get the two-letter country code; ISO 3166-1 alpha-2
+         * Get the two-letter country code (lower case). ISO 3166-1 alpha-2
          *
          * @param string $sLocaleName Locale language name (e.g., locale such as "en_US", ..).
          * @param int $iPositionLangCode
