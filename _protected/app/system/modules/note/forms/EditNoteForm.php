@@ -71,7 +71,7 @@ class EditNoteForm
                     'title',
                     [
                         'value' => $oPost->title,
-                        'validation' => new \PFBC\Validation\Str(2, 50),
+                        'validation' => new \PFBC\Validation\Str(2, 60),
                         'required' => 1
                     ]
                 )
@@ -80,7 +80,8 @@ class EditNoteForm
                 new \PFBC\Element\Textbox(
                     t('Article ID:'),
                     'post_id',
-                    ['value' => $oPost->postId,
+                    [
+                        'value' => $oPost->postId,
                         'description' => Uri::get('note', 'main', 'read', (new Session)->get('member_username')) . '/<strong><span class="your-address">' . $oPost->postId . '</span><span class="post_id"></span></strong>',
                         'title' => t('Article ID will be the name of the URL.'),
                         'data-profile_id' => $iProfileId,

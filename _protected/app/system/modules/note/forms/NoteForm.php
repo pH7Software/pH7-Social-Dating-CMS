@@ -42,7 +42,16 @@ class NoteForm
         $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_note', 'form_note'));
         $oForm->addElement(new \PFBC\Element\Token('note'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Article name:'), 'title', ['validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1]));
+        $oForm->addElement(
+            new \PFBC\Element\Textbox(
+                t('Article name:'),
+                'title',
+                [
+                    'validation' => new \PFBC\Validation\Str(2, 60),
+                    'required' => 1
+                ]
+            )
+        );
         $oForm->addElement(
             new \PFBC\Element\Textbox(
                 t('Article ID:'),

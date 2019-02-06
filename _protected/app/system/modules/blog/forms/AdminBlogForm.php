@@ -40,7 +40,16 @@ class AdminBlogForm
         $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_blog', 'form_blog'));
         $oForm->addElement(new \PFBC\Element\Token('blog'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Article name:'), 'title', ['validation' => new \PFBC\Validation\Str(2, 60), 'required' => 1]));
+        $oForm->addElement(
+            new \PFBC\Element\Textbox(
+                t('Article name:'),
+                'title',
+                [
+                    'validation' => new \PFBC\Validation\Str(2, 60),
+                    'required' => 1
+                ]
+            )
+        );
         $oForm->addElement(
             new \PFBC\Element\Textbox(
                 t('Article ID:'),
