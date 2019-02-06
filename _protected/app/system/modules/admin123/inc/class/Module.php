@@ -59,7 +59,7 @@ class Module
     {
         $this->oFile = new F\File;
         $this->sDefLangRoute = PH7_LANG_CODE;
-        $this->sRoutePath = PH7_PATH_APP_CONFIG . 'routes/' . $this->sDefLangRoute . '.xml';
+        $this->sRoutePath = PH7_PATH_APP_CONFIG . 'routes/' . $this->sDefLangRoute . Uri::ROUTE_FILE_EXT;
     }
 
     public function setPath($sModsDirModFolder)
