@@ -112,7 +112,7 @@
                         <td class="small">{% $user->reference %}</td>
                         <td class="small">
                             <a href="{{ $design->url('realestate','setting','edit',$user->profileId) }}" title="{lang "Edit User's Profile"}">{lang 'Edit'}</a> |
-                            <a href="{{ $design->url('realestate','setting','avatar',"$user->profileId,$user->username,$user->firstName,$user->sex", false) }}" title="{lang "Edit User's Profile Photo"}">{lang 'Edit Avatar'}</a> |
+                            <a href="{{ $design->url('realestate','setting','avatar',"$user->profileId,$user->username,$user->firstName,$user->sex", false) }}" title="{lang "Edit User's Profile Photo"}">{lang 'Edit Avatar'}</a>
                             {if $is_mail_enabled}
                                 | <a href="{{ $design->url('mail','main','compose',$user->username) }}" title="{lang 'Send a message to this user'}">{lang 'Send Mail'}</a>
                             {/if}
