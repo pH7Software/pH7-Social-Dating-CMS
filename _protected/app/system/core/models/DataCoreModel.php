@@ -105,6 +105,11 @@ class DataCoreModel extends Model
         return $this->getForumsPosts(SearchCoreModel::CREATED, 0, static::MAX_ITEMS);
     }
 
+    /**
+     * @param int $iTopicId
+     *
+     * @return array|false|\stdClass
+     */
     public function getForumsMessages($iTopicId)
     {
         return (new ForumCoreModel)->getMessage(
