@@ -81,6 +81,9 @@ class MainController extends Controller
         $this->output();
     }
 
+    /**
+     * @internal It uses "__toString" magic for returning the URL.
+     */
     private function whatApi()
     {
         switch ($this->sApi) {
