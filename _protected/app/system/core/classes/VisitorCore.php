@@ -8,11 +8,24 @@
 
 namespace PH7;
 
+use PH7\Framework\Date\CDateTime;
 use stdClass;
 
 class VisitorCore
 {
     const DATETIME_FORMAT = 'Y-m-d H:i:s';
+
+    /** @var ProfileBaseController */
+    private $oProfile;
+
+    /** @var CDateTime */
+    private $oDateTime;
+
+    public function __construct(ProfileBaseController $oProfile)
+    {
+        $this->oProfile = $oProfile;
+        $this->oDateTime = new CDateTime;
+    }
 
     /**
      * @return void
@@ -20,9 +33,9 @@ class VisitorCore
     public function updateViews()
     {
         $oVisitorModel = new VisitorCoreModel(
-            $this->iProfileId,
-            $this->iVisitorId,
-            $this->dateTime->get()->dateTime(self::DATETIME_FORMAT)
+            $this->oProfile->getProfileId(),
+            $this->oProfile->getVisitorId(),
+            $this->oDateTime->get()->dateTime(self::DATETIME_FORMAT)
         );
 
         if (!$oVisitorModel->already()) {
@@ -35,14 +48,10 @@ class VisitorCore
         unset($oVisitorModel);
     }
 
-    public function isViewUpdateEligible(
-        stdClass $oPrivacyViewsUser,
-        stdClass $oPrivacyViewsVisitor,
-        ProfileBaseController $oProfile
-    )
+    public function isViewUpdateEligible(stdClass $oPrivacyViewsUser, stdClass $oPrivacyViewsVisitor)
     {
         return $oPrivacyViewsUser->userSaveViews === PrivacyCore::YES &&
             $oPrivacyViewsVisitor->userSaveViews === PrivacyCore::YES &&
-            !$oProfile->isOwnProfile();
+            !$this->oProfile->isOwnProfile();
     }
 }

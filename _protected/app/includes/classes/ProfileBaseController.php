@@ -74,6 +74,22 @@ abstract class ProfileBaseController extends Controller
     }
 
     /**
+     * @return int
+     */
+    public function getProfileId()
+    {
+        return $this->iProfileId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getVisitorId()
+    {
+        return $this->iVisitorId;
+    }
+
+    /**
      * Privacy Profile.
      *
      * @param UserCoreModel $oUserModel
@@ -313,10 +329,10 @@ abstract class ProfileBaseController extends Controller
 
     private function updateProfileViews(UserCoreModel $oUserModel, stdClass $oPrivacyViewsUser)
     {
-        $oVisitor = new VisitorCore;
+        $oVisitor = new VisitorCore($this);
         $oPrivacyViewsVisitor = $oUserModel->getPrivacySetting($this->iVisitorId);
 
-        if ($oVisitor->isViewUpdateEligible($oPrivacyViewsUser, $oPrivacyViewsVisitor, $this)) {
+        if ($oVisitor->isViewUpdateEligible($oPrivacyViewsUser, $oPrivacyViewsVisitor)) {
             $oVisitor->updateViews();
         }
         unset($oPrivacyViewsVisitor);
