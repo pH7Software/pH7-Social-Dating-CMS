@@ -15,7 +15,7 @@ class VisitorCore
     /**
      * @return void
      */
-    public function updateVisitorViews()
+    public function updateViews()
     {
         $oVisitorModel = new VisitorCoreModel(
             $this->iProfileId,
@@ -33,7 +33,7 @@ class VisitorCore
         unset($oVisitorModel);
     }
 
-    public function isVisitorViewUpdateEligible(
+    public function isViewUpdateEligible(
         stdClass $oPrivacyViewsUser,
         stdClass $oPrivacyViewsVisitor,
         ProfileBaseController $oProfile

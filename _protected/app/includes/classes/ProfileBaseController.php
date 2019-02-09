@@ -316,8 +316,8 @@ abstract class ProfileBaseController extends Controller
         $oVisitor = new VisitorCore;
         $oPrivacyViewsVisitor = $oUserModel->getPrivacySetting($this->iVisitorId);
 
-        if ($oVisitor->isVisitorViewUpdateEligible($oPrivacyViewsUser, $oPrivacyViewsVisitor, $this)) {
-            $oVisitor->updateVisitorViews();
+        if ($oVisitor->isViewUpdateEligible($oPrivacyViewsUser, $oPrivacyViewsVisitor, $this)) {
+            $oVisitor->updateViews();
         }
         unset($oPrivacyViewsVisitor);
     }
