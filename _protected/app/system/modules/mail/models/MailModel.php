@@ -14,6 +14,7 @@ use PH7\Framework\Mvc\Model\Spam as SpamModel;
 
 class MailModel extends MailCoreModel
 {
+    const ALL = 0;
     const INBOX = 1;
     const OUTBOX = 2;
     const TRASH = 3;
@@ -223,11 +224,11 @@ class MailModel extends MailCoreModel
      * @param int $iOffset
      * @param int $iLimit
      * @param int|null $iProfileId
-     * @param string $sType
+     * @param int $iType
      *
      * @return int|\stdClass
      */
-    public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $iProfileId = null, $sType = 'all')
+    public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $iProfileId = null, $iType = self::ALL)
     {
         $bCount = (bool)$bCount;
         $iOffset = (int)$iOffset;
@@ -240,7 +241,7 @@ class MailModel extends MailCoreModel
         $sSqlFind = ' ' . ($bDigitSearch ? '(messageId = :looking)' : '(title LIKE :looking OR message LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)');
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
-        switch ($sType) {
+        switch ($iType) {
             case self::INBOX && $iProfileId !== null:
                 $sSql = 'msg.sender = m.profileId WHERE (msg.recipient = :profileId) AND (NOT FIND_IN_SET(\'recipient\', msg.trash)) AND';
                 break;
