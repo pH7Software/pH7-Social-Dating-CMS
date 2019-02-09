@@ -117,7 +117,7 @@ abstract class ProfileBaseController extends Controller
 
         // Update the "Who's Viewed Your Profile"
         if ($this->bUserAuth) {
-            $this->updateProfileViews($oUserModel, $oPrivacyViewsUser);
+            $this->updateProfileViews($oPrivacyViewsUser, $oUserModel);
         }
         unset($oPrivacyViewsUser);
     }
@@ -327,7 +327,7 @@ abstract class ProfileBaseController extends Controller
         $this->view->image_social_meta_tag = $sAvatarImageUrl;
     }
 
-    private function updateProfileViews(UserCoreModel $oUserModel, stdClass $oPrivacyViewsUser)
+    private function updateProfileViews(stdClass $oPrivacyViewsUser, UserCoreModel $oUserModel)
     {
         $oVisitor = new VisitorCore($this);
         $oPrivacyViewsVisitor = $oUserModel->getPrivacySetting($this->iVisitorId);
