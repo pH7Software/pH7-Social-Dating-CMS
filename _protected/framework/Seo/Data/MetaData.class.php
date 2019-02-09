@@ -11,7 +11,7 @@ namespace PH7\Framework\Seo\Data;
 final class MetaData
 {
     /**
-     * @param string $sLangId The new language key (e.g., de_DE, fr_FR)
+     * @param string $sLangId The new language key (e.g., de_DE, fr_FR).
      *
      * @return array
      */
