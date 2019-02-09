@@ -52,7 +52,13 @@ class MailFormProcess extends Form
         } elseif (!$bIsAdmin && Spam::areUrls($sMessage, self::MAX_ALLOWED_LINKS)) {
             \PFBC\Form::setError('form_compose_mail', Form::tooManyUrlsMsg());
         } else {
-            $mSendMsg = $oMailModel->sendMsg($iSenderId, $iRecipientId, $this->httpRequest->post('title'), $sMessage, $sCurrentTime);
+            $mSendMsg = $oMailModel->sendMsg(
+                $iSenderId,
+                $iRecipientId,
+                $this->httpRequest->post('title'),
+                $sMessage,
+                $sCurrentTime
+            );
 
             if (false === $mSendMsg) {
                 \PFBC\Form::setError(
