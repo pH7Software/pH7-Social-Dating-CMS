@@ -66,6 +66,14 @@ abstract class ProfileBaseController extends Controller
     }
 
     /**
+     * @return bool TRUE if the user is on their own profile, FALSE otherwise.
+     */
+    public function isOwnProfile()
+    {
+        return $this->str->equals($this->iVisitorId, $this->iProfileId);
+    }
+
+    /**
      * Privacy Profile.
      *
      * @param UserCoreModel $oUserModel
@@ -93,16 +101,9 @@ abstract class ProfileBaseController extends Controller
 
         // Update the "Who's Viewed Your Profile"
         if ($this->bUserAuth) {
-            $oPrivacyViewsVisitor = $oUserModel->getPrivacySetting($this->iVisitorId);
-
-            if ($oPrivacyViewsUser->userSaveViews === PrivacyCore::YES &&
-                $oPrivacyViewsVisitor->userSaveViews === PrivacyCore::YES &&
-                !$this->isOwnProfile()
-            ) {
-                $this->updateVisitorViews();
-            }
+            $this->updateProfileViews($oUserModel, $oPrivacyViewsUser);
         }
-        unset($oPrivacyViewsUser, $oPrivacyViewsVisitor);
+        unset($oPrivacyViewsUser);
     }
 
     /**
@@ -273,14 +274,6 @@ abstract class ProfileBaseController extends Controller
     }
 
     /**
-     * @return bool TRUE if the user is on their own profile, FALSE otherwise.
-     */
-    protected function isOwnProfile()
-    {
-        return $this->str->equals($this->iVisitorId, $this->iProfileId);
-    }
-
-    /**
      * Add JS file for the Ajax Friend Adder feature.
      *
      * @return void
@@ -318,24 +311,14 @@ abstract class ProfileBaseController extends Controller
         $this->view->image_social_meta_tag = $sAvatarImageUrl;
     }
 
-    /**
-     * @return void
-     */
-    private function updateVisitorViews()
+    private function updateProfileViews(UserCoreModel $oUserModel, stdClass $oPrivacyViewsUser)
     {
-        $oVisitorModel = new VisitorCoreModel(
-            $this->iProfileId,
-            $this->iVisitorId,
-            $this->dateTime->get()->dateTime('Y-m-d H:i:s')
-        );
+        $oVisitor = new VisitorCore;
+        $oPrivacyViewsVisitor = $oUserModel->getPrivacySetting($this->iVisitorId);
 
-        if (!$oVisitorModel->already()) {
-            // Add a new visit
-            $oVisitorModel->set();
-        } else {
-            // Update the date of last visit
-            $oVisitorModel->update();
+        if ($oVisitor->isVisitorViewUpdateEligible($oPrivacyViewsUser, $oPrivacyViewsVisitor, $this)) {
+            $oVisitor->updateVisitorViews();
         }
-        unset($oVisitorModel);
+        unset($oPrivacyViewsVisitor);
     }
 }
