@@ -241,15 +241,15 @@ class MailModel extends MailCoreModel
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
         switch ($sType) {
-            case self::INBOX && !empty($iProfileId):
+            case self::INBOX && $iProfileId !== null:
                 $sSql = 'msg.sender = m.profileId WHERE (msg.recipient = :profileId) AND (NOT FIND_IN_SET(\'recipient\', msg.trash)) AND';
                 break;
 
-            case self::OUTBOX && !empty($iProfileId):
+            case self::OUTBOX && $iProfileId !== null:
                 $sSql = 'msg.recipient = m.profileId WHERE (msg.sender = :profileId) AND (NOT FIND_IN_SET(\'sender\', msg.toDelete)) AND';
                 break;
 
-            case self::TRASH && !empty($iProfileId):
+            case self::TRASH && $iProfileId !== null:
                 $sSql = 'msg.sender = m.profileId WHERE (msg.recipient = :profileId) AND (FIND_IN_SET(\'recipient\', msg.trash)) AND
                 (NOT FIND_IN_SET(\'recipient\', msg.toDelete)) AND';
                 break;
@@ -268,7 +268,8 @@ class MailModel extends MailCoreModel
             $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
         }
 
-        if (!empty($iProfileId)) {
+        if ($iProfileId !== null) {
+            $iProfileId = (int)$iProfileId;
             $rStmt->bindParam(':profileId', $iProfileId, \PDO::PARAM_INT);
         }
 
