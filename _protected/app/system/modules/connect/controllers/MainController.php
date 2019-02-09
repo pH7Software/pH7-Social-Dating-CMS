@@ -82,7 +82,7 @@ class MainController extends Controller
     }
 
     /**
-     * @internal It uses "__toString" magic for returning the URL.
+     * @internal API class (e.g. Facebook, Google, Twitter) uses "__toString" magic for returning the URL.
      */
     private function whatApi()
     {
