@@ -409,6 +409,8 @@ class MainController extends Controller
     {
         $iId = $this->httpRequest->post('id', 'int');
 
+        $this->oMailModel->setReadMsg($iId);
+
         if ($this->bAdminLogged) {
             $this->bStatus = $this->oMailModel->adminDeleteMsg($iId);
         } else {
@@ -438,6 +440,7 @@ class MainController extends Controller
                 foreach ($this->httpRequest->post('action') as $iId) {
                     $iId = (int)$iId;
 
+                    $this->oMailModel->setReadMsg($iId);
                     if ($this->bAdminLogged) {
                         $this->oMailModel->adminDeleteMsg($iId);
                     } else {
