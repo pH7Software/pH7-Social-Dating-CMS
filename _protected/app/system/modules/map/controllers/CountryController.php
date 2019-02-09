@@ -35,11 +35,8 @@ class CountryController extends Controller
     public function index($sCountry = null, $sCity = null)
     {
         if ($sCountry !== null) {
-            // Get the country and city, limited to 50 characters and remove dashes automatically added from the URL
             $this->registry->country = $this->getCountry($sCountry);
             $this->registry->city = $sCity !== null ? $this->getCity($sCity) : '';
-
-            $this->setMap();
 
             $sCountryCode = $this->getCountryCode();
 
@@ -64,6 +61,7 @@ class CountryController extends Controller
             $this->view->nb_user_by_page = $oPage->getNbItemsPerPage();
 
             $this->addTooltipCssFile();
+            $this->setMap();
             $this->setMetaTags($iTotalUsers);
         } else {
             // Not found page
@@ -132,6 +130,8 @@ class CountryController extends Controller
     }
 
     /**
+     * Gives the country name limited to 50 chars and removes dashes automatically added from the URL.
+     *
      * @param string $sCountry
      *
      * @return string
@@ -146,6 +146,8 @@ class CountryController extends Controller
     }
 
     /**
+     * Gives the city name limited to 50 chars and removes dashes automatically added from the URL.
+     *
      * @param string $sCity
      *
      * @return string
