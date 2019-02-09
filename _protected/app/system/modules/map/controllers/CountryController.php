@@ -26,12 +26,18 @@ class CountryController extends Controller
     const MAX_COUNTRY_LENGTH = 50;
     const MAX_CITY_LENGTH = 50;
 
-    public function index()
+    /**
+     * @param string|null $sCountry
+     * @param string|null $sCity
+     *
+     * @throws Framework\Http\Exception
+     */
+    public function index($sCountry = null, $sCity = null)
     {
-        if ($this->httpRequest->getExists('country')) {
+        if ($sCountry !== null) {
             // Get the country and city, limited to 50 characters and remove dashes automatically added from the URL
-            $this->registry->country = $this->getCountry();
-            $this->registry->city = $this->httpRequest->getExists('city') ? $this->getCity() : '';
+            $this->registry->country = $this->getCountry($sCountry);
+            $this->registry->city = $sCity !== null ? $this->getCity($sCity) : '';
 
             $this->setMap();
 
@@ -126,26 +132,30 @@ class CountryController extends Controller
     }
 
     /**
+     * @param string $sCountry
+     *
      * @return string
      */
-    private function getCountry()
+    private function getCountry($sCountry)
     {
         return str_replace(
             '-',
             ' ',
-            substr($this->str->upperFirst($this->httpRequest->get('country')), 0, self::MAX_COUNTRY_LENGTH)
+            substr($this->str->upperFirst($sCountry), 0, self::MAX_COUNTRY_LENGTH)
         );
     }
 
     /**
+     * @param string $sCity
+     *
      * @return string
      */
-    private function getCity()
+    private function getCity($sCity)
     {
         return str_replace(
             '-',
             ' ',
-            substr($this->str->upperFirst($this->httpRequest->get('city')), 0, self::MAX_CITY_LENGTH)
+            substr($this->str->upperFirst($sCity), 0, self::MAX_CITY_LENGTH)
         );
     }
 
