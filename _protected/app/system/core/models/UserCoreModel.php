@@ -1640,7 +1640,12 @@ class UserCoreModel extends Model
             }
         }
 
-        return ' AND sex IN (' . rtrim($sGender, ',') . ') ';
+        $sInClauseValue = rtrim($sGender, ',');
+        if (!empty($sInClauseValue)) {
+            return ' AND sex IN (' . $sInClauseValue . ') ';
+        }
+
+        return '';
     }
 
     /**
