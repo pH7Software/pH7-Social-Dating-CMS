@@ -241,16 +241,16 @@ class MailModel extends MailCoreModel
         $sSqlFind = ' ' . ($bDigitSearch ? '(messageId = :looking)' : '(title LIKE :looking OR message LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)');
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
-        switch ($iType) {
-            case self::INBOX && $iProfileId !== null:
+        switch (true) {
+            case $iType === self::INBOX && $iProfileId !== null:
                 $sSql = 'msg.sender = m.profileId WHERE (msg.recipient = :profileId) AND (NOT FIND_IN_SET(\'recipient\', msg.trash)) AND';
                 break;
 
-            case self::OUTBOX && $iProfileId !== null:
+            case $iType === self::OUTBOX && $iProfileId !== null:
                 $sSql = 'msg.recipient = m.profileId WHERE (msg.sender = :profileId) AND (NOT FIND_IN_SET(\'sender\', msg.toDelete)) AND';
                 break;
 
-            case self::TRASH && $iProfileId !== null:
+            case $iType === self::TRASH && $iProfileId !== null:
                 $sSql = 'msg.sender = m.profileId WHERE (msg.recipient = :profileId) AND (FIND_IN_SET(\'recipient\', msg.trash)) AND
                 (NOT FIND_IN_SET(\'recipient\', msg.toDelete)) AND';
                 break;
