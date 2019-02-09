@@ -99,7 +99,7 @@ abstract class ProfileBaseController extends Controller
      *
      * @throws Framework\File\IOException
      */
-    protected function initPrivacy(UserCoreModel $oUserModel, stdClass $oUser)
+    protected function initPrivacy(stdClass $oUser, UserCoreModel $oUserModel)
     {
         // Check Privacy Profile
         $oPrivacyViewsUser = $oUserModel->getPrivacySetting($this->iProfileId);

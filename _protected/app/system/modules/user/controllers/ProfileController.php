@@ -50,7 +50,7 @@ class ProfileController extends ProfileBaseController
 
             // The administrators can view all profiles and profile visits are not saved.
             if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
-                $this->initPrivacy($oUserModel, $oUser);
+                $this->initPrivacy($oUser, $oUserModel);
             }
 
             // Assign the profile background image to the view
