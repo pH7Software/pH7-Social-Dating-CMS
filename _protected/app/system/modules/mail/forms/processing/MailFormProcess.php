@@ -94,15 +94,15 @@ class MailFormProcess extends Form
             t('You received a new message from %0%', $this->getSenderUsername()) . '<br />' .
             '<a href="' . Uri::get('mail', 'main', 'inbox', $iMsgId) . '">' . t('Click here') . '</a>' . t('to read your message.');
 
-        $sRecipientUsernameEmail = $this->oUserModel->getEmail($iRecipientId);
+        $sRecipientEmail = $this->oUserModel->getEmail($iRecipientId);
 
         $sMessageHtml = $this->view->parseMail(
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/mail/new_msg.tpl',
-            $sRecipientUsernameEmail
+            $sRecipientEmail
         );
 
         $aInfo = [
-            'to' => $sRecipientUsernameEmail,
+            'to' => $sRecipientEmail,
             'subject' => t('New private message from %0% on %site_name%', $this->getSenderFirstName())
         ];
 
