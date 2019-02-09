@@ -286,7 +286,9 @@ class Http
      */
     public function getRequestUri()
     {
-        return Server::getVar(Server::REQUEST_URI);
+        $sRequestUri = Server::getVar(Server::REQUEST_URI);
+
+        return rawurldecode($sRequestUri);
     }
 
     /**
