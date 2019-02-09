@@ -118,7 +118,7 @@ class MailModel extends MailCoreModel
         $rStmt->bindValue(':message', $sMessage, \PDO::PARAM_STR);
         $rStmt->bindValue(':sendDate', $sCreatedDate, \PDO::PARAM_STR);
 
-        return (!$rStmt->execute()) ? false : Db::getInstance()->lastInsertId();
+        return $rStmt->execute() ? Db::getInstance()->lastInsertId() : false;
     }
 
     /**
