@@ -11,6 +11,8 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Model\Engine\Db;
+
 class Form extends Framework\Layout\Form\Form
 {
     /**
@@ -23,7 +25,7 @@ class Form extends Framework\Layout\Form\Form
     public static function getVal($sValue)
     {
         $aVal = [];
-        $aValue = explode(',', $sValue);
+        $aValue = explode(Db::SET_DELIMITER, $sValue);
 
         foreach ($aValue as $sVal) {
             $aVal[] = $sVal;
@@ -44,10 +46,10 @@ class Form extends Framework\Layout\Form\Form
         $sVal = ''; // Default Value
 
         foreach ($aValue as $sValue) {
-            $sVal .= $sValue . ',';
+            $sVal .= $sValue . Db::SET_DELIMITER;
         }
 
-        return rtrim($sVal, ','); // Removes the last comma
+        return rtrim($sVal, Db::SET_DELIMITER); // Removes the MySQL SET's delimiter
     }
 
     /**

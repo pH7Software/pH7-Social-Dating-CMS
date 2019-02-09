@@ -27,6 +27,7 @@ class Db
     const ASC = 'ASC';
     const DESC = 'DESC';
     const RAND = 'RAND()';
+    const SET_DELIMITER = ',';
 
     /** @var string */
     private static $sDsn;
