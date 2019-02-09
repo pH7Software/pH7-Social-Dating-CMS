@@ -282,7 +282,10 @@ class Http
     }
 
     /**
-     * @return string Request URI.
+     * Gives the requested URI with URL-decoded
+     * to avoid issues with special I18N characters in URL.
+     *
+     * @return string
      */
     public function getRequestUri()
     {
