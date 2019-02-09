@@ -192,7 +192,7 @@ class MailModel extends MailCoreModel
         }
 
         $oData = $this->getMsg($iMessageId);
-        $sFieldId = $oData->sender === $iProfileId ? self::SENDER_DB_FIELD : self::RECIPIENT_DB_FIELD;
+        $sFieldId = $oData->sender == $iProfileId ? self::SENDER_DB_FIELD : self::RECIPIENT_DB_FIELD;
         if ($sMode === self::RESTOR_MODE) {
             $sTrashVal = str_replace([$sFieldId, ','], '', $oData->trash);
         } else {
@@ -233,16 +233,16 @@ class MailModel extends MailCoreModel
         $sSqlFind = ' ' . (ctype_digit($mLooking) ? '(messageId = :looking)' : '(title LIKE :looking OR message LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)');
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
-        switch ($sType) {
-            case self::INBOX && !empty($iProfileId):
+        switch (true) {
+            case $sType === self::INBOX && !empty($iProfileId):
                 $sSql = 'msg.sender = m.profileId WHERE (msg.recipient = :profileId) AND (NOT FIND_IN_SET(\'recipient\', msg.trash)) AND';
                 break;
 
-            case self::OUTBOX && !empty($iProfileId):
+            case $sType === self::OUTBOX && !empty($iProfileId):
                 $sSql = 'msg.recipient = m.profileId WHERE (msg.sender = :profileId) AND (NOT FIND_IN_SET(\'sender\', msg.toDelete)) AND';
                 break;
 
-            case self::TRASH && !empty($iProfileId):
+            case $sType === self::TRASH && !empty($iProfileId):
                 $sSql = 'msg.sender = m.profileId WHERE (msg.recipient = :profileId) AND (FIND_IN_SET(\'recipient\', msg.trash)) AND
                 (NOT FIND_IN_SET(\'recipient\', msg.toDelete)) AND';
                 break;
