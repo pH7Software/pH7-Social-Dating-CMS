@@ -28,7 +28,7 @@
     </dl>
 
     <div><a href="{{ $design->url('mail','main','compose',"$usernameSender,$subject") }}">{lang 'Reply'}</a> | {{ LinkCoreForm::display($label_txt, 'mail', 'main', $set_to, array('id'=>$msg->messageId)) }}
-    {if $is_trash} | {{ LinkCoreForm::display(t('Move to Inbox'), 'mail', 'main', 'setrestor', array('id'=>$msg->messageId)) }}{/if}</div>
+    {if $is_trash} | {{ LinkCoreForm::display(t('Move to Inbox'), 'mail', 'main', 'setrestore', array('id'=>$msg->messageId)) }}{/if}</div>
   </div>
 
 {/if}

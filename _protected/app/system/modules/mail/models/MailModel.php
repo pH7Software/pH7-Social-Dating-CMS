@@ -22,12 +22,12 @@ class MailModel extends MailCoreModel
     const SENDER_DB_FIELD = 'sender';
 
     const TRASH_MODE = 'trash';
-    const RESTOR_MODE = 'restor';
+    const RESTORE_MODE = 'restore';
     const DELETE_MODE = 'delete';
 
     const MODES = [
         self::TRASH_MODE,
-        self::RESTOR_MODE,
+        self::RESTORE_MODE,
         self::DELETE_MODE
     ];
 
@@ -179,7 +179,7 @@ class MailModel extends MailCoreModel
      *
      * @param int $iProfileId User ID
      * @param int $iMessageId Message ID
-     * @param string $sMode Set to this category. Choose between 'trash', 'restor' and 'delete'
+     * @param string $sMode Set to this category. Choose between 'trash', 'restore' and 'delete'
      *
      * @throws PH7InvalidArgumentException
      *
@@ -193,7 +193,7 @@ class MailModel extends MailCoreModel
 
         $oData = $this->getMsg($iMessageId);
         $sFieldId = $oData->sender == $iProfileId ? self::SENDER_DB_FIELD : self::RECIPIENT_DB_FIELD;
-        if ($sMode === self::RESTOR_MODE) {
+        if ($sMode === self::RESTORE_MODE) {
             $sTrashVal = str_replace([$sFieldId, Db::SET_DELIMITER], '', $oData->trash);
         } else {
             $sTrashVal = ($oData->sender === $oData->recipient) ? 'sender,recipient' : $sFieldId . (!empty($oData->trash) ? Db::SET_DELIMITER . $oData->trash : '');

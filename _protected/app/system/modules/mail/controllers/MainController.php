@@ -361,12 +361,12 @@ class MainController extends Controller
         );
     }
 
-    public function setRestor()
+    public function setRestore()
     {
         $this->bStatus = $this->oMailModel->setTo(
             $this->iProfileId,
             $this->httpRequest->post('id', 'int'),
-            MailModel::RESTOR_MODE
+            MailModel::RESTORE_MODE
         );
 
         if ($this->bStatus) {
@@ -381,7 +381,7 @@ class MainController extends Controller
         );
     }
 
-    public function setRestorAll()
+    public function setRestoreAll()
     {
         if (!(new Token)->check('mail_action')) {
             $this->sMsg = Form::errorTokenMsg();
@@ -392,7 +392,7 @@ class MainController extends Controller
                     $this->oMailModel->setTo(
                         $this->iProfileId,
                         $iId,
-                        MailModel::RESTOR_MODE
+                        MailModel::RESTORE_MODE
                     );
                 }
                 $this->sMsg = t('Your message(s) has/have been moved to your inbox.');

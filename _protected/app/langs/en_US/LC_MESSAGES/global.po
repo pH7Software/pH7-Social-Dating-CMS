@@ -24243,7 +24243,7 @@ msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/adminlist.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/mainlist.inc.cpl.php:19
-msgid "Restor"
+msgid "Restore"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/adminlist.inc.cpl.php:19

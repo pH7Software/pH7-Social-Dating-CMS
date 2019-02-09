@@ -57,7 +57,7 @@
                     <div class="action">
                         <a href="{{ $design->url('mail','main','compose',"$usernameSender,$subject") }}">{lang 'Reply'}</a> | <a href="javascript:void(0)" onclick="mail('{move_to}',{% $msg->messageId %},'{csrf_token}')">{label_txt}</a>
                         {if $is_trash}
-                            | <a href="javascript:void(0)" onclick="mail('restor',{% $msg->messageId %},'{csrf_token}')">{lang 'Restor'}</a>
+                            | <a href="javascript:void(0)" onclick="mail('restore',{% $msg->messageId %},'{csrf_token}')">{lang 'Restore'}</a>
                         {/if}
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                     >{label_txt}
                 </button>
                 {if $is_trash}
-                    | <button class="btn btn-default btn-md" type="submit" onclick="return checkChecked(false)" formaction="{{ $design->url('mail',$ctrl,'setrestorall') }}">{lang 'Move to Inbox'}</button>
+                    | <button class="btn btn-default btn-md" type="submit" onclick="return checkChecked(false)" formaction="{{ $design->url('mail',$ctrl,'setrestoreall') }}">{lang 'Move to Inbox'}</button>
                 {/if}
             </p>
         </form>

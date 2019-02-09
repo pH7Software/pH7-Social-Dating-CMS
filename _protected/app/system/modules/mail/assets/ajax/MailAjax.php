@@ -49,8 +49,8 @@ class Mail
                 $this->trash();
                 break;
 
-            case 'restor':
-                $this->restor();
+            case 'restore':
+                $this->restore();
 
             case 'delete':
                 $this->delete();
@@ -79,12 +79,12 @@ class Mail
         echo $this->sMsg;
     }
 
-    protected function restor()
+    protected function restore()
     {
         $this->bStatus = $this->oMailModel->setTo(
             $this->oSession->get('member_id'),
             $this->oHttpRequest->post('msg_id'),
-            MailModel::RESTOR_MODE
+            MailModel::RESTORE_MODE
         );
 
         if (!$this->bStatus) {
