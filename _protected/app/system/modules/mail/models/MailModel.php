@@ -201,7 +201,12 @@ class MailModel extends MailCoreModel
         unset($oData);
 
         $sField = $sMode === self::DELETE_MODE ? 'toDelete' : 'trash';
-        $sSqlQuery = 'UPDATE' . Db::prefix(DbTableName::MESSAGE) . 'SET ' . $sField . ' = :val WHERE ' . $sFieldId . ' = :profileId AND messageId = :messageId LIMIT 1';
+        $sSqlQuery = sprintf(
+            'UPDATE %s SET %s = :val WHERE %s = :profileId AND messageId = :messageId LIMIT 1',
+            Db::prefix(DbTableName::MESSAGE),
+            $sField,
+            $sFieldId
+        );
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
