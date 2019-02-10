@@ -75,8 +75,22 @@ class VisitorController extends Controller
         $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalVisitors, self::MAX_PROFILE_PER_PAGE);
         $this->view->current_page = $this->oPage->getCurrentPage();
 
-        $this->iTotalVisitors = $this->oVisitorModel->get($this->httpRequest->get('looking'), true, SearchCoreModel::LAST_VISIT, SearchCoreModel::DESC, null, null);
-        $oVisitor = $this->oVisitorModel->get($this->httpRequest->get('looking'), false, SearchCoreModel::LAST_VISIT, SearchCoreModel::DESC, $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage());
+        $this->iTotalVisitors = $this->oVisitorModel->get(
+            $this->httpRequest->get('looking'),
+            true,
+            SearchCoreModel::LAST_VISIT,
+            SearchCoreModel::DESC,
+            null,
+            null
+        );
+        $oVisitor = $this->oVisitorModel->get(
+            $this->httpRequest->get('looking'),
+            false,
+            SearchCoreModel::LAST_VISIT,
+            SearchCoreModel::DESC,
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsPerPage()
+        );
 
         $this->view->user_views_setting = UserCore::auth() ? $this->oUserModel->getPrivacySetting($this->session->get('member_id'))->userSaveViews : '';
 
@@ -102,6 +116,7 @@ class VisitorController extends Controller
         $this->sTitle = t("Find someone who has visited %0%'s profile", $this->sUsername);
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
