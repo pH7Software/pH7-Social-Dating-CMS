@@ -104,7 +104,7 @@ $LANG = array(
         <p>P.D. Para informes de errores, sugerencias, colaboración, participación en el desarrollo y / o traducción de software, etc,
             por favor visite nuestro <a href="' . Controller::SOFTWARE_GIT_REPO_URL . '">GitHub sitio web</a>.</p>
         <p>---</p>
-        <p>Saludos cordiales,<br />
+        <p>Saludos,<br />
         <a href="' . Controller::AUTHOR_URL . '">Pierre Soria</a></p>',
     'yes_dir' => '¡El directorio se encuentra correctamente!',
     'no_dir' => 'El directorio no existe.',
