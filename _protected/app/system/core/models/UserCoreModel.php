@@ -798,7 +798,10 @@ class UserCoreModel extends Model
      */
     public function setAvatar($iProfileId, $sAvatar, $iApproved)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::MEMBER) . 'SET avatar = :avatar, approvedAvatar = :approved WHERE profileId = :profileId');
+        $sSql = 'UPDATE' . Db::prefix(DbTableName::MEMBER) .
+            'SET avatar = :avatar, approvedAvatar = :approved WHERE profileId = :profileId LIMIT 1';
+
+        $rStmt = Db::getInstance()->prepare($sSql);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':avatar', $sAvatar, \PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
