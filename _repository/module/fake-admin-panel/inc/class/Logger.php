@@ -86,7 +86,7 @@ class Logger extends Core
      *
      * @return int
      */
-    protected function sendMessage()
+    private function sendMessage()
     {
         $aInfo = [
             'to' => $this->config->values['logging']['bug_report_email'],
@@ -105,7 +105,7 @@ class Logger extends Core
      *
      * @return self
      */
-    protected function blockIp()
+    private function blockIp()
     {
         $sFullPath = PH7_PATH_APP_CONFIG . Ban::DIR . Ban::IP_FILE;
         file_put_contents($sFullPath, $this->sIp . "\n", FILE_APPEND);
@@ -118,7 +118,7 @@ class Logger extends Core
      *
      * @return self
      */
-    protected function writeFile()
+    private function writeFile()
     {
         $sFullPath = $this->registry->path_module_inc . static::ATTACK_DIR . $this->sIp . '.log';
         file_put_contents($sFullPath, $this->sContents, FILE_APPEND);
