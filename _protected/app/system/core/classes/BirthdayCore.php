@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Mail\Mail;
+use PH7\Framework\Mail\Mailable;
 use stdClass;
 
 class BirthdayCore extends Core
@@ -50,13 +51,13 @@ class BirthdayCore extends Core
      * Send birthday emails to users.
      *
      * @param stdClass $oUser User data from the DB.
-     * @param Mail $oMail
+     * @param Mailable $oMailEngine
      *
      * @return int Number of recipients who were accepted for delivery.
      *
      * @throws \PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
-    private function sendMail(stdClass $oUser, Mail $oMail)
+    private function sendMail(stdClass $oUser, Mailable $oMailEngine)
     {
         $this->view->content = t('Hi %0%!', $oUser->firstName) . '<br />' .
             t("The %site_name%'s team wish you a very happy birthday!") . '<br />' .
@@ -72,6 +73,6 @@ class BirthdayCore extends Core
             'to' => $oUser->email
         ];
 
-        return $oMail->send($aInfo, $sHtmlMsg);
+        return $oMailEngine->send($aInfo, $sHtmlMsg);
     }
 }

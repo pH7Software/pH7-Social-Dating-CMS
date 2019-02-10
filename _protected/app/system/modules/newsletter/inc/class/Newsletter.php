@@ -11,6 +11,7 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mail\Mail;
+use PH7\Framework\Mail\Mailable;
 use PH7\Framework\Mvc\Request\Http;
 use stdClass;
 
@@ -79,14 +80,14 @@ class Newsletter extends Core
      * Send the newsletter to the subscribers.
      *
      * @param stdClass $oSubscriber Subscriber data from the DB.
-     * @param Mail $oMail
+     * @param Mailable $oMailEngine
      *
      * @return int Number of recipients who were accepted for delivery.
      *
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    private function sendMail(stdClass $oSubscriber, Mail $oMail)
+    private function sendMail(stdClass $oSubscriber, Mailable $oMailEngine)
     {
         $this->view->content = $this->httpRequest->post('body', Http::NO_CLEAN);
 
@@ -101,7 +102,7 @@ class Newsletter extends Core
             'to_name' => $oSubscriber->firstName
         ];
 
-        return $oMail->send($aInfo, $sHtmlMsg);
+        return $oMailEngine->send($aInfo, $sHtmlMsg);
     }
 
     /**

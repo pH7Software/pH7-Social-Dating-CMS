@@ -11,6 +11,7 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mail\Mail;
+use PH7\Framework\Mail\Mailable;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Validate\Validate;
 
@@ -19,9 +20,6 @@ class InviteFormProcess extends Form
     const MAX_EMAIL_ADDRESSES = 10;
     const EMAIL_DELIMITER = ',';
 
-    /**
-     * @throws Framework\Mvc\Request\WrongRequestMethodException
-     */
     public function __construct()
     {
         parent::__construct();
@@ -53,11 +51,14 @@ class InviteFormProcess extends Form
      * Send the confirm email.
      *
      * @param string $sEmailAddress The user email.
-     * @param Mail $oMail
+     * @param Mailable $oMailEngine
      *
      * @return int Number of recipients who were accepted for delivery.
+     *
+     * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    protected function sendMail($sEmailAddress, Mail $oMail)
+    private function sendMail($sEmailAddress, Mailable $oMailEngine)
     {
         $this->view->content = t('Hello!') . '<br />' .
             t('You have received a privilege on the invitation from your friend on the new platform to meet new generation - %site_name%') . '<br />' .
@@ -65,14 +66,17 @@ class InviteFormProcess extends Form
             t('Message left by your friend:') . '<br />"<em>' . $this->httpRequest->post('message') . '</em>"';
         $this->view->footer = t('You are receiving this message because "%0%" you know has entered your email address in the form of invitation of friends to our site. This is not spam!', $this->httpRequest->post('first_name'));
 
-        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/invite/invitation.tpl', $sEmailAddress);
+        $sMessageHtml = $this->view->parseMail(
+            PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/invite/invitation.tpl',
+            $sEmailAddress
+        );
 
         $aInfo = [
             'to' => $sEmailAddress,
             'subject' => t('Privilege on the invitation from your friend for the new generation community platform - %site_name%')
         ];
 
-        return $oMail->send($aInfo, $sMessageHtml);
+        return $oMailEngine->send($aInfo, $sMessageHtml);
     }
 
     /**
@@ -82,6 +86,9 @@ class InviteFormProcess extends Form
      */
     private function getEmails()
     {
-        return explode(self::EMAIL_DELIMITER, $this->httpRequest->post('to'));
+        return explode(
+            self::EMAIL_DELIMITER,
+            $this->httpRequest->post('to')
+        );
     }
 }
