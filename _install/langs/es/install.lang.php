@@ -102,7 +102,7 @@ $LANG = array(
         <p>No se olvide de mostrar al mostrar su nuevo sitio de citas para todos sus amigos, sus colegas y compañeros de su Facebook (e incluso a sus enemigos ... o no).</p>
         <p>&nbsp;</p>
         <p>P.D. Para informes de errores, sugerencias, colaboración, participación en el desarrollo y / o traducción de software, etc,
-            por favor visite nuestro <a href="' . Controller::SOFTWARE_WEBSITE . '">sitio web</a>.</p>
+            por favor visite nuestro <a href="' . Controller::SOFTWARE_GIT_REPO_URL . '">GitHub sitio web</a>.</p>
         <p>---</p>
         <p>Saludos cordiales,<br />
         <a href="' . Controller::AUTHOR_URL . '">Pierre Soria</a></p>',
