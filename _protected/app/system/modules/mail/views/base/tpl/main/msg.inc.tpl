@@ -1,9 +1,8 @@
 {if empty($msg)}
-
-  <p class="center bold">{lang 'Sorry, this message was not found.'}</p>
-
+  <p class="center bold">
+    {lang 'Sorry, this message was not found.'}
+  </p>
 {else}
-
   {* Set Variables *}
   {{ $usernameSender = (empty($msg->username)) ? PH7_ADMIN_USERNAME : escape($msg->username) }}
   {{ $firstNameSender = (empty($msg->firstName)) ? PH7_ADMIN_USERNAME : escape($msg->firstName) }}
@@ -30,5 +29,4 @@
     <div><a href="{{ $design->url('mail','main','compose',"$usernameSender,$subject") }}">{lang 'Reply'}</a> | {{ LinkCoreForm::display($label_txt, 'mail', 'main', $set_to, array('id'=>$msg->messageId)) }}
     {if $is_trash} | {{ LinkCoreForm::display(t('Move to Inbox'), 'mail', 'main', 'setrestore', array('id'=>$msg->messageId)) }}{/if}</div>
   </div>
-
 {/if}

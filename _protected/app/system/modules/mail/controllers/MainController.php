@@ -76,6 +76,7 @@ class MainController extends Controller
         $this->design->addJs(PH7_STATIC . PH7_JS, 'autocompleteUsername.js');
         $this->view->page_title = t('MailBox : Compose a new message');
         $this->view->h2_title = t('Compose a new message');
+
         $this->output();
     }
 
