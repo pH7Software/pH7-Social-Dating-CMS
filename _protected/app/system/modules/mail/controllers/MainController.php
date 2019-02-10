@@ -509,7 +509,7 @@ class MainController extends Controller
      */
     private function setRead(stdClass $oMsg)
     {
-        if ($oMsg->status == 1) {
+        if ($oMsg->status == MailModel::UNREAD_STATUS) {
             $this->oMailModel->setReadMsg($oMsg->messageId);
         }
     }

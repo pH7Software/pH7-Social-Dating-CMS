@@ -14,6 +14,9 @@ use PH7\Framework\Mvc\Model\Engine\Model;
 // Abstract Class
 class MailCoreModel extends Model
 {
+    const READ_STATUS = 0;
+    const UNREAD_STATUS = 1;
+
     /**
      * Get the number of unread messages.
      *
@@ -24,9 +27,10 @@ class MailCoreModel extends Model
     public static function countUnreadMsg($iProfileId)
     {
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(status) AS unread FROM' . Db::prefix(DbTableName::MESSAGE) .
-            'WHERE recipient = :recipient AND status = 1 AND NOT FIND_IN_SET(\'recipient\', toDelete)');
+            'WHERE recipient = :recipient AND status = :status AND NOT FIND_IN_SET(\'recipient\', toDelete)');
 
         $rStmt->bindValue(':recipient', $iProfileId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':status', self::UNREAD_STATUS, \PDO::PARAM_INT);
         $rStmt->execute();
         $iUnread = (int)$rStmt->fetchColumn();
         Db::free($rStmt);

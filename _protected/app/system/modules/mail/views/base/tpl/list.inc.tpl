@@ -27,7 +27,7 @@
                         <input type="checkbox" name="action[]" value="{% $msg->messageId %}" />
                     </div>
 
-                    {if $msg->status == 1}
+                    {if $msg->status == MailModel::UNREAD_STATUS}
                         <img src="{url_tpl_img}icon/new.gif" alt="{lang 'New Message'}" title="{lang 'Unread'}" />
                     {/if}
 

@@ -111,13 +111,14 @@ class MailModel extends MailCoreModel
     {
         $rStmt = Db::getInstance()->prepare(
             'INSERT INTO' . Db::prefix(DbTableName::MESSAGE) . '(sender, recipient, title, message, sendDate, status)
-            VALUES (:sender, :recipient, :title, :message, :sendDate, \'1\')'
+            VALUES (:sender, :recipient, :title, :message, :sendDate, :status)'
         );
         $rStmt->bindValue(':sender', $iSender, \PDO::PARAM_INT);
         $rStmt->bindValue(':recipient', $iRecipient, \PDO::PARAM_INT);
         $rStmt->bindValue(':title', $sTitle, \PDO::PARAM_STR);
         $rStmt->bindValue(':message', $sMessage, \PDO::PARAM_STR);
         $rStmt->bindValue(':sendDate', $sCreatedDate, \PDO::PARAM_STR);
+        $rStmt->bindValue(':status', self::UNREAD_STATUS, \PDO::PARAM_INT);
 
         return $rStmt->execute() ? Db::getInstance()->lastInsertId() : false;
     }
@@ -155,8 +156,9 @@ class MailModel extends MailCoreModel
      */
     public function setReadMsg($iMessageId)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::MESSAGE) . 'SET status = 0 WHERE messageId = :messageId LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::MESSAGE) . 'SET status = :status WHERE messageId = :messageId LIMIT 1');
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':status', self::READ_STATUS, \PDO::PARAM_INT);
         $rStmt->execute();
         Db::free($rStmt);
     }
