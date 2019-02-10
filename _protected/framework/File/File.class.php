@@ -374,7 +374,7 @@ class File
 
     /**
      * Rename a file or directory and checks if the "from file" or directory exists with file_exists() function
-     * since it checks the existance of a file or directory (because, as in the Unix OS, a directory is a file).
+     * since it checks the existence of a file or directory (because, as in the Unix OS, a directory is a file).
      *
      * @param string $sFrom File or directory.
      * @param string $sTo File or directory.
