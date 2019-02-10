@@ -63,7 +63,6 @@ abstract class ProfileBaseController extends Controller
         parent::__construct();
 
         $this->oUserModel = new UserCoreModel;
-
         $this->bUserAuth = UserCore::auth();
 
         // Initialize header tpl variable, to make sure it won't be overwritten later on
