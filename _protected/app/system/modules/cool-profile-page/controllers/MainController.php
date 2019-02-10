@@ -20,31 +20,32 @@ class MainController extends ProfileBaseController
     const MAP_WIDTH_SIZE = '100%';
     const MAP_HEIGHT_SIZE = '200px';
 
-    public function index()
+    public function __construct()
     {
-        $oUserModel = new UserCoreModel;
-
-        $this->addCssFiles();
-        $this->addAdditionalAssetFiles();
+        parent::__construct();
 
         // Set the Profile ID and Visitor ID
         $this->iProfileId = $this->httpRequest->get('profile_id', 'int');
         $this->iVisitorId = (int)$this->session->get('member_id');
+    }
+
+    public function index()
+    {
+        $this->addCssFiles();
+        $this->addAdditionalAssetFiles();
 
         // Read the profile information
-        $oUser = $oUserModel->readProfile($this->iProfileId);
+        $oUser = $this->oUserModel->readProfile($this->iProfileId);
         if ($oUser) {
             // The administrators can view all profiles and profile visits are not saved.
             if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
-                $this->initPrivacy($oUser, $oUserModel);
+                $this->initPrivacy($oUser);
             }
 
             // Assign the profile background image to the view
-            $this->view->img_background = $oUserModel->getBackground($this->iProfileId, 1);
+            $this->view->img_background = $this->oUserModel->getBackground($this->iProfileId, 1);
 
-            $oFields = $oUserModel->getInfoFields($this->iProfileId);
-
-            unset($oUserModel);
+            $oFields = $this->oUserModel->getInfoFields($this->iProfileId);
 
             // Date of birth
             $this->view->birth_date = $oUser->birthDate;

@@ -28,37 +28,38 @@ class ProfileController extends ProfileBaseController
     /** @var string */
     private $sUsername;
 
-    public function index()
+    public function __construct()
     {
-        $oUserModel = new UserModel;
-
-        $this->addCssFiles();
-        $this->addAdditionalAssetFiles();
+        parent::__construct();
 
         // Set the Profile username
         $this->sUsername = $this->httpRequest->get('username', 'string');
 
         // Set the Profile ID and Visitor ID
-        $this->iProfileId = $oUserModel->getId(null, $this->sUsername);
+        $this->iProfileId = $this->oUserModel->getId(null, $this->sUsername);
         $this->iVisitorId = (int)$this->session->get('member_id');
+    }
+
+    public function index()
+    {
+        $this->addCssFiles();
+        $this->addAdditionalAssetFiles();
 
         // Read the Profile information
-        $oUser = $oUserModel->readProfile($this->iProfileId);
+        $oUser = $this->oUserModel->readProfile($this->iProfileId);
 
         if ($oUser && $this->doesProfileExist($oUser)) {
             $this->redirectToOtherProfileStyleIfEnabled();
 
             // The administrators can view all profiles and profile visits are not saved.
             if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
-                $this->initPrivacy($oUser, $oUserModel);
+                $this->initPrivacy($oUser);
             }
 
             // Assign the profile background image to the view
-            $this->view->img_background = $oUserModel->getBackground($this->iProfileId, 1);
+            $this->view->img_background = $this->oUserModel->getBackground($this->iProfileId, 1);
 
-            $oFields = $oUserModel->getInfoFields($this->iProfileId);
-
-            unset($oUserModel);
+            $oFields = $this->oUserModel->getInfoFields($this->iProfileId);
 
             // Date of birth
             $this->view->birth_date = $oUser->birthDate;

@@ -32,6 +32,9 @@ abstract class ProfileBaseController extends Controller
     const MAP_WIDTH_SIZE = '100%';
     const MAP_HEIGHT_SIZE = '300px';
 
+    /** @var UserCoreModel */
+    protected $oUserModel;
+
     /** @var int */
     protected $iProfileId;
 
@@ -58,6 +61,8 @@ abstract class ProfileBaseController extends Controller
     public function __construct()
     {
         parent::__construct();
+
+        $this->oUserModel = new UserCoreModel;
 
         $this->bUserAuth = UserCore::auth();
 
@@ -92,17 +97,16 @@ abstract class ProfileBaseController extends Controller
     /**
      * Privacy Profile.
      *
-     * @param UserCoreModel $oUserModel
      * @param stdClass $oUser
      *
      * @return void
      *
      * @throws Framework\File\IOException
      */
-    protected function initPrivacy(stdClass $oUser, UserCoreModel $oUserModel)
+    protected function initPrivacy(stdClass $oUser)
     {
         // Check Privacy Profile
-        $oPrivacyViewsUser = $oUserModel->getPrivacySetting($this->iProfileId);
+        $oPrivacyViewsUser = $this->oUserModel->getPrivacySetting($this->iProfileId);
 
         if ($oPrivacyViewsUser->searchProfile === PrivacyCore::NO) {
             $this->excludeProfileFromSearchEngines();
@@ -117,7 +121,7 @@ abstract class ProfileBaseController extends Controller
 
         // Update the "Who's Viewed Your Profile"
         if ($this->bUserAuth) {
-            $this->updateProfileViews($oPrivacyViewsUser, $oUserModel);
+            $this->updateProfileViews($oPrivacyViewsUser);
         }
         unset($oPrivacyViewsUser);
     }
@@ -327,10 +331,10 @@ abstract class ProfileBaseController extends Controller
         $this->view->image_social_meta_tag = $sAvatarImageUrl;
     }
 
-    private function updateProfileViews(stdClass $oPrivacyViewsUser, UserCoreModel $oUserModel)
+    private function updateProfileViews(stdClass $oPrivacyViewsUser)
     {
         $oVisitor = new VisitorCore($this);
-        $oPrivacyViewsVisitor = $oUserModel->getPrivacySetting($this->iVisitorId);
+        $oPrivacyViewsVisitor = $this->oUserModel->getPrivacySetting($this->iVisitorId);
 
         if ($oVisitor->isViewUpdateEligible($oPrivacyViewsUser, $oPrivacyViewsVisitor)) {
             $oVisitor->updateViews();
