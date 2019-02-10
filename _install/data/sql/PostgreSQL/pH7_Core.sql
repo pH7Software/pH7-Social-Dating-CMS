@@ -1023,7 +1023,7 @@ CREATE TABLE IF NOT EXISTS ph7_messages (
   title varchar(30) NOT NULL DEFAULT '',
   message text NOT NULL,
   sendDate timestamp(0) NULL,
-  status smallint check (status > 0) NOT NULL DEFAULT '1',
+  status smallint check (status > 0) NOT NULL DEFAULT '1', -- 1 = Unread | 0 = Read
   trash set('sender','recipient') NOT NULL DEFAULT '',
   toDelete set('sender','recipient') NOT NULL DEFAULT '',
   PRIMARY KEY (messageId),
