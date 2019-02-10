@@ -93,7 +93,11 @@ class Logger extends Core
             'subject' => t('Reporting of the Fake Admin Honeypot')
         ];
 
-        return (new Mail)->send($aInfo, $this->sContents, Mailable::TEXT_FORMAT);
+        return (new Mail)->send(
+            $aInfo,
+            $this->sContents,
+            Mailable::TEXT_FORMAT
+        );
     }
 
     /**
