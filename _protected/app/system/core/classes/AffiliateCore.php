@@ -51,7 +51,11 @@ class AffiliateCore extends UserCore
      *
      * @return void
      */
-    public function setAuth(stdClass $oAffData, UserCoreModel $oAffModel, Session $oSession, SecurityModel $oSecurityModel)
+    public function setAuth(
+        stdClass $oAffData,
+        UserCoreModel $oAffModel,
+        Session $oSession,
+        SecurityModel $oSecurityModel)
     {
         // Remove the session if the affiliate is logged on as "user" or "affiliate".
         if (UserCore::auth() || AdminCore::auth()) {
@@ -71,8 +75,8 @@ class AffiliateCore extends UserCore
             'affiliate_http_user_agent' => (new Browser)->getUserAgent(),
             'affiliate_token' => Various::genRnd($oAffData->email)
         ];
-
         $oSession->set($aSessionData);
+
         $oSecurityModel->addLoginLog(
             $oAffData->email,
             $oAffData->username,

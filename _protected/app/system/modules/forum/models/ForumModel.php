@@ -503,7 +503,9 @@ class ForumModel extends ForumCoreModel
             $sSqlWhere = ' WHERE profileId = :profileId';
         }
 
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(topicId) FROM' . Db::prefix(DbTableName::FORUM_TOPIC) . $sSqlWhere);
+        $rStmt = Db::getInstance()->prepare(
+            'SELECT COUNT(topicId) FROM' . Db::prefix(DbTableName::FORUM_TOPIC) . $sSqlWhere
+        );
 
         if ($iForumId !== null) {
             $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT);

@@ -80,7 +80,11 @@ class AdminCore extends UserCore
      *
      * @return void
      */
-    public function setAuth(stdClass $oAdminData, UserCoreModel $oAdminModel, Session $oSession, SecurityModel $oSecurityModel)
+    public function setAuth(
+        stdClass $oAdminData,
+        UserCoreModel $oAdminModel,
+        Session $oSession,
+        SecurityModel $oSecurityModel)
     {
         // Remove the session if the admin is logged in as "user" or "affiliate".
         if (UserCore::auth() || AffiliateCore::auth()) {
@@ -100,6 +104,7 @@ class AdminCore extends UserCore
             'admin_token' => Various::genRnd($oAdminData->email),
         ];
         $oSession->set($aSessionData);
+
         $oSecurityModel->addLoginLog(
             $oAdminData->email,
             $oAdminData->username,

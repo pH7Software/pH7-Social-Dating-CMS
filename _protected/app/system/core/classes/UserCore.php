@@ -402,7 +402,6 @@ class UserCore
             'member_http_user_agent' => (new Browser)->getUserAgent(),
             'member_token' => Various::genRnd($oUserData->email)
         ];
-
         $oSession->set($aSessionData);
 
         $oSecurityModel->addLoginLog(
