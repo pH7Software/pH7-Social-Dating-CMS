@@ -108,7 +108,7 @@ $LANG = array(
         <p>&nbsp;</p>
         <p><strong>Allez-vous m\'aider à améliorer le logiciel ? <a href="' . Controller::PATREON_URL . '">Faire une donation ici</a></strong></p>
         <p>&nbsp;</p>
-        <p>Pour tous rapport de bogues, suggestions, partenariat, participation au développement du logiciel et/ou à sa traduction, etc.,
+        <p>Pour tout rapport de bogues, suggestions, partenariat, participation au développement du logiciel et/ou à sa traduction, etc.,
         veuillez visiter le <a href="' . Controller::SOFTWARE_GIT_REPO_URL . '">dépôt GitHub</a>.</p>
         <p>---</p>
         <p>Cordialement,<br />
