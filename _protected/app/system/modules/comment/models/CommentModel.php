@@ -29,7 +29,7 @@ class CommentModel extends CommentCoreModel
 
             $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' .
                 Db::prefix(self::TABLE_PREFIX_NAME . $sTable) . ' AS c LEFT JOIN' . Db::prefix(DbTableName::MEMBER) .
-                'AS m ON c.sender = m.profileId WHERE commentId = :commentId AND c.approved =:approved LIMIT 1');
+                'AS m ON c.sender = m.profileId WHERE commentId = :commentId AND c.approved = :approved LIMIT 1');
             $rStmt->bindParam(':commentId', $iCommentId, \PDO::PARAM_INT);
             $rStmt->bindParam(':approved', $sApproved, \PDO::PARAM_STR);
             $rStmt->execute();
