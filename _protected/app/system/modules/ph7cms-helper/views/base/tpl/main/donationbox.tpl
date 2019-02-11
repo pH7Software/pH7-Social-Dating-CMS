@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <div id="box_block" class="center">
-        <h1>{lang 'Make Your Website Better!'} ❤️</h1>
+        <h1 class="underline">😍 {lang 'Make Your Website Better!'} ❤️</h1>
 
         <form action="{form_action}" method="post">
             {form_body}
