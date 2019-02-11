@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Inc / Class
  */
@@ -14,7 +14,7 @@ use PH7\Framework\Url\Url;
 final class TweetSharing
 {
     const TWITTER_TWEET_URL = 'https://twitter.com/intent/tweet?text=';
-    const TWITTER_TWEET_MSG = "I built my social #DatingBusiness with #pH7CMS, #DatingSoftware -> %0% \n%1%";
+    const TWITTER_TWEET_MSG = "I built my Social #DatingWebApp with #pH7CMS 😍, #DatingSoftware -> %0% \n%1% 🚀";
 
     /**
      * @return string
