@@ -18,6 +18,9 @@ class Module extends Engine\Model
     const CACHE_GROUP = 'db/sys/core/enabled_modules';
     const CACHE_TIME = 172800; // 2 days
 
+    const YES = '1';
+    const NO = '0';
+
     /**
      * Get all modules status (enabled & disabled).
      *
@@ -55,7 +58,7 @@ class Module extends Engine\Model
      *
      * @return int|bool Returns the number of rows on success or FALSE on failure.
      */
-    public function update($iId, $sIsEnabled = '1')
+    public function update($iId, $sIsEnabled = self::YES)
     {
         return $this->orm->update(DbTableName::SYS_MOD_ENABLED, 'enabled', $sIsEnabled, 'moduleId', $iId);
     }

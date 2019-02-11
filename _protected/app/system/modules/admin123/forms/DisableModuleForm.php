@@ -15,8 +15,6 @@ use PH7\Framework\Url\Header;
 
 class DisableModuleForm
 {
-    const YES_VALUE = '1';
-
     const DEV_STAGE_MODS = [
         'connect'
     ];
@@ -42,12 +40,12 @@ class DisableModuleForm
                 continue;
             }
 
-            if ($oData->enabled === self::YES_VALUE) {
+            if ($oData->enabled === ModuleModel::YES) {
                 $aSelectedMods[] = $oData->moduleId;
             }
 
             $sAdditionalText = '';
-            if ($oData->premiumMod === self::YES_VALUE) {
+            if ($oData->premiumMod === ModuleModel::YES) {
                 $sAdditionalText .= ' • <a class="small" href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'general') . '#p=api">' . t('Change the default Chat by yours') . '</a>';
             }
 

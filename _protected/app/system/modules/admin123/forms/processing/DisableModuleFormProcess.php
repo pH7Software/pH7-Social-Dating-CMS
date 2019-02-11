@@ -26,7 +26,7 @@ class DisableModuleFormProcess extends Form
 
         // Then, enable the mods selected to be enabled
         foreach ($this->httpRequest->post('module_id') as $iModId) {
-            $oModuleModel->update($iModId, '1'); // Need to be string because in DB it's an "enum" type
+            $oModuleModel->update($iModId, ModuleModel::YES); // Need to be string because in DB it's an "enum" type
         }
         unset($oModuleModel);
 
@@ -39,7 +39,7 @@ class DisableModuleFormProcess extends Form
     {
         foreach ($oModuleModel->get() as $oMod) {
             // Need to be string because in DB it's an "enum" type
-            $oModuleModel->update($oMod->moduleId, '0');
+            $oModuleModel->update($oMod->moduleId, ModuleModel::NO);
         }
     }
 
