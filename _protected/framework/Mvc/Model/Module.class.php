@@ -33,7 +33,7 @@ class Module extends Engine\Model
         $this->cache->start(static::CACHE_GROUP, 'list' . $sFolderName, static::CACHE_TIME);
 
         if (!$oData = $this->cache->get()) {
-            $bIsFolderName = !empty($sFolderName);
+            $bIsFolderName = $sFolderName !== null;
             $sSelect = ($bIsFolderName) ? 'enabled' : '*';
             $sSqlWhere = ($bIsFolderName) ? 'WHERE folderName = :modName LIMIT 1' : '';
 
