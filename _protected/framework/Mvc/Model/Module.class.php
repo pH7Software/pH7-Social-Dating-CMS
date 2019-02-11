@@ -18,8 +18,8 @@ class Module extends Engine\Model
     const CACHE_GROUP = 'db/sys/core/enabled_modules';
     const CACHE_TIME = 172800; // 2 days
 
-    const YES = '1';
-    const NO = '0';
+    const YES = '1'; // Enabled
+    const NO = '0'; // Disabled
 
     /**
      * Get all modules status (enabled and disabled).
