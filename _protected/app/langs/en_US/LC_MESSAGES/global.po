@@ -23411,7 +23411,7 @@ msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/info/software.cpl.php:19
 msgid ""
-"Here is a <a class=\"bold\" href=\"%0%\">pre-written Tweet</a> (which you "
+"Here is a <a class=\"bold underline\" href=\"%0%\">pre-written Tweet</a> (which you "
 "can edit, of course)."
 msgstr ""
 

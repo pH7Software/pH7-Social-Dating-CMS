@@ -5,7 +5,7 @@
             <div class="panel-body">
                 <ul class="list-group">
                     <li class="list-group-item">
-                        {lang 'Here is a <a class="bold" href="%0%">pre-written Tweet</a> (which you can edit, of course).', $tweet_msg_url}
+                        {lang 'Here is a <a class="bold underline" href="%0%">pre-written Tweet</a> (which you can edit, of course).', $tweet_msg_url}
                     </li>
                 </ul>
             </div>
