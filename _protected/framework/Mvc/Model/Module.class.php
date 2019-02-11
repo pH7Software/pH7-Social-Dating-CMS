@@ -22,9 +22,9 @@ class Module extends Engine\Model
     const NO = '0';
 
     /**
-     * Get all modules status (enabled & disabled).
+     * Get all modules status (enabled and disabled).
      *
-     * @param string $sFolderName Name of the module folder. Default: NULL
+     * @param string|null $sFolderName Name of the module folder.
      *
      * @return \stdClass|array
      */
