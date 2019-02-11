@@ -15,6 +15,12 @@ use PH7\Framework\Url\Header;
 
 class DisableModuleForm
 {
+    const YES_VALUE = '1';
+
+    const DEV_STAGE_MODS = [
+        'connect'
+    ];
+
     public static function display()
     {
         if (isset($_POST['submit_module'])) {
@@ -36,16 +42,16 @@ class DisableModuleForm
                 continue;
             }
 
-            if ((int)$oData->enabled === 1) {
+            if ($oData->enabled === self::YES_VALUE) {
                 $aSelectedMods[] = $oData->moduleId;
             }
 
             $sAdditionalText = '';
-            if ((int)$oData->premiumMod === 1) {
+            if ($oData->premiumMod === self::YES_VALUE) {
                 $sAdditionalText .= ' • <a class="small" href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'general') . '#p=api">' . t('Change the default Chat by yours') . '</a>';
             }
 
-            if ($oData->folderName === 'connect') {
+            if (in_array($oData->folderName, self::DEV_STAGE_MODS, true)) {
                 $sAdditionalText .= '<span class="small red"> • ' . t('Only for development purpose to test it before <a href="%0%">opening a PR</a>. <a href="%1%">Social APIs</a> have to be updated.', 'https://github.com/pH7Software/pH7-Social-Dating-CMS/pulls', 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/master/_protected/app/system/modules/connect/inc/class/') . '</span>';
             }
 
