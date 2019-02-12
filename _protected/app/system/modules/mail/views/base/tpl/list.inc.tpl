@@ -28,7 +28,7 @@
                     </div>
 
                     {if $msg->status == MailModel::UNREAD_STATUS}
-                        <span class="label label-primary">New</span>
+                        <span class="label label-primary">{lang 'New'}</span>
                     {/if}
 
                     <div class="user">{{ $avatarDesign->get($usernameSender, $firstNameSender, null, 32) }}</div>
