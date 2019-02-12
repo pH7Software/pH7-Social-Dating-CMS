@@ -1,6 +1,6 @@
 # Set the wanted Ubuntu & PHP versions
 ARG UBUNTU_VERSION=18.04
-ARG PHP_VERSION=7.2
+ARG PHP_VERSION=7.3
 
 
 # Set the base image to Ubuntu
