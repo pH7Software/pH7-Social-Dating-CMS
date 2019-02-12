@@ -28,7 +28,7 @@
                     </div>
 
                     {if $msg->status == MailModel::UNREAD_STATUS}
-                        <img src="{url_tpl_img}icon/new.gif" alt="{lang 'New Message'}" title="{lang 'Unread'}" />
+                        <span class="label label-primary">New</span>
                     {/if}
 
                     <div class="user">{{ $avatarDesign->get($usernameSender, $firstNameSender, null, 32) }}</div>
