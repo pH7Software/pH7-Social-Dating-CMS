@@ -1,4 +1,4 @@
-<div class="left">
+<div class="right">
     <p>
         {lang 'AMAZING!!! 😍 You currently have %0% users!', $total_users}
         <span class="underline">
