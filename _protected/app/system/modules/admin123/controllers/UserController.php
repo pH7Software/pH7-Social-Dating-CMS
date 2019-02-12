@@ -83,8 +83,9 @@ class UserController extends Controller
 
             $this->view->page_title = $this->view->h1_title = t('Browse Users');
             $this->view->h3_title = t('Total Users: %0%', $this->iTotalUsers);
-
+            $this->view->total_users = $this->iTotalUsers;
             $this->view->browse = $oBrowse;
+
             $this->output();
         }
     }

@@ -136,6 +136,10 @@
                 {/each}
             </tbody>
         </table>
+
+        {if $total_users > UserMilestoneCore::MILLENARIAN_WEBSITE}
+            {manual_include 'milestonne_reached.inc.tpl'}
+        {/if}
     </div>
 </form>
 
