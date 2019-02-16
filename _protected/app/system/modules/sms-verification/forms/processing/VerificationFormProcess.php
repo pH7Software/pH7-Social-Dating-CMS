@@ -45,14 +45,14 @@ class VerificationFormProcess extends Form
             unset($oUserModel);
 
             Header::redirect(
-                Uri::get('realestate', 'account', 'index'),
+                Uri::get('user', 'account', 'index'),
                 t('Congratulations! Your phone number has been successfully verified.')
             );
 
         } else {
             \PFBC\Form::setError(
                 'form_sms_verification',
-                t('The SMS verification code is invalid. <a href="%0%">Try to resend a new one?</a>', Uri::get('sms-verifier', 'main', 'send'))
+                t('The SMS verification code is invalid. <a href="%0%">Try to resend a new one?</a>', Uri::get('sms-verification', 'main', 'send'))
             );
         }
     }

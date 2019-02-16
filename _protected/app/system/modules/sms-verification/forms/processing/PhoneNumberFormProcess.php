@@ -29,7 +29,7 @@ class PhoneNumberFormProcess extends Form
             $this->session->set(SmsVerificationCore::PHONE_NUMBER_SESS_NAME, $sPhoneNumber);
 
             Header::redirect(
-                Uri::get('sms-verifier', 'main', 'verification')
+                Uri::get('sms-verification', 'main', 'verification')
             );
         } else {
             \PFBC\Form::setError(

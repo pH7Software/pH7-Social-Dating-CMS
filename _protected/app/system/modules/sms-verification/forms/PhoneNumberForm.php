@@ -26,7 +26,16 @@ class PhoneNumberForm
         $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_phone_number_verification', 'form_phone_number_verification'));
         $oForm->addElement(new \PFBC\Element\Token('phone_number_verification'));
-        $oForm->addElement(new \PFBC\Element\Phone(t('Your Phone Number'), 'phone_number', ['description' => t('In order to validate your account, please specify your phone number and we will text you with a verification code.'), 'required' => 1]));
+        $oForm->addElement(
+            new \PFBC\Element\Phone(
+                t('Your Phone Number'),
+                'phone_number',
+                [
+                    'description' => t('In order to validate your account, please specify your phone number and we will text you with a verification code.'),
+                    'required' => 1
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
