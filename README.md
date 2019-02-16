@@ -94,6 +94,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Country Blocker (block easily any countries where you don't want your website to be accessible)
 * Country Restrictions for Member and Affiliate registration forms
 * RESTful API for integration from an external app (iOS iPhone, Apple Watch, Android, ...), website, program, ...
+* Users' SMS Verification (supporting Clickatell and Twilio SMS gateways)
 * Feedback Module
 * Full Homepage Customization (profiles block, slogan, SEO text, headline)
 * Fully Responsive Templates
