@@ -45,7 +45,7 @@ class InstallController extends Controller
         'birthday' => '1',
         'map' => '1',
         'pwa' => '0',
-        'sms-verification' => 0
+        'sms-verification' => '0'
     ];
 
     const DATING_MODS = [
@@ -73,7 +73,7 @@ class InstallController extends Controller
         'birthday' => '0',
         'map' => '1',
         'pwa' => '0',
-        'sms-verification' => 0
+        'sms-verification' => '0'
     ];
 
     /**
