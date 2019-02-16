@@ -101,7 +101,10 @@ class LoginFormProcess extends Form implements LoginableForm
             if ($this->httpRequest->postExists('remember')) {
                 // We hash again the password
                 (new Framework\Cookie\Cookie)->set(
-                    ['member_remember' => Security::hashCookie($oUserData->password), 'member_id' => $oUserData->profileId]
+                    [
+                        'member_remember' => Security::hashCookie($oUserData->password),
+                        'member_id' => $oUserData->profileId
+                    ]
                 );
             }
 
@@ -126,7 +129,12 @@ class LoginFormProcess extends Form implements LoginableForm
                         )
                     );
                 } else {
-                    $oUser->setAuth($oUserData, $this->oUserModel, $this->session, $oSecurityModel);
+                    $oUser->setAuth(
+                        $oUserData,
+                        $this->oUserModel,
+                        $this->session,
+                        $oSecurityModel
+                    );
 
                     Header::redirect(
                         $sUrlRelocateAfterLogin,
