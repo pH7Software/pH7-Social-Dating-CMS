@@ -10,12 +10,14 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Security;
 use PH7\Framework\Url\Header;
+use stdClass;
 
 class LoginFormProcess extends Form implements LoginableForm
 {
@@ -104,6 +106,9 @@ class LoginFormProcess extends Form implements LoginableForm
             }
 
             $oUser = new UserCore;
+            if ($this->IsSmsVerificationEligible($oUserData)) {
+                $this->redirectToSmsVerification($iId);
+            }
             if (true !== ($mStatus = $oUser->checkAccountStatus($oUserData))) {
                 \PFBC\Form::setError('form_login_user', $mStatus);
             } else {
@@ -148,5 +153,31 @@ class LoginFormProcess extends Form implements LoginableForm
     public function enableCaptcha()
     {
         $this->session->set('captcha_user_enabled', 1);
+    }
+
+    /**
+     * @param stdClass $oUserData
+     *
+     * @return bool
+     */
+    private function isSmsVerificationEligible(stdClass $oUserData)
+    {
+        return $oUserData->active == RegistrationCore::SMS_ACTIVATION &&
+            SysMod::isEnabled('sms-verification');
+    }
+
+    /**
+     * @param int $iId
+     *
+     * @return void
+     */
+    private function redirectToSmsVerification($iId)
+    {
+        // Store the user ID/email before redirecting to sms-verification module
+        $this->session->set(SmsVerificationCore::PROFILE_ID_SESS_NAME, $iId);
+
+        Header::redirect(
+            Uri::get('sms-verification', 'main', 'send')
+        );
     }
 }
