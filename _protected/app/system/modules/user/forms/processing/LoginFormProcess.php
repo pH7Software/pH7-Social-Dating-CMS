@@ -106,7 +106,7 @@ class LoginFormProcess extends Form implements LoginableForm
             }
 
             $oUser = new UserCore;
-            if ($this->IsSmsVerificationEligible($oUserData)) {
+            if ($this->isSmsVerificationEligible($oUserData)) {
                 $this->redirectToSmsVerification($iId);
             }
             if (true !== ($mStatus = $oUser->checkAccountStatus($oUserData))) {
