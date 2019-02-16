@@ -17,7 +17,7 @@ With **[pH7CMS](https://sourceforge.net/projects/ph7socialdating/files/latest/do
 ![Professional PHP Social Dating Builder Software](https://cloud.githubusercontent.com/assets/1325411/19419476/5475b32c-93d0-11e6-9756-8e7db8df129f.png)
 
 
-## Software Overview
+## 👀 Software Overview
 
 **pH7 Dating CMS** is a **Social/Dating CMS** written in **Object-Oriented** PHP (*OOP*), fully compatible and highly optimised for PHP 7+ and based on **MVC** architecture (Model-View-Controller).
 
@@ -28,7 +28,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 *To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **best online dating service** or **social networking** website on the World Wide Web!*
 
 
-## How Powerful Your Social-Dating WebApp Will Be? 🚀
+## 😻 How Powerful Your Social-Dating WebApp Will Be? 🚀
 
 * Boosted Social-Dating Streams™
 * Smart Intuitive Search Engine™ (SISE System)
@@ -125,7 +125,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 ![Build a Social Dating Web App with pH7CMS](https://cloud.githubusercontent.com/assets/1325411/19419481/657386a4-93d0-11e6-8eee-95deba2d30a0.png)
 
 
-## Requirements
+## ⚙️ Requirements
 
 * **Application Server** PHP 5.6 or higher (Recommended Version: **PHP 7.0.4** or higher).
 
@@ -144,7 +144,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * **pH7CMS's Video Module Requirement (only if enabled)** [FFmpeg](http://ffmpeg.org)
 
 
-## Installation
+## 🛠 Installation
 
   * Github:
     * Clone pH7CMS from Github `git clone git@github.com:pH7Software/pH7-Social-Dating-CMS.git`
@@ -160,7 +160,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
     * If your Web host offers Softaculous, you might be able to install [pH7CMS in one-click with Softaculous](http://www.softaculous.com/softwares/socialnetworking/pH7CMS).
 
 
-## Nginx Configuration
+## 🏗 Nginx Configuration
 
 In order to get pH7CMS working on nginx server, you need to add some custom nginx configuration.
 
@@ -203,38 +203,38 @@ For more information, please refer to the nginx documentation.
 ![Create Your Own Niche Dating Service in New York City](https://cloud.githubusercontent.com/assets/1325411/19419480/65738a1e-93d0-11e6-9fbe-a48fa36fc53a.png)
 
 
-## Translations
+## 📝 Translations
 
 You can find and add other languages on the [I18N repo](https://github.com/pH7Software/pH7-Internationalization).
 
 
-## Author
+## ✍ Author
 
 Coded & Designed with lots of ❤️ by [Pierre-Henry Soria](http://ph7.me). A passionate Belgian software engineer 🍫🍺
 
 
-## Offer Me A Cup of Tea? (...or tea bags...) 🍵
+## 💲 Offer Me A Cup of Tea? (...or tea bags...) 🍵
 
 [![Paypal](templates/system/modules/ph7cms-helper/themes/base/img/paypal-donate.en.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6)
 [![Patreon](templates/system/modules/ph7cms-helper/themes/base/img/support-patreon.en.png)](https://www.patreon.com/bePatron?u=3534366 "Become a Patron")
 
 
-## Hire Me At Your Company?
+## 🤝 Hire Me At Your Company?
 
 Do you need a software engineer like me (and willing to relocate) at your company..? **[Let's chat together](https://www.linkedin.com/in/ph7enry/)**!
 
 
-## Official Website
+## ⚡️ Official Website
 
 [pH7CMS.com](http://ph7cms.com)
 
 
-## Documentation
+## 📚 Documentation
 
 [pH7CMS Documentation](http://ph7cms.com/doc/)
 
 
-## Contributing
+## 💖 Contributing
 
 ![I Love Open Source](static/img/love-open-source-logo.png)
 
@@ -252,7 +252,7 @@ Just clone the repository, make your changes and then make a push ;-)
 ![Beautiful Profile Dating Page](https://user-images.githubusercontent.com/1325411/35779585-68f0d5fc-09c7-11e8-91eb-bf793fcfab6e.png)
 
 
-## pH7CMS; The Eco-Friendly CMS ❤️
+## 🌲 pH7CMS; The Eco-Friendly CMS ❤️
 
 ![Eco Friendly. Love the World and Love the Nature](static/img/love-nature.svg)
 
@@ -266,7 +266,7 @@ Finally, **please consider using green Web hosting** (which use Green Power supp
 -> Other [10 Easy Ways to Green Your Social Community](https://mashable.com/2010/01/01/green-your-web-site/) 😉 <-
 
 
-## Tools/Software Used to Develop pH7CMS
+## 🔨 Tools/Software Used to Develop pH7CMS
 
 * LAMP on **Fedora/Ubuntu** (and Windows/Mac with WampServer/MAMP for testing purpose)
 
@@ -285,12 +285,12 @@ Finally, **please consider using green Web hosting** (which use Green Power supp
 * Sometimes, when working on Mac, **Sequel Pro** is used to lookup easily at a database.
 
 
-## Contact
+## ✒️ Contact
 
 You can send me an email for any suggestions or feedback at: *hello {AT} ph7cms {D0T} com*
 
 
-## License
+## ⚖️ License
 
 **pH7CMS** is generously distributed under **Open Source, Free** License.
 
