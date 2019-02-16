@@ -103,6 +103,7 @@ abstract class RegistrationCore
             case self::MANUAL_ACTIVATION:
                 $sMsg = t('Your account must be approved by an administrator. You will receive an email of any decision.');
                 break;
+
             case self::SMS_ACTIVATION:
                 $sMsg = t('You have been successfully registered!');
                 break;
