@@ -125,7 +125,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 ![Build a Social Dating Web App with pH7CMS](https://cloud.githubusercontent.com/assets/1325411/19419481/657386a4-93d0-11e6-8eee-95deba2d30a0.png)
 
 
-## ⚙️ Requirements
+## ⚙ Requirements
 
 * **Application Server** PHP 5.6 or higher (Recommended Version: **PHP 7.0.4** or higher).
 
@@ -224,7 +224,7 @@ Coded & Designed with lots of ❤️ by [Pierre-Henry Soria](http://ph7.me). A p
 Do you need a software engineer like me (and willing to relocate) at your company..? **[Let's chat together](https://www.linkedin.com/in/ph7enry/)**!
 
 
-## ⚡️ Official Website
+## ⚡ Official Website
 
 [pH7CMS.com](http://ph7cms.com)
 
@@ -285,12 +285,12 @@ Finally, **please consider using green Web hosting** (which use Green Power supp
 * Sometimes, when working on Mac, **Sequel Pro** is used to lookup easily at a database.
 
 
-## ✒️ Contact
+## 🖋 Contact
 
 You can send me an email for any suggestions or feedback at: *hello {AT} ph7cms {D0T} com*
 
 
-## ⚖️ License
+## ⚖ License
 
 **pH7CMS** is generously distributed under **Open Source, Free** License.
 
