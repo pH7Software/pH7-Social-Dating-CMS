@@ -23,6 +23,7 @@ abstract class RegistrationCore
     const NO_ACTIVATION = 1;
     const EMAIL_ACTIVATION = 2;
     const MANUAL_ACTIVATION = 3;
+    const SMS_ACTIVATION = 4;
 
     /**
      * @internal Set protected visibility because this attribute is used in child classes.
@@ -101,6 +102,9 @@ abstract class RegistrationCore
 
             case self::MANUAL_ACTIVATION:
                 $sMsg = t('Your account must be approved by an administrator. You will receive an email of any decision.');
+                break;
+            case self::SMS_ACTIVATION:
+                $sMsg = t('You have been successfully registered!');
                 break;
 
             default:
