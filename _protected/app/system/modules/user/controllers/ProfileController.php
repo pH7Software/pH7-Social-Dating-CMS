@@ -49,7 +49,9 @@ class ProfileController extends ProfileBaseController
         $oUser = $this->oUserModel->readProfile($this->iProfileId);
 
         if ($oUser && $this->doesProfileExist($oUser)) {
-            $this->redirectToOtherProfileStyleIfEnabled();
+            if (SysMod::isEnabled('cool-profile-page')) {
+                $this->redirectToCoolProfileStyle();
+            }
 
             // The administrators can view all profiles and profile visits are not saved.
             if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
@@ -196,14 +198,16 @@ class ProfileController extends ProfileBaseController
      *
      * @throws Framework\File\IOException
      */
-    private function redirectToOtherProfileStyleIfEnabled()
+    private function redirectToCoolProfileStyle()
     {
-        if (SysMod::isEnabled('cool-profile-page')) {
-            // If enabled, redirect to the other profile page style
-            Header::redirect(
-                Uri::get('cool-profile-page', 'main', 'index', $this->iProfileId)
-            );
-        }
+        Header::redirect(
+            Uri::get(
+                'cool-profile-page',
+                'main',
+                'index',
+                $this->iProfileId
+            )
+        );
     }
 
     /**
