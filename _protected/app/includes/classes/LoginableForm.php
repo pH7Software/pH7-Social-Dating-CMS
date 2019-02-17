@@ -10,6 +10,10 @@ namespace PH7;
 
 interface LoginableForm
 {
+    const EMAIL_DOES_NOT_EXIST = 'email_does_not_exist';
+    const PASSWORD_DOES_NOT_EXIST = 'password_does_not_exist';
+
+
     /**
      * Check if the existing password hash in the user record is outdated
      * with the current algorithm and password hashing options.

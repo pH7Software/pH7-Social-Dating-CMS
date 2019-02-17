@@ -110,10 +110,10 @@ class UserCoreModel extends Model
         $sDbPassword = !empty($oRow->password) ? $oRow->password : '';
 
         if (strtolower($sEmail) !== strtolower($sDbEmail)) {
-            return 'email_does_not_exist';
+            return LoginableForm::EMAIL_DOES_NOT_EXIST;
         }
         if (!Security::checkPwd($sPassword, $sDbPassword)) {
-            return 'password_does_not_exist';
+            return LoginableForm::PASSWORD_DOES_NOT_EXIST;
         }
 
         return true;
