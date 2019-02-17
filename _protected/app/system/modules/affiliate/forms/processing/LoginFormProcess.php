@@ -54,10 +54,10 @@ class LoginFormProcess extends Form implements LoginableForm
 
         // Check Login
         $sLogin = $this->oAffModel->login($sEmail, $sPassword, DbTableName::AFFILIATE);
-        if ($sLogin === 'email_does_not_exist' || $sLogin === 'password_does_not_exist') {
+        if ($sLogin === CredentialStatusCore::EMAIL_DOES_NOT_EXIST || $sLogin === CredentialStatusCore::PASSWORD_DOES_NOT_EXIST) {
             $this->preventBruteForce(self::BRUTE_FORCE_SLEEP_DELAY);
 
-            if ($sLogin === 'email_does_not_exist') {
+            if ($sLogin === CredentialStatusCore::EMAIL_DOES_NOT_EXIST) {
                 $this->enableCaptcha();
                 \PFBC\Form::setError(
                     'form_login_aff',
@@ -70,7 +70,7 @@ class LoginFormProcess extends Form implements LoginableForm
                     'Failed! Incorrect Username',
                     DbTableName::AFFILIATE
                 );
-            } elseif ($sLogin === 'password_does_not_exist') {
+            } elseif ($sLogin === CredentialStatusCore::PASSWORD_DOES_NOT_EXIST) {
                 $oSecurityModel->addLoginLog(
                     $sEmail,
                     'Guest',
