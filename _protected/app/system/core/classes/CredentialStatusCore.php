@@ -8,7 +8,7 @@
 
 namespace PH7;
 
-final class CredentialStatus
+final class CredentialStatusCore
 {
     const EMAIL_DOES_NOT_EXIST = 'email_does_not_exist';
     const PASSWORD_DOES_NOT_EXIST = 'password_does_not_exist';
