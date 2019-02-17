@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module /PWA / Controller
  */
@@ -22,6 +22,7 @@ class MainController extends Controller
         $this->enableStaticTplCache();
 
         $this->view->bg_color = $this->config->values['module.setting']['background_color'];
+        $this->view->orientation = $this->config->values['module.setting']['orientation_mode'];
 
         $this->jsonOutput();
     }
