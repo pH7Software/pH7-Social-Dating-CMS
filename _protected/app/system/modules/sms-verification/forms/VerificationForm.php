@@ -28,7 +28,7 @@ class VerificationForm
         $oForm->addElement(new \PFBC\Element\Token('sms_verification'));
         $oForm->addElement(
             new \PFBC\Element\Textbox(
-                t('Verification Code'),
+                t('Your Verification Code'),
                 'verification_code',
                 [
                     'autocomplete' => 'off',

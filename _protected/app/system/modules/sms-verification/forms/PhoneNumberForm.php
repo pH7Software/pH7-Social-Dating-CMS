@@ -31,7 +31,7 @@ class PhoneNumberForm
                 t('Your Phone Number'),
                 'phone_number',
                 [
-                    'description' => t('In order to validate your account, please specify your phone number and we will text you with a verification code.'),
+                    'description' => t('In order to verify your account, please enter your phone number and we will text you with a verification code.'),
                     'required' => 1
                 ]
             )
