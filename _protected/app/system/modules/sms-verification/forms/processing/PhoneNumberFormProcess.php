@@ -22,7 +22,7 @@ class PhoneNumberFormProcess extends Form
         $oSmsApi = SmsGatewayFactory::create($this->config->values['module.setting']['default_sms_gateway']);
         $bResult = $oSmsApi->send(
             $sPhoneNumber,
-            t('Your verification code is: %0% Thanks! %site_name% Team', Verification::getVerificationCode($iProfileId))
+            t('Your verification code is: %0% Thank you. %site_name% team', Verification::getVerificationCode($iProfileId))
         );
 
         if ($bResult) {
@@ -34,7 +34,7 @@ class PhoneNumberFormProcess extends Form
         } else {
             \PFBC\Form::setError(
                 'form_phone_number_verification',
-                t('An error occurred while sending the verification text. Please retry.')
+                t('An error occurred while sending the verification text. Please try again.')
             );
         }
     }
