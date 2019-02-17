@@ -63,9 +63,9 @@ class Url
      * N.B.: We recreate our own function with default parameters (because the default parameters of PHP we do not like;))
      *
      * @param array $aParams
-     * @param string $sNumericPrefix Default NULL
-     * @param string $sArgSeparator Default '&amp;
-     * @param int $iEncType Default PHP_QUERY_RFC1738
+     * @param string $sNumericPrefix
+     * @param string $sArgSeparator
+     * @param int $iEncType
      *
      * @return string Returns a URL-encoded string.
      */
