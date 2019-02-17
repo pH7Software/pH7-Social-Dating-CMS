@@ -47,7 +47,7 @@ class Uri
     /**
      * Counting all fragments of a URL.
      *
-     * @return integer
+     * @return int
      */
     public function totalFragment()
     {
@@ -57,9 +57,9 @@ class Uri
     /**
      * Gets URI fragment.
      *
-     * @param integer $iKey The URI key.
+     * @param int $iKey The URI key.
      *
-     * @return boolean|string Returns FALSE if key is not found, otherwise STRING of the URI fragment if success.
+     * @return bool|string Returns FALSE if key is not found, otherwise STRING of the URI fragment if success.
      */
     public function fragment($iKey)
     {
@@ -73,7 +73,7 @@ class Uri
     /**
      * Gets URI segments.
      *
-     * @param integer $iOffset The sequence will start at that offset in the array.
+     * @param int $iOffset The sequence will start at that offset in the array.
      *
      * @return array Returns the slice segments URI.
      */
