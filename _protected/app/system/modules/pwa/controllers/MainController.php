@@ -38,7 +38,7 @@ class MainController extends Controller
         $this->view->setHtmlCompress(false);
         $this->view->setPhpCompress(false);
 
-        $this->setContentType(); // Header, output format
+        $this->setContentType();
 
         $this->view->display($this->httpRequest->currentController() . PH7_DS . $this->registry->action . self::JSON_TPL_EXT);
     }
@@ -50,6 +50,8 @@ class MainController extends Controller
     }
 
     /**
+     * Set the appropriate header output format.
+     *
      * @return void
      *
      * @throws Framework\Http\Exception
