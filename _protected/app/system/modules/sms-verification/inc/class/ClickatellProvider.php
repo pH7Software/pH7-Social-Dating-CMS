@@ -33,9 +33,9 @@ class ClickatellProvider extends SmsProvider implements SmsProvidable
 
             if (!empty($aResponse) && is_array($aResponse)) {
                 $aMessages = $aResponse['messages'];
-                $aMessages = array_pop($aMessages);
+                $aMessage = array_pop($aMessages);
 
-                if ($aMessages['error'] === false) {
+                if ($aMessage['error'] === false) {
                     return true;
                 }
             }
