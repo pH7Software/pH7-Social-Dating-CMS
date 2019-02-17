@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Model\Security as SecurityModel;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
@@ -41,7 +42,7 @@ class VerificationFormProcess extends Form
             $oUser->clearReadProfileCache($iProfileId);
 
             $oUserData = $oUserModel->readProfile($iProfileId);
-            $oUser->setAuth($oUserData, $oUserModel, $this->session, new Framework\Mvc\Model\Security);
+            $oUser->setAuth($oUserData, $oUserModel, $this->session, new SecurityModel);
             unset($oUserModel);
 
             Header::redirect(
