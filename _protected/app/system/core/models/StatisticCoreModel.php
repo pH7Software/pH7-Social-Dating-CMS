@@ -83,7 +83,7 @@ class StatisticCoreModel extends StatisticModel
         $iDay = (int)$iDay;
 
         $bIsDay = ($iDay > 0);
-        $bIsGender = $sTable === DbTableName::MEMBER ? GenderTypeUserCoreModel::isGenderValid($sGender) : GenderTypeUserCoreModel::isGenderValid($sGender, GenderTypeUserCoreModel::IGNORE_COUPLE_GENDER);
+        $bIsGender = $sTable === DbTableName::MEMBER ? GenderTypeUserCore::isGenderValid($sGender) : GenderTypeUserCore::isGenderValid($sGender, GenderTypeUserCore::IGNORE_COUPLE_GENDER);
 
         $sSqlDay = $bIsDay ? ' AND (lastActivity + INTERVAL :day DAY) > NOW()' : '';
         $sSqlGender = $bIsGender ? ' AND sex = :gender' : '';

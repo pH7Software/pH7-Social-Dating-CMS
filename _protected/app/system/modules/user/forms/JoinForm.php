@@ -96,11 +96,11 @@ class JoinForm
                 t('I am a'),
                 'sex',
                 [
-                    GenderTypeUserCoreModel::FEMALE => t('Woman') . ' <i class="fa fa-venus"></i>',
-                    GenderTypeUserCoreModel::MALE => t('Man') . ' <i class="fa fa-mars"></i>',
-                    GenderTypeUserCoreModel::COUPLE => t('Couple') . ' <i class="fa fa-venus-mars"></i>'
+                    GenderTypeUserCore::FEMALE => t('Woman') . ' <i class="fa fa-venus"></i>',
+                    GenderTypeUserCore::MALE => t('Man') . ' <i class="fa fa-mars"></i>',
+                    GenderTypeUserCore::COUPLE => t('Couple') . ' <i class="fa fa-venus-mars"></i>'
                 ],
-                ['value' => GenderTypeUserCoreModel::FEMALE, 'required' => 1]
+                ['value' => GenderTypeUserCore::FEMALE, 'required' => 1]
             )
         );
 
@@ -109,11 +109,11 @@ class JoinForm
                 t('Looking for a'),
                 'match_sex',
                 [
-                    GenderTypeUserCoreModel::MALE => t('Man') . ' <i class="fa fa-mars"></i>',
-                    GenderTypeUserCoreModel::FEMALE => t('Woman') . ' <i class="fa fa-venus"></i>',
-                    GenderTypeUserCoreModel::COUPLE => t('Couple') . ' <i class="fa fa-venus-mars"></i>'
+                    GenderTypeUserCore::MALE => t('Man') . ' <i class="fa fa-mars"></i>',
+                    GenderTypeUserCore::FEMALE => t('Woman') . ' <i class="fa fa-venus"></i>',
+                    GenderTypeUserCore::COUPLE => t('Couple') . ' <i class="fa fa-venus-mars"></i>'
                 ],
-                ['value' => GenderTypeUserCoreModel::MALE, 'required' => 1]
+                ['value' => GenderTypeUserCore::MALE, 'required' => 1]
             )
         );
 

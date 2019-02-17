@@ -37,10 +37,10 @@ class AddAffiliateForm
                 t('Gender:'),
                 'sex',
                 [
-                    GenderTypeUserCoreModel::MALE => t('Man'),
-                    GenderTypeUserCoreModel::FEMALE => t('Woman')
+                    GenderTypeUserCore::MALE => t('Man'),
+                    GenderTypeUserCore::FEMALE => t('Woman')
                 ],
-                ['value' => GenderTypeUserCoreModel::MALE, 'required' => 1]
+                ['value' => GenderTypeUserCore::MALE, 'required' => 1]
             )
         );
         $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', ['title' => t('Please specify the date of birth using the calendar.'), 'required' => 1, 'validation' => new \PFBC\Validation\BirthDate]));

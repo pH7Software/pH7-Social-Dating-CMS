@@ -37,10 +37,10 @@ class AddAdminForm
                 t('Gender:'),
                 'sex',
                 [
-                    GenderTypeUserCoreModel::MALE => t('Man'),
-                    GenderTypeUserCoreModel::FEMALE => t('Woman')
+                    GenderTypeUserCore::MALE => t('Man'),
+                    GenderTypeUserCore::FEMALE => t('Woman')
                 ],
-                ['value' => GenderTypeUserCoreModel::MALE, 'required' => 1]
+                ['value' => GenderTypeUserCore::MALE, 'required' => 1]
             )
         );
         $oForm->addElement(new \PFBC\Element\Timezone('Time Zone:', 'time_zone', ['description' => t('Knowing the time zone, the other administrators may know when they can contact you easily.'), 'value' => '-6', 'required' => 1]));

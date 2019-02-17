@@ -41,11 +41,11 @@ class AddUserForm
                 t('Gender:'),
                 'sex',
                 [
-                    GenderTypeUserCoreModel::FEMALE => t('Woman'),
-                    GenderTypeUserCoreModel::MALE => t('Man'),
-                    GenderTypeUserCoreModel::COUPLE => t('Couple')
+                    GenderTypeUserCore::FEMALE => t('Woman'),
+                    GenderTypeUserCore::MALE => t('Man'),
+                    GenderTypeUserCore::COUPLE => t('Couple')
                 ],
-                ['value' => GenderTypeUserCoreModel::FEMALE, 'required' => 1]
+                ['value' => GenderTypeUserCore::FEMALE, 'required' => 1]
             )
         );
         $oForm->addElement(
@@ -53,11 +53,11 @@ class AddUserForm
                 t('Looking for:'),
                 'match_sex',
                 [
-                    GenderTypeUserCoreModel::MALE => t('Man'),
-                    GenderTypeUserCoreModel::FEMALE => t('Woman'),
-                    GenderTypeUserCoreModel::COUPLE => t('Couple')
+                    GenderTypeUserCore::MALE => t('Man'),
+                    GenderTypeUserCore::FEMALE => t('Woman'),
+                    GenderTypeUserCore::COUPLE => t('Couple')
                 ],
-                ['value' => GenderTypeUserCoreModel::MALE, 'required' => 1]
+                ['value' => GenderTypeUserCore::MALE, 'required' => 1]
             )
         );
         $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', ['title' => t('Please specify the date of birth using the calendar.'), 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1]));

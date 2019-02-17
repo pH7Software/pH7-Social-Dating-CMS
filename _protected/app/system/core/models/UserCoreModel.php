@@ -187,9 +187,9 @@ class UserCoreModel extends Model
         $bIsDay = ($iDay > 0);
 
         if ($sTable === DbTableName::MEMBER) {
-            $bIsGender = GenderTypeUserCoreModel::isGenderValid($sGender);
+            $bIsGender = GenderTypeUserCore::isGenderValid($sGender);
         } else {
-            $bIsGender = GenderTypeUserCoreModel::isGenderValid($sGender, GenderTypeUserCoreModel::IGNORE_COUPLE_GENDER);
+            $bIsGender = GenderTypeUserCore::isGenderValid($sGender, GenderTypeUserCore::IGNORE_COUPLE_GENDER);
         }
 
         $sSqlDay = $bIsDay ? ' AND (joinDate + INTERVAL :day DAY) > NOW()' : '';
@@ -1630,16 +1630,16 @@ class UserCoreModel extends Model
         $sGender = '';
 
         foreach ($aSex as $sSex) {
-            if ($sSex === GenderTypeUserCoreModel::MALE) {
-                $sGender .= "'" . GenderTypeUserCoreModel::MALE . "',";
+            if ($sSex === GenderTypeUserCore::MALE) {
+                $sGender .= "'" . GenderTypeUserCore::MALE . "',";
             }
 
-            if ($sSex === GenderTypeUserCoreModel::FEMALE) {
-                $sGender .= "'" . GenderTypeUserCoreModel::FEMALE . "',";
+            if ($sSex === GenderTypeUserCore::FEMALE) {
+                $sGender .= "'" . GenderTypeUserCore::FEMALE . "',";
             }
 
-            if ($sSex === GenderTypeUserCoreModel::COUPLE) {
-                $sGender .= "'" . GenderTypeUserCoreModel::COUPLE . "',";
+            if ($sSex === GenderTypeUserCore::COUPLE) {
+                $sGender .= "'" . GenderTypeUserCore::COUPLE . "',";
             }
         }
 

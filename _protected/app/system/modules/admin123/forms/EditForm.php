@@ -50,8 +50,8 @@ class EditForm
                 t('Gender:'),
                 'sex',
                 [
-                    GenderTypeUserCoreModel::MALE => t('Man'),
-                    GenderTypeUserCoreModel::FEMALE => t('Female')
+                    GenderTypeUserCore::MALE => t('Man'),
+                    GenderTypeUserCore::FEMALE => t('Female')
                 ],
                 ['value' => $oAdmin->sex, 'required' => 1]
             )

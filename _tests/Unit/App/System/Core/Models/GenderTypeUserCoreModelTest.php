@@ -8,7 +8,7 @@
 
 namespace PH7\Test\Unit\App\System\Core\Models;
 
-use PH7\GenderTypeUserCoreModel;
+use PH7\GenderTypeUserCore;
 use PHPUnit_Framework_TestCase;
 
 require_once PH7_PATH_SYS . 'core/models/GenderTypeUserCoreModel.php';
@@ -23,7 +23,7 @@ class GenderTypeUserCoreModelTest extends PHPUnit_Framework_TestCase
      */
     public function testValidGenders($sGender, $bIncludeCoupleGender)
     {
-        $bResult = GenderTypeUserCoreModel::isGenderValid($sGender, $bIncludeCoupleGender);
+        $bResult = GenderTypeUserCore::isGenderValid($sGender, $bIncludeCoupleGender);
 
         $this->assertTrue($bResult);
     }
@@ -36,7 +36,7 @@ class GenderTypeUserCoreModelTest extends PHPUnit_Framework_TestCase
      */
     public function testInvalidGenders($sGender, $bIncludeCoupleGender)
     {
-        $bResult = GenderTypeUserCoreModel::isGenderValid($sGender, $bIncludeCoupleGender);
+        $bResult = GenderTypeUserCore::isGenderValid($sGender, $bIncludeCoupleGender);
 
         $this->assertFalse($bResult);
     }
@@ -47,11 +47,11 @@ class GenderTypeUserCoreModelTest extends PHPUnit_Framework_TestCase
     public function validGenderTypesProvider()
     {
         return [
-            ['male', GenderTypeUserCoreModel::CONSIDER_COUPLE_GENDER],
-            ['female', GenderTypeUserCoreModel::CONSIDER_COUPLE_GENDER],
-            ['male', GenderTypeUserCoreModel::IGNORE_COUPLE_GENDER],
-            ['female', GenderTypeUserCoreModel::IGNORE_COUPLE_GENDER],
-            ['couple', GenderTypeUserCoreModel::CONSIDER_COUPLE_GENDER]
+            ['male', GenderTypeUserCore::CONSIDER_COUPLE_GENDER],
+            ['female', GenderTypeUserCore::CONSIDER_COUPLE_GENDER],
+            ['male', GenderTypeUserCore::IGNORE_COUPLE_GENDER],
+            ['female', GenderTypeUserCore::IGNORE_COUPLE_GENDER],
+            ['couple', GenderTypeUserCore::CONSIDER_COUPLE_GENDER]
         ];
     }
 
@@ -61,10 +61,10 @@ class GenderTypeUserCoreModelTest extends PHPUnit_Framework_TestCase
     public function invalidGenderTypesProvider()
     {
         return [
-            ['couple', GenderTypeUserCoreModel::IGNORE_COUPLE_GENDER],
-            ['visitor', GenderTypeUserCoreModel::CONSIDER_COUPLE_GENDER],
-            ['woman', GenderTypeUserCoreModel::CONSIDER_COUPLE_GENDER],
-            ['man', GenderTypeUserCoreModel::IGNORE_COUPLE_GENDER]
+            ['couple', GenderTypeUserCore::IGNORE_COUPLE_GENDER],
+            ['visitor', GenderTypeUserCore::CONSIDER_COUPLE_GENDER],
+            ['woman', GenderTypeUserCore::CONSIDER_COUPLE_GENDER],
+            ['man', GenderTypeUserCore::IGNORE_COUPLE_GENDER]
         ];
     }
 }

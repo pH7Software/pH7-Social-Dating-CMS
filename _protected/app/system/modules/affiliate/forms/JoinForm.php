@@ -51,8 +51,8 @@ class JoinForm
                 t('Your Gender:'),
                 'sex',
                 [
-                    GenderTypeUserCoreModel::MALE => t('Man'),
-                    GenderTypeUserCoreModel::FEMALE => t('Woman')
+                    GenderTypeUserCore::MALE => t('Man'),
+                    GenderTypeUserCore::FEMALE => t('Woman')
                 ],
                 ['required' => 1]
             )

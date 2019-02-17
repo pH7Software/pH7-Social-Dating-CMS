@@ -23,7 +23,7 @@ use PH7\Framework\Util\Various;
 abstract class Api
 {
     const BIRTH_DATE_FORMAT = 'Y-m-d';
-    const DEFAULT_GENDER = GenderTypeUserCoreModel::FEMALE;
+    const DEFAULT_GENDER = GenderTypeUserCore::FEMALE;
     const DEFAULT_AVATAR_EXTENSION = '.jpg';
 
     /** @var Design */
@@ -103,6 +103,6 @@ abstract class Api
      */
     protected function checkGender($sGender)
     {
-        return !GenderTypeUserCoreModel::isGenderValid($sGender) ? self::DEFAULT_GENDER : $sGender;
+        return !GenderTypeUserCore::isGenderValid($sGender) ? self::DEFAULT_GENDER : $sGender;
     }
 }
