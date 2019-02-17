@@ -62,6 +62,8 @@ class VerificationFormProcess extends Form
      * @param int $iProfileId
      *
      * @return bool
+     *
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
     private function isVerificationCodeValid($iProfileId)
     {
