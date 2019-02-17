@@ -1,7 +1,7 @@
 <div class="col-md-8">
     <p>
         {lang 'Not registered yet?'}<br />
-        <a href="{{ $design->url('user','signup','step1') }}"><strong>{lang 'Join Us Today!'}</strong></a>
+        <a class="underline" href="{{ $design->url('user','signup','step1') }}"><strong>{lang 'Join Us Today!'}</strong></a>
     </p>
 
     {{ LoginForm::display() }}
