@@ -14,7 +14,7 @@ defined('PH7') or exit('Restricted access');
 
 //------------ URL ----------------//
 // Check the SSL protocol compatibility
-// You need to clear the caches if you move HTTP to HTTPS. Admin Panel -> Tool -> Caches -> Caches Manager
+// You need to clear caches if you move your server from HTTP to HTTPS. Admin Panel -> Tool -> Caches -> Caches Manager
 $sHttp = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) === 'on') ? 'https://' : 'http://';
 // Determine the domain name, with the port if necessary
 $sServerName = $_SERVER['SERVER_NAME'] !== $_SERVER['HTTP_HOST'] ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
