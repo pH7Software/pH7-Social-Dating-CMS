@@ -280,8 +280,8 @@ function _permissions() {
     find . -type f -print0 | sudo xargs -0 chmod $1 # First parameter for Files
     find . -type d -print0 | sudo xargs -0 chmod $2 # Second parameter for Folders
 
-    sudo chmod 777 ./
     sudo chmod -R 777 ./_install/*
+    sudo chmod -R 777 ./data/system/modules/*
     sudo chmod -R 777 ./_repository/module/*
     sudo chmod -R 777 ./_repository/upgrade/*
     sudo chmod -R 777 ./_protected/app/configs/*
