@@ -17,9 +17,11 @@ function run() {
         if [ $? -eq 1 ]; then
 
             ## Permissions
+            # Generic for folders/files
             find . -type f -print0 | sudo xargs -0 chmod 666 # for files
             find . -type d -print0 | sudo xargs -0 chmod 755 # for folders
 
+            # Specific ones
             sudo chmod -R 777 ./_install/data/logs/
             sudo chmod -R 777 ./_install/data/caches/
             sudo chmod -R 777 ./data/system/modules/*
