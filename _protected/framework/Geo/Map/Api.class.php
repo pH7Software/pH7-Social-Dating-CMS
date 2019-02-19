@@ -176,6 +176,7 @@ class Api
     public function setMapType($type)
     {
         $mapsType = ['ROADMAP', 'HYBRID', 'TERRAIN', 'SATELLITE'];
+
         if (!in_array(strtoupper($type), $mapsType, true)) {
             $this->mapType = $mapsType[0];
         } else {
