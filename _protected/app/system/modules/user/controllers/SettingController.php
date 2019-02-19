@@ -189,6 +189,8 @@ class SettingController extends Controller
     }
 
     /**
+     * Returns the correct profile ID (depending if it's with the "login as" admin or not).
+     *
      * @return int
      */
     private function getProfileId()
