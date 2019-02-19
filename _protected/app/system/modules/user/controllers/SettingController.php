@@ -121,6 +121,7 @@ class SettingController extends Controller
 
         if ($this->httpRequest->get('delete_status') === 'yesdelete') {
             $this->session->set('yes_delete', 1);
+
             Header::redirect(
                 Uri::get(
                     'user',
@@ -130,6 +131,7 @@ class SettingController extends Controller
             );
         } elseif ($this->httpRequest->get('delete_status') === 'nodelete') {
             $this->view->delete_status = false;
+
             $this->design->setRedirect(
                 Uri::get('user', 'main', 'index'),
                 null,
@@ -162,7 +164,10 @@ class SettingController extends Controller
     {
         (new UserCore)->deleteAvatar($this->iProfileId, $this->sUsername);
 
-        Header::redirect(null, t('Profile photo successfully deleted'));
+        Header::redirect(
+            null,
+            t('Profile photo successfully deleted')
+        );
     }
 
     /**
@@ -185,7 +190,10 @@ class SettingController extends Controller
     {
         (new UserCore)->deleteBackground($this->iProfileId, $this->sUsername);
 
-        Header::redirect(null, t('Your wallpaper has been successfully deleted!'));
+        Header::redirect(
+            null,
+            t('Your wallpaper has been successfully deleted!')
+        );
     }
 
     /**
