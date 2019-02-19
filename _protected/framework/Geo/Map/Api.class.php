@@ -37,6 +37,7 @@ class Api
 {
     const API_KEY_MIN_LENGTH = 10;
     const MARKER_ICON_PATH = PH7_URL_STATIC . PH7_IMG . 'icon/map-marker.svg';
+    const GOOGLE_API_URL = 'https://maps.googleapis.com/maps/api/';
 
     /** GoogleMap ID for the HTML DIV and identifier for all the methods (to have several gmaps) **/
     protected $googleMapId = 'googlemapapi';
@@ -454,7 +455,7 @@ class Api
      */
     public function geocoding($address)
     {
-        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($address) . '&amp;key=' . $this->key;
+        $url = self::GOOGLE_API_URL . 'geocode/json?address=' . urlencode($address) . '&amp;key=' . $this->key;
 
         if (function_exists('curl_init')) {
             $data = $this->getContent($url);
@@ -610,7 +611,7 @@ class Api
 
         if ($this->includeJs === true) {
             // Google map JS
-            $this->content .= '<script src="https://maps.googleapis.com/maps/api/js?key=' .
+            $this->content .= '<script src="' . self::GOOGLE_API_URL . 'js?key=' .
                 $this->key . '&amp;language=' . $this->lang . '">';
             $this->content .= '</script>' . "\n";
 
