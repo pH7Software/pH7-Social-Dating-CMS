@@ -38,6 +38,7 @@ class Api
     const API_KEY_MIN_LENGTH = 10;
     const MARKER_ICON_PATH = PH7_URL_STATIC . PH7_IMG . 'icon/map-marker.svg';
     const GOOGLE_API_URL = 'https://maps.googleapis.com/maps/api/';
+    const MARKER_CLUSTERER_LIBRARY_URL = 'https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer_compiled.js';
 
     /** GoogleMap ID for the HTML DIV and identifier for all the methods (to have several gmaps) **/
     protected $googleMapId = 'googlemapapi';
@@ -100,7 +101,7 @@ class Api
     protected $useClusterer = false;
     protected $gridSize = 100;
     protected $maxZoom = 9;
-    protected $clustererLibrarypath = 'https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer.js';
+    protected $clustererLibrarypath;
 
     /** Enable automatic center/zoom **/
     protected $enableAutomaticCenterZoom = false;
@@ -162,7 +163,7 @@ class Api
         $this->useClusterer = $useClusterer;
         $this->gridSize = $gridSize;
         $this->maxZoom = $maxZoom;
-        $this->clustererLibraryPath = $clustererLibraryPath === '' ? 'https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer_compiled.js' : $clustererLibraryPath;
+        $this->clustererLibraryPath = $clustererLibraryPath === '' ? self::MARKER_CLUSTERER_LIBRARY_URL : $clustererLibraryPath;
     }
 
     /**
