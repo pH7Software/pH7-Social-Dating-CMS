@@ -3,7 +3,7 @@
  * @title          User Core Model Class
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
@@ -110,10 +110,10 @@ class UserCoreModel extends Model
         $sDbPassword = !empty($oRow->password) ? $oRow->password : '';
 
         if (strtolower($sEmail) !== strtolower($sDbEmail)) {
-            return 'email_does_not_exist';
+            return CredentialStatusCore::EMAIL_DOES_NOT_EXIST;
         }
         if (!Security::checkPwd($sPassword, $sDbPassword)) {
-            return 'password_does_not_exist';
+            return CredentialStatusCore::PASSWORD_DOES_NOT_EXIST;
         }
 
         return true;
@@ -187,9 +187,9 @@ class UserCoreModel extends Model
         $bIsDay = ($iDay > 0);
 
         if ($sTable === DbTableName::MEMBER) {
-            $bIsGender = GenderTypeUserCoreModel::isGenderValid($sGender);
+            $bIsGender = GenderTypeUserCore::isGenderValid($sGender);
         } else {
-            $bIsGender = GenderTypeUserCoreModel::isGenderValid($sGender, GenderTypeUserCoreModel::IGNORE_COUPLE_GENDER);
+            $bIsGender = GenderTypeUserCore::isGenderValid($sGender, GenderTypeUserCore::IGNORE_COUPLE_GENDER);
         }
 
         $sSqlDay = $bIsDay ? ' AND (joinDate + INTERVAL :day DAY) > NOW()' : '';
@@ -1630,16 +1630,16 @@ class UserCoreModel extends Model
         $sGender = '';
 
         foreach ($aSex as $sSex) {
-            if ($sSex === GenderTypeUserCoreModel::MALE) {
-                $sGender .= "'" . GenderTypeUserCoreModel::MALE . "',";
+            if ($sSex === GenderTypeUserCore::MALE) {
+                $sGender .= "'" . GenderTypeUserCore::MALE . "',";
             }
 
-            if ($sSex === GenderTypeUserCoreModel::FEMALE) {
-                $sGender .= "'" . GenderTypeUserCoreModel::FEMALE . "',";
+            if ($sSex === GenderTypeUserCore::FEMALE) {
+                $sGender .= "'" . GenderTypeUserCore::FEMALE . "',";
             }
 
-            if ($sSex === GenderTypeUserCoreModel::COUPLE) {
-                $sGender .= "'" . GenderTypeUserCoreModel::COUPLE . "',";
+            if ($sSex === GenderTypeUserCore::COUPLE) {
+                $sGender .= "'" . GenderTypeUserCore::COUPLE . "',";
             }
         }
 

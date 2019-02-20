@@ -3,7 +3,7 @@
  * @title          Main Controller
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  */
@@ -98,25 +98,25 @@ class MainController extends Controller
         $this->view->login_members = $oStatModel->totalLogins();
 
         // Men Members
-        $this->view->today_login_male_members = $oStatModel->totalLogins(DbTableName::MEMBER, 1, GenderTypeUserCoreModel::MALE);
-        $this->view->week_login_male_members = $oStatModel->totalLogins(DbTableName::MEMBER, 7, GenderTypeUserCoreModel::MALE);
-        $this->view->month_login_male_members = $oStatModel->totalLogins(DbTableName::MEMBER, 31, GenderTypeUserCoreModel::MALE);
-        $this->view->year_login_male_members = $oStatModel->totalLogins(DbTableName::MEMBER, 365, GenderTypeUserCoreModel::MALE);
-        $this->view->login_male_members = $oStatModel->totalLogins(DbTableName::MEMBER, 0, GenderTypeUserCoreModel::MALE);
+        $this->view->today_login_male_members = $oStatModel->totalLogins(DbTableName::MEMBER, 1, GenderTypeUserCore::MALE);
+        $this->view->week_login_male_members = $oStatModel->totalLogins(DbTableName::MEMBER, 7, GenderTypeUserCore::MALE);
+        $this->view->month_login_male_members = $oStatModel->totalLogins(DbTableName::MEMBER, 31, GenderTypeUserCore::MALE);
+        $this->view->year_login_male_members = $oStatModel->totalLogins(DbTableName::MEMBER, 365, GenderTypeUserCore::MALE);
+        $this->view->login_male_members = $oStatModel->totalLogins(DbTableName::MEMBER, 0, GenderTypeUserCore::MALE);
 
         // Women Members
-        $this->view->today_login_female_members = $oStatModel->totalLogins(DbTableName::MEMBER, 1, GenderTypeUserCoreModel::FEMALE);
-        $this->view->week_login_female_members = $oStatModel->totalLogins(DbTableName::MEMBER, 7, GenderTypeUserCoreModel::FEMALE);
-        $this->view->month_login_female_members = $oStatModel->totalLogins(DbTableName::MEMBER, 31, GenderTypeUserCoreModel::FEMALE);
-        $this->view->year_login_female_members = $oStatModel->totalLogins(DbTableName::MEMBER, 365, GenderTypeUserCoreModel::FEMALE);
-        $this->view->login_female_members = $oStatModel->totalLogins(DbTableName::MEMBER, 0, GenderTypeUserCoreModel::FEMALE);
+        $this->view->today_login_female_members = $oStatModel->totalLogins(DbTableName::MEMBER, 1, GenderTypeUserCore::FEMALE);
+        $this->view->week_login_female_members = $oStatModel->totalLogins(DbTableName::MEMBER, 7, GenderTypeUserCore::FEMALE);
+        $this->view->month_login_female_members = $oStatModel->totalLogins(DbTableName::MEMBER, 31, GenderTypeUserCore::FEMALE);
+        $this->view->year_login_female_members = $oStatModel->totalLogins(DbTableName::MEMBER, 365, GenderTypeUserCore::FEMALE);
+        $this->view->login_female_members = $oStatModel->totalLogins(DbTableName::MEMBER, 0, GenderTypeUserCore::FEMALE);
 
         // Couple Members
-        $this->view->today_login_couple_members = $oStatModel->totalLogins(DbTableName::MEMBER, 1, GenderTypeUserCoreModel::COUPLE);
-        $this->view->week_login_couple_members = $oStatModel->totalLogins(DbTableName::MEMBER, 7, GenderTypeUserCoreModel::COUPLE);
-        $this->view->month_login_couple_members = $oStatModel->totalLogins(DbTableName::MEMBER, 31, GenderTypeUserCoreModel::COUPLE);
-        $this->view->year_login_couple_members = $oStatModel->totalLogins(DbTableName::MEMBER, 365, GenderTypeUserCoreModel::COUPLE);
-        $this->view->login_couple_members = $oStatModel->totalLogins(DbTableName::MEMBER, 0, GenderTypeUserCoreModel::COUPLE);
+        $this->view->today_login_couple_members = $oStatModel->totalLogins(DbTableName::MEMBER, 1, GenderTypeUserCore::COUPLE);
+        $this->view->week_login_couple_members = $oStatModel->totalLogins(DbTableName::MEMBER, 7, GenderTypeUserCore::COUPLE);
+        $this->view->month_login_couple_members = $oStatModel->totalLogins(DbTableName::MEMBER, 31, GenderTypeUserCore::COUPLE);
+        $this->view->year_login_couple_members = $oStatModel->totalLogins(DbTableName::MEMBER, 365, GenderTypeUserCore::COUPLE);
+        $this->view->login_couple_members = $oStatModel->totalLogins(DbTableName::MEMBER, 0, GenderTypeUserCore::COUPLE);
 
 
         //---------- Number of Logins Affiliates ----------//
@@ -129,18 +129,18 @@ class MainController extends Controller
         $this->view->login_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE);
 
         // Men Affiliates
-        $this->view->today_login_male_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 1, GenderTypeUserCoreModel::MALE);
-        $this->view->week_login_male_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 7, GenderTypeUserCoreModel::MALE);
-        $this->view->month_login_male_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 31, GenderTypeUserCoreModel::MALE);
-        $this->view->year_login_male_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 365, GenderTypeUserCoreModel::MALE);
-        $this->view->login_male_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 0, GenderTypeUserCoreModel::MALE);
+        $this->view->today_login_male_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 1, GenderTypeUserCore::MALE);
+        $this->view->week_login_male_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 7, GenderTypeUserCore::MALE);
+        $this->view->month_login_male_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 31, GenderTypeUserCore::MALE);
+        $this->view->year_login_male_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 365, GenderTypeUserCore::MALE);
+        $this->view->login_male_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 0, GenderTypeUserCore::MALE);
 
         // Women Affiliates
-        $this->view->today_login_female_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 1, GenderTypeUserCoreModel::FEMALE);
-        $this->view->week_login_female_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 7, GenderTypeUserCoreModel::FEMALE);
-        $this->view->month_login_female_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 31, GenderTypeUserCoreModel::FEMALE);
-        $this->view->year_login_female_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 365, GenderTypeUserCoreModel::FEMALE);
-        $this->view->login_female_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 0, GenderTypeUserCoreModel::FEMALE);
+        $this->view->today_login_female_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 1, GenderTypeUserCore::FEMALE);
+        $this->view->week_login_female_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 7, GenderTypeUserCore::FEMALE);
+        $this->view->month_login_female_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 31, GenderTypeUserCore::FEMALE);
+        $this->view->year_login_female_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 365, GenderTypeUserCore::FEMALE);
+        $this->view->login_female_affiliate = $oStatModel->totalLogins(DbTableName::AFFILIATE, 0, GenderTypeUserCore::FEMALE);
 
 
         //---------- Number of Logins Admins ----------//
@@ -153,18 +153,18 @@ class MainController extends Controller
         $this->view->login_admins = $oStatModel->totalLogins(DbTableName::ADMIN);
 
         // Men Admins
-        $this->view->today_login_male_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 1, GenderTypeUserCoreModel::MALE);
-        $this->view->week_login_male_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 7, GenderTypeUserCoreModel::MALE);
-        $this->view->month_login_male_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 31, GenderTypeUserCoreModel::MALE);
-        $this->view->year_login_male_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 365, GenderTypeUserCoreModel::MALE);
-        $this->view->login_male_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 0, GenderTypeUserCoreModel::MALE);
+        $this->view->today_login_male_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 1, GenderTypeUserCore::MALE);
+        $this->view->week_login_male_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 7, GenderTypeUserCore::MALE);
+        $this->view->month_login_male_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 31, GenderTypeUserCore::MALE);
+        $this->view->year_login_male_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 365, GenderTypeUserCore::MALE);
+        $this->view->login_male_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 0, GenderTypeUserCore::MALE);
 
         // Women Admins
-        $this->view->today_login_female_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 1, GenderTypeUserCoreModel::FEMALE);
-        $this->view->week_login_female_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 7, GenderTypeUserCoreModel::FEMALE);
-        $this->view->month_login_female_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 31, GenderTypeUserCoreModel::FEMALE);
-        $this->view->year_login_female_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 365, GenderTypeUserCoreModel::FEMALE);
-        $this->view->login_female_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 0, GenderTypeUserCoreModel::FEMALE);
+        $this->view->today_login_female_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 1, GenderTypeUserCore::FEMALE);
+        $this->view->week_login_female_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 7, GenderTypeUserCore::FEMALE);
+        $this->view->month_login_female_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 31, GenderTypeUserCore::FEMALE);
+        $this->view->year_login_female_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 365, GenderTypeUserCore::FEMALE);
+        $this->view->login_female_admins = $oStatModel->totalLogins(DbTableName::ADMIN, 0, GenderTypeUserCore::FEMALE);
 
 
         //---------- Members Registrations ----------//
@@ -177,25 +177,25 @@ class MainController extends Controller
         $this->view->total_members = $oStatModel->totalMembers();
 
         // Men Members
-        $this->view->today_total_male_members = $oStatModel->totalMembers(1, GenderTypeUserCoreModel::MALE);
-        $this->view->week_total_male_members = $oStatModel->totalMembers(7, GenderTypeUserCoreModel::MALE);
-        $this->view->month_total_male_members = $oStatModel->totalMembers(31, GenderTypeUserCoreModel::MALE);
-        $this->view->year_total_male_members = $oStatModel->totalMembers(365, GenderTypeUserCoreModel::MALE);
-        $this->view->total_male_members = $oStatModel->totalMembers(0, GenderTypeUserCoreModel::MALE);
+        $this->view->today_total_male_members = $oStatModel->totalMembers(1, GenderTypeUserCore::MALE);
+        $this->view->week_total_male_members = $oStatModel->totalMembers(7, GenderTypeUserCore::MALE);
+        $this->view->month_total_male_members = $oStatModel->totalMembers(31, GenderTypeUserCore::MALE);
+        $this->view->year_total_male_members = $oStatModel->totalMembers(365, GenderTypeUserCore::MALE);
+        $this->view->total_male_members = $oStatModel->totalMembers(0, GenderTypeUserCore::MALE);
 
         // Women Members
-        $this->view->today_total_female_members = $oStatModel->totalMembers(1, GenderTypeUserCoreModel::FEMALE);
-        $this->view->week_total_female_members = $oStatModel->totalMembers(7, GenderTypeUserCoreModel::FEMALE);
-        $this->view->month_total_female_members = $oStatModel->totalMembers(31, GenderTypeUserCoreModel::FEMALE);
-        $this->view->year_total_female_members = $oStatModel->totalMembers(365, GenderTypeUserCoreModel::FEMALE);
-        $this->view->total_female_members = $oStatModel->totalMembers(0, GenderTypeUserCoreModel::FEMALE);
+        $this->view->today_total_female_members = $oStatModel->totalMembers(1, GenderTypeUserCore::FEMALE);
+        $this->view->week_total_female_members = $oStatModel->totalMembers(7, GenderTypeUserCore::FEMALE);
+        $this->view->month_total_female_members = $oStatModel->totalMembers(31, GenderTypeUserCore::FEMALE);
+        $this->view->year_total_female_members = $oStatModel->totalMembers(365, GenderTypeUserCore::FEMALE);
+        $this->view->total_female_members = $oStatModel->totalMembers(0, GenderTypeUserCore::FEMALE);
 
         // Couple Members
-        $this->view->today_total_couple_members = $oStatModel->totalMembers(1, GenderTypeUserCoreModel::COUPLE);
-        $this->view->week_total_couple_members = $oStatModel->totalMembers(7, GenderTypeUserCoreModel::COUPLE);
-        $this->view->month_total_couple_members = $oStatModel->totalMembers(31, GenderTypeUserCoreModel::COUPLE);
-        $this->view->year_total_couple_members = $oStatModel->totalMembers(365, GenderTypeUserCoreModel::COUPLE);
-        $this->view->total_couple_members = $oStatModel->totalMembers(0, GenderTypeUserCoreModel::COUPLE);
+        $this->view->today_total_couple_members = $oStatModel->totalMembers(1, GenderTypeUserCore::COUPLE);
+        $this->view->week_total_couple_members = $oStatModel->totalMembers(7, GenderTypeUserCore::COUPLE);
+        $this->view->month_total_couple_members = $oStatModel->totalMembers(31, GenderTypeUserCore::COUPLE);
+        $this->view->year_total_couple_members = $oStatModel->totalMembers(365, GenderTypeUserCore::COUPLE);
+        $this->view->total_couple_members = $oStatModel->totalMembers(0, GenderTypeUserCore::COUPLE);
 
 
         //---------- Affiliates Registrations ----------//
@@ -208,18 +208,18 @@ class MainController extends Controller
         $this->view->total_affiliate = $oStatModel->totalAffiliates();
 
         // Men Affiliates
-        $this->view->today_total_male_affiliate = $oStatModel->totalAffiliates(1, GenderTypeUserCoreModel::MALE);
-        $this->view->week_total_male_affiliate = $oStatModel->totalAffiliates(7, GenderTypeUserCoreModel::MALE);
-        $this->view->month_total_male_affiliate = $oStatModel->totalAffiliates(31, GenderTypeUserCoreModel::MALE);
-        $this->view->year_total_male_affiliate = $oStatModel->totalAffiliates(365, GenderTypeUserCoreModel::MALE);
-        $this->view->total_male_affiliate = $oStatModel->totalAffiliates(0, GenderTypeUserCoreModel::MALE);
+        $this->view->today_total_male_affiliate = $oStatModel->totalAffiliates(1, GenderTypeUserCore::MALE);
+        $this->view->week_total_male_affiliate = $oStatModel->totalAffiliates(7, GenderTypeUserCore::MALE);
+        $this->view->month_total_male_affiliate = $oStatModel->totalAffiliates(31, GenderTypeUserCore::MALE);
+        $this->view->year_total_male_affiliate = $oStatModel->totalAffiliates(365, GenderTypeUserCore::MALE);
+        $this->view->total_male_affiliate = $oStatModel->totalAffiliates(0, GenderTypeUserCore::MALE);
 
         // Women Affiliates
-        $this->view->today_total_female_affiliate = $oStatModel->totalAffiliates(1, GenderTypeUserCoreModel::FEMALE);
-        $this->view->week_total_female_affiliate = $oStatModel->totalAffiliates(7, GenderTypeUserCoreModel::FEMALE);
-        $this->view->month_total_female_affiliate = $oStatModel->totalAffiliates(31, GenderTypeUserCoreModel::FEMALE);
-        $this->view->year_total_female_affiliate = $oStatModel->totalAffiliates(365, GenderTypeUserCoreModel::FEMALE);
-        $this->view->total_female_affiliate = $oStatModel->totalAffiliates(0, GenderTypeUserCoreModel::FEMALE);
+        $this->view->today_total_female_affiliate = $oStatModel->totalAffiliates(1, GenderTypeUserCore::FEMALE);
+        $this->view->week_total_female_affiliate = $oStatModel->totalAffiliates(7, GenderTypeUserCore::FEMALE);
+        $this->view->month_total_female_affiliate = $oStatModel->totalAffiliates(31, GenderTypeUserCore::FEMALE);
+        $this->view->year_total_female_affiliate = $oStatModel->totalAffiliates(365, GenderTypeUserCore::FEMALE);
+        $this->view->total_female_affiliate = $oStatModel->totalAffiliates(0, GenderTypeUserCore::FEMALE);
 
 
         //---------- Admins Registrations ----------//
@@ -232,18 +232,18 @@ class MainController extends Controller
         $this->view->total_admins = $oStatModel->totalAdmins();
 
         // Men Admins
-        $this->view->today_total_male_admins = $oStatModel->totalAdmins(1, GenderTypeUserCoreModel::MALE);
-        $this->view->week_total_male_admins = $oStatModel->totalAdmins(7, GenderTypeUserCoreModel::MALE);
-        $this->view->month_total_male_admins = $oStatModel->totalAdmins(31, GenderTypeUserCoreModel::MALE);
-        $this->view->year_total_male_admins = $oStatModel->totalAdmins(365, GenderTypeUserCoreModel::MALE);
-        $this->view->total_male_admins = $oStatModel->totalAdmins(0, GenderTypeUserCoreModel::MALE);
+        $this->view->today_total_male_admins = $oStatModel->totalAdmins(1, GenderTypeUserCore::MALE);
+        $this->view->week_total_male_admins = $oStatModel->totalAdmins(7, GenderTypeUserCore::MALE);
+        $this->view->month_total_male_admins = $oStatModel->totalAdmins(31, GenderTypeUserCore::MALE);
+        $this->view->year_total_male_admins = $oStatModel->totalAdmins(365, GenderTypeUserCore::MALE);
+        $this->view->total_male_admins = $oStatModel->totalAdmins(0, GenderTypeUserCore::MALE);
 
         // Women Admins
-        $this->view->today_total_female_admins = $oStatModel->totalAdmins(1, GenderTypeUserCoreModel::FEMALE);
-        $this->view->week_total_female_admins = $oStatModel->totalAdmins(7, GenderTypeUserCoreModel::FEMALE);
-        $this->view->month_total_female_admins = $oStatModel->totalAdmins(31, GenderTypeUserCoreModel::FEMALE);
-        $this->view->year_total_female_admins = $oStatModel->totalAdmins(365, GenderTypeUserCoreModel::FEMALE);
-        $this->view->total_female_admins = $oStatModel->totalAdmins(0, GenderTypeUserCoreModel::FEMALE);
+        $this->view->today_total_female_admins = $oStatModel->totalAdmins(1, GenderTypeUserCore::FEMALE);
+        $this->view->week_total_female_admins = $oStatModel->totalAdmins(7, GenderTypeUserCore::FEMALE);
+        $this->view->month_total_female_admins = $oStatModel->totalAdmins(31, GenderTypeUserCore::FEMALE);
+        $this->view->year_total_female_admins = $oStatModel->totalAdmins(365, GenderTypeUserCore::FEMALE);
+        $this->view->total_female_admins = $oStatModel->totalAdmins(0, GenderTypeUserCore::FEMALE);
 
 
         //---------- Blogs ----------//

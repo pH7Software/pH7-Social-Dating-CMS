@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Form
  */
@@ -74,9 +74,9 @@ class EditForm
                     t('Gender:'),
                     'sex',
                     [
-                        GenderTypeUserCoreModel::FEMALE => t('Woman'),
-                        GenderTypeUserCoreModel::MALE => t('Man'),
-                        GenderTypeUserCoreModel::COUPLE => t('Couple')
+                        GenderTypeUserCore::FEMALE => t('Woman'),
+                        GenderTypeUserCore::MALE => t('Man'),
+                        GenderTypeUserCore::COUPLE => t('Couple')
                     ],
                     ['value' => $oUser->sex, 'required' => 1]
                 )
@@ -88,9 +88,9 @@ class EditForm
                 t('Looking for a:'),
                 'match_sex',
                 [
-                    GenderTypeUserCoreModel::MALE => t('Man'),
-                    GenderTypeUserCoreModel::FEMALE => t('Woman'),
-                    GenderTypeUserCoreModel::COUPLE => t('Couple')
+                    GenderTypeUserCore::MALE => t('Man'),
+                    GenderTypeUserCore::FEMALE => t('Woman'),
+                    GenderTypeUserCore::COUPLE => t('Couple')
                 ],
                 ['value' => Form::getVal($oUser->matchSex), 'required' => 1]
             )

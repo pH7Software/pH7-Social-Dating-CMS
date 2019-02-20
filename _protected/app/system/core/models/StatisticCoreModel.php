@@ -3,7 +3,7 @@
  * @title          Statistic Core Model Class
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  * @version        1.1
@@ -83,7 +83,7 @@ class StatisticCoreModel extends StatisticModel
         $iDay = (int)$iDay;
 
         $bIsDay = ($iDay > 0);
-        $bIsGender = $sTable === DbTableName::MEMBER ? GenderTypeUserCoreModel::isGenderValid($sGender) : GenderTypeUserCoreModel::isGenderValid($sGender, GenderTypeUserCoreModel::IGNORE_COUPLE_GENDER);
+        $bIsGender = $sTable === DbTableName::MEMBER ? GenderTypeUserCore::isGenderValid($sGender) : GenderTypeUserCore::isGenderValid($sGender, GenderTypeUserCore::IGNORE_COUPLE_GENDER);
 
         $sSqlDay = $bIsDay ? ' AND (lastActivity + INTERVAL :day DAY) > NOW()' : '';
         $sSqlGender = $bIsGender ? ' AND sex = :gender' : '';

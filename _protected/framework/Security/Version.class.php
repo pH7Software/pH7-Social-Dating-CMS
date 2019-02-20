@@ -4,7 +4,7 @@
  * @desc             Version Information for the security of packaged software.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Security
  */
@@ -32,11 +32,12 @@ final class Version
      * Framework Kernel.
      *
      * VERSION NAMES:
+     *
      * 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO",
-     * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa", 12.* was "PHS" and 14.* is "pKb"
+     * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa", 12.* was "PHS", 14.* was "pKb" amd 15.* is ABSOLUTE™
      */
-    const KERNEL_VERSION_NAME = 'pKb';
-    const KERNEL_VERSION = '14.9.0';
+    const KERNEL_VERSION_NAME = 'ABSOLUTE™';
+    const KERNEL_VERSION = '15.0.0';
     const KERNEL_BUILD = '1';
     const KERNEL_RELEASE_DATE = '2019-02-18';
 

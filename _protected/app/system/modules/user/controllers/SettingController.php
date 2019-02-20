@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Controller
  */
@@ -121,6 +121,7 @@ class SettingController extends Controller
 
         if ($this->httpRequest->get('delete_status') === 'yesdelete') {
             $this->session->set('yes_delete', 1);
+
             Header::redirect(
                 Uri::get(
                     'user',
@@ -130,6 +131,7 @@ class SettingController extends Controller
             );
         } elseif ($this->httpRequest->get('delete_status') === 'nodelete') {
             $this->view->delete_status = false;
+
             $this->design->setRedirect(
                 Uri::get('user', 'main', 'index'),
                 null,
@@ -162,7 +164,10 @@ class SettingController extends Controller
     {
         (new UserCore)->deleteAvatar($this->iProfileId, $this->sUsername);
 
-        Header::redirect(null, t('Profile photo successfully deleted'));
+        Header::redirect(
+            null,
+            t('Profile photo successfully deleted')
+        );
     }
 
     /**
@@ -185,10 +190,15 @@ class SettingController extends Controller
     {
         (new UserCore)->deleteBackground($this->iProfileId, $this->sUsername);
 
-        Header::redirect(null, t('Your wallpaper has been successfully deleted!'));
+        Header::redirect(
+            null,
+            t('Your wallpaper has been successfully deleted!')
+        );
     }
 
     /**
+     * Returns the correct profile ID (depending if it's with the "login as" admin or not).
+     *
      * @return int
      */
     private function getProfileId()

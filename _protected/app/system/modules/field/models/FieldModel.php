@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2013-2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2013-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Field / Model
  */
@@ -16,7 +16,7 @@ use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 class FieldModel extends Model
 {
-    const MAX_VARCHAR_LENGTH = 191;
+    const MAX_VARCHAR_LENGTH = 191; // 191 max for MySQL's utf8mb4
     const MAX_INT_LENGTH = 11;
     const DEF_INT_LENGTH = 9;
     const FIELD_TEXTBOX_TYPE = 'textbox';
@@ -87,7 +87,7 @@ class FieldModel extends Model
      */
     public function insert()
     {
-        $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'ADD ' . $this->sName . ' ' . $this->getType();
+        $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'ADD ' . $this->sName . ' ' . $this->getSqlType() . ';';
         return $this->execute();
     }
 
@@ -96,7 +96,9 @@ class FieldModel extends Model
      */
     public function update()
     {
-        $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'CHANGE ' . (new HttpRequest)->get('name') . ' ' . $this->sName . ' ' . $this->getType();
+        $sOldFieldName = (new HttpRequest)->get('name');
+        $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'CHANGE ' . $sOldFieldName . ' ' . $this->sName . ' ' . $this->getSqlType() . ';';
+
         return $this->execute();
     }
 
@@ -139,7 +141,7 @@ class FieldModel extends Model
      *
      * @throws PH7InvalidArgumentException
      */
-    protected function getType()
+    protected function getSqlType()
     {
         switch ($this->sType) {
             case self::FIELD_TEXTBOX_TYPE: {
@@ -170,7 +172,7 @@ class FieldModel extends Model
                 throw new PH7InvalidArgumentException('Invalid Field type!');
         }
 
-        return $this->sSql . ' NOT NULL DEFAULT ' . Db::getInstance()->quote($this->sDefVal) . ';';
+        return $this->sSql . ' NOT NULL DEFAULT ' . Db::getInstance()->quote($this->sDefVal);
     }
 
     /**

@@ -6,7 +6,7 @@
   "lang": "{% $config->values['language']['lang'] %}",
   "start_url": "{url_relative}",
   "homepage_url": "{url_root}",
-  "orientation": "portrait",
+  "orientation": "{orientation}",
   "scope": "/",
   "theme_color": "transparent",
   "background_color": "{bg_color}",

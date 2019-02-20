@@ -4,7 +4,7 @@
  * @desc             URI URL methods.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Url
  */
@@ -47,7 +47,7 @@ class Uri
     /**
      * Counting all fragments of a URL.
      *
-     * @return integer
+     * @return int
      */
     public function totalFragment()
     {
@@ -57,9 +57,9 @@ class Uri
     /**
      * Gets URI fragment.
      *
-     * @param integer $iKey The URI key.
+     * @param int $iKey The URI key.
      *
-     * @return boolean|string Returns FALSE if key is not found, otherwise STRING of the URI fragment if success.
+     * @return bool|string Returns FALSE if key is not found, otherwise STRING of the URI fragment if success.
      */
     public function fragment($iKey)
     {
@@ -73,7 +73,7 @@ class Uri
     /**
      * Gets URI segments.
      *
-     * @param integer $iOffset The sequence will start at that offset in the array.
+     * @param int $iOffset The sequence will start at that offset in the array.
      *
      * @return array Returns the slice segments URI.
      */

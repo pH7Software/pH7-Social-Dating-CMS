@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Form / Processing
  */
@@ -38,7 +38,7 @@ class DeleteUserCoreFormProcess extends Form
         $sTable = $this->registry->module === 'user' ? DbTableName::MEMBER : DbTableName::AFFILIATE;
 
         $mLogin = (new UserCoreModel)->login($this->sEmail, $this->httpRequest->post('password', Http::NO_CLEAN), $sTable);
-        if ($mLogin === 'password_does_not_exist') {
+        if ($mLogin === CredentialStatusCore::PASSWORD_DOES_NOT_EXIST) {
             \PFBC\Form::setError('form_delete_account', t('Oops! This password you entered is incorrect.'));
         } else {
             $this->session->regenerateId();

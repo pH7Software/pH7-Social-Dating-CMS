@@ -15,7 +15,7 @@
  * ----------------- Modified by Pierre-Henry SORIA ----------------- *
  *
  * @author          Pierre-Henry SORIA <ph7software@gmail.com>
- * @copyright       (c) 2011-2018, Pierre-Henry Soria, All Rights Reserved.
+ * @copyright       (c) 2011-2019, Pierre-Henry Soria, All Rights Reserved.
  * @version         Last update 04/19/2018
  * @package         pH7CMS
  */
@@ -37,6 +37,8 @@ class Api
 {
     const API_KEY_MIN_LENGTH = 10;
     const MARKER_ICON_PATH = PH7_URL_STATIC . PH7_IMG . 'icon/map-marker.svg';
+    const GOOGLE_API_URL = 'https://maps.googleapis.com/maps/api/';
+    const MARKER_CLUSTERER_LIBRARY_URL = 'https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer_compiled.js';
 
     /** GoogleMap ID for the HTML DIV and identifier for all the methods (to have several gmaps) **/
     protected $googleMapId = 'googlemapapi';
@@ -99,7 +101,7 @@ class Api
     protected $useClusterer = false;
     protected $gridSize = 100;
     protected $maxZoom = 9;
-    protected $clustererLibrarypath = 'https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer.js';
+    protected $clustererLibrarypath;
 
     /** Enable automatic center/zoom **/
     protected $enableAutomaticCenterZoom = false;
@@ -161,7 +163,7 @@ class Api
         $this->useClusterer = $useClusterer;
         $this->gridSize = $gridSize;
         $this->maxZoom = $maxZoom;
-        $this->clustererLibraryPath = $clustererLibraryPath == '' ? 'https://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/1.0/src/markerclusterer_packed.js' : $clustererLibraryPath;
+        $this->clustererLibraryPath = $clustererLibraryPath === '' ? self::MARKER_CLUSTERER_LIBRARY_URL : $clustererLibraryPath;
     }
 
     /**
@@ -175,6 +177,7 @@ class Api
     public function setMapType($type)
     {
         $mapsType = ['ROADMAP', 'HYBRID', 'TERRAIN', 'SATELLITE'];
+
         if (!in_array(strtoupper($type), $mapsType, true)) {
             $this->mapType = $mapsType[0];
         } else {
@@ -454,7 +457,7 @@ class Api
      */
     public function geocoding($address)
     {
-        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($address) . '&amp;key=' . $this->key;
+        $url = self::GOOGLE_API_URL . 'geocode/json?address=' . urlencode($address) . '&amp;key=' . $this->key;
 
         if (function_exists('curl_init')) {
             $data = $this->getContent($url);
@@ -610,7 +613,7 @@ class Api
 
         if ($this->includeJs === true) {
             // Google map JS
-            $this->content .= '<script src="https://maps.googleapis.com/maps/api/js?key=' .
+            $this->content .= '<script src="' . self::GOOGLE_API_URL . 'js?key=' .
                 $this->key . '&amp;language=' . $this->lang . '">';
             $this->content .= '</script>' . "\n";
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Form
  */
@@ -96,11 +96,11 @@ class JoinForm
                 t('I am a'),
                 'sex',
                 [
-                    GenderTypeUserCoreModel::FEMALE => t('Woman') . ' <i class="fa fa-venus"></i>',
-                    GenderTypeUserCoreModel::MALE => t('Man') . ' <i class="fa fa-mars"></i>',
-                    GenderTypeUserCoreModel::COUPLE => t('Couple') . ' <i class="fa fa-venus-mars"></i>'
+                    GenderTypeUserCore::FEMALE => t('Woman') . ' <i class="fa fa-venus"></i>',
+                    GenderTypeUserCore::MALE => t('Man') . ' <i class="fa fa-mars"></i>',
+                    GenderTypeUserCore::COUPLE => t('Couple') . ' <i class="fa fa-venus-mars"></i>'
                 ],
-                ['value' => GenderTypeUserCoreModel::FEMALE, 'required' => 1]
+                ['value' => GenderTypeUserCore::FEMALE, 'required' => 1]
             )
         );
 
@@ -109,11 +109,11 @@ class JoinForm
                 t('Looking for a'),
                 'match_sex',
                 [
-                    GenderTypeUserCoreModel::MALE => t('Man') . ' <i class="fa fa-mars"></i>',
-                    GenderTypeUserCoreModel::FEMALE => t('Woman') . ' <i class="fa fa-venus"></i>',
-                    GenderTypeUserCoreModel::COUPLE => t('Couple') . ' <i class="fa fa-venus-mars"></i>'
+                    GenderTypeUserCore::MALE => t('Man') . ' <i class="fa fa-mars"></i>',
+                    GenderTypeUserCore::FEMALE => t('Woman') . ' <i class="fa fa-venus"></i>',
+                    GenderTypeUserCore::COUPLE => t('Couple') . ' <i class="fa fa-venus-mars"></i>'
                 ],
-                ['value' => GenderTypeUserCoreModel::MALE, 'required' => 1]
+                ['value' => GenderTypeUserCore::MALE, 'required' => 1]
             )
         );
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Form
  */
@@ -37,10 +37,10 @@ class AddAffiliateForm
                 t('Gender:'),
                 'sex',
                 [
-                    GenderTypeUserCoreModel::MALE => t('Man'),
-                    GenderTypeUserCoreModel::FEMALE => t('Woman')
+                    GenderTypeUserCore::MALE => t('Man'),
+                    GenderTypeUserCore::FEMALE => t('Woman')
                 ],
-                ['value' => GenderTypeUserCoreModel::MALE, 'required' => 1]
+                ['value' => GenderTypeUserCore::MALE, 'required' => 1]
             )
         );
         $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', ['title' => t('Please specify the date of birth using the calendar.'), 'required' => 1, 'validation' => new \PFBC\Validation\BirthDate]));

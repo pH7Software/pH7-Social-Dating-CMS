@@ -6,7 +6,7 @@
  * It can also retrieve the URL roads, initialize the languages​​, themes, database, etc.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2011-2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Router
  */
@@ -522,6 +522,7 @@ final class FrontController
     {
         if ($this->isCronHashValid()) {
             if (is_file(PH7_PATH_SYS . 'core/assets/cron/' . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php')) {
+                ignore_user_abort();
                 require PH7_PATH_SYS . 'core/assets/cron/' . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php';
             } else {
                 $this->notFound(

@@ -3,7 +3,7 @@
  * @title          Profile Controller
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Controller
  */
@@ -49,7 +49,9 @@ class ProfileController extends ProfileBaseController
         $oUser = $this->oUserModel->readProfile($this->iProfileId);
 
         if ($oUser && $this->doesProfileExist($oUser)) {
-            $this->redirectToOtherProfileStyleIfEnabled();
+            if (SysMod::isEnabled('cool-profile-page')) {
+                $this->redirectToCoolProfileStyle();
+            }
 
             // The administrators can view all profiles and profile visits are not saved.
             if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
@@ -196,14 +198,16 @@ class ProfileController extends ProfileBaseController
      *
      * @throws Framework\File\IOException
      */
-    private function redirectToOtherProfileStyleIfEnabled()
+    private function redirectToCoolProfileStyle()
     {
-        if (SysMod::isEnabled('cool-profile-page')) {
-            // If enabled, redirect to the other profile page style
-            Header::redirect(
-                Uri::get('cool-profile-page', 'main', 'index', $this->iProfileId)
-            );
-        }
+        Header::redirect(
+            Uri::get(
+                'cool-profile-page',
+                'main',
+                'index',
+                $this->iProfileId
+            )
+        );
     }
 
     /**

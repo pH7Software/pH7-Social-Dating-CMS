@@ -6,7 +6,7 @@
 #                  To work correctly, you have to execute this script when you're in the project root with your terminal (generally the parent folder of "_tools/").
 #                  (e.g., you@you:/path/to/root-project$ bash _tools/pH7.sh).
 # Author:          Pierre-Henry Soria <hello@ph7cms.com>
-# Copyright:       (c) 2014-2018, Pierre-Henry Soria. All Rights Reserved.
+# Copyright:       (c) 2014-2019, Pierre-Henry Soria. All Rights Reserved.
 # License:         GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 ##
 
@@ -15,8 +15,23 @@ function run() {
     if [ $? -eq 1 ]; then
         _confirm "Have you made a copy of it before?"
         if [ $? -eq 1 ]; then
-            ## Permission
-            sudo chmod -R 777 .
+
+            ## Permissions
+            # Generic for folders/files
+            find . -type f -print0 | sudo xargs -0 chmod 666 # for files
+            find . -type d -print0 | sudo xargs -0 chmod 755 # for folders
+
+            # Specific ones
+            sudo chmod -R 777 ./_install/data/logs/
+            sudo chmod -R 777 ./_install/data/caches/
+            sudo chmod -R 777 ./data/system/modules/*
+            sudo chmod -R 777 ./_repository/module/*
+            sudo chmod -R 777 ./_repository/upgrade/*
+            sudo chmod -R 777 ./_protected/app/configs/*
+            sudo chmod -R 777 ./_protected/data/cache/*
+            sudo chmod -R 777 ./_protected/data/backup/*
+            sudo chmod -R 777 ./_protected/data/tmp/*
+            sudo chmod -R 777 ./_protected/data/log/*
 
             ## TMP files
             find . -type f \( -name '*~' -or -name '*.log' -or -name '*.tmp' -or -name '*.swp' -or -name '.directory' -or -name '._*' -or -name '.DS_Store*' -or -name 'Thumbs.db' \) -exec rm {} \;

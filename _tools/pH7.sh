@@ -6,7 +6,7 @@
 #                  (e.g., you@you:/path/to/root-project$ bash _tools/pH7.sh).
 #
 # Author:          Pierre-Henry Soria <hello@ph7cms.com>
-# Copyright:       (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
+# Copyright:       (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
 # License:         GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 ##
 
@@ -280,8 +280,8 @@ function _permissions() {
     find . -type f -print0 | sudo xargs -0 chmod $1 # First parameter for Files
     find . -type d -print0 | sudo xargs -0 chmod $2 # Second parameter for Folders
 
-    sudo chmod 777 ./
-    sudo chmod -R 777 ./_install/*
+    sudo chmod -R 777 ./_install/data/logs/
+    sudo chmod -R 777 ./data/system/modules/*
     sudo chmod -R 777 ./_repository/module/*
     sudo chmod -R 777 ./_repository/upgrade/*
     sudo chmod -R 777 ./_protected/app/configs/*

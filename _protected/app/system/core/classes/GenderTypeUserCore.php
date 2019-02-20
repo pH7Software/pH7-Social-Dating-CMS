@@ -1,14 +1,14 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
- * @package        PH7 / App / System / Core / Model
+ * @package        PH7 / App / System / Core / Class
  */
 
 namespace PH7;
 
-final class GenderTypeUserCoreModel
+final class GenderTypeUserCore
 {
     const CONSIDER_COUPLE_GENDER = true;
     const IGNORE_COUPLE_GENDER = false;

@@ -4,7 +4,7 @@
  * @desc             File containing HTML for display management.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
  * @package          PH7 / Framework / Layout / Html
  */
@@ -39,7 +39,7 @@ use PH7\Framework\Session\Session;
 use PH7\Framework\Str\Str;
 use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Url;
-use PH7\GenderTypeUserCoreModel;
+use PH7\GenderTypeUserCore;
 use PH7\UserCore;
 use PH7\UserCoreModel;
 
@@ -652,7 +652,7 @@ class Design
                 /* If sex is empty, it is recovered in the database using information from member */
                 $sSex = !empty($sSex) ? $sSex : $oUserModel->getSex(null, $sUsername, DbTableName::MEMBER);
                 $sSex = $this->oStr->lower($sSex);
-                $sIcon = (GenderTypeUserCoreModel::isGenderValid($sSex) || $sSex === PH7_ADMIN_USERNAME) ? $sSex : 'visitor';
+                $sIcon = (GenderTypeUserCore::isGenderValid($sSex) || $sSex === PH7_ADMIN_USERNAME) ? $sSex : 'visitor';
                 $sUrlTplName = defined('PH7_TPL_NAME') ? PH7_TPL_NAME : PH7_DEFAULT_THEME;
 
                 /** If the user doesn't have an avatar **/
