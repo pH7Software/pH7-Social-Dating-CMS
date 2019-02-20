@@ -26,7 +26,7 @@ defined('PH7') or exit('Restricted access');
  *
  * THIS FILE HAS BEEN MODIFIED BY:
  * @author Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright (c) 2011-2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
  */
 class Css
 {

@@ -6,7 +6,7 @@
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
- * @copyright        (c) 2011-2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
  * @version          1.4.0
  * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
  *
