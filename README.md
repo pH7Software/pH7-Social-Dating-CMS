@@ -210,6 +210,8 @@ You can find and add other languages on the [I18N repo](https://github.com/pH7So
 
 ## ✍ Author
 
+[![Pierre-Henry Soria](https://avatars0.githubusercontent.com/u/1325411?s=200)](http://pierrehenry.be "My personal website :-)")
+
 Coded & Designed with lots of ❤️ by [Pierre-Henry Soria](http://ph7.me). A passionate Belgian software engineer 🍫🍺
 
 
