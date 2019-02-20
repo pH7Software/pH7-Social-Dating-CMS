@@ -4,7 +4,7 @@
  * @desc             Core Class of the pH7CMS.
  *
  * @author           Pierre-Henry Soria <hi@ph7.me>
- * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
  * @link             http://ph7cms.com
  * @package          PH7 / Framework / Core
