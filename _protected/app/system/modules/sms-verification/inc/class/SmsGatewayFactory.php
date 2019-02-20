@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Config\Config;
 
 class SmsGatewayFactory
 {
