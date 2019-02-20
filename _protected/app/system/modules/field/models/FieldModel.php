@@ -16,7 +16,7 @@ use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 class FieldModel extends Model
 {
-    const MAX_VARCHAR_LENGTH = 191;
+    const MAX_VARCHAR_LENGTH = 191; // 191 max for MySQL's utf8mb4
     const MAX_INT_LENGTH = 11;
     const DEF_INT_LENGTH = 9;
     const FIELD_TEXTBOX_TYPE = 'textbox';
