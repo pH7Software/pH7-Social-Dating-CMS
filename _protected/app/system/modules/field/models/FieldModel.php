@@ -96,7 +96,9 @@ class FieldModel extends Model
      */
     public function update()
     {
-        $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'CHANGE ' . (new HttpRequest)->get('name') . ' ' . $this->sName . ' ' . $this->getSqlType() . ';';
+        $sOldFieldName = (new HttpRequest)->get('name');
+        $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'CHANGE ' . $sOldFieldName . ' ' . $this->sName . ' ' . $this->getSqlType() . ';';
+
         return $this->execute();
     }
 
