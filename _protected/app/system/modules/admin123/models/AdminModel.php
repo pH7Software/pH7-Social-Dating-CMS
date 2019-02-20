@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Security\Security;
@@ -27,8 +28,8 @@ class AdminModel extends AdminCoreModel
     {
         $rStmt = Db::getInstance()->prepare('SELECT password FROM' .
             Db::prefix(DbTableName::ADMIN) . 'WHERE email = :email AND username = :username LIMIT 1');
-        $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
-        $rStmt->bindValue(':username', $sUsername, \PDO::PARAM_STR);
+        $rStmt->bindValue(':email', $sEmail, PDO::PARAM_STR);
+        $rStmt->bindValue(':username', $sUsername, PDO::PARAM_STR);
         $rStmt->execute();
         $sHashedPassword = $rStmt->fetchColumn();
         Db::free($rStmt);
@@ -50,16 +51,16 @@ class AdminModel extends AdminCoreModel
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::ADMIN) .
             '(email, username, password, firstName, lastName, sex, timeZone, ip, joinDate, lastActivity)
         VALUES (:email, :username, :password, :firstName, :lastName, :sex, :timeZone, :ip, :joinDate, :lastActivity)');
-        $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':username', $aData['username'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':password', Security::hashPwd($aData['password']), \PDO::PARAM_STR);
-        $rStmt->bindValue(':firstName', $aData['first_name'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':lastName', $aData['last_name'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':timeZone', $aData['time_zone'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':joinDate', $sCurrentDate, \PDO::PARAM_STR);
-        $rStmt->bindValue(':lastActivity', $sCurrentDate, \PDO::PARAM_STR);
+        $rStmt->bindValue(':email', $aData['email'], PDO::PARAM_STR);
+        $rStmt->bindValue(':username', $aData['username'], PDO::PARAM_STR);
+        $rStmt->bindValue(':password', Security::hashPwd($aData['password']), PDO::PARAM_STR);
+        $rStmt->bindValue(':firstName', $aData['first_name'], PDO::PARAM_STR);
+        $rStmt->bindValue(':lastName', $aData['last_name'], PDO::PARAM_STR);
+        $rStmt->bindValue(':sex', $aData['sex'], PDO::PARAM_STR);
+        $rStmt->bindValue(':timeZone', $aData['time_zone'], PDO::PARAM_STR);
+        $rStmt->bindValue(':ip', $aData['ip'], PDO::PARAM_STR);
+        $rStmt->bindValue(':joinDate', $sCurrentDate, PDO::PARAM_STR);
+        $rStmt->bindValue(':lastActivity', $sCurrentDate, PDO::PARAM_STR);
         $rStmt->execute();
         Db::free($rStmt);
 
@@ -119,20 +120,20 @@ class AdminModel extends AdminCoreModel
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::ADMIN) . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         if ($bDigitSearch) {
-            $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
+            $rStmt->bindValue(':looking', $mLooking, PDO::PARAM_INT);
         } else {
-            $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+            $rStmt->bindValue(':looking', '%' . $mLooking . '%', PDO::PARAM_STR);
         }
 
         if (!$bCount) {
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
         if (!$bCount) {
-            $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = $rStmt->fetchAll(PDO::FETCH_OBJ);
         } else {
             $mData = (int)$rStmt->fetchColumn();
         }
