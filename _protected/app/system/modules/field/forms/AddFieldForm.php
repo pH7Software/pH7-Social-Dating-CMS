@@ -29,7 +29,19 @@ class AddFieldForm
         $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_add_field', 'form_add_field'));
         $oForm->addElement(new \PFBC\Element\Token('add_field'));
-        $oForm->addElement(new \PFBC\Element\Select(t('Field Type:'), 'type', ['textbox' => t('Text Box'), 'number' => t('Number')], ['required' => 1]));
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('Field Type:'),
+                'type',
+                [
+                    'textbox' => t('Text Box'),
+                    'number' => t('Number')
+                ],
+                [
+                    'required' => 1
+                ]
+            )
+        );
         $oForm->addElement(
             new \PFBC\Element\Textbox(
                 t('Field Name:'),
@@ -42,8 +54,26 @@ class AddFieldForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Number(t('Length Field:'), 'length', ['description' => t('Length of the field in numeric number (e.g., 150).'), 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Default Field Value'), 'value', ['description' => t('The value by default of the field (optional).'), 'validation' => new \PFBC\Validation\Str(2, 120)]));
+        $oForm->addElement(
+            new \PFBC\Element\Number(
+                t('Length Field:'),
+                'length',
+                [
+                    'description' => t('Length of the field in numeric number (e.g., 150).'),
+                    'required' => 1
+                ]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Textbox(
+                t('Default Field Value'),
+                'value',
+                [
+                    'description' => t('The value by default of the field (optional).'),
+                    'validation' => new \PFBC\Validation\Str(2, 120)
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\Button(t('Add')));
         $oForm->render();
     }
