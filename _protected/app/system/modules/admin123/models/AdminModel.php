@@ -152,6 +152,12 @@ class AdminModel extends AdminCoreModel
      */
     public function updateCustomCode($sCode, $sType)
     {
-        return $this->orm->update(DbTableName::CUSTOM_CODE, 'code', $sCode, 'codeType', $sType);
+        return $this->orm->update(
+            DbTableName::CUSTOM_CODE,
+            'code',
+            $sCode,
+            'codeType',
+            $sType
+        );
     }
 }
