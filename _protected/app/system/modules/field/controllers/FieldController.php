@@ -20,7 +20,12 @@ class FieldController extends Controller
     public function index()
     {
         Header::redirect(
-            Uri::get('field', 'field', 'all', 'user')
+            Uri::get(
+                'field',
+                'field',
+                'all',
+                'user'
+            )
         );
     }
 
