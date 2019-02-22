@@ -53,7 +53,7 @@
                         </td>
                         <td>{% $dateTime->get($user->joinDate)->dateTime() %}</td>
                         <td>
-                            {if $user->active == 1}
+                            {if $user->active == SubscriptionModel::ACTIVE_STATUS}
                                 <span class="green1">{lang 'Active Account'}</span>
                             {else}
                                 <span class="red">{lang 'Inactive Account'}</span>

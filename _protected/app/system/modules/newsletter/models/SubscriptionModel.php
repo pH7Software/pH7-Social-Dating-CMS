@@ -12,6 +12,9 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class SubscriptionModel extends UserCoreModel
 {
+    const ACTIVE_STATUS = 1;
+    const INACTIVE_STATUS = 0;
+
     /**
      * Get all Active Subscribers (it is required by the law to send emails only to the confirmed opt-in subscribers).
      *
@@ -19,7 +22,10 @@ class SubscriptionModel extends UserCoreModel
      */
     public function getSubscribers()
     {
-        $rStmt = Db::getInstance()->prepare('SELECT email, name AS firstName FROM' . Db::prefix(DbTableName::SUBSCRIBER) . 'WHERE active = 1');
+        $rStmt = Db::getInstance()->prepare(
+            'SELECT email, name AS firstName FROM' . Db::prefix(DbTableName::SUBSCRIBER) . 'WHERE active = :status'
+        );
+        $rStmt->bindValue(':status', self::ACTIVE_STATUS, \PDO::PARAM_INT);
         $rStmt->execute();
         $aRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);

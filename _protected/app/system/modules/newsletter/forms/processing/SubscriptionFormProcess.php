@@ -39,7 +39,7 @@ class SubscriptionFormProcess extends Form
                         'current_date' => (new CDateTime)->get()->dateTime('Y-m-d H:i:s'),
                         'ip' => Ip::get(),
                         'hash_validation' => Various::genRnd(null, UserCoreModel::HASH_VALIDATION_LENGTH),
-                        'active' => '0',
+                        'active' => SubscriptionModel::INACTIVE_STATUS,
                         'affiliated_id' => (int)(new Cookie)->get(AffiliateCore::COOKIE_NAME)
                     ];
 
