@@ -46,6 +46,7 @@
                 {/if}
             </div>
         {/each}
+
         {main_include 'page_nav.inc.tpl'}
     {/if}
 </div>
