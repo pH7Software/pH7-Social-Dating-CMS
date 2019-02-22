@@ -3,12 +3,16 @@
     {if !$browser->isMobile()}
         <div class="left col-xs-12 col-sm-4 col-md-3">
             <h2>{lang 'My Profile'}</h2>
-            {{ $avatarDesign->lightBox($username, $first_name, $sex, 400) }}
+            {if $sex !== 'buyer'}
+                {{ $avatarDesign->lightBox($username, $first_name, $sex, 400) }}
+            {/if}
 
             <ul>
-                <li>
-                    <a href="{{ $design->url('realestate','setting','avatar') }}" title="{lang 'Change My Profile Photo'}"><i class="fa fa-upload"></i> {lang 'Change Profile Photo'}</a>
-                </li>
+                {if $sex !== 'buyer'}
+                    <li>
+                        <a href="{{ $design->url('realestate','setting','avatar') }}" title="{lang 'Change My Profile Photo'}"><i class="fa fa-upload"></i> {lang 'Change Profile Photo'}</a>
+                    </li>
+                {/if}
                 <li>
                     <a href="{{ $design->url('realestate','setting','edit') }}" title="{lang 'Edit My Profile'}"><i class="fa fa-cog fa-fw"></i> {lang 'Edit Profile'}</a>
                 </li>
