@@ -189,7 +189,7 @@ class Tal extends Syntax implements Parsable
     {
         $this->sCode = str_replace(
             '<ph:else>',
-            '<?php else { ?>',
+            '<?php } else { ?>',
             $this->sCode
         );
     }
@@ -198,7 +198,7 @@ class Tal extends Syntax implements Parsable
     {
         $this->sCode = preg_replace(
             '#<ph:else-if test=(?:"|\')([^\<\>"\'\n]+)(?:"|\')>#',
-            '<?php elseif($1) { ?>',
+            '<?php } elseif($1) { ?>',
             $this->sCode
         );
     }
