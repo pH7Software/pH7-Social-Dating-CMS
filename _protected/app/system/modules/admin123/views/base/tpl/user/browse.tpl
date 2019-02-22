@@ -10,12 +10,12 @@
                     <th>{lang 'Email Address'}</th>
                     <th>{lang 'User'}</th>
                     <th>{lang 'Avatar'}</th>
+                    <th>{lang 'Phone'}</th>
                     <th>{lang 'IP'}</th>
                     <th>{lang 'Membership Group + ID'}</th>
                     <th>{lang 'Registration Date'}</th>
                     <th>{lang 'Last Activity'}</th>
                     <th>{lang 'Last Edit'}</th>
-                    <th>{lang 'Reference'}</th>
                     <th>{lang 'Action'}</th>
                 </tr>
             </thead>
@@ -91,6 +91,11 @@
                         </td>
                         <td>{{ $avatarDesign->get($user->username, $user->firstName, null, 32) }}</td>
                         <td>
+                            <a href="{{ $design->url(PH7_ADMIN_MOD, 'user','result','?what='.$user->phone.'&where=phone&group_id='.$user->groupId) }}" title="{lang 'Query the accounts using the same phone number'}">
+                                {% $user->phone %}
+                            </a>
+                        </td>
+                        <td>
                             <img src="{{ $design->getSmallFlagIcon(Framework\Geo\Ip\Geo::getCountryCode($user->ip)) }}" title="{lang 'Country Flag'}" alt="{lang 'Country Flag'}" /> {{ $design->ip($user->ip) }}
                         </td>
                         <td>{% $user->membershipName %} ({% $user->groupId %})</td> {* Name of the Membership Group *}
@@ -109,7 +114,6 @@
                                 {lang 'No editing'}
                             {/if}
                         </td>
-                        <td class="small">{% $user->reference %}</td>
                         <td class="small">
                             <a href="{{ $design->url('realestate','setting','edit',$user->profileId) }}" title="{lang "Edit User's Profile"}">{lang 'Edit'}</a> |
                             <a href="{{ $design->url('realestate','setting','avatar',"$user->profileId,$user->username,$user->firstName,$user->sex", false) }}" title="{lang "Edit User's Profile Photo"}">{lang 'Edit Avatar'}</a>
