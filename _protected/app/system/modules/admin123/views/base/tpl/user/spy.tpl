@@ -1,5 +1,5 @@
 <p class="center">
-    {if !empty($userSpy)}
+    {if !empty($data)}
         {each $userSpy in $data}
             <div class="row">
                 <div class="col-md-2">
