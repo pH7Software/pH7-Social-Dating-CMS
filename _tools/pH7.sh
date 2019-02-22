@@ -29,6 +29,7 @@ function init() {
     echo "15) backup"
     echo "16) remove sensitive data"
     echo "17) update geoip db"
+    echo "18) git checkout"
 
 
     read option
@@ -50,6 +51,7 @@ function init() {
       "backup") backup;;
       "remove sensitive data") remove-sensitive-data;;
       "update geoip db") update-geoip-db;;
+      "git checkout") git-checkout;;
       *) _error
     esac
 }
@@ -246,6 +248,19 @@ function update-geoip-db()
     fi
 
     echo "GeoIP DB successfully updated at $full_db_path"
+}
+
+# Clear caches to avoid wrong data when checking out to another git branch
+function git-checkout() {
+    echo "Give the name of the git branch you want to checkout"
+    read branch_name
+    if [ ! -z "$branch_name" ]; then
+        echo "Removing cache files before checking out the branch. Please answer 'Y'"
+        clear-cache
+        git checkout $branch_name
+    else
+        echo "You need to enter the git branch name."
+    fi
 }
 
 
