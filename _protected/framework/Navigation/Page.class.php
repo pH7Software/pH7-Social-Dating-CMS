@@ -146,6 +146,8 @@ class Page
      */
     private static function getUrlSlug($sCurrentUrl)
     {
-        return strpos($sCurrentUrl, '&amp;') !== false ? strrchr($sCurrentUrl, '?') !== false : strrchr($sCurrentUrl, '?');
+        return strpos($sCurrentUrl, '&amp;') !== false ?
+            strrchr($sCurrentUrl, '?') !== false :
+            strrchr($sCurrentUrl, '?');
     }
 }
