@@ -199,7 +199,7 @@ function backup() {
     fi
     file="pH7Builder-backup.tar.bz2"
     full_path=$path$file
-    if [ -e  $full_path ]; then
+    if [ -e $full_path ]; then
         _confirm "A backup already exists in this directory, do you want to delete it?"
         if [ $? -eq 1 ]; then
             rm $full_path
