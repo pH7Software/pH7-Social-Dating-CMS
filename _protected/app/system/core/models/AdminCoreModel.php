@@ -34,7 +34,7 @@ class AdminCoreModel extends UserCoreModel
         if ($sTable !== DbTableName::MEMBER) {
             $sSql = 'SELECT * FROM' . Db::prefix($sTable) . 'WHERE username <> \'' . PH7_GHOST_USERNAME . '\' ORDER BY joinDate DESC LIMIT :offset, :limit';
         } else {
-            $sSql = 'SELECT m.*, g.name AS membershipName FROM' . Db::prefix($sTable) . 'AS m INNER JOIN ' . Db::prefix(DbTableName::MEMBERSHIP) . 'AS g ON m.groupId = g.groupId LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) . 'AS i ON m.profileId = i.profileId WHERE username <> \'' . PH7_GHOST_USERNAME . '\' ORDER BY joinDate DESC LIMIT :offset, :limit';
+            $sSql = 'SELECT m.*, i.phone, g.name AS membershipName FROM' . Db::prefix($sTable) . 'AS m INNER JOIN ' . Db::prefix(DbTableName::MEMBERSHIP) . 'AS g ON m.groupId = g.groupId LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) . 'AS i ON m.profileId = i.profileId WHERE username <> \'' . PH7_GHOST_USERNAME . '\' ORDER BY joinDate DESC LIMIT :offset, :limit';
         }
 
         $rStmt = Db::getInstance()->prepare($sSql);
