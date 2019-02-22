@@ -21,6 +21,9 @@ use ReflectionClass;
 
 abstract class Annotation
 {
+    const REGEX_COMMENT = '/\/\*\*(.*)\*\//';
+    const REGEX_NEWLINE = '/\n/';
+
     const CACHE_GROUP = 'str/annotation';
 
     /** @var Cache */
@@ -62,8 +65,8 @@ abstract class Annotation
                 $oProperty = $oReflection->getProperty($sName);
                 $sComment = $oProperty->getDocComment();
 
-                $sComment = preg_replace('/\/\*\*(.*)\*\//', '$1', $sComment);
-                $aComment = preg_split('/\n/', $sComment);
+                $sComment = preg_replace(self::REGEX_COMMENT, '$1', $sComment);
+                $aComment = preg_split(self::REGEX_NEWLINE, $sComment);
 
                 $sKey = $sVal = null; // Set default values
                 $aSchema[$sName] = array();
