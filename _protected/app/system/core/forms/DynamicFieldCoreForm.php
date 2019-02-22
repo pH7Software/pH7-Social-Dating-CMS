@@ -101,17 +101,31 @@ class DynamicFieldCoreForm
                 $this->oForm->addElement(new \PFBC\Element\Number(t('Size:'), SearchQueryCore::SIZE, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
                 break;
 
+            case 'phone':
+                $this->oForm->addElement(new \PFBC\Element\Phone(t('Phone Number:'), $this->sColumn, ['id' => $this->getFieldId('phone'), 'onblur' => 'CValid(this.value, this.id)', 'title' => t('Enter full number with area code.'), 'value' => $this->sVal]));
+                $this->addCheckErrSpan('phone');
+                break;
+
+            case 'contactTimes':
+                $this->oForm->addElement(new \PFBC\Element\Select(
+                        t('Best time to be contacted:'),
+                        $this->sColumn,
+                        [
+                            'morning' => t('Morning (8.30am - 1pm)'),
+                            'afternoon' => t('Afternoon (1pm - 5.30pm)'),
+                            'evening' => t('Evening (5.30pm - 9pm)')
+                        ],
+                        ['value' => $this->sVal]
+                    )
+                );
+                break;
+
             case 'website':
             case 'socialNetworkSite':
                 $sLabel = $this->sColumn === 'socialNetworkSite' ? t('Social Media Profile:') : t('Website:');
                 $sDesc = $this->sColumn === 'socialNetworkSite' ? t('The URL of your social profile, such as Facebook, Twitter or LinkedIn.') : t('Your Personal Website/Blog (any promotional/affiliated contents will be removed)');
                 $this->oForm->addElement(new \PFBC\Element\Url($sLabel, $this->sColumn, ['id' => $this->getFieldId('url'), 'onblur' => 'CValid(this.value,this.id)', 'description' => $sDesc, 'value' => $this->sVal]));
                 $this->addCheckErrSpan('url');
-                break;
-
-            case 'phone':
-                $this->oForm->addElement(new \PFBC\Element\Phone(t('Phone Number:'), $this->sColumn, ['id' => $this->getFieldId('phone'), 'onblur' => 'CValid(this.value, this.id)', 'title' => t('Enter full number with area code.'), 'value' => $this->sVal]));
-                $this->addCheckErrSpan('phone');
                 break;
 
             default:

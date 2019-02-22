@@ -22,7 +22,8 @@ class Field
         'state',
         'zipcode',
         'phone',
-        'website'
+        'website',
+        'contactTimes'
     ];
 
     /**

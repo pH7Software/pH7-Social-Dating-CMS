@@ -71,6 +71,21 @@
                             {val}
                         </span>
                     </p>
+                {elseif $key == 'contactTimes'}
+                    <p>
+                        <span class="bold">{lang 'Best Time to Contact:'}</span>
+                        <span class="italic">
+                            {if $val === 'morning'}
+                                {lang 'Morning (8.30am - 1pm)'}
+                            {elseif $val === 'afternoon'}
+                                {lang 'Afternoon (1pm - 5.30pm)'}
+                            {elseif $val === 'evening'}
+                                {lang 'Evening (5.30pm - 9pm)'}
+                            {else}
+                                {lang 'At anytime'}
+                            {/if}
+                        </span>
+                    </p>
                 {elseif $key == 'website'}
                     <p>
                         {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Site/Blog:'}</span>
