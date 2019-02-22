@@ -53,10 +53,10 @@ class Page
     {
         $this->iTotalItems = (int)$iTotalItems;
         $this->iNbItemsPerPage = (int)$iNbItemsPerPage; // or intval() function, but it is slower than casting
-        $this->iCurrentPage = (int)$this->oHttpRequest->getExists('p') ? $this->oHttpRequest->get('p') : 1;
+        $this->iCurrentPage = $this->oHttpRequest->getExists('p') ? $this->oHttpRequest->get('p', 'int') : 1;
 
         // Ternary condition to prevent division by zero
-        $this->iTotalPages = (int)($this->iTotalItems !== 0 && $this->iNbItemsPerPage !== 0) ? ceil($this->iTotalItems / $this->iNbItemsPerPage) : 0;
+        $this->iTotalPages = ($this->iTotalItems !== 0 && $this->iNbItemsPerPage !== 0) ? (int)ceil($this->iTotalItems / $this->iNbItemsPerPage) : 0;
 
         $this->iFirstItem = (int)($this->iCurrentPage - 1) * $this->iNbItemsPerPage;
     }
