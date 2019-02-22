@@ -270,7 +270,7 @@ function git-checkout() {
         clear-cache
         git checkout $branch_name
     else
-        echo "You need to enter the git checkout branch name."
+        echo "You need to enter the git branch name."
     fi
 }
 
