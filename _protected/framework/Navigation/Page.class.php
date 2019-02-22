@@ -45,24 +45,6 @@ class Page
 
     /**
      * @param int $iTotalItems
-     * @param int $iNbItemsPerPage
-     *
-     * @return void
-     */
-    protected function totalPages($iTotalItems, $iNbItemsPerPage)
-    {
-        $this->iTotalItems = (int)$iTotalItems;
-        $this->iNbItemsPerPage = (int)$iNbItemsPerPage; // or intval() function, but it is slower than casting
-        $this->iCurrentPage = $this->oHttpRequest->getExists('p') ? $this->oHttpRequest->get('p', 'int') : 1;
-
-        // Ternary condition to prevent division by zero
-        $this->iTotalPages = ($this->iTotalItems !== 0 && $this->iNbItemsPerPage !== 0) ? (int)ceil($this->iTotalItems / $this->iNbItemsPerPage) : 0;
-
-        $this->iFirstItem = (int)($this->iCurrentPage - 1) * $this->iNbItemsPerPage;
-    }
-
-    /**
-     * @param int $iTotalItems
      * @param int $iNbItemsPerPage Default 10
      *
      * @return int The number of pages.
@@ -123,6 +105,24 @@ class Page
         }
 
         return $sUrl . self::trailingSlash($sUrl) . '?' . $sVar . '=';
+    }
+
+    /**
+     * @param int $iTotalItems
+     * @param int $iNbItemsPerPage
+     *
+     * @return void
+     */
+    private function totalPages($iTotalItems, $iNbItemsPerPage)
+    {
+        $this->iTotalItems = (int)$iTotalItems;
+        $this->iNbItemsPerPage = (int)$iNbItemsPerPage; // or intval() function, but it is slower than casting
+        $this->iCurrentPage = $this->oHttpRequest->getExists('p') ? $this->oHttpRequest->get('p', 'int') : 1;
+
+        // Ternary condition to prevent division by zero
+        $this->iTotalPages = ($this->iTotalItems !== 0 && $this->iNbItemsPerPage !== 0) ? (int)ceil($this->iTotalItems / $this->iNbItemsPerPage) : 0;
+
+        $this->iFirstItem = (int)($this->iCurrentPage - 1) * $this->iNbItemsPerPage;
     }
 
     /**
