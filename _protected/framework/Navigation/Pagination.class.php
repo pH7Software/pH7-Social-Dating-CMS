@@ -65,8 +65,7 @@ class Pagination
         // Management pages to see
         $this->iShowItems = (self::$aOptions['range'] * 2) + 1;
 
-        // It generates the paging
-        $this->generate();
+        $this->generateHtmlPaging();
     }
 
     /**
@@ -84,7 +83,7 @@ class Pagination
      *
      * @return void
      */
-    private function generate()
+    private function generateHtmlPaging()
     {
         // If you have more than one page, it displays the navigation
         if ($this->iTotalPages > 1) {
