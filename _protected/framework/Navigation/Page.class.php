@@ -19,6 +19,9 @@ class Page
 {
     const DEFAULT_NUMBER_ITEMS = 10;
 
+    const REGEX_URL_PARAMS = '#\?(.+[^\./])=(.+[^\./])$#';
+    const REGEX_URL_QUESTION_MARKS = '#\?.+$#';
+
     /** @var HttpRequest */
     private $oHttpRequest;
 
@@ -97,9 +100,9 @@ class Page
     public static function cleanDynamicUrl($sVar)
     {
         $sCurrentUrl = (new HttpRequest)->currentUrl();
-        $sUrl = preg_replace('#\?.+$#', '', $sCurrentUrl);
+        $sUrl = preg_replace(self::REGEX_URL_QUESTION_MARKS, '', $sCurrentUrl);
 
-        if (preg_match('#\?(.+[^\./])=(.+[^\./])$#', $sCurrentUrl)) {
+        if (preg_match(self::REGEX_URL_PARAMS, $sCurrentUrl)) {
             return $sUrl . self::getUrlSlug($sCurrentUrl) . '&amp;' . $sVar . '=';
         }
 
