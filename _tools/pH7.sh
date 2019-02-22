@@ -193,13 +193,13 @@ function save-code() {
 function backup() {
     echo "Specify the full path ending with a SLASH where you want the archive will be stored"
     read path
-    if [ ! -d $path ]; then
+    if [ ! -d "$path" ]; then
         echo "The path is not a valid directory."
         exit 1
     fi
     file="pH7Builder-backup.tar.bz2"
     full_path=$path$file
-    if [ -e $full_path ]; then
+    if [ -e "$full_path" ]; then
         _confirm "A backup already exists in this directory, do you want to delete it?"
         if [ $? -eq 1 ]; then
             rm $full_path
