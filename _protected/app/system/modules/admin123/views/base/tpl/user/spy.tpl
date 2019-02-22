@@ -17,7 +17,9 @@
             </div>
         {/each}
     {else}
-        <p class="err_msg">{lang 'No user interactions found.'}</p>
+        <p class="err_msg">
+            {lang 'No user interactions found.'}
+        </p>
     {/if}
 </div>
 
