@@ -25,7 +25,7 @@ class SearchUserForm
         $oForm->configure(['action' => Uri::get(PH7_ADMIN_MOD, 'user', 'result') . PH7_SH, 'method' => 'get']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_user_search', 'form_user_search'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Search for:'), 'what'));
-        $oForm->addElement(new \PFBC\Element\Select(t('Where:'), 'where', ['all' => t('All'), SearchCoreModel::USERNAME => t('Username'), SearchCoreModel::EMAIL => t('Email'), SearchCoreModel::FIRST_NAME => t('First Name'), SearchCoreModel::LAST_NAME => t('Last Name'), SearchCoreModel::IP => t('IP Address')], ['required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Select(t('Where:'), 'where', ['all' => t('All'), SearchCoreModel::USERNAME => t('Username'), SearchCoreModel::EMAIL => t('Email'), SearchCoreModel::FIRST_NAME => t('First Name'), SearchCoreModel::LAST_NAME => t('Last Name'), SearchCoreModel::IP => t('IP Address'), SearchCoreModel::PHONE => t('Phone Number')], ['required' => 1]));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Membership Group:'), 'group_id', $aGroupName, ['value' => 2]));
         unset($aGroupName);

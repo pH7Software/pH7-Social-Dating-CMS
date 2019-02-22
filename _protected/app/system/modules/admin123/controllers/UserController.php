@@ -508,7 +508,8 @@ class UserController extends Controller
             SearchCoreModel::EMAIL,
             SearchCoreModel::FIRST_NAME,
             SearchCoreModel::LAST_NAME,
-            SearchCoreModel::IP
+            SearchCoreModel::IP,
+            SearchCoreModel::PHONE
         ];
 
         return in_array($sWhere, $aWhereOptions, true);

@@ -70,9 +70,13 @@ class AdminCoreModel extends UserCoreModel
 
         $sSqlQuery = !empty($iBanned) ? '(ban = 1) AND ' : '';
         if ($sWhere === 'all') {
-            $sSqlQuery .= '(m.username LIKE :what OR m.email LIKE :what OR m.firstName LIKE :what OR m.lastName LIKE :what OR m.ip LIKE :what)';
+            $sSqlQuery .= '(m.username LIKE :what OR m.email LIKE :what OR m.firstName LIKE :what OR m.lastName LIKE :what OR m.ip LIKE :what OR i.phone LIKE :what)';
         } else {
-            $sSqlQuery .= '(m.' . $sWhere . ' LIKE :what)';
+            if ($sWhere === SearchCoreModel::PHONE) {
+                $sSqlQuery .= '(i.phone LIKE :what)';
+            } else {
+                $sSqlQuery .= '(m.' . $sWhere . ' LIKE :what)';
+            }
         }
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);

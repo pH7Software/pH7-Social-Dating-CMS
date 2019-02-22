@@ -38,6 +38,7 @@ class SearchCoreModel
     const ADDED_DATE = 'addedDate';
     const UPDATED = 'updatedDate';
     const IP = 'ip';
+    const PHONE = 'phone';
 
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
