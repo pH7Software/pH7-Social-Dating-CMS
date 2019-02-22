@@ -10,6 +10,10 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Layout\Html\Design;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
+
 class Permission extends PermissionCore
 {
     public function __construct()
