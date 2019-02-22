@@ -217,8 +217,7 @@ function backup() {
 }
 
 # Update GeoIP database
-function update-geoip-db()
-{
+function update-geoip-db() {
     geo_archive_filename="GeoLite2-City.tar.gz"
     database_geo_lite_url="http://geolite.maxmind.com/download/geoip/database/$geo_archive_filename"
     target_path="./_protected/framework/Geo/Ip/"
