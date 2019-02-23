@@ -102,7 +102,7 @@ class DynamicFieldCoreForm
                 break;
 
             case 'propertyYearBuilt':
-                $this->oForm->addElement(new \PFBC\Element\Number(t('Year Built:'), SearchQueryCore::YEAR_BUILT, ['value' => $this->sVal,  'min' => 0]));
+                $this->oForm->addElement(new \PFBC\Element\Number(t('Min Year Built:'), SearchQueryCore::YEAR_BUILT, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
                 break;
 
             case 'phone':
