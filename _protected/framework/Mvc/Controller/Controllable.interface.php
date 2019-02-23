@@ -17,7 +17,7 @@ interface Controllable
     /**
      * Output Stream Views.
      *
-     * @param string|null $sFile Specify another display file instead of the default layout file. Default NULL
+     * @param string|null $sFile Specify another display file instead of the default layout file.
      *
      * @return void
      */
@@ -26,8 +26,8 @@ interface Controllable
     /**
      * Set a Not Found Error Message with HTTP 404 Code Status.
      *
-     * @param string $sMsg Default is empty ('')
-     * @param bool $b404Status For the Ajax blocks and others, we cannot put the HTTP 404 error code, so the attribute must be set to FALSE. Default TRUE
+     * @param string $sMsg Optionally, a customized message.
+     * @param bool $b404Status For the Ajax blocks and others, we cannot put the HTTP 404 error code, so the attribute must be set to FALSE.
      *
      * @return void Quits the page with the exit() function
      */
