@@ -241,6 +241,7 @@ class MainController extends Controller
         $oDb = Db::getInstance();
         $sSqlContent = <<<SQL
 ALTER TABLE ph7_members_info ADD COLUMN contactTimes enum('morning', 'afternoon', 'evening') NOT NULL DEFAULT 'morning';
+ALTER TABLE ph7_members_info ADD COLUMN yearBuilt int(9) DEFAULT NULL;
 SQL;
 
         $sSqlContent = DbVarious::renameTablePrefix($sSqlContent);
