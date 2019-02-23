@@ -44,57 +44,170 @@ class DynamicFieldCoreForm
     {
         switch ($this->sColumn) {
             case 'description':
-                $this->oForm->addElement(new \PFBC\Element\Textarea(t('Description:'), $this->sColumn, ['id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,20,4000)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(20, 4000), 'required' => 1]));
+                $this->oForm->addElement(
+                    new \PFBC\Element\Textarea(
+                        t('Description:'),
+                        $this->sColumn,
+                        [
+                            'id' => $this->getFieldId('str'),
+                            'onblur' => 'CValid(this.value,this.id,20,4000)',
+                            'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(20, 4000),
+                            'required' => 1
+                        ]
+                    )
+                );
                 $this->addCheckErrSpan('str');
                 break;
 
             case 'punchline':
-                $this->oForm->addElement(new \PFBC\Element\Textbox(t('Punchline/Headline:'), 'punchline', ['id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,5,150)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(5, 150)]));
+                $this->oForm->addElement(
+                    new \PFBC\Element\Textbox(
+                        t('Punchline/Headline:'),
+                        'punchline',
+                        [
+                            'id' => $this->getFieldId('str'),
+                            'onblur' => 'CValid(this.value,this.id,5,150)',
+                            'value' => $this->sVal,
+                            'validation' => new \PFBC\Validation\Str(5, 150)
+                        ]
+                    )
+                );
                 $this->addCheckErrSpan('str');
                 break;
 
             case 'country':
-                $this->oForm->addElement(new \PFBC\Element\Country(t('Country:'), $this->sColumn, ['id' => $this->getFieldId('str'), 'value' => $this->sVal, 'required' => 1]));
+                $this->oForm->addElement(
+                    new \PFBC\Element\Country(
+                        t('Country:'),
+                        $this->sColumn,
+                        [
+                            'id' => $this->getFieldId('str'),
+                            'value' => $this->sVal,
+                            'required' => 1
+                        ]
+                    )
+                );
                 break;
 
             case 'city':
-                $this->oForm->addElement(new \PFBC\Element\Textbox(t('City:'), $this->sColumn, ['id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,2,150)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(2, 150), 'required' => 1]));
+                $this->oForm->addElement(
+                    new \PFBC\Element\Textbox(
+                        t('City:'),
+                        $this->sColumn,
+                        [
+                            'id' => $this->getFieldId('str'),
+                            'onblur' => 'CValid(this.value,this.id,2,150)',
+                            'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(2, 150),
+                            'required' => 1
+                        ]
+                    )
+                );
                 $this->addCheckErrSpan('str');
                 break;
 
             case 'state':
-                $this->oForm->addElement(new \PFBC\Element\Textbox(t('State/Province:'), $this->sColumn, ['id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,2,150)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(2, 150)]));
+                $this->oForm->addElement(
+                    new \PFBC\Element\Textbox(
+                        t('State/Province:'),
+                        $this->sColumn,
+                        [
+                            'id' => $this->getFieldId('str'),
+                            'onblur' => 'CValid(this.value,this.id,2,150)',
+                            'value' => $this->sVal,
+                            'validation' => new \PFBC\Validation\Str(2, 150)
+                        ]
+                    )
+                );
                 $this->addCheckErrSpan('str');
                 break;
 
             case 'zipCode':
-                $this->oForm->addElement(new \PFBC\Element\Textbox(t('Postal Code:'), $this->sColumn, ['id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,2,15)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(2, 15)]));
+                $this->oForm->addElement(
+                    new \PFBC\Element\Textbox(
+                        t('Postal Code:'),
+                        $this->sColumn,
+                        [
+                            'id' => $this->getFieldId('str'),
+                            'onblur' => 'CValid(this.value,this.id,2,15)',
+                            'value' => $this->sVal,
+                            'validation' => new \PFBC\Validation\Str(2, 15)
+                        ]
+                    )
+                );
                 $this->addCheckErrSpan('str');
                 break;
 
             case 'middleName':
-                $this->oForm->addElement(new \PFBC\Element\Textbox(t('Middle Name:'), $this->sColumn, ['id' => $this->getFieldId('name'), 'onblur' => 'CValid(this.value,this.id)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Name]));
+                $this->oForm->addElement(
+                    new \PFBC\Element\Textbox(
+                        t('Middle Name:'),
+                        $this->sColumn,
+                        [
+                            'id' => $this->getFieldId('name'),
+                            'onblur' => 'CValid(this.value,this.id)',
+                            'value' => $this->sVal,
+                            'validation' => new \PFBC\Validation\Name
+                        ]
+                    )
+                );
                 $this->addCheckErrSpan('name');
                 break;
 
             case 'height':
-                $this->oForm->addElement(new \PFBC\Element\Height(t('Height:'), $this->sColumn, ['value' => $this->sVal]));
+                $this->oForm->addElement(
+                    new \PFBC\Element\Height(
+                        t('Height:'),
+                        $this->sColumn,
+                        [
+                            'value' => $this->sVal
+                        ]
+                    )
+                );
                 break;
 
             case 'weight':
-                $this->oForm->addElement(new \PFBC\Element\Weight(t('Weight:'), $this->sColumn, ['value' => $this->sVal]));
+                $this->oForm->addElement(
+                    new \PFBC\Element\Weight(
+                        t('Weight:'),
+                        $this->sColumn,
+                        [
+                            'value' => $this->sVal
+                        ]
+                    )
+                );
                 break;
 
             case 'website':
             case 'socialNetworkSite':
                 $sLabel = $this->sColumn === 'socialNetworkSite' ? t('Social Media Profile:') : t('Website:');
                 $sDesc = $this->sColumn === 'socialNetworkSite' ? t('The URL of your social profile, such as Facebook, Instagram, Snapchat, LinkedIn, ...') : t('Your Personal Website/Blog (any promotional/affiliated contents will be removed)');
-                $this->oForm->addElement(new \PFBC\Element\Url($sLabel, $this->sColumn, ['id' => $this->getFieldId('url'), 'onblur' => 'CValid(this.value,this.id)', 'description' => $sDesc, 'value' => $this->sVal]));
+                $this->oForm->addElement(
+                    new \PFBC\Element\Url(
+                        $sLabel,
+                        $this->sColumn, [
+                            'id' => $this->getFieldId('url'),
+                            'onblur' => 'CValid(this.value,this.id)',
+                            'description' => $sDesc,
+                            'value' => $this->sVal
+                        ]
+                    )
+                );
                 $this->addCheckErrSpan('url');
                 break;
 
             case 'phone':
-                $this->oForm->addElement(new \PFBC\Element\Phone(t('Phone Number:'), $this->sColumn, ['id' => $this->getFieldId('phone'), 'onblur' => 'CValid(this.value, this.id)', 'title' => t('Enter full number with area code.'), 'value' => $this->sVal]));
+                $this->oForm->addElement(
+                    new \PFBC\Element\Phone(
+                        t('Phone Number:'),
+                        $this->sColumn,
+                        [
+                            'id' => $this->getFieldId('phone'),
+                            'onblur' => 'CValid(this.value, this.id)',
+                            'title' => t('Enter full number with area code.'),
+                            'value' => $this->sVal
+                        ]
+                    )
+                );
                 $this->addCheckErrSpan('phone');
                 break;
 
