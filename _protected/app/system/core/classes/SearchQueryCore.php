@@ -31,6 +31,7 @@ final class SearchQueryCore
     const BEDROOM = 'propertyBedrooms';
     const BATHROOM = 'propertyBathrooms';
     const YEAR_BUILT = 'propertyYearBuilt';
+    const HOME_STYLE = 'propertyHomeStyle';
     const HOME_TYPE = 'propertyHomeType';
     const FIRST_NAME = 'first_name';
     const LAST_NAME = 'last_name';

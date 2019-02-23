@@ -86,7 +86,7 @@
                             {/if}
                         </span>
                     </p>
-                {elseif $key == 'propertyHomeType' AND ($sex === 'seller' || $sex === 'both')}
+                {elseif $key == 'propertyHomeType' AND !empty($val) AND ($sex === 'seller' || $sex === 'both')}
                     <p>
                         <span class="bold">{lang 'Home Type:'}</span>
                         <span class="italic">
@@ -94,6 +94,25 @@
                                 {lang 'Single Family'}
                             {elseif $val === 'condo'}
                                 {lang 'Condo/Townhouse'}
+                            {else}
+                                {val}
+                            {/if}
+                        </span>
+                    </p>
+                {elseif $key == 'propertyHomeStyle' AND !empty($val) AND ($sex === 'seller' || $sex === 'both')}
+                    <p>
+                        <span class="bold">{lang 'Home Style:'}</span>
+                        <span class="italic">
+                            {if $val === 'rambler'}
+                                {lang 'Rambler'}
+                            {elseif $val === 'ranch'}
+                                {lang 'Ranch/Patio'}
+                            {elseif $val === 'tri-multi-level'}
+                                {lang 'Tri-Multi-Level'}
+                            {elseif $val === 'two-story'}
+                                {lang 'Two Story'}
+                            {elseif $val === 'any'}
+                                {lang 'Any'}
                             {else}
                                 {val}
                             {/if}

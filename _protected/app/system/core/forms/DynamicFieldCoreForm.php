@@ -135,6 +135,27 @@ class DynamicFieldCoreForm
                 }
                 break;
 
+            case 'propertyHomeStyle':
+                if ($sSex === 'seller' || $sSex === 'both') {
+                    $this->oForm->addElement(
+                        new \PFBC\Element\Select(
+                            t('Home Style:'),
+                            SearchQueryCore::HOME_STYLE,
+                            [
+                                'rambler' => t('Rambler'),
+                                'ranch' => t('Ranch/Patio'),
+                                'tri-multi-level' => t('Tri-Multi-Level'),
+                                'two-story' => t('Two Story'),
+                                'any' => t('Any')
+                            ],
+                            [
+                                'value' => $this->sVal
+                            ]
+                        )
+                    );
+                }
+                break;
+
             case 'phone':
                 $this->oForm->addElement(new \PFBC\Element\Phone(t('Phone Number:'), $this->sColumn, ['id' => $this->getFieldId('phone'), 'onblur' => 'CValid(this.value, this.id)', 'title' => t('Enter full number with area code.'), 'value' => $this->sVal]));
                 $this->addCheckErrSpan('phone');
