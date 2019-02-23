@@ -12,6 +12,12 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class ModeratorModel extends ModeratorCoreModel
 {
+    /**
+     * @param int $iOffset
+     * @param int $iLimit
+     *
+     * @return array
+     */
     public function getAlbumsPicture($iOffset, $iLimit)
     {
         $iOffset = (int)$iOffset;
@@ -29,6 +35,12 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    /**
+     * @param int $iOffset
+     * @param int $iLimit
+     *
+     * @return array
+     */
     public function getPictures($iOffset, $iLimit)
     {
         $iOffset = (int)$iOffset;
@@ -43,6 +55,12 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    /**
+     * @param int $iOffset
+     * @param int $iLimit
+     *
+     * @return array
+     */
     public function getAlbumsVideo($iOffset, $iLimit)
     {
         $iOffset = (int)$iOffset;
@@ -57,6 +75,12 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    /**
+     * @param int $iOffset
+     * @param int $iLimit
+     *
+     * @return array
+     */
     public function getVideos($iOffset, $iLimit)
     {
         $iOffset = (int)$iOffset;
@@ -71,6 +95,12 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    /**
+     * @param int $iOffset
+     * @param int $iLimit
+     *
+     * @return array
+     */
     public function getAvatars($iOffset, $iLimit)
     {
         $iOffset = (int)$iOffset;
@@ -84,6 +114,12 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    /**
+     * @param int $iOffset
+     * @param int $iLimit
+     *
+     * @return array
+     */
     public function getBackgrounds($iOffset, $iLimit)
     {
         $iOffset = (int)$iOffset;
@@ -98,6 +134,12 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    /**
+     * @param int $iAlbumId
+     * @param string $sStatus
+     *
+     * @return bool
+     */
     public function approvedPictureAlbum($iAlbumId, $sStatus = '1')
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::ALBUM_PICTURE) .
@@ -108,6 +150,12 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iPictureId
+     * @param string $sStatus
+     *
+     * @return bool
+     */
     public function approvedPicture($iPictureId, $sStatus = '1')
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::PICTURE) .
@@ -118,6 +166,12 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iAlbumId
+     * @param string $sStatus
+     *
+     * @return bool
+     */
     public function approvedVideoAlbum($iAlbumId, $sStatus = '1')
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::ALBUM_VIDEO) .
@@ -128,6 +182,12 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iVideoId
+     * @param string $sStatus
+     *
+     * @return bool
+     */
     public function approvedVideo($iVideoId, $sStatus = '1')
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::VIDEO) .
@@ -138,6 +198,12 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iProfileId
+     * @param int $iStatus
+     *
+     * @return bool
+     */
     public function approvedAvatar($iProfileId, $iStatus = 1)
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::MEMBER) .
@@ -148,6 +214,12 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iProfileId
+     * @param int $iStatus
+     *
+     * @return bool
+     */
     public function approvedBackground($iProfileId, $iStatus = 1)
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::MEMBER_BACKGROUND) .
@@ -158,6 +230,11 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iAlbumId
+     *
+     * @return bool
+     */
     public function deletePictureAlbum($iAlbumId)
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::ALBUM_PICTURE) .
@@ -167,6 +244,11 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iAlbumId
+     *
+     * @return bool
+     */
     public function deleteVideoAlbum($iAlbumId)
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::ALBUM_VIDEO) .
