@@ -10,6 +10,8 @@
 
 namespace PH7;
 
+use PH7\Framework\Session\Session;
+
 defined('PH7') or exit('Restricted access');
 
 class DynamicFieldCoreForm
@@ -42,6 +44,8 @@ class DynamicFieldCoreForm
      */
     public function generate()
     {
+        $sSex = (new Session)->get('member_sex');
+
         switch ($this->sColumn) {
             case 'description':
                 $this->oForm->addElement(new \PFBC\Element\Textarea(t('Description:'), $this->sColumn, ['id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,20,4000)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(20, 4000), 'required' => 1]));
@@ -86,37 +90,49 @@ class DynamicFieldCoreForm
                 break;
 
             case 'propertyPrice':
-                $this->oForm->addElement(new \PFBC\Element\Range(t('Price Range'), SearchQueryCore::PRICE, ['value' => $this->sVal, 'min' => Form::MIN_PRICE, 'max' => Form::MAX_PRICE, 'step' => Form::RANGE_NUMBER_INTERVAL]));
+                if ($sSex === 'seller' || $sSex === 'both') {
+                    $this->oForm->addElement(new \PFBC\Element\Range(t('Price Range'), SearchQueryCore::PRICE, ['value' => $this->sVal, 'min' => Form::MIN_PRICE, 'max' => Form::MAX_PRICE, 'step' => Form::RANGE_NUMBER_INTERVAL]));
+                }
                 break;
 
             case 'propertyBedrooms':
-                $this->oForm->addElement(new \PFBC\Element\Number(t('Min Bedrooms:'), SearchQueryCore::BEDROOM, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
+                if ($sSex === 'seller' || $sSex === 'both') {
+                    $this->oForm->addElement(new \PFBC\Element\Number(t('Min Bedrooms:'), SearchQueryCore::BEDROOM, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
+                }
                 break;
 
             case 'propertyBathrooms':
-                $this->oForm->addElement(new \PFBC\Element\Number(t('Min Bathrooms:'), SearchQueryCore::BATHROOM, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
+                if ($sSex === 'seller' || $sSex === 'both') {
+                    $this->oForm->addElement(new \PFBC\Element\Number(t('Min Bathrooms:'), SearchQueryCore::BATHROOM, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
+                }
                 break;
 
             case 'propertySize':
-                $this->oForm->addElement(new \PFBC\Element\Number(t('Size:'), SearchQueryCore::SIZE, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
+                if ($sSex === 'seller' || $sSex === 'both') {
+                    $this->oForm->addElement(new \PFBC\Element\Number(t('Size:'), SearchQueryCore::SIZE, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
+                }
                 break;
 
             case 'propertyYearBuilt':
-                $this->oForm->addElement(new \PFBC\Element\Number(t('Min Year Built:'), SearchQueryCore::YEAR_BUILT, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
+                if ($sSex === 'seller' || $sSex === 'both') {
+                    $this->oForm->addElement(new \PFBC\Element\Number(t('Min Year Built:'), SearchQueryCore::YEAR_BUILT, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
+                }
                 break;
 
             case 'propertyHomeType':
-                $this->oForm->addElement(
-                    new \PFBC\Element\Select(
-                        t('Home Type'),
-                       SearchQueryCore::HOME_TYPE,
-                        [
-                            'family' => t('Single Family'),
-                            'condo' => t('Condo/Townhouse')
-                        ],
-                        ['value' => $this->sVal]
-                    )
-                );
+                if ($sSex === 'seller' || $sSex === 'both') {
+                    $this->oForm->addElement(
+                        new \PFBC\Element\Select(
+                            t('Home Type'),
+                            SearchQueryCore::HOME_TYPE,
+                            [
+                                'family' => t('Single Family'),
+                                'condo' => t('Condo/Townhouse')
+                            ],
+                            ['value' => $this->sVal]
+                        )
+                    );
+                }
                 break;
 
             case 'phone':

@@ -43,28 +43,28 @@
                             {val}
                         </span>
                     </p>
-                {elseif $key == 'propertyPrice' AND $sex === 'seller'}
+                {elseif $key == 'propertyPrice' AND ($sex === 'seller' || $sex === 'both')}
                     <p>
                         <span class="bold">{lang 'Price:'}</span>
                         <span class="italic">
                             {val}
                         </span>
                     </p>
-                {elseif $key == 'propertyBedrooms' AND $sex === 'seller'}
+                {elseif $key == 'propertyBedrooms' AND ($sex === 'seller' || $sex === 'both')}
                     <p>
                         <span class="bold">{lang 'Bedrooms:'}</span>
                         <span class="italic">
                             {val}
                         </span>
                     </p>
-                {elseif $key == 'propertyBathrooms' AND $sex === 'seller'}
+                {elseif $key == 'propertyBathrooms' AND ($sex === 'seller' || $sex === 'both')}
                     <p>
                         <span class="bold">{lang 'Bedrooms:'}</span>
                         <span class="italic">
                             {val}
                         </span>
                     </p>
-                {elseif $key == 'propertySize' AND $sex === 'seller'}
+                {elseif $key == 'propertySize' AND ($sex === 'seller' || $sex === 'both')}
                     <p>
                         <span class="bold">{lang 'Size:'}</span>
                         <span class="italic">
@@ -86,7 +86,7 @@
                             {/if}
                         </span>
                     </p>
-                {elseif $key == 'propertyHomeType' AND $sex === 'seller'}
+                {elseif $key == 'propertyHomeType' AND ($sex === 'seller' || $sex === 'both')}
                     <p>
                         <span class="bold">{lang 'Home Type:'}</span>
                         <span class="italic">
