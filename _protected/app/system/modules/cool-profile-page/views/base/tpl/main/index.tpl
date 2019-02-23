@@ -43,28 +43,28 @@
                             {val}
                         </span>
                     </p>
-                {elseif $key == 'propertyPrice'}
+                {elseif $key == 'propertyPrice' AND $sex === 'seller'}
                     <p>
                         <span class="bold">{lang 'Price:'}</span>
                         <span class="italic">
                             {val}
                         </span>
                     </p>
-                {elseif $key == 'propertyBedrooms'}
+                {elseif $key == 'propertyBedrooms' AND $sex === 'seller'}
                     <p>
                         <span class="bold">{lang 'Bedrooms:'}</span>
                         <span class="italic">
                             {val}
                         </span>
                     </p>
-                {elseif $key == 'propertyBathrooms'}
+                {elseif $key == 'propertyBathrooms' AND $sex === 'seller'}
                     <p>
                         <span class="bold">{lang 'Bedrooms:'}</span>
                         <span class="italic">
                             {val}
                         </span>
                     </p>
-                {elseif $key == 'propertySize'}
+                {elseif $key == 'propertySize' AND $sex === 'seller'}
                     <p>
                         <span class="bold">{lang 'Size:'}</span>
                         <span class="italic">
