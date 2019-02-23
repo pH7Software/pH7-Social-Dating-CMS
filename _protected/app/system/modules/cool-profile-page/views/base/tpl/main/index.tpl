@@ -86,6 +86,19 @@
                             {/if}
                         </span>
                     </p>
+                {elseif $key == 'propertyHomeType'}
+                    <p>
+                        <span class="bold">{lang 'Home Type:'}</span>
+                        <span class="italic">
+                            {if $val === 'family'}
+                                {lang 'Single Family'}
+                            {elseif $val === 'condo'}
+                                {lang 'Condo/Townhouse'}
+                            {else}
+                                {val}
+                            {/if}
+                        </span>
+                    </p>
                 {elseif $key == 'website'}
                     <p>
                         {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Site/Blog:'}</span>

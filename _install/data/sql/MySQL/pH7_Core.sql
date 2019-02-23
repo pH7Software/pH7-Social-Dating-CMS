@@ -125,6 +125,7 @@ CREATE TABLE IF NOT EXISTS ph7_members_info (
   propertyBedrooms int(5) DEFAULT NULL,
   propertyBathrooms int(3) DEFAULT NULL,
   propertyYearBuilt int(9) DEFAULT NULL,
+  propertyHomeType varchar(190) DEFAULT NULL,
   contactTimes enum('morning', 'afternoon', 'evening') NOT NULL DEFAULT 'morning',
   state varchar(150) DEFAULT NULL,
   zipCode varchar(20) DEFAULT NULL,

@@ -105,6 +105,20 @@ class DynamicFieldCoreForm
                 $this->oForm->addElement(new \PFBC\Element\Number(t('Min Year Built:'), SearchQueryCore::YEAR_BUILT, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
                 break;
 
+            case 'propertyHomeType':
+                $this->oForm->addElement(
+                    new \PFBC\Element\Select(
+                        t('Home Type'),
+                       SearchQueryCore::HOME_TYPE,
+                        [
+                            'family' => t('Single Family'),
+                            'condo' => t('Condo/Townhouse')
+                        ],
+                        ['value' => $this->sVal]
+                    )
+                );
+                break;
+
             case 'phone':
                 $this->oForm->addElement(new \PFBC\Element\Phone(t('Phone Number:'), $this->sColumn, ['id' => $this->getFieldId('phone'), 'onblur' => 'CValid(this.value, this.id)', 'title' => t('Enter full number with area code.'), 'value' => $this->sVal]));
                 $this->addCheckErrSpan('phone');
