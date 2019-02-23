@@ -26,7 +26,17 @@ class ShareUrlCoreForm
 
         $oForm = new \PFBC\Form('form_share_url', $iWidth);
         $oForm->configure(['action' => '', 'class' => 'center']);
-        $oForm->addElement(new \PFBC\Element\Url($sLabel, 'share', ['value' => $sUrl, 'readonly' => 'readonly', 'onclick' => 'this.select()']));
+        $oForm->addElement(
+            new \PFBC\Element\Url(
+                $sLabel,
+                'share',
+                [
+                    'value' => $sUrl,
+                    'readonly' => 'readonly',
+                    'onclick' => 'this.select()'
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br />'));
         $oForm->render();
     }
