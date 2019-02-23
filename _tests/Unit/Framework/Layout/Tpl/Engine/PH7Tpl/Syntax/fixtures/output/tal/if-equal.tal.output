@@ -1,3 +1,7 @@
-<ph:if-equal test="hello,hello">
-    Yes, both are HELLO!
+<?php if('hello' === 'hello') { ?>
+    Yes, both are "hello" strings!
+<?php } ?>
+
+<?php if(true === true) { ?>
+    Yes, everything is TRUE :)
 <?php } ?>

@@ -179,8 +179,8 @@ class Tal extends Syntax implements Parsable
     public function ifEqualStatement()
     {
         $this->sCode = preg_replace(
-            '#<ph:if-equal test=(?:"|\')([^\<\>,"\'\n]+)(?:"|\'),(?:"|\')([^\<\>,"\'\n]+)(?:"|\')>#',
-            '<?php if($1 == $2) { ?>',
+            '#<ph:if-equal test=(?:"|\')(\')?([^\<\>,"\'\n]+)(\')?,(\')?([^\<\>,"\'\n]+)(\')?(?:"|\')>#',
+            '<?php if($1$2$3 === $4$5$6) { ?>',
             $this->sCode
         );
     }
