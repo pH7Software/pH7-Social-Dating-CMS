@@ -1,4 +1,4 @@
-{if (true)}
+{if true}
     YES
 {else}
     NO

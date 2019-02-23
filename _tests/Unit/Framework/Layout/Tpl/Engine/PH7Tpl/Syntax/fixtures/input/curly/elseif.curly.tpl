@@ -1,5 +1,5 @@
 {if true}
     ...
-{elseif (false)}
+{elseif false}
     ...
 {/if}
