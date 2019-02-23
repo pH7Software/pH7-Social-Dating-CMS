@@ -86,7 +86,7 @@
                             {/if}
                         </span>
                     </p>
-                {elseif $key == 'propertyHomeType'}
+                {elseif $key == 'propertyHomeType' AND $sex === 'seller'}
                     <p>
                         <span class="bold">{lang 'Home Type:'}</span>
                         <span class="italic">
