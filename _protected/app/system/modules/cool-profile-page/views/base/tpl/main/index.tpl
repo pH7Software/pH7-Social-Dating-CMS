@@ -1,6 +1,5 @@
 {if !empty($img_background)}
-    {* Set custom profile background (if set by user) *}
-    {manual_include 'profile_background.inc.tpl'}
+    {main_include 'profile_background.inc.tpl'}
 {/if}
 
 <div class="row" itemscope="itemscope" itemtype="http://schema.org/Person">
