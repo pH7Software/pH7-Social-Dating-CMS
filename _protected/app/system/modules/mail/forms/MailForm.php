@@ -61,7 +61,7 @@ class MailForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_title"></span>'));
         $oForm->addElement(
             new \PFBC\Element\Textarea(
-                t('Your message:'),
+                t('Message:'),
                 'message',
                 [
                     'id' => 'str_msg',
