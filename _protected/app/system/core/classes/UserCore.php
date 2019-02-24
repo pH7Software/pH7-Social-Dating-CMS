@@ -63,7 +63,7 @@ class UserCore
         $oSession = new Session;
         $bSessionIpCheck = ((bool)DbConfig::getSetting('isUserSessionIpCheck')) ? $oSession->get('member_ip') === Ip::get() : true;
 
-        $bIsLogged = (bool)$oSession->exists('member_id') &&
+        $bIsLogged = $oSession->exists('member_id') &&
             $bSessionIpCheck &&
             $oSession->get('member_http_user_agent') === (new Browser)->getUserAgent();
 

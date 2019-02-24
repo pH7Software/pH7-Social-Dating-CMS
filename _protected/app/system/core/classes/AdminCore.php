@@ -32,7 +32,7 @@ class AdminCore extends UserCore
         $oSession = new Session;
         $bSessionIpCheck = ((bool)DbConfig::getSetting('isAdminSessionIpCheck')) ? $oSession->get('admin_ip') === Ip::get() : true;
 
-        $bIsLogged = (bool)$oSession->exists('admin_id') &&
+        $bIsLogged = $oSession->exists('admin_id') &&
             $bSessionIpCheck &&
             $oSession->get('admin_http_user_agent') === (new Browser)->getUserAgent();
         unset($oSession);
