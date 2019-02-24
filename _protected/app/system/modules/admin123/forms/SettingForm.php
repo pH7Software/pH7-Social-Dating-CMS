@@ -326,6 +326,7 @@ class SettingForm
             $oForm->addElement(new \PFBC\Element\Url(t('Chatroulette API:'), 'chatroulette_api', ['description' => t('Documentation: <a href="%0%">Change the default chatroulette provider by yours</a>.<br /> <small>Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).</small>', self::CHANGE_CHAT_DOC_URL, '<strong>%site_url%</strong>', '<strong>%site_name%</strong>'), 'value' => DbConfig::getSetting('chatrouletteApi'), 'required' => 1]));
         }
 
+
         /********** Automation **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="automation"><div class="col-md-10"><h2 class="underline">' . t('Automation') . '</h2>'));
 
@@ -333,9 +334,8 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Number(t('User inactivity timeout:'), 'user_timeout', ['description' => t('The number of minutes that a member becomes inactive (offline).'), 'value' => DbConfig::getSetting('userTimeout'), 'required' => 1]));
 
+
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><script src="' . PH7_URL_STATIC . PH7_JS . 'tabs.js"></script><script>tabs(\'p\', [\'general\',\'icon\',\'registration\',\'pic_vid\',\'moderation\',\'email\',\'security\',\'spam\',\'design\',\'api\',\'automation\']);</script>'));
-
-
         $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'check']));
 
         $oForm->render();
