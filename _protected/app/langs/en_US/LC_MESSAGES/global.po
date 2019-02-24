@@ -5610,7 +5610,7 @@ msgid "Latest Forum Posts"
 msgstr ""
 
 #: _protected/app/system/modules/forum/controllers/ForumController.php:163
-msgid "%0% | %1% - Forum"
+msgid "%0% -> %1% - Forum"
 msgstr ""
 
 #: _protected/app/system/modules/forum/controllers/ForumController.php:165

@@ -160,13 +160,12 @@ class ForumController extends Controller
 
             // Adding the RSS link
             $this->view->header = '<link rel="alternate" type="application/rss+xml" title="' . t('Latest Forum Posts') . '" href="' . Uri::get('xml', 'rss', 'xmlrouter', 'forum-post,' . $oPost->topicId) . '" />';
-            $this->sTitle = t('%0% | %1% - Forum', $this->str->upperFirst($sForumName), $this->getTitle($oPost->title));
-            $this->view->page_title = $this->sTitle;
+            $this->view->page_title = t('%0% -> %1% - Forum', $this->str->upperFirst($sForumName), $this->getTitle($oPost->title));
             $this->view->meta_description = t('%0% Topics - Discussion Forums', $this->getShortedMessage($oPost->message));
 
             // Generates beautiful meta keywords for good SEO
             $this->view->meta_keywords = t('%0%,%1%,forum,discussion,dating forum,social forum', $this->getNameAsKeywords($sForumName), $this->getTitleAsKeywords($oPost->title));
-            $this->view->h1_title = $this->sTitle;
+            $this->view->h1_title = $this->getTitle($oPost->title);
 
             $this->view->dateTime = $this->dateTime;
             $this->view->post = $oPost;
