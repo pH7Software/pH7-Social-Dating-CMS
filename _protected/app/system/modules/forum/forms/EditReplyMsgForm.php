@@ -39,8 +39,10 @@ class EditReplyMsgForm
         $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_reply_msg', 'form_edit_reply_msg'));
         $oForm->addElement(new \PFBC\Element\Token('edit_reply_msg'));
+
+        $sEditorClass = FormHelper::getEditorPfbcClassName();
         $oForm->addElement(
-            new \PFBC\Element\CKEditor(
+            new $sEditorClass(
                 t('Message:'),
                 'message',
                 [

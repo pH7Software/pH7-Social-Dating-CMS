@@ -60,8 +60,10 @@ class EditMsgForm
             )
         );
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_title"></span>'));
+
+        $sEditorClass = FormHelper::getEditorPfbcClassName();
         $oForm->addElement(
-            new \PFBC\Element\CKEditor(
+            new $sEditorClass(
                 t('Message:'),
                 'message',
                 [
