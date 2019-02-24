@@ -146,9 +146,13 @@ class SettingForm
             $oForm->addElement(new \PFBC\Element\Select(t('Note Post Manual Approval:'), 'note_manual_approval', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('noteManualApproval'), 'required' => 1]));
         }
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Photos Manual Approval:'), 'picture_manual_approval', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('pictureManualApproval'), 'required' => 1]));
+        if (SysMod::isEnabled('picture')) {
+            $oForm->addElement(new \PFBC\Element\Select(t('Photos Manual Approval:'), 'picture_manual_approval', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('pictureManualApproval'), 'required' => 1]));
+        }
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Videos Manual Approval:'), 'video_manual_approval', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('videoManualApproval'), 'required' => 1]));
+        if (SysMod::isEnabled('video')) {
+            $oForm->addElement(new \PFBC\Element\Select(t('Videos Manual Approval:'), 'video_manual_approval', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('videoManualApproval'), 'required' => 1]));
+        }
 
         $oForm->addElement(new \PFBC\Element\Select(t('Webcam Pictures Manual Approval:'), 'webcam_picture_manual_approval', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('This approval mode is experimental, do not use it on production.'), 'value' => DbConfig::getSetting('webcamPictureManualApproval'), 'required' => 1]));
 
