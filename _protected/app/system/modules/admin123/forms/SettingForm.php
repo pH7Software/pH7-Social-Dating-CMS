@@ -36,6 +36,7 @@ class SettingForm
 
         $bIsAffiliateEnabled = SysMod::isEnabled('affiliate');
         $bIsMailEnabled = SysMod::isEnabled('mail');
+        $bIsNoteEnabled = SysMod::isEnabled('note');
 
         $oForm = new \PFBC\Form('form_setting');
         $oForm->configure(['action' => '']);
@@ -141,7 +142,9 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Background Profile Manual Approval:'), 'bg_profile_manual_approval', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('bgProfileManualApproval'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Note Post Manual Approval:'), 'note_manual_approval', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('noteManualApproval'), 'required' => 1]));
+        if ($bIsNoteEnabled) {
+            $oForm->addElement(new \PFBC\Element\Select(t('Note Post Manual Approval:'), 'note_manual_approval', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('noteManualApproval'), 'required' => 1]));
+        }
 
         $oForm->addElement(new \PFBC\Element\Select(t('Photos Manual Approval:'), 'picture_manual_approval', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('pictureManualApproval'), 'required' => 1]));
 
@@ -231,7 +234,9 @@ class SettingForm
             $oForm->addElement(new \PFBC\Element\Number(t('Registration delay for Affiliates:'), 'time_delay_aff_registration', ['description' => t('Number of minutes that has to pass before an affiliate with the same IP address can register again.'), 'value' => DbConfig::getSetting('timeDelayAffRegistration'), 'required' => 1]));
         }
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Send Note delay:'), 'time_delay_send_note', ['description' => t('Number of minutes for the same user to post a new note.'), 'value' => DbConfig::getSetting('timeDelaySendNote'), 'required' => 1]));
+        if ($bIsNoteEnabled) {
+            $oForm->addElement(new \PFBC\Element\Number(t('Send Note delay:'), 'time_delay_send_note', ['description' => t('Number of minutes for the same user to post a new note.'), 'value' => DbConfig::getSetting('timeDelaySendNote'), 'required' => 1]));
+        }
 
         if ($bIsMailEnabled) {
             $oForm->addElement(new \PFBC\Element\Number(t('Send Mail delay:'), 'time_delay_send_mail', ['description' => t('Number of minutes for the same user can send a new email.'), 'value' => DbConfig::getSetting('timeDelaySendMail'), 'required' => 1]));
@@ -264,7 +269,9 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Captcha for adding or reply a message in the Forum:'), 'is_captcha_forum', ['1' => t('Activate'), '0' => t('Deactivate')], ['value' => DbConfig::getSetting('isCaptchaForum'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Captcha for adding a User Post Note:'), 'is_captcha_note', ['1' => t('Activate'), '0' => t('Deactivate')], ['value' => DbConfig::getSetting('isCaptchaNote'), 'required' => 1]));
+        if ($bIsNoteEnabled) {
+            $oForm->addElement(new \PFBC\Element\Select(t('Captcha for adding a User Post Note:'), 'is_captcha_note', ['1' => t('Activate'), '0' => t('Deactivate')], ['value' => DbConfig::getSetting('isCaptchaNote'), 'required' => 1]));
+        }
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Pruning') . '</h3>'));
 
