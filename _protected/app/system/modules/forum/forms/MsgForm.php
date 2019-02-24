@@ -38,7 +38,16 @@ class MsgForm
         $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_msg', 'form_msg'));
         $oForm->addElement(new \PFBC\Element\Token('msg'));
-        $oForm->addElement(new \PFBC\Element\Select(t('Forum:'), 'forum', $aForumsName, ['value' => (new Http)->get('forum_id')]));
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('Forum:'),
+                'forum',
+                $aForumsName,
+                [
+                    'value' => (new Http)->get('forum_id')
+                ]
+            )
+        );
         $oForm->addElement(
             new \PFBC\Element\Textbox(
                 t('Subject:'),

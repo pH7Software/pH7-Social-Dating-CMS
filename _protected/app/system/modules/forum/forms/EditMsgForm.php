@@ -45,9 +45,32 @@ class EditMsgForm
         $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_msg', 'form_edit_msg'));
         $oForm->addElement(new \PFBC\Element\Token('edit_msg'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Subject:'), 'title', ['value' => $oMsg->title, 'id' => 'str_title', 'onblur' => 'CValid(this.value,this.id,2,60)', 'pattern' => $sTitlePattern, 'required' => 1, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern)]));
+        $oForm->addElement(
+            new \PFBC\Element\Textbox(
+                t('Subject:'),
+                'title',
+                [
+                    'value' => $oMsg->title,
+                    'id' => 'str_title',
+                    'onblur' => 'CValid(this.value,this.id,2,60)',
+                    'pattern' => $sTitlePattern,
+                    'required' => 1,
+                    'validation' => new \PFBC\Validation\RegExp($sTitlePattern)
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_title"></span>'));
-        $oForm->addElement(new \PFBC\Element\CKEditor(t('Message:'), 'message', ['value' => $oMsg->message, 'required' => 1, 'validation' => new \PFBC\Validation\Str(4)]));
+        $oForm->addElement(
+            new \PFBC\Element\CKEditor(
+                t('Message:'),
+                'message',
+                [
+                    'value' => $oMsg->message,
+                    'required' => 1,
+                    'validation' => new \PFBC\Validation\Str(4)
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
