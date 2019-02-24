@@ -35,6 +35,7 @@ class SettingForm
         }
 
         $bIsAffiliateEnabled = SysMod::isEnabled('affiliate');
+        $bIsMailEnabled = SysMod::isEnabled('mail');
 
         $oForm = new \PFBC\Form('form_setting');
         $oForm->configure(['action' => '']);
@@ -232,8 +233,9 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Number(t('Send Note delay:'), 'time_delay_send_note', ['description' => t('Number of minutes for the same user to post a new note.'), 'value' => DbConfig::getSetting('timeDelaySendNote'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Send Mail delay:'), 'time_delay_send_mail', ['description' => t('Number of minutes for the same user can send a new email.'), 'value' => DbConfig::getSetting('timeDelaySendMail'), 'required' => 1]));
-
+        if ($bIsMailEnabled) {
+            $oForm->addElement(new \PFBC\Element\Number(t('Send Mail delay:'), 'time_delay_send_mail', ['description' => t('Number of minutes for the same user can send a new email.'), 'value' => DbConfig::getSetting('timeDelaySendMail'), 'required' => 1]));
+        }
         $oForm->addElement(new \PFBC\Element\Number(t('Send Comment delay:'), 'time_delay_send_comment', ['description' => t('Number of minutes for the same user can send a new comment.'), 'value' => DbConfig::getSetting('timeDelaySendComment'), 'required' => 1]));
 
         if (SysMod::isEnabled('forum')) {
@@ -254,7 +256,9 @@ class SettingForm
             $oForm->addElement(new \PFBC\Element\Select(t('Captcha for Affiliate Signup Form:'), 'is_captcha_affiliate_signup', ['1' => t('Activate'), '0' => t('Deactivate')], ['value' => DbConfig::getSetting('isCaptchaAffiliateSignup'), 'required' => 1]));
         }
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Captcha for sending Messages between users:'), 'is_captcha_mail', ['1' => t('Activate'), '0' => t('Deactivate')], ['value' => DbConfig::getSetting('isCaptchaMail'), 'required' => 1]));
+        if ($bIsMailEnabled) {
+            $oForm->addElement(new \PFBC\Element\Select(t('Captcha for sending Messages between users:'), 'is_captcha_mail', ['1' => t('Activate'), '0' => t('Deactivate')], ['value' => DbConfig::getSetting('isCaptchaMail'), 'required' => 1]));
+        }
 
         $oForm->addElement(new \PFBC\Element\Select(t('Captcha for adding a Comment:'), 'is_captcha_comment', ['1' => t('Activate'), '0' => t('Deactivate')], ['value' => DbConfig::getSetting('isCaptchaComment'), 'required' => 1]));
 
