@@ -11,7 +11,9 @@
                         <a href="{% $design->url('report', 'admin', 'report', $report->reportId) %}">{lang 'View Report'}</a> |
                         {lang 'Reporter:'} {{ $avatarDesign->get($oUserModel->getUsername($report->reporterId), $oUserModel->getFirstName($report->reporterId) ,null, 32) }} |
                         {lang 'Spammer:'} {{ $avatarDesign->get($oUserModel->getUsername($report->spammerId), $oUserModel->getFirstName($report->spammerId) ,null, 32) }}
-                        <a class="btn btn-default btn-md" href="javascript:void(0)" onclick="report('delete', {% $report->reportId%},'{csrf_token}')">{lang 'Delete'}</a>
+                        <a class="btn btn-default btn-md" href="javascript:void(0)" onclick="report('delete', {% $report->reportId%},'{csrf_token}')">
+                            {lang 'Delete'}
+                        </a>
                     </li>
                 {/each}
             </ul>

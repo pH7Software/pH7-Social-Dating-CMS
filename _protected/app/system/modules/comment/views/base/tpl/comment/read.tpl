@@ -23,12 +23,20 @@
                             | <span class="post-edit">{lang 'Last Edited %0%', Framework\Date\Various::textTimeStamp($com->updatedDate)}</span>
                         {/if}
                     </p>
-                    <p class="center">{{ $design->like($com->username,$com->firstName,$com->sex,$absolute_url) }} | {{ $design->report($com->sender,$com->username,$com->firstName,$com->sex) }}</p>
+                    <p class="center">
+                        {{ $design->like($com->username,$com->firstName,$com->sex,$absolute_url) }} | {{ $design->report($com->sender,$com->username,$com->firstName,$com->sex) }}
+                    </p>
                 </div>
 
                 {if $is_user_auth && ($member_id == $com->sender || $member_id == $com->recipient)}
-                    <p><a class="s_bMarg button_medium" href="{{ $design->url('comment','comment','edit',"$table,$com->recipient,$com->sender,$com->commentId") }}">{lang 'Edit'}</a> |
-                    <a class="button_medium" href="javascript:void(0)" onclick="comment('delete',{% $com->commentId %},{% $com->recipient %},{% $com->sender %},'{table}','{csrf_token}')">{lang 'Delete'}</a></p>
+                    <p>
+                        <a class="s_bMarg button_medium" href="{{ $design->url('comment','comment','edit',"$table,$com->recipient,$com->sender,$com->commentId") }}">
+                            {lang 'Edit'}
+                        </a> |
+                        <a class="button_medium" href="javascript:void(0)" onclick="comment('delete',{% $com->commentId %},{% $com->recipient %},{% $com->sender %},'{table}','{csrf_token}')">
+                            {lang 'Delete'}
+                        </a>
+                    </p>
                 {/if}
             </div>
         {/each}

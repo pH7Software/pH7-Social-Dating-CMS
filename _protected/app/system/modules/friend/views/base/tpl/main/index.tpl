@@ -13,7 +13,9 @@
                     {if $sess_member_id == $f->friendId AND $f->pending == FriendCoreModel::PENDING_REQUEST}
                         <small>{lang 'Pending...'}</small> <a href="javascript:void(0)" onclick="friend('approval',{% $f->fdId %},'{csrf_token}')">{lang 'Approve'}</a>
                     {/if}
-                    <a href="javascript:void(0)" onclick="friend('delete',{% $f->fdId %},'{csrf_token}')">{lang 'Delete'}</a>
+                    <a href="javascript:void(0)" onclick="friend('delete',{% $f->fdId %},'{csrf_token}')">
+                        {lang 'Delete'}
+                    </a>
                 {/if}
             </div>
         {/each}
