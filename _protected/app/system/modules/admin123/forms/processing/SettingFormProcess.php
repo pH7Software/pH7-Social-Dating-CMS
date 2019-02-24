@@ -39,6 +39,7 @@ class SettingFormProcess extends Form
         'bg_splash_vid' => 'bgSplashVideo',
         'users_block' => 'usersBlock',
         'number_profile_splash_page' => 'numberProfileSplashPage',
+        'wysiwyg_editor_forum' => 'wysiwygEditorForum',
         'full_ajax_site' => 'fullAjaxSite',
         'site_status' => 'siteStatus',
         'social_media_widgets' => 'socialMediaWidgets',
