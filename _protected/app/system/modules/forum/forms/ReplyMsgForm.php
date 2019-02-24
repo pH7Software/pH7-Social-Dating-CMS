@@ -27,8 +27,10 @@ class ReplyMsgForm
         $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_reply', 'form_reply'));
         $oForm->addElement(new \PFBC\Element\Token('reply'));
+
+        $sEditorClass = FormHelper::getEditorPfbcClassName();
         $oForm->addElement(
-            new \PFBC\Element\CKEditor(
+            new $sEditorClass(
                 t('Message:'),
                 'message',
                 [
