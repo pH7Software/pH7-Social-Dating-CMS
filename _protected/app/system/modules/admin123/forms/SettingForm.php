@@ -102,12 +102,12 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="registration"><div class="col-md-10"><h2 class="underline">' . t('Registration') . '</h2>'));
 
         $aUserActivationTypes = [
-            '1' => t('No activation required'),
-            '2' => t('Self-activation via email'),
-            '3' => t('Manual activation by administrator')
+            RegistrationCore::NO_ACTIVATION => t('No activation required'),
+            RegistrationCore::EMAIL_ACTIVATION => t('Self-activation via email'),
+            RegistrationCore::MANUAL_ACTIVATION => t('Manual activation by administrator')
         ];
         if (SysMod::isEnabled('sms-verification')) {
-            $aUserActivationTypes['4'] = t('Self-activation via SMS');
+            $aUserActivationTypes[RegistrationCore::SMS_ACTIVATION] = t('Self-activation via SMS');
         }
 
         $oForm->addElement(
