@@ -16,7 +16,7 @@ use stdClass;
 class RememberMeCore
 {
     const CHECKBOX_FIELD_NAME = 'remember';
-    const STAY_LOGGED_IN_REQUESTED = 'stayedLoggedInRequested';
+    const STAY_LOGGED_IN_REQUESTED = 'stayed_logged_requested';
 
     /**
      * @param Session $oSession
