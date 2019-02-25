@@ -122,7 +122,7 @@ class LoginFormProcess extends Form implements LoginableForm
                 } else {
                     $oRememberMe = new RememberMeCore;
                     if ($oRememberMe->isEligible($this->session)) {
-                        $oRememberMe->enableSession($this->oUserModel);
+                        $oRememberMe->enableSession($oUserData);
                     }
                     unset($oRememberMe);
 
