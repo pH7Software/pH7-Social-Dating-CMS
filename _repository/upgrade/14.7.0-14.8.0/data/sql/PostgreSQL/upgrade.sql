@@ -4,7 +4,7 @@
 -- License:       GNU General Public License
 --
 
--- Add the ability to enable/disave Session IP Check
+-- Add the ability to enable/disable Session IP Check
 INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) VALUES
 ('isUserSessionIpCheck', 1, 'Enable it to Protect against session hijacking. Disable it if use dynamic IPs', 'security'),
 ('isAffiliateSessionIpCheck', 1, 'Enable it to Protect against session hijacking. Disable it if use dynamic IPs', 'security'),
