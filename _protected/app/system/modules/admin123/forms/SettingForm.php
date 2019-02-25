@@ -123,7 +123,21 @@ class SettingForm
         );
 
         if ($bIsAffiliateEnabled) {
-            $oForm->addElement(new \PFBC\Element\Select(t('Account activation type for Affiliates:'), 'aff_activation_type', ['1' => t('No activation required'), '2' => t('Self-activation via email'), '3' => t('Manual activation by administrator')], ['value' => DbConfig::getSetting('affActivationType'), 'required' => 1]));
+            $oForm->addElement(
+                new \PFBC\Element\Select(
+                    t('Account activation type for Affiliates:'),
+                    'aff_activation_type',
+                    [
+                        RegistrationCore::NO_ACTIVATION => t('No activation required'),
+                        RegistrationCore::EMAIL_ACTIVATION => t('Self-activation via email'),
+                        RegistrationCore::MANUAL_ACTIVATION => t('Manual activation by administrator')
+                    ],
+                    [
+                        'value' => DbConfig::getSetting('affActivationType'),
+                        'required' => 1
+                    ]
+                )
+            );
         }
 
         $oForm->addElement(new \PFBC\Element\Number(t('Minimum username length:'), 'min_username_length', ['value' => DbConfig::getSetting('minUsernameLength'), 'max' => DbConfig::getSetting('maxUsernameLength') - 1, 'required' => 1]));
