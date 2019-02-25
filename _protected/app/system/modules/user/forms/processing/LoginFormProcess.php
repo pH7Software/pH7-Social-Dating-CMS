@@ -124,7 +124,12 @@ class LoginFormProcess extends Form implements LoginableForm
                     }
                     unset($oRememberMe);
 
-                    $oUser->setAuth($oUserData, $this->oUserModel, $this->session, $oSecurityModel);
+                    $oUser->setAuth(
+                        $oUserData,
+                        $this->oUserModel,
+                        $this->session,
+                        $oSecurityModel
+                    );
 
                     Header::redirect(
                         $sUrlRelocateAfterLogin,
