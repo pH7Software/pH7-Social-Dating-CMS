@@ -100,8 +100,12 @@ class LoginFormProcess extends Form implements LoginableForm
 
             $oUser = new UserCore;
             if ($this->isSmsVerificationEligible($oUserData)) {
+                // Store the user ID before redirecting to sms-verification module
+                $this->session->set(SmsVerificationCore::PROFILE_ID_SESS_NAME, $iId);
+
                 $this->redirectToSmsVerification($iId);
             }
+
             if (true !== ($mStatus = $oUser->checkAccountStatus($oUserData))) {
                 \PFBC\Form::setError('form_login_user', $mStatus);
             } else {
@@ -114,14 +118,7 @@ class LoginFormProcess extends Form implements LoginableForm
                     // Store the user ID for 2FA
                     $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iId);
 
-                    Header::redirect(
-                        Uri::get(
-                            'two-factor-auth',
-                            'main',
-                            'verificationcode',
-                            'user'
-                        )
-                    );
+                    $this->redirectToTwoFactorAuth();
                 } else {
                     $oRememberMe = new RememberMeCore;
                     if ($oRememberMe->isEligible()) {
@@ -174,18 +171,22 @@ class LoginFormProcess extends Form implements LoginableForm
             SysMod::isEnabled('sms-verification');
     }
 
-    /**
-     * @param int $iId
-     *
-     * @return void
-     */
-    private function redirectToSmsVerification($iId)
+    private function redirectToSmsVerification()
     {
-        // Store the user ID/email before redirecting to sms-verification module
-        $this->session->set(SmsVerificationCore::PROFILE_ID_SESS_NAME, $iId);
-
         Header::redirect(
             Uri::get('sms-verification', 'main', 'send')
+        );
+    }
+
+    private function redirectToTwoFactorAuth()
+    {
+        Header::redirect(
+            Uri::get(
+                'two-factor-auth',
+                'main',
+                'verificationcode',
+                'user'
+            )
         );
     }
 }
