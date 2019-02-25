@@ -93,16 +93,9 @@ class LoginFormProcess extends Form implements LoginableForm
 
             $this->updatePwdHashIfNeeded($sPassword, $oUserData->password, $sEmail);
 
-            if ($this->httpRequest->postExists('remember')) {
-                // We hash again the password
-                (new Framework\Cookie\Cookie)->set(
-                    ['member_remember' => Security::hashCookie($oUserData->password), 'member_id' => $oUserData->profileId]
-                );
-            }
-
             $oUser = new UserCore;
             if ($oUserData->active == RegistrationCore::SMS_ACTIVATION) {
-                // Store the user ID/email before redirecting to sms-verifier module
+                // Store the user ID before redirecting to sms-verifier module
                 $this->session->set(SmsVerificationCore::PROFILE_ID_SESS_NAME, $iId);
 
                 Header::redirect(
@@ -126,6 +119,13 @@ class LoginFormProcess extends Form implements LoginableForm
                             )
                         );
                     } else {
+                        if ($this->httpRequest->postExists('remember')) {
+                            // We hash again the password
+                            (new Framework\Cookie\Cookie)->set(
+                                ['member_remember' => Security::hashCookie($oUserData->password), 'member_id' => $oUserData->profileId]
+                            );
+                        }
+
                         $oUser->setAuth($oUserData, $this->oUserModel, $this->session, $oSecurityModel);
 
                         Header::redirect(
