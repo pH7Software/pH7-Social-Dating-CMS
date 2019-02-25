@@ -42,6 +42,13 @@ class VerificationFormProcess extends Form
             $oUser->clearReadProfileCache($iProfileId);
 
             $oUserData = $oUserModel->readProfile($iProfileId);
+
+            $oRememberMe = new RememberMeCore;
+            if ($oRememberMe->isEligible($this->session)) {
+                $oRememberMe->enableSession($oUserData);
+            }
+            unset($oRememberMe);
+
             $oUser->setAuth(
                 $oUserData,
                 $oUserModel,
