@@ -42,7 +42,12 @@ class VerificationFormProcess extends Form
             $oUser->clearReadProfileCache($iProfileId);
 
             $oUserData = $oUserModel->readProfile($iProfileId);
-            $oUser->setAuth($oUserData, $oUserModel, $this->session, new SecurityModel);
+            $oUser->setAuth(
+                $oUserData,
+                $oUserModel,
+                $this->session,
+                new SecurityModel
+            );
             unset($oUserModel);
 
             Header::redirect(
