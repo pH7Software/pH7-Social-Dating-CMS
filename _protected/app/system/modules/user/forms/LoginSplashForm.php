@@ -31,7 +31,7 @@ class LoginSplashForm
         $oForm->addElement(new \PFBC\Element\Password('', 'password', ['placeholder' => t('Your Password'), 'style' => 'width:190px', 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\Button(t('Login'), 'submit', ['icon' => 'key']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="col-md-4 bt_login_remember">'));
-        $oForm->addElement(new \PFBC\Element\Checkbox('', 'remember', [1 => t('Stay signed in')]));
+        $oForm->addElement(new \PFBC\Element\Checkbox('', RememberMeCore::CHECKBOX_FIELD_NAME, [1 => t('Stay signed in')]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="col-md-4 bt_login_forgot">' . LostPwdDesignCore::link('user', false) . '</div>'));
         $oForm->render();

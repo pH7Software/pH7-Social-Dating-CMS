@@ -43,6 +43,15 @@ class VerificationCodeFormProcess extends Form
             $sCoreModelClassName = $sCoreClassName . 'Model';
             $sCoreModelClass = new $sCoreModelClassName;
             $oUserData = $sCoreModelClass->readProfile($iProfileId, Various::convertModToTable($sMod));
+
+            if ($sMod === 'user') {
+                $oRememberMe = new RememberMeCore;
+                if ($oRememberMe->isEligible()) {
+                    $oRememberMe->enableSession($oUserData);
+                }
+                unset($oRememberMe);
+            }
+
             (new $sCoreClassName)->setAuth($oUserData, $sCoreModelClass, $this->session, new Framework\Mvc\Model\Security);
 
             $sUrl = ($sMod === PH7_ADMIN_MOD) ? Uri::get(PH7_ADMIN_MOD, 'main', 'index') : Uri::get($sMod, 'account', 'index');

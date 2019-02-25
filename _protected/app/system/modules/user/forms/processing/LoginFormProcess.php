@@ -96,17 +96,14 @@ class LoginFormProcess extends Form implements LoginableForm
 
             $this->updatePwdHashIfNeeded($sPassword, $oUserData->password, $sEmail);
 
-            if ($this->httpRequest->postExists('remember')) {
-                // We hash again the password
-                (new Framework\Cookie\Cookie)->set(
-                    ['member_remember' => Security::hashCookie($oUserData->password), 'member_id' => $oUserData->profileId]
-                );
-            }
-
             $oUser = new UserCore;
             if (true !== ($mStatus = $oUser->checkAccountStatus($oUserData))) {
                 \PFBC\Form::setError('form_login_user', $mStatus);
             } else {
+                if ($this->httpRequest->postExists(RememberMeCore::CHECKBOX_FIELD_NAME)) {
+                    $this->session->set(RememberMeCore::STAY_LOGGED_IN_REQUESTED, 1);
+                }
+
                 $o2FactorModel = new TwoFactorAuthCoreModel('user');
                 if ($o2FactorModel->isEnabled($iId)) {
                     // Store the user ID for 2FA
@@ -121,6 +118,12 @@ class LoginFormProcess extends Form implements LoginableForm
                         )
                     );
                 } else {
+                    $oRememberMe = new RememberMeCore;
+                    if ($oRememberMe->isEligible()) {
+                        $oRememberMe->enableSession($this->oUserModel);
+                    }
+                    unset($oRememberMe);
+
                     $oUser->setAuth($oUserData, $this->oUserModel, $this->session, $oSecurityModel);
 
                     Header::redirect(
