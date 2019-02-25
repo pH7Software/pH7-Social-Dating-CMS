@@ -71,7 +71,7 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\Number(t('Number of Profiles on Splash Page:'), 'number_profile_splash_page', ['description' => t('The number of profile photos to display on the Splash Homepage. <br /><em>Available only if "Profiles on Guest Homepage" is enabled and if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('numberProfileSplashPage'), 'validation' => new \PFBC\Validation\Str(1, 2), 'required' => 1]));
 
         if ($bIsForumEnabled) {
-            $oForm->addElement(new \PFBC\Element\Select(t('WYSIWYG editor for Forum:'), 'wysiwyg_editor_forum', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('Enable the WYSIWYG editor (CKEditor) for the forum posts. If disabled, the simple textarea field will be used.'), 'value' => DbConfig::getSetting('wysiwygEditorForum'), 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\Select(t('WYSIWYG editor for Forum:'), 'wysiwyg_editor_forum', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('Enable WYSIWYG editor (CKEditor) for the forum posts. If disabled, the simple textarea field will be used.'), 'value' => DbConfig::getSetting('wysiwygEditorForum'), 'required' => 1]));
         }
 
         $oForm->addElement(new \PFBC\Element\Select(t('Social Media Widgets:'), 'social_media_widgets', [1 => t('Enable'), 0 => t('Disable')], ['description' => t('Enable the Social Media Sharing such as Like and Sharing buttons.'), 'value' => DbConfig::getSetting('socialMediaWidgets'), 'required' => 1]));
