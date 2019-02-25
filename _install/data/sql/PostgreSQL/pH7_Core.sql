@@ -1108,6 +1108,7 @@ INSERT INTO ph7_sys_mods_enabled (moduleTitle, folderName, premiumMod, enabled) 
 ('Game', 'game', '0', '1'),
 ('Newsletter', 'newsletter', '0', '1'),
 ('Invite Friends', 'invite', '0', '1'),
+('SMS Verification', 'sms-verification', '0', '0'),
 ('Social Media Auth (connect)', 'connect', '0', '0'),
 ('Webcam', 'webcam', '0', '0'),
 ('Progressive Web App (HTTPS required)', 'pwa', '0', '0');
@@ -1130,7 +1131,7 @@ ALTER SEQUENCE ph7_modules_seq RESTART WITH 1;
 
 INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of pH7CMS SQL schema (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.5.2', 1);
+('pH7CMS', 'SQL System Schema', '1.5.5', 1);
 
 
 CREATE SEQUENCE ph7_report_seq;
@@ -1202,7 +1203,7 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('minUsernameLength', 3, '', 'registration'),
 ('maxUsernameLength', 30, '', 'registration'),
 ('requireRegistrationAvatar', 0, '', 'registration'),
-('userActivationType', 1, '1 = no activation, 2 = email activation, 3 = Manual activation by the administrator', 'registration'),
+('userActivationType', 1, '1 = no activation, 2 = email activation, 3 = manual activation by admin, 4 = SMS activation', 'registration'),
 ('affActivationType', 1, '1 = no activation, 2 = email activation, 3 = Manual activation by the administrator', 'registration'),
 ('defaultMembershipGroupId', 2, 'Default Membership Group', 'registration'),
 ('minPasswordLength', 6, '', 'security'),
