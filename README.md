@@ -216,15 +216,15 @@ You can find and add other languages on the [I18N repo](https://github.com/pH7So
 Coded & Designed with lots of ❤️ by [Pierre-Henry Soria](http://ph7.me). A SUPER Passionate, Belgian Software Engineer 🍫🍺
 
 
+## 🤝 Hire Me At Your Company?
+
+Do you need a software engineer like me (and willing to relocate) at your company..? **[Let's chat together](https://www.linkedin.com/in/ph7enry/)**! 😊
+
+
 ## 💲 Offer Me A Cup of Tea? (...or tea bags...) 🍵
 
 [![Paypal](templates/system/modules/ph7cms-helper/themes/base/img/paypal-donate.en.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6)
 [![Patreon](templates/system/modules/ph7cms-helper/themes/base/img/support-patreon.en.png)](https://www.patreon.com/bePatron?u=3534366 "Become a Patron")
-
-
-## 🤝 Hire Me At Your Company?
-
-Do you need a software engineer like me (and willing to relocate) at your company..? **[Let's chat together](https://www.linkedin.com/in/ph7enry/)**! 😊
 
 
 ## ⚡ Official Website
