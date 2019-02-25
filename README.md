@@ -208,7 +208,7 @@ For more information, please refer to the nginx documentation.
 You can find and add other languages on the [I18N repo](https://github.com/pH7Software/pH7-Internationalization).
 
 
-## ✍ Author
+## 👨‍🍳 The Cooker
 
 [![Pierre-Henry Soria](https://avatars0.githubusercontent.com/u/1325411?s=200)](http://pierrehenry.be "My personal website :-)")
 
