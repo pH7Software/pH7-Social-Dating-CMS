@@ -8,7 +8,7 @@
 INSERT INTO ph7_sys_mods_enabled (moduleTitle, folderName, premiumMod, enabled) VALUES
 ('SMS Verification', 'sms-verification', '0', '0');
 
--- Allow to enable the WYSIWYG editor (CKEditor) for the forum posts
+-- Allow to enable WYSIWYG editor (CKEditor) for the forum posts
 INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) VALUES
 ('wysiwygEditorForum', 0, 'Enable or not the WYSIWYG. 0 = Disable | 1 = Enable', 'general');
 
