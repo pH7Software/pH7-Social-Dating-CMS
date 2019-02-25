@@ -98,7 +98,6 @@ class LoginFormProcess extends Form implements LoginableForm
 
             $this->updatePwdHashIfNeeded($sPassword, $oUserData->password, $sEmail);
 
-            $oUser = new UserCore;
             if ($this->isSmsVerificationEligible($oUserData)) {
                 // Store the user ID before redirecting to sms-verification module
                 $this->session->set(SmsVerificationCore::PROFILE_ID_SESS_NAME, $iId);
@@ -106,6 +105,7 @@ class LoginFormProcess extends Form implements LoginableForm
                 $this->redirectToSmsVerification($iId);
             }
 
+            $oUser = new UserCore;
             if (true !== ($mStatus = $oUser->checkAccountStatus($oUserData))) {
                 \PFBC\Form::setError('form_login_user', $mStatus);
             } else {
