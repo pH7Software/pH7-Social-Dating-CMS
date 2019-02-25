@@ -45,7 +45,7 @@ class VerificationCodeFormProcess extends Form
             $sCoreModelClass = new $sCoreModelClassName;
             $oUserData = $sCoreModelClass->readProfile($iProfileId, Various::convertModToTable($sMod));
 
-            if ($sMod === 'user') {
+            if ($sMod === 'user') { // RememberMe is only available for "user" module
                 $oRememberMe = new RememberMeCore;
                 if ($oRememberMe->isEligible($this->session)) {
                     $oRememberMe->enableSession($oUserData);
