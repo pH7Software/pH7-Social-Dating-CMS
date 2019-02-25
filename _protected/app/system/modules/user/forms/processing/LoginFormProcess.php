@@ -102,7 +102,7 @@ class LoginFormProcess extends Form implements LoginableForm
                 // Store the user ID before redirecting to sms-verification module
                 $this->session->set(SmsVerificationCore::PROFILE_ID_SESS_NAME, $iId);
 
-                $this->redirectToSmsVerification($iId);
+                $this->redirectToSmsVerification();
             }
 
             $oUser = new UserCore;
