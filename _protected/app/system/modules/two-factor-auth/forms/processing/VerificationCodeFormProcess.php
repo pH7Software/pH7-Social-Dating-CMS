@@ -12,6 +12,7 @@ defined('PH7') or die('Restricted access');
 
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
+use PH7\Framework\Mvc\Model\Security as SecurityModel;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 use RobThree\Auth\TwoFactorAuth as Authenticator;
@@ -56,7 +57,7 @@ class VerificationCodeFormProcess extends Form
                 $oUserData,
                 $sCoreModelClass,
                 $this->session,
-                new Framework\Mvc\Model\Security
+                new SecurityModel
             );
 
             $sUrl = ($sMod === PH7_ADMIN_MOD) ? Uri::get(PH7_ADMIN_MOD, 'main', 'index') : Uri::get($sMod, 'account', 'index');
