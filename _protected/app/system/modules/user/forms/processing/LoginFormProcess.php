@@ -121,7 +121,7 @@ class LoginFormProcess extends Form implements LoginableForm
                     $this->redirectToTwoFactorAuth();
                 } else {
                     $oRememberMe = new RememberMeCore;
-                    if ($oRememberMe->isEligible()) {
+                    if ($oRememberMe->isEligible($this->session)) {
                         $oRememberMe->enableSession($this->oUserModel);
                     }
                     unset($oRememberMe);

@@ -47,7 +47,7 @@ class VerificationCodeFormProcess extends Form
 
             if ($sMod === 'user') {
                 $oRememberMe = new RememberMeCore;
-                if ($oRememberMe->isEligible()) {
+                if ($oRememberMe->isEligible($this->session)) {
                     $oRememberMe->enableSession($oUserData);
                 }
                 unset($oRememberMe);
