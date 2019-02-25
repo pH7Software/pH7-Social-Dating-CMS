@@ -101,7 +101,26 @@ class SettingForm
         /********** Registration **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="registration"><div class="col-md-10"><h2 class="underline">' . t('Registration') . '</h2>'));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Account activation type for Members:'), 'user_activation_type', ['1' => t('No activation required'), '2' => t('Self-activation via email'), '3' => t('Manual activation by administrator')], ['value' => DbConfig::getSetting('userActivationType'), 'required' => 1]));
+        $aUserActivationTypes = [
+            '1' => t('No activation required'),
+            '2' => t('Self-activation via email'),
+            '3' => t('Manual activation by administrator')
+        ];
+        if (SysMod::isEnabled('sms-verification')) {
+            $aUserActivationTypes['4'] = t('Self-activation via SMS');
+        }
+
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('Account activation type for Members:'),
+                'user_activation_type',
+                $aUserActivationTypes,
+                [
+                    'value' => DbConfig::getSetting('userActivationType'),
+                    'required' => 1
+                ]
+            )
+        );
 
         if ($bIsAffiliateEnabled) {
             $oForm->addElement(new \PFBC\Element\Select(t('Account activation type for Affiliates:'), 'aff_activation_type', ['1' => t('No activation required'), '2' => t('Self-activation via email'), '3' => t('Manual activation by administrator')], ['value' => DbConfig::getSetting('affActivationType'), 'required' => 1]));

@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Cache\Cache;
+use PH7\Framework\Module\Various as SysMod;
 
 class Field
 {
@@ -85,7 +86,13 @@ class Field
      */
     public static function unmodifiable($sMod, $sField)
     {
-        $aFields = $sMod === 'aff' ? static::AFFILIATE_UNMODIFIABLE_FIELDS : static::MEMBER_UNMODIFIABLE_FIELDS;
+        $aMemberUnmodifiableFields = static::MEMBER_UNMODIFIABLE_FIELDS;
+
+        if (SysMod::isEnabled('sms-verification')) {
+            $aMemberUnmodifiableFields += 'phone';
+        }
+
+        $aFields = $sMod === 'aff' ? static::AFFILIATE_UNMODIFIABLE_FIELDS : $aMemberUnmodifiableFields;
 
         return in_array(strtolower($sField), $aFields, true);
     }
