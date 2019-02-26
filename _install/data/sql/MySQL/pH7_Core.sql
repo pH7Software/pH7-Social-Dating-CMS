@@ -133,7 +133,6 @@ CREATE TABLE IF NOT EXISTS ph7_members_info (
   phone varchar(100) DEFAULT NULL,
   website varchar(120) DEFAULT NULL,
   PRIMARY KEY (profileId),
-  KEY country (country),
   FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
@@ -160,8 +159,8 @@ CREATE TABLE IF NOT EXISTS ph7_members_notifications (
 -- GHOST User. Do not remove ghost default member!
 INSERT INTO ph7_members (profileId, email, username, password, firstName, lastName, birthDate, ip, lastActivity, featured, active, userStatus, groupId, joinDate) VALUES
 (1, 'ghost@ghost', 'ghost', @sPassword, 'Ghost', 'The Ghost', '1001-01-01', '00.000.00.00', @sCurrentDate, 0, 1, 1, 2, @sCurrentDate);
-INSERT INTO ph7_members_info (profileId, description, address, city, state, zipCode, country) VALUES
-(1, 'This profile doesn''t exist anymore. So I''m the ghost who replaces him/her during this time', 'The Ghost City', 'Ghost Town', 'Ghost State', '000000', 'US');
+INSERT INTO ph7_members_info (profileId, description, address, city, state, zipCode) VALUES
+(1, 'This profile doesn''t exist anymore. So I''m the ghost who replaces him/her during this time', 'The Ghost City', 'Ghost Town', 'Ghost State', '000000');
 -- Privacy settings
 INSERT INTO ph7_members_privacy (profileId, privacyProfile, searchProfile, userSaveViews) VALUES (1, 'all', 'yes', 'yes');
 -- Notifications
