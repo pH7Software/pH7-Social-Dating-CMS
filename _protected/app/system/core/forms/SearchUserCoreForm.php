@@ -10,7 +10,6 @@
 
 namespace PH7;
 
-use Couchbase\SearchQuery;
 use PH7\Framework\Geo\Ip\Geo;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
