@@ -19,7 +19,7 @@
 
         {* Profile's Fields *}
         {each $key => $val in $fields}
-            {if $key != 'description' AND $key != 'middleName' AND $key != 'punchline' AND !empty($val)}
+            {if $key != 'description' AND $key != 'middleName' AND !empty($val)}
                 {{ $val = escape($val, true) }}
 
                 {if $key == 'city'}
@@ -146,12 +146,6 @@
     </div>
 
     <div class="col-xs-12 col-sm-6 col-md-6">
-        {if !empty($punchline)}
-            <div class="profile-section">
-                <h1 class="cinnabar-red italic center">{punchline}</h1>
-            </div>
-        {/if}
-
         {if !empty($description)}
             <div class="profile-section">
                 <h2 class="center">{lang 'A Little About Me'}</h2>

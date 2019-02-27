@@ -52,11 +52,6 @@ class DynamicFieldCoreForm
                 $this->addCheckErrSpan('str');
                 break;
 
-            case 'punchline':
-                $this->oForm->addElement(new \PFBC\Element\Textbox(t('Punchline/Headline:'), 'punchline', ['id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,5,150)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(5, 150)]));
-                $this->addCheckErrSpan('str');
-                break;
-
             case 'country':
                 $this->oForm->addElement(new \PFBC\Element\Country(t('Country:'), $this->sColumn, ['id' => $this->getFieldId('str'), 'value' => $this->sVal, 'required' => 1]));
                 break;
