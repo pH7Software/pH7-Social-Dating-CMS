@@ -32,8 +32,8 @@ class SearchUserCoreForm
     private static $aOnlineOnly = [];
 
     /**
-     * @param integer $iWidth Width of the form in pixel. If null, will be 100%
-     * @param boolean $bSetDefVals Set default values in the form fields, or not...
+     * @param int $iWidth Width of the form in pixel. If null, will be 100%
+     * @param bool $bSetDefVals Set default values in the form fields, or not...
      *
      * @return void HTML output.
      */
@@ -83,8 +83,8 @@ class SearchUserCoreForm
     }
 
     /**
-     * @param integer $iWidth Width of the form in pixel. If null, will be 100%
-     * @param boolean $bSetDefVals Set default values in the form fields, or not...
+     * @param int $iWidth Width of the form in pixel. If null, will be 100%
+     * @param bool $bSetDefVals Set default values in the form fields, or not...
      *
      * @return void HTML output.
      */
