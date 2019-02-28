@@ -92,13 +92,13 @@ class DynamicFieldCoreForm
 
             case 'propertyBedrooms':
                 if ($sSex === 'seller' || $sSex === 'both') {
-                    $this->oForm->addElement(new \PFBC\Element\Number(t('Min Bedrooms:'), SearchQueryCore::BEDROOM, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
+                    $this->oForm->addElement(new \PFBC\Element\Number(t('Bedrooms:'), SearchQueryCore::BEDROOM, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
                 }
                 break;
 
             case 'propertyBathrooms':
                 if ($sSex === 'seller' || $sSex === 'both') {
-                    $this->oForm->addElement(new \PFBC\Element\Number(t('Min Bathrooms:'), SearchQueryCore::BATHROOM, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
+                    $this->oForm->addElement(new \PFBC\Element\Number(t('Bathrooms:'), SearchQueryCore::BATHROOM, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
                 }
                 break;
 
@@ -110,7 +110,7 @@ class DynamicFieldCoreForm
 
             case 'propertyYearBuilt':
                 if ($sSex === 'seller' || $sSex === 'both') {
-                    $this->oForm->addElement(new \PFBC\Element\Number(t('Min Year Built:'), SearchQueryCore::YEAR_BUILT, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
+                    $this->oForm->addElement(new \PFBC\Element\Number(t('Year Built:'), SearchQueryCore::YEAR_BUILT, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
                 }
                 break;
 
