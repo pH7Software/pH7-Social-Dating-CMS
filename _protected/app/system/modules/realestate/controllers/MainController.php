@@ -244,6 +244,8 @@ ALTER TABLE ph7_members_info ADD COLUMN contactTimes enum('morning', 'afternoon'
 ALTER TABLE ph7_members_info ADD COLUMN propertyYearBuilt int(9) DEFAULT NULL;
 ALTER TABLE ph7_members_info ADD COLUMN propertyHomeType enum('family', 'condo') DEFAULT NULL;
 ALTER TABLE ph7_members_info ADD COLUMN propertyHomeStyle enum('rambler', 'ranch', 'tri-multi-level', 'two-story', 'any') DEFAULT NULL;
+ALTER TABLE ph7_members_info ADD COLUMN propertySquareFeet int(9) unsigned DEFAULT 0;
+ALTER TABLE ph7_members_info ADD COLUMN propertyLotSize int(9) DEFAULT NULL;
 SQL;
 
         $sSqlContent = DbVarious::renameTablePrefix($sSqlContent);

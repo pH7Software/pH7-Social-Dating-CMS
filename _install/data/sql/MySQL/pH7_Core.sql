@@ -127,6 +127,8 @@ CREATE TABLE IF NOT EXISTS ph7_members_info (
   propertyYearBuilt int(9) DEFAULT NULL,
   propertyHomeType enum('family', 'condo') DEFAULT NULL,
   propertyHomeStyle enum('rambler', 'ranch', 'tri-multi-level', 'two-story', 'any') DEFAULT NULL,
+  propertySquareFeet int(9) unsigned DEFAULT 0,
+  propertyLotSize int(9) unsigned DEFAULT 0,
   contactTimes enum('morning', 'afternoon', 'evening') NOT NULL DEFAULT 'morning',
   state varchar(150) DEFAULT NULL,
   zipCode varchar(20) DEFAULT NULL,
