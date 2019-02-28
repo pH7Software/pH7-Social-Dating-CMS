@@ -151,6 +151,42 @@ class DynamicFieldCoreForm
                 }
                 break;
 
+            case 'propertySquareFeet':
+                if ($sSex === 'seller' || $sSex === 'both') {
+                    $this->oForm->addElement(
+                        new \PFBC\Element\Number(
+                            t('Square Feet:'),
+                            SearchQueryCore::HOME_SQUARE_FT,
+                            ['value' => $this->sVal]
+                        )
+                    );
+                }
+                break;
+
+            case 'propertyLotSize':
+                if ($sSex === 'seller' || $sSex === 'both') {
+                    $this->oForm->addElement(
+                        new \PFBC\Element\Number(
+                            t('Lot Size:'),
+                            SearchQueryCore::HOME_LOT_SIZE,
+                            ['value' => $this->sVal]
+                        )
+                    );
+                }
+                break;
+
+            case 'propertyGarageSpaces':
+                if ($sSex === 'seller' || $sSex === 'both') {
+                    $this->oForm->addElement(
+                        new \PFBC\Element\Number(
+                            t('Garage Spaces:'),
+                            SearchQueryCore::HOME_GARAGE_SPACE,
+                            ['value' => $this->sVal]
+                        )
+                    );
+                }
+                break;
+
             case 'phone':
                 $this->oForm->addElement(new \PFBC\Element\Phone(t('Phone Number:'), $this->sColumn, ['id' => $this->getFieldId('phone'), 'onblur' => 'CValid(this.value, this.id)', 'title' => t('Enter full number with area code.'), 'value' => $this->sVal]));
                 $this->addCheckErrSpan('phone');
