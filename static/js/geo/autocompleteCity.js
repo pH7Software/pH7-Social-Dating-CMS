@@ -39,8 +39,7 @@ function autocompleteCityInit(sGeonamesUsername) {
                                 if (oData.status.message) {
                                     console.error(oData.status.message); // Display the error message from the API into the browser's log
                                 }
-                            }
-                            else {
+                            } else {
                                 oResponse($.map(oData.geonames, function (oItem) {
                                     $('#str_city').mousemove(function () {
                                         $('#str_state').val((oItem.adminName1 ? oItem.adminName1 : ''));
