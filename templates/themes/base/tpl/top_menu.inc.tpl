@@ -2,7 +2,7 @@
     {{
       $admin_logged_as_user = UserCore::isAdminLoggedAs();
       $admin_logged_as_affiliate = AffiliateCore::isAdminLoggedAs()
-     }}
+    }}
 
 
     {* Creating Objects *}
