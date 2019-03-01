@@ -327,6 +327,9 @@ class UserCoreModel extends Model
         $bIsYearBuilt = !$bIsMail && !empty($aParams[SearchQueryCore::YEAR_BUILT]);
         $bIsHomeType = !$bIsMail && !empty($aParams[SearchQueryCore::HOME_TYPE]);
         $bIsHomeStyle = !$bIsMail && !empty($aParams[SearchQueryCore::HOME_STYLE]);
+        $bIsSquareFeet = !$bIsMail && !empty($aParams[SearchQueryCore::HOME_SQUARE_FT]);
+        $bIsLotSize = !$bIsMail && !empty($aParams[SearchQueryCore::HOME_LOT_SIZE]);
+        $bIsGarageSpaces = !$bIsMail && !empty($aParams[SearchQueryCore::HOME_GARAGE_SPACE]);
         $bIsCity = !$bIsMail && !empty($aParams[SearchQueryCore::CITY]) && Str::noSpaces($aParams[SearchQueryCore::CITY]);
         $bIsState = !$bIsMail && !empty($aParams[SearchQueryCore::STATE]) && Str::noSpaces($aParams[SearchQueryCore::STATE]);
         $bIsZipCode = !$bIsMail && !empty($aParams[SearchQueryCore::ZIP_CODE]) && Str::noSpaces($aParams[SearchQueryCore::ZIP_CODE]);
@@ -350,6 +353,9 @@ class UserCoreModel extends Model
         $sSqlYearBuilt = $bIsYearBuilt ? ' AND (propertyYearBuilt >= :yearBuilt) ' : '';
         $sSqlHomeType = $bIsHomeType ? ' AND (propertyHomeType >= :homeType) ' : '';
         $sSqlHomeStyle = $bIsHomeStyle ? ' AND (propertyHomeStyle >= :homeStyle) ' : '';
+        $sSqlSquareFeet = $bIsSquareFeet ? ' AND (propertySquareFeet >= :squareFeet) ' : '';
+        $sSqlLotSize = $bIsLotSize ? ' AND (propertyLotSize >= :lotSize) ' : '';
+        $sSqlGarageSpaces = $bIsGarageSpaces ? ' AND (propertyGarageSpaces >= :garageSpaces) ' : '';
         $sSqlCity = $bIsCity ? ' AND LOWER(city) LIKE LOWER(:city) ' : '';
         $sSqlState = $bIsState ? ' AND LOWER(state) LIKE LOWER(:state) ' : '';
         $sSqlZipCode = $bIsZipCode ? ' AND zipCode LIKE :zipCode ' : '';
@@ -379,7 +385,9 @@ class UserCoreModel extends Model
             'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER) . 'AS m LEFT JOIN' . Db::prefix(DbTableName::MEMBER_PRIVACY) . 'AS p USING(profileId)
             LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) . 'AS i USING(profileId) WHERE username <> :ghostUsername AND searchProfile = \'yes\'
             AND (groupId <> :visitorGroup) AND (groupId <> :pendingGroup) AND (ban = 0)' . $sSqlHideLoggedProfile . $sSqlFirstName . $sSqlMiddleName . $sSqlLastName . $sSqlMatchSex . $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCity . $sSqlState .
-            $sSqlZipCode . $sSqlPrice . $sSqlBedroom . $sSqlBathroom . $sSqlSize . $sSqlYearBuilt . $sSqlHomeType . $sSqlHomeStyle . $sSqlEmail . $sSqlOnline . $sSqlAvatar . $sSqlOrder . $sSqlLimit
+            $sSqlZipCode . $sSqlPrice . $sSqlBedroom . $sSqlBathroom . $sSqlSize . $sSqlYearBuilt .
+            $sSqlHomeType . $sSqlHomeStyle . $sSqlSquareFeet . $sSqlLotSize . $sSqlGarageSpaces . $sSqlEmail .
+            $sSqlOnline . $sSqlAvatar . $sSqlOrder . $sSqlLimit
         );
 
         $rStmt->bindValue(':ghostUsername', PH7_GHOST_USERNAME, \PDO::PARAM_STR);
@@ -428,6 +436,15 @@ class UserCoreModel extends Model
         }
         if ($bIsHomeStyle) {
             $rStmt->bindValue(':homeStyle', $aParams[SearchQueryCore::HOME_STYLE]);
+        }
+        if ($bIsSquareFeet) {
+            $rStmt->bindValue(':squareFeet', $aParams[SearchQueryCore::HOME_SQUARE_FT]);
+        }
+        if ($bIsLotSize) {
+            $rStmt->bindValue(':lotSize', $aParams[SearchQueryCore::HOME_LOT_SIZE]);
+        }
+        if ($bIsGarageSpaces) {
+            $rStmt->bindValue(':garageSpaces', $aParams[SearchQueryCore::HOME_GARAGE_SPACE]);
         }
         if ($bIsCity) {
             $rStmt->bindValue(':city', '%' . str_replace('-', ' ', $aParams[SearchQueryCore::CITY]) . '%', \PDO::PARAM_STR);
