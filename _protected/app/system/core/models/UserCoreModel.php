@@ -760,15 +760,31 @@ class UserCoreModel extends Model
      */
     public function setInfoFields(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER_INFO) . '(profileId, middleName, city, state, address, zipCode, description, website)
-            VALUES (:profileId, :middleName, :city, :state, :address, :zipCode, :description, :website)');
+        $sSql = 'INSERT INTO' . Db::prefix(DbTableName::MEMBER_INFO) .
+            '(profileId, middleName, description, address, city, state, zipCode, propertyPrice, propertySize, propertyBedrooms, propertyBathrooms, propertyYearBuilt, propertyHomeType, propertyHomeStyle, propertySquareFeet, propertyLotSize, propertyGarageSpaces, propertyCarportSpaces, contactTimes, phone, website)
+            VALUES (:profileId, :middleName, :description, :address, :city, :state, :zipCode, :propertyPrice, :propertySize, :propertyBedrooms, :propertyBathrooms, :propertyYearBuilt, :propertyHomeType, :propertyHomeStyle, :propertySquareFeet, :propertyLotSize, :propertyGarageSpaces, :propertyCarportSpaces, :contactTimes, :phone, :website)';
+
+        $rStmt = Db::getInstance()->prepare($sSql);
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
         $rStmt->bindValue(':middleName', (!empty($aData['middle_name']) ? $aData['middle_name'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':description', (!empty($aData['description']) ? $aData['description'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':address', (!empty($aData['address']) ? $aData['address'] : ''), \PDO::PARAM_STR);
         $rStmt->bindValue(':city', (!empty($aData['city']) ? $aData['city'] : ''), \PDO::PARAM_STR);
         $rStmt->bindValue(':state', (!empty($aData['state']) ? $aData['state'] : ''), \PDO::PARAM_STR);
-        $rStmt->bindValue(':address', (!empty($aData['address']) ? $aData['address'] : ''), \PDO::PARAM_STR);
         $rStmt->bindValue(':zipCode', (!empty($aData['zip_code']) ? $aData['zip_code'] : ''), \PDO::PARAM_STR);
-        $rStmt->bindValue(':description', (!empty($aData['description']) ? $aData['description'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':propertyPrice', (!empty($aData['property_price']) ? $aData['property_price'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':propertySize', (!empty($aData['property_size']) ? $aData['property_size'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':propertyBedrooms', (!empty($aData['property_bedrooms']) ? $aData['property_bedrooms'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':propertyBathrooms', (!empty($aData['property_bathrooms']) ? $aData['property_bathrooms'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':propertyYearBuilt', (!empty($aData['property_year_built']) ? $aData['property_year_built'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':propertyHomeType', (!empty($aData['property_home_type']) ? $aData['property_home_type'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':propertyHomeStyle', (!empty($aData['property_home_style']) ? $aData['property_home_style'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':propertySquareFeet', (!empty($aData['property_square_feet']) ? $aData['property_square_feet'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':propertyLotSize', (!empty($aData['property_lot_size']) ? $aData['property_lot_size'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':propertyGarageSpaces', (!empty($aData['property_garage_spaces']) ? $aData['property_garage_spaces'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':propertyCarportSpaces', (!empty($aData['property_carport_spaces']) ? $aData['property_carport_spaces'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':contactTimes', (!empty($aData['contact_times']) ? $aData['contact_times'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':phone', (!empty($aData['phone']) ? $aData['phone'] : ''), \PDO::PARAM_STR);
         $rStmt->bindValue(':website', (!empty($aData['website']) ? trim($aData['website']) : ''), \PDO::PARAM_STR);
 
         return $rStmt->execute();
