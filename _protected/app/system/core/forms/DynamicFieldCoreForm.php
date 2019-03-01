@@ -187,6 +187,18 @@ class DynamicFieldCoreForm
                 }
                 break;
 
+            case 'propertyCarportSpaces':
+                if ($sSex === 'seller' || $sSex === 'both') {
+                    $this->oForm->addElement(
+                        new \PFBC\Element\Number(
+                            t('Carport Spaces:'),
+                            SearchQueryCore::HOME_CARPORT_SPACE,
+                            ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]
+                        )
+                    );
+                }
+                break;
+
             case 'phone':
                 $this->oForm->addElement(new \PFBC\Element\Phone(t('Phone Number:'), $this->sColumn, ['id' => $this->getFieldId('phone'), 'onblur' => 'CValid(this.value, this.id)', 'title' => t('Enter full number with area code.'), 'value' => $this->sVal]));
                 $this->addCheckErrSpan('phone');
