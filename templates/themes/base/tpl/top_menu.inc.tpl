@@ -187,7 +187,7 @@
                 <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('picture','main','index') }}" title="{lang 'Photo Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-picture-o"></i> {lang 'Photo Gallery'}</a>
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="{{ $design->url('picture','main','addalbum') }}" title="{lang 'Add an Album'}">{lang 'Add an Album'}</a></li>
-                    <li><a href="{{ $design->url('picture','main','albums', $username) }}" title="{lang 'My Albums'}" data-load="ajax">{lang 'My Albums'}</a></li>
+                    <li><a href="{{ $design->url('picture','main','albums',$username) }}" title="{lang 'My Albums'}" data-load="ajax">{lang 'My Albums'}</a></li>
                   </ul>
                 </li>
               {/if}
@@ -196,7 +196,7 @@
                 <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('video','main','index') }}" title="{lang 'Videos Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-youtube-play"></i> {lang 'Videos Gallery'}</a>
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="{{ $design->url('video','main','addalbum') }}" title="{lang 'Add an Album'}">{lang 'Add an Album'}</a></li>
-                    <li><a href="{{ $design->url('video','main','albums', $username) }}" title="{lang 'My Albums'}" data-load="ajax">{lang 'My Albums'}</a></li>
+                    <li><a href="{{ $design->url('video','main','albums',$username) }}" title="{lang 'My Albums'}" data-load="ajax">{lang 'My Albums'}</a></li>
                   </ul>
                 </li>
               {/if}
@@ -205,7 +205,7 @@
                 <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('note','main','index') }}" title="{lang 'Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-newspaper-o"></i> {lang 'Note'}</a>
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="{{ $design->url('note','main','add') }}" title="{lang 'Add a Note'}">{lang 'Add a Note'}</a></li>
-                    <li><a href="{{ $design->url('note','main','author', $username) }}" title="{lang 'My Notes'}">{lang 'My Notes'}</a></li>
+                    <li><a href="{{ $design->url('note','main','author',$username) }}" title="{lang 'My Notes'}">{lang 'My Notes'}</a></li>
                   </ul>
                 </li>
               {/if}
@@ -214,7 +214,7 @@
                   <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('friend','main','index') }}" title="{lang 'Friends Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-users"></i> {lang 'Friends Manager'} {if $count_pen_friend_request}<span class="badge">{count_pen_friend_request}</span>{/if}</a>
                   <ul class="dropdown-menu" role="menu">
                       <li><a href="{{ $design->url('friend','main','index') }}" title="{lang 'Friends List'}">{lang 'Friends List'}</a></li>
-                    <li><a href="{{ $design->url('friend','main','search', $username) }}" title="{lang 'Find a friend in my list'}">{lang 'Find a Friend'}</a></li>
+                    <li><a href="{{ $design->url('friend','main','search',$username) }}" title="{lang 'Find a friend in my list'}">{lang 'Find a Friend'}</a></li>
                   </ul>
                 </li>
               {/if}
