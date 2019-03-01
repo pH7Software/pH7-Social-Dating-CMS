@@ -71,21 +71,6 @@
                             {val}
                         </span>
                     </p>
-                {elseif $key == 'contactTimes'}
-                    <p>
-                        <span class="bold">{lang 'Best Time to Contact:'}</span>
-                        <span class="italic">
-                            {if $val === 'morning'}
-                                {lang 'Morning (8.30am - 1pm)'}
-                            {elseif $val === 'afternoon'}
-                                {lang 'Afternoon (1pm - 5.30pm)'}
-                            {elseif $val === 'evening'}
-                                {lang 'Evening (5.30pm - 9pm)'}
-                            {else}
-                                {lang 'At anytime'}
-                            {/if}
-                        </span>
-                    </p>
                 {elseif $key == 'propertyHomeType' AND !empty($val) AND ($sex === 'seller' || $sex === 'both')}
                     <p>
                         <span class="bold">{lang 'Home Type:'}</span>
@@ -115,6 +100,54 @@
                                 {lang 'Any'}
                             {else}
                                 {val}
+                            {/if}
+                        </span>
+                    </p>
+                {elseif $key == 'propertyYearBuilt' AND !empty($val) AND ($sex === 'seller' || $sex === 'both')}
+                    <p>
+                        <span class="bold">{lang 'Year Built:'}</span>
+                        <span class="italic">{val}</span>
+                    </p>
+                {elseif $key == 'propertySquareFeet' AND ($sex === 'seller' || $sex === 'both')}
+                    <p>
+                        <span class="bold">{lang 'Square Ft:'}</span>
+                        <span class="italic">
+                            {val}
+                        </span>
+                    </p>
+                {elseif $key == 'propertyLotSize' AND ($sex === 'seller' || $sex === 'both')}
+                    <p>
+                        <span class="bold">{lang 'Lot Size:'}</span>
+                        <span class="italic">
+                            {val}
+                        </span>
+                    </p>
+                {elseif $key == 'propertyGarageSpaces' AND ($sex === 'seller' || $sex === 'both')}
+                    <p>
+                        <span class="bold">{lang 'Garage Spaces:'}</span>
+                        <span class="italic">
+                            {val}
+                        </span>
+                    </p>
+                {elseif $key == 'propertyCarportSpaces' AND ($sex === 'seller' || $sex === 'both')}
+                    <p>
+                        <span class="bold">{lang 'Carport Spaces:'}</span>
+                        <span class="italic">
+                            {val}
+                        </span>
+                    </p>
+                {elseif $key == 'contactTimes'}
+                    <p>
+                        <span class="bold">{lang 'Best Time to Contact:'}</span>
+                        <span class="italic">
+                            {if $val === 'morning'}
+                                {lang 'Morning (8.30am - 1pm)'}
+                            {elseif $val === 'afternoon'}
+                                {lang 'Afternoon (1pm - 5.30pm)'}
+                            {elseif $val === 'evening'}
+                                {lang 'Evening (5.30pm - 9pm)'}
+                            {else}
+                                {lang 'At anytime'}
                             {/if}
                         </span>
                     </p>
