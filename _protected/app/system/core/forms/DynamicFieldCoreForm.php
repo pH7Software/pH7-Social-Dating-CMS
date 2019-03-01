@@ -157,7 +157,7 @@ class DynamicFieldCoreForm
                         new \PFBC\Element\Number(
                             t('Square Feet:'),
                             SearchQueryCore::HOME_SQUARE_FT,
-                            ['value' => $this->sVal]
+                            ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]
                         )
                     );
                 }
@@ -169,7 +169,7 @@ class DynamicFieldCoreForm
                         new \PFBC\Element\Number(
                             t('Lot Size:'),
                             SearchQueryCore::HOME_LOT_SIZE,
-                            ['value' => $this->sVal]
+                            ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]
                         )
                     );
                 }
@@ -181,7 +181,7 @@ class DynamicFieldCoreForm
                         new \PFBC\Element\Number(
                             t('Garage Spaces:'),
                             SearchQueryCore::HOME_GARAGE_SPACE,
-                            ['value' => $this->sVal]
+                            ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]
                         )
                     );
                 }
