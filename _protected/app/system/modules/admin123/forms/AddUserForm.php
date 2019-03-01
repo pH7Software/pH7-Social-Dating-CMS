@@ -11,7 +11,6 @@
 namespace PH7;
 
 use PFBC\Validation\CEmail;
-use PH7\Framework\Geo\Ip\Geo;
 use PH7\Framework\Url\Header;
 
 class AddUserForm
@@ -50,11 +49,22 @@ class AddUserForm
         );
         $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', ['title' => t('Please specify the date of birth using the calendar.'), 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1]));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', ['id' => 'str_city', 'validation' => new \PFBC\Validation\Str(2, 150), 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('State/Province:'), 'state', ['id' => 'str_state', 'validation' => new \PFBC\Validation\Str(2, 150)]));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Stat:'), 'state', ['id' => 'str_state', 'validation' => new \PFBC\Validation\Str(2, 150)]));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Postal Code:'), 'zip_code', ['id' => 'str_zip_code', 'validation' => new \PFBC\Validation\Str(2, 15)]));
         $oForm->addElement(new \PFBC\Element\CKEditor(t('Description:'), 'description', ['validation' => new \PFBC\Validation\Str(10, 2000), 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Phone(t('Phone:'), 'phone'));
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('Best time to be contacted:'),
+                'contact_times',
+                [
+                    'morning' => t('Morning (8.30am - 1pm)'),
+                    'afternoon' => t('Afternoon (1pm - 5.30pm)'),
+                    'evening' => t('Evening (5.30pm - 9pm)')
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\File(t('Profile Photo:'), 'avatar', ['accept' => 'image/*']));
-        $oForm->addElement(new \PFBC\Element\Url(t('Personal Website:'), 'website'));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
