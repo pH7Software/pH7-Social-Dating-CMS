@@ -17,7 +17,7 @@ function autocompleteCityInit(sGeonamesUsername) {
     // Set "country" API parameter
     var sUrlSlug = '';
     $('#str_city').click(function () {
-        sUrlSlug = '&country=' + $('#str_country').val();
+        sUrlSlug = '&country=US';
     });
 
     $('#str_city').autocomplete(
