@@ -92,21 +92,19 @@
           </li>
         {/if}
 
-        {if $is_picture_enabled}
+        {*
+        {if $is_picture_enabled AND ($sex === 'seller' || $sex === 'both')}
           <li class="dropdown"><a href="{{ $design->url('picture','main','index') }}" title="{lang 'Photo Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-picture-o"></i> {lang 'Photo'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="{{ $design->url('picture','main','index') }}" rel="nofollow" title="{lang 'Photo Gallery'}" data-load="ajax"><i class="fa fa-picture-o"></i> {lang 'Photos'}</a></li>
-
-              {if $is_hotornot_enabled}
-                <li><a href="{{ $design->url('hotornot','main','rating') }}" title="{lang 'Hot Or Not'}" data-load="ajax"><i class="fa fa-star-half-o"></i> {lang 'Hot Or Not'}</a></li>
-              {/if}
-
               <li><a href="{{ $design->url('picture','main','search') }}" title="{lang 'Search Photos'}" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search'}</a></li>
             </ul>
           </li>
         {/if}
+        *}
 
-        {if $is_video_enabled}
+        {*
+        {if $is_video_enabled AND ($sex === 'seller' || $sex === 'both')}
           <li class="dropdown"><a href="{{ $design->url('video','main','index') }}" title="{lang 'Video Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-youtube-play"></i> {lang 'Video'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="{{ $design->url('video','main','index') }}" rel="nofollow" title="{lang 'Video Gallery'}" data-load="ajax"><i class="fa fa-youtube-play"></i> {lang 'Videos'}</a></li>
@@ -114,6 +112,7 @@
             </ul>
           </li>
         {/if}
+        *}
 
         {if $is_game_enabled}
           <li class="dropdown"><a href="{{ $design->url('game','main','index') }}" title="{lang 'Games Zone'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-gamepad"></i> {lang 'Game'} <span class="caret"></span></a>
@@ -400,10 +399,6 @@
                   <li><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Note Posts'}">{lang 'All Notes'}</a></li>
                 </ul>
               </li>
-            {/if}
-
-            {if $is_webcam_enabled}
-              <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picturewebcam') }}" title="{lang 'Moderate the Webcam Pictures'}"><i class="fa fa-camera"></i> {lang 'Webcam Pictures'}</a></li>
             {/if}
           </ul>
         </li>
