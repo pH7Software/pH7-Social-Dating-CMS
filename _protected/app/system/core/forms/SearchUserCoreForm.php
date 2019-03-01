@@ -125,7 +125,7 @@ class SearchUserCoreForm
         $oForm->addElement(new \PFBC\Element\Age(self::$aAgeOption));
         $oForm->addElement(new \PFBC\Element\Select(t('Country:'), 'country', Form::getCountryValues(), self::$aCountryOption));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', self::$aCityOption));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('State/Province:'), 'state', self::$aStateOption));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('State:'), 'state', self::$aStateOption));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Postal Code:'), 'zip_code', ['id' => 'str_zip_code']));
         $oForm->addElement(new \PFBC\Element\Email(t('Email Address:'), 'mail'));
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'avatar', ['1' => '<span class="bold">' . t('Only with Avatar') . '</span>']));

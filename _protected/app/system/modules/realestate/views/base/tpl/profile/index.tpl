@@ -221,7 +221,7 @@
                     </p>
                 {elseif $key == 'state'}
                     <p>
-                        <span class="bold">{lang 'State/Province:'}</span>
+                        <span class="bold">{lang 'State:'}</span>
                         <span class="italic">
                             <a href="{{ $design->url('realestate','browse','index', '?country='.$country_code.'&state='.$state) }}">
                                 {state}

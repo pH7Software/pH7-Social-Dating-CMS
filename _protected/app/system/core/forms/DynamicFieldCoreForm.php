@@ -62,7 +62,7 @@ class DynamicFieldCoreForm
                 break;
 
             case 'state':
-                $this->oForm->addElement(new \PFBC\Element\Textbox(t('State/Province:'), $this->sColumn, ['id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,2,150)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(2, 150)]));
+                $this->oForm->addElement(new \PFBC\Element\Textbox(t('State:'), $this->sColumn, ['id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,2,150)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(2, 150)]));
                 $this->addCheckErrSpan('str');
                 break;
 
