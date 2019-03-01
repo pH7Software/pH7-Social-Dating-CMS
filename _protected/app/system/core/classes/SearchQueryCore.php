@@ -37,6 +37,7 @@ final class SearchQueryCore
     const HOME_LOT_SIZE = 'propertyLotSize';
     const HOME_GARAGE_SPACE = 'propertyGarageSpaces';
     const HOME_CARPORT_SPACE = 'propertyCarportSpaces';
+    const FROM_DATE = 'fromDate';
     const FIRST_NAME = 'first_name';
     const LAST_NAME = 'last_name';
     const MIDDLE_NAME = 'middle_name';

@@ -337,6 +337,7 @@ class UserCoreModel extends Model
         $bIsSex = !$bIsMail && !empty($aParams[SearchQueryCore::SEX]) && is_array($aParams[SearchQueryCore::SEX]);
         $bIsMatchSex = !$bIsMail && !empty($aParams[SearchQueryCore::MATCH_SEX]);
         $bIsOnline = !$bIsMail && !empty($aParams[SearchQueryCore::ONLINE]);
+        $bIsFromDate = !$bIsMail && !empty($aParams[SearchQueryCore::FROM_DATE]);
         $bIsAvatar = !$bIsMail && !empty($aParams[SearchQueryCore::AVATAR]);
         $bHideUserLogged = !$bIsMail && !empty($this->iProfileId);
 
@@ -363,6 +364,7 @@ class UserCoreModel extends Model
         $sSqlZipCode = $bIsZipCode ? ' AND zipCode LIKE :zipCode ' : '';
         $sSqlEmail = $bIsMail ? ' AND email LIKE :email ' : '';
         $sSqlOnline = $bIsOnline ? ' AND userStatus = :userStatus AND lastActivity > DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL ' . DbConfig::getSetting('userTimeout') . ' MINUTE) ' : '';
+        $sSqlFromDate = $bIsFromDate ? ' AND joinDate >= :fromDate ' : '';
         $sSqlAvatar = $bIsAvatar ? $this->getUserWithAvatarOnlySql() : '';
         $sSqlHideLoggedProfile = $bHideUserLogged ? ' AND (m.profileId <> :profileId)' : '';
 
@@ -389,7 +391,7 @@ class UserCoreModel extends Model
             AND (groupId <> :visitorGroup) AND (groupId <> :pendingGroup) AND (ban = 0)' . $sSqlHideLoggedProfile . $sSqlFirstName . $sSqlMiddleName . $sSqlLastName . $sSqlMatchSex . $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCity . $sSqlState .
             $sSqlZipCode . $sSqlPrice . $sSqlBedroom . $sSqlBathroom . $sSqlSize . $sSqlYearBuilt .
             $sSqlHomeType . $sSqlHomeStyle . $sSqlSquareFeet . $sSqlLotSize . $sSqlGarageSpaces . $sSqlCarportSpaces .
-            $sSqlEmail . $sSqlOnline . $sSqlAvatar . $sSqlOrder . $sSqlLimit
+            $sSqlEmail . $sSqlOnline . $sSqlFromDate . $sSqlAvatar . $sSqlOrder . $sSqlLimit
         );
 
         $rStmt->bindValue(':ghostUsername', PH7_GHOST_USERNAME, \PDO::PARAM_STR);
@@ -465,6 +467,9 @@ class UserCoreModel extends Model
         }
         if ($bIsOnline) {
             $rStmt->bindValue(':userStatus', self::ONLINE_STATUS, \PDO::PARAM_INT);
+        }
+        if ($bIsFromDate) {
+            $rStmt->bindValue(':fromDate', $aParams[SearchQueryCore::HOME_STYLE]);
         }
         if ($bHideUserLogged) {
             $rStmt->bindValue(':profileId', $this->iProfileId, \PDO::PARAM_INT);
