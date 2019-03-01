@@ -1,6 +1,8 @@
 <ol id="toc">
     <li><a href="#edit"><span>{lang 'Edit'}</span></a></li>
-    <li><a href="#avatar"><span>{lang 'Profile Photo'}</span></a></li>
+    {if $sex === 'seller' || $sex === 'both'}
+      <li><a href="#avatar"><span>{lang 'Profile Photo'}</span></a></li>
+    {/if}
     <li><a href="#notification"><span>{lang 'Email Notification'}</span></a></li>
     <li><a href="#privacy"><span>{lang 'Privacy'}</span></a></li>
     <li><a href="{{ $design->url('payment','main','info') }}"><span>{lang 'Membership Details'}</span></a></li>
