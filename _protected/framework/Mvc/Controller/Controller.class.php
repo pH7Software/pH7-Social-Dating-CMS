@@ -227,8 +227,8 @@ abstract class Controller extends Core implements Controllable
             'meta_category' => $oInfo->metaCategory,
             'header' => 0 // Default value of header contents
         ];
-
         $this->view->assigns($aMetaVars);
+
         unset($oInfo, $aMetaVars);
     }
 
@@ -258,8 +258,8 @@ abstract class Controller extends Core implements Controllable
             'is_webcam_enabled' => SysMod::isEnabled('webcam'),
             'is_pwa_enabled' => SysMod::isEnabled('pwa')
         ];
-
         $this->view->assigns($aModsEnabled);
+
         unset($aModsEnabled);
     }
 
@@ -269,8 +269,8 @@ abstract class Controller extends Core implements Controllable
             'count_unread_mail' => MailCoreModel::countUnreadMsg($this->session->get('member_id')),
             'count_pen_friend_request' => FriendCoreModel::getPending($this->session->get('member_id'))
         ];
-
         $this->view->assigns($aNotificationCounter);
+
         unset($aNotificationCounter);
     }
 
