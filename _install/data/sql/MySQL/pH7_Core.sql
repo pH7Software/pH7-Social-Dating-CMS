@@ -126,7 +126,7 @@ CREATE TABLE IF NOT EXISTS ph7_members_info (
   propertyBathrooms int(3) DEFAULT NULL,
   propertyYearBuilt int(9) DEFAULT NULL,
   propertyHomeType enum('family', 'condo') DEFAULT NULL,
-  propertyHomeStyle enum('rambler', 'ranch', 'tri-multi-level', 'two-story', 'any') DEFAULT NULL,
+  propertyHomeStyle enum('rambler', 'ranch', 'tri-multi-level', 'two-story', 'any') NOT NULL DEFAULT 'any',
   propertySquareFeet int(9) unsigned DEFAULT 0,
   propertyLotSize int(9) unsigned DEFAULT 0,
   propertyGarageSpaces tinyint(3) unsigned DEFAULT 0,

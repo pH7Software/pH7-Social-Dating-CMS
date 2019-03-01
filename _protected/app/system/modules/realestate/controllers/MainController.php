@@ -243,7 +243,7 @@ class MainController extends Controller
 ALTER TABLE ph7_members_info ADD COLUMN contactTimes enum('morning', 'afternoon', 'evening') NOT NULL DEFAULT 'morning';
 ALTER TABLE ph7_members_info ADD COLUMN propertyYearBuilt int(9) DEFAULT NULL;
 ALTER TABLE ph7_members_info ADD COLUMN propertyHomeType enum('family', 'condo') DEFAULT NULL;
-ALTER TABLE ph7_members_info ADD COLUMN propertyHomeStyle enum('rambler', 'ranch', 'tri-multi-level', 'two-story', 'any') DEFAULT NULL;
+ALTER TABLE ph7_members_info ADD COLUMN propertyHomeStyle enum('rambler', 'ranch', 'tri-multi-level', 'two-story', 'any') NOT NULL DEFAULT 'any';
 ALTER TABLE ph7_members_info ADD COLUMN propertySquareFeet int(9) unsigned DEFAULT 0;
 ALTER TABLE ph7_members_info ADD COLUMN propertyLotSize int(9) unsigned DEFAULT 0;
 ALTER TABLE ph7_members_info ADD COLUMN propertyGarageSpaces tinyint(3) unsigned DEFAULT 0;
