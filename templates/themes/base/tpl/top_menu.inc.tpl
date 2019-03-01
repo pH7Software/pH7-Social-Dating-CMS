@@ -24,7 +24,9 @@
             </button>
             <div role="banner" id="logo" class="navbar-brand">
               <h1>
-                <a href="{{ $design->homePageUrl() }}" title="{slogan}">{site_name}</a>
+                <a href="{{ $design->homePageUrl() }}" title="{slogan}">
+                  {site_name}
+                </a>
               </h1>
             </div>
           </div>
