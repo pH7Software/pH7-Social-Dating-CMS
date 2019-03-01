@@ -42,7 +42,8 @@ class AddUserForm
                 'sex',
                 [
                     'buyer' => t('Home Buyer'),
-                    'seller' => t('Home Seller')
+                    'seller' => t('Home Seller'),
+                    'both' => t('Both')
                 ],
                 ['value' => 'buyer', 'required' => 1]
             )
