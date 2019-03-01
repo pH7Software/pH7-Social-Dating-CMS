@@ -33,7 +33,13 @@
     {/if}
 
     <div class="left col-xs-12 col-sm-6 col-md-6">
-        {if $is_picture_enabled}
+        <h1 class="center underline italic s_tMarg">{lang 'Search Sellers'}</h1>
+        {* if profiles are buyers, show the seller form *}
+        {if $sex === 'buyer' || $sex === 'both'}
+            {{ SearchSellerForm::display() }}
+        {/if}
+
+        {if $is_picture_enabled AND ($sex === 'seller' || $sex === 'both')}
             <h2 class="center underline">{lang 'My photo albums'}</h2>
             <div class="content" id="picture">
                 <script>
@@ -44,7 +50,7 @@
             <div class="clear"></div>
         {/if}
 
-        {if $is_video_enabled}
+        {if $is_video_enabled AND ($sex === 'seller' || $sex === 'both')}
             <h2 class="center underline">{lang 'My video albums'}</h2>
             <div class="content" id="video">
                 <script>
@@ -75,12 +81,6 @@
                 </script>
             </div>
             <div class="clear"></div>
-        {/if}
-
-        <h2 class="center underline italic s_tMarg">{lang 'Quick User Search'}</h2>
-        {* if profiles are buyers, show the seller form *}
-        {if $sex === 'buyer' || $sex === 'both'}
-            {{ SearchSellerForm::display() }}
         {/if}
     </div>
 
