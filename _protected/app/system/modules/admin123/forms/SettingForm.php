@@ -38,6 +38,8 @@ class SettingForm
         $bIsMailEnabled = SysMod::isEnabled('mail');
         $bIsNoteEnabled = SysMod::isEnabled('note');
         $bIsForumEnabled = SysMod::isEnabled('forum');
+        $bIsPictureEnabled = SysMod::isEnabled('picture');
+        $bIsVideoEnabled = SysMod::isEnabled('video');
 
         $oForm = new \PFBC\Form('form_setting');
         $oForm->configure(['action' => '']);
@@ -158,17 +160,21 @@ class SettingForm
         /********** Picture and Video **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="pic_vid"><div class="col-md-10"><h2 class="underline">' . t('Picture and Video') . '</h2>'));
 
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Image') . '</h3>'));
+        if ($bIsPictureEnabled) {
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Image') . '</h3>'));
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Watermark Text:'), 'watermark_text_image', ['value' => DbConfig::getSetting('watermarkTextImage'), 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Watermark Text:'), 'watermark_text_image', ['value' => DbConfig::getSetting('watermarkTextImage'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Watermark Size:'), 'size_watermark_text_image', ['description' => t('Between 0 to 5.'), 'min' => 0, 'max' => 5, 'value' => DbConfig::getSetting('sizeWatermarkTextImage'), 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\Number(t('Watermark Size:'), 'size_watermark_text_image', ['description' => t('Between 0 to 5.'), 'min' => 0, 'max' => 5, 'value' => DbConfig::getSetting('sizeWatermarkTextImage'), 'required' => 1]));
+        }
 
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Video') . '</h3>'));
+        if ($bIsVideoEnabled) {
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Video') . '</h3>'));
 
-        $oForm->addElement(new \PFBC\Element\Url(t('Default Video:'), 'default_video', ['description' => t('Video by default if no video is found.'), 'value' => DbConfig::getSetting('defaultVideo'), 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\Url(t('Default Video:'), 'default_video', ['description' => t('Video by default if no video is found.'), 'value' => DbConfig::getSetting('defaultVideo'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Autoplay Video:'), 'autoplay_video', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('autoplayVideo'), 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\Select(t('Autoplay Video:'), 'autoplay_video', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('autoplayVideo'), 'required' => 1]));
+        }
 
 
         /********** Moderation **********/
@@ -184,13 +190,14 @@ class SettingForm
             $oForm->addElement(new \PFBC\Element\Select(t('Note Post Manual Approval:'), 'note_manual_approval', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('noteManualApproval'), 'required' => 1]));
         }
 
-        if (SysMod::isEnabled('picture')) {
+        if ($bIsPictureEnabled) {
             $oForm->addElement(new \PFBC\Element\Select(t('Photos Manual Approval:'), 'picture_manual_approval', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('pictureManualApproval'), 'required' => 1]));
         }
 
-        if (SysMod::isEnabled('video')) {
+        if ($bIsVideoEnabled) {
             $oForm->addElement(new \PFBC\Element\Select(t('Videos Manual Approval:'), 'video_manual_approval', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('videoManualApproval'), 'required' => 1]));
         }
+
 
         $oForm->addElement(new \PFBC\Element\Select(t('Webcam Pictures Manual Approval:'), 'webcam_picture_manual_approval', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('This approval mode is experimental, do not use it on production.'), 'value' => DbConfig::getSetting('webcamPictureManualApproval'), 'required' => 1]));
 
