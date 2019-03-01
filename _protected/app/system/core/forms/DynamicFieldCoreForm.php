@@ -92,19 +92,39 @@ class DynamicFieldCoreForm
 
             case 'propertyBedrooms':
                 if ($sSex === 'seller' || $sSex === 'both') {
-                    $this->oForm->addElement(new \PFBC\Element\Number(t('Bedrooms:'), SearchQueryCore::BEDROOM, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
+                    $this->oForm->addElement(
+                        new \PFBC\Element\Select(
+                            t('Bedrooms:'),
+                            SearchQueryCore::BEDROOM,
+                            [0, 1, 2, 3, 4, 5, 6],
+                            ['value' => $this->sVal]
+                        )
+                    );
                 }
                 break;
 
             case 'propertyBathrooms':
                 if ($sSex === 'seller' || $sSex === 'both') {
-                    $this->oForm->addElement(new \PFBC\Element\Number(t('Bathrooms:'), SearchQueryCore::BATHROOM, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
+                    $this->oForm->addElement(
+                        new \PFBC\Element\Select(
+                            t('Bathrooms:'),
+                            SearchQueryCore::BATHROOM,
+                            [0, 1, 2, 3, 4],
+                            ['value' => $this->sVal]
+                        )
+                    );
                 }
                 break;
 
             case 'propertySize':
                 if ($sSex === 'seller' || $sSex === 'both') {
-                    $this->oForm->addElement(new \PFBC\Element\Number(t('Size:'), SearchQueryCore::SIZE, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
+                    $this->oForm->addElement(
+                        new \PFBC\Element\Number(
+                            t('Size:'),
+                            SearchQueryCore::SIZE,
+                            ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]
+                        )
+                    );
                 }
                 break;
 
@@ -188,10 +208,11 @@ class DynamicFieldCoreForm
             case 'propertyGarageSpaces':
                 if ($sSex === 'seller' || $sSex === 'both') {
                     $this->oForm->addElement(
-                        new \PFBC\Element\Number(
+                        new \PFBC\Element\Select(
                             t('Garage Spaces:'),
                             SearchQueryCore::HOME_GARAGE_SPACE,
-                            ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]
+                            [1, 2, 3, 4],
+                            ['value' => $this->sVal]
                         )
                     );
                 }
@@ -200,10 +221,11 @@ class DynamicFieldCoreForm
             case 'propertyCarportSpaces':
                 if ($sSex === 'seller' || $sSex === 'both') {
                     $this->oForm->addElement(
-                        new \PFBC\Element\Number(
+                        new \PFBC\Element\Select(
                             t('Carport Spaces:'),
                             SearchQueryCore::HOME_CARPORT_SPACE,
-                            ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]
+                            [1, 2],
+                            ['value' => $this->sVal]
                         )
                     );
                 }
@@ -215,7 +237,8 @@ class DynamicFieldCoreForm
                 break;
 
             case 'contactTimes':
-                $this->oForm->addElement(new \PFBC\Element\Select(
+                $this->oForm->addElement(
+                    new \PFBC\Element\Select(
                         t('Best time to be contacted:'),
                         $this->sColumn,
                         [
