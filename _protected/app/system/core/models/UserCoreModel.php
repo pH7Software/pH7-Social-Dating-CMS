@@ -433,7 +433,7 @@ class UserCoreModel extends Model
             $rStmt->bindValue(':size', $aParams[SearchQueryCore::SIZE]);
         }
         if ($bIsYearBuilt) {
-            $rStmt->bindValue(':yearBuilt', $aParams[SearchQueryCore::YEAR_BUILT]);
+            $rStmt->bindValue(':yearBuilt', $aParams[SearchQueryCore::YEAR_BUILT], \PDO::PARAM_INT);
         }
         if ($bIsHomeType) {
             $rStmt->bindValue(':homeType', $aParams[SearchQueryCore::HOME_TYPE]);
@@ -442,16 +442,16 @@ class UserCoreModel extends Model
             $rStmt->bindValue(':homeStyle', $aParams[SearchQueryCore::HOME_STYLE]);
         }
         if ($bIsSquareFeet) {
-            $rStmt->bindValue(':squareFeet', $aParams[SearchQueryCore::HOME_SQUARE_FT]);
+            $rStmt->bindValue(':squareFeet', $aParams[SearchQueryCore::HOME_SQUARE_FT], \PDO::PARAM_INT);
         }
         if ($bIsLotSize) {
-            $rStmt->bindValue(':lotSize', $aParams[SearchQueryCore::HOME_LOT_SIZE]);
+            $rStmt->bindValue(':lotSize', $aParams[SearchQueryCore::HOME_LOT_SIZE], \PDO::PARAM_INT);
         }
         if ($bIsGarageSpaces) {
-            $rStmt->bindValue(':garageSpaces', $aParams[SearchQueryCore::HOME_GARAGE_SPACE]);
+            $rStmt->bindValue(':garageSpaces', $aParams[SearchQueryCore::HOME_GARAGE_SPACE], \PDO::PARAM_INT);
         }
         if ($bIsCarportSpaces) {
-            $rStmt->bindValue(':carportSpaces', $aParams[SearchQueryCore::HOME_CARPORT_SPACE]);
+            $rStmt->bindValue(':carportSpaces', $aParams[SearchQueryCore::HOME_CARPORT_SPACE], \PDO::PARAM_INT);
         }
         if ($bIsCity) {
             $rStmt->bindValue(':city', '%' . str_replace('-', ' ', $aParams[SearchQueryCore::CITY]) . '%', \PDO::PARAM_STR);

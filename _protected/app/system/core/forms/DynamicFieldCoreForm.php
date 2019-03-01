@@ -110,7 +110,17 @@ class DynamicFieldCoreForm
 
             case 'propertyYearBuilt':
                 if ($sSex === 'seller' || $sSex === 'both') {
-                    $this->oForm->addElement(new \PFBC\Element\Number(t('Year Built:'), SearchQueryCore::YEAR_BUILT, ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]));
+                    $this->oForm->addElement(
+                        new \PFBC\Element\Number(
+                            t('Year Built:'),
+                            SearchQueryCore::YEAR_BUILT,
+                            [
+                                'value' => (!empty($this->sVal) ? $this->sVal : date('Y') - 20),
+                                'min' => 0,
+                                'max' => date('Y')
+                            ]
+                        )
+                    );
                 }
                 break;
 
@@ -118,7 +128,7 @@ class DynamicFieldCoreForm
                 if ($sSex === 'seller' || $sSex === 'both') {
                     $this->oForm->addElement(
                         new \PFBC\Element\Select(
-                            t('Home Type'),
+                            t('Home Type:'),
                             SearchQueryCore::HOME_TYPE,
                             [
                                 'family' => t('Single Family'),
