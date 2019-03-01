@@ -40,6 +40,50 @@ class SearchSellerForm
         $oForm->addElement(new \PFBC\Element\Number(t('Min Bathrooms:'), SearchQueryCore::BATHROOM, ['value' => 0, 'min' => 0]));
         $oForm->addElement(new \PFBC\Element\Number(t('Size:'), SearchQueryCore::SIZE, ['value' => 0, 'min' => 0]));
         $oForm->addElement(new \PFBC\Element\Number(t('Min Year Built:'), SearchQueryCore::YEAR_BUILT, ['value' => 0, 'min' => 0]));
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('Home Type'),
+                SearchQueryCore::HOME_TYPE,
+                [
+                    'family' => t('Single Family'),
+                    'condo' => t('Condo/Townhouse')
+                ]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('Home Style:'),
+                SearchQueryCore::HOME_STYLE,
+                [
+                    'rambler' => t('Rambler'),
+                    'ranch' => t('Ranch/Patio'),
+                    'tri-multi-level' => t('Tri-Multi-Level'),
+                    'two-story' => t('Two Story'),
+                    'any' => t('Any')
+                ]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Number(
+                t('Min Square Feet:'),
+                SearchQueryCore::HOME_SQUARE_FT,
+                ['value' => 0, 'min' => 0]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Number(
+                t('Min Lot Size:'),
+                SearchQueryCore::HOME_LOT_SIZE,
+                ['value' => 0, 'min' => 0]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Number(
+                t('Min Garage Spaces:'),
+                SearchQueryCore::HOME_GARAGE_SPACE,
+                ['value' => 0, 'min' => 0]
+            )
+        );
         //$oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', [SearchCoreModel::LATEST => t('Latest Members'), SearchCoreModel::LAST_ACTIVITY => t('Last Activity'), SearchCoreModel::VIEWS => t('Most Popular'), SearchCoreModel::RATING => t('Top Rated'), SearchCoreModel::USERNAME => t('Username'), SearchCoreModel::FIRST_NAME => t('First Name'), SearchCoreModel::LAST_NAME => t('Last Name'), SearchCoreModel::EMAIL => t('Email')]));
         $oForm->addElement(new \PFBC\Element\Select(t('Search Direction:'), 'sort', [SearchCoreModel::DESC => t('Descending'), SearchCoreModel::ASC => t('Ascending')]));
         $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', ['icon' => 'search']));
