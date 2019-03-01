@@ -2,7 +2,9 @@
     <li><a href="#general"><span>{lang 'General Settings'}</span></a></li>
     <li><a href="#icon"><span>{lang 'Logo'}</span></a></li>
     <li><a href="#registration"><span>{lang 'Registration'}</span></a></li>
-    <li><a href="#pic_vid"><span>{lang 'Picture and Video'}</span></a></li>
+    {if $is_video_enabled OR $is_picture_enabled}
+        <li><a href="#pic_vid"><span>{lang 'Picture and Video'}</span></a></li>
+    {/if}
     <li><a href="#moderation"><span>{lang 'Moderation'}</span></a></li>
     <li><a href="#email"><span>{lang 'Email'}</span></a></li>
     <li><a href="#security"><span>{lang 'Security'}</span></a></li>
