@@ -21,6 +21,7 @@ use PH7\Framework\Util\Various;
 class AdminController extends Controller
 {
     const PROFILES_PER_PAGE = 15;
+    const REDIRECTION_DELAY_IN_SEC = 5;
 
     /** @var Affiliate */
     private $oAff;
@@ -102,7 +103,16 @@ class AdminController extends Controller
         unset($oPage);
 
         if (empty($oSearch)) {
-            $this->design->setRedirect(Uri::get('affiliate', 'admin', 'browse'));
+            $this->design->setRedirect(
+                Uri::get(
+                    'affiliate',
+                    'admin',
+                    'browse'
+                ),
+                null,
+                null,
+                self::REDIRECTION_DELAY_IN_SEC
+            );
             $this->displayPageNotFound(t('Sorry, Your search returned no results!'));
         } else {
             // Add the js file necessary for the browse form
