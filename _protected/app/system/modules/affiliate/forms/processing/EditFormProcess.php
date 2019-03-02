@@ -54,8 +54,13 @@ class EditFormProcess extends Form
         $oFields = $oAffModel->getInfoFields($iProfileId, DbTableName::AFFILIATE_INFO);
         foreach ($oFields as $sColumn => $sValue) {
             $sHRParam = ($sColumn === 'description') ? Http::ONLY_XSS_CLEAN : null;
-            if (!$this->str->equals($this->httpRequest->post($sColumn, $sHRParam), $sValue)) {
-                $oAffModel->updateProfile($sColumn, $this->httpRequest->post($sColumn, $sHRParam), $iProfileId, DbTableName::AFFILIATE_INFO);
+            if ($this->httpRequest->postExists($sColumn) && !$this->str->equals($this->httpRequest->post($sColumn, $sHRParam), $sValue)) {
+                $oAffModel->updateProfile(
+                    $sColumn,
+                    $this->httpRequest->post($sColumn, $sHRParam),
+                    $iProfileId,
+                    DbTableName::AFFILIATE_INFO
+                );
             }
         }
         unset($oFields);
