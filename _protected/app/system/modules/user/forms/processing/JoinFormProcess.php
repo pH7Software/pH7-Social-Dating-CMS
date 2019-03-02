@@ -150,8 +150,8 @@ class JoinFormProcess extends Form
 
     public function step4()
     {
-        // If no photo was uploaded, automatically skip the uploading process
         if (!$this->isAvatarUploaded()) {
+            // Automatically skip the uploading process if no photo was uploaded
             $this->session->set('mail_step4', $this->session->get('mail_step1'));
             $this->redirectUserToDonePage();
         } else {
