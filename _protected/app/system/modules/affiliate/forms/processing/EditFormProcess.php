@@ -50,20 +50,8 @@ class EditFormProcess extends Form
         if (!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oAff->birthDate))
             $oAffModel->updateProfile('birthDate', $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $iProfileId, DbTableName::AFFILIATE);
 
-        // Update dynamic fields.
-        $oFields = $oAffModel->getInfoFields($iProfileId, DbTableName::AFFILIATE_INFO);
-        foreach ($oFields as $sColumn => $sValue) {
-            $sHRParam = ($sColumn === 'description') ? Http::ONLY_XSS_CLEAN : null;
-            if ($this->httpRequest->postExists($sColumn) && !$this->str->equals($this->httpRequest->post($sColumn, $sHRParam), $sValue)) {
-                $oAffModel->updateProfile(
-                    $sColumn,
-                    $this->httpRequest->post($sColumn, $sHRParam),
-                    $iProfileId,
-                    DbTableName::AFFILIATE_INFO
-                );
-            }
-        }
-        unset($oFields);
+        $this->updateDynamicFields($iProfileId, $oAffModel);
+
 
         $oAffModel->setLastEdit($iProfileId, DbTableName::AFFILIATE);
 
@@ -77,6 +65,31 @@ class EditFormProcess extends Form
             'form_aff_edit_account',
             t('The profile has been successfully updated')
         );
+    }
+
+    /**
+     * @param int $iProfileId
+     * @param AffiliateCoreModel $oAffModel
+     *
+     * @return void
+     *
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
+     */
+    private function updateDynamicFields($iProfileId, AffiliateCoreModel $oAffModel)
+    {
+        $oFields = $oAffModel->getInfoFields($iProfileId, DbTableName::AFFILIATE_INFO);
+        foreach ($oFields as $sColumn => $sValue) {
+            $sHRParam = ($sColumn === 'description') ? Http::ONLY_XSS_CLEAN : null;
+            if ($this->httpRequest->postExists($sColumn) && !$this->str->equals($this->httpRequest->post($sColumn, $sHRParam), $sValue)) {
+                $oAffModel->updateProfile(
+                    $sColumn,
+                    $this->httpRequest->post($sColumn, $sHRParam),
+                    $iProfileId,
+                    DbTableName::AFFILIATE_INFO
+                );
+            }
+        }
+        unset($oFields);
     }
 
     /**
