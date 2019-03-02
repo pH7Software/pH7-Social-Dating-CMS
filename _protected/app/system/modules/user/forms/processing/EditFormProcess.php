@@ -113,11 +113,13 @@ class EditFormProcess extends Form
      *
      * @param int $iProfileId
      * @param stdClass $oUser
-     * @param UserModel $oUserModel
+     * @param UserCoreModel $oUserModel
+     *
+     * @return void
      *
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    private function updateUserMembership($iProfileId, stdClass $oUser, UserModel $oUserModel)
+    private function updateUserMembership($iProfileId, stdClass $oUser, UserCoreModel $oUserModel)
     {
         if (!$this->str->equals($this->httpRequest->post('group_id'), $oUser->groupId)) {
             $oUserModel->updateMembership(
