@@ -34,7 +34,9 @@ class SearchSellerForm
         $oForm->addElement(new \PFBC\Element\Hidden('sex', 'seller'));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
         $oForm->addElement(new \PFBC\Element\Hidden('sex', 'seller'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', self::$aCityOption));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('City 1:'), 'city', self::$aCityOption));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('City 2:'), 'city2'));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('City 3:'), 'city3'));
         $oForm->addElement(new \PFBC\Element\Price);
         $oForm->addElement(new \PFBC\Element\Number(t('Min Bedrooms:'), SearchQueryCore::BEDROOM, ['value' => 0, 'min' => 0]));
         $oForm->addElement(new \PFBC\Element\Number(t('Min Bathrooms:'), SearchQueryCore::BATHROOM, ['value' => 0, 'min' => 0]));
@@ -52,7 +54,7 @@ class SearchSellerForm
         );
         $oForm->addElement(
             new \PFBC\Element\Select(
-                t('Home Type'),
+                t('Home Type:'),
                 SearchQueryCore::HOME_TYPE,
                 [
                     'family' => t('Single Family'),
@@ -103,7 +105,7 @@ class SearchSellerForm
         );
         $oForm->addElement(
             new \PFBC\Element\Date(
-                t('Only show listings from this date'),
+                t('Only show listings from this date:'),
                 SearchQueryCore::FROM_DATE
             )
         );

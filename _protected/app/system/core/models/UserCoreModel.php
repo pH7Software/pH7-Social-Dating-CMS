@@ -332,6 +332,8 @@ class UserCoreModel extends Model
         $bIsGarageSpaces = !$bIsMail && !empty($aParams[SearchQueryCore::HOME_GARAGE_SPACE]);
         $bIsCarportSpaces = !$bIsMail && !empty($aParams[SearchQueryCore::HOME_CARPORT_SPACE]);
         $bIsCity = !$bIsMail && !empty($aParams[SearchQueryCore::CITY]) && Str::noSpaces($aParams[SearchQueryCore::CITY]);
+        $bIsCity2 = !$bIsMail && !empty($aParams['city2']) && Str::noSpaces($aParams['city2']);
+        $bIsCity3 = !$bIsMail && !empty($aParams['city3']) && Str::noSpaces($aParams['city3']);
         $bIsState = !$bIsMail && !empty($aParams[SearchQueryCore::STATE]) && Str::noSpaces($aParams[SearchQueryCore::STATE]);
         $bIsZipCode = !$bIsMail && !empty($aParams[SearchQueryCore::ZIP_CODE]) && Str::noSpaces($aParams[SearchQueryCore::ZIP_CODE]);
         $bIsSex = !$bIsMail && !empty($aParams[SearchQueryCore::SEX]) && is_array($aParams[SearchQueryCore::SEX]);
@@ -360,6 +362,8 @@ class UserCoreModel extends Model
         $sSqlGarageSpaces = $bIsGarageSpaces ? ' AND (propertyGarageSpaces >= :garageSpaces) ' : '';
         $sSqlCarportSpaces = $bIsCarportSpaces ? ' AND (propertyCarportSpaces >= :carportSpaces) ' : '';
         $sSqlCity = $bIsCity ? ' AND LOWER(city) LIKE LOWER(:city) ' : '';
+        $sSqlCity2 = $bIsCity2 ? ' OR LOWER(city) LIKE LOWER(:city2) ' : '';
+        $sSqlCity3 = $bIsCity3 ? ' OR LOWER(city) LIKE LOWER(:city3) ' : '';
         $sSqlState = $bIsState ? ' AND LOWER(state) LIKE LOWER(:state) ' : '';
         $sSqlZipCode = $bIsZipCode ? ' AND zipCode LIKE :zipCode ' : '';
         $sSqlEmail = $bIsMail ? ' AND email LIKE :email ' : '';
@@ -388,7 +392,8 @@ class UserCoreModel extends Model
         $rStmt = Db::getInstance()->prepare(
             'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER) . 'AS m LEFT JOIN' . Db::prefix(DbTableName::MEMBER_PRIVACY) . 'AS p USING(profileId)
             LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) . 'AS i USING(profileId) WHERE username <> :ghostUsername AND searchProfile = \'yes\'
-            AND (groupId <> :visitorGroup) AND (groupId <> :pendingGroup) AND (ban = 0)' . $sSqlHideLoggedProfile . $sSqlFirstName . $sSqlMiddleName . $sSqlLastName . $sSqlMatchSex . $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCity . $sSqlState .
+            AND (groupId <> :visitorGroup) AND (groupId <> :pendingGroup) AND (ban = 0)' . $sSqlHideLoggedProfile . $sSqlFirstName . $sSqlMiddleName . $sSqlLastName .
+            $sSqlMatchSex . $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCity . $sSqlCity2 . $sSqlCity3 . $sSqlState .
             $sSqlZipCode . $sSqlPrice . $sSqlBedroom . $sSqlBathroom . $sSqlSize . $sSqlYearBuilt .
             $sSqlHomeType . $sSqlHomeStyle . $sSqlSquareFeet . $sSqlLotSize . $sSqlGarageSpaces . $sSqlCarportSpaces .
             $sSqlEmail . $sSqlOnline . $sSqlFromDate . $sSqlAvatar . $sSqlOrder . $sSqlLimit
@@ -456,9 +461,16 @@ class UserCoreModel extends Model
         if ($bIsCity) {
             $rStmt->bindValue(':city', '%' . str_replace('-', ' ', $aParams[SearchQueryCore::CITY]) . '%', \PDO::PARAM_STR);
         }
+        if ($bIsCity2) {
+            $rStmt->bindValue(':city2', '%' . str_replace('-', ' ', $aParams['city2']) . '%', \PDO::PARAM_STR);
+        }
+        if ($bIsCity3) {
+            $rStmt->bindValue(':city3', '%' . str_replace('-', ' ', $aParams['city3']) . '%', \PDO::PARAM_STR);
+        }
         if ($bIsState) {
             $rStmt->bindValue(':state', '%' . str_replace('-', ' ', $aParams[SearchQueryCore::STATE]) . '%', \PDO::PARAM_STR);
         }
+
         if ($bIsZipCode) {
             $rStmt->bindValue(':zipCode', '%' . $aParams[SearchQueryCore::ZIP_CODE] . '%', \PDO::PARAM_STR);
         }
