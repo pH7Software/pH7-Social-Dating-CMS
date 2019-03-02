@@ -63,20 +63,7 @@ class EditFormProcess extends Form
             $oUserModel->updateProfile('birthDate', $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $iProfileId);
         }
 
-        // Update dynamic fields
-        $oFields = $oUserModel->getInfoFields($iProfileId);
-        foreach ($oFields as $sColumn => $sValue) {
-            $sHRParam = ($sColumn === 'description') ? Http::ONLY_XSS_CLEAN : null;
-            if ($this->httpRequest->postExists($sColumn) && !$this->str->equals($this->httpRequest->post($sColumn, $sHRParam), $sValue)) {
-                $oUserModel->updateProfile(
-                    $sColumn,
-                    $this->httpRequest->post($sColumn, $sHRParam),
-                    $iProfileId,
-                    DbTableName::MEMBER_INFO
-                );
-            }
-        }
-        unset($oFields);
+        $this->updateDynamicFields($iProfileId, $oUserModel);
 
         $oUserModel->setLastEdit($iProfileId);
 
@@ -92,6 +79,33 @@ class EditFormProcess extends Form
             'form_user_edit_account',
             t('The profile has been successfully updated')
         );
+    }
+
+    /**
+     * Update user's info fields.
+     *
+     * @param int $iProfileId
+     * @param UserCoreModel $oUserModel
+     *
+     * @return void
+     *
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
+     */
+    private function updateDynamicFields($iProfileId, UserCoreModel $oUserModel)
+    {
+        $oFields = $oUserModel->getInfoFields($iProfileId);
+        foreach ($oFields as $sColumn => $sValue) {
+            $sHRParam = ($sColumn === 'description') ? Http::ONLY_XSS_CLEAN : null;
+            if ($this->httpRequest->postExists($sColumn) && !$this->str->equals($this->httpRequest->post($sColumn, $sHRParam), $sValue)) {
+                $oUserModel->updateProfile(
+                    $sColumn,
+                    $this->httpRequest->post($sColumn, $sHRParam),
+                    $iProfileId,
+                    DbTableName::MEMBER_INFO
+                );
+            }
+        }
+        unset($oFields);
     }
 
     /**
