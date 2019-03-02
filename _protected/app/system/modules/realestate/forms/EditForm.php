@@ -76,7 +76,10 @@ class EditForm
                     'seller' => t('Home Seller'),
                     'both' => t('Both')
                 ],
-                ['value' => 'buyer', 'required' => 1]
+                [
+                    'value' => $oUser->sex,
+                    'required' => 1
+                ]
             )
         );
 
