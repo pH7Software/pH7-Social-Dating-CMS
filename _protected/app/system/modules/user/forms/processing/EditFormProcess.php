@@ -1,6 +1,6 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Form / Processing
@@ -56,11 +56,19 @@ class EditFormProcess extends Form
         // WARNING: Be careful, you should use the Http::NO_CLEAN constant, otherwise Http::post() method removes the special tags
         // and damages the SET function SQL for entry into the database.
         if (!$this->str->equals($this->httpRequest->post('match_sex', Http::NO_CLEAN), $oUser->matchSex)) {
-            $oUserModel->updateProfile('matchSex', Form::setVal($this->httpRequest->post('match_sex', Http::NO_CLEAN)), $iProfileId);
+            $oUserModel->updateProfile(
+                'matchSex',
+                Form::setVal($this->httpRequest->post('match_sex', Http::NO_CLEAN)),
+                $iProfileId
+            );
         }
 
         if (!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oUser->birthDate)) {
-            $oUserModel->updateProfile('birthDate', $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $iProfileId);
+            $oUserModel->updateProfile(
+                'birthDate',
+                $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'),
+                $iProfileId
+            );
         }
 
         $this->updateDynamicFields($iProfileId, $oUserModel);
