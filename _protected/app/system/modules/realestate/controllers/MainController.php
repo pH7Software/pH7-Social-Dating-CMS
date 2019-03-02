@@ -248,6 +248,7 @@ ALTER TABLE ph7_members_info ADD COLUMN propertySquareFeet int(9) unsigned DEFAU
 ALTER TABLE ph7_members_info ADD COLUMN propertyLotSize int(9) unsigned DEFAULT 0;
 ALTER TABLE ph7_members_info ADD COLUMN propertyGarageSpaces tinyint(3) unsigned DEFAULT 0;
 ALTER TABLE ph7_members_info ADD COLUMN propertyCarportSpaces tinyint(3) unsigned DEFAULT 0;
+UPDATE ph7_settings SET settingValue = 1 WHERE settingName = 'requireRegistrationAvatar' LIMIT 1;
 SQL;
 
         $sSqlContent = DbVarious::renameTablePrefix($sSqlContent);

@@ -1036,7 +1036,7 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('minAgeRegistration', 18, '', 'registration'),
 ('minUsernameLength', 3, '', 'registration'),
 ('maxUsernameLength', 30, '', 'registration'),
-('requireRegistrationAvatar', 0, '', 'registration'),
+('requireRegistrationAvatar', 1, '', 'registration'),
 ('userActivationType', 4, '1 = no activation, 2 = email activation, 3 = manual activation by administrator, 4 = SMS activation', 'registration'),
 ('affActivationType', 1, '1 = no activation, 2 = email activation, 3 = Manual activation by the administrator', 'registration'),
 ('defaultMembershipGroupId', @iUserRegularGroup, 'Default Membership Group', 'registration'),
