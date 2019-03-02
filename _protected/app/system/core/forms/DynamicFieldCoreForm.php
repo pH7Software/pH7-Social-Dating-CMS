@@ -86,7 +86,18 @@ class DynamicFieldCoreForm
 
             case 'propertyPrice':
                 if ($sSex === 'seller' || $sSex === 'both') {
-                    $this->oForm->addElement(new \PFBC\Element\Range(t('Price Range'), SearchQueryCore::PRICE, ['value' => $this->sVal, 'min' => Form::MIN_PRICE, 'max' => Form::MAX_PRICE, 'step' => Form::RANGE_NUMBER_INTERVAL]));
+                    $this->oForm->addElement(
+                        new \PFBC\Element\Range(
+                            t('Price Range'),
+                            SearchQueryCore::PRICE,
+                            [
+                                'value' => $this->sVal,
+                                'min' => Form::MIN_PRICE,
+                                'max' => Form::MAX_PRICE,
+                                'step' => Form::RANGE_NUMBER_INTERVAL
+                            ]
+                        )
+                    );
                 }
                 break;
 
