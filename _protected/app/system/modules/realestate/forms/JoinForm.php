@@ -10,7 +10,6 @@ namespace PH7;
 
 use PFBC\Validation\CEmail;
 use PH7\Framework\Geo\Ip\Geo;
-use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Session\Session;
@@ -104,14 +103,24 @@ class JoinForm
         $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user2', 'form_join_user2'));
         $oForm->addElement(new \PFBC\Element\Token('join2'));
-        $oForm->addElement(new \PFBC\Element\Price);
-        $oForm->addElement(new \PFBC\Element\Number(t('Bedrooms'), SearchQueryCore::BEDROOM, ['value' => 0, 'min' => 0]));
-        $oForm->addElement(new \PFBC\Element\Number(t('Bathrooms'), SearchQueryCore::BATHROOM, ['value' => 0, 'min' => 0]));
-        $oForm->addElement(new \PFBC\Element\Number(t('Size'), SearchQueryCore::SIZE, ['value' => 0, 'size' => 0]));
+        $oForm->addElement(
+            new \PFBC\Element\Range(
+                t('Price Range'),
+                'price',
+                [
+                    'min' => Form::MIN_PRICE,
+                    'max' => Form::MAX_PRICE,
+                    'step' => Form::RANGE_NUMBER_INTERVAL
+                ]
+            )
+        );
+        $oForm->addElement(new \PFBC\Element\Number(t('Bedrooms'), 'bedrooms', ['value' => 0, 'min' => 0]));
+        $oForm->addElement(new \PFBC\Element\Number(t('Bathrooms'), 'bathrooms', ['value' => 0, 'min' => 0]));
+        $oForm->addElement(new \PFBC\Element\Number(t('Size'), 'size', ['value' => 0, 'size' => 0]));
         $oForm->addElement(
             new \PFBC\Element\Number(
                 t('Min Year Built'),
-                SearchQueryCore::YEAR_BUILT,
+                'year_built',
                 [
                     'value' => date('Y') - 20,
                     'min' => 0,
@@ -122,7 +131,7 @@ class JoinForm
         $oForm->addElement(
             new \PFBC\Element\Select(
                 t('Home Type'),
-                SearchQueryCore::HOME_TYPE,
+                'home_type',
                 [
                     'family' => t('Single Family'),
                     'condo' => t('Condo/Townhouse')

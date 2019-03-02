@@ -103,7 +103,29 @@ class JoinFormProcess extends Form
 
     public function step2()
     {
+        $iProfileId = $this->oUserModel->getId($this->session->get('mail_step1'));
 
+        $aData = [
+            'profile_id' => $iProfileId,
+            'price' => $this->httpRequest->post('price'),
+            'bedrooms' => $this->httpRequest->post('bedrooms'),
+            'bathrooms' => $this->httpRequest->post('bathrooms'),
+            'house_size' => $this->httpRequest->post('size'),
+            'year_built' => $this->httpRequest->post('year_built'),
+            'home_type' => $this->httpRequest->post('home_type'),
+        ];
+
+        if (!$this->oUserModel->exe($aData, '2')) {
+            \PFBC\Form::setError('form_join_user2',
+                t('An error occurred during registration!') . '<br />' .
+                t('Please try again with new information in the form fields or come back later.')
+            );
+        } else {
+            $this->session->set('mail_step2', $this->session->get('mail_step1'));
+            Header::redirect(
+                Uri::get('user', 'signup', 'step3')
+            );
+        }
     }
 
     public function step3()
