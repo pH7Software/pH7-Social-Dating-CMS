@@ -104,11 +104,83 @@ class JoinForm
         $oForm->configure(['action' => '']);
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user2', 'form_join_user2'));
         $oForm->addElement(new \PFBC\Element\Token('join2'));
+        $oForm->addElement(new \PFBC\Element\Price);
+        $oForm->addElement(new \PFBC\Element\Number(t('Bedrooms'), SearchQueryCore::BEDROOM, ['value' => 0, 'min' => 0]));
+        $oForm->addElement(new \PFBC\Element\Number(t('Bathrooms'), SearchQueryCore::BATHROOM, ['value' => 0, 'min' => 0]));
+        $oForm->addElement(new \PFBC\Element\Number(t('Size'), SearchQueryCore::SIZE, ['value' => 0, 'size' => 0]));
+        $oForm->addElement(
+            new \PFBC\Element\Number(
+                t('Min Year Built'),
+                SearchQueryCore::YEAR_BUILT,
+                [
+                    'value' => date('Y') - 20,
+                    'min' => 0,
+                    'max' => date('Y')
+                ]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('Home Type'),
+                SearchQueryCore::HOME_TYPE,
+                [
+                    'family' => t('Single Family'),
+                    'condo' => t('Condo/Townhouse')
+                ]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('Home Style'),
+                SearchQueryCore::HOME_STYLE,
+                [
+                    'rambler' => t('Rambler'),
+                    'ranch' => t('Ranch/Patio'),
+                    'tri-multi-level' => t('Tri-Multi-Level'),
+                    'two-story' => t('Two Story'),
+                    'any' => t('Any')
+                ]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Number(
+                t('Square Feet'),
+                SearchQueryCore::HOME_SQUARE_FT,
+                ['value' => 0, 'min' => 0]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Number(
+                t('Lot Size'),
+                SearchQueryCore::HOME_LOT_SIZE,
+                ['value' => 0, 'min' => 0]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Number(
+                t('Garage Spaces'),
+                SearchQueryCore::HOME_GARAGE_SPACE,
+                ['value' => 0, 'min' => 0]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Number(
+                t('Carport Spaces'),
+                SearchQueryCore::HOME_CARPORT_SPACE,
+                ['value' => 0, 'min' => 0]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Date(
+                t('Only show listings from this date'),
+                SearchQueryCore::FROM_DATE
+            )
+        );
         $oForm->addElement(new \PFBC\Element\Button(t('Next')));
         $oForm->render();
     }
 
-    public  function step3()
+    public function step3()
     {
         $oSession = new Session;
         if (!$oSession->exists('mail_step2')) {
