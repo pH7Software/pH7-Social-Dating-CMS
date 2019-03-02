@@ -1,6 +1,6 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
@@ -43,7 +43,12 @@ class EditFormProcess extends Form
                 );
                 $this->bIsErr = true;
             } else {
-                $oAdminModel->updateProfile('username', $this->httpRequest->post('username'), $iProfileId, DbTableName::ADMIN);
+                $oAdminModel->updateProfile(
+                    'username',
+                    $this->httpRequest->post('username'),
+                    $iProfileId,
+                    DbTableName::ADMIN
+                );
                 $this->session->set('admin_username', $this->httpRequest->post('username'));
 
                 $this->clearFieldCache('username', $iProfileId);
@@ -58,30 +63,55 @@ class EditFormProcess extends Form
                 );
                 $this->bIsErr = true;
             } else {
-                $oAdminModel->updateProfile('email', $this->httpRequest->post('mail'), $iProfileId, DbTableName::ADMIN);
+                $oAdminModel->updateProfile(
+                    'email',
+                    $this->httpRequest->post('mail'),
+                    $iProfileId,
+                    DbTableName::ADMIN
+                );
                 $this->session->set('admin_email', $this->httpRequest->post('mail'));
             }
         }
 
         if (!$this->str->equals($this->httpRequest->post('first_name'), $oAdmin->firstName)) {
-            $oAdminModel->updateProfile('firstName', $this->httpRequest->post('first_name'), $iProfileId, DbTableName::ADMIN);
+            $oAdminModel->updateProfile(
+                'firstName',
+                $this->httpRequest->post('first_name'),
+                $iProfileId,
+                DbTableName::ADMIN
+            );
             $this->session->set('admin_first_name', $this->httpRequest->post('first_name'));
 
             $this->clearFieldCache('firstName', $iProfileId);
         }
 
         if (!$this->str->equals($this->httpRequest->post('last_name'), $oAdmin->lastName)) {
-            $oAdminModel->updateProfile('lastName', $this->httpRequest->post('last_name'), $iProfileId, DbTableName::ADMIN);
+            $oAdminModel->updateProfile(
+                'lastName',
+                $this->httpRequest->post('last_name'),
+                $iProfileId,
+                DbTableName::ADMIN
+            );
         }
 
         if (!$this->str->equals($this->httpRequest->post('sex'), $oAdmin->sex)) {
-            $oAdminModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId, DbTableName::ADMIN);
+            $oAdminModel->updateProfile(
+                'sex',
+                $this->httpRequest->post('sex'),
+                $iProfileId,
+                DbTableName::ADMIN
+            );
 
             $this->clearFieldCache('sex', $iProfileId);
         }
 
         if (!$this->str->equals($this->httpRequest->post('time_zone'), $oAdmin->timeZone)) {
-            $oAdminModel->updateProfile('timeZone', $this->httpRequest->post('time_zone'), $iProfileId, DbTableName::ADMIN);
+            $oAdminModel->updateProfile(
+                'timeZone',
+                $this->httpRequest->post('time_zone'),
+                $iProfileId,
+                DbTableName::ADMIN
+            );
         }
 
         $oAdminModel->setLastEdit($iProfileId, DbTableName::ADMIN);
