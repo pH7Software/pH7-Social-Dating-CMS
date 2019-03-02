@@ -88,13 +88,39 @@ class JoinForm
         if (!$oSession->exists('mail_step1')) {
             Header::redirect(Uri::get('realestate', 'signup', 'step1'));
         } elseif ($oSession->exists('mail_step2')) {
-            Header::redirect(Uri::get('realestate', 'signup', 'done'));
+            Header::redirect(Uri::get('realestate', 'signup', 'step3'));
         }
         unset($oSession);
 
         if (isset($_POST['submit_join_user2'])) {
             if (\PFBC\Form::isValid($_POST['submit_join_user2'])) {
-                (new JoinFormProcess)->step4();
+                (new JoinFormProcess)->step2();
+            }
+
+            Header::redirect();
+        }
+
+        $oForm = new \PFBC\Form('form_join_user2');
+        $oForm->configure(['action' => '']);
+        $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user2', 'form_join_user2'));
+        $oForm->addElement(new \PFBC\Element\Token('join2'));
+        $oForm->addElement(new \PFBC\Element\Button(t('Next')));
+        $oForm->render();
+    }
+
+    public  function step3()
+    {
+        $oSession = new Session;
+        if (!$oSession->exists('mail_step2')) {
+            Header::redirect(Uri::get('realestate', 'signup', 'step2'));
+        } elseif ($oSession->exists('mail_step3')) {
+            Header::redirect(Uri::get('realestate', 'signup', 'done'));
+        }
+        unset($oSession);
+
+        if (isset($_POST['submit_join_user3'])) {
+            if (\PFBC\Form::isValid($_POST['submit_join_user3'])) {
+                (new JoinFormProcess)->step3();
             }
 
             Header::redirect();
@@ -106,10 +132,10 @@ class JoinForm
             $aAvatarFieldOption += ['required' => 1];
         }
 
-        $oForm = new \PFBC\Form('form_join_user2');
+        $oForm = new \PFBC\Form('form_join_user3');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user2', 'form_join_user2'));
-        $oForm->addElement(new \PFBC\Element\Token('join2'));
+        $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user3', 'form_join_user3'));
+        $oForm->addElement(new \PFBC\Element\Token('join3'));
         $oForm->addElement(new \PFBC\Element\File(t('Photo'), 'avatar', $aAvatarFieldOption));
         $oForm->addElement(new \PFBC\Element\Button(t('Add My Photo')));
 

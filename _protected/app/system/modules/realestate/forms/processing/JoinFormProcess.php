@@ -103,9 +103,14 @@ class JoinFormProcess extends Form
 
     public function step2()
     {
+
+    }
+
+    public function step3()
+    {
         // If no photo was uploaded, automatically skip the uploading process
         if (!$this->isAvatarUploaded()) {
-            $this->session->set('mail_step2', $this->session->get('mail_step1'));
+            $this->session->set('mail_step3', $this->session->get('mail_step2'));
             $this->redirectUserToDonePage();
         } else {
             $iApproved = DbConfig::getSetting('avatarManualApproval') == 0 ? 1 : 0;
@@ -123,9 +128,9 @@ class JoinFormProcess extends Form
             );
 
             if (!$bAvatar) {
-                \PFBC\Form::setError('form_join_user2', Form::wrongImgFileTypeMsg());
+                \PFBC\Form::setError('form_join_user3', Form::wrongImgFileTypeMsg());
             } else {
-                $this->session->set('mail_step2', $this->session->get('mail_step1'));
+                $this->session->set('mail_step3', $this->session->get('mail_step2'));
                 $this->redirectUserToDonePage();
             }
         }
