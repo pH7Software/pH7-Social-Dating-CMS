@@ -128,7 +128,7 @@ class JoinFormProcess extends Form
         } else {
             $this->session->set('mail_step2', $this->session->get('mail_step1'));
             Header::redirect(
-                Uri::get('user', 'signup', 'step3')
+                Uri::get('realestate', 'signup', 'step3')
             );
         }
     }
