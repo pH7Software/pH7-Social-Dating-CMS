@@ -73,10 +73,19 @@ class SignupController extends Controller
 
     public function step2()
     {
-        $this->setTitle(t('Sign up - Step 2/2'));
+        $this->setTitle(t('Sign up - Step 2/3'));
         $this->setupProgressbar(2, 75);
 
-        $this->view->avatarDesign = new AvatarDesignCore; // Add AvatarDesign Class for displaying the avatar lightBox
+        $this->output();
+    }
+
+    public function step3()
+    {
+        $this->setTitle(t('Sign up - Step 3/3'));
+        $this->setupProgressbar(3, 90);
+
+        // Add AvatarDesign Class for displaying the avatar lightBox
+        $this->view->avatarDesign = new AvatarDesignCore;
 
         $this->output();
     }
