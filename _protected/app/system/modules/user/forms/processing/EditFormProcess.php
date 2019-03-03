@@ -72,16 +72,11 @@ class EditFormProcess extends Form
         }
 
         $this->updateDynamicFields($iProfileId, $oUserModel);
-
         $oUserModel->setLastEdit($iProfileId);
-
-        /*** Clear caches ***/
-        $oUserCache = new User;
-        $oUserCache->clearReadProfileCache($iProfileId);
-        $oUserCache->clearInfoFieldCache($iProfileId);
+        $this->clearCaches($iProfileId);
 
         // Destroy objects
-        unset($oUserModel, $oUser, $oUserCache);
+        unset($oUserModel, $oUser);
 
         \PFBC\Form::setSuccess(
             'form_user_edit_account',
@@ -162,5 +157,16 @@ class EditFormProcess extends Form
             $sCacheId . $iProfileId . DbTableName::MEMBER,
             null
         )->clear();
+    }
+
+    /**
+     * @param int $iProfileId
+     */
+    private function clearCaches($iProfileId)
+    {
+        $oUserCache = new User;
+        $oUserCache->clearReadProfileCache($iProfileId);
+        $oUserCache->clearInfoFieldCache($iProfileId);
+        unset($oUserCache);
     }
 }
