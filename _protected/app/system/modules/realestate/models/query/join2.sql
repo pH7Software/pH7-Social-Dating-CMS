@@ -1,6 +1,6 @@
 UPDATE [DB_PREFIX]members_info
 SET
-propertyPrice = :price
+propertyPrice = :price,
 propertyBedrooms = :bedrooms,
 propertyBathrooms = :bathrooms,
 propertySize = :house_size,
