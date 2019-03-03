@@ -158,7 +158,7 @@ class LikeCoreAjax
         UserSpyCoreModel::addUserAction(
             $iProfileId,
             $this->sKey,
-            t('%0% likes <a href="%1%">%1%</a>', $oSession->get('member_username'), $$this->sKey)
+            t('%0% likes <a href="%1%">%1%</a>', $oSession->get('member_username'), $this->sKey)
         );
     }
 }
