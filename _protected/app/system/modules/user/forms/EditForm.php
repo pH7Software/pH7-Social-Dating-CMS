@@ -78,7 +78,10 @@ class EditForm
                         GenderTypeUserCore::MALE => t('Man'),
                         GenderTypeUserCore::COUPLE => t('Couple')
                     ],
-                    ['value' => $oUser->sex, 'required' => 1]
+                    [
+                        'value' => $oUser->sex,
+                        'required' => 1
+                    ]
                 )
             );
         }

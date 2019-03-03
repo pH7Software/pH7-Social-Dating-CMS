@@ -53,7 +53,10 @@ class EditForm
                     GenderTypeUserCore::MALE => t('Man'),
                     GenderTypeUserCore::FEMALE => t('Female')
                 ],
-                ['value' => $oAdmin->sex, 'required' => 1]
+                [
+                    'value' => $oAdmin->sex,
+                    'required' => 1
+                ]
             )
         );
         $oForm->addElement(new \PFBC\Element\Timezone('Time Zone:', 'time_zone', ['description' => t('With your time zone, the other administrators may know when they can contact you easily.'), 'value' => $oAdmin->timeZone, 'required' => 1]));
