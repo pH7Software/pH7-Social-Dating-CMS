@@ -163,8 +163,8 @@
               <li><a href="{% (new UserCore)->getProfileLink($username) %}" title="{lang 'See My Profile'}"><i class="fa fa-user fa-fw"></i> {lang 'See My Profile'}</a></li>
               {if $sex === 'seller' || $sex === 'both'}
                 <li>
-                  <a href="{{ $design->url('realestate','setting','avatar') }}" title="{lang 'Change Profile Photo'}">
-                    <i class="fa fa-upload"></i> {lang 'Change Profile Photo'}
+                  <a href="{{ $design->url('realestate','setting','avatar') }}" title="{lang 'Change Main Photo'}">
+                    <i class="fa fa-upload"></i> {lang 'Change Main Photo'}
                   </a>
                 </li>
               {/if}

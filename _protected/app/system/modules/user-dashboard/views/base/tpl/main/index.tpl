@@ -10,7 +10,9 @@
             <ul>
                 {if $sex !== 'buyer'}
                     <li>
-                        <a href="{{ $design->url('realestate','setting','avatar') }}" title="{lang 'Change My Profile Photo'}"><i class="fa fa-upload"></i> {lang 'Change Profile Photo'}</a>
+                        <a href="{{ $design->url('realestate','setting','avatar') }}" title="{lang 'Change My Main Photo'}">
+                            <i class="fa fa-upload"></i> {lang 'Change Main Photo'}
+                        </a>
                     </li>
                 {/if}
                 <li>

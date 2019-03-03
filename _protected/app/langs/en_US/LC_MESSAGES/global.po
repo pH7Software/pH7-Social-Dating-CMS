@@ -9364,7 +9364,7 @@ msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.phptop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/user-dashboard_4fa7a211b543fff185f114c0462e4609/base/main/index.cpl.php:19
-msgid "Change Profile Photo"
+msgid "Change Main Photo"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.phptop_menu.inc.cpl.php:19
