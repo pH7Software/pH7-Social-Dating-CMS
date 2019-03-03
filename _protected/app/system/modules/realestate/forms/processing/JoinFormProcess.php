@@ -107,17 +107,17 @@ class JoinFormProcess extends Form
 
         $aData = [
             'profile_id' => $iProfileId,
-            'price' => $this->httpRequest->post('price'),
-            'bedrooms' => $this->httpRequest->post('bedrooms'),
-            'bathrooms' => $this->httpRequest->post('bathrooms'),
-            'house_size' => $this->httpRequest->post('size'),
-            'year_built' => $this->httpRequest->post('year_built'),
+            'price' => $this->httpRequest->post('price', 'int'),
+            'bedrooms' => $this->httpRequest->post('bedrooms', 'int'),
+            'bathrooms' => $this->httpRequest->post('bathrooms', 'int'),
+            'house_size' => $this->httpRequest->post('size', 'int'),
+            'year_built' => $this->httpRequest->post('year_built', 'int'),
             'home_type' => $this->httpRequest->post('home_type'),
             'home_style' => $this->httpRequest->post('home_style'),
-            'square_ft' => $this->httpRequest->post('square_ft'),
-            'lot_size' => $this->httpRequest->post('lot_size'),
-            'garage_spaces' => $this->httpRequest->post('garage_spaces'),
-            'carport_spaces' => $this->httpRequest->post('carport_spaces'),
+            'square_ft' => $this->httpRequest->post('square_ft', 'int'),
+            'lot_size' => $this->httpRequest->post('lot_size', 'int'),
+            'garage_spaces' => $this->httpRequest->post('garage_spaces', 'int'),
+            'carport_spaces' => $this->httpRequest->post('carport_spaces', 'int'),
         ];
 
         if (!$this->oUserModel->exe($aData, '2')) {
