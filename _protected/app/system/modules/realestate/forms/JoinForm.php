@@ -117,8 +117,8 @@ class JoinForm
         $oForm->addElement(
             new \PFBC\Element\Select(
                 t('Bedrooms'),
-                [0, 1, 2, 3, 4, 5, 6],
                 'bedrooms',
+                [0, 1, 2, 3, 4, 5, 6],
                 ['required' => 1]
             )
         );
