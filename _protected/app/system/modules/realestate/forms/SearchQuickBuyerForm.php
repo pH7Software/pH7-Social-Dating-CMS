@@ -40,6 +40,7 @@ class SearchQuickBuyerForm
         $oForm->addElement(new \PFBC\Element\Hidden('sex', 'buyer'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City'), 'city', self::$aCityOption));
         $oForm->addElement(new \PFBC\Element\Price);
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<a href="' . Uri::get('realestate', 'search', 'buyer') . '">' . t('Advanced Search') . '</a>'));
         $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', ['icon' => 'search']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
         $oForm->render();
