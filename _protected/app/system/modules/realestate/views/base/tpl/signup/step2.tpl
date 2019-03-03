@@ -1,6 +1,5 @@
 <div class="left col-md-4">
     {include 'progressbar.inc.tpl'}
-    {{ $avatarDesign->lightBox() }}
     {{ JoinForm::step2() }}
 </div>
 
