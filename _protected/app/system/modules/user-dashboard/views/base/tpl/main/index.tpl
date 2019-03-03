@@ -35,9 +35,9 @@
     {/if}
 
     <div class="left col-xs-12 col-sm-6 col-md-6">
-        <h1 class="center underline italic s_tMarg">{lang 'Search Sellers'}</h1>
-        {* if profiles are buyers, show the seller form *}
         {if $sex === 'buyer' || $sex === 'both'}
+            {* if profiles are buyers, show the seller form *}
+            <h1 class="center underline italic s_tMarg">{lang 'Search Sellers'}</h1>
             {{ SearchSellerForm::display() }}
         {/if}
 
