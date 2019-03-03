@@ -3796,7 +3796,7 @@ msgstr ""
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:227
 msgid ""
 "Number of minutes that has to pass before a user with the same IP address "
-"can register again."
+"can register again. Enter \"0\" to disable."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:230
@@ -3806,7 +3806,7 @@ msgstr ""
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:230
 msgid ""
 "Number of minutes that has to pass before an affiliate with the same IP "
-"address can register again."
+"address can register again. Enter \"0\" to disable."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:233
