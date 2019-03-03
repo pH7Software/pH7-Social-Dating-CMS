@@ -2,7 +2,7 @@
     {* "My Profile" block don't really fit well on small mobile devices, so ignore it if it's the case *}
     {if !$browser->isMobile()}
         <div class="left col-xs-12 col-sm-4 col-md-3">
-            <h2>{lang 'My Profile'}</h2>
+            <h2>{lang 'My %0% Profile', $user_type}</h2>
             {if $sex !== 'buyer'}
                 {{ $avatarDesign->lightBox($username, $first_name, $sex, 400) }}
             {/if}

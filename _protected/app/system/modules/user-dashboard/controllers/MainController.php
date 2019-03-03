@@ -14,7 +14,8 @@ class MainController extends Controller
 {
     public function index()
     {
-        $this->view->page_title = $this->view->h1_title = t('My Dashboard');
+        $this->view->user_type = $sUserType = $this->getUserTypeName();
+        $this->view->page_title = $this->view->h1_title = t('My %0% Dashboard', $sUserType);
 
         $this->design->addCss(
             PH7_STATIC . PH7_CSS . PH7_JS . 'jquery/slick/',
@@ -37,5 +38,22 @@ class MainController extends Controller
         $this->view->userDesignModel = new UserDesignModel; // For the profilesBlock
 
         $this->output();
+    }
+
+    /**
+     * @return string Return the appropriate user type name.
+     */
+    private function getUserTypeName()
+    {
+        switch ($this->session->get('member_sex')) {
+            case 'buyer':
+                return t('Buyer');
+
+            case 'seller':
+                return t('Seller');
+
+            default:
+                return '';
+        }
     }
 }
