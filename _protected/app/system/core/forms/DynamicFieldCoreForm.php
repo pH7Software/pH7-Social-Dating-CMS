@@ -222,7 +222,7 @@ class DynamicFieldCoreForm
                         new \PFBC\Element\Select(
                             t('Garage Spaces:'),
                             SearchQueryCore::HOME_GARAGE_SPACE,
-                            [1, 2, 3, 4],
+                            [0, 1, 2, 3, 4],
                             ['value' => $this->sVal]
                         )
                     );
@@ -235,7 +235,7 @@ class DynamicFieldCoreForm
                         new \PFBC\Element\Select(
                             t('Carport Spaces:'),
                             SearchQueryCore::HOME_CARPORT_SPACE,
-                            [1, 2],
+                            [0, 1, 2],
                             ['value' => $this->sVal]
                         )
                     );

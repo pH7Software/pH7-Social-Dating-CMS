@@ -114,9 +114,33 @@ class JoinForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Number(t('Bedrooms'), 'bedrooms', ['value' => 0, 'min' => 0]));
-        $oForm->addElement(new \PFBC\Element\Number(t('Bathrooms'), 'bathrooms', ['value' => 0, 'min' => 0]));
-        $oForm->addElement(new \PFBC\Element\Number(t('Size'), 'size', ['value' => 0, 'size' => 0]));
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('Bedrooms'),
+                [0, 1, 2, 3, 4, 5, 6],
+                'bedrooms',
+                ['required' => 1]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('Bathrooms'),
+                'bathrooms',
+                [0, 1, 2, 3, 4],
+                ['required' => 1]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Number(
+                t('Size'),
+                'size',
+                [
+                    'value' => 0,
+                    'size' => 0,
+                    'required' => 1
+                ]
+            )
+        );
         $oForm->addElement(
             new \PFBC\Element\Number(
                 t('Min Year Built'),
@@ -124,8 +148,10 @@ class JoinForm
                 [
                     'value' => date('Y') - 20,
                     'min' => 0,
-                    'max' => date('Y')
-                ]
+                    'max' => date('Y'),
+                    'required' => 1
+                ],
+                ['required' => 1]
             )
         );
         $oForm->addElement(
@@ -135,7 +161,8 @@ class JoinForm
                 [
                     'family' => t('Single Family'),
                     'condo' => t('Condo/Townhouse')
-                ]
+                ],
+                ['required' => 1]
             )
         );
         $oForm->addElement(
@@ -148,41 +175,46 @@ class JoinForm
                     'tri-multi-level' => t('Tri-Multi-Level'),
                     'two-story' => t('Two Story'),
                     'any' => t('Any')
-                ]
+                ],
+                ['required' => 1]
             )
         );
         $oForm->addElement(
             new \PFBC\Element\Number(
                 t('Square Feet'),
                 'square_ft',
-                ['value' => 0, 'min' => 0]
+                ['value' => 0, 'min' => 0, 'required' => 1]
             )
         );
         $oForm->addElement(
             new \PFBC\Element\Number(
                 t('Lot Size'),
                 'lot_size',
-                ['value' => 0, 'min' => 0]
+                ['value' => 0, 'min' => 0, 'required' => 1]
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Number(
+            new \PFBC\Element\Select(
                 t('Garage Spaces'),
                 'garage_spaces',
-                ['value' => 0, 'min' => 0]
+                [0, 1, 2, 3, 4],
+                [
+                    'value' => 0,
+                    'min' => 0,
+                    'required' => 1
+                ]
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Number(
+            new \PFBC\Element\Select(
                 t('Carport Spaces'),
                 'carport_spaces',
-                ['value' => 0, 'min' => 0]
-            )
-        );
-        $oForm->addElement(
-            new \PFBC\Element\Date(
-                t('Only show listings from this date'),
-                SearchQueryCore::FROM_DATE
+                [0, 1, 2],
+                [
+                    'value' => 0,
+                    'min' => 0,
+                    'required' => 1
+                ]
             )
         );
         $oForm->addElement(new \PFBC\Element\Button(t('Next'), 'submit', ['icon' => 'arrowthick-1-e']));

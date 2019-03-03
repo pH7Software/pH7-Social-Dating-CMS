@@ -38,8 +38,28 @@ class SearchSellerForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('City 2:'), 'city2'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City 3:'), 'city3'));
         $oForm->addElement(new \PFBC\Element\Price);
-        $oForm->addElement(new \PFBC\Element\Number(t('Min Bedrooms:'), SearchQueryCore::BEDROOM, ['value' => 0, 'min' => 0]));
-        $oForm->addElement(new \PFBC\Element\Number(t('Min Bathrooms:'), SearchQueryCore::BATHROOM, ['value' => 0, 'min' => 0]));
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('Min Bedrooms:'),
+                SearchQueryCore::BEDROOM,
+                [0, 1, 2, 3, 4, 5, 6],
+                [
+                    'value' => 0,
+                    'min' => 0
+                ]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('Min Bathrooms:'),
+                SearchQueryCore::BATHROOM,
+                [0, 1, 2, 3, 4],
+                [
+                    'value' => 0,
+                    'min' => 0
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\Number(t('Size:'), SearchQueryCore::SIZE, ['value' => 0, 'min' => 0]));
         $oForm->addElement(
             new \PFBC\Element\Number(
@@ -90,16 +110,18 @@ class SearchSellerForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Number(
+            new \PFBC\Element\Select(
                 t('Min Garage Spaces:'),
                 SearchQueryCore::HOME_GARAGE_SPACE,
+                [0, 1, 2, 3, 4],
                 ['value' => 0, 'min' => 0]
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Number(
+            new \PFBC\Element\Select(
                 t('Min Carport Spaces:'),
                 SearchQueryCore::HOME_CARPORT_SPACE,
+                [0, 1, 2],
                 ['value' => 0, 'min' => 0]
             )
         );
