@@ -117,7 +117,7 @@
                     </p>
                 {elseif $key == 'propertyLotSize' AND ($sex === 'seller' || $sex === 'both')}
                     <p>
-                        <span class="bold">{lang 'Lot Size:'}</span>
+                        <span class="bold">{lang 'Lot Size (acres):'}</span>
                         <span class="italic">
                             {val}
                         </span>

@@ -208,7 +208,7 @@ class DynamicFieldCoreForm
                 if ($sSex === 'seller' || $sSex === 'both') {
                     $this->oForm->addElement(
                         new \PFBC\Element\Number(
-                            t('Lot Size:'),
+                            t('Lot Size (acres):'),
                             SearchQueryCore::HOME_LOT_SIZE,
                             ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]
                         )

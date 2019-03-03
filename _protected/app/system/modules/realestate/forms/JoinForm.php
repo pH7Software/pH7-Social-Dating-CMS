@@ -188,7 +188,7 @@ class JoinForm
         );
         $oForm->addElement(
             new \PFBC\Element\Number(
-                t('Lot Size'),
+                t('Lot Size (acres)'),
                 'lot_size',
                 ['value' => 0, 'min' => 0, 'required' => 1]
             )

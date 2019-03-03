@@ -116,7 +116,7 @@ class SearchSellerForm
         );
         $oForm->addElement(
             new \PFBC\Element\Number(
-                t('Min Lot Size'),
+                t('Min Lot Size (acres)'),
                 SearchQueryCore::HOME_LOT_SIZE,
                 ['value' => 0, 'min' => 0]
             )
