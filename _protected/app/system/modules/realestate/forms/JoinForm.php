@@ -221,7 +221,7 @@ class JoinForm
         $oForm->render();
     }
 
-    public function step3()
+    public static function step3()
     {
         $oSession = new Session;
         if (!$oSession->exists('mail_step2')) {
