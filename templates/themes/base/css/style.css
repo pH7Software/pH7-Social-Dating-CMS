@@ -62,7 +62,7 @@ a {
 }
 
 a:hover, a:active {
-    color: #F24C9E;
+    color: #01AEF0;
     text-decoration: underline;
     text-shadow: 0 0 5px #fff, 0 0 8px rgba(255, 255, 255, .6);
 }

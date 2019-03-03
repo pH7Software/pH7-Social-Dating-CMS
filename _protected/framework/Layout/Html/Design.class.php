@@ -754,7 +754,7 @@ class Design
         $sLikeId = $bIsLogged ? ' id="like"' : '';
 
         $sUrlKey = empty($sForceUrlKey) ? $this->oHttpRequest->currentUrl() : $sForceUrlKey;
-        echo '<a rel="nofollow" href="', $sLikeLink, '" data-key="', $sUrlKey, '" title="', t('Like %0%', $sFirstName), '" class="like smooth-pink"', $sLikeId, '>', t('Like %0%', $sFirstName), '</a>';
+        echo '<a rel="nofollow" href="', $sLikeLink, '" data-key="', $sUrlKey, '" title="', t('Like %0%', $sFirstName), '" class="like"', $sLikeId, '>', t('Like %0%', $sFirstName), '</a>';
         $this->staticFiles('js', PH7_STATIC . PH7_JS, 'Like.js');
     }
 
@@ -847,9 +847,9 @@ HTML;
                 $sReportLink = Uri::get('realestate', 'signup', 'step1', '?' . Url::httpBuildQuery($aUrlParams), false);
             }
 
-            echo '<a rel="nofollow" href="', $sReportLink, '" title="', t('Report Abuse'), '"><i class="fa fa-flag smooth-pink"></i></a>';
+            echo '<a rel="nofollow" href="', $sReportLink, '" title="', t('Report Abuse'), '"><i class="fa fa-flag"></i></a>';
         } else {
-            echo '<abbr title="' . t('Report feature is not available for this content since the user who posted that content has been removed.') . '""><i class="fa fa-flag smooth-pink"></i></abbr>';
+            echo '<abbr title="' . t('Report feature is not available for this content since the user who posted that content has been removed.') . '""><i class="fa fa-flag"></i></abbr>';
         }
     }
 
