@@ -365,8 +365,8 @@ class UserCoreModel extends Model
         $sSqlCity2 = $bIsCity2 ? ' OR LOWER(city) LIKE LOWER(:city2) ' : '';
         $sSqlCity3 = $bIsCity3 ? ' OR LOWER(city) LIKE LOWER(:city3) ' : '';
         $sSqlState = $bIsState ? ' AND LOWER(state) LIKE LOWER(:state) ' : '';
-        $sSqlZipCode = $bIsZipCode ? ' AND zipCode LIKE :zipCode ' : '';
-        $sSqlEmail = $bIsMail ? ' AND email LIKE :email ' : '';
+        $sSqlZipCode = $bIsZipCode ? ' AND LOWER(zipCode) LIKE LOWER(:zipCode) ' : '';
+        $sSqlEmail = $bIsMail ? ' AND LOWER(email) LIKE LOWER(:email) ' : '';
         $sSqlOnline = $bIsOnline ? ' AND userStatus = :userStatus AND lastActivity > DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL ' . DbConfig::getSetting('userTimeout') . ' MINUTE) ' : '';
         $sSqlFromDate = $bIsFromDate ? ' AND joinDate >= :fromDate ' : '';
         $sSqlAvatar = $bIsAvatar ? $this->getUserWithAvatarOnlySql() : '';
