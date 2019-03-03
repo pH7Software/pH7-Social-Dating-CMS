@@ -105,7 +105,7 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\Token('join2'));
         $oForm->addElement(
             new \PFBC\Element\Range(
-                t('Price Range'),
+                t('Property Price Range'),
                 'price',
                 [
                     'min' => Form::MIN_PRICE,
