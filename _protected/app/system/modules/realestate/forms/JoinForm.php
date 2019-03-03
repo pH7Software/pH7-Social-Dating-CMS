@@ -185,7 +185,7 @@ class JoinForm
                 SearchQueryCore::FROM_DATE
             )
         );
-        $oForm->addElement(new \PFBC\Element\Button(t('Next')));
+        $oForm->addElement(new \PFBC\Element\Button(t('Next'), 'submit', ['icon' => 'arrowthick-1-e']));
         $oForm->render();
     }
 
