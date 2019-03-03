@@ -113,6 +113,11 @@ class JoinFormProcess extends Form
             'house_size' => $this->httpRequest->post('size'),
             'year_built' => $this->httpRequest->post('year_built'),
             'home_type' => $this->httpRequest->post('home_type'),
+            'home_style' => $this->httpRequest->post('home_style'),
+            'square_ft' => $this->httpRequest->post('square_ft'),
+            'lot_size' => $this->httpRequest->post('lot_size'),
+            'garage_spaces' => $this->httpRequest->post('garage_spaces'),
+            'carport_spaces' => $this->httpRequest->post('carport_spaces'),
         ];
 
         if (!$this->oUserModel->exe($aData, '2')) {

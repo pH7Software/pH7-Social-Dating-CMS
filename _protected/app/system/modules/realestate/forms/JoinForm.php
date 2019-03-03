@@ -141,7 +141,7 @@ class JoinForm
         $oForm->addElement(
             new \PFBC\Element\Select(
                 t('Home Style'),
-                SearchQueryCore::HOME_STYLE,
+                'home_style',
                 [
                     'rambler' => t('Rambler'),
                     'ranch' => t('Ranch/Patio'),
@@ -154,28 +154,28 @@ class JoinForm
         $oForm->addElement(
             new \PFBC\Element\Number(
                 t('Square Feet'),
-                SearchQueryCore::HOME_SQUARE_FT,
+                'square_ft',
                 ['value' => 0, 'min' => 0]
             )
         );
         $oForm->addElement(
             new \PFBC\Element\Number(
                 t('Lot Size'),
-                SearchQueryCore::HOME_LOT_SIZE,
+                'lot_size',
                 ['value' => 0, 'min' => 0]
             )
         );
         $oForm->addElement(
             new \PFBC\Element\Number(
                 t('Garage Spaces'),
-                SearchQueryCore::HOME_GARAGE_SPACE,
+                'garage_spaces',
                 ['value' => 0, 'min' => 0]
             )
         );
         $oForm->addElement(
             new \PFBC\Element\Number(
                 t('Carport Spaces'),
-                SearchQueryCore::HOME_CARPORT_SPACE,
+                'carport_spaces',
                 ['value' => 0, 'min' => 0]
             )
         );
