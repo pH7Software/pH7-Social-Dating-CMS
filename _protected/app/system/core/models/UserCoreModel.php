@@ -349,7 +349,7 @@ class UserCoreModel extends Model
         $sSqlCountry = $bIsCountry ? ' AND country = :country ' : '';
         $sSqlCity = $bIsCity ? ' AND LOWER(city) LIKE LOWER(:city) ' : '';
         $sSqlState = $bIsState ? ' AND LOWER(state) LIKE LOWER(:state) ' : '';
-        $sSqlZipCode = $bIsZipCode ? ' AND zipCode LIKE :zipCode ' : '';
+        $sSqlZipCode = $bIsZipCode ? ' AND LOWER(zipCode) LIKE LOWER(:zipCode) ' : '';
         $sSqlEmail = $bIsMail ? ' AND email LIKE :email ' : '';
         $sSqlOnline = $bIsOnline ? ' AND userStatus = :userStatus AND lastActivity > DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL ' . DbConfig::getSetting('userTimeout') . ' MINUTE) ' : '';
         $sSqlAvatar = $bIsAvatar ? $this->getUserWithAvatarOnlySql() : '';
