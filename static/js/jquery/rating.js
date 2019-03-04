@@ -16,8 +16,8 @@
         var defaults = {
             /** String vars **/
             url: pH7Url.base + 'asset/ajax/Rating/',
-            bigStarUrl: pH7Url.stic + 'img/icon/m_star.png', // URL of the icon m_star.png
-            smallStarUrl: pH7Url.stic + 'img/icon/s_star.png', // URL of the icon s_star.png
+            bigStarUrl: pH7Url.stic + 'img/icon/m-star.png', // URL of the icon m-star.png
+            smallStarUrl: pH7Url.stic + 'img/icon/s-star-transparent.png', // URL of the icon s-star.png
             type: 'big', // can be set to 'small' or 'big'
 
             /** Boolean vars **/
@@ -186,8 +186,8 @@
                             bgUrl = opts.smallStarUrl;
                             break;
                         default :
-                            starWidth = 23; // width of the picture m_star.png
-                            starHeight = 20; // height of the picture m_star.png
+                            starWidth = 23; // width of the picture m-star.png
+                            starHeight = 20; // height of the picture m-star.png
                             bgUrl = opts.bigStarUrl;
                     }
                 };
