@@ -16,7 +16,7 @@
         var defaults = {
             /** String vars **/
             url: pH7Url.base + 'asset/ajax/Rating/',
-            bigStarUrl: pH7Url.stic + 'img/icon/m-star.png',
+            bigStarUrl: pH7Url.stic + 'img/icon/m-star-transparent.png',
             smallStarUrl: pH7Url.stic + 'img/icon/s-star-transparent.png',
             type: 'big', // can be set to 'small' or 'big'
 
