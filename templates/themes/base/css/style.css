@@ -204,6 +204,12 @@ dd {
     margin: 5px;
 }
 
+/* Very Small Top & Bottom Margin */
+.vs_tbMarg {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 /* Small Margin */
 .s_marg {
     margin: 12px;
