@@ -87,8 +87,10 @@
     </div>
 
     <div class="left col-xs-12 col-sm-2 col-md-3">
-        <h2>{lang 'The Latest News'}</h2>
-        <div id="wall"></div>
+        {if $sex === 'seller' || $sex === 'both'}
+            <h3>{lang 'The Latest Updates between Buyers/Sellers'}</h3>
+            <div id="wall"></div>
+        {/if}
     </div>
 </div>
 
