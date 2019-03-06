@@ -93,6 +93,10 @@ final class FrontController
 
         $this->indexFileRouter();
 
+        if (UriRoute::URI_CACHE_ENABLED && UriRoute::isCachedUrlOutdated()) {
+            UriRoute::clearCache();
+        }
+
         if ($this->isAssetRequest(0) && $this->isGzipRequest(1)) {
             // Loading and compress CSS and JavaScript files
             $this->gzipRouter();
@@ -140,10 +144,6 @@ final class FrontController
     private function launchRewritingRouter()
     {
         $oUrl = UriRoute::loadFile(new DomDocument);
-
-        if (UriRoute::URI_CACHE_ENABLED && UriRoute::isCachedUrlOutdated()) {
-            UriRoute::clearCache();
-        }
 
         foreach ($oUrl->getElementsByTagName('route') as $oRoute) {
             if ($this->isRewrittenUrl($oRoute, $aMatches)) {
