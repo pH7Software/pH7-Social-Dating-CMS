@@ -41,7 +41,9 @@ class SearchQuickBuyerForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('City'), 'city', self::$aCityOption));
         $oForm->addElement(new \PFBC\Element\Price);
         $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', ['icon' => 'search']));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a href="' . Uri::get('realestate', 'search', 'buyer') . '">' . t('Advanced Search') . '</a></p>'));
+        if ((new HttpRequest)->isRootUrl() === false) {
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a href="' . Uri::get('realestate', 'search', 'buyer') . '">' . t('Advanced Search') . '</a></p>'));
+        }
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
         $oForm->render();
     }

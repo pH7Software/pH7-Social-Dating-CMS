@@ -305,6 +305,14 @@ class Http extends \PH7\Framework\Http\Http
     }
 
     /**
+     * @return bool
+     */
+    public function isRootUrl()
+    {
+        return $this->currentUrl() === PH7_URL_ROOT;
+    }
+
+    /**
      * @return string The Previous Page.
      */
     public function previousPage()
