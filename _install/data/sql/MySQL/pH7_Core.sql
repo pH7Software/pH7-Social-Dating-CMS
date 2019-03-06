@@ -1066,7 +1066,7 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('smtpHostName', 'mail.example.com', '', 'email'),
 ('smtpPassword', 123456, '', 'email'),
 ('smtpPort', 25, '', 'email'),
-('watermarkTextImage', 'pH7CMS.com', 'Watermark text', 'image'),
+('watermarkTextImage', 'Acquireutah', 'Watermark text', 'image'),
 ('sizeWatermarkTextImage', 2, 'Between 0 to 5', 'image'),
 ('banWordReplace', '[removed]',  '',  'security'),
 ('securityToken', 0, '0 to disable or 1 to enable the CSRF security token in the forms', 'security'),
