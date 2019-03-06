@@ -115,7 +115,11 @@ class Uri
      */
     public static function clearCache($sCacheId = null)
     {
-        (new Cache)->start(self::CACHE_GROUP, $sCacheId, null)->clear();
+        (new Cache)->start(
+            self::CACHE_GROUP,
+            $sCacheId,
+            null
+        )->clear();
     }
 
     /**
