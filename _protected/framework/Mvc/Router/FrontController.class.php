@@ -141,6 +141,10 @@ final class FrontController
     {
         $oUrl = UriRoute::loadFile(new DomDocument);
 
+        if (UriRoute::URI_CACHE_ENABLED && UriRoute::isCachedUrlOutdated()) {
+            UriRoute::clearCache();
+        }
+
         foreach ($oUrl->getElementsByTagName('route') as $oRoute) {
             if ($this->isRewrittenUrl($oRoute, $aMatches)) {
                 $this->setRewritingRouter();

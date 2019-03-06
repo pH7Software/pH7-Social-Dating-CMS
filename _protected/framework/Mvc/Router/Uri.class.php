@@ -93,10 +93,6 @@ class Uri
         );
         $oCache->enabled(static::URI_CACHE_ENABLED);
 
-        if (static::URI_CACHE_ENABLED && self::isCachedUrlOutdated()) {
-            self::clearCache();
-        }
-
         if (!$sUrl = $oCache->get()) {
             $sUrl = self::uri(
                 [
@@ -130,9 +126,9 @@ class Uri
     /**
      * @return bool TRUE if the URL has changed from the cached URL, FALSE otherwise.
      */
-    private static function isCachedUrlOutdated()
+    public static function isCachedUrlOutdated()
     {
-        $sHomepageRoute = self::get(Controller::CORE_MAIN_MODULE, 'main', 'index');
+        $sHomepageRoute = self::get('user', 'main', 'index');
 
         return stripos($sHomepageRoute, PH7_URL_ROOT) === false;
     }
