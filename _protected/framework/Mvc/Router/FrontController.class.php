@@ -93,10 +93,6 @@ final class FrontController
 
         $this->indexFileRouter();
 
-        if (UriRoute::URI_CACHE_ENABLED && UriRoute::isCachedUrlOutdated()) {
-            UriRoute::clearCache();
-        }
-
         if ($this->isAssetRequest(0) && $this->isGzipRequest(1)) {
             // Loading and compress CSS and JavaScript files
             $this->gzipRouter();
@@ -113,6 +109,8 @@ final class FrontController
          * @internal self::initializeLanguage() method must be declared before the others, because it initializes the main language constants for the rest of the code.
          */
         $this->initializeLanguage();
+
+        $this->checkUriCacheStatus();
 
         $this->initializeAssets();
 
@@ -443,6 +441,18 @@ final class FrontController
                     );
             }
             exit;
+        }
+    }
+
+    /**
+     * Check if the URI cache needs to be regenerated when outdated.
+     *
+     * @return void
+     */
+    private function checkUriCacheStatus()
+    {
+        if (UriRoute::URI_CACHE_ENABLED && UriRoute::isCachedUrlOutdated()) {
+            UriRoute::clearCache();
         }
     }
 
