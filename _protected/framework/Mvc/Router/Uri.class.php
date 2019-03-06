@@ -16,6 +16,7 @@ use DOMDocument;
 use DOMElement;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\File\IOException;
+use PH7\Framework\Mvc\Controller\Controller;
 use PH7\Framework\Parse\Url;
 use PH7\Framework\Pattern\Statik;
 
@@ -92,6 +93,10 @@ class Uri
         );
         $oCache->enabled(static::URI_CACHE_ENABLED);
 
+        if (self::isCachedUrlOutdated()) {
+            self::clearCache();
+        }
+
         if (!$sUrl = $oCache->get()) {
             $sUrl = self::uri(
                 [
@@ -120,6 +125,16 @@ class Uri
             $sCacheId,
             null
         )->clear();
+    }
+
+    /**
+     * @return bool TRUE if the URL has changed from the cached URL, FALSE otherwise.
+     */
+    private static function isCachedUrlOutdated()
+    {
+        $sHomepageRoute = self::get(Controller::CORE_MAIN_MODULE, 'main', 'index');
+
+        return stripos($sHomepageRoute, PH7_URL_ROOT) === false;
     }
 
     /**
