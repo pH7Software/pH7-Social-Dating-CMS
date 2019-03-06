@@ -93,7 +93,7 @@ class Uri
         );
         $oCache->enabled(static::URI_CACHE_ENABLED);
 
-        if (self::isCachedUrlOutdated()) {
+        if (static::URI_CACHE_ENABLED && self::isCachedUrlOutdated()) {
             self::clearCache();
         }
 
