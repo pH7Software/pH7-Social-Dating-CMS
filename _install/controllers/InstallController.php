@@ -359,7 +359,7 @@ class InstallController extends Controller
                                                             'ip' => client_ip()
                                                         ]);
 
-                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . DbTableName::SETTING . ' SET settingValue = :siteName WHERE settingName = \'siteName\' LIMIT 1');
+                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . DbTableName::SETTING . ' SET settingValue = :siteName WHERE settingName = \'siteName\' OR settingName = \'watermarkTextImage\' OR settingName = \'emailName\'');
                                                         $rStmt->execute(['siteName' => $_SESSION['val']['site_name']]);
 
                                                         $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . DbTableName::SETTING . ' SET settingValue = :adminEmail WHERE settingName = \'adminEmail\'  LIMIT 1');
