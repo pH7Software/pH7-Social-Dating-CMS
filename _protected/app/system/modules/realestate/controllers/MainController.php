@@ -240,8 +240,9 @@ class MainController extends Controller
     {
         $oDb = Db::getInstance();
         $sSqlContent = <<<SQL
-        ALTER TABLE ph7_members_info DROP COLUMN propertyHomeStyle;
-        ALTER TABLE ph7_members_info ADD COLUMN propertyHomeStyle enum('rambler', 'ranch', 'tri-multi-level', 'two-story', 'other') NOT NULL DEFAULT 'other';
+        ALTER TABLE ph7_members_info MODIFY COLUMN propertyHomeStyle enum('rambler', 'ranch', 'tri-multi-level', 'two-story', 'other') NOT NULL DEFAULT 'other';
+       -- ALTER TABLE ph7_members_info DROP COLUMN propertyHomeStyle;
+       -- ALTER TABLE ph7_members_info ADD COLUMN propertyHomeStyle enum('rambler', 'ranch', 'tri-multi-level', 'two-story', 'other') NOT NULL DEFAULT 'other';
 SQL;
 
         $sSqlContent = DbVarious::renameTablePrefix($sSqlContent);
