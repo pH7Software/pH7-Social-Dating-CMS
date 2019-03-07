@@ -146,7 +146,7 @@ class DynamicFieldCoreForm
                             t('Year Built:'),
                             SearchQueryCore::YEAR_BUILT,
                             [
-                                'value' => (!empty($this->sVal) ? $this->sVal : date('Y') - 20),
+                                'value' => (isset($this->sVal) ? $this->sVal : date('Y') - 20),
                                 'min' => 0,
                                 'max' => date('Y')
                             ]
