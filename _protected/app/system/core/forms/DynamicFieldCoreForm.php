@@ -182,7 +182,7 @@ class DynamicFieldCoreForm
                                 'ranch' => t('Ranch/Patio'),
                                 'tri-multi-level' => t('Tri-Multi-Level'),
                                 'two-story' => t('Two Story'),
-                                'any' => t('Any')
+                                'other' => t('Other')
                             ],
                             [
                                 'value' => $this->sVal

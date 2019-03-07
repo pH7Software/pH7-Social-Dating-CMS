@@ -78,7 +78,8 @@ class SearchSellerForm
                 SearchQueryCore::HOME_TYPE,
                 [
                     'family' => t('Single Family'),
-                    'condo' => t('Condo/Townhouse')
+                    'condo' => t('Condo/Townhouse'),
+                    '' => t('Any')
                 ]
             )
         );
@@ -91,7 +92,7 @@ class SearchSellerForm
                     'ranch' => t('Ranch/Patio'),
                     'tri-multi-level' => t('Tri-Multi-Level'),
                     'two-story' => t('Two Story'),
-                    'any' => t('Any')
+                    '' => t('Any')
                 ]
             )
         );
