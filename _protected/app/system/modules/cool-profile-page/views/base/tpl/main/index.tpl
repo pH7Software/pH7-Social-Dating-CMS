@@ -96,8 +96,8 @@
                                 {lang 'Tri-Multi-Level'}
                             {elseif $val === 'two-story'}
                                 {lang 'Two Story'}
-                            {elseif $val === 'any'}
-                                {lang 'Any'}
+                            {elseif $val === 'other'}
+                                {lang 'Other'}
                             {else}
                                 {val}
                             {/if}

@@ -790,7 +790,7 @@ class UserCoreModel extends Model
         $rStmt->bindValue(':propertyBathrooms', (!empty($aData['property_bathrooms']) ? $aData['property_bathrooms'] : null), \PDO::PARAM_STR);
         $rStmt->bindValue(':propertyYearBuilt', (!empty($aData['property_year_built']) ? $aData['property_year_built'] : null), \PDO::PARAM_STR);
         $rStmt->bindValue(':propertyHomeType', (!empty($aData['property_home_type']) ? $aData['property_home_type'] : null), \PDO::PARAM_STR);
-        $rStmt->bindValue(':propertyHomeStyle', (!empty($aData['property_home_style']) ? $aData['property_home_style'] : 'any'), \PDO::PARAM_STR);
+        $rStmt->bindValue(':propertyHomeStyle', (!empty($aData['property_home_style']) ? $aData['property_home_style'] : 'other'), \PDO::PARAM_STR);
         $rStmt->bindValue(':propertySquareFeet', (!empty($aData['property_square_feet']) ? $aData['property_square_feet'] : null), \PDO::PARAM_STR);
         $rStmt->bindValue(':propertyLotSize', (!empty($aData['property_lot_size']) ? $aData['property_lot_size'] : null), \PDO::PARAM_STR);
         $rStmt->bindValue(':propertyGarageSpaces', (!empty($aData['property_garage_spaces']) ? $aData['property_garage_spaces'] : null), \PDO::PARAM_STR);
