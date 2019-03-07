@@ -8,7 +8,16 @@
     <fieldset>
         <p>
             <span class="mandatory">*</span> <label for="site_name">{$LANG.site_name}:</label><br />
-            <input type="text" name="site_name" id="site_name" onfocus="if('{$def_site_name}' == this.value) this.value='';" onblur="if ('' == this.value) this.value = '{$def_site_name}';" value="{$smarty.session.val.site_name|escape}" required="required" />
+            <input
+                type="text"
+                name="site_name"
+                id="site_name"
+                onfocus="if('{$def_site_name}' == this.value) this.value='';"
+                onblur="if ('' == this.value) this.value = '{$def_site_name}';"
+                value="{$smarty.session.val.site_name|escape}"
+                maxlength="50"
+                required="required"
+            />
         </p>
 
         <p>
