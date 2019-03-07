@@ -245,6 +245,7 @@ class MainController extends Controller
        -- ALTER TABLE ph7_members_info ADD COLUMN propertyHomeStyle enum('rambler', 'ranch', 'tri-multi-level', 'two-story', 'other') NOT NULL DEFAULT 'other';
 SQL;
 
+        // Make sure the DB prefix is correct and match with config.ini [database] section
         $sSqlContent = DbVarious::renameTablePrefix($sSqlContent);
         $rStmt = $oDb->exec($sSqlContent);
         unset($sSqlContent);
