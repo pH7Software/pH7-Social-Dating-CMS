@@ -33,7 +33,7 @@ abstract class Emoticon
      *
      * @param string $sName
      *
-     * @return Emoticon path.
+     * @return string Emoticon path.
      */
     protected static function getPath($sName)
     {
@@ -45,7 +45,7 @@ abstract class Emoticon
      *
      * @param string $sName
      *
-     * @return Emoticon URL.
+     * @return string Emoticon URL.
      */
     protected static function getUrl($sName)
     {
@@ -57,7 +57,7 @@ abstract class Emoticon
      *
      * @param array $aVal
      *
-     * @return Emoticon name.
+     * @return string Emoticon name.
      */
     protected static function getName(array $aVal)
     {
@@ -69,7 +69,7 @@ abstract class Emoticon
      *
      * @param array $aVal
      *
-     * @return Emoticon code.
+     * @return array|string Emoticon code.
      */
     protected static function getCode(array $aVal)
     {
