@@ -25,7 +25,7 @@ class SmileCoreAjax extends Emoticon
     private static $sData = '';
 
     /**
-     * @return void
+     * @return void Output the emoticon JSON code.
      *
      * @throws Framework\Http\Exception
      */
