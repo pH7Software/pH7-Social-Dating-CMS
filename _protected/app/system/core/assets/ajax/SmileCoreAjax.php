@@ -49,7 +49,7 @@ class SmileCoreAjax extends Emoticon
                 $sImg = static::getUrl($sEmoticonKey);
                 $sName = static::getName($aEmoticon);
 
-                $sCode = (is_array($mCode)) ? $mCode[0] : $mCode;
+                $sCode = is_array($mCode) ? $mCode[0] : $mCode;
 
                 self::$sData .= <<<EOD
                 {
