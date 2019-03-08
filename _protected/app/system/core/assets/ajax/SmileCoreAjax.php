@@ -20,6 +20,7 @@ use PH7\Framework\Service\Emoticon;
 class SmileCoreAjax extends Emoticon
 {
     const CACHE_LIFETIME = 120 * 48 * 30;
+    const CONTENT_TYPE = 'application/json';
 
     /** @var string */
     private static $sData = '';
@@ -32,7 +33,7 @@ class SmileCoreAjax extends Emoticon
     public static function output()
     {
         static::retrieve();
-        Http::setContentType('application/json');
+        Http::setContentType(self::CONTENT_TYPE);
 
         echo self::$sData;
     }
