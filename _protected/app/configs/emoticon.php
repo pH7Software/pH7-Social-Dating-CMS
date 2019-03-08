@@ -18,7 +18,7 @@ defined('PH7') or exit('Restricted access');
  */
 
 return [
-    /** smiley (image name without extension)  |  code  |  alt **/
+    /** smiley (image name without file extension)  |  code  |  alt **/
 
     'grin'             =>    [[':-d', ':d', 'xd', '=d'], 'Grin'],
     'lol'              =>    [['^^', ':lol:'], 'LOL'],
