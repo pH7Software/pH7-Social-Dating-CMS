@@ -69,6 +69,3 @@ EOD;
 
 // Output
 SmileCoreAjax::output();
-
-
-
