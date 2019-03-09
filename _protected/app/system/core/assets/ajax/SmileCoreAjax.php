@@ -3,12 +3,15 @@
  * @title          Smile Ajax
  * @desc           Get Smiles Ajax in JSON format.
  *
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Asset / Ajax
  */
 
+/**
+ * Access to it with: https://YOUR-URL.com/asset/ajax/Smile
+ */
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
