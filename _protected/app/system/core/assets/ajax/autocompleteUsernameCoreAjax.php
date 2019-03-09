@@ -14,14 +14,14 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Layout\Html\Design;
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Session\Session;
 
 const AVATAR_SIZE = 32;
 
 // Only for members
 if (UserCore::auth()) {
-    $oHttpRequest = new Http;
+    $oHttpRequest = new HttpRequest;
 
     if ($oHttpRequest->postExists('username')) {
         if ($oUsernameResult = (new UserCoreModel)->getUsernameList($oHttpRequest->post('username'))) {
