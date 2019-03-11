@@ -37,6 +37,13 @@ final class Version
      * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa", 12.* was "PHS", 14.* was "pKb" amd 15.* is ABSOLUTE™
      */
     const KERNEL_VERSION_NAME = 'ABSOLUTE™';
+
+    /**
+     * VERSION NUMBERS:
+     * MAJOR.MINOR.PATCH[.build]
+     *
+     * More details: https://ph7cms.com/new-versioning-system/
+     */
     const KERNEL_VERSION = '15.0.0';
     const KERNEL_BUILD = '1';
     const KERNEL_RELEASE_DATE = '2019-02-18';
