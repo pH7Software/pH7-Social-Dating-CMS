@@ -239,24 +239,13 @@ class InstallController extends Controller
                                     $aErrors[] = $LANG['require_mysql_version'];
                                 } else {
                                     $aDumps = [
-                                        /*** Game ***/
-                                        // We need to install the Game before the Core SQL for "foreign keys" that work are correct.
+                                        /** Game **/
+                                        // We need to install the Game before the "Core SQL" for foreign key reasons
                                         'pH7_SchemaGame',
                                         'pH7_DataGame',
-                                        /*** Core ***/
+                                        /** Core (main SQL schema/data) **/
                                         'pH7_Core',
-                                        // --- GeoIp (exec_query_file() function executes these files only if they existens otherwise it does nothing) --- //
-                                        'pH7_GeoCountry',
-                                        'pH7_GeoCity',
-                                        'pH7_GeoCity2',
-                                        'pH7_GeoCity3',
-                                        'pH7_GeoCity4',
-                                        'pH7_GeoCity5',
-                                        'pH7_GeoCity6',
-                                        'pH7_GeoCity7',
-                                        'pH7_GeoCity8',
-                                        'pH7_GeoState',
-                                        // --- Execute this file if there is something --- //
+                                        /** Sample user data **/
                                         'pH7_SampleData'
                                     ];
 
