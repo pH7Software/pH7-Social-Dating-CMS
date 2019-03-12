@@ -68,13 +68,6 @@ class SearchSellerForm
         );
         $oForm->addElement(
             new \PFBC\Element\Number(
-                t('Size'),
-                SearchQueryCore::SIZE,
-                ['value' => 0, 'size' => 0]
-            )
-        );
-        $oForm->addElement(
-            new \PFBC\Element\Number(
                 t('Min Year Built'),
                 SearchQueryCore::YEAR_BUILT,
                 [

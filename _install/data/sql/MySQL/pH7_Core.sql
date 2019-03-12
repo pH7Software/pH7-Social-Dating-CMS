@@ -121,7 +121,6 @@ CREATE TABLE IF NOT EXISTS ph7_members_info (
   address varchar(255) DEFAULT NULL,
   city varchar(150) DEFAULT NULL,
   propertyPrice int(10) unsigned DEFAULT NULL,
-  propertySize varchar(20) DEFAULT NULL,
   propertyBedrooms int(5) DEFAULT NULL,
   propertyBathrooms int(3) DEFAULT NULL,
   propertyYearBuilt int(9) DEFAULT NULL,

@@ -3,7 +3,6 @@ SET
 propertyPrice = :price,
 propertyBedrooms = :bedrooms,
 propertyBathrooms = :bathrooms,
-propertySize = :house_size,
 propertyYearBuilt = :year_built,
 propertyHomeType = :home_type,
 propertyHomeStyle = :home_style,

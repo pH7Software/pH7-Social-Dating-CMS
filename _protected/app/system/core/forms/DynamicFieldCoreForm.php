@@ -127,18 +127,6 @@ class DynamicFieldCoreForm
                 }
                 break;
 
-            case 'propertySize':
-                if ($sSex === 'seller' || $sSex === 'both') {
-                    $this->oForm->addElement(
-                        new \PFBC\Element\Number(
-                            t('Size:'),
-                            SearchQueryCore::SIZE,
-                            ['value' => (!empty($this->sVal) ? $this->sVal : 0), 'min' => 0]
-                        )
-                    );
-                }
-                break;
-
             case 'propertyYearBuilt':
                 if ($sSex === 'seller' || $sSex === 'both') {
                     $this->oForm->addElement(

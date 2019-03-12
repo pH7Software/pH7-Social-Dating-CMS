@@ -323,7 +323,6 @@ class UserCoreModel extends Model
         $bIsPrice = !$bIsMail && !empty($aParams[SearchQueryCore::MIN_PRICE]) && !empty($aParams[SearchQueryCore::MAX_PRICE]);
         $bIsBedroom = !$bIsMail && !empty($aParams[SearchQueryCore::BEDROOM]);
         $bIsBathroom = !$bIsMail && !empty($aParams[SearchQueryCore::BATHROOM]);
-        $bIsSize = !$bIsMail && !empty($aParams[SearchQueryCore::SIZE]);
         $bIsYearBuilt = !$bIsMail && !empty($aParams[SearchQueryCore::YEAR_BUILT]);
         $bIsHomeType = !$bIsMail && !empty($aParams[SearchQueryCore::HOME_TYPE]);
         $bIsHomeStyle = !$bIsMail && !empty($aParams[SearchQueryCore::HOME_STYLE]);
@@ -353,7 +352,6 @@ class UserCoreModel extends Model
         $sSqlPrice = $bIsPrice ? ' AND (propertyPrice BETWEEN :minPrice AND :maxPrice) ' : '';
         $sSqlBedroom = $bIsBedroom ? ' AND (propertyBedrooms >= :bedrooms) ' : '';
         $sSqlBathroom = $bIsBathroom ? ' AND (propertyBathrooms >= :bathrooms) ' : '';
-        $sSqlSize = $bIsSize ? ' AND (propertySize >= :size) ' : '';
         $sSqlYearBuilt = $bIsYearBuilt ? ' AND (propertyYearBuilt >= :yearBuilt) ' : '';
         $sSqlHomeType = $bIsHomeType ? ' AND (propertyHomeType >= :homeType) ' : '';
         $sSqlHomeStyle = $bIsHomeStyle ? ' AND (propertyHomeStyle >= :homeStyle) ' : '';
@@ -394,7 +392,7 @@ class UserCoreModel extends Model
             LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) . 'AS i USING(profileId) WHERE username <> :ghostUsername AND searchProfile = \'yes\'
             AND (groupId <> :visitorGroup) AND (groupId <> :pendingGroup) AND (ban = 0)' . $sSqlHideLoggedProfile . $sSqlFirstName . $sSqlMiddleName . $sSqlLastName .
             $sSqlMatchSex . $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCity . $sSqlCity2 . $sSqlCity3 . $sSqlState .
-            $sSqlZipCode . $sSqlPrice . $sSqlBedroom . $sSqlBathroom . $sSqlSize . $sSqlYearBuilt .
+            $sSqlZipCode . $sSqlPrice . $sSqlBedroom . $sSqlBathroom . $sSqlYearBuilt .
             $sSqlHomeType . $sSqlHomeStyle . $sSqlSquareFeet . $sSqlLotSize . $sSqlGarageSpaces . $sSqlCarportSpaces .
             $sSqlEmail . $sSqlOnline . $sSqlFromDate . $sSqlAvatar . $sSqlOrder . $sSqlLimit
         );
@@ -433,9 +431,6 @@ class UserCoreModel extends Model
         }
         if ($bIsBathroom) {
             $rStmt->bindValue(':bathrooms', $aParams[SearchQueryCore::BATHROOM], \PDO::PARAM_INT);
-        }
-        if ($bIsSize) {
-            $rStmt->bindValue(':size', $aParams[SearchQueryCore::SIZE]);
         }
         if ($bIsYearBuilt) {
             $rStmt->bindValue(':yearBuilt', $aParams[SearchQueryCore::YEAR_BUILT], \PDO::PARAM_INT);
@@ -773,8 +768,8 @@ class UserCoreModel extends Model
     public function setInfoFields(array $aData)
     {
         $sSql = 'INSERT INTO' . Db::prefix(DbTableName::MEMBER_INFO) .
-            '(profileId, middleName, description, address, city, state, zipCode, propertyPrice, propertySize, propertyBedrooms, propertyBathrooms, propertyYearBuilt, propertyHomeType, propertyHomeStyle, propertySquareFeet, propertyLotSize, propertyGarageSpaces, propertyCarportSpaces, contactTimes, phone, website)
-            VALUES (:profileId, :middleName, :description, :address, :city, :state, :zipCode, :propertyPrice, :propertySize, :propertyBedrooms, :propertyBathrooms, :propertyYearBuilt, :propertyHomeType, :propertyHomeStyle, :propertySquareFeet, :propertyLotSize, :propertyGarageSpaces, :propertyCarportSpaces, :contactTimes, :phone, :website)';
+            '(profileId, middleName, description, address, city, state, zipCode, propertyPrice, propertyBedrooms, propertyBathrooms, propertyYearBuilt, propertyHomeType, propertyHomeStyle, propertySquareFeet, propertyLotSize, propertyGarageSpaces, propertyCarportSpaces, contactTimes, phone, website)
+            VALUES (:profileId, :middleName, :description, :address, :city, :state, :zipCode, :propertyPrice, :propertyBedrooms, :propertyBathrooms, :propertyYearBuilt, :propertyHomeType, :propertyHomeStyle, :propertySquareFeet, :propertyLotSize, :propertyGarageSpaces, :propertyCarportSpaces, :contactTimes, :phone, :website)';
 
         $rStmt = Db::getInstance()->prepare($sSql);
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
@@ -785,7 +780,6 @@ class UserCoreModel extends Model
         $rStmt->bindValue(':state', (!empty($aData['state']) ? $aData['state'] : ''), \PDO::PARAM_STR);
         $rStmt->bindValue(':zipCode', (!empty($aData['zip_code']) ? $aData['zip_code'] : ''), \PDO::PARAM_STR);
         $rStmt->bindValue(':propertyPrice', (!empty($aData['property_price']) ? $aData['property_price'] : 0), \PDO::PARAM_STR);
-        $rStmt->bindValue(':propertySize', (!empty($aData['property_size']) ? $aData['property_size'] : 0), \PDO::PARAM_STR);
         $rStmt->bindValue(':propertyBedrooms', (!empty($aData['property_bedrooms']) ? $aData['property_bedrooms'] : null), \PDO::PARAM_STR);
         $rStmt->bindValue(':propertyBathrooms', (!empty($aData['property_bathrooms']) ? $aData['property_bathrooms'] : null), \PDO::PARAM_STR);
         $rStmt->bindValue(':propertyYearBuilt', (!empty($aData['property_year_built']) ? $aData['property_year_built'] : null), \PDO::PARAM_STR);

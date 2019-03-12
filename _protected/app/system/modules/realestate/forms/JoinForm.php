@@ -132,17 +132,6 @@ class JoinForm
         );
         $oForm->addElement(
             new \PFBC\Element\Number(
-                t('Size'),
-                'size',
-                [
-                    'value' => 0,
-                    'size' => 0,
-                    'required' => 1
-                ]
-            )
-        );
-        $oForm->addElement(
-            new \PFBC\Element\Number(
                 t('Min Year Built'),
                 'year_built',
                 [

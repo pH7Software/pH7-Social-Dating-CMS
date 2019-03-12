@@ -110,7 +110,6 @@ class JoinFormProcess extends Form
             'price' => $this->httpRequest->post('price', 'int'),
             'bedrooms' => $this->httpRequest->post('bedrooms', 'int'),
             'bathrooms' => $this->httpRequest->post('bathrooms', 'int'),
-            'house_size' => $this->httpRequest->post('size', 'int'),
             'year_built' => $this->httpRequest->post('year_built', 'int'),
             'home_type' => $this->httpRequest->post('home_type'),
             'home_style' => $this->httpRequest->post('home_style'),

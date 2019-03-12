@@ -64,13 +64,6 @@
                             {val}
                         </span>
                     </p>
-                {elseif $key == 'propertySize' AND ($sex === 'seller' || $sex === 'both')}
-                    <p>
-                        <span class="bold">{lang 'Size:'}</span>
-                        <span class="italic">
-                            {val}
-                        </span>
-                    </p>
                 {elseif $key == 'propertyHomeType' AND !empty($val) AND ($sex === 'seller' || $sex === 'both')}
                     <p>
                         <span class="bold">{lang 'Home Type:'}</span>
