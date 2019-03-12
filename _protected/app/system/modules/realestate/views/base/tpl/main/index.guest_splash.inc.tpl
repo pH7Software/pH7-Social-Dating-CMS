@@ -52,7 +52,7 @@
 
     *}
 
-    <h1>{lang 'Search Home for Sale'}</h1>
+    <h1>{lang 'Search Homes for Sale'}</h1>
     {{ SearchQuickSellerForm::display() }}
 
     <h1>{lang 'Search Buyers'}</h1>
