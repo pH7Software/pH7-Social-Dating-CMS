@@ -246,9 +246,7 @@ class InstallController extends Controller
                                         'pH7_SchemaGame',
                                         'pH7_DataGame',
                                         /** Core (main SQL schema/data) **/
-                                        'pH7_Core',
-                                        /** Sample user data **/
-                                        'pH7_SampleData'
+                                        'pH7_Core'
                                     ];
 
                                     for ($iFileKey = 0, $iCount = count($aDumps); $iFileKey < $iCount; $iFileKey++) {
