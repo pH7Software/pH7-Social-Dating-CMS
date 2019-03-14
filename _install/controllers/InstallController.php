@@ -555,32 +555,6 @@ class InstallController extends Controller
             !empty($_SESSION['val']['admin_username']);
     }
 
-    private function removeSessions()
-    {
-        $_SESSION = [];
-        session_unset();
-        session_destroy();
-    }
-
-    private function removeCookies()
-    {
-        $sCookieName = self::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang';
-
-        // We are asking the browser to delete the cookie.
-        setcookie(
-            $sCookieName,
-            0,
-            0,
-            null,
-            null,
-            false,
-            true
-        );
-
-        // and then, we delete the cookie value locally to avoid using it by mistake in following our script.
-        unset($_COOKIE[$sCookieName]);
-    }
-
     /**
      * Update module status (enabled/disabled).
      *
@@ -701,6 +675,32 @@ class InstallController extends Controller
         // Loading Class ~/protected/app/includes/classes/* (for "DbTableName" class)
         require PH7_PATH_APP . 'includes/classes/Loader/Autoloader.php';
         App\Includes\Classes\Loader\Autoloader::getInstance()->init();
+    }
+
+    private function removeSessions()
+    {
+        $_SESSION = [];
+        session_unset();
+        session_destroy();
+    }
+
+    private function removeCookies()
+    {
+        $sCookieName = self::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang';
+
+        // We are asking the browser to delete the cookie.
+        setcookie(
+            $sCookieName,
+            0,
+            0,
+            null,
+            null,
+            false,
+            true
+        );
+
+        // and then, we delete the cookie value locally to avoid using it by mistake in following our script.
+        unset($_COOKIE[$sCookieName]);
     }
 
     /**
