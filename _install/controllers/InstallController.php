@@ -600,6 +600,12 @@ class InstallController extends Controller
      */
     private function populateSampleUserData($iMemberNumber, $iAffiliateNumber)
     {
+        (new Framework\Translate\Lang)
+            ->setDefaultLang('en_US')
+            ->init();
+
+        // Initialize the site's database for "UserCoreModel" and "AffiliateCoreModel" classes
+        Framework\Mvc\Router\FrontController::getInstance()->_initializeDatabase();
 
         $oUserModel = new UserCoreModel;
         $oAffModel = new AffiliateCoreModel;
@@ -626,10 +632,10 @@ class InstallController extends Controller
             $aUser['birth_date'] = $sBirthDate;
             $aUser['description'] = $oFaker->paragraph(10);
 
-            $oUserModel->add(escape($aUser, true));
+            $oUserModel->add($aUser);
 
             if ($iAffiliateNumber <= $iAffiliateNumber) {
-                $oAffModel->add(escape($aUser, true));
+                $oAffModel->add($aUser);
             }
         }
     }
