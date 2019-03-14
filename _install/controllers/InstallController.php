@@ -621,10 +621,10 @@ class InstallController extends Controller
             $aUser['match_sex'] = $sMatchSex;
             $aUser['country'] = $oFaker->country;
             $aUser['city'] = $oFaker->city;
-            $aUser['state'] = $oFaker->state;
             $aUser['address'] = $oFaker->streetAddress;
             $aUser['zip_code'] = $oFaker->postcode;
             $aUser['birth_date'] = $sBirthDate;
+            $aUser['description'] = $oFaker->paragraph(10);
 
             $oUserModel->add(escape($aUser, true));
 
