@@ -630,7 +630,7 @@ class InstallController extends Controller
             $aUser['address'] = $oFaker->streetAddress;
             $aUser['zip_code'] = $oFaker->postcode;
             $aUser['birth_date'] = $sBirthDate;
-            $aUser['description'] = $oFaker->paragraph(10);
+            $aUser['description'] = $oFaker->paragraph(2);
             $aUser['ip'] = $oFaker->ipv4;
             $aUser['bank_account'] = $oFaker->bankAccountNumber;
 
