@@ -632,6 +632,7 @@ class InstallController extends Controller
             $aUser['birth_date'] = $sBirthDate;
             $aUser['description'] = $oFaker->paragraph(10);
             $aUser['ip'] = $oFaker->ipv4;
+            $aUser['bank_account'] = $oFaker->bankAccountNumber;
 
             $oUserModel->add($aUser);
 
