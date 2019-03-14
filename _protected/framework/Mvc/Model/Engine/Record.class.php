@@ -99,7 +99,7 @@ class Record
         try {
             $oDb = Db::getInstance();
 
-            // We start the transaction.
+            // We start the transaction
             $oDb->beginTransaction();
 
             $this->sSql = 'DELETE FROM' . Db::prefix($sTable) . "WHERE $sField = :id";
@@ -107,7 +107,7 @@ class Record
             $rStmt->bindParam(':id', $sId);
             $bStatus = $rStmt->execute();
 
-            // If all goes well, we commit the transaction.
+            // If all goes well, we commit the transaction
             $oDb->commit();
 
             Db::free($rStmt);
@@ -116,7 +116,7 @@ class Record
         } catch (Exception $oE) {
             $this->aErrors[] = $oE->getMessage();
 
-            // We cancel the transaction if an error occurs.
+            // We cancel the transaction if an error occurs
             $oDb->rollBack();
             return false;
         }
@@ -140,7 +140,7 @@ class Record
         try {
             $oDb = Db::getInstance();
 
-            // We start the transaction.
+            // We start the transaction
             $oDb->beginTransaction();
 
             foreach ($oCachingIterator as $sField => $sValue) {
@@ -156,7 +156,7 @@ class Record
 
             $rStmt->execute($aValues);
 
-            // If all goes well, we commit the transaction.
+            // If all goes well, we commit the transaction
             $oDb->commit();
 
             Db::free($rStmt);
@@ -164,7 +164,7 @@ class Record
         } catch (Exception $oE) {
             $this->aErrors[] = $oE->getMessage();
 
-            // We cancel the transaction if an error occurs.
+            // We cancel the transaction if an error occurs
             $oDb->rollBack();
 
             return false;
@@ -187,7 +187,7 @@ class Record
         try {
             $oDb = Db::getInstance();
 
-            // We start the transaction.
+            // We start the transaction
             $oDb->beginTransaction();
 
             $bIsWhere = isset($sPk, $sId);
@@ -206,7 +206,7 @@ class Record
             $rStmt->execute();
             $iRow = $rStmt->rowCount();
 
-            // If all goes well, we commit the transaction.
+            // If all goes well, we commit the transaction
             $oDb->commit();
 
             Db::free($rStmt);
@@ -215,7 +215,7 @@ class Record
         } catch (Exception $oE) {
             $this->aErrors[] = $oE->getMessage();
 
-            // We cancel the transaction if an error occurs.
+            // We cancel the transaction if an error occurs
             $oDb->rollBack();
 
             return false;
@@ -234,14 +234,14 @@ class Record
         try {
             $oDb = Db::getInstance();
 
-            // We start the transaction.
+            // We start the transaction
             $oDb->beginTransaction();
 
             $rStmt = $oDb->prepare($sSql);
             $rStmt->execute();
             $aRow = $rStmt->fetchAll(PDO::FETCH_OBJ);
 
-            // If all goes well, we commit the transaction.
+            // If all goes well, we commit the transaction
             $oDb->commit();
 
             Db::free($rStmt);
@@ -249,7 +249,7 @@ class Record
         } catch (Exception $oE) {
             $this->aErrors[] = $oE->getMessage();
 
-            // We cancel the transaction if an error occurs.
+            // We cancel the transaction if an error occurs
             $oDb->rollBack();
             return false;
         }
