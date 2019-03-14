@@ -256,7 +256,8 @@ class InstallController extends Controller
                                         );
                                     }
 
-                                    unset($DB);
+                                    // We finalise it by setting the correct permission to the config files
+                                    $this->chmodConfigFiles();
 
                                     $_SESSION['step4'] = 1;
                                     unset($_SESSION['val']);
@@ -334,7 +335,9 @@ class InstallController extends Controller
                                                         // SQL EXECUTE
                                                         $sSql = 'INSERT INTO %s (profileId , username, password, email, firstName, lastName, joinDate, lastActivity, ip)
                                                             VALUES (1, :username, :password, :email, :firstName, :lastName, :joinDate, :lastActivity, :ip)';
-                                                        $rStmt = $DB->prepare(sprintf($sSql, $_SESSION['db']['prefix'] . DbTableName::ADMIN));
+                                                        $rStmt = $DB->prepare(
+                                                            sprintf($sSql, $_SESSION['db']['prefix'] . DbTableName::ADMIN)
+                                                        );
 
                                                         $sCurrentDate = date('Y-m-d H:i:s');
                                                         $rStmt->execute([
@@ -360,8 +363,7 @@ class InstallController extends Controller
                                                         $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . DbTableName::SETTING . ' SET settingValue = :returnEmail WHERE settingName = \'returnEmail\'  LIMIT 1');
                                                         $rStmt->execute(['returnEmail' => $_SESSION['val']['admin_return_email']]);
 
-                                                        // We finalise by putting the correct permission to the config files
-                                                        $this->chmodConfigFiles();
+                                                        $this->populateSampleUserData();
 
                                                         $_SESSION['step5'] = 1;
 
