@@ -17,6 +17,8 @@ defined('PH7') or exit('Restricted access');
 
 class InstallController extends Controller
 {
+    const TOTAL_SAMPLE_PROFILES = 15;
+
     /**
      * Enable/Disable Modules according to the chosen niche
      */
@@ -363,7 +365,9 @@ class InstallController extends Controller
                                                         $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . DbTableName::SETTING . ' SET settingValue = :returnEmail WHERE settingName = \'returnEmail\'  LIMIT 1');
                                                         $rStmt->execute(['returnEmail' => $_SESSION['val']['admin_return_email']]);
 
-                                                        $this->populateSampleUserData();
+                                                        if (!empty($_POST['sample_data_request'])) {
+                                                            $this->populateSampleUserData(self::TOTAL_SAMPLE_PROFILES);
+                                                        }
 
                                                         $_SESSION['step5'] = 1;
 
@@ -607,6 +611,46 @@ class InstallController extends Controller
         foreach ($aParams as $sName => $sValue) {
             $sMethodName = ($sName === 'socialMediaWidgets' ? 'setSocialWidgets' : 'setSetting');
             Framework\Mvc\Model\DbConfig::$sMethodName($sValue, $sName);
+        }
+    }
+
+    /**
+     * Populates some sample user profiles with Faker library.
+     *
+     * @param int $iNumber The number of profiles to generate.
+     *
+     * @return void
+     */
+    private function populateSampleUserData($iNumber)
+    {
+
+        $oUserModel = new UserCoreModel;
+        $oAffModel = new AffiliateCoreModel;
+
+        for ($iProfile = 0; $iProfile < $iNumber; $iProfile++) {
+            $oFaker = \Faker\Factory::create();
+
+            $sSex = $oFaker->randomElement(['male', 'female', 'couple']);
+            $sMatchSex = $oFaker->randomElement(['male', 'female', 'couple']);
+            $sBirthDate = $oFaker->dateTimeBetween('-60 years', '-18 years')->format('Y-m-d');
+
+            $aUser = [];
+            $aUser['username'] = $oFaker->username;
+            $aUser['email'] = $oFaker->email;
+            $aUser['first_name'] = $oFaker->firstName;
+            $aUser['last_name'] = $oFaker->lastName;
+            $aUser['password'] = $oFaker->password;
+            $aUser['sex'] = $sSex;
+            $aUser['match_sex'] = $sMatchSex;
+            $aUser['country'] = $oFaker->country;
+            $aUser['city'] = $oFaker->city;
+            $aUser['state'] = $oFaker->state;
+            $aUser['address'] = $oFaker->streetAddress;
+            $aUser['zip_code'] = $oFaker->postcode;
+            $aUser['birth_date'] = $sBirthDate;
+
+            $oUserModel->add(escape($aUser, true));
+            $oAffModel->add(escape($aUser, true));
         }
     }
 
