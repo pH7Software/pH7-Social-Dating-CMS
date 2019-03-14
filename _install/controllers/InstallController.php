@@ -624,7 +624,7 @@ class InstallController extends Controller
             $aUser['last_name'] = $oFaker->lastName;
             $aUser['password'] = $oFaker->password;
             $aUser['sex'] = $sSex;
-            $aUser['match_sex'] = $sMatchSex;
+            $aUser['match_sex'] = [$sMatchSex];
             $aUser['country'] = $oFaker->country;
             $aUser['city'] = $oFaker->city;
             $aUser['address'] = $oFaker->streetAddress;
