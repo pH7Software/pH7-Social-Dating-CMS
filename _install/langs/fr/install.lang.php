@@ -117,6 +117,7 @@ $LANG = array(
     'no_dir' => 'Le répertoire n\'existe pas.',
     'wait_importing_database' => 'Veuillez patienter pendant l\'importation de la base de donnée.<br />
         Cette opération peut prendre plusieurs minutes.',
+    'add_sample_data' => 'Générer des profils d\'example (vous pouvez les supprimer par la suite)',
     'niche' => 'Choisissez le type de site que vous voulez avoir ',
     'social_dating_niche' => 'Niche de Rencontre Sociale',
     'social_niche' => 'Niche de Réseautage Sociale',
