@@ -64,6 +64,8 @@ class Language
     }
 
     /**
+     * Gives the correct chosen language (e.g., fr, en, es).
+     *
      * @return string
      */
     public function get()
