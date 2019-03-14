@@ -67,7 +67,7 @@
         </p>
 
         <p>
-            <input type="checkbox" name="sample_data_request" id="sample_data_request" /> <label for="sample_data_request">{$LANG.add_sample_data}:</label>
+            <input type="checkbox" name="sample_data_request" id="sample_data_request" checked="checked" /> <label for="sample_data_request">{$LANG.add_sample_data}</label>
         </p>
 
         <p>
