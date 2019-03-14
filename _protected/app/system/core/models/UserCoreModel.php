@@ -1643,7 +1643,8 @@ class UserCoreModel extends Model
             }
         }
 
-        $sInClauseValue = rtrim($sGender, ',');
+        $sInClauseValue = rtrim($sGender, ','); // Removes the last extra comma
+
         if (!empty($sInClauseValue)) {
             return ' AND sex IN (' . $sInClauseValue . ') ';
         }
