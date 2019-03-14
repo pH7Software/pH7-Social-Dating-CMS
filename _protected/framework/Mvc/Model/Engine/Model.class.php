@@ -75,6 +75,10 @@ abstract class Model extends Entity
      */
     private function parseVar()
     {
-        $this->sContents = str_replace(self::DB_PREFIX_FLAG, Db::prefix(), $this->sContents);
+        $this->sContents = str_replace(
+            self::DB_PREFIX_FLAG,
+            Db::prefix(),
+            $this->sContents
+        );
     }
 }

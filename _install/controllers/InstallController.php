@@ -465,7 +465,9 @@ class InstallController extends Controller
 
                             // Set the theme for the chosen niche
                             $sSql = 'UPDATE %s SET settingValue = :theme WHERE settingName = :setting LIMIT 1';
-                            $rStmt = $DB->prepare(sprintf($sSql, $_SESSION['db']['prefix'] . DbTableName::SETTING));
+                            $rStmt = $DB->prepare(
+                                sprintf($sSql, $_SESSION['db']['prefix'] . DbTableName::SETTING)
+                            );
                             $rStmt->execute(['theme' => $sTheme, 'setting' => 'defaultTemplate']);
                         } catch (\PDOException $oE) {
                             $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
@@ -583,7 +585,10 @@ class InstallController extends Controller
     private function updateMods(Db $oDb, $sModName, $sStatus)
     {
         $sSql = 'UPDATE %s SET enabled = :status WHERE folderName = :modName LIMIT 1';
-        $rStmt = $oDb->prepare(sprintf($sSql, $_SESSION['db']['prefix'] . DbTableName::SYS_MOD_ENABLED));
+        $rStmt = $oDb->prepare(
+            sprintf($sSql, $_SESSION['db']['prefix'] . DbTableName::SYS_MOD_ENABLED)
+        );
+
         return $rStmt->execute(['modName' => $sModName, 'status' => $sStatus]);
     }
 
