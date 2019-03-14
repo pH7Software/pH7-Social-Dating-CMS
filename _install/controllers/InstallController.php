@@ -636,7 +636,7 @@ class InstallController extends Controller
 
             $oUserModel->add($aUser);
 
-            if ($iAffiliateNumber <= $iAffiliateNumber) {
+            if ($iProfile <= $iAffiliateNumber) {
                 $oAffModel->add($aUser);
             }
         }
