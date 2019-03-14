@@ -132,7 +132,7 @@ class Record
      */
     public function insert($sTable, array $aValues)
     {
-        $aValues = ($aValues === null) ? $this->aValues : $aValues;
+        $aValues = $aValues === null ? $this->aValues : $aValues;
         $this->sSql = 'INSERT INTO' . Db::prefix($sTable) . 'SET ';
 
         $oCachingIterator = new CachingIterator(new ArrayIterator($aValues));
@@ -317,7 +317,7 @@ class Record
             }
 
             if (is_array($mWhat)) {
-                $sWhat = (count($mWhat)) ? implode(',', $mWhat) : '*';
+                $sWhat = count($mWhat) ? implode(',', $mWhat) : '*';
             } else {
                 $sWhat = $mWhat;
             }
