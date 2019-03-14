@@ -17,7 +17,7 @@ defined('PH7') or exit('Restricted access');
 
 class InstallController extends Controller
 {
-    const TOTAL_SAMPLE_PROFILES = 15;
+    const TOTAL_SAMPLE_PROFILES = 16;
 
     /**
      * Enable/Disable Modules according to the chosen niche
