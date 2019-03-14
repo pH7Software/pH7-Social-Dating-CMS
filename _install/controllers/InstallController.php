@@ -17,7 +17,8 @@ defined('PH7') or exit('Restricted access');
 
 class InstallController extends Controller
 {
-    const TOTAL_SAMPLE_PROFILES = 16;
+    const TOTAL_MEMBERS_SAMPLE = 16;
+    const TOTAL_AFFILIATES_SAMPLE = 2;
 
     /**
      * Enable/Disable Modules according to the chosen niche
@@ -364,7 +365,10 @@ class InstallController extends Controller
                                                         $rStmt->execute(['returnEmail' => $_SESSION['val']['admin_return_email']]);
 
                                                         if (!empty($_POST['sample_data_request'])) {
-                                                            $this->populateSampleUserData(self::TOTAL_SAMPLE_PROFILES);
+                                                            $this->populateSampleUserData(
+                                                                self::TOTAL_MEMBERS_SAMPLE,
+                                                                self::TOTAL_AFFILIATES_SAMPLE
+                                                            );
                                                         }
 
                                                         $_SESSION['step5'] = 1;
@@ -615,17 +619,18 @@ class InstallController extends Controller
     /**
      * Populates some sample user profiles with Faker library.
      *
-     * @param int $iNumber The number of profiles to generate.
+     * @param int $iMemberNumber The number of members to generate.
+     * @param int $iAffiliateNumber The number of affiliates to generate (usually less than members).
      *
      * @return void
      */
-    private function populateSampleUserData($iNumber)
+    private function populateSampleUserData($iMemberNumber, $iAffiliateNumber)
     {
 
         $oUserModel = new UserCoreModel;
         $oAffModel = new AffiliateCoreModel;
 
-        for ($iProfile = 0; $iProfile < $iNumber; $iProfile++) {
+        for ($iProfile = 1; $iProfile <= $iMemberNumber; $iProfile++) {
             $oFaker = \Faker\Factory::create();
 
             $sSex = $oFaker->randomElement(['male', 'female', 'couple']);
@@ -648,7 +653,10 @@ class InstallController extends Controller
             $aUser['birth_date'] = $sBirthDate;
 
             $oUserModel->add(escape($aUser, true));
-            $oAffModel->add(escape($aUser, true));
+
+            if ($iAffiliateNumber <= $iAffiliateNumber) {
+                $oAffModel->add(escape($aUser, true));
+            }
         }
     }
 
