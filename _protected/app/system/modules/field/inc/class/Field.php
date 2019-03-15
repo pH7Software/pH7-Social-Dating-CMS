@@ -89,7 +89,7 @@ class Field
         $aMemberUnmodifiableFields = static::MEMBER_UNMODIFIABLE_FIELDS;
 
         if (SysMod::isEnabled('sms-verification')) {
-            $aMemberUnmodifiableFields += 'phone';
+            $aMemberUnmodifiableFields[] = 'phone';
         }
 
         $aFields = $sMod === 'aff' ? static::AFFILIATE_UNMODIFIABLE_FIELDS : $aMemberUnmodifiableFields;
