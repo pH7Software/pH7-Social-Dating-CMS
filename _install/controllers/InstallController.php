@@ -631,12 +631,16 @@ class InstallController extends Controller
             $aUser['zip_code'] = $oFaker->postcode;
             $aUser['birth_date'] = $sBirthDate;
             $aUser['description'] = $oFaker->paragraph(2);
+            $aUser['lang'] = $oFaker->languageCode;
             $aUser['ip'] = $oFaker->ipv4;
             $aUser['bank_account'] = $oFaker->bankAccountNumber;
 
             $oUserModel->add($aUser);
 
             if ($iProfile <= $iAffiliateNumber) {
+                // Specific data only for affiliates
+                $aUser['website'] = 'http://pierrehenry.be';
+                $aUser['phone'] = $oFaker->phoneNumber;
                 $oAffModel->add($aUser);
             }
         }
