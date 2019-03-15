@@ -631,7 +631,7 @@ class InstallController extends Controller
             $aUser['zip_code'] = $oFaker->postcode;
             $aUser['birth_date'] = $sBirthDate;
             $aUser['description'] = $oFaker->paragraph(2);
-            $aUser['lang'] = $oFaker->languageCode;
+            $aUser['lang'] = $oFaker->locale;
             $aUser['ip'] = $oFaker->ipv4;
             $aUser['bank_account'] = $oFaker->bankAccountNumber;
 
