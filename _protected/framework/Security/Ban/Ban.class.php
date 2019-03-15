@@ -24,6 +24,7 @@ class Ban
     const WORD_FILE = 'word.txt';
     const BANK_ACCOUNT_FILE = 'bank_account.txt';
     const IP_FILE = 'ip.txt';
+    const COMMENT_SIGN = '#';
 
     /** @var string */
     private static $sFile;
@@ -140,6 +141,11 @@ class Ban
 
         foreach ($aBans as $sBan) {
             $sBan = trim($sBan);
+            if (strpos($sBan, self::COMMENT_SIGN) === 0) {
+                // Skip comments
+                continue;
+            }
+
             $sWordReplace = $bWordReplace ? DbConfig::getSetting('banWordReplace') : '';
             self::$sVal = str_ireplace($sBan, $sWordReplace, self::$sVal);
         }
