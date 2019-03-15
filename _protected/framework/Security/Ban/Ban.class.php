@@ -141,7 +141,7 @@ class Ban
 
         foreach ($aBans as $sBan) {
             $sBan = trim($sBan);
-            if (strpos($sBan, self::COMMENT_SIGN) === 0) {
+            if (empty($sBan) || strpos($sBan, self::COMMENT_SIGN) === 0) {
                 // Skip comments
                 continue;
             }
