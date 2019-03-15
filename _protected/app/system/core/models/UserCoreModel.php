@@ -21,6 +21,7 @@ use PH7\Framework\Mvc\Model\Engine\Util\Various;
 use PH7\Framework\Security\Security;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Str\Str;
+use PH7\Framework\Translate\Lang;
 use stdClass;
 
 // Abstract Class
@@ -40,7 +41,6 @@ class UserCoreModel extends Model
     const PENDING_GROUP = 9;
 
     const DATETIME_FORMAT = 'Y-m-d H:i:s';
-    const DEFAULT_USER_LOCALE = 'en_US';
 
     /** @var string */
     protected $sCurrentDate;
@@ -687,7 +687,7 @@ class UserCoreModel extends Model
         $rStmt->bindValue(':matchSex', Form::setVal($aData['match_sex']), \PDO::PARAM_STR);
         $rStmt->bindValue(':birthDate', $aData['birth_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':active', (!empty($aData['is_active']) ? $aData['is_active'] : RegistrationCore::NO_ACTIVATION), \PDO::PARAM_INT);
-        $rStmt->bindValue(':lang', (!empty($aData['lang']) ? $aData['lang'] : self::DEFAULT_USER_LOCALE) , \PDO::PARAM_STR);
+        $rStmt->bindValue(':lang', (!empty($aData['lang']) ? $aData['lang'] : Lang::DEFAULT_LOCALE) , \PDO::PARAM_STR);
         $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
         $rStmt->bindParam(':hashValidation', $sHashValidation, \PDO::PARAM_STR, self::HASH_VALIDATION_LENGTH);
         $rStmt->bindValue(':joinDate', $this->sCurrentDate, \PDO::PARAM_STR);
