@@ -72,8 +72,8 @@ class AffiliateCoreModel extends AdminCoreModel
     {
         $sCurrentDate = (new CDateTime)->get()->dateTime('Y-m-d H:i:s');
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::AFFILIATE) . '(email, username, password, firstName, lastName, sex, birthDate, bankAccount, ip, joinDate, lastActivity)
-        VALUES (:email, :username, :password, :firstName, :lastName, :sex, :birthDate, :bankAccount, :ip, :joinDate, :lastActivity)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::AFFILIATE) . '(email, username, password, firstName, lastName, sex, birthDate, bankAccount, lang, ip, joinDate, lastActivity)
+        VALUES (:email, :username, :password, :firstName, :lastName, :sex, :birthDate, :bankAccount, :lang, :ip, :joinDate, :lastActivity)');
 
         $rStmt->bindValue(':email', trim($aData['email']), \PDO::PARAM_STR);
         $rStmt->bindValue(':username', trim($aData['username']), \PDO::PARAM_STR);
@@ -83,6 +83,7 @@ class AffiliateCoreModel extends AdminCoreModel
         $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);
         $rStmt->bindValue(':birthDate', $aData['birth_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':bankAccount', $aData['bank_account'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':lang', (!empty($aData['lang']) ? $aData['lang'] : self::DEFAULT_USER_LOCALE) , \PDO::PARAM_STR);
         $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
         $rStmt->bindValue(':joinDate', $sCurrentDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':lastActivity', $sCurrentDate, \PDO::PARAM_STR);
