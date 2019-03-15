@@ -21,6 +21,7 @@ use PH7\Framework\Mvc\Model\Engine\Util\Various;
 use PH7\Framework\Security\Security;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Str\Str;
+use PH7\Framework\Translate\Lang;
 use stdClass;
 
 // Abstract Class
@@ -675,8 +676,8 @@ class UserCoreModel extends Model
     {
         $sHashValidation = !empty($aData['hash_validation']) ? $aData['hash_validation'] : null;
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER) . '(email, username, password, firstName, lastName, sex, matchSex, birthDate, active, ip, hashValidation, joinDate, lastActivity)
-            VALUES (:email, :username, :password, :firstName, :lastName, :sex, :matchSex, :birthDate, :active, :ip, :hashValidation, :joinDate, :lastActivity)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER) . '(email, username, password, firstName, lastName, sex, matchSex, birthDate, active, lang, ip, hashValidation, joinDate, lastActivity)
+            VALUES (:email, :username, :password, :firstName, :lastName, :sex, :matchSex, :birthDate, :active, :lang, :ip, :hashValidation, :joinDate, :lastActivity)');
         $rStmt->bindValue(':email', trim($aData['email']), \PDO::PARAM_STR);
         $rStmt->bindValue(':username', trim($aData['username']), \PDO::PARAM_STR);
         $rStmt->bindValue(':password', Security::hashPwd($aData['password']), \PDO::PARAM_STR);
@@ -686,6 +687,7 @@ class UserCoreModel extends Model
         $rStmt->bindValue(':matchSex', Form::setVal($aData['match_sex']), \PDO::PARAM_STR);
         $rStmt->bindValue(':birthDate', $aData['birth_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':active', (!empty($aData['is_active']) ? $aData['is_active'] : RegistrationCore::NO_ACTIVATION), \PDO::PARAM_INT);
+        $rStmt->bindValue(':lang', (!empty($aData['lang']) ? $aData['lang'] : Lang::DEFAULT_LOCALE), \PDO::PARAM_STR);
         $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
         $rStmt->bindParam(':hashValidation', $sHashValidation, \PDO::PARAM_STR, self::HASH_VALIDATION_LENGTH);
         $rStmt->bindValue(':joinDate', $this->sCurrentDate, \PDO::PARAM_STR);

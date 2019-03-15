@@ -17,6 +17,9 @@ defined('PH7') or exit('Restricted access');
 
 class InstallController extends Controller
 {
+    const TOTAL_MEMBERS_SAMPLE = 16;
+    const TOTAL_AFFILIATES_SAMPLE = 2;
+
     /**
      * Enable/Disable Modules according to the chosen niche
      */
@@ -244,9 +247,7 @@ class InstallController extends Controller
                                         'pH7_SchemaGame',
                                         'pH7_DataGame',
                                         /** Core (main SQL schema/data) **/
-                                        'pH7_Core',
-                                        /** Sample user data **/
-                                        'pH7_SampleData'
+                                        'pH7_Core'
                                     ];
 
                                     for ($iFileKey = 0, $iCount = count($aDumps); $iFileKey < $iCount; $iFileKey++) {
@@ -363,7 +364,12 @@ class InstallController extends Controller
                                                         $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . DbTableName::SETTING . ' SET settingValue = :returnEmail WHERE settingName = \'returnEmail\'  LIMIT 1');
                                                         $rStmt->execute(['returnEmail' => $_SESSION['val']['admin_return_email']]);
 
-                                                        $this->populateSampleUserData();
+                                                        if (!empty($_POST['sample_data_request'])) {
+                                                            $this->populateSampleUserData(
+                                                                self::TOTAL_MEMBERS_SAMPLE,
+                                                                self::TOTAL_AFFILIATES_SAMPLE
+                                                            );
+                                                        }
 
                                                         $_SESSION['step5'] = 1;
 
@@ -549,32 +555,6 @@ class InstallController extends Controller
             !empty($_SESSION['val']['admin_username']);
     }
 
-    private function removeSessions()
-    {
-        $_SESSION = [];
-        session_unset();
-        session_destroy();
-    }
-
-    private function removeCookies()
-    {
-        $sCookieName = self::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang';
-
-        // We are asking the browser to delete the cookie.
-        setcookie(
-            $sCookieName,
-            0,
-            0,
-            null,
-            null,
-            false,
-            true
-        );
-
-        // and then, we delete the cookie value locally to avoid using it by mistake in following our script.
-        unset($_COOKIE[$sCookieName]);
-    }
-
     /**
      * Update module status (enabled/disabled).
      *
@@ -607,6 +587,62 @@ class InstallController extends Controller
         foreach ($aParams as $sName => $sValue) {
             $sMethodName = ($sName === 'socialMediaWidgets' ? 'setSocialWidgets' : 'setSetting');
             Framework\Mvc\Model\DbConfig::$sMethodName($sValue, $sName);
+        }
+    }
+
+    /**
+     * Populates some sample user profiles with Faker library.
+     *
+     * @param int $iMemberNumber The number of members to generate.
+     * @param int $iAffiliateNumber The number of affiliates to generate (usually less than members).
+     *
+     * @return void
+     */
+    private function populateSampleUserData($iMemberNumber, $iAffiliateNumber)
+    {
+        (new Framework\Translate\Lang)
+            ->setDefaultLang('en_US')
+            ->init();
+
+        // Initialize the site's database for "UserCoreModel" and "AffiliateCoreModel" classes
+        Framework\Mvc\Router\FrontController::getInstance()->_initializeDatabase();
+
+        $oUserModel = new UserCoreModel;
+        $oAffModel = new AffiliateCoreModel;
+
+        for ($iProfile = 1; $iProfile <= $iMemberNumber; $iProfile++) {
+            $oFaker = \Faker\Factory::create();
+
+            $sSex = $oFaker->randomElement(['male', 'female']);
+            $sMatchSex = $oFaker->randomElement(['male', 'female', 'couple']);
+            $sBirthDate = $oFaker->dateTimeBetween('-60 years', '-18 years')->format('Y-m-d');
+
+            $aUser = [];
+            $aUser['username'] = $oFaker->userName;
+            $aUser['email'] = $oFaker->email;
+            $aUser['first_name'] = $oFaker->firstName;
+            $aUser['last_name'] = $oFaker->lastName;
+            $aUser['password'] = $oFaker->password;
+            $aUser['sex'] = $sSex;
+            $aUser['match_sex'] = [$sMatchSex];
+            $aUser['country'] = $oFaker->countryCode;
+            $aUser['city'] = $oFaker->city;
+            $aUser['address'] = $oFaker->streetAddress;
+            $aUser['zip_code'] = $oFaker->postcode;
+            $aUser['birth_date'] = $sBirthDate;
+            $aUser['description'] = $oFaker->paragraph(2);
+            $aUser['lang'] = $oFaker->locale;
+            $aUser['ip'] = $oFaker->ipv4;
+            $aUser['bank_account'] = $oFaker->bankAccountNumber;
+
+            $oUserModel->add($aUser);
+
+            if ($iProfile <= $iAffiliateNumber) {
+                // Specific data only for affiliates
+                $aUser['website'] = 'http://pierrehenry.be';
+                $aUser['phone'] = $oFaker->phoneNumber;
+                $oAffModel->add($aUser);
+            }
         }
     }
 
@@ -651,6 +687,32 @@ class InstallController extends Controller
         // Loading Class ~/protected/app/includes/classes/* (for "DbTableName" class)
         require PH7_PATH_APP . 'includes/classes/Loader/Autoloader.php';
         App\Includes\Classes\Loader\Autoloader::getInstance()->init();
+    }
+
+    private function removeSessions()
+    {
+        $_SESSION = [];
+        session_unset();
+        session_destroy();
+    }
+
+    private function removeCookies()
+    {
+        $sCookieName = self::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang';
+
+        // We are asking the browser to delete the cookie.
+        setcookie(
+            $sCookieName,
+            0,
+            0,
+            null,
+            null,
+            false,
+            true
+        );
+
+        // and then, we delete the cookie value locally to avoid using it by mistake in following our script.
+        unset($_COOKIE[$sCookieName]);
     }
 
     /**

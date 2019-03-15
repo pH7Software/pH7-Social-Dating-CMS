@@ -67,6 +67,10 @@
         </p>
 
         <p>
+            <input type="checkbox" name="sample_data_request" id="sample_data_request" checked="checked" /> <label for="sample_data_request">{$LANG.add_sample_data}</label>
+        </p>
+
+        <p>
             <button type="submit" name="config_site_submit" value="1" class="btn btn-primary btn-lg">{$LANG.next}</button>
         </p>
     </fieldset>
