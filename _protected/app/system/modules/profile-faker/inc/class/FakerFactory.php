@@ -67,7 +67,7 @@ class FakerFactory
 
     public function generateAffiliates()
     {
-        $oUserModel = new AffiliateCoreModel;
+        $oAffModel = new AffiliateCoreModel;
 
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
             $oFaker = \Faker\Factory::create($this->sLocale);
