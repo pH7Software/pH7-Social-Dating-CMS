@@ -59,32 +59,37 @@ class GenerateProfileForm
         $oForm->render();
     }
 
+    /**
+     * @return array
+     */
     private static function getNationalities()
     {
         return [
-            'ALL' => t('Random Nationalities'),
+            '' => t('Random Nationalities'),
             'en_US' => t('American'),
             'en_AU' => t('Australian'),
             'nl_BE' => t('Dutch Belgian'),
             'fr_BE' => t('French Belgian'),
-            'BR' => t('Brazilian'),
+            'pt_BR' => t('Brazilian'),
             'en_GB' => t('British'),
             'en_CA' => t('English Canadian'),
             'fr_CA' => t('French Canadian'),
-            'DK' => t('Danish'),
+            'da_DK' => t('Danish'),
             'nl_NL' => t('Dutch'),
-            'FI' => t('Finnish'),
+            'fi_FI' => t('Finnish'),
             'fr_FR' => t('French'),
             'de_DE' => t('German'),
-            'IR' => t('Iranian'),
+            'fa_IR' => t('Iranian'),
             'en_IE' => t('Irish'),
             'en_NZ' => t('New Zealander'),
-            'NO' => t('Norwegian'),
-            'es_ES' => t('Spanish (from Spain)'),
+            'nb_NO' => t('Norwegian'),
+            'ro_RO' => t('Romanian'),
+            'ru_RU' => t('Russian'),
+            'es_ES' => t('Spanish'),
             'fr_CH' => t('French Swiss'),
             'it_CH' => t('Italian Swiss'),
             'de_CH' => t('German Swiss'),
-            'TR' => t('Turkish')
+            'tr_TR' => t('Turkish')
         ];
     }
 }
