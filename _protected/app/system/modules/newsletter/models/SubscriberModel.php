@@ -31,30 +31,6 @@ class SubscriberModel extends SubscriberCoreModel
     }
 
     /**
-     * Adding a Subscriber.
-     *
-     * @param array $aData
-     *
-     * @return int The ID of the Subscriber.
-     */
-    public function add(array $aData)
-    {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::SUBSCRIBER) . '(name, email, joinDate, ip, hashValidation, active, affiliatedId)
-            VALUES (:name, :email, :joinDate, :ip, :hashValidation, :active, :affiliatedId)');
-
-        $rStmt->bindValue(':name', $aData['name'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':joinDate', $aData['current_date'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
-        $rStmt->bindParam(':hashValidation', $aData['hash_validation'], \PDO::PARAM_STR, self::HASH_VALIDATION_LENGTH);
-        $rStmt->bindValue(':active', $aData['active'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':affiliatedId', $aData['affiliated_id'], \PDO::PARAM_INT);
-        $rStmt->execute();
-
-        return (int)Db::getInstance()->lastInsertId();
-    }
-
-    /**
      * Delete a Subscriber.
      *
      * @param int $sEmail
