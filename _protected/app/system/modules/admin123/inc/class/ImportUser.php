@@ -139,8 +139,8 @@ class ImportUser extends Core
             'password' => Various::genRnd(),
             'first_name' => 'Alex' . $sFiveChars,
             'last_name' => 'Rolli' . $sFiveChars,
-            'sex' => GenderTypeUserCore::GENDERS[mt_rand(0, 2)], // Generate randomly it
-            'match_sex' => GenderTypeUserCore::GENDERS[mt_rand(0, 2)], // Generate randomly it
+            'sex' => GenderTypeUserCore::GENDERS[array_rand(GenderTypeUserCore::GENDERS)], // Generate gender randomly
+            'match_sex' => GenderTypeUserCore::GENDERS[array_rand(GenderTypeUserCore::GENDERS)], // Generate one randomly
             'birth_date' => $this->getRandomDate(),
             'country' => 'US',
             'city' => 'Virginia',
@@ -256,7 +256,7 @@ class ImportUser extends Core
         $sSex = strtolower($sSex);
 
         if (!GenderTypeUserCore::isGenderValid($sSex, GenderTypeUserCore::GENDERS)) {
-            $sSex = GenderTypeUserCore::GENDERS[mt_rand(0, 2)];
+            $sSex = GenderTypeUserCore::GENDERS[array_rand(GenderTypeUserCore::GENDERS)];
         }
 
         return $sSex;
