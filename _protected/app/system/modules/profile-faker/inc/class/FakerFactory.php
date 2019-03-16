@@ -100,7 +100,8 @@ class FakerFactory
 
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
             $oFaker = \Faker\Factory::create($this->sLocale);
-            $iAccountStatus = $oFaker->randomElement([
+            $iAccountStatus = $oFaker->randomElement(
+                [
                     SubscriberCoreModel::ACTIVE_STATUS,
                     SubscriberCoreModel::INACTIVE_STATUS
                 ]
