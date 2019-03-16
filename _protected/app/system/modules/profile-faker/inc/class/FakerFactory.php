@@ -8,10 +8,6 @@
 
 namespace PH7;
 
-use PH7\Framework\Core\Kernel;
-use PH7\Framework\Translate\Lang;
-use PH7\Framework\Util\Various;
-
 class FakerFactory
 {
     /** @var int */
