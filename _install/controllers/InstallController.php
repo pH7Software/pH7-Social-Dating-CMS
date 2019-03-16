@@ -631,7 +631,7 @@ class InstallController extends Controller
             $aUser['zip_code'] = $oFaker->postcode;
             $aUser['birth_date'] = $sBirthDate;
             $aUser['description'] = $oFaker->paragraph(2);
-            $aUser['lang'] = substr($oFaker->locale, 0, 5);
+            $aUser['lang'] = $oFaker->locale;
             $aUser['ip'] = $oFaker->ipv4;
 
             $oUserModel->add($aUser);

@@ -55,7 +55,7 @@ class FakerFactory
             $aUser['zip_code'] = $oFaker->postcode;
             $aUser['birth_date'] = $sBirthDate;
             $aUser['description'] = $oFaker->paragraph(2);
-            $aUser['lang'] = substr($oFaker->locale, 0, 5);
+            $aUser['lang'] = $oFaker->locale;
             $aUser['website'] = Kernel::SOFTWARE_WEBSITE;
             $aUser['ip'] = $oFaker->ipv4;
 
@@ -96,7 +96,7 @@ class FakerFactory
             $aUser['website'] = $sWebsite;
             $aUser['phone'] = $oFaker->phoneNumber;
             $aUser['bank_account'] = $oFaker->bankAccountNumber;
-            $aUser['lang'] = substr($oFaker->locale, 0, 5);
+            $aUser['lang'] = $oFaker->locale;
             $aUser['ip'] = $oFaker->ipv4;
 
             $oAffModel->add($aUser);

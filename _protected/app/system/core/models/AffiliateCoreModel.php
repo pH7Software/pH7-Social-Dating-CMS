@@ -84,7 +84,7 @@ class AffiliateCoreModel extends AdminCoreModel
         $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);
         $rStmt->bindValue(':birthDate', $aData['birth_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':bankAccount', $aData['bank_account'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':lang', (!empty($aData['lang']) ? $aData['lang'] : Lang::DEFAULT_LOCALE), \PDO::PARAM_STR);
+        $rStmt->bindValue(':lang', (!empty($aData['lang']) ? substr($aData['lang'], 0, 5) : Lang::DEFAULT_LOCALE), \PDO::PARAM_STR);
         $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
         $rStmt->bindValue(':joinDate', $sCurrentDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':lastActivity', $sCurrentDate, \PDO::PARAM_STR);
