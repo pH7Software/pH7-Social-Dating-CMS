@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Core\Kernel;
 use PH7\Framework\Translate\Lang;
 use PH7\Framework\Util\Various;
 
@@ -55,7 +56,7 @@ class FakerFactory
             $aUser['birth_date'] = $sBirthDate;
             $aUser['description'] = $oFaker->paragraph(2);
             $aUser['lang'] = $oFaker->locale;
-            $aUser['website'] = 'https://ph7cms.com';
+            $aUser['website'] = Kernel::SOFTWARE_WEBSITE;
             $aUser['ip'] = $oFaker->ipv4;
 
             $oUserModel->add($aUser);
@@ -71,6 +72,13 @@ class FakerFactory
 
             $sSex = $oFaker->randomElement(['male', 'female']);
             $sBirthDate = $oFaker->dateTimeBetween('-65 years', '-18 years')->format('Y-m-d');
+            $sWebsite = $oFaker->randomElement(
+                [
+                    Kernel::SOFTWARE_WEBSITE,
+                    'http://pierrehenry.be',
+                    'https://lifyzer.com'
+                ]
+            );
 
             $aUser = [];
             $aUser['username'] = $oFaker->userName;
@@ -85,7 +93,7 @@ class FakerFactory
             $aUser['zip_code'] = $oFaker->postcode;
             $aUser['birth_date'] = $sBirthDate;
             $aUser['description'] = $oFaker->paragraph(2);
-            $aUser['website'] = 'http://pierrehenry.be';
+            $aUser['website'] = $sWebsite;
             $aUser['phone'] = $oFaker->phoneNumber;
             $aUser['bank_account'] = $oFaker->bankAccountNumber;
             $aUser['lang'] = $oFaker->locale;
