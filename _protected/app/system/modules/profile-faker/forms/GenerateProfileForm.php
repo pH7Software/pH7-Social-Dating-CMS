@@ -51,17 +51,20 @@ class GenerateProfileForm
                 ]
             )
         );
-        $oForm->addElement(
-            new \PFBC\Element\Select(
-                t('Nationality:'),
-                'locale',
-                static::getNationalities(),
-                [
-                    'value' => Lang::DEFAULT_LOCALE,
-                    'required' => 1
-                ]
-            )
-        );
+
+        if (self::isLocaleFieldEligible($sProfileType)) {
+            $oForm->addElement(
+                new \PFBC\Element\Select(
+                    t('Nationality:'),
+                    'locale',
+                    static::getNationalities(),
+                    [
+                        'value' => Lang::DEFAULT_LOCALE,
+                        'required' => 1
+                    ]
+                )
+            );
+        }
         $oForm->addElement(new \PFBC\Element\Button(t('Generate Profiles')));
         $oForm->render();
     }
@@ -97,5 +100,15 @@ class GenerateProfileForm
             'de_CH' => t('German Swiss'),
             'tr_TR' => t('Turkish')
         ];
+    }
+
+    /**
+     * @param string $sProfileType
+     *
+     * @return bool
+     */
+    private static function isLocaleFieldEligible($sProfileType)
+    {
+        return $sProfileType !== ProfileType::SUBSCRIBER;
     }
 }
