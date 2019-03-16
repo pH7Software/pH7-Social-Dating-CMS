@@ -20,21 +20,18 @@ class GeneratorController extends Controller
     public function addMember()
     {
         $this->setTitle(t('Generate Fake Members'));
-
         $this->output();
     }
 
     public function addAffiliate()
     {
         $this->setTitle(t('Generate Fake Affiliates'));
-
         $this->output();
     }
 
-    public function addSubscribers()
+    public function addSubscriber()
     {
         $this->setTitle(t('Generate Fake Subscribers'));
-
         $this->output();
     }
 
