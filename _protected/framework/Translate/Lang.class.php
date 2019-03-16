@@ -28,6 +28,8 @@ namespace PH7\Framework\Translate {
         const FIRST_ISO_CODE = 1;
         const LAST_ISO_CODE = 2;
 
+        const DEFAULT_LOCALE = 'en_US';
+
         /** @var Config */
         private $oConfig;
 
