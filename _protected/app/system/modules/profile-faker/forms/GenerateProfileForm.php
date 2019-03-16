@@ -12,6 +12,8 @@ use PH7\Framework\Url\Header;
 
 class GenerateProfileForm
 {
+    const DEFAULT_AMOUNT_VALUE = 20;
+
     public static function display($sProfileType)
     {
         if (isset($_POST['submit_generate_profiles'])) {
@@ -36,6 +38,8 @@ class GenerateProfileForm
                 t('Number of Profiles:'),
                 'amount',
                 [
+                    'min' => 1,
+                    'value' => self::DEFAULT_AMOUNT_VALUE,
                     'description' => t('Number of profiles to generate. Choosing a high number might takes a few minutes to load.'),
                     'required' => 1
                 ]
