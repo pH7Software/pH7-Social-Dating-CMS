@@ -117,7 +117,7 @@ class FakerFactory
 
             $aUser = [];
             $aUser['name'] = $oFaker->name;
-            $aUser['email'] = $oFaker->freeEmail;
+            $aUser['email'] = $oFaker->email;
             $aUser['active'] = $iAccountStatus;
             $aUser['current_date'] = $oFaker->dateTime()->format('Y-m-d H:i:s');
             $aUser['hash_validation'] = Various::genRnd(null, UserCoreModel::HASH_VALIDATION_LENGTH);
