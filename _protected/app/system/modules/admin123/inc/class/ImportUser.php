@@ -111,9 +111,9 @@ class ImportUser extends Core
             if ($sType === 'username') {
                 $this->aData[$iRow][$sType] = $oUser->findUsername($sData, $this->aData[$iRow]['first_name'], $this->aData[$iRow]['last_name']);
             } elseif ($sType === 'sex') {
-                $this->aData[$iRow][$sType] = $this->checkGender($sData);
+                $this->aData[$iRow][$sType] = $this->fixGender($sData);
             } elseif ($sType === 'match_sex') {
-                $this->aData[$iRow][$sType] = [$this->checkGender($sData)];
+                $this->aData[$iRow][$sType] = [$this->fixGender($sData)];
             } elseif ($sType === 'birth_date') {
                 $this->aData[$iRow][$sType] = $this->dateTime->get($sData)->date('Y-m-d');
             } else {
@@ -251,7 +251,7 @@ class ImportUser extends Core
      *
      * @return string
      */
-    private function checkGender($sSex)
+    private function fixGender($sSex)
     {
         $sSex = strtolower($sSex);
 
