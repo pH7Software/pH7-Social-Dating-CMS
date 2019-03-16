@@ -28,16 +28,16 @@ class FakerFactory
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
             $oFaker = \Faker\Factory::create(\Faker\Factory::DEFAULT_LOCALE);
 
-            $sSex = $oFaker->randomElement(['male', 'female']);
             $sBirthDate = $oFaker->dateTimeBetween('-65 years', '-18 years')->format('Y-m-d');
 
             $aUser = [];
+            $aUser['sex'] = 'buyer';
             $aUser['username'] = $oFaker->userName;
             $aUser['email'] = $oFaker->email;
             $aUser['first_name'] = $oFaker->firstName;
             $aUser['last_name'] = $oFaker->lastName;
             $aUser['password'] = $oFaker->password;
-            $aUser['sex'] = 'seller';
+            $aUser['phone'] = $oFaker->phoneNumber;
             $aUser['country'] = $oFaker->countryCode;
             $aUser['city'] = $oFaker->city;
             $aUser['address'] = $oFaker->streetAddress;
