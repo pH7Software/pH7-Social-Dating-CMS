@@ -84,7 +84,7 @@ class AffiliateCoreModel extends AdminCoreModel
         $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);
         $rStmt->bindValue(':birthDate', $aData['birth_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':bankAccount', $aData['bank_account'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':lang', (!empty($aData['lang']) ? $aData['lang'] : Lang::DEFAULT_LOCALE), \PDO::PARAM_STR);
+        $rStmt->bindValue(':lang', (!empty($aData['lang']) ? substr($aData['lang'], 0, 5) : Lang::DEFAULT_LOCALE), \PDO::PARAM_STR);
         $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
         $rStmt->bindValue(':joinDate', $sCurrentDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':lastActivity', $sCurrentDate, \PDO::PARAM_STR);
@@ -102,11 +102,11 @@ class AffiliateCoreModel extends AdminCoreModel
             VALUES (:profileId, :middleName, :country, :city, :state, :zipCode, :phone, :description, :website)');
 
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
-        $rStmt->bindValue(':middleName', $aData['middle_name'], \PDO::PARAM_STR);
-        $rStmt->bindParam(':country', $aData['country'], \PDO::PARAM_STR, 2);
-        $rStmt->bindValue(':city', $aData['city'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':state', $aData['state'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':zipCode', $aData['zip_code'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':middleName', (!empty($aData['middle_name']) ? $aData['middle_name'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':country', (!empty($aData['country']) ? $aData['country'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':city', (!empty($aData['city']) ? $aData['city'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':state', (!empty($aData['state']) ? $aData['state'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':zipCode', (!empty($aData['zip_code']) ? $aData['zip_code'] : ''), \PDO::PARAM_STR);
         $rStmt->bindValue(':description', $aData['description'], \PDO::PARAM_STR);
         $rStmt->bindValue(':phone', $aData['phone'], \PDO::PARAM_STR);
         $rStmt->bindValue(':website', trim($aData['website']), \PDO::PARAM_STR);

@@ -25,7 +25,7 @@ class SubscriptionFormProcess extends Form
     {
         parent::__construct();
 
-        $oSubscriptionModel = new SubscriptionModel;
+        $oSubscriberModel = new SubscriberModel;
         $sEmail = $this->httpRequest->post('email');
         $sName = $this->httpRequest->post('name');
         $bIsSubscriber = (new ExistsCoreModel)->email($sEmail, DbTableName::SUBSCRIBER);
@@ -39,7 +39,7 @@ class SubscriptionFormProcess extends Form
                         'current_date' => (new CDateTime)->get()->dateTime('Y-m-d H:i:s'),
                         'ip' => Ip::get(),
                         'hash_validation' => Various::genRnd(null, UserCoreModel::HASH_VALIDATION_LENGTH),
-                        'active' => SubscriptionModel::INACTIVE_STATUS,
+                        'active' => SubscriberModel::INACTIVE_STATUS,
                         'affiliated_id' => (int)(new Cookie)->get(AffiliateCore::COOKIE_NAME)
                     ];
 
@@ -48,7 +48,7 @@ class SubscriptionFormProcess extends Form
                             'form_subscription',
                             t('Please activate your subscription by clicking the activation link you received by email. If you can not find the email, please look in your SPAM FOLDER and mark as not spam.')
                         );
-                        $oSubscriptionModel->add($aData);
+                        $oSubscriberModel->add($aData);
                     } else {
                         \PFBC\Form::setError('form_subscription', Form::errorSendingEmail());
                     }
@@ -59,7 +59,7 @@ class SubscriptionFormProcess extends Form
 
             case 'unsubscribe': {
                 if ($bIsSubscriber) {
-                    $oSubscriptionModel->unsubscribe($sEmail);
+                    $oSubscriberModel->unsubscribe($sEmail);
                     \PFBC\Form::setSuccess('form_subscription', t('Your subscription was successfully canceled.'));
                 } else {
                     \PFBC\Form::setError(
@@ -73,7 +73,7 @@ class SubscriptionFormProcess extends Form
                 Http::setHeadersByCode(StatusCode::BAD_REQUEST);
                 exit('Bad Request Error!');
         }
-        unset($oSubscriptionModel);
+        unset($oSubscriberModel);
     }
 
     /**

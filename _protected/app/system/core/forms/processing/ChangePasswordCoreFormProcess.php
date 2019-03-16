@@ -69,8 +69,16 @@ class ChangePasswordCoreFormProcess extends Form
             $this->session->regenerateId();
 
             // Update the password
-            $oPasswordModel->changePassword($sEmail, $this->httpRequest->post('new_password', Http::NO_CLEAN), $sTable);
-            \PFBC\Form::setSuccess('form_change_password', t('Your password has been successfully changed.'));
+            $oPasswordModel->changePassword(
+                $sEmail,
+                $this->httpRequest->post('new_password', Http::NO_CLEAN),
+                $sTable
+            );
+
+            \PFBC\Form::setSuccess(
+                'form_change_password',
+                t('Your password has been successfully changed.')
+            );
         }
     }
 

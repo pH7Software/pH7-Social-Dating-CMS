@@ -633,7 +633,6 @@ class InstallController extends Controller
             $aUser['description'] = $oFaker->paragraph(2);
             $aUser['lang'] = $oFaker->locale;
             $aUser['ip'] = $oFaker->ipv4;
-            $aUser['bank_account'] = $oFaker->bankAccountNumber;
 
             $oUserModel->add($aUser);
 
@@ -641,6 +640,7 @@ class InstallController extends Controller
                 // Specific data only for affiliates
                 $aUser['website'] = 'http://pierrehenry.be';
                 $aUser['phone'] = $oFaker->phoneNumber;
+                $aUser['bank_account'] = $oFaker->bankAccountNumber;
                 $oAffModel->add($aUser);
             }
         }
