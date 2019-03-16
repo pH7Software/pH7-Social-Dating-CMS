@@ -55,7 +55,7 @@ class GenerateProfileForm
         if (self::isLocaleFieldEligible($sProfileType)) {
             $oForm->addElement(
                 new \PFBC\Element\Select(
-                    t('Nationality:'),
+                    t('Type of Profile:'),
                     'locale',
                     static::getNationalities(),
                     [
