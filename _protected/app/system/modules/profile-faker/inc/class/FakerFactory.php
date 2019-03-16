@@ -72,11 +72,13 @@ class FakerFactory
             $aUser['zip_code'] = $oFaker->postcode;
             $aUser['birth_date'] = $sBirthDate;
             $aUser['description'] = $oFaker->paragraph(3);
-            $aUser['property_bedrooms'] = $oFaker->randomElement([1, 2, 3, 4]);
+            $aUser['property_bedrooms'] = $oFaker->randomElement([1, 2, 3, 4, 5]);
             $aUser['property_bathrooms'] = $oFaker->randomElement([1, 2, 3, 4]);
             $aUser['property_year_built'] = $oFaker->year('-4 years');
             $aUser['property_home_type'] = $oFaker->randomElement(['family', 'condo']);
             $aUser['property_home_style'] = $oFaker->randomElement(['rambler', 'ranch', 'tri-multi-level', 'two-story', 'other']);
+            $aUser['property_garage_spaces'] = $oFaker->randomElement([0, 1, 2, 3, 4]);
+            $aUser['property_carport_spaces'] = $oFaker->randomElement([0, 1, 2]);
             $aUser['ip'] = $oFaker->ipv4;
 
             $oUserModel->add($aUser);
