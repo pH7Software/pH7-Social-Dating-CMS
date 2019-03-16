@@ -94,7 +94,6 @@ class FakerFactory
             $aUser['birth_date'] = $sBirthDate;
             $aUser['description'] = $oFaker->paragraph(2);
             $aUser['website'] = $sWebsite;
-            $aUser['phone'] = $oFaker->phoneNumber;
             $aUser['bank_account'] = $oFaker->bankAccountNumber;
             $aUser['lang'] = $oFaker->locale;
             $aUser['ip'] = $oFaker->ipv4;
