@@ -30,7 +30,7 @@ class FakerFactory
         $oAffModel = new AffiliateCoreModel;
 
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
-            $oFaker = \Faker\Factory::create($this->sLocale);
+            $oFaker = \Faker\Factory::create(\Faker\Factory::DEFAULT_LOCALE);
 
             $sSex = $oFaker->randomElement(['male', 'female']);
             $sBirthDate = $oFaker->dateTimeBetween('-65 years', '-18 years')->format('Y-m-d');
@@ -41,14 +41,13 @@ class FakerFactory
             $aUser['first_name'] = $oFaker->firstName;
             $aUser['last_name'] = $oFaker->lastName;
             $aUser['password'] = $oFaker->password;
-            $aUser['sex'] = $sSex;
+            $aUser['sex'] = 'seller';
             $aUser['country'] = $oFaker->countryCode;
             $aUser['city'] = $oFaker->city;
             $aUser['address'] = $oFaker->streetAddress;
             $aUser['zip_code'] = $oFaker->postcode;
             $aUser['birth_date'] = $sBirthDate;
             $aUser['description'] = $oFaker->paragraph(2);
-            $aUser['lang'] = $oFaker->locale;
             $aUser['ip'] = $oFaker->ipv4;
 
             $oAffModel->add($aUser);
@@ -60,10 +59,8 @@ class FakerFactory
         $oUserModel = new UserCoreModel;
 
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
-            $oFaker = \Faker\Factory::create($this->sLocale);
+            $oFaker = \Faker\Factory::create(\Faker\Factory::DEFAULT_LOCALE);
 
-            $sSex = $oFaker->randomElement(['male', 'female', 'couple']);
-            $sMatchSex = $oFaker->randomElement(['male', 'female', 'couple']);
             $sBirthDate = $oFaker->dateTimeBetween('-65 years', '-18 years')->format('Y-m-d');
 
             $aUser = [];
@@ -72,16 +69,18 @@ class FakerFactory
             $aUser['first_name'] = $oFaker->firstName;
             $aUser['last_name'] = $oFaker->lastName;
             $aUser['password'] = $oFaker->password;
-            $aUser['sex'] = $sSex;
-            $aUser['match_sex'] = [$sMatchSex];
+            $aUser['sex'] = 'seller';
             $aUser['country'] = $oFaker->countryCode;
             $aUser['city'] = $oFaker->city;
             $aUser['address'] = $oFaker->streetAddress;
             $aUser['zip_code'] = $oFaker->postcode;
             $aUser['birth_date'] = $sBirthDate;
-            $aUser['description'] = $oFaker->paragraph(2);
-            $aUser['lang'] = $oFaker->locale;
-            $aUser['website'] = Kernel::SOFTWARE_WEBSITE;
+            $aUser['description'] = $oFaker->paragraph(3);
+            $aUser['property_bedrooms'] = $oFaker->randomElement([1, 2, 3, 4]);
+            $aUser['property_bathrooms'] = $oFaker->randomElement([1, 2, 3, 4]);
+            $aUser['property_year_built'] = $oFaker->year('-4 years');
+            $aUser['property_home_type'] = $oFaker->randomElement(['family', 'condo']);
+            $aUser['property_home_style'] = $oFaker->randomElement(['rambler', 'ranch', 'tri-multi-level', 'two-story', 'other']);
             $aUser['ip'] = $oFaker->ipv4;
 
             $oUserModel->add($aUser);
