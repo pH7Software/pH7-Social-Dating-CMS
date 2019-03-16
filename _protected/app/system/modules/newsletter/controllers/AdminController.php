@@ -19,7 +19,7 @@ class AdminController extends Controller
     const REDIRECTION_DELAY_IN_SEC = 5;
 
     /** @var SubscriberModel */
-    private $oSubscriptionModel;
+    private $oSubscriberModel;
 
     /** @var string */
     private $sTitle;
@@ -28,7 +28,7 @@ class AdminController extends Controller
     {
         parent::__construct();
 
-        $this->oSubscriptionModel = new SubscriberModel;
+        $this->oSubscriberModel = new SubscriberModel;
     }
 
     public function index()
@@ -51,7 +51,7 @@ class AdminController extends Controller
 
     public function browse()
     {
-        $iTotal = $this->oSubscriptionModel->browse(
+        $iTotal = $this->oSubscriberModel->browse(
             $this->httpRequest->get('looking'),
             true,
             $this->httpRequest->get('order'),
@@ -63,7 +63,7 @@ class AdminController extends Controller
         $oPage = new Page;
         $this->view->total_pages = $oPage->getTotalPages($iTotal, self::SUBSCRIBERS_PER_PAGE);
         $this->view->current_page = $oPage->getCurrentPage();
-        $oBrowse = $this->oSubscriptionModel->browse(
+        $oBrowse = $this->oSubscriberModel->browse(
             $this->httpRequest->get('looking'),
             false,
             $this->httpRequest->get('order'),
@@ -102,7 +102,7 @@ class AdminController extends Controller
             $sMsg = Form::errorTokenMsg();
         } elseif (count($this->httpRequest->post('action')) > 0) {
             foreach ($this->httpRequest->post('action') as $sEmail) {
-                $this->oSubscriptionModel->unsubscribe($sEmail);
+                $this->oSubscriberModel->unsubscribe($sEmail);
             }
 
             $sMsg = t('The subscribers(s) has/have been removed.');

@@ -28,7 +28,7 @@ class Newsletter extends Core
     const SUBSCRIBER_DATA_METHOD = 'getSubscribers';
 
     /** @var SubscriberModel */
-    private $oSubscriptionModel;
+    private $oSubscriberModel;
 
     /** @var string */
     private $sSubscribersMethod;
@@ -40,7 +40,7 @@ class Newsletter extends Core
     {
         parent::__construct();
 
-        $this->oSubscriptionModel = new SubscriberModel;
+        $this->oSubscriberModel = new SubscriberModel;
         $bOnlySubscribers = $this->httpRequest->postExists('only_subscribers');
         $this->sSubscribersMethod = $bOnlySubscribers ? self::SUBSCRIBER_DATA_METHOD : self::MEMBER_DATA_METHOD;
     }
@@ -54,7 +54,7 @@ class Newsletter extends Core
     {
         $iStatus = 0; // Default value
 
-        $oSubscribers = $this->oSubscriptionModel->{$this->sSubscribersMethod}();
+        $oSubscribers = $this->oSubscriberModel->{$this->sSubscribersMethod}();
 
         $oMail = new Mail;
         foreach ($oSubscribers as $oSubscriber) {
@@ -113,7 +113,7 @@ class Newsletter extends Core
     private function isUserOptedIn(stdClass $oSubscriber)
     {
         return $this->isMemberData($oSubscriber) &&
-            !$this->oSubscriptionModel->isNotification($oSubscriber->profileId, 'enableNewsletters');
+            !$this->oSubscriberModel->isNotification($oSubscriber->profileId, 'enableNewsletters');
     }
 
     /**
