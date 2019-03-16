@@ -65,7 +65,13 @@ class GenerateProfileForm
                 )
             );
         }
-        $oForm->addElement(new \PFBC\Element\Button(t('Generate Profiles')));
+        $oForm->addElement(
+            new \PFBC\Element\Button(
+                t('Generate Profiles'),
+                'submit',
+                ['icon' => 'plus']
+            )
+        );
         $oForm->render();
     }
 
