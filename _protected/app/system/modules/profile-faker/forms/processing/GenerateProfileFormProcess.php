@@ -17,17 +17,24 @@ class GenerateProfileFormProcess extends Form
 
     /**
      * @param string $sProfileType The profile type to generate.
+     *
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
     public function __construct($sProfileType)
     {
         $this->sProfileType = $sProfileType;
         $this->generate();
+
+        \PFBC\Form::setSuccess(
+            'form_generate_profiles',
+            nt('%n% profile has been generated.', '%n% profiles have been generated.', $this->httpRequest->post('amount', 'int'))
+        );
     }
 
     private function generate()
     {
         $oFakerFactory = new FakerFactory(
-            $this->httpRequest->post('amount'),
+            $this->httpRequest->post('amount', 'int'),
             $this->httpRequest->post('locale')
         );
 
