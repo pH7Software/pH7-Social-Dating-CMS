@@ -260,7 +260,8 @@
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','search') }}" title="{lang 'Search Users'}"><i class="fa fa-search"></i> {lang 'Search'}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','add') }}" title="{lang 'Add a User'}"><i class="fa fa-user-plus"></i> {lang 'Add User'}</a></li>
                 <li><a href="{{ $design->url('report','admin','index') }}" title="{lang 'Report Abuse'}"><i class="fa fa-flag"></i> {lang 'Reports'} {if $count_total_reports}<span class="badge">{count_total_reports}</span>{/if}</a></li>
-                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','addfakeprofiles') }}" title="{lang 'Fake Profiles Automatic Generator'}"><i class="fa fa-user-plus"></i> {lang 'Fake Profile Generator'}</a></li>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','addfakeprofiles') }}" title="{lang 'Fake Profiles Automatic Generator (with profile photos)'}"><i class="fa fa-user-plus"></i> {lang 'Fake Profile Generator'}</a></li>
+                <li><a href="{{ $design->url('profile-faker','generator','addmember') }}" title="{lang 'Generate Bulk Members (without profile photos)'}"><i class="fa fa-user-plus"></i> {lang 'Generate Bulk Members'}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','import') }}" title="{lang 'Import Users'}"><i class="fa fa-user-plus"></i> {lang 'Import Users'}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','countryrestriction') }}" title="{lang 'Country Restrictions for Registration and Search form'}"><i class="fa fa-globe"></i> {lang 'Country Restriction'}</a></li>
                 <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('field','field','all','user') }}" title="{lang 'User Fields'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-check-circle-o"></i> {lang 'User Fields'}</a>
@@ -307,6 +308,7 @@
                       <li><a href="{{ $design->url('newsletter', 'admin', 'search') }}" title="{lang 'Search Subscribers'}">{lang 'Search'}</a></li>
                     </ul>
                   </li>
+                  <li><a href="{{ $design->url('profile-faker', 'generator', 'addsubscriber') }}" title="{lang 'Generate Bulk Subscribers'}">{lang 'Generate Bulk Subscribers'}</a></li>
                 </ul>
               </li>
             {/if}
@@ -344,6 +346,7 @@
                   <li><a href="{{ $design->url('affiliate','admin','browse') }}" title="{lang 'Affiliates List'}">{lang 'Browse Affiliates'}</a></li>
                   <li><a href="{{ $design->url('affiliate','admin','search') }}" title="{lang 'Search an Affiliate'}">{lang 'Search an Affiliate'}</a></li>
                   <li><a href="{{ $design->url('affiliate','admin','add') }}" title="{lang 'Add an Affiliate'}">{lang 'Add Affiliate'}</a></li>
+                  <li><a href="{{ $design->url('profile-faker','generator','addaffiliate') }}" title="{lang 'Generate Bulk Affiliates'}">{lang 'Generate Bulk Affiliates'}</a></li>
                   <li><a href="{{ $design->url('affiliate','admin','config') }}" title="{lang 'Affiliate Settings'}">{lang 'Settings'}</a></li>
                   <li><a href="{{ $design->url('affiliate','admin','countryrestriction') }}" title="{lang 'Country Restrictions for Registration form'}">{lang 'Country Restriction'}</a></li>
                   <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('field','field','all','aff') }}" title="{lang 'Affiliate Fields'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Affiliate Fields'}</a>
