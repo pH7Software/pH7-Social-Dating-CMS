@@ -100,11 +100,16 @@ class FakerFactory
 
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
             $oFaker = \Faker\Factory::create($this->sLocale);
+            $iAccountStatus = $oFaker->randomElement([
+                    SubscriberCoreModel::ACTIVE_STATUS,
+                    SubscriberCoreModel::INACTIVE_STATUS
+                ]
+            );
 
             $aUser = [];
             $aUser['name'] = $oFaker->name;
             $aUser['email'] = $oFaker->freeEmail;
-            $aUser['active'] = SubscriberCoreModel::ACTIVE_STATUS;
+            $aUser['active'] = $iAccountStatus;
             $aUser['current_date'] = $oFaker->dateTime()->format('Y-m-d H:i:s');
             $aUser['hash_validation'] = Various::genRnd(null, UserCoreModel::HASH_VALIDATION_LENGTH);
             $aUser['affiliated_id'] = 0;
