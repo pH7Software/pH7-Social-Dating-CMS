@@ -60,18 +60,20 @@ class FakerFactory
             $sBirthDate = $oFaker->dateTimeBetween('-65 years', '-18 years')->format('Y-m-d');
 
             $aUser = [];
+            $aUser['sex'] = 'seller';
             $aUser['username'] = $oFaker->userName;
             $aUser['email'] = $oFaker->freeEmail;
             $aUser['first_name'] = $oFaker->firstName;
             $aUser['last_name'] = $oFaker->lastName;
             $aUser['password'] = $oFaker->password;
-            $aUser['sex'] = 'seller';
             $aUser['country'] = $oFaker->countryCode;
             $aUser['city'] = $oFaker->city;
             $aUser['address'] = $oFaker->streetAddress;
             $aUser['zip_code'] = $oFaker->postcode;
             $aUser['birth_date'] = $sBirthDate;
             $aUser['description'] = $oFaker->paragraph(3);
+            $aUser['phone'] = $oFaker->phoneNumber;
+            $aUser['property_price'] = $oFaker->numberBetween([900, 99999999]);
             $aUser['property_bedrooms'] = $oFaker->randomElement([1, 2, 3, 4, 5]);
             $aUser['property_bathrooms'] = $oFaker->randomElement([1, 2, 3, 4]);
             $aUser['property_year_built'] = $oFaker->year('-4 years');
@@ -79,6 +81,7 @@ class FakerFactory
             $aUser['property_home_style'] = $oFaker->randomElement(['rambler', 'ranch', 'tri-multi-level', 'two-story', 'other']);
             $aUser['property_garage_spaces'] = $oFaker->randomElement([0, 1, 2, 3, 4]);
             $aUser['property_carport_spaces'] = $oFaker->randomElement([0, 1, 2]);
+            $aUser['contact_times'] = $oFaker->randomElement(['morning', 'afternoon', 'evening']);
             $aUser['ip'] = $oFaker->ipv4;
 
             $oUserModel->add($aUser);
