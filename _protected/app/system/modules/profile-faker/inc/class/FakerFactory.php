@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Core\Kernel;
+use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Translate\Lang;
 use PH7\Framework\Util\Various;
 
@@ -51,7 +52,12 @@ class FakerFactory
                     GenderTypeUserCore::COUPLE
                 ]
             );
-            $sBirthDate = $oFaker->dateTimeBetween('-65 years', '-18 years')->format('Y-m-d');
+            $iMinAge = DbConfig::getSetting('minAgeRegistration');
+            $iMaxAge = DbConfig::getSetting('maxAgeRegistration');
+            $sBirthDate = $oFaker->dateTimeBetween(
+                sprintf('-%s years', $iMinAge),
+                sprintf('-%s years', $iMaxAge)
+            )->format('Y-m-d');
 
             $aUser = [];
             $aUser['username'] = $oFaker->userName;
