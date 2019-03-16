@@ -15,7 +15,6 @@ class Field
 {
     const MEMBER_UNMODIFIABLE_FIELDS = [
         'profileid',
-        'middlename',
         'description',
         'punchline',
         'city',
@@ -30,7 +29,6 @@ class Field
 
     const AFFILIATE_UNMODIFIABLE_FIELDS = [
         'profileid',
-        'middlename',
         'description',
         'businessname',
         'address',
