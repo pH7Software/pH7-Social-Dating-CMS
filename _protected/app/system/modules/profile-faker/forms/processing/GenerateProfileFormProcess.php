@@ -12,19 +12,19 @@ defined('PH7') or exit('Restricted access');
 
 class GenerateProfileFormProcess extends Form
 {
-    /** @var string */
-    private $sProfileType;
+    /** @var int */
+    private $iProfileType;
 
     /**
-     * @param string $sProfileType The profile type to generate.
+     * @param int $iProfileType The profile type to generate.
      *
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    public function __construct($sProfileType)
+    public function __construct($iProfileType)
     {
         parent::__construct();
 
-        $this->sProfileType = $sProfileType;
+        $this->iProfileType = $iProfileType;
         $this->generate();
 
         \PFBC\Form::setSuccess(
@@ -40,7 +40,7 @@ class GenerateProfileFormProcess extends Form
             $this->httpRequest->post('locale')
         );
 
-        switch ($this->sProfileType) {
+        switch ($this->iProfileType) {
             case ProfileType::MEMBER:
                 $oFakerFactory->generateMembers();
                 break;

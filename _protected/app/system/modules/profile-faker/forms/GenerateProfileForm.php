@@ -16,15 +16,15 @@ class GenerateProfileForm
     const DEFAULT_AMOUNT_VALUE = 20;
 
     /**
-     * @param string $sProfileType
+     * @param int $iProfileType
      *
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    public static function display($sProfileType)
+    public static function display($iProfileType)
     {
         if (isset($_POST['submit_generate_profiles'])) {
             if (\PFBC\Form::isValid($_POST['submit_generate_profiles'])) {
-                new GenerateProfileFormProcess($sProfileType);
+                new GenerateProfileFormProcess($iProfileType);
             }
 
             Header::redirect();
@@ -52,7 +52,7 @@ class GenerateProfileForm
             )
         );
 
-        if (self::isLocaleFieldEligible($sProfileType)) {
+        if (self::isLocaleFieldEligible($iProfileType)) {
             $oForm->addElement(
                 new \PFBC\Element\Select(
                     t('Type of Profile:'),
@@ -109,12 +109,12 @@ class GenerateProfileForm
     }
 
     /**
-     * @param string $sProfileType
+     * @param int $iProfileType
      *
      * @return bool
      */
-    private static function isLocaleFieldEligible($sProfileType)
+    private static function isLocaleFieldEligible($iProfileType)
     {
-        return $sProfileType !== ProfileType::SUBSCRIBER;
+        return $iProfileType !== ProfileType::SUBSCRIBER;
     }
 }

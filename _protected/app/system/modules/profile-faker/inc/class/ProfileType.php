@@ -10,7 +10,7 @@ namespace PH7;
 
 final class ProfileType
 {
-    const MEMBER = 'members';
-    const AFFILIATE = 'affiliates';
-    const SUBSCRIBER = 'subscribers';
+    const MEMBER = 1;
+    const AFFILIATE = 2;
+    const SUBSCRIBER = 3;
 }
