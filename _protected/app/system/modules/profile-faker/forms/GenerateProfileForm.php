@@ -49,10 +49,7 @@ class GenerateProfileForm
             new \PFBC\Element\Select(
                 t('Nationality:'),
                 'locale',
-                static::getNationalities(),
-                [
-                    'required' => 1
-                ]
+                static::getNationalities()
             )
         );
         $oForm->addElement(new \PFBC\Element\Button(t('Generate Profiles')));
