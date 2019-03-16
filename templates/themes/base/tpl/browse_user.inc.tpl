@@ -17,9 +17,9 @@
                 {{ UserDesignCoreModel::userStatus($user->profileId) }}
 
                 {* Sex Icon *}
-                {if $user->sex === 'male'}
+                {if $user->sex === GenderTypeUserCore::MALE}
                     {{ $sex_ico = ' <span class=green>&#9794;</span>' }}
-                {elseif $user->sex === 'female'}
+                {elseif $user->sex === GenderTypeUserCore::FEMALE}
                     {{ $sex_ico = ' <span class=pink>&#9792;</span>' }}
                 {else}
                     {{ $sex_ico = '' }}
