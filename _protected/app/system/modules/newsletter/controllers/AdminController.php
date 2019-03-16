@@ -18,7 +18,7 @@ class AdminController extends Controller
     const SUBSCRIBERS_PER_PAGE = 30;
     const REDIRECTION_DELAY_IN_SEC = 5;
 
-    /** @var SubscriptionModel */
+    /** @var SubscriberModel */
     private $oSubscriptionModel;
 
     /** @var string */
@@ -28,7 +28,7 @@ class AdminController extends Controller
     {
         parent::__construct();
 
-        $this->oSubscriptionModel = new SubscriptionModel;
+        $this->oSubscriptionModel = new SubscriberModel;
     }
 
     public function index()

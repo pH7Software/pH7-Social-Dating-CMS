@@ -25,7 +25,7 @@ class SubscriptionFormProcess extends Form
     {
         parent::__construct();
 
-        $oSubscriptionModel = new SubscriptionModel;
+        $oSubscriptionModel = new SubscriberModel;
         $sEmail = $this->httpRequest->post('email');
         $sName = $this->httpRequest->post('name');
         $bIsSubscriber = (new ExistsCoreModel)->email($sEmail, DbTableName::SUBSCRIBER);
@@ -39,7 +39,7 @@ class SubscriptionFormProcess extends Form
                         'current_date' => (new CDateTime)->get()->dateTime('Y-m-d H:i:s'),
                         'ip' => Ip::get(),
                         'hash_validation' => Various::genRnd(null, UserCoreModel::HASH_VALIDATION_LENGTH),
-                        'active' => SubscriptionModel::INACTIVE_STATUS,
+                        'active' => SubscriberModel::INACTIVE_STATUS,
                         'affiliated_id' => (int)(new Cookie)->get(AffiliateCore::COOKIE_NAME)
                     ];
 

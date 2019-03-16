@@ -27,7 +27,7 @@ class Newsletter extends Core
     const MEMBER_DATA_METHOD = 'getProfiles';
     const SUBSCRIBER_DATA_METHOD = 'getSubscribers';
 
-    /** @var SubscriptionModel */
+    /** @var SubscriberModel */
     private $oSubscriptionModel;
 
     /** @var string */
@@ -40,7 +40,7 @@ class Newsletter extends Core
     {
         parent::__construct();
 
-        $this->oSubscriptionModel = new SubscriptionModel;
+        $this->oSubscriptionModel = new SubscriberModel;
         $bOnlySubscribers = $this->httpRequest->postExists('only_subscribers');
         $this->sSubscribersMethod = $bOnlySubscribers ? self::SUBSCRIBER_DATA_METHOD : self::MEMBER_DATA_METHOD;
     }

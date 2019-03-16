@@ -10,7 +10,7 @@ namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
 
-class SubscriptionModel extends UserCoreModel
+class SubscriberModel extends SubscriberCoreModel
 {
     const ACTIVE_STATUS = 1;
     const INACTIVE_STATUS = 0;
