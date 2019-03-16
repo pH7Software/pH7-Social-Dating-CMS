@@ -71,11 +71,6 @@ class ImportUser extends Core
     private $aRes;
 
     /**
-     * @var array $aGenderList Gender types available for pH7CMS.
-     */
-    private static $aGenderList = ['male', 'female', 'couple'];
-
-    /**
      * @param array $aFile
      * @param string $sDelimiter Delimiter Field delimiter (one character).
      * @param string $sEnclosure Enclosure Field enclosure (one character).
@@ -144,8 +139,8 @@ class ImportUser extends Core
             'password' => Various::genRnd(),
             'first_name' => 'Alex' . $sFiveChars,
             'last_name' => 'Rolli' . $sFiveChars,
-            'sex' => self::$aGenderList[mt_rand(0, 2)], // Generate randomly it
-            'match_sex' => self::$aGenderList[mt_rand(0, 2)], // Generate randomly it
+            'sex' => GenderTypeUserCore::GENDERS[mt_rand(0, 2)], // Generate randomly it
+            'match_sex' => GenderTypeUserCore::GENDERS[mt_rand(0, 2)], // Generate randomly it
             'birth_date' => $this->getRandomDate(),
             'country' => 'US',
             'city' => 'Virginia',
@@ -260,8 +255,8 @@ class ImportUser extends Core
     {
         $sSex = strtolower($sSex);
 
-        if (!in_array($sSex, self::$aGenderList, true)) {
-            $sSex = self::$aGenderList[mt_rand(0, 2)];
+        if (!GenderTypeUserCore::isGenderValid($sSex, GenderTypeUserCore::GENDERS)) {
+            $sSex = GenderTypeUserCore::GENDERS[mt_rand(0, 2)];
         }
 
         return $sSex;

@@ -172,8 +172,12 @@ class SearchUserCoreForm
      */
     protected static function getGenderVals(UserCoreModel $oUserModel, Session $oSession)
     {
-        $sUserSex = 'male';
-        $aMatchSex = ['male', 'female', 'couple'];
+        $sUserSex = GenderTypeUserCore::MALE;
+        $aMatchSex = [
+            GenderTypeUserCore::MALE,
+            GenderTypeUserCore::FEMALE,
+            GenderTypeUserCore::COUPLE
+        ];
 
         if (UserCore::auth()) {
             $sUserSex = $oUserModel->getSex($oSession->get('member_id'));
