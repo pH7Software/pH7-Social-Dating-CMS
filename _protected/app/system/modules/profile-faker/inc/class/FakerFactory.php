@@ -8,10 +8,6 @@
 
 namespace PH7;
 
-use PH7\Framework\Date\CDateTime;
-use PH7\Framework\Layout\Tpl\Engine\Templatable;
-use PH7\Framework\Mail\Mail;
-use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Util\Various;
 
 class FakerFactory
