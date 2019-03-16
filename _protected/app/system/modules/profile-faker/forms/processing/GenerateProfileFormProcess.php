@@ -22,6 +22,8 @@ class GenerateProfileFormProcess extends Form
      */
     public function __construct($sProfileType)
     {
+        parent::__construct();
+
         $this->sProfileType = $sProfileType;
         $this->generate();
 
