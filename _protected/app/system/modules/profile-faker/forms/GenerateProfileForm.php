@@ -13,7 +13,7 @@ use PH7\Framework\Url\Header;
 
 class GenerateProfileForm
 {
-    const DEFAULT_AMOUNT_VALUE = 20;
+    const DEFAULT_AMOUNT_VALUE = 10;
 
     /**
      * @param string $sProfileType
