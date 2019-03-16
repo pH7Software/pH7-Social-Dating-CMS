@@ -12,6 +12,7 @@ use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Layout\Tpl\Engine\Templatable;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Util\Various;
 
 class FakerFactory
 {
@@ -93,40 +94,27 @@ class FakerFactory
             $aUser['lang'] = $oFaker->locale;
             $aUser['ip'] = $oFaker->ipv4;
 
-            $oUserModel->add($aUser);
+            $oAffModel->add($aUser);
         }
     }
 
     public function generateSubscribers()
     {
-        $oUserModel = new Subscrib;
+        $oSubscriberModel = new SubscriberCoreModel();
 
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
             $oFaker = \Faker\Factory::create($this->sLocale);
 
-            $sSex = $oFaker->randomElement(['male', 'female']);
-            $sBirthDate = $oFaker->dateTimeBetween('-65 years', '-18 years')->format('Y-m-d');
-
             $aUser = [];
-            $aUser['username'] = $oFaker->userName;
-            $aUser['email'] = $oFaker->email;
-            $aUser['first_name'] = $oFaker->firstName;
-            $aUser['last_name'] = $oFaker->lastName;
-            $aUser['password'] = $oFaker->password;
-            $aUser['sex'] = $sSex;
-            $aUser['country'] = $oFaker->countryCode;
-            $aUser['city'] = $oFaker->city;
-            $aUser['address'] = $oFaker->streetAddress;
-            $aUser['zip_code'] = $oFaker->postcode;
-            $aUser['birth_date'] = $sBirthDate;
-            $aUser['description'] = $oFaker->paragraph(2);
-            $aUser['website'] = 'http://pierrehenry.be';
-            $aUser['phone'] = $oFaker->phoneNumber;
-            $aUser['bank_account'] = $oFaker->bankAccountNumber;
-            $aUser['lang'] = $oFaker->locale;
+            $aUser['name'] = $oFaker->name;
+            $aUser['email'] = $oFaker->freeEmail;
+            $aUser['active'] = SubscriberCoreModel::ACTIVE_STATUS;
+            $aUser['current_date'] = $oFaker->dateTime()->format('Y-m-d H:i:s');
+            $aUser['hash_validation'] = Various::genRnd(null, UserCoreModel::HASH_VALIDATION_LENGTH);
+            $aUser['affiliated_id'] = 0;
             $aUser['ip'] = $oFaker->ipv4;
 
-            $oUserModel->add($aUser);
+            $oSubscriberModel->add($aUser);
         }
     }
 }
