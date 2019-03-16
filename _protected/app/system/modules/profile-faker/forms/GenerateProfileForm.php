@@ -15,6 +15,11 @@ class GenerateProfileForm
 {
     const DEFAULT_AMOUNT_VALUE = 20;
 
+    /**
+     * @param string $sProfileType
+     *
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
+     */
     public static function display($sProfileType)
     {
         if (isset($_POST['submit_generate_profiles'])) {
