@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Translate\Lang;
 use PH7\Framework\Util\Various;
 
 class FakerFactory
@@ -22,7 +23,7 @@ class FakerFactory
      * @param int $iAmount Number of profile to generate.
      * @param string $sLocale The locale if specified. e.g., en_US, en_IE, fr_FR, fr_BE, nl_NL, es_ES, ...
      */
-    public function __construct($iAmount, $sLocale = '')
+    public function __construct($iAmount, $sLocale = Lang::DEFAULT_LOCALE)
     {
         $this->iAmount = $iAmount;
         $this->sLocale = $sLocale;

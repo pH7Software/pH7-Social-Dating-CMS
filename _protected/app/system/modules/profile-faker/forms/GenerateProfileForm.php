@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Header;
 
 class GenerateProfileForm
@@ -49,7 +50,11 @@ class GenerateProfileForm
             new \PFBC\Element\Select(
                 t('Nationality:'),
                 'locale',
-                static::getNationalities()
+                static::getNationalities(),
+                [
+                    'value' => Lang::DEFAULT_LOCALE,
+                    'required' => 1
+                ]
             )
         );
         $oForm->addElement(new \PFBC\Element\Button(t('Generate Profiles')));
@@ -62,7 +67,6 @@ class GenerateProfileForm
     private static function getNationalities()
     {
         return [
-            '' => t('Random Nationalities'),
             'en_US' => t('American'),
             'en_AU' => t('Australian'),
             'nl_BE' => t('Dutch Belgian'),
