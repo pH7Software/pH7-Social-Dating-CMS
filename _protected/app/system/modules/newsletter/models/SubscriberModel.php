@@ -12,9 +12,6 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class SubscriberModel extends SubscriberCoreModel
 {
-    const ACTIVE_STATUS = 1;
-    const INACTIVE_STATUS = 0;
-
     /**
      * Get all Active Subscribers (it is required by the law to send emails only to the confirmed opt-in subscribers).
      *
