@@ -37,8 +37,20 @@ class FakerFactory
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
             $oFaker = \Faker\Factory::create($this->sLocale);
 
-            $sSex = $oFaker->randomElement(['male', 'female', 'couple']);
-            $sMatchSex = $oFaker->randomElement(['male', 'female', 'couple']);
+            $sSex = $oFaker->randomElement(
+                [
+                    GenderTypeUserCore::MALE,
+                    GenderTypeUserCore::FEMALE,
+                    GenderTypeUserCore::COUPLE
+                ]
+            );
+            $sMatchSex = $oFaker->randomElement(
+                [
+                    GenderTypeUserCore::MALE,
+                    GenderTypeUserCore::FEMALE,
+                    GenderTypeUserCore::COUPLE
+                ]
+            );
             $sBirthDate = $oFaker->dateTimeBetween('-65 years', '-18 years')->format('Y-m-d');
 
             $aUser = [];
@@ -70,7 +82,7 @@ class FakerFactory
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
             $oFaker = \Faker\Factory::create($this->sLocale);
 
-            $sSex = $oFaker->randomElement(['male', 'female']);
+            $sSex = $oFaker->randomElement([GenderTypeUserCore::MALE, GenderTypeUserCore::FEMALE]);
             $sBirthDate = $oFaker->dateTimeBetween('-65 years', '-18 years')->format('Y-m-d');
             $sWebsite = $oFaker->randomElement(
                 [
