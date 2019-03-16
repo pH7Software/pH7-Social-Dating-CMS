@@ -45,7 +45,7 @@ class FakerFactory
 
             $aUser = [];
             $aUser['username'] = $oFaker->userName;
-            $aUser['email'] = $oFaker->email;
+            $aUser['email'] = $oFaker->freeEmail;
             $aUser['first_name'] = $oFaker->firstName;
             $aUser['last_name'] = $oFaker->lastName;
             $aUser['password'] = $oFaker->password;
