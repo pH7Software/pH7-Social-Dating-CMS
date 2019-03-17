@@ -7,7 +7,6 @@ namespace PFBC\Element;
 
 class City extends Select
 {
-
     const UTAH_CITIES = [
         '' => '--Select State--',
         'Salt Lake',

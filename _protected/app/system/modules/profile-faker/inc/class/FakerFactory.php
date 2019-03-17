@@ -10,6 +10,28 @@ namespace PH7;
 
 class FakerFactory
 {
+    const UTAH_CITIES = [
+        '' => '--Select State--',
+        'Salt Lake',
+        'West Valley',
+        'Provo',
+        'West Jordan',
+        'Orem',
+        'Sandy',
+        'Ogden',
+        'St. George',
+        'Layton',
+        'Taylorsville',
+        'South Jordan',
+        'Lehi',
+        'Logan',
+        'Murray',
+        'Draper',
+        'Bountiful',
+        'Riverton',
+        'Roy'
+    ];
+
     /** @var int */
     private $iAmount;
 
@@ -57,6 +79,7 @@ class FakerFactory
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
             $oFaker = \Faker\Factory::create(\Faker\Factory::DEFAULT_LOCALE);
 
+            $sCity = $oFaker->randomElement(self::UTAH_CITIES);
             $sBirthDate = $oFaker->dateTimeBetween('-65 years', '-18 years')->format('Y-m-d');
 
             $aUser = [];
@@ -67,9 +90,8 @@ class FakerFactory
             $aUser['last_name'] = $oFaker->lastName;
             $aUser['password'] = $oFaker->password;
             $aUser['country'] = $oFaker->countryCode;
-            $aUser['city'] = $oFaker->city;
+            $aUser['city'] = $sCity;
             $aUser['address'] = $oFaker->streetAddress;
-            $aUser['zip_code'] = $oFaker->postcode;
             $aUser['birth_date'] = $sBirthDate;
             $aUser['description'] = $oFaker->paragraph(3);
             $aUser['phone'] = $oFaker->phoneNumber;
