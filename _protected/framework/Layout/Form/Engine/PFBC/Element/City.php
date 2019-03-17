@@ -10,7 +10,24 @@ class City extends Select
 
     const UTAH_CITIES = [
         '' => '--Select State--',
-        ''
+        'Salt Lake',
+        'West Valley',
+        'Provo',
+        'West Jordan',
+        'Orem',
+        'Sandy',
+        'Ogden',
+        'St. George',
+        'Layton',
+        'Taylorsville',
+        'South Jordan',
+        'Lehi',
+        'Logan',
+        'Murray',
+        'Draper',
+        'Bountiful',
+        'Riverton',
+        'Roy'
     ];
 
     /**
@@ -20,6 +37,7 @@ class City extends Select
      */
     public function __construct($sLabel, $sName, array $aProperties = null)
     {
-        parent::__construct($sLabel, $sName, self::UTAH_CITIES, $aProperties);
+        $aCities = array_combine(self::UTAH_CITIES, self::UTAH_CITIES);
+        parent::__construct($sLabel, $sName, $aCities, $aProperties);
     }
 }
