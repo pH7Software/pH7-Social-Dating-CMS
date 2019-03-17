@@ -9,7 +9,7 @@ class City extends Select
 {
     const UTAH_CITIES = [
         '' => '--Select State--',
-        'Salt Lake',
+        'Salt Lake City',
         'West Valley',
         'Provo',
         'West Jordan',
