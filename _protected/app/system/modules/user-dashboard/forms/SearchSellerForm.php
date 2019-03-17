@@ -34,9 +34,9 @@ class SearchSellerForm
         $oForm->addElement(new \PFBC\Element\Hidden('sex', 'seller'));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
         $oForm->addElement(new \PFBC\Element\Hidden('sex', 'seller'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('City 1:'), 'city', self::$aCityOption));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('City 2:'), 'city2'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('City 3:'), 'city3'));
+        $oForm->addElement(new \PFBC\Element\City(t('City 1:'), 'city', self::$aCityOption));
+        $oForm->addElement(new \PFBC\Element\City(t('City 2:'), 'city2'));
+        $oForm->addElement(new \PFBC\Element\City(t('City 3:'), 'city3'));
         $oForm->addElement(new \PFBC\Element\Price);
         $oForm->addElement(
             new \PFBC\Element\Select(

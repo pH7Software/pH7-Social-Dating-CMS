@@ -40,7 +40,7 @@ class SearchQuickSellerForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_seller_search', 'form_seller_search'));
         $oForm->addElement(new \PFBC\Element\Hidden('sex', 'seller'));
         $oForm->addElement(new \PFBC\Element\Hidden('sex', 'buyer'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('City'), 'city', self::$aCityOption));
+        $oForm->addElement(new \PFBC\Element\City(t('City'), 'city', self::$aCityOption));
         $oForm->addElement(new \PFBC\Element\Number(t('Min Bedrooms'), SearchQueryCore::BEDROOM, ['value' => 0, 'min' => 0]));
         $oForm->addElement(new \PFBC\Element\Price);
         $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', ['icon' => 'search']));
