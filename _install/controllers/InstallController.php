@@ -19,6 +19,7 @@ class InstallController extends Controller
 {
     const TOTAL_MEMBERS_SAMPLE = 16;
     const TOTAL_AFFILIATES_SAMPLE = 1;
+    const TOTAL_SUBSCRIBERS_SAMPLE = 1;
 
     /**
      * Enable/Disable Modules according to the chosen niche
@@ -367,7 +368,8 @@ class InstallController extends Controller
                                                         if (!empty($_POST['sample_data_request'])) {
                                                             $this->populateSampleUserData(
                                                                 self::TOTAL_MEMBERS_SAMPLE,
-                                                                self::TOTAL_AFFILIATES_SAMPLE
+                                                                self::TOTAL_AFFILIATES_SAMPLE,
+                                                                self::TOTAL_SUBSCRIBERS_SAMPLE
                                                             );
                                                         }
 
@@ -595,10 +597,13 @@ class InstallController extends Controller
      *
      * @param int $iMemberNumber The number of members to generate.
      * @param int $iAffiliateNumber The number of affiliates to generate (usually less than members).
+     * @param int $iSubscriberNumber The number of subscribers to generate (for newsletter module).
      *
      * @return void
+     *
+     * @throws Framework\Translate\Exception
      */
-    private function populateSampleUserData($iMemberNumber, $iAffiliateNumber)
+    private function populateSampleUserData($iMemberNumber, $iAffiliateNumber, $iSubscriberNumber)
     {
         (new Framework\Translate\Lang)
             ->setDefaultLang('en_US')
@@ -609,6 +614,7 @@ class InstallController extends Controller
 
         $oUserModel = new UserCoreModel;
         $oAffModel = new AffiliateCoreModel;
+        $oSubscriberModel = new SubscriberCoreModel;
 
         for ($iProfile = 1; $iProfile <= $iMemberNumber; $iProfile++) {
             $oFaker = \Faker\Factory::create();
@@ -642,6 +648,22 @@ class InstallController extends Controller
                 $aUser['phone'] = $oFaker->phoneNumber;
                 $aUser['bank_account'] = $oFaker->bankAccountNumber;
                 $oAffModel->add($aUser);
+            }
+
+            if ($iProfile <= $iSubscriberNumber) {
+                // Specific data only for subscribers
+                $aUser['name'] = $oFaker->name;
+                $aUser['active'] = $iAccountStatus = $oFaker->randomElement(
+                    [
+                        SubscriberCoreModel::ACTIVE_STATUS,
+                        SubscriberCoreModel::INACTIVE_STATUS
+                    ]
+                );
+                $aUser['current_date'] = $oFaker->dateTime()->format('Y-m-d H:i:s');
+                $aUser['hash_validation'] = sha1($oFaker->password(20));
+                $aUser['affiliated_id'] = 0;
+                $aUser['ip'] = $oFaker->ipv4;
+                $oSubscriberModel->add($aUser);
             }
         }
     }
