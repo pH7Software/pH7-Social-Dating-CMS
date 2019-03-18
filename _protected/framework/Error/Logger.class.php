@@ -22,6 +22,7 @@ class Logger extends Core
     const LOG_DIR = 'pH7log/';
     const EXCEPT_DIR = 'except/';
     const GZIP_DIR = 'gzip/';
+    const EXT = '.log';
 
     const FILE_MESSAGE_TYPE = 3;
 
@@ -44,7 +45,7 @@ class Logger extends Core
         error_log(
             $sMsg . File::EOL,
             self::FILE_MESSAGE_TYPE,
-            $this->sDir . $this->sFileName . '.log'
+            $this->sDir . $this->sFileName . self::EXT
         );
     }
 
