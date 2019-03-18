@@ -236,8 +236,8 @@ class InstallController extends Controller
                             if (!@file_put_contents(PH7_PATH_APP_CONFIG . 'config.ini', $sConfigContent)) {
                                 $aErrors[] = $LANG['no_app_config_writable'];
                             } else {
-                                if (
-                                    !($DB->getAttribute(\PDO::ATTR_DRIVER_NAME) === Db::DSN_MYSQL_PREFIX &&
+                                if (!(
+                                    $DB->getAttribute(\PDO::ATTR_DRIVER_NAME) === Db::DSN_MYSQL_PREFIX &&
                                     version_compare($DB->getAttribute(\PDO::ATTR_SERVER_VERSION), PH7_REQUIRED_SQL_VERSION, '>='))
                                 ) {
                                     $aErrors[] = $LANG['require_mysql_version'];
