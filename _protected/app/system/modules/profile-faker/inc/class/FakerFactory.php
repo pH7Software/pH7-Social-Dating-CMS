@@ -147,7 +147,7 @@ class FakerFactory
             $aUser['property_price'] = $oFaker->numberBetween([900, 99999999]);
             $aUser['property_bedrooms'] = $oFaker->randomElement([1, 2, 3, 4, 5]);
             $aUser['property_bathrooms'] = $oFaker->randomElement([1, 2, 3, 4]);
-            $aUser['property_year_built'] = $oFaker->year('-4 years');
+            $aUser['property_year_built'] = $oFaker->year('-1 years');
             $aUser['property_home_type'] = $oFaker->randomElement(['family', 'condo']);
             $aUser['property_home_style'] = $oFaker->randomElement(['rambler', 'ranch', 'tri-multi-level', 'two-story', 'other']);
             $aUser['property_garage_spaces'] = $oFaker->randomElement([0, 1, 2, 3, 4]);
