@@ -31,7 +31,7 @@ class Ip
      */
     public static function get($sIp = null)
     {
-        if (empty($sIp)) {
+        if ($sIp === null) {
             $sIp = self::getClientIp();
         }
 
@@ -51,7 +51,7 @@ class Ip
      */
     public static function api($sIp = null)
     {
-        $sIp = empty($sIp) ? static::get() : $sIp;
+        $sIp = $sIp === null ? static::get() : $sIp;
 
         return DbConfig::getSetting('ipApi') . $sIp;
     }
