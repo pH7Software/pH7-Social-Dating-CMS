@@ -242,6 +242,8 @@ class InstallController extends Controller
                                 ) {
                                     $aErrors[] = $LANG['require_mysql_version'];
                                 } else {
+                                    ignore_user_abort(true);
+
                                     $aDumps = [
                                         /** Game **/
                                         // We need to install the Game before the "Core SQL" for foreign key reasons
@@ -332,6 +334,8 @@ class InstallController extends Controller
                                                     $this->initializeClasses();
 
                                                     try {
+                                                        ignore_user_abort(true);
+
                                                         require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
 
                                                         // SQL EXECUTE
