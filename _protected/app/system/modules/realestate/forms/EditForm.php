@@ -86,7 +86,7 @@ class EditForm
         // Generate dynamic fields
         $oFields = $oUserModel->getInfoFields($iProfileId);
         foreach ($oFields as $sColumn => $sValue) {
-            $oForm = (new DynamicFieldCoreForm($oForm, $sColumn, $sValue))->generate();
+            $oForm = (new DynamicFieldCoreForm($oForm, $sColumn, $sValue))->generate($oUser->sex);
         }
 
         $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'check']));

@@ -77,7 +77,7 @@ class EditForm
         // Generate dynamic fields
         $oFields = $oAffModel->getInfoFields($iProfileId, DbTableName::AFFILIATE_INFO);
         foreach ($oFields as $sColumn => $sValue) {
-            $oForm = (new DynamicFieldCoreForm($oForm, $sColumn, $sValue))->generate();
+            $oForm = (new DynamicFieldCoreForm($oForm, $sColumn, $sValue))->generate($oAff->sex);
         }
 
         $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'check']));

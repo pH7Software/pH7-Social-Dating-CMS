@@ -40,12 +40,12 @@ class DynamicFieldCoreForm
     /**
      * Generate the dynamic form.
      *
+     * @param string $sSex Profile gender.
+     *
      * @return \PFBC\Form
      */
-    public function generate()
+    public function generate($sSex)
     {
-        $sSex = (new Session)->get('member_sex');
-
         switch ($this->sColumn) {
             case 'description':
                 $this->oForm->addElement(new \PFBC\Element\Textarea(t('Description:'), $this->sColumn, ['id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,20,4000)', 'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(20, 4000), 'required' => 1]));
