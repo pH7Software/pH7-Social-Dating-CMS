@@ -25,18 +25,20 @@ class GenerateProfileFormProcess extends Form
         parent::__construct();
 
         $this->iProfileType = $iProfileType;
-        $this->generate();
+        $iAmountProfiles = $this->httpRequest->post('amount', 'int');
+
+        $this->generate($iAmountProfiles);
 
         \PFBC\Form::setSuccess(
             'form_generate_profiles',
-            nt('%n% profile has been generated.', '%n% profiles have been generated.', $this->httpRequest->post('amount', 'int'))
+            nt('%n% profile has been generated.', '%n% profiles have been generated.', $iAmountProfiles)
         );
     }
 
-    private function generate()
+    private function generate($iAmountProfiles)
     {
         $oFakerFactory = new FakerFactory(
-            $this->httpRequest->post('amount', 'int'),
+            $iAmountProfiles,
             $this->httpRequest->post('locale')
         );
 
