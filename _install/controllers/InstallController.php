@@ -340,7 +340,7 @@ class InstallController extends Controller
 
                                                         // SQL EXECUTE
                                                         $rStmt = $DB->prepare(
-                                                            sprintf(SqlQuery::QUERY_ADD_ADMIN, $_SESSION['db']['prefix'] . DbTableName::ADMIN)
+                                                            sprintf(SqlQuery::ADD_ADMIN, $_SESSION['db']['prefix'] . DbTableName::ADMIN)
                                                         );
 
                                                         $sCurrentDate = date('Y-m-d H:i:s');
@@ -356,22 +356,22 @@ class InstallController extends Controller
                                                         ]);
 
                                                         $rStmt = $DB->prepare(
-                                                            sprintf(SqlQuery::QUERY_UPDATE_SITE_NAME, $_SESSION['db']['prefix'] . DbTableName::SETTING)
+                                                            sprintf(SqlQuery::UPDATE_SITE_NAME, $_SESSION['db']['prefix'] . DbTableName::SETTING)
                                                         );
                                                         $rStmt->execute(['siteName' => $_SESSION['val']['site_name']]);
 
                                                         $rStmt = $DB->prepare(
-                                                            sprintf(SqlQuery::QUERY_UPDATE_ADMIN_EMAIL, $_SESSION['db']['prefix'] . DbTableName::SETTING)
+                                                            sprintf(SqlQuery::UPDATE_ADMIN_EMAIL, $_SESSION['db']['prefix'] . DbTableName::SETTING)
                                                         );
                                                         $rStmt->execute(['adminEmail' => $_SESSION['val']['admin_email']]);
 
                                                         $rStmt = $DB->prepare(
-                                                            sprintf(SqlQuery::QUERY_UPDATE_FEEDBACK_EMAIL, $_SESSION['db']['prefix'] . DbTableName::SETTING)
+                                                            sprintf(SqlQuery::UPDATE_FEEDBACK_EMAIL, $_SESSION['db']['prefix'] . DbTableName::SETTING)
                                                         );
                                                         $rStmt->execute(['feedbackEmail' => $_SESSION['val']['admin_feedback_email']]);
 
                                                         $rStmt = $DB->prepare(
-                                                            sprintf(SqlQuery::QUERY_UPDATE_RETURN_EMAIL, $_SESSION['db']['prefix'] . DbTableName::SETTING)
+                                                            sprintf(SqlQuery::UPDATE_RETURN_EMAIL, $_SESSION['db']['prefix'] . DbTableName::SETTING)
                                                         );
                                                         $rStmt->execute(['returnEmail' => $_SESSION['val']['admin_return_email']]);
 
@@ -574,7 +574,7 @@ class InstallController extends Controller
     private function updateMods(Db $oDb, $sModName, $sStatus)
     {
         $rStmt = $oDb->prepare(
-            sprintf(SqlQuery::QUERY_UPDATE_SYS_MODULE, $_SESSION['db']['prefix'] . DbTableName::SYS_MOD_ENABLED)
+            sprintf(SqlQuery::UPDATE_SYS_MODULE, $_SESSION['db']['prefix'] . DbTableName::SYS_MOD_ENABLED)
         );
 
         return $rStmt->execute(['modName' => $sModName, 'status' => $sStatus]);
@@ -591,7 +591,7 @@ class InstallController extends Controller
     private function updateTheme(Db $oDb, $sThemeName)
     {
         $rStmt = $DB->prepare(
-            sprintf(SqlQuery::QUERY_UPDATE_THEME, $_SESSION['db']['prefix'] . DbTableName::SETTING)
+            sprintf(SqlQuery::UPDATE_THEME, $_SESSION['db']['prefix'] . DbTableName::SETTING)
         );
 
         return $rStmt->execute(['theme' => $sThemeName, 'setting' => 'defaultTemplate']);
