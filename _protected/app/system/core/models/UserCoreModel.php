@@ -1078,6 +1078,9 @@ class UserCoreModel extends Model
         // DELETE INFO FIELDS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_INFO) . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
 
+        // DELETE SPY ENTRIES
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_SPY) . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
+
         // DELETE USER
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER) . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
 
