@@ -339,10 +339,8 @@ class InstallController extends Controller
                                                         require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
 
                                                         // SQL EXECUTE
-                                                        $sSql = 'INSERT INTO %s (profileId , username, password, email, firstName, lastName, joinDate, lastActivity, ip)
-                                                            VALUES (1, :username, :password, :email, :firstName, :lastName, :joinDate, :lastActivity, :ip)';
                                                         $rStmt = $DB->prepare(
-                                                            sprintf($sSql, $_SESSION['db']['prefix'] . DbTableName::ADMIN)
+                                                            sprintf(SqlQuery::QUERY_ADD_ADMIN, $_SESSION['db']['prefix'] . DbTableName::ADMIN)
                                                         );
 
                                                         $sCurrentDate = date('Y-m-d H:i:s');
@@ -357,16 +355,24 @@ class InstallController extends Controller
                                                             'ip' => client_ip()
                                                         ]);
 
-                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . DbTableName::SETTING . ' SET settingValue = :siteName WHERE settingName = \'siteName\' OR settingName = \'watermarkTextImage\' OR settingName = \'emailName\'');
+                                                        $rStmt = $DB->prepare(
+                                                            sprintf(SqlQuery::QUERY_UPDATE_SITE_NAME, $_SESSION['db']['prefix'] . DbTableName::SETTING)
+                                                        );
                                                         $rStmt->execute(['siteName' => $_SESSION['val']['site_name']]);
 
-                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . DbTableName::SETTING . ' SET settingValue = :adminEmail WHERE settingName = \'adminEmail\'  LIMIT 1');
+                                                        $rStmt = $DB->prepare(
+                                                            sprintf(SqlQuery::QUERY_UPDATE_ADMIN_EMAIL, $_SESSION['db']['prefix'] . DbTableName::SETTING)
+                                                        );
                                                         $rStmt->execute(['adminEmail' => $_SESSION['val']['admin_email']]);
 
-                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . DbTableName::SETTING . ' SET settingValue = :feedbackEmail WHERE settingName = \'feedbackEmail\'  LIMIT 1');
+                                                        $rStmt = $DB->prepare(
+                                                            sprintf(SqlQuery::QUERY_UPDATE_FEEDBACK_EMAIL, $_SESSION['db']['prefix'] . DbTableName::SETTING)
+                                                        );
                                                         $rStmt->execute(['feedbackEmail' => $_SESSION['val']['admin_feedback_email']]);
 
-                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . DbTableName::SETTING . ' SET settingValue = :returnEmail WHERE settingName = \'returnEmail\'  LIMIT 1');
+                                                        $rStmt = $DB->prepare(
+                                                            sprintf(SqlQuery::QUERY_UPDATE_RETURN_EMAIL, $_SESSION['db']['prefix'] . DbTableName::SETTING)
+                                                        );
                                                         $rStmt->execute(['returnEmail' => $_SESSION['val']['admin_return_email']]);
 
                                                         if (!empty($_POST['sample_data_request'])) {
