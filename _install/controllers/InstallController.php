@@ -681,7 +681,6 @@ class InstallController extends Controller
                 $aUser['current_date'] = $oFaker->dateTime()->format('Y-m-d H:i:s');
                 $aUser['hash_validation'] = sha1($oFaker->password(20));
                 $aUser['affiliated_id'] = 0;
-                $aUser['ip'] = $oFaker->ipv4;
                 $oSubscriberModel->add($aUser);
             }
         }
