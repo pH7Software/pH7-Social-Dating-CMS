@@ -536,7 +536,7 @@ final class FrontController
     {
         if ($this->isCronHashValid()) {
             if (is_file(PH7_PATH_SYS . 'core/assets/cron/' . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php')) {
-                ignore_user_abort();
+                ignore_user_abort(true);
                 require PH7_PATH_SYS . 'core/assets/cron/' . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php';
             } else {
                 $this->notFound(
