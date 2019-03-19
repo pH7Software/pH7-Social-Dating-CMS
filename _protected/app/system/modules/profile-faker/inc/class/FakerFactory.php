@@ -52,11 +52,11 @@ class FakerFactory
                     GenderTypeUserCore::COUPLE
                 ]
             );
-            $iMinAge = DbConfig::getSetting('minAgeRegistration');
             $iMaxAge = DbConfig::getSetting('maxAgeRegistration');
+            $iMinAge = DbConfig::getSetting('minAgeRegistration');
             $sBirthDate = $oFaker->dateTimeBetween(
-                sprintf('-%s years', $iMinAge),
-                sprintf('-%s years', $iMaxAge)
+                sprintf('-%s years', $iMaxAge),
+                sprintf('-%s years', $iMinAge)
             )->format('Y-m-d');
 
             $aUser = [];
