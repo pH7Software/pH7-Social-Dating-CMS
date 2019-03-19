@@ -8,6 +8,8 @@
 
 namespace PH7;
 
+use PH7\Framework\Ip\Ip;
+
 class FakerFactory
 {
     const PROFILE_LOCALE = 'en_US';
@@ -117,7 +119,7 @@ class FakerFactory
             $aUser['zip_code'] = $oFaker->postcode;
             $aUser['birth_date'] = $sBirthDate;
             $aUser['description'] = $oFaker->paragraph(2);
-            $aUser['ip'] = $oFaker->ipv4;
+            $aUser['ip'] = Ip::get();
 
             $oAffModel->add($aUser);
         }
@@ -155,7 +157,7 @@ class FakerFactory
             $aUser['property_garage_spaces'] = $oFaker->randomElement([0, 1, 2, 3, 4]);
             $aUser['property_carport_spaces'] = $oFaker->randomElement([0, 1, 2]);
             $aUser['contact_times'] = $oFaker->randomElement(['morning', 'afternoon', 'evening']);
-            $aUser['ip'] = $oFaker->ipv4;
+            $aUser['ip'] = Ip::get();
 
             $oUserModel->add($aUser);
         }
