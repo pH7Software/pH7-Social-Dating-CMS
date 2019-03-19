@@ -35,6 +35,11 @@ class GenerateProfileFormProcess extends Form
         );
     }
 
+    /**
+     * @param int $iAmountProfiles
+     *
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
+     */
     private function generate($iAmountProfiles)
     {
         $oFakerFactory = new FakerFactory(
