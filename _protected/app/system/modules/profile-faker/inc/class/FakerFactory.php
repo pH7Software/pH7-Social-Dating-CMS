@@ -10,6 +10,8 @@ namespace PH7;
 
 class FakerFactory
 {
+    const PROFILE_LOCALE = 'en_US';
+
     const UTAH_CITIES = [
         '' => '--Select City--',
         'Alpine',
@@ -97,7 +99,7 @@ class FakerFactory
         $oAffModel = new AffiliateCoreModel;
 
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
-            $oFaker = \Faker\Factory::create(\Faker\Factory::DEFAULT_LOCALE);
+            $oFaker = \Faker\Factory::create(self::PROFILE_LOCALE);
 
             $sBirthDate = $oFaker->dateTimeBetween('-65 years', '-18 years')->format('Y-m-d');
 
@@ -126,7 +128,7 @@ class FakerFactory
         $oUserModel = new UserCoreModel;
 
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
-            $oFaker = \Faker\Factory::create(\Faker\Factory::DEFAULT_LOCALE);
+            $oFaker = \Faker\Factory::create(self::PROFILE_LOCALE);
 
             $sCity = $oFaker->randomElement(self::UTAH_CITIES);
             $sBirthDate = $oFaker->dateTimeBetween('-65 years', '-18 years')->format('Y-m-d');
