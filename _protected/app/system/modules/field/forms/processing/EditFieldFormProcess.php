@@ -26,7 +26,10 @@ class EditFieldFormProcess extends Form
         $sDefVal = $this->httpRequest->post('value');
 
         if (Field::unmodifiable($sMod, $sName)) {
-            \PFBC\Form::setError('form_edit_field', t('Bad field name!'));
+            \PFBC\Form::setError(
+                'form_edit_field',
+                t('Wrong field name submitted. %0% cannot be modified', $sName)
+            );
         } else {
             $bRet = (new FieldModel(Field::getTable($sMod), $sName, $sType, $iLength, $sDefVal))->update();
 
