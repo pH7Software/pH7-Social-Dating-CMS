@@ -590,7 +590,7 @@ class InstallController extends Controller
      */
     private function updateTheme(Db $oDb, $sThemeName)
     {
-        $rStmt = $DB->prepare(
+        $rStmt = $oDb->prepare(
             sprintf(SqlQuery::UPDATE_THEME, $_SESSION['db']['prefix'] . DbTableName::SETTING)
         );
 
