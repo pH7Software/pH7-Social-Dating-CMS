@@ -483,12 +483,7 @@ class InstallController extends Controller
 
                             $this->updateSettings($aSettingUpdate);
 
-                            // Set the theme for the chosen niche
-                            $sSql = 'UPDATE %s SET settingValue = :theme WHERE settingName = :setting LIMIT 1';
-                            $rStmt = $DB->prepare(
-                                sprintf($sSql, $_SESSION['db']['prefix'] . DbTableName::SETTING)
-                            );
-                            $rStmt->execute(['theme' => $sTheme, 'setting' => 'defaultTemplate']);
+                            $this->updateTheme($DB, $sTheme);
                         } catch (\PDOException $oE) {
                             $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                         }
@@ -578,12 +573,28 @@ class InstallController extends Controller
      */
     private function updateMods(Db $oDb, $sModName, $sStatus)
     {
-        $sSql = 'UPDATE %s SET enabled = :status WHERE folderName = :modName LIMIT 1';
         $rStmt = $oDb->prepare(
-            sprintf($sSql, $_SESSION['db']['prefix'] . DbTableName::SYS_MOD_ENABLED)
+            sprintf(SqlQuery::QUERY_UPDATE_SYS_MODULE, $_SESSION['db']['prefix'] . DbTableName::SYS_MOD_ENABLED)
         );
 
         return $rStmt->execute(['modName' => $sModName, 'status' => $sStatus]);
+    }
+
+    /**
+     * Set the adequate website's theme for the chosen niche.
+     *
+     * @param Db $oDb
+     * @param string $sThemeName
+     *
+     * @return int|bool Returns the number of rows on success or FALSE on failure.
+     */
+    private function updateTheme(Db $oDb, $sThemeName)
+    {
+        $rStmt = $DB->prepare(
+            sprintf(SqlQuery::QUERY_UPDATE_THEME, $_SESSION['db']['prefix'] . DbTableName::SETTING)
+        );
+
+        return $rStmt->execute(['theme' => $sThemeName, 'setting' => 'defaultTemplate']);
     }
 
     /**
