@@ -38,7 +38,10 @@ class EditFieldFormProcess extends Form
                     t('The field has been edited.')
                 );
             } else {
-                \PFBC\Form::setError('form_edit_field', t('Oops! An error occurred while adding the field, please try again.'));
+                \PFBC\Form::setError(
+                    'form_edit_field',
+                    t('Oops! An error occurred while adding the field, please try again.')
+                );
             }
         }
     }
