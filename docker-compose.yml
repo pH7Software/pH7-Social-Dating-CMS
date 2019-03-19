@@ -2,9 +2,10 @@ version: '3'
 
 services:
     web:
-        build: ./docker/web
+        image: nginx:alpine
         ports:
             - 8080:80
+            - 8443:443
         volumes:
             - ./:/var/www/html
             - ./docker/web/default.conf:/etc/nginx/conf.d/default.conf
@@ -26,6 +27,6 @@ services:
           - 8001:3306
         environment:
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: myblog_db
-          MYSQL_USER: myblog_user
-          MYSQL_PASSWORD: myblog_password
+          MYSQL_DATABASE: mypH7CMS_db
+          MYSQL_USER: mypH7CMS_user
+          MYSQL_PASSWORD:  mypH7CMS_password
