@@ -335,10 +335,8 @@ class InstallController extends Controller
 
                                                     try {
                                                         ignore_user_abort(true);
-
                                                         require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
 
-                                                        // SQL EXECUTE
                                                         $rStmt = $DB->prepare(
                                                             sprintf(SqlQuery::ADD_ADMIN, $_SESSION['db']['prefix'] . DbTableName::ADMIN)
                                                         );
