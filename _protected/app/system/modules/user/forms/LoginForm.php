@@ -13,6 +13,8 @@ use PH7\Framework\Url\Header;
 
 class LoginForm
 {
+    const CAPTCHA_NUMBER_ATTEMPTS = 3;
+
     public static function display()
     {
         if (isset($_POST['submit_login_user'])) {
@@ -32,7 +34,7 @@ class LoginForm
         $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', ['required' => 1]));
         $oForm->addElement(new \PFBC\Element\Checkbox('', RememberMeCore::CHECKBOX_FIELD_NAME, [1 => t('Stay signed in')]));
 
-        if ((new Session)->exists('captcha_user_enabled')) {
+        if (self::isCaptchaEligible()) {
             $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha'), 'captcha', ['id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:')]));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }
@@ -40,5 +42,10 @@ class LoginForm
         $oForm->addElement(new \PFBC\Element\Button(t('Login'), 'submit', ['icon' => 'key']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
+    }
+
+    private function isCaptchaEligible()
+    {
+        return (new Session)->get('captcha_user_enabled') === self::CAPTCHA_NUMBER_ATTEMPTS;
     }
 }
