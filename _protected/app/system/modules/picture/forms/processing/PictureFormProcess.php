@@ -98,13 +98,15 @@ class PictureFormProcess extends Form implements NudityDetectable
 
             /* Set watermark text on images */
             $sWatermarkText = DbConfig::getSetting('watermarkTextImage');
-            $iSizeWatermarkText = DbConfig::getSetting('sizeWatermarkTextImage');
-            $oPicture1->watermarkText($sWatermarkText, $iSizeWatermarkText);
-            $oPicture2->watermarkText($sWatermarkText, $iSizeWatermarkText);
-            $oPicture3->watermarkText($sWatermarkText, $iSizeWatermarkText);
-            $oPicture4->watermarkText($sWatermarkText, $iSizeWatermarkText);
-            $oPicture5->watermarkText($sWatermarkText, $iSizeWatermarkText);
-            $oPicture6->watermarkText($sWatermarkText, $iSizeWatermarkText);
+            if (!empty(trim($sWatermarkText))) {
+                $iSizeWatermarkText = DbConfig::getSetting('sizeWatermarkTextImage');
+                $oPicture1->watermarkText($sWatermarkText, $iSizeWatermarkText);
+                $oPicture2->watermarkText($sWatermarkText, $iSizeWatermarkText);
+                $oPicture3->watermarkText($sWatermarkText, $iSizeWatermarkText);
+                $oPicture4->watermarkText($sWatermarkText, $iSizeWatermarkText);
+                $oPicture5->watermarkText($sWatermarkText, $iSizeWatermarkText);
+                $oPicture6->watermarkText($sWatermarkText, $iSizeWatermarkText);
+            }
 
             $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'picture/img/' . $this->session->get('member_username') . PH7_DS . $iAlbumId . PH7_DS;
 

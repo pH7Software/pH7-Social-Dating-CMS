@@ -164,11 +164,13 @@ class UserCore
 
         /* Set watermark text on large avatars */
         $sWatermarkText = DbConfig::getSetting('watermarkTextImage');
-        $iSizeWatermarkText = DbConfig::getSetting('sizeWatermarkTextImage');
-        $oAvatar4->watermarkText($sWatermarkText, $iSizeWatermarkText);
-        $oAvatar5->watermarkText($sWatermarkText, $iSizeWatermarkText);
-        $oAvatar6->watermarkText($sWatermarkText, $iSizeWatermarkText);
-        $oAvatar7->watermarkText($sWatermarkText, $iSizeWatermarkText);
+        if (!empty(trim($sWatermarkText))) {
+            $iSizeWatermarkText = DbConfig::getSetting('sizeWatermarkTextImage');
+            $oAvatar4->watermarkText($sWatermarkText, $iSizeWatermarkText);
+            $oAvatar5->watermarkText($sWatermarkText, $iSizeWatermarkText);
+            $oAvatar6->watermarkText($sWatermarkText, $iSizeWatermarkText);
+            $oAvatar7->watermarkText($sWatermarkText, $iSizeWatermarkText);
+        }
 
         $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/avatar/img/' . $sUsername . PH7_SH;
         (new File)->createDir($sPath);

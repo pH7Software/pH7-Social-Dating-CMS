@@ -65,8 +65,10 @@ class AlbumFormProcess extends Form implements NudityDetectable
 
             /* Set watermark text on thumbnail */
             $sWatermarkText = DbConfig::getSetting('watermarkTextImage');
-            $iSizeWatermarkText = DbConfig::getSetting('sizeWatermarkTextImage');
-            $oPicture->watermarkText($sWatermarkText, $iSizeWatermarkText);
+            if (!empty(trim($sWatermarkText))) {
+                $iSizeWatermarkText = DbConfig::getSetting('sizeWatermarkTextImage');
+                $oPicture->watermarkText($sWatermarkText, $iSizeWatermarkText);
+            }
 
             $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'picture/img/' . $this->session->get('member_username') . PH7_DS . $iLastAlbumId . PH7_DS;
 

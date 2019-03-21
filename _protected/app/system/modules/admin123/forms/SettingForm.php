@@ -163,7 +163,7 @@ class SettingForm
         if ($bIsPictureEnabled) {
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Image') . '</h3>'));
 
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Watermark Text:'), 'watermark_text_image', ['value' => DbConfig::getSetting('watermarkTextImage'), 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Watermark Text:'), 'watermark_text_image', ['description' => t('Leave blank to disable the watermark text on images.'), 'value' => DbConfig::getSetting('watermarkTextImage')]));
 
             $oForm->addElement(new \PFBC\Element\Number(t('Watermark Size:'), 'size_watermark_text_image', ['description' => t('Between 0 to 5.'), 'min' => 0, 'max' => 5, 'value' => DbConfig::getSetting('sizeWatermarkTextImage'), 'required' => 1]));
         }
