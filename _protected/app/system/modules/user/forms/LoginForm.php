@@ -44,6 +44,9 @@ class LoginForm
         $oForm->render();
     }
 
+    /**
+     * @return bool
+     */
     private function isCaptchaEligible()
     {
         return (new Session)->get('captcha_user_enabled') === self::CAPTCHA_NUMBER_ATTEMPTS;
