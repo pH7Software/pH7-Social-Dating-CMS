@@ -158,7 +158,7 @@ class LoginFormProcess extends Form implements LoginableForm
     public function enableCaptcha()
     {
         $iNumberAttempts = (int)$this->session->get('captcha_user_enabled');
-        $this->session->set('captcha_user_enabled', $iNumberAttempts += 1);
+        $this->session->set('captcha_user_enabled', $iNumberAttempts++);
     }
 
     /**

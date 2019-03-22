@@ -49,6 +49,6 @@ class LoginForm
      */
     private static function isCaptchaEligible()
     {
-        return (new Session)->get('captcha_user_enabled') >= self::CAPTCHA_NUMBER_ATTEMPTS;
+        return (new Session)->get('captcha_user_enabled') > self::CAPTCHA_NUMBER_ATTEMPTS;
     }
 }
