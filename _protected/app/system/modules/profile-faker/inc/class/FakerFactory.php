@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mvc\Model\DbConfig;
 
 class FakerFactory
 {
@@ -107,7 +108,7 @@ class FakerFactory
 
             $aUser = [];
             $aUser['sex'] = 'buyer';
-            $aUser['username'] = $oFaker->userName;
+            $aUser['username'] = $this->cleanUsername($oFaker->userName);
             $aUser['email'] = $oFaker->email;
             $aUser['first_name'] = $oFaker->firstName;
             $aUser['last_name'] = $oFaker->lastName;
@@ -137,7 +138,7 @@ class FakerFactory
 
             $aUser = [];
             $aUser['sex'] = 'seller';
-            $aUser['username'] = $oFaker->userName;
+            $aUser['username'] = $this->cleanUsername($oFaker->userName);
             $aUser['email'] = $oFaker->freeEmail;
             $aUser['first_name'] = $oFaker->firstName;
             $aUser['last_name'] = $oFaker->lastName;
@@ -161,5 +162,19 @@ class FakerFactory
 
             $oUserModel->add($aUser);
         }
+    }
+
+    /**
+     * Remove invalid characters that may contain in the Faker usernames.
+     *
+     * @param string $sUsername
+     *
+     * @return string
+     */
+    private function cleanUsername($sUsername)
+    {
+        $sUsername = str_replace('.', '-', $sUsername);
+
+        return substr($sUsername, 0, DbConfig::getSetting('maxUsernameLength'));
     }
 }
