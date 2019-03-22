@@ -163,7 +163,7 @@ class SettingForm
         if ($bIsPictureEnabled) {
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Image') . '</h3>'));
 
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Watermark Text:'), 'watermark_text_image', ['description' => t('Leave it blank to disable the watermark text on images.'), 'value' => DbConfig::getSetting('watermarkTextImage')]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Watermark Text:'), 'watermark_text_image', ['description' => t('Leave it blank to disable the watermark text on images.'), 'value' => DbConfig::getSetting('watermarkTextImage', '')]));
 
             $oForm->addElement(new \PFBC\Element\Number(t('Watermark Size:'), 'size_watermark_text_image', ['description' => t('Between 0 to 5.'), 'min' => 0, 'max' => 5, 'value' => DbConfig::getSetting('sizeWatermarkTextImage'), 'required' => 1]));
         }
@@ -254,7 +254,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Send Abuse Reports by email:'), 'send_report_mail', ['1' => t('Yes'), '0' => t('No')], ['value' => DbConfig::getSetting('sendReportMail'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('IP Restriction for Admin Panel Access:'), 'ip_login', ['description' => t('By entering <a href="%0%" title="Get your current IP address">your IP</a>, you will get a higher security and exclude all other people and bots that tried to login with another IP address even if the login is correct! Leave blank to disable this feature. Be careful, for using this feature you need to have a static IP (not a dynamic one). If you are not sure, please contact your ISP.', Ip::api()), 'value' => DbConfig::getSetting('ipLogin')]));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('IP Restriction for Admin Panel Access:'), 'ip_login', ['description' => t('By entering <a href="%0%" title="Get your current IP address">your IP</a>, you will get a higher security and exclude all other people and bots that tried to login with another IP address even if the login is correct! Leave blank to disable this feature. Be careful, for using this feature you need to have a static IP (not a dynamic one). If you are not sure, please contact your ISP.', Ip::api()), 'value' => DbConfig::getSetting('ipLogin', '')]));
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Indicate a word that will replace the banned word in <a href="%0%">the list</a>.', Uri::get(PH7_ADMIN_MOD, 'file', 'protectededit', 'app/configs/bans/word.txt', false)), 'ban_word_replace', ['value' => DbConfig::getSetting('banWordReplace'), 'required' => 1]));
 
@@ -361,7 +361,7 @@ class SettingForm
 
         if (SysMod::isEnabled('map')) {
             $sGoogleApiKeyDesc = t('You can get your key <a href="%0%">here</a>. Then, select "<strong>Google Maps JavaScript API</strong>" for "<em>Which API are you using</em>" and "<strong>Web browser (Javascript)</strong>" for "<em>Where will you be calling the API from</em>", then you will get your API key to paste here. ', self::GOOGLE_API_KEY_URL);
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Google Maps API Key:'), 'google_api_key', ['description' => $sGoogleApiKeyDesc, 'value' => DbConfig::getSetting('googleApiKey'), 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Google Maps API Key:'), 'google_api_key', ['description' => $sGoogleApiKeyDesc, 'value' => DbConfig::getSetting('googleApiKey', '')]));
         }
 
         $oForm->addElement(new \PFBC\Element\Url(t('IP API:'), 'ip_api', ['description' => t('The URL must end with a slash.'), 'value' => DbConfig::getSetting('ipApi'), 'required' => 1]));

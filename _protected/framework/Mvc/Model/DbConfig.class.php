@@ -34,10 +34,11 @@ final class DbConfig
 
     /**
      * @param string|null $sSetting You can specify a specific parameter.
+     * @param string|int|float|bool $mDefaultValue The default value to return when no result was found from the database.
      *
      * @return string|int|\stdClass A string or an integer if you specify a specific parameter, otherwise returns an object.
      */
-    public static function getSetting($sSetting = null)
+    public static function getSetting($sSetting = null, $mDefaultValue = 0)
     {
         $oCache = (new Cache)->start(self::CACHE_GROUP, 'setting' . $sSetting, self::CACHE_TIME);
 
@@ -65,7 +66,7 @@ final class DbConfig
         }
         unset($oCache);
 
-        return empty($mData) ? 0 : $mData;
+        return empty($mData) ? $mDefaultValue : $mData;
     }
 
     /**
