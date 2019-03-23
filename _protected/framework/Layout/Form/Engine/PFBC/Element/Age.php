@@ -82,7 +82,7 @@ class Age extends OptionElement
     {
         $sAttrName = $sType === static::MIN_AGE_TYPE ? 'iMinAge' : 'iMaxAge';
 
-        return !empty($this->attributes['value'][$sType]) && $iAge === $this->attributes['value'][$sType] ||
-            empty($this->attributes['value'][$sType]) && $iAge === $this->$sAttrName;
+        return (!empty($this->attributes['value'][$sType]) && $iAge == $this->attributes['value'][$sType]) ||
+            (empty($this->attributes['value'][$sType]) && $iAge == $this->$sAttrName);
     }
 }
