@@ -29,7 +29,7 @@ class Cleanup
      */
     public static function username($sUsername, $iMaxLength = PH7_MAX_USERNAME_LENGTH)
     {
-        $sUsername = str_replace('.', '-', $sUsername);
+        $sUsername = str_replace(['.', ' '], '-', $sUsername);
 
         return substr($sUsername, 0, $iMaxLength);
     }
