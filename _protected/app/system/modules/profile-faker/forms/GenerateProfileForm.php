@@ -57,7 +57,7 @@ class GenerateProfileForm
                 new \PFBC\Element\Select(
                     t('Type of Profile:'),
                     'locale',
-                    static::getNationalities(),
+                    self::getNationalities(),
                     [
                         'value' => Lang::DEFAULT_LOCALE,
                         'required' => 1
