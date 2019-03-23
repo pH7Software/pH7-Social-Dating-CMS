@@ -22,7 +22,11 @@ class ImportUserFormProcess
     public function __construct()
     {
         $oHR = new HttpRequest;
-        $aData = (new ImportUser($_FILES['csv_file'], $oHR->post('delimiter'), $oHR->post('enclosure')))->getResponse();
+        $aData = (new ImportUser(
+            $_FILES['csv_file'],
+            $oHR->post('delimiter'),
+            $oHR->post('enclosure')
+        ))->getResponse();
 
         if (!$aData['status']) {
             \PFBC\Form::setError('form_import_user', $aData['msg']);
