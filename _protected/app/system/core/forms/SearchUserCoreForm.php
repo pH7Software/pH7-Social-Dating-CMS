@@ -50,7 +50,7 @@ class SearchUserCoreForm
         $oForm->addElement(
             new \PFBC\Element\Select(
                 t('I am a:'),
-                'match_sex',
+                SearchQueryCore::MATCH_SEX,
                 [
                     GenderTypeUserCore::MALE => t('Man'),
                     GenderTypeUserCore::FEMALE => t('Woman'),
@@ -62,7 +62,7 @@ class SearchUserCoreForm
         $oForm->addElement(
             new \PFBC\Element\Checkbox(
                 t('Looking for a:'),
-                'sex',
+                SearchQueryCore::SEX,
                 [
                     GenderTypeUserCore::FEMALE => t('Woman'),
                     GenderTypeUserCore::MALE => t('Man'),
@@ -102,7 +102,7 @@ class SearchUserCoreForm
         $oForm->addElement(
             new \PFBC\Element\Select(
                 t('I am a:'),
-                'match_sex',
+                SearchQueryCore::MATCH_SEX,
                 [
                     GenderTypeUserCore::MALE => t('Male'),
                     GenderTypeUserCore::FEMALE => t('Woman'),
@@ -114,7 +114,7 @@ class SearchUserCoreForm
         $oForm->addElement(
             new \PFBC\Element\Checkbox(
                 t('Looking for:'),
-                'sex',
+                SearchQueryCore::SEX,
                 [
                     GenderTypeUserCore::FEMALE => t('Woman'),
                     GenderTypeUserCore::MALE => t('Male'),
@@ -222,24 +222,24 @@ class SearchUserCoreForm
         $oSession = new Session;
         $oUserModel = new UserCoreModel;
 
-        if ($oHttpRequest->getExists('match_sex')) {
-            self::$aSexOption += ['value' => $oHttpRequest->get('match_sex')];
+        if ($oHttpRequest->getExists(SearchQueryCore::MATCH_SEX)) {
+            self::$aSexOption += ['value' => $oHttpRequest->get(SearchQueryCore::MATCH_SEX)];
         } else {
             self::$aSexOption += ['value' => self::getGenderVals($oUserModel, $oSession)['user_sex']];
         }
 
-        if ($oHttpRequest->getExists('sex')) {
-            self::$aMatchSexOption += ['value' => $oHttpRequest->get('sex')];
+        if ($oHttpRequest->getExists(SearchQueryCore::SEX)) {
+            self::$aMatchSexOption += ['value' => $oHttpRequest->get(SearchQueryCore::SEX)];
         } else {
             self::$aMatchSexOption += ['value' => self::getGenderVals($oUserModel, $oSession)['match_sex']];
         }
 
         self::$aAgeOption = ['value' => self::getAgeVals($oUserModel, $oSession)];
-        if ($oHttpRequest->getExists(['age1', 'age2'])) {
+        if ($oHttpRequest->getExists([SearchQueryCore::MIN_AGE, SearchQueryCore::MAX_AGE])) {
             self::$aAgeOption = [
                 'value' => [
-                    'min_age' => $oHttpRequest->get('age1'),
-                    'max_age' => $oHttpRequest->get('age2')
+                    'min_age' => $oHttpRequest->get(SearchQueryCore::MIN_AGE),
+                    'max_age' => $oHttpRequest->get(SearchQueryCore::MAX_AGE)
                 ]
             ];
         }
