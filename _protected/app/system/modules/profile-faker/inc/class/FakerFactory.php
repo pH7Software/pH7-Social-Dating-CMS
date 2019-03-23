@@ -60,7 +60,7 @@ class FakerFactory
             )->format('Y-m-d');
 
             $aUser = [];
-            $aUser['username'] = $this->cleanUsername($oFaker->userName);
+            $aUser['username'] = Cleanup::username($oFaker->userName);
             $aUser['email'] = $oFaker->freeEmail;
             $aUser['first_name'] = $oFaker->firstName;
             $aUser['last_name'] = $oFaker->lastName;
@@ -99,7 +99,7 @@ class FakerFactory
             );
 
             $aUser = [];
-            $aUser['username'] = $this->cleanUsername($oFaker->userName);
+            $aUser['username'] = Cleanup::username($oFaker->userName);
             $aUser['email'] = $oFaker->email;
             $aUser['first_name'] = $oFaker->firstName;
             $aUser['last_name'] = $oFaker->lastName;
@@ -144,19 +144,5 @@ class FakerFactory
 
             $oSubscriberModel->add($aUser);
         }
-    }
-
-    /**
-     * Remove invalid characters that may contain in the Faker usernames.
-     *
-     * @param string $sUsername
-     *
-     * @return string
-     */
-    private function cleanUsername($sUsername)
-    {
-        $sUsername = str_replace('.', '-', $sUsername);
-
-        return substr($sUsername, 0, DbConfig::getSetting('maxUsernameLength'));
     }
 }
