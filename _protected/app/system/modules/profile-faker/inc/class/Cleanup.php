@@ -8,7 +8,6 @@
 
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Pattern\Statik;
 
 class Cleanup
@@ -24,13 +23,14 @@ class Cleanup
      * Remove invalid characters that may contain in the Faker usernames.
      *
      * @param string $sUsername
+     * @param int $iMaxLength
      *
      * @return string
      */
-    public static function username($sUsername)
+    public static function username($sUsername, $iMaxLength = PH7_MAX_USERNAME_LENGTH)
     {
         $sUsername = str_replace('.', '-', $sUsername);
 
-        return substr($sUsername, 0, DbConfig::getSetting('maxUsernameLength'));
+        return substr($sUsername, 0, $iMaxLength);
     }
 }

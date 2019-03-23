@@ -60,7 +60,7 @@ class FakerFactory
             )->format('Y-m-d');
 
             $aUser = [];
-            $aUser['username'] = Cleanup::username($oFaker->userName);
+            $aUser['username'] = Cleanup::username($oFaker->userName, DbConfig::getSetting('maxUsernameLength'));
             $aUser['email'] = $oFaker->freeEmail;
             $aUser['first_name'] = $oFaker->firstName;
             $aUser['last_name'] = $oFaker->lastName;
@@ -99,7 +99,7 @@ class FakerFactory
             );
 
             $aUser = [];
-            $aUser['username'] = Cleanup::username($oFaker->userName);
+            $aUser['username'] = Cleanup::username($oFaker->userName, DbConfig::getSetting('maxUsernameLength'));
             $aUser['email'] = $oFaker->email;
             $aUser['first_name'] = $oFaker->firstName;
             $aUser['last_name'] = $oFaker->lastName;
