@@ -30,14 +30,14 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param string $sUrl
-     * @param string $sExpected
+     * @param string $sActualUrl
+     * @param string $sExpectedUrl
      *
      * @dataProvider urlsProvider
      */
-    public function testClean($sUrl, $sExpected)
+    public function testClean($sActualUrl, $sExpectedUrl)
     {
-        $this->assertSame($sExpected, Url::clean($sUrl));
+        $this->assertSame($sExpectedUrl, Url::clean($sActualUrl));
     }
 
     /**

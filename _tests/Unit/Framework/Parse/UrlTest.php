@@ -22,14 +22,14 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param string $sUrl
-     * @param string $sExpected
+     * @param string $sActualUrl
+     * @param string $sExpectedUrl
      *
      * @dataProvider urlsNamesProvider
      */
-    public function testName($sUrl, $sExpected)
+    public function testName($sActualUrl, $sExpectedUrl)
     {
-        $this->assertSame($sExpected, UrlParser::name($sUrl));
+        $this->assertSame($sExpectedUrl, UrlParser::name($sActualUrl));
     }
 
     /**
