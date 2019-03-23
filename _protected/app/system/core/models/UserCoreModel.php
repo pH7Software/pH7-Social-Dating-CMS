@@ -355,23 +355,20 @@ class UserCoreModel extends Model
         $sSqlOnline = $bIsOnline ? ' AND userStatus = :userStatus AND lastActivity > DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL ' . DbConfig::getSetting('userTimeout') . ' MINUTE) ' : '';
         $sSqlAvatar = $bIsAvatar ? $this->getUserWithAvatarOnlySql() : '';
         $sSqlHideLoggedProfile = $bHideUserLogged ? ' AND (m.profileId <> :profileId)' : '';
-
-        if (empty($aParams[SearchQueryCore::ORDER])) {
-            $aParams[SearchQueryCore::ORDER] = SearchCoreModel::LATEST; // Default is "ORDER BY joinDate"
-        }
-
-        if (empty($aParams[SearchQueryCore::SORT])) {
-            $aParams[SearchQueryCore::SORT] = SearchCoreModel::DESC; // Default is "descending"
-        }
-
-        $sSqlOrder = SearchCoreModel::order($aParams[SearchQueryCore::ORDER], $aParams[SearchQueryCore::SORT]);
-
         $sSqlMatchSex = $bIsMatchSex ? ' AND FIND_IN_SET(:matchSex, matchSex)' : '';
 
         $sSqlSex = '';
         if ($bIsSex) {
             $sSqlSex = $this->getSexInClauseSql($aParams[SearchQueryCore::SEX]);
         }
+
+        if (empty($aParams[SearchQueryCore::ORDER])) {
+            $aParams[SearchQueryCore::ORDER] = SearchCoreModel::LATEST; // Default is "ORDER BY joinDate"
+        }
+        if (empty($aParams[SearchQueryCore::SORT])) {
+            $aParams[SearchQueryCore::SORT] = SearchCoreModel::DESC; // Default is "descending"
+        }
+        $sSqlOrder = SearchCoreModel::order($aParams[SearchQueryCore::ORDER], $aParams[SearchQueryCore::SORT]);
 
         $rStmt = Db::getInstance()->prepare(
             'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER) . 'AS m LEFT JOIN' . Db::prefix(DbTableName::MEMBER_PRIVACY) . 'AS p USING(profileId)
