@@ -191,7 +191,7 @@ class SearchUserCoreForm
      * If a user is logged, get "approximately" the relative age for better and more intuitive search.
      *
      * @param UserCoreModel $oUserModel
-     * @param Session $oSession
+     * @param $oSession $oSession
      *
      * @return array 'min_age' and 'max_age' which is the approximately age the user is looking for.
      */
