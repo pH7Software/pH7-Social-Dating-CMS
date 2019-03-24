@@ -197,8 +197,8 @@ function backup() {
         echo "The path is not a valid directory."
         exit 1
     fi
-    file="pH7Builder-backup.tar.bz2"
-    full_path=$path$file
+    filename="pH7Builder-backup.tar.bz2"
+    full_path=$path$filename
     if [ -e "$full_path" ]; then
         _confirm "A backup already exists in this directory, do you want to delete it?"
         if [ $? -eq 1 ]; then
