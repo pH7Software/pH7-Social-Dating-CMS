@@ -18,13 +18,13 @@ class CleanupTest extends PHPUnit_Framework_TestCase
     /**
      * @param string $sActualUsername
      * @param string $sExpectedUsername
-     * @param int $iLength
+     * @param int $iMaxLength
      *
      * @dataProvider usernamesProvider
      */
-    public function testUsername($sActualUsername, $sExpectedUsername, $iLength)
+    public function testUsername($sActualUsername, $sExpectedUsername, $iMaxLength)
     {
-        $sCleanedUsername = Cleanup::username($sActualUsername, $iLength);
+        $sCleanedUsername = Cleanup::username($sActualUsername, $iMaxLength);
         $this->assertSame($sCleanedUsername, $sExpectedUsername);
     }
 
