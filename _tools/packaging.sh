@@ -110,8 +110,6 @@ function run() {
             rm -rf ./_protected/.tmb/
             # Composer cache folder
             rm -rf ./_protected/vendor/cache/
-            # "dating-affiliate-tools" cookie file
-            rm cookie_log.txt
 
             echo "Done!"
             echo "Remove \"_tools/\" folder (containing this file) before packaging pH7Builder"
