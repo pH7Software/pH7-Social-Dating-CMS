@@ -271,9 +271,9 @@ Finally, **please consider using green Web hosting** (which use Green Power supp
 
 ## 🔨 Tools/Software Used to Develop pH7CMS
 
-* LAMP on **Fedora/Ubuntu** (and Windows/Mac with WampServer/MAMP for testing purpose)
+* LAMP on **Fedora/Ubuntu** (and Mac/Windows with MAMP/WampServer/XAMPP for testing purpose)
 
-* **Geany &amp; Sublime Text** for coding the whole project. That's it! However, since pH7CMS 5.0, PhpStorm (and sometimes Atom) are used as well.
+* **Geany &amp; Sublime Text** for coding the whole project. That's it! However, since pH7CMS 5.0, **PhpStorm** (and sometimes Atom) are used as well.
 
 * **GIMP** for editing the assets, etc.
 
