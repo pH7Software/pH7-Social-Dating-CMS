@@ -5,6 +5,7 @@
 # Description:     It is used to clean up the script before distribution to customers (e.g. before uploading it to SourceForge).
 #                  To work correctly, you have to execute this script when you're in the project root with your terminal (generally the parent folder of "_tools/").
 #                  (e.g., you@you:/path/to/root-project$ bash _tools/pH7.sh).
+#
 # Author:          Pierre-Henry Soria <hello@ph7cms.com>
 # Copyright:       (c) 2014-2019, Pierre-Henry Soria. All Rights Reserved.
 # License:         GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
@@ -83,7 +84,7 @@ function run() {
             rm -rf ./coverage/ # PHPUnit coverage reports
             rm -rf ./.idea/ # PHPStorm
 
-            ## Other
+            ## Others
             rm -f ./_protected/app/system/core/assets/cron/_delay/*
             rm -rf ./_repository/import/*
             rm -rf ./_repository/module/*
