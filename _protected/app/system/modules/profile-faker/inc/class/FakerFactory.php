@@ -151,12 +151,11 @@ class FakerFactory
     /**
      * Returns random and correct genders for Faker's profiles (without 'couple' gender).
      *
-     * @return string
+     * @return string Gives 'male' or 'female' randomly.
      */
     private function getRandomGender()
     {
-        $aGenders = GenderTypeUserCore::GENDERS;
-        unset($aGenders[GenderTypeUserCore::COUPLE]);
+        $aGenders = [GenderTypeUserCore::MALE, GenderTypeUserCore::FEMALE];
 
         return $aGenders[array_rand($aGenders)];
     }
