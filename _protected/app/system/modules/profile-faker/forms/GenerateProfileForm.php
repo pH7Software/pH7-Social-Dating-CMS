@@ -59,9 +59,6 @@ class GenerateProfileForm
                     '' => t('Women &amp; Men'),
                     GenderTypeUserCore::FEMALE => t('Only Women'),
                     GenderTypeUserCore::MALE => t('Only Men')
-                ],
-                [
-                    'required' => 1
                 ]
             )
         );
