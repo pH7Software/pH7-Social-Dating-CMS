@@ -57,7 +57,7 @@ class AddFakeProfilesForm
             new \PFBC\Element\Select(
                 t('Nationality:'),
                 'nat',
-                static::getNationalities(),
+                self::getNationalities(),
                 [
                     'required' => 1
                 ]
