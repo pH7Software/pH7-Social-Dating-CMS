@@ -32,7 +32,7 @@ class FakerFactory
     public function __construct($iAmount, $sSex, $sLocale = Lang::DEFAULT_LOCALE)
     {
         $this->iAmount = $iAmount;
-        $this->sSex = empty($sSex) ? $this->getGender() : $sSex;
+        $this->sSex = $sSex;
         $this->sLocale = $sLocale;
     }
 
@@ -64,7 +64,7 @@ class FakerFactory
             $aUser['first_name'] = $oFaker->firstName($this->sSex);
             $aUser['last_name'] = $oFaker->lastName;
             $aUser['password'] = $oFaker->password;
-            $aUser['sex'] = $this->sSex;
+            $aUser['sex'] = empty($this->sSex) ? $this->getGender() : $this->sSex;
             $aUser['match_sex'] = [$sMatchSex];
             $aUser['country'] = $oFaker->countryCode;
             $aUser['city'] = $oFaker->city;
@@ -103,7 +103,7 @@ class FakerFactory
             $aUser['first_name'] = $oFaker->firstName($this->sSex);
             $aUser['last_name'] = $oFaker->lastName;
             $aUser['password'] = $oFaker->password;
-            $aUser['sex'] = $this->sSex;
+            $aUser['sex'] = empty($this->sSex) ? $this->getGender() : $this->sSex;
             $aUser['country'] = $oFaker->countryCode;
             $aUser['city'] = $oFaker->city;
             $aUser['address'] = $oFaker->streetAddress;
