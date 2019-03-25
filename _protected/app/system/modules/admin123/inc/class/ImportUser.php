@@ -255,7 +255,7 @@ class ImportUser extends Core
     {
         $sSex = strtolower($sSex);
 
-        if (!GenderTypeUserCore::isGenderValid($sSex, GenderTypeUserCore::GENDERS)) {
+        if (!GenderTypeUserCore::isGenderValid($sSex)) {
             $sSex = GenderTypeUserCore::GENDERS[array_rand(GenderTypeUserCore::GENDERS)];
         }
 
