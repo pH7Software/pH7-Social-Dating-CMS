@@ -43,7 +43,7 @@ class FakerFactory
 
         $iMaxAge = DbConfig::getSetting('maxAgeRegistration');
         $iMinAge = DbConfig::getSetting('minAgeRegistration');
-        $iMaxUsernameLength = (int)DbConfig::getSetting('maxUsernameLength');
+        $iMaxUsernameLength = DbConfig::getSetting('maxUsernameLength');
 
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
             $sSex = empty($this->sSex) ? $this->getRandomGender() : $this->sSex;
@@ -86,7 +86,7 @@ class FakerFactory
         $oAffModel = new AffiliateCoreModel;
         $oFaker = \Faker\Factory::create($this->sLocale);
 
-        $iMaxUsernameLength = (int)DbConfig::getSetting('maxUsernameLength');
+        $iMaxUsernameLength = DbConfig::getSetting('maxUsernameLength');
 
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
             $sSex = empty($this->sSex) ? $this->getRandomGender() : $this->sSex;
