@@ -121,9 +121,9 @@ class FakerFactory
 
     public function generateSubscribers()
     {
-        $oSubscriberModel = new SubscriberCoreModel();
-
+        $oSubscriberModel = new SubscriberCoreModel;
         $oFaker = \Faker\Factory::create($this->sLocale);
+
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
             $iAccountStatus = $oFaker->randomElement(
                 [
