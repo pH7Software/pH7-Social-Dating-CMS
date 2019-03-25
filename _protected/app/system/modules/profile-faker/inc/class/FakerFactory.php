@@ -32,7 +32,7 @@ class FakerFactory
     public function __construct($iAmount, $sSex, $sLocale = Lang::DEFAULT_LOCALE)
     {
         $this->iAmount = $iAmount;
-        $this->sSex = empty($sSex) ? GenderTypeUserCore::GENDERS[array_rand([GenderTypeUserCore::MALE, GenderTypeUserCore::FEMALE])] : $sSex;
+        $this->sSex = empty($sSex) ? $this->getGender() : $sSex;
         $this->sLocale = $sLocale;
     }
 
@@ -143,5 +143,16 @@ class FakerFactory
 
             $oSubscriberModel->add($aUser);
         }
+    }
+
+    /**
+     * @return string
+     */
+    private function getGender()
+    {
+        $aGenders = GenderTypeUserCore::GENDERS;
+        unset($aGenders[GenderTypeUserCore::COUPLE]);
+
+        return $aGenders[array_rand($aGenders)];
     }
 }
