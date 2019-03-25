@@ -45,8 +45,8 @@ class AddFakeProfilesForm
                 'sex',
                 [
                     'both' => t('Gentlemen &amp; Ladies'),
-                    'male' => t('Only Gentlemen'),
-                    'female' => t('Only Ladies')
+                    GenderTypeUserCore::MALE => t('Only Gentlemen'),
+                    GenderTypeUserCore::FEMALE => t('Only Ladies')
                 ],
                 [
                     'required' => 1
