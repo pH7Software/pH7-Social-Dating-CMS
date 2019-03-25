@@ -35,9 +35,8 @@ class FakerFactory
     {
         $oUserModel = new UserCoreModel;
 
+        $oFaker = \Faker\Factory::create($this->sLocale);
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
-            $oFaker = \Faker\Factory::create($this->sLocale);
-
             $sSex = $oFaker->randomElement(
                 [
                     GenderTypeUserCore::MALE,
@@ -85,9 +84,8 @@ class FakerFactory
     {
         $oAffModel = new AffiliateCoreModel;
 
+        $oFaker = \Faker\Factory::create($this->sLocale);
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
-            $oFaker = \Faker\Factory::create($this->sLocale);
-
             $sSex = $oFaker->randomElement([GenderTypeUserCore::MALE, GenderTypeUserCore::FEMALE]);
             $sBirthDate = $oFaker->dateTimeBetween('-65 years', '-18 years')->format('Y-m-d');
             $sWebsite = $oFaker->randomElement(
@@ -124,8 +122,8 @@ class FakerFactory
     {
         $oSubscriberModel = new SubscriberCoreModel();
 
+        $oFaker = \Faker\Factory::create($this->sLocale);
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
-            $oFaker = \Faker\Factory::create($this->sLocale);
             $iAccountStatus = $oFaker->randomElement(
                 [
                     SubscriberCoreModel::ACTIVE_STATUS,

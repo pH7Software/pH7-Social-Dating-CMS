@@ -635,9 +635,8 @@ class InstallController extends Controller
         $oAffModel = new AffiliateCoreModel;
         $oSubscriberModel = new SubscriberCoreModel;
 
+        $oFaker = \Faker\Factory::create();
         for ($iProfile = 1; $iProfile <= $iMemberNumber; $iProfile++) {
-            $oFaker = \Faker\Factory::create();
-
             $sSex = $oFaker->randomElement(['male', 'female']);
             $sMatchSex = $oFaker->randomElement(['male', 'female', 'couple']);
             $sBirthDate = $oFaker->dateTimeBetween('-60 years', '-18 years')->format('Y-m-d');
