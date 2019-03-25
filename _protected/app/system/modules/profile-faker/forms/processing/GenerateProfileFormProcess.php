@@ -44,6 +44,7 @@ class GenerateProfileFormProcess extends Form
     {
         $oFakerFactory = new FakerFactory(
             $iAmountProfiles,
+            $this->httpRequest->post('sex'),
             $this->httpRequest->post('locale')
         );
 

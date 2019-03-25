@@ -19,31 +19,33 @@ class FakerFactory
     private $iAmount;
 
     /** @var string */
+    private $sSex;
+
+    /** @var string */
     private $sLocale;
 
     /**
      * @param int $iAmount Number of profile to generate.
+     * @param string $sSex Profile gender.
      * @param string $sLocale The locale if specified. e.g., en_US, en_IE, fr_FR, fr_BE, nl_NL, es_ES, ...
      */
-    public function __construct($iAmount, $sLocale = Lang::DEFAULT_LOCALE)
+    public function __construct($iAmount, $sSex, $sLocale = Lang::DEFAULT_LOCALE)
     {
         $this->iAmount = $iAmount;
+        $this->sSex = empty($sSex) ? GenderTypeUserCore::GENDERS[array_rand([GenderTypeUserCore::MALE, GenderTypeUserCore::FEMALE])] : $sSex;
         $this->sLocale = $sLocale;
     }
 
     public function generateMembers()
     {
         $oUserModel = new UserCoreModel;
-
         $oFaker = \Faker\Factory::create($this->sLocale);
+
+        $iMaxAge = DbConfig::getSetting('maxAgeRegistration');
+        $iMinAge = DbConfig::getSetting('minAgeRegistration');
+        $iMaxUsernameLength = (int)DbConfig::getSetting('maxUsernameLength');
+
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
-            $sSex = $oFaker->randomElement(
-                [
-                    GenderTypeUserCore::MALE,
-                    GenderTypeUserCore::FEMALE,
-                    GenderTypeUserCore::COUPLE
-                ]
-            );
             $sMatchSex = $oFaker->randomElement(
                 [
                     GenderTypeUserCore::MALE,
@@ -51,20 +53,18 @@ class FakerFactory
                     GenderTypeUserCore::COUPLE
                 ]
             );
-            $iMaxAge = DbConfig::getSetting('maxAgeRegistration');
-            $iMinAge = DbConfig::getSetting('minAgeRegistration');
             $sBirthDate = $oFaker->dateTimeBetween(
                 sprintf('-%s years', $iMaxAge),
                 sprintf('-%s years', $iMinAge)
             )->format('Y-m-d');
 
             $aUser = [];
-            $aUser['username'] = Cleanup::username($oFaker->userName, DbConfig::getSetting('maxUsernameLength'));
+            $aUser['username'] = Cleanup::username($oFaker->userName, $iMaxUsernameLength);
             $aUser['email'] = $oFaker->freeEmail;
-            $aUser['first_name'] = $oFaker->firstName;
+            $aUser['first_name'] = $oFaker->firstName($this->sSex);
             $aUser['last_name'] = $oFaker->lastName;
             $aUser['password'] = $oFaker->password;
-            $aUser['sex'] = $sSex;
+            $aUser['sex'] = $this->sSex;
             $aUser['match_sex'] = [$sMatchSex];
             $aUser['country'] = $oFaker->countryCode;
             $aUser['city'] = $oFaker->city;
@@ -83,10 +83,11 @@ class FakerFactory
     public function generateAffiliates()
     {
         $oAffModel = new AffiliateCoreModel;
-
         $oFaker = \Faker\Factory::create($this->sLocale);
+
+        $iMaxUsernameLength = (int)DbConfig::getSetting('maxUsernameLength');
+
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
-            $sSex = $oFaker->randomElement([GenderTypeUserCore::MALE, GenderTypeUserCore::FEMALE]);
             $sBirthDate = $oFaker->dateTimeBetween('-65 years', '-18 years')->format('Y-m-d');
             $sWebsite = $oFaker->randomElement(
                 [
@@ -97,12 +98,12 @@ class FakerFactory
             );
 
             $aUser = [];
-            $aUser['username'] = Cleanup::username($oFaker->userName, DbConfig::getSetting('maxUsernameLength'));
+            $aUser['username'] = Cleanup::username($oFaker->userName, $iMaxUsernameLength);
             $aUser['email'] = $oFaker->email;
-            $aUser['first_name'] = $oFaker->firstName;
+            $aUser['first_name'] = $oFaker->firstName($this->sSex);
             $aUser['last_name'] = $oFaker->lastName;
             $aUser['password'] = $oFaker->password;
-            $aUser['sex'] = $sSex;
+            $aUser['sex'] = $this->sSex;
             $aUser['country'] = $oFaker->countryCode;
             $aUser['city'] = $oFaker->city;
             $aUser['address'] = $oFaker->streetAddress;
@@ -132,7 +133,7 @@ class FakerFactory
             );
 
             $aUser = [];
-            $aUser['name'] = $oFaker->name;
+            $aUser['name'] = $oFaker->name($this->sSex);
             $aUser['email'] = $oFaker->email;
             $aUser['active'] = $iAccountStatus;
             $aUser['current_date'] = $oFaker->dateTime()->format('Y-m-d H:i:s');

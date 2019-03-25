@@ -51,7 +51,20 @@ class GenerateProfileForm
                 ]
             )
         );
-
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('Gender:'),
+                'sex',
+                [
+                    '' => t('Women &amp; Men'),
+                    GenderTypeUserCore::FEMALE => t('Only Women'),
+                    GenderTypeUserCore::MALE => t('Only Men')
+                ],
+                [
+                    'required' => 1
+                ]
+            )
+        );
         if (self::isLocaleFieldEligible($iProfileType)) {
             $oForm->addElement(
                 new \PFBC\Element\Select(
