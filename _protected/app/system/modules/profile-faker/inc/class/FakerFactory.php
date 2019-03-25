@@ -146,6 +146,8 @@ class FakerFactory
     }
 
     /**
+     * Returns the correct gender for Faker's profiles (without 'couple').
+     *
      * @return string
      */
     private function getGender()
