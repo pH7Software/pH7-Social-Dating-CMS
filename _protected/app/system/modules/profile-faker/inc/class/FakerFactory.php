@@ -46,6 +46,7 @@ class FakerFactory
         $iMaxUsernameLength = (int)DbConfig::getSetting('maxUsernameLength');
 
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
+            $sSex = empty($this->sSex) ? $this->getRandomGender() : $this->sSex;
             $sMatchSex = $oFaker->randomElement(
                 [
                     GenderTypeUserCore::MALE,
@@ -61,10 +62,10 @@ class FakerFactory
             $aUser = [];
             $aUser['username'] = Cleanup::username($oFaker->userName, $iMaxUsernameLength);
             $aUser['email'] = $oFaker->freeEmail;
-            $aUser['first_name'] = $oFaker->firstName($this->sSex);
+            $aUser['first_name'] = $oFaker->firstName($sSex);
             $aUser['last_name'] = $oFaker->lastName;
             $aUser['password'] = $oFaker->password;
-            $aUser['sex'] = empty($this->sSex) ? $this->getGender() : $this->sSex;
+            $aUser['sex'] = $sSex;
             $aUser['match_sex'] = [$sMatchSex];
             $aUser['country'] = $oFaker->countryCode;
             $aUser['city'] = $oFaker->city;
@@ -88,6 +89,7 @@ class FakerFactory
         $iMaxUsernameLength = (int)DbConfig::getSetting('maxUsernameLength');
 
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
+            $sSex = empty($this->sSex) ? $this->getRandomGender() : $this->sSex;
             $sBirthDate = $oFaker->dateTimeBetween('-65 years', '-18 years')->format('Y-m-d');
             $sWebsite = $oFaker->randomElement(
                 [
@@ -100,10 +102,10 @@ class FakerFactory
             $aUser = [];
             $aUser['username'] = Cleanup::username($oFaker->userName, $iMaxUsernameLength);
             $aUser['email'] = $oFaker->email;
-            $aUser['first_name'] = $oFaker->firstName($this->sSex);
+            $aUser['first_name'] = $oFaker->firstName($sSex);
             $aUser['last_name'] = $oFaker->lastName;
             $aUser['password'] = $oFaker->password;
-            $aUser['sex'] = empty($this->sSex) ? $this->getGender() : $this->sSex;
+            $aUser['sex'] = $sSex;
             $aUser['country'] = $oFaker->countryCode;
             $aUser['city'] = $oFaker->city;
             $aUser['address'] = $oFaker->streetAddress;
@@ -125,6 +127,7 @@ class FakerFactory
         $oFaker = \Faker\Factory::create($this->sLocale);
 
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
+            $sSex = empty($this->sSex) ? $this->getRandomGender() : $this->sSex;
             $iAccountStatus = $oFaker->randomElement(
                 [
                     SubscriberCoreModel::ACTIVE_STATUS,
@@ -133,7 +136,7 @@ class FakerFactory
             );
 
             $aUser = [];
-            $aUser['name'] = $oFaker->name($this->sSex);
+            $aUser['name'] = $oFaker->name($sSex);
             $aUser['email'] = $oFaker->email;
             $aUser['active'] = $iAccountStatus;
             $aUser['current_date'] = $oFaker->dateTime()->format('Y-m-d H:i:s');
@@ -146,11 +149,11 @@ class FakerFactory
     }
 
     /**
-     * Returns the correct gender for Faker's profiles (without 'couple').
+     * Returns random and correct genders for Faker's profiles (without 'couple' gender).
      *
      * @return string
      */
-    private function getGender()
+    private function getRandomGender()
     {
         $aGenders = GenderTypeUserCore::GENDERS;
         unset($aGenders[GenderTypeUserCore::COUPLE]);
