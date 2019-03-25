@@ -18,7 +18,7 @@ class FakerFactory
     /** @var int */
     private $iAmount;
 
-    /** @var string */
+    /** @var string|null */
     private $sSex;
 
     /** @var string */
