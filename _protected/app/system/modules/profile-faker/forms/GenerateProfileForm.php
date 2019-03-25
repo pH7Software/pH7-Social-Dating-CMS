@@ -51,19 +51,17 @@ class GenerateProfileForm
                 ]
             )
         );
-        if (self::isGenderFieldEligible($iProfileType)) {
-            $oForm->addElement(
-                new \PFBC\Element\Select(
-                    t('Gender:'),
-                    'sex',
-                    [
-                        '' => t('Women &amp; Men'),
-                        GenderTypeUserCore::FEMALE => t('Only Women'),
-                        GenderTypeUserCore::MALE => t('Only Men')
-                    ]
-                )
-            );
-        }
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('Gender:'),
+                'sex',
+                [
+                    '' => t('Women &amp; Men'),
+                    GenderTypeUserCore::FEMALE => t('Only Women'),
+                    GenderTypeUserCore::MALE => t('Only Men')
+                ]
+            )
+        );
         $oForm->addElement(
             new \PFBC\Element\Select(
                 t('Type of Profile:'),
@@ -121,17 +119,5 @@ class GenerateProfileForm
             'tr_TR' => t('Turkish'),
             'es_VE' => t('Venezuelan')
         ];
-    }
-
-    /**
-     * Don't show gender field for Subscribers, since they don't have "gender" detail.
-     *
-     * @param int $iProfileType
-     *
-     * @return bool
-     */
-    private static function isGenderFieldEligible($iProfileType)
-    {
-        return $iProfileType !== ProfileType::SUBSCRIBER;
     }
 }
