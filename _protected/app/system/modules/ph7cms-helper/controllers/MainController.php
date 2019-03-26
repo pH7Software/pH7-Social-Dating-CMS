@@ -29,7 +29,8 @@ class MainController extends Controller
         'stargithubbox',
         'forkgithubbox',
         'followgithubbox',
-        'seemebox'
+        'seemebox',
+        'reviewboxrecall'
     ];
 
     const DONATION_AMOUNTS = [
