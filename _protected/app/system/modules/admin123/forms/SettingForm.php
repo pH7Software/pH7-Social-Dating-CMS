@@ -160,7 +160,7 @@ class SettingForm
         /********** Picture and Video **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="pic_vid"><div class="col-md-10"><h2 class="underline">' . t('Picture and Video') . '</h2>'));
 
-        if ($bIsPictureEnabled) {
+        if ($bIsPictureEnabled || $bIsVideoEnabled) {
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Image') . '</h3>'));
 
             $oForm->addElement(new \PFBC\Element\Textbox(t('Watermark Text:'), 'watermark_text_image', ['description' => t('Leave it blank to disable the watermark text on images.'), 'value' => DbConfig::getSetting('watermarkTextImage', '')]));
