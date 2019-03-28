@@ -171,8 +171,8 @@ class UserController extends MainController
      * Get all profile data.
      *
      * @param string $sOrder
-     * @param int $iOffset
-     * @param int $iLimit
+     * @param int|null $iOffset
+     * @param int|null $iLimit
      *
      * @return void
      */
@@ -198,8 +198,8 @@ class UserController extends MainController
      * @param string $sCountryCode The country code. e.g. US, CA, FR, ES, BE, NL
      * @param string $sCity
      * @param string $sOrder
-     * @param int $iOffset
-     * @param int $iLimit
+     * @param int|null $iOffset
+     * @param int|null $iLimit
      *
      * @return void
      */
