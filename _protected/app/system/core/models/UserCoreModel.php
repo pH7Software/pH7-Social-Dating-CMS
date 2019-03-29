@@ -27,8 +27,12 @@ use stdClass;
 // Abstract Class
 class UserCoreModel extends Model
 {
-    const CACHE_GROUP = 'db/sys/mod/user';
+    /**
+     * Cache lifetime set to 1 week.
+     */
     const CACHE_TIME = 604800;
+
+    const CACHE_GROUP = 'db/sys/mod/user';
 
     const HASH_VALIDATION_LENGTH = 40;
 

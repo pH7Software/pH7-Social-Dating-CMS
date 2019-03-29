@@ -22,7 +22,10 @@ use Teapot\StatusCode;
 
 class RatingCoreAjax
 {
-    const COOKIE_LIFETIME = 3600 * 24 * 7; // A week
+    /**
+     * Cache lifetime set to 1 week.
+     */
+    const COOKIE_LIFETIME = 3600 * 24 * 7;
 
     /** @var HttpRequest */
     private $oHttpRequest;

@@ -15,8 +15,12 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class Module extends Engine\Model
 {
+    /**
+     * Cache lifetime set to 2 days.
+     */
+    const CACHE_TIME = 172800;
+
     const CACHE_GROUP = 'db/sys/core/enabled_modules';
-    const CACHE_TIME = 172800; // 2 days
 
     const YES = '1'; // Enabled
     const NO = '0'; // Disabled

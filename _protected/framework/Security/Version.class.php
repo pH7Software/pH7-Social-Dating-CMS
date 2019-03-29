@@ -20,7 +20,13 @@ use PH7\Framework\Security\Validate\Validate;
 
 final class Version
 {
-    const CACHE_TIME = 86400; // 1 day
+    /**
+     * Cache lifetime set to 1 day.
+     */
+    const CACHE_TIME = 86400;
+
+    const CACHE_GROUP = 'str/security';
+
     const LATEST_VERSION_URL = 'http://xml.ph7cms.com/software-info.xml';
     const VERSION_PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
     const FRAMEWORK_TAG_NAME = 'ph7';
@@ -66,7 +72,7 @@ final class Version
      */
     public static function getLatestInfo()
     {
-        $oCache = (new Cache)->start('str/security', 'version-info', self::CACHE_TIME);
+        $oCache = (new Cache)->start(self::CACHE_GROUP, 'version-info', self::CACHE_TIME);
         if (!$mData = $oCache->get()) {
             $mData = self::retrieveXmlInfoFromRemoteServer();
             $oCache->put($mData);
