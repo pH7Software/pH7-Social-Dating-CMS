@@ -74,7 +74,11 @@ class UserCoreModel extends Model
         }
         $iMemberGroupId = (int)$oSession->get('member_group_id');
 
-        $this->cache->start(self::CACHE_GROUP, 'membership_groups' . $iMemberGroupId, static::CACHE_TIME);
+        $this->cache->start(
+            self::CACHE_GROUP,
+            'membership_groups' . $iMemberGroupId,
+            static::CACHE_TIME
+        );
 
         if (!$oPermissions = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare(
@@ -105,7 +109,9 @@ class UserCoreModel extends Model
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT email, password FROM' . Db::prefix($sTable) . 'WHERE email = :email LIMIT 1');
+        $rStmt = Db::getInstance()->prepare(
+            'SELECT email, password FROM' . Db::prefix($sTable) . 'WHERE email = :email LIMIT 1'
+        );
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -244,7 +250,13 @@ class UserCoreModel extends Model
      */
     public function updatePrivacySetting($sSection, $sValue, $iProfileId)
     {
-        $this->orm->update(DbTableName::MEMBER_PRIVACY, $sSection, $sValue, 'profileId', $iProfileId);
+        $this->orm->update(
+            DbTableName::MEMBER_PRIVACY,
+            $sSection,
+            $sValue,
+            'profileId',
+            $iProfileId
+        );
     }
 
     /**
@@ -260,7 +272,9 @@ class UserCoreModel extends Model
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET password = :newPassword WHERE email = :email LIMIT 1');
+        $rStmt = Db::getInstance()->prepare(
+            'UPDATE' . Db::prefix($sTable) . 'SET password = :newPassword WHERE email = :email LIMIT 1'
+        );
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->bindValue(':newPassword', Security::hashPwd($sNewPassword), \PDO::PARAM_STR);
 
@@ -300,7 +314,9 @@ class UserCoreModel extends Model
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(profileId) FROM' . Db::prefix($sTable) . 'WHERE email = :email AND hashValidation = :hash LIMIT 1');
+        $rStmt = Db::getInstance()->prepare(
+            'SELECT COUNT(profileId) FROM' . Db::prefix($sTable) . 'WHERE email = :email AND hashValidation = :hash LIMIT 1'
+        );
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->bindParam(':hash', $sHash, \PDO::PARAM_STR, self::HASH_VALIDATION_LENGTH);
         $rStmt->execute();
@@ -634,7 +650,10 @@ class UserCoreModel extends Model
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT email, username, firstName, hashValidation FROM' . Db::prefix($sTable) . 'WHERE email = :email AND active = :emailActivation LIMIT 1');
+        $rStmt = Db::getInstance()->prepare(
+            'SELECT email, username, firstName, hashValidation FROM' . Db::prefix($sTable) .
+            'WHERE email = :email AND active = :emailActivation LIMIT 1'
+        );
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->bindValue(':emailActivation', RegistrationCore::EMAIL_ACTIVATION, \PDO::PARAM_INT);
         $rStmt->execute();
