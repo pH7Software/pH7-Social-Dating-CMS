@@ -320,13 +320,16 @@ class MainController extends Controller
 
     public function setTrash()
     {
+        $iId = $this->httpRequest->post('id', 'int');
+
         $this->bStatus = $this->oMailModel->setTo(
             $this->iProfileId,
-            $this->httpRequest->post('id', 'int'),
+            $iId,
             MailModel::TRASH_MODE
         );
 
         if ($this->bStatus) {
+            $this->oMailModel->setReadMsg($iId);
             $this->sMsg = t('Your message has been moved to your trash bin.');
         } else {
             $this->sMsg = t("Your message doesn't exist anymore in your trash bin.");
@@ -346,6 +349,8 @@ class MainController extends Controller
             if (count($this->httpRequest->post('action')) > 0) {
                 foreach ($this->httpRequest->post('action') as $iId) {
                     $iId = (int)$iId;
+
+                    $this->oMailModel->setReadMsg($iId);
                     $this->oMailModel->setTo(
                         $this->iProfileId,
                         $iId,
@@ -410,8 +415,6 @@ class MainController extends Controller
     {
         $iId = $this->httpRequest->post('id', 'int');
 
-        $this->oMailModel->setReadMsg($iId);
-
         if ($this->bAdminLogged) {
             $this->bStatus = $this->oMailModel->adminDeleteMsg($iId);
         } else {
@@ -420,6 +423,10 @@ class MainController extends Controller
                 $iId,
                 MailModel::DELETE_MODE
             );
+
+            if ($this->bStatus) {
+                $this->oMailModel->setReadMsg($iId);
+            }
         }
 
         if ($this->bStatus) {
@@ -441,10 +448,10 @@ class MainController extends Controller
                 foreach ($this->httpRequest->post('action') as $iId) {
                     $iId = (int)$iId;
 
-                    $this->oMailModel->setReadMsg($iId);
                     if ($this->bAdminLogged) {
                         $this->oMailModel->adminDeleteMsg($iId);
                     } else {
+                        $this->oMailModel->setReadMsg($iId);
                         $this->oMailModel->setTo(
                             $this->iProfileId,
                             $iId,
