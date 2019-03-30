@@ -137,7 +137,6 @@ class UserCoreModel extends Model
      * @param string $sUsername
      * @param string $sFirstName
      * @param string $sTable
-     * @param string $sTable Default DbTableName::MEMBER
      *
      * @return void
      */
