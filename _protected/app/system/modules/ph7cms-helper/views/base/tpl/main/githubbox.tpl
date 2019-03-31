@@ -7,7 +7,7 @@
                 <img src="{url_tpl_mod_img}github.svg" alt="pH7CMS on Github" />
             </a>
             <figcaption>
-                <em>{lang 'Will you do it? Awesome! 😊️'}</em>
+                <em>{lang 'Will you do it? Awesome then! 😊️'}</em>
             </figcaption>
         </figure>
     </div>
