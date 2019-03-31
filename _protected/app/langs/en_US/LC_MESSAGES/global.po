@@ -14278,7 +14278,7 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/ph7cms-helper_c718c7a0c6017242b5287b948f02581d/base/main/donationbox.cpl.php:19
 #, php-format
 msgid ""
-"Be like 78% of our users who contribute to the software on a regular basis."
+"Be like the 78% of users who contribute to the software on a regular basis 🙏"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/ph7cms-helper_c718c7a0c6017242b5287b948f02581d/base/main/donationbox.cpl.php:19
