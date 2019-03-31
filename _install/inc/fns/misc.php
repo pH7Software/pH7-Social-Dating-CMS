@@ -129,12 +129,13 @@ function validate_password($sPassword, $iMin = 6, $iMax = 92)
  * Validate email.
  *
  * @param string $sEmail
+ * @param int $iEmailMaxLength
  *
  * @return bool
  */
-function validate_email($sEmail)
+function validate_email($sEmail, $iEmailMaxLength = 120)
 {
-    return (filter_var($sEmail, FILTER_VALIDATE_EMAIL) !== false && mb_strlen($sEmail) < 120);
+    return (filter_var($sEmail, FILTER_VALIDATE_EMAIL) !== false && mb_strlen($sEmail) < $iEmailMaxLength);
 }
 
 /**
