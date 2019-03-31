@@ -223,6 +223,8 @@ Do you need a software engineer like me (and willing to relocate) at your compan
 
 ## 💲 Offer Me A Cup of Tea? (...or tea bags...) 🍵
 
+You appreciate the project, the several years I spent on it, and don't want to let it die...?
+
 [![Paypal](templates/system/modules/ph7cms-helper/themes/base/img/paypal-donate.en.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6)
 [![Patreon](templates/system/modules/ph7cms-helper/themes/base/img/support-patreon.en.png)](https://www.patreon.com/bePatron?u=3534366 "Become a Patron")
 
