@@ -69,7 +69,7 @@ class JoinFormProcess extends Form
                 AffiliateCore::updateJoinCom($iAffId, $this->config, $this->registry);
             }
 
-            // Send an email and sets the welcome message.
+            // Send an email and sets the welcome message
             \PFBC\Form::setSuccess(
                 'form_join_aff',
                 t('Your affiliate account has been created! %0%', (new Registration($this->view))->sendMail($aData)->getMsg())
