@@ -64,8 +64,6 @@ class JoinFormProcess extends Form
                 t('Please try again with new information in the form fields or come back later.')
             );
         } else {
-            // Successful registration in the database!
-
             /** Update the Affiliate Commission **/
             if ($this->isUserActivated()) {
                 AffiliateCore::updateJoinCom($iAffId, $this->config, $this->registry);
