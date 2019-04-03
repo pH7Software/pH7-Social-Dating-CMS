@@ -208,7 +208,14 @@ class UserController extends MainController
         if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_GET) {
             $this->oRest->response('', StatusCode::NOT_ACCEPTABLE);
         } else {
-            $oUsers = $this->oUserModel->getGeoProfiles($sCountryCode, $sCity, false, $sOrder, $iOffset, $iLimit);
+            $oUsers = $this->oUserModel->getGeoProfiles(
+                $sCountryCode,
+                $sCity,
+                false,
+                $sOrder,
+                $iOffset,
+                $iLimit
+            );
 
             if (!empty($oUsers)) {
                 $this->oRest->response($this->set([$oUsers]));

@@ -57,7 +57,14 @@ class UserDesignCoreModel extends Design
         $iLimit = self::GEO_PROFILE_LIMIT
     )
     {
-        $oUserGeo = $this->oUserModel->getGeoProfiles($sCountryCode, $sCity, false, SearchCoreModel::LAST_ACTIVITY, $iOffset, $iLimit);
+        $oUserGeo = $this->oUserModel->getGeoProfiles(
+            $sCountryCode,
+            $sCity,
+            false,
+            SearchCoreModel::LAST_ACTIVITY,
+            $iOffset,
+            $iLimit
+        );
         if (empty($oUserGeo)) {
             return;
         }
