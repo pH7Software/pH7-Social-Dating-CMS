@@ -37,6 +37,7 @@ class SearchCoreModel
     const SEND_DATE = 'sendDate';
     const ADDED_DATE = 'addedDate';
     const UPDATED = 'updatedDate';
+    const FEATURED = 'featured';
     const IP = 'ip';
 
     /**
@@ -78,6 +79,7 @@ class SearchCoreModel
             case static::SEND_DATE:
             case static::ADDED_DATE:
             case static::UPDATED:
+            case static::FEATURED:
                 $sAsTable = !empty($sAsTable) ? $sAsTable . '.' : '';
                 $sOrderBy = $sColumn;
                 break;
