@@ -230,6 +230,22 @@ class UserController extends MainController
     }
 
     /**
+     * @param int $iProfileId
+     *
+     * Delete a user
+     */
+    public function deleteUser($iProfileId)
+    {
+        if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_DELETE) {
+            $this->oRest->response('', StatusCode::NOT_ACCEPTABLE);
+        } else {
+            $aResults = ['status' => 'failed', 'msg' => t('Endpoint Not Implemented Yet')];
+
+            $this->oRest->response($this->set($aResults), StatusCode::NOT_IMPLEMENTED);
+        }
+    }
+
+    /**
      * @param array $aData
      * @param array $aRequiredElements
      *
