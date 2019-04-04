@@ -74,7 +74,7 @@ class Uri
      * @param string $sModule
      * @param string $sController
      * @param string $sAction
-     * @param string $sVars Default NULL
+     * @param string|null $sVars Default NULL
      * @param bool $bFullClean Default TRUE
      *
      * @return string
