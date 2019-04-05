@@ -70,19 +70,34 @@ class UserController extends MainController
                 'description'
             ];
             if (!$this->areFieldsExist($aData, $aRequiredFields)) {
-                $aResults = ['status' => 'failed', 'msg' => t('One or several profile fields are empty.')];
+                $aResults = [
+                    'status' => 'failed',
+                    'msg' => t('One or several profile fields are empty.')
+                ];
                 $this->oRest->response($this->set($aResults), StatusCode::BAD_REQUEST);
             } elseif (!$this->oValidate->email($aData['email'])) {
-                $aResults = ['status' => 'form_error', 'msg' => t('The Email is not valid.')];
+                $aResults = [
+                    'status' => 'form_error',
+                    'msg' => t('The Email is not valid.')
+                ];
                 $this->oRest->response($this->set($aResults), StatusCode::BAD_REQUEST);
             } elseif (!$this->oValidate->username($aData['username'], $iMinUsr, $iMaxUsr)) {
-                $aResults = ['status' => 'form_error', 'msg' => t('The Username must contain from %0% to %1% characters, the Username is not available or it is already used by other member.', $iMinUsr, $iMaxUsr)];
+                $aResults = [
+                    'status' => 'form_error',
+                    'msg' => t('The Username must contain from %0% to %1% characters, the Username is not available or it is already used by other member.', $iMinUsr, $iMaxUsr)
+                ];
                 $this->oRest->response($this->set($aResults), StatusCode::BAD_REQUEST);
             } elseif (!$this->oValidate->password($aData['password'], $iMinPwd, $iMaxPwd)) {
-                $aResults = ['status' => 'form_error', 'msg' => t('The Password must contain from %0% to %1% characters.', $iMinPwd, $iMaxPwd)];
+                $aResults = [
+                    'status' => 'form_error',
+                    'msg' => t('The Password must contain from %0% to %1% characters.', $iMinPwd, $iMaxPwd)
+                ];
                 $this->oRest->response($this->set($aResults), StatusCode::BAD_REQUEST);
             } elseif (!$this->oValidate->birthDate($sBirthDate, $iMinAge, $iMaxAge)) {
-                $aResults = ['status' => 'form_error', 'msg' => t('You must be %0% to %1% years to register on the site.', $iMinAge, $iMinAge)];
+                $aResults = [
+                    'status' => 'form_error',
+                    'msg' => t('You must be %0% to %1% years to register on the site.', $iMinAge, $iMinAge)
+                ];
                 $this->oRest->response($this->set($aResults), StatusCode::BAD_REQUEST);
             } else {
                 $aValidData = [
@@ -133,7 +148,10 @@ class UserController extends MainController
 
                 $this->oRest->response($this->set($aData));
             } else {
-                $aResults = ['status' => 'failed', 'msg' => t('Password or Email was incorrect.')];
+                $aResults = [
+                    'status' => 'failed',
+                    'msg' => t('Password or Email was incorrect.')
+                ];
                 $this->oRest->response($this->set($aResults), StatusCode::BAD_REQUEST);
             }
         }
@@ -240,7 +258,6 @@ class UserController extends MainController
             $this->oRest->response('', StatusCode::NOT_ACCEPTABLE);
         } else {
             $aResults = ['status' => 'failed', 'msg' => t('Endpoint Not Implemented Yet')];
-
             $this->oRest->response($this->set($aResults), StatusCode::NOT_IMPLEMENTED);
         }
     }
