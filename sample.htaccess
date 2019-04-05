@@ -656,6 +656,9 @@ ErrorDocument 505 /error/http/index?code=505
         SetEnv HTTP_MOD_REWRITE On
     </IfModule>
 
+    # Uncomment only if HTTPS is enabled. HSTS header increases security of your website & SEO)
+    # Header set Strict-Transport-Security "max-age=31536000" env=HTTPS
+
     # Remove www subdomain in the URL
     # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
     # RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
