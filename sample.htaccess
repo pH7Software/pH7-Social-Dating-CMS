@@ -658,7 +658,7 @@ ErrorDocument 505 /error/http/index?code=505
 
     # Uncomment the following only if HTTPS is enabled. HSTS header increases security of your website & SEO)
     # <IfModule mod_headers.c>
-    # Header set Strict-Transport-Security "max-age=31536000" env=HTTPS
+    # Header set Strict-Transport-Security "max-age=31536000; preload" env=HTTPS
     # </IfModule>
 
     # Remove www subdomain in the URL
