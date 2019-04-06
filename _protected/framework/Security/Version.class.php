@@ -52,7 +52,7 @@ final class Version
      */
     const KERNEL_VERSION = '15.0.0';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELEASE_DATE = '2019-02-18';
+    const KERNEL_RELEASE_DATE = '2019-04-08';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7CMS.com';
