@@ -1,7 +1,7 @@
     {* Get the frequently used functions in variables to optimize the script and call these functions only once in the file *}
     {{
       $admin_logged_as_user = UserCore::isAdminLoggedAs();
-      $admin_logged_as_affiliate = AffiliateCore::isAdminLoggedAs()
+      $admin_logged_as_affiliate = AffiliateCore::isAdminLoggedAs();
     }}
 
     {{
