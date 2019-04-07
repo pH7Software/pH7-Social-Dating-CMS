@@ -642,7 +642,7 @@ class InstallController extends Controller
             $sBirthDate = $oFaker->dateTimeBetween('-60 years', '-18 years')->format('Y-m-d');
 
             $aUser = [];
-            $aUser['username'] = $oFaker->userName;
+            $aUser['username'] = str_replace(['.', ' '], '-', $oFaker->userName);
             $aUser['email'] = $oFaker->email;
             $aUser['first_name'] = $oFaker->firstName;
             $aUser['last_name'] = $oFaker->lastName;
