@@ -256,7 +256,8 @@ abstract class Controller extends Core implements Controllable
             'is_map_enabled' => SysMod::isEnabled('map'),
             'is_friend_enabled' => SysMod::isEnabled('friend'),
             'is_webcam_enabled' => SysMod::isEnabled('webcam'),
-            'is_pwa_enabled' => SysMod::isEnabled('pwa')
+            'is_pwa_enabled' => SysMod::isEnabled('pwa'),
+            'is_smsverification_enabled' => SysMod::isEnabled('sms-verification')
         ];
         $this->view->assigns($aModsEnabled);
 

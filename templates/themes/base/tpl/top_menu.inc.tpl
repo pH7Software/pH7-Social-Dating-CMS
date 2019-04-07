@@ -381,6 +381,10 @@
               <li><a href="{{ $design->url('video', 'admin', 'config') }}"><i class="fa fa-youtube-play"></i> {lang 'Video Youtube API key'}</a></li>
             {/if}
 
+            {if $is_smsverification_enabled}
+              <li><a href="{{ $design->url('sms-verification', 'admin', 'config') }}"><i class="fa-user-check"></i> {lang 'SMS Gateway Verification APIs'}</a></li>
+            {/if}
+
             {if $is_connect_enabled}
               <li><a href="{{ $design->url('connect', 'admin', 'config') }}"><i class="fa fa-share-alt-square"></i> {lang 'Universal Login Setting'}</a></li>
             {/if}
