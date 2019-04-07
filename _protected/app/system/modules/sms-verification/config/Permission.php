@@ -20,11 +20,11 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if (!$this->session->exists(SmsVerificationCore::PROFILE_ID_SESS_NAME)) {
+        if ($this->registry->controller === 'MainController' && !$this->session->exists(SmsVerificationCore::PROFILE_ID_SESS_NAME)) {
             $this->signUpRedirect();
         }
 
-        if (!AdminCore::auth() && $this->registry->controller === 'AdminController') {
+        if ($this->registry->controller === 'AdminController' && !AdminCore::auth()) {
             // For security reasons, don't redirect user to admin panel URL
             Header::redirect(
                 Uri::get('user', 'main', 'login'),
