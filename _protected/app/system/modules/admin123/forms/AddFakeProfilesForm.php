@@ -65,7 +65,7 @@ class AddFakeProfilesForm
         );
         $oForm->addElement(
             new \PFBC\Element\Button(
-                t('Add Fake Profiles!'),
+                t('Add Fake Profiles'),
                 'submit',
                 ['icon' => 'plus']
             )

@@ -2522,6 +2522,7 @@ msgid "Import Users"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/UserController.php:107
+#: _protected/app/system/modules/admin123/forms/AddFakeProfilesForm.php:34
 msgid "Add Fake Profiles"
 msgstr ""
 
@@ -2703,10 +2704,6 @@ msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/AddFakeProfilesForm.php:33
 msgid "Nationality:"
-msgstr ""
-
-#: _protected/app/system/modules/admin123/forms/AddFakeProfilesForm.php:34
-msgid "Add Fake Profiles!"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/AddFakeProfilesForm.php:46
