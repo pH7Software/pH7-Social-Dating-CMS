@@ -92,8 +92,8 @@
                         <span>{lang 'Add Friend'}</span>
                     </a>
                 {else}
-                    <a href="{{ $design->url('friend','main','search',$username) }}">
-                        <span>{lang 'Manage Friends'}</span>
+                    <a href="{{ $design->url('friend','main','index', $visitor_username.'?looking='.$username) }}">
+                        <span>{lang 'Manage Friend'}</span>
                     </a>
                 {/if}
             </li>

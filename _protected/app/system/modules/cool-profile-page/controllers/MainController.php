@@ -71,6 +71,7 @@ class MainController extends ProfileBaseController
 
             $this->view->id = $this->iProfileId;
             $this->view->username = $oUser->username;
+            $this->view->visitor_username = $this->session->get('member_username');
             $this->view->first_name = $aData['first_name'];
             $this->view->last_name = $aData['last_name'];
             $this->view->middle_name = $aData['middle_name'];
