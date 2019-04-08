@@ -12,6 +12,11 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class FriendModel extends FriendCoreModel
 {
+    const SUCCESS_STATUS = 0;
+    const EXISTS_STATUS = 1;
+    const UNEXISTANT_ID_STATUS = 2;
+    const ERROR_STATUS = -1;
+
     /** @var string */
     private $sStatus;
 
@@ -74,15 +79,15 @@ class FriendModel extends FriendCoreModel
                 $oRow = $rStmt->execute();
                 Db::free($rStmt);
                 if (!$oRow) {
-                    $this->sStatus = 'error';
+                    $this->sStatus = self::ERROR_STATUS;
                 } else {
-                    $this->sStatus = 'success';
+                    $this->sStatus = self::SUCCESS_STATUS;
                 }
             } else {
-                $this->sStatus = 'friend_exists';
+                $this->sStatus = self::EXISTS_STATUS;
             }
         } else {
-            $this->sStatus = 'id_does_not_exist';
+            $this->sStatus = self::UNEXISTANT_ID_STATUS;
         }
 
         unset($oExistsModel); // Destruction of the object
