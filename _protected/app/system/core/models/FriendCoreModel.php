@@ -102,6 +102,35 @@ class FriendCoreModel extends Model
     }
 
     /**
+     * Check if a user exists in another user's friends list.
+     *
+     * @param int $iProfileId
+     * @param int $iFriendId
+     * @param int $iPending 2 = select the friends that are approved and pending, 0 = approved or 1 = pending friend requests.
+     *
+     * @return bool
+     */
+    public function inList($iProfileId, $iFriendId, $iPending = self::ALL_REQUEST)
+    {
+        $iProfileId = (int)$iProfileId;
+        $iFriendId = (int)$iFriendId;
+
+        $sSqlPending = ($iPending !== self::ALL_REQUEST) ? 'AND pending = :pending' : '';
+
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::MEMBER_FRIEND) .
+            'WHERE profileId = :profileId AND friendId = :friendId ' . $sSqlPending . ' LIMIT 1');
+
+        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
+        if ($iPending !== self::ALL_REQUEST) {
+            $rStmt->bindValue(':pending', $iPending, \PDO::PARAM_INT);
+        }
+        $rStmt->execute();
+
+        return $rStmt->fetchColumn() > 0;
+    }
+
+    /**
      * Get Pending Friend.
      *
      * @param int $iFriendId

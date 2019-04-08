@@ -233,11 +233,16 @@ abstract class ProfileBaseController extends Controller
      * @param string $sFirstName User's first name.
      * @param stdClass $oUser User data from the DB.
      *
-     * @return string The anchor for the link.
+     * @return string|null The correct anchor for the friend link, or NULL if the both users are already friends.
      */
     protected function getBeFriendLink($sFirstName, stdClass $oUser)
     {
         if ($this->bUserAuth) {
+            // Check if already friend
+            if ((new FriendCoreModel)->inList($this->iVisitorId, $this->iProfileId)) {
+                return null;
+            }
+
             $sBefriendLink = 'javascript:void(0)" onclick="friend(\'add\',' . $this->iProfileId . ',\'' . (new Token)->generate('friend') . '\')';
         } else {
             $aUrlParms = [
