@@ -275,7 +275,7 @@ class MainController extends Controller
 
     public function result()
     {
-        $iType = (int)$this->httpRequest->get('where');
+        $iType = $this->httpRequest->get('where', 'int');
 
         $this->iTotalMails = $this->oMailModel->search(
             $this->httpRequest->get('looking'),
