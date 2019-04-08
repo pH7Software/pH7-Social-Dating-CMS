@@ -21,7 +21,7 @@ class FriendModel extends FriendCoreModel
     private $sStatus;
 
     /**
-     * Check exists in the friends list.
+     * Check if a user exists in another user's friends list.
      *
      * @param int $iProfileId
      * @param int $iFriendId
@@ -57,7 +57,7 @@ class FriendModel extends FriendCoreModel
      * @param string $sRequestDate Date of the Request Friend.
      * @param int $iPending 0 = approved or 1 = pending friend requests.
      *
-     * @return string Status in word: 'error', 'id_does_not_exist', 'friend_exists' or 'success'
+     * @return int
      */
     public function add($iProfileId, $iFriendId, $sRequestDate, $iPending = self::PENDING_REQUEST)
     {
