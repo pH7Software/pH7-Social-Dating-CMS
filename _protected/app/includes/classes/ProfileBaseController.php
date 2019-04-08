@@ -238,8 +238,7 @@ abstract class ProfileBaseController extends Controller
     protected function getBeFriendLink($sFirstName, stdClass $oUser)
     {
         if ($this->bUserAuth) {
-            // Check if already friend
-            if ((new FriendCoreModel)->inList($this->iVisitorId, $this->iProfileId)) {
+            if ($this->isAlreadyFriend()) {
                 return null;
             }
 
@@ -333,6 +332,14 @@ abstract class ProfileBaseController extends Controller
     {
         $sAvatarImageUrl = $this->design->getUserAvatar($oUser->username, $oUser->sex, 400, false);
         $this->view->image_social_meta_tag = $sAvatarImageUrl;
+    }
+
+    /**
+     * @return bool
+     */
+    private function isAlreadyFriend()
+    {
+        return (new FriendCoreModel)->inList($this->iVisitorId, $this->iProfileId);
     }
 
     private function updateProfileViews(stdClass $oPrivacyViewsUser)
