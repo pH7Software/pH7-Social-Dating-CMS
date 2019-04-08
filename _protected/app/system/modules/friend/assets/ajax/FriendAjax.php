@@ -71,13 +71,13 @@ class FriendAjax extends Core
                 $this->dateTime->get()->dateTime('Y-m-d H:i:s')
             );
 
-            if ($this->mStatus == 'error') {
+            if ($this->mStatus === 'error') {
                 $this->sMsg = jsonMsg(0, t('Unable to add to friends list. Please try later.'));
-            } elseif ($this->mStatus == 'friend_exists') {
+            } elseif ($this->mStatus === 'friend_exists') {
                 $this->sMsg = jsonMsg(0, t('This profile already exists in your friends list.'));
-            } elseif ($this->mStatus == 'id_does_not_exist') {
+            } elseif ($this->mStatus === 'id_does_not_exist') {
                 $this->sMsg = jsonMsg(0, t('Profile ID does not exist.')); // Should never happen unless someone changes the source code with firebug or other
-            } elseif ($this->mStatus == 'success') {
+            } elseif ($this->mStatus === 'success') {
                 $this->sMsg = jsonMsg(1, t('Profile successfully added to your friends list.'));
 
                 $oUserModel = new UserCoreModel;
