@@ -275,7 +275,7 @@ class MainController extends Controller
 
     public function result()
     {
-        $sType = $this->httpRequest->get('where');
+        $iType = (int)$this->httpRequest->get('where');
 
         $this->iTotalMails = $this->oMailModel->search(
             $this->httpRequest->get('looking'),
@@ -285,7 +285,7 @@ class MainController extends Controller
             null,
             null,
             $this->iProfileId,
-            $sType
+            $iType
         );
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->iTotalMails,
@@ -300,7 +300,7 @@ class MainController extends Controller
             $this->oPage->getFirstItem(),
             $this->oPage->getNbItemsPerPage(),
             $this->iProfileId,
-            $sType
+            $iType
         );
 
         if (empty($oSearch)) {
