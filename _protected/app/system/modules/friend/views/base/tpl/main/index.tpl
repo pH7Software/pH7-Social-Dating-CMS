@@ -8,7 +8,7 @@
         {each $f in $friends}
             <div class="s_photo" id="friend_{% $f->fdId %}">
                 {{ $avatarDesign->get($f->username, $f->firstName, $f->sex, 64, true) }}
-                <em>{% $f->username %}</em><br />
+                <em><abbr title="{% $f->firstName %}">{% $f->username %}</abbr></em><br />
 
                 {if $is_user_auth AND $sess_member_id == $member_id}
                     {if $sess_member_id == $f->friendId AND $f->pending == FriendCoreModel::PENDING_REQUEST}
