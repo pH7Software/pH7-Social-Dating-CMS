@@ -92,7 +92,7 @@
                         <span>{lang 'Add Friend'}</span>
                     </a>
                 {else}
-                    <a href="{{ $design->url('friend','main','index') }}">
+                    <a href="{{ $design->url('friend','main','search',$username) }}">
                         <span>{lang 'Manage Friends'}</span>
                     </a>
                 {/if}

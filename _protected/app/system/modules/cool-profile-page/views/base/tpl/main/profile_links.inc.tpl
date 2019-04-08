@@ -25,7 +25,7 @@
                 <i class="fa fa-user-plus friend"></i>
             </a>
         {else}
-            <a class="vs_marg" href="{{ $design->url('friend','main','index') }}" title="{lang 'Manage Friends'}">
+            <a class="vs_marg" href="{{ $design->url('friend','main','search',$username) }}" title="{lang 'Manage Friends'}">
                 <i class="fa fa-user friend disabled-icon"></i>
             </a>
         {/if}
