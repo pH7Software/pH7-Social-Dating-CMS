@@ -48,7 +48,3 @@ h2 {
 .bottom {
     float: none !important;
 }
-
-.disabled-icon {
-    opacity: .5;
-}
