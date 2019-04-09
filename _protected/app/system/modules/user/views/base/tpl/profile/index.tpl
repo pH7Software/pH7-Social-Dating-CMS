@@ -87,15 +87,15 @@
         {/if}
         {if $is_friend_enabled AND $is_logged AND !$is_own_profile}
             <li>
-                {if !empty($befriend_link)}
-                    <a ref="nofollow" href="{befriend_link}">
-                        <span>{lang 'Add Friend'}</span>
-                    </a>
-                {else}
-                    <a href="{{ $design->url('friend','main','index', $visitor_username.'?looking='.$username) }}">
-                        <span>{lang 'Manage Friend'}</span>
-                    </a>
-                {/if}
+                <a ref="nofollow" href="{friend_link}">
+                    <span>
+                        {if $is_already_friend}
+                            {lang 'Remove Friend'}
+                        {else}
+                            {lang 'Add Friend'}
+                        {/if}
+                    </span>
+                </a>
             </li>
         {/if}
         {if $is_lovecalculator_enabled AND $is_logged AND !$is_own_profile}

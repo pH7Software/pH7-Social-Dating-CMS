@@ -20,14 +20,12 @@
     {/if}
 
     {if $is_friend_enabled AND !$is_own_profile}
-        {if !empty($befriend_link)}
-            <a class="vs_marg" ref="nofollow" href="{befriend_link}" title="{lang 'Add Friend'}">
+        <a class="vs_marg" ref="nofollow" href="{friend_link}">
+            {if $is_already_friend}
+                <i class="fa fa-user-times friend disabled-icon"></i>
+            {else}
                 <i class="fa fa-user-plus friend"></i>
-            </a>
-        {else}
-            <a class="vs_marg" href="{{ $design->url('friend','main','index', $visitor_username.'?looking='.$username) }}" title="{lang 'Manage Friend'}">
-                <i class="fa fa-user friend disabled-icon"></i>
-            </a>
-        {/if}
+            {/if}
+        </a>
     {/if}
 </div>

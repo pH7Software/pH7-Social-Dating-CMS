@@ -135,7 +135,8 @@ abstract class ProfileBaseController extends Controller
     {
         $this->view->mail_link = $this->getMailLink($sFirstName, $oUser);
         $this->view->messenger_link = $this->getMessengerLink($sFirstName, $oUser);
-        $this->view->befriend_link = $this->getBeFriendLink($sFirstName, $oUser);
+        $this->view->friend_link = $this->getFriendLink($sFirstName, $oUser);
+        $this->view->is_already_friend = $this->isAlreadyFriend();
     }
 
     /**
@@ -233,16 +234,18 @@ abstract class ProfileBaseController extends Controller
      * @param string $sFirstName User's first name.
      * @param stdClass $oUser User data from the DB.
      *
-     * @return string|null The correct anchor for the friend link, or NULL if the both users are already friends.
+     * @return string The correct anchor "Manage Friend" link.
      */
-    protected function getBeFriendLink($sFirstName, stdClass $oUser)
+    protected function getFriendLink($sFirstName, stdClass $oUser)
     {
+        $sCsrfToken = (new Token)->generate('friend');
+
         if ($this->bUserAuth) {
             if ($this->isAlreadyFriend()) {
-                return null;
+                $sFriendLink = 'javascript:void(0)" onclick="friend(\'delete\',' . $this->iProfileId . ',\'' . $sCsrfToken . '\')';
+            } else {
+                $sFriendLink = 'javascript:void(0)" onclick="friend(\'add\',' . $this->iProfileId . ',\'' . $sCsrfToken . '\')';
             }
-
-            $sBefriendLink = 'javascript:void(0)" onclick="friend(\'add\',' . $this->iProfileId . ',\'' . (new Token)->generate('friend') . '\')';
         } else {
             $aUrlParms = [
                 'msg' => t('Free Sign up for %site_name% to become friend with %0%.', $sFirstName),
@@ -252,7 +255,7 @@ abstract class ProfileBaseController extends Controller
                 'f_n' => $sFirstName,
                 's' => $oUser->sex
             ];
-            $sBefriendLink = Uri::get(
+            $sFriendLink = Uri::get(
                 'user',
                 'signup',
                 'step1', '?' . Url::httpBuildQuery($aUrlParms),
@@ -260,7 +263,7 @@ abstract class ProfileBaseController extends Controller
             );
         }
 
-        return $sBefriendLink;
+        return $sFriendLink;
     }
 
     /**
