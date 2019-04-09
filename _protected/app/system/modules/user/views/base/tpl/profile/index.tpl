@@ -27,13 +27,13 @@
         {if $is_friend_enabled}
             <li>
                 <a href="#friend">
-                    <span>{friend_link}</span>
+                    <span>{friend_link_name}</span>
                 </a>
             </li>
             {if $is_logged AND !$is_own_profile}
                 <li>
                     <a href="#mutual_friend">
-                        <span>{mutual_friend_link}</span>
+                        <span>{mutual_friend_link_name}</span>
                     </a>
                 </li>
             {/if}

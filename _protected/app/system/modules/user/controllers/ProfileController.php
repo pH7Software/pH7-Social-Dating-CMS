@@ -130,10 +130,10 @@ class ProfileController extends ProfileBaseController
         parent::setMenuBar($sFirstName, $oUser);
 
         if (SysMod::isEnabled('friend')) {
-            $this->view->friend_link = $this->getFriendLinkName();
+            $this->view->friend_link_name = $this->getFriendLinkName();
 
             if ($this->bUserAuth) {
-                $this->view->mutual_friend_link = $this->getMutualFriendLinkName();
+                $this->view->mutual_friend_link_name = $this->getMutualFriendLinkName();
             }
         }
     }
