@@ -143,7 +143,8 @@ abstract class ProfileBaseController extends Controller
 
         if (SysMod::isEnabled('friend')) {
             $this->view->friend_link = $this->getFriendLink($sFirstName, $oUser);
-            $this->view->is_already_friend = $this->isAlreadyFriend();
+            $this->view->is_approved_friend = $this->isFriend(FriendCoreModel::APPROVED_REQUEST);
+            $this->view->is_pending_friend = $this->isFriend(FriendCoreModel::PENDING_REQUEST);
         }
     }
 
@@ -249,7 +250,9 @@ abstract class ProfileBaseController extends Controller
         $sCsrfToken = (new Token)->generate('friend');
 
         if ($this->bUserAuth) {
-            if ($this->isAlreadyFriend()) {
+            if ($this->isFriend(FriendCoreModel::PENDING_REQUEST)) {
+                $sFriendLink = Uri::get('friend', 'main', 'index', $oUser->username . '?looking=' . $this->session->get('member_username'));
+            } elseif ($this->isFriend(FriendCoreModel::APPROVED_REQUEST)) {
                 $sFriendLink = 'javascript:void(0)" onclick="friend(\'delete\',' . $this->iProfileId . ',\'' . $sCsrfToken . '\')';
             } else {
                 $sFriendLink = 'javascript:void(0)" onclick="friend(\'add\',' . $this->iProfileId . ',\'' . $sCsrfToken . '\')';
@@ -351,14 +354,16 @@ abstract class ProfileBaseController extends Controller
     }
 
     /**
+     * @param int One the these consts: FriendCoreModel::APPROVED_REQUEST, FriendCoreModel::PENDING_REQUEST, FriendCoreModel::ALL_REQUEST
+     *
      * @return bool
      */
-    private function isAlreadyFriend()
+    private function isFriend($iStatus = FriendCoreModel::ALL_REQUEST)
     {
         return (new FriendCoreModel)->inList(
             $this->iVisitorId,
             $this->iProfileId,
-            FriendCoreModel::APPROVED_REQUEST
+            $iStatus
         );
     }
 

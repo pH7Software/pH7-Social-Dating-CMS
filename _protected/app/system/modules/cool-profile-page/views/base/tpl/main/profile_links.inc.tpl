@@ -21,8 +21,10 @@
 
     {if $is_friend_enabled AND !$is_own_profile}
         <a class="vs_marg" ref="nofollow" href="{friend_link}">
-            {if $is_already_friend}
+            {if $is_approved_friend}
                 <i class="fa fa-user-times friend"></i>
+            {elseif $is_pending_friend}
+                <i class="fa fa-users friend"></i>
             {else}
                 <i class="fa fa-user-plus friend"></i>
             {/if}

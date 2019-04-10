@@ -89,8 +89,10 @@
             <li>
                 <a ref="nofollow" href="{friend_link}">
                     <span>
-                        {if $is_already_friend}
+                        {if $is_approved_friend}
                             {lang 'Remove Friend'}
+                        {elseif $is_pending_friend}
+                            {lang 'Manage Friend'}
                         {else}
                             {lang 'Add Friend'}
                         {/if}
