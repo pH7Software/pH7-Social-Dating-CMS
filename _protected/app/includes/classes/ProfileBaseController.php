@@ -133,10 +133,18 @@ abstract class ProfileBaseController extends Controller
      */
     protected function setMenuBar($sFirstName, stdClass $oUser)
     {
-        $this->view->mail_link = $this->getMailLink($sFirstName, $oUser);
-        $this->view->messenger_link = $this->getMessengerLink($sFirstName, $oUser);
-        $this->view->friend_link = $this->getFriendLink($sFirstName, $oUser);
-        $this->view->is_already_friend = $this->isAlreadyFriend();
+        if (SysMod::isEnabled('mail')) {
+            $this->view->mail_link = $this->getMailLink($sFirstName, $oUser);
+        }
+
+        if (SysMod::isEnabled('im')) {
+            $this->view->messenger_link = $this->getMessengerLink($sFirstName, $oUser);
+        }
+
+        if (SysMod::isEnabled('friend')) {
+            $this->view->friend_link = $this->getFriendLink($sFirstName, $oUser);
+            $this->view->is_already_friend = $this->isAlreadyFriend();
+        }
     }
 
     /**
