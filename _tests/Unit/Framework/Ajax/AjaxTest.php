@@ -13,9 +13,15 @@ use PHPUnit_Framework_TestCase;
 
 class AjaxTest extends PHPUnit_Framework_TestCase
 {
-    public function testJsonMsg()
+    public function testJsonSuccessMsg()
     {
         $sActualResult = Ajax::jsonMsg(1, 'Yaaay!');
         $this->assertSame('{"status":1,"txt":"Yaaay!"}', $sActualResult);
+    }
+
+    public function testJsonFailuresMsg()
+    {
+        $sActualResult = Ajax::jsonMsg(0, 'Noooo! :(');
+        $this->assertSame('{"status":0,"txt":"Noooo! :("}', $sActualResult);
     }
 }
