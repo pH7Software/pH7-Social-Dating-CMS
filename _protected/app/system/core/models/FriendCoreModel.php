@@ -113,7 +113,7 @@ class FriendCoreModel extends Model
         $sSqlPending = ($iPending !== self::ALL_REQUEST) ? 'AND pending = :pending' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::MEMBER_FRIEND) .
-            'WHERE profileId = :profileId AND friendId = :friendId ' . $sSqlPending . ' LIMIT 1');
+            'WHERE (profileId = :profileId AND friendId = :friendId) OR (profileId = :friendId AND friendId = :profileId) ' . $sSqlPending . ' LIMIT 1');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
