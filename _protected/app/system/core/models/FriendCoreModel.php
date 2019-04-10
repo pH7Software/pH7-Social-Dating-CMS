@@ -28,11 +28,10 @@ class FriendCoreModel extends Model
      * @param int $iSort
      * @param int $iOffset
      * @param int $iLimit
-     * @param int $iPending 2 = [approved and pending], 0 = approved or 1 = pending friend requests. Default value: 'all'
      *
      * @return int|array Integer for the number friends returned or an array containing a stdClass object with the friends list)
      */
-    public function get($iIdProfileId, $iFriendId = null, $mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $iPending = self::ALL_REQUEST)
+    public function get($iIdProfileId, $iFriendId = null, $mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
         $bCount = (bool)$bCount;
         $iOffset = (int)$iOffset;
@@ -78,10 +77,6 @@ class FriendCoreModel extends Model
 
         if (!empty($iFriendId)) {
             $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
-        }
-
-        if ($iPending !== self::ALL_REQUEST) {
-            $rStmt->bindValue(':pending', $iPending, \PDO::PARAM_INT);
         }
 
         if (!$bCount) {
