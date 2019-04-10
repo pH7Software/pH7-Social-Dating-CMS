@@ -39,7 +39,7 @@ class FriendModel extends FriendCoreModel
         $oExistsModel = new ExistsCoreModel;
 
         if ($oExistsModel->id($iProfileId, DbTableName::MEMBER) && $oExistsModel->id($iFriendId, DbTableName::MEMBER)) {
-            if (!$this->inList($iProfileId, $iFriendId)) {
+            if ($this->inList($iProfileId, $iFriendId) === false) {
                 $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER_FRIEND) .
                     '(profileId, friendId, pending, requestDate) VALUES (:profileId, :friendId, :pending, :requestDate)');
 
