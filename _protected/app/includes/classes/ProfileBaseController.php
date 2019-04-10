@@ -341,7 +341,12 @@ abstract class ProfileBaseController extends Controller
      */
     protected function imageToSocialMetaTags(stdClass $oUser)
     {
-        $sAvatarImageUrl = $this->design->getUserAvatar($oUser->username, $oUser->sex, 400, false);
+        $sAvatarImageUrl = $this->design->getUserAvatar(
+            $oUser->username,
+            $oUser->sex,
+            400,
+            false
+        );
         $this->view->image_social_meta_tag = $sAvatarImageUrl;
     }
 
@@ -350,7 +355,11 @@ abstract class ProfileBaseController extends Controller
      */
     private function isAlreadyFriend()
     {
-        return (new FriendCoreModel)->inList($this->iVisitorId, $this->iProfileId);
+        return (new FriendCoreModel)->inList(
+            $this->iVisitorId,
+            $this->iProfileId,
+            FriendCoreModel::APPROVED_REQUEST
+        );
     }
 
     private function updateProfileViews(stdClass $oPrivacyViewsUser)

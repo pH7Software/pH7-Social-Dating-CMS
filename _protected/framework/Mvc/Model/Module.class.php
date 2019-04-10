@@ -34,7 +34,11 @@ class Module extends Engine\Model
      */
     public function get($sFolderName = null)
     {
-        $this->cache->start(static::CACHE_GROUP, 'list' . $sFolderName, static::CACHE_TIME);
+        $this->cache->start(
+            static::CACHE_GROUP,
+            'list' . $sFolderName,
+            static::CACHE_TIME
+        );
 
         if (!$oData = $this->cache->get()) {
             $bIsFolderName = $sFolderName !== null;
@@ -53,6 +57,7 @@ class Module extends Engine\Model
             Db::free($rStmt);
             $this->cache->put($oData);
         }
+
         return $oData;
     }
 

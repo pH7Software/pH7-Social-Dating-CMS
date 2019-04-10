@@ -26,8 +26,11 @@ class RatingCoreModel extends Model
      */
     public function getVote($iId, $sTable)
     {
-        $this->cache->start(self::CACHE_GROUP, 'getVote' . $iId . $sTable, static::
-        CACHE_TIME);
+        $this->cache->start(
+            self::CACHE_GROUP,
+            'getVote' . $iId . $sTable,
+            static::CACHE_TIME
+        );
 
         $sTable = Various::checkTable($sTable);
         $sWhere = Various::convertTableToId($sTable);
@@ -53,8 +56,11 @@ class RatingCoreModel extends Model
      */
     public function getScore($iId, $sTable)
     {
-        $this->cache->start(self::CACHE_GROUP, 'getScore' . $iId . $sTable, static::
-        CACHE_TIME);
+        $this->cache->start(
+            self::CACHE_GROUP,
+            'getScore' . $iId . $sTable,
+            static::CACHE_TIME
+        );
 
         $sTable = Various::checkTable($sTable);
         $sWhere = Various::convertTableToId($sTable);
@@ -86,6 +92,7 @@ class RatingCoreModel extends Model
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) .
             'SET votes = votes + 1 WHERE ' . $sWhere . ' = :id');
         $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -105,6 +112,7 @@ class RatingCoreModel extends Model
             'SET score = :score WHERE ' . $sWhere . ' = :id');
         $rStmt->bindValue(':score', $fScore);
         $rStmt->bindValue(':id', $iId);
+
         return $rStmt->execute();
     }
 }
