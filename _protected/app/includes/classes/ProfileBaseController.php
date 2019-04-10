@@ -251,7 +251,7 @@ abstract class ProfileBaseController extends Controller
 
         if ($this->bUserAuth) {
             if ($this->isFriend(FriendCoreModel::PENDING_REQUEST)) {
-                $sFriendLink = Uri::get('friend', 'main', 'index', $oUser->username . '?looking=' . $this->session->get('member_username'));
+                $sFriendLink = Uri::get('friend', 'main', 'index', $this->session->get('member_username') . '?looking=' . $oUser->username);
             } elseif ($this->isFriend(FriendCoreModel::APPROVED_REQUEST)) {
                 $sFriendLink = 'javascript:void(0)" onclick="friend(\'delete\',' . $this->iProfileId . ',\'' . $sCsrfToken . '\')';
             } else {
