@@ -157,7 +157,7 @@ class FriendCoreModel extends Model
     {
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(friendId) FROM' .
             Db::prefix(DbTableName::MEMBER_FRIEND) .
-            'WHERE (profileId = :profileId OR friendId= :profileId)');
+            'WHERE (profileId = :profileId OR friendId = :profileId)');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->execute();
