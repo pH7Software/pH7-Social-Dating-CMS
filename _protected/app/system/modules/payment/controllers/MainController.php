@@ -113,126 +113,34 @@ class MainController extends Controller
      * @param string $sProvider
      *
      * @return void
-     *
-     * @throws Framework\Mvc\Request\WrongRequestMethodException
-     * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
     public function process($sProvider = '')
     {
         switch ($sProvider) {
-            case static::PAYPAL_GATEWAY_NAME: {
-                $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enabled']);
-                if ($oPayPal->valid() && $this->httpRequest->postExists('custom')) {
-                    $aData = explode('|', base64_decode($this->httpRequest->post('custom')));
-                    $iItemNumber = (int)$aData[0];
-                    if ($this->oUserModel->updateMembership(
-                        $iItemNumber,
-                        $this->iProfileId,
-                        $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
-                    )) {
-                        $this->bStatus = true; // Status is OK
-                        $this->updateUserGroupId($iItemNumber);
-                        // PayPal will call automatically the "notification()" method thanks its IPN feature and "notify_url" form attribute.
-                    }
-                }
-                unset($oPayPal);
-            } break;
+            case static::PAYPAL_GATEWAY_NAME:
+                $this->paypalHandler();
+                break;
 
-            case static::STRIPE_GATEWAY_NAME: {
-                if ($this->httpRequest->postExists('stripeToken')) {
-                    \Stripe\Stripe::setApiKey($this->config->values['module.setting']['stripe.secret_key']);
-                    $sAmount = $this->httpRequest->post('amount');
+            case static::STRIPE_GATEWAY_NAME:
+                $this->stripeHandler();
+                break;
 
-                    try {
-                        $oCharge = \Stripe\Charge::create(
-                            [
-                                'amount' => Stripe::getAmount($sAmount),
-                                'currency' => $this->config->values['module.setting']['currency_code'],
-                                'source' => $this->httpRequest->post('stripeToken'),
-                                'description' => t('Membership charged for %0%', $this->httpRequest->post('stripeEmail'))
-                            ]
-                        );
+            case static::BRAINTREE_GATEWAY_NAME:
+                $this->braintreeHandler();
+                break;
 
-                        // Make sure the item has been paid
-                        if ($oCharge->paid === true) {
-                            $iItemNumber = $this->httpRequest->post('item_number');
-                            if ($this->oUserModel->updateMembership(
-                                $iItemNumber,
-                                $this->iProfileId,
-                                $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
-                            )) {
-                                $this->bStatus = true; // Status is OK
-                                $this->updateUserGroupId($iItemNumber);
-                                $this->notification(Stripe::class, $iItemNumber);
-                            }
-                        }
-                    } catch (\Stripe\Error\Card $oE) {
-                        // The card has been declined
-                        // Do nothing here as "$this->bStatus" is by default FALSE and so it will display "Error occurred" msg later
-                    } catch (\Stripe\Error\Base $oE) {
-                        $this->design->setMessage($this->str->escape($oE->getMessage(), true));
-                    }
-                }
-            } break;
+            case static::TWO_CHECKOUT_GATEWAY_NAME:
+                $this->twoCheckOutHandler();
+                break;
 
-            case static::BRAINTREE_GATEWAY_NAME: {
-                if ($bNonce = $this->httpRequest->post('payment_method_nonce')) {
-                    Braintree::init($this->config);
-
-                    $oResult = Braintree_Transaction::sale([
-                        'amount' => $this->httpRequest->post('amount'),
-                        'paymentMethodNonce' => $bNonce,
-                        'options' => ['submitForSettlement' => true]
-                    ]);
-
-                    if ($oResult->success) {
-                        $iItemNumber = $this->httpRequest->post('item_number');
-                        if ($this->oUserModel->updateMembership(
-                            $iItemNumber,
-                            $this->iProfileId,
-                            $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
-                        )) {
-                            $this->bStatus = true; // Status is OK
-                            $this->updateUserGroupId($iItemNumber);
-                            $this->notification(Braintree::class, $iItemNumber);
-                        }
-                    } elseif ($oResult->transaction) {
-                        $sErrMsg = t('Error processing transaction: %0%', $oResult->transaction->processorResponseText);
-                        $this->design->setMessage($this->str->escape($sErrMsg, true));
-                    }
-                }
-            } break;
-
-            case static::TWO_CHECKOUT_GATEWAY_NAME: {
-                $o2CO = new TwoCO($this->config->values['module.setting']['sandbox.enabled']);
-                $sVendorId = $this->config->values['module.setting']['2co.vendor_id'];
-                $sSecretWord = $this->config->values['module.setting']['2co.secret_word'];
-
-                $iItemNumber = $this->httpRequest->post('cart_order_id');
-                if ($o2CO->valid($sVendorId, $sSecretWord)
-                    && $this->httpRequest->postExists('sale_id')
-                ) {
-                    if ($this->oUserModel->updateMembership(
-                        $iItemNumber,
-                        $this->iProfileId,
-                        $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
-                        )
-                    ) {
-                        $this->bStatus = true; // Status is OK
-                        $this->updateUserGroupId($iItemNumber);
-                        $this->notification(TwoCO::class, $iItemNumber);
-                    }
-                }
-                unset($o2CO);
-            } break;
-
-            case static::CCBILL_GATEWAY_NAME: {
+            case static::CCBILL_GATEWAY_NAME:
                 // Still in developing...
-                // You are more than welcome to contribute on Github: https://github.com/pH7Software/pH7-Social-Dating-CMS
-            } break;
+                // You are more than welcome to contribute on GitHub: https://github.com/pH7Software/pH7-Social-Dating-CMS
+                break;
 
             default:
-                $this->displayPageNotFound(t('Provider Not Found!'));
+                $this->paypalHandler(); // Default payment gateway
+            //$this->displayPageNotFound(t('Provider Not Found!'));
         }
 
         // Set the page titles
@@ -361,6 +269,114 @@ class MainController extends Controller
         ];
 
         return (new Mail)->send($aInfo, $sMessageHtml);
+    }
+
+    private function paypalHandler()
+    {
+        $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enabled']);
+        if ($oPayPal->valid() && $this->httpRequest->postExists('custom')) {
+            $aData = explode('|', base64_decode($this->httpRequest->post('custom')));
+            $iItemNumber = (int)$aData[0];
+            if ($this->oUserModel->updateMembership(
+                $iItemNumber,
+                $this->iProfileId,
+                $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
+            )) {
+                $this->bStatus = true; // Status is OK
+                $this->updateUserGroupId($iItemNumber);
+                // PayPal will call automatically the "notification()" method thanks its IPN feature and "notify_url" form attribute.
+            }
+        }
+    }
+
+    private function stripeHandler()
+    {
+        if ($this->httpRequest->postExists('stripeToken')) {
+            \Stripe\Stripe::setApiKey($this->config->values['module.setting']['stripe.secret_key']);
+            $sAmount = $this->httpRequest->post('amount');
+
+            try {
+                $oCharge = \Stripe\Charge::create(
+                    [
+                        'amount' => Stripe::getAmount($sAmount),
+                        'currency' => $this->config->values['module.setting']['currency_code'],
+                        'source' => $this->httpRequest->post('stripeToken'),
+                        'description' => t('Membership charged for %0%', $this->httpRequest->post('stripeEmail'))
+                    ]
+                );
+
+                // Make sure the item has been paid
+                if ($oCharge->paid === true) {
+                    $iItemNumber = $this->httpRequest->post('item_number');
+                    if ($this->oUserModel->updateMembership(
+                        $iItemNumber,
+                        $this->iProfileId,
+                        $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
+                    )) {
+                        $this->bStatus = true; // Status is OK
+                        $this->updateUserGroupId($iItemNumber);
+                        $this->notification(Stripe::class, $iItemNumber);
+                    }
+                }
+            } catch (\Stripe\Error\Card $oE) {
+                // The card has been declined
+                // Do nothing here as "$this->bStatus" is by default FALSE and so it will display "Error occurred" msg later
+            } catch (\Stripe\Error\Base $oE) {
+                $this->design->setMessage($this->str->escape($oE->getMessage(), true));
+            }
+        }
+    }
+
+    private function braintreeHandler()
+    {
+        if ($bNonce = $this->httpRequest->post('payment_method_nonce')) {
+            Braintree::init($this->config);
+
+            $oResult = Braintree_Transaction::sale([
+                'amount' => $this->httpRequest->post('amount'),
+                'paymentMethodNonce' => $bNonce,
+                'options' => ['submitForSettlement' => true]
+            ]);
+
+            if ($oResult->success) {
+                $iItemNumber = $this->httpRequest->post('item_number');
+                if ($this->oUserModel->updateMembership(
+                    $iItemNumber,
+                    $this->iProfileId,
+                    $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
+                )) {
+                    $this->bStatus = true; // Status is OK
+                    $this->updateUserGroupId($iItemNumber);
+                    $this->notification(Braintree::class, $iItemNumber);
+                }
+            } elseif ($oResult->transaction) {
+                $sErrMsg = t('Error processing transaction: %0%', $oResult->transaction->processorResponseText);
+                $this->design->setMessage($this->str->escape($sErrMsg, true));
+            }
+        }
+    }
+
+    private function twoCheckOutHandler()
+    {
+        $o2CO = new TwoCO($this->config->values['module.setting']['sandbox.enabled']);
+        $sVendorId = $this->config->values['module.setting']['2co.vendor_id'];
+        $sSecretWord = $this->config->values['module.setting']['2co.secret_word'];
+
+        $iItemNumber = $this->httpRequest->post('cart_order_id');
+        if ($o2CO->valid($sVendorId, $sSecretWord)
+            && $this->httpRequest->postExists('sale_id')
+        ) {
+            if ($this->oUserModel->updateMembership(
+                $iItemNumber,
+                $this->iProfileId,
+                $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
+            )
+            ) {
+                $this->bStatus = true; // Status is OK
+                $this->updateUserGroupId($iItemNumber);
+                $this->notification(TwoCO::class, $iItemNumber);
+            }
+        }
     }
 
     /**
