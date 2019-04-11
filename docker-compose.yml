@@ -2,13 +2,15 @@ version: '3'
 
 services:
     web:
-        image: nginx:alpine
+        image: nginx:latest
         ports:
             - 8080:80
             - 8443:443
         volumes:
-            - ./:/var/www/html
-            - ./docker/web/default.conf:/etc/nginx/conf.d/default.conf
+            - ./:/var/www/html:ro
+            - ./docker/web/certs/example.com.crt:/opt/certs/example.com.crt:ro
+            - ./docker/web/certs/example.com.key:/opt/certs/example.com.key:ro
+            - ./docker/web/default.conf:/etc/nginx/conf.d/default.conf:ro
         depends_on:
             - ap
         links:
@@ -22,9 +24,7 @@ services:
         links:
             - db
     db:
-        image: mysql/mysql-server:8.0.3-rc-1.1.2
-        ports:
-          - 8001:3306
+        image: mysql
         environment:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: mypH7CMS_db
