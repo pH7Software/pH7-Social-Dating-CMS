@@ -102,7 +102,7 @@ class FriendModel extends FriendCoreModel
         $iFriendId = (int)$iFriendId;
 
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::MEMBER_FRIEND) .
-            'WHERE (profileId = :profileId AND friendId = :friendId) OR (friendId = :profileId AND profileId = :friendId)');
+            'WHERE (profileId = :profileId AND friendId = :friendId) OR (profileId = :friendId AND friendId = :profileId)');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
 
