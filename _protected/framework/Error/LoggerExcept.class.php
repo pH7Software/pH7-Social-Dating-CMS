@@ -3,11 +3,11 @@
  * @title          Logger Except Class
  * @desc           Handler Logger Exception Management.
  *
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7/ Framework / Error
- * @version        1.3
+ * @version        2.0
  */
 
 namespace PH7\Framework\Error;
@@ -83,46 +83,76 @@ final class LoggerExcept extends Logger
         // Encode the line
         $sContents = json_encode($aLog) . File::EOL . File::EOL . File::EOL;
         switch ($this->config->values['logging']['log_handler']) {
-            case self::FILE_LOG_HANDLER_TYPE: {
-                $sFullFile = $this->sDir . static::EXCEPT_DIR . $this->sFileName . '.json';
-                $sFullGzipFile = $this->sDir . static::EXCEPT_DIR . static::GZIP_DIR . $this->sFileName . '.gz';
+            case self::FILE_LOG_HANDLER_TYPE:
+                $this->fileHandler($sContents);
+                break;
 
-                if ($this->isGzipEligible($sFullFile)) {
-                    $sErrMsg = Debug::is() ? 'Unable to write: ' . $sFullGzipFile : 'Unable to write to log gzip file';
-                    $rHandler = @gzopen($sFullGzipFile, 'a') or exit($sErrMsg);
-                    gzwrite($rHandler, $sContents);
-                    gzclose($rHandler);
-                } else {
-                    $sErrMsg = Debug::is() ? 'Unable to write: ' . $sFullFile : 'Unable to write to log file';
-                    $rHandler = @fopen($sFullFile, 'a') or exit($sErrMsg);
-                    fwrite($rHandler, $sContents);
-                    fclose($rHandler);
-                }
-            } break;
+            case self::DATABASE_LOG_HANDLER_TYPE:
+                $this->sqlHandler($sContents);
+                break;
 
-            case self::DATABASE_LOG_HANDLER_TYPE: {
-                $sSql = 'INSERT INTO' . Db::prefix(DbTableName::LOG_ERROR) . 'SET logError = :line';
-                $rStmt = Db::getInstance()->prepare($sSql);
-                $rStmt->execute([':line' => $sContents]);
-                Db::free($rStmt);
-            } break;
-
-            case self::EMAIL_LOG_HANDLER_TYPE: {
-                $aInfo = [
-                    'to' => $this->config->values['logging']['bug_report_email'],
-                    'subject' => t('Errors Reporting of pH7Framework')
-                ];
-
-                (new Mail)->send(
-                    $aInfo,
-                    $sContents,
-                    Mailable::TEXT_FORMAT
-                );
-            } break;
+            case self::EMAIL_LOG_HANDLER_TYPE:
+                $this->emailHandler($sContents);
+                break;
 
             default:
                 exit(t('Invalid Log Option.'));
         }
+    }
+
+    /**
+     * @param string $sContents
+     *
+     * @return void
+     */
+    private function fileHandler($sContents)
+    {
+        $sFullFile = $this->sDir . static::EXCEPT_DIR . $this->sFileName . '.json';
+        $sFullGzipFile = $this->sDir . static::EXCEPT_DIR . static::GZIP_DIR . $this->sFileName . '.gz';
+
+        if ($this->isGzipEligible($sFullFile)) {
+            $sErrMsg = Debug::is() ? 'Unable to write: ' . $sFullGzipFile : 'Unable to write to log gzip file';
+            $rHandler = @gzopen($sFullGzipFile, 'a') or exit($sErrMsg);
+            gzwrite($rHandler, $sContents);
+            gzclose($rHandler);
+        } else {
+            $sErrMsg = Debug::is() ? 'Unable to write: ' . $sFullFile : 'Unable to write to log file';
+            $rHandler = @fopen($sFullFile, 'a') or exit($sErrMsg);
+            fwrite($rHandler, $sContents);
+            fclose($rHandler);
+        }
+    }
+
+    /**
+     * @param string $sContents
+     *
+     * @return void
+     */
+    private function sqlHandler($sContents)
+    {
+        $sSql = 'INSERT INTO' . Db::prefix(DbTableName::LOG_ERROR) . 'SET logError = :line';
+        $rStmt = Db::getInstance()->prepare($sSql);
+        $rStmt->execute([':line' => $sContents]);
+        Db::free($rStmt);
+    }
+
+    /**
+     * @param string $sContents
+     *
+     * @return void
+     */
+    private function emailHandler($sContents)
+    {
+        $aInfo = [
+            'to' => $this->config->values['logging']['bug_report_email'],
+            'subject' => t('Errors Reporting of pH7Framework')
+        ];
+
+        (new Mail)->send(
+            $aInfo,
+            $sContents,
+            Mailable::TEXT_FORMAT
+        );
     }
 
     /**
