@@ -61,3 +61,6 @@ RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 RUN echo "LANG=en_US.UTF-8" > /etc/locale.conf
 RUN locale-gen en_US.UTF-8
 
+RUN useradd -m -s /bin/bash ap
+# When need login as root, exec "docker exec -u 0 -it {container} bash"
+USER ap
