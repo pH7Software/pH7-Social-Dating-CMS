@@ -21,7 +21,7 @@ use PH7\Framework\Url\Url;
  *
  * @link https://developer.paypal.com/docs/integration/direct/identity/seamless-checkout/
  */
-class Paypal extends Provider implements Api
+class PayPal extends Provider implements Api
 {
     const SANDBOX_PAYMENT_URL = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
     const PAYMENT_URL = 'https://www.paypal.com/cgi-bin/webscr';
