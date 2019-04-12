@@ -20,8 +20,8 @@ use PH7\Framework\Url\Header;
 
 class SettingForm
 {
-    const CHANGE_CHAT_DOC_URL = 'http://ph7cms.com/how-to-change-chat/';
-    const I18N_DOC_URL = 'http://ph7cms.com/doc/en/how-to-translate-to-another-language';
+    const CHANGE_CHAT_DOC_URL = 'https://ph7cms.com/how-to-change-chat/';
+    const I18N_DOC_URL = 'https://ph7cms.com/doc/en/how-to-translate-to-another-language';
     const GOOGLE_API_KEY_URL = 'https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend,places_backend&amp;keyType=CLIENT_SIDE&amp;reusekey=true';
 
     public static function display()
