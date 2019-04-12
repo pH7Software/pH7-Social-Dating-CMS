@@ -121,7 +121,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 
 **It's not a hazard that pH7CMS is considered to be the first choice for creating an enterprise level dating web app or social networking website**
 
-*Great features [like here](http://ph7cms.com/social-dating-features/) and many other unique and exclusive features are waiting for YOU. Already released in pH7CMS!*
+*Great features [like here](https://ph7cms.com/social-dating-features/) and many other unique and exclusive features are waiting for YOU. Already released in pH7CMS!*
 
 ![Build a Social Dating Web App with pH7CMS](https://cloud.githubusercontent.com/assets/1325411/19419481/657386a4-93d0-11e6-8eee-95deba2d30a0.png)
 
@@ -211,7 +211,7 @@ You can find and add other languages on the [I18N repo](https://github.com/pH7So
 
 ## 👨‍🍳 The Cook
 
-[![Pierre-Henry Soria](https://avatars0.githubusercontent.com/u/1325411?s=200)](http://pierrehenry.be "My personal website :-)")
+[![Pierre-Henry Soria](https://avatars0.githubusercontent.com/u/1325411?s=200)](https://pierrehenry.be "My personal website :-)")
 
 Coded & Designed with lots of ❤ by [Pierre-Henry Soria](http://ph7.me). A SUPER Passionate Belgian Software Engineer 🍫🍺
 
@@ -231,12 +231,12 @@ You appreciate the project, the several years I spent on it, and don't want to l
 
 ## ⚡ Official Website
 
-[pH7CMS.com](http://ph7cms.com)
+[pH7CMS.com](https://ph7cms.com)
 
 
 ## 📚 Documentation
 
-[pH7CMS Documentation](http://ph7cms.com/doc/)
+[pH7CMS Documentation](https://ph7cms.com/doc/)
 
 
 ## 💖 Contributing
@@ -249,9 +249,7 @@ Finding bugs, improving the CMS/doc or adding translations. Any contribution is 
 
 Just clone the repository, make your changes and then make a push ;-)
 
-*WARNING, your code/modification must be of excellent quality and follow the [Code Convention](http://ph7cms.com/doc/en/code-convention) and [PSR](https://www.php-fig.org/psr/).* I manually validate all the improvements and changes.
-
-**You will also become a pH7CMS VIP member and get all exclusive premium contents and upcoming modules.**
+*WARNING: Your code/modification must be of excellent quality and follow the [Code Convention](https://ph7cms.com/doc/en/code-convention) and [PSR](https://www.php-fig.org/psr/).* I manually review and validate all improvements and changes you I've done.
 
 
 ![Beautiful Profile Dating Page](https://user-images.githubusercontent.com/1325411/35779585-68f0d5fc-09c7-11e8-91eb-bf793fcfab6e.png)
@@ -261,7 +259,7 @@ Just clone the repository, make your changes and then make a push ;-)
 
 ![Eco Friendly. Love the World and Love the Nature](static/img/love-nature.svg)
 
-[pH7CMS](http://ph7cms.com) has been built to reduce the power and CPU usage of your server in order to preserve the nature and help to save our environment.
+[pH7CMS](https://ph7cms.com) has been built to reduce the power and CPU usage of your server in order to preserve the nature and help to save our environment.
 
 pH7CMS's templates also use lighter colors since LCD monitors use less electricity to display them.
 

@@ -662,7 +662,7 @@ class InstallController extends Controller
 
             if ($iProfile <= $iAffiliateNumber) {
                 // Specific data only for affiliates
-                $aUser['website'] = 'http://pierrehenry.be';
+                $aUser['website'] = 'https://pierrehenry.be';
                 $aUser['phone'] = $oFaker->phoneNumber;
                 $aUser['bank_account'] = $oFaker->bankAccountNumber;
                 $oAffModel->add($aUser);

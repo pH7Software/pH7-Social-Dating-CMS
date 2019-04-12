@@ -94,7 +94,7 @@ class FakerFactory
             $sWebsite = $oFaker->randomElement(
                 [
                     Kernel::SOFTWARE_WEBSITE,
-                    'http://pierrehenry.be',
+                    'https://pierrehenry.be',
                     'https://lifyzer.com'
                 ]
             );
