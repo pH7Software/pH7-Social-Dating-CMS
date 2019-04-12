@@ -211,7 +211,7 @@ You can find and add other languages on the [I18N repo](https://github.com/pH7So
 
 ## 👨‍🍳 The Cook
 
-[![Pierre-Henry Soria](https://avatars0.githubusercontent.com/u/1325411?s=200)](http://pierrehenry.be "My personal website :-)")
+[![Pierre-Henry Soria](https://avatars0.githubusercontent.com/u/1325411?s=200)](https://pierrehenry.be "My personal website :-)")
 
 Coded & Designed with lots of ❤ by [Pierre-Henry Soria](http://ph7.me). A SUPER Passionate Belgian Software Engineer 🍫🍺
 
@@ -249,9 +249,7 @@ Finding bugs, improving the CMS/doc or adding translations. Any contribution is 
 
 Just clone the repository, make your changes and then make a push ;-)
 
-*WARNING, your code/modification must be of excellent quality and follow the [Code Convention](https://ph7cms.com/doc/en/code-convention) and [PSR](https://www.php-fig.org/psr/).* I manually validate all the improvements and changes.
-
-**You will also become a pH7CMS VIP member and get all exclusive premium contents and upcoming modules.**
+*WARNING: Your code/modification must be of excellent quality and follow the [Code Convention](https://ph7cms.com/doc/en/code-convention) and [PSR](https://www.php-fig.org/psr/).* I manually review and validate all improvements and changes you I've done.
 
 
 ![Beautiful Profile Dating Page](https://user-images.githubusercontent.com/1325411/35779585-68f0d5fc-09c7-11e8-91eb-bf793fcfab6e.png)
