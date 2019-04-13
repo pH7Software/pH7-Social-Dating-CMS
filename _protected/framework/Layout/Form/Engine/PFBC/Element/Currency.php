@@ -38,7 +38,8 @@ class Currency extends Select
         'TWD',
         'THB',
         'TRY',
-        'USD'
+        'USD',
+        'ZAR'
     ];
 
     /**
