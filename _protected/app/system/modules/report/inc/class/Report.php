@@ -38,9 +38,7 @@ class Report
      */
     public function add(array $aData)
     {
-        $oExistsModel = new ExistsCoreModel;
-
-        if ($oExistsModel->id($aData['reporter_id']) && $oExistsModel->id($aData['spammer_id'])) {
+        if ($this->areValidProfiles($aData)) {
             $this->mStatus = (new ReportModel)->add($aData);
 
             if ($this->mStatus === true) {
@@ -96,5 +94,17 @@ class Report
         ];
 
         return (new Mail)->send($aInfo, $sHtmlMessage);
+    }
+
+    /**
+     * @param array $aData
+     *
+     * @return bool
+     */
+    private function areValidProfiles(array $aData)
+    {
+        $oExistsModel = new ExistsCoreModel;
+
+        return $oExistsModel->id($aData['reporter_id']) && $oExistsModel->id($aData['spammer_id']);
     }
 }
