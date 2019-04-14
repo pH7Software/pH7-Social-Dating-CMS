@@ -38,7 +38,7 @@ class Report
      */
     public function add(array $aData)
     {
-        if ($this->areValidProfiles($aData)) {
+        if ($this->areValidProfileIds($aData)) {
             $this->mStatus = (new ReportModel)->add($aData);
 
             if ($this->mStatus === true) {
@@ -101,7 +101,7 @@ class Report
      *
      * @return bool
      */
-    private function areValidProfiles(array $aData)
+    private function areValidProfileIds(array $aData)
     {
         $oExistsModel = new ExistsCoreModel;
 
