@@ -71,7 +71,11 @@ class Field
     {
         $aFields = (new FieldModel(static::getTable($sMod)))->all();
 
-        return in_array(strtolower($sField), array_map('strtolower', $aFields), true);
+        return in_array(
+            strtolower($sField),
+            array_map('strtolower', $aFields),
+            true
+        );
     }
 
     /**
