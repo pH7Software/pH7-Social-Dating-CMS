@@ -14,7 +14,7 @@ defined('PH7') or exit('Restricted access');
 
 class Pagination
 {
-    const MAX_PAGES = 4;
+    const NEARBY_PAGES_LIMIT = 4;
 
     /** @var string */
     private $sPageName;
@@ -33,7 +33,7 @@ class Pagination
 
     /** @var array */
     private static $aOptions = [
-        'range' => self::MAX_PAGES - 1, // Number of pages to display on the pagination
+        'range' => self::NEARBY_PAGES_LIMIT - 1, // Number of pages to display on the pagination
         'text_first_page' => '&laquo;', // Button text "First Page"
         'text_last_page' => '&raquo;', // Button text "Last Page"
         'text_next_page' => '&rsaquo;', //  Button text "Next"
