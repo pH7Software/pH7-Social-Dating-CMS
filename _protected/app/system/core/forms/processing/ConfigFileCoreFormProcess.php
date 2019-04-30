@@ -35,7 +35,7 @@ class ConfigFileCoreFormProcess extends Form
 
             /**
              * ----- Replacement with quotes -----
-             * For non-alphanumeric characters and especially for special  characters.
+             * For non-alphanumeric characters and especially for special characters.
              * For example, it is very important to put quotes between the dollar sign "$", otherwise you'll get errors in the parsing of INI files.
              */
             $sData = str_replace($sKey . ' = "' . $aOldData[$sConfigVar][$sKey] . '"', $sKey . ' = "' . $sVal . '"', $sData);
