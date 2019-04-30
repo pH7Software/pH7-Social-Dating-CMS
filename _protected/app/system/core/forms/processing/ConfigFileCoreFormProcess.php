@@ -33,14 +33,22 @@ class ConfigFileCoreFormProcess extends Form
         $sData = file_get_contents($sIniFile);
 
         foreach ($this->httpRequest->post('config') as $sKey => $sVal) {
-            $sData = str_replace($sKey . ' = ' . $aOldData[$sConfigVar][$sKey], $sKey . ' = ' . $sVal, $sData);
+            $sData = str_replace(
+                $sKey . ' = ' . $aOldData[$sConfigVar][$sKey],
+                $sKey . ' = ' . $sVal,
+                $sData
+            );
 
             /**
              * ----- Replacement with quotes -----
              * For non-alphanumeric characters and especially for special characters.
              * For example, it is very important to put quotes between the dollar sign "$", otherwise you'll get errors in the parsing of INI files.
              */
-            $sData = str_replace($sKey . ' = "' . $aOldData[$sConfigVar][$sKey] . '"', $sKey . ' = "' . $sVal . '"', $sData);
+            $sData = str_replace(
+                $sKey . ' = "' . $aOldData[$sConfigVar][$sKey] . '"',
+                $sKey . ' = "' . $sVal . '"',
+                $sData
+            );
         }
 
         // Check and correct the file permission if necessary.
