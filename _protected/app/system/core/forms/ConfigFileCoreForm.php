@@ -36,6 +36,8 @@ class ConfigFileCoreForm
      * @param string|null $sConfigPath Specify the path of INI file configuration WITHOUT "config.ini". The default value is the current configuration module file.
      *
      * @return void
+     *
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
     public static function display($sConfigVar = self::CONFIG_SETTING_SECTION, $sConfigPath = null)
     {
