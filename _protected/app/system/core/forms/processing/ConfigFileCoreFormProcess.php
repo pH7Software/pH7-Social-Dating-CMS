@@ -22,6 +22,8 @@ class ConfigFileCoreFormProcess extends Form
     /**
      * @param string $sConfigVar Specify the variable in the INI file where module options. Default module.setting
      * @param string $sIniFile The path of INI config file.
+     *
+     * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
     public function __construct($sConfigVar, $sIniFile)
     {
