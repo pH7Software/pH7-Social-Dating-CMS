@@ -47,10 +47,10 @@ class FriendCoreModel extends Model
             $sSqlWhere = 'f.profileId IN
            (SELECT * FROM (SELECT (m.profileId)
            FROM ' . Db::prefix(DbTableName::MEMBER_FRIEND) . ' AS m
-           WHERE (m.friendId IN(:profileId, :friendId))
+           WHERE (m.friendId IN (:profileId, :friendId))
            UNION ALL
                SELECT (f.friendId) FROM ' . Db::prefix(DbTableName::MEMBER_FRIEND) . ' AS f
-               WHERE (f.profileId IN(:profileId, :friendId))) AS fd
+               WHERE (f.profileId IN (:profileId, :friendId))) AS fd
                GROUP BY fd.profileId HAVING COUNT(fd.profileId) > 1)';
         }
 
