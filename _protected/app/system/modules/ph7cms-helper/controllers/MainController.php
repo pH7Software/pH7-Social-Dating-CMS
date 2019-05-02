@@ -35,10 +35,9 @@ class MainController extends Controller
 
     const DONATION_AMOUNTS = [
         19,
-        27,
-        39,
+        29,
+        47,
         57,
-        77,
         99,
         129,
         397,
