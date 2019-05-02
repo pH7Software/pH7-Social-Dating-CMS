@@ -1389,7 +1389,7 @@ class UserCoreModel extends Model
      * @param int $iProfileId
      * @param string $sTable Default DbTableName::MEMBER
      *
-     * @return string The User's birthdate.
+     * @return string The user's date of birth.
      */
     public function getBirthDate($iProfileId, $sTable = DbTableName::MEMBER)
     {
@@ -1582,7 +1582,7 @@ class UserCoreModel extends Model
      *
      * @return array
      *
-     * @throws PH7InvalidArgumentException
+     * @throws PH7InvalidArgumentException If the specified table is incorrect.
      */
     public function getCountries($sTable = DbTableName::MEMBER_COUNTRY)
     {
@@ -1610,7 +1610,7 @@ class UserCoreModel extends Model
      *
      * @return bool|int
      *
-     * @throws PH7InvalidArgumentException If the table arg is incorrect.
+     * @throws PH7InvalidArgumentException If the specified table is incorrect.
      */
     public function addCountry($sCountryCode, $sTable = DbTableName::MEMBER_COUNTRY)
     {
@@ -1622,7 +1622,7 @@ class UserCoreModel extends Model
     /**
      * @param string $sTable
      *
-     * @throws PH7InvalidArgumentException If the table arg is incorrect.
+     * @throws PH7InvalidArgumentException If the specified table is incorrect.
      */
     public function clearCountries($sTable = DbTableName::MEMBER_COUNTRY)
     {
