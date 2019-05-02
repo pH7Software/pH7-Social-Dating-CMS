@@ -378,7 +378,7 @@ class UserCoreModel extends Model
 
         $sSqlSex = '';
         if ($bIsSex) {
-            $sSqlSex = $this->getSexInClauseSql($aParams[SearchQueryCore::SEX]);
+            $sSqlSex = ' AND' . $this->getSexInClauseSql($aParams[SearchQueryCore::SEX]);
         }
 
         if (empty($aParams[SearchQueryCore::ORDER])) {
@@ -1667,7 +1667,7 @@ class UserCoreModel extends Model
         $sInClauseValue = rtrim($sGender, ','); // Removes the last extra comma
 
         if (!empty($sInClauseValue)) {
-            return ' AND sex IN (' . $sInClauseValue . ') ';
+            return ' sex IN (' . $sInClauseValue . ') ';
         }
 
         return '';
