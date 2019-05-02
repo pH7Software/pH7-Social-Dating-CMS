@@ -49,7 +49,7 @@
 
             <li>
                 <a href="{{ $design->url(PH7_ADMIN_MOD,'module','disable') }}">
-                    {lang 'Enable/Disable Modules'}
+                    {lang 'Enable/disable modules'}
                 </a>
             </li>
 
