@@ -48,6 +48,12 @@
             </li>
 
             <li>
+                <a href="{{ $design->url(PH7_ADMIN_MOD,'module','disable') }}">
+                    {lang 'Enable/Disable Modules'}
+                </a>
+            </li>
+
+            <li>
                 <a class="underline" href="{patreon_url}" target="_blank" rel="noopener noreferrer">
                     {lang 'Become a Patron TODAY'}
                 </a> 🚀
