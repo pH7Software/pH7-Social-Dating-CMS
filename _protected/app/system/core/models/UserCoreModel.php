@@ -1070,7 +1070,7 @@ class UserCoreModel extends Model
      * @param int|null $iOffset
      * @param int|null $iLimit
      *
-     * @return array Data of users
+     * @return array Data of user.
      */
     public function getProfiles($sOrder = SearchCoreModel::LAST_ACTIVITY, $iOffset = null, $iLimit = null)
     {
@@ -1246,7 +1246,7 @@ class UserCoreModel extends Model
      * @param int $iProfileId
      * @param string $sTable Default DbTableName::MEMBER
      *
-     * @return string The email address of a member
+     * @return string The email address of a member.
      */
     public function getEmail($iProfileId, $sTable = DbTableName::MEMBER)
     {
@@ -1273,7 +1273,7 @@ class UserCoreModel extends Model
      * @param int $iProfileId
      * @param string $sTable Default DbTableName::MEMBER
      *
-     * @return string The Username of member
+     * @return string The username of a member.
      */
     public function getUsername($iProfileId, $sTable = DbTableName::MEMBER)
     {
@@ -1304,7 +1304,7 @@ class UserCoreModel extends Model
      * @param int $iProfileId
      * @param string $sTable Default DbTableName::MEMBER
      *
-     * @return string The first name of member
+     * @return string The user first name.
      */
     public function getFirstName($iProfileId, $sTable = DbTableName::MEMBER)
     {
@@ -1332,7 +1332,7 @@ class UserCoreModel extends Model
      * @param string $sUsername Default NULL
      * @param string $sTable Default DbTableName::MEMBER
      *
-     * @return string The sex of a member
+     * @return string The user's sex.
      */
     public function getSex($iProfileId = null, $sUsername = null, $sTable = DbTableName::MEMBER)
     {
@@ -1364,7 +1364,7 @@ class UserCoreModel extends Model
      *
      * @param int $iProfileId
      *
-     * @return string The User's birthdate.
+     * @return string The user's match sex.
      */
     public function getMatchSex($iProfileId)
     {
@@ -1470,7 +1470,7 @@ class UserCoreModel extends Model
      *
      * @param int $iProfileId
      *
-     * @return stdClass The membership detais.
+     * @return stdClass The membership details.
      */
     public function getMembershipDetails($iProfileId)
     {
