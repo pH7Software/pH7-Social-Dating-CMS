@@ -17,7 +17,7 @@ class HotOrNotModel extends UserCoreModel
      * Get random picture.
      *
      * @param int|null $iProfileId
-     * If the user is logged in, you need to specify its user ID, in orser to not display its own profile since the user cannot vote for themselves.
+     * If the user is logged in, you need to specify its user ID, in order to not display its own profile since the user cannot vote for themselves.
      *
      * @param int $iApproved
      * @param int $iOffset

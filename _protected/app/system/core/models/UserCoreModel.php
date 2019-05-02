@@ -1079,7 +1079,7 @@ class UserCoreModel extends Model
      * @param int|null $iOffset
      * @param int|null $iLimit
      *
-     * @return array Data of user.
+     * @return array Data of users.
      */
     public function getProfiles($sOrder = SearchCoreModel::LAST_ACTIVITY, $iOffset = null, $iLimit = null)
     {
