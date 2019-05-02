@@ -61,6 +61,8 @@ class EditFormProcess extends Form
                 Form::setVal($this->httpRequest->post('match_sex', Http::NO_CLEAN)),
                 $iProfileId
             );
+
+            $this->clearFieldCache('matchsex', $iProfileId, null);
         }
 
         if (!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oUser->birthDate)) {
@@ -147,14 +149,15 @@ class EditFormProcess extends Form
     /**
      * @param string $sCacheId
      * @param int $iProfileId
+     * @param string $sTableName
      *
      * @return void
      */
-    private function clearFieldCache($sCacheId, $iProfileId)
+    private function clearFieldCache($sCacheId, $iProfileId, $sTableName = DbTableName::MEMBER)
     {
         (new Cache)->start(
             UserCoreModel::CACHE_GROUP,
-            $sCacheId . $iProfileId . DbTableName::MEMBER,
+            $sCacheId . $iProfileId . $sTableName,
             null
         )->clear();
     }
