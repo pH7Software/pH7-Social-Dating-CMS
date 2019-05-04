@@ -736,8 +736,8 @@ class UserCoreModel extends Model
      */
     public function setInfoFields(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER_INFO) . '(profileId, middleName, country, city, state, zipCode, description, punchline, website, socialNetworkSite)
-            VALUES (:profileId, :middleName, :country, :city, :state, :zipCode, :description, :punchline, :website, :socialNetworkSite)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER_INFO) . '(profileId, country, city, state, zipCode, description, punchline, website, socialNetworkSite)
+            VALUES (:profileId, :country, :city, :state, :zipCode, :description, :punchline, :website, :socialNetworkSite)');
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
         $rStmt->bindValue(':middleName', (!empty($aData['middle_name']) ? $aData['middle_name'] : ''), \PDO::PARAM_STR);
         $rStmt->bindValue(':country', (!empty($aData['country']) ? $aData['country'] : ''), \PDO::PARAM_STR);
