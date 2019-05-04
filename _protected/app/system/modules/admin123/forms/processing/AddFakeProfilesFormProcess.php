@@ -158,7 +158,6 @@ class AddFakeProfilesFormProcess extends Form
         $aData['birth_date'] = $this->dateTime->get($aUser['dob']['date'])->date('Y-m-d');
         $aData['avatar'] = $aUser['picture']['large'];
         $aData['ip'] = Ip::get();
-        $aData['website'] = Kernel::SOFTWARE_WEBSITE;
 
         return $aData;
     }
