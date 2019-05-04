@@ -144,35 +144,42 @@ class FieldModel extends Model
     protected function getSqlType()
     {
         switch ($this->sType) {
-            case self::FIELD_TEXTBOX_TYPE: {
-                if (mb_strlen($this->sDefVal) > $this->iLength) {
-                    $this->iLength = mb_strlen($this->sDefVal);
+            case self::FIELD_TEXTBOX_TYPE:
+                {
+                    if (mb_strlen($this->sDefVal) > $this->iLength) {
+                        $this->iLength = mb_strlen($this->sDefVal);
+                    }
+                    if ($this->iLength === 0 || $this->iLength > self::MAX_VARCHAR_LENGTH) {
+                        $this->iLength = self::MAX_VARCHAR_LENGTH;
+                    }
+                    $this->sSql .= 'VARCHAR(' . $this->iLength . ')';
                 }
-                if ($this->iLength === 0 || $this->iLength > self::MAX_VARCHAR_LENGTH) {
-                    $this->iLength = self::MAX_VARCHAR_LENGTH;
-                }
-                $this->sSql .= 'VARCHAR(' . $this->iLength . ')';
-            } break;
+                break;
 
-            case self::FIELD_NUMBER_TYPE: {
-                if (!is_numeric($this->sDefVal)) {
-                    $this->sDefVal = 0;
-                }
-                if (strlen($this->sDefVal) > $this->iLength) {
-                    $this->iLength = strlen($this->sDefVal);
-                }
-                if ($this->iLength === 0 || $this->iLength > self::MAX_INT_LENGTH) {
-                    $this->iLength = self::DEF_INT_LENGTH; // Set the default INT() length value
-                }
+            case self::FIELD_NUMBER_TYPE:
+                {
+                    if (!is_numeric($this->sDefVal)) {
+                        $this->sDefVal = 0;
+                    }
+                    if (strlen($this->sDefVal) > $this->iLength) {
+                        $this->iLength = strlen($this->sDefVal);
+                    }
+                    if ($this->iLength === 0 || $this->iLength > self::MAX_INT_LENGTH) {
+                        $this->iLength = self::DEF_INT_LENGTH; // Set the default INT() length value
+                    }
 
-                $this->sSql .= 'INT(' . $this->iLength . ')';
-            } break;
+                    $this->sSql .= 'INT(' . $this->iLength . ')';
+                }
+                break;
 
             default:
                 throw new PH7InvalidArgumentException('Invalid Field type!');
         }
 
-        return $this->sSql . ' NOT NULL DEFAULT ' . Db::getInstance()->quote($this->sDefVal);
+        $this->sSql .= ' DEFAULT ';
+        $this->sSql .= (isset($this->sDefVal)) ? Db::getInstance()->quote($this->sDefVal) : 'NULL';
+
+        return $this->sSql;
     }
 
     /**
