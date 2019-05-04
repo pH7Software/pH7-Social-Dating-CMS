@@ -259,7 +259,7 @@ class DynamicFieldCoreForm
             $sType = 'Email';
         elseif (strstr($this->sColumn, 'password'))
             $sType = 'Password';
-        elseif (strstr($this->sColumn, 'url') || stristr($this->sVal, 'http'))
+        elseif (strstr($this->sColumn, 'url'))
             $sType = 'Url';
         elseif (strstr($this->sColumn, 'phone'))
             $sType = 'Phone';
