@@ -84,7 +84,7 @@
                             <a itemprop="nationality" href="{{ $design->url('user','browse','index', '?country='.$country_code) }}">
                                 {country}
                             </a>
-                        </span>&nbsp;&nbsp;<img src="{{ $design->getSmallFlagIcon($country_code) }}" title="{country}" alt="{country}" />
+                        </span> <img src="{{ $design->getSmallFlagIcon($country_code) }}" title="{country}" alt="{country}" />
                     </p>
                 {elseif $key == 'city'}
                     <p>
@@ -115,12 +115,12 @@
                     </p>
                 {elseif stripos($key, 'website') !== false}
                     <p>
-                        {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Site/Blog:'}</span>
+                        {{ $design->favicon($val) }} <span class="bold">{lang 'Site/Blog:'}</span>
                         <span class="italic">{{ $design->urlTag($val) }}</span>
                     </p>
                 {elseif stripos($key, 'socialNetworkSite') !== false}
                     <p>
-                        {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Social Profile:'}</span>
+                        {{ $design->favicon($val) }} <span class="bold">{lang 'Social Profile:'}</span>
                         <span class="italic">{{ $design->urlTag($val) }}</span>
                     </p>
                 {else}
@@ -128,7 +128,7 @@
 
                     {if strstr($key, 'url') OR stristr($val, 'http')}
                         <p>
-                            {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang $lang_key}</span>
+                            {{ $design->favicon($val) }} <span class="bold">{lang $lang_key}</span>
                             <span class="italic">{{ $design->urlTag($val) }}</span>
                         </p>
                     {else}
