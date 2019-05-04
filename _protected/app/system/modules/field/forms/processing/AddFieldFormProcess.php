@@ -26,7 +26,10 @@ class AddFieldFormProcess extends Form
         $sDefVal = $this->httpRequest->post('value');
 
         if (Field::doesExist($sMod, $sName)) {
-            \PFBC\Form::setError('form_add_field', t('Oops! The field already exists!'));
+            \PFBC\Form::setError(
+                'form_add_field',
+                t('Oops! The field already exists!')
+            );
         } else {
             $bRet = (new FieldModel(Field::getTable($sMod), $sName, $sType, $iLength, $sDefVal))->insert();
 
