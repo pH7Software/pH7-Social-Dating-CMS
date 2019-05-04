@@ -243,7 +243,7 @@ class Http
      */
     public function isRelativeUrl($sUrl)
     {
-        return 0 !== stripos($sUrl, 'http');
+        return stristr($sUrl, 'http') === false;
     }
 
     /**
