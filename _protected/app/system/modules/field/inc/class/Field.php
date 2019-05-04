@@ -30,7 +30,6 @@ class Field
     const AFFILIATE_UNMODIFIABLE_FIELDS = [
         'profileid',
         'description',
-        'businessname',
         'address',
         'phone',
         'city',
