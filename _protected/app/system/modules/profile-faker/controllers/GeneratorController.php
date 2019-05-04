@@ -19,7 +19,7 @@ class GeneratorController extends Controller
 {
     public function addMember()
     {
-        $this->setTitle(t('Generate Fake Members'));
+        $this->setTitle(t('Generate Fake Members (without profile photo)'));
         $this->output();
     }
 

@@ -104,7 +104,7 @@ class UserController extends Controller
 
     public function addFakeProfiles()
     {
-        $this->view->page_title = $this->view->h1_title = t('Add Fake Profiles');
+        $this->view->page_title = $this->view->h1_title = t('Add Fake Profiles (with profile photo)');
         $this->output();
     }
 
