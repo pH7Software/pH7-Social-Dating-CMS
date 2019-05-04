@@ -35,7 +35,6 @@ class AddUserForm
         $oForm->addElement(new \PFBC\Element\Password(t('Password:'), 'password', ['required' => 1]));
         $oForm->addElement(new \PFBC\Element\Textbox(t('First Name:'), 'first_name', ['required' => 1, 'validation' => new \PFBC\Validation\Name]));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Last Name:'), 'last_name', ['required' => 1, 'validation' => new \PFBC\Validation\Name]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Middle Name:'), 'middle_name', ['validation' => new \PFBC\Validation\Name]));
         $oForm->addElement(
             new \PFBC\Element\Radio(
                 t('Gender:'),

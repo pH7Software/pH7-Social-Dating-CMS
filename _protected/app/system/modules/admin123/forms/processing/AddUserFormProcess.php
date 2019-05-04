@@ -31,7 +31,6 @@ class AddUserFormProcess extends Form
             'password' => $this->httpRequest->post('password', Http::NO_CLEAN),
             'first_name' => $this->httpRequest->post('first_name'),
             'last_name' => $this->httpRequest->post('last_name'),
-            'middle_name' => $this->httpRequest->post('middle_name'),
             'sex' => $this->httpRequest->post('sex'),
             'match_sex' => $this->httpRequest->post('match_sex'),
             'birth_date' => $sBirthDate,
