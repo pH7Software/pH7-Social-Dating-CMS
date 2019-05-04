@@ -22,9 +22,7 @@ class Field
         'zipcode',
         'country',
         'website',
-        'socialnetworksite',
-        'height',
-        'weight'
+        'socialnetworksite'
     ];
 
     const AFFILIATE_UNMODIFIABLE_FIELDS = [
