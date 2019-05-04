@@ -271,9 +271,9 @@ class DynamicFieldCoreForm
             $sType = 'Number';
         elseif (strstr($this->sColumn, 'range'))
             $sType = 'Range';
-        elseif (strstr($this->sColumn, 'height'))
+        elseif (stripos($this->sColumn, 'height'))
             $sType = 'Height';
-        elseif (strstr($this->sColumn, 'weight'))
+        elseif (stripos($this->sColumn, 'weight'))
             $sType = 'Weight';
         else
             $sType = 'Textbox';

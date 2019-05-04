@@ -187,7 +187,7 @@
             {if $key != 'description' AND $key != 'middleName' AND $key != 'punchline' AND !empty($val)}
                 {{ $val = escape($val, true) }}
 
-                {if stristr($key, 'height')}
+                {if stripos($key, 'height')}
                     <p>
                         <span class="bold">{lang 'Height:'}</span>
                         <span class="italic">
@@ -196,7 +196,7 @@
                             </a>
                         </span>
                     </p>
-                {elseif stristr($key, 'weight')}
+                {elseif stripos($key, 'weight')}
                     <p>
                         <span class="bold">{lang 'Weight:'}</span>
                         <span class="italic">
