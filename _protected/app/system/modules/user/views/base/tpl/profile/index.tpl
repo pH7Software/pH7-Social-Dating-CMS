@@ -187,7 +187,7 @@
             {if $key != 'description' AND $key != 'middleName' AND $key != 'punchline' AND !empty($val)}
                 {{ $val = escape($val, true) }}
 
-                {if $key == 'height'}
+                {if stristr($key, 'height')}
                     <p>
                         <span class="bold">{lang 'Height:'}</span>
                         <span class="italic">
@@ -196,7 +196,7 @@
                             </a>
                         </span>
                     </p>
-                {elseif $key == 'weight'}
+                {elseif stristr($key, 'weight')}
                     <p>
                         <span class="bold">{lang 'Weight:'}</span>
                         <span class="italic">
@@ -254,7 +254,7 @@
                 {else}
                     {{ $lang_key = strtolower($key) }}
 
-                     {if strstr($key, 'url')}
+                     {if strstr($key, 'url') OR stristr($val, 'http')}
                          <p>
                              {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang $lang_key}</span>
                              <span itemprop="url" class="italic">{{ $design->urlTag($val) }}</span>
