@@ -59,7 +59,7 @@
             {if $key != 'description' AND $key != 'middleName' AND $key != 'punchline' AND !empty($val)}
                 {{ $val = escape($val, true) }}
 
-                {if stripos($key, 'height')}
+                {if stripos($key, 'height') !== false}
                     <p>
                         <span class="bold">{lang 'Height:'}</span>
                         <span class="italic">
@@ -68,7 +68,7 @@
                             </a>
                         </span>
                     </p>
-                {elseif stripos($key, 'weight')}
+                {elseif stripos($key, 'weight') !== false}
                     <p>
                         <span class="bold">{lang 'Weight:'}</span>
                         <span class="italic">
@@ -113,12 +113,12 @@
                             </a>
                         </span>
                     </p>
-                {elseif $key == 'website'}
+                {elseif stripos($key, 'website') !== false}
                     <p>
                         {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Site/Blog:'}</span>
                         <span class="italic">{{ $design->urlTag($val) }}</span>
                     </p>
-                {elseif $key == 'socialNetworkSite'}
+                {elseif stripos($key, 'socialNetworkSite') !== false}
                     <p>
                         {{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Social Profile:'}</span>
                         <span class="italic">{{ $design->urlTag($val) }}</span>
