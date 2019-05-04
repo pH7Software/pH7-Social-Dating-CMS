@@ -2,7 +2,7 @@
 /**
  * @title          User Core Model Class
  *
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
@@ -101,7 +101,7 @@ class UserCoreModel extends Model
      *
      * @param string $sEmail Not case sensitive since on lot of mobile devices (such as iPhone), the first letter is uppercase.
      * @param string $sPassword
-     * @param string $sTable Default DbTableName::MEMBER
+     * @param string $sTable
      *
      * @return bool|string (boolean "true" or string "message")
      */
@@ -158,7 +158,7 @@ class UserCoreModel extends Model
      * Read Profile Data.
      *
      * @param int $iProfileId The user ID
-     * @param string $sTable Default DbTableName::MEMBER
+     * @param string $sTable
      *
      * @return stdClass|bool The data of a member if exists, FALSE otherwise.
      */
@@ -183,9 +183,9 @@ class UserCoreModel extends Model
     /**
      * Get the total number of members.
      *
-     * @param string $sTable Default DbTableName::MEMBER
-     * @param int $iDay Default '0'
-     * @param string $sGender Values ​​available 'all', 'male', 'female'. 'couple' is only available to Members. Default 'all'
+     * @param string $sTable
+     * @param int $iDay
+     * @param string $sGender Values ​​available 'all', 'male', 'female'. 'couple' is only available to Members.
      *
      * @return int Total Users
      */
@@ -227,7 +227,7 @@ class UserCoreModel extends Model
      * @param string $sSection
      * @param string $sValue
      * @param int $iProfileId Profile ID
-     * @param string $sTable Default DbTableName::MEMBER
+     * @param string $sTable
      *
      * @return void
      */
@@ -470,7 +470,7 @@ class UserCoreModel extends Model
      * Check online status.
      *
      * @param int $iProfileId
-     * @param int $iTime Number of minutes that a member becomes inactive (offline). Default 1 minute
+     * @param int $iTime Number of minutes that a member becomes inactive (offline).
      *
      * @return bool
      */
@@ -595,7 +595,7 @@ class UserCoreModel extends Model
      * Set the last activity of a user.
      *
      * @param int $iProfileId
-     * @param string $sTable Default DbTableName::MEMBER
+     * @param string $sTable
      *
      * @return void
      */
@@ -610,7 +610,7 @@ class UserCoreModel extends Model
      * Set the last edit account of a user.
      *
      * @param int $iProfileId
-     * @param string $sTable Default DbTableName::MEMBER
+     * @param string $sTable
      *
      * @return void
      */
@@ -626,7 +626,7 @@ class UserCoreModel extends Model
      *
      * @param int $iProfileId
      * @param int $iStatus 1 = approved | 0 = not approved
-     * @param string $sTable Default DbTableName::MEMBER
+     * @param string $sTable
      *
      * @return void
      */
@@ -641,7 +641,7 @@ class UserCoreModel extends Model
      * Get member data. The validation hash, and other useful data for sending the activation email (hash, email, username, firstName).
      *
      * @param string $sEmail User's email address.
-     * @param string $sTable Default DbTableName::MEMBER
+     * @param string $sTable
      *
      * @return stdClass|bool Returns the data member (email, username, firstName, hashValidation) on success, otherwise returns false if there is an error.
      */
@@ -667,7 +667,7 @@ class UserCoreModel extends Model
      *
      * @param string $sEmail
      * @param string $sHash
-     * @param string $sTable Default DbTableName::MEMBER
+     * @param string $sTable
      *
      * @return bool
      */
@@ -786,7 +786,7 @@ class UserCoreModel extends Model
      * @param string $sIp
      * @param int $iWaitTime In minutes!
      * @param string $sCurrentTime In date format: 0000-00-00 00:00:00
-     * @param string $sTable Default DbTableName::MEMBER
+     * @param string $sTable
      *
      * @return bool Return TRUE if the weather was fine, FALSE otherwise.
      */
@@ -880,7 +880,7 @@ class UserCoreModel extends Model
      * Get file of a user background.
      *
      * @param int $iProfileId
-     * @param int|null $iApproved (1 = approved | 0 = pending | NULL = approved and pending) Default NULL
+     * @param int|null $iApproved (1 = approved | 0 = pending | NULL = approved and pending).
      *
      * @return string
      */
@@ -1051,7 +1051,7 @@ class UserCoreModel extends Model
 
     /**
      * @param string $sUsernameSearch
-     * @param string $sTable Default DbTableName::MEMBER
+     * @param string $sTable
      *
      * @return array data of users (profileId, username, sex)
      */
@@ -1213,9 +1213,9 @@ class UserCoreModel extends Model
     /**
      * Get the Profile ID of a user.
      *
-     * @param string|null $sEmail Default NULL
-     * @param string|null $sUsername Default NULL
-     * @param string $sTable Default DbTableName::MEMBER
+     * @param string|null $sEmail
+     * @param string|null $sUsername
+     * @param string $sTable
      *
      * @return int|bool The Member ID if it is found or FALSE if not found.
      */
@@ -1250,7 +1250,7 @@ class UserCoreModel extends Model
 
     /**
      * @param int $iProfileId
-     * @param string $sTable Default DbTableName::MEMBER
+     * @param string $sTable
      *
      * @return string The email address of a member.
      */
@@ -1277,7 +1277,7 @@ class UserCoreModel extends Model
      * Retrieves the username from the user ID.
      *
      * @param int $iProfileId
-     * @param string $sTable Default DbTableName::MEMBER
+     * @param string $sTable
      *
      * @return string The username of a member.
      */
@@ -1308,7 +1308,7 @@ class UserCoreModel extends Model
      * Retrieves the first name from the user ID.
      *
      * @param int $iProfileId
-     * @param string $sTable Default DbTableName::MEMBER
+     * @param string $sTable
      *
      * @return string The user first name.
      */
@@ -1334,9 +1334,9 @@ class UserCoreModel extends Model
     /**
      * Get Gender (sex) of a user.
      *
-     * @param int|null $iProfileId Default NULL
-     * @param string $sUsername Default NULL
-     * @param string $sTable Default DbTableName::MEMBER
+     * @param int|null $iProfileId
+     * @param string $sUsername
+     * @param string $sTable
      *
      * @return string The user's sex.
      */
@@ -1393,7 +1393,7 @@ class UserCoreModel extends Model
      * Get Date of Birth of a user.
      *
      * @param int $iProfileId
-     * @param string $sTable Default DbTableName::MEMBER
+     * @param string $sTable
      *
      * @return string The user's date of birth.
      */
@@ -1420,7 +1420,7 @@ class UserCoreModel extends Model
      * Get user's group.
      *
      * @param int $iProfileId
-     * @param string sTable Default DbTableName::MEMBER
+     * @param string sTable
      *
      * @return int The Group ID of a member
      */
@@ -1553,7 +1553,7 @@ class UserCoreModel extends Model
      * Get Info Fields from profile ID.
      *
      * @param int $iProfileId
-     * @param string $sTable Default DbTableName::MEMBER_INFO
+     * @param string $sTable
      *
      * @return stdClass
      */
