@@ -137,8 +137,6 @@ class Google extends Api implements IApi
             'state' => Geo::getState(),
             'zip_code' => Geo::getZipCode(),
             'description' => !empty($aProfile['bio']) ? $aProfile['bio'] : '',
-            'website' => '',
-            'social_network_site' => $aProfile['link'],
             'ip' => Ip::get(),
             'prefix_salt' => Various::genRnd(),
             'suffix_salt' => Various::genRnd(),

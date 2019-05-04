@@ -40,8 +40,6 @@ class AddUserFormProcess extends Form
             'zip_code' => $this->httpRequest->post('zip_code'),
             'punchline' => $this->httpRequest->post('punchline'),
             'description' => $this->httpRequest->post('description', Http::ONLY_XSS_CLEAN),
-            'website' => $this->httpRequest->post('website'),
-            'social_network_site' => $this->httpRequest->post('social_network_site'),
             'ip' => Ip::get()
         ];
         $iProfileId = (new UserCoreModel)->add($aData);

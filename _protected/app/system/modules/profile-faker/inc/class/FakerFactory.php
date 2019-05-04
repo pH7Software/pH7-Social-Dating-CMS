@@ -74,7 +74,6 @@ class FakerFactory
             $aUser['birth_date'] = $sBirthDate;
             $aUser['description'] = $oFaker->paragraph(2);
             $aUser['lang'] = $oFaker->locale;
-            $aUser['website'] = Kernel::SOFTWARE_WEBSITE;
             $aUser['ip'] = $oFaker->ipv4;
 
             $oUserModel->add($aUser);

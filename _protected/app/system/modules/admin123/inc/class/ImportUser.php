@@ -47,8 +47,6 @@ class ImportUser extends Core
         'city',
         'state',
         'zip_code',
-        'website',
-        'social_network_site',
         'ip'
     ];
 
@@ -147,8 +145,6 @@ class ImportUser extends Core
             'state' => 'Doswell',
             'zip_code' => '23047',
             'description' => 'Hi all!<br />How are you today?<br /> Bye ;)',
-            'website' => '',
-            'social_network_site' => '',
             'ip' => Ip::get()
         ];
     }
@@ -206,10 +202,6 @@ class ImportUser extends Core
                 $sVal === 'postalcode' || $sVal === 'pin' || $sVal === 'pincode' || $sVal === 'eircode'
             ) {
                 $this->aTmpData['zip_code'] = $sKey;
-            }
-
-            if ($sVal === 'website' || $sVal === 'site' || $sVal === 'url') {
-                $this->aTmpData['website'] = $sKey;
             }
 
             if ($sVal === 'birthday' || $sVal === 'birthdate' || $sVal === 'dateofbirth' || $sVal === 'dob') {

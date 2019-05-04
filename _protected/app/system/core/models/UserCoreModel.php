@@ -736,8 +736,8 @@ class UserCoreModel extends Model
      */
     public function setInfoFields(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER_INFO) . '(profileId, country, city, state, zipCode, description, punchline, website, socialNetworkSite)
-            VALUES (:profileId, :country, :city, :state, :zipCode, :description, :punchline, :website, :socialNetworkSite)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER_INFO) . '(profileId, country, city, state, zipCode, description, punchline)
+            VALUES (:profileId, :country, :city, :state, :zipCode, :description, :punchline)');
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
         $rStmt->bindValue(':country', (!empty($aData['country']) ? $aData['country'] : ''), \PDO::PARAM_STR);
         $rStmt->bindValue(':city', (!empty($aData['city']) ? $aData['city'] : ''), \PDO::PARAM_STR);
@@ -745,8 +745,6 @@ class UserCoreModel extends Model
         $rStmt->bindValue(':zipCode', (!empty($aData['zip_code']) ? $aData['zip_code'] : ''), \PDO::PARAM_STR);
         $rStmt->bindValue(':description', (!empty($aData['description']) ? $aData['description'] : ''), \PDO::PARAM_STR);
         $rStmt->bindValue(':punchline', (!empty($aData['punchline']) ? $aData['punchline'] : ''), \PDO::PARAM_STR);
-        $rStmt->bindValue(':website', (!empty($aData['website']) ? trim($aData['website']) : ''), \PDO::PARAM_STR);
-        $rStmt->bindValue(':socialNetworkSite', (!empty($aData['social_network_site']) ? trim($aData['social_network_site']) : ''), \PDO::PARAM_STR);
 
         return $rStmt->execute();
     }

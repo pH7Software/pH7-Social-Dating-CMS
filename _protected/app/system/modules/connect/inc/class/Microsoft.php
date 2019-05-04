@@ -137,8 +137,6 @@ class Microsoft extends Api
             'state' => Geo::getState(),
             'zip_code' => Geo::getZipCode(),
             'description' => '',
-            'website' => '',
-            'social_network_site' => '',
             'ip' => Ip::get(),
             'prefix_salt' => Various::genRnd(),
             'suffix_salt' => Various::genRnd(),
