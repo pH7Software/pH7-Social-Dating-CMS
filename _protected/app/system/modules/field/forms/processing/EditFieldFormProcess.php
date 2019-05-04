@@ -28,7 +28,7 @@ class EditFieldFormProcess extends Form
         if (Field::unmodifiable($sMod, $sName)) {
             \PFBC\Form::setError(
                 'form_edit_field',
-                t('Wrong field name submitted. %0% cannot be modified', $sName)
+                t('Wrong field name submitted. %0% cannot be modified.', $sName)
             );
         } else {
             $bRet = (new FieldModel(Field::getTable($sMod), $sName, $sType, $iLength, $sDefVal))->update();
@@ -43,7 +43,7 @@ class EditFieldFormProcess extends Form
             } else {
                 \PFBC\Form::setError(
                     'form_edit_field',
-                    t('Oops! An error occurred while adding the field, please try again.')
+                    t('Oops! An error occurred while editing the field. Please try again.')
                 );
             }
         }

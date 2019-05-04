@@ -43,7 +43,7 @@ class AddFieldFormProcess extends Form
             } else {
                 \PFBC\Form::setError(
                     'form_add_field',
-                    t('Oops! An error occurred while adding the field, please try again.')
+                    t('Oops! An error occurred while adding the field. Please try again.')
                 );
             }
         }

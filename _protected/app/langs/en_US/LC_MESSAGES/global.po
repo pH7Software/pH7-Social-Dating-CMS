@@ -5511,7 +5511,7 @@ msgstr ""
 
 #: _protected/app/system/modules/field/forms/processing/AddFieldFormProcess.php:43
 #: _protected/app/system/modules/field/forms/processing/EditFieldFormProcess.php:41
-msgid "Oops! An error occurred while adding the field, please try again."
+msgid "Oops! An error occurred while adding the field. Please try again."
 msgstr ""
 
 #: _protected/app/system/modules/field/forms/processing/EditFieldFormProcess.php:29
