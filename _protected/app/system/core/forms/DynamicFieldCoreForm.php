@@ -237,7 +237,11 @@ class DynamicFieldCoreForm
      */
     protected function addCheckErrSpan($sType)
     {
-        $this->oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ' . $this->getFieldId($sType) . '"></span>'));
+        $this->oForm->addElement(
+            new \PFBC\Element\HTMLExternal(
+                '<span class="input_error ' . $this->getFieldId($sType) . '"></span>'
+            )
+        );
     }
 
     /**
