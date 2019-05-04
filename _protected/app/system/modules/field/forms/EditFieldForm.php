@@ -75,7 +75,7 @@ class EditFieldForm
                 'value',
                 [
                     'description' => t('The default value of the field (optional).') . '<br /><small>' . t('Note: The default value will always be empty even if you added a default string. Your change is saved, but cannot be retrieve on the form.') . '</small>',
-                    'validation' => new \PFBC\Validation\Str(2, 120)
+                    'validation' => new \PFBC\Validation\Str(1, 120)
                 ]
             )
         );

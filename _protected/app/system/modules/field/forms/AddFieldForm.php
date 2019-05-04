@@ -71,7 +71,7 @@ class AddFieldForm
                 'value',
                 [
                     'description' => t('The value by default of the field (optional).'),
-                    'validation' => new \PFBC\Validation\Str(2, 120)
+                    'validation' => new \PFBC\Validation\Str(1, 120)
                 ]
             )
         );
