@@ -153,7 +153,6 @@ class Facebook extends Api implements IApi
             'password' => Various::genRndWord(Registration::DEFAULT_PASSWORD_LENGTH),
             'first_name' => $this->oProfile->getFirstName(),
             'last_name' => $this->oProfile->getLastName(),
-            'middle_name' => $this->oProfile->getMiddleName(),
             'sex' => $sSex,
             'match_sex' => [$sMatchSex],
             'birth_date' => $sBirthDate,
