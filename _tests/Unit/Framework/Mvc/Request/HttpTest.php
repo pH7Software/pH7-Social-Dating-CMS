@@ -73,6 +73,7 @@ class HttpTest extends PHPUnit_Framework_TestCase
         $_GET['name'] = 'value';
 
         $sActual = $this->oHttpRequest->gets('name');
+
         $this->assertSame('value', $sActual);
     }
 
@@ -127,6 +128,7 @@ class HttpTest extends PHPUnit_Framework_TestCase
         $_POST['name'] = 'value';
 
         $sActual = $this->oHttpRequest->gets('name');
+
         $this->assertSame('value', $sActual);
     }
 
