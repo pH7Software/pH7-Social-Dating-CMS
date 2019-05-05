@@ -92,7 +92,7 @@ class Http
     {
         $iStatus = (int)$iStatus;
 
-        return !empty(static::STATUS_CODE[$iStatus]) ? $iStatus : false;
+        return !empty(static::STATUS_CODE[$iStatus]) ? static::STATUS_CODE[$iStatus] : false;
     }
 
     /**
