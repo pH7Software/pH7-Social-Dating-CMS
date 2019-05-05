@@ -87,7 +87,7 @@ class FieldModel extends Model
      */
     public function insert()
     {
-        $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'ADD ' . $this->sName . ' ' . $this->getSqlType() . ';';
+        $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'ADD ' . $this->sName . ' ' . $this->getSqlType() . $this->getSqlDefault() . ';';
         return $this->execute();
     }
 
@@ -97,7 +97,7 @@ class FieldModel extends Model
     public function update()
     {
         $sOldFieldName = (new HttpRequest)->get('name');
-        $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'CHANGE ' . $sOldFieldName . ' ' . $this->sName . ' ' . $this->getSqlType() . ';';
+        $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'CHANGE ' . $sOldFieldName . ' ' . $this->sName . ' ' . $this->getSqlType() . $this->getSqlDefault() . ';';
 
         return $this->execute();
     }
@@ -152,7 +152,7 @@ class FieldModel extends Model
                     if ($this->iLength === 0 || $this->iLength > self::MAX_VARCHAR_LENGTH) {
                         $this->iLength = self::MAX_VARCHAR_LENGTH;
                     }
-                    $this->sSql .= 'VARCHAR(' . $this->iLength . ')';
+                    $sSql = 'VARCHAR(' . $this->iLength . ')';
                 }
                 break;
 
@@ -168,7 +168,7 @@ class FieldModel extends Model
                         $this->iLength = self::DEF_INT_LENGTH; // Set the default INT() length value
                     }
 
-                    $this->sSql .= 'INT(' . $this->iLength . ')';
+                    $sSql = 'INT(' . $this->iLength . ')';
                 }
                 break;
 
@@ -176,10 +176,18 @@ class FieldModel extends Model
                 throw new PH7InvalidArgumentException('Invalid Field type!');
         }
 
-        $this->sSql .= ' DEFAULT ';
-        $this->sSql .= (isset($this->sDefVal)) ? Db::getInstance()->quote($this->sDefVal) : 'NULL';
+        return $sSql;
+    }
 
-        return $this->sSql;
+    /**
+     * @return string
+     */
+    protected function getSqlDefault()
+    {
+        $sSql = ' DEFAULT ';
+        $sSql .= (isset($this->sDefVal)) ? Db::getInstance()->quote($this->sDefVal) : 'NULL';
+
+        return $sSql;
     }
 
     /**
