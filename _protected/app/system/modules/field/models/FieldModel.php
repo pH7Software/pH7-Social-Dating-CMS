@@ -128,7 +128,7 @@ class FieldModel extends Model
      *
      * @throws PH7InvalidArgumentException Explanatory message.
      */
-    protected function execute()
+    private function execute()
     {
         $oDb = Db::getInstance();
         $rStmt = $oDb->exec($this->sSql);
@@ -141,7 +141,7 @@ class FieldModel extends Model
      *
      * @throws PH7InvalidArgumentException
      */
-    protected function getSqlType()
+    private function getSqlType()
     {
         switch ($this->sType) {
             case self::FIELD_TEXTBOX_TYPE:
@@ -182,7 +182,7 @@ class FieldModel extends Model
     /**
      * @return string
      */
-    protected function getSqlDefault()
+    private function getSqlDefault()
     {
         $sSql = ' DEFAULT ';
         $sSql .= (isset($this->sDefVal)) ? Db::getInstance()->quote($this->sDefVal) : 'NULL';
