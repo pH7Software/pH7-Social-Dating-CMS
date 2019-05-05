@@ -15,6 +15,8 @@ class LoginForm
 {
     public static function display($iWidth = 500)
     {
+        self::clearCurrentSessions();
+
         if (isset($_POST['submit_login_aff'])) {
             if (\PFBC\Form::isValid($_POST['submit_login_aff'])) {
                 new LoginFormProcess();
@@ -39,5 +41,17 @@ class LoginForm
         $oForm->addElement(new \PFBC\Element\Button(t('Login'), 'submit', ['icon' => 'key']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
+    }
+
+    /**
+     * Remove the session if the affiliate is logged on as "user" or "affiliate".
+     *
+     * @return void
+     */
+    private static function clearCurrentSessions()
+    {
+        if (UserCore::auth() || AdminCore::auth()) {
+            (new Session)->destroy();
+        }
     }
 }

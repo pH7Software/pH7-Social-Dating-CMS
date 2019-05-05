@@ -86,11 +86,6 @@ class AdminCore extends UserCore
         Session $oSession,
         SecurityModel $oSecurityModel)
     {
-        // Remove the session if the admin is logged in as "user" or "affiliate".
-        if (UserCore::auth() || AffiliateCore::auth()) {
-            $oSession->destroy();
-        }
-
         // Regenerate the session ID to prevent session fixation attack
         $oSession->regenerateId();
 

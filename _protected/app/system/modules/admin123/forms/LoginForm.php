@@ -15,6 +15,8 @@ class LoginForm
 {
     public static function display()
     {
+        self::clearCurrentSessions();
+
         if (isset($_POST['submit_admin_login'])) {
             if (\PFBC\Form::isValid($_POST['submit_admin_login'])) {
                 new LoginFormProcess;
@@ -49,5 +51,17 @@ class LoginForm
         $oForm->addElement(new \PFBC\Element\Button(t('Login'), 'submit', ['icon' => 'key']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
+    }
+
+    /**
+     * Remove the session if the admin is logged in as "user" or "affiliate".
+     *
+     * @return void
+     */
+    private static function clearCurrentSessions()
+    {
+        if (UserCore::auth() || AffiliateCore::auth()) {
+            (new Session)->destroy();
+        }
     }
 }

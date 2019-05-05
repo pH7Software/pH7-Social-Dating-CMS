@@ -384,11 +384,6 @@ class UserCore
         Session $oSession,
         SecurityModel $oSecurityModel)
     {
-        // Remove the session if the user is logged on as "affiliate" or "administrator".
-        if (AffiliateCore::auth() || AdminCore::auth()) {
-            $oSession->destroy();
-        }
-
         // Regenerate the session ID to prevent session fixation attack
         $oSession->regenerateId();
 

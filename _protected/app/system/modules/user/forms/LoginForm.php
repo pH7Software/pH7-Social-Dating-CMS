@@ -17,6 +17,8 @@ class LoginForm
 
     public static function display()
     {
+        self::clearCurrentSessions();
+
         if (isset($_POST['submit_login_user'])) {
             if (\PFBC\Form::isValid($_POST['submit_login_user'])) {
                 new LoginFormProcess();
@@ -50,5 +52,17 @@ class LoginForm
     private static function isCaptchaEligible()
     {
         return (new Session)->get('captcha_user_enabled') > self::CAPTCHA_NUMBER_ATTEMPTS;
+    }
+
+    /**
+     * Remove the session if the user is logged on as "affiliate" or "administrator".
+     *
+     * @reutrn void
+     */
+    private static function clearCurrentSessions()
+    {
+        if (AffiliateCore::auth() || AdminCore::auth()) {
+            (new Session)->destroy();
+        }
     }
 }
