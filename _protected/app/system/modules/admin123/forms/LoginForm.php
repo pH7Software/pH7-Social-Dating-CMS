@@ -33,7 +33,7 @@ class LoginForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Your Username:'), 'username', ['required' => 1]));
         $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', ['required' => 1]));
 
-        if ((new Session)->exists('captcha_admin_enabled')) {
+        if (self::isCaptchaEligible()) {
             $oForm->addElement(
                 new \PFBC\Element\CCaptcha(
                     t('Captcha'),
@@ -51,6 +51,14 @@ class LoginForm
         $oForm->addElement(new \PFBC\Element\Button(t('Login'), 'submit', ['icon' => 'key']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
+    }
+
+    /**
+     * @return bool
+     */
+    private static function isCaptchaEligible()
+    {
+        return (new Session)->exists('captcha_admin_enabled');
     }
 
     /**
