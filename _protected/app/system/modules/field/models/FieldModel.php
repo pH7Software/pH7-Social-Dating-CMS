@@ -112,7 +112,7 @@ class FieldModel extends Model
     }
 
     /**
-     * Count fields.
+     * Count the number of fields.
      *
      * @return int
      */
