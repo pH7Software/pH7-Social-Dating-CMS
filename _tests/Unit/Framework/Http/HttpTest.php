@@ -37,7 +37,7 @@ class HttpTest extends PHPUnit_Framework_TestCase
 
     public function testRelativeUrl()
     {
-        $bActual = $this->oHttp->isRelativeUrl('https://pierrehenry.be');
+        $bActual = $this->oHttp->isRelativeUrl('https://pierrehenry.be/user/brows');
 
         $this->assertFalse($bActual);
     }
