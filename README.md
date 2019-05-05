@@ -138,13 +138,13 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 
 * **Web Server** Apache with mod_php or with PHP in CGI, FastCGI mode (nginx, LiteSpeed and IIS should also work. You might have to change some pieces of code and change the URL rewriting to make it work).
 
-* **URL rewriting extension module** [Apache](https://ph7cms.com/doc/en/how-to-install-rewrite-module), nginx, LiteSpeed, IIS (for Web.config, you have a [good tutorial here](http://www.phpgenious.com/2010/04/url-rewriting-with-php-and-iis-7/)).
+* **URL rewriting extension module** [Apache](https://ph7cms.com/doc/en/how-to-install-rewrite-module), nginx, LiteSpeed, IIS (for Web.config, you have a [good tutorial here](https://web.archive.org/web/20190116102700/http://www.phpgenious.com/2010/04/url-rewriting-with-php-and-iis-7/)).
 
 * **Specific Requirement** Server has to be connected to Internet.
 
 * **Minimum Web Space** 2.0 GB
 
-* **pH7CMS's Video Module Requirement (only if enabled)** [FFmpeg](http://ffmpeg.org)
+* **pH7CMS's Video Module Requirement (only if enabled)** [FFmpeg](https://ffmpeg.org)
 
 
 ## 🛠 Installation
@@ -160,7 +160,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
   * Sourceforge:
     * Directly download the latest stable version from [Sourceforge](https://sourceforge.net/projects/ph7socialdating/).
   * Softaculous:
-    * If your Web host offers Softaculous, you might be able to install [pH7CMS in one-click with Softaculous](http://www.softaculous.com/softwares/socialnetworking/pH7CMS).
+    * If your Web host offers Softaculous, you might be able to install [pH7CMS in one-click with Softaculous](https://www.softaculous.com/apps/socialnetworking/pH7CMS).
 
 
 ## 🏗 Nginx Configuration
@@ -215,7 +215,7 @@ You can find and add other languages on the [I18N repo](https://github.com/pH7So
 
 [![Pierre-Henry Soria](https://avatars0.githubusercontent.com/u/1325411?s=200)](https://pierrehenry.be "My personal website :-)")
 
-Coded & Designed with lots of ❤ by [Pierre-Henry Soria](http://ph7.me). A SUPER Passionate Belgian Software Engineer 🍫🍺
+Coded & Designed with lots of ❤ by [Pierre-Henry Soria](https://ph7.me). A SUPER Passionate Belgian Software Engineer 🍫🍺
 
 
 ## 🤝 Hire Me At Your Company?
@@ -299,7 +299,7 @@ You can send me an email for any suggestions or feedback at: *hello {AT} ph7cms 
 
 **pH7CMS** is generously distributed under **Open Source, Free** License.
 
-License: [General Public License 3](http://www.gnu.org/licenses/gpl.html) or later; See the *PH7.LICENSE.txt* and *PH7.COPYRIGHT.txt* files for more details.
+License: [General Public License 3](https://www.gnu.org/licenses/gpl.html) or later; See the *PH7.LICENSE.txt* and *PH7.COPYRIGHT.txt* files for more details.
 
 
 ![pH7CMS allows anyone to start a web dating app like Tinder/Bumble or Badoo](https://cloud.githubusercontent.com/assets/1325411/19419477/5476b45c-93d0-11e6-823d-d293f186c0f7.png)
