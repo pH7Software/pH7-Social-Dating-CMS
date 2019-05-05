@@ -153,7 +153,6 @@ class Http
             $iCode = StatusCode::OK;
         }
 
-        // Set header
         static::setHeaders(static::getProtocol() . ' ' . static::getStatusCode($iCode));
     }
 
