@@ -52,10 +52,10 @@ class Rest extends Http
         $this->sData = $sData;
 
         /**
-         * @internal Http::getStatusCodes() returns FALSE when it doesn't find any valid HTTP codes.
+         * @internal Http::getStatusCode() returns FALSE when it doesn't find any valid HTTP codes.
          */
         // If it finds nothing, give 500 HTTP code
-        $this->iCode = false !== static::getStatusCodes($iStatus) ? $iStatus : StatusCode::INTERNAL_SERVER_ERROR;
+        $this->iCode = false !== static::getStatusCode($iStatus) ? $iStatus : StatusCode::INTERNAL_SERVER_ERROR;
         $this->output();
     }
 

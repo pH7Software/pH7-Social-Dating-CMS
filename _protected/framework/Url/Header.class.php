@@ -33,11 +33,11 @@ class Header
      */
     public static function redirect($sUrl = null, $sMessage = null, $sType = Design::SUCCESS_TYPE, $iRedirectCode = null)
     {
-        if (!Http::getStatusCodes($iRedirectCode)) {
+        if (!Http::getStatusCode($iRedirectCode)) {
             $iRedirectCode = StatusCode::MOVED_PERMANENTLY;
         }
 
-        Http::setHeadersByCode(Http::getStatusCodes($iRedirectCode));
+        Http::setHeadersByCode(Http::getStatusCode($iRedirectCode));
 
         $oHttpRequest = new HttpRequest;
         $sUrl = ($sUrl !== null) ? $sUrl : $oHttpRequest->currentUrl();

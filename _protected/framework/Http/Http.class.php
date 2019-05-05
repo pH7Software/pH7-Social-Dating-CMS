@@ -88,7 +88,7 @@ class Http
      *
      * @return string|bool $iStatus Returns the "HTTP status code" if found, FALSE otherwise.
      */
-    public static function getStatusCodes($iStatus)
+    public static function getStatusCode($iStatus)
     {
         $iStatus = (int)$iStatus;
 
@@ -149,12 +149,12 @@ class Http
      */
     public static function setHeadersByCode($iCode = StatusCode::OK)
     {
-        if (!static::getStatusCodes($iCode)) {
+        if (!static::getStatusCode($iCode)) {
             $iCode = StatusCode::OK;
         }
 
         // Set header
-        static::setHeaders(static::getProtocol() . ' ' . static::getStatusCodes($iCode));
+        static::setHeaders(static::getProtocol() . ' ' . static::getStatusCode($iCode));
     }
 
     /**
