@@ -170,11 +170,11 @@ class Http
     }
 
     /**
-     * Set the HTTP status codes for the maintenance page.
+     * Set the HTTP status code for the maintenance page.
      *
      * @param int $iMaintenanceTime Time site will be down for (in seconds).
      */
-    public static function setMaintenanceCodes($iMaintenanceTime)
+    public static function setMaintenanceCode($iMaintenanceTime)
     {
         header(static::getProtocol() . ' 503 Service Temporarily Unavailable');
         header('Retry-After: ' . $iMaintenanceTime);
