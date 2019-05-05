@@ -106,11 +106,7 @@ class LoginFormProcess extends Form implements LoginableForm
                 // Store the admin ID for 2FA
                 $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iId);
 
-                Header::redirect(
-                    Uri::get(
-                        'two-factor-auth', 'main', 'verificationcode', PH7_ADMIN_MOD
-                    )
-                );
+                $this->redirectToTwoFactorAuth();
             } else {
                 (new AdminCore)->setAuth($oAdminData, $this->oAdminModel, $this->session, $oSecurityModel);
 
@@ -138,5 +134,17 @@ class LoginFormProcess extends Form implements LoginableForm
     public function enableCaptcha()
     {
         $this->session->set('captcha_admin_enabled', 1);
+    }
+
+    private function redirectToTwoFactorAuth()
+    {
+        Header::redirect(
+            Uri::get(
+                'two-factor-auth',
+                'main',
+                'verificationcode',
+                PH7_ADMIN_MOD
+            )
+        );
     }
 }
