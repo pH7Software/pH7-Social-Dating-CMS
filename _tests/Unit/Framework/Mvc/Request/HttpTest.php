@@ -36,25 +36,25 @@ class HttpTest extends PHPUnit_Framework_TestCase
     {
         $_GET['id'] = 123;
 
-        $sActual = $this->oHttpRequest->getExists('id', 'string');
+        $bActual = $this->oHttpRequest->getExists('id', 'string');
 
-        $this->assertFalse($sActual);
+        $this->assertFalse($bActual);
     }
 
     public function testGetExistsWithValidType()
     {
         $_GET['id'] = 0;
 
-        $sActual = $this->oHttpRequest->getExists('id', 'int');
+        $bActual = $this->oHttpRequest->getExists('id', 'int');
 
-        $this->assertTrue($sActual);
+        $this->assertTrue($bActual);
     }
 
     public function testGetNotExists()
     {
-        $sActual = $this->oHttpRequest->getExists('undefined_key');
+        $bActual = $this->oHttpRequest->getExists('undefined_key');
 
-        $this->assertFalse($sActual);
+        $this->assertFalse($bActual);
     }
 
     public function testGetExistsWithSeveralKeys()
@@ -62,9 +62,9 @@ class HttpTest extends PHPUnit_Framework_TestCase
         $_GET['key1'] = 'blabla';
         $_GET['key2'] = 'blabla';
 
-        $sActual = $this->oHttpRequest->getExists(['key1', 'key2']);
+        $bActual = $this->oHttpRequest->getExists(['key1', 'key2']);
 
-        $this->assertTrue($sActual);
+        $this->assertTrue($bActual);
     }
 
     public function testGetRequestWithGets()
@@ -90,25 +90,25 @@ class HttpTest extends PHPUnit_Framework_TestCase
     {
         $_POST['id'] = 123;
 
-        $sActual = $this->oHttpRequest->postExists('id', 'string');
+        $bActual = $this->oHttpRequest->postExists('id', 'string');
 
-        $this->assertFalse($sActual);
+        $this->assertFalse($bActual);
     }
 
     public function testPostExistsWithValidType()
     {
         $_POST['id'] = 0;
 
-        $sActual = $this->oHttpRequest->postExists('id', 'int');
+        $bActual = $this->oHttpRequest->postExists('id', 'int');
 
-        $this->assertTrue($sActual);
+        $this->assertTrue($bActual);
     }
 
     public function testPostNotExists()
     {
-        $sActual = $this->oHttpRequest->postExists('undefined_key');
+        $bActual = $this->oHttpRequest->postExists('undefined_key');
 
-        $this->assertFalse($sActual);
+        $this->assertFalse($bActual);
     }
 
     public function testPostExistsWithSeveralKeys()
@@ -116,9 +116,9 @@ class HttpTest extends PHPUnit_Framework_TestCase
         $_POST['key1'] = 'blabla';
         $_POST['key2'] = 'blabla';
 
-        $sActual = $this->oHttpRequest->postExists(['key1', 'key2']);
+        $bActual = $this->oHttpRequest->postExists(['key1', 'key2']);
 
-        $this->assertTrue($sActual);
+        $this->assertTrue($bActual);
     }
 
     public function testPostRequestWithGets()
