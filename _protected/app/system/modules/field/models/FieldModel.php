@@ -185,7 +185,7 @@ class FieldModel extends Model
     private function getSqlDefault()
     {
         $sSql = ' DEFAULT ';
-        $sSql .= (isset($this->sDefVal)) ? Db::getInstance()->quote($this->sDefVal) : 'NULL';
+        $sSql .= isset($this->sDefVal) ? Db::getInstance()->quote($this->sDefVal) : 'NULL';
 
         return $sSql;
     }
