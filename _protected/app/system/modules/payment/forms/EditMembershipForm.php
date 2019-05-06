@@ -65,7 +65,10 @@ class EditMembershipForm
                 new \PFBC\Element\Select(
                     $sLabel,
                     'perms[' . $sKey . ']',
-                    [1 => t('Yes'), 0 => t('No')],
+                    [
+                        1 => t('Yes'),
+                        0 => t('No')
+                    ],
                     ['value' => $sVal]
                 )
             );
@@ -99,8 +102,14 @@ class EditMembershipForm
             new \PFBC\Element\Radio(
                 t('Status:'),
                 'enable',
-                [1 => t('Enabled'), 0 => t('Disabled')],
-                ['value' => $oMembership->enable, 'required' => 1]
+                [
+                    1 => t('Enabled'),
+                    0 => t('Disabled')
+                ],
+                [
+                    'value' => $oMembership->enable,
+                    'required' => 1
+                ]
             )
         );
         $oForm->addElement(new \PFBC\Element\Button(t('Update')));
