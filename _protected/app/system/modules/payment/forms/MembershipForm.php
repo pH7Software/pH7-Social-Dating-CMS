@@ -35,7 +35,7 @@ class MembershipForm
                 'name',
                 [
                     'required' => 1,
-                    'validation' => new \PFBC\Validation\Str(2, 60)
+                    'validation' => new \PFBC\Validation\Str(2, 64)
                 ]
             )
         );
