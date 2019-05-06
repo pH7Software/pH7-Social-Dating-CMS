@@ -72,6 +72,7 @@ class MembershipForm
                 [
                     'description' => t('Currency: %0%. 0 = Free. To change the currency, please <a href="%1%">go to settings</a>.', Config::getInstance()->values['module.setting']['currency_code'], Uri::get('payment', 'admin', 'config')),
                     'step' => '0.01',
+                    'min' => 0,
                     'required' => 1
                 ]
             )
