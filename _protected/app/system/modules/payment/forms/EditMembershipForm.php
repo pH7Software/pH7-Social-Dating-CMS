@@ -69,7 +69,9 @@ class EditMembershipForm
                         1 => t('Yes'),
                         0 => t('No')
                     ],
-                    ['value' => $sVal]
+                    [
+                        'value' => $sVal
+                    ]
                 )
             );
         }

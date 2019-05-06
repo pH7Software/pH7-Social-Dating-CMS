@@ -58,8 +58,13 @@ class MembershipForm
                 new \PFBC\Element\Select(
                     $sLabel,
                     'perms[' . $sKey . ']',
-                    [1 => t('Yes'), 0 => t('No')],
-                    ['value' => $sVal]
+                    [
+                        1 => t('Yes'),
+                        0 => t('No')
+                    ],
+                    [
+                        'value' => $sVal
+                    ]
                 )
             );
         }
