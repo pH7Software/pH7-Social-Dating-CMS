@@ -11,11 +11,11 @@ namespace PH7;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Url\Header;
 
-class LoginForm
+class LoginForm implements Authenticable
 {
     public static function display()
     {
-        self::clearCurrentSessions();
+        static::clearCurrentSessions();
 
         if (isset($_POST['submit_admin_login'])) {
             if (\PFBC\Form::isValid($_POST['submit_admin_login'])) {
@@ -33,7 +33,7 @@ class LoginForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Your Username:'), 'username', ['required' => 1]));
         $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', ['required' => 1]));
 
-        if (self::isCaptchaEligible()) {
+        if (static::isCaptchaEligible()) {
             $oForm->addElement(
                 new \PFBC\Element\CCaptcha(
                     t('Captcha'),
@@ -54,19 +54,17 @@ class LoginForm
     }
 
     /**
-     * @return bool
+     * {@inheritDoc}
      */
-    private static function isCaptchaEligible()
+    public static function isCaptchaEligible()
     {
         return (new Session)->exists('captcha_admin_enabled');
     }
 
     /**
-     * Remove the session if the admin is logged in as "user" or "affiliate".
-     *
-     * @return void
+     * {@inheritDoc}
      */
-    private static function clearCurrentSessions()
+    public static function clearCurrentSessions()
     {
         if (UserCore::auth() || AffiliateCore::auth()) {
             (new Session)->destroy();

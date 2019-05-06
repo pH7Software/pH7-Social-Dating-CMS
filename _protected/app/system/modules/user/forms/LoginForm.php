@@ -11,13 +11,13 @@ namespace PH7;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Url\Header;
 
-class LoginForm
+class LoginForm implements Authenticable
 {
     const CAPTCHA_NUMBER_ATTEMPTS = 3;
 
     public static function display()
     {
-        self::clearCurrentSessions();
+        static::clearCurrentSessions();
 
         if (isset($_POST['submit_login_user'])) {
             if (\PFBC\Form::isValid($_POST['submit_login_user'])) {
@@ -36,7 +36,7 @@ class LoginForm
         $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', ['required' => 1]));
         $oForm->addElement(new \PFBC\Element\Checkbox('', RememberMeCore::CHECKBOX_FIELD_NAME, [1 => t('Stay signed in')]));
 
-        if (self::isCaptchaEligible()) {
+        if (static::isCaptchaEligible()) {
             $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha'), 'captcha', ['id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:')]));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }
@@ -47,19 +47,17 @@ class LoginForm
     }
 
     /**
-     * @return bool
+     * {@inheritDoc}
      */
-    private static function isCaptchaEligible()
+    public static function isCaptchaEligible()
     {
         return (new Session)->get('captcha_user_enabled') > self::CAPTCHA_NUMBER_ATTEMPTS;
     }
 
     /**
-     * Remove the session if the user is logged on as "affiliate" or "administrator".
-     *
-     * @reutrn void
+     * {@inheritDoc}
      */
-    private static function clearCurrentSessions()
+    public static function clearCurrentSessions()
     {
         if (AffiliateCore::auth() || AdminCore::auth()) {
             (new Session)->destroy();
