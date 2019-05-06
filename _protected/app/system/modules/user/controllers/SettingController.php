@@ -176,10 +176,9 @@ class SettingController extends Controller
     private function getWallpaper()
     {
         $sBackground = (new UserModel)->getBackground($this->iProfileId, 1);
+        $sBgFullPath = PH7_URL_DATA_SYS_MOD . 'user/background/img/' . $this->sUsername . PH7_SH . $sBackground;
 
-        if (!empty($sBackground)) {
-            $sBgFullPath = PH7_URL_DATA_SYS_MOD . 'user/background/img/' . $this->sUsername . PH7_SH . $sBackground;
-        } else {
+        if (empty($sBackground)) {
             $sBgFullPath = PH7_URL_TPL . PH7_TPL_NAME . PH7_SH . PH7_IMG . 'icon/' . UserDesignCore::NONE_IMG_FILENAME;
         }
 
@@ -203,10 +202,10 @@ class SettingController extends Controller
      */
     private function getProfileId()
     {
+        $iId = $this->session->get('member_id');
+
         if ($this->bAdminLogged && $this->httpRequest->getExists('profile_id')) {
             $iId = $this->httpRequest->get('profile_id');
-        } else {
-            $iId = $this->session->get('member_id');
         }
 
         return (int)$iId;
