@@ -89,7 +89,7 @@ class EditMembershipForm
         );
         $oForm->addElement(
             new \PFBC\Element\Number(
-                t('Expiration Days:'),
+                t('Duration (expiration days):'),
                 'expiration_days',
                 [
                     'description' => t('0 = Unlimited'),

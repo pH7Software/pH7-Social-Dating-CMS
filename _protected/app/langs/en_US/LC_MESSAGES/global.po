@@ -7326,7 +7326,7 @@ msgstr ""
 
 #: _protected/app/system/modules/payment/forms/EditMembershipForm.php:89
 #: _protected/app/system/modules/payment/forms/MembershipForm.php:63
-msgid "Expiration Days:"
+msgid "Duration (expiration days):"
 msgstr ""
 
 #: _protected/app/system/modules/payment/forms/EditMembershipForm.php:92
