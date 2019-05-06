@@ -94,6 +94,7 @@ class EditMembershipForm
                 [
                     'description' => t('0 = Unlimited'),
                     'value' => $oMembership->expirationDays,
+                    'min' => 0,
                     'required' => 1
                 ]
             )

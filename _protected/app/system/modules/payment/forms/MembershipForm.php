@@ -80,15 +80,25 @@ class MembershipForm
             new \PFBC\Element\Number(
                 t('Expiration Days:'),
                 'expiration_days',
-                ['description' => t('0 = Unlimited'), 'required' => 1]
+                [
+                    'description' => t('0 = Unlimited'),
+                    'min' => 0,
+                    'required' => 1
+                ]
             )
         );
         $oForm->addElement(
             new \PFBC\Element\Radio(
                 t('Status:'),
                 'enable',
-                [1 => t('Enabled'), 0 => t('Disabled')],
-                ['value' => 1, 'required' => 1]
+                [
+                    1 => t('Enabled'),
+                    0 => t('Disabled')
+                ],
+                [
+                    'value' => 1,
+                    'required' => 1
+                ]
             )
         );
         $oForm->addElement(new \PFBC\Element\Button(t('Add')));
