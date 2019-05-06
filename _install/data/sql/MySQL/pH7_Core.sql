@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS ph7_memberships (
   description varchar(191) NOT NULL,
   permissions text NOT NULL,
   price decimal(10,2) unsigned NOT NULL,
-  expirationDays tinyint(2) unsigned NOT NULL,
+  expirationDays smallint(3) unsigned NOT NULL,
   enable enum('1','0') DEFAULT '1',
   PRIMARY KEY (groupId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
