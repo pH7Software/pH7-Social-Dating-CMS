@@ -304,7 +304,10 @@ class Http extends \PH7\Framework\Http\Http
      */
     public function currentUrl()
     {
-        return PH7_URL_PROT . PH7_DOMAIN . $this->getUri();
+        return htmlspecialchars(
+            PH7_URL_PROT . PH7_DOMAIN . $this->getUri(),
+            ENT_QUOTES
+        );
     }
 
     /**
