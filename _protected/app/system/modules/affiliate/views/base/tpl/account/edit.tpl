@@ -1,6 +1,14 @@
 <ol id="toc">
-    <li><a href="#general"><span>{lang 'General Info'}</span></a></li>
-    <li><a href="#bank"><span>{lang 'Bank Info'}</span></a></li>
+    <li>
+        <a href="#general">
+            <span>{lang 'General Info'}</span>
+        </a>
+    </li>
+    <li>
+        <a href="#bank">
+            <span>{lang 'Bank Info'}</span>
+        </a>
+    </li>
 </ol>
 
 <div class="content" id="general">

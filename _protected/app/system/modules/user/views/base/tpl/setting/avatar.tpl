@@ -13,6 +13,10 @@
     </p>
 
     {if $is_webcam_enabled} {* Check if the module is enabled *}
-        <p class="s_tMarg bold"><a href="{{ $design->url('webcam','webcam','picture') }}">{lang 'Want to take a photo of yourself directly with your webcam?'}</a></p>
+        <p class="s_tMarg bold">
+            <a href="{{ $design->url('webcam','webcam','picture') }}">
+                {lang 'Want to take a photo of yourself directly with your webcam?'}
+            </a>
+        </p>
     {/if}
 </div>
