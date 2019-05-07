@@ -70,11 +70,11 @@ class ValidateSiteCore
             return false;
         }
 
-        if ($this->shouldUserBeRedirected()) {
-            $this->redirectUserToDonationBox();
+        if ($this->shouldBeRedirected()) {
+            $this->redirectToDonationBox();
         }
 
-        return $this->shouldUserSeeDialog();
+        return $this->shouldSeeDialog();
     }
 
     public function injectJsSuggestionBox(Design $oDesign)
@@ -91,7 +91,7 @@ class ValidateSiteCore
      *
      * @return bool
      */
-    private function shouldUserBeRedirected()
+    private function shouldBeRedirected()
     {
         return $this->isNotValidated() && $this->hasPageNotBeenSeenYet() &&
             ($this->isSoftwareNoticeHidden() || $this->removeTime(self::VALIDATE_FORM_PAGE_DELAY) >= $this->iSiteCreationDate);
@@ -100,14 +100,14 @@ class ValidateSiteCore
     /**
      * @return bool
      */
-    private function shouldUserSeeDialog()
+    private function shouldSeeDialog()
     {
         $sTime = self::VALIDATE_FORM_POPUP_DELAYS[array_rand(self::VALIDATE_FORM_POPUP_DELAYS)];
 
         return !$this->oValidateSiteModel->is() && $this->removeTime($sTime) >= $this->iSiteCreationDate;
     }
 
-    private function redirectUserToDonationBox()
+    private function redirectToDonationBox()
     {
         Header::redirect(
             Uri::get(
