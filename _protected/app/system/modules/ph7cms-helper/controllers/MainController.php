@@ -24,14 +24,14 @@ class MainController extends Controller
 
     const VIEW_OPTIONS = [
         'donationbox',
+        'upsetbox',
         'reviewbox',
         'githubbox',
         'stargithubbox',
         'forkgithubbox',
         'followgithubbox',
         'seemebox',
-        'reviewboxrecall',
-        'upsetbox'
+        'reviewboxrecall'
     ];
 
     const DONATION_AMOUNTS = [
@@ -136,7 +136,7 @@ class MainController extends Controller
      */
     private function doesSuggestionBoxIsDonation($sBoxType)
     {
-        return $sBoxType === self::VIEW_OPTIONS[0];
+        return $sBoxType === self::VIEW_OPTIONS[0] || $sBoxType === self::VIEW_OPTIONS[1];
     }
 
     /**
