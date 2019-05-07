@@ -25,8 +25,12 @@
 
     <p class="center">
         {lang}Will You Be Nice Today...?{/lang}<br />
-        <span class="bold">{lang}And make your website better with regular updates.{/lang}</span><br />
-        <span class="underline">{lang}Be like the 81% of users who contribute to the software on a regular basis 🙏{/lang}</span>
+        <span class="bold">
+            {lang}And make your website better with regular updates.{/lang}
+        </span><br />
+        <span class="underline">
+            {lang}Be like the 81% of users who contribute to the software on a regular basis 🙏{/lang}
+        </span>
     </p>
 
     <figure class="center">
