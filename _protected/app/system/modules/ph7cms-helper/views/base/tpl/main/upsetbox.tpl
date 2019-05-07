@@ -39,7 +39,9 @@
 
         <p>
             {if mt_rand(0,1) === 1}
-                <a class="bold" href="{% $config->values['module.setting']['patreon.link'] %}">{lang 'Become a Patron!'}</a>
+                <a class="bold" href="{% $config->values['module.setting']['patreon.link'] %}">
+                    {lang 'Become a Patron!'}
+                </a>
             {else}
                 {{ $patreon_btns = ['become-patreon.en.png', 'support-patreon.en.png'] }}
                 {{ $patreon_btn = $patreon_btns[mt_rand(0,1)] }}
