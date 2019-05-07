@@ -109,12 +109,14 @@ class ValidateSiteCore
 
     private function redirectToDonationBox()
     {
+        $aBoxes = ['donationbox', 'upsetbox'];
+
         Header::redirect(
             Uri::get(
                 'ph7cms-helper',
                 'main',
                 'suggestionbox',
-                '?box=donationbox'
+                '?box=' . $aBoxes[array_rand($aBoxes)]
             )
         );
     }
