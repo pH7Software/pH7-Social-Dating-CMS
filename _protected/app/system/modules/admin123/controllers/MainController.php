@@ -39,7 +39,6 @@ class MainController extends Controller
         $this->view->is_news_feed = (bool)DbConfig::getSetting('isSoftwareNewsFeed');
         $this->view->software_blog_url = self::SOFTWARE_BLOG_URL;
         $this->view->show_get_started_section = $this->isWebsiteNew();
-        $this->view->patreon_url = Kernel::PATREON_URL;
         $this->view->tweet_msg_url = TweetSharing::getMessage();
 
         $this->checkUpdates();

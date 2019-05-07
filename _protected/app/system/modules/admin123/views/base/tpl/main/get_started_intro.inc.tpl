@@ -54,8 +54,8 @@
             </li>
 
             <li>
-                <a class="underline" href="{patreon_url}" target="_blank" rel="noopener noreferrer">
-                    {lang 'Become a Patron TODAY'}
+                <a class="underline" href="{{ $design->url('ph7cms-helper', 'main', 'suggestionbox', '?box=upsetbox') }}">
+                    {lang 'Contribute to the software'}
                 </a> 🚀
             </li>
 
