@@ -14279,7 +14279,7 @@ msgid ""
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/ph7cms-helper_c718c7a0c6017242b5287b948f02581d/base/main/donationbox.cpl.php:19
-msgid "We believe in you 👀"
+msgid "👀 We believe in you!"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/picture_10d1588a50ebee22e4a7c126111489e2/base/main/albums.cpl.php:19
