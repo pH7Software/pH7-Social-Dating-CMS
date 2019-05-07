@@ -11,14 +11,14 @@
 
         <p class="s_bMarg">
             {if mt_rand(0,1) === 1} {* gives random boolean *}
-                <a class="bold" href="{% $config->values['module.setting']['patreon.link'] %}">
+                <a class="bold" href="{% $config->values['module.setting']['patreon.link'] %}" rel="noreferrer">
                     {lang 'Become a Patron!'}
                 </a>
             {else}
                 {{ $patreon_btns = ['become-patreon.en.png', 'support-patreon.en.png'] }}
                 {{ $patreon_btn = $patreon_btns[mt_rand(0,1)] }}
 
-                <a href="{% $config->values['module.setting']['patreon.link'] %}">
+                <a href="{% $config->values['module.setting']['patreon.link'] %}" rel="noreferrer">
                     <img class="img-rounded" src="{url_tpl_mod_img}{patreon_btn}" alt="Patreon" />
                 </a>
             {/if}
