@@ -4,7 +4,7 @@
 
         <form action="{form_action}" method="post">
             {form_body}
-            <input type="image" name="submit" src="{url_tpl_mod_img}paypal-donate.en.png" alt="Donate" />
+            <input type="image" name="submit" src="{url_tpl_mod_img}paypal-donate.en.png" alt="{lang 'Donate'}" />
         </form>
 
         <p>{lang '~OR~'}</p>
@@ -36,7 +36,7 @@
     </p>
 
     <figure class="center">
-        <img src="{url_tpl_mod_img}eye.svg" alt="Staring Eye" />
+        <img src="{url_tpl_mod_img}eye.svg" alt="{lang 'Staring Eye'}" />
         <figcaption>
             <em>{lang '👀 We believe in you!'}</em>
         </figcaption>

@@ -54,7 +54,7 @@
 
         <form action="{form_action}" method="post">
             {form_body}
-            <input type="image" name="submit" src="{url_tpl_mod_img}paypal-donate.en.png" alt="Contribute" />
+            <input type="image" name="submit" src="{url_tpl_mod_img}paypal-donate.en.png" alt="{lang 'Contribute'}" />
         </form>
     </div>
 </div>
