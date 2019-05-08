@@ -4,7 +4,7 @@
  * @desc             Define functions (and helpers).
  *                   Predefined functions can save considerable resources and speeds up the code with respect to functions in variables assigned through the object's template engine (PH7Tpl).
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl / Predefined
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.

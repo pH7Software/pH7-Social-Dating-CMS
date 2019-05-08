@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.

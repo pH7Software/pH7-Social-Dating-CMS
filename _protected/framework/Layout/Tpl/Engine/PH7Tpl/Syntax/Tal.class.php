@@ -3,7 +3,7 @@
  * @title            Template Attribute Language (TAL) syntax for pH7TPl template engine.
  * @desc             This alternative pH7Tpl syntax is a sort of Template Attribute Language.
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl / Syntax
  * @copyright        (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
