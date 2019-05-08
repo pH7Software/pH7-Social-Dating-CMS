@@ -30,7 +30,7 @@
         <p>
             {lang '...if you want to help me making the software (and so, your website), the best on the market.'}<br />
             {lang 'And impress the big sharks out there.'}<br />
-            {lang 'Once you made a donation, I will ship faster and better to you new features and changes to the softeare.'}
+            {lang 'Once you made a donation, I will ship faster and better to you new features and changes to the software.'}
         </p>
     </div>
 
