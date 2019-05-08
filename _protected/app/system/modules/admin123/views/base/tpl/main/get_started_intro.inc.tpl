@@ -54,7 +54,9 @@
             </li>
 
             <li>
-                <a class="underline" href="{{ $design->url('ph7cms-helper', 'main', 'suggestionbox', '?box=upsetbox') }}">
+                {{ $boxes = ['donationbox', 'upsetbox'] }}
+                {{ $box = $boxes[mt_rand(0,1)] }}
+                <a class="underline" href="{{ $design->url('ph7cms-helper', 'main', 'suggestionbox', '?box='.$box) }}">
                     {lang 'Contribute to the software'}
                 </a> 🚀
             </li>
