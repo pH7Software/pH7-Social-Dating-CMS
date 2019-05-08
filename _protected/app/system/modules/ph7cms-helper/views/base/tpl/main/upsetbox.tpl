@@ -31,7 +31,7 @@
             {lang 'And impress the big sharks out there'}<br />
             {lang 'would you be kind to make a contribution and be part of this amazing project?'}
         </p>
-        <p>
+        <p class="s_tMarg">
             {lang 'Once you made a donation, I will ship faster and better to you new features and changes to the software 🚀'}
         </p>
     </div>
