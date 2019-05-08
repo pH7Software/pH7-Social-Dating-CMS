@@ -3,7 +3,7 @@
  * @title            PH7 Template Engine
  * @desc             Template Engine with Compiler and Cache for pH7 CMS!
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
  * @copyright        (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
