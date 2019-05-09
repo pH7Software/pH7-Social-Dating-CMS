@@ -65,8 +65,10 @@ CSS;
             echo '<div class="pfbc-label">';
             if (!empty($label)) {
                 echo '<label for="', $id, '">';
-                if ($element->isRequired())
+
+                if ($element->isRequired()) {
                     echo '<strong>*</strong> ';
+                }
                 echo $label, '</label>';
             }
             if (!empty($description)) {
