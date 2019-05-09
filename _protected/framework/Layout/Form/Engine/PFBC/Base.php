@@ -25,8 +25,9 @@ abstract class Base
             case-insensitively.*/
             $available = get_class_methods($class);
             $method_reference = [];
-            foreach ($available as $method)
+            foreach ($available as $method) {
                 $method_reference[strtolower($method)] = $method;
+            }
 
             foreach ($properties as $property => $value) {
                 $property = strtolower($property);

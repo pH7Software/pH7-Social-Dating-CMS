@@ -297,6 +297,11 @@ class Form extends Base
         return $this->widthSuffix;
     }
 
+    /**
+     * @param bool $returnHTML
+     *
+     * @return false|string
+     */
     public function render($returnHTML = false)
     {
         $this->view->setForm($this);
