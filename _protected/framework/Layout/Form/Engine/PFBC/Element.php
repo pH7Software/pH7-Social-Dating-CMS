@@ -107,9 +107,9 @@ abstract class Element extends Base
 
     public function setWidth($width)
     {
-        if (substr($width, -2) == 'px') {
+        if (substr($width, -2) === 'px') {
             $width = substr($width, 0, -2);
-        } elseif (substr($width, -1) == '%') {
+        } elseif (substr($width, -1) === '%') {
             $width = substr($width, 0, -1);
         }
 
@@ -130,7 +130,7 @@ abstract class Element extends Base
         if (!empty($this->validation)) {
             if (!empty($this->label)) {
                 $element = $this->label;
-                if (substr($element, -1) == ":") {
+                if (substr($element, -1) === ':') {
                     $element = substr($element, 0, -1);
                 }
             } else {
@@ -166,16 +166,18 @@ abstract class Element extends Base
     public function jQueryOptions()
     {
         if (!empty($this->jQueryOptions)) {
-            $options = "";
+            $options = '';
             foreach ($this->jQueryOptions as $option => $value) {
-                if (!empty($options))
+                if (!empty($options)) {
                     $options .= ', ';
+                }
                 $options .= $option . ': ';
                 /*When javascript needs to be applied as a jQuery option's value, no quotes are needed.*/
-                if (is_string($value) && substr($value, 0, 3) == 'js:')
+                if (is_string($value) && substr($value, 0, 3) === 'js:') {
                     $options .= substr($value, 3);
-                else
+                } else {
                     $options .= var_export($value, true);
+                }
             }
             echo '{ ', $options, ' }';
         }

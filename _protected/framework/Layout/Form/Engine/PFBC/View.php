@@ -36,7 +36,7 @@ abstract class View extends Base
         $id = $this->form->getId();
 
         /*For ease-of-use, default styles are applied to form elements.*/
-        if (!in_array('style', $this->form->getPrevent())) {
+        if (!in_array('style', $this->form->getPrevent(), true)) {
             echo <<<CSS
 #$id .pfbc-label label{font-weight:bold}
 #$id em{font-size:.9em;color:#888}
