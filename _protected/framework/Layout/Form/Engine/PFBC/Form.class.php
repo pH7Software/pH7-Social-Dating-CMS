@@ -224,14 +224,16 @@ class Form extends Base
         $element->setForm($this);
         //If the element doesn't have a specified id, a generic identifier is applied.
         $id = $element->getID();
-        if (empty($id))
+        if (empty($id)) {
             $element->setID($this->attributes['id'] . '-element-' . sizeof($this->elements));
+        }
         $this->elements[] = $element;
 
         /*For ease-of-use, the form tag's encytype attribute is automatically set if the File element
         class is added.*/
-        if ($element instanceof Element\File)
+        if ($element instanceof Element\File) {
             $this->attributes['enctype'] = 'multipart/form-data';
+        }
     }
 
     public function getAjax()
