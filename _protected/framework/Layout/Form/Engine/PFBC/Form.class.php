@@ -6,7 +6,6 @@
 namespace PFBC;
 
 use PH7\Framework\Layout\Html\Design;
-use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 /*This project's namespace structure is leveraged to autoload requested classes at runtime.*/
 function load($class)
@@ -419,12 +418,6 @@ class Form extends Base
         }
         echo '});';
 
-        // Don't want to focus the first form field on the homepage
-        if ($this->isFormFocusNotOnHomepage()) {
-            // Use jQuery to set the focus of the form's initial element
-            echo 'jQuery("#', $id, ' :input:visible:enabled:first").focus();';
-        }
-
         $this->view->jQueryDocumentReady();
         foreach ($this->elements as $element) {
             $element->jQueryDocumentReady();
@@ -545,14 +538,5 @@ JS;
     private function isNotJQueryUiButtons()
     {
         return !in_array('jQueryUIButtons', $this->prevent, true);
-    }
-
-    /**
-     * @return bool
-     */
-    private function isFormFocusNotOnHomepage()
-    {
-        return ((new HttpRequest)->currentUrl() !== PH7_URL_ROOT) &&
-            !in_array('focus', $this->prevent, true);
     }
 }
