@@ -16,6 +16,9 @@ abstract class Validation extends Base
     /** @var string */
     protected $message;
 
+    /**
+     * @param string $message
+     */
     public function __construct($message = '')
     {
         $this->oValidate = new Validate;
@@ -30,6 +33,11 @@ abstract class Validation extends Base
         return $this->message;
     }
 
+    /**
+     * @param array|string|bool|null $value
+     *
+     * @return bool
+     */
     public function isNotApplicable($value)
     {
         return ($value === null || is_array($value) || $value === '');
