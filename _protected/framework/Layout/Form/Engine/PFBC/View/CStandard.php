@@ -1,7 +1,6 @@
 <?php
 /**
- * We made this code.
- * By pH7.
+ * By Pierre-Henry Soria <https://ph7.me>
  */
 
 namespace PFBC\View;
@@ -15,7 +14,7 @@ class CStandard extends \PFBC\View
         $this->form->getError()->render();
 
         $elements = $this->form->getElements();
-        $elementSize = sizeof($elements);
+        $elementSize = count($elements);
         $elementCount = 0;
 
         for ($e = 0; $e < $elementSize; ++$e) {

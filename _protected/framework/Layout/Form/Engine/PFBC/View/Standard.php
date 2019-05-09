@@ -1,4 +1,8 @@
 <?php
+/**
+ * Changes made in this code from original PFBC's version.
+ * By Pierre-Henry Soria <https://ph7.me>
+ */
 
 namespace PFBC\View;
 

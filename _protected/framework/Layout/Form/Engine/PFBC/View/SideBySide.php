@@ -1,4 +1,8 @@
 <?php
+/**
+ * Changes made in this code from original PFBC's version.
+ * By Pierre-Henry Soria <https://ph7.me>
+ */
 
 namespace PFBC\View;
 
@@ -12,9 +16,9 @@ class SideBySide extends \PFBC\View
     public function __construct($labelWidth, array $properties = null)
     {
         if (!empty($properties)) {
-            $properties["labelWidth"] = $labelWidth;
+            $properties['labelWidth'] = $labelWidth;
         } else {
-            $properties = ["labelWidth" => $labelWidth];
+            $properties = ['labelWidth' => $labelWidth];
         }
 
         parent::__construct($properties);
@@ -58,10 +62,11 @@ class SideBySide extends \PFBC\View
         $width = $this->form->getWidth();
         $widthSuffix = $this->form->getWidthSuffix();
 
-        if ($widthSuffix == "px")
+        if ($widthSuffix === 'px') {
             $elementWidth = $width - $this->labelWidth - $this->labelPaddingRight;
-        else
+        } else {
             $elementWidth = 100 - $this->labelWidth - $this->labelPaddingRight;
+        }
 
         \PFBC\View::renderCSS();
         echo <<<CSS
@@ -76,12 +81,13 @@ CSS;
         if (!empty($this->labelRightAlign))
             echo '#', $id, ' .pfbc-label { text-align: right; }';
 
-        if (empty($this->labelPaddingTop) && !in_array("style", $this->form->getPrevent()))
-            $this->labelPaddingTop = ".75em";
+        if (empty($this->labelPaddingTop) && !in_array('style', $this->form->getPrevent(), true)) {
+            $this->labelPaddingTop = '.75em';
+        }
 
         if (!empty($this->labelPaddingTop)) {
             if (is_numeric($this->labelPaddingTop))
-                $this->labelPaddingTop .= "px";
+                $this->labelPaddingTop .= 'px';
             echo '#', $id, ' .pfbc-label { padding-top: ', $this->labelPaddingTop, '; }';
         }
 
@@ -94,7 +100,7 @@ CSS;
             if (!$element instanceof \PFBC\Element\Hidden && !$element instanceof \PFBC\Element\HTMLExternal && !$element instanceof \PFBC\Element\HTMLExternal) {
                 if (!empty($elementWidth)) {
                     echo '#', $id, ' #pfbc-element-', $elementCount, ' { width: ', $elementWidth, $widthSuffix, '; }';
-                    if ($widthSuffix == "px") {
+                    if ($widthSuffix === 'px') {
                         $elementWidth = $elementWidth - $this->labelWidth - $this->labelPaddingRight;
                         echo '#', $id, ' #pfbc-element-', $elementCount, ' .pfbc-textbox, #', $id, ' #pfbc-element-', $elementCount, ' .pfbc-textarea, #', $id, ' #pfbc-element-', $elementCount, ' .pfbc-select, #', $id, ' #pfbc-element-', $elementCount, ' .pfbc-right { width: ', $elementWidth, $widthSuffix, '; }';
                     }

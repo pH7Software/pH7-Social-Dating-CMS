@@ -1,7 +1,7 @@
 <?php
 /**
  * Many changes have been made in this file.
- * By Pierre-Henry SORIA.
+ * By Pierre-Henry Soria <https://ph7.me>
  */
 
 namespace PFBC;

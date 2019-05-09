@@ -1,4 +1,8 @@
 <?php
+/**
+ * Changes made in this code from original PFBC's version.
+ * By Pierre-Henry Soria <https://ph7.me>
+ */
 
 namespace PFBC\View;
 
@@ -47,12 +51,15 @@ class Horizontal extends \PFBC\View
 #$id .pfbc-label { float: left; margin-right: .25em; }
 CSS;
 
-        if (empty($this->labelPaddingTop) && !in_array("style", $this->form->getPrevent()))
-            $this->labelPaddingTop = ".75em";
+        if (empty($this->labelPaddingTop) && !in_array('style', $this->form->getPrevent(), true)) {
+            $this->labelPaddingTop = '.75em';
+        }
 
         if (!empty($this->labelPaddingTop)) {
-            if (is_numeric($this->labelPaddingTop))
-                $this->labelPaddingTop .= "px";
+            if (is_numeric($this->labelPaddingTop)) {
+                $this->labelPaddingTop .= 'px';
+            }
+
             echo '#', $id, ' .pfbc-label { padding-top: ', $this->labelPaddingTop, '; }';
         }
     }

@@ -51,7 +51,7 @@ JS;
         foreach ($this->options as $value => $text) {
             $value = $this->getOptionValue($value);
             echo '<div class="pfbc-checkbox"><table cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top"><input id="', $this->attributes["id"], "-", $count, '"', $this->getAttributes(['id', 'value', 'checked']), ' value="', $this->filter($value), '"';
-            if (in_array($value, $this->attributes['value'])) {
+            if (in_array($value, $this->attributes['value'], true)) {
                 echo ' checked="checked"';
             }
 

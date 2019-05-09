@@ -54,13 +54,13 @@ JS;
         foreach ($this->options as $value => $text) {
             $value = $this->getOptionValue($value);
             echo '<div class="pfbc-checkbox"><table cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top"><input id="', $this->attributes['id'], "-", $count, '"', $this->getAttributes(["id", "value", "checked", "name", "onclick"]), ' value="', $this->filter($value), '"';
-            if (in_array($value, $this->attributes['value'])) {
+            if (in_array($value, $this->attributes['value'], true)) {
                 echo ' checked="checked"';
             }
 
             echo ' onclick="updateChecksort(this, \'', $this->filter($text), '\');"/></td><td><label for="', $this->attributes['id'], "-", $count, '">', $text, '</label></td></tr></table></div>';
 
-            if (in_array($value, $this->attributes['value'])) {
+            if (in_array($value, $this->attributes['value'], true)) {
                 $existing .= '<li id="' . $this->attributes['id'] . "-sort-" . $count . '" class="ui-state-default"><input type="hidden" name="' . $this->attributes['name'] . '" value="' . $value . '"/>' . $text . '</li>';
             }
 

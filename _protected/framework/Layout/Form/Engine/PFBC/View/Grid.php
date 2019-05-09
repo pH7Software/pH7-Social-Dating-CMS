@@ -1,4 +1,8 @@
 <?php
+/**
+ * Changes made in this code from original PFBC's version.
+ * By Pierre-Henry Soria <https://ph7.me>
+ */
 
 namespace PFBC\View;
 
@@ -11,10 +15,11 @@ class Grid extends \PFBC\View
 
     public function __construct(array $grid, array $properties = null)
     {
-        if (!empty($properties))
-            $properties["grid"] = $grid;
-        else
-            $properties = ["grid" => $grid];
+        if (!empty($properties)) {
+            $properties['grid'] = $grid;
+        } else {
+            $properties = ['grid' => $grid];
+        }
 
         parent::__construct($properties);
     }
@@ -66,8 +71,9 @@ JS;
                 if (!empty($this->grid[$gridIndex])) {
                     if ($gridCount == 0)
                         echo '<div class="pfbc-grid pfbc-grid-' . $this->grid[$gridIndex] . '">';
-                } else
+                } else {
                     echo '<div class="pfbc-grid pfbc-grid-1">';
+                }
 
                 echo '<div id="pfbc-element-', $gridElementCount, '" class="pfbc-element">';
                 $this->renderLabel($element);
@@ -83,8 +89,10 @@ JS;
                         ++$gridIndex;
                     } else
                         ++$gridCount;
-                } else
+                } else {
                     echo '</div>';
+                }
+
                 echo $element->getPostHTML();
                 ++$gridElementCount;
             }
@@ -126,25 +134,21 @@ CSS;
             $gridRevised = [];
             foreach ($this->grid as $grid) {
                 $gridRemaining = $this->gridIncludedElements - array_sum($gridRevised);
-                if (!empty($gridRemaining))
-                    if ($gridRemaining >= $grid)
-                        $gridRevised[] = $grid;
-                    else
-                        $gridRevised[] = $gridRemaining;
-                else
+                if (!empty($gridRemaining)) {
+                    $gridRevised[] = ($gridRemaining >= $grid) ? $grid : $gridRemaining;
+                } else {
                     break;
+                }
             }
             $this->grid = $gridRevised;
         }
 
-        $gridSize = sizeof($this->grid);
+        $gridSize = count($this->grid);
         $elementWidths = [];
+
         for ($g = 0; $g < $gridSize; ++$g) {
             $gridSum = array_sum(array_slice($this->grid, 0, $g));
-            if ($widthSuffix == "px")
-                $gridRemainingWidth = $width;
-            else
-                $gridRemainingWidth = 100;
+            $gridRemainingWidth = $widthSuffix === 'px' ? $width : 100;
             $gridRemainingElements = $this->grid[$g];
             for ($e = $gridSum; $e < ($gridSum + $this->grid[$g]); ++$e) {
                 $elementWidths[$e] = $gridElements[$e]->getWidth();
@@ -167,5 +171,4 @@ CSS;
             }
         }
     }
-
 }

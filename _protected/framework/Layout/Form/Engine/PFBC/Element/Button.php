@@ -49,7 +49,7 @@ class Button extends Element
     {
         /*Unless explicitly prevented, jQueryUI's button widget functionality is applied to
         the each Button element.*/
-        if (!in_array('jQueryUIButtons', $this->form->getPrevent())) {
+        if (!in_array('jQueryUIButtons', $this->form->getPrevent(), true)) {
             echo 'jQuery("#', $this->attributes['id'], '").button(';
             /*Any of the jQueryUI framework icons can be added to your buttons via the icon
             property.  See http://jqueryui.com/themeroller/ for a complete list of available
