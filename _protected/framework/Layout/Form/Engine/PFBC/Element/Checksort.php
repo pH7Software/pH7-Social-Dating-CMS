@@ -1,6 +1,6 @@
 <?php
 /**
- * File has been modified by Pierre-Henry Soria
+ * File modified by Pierre-Henry Soria <hi@ph7.me>
  */
 
 namespace PFBC\Element;
@@ -49,7 +49,7 @@ JS;
         }
 
         $count = 0;
-        $existing = "";
+        $existing = '';
         echo '<div id="', $this->attributes['id'], '"><div class="pfbc-checkboxes">';
         foreach ($this->options as $value => $text) {
             $value = $this->getOptionValue($value);
