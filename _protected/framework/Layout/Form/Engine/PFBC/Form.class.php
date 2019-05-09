@@ -51,7 +51,7 @@ class Form extends Base
             'method' => 'post'
         ]);
 
-        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
             $this->prefix = 'https';
         }
 
@@ -74,7 +74,7 @@ class Form extends Base
         /*The form's instance is recovered (unserialized) from the session.*/
         $form = self::recover($id);
         if (!empty($form)) {
-            if ($_SERVER['REQUEST_METHOD'] == 'POST')
+            if ($_SERVER['REQUEST_METHOD'] === 'POST')
                 $data = $_POST;
             else
                 $data = $_GET;
@@ -88,7 +88,7 @@ class Form extends Base
             if (!empty($form->elements)) {
                 foreach ($form->elements as $element) {
                     $name = $element->getName();
-                    if (substr($name, -2) == '[]') {
+                    if (substr($name, -2) === '[]') {
                         $name = substr($name, 0, -2);
                     }
 
@@ -356,7 +356,7 @@ class Form extends Base
             $name = $element->getName();
             if (isset($this->values[$name])) {
                 $element->setValue($this->values[$name]);
-            } elseif (substr($name, -2) == '[]' &&
+            } elseif (substr($name, -2) === '[]' &&
                 isset($this->values[substr($name, 0, -2)])
             ) {
                 $element->setValue($this->values[substr($name, 0, -2)]);
@@ -371,10 +371,10 @@ class Form extends Base
     public function formatWidthProperties()
     {
         if (!empty($this->width)) {
-            if (substr($this->width, -1) == '%') {
+            if (substr($this->width, -1) === '%') {
                 $this->width = substr($this->width, 0, -1);
                 $this->widthSuffix = '%';
-            } elseif (substr($this->width, -2) == 'px') {
+            } elseif (substr($this->width, -2) === 'px') {
                 $this->width = substr($this->width, 0, -2);
             }
         } else {

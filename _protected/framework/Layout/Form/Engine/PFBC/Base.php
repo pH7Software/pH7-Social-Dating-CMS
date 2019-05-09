@@ -31,7 +31,7 @@ abstract class Base
             foreach ($properties as $property => $value) {
                 $property = strtolower($property);
                 /*The attributes property cannot be set directly.*/
-                if ($property != 'attributes') {
+                if ($property !== 'attributes') {
                     /*If the appropriate class has a "set" method for the property provided, then
                     it is called instead or setting the property directly.*/
                     if (isset($method_reference['set' . $property])) {
