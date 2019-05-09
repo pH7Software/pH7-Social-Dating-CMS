@@ -87,8 +87,9 @@ JS;
                         echo '</div>';
                         $gridCount = 0;
                         ++$gridIndex;
-                    } else
+                    } else {
                         ++$gridCount;
+                    }
                 } else {
                     echo '</div>';
                 }

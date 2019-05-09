@@ -26,12 +26,13 @@ class Horizontal extends \PFBC\View
         for ($e = 0; $e < $elementSize; ++$e) {
             $element = $elements[$e];
 
-            if ($element instanceof \PFBC\Element\Hidden || $element instanceof \PFBC\Element\HTMLExternal)
+            if ($element instanceof \PFBC\Element\Hidden || $element instanceof \PFBC\Element\HTMLExternal) {
                 $element->render();
-            else {
+            } else {
                 echo '<div class="pfbc-element">', $element->getPreHTML();
-                if (!$element instanceof \PFBC\Element\Button)
+                if (!$element instanceof \PFBC\Element\Button) {
                     $this->renderLabel($element);
+                }
                 $element->render();
                 echo $element->getPostHTML(), '</div>';
             }
