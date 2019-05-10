@@ -8,13 +8,6 @@
 
 namespace PH7;
 
-use PH7\Framework\Layout\Html\Design;
-use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
-use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\Framework\Mvc\Router\Uri;
-use PH7\Framework\Payment\Gateway\Api\PayPal;
-use PH7\Framework\Url\Header;
-
 class GeneratorController extends Controller
 {
     public function addMember()

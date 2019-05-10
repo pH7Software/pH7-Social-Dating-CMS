@@ -13,7 +13,6 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Core\Kernel;
 use PH7\Framework\Geo\Misc\Country;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Security\Validate\Validate;

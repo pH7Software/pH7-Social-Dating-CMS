@@ -16,7 +16,6 @@ use DOMDocument;
 use DOMElement;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\File\IOException;
-use PH7\Framework\Mvc\Controller\Controller;
 use PH7\Framework\Parse\Url;
 use PH7\Framework\Pattern\Statik;
 

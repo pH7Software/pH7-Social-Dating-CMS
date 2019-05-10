@@ -8,11 +8,9 @@
 
 namespace PH7;
 
-use PH7\Framework\Core\Kernel;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Version;
 use PH7\Framework\Url\Header;
-use PH7\Framework\Url\Url;
 
 class InfoController extends Controller
 {
