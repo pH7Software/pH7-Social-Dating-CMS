@@ -4,10 +4,10 @@
 PH7 / Framework / Security / DDoS
 
 ===== Author =====
-Soria Pierre-Henry
+Pierre-Henry Soria
 
 ===== Email =====
-ph7software {AT} gmail {DOT} com
+hello {AT} ph7cms {DOT} com
 
 ===== Links Documentation =====
 http://en.wikipedia.org/wiki/Denial-of-service_attack
