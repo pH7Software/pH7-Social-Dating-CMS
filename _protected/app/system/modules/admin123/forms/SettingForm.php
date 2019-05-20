@@ -154,7 +154,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Require photo to be uploaded:'), 'require_registration_avatar', ['1' => t('Yes'), '0' => t('No')], ['description' => t('Require Members to upload a profile photo during sign up.') . '<br /><small>' . t("Doesn't guarantee that all users will have a profile photo, because users can still close the tab without completely finishing the registration process.") . '</small>', 'value' => DbConfig::getSetting('requireRegistrationAvatar'), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Default Membership Group:'), 'default_membership_group_id', self::getMembershipGroups(), ['value' => (int)DbConfig::getSetting('defaultMembershipGroupId'), 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Select(t('Default Membership Group:'), 'default_membership_group_id', self::getMembershipGroups(), ['value' => DbConfig::getSetting('defaultMembershipGroupId'), 'required' => 1]));
 
 
         /********** Picture and Video **********/
