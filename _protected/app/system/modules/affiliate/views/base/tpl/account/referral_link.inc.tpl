@@ -2,4 +2,4 @@
     {lang 'Your Unique Referral Link'}
 </h3>
 
-{{ ShareUrlCoreForm::display($url, null, false) }}
+{{ ShareUrlCoreForm::display($url_referral_link, null, false) }}
