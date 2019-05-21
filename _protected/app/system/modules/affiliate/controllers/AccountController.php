@@ -23,7 +23,12 @@ class AccountController extends Controller
         $this->view->currency_code = $this->config->values['module.setting']['currency_code'];
         $this->view->min_withdrawal = $this->config->values['module.setting']['min_withdrawal_money'];
         $this->view->amount = (new AffiliateModel)->getAmount($this->session->get('affiliate_id'));
-        $this->view->username = $this->session->get('affiliate_username');
+        $this->view->url = Uri::get(
+            'affiliate',
+            'router',
+            'refer',
+            $this->session->get('affiliate_username')
+        );
         $this->view->contact_url = Uri::get('contact', 'contact', 'index');
 
         $this->output();
