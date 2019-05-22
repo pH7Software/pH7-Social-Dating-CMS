@@ -8,6 +8,8 @@
 
 namespace PH7\Framework\Layout\Tpl\Engine;
 
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception as TplException;
+
 interface Templatable
 {
     /**
@@ -45,6 +47,8 @@ interface Templatable
      * @param string $sEmailAddress
      *
      * @return string
+     *
+     * @throws TplException
      */
     public function parseMail($sMailTplFile, $sEmailAddress);
 }
