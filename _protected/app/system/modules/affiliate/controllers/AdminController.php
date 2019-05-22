@@ -65,7 +65,12 @@ class AdminController extends Controller
     public function banner()
     {
         Header::redirect(
-            Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', 'affiliate')
+            Uri::get(
+                PH7_ADMIN_MOD,
+                'setting',
+                'ads',
+                'affiliate'
+            )
         );
     }
 
