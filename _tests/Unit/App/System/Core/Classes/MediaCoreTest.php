@@ -17,7 +17,7 @@ class MediaCoreTest extends PHPUnit_Framework_TestCase
 {
     public function testTitle()
     {
-        // Title taken from my blog post http://01script.com/transformer-histoire-en-legende/
+        // Title taken from my blog post https://01script.com/transformer-histoire-en-legende/
         $sTitle = '   Comment Transformer UNE IDÉE en LÉGENDE –  ';
         $sExpected = 'Comment Transformer UNE IDÉE en LÉGENDE –';
         $this->assertSame($sExpected, MediaCore::cleanTitle($sTitle));

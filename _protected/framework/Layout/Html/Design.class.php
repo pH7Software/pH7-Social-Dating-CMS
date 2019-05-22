@@ -420,24 +420,24 @@ class Design
         // Default links, set to English
         $aSites = [
             ['title' => 'Free Dating CMS', 'link' => Kernel::SOFTWARE_GIT_REPO_URL],
-            ['title' => 'Flirt Hot Girls', 'link' => 'http://01script.com/p/dooba'],
+            ['title' => 'Flirt Hot Girls', 'link' => 'https://01script.com/p/dooba'],
             ['title' => 'Romance Dating', 'link' => 'http://love-rencontre.wekiss.net'],
-            ['title' => 'Date your Friends', 'link' => 'http://01script.com/p/dooba']
+            ['title' => 'Date your Friends', 'link' => 'https://01script.com/p/dooba']
         ];
 
         if ($sLangCode === 'en-ie') {
-            $aSites[] = ['title' => 'FREE Flirt in Dublin City', 'link' => 'http://01script.com/p/dooba'];
-            $aSites[] = ['title' => 'Date Dubs in the Town!', 'link' => 'http://01script.com/p/dooba'];
+            $aSites[] = ['title' => 'FREE Flirt in Dublin City', 'link' => 'https://01script.com/p/dooba'];
+            $aSites[] = ['title' => 'Date Dubs in the Town!', 'link' => 'https://01script.com/p/dooba'];
         } elseif ($sLangCode === 'en-gb') {
-            $aSites[] = ['title' => 'Date Brits near from YOU', 'link' => 'http://01script.com/p/dooba'];
-            $aSites[] = ['title' => 'Date Londoners', 'link' => 'http://01script.com/p/dooba'];
+            $aSites[] = ['title' => 'Date Brits near from YOU', 'link' => 'https://01script.com/p/dooba'];
+            $aSites[] = ['title' => 'Date Londoners', 'link' => 'https://01script.com/p/dooba'];
         } elseif (strpos($sLangCode, 'fr') !== false) {
             /**
              * Reset the array since we don't want to mix it up with different langs (default one is English, not French)
              */
             $aSites = [
-                ['title' => 'Rencontre d\'un soir', 'link' => 'http://01script.com/p/dooba'],
-                ['title' => 'Flirt Coquin', 'link' => 'http://01script.com/p/dooba'],
+                ['title' => 'Rencontre d\'un soir', 'link' => 'https://01script.com/p/dooba'],
+                ['title' => 'Flirt Coquin', 'link' => 'https://01script.com/p/dooba'],
                 ['title' => 'Rencontre amoureuse', 'link' => 'http://love-rencontre.wekiss.net']
             ];
         }
