@@ -14,7 +14,6 @@ namespace PH7\Framework\Security;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Util\Various;
@@ -96,7 +95,7 @@ final class Security
      *
      * @return string The password hashed.
      *
-     * @throws PH7InvalidArgumentException
+     * @throws InvalidAlgorithmException
      */
     public static function hashCookie($sPassword, $iLength = self::COOKIE_HASH_LENGTH)
     {
@@ -131,12 +130,12 @@ final class Security
      *
      * @return string
      *
-     * @throws PH7InvalidArgumentException
+     * @throws InvalidAlgorithmException
      */
     public static function userHash($sVal, $iLength, $sAlgo = self::WHIRLPOOL_ALGORITHM)
     {
         if ($sAlgo !== self::WHIRLPOOL_ALGORITHM && $sAlgo !== self::SHA512_ALGORITHM) {
-            throw new PH7InvalidArgumentException('Wrong algorithm! Please choose between "whirlpool" or "sha512"');
+            throw new InvalidAlgorithmException('Wrong algorithm! Please choose between "whirlpool" or "sha512"');
         }
 
         $sSalt = self::PREFIX_SALT . Ip::get() . self::SUFFIX_SALT . (new Browser)->getUserAgent();
