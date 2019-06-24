@@ -209,20 +209,30 @@ class JoinForm
     private static function generateBirthDateField(\PFBC\Form $oForm)
     {
         if (DbConfig::getSetting('isUserAgeRangeField')) {
-            $iMinAge = DbConfig::getSetting('minAgeRegistration');
-            $iMaxAge = DbConfig::getSetting('maxAgeRegistration');
-            $iDefRegistrationAge = $iMinAge + 16;
-
-            $oForm->addElement(
-                new \PFBC\Element\Range(
-                    t('How Old Are You?'),
-                    'age',
-                    ['value' => $iDefRegistrationAge, 'min' => $iMinAge, 'max' => $iMaxAge, 'required' => 1]
-                )
-            );
+            self::getRangeBirthDateFieldForm($oForm);
         } else {
             $oForm->addElement(new \PFBC\Element\Date(t('Your Date of Birth'), 'birth_date', ['id' => 'birth_date', 'description' => t('Please specify your date of birth using the calendar.'), 'onblur' => 'CValid(this.value, this.id)', 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1]));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
         }
+    }
+
+    private static function getRangeBirthDateFieldForm(\PFBC\Form $oForm)
+    {
+        $iMinAge = DbConfig::getSetting('minAgeRegistration');
+        $iMaxAge = DbConfig::getSetting('maxAgeRegistration');
+        $iDefRegistrationAge = $iMinAge + 16;
+
+        $oForm->addElement(
+            new \PFBC\Element\Range(
+                t('How Old Are You?'),
+                'age',
+                [
+                    'value' => $iDefRegistrationAge,
+                    'min' => $iMinAge,
+                    'max' => $iMaxAge,
+                    'required' => 1
+                ]
+            )
+        );
     }
 }
