@@ -30,6 +30,7 @@ class MainController extends Controller
 
         $this->oDataModel = new DataCoreModel;
 
+        // Enable caching for all pages of this module
         $this->enableStaticTplCache();
     }
 
@@ -134,11 +135,6 @@ class MainController extends Controller
         }
     }
 
-    /**
-     * Enable caching for all pages of this module.
-     *
-     * @return void
-     */
     private function enableStaticTplCache()
     {
         $this->view->setCaching(true);
