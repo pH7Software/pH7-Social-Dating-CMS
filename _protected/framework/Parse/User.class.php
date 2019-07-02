@@ -53,7 +53,9 @@ class User
     private static function getAtUsernames($sContents)
     {
         if (self::areProfileFound($sContents, $aMatches)) {
-            $aMatches[1] = array_unique($aMatches[1]); // Delete duplicate usernames.
+            // Delete duplicate usernames
+            $aMatches[1] = array_unique($aMatches[1]);
+
             foreach ($aMatches[1] as $sUsername) {
                 if ((new ExistsCoreModel)->username($sUsername)) {
                     yield $sUsername; // "yield" thanks to PHP 5.5
