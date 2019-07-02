@@ -92,12 +92,13 @@ class EditAdminBlogForm
             $oForm->addElement(new \PFBC\Element\Textbox(t('Language of your article:'), 'lang_id', ['value' => $oPost->langId, 'description' => t('e.g., "en", "fr", "es", "jp"'), 'pattern' => '[a-z]{2}', 'validation' => new \PFBC\Validation\Str(2, 2), 'required' => 1]));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Slogan:'), 'slogan', ['value' => $oPost->slogan, 'validation' => new \PFBC\Validation\Str(2, 190)]));
             $oForm->addElement(new \PFBC\Element\File(t('Thumbnail:'), 'thumb', ['accept' => 'image/*']));
-
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<p><br /><img src="' . Blog::getThumb($oPost->blogId) . '" alt="' . t('Thumbnail') . '" title="' . t('The current thumbnail of your post.') . '" class="avatar" /></p>'));
 
-            if (is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'blog' . PH7_SH . PH7_IMG . $iBlogId . PH7_DS . Blog::THUMBNAIL_FILENAME)) {
+            if (self::doesThumbnailExist($iBlogId)) {
+                $sRemoveThumbUrl = Uri::get('blog', 'admin', 'removethumb', $oPost->blogId . ',' . (new Token)->url(), false);
+
                 $oForm->addElement(new \PFBC\Element\HTMLExternal(
-                    '<a href="' . Uri::get('blog', 'admin', 'removethumb', $oPost->blogId . ',' . (new Token)->url(), false) . '">' . t('Remove this thumbnail?') . '</a>'
+                    '<a href="' . $sRemoveThumbUrl . '">' . t('Remove this thumbnail?') . '</a>'
                 ));
             }
 
@@ -115,5 +116,17 @@ class EditAdminBlogForm
         } else {
             echo '<p class="center bold">' . t('Post Not Found!') . '</p>';
         }
+    }
+
+    /**
+     * @param int $iBlogId
+     *
+     * @return bool
+     */
+    private static function doesThumbnailExist($iBlogId)
+    {
+        $sThumbnailPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'blog' . PH7_SH . PH7_IMG . $iBlogId . PH7_DS . Blog::THUMBNAIL_FILENAME;
+
+        return is_file($sThumbnailPath);
     }
 }
