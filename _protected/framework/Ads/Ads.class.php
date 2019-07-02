@@ -33,7 +33,7 @@ class Ads
      */
     public static function output(stdClass $oData, HttpRequest $oHttpRequest)
     {
-        // Stat Advertisement Shows
+        // Update ad's statistic shows
         Statistic::setView($oData->adsId, DbTableName::AD);
 
         if (self::hasAdBeenClicked($oData, $oHttpRequest)) {
