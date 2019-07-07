@@ -26,7 +26,7 @@ final class MetaData
             'slogan' => 'Online Dating Community with Chat Rooms',
             'promoText' => 'You\'re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Dating Sites like that with <a href="https://ph7cms.com">pH7CMS</a>. It is Professional, Free, Open Source, ...',
             'metaRobots' => 'index, follow, all',
-            'metaAuthor' => 'Pierre-Henry Soria',
+            'metaAuthor' => 'Pierre-Henry Soria (pH7CMS.com)',
             'metaCopyright' => 'Pierre-Henry Soria. All Rights Reserved.',
             'metaRating' => 'general',
             'metaDistribution' => 'global',
