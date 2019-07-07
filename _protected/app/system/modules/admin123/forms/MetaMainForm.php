@@ -35,21 +35,7 @@ class MetaMainForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_meta', 'form_meta'));
         $oForm->addElement(new \PFBC\Element\Token('admin_meta'));
 
-        // Generate the list of languages
-        $aLangs = (new File)->getDirList(PH7_PATH_APP_LANG);
-        $iTotalLangs = count($aLangs);
-        if ($iTotalLangs > 1) {
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="center divShow">'));
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<h3 class="underline"><a href="#showDiv_listLang" title="' . t('Click here to show/hide the languages') . '">' . t('Change language for the Meta Tags') . '</a></h3>'));
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<ul class="hidden" id="showDiv_listLang">'));
-
-            for ($iLangIndex = 0; $iLangIndex < $iTotalLangs; $iLangIndex++) {
-                $sAbbrLang = Lang::getIsoCode($aLangs[$iLangIndex]);
-                $oForm->addElement(new \PFBC\Element\HTMLExternal('<li>' . ($iLangIndex + 1) . ') ' . '<a class="bold" href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'metamain', $aLangs[$iLangIndex], false) . '" title="' . t($sAbbrLang) . '">' . t($sAbbrLang) . ' (' . $aLangs[$iLangIndex] . ')</a></li>'));
-            }
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('</ul></div>'));
-        }
-        unset($aLangs);
+        self::generateChangeLangField($oForm);
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Language:'), 'lang_id', ['disabled' => 'disabled', 'value' => $oMeta->langId]));
 
@@ -80,5 +66,30 @@ class MetaMainForm
         $oForm->addElement(new \PFBC\Element\Button);
 
         $oForm->render();
+    }
+
+    /**
+     * Generate the list of languages to switch to another language for meta tags configuration.
+     *
+     * @param \PFBC\Form $oForm
+     *
+     * @return void
+     */
+    private static function generateChangeLangField(\PFBC\Form $oForm)
+    {
+        $aLangs = (new File)->getDirList(PH7_PATH_APP_LANG);
+        $iTotalLangs = count($aLangs);
+        if ($iTotalLangs > 1) {
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="center divShow">'));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<h3 class="underline"><a href="#showDiv_listLang" title="' . t('Click here to show/hide the languages') . '">' . t('Change language for the Meta Tags') . '</a></h3>'));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<ul class="hidden" id="showDiv_listLang">'));
+
+            for ($iLangIndex = 0; $iLangIndex < $iTotalLangs; $iLangIndex++) {
+                $sAbbrLang = Lang::getIsoCode($aLangs[$iLangIndex]);
+                $oForm->addElement(new \PFBC\Element\HTMLExternal('<li>' . ($iLangIndex + 1) . ') ' . '<a class="bold" href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'metamain', $aLangs[$iLangIndex], false) . '" title="' . t($sAbbrLang) . '">' . t($sAbbrLang) . ' (' . $aLangs[$iLangIndex] . ')</a></li>'));
+            }
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('</ul></div>'));
+        }
+        unset($aLangs);
     }
 }
