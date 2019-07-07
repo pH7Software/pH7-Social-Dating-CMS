@@ -69,7 +69,7 @@ class MetaMainForm
     }
 
     /**
-     * Generate the list of languages to switch to another language for meta tags configuration.
+     * Generate the list of languages that allows admins to switch to another language on the meta tags form.
      *
      * @param \PFBC\Form $oForm
      *
