@@ -35,7 +35,7 @@ class MetaMainForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_meta', 'form_meta'));
         $oForm->addElement(new \PFBC\Element\Token('admin_meta'));
 
-        self::generateChangeLangField($oForm);
+        self::generateLanguageSwitchField($oForm);
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Language:'), 'lang_id', ['disabled' => 'disabled', 'value' => $oMeta->langId]));
 
@@ -75,7 +75,7 @@ class MetaMainForm
      *
      * @return void
      */
-    private static function generateChangeLangField(\PFBC\Form $oForm)
+    private static function generateLanguageSwitchField(\PFBC\Form $oForm)
     {
         $aLangs = (new File)->getDirList(PH7_PATH_APP_LANG);
         $iTotalLangs = count($aLangs);
