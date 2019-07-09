@@ -3,9 +3,11 @@
 3. Once you finished the installation, your admin panel URL will be: http://YOUR-PH7CMS-SITE.com/admin123/
 
 
---- Softaculous Installation ---
-If your web host offers Softaculous with pH7CMS enabled, you can install pH7CMS in one-click.
+--- Softaculous/Fantastico Installation ---
+If your web host offers Softaculous/Fantastico with pH7CMS enabled, you can install pH7CMS in one-click.
 Generally, through cPanel -> Softaculous icon -> search for "pH7CMS".
+
+For "Fantastico", search it under "pH7SocialDatingCMS" name in the "Portals/CMS" category.
 
 
 --- Good Hosting ---
