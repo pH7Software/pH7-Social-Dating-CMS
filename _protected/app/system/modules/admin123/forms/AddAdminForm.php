@@ -13,6 +13,8 @@ use PH7\Framework\Url\Header;
 
 class AddAdminForm
 {
+    const DEFAULT_TIMEZONE = '-6';
+
     public static function display()
     {
         if (isset($_POST['submit_add_admin'])) {
@@ -43,7 +45,17 @@ class AddAdminForm
                 ['value' => GenderTypeUserCore::MALE, 'required' => 1]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Timezone('Time Zone:', 'time_zone', ['description' => t('Knowing the time zone, the other administrators may know when they can contact you easily.'), 'value' => '-6', 'required' => 1]));
+        $oForm->addElement(
+            new \PFBC\Element\Timezone(
+                'Time Zone:',
+                'time_zone',
+                [
+                    'description' => t('Knowing the time zone, the other administrators may know when they can contact you easily.'),
+                    'value' => self::DEFAULT_TIMEZONE,
+                    'required' => 1
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
