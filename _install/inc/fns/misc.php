@@ -26,13 +26,15 @@ function get_dir_list($sDir)
 
     if ($rHandle = opendir($sDir)) {
         while (false !== ($sFile = readdir($rHandle))) {
-            if ($sFile != '.' && $sFile != '..' && is_dir($sDir . '/' . $sFile))
+            if ($sFile !== '.' && $sFile !== '..' && is_dir($sDir . '/' . $sFile)) {
                 $aDirList[] = $sFile;
+            }
         }
         closedir($rHandle);
         asort($aDirList);
         reset($aDirList);
     }
+
     return $aDirList;
 }
 
@@ -61,7 +63,7 @@ function is_directory($sDir)
  */
 function check_ext_start($sDir)
 {
-    return (!is_windows() && substr($sDir, 0, 1) != '/') ? '/' . $sDir : $sDir;
+    return (!is_windows() && substr($sDir, 0, 1) !== '/') ? '/' . $sDir : $sDir;
 }
 
 /**
@@ -73,7 +75,7 @@ function check_ext_start($sDir)
  */
 function check_ext_end($sDir)
 {
-    return (substr($sDir, -1) != PH7_DS) ? $sDir . PH7_DS : $sDir;
+    return substr($sDir, -1) !== PH7_DS ? $sDir . PH7_DS : $sDir;
 }
 
 /**
@@ -173,9 +175,11 @@ function find($sText, $sWord)
  */
 function filled_out(array $aVars)
 {
-    foreach ($aVars as $sKey => $sVal)
-        if (empty($sKey) || trim($sVal) == '')
+    foreach ($aVars as $sKey => $sVal) {
+        if (empty($sKey) || trim($sVal) === '') {
             return false;
+        }
+    }
     return true;
 }
 
