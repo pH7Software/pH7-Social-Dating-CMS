@@ -483,7 +483,7 @@ function send_mail(array $aParams)
     $sFrontier = "-----=" . md5(mt_rand());
 
     // Removing any HTML tags to get a text format.
-    // If any of our lines are larger than 70 characterse, we return to the new line.
+    // If any of our lines are larger than 70 characters, we return to the new line.
     $sTextBody = wordwrap(strip_tags($aParams['body']), 70);
 
     // HTML format (you can change the layout below).
