@@ -451,7 +451,7 @@ function is_software_installed($sCtrlName, $sAction)
  */
 function check_license($sKey)
 {
-    $sKey = trim(strtolower($sKey));
+    $sKey = strtolower(trim($sKey));
 
     return preg_match('/^ph7-[a-z0-9]{36}$/', $sKey);
 }
