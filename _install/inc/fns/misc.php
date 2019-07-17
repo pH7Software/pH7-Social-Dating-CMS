@@ -322,9 +322,9 @@ function generate_hash($iLength = 80)
 function ffmpeg_path()
 {
     if (is_windows()) {
-        $sPath = (is_file('C:\ffmpeg\bin\ffmpeg.exe')) ? 'C:\ffmpeg\bin\ffmpeg.exe' : 'C:\ffmpeg\ffmpeg.exe';
+        $sPath = is_file('C:\ffmpeg\bin\ffmpeg.exe') ? 'C:\ffmpeg\bin\ffmpeg.exe' : 'C:\ffmpeg\ffmpeg.exe';
     } else {
-        $sPath = (is_file('/usr/local/bin/ffmpeg')) ? '/usr/local/bin/ffmpeg' : '/usr/bin/ffmpeg';
+        $sPath = is_file('/usr/local/bin/ffmpeg') ? '/usr/local/bin/ffmpeg' : '/usr/bin/ffmpeg';
     }
 
     return $sPath;
