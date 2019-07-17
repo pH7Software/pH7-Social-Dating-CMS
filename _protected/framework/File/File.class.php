@@ -207,7 +207,7 @@ class File
 
         if ($rHandle = opendir($sDir)) {
             while (false !== ($sFile = readdir($rHandle))) {
-                if ($sFile != '.' && $sFile != '..' && is_dir($sDir . PH7_DS . $sFile)) {
+                if ($sFile !== '.' && $sFile !== '..' && is_dir($sDir . PH7_DS . $sFile)) {
                     $aDirList[] = $sFile;
                 }
             }
@@ -581,7 +581,7 @@ class File
 
         $iSize = 0;
         while (false !== ($sFile = readdir($rHandle))) {
-            if ($sFile != '.' && $sFile != '..') {
+            if ($sFile !== '.' && $sFile !== '..') {
                 $sFullPath = $sPath . PH7_DS . $sFile;
 
                 if (is_dir($sFullPath)) {
@@ -726,7 +726,7 @@ class File
         }
 
         while (false !== ($sFile = readdir($rHandle))) {
-            if ($sFile != '.' && $sFile != '..') {
+            if ($sFile !== '.' && $sFile !== '..') {
                 if (strpos($sFile, '.') === false) {
                     $this->readFiles($sPath . PH7_DS . $sFile, $mFiles);
                 } else {
@@ -754,7 +754,7 @@ class File
 
         $aRet = []; // TODO: Remove it once yield is used
         while (false !== ($sFolder = readdir($rHandle))) {
-            if ('.' == $sFolder || '..' == $sFolder || !is_dir($sPath . $sFolder)) {
+            if ($sFolder === '.' || $sFolder === '..' || !is_dir($sPath . $sFolder)) {
                 continue;
             }
 
