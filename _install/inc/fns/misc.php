@@ -48,9 +48,12 @@ function get_dir_list($sDir)
 function is_directory($sDir)
 {
     $sPathProtected = check_ext_start(check_ext_end(trim($sDir)));
-    if (is_dir($sPathProtected))
-        if (is_readable($sPathProtected))
+
+    if (is_dir($sPathProtected)) {
+        if (is_readable($sPathProtected)) {
             return true;
+        }
+    }
     return false;
 }
 
@@ -318,10 +321,11 @@ function generate_hash($iLength = 80)
  */
 function ffmpeg_path()
 {
-    if (is_windows())
+    if (is_windows()) {
         $sPath = (is_file('C:\ffmpeg\bin\ffmpeg.exe')) ? 'C:\ffmpeg\bin\ffmpeg.exe' : 'C:\ffmpeg\ffmpeg.exe';
-    else
+    } else {
         $sPath = (is_file('/usr/local/bin/ffmpeg')) ? '/usr/local/bin/ffmpeg' : '/usr/bin/ffmpeg';
+    }
 
     return $sPath;
 }
@@ -333,15 +337,17 @@ function ffmpeg_path()
  */
 function is_url_rewrite()
 {
-    if (!is_file(PH7_ROOT_INSTALL . '.htaccess'))
+    if (!is_file(PH7_ROOT_INSTALL . '.htaccess')) {
         return false;
+    }
 
     // Check if mod_rewrite is installed and is configured to be used via .htaccess
     if (!$bIsRewrite = (strtolower(getenv('HTTP_MOD_REWRITE')) == 'on')) {
         $sOutputMsg = 'mod_rewrite Works!';
 
-        if (!empty($_GET['a']) && $_GET['a'] == 'test_mod_rewrite')
+        if (!empty($_GET['a']) && $_GET['a'] == 'test_mod_rewrite') {
             exit($sOutputMsg);
+        }
 
         $sPage = @file_get_contents(PH7_URL_INSTALL . 'test_mod_rewrite');
 
