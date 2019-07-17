@@ -342,16 +342,16 @@ function is_url_rewrite()
     }
 
     // Check if mod_rewrite is installed and is configured to be used via .htaccess
-    if (!$bIsRewrite = (strtolower(getenv('HTTP_MOD_REWRITE')) == 'on')) {
+    if (!$bIsRewrite = (strtolower(getenv('HTTP_MOD_REWRITE')) === 'on')) {
         $sOutputMsg = 'mod_rewrite Works!';
 
-        if (!empty($_GET['a']) && $_GET['a'] == 'test_mod_rewrite') {
+        if (!empty($_GET['a']) && $_GET['a'] === 'test_mod_rewrite') {
             exit($sOutputMsg);
         }
 
         $sPage = @file_get_contents(PH7_URL_INSTALL . 'test_mod_rewrite');
 
-        $bIsRewrite = ($sPage == $sOutputMsg);
+        $bIsRewrite = ($sPage === $sOutputMsg);
     }
 
     return $bIsRewrite;
