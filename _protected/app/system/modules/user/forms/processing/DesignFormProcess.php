@@ -36,7 +36,12 @@ class DesignFormProcess extends Form implements NudityDetectable
             $this->checkNudityFilter();
         }
 
-        $bWallpaper = (new UserCore)->setBackground($iProfileId, $sUsername, $_FILES['wallpaper']['tmp_name'], $this->iApproved);
+        $bWallpaper = (new UserCore)->setBackground(
+            $iProfileId,
+            $sUsername,
+            $_FILES['wallpaper']['tmp_name'],
+            $this->iApproved
+        );
 
         if (!$bWallpaper) {
             \PFBC\Form::setError('form_design', Form::wrongImgFileTypeMsg());
