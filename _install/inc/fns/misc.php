@@ -350,7 +350,6 @@ function is_url_rewrite()
         }
 
         $sPage = @file_get_contents(PH7_URL_INSTALL . 'test_mod_rewrite');
-
         $bIsRewrite = ($sPage === $sOutputMsg);
     }
 
