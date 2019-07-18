@@ -101,6 +101,7 @@ class Ban
      * Filter words.
      *
      * @param string $sVal
+     * @param bool $bWordReplace
      *
      * @return string
      */
