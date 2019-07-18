@@ -120,6 +120,8 @@ class Ban
      */
     private static function is()
     {
+        self::setCaseInsensitive();
+
         if (self::$bIsEmail) {
             if (self::check(strrchr(self::$sVal, '@'))) {
                 return true;
@@ -164,5 +166,10 @@ class Ban
         $aBans = file(PH7_PATH_APP_CONFIG . static::DIR . self::$sFile);
 
         return in_array($sVal, array_map('trim', $aBans), true);
+    }
+
+    private static function setCaseInsensitive()
+    {
+        self::$sVal = strtolower(self::$sVal);
     }
 }
