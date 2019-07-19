@@ -1,6 +1,6 @@
-# Contact me at hello{{AT}}ph7cms{{D0T}}com if you find that some words should be added or deleted #
-# NOTE: Words are case insensitive #
+# Words are case insensitive #
 # List is from: https://github.com/zacanger/profane-words
+
 2 girls 1 cup
 2g1c
 4r5e

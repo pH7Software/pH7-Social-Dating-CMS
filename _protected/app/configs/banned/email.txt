@@ -1,4 +1,3 @@
-# Contact me at hello{{AT}}ph7cms{{D0T}}com if you find that some email hosts should be added or deleted #
 # Please indicate each the email address or domain name on a new line. You can use a wild card to ban whole domains such as @spam_email.com #
 # This list is from: https://github.com/wesbos/burner-email-providers (MIT license available in this folder)
 @0-mail.com
