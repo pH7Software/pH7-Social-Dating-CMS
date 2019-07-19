@@ -1,5 +1,6 @@
 # Do not delete "admin" in this list, otherwise the default avatar "admin" (AvatarDesignCore, ...), etc.. no longer work #
 admin
+root
 administrator
 administration
 administrateur
