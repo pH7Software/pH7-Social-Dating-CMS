@@ -1,5 +1,5 @@
 # Words are case insensitive #
-# Just write the beginning of a word. e.g. shit will also ban shitass, shithead, shits, ... #
+# Note: If needed, you can just write the beginning of a word. e.g. shit will also ban shitass, shithead, shits, ... #
 fuck
 shit
 asshole
