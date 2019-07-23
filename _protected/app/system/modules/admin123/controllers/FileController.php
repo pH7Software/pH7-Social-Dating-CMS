@@ -79,9 +79,9 @@ class FileController extends Controller
 
     public function banDisplay()
     {
-        $this->sTitle = t('Ban Files');
+        $this->sTitle = t('Banned Files');
 
-        $this->displayAction(PH7_PATH_APP_CONFIG . Ban::DIR, '.txt');
+        $this->displayAction(PH7_PATH_APP_CONFIG . Ban::DIR, Ban::EXT);
         $this->manualTplInclude('protecteddisplay.inc.tpl');
 
         $this->output();
