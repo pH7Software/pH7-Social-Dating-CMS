@@ -12,6 +12,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Service\Suggestion;
@@ -91,7 +92,7 @@ class FileController extends Controller
     {
         $this->sTitle = t('Suggestion Files');
 
-        $this->displayAction(PH7_PATH_APP_CONFIG . Suggestion::DIR, '.txt');
+        $this->displayAction(PH7_PATH_APP_CONFIG . Suggestion::DIR, Suggestion::EXT);
         $this->manualTplInclude('protecteddisplay.inc.tpl');
 
         $this->output();
@@ -102,8 +103,7 @@ class FileController extends Controller
         $this->sTitle = t('Pages');
 
         $this->displayAction(
-            PH7_PATH_SYS_MOD . 'page' . PH7_DS . PH7_VIEWS . PH7_TPL_MOD_NAME,
-            '.tpl'
+            PH7_PATH_SYS_MOD . 'page' . PH7_DS . PH7_VIEWS . PH7_TPL_MOD_NAME, PH7Tpl::TEMPLATE_FILE_EXT
         );
 
         $this->manualTplInclude('protecteddisplay.inc.tpl');
