@@ -20,7 +20,7 @@ class Suggestion
     use Statik;
 
     const DIR = 'suggestions/';
-    const EXT = '.ext';
+    const EXT = '.txt';
     const EMAIL_FILE = 'email.txt';
 
     /** @var string */

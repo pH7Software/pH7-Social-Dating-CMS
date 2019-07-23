@@ -19,7 +19,7 @@ use PH7\Framework\Pattern\Statik;
 class Ban
 {
     const DIR = 'banned/';
-    const EXT = '.ext';
+    const EXT = '.txt';
     const USERNAME_FILE = 'username.txt';
     const EMAIL_FILE = 'email.txt';
     const WORD_FILE = 'word.txt';
