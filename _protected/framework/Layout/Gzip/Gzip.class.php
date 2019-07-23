@@ -416,9 +416,17 @@ class Gzip
             $sImgUrl = PH7_URL_ROOT . $this->sBaseUrl . $aHit[1][$i] . $aHit[2][$i];
 
             if ($this->isDataUriEligible($sImgPath)) {
-                $this->sContents = str_replace($aHit[0][$i], 'url(' . Optimization::dataUri($sImgPath, $this->oFile) . ')', $this->sContents);
+                $this->sContents = str_replace(
+                    $aHit[0][$i],
+                    'url(' . Optimization::dataUri($sImgPath, $this->oFile) . ')',
+                    $this->sContents
+                );
             } else {
-                $this->sContents = str_replace($aHit[0][$i], 'url(' . $sImgUrl . ')', $this->sContents);
+                $this->sContents = str_replace(
+                    $aHit[0][$i],
+                    'url(' . $sImgUrl . ')',
+                    $this->sContents
+                );
             }
         }
     }
