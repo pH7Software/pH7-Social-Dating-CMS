@@ -41,7 +41,7 @@ class FileController extends Controller
 
     public function display($sDir = '')
     {
-        /* Add the stylesheet files for the Elfinder File Manager */
+        /* Add the stylesheet files for the elFinder File Manager */
         $this->design->addCss(PH7_STATIC . 'fileManager/css/', 'elfinder.css,theme.css');
 
         $bIsProtectedDir = $sDir === self::PROTECTED_DIR_NAME;
