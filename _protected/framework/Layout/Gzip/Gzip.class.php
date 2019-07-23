@@ -366,7 +366,7 @@ class Gzip
         /**
          * $getCurrentTplName is used in "variables.inc.php" file
          */
-        $getCurrentTplName = function () use ($sBaseUrl) {
+        $getCurrentTplName = static function () use ($sBaseUrl) {
             $aDirs = explode('/', $sBaseUrl);
             return !empty($aDirs[2]) ? $aDirs[2] : PH7_DEFAULT_THEME;
         };

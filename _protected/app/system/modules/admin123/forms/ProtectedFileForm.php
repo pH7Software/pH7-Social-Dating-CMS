@@ -65,7 +65,7 @@ class ProtectedFileForm
      */
     private static function isLegalPage($sFullPath)
     {
-        $cIsFound = function ($sPageFilename) use ($sFullPath) {
+        $cIsFound = static function ($sPageFilename) use ($sFullPath) {
             return strpos($sFullPath, $sPageFilename) !== false;
         };
 
