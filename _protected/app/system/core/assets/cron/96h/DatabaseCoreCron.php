@@ -66,8 +66,7 @@ class DatabaseCoreCron extends Cron
         // Optimization tables
         $this->optimize();
 
-        echo '<br />' . t('Done!') . '<br />';
-        echo t('The Jobs Cron is working to complete successfully!');
+        echo '<br />' . t('Cron job finished!');
     }
 
     private function stat()

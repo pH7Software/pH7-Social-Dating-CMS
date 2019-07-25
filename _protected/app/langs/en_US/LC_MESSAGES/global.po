@@ -287,11 +287,6 @@ msgstr[1] ""
 msgid "Done!"
 msgstr ""
 
-#: _protected/app/system/core/assets/cron/96h/DatabaseCoreCron.php:70
-#: _protected/app/system/core/assets/cron/96h/GeneralCoreCron.php:28
-msgid "The Jobs Cron is working to complete successfully!"
-msgstr ""
-
 #: _protected/app/system/core/assets/cron/96h/DatabaseCoreCron.php:114
 msgid "Restart Statistics... OK!"
 msgstr ""
