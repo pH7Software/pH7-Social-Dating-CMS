@@ -138,19 +138,19 @@ class BannedCoreCron extends Cron
             $this->aNewIps = [];
         }
 
-        $oInBound = $this->oWebClient->get($sUrl);
+        $oRemoteResource = $this->oWebClient->get($sUrl);
 
         /**
          * Check we get a valid response
          */
-        if ($oInBound->getStatusCode() !== 200) {
+        if ($oRemoteResource->getStatusCode() !== 200) {
             return false;
         }
 
         /**
          * Get the body and detach into a stream
          */
-        $rBannedIps = $oInBound->getBody()->detach();
+        $rBannedIps = $oRemoteResource->getBody()->detach();
 
         /**
          * Process the received IP
