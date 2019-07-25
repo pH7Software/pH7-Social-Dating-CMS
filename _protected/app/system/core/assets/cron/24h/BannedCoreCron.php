@@ -78,6 +78,8 @@ class BannedCoreCron extends Cron
         $this->sIpRegExp = self::regexpIps();
 
         $this->doProcess();
+
+        echo t('Banned IP list updated!');
     }
 
     protected function doProcess()
