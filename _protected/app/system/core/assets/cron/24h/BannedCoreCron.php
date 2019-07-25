@@ -76,9 +76,6 @@ class BannedCoreCron extends Cron
         $this->doProcess();
     }
 
-    /**
-     * Get the job done !
-     */
     protected function doProcess()
     {
         /**
@@ -280,3 +277,6 @@ class BannedCoreCron extends Cron
         return empty($this->aNewIps) || !is_array($this->aNewIps);
     }
 }
+
+// Get the job done!
+new BannedCoreCron;
