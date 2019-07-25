@@ -167,7 +167,7 @@ class BannedCoreCron extends Cron
          */
         while ($sBannedIp = fgets($rBannedIps)) {
             /**
-             * Trim the ip from return carriage and new line then add to the current array
+             * Trim the IP from return carriage and new line, then add to the current array
              */
             $this->aNewIps[] = rtrim($sBannedIp, "\n\r");
         }
@@ -221,6 +221,7 @@ class BannedCoreCron extends Cron
      * Using strict reject octal form (leading zero)
      *
      * @param bool $bStrict
+     *
      * @return string
      */
     public static function regexpIP($bStrict = false)
@@ -254,9 +255,9 @@ class BannedCoreCron extends Cron
     }
 
     /**
-     * Write IPs to banned ip file
+     * Write IPs to the configs/banned/ip.txt file.
      *
-     * @return boolean
+     * @return bool
      */
     private function writeIP()
     {
