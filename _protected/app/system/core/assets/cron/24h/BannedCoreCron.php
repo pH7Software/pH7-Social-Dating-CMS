@@ -136,16 +136,10 @@ class BannedCoreCron extends Cron
             $this->oWebClient = new Client();
         }
 
-        /**
-         * If we don't have a valid array to put address into, we create it.
-         */
         if ($this->invalidNewIp()) {
             $this->aNewIps = [];
         }
 
-        /**
-         * Call the WebClient with the URL
-         */
         $oInBound = $this->oWebClient->get($sUrl);
 
         /**
