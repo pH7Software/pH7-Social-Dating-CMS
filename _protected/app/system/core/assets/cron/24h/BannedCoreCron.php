@@ -14,6 +14,7 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use Exception;
+use GuzzleHttp\Client;
 use PH7\Framework\Error\Logger;
 use PH7\Framework\Security\Ban\Ban;
 
@@ -27,7 +28,7 @@ class BannedCoreCron extends Cron
     /**
      * Web client used to fetch IPs
      *
-     * @var \GuzzleHttp\Client
+     * @var Client
      */
     private $oWebClient;
 
@@ -84,11 +85,7 @@ class BannedCoreCron extends Cron
          * Process each web url we have in the $svcUrl array
          */
         foreach (self::SVC_URLS as $sUrl) {
-            /**
-             * Each url we have for Web Service.
-             */
             try {
-
                 /**
                  * If we don't get true then we have an error
                  */
@@ -136,7 +133,7 @@ class BannedCoreCron extends Cron
     private function callWebService($sUrl)
     {
         if (is_null($this->oWebClient)) {
-            $this->oWebClient = new \GuzzleHttp\Client();
+            $this->oWebClient = new Client();
         }
 
         /**
@@ -236,7 +233,6 @@ class BannedCoreCron extends Cron
             $sIpRegExp .= '(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])/';
         } else {
             /**
-             *
              * Regular Expression representing a valid IPv4 class address
              * We accept leading 0 but they normally imply octal so we shouldn't !!!
              *
