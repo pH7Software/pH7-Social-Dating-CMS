@@ -139,11 +139,12 @@ class BannedCoreCron extends Cron
         /**
          * If we don't have a valid array to put address into, we create it.
          */
-        if (!is_array($this->aNewIps)) {
+        if ($this->invalidNewIp()) {
             $this->aNewIps = [];
         }
+
         /**
-         * Call the oWebClient with the url
+         * Call the WebClient with the URL
          */
         $oInBound = $this->oWebClient->get($sUrl);
 
