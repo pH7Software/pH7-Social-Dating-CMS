@@ -267,7 +267,7 @@ class BannedCoreCron extends Cron
      */
     private function addIp($sIpAddress)
     {
-        $this->file->save(self::BANNED_IP_FILE_PATH, $sIpAddress . "\n", FILE_APPEND);
+        file_put_contents(self::BANNED_IP_FILE_PATH, $sIpAddress . "\n", FILE_APPEND);
     }
 
     /**
