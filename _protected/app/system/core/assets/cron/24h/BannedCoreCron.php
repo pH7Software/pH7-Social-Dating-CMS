@@ -65,7 +65,7 @@ class BannedCoreCron extends Cron
      */
     const SVC_URLS = [
         'https://www.blocklist.de/downloads/export-ips_all.txt',
-        'http://www.badips.com/get/list/ssh/2'
+        'https://www.badips.com/get/list/ssh/2?age=30d'
     ];
 
     public function __construct()
