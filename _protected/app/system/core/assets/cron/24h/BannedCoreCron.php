@@ -24,6 +24,17 @@ use PH7\Framework\Security\Ban\Ban;
 
 class BannedCoreCron extends Cron
 {
+    /**
+     * Contain the URL of the remote services we call to get the list of accurate banned IPs.
+     * Currently filled at instantiation statically, will use config file later
+     *
+     * @var array
+     */
+    const SVC_URLS = [
+        'https://www.blocklist.de/downloads/export-ips_all.txt',
+        'https://www.badips.com/get/list/ssh/2?age=30d'
+    ];
+
     const BANNED_IP_FILE_PATH = PH7_PATH_APP_CONFIG . Ban::DIR . Ban::IP_FILE;
 
     const ERROR_CALLING_WEB_SERVICE_MESSAGE = 'Error calling web service for banned IP URL name: %s';
@@ -56,17 +67,6 @@ class BannedCoreCron extends Cron
      * @var string
      */
     private $sIpRegExp;
-
-    /**
-     * Contain the URL of the remote services we call to get the list of accurate banned IPs.
-     * Currently filled at instantiation statically, will use config file later
-     *
-     * @var array
-     */
-    const SVC_URLS = [
-        'https://www.blocklist.de/downloads/export-ips_all.txt',
-        'https://www.badips.com/get/list/ssh/2?age=30d'
-    ];
 
     public function __construct()
     {
