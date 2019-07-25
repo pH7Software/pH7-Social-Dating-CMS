@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @title            BannedIP Cron Class
  *
@@ -9,6 +8,7 @@
  * @package          PH7 / App / System / Core / Asset / Cron / 24H
  * @version          1.0
  */
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -69,14 +69,14 @@ class BannedCoreCron extends Cron
     public function __construct()
     {
         parent::__construct();
-        
+
         /**
          * Set valid IP regular expression using lazy mode (false)
          *
          * @var \PH7\BannedCoreCron $ipRegExp
          */
         $this->ipRegExp = self::regexpIP();
-        
+
         /**
          * Set the banned IP file name to the same file as used by PH7\Framework\Security\Ban\Ban
          *
@@ -104,17 +104,17 @@ class BannedCoreCron extends Cron
                 /**
                  * If we don't get true then we have an error
                  */
-                if (! $this->callWebService($url)) {
+                if (!$this->callWebService($url)) {
                     (new Logger())->msg('Error calling web service for banned IP url name :' . $url);
                 }
-            /**
-             * We catch exception so we can continue if one service fail
-             */
+                /**
+                 * We catch exception so we can continue if one service fail
+                 */
             } catch (Exception $e) {
                 (new Logger())->msg('Error calling web service for banned IP url name :' . $url);
             }
         }
-        
+
         /**
          * Process the currently banned IP
          */
@@ -123,11 +123,11 @@ class BannedCoreCron extends Cron
          * Merge both IPs and filter out doubles
          */
         $this->processIP();
-        
+
         /**
          * Wrie the new banned IP file
          */
-        if (! $this->writeIP()) {
+        if (!$this->writeIP()) {
             (new Logger())->msg('Error writting new banned IP file');
         }
     }
@@ -142,30 +142,30 @@ class BannedCoreCron extends Cron
         if (is_null($this->webClient)) {
             $this->webClient = new \GuzzleHttp\Client();
         }
-        
+
         /**
          * If we don't have a valid array to put address into, we create it.
          */
-        if (! is_array($this->ipNew)) {
-            $this->ipNew = array();
+        if (!is_array($this->ipNew)) {
+            $this->ipNew = [];
         }
         /**
          * Call the webClient with the url
          */
         $inbound = $this->webClient->get($url);
-        
+
         /**
          * Check we get a valid response
          */
         if ($inbound->getStatusCode() !== '200') {
             return false;
         }
-        
+
         /**
          * Get the body and detach into a stream
          */
         $bannedIPs = $inbound->getBody()->detach();
-        
+
         /**
          * Process the received IP
          */
@@ -187,7 +187,7 @@ class BannedCoreCron extends Cron
          * We fill a temporary array with current adress
          */
         $aBans = file($this->bannedFileName);
-        $this->ipOld = array();
+        $this->ipOld = [];
         foreach ($aBans as $ban) {
             /**
              * Array containing return IP adress
@@ -198,7 +198,7 @@ class BannedCoreCron extends Cron
             /**
              * check if $ip empty in case we processed a text line
              */
-            if (! empty($ips)) {
+            if (!empty($ips)) {
                 /**
                  * Use a foreach loop in case we have more than one IP per line
                  */
@@ -214,7 +214,7 @@ class BannedCoreCron extends Cron
      */
     private function processIP()
     {
-        $newIP = array();
+        $newIP = [];
         $newIP = array_unique(array_merge($this->ipNew, $this->ipOld), SORT_STRING);
         $this->ipNew = $newIP;
     }
@@ -263,13 +263,13 @@ class BannedCoreCron extends Cron
     private function writeIP()
     {
         $outfile = fopen($this->bannedFileName, 'w+');
-        if (empty($this->ipNew) || ! is_array($this->ipNew)) {
+        if (empty($this->ipNew) || !is_array($this->ipNew)) {
             return false;
         }
         foreach ($this->ipNew as $ip) {
-            fwrite($outfile, $ip . "\n" );
-		}
-		fclose ( $outfile );
-		return true;
-	}
+            fwrite($outfile, $ip . "\n");
+        }
+        fclose($outfile);
+        return true;
+    }
 }
