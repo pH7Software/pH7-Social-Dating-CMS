@@ -177,38 +177,35 @@ class BannedCoreCron extends Cron
 
     /**
      * Process existing banned IP file and only keep validating IP addresses.
+     *
+     * @return void
      */
     private function processExistingIP()
     {
         /**
          * We fill a temporary array with current address
          */
-        $aBans = file(self::BANNED_IP_FILE_PATH);
+        $aBannedIps = file(self::BANNED_IP_FILE_PATH);
         $this->aOldIps = [];
 
-        foreach ($aBans as $ban) {
-            /**
-             * Array containing return IP address
-             *
-             * @var array $ips
-             */
-            $ips = preg_grep($this->sIpRegExp, $ban);
-            /**
-             * check if $ip empty in case we processed a text line
-             */
-            if (!empty($ips)) {
+        foreach ($aBannedIps as $sBannedIp) {
+            $aIps = preg_grep($this->sIpRegExp, $sBannedIp);
+
+            if (!empty($aIps)) {
                 /**
                  * Use a foreach loop in case we have more than one IP per line
                  */
-                foreach ($ips as $ip) {
-                    $this->aOldIps[] = $ip;
+                foreach ($aIps as $sIp) {
+                    $this->aOldIps[] = $sIp;
                 }
             }
         }
     }
 
     /**
-     * Read both IPs array, merge and extract only unique one
+     * Read both IPs array, merge and extract only unique one.
+     *
+     * @return void
      */
     private function processIP()
     {
