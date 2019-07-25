@@ -16,6 +16,7 @@ defined('PH7') or exit('Restricted access');
 use Exception;
 use GuzzleHttp\Client;
 use PH7\Framework\Error\Logger;
+use PH7\Framework\File\Permission\Chmod;
 use PH7\Framework\Security\Ban\Ban;
 
 class BannedCoreCron extends Cron
@@ -176,17 +177,14 @@ class BannedCoreCron extends Cron
          */
         $aBannedIps = file(self::BANNED_IP_FILE_PATH);
         $this->aOldIps = [];
+        $aIps = preg_grep($this->sIpRegExp, $aBannedIps);
 
-        foreach ($aBannedIps as $sBannedIp) {
-            $aIps = preg_grep($this->sIpRegExp, $sBannedIp);
-
-            if (!empty($aIps)) {
-                /**
-                 * Use a foreach loop in case we have more than one IP per line
-                 */
-                foreach ($aIps as $sIp) {
-                    $this->aOldIps[] = $sIp;
-                }
+        if (!empty($aIps)) {
+            /**
+             * Use a foreach loop in case we have more than one IP per line
+             */
+            foreach ($aIps as $sIp) {
+                $this->aOldIps[] = $sIp;
             }
         }
     }
@@ -250,6 +248,8 @@ class BannedCoreCron extends Cron
             return false;
         }
 
+        $this->file->chmod(self::BANNED_IP_FILE_PATH, Chmod::MODE_ALL_EXEC);
+
         foreach ($this->aNewIps as $sIp) {
             $this->addIp($sIp);
         }
@@ -266,7 +266,7 @@ class BannedCoreCron extends Cron
      */
     private function addIp($sIpAddress)
     {
-        file_put_contents(self::BANNED_IP_FILE_PATH, $sIpAddress . "\n", FILE_APPEND);
+        $this->file->save(self::BANNED_IP_FILE_PATH, $sIpAddress . "\n", FILE_APPEND);
     }
 
     /**
