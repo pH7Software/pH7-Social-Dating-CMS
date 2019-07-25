@@ -19,41 +19,38 @@ use PH7\Framework\Error\Logger;
 
 class BannedCoreCron extends Cron
 {
+    const BANNED_IP_FILE_PATH = PH7_PATH_APP_CONFIG . Ban::DIR . Ban::IP_FILE;
+
+    const ERROR_CALLING_WEB_SERVICE_MESSAGE = 'Error calling web service for banned IP URL name: %s';
+    const ERROR_ADD_BANNED_IP_MESSAGE = 'Error writing new banned IP file';
 
     /**
      * Web client used to fetch IPs
      *
      * @var \GuzzleHttp\Client
      */
-    private $webClient;
-
-    /**
-     * Banned IP filename
-     *
-     * @var string
-     */
-    private $bannedFileName;
+    private $oWebClient;
 
     /**
      * Contain new blocked IP just fetched
      *
      * @var array
      */
-    private $ipNew;
+    private $aIpNew;
 
     /**
      * Contain existing blocked IP
      *
      * @var array
      */
-    private $ipOld;
+    private $aIpOld;
 
     /**
-     * IP extracting regulat expression
+     * IP extracting regular expression.
      *
      * @var string
      */
-    private $ipRegExp;
+    private $sIpRegExp;
 
     /**
      * Contain the URL of the service we call to get banned IP
@@ -61,7 +58,7 @@ class BannedCoreCron extends Cron
      *
      * @var array
      */
-    const SVC_URL = [
+    const SVC_URLS = [
         'https://www.blocklist.de/downloads/export-ips_all.txt',
         'http://www.badips.com/get/list/ssh/2'
     ];
@@ -73,16 +70,10 @@ class BannedCoreCron extends Cron
         /**
          * Set valid IP regular expression using lazy mode (false)
          *
-         * @var \PH7\BannedCoreCron $ipRegExp
+         * @var \PH7\BannedCoreCron $sIpRegExp
          */
-        $this->ipRegExp = self::regexpIP();
+        $this->sIpRegExp = self::regexpIP();
 
-        /**
-         * Set the banned IP file name to the same file as used by PH7\Framework\Security\Ban\Ban
-         *
-         * @var \PH7\BannedCoreCron $bannedFileName
-         */
-        $this->bannedFileName = PH7_PATH_APP_CONFIG . Ban::DIR . Ban::IP_FILE;
         $this->doProcess();
     }
 
@@ -94,24 +85,28 @@ class BannedCoreCron extends Cron
         /**
          * Process each web url we have in the $svcUrl array
          */
-        foreach ($this->SVC_URL as $url) {
+        foreach (self::SVC_URLS as $sUrl) {
             /**
-             * Each url we have for Web Service
-             *
-             * @var string $url
+             * Each url we have for Web Service.
              */
             try {
+
                 /**
                  * If we don't get true then we have an error
                  */
-                if (!$this->callWebService($url)) {
-                    (new Logger())->msg('Error calling web service for banned IP url name :' . $url);
+                if (!$this->callWebService($sUrl)) {
+                    (new Logger())->msg(
+                        sprintf(self::ERROR_CALLING_WEB_SERVICE_MESSAGE, $sUrl)
+                    );
                 }
+
                 /**
                  * We catch exception so we can continue if one service fail
                  */
-            } catch (Exception $e) {
-                (new Logger())->msg('Error calling web service for banned IP url name :' . $url);
+            } catch (Exception $oExcept) {
+                (new Logger())->msg(
+                    sprintf(self::ERROR_CALLING_WEB_SERVICE_MESSAGE, $sUrl)
+                );
             }
         }
 
@@ -119,82 +114,84 @@ class BannedCoreCron extends Cron
          * Process the currently banned IP
          */
         $this->processExistingIP();
+
         /**
          * Merge both IPs and filter out doubles
          */
         $this->processIP();
 
         /**
-         * Wrie the new banned IP file
+         * Write the new banned IP file
          */
         if (!$this->writeIP()) {
-            (new Logger())->msg('Error writting new banned IP file');
+            (new Logger())->msg(self::ERROR_ADD_BANNED_IP_MESSAGE);
         }
     }
 
     /**
-     * Call the web service with the given url and add received IP into $ipNew
+     * Call the web service with the given url and add received IP into $aIpNew
      *
-     * @param string $url
+     * @param string $sUrl
      */
-    private function callWebService($url)
+    private function callWebService($sUrl)
     {
-        if (is_null($this->webClient)) {
-            $this->webClient = new \GuzzleHttp\Client();
+        if (is_null($this->oWebClient)) {
+            $this->oWebClient = new \GuzzleHttp\Client();
         }
 
         /**
          * If we don't have a valid array to put address into, we create it.
          */
-        if (!is_array($this->ipNew)) {
-            $this->ipNew = [];
+        if (!is_array($this->aIpNew)) {
+            $this->aIpNew = [];
         }
         /**
-         * Call the webClient with the url
+         * Call the oWebClient with the url
          */
-        $inbound = $this->webClient->get($url);
+        $oInBound = $this->oWebClient->get($sUrl);
 
         /**
          * Check we get a valid response
          */
-        if ($inbound->getStatusCode() !== '200') {
+        if ($oInBound->getStatusCode() !== 200) {
             return false;
         }
 
         /**
          * Get the body and detach into a stream
          */
-        $bannedIPs = $inbound->getBody()->detach();
+        $rBannedIPs = $oInBound->getBody()->detach();
 
         /**
          * Process the received IP
          */
-        while ($bannedIP = fgets($bannedIPs)) {
+        while ($sBannedIP = fgets($rBannedIPs)) {
             /**
              * Trim the ip from return carriage and new line then add to the current array
              */
-            $this->ipNew[] = rtrim($bannedIP, "\n\r");
+            $this->aIpNew[] = rtrim($sBannedIP, "\n\r");
         }
         return true;
     }
 
     /**
-     * Process existing banned IP file and only keep valide IP adress
+     * Process existing banned IP file and only keep validating IP addresses.
      */
     private function processExistingIP()
     {
         /**
-         * We fill a temporary array with current adress
+         * We fill a temporary array with current address
          */
-        $aBans = file($this->bannedFileName);
-        $this->ipOld = [];
+        $aBans = file(self::BANNED_IP_FILE_PATH);
+        $this->aIpOld = [];
+
         foreach ($aBans as $ban) {
             /**
-             * Array containing return IP adress
+             * Array containing return IP address
              *
              * @var array $ips
              */
-            $ips = preg_grep($this->ipRegExp, $ban);
+            $ips = preg_grep($this->sIpRegExp, $ban);
             /**
              * check if $ip empty in case we processed a text line
              */
@@ -203,7 +200,7 @@ class BannedCoreCron extends Cron
                  * Use a foreach loop in case we have more than one IP per line
                  */
                 foreach ($ips as $ip) {
-                    $this->ipOld[] = $ip;
+                    $this->aIpOld[] = $ip;
                 }
             }
         }
@@ -214,45 +211,45 @@ class BannedCoreCron extends Cron
      */
     private function processIP()
     {
-        $newIP = [];
-        $newIP = array_unique(array_merge($this->ipNew, $this->ipOld), SORT_STRING);
-        $this->ipNew = $newIP;
+        $aNewIP = array_unique(array_merge($this->aIpNew, $this->aIpOld), SORT_STRING);
+        $this->aIpNew = $aNewIP;
     }
 
     /**
      * Return a valid IPv4 regular expression
      * Using strict reject octal form (leading zero)
      *
-     * @param bool $strict
+     * @param bool $bStrict
      * @return string
      */
-    static public function regexpIP($strict = false)
+    public static function regexpIP($bStrict = false)
     {
-        if (strict) {
+        if ($bStrict) {
             /**
              * Regular Expression representing a valid IPv4 class address
              * Rejecting octal form (leading zero)
              *
-             * @var string $ipRegExp
+             * @var string $sIpRegExp
              */
-            $ipRegExp = '/(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.';
-            $ipRegExp .= '(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.';
-            $ipRegExp .= '(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.';
-            $ipRegExp .= '(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])/';
+            $sIpRegExp = '/(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.';
+            $sIpRegExp .= '(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.';
+            $sIpRegExp .= '(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.';
+            $sIpRegExp .= '(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])/';
         } else {
             /**
              *
              * Regular Expression representing a valid IPv4 class address
              * We accept leading 0 but they normally imply octal so we shouldn't !!!
              *
-             * @var string $ipRegExp
+             * @var string $sIpRegExp
              */
-            $ipRegExp = '/(25[0-5]|2[0-9][0-9]|[01]?[0-9][0-9]?)\.';
-            $ipRegExp .= '(25[0-5]|2[0-9][0-9]|[01]?[0-9][0-9]?)\.';
-            $ipRegExp .= '(25[0-5]|2[0-9][0-9]|[01]?[0-9][0-9]?)\.';
-            $ipRegExp .= '(25[0-5]|2[0-9][0-9]|[01]?[0-9][0-9]?)/';
+            $sIpRegExp = '/(25[0-5]|2[0-9][0-9]|[01]?[0-9][0-9]?)\.';
+            $sIpRegExp .= '(25[0-5]|2[0-9][0-9]|[01]?[0-9][0-9]?)\.';
+            $sIpRegExp .= '(25[0-5]|2[0-9][0-9]|[01]?[0-9][0-9]?)\.';
+            $sIpRegExp .= '(25[0-5]|2[0-9][0-9]|[01]?[0-9][0-9]?)/';
         }
-        return $ipRegExp;
+
+        return $sIpRegExp;
     }
 
     /**
@@ -262,14 +259,32 @@ class BannedCoreCron extends Cron
      */
     private function writeIP()
     {
-        $outfile = fopen($this->bannedFileName, 'w+');
-        if (empty($this->ipNew) || !is_array($this->ipNew)) {
+        if ($this->invalidNewIp()) {
             return false;
         }
-        foreach ($this->ipNew as $ip) {
-            fwrite($outfile, $ip . "\n");
+
+        foreach ($this->aIpNew as $sIp) {
+            $this->addIp($sIp);
         }
-        fclose($outfile);
+
         return true;
+    }
+
+    /**
+     * @param string $sIpAddress
+     *
+     * @return void
+     */
+    private function addIp($sIpAddress)
+    {
+        file_put_contents(self::BANNED_IP_FILE_PATH, $sIpAddress . "\n", FILE_APPEND);
+    }
+
+    /**
+     * @return bool
+     */
+    private function invalidNewIp()
+    {
+        return empty($this->aIpNew) || !is_array($this->aIpNew);
     }
 }
