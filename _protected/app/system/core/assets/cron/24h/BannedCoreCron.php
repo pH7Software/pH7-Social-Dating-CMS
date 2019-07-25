@@ -14,15 +14,15 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use Exception;
-use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Error\Logger;
+use PH7\Framework\Security\Ban\Ban;
 
 class BannedCoreCron extends Cron
 {
     const BANNED_IP_FILE_PATH = PH7_PATH_APP_CONFIG . Ban::DIR . Ban::IP_FILE;
 
     const ERROR_CALLING_WEB_SERVICE_MESSAGE = 'Error calling web service for banned IP URL name: %s';
-    const ERROR_ADD_BANNED_IP_MESSAGE = 'Error writing new banned IP file';
+    const ERROR_ADD_BANNED_IP_MESSAGE = 'Error writing new banned IP addresses.';
 
     /**
      * Web client used to fetch IPs
