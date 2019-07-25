@@ -57,7 +57,7 @@ class BannedCoreCron extends Cron
 
     /**
      * Contain the URL of the service we call to get banned IP
-     * Currently filled at instantiation staticly, will use config file later
+     * Currently filled at instantiation statically, will use config file later
      *
      * @var array
      */
