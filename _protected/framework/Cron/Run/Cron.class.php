@@ -44,7 +44,7 @@ abstract class Cron extends Core
 
         $this->iTime = time();
         $this->oUri = Uri::getInstance();
-        $this->sDelayPathFile = PH7_PATH_SYS . 'core/assets/cron/_delay/' . $this->getFileName() . self::DELAY_FILE_EXT;
+        $this->sDelayPathFile = $this->getDelayedFilePath();
     }
 
     /**
@@ -89,6 +89,14 @@ abstract class Cron extends Core
     private function getFileName()
     {
         return strtolower($this->oUri->fragment(self::URI_FILENAME_INDEX));
+    }
+
+    /**
+     * @return string The full path of the delayed text file containing the UNIX time of the last cron job execution.
+     */
+    private function getDelayedFilePath()
+    {
+        return PH7_PATH_SYS . 'core/assets/cron/_delay/' . $this->getFileName() . self::DELAY_FILE_EXT;
     }
 
     /**
