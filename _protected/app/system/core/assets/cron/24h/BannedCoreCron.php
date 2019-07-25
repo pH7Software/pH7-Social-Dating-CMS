@@ -53,7 +53,7 @@ class BannedCoreCron extends Cron
     private $sIpRegExp;
 
     /**
-     * Contain the URL of the service we call to get banned IP
+     * Contain the URL of the remote services we call to get the list of accurate banned IPs.
      * Currently filled at instantiation statically, will use config file later
      *
      * @var array
@@ -69,8 +69,6 @@ class BannedCoreCron extends Cron
 
         /**
          * Set valid IP regular expression using lazy mode (false)
-         *
-         * @var \PH7\BannedCoreCron $sIpRegExp
          */
         $this->sIpRegExp = self::regexpIP();
 
