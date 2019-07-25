@@ -36,14 +36,14 @@ class BannedCoreCron extends Cron
      *
      * @var array
      */
-    private $aIpNew;
+    private $aNewIps;
 
     /**
      * Contain existing blocked IP
      *
      * @var array
      */
-    private $aIpOld;
+    private $aOldIps;
 
     /**
      * IP extracting regular expression.
@@ -129,9 +129,11 @@ class BannedCoreCron extends Cron
     }
 
     /**
-     * Call the web service with the given url and add received IP into $aIpNew
+     * Call the web service with the given url and add received IP into $aNewIps
      *
      * @param string $sUrl
+     *
+     * @return bool
      */
     private function callWebService($sUrl)
     {
@@ -142,8 +144,8 @@ class BannedCoreCron extends Cron
         /**
          * If we don't have a valid array to put address into, we create it.
          */
-        if (!is_array($this->aIpNew)) {
-            $this->aIpNew = [];
+        if (!is_array($this->aNewIps)) {
+            $this->aNewIps = [];
         }
         /**
          * Call the oWebClient with the url
@@ -160,17 +162,18 @@ class BannedCoreCron extends Cron
         /**
          * Get the body and detach into a stream
          */
-        $rBannedIPs = $oInBound->getBody()->detach();
+        $rBannedIps = $oInBound->getBody()->detach();
 
         /**
          * Process the received IP
          */
-        while ($sBannedIP = fgets($rBannedIPs)) {
+        while ($sBannedIp = fgets($rBannedIps)) {
             /**
              * Trim the ip from return carriage and new line then add to the current array
              */
-            $this->aIpNew[] = rtrim($sBannedIP, "\n\r");
+            $this->aNewIps[] = rtrim($sBannedIp, "\n\r");
         }
+
         return true;
     }
 
@@ -183,7 +186,7 @@ class BannedCoreCron extends Cron
          * We fill a temporary array with current address
          */
         $aBans = file(self::BANNED_IP_FILE_PATH);
-        $this->aIpOld = [];
+        $this->aOldIps = [];
 
         foreach ($aBans as $ban) {
             /**
@@ -200,7 +203,7 @@ class BannedCoreCron extends Cron
                  * Use a foreach loop in case we have more than one IP per line
                  */
                 foreach ($ips as $ip) {
-                    $this->aIpOld[] = $ip;
+                    $this->aOldIps[] = $ip;
                 }
             }
         }
@@ -211,8 +214,8 @@ class BannedCoreCron extends Cron
      */
     private function processIP()
     {
-        $aNewIP = array_unique(array_merge($this->aIpNew, $this->aIpOld), SORT_STRING);
-        $this->aIpNew = $aNewIP;
+        $aNewIps = array_unique(array_merge($this->aNewIps, $this->aOldIps), SORT_STRING);
+        $this->aNewIps = $aNewIps;
     }
 
     /**
@@ -263,7 +266,7 @@ class BannedCoreCron extends Cron
             return false;
         }
 
-        foreach ($this->aIpNew as $sIp) {
+        foreach ($this->aNewIps as $sIp) {
             $this->addIp($sIp);
         }
 
@@ -285,6 +288,6 @@ class BannedCoreCron extends Cron
      */
     private function invalidNewIp()
     {
-        return empty($this->aIpNew) || !is_array($this->aIpNew);
+        return empty($this->aNewIps) || !is_array($this->aNewIps);
     }
 }
