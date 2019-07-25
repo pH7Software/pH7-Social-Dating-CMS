@@ -18,6 +18,10 @@ use GuzzleHttp\Client;
 use PH7\Framework\Error\Logger;
 use PH7\Framework\Security\Ban\Ban;
 
+/** Reset time limit and increase memory **/
+@set_time_limit(0);
+@ini_set('memory_limit', '528M');
+
 class BannedCoreCron extends Cron
 {
     const BANNED_IP_FILE_PATH = PH7_PATH_APP_CONFIG . Ban::DIR . Ban::IP_FILE;
