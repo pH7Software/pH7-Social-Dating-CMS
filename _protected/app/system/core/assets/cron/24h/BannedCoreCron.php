@@ -71,7 +71,7 @@ class BannedCoreCron extends Cron
         /**
          * Set valid IP regular expression using lazy mode (false)
          */
-        $this->sIpRegExp = self::regexpIP();
+        $this->sIpRegExp = self::regexpIps();
 
         $this->doProcess();
     }
@@ -106,19 +106,19 @@ class BannedCoreCron extends Cron
         }
 
         /**
-         * Process the currently banned IP
+         * Process the currently banned IPs
          */
-        $this->processExistingIP();
+        $this->processExistingIps();
 
         /**
          * Merge both IPs and filter out doubles
          */
-        $this->processIP();
+        $this->processIps();
 
         /**
          * Write the new banned IP file
          */
-        if (!$this->writeIP()) {
+        if (!$this->writeIps()) {
             (new Logger())->msg(self::ERROR_ADD_BANNED_IP_MESSAGE);
         }
     }
@@ -172,10 +172,10 @@ class BannedCoreCron extends Cron
      *
      * @return void
      */
-    private function processExistingIP()
+    private function processExistingIps()
     {
         /**
-         * We fill a temporary array with current address
+         * We fill a temporary array with current IP addresses
          */
         $aBannedIps = file(self::BANNED_IP_FILE_PATH);
         $this->aOldIps = [];
@@ -199,7 +199,7 @@ class BannedCoreCron extends Cron
      *
      * @return void
      */
-    private function processIP()
+    private function processIps()
     {
         $aNewIps = array_unique(array_merge($this->aNewIps, $this->aOldIps), SORT_STRING);
         $this->aNewIps = $aNewIps;
@@ -213,7 +213,7 @@ class BannedCoreCron extends Cron
      *
      * @return string
      */
-    public static function regexpIP($bStrict = false)
+    public static function regexpIps($bStrict = false)
     {
         if ($bStrict) {
             /**
@@ -247,7 +247,7 @@ class BannedCoreCron extends Cron
      *
      * @return bool
      */
-    private function writeIP()
+    private function writeIps()
     {
         if ($this->invalidNewIp()) {
             return false;
@@ -261,6 +261,8 @@ class BannedCoreCron extends Cron
     }
 
     /**
+     * Add single address IP into the banned IPs list.
+     *
      * @param string $sIpAddress
      *
      * @return void
