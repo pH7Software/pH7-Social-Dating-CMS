@@ -114,7 +114,7 @@ class Logger extends Core
     }
 
     /**
-     * Write a log file with the hacher information.
+     * Write a log file with the hacker information.
      *
      * @return self
      */
