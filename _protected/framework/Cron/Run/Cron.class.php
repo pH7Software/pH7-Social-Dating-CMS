@@ -84,7 +84,7 @@ abstract class Cron extends Core
     }
 
     /**
-     * @return string File name.
+     * @return string The current cron filename.
      */
     private function getFileName()
     {
