@@ -164,7 +164,7 @@ class BannedCoreCron extends Cron
             /**
              * Trim the IP from return carriage and new line, then add to the current array
              */
-            $this->aNewIps[] = rtrim($sBannedIp);
+            $this->aNewIps[] = rtrim($sBannedIp, "\r\n");
         }
 
         return true;
