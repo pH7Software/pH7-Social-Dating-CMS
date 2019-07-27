@@ -16,6 +16,7 @@ defined('PH7') or exit('Restricted access');
 use Exception;
 use GuzzleHttp\Client;
 use PH7\Framework\Error\Logger;
+use PH7\Framework\File\Permission\Chmod;
 use PH7\Framework\Security\Ban\Ban;
 
 /** Reset time limit and increase memory **/
@@ -252,6 +253,8 @@ class BannedCoreCron extends Cron
         if ($this->invalidNewIp()) {
             return false;
         }
+
+        $this->file->chmod(self::BANNED_IP_FILE_PATH, Chmod::MODE_ALL_EXEC);
 
         foreach ($this->aNewIps as $sIp) {
             $this->addIp($sIp);
