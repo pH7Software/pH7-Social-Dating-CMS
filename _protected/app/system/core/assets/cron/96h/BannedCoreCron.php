@@ -33,7 +33,8 @@ class BannedCoreCron extends Cron
      */
     const SVC_URLS = [
         'https://www.blocklist.de/downloads/export-ips_all.txt',
-        'https://www.badips.com/get/list/ssh/2?age=30d'
+        'https://www.badips.com/get/list/ssh/2?age=30d',
+        'https://www.rjmblocklist.com/free/badips.txt'
     ];
 
     const BANNED_IP_FILE_PATH = PH7_PATH_APP_CONFIG . Ban::DIR . Ban::IP_FILE;
