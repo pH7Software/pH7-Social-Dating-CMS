@@ -1092,7 +1092,6 @@
 @dko.kr
 @dlemail.ru
 @dm.w3internet.co.uk
-@dm.w3internet.co.ukexample.com
 @dma.in-ulm.de
 @dmail.kyty.net
 @dmarc.ro
@@ -1377,7 +1376,6 @@
 @evopo.com
 @evyush.com
 @ewa.kr
-@example.com
 @exi.kr
 @existiert.net
 @exitstageleft.net
@@ -4084,7 +4082,6 @@
 @uk.igg.biz
 @uk.nut.cc
 @uk.to
-@ukexample.com
 @uko.kr
 @ultra.fyi
 @ultrada.ru
