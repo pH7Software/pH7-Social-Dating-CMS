@@ -17,7 +17,6 @@ use PH7\Framework\Geo\Misc\Country;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Url\Url;
-use phpDocumentor\Reflection\DocBlock\Tags\Param;
 
 /** Reset the time limit and increase the memory **/
 @set_time_limit(0);
