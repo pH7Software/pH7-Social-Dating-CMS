@@ -47,7 +47,7 @@ class AddFakeProfilesFormProcess extends Form
 
         $aUserData = $this->getApiClient()['results'];
         if (!empty($aUserData) && is_array($aUserData)) {
-            foreach ($this->getApiClient()['results'] as $aUser) {
+            foreach ($aUserData as $aUser) {
                 $sEmail = trim($aUser['email']);
                 $sUsername = trim($aUser['login']['username']);
 
