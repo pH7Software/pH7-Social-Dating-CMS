@@ -33,6 +33,9 @@ class AddFakeProfilesFormProcess extends Form
     /** @var ExistsCoreModel */
     private $oExistsModel;
 
+    /** @var int */
+    private static $iTotalGenerated = 0;
+
     public function __construct()
     {
         parent::__construct();
@@ -42,28 +45,39 @@ class AddFakeProfilesFormProcess extends Form
         $this->oExistsModel = new ExistsCoreModel;
         $this->oValidate = new Validate;
 
-        foreach ($this->getApiClient()['results'] as $aUser) {
-            $sEmail = trim($aUser['email']);
-            $sUsername = trim($aUser['login']['username']);
+        $aUserData = $this->getApiClient()['results'];
+        if (!empty($aUserData) && is_array($aUserData)) {
+            foreach ($aUserData as $aUser) {
+                $sEmail = trim($aUser['email']);
+                $sUsername = trim($aUser['login']['username']);
 
-            if ($this->isValidProfile($sEmail, $sUsername)) {
-                $aData = $this->storeUserDataIntoArray($sUsername, $sEmail, $aUser, $oUser);
-                $aData['profile_id'] = $oUserModel->add(escape($aData, true));
-                $this->addAvatar($aData, $oUser);
+                if ($this->isValidProfile($sEmail, $sUsername)) {
+                    self::$iTotalGenerated++;
+                    $aData = $this->storeUserDataIntoArray($sUsername, $sEmail, $aUser, $oUser);
+                    $aData['profile_id'] = $oUserModel->add(escape($aData, true));
+                    $this->addAvatar($aData, $oUser);
+                }
             }
+
+            if (self::$iTotalGenerated > 0) {
+                \PFBC\Form::setSuccess(
+                    'form_add_fake_profiles',
+                    nt('%n% user has successfully been added.', '%n% users have successfully been added.', self::$iTotalGenerated)
+                );
+            } else {
+                \PFBC\Form::setError(
+                    'form_add_fake_profiles',
+                    t('None of the received fake profiles were valid for the system. Please try again.')
+                );
+            }
+        } else {
+            \PFBC\Form::setError(
+                'form_add_fake_profiles',
+                t('An error occurred when requesting user data to %0%. Maybe, you could try again later.', self::API_URL)
+            );
         }
 
         unset($oUser, $oUserModel, $aData);
-
-        \PFBC\Form::setSuccess(
-            'form_add_fake_profiles',
-            nt('%n% user has successfully been added.', '%n% users have successfully been added.', $this->getUserNumber())
-        );
-    }
-
-    protected function getUserNumber()
-    {
-        return $this->httpRequest->post('num');
     }
 
     protected function getApiClient()
@@ -79,7 +93,7 @@ class AddFakeProfilesFormProcess extends Form
     private function getApiParameters()
     {
         return [
-            'results' => $this->getUserNumber(),
+            'results' => $this->httpRequest->post('num'),
             'gender' => $this->httpRequest->post('sex'),
             'nat' => $this->httpRequest->post('nat'),
             'noinfo' => 1

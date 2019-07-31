@@ -6,7 +6,6 @@
  * @copyright        (c) 2013-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / App / System / Core / Asset / Cron / 96H
- * @version          1.0
  */
 
 namespace PH7;
@@ -16,6 +15,7 @@ defined('PH7') or exit('Restricted access');
 use Exception;
 use GuzzleHttp\Client;
 use PH7\Framework\Error\Logger;
+use PH7\Framework\File\Permission\Chmod;
 use PH7\Framework\Security\Ban\Ban;
 
 /** Reset time limit and increase memory **/
@@ -32,7 +32,8 @@ class BannedCoreCron extends Cron
      */
     const SVC_URLS = [
         'https://www.blocklist.de/downloads/export-ips_all.txt',
-        'https://www.badips.com/get/list/ssh/2?age=30d'
+        'https://www.badips.com/get/list/ssh/2?age=30d',
+        'https://www.rjmblocklist.com/free/badips.txt'
     ];
 
     const BANNED_IP_FILE_PATH = PH7_PATH_APP_CONFIG . Ban::DIR . Ban::IP_FILE;
@@ -252,6 +253,8 @@ class BannedCoreCron extends Cron
         if ($this->invalidNewIp()) {
             return false;
         }
+
+        $this->file->chmod(self::BANNED_IP_FILE_PATH, Chmod::MODE_ALL_EXEC);
 
         foreach ($this->aNewIps as $sIp) {
             $this->addIp($sIp);
