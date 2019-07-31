@@ -21,9 +21,9 @@ With **[pH7CMS](https://sourceforge.net/projects/ph7socialdating/files/latest/do
 
 ## 👀 Software Overview
 
-**pH7 Dating CMS** is a **Social/Dating CMS** written in **Object-Oriented** PHP (*OOP*), fully compatible and highly optimised for PHP 7+ and based on **MVC** architecture (Model-View-Controller).
+**pH7 Dating CMS** is a **Social ommunity CMS** written in **Object-Oriented** PHP (*OOP*), fully compatible and highly optimized for PHP 7+ and based on **MVC** architecture (Model-View-Controller).
 
-It is designed with the **KISS** principle in mind, and the whole source code can be read and understood in minutes. For a better flexibility, the software uses **PDO** (PHP Data Objects) abstraction which allows the choice of the database. The principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (no duplicate code) and **YAGNI** principle to avoid unused code/not needed functionality in the software.
+It is designed with the **KISS** principle in mind, and the whole source code can be read and understood in minutes. For better flexibility, the software uses **PDO** (PHP Data Objects) abstraction which allows the choice of the database. The principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (no duplicate code) and **YAGNI** principle to avoid unused code/not needed functionality in the software.
 
 This Free and Open Source **Social Dating Site Builder** wants to be low resource-intensive, powerful, stable and secure. The software also comes with 42 system modules and is based on **pH7Framework** *(written specifically for this project)* that has over 52 packages.
 
