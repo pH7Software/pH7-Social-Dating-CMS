@@ -176,7 +176,7 @@ class Module
     }
 
     /**
-     * FOR INSTALL: Movement of the back module of the repository to the modules directory OR FOR UNISTALL: Movement of the back module of the modules directory to the repository.
+     * FOR INSTALL: Movement of the back module of the repository to the modules directory OR FOR UNINSTALL: Movement of the back module of the modules directory to the repository.
      *
      * @param string $sSwitch Module::INSTALL or Module::UNINSTALL constant.
      *
@@ -194,7 +194,7 @@ class Module
     }
 
     /**
-     * FOR INSTALL: Execute SQL statements for module installation OR FOR UNISTALL: Uninstalling the database.
+     * FOR INSTALL: Execute SQL statements for module installation OR FOR UNINSTALL: Uninstalling the database.
      *
      * @param string $sSwitch Module::INSTALL or Module::UNINSTALL constant.
      *
