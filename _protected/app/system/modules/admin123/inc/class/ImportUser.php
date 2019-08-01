@@ -70,8 +70,8 @@ class ImportUser extends Core
 
     /**
      * @param array $aFile
-     * @param string $sDelimiter Delimiter Field delimiter (one character).
-     * @param string $sEnclosure Enclosure Field enclosure (one character).
+     * @param string $sDelimiter Field delimiter (one character).
+     * @param string $sEnclosure Field enclosure (one character).
      */
     public function __construct(array $aFile, $sDelimiter, $sEnclosure)
     {
