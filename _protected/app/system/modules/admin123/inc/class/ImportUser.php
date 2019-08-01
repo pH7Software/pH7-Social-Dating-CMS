@@ -132,7 +132,7 @@ class ImportUser extends Core
         $sFiveChars = Various::genRnd($this->aFile['name'], 5);
 
         $this->aTmpData = [
-            'email' => $this->getUniqueEmailAddress($sFiveChars),
+            'email' => $this->getRandomEmail($sFiveChars),
             'username' => 'pH7CMS' . $sFiveChars,
             'password' => Various::genRnd(),
             'first_name' => 'Alex' . $sFiveChars,
@@ -340,7 +340,7 @@ class ImportUser extends Core
      *
      * @return string
      */
-    private function getUniqueEmailAddress($sFiveChars)
+    private function getRandomEmail($sFiveChars)
     {
         return sprintf('peterzhenry%s@%s.ph7cms.com', $sFiveChars, $sFiveChars);
     }
