@@ -43,7 +43,7 @@ abstract class Controller implements Controllable
      * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa", 12.* was "PHS", 14.* was "pKb" amd 15.* is ABSOLUTE™
      */
     const SOFTWARE_VERSION_NAME = 'ABSOLUTE™';
-    const SOFTWARE_VERSION = '15.1.7';
+    const SOFTWARE_VERSION = '15.1.8';
     const SOFTWARE_BUILD = '1';
 
     const DEFAULT_LANG = 'en';

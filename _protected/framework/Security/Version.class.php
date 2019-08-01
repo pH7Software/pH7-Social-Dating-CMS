@@ -50,9 +50,9 @@ final class Version
      *
      * More details: https://ph7cms.com/new-versioning-system/
      */
-    const KERNEL_VERSION = '15.1.7';
+    const KERNEL_VERSION = '15.1.8';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELEASE_DATE = '2019-08-01';
+    const KERNEL_RELEASE_DATE = '2019-08-04';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7CMS.com';
