@@ -29,51 +29,51 @@ VISTORS/NOT LOGGED IN ¬
 
            Dashboard ¬            
                       |--> Many links here most already covered below.
-    	                |--> Lots of data to be shown to the user (profile page) - Needs a better layout, there is to much all going on in center.
+    	              |--> Lots of data to be shown to the user (profile page) - Needs a better layout, there is to much all going on in center.
 
   Nav Bar --> People ¬
-	      	            |--> Browse
-		                  |--> Search ---> Quick Search ---> Advance Search (side menu main features)
-		                  |--> People Nearby                                (side menu main feature)
-		                  |--> Birthdays ---> All ---> Men ---> Women ---> Couple (no bithday just male, female, not sure how a couple have a birthday?)
+	      	      |--> Browse
+		      |--> Search ---> Quick Search ---> Advance Search (side menu main features)
+		      |--> People Nearby                                (side menu main feature)
+		      |--> Birthdays ---> All ---> Men ---> Women ---> Couple (no bithday just male, female, not sure how a couple have a birthday?)
 	             
-	               Chat ¬
-		                  |--> Chat
+	        Chat ¬
+		      |--> Chat
 
-	             Photos ¬ 
-		                  |--> Photos *** Rename Photos -> Member Photo Gallery *** (main feature on a side menu)
-	                    |--> Hot or Not (moving to side menu)
-		                  |--> Search	
+	       Photos ¬ 
+		       |--> Photos *** Rename Photos -> Member Photo Gallery *** (main feature on a side menu)
+	               |--> Hot or Not (moving to side menu)
+		       |--> Search	
        	  	
-	              Games ¬
-		                  |--> Game
-   		                |--> Search
+	         Games ¬
+		       |--> Game
+   		       |--> Search
 
-               Forums ¬
-		                  |--> Forum  *** Forum is getting a total make over, not thought it though yet but lots of change here,  ***
-		                  |--> Search *** currently feels to simple and all bunched together, so just layed out in a more usable manner ***
+                Forums ¬
+		       |--> Forum  *** Forum is getting a total make over, not thought it though yet but lots of change here,  ***
+		       |--> Search *** currently feels to simple and all bunched together, so just layed out in a more usable manner ***
 
-	              Notes ¬
-    		              |--> Notes
-		                  |--> Search
+	         Notes ¬
+    		       |--> Notes
+		       |--> Search
 
-		             Mail ¬             *** Rename 'Mail' -> 'Messages' and Put everything on one page, currently Mail feels like  ***
-		                  |--> Compose  *** I could send and receive emails and we are offering an internal messaging system not emails  ***
-		                  |--> Inbox
-                      |--> Sent
-		                  |--> Trash
-		                  |--> Search 
+		  Mail ¬             *** Rename 'Mail' -> 'Messages' and Put everything on one page, currently Mail feels like  ***
+		       |--> Compose  *** I could send and receive emails and we are offering an internal messaging system not emails  ***
+		       |--> Inbox
+                       |--> Sent
+		       |--> Trash
+		       |--> Search 
 
-	            Account ¬
-   		                 |--> Edit Profile
+	      Account ¬
+   		       |--> Edit Profile
                        |--> See My Profile
-			                 |--> Change Profile Phote
-			                 |--> Photo Gallery --> Add an Album --> My Albums
-			                 |--> Video Gallery --> Add an Album --> My Albums
-			                 |--> Note --> Add a Note --> My Notes
-			                 |--> Friends Manager --> Friend List --> Find a Friend
-			                 |--> Who Sees Me --> Find Visitor(s) (rename who sees me -> privacy settings)
-			                 |--> Logout
+		       |--> Change Profile Phote
+		       |--> Photo Gallery --> Add an Album --> My Albums
+		       |--> Video Gallery --> Add an Album --> My Albums
+		       |--> Note --> Add a Note --> My Notes
+		       |--> Friends Manager --> Friend List --> Find a Friend
+		       |--> Who Sees Me --> Find Visitor(s) (rename who sees me -> privacy settings)
+		       |--> Logout
 
 There is a lot going on in this accounts tab that could be better handled. One page (profile) with these other links found there! There is 
 no benifit fo having them all here this way, it confuses the way you can use the menu, it would be faster and more orginised to have these
