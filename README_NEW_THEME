@@ -30,20 +30,24 @@ VISTORS/NOT LOGGED IN ¬
 
 ********************** AFTER SUCESSFUL LOGIN **********************
 
-           Dashboard ¬            
+            Dashboard ¬            
                       |--> Many links here are covered below.
-    	              |--> Lots of data to be shown to the user (profile page) - Needs a better layout, there is to much all going on in center.
-
-  Nav Bar --> People ¬
+    	              |--> Lots of data to be shown to the user (profile page) - Needs a better layout, there is to much all 
+		           going on in center of the page and if im honest it looks unorganize.
+			   
+			   
+   Nav Bar --> People ¬
 	      	      |--> Browse
 		      |--> Search ---> Quick Search ---> Advance Search (side menu main features)
 		      |--> People Nearby                                (side menu main feature)
-		      |--> Birthdays ---> All ---> Men ---> Women ---> Couple (no bithday just male, female, not sure how a couple have a birthday?)
+		      |--> Birthdays ---> All ---> Men ---> Women ---> Couple (remove the word bithday after each sub cat just 
+		      								male, female, not sure how a couple share birthdays
+										just not looked at how that works yet.)
 	             
 	        Chat ¬
 		      |--> Chat
 
-	       Photos ¬ 
+	        Photos ¬ 
 		       |--> Photos --> Rename Photos -> Member Photo Gallery --> (main feature on side menu)
 	               |--> Hot or Not (moving to side menu, should be visable all the time as a main attraction)
 		       |--> Search (#1 search)	
