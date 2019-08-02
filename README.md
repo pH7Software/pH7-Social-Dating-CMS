@@ -19,9 +19,11 @@ With **[pH7CMS](https://sourceforge.net/projects/ph7socialdating/files/latest/do
 ![Professional PHP Social Dating Builder Software](https://cloud.githubusercontent.com/assets/1325411/19419476/5475b32c-93d0-11e6-9756-8e7db8df129f.png)
 
 ### 100% Owned by You ❤
+
 **Don't let your webapp be controlled by others! 🚀**
+
 Why your business has to be under the mercy of others? 
-By choosing pH7CMS, you have the complete control of your website and your users! 
+By choosing pH7CMS, you have complete control of your website and your users! 
 You get and own all data and files, hosted on your own server! ✌️
 
 
