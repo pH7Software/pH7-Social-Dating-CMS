@@ -470,7 +470,7 @@ class Image
     /**
      * Determine and get the type of the image (even an unallowed image type) by reading the first bytes and checking its signature.
      *
-     * @return string|bool When a correct signature is found, returns the appropriate value, FALSE otherwise.
+     * @return int|bool When a correct signature is found, returns the appropriate integer constant value, FALSE otherwise.
      */
     public function getType()
     {
