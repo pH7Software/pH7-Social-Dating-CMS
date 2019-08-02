@@ -210,6 +210,10 @@ class Image
         $this->iWidth = $iWidth;
         $this->iHeight = $iHeight;
 
+        if ($this->isTransparent()) {
+            $this->preserveTransparency();
+        }
+
         return $this;
     }
 
@@ -438,6 +442,9 @@ class Image
 
             case self::PNG_NAME:
                 header('Content-type: image/png');
+                if ($this->isTransparent()) {
+                    $this->preserveTransparency();
+                }
                 imagepng($this->rImage, null, $this->iCompression);
                 break;
 
@@ -485,6 +492,32 @@ class Image
     public function getExt()
     {
         return $this->sType;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTransparent()
+    {
+        return $this->getTransparentColor() >= 0;
+    }
+
+    /**
+     * @return false|int Returns the identifier of the transparent color index.
+     */
+    public function getTransparentColor()
+    {
+        return imagecolortransparent($this->rImage);
+    }
+
+    private function preserveTransparency()
+    {
+        if ($this->sType === self::PNG_NAME) {
+            imagealphablending($this->rImage, false);
+            imagesavealpha($this->rImage, true);
+            $iColor = imagecolorallocatealpha($this->rImage, 0, 0, 0, 127);
+            imagefill($this->rImage, 0, 0, $iColor);
+        }
     }
 
     /**
