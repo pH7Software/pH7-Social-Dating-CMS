@@ -1,0 +1,122 @@
+*** THE MISSION ***
+
+My goal here is to make a new theme for Ph7cms. The current theme is usable but I really want it to look and feel a different. 
+
+*** HOW ***
+
+Most of this will be done using CSS but there will be some rearanging involved, for example the top and bottom menu template files. 
+We will need to rearrange the order and in some cases the location of the nav bars links to the other pages in order to allow our 
+new CSS rules to work. This in turn will require some changes in the routes scrip. 
+
+*** MAYBE *** 
+
+I would like to add a few more feilds to the Current ones available in the users profile, this is an option now
+however these additions are limited to text or number feilds. I would like the ability to add radio and checkbox,
+and button input types, however this is a little more involved will require changes in view forms, models and also
+controllers so this may be an extra I might include at the end of the project.
+
+*** CURRENT LAYOUT (USER SIDE)***
+
+All the search pages should be linked on there mother catagory pages not seprate links that add extra confusion to navigation.
+
+VISTORS/NOT LOGGED IN ¬   
+                      |--> Only Allow Members Past These Few Pages (can be done by changing the default membership group).
+                      |--> Splash/JoinUp (personally im not that keen on the video back ground. I just feel it makes use of the form a challange)
+                      |--> Login
+                      |--> Logout
+
+********************** AFTER SUCESSFUL LOGIN **********************
+
+           Dashboard ¬            
+                      |--> Many links here most already covered below.
+    	                |--> Lots of data to be shown to the user (profile page) - Needs a better layout, there is to much all going on in center.
+
+  Nav Bar --> People ¬
+	      	            |--> Browse
+		                  |--> Search ---> Quick Search ---> Advance Search (side menu main features)
+		                  |--> People Nearby                                (side menu main feature)
+		                  |--> Birthdays ---> All ---> Men ---> Women ---> Couple (no bithday just male, female, not sure how a couple have a birthday?)
+	             
+	               Chat ¬
+		                  |--> Chat
+
+	             Photos ¬ 
+		                  |--> Photos *** Rename Photos -> Member Photo Gallery *** (main feature on a side menu)
+	                    |--> Hot or Not (moving to side menu)
+		                  |--> Search	
+       	  	
+	              Games ¬
+		                  |--> Game
+   		                |--> Search
+
+               Forums ¬
+		                  |--> Forum  *** Forum is getting a total make over, not thought it though yet but lots of change here,  ***
+		                  |--> Search *** currently feels to simple and all bunched together, so just layed out in a more usable manner ***
+
+	              Notes ¬
+    		              |--> Notes
+		                  |--> Search
+
+		             Mail ¬             *** Rename 'Mail' -> 'Messages' and Put everything on one page, currently Mail feels like  ***
+		                  |--> Compose  *** I could send and receive emails and we are offering an internal messaging system not emails  ***
+		                  |--> Inbox
+                      |--> Sent
+		                  |--> Trash
+		                  |--> Search 
+
+	            Account ¬
+   		                 |--> Edit Profile
+                       |--> See My Profile
+			                 |--> Change Profile Phote
+			                 |--> Photo Gallery --> Add an Album --> My Albums
+			                 |--> Video Gallery --> Add an Album --> My Albums
+			                 |--> Note --> Add a Note --> My Notes
+			                 |--> Friends Manager --> Friend List --> Find a Friend
+			                 |--> Who Sees Me --> Find Visitor(s) (rename who sees me -> privacy settings)
+			                 |--> Logout
+
+There is a lot going on in this accounts tab that could be better handled. One page (profile) with these other links found there! There is 
+no benifit fo having them all here this way, it confuses the way you can use the menu, it would be faster and more orginised to have these
+links all on one main profile page.
+
+Also update/refraze some user preset messages, Ph7 has done an incredable job but english not being his mother tounge there are
+always going to be grammer mistakes in these responses, they are small things like "Never send anybody the money". No "the" needed 
+Only problemis the size of the file they are in is 15,159 lines long!!! This is a long job and requires lots of concentration. Its 
+given me a headache more than once and you feel like you are not making any progress!
+
+******************************************************
+Add Uk phone number support (11 digits start with 0) -> changing following bellow in _protected/app/configs/config.ini (after install)
+for preinstall the devloper Ph7 would need to add this to his install script (I will request at some point)
+
+[validate]
+phone.pattern = "^[0][1-9]\d{1}$|^[0]\d{10}$"
+
+********************************************************
+
+These are user configable and work by putting header, body, footer templates together, the body being the users own so very easy to include 
+these files below, we have added a membership page to the list!
+
+ABOUT SUB MENU
+-->About
+-->Help
+-->Blog
+-->Affiliate
+-->Contact
+-->Partners ---> Ph7cms software will be a Featured non removable link (I've got some ideas on how to make sure it can not be removed) 
+-->Links
+-->Jobs --> rename "Jobs" -> "Carrers"
+
+HELP SUB MENU
+-->F.A.Q
+-->Terms of Service --> rename "Terms of Service" -> "Terms & Condions"
+-->Privacy --> rename "Privacy" -> "Data Protection"
+-->Legal Notice --> rename "Legal Notice" -> "Contract" 
+
+OTHER PAGES
+-->Membership ---> Top nav bar (floating bold bright "UPGRADE" link)
+
+-->EXTRA STYLE JOBS THAT NEED DOING
+
+Add Ph7 Software name and website links will be moved from bottom center to far right and non removable!!! (part of the theme's licance).
+
+
