@@ -1,34 +1,37 @@
 *** THE MISSION ***
 
-My goal here is to make a new theme for Ph7cms. The current theme is usable but I really want it to look and feel a different. 
+My goal here is to create a new theme for Ph7-Social-Dating-CMS by @pH-7 "https://github.com/pH-7". The current theme is 
+nice but I really want something that looks and feel a bit different. 
 
-*** HOW ***
+*** HOW I PLAN TO DO THIS ***
 
-Most of this will be done using CSS but there will be some rearanging involved, for example the top and bottom menu template files. 
-We will need to rearrange the order and in some cases the location of the nav bars links to the other pages in order to allow our 
-new CSS rules to work. This in turn will require some changes in the routes scrip. 
+Most the desired changes can be achived using CSS. There will be some rearanging involved, for example the top and bottom menu's 
+template files put the page links in to dropdown group so we will need to rearrange the order some of these are currently found in
+and in some cases the location of the links will need moving to other pages in order to allow our new CSS rules to work. This in
+turn will require some changes in the routes scrip. 
 
-*** MAYBE *** 
+*** MAYBE AT THE END *** 
 
-I would like to add a few more feilds to the Current ones available in the users profile, this is an option now
-however these additions are limited to text or number feilds. I would like the ability to add radio and checkbox,
-and button input types, however this is a little more involved will require changes in view forms, models and also
-controllers so this may be an extra I might include at the end of the project.
+I would like to add a few more feilds to the Current ones available in the users profile, this is an option available
+now however the options are limited to text or number input types. I would like the ability to add radio, checkbox, button
+and select input types. This is a little more involved as will require changes in view form, model, controller  and database 
+so this may be an extra I might include at the end of the project.
 
 *** CURRENT LAYOUT (USER SIDE)***
 
-All the search pages should be linked on there mother catagory pages not seprate links that add extra confusion to navigation.
+There are a lot of search pages that would be easier to use if they was displayed as a search box on the catagories own page
+and not separate links in the nav bar, when used separately they add extra confusion and clutter to the navigation bar.
 
 VISTORS/NOT LOGGED IN ¬   
                       |--> Only Allow Members Past These Few Pages (can be done by changing the default membership group).
-                      |--> Splash/JoinUp (personally im not that keen on the video back ground. I just feel it makes use of the form a challange)
-                      |--> Login
+                      |--> Splash/JoinUp (personally im not that keen on the video back ground. I just feel it makes use of the 			
+                      |--> Login          form a bit more of a challange.)
                       |--> Logout
 
 ********************** AFTER SUCESSFUL LOGIN **********************
 
            Dashboard ¬            
-                      |--> Many links here most already covered below.
+                      |--> Many links here are covered below.
     	              |--> Lots of data to be shown to the user (profile page) - Needs a better layout, there is to much all going on in center.
 
   Nav Bar --> People ¬
@@ -41,28 +44,28 @@ VISTORS/NOT LOGGED IN ¬
 		      |--> Chat
 
 	       Photos ¬ 
-		       |--> Photos *** Rename Photos -> Member Photo Gallery *** (main feature on a side menu)
-	               |--> Hot or Not (moving to side menu)
-		       |--> Search	
+		       |--> Photos --> Rename Photos -> Member Photo Gallery --> (main feature on side menu)
+	               |--> Hot or Not (moving to side menu, should be visable all the time as a main attraction)
+		       |--> Search (#1 search)	
        	  	
 	         Games ¬
 		       |--> Game
-   		       |--> Search
+   		       |--> Search (#2 search)
 
                 Forums ¬
 		       |--> Forum  *** Forum is getting a total make over, not thought it though yet but lots of change here,  ***
 		       |--> Search *** currently feels to simple and all bunched together, so just layed out in a more usable manner ***
-
+					(#3 search)
 	         Notes ¬
     		       |--> Notes
-		       |--> Search
+		       |--> Search (#4 search)
 
 		  Mail ¬             *** Rename 'Mail' -> 'Messages' and Put everything on one page, currently Mail feels like  ***
 		       |--> Compose  *** I could send and receive emails and we are offering an internal messaging system not emails  ***
 		       |--> Inbox
                        |--> Sent
 		       |--> Trash
-		       |--> Search 
+		       |--> Search (#5 Search)
 
 	      Account ¬
    		       |--> Edit Profile
@@ -75,26 +78,31 @@ VISTORS/NOT LOGGED IN ¬
 		       |--> Who Sees Me --> Find Visitor(s) (rename who sees me -> privacy settings)
 		       |--> Logout
 
-There is a lot going on in this accounts tab that could be better handled. One page (profile) with these other links found there! There is 
-no benifit fo having them all here this way, it confuses the way you can use the menu, it would be faster and more orginised to have these
-links all on one main profile page.
+There is a lot going on in this accounts tab that could be better handled. One page (profile) with these other links found displayed there! 
+There is no benifit having them here in this way, it confuses and slows down the way you use the navigation, it would be faster and more
+organised to have these links all on one main profile page. This way we can also empathise the pages we want free users to see, like 
+upgading and paid members there current membership expire date.
 
-Also update/refraze some user preset messages, Ph7 has done an incredable job but english not being his mother tounge there are
-always going to be grammer mistakes in these responses, they are small things like "Never send anybody the money". No "the" needed 
-Only problemis the size of the file they are in is 15,159 lines long!!! This is a long job and requires lots of concentration. Its 
-given me a headache more than once and you feel like you are not making any progress!
+Also update/refraze some user preset messages in app/langs/en_US/LC_MESSAGES/global.po, Ph-7 has done an incredable job but english 
+is not his mother tounge so there was always going to be slight translation differances in grammar, this are small things like 
+"Never send anybody the money". There is no need for the word "no" in this sentance and breaks english grammar! The only issue is
+file they are in is 15,159 lines long!!! This is a long job and requires lots of concentration and has given me headache more than
+once and you really feel like you are not making any progressat all!
 
 ******************************************************
+
 Add Uk phone number support (11 digits start with 0) -> changing following bellow in _protected/app/configs/config.ini (after install)
-for preinstall the devloper Ph7 would need to add this to his install script (I will request at some point)
+for preinstall the devloper Ph-7 would need to add this to his install script giving a set up choice between UK/US for example.
+(I will request this at some point in the future).
 
 [validate]
 phone.pattern = "^[0][1-9]\d{1}$|^[0]\d{10}$"
 
 ********************************************************
 
-These are user configable and work by putting header, body, footer templates together, the body being the users own so very easy to include 
-these files below, we have added a membership page to the list!
+These are user configable pages and work by putting header, body, footer templates together, the body being the users custom page
+contents so its very easy to include these files below in to a theme and almost include themselves, we have also added a membership
+page to the list this is going to be a main feature on new side menu!
 
 ABOUT SUB MENU
 -->About
