@@ -354,6 +354,14 @@ class ImportUser extends Core
      */
     private function cleanValue($sValue)
     {
-        return strtolower(trim(str_replace(['-', '_', ' '], '', $sValue)));
+        return strtolower(
+            trim(
+                str_replace(
+                    ['-', '_', ' '],
+                    '',
+                    $sValue
+                )
+            )
+        );
     }
 }
