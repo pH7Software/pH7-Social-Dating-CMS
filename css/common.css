@@ -1,0 +1,275 @@
+/*
+ * Author:        Pierre-Henry Soria <ph7software@gmail.com>
+ * Copyright:     (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+body {
+    margin: 0;
+    padding: 0;
+    color: #555;
+    font: normal 10.5pt Arial, Helvetica, sans-serif;
+    background: #efefef;
+}
+
+p {
+    margin: 1em;
+}
+
+img {
+    border: 0;
+}
+
+h1, h2 {
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+#logo {
+    margin-bottom: 3%;
+}
+
+#logo h1 {
+    font-size: 2.5em;
+}
+
+.center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.right {
+    float: right;
+    margin-right: 10px;
+}
+
+.left {
+    float: left;
+    margin-left: 10px;
+}
+
+.left, .right {
+    width: 400px;
+}
+
+.s_tPadd {
+    padding-top: 12px;
+}
+
+/* Small Top Padding */
+.small {
+    font-size: x-small;
+}
+
+.success {
+    color: green;
+}
+
+.red, .error, .warning, .mandatory {
+    color: #F00;
+}
+
+.dark-red {
+    color: #8B0000;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+button, input, select {
+    font-size: 18px;
+}
+
+input:not([type=checkbox]) {
+    margin: 6px;
+    width: 280px;
+    height: 34px;
+}
+
+button, select, input[type="submit"], input[type="reset"] {
+    width: 190px !important;
+}
+
+iframe {
+    border: 1px #475c9e solid;
+    width: 100%;
+    height: 300px;
+    margin: 0;
+    overflow: scroll;
+}
+
+input, iframe, .button {
+    border-radius: 5px;
+    border: solid 1px #999;
+}
+
+header {
+    margin-bottom: 10px;
+}
+
+footer {
+    padding: 10px;
+    margin-top: 25px;
+    font-size: .9em;
+    text-align: center;
+    border-top: 1px solid #c8c8c8;
+}
+
+.success, .error, .warning, .mandatory, .bold, .err_msg {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.err_msg {
+    text-align: center;
+    color: #F00;
+    text-transform: uppercase;
+}
+
+.gray {
+    color: #999;
+}
+
+.button {
+    text-decoration: none;
+    color: #333;
+    display: inline-block;
+    text-align: center;
+    padding: 6px 10px;
+    background: -webkit-linear-gradient(top, #fff, #ddd);
+    background: -moz-linear-gradient(top, #fff, #ddd);
+    background: linear-gradient(top, #fff, #ddd);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 1);
+    line-height: 1;
+    width: 100%;
+    max-width: 450px;
+}
+
+.button:hover {
+    border: solid 1px #000;
+    background: -webkit-linear-gradient(top, #fff, #c8c8c8);
+    background: -moz-linear-gradient(top, #fff, #c8c8c8);
+    background: linear-gradient(top, #fff, #c8c8c8);
+}
+
+.clear {
+    clear: both;
+}
+
+.img_thumb {
+    display: block;
+    padding: 4px;
+    margin-right: 12px;
+    line-height: 1;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.img_thumb:hover {
+    border-color: #08c;
+    box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+}
+
+.img_thumb > img {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.img_thumb, .img_thumb > img {
+    border-radius: 4px;
+}
+
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+img, video, iframe {
+    max-width: 100%;
+}
+
+hr {
+    border-top: 1px solid #c8c8c8;
+}
+
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
