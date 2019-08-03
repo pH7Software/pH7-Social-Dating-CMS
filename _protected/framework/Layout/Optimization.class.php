@@ -53,11 +53,6 @@ class Optimization
         preg_match_all($sRegexUrl, $sFile, $aHit, PREG_PATTERN_ORDER);
 
         for ($i = 0, $iCountHit = count($aHit[0]); $i < $iCountHit; $i++) {
-            $sSearch = $aHit[1][$i] . $aHit[2][$i] . $aHit[3][$i];
-
-            $sReplace = $sDir . $aHit[1][$i];
-            $sReplace .= $aHit[2][$i] . $aHit[3][$i];
-
             $sProtocolContext = str_replace(['"', "'"], '', $aHit[2][$i]);
             if (
                 substr($sProtocolContext, 0, 5) !== 'http:' &&
@@ -67,6 +62,10 @@ class Optimization
                 substr($sProtocolContext, 0, 1) !== '/' &&
                 substr($sProtocolContext, strlen($sProtocolContext) - 4, 4) !== '.htc'
             ) {
+                $sSearch = $aHit[1][$i] . $aHit[2][$i] . $aHit[3][$i];
+                $sReplace = $sDir . $aHit[1][$i];
+                $sReplace .= $aHit[2][$i] . $aHit[3][$i];
+
                 $sFile = str_replace($sSearch, $sReplace, $sFile);
             }
         }
