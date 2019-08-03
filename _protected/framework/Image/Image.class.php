@@ -210,7 +210,7 @@ class Image
         $this->iWidth = $iWidth;
         $this->iHeight = $iHeight;
 
-        if ($this->isTransparent()) {
+        if ($this->sType === self::PNG_NAME && $this->isTransparent()) {
             $this->preserveTransparency();
         }
 
@@ -442,7 +442,7 @@ class Image
 
             case self::PNG_NAME:
                 header('Content-type: image/png');
-                if ($this->isTransparent()) {
+                if ($this->sType === self::PNG_NAME && $this->isTransparent()) {
                     $this->preserveTransparency();
                 }
                 imagepng($this->rImage, null, $this->iCompression);
@@ -512,17 +512,15 @@ class Image
 
     private function preserveTransparency()
     {
-        if ($this->sType === self::PNG_NAME) {
-            // Turn off (temporarily) transparency blending
-            imagealphablending($this->rImage, false);
+        // Turn off (temporarily) transparency blending
+        imagealphablending($this->rImage, false);
 
-            // Create a new transparent alpha color
-            $iColorAlpha = imagecolorallocatealpha($this->rImage, 0, 0, 0, 127);
-            imagefill($this->rImage, 0, 0, $iColorAlpha);
+        // Create a new transparent alpha color
+        $iColorAlpha = imagecolorallocatealpha($this->rImage, 0, 0, 0, 127);
+        imagefill($this->rImage, 0, 0, $iColorAlpha);
 
-            // Restore transparency blending
-            imagesavealpha($this->rImage, true);
-        }
+        // Restore transparency blending
+        imagesavealpha($this->rImage, true);
     }
 
     /**
