@@ -61,10 +61,10 @@ class Image
     private $iMaxHeight;
 
     /** @var int */
-    private $iQuality = 100;
+    private $iQuality = self::DEFAULT_IMAGE_QUALITY;
 
     /** @var int */
-    private $iCompression = 4;
+    private $iCompression = self::DEFAULT_COMPRESSION_LEVEL;
 
 
     /**
