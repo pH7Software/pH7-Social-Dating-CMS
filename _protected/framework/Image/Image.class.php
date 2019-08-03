@@ -499,7 +499,9 @@ class Image
      */
     public function isTransparent()
     {
-        return $this->getTransparentColor() >= 0;
+        $mTransparentIndex = $this->getTransparentColor();
+
+        return $mTransparentIndex >= 0 || $mTransparentIndex === -1;
     }
 
     /**
