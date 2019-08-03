@@ -513,10 +513,15 @@ class Image
     private function preserveTransparency()
     {
         if ($this->sType === self::PNG_NAME) {
+            // Turn off (temporarily) transparency blending
             imagealphablending($this->rImage, false);
+
+            // Create a new transparent alpha color
+            $iColorAlpha = imagecolorallocatealpha($this->rImage, 0, 0, 0, 127);
+            imagefill($this->rImage, 0, 0, $iColorAlpha);
+
+            // Restore transparency blending
             imagesavealpha($this->rImage, true);
-            $iColor = imagecolorallocatealpha($this->rImage, 0, 0, 0, 127);
-            imagefill($this->rImage, 0, 0, $iColor);
         }
     }
 
