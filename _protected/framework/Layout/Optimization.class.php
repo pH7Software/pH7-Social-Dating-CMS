@@ -58,13 +58,14 @@ class Optimization
             $sReplace = $sDir . $aHit[1][$i];
             $sReplace .= $aHit[2][$i] . $aHit[3][$i];
 
+            $sProtocolContext = str_replace(['"', "'"], '', $aHit[2][$i]);
             if (
-                substr(str_replace(['"', "'"], '', $aHit[2][$i]), 0, 5) !== 'http:' &&
-                substr(str_replace(['"', "'"], '', $aHit[2][$i]), 0, 6) !== 'https:' &&
-                substr(str_replace(['"', "'"], '', $aHit[2][$i]), 0, 5) !== 'data:' &&
-                substr(str_replace(['"', "'"], '', $aHit[2][$i]), 0, 6) !== 'mhtml:' &&
-                substr(str_replace(['"', "'"], '', $aHit[2][$i]), 0, 1) !== '/' &&
-                substr(str_replace(['"', "'"], '', $aHit[2][$i]), strlen(str_replace(['"', "'"], '', $aHit[2][$i])) - 4, 4) !== '.htc'
+                substr($sProtocolContext, 0, 5) !== 'http:' &&
+                substr($sProtocolContext, 0, 6) !== 'https:' &&
+                substr($sProtocolContext, 0, 5) !== 'data:' &&
+                substr($sProtocolContext, 0, 6) !== 'mhtml:' &&
+                substr($sProtocolContext, 0, 1) !== '/' &&
+                substr($sProtocolContext, strlen($sProtocolContext) - 4, 4) !== '.htc'
             ) {
                 $sFile = str_replace($sSearch, $sReplace, $sFile);
             }
