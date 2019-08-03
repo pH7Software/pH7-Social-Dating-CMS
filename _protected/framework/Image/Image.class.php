@@ -124,8 +124,8 @@ class Image
             $this->iWidth = imagesx($this->rImage);
             $this->iHeight = imagesy($this->rImage);
 
-            // Automatic resizing if the image is too large
-            if ($this->iWidth > $this->iMaxWidth || $this->iHeight > $this->iMaxHeight) {
+            if ($this->isTooLarge()) {
+                // Automatic resizing if the image is too large
                 $this->dynamicResize($this->iMaxWidth, $this->iMaxHeight);
             }
 
@@ -521,6 +521,14 @@ class Image
 
         // Restore transparency blending
         imagesavealpha($this->rImage, true);
+    }
+
+    /**
+     * @return bool TRUE if the image is too large (and should be resized), FALSE otherwise.
+     */
+    private function isTooLarge()
+    {
+        return $this->iWidth > $this->iMaxWidth || $this->iHeight > $this->iMaxHeight;
     }
 
     /**
