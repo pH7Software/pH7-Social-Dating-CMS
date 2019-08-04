@@ -203,7 +203,13 @@ class MessengerAjax extends PermissionCore
         unset($_SESSION['messenger_boxes'][$this->oHttpRequest->post('to')]);
 
         Http::setContentType('application/json');
-        echo $this->setJsonContent(['user' => $sFrom, 'msg' => $sMsgTransform], false);
+        echo $this->setJsonContent(
+            [
+                'user' => $sFrom,
+                'msg' => $sMsgTransform
+            ],
+            false
+        );
         exit;
     }
 
