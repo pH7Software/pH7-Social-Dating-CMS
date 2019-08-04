@@ -246,8 +246,8 @@ class SettingFormProcess extends Form
                 \PFBC\Form::setError('form_setting', Form::wrongImgFileTypeMsg());
                 $this->bIsErr = true;
             } else {
-                /*
-                 * File::deleteFile() tests first if the file exists, and then deletes the file
+                /**
+                 * @internal File::deleteFile() first tests if the file exists, and then deletes it.
                  */
                 $sPathName = PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . self::LOGO_FILENAME;
                 $this->file->deleteFile($sPathName); // It erases the old logo.
