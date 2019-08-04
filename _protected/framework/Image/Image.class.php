@@ -209,7 +209,7 @@ class Image
         $this->iWidth = $iWidth;
         $this->iHeight = $iHeight;
 
-        if ($this->sType === self::PNG_NAME && $this->isTransparent()) {
+        if ($this->sType === self::PNG_NAME) {
             $this->preserveTransparency();
         }
 
@@ -441,7 +441,7 @@ class Image
 
             case self::PNG_NAME:
                 header('Content-type: image/png');
-                if ($this->sType === self::PNG_NAME && $this->isTransparent()) {
+                if ($this->sType === self::PNG_NAME) {
                     $this->preserveTransparency();
                 }
                 imagepng($this->rImage, null, $this->iCompression);
@@ -500,7 +500,7 @@ class Image
     {
         $mTransparentIndex = $this->getTransparentColor();
 
-        return $mTransparentIndex >= 0 || $mTransparentIndex === -1;
+        return $mTransparentIndex >= 0;
     }
 
     /**
