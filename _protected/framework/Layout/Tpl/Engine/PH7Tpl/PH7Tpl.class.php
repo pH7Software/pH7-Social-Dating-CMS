@@ -559,7 +559,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
  *     ' . self::SOFTWARE_NAME . ' ' . self::SOFTWARE_COMPANY . '
  *               --------------------
  * @since      Mon Mar 21 2011
- * @author     SORIA Pierre-Henry
+ * @author     Pierre-Henry Soria
  * @email      ' . self::SOFTWARE_EMAIL . '
  * @link       ' . self::SOFTWARE_WEBSITE . '
  * @copyright  ' . sprintf(self::SOFTWARE_COPYRIGHT, date('Y')) . '
