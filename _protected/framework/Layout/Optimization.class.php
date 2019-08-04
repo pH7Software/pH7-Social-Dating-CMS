@@ -17,6 +17,8 @@ use PH7\Framework\File\File;
 
 class Optimization
 {
+    const REGEX_CSS_IMPORT_URL_PATTERN = '/(url\([\'"]??)([^\'"\)]+?\.[^\'"\)]+?)([\'"]??\))/msi';
+
     /**
      * Data URI scheme - base64 encoding.
      *
@@ -48,9 +50,7 @@ class Optimization
     public static function cssDataUriCleanup($sFile, $sDir)
     {
         // Scan any left file references & adjust their paths
-        $sRegexUrl = '/(url\([\'"]??)([^\'"\)]+?\.[^\'"\)]+?)([\'"]??\))/msi';
-
-        preg_match_all($sRegexUrl, $sFile, $aHit, PREG_PATTERN_ORDER);
+        preg_match_all(self::REGEX_CSS_IMPORT_URL_PATTERN, $sFile, $aHit, PREG_PATTERN_ORDER);
 
         for ($i = 0, $iCountHit = count($aHit[0]); $i < $iCountHit; $i++) {
             $sProtocolContext = str_replace(['"', "'"], '', $aHit[2][$i]);
