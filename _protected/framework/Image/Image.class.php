@@ -203,7 +203,18 @@ class Image
     public function crop($iX = 0, $iY = 0, $iWidth = 1, $iHeight = 1)
     {
         $rTmp = imagecreatetruecolor($iWidth, $iHeight);
-        imagecopyresampled($rTmp, $this->rImage, 0, 0, $iX, $iY, $iWidth, $iHeight, $iWidth, $iHeight);
+        imagecopyresampled(
+            $rTmp,
+            $this->rImage,
+            0,
+            0,
+            $iX,
+            $iY,
+            $iWidth,
+            $iHeight,
+            $iWidth,
+            $iHeight
+        );
         $this->rImage = &$rTmp;
 
         $this->iWidth = $iWidth;

@@ -36,7 +36,12 @@ class AvatarFormProcess extends Form implements NudityDetectable
             $this->checkNudityFilter();
         }
 
-        $bAvatar = (new UserCore)->setAvatar($iProfileId, $sUsername, $_FILES['avatar']['tmp_name'], $this->iApproved);
+        $bAvatar = (new UserCore)->setAvatar(
+            $iProfileId,
+            $sUsername,
+            $_FILES['avatar']['tmp_name'],
+            $this->iApproved
+        );
 
         if (!$bAvatar) {
             \PFBC\Form::setError('form_avatar', Form::wrongImgFileTypeMsg());
