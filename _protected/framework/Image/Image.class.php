@@ -523,17 +523,17 @@ class Image
     {
         switch ($this->sType) {
             case self::PNG_NAME:
-                $this->handleTransparency();
+                $this->allocateAlphaColorTransparency();
                 $this->handlePngTransparency();
                 break;
 
             case self::GIF_NAME:
-                $this->handleTransparency();
+                $this->allocateAlphaColorTransparency();
                 imagealphablending($this->rImage, true);
                 break;
 
             case self::JPG_NAME:
-                $this->handleJpgTransparency();
+                imagealphablending($this->rImage, true);
                 break;
         }
     }
@@ -541,7 +541,7 @@ class Image
     /**
      * Create a new transparent alpha color.
      */
-    private function handleTransparency()
+    private function allocateAlphaColorTransparency()
     {
         $iAlphaColor = imagecolorallocatealpha($this->rImage, 0, 0, 0, 127);
         imagefill($this->rImage, 0, 0, $iAlphaColor);
@@ -554,11 +554,6 @@ class Image
 
         // Restore transparency blending
         imagesavealpha($this->rImage, true);
-    }
-
-    private function handleJpgTransparency()
-    {
-        imagealphablending($this->rImage, true);
     }
 
     /**
