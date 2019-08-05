@@ -521,16 +521,23 @@ class Image
 
     private function preserveTransparencies()
     {
-        if ($this->sType === self::PNG_NAME || $this->sType === self::GIF_NAME) {
-            $this->handleTransparency();
-        }
+        switch ($this->sType) {
+            case self::PNG_NAME:
+            case self::GIF_NAME:
+                $this->handleTransparency();
+                break;
 
-        if ($this->sType === self::PNG_NAME) {
-            $this->handlePngTransparency();
-        }
+            case self::PNG_NAME:
+                $this->handlePngTransparency();
+                break;
 
-        if ($this->sType === self::JPG_NAME) {
-            $this->handleJpgTransparency();
+            case self::GIF_NAME:
+                imagealphablending($this->rImage, true);
+                break;
+
+            case self::JPG_NAME:
+                $this->handleJpgTransparency();
+                break;
         }
     }
 
