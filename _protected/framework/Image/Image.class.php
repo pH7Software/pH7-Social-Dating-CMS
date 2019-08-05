@@ -220,9 +220,7 @@ class Image
         $this->iWidth = $iWidth;
         $this->iHeight = $iHeight;
 
-        if ($this->sType === self::PNG_NAME) {
-            $this->preserveTransparency();
-        }
+        $this->preserveTransparencies();
 
         return $this;
     }
@@ -444,6 +442,8 @@ class Image
      */
     public function show()
     {
+        $this->preserveTransparencies();
+
         switch ($this->sType) {
             case self::JPG_NAME:
                 header('Content-type: image/jpeg');
@@ -452,9 +452,6 @@ class Image
 
             case self::PNG_NAME:
                 header('Content-type: image/png');
-                if ($this->sType === self::PNG_NAME) {
-                    $this->preserveTransparency();
-                }
                 imagepng($this->rImage, null, $this->iCompression);
                 break;
 
@@ -522,17 +519,42 @@ class Image
         return imagecolortransparent($this->rImage);
     }
 
-    private function preserveTransparency()
+    private function preserveTransparencies()
+    {
+        if ($this->sType === self::PNG_NAME || $this->sType === self::GIF_NAME) {
+            $this->handleTransparency();
+        }
+
+        if ($this->sType === self::PNG_NAME) {
+            $this->handlePngTransparency();
+        }
+
+        if ($this->sType === self::JPG_NAME) {
+            $this->handleJpgTransparency();
+        }
+    }
+
+    /**
+     * Create a new transparent alpha color.
+     */
+    private function handleTransparency()
+    {
+        $iAlphaColor = imagecolorallocatealpha($this->rImage, 0, 0, 0, 127);
+        imagefill($this->rImage, 0, 0, $iAlphaColor);
+    }
+
+    private function handlePngTransparency()
     {
         // Turn off (temporarily) transparency blending
         imagealphablending($this->rImage, false);
 
-        // Create a new transparent alpha color
-        $iColorAlpha = imagecolorallocatealpha($this->rImage, 0, 0, 0, 127);
-        imagefill($this->rImage, 0, 0, $iColorAlpha);
-
         // Restore transparency blending
         imagesavealpha($this->rImage, true);
+    }
+
+    private function handleJpgTransparency()
+    {
+        imagealphablending($this->rImage, true);
     }
 
     /**
