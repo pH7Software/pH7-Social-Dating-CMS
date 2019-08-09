@@ -9,7 +9,7 @@ class Range extends Textbox
 {
     public function render()
     {
-        $this->attributes = [
+        $this->attributes += [
             'type' => 'range', // Range Type
             'id' => 'rangeInput',
             'oninput' => 'rangeOutput.value = rangeInput.value'
