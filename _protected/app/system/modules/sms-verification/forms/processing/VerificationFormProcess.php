@@ -22,21 +22,8 @@ class VerificationFormProcess extends Form
         if ($this->isVerificationCodeValid($iProfileId)) {
             $oUser = new UserCore;
             $oUserModel = new UserCoreModel;
-
-            $sPhoneNumber = $this->session->get(SmsVerificationCore::PHONE_NUMBER_SESS_NAME);
-
-            $oUserModel->approve(
-                $iProfileId,
-                1
-            );
-
-            // Add phone number to DB field
-            $oUserModel->updateProfile(
-                'phone',
-                $sPhoneNumber,
-                $iProfileId,
-                DbTableName::MEMBER_INFO
-            );
+            $this->setPhoneNumberToDb($iProfileId, $oUserModel);
+            $this->approveUser($iProfileId, $oUserModel);
 
             // Clear "active" DB field from the cache
             $oUser->clearReadProfileCache($iProfileId);
@@ -68,6 +55,36 @@ class VerificationFormProcess extends Form
                 t('The SMS verification code is invalid. <a href="%0%">Try to resend a new one?</a>', Uri::get('sms-verification', 'main', 'send'))
             );
         }
+    }
+
+    /**
+     * @param int $iProfileId
+     * @param UserCoreModel $oUserModel
+     */
+    private function setPhoneNumberToDb($iProfileId, UserCoreModel $oUserModel)
+    {
+        $sPhoneNumber = $this->session->get(SmsVerificationCore::PHONE_NUMBER_SESS_NAME);
+
+        $oUserModel->updateProfile(
+            'phone',
+            $sPhoneNumber,
+            $iProfileId,
+            DbTableName::MEMBER_INFO
+        );
+    }
+
+    /**
+     * Validate the user (once its phone number has been verified).
+     *
+     * @param int $iProfileId
+     * @param UserCoreModel $oUserModel
+     */
+    private function approveUser($iProfileId, UserCoreModel $oUserModel)
+    {
+        $oUserModel->approve(
+            $iProfileId,
+            1
+        );
     }
 
     /**
