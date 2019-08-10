@@ -68,7 +68,7 @@ abstract class Api
     /**
      * Set an user authentication.
      *
-     * @param integer $iId
+     * @param int $iId
      * @param UserCoreModel $oUserModel
      *
      * @return void
