@@ -96,9 +96,9 @@ class JoinForm
                 t('I am a'),
                 'sex',
                 [
-                    GenderTypeUserCore::FEMALE => '<i class="fa fa-female"></i> ' . t('Woman'),
-                    GenderTypeUserCore::MALE => '<i class="fa fa-male"></i> ' . t('Man'),
-                    GenderTypeUserCore::COUPLE => '<i class="fa fa-venus-mars"></i> ' . t('Couple')
+                    GenderTypeUserCore::FEMALE => '👩 ' . t('Woman'),
+                    GenderTypeUserCore::MALE => '👨 ' . t('Man'),
+                    GenderTypeUserCore::COUPLE => '💑 ' . t('Couple')
                 ],
                 ['value' => GenderTypeUserCore::FEMALE, 'required' => 1]
             )
@@ -109,9 +109,9 @@ class JoinForm
                 t('Looking for a'),
                 'match_sex',
                 [
-                    GenderTypeUserCore::MALE => '<i class="fa fa-male"></i> ' . t('Man'),
-                    GenderTypeUserCore::FEMALE => '<i class="fa fa-female"></i> ' . t('Woman'),
-                    GenderTypeUserCore::COUPLE => '<i class="fa fa-venus-mars"></i> ' . t('Couple')
+                    GenderTypeUserCore::MALE => '👨 ' . t('Man'),
+                    GenderTypeUserCore::FEMALE => '👩 ' . t('Woman'),
+                    GenderTypeUserCore::COUPLE => '💑 ' . t('Couple')
                 ],
                 ['value' => GenderTypeUserCore::MALE, 'required' => 1]
             )
