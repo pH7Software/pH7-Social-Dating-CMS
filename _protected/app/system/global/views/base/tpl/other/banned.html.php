@@ -18,7 +18,7 @@ $oDesign->htmlHeader();
 $aMeta = [
     'title' => t('Free Dating Social Community - Your IP is banned') . ' - ' . Core::SOFTWARE_NAME . ' | ' . Core::SOFTWARE_COMPANY,
     'description' => t('Free Dating Social Community - Your IP is banned') . ' ' . Core::SOFTWARE_DESCRIPTION,
-    'keywords' => t('banned,ban,dating site,free online dating social,social network,dating')
+    'noindex' => true
 ];
 ?>
 <!-- Begin Header -->

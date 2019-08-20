@@ -18,6 +18,7 @@ $oDesign->htmlHeader();
 $aMeta = [
     'title' => Core::SOFTWARE_NAME . ' | ' . Core::SOFTWARE_COMPANY,
     'description' => Core::SOFTWARE_DESCRIPTION,
+    'noindex' => true
 ];
 ?>
 <!-- Begin Header -->

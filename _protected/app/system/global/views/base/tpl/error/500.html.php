@@ -18,7 +18,7 @@ $oDesign->htmlHeader();
 $aMeta = [
     'title' => 'Internal Server Error - ' . Core::SOFTWARE_NAME . ' | ' . Core::SOFTWARE_COMPANY,
     'description' => Core::SOFTWARE_DESCRIPTION,
-    'keywords' => 'script, CMS, clone match, clone facebook, PHP, script dating'
+    'noindex' => true
 ];
 ?>
 <!-- Begin Header -->

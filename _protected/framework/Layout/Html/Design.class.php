@@ -976,7 +976,7 @@ HTML;
         if (!empty($aMeta['keywords'])) {
             echo '<meta name="keywords" content="', $aMeta['keywords'], '" />';
         }
-        
+
         if (!empty($aMeta['noindex'])) {
             echo Meta::NOINDEX;
         }
