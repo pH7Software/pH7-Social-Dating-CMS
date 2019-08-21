@@ -54,7 +54,7 @@ class ProtectedFileForm
             $oForm->addElement(new \PFBC\Element\Button(t('Save')));
             $oForm->render();
         } catch (RuntimeException $oExcept) {
-            echo '<p class="col-md-6 col-md-offset-4 red">' . $oExcept->getMessage() . '</p>';
+            self::showErrorMessage($oExcept);
         }
     }
 
@@ -90,5 +90,10 @@ class ProtectedFileForm
         }
 
         return $mRealFullPath;
+    }
+
+    private static function showErrorMessage(RuntimeException $oExcept)
+    {
+        printf('<p class="col-md-6 col-md-offset-4 red">%s</p>', $oExcept->getMessage());
     }
 }
