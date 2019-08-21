@@ -115,6 +115,7 @@ abstract class Api
                 '://',
                 'v=',
                 'v/',
+                'embed/',
                 '?',
                 '=',
                 '//',

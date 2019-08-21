@@ -18,7 +18,7 @@ defined('PH7') or exit('Restricted access');
 class Youtube extends Api implements IApi
 {
     const API_URL = 'https://www.googleapis.com/youtube/v3/videos?id=%s&key=%s&part=snippet,contentDetails,statistics,status';
-    const PLAYER_URL = 'https://youtube.com/v/';
+    const PLAYER_URL = 'https://www.youtube.com/embed/';
     const THUMBNAIL_URL = 'https://i%d.ytimg.com/vi/%s.jpg';
     const REGEX_TIME_FORMAT = '/[0-9]+[HMS]/';
     const API_KEY_MIN_LENGTH = 10;
