@@ -18,6 +18,8 @@ class MainController extends Controller
 {
     const TWO_FACTOR_SECRET_STRING_LENGTH = 10;
 
+    const WRONG_MODULE_ERROR_MESSAGE = 'Wrong "%s" module!';
+
     /** @var TwoFactorAuthModel */
     private $o2FactorModel;
 
@@ -120,7 +122,9 @@ class MainController extends Controller
                 return $this->session->get('admin_id');
 
             default:
-                throw new PH7InvalidArgumentException('Wrong "' . $this->sMod . '" module!');
+                throw new PH7InvalidArgumentException(
+                    sprintf(self::WRONG_MODULE_ERROR_MESSAGE, $this->sMod)
+                );
         }
     }
 
