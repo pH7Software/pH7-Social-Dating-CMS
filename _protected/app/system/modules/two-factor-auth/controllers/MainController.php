@@ -105,7 +105,7 @@ class MainController extends Controller
     }
 
     /**
-     * @param string $sSecret
+     * @param string $sSecret The 2FA secret code.
      *
      * @return string
      */
@@ -170,7 +170,7 @@ class MainController extends Controller
     }
 
     /**
-     * @param string $sSecret
+     * @param string $sSecret The 2FA secret code.
      *
      * @return bool
      */
