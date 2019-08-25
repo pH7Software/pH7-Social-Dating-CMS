@@ -95,7 +95,7 @@ class MainController extends Controller
      *
      * @return void
      */
-    protected function download($sSecret)
+    private function download($sSecret)
     {
         $sFileName = '2FA-backup-code-' . $this->sMod . '-' . Url::clean($this->registry->site_name) . '.txt';
         header('Content-Disposition: attachment; filename=' . $sFileName);
@@ -111,7 +111,7 @@ class MainController extends Controller
      *
      * @throws PH7InvalidArgumentException Explanatory message if the specified module is wrong.
      */
-    protected function getProfileId()
+    private function getProfileId()
     {
         switch ($this->sMod) {
             case 'user':
@@ -133,7 +133,7 @@ class MainController extends Controller
      *
      * @return void
      */
-    protected function update2FaStatus()
+    private function update2FaStatus()
     {
         $this->iIsEnabled = $this->iIsEnabled === 1 ? 0 : 1; // Get the opposite value (if 1 so 0 | if 0 so 1)
 
