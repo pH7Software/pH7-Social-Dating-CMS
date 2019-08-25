@@ -17,8 +17,8 @@ use RobThree\Auth\TwoFactorAuth as Authenticator;
 class MainController extends Controller
 {
     const TWO_FACTOR_SECRET_STRING_LENGTH = 10;
-
     const WRONG_MODULE_ERROR_MESSAGE = 'Wrong "%s" module!';
+    const BACKUP_CODE_FILE_EXT = '.txt';
 
     /** @var TwoFactorAuthModel */
     private $o2FactorModel;
@@ -97,7 +97,7 @@ class MainController extends Controller
      */
     private function download($sSecret)
     {
-        $sFileName = '2FA-backup-code-' . $this->sMod . '-' . Url::clean($this->registry->site_name) . '.txt';
+        $sFileName = '2FA-backup-code-' . $this->sMod . '-' . Url::clean($this->registry->site_name) . self::BACKUP_CODE_FILE_EXT;
         header('Content-Disposition: attachment; filename=' . $sFileName);
         $sBackupCodeTextMessage = $this->getBackupCodeMessage($sSecret);
 
