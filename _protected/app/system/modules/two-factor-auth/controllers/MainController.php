@@ -105,6 +105,24 @@ class MainController extends Controller
     }
 
     /**
+     * @param string $sSecret
+     *
+     * @return string
+     */
+    private function getBackupCodeMessage($sSecret)
+    {
+        $sTxtMsg = t('BACKUP VERIFICATION CODE - %site_url% | %0%', $this->sMod) . "\r\n\r\n";
+        $sTxtMsg .= t('Code: %0%', $this->oAuthenticator->getCode($sSecret)) . "\r\n\r\n";
+        $sTxtMsg .= t('Generated on: %0%', $this->dateTime->get()->date()) . "\r\n\r\n";
+        $sTxtMsg .= t('Print it and keep it in a safe place, like your wallet.') . "\r\n\r\n\r\n";
+        $sTxtMsg .= t('Regards, %site_name%') . "\r\n";
+        $sTxtMsg .= '-----' . "\r\n";
+        $sTxtMsg .= t('Powered by "pH7CMS.com" software.') . "\r\n";
+
+        return $sTxtMsg;
+    }
+
+    /**
      * Get Session Profile ID.
      *
      * @return integer
@@ -138,24 +156,6 @@ class MainController extends Controller
         $this->iIsEnabled = $this->iIsEnabled === 1 ? 0 : 1; // Get the opposite value (if 1 so 0 | if 0 so 1)
 
         $this->o2FactorModel->setStatus($this->iIsEnabled, $this->iProfileId);
-    }
-
-    /**
-     * @param string $sSecret
-     *
-     * @return string
-     */
-    private function getBackupCodeMessage($sSecret)
-    {
-        $sTxtMsg = t('BACKUP VERIFICATION CODE - %site_url% | %0%', $this->sMod) . "\r\n\r\n";
-        $sTxtMsg .= t('Code: %0%', $this->oAuthenticator->getCode($sSecret)) . "\r\n\r\n";
-        $sTxtMsg .= t('Generated on: %0%', $this->dateTime->get()->date()) . "\r\n\r\n";
-        $sTxtMsg .= t('Print it and keep it in a safe place, like your wallet.') . "\r\n\r\n\r\n";
-        $sTxtMsg .= t('Regards, %site_name%') . "\r\n";
-        $sTxtMsg .= '-----' . "\r\n";
-        $sTxtMsg .= t('Powered by "pH7CMS.com" software.') . "\r\n";
-
-        return $sTxtMsg;
     }
 
     /**
