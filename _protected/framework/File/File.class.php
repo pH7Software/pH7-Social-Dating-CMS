@@ -101,7 +101,7 @@ class File
     }
 
     /**
-     * Returns the filename without the dot and the extension (or the last one if they are more).
+     * Give the filename without the dot and the extension (or the last one, if they are more).
      *
      * @param string $sFile
      *
