@@ -89,7 +89,7 @@ class File
     }
 
     /**
-     * Get Extension file without the dot.
+     * Get the file extension, without the dot.
      *
      * @param string $sFile The File Name.
      *
@@ -97,18 +97,11 @@ class File
      */
     public function getFileExt($sFile)
     {
-        return strtolower(substr(strrchr($sFile, PH7_DOT), 1));
+        return strtolower(pathinfo($sFile, PATHINFO_EXTENSION));
     }
 
     /**
-     * Get File without Extension and dot.
-     * This function is smarter than just a code like this, substr($sFile,0,strpos($sFile,'.'))
-     * Just look at the example below for you to realize that the function removes only the extension and nothing else!
-     * Example 1 "my_file.pl" The return value is "my_file"
-     * Example 2 "my_file.inc.pl" The return value is "my_file.inc"
-     * Example 3 "my_file.class.html.php" The return value is "my_file.class.html"
-     *
-     * @see File::getFileExt() To see the method that retrieves the file extension.
+     * Returns the filename without the dot and the extension (or the last one if they are more).
      *
      * @param string $sFile
      *
@@ -116,9 +109,7 @@ class File
      */
     public function getFileWithoutExt($sFile)
     {
-        $sExt = $this->getFileExt($sFile);
-
-        return str_replace(PH7_DOT . $sExt, '', $sFile);
+        return pathinfo($sFile, PATHINFO_FILENAME);
     }
 
     /**
