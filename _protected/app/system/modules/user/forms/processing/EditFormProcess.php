@@ -65,12 +65,15 @@ class EditFormProcess extends Form
             $this->clearFieldCache('matchsex', $iProfileId, null);
         }
 
-        if (!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oUser->birthDate)) {
-            $oUserModel->updateProfile(
-                'birthDate',
-                $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'),
-                $iProfileId
-            );
+        if ($this->isOnlyAdminLoggedAndUserIdExists()) {
+            // For security reasons, only admins are able to change the DOB
+            if (!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oUser->birthDate)) {
+                $oUserModel->updateProfile(
+                    'birthDate',
+                    $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'),
+                    $iProfileId
+                );
+            }
         }
 
         $this->updateDynamicFields($iProfileId, $oUserModel);

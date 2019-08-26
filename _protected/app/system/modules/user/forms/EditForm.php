@@ -99,8 +99,23 @@ class EditForm
             )
         );
 
-        $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', ['id' => 'birth_date', 'onblur' => 'CValid(this.value, this.id)', 'value' => $sBirthDate, 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
+        if (self::isAdminLoggedAndUserIdExists($oHttpRequest)) {
+            // For security reasons, only admins are able to change DOB
+            $oForm->addElement(
+                new \PFBC\Element\Date(
+                    t('Date of birth:'),
+                    'birth_date',
+                    [
+                        'id' => 'birth_date',
+                        'onblur' => 'CValid(this.value, this.id)',
+                        'value' => $sBirthDate,
+                        'validation' => new \PFBC\Validation\BirthDate,
+                        'required' => 1
+                    ]
+                )
+            );
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
+        }
 
         // Generate dynamic fields
         $oFields = $oUserModel->getInfoFields($iProfileId);
