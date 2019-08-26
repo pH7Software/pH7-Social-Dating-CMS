@@ -147,7 +147,9 @@ class SettingController extends Controller
 
     public function yesDelete()
     {
-        if (!$this->session->exists('yes_delete')) {
+        if ($this->session->exists('yes_delete')) {
+            $this->output();
+        } else {
             Header::redirect(
                 Uri::get(
                     'user',
@@ -155,8 +157,6 @@ class SettingController extends Controller
                     'delete'
                 )
             );
-        } else {
-            $this->output();
         }
     }
 
