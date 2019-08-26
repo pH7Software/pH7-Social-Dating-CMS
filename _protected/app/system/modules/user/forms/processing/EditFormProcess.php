@@ -44,7 +44,7 @@ class EditFormProcess extends Form
         }
 
         if ($this->isOnlyAdminLoggedAndUserIdExists()) {
-            // For security reasons, only admins are able to change profile gender
+            // For security reasons, only admins can change profile gender
             if (!$this->str->equals($this->httpRequest->post('sex'), $oUser->sex)) {
                 $oUserModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId);
                 $this->session->set('member_sex', $this->httpRequest->post('sex'));
@@ -66,7 +66,7 @@ class EditFormProcess extends Form
         }
 
         if ($this->isOnlyAdminLoggedAndUserIdExists()) {
-            // For security reasons, only admins are able to change the DOB
+            // For security reasons, only admins can change the DOB
             if (!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oUser->birthDate)) {
                 $oUserModel->updateProfile(
                     'birthDate',
