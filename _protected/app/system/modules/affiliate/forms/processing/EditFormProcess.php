@@ -63,13 +63,16 @@ class EditFormProcess extends Form
             }
         }
 
-        if (!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oAff->birthDate)) {
-            $oAffModel->updateProfile(
-                'birthDate',
-                $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'),
-                $iProfileId,
-                DbTableName::AFFILIATE
-            );
+        if (AdminCore::auth()) {
+            // For security reasons, only admins can change date of birth
+            if (!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oAff->birthDate)) {
+                $oAffModel->updateProfile(
+                    'birthDate',
+                    $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'),
+                    $iProfileId,
+                    DbTableName::AFFILIATE
+                );
+            }
         }
 
         $this->updateDynamicFields($iProfileId, $oAffModel);

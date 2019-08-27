@@ -77,8 +77,11 @@ class EditForm
             );
         }
 
-        $oForm->addElement(new \PFBC\Element\Date(t('Your Date of Birth:'), 'birth_date', ['id' => 'birth_date', 'onblur' => 'CValid(this.value, this.id)', 'value' => $sBirthDate, 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
+        if (self::isAdminLoggedAndUserIdExists($oHttpRequest)) {
+            // For security reasons, only admins can change the date of birth
+            $oForm->addElement(new \PFBC\Element\Date(t('Your Date of Birth:'), 'birth_date', ['id' => 'birth_date', 'onblur' => 'CValid(this.value, this.id)', 'value' => $sBirthDate, 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1]));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
+        }
 
         // Generate dynamic fields
         $oFields = $oAffModel->getInfoFields($iProfileId, DbTableName::AFFILIATE_INFO);
