@@ -149,6 +149,7 @@ class EditForm
      */
     private static function isAdminLoggedAndUserIdExists(HttpRequest $oHttpRequest)
     {
-        return AdminCore::auth() && !User::auth() && $oHttpRequest->getExists('profile_id');
+        return AdminCore::auth() && !User::auth() &&
+            $oHttpRequest->getExists('profile_id');
     }
 }
