@@ -49,7 +49,7 @@ class EditFormProcess extends Form
         }
 
         if (AdminCore::auth()) {
-            // For security reasons, only admins are able to change profile gender
+            // For security reasons, only admins can change profile gender
             if (!$this->str->equals($this->httpRequest->post('sex'), $oAff->sex)) {
                 $oAffModel->updateProfile(
                     'sex',

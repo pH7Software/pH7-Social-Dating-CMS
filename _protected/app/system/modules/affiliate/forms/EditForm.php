@@ -60,7 +60,7 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error phone"></span>'));
 
         if (self::isAdminLoggedAndUserIdExists($oHttpRequest)) {
-            // For security reasons, only admins are able to change profile gender
+            // For security reasons, only admins can change profile gender
             $oForm->addElement(
                 new \PFBC\Element\Radio(
                     t('Gender:'),
