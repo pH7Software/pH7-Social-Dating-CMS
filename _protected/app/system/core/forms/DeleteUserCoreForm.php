@@ -32,7 +32,19 @@ class DeleteUserCoreForm
         $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', ['required' => 1]));
         $oForm->addElement(new \PFBC\Element\Textarea(t('Your Reason:'), 'message', ['id' => 'str_reason', 'onblur' => 'CValid(this.value, this.id,5,500)', 'description' => t('Please be specific why you want to leave us.') . '<br />' . t('It will hep us to improve our service and make it the best one for you!'), 'required' => 1, 'validation' => new \PFBC\Validation\Str(5, 500)]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_reason"></span>'));
-        $oForm->addElement(new \PFBC\Element\Radio(t('Why:'), 'why_delete', [t("I'm not happy with the service."), t('I met someone.'), t('Other. I said the reason above.')], ['required' => 1]));
+        $oForm->addElement(
+            new \PFBC\Element\Radio(
+                t('Why:'),
+                'why_delete',
+                [
+                    t("I'm not happy with the service."),
+                    t('I met someone.'),
+                    t('My email address has changed.'),
+                    t('Other. I said the reason above.')
+                ],
+                ['required' => 1]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha'), 'captcha', ['id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:')]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         $oForm->addElement(new \PFBC\Element\Button);
