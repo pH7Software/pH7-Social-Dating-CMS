@@ -16,8 +16,8 @@ use RobThree\Auth\TwoFactorAuth as Authenticator;
 
 class MainController extends Controller
 {
-    const AUTHENTICATOR_ANDROID_APP_URL = 'https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2';
     const AUTHENTICATOR_IOS_APP_URL = 'https://itunes.apple.com/en/app/google-authenticator/id388497605';
+    const AUTHENTICATOR_ANDROID_APP_URL = 'https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2';
 
     const TWO_FACTOR_SECRET_STRING_LENGTH = 10;
     const WRONG_MODULE_ERROR_MESSAGE = 'Wrong "%s" module!';
@@ -86,6 +86,8 @@ class MainController extends Controller
             exit;
         }
 
+        $this->view->authenticator_ios_app_url = self::AUTHENTICATOR_IOS_APP_URL;
+        $this->view->authenticator_android_app_url = self::AUTHENTICATOR_ANDROID_APP_URL;
         $this->view->qr_core = $this->oAuthenticator->getQRCodeImageAsDataUri($this->getAuthenticatorName(), $sSecret, 240);
 
         $this->output();
@@ -156,7 +158,7 @@ class MainController extends Controller
      */
     private function update2FaStatus()
     {
-        $this->iIsEnabled = $this->iIsEnabled === 1 ? 0 : 1; // Get the opposite value (if 1 so 0 | if 0 so 1)
+        $this->iIsEnabled = ($this->iIsEnabled === 1) ? 0 : 1; // Get the opposite value (if 1 so 0 | if 0 so 1)
 
         $this->o2FactorModel->setStatus($this->iIsEnabled, $this->iProfileId);
     }
