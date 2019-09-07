@@ -16,6 +16,9 @@ use RobThree\Auth\TwoFactorAuth as Authenticator;
 
 class MainController extends Controller
 {
+    const AUTHENTICATOR_ANDROID_APP_URL = 'https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2';
+    const AUTHENTICATOR_IOS_APP_URL = 'https://itunes.apple.com/en/app/google-authenticator/id388497605';
+
     const TWO_FACTOR_SECRET_STRING_LENGTH = 10;
     const WRONG_MODULE_ERROR_MESSAGE = 'Wrong "%s" module!';
     const BACKUP_CODE_FILE_EXT = '.txt';
