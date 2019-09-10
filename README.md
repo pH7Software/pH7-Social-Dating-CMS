@@ -223,7 +223,7 @@ You can find and add other languages on the [I18N repo](https://github.com/pH7So
 
 [![Pierre-Henry Soria](https://avatars0.githubusercontent.com/u/1325411?s=200)](https://pierrehenry.be "My personal website :-)")
 
-Coded & Designed with lots of ❤ by [Pierre-Henry Soria](https://ph7.me). A SUPER Passionate Belgian Software Engineer 🍫🍺
+Designed & Coded with lots of ❤ by [Pierre-Henry Soria](https://ph7.me). A SUPER Passionate Belgian Software Engineer 🍫🍺
 
 
 ## 🤝 Hire Me At Your Company?
@@ -303,7 +303,7 @@ Finally, **please consider using green Web hosting** (which use Green Power supp
 You can send me an email for any suggestions or feedback at: *hello {AT} ph7cms {D0T} com*
 
 
-## ⚖ License
+## ⚖️ License
 
 **pH7CMS** is generously distributed under **Open Source, Free** License.
 
