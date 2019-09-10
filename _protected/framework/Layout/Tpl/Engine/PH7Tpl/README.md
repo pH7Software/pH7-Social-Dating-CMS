@@ -15,7 +15,7 @@ pH7Tpl supports two different syntaxes:
 2. "*TAL (Template Attribute Language)*" is inspired from XSLT/XML syntax, but simplified and easier to use.
 
 
-## 💨 Built to be the FASTEST
+## 💨 Built to be the FASTEST 🌠
 
 It translates all high-level code into PHP, then save it until the .tpl file is modified.
 
