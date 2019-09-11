@@ -35,6 +35,7 @@ class VerificationCodeForm
                 'verification_code',
                 [
                     'description' => '<i class="fa fa-mobile"></i> ' . t('Open your two-factor authentication app on your device to view the 6 digit code.'),
+                    'pattern' => '\d{6}',
                     'maxlength' => 6,
                     'autocomplete' => 'off',
                     'required' => 1
