@@ -4,8 +4,58 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "92e1479d2095ba3446267dac93822399",
+    "content-hash": "4004e38857be4e40687f679ef9676e21",
     "packages": [
+        {
+            "name": "arcansecurity/skeerel-php",
+            "version": "2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ArcanSecurity/skeerel-php.git",
+                "reference": "58280eba71de64c5d53ca39d32da419f9c3be611"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ArcanSecurity/skeerel-php/zipball/58280eba71de64c5d53ca39d32da419f9c3be611",
+                "reference": "58280eba71de64c5d53ca39d32da419f9c3be611",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=5.4.0"
+            },
+            "suggest": {
+                "ext-mcrypt": "Install the Mcrypt extension in backup of openssl.",
+                "ext-openssl": "Install the OpenSSL extension in order to generate better random bits."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Skeerel\\": "Skeerel/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ArcanSecurity and contributors",
+                    "homepage": "https://github.com/ArcanSecurity/skeerel-php/graphs/contributors"
+                }
+            ],
+            "description": "Skeerel PHP Library",
+            "homepage": "https://skeerel.com/",
+            "keywords": [
+                "api",
+                "arcansecurity",
+                "passwordless authentication",
+                "payment",
+                "php",
+                "skeerel"
+            ],
+            "time": "2019-09-03T15:36:25+00:00"
+        },
         {
             "name": "arcturial/clickatell",
             "version": "3.0.0",
