@@ -384,6 +384,36 @@ class MainController extends Controller
         }
     }
 
+    private function skeerelHandler()
+    {
+        if (\Skeerel\Skeerel::verifyAndRemoveSessionStateParameter(
+            $this->httpRequest->get('state')
+        )) {
+            $oSkeerel = new \Skeerel\Skeerel(
+                $this->config->values['module.setting']['skeerel.website_id'],
+                $this->config->values['module.setting']['skeerel.website_secret']
+            );
+            $oResult = $oSkeerel->getData($this->httpRequest->get('token'));
+
+            if ($oResult->status) {
+                $iItemNumber = $this->httpRequest->post('item_number');
+                if ($this->oUserModel->updateMembership(
+                    $iItemNumber,
+                    $this->iProfileId,
+                    $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
+                )) {
+                    $this->bStatus = true; // Status is OK
+                    $this->updateUserGroupId($iItemNumber);
+                    $this->notification(Skeerel::class, $iItemNumber);
+                }
+            }
+        } else {
+            $this->design->setMessage(
+                t('Error occurred while processing transaction.')
+            );
+        }
+    }
+
     /**
      * Create a Payment Log file.
      *
