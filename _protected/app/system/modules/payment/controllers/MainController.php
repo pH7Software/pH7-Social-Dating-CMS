@@ -29,6 +29,7 @@ class MainController extends Controller
     const STRIPE_GATEWAY_NAME = 'stripe';
     const BRAINTREE_GATEWAY_NAME = 'braintree';
     const TWO_CHECKOUT_GATEWAY_NAME = '2co';
+    const SKEEREL_GATEWAY_NAME = 'skeerel';
     const CCBILL_GATEWAY_NAME = 'ccbill';
 
     const REDIRECTION_DELAY = 4; // In seconds
@@ -131,6 +132,10 @@ class MainController extends Controller
 
             case static::TWO_CHECKOUT_GATEWAY_NAME:
                 $this->twoCheckOutHandler();
+                break;
+
+            case static::SKEEREL_GATEWAY_NAME:
+                $this->skeerelHandler();
                 break;
 
             case static::CCBILL_GATEWAY_NAME:

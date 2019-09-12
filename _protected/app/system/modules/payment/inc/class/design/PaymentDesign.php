@@ -150,6 +150,32 @@ class PaymentDesign extends Framework\Core\Core
      *
      * @return void
      */
+    public function buttonSkeerel(stdClass $oMembership)
+    {
+        $sWebsiteId = $this->config->values['module.setting']['website_id'];
+        $sSessionState = \Skeerel\Util\Session::get(\Skeerel\Skeerel::DEFAULT_COOKIE_NAME);
+        $bSandboxMode = (bool)$this->config->values['module.setting']['sandbox.enabled'];
+        $iPrice = $oMembership->price;
+        $sCurrencyCode = $this->config->values['module.setting']['currency_code'];
+        $sRedirectUrl = Uri::get('payment', 'main', 'process', 'skeerel');
+
+        echo <<<HTML
+<script src="https://api.skeerel.com/assets/v2/javascript/api.min.js"
+        id="skeerel-api-script"
+        data-website-id="$sWebsiteId"
+        data-state="$sSessionState"
+        data-redirect-url="$sRedirectUrl"
+        data-payment-test="$bSandboxMode"
+        data-amount="$iPrice"
+        data-currency="$sCurrencyCode"></script>
+HTML;
+    }
+
+    /**
+     * @param stdClass $oMembership
+     *
+     * @return void
+     */
     public function buttonCCBill(stdClass $oMembership)
     {
         // Not implemented yet.
