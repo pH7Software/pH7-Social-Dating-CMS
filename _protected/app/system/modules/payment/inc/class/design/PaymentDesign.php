@@ -152,8 +152,6 @@ class PaymentDesign extends Framework\Core\Core
      */
     public function buttonSkeerel(stdClass $oMembership)
     {
-		\Skeerel\Skeerel::generateSessionStateParameter();
-		
         $sWebsiteId = $this->config->values['module.setting']['website_id'];
         $sSessionState = \Skeerel\Util\Session::get(\Skeerel\Skeerel::DEFAULT_COOKIE_NAME);
         $bSandboxMode = (bool)$this->config->values['module.setting']['sandbox.enabled'];
