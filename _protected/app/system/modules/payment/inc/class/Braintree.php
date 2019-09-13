@@ -33,7 +33,7 @@ class Braintree extends BraintreeGateway
         Braintree_Configuration::privateKey($oConfig->values['module.setting']['braintree.private_ke']);
     }
 
-    private function isSandboxEnabled(Config $oConfig)
+    private static function isSandboxEnabled(Config $oConfig)
     {
         return (bool)$oConfig->values['module.setting']['sandbox.enabled'] ||
             $oConfig->values['module.setting']['braintree.merchant_id'] === static::SANDBOX_MERCHANT_ID;
