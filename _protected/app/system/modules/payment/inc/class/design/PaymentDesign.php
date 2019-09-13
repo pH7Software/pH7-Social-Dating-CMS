@@ -155,7 +155,7 @@ class PaymentDesign extends Framework\Core\Core
     {
         Skeerel::generateSessionStateParameter(Skeerel::DEFAULT_COOKIE_NAME);
 
-        $sWebsiteId = $this->config->values['module.setting']['website_id'];
+        $sWebsiteId = $this->config->values['module.setting']['skeerel.website_id'];
         $sSessionState = \Skeerel\Util\Session::get(Skeerel::DEFAULT_COOKIE_NAME);
         $bSandboxMode = (bool)$this->config->values['module.setting']['sandbox.enabled'];
         $sPrice = $oMembership->price; // Decimal price format (e.g., 19.95)
