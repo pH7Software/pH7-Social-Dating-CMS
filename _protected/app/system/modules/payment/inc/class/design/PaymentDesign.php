@@ -13,6 +13,7 @@ namespace PH7;
 use Braintree_ClientToken;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Payment\Gateway\Api\Api as PaymentApi;
+use Skeerel\Skeerel;
 use stdClass;
 
 class PaymentDesign extends Framework\Core\Core
@@ -152,8 +153,10 @@ class PaymentDesign extends Framework\Core\Core
      */
     public function buttonSkeerel(stdClass $oMembership)
     {
+        Skeerel::generateSessionStateParameter(Skeerel::DEFAULT_COOKIE_NAME);
+
         $sWebsiteId = $this->config->values['module.setting']['website_id'];
-        $sSessionState = \Skeerel\Util\Session::get(\Skeerel\Skeerel::DEFAULT_COOKIE_NAME);
+        $sSessionState = \Skeerel\Util\Session::get(Skeerel::DEFAULT_COOKIE_NAME);
         $bSandboxMode = (bool)$this->config->values['module.setting']['sandbox.enabled'];
         $iPrice = $oMembership->price;
         $sCurrencyCode = $this->config->values['module.setting']['currency_code'];
