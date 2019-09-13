@@ -170,7 +170,8 @@ class PaymentDesign extends Framework\Core\Core
         data-redirect-url="$sRedirectUrl"
         data-payment-test="$bSandboxMode"
         data-amount="$sPrice"
-        data-currency="$sCurrencyCode"></script>
+        data-currency="$sCurrencyCode">
+</script>
 HTML;
     }
 
