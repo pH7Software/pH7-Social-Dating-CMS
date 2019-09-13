@@ -158,7 +158,7 @@ class PaymentDesign extends Framework\Core\Core
         $sWebsiteId = $this->config->values['module.setting']['website_id'];
         $sSessionState = \Skeerel\Util\Session::get(Skeerel::DEFAULT_COOKIE_NAME);
         $bSandboxMode = (bool)$this->config->values['module.setting']['sandbox.enabled'];
-        $iPrice = $oMembership->price;
+        $sPrice = $oMembership->price; // Decimal price format (e.g., 19.95)
         $sCurrencyCode = $this->config->values['module.setting']['currency_code'];
         $sRedirectUrl = Uri::get('payment', 'main', 'process', 'skeerel');
 
@@ -169,7 +169,7 @@ class PaymentDesign extends Framework\Core\Core
         data-state="$sSessionState"
         data-redirect-url="$sRedirectUrl"
         data-payment-test="$bSandboxMode"
-        data-amount="$iPrice"
+        data-amount="$sPrice"
         data-currency="$sCurrencyCode"></script>
 HTML;
     }
