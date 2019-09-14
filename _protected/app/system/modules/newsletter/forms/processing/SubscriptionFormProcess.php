@@ -83,7 +83,7 @@ class SubscriptionFormProcess extends Form
      *
      * @return int Number of recipients who were accepted for delivery.
      */
-    protected function sendMail(array $aData)
+    private function sendMail(array $aData)
     {
         $sActivateLink = Uri::get('newsletter', 'home', 'activate') . PH7_SH . $aData['email'] . PH7_SH . $aData['hash_validation'];
 
