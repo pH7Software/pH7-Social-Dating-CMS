@@ -146,7 +146,7 @@ class MainController extends Controller
 
             default:
                 $this->paypalHandler(); // Default payment gateway
-                //$this->displayPageNotFound(t('Provider Not Found!'));
+            //$this->displayPageNotFound(t('Provider Not Found!'));
         }
 
         // Set the page titles
