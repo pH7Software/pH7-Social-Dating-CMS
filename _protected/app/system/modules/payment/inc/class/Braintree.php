@@ -22,9 +22,7 @@ class Braintree extends BraintreeGateway
     {
         $sEnvironment = 'production';
 
-        if ((bool)$oConfig->values['module.setting']['sandbox.enabled'] ||
-            $oConfig->values['module.setting']['braintree.merchant_id'] === static::SANDBOX_MERCHANT_ID
-        ) {
+        if (self::isSandboxEnabled($oConfig)) {
             $sEnvironment = 'sandbox';
         }
 
@@ -33,5 +31,11 @@ class Braintree extends BraintreeGateway
         Braintree_Configuration::merchantId($oConfig->values['module.setting']['braintree.merchant_id']);
         Braintree_Configuration::publicKey($oConfig->values['module.setting']['braintree.public_key']);
         Braintree_Configuration::privateKey($oConfig->values['module.setting']['braintree.private_ke']);
+    }
+
+    private static function isSandboxEnabled(Config $oConfig)
+    {
+        return (bool)$oConfig->values['module.setting']['sandbox.enabled'] ||
+            $oConfig->values['module.setting']['braintree.merchant_id'] === static::SANDBOX_MERCHANT_ID;
     }
 }

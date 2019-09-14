@@ -14,6 +14,7 @@ namespace PH7;
 use Braintree_Transaction;
 use DateInterval;
 use DateTime;
+use Exception;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\File\File;
@@ -29,6 +30,7 @@ class MainController extends Controller
     const STRIPE_GATEWAY_NAME = 'stripe';
     const BRAINTREE_GATEWAY_NAME = 'braintree';
     const TWO_CHECKOUT_GATEWAY_NAME = '2co';
+    const SKEEREL_GATEWAY_NAME = 'skeerel';
     const CCBILL_GATEWAY_NAME = 'ccbill';
 
     const REDIRECTION_DELAY = 4; // In seconds
@@ -97,7 +99,7 @@ class MainController extends Controller
         if (empty($iMembershipId) || empty($oMembershipData)) {
             $this->displayPageNotFound(t('No membership found!'));
         } else {
-            // Adding the stylesheet for Gatway Logo
+            // Adding the stylesheet for gateway logos
             $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'common.css');
 
             // Regenerate the session ID to prevent the session fixation attack
@@ -133,6 +135,10 @@ class MainController extends Controller
                 $this->twoCheckOutHandler();
                 break;
 
+            case static::SKEEREL_GATEWAY_NAME:
+                $this->skeerelHandler();
+                break;
+
             case static::CCBILL_GATEWAY_NAME:
                 // Still in developing...
                 // You are more than welcome to contribute on GitHub: https://github.com/pH7Software/pH7-Social-Dating-CMS
@@ -140,7 +146,7 @@ class MainController extends Controller
 
             default:
                 $this->paypalHandler(); // Default payment gateway
-                //$this->displayPageNotFound(t('Provider Not Found!'));
+            //$this->displayPageNotFound(t('Provider Not Found!'));
         }
 
         // Set the page titles
@@ -376,6 +382,40 @@ class MainController extends Controller
                 $this->updateUserGroupId($iItemNumber);
                 $this->notification(TwoCO::class, $iItemNumber);
             }
+        }
+    }
+
+    private function skeerelHandler()
+    {
+        try {
+            if (\Skeerel\Skeerel::verifyAndRemoveSessionStateParameter(
+                $this->httpRequest->get('state')
+            )) {
+                $oSkeerel = new \Skeerel\Skeerel(
+                    $this->config->values['module.setting']['skeerel.website_id'],
+                    $this->config->values['module.setting']['skeerel.website_secret']
+                );
+                $oResult = $oSkeerel->getData($this->httpRequest->get('token'));
+
+                if ($oResult->status) {
+                    $iItemNumber = $this->httpRequest->post('item_number');
+                    if ($this->oUserModel->updateMembership(
+                        $iItemNumber,
+                        $this->iProfileId,
+                        $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
+                    )) {
+                        $this->bStatus = true; // Status is OK
+                        $this->updateUserGroupId($iItemNumber);
+                        $this->notification(Skeerel::class, $iItemNumber);
+                    }
+                }
+            } else {
+                $this->design->setMessage(
+                    t('Payment state parameter cannot be verified.')
+                );
+            }
+        } catch (Exception $oE) {
+            $this->design->setMessage($this->str->escape($oE->getMessage(), true));
         }
     }
 
