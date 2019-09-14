@@ -443,6 +443,8 @@ class AdminController extends Controller
             null,
             self::REDIRECTION_DELAY_IN_SEC
         );
-        $this->displayPageNotFound(t('No affiliates have been found!'));
+
+        $sErrorMsg = t('No affiliates have been found!');
+        $this->displayPageNotFound($sErrorMsg);
     }
 }
