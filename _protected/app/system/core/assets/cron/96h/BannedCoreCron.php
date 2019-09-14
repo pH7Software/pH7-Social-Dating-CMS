@@ -91,7 +91,7 @@ class BannedCoreCron extends Cron
         foreach (self::SVC_URLS as $sUrl) {
             try {
                 /**
-                 * If we don't get true then we have an error
+                 * If we don't get TRUE, then, we have an error...
                  */
                 if (!$this->callWebService($sUrl)) {
                     (new Logger())->msg(
@@ -100,7 +100,7 @@ class BannedCoreCron extends Cron
                 }
 
                 /**
-                 * We catch exception so we can continue if one service fail
+                 * Catch exception, so we can continue if one service fails
                  */
             } catch (Exception $oExcept) {
                 (new Logger())->msg(
