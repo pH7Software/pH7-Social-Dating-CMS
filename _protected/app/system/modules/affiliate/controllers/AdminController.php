@@ -395,7 +395,6 @@ class AdminController extends Controller
 
                 if (!empty($this->sMsg)) {
                     $this->sendRegistrationMail();
-
                     $this->oAff->clearReadProfileCache($oUser->profileId, DbTableName::AFFILIATE);
 
                     $sOutputMsg = t('Done!');
