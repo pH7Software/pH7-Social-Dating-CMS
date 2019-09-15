@@ -21,7 +21,7 @@ class Permission extends PermissionCore
         parent::__construct();
 
         /**
-         * Make sure the page is requested directly through the signup process.
+         * Make sure the page is only requested through the signup process.
          */
         if (!$this->session->exists('mail_step3')) {
             Header::redirect(
