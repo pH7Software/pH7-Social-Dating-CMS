@@ -402,7 +402,7 @@ class AdminController extends Controller
                     $sOutputMsg = t('Error! Bad argument in the URL.');
                 }
             } else {
-                $sOutputMsg = t('The user is not found!');
+                $sOutputMsg = t("The requested user ID wasn't found.");
             }
         } else {
             $sOutputMsg = t('Error! Missing argument in the URL.');
@@ -448,7 +448,7 @@ class AdminController extends Controller
             self::REDIRECTION_DELAY_IN_SEC
         );
 
-        $sErrorMsg = t('No affiliates have been found!');
+        $sErrorMsg = t('No affiliates have been found.');
         $this->displayPageNotFound($sErrorMsg);
     }
 }
