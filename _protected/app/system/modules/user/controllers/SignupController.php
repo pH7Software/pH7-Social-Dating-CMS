@@ -90,7 +90,8 @@ class SignupController extends Controller
     public function step4()
     {
         $this->setTitle(t('Now, Upload a Photo of You! 😃'));
-        $this->view->avatarDesign = new AvatarDesignCore; // Add AvatarDesign Class for displaying the avatar lightBox
+        // Assign AvatarDesign to view for displaying the avatar lightBox through the step4.tpl
+        $this->view->avatarDesign = new AvatarDesignCore;
 
         $this->output();
     }
