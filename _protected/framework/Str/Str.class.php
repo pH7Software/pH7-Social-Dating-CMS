@@ -269,14 +269,13 @@ namespace PH7\Framework\Str {
         {
             preg_match_all(self::regexNormalize($sPattern), $sText, $aMatches, PREG_PATTERN_ORDER);
 
-            $mRet = null; // Default value
             if (!empty($aMatches[1])) {
-                $mRet = $aMatches[1];
+                return $aMatches[1];
             } elseif (!empty($aMatches[0])) {
-                $mRet = $aMatches[0];
+                return $aMatches[0];
             }
 
-            return $mRet;
+            return null;
         }
 
         /**
