@@ -232,6 +232,7 @@ class MainController extends Controller
         $iAffCom = $this->getAffiliateCommissionAmount();
 
         if ($iAffCom > 0) {
+            // If commission amount is higher than 0, we update the user's commission
             $this->oUserModel->updateUserJoinCom($iAffId, $iAffCom);
         }
     }
