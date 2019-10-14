@@ -75,8 +75,7 @@ class PaymentDesign extends Framework\Core\Core
                 data-description="', $oMembership->name, '"
                 data-amount="', Stripe::getAmount($oMembership->price), '"
                 data-currency="', $this->config->values['module.setting']['currency_code'], '"
-                data-allow-remember-me="true"
-                data-bitcoin="true">
+                data-allow-remember-me="true">
             </script>
         </form>';
 
