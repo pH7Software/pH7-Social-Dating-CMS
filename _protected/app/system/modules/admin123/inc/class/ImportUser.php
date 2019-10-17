@@ -159,7 +159,7 @@ class ImportUser extends Core
                 $this->aTmpData['username'] = $sKey;
             }
 
-            if ($sVal === 'name' || $sVal === 'firstname' || $sVal === 'givenname' || $sVal === 'forname') {
+            if ($sVal === 'name' || $sVal === 'firstname' || $sVal === 'givenname' || $sVal === 'forename') {
                 $this->aTmpData['first_name'] = $sKey;
             }
 
