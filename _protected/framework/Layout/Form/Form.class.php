@@ -86,7 +86,7 @@ abstract class Form extends Core
      */
     public static function duplicateContentMsg()
     {
-        return t("It seems you have previously sent the same message. Be unique and you'll increase your chances of receiving a reply 😉");
+        return t("It seems you previously sent the same message. Be unique and you'll increase your chances of receiving a reply 😉");
     }
 
     /**
