@@ -15,6 +15,8 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class Form extends Framework\Layout\Form\Form
 {
+    use Framework\Layout\Form\Message;
+
     /**
      * To get Value Data from the database.
      *
