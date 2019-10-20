@@ -341,6 +341,12 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Color(t('Text:'), 'text_color', ['value' => DbConfig::getSetting('textColor')]));
 
+        $oForm->addElement(new \PFBC\Element\Color(t('First Heading (H1):'), 'heading1_color', ['value' => DbConfig::getSetting('heading1Color')]));
+
+        $oForm->addElement(new \PFBC\Element\Color(t('Second Heading (H2):'), 'heading2_color', ['value' => DbConfig::getSetting('heading2Color')]));
+
+        $oForm->addElement(new \PFBC\Element\Color(t('Third Heading (H3):'), 'heading3_color', ['value' => DbConfig::getSetting('heading3Color')]));
+
         $oForm->addElement(new \PFBC\Element\Color(t('Links:'), 'link_color', ['value' => DbConfig::getSetting('linkColor')]));
 
         $oForm->addElement(new \PFBC\Element\Color(t('Footer Links:'), 'footer_link_color', ['value' => DbConfig::getSetting('footerLinkColor')]));
