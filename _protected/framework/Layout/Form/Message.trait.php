@@ -76,7 +76,7 @@ trait Message
      */
     public static function loginAttemptsExceededMsg($iWaitTime)
     {
-        return t('Oops! You have exceeded the allowed login attempts. Please try again in %0% %1%.', static::convertTime($iWaitTime), static::getTimeText($iWaitTime));
+        return t('Oops! You have exceeded the allowed login attempts. Please try again in %0% %1%.', self::convertTime($iWaitTime), self::getTimeText($iWaitTime));
     }
 
     /**
@@ -113,7 +113,7 @@ trait Message
      */
     public static function waitWriteMsg($iWaitTime)
     {
-        return t('Oops! You should wait %0% %1% before you can send another one 😉', static::convertTime($iWaitTime), static::getTimeText($iWaitTime));
+        return t('Oops! You should wait %0% %1% before you can send another one 😉', self::convertTime($iWaitTime), self::getTimeText($iWaitTime));
     }
 
     /**
@@ -125,7 +125,7 @@ trait Message
      */
     public static function waitRegistrationMsg($iWaitTime)
     {
-        return t('Oops! Somebody has recently registered with the same IP address. Do you mind waiting %0% %1%?', static::convertTime($iWaitTime), static::getTimeText($iWaitTime));
+        return t('Oops! Somebody has recently registered with the same IP address. Do you mind waiting %0% %1%?', self::convertTime($iWaitTime), self::getTimeText($iWaitTime));
     }
 
     /**
