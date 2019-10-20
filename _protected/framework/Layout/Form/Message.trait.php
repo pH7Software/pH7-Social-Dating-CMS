@@ -10,6 +10,9 @@
 
 namespace PH7\Framework\Layout\Form;
 
+use PH7\Framework\Image\Image;
+use PH7\Framework\Video\Video;
+
 trait Message
 {
     /**
@@ -29,7 +32,7 @@ trait Message
      */
     public static function wrongImgFileTypeMsg()
     {
-        return t('The file type is incompatible or too large. Please try with a smaller image with .jpg, .png or .gif, extension.');
+        return t('The file type is incompatible or too large. Please try with a smaller image with one of the following extensions: %0%', self::getImageExtensions());
     }
 
     /**
@@ -39,7 +42,7 @@ trait Message
      */
     public static function wrongVideoFileTypeMsg()
     {
-        return t('File type is incompatible or too large. The accepted file types are: .mov, .avi, .flv, .mp4, .mpg/.mpeg, .wmv, .ogg, .ogv, .webm or .mkv');
+        return t('File type is incompatible or too large. The accepted file types are: %0%', self::getVideoExtensions());
     }
 
     /**
@@ -156,5 +159,21 @@ trait Message
         }
 
         return $iWaitTime;
+    }
+
+    /**
+     * @return string e.g., .jpg, .png, .gif, .webp
+     */
+    private static function getImageExtensions()
+    {
+        return '.' . implode(', .', Image::SUPPORTED_TYPES);
+    }
+
+    /**
+     * @return string e.g., .mov, .avi, .flv, .mp4, .mpg
+     */
+    private static function getVideoExtensions()
+    {
+        return '.' . implode(', .', array_keys(Video::SUPPORTED_TYPES));
     }
 }
