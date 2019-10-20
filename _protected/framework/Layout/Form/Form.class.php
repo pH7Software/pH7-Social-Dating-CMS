@@ -78,7 +78,7 @@ abstract class Form extends Core
      */
     public static function loginAttemptsExceededMsg($iWaitTime)
     {
-        return t('Oops! You have exceeded allowed login attemts. Please try again in %0% %1%.', static::convertTime($iWaitTime), static::getTimeText($iWaitTime));
+        return t('Oops! You have exceeded the allowed login attempts. Please try again in %0% %1%.', static::convertTime($iWaitTime), static::getTimeText($iWaitTime));
     }
 
     /**
