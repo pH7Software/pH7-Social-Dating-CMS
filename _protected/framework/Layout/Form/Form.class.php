@@ -24,7 +24,7 @@ abstract class Form extends Core
      */
     public static function errorTokenMsg()
     {
-        return t('The security token does not exist or the security time of the token has expired. Please try again!');
+        return t('The security token does not exist or its lifetime has expired. Please try once again');
     }
 
     /**
@@ -34,7 +34,7 @@ abstract class Form extends Core
      */
     public static function wrongImgFileTypeMsg()
     {
-        return t('The file type is incompatible or too large. Please try again a smaller image with .gif, .png or .jpg extension.');
+        return t('The file type is incompatible or too large. Please try with a smaller image with .jpg, .png or .gif, extension.');
     }
 
     /**
@@ -44,7 +44,7 @@ abstract class Form extends Core
      */
     public static function wrongVideoFileTypeMsg()
     {
-        return t('The file type is incompatible or too large. The accepted file types are: .mov, .avi, .flv, .mp4, .mpg/.mpeg, .wmv, .ogg, .ogv, .webm or .mkv');
+        return t('File type is incompatible or too large. The accepted file types are: .mov, .avi, .flv, .mp4, .mpg/.mpeg, .wmv, .ogg, .ogv, .webm or .mkv');
     }
 
     /**
@@ -66,7 +66,7 @@ abstract class Form extends Core
      */
     public static function errorSendingEmail()
     {
-        return t('Oops! Our email server encountered an internal error and the email could not be sent. Please try again later!');
+        return t('Oops! Our email server encountered an internal error. The email could not be sent. Please try again later');
     }
 
     /**
@@ -94,7 +94,7 @@ abstract class Form extends Core
      */
     public static function tooManyUrlsMsg()
     {
-        return t('Oops! It seems that you abuse of links. Why links are that important for you...?');
+        return t('Oops! It seems you are abusing of links. Why are links so important to you?');
     }
 
     /**
@@ -102,7 +102,7 @@ abstract class Form extends Core
      */
     public static function tooManyEmailsMsg()
     {
-        return t('Oops! It seems that you abuse of emails. Why emails are that important for you...?');
+        return t('Oops! It seems you abused of emails. Why are emails so important to you?');
     }
 
 
@@ -115,7 +115,7 @@ abstract class Form extends Core
      */
     public static function waitWriteMsg($iWaitTime)
     {
-        return t('Oops! You have to wait %0% %1% before you can send another.', static::convertTime($iWaitTime), static::getTimeText($iWaitTime));
+        return t('Oops! You should wait %0% %1% before you can send another one 😉', static::convertTime($iWaitTime), static::getTimeText($iWaitTime));
     }
 
     /**
@@ -127,7 +127,7 @@ abstract class Form extends Core
      */
     public static function waitRegistrationMsg($iWaitTime)
     {
-        return t('Oops! Somebody has recently registered with the same IP address. You have to wait %0% %1% before try again.', static::convertTime($iWaitTime), static::getTimeText($iWaitTime));
+        return t('Oops! Somebody has recently registered with the same IP address. Do you mind waiting %0% %1%?', static::convertTime($iWaitTime), static::getTimeText($iWaitTime));
     }
 
     /**
