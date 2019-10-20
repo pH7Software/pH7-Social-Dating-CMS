@@ -101,7 +101,7 @@
           </div>
       {/if}
 
-      {* Heading groups *}
+      {* Heading groups (H1 to H4) *}
       {main_include 'headings.inc.tpl'}
 
       {* Don't display the top middle banner on the the splash page *}

@@ -30,7 +30,7 @@ class HomeController extends Controller
         $this->view->meta_description = t('This module is just an example to show how easy you can create modules with pH7CMS');
         $this->view->meta_keywords = t('hello world, test, developpers, CMS, Dating CMS, CMS Dating, Social CMS, pH7, pH7 CMS, Dating Script, Social Dating Script, Dating Software, Social Network Software, Social Networking Software');
 
-        /* H TITLE html tag H1 to H4 */
+        /* Heading html tags (H1 to H4) */
         $this->view->h1_title = t('Example of a simple module that displays "Hello World"');
         $this->view->h3_title = t('H3 title example');
         $this->view->desc = t('Hello %0% %1% How are you on this %2%?', $this->str->upperFirst($sFirstName), $this->str->upperFirst($sLastName), $this->dateTime->get()->date('l'));
