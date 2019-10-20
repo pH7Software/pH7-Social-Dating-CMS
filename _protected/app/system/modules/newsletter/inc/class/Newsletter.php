@@ -48,7 +48,7 @@ class Newsletter extends Core
     /**
      * Send the newsletter to subscribers.
      *
-     * @return array (integer | integer) ['status', 'nb_mail_sent']
+     * @return array ['status' => integer, 'nb_mail_sent' => integer]
      */
     public function sendMessages()
     {
