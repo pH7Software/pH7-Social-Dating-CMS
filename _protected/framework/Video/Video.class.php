@@ -23,6 +23,20 @@ use PH7\Framework\File\Upload;
 
 class Video extends Upload
 {
+    const SUPPORTED_TYPES = [
+        'mov' => 'video/mov',
+        'avi' => 'video/avi',
+        'flv' => 'video/flv',
+        'mp4' => 'video/mp4',
+        'mpg' => 'video/mpg',
+        'mpeg' => 'video/mpeg',
+        'wmv' => 'video/wmv',
+        'ogg' => 'video/ogg',
+        'ogv' => 'video/ogv',
+        'webm' => 'video/webm',
+        'mkv' => 'video/mkv'
+    ];
+
     const MP4_TYPE = 'mp4';
 
     /** @var File */
@@ -36,21 +50,6 @@ class Video extends Upload
 
     /** @var array */
     private $aFile;
-
-    /** @var array File formats supported */
-    private static $aAllowedTypes = [
-        'video/mov',
-        'video/avi',
-        'video/flv',
-        'video/mp4',
-        'video/mpg',
-        'video/mpeg',
-        'video/wmv',
-        'video/ogg',
-        'video/ogv',
-        'video/webm',
-        'video/mkv'
-    ];
 
     /**
      * @param array $aFile Example: $_FILES['video']
@@ -89,7 +88,7 @@ class Video extends Upload
                 throw new TooLargeException('Video file could not be uploaded. Possibly too large.');
             }
         } else {
-            return in_array($this->sType, self::$aAllowedTypes, true);
+            return in_array($this->sType, self::SUPPORTED_TYPES, true);
         }
     }
 

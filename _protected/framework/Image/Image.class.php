@@ -32,6 +32,13 @@ class Image
     const GIF_NAME = 'gif';
     const WEBP_NAME = 'webp';
 
+    const SUPPORTED_TYPES = [
+        self::JPG_NAME,
+        self::PNG_NAME,
+        self::GIF_NAME,
+        self::WEBP_NAME
+    ];
+
     const DEFAULT_MAX_WIDTH = 3000;
     const DEFAULT_MAX_HEIGHT = 3000;
 
