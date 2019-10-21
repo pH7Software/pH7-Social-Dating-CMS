@@ -303,17 +303,20 @@ class MainController extends Controller
             $sAmount = $this->httpRequest->post('amount');
 
             try {
-                $oCharge = \Stripe\Charge::create(
-                    [
-                        'amount' => Stripe::getAmount($sAmount),
-                        'currency' => $this->config->values['module.setting']['currency_code'],
-                        'source' => $this->httpRequest->post('stripeToken'),
-                        'description' => t('Membership charged for %0%', $this->httpRequest->post('stripeEmail'))
-                    ]
-                );
+                $oIntent = \Stripe\PaymentIntent::create([
+                    'payment_method_data' => [
+                        'type' => 'card',
+                        'card' => ['token' => $this->httpRequest->post('stripeToken'),],
+                    ],
+                    'amount' => Stripe::getAmount($sAmount),
+                    'currency' => $this->config->values['module.setting']['currency_code'],
+                    'confirmation_method' => 'manual',
+                    'confirm' => true,
+                    'description' => t('Membership charged for %0%', $this->httpRequest->post('stripeEmail'))
+                ]);
 
                 // Make sure the item has been paid
-                if ($oCharge->paid === true) {
+                if (!in_array($oIntent->status, ['requires_payment_method', 'requires_action'], true)) {
                     $iItemNumber = $this->httpRequest->post('item_number');
                     if ($this->oUserModel->updateMembership(
                         $iItemNumber,
