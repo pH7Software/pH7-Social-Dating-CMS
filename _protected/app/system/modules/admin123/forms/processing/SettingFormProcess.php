@@ -132,6 +132,9 @@ class SettingFormProcess extends Form
         // Design
         'background_color' => 'backgroundColor',
         'text_color' => 'textColor',
+        'heading1_color' => 'heading1Color',
+        'heading2_color' => 'heading2Color',
+        'heading3_color' => 'heading3Color',
         'link_color' => 'linkColor',
         'footer_link_color' => 'footerLinkColor',
         'link_hover_color' => 'linkHoverColor',

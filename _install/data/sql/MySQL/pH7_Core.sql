@@ -970,7 +970,7 @@ CREATE TABLE IF NOT EXISTS ph7_modules (
 
 INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of pH7CMS SQL schema (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.5.6', 1);
+('pH7CMS', 'SQL System Schema', '1.5.7', 1);
 
 
 CREATE TABLE IF NOT EXISTS ph7_report (
@@ -1001,6 +1001,9 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('defaultTemplate', @sDefaultTemplate, '', 'design'),
 ('backgroundColor', '', 'Override background color. Leave empty to disable', 'design'),
 ('textColor', '', 'Override text color. Leave empty to disable', 'design'),
+('heading1Color', '', 'Override H1 color. Leave empty to disable', 'design'),
+('heading2Color', '', 'Override H2 color. Leave empty to disable', 'design'),
+('heading3Color', '', 'Override H3 color. Leave empty to disable', 'design'),
 ('linkColor', '', 'Override links color. Leave empty to disable', 'design'),
 ('footerLinkColor', '', 'Override footer links color. Leave empty to disable', 'design'),
 ('linkHoverColor', '', 'Override links hover color. Leave empty to disable', 'design'),
