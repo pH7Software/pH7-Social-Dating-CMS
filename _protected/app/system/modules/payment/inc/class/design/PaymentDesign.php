@@ -43,7 +43,7 @@ class PaymentDesign extends Framework\Core\Core
             ->param('return', Uri::get('payment', 'main', 'process', 'paypal'))
             ->param('rm', 2)// Auto redirection in POST data
             ->param('notify_url', Uri::get('payment', 'main', 'notification', 'PH7\PayPal,' . $oMembership->groupId))
-            ->param('cancel_return', Uri::get('payment', 'main', 'membership', '?msg=' . t('The payment was aborted. No charge has been taken from your account.'), false));
+            ->param('cancel_return', $this->getCancelPaymentUrl());
 
         $this->displayGatewayForm($oPayPal, $oMembership->name, 'PayPal');
 
@@ -59,27 +59,32 @@ class PaymentDesign extends Framework\Core\Core
      */
     public function buttonStripe(stdClass $oMembership)
     {
-        $oStripe = new Stripe;
+        $iAmount = Stripe::getAmount($oMembership->price);
+        $sSuccessUrl = Uri::get('payment', 'main', 'process', 'stripe');
+        $sCancelUrl = $this->getCancelPaymentUrl();
 
-        $oStripe
-            ->param('item_number', $oMembership->groupId)
-            ->param('amount', $oMembership->price);
+        echo <<<HTML
+<script src="https://js.stripe.com/v3"></script>
+<button id="checkout-button">Stripe</button>
+HTML;
 
-        echo
-        '<form action="', $oStripe->getUrl(), '" method="post">',
-            $oStripe->generate(),
-            '<script
-                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                data-key="', $this->config->values['module.setting']['stripe.publishable_key'], '"
-                data-name="', $this->registry->site_name, '"
-                data-description="', $oMembership->name, '"
-                data-amount="', Stripe::getAmount($oMembership->price), '"
-                data-currency="', $this->config->values['module.setting']['currency_code'], '"
-                data-allow-remember-me="true">
-            </script>
-        </form>';
-
-        unset($oStripe);
+        echo <<<JS
+var stripe = Stripe('{$this->config->values['module.setting']['stripe.publishable_key']}');
+var checkoutButton = document.querySelector('#checkout-button');
+checkoutButton.addEventListener('click', function () {
+  stripe.redirectToCheckout({
+    items: [{
+      name: '{$this->registry->site_name}',
+      plan: '{$oMembership->name}',
+      amount: {$iAmount},
+      currency: '{$this->config->values['module.setting']['currency_code']}',
+      quantity: 1
+    }],
+    successUrl: '$sSuccessUrl',
+    cancelUrl: '$sCancelUrl'
+  });
+});
+JS;
     }
 
     /**
@@ -224,6 +229,20 @@ HTML;
     private function getDivFormContainer()
     {
         return '<div id="' . self::DIV_CONTAINER_NAME . '"></div>';
+    }
+
+    /**
+     * @return string
+     */
+    private function getCancelPaymentUrl()
+    {
+        return Uri::get(
+            'payment',
+            'main',
+            'membership',
+            '?msg=' . t('The payment was aborted. No charge has been taken from your account.'),
+            false
+        );
     }
 
     /**
