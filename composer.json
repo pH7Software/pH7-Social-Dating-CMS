@@ -38,7 +38,7 @@
         "robthree/twofactorauth": "^1.6",
         "shrikeh/teapot": "^2.3",
         "facebook/graph-sdk": "^5.6",
-        "stripe/stripe-php": "^5.9",
+        "stripe/stripe-php": "^7.5",
         "braintree/braintree_php": "^3.27",
         "arcansecurity/skeerel-php": "^2.3",
         "twilio/sdk": "^5.28",
