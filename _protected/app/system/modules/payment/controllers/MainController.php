@@ -316,7 +316,7 @@ class MainController extends Controller
                 ]);
 
                 // Make sure the item has been paid
-                if (!in_array($oIntent->status, ['requires_payment_method', 'requires_action'], true)) {
+                if (in_array($oIntent->status, ['requires_payment_method', 'requires_action'], true) === false) {
                     $iItemNumber = $this->httpRequest->post('item_number');
                     if ($this->oUserModel->updateMembership(
                         $iItemNumber,
