@@ -39,8 +39,9 @@ JS;
             if (!is_array($this->attributes['value'])) {
                 $this->attributes['value'] = [$this->attributes['value']];
             }
-        } else
+        } else {
             $this->attributes['value'] = [];
+        }
 
         if (substr($this->attributes['name'], -2) !== '[]') {
             $this->attributes['name'] .= '[]';
