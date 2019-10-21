@@ -328,10 +328,10 @@ class MainController extends Controller
                         $this->notification(Stripe::class, $iItemNumber);
                     }
                 }
-            } catch (\Stripe\Error\Card $oE) {
+            } catch (\Stripe\Exception\CardException  $oE) {
                 // The card has been declined
                 // Do nothing here as "$this->bStatus" is by default FALSE and so it will display "Error occurred" msg later
-            } catch (\Stripe\Error\Base $oE) {
+            } catch (\Stripe\Exception\ApiErrorException $oE) {
                 $this->design->setMessage($this->str->escape($oE->getMessage(), true));
             }
         }
