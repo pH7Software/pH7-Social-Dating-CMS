@@ -12,6 +12,8 @@ class Stripe
 {
     use Api; // Import the Api trait
 
+    const JS_LIBRARY_URL = 'https://checkout.stripe.com/checkout.js';
+
     /**
      * @param string $sPrice Normal price format (e.g., 19.95).
      *

@@ -63,10 +63,8 @@ class PaymentDesign extends Framework\Core\Core
         $sSuccessUrl = Uri::get('payment', 'main', 'process', 'stripe');
         $sCancelUrl = $this->getCancelPaymentUrl();
 
-        echo <<<HTML
-<script src="https://js.stripe.com/v3"></script>
-<button id="checkout-button">Stripe</button>
-HTML;
+        echo '<script src="', Stripe::JS_LIBRARY_URL, '"></script>';
+        echo '<button id="checkout-button">Stripe</button>';
 
         echo <<<JS
 var stripe = Stripe('{$this->config->values['module.setting']['stripe.publishable_key']}');
@@ -103,7 +101,7 @@ JS;
         Braintree::init($this->config);
         $sClientToken = Braintree_ClientToken::generate();
 
-        echo '<script src="https://js.braintreegateway.com/v2/braintree.js"></script>';
+        echo '<script src="', Braintree::JS_LIBRARY_URL, '"></script>';
 
         $oBraintree = new Braintree;
         $oBraintree
@@ -161,13 +159,14 @@ JS;
 
         $sWebsiteId = $this->config->values['module.setting']['skeerel.website_id'];
         $sSessionState = \Skeerel\Util\Session::get(Skeerel::DEFAULT_COOKIE_NAME);
+        $sJsLibrary = Skeerel::JS_LIBRARY_URL;
         $bSandboxMode = (bool)$this->config->values['module.setting']['sandbox.enabled'];
         $sPrice = $oMembership->price; // Decimal price format (e.g., 19.95)
         $sCurrencyCode = $this->config->values['module.setting']['currency_code'];
         $sRedirectUrl = Uri::get('payment', 'main', 'process', 'skeerel');
 
         echo <<<HTML
-<script src="https://api.skeerel.com/assets/v2/javascript/api.min.js"
+<script src="$sJsLibrary"
         id="skeerel-api-script"
         data-website-id="$sWebsiteId"
         data-state="$sSessionState"

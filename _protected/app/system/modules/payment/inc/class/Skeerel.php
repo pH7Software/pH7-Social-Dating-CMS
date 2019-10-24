@@ -11,4 +11,6 @@ namespace PH7;
 class Skeerel
 {
     use Api; // Import the Api trait
+
+    const JS_LIBRARY_URL = 'https://api.skeerel.com/assets/v2/javascript/api.min.js';
 }
