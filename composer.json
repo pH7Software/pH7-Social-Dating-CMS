@@ -57,7 +57,7 @@
     "shrikeh/teapot": "^2.3",
     "facebook/graph-sdk": "^5.6",
     "stripe/stripe-php": "^5.9",
-    "braintree/braintree_php": "^3.27",
+    "braintree/braintree_php": "^4.4.0",
     "arcansecurity/skeerel-php": "^2.3",
     "twilio/sdk": "^5.28",
     "arcturial/clickatell": "^3.0",
