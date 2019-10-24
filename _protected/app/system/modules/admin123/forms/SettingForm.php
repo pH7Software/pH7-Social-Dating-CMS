@@ -351,7 +351,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Color(t('Footer Links:'), 'footer_link_color', ['value' => DbConfig::getSetting('footerLinkColor')]));
 
-        $oForm->addElement(new \PFBC\Element\Color(t('Links hover:'), 'link_hover_color', ['value' => DbConfig::getSetting('linkHoverColor')]));
+        $oForm->addElement(new \PFBC\Element\Color(t('Links Hover:'), 'link_hover_color', ['value' => DbConfig::getSetting('linkHoverColor')]));
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal(
             '<div class="right"><a href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'resetcolor', (new SecurityToken)->url(), false) . '">' . t('Reset Colors') . '</a></div>'

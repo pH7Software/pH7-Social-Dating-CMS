@@ -16,6 +16,7 @@ class Braintree extends BraintreeGateway
 {
     use Api; // Import the Api trait
 
+    const JS_LIBRARY_URL = 'https://js.braintreegateway.com/v2/braintree.js';
     const SANDBOX_MERCHANT_ID = 'cbqd3ncztsszwbrh';
 
     public static function init(Config $oConfig)
