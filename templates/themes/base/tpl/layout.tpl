@@ -32,7 +32,7 @@
     <!-- Do not modify or remove this code! Think of those who spend a lot of time to develop this CMS & Framework for you -->
     <meta name="creator" content="pH7CMS, Pierre-Henry Soria - {software_url}" />
     <meta name="designer" content="pH7CMS, Pierre-Henry Soria - {software_url}" />
-    <meta name="generator" content="{software_name}  {software_version}" />
+    <meta name="generator" content="{software_name}, {software_version}" />
     <!-- End Copyright -->
 
     <!-- End Title and Meta -->
@@ -101,7 +101,7 @@
           </div>
       {/if}
 
-      {* Heading groups *}
+      {* Heading groups (H1 to H4) *}
       {main_include 'headings.inc.tpl'}
 
       {* Don't display the top middle banner on the the splash page *}

@@ -68,7 +68,7 @@ class Backup implements GenerableFile
             if ($iNum > 0) {
                 $aRow = $rResult->fetch();
 
-                $this->sSql .= "#\n# Table: $sTable\r\n#\r\n\r\n";
+                $this->sSql .= "--\r\n-- Table: $sTable\r\n--\r\n\r\n";
                 $this->sSql .= "DROP TABLE IF EXISTS $sTable;\r\n\r\n";
 
                 $sValue = $aRow[1];
@@ -213,11 +213,11 @@ class Backup implements GenerableFile
      */
     public function getHeaderContents()
     {
-        $sSql = "#################### Database Backup ####################\n" .
-            '# ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_VERSION . ', Build ' . Kernel::SOFTWARE_BUILD . "\r\n" .
-            '# Database name: ' . Config::getInstance()->values['database']['name'] . "\r\n" .
-            '# Created on ' . (new CDateTime)->get()->dateTime() . "\r\n" .
-            "#########################################################\r\n\r\n";
+        $sSql = "-- Database Backup\n" .
+            '-- ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_VERSION . ', Build ' . Kernel::SOFTWARE_BUILD . "\r\n" .
+            '-- Database name: ' . Config::getInstance()->values['database']['name'] . "\r\n" .
+            '-- Created on ' . (new CDateTime)->get()->dateTime() . "\r\n" .
+            "--r\n\r\n";
 
         return $sSql;
     }

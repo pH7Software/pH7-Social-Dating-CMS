@@ -5,7 +5,7 @@
 
 namespace PFBC\Validation;
 
-use PH7\Framework\Layout\Form\Form as FormMessage;
+use PH7\Framework\Layout\Form\Message;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
 
 class Token extends \PFBC\Validation
@@ -18,7 +18,7 @@ class Token extends \PFBC\Validation
      */
     public function __construct($sName)
     {
-        $this->message = FormMessage::errorTokenMsg();
+        $this->message = Message::errorTokenMsg();
         $this->sName = $sName;
     }
 

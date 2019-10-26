@@ -14,7 +14,7 @@ namespace PH7\Framework\Mvc\Request;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Error\CException\UserException;
-use PH7\Framework\Layout\Form\Form;
+use PH7\Framework\Layout\Form\Message;
 
 class WrongRequestMethodException extends UserException
 {
@@ -27,6 +27,6 @@ class WrongRequestMethodException extends UserException
      */
     public function __construct($sMethodName, $iCode)
     {
-        parent::__construct(Form::wrongRequestMethodMsg($sMethodName), $iCode);
+        parent::__construct(Message::wrongRequestMethodMsg($sMethodName), $iCode);
     }
 }

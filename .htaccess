@@ -56,7 +56,7 @@ ServerSignature Off
 </FilesMatch>
 
 # Leave open the humans.txt and robots.txt file
-<FilesMatch "humans\.txt|robots\.txt">
+<FilesMatch "humans\.txt|robots\.txt|(app-)?ads\.txt">
     # Apache 2.4+
     <IfModule mod_authz_core.c>
         Require all granted

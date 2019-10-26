@@ -22,7 +22,7 @@ class PhoneNumberFormProcess extends Form
         $oSmsApi = SmsGatewayFactory::create($this->config->values['module.setting']['default_sms_gateway']);
         $bResult = $oSmsApi->send(
             $sPhoneNumber,
-            t('Your verification code is: %0% Thank you. %site_name% team', Verification::getVerificationCode($iProfileId))
+            t('%0% is your verification code. Do not share it with anyone. Thank you, %site_name%', Verification::getVerificationCode($iProfileId))
         );
 
         if ($bResult) {

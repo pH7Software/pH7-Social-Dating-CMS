@@ -16,7 +16,7 @@ use PH7\Framework\Registry\Registry;
 use PH7\Framework\Security\Security;
 use PH7\Framework\Session\Session;
 
-// Automatic connection
+// Automatic connection ('Remember Me' feature)
 if (!UserCore::auth() && Registry::getInstance()->action !== 'soon') {
     $oCookie = new Cookie;
     if ($oCookie->exists(['member_remember', 'member_id'])) {

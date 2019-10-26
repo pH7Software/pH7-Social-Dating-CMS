@@ -7,7 +7,6 @@
  * @copyright        (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Str
- * @version          1.2
  */
 
 namespace PH7\Framework\Str {
@@ -270,14 +269,13 @@ namespace PH7\Framework\Str {
         {
             preg_match_all(self::regexNormalize($sPattern), $sText, $aMatches, PREG_PATTERN_ORDER);
 
-            $mRet = null; // Default value
             if (!empty($aMatches[1])) {
-                $mRet = $aMatches[1];
+                return $aMatches[1];
             } elseif (!empty($aMatches[0])) {
-                $mRet = $aMatches[0];
+                return $aMatches[0];
             }
 
-            return $mRet;
+            return null;
         }
 
         /**

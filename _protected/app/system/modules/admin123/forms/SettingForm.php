@@ -341,11 +341,17 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Color(t('Text:'), 'text_color', ['value' => DbConfig::getSetting('textColor')]));
 
+        $oForm->addElement(new \PFBC\Element\Color(t('First Heading (H1):'), 'heading1_color', ['value' => DbConfig::getSetting('heading1Color')]));
+
+        $oForm->addElement(new \PFBC\Element\Color(t('Second Heading (H2):'), 'heading2_color', ['value' => DbConfig::getSetting('heading2Color')]));
+
+        $oForm->addElement(new \PFBC\Element\Color(t('Third Heading (H3):'), 'heading3_color', ['value' => DbConfig::getSetting('heading3Color')]));
+
         $oForm->addElement(new \PFBC\Element\Color(t('Links:'), 'link_color', ['value' => DbConfig::getSetting('linkColor')]));
 
         $oForm->addElement(new \PFBC\Element\Color(t('Footer Links:'), 'footer_link_color', ['value' => DbConfig::getSetting('footerLinkColor')]));
 
-        $oForm->addElement(new \PFBC\Element\Color(t('Links hover:'), 'link_hover_color', ['value' => DbConfig::getSetting('linkHoverColor')]));
+        $oForm->addElement(new \PFBC\Element\Color(t('Links Hover:'), 'link_hover_color', ['value' => DbConfig::getSetting('linkHoverColor')]));
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal(
             '<div class="right"><a href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'resetcolor', (new SecurityToken)->url(), false) . '">' . t('Reset Colors') . '</a></div>'

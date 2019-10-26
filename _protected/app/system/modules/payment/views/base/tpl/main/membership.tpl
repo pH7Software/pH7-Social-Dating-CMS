@@ -29,7 +29,9 @@
                                     <p class="italic">{% $membership->description %}</p>
                                 </div>
                                 <p class="pull-right">
-                                    <a class="btn btn-default" href="{{ $design->url('payment', 'main', 'pay', $membership->groupId) }}" title="{lang 'Purchase this membership!'}">{lang 'Choose It'}</a>
+                                    <a class="btn btn-default" href="{{ $design->url('payment', 'main', 'pay', $membership->groupId) }}" title="{lang 'Purchase this membership!'}">
+                                        {lang 'Choose It'}
+                                    </a>
                                 </p>
                             </li>
                         {/if}

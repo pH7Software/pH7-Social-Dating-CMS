@@ -52,7 +52,7 @@ abstract class Cron extends Core
      */
     public function checkDelay()
     {
-        $bStatus = true; // Default status is TRUE
+        $bStatus = true; // Default delay status is TRUE
 
         if ($iSavedTime = $this->getSavedDelay()) {
             $iHours = $this->getCronDelay();
@@ -72,7 +72,7 @@ abstract class Cron extends Core
     }
 
     /**
-     * @return bool|string The file contents if exists, FALSE otherwise.
+     * @return bool|string The file contents if it exists, FALSE otherwise.
      */
     private function getSavedDelay()
     {
