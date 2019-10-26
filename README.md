@@ -1,17 +1,19 @@
 # pH7 Social Dating CMS
 
-## ⚡️The KILLER Dating WebApp Builder!
+## ⚡️The KILLER Dating WebApp Builder! ❤️
 
-### The 2019-2020 Most Secure, Powerful & Professional "Social Dating Web App Builder" 🚀
+### The 2020 "Social Dating Web App Builder"🚀 - The Most Secure, Open Source, and Cutting Edge Technology 🤖
 
 [![PayPal](https://img.shields.io/badge/Donate-PayPal-lightgrey.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6 "Help keep me off the streets! ;)") [![Build Status](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/build.png?b=master)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/build-status/master) [![GPL v3 Licence](https://img.shields.io/aur/license/yaourt.svg)](https://opensource.org/licenses/gpl-3.0.html) [![SourceForge](https://img.shields.io/badge/Download-SourceForge-orange.svg)](https://sourceforge.net/projects/ph7socialdating/files/latest/download) [![Patreon](https://img.shields.io/badge/Subscribe-Patreon-red.svg)](https://www.patreon.com/bePatron?u=3534366 "Become a Patron Today!")
 
 **pH7, Social Dating CMS Solution™** is a **Professional**, **Free** & **Open Source** Social Dating CMS, fully responsive design, low-resource-intensive, powerful and very secure.
 
-pH7CMS (now known as **pH7Builder**) offers 42 modules and based on its homemade framework (pH7Framework). pH7Builder is also the first Professional, Free and Open Source Social Dating Site Builder Software and the first choice for creating enterprise-level Dating Apps/Service or social networking sites.
+pH7CMS (currently known as **pH7Builder**) offers 42 modules and based on its homemade framework (pH7Framework).
+
+pH7Builder is the first Professional, Free and Open Source Social Dating Site Builder Software. By far, the first choice for creating enterprise-level Dating Apps/Service or social networking sites.
 
 
-*Imagine in 3 months' time, you have a well-known successful online community with thousands of happy users and without spending a dime for it! Instead, you spent money on advertising, user acquisition, and other marketing strategies... Imagine the time you have saved. The amazing business and freedom you have now created.*
+**Imagine in 3 months' time, you have a well-known successful online community with thousands of happy users and without spending a dime for it! Instead, you spent money on advertising, user acquisition, and other marketing strategies... Imagine the time you have saved. The amazing business and freedom you have now created.**
 
 With **[pH7CMS](https://sourceforge.net/projects/ph7socialdating/files/latest/download)**, *THIS IS TOTALLY POSSIBLE!* (however, you have to be motivated! Nothing comes as magic).
 
