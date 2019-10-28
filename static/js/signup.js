@@ -11,7 +11,7 @@
  * @return {Void}
  */
 $('#username').keyup(function () {
-    $('.your-user-name').hide();
+    $('.your-username').hide();
     var sUsername = $('#username').val();
 
     $.post(pH7Url.base + 'user/asset/ajax/form/checkUsername', {'username': sUsername}, function (oData) {

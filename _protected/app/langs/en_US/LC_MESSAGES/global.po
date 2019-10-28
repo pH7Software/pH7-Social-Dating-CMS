@@ -8197,7 +8197,7 @@ msgid "Nickname"
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/JoinForm.php:48
-msgid "your-user-name"
+msgid "your-nickname"
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/JoinForm.php:50
