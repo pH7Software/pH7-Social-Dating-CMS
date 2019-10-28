@@ -98,7 +98,7 @@ class Page
      */
     public static function cleanDynamicUrl($sVar)
     {
-        $sCurrentUrl = (new HttpRequest)->currentUrl();
+        $sCurrentUrl = PH7_URL_PROT . PH7_DOMAIN . (new HttpRequest)->getUri();
         $sUrl = preg_replace(self::REGEX_URL_QUESTION_MARKS, '', $sCurrentUrl);
 
         if (self::areParametersInUrlFound($sCurrentUrl)) {
@@ -145,7 +145,7 @@ class Page
      */
     private static function areParametersInUrlFound($sCurrentUrl)
     {
-        return preg_match(self::REGEX_URL_PARAMS, $sCurrentUrl) && strrchr($sCurrentUrl, '?') === false;
+        return preg_match(self::REGEX_URL_PARAMS, $sCurrentUrl);
     }
 
     /**
