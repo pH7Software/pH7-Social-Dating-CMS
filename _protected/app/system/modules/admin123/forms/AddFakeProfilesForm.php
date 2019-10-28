@@ -34,7 +34,7 @@ class AddFakeProfilesForm
                 'num',
                 [1, 5, 10, 15, 25],
                 [
-                    'description' => t('Number of fake profiles to add in the same time. Choosing 15 or 25 profiles might takes a few minutes.'),
+                    'description' => t('Number of fake profiles to add in the same time. Choosing 15 or 25 profiles might take a few minutes.'),
                     'required' => 1
                 ]
             )

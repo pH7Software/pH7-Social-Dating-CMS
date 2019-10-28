@@ -2678,7 +2678,7 @@ msgstr ""
 #: _protected/app/system/modules/admin123/forms/AddFakeProfilesForm.php:31
 msgid ""
 "Number of fake profiles to add in the same time. Choosing 15 or 25 profiles "
-"might takes a few minutes."
+"might take a few minutes."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/AddFakeProfilesForm.php:32
@@ -16268,7 +16268,7 @@ msgid "Number of Profiles:"
 msgstr ""
 
 #: _protected/app/system/modules/profile-faker/forms/GenerateProfileForm.php:49
-msgid "Number of profiles to generate. Choosing a high number might takes a few "
+msgid "Number of profiles to generate. Choosing a high number might take a few "
 "minutes to load."
 msgstr ""
 
