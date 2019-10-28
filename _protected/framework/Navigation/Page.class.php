@@ -1,6 +1,5 @@
 <?php
 /**
- * @title            Page Class
  * @desc             Various Page methods with also the pagination methods.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
