@@ -15541,7 +15541,7 @@ msgstr ""
 
 #: _protected/app/system/modules/affiliate/views/base/tpl/home/resendactivation.tpl:10
 #: _protected/app/system/modules/user/views/base/tpl/main/resendactivation.tpl:10
-msgid "After you click the "Send Activation" button, the account activation email"
+msgid "After you click the \"Send Activation\" button, the account activation email"
 " will be sent to you, using this email address."
 msgstr ""
 
@@ -15896,7 +15896,7 @@ msgid "contact us"
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/faq.tpl:9
-msgid "If you cannot login, check to make sure that your "caps lock" key is "
+msgid "If you cannot login, check to make sure that your \"caps lock\" key is "
 "off. Your username and password are CaSe SeNsItIvE. If you still cannot login,"
 " you can request to"
 msgstr ""
@@ -16582,9 +16582,9 @@ msgid "You need a Google API key to retrieve the Youtube video infos."
 msgstr ""
 
 #: _protected/app/system/modules/video/views/base/tpl/admin/config.tpl:6
-msgid "You can get one <a href="%0%">here</a>. Enable YouTube Data API (which "
-"is disabled by default). Finally create an API key. Select "Api Key" for the "
-"Credential type, then select "Server Key", then you will get your API key to "
+msgid "You can get one <a href=\"%0%\">here</a>. Enable YouTube Data API (which "
+"is disabled by default). Finally create an API key. Select \"Api Key\" for the "
+"Credential type, then select \"Server Key\", then you will get your API key to "
 "paste in this form. "
 msgstr ""
 
