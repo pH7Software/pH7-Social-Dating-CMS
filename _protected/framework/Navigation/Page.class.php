@@ -101,7 +101,7 @@ class Page
         $sCurrentUrl = (new HttpRequest)->currentUrl();
         $sUrl = preg_replace(self::REGEX_URL_QUESTION_MARKS, '', $sCurrentUrl);
 
-        if (preg_match(self::REGEX_URL_PARAMS, $sCurrentUrl) && strrchr($sCurrentUrl, '?') === false) {
+        if (self::areParametersInUrlFound($sCurrentUrl)) {
             return $sUrl . self::getUrlSlug($sCurrentUrl) . '&amp;' . $sVar . '=';
         }
 
@@ -136,6 +136,16 @@ class Page
     private static function trailingSlash($sUrl)
     {
         return substr($sUrl, -1) !== PH7_SH && !strstr($sUrl, PH7_PAGE_EXT) ? PH7_SH : '';
+    }
+
+    /**
+     * @param string $sCurrentUrl
+     *
+     * @return bool
+     */
+    private static function areParametersInUrlFound($sCurrentUrl)
+    {
+        return preg_match(self::REGEX_URL_PARAMS, $sCurrentUrl) && strrchr($sCurrentUrl, '?') === false;
     }
 
     /**
