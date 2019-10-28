@@ -118,7 +118,7 @@ class Page
     {
         $this->iTotalItems = (int)$iTotalItems;
         $this->iNbItemsPerPage = (int)$iNbItemsPerPage; // or intval() function, but it is slower than casting
-        $this->iCurrentPage = $this->oHttpRequest->getExists('p') ? $this->oHttpRequest->get('p', 'int') : 1;
+        $this->iCurrentPage = $this->oHttpRequest->getExists(Pagination::REQUEST_PARAM_NAME) ? $this->oHttpRequest->get(Pagination::REQUEST_PARAM_NAME, 'int') : 1;
 
         // Ternary condition to prevent division by zero
         $this->iTotalPages = ($this->iTotalItems !== 0 && $this->iNbItemsPerPage !== 0) ? (int)ceil($this->iTotalItems / $this->iNbItemsPerPage) : 0;
@@ -155,6 +155,10 @@ class Page
      */
     private static function getUrlSlug($sCurrentUrl)
     {
-        return strpos($sCurrentUrl, '&amp;p=') ? strstr(strrchr($sCurrentUrl, '?'), '&amp;p=', true) : strrchr($sCurrentUrl, '?');
+        $sGlueName = sprintf('&amp;%s=', Pagination::REQUEST_PARAM_NAME);
+
+        return strpos($sCurrentUrl, $sGlueName) ?
+            strstr(strrchr($sCurrentUrl, '?'), $sGlueName, true) :
+            strrchr($sCurrentUrl, '?');
     }
 }
