@@ -101,7 +101,7 @@ class Page
         $sCurrentUrl = (new HttpRequest)->currentUrl();
         $sUrl = preg_replace(self::REGEX_URL_QUESTION_MARKS, '', $sCurrentUrl);
 
-        if (preg_match(self::REGEX_URL_PARAMS, $sCurrentUrl)) {
+        if (preg_match(self::REGEX_URL_PARAMS, $sCurrentUrl) && strrchr($sCurrentUrl, '?') === false) {
             return $sUrl . self::getUrlSlug($sCurrentUrl) . '&amp;' . $sVar . '=';
         }
 
@@ -145,8 +145,6 @@ class Page
      */
     private static function getUrlSlug($sCurrentUrl)
     {
-        return strpos($sCurrentUrl, '&amp;') !== false ?
-            strrchr($sCurrentUrl, '?') !== false :
-            strrchr($sCurrentUrl, '?');
+        return strrchr($sCurrentUrl, '?');
     }
 }
