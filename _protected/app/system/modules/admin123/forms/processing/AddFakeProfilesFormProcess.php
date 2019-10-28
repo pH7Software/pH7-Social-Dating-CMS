@@ -128,7 +128,10 @@ class AddFakeProfilesFormProcess extends Form
      */
     private function addAvatar(array $aData, UserCore $oUser)
     {
-        // Sometimes, cURL returns FALSE and doesn't work at all under Windowns server or some other specific server config, so use file_get_contents() instead as it will work.
+        /**
+         * Sometimes, cURL fails under Windows or some other specific server configs,
+         * for this reason, we use `file_get_contents()` as fallback when cURL fails.
+         */
         if (!$rFile = $this->file->getUrlContents($aData['avatar'])) {
             $rFile = $this->file->getFile($aData['avatar']);
         }
