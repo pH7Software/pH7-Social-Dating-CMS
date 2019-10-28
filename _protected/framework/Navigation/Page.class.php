@@ -129,7 +129,7 @@ class Page
     /**
      * Returns a trailing slash if needed.
      *
-     * @param  string $sUrl
+     * @param string $sUrl
      *
      * @return string
      */
