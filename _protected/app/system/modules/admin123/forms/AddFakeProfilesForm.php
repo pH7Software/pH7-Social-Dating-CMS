@@ -14,6 +14,14 @@ use PH7\Framework\Url\Header;
 
 class AddFakeProfilesForm
 {
+    const NUMBERS_RANGE = [
+        1,
+        5,
+        10,
+        15,
+        25
+    ];
+
     public static function display()
     {
         if (isset($_POST['submit_add_fake_profiles'])) {
@@ -32,7 +40,7 @@ class AddFakeProfilesForm
             new \PFBC\Element\Select(
                 t('Number of Profile:'),
                 'num',
-                [1, 5, 10, 15, 25],
+                self::NUMBERS_RANGE,
                 [
                     'description' => t('Number of fake profiles to add in the same time. Choosing 15 or 25 profiles might take a few minutes.'),
                     'required' => 1
