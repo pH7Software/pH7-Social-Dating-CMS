@@ -1,6 +1,5 @@
 <?php
 /**
- * @title            Page Class
  * @desc             Various Page methods with also the pagination methods.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
@@ -99,10 +98,10 @@ class Page
      */
     public static function cleanDynamicUrl($sVar)
     {
-        $sCurrentUrl = (new HttpRequest)->currentUrl();
+        $sCurrentUrl = PH7_URL_PROT . PH7_DOMAIN . (new HttpRequest)->getUri();
         $sUrl = preg_replace(self::REGEX_URL_QUESTION_MARKS, '', $sCurrentUrl);
 
-        if (preg_match(self::REGEX_URL_PARAMS, $sCurrentUrl)) {
+        if (self::areParametersInUrlFound($sCurrentUrl)) {
             return $sUrl . self::getUrlSlug($sCurrentUrl) . '&amp;' . $sVar . '=';
         }
 
@@ -119,7 +118,7 @@ class Page
     {
         $this->iTotalItems = (int)$iTotalItems;
         $this->iNbItemsPerPage = (int)$iNbItemsPerPage; // or intval() function, but it is slower than casting
-        $this->iCurrentPage = $this->oHttpRequest->getExists('p') ? $this->oHttpRequest->get('p', 'int') : 1;
+        $this->iCurrentPage = $this->oHttpRequest->getExists(Pagination::REQUEST_PARAM_NAME) ? $this->oHttpRequest->get(Pagination::REQUEST_PARAM_NAME, 'int') : 1;
 
         // Ternary condition to prevent division by zero
         $this->iTotalPages = ($this->iTotalItems !== 0 && $this->iNbItemsPerPage !== 0) ? (int)ceil($this->iTotalItems / $this->iNbItemsPerPage) : 0;
@@ -130,7 +129,7 @@ class Page
     /**
      * Returns a trailing slash if needed.
      *
-     * @param  string $sUrl
+     * @param string $sUrl
      *
      * @return string
      */
@@ -142,12 +141,24 @@ class Page
     /**
      * @param string $sCurrentUrl
      *
+     * @return bool
+     */
+    private static function areParametersInUrlFound($sCurrentUrl)
+    {
+        return preg_match(self::REGEX_URL_PARAMS, $sCurrentUrl);
+    }
+
+    /**
+     * @param string $sCurrentUrl
+     *
      * @return string
      */
     private static function getUrlSlug($sCurrentUrl)
     {
-        return strpos($sCurrentUrl, '&amp;') !== false ?
-            strrchr($sCurrentUrl, '?') !== false :
+        $sGlueName = sprintf('&amp;%s=', Pagination::REQUEST_PARAM_NAME);
+
+        return strpos($sCurrentUrl, $sGlueName) ?
+            strstr(strrchr($sCurrentUrl, '?'), $sGlueName, true) :
             strrchr($sCurrentUrl, '?');
     }
 }

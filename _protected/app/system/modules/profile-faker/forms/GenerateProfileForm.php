@@ -46,7 +46,7 @@ class GenerateProfileForm
                 [
                     'min' => 1,
                     'value' => self::DEFAULT_AMOUNT_VALUE,
-                    'description' => t('Number of profiles to generate. Choosing a high number might takes a few minutes to load.'),
+                    'description' => t('Number of profiles to generate. Choosing a high number might take a few minutes to load.'),
                     'required' => 1
                 ]
             )

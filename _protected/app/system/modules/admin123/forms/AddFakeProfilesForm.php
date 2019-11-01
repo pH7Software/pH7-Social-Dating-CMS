@@ -2,7 +2,7 @@
 /**
  * @title          Add Fake Profiles Class
  *
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2014-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
@@ -14,6 +14,14 @@ use PH7\Framework\Url\Header;
 
 class AddFakeProfilesForm
 {
+    const NUMBERS_RANGE = [
+        1,
+        5,
+        10,
+        15,
+        25
+    ];
+
     public static function display()
     {
         if (isset($_POST['submit_add_fake_profiles'])) {
@@ -32,9 +40,9 @@ class AddFakeProfilesForm
             new \PFBC\Element\Select(
                 t('Number of Profile:'),
                 'num',
-                [1, 5, 10, 15, 25],
+                self::NUMBERS_RANGE,
                 [
-                    'description' => t('Number of fake profiles to add in the same time. Choosing 15 or 25 profiles might takes a few minutes.'),
+                    'description' => t('Number of fake profiles to add in the same time. Choosing 15 or 25 profiles might take a few minutes.'),
                     'required' => 1
                 ]
             )

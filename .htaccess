@@ -96,7 +96,7 @@ ServerSignature Off
     </IfModule>
 </Files>
 
-# block bots spam
+# Block bots spam
 <IfModule mod_setenvif.c>
     SetEnvIfNoCase User-Agent "^aesop_com_spiderman" bad_bot
     SetEnvIfNoCase User-Agent "^BackWeb" bad_bot
