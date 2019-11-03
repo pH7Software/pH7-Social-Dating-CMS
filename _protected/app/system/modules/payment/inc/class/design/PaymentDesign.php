@@ -60,11 +60,12 @@ class PaymentDesign extends Framework\Core\Core
     public function buttonStripe(stdClass $oMembership)
     {
         $iAmount = Stripe::getAmount($oMembership->price);
+        $sMembershipName = $oMembership->name;
         $sSuccessUrl = Uri::get('payment', 'main', 'process', 'stripe');
         $sCancelUrl = $this->getCancelPaymentUrl();
 
         echo '<script src="', Stripe::JS_LIBRARY_URL, '"></script>';
-        echo '<button id="checkout-button" class="btn btn-primary btn-md">Stripe</button>';
+        echo '<button id="checkout-button" class="btn btn-primary btn-md">', $this->buyTxt($sMembershipName, 'Stripe'), '</button>';
 
         echo <<<JS
 <script>
@@ -74,7 +75,7 @@ checkoutButton.addEventListener('click', function () {
   stripe.redirectToCheckout({
     items: [{
       name: '{$this->registry->site_name}',
-      plan: '{$oMembership->name}',
+      plan: '$sMembershipName',
       amount: {$iAmount},
       currency: '{$this->config->values['module.setting']['currency_code']}',
       quantity: 1
