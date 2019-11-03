@@ -17,19 +17,19 @@ code {
 
 /** TITLE (h1, h2, h3, h4) **/
 h1 {
-    font-size: 18px;
+    font-size: 1.85rem;
 }
 
 h2 {
-    font-size: 16px;
+    font-size: 1.65rem;
 }
 
 h3 {
-    font-size: 15px;
+    font-size: 1.55rem;
 }
 
 h4 {
-    font-size: 14px;
+    font-size: 1.45rem;
 }
 
 h1::first-letter, h2::first-letter {

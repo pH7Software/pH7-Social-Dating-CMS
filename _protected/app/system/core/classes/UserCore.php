@@ -1,8 +1,6 @@
 <?php
 /**
- * @title          User Core Class
- *
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
@@ -304,9 +302,12 @@ class UserCore
      */
     public function deleteBackground($iProfileId, $sUsername)
     {
-        // We start to delete the file before the data in the database if we could not delete the file since we would have lost the link to the file found in the database.
+        /**
+         * @internal First, we need to delete the file,
+         * Second, Remove it in the database,
+         * With the opposite order, we won't have the file path from the database to be able to delete the actual file.
+         */
         $sFile = (new UserCoreModel)->getBackground($iProfileId, null);
-
         (new File)->deleteFile(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/background/img/' . $sUsername . PH7_SH . $sFile);
         (new UserCoreModel)->deleteBackground($iProfileId);
 
@@ -445,7 +446,7 @@ class UserCore
             }
         }
 
-        // If all other usernames aren't valid, return the default one below
+        // If all other usernames aren't valid, return the default below one
         return Various::genRnd('pOH_Pierre-Henry_Soria_Béghin_Rollier', $iMaxLen);
     }
 
@@ -560,7 +561,7 @@ class UserCore
         $oCookie = new Cookie;
         $aRememberMeCookieNames = ['member_remember', 'member_id'];
 
-        // If "Remember Me" checkbox has been checked
+        // When "Remember Me" checkbox has been checked
         if ($oCookie->exists($aRememberMeCookieNames)) {
             $oCookie->remove($aRememberMeCookieNames);
         }

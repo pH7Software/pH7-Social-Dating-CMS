@@ -1,5 +1,5 @@
 /*!
- * Author:        Pierre-Henry Soria <ph7software@gmail.com>
+ * Author:        Pierre-Henry Soria <hello@ph7cms.com>
  * Copyright:     (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
@@ -11,7 +11,7 @@
  * @return {Void}
  */
 $('#username').keyup(function () {
-    $('.your-user-name').hide();
+    $('.your-username').hide();
     var sUsername = $('#username').val();
 
     $.post(pH7Url.base + 'user/asset/ajax/form/checkUsername', {'username': sUsername}, function (oData) {

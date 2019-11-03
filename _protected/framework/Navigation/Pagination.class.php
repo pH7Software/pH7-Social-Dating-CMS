@@ -14,6 +14,7 @@ defined('PH7') or exit('Restricted access');
 
 class Pagination
 {
+    const REQUEST_PARAM_NAME = 'p';
     const NEARBY_PAGES_LIMIT = 4;
 
     /** @var string */
@@ -46,7 +47,7 @@ class Pagination
      * @param string $sPageName Default 'p'
      * @param array $aOptions Optional options.
      */
-    public function __construct($iTotalPages, $iCurrentPage, $sPageName = 'p', array $aOptions = [])
+    public function __construct($iTotalPages, $iCurrentPage, $sPageName = self::REQUEST_PARAM_NAME, array $aOptions = [])
     {
         // Set the total number of page
         $this->iTotalPages = $iTotalPages;

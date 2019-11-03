@@ -3,7 +3,7 @@
  * @title          Add Fake Profiles; Process Class
  * @desc           Generate Fake Profiles from Web API.
  *
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2014-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
@@ -128,7 +128,10 @@ class AddFakeProfilesFormProcess extends Form
      */
     private function addAvatar(array $aData, UserCore $oUser)
     {
-        // Sometimes, cURL returns FALSE and doesn't work at all under Windowns server or some other specific server config, so use file_get_contents() instead as it will work.
+        /**
+         * Sometimes, cURL fails under Windows or some other specific server configs,
+         * for this reason, we use `file_get_contents()` as fallback when cURL fails.
+         */
         if (!$rFile = $this->file->getUrlContents($aData['avatar'])) {
             $rFile = $this->file->getFile($aData['avatar']);
         }
