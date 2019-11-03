@@ -64,7 +64,7 @@ class PaymentDesign extends Framework\Core\Core
         $sCancelUrl = $this->getCancelPaymentUrl();
 
         echo '<script src="', Stripe::JS_LIBRARY_URL, '"></script>';
-        echo '<button id="checkout-button">Stripe</button>';
+        echo '<button id="checkout-button" class="btn btn-primary btn-md">Stripe</button>';
 
         echo <<<JS
 <script>
