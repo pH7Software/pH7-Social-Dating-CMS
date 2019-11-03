@@ -131,6 +131,9 @@ class SettingController extends Controller
         $aColorFields = [
             'backgroundColor',
             'textColor',
+            'heading1Color',
+            'heading2Color',
+            'heading3Color',
             'linkColor',
             'footerLinkColor',
             'linkHoverColor'
