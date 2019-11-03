@@ -67,6 +67,7 @@ class PaymentDesign extends Framework\Core\Core
         echo '<button id="checkout-button">Stripe</button>';
 
         echo <<<JS
+<script>
 var stripe = Stripe('{$this->config->values['module.setting']['stripe.publishable_key']}');
 var checkoutButton = document.querySelector('#checkout-button');
 checkoutButton.addEventListener('click', function () {
@@ -81,7 +82,7 @@ checkoutButton.addEventListener('click', function () {
     successUrl: '$sSuccessUrl',
     cancelUrl: '$sCancelUrl'
   });
-});
+});</script>
 JS;
     }
 
