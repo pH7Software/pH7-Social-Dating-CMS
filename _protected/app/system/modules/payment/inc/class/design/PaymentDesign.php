@@ -74,10 +74,10 @@ var checkoutButton = document.querySelector('#checkout-button');
 checkoutButton.addEventListener('click', function () {
   stripe.redirectToCheckout({
     items: [{
-      name: '{$this->registry->site_name}',
-      plan: '$sMembershipName',
+      name: "{$this->registry->site_name}",
+      plan: "$sMembershipName",
       amount: {$iAmount},
-      currency: '{$this->config->values['module.setting']['currency_code']}',
+      currency: "{$this->config->values['module.setting']['currency_code']}",
       quantity: 1
     }],
     successUrl: '$sSuccessUrl',
