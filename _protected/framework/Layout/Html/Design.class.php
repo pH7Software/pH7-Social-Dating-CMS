@@ -525,7 +525,7 @@ class Design
     {
         /** Check the type of message, otherwise it's the default one **/
         $sType = in_array($sType, self::MESSAGE_TYPES, true) ? $sType : self::SUCCESS_TYPE;
-        $sType = $sType === self::ERROR_TYPE ? 'danger' : $sType; // Now the "error" CSS class has become "danger", so we have to convert it
+        $sType = $sType === self::ERROR_TYPE ? 'danger' : $sType; // The "error" CSS class is now "danger", so convert it to the corresponding name
         $this->oSession->set(
             [
                 self::FLASH_MSG => $sMessage,
