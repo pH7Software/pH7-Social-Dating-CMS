@@ -27,7 +27,7 @@ class Role
         switch ($sName) {
             case 'sName':
             case 'sPermissions':
-                return $this->sName;
+                return $this->$sName;
 
             default:
                 throw new Exception(
