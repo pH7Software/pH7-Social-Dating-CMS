@@ -48,6 +48,13 @@ final class Server
     const LOCAL_IP = '127.0.0.1';
     const LOCAL_HOSTNAME = 'localhost';
 
+    const UNIX_OS_LIST = [
+        'UNIX',
+        'LINUX',
+        'FREEBSD',
+        'OPENBSD'
+    ];
+
     public function __construct()
     {
         header('Server: ' . Kernel::SOFTWARE_SERVER_NAME);
@@ -73,7 +80,8 @@ final class Server
     public static function isUnix()
     {
         $sOS = strtoupper(PHP_OS);
-        return $sOS === 'UNIX' || $sOS === 'LINUX' || $sOS === 'FREEBSD' || $sOS === 'OPENBSD';
+
+        return in_array($sOS, self::UNIX_OS_LIST, true);
     }
 
     /**
