@@ -48,7 +48,7 @@ final class Server
     const LOCAL_IP = '127.0.0.1';
     const LOCAL_HOSTNAME = 'localhost';
 
-    const UNIX_OS_LIST = [
+    const UNIX_OS = [
         'UNIX',
         'LINUX',
         'FREEBSD',
@@ -73,7 +73,7 @@ final class Server
     }
 
     /**
-     * Check to see if we are on a Unix server.
+     * See if we are on a Unix server...?
      *
      * @return bool TRUE if Unix, FALSE if not.
      */
@@ -81,7 +81,7 @@ final class Server
     {
         $sOS = strtoupper(PHP_OS);
 
-        return in_array($sOS, self::UNIX_OS_LIST, true);
+        return in_array($sOS, self::UNIX_OS, true);
     }
 
     /**
