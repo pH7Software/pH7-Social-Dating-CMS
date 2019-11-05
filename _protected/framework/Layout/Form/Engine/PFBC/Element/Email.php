@@ -31,7 +31,7 @@ class Email extends Textbox
 
         if ($this->bMailCheck) {
             echo '<script src="' . (new \PFBC\Form)->getResourcesPath() . PH7_SH . PH7_JS . 'jquery/mailcheck.js"></script>
-            <script src=' . PH7_RELATIVE . 'asset/js/mailcheck.js></script>';
+            <script src="' . PH7_RELATIVE . 'asset/js/mailcheck.js"></script>';
         }
     }
 }
