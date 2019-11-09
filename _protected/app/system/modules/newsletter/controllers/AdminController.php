@@ -76,7 +76,7 @@ class AdminController extends Controller
         if (empty($oBrowse)) {
             $this->setNotFoundPage();
         } else {
-            // Add the js file necessary for the browse form
+            // Add the js file for the browse form
             $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
 
             // Assigns variables for views
