@@ -74,7 +74,7 @@ class CommentController extends Controller
         $this->view->h1_title = $this->sTitle;
 
         $iCommentNumber = $this->oCommentModel->total($this->iId, $this->sTable);
-        $this->view->h4_title = nt('%n% Comment', '%n% Comments', $iCommentNumber);
+        $this->view->h3_title = nt('%n% Comment', '%n% Comments', $iCommentNumber);
 
         $oPage = new Page;
         $this->view->total_pages = $oPage->getTotalPages(
