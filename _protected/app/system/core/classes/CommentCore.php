@@ -56,21 +56,6 @@ class CommentCore
     }
 
     /**
-     * Count Comment with a HTML text.
-     *
-     * @param integer $iId
-     * @param string $sTable
-     *
-     * @return string
-     */
-    public static function count($iId, $sTable)
-    {
-        $iCommentNumber = (new CommentCoreModel)->total($iId, $sTable);
-
-        return nt('%n% Comment', '%n% Comments', $iCommentNumber);
-    }
-
-    /**
      * @param HttpRequest $oHttpRequest
      * @param Session $oSession
      *
