@@ -62,25 +62,14 @@ class CommentController extends Controller
 
     public function read()
     {
-        // Adding JavaScript file for Ajax Comment
-        $this->design->addJs(
-            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
-            'comment.js'
-        );
-
-        $this->sTitle = t('Read Comment');
-        $this->view->page_title = $this->sTitle;
-        $this->view->meta_description = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
-
-        $iCommentNumber = $this->oCommentModel->total($this->iId, $this->sTable);
-        $this->view->h3_title = nt('%n% Comment', '%n% Comments', $iCommentNumber);
-
         $oPage = new Page;
+        $iCommentNumber = $this->oCommentModel->total($this->iId, $this->sTable);
+
         $this->view->total_pages = $oPage->getTotalPages(
             $iCommentNumber, self::COMMENTS_PER_PAGE
         );
         $this->view->current_page = $oPage->getCurrentPage();
+
         $oComment = $this->oCommentModel->read(
             $this->iId,
             '1',
@@ -89,6 +78,17 @@ class CommentController extends Controller
             $this->sTable
         );
         unset($oPage);
+
+        // Adding JavaScript file for Ajax Comment
+        $this->design->addJs(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
+            'comment.js'
+        );
+        $this->sTitle = t('Read Comment');
+        $this->view->page_title = $this->sTitle;
+        $this->view->meta_description = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
+        $this->view->h3_title = nt('%n% Comment', '%n% Comments', $iCommentNumber);
 
         if (!empty($oComment)) {
             $this->view->avatarDesign = new AvatarDesignCore(); // Avatar Design Class
