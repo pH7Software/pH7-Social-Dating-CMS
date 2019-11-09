@@ -77,7 +77,6 @@ class SettingController extends Controller
         $this->view->page_title = $this->view->h1_title = t('Banner Settings');
         $this->view->h4_title = nt('%n% Banner', '%n% Banners', $iTotalAds);
         $this->output();
-
     }
 
     public function addAds()
