@@ -79,11 +79,8 @@ class CommentController extends Controller
         );
         unset($oPage);
 
-        // Adding JavaScript file for Ajax Comment
-        $this->design->addJs(
-            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
-            'comment.js'
-        );
+        $this->addAjaxCommentJsFile();
+
         $this->sTitle = t('Read Comment');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = $this->sTitle;
@@ -184,6 +181,19 @@ class CommentController extends Controller
 
         $this->view->page_title = t('Comment Not Found');
         $this->view->error = t('No comments yet, <a class="bold" href="%0%">add one</a>!', Uri::get('comment', 'comment', 'add', $this->sTable . ',' . $this->str->escape($this->httpRequest->get('id'))));
+    }
+
+    /**
+     * JavaScript file for Ajax Comment.
+     *
+     * @return void
+     */
+    private function addAjaxCommentJsFile()
+    {
+        $this->design->addJs(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
+            'comment.js'
+        );
     }
 
     /**
