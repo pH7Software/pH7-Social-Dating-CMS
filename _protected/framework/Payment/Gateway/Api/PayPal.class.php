@@ -94,7 +94,7 @@ class PayPal extends Provider implements Api
     public function valid($sParam1 = '', $sParam2 = '')
     {
         // If already validated, just return last result
-        if (true === $this->bValid || false === $this->bValid) {
+        if ($this->bValid === true || $this->bValid === false) {
             return $this->bValid;
         }
 
