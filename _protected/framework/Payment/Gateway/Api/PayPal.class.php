@@ -103,8 +103,7 @@ class PayPal extends Provider implements Api
         $mStatus = trim($mStatus);
 
         if (0 === strcmp('VERIFIED', $mStatus)) {
-            // Valid
-            if ($_POST['payment_status'] == 'Completed') {
+            if ($this->isValidPayment()) {
                 $this->bValid = true;
                 $this->sMsg = t('Transaction valid and completed.');
             } else {
@@ -112,11 +111,9 @@ class PayPal extends Provider implements Api
                 $this->sMsg = t('Transaction valid but not completed.');
             }
         } elseif (0 === strcmp('INVALID', $mStatus)) {
-            // Bad Connection
             $this->bValid = false;
             $this->sMsg = t('Invalid transaction.');
         } else {
-            // Bad Connection
             $this->bValid = false;
             $this->sMsg = t('Connection to PayPal failed.');
         }
@@ -209,5 +206,13 @@ class PayPal extends Provider implements Api
     private function isStatusVerified()
     {
         return $this->bValid === true || $this->bValid === false;
+    }
+
+    /**
+     * @return bool
+     */
+    private function isValidPayment()
+    {
+        return $_POST['payment_status'] === 'Completed';
     }
 }

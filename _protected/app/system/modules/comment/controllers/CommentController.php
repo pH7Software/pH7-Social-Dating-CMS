@@ -62,24 +62,14 @@ class CommentController extends Controller
 
     public function read()
     {
-        // Adding JavaScript file for Ajax Comment
-        $this->design->addJs(
-            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
-            'comment.js'
-        );
-
-        $this->sTitle = t('Read Comment');
-        $this->view->page_title = $this->sTitle;
-        $this->view->meta_description = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
-
-        $this->view->h4_title = CommentCore::count($this->iId, $this->sTable);
-
         $oPage = new Page;
+        $iCommentNumber = $this->oCommentModel->total($this->iId, $this->sTable);
+
         $this->view->total_pages = $oPage->getTotalPages(
-            $this->oCommentModel->total($this->iId, $this->sTable), self::COMMENTS_PER_PAGE
+            $iCommentNumber, self::COMMENTS_PER_PAGE
         );
         $this->view->current_page = $oPage->getCurrentPage();
+
         $oComment = $this->oCommentModel->read(
             $this->iId,
             '1',
@@ -88,6 +78,14 @@ class CommentController extends Controller
             $this->sTable
         );
         unset($oPage);
+
+        $this->addAjaxCommentJsFile();
+
+        $this->sTitle = t('Read Comment');
+        $this->view->page_title = $this->sTitle;
+        $this->view->meta_description = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
+        $this->view->h3_title = nt('%n% Comment', '%n% Comments', $iCommentNumber);
 
         if (!empty($oComment)) {
             $this->view->avatarDesign = new AvatarDesignCore(); // Avatar Design Class
@@ -183,6 +181,19 @@ class CommentController extends Controller
 
         $this->view->page_title = t('Comment Not Found');
         $this->view->error = t('No comments yet, <a class="bold" href="%0%">add one</a>!', Uri::get('comment', 'comment', 'add', $this->sTable . ',' . $this->str->escape($this->httpRequest->get('id'))));
+    }
+
+    /**
+     * JavaScript file for Ajax Comment.
+     *
+     * @return void
+     */
+    private function addAjaxCommentJsFile()
+    {
+        $this->design->addJs(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
+            'comment.js'
+        );
     }
 
     /**
