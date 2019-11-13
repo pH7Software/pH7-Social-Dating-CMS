@@ -93,8 +93,7 @@ class PayPal extends Provider implements Api
      */
     public function valid($sParam1 = '', $sParam2 = '')
     {
-        // If already validated, just return last result
-        if ($this->bValid === true || $this->bValid === false) {
+        if ($this->isStatusVerified()) {
             return $this->bValid;
         }
 
@@ -202,5 +201,13 @@ class PayPal extends Provider implements Api
         unset($aRawPost);
 
         return $aPostData;
+    }
+
+    /**
+     * @return bool
+     */
+    private function isStatusVerified()
+    {
+        return $this->bValid === true || $this->bValid === false;
     }
 }
