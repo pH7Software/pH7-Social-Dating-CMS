@@ -159,7 +159,7 @@ class PayPal extends Provider implements Api
      */
     protected function setParams()
     {
-        foreach ($this->getPostDatas() as $sKey => $sValue) {
+        foreach ($this->getPostData() as $sKey => $sValue) {
             $this->setUrlData($sKey, $sValue);
         }
 
@@ -186,7 +186,7 @@ class PayPal extends Provider implements Api
      *
      * @return array
      */
-    protected function getPostDatas()
+    protected function getPostData()
     {
         $rRawPost = Stream::getInput();
         $aRawPost = explode('&', $rRawPost);
