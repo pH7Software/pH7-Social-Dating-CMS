@@ -140,7 +140,7 @@ class PayPal extends Provider implements Api
         curl_setopt($rCh, CURLOPT_HTTPHEADER, [sprintf('Host: %s', self::PAYPAL_HOST)]);
         $mRes = curl_exec($rCh);
 
-        if (curl_errno($rCh) == 60) {
+        if (curl_errno($rCh) === 60) {
             // CURLE_SSL_CACERT
             curl_setopt($rCh, CURLOPT_CAINFO, __DIR__ . '/cert/paypal_api_chain.crt');
             $mRes = curl_exec($rCh);
