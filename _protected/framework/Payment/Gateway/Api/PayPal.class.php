@@ -105,7 +105,7 @@ class PayPal extends Provider implements Api
 
         if (0 === strcmp('VERIFIED', $mStatus)) {
             // Valid
-            if ($_POST['payment_status'] == 'Completed') {
+            if ($_POST['payment_status'] === 'Completed') {
                 $this->bValid = true;
                 $this->sMsg = t('Transaction valid and completed.');
             } else {
