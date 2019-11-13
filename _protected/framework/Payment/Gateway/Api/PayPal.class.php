@@ -93,7 +93,7 @@ class PayPal extends Provider implements Api
      */
     public function valid($sParam1 = '', $sParam2 = '')
     {
-        if ($this->isStatusVerified()) {
+        if ($this->isStatusAlreadyVerified()) {
             return $this->bValid;
         }
 
@@ -203,7 +203,7 @@ class PayPal extends Provider implements Api
     /**
      * @return bool
      */
-    private function isStatusVerified()
+    private function isStatusAlreadyVerified()
     {
         return $this->bValid === true || $this->bValid === false;
     }
