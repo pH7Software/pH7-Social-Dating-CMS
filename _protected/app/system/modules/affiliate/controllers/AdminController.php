@@ -394,7 +394,7 @@ class AdminController extends Controller
                 }
 
                 if (!empty($this->sMsg)) {
-                    $this->sendRegistrationMail();
+                    $this->sendRegistrationMail($sSubject, $oUser);
                     $this->oAff->clearReadProfileCache($oUser->profileId, DbTableName::AFFILIATE);
 
                     $sOutputMsg = t('Done!');
@@ -411,7 +411,15 @@ class AdminController extends Controller
         return $sOutputMsg;
     }
 
-    private function sendRegistrationMail()
+    /**
+     * @param string $sSubject
+     * @param stdClass $oUser
+     *
+     * @return void
+     *
+     * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
+     */
+    private function sendRegistrationMail($sSubject, stdClass $oUser)
     {
         // Set message
         $this->view->content = t('Dear %0%,', $oUser->firstName) . '<br />' . $this->sMsg;
