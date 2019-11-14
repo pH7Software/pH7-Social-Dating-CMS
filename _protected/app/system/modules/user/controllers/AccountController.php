@@ -16,14 +16,7 @@ class AccountController extends Controller
 {
     public function index()
     {
-        // Redirect this page to the user homepage
-        if (SysMod::isEnabled('user-dashboard')) {
-            $sUrl = Uri::get('user-dashboard', 'main', 'index');
-        } else {
-            $sUrl = Uri::get('user', 'main', 'index');
-        }
-
-        Header::redirect($sUrl);
+        Header::redirect($this->getHomepageUrl());
     }
 
     /**
@@ -40,5 +33,19 @@ class AccountController extends Controller
             $this->config,
             $this->registry
         );
+    }
+
+    /**
+     * Redirect this page to the user homepage.
+     *
+     * @return string
+     */
+    private function getHomepageUrl()
+    {
+        if (SysMod::isEnabled('user-dashboard')) {
+            return Uri::get('user-dashboard', 'main', 'index');
+        }
+
+        return Uri::get('user', 'main', 'index');
     }
 }
