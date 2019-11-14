@@ -423,6 +423,7 @@ class AdminController extends Controller
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/moderate_registration.tpl',
             $oUser->email
         );
+
         $aInfo = [
             'to' => $oUser->email,
             'subject' => $sSubject
