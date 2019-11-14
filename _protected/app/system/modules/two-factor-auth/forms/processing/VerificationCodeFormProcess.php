@@ -60,8 +60,7 @@ class VerificationCodeFormProcess extends Form
                 new SecurityModel
             );
 
-            $sUrl = ($sMod === PH7_ADMIN_MOD) ? Uri::get(PH7_ADMIN_MOD, 'main', 'index') : Uri::get($sMod, 'account', 'index');
-            Header::redirect($sUrl, t('You are successfully logged in!'));
+            Header::redirect($this->getAccountUrl($sMod), t('You are successfully logged in!'));
         } else {
             \PFBC\Form::setError(
                 'form_verification_code',
@@ -101,5 +100,19 @@ class VerificationCodeFormProcess extends Form
         }
 
         return $sFullClassName;
+    }
+
+    /**
+     * @param string $sModName
+     *
+     * @return string
+     */
+    private function getAccountUrl($sModName)
+    {
+        if ($sModName === PH7_ADMIN_MOD) {
+            return Uri::get(PH7_ADMIN_MOD, 'main', 'index');
+        }
+
+        return Uri::get($sModName, 'account', 'index');
     }
 }

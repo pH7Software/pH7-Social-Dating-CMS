@@ -36,7 +36,6 @@ class RouterController extends Controller
     private function redirectToWebsite()
     {
         $sUrl = $this->registry->site_url . $this->httpRequest->get('action');
-
         Header::redirect($sUrl);
     }
 }
