@@ -50,7 +50,7 @@ class DisableModuleForm
             }
 
             if (in_array($oData->folderName, self::DEV_STAGE_MODS, true)) {
-                $sAdditionalText .= '<span class="small red"> • ' . t('Only for development purpose to test it before <a href="%0%">opening a PR</a>. <a href="%1%">Social APIs</a> have to be updated.', 'https://github.com/pH7Software/pH7-Social-Dating-CMS/pulls', 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/master/_protected/app/system/modules/connect/inc/class/') . '</span>';
+                $sAdditionalText .= ' • <span class="small red">' . t('Only for development purpose to test it before <a href="%0%">opening a PR</a>. <a href="%1%">Social APIs</a> have to be updated.', 'https://github.com/pH7Software/pH7-Social-Dating-CMS/pulls', 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/master/_protected/app/system/modules/connect/inc/class/') . '</span>';
             }
 
             $aModuleNames[$oData->moduleId] = $oData->moduleTitle . $sAdditionalText;
