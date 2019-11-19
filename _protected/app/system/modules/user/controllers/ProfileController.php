@@ -96,7 +96,7 @@ class ProfileController extends ProfileBaseController
             $this->view->middle_name = $aData['middle_name'];
             $this->view->sex = $oUser->sex;
             $this->view->match_sex = $oUser->matchSex;
-            $this->view->match_sex_search = str_replace(['[code]', ','], '&sex[]=', '[code]' . $oUser->matchSex);
+            $this->view->match_sex_search = str_replace(['[code]', ','], '&amp;sex[]=', '[code]' . $oUser->matchSex);
             $this->view->age = $aData['age'];
             $this->view->country = t($aData['country']);
             $this->view->country_code = $aData['country'];
