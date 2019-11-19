@@ -216,7 +216,7 @@
             {{ $design->like($username, $first_name, $sex) }}
         </p>
 
-        {if $is_mail_enabled AND $is_logged AND !$is_own_profile}
+        {if $is_mail_enabled AND !$is_own_profile}
             {* Works only if "mail" module is enabled *}
             {manual_include 'interested_buttons.inc.tpl'}
         {/if}
