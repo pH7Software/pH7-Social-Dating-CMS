@@ -6,7 +6,7 @@
             </a>
         {elseif $is_im_enabled}
             <a class="s_tMarg btn btn-success btn-lg" rel="nofollow" href="{messenger_link}">
-                {lang '👍 Wanna Speak 😍'}
+                {lang '👍 Wanna Speak 💬'}
             </a>
         {/if}
 
