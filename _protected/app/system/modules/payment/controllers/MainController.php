@@ -100,7 +100,10 @@ class MainController extends Controller
             $this->displayPageNotFound(t('No membership found!'));
         } else {
             // Adding the stylesheet for gateway logos
-            $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'common.css');
+            $this->design->addCss(
+                PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
+                'common.css'
+            );
 
             // Regenerate the session ID to prevent the session fixation attack
             $this->session->regenerateId();

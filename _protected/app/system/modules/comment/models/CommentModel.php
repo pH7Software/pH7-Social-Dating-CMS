@@ -135,7 +135,9 @@ class CommentModel extends CommentCoreModel
             $sRealTable = Comment::getTable($sTable);
             $sProfileIdColumn = lcfirst($sTable) . 'Id';
 
-            $rStmt = Db::getInstance()->prepare('SELECT COUNT(' . $sProfileIdColumn . ') FROM' . Db::prefix($sRealTable) . 'WHERE ' . $sProfileIdColumn . ' = :id LIMIT 1');
+            $rStmt = Db::getInstance()->prepare(
+                'SELECT COUNT(' . $sProfileIdColumn . ') FROM' . Db::prefix($sRealTable) . 'WHERE ' . $sProfileIdColumn . ' = :id LIMIT 1'
+            );
             $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
             $rStmt->execute();
             $bExists = $rStmt->fetchColumn() == 1;

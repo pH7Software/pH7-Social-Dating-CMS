@@ -74,16 +74,7 @@ class MainController extends Controller
      */
     public function account()
     {
-        if (UserCore::auth()) {
-            $sUrl = Uri::get('user', 'account', 'index');
-        } elseif (AffiliateCore::auth()) {
-            $sUrl = Uri::get('affiliate', 'account', 'index');
-        } elseif (AdminCore::auth()) {
-            $sUrl = Uri::get(PH7_ADMIN_MOD, 'main', 'index');
-        } else {
-            $sUrl = $this->registry->site_url;
-        }
-
+        $sUrl = $this->getUserHomepageUrl();
         Header::redirect($sUrl);
     }
 
@@ -135,6 +126,24 @@ class MainController extends Controller
             case DbTableName::ADMIN:
                 return Uri::get(PH7_ADMIN_MOD, 'main', 'login');
         }
+    }
+
+    /**
+     * @return string
+     */
+    private function getUserHomepageUrl()
+    {
+        if (UserCore::auth()) {
+            $sUrl = Uri::get('user', 'account', 'index');
+        } elseif (AffiliateCore::auth()) {
+            $sUrl = Uri::get('affiliate', 'account', 'index');
+        } elseif (AdminCore::auth()) {
+            $sUrl = Uri::get(PH7_ADMIN_MOD, 'main', 'index');
+        } else {
+            $sUrl = $this->registry->site_url;
+        }
+
+        return $sUrl;
     }
 
     /**

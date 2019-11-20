@@ -11,9 +11,10 @@
         {/if}
 
         {if $is_mail_enabled OR $is_im_enabled}
-            <a class="s_tMarg btn btn-danger btn-lg" href="{{ $design->url('user', 'browse', 'index', '?country='.$country_code.'&match_sex='.$sex) }}">
+            <a class="s_tMarg btn btn-danger btn-lg" href="{{ $design->url('user', 'browse', 'index', '?country='.$country_code.'&sex='.$sex) }}">
                 {lang ' 👎 Not Interested'}
             </a>
         {/if}
     </div>
 {/if}
+

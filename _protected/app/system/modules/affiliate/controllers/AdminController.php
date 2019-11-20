@@ -394,7 +394,7 @@ class AdminController extends Controller
                 }
 
                 if (!empty($this->sMsg)) {
-                    $this->sendRegistrationMail();
+                    $this->sendRegistrationMail($sSubject, $oUser);
                     $this->oAff->clearReadProfileCache($oUser->profileId, DbTableName::AFFILIATE);
 
                     $sOutputMsg = t('Done!');
@@ -411,9 +411,17 @@ class AdminController extends Controller
         return $sOutputMsg;
     }
 
-    private function sendRegistrationMail()
+    /**
+     * @param string $sSubject
+     * @param stdClass $oUser
+     *
+     * @return void
+     *
+     * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
+     */
+    private function sendRegistrationMail($sSubject, stdClass $oUser)
     {
-        // Set message
+        // Set body messages + footer
         $this->view->content = t('Dear %0%,', $oUser->firstName) . '<br />' . $this->sMsg;
         $this->view->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $oUser->email) . '<br />' .
             t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
@@ -423,6 +431,7 @@ class AdminController extends Controller
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/moderate_registration.tpl',
             $oUser->email
         );
+
         $aInfo = [
             'to' => $oUser->email,
             'subject' => $sSubject
