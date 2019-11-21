@@ -98,7 +98,7 @@
 
         {if $is_friend_enabled AND $is_logged AND !$is_own_profile}
             <li>
-                <a ref="nofollow" href="{friend_link}">
+                <a rel="nofollow" href="{friend_link}">
                     <span>
                         {if $is_approved_friend}
                             {lang 'Remove Friend'}
