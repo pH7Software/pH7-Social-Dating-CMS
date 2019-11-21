@@ -7,6 +7,6 @@
         {/each}
         {main_include 'page_nav.inc.tpl'}
     {else}
-        <p>{lang}No users who have a birthday today. Come back tomorrow 😉{/lang}</p>
+        <p>{lang}No users who have a birthday today. Come back tomorrow! 😉{/lang}</p>
     {/if}
 </div>
