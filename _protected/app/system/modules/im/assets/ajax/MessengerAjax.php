@@ -18,6 +18,7 @@ use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Date\Various as VDate;
 use PH7\Framework\File\Import;
 use PH7\Framework\Http\Http;
+use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
@@ -127,7 +128,11 @@ class MessengerAjax extends PermissionCore
         if (!$this->isOnline($sFrom)) {
             $sItems = t('You must have the ONLINE status in order to speak instantaneous.');
         } elseif ($sTo !== 0 && !$this->isOnline($sTo)) {
-            $sItems = '<small><em>' . t("%0% is offline. Send a <a href='%1%'>Private Message</a> instead.", $sTo, Uri::get('mail', 'main', 'compose', $sTo)) . '</em></small>';
+            if (SysMod::isEnabled('mail')) {
+                $sItems = '<small><em>' . t("%0% is offline. Send a <a href='%1%'>Private Message</a> instead.", $sTo, Uri::get('mail', 'main', 'compose', $sTo)) . '</em></small>';
+            } else {
+                $sItems = '<small><em>' . t('%0% is currently offline. Try to chat later on.', $sTo) . '</em></small>';
+            }
         } else {
             $this->oMessengerModel->update($sFrom, $sTo);
         }
@@ -193,7 +198,11 @@ class MessengerAjax extends PermissionCore
         } elseif (!$this->isOnline($sFrom)) {
             $sMsgTransform = t('You must have the ONLINE status in order to chat with other users.');
         } elseif (!$this->isOnline($sTo)) {
-            $sMsgTransform = '<small><em>' . t("%0% is offline. Send a <a href='%1%'>Private Message</a> instead.", $sTo, Uri::get('mail', 'main', 'compose', $sTo)) . '</em></small>';
+            if (SysMod::isEnabled('mail')) {
+                $sMsgTransform = '<small><em>' . t("%0% is offline. Send a <a href='%1%'>Private Message</a> instead.", $sTo, Uri::get('mail', 'main', 'compose', $sTo)) . '</em></small>';
+            } else {
+                $sMsgTransform = '<small><em>' . t('%0% is currently offline. Try to chat later on.', $sTo) . '</em></small>';
+            }
         } else {
             $this->oMessengerModel->insert($sFrom, $sTo, $sMsg, (new CDateTime)->get()->dateTime(self::DATETIME_FORMAT));
         }
