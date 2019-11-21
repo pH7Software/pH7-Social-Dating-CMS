@@ -137,7 +137,7 @@ class MessengerAjax extends PermissionCore
             $this->oMessengerModel->update($sFrom, $sTo);
         }
 
-        if ($sItems != '') {
+        if ($sItems !== '') {
             $sItems = substr($sItems, 0, -1);
         }
 
@@ -166,7 +166,7 @@ class MessengerAjax extends PermissionCore
             }
         }
 
-        if ($sItems != '') {
+        if ($sItems !== '') {
             $sItems = substr($sItems, 0, -1);
         }
 
