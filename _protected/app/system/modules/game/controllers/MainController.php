@@ -54,7 +54,8 @@ class MainController extends Controller
         $this->oGameModel = new GameModel;
         $this->oPage = new Page;
 
-        $this->sMetaKeywords = t('game,free,flash,game site,flash game,games,gaming,online game'); // Predefined meta_keywords tags
+        // Predefined meta keyword tags
+        $this->sMetaKeywords = t('game,free,flash,game site,flash game,games,gaming,online game');
         $this->view->meta_keywords = $this->sMetaKeywords;
     }
 
