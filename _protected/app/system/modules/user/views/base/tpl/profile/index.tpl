@@ -9,6 +9,7 @@
                 <span>{lang 'Info'}</span>
             </a>
         </li>
+
         {if $is_map_enabled}
             <li>
                 <a href="#map">
@@ -16,6 +17,7 @@
                 </a>
             </li>
         {/if}
+
         {if $is_relatedprofile_enabled}
             <li>
                 <a href="#related_profile">
@@ -30,6 +32,7 @@
                     <span>{friend_link_name}</span>
                 </a>
             </li>
+
             {if $is_logged AND !$is_own_profile}
                 <li>
                     <a href="#mutual_friend">
@@ -38,6 +41,7 @@
                 </li>
             {/if}
         {/if}
+
         {if $is_picture_enabled}
             <li>
                 <a href="#picture">
@@ -45,6 +49,7 @@
                 </a>
             </li>
         {/if}
+
         {if $is_video_enabled}
             <li>
                 <a href="#video">
@@ -52,6 +57,7 @@
                 </a>
             </li>
         {/if}
+
         {if $is_forum_enabled}
             <li>
               <a href="#forum">
@@ -59,6 +65,7 @@
               </a>
             </li>
         {/if}
+
         {if $is_note_enabled}
             <li>
                 <a href="#note">
@@ -66,11 +73,13 @@
                 </a>
             </li>
         {/if}
+
         <li>
             <a href="#visitor">
                 <span>{lang 'Recently Viewed'}</span>
             </a>
         </li>
+
         {if $is_mail_enabled AND $is_logged AND !$is_own_profile}
             <li>
                 <a rel="nofollow" href="{mail_link}">
@@ -78,6 +87,7 @@
                 </a>
             </li>
         {/if}
+
         {if $is_im_enabled AND $is_logged AND !$is_own_profile}
             <li>
                 <a rel="nofollow" href="{messenger_link}">
@@ -85,6 +95,7 @@
                 </a>
             </li>
         {/if}
+
         {if $is_friend_enabled AND $is_logged AND !$is_own_profile}
             <li>
                 <a ref="nofollow" href="{friend_link}">
@@ -100,6 +111,7 @@
                 </a>
             </li>
         {/if}
+
         {if $is_lovecalculator_enabled AND $is_logged AND !$is_own_profile}
             <li>
                 <a href="{{ $design->url('love-calculator','main','index',$username) }}" title="{lang 'Love Calculator'}">
