@@ -174,7 +174,9 @@ class UserController extends Controller
                     self::SEARCH_NOT_FOUND_REDIRECT_DELAY
                 );
 
-                $this->displayPageNotFound('No results found. Please try again with wider/new search criteria');
+                $this->displayPageNotFound(
+                    t('No results found. Please try again with wider/new search criteria')
+                );
             } else {
                 // Add the JS file for the browse form
                 $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
