@@ -32,7 +32,7 @@ class Report
     /**
      * Add the fields in the database.
      *
-     * @param array $aData The data to  add
+     * @param array $aData The data to add.
      *
      * @return Report
      */
