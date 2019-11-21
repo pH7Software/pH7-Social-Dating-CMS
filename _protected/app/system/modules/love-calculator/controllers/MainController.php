@@ -41,7 +41,7 @@ class MainController extends Controller
 
     public function index()
     {
-        // Get Username
+        // Get Usernames
         $sUsername = $this->session->get('member_username');
         $sSecondUsername = $this->httpRequest->get('second_username');
 
@@ -55,24 +55,24 @@ class MainController extends Controller
             $sFirstName = $this->session->get('member_first_name');
             $sSecondFirstName = $this->oUserModel->getFirstName($iSecondId);
 
-            // Title to View
+            // Headings to View
             $this->sTitle = t('Love Calculator with <span class="pH1">You</span> and <span class="pH1">%0%</span>', $this->str->upperFirst($sFirstName));
             $this->view->page_title = $this->sTitle;
             $this->view->h1_title = $this->sTitle;
 
-            // Username to View
+            // Usernames to View
             $this->view->username = $sUsername;
             $this->view->second_username = $sSecondUsername;
 
-            // First Name to View
+            // First Names to View
             $this->view->first_name = $sFirstName;
             $this->view->second_first_name = $sSecondFirstName;
 
-            // Sex to View
+            // Genders to View
             $this->view->sex = $this->oUserModel->getSex($iId);
             $this->view->second_sex = $this->oUserModel->getSex($iSecondId);
 
-            // Include the Avatar class
+            // Include the Avatar class to view
             $this->view->avatarDesign = new AvatarDesignCore;
 
             // Calculate the mutual love
