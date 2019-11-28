@@ -489,7 +489,7 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-{* For LoginUserAs of Admin Panel *}
+{* To switch back to admin panel from user session *}
   {if $is_admin_auth AND $admin_logged_as_user}
     <p class="center bold loginas">
       <a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'logoutuseras') }}">{lang}Switch back to the Admin Panel{/lang}</a>
