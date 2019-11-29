@@ -294,7 +294,7 @@ class MainController extends Controller
             )) {
                 $this->bStatus = true; // Status is OK
                 $this->updateUserGroupId($iItemNumber);
-                // PayPal will call automatically the "notification()" method thanks its IPN feature and "notify_url" form attribute.
+                // PayPal automatically calls the `notification()` method thanks to its IPN feature and "notify_url" form attribute
             }
         }
     }

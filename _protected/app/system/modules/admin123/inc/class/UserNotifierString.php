@@ -41,7 +41,7 @@ final class UserNotifierString
     {
         $sMsg = t('Congratulation! The content you recently posted at <a href="%site_url%">%site_name%</a> has been successfully approved by the team.');
         $sMsg .= '<br />';
-        $sMsg .= t('Other users will now enjoy what you posted and thanks you, our online service gets better! :)');
+        $sMsg .= t('Other users will now enjoy what you posted and thanks to you, our online service gets better! :)');
 
         return $sMsg;
     }

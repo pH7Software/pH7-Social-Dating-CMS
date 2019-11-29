@@ -4165,7 +4165,7 @@ msgstr ""
 
 #: _protected/app/system/modules/admin123/inc/class/UserNotifierString.php:44
 msgid ""
-"Other users will now enjoy what you posted and thanks you, our online "
+"Other users will now enjoy what you posted and thanks to you, our online "
 "service gets better! :)"
 msgstr ""
 
@@ -6515,7 +6515,7 @@ msgid "%0% near %1% %2%"
 msgstr ""
 
 #: _protected/app/system/modules/map/controllers/CountryController.php:118
-msgid "Meet new people here thanks <b>%site_name%</b>!"
+msgid "Meet new people here thanks to <b>%site_name%</b>!"
 msgstr ""
 
 #: _protected/app/system/modules/milestone-celebration/controllers/MainController.php:31
@@ -14723,7 +14723,7 @@ msgid "Meet New People in %0%, %1% with %site_name%!"
 msgstr ""
 
 #: _protected/framework/Layout/Html/Design.class.php:595
-msgid "Meet New People in %0%, %1% thanks %site_name%!"
+msgid "Meet New People in %0%, %1% thanks to %site_name%!"
 msgstr ""
 
 #: _protected/framework/Layout/Html/Design.class.php:706

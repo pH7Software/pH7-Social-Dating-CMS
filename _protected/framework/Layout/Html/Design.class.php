@@ -592,7 +592,7 @@ class Design
         if (SysMod::isEnabled('map')) {
             $sHtml = '<a href="' . Uri::get('map', 'country', 'index', $sCountry . PH7_SH . $sCity) . '" title="' . t('Meet New People in %0%, %1% with %site_name%!', $sCountryLang, $sCity) . '">' . $sCity . '</a>';
         } else {
-            $sHtml = '<abbr title="' . t('Meet New People in %0%, %1% thanks %site_name%!', $sCountryLang, $sCity) . '">' . $sCity . '</abbr>';
+            $sHtml = '<abbr title="' . t('Meet New People in %0%, %1% thanks to %site_name%!', $sCountryLang, $sCity) . '">' . $sCity . '</abbr>';
         }
 
         if (!$bPrint) {
