@@ -41,8 +41,8 @@ class Permission extends PermissionCore
             );
         }
 
-        if ($bAffAuth && ($this->registry->controller === 'SignupController' || $this->registry->action === 'activate'
-                || $this->registry->action === 'resendactivation' || $this->registry->action === 'login')
+        if ($bAffAuth && ($this->registry->controller === 'SignupController' || $this->registry->action === 'activate' ||
+                $this->registry->action === 'resendactivation' || $this->registry->action === 'login')
         ) {
             Header::redirect(
                 Uri::get('affiliate', 'account', 'index'),
@@ -52,7 +52,7 @@ class Permission extends PermissionCore
         }
 
         if (!$bAdminAuth && $this->registry->controller === 'AdminController') {
-            // For security reasons, we don't redirect the user to the admin panel URL
+            // For security reasons, we don't redirect user to the admin panel URL
             Header::redirect(
                 Uri::get('affiliate', 'home', 'index'),
                 $this->adminSignInMsg(),

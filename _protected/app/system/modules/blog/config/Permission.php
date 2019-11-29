@@ -20,7 +20,7 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        // Level for Blogs
+        // Level for Blog
         $bAdminAuth = AdminCore::auth();
 
         if (!$bAdminAuth || UserCore::isAdminLoggedAs()) {

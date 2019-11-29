@@ -115,7 +115,7 @@ class CountryController extends Controller
     private function setMap()
     {
         $sFullAddress = $this->registry->country . ' ' . $this->registry->city;
-        $sMarkerText = t('Meet new people here thanks <b>%site_name%</b>!');
+        $sMarkerText = t('Meet new people here thanks to <b>%site_name%</b>!');
 
         $oMap = new Map;
         $oMap->setKey(DbConfig::getSetting('googleApiKey'));

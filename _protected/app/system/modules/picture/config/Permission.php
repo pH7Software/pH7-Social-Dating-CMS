@@ -16,18 +16,19 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if (!UserCore::auth() && ($this->registry->action === 'addalbum' || $this->registry->action === 'addphoto'
-                || $this->registry->action === 'editalbum' || $this->registry->action === 'editphoto'
-                || $this->registry->action === 'deletephoto' || $this->registry->action === 'deletealbum')
+        if (!UserCore::auth() && ($this->registry->action === 'addalbum' || $this->registry->action === 'addphoto' ||
+                $this->registry->action === 'editalbum' || $this->registry->action === 'editphoto' ||
+                $this->registry->action === 'deletephoto' || $this->registry->action === 'deletealbum')
         ) {
             $this->signInRedirect();
         }
 
-        if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) // If the admin is not logged (but can be if the admin use "login as user" feature)
-        {
+        // If the admin is not logged (but can still be if admin use "login as user" feature)
+        if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
             if (!$this->checkMembership() || !$this->group->view_pictures) {
                 $this->paymentRedirect();
-            } elseif (($this->registry->action === 'addalbum' || $this->registry->action === 'addphoto') && !$this->group->upload_pictures) {
+            } elseif (($this->registry->action === 'addalbum' || $this->registry->action === 'addphoto') &&
+                !$this->group->upload_pictures) {
                 $this->paymentRedirect();
             }
         }

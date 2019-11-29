@@ -120,16 +120,10 @@ class ToolController extends Controller
         $this->view->h1_title = $this->sTitle;
 
         $aDumpList = $this->file->getFileList(PH7_PATH_BACKUP_SQL, static::BACKUP_FILE_EXTS);
-
-        // Removing the path
-        $aDumpList = array_map(function ($sValue) {
-            return str_replace(PH7_PATH_BACKUP_SQL, '', $sValue);
-        }, $aDumpList);
+        $this->removePaths($aDumpList);
         $this->view->aDumpList = $aDumpList;
 
-
         $oSecurityToken = new Token;
-
         if ($this->httpRequest->postExists('backup')) {
             if (!$oSecurityToken->check('backup')) {
                 $this->design->setFlashMsg(Form::errorTokenMsg(), Design::ERROR_TYPE);
@@ -213,7 +207,6 @@ class ToolController extends Controller
                 }
             }
         }
-
         unset($oSecurityToken);
 
 
@@ -299,5 +292,17 @@ class ToolController extends Controller
     private function isPost()
     {
         return $this->httpRequest->postExists('is');
+    }
+
+    /**
+     * @param array $aDumpList
+     *
+     * @return array
+     */
+    private function removePaths(array $aDumpList)
+    {
+        return array_map(function ($sFullPath) {
+            return str_replace(PH7_PATH_BACKUP_SQL, '', $sFullPath);
+        }, $aDumpList);
     }
 }

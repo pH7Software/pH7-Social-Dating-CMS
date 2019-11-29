@@ -1,5 +1,7 @@
 <?php
 /**
+ * Levels for admin module.
+ *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
@@ -22,10 +24,6 @@ class Permission extends PermissionCore
 
         $bAdminAuth = AdminCore::auth();
 
-        /***** Levels for admin module *****/
-
-        // Overall levels
-
         if (!$bAdminAuth && $this->registry->action !== 'login') {
             Header::redirect(
                 Uri::get(PH7_ADMIN_MOD, 'main', 'login'),
@@ -41,7 +39,5 @@ class Permission extends PermissionCore
                 Design::ERROR_TYPE
             );
         }
-
-        // Options ...
     }
 }
