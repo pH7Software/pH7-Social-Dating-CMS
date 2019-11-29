@@ -23,10 +23,12 @@ abstract class ProfileBaseController extends Controller
 {
     use ImageTaggable;
 
+    const SOCIAL_TAG_AVATAR_SIZE = 400;
+
     /**
      * Default Map settings.
      * These constants are likely to be modified in the child class
-     * thanks static:: keyword to use late static binding.
+     * thanks to static:: keyword to use late static binding.
      */
     const MAP_ZOOM_LEVEL = 10;
     const MAP_WIDTH_SIZE = '100%';
@@ -347,7 +349,7 @@ abstract class ProfileBaseController extends Controller
         $sAvatarImageUrl = $this->design->getUserAvatar(
             $oUser->username,
             $oUser->sex,
-            400,
+            self::SOCIAL_TAG_AVATAR_SIZE,
             false
         );
         $this->view->image_social_meta_tag = $sAvatarImageUrl;
