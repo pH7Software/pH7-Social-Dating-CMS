@@ -53,7 +53,11 @@ class MainController extends Controller
 
     public function faq()
     {
-        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'faq.css');
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
+            'faq.css'
+        );
+
         // divShow.js for the display/hide questions
         $this->design->addJs(PH7_STATIC . PH7_JS, 'divShow.js');
 
