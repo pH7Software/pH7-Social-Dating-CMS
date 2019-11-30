@@ -34,6 +34,7 @@ class UserBirthDateCore
 
     /**
      * @param array $aAge
+     *
      * @return bool
      */
     private static function isInvalidBirthDate(array $aAge)
