@@ -32,6 +32,10 @@ class UserBirthDateCore
         return (new YearMeasure($aAge[0], $aAge[1], $aAge[2]))->get();
     }
 
+    /**
+     * @param array $aAge
+     * @return bool
+     */
     private static function isInvalidBirthDate(array $aAge)
     {
         $iAgeElements = count($aAge);
