@@ -20,7 +20,7 @@ use stdClass;
 // Abstract Class
 class AdminCore extends UserCore
 {
-    const ROOT_PROILE_ID = 1;
+    const ROOT_PROFILE_ID = 1;
 
     /**
      * Check if an admin is authenticated.
@@ -57,7 +57,7 @@ class AdminCore extends UserCore
      */
     public static function isRootProfileId($iProfileId)
     {
-        return $iProfileId === static::ROOT_PROILE_ID;
+        return $iProfileId === static::ROOT_PROFILE_ID;
     }
 
     /**
