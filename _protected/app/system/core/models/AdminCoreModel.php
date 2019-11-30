@@ -31,17 +31,17 @@ class AdminCoreModel extends UserCoreModel
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
-        $sSql = 'SELECT m.*, g.name AS membershipName FROM' . Db::prefix($sTable) .
+        $sSqlQuery = 'SELECT m.*, g.name AS membershipName FROM' . Db::prefix($sTable) .
             'AS m INNER JOIN ' . Db::prefix(DbTableName::MEMBERSHIP) .
             'AS g ON m.groupId = g.groupId LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) .
             'AS i ON m.profileId = i.profileId WHERE username <> \'' . PH7_GHOST_USERNAME . '\' ORDER BY joinDate DESC LIMIT :offset, :limit';
         if ($sTable !== DbTableName::MEMBER) {
             // Redefine query if it isn't the "members" table
-            $sSql = 'SELECT * FROM' . Db::prefix($sTable) .
+            $sSqlQuery = 'SELECT * FROM' . Db::prefix($sTable) .
                 'WHERE username <> \'' . PH7_GHOST_USERNAME . '\' ORDER BY joinDate DESC LIMIT :offset, :limit';
         }
 
-        $rStmt = Db::getInstance()->prepare($sSql);
+        $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -72,16 +72,17 @@ class AdminCoreModel extends UserCoreModel
         $sSqlLimit = !$bCount ? ' LIMIT :offset, :limit' : '';
         $sSqlSelect = !$bCount ? 'm.*, g.name AS membershipName' : 'COUNT(m.profileId)';
 
-        $sSqlQuery = !empty($iBanned) ? '(ban = 1) AND ' : '';
+        $sSqlConditions = !empty($iBanned) ? '(ban = 1) AND ' : '';
         if ($sWhere === 'all') {
-            $sSqlQuery .= '(m.username LIKE :what OR m.email LIKE :what OR m.firstName LIKE :what OR m.lastName LIKE :what OR m.ip LIKE :what)';
+            $sSqlConditions .= '(m.username LIKE :what OR m.email LIKE :what OR m.firstName LIKE :what OR m.lastName LIKE :what OR m.ip LIKE :what)';
         } else {
-            $sSqlQuery .= '(m.' . $sWhere . ' LIKE :what)';
+            $sSqlConditions .= '(m.' . $sWhere . ' LIKE :what)';
         }
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER) . 'AS m INNER JOIN ' . Db::prefix(DbTableName::MEMBERSHIP) . 'AS g ON m.groupId = g.groupId LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) . 'AS i ON m.profileId = i.profileId WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (m.groupId = :groupId) AND ' . $sSqlQuery . $sSqlOrder . $sSqlLimit);
+        $sSqlQuery = 'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER) . 'AS m INNER JOIN ' . Db::prefix(DbTableName::MEMBERSHIP) . 'AS g ON m.groupId = g.groupId LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) . 'AS i ON m.profileId = i.profileId WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (m.groupId = :groupId) AND ' . $sSqlConditions . $sSqlOrder . $sSqlLimit;
+        $rStmt = Db::getInstance()->prepare($sSqlQuery);
 
         $rStmt->bindValue(':what', '%' . $mWhat . '%', \PDO::PARAM_STR);
         $rStmt->bindParam(':groupId', $iGroupId, \PDO::PARAM_INT);
