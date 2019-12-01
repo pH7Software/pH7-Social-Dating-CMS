@@ -30,8 +30,14 @@ class WebcamController extends Controller
         $this->view->h3_title = t('Guaranteed fun!');
 
         // Add Css Style and JavaScript for the Webcam
-        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'style.css');
-        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'webcam.js,script.js');
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
+            'style.css'
+        );
+        $this->design->addJs(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
+            'webcam.js,script.js'
+        );
 
         $this->output();
     }
