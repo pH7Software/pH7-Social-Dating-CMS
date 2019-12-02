@@ -74,6 +74,10 @@ class DisableModuleForm
      */
     private static function isModuleInDevStage(stdClass $oModuleDetails)
     {
-        return in_array($oModuleDetails->folderName, self::DEV_STAGE_MODULES, true);
+        return in_array(
+            $oModuleDetails->folderName,
+            self::DEV_STAGE_MODULES,
+            true
+        );
     }
 }
