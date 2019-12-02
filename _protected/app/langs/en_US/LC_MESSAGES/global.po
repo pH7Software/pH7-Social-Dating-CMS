@@ -2816,7 +2816,7 @@ msgid ""
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/AnalyticsApiForm.php:30
-msgid "Your analytics code (e.g., Google Analytics)"
+msgid "Your analytics tracking code (e.g., Google Analytics, Matomo)"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/BlockCountryForm.php:34
