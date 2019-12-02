@@ -20,13 +20,13 @@ class RouterController extends Controller
     public function refer()
     {
         if ($this->httpRequest->getExists('aff')) {
-            $this->addUsernameReferer();
+            $this->addReferer();
         }
 
         $this->redirectToWebsite();
     }
 
-    private function addUsernameReferer()
+    private function addReferer()
     {
         $sUsername = $this->httpRequest->get('aff');
 
