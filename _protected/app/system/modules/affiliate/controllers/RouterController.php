@@ -20,12 +20,17 @@ class RouterController extends Controller
     public function refer()
     {
         if ($this->httpRequest->getExists('aff')) {
-            if ((new ExistsCoreModel)->username($this->httpRequest->get('aff'), DbTableName::AFFILIATE)) {
-                (new Affiliate)->addRefer($this->httpRequest->get('aff'));
-            }
+            $this->addUsernameReferer();
         }
 
         $this->redirectToWebsite();
+    }
+
+    private function addUsernameReferer()
+    {
+        if ((new ExistsCoreModel)->username($this->httpRequest->get('aff'), DbTableName::AFFILIATE)) {
+            (new Affiliate)->addRefer($this->httpRequest->get('aff'));
+        }
     }
 
     /**
