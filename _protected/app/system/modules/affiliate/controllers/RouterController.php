@@ -28,8 +28,10 @@ class RouterController extends Controller
 
     private function addUsernameReferer()
     {
-        if ((new ExistsCoreModel)->username($this->httpRequest->get('aff'), DbTableName::AFFILIATE)) {
-            (new Affiliate)->addRefer($this->httpRequest->get('aff'));
+        $sUsername = $this->httpRequest->get('aff');
+
+        if ((new ExistsCoreModel)->username($sUsername, DbTableName::AFFILIATE)) {
+            (new Affiliate)->addRefer($sUsername);
         }
     }
 
