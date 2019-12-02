@@ -380,7 +380,7 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
         /**
          * If the template doesn't contain theme for emails, we retrieve the emails default themes.
          */
-        if (!is_file($sMailTplFile) && defined('PH7_TPL_NAME')) {
+        if (defined('PH7_TPL_NAME') && !is_file($sMailTplFile)) {
             $sMailTplFile = str_replace(PH7_TPL_NAME, PH7_DEFAULT_THEME, $sMailTplFile);
         }
 
