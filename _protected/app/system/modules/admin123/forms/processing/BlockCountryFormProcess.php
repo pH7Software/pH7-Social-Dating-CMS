@@ -62,6 +62,10 @@ class BlockCountryFormProcess extends Form
 
     private function clearCache()
     {
-        (new Cache)->start(BlockCountryModel::CACHE_GROUP, null, null)->clear();
+        (new Cache)->start(
+            BlockCountryModel::CACHE_GROUP,
+            null,
+            null
+        )->clear();
     }
 }

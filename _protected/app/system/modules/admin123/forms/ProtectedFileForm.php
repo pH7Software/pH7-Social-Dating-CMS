@@ -40,7 +40,17 @@ class ProtectedFileForm
             $oForm->configure(['action' => '']);
             $oForm->addElement(new \PFBC\Element\Hidden('submit_file', 'form_file'));
             $oForm->addElement(new \PFBC\Element\Token('file'));
-            $oForm->addElement(new \PFBC\Element\Textarea(t('File Contents'), 'content', ['value' => $rData, 'style' => 'height:50rem', 'required' => 1]));
+            $oForm->addElement(
+                new \PFBC\Element\Textarea(
+                    t('File Contents'),
+                    'content',
+                    [
+                        'value' => $rData,
+                        'style' => 'height:50rem',
+                        'required' => 1
+                    ]
+                )
+            );
             if (self::isLegalPage($sFullPath)) {
                 $oForm->addElement(
                     new \PFBC\Element\HTMLExternal(
