@@ -43,8 +43,28 @@ class EditPictureForm
         );
         unset($oHttpRequest);
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Image Name:'), 'title', ['value' => $oPhoto->title, 'required' => 1, 'pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern)]));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Image Description:'), 'description', ['value' => $oPhoto->description, 'validation' => new \PFBC\Validation\Str(2, 190)]));
+        $oForm->addElement(
+            new \PFBC\Element\Textbox(
+                t('Image Name:'),
+                'title',
+                [
+                    'value' => $oPhoto->title,
+                    'required' => 1,
+                    'pattern' => $sTitlePattern,
+                    'validation' => new \PFBC\Validation\RegExp($sTitlePattern)
+                ]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Textarea(
+                t('Image Description:'),
+                'description',
+                [
+                    'value' => $oPhoto->description,
+                    'validation' => new \PFBC\Validation\Str(2, 190)
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

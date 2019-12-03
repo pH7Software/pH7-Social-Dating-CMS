@@ -43,8 +43,28 @@ class EditVideoForm
         );
         unset($oHttpRequest);
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Video Name:'), 'title', ['value' => $oVideo->title, 'required' => 1, 'pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern)]));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Video Description:'), 'description', ['value' => $oVideo->description, 'validation' => new \PFBC\Validation\Str(2, 190)]));
+        $oForm->addElement(
+            new \PFBC\Element\Textbox(
+                t('Video Name:'),
+                'title',
+                [
+                    'value' => $oVideo->title,
+                    'required' => 1,
+                    'pattern' => $sTitlePattern,
+                    'validation' => new \PFBC\Validation\RegExp($sTitlePattern)
+                ]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Textarea(
+                t('Video Description:'),
+                'description',
+                [
+                    'value' => $oVideo->description,
+                    'validation' => new \PFBC\Validation\Str(2, 190)
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
