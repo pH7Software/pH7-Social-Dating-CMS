@@ -37,6 +37,8 @@ class EditCommentForm
                 'comment',
                 [
                     'value' => $oData->comment,
+                    'id' => 'str_com',
+                    'onblur' => 'CValid(this.value,this.id,2,2500)',
                     'required' => 1,
                     'validation' => new \PFBC\Validation\Str(2, 2500)
                 ]
@@ -44,7 +46,10 @@ class EditCommentForm
         );
         unset($oHttpRequest, $oData);
 
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_com"></span>'));
+
         $oForm->addElement(new \PFBC\Element\Button(t('Save')));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
     }
 }
