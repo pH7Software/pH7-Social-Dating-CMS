@@ -42,7 +42,17 @@ class CommentForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_com"></span>'));
 
         if (DbConfig::getSetting('isCaptchaComment')) {
-            $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha'), 'captcha', ['id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:')]));
+            $oForm->addElement(
+                new \PFBC\Element\CCaptcha(
+                    t('Captcha'),
+                    'captcha',
+                    [
+                        'id' => 'ccaptcha',
+                        'onkeyup' => 'CValid(this.value, this.id)',
+                        'description' => t('Enter the below code:')
+                    ]
+                )
+            );
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }
 
