@@ -38,7 +38,7 @@ class EditCommentForm
                 [
                     'value' => $oData->comment,
                     'required' => 1,
-                    'validation' => new \PFBC\Validation\Str(2, 2000)
+                    'validation' => new \PFBC\Validation\Str(2, 2500)
                 ]
             )
         );
