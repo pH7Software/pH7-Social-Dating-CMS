@@ -43,13 +43,13 @@ class MetaMainForm
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Headline:'), 'headline', ['description' => t('Right headline mainly displaying on the visitors homepage'), 'value' => $oMeta->headline, 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Slogan:'), 'slogan', ['description' => t('Left slogan (headline) mainly displaying on the visitors homepage'), 'value' => $oMeta->slogan, 'validation' => new \PFBC\Validation\Str(2, 190), 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Slogan:'), 'slogan', ['description' => t('Left slogan (headline) mainly displaying on the visitors homepage'), 'value' => $oMeta->slogan, 'validation' => new \PFBC\Validation\Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH), 'required' => 1]));
 
         $oForm->addElement(new \PFBC\Element\CKEditor(t('SEO text:'), 'promo_text', ['description' => t('Promotional text displaying on the visitors homepage.'), 'value' => $oMeta->promoText, 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Description (meta tag):'), 'meta_description', ['value' => $oMeta->metaDescription, 'validation' => new \PFBC\Validation\Str(2, 190), 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Description (meta tag):'), 'meta_description', ['value' => $oMeta->metaDescription, 'validation' => new \PFBC\Validation\Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH), 'required' => 1]));
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Keywords (meta tag):'), 'meta_keywords', ['description' => t('Separate keywords by commas.'), 'value' => $oMeta->metaKeywords, 'validation' => new \PFBC\Validation\Str(2, 190), 'required' => 1]));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Keywords (meta tag):'), 'meta_keywords', ['description' => t('Separate keywords by commas.'), 'value' => $oMeta->metaKeywords, 'validation' => new \PFBC\Validation\Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH), 'required' => 1]));
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Robots (meta tag):'), 'meta_robots', ['value' => $oMeta->metaRobots, 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1]));
 
