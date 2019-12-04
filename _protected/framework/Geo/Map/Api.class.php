@@ -14,7 +14,7 @@
  *
  * ----------------- Modified by Pierre-Henry SORIA ----------------- *
  *
- * @author          Pierre-Henry SORIA <ph7software@gmail.com>
+ * @author          Pierre-Henry SORIA <hello@ph7cms.com>
  * @copyright       (c) 2011-2019, Pierre-Henry Soria, All Rights Reserved.
  * @version         Last update 04/19/2018
  * @package         pH7CMS
@@ -31,7 +31,7 @@ use PH7\Framework\Config\Config;
  * Class to use the Google Maps v3 API
  *
  * @author Yohann CERDAN <cerdanyohann@yahoo.fr>
- * @author Pierre-Henry SORIA <ph7software@gmail.com>
+ * @author Pierre-Henry SORIA <hello@ph7cms.com>
  */
 class Api
 {
