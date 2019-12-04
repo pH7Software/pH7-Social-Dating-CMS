@@ -44,14 +44,63 @@ class VideoForm
         unset($aAlbumName);
 
         $oForm->addElement(new \PFBC\Element\Hidden('album_title', @$oAlbums[0]->name));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Video Name:'), 'title', ['pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern)]));
-        $oForm->addElement(new \PFBC\Element\Select('Video Type:', 'type', [t('Choose...'), 'embed' => t('Embed (from video platform)'), 'regular' => t('Regular (from device/computer)')], ['id' => 'video-type', 'required' => 1]));
-
+        $oForm->addElement(
+            new \PFBC\Element\Textbox(
+                t('Video Name:'),
+                'title',
+                [
+                    'pattern' => $sTitlePattern,
+                    'validation' => new \PFBC\Validation\RegExp($sTitlePattern)
+                ]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('Video Type:'),
+                'type',
+                [
+                    t('Choose...'),
+                    'embed' => t('Embed (from video platform)'),
+                    'regular' => t('Regular (from device/computer)')
+                ],
+                [
+                    'id' => 'video-type',
+                    'required' => 1
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="hidden" id="regular">'));
-        $oForm->addElement(new \PFBC\Element\File(t('Video:'), 'video', ['description' => '<span class="bold">' . t('Note:') . '</span> ' . t('Please be patient while downloading video, this may take time (especially if you download a long video).') . '</em>', 'accept' => 'video/*']));
-        $oForm->addElement(new \PFBC\Element\Checkbox('', 'agree', ['1' => t('I have the right to distribute this video')]));
+        $oForm->addElement(
+            new \PFBC\Element\File(
+                t('Video:'),
+                'video',
+                [
+                    'description' => '<span class="bold">' . t('Note:') . '</span> ' . t('Please be patient while downloading video, this may take time (especially if you download a long video).') . '</em>',
+                    'accept' => 'video/*'
+                ]
+            )
+        );
+        $oForm->addElement(
+            new \PFBC\Element\Checkbox(
+                '',
+                'agree',
+                [
+                    '1' => t('I have the right to distribute this video')
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div><div class="hidden" id="embed">'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Embed URL:'), 'embed_code', ['description' => t('e.g., %0%', DbConfig::getSetting('defaultVideo')), 'title' => t('Video from Youtube, Vimeo or DailyMotion.'), 'validation' => new \PFBC\Validation\Url]));
+        $oForm->addElement(
+            new \PFBC\Element\Textbox(
+                t('Embed URL:'),
+                'embed_code',
+                [
+                    'description' => t('e.g., %0%', DbConfig::getSetting('defaultVideo')),
+                    'title' => t('Video from Youtube, Vimeo or DailyMotion.'),
+                    'validation' => new \PFBC\Validation\Url
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
 
         $oForm->addElement(
