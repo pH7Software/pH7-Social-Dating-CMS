@@ -54,7 +54,15 @@ class VideoForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Embed URL:'), 'embed_code', ['description' => t('e.g., %0%', DbConfig::getSetting('defaultVideo')), 'title' => t('Video from Youtube, Vimeo or DailyMotion.'), 'validation' => new \PFBC\Validation\Url]));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
 
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Video Description:'), 'description', ['validation' => new \PFBC\Validation\Str(2, 190)]));
+        $oForm->addElement(
+            new \PFBC\Element\Textarea(
+                t('Video Description:'),
+                'description',
+                [
+                    'validation' => new \PFBC\Validation\Str(2, 190)
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\Button(t('Upload'), 'submit', ['icon' => 'video']));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'form.js"></script>'));
         $oForm->render();
