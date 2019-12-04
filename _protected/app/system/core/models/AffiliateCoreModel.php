@@ -108,7 +108,7 @@ class AffiliateCoreModel extends AdminCoreModel
         $rStmt->bindValue(':state', (!empty($aData['state']) ? $aData['state'] : ''), \PDO::PARAM_STR);
         $rStmt->bindValue(':zipCode', (!empty($aData['zip_code']) ? $aData['zip_code'] : ''), \PDO::PARAM_STR);
         $rStmt->bindValue(':description', $aData['description'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':phone', $aData['phone'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':phone', (!empty($aData['phone']) ? $aData['phone'] : ''), \PDO::PARAM_STR);
         $rStmt->bindValue(':website', trim($aData['website']), \PDO::PARAM_STR);
 
         return $rStmt->execute();
