@@ -49,7 +49,16 @@ class AlbumForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\File(t('Album Cover Thumbnail:'), 'album', ['accept' => 'image/*', 'required' => 1]));
+        $oForm->addElement(
+            new \PFBC\Element\File(
+                t('Album Cover Thumbnail:'),
+                'album',
+                [
+                    'accept' => 'image/*',
+                    'required' => 1
+                ]
+            )
+        );
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

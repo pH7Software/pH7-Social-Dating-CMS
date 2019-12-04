@@ -40,7 +40,17 @@ class VideoForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_video', 'form_video'));
         $oForm->addElement(new \PFBC\Element\Token('video'));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Choose your album - OR - <a href="%0%">Add a new Album</a>', Uri::get('video', 'main', 'addalbum')), 'album_id', $aAlbumName, ['value' => self::getAlbumId(), 'required' => 1]));
+        $oForm->addElement(
+            new \PFBC\Element\Select(
+                t('Choose your album - OR - <a href="%0%">Add a new Album</a>', Uri::get('video', 'main', 'addalbum')),
+                'album_id',
+                $aAlbumName,
+                [
+                    'value' => self::getAlbumId(),
+                    'required' => 1
+                ]
+            )
+        );
         unset($aAlbumName);
 
         $oForm->addElement(new \PFBC\Element\Hidden('album_title', @$oAlbums[0]->name));
