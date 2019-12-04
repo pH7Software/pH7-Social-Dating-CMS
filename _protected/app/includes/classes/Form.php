@@ -17,6 +17,9 @@ class Form extends Framework\Layout\Form\Form
 {
     use Framework\Layout\Form\Message;
 
+    const MIN_STRING_FIELD_LENGTH = 2;
+    const MAX_STRING_FIELD_LENGTH = 200;
+
     /**
      * To get Value Data from the database.
      *

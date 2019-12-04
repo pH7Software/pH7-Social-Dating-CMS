@@ -96,7 +96,7 @@ class EditNoteForm
             $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
             $oForm->addElement(new \PFBC\Element\CKEditor(t('Body:'), 'content', ['value' => $oPost->content, 'validation' => new \PFBC\Validation\Str(30), 'required' => 1]));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Language of your post:'), 'lang_id', ['value' => $oPost->langId, 'description' => t('e.g., "en", "fr", "es", "js"'), 'pattern' => '[a-z]{2}', 'validation' => new \PFBC\Validation\Str(2, 2), 'required' => 1]));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Slogan:'), 'slogan', ['value' => $oPost->slogan, 'validation' => new \PFBC\Validation\Str(2, 190)]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Slogan:'), 'slogan', ['value' => $oPost->slogan, 'validation' => new \PFBC\Validation\Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)]));
             $oForm->addElement(new \PFBC\Element\File(t('Thumbnail:'), 'thumb', ['accept' => 'image/*']));
 
             if (!empty($oPost->thumb)) {
@@ -104,10 +104,10 @@ class EditNoteForm
                 $oForm->addElement(new \PFBC\Element\HTMLExternal('<a href="' . Uri::get('note', 'main', 'removethumb', $oPost->noteId . (new Token)->url(), false) . '">' . t('Remove this thumbnail?') . '</a>'));
             }
 
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Tags:'), 'tags', ['value' => $oPost->tags, 'description' => t('Separate keywords by commas and without spaces between the commas.'), 'validation' => new \PFBC\Validation\Str(2, 190)]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Tags:'), 'tags', ['value' => $oPost->tags, 'description' => t('Separate keywords by commas and without spaces between the commas.'), 'validation' => new \PFBC\Validation\Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)]));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Title (meta tag):'), 'page_title', ['value' => $oPost->pageTitle, 'validation' => new \PFBC\Validation\Str(2, 100), 'required' => 1]));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Description (meta tag):'), 'meta_description', ['validation' => new \PFBC\Validation\Str(2, 190), 'value' => $oPost->metaDescription]));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Keywords (meta tag):'), 'meta_keywords', ['description' => t('Separate keywords by commas and without spaces between the commas.'), 'validation' => new \PFBC\Validation\Str(2, 190), 'value' => $oPost->metaKeywords]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Description (meta tag):'), 'meta_description', ['validation' => new \PFBC\Validation\Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH), 'value' => $oPost->metaDescription]));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Keywords (meta tag):'), 'meta_keywords', ['description' => t('Separate keywords by commas and without spaces between the commas.'), 'validation' => new \PFBC\Validation\Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH), 'value' => $oPost->metaKeywords]));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Robots (meta tag):'), 'meta_robots', ['validation' => new \PFBC\Validation\Str(2, 50), 'value' => $oPost->metaRobots]));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Author (meta tag):'), 'meta_author', ['validation' => new \PFBC\Validation\Str(2, 50), 'value' => $oPost->metaAuthor]));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Copyright (meta tag):'), 'meta_copyright', ['validation' => new \PFBC\Validation\Str(2, 50), 'value' => $oPost->metaCopyright]));

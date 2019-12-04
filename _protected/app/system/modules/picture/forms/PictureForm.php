@@ -82,7 +82,7 @@ class PictureForm
                 t('Description for your photo(s):'),
                 'description',
                 [
-                    'validation' => new \PFBC\Validation\Str(2, 190)
+                    'validation' => new \PFBC\Validation\Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)
                 ]
             )
         );
