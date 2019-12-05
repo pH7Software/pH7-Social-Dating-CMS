@@ -29,17 +29,20 @@ class Admin extends AdminCore
      *
      * @param int $iProfileId
      * @param string $sUsername
+     * @param AdminModel $oAdminModel
      *
      * @return void
+     *
+     * @throws ForbiddenActionException
      */
-    public function delete($iProfileId, $sUsername)
+    public function delete($iProfileId, $sUsername, AdminModel $oAdminModel)
     {
         $iProfileId = (int)$iProfileId;
 
         if (AdminCore::isRootProfileId($iProfileId)) {
-            exit('You cannot delete the Root Administrator!');
-        } else {
-            (new AdminModel)->delete($iProfileId, $sUsername);
+            throw new ForbiddenActionException('You cannot delete the Root Administrator!');
         }
+
+        (new $oAdminModel)->delete($iProfileId, $sUsername);
     }
 }
