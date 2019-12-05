@@ -112,12 +112,12 @@ final class Security
      */
     public static function hash($sVal, $iLength = self::HASH_LENGTH)
     {
-        $sCoreHash = hash(self::SHA512_ALGORITHM, self::PREFIX_SALT . hash(self::WHIRLPOOL_ALGORITHM, self::PREFIX_SALT)) . hash(self::WHIRLPOOL_ALGORITHM, $sVal) . hash(self::SHA512_ALGORITHM, hash(self::WHIRLPOOL_ALGORITHM, self::SUFFIX_SALT) . self::SUFFIX_SALT);
+        $sCoreHashString = hash(self::SHA512_ALGORITHM, self::PREFIX_SALT . hash(self::WHIRLPOOL_ALGORITHM, self::PREFIX_SALT)) . hash(self::WHIRLPOOL_ALGORITHM, $sVal) . hash(self::SHA512_ALGORITHM, hash(self::WHIRLPOOL_ALGORITHM, self::SUFFIX_SALT) . self::SUFFIX_SALT);
 
         return Various::padStr(
             hash(
                 self::WHIRLPOOL_ALGORITHM,
-                $sCoreHash
+                $sCoreHashString
             ),
             $iLength
         );
