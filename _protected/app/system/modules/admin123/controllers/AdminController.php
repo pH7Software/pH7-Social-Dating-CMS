@@ -10,6 +10,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Layout\Html\Security as HtmlSecurity;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
@@ -117,36 +118,52 @@ class AdminController extends Controller
 
     public function delete()
     {
-        $aData = explode('_', $this->httpRequest->post('id'));
-        $iId = (int)$aData[0];
-        $sUsername = (string)$aData[1];
+        try {
+            $aData = explode('_', $this->httpRequest->post('id'));
+            $iId = (int)$aData[0];
+            $sUsername = (string)$aData[1];
 
-        (new Admin)->delete($iId, $sUsername);
+            (new Admin)->delete($iId, $sUsername);
 
-        Header::redirect(
-            Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'),
-            t('The admin has been deleted.')
-        );
+            Header::redirect(
+                Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'),
+                t('The admin has been deleted.')
+            );
+        } catch (ForbiddenActionException $oExcept) {
+            Header::redirect(
+                Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'),
+                $oExcept->getMessage(),
+                Design::ERROR_TYPE
+            );
+        }
     }
 
     public function deleteAll()
     {
-        if (!(new SecurityToken)->check('admin_action')) {
-            $this->sMsg = Form::errorTokenMsg();
-        } elseif (count($this->httpRequest->post('action')) > 0) {
-            foreach ($this->httpRequest->post('action') as $sAction) {
-                $aData = explode('_', $sAction);
-                $iId = (int)$aData[0];
-                $sUsername = (string)$aData[1];
+        try {
+            if (!(new SecurityToken)->check('admin_action')) {
+                $this->sMsg = Form::errorTokenMsg();
+            } elseif (count($this->httpRequest->post('action')) > 0) {
+                foreach ($this->httpRequest->post('action') as $sAction) {
+                    $aData = explode('_', $sAction);
+                    $iId = (int)$aData[0];
+                    $sUsername = (string)$aData[1];
 
-                (new Admin)->delete($iId, $sUsername);
+                    (new Admin)->delete($iId, $sUsername);
+                }
+                $this->sMsg = t('The admin(s) has/have been deleted.');
             }
-            $this->sMsg = t('The admin(s) has/have been deleted.');
-        }
 
-        Header::redirect(
-            Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'),
-            $this->sMsg
-        );
+            Header::redirect(
+                Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'),
+                $this->sMsg
+            );
+        } catch (ForbiddenActionException $oExcept) {
+            Header::redirect(
+                Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'),
+                $oExcept->getMessage(),
+                Design::ERROR_TYPE
+            );
+        }
     }
 }

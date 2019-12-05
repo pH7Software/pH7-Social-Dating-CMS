@@ -88,11 +88,13 @@ class UserCore
      * @param string $sUsername
      *
      * @return void
+     *
+     * @throws ForbiddenActionException
      */
     public function delete($iProfileId, $sUsername)
     {
         if ($this->isGhost($sUsername)) {
-            exit('You cannot delete this profile!');
+            throw new ForbiddenActionException('You cannot delete this profile!');
         }
 
         $oFile = new File;

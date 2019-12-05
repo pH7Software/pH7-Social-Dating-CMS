@@ -953,6 +953,8 @@ class UserCoreModel extends Model
      * @param string $sUsername
      *
      * @return void
+     *
+     * @throws ForbiddenActionException
      */
     public function delete($iProfileId, $sUsername)
     {
@@ -960,7 +962,7 @@ class UserCoreModel extends Model
         $iProfileId = (int)$iProfileId;
 
         if ($sUsername === PH7_GHOST_USERNAME) {
-            exit('You cannot delete this profile!');
+            throw new ForbiddenActionException('You cannot delete this profile!');
         }
 
         $oDb = Db::getInstance();

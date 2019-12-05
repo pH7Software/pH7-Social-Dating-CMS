@@ -331,16 +331,24 @@ class UserController extends Controller
 
     public function delete()
     {
-        $aData = explode('_', $this->httpRequest->post('id'));
-        $iId = (int)$aData[0];
-        $sUsername = (string)$aData[1];
+        try {
+            $aData = explode('_', $this->httpRequest->post('id'));
+            $iId = (int)$aData[0];
+            $sUsername = (string)$aData[1];
 
-        $this->oAdmin->delete($iId, $sUsername);
+            $this->oUser->delete($iId, $sUsername);
 
-        Header::redirect(
-            Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
-            t('The profile has been deleted.')
-        );
+            Header::redirect(
+                Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
+                t('The profile has been deleted.')
+            );
+        } catch (ForbiddenActionException $oExcept) {
+            Header::redirect(
+                Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
+                $oExcept->getMessage(),
+                Design::ERROR_TYPE
+            );
+        }
     }
 
     public function banAll()
@@ -386,23 +394,31 @@ class UserController extends Controller
 
     public function deleteAll()
     {
-        if (!(new SecurityToken)->check('user_action')) {
-            $this->sMsg = Form::errorTokenMsg();
-        } elseif (count($this->httpRequest->post('action')) > 0) {
-            foreach ($this->httpRequest->post('action') as $sAction) {
-                $aData = explode('_', $sAction);
-                $iId = (int)$aData[0];
-                $sUsername = (string)$aData[1];
+        try {
+            if (!(new SecurityToken)->check('user_action')) {
+                $this->sMsg = Form::errorTokenMsg();
+            } elseif (count($this->httpRequest->post('action')) > 0) {
+                foreach ($this->httpRequest->post('action') as $sAction) {
+                    $aData = explode('_', $sAction);
+                    $iId = (int)$aData[0];
+                    $sUsername = (string)$aData[1];
 
-                $this->oAdmin->delete($iId, $sUsername);
+                    $this->oUser->delete($iId, $sUsername);
+                }
+                $this->sMsg = t('The profile(s) has/have been deleted.');
             }
-            $this->sMsg = t('The profile(s) has/have been deleted.');
-        }
 
-        Header::redirect(
-            Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
-            $this->sMsg
-        );
+            Header::redirect(
+                Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
+                $this->sMsg
+            );
+        } catch (ForbiddenActionException $oExcept) {
+            Header::redirect(
+                Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
+                $oExcept->getMessage(),
+                Design::ERROR_TYPE
+            );
+        }
     }
 
     /**
