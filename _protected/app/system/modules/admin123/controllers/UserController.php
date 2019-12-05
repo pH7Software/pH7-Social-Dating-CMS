@@ -23,8 +23,8 @@ class UserController extends Controller
     const PROFILES_PER_PAGE = 15;
     const SEARCH_NOT_FOUND_REDIRECT_DELAY = 2; // Seconds
 
-    /** @var AdminCore */
-    private $oAdmin;
+    /** @var UserCore */
+    private $oUser;
 
     /** @var AdminModel */
     private $oAdminModel;
@@ -39,7 +39,7 @@ class UserController extends Controller
     {
         parent::__construct();
 
-        $this->oAdmin = new AdminCore;
+        $this->oUser = new UserCore;
         $this->oAdminModel = new AdminModel;
 
         // Assigns variables for views
@@ -300,7 +300,7 @@ class UserController extends Controller
         $iId = $this->httpRequest->post('id');
 
         if ($this->oAdminModel->ban($iId, 1)) {
-            $this->oAdmin->clearReadProfileCache($iId);
+            $this->oUser->clearReadProfileCache($iId);
             $this->sMsg = t('The profile has been banned.');
         } else {
             $this->sMsg = t('Oops! An error has occurred while banishment the profile.');
@@ -317,7 +317,7 @@ class UserController extends Controller
         $iId = $this->httpRequest->post('id');
 
         if ($this->oAdminModel->ban($iId, 0)) {
-            $this->oAdmin->clearReadProfileCache($iId);
+            $this->oUser->clearReadProfileCache($iId);
             $this->sMsg = t('The profile has been unbanned.');
         } else {
             $this->sMsg = t('Oops! An error has occurred while unban the profile.');
@@ -353,7 +353,7 @@ class UserController extends Controller
 
                 $this->oAdminModel->ban($iId, 1);
 
-                $this->oAdmin->clearReadProfileCache($iId);
+                $this->oUser->clearReadProfileCache($iId);
             }
             $this->sMsg = t('The profile(s) has/have been banned.');
         }
@@ -373,7 +373,7 @@ class UserController extends Controller
                 $iId = (int)explode('_', $sAction)[0];
 
                 $this->oAdminModel->ban($iId, 0);
-                $this->oAdmin->clearReadProfileCache($iId);
+                $this->oUser->clearReadProfileCache($iId);
             }
             $this->sMsg = t('The profile(s) has/have been unbanned.');
         }
@@ -457,7 +457,7 @@ class UserController extends Controller
                     ];
                     (new Mail)->send($aInfo, $sMessageHtml);
 
-                    $this->oAdmin->clearReadProfileCache($oUser->profileId);
+                    $this->oUser->clearReadProfileCache($oUser->profileId);
 
                     $sOutputMsg = t('Done!');
                 } else {
