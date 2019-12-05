@@ -549,10 +549,10 @@
 {* To switch back to admin panel from user session *}
   {if $is_admin_auth AND $admin_logged_as_user}
     <p class="center bold loginas">
-      <a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'logoutuseras') }}">{lang}Switch back to the Admin Panel{/lang}</a>
+      <a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'logoutuseras') }}">{lang}Switch back to Admin Panel{/lang}</a>
     </p>
   {elseif $is_affiliate_enabled AND $is_admin_auth AND $admin_logged_as_affiliate}
     <p class="center bold loginas">
-      <a href="{{ $design->url('affiliate', 'admin', 'logoutuseras') }}">{lang}Switch back to the Admin Panel{/lang}</a>
+      <a href="{{ $design->url('affiliate', 'admin', 'logoutuseras') }}">{lang}Switch back to Admin Panel{/lang}</a>
     </p>
   {/if}
