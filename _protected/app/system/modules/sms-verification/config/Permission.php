@@ -20,7 +20,7 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if ($this->registry->controller === 'MainController' && !$this->session->exists(SmsVerificationCore::PROFILE_ID_SESS_NAME)) {
+        if ($this->isUserNotAllowed()) {
             $this->signUpRedirect();
         }
 
@@ -32,5 +32,14 @@ class Permission extends PermissionCore
                 Design::ERROR_TYPE
             );
         }
+    }
+
+    /**
+     * @return bool
+     */
+    private function isUserNotAllowed()
+    {
+        $this->registry->controller === 'MainController' &&
+            !$this->session->exists(SmsVerificationCore::PROFILE_ID_SESS_NAME);
     }
 }
