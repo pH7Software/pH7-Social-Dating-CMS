@@ -687,7 +687,7 @@ class ModeratorController extends Controller
                 ->send();
         } catch (InvalidEmailException $oExcept) {
             $this->design->setFlashMsg(
-                t("Notifier email couldn't be sent to user. Their email wasn't valid."),
+                $oExcept->getMessage(),
                 Design::ERROR_TYPE
             );
         }
@@ -705,7 +705,7 @@ class ModeratorController extends Controller
                 ->send();
         } catch (InvalidEmailException $oExcept) {
             $this->design->setFlashMsg(
-                t("Notifier email couldn't be sent to user. Their email wasn't valid."),
+                $oExcept->getMessage(),
                 Design::ERROR_TYPE
             );
         }
