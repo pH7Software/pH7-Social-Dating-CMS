@@ -629,7 +629,7 @@ class File
           register_shutdown_function('function_name');
          */
 
-        //if (!is_readable($sFile)) exit('File not found or inaccessible!');
+        //if (!is_readable($sFile)) throw new IOException('File not found or inaccessible!');
 
         $sName = Url::decode($sName); // Clean the name file
 
