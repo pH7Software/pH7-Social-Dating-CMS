@@ -96,6 +96,7 @@ class AdminController extends Controller
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
             $this->view->h3_title = nt('%n% Admin', '%n% Admins', $this->iTotalAdmins);
+            $this->view->current_admin_id = (int)$this->session->get('admin_id');
             $this->view->browse = $oSearch;
         }
 
