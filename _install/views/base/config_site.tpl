@@ -28,6 +28,7 @@
 
         <p>
             <span class="mandatory">*</span> <label for="admin_email">{$LANG.admin_login_email}:</label><br />
+            <span class="small italic">{$smarty.const.PH7_URL_ROOT}<strong>{$smarty.const.PH7_ADMIN_MOD}</strong></span><br />
             <input type="email" name="admin_login_email" id="admin_login_email" value="{$smarty.session.val.admin_login_email|escape}" required="required" />
         </p>
 
