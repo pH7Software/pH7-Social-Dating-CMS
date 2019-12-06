@@ -27,7 +27,7 @@ class InstallController extends Controller
     const SOCIAL_MODS = [
         'connect' => '0',
         'affiliate' => '0',
-        'game' => '1',
+        'game' => '0',
         'chat' => '0',
         'chatroulette' => '0',
         'picture' => '1',

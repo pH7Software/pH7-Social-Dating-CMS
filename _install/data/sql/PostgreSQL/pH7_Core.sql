@@ -1105,7 +1105,7 @@ INSERT INTO ph7_sys_mods_enabled (moduleTitle, folderName, premiumMod, enabled) 
 ('Dating-Style Profile Page', 'cool-profile-page', '0', '1'),
 ('Birthday: Let''s Celebrate Birthdays', 'birthday', '0', '1'),
 ('Google Maps', 'map', '0', '1'),
-('Game', 'game', '0', '1'),
+('Game', 'game', '0', '0'),
 ('Newsletter', 'newsletter', '0', '1'),
 ('Invite Friends', 'invite', '0', '1'),
 ('SMS Verification', 'sms-verification', '0', '0'),
