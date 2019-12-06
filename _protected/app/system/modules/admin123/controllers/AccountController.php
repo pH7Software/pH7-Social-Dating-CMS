@@ -39,6 +39,7 @@ class AccountController extends Controller
         $this->sTitle = t('Edit your account');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+        $this->view->is_edit_mode = $this->httpRequest->getExists('profile_id');
 
         $this->output();
     }
