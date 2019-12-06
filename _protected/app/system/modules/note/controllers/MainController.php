@@ -137,7 +137,7 @@ class MainController extends Controller
     {
         $sCategory = str_replace('-', ' ', $this->httpRequest->get('name'));
         $sOrder = $this->httpRequest->get('order');
-        $iSort = $this->httpRequest->get('sort');
+        $iSort = $this->httpRequest->get('sort', 'int');
 
         $this->iTotalNotes = $this->oNoteModel->category(
             $sCategory,
@@ -187,7 +187,7 @@ class MainController extends Controller
     {
         $sAuthor = $this->httpRequest->get('author');
         $sOrder = $this->httpRequest->get('order');
-        $iSort = $this->httpRequest->get('sort');
+        $iSort = $this->httpRequest->get('sort', 'int');
 
         $this->iTotalNotes = $this->oNoteModel->author(
             $sAuthor,

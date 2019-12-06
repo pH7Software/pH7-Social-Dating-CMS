@@ -126,7 +126,7 @@ class MainController extends Controller
     {
         $sCategory = str_replace('-', ' ', $this->httpRequest->get('name'));
         $sOrder = $this->httpRequest->get('order');
-        $iSort = $this->httpRequest->get('sort');
+        $iSort = $this->httpRequest->get('sort', 'int');
 
         $this->iTotalGames = $this->oGameModel->category(
             $sCategory,
