@@ -11,11 +11,11 @@
 namespace PH7;
 
 use PH7\Framework\Core\Kernel;
+use PH7\Framework\Date\Various as VDate;
 use PH7\Framework\Layout\Html\Meta;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Version;
-use PH7\Framework\Date\Various as VDate;
 use PH7\Framework\Url\Header;
 
 class MainController extends Controller
