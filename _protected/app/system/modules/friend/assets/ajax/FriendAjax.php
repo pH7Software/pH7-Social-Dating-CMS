@@ -76,7 +76,8 @@ class FriendAjax extends Core
             } elseif ($this->mStatus === FriendModel::EXISTS_STATUS) {
                 $this->sMsg = jsonMsg(0, t('This profile already exists in your friends list.'));
             } elseif ($this->mStatus === FriendModel::INEXISTENT_ID_STATUS) {
-                $this->sMsg = jsonMsg(0, t('Profile ID does not exist.')); // Should never happen unless someone changes the source code with firebug or other
+                // This one should never happen unless someone changes the source code with firebug or other...
+                $this->sMsg = jsonMsg(0, t('Profile ID does not exist.'));
             } elseif ($this->mStatus === FriendModel::SUCCESS_STATUS) {
                 $this->sMsg = jsonMsg(1, t('Profile successfully added to your friends list.'));
 
