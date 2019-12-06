@@ -142,6 +142,11 @@ class MainController extends Controller
             case 'affiliate':
                 return $this->session->get('affiliate_id');
             case PH7_ADMIN_MOD:
+                if ($this->httpRequest->getExists('profile_id') &&
+                    !AdminCore::isRootProfileId($this->httpRequest->get('profile_id', 'int'))) {
+                    return $this->httpRequest->get('profile_id', 'int');
+                }
+
                 return $this->session->get('admin_id');
 
             default:
