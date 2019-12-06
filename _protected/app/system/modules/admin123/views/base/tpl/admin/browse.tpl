@@ -75,7 +75,7 @@
                               <a href="{{ $design->url(PH7_ADMIN_MOD, 'account', 'edit', $adminId) }}" title="{lang 'Edit this Admin'}">{lang 'Edit'}</a>
                           {/if}
 
-                          {if !AdminCore::isRootProfileId($adminId)}
+                          {if $adminId !== $current_admin_id AND !AdminCore::isRootProfileId($adminId)}
                               | {{ $design->popupLinkConfirm(t('Delete'), PH7_ADMIN_MOD, 'admin', 'delete', $adminId.'_'.$admin->username) }}
                           {/if}
                       </td>

@@ -31,6 +31,9 @@ class AdminController extends Controller
     private $sMsg;
 
     /** @var int */
+    private $iCurrentAdminId;
+
+    /** @var int */
     private $iTotalAdmins;
 
     public function __construct()
@@ -38,6 +41,7 @@ class AdminController extends Controller
         parent::__construct();
 
         $this->oAdminModel = new AdminModel;
+        $this->iCurrentAdminId = (int)$this->session->get('admin_id');
     }
 
     public function index()
@@ -96,7 +100,7 @@ class AdminController extends Controller
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
             $this->view->h3_title = nt('%n% Admin', '%n% Admins', $this->iTotalAdmins);
-            $this->view->current_admin_id = (int)$this->session->get('admin_id');
+            $this->view->current_admin_id = $this->iCurrentAdminId;
             $this->view->browse = $oSearch;
         }
 
@@ -128,12 +132,20 @@ class AdminController extends Controller
             $iId = (int)$aData[0];
             $sUsername = (string)$aData[1];
 
-            (new Admin)->delete($iId, $sUsername, $this->oAdminModel);
+            if ($iId === $this->iCurrentAdminId) {
+                Header::redirect(
+                    Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'),
+                    t('You cannot remove your own admin profile.'),
+                    Design::ERROR_TYPE
+                );
+            } else {
+                (new Admin)->delete($iId, $sUsername, $this->oAdminModel);
 
-            Header::redirect(
-                Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'),
-                t('The admin has been deleted.')
-            );
+                Header::redirect(
+                    Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'),
+                    t('The admin has been deleted.')
+                );
+            }
         } catch (ForbiddenActionException $oExcept) {
             Header::redirect(
                 Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'),
@@ -154,7 +166,11 @@ class AdminController extends Controller
                     $iId = (int)$aData[0];
                     $sUsername = (string)$aData[1];
 
-                    (new Admin)->delete($iId, $sUsername, $this->oAdminModel);
+                    if ($iId === $this->iCurrentAdminId) {
+                        $this->sMsg = t('Oops! You cannot remove your own admin profile.');
+                    } else {
+                        (new Admin)->delete($iId, $sUsername, $this->oAdminModel);
+                    }
                 }
                 $this->sMsg = t('The admin(s) has/have been deleted.');
             }
