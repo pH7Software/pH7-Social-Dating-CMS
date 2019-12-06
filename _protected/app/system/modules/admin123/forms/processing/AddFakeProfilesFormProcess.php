@@ -24,8 +24,10 @@ use PH7\Framework\Url\Url;
 
 class AddFakeProfilesFormProcess extends Form
 {
+    const SERVICE_NAME = 'RandomUser';
+    const SERVICE_URL = 'https://randomuser.me';
     const API_URL = 'https://randomuser.me/api/';
-    const API_VER = '1.2';
+    const API_VER = '1.3';
 
     /** @var Validate */
     private $oValidate;

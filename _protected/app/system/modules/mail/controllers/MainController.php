@@ -275,13 +275,16 @@ class MainController extends Controller
 
     public function result()
     {
+        $sKeywords = $this->httpRequest->get('looking');
+        $sOrder = $this->httpRequest->get('order');
+        $iSort = $this->httpRequest->get('sort', 'int');
         $iType = $this->httpRequest->get('where', 'int');
 
         $this->iTotalMails = $this->oMailModel->search(
-            $this->httpRequest->get('looking'),
+            $sKeywords,
             true,
-            $this->httpRequest->get('order'),
-            $this->httpRequest->get('sort'),
+            $sOrder,
+            $iSort,
             null,
             null,
             $this->iProfileId,
@@ -293,10 +296,10 @@ class MainController extends Controller
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oSearch = $this->oMailModel->search(
-            $this->httpRequest->get('looking'),
+            $sKeywords,
             false,
-            $this->httpRequest->get('order'),
-            $this->httpRequest->get('sort'),
+            $sOrder,
+            $iSort,
             $this->oPage->getFirstItem(),
             $this->oPage->getNbItemsPerPage(),
             $this->iProfileId,
