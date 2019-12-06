@@ -126,9 +126,9 @@ $LANG = array(
     'base_niche_desc' => 'By choosing this niche, the main modules will be enabled and the generic template (social dating community theme) will be enabled by default.',
     'zendate_niche_desc' => 'By choosing the Social niche, only the Social modules will be enabled, profile photo won\'t be required by default and the Social theme will be enabled by default.',
     'datelove_niche_desc' => 'By choosing the Dating niche, only the Dating modules will be enabled on your website, profile photo will be required by default and the Dating theme will be enabled by default.',
-    'go_social_dating' => 'Go for Social Dating!',
-    'go_social' => 'Go for Social!',
-    'go_dating' => 'Go for Dating!',
+    'go_social_dating' => 'Go for Social Dating! 🥰',
+    'go_social' => 'Go for Social! 🥳',
+    'go_dating' => 'Go for Dating! 😍',
     'recommended' => 'Recommended Niche',
     'recommended_desc' => 'Choose this niche if you haven\'t an idea yet.',
     'note_able_to_change_niche_settings_later' => 'Please note that you will be able to change the template and enable/disable the modules later in your admin panel.',
@@ -138,6 +138,6 @@ $LANG = array(
     'warning_no_js' => 'JavaScript is disabled on your Web browser!<br />
         Please enable JavaScript via the options of your Web browser in order to use this website.',
     'admin_url' => 'Admin Panel URL',
-    'powered' => 'Powered by',
+    'powered' => 'Proudly powered by',
     'loading' => 'Loading...',
 );
