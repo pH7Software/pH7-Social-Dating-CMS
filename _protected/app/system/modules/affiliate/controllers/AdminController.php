@@ -82,11 +82,15 @@ class AdminController extends Controller
 
     public function browse()
     {
+        $sKeywords = $this->httpRequest->get('looking');
+        $sOrder = $this->httpRequest->get('order');
+        $iSort = $this->httpRequest->get('sort', 'int');
+
         $this->iTotalUsers = $this->oAffModel->searchAff(
-            $this->httpRequest->get('looking'),
+            $sKeywords,
             true,
-            $this->httpRequest->get('order'),
-            $this->httpRequest->get('sort'),
+            $sOrder,
+            $iSort,
             null,
             null
         );
@@ -98,10 +102,10 @@ class AdminController extends Controller
         );
         $this->view->current_page = $oPage->getCurrentPage();
         $oSearch = $this->oAffModel->searchAff(
-            $this->httpRequest->get('looking'),
+            $sKeywords,
             false,
-            $this->httpRequest->get('order'),
-            $this->httpRequest->get('sort'),
+            $sOrder,
+            $iSort,
             $oPage->getFirstItem(),
             $oPage->getNbItemsPerPage()
         );

@@ -51,11 +51,15 @@ class AdminController extends Controller
 
     public function browse()
     {
+        $sKeywords = $this->httpRequest->get('looking');
+        $sOrder = $this->httpRequest->get('order');
+        $iSort = $this->httpRequest->get('sort', 'int');
+
         $iTotal = $this->oSubscriberModel->browse(
-            $this->httpRequest->get('looking'),
+            $sKeywords,
             true,
-            $this->httpRequest->get('order'),
-            $this->httpRequest->get('sort'),
+            $sOrder,
+            $iSort,
             null,
             null
         );
@@ -64,10 +68,10 @@ class AdminController extends Controller
         $this->view->total_pages = $oPage->getTotalPages($iTotal, self::SUBSCRIBERS_PER_PAGE);
         $this->view->current_page = $oPage->getCurrentPage();
         $oBrowse = $this->oSubscriberModel->browse(
-            $this->httpRequest->get('looking'),
+            $sKeywords,
             false,
-            $this->httpRequest->get('order'),
-            $this->httpRequest->get('sort'),
+            $sOrder,
+            $iSort,
             $oPage->getFirstItem(),
             $oPage->getNbItemsPerPage()
         );
