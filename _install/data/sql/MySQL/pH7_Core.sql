@@ -1008,7 +1008,7 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('footerLinkColor', '', 'Override footer links color. Leave empty to disable', 'design'),
 ('linkHoverColor', '', 'Override links hover color. Leave empty to disable', 'design'),
 ('defaultSysModule', @sDefaultSysModule, 'The default module running by default on the index page. Recommended to keep the "user" module', 'general'),
-('returnEmail', @sNoReplyEmail, 'Generally noreply@yoursite.com', 'email'),
+('returnEmail', @sNoReplyEmail, 'Usually noreply@yoursite.com', 'email'),
 ('adminEmail', @sAdminEmail, '', 'email'),
 ('feedbackEmail', @sFeedbackEmail, '', 'email'),
 ('emailName', 'pH7CMS.com', '', 'email'),
