@@ -14,7 +14,7 @@ class FriendModel extends FriendCoreModel
 {
     const SUCCESS_STATUS = 0;
     const EXISTS_STATUS = 1;
-    const INEXISTENT_ID_STATUS = 2;
+    const UNEXISTENT_ID_STATUS = 2;
     const ERROR_STATUS = -1;
 
     /** @var string */
@@ -58,7 +58,7 @@ class FriendModel extends FriendCoreModel
                 $this->sStatus = self::EXISTS_STATUS;
             }
         } else {
-            $this->sStatus = self::INEXISTENT_ID_STATUS;
+            $this->sStatus = self::UNEXISTENT_ID_STATUS;
         }
 
         unset($oExistsModel); // Destruction of the object
