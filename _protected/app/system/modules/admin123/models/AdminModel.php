@@ -117,7 +117,11 @@ class AdminModel extends AdminCoreModel
             $sSqlWhere = ' WHERE username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking OR email LIKE :looking OR sex LIKE :looking OR ip LIKE :looking';
         }
 
-        $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
+        if (!empty($sOrderBy) && !empty($iSort)) {
+            $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
+        } else {
+            $sSqlOrder = ' ORDER BY profileId ASC ';
+        }
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::ADMIN) . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
