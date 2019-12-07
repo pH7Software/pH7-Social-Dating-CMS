@@ -73,7 +73,7 @@ class MapDrawerCore
      */
     public function setDivId($sDivId)
     {
-        if (!is_string($sDivId) || strlen($sDivId) < 2) {
+        if ($this->isDivIdInvalid($sDivId)) {
             throw new PH7InvalidArgumentException('The map div class ID argument is invalid.');
         }
 
@@ -99,5 +99,15 @@ class MapDrawerCore
         $this->oMap->generate();
 
         return $this->oMap->getMap();
+    }
+
+    /**
+     * @param string $sDivId
+     *
+     * @return bool
+     */
+    private function isDivIdInvalid($sDivId)
+    {
+        return !is_string($sDivId) || strlen($sDivId) < 2;
     }
 }
