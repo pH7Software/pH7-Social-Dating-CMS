@@ -52,7 +52,9 @@ abstract class WriteCore
     public static function checkMod($sMod)
     {
         if (!in_array($sMod, self::ALLOWED_MODULES, true)) {
-            throw new PH7InvalidArgumentException('Wrong module: ' . $sMod);
+            throw new PH7InvalidArgumentException(
+                sprintf('Wrong module: %s', $sMod)
+            );
         }
     }
 }

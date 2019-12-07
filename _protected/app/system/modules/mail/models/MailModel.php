@@ -184,14 +184,16 @@ class MailModel extends MailCoreModel
      * @param int $iMessageId Message ID
      * @param string $sMode Set to this category. Choose between 'trash', 'restore' and 'delete'
      *
-     * @throws PH7InvalidArgumentException
-     *
      * @return bool
+     *
+     * @throws PH7InvalidArgumentException
      */
     public function setTo($iProfileId, $iMessageId, $sMode)
     {
         if (!in_array($sMode, self::MODES, true)) {
-            throw new PH7InvalidArgumentException('Bad set mode: "' . $sMode . '"!');
+            throw new PH7InvalidArgumentException(
+                sprintf('Invalid set mode: "%s"!', $sMode)
+            );
         }
 
         $oData = $this->getMsg($iMessageId);
