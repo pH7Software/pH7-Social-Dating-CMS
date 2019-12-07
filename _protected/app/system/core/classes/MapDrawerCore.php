@@ -100,20 +100,4 @@ class MapDrawerCore
 
         return $this->oMap->getMap();
     }
-
-    /**
-     * @param string $sApiKey
-     *
-     * @throws PH7InvalidArgumentException
-     */
-    private function setApiKey($sApiKey)
-    {
-        if (!is_string($sApiKey) || strlen($sApiKey) < 2) {
-            throw new PH7InvalidArgumentException(
-                sprintf('"%s" is an invalid API key.', $sApiKey)
-            );
-        }
-
-        $this->sApiKey = $sApiKey;
-    }
 }
