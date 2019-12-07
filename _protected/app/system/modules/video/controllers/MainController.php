@@ -188,7 +188,6 @@ class MainController extends Controller
             $this->view->video = $oVideo;
             $this->imageToSocialMetaTags($oVideo);
 
-            //Set Video Statistics
             Statistic::setView($oVideo->videoId, DbTableName::VIDEO);
         }
 
