@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\CArray\CArray;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Geo\Map\Map as GeoMap;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Model\DbConfig;
@@ -114,16 +115,21 @@ class CountryController extends Controller
         $sFullAddress = $this->registry->country . ' ' . $this->registry->city;
         $sMarkerText = t('Meet new people here thanks to <b>%site_name%</b>!');
 
-        $oGeoMap = new GeoMap;
-        $oGeoMap->setKey(DbConfig::getSetting('googleApiKey'));
-        $oGeoMap->setCenter($sFullAddress);
-        $oGeoMap->setSize(self::MAP_WIDTH_SIZE, self::MAP_HEIGHT_SIZE);
-        $oGeoMap->setDivId('country_map');
-        $oGeoMap->setZoom(self::MAP_ZOOM_LEVEL);
-        $oGeoMap->addMarkerByAddress($sFullAddress, $sMarkerText, $sMarkerText);
-        $oGeoMap->generate();
-        $this->view->map = $oGeoMap->getMap();
-        unset($oGeoMap);
+        try {
+            $oMapDrawer = new MapDrawerCore(
+                new GeoMap,
+                DbConfig::getSetting('googleApiKey')
+            );
+            $oMapDrawer->setHeightSize(self::MAP_HEIGHT_SIZE);
+            $oMapDrawer->setWidthSize(self::MAP_WIDTH_SIZE);
+            $oMapDrawer->setZoomLevel(self::MAP_ZOOM_LEVEL);
+            $oMapDrawer->setDivId('country_map');
+            $sContent = $oMapDrawer->getMap($sFullAddress, $sMarkerText);
+        } catch (PH7InvalidArgumentException $oE) {
+            $sContent = sprintf('<strong>%s</strong>', $oE->getMessage());
+        }
+
+        $this->view->map = $sContent;
     }
 
     /**

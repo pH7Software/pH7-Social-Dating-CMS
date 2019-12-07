@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Geo\Map\Map;
 use PH7\Framework\Layout\Html\Meta;
 use PH7\Framework\Module\Various as SysMod;
@@ -163,16 +164,22 @@ abstract class ProfileBaseController extends Controller
     {
         $sFullAddress = $sCity . ' ' . t($sCountry);
         $sMarkerText = t('Meet <b>%0%</b> near here!', $oUser->username);
-        $oMap = new Map;
-        $oMap->setKey(DbConfig::getSetting('googleApiKey'));
-        $oMap->setCenter($sFullAddress);
-        $oMap->setSize(static::MAP_WIDTH_SIZE, static::MAP_HEIGHT_SIZE);
-        $oMap->setDivId('profile_map');
-        $oMap->setZoom(static::MAP_ZOOM_LEVEL);
-        $oMap->addMarkerByAddress($sFullAddress, $sMarkerText, $sMarkerText);
-        $oMap->generate();
-        $this->view->map = $oMap->getMap();
-        unset($oMap);
+
+        try {
+            $oMapDrawer = new MapDrawerCore(
+                new Map,
+                DbConfig::getSetting('googleApiKey')
+            );
+            $oMapDrawer->setHeightSize(self::MAP_HEIGHT_SIZE);
+            $oMapDrawer->setWidthSize(self::MAP_HEIGHT_SIZE);
+            $oMapDrawer->setZoomLevel(self::MAP_ZOOM_LEVEL);
+            $oMapDrawer->setDivId('profile_map');
+            $oMapDrawer->getMap($sFullAddress, $sMarkerText);
+        } catch (PH7InvalidArgumentException $oE) {
+            $sContent = $oE->getMessage();
+        }
+
+        $this->view->map = $sContent;
     }
 
     /**
