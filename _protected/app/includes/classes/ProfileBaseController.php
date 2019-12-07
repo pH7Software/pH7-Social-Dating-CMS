@@ -174,7 +174,7 @@ abstract class ProfileBaseController extends Controller
             $oMapDrawer->setWidthSize(self::MAP_HEIGHT_SIZE);
             $oMapDrawer->setZoomLevel(self::MAP_ZOOM_LEVEL);
             $oMapDrawer->setDivId('profile_map');
-            $oMapDrawer->getMap($sFullAddress, $sMarkerText);
+            $sContent = $oMapDrawer->getMap($sFullAddress, $sMarkerText);
         } catch (PH7InvalidArgumentException $oE) {
             $sContent = sprintf('<strong>%s</strong>', $oE->getMessage());
         }
