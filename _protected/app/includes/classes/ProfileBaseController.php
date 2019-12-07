@@ -170,8 +170,8 @@ abstract class ProfileBaseController extends Controller
                 new Map,
                 DbConfig::getSetting('googleApiKey')
             );
+            $oMapDrawer->setWidthSize(self::MAP_WIDTH_SIZE);
             $oMapDrawer->setHeightSize(self::MAP_HEIGHT_SIZE);
-            $oMapDrawer->setWidthSize(self::MAP_HEIGHT_SIZE);
             $oMapDrawer->setZoomLevel(self::MAP_ZOOM_LEVEL);
             $oMapDrawer->setDivId('profile_map');
             $sContent = $oMapDrawer->getMap($sFullAddress, $sMarkerText);
