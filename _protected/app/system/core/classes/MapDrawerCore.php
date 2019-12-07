@@ -17,10 +17,10 @@ class MapDrawerCore
     private $oMap;
 
     /** @var string */
-    private $sMapHeightSize = '520px';
+    private $sMapWidthSize = '100%';
 
     /** @var string */
-    private $sMapWidthSize = '100%';
+    private $sMapHeightSize = '520px';
 
     /** @var string */
     private $sMapDivId = 'country_map';
@@ -33,16 +33,7 @@ class MapDrawerCore
     public function __construct(Map $oMap, $sApiKey)
     {
         $this->oMap = $oMap;
-
-        $this->setApiKey($sApiKey);
-    }
-
-    /**
-     * @param string $sHeightSize
-     */
-    public function setHeightSize($sHeightSize)
-    {
-        $this->sMapHeightSize = $sHeightSize;
+        $this->sApiKey = $sApiKey;
     }
 
     /**
@@ -51,6 +42,14 @@ class MapDrawerCore
     public function setWidthSize($sWidthSize)
     {
         $this->sMapWidthSize = $sWidthSize;
+    }
+
+    /**
+     * @param string $sHeightSize
+     */
+    public function setHeightSize($sHeightSize)
+    {
+        $this->sMapHeightSize = $sHeightSize;
     }
 
     /**

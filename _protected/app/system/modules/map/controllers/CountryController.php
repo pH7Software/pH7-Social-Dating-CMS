@@ -120,8 +120,8 @@ class CountryController extends Controller
                 new GeoMap,
                 DbConfig::getSetting('googleApiKey')
             );
-            $oMapDrawer->setHeightSize(self::MAP_HEIGHT_SIZE);
             $oMapDrawer->setWidthSize(self::MAP_WIDTH_SIZE);
+            $oMapDrawer->setHeightSize(self::MAP_HEIGHT_SIZE);
             $oMapDrawer->setZoomLevel(self::MAP_ZOOM_LEVEL);
             $oMapDrawer->setDivId('country_map');
             $sContent = $oMapDrawer->getMap($sFullAddress, $sMarkerText);
