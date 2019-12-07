@@ -9,7 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\CArray\CArray;
-use PH7\Framework\Geo\Map\Map;
+use PH7\Framework\Geo\Map\Map as GeoMap;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Navigation\Page;
@@ -79,7 +79,7 @@ class CountryController extends Controller
     {
         $sCountryCode = CArray::getKeyByValueIgnoreCase($this->registry->country, $this->registry->lang);
 
-        if (Country::isCountryCodeTooLong($sCountryCode)) {
+        if (Map::isCountryCodeTooLong($sCountryCode)) {
             return substr(
                 $this->registry->country,
                 0,
@@ -117,16 +117,16 @@ class CountryController extends Controller
         $sFullAddress = $this->registry->country . ' ' . $this->registry->city;
         $sMarkerText = t('Meet new people here thanks to <b>%site_name%</b>!');
 
-        $oMap = new Map;
-        $oMap->setKey(DbConfig::getSetting('googleApiKey'));
-        $oMap->setCenter($sFullAddress);
-        $oMap->setSize(self::MAP_WIDTH_SIZE, self::MAP_HEIGHT_SIZE);
-        $oMap->setDivId('country_map');
-        $oMap->setZoom(self::MAP_ZOOM_LEVEL);
-        $oMap->addMarkerByAddress($sFullAddress, $sMarkerText, $sMarkerText);
-        $oMap->generate();
-        $this->view->map = $oMap->getMap();
-        unset($oMap);
+        $oGeoMap = new GeoMap;
+        $oGeoMap->setKey(DbConfig::getSetting('googleApiKey'));
+        $oGeoMap->setCenter($sFullAddress);
+        $oGeoMap->setSize(self::MAP_WIDTH_SIZE, self::MAP_HEIGHT_SIZE);
+        $oGeoMap->setDivId('country_map');
+        $oGeoMap->setZoom(self::MAP_ZOOM_LEVEL);
+        $oGeoMap->addMarkerByAddress($sFullAddress, $sMarkerText, $sMarkerText);
+        $oGeoMap->generate();
+        $this->view->map = $oGeoMap->getMap();
+        unset($oGeoMap);
     }
 
     /**

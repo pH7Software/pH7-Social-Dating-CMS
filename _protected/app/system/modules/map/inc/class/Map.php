@@ -10,7 +10,7 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-class Country
+class Map
 {
     /**
      * @param string $sCountryCode
