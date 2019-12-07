@@ -21,10 +21,7 @@ class CountryController extends Controller
     const MAP_WIDTH_SIZE = '100%';
     const MAP_HEIGHT_SIZE = '520px';
 
-    const COUNTRY_CODE_LENGTH = 2;
     const MAX_PROFILE_PER_PAGE = 20;
-    const MAX_COUNTRY_LENGTH = 50;
-    const MAX_CITY_LENGTH = 50;
 
     /**
      * @param string|null $sCountry
@@ -83,7 +80,7 @@ class CountryController extends Controller
             return substr(
                 $this->registry->country,
                 0,
-                self::COUNTRY_CODE_LENGTH
+                Map::COUNTRY_CODE_LENGTH
             );
         }
 
@@ -141,7 +138,7 @@ class CountryController extends Controller
         return str_replace(
             '-',
             ' ',
-            substr($this->str->upperFirst($sCountry), 0, self::MAX_COUNTRY_LENGTH)
+            substr($this->str->upperFirst($sCountry), 0, Map::MAX_COUNTRY_LENGTH)
         );
     }
 
@@ -157,7 +154,7 @@ class CountryController extends Controller
         return str_replace(
             '-',
             ' ',
-            substr($this->str->upperFirst($sCity), 0, self::MAX_CITY_LENGTH)
+            substr($this->str->upperFirst($sCity), 0, Map::MAX_CITY_LENGTH)
         );
     }
 

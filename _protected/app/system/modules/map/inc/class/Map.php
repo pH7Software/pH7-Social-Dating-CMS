@@ -8,10 +8,18 @@
 
 namespace PH7;
 
+use PH7\Framework\Geo\Map\Map as GeoMap;
+use PH7\Framework\Mvc\Model\DbConfig;
+use stdClass;
+
 defined('PH7') or exit('Restricted access');
 
 class Map
 {
+    const COUNTRY_CODE_LENGTH = 2;
+    const MAX_COUNTRY_LENGTH = 50;
+    const MAX_CITY_LENGTH = 50;
+
     /**
      * @param string $sCountryCode
      *
