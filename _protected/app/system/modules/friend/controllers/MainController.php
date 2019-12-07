@@ -89,13 +89,17 @@ class MainController extends Controller
 
     public function index()
     {
+        $sKeywords = $this->httpRequest->get('looking');
+        $sOrder = $this->httpRequest->get('order');
+        $iSortBy = $this->httpRequest->get('sort', 'int');
+
         $this->iTotalFriends = $this->oFriendModel->get(
             $this->iId,
             null,
-            $this->httpRequest->get('looking'),
+            $sKeywords,
             true,
-            $this->httpRequest->get('order'),
-            $this->httpRequest->get('sort'),
+            $sOrder,
+            $iSortBy,
             null,
             null
         );
@@ -109,10 +113,10 @@ class MainController extends Controller
         $oFriend = $this->oFriendModel->get(
             $this->iId,
             null,
-            $this->httpRequest->get('looking'),
+            $sKeywords,
             false,
-            $this->httpRequest->get('order'),
-            $this->httpRequest->get('sort'),
+            $sOrder,
+            $iSortBy,
             $this->oPage->getFirstItem(),
             $this->oPage->getNbItemsPerPage()
         );
@@ -138,13 +142,17 @@ class MainController extends Controller
 
     public function mutual()
     {
+        $sKeywords = $this->httpRequest->get('looking');
+        $sOrder = $this->httpRequest->get('order');
+        $iSortBy = $this->httpRequest->get('sort', 'int');
+
         $this->iTotalFriends = $this->oFriendModel->get(
             $this->iMemberId,
             $this->iId,
-            $this->httpRequest->get('looking'),
+            $sKeywords,
             true,
-            $this->httpRequest->get('order'),
-            $this->httpRequest->get('sort'),
+            $sOrder,
+            $iSortBy,
             null,
             null
         );
@@ -156,10 +164,10 @@ class MainController extends Controller
         $oFriend = $this->oFriendModel->get(
             $this->iMemberId,
             $this->iId,
-            $this->httpRequest->get('looking'),
+            $sKeywords,
             false,
-            $this->httpRequest->get('order'),
-            $this->httpRequest->get('sort'),
+            $sOrder,
+            $iSortBy,
             $this->oPage->getFirstItem(),
             $this->oPage->getNbItemsPerPage()
         );
