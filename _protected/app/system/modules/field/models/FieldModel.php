@@ -151,9 +151,11 @@ class FieldModel extends Model
                     if (mb_strlen($this->sDefVal) > $this->iLength) {
                         $this->iLength = mb_strlen($this->sDefVal);
                     }
+
                     if ($this->iLength === 0 || $this->iLength > self::MAX_VARCHAR_LENGTH) {
                         $this->iLength = self::MAX_VARCHAR_LENGTH;
                     }
+
                     $sSql .= 'VARCHAR(' . $this->iLength . ')';
                 }
                 break;
@@ -163,9 +165,11 @@ class FieldModel extends Model
                     if (!is_numeric($this->sDefVal)) {
                         $this->sDefVal = 0;
                     }
+
                     if (strlen($this->sDefVal) > $this->iLength) {
                         $this->iLength = strlen($this->sDefVal);
                     }
+
                     if ($this->iLength === 0 || $this->iLength > self::MAX_INT_LENGTH) {
                         $this->iLength = self::DEF_INT_LENGTH; // Set the default INT() length value
                     }
