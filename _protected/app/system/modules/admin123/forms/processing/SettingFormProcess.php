@@ -220,6 +220,9 @@ class SettingFormProcess extends Form
 
                     case 'background_color':
                     case 'text_color':
+                    case 'heading1_color':
+                    case 'heading2_color':
+                    case 'heading3_color':
                     case 'link_color':
                     case 'footer_link_color':
                     case 'link_hover_color': {
