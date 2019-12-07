@@ -175,7 +175,12 @@ class UserDesignCoreModel extends Design
         }
 
         foreach ($oUsers as $oUser) {
-            (new AvatarDesignCore)->get($oUser->username, $oUser->firstName, $oUser->sex, self::PROFILE_AVATAR_SIZE);
+            (new AvatarDesignCore)->get(
+                $oUser->username,
+                $oUser->firstName,
+                $oUser->sex,
+                self::PROFILE_AVATAR_SIZE
+            );
         }
     }
 
