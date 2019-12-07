@@ -21,7 +21,10 @@ class SettingFormProcess extends Form
     const LOGO_WIDTH = 47;
     const LOGO_HEIGHT = 45;
     const MAX_WATERMARK_SIZE = 5;
-    const DEFAULT_BROWSER_HEX_CODE = '#000000';
+    const DEFAULT_BROWSER_HEX_CODES = [
+        '#000',
+        '#000000'
+    ];
 
     /** @var boolean */
     private $bIsErr = false;
@@ -227,7 +230,7 @@ class SettingFormProcess extends Form
                     case 'footer_link_color':
                     case 'link_hover_color': {
                         // Don't update if value wasn't changed by user but was set by browser because field was empty
-                        if ($this->httpRequest->post($sKey) !== self::DEFAULT_BROWSER_HEX_CODE) {
+                        if (in_array($this->httpRequest->post($sKey), self::DEFAULT_BROWSER_HEX_CODES, true)) {
                             DbConfig::setSetting($this->httpRequest->post($sKey), $sVal);
                         }
                     } break;
