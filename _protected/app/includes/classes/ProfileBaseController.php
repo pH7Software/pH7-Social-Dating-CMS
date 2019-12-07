@@ -176,7 +176,7 @@ abstract class ProfileBaseController extends Controller
             $oMapDrawer->setDivId('profile_map');
             $oMapDrawer->getMap($sFullAddress, $sMarkerText);
         } catch (PH7InvalidArgumentException $oE) {
-            $sContent = $oE->getMessage();
+            $sContent = sprintf('<strong>%s</strong>', $oE->getMessage());
         }
 
         $this->view->map = $sContent;
