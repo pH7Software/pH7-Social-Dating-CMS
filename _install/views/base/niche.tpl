@@ -7,7 +7,7 @@
         <h3 class="underline">{$LANG.social_dating_niche}</h3>
         <p class="img_thumb">
             <img
-                src="{$smarty.const.PH7_URL_ROOT}templates/themes/base/img/preview.png"
+                src="{$smarty.const.PH7_URL_ROOT}templates/themes/base/img/preview.gif"
                 alt="Default Base Template"
                 title="Default Base Template"
             />
@@ -24,7 +24,7 @@
         <h3 class="underline">{$LANG.social_niche}</h3>
         <p class="img_thumb">
             <img
-                src="{$smarty.const.PH7_URL_ROOT}templates/themes/zendate/img/preview.png"
+                src="{$smarty.const.PH7_URL_ROOT}templates/themes/zendate/img/preview.gif"
                 alt="ZenDate Template"
                 title="ZenDate Template"
             />
@@ -39,7 +39,7 @@
         <h3 class="underline">{$LANG.dating_niche}</h3>
         <p class="img_thumb">
             <img
-                src="{$smarty.const.PH7_URL_ROOT}templates/themes/datelove/img/preview.png"
+                src="{$smarty.const.PH7_URL_ROOT}templates/themes/datelove/img/preview.gif"
                 alt="DateLove Template"
                 title="DateLove Template"
             />
