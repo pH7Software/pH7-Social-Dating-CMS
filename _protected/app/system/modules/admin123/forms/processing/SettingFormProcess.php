@@ -229,7 +229,7 @@ class SettingFormProcess extends Form
                     case 'link_color':
                     case 'footer_link_color':
                     case 'link_hover_color': {
-                        // Don't update if value wasn't changed by user but was set by browser because field was empty
+                        // Prevent to override color style if the value isn't changed by user but set by the Web browser due to empty field values
                         if (in_array($this->httpRequest->post($sKey), self::DEFAULT_BROWSER_HEX_CODES, true)) {
                             DbConfig::setSetting($this->httpRequest->post($sKey), $sVal);
                         }
