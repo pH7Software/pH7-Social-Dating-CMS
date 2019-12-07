@@ -43,10 +43,10 @@ class UserDesignCoreModel extends Design
     /**
      * Get profile avatars from the geolocation.
      *
-     * @param string $sCountryCode Optional The country code (e.g., GB, RU, FR, ES, ...). Default ''
-     * @param string $sCity Optional. The city name. Default ''
-     * @param int $iOffset Optional. Default 0
-     * @param int $iLimit Optional. Default 14
+     * @param string $sCountryCode The country code (e.g., GB, RU, FR, ES, ...).
+     * @param string $sCity The city name.
+     * @param int $iOffset
+     * @param int $iLimit
      *
      * @return void HTML output.
      */
