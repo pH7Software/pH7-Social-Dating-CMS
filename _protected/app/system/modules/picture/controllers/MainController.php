@@ -145,7 +145,10 @@ class MainController extends Controller
             $this->view->meta_description = t("Browse %0%'s Photos | Photo Album Social Community - %site_name%", $this->sUsername);
             $this->view->album = $oAlbum;
 
-            // Set Picture Album Statistics since it needs the foreach loop and it is unnecessary to do both, we have placed in the file album.tpl
+            /**
+             * @internal FYI, we don't call `Statistic::setView()`, because it needs a foreach loop,
+             * and it is unnecessary to do both, that's why it is located in the album.tpl view instead.
+             */
         }
 
         $this->output();
