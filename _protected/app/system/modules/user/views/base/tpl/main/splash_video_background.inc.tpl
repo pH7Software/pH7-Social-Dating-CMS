@@ -4,7 +4,7 @@
 
 {* Enable the video only if visitors aren't from a mobile devices (for performance optimization) *}
 {if !$browser->isMobile()}
-    <style scoped="scoped">video#bgvid{background: url({url_tpl}file/splash/{video_prefix}_vid.jpg) no-repeat}</style>
+    <style scoped="scoped">video#bgvid{background: url({url_tpl}file/splash/{video_prefix}_vid.jpg) no-repeat center}</style>
     <video autoplay loop muted poster="{url_tpl}file/splash/{video_prefix}_vid.jpg" id="bgvid">
         <source src="{url_tpl}file/splash/{video_prefix}_vid.webm" type="video/webm" />
         <source src="{url_tpl}file/splash/{video_prefix}_vid.mp4" type="video/mp4" />
