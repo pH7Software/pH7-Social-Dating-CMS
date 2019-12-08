@@ -33,7 +33,7 @@ abstract class ProfileBaseController extends Controller
      */
     const MAP_ZOOM_LEVEL = 10;
     const MAP_WIDTH_SIZE = '100%';
-    const MAP_HEIGHT_SIZE = '280px';
+    const MAP_HEIGHT_SIZE = '260px';
 
     /** @var UserCoreModel */
     protected $oUserModel;
