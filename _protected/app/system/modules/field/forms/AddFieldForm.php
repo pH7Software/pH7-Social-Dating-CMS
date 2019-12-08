@@ -47,7 +47,7 @@ class AddFieldForm
                 t('Field Name:'),
                 'name',
                 [
-                    'description' => t('Field Name must contain 2-30 alphanumeric characters ([a-z], [A-Z], [0-9] and [_]). After you can translate this language key in <span class="italic underline">%0%</span>', PH7_PATH_APP_LANG . PH7_LANG_NAME . PH7_DS . 'language.php'),
+                    'description' => t('Field Name must contain 2-30 alphanumeric characters ([a-z], [A-Z], [0-9] and [_]). Then, you can translate the language key in <span class="italic underline">%0%</span>', PH7_PATH_APP_LANG . PH7_LANG_NAME . PH7_DS . 'language.php'),
                     'pattern' => $sFieldPattern,
                     'title' => t('Field name must contain 2-30 alphanumeric characters ([a-z], [A-Z], [0-9] and [_]).'),
                     'required' => 1,

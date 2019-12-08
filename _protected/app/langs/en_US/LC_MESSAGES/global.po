@@ -5429,7 +5429,7 @@ msgstr ""
 #: _protected/app/system/modules/field/forms/EditFieldForm.php:34
 msgid ""
 "Field Name must contain 2-30 alphanumeric characters ([a-z], [A-Z], [0-9] "
-"and [_]). After you can translate this language key in <span class="
+"and [_]). Then, you can translate the language key in <span class="
 "\"italic underline\">%0%</span>"
 msgstr ""
 
