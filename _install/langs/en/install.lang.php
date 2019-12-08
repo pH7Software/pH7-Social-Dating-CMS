@@ -65,7 +65,7 @@ $LANG = array(
     'desc_db_prefix' => 'This option is useful when you have multiple installations of pH7CMS on the same database.
         We also recommend that you change the default value ​​in order to increase the security of your website.',
     'db_encoding' => 'Encoding',
-    'desc_db_encoding' => 'Database encoding. Leave utf8mb4 for international encoding (supporting emojis).',
+    'desc_db_encoding' => 'Database encoding. Leave utf8mb4 for international encoding, including emojis.',
     'db_port' => 'Database host port number',
     'desc_db_port' => 'Leave it to "3306" if you don\'t know.',
     'ffmpeg_path' => 'The path to the FFmpeg executable (if you don\'t know where it is, please ask your hosting company)',
@@ -74,7 +74,7 @@ $LANG = array(
     'admin_first_name' => 'Your first name',
     'admin_last_name' => 'Your last name',
     'admin_username' => 'Your username (to login into the admin panel)',
-    'admin_login_email' => 'Your email to login into the admin panel',
+    'admin_login_email' => 'Email to login into the admin dashboard',
     'admin_email' => 'Admin email address for your website',
     'admin_return_email' => 'No-reply email address (usually noreply@yoursite.com)',
     'admin_feedback_email' => 'Email address for the contact form of your website',
