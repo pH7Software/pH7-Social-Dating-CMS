@@ -91,7 +91,7 @@ class MainController extends ProfileBaseController
             $this->view->is_logged = $this->bUserAuth;
             $this->view->is_own_profile = $this->isOwnProfile();
 
-            // Count number of views
+            // Count number of times the profile is viewed
             Statistic::setView($this->iProfileId, DbTableName::MEMBER);
         } else {
             $this->displayPageNotFound();
