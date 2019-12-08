@@ -25,6 +25,11 @@ class Browser
 {
     const FAVICON_GENERATOR_URL = 'https://www.google.com/s2/favicons?domain=';
 
+    const DEFAULT_BROWSER_HEX_CODES = [
+        '#000',
+        '#000000'
+    ];
+
     /**
      * Detect the user's preferred language.
      *
@@ -176,6 +181,16 @@ class Browser
     public function isAjaxRequest()
     {
         return array_key_exists(Server::HTTP_X_REQUESTED_WITH, Server::getVar());
+    }
+
+    /**
+     * @param string $sValue
+     *
+     * @return bool
+     */
+    public static function isDefaultBrowserHexCodeFound($sValue)
+    {
+        return in_array($sValue, self::DEFAULT_BROWSER_HEX_CODES, true);
     }
 
     /**

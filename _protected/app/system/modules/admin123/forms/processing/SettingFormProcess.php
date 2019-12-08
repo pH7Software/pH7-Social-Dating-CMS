@@ -13,6 +13,7 @@ defined('PH7') or exit('Restricted access');
 use PH7\Framework\Image\Image;
 use PH7\Framework\Layout\Gzip\Gzip;
 use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Navigation\Browser;
 
 class SettingFormProcess extends Form
 {
@@ -21,10 +22,6 @@ class SettingFormProcess extends Form
     const LOGO_WIDTH = 47;
     const LOGO_HEIGHT = 45;
     const MAX_WATERMARK_SIZE = 5;
-    const DEFAULT_BROWSER_HEX_CODES = [
-        '#000',
-        '#000000'
-    ];
 
     /** @var boolean */
     private $bIsErr = false;
@@ -230,7 +227,7 @@ class SettingFormProcess extends Form
                     case 'footer_link_color':
                     case 'link_hover_color': {
                         // Prevent to override color style if the value isn't changed by user but set by the Web browser due to empty field values
-                        if (!in_array($this->httpRequest->post($sKey), self::DEFAULT_BROWSER_HEX_CODES, true)) {
+                        if (!Browser::isDefaultBrowserHexCodeFound($sKey)) {
                             DbConfig::setSetting($this->httpRequest->post($sKey), $sVal);
                         }
                     } break;
