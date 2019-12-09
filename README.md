@@ -1,6 +1,6 @@
 # pH7 Social Dating CMS
 
-## ⚡️The 2020 <u>KILLER Dating WebApp Builder</u>! ❤️
+## ⚡️The 2020 <span style="text-decoration:underline">Killer Dating WebApp Builder</span>! ❤️
 
 ### 🚀 The Most Secure, User-Friendly & Open Source Social Dating Web App Software
 
@@ -272,7 +272,7 @@ Just clone the repository, make your changes and then make a push ;-)
 
 ![Eco Friendly. Love the World and Love the Nature](static/img/love-nature.svg)
 
-[pH7CMS](https://ph7cms.com) has been built to reduce the power and CPU usage of your server in order to preserve the nature and help to save our environment.
+[pH7CMS](https://ph7cms.com) has been designed to reduce power and CPU usage of your server in order to preserve the nature and help to save our environment.
 
 pH7CMS's templates also use lighter colors since LCD monitors use less electricity to display them.
 

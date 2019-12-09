@@ -216,7 +216,7 @@
             {{ $design->like($username, $first_name, $sex) }}
         </p>
 
-        {manual_include 'interested_buttons.inc.tpl'}
+        {manual_include 'interested_or_not.buttons.inc.tpl'}
     </div>
 
     <div class="col-xs-12 col-sm-2 col-md-3">
