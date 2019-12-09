@@ -23,6 +23,7 @@
 <script>
     artyom.initialize({
         lang: "{$LANG.lang}",
+        debug: false,
         speed: 0.9 // Slower the speed voice
     });
 </script>
