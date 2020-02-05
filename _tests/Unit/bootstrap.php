@@ -11,10 +11,8 @@ use PH7\Framework\Loader\Autoloader as FrameworkLoader;
 
 define('PH7', 1);
 
+// Timezone constant
 define('PH7_DEFAULT_TIMEZONE', 'America/Chicago');
-if (!ini_get('date.timezone')) {
-    date_default_timezone_set(PH7_DEFAULT_TIMEZONE);
-}
 
 // Charset constant
 define('PH7_ENCODING', 'utf-8');
@@ -75,20 +73,35 @@ define('PH7_PATH_CACHE', PH7_PATH_PROTECTED . 'data/cache/');
 // Max Values constants
 define('PH7_MAX_URL_LENGTH', 120);
 
-// Loading Framework Classes
-require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
-FrameworkLoader::getInstance()->init();
 
-// Loading classes from ~/protected/app/includes/classes/*
-require PH7_PATH_APP . 'includes/classes/Loader/Autoloader.php';
-AppLoader::getInstance()->init();
+try {
+    // Fix if timezone isn't correctly set
+    if (!ini_get('date.timezone')) {
+        date_default_timezone_set(PH7_DEFAULT_TIMEZONE);
+    }
 
-if (!function_exists('escape')) {
-    new \PH7\Framework\Str\Str; // Load class to get escape() function
-}
+    // Because these tests cannot run without the main config.ini file, throw an exception if pH7CMS isn't setup
+    if (!is_file(PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE)) {
+        throw new RuntimeException('Before running unit tests, please install pH7CMS, so that config.ini\'s main file is initialized.');
+    }
 
-if (!function_exists('t')) {
-    include PH7_PATH_APP_LANG . 'en_US/language.php';
-    // Load class to include t() function
-    new \PH7\Framework\Translate\Lang;
+    // Loading Framework Classes
+    require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
+    FrameworkLoader::getInstance()->init();
+
+    // Loading classes from ~/protected/app/includes/classes/*
+    require PH7_PATH_APP . 'includes/classes/Loader/Autoloader.php';
+    AppLoader::getInstance()->init();
+
+    if (!function_exists('escape')) {
+        new \PH7\Framework\Str\Str; // Load class to get escape() function
+    }
+
+    if (!function_exists('t')) {
+        include PH7_PATH_APP_LANG . 'en_US/language.php';
+        // Load class to include t() function
+        new \PH7\Framework\Translate\Lang;
+    }
+} catch (RuntimeException $oExcept) {
+    echo $oExcept->getMessage();
 }
