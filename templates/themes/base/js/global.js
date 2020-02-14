@@ -45,8 +45,8 @@ const $goBox = (function () {
                 maxWidth: '400px',
                 maxHeight: '85%',
                 html: $(oData).find('#block_page')
-            })
-        })
+            });
+        });
     });
 
     // Classic Box Popup (no frame)
@@ -122,7 +122,7 @@ $('form input[title],textarea[title],select[title]').each(function () {
         fadeOut: 0,
         delay: 0,
         defaultPosition: 'right'
-    })
+    });
 });
 
 function openBox(sFile) {
