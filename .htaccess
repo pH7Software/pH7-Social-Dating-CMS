@@ -28,6 +28,12 @@
     php_flag expose_php Off
 </IfModule>
 
+### URL Helper ###
+
+# Removes any additional unwanted segments added to URL
+<IfModule mod_rewrite.c>
+    RewriteRule ^index\.php/module/action/param1/.*/(.*+)$ /$1 [L,R=301]
+</IfModule>
 
 ### Security and Spam ###
 
