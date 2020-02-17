@@ -474,8 +474,9 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
      *
      * @param string $sName Variable name
      * @param mixed $mValue (string, object, array, integer, ...) Value Variable
-     * @param bool $bEscape Specify "true" if you want to protect your variables against XSS.
-     * @param bool $bEscapeStrip If you use escape method, you can also set this parameter to "true" to strip HTML and PHP tags from a string.
+     * @param bool $bEscape Specify "1" (TRUE) if you want to protect your variables against XSS.
+     * @param bool $bEscapeStrip If you use escape method, you can also set this parameter to "1" (TRUE) to strip HTML and PHP tags from a string.
+     * @param bool Has to be set to 1 which is equal to true. Setting "true" throws an error.
      *
      * @return void
      */
@@ -494,8 +495,9 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
      * @see assign()
      *
      * @param array $aVars
-     * @param bool $bEscape Specify TRUE if you want to protect your variables against XSS.
-     * @param bool $bEscapeStrip If you use escape method, you can also set this parameter to "true" to strip HTML and PHP tags from a string.
+     * @param bool $bEscape Specify "1" (TRUE) if you want to protect your variables against XSS.
+     * @param bool $bEscapeStrip If you use escape method, you can also set this parameter to "1" (TRUE) to strip HTML and PHP tags from a string.
+     * @param bool Has to be set to 1 which is equal to true. Setting "true" throws an error.
      *
      * @return void
      */
