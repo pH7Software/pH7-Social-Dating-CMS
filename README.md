@@ -282,6 +282,11 @@ Finally, **please consider using green Web hosting** (which use Green Power supp
 -> Other [10 Easy Ways to Green Your Social Community](https://mashable.com/2010/01/01/green-your-web-site/) 😉 <-
 
 
+## Calculate Carbon Footprint of your Social Dating Service 🌍
+
+ How is your website impacting the planet? => Check it on the Website Carbon Calculator such as [https://www.websitecarbon.com](https://www.websitecarbon.com)
+
+
 ## 🔨 Tools/Software Used to Develop pH7CMS
 
 * LAMP on **Fedora/Ubuntu** (and Mac/Windows with MAMP/WampServer/XAMPP for testing purpose)
