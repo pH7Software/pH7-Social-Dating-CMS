@@ -28,7 +28,7 @@ $config['charset'] = PH7_ENCODING;
 $config['cookie_prefix'] = 'pHS';
 $config['cookie_domain'] = PH7_DOMAIN_COOKIE;
 $config['cookie_path'] = '/';
-$config['cookie_secure'] = false;
+$config['cookie_secure'] = true;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ $config['cookie_secure'] = false;
 | 'csrf_cookie_name' = The cookie name
 | 'csrf_expire' = The number in seconds the token should expire.
 */
-$config['csrf_protection'] = false;
+$config['csrf_protection'] = true;
 $config['csrf_token_name'] = 'csrf_test_name';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
