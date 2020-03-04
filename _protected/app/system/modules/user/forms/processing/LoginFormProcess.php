@@ -76,7 +76,7 @@ class LoginFormProcess extends Form implements LoginableForm
                 $oSecurityModel->addLoginLog(
                     $sEmail,
                     'Guest',
-                    $sPassword,
+                    '*****',
                     'Failed! Incorrect Password'
                 );
 
