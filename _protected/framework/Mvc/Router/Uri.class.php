@@ -228,8 +228,7 @@ class Uri
      */
     private static function getVariables($sVariables)
     {
-        // Omit commas which may be part of a sentence in the URL parameters
-        $sVariables = str_replace([', ', ' ,'], '', $sVariables);
+        $sVariables = self::removePunctuationCommas($sVariables);
 
         $sVars = '';
         $aVars = explode(self::VARS_PARAM_DELIMITER, $sVariables);
@@ -256,5 +255,17 @@ class Uri
         $sUri = preg_replace('#([/\?]+)$#', '', $sUri);
 
         return $sUri;
+    }
+
+    /**
+     * Omit commas which may be part of a string sentence in the URL parameters.
+     *
+     * @param string $sValue
+     *
+     * @return string
+     */
+    private static function removePunctuationCommas($sValue)
+    {
+        return str_replace([', ', ' ,'], '', $sValue);
     }
 }
