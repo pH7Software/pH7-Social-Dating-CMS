@@ -60,13 +60,15 @@ abstract class Syntax
                 '$browser->',
                 '$registry->',
                 '$str->',
-                '$config->'
+                '$config->',
+                '$httpRequest->'
             ],
             [
                 '$this->browser->',
                 '$this->registry->',
                 '$this->str->',
-                '$this->config->'
+                '$this->config->',
+                '$this->httpRequest'
             ],
             $this->sCode
         );
