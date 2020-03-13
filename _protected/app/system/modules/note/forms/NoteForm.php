@@ -8,6 +8,17 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\CCaptcha;
+use PFBC\Element\Checkbox;
+use PFBC\Element\CKEditor;
+use PFBC\Element\File;
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Radio;
+use PFBC\Element\Textbox;
+use PFBC\Element\Token;
+use PFBC\Validation\Str;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Session\Session;
@@ -40,20 +51,20 @@ class NoteForm
 
         $oForm = new \PFBC\Form('form_note');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_note', 'form_note'));
-        $oForm->addElement(new \PFBC\Element\Token('note'));
+        $oForm->addElement(new Hidden('submit_note', 'form_note'));
+        $oForm->addElement(new Token('note'));
         $oForm->addElement(
-            new \PFBC\Element\Textbox(
+            new Textbox(
                 t('Article name:'),
                 'title',
                 [
-                    'validation' => new \PFBC\Validation\Str(2, 60),
+                    'validation' => new Str(2, 60),
                     'required' => 1
                 ]
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Textbox(
+            new Textbox(
                 t('Article ID:'),
                 'post_id',
                 [
@@ -61,34 +72,34 @@ class NoteForm
                     'title' => t('Article ID will be the name of the URL.'),
                     'data-profile_id' => (new Session)->get('member_id'),
                     'id' => 'post_id',
-                    'validation' => new \PFBC\Validation\Str(2, 50),
+                    'validation' => new Str(2, 50),
                     'required' => 1
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="label_flow">'));
-        $oForm->addElement(new \PFBC\Element\Checkbox(t('Categories:'), 'category_id', $aCategoryNames, ['description' => t('Select a category that fits the best for your article. You can select up to three different categories'), 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
-        $oForm->addElement(new \PFBC\Element\CKEditor(t('Body:'), 'content', ['validation' => new \PFBC\Validation\Str(30), 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Language of the post:'), 'lang_id', ['description' => t('e.g., "en", "fr", "es", "js"'), 'value' => PH7_LANG_CODE, 'pattern' => '[a-z]{2}', 'validation' => new \PFBC\Validation\Str(2, 2), 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Slogan:'), 'slogan', ['validation' => new \PFBC\Validation\Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)]));
-        $oForm->addElement(new \PFBC\Element\File(t('Thumbnail:'), 'thumb', ['accept' => 'image/*']));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Tags:'), 'tags', ['description' => t('Separate keywords by commas and without spaces between the commas.'), 'validation' => new \PFBC\Validation\Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Title (meta tag):'), 'page_title', ['validation' => new \PFBC\Validation\Str(2, 100), 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Description (meta tag):'), 'meta_description', ['validation' => new \PFBC\Validation\Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Keywords (meta tag):'), 'meta_keywords', ['description' => t('Separate keywords by commas and without spaces between the commas.'), 'validation' => new \PFBC\Validation\Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Robots (meta tag):'), 'meta_robots', ['validation' => new \PFBC\Validation\Str(2, 50)]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Author (meta tag):'), 'meta_author', ['validation' => new \PFBC\Validation\Str(2, 50)]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Copyright (meta tag):'), 'meta_copyright', ['validation' => new \PFBC\Validation\Str(2, 50)]));
-        $oForm->addElement(new \PFBC\Element\Radio(t('Enable Comment:'), 'enable_comment', ['1' => t('Enable'), '0' => t('Disable')], ['value' => '1', 'required' => 1]));
+        $oForm->addElement(new HTMLExternal('<div class="label_flow">'));
+        $oForm->addElement(new Checkbox(t('Categories:'), 'category_id', $aCategoryNames, ['description' => t('Select a category that fits the best for your article. You can select up to three different categories'), 'required' => 1]));
+        $oForm->addElement(new HTMLExternal('</div>'));
+        $oForm->addElement(new CKEditor(t('Body:'), 'content', ['validation' => new Str(30), 'required' => 1]));
+        $oForm->addElement(new Textbox(t('Language of the post:'), 'lang_id', ['description' => t('e.g., "en", "fr", "es", "js"'), 'value' => PH7_LANG_CODE, 'pattern' => '[a-z]{2}', 'validation' => new Str(2, 2), 'required' => 1]));
+        $oForm->addElement(new Textbox(t('Slogan:'), 'slogan', ['validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)]));
+        $oForm->addElement(new File(t('Thumbnail:'), 'thumb', ['accept' => 'image/*']));
+        $oForm->addElement(new Textbox(t('Tags:'), 'tags', ['description' => t('Separate keywords by commas and without spaces between the commas.'), 'validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)]));
+        $oForm->addElement(new Textbox(t('Title (meta tag):'), 'page_title', ['validation' => new Str(2, 100), 'required' => 1]));
+        $oForm->addElement(new Textbox(t('Description (meta tag):'), 'meta_description', ['validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)]));
+        $oForm->addElement(new Textbox(t('Keywords (meta tag):'), 'meta_keywords', ['description' => t('Separate keywords by commas and without spaces between the commas.'), 'validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)]));
+        $oForm->addElement(new Textbox(t('Robots (meta tag):'), 'meta_robots', ['validation' => new Str(2, 50)]));
+        $oForm->addElement(new Textbox(t('Author (meta tag):'), 'meta_author', ['validation' => new Str(2, 50)]));
+        $oForm->addElement(new Textbox(t('Copyright (meta tag):'), 'meta_copyright', ['validation' => new Str(2, 50)]));
+        $oForm->addElement(new Radio(t('Enable Comment:'), 'enable_comment', ['1' => t('Enable'), '0' => t('Disable')], ['value' => '1', 'required' => 1]));
 
         if (DbConfig::getSetting('isCaptchaNote')) {
-            $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha'), 'captcha', ['id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:')]));
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
+            $oForm->addElement(new CCaptcha(t('Captcha'), 'captcha', ['id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:')]));
+            $oForm->addElement(new HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }
 
-        $oForm->addElement(new \PFBC\Element\Button);
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script><script src="' . PH7_URL_TPL_SYS_MOD . 'note/' . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS . 'common.js"></script>'));
+        $oForm->addElement(new Button);
+        $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script><script src="' . PH7_URL_TPL_SYS_MOD . 'note/' . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS . 'common.js"></script>'));
         $oForm->render();
     }
 }

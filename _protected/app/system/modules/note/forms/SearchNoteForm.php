@@ -8,6 +8,9 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Search;
+use PFBC\Element\Select;
 use PH7\Framework\Mvc\Router\Uri;
 
 class SearchNoteForm
@@ -26,10 +29,10 @@ class SearchNoteForm
 
         $oForm = new \PFBC\Form('form_search', $iWidth);
         $oForm->configure(['action' => Uri::get('note', 'main', 'result') . PH7_SH, 'method' => 'get']);
-        $oForm->addElement(new \PFBC\Element\Search(t('Search Note Posts:'), 'looking', $aOptions));
-        $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', [SearchCoreModel::TITLE => t('Title'), SearchCoreModel::VIEWS => t('Popular'), SearchCoreModel::RATING => t('Rated'), SearchCoreModel::CREATED => t('Created Date'), SearchCoreModel::UPDATED => t('Updated Date')]));
-        $oForm->addElement(new \PFBC\Element\Select(t('Direction:'), 'sort', [SearchCoreModel::ASC => t('Ascending'), SearchCoreModel::DESC => t('Descending')], ['value' => SearchCoreModel::DESC]));
-        $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', ['icon' => 'search']));
+        $oForm->addElement(new Search(t('Search Note Posts:'), 'looking', $aOptions));
+        $oForm->addElement(new Select(t('Browse By:'), 'order', [SearchCoreModel::TITLE => t('Title'), SearchCoreModel::VIEWS => t('Popular'), SearchCoreModel::RATING => t('Rated'), SearchCoreModel::CREATED => t('Created Date'), SearchCoreModel::UPDATED => t('Updated Date')]));
+        $oForm->addElement(new Select(t('Direction:'), 'sort', [SearchCoreModel::ASC => t('Ascending'), SearchCoreModel::DESC => t('Descending')], ['value' => SearchCoreModel::DESC]));
+        $oForm->addElement(new Button(t('Search'), 'submit', ['icon' => 'search']));
         $oForm->render();
     }
 }

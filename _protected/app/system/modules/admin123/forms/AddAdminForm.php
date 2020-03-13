@@ -8,7 +8,17 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Email;
+use PFBC\Element\Hidden;
+use PFBC\Element\Password;
+use PFBC\Element\Radio;
+use PFBC\Element\Textbox;
+use PFBC\Element\Timezone;
+use PFBC\Element\Token;
 use PFBC\Validation\CEmail;
+use PFBC\Validation\Name;
+use PFBC\Validation\Username;
 use PH7\Framework\Url\Header;
 
 class AddAdminForm
@@ -27,15 +37,15 @@ class AddAdminForm
 
         $oForm = new \PFBC\Form('form_add_admin');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_add_admin', 'form_add_admin'));
-        $oForm->addElement(new \PFBC\Element\Token('add_admin'));
-        $oForm->addElement(new \PFBC\Element\Username(t('Login Username:'), 'username', ['required' => 1, 'validation' => new \PFBC\Validation\Username(DbTableName::ADMIN)]));
-        $oForm->addElement(new \PFBC\Element\Email(t('Login Email:'), 'mail', ['required' => 1, 'validation' => new CEmail(CEmail::GUEST_MODE, DbTableName::ADMIN)]));
-        $oForm->addElement(new \PFBC\Element\Password(t('Password:'), 'password', ['required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('First Name:'), 'first_name', ['required' => 1, 'validation' => new \PFBC\Validation\Name]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Last Name:'), 'last_name', ['required' => 1, 'validation' => new \PFBC\Validation\Name]));
+        $oForm->addElement(new Hidden('submit_add_admin', 'form_add_admin'));
+        $oForm->addElement(new Token('add_admin'));
+        $oForm->addElement(new \PFBC\Element\Username(t('Login Username:'), 'username', ['required' => 1, 'validation' => new Username(DbTableName::ADMIN)]));
+        $oForm->addElement(new Email(t('Login Email:'), 'mail', ['required' => 1, 'validation' => new CEmail(CEmail::GUEST_MODE, DbTableName::ADMIN)]));
+        $oForm->addElement(new Password(t('Password:'), 'password', ['required' => 1]));
+        $oForm->addElement(new Textbox(t('First Name:'), 'first_name', ['required' => 1, 'validation' => new Name]));
+        $oForm->addElement(new Textbox(t('Last Name:'), 'last_name', ['required' => 1, 'validation' => new Name]));
         $oForm->addElement(
-            new \PFBC\Element\Radio(
+            new Radio(
                 t('Gender:'),
                 'sex',
                 [
@@ -46,7 +56,7 @@ class AddAdminForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Timezone(
+            new Timezone(
                 'Time Zone:',
                 'time_zone',
                 [
@@ -56,7 +66,7 @@ class AddAdminForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Button);
+        $oForm->addElement(new Button);
         $oForm->render();
     }
 }
