@@ -104,6 +104,8 @@ class MainController extends Controller
             $this->oPage->getNbItemsPerPage()
         );
 
+        $this->view->is_add_album_btn_shown = $this->httpRequest->get('show_add_album_btn', 'bool');
+
         if (empty($oAlbums)) {
             $this->sTitle = t('No video albums found.');
             $this->notFound(false); // Because the Ajax blocks profile, we cannot put HTTP error code 404, so the attribute is FALSE
@@ -114,7 +116,6 @@ class MainController extends Controller
             $this->view->meta_description = t("%0%'s Albums | Video Albums of the Dating Social Community - %site_name%", $this->sUsername);
 
             $this->view->albums = $oAlbums;
-            $this->view->is_add_album_btn_shown = $this->httpRequest->get('show_add_album_btn', 'bool');
         }
 
         if (empty($iProfileId)) {
