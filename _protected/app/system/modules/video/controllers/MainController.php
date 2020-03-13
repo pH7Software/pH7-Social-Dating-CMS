@@ -112,7 +112,9 @@ class MainController extends Controller
             $this->sTitle = !empty($iProfileId) ? t("The %0%'s albums", $this->design->getProfileLink($this->sUsername, false)) : t('Video Gallery Community');
             $this->view->page_title = $this->view->h2_title = $this->sTitle;
             $this->view->meta_description = t("%0%'s Albums | Video Albums of the Dating Social Community - %site_name%", $this->sUsername);
+
             $this->view->albums = $oAlbums;
+            $this->view->is_add_album_btn_shown = (bool)$this->httpRequest->get('show_add_album_btn');
         }
 
         if (empty($iProfileId)) {

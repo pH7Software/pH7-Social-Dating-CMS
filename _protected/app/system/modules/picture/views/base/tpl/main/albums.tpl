@@ -30,7 +30,7 @@
         <p>{error}</p>
     {/if}
 
-    {if $httpRequest->get('show_add_album_btn')}
+    {if $is_add_album_btn_shown}
         <p class="bottom">
             <a class="btn btn-default btn-md" href="{{ $design->url('picture', 'main', 'addalbum') }}">
                 {lang 'Add a new album'}
