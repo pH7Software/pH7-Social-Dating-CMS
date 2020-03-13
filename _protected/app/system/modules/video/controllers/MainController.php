@@ -114,7 +114,7 @@ class MainController extends Controller
             $this->view->meta_description = t("%0%'s Albums | Video Albums of the Dating Social Community - %site_name%", $this->sUsername);
 
             $this->view->albums = $oAlbums;
-            $this->view->is_add_album_btn_shown = (bool)$this->httpRequest->get('show_add_album_btn');
+            $this->view->is_add_album_btn_shown = $this->httpRequest->get('show_add_album_btn', 'bool');
         }
 
         if (empty($iProfileId)) {
