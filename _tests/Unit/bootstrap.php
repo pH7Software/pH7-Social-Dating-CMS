@@ -81,7 +81,7 @@ try {
     }
 
     // Because these tests cannot run without the main config.ini file, throw an exception if pH7CMS isn't setup
-    if (!is_file(PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE)) {Before running unit tests, please i
+    if (!is_file(PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE)) {
         throw new RuntimeException('You need to install pH7CMS first so that config.ini main file is initialized and tests can then work properly.');
     }
 
