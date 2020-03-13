@@ -8,6 +8,9 @@
 
 namespace PH7;
 
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Textarea;
+
 class ShareEmbedCoreForm
 {
     /**
@@ -30,7 +33,7 @@ class ShareEmbedCoreForm
         $oForm = new \PFBC\Form('form_share_embed', $iWidth);
         $oForm->configure(['action' => '', 'class' => 'center']);
         $oForm->addElement(
-            new \PFBC\Element\Textarea(
+            new Textarea(
                 t('Embed Code'),
                 'embed',
                 [
@@ -40,7 +43,7 @@ class ShareEmbedCoreForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<br />'));
+        $oForm->addElement(new HTMLExternal('<br />'));
         $oForm->render();
     }
 }

@@ -8,6 +8,10 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\Textarea;
+use PFBC\Element\Token;
 use PH7\Framework\Mvc\Model\Design;
 use PH7\Framework\Url\Header;
 
@@ -25,10 +29,10 @@ class AnalyticsApiForm
 
         $oForm = new \PFBC\Form('form_analytics');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_analytics', 'form_analytics'));
-        $oForm->addElement(new \PFBC\Element\Token('analytics'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Your analytics tracking code (e.g., Google Analytics, Matomo)'), 'code', ['value' => (new Design)->analyticsApi(false)]));
-        $oForm->addElement(new \PFBC\Element\Button);
+        $oForm->addElement(new Hidden('submit_analytics', 'form_analytics'));
+        $oForm->addElement(new Token('analytics'));
+        $oForm->addElement(new Textarea(t('Your analytics tracking code (e.g., Google Analytics, Matomo)'), 'code', ['value' => (new Design)->analyticsApi(false)]));
+        $oForm->addElement(new Button);
         $oForm->render();
     }
 }

@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Model;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
@@ -38,7 +39,7 @@ class RatingCoreModel extends Model
         if (!$iVote = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT votes FROM' . Db::prefix($sTable) .
                 'WHERE ' . $sWhere . ' = :id LIMIT 1');
-            $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':id', $iId, PDO::PARAM_INT);
             $rStmt->execute();
             $iVote = (int)$rStmt->fetchColumn();
             Db::free($rStmt);
@@ -68,7 +69,7 @@ class RatingCoreModel extends Model
         if (!$fScore = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT score FROM' . Db::prefix($sTable) .
                 'WHERE ' . $sWhere . ' = :id LIMIT 1');
-            $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':id', $iId, PDO::PARAM_INT);
             $rStmt->execute();
             $fScore = (float)$rStmt->fetchColumn();
             Db::free($rStmt);
@@ -91,7 +92,7 @@ class RatingCoreModel extends Model
 
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) .
             'SET votes = votes + 1 WHERE ' . $sWhere . ' = :id');
-        $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':id', $iId, PDO::PARAM_INT);
 
         return $rStmt->execute();
     }

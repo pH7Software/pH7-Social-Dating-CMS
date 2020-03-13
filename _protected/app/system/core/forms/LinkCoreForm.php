@@ -10,6 +10,9 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PFBC\Element\Hidden;
+use PFBC\Element\Submit;
+use PFBC\Element\Token;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
 
@@ -32,14 +35,14 @@ class LinkCoreForm
 
         $oForm = new \PFBC\Form('form_link');
         $oForm->configure(['action' => $sUrl, 'class' => 'form_link']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_link', 'form_link'));
-        $oForm->addElement(new \PFBC\Element\Token(substr($sUrl, -14, -6))); // Create a name token and generate a random token
+        $oForm->addElement(new Hidden('submit_link', 'form_link'));
+        $oForm->addElement(new Token(substr($sUrl, -14, -6))); // Create a name token and generate a random token
 
         foreach ($aParams as $sKey => $sVal) {
-            $oForm->addElement(new \PFBC\Element\Hidden($sKey, $sVal));
+            $oForm->addElement(new Hidden($sKey, $sVal));
         }
 
-        $oForm->addElement(new \PFBC\Element\Submit($sLabel, ['class' => 'form_link']));
+        $oForm->addElement(new Submit($sLabel, ['class' => 'form_link']));
         $oForm->render();
     }
 

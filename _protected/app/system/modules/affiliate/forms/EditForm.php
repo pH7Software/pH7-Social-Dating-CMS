@@ -8,6 +8,16 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Date;
+use PFBC\Element\Email;
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Radio;
+use PFBC\Element\Textbox;
+use PFBC\Element\Token;
+use PFBC\Validation\BirthDate;
+use PFBC\Validation\Name;
 use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
@@ -36,33 +46,33 @@ class EditForm
 
         $oForm = new \PFBC\Form('form_aff_edit_account');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_aff_edit_account', 'form_aff_edit_account'));
-        $oForm->addElement(new \PFBC\Element\Token('edit_account'));
+        $oForm->addElement(new Hidden('submit_aff_edit_account', 'form_aff_edit_account'));
+        $oForm->addElement(new Token('edit_account'));
 
         if (self::isAdminLoggedAndUserIdExists($oHttpRequest)) {
             $oForm->addElement(
-                new \PFBC\Element\HTMLExternal('<p class="center"><a class="bold btn btn-default btn-md" href="' . Uri::get('affiliate', 'admin', 'browse') . '">' . t('Back to Browse Affiliates') . '</a></p>')
+                new HTMLExternal('<p class="center"><a class="bold btn btn-default btn-md" href="' . Uri::get('affiliate', 'admin', 'browse') . '">' . t('Back to Browse Affiliates') . '</a></p>')
             );
         }
 
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<h2 class="underline">' . t('Global Information:') . '</h2>'));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="cinnabar-red">' . t('All your information must be accurate and valid.') . '</p>'));
+        $oForm->addElement(new HTMLExternal('<h2 class="underline">' . t('Global Information:') . '</h2>'));
+        $oForm->addElement(new HTMLExternal('<p class="cinnabar-red">' . t('All your information must be accurate and valid.') . '</p>'));
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', ['id' => 'name_first', 'onblur' => 'CValid(this.value,this.id)', 'value' => $oAff->firstName, 'required' => 1, 'validation' => new \PFBC\Validation\Name]));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_first"></span>'));
+        $oForm->addElement(new Textbox(t('Your First Name:'), 'first_name', ['id' => 'name_first', 'onblur' => 'CValid(this.value,this.id)', 'value' => $oAff->firstName, 'required' => 1, 'validation' => new Name]));
+        $oForm->addElement(new HTMLExternal('<span class="input_error name_first"></span>'));
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Last Name:'), 'last_name', ['id' => 'name_last', 'onblur' => 'CValid(this.value,this.id)', 'value' => $oAff->lastName, 'required' => 1, 'validation' => new \PFBC\Validation\Name]));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_last"></span>'));
+        $oForm->addElement(new Textbox(t('Your Last Name:'), 'last_name', ['id' => 'name_last', 'onblur' => 'CValid(this.value,this.id)', 'value' => $oAff->lastName, 'required' => 1, 'validation' => new Name]));
+        $oForm->addElement(new HTMLExternal('<span class="input_error name_last"></span>'));
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Username:'), 'username', ['description' => t('For security reasons, you cannot change your username.'), 'disabled' => 'disabled', 'value' => $oAff->username]));
+        $oForm->addElement(new Textbox(t('Username:'), 'username', ['description' => t('For security reasons, you cannot change your username.'), 'disabled' => 'disabled', 'value' => $oAff->username]));
 
-        $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', ['description' => t('For security reasons and to avoid spam, you cannot change your email address.'), 'disabled' => 'disabled', 'value' => $oAff->email]));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error phone"></span>'));
+        $oForm->addElement(new Email(t('Your Email:'), 'mail', ['description' => t('For security reasons and to avoid spam, you cannot change your email address.'), 'disabled' => 'disabled', 'value' => $oAff->email]));
+        $oForm->addElement(new HTMLExternal('<span class="input_error phone"></span>'));
 
         if (self::isAdminLoggedAndUserIdExists($oHttpRequest)) {
             // For security reasons, only admins can change profile gender
             $oForm->addElement(
-                new \PFBC\Element\Radio(
+                new Radio(
                     t('Gender:'),
                     'sex',
                     [
@@ -79,8 +89,8 @@ class EditForm
 
         if (self::isAdminLoggedAndUserIdExists($oHttpRequest)) {
             // For security reasons, only admins can change the date of birth
-            $oForm->addElement(new \PFBC\Element\Date(t('Your Date of Birth:'), 'birth_date', ['id' => 'birth_date', 'onblur' => 'CValid(this.value, this.id)', 'value' => $sBirthDate, 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1]));
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
+            $oForm->addElement(new Date(t('Your Date of Birth:'), 'birth_date', ['id' => 'birth_date', 'onblur' => 'CValid(this.value, this.id)', 'value' => $sBirthDate, 'validation' => new BirthDate, 'required' => 1]));
+            $oForm->addElement(new HTMLExternal('<span class="input_error birth_date"></span>'));
         }
 
         // Generate dynamic fields
@@ -89,8 +99,8 @@ class EditForm
             $oForm = (new DynamicFieldCoreForm($oForm, $sColumn, $sValue))->generate();
         }
 
-        $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'check']));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
+        $oForm->addElement(new Button(t('Save'), 'submit', ['icon' => 'check']));
+        $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
     }
 

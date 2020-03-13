@@ -8,6 +8,10 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\Textarea;
+use PFBC\Element\Token;
 use PH7\Framework\Mvc\Model\Design;
 use PH7\Framework\Url\Header;
 
@@ -25,10 +29,10 @@ class StyleForm
 
         $oForm = new \PFBC\Form('form_style');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_style', 'form_style'));
-        $oForm->addElement(new \PFBC\Element\Token('style'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Your custom CSS code'), 'code', ['value' => (new Design)->customCode('css'), 'description' => t("WARNING! Here you don't have to add %0% tags.", '<b><i>&lt;style&gt;&lt;/style&gt;</i></b>'), 'style' => 'height:35rem']));
-        $oForm->addElement(new \PFBC\Element\Button(t('Save Changes'), 'submit', ['icon' => 'check']));
+        $oForm->addElement(new Hidden('submit_style', 'form_style'));
+        $oForm->addElement(new Token('style'));
+        $oForm->addElement(new Textarea(t('Your custom CSS code'), 'code', ['value' => (new Design)->customCode('css'), 'description' => t("WARNING! Here you don't have to add %0% tags.", '<b><i>&lt;style&gt;&lt;/style&gt;</i></b>'), 'style' => 'height:35rem']));
+        $oForm->addElement(new Button(t('Save Changes'), 'submit', ['icon' => 'check']));
         $oForm->render();
     }
 }

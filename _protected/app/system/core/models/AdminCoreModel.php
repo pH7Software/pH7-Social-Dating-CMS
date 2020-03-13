@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 
@@ -42,11 +43,11 @@ class AdminCoreModel extends UserCoreModel
         }
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
-        $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-        $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+        $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+        $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         $rStmt->execute();
 
-        return $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        return $rStmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     /**
@@ -84,18 +85,18 @@ class AdminCoreModel extends UserCoreModel
         $sSqlQuery = 'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER) . 'AS m INNER JOIN ' . Db::prefix(DbTableName::MEMBERSHIP) . 'AS g ON m.groupId = g.groupId LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) . 'AS i ON m.profileId = i.profileId WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (m.groupId = :groupId) AND ' . $sSqlConditions . $sSqlOrder . $sSqlLimit;
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
 
-        $rStmt->bindValue(':what', '%' . $mWhat . '%', \PDO::PARAM_STR);
-        $rStmt->bindParam(':groupId', $iGroupId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':what', '%' . $mWhat . '%', PDO::PARAM_STR);
+        $rStmt->bindParam(':groupId', $iGroupId, PDO::PARAM_INT);
 
         if (!$bCount) {
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
         if (!$bCount) {
-            $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = $rStmt->fetchAll(PDO::FETCH_OBJ);
         } else {
             $mData = (int)$rStmt->fetchColumn();
         }
@@ -119,8 +120,8 @@ class AdminCoreModel extends UserCoreModel
         $iBan = (int)$iBan;
 
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET ban = :ban WHERE profileId = :profileId');
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':ban', $iBan, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':ban', $iBan, PDO::PARAM_INT);
 
         return $rStmt->execute();
     }

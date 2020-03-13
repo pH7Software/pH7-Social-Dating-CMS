@@ -8,6 +8,10 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Checkbox;
+use PFBC\Element\Hidden;
+use PFBC\Element\Token;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Module as ModuleModel;
 use PH7\Framework\Mvc\Router\Uri;
@@ -60,10 +64,10 @@ class DisableModuleForm
 
         $oForm = new \PFBC\Form('form_module');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_module', 'form_module'));
-        $oForm->addElement(new \PFBC\Element\Token('module'));
-        $oForm->addElement(new \PFBC\Element\Checkbox('', 'module_id', $aModuleNames, ['value' => $aSelectedMods]));
-        $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'check']));
+        $oForm->addElement(new Hidden('submit_module', 'form_module'));
+        $oForm->addElement(new Token('module'));
+        $oForm->addElement(new Checkbox('', 'module_id', $aModuleNames, ['value' => $aSelectedMods]));
+        $oForm->addElement(new Button(t('Save'), 'submit', ['icon' => 'check']));
         $oForm->render();
     }
 

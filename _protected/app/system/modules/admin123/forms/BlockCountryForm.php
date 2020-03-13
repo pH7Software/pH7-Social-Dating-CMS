@@ -8,6 +8,10 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Country;
+use PFBC\Element\Hidden;
+use PFBC\Element\Token;
 use PH7\Framework\Mvc\Model\BlockCountry as BlockCountryModel;
 use PH7\Framework\Url\Header;
 
@@ -27,10 +31,10 @@ class BlockCountryForm
 
         $oForm = new \PFBC\Form('form_country_blocklist');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_country_blocklist', 'form_country_blocklist'));
-        $oForm->addElement(new \PFBC\Element\Token('block_country'));
+        $oForm->addElement(new Hidden('submit_country_blocklist', 'form_country_blocklist'));
+        $oForm->addElement(new Token('block_country'));
         $oForm->addElement(
-            new \PFBC\Element\Country(
+            new Country(
                 t('Countries to exclude'),
                 'countries[]',
                 [
@@ -41,7 +45,7 @@ class BlockCountryForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'check']));
+        $oForm->addElement(new Button(t('Save'), 'submit', ['icon' => 'check']));
         $oForm->render();
     }
 }

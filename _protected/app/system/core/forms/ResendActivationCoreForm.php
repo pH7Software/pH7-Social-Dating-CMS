@@ -10,6 +10,12 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PFBC\Element\Button;
+use PFBC\Element\CCaptcha;
+use PFBC\Element\Email;
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Token;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Url\Header;
 
@@ -33,14 +39,14 @@ class ResendActivationCoreForm
 
             $oForm = new \PFBC\Form('form_resend_activation');
             $oForm->configure(['action' => '']);
-            $oForm->addElement(new \PFBC\Element\Hidden('submit_resend_activation', 'form_resend_activation'));
-            $oForm->addElement(new \PFBC\Element\Token('resend_activation'));
-            $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', ['id' => 'email', 'onblur' => 'CValid(this.value, this.id,\'user\',\'' . $sTable . '\')', 'required' => 1]));
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error email"></span>'));
-            $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha'), 'captcha', ['id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:')]));
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
-            $oForm->addElement(new \PFBC\Element\Button(t('Send Activation'), 'submit', ['icon' => 'key']));
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
+            $oForm->addElement(new Hidden('submit_resend_activation', 'form_resend_activation'));
+            $oForm->addElement(new Token('resend_activation'));
+            $oForm->addElement(new Email(t('Your Email:'), 'mail', ['id' => 'email', 'onblur' => 'CValid(this.value, this.id,\'user\',\'' . $sTable . '\')', 'required' => 1]));
+            $oForm->addElement(new HTMLExternal('<span class="input_error email"></span>'));
+            $oForm->addElement(new CCaptcha(t('Captcha'), 'captcha', ['id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:')]));
+            $oForm->addElement(new HTMLExternal('<span class="input_error ccaptcha"></span>'));
+            $oForm->addElement(new Button(t('Send Activation'), 'submit', ['icon' => 'key']));
+            $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
             $oForm->render();
         }
     }

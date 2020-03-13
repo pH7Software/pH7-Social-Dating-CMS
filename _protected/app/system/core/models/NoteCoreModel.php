@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Model;
 
@@ -51,13 +52,13 @@ class NoteCoreModel extends Model
                 Db::prefix(DbTableName::MEMBER) . 'AS m ON n.profileId = m.profileId' . $sSqlApproved . $sOrderBy . 'LIMIT :offset, :limit';
 
             $rStmt = Db::getInstance()->prepare($sSqlQuery);
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
             if ($bIsApproved) {
-                $rStmt->bindParam(':approved', $iApproved, \PDO::PARAM_INT);
+                $rStmt->bindParam(':approved', $iApproved, PDO::PARAM_INT);
             }
             $rStmt->execute();
-            $aData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $aData = $rStmt->fetchAll(PDO::FETCH_OBJ);
             Db::free($rStmt);
             $this->cache->put($aData);
         }
@@ -88,7 +89,7 @@ class NoteCoreModel extends Model
             $sSqlQuery = 'SELECT COUNT(postId) FROM' . Db::prefix(DbTableName::NOTE) . $sSqlWhere . $sSqlApproved . $sSqlAnd . $sSqlDay;
             $rStmt = Db::getInstance()->prepare($sSqlQuery);
             if ($bIsApproved) {
-                $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+                $rStmt->bindValue(':approved', $iApproved, PDO::PARAM_INT);
             }
             $rStmt->execute();
 

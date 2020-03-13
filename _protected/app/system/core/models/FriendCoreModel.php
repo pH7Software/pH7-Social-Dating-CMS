@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Model;
 
@@ -67,27 +68,27 @@ class FriendCoreModel extends Model
             $sSqlOrder . $sSqlLimit
         );
 
-        $rStmt->bindValue(':profileId', $iIdProfileId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iIdProfileId, PDO::PARAM_INT);
 
         if ($bDigitSearch) {
-            $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
+            $rStmt->bindValue(':looking', $mLooking, PDO::PARAM_INT);
         } else {
-            $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+            $rStmt->bindValue(':looking', '%' . $mLooking . '%', PDO::PARAM_STR);
         }
 
         if (!empty($iFriendId)) {
-            $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':friendId', $iFriendId, PDO::PARAM_INT);
         }
 
         if (!$bCount) {
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
         if (!$bCount) {
-            $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = $rStmt->fetchAll(PDO::FETCH_OBJ);
         } else {
             $mData = (int)$rStmt->fetchColumn();
         }
@@ -115,10 +116,10 @@ class FriendCoreModel extends Model
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::MEMBER_FRIEND) .
             'WHERE (profileId = :profileId AND friendId = :friendId) OR (profileId = :friendId AND friendId = :profileId) ' . $sSqlPending . ' LIMIT 1');
 
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':friendId', $iFriendId, PDO::PARAM_INT);
         if ($iPending !== self::ALL_REQUEST) {
-            $rStmt->bindValue(':pending', $iPending, \PDO::PARAM_INT);
+            $rStmt->bindValue(':pending', $iPending, PDO::PARAM_INT);
         }
         $rStmt->execute();
 
@@ -137,8 +138,8 @@ class FriendCoreModel extends Model
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(pending) FROM' .
             Db::prefix(DbTableName::MEMBER_FRIEND) . 'WHERE friendId = :friendId AND pending = :pending');
 
-        $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':pending', self::PENDING_REQUEST, \PDO::PARAM_INT);
+        $rStmt->bindValue(':friendId', $iFriendId, PDO::PARAM_INT);
+        $rStmt->bindValue(':pending', self::PENDING_REQUEST, PDO::PARAM_INT);
         $rStmt->execute();
         $iPendingFriends = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
@@ -159,7 +160,7 @@ class FriendCoreModel extends Model
             Db::prefix(DbTableName::MEMBER_FRIEND) .
             'WHERE (profileId = :profileId OR friendId = :profileId)');
 
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
         $rStmt->execute();
         $iTotalFriends = (int)$rStmt->fetchColumn();
         Db::free($rStmt);

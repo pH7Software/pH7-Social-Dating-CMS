@@ -8,6 +8,15 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Email;
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Radio;
+use PFBC\Element\Textbox;
+use PFBC\Element\Timezone;
+use PFBC\Element\Token;
+use PFBC\Validation\Name;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Session\Session;
@@ -32,21 +41,21 @@ class EditForm
 
         $oForm = new \PFBC\Form('form_admin_edit_account');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_admin_edit_account', 'form_admin_edit_account'));
-        $oForm->addElement(new \PFBC\Element\Token('edit_account'));
+        $oForm->addElement(new Hidden('submit_admin_edit_account', 'form_admin_edit_account'));
+        $oForm->addElement(new Token('edit_account'));
 
         if (self::isEditModeEligible($oHttpRequest)) {
             $oForm->addElement(
-                new \PFBC\Element\HTMLExternal('<p class="center"><a class="bold btn btn-default btn-md" href="' . Uri::get(PH7_ADMIN_MOD, 'admin', 'browse') . '">' . t('Back to Browse Admins') . '</a></p>')
+                new HTMLExternal('<p class="center"><a class="bold btn btn-default btn-md" href="' . Uri::get(PH7_ADMIN_MOD, 'admin', 'browse') . '">' . t('Back to Browse Admins') . '</a></p>')
             );
         }
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Login Username:'), 'username', ['value' => $oAdmin->username, 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Email(t('Login Email:'), 'mail', ['value' => $oAdmin->email, 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('First Name:'), 'first_name', ['value' => $oAdmin->firstName, 'required' => 1, 'validation' => new \PFBC\Validation\Name]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Last Name:'), 'last_name', ['value' => $oAdmin->lastName, 'required' => 1, 'validation' => new \PFBC\Validation\Name]));
+        $oForm->addElement(new Textbox(t('Login Username:'), 'username', ['value' => $oAdmin->username, 'required' => 1]));
+        $oForm->addElement(new Email(t('Login Email:'), 'mail', ['value' => $oAdmin->email, 'required' => 1]));
+        $oForm->addElement(new Textbox(t('First Name:'), 'first_name', ['value' => $oAdmin->firstName, 'required' => 1, 'validation' => new Name]));
+        $oForm->addElement(new Textbox(t('Last Name:'), 'last_name', ['value' => $oAdmin->lastName, 'required' => 1, 'validation' => new Name]));
         $oForm->addElement(
-            new \PFBC\Element\Radio(
+            new Radio(
                 t('Gender:'),
                 'sex',
                 [
@@ -59,8 +68,8 @@ class EditForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Timezone('Time Zone:', 'time_zone', ['description' => t('With your time zone, the other administrators may know when they can contact you easily.'), 'value' => $oAdmin->timeZone, 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'check']));
+        $oForm->addElement(new Timezone('Time Zone:', 'time_zone', ['description' => t('With your time zone, the other administrators may know when they can contact you easily.'), 'value' => $oAdmin->timeZone, 'required' => 1]));
+        $oForm->addElement(new Button(t('Save'), 'submit', ['icon' => 'check']));
         $oForm->render();
     }
 

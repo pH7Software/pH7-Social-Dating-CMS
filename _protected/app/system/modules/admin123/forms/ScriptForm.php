@@ -8,6 +8,10 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\Textarea;
+use PFBC\Element\Token;
 use PH7\Framework\Mvc\Model\Design;
 use PH7\Framework\Url\Header;
 
@@ -25,10 +29,10 @@ class ScriptForm
 
         $oForm = new \PFBC\Form('form_script');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_script', 'form_script'));
-        $oForm->addElement(new \PFBC\Element\Token('script'));
+        $oForm->addElement(new Hidden('submit_script', 'form_script'));
+        $oForm->addElement(new Token('script'));
         $oForm->addElement(
-            new \PFBC\Element\Textarea(
+            new Textarea(
                 t('Your custom JavaScript code'),
                 'code',
                 [
@@ -38,7 +42,7 @@ class ScriptForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Button(t('Save Changes'), 'submit', ['icon' => 'check']));
+        $oForm->addElement(new Button(t('Save Changes'), 'submit', ['icon' => 'check']));
         $oForm->render();
     }
 }

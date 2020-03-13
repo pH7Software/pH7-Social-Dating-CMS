@@ -10,7 +10,24 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Checkbox;
+use PFBC\Element\CKEditor;
+use PFBC\Element\Country;
+use PFBC\Element\Date;
+use PFBC\Element\Email;
+use PFBC\Element\File;
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Password;
+use PFBC\Element\Radio;
+use PFBC\Element\Textbox;
+use PFBC\Element\Token;
+use PFBC\Validation\BirthDate;
 use PFBC\Validation\CEmail;
+use PFBC\Validation\Name;
+use PFBC\Validation\Str;
+use PFBC\Validation\Username;
 use PH7\Framework\Geo\Ip\Geo;
 use PH7\Framework\Url\Header;
 
@@ -28,15 +45,15 @@ class AddUserForm
 
         $oForm = new \PFBC\Form('form_add_user');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_add_user', 'form_add_user'));
-        $oForm->addElement(new \PFBC\Element\Token('add_user'));
-        $oForm->addElement(new \PFBC\Element\Username(t('Nickname:'), 'username', ['required' => 1, 'validation' => new \PFBC\Validation\Username]));
-        $oForm->addElement(new \PFBC\Element\Email(t('Login Email:'), 'mail', ['required' => 1, 'validation' => new CEmail(CEmail::GUEST_MODE)]));
-        $oForm->addElement(new \PFBC\Element\Password(t('Password:'), 'password', ['required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('First Name:'), 'first_name', ['required' => 1, 'validation' => new \PFBC\Validation\Name]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Last Name:'), 'last_name', ['required' => 1, 'validation' => new \PFBC\Validation\Name]));
+        $oForm->addElement(new Hidden('submit_add_user', 'form_add_user'));
+        $oForm->addElement(new Token('add_user'));
+        $oForm->addElement(new \PFBC\Element\Username(t('Nickname:'), 'username', ['required' => 1, 'validation' => new Username]));
+        $oForm->addElement(new Email(t('Login Email:'), 'mail', ['required' => 1, 'validation' => new CEmail(CEmail::GUEST_MODE)]));
+        $oForm->addElement(new Password(t('Password:'), 'password', ['required' => 1]));
+        $oForm->addElement(new Textbox(t('First Name:'), 'first_name', ['required' => 1, 'validation' => new Name]));
+        $oForm->addElement(new Textbox(t('Last Name:'), 'last_name', ['required' => 1, 'validation' => new Name]));
         $oForm->addElement(
-            new \PFBC\Element\Radio(
+            new Radio(
                 t('Gender:'),
                 'sex',
                 [
@@ -48,7 +65,7 @@ class AddUserForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Checkbox(
+            new Checkbox(
                 t('Looking for:'),
                 'match_sex',
                 [
@@ -59,16 +76,16 @@ class AddUserForm
                 ['value' => GenderTypeUserCore::MALE, 'required' => 1]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', ['title' => t('Please specify the date of birth using the calendar.'), 'validation' => new \PFBC\Validation\BirthDate, 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country', ['id' => 'str_country', 'value' => Geo::getCountryCode(), 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', ['id' => 'str_city', 'validation' => new \PFBC\Validation\Str(2, 150), 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('State/Province:'), 'state', ['id' => 'str_state', 'validation' => new \PFBC\Validation\Str(2, 150)]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Postal Code:'), 'zip_code', ['id' => 'str_zip_code', 'validation' => new \PFBC\Validation\Str(2, 15)]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Punchline/Headline:'), 'punchline', ['validation' => new \PFBC\Validation\Str(5, 150)]));
-        $oForm->addElement(new \PFBC\Element\CKEditor(t('Description:'), 'description', ['validation' => new \PFBC\Validation\Str(10, 2000), 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\File(t('Profile Photo:'), 'avatar', ['accept' => 'image/*']));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
-        $oForm->addElement(new \PFBC\Element\Button);
+        $oForm->addElement(new Date(t('Date of birth:'), 'birth_date', ['title' => t('Please specify the date of birth using the calendar.'), 'validation' => new BirthDate, 'required' => 1]));
+        $oForm->addElement(new Country(t('Country:'), 'country', ['id' => 'str_country', 'value' => Geo::getCountryCode(), 'required' => 1]));
+        $oForm->addElement(new Textbox(t('City:'), 'city', ['id' => 'str_city', 'validation' => new Str(2, 150), 'required' => 1]));
+        $oForm->addElement(new Textbox(t('State/Province:'), 'state', ['id' => 'str_state', 'validation' => new Str(2, 150)]));
+        $oForm->addElement(new Textbox(t('Postal Code:'), 'zip_code', ['id' => 'str_zip_code', 'validation' => new Str(2, 15)]));
+        $oForm->addElement(new Textbox(t('Punchline/Headline:'), 'punchline', ['validation' => new Str(5, 150)]));
+        $oForm->addElement(new CKEditor(t('Description:'), 'description', ['validation' => new Str(10, 2000), 'required' => 1]));
+        $oForm->addElement(new File(t('Profile Photo:'), 'avatar', ['accept' => 'image/*']));
+        $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
+        $oForm->addElement(new Button);
         $oForm->render();
     }
 }

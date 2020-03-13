@@ -12,6 +12,14 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PFBC\Element\Button;
+use PFBC\Element\Currency;
+use PFBC\Element\Email;
+use PFBC\Element\Hidden;
+use PFBC\Element\Number;
+use PFBC\Element\Select;
+use PFBC\Element\Textbox;
+use PFBC\Element\Token;
 use PH7\Framework\File\Various as FileHelper;
 use PH7\Framework\Layout\Gzip\Gzip;
 use PH7\Framework\Registry\Registry;
@@ -53,8 +61,8 @@ class ConfigFileCoreForm
 
         $oForm = new \PFBC\Form('form_config');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_config', 'form_config'));
-        $oForm->addElement(new \PFBC\Element\Token('config'));
+        $oForm->addElement(new Hidden('submit_config', 'form_config'));
+        $oForm->addElement(new Token('config'));
 
         $aData = parse_ini_file($sIniFile, true);
         foreach ($aData[$sConfigVar] as $sKey => $sVal) {
@@ -62,22 +70,22 @@ class ConfigFileCoreForm
             $sFieldName = 'config[' . $sKey . ']';
 
             if (false !== strpos($sKey, 'enable')) {
-                $oForm->addElement(new \PFBC\Element\Select($sLabel, $sFieldName, [1 => t('Enable'), 0 => t('Disable')], ['value' => $sVal]));
+                $oForm->addElement(new Select($sLabel, $sFieldName, [1 => t('Enable'), 0 => t('Disable')], ['value' => $sVal]));
             } elseif (false !== strpos($sKey, 'email')) {
-                $oForm->addElement(new \PFBC\Element\Email($sLabel, $sFieldName, ['value' => $sVal]));
+                $oForm->addElement(new Email($sLabel, $sFieldName, ['value' => $sVal]));
             } elseif (false !== strpos($sKey, 'environment')) {
-                $oForm->addElement(new \PFBC\Element\Select($sLabel, $sFieldName, ['production' => t('Production'), 'development' => t('Development')], ['description' => t('If you see "Internal Server Error" message on your site, please set to "development" mode in order to see the details of the error. If your site is on production (and visible by everyone) please set it to the production mode for security reasons.'), 'value' => $sVal]));
+                $oForm->addElement(new Select($sLabel, $sFieldName, ['production' => t('Production'), 'development' => t('Development')], ['description' => t('If you see "Internal Server Error" message on your site, please set to "development" mode in order to see the details of the error. If your site is on production (and visible by everyone) please set it to the production mode for security reasons.'), 'value' => $sVal]));
             } elseif (false !== strpos($sKey, 'currency_code')) {
-                $oForm->addElement(new \PFBC\Element\Currency($sLabel, $sFieldName, ['value' => $sVal]));
+                $oForm->addElement(new Currency($sLabel, $sFieldName, ['value' => $sVal]));
             } elseif (is_numeric($sVal)) {
-                $oForm->addElement(new \PFBC\Element\Number($sLabel, $sFieldName, ['step' => 'any', 'value' => $sVal]));
+                $oForm->addElement(new Number($sLabel, $sFieldName, ['step' => 'any', 'value' => $sVal]));
             } else {
-                $oForm->addElement(new \PFBC\Element\Textbox($sLabel, $sFieldName, ['value' => $sVal]));
+                $oForm->addElement(new Textbox($sLabel, $sFieldName, ['value' => $sVal]));
             }
         }
         unset($aData);
 
-        $oForm->addElement(new \PFBC\Element\Button);
+        $oForm->addElement(new Button);
         $oForm->render();
     }
 

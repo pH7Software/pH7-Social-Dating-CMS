@@ -8,6 +8,8 @@
 
 namespace PH7;
 
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Url;
 use PH7\Framework\Mvc\Request\Http;
 
 class ShareUrlCoreForm
@@ -27,7 +29,7 @@ class ShareUrlCoreForm
         $oForm = new \PFBC\Form('form_share_url', $iWidth);
         $oForm->configure(['action' => '', 'class' => 'center']);
         $oForm->addElement(
-            new \PFBC\Element\Url(
+            new Url(
                 $sLabel,
                 'share',
                 [
@@ -37,7 +39,7 @@ class ShareUrlCoreForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<br />'));
+        $oForm->addElement(new HTMLExternal('<br />'));
         $oForm->render();
     }
 }

@@ -10,6 +10,7 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Mvc\Model\Engine\Db;
 
@@ -51,25 +52,25 @@ class BirthdayCoreModel
             $sSqlOrder . $sSqlLimit;
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
-        $rStmt->bindValue(':date', '%' . (new CDateTime)->get()->date('-m-d'), \PDO::PARAM_STR);
+        $rStmt->bindValue(':date', '%' . (new CDateTime)->get()->date('-m-d'), PDO::PARAM_STR);
 
-        $rStmt->bindValue(':ghostUsername', PH7_GHOST_USERNAME, \PDO::PARAM_STR);
-        $rStmt->bindValue(':visitorGroup', UserCoreModel::VISITOR_GROUP, \PDO::PARAM_INT);
-        $rStmt->bindValue(':pendingGroup', UserCoreModel::PENDING_GROUP, \PDO::PARAM_INT);
+        $rStmt->bindValue(':ghostUsername', PH7_GHOST_USERNAME, PDO::PARAM_STR);
+        $rStmt->bindValue(':visitorGroup', UserCoreModel::VISITOR_GROUP, PDO::PARAM_INT);
+        $rStmt->bindValue(':pendingGroup', UserCoreModel::PENDING_GROUP, PDO::PARAM_INT);
 
         if ($bIsSex) {
-            $rStmt->bindValue(':sex', $sGender, \PDO::PARAM_STR);
+            $rStmt->bindValue(':sex', $sGender, PDO::PARAM_STR);
         }
 
         if (!$bCount && $bIsLimit) {
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
         if (!$bCount) {
-            $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = $rStmt->fetchAll(PDO::FETCH_OBJ);
         } else {
             $mData = (int)$rStmt->fetchColumn();
         }

@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 
@@ -35,7 +36,7 @@ class TwoFactorAuthCoreModel extends Framework\Mvc\Model\Engine\Model
     {
         $sSql = 'SELECT isTwoFactorAuth FROM' . Db::prefix($this->sTable) . 'WHERE profileId = :profileId AND isTwoFactorAuth = \'1\' LIMIT 1';
         $rStmt = Db::getInstance()->prepare($sSql);
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
         $rStmt->execute();
 
         return $rStmt->fetchColumn() == 1;

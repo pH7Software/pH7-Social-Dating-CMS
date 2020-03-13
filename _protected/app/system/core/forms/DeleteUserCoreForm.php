@@ -10,6 +10,15 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PFBC\Element\Button;
+use PFBC\Element\CCaptcha;
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Password;
+use PFBC\Element\Radio;
+use PFBC\Element\Textarea;
+use PFBC\Element\Token;
+use PFBC\Validation\Str;
 use PH7\Framework\Url\Header;
 
 /** For "user" and "affiliate" module **/
@@ -27,13 +36,13 @@ class DeleteUserCoreForm
 
         $oForm = new \PFBC\Form('form_delete_account');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_delete_account', 'form_delete_account'));
-        $oForm->addElement(new \PFBC\Element\Token('delete_account'));
-        $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', ['required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Your Reason:'), 'message', ['id' => 'str_reason', 'onblur' => 'CValid(this.value, this.id,5,500)', 'description' => t('Please be specific why you want to leave us.') . '<br />' . t('It will hep us to improve our service and make it the best one for you!'), 'required' => 1, 'validation' => new \PFBC\Validation\Str(5, 500)]));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_reason"></span>'));
+        $oForm->addElement(new Hidden('submit_delete_account', 'form_delete_account'));
+        $oForm->addElement(new Token('delete_account'));
+        $oForm->addElement(new Password(t('Your Password:'), 'password', ['required' => 1]));
+        $oForm->addElement(new Textarea(t('Your Reason:'), 'message', ['id' => 'str_reason', 'onblur' => 'CValid(this.value, this.id,5,500)', 'description' => t('Please be specific why you want to leave us.') . '<br />' . t('It will hep us to improve our service and make it the best one for you!'), 'required' => 1, 'validation' => new Str(5, 500)]));
+        $oForm->addElement(new HTMLExternal('<span class="input_error str_reason"></span>'));
         $oForm->addElement(
-            new \PFBC\Element\Radio(
+            new Radio(
                 t('Why:'),
                 'why_delete',
                 [
@@ -45,10 +54,10 @@ class DeleteUserCoreForm
                 ['required' => 1]
             )
         );
-        $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha'), 'captcha', ['id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:')]));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
-        $oForm->addElement(new \PFBC\Element\Button);
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
+        $oForm->addElement(new CCaptcha(t('Captcha'), 'captcha', ['id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:')]));
+        $oForm->addElement(new HTMLExternal('<span class="input_error ccaptcha"></span>'));
+        $oForm->addElement(new Button);
+        $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
     }
 }

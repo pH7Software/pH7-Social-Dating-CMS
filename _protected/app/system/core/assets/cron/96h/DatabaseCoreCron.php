@@ -14,6 +14,7 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PDO;
 use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Model\DbConfig;
@@ -212,7 +213,7 @@ class DatabaseCoreCron extends Cron
         }
 
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix($sTable) . 'WHERE (' . $sDateColumn . ' < NOW() - INTERVAL :dayNumber DAY)');
-        $rStmt->bindValue(':dayNumber', $iOlderThanXDay, \PDO::PARAM_INT);
+        $rStmt->bindValue(':dayNumber', $iOlderThanXDay, PDO::PARAM_INT);
         $rStmt->execute();
 
         return $rStmt->rowCount();

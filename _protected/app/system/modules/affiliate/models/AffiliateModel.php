@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Security\Security;
 
@@ -26,19 +27,19 @@ class AffiliateModel extends AffiliateCoreModel
             '(email, username, password, firstName, lastName, sex, birthDate, active, ip, hashValidation, joinDate, lastActivity, affiliatedId)
             VALUES (:email, :username, :password, :firstName, :lastName, :sex, :birthDate, :active, :ip, :hashValidation, :joinDate, :lastActivity, :affiliatedId)');
 
-        $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':username', $aData['username'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':password', Security::hashPwd($aData['password']), \PDO::PARAM_STR);
-        $rStmt->bindValue(':firstName', $aData['first_name'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':lastName', $aData['last_name'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':birthDate', $aData['birth_date'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':active', $aData['is_active'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
-        $rStmt->bindParam(':hashValidation', $aData['hash_validation'], \PDO::PARAM_STR, self::HASH_VALIDATION_LENGTH);
-        $rStmt->bindValue(':joinDate', $aData['current_date'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':lastActivity', $aData['current_date'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':affiliatedId', $aData['affiliated_id'], \PDO::PARAM_INT);
+        $rStmt->bindValue(':email', $aData['email'], PDO::PARAM_STR);
+        $rStmt->bindValue(':username', $aData['username'], PDO::PARAM_STR);
+        $rStmt->bindValue(':password', Security::hashPwd($aData['password']), PDO::PARAM_STR);
+        $rStmt->bindValue(':firstName', $aData['first_name'], PDO::PARAM_STR);
+        $rStmt->bindValue(':lastName', $aData['last_name'], PDO::PARAM_STR);
+        $rStmt->bindValue(':sex', $aData['sex'], PDO::PARAM_STR);
+        $rStmt->bindValue(':birthDate', $aData['birth_date'], PDO::PARAM_STR);
+        $rStmt->bindValue(':active', $aData['is_active'], PDO::PARAM_INT);
+        $rStmt->bindValue(':ip', $aData['ip'], PDO::PARAM_STR);
+        $rStmt->bindParam(':hashValidation', $aData['hash_validation'], PDO::PARAM_STR, self::HASH_VALIDATION_LENGTH);
+        $rStmt->bindValue(':joinDate', $aData['current_date'], PDO::PARAM_STR);
+        $rStmt->bindValue(':lastActivity', $aData['current_date'], PDO::PARAM_STR);
+        $rStmt->bindValue(':affiliatedId', $aData['affiliated_id'], PDO::PARAM_INT);
         $rStmt->execute();
         $this->setKeyId(Db::getInstance()->lastInsertId()); // Set the affiliate's ID
         Db::free($rStmt);
@@ -58,11 +59,11 @@ class AffiliateModel extends AffiliateCoreModel
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::AFFILIATE_INFO) .
             '(profileId, country, city, state, zipCode) VALUES (:profileId, :country, :city, :state, :zipCode)');
 
-        $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
-        $rStmt->bindParam(':country', $aData['country'], \PDO::PARAM_STR, 2);
-        $rStmt->bindValue(':city', $aData['city'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':state', $aData['state'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':zipCode', $aData['zip_code'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':profileId', $this->getKeyId(), PDO::PARAM_INT);
+        $rStmt->bindParam(':country', $aData['country'], PDO::PARAM_STR, 2);
+        $rStmt->bindValue(':city', $aData['city'], PDO::PARAM_STR);
+        $rStmt->bindValue(':state', $aData['state'], PDO::PARAM_STR);
+        $rStmt->bindValue(':zipCode', $aData['zip_code'], PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -77,7 +78,7 @@ class AffiliateModel extends AffiliateCoreModel
     public function addRefer($iProfileId)
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::AFFILIATE) . 'SET refer = refer+1 WHERE profileId = :profileId');
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
         Db::free($rStmt);
 
         return $rStmt->execute();
@@ -116,20 +117,20 @@ class AffiliateModel extends AffiliateCoreModel
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::AFFILIATE) . 'AS a LEFT JOIN' . Db::prefix(DbTableName::AFFILIATE_INFO) . 'AS i ON a.profileId = i.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         if ($bDigitSearch) {
-            $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
+            $rStmt->bindValue(':looking', $mLooking, PDO::PARAM_INT);
         } else {
-            $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+            $rStmt->bindValue(':looking', '%' . $mLooking . '%', PDO::PARAM_STR);
         }
 
         if (!$bCount) {
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
         if (!$bCount) {
-            $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = $rStmt->fetchAll(PDO::FETCH_OBJ);
         } else {
             $mData = (int)$rStmt->fetchColumn();
         }
@@ -148,9 +149,9 @@ class AffiliateModel extends AffiliateCoreModel
     public function getAmount($iProfileId)
     {
         $rStmt = Db::getInstance()->prepare('SELECT amount FROM' . Db::prefix(DbTableName::AFFILIATE) . ' WHERE profileId = :profileId LIMIT 1');
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
         $rStmt->execute();
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        $oRow = $rStmt->fetch(PDO::FETCH_OBJ);
         Db::free($rStmt);
 
         return $oRow->amount;

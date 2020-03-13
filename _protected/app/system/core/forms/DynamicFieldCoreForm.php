@@ -10,6 +10,17 @@
 
 namespace PH7;
 
+use PFBC\Element\Country;
+use PFBC\Element\Height;
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Phone;
+use PFBC\Element\Textarea;
+use PFBC\Element\Textbox;
+use PFBC\Element\Url;
+use PFBC\Element\Weight;
+use PFBC\Validation\Name;
+use PFBC\Validation\Str;
+
 defined('PH7') or exit('Restricted access');
 
 class DynamicFieldCoreForm
@@ -45,13 +56,13 @@ class DynamicFieldCoreForm
         switch ($this->sColumn) {
             case 'description':
                 $this->oForm->addElement(
-                    new \PFBC\Element\Textarea(
+                    new Textarea(
                         t('Description:'),
                         $this->sColumn,
                         [
                             'id' => $this->getFieldId('str'),
                             'onblur' => 'CValid(this.value,this.id,20,4000)',
-                            'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(20, 4000),
+                            'value' => $this->sVal, 'validation' => new Str(20, 4000),
                             'required' => 1
                         ]
                     )
@@ -61,14 +72,14 @@ class DynamicFieldCoreForm
 
             case 'punchline':
                 $this->oForm->addElement(
-                    new \PFBC\Element\Textbox(
+                    new Textbox(
                         t('Punchline/Headline:'),
                         'punchline',
                         [
                             'id' => $this->getFieldId('str'),
                             'onblur' => 'CValid(this.value,this.id,5,150)',
                             'value' => $this->sVal,
-                            'validation' => new \PFBC\Validation\Str(5, 150)
+                            'validation' => new Str(5, 150)
                         ]
                     )
                 );
@@ -77,7 +88,7 @@ class DynamicFieldCoreForm
 
             case 'country':
                 $this->oForm->addElement(
-                    new \PFBC\Element\Country(
+                    new Country(
                         t('Country:'),
                         $this->sColumn,
                         [
@@ -91,13 +102,13 @@ class DynamicFieldCoreForm
 
             case 'city':
                 $this->oForm->addElement(
-                    new \PFBC\Element\Textbox(
+                    new Textbox(
                         t('City:'),
                         $this->sColumn,
                         [
                             'id' => $this->getFieldId('str'),
                             'onblur' => 'CValid(this.value,this.id,2,150)',
-                            'value' => $this->sVal, 'validation' => new \PFBC\Validation\Str(2, 150),
+                            'value' => $this->sVal, 'validation' => new Str(2, 150),
                             'required' => 1
                         ]
                     )
@@ -107,14 +118,14 @@ class DynamicFieldCoreForm
 
             case 'state':
                 $this->oForm->addElement(
-                    new \PFBC\Element\Textbox(
+                    new Textbox(
                         t('State/Province:'),
                         $this->sColumn,
                         [
                             'id' => $this->getFieldId('str'),
                             'onblur' => 'CValid(this.value,this.id,2,150)',
                             'value' => $this->sVal,
-                            'validation' => new \PFBC\Validation\Str(2, 150)
+                            'validation' => new Str(2, 150)
                         ]
                     )
                 );
@@ -123,14 +134,14 @@ class DynamicFieldCoreForm
 
             case 'zipCode':
                 $this->oForm->addElement(
-                    new \PFBC\Element\Textbox(
+                    new Textbox(
                         t('Postal Code:'),
                         $this->sColumn,
                         [
                             'id' => $this->getFieldId('str'),
                             'onblur' => 'CValid(this.value,this.id,2,15)',
                             'value' => $this->sVal,
-                            'validation' => new \PFBC\Validation\Str(2, 15)
+                            'validation' => new Str(2, 15)
                         ]
                     )
                 );
@@ -139,14 +150,14 @@ class DynamicFieldCoreForm
 
             case 'middleName':
                 $this->oForm->addElement(
-                    new \PFBC\Element\Textbox(
+                    new Textbox(
                         t('Middle Name:'),
                         $this->sColumn,
                         [
                             'id' => $this->getFieldId('name'),
                             'onblur' => 'CValid(this.value,this.id)',
                             'value' => $this->sVal,
-                            'validation' => new \PFBC\Validation\Name
+                            'validation' => new Name
                         ]
                     )
                 );
@@ -155,7 +166,7 @@ class DynamicFieldCoreForm
 
             case 'height':
                 $this->oForm->addElement(
-                    new \PFBC\Element\Height(
+                    new Height(
                         t('Height:'),
                         $this->sColumn,
                         [
@@ -167,7 +178,7 @@ class DynamicFieldCoreForm
 
             case 'weight':
                 $this->oForm->addElement(
-                    new \PFBC\Element\Weight(
+                    new Weight(
                         t('Weight:'),
                         $this->sColumn,
                         [
@@ -182,7 +193,7 @@ class DynamicFieldCoreForm
                 $sLabel = $this->sColumn === 'socialNetworkSite' ? t('Social Media Profile:') : t('Website:');
                 $sDesc = $this->sColumn === 'socialNetworkSite' ? t('The URL of your social profile, such as Facebook, Instagram, Snapchat, LinkedIn, ...') : t('Your Personal Website/Blog (any promotional/affiliated contents will be removed)');
                 $this->oForm->addElement(
-                    new \PFBC\Element\Url(
+                    new Url(
                         $sLabel,
                         $this->sColumn, [
                             'id' => $this->getFieldId('url'),
@@ -197,7 +208,7 @@ class DynamicFieldCoreForm
 
             case 'phone':
                 $this->oForm->addElement(
-                    new \PFBC\Element\Phone(
+                    new Phone(
                         t('Phone Number:'),
                         $this->sColumn,
                         [
@@ -238,7 +249,7 @@ class DynamicFieldCoreForm
     protected function addCheckErrSpan($sType)
     {
         $this->oForm->addElement(
-            new \PFBC\Element\HTMLExternal(
+            new HTMLExternal(
                 '<span class="input_error ' . $this->getFieldId($sType) . '"></span>'
             )
         );

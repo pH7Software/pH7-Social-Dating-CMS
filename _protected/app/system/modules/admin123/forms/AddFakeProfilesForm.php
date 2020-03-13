@@ -10,6 +10,10 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\Select;
+use PFBC\Element\Token;
 use PH7\Framework\Url\Header;
 
 class AddFakeProfilesForm
@@ -34,10 +38,10 @@ class AddFakeProfilesForm
 
         $oForm = new \PFBC\Form('form_add_fake_profiles');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_add_fake_profiles', 'form_add_fake_profiles'));
-        $oForm->addElement(new \PFBC\Element\Token('fake_profiles'));
+        $oForm->addElement(new Hidden('submit_add_fake_profiles', 'form_add_fake_profiles'));
+        $oForm->addElement(new Token('fake_profiles'));
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Number of Profile:'),
                 'num',
                 self::RANGE_AMOUNT_PROFILE,
@@ -48,7 +52,7 @@ class AddFakeProfilesForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Gender:'),
                 'sex',
                 [
@@ -62,7 +66,7 @@ class AddFakeProfilesForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Nationality:'),
                 'nat',
                 self::getNationalities(),
@@ -72,7 +76,7 @@ class AddFakeProfilesForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Button(
+            new Button(
                 t('Add Fake Profiles'),
                 'submit',
                 ['icon' => 'plus']

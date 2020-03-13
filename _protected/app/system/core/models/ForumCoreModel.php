@@ -8,8 +8,10 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Model;
+use stdClass;
 
 class ForumCoreModel extends Model
 {
@@ -24,7 +26,7 @@ class ForumCoreModel extends Model
      * @param int|null $iLimit
      * @param string $sOrder
      *
-     * @return array|\stdClass|false
+     * @return array|stdClass|false
      */
     public function getForum($iForumId = null, $iOffset = null, $iLimit = null, $sOrder = self::NAME)
     {
@@ -40,24 +42,24 @@ class ForumCoreModel extends Model
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::FORUM) . $sSqlForumId . 'ORDER BY ' . $sOrder . $sSqlLimit);
 
         if ($bIsForumId) {
-            $rStmt->bindParam(':forumId', $iForumId, \PDO::PARAM_INT);
+            $rStmt->bindParam(':forumId', $iForumId, PDO::PARAM_INT);
         }
 
         if ($bIsLimit) {
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
         }
 
         if ($bIsLimit) {
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
         if ($bIsForumId) {
-            return $rStmt->fetch(\PDO::FETCH_OBJ);
+            return $rStmt->fetch(PDO::FETCH_OBJ);
         }
 
-        return $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        return $rStmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     /**
@@ -69,7 +71,7 @@ class ForumCoreModel extends Model
      * @param int $iLimit
      * @param string $sSort
      *
-     * @return array|\stdClass|false
+     * @return array|stdClass|false
      */
     public function getMessage($iTopicId, $iMessageId = null, $iProfileId = null, $sApproved, $iOffset, $iLimit, $sSort = Db::ASC)
     {
@@ -86,25 +88,25 @@ class ForumCoreModel extends Model
             'AS msg ON t.topicId = msg.topicId LEFT JOIN' . Db::prefix(DbTableName::MEMBER) . 'AS m ON msg.profileId = m.profileId WHERE msg.topicId = :topicId ' .
             $sSqlMessageId . $sSqlProfileId . ' AND msg.approved = :approved ORDER BY msg.createdDate ' . $sSort . ' LIMIT :offset, :limit');
 
-        $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':topicId', $iTopicId, PDO::PARAM_INT);
 
         if ($bIsMessageId) {
-            $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':messageId', $iMessageId, PDO::PARAM_INT);
         }
 
         if ($bIsProfileId) {
-            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
         }
 
-        $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
-        $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-        $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+        $rStmt->bindValue(':approved', $sApproved, PDO::PARAM_STR);
+        $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+        $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         $rStmt->execute();
 
         if ($bIsProfileId) {
-            return $rStmt->fetch(\PDO::FETCH_OBJ);
+            return $rStmt->fetch(PDO::FETCH_OBJ);
         }
 
-        return $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        return $rStmt->fetchAll(PDO::FETCH_OBJ);
     }
 }

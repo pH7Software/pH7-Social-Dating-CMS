@@ -8,6 +8,11 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Checkbox;
+use PFBC\Element\Hidden;
+use PFBC\Element\Select;
+use PFBC\Element\Textbox;
 use PH7\Framework\Mvc\Router\Uri;
 
 class SearchUserForm
@@ -23,10 +28,10 @@ class SearchUserForm
 
         $oForm = new \PFBC\Form('form_user_search');
         $oForm->configure(['action' => Uri::get(PH7_ADMIN_MOD, 'user', 'result') . PH7_SH, 'method' => 'get']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_user_search', 'form_user_search'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Search for:'), 'what'));
+        $oForm->addElement(new Hidden('submit_user_search', 'form_user_search'));
+        $oForm->addElement(new Textbox(t('Search for:'), 'what'));
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Where:'),
                 'where',
                 [
@@ -41,12 +46,12 @@ class SearchUserForm
             )
         );
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Membership Group:'), 'group_id', $aGroupName, ['value' => 2]));
+        $oForm->addElement(new Select(t('Membership Group:'), 'group_id', $aGroupName, ['value' => 2]));
         unset($aGroupName);
 
-        $oForm->addElement(new \PFBC\Element\Checkbox('', 'ban', ['1' => '<span class="bold">' . t('Only banned user') . '</span>']));
+        $oForm->addElement(new Checkbox('', 'ban', ['1' => '<span class="bold">' . t('Only banned user') . '</span>']));
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Browse By:'),
                 'order',
                 [
@@ -64,7 +69,7 @@ class SearchUserForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Direction:'),
                 'sort',
                 [
@@ -73,7 +78,7 @@ class SearchUserForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', ['icon' => 'search']));
+        $oForm->addElement(new Button(t('Search'), 'submit', ['icon' => 'search']));
         $oForm->render();
     }
 }

@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Ads as AdsModel;
 use PH7\Framework\Mvc\Model\Engine\Db;
 
@@ -36,12 +37,12 @@ class AdsCoreModel extends AdsModel
         $sSqlActive = !empty($mActive) ? 'WHERE active= :active' : '';
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sTable) . $sSqlActive . ' ORDER BY active ASC LIMIT :offset, :limit');
         if (!empty($mActive)) {
-            $rStmt->bindValue(':active', $mActive, \PDO::PARAM_STR);
+            $rStmt->bindValue(':active', $mActive, PDO::PARAM_STR);
         }
-        $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-        $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+        $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+        $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         $rStmt->execute();
-        $aRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        $aRow = $rStmt->fetchAll(PDO::FETCH_OBJ);
         Db::free($rStmt);
 
         return $aRow;
@@ -61,10 +62,10 @@ class AdsCoreModel extends AdsModel
         AdsCore::checkTable($sTable);
 
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix($sTable) . '(name, code, width, height) VALUES(:name, :code, :width, :height)');
-        $rStmt->bindValue(':name', $sName, \PDO::PARAM_STR);
-        $rStmt->bindValue(':code', $sCode, \PDO::PARAM_STR);
-        $rStmt->bindValue(':width', $iWidth, \PDO::PARAM_INT);
-        $rStmt->bindValue(':height', $iHeight, \PDO::PARAM_INT);
+        $rStmt->bindValue(':name', $sName, PDO::PARAM_STR);
+        $rStmt->bindValue(':code', $sCode, PDO::PARAM_STR);
+        $rStmt->bindValue(':width', $iWidth, PDO::PARAM_INT);
+        $rStmt->bindValue(':height', $iHeight, PDO::PARAM_INT);
 
         return $rStmt->execute();
     }
@@ -81,8 +82,8 @@ class AdsCoreModel extends AdsModel
         AdsCore::checkTable($sTable);
 
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET active = :status WHERE adsId = :adsId');
-        $rStmt->bindValue(':adsId', $iId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':status', $sStatus, \PDO::PARAM_STR);
+        $rStmt->bindValue(':adsId', $iId, PDO::PARAM_INT);
+        $rStmt->bindValue(':status', $sStatus, PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -98,7 +99,7 @@ class AdsCoreModel extends AdsModel
         AdsCore::checkTable($sTable);
 
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix($sTable) . 'WHERE adsId = :adsId');
-        $rStmt->bindValue(':adsId', $iId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':adsId', $iId, PDO::PARAM_INT);
 
         return $rStmt->execute();
     }
@@ -116,9 +117,9 @@ class AdsCoreModel extends AdsModel
         AdsCore::checkTable($sTable);
 
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET name = :name, code = :code WHERE adsId = :adsId');
-        $rStmt->bindValue(':adsId', $iId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':name', $sName, \PDO::PARAM_STR);
-        $rStmt->bindValue(':code', $sCode, \PDO::PARAM_STR);
+        $rStmt->bindValue(':adsId', $iId, PDO::PARAM_INT);
+        $rStmt->bindValue(':name', $sName, PDO::PARAM_STR);
+        $rStmt->bindValue(':code', $sCode, PDO::PARAM_STR);
 
         return $rStmt->execute();
     }

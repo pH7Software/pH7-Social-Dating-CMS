@@ -10,6 +10,10 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\Textarea;
+use PFBC\Element\Token;
 use PH7\Framework\Url\Header;
 use RuntimeException;
 
@@ -33,10 +37,10 @@ class PublicFileForm
 
             $oForm = new \PFBC\Form('form_file');
             $oForm->configure(['action' => '']);
-            $oForm->addElement(new \PFBC\Element\Hidden('submit_file', 'form_file'));
-            $oForm->addElement(new \PFBC\Element\Token('file'));
+            $oForm->addElement(new Hidden('submit_file', 'form_file'));
+            $oForm->addElement(new Token('file'));
             $oForm->addElement(
-                new \PFBC\Element\Textarea(
+                new Textarea(
                     t('File Contents'),
                     'content',
                     [
@@ -46,7 +50,7 @@ class PublicFileForm
                     ]
                 )
             );
-            $oForm->addElement(new \PFBC\Element\Button(t('Save')));
+            $oForm->addElement(new Button(t('Save')));
             $oForm->render();
         } catch (RuntimeException $oExcept) {
             self::showErrorMessage($oExcept);

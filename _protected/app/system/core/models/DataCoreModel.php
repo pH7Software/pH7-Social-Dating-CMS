@@ -8,8 +8,10 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Model;
+use stdClass;
 
 class DataCoreModel extends Model
 {
@@ -37,11 +39,11 @@ class DataCoreModel extends Model
             $sOrder . ' DESC LIMIT :offset, :limit';
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
-        $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-        $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+        $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+        $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
 
         $rStmt->execute();
-        $aData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        $aData = $rStmt->fetchAll(PDO::FETCH_OBJ);
         Db::free($rStmt);
 
         return $aData;
@@ -65,11 +67,11 @@ class DataCoreModel extends Model
             ' AS m ON t.profileId = m.profileId WHERE t.approved = 1 ORDER BY ' . $sOrder . ' DESC LIMIT :offset, :limit';
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
-        $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-        $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+        $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+        $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
 
         $rStmt->execute();
-        $aData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        $aData = $rStmt->fetchAll(PDO::FETCH_OBJ);
         Db::free($rStmt);
 
         return $aData;
@@ -108,7 +110,7 @@ class DataCoreModel extends Model
     /**
      * @param int $iTopicId
      *
-     * @return array|false|\stdClass
+     * @return array|false|stdClass
      */
     public function getForumsMessages($iTopicId)
     {

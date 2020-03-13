@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Model;
 
@@ -43,10 +44,10 @@ class BlogCoreModel extends Model
             $rStmt = Db::getInstance()->prepare(
                 'SELECT * FROM' . Db::prefix(DbTableName::BLOG) . $sOrderBy . 'LIMIT :offset, :limit'
             );
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
             $rStmt->execute();
-            $aData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $aData = $rStmt->fetchAll(PDO::FETCH_OBJ);
             Db::free($rStmt);
             $this->cache->put($aData);
         }

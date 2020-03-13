@@ -8,6 +8,12 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Email;
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Token;
+use PFBC\Validation\BankAccount;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Session\Session;
@@ -29,23 +35,23 @@ class BankForm
 
         $oForm = new \PFBC\Form('form_bank_account');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_bank_account', 'form_bank_account'));
-        $oForm->addElement(new \PFBC\Element\Token('bank_account'));
+        $oForm->addElement(new Hidden('submit_bank_account', 'form_bank_account'));
+        $oForm->addElement(new Token('bank_account'));
 
         if (self::isAdminLogged() && $oHttpRequest->getExists('profile_id')) {
             $oForm->addElement(
-                new \PFBC\Element\HTMLExternal(
+                new HTMLExternal(
                     '<p class="center"><a class="bold btn btn-default btn-md" href="' . Uri::get('affiliate', 'admin', 'browse') . '">' . t('Back to Browse Affiliates') . '</a></p>'
                 )
             );
         }
         $oForm->addElement(
-            new \PFBC\Element\HTMLExternal(
+            new HTMLExternal(
                 '<h2 class="underline">' . t('Bank Information:') . '</h2>'
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Email(
+            new Email(
                 AffiliateDesign::getPayPalIcon() . t('Your Bank Account:'),
                 'bank_account',
                 [
@@ -53,14 +59,14 @@ class BankForm
                     'onblur' => 'CValid(this.value,this.id)',
                     'description' => t('Your Bank Account (PayPal Email Address).'),
                     'value' => self::getAffiliateBankAccount($oHttpRequest),
-                    'validation' => new \PFBC\Validation\BankAccount,
+                    'validation' => new BankAccount,
                     'required' => 1
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\HtmlExternal('<span class="input_error email_paypal"></span>'));
-        $oForm->addElement(new \PFBC\Element\Button);
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
+        $oForm->addElement(new HtmlExternal('<span class="input_error email_paypal"></span>'));
+        $oForm->addElement(new Button);
+        $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
     }
 

@@ -8,6 +8,10 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Country;
+use PFBC\Element\Hidden;
+use PFBC\Element\Token;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
@@ -27,10 +31,10 @@ class CountryRestrictionCoreForm
 
         $oForm = new \PFBC\Form('form_country_restriction');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_country_restriction', 'form_country_restriction'));
-        $oForm->addElement(new \PFBC\Element\Token('block_country'));
+        $oForm->addElement(new Hidden('submit_country_restriction', 'form_country_restriction'));
+        $oForm->addElement(new Token('block_country'));
         $oForm->addElement(
-            new \PFBC\Element\Country(
+            new Country(
                 t('Countries to be showed on registration forms'),
                 'countries[]',
                 [
@@ -41,7 +45,7 @@ class CountryRestrictionCoreForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'check']));
+        $oForm->addElement(new Button(t('Save'), 'submit', ['icon' => 'check']));
         $oForm->render();
     }
 

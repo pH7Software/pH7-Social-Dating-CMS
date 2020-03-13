@@ -8,6 +8,13 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\Select;
+use PFBC\Element\Textarea;
+use PFBC\Element\Textbox;
+use PFBC\Element\Token;
+use PFBC\Validation\Str;
 use PH7\Framework\File\Import;
 use PH7\Framework\Url\Header;
 
@@ -27,12 +34,12 @@ class AdsForm
 
         $oForm = new \PFBC\Form('form_ads');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_ads', 'form_ads'));
-        $oForm->addElement(new \PFBC\Element\Token('ads'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Title:'), 'title', ['required' => 1, 'validation' => new \PFBC\Validation\Str(2, 40)]));
-        $oForm->addElement(new \PFBC\Element\Select(t('Size of the Banner:'), 'size', $aAdSizes, ['required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Banner:'), 'code', ['description' => self::getBannerDesc(), 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Button(t('Save')));
+        $oForm->addElement(new Hidden('submit_ads', 'form_ads'));
+        $oForm->addElement(new Token('ads'));
+        $oForm->addElement(new Textbox(t('Title:'), 'title', ['required' => 1, 'validation' => new Str(2, 40)]));
+        $oForm->addElement(new Select(t('Size of the Banner:'), 'size', $aAdSizes, ['required' => 1]));
+        $oForm->addElement(new Textarea(t('Banner:'), 'code', ['description' => self::getBannerDesc(), 'required' => 1]));
+        $oForm->addElement(new Button(t('Save')));
         $oForm->render();
     }
 

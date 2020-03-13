@@ -8,6 +8,9 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Search;
+use PFBC\Element\Select;
 use PH7\Framework\Mvc\Router\Uri;
 
 class SearchAffiliateForm
@@ -17,7 +20,7 @@ class SearchAffiliateForm
         $oForm = new \PFBC\Form('form_search');
         $oForm->configure(['action' => Uri::get('affiliate', 'admin', 'browse') . PH7_SH, 'method' => 'get']);
         $oForm->addElement(
-            new \PFBC\Element\Search(
+            new Search(
                 t('Search an Affiliate:'),
                 'looking',
                 [
@@ -26,7 +29,7 @@ class SearchAffiliateForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Browse By:'),
                 'order',
                 [
@@ -42,7 +45,7 @@ class SearchAffiliateForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Direction:'),
                 'sort',
                 [
@@ -51,7 +54,7 @@ class SearchAffiliateForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', ['icon' => 'search']));
+        $oForm->addElement(new Button(t('Search'), 'submit', ['icon' => 'search']));
         $oForm->render();
     }
 }

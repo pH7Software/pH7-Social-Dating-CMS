@@ -10,6 +10,10 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Token;
 use PH7\Framework\Mvc\Router\Uri;
 
 class ConfirmCoreForm
@@ -25,18 +29,18 @@ class ConfirmCoreForm
 
         $oForm = new \PFBC\Form('form_confirm');
         $oForm->configure(['action' => $sUrl]);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_confirm', 'form_confirm'));
-        $oForm->addElement(new \PFBC\Element\Token(substr($sUrl, -14, -6))); // Create a name token and generate a random token
-        $oForm->addElement(new \PFBC\Element\Hidden('id', $aParam['id']));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<h2>' . t('Are you sure you want to do this?') . '</h2>'));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="err_msg s_marg">' . t('Warning, this action is irreversible!') . '</p>'));
-        $oForm->addElement(new \PFBC\Element\Button($aParam['label'], 'submit'));
+        $oForm->addElement(new Hidden('submit_confirm', 'form_confirm'));
+        $oForm->addElement(new Token(substr($sUrl, -14, -6))); // Create a name token and generate a random token
+        $oForm->addElement(new Hidden('id', $aParam['id']));
+        $oForm->addElement(new HTMLExternal('<h2>' . t('Are you sure you want to do this?') . '</h2>'));
+        $oForm->addElement(new HTMLExternal('<p class="err_msg s_marg">' . t('Warning, this action is irreversible!') . '</p>'));
+        $oForm->addElement(new Button($aParam['label'], 'submit'));
         /**
          * Bug Ajax jQuery -> https://github.com/jquery/jquery-mobile/issues/3202
          * $oForm->addElement(new \PFBC\Element\Button($aParam['label'], 'submit', ['formaction'=>$sUrl]));
          */
         $oForm->addElement(
-            new \PFBC\Element\Button(
+            new Button(
                 t('Cancel'),
                 'cancel',
                 [

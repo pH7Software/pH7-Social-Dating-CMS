@@ -8,8 +8,10 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Model;
+use stdClass;
 
 class GameCoreModel extends Model
 {
@@ -23,7 +25,7 @@ class GameCoreModel extends Model
      * @param int $iLimit
      * @param string $sOrder
      *
-     * @return array|\stdClass
+     * @return array|stdClass
      */
     public function get($sTitle = null, $iGameId = null, $iOffset, $iLimit, $sOrder = SearchCoreModel::NAME)
     {
@@ -37,15 +39,15 @@ class GameCoreModel extends Model
         $sSqlGameId = ($bIsTitle && $bIsGameId) ? ' WHERE title LIKE :title AND gameId =:gameId ' : '';
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::GAME) . $sSqlGameId . $sOrderBy . 'LIMIT :offset, :limit');
         if ($bIsTitle) {
-            $rStmt->bindValue(':title', $sTitle . '%', \PDO::PARAM_STR);
+            $rStmt->bindValue(':title', $sTitle . '%', PDO::PARAM_STR);
         }
         if ($bIsGameId) {
-            $rStmt->bindValue(':gameId', $iGameId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':gameId', $iGameId, PDO::PARAM_INT);
         }
-        $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-        $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+        $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+        $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         $rStmt->execute();
-        $mData = $bIsGameId ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        $mData = $bIsGameId ? $rStmt->fetch(PDO::FETCH_OBJ) : $rStmt->fetchAll(PDO::FETCH_OBJ);
         Db::free($rStmt);
 
         return $mData;

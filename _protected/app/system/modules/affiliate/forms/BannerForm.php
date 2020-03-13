@@ -8,6 +8,9 @@
 
 namespace PH7;
 
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Textarea;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Parse\SysVar;
 
@@ -36,16 +39,16 @@ class BannerForm
         $oSysVar = new SysVar;
         foreach ($oAds as $oRow) {
             // Begin ads div tags
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<div id="ad_' . $oRow->adsId . '">'));
+            $oForm->addElement(new HTMLExternal('<div id="ad_' . $oRow->adsId . '">'));
 
-            $oForm->addElement(new \PFBC\Element\Hidden('id_ads', $oRow->adsId));
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<h2>' . $oRow->name . '</h2>'));
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p>' . t('Preview Banner:') . '</p>'));
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<div>' . $oSysVar->parse($oRow->code) . '</div>'));
-            $oForm->addElement(new \PFBC\Element\Textarea(t('Banner:'), 'code', ['readonly' => 'readonly', 'onclick' => 'this.select()', 'value' => $oSysVar->parse($oRow->code)]));
+            $oForm->addElement(new Hidden('id_ads', $oRow->adsId));
+            $oForm->addElement(new HTMLExternal('<h2>' . $oRow->name . '</h2>'));
+            $oForm->addElement(new HTMLExternal('<p>' . t('Preview Banner:') . '</p>'));
+            $oForm->addElement(new HTMLExternal('<div>' . $oSysVar->parse($oRow->code) . '</div>'));
+            $oForm->addElement(new Textarea(t('Banner:'), 'code', ['readonly' => 'readonly', 'onclick' => 'this.select()', 'value' => $oSysVar->parse($oRow->code)]));
             // End ads div tags
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><hr /><br />'));
+            $oForm->addElement(new HTMLExternal('</div>'));
+            $oForm->addElement(new HTMLExternal('<br /><hr /><br />'));
         }
         $oForm->render();
         unset($oSysVar);
