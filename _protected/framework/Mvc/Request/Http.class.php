@@ -103,7 +103,7 @@ class Http extends \PH7\Framework\Http\Http
      * Check is the request method GET exists.
      *
      * @param array|string $mKey The key of the request or an array with the list of key of the variables request.
-     * @param string $sParam Optional parameter, check the type of the request variable | Value type is: str, int, float, bool
+     * @param string $sParam Optional, check the type of the request variable | Value types are: str, int, float, bool
      *
      * @return bool
      */
@@ -132,7 +132,7 @@ class Http extends \PH7\Framework\Http\Http
      * Check is the POST request method exists.
      *
      * @param array|string $mKey The key of the request or an array with the list of key of the variables request.
-     * @param string $sParam Optional parameter, check the type of the request variable | Value type is: str, int, float, bool
+     * @param string $sParam Optional, check the type of the request variable | Value types are: str, int, float, bool
      *
      * @return bool
      */
@@ -203,7 +203,7 @@ class Http extends \PH7\Framework\Http\Http
      * $_GET and $_POST request type.
      *
      * @param string $sKey
-     * @param string $sParam Optional parameter, set a type of the request | Value type is: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
+     * @param string $sParam Optional, set a type of the request | Value types are: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
      *
      * @return string|void Uses Str::escape() method to secure the data display unless you specified the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
      */
@@ -222,7 +222,7 @@ class Http extends \PH7\Framework\Http\Http
      * Get Request Parameter.
      *
      * @param string $sKey The key of the request.
-     * @param string $sParam Optional parameter, set a type of the request | Value type is: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
+     * @param string $sParam Optional, set a type of the request | Value types are: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
      * @param bool $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities, so less secure
      *
      * @return string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
@@ -253,7 +253,7 @@ class Http extends \PH7\Framework\Http\Http
      * Post Request Parameter.
      *
      * @param string $sKey The key of the request.
-     * @param string $sParam Optional parameter, set a type of the request | Value type is: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
+     * @param string $sParam Optional, set a type of the request | Value types are: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
      * @param bool $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities, so less secure.
      *
      * @return string The string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
@@ -377,7 +377,7 @@ class Http extends \PH7\Framework\Http\Http
     /**
      * @param array $aType Request variable type ($_GET, $_POST, $_COOKIE, $_REQUEST).
      * @param string $sKey
-     * @param string $sParam Optional self::ONLY_XSS_CLEAN To delete only the XSS vulnerability.
+     * @param string $sParam Optional self::ONLY_XSS_CLEAN to delete only the XSS vulnerability.
      *
      * @return string
      */
