@@ -32,6 +32,16 @@ class HttpTest extends PHPUnit_Framework_TestCase
         $this->assertSame(123, $sActual);
     }
 
+    public function testGetRequestCastedToFloat()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_GET['float_value'] = '10.3';
+
+        $sActual = $this->oHttpRequest->get('float_value', 'float');
+
+        $this->assertSame(10.3, $sActual);
+    }
+
     public function testGetRequestCastedToBool()
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
@@ -95,6 +105,16 @@ class HttpTest extends PHPUnit_Framework_TestCase
         $sActual = $this->oHttpRequest->post('string_id', 'int');
 
         $this->assertSame(123, $sActual);
+    }
+
+    public function testPostRequestCastedToFloat()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_POST['float_value'] = '10.3';
+
+        $sActual = $this->oHttpRequest->post('float_value', 'float');
+
+        $this->assertSame(10.3, $sActual);
     }
 
     public function testPostRequestCastedToBool()
