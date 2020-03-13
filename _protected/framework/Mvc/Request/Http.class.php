@@ -383,7 +383,7 @@ class Http extends \PH7\Framework\Http\Http
      */
     protected function cleanData(&$aType, $sKey, $sParam)
     {
-        // Avoid to use escape() func that converts integer/float to string type
+        // Avoid to use escape() func, because it converts integer/float/boolean value into string type
         if ($this->isUnescapableType($aType[$sKey])) {
             return $aType[$sKey];
         }
@@ -421,7 +421,7 @@ class Http extends \PH7\Framework\Http\Http
      */
     private function isUnescapableType($mValue)
     {
-        return is_int($mValue) || is_float($mValue);
+        return is_int($mValue) || is_float($mValue) || is_bool($mValue);
     }
 
     /**
