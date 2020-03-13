@@ -258,7 +258,7 @@ class Uri
     }
 
     /**
-     * Omit commas which may be part of a string sentence in the URL parameters.
+     * Omits commas that may be part of a string sentence present in the URL parameters.
      *
      * @param string $sValue
      *
