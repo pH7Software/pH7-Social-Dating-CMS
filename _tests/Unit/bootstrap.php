@@ -8,6 +8,8 @@
 
 use PH7\App\Includes\Classes\Loader\Autoloader as AppLoader;
 use PH7\Framework\Loader\Autoloader as FrameworkLoader;
+use PH7\Framework\Str\Str;
+use PH7\Framework\Translate\Lang;
 
 define('PH7', 1);
 
@@ -94,13 +96,13 @@ try {
     AppLoader::getInstance()->init();
 
     if (!function_exists('escape')) {
-        new \PH7\Framework\Str\Str; // Load class to get escape() function
+        new Str; // Load class to get escape() function
     }
 
     if (!function_exists('t')) {
         include PH7_PATH_APP_LANG . 'en_US/language.php';
         // Load class to include t() function
-        new \PH7\Framework\Translate\Lang;
+        new Lang;
     }
 } catch (RuntimeException $oExcept) {
     echo $oExcept->getMessage();
