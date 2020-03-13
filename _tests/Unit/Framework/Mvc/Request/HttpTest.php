@@ -32,6 +32,16 @@ class HttpTest extends PHPUnit_Framework_TestCase
         $this->assertSame(123, $sActual);
     }
 
+    public function testGetRequestCastedToBool()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_GET['boolean_key'] = 'true';
+
+        $sActual = $this->oHttpRequest->get('boolean_key', 'bool');
+
+        $this->assertTrue($sActual);
+    }
+
     public function testGetExistsWithWrongValidateType()
     {
         $_GET['id'] = 123;
@@ -85,6 +95,16 @@ class HttpTest extends PHPUnit_Framework_TestCase
         $sActual = $this->oHttpRequest->post('string_id', 'int');
 
         $this->assertSame(123, $sActual);
+    }
+
+    public function testPostRequestCastedToBool()
+    {
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_POST['boolean_key'] = 0;
+
+        $sActual = $this->oHttpRequest->post('boolean_key', 'bool');
+
+        $this->assertFalse($sActual);
     }
 
     public function testPostExistsWithWrongValidateType()
