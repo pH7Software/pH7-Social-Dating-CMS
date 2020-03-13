@@ -678,7 +678,7 @@ class ModeratorController extends Controller
     private function notifyUserForApprovedContent()
     {
         try {
-            $iProfileId = (int)$this->httpRequest->post('id');
+            $iProfileId = $this->httpRequest->post('id', 'int');
             $sUserEmail = $this->oModeratorModel->getEmail($iProfileId);
 
             $this->oUserNotifier
@@ -696,7 +696,7 @@ class ModeratorController extends Controller
     private function notifyUserForDisapprovedContent()
     {
         try {
-            $iProfileId = (int)$this->httpRequest->post('id');
+            $iProfileId = $this->httpRequest->post('id', 'int');
             $sUserEmail = $this->oModeratorModel->getEmail($iProfileId);
 
             $this->oUserNotifier
