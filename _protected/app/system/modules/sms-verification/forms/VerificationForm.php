@@ -8,6 +8,10 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\Textbox;
+use PFBC\Element\Token;
 use PH7\Framework\Url\Header;
 
 class VerificationForm
@@ -24,10 +28,10 @@ class VerificationForm
 
         $oForm = new \PFBC\Form('form_sms_verification');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_sms_verification', 'form_sms_verification'));
-        $oForm->addElement(new \PFBC\Element\Token('sms_verification'));
+        $oForm->addElement(new Hidden('submit_sms_verification', 'form_sms_verification'));
+        $oForm->addElement(new Token('sms_verification'));
         $oForm->addElement(
-            new \PFBC\Element\Textbox(
+            new Textbox(
                 t('Your Verification Code'),
                 'verification_code',
                 [
@@ -36,7 +40,7 @@ class VerificationForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Button);
+        $oForm->addElement(new Button);
         $oForm->render();
     }
 }

@@ -8,6 +8,14 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\Number;
+use PFBC\Element\Select;
+use PFBC\Element\Textbox;
+use PFBC\Element\Token;
+use PFBC\Validation\RegExp;
+use PFBC\Validation\Str;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Url\Header;
@@ -28,10 +36,10 @@ class EditFieldForm
 
         $oForm = new \PFBC\Form('form_edit_field');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_field', 'form_edit_field'));
-        $oForm->addElement(new \PFBC\Element\Token('edit_field'));
+        $oForm->addElement(new Hidden('submit_edit_field', 'form_edit_field'));
+        $oForm->addElement(new Token('edit_field'));
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Field Type:'),
                 'type',
                 [
@@ -46,7 +54,7 @@ class EditFieldForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Textbox(
+            new Textbox(
                 t('Field Name:'),
                 'name',
                 [
@@ -55,11 +63,11 @@ class EditFieldForm
                     'pattern' => $sFieldPattern,
                     'title' => t('Field name must contain 2-30 alphanumeric characters ([a-z], [A-Z], [0-9] and [_]).'),
                     'required' => 1,
-                    'validation' => new \PFBC\Validation\RegExp($sFieldPattern)
+                    'validation' => new RegExp($sFieldPattern)
                 ]
             ));
         $oForm->addElement(
-            new \PFBC\Element\Number(
+            new Number(
                 t('Length Field:'),
                 'length',
                 [
@@ -70,16 +78,16 @@ class EditFieldForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Textbox(
+            new Textbox(
                 t('Default Field Value'),
                 'value',
                 [
                     'description' => t('The default value of the field (optional).') . '<br /><small>' . t('Note: The default value will always be empty even if you added a default string. Your change is saved, but cannot be retrieve on the form.') . '</small>',
-                    'validation' => new \PFBC\Validation\Str(1, 120)
+                    'validation' => new Str(1, 120)
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Button(t('Update')));
+        $oForm->addElement(new Button(t('Update')));
         $oForm->render();
     }
 }

@@ -8,6 +8,14 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\File;
+use PFBC\Element\Hidden;
+use PFBC\Element\Textarea;
+use PFBC\Element\Textbox;
+use PFBC\Element\Token;
+use PFBC\Validation\RegExp;
+use PFBC\Validation\Str;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Url\Header;
 
@@ -27,30 +35,30 @@ class AlbumForm
 
         $oForm = new \PFBC\Form('form_video_album');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_video_album', 'form_video_album'));
-        $oForm->addElement(new \PFBC\Element\Token('album'));
+        $oForm->addElement(new Hidden('submit_video_album', 'form_video_album'));
+        $oForm->addElement(new Token('album'));
         $oForm->addElement(
-            new \PFBC\Element\Textbox(
+            new Textbox(
                 t('Album Cover Name:'),
                 'name',
                 [
                     'required' => 1,
                     'pattern' => $sTitlePattern,
-                    'validation' => new \PFBC\Validation\RegExp($sTitlePattern)
+                    'validation' => new RegExp($sTitlePattern)
                 ]
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Textarea(
+            new Textarea(
                 t('Album Cover Description:'),
                 'description',
                 [
-                    'validation' => new \PFBC\Validation\Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)
+                    'validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)
                 ]
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\File(
+            new File(
                 t('Album Cover Thumbnail:'),
                 'album',
                 [
@@ -59,7 +67,7 @@ class AlbumForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Button);
+        $oForm->addElement(new Button);
         $oForm->render();
     }
 }

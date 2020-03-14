@@ -8,6 +8,13 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\CCaptcha;
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Textarea;
+use PFBC\Element\Token;
+use PFBC\Validation\Str;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Url\Header;
 
@@ -25,25 +32,25 @@ class CommentForm
 
         $oForm = new \PFBC\Form('form_comment');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_comment', 'form_comment'));
-        $oForm->addElement(new \PFBC\Element\Token('comment'));
+        $oForm->addElement(new Hidden('submit_comment', 'form_comment'));
+        $oForm->addElement(new Token('comment'));
         $oForm->addElement(
-            new \PFBC\Element\Textarea(
+            new Textarea(
                 t('Your comment:'),
                 'comment',
                 [
                     'id' => 'str_com',
                     'onblur' => 'CValid(this.value,this.id,2,2500)',
                     'required' => 1,
-                    'validation' => new \PFBC\Validation\Str(2, 2500)
+                    'validation' => new Str(2, 2500)
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_com"></span>'));
+        $oForm->addElement(new HTMLExternal('<span class="input_error str_com"></span>'));
 
         if (DbConfig::getSetting('isCaptchaComment')) {
             $oForm->addElement(
-                new \PFBC\Element\CCaptcha(
+                new CCaptcha(
                     t('Captcha'),
                     'captcha',
                     [
@@ -53,11 +60,11 @@ class CommentForm
                     ]
                 )
             );
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
+            $oForm->addElement(new HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }
 
-        $oForm->addElement(new \PFBC\Element\Button);
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
+        $oForm->addElement(new Button);
+        $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
     }
 }

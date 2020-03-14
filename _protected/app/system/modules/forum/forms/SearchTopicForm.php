@@ -8,6 +8,9 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Search;
+use PFBC\Element\Select;
 use PH7\Framework\Mvc\Router\Uri;
 
 class SearchTopicForm
@@ -17,13 +20,13 @@ class SearchTopicForm
         $oForm = new \PFBC\Form('form_search');
         $oForm->configure(['action' => Uri::get('forum', 'forum', 'result') . PH7_SH, 'method' => 'get']);
         $oForm->addElement(
-            new \PFBC\Element\Search(
+            new Search(
                 t('Name, Keyword of message, Author (username) or ID of Topic Forum:'),
                 'looking'
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Browse By:'),
                 'order',
                 [
@@ -35,7 +38,7 @@ class SearchTopicForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Direction:'),
                 'sort',
                 [
@@ -47,7 +50,7 @@ class SearchTopicForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', ['icon' => 'search']));
+        $oForm->addElement(new Button(t('Search'), 'submit', ['icon' => 'search']));
         $oForm->render();
     }
 }

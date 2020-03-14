@@ -8,6 +8,12 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Textarea;
+use PFBC\Element\Token;
+use PFBC\Validation\Str;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Url\Header;
 
@@ -27,12 +33,12 @@ class EditCommentForm
 
         $oForm = new \PFBC\Form('form_edit_comment');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_comment', 'form_edit_comment'));
-        $oForm->addElement(new \PFBC\Element\Token('edit_comment'));
+        $oForm->addElement(new Hidden('submit_edit_comment', 'form_edit_comment'));
+        $oForm->addElement(new Token('edit_comment'));
 
         $oData = (new CommentModel)->get($oHttpRequest->get('id'), 1, $oHttpRequest->get('table'));
         $oForm->addElement(
-            new \PFBC\Element\Textarea(
+            new Textarea(
                 t('Edit your comment:'),
                 'comment',
                 [
@@ -40,16 +46,16 @@ class EditCommentForm
                     'id' => 'str_com',
                     'onblur' => 'CValid(this.value,this.id,2,2500)',
                     'required' => 1,
-                    'validation' => new \PFBC\Validation\Str(2, 2500)
+                    'validation' => new Str(2, 2500)
                 ]
             )
         );
         unset($oHttpRequest, $oData);
 
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_com"></span>'));
+        $oForm->addElement(new HTMLExternal('<span class="input_error str_com"></span>'));
 
-        $oForm->addElement(new \PFBC\Element\Button(t('Save')));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
+        $oForm->addElement(new Button(t('Save')));
+        $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
     }
 }

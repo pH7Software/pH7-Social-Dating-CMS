@@ -8,6 +8,15 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Select;
+use PFBC\Element\Textarea;
+use PFBC\Element\Textbox;
+use PFBC\Element\Token;
+use PFBC\Validation\RegExp;
+use PFBC\Validation\Str;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Url\Header;
@@ -35,10 +44,10 @@ class ForumForm
 
         $oForm = new \PFBC\Form('form_forum');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_forum', 'form_forum'));
-        $oForm->addElement(new \PFBC\Element\Token('forum'));
+        $oForm->addElement(new Hidden('submit_forum', 'form_forum'));
+        $oForm->addElement(new Token('forum'));
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Category Name:'),
                 'category_id',
                 $aCategoriesName,
@@ -49,32 +58,32 @@ class ForumForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Textbox(t('Forum Name:'),
+            new Textbox(t('Forum Name:'),
                 'name', [
                     'id' => 'str_name',
                     'onblur' => 'CValid(this.value,this.id,2,60)',
                     'pattern' => $sTitlePattern,
                     'required' => 1,
-                    'validation' => new \PFBC\Validation\RegExp($sTitlePattern)
+                    'validation' => new RegExp($sTitlePattern)
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_name"></span>'));
+        $oForm->addElement(new HTMLExternal('<span class="input_error str_name"></span>'));
         $oForm->addElement(
-            new \PFBC\Element\Textarea(
+            new Textarea(
                 t('Description:'),
                 'description',
                 [
                     'id' => 'str_description',
                     'required' => 1,
                     'onblur' => 'CValid(this.value,this.id,4,190)',
-                    'validation' => new \PFBC\Validation\Str(4, 190)
+                    'validation' => new Str(4, 190)
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_description"></span>'));
-        $oForm->addElement(new \PFBC\Element\Button);
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
+        $oForm->addElement(new HTMLExternal('<span class="input_error str_description"></span>'));
+        $oForm->addElement(new Button);
+        $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
     }
 }

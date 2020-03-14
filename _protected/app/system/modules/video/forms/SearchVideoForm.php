@@ -8,6 +8,9 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Search;
+use PFBC\Element\Select;
 use PH7\Framework\Mvc\Router\Uri;
 
 class SearchVideoForm
@@ -16,9 +19,9 @@ class SearchVideoForm
     {
         $oForm = new \PFBC\Form('form_search');
         $oForm->configure(['action' => Uri::get('video', 'main', 'result') . PH7_SH, 'method' => 'get']);
-        $oForm->addElement(new \PFBC\Element\Search(t('ID or Name of Video:'), 'looking'));
+        $oForm->addElement(new Search(t('ID or Name of Video:'), 'looking'));
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Browse By:'),
                 'order',
                 [
@@ -31,7 +34,7 @@ class SearchVideoForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Direction:'),
                 'sort',
                 [
@@ -43,7 +46,7 @@ class SearchVideoForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', ['icon' => 'search']));
+        $oForm->addElement(new Button(t('Search'), 'submit', ['icon' => 'search']));
         $oForm->render();
     }
 }

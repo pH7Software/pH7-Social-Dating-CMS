@@ -8,6 +8,10 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\Phone;
+use PFBC\Element\Token;
 use PH7\Framework\Url\Header;
 
 class PhoneNumberForm
@@ -24,10 +28,10 @@ class PhoneNumberForm
 
         $oForm = new \PFBC\Form('form_phone_number_verification');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_phone_number_verification', 'form_phone_number_verification'));
-        $oForm->addElement(new \PFBC\Element\Token('phone_number_verification'));
+        $oForm->addElement(new Hidden('submit_phone_number_verification', 'form_phone_number_verification'));
+        $oForm->addElement(new Token('phone_number_verification'));
         $oForm->addElement(
-            new \PFBC\Element\Phone(
+            new Phone(
                 t('Your Phone Number'),
                 'phone_number',
                 [
@@ -36,7 +40,7 @@ class PhoneNumberForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Button);
+        $oForm->addElement(new Button);
         $oForm->render();
     }
 }

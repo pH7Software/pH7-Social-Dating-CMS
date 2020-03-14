@@ -8,6 +8,13 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\Textarea;
+use PFBC\Element\Textbox;
+use PFBC\Element\Token;
+use PFBC\Validation\RegExp;
+use PFBC\Validation\Str;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Session\Session;
@@ -29,8 +36,8 @@ class EditPictureForm
 
         $oForm = new \PFBC\Form('form_edit_picture');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_picture', 'form_edit_picture'));
-        $oForm->addElement(new \PFBC\Element\Token('edit_picture'));
+        $oForm->addElement(new Hidden('submit_edit_picture', 'form_edit_picture'));
+        $oForm->addElement(new Token('edit_picture'));
 
         $oHttpRequest = new HttpRequest;
         $oPhoto = (new PictureModel)->photo(
@@ -44,28 +51,28 @@ class EditPictureForm
         unset($oHttpRequest);
 
         $oForm->addElement(
-            new \PFBC\Element\Textbox(
+            new Textbox(
                 t('Image Name:'),
                 'title',
                 [
                     'value' => $oPhoto->title,
                     'required' => 1,
                     'pattern' => $sTitlePattern,
-                    'validation' => new \PFBC\Validation\RegExp($sTitlePattern)
+                    'validation' => new RegExp($sTitlePattern)
                 ]
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Textarea(
+            new Textarea(
                 t('Image Description:'),
                 'description',
                 [
                     'value' => $oPhoto->description,
-                    'validation' => new \PFBC\Validation\Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)
+                    'validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Button);
+        $oForm->addElement(new Button);
         $oForm->render();
     }
 }

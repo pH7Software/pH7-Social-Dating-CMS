@@ -8,6 +8,11 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\Textarea;
+use PFBC\Element\Token;
+use PFBC\Validation\Str;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Url\Header;
@@ -32,10 +37,10 @@ class EditWallForm
 
         $oForm = new \PFBC\Form('form_edit_wall');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_wall', 'form_edit_wall'));
-        $oForm->addElement(new \PFBC\Element\Token('edit_wall'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Content:'), 'post', ['value' => $oWallData->post, 'validation' => new \PFBC\Validation\Str(1, 900)]));
-        $oForm->addElement(new \PFBC\Element\Button);
+        $oForm->addElement(new Hidden('submit_edit_wall', 'form_edit_wall'));
+        $oForm->addElement(new Token('edit_wall'));
+        $oForm->addElement(new Textarea(t('Content:'), 'post', ['value' => $oWallData->post, 'validation' => new Str(1, 900)]));
+        $oForm->addElement(new Button);
         $oForm->render();
     }
 }

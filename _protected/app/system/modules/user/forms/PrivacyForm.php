@@ -8,6 +8,12 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Radio;
+use PFBC\Element\Select;
+use PFBC\Element\Token;
 use PH7\Framework\Registry\Registry;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Url\Header;
@@ -31,11 +37,11 @@ class PrivacyForm
 
         $oForm = new \PFBC\Form('form_privacy_account');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_privacy_account', 'form_privacy_account'));
-        $oForm->addElement(new \PFBC\Element\Token('privacy_account'));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<h3><u>' . t('Profile:') . '</u></h3>'));
+        $oForm->addElement(new Hidden('submit_privacy_account', 'form_privacy_account'));
+        $oForm->addElement(new Token('privacy_account'));
+        $oForm->addElement(new HTMLExternal('<h3><u>' . t('Profile:') . '</u></h3>'));
         $oForm->addElement(
-            new \PFBC\Element\Radio(
+            new Radio(
                 t('Who can view your profile?'),
                 'privacy_profile',
                 [
@@ -49,9 +55,9 @@ class PrivacyForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<h3><u>' . t('Web search engine:') . '</u></h3>'));
+        $oForm->addElement(new HTMLExternal('<h3><u>' . t('Web search engine:') . '</u></h3>'));
         $oForm->addElement(
-            new \PFBC\Element\Radio(
+            new Radio(
                 t('Do you want to be included in search results?'),
                 'search_profile',
                 [
@@ -64,9 +70,9 @@ class PrivacyForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<h3><u>' . t('Show profile visitors:') . '</u></h3>'));
+        $oForm->addElement(new HTMLExternal('<h3><u>' . t('Show profile visitors:') . '</u></h3>'));
         $oForm->addElement(
-            new \PFBC\Element\Radio(
+            new Radio(
                 t('Would you like to display members that have viewed your profile?'),
                 'user_save_views',
                 [
@@ -79,9 +85,9 @@ class PrivacyForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<h3><u>' . t('Presence:') . '</u></h3>'));
+        $oForm->addElement(new HTMLExternal('<h3><u>' . t('Presence:') . '</u></h3>'));
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Your status <div class="user_status right" id="status_div"></div>'),
                 'user_status',
                 [
@@ -98,8 +104,8 @@ class PrivacyForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script>$(function(){ init_status() });</script>'));
-        $oForm->addElement(new \PFBC\Element\Button);
+        $oForm->addElement(new HTMLExternal('<script>$(function(){ init_status() });</script>'));
+        $oForm->addElement(new Button);
         $oForm->render();
     }
 }

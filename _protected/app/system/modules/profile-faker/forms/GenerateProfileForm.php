@@ -8,6 +8,11 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\Number;
+use PFBC\Element\Select;
+use PFBC\Element\Token;
 use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Header;
 
@@ -33,14 +38,14 @@ class GenerateProfileForm
         $oForm = new \PFBC\Form('form_generate_profiles');
         $oForm->configure(['action' => '']);
         $oForm->addElement(
-            new \PFBC\Element\Hidden(
+            new Hidden(
                 'submit_generate_profiles',
                 'form_generate_profiles'
             )
         );
-        $oForm->addElement(new \PFBC\Element\Token('generate_profiles'));
+        $oForm->addElement(new Token('generate_profiles'));
         $oForm->addElement(
-            new \PFBC\Element\Number(
+            new Number(
                 t('Number of Profiles:'),
                 'amount',
                 [
@@ -52,7 +57,7 @@ class GenerateProfileForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Gender:'),
                 'sex',
                 [
@@ -63,7 +68,7 @@ class GenerateProfileForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Type of Profile:'),
                 'locale',
                 self::getNationalities(),
@@ -74,7 +79,7 @@ class GenerateProfileForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Button(
+            new Button(
                 t('Generate Profiles'),
                 'submit',
                 ['icon' => 'plus']

@@ -8,6 +8,14 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\Number;
+use PFBC\Element\Radio;
+use PFBC\Element\Select;
+use PFBC\Element\Textarea;
+use PFBC\Element\Textbox;
+use PFBC\Element\Token;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
@@ -30,10 +38,10 @@ class EditMembershipForm
 
         $oForm = new \PFBC\Form('form_edit_membership');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_membership', 'form_edit_membership'));
-        $oForm->addElement(new \PFBC\Element\Token('membership'));
+        $oForm->addElement(new Hidden('submit_edit_membership', 'form_edit_membership'));
+        $oForm->addElement(new Token('membership'));
         $oForm->addElement(
-            new \PFBC\Element\Textbox(
+            new Textbox(
                 t('Name:'),
                 'name',
                 [
@@ -44,7 +52,7 @@ class EditMembershipForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Textarea(
+            new Textarea(
                 t('Description:'),
                 'description',
                 [
@@ -62,7 +70,7 @@ class EditMembershipForm
         foreach ($aPerms as $sKey => $sVal) {
             $sLabel = (new Str)->upperFirstWords(str_replace('_', ' ', $sKey));
             $oForm->addElement(
-                new \PFBC\Element\Select(
+                new Select(
                     $sLabel,
                     'perms[' . $sKey . ']',
                     [
@@ -78,7 +86,7 @@ class EditMembershipForm
         unset($aPerms);
 
         $oForm->addElement(
-            new \PFBC\Element\Number(
+            new Number(
                 t('Price:'),
                 'price',
                 [
@@ -91,7 +99,7 @@ class EditMembershipForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Number(
+            new Number(
                 t('Duration (expiration days):'),
                 'expiration_days',
                 [
@@ -103,7 +111,7 @@ class EditMembershipForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Radio(
+            new Radio(
                 t('Status:'),
                 'enable',
                 [
@@ -116,7 +124,7 @@ class EditMembershipForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Button(t('Update')));
+        $oForm->addElement(new Button(t('Update')));
         $oForm->render();
     }
 }

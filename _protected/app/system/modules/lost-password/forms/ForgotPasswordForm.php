@@ -10,6 +10,12 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PFBC\Element\Button;
+use PFBC\Element\CCaptcha;
+use PFBC\Element\Email;
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Token;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Url\Header;
@@ -30,10 +36,10 @@ class ForgotPasswordForm
 
         $oForm = new \PFBC\Form('form_forgot_password');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_forgot_password', 'form_forgot_password'));
-        $oForm->addElement(new \PFBC\Element\Token('forgot_password'));
+        $oForm->addElement(new Hidden('submit_forgot_password', 'form_forgot_password'));
+        $oForm->addElement(new Token('forgot_password'));
         $oForm->addElement(
-            new \PFBC\Element\Email(
+            new Email(
                 t('Your Email:'),
                 'mail',
                 [
@@ -43,9 +49,9 @@ class ForgotPasswordForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error email"></span>'));
+        $oForm->addElement(new HTMLExternal('<span class="input_error email"></span>'));
         $oForm->addElement(
-            new \PFBC\Element\CCaptcha(
+            new CCaptcha(
                 t('Captcha'),
                 'captcha',
                 [
@@ -55,9 +61,9 @@ class ForgotPasswordForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
-        $oForm->addElement(new \PFBC\Element\Button(t('Get a new password'), 'submit', ['icon' => 'key']));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
+        $oForm->addElement(new HTMLExternal('<span class="input_error ccaptcha"></span>'));
+        $oForm->addElement(new Button(t('Get a new password'), 'submit', ['icon' => 'key']));
+        $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
     }
 }

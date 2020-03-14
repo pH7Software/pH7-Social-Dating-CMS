@@ -8,6 +8,14 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\File;
+use PFBC\Element\Hidden;
+use PFBC\Element\Select;
+use PFBC\Element\Textbox;
+use PFBC\Element\Token;
+use PFBC\Validation\RegExp;
+use PFBC\Validation\Str;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Url\Header;
 
@@ -36,16 +44,16 @@ class AdminForm
 
         $oForm = new \PFBC\Form('form_game');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_game', 'form_game'));
-        $oForm->addElement(new \PFBC\Element\Token('game'));
-        $oForm->addElement(new \PFBC\Element\Select(t('Category Name:'), 'category_id', $aCategoriesName, ['required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Name of the Game:'), 'name', ['pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern), 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Title of the Game:'), 'title', ['validation' => new \PFBC\Validation\Str(2, 120), 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Description:'), 'description', ['validation' => new \PFBC\Validation\Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH), 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Keywords:'), 'keywords', ['validation' => new \PFBC\Validation\Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH), 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\File(t('Thumbnail of the Game:'), 'thumb', ['accept' => 'image/*', 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\File(t('File of the Game:'), 'file', ['accept' => 'application/x-shockwave-flash', 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Button);
+        $oForm->addElement(new Hidden('submit_game', 'form_game'));
+        $oForm->addElement(new Token('game'));
+        $oForm->addElement(new Select(t('Category Name:'), 'category_id', $aCategoriesName, ['required' => 1]));
+        $oForm->addElement(new Textbox(t('Name of the Game:'), 'name', ['pattern' => $sTitlePattern, 'validation' => new RegExp($sTitlePattern), 'required' => 1]));
+        $oForm->addElement(new Textbox(t('Title of the Game:'), 'title', ['validation' => new Str(2, 120), 'required' => 1]));
+        $oForm->addElement(new Textbox(t('Description:'), 'description', ['validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH), 'required' => 1]));
+        $oForm->addElement(new Textbox(t('Keywords:'), 'keywords', ['validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH), 'required' => 1]));
+        $oForm->addElement(new File(t('Thumbnail of the Game:'), 'thumb', ['accept' => 'image/*', 'required' => 1]));
+        $oForm->addElement(new File(t('File of the Game:'), 'file', ['accept' => 'application/x-shockwave-flash', 'required' => 1]));
+        $oForm->addElement(new Button);
         $oForm->render();
     }
 }

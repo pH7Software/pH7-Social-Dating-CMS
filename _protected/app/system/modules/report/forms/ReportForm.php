@@ -10,6 +10,13 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Select;
+use PFBC\Element\Textarea;
+use PFBC\Element\Token;
+use PFBC\Validation\Url;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Url\Header as HeaderUrl;
 
@@ -29,13 +36,13 @@ class ReportForm
 
         $oForm = new \PFBC\Form('form_report');
         $oForm->configure(['action' => $oHttpRequest->currentUrl()]);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_report', 'form_report'));
-        $oForm->addElement(new \PFBC\Element\Token('report'));
-        $oForm->addElement(new \PFBC\Element\Hidden('spammer', $oHttpRequest->get('spammer'), ['required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Hidden('url', $oHttpRequest->get('url'), ['validation' => new \PFBC\Validation\Url]));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<h3 class="center">' . t('Do your want to report this?') . '</h4>'));
+        $oForm->addElement(new Hidden('submit_report', 'form_report'));
+        $oForm->addElement(new Token('report'));
+        $oForm->addElement(new Hidden('spammer', $oHttpRequest->get('spammer'), ['required' => 1]));
+        $oForm->addElement(new Hidden('url', $oHttpRequest->get('url'), ['validation' => new Url]));
+        $oForm->addElement(new HTMLExternal('<h3 class="center">' . t('Do your want to report this?') . '</h4>'));
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Type the Content'),
                 'type',
                 [
@@ -55,7 +62,7 @@ class ReportForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Textarea(
+            new Textarea(
                 t('Comment:'),
                 'desc',
                 [
@@ -64,9 +71,9 @@ class ReportForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Button(t('Report It'), 'submit', ['icon' => 'check']));
-        $oForm->addElement(new \PFBC\Element\Button(t('Cancel'), 'cancel', ['onclick' => 'parent.$.colorbox.close();return false', 'icon' => 'cancel']));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'str.js"></script>'));
+        $oForm->addElement(new Button(t('Report It'), 'submit', ['icon' => 'check']));
+        $oForm->addElement(new Button(t('Cancel'), 'cancel', ['onclick' => 'parent.$.colorbox.close();return false', 'icon' => 'cancel']));
+        $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'str.js"></script>'));
         $oForm->render();
     }
 }

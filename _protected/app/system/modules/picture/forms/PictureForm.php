@@ -8,6 +8,16 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\File;
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Select;
+use PFBC\Element\Textarea;
+use PFBC\Element\Textbox;
+use PFBC\Element\Token;
+use PFBC\Validation\RegExp;
+use PFBC\Validation\Str;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
@@ -37,11 +47,11 @@ class PictureForm
 
         $oForm = new \PFBC\Form('form_picture');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_picture', 'form_picture'));
-        $oForm->addElement(new \PFBC\Element\Token('picture'));
+        $oForm->addElement(new Hidden('submit_picture', 'form_picture'));
+        $oForm->addElement(new Token('picture'));
 
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Choose your album - OR - <a href="%0%">Add a new Album</a>', Uri::get('picture', 'main', 'addalbum')),
                 'album_id',
                 $aAlbumName,
@@ -53,19 +63,19 @@ class PictureForm
         );
         unset($aAlbumName);
 
-        $oForm->addElement(new \PFBC\Element\Hidden('album_title', @$oAlbums[0]->name));
+        $oForm->addElement(new Hidden('album_title', @$oAlbums[0]->name));
         $oForm->addElement(
-            new \PFBC\Element\Textbox(
+            new Textbox(
                 t('Name for your photo(s):'),
                 'title',
                 [
                     'pattern' => $sTitlePattern,
-                    'validation' => new \PFBC\Validation\RegExp($sTitlePattern)
+                    'validation' => new RegExp($sTitlePattern)
                 ]
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\File(
+            new File(
                 t('Your photo(s):'),
                 'photos[]',
                 [
@@ -76,17 +86,17 @@ class PictureForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="pfbc-label"><em><span class="bold">' . t('Note:') . '</span> ' . t('Please be patient while downloading pictures, this may take time (especially if you download a lot of photos at once).') . '</em></p>'));
+        $oForm->addElement(new HTMLExternal('<p class="pfbc-label"><em><span class="bold">' . t('Note:') . '</span> ' . t('Please be patient while downloading pictures, this may take time (especially if you download a lot of photos at once).') . '</em></p>'));
         $oForm->addElement(
-            new \PFBC\Element\Textarea(
+            new Textarea(
                 t('Description for your photo(s):'),
                 'description',
                 [
-                    'validation' => new \PFBC\Validation\Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)
+                    'validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Button(t('Upload'), 'submit', ['icon' => 'image']));
+        $oForm->addElement(new Button(t('Upload'), 'submit', ['icon' => 'image']));
         $oForm->render();
     }
 

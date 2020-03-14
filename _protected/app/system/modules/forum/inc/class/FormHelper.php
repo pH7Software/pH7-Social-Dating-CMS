@@ -8,6 +8,8 @@
 
 namespace PH7;
 
+use PFBC\Element\CKEditor;
+use PFBC\Element\Textarea;
 use PH7\Framework\Mvc\Model\DbConfig;
 
 class FormHelper
@@ -18,9 +20,9 @@ class FormHelper
     public static function getEditorPfbcClassName()
     {
         if (DbConfig::getSetting('wysiwygEditorForum')) {
-            return \PFBC\Element\CKEditor::class;
+            return CKEditor::class;
         }
 
-        return \PFBC\Element\Textarea::class;
+        return Textarea::class;
     }
 }

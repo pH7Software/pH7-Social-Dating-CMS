@@ -8,6 +8,10 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\Token;
+use PFBC\Validation\Str;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Url\Header;
@@ -37,8 +41,8 @@ class EditReplyMsgForm
 
         $oForm = new \PFBC\Form('form_edit_reply_msg');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_reply_msg', 'form_edit_reply_msg'));
-        $oForm->addElement(new \PFBC\Element\Token('edit_reply_msg'));
+        $oForm->addElement(new Hidden('submit_edit_reply_msg', 'form_edit_reply_msg'));
+        $oForm->addElement(new Token('edit_reply_msg'));
 
         $sEditorClass = FormHelper::getEditorPfbcClassName();
         $oForm->addElement(
@@ -48,11 +52,11 @@ class EditReplyMsgForm
                 [
                     'value' => $oMsg->message,
                     'required' => 1,
-                    'validation' => new \PFBC\Validation\Str(4)
+                    'validation' => new Str(4)
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Button);
+        $oForm->addElement(new Button);
         $oForm->render();
     }
 }

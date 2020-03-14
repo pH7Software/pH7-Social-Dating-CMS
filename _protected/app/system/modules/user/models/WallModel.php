@@ -10,6 +10,7 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Model;
 
@@ -25,9 +26,9 @@ class WallModel extends Model
     public function add($iProfileId, $sPost, $sCreatedDate)
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER_WALL) . '(profileId, post, createdDate) VALUES (:profileId, :post, :createdDate)');
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':post', $sPost, \PDO::PARAM_STR);
-        $rStmt->bindValue(':dateTime', $sCreatedDate, \PDO::PARAM_STR);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':post', $sPost, PDO::PARAM_STR);
+        $rStmt->bindValue(':dateTime', $sCreatedDate, PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -42,9 +43,9 @@ class WallModel extends Model
     public function edit($iProfileId, $sPost, $sUpdatedDate)
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::MEMBER_WALL) . 'SET post = :post, updatedDate = :updatedDate WHERE profileId = :profileId');
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':post', $sPost, \PDO::PARAM_STR);
-        $rStmt->bindValue(':updatedDate', $sUpdatedDate, \PDO::PARAM_STR);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':post', $sPost, PDO::PARAM_STR);
+        $rStmt->bindValue(':updatedDate', $sUpdatedDate, PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -58,8 +59,8 @@ class WallModel extends Model
     public function delete($iProfileId, $iWallId)
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::MEMBER_WALL) . 'WHERE :profileId=:profileId AND wallId=:wallId');
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':wallId', $iWallId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':wallId', $iWallId, PDO::PARAM_INT);
 
         return $rStmt->execute();
     }
@@ -83,14 +84,14 @@ class WallModel extends Model
             $sSqlWallId . ' ORDER BY dateTime DESC LIMIT :offset, :limit';
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
         if (!empty($iWallId)) {
-            $rStmt->bindValue(':wallId', $iWallId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':wallId', $iWallId, PDO::PARAM_INT);
         }
-        $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-        $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+        $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+        $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         $rStmt->execute();
-        $aRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        $aRow = $rStmt->fetchAll(PDO::FETCH_OBJ);
         Db::free($rStmt);
 
         return $aRow;

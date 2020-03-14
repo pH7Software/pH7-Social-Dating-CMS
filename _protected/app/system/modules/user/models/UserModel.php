@@ -10,6 +10,7 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
 
 class UserModel extends UserCoreModel
@@ -34,16 +35,16 @@ class UserModel extends UserCoreModel
     public function join(array $aData)
     {
         $rStmt = Db::getInstance()->prepare($this->getQuery('join', $this->sQueryPath));
-        $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':username', $aData['username'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':password', $aData['password'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':first_name', $aData['first_name'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':reference', $aData['reference'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':is_active', $aData['is_active'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
-        $rStmt->bindParam(':hash_validation', $aData['hash_validation'], \PDO::PARAM_STR, self::HASH_VALIDATION_LENGTH);
-        $rStmt->bindValue(':current_date', $aData['current_date'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':affiliated_id', $aData['affiliated_id'], \PDO::PARAM_INT);
+        $rStmt->bindValue(':email', $aData['email'], PDO::PARAM_STR);
+        $rStmt->bindValue(':username', $aData['username'], PDO::PARAM_STR);
+        $rStmt->bindValue(':password', $aData['password'], PDO::PARAM_STR);
+        $rStmt->bindValue(':first_name', $aData['first_name'], PDO::PARAM_STR);
+        $rStmt->bindValue(':reference', $aData['reference'], PDO::PARAM_STR);
+        $rStmt->bindValue(':is_active', $aData['is_active'], PDO::PARAM_INT);
+        $rStmt->bindValue(':ip', $aData['ip'], PDO::PARAM_STR);
+        $rStmt->bindParam(':hash_validation', $aData['hash_validation'], PDO::PARAM_STR, self::HASH_VALIDATION_LENGTH);
+        $rStmt->bindValue(':current_date', $aData['current_date'], PDO::PARAM_STR);
+        $rStmt->bindValue(':affiliated_id', $aData['affiliated_id'], PDO::PARAM_INT);
         $rStmt->execute();
         $this->setKeyId(Db::getInstance()->lastInsertId()); // Set the user's ID
         Db::free($rStmt);

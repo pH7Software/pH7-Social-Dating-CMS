@@ -8,6 +8,9 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Search;
+use PFBC\Element\Select;
 use PH7\Framework\Mvc\Router\Uri;
 
 class SearchSubscriberForm
@@ -22,7 +25,7 @@ class SearchSubscriberForm
             ]
         );
         $oForm->addElement(
-            new \PFBC\Element\Search(
+            new Search(
                 t('Search an Subscriber:'),
                 'looking',
                 [
@@ -31,7 +34,7 @@ class SearchSubscriberForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Browse By:'),
                 'order',
                 [
@@ -42,7 +45,7 @@ class SearchSubscriberForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Direction:'),
                 'sort',
                 [
@@ -51,7 +54,7 @@ class SearchSubscriberForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', ['icon' => 'search']));
+        $oForm->addElement(new Button(t('Search'), 'submit', ['icon' => 'search']));
         $oForm->render();
     }
 }

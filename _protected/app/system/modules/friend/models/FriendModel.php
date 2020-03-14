@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
 
 class FriendModel extends FriendCoreModel
@@ -43,10 +44,10 @@ class FriendModel extends FriendCoreModel
                 $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER_FRIEND) .
                     '(profileId, friendId, pending, requestDate) VALUES (:profileId, :friendId, :pending, :requestDate)');
 
-                $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-                $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
-                $rStmt->bindValue(':pending', $iPending, \PDO::PARAM_INT);
-                $rStmt->bindValue(':requestDate', $sRequestDate, \PDO::PARAM_STR);
+                $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+                $rStmt->bindValue(':friendId', $iFriendId, PDO::PARAM_INT);
+                $rStmt->bindValue(':pending', $iPending, PDO::PARAM_INT);
+                $rStmt->bindValue(':requestDate', $sRequestDate, PDO::PARAM_STR);
                 $oRow = $rStmt->execute();
                 Db::free($rStmt);
                 if (!$oRow) {
@@ -81,9 +82,9 @@ class FriendModel extends FriendCoreModel
 
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::MEMBER_FRIEND) .
             'SET pending = :approved WHERE profileId = :friendId AND friendId = :profileId');
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':approved', self::APPROVED_REQUEST, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':friendId', $iFriendId, PDO::PARAM_INT);
+        $rStmt->bindValue(':approved', self::APPROVED_REQUEST, PDO::PARAM_INT);
 
         return $rStmt->execute();
     }
@@ -103,8 +104,8 @@ class FriendModel extends FriendCoreModel
 
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::MEMBER_FRIEND) .
             'WHERE (profileId = :profileId AND friendId = :friendId) OR (profileId = :friendId AND friendId = :profileId)');
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':friendId', $iFriendId, PDO::PARAM_INT);
 
         return $rStmt->execute();
     }

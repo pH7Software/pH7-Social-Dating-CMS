@@ -8,6 +8,18 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\Checkbox;
+use PFBC\Element\File;
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Select;
+use PFBC\Element\Textarea;
+use PFBC\Element\Textbox;
+use PFBC\Element\Token;
+use PFBC\Validation\RegExp;
+use PFBC\Validation\Str;
+use PFBC\Validation\Url;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
@@ -37,11 +49,11 @@ class VideoForm
 
         $oForm = new \PFBC\Form('form_video');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_video', 'form_video'));
-        $oForm->addElement(new \PFBC\Element\Token('video'));
+        $oForm->addElement(new Hidden('submit_video', 'form_video'));
+        $oForm->addElement(new Token('video'));
 
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Choose your album - OR - <a href="%0%">Add a new Album</a>', Uri::get('video', 'main', 'addalbum')),
                 'album_id',
                 $aAlbumName,
@@ -53,19 +65,19 @@ class VideoForm
         );
         unset($aAlbumName);
 
-        $oForm->addElement(new \PFBC\Element\Hidden('album_title', @$oAlbums[0]->name));
+        $oForm->addElement(new Hidden('album_title', @$oAlbums[0]->name));
         $oForm->addElement(
-            new \PFBC\Element\Textbox(
+            new Textbox(
                 t('Video Name:'),
                 'title',
                 [
                     'pattern' => $sTitlePattern,
-                    'validation' => new \PFBC\Validation\RegExp($sTitlePattern)
+                    'validation' => new RegExp($sTitlePattern)
                 ]
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Select(
+            new Select(
                 t('Video Type:'),
                 'type',
                 [
@@ -79,9 +91,9 @@ class VideoForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="hidden" id="regular">'));
+        $oForm->addElement(new HTMLExternal('<div class="hidden" id="regular">'));
         $oForm->addElement(
-            new \PFBC\Element\File(
+            new File(
                 t('Video:'),
                 'video',
                 [
@@ -91,7 +103,7 @@ class VideoForm
             )
         );
         $oForm->addElement(
-            new \PFBC\Element\Checkbox(
+            new Checkbox(
                 '',
                 'agree',
                 [
@@ -99,31 +111,31 @@ class VideoForm
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div><div class="hidden" id="embed">'));
+        $oForm->addElement(new HTMLExternal('</div><div class="hidden" id="embed">'));
         $oForm->addElement(
-            new \PFBC\Element\Textbox(
+            new Textbox(
                 t('Embed URL:'),
                 'embed_code',
                 [
                     'description' => t('e.g., %0%', DbConfig::getSetting('defaultVideo')),
                     'title' => t('Video from Youtube, Vimeo or DailyMotion.'),
-                    'validation' => new \PFBC\Validation\Url
+                    'validation' => new Url
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
+        $oForm->addElement(new HTMLExternal('</div>'));
 
         $oForm->addElement(
-            new \PFBC\Element\Textarea(
+            new Textarea(
                 t('Video Description:'),
                 'description',
                 [
-                    'validation' => new \PFBC\Validation\Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)
+                    'validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)
                 ]
             )
         );
-        $oForm->addElement(new \PFBC\Element\Button(t('Upload'), 'submit', ['icon' => 'video']));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'form.js"></script>'));
+        $oForm->addElement(new Button(t('Upload'), 'submit', ['icon' => 'video']));
+        $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'form.js"></script>'));
         $oForm->render();
     }
 

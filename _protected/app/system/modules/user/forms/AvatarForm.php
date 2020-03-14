@@ -8,6 +8,11 @@
 
 namespace PH7;
 
+use PFBC\Element\Button;
+use PFBC\Element\File;
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\Element\Token;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
@@ -25,17 +30,17 @@ class AvatarForm
 
         $oForm = new \PFBC\Form('form_avatar');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_avatar', 'form_avatar'));
-        $oForm->addElement(new \PFBC\Element\Token('avatar'));
+        $oForm->addElement(new Hidden('submit_avatar', 'form_avatar'));
+        $oForm->addElement(new Token('avatar'));
 
         if (AdminCore::auth() && !User::auth()) {
             $oForm->addElement(
-                new \PFBC\Element\HTMLExternal('<p><a class="s_tMarg bold btn btn-default btn-md" href="' . Uri::get(PH7_ADMIN_MOD, 'user', 'browse') . '">' . t('Back to Browse Users') . '</a></p>')
+                new HTMLExternal('<p><a class="s_tMarg bold btn btn-default btn-md" href="' . Uri::get(PH7_ADMIN_MOD, 'user', 'browse') . '">' . t('Back to Browse Users') . '</a></p>')
             );
         }
 
-        $oForm->addElement(new \PFBC\Element\File(t('Your Profile Photo'), 'avatar', ['accept' => 'image/*', 'required' => 1]));
-        $oForm->addElement(new \PFBC\Element\Button(t('Save'), 'submit', ['icon' => 'check']));
+        $oForm->addElement(new File(t('Your Profile Photo'), 'avatar', ['accept' => 'image/*', 'required' => 1]));
+        $oForm->addElement(new Button(t('Save'), 'submit', ['icon' => 'check']));
         $oForm->render();
     }
 }
