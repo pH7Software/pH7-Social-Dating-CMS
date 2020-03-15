@@ -8,8 +8,10 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Spam;
+use stdClass;
 
 class ForumModel extends ForumCoreModel
 {
@@ -18,7 +20,7 @@ class ForumModel extends ForumCoreModel
      * @param int|null $iOffset
      * @param int|null $iLimit
      *
-     * @return array|\stdClass|bool
+     * @return array|stdClass|bool
      */
     public function getCategory($iCategoryId = null, $iOffset = null, $iLimit = null)
     {
@@ -36,17 +38,17 @@ class ForumModel extends ForumCoreModel
             'SELECT * FROM' . Db::prefix(DbTableName::FORUM_CATEGORY) . $sSqlCategoryId . 'ORDER BY title ASC' . $sSqlLimit
         );
         if ($bIsCategoryId) {
-            $rStmt->bindParam(':categoryId', $iCategoryId, \PDO::PARAM_INT);
+            $rStmt->bindParam(':categoryId', $iCategoryId, PDO::PARAM_INT);
         }
         if ($bIsLimit) {
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
         }
         if ($bIsLimit) {
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         }
         $rStmt->execute();
 
-        return $bIsCategoryId ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        return $bIsCategoryId ? $rStmt->fetch(PDO::FETCH_OBJ) : $rStmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     /**
@@ -59,7 +61,7 @@ class ForumModel extends ForumCoreModel
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return array|\stdClass|bool
+     * @return array|stdClass|bool
      */
     public function getTopic($sForumName, $iForumId, $sTopicSubject, $iTopicId, $iProfileId, $sApproved, $iOffset, $iLimit)
     {
@@ -79,23 +81,23 @@ class ForumModel extends ForumCoreModel
             ' AND (t.approved = :approved) ORDER BY t.createdDate DESC LIMIT :offset, :limit'
         );
 
-        $rStmt->bindValue(':forumName', $sForumName . '%', \PDO::PARAM_STR);
-        $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':forumName', $sForumName . '%', PDO::PARAM_STR);
+        $rStmt->bindValue(':forumId', $iForumId, PDO::PARAM_INT);
 
         if (isset($sTopicSubject, $iTopicId)) {
-            $rStmt->bindValue(':topicSubject', $sTopicSubject . '%', \PDO::PARAM_STR);
-            $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':topicSubject', $sTopicSubject . '%', PDO::PARAM_STR);
+            $rStmt->bindValue(':topicId', $iTopicId, PDO::PARAM_INT);
         }
 
         if ($bIsProfileId) {
-            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
         }
-        $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
-        $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-        $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+        $rStmt->bindValue(':approved', $sApproved, PDO::PARAM_STR);
+        $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+        $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         $rStmt->execute();
 
-        return isset($sTopicSubject, $iTopicId) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        return isset($sTopicSubject, $iTopicId) ? $rStmt->fetch(PDO::FETCH_OBJ) : $rStmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     /**
@@ -106,7 +108,7 @@ class ForumModel extends ForumCoreModel
     public function addCategory($sTitle)
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::FORUM_CATEGORY) . '(title) VALUES(:title)');
-        $rStmt->bindValue(':title', $sTitle, \PDO::PARAM_STR);
+        $rStmt->bindValue(':title', $sTitle, PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -126,10 +128,10 @@ class ForumModel extends ForumCoreModel
             VALUES(:categoryId, :title, :description, :createdDate)'
         );
 
-        $rStmt->bindValue(':categoryId', $iCategoryId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':title', $sTitle, \PDO::PARAM_STR);
-        $rStmt->bindValue(':description', $sDescription, \PDO::PARAM_STR);
-        $rStmt->bindValue(':createdDate', $sCreatedDate, \PDO::PARAM_STR);
+        $rStmt->bindValue(':categoryId', $iCategoryId, PDO::PARAM_INT);
+        $rStmt->bindValue(':title', $sTitle, PDO::PARAM_STR);
+        $rStmt->bindValue(':description', $sDescription, PDO::PARAM_STR);
+        $rStmt->bindValue(':createdDate', $sCreatedDate, PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -150,11 +152,11 @@ class ForumModel extends ForumCoreModel
             VALUES(:profileId, :forumId, :title, :message, :createdDate)'
         );
 
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':title', $sTitle, \PDO::PARAM_STR);
-        $rStmt->bindValue(':message', $sMessage, \PDO::PARAM_STR);
-        $rStmt->bindValue(':createdDate', $sCreatedDate, \PDO::PARAM_STR);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':forumId', $iForumId, PDO::PARAM_INT);
+        $rStmt->bindValue(':title', $sTitle, PDO::PARAM_STR);
+        $rStmt->bindValue(':message', $sMessage, PDO::PARAM_STR);
+        $rStmt->bindValue(':createdDate', $sCreatedDate, PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -174,10 +176,10 @@ class ForumModel extends ForumCoreModel
             VALUES(:profileId, :topicId, :message, :createdDate)'
         );
 
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':message', $sMessage, \PDO::PARAM_STR);
-        $rStmt->bindValue(':createdDate', $sCreatedDate, \PDO::PARAM_STR);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':topicId', $iTopicId, PDO::PARAM_INT);
+        $rStmt->bindValue(':message', $sMessage, PDO::PARAM_STR);
+        $rStmt->bindValue(':createdDate', $sCreatedDate, PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -193,8 +195,8 @@ class ForumModel extends ForumCoreModel
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::FORUM_CATEGORY) .
             'SET title = :title WHERE categoryId = :categoryId');
 
-        $rStmt->bindValue(':categoryId', $iCategoryId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':title', $sTitle, \PDO::PARAM_STR);
+        $rStmt->bindValue(':categoryId', $iCategoryId, PDO::PARAM_INT);
+        $rStmt->bindValue(':title', $sTitle, PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -215,11 +217,11 @@ class ForumModel extends ForumCoreModel
             'SET categoryId = :categoryId, name = :name, description = :description, updatedDate = :updatedDate WHERE forumId = :forumId'
         );
 
-        $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':categoryId', $iCategoryId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':name', $sName, \PDO::PARAM_STR);
-        $rStmt->bindValue(':description', $sDescription, \PDO::PARAM_STR);
-        $rStmt->bindValue(':updatedDate', $sUpdatedDate, \PDO::PARAM_STR);
+        $rStmt->bindValue(':forumId', $iForumId, PDO::PARAM_INT);
+        $rStmt->bindValue(':categoryId', $iCategoryId, PDO::PARAM_INT);
+        $rStmt->bindValue(':name', $sName, PDO::PARAM_STR);
+        $rStmt->bindValue(':description', $sDescription, PDO::PARAM_STR);
+        $rStmt->bindValue(':updatedDate', $sUpdatedDate, PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -240,11 +242,11 @@ class ForumModel extends ForumCoreModel
             'SET title = :title, message = :message, updatedDate = :updatedDate WHERE profileId = :profileId AND topicId = :topicId'
         );
 
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':title', $sTitle, \PDO::PARAM_STR);
-        $rStmt->bindValue(':message', $sMessage, \PDO::PARAM_STR);
-        $rStmt->bindValue(':updatedDate', $sUpdatedDate, \PDO::PARAM_STR);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':topicId', $iTopicId, PDO::PARAM_INT);
+        $rStmt->bindValue(':title', $sTitle, PDO::PARAM_STR);
+        $rStmt->bindValue(':message', $sMessage, PDO::PARAM_STR);
+        $rStmt->bindValue(':updatedDate', $sUpdatedDate, PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -264,10 +266,10 @@ class ForumModel extends ForumCoreModel
             'SET message = :message, updatedDate = :updatedDate WHERE profileId = :profileId AND messageId = :messageId'
         );
 
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':message', $sMessage, \PDO::PARAM_STR);
-        $rStmt->bindValue(':updatedDate', $sUpdatedDate, \PDO::PARAM_STR);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':messageId', $iMessageId, PDO::PARAM_INT);
+        $rStmt->bindValue(':message', $sMessage, PDO::PARAM_STR);
+        $rStmt->bindValue(':updatedDate', $sUpdatedDate, PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -288,14 +290,14 @@ class ForumModel extends ForumCoreModel
         $rStmt = Db::getInstance()->prepare(
             'DELETE FROM' . Db::prefix(DbTableName::FORUM) . 'WHERE categoryId = :categoryId'
         );
-        $rStmt->bindValue(':categoryId', $iCategoryId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':categoryId', $iCategoryId, PDO::PARAM_INT);
         $rStmt->execute();
 
         // Category
         $rStmt = Db::getInstance()->prepare(
             'DELETE FROM' . Db::prefix(DbTableName::FORUM_CATEGORY) . 'WHERE categoryId = :categoryId LIMIT 1'
         );
-        $rStmt->bindValue(':categoryId', $iCategoryId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':categoryId', $iCategoryId, PDO::PARAM_INT);
 
         return $rStmt->execute();
     }
@@ -316,14 +318,14 @@ class ForumModel extends ForumCoreModel
         $rStmt = Db::getInstance()->prepare(
             'DELETE FROM' . Db::prefix(DbTableName::FORUM_TOPIC) . 'WHERE forumId = :forumId'
         );
-        $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':forumId', $iForumId, PDO::PARAM_INT);
         $rStmt->execute();
 
         // Forum
         $rStmt = Db::getInstance()->prepare(
             'DELETE FROM' . Db::prefix(DbTableName::FORUM) . 'WHERE forumId = :forumId LIMIT 1'
         );
-        $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':forumId', $iForumId, PDO::PARAM_INT);
 
         return $rStmt->execute();
     }
@@ -342,16 +344,16 @@ class ForumModel extends ForumCoreModel
         $rStmt = Db::getInstance()->prepare(
             'DELETE FROM' . Db::prefix(DbTableName::FORUM_MESSAGE) . 'WHERE profileId = :profileId AND topicId = :topicId'
         );
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':topicId', $iTopicId, PDO::PARAM_INT);
         $rStmt->execute();
 
         // Topic
         $rStmt = Db::getInstance()->prepare(
             'DELETE FROM' . Db::prefix(DbTableName::FORUM_TOPIC) . 'WHERE profileId = :profileId AND topicId = :topicId LIMIT 1'
         );
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':topicId', $iTopicId, PDO::PARAM_INT);
 
         return $rStmt->execute();
     }
@@ -370,8 +372,8 @@ class ForumModel extends ForumCoreModel
             'DELETE FROM' . Db::prefix(DbTableName::FORUM_MESSAGE) .
             'WHERE profileId = :profileId AND messageId = :messageId LIMIT 1'
         );
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':messageId', $iMessageId, PDO::PARAM_INT);
 
         return $rStmt->execute();
     }
@@ -386,7 +388,7 @@ class ForumModel extends ForumCoreModel
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return int|\stdClass (integer for the number topics returned or an object for the topics list)
+     * @return int|stdClass (integer for the number topics returned or an object for the topics list)
      */
     public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
@@ -413,20 +415,20 @@ class ForumModel extends ForumCoreModel
         );
 
         if ($bDigitSearch) {
-            $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
+            $rStmt->bindValue(':looking', $mLooking, PDO::PARAM_INT);
         } else {
-            $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+            $rStmt->bindValue(':looking', '%' . $mLooking . '%', PDO::PARAM_STR);
         }
 
         if (!$bCount) {
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
         if (!$bCount) {
-            $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = $rStmt->fetchAll(PDO::FETCH_OBJ);
         } else {
             $mData = (int)$rStmt->fetchColumn();
         }
@@ -455,13 +457,13 @@ class ForumModel extends ForumCoreModel
             'AS t ON f.forumId = t.forumId WHERE t.profileId = :profileId AND t.approved = :approved GROUP BY t.topicId ORDER BY t.createdDate DESC LIMIT :offset, :limit'
         );
 
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
-        $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-        $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':approved', $sApproved, PDO::PARAM_STR);
+        $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+        $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         $rStmt->execute();
 
-        return $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        return $rStmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     /**
@@ -477,7 +479,7 @@ class ForumModel extends ForumCoreModel
 
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(forumId) FROM' . Db::prefix(DbTableName::FORUM) . $sSqlProfileId);
         if ($bIsProfileId) {
-            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
         }
         $rStmt->execute();
         $iTotalForums = (int)$rStmt->fetchColumn();
@@ -508,9 +510,9 @@ class ForumModel extends ForumCoreModel
         );
 
         if ($iForumId !== null) {
-            $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':forumId', $iForumId, PDO::PARAM_INT);
         } elseif ($iProfileId !== null) {
-            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
         }
 
         $rStmt->execute();
@@ -540,9 +542,9 @@ class ForumModel extends ForumCoreModel
         );
 
         if ($iTopicId !== null) {
-            $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':topicId', $iTopicId, PDO::PARAM_INT);
         } elseif ($iProfileId !== null) {
-            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
         }
 
         $rStmt->execute();
@@ -607,9 +609,9 @@ class ForumModel extends ForumCoreModel
             'WHERE profileId = :profileId AND DATE_ADD(createdDate, INTERVAL :waitTime MINUTE) > :currentTime LIMIT 1'
         );
 
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':waitTime', $iWaitTime, \PDO::PARAM_INT);
-        $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_STR);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':waitTime', $iWaitTime, PDO::PARAM_INT);
+        $rStmt->bindValue(':currentTime', $sCurrentTime, PDO::PARAM_STR);
         $rStmt->execute();
 
         return $rStmt->rowCount() === 0;
@@ -633,10 +635,10 @@ class ForumModel extends ForumCoreModel
             'WHERE topicId = :topicId AND profileId = :profileId AND DATE_ADD(createdDate, INTERVAL :waitTime MINUTE) > :currentTime LIMIT 1'
         );
 
-        $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':waitTime', $iWaitTime, \PDO::PARAM_INT);
-        $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_STR);
+        $rStmt->bindValue(':topicId', $iTopicId, PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':waitTime', $iWaitTime, PDO::PARAM_INT);
+        $rStmt->bindValue(':currentTime', $sCurrentTime, PDO::PARAM_STR);
         $rStmt->execute();
 
         return $rStmt->rowCount() === 0;
@@ -654,10 +656,10 @@ class ForumModel extends ForumCoreModel
         $rStmt = Db::getInstance()->prepare(
             'SELECT topicId FROM' . Db::prefix(DbTableName::FORUM_TOPIC) . 'WHERE forumId = :forumId'
         );
-        $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':forumId', $iForumId, PDO::PARAM_INT);
         $rStmt->execute();
 
-        return $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        return $rStmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     /**
@@ -672,10 +674,10 @@ class ForumModel extends ForumCoreModel
         $rStmt = Db::getInstance()->prepare(
             'SELECT forumId FROM' . Db::prefix(DbTableName::FORUM) . 'WHERE categoryId = :categoryId'
         );
-        $rStmt->bindValue(':categoryId', $iCategoryId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':categoryId', $iCategoryId, PDO::PARAM_INT);
         $rStmt->execute();
 
-        return $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        return $rStmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     /**
@@ -695,7 +697,7 @@ class ForumModel extends ForumCoreModel
             $rStmt = Db::getInstance()->prepare(
                 'DELETE FROM' . Db::prefix(DbTableName::FORUM_MESSAGE) . 'WHERE topicId = :topicId'
             );
-            $rStmt->bindValue(':topicId', $iId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':topicId', $iId, PDO::PARAM_INT);
             $rStmt->execute();
         }
     }
@@ -718,7 +720,7 @@ class ForumModel extends ForumCoreModel
             $rStmt = Db::getInstance()->prepare(
                 'DELETE FROM' . Db::prefix(DbTableName::FORUM_TOPIC) . 'WHERE forumId = :forumId'
             );
-            $rStmt->bindValue(':forumId', $iId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':forumId', $iId, PDO::PARAM_INT);
             $rStmt->execute();
         }
     }

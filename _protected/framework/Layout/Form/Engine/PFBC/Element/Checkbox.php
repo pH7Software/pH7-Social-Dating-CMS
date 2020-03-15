@@ -5,7 +5,9 @@
 
 namespace PFBC\Element;
 
-class Checkbox extends \PFBC\OptionElement
+use PFBC\OptionElement;
+
+class Checkbox extends OptionElement
 {
     protected $attributes = ['type' => 'checkbox'];
     protected $inline;

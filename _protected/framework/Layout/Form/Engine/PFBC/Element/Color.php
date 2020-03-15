@@ -5,12 +5,14 @@
 
 namespace PFBC\Element;
 
+use PFBC\Validation\HexColor;
+
 class Color extends Textbox
 {
     public function render()
     {
         $this->attributes['type'] = 'color';
-        $this->validation[] = new \PFBC\Validation\HexColor;
+        $this->validation[] = new HexColor;
         parent::render();
     }
 }
