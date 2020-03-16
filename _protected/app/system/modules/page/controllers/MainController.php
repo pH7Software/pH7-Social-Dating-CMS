@@ -153,7 +153,7 @@ class MainController extends Controller
 
     public function link()
     {
-        $this->sTitle = t('Links and Partners of %site_name%');
+        $this->sTitle = t('Links / Partners of %site_name%');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
