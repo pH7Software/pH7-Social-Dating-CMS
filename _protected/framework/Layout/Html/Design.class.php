@@ -421,7 +421,7 @@ class Design
         $aSites = [
             ['title' => 'Free Dating CMS', 'link' => Kernel::SOFTWARE_GIT_REPO_URL],
             ['title' => 'Flirt Hot Girls', 'link' => 'https://01script.com/p/dooba'],
-            ['title' => 'Romance Dating', 'link' => 'http://love-rencontre.wekiss.net'],
+            ['title' => 'Speed Dating', 'link' => 'https://01script.com/p/dooba'],
             ['title' => 'Date your Friends', 'link' => 'https://01script.com/p/dooba']
         ];
 
@@ -433,12 +433,12 @@ class Design
             $aSites[] = ['title' => 'Date Londoners', 'link' => 'https://01script.com/p/dooba'];
         } elseif (strpos($sLangCode, 'fr') !== false) {
             /**
-             * Reset the array since we don't want to mix it up with different langs (default one is English, not French)
+             * Reset the array since we don't want to mix it up with different languages (default one is English, not French)
              */
             $aSites = [
                 ['title' => 'Rencontre d\'un soir', 'link' => 'https://01script.com/p/dooba'],
                 ['title' => 'Flirt Coquin', 'link' => 'https://01script.com/p/dooba'],
-                ['title' => 'Rencontre amoureuse', 'link' => 'http://love-rencontre.wekiss.net']
+                ['title' => 'Rencontre amoureuse', 'link' => 'https://01script.com/p/dooba']
             ];
         }
 
