@@ -457,6 +457,7 @@ class Api
      */
     public function geocoding($address)
     {
+        $return = null;
         $url = self::GOOGLE_API_URL . 'geocode/json?address=' . urlencode($address) . '&amp;key=' . $this->key;
 
         if (function_exists('curl_init')) {
@@ -466,18 +467,20 @@ class Api
         }
 
         $response = json_decode($data, true);
-        $status = $response['status'];
 
-        if ($status == 'OK') {
-            $return = array(
-                $status,
-                $response['results'][0]['types'],
-                $response['results'][0]['geometry']['location']['lat'],
-                $response['results'][0]['geometry']['location']['lng']
-            ); // successful geocode, $status-$precision-$lat-$lng
+        if (!empty($response['status'])) {
+            if ($response['status'] === 'OK') {
+                $return = array(
+                    $response['status'],
+                    $response['results'][0]['types'],
+                    $response['results'][0]['geometry']['location']['lat'],
+                    $response['results'][0]['geometry']['location']['lng']
+                );
+            } else {
+                echo '<!-- geocoding : failure to geocode : ' . $response['status'] . " -->\n";
+            }
         } else {
-            echo '<!-- geocoding : failure to geocode : ' . $status . " -->\n";
-            $return = null; // failure to geocode
+            echo '<!-- geocoding : failure to reach ' . $url . " -->\n";
         }
 
         return $return;
