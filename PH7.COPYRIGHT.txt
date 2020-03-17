@@ -12,8 +12,3 @@ This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 See the License file for more details.
-
-------------------------------------------------------------
-
-
-The all text written and displayed (except third libraries and files where license is given their own) in this software is licensed under Attribution-ShareAlike 3.0 or later (http://creativecommons.org/licenses/by-sa/3.0/).
