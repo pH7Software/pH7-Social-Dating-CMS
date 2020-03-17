@@ -7,7 +7,7 @@
 #                  (e.g., you@you:/path/to/root-project$ bash _tools/pH7.sh).
 #
 # Author:          Pierre-Henry Soria <hello@ph7cms.com>
-# Copyright:       (c) 2014-2019, Pierre-Henry Soria. All Rights Reserved.
+# Copyright:       (c) 2014-2020, Pierre-Henry Soria. All Rights Reserved.
 # License:         GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 ##
 
