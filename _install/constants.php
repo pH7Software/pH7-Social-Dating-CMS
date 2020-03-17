@@ -3,10 +3,10 @@
  * @title            Constants File
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  *
- * @see             http://ph7cms.com
+ * @see             https://ph7cms.com
  */
 defined('PH7') or exit('Restricted access');
 
