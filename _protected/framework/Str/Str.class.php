@@ -287,7 +287,7 @@ namespace PH7\Framework\Str {
          */
         public static function noSpaces($sValue)
         {
-            return strlen(trim($sValue)) > 0;
+            return trim($sValue) !== '';
         }
 
         /**
