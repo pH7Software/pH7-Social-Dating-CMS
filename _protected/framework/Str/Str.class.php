@@ -4,7 +4,7 @@
  * @desc             Many useful functions for string manipulation.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2011-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Str
  */
@@ -229,7 +229,7 @@ namespace PH7\Framework\Str {
                     )
                 );
             } else {
-                // Recovers a portion of the string
+                // Recover a portion of the string
                 $sExtract = substr($sText, $iStart, $iLimit);
 
                 // Find the last space after the last word of the extract
