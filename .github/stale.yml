@@ -31,6 +31,7 @@ issues:
     - feature
     - improvement
     - enhancement
+    - "potential-bug:investigation-needed"
 
 
 # Set to true to ignore issues in a milestone (defaults to false)
