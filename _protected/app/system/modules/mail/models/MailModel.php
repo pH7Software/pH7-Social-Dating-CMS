@@ -82,7 +82,7 @@ class MailModel extends MailCoreModel
             AND msg.recipient OR msg.sender = m.profileId
             WHERE msg.recipient = :recipient
             AND msg.sender = :sender OR msg.sender = :recipient
-            AND NOT FIND_IN_SET(\'recipient\', msg.trash)
+            AND NOT FIND_IN_SET(\'recipient\', msg.toDelete)
             AND NOT FIND_IN_SET(\'sender\', msg.toDelete) LIMIT 25'
         );
 
