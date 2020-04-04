@@ -105,7 +105,7 @@ class MainController extends Controller
                 
                 $this->setRead($oMsg);
 
-                $this->view->page_title = str_replace('re ', '',$oMsg->title) . ' - ' . $this->view->page_title;
+                $this->view->page_title = str_replace('re ', '', $oMsg->title) . ' - ' . $this->view->page_title;
                 $this->view->msg = $oMsg;
             }
 
@@ -165,7 +165,7 @@ class MainController extends Controller
                 $this->sTitle = t('Empty!');
                 $this->notFound();
             } else {
-                $this->view->page_title = str_replace('re ', '',$oMsg->title) . ' - ' . $this->view->page_title;
+                $this->view->page_title = str_replace('re ', '', $oMsg->title) . ' - ' . $this->view->page_title;
                 $this->view->msg = $oMsg;
             }
 
@@ -227,7 +227,7 @@ class MainController extends Controller
             } else {
                 $this->setRead($oMsg);
 
-                $this->view->page_title = str_replace('re ', '',$oMsg->title) . ' - ' . $this->view->page_title;
+                $this->view->page_title = str_replace('re ', '', $oMsg->title) . ' - ' . $this->view->page_title;
                 $this->view->msg = $oMsg;
             }
 
