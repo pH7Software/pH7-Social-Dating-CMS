@@ -1,5 +1,16 @@
+<div class="msg-menu">
+    <a href="{{ $design->url('mail','main','compose') }}">Compose</a> |
+    <a href="{{ $design->url('mail','main','inbox') }}">Inbox({count_unread_mail}) </a> |
+    <a href="{{ $design->url('mail','main','outbox') }}">Sent</a> |
+    <a href="{{ $design->url('mail','main','trash') }}">Trash</a> |
+    <a href="{{ $design->url('user','setting','index') }}#p=notification">Settings</a> 
+</div>
+<hr class="msg-hoz-rule">
 {if empty($error)}
     <div class="middle">
+        
+        {{ SearchMailForm::display() }}
+        <br>
         <form method="post" action="{{ $design->url('mail','main','inbox') }}">
             {{ $designSecurity->inputToken('mail_action') }}
 
@@ -22,16 +33,21 @@
                 {{ $move_to = ($is_delete) ? 'delete' : 'trash' }}
                 {{ $label_txt = ($is_delete) ? t('Delete') : t('Trash') }}
 
+                {{ $subject = escape(str_replace('re ', '', $msg->title), true) }}
+
+                
                 <div class="msg_content" id="mail_{% $msg->messageId %}">
                     <div class="left">
                         <input type="checkbox" name="action[]" value="{% $msg->messageId %}" />
                     </div>
 
                     {if $msg->status == MailModel::UNREAD_STATUS}
-                        <span class="label label-primary">{lang 'New'}</span>
+                        <span class="label label-primary">{lang 'Unread'}</span>
                     {/if}
 
                     <div class="user">{{ $avatarDesign->get($usernameSender, $firstNameSender, null, 32) }}</div>
+                    
+                    <div class="msg-cs"><?php echo $usernameSender ?></div>
 
                     {if $is_admin}
                         <div class="content" title="{lang 'See more'}"><a href="#divShow_{% $msg->messageId %}">
@@ -40,7 +56,7 @@
                     {/if}
 
                     <div class="subject">{subject}</div>
-                    <div class="message">{% substr($message,0,50) %}</div>
+                    <div class="message">{% substr($message,0,20) %}</div>
 
                     {if $is_admin}
                         </a>
@@ -54,11 +70,8 @@
                         <div class="hidden center" id="divShow_{% $msg->messageId %}">{message}</div>
                     {/if}
 
-                    <div class="action">
-                        <a href="{{ $design->url('mail','main','compose',"$usernameSender,$subject") }}">{lang 'Reply'}</a> | <a href="javascript:void(0)" onclick="mail('{move_to}',{% $msg->messageId %},'{csrf_token}')">{label_txt}</a>
-                        {if $is_trash}
-                            | <a href="javascript:void(0)" onclick="mail('restore',{% $msg->messageId %},'{csrf_token}')">{lang 'Restore'}</a>
-                        {/if}
+                    <div class="msg-read">
+                     <a class="content" title="{lang 'Read'}" onclick="window.location='{{ $design->url('mail','main',$slug_url,$msg->messageId) }}'">Read</a>
                     </div>
                 </div>
             {/each}

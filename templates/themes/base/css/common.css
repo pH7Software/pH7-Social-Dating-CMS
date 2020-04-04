@@ -314,6 +314,129 @@ img, video, iframe {
     max-width: 100%;
 }
 
+/* Begin Msg */
+
+.msg-search-bar {
+    max-width: 1000px;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.msg-search-input {
+     display: inline-flex;
+     max-width: 250px;
+     margin: auto 10px auto 10px;
+}
+
+.msg-search-input-text {
+     display: inline-flex;
+     width: 250px;
+     margin: auto 10px auto 10px;
+}
+
+.msg-menu {
+    font-size: 18px;
+    text-align: center;
+    padding: 15px;
+    margin-bottom: -15px;
+}
+
+.msg_content {
+    border: solid 1px #ff0000;
+    padding: 10px;
+    margin: 5px auto 5px auto;
+    border-radius: 9px;
+    background-color: #ccc;
+    max-width: 1000px
+}
+
+.msg-text-area {
+    border: solid 1px #ff0000;
+    background-color: #ccc;
+    padding: 25px;
+    text-align: justify;
+    margin-left: 0;
+    border-radius: 5px;
+    width: 600px;
+    min-height: 200px;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+
+.msg-label {
+    padding: 5px;
+    text-align: justify;
+    margin-left: 0;
+    width: 600px;
+}
+
+.msg-l-sent {
+    padding: 5px;
+    text-align: center;
+    margin: -20px auto 50px 450px;
+    width: 150px;
+    color: #006600;
+    font-size: 10px;
+    border: solid 1px #006600;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.msg-l-received {
+    padding: 5px;
+    text-align: center;
+    margin: -20px auto 50px 450px;
+    width: 150px;
+    color: #0099cc;
+    font-size: 10px;
+    border: 1px solid #0099cc;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+.msg-from {
+    padding: 15px;
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #000033;
+    background-color: #ccc;
+    border-radius: 5px;
+    font-weight: 400;
+    max-width: 600px;
+}
+
+.msg-cy {
+    background-color: #ccc;
+    padding: 15px;
+    text-align: justify;
+    margin-left: 0;
+    border-radius: 5px;
+    width: 600px;
+    text-align: center;
+}
+
+.msg-cc {
+    background-color: #ccc;
+    padding: 15px;
+    text-align: justify;
+    margin-left: 0;
+    border-radius: 5px;
+    width: 600px;
+}
+
+.msg-cs {
+    background-color: #ccc;
+    margin-left: 0;
+    border-radius: 5px;
+    width: 600px;
+}
+
+.msg-hoz-rule {
+    max-width: 800px;
+    margin: 25px auto 0 auto;
+}
+
+/* End Msg */
+
 /*--- Advertising Available ---*/
 .ad_728_90 {}
 .ad_200_200 {}

@@ -73,7 +73,29 @@ class MailModel extends MailCoreModel
 
         return $rStmt->fetch(\PDO::FETCH_OBJ);
     }
+    
+    public function getMsgHistory($iRecipient, $iSender)
+    {
+        $rStmt = Db::getInstance()->prepare(
+            'SELECT msg.*, m.profileId, m.username, m.firstName FROM' . Db::prefix(DbTableName::MESSAGE) .
+            'AS msg LEFT JOIN ' . Db::prefix(DbTableName::MEMBER) . 'AS m ON msg.sender = m.profileId
+            AND msg.recipient OR msg.sender = m.profileId
+            WHERE msg.recipient = :recipient
+            AND msg.sender = :sender OR msg.sender = :recipient
+            AND NOT FIND_IN_SET(\'recipient\', msg.trash)
+            AND NOT FIND_IN_SET(\'sender\', msg.toDelete) LIMIT 25'
+        );
 
+        $rStmt->bindValue(':recipient', $iRecipient, \PDO::PARAM_INT);
+        $rStmt->bindValue(':sender', $iSender, \PDO::PARAM_INT);
+        
+        $rStmt->execute();
+
+        $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+                    
+        return $mData;
+    }
+    
     /**
      * @param int $iProfileId
      * @param int $iMessageId

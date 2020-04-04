@@ -37,6 +37,9 @@ class MainController extends Controller
 
     /** @var int */
     private $iProfileId;
+    
+    /** @var int */
+    private $iSender;
 
     /** @var bool */
     private $bAdminLogged;
@@ -74,7 +77,7 @@ class MainController extends Controller
     {
         // Add JS file for the Ajax autocomplete usernames list.
         $this->design->addJs(PH7_STATIC . PH7_JS, 'autocompleteUsername.js');
-        $this->view->page_title = t('MailBox : Compose a new message');
+        $this->view->page_title = t('Messages : Compose new message');
         $this->view->h2_title = t('Compose a new message');
 
         $this->output();
@@ -83,7 +86,7 @@ class MainController extends Controller
     public function inbox()
     {
         /** Default title **/
-        $this->sTitle = t('MailBox : Inbox');
+        $this->sTitle = t('Messages : Inbox');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
 
@@ -94,9 +97,15 @@ class MainController extends Controller
                 $this->sTitle = t('No Messages Found!');
                 $this->notFound();
             } else {
+                
+                $iSender = $oMsg->sender;
+
+                $msgsOld = $this->oMailModel->getMsgHistory($this->iProfileId, $iSender);
+                $this->view->msgsOld = $msgsOld;
+                
                 $this->setRead($oMsg);
 
-                $this->view->page_title = $oMsg->title . ' - ' . $this->view->page_title;
+                $this->view->page_title = str_replace('re ', '',$oMsg->title) . ' - ' . $this->view->page_title;
                 $this->view->msg = $oMsg;
             }
 
@@ -145,7 +154,7 @@ class MainController extends Controller
 
     public function outbox()
     {
-        $this->sTitle = t('MailBox : Messages Sent');
+        $this->sTitle = t('Messages : Sent');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
 
@@ -156,7 +165,7 @@ class MainController extends Controller
                 $this->sTitle = t('Empty!');
                 $this->notFound();
             } else {
-                $this->view->page_title = $oMsg->title . ' - ' . $this->view->page_title;
+                $this->view->page_title = str_replace('re ', '',$oMsg->title) . ' - ' . $this->view->page_title;
                 $this->view->msg = $oMsg;
             }
 
@@ -189,7 +198,7 @@ class MainController extends Controller
             );
 
             if (empty($oMail)) {
-                $this->sTitle = t('Sorry!');
+                $this->sTitle = t('Not Found!');
                 $this->notFound();
                 // We modify the default error message
                 $this->view->error = t('No messages found.');
@@ -205,7 +214,7 @@ class MainController extends Controller
 
     public function trash()
     {
-        $this->sTitle = t('MailBox : Trash');
+        $this->sTitle = t('Messages : Trash');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
 
@@ -218,7 +227,7 @@ class MainController extends Controller
             } else {
                 $this->setRead($oMsg);
 
-                $this->view->page_title = $oMsg->title . ' - ' . $this->view->page_title;
+                $this->view->page_title = str_replace('re ', '',$oMsg->title) . ' - ' . $this->view->page_title;
                 $this->view->msg = $oMsg;
             }
 
@@ -251,10 +260,10 @@ class MainController extends Controller
             );
 
             if (empty($oMail)) {
-                $this->sTitle = t('Sorry!');
+                $this->sTitle = t('Not Found!');
                 $this->notFound();
                 // We modify the default 404 error message
-                $this->view->error = t('No trashed messages were found.');
+                $this->view->error = t('Trash is empty!');
             } else {
                 $this->view->msgs = $oMail;
             }
@@ -267,7 +276,7 @@ class MainController extends Controller
 
     public function search()
     {
-        $this->sTitle = t('Mail Search - Look for a message');
+        $this->sTitle = t('Messages - Search');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
         $this->output();
@@ -310,7 +319,7 @@ class MainController extends Controller
             $this->sTitle = t("Your search didn't match any of your messages.");
             $this->notFound();
         } else {
-            $this->sTitle = t('Mail | Message - Your search returned');
+            $this->sTitle = t('Messages - Search Results');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
             $this->view->h3_title = nt('%n% message found!', '%n% messages found!', $this->iTotalMails);
@@ -333,9 +342,9 @@ class MainController extends Controller
 
         if ($this->bStatus) {
             $this->oMailModel->setReadMsg($iId);
-            $this->sMsg = t('Your message has been moved to your trash bin.');
+            $this->sMsg = t('Message has been moved to the trash.');
         } else {
-            $this->sMsg = t("Your message doesn't exist anymore in your trash bin.");
+            $this->sMsg = t("Your message doesn't exist in the trash.");
         }
 
         Header::redirect(
@@ -360,7 +369,7 @@ class MainController extends Controller
                         MailModel::TRASH_MODE
                     );
                 }
-                $this->sMsg = t('Your message(s) has/have been moved to your trash bin.');
+                $this->sMsg = t('Your message(s) has/have been moved to the trash.');
             }
         }
 
@@ -379,9 +388,9 @@ class MainController extends Controller
         );
 
         if ($this->bStatus) {
-            $this->sMsg = t('Your message has been moved to your inbox.');
+            $this->sMsg = t('Your message has been restored and is now back to your inbox.');
         } else {
-            $this->sMsg = t("Your message doesn't exist anymore in your inbox.");
+            $this->sMsg = t("Your message doesn't exist in your inbox.");
         }
 
         Header::redirect(
@@ -404,7 +413,7 @@ class MainController extends Controller
                         MailModel::RESTORE_MODE
                     );
                 }
-                $this->sMsg = t('Your message(s) has/have been moved to your inbox.');
+                $this->sMsg = t('Your message(s) has/have been restored and is/are back in your inbox.');
             }
         }
 
