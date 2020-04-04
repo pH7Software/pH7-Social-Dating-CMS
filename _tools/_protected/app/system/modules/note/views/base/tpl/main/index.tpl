@@ -1,0 +1,1 @@
+{include 'home.inc.tpl'}

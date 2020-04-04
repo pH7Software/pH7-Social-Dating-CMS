@@ -1,0 +1,227 @@
+/*
+ * Author:        Pierre-Henry Soria <hello@ph7cms.com>
+ * Copyright:     (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+#logo {
+    float: left;
+    margin-top: 20px;
+}
+
+#headings, .noscript {
+    margin-top: 0;
+}
+
+.folio_block {
+    position: absolute;
+}
+
+.carousel {
+    margin-top: 30px;
+}
+
+.splash_slideshow {
+    float: left;
+    margin-top: 22px;
+}
+
+/** Avatar Profiles Block **/
+.pic_block {
+    margin: 5px 0 15px;
+}
+
+.pic_block:hover a {
+    opacity: .5;
+    transition: opacity .35s ease-in-out;
+    -webkit-transition: opacity .35s ease-in-out;
+    -moz-transition: opacity .35s ease-in-out;
+    -o-transition: opacity .35s ease-in-out;
+    -ms-transition: opacity .35s ease-in-out;
+    -khtml-transition: opacity .35s ease-in-out;
+}
+
+.pic_block a:hover {
+    opacity: 1;
+}
+
+.pic img:hover {
+    /* Rewrite the .pic class for splash page (already defined in style.css) */
+    opacity: 1 !important;
+}
+
+.window, .profiles_window {
+    border: 1px solid #999;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+}
+
+h1:hover {
+    color: #1877D5;
+    cursor: default;
+}
+
+.img_reel {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.paging {
+    position: absolute;
+    bottom: 30px;
+    right: -7px;
+    width: 178px;
+    height: 47px;
+    z-index: 100;
+    text-align: center;
+    line-height: 40px;
+    background: url(../img/paging_bg2.png) no-repeat;
+    display: none;
+}
+
+.paging a {
+    padding: 5px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.paging a.active {
+    font-weight: bold;
+    background: #920000;
+    border: 1px solid #610000;
+    -border-radius: 4px;
+}
+
+.paging a:hover {
+    font-weight: bold;
+}
+
+.block_txt {
+    margin: 380px 80px 5px 10px;
+}
+
+.counter {
+    margin: 15px 2px 4px 1px;
+}
+
+/** Buttons (links) **/
+.bt_login_remember, .bt_login_forgot {
+    width: 200px;
+    margin-left: 5px;
+}
+
+.bt_login_remember {
+    margin-top: -8px;
+}
+
+.bt_login_forgot {
+    margin-top: -2px;
+}
+
+#form_join_user .pfbc-label strong {
+    color: #F55959 !important;
+}
+
+#form_login_user label {
+    font-weight: normal !important;
+}
+
+video#bgvid {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background-size: cover;
+}
+
+.login_block {
+    margin: -52px 0 10px 52%;
+    width: 580px;
+}
+
+/* Slideshow */
+.window {
+    height: 300px;
+    width: 590px;
+}
+
+.profiles_window {
+    margin: 2px;
+    max-height: 546px;
+    max-width: 590px
+}
+
+.img_reel img {
+    float: left;
+    height: 300px;
+    width: 588px;
+}
+
+/* Make sure Bootstrap "alert" message is always well displayed */
+.alert {
+    z-index: 999;
+    position: absolute;
+}
+
+/*** Media Queries ***/
+
+/* 1185px or less */
+@media (max-width: 1185px) {
+    .left {
+        width: 400px;
+    }
+}
+
+/* 1209px or less */
+@media (max-width: 1209px) {
+    .login_block {
+        display: none;
+    }
+
+    .login_button {
+        display: block !important;
+    }
+}
+
+/* 1230px or less */
+@media (max-width: 1230px) {
+    .window {
+        height: 200px;
+        width: 393px;
+    }
+
+    .profiles_window {
+        margin: 2px;
+        max-height: 614px;
+        max-width: 393px;
+    }
+
+    .img_reel img {
+        float: left;
+        height: 200px;
+        width: 393px;
+    }
+}
+
+/* 925px or less */
+@media (max-width: 760px) {
+    .left, .right, .login_block {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+    }
+
+    .center {
+        /* Reset width for small screens */
+        width: auto;
+    }
+}

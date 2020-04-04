@@ -1,0 +1,1 @@
+<?php $this->display($this->getCurrentController() . PH7_DS . $this->registry->action . '.tpl', $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>

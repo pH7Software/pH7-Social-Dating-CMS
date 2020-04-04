@@ -1,0 +1,4 @@
+We need your help in order to make pH7CMS "the best dating site/app builder" ever made! 
+Thanks for helping us to contribute to this project by adding your code modifications on the official Git repo: https://github.com/pH7Software/pH7-Social-Dating-CMS
+
+Got a question? Please feel free to shoot a message @: hi{AT}ph7{D0T}me

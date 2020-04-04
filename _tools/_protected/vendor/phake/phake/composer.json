@@ -1,0 +1,44 @@
+{
+    "name": "phake/phake",
+    "type": "library",
+    "description": "The Phake mock testing library",
+    "keywords": ["testing", "mock"],
+    "homepage": "https://github.com/mlively/Phake",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Mike Lively",
+            "email": "m@digitalsandwich.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "sebastian/comparator": "~1.1"
+    },
+    "require-dev": {
+        "ext-soap": "*",
+        "doctrine/common": "2.3.*",
+        "phpunit/phpunit": "3.7.*",
+        "hamcrest/hamcrest-php": "1.1.*",
+        "codeclimate/php-test-reporter": "dev-master"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": {
+            "Phake": "src/"
+        }
+    },
+    "suggest": {
+        "doctrine/common": "Allows mock annotations to use import statements for classes.",
+        "hamcrest/hamcrest-php": "Use Hamcrest matchers."
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.0.0-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

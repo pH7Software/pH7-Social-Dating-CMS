@@ -1,0 +1,50 @@
+/*
+ * Author:        Pierre-Henry Soria <hello@ph7cms.com>
+ * Copyright:     (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+h2 {
+    text-transform: uppercase;
+    text-decoration: underline;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.profile-section {
+    padding-bottom: 4rem;
+}
+
+.profile-section::after {
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    content: '';
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.chat, .message, .friend, .heart {
+    font-size: 80px;
+    line-height: 100px;
+}
+
+.chat {
+    color: #ff4000;
+}
+
+.message {
+    color: #45c000;
+}
+
+.friend {
+    color: #2b65f8;
+}
+
+.heart {
+    color: #F06;
+}
+
+.bottom {
+    float: none !important;
+}

@@ -1,0 +1,183 @@
+/*--------------------------
+    Top Bar with Headings
+---------------------------*/
+
+#topBar {
+    background: url('../img/top_bar_bg.jpg') repeat-x;
+    height: 163px;
+}
+
+/*-------------------
+    Photo area
+--------------------*/
+
+#photos {
+    margin: 60px auto 100px;
+    overflow: hidden;
+    width: 880px;
+}
+
+#photos:hover a {
+    opacity: 0.5;
+}
+
+#photos a,
+#loadMore {
+    background-position: center center;
+    background-color: rgba(14, 14, 14, 0.3);
+    float: left;
+    height: 110px;
+    margin: 1px 1px 0 0;
+    overflow: hidden;
+    width: 145px;
+
+    -moz-transition: 0.25s;
+    -webkit-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+}
+
+#photos a:hover {
+    opacity: 1;
+}
+
+#loadMore {
+    cursor: pointer;
+    line-height: 110px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
+#loadMore:hover {
+    color: #fff;
+    text-shadow: 0 0 4px #fff;
+}
+
+/*----------------------
+    Camera slide up
+-----------------------*/
+
+#camera {
+    background: url('../img/cam_bg.jpg') repeat-y;
+    border: 1px solid #f0f0f0;
+    height: 525px;
+    width: 598px;
+    position: fixed;
+    bottom: -466px;
+    left: 50%;
+    margin-left: -300px;
+    z-index: 1200;
+
+    -moz-border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+
+    -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+}
+
+.camTop {
+    background: url('../img/cam.png') no-repeat center center;
+    width: 100%;
+    height: 66px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.settings {
+    background: url('../img/settings.png') no-repeat;
+    cursor: pointer;
+    height: 28px;
+    position: absolute;
+    right: 37px;
+    top: 448px;
+    width: 30px;
+}
+
+.settings:hover {
+    background-position: left bottom;
+}
+
+#screen {
+    width: 520px;
+    height: 370px;
+    margin: 66px auto 22px;
+    background: #ccc;
+
+    line-height: 360px;
+    text-align: center;
+    color: #666;
+}
+
+.buttonPane {
+    text-align: center;
+}
+
+.tooltip {
+    background: url('../img/tooltip.png') no-repeat;
+    position: absolute;
+    width: 177px;
+    height: 146px;
+    right: 38px;
+    top: -140px;
+}
+
+.blueButton, .greenButton {
+    background: url('../img/buttons.png') no-repeat;
+    text-shadow: 1px 1px 1px #277c9b;
+    color: #fff !important;
+    width: 99px;
+    height: 38px;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    line-height: 32px;
+    text-align: center;
+    margin: 0 4px;
+}
+
+.greenButton {
+    background: url('../img/buttons.png') no-repeat right top;
+    text-shadow: 1px 1px 1px #498917;
+}
+
+.blueButton:hover,
+.greenButton:hover {
+    background-position: left bottom;
+    text-decoration: none !important;
+}
+
+.greenButton:hover {
+    background-position: right bottom;
+}
+
+.blueButton:active,
+.greenButton:active {
+    position: relative;
+    bottom: -1px;
+}
+
+.hidden {
+    display: none;
+}
+
+/*-------------------------
+    Generic styles
+--------------------------*/
+
+/*
+a, a:visited {
+    text-decoration:none;
+    outline:none;
+    color:#54a6de;
+}
+
+a:hover{
+    text-decoration:underline;
+}
+*/

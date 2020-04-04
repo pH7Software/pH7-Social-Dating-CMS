@@ -1,0 +1,19 @@
+/*
+ * Author:        Pierre-Henry Soria <ph7software@gmail.com>
+ * Copyright:     (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+.post-edit {
+    color: #999;
+}
+
+.post-ident {
+    background: #F1F1F1;
+    border-color: #DDE4EB;
+    border-style: none none dashed none;
+    border-width: 1px;
+    padding: .35em 0;
+    margin-top: 10%;
+    margin-bottom: 5px;
+}

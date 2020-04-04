@@ -1,0 +1,285 @@
+/*
+ * Author:        Pierre-Henry Soria <ph7software@gmail.com>
+ * Copyright:     (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+pre {
+    border: 1px solid #3366CC;
+    background-color: #E5ECF9;
+    padding: 0.5em;
+    font-family: 'Courier New', Courier, monospace, sans-serif;
+}
+
+code {
+    white-space: nowrap;
+}
+
+/** TITLE (h1, h2, h3, h4) **/
+h1 {
+    font-size: 1.85rem;
+}
+
+h2 {
+    font-size: 1.65rem;
+}
+
+h3 {
+    font-size: 1.55rem;
+}
+
+h4 {
+    font-size: 1.45rem;
+}
+
+h1::first-letter, h2::first-letter {
+    text-transform: capitalize;
+}
+
+h1, h2, h3, h4 {
+    margin-top: 2px;
+    font-weight: bold;
+}
+
+p {
+    margin: 0 0 0;
+}
+
+img {
+    border: 0;
+}
+
+p, li, pre {
+    line-height: 1.5em;
+}
+
+/* A tag */
+a {
+    color: #08c;
+    outline-style: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover, a:active {
+    color: #F24C9E;
+    text-decoration: underline;
+    text-shadow: 0 0 5px #fff, 0 0 8px rgba(255, 255, 255, .6);
+}
+
+ul li {
+    display: block;
+}
+
+abbr {
+    border-bottom: 1px dotted #666;
+}
+
+h2.first {
+    margin: 0 0 10px;
+}
+
+/** Table **/
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.quote::before, .quote::after {
+    font-weight: bold;
+}
+
+.quote::before {
+    content: "« ";
+}
+
+.quote::after {
+    content: " »";
+}
+
+.italic {
+    font-style: italic;
+}
+
+.small {
+    font-size: x-small;
+}
+
+.border {
+    margin: 2px;
+    border: 1px solid #ccc;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.hidden {
+    display: none;
+}
+
+.inline {
+    display: inline;
+}
+
+.s_button, .m_button, .b_button {
+    margin: 25px;
+    color: #000;
+    text-decoration: none;
+    text-align: center;
+    line-height: 20px;
+    font-family: 'Helvetica Neue', 'Open Sans', Helvetica, sans-serif;
+    border-color: #a8a8a8 #888 #888 #a8a8a8;
+    border-style: solid;
+    border-width: 1px;
+    background-color: #ececec;
+    background-image: linear-gradient(100% 100% 90deg, #e3e3e3, #ccc);
+    background-image: -moz-linear-gradient(100% 100% 90deg, #e3e3e3, #ccc);
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ccc), to(#e3e3e3));
+    background-image: -o-gradient(linear, 0% 0%, 0% 100%, from(#ccc), to(#e3e3e3));
+    background-image: -ms-gradient(linear, 0% 0%, 0% 100%, from(#ccc), to(#e3e3e3));
+    background-image: -khtml-linear-gradient(100% 100% 90deg, #e3e3e3, #ccc);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+    border-radius: 3px;
+    padding: 1px 3px 1px 3px;
+}
+
+.s_button {
+    font-size: 11px;
+}
+
+.m_button {
+    font-size: 14px;
+    line-height: 30px;
+    margin: 10px;
+}
+
+.b_button {
+    font-size: 22px;
+    line-height: 30px;
+    margin: 10px;
+}
+
+.success {
+    color: green;
+}
+
+dt {
+    font-weight: bold;
+}
+
+dd {
+    margin-bottom: 4px;
+}
+
+.pic {
+    margin: 5px 0 15px;
+}
+
+.pic img {
+    opacity: 1;
+    margin: 1px;
+    transition: opacity .40s ease-in-out;
+    -webkit-transition: opacity .40s ease-in-out;
+    -moz-transition: opacity .40s ease-in-out;
+    -o-transition: opacity .40s ease-in-out;
+    -ms-transition: opacity .40s ease-in-out;
+    -khtml-transition: opacity .40s ease-in-out;
+}
+
+.pic img:hover {
+    opacity: 0.5;
+}
+
+.label_flow {
+    overflow: auto;
+    border: 1px #D7D7D7 solid;
+    padding: 4px;
+    margin: 8px;
+    max-height: 200px;
+}
+
+/* Very Small Margin */
+.vs_marg {
+    margin: 5px;
+}
+
+/* Very Small Top & Bottom Margin */
+.vs_tbMarg {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* Small Margin */
+.s_marg {
+    margin: 12px;
+}
+
+/* Medium Margin */
+.m_marg {
+    margin: 20px;
+}
+
+/* Small Top Margin */
+.s_tMarg {
+    margin-top: 12px;
+}
+
+/* Small Bottom Margin */
+.s_bMarg {
+    margin-bottom: 12px;
+}
+
+/* Small Left Margin */
+.s_lMarg {
+    margin-left: 12px;
+}
+
+/* Small Right Margin */
+.s_rMarg {
+    margin-right: 12px;
+}
+
+/* Very Small Padding */
+.vs_padd {
+    padding: 5px;
+}
+
+/* Small Padding */
+.s_padd {
+    padding: 12px;
+}
+
+.thumb {
+    display: block;
+    margin-right: 12px;
+    line-height: 1;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.thumb:hover {
+    border-color: #08c;
+    box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
+}
+
+.thumb > img {
+    max-width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.thumb, .thumb > img {
+    border-radius: 5px;
+}
+
+.bottom {
+    width: 100%;
+    vertical-align: bottom;
+    float: left;
+}
+
+#country_map, #profile_map {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}

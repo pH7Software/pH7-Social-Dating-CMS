@@ -1,0 +1,3 @@
+<?php for($sData_i=0,$sData_total=count($aData);$sData_i<$sData_total;$sData_i++) { $sData=$aData[$sData_i]; ?>
+    <?php echo  $sData ;?>
+<?php } ?>

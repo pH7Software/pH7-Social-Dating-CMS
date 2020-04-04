@@ -1,0 +1,19 @@
+a.like {
+    display: inline-block;
+    text-decoration: none;
+}
+
+a.like:hover {
+    text-decoration: underline;
+}
+
+a.like_voted {
+    font-style: italic;
+    cursor: default;
+    background: url(../img/icon/heart.gif) 0% 50% no-repeat;
+    padding-left: 20px;
+}
+
+a.like_voted:hover {
+    text-decoration: none;
+}

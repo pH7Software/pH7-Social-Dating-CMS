@@ -1,0 +1,67 @@
+language: php
+
+php:
+  - 5.3
+  - 5.4
+  - 5.5
+  - 5.6
+  - 7.0
+  - hhvm
+  - nightly
+
+env:
+  - PHPUNIT_VERSION=4.8.*
+  - PHPUNIT_VERSION=4.8.x-dev
+  - PHPUNIT_VERSION=5.0.x-dev
+  - PHPUNIT_VERSION=5.1.x-dev
+  - PHPUNIT_VERSION=6.0.x-dev
+
+
+script:
+  - |
+    if [[ $TRAVIS_PHP_VERSION = "hhv"* ]]; then
+      hhvm -vEval.EnableHipHopSyntax=true ./bin/phpunit --coverage-clover=build/logs/clover.xml
+    else
+      ./bin/phpunit --coverage-clover=build/logs/clover.xml
+    fi
+  -
+
+matrix:
+  allow_failures:
+    - php: nightly
+    - env: PHPUNIT_VERSION=4.8.x-dev
+    - env: PHPUNIT_VERSION=5.0.x-dev
+    - env: PHPUNIT_VERSION=5.1.x-dev
+    - env: PHPUNIT_VERSION=6.0.x-dev
+  exclude:
+    - php: 5.3
+      env: PHPUNIT_VERSION=5.0.x-dev
+    - php: 5.4
+      env: PHPUNIT_VERSION=5.0.x-dev
+    - php: 5.5
+      env: PHPUNIT_VERSION=5.0.x-dev
+    - php: 5.3
+      env: PHPUNIT_VERSION=5.1.x-dev
+    - php: 5.4
+      env: PHPUNIT_VERSION=5.1.x-dev
+    - php: 5.5
+      env: PHPUNIT_VERSION=5.1.x-dev
+    - php: 5.3
+      env: PHPUNIT_VERSION=6.0.x-dev
+    - php: 5.4
+      env: PHPUNIT_VERSION=6.0.x-dev
+    - php: 5.5
+      env: PHPUNIT_VERSION=6.0.x-dev
+    - php: 5.6
+      env: PHPUNIT_VERSION=6.0.x-dev
+    - php: hhvm
+      env: PHPUNIT_VERSION=6.0.x-dev
+
+install:
+  - composer require --dev phpunit/phpunit:${PHPUNIT_VERSION}
+  - composer install --dev
+
+after_script:
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
+  - CODECLIMATE_REPO_TOKEN=74f9cd376c20c19d09d6c73e4bac9dad48209fa7f3fb44b650ec7d70db81a51a ./bin/test-reporter

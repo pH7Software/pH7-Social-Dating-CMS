@@ -1,0 +1,49 @@
+/*
+ * Author:        Pierre-Henry Soria <ph7software@gmail.com>
+ * Copyright:     (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+.mb_nav {
+    margin: 5px 150px 18px 50px;
+    font-weight: bold;
+    line-height: 13px;
+}
+
+.user, .content, .subject, .message, .date {
+    overflow: hidden;
+    display: inline;
+}
+
+.content {
+    cursor: pointer;
+}
+
+.subject {
+    font-weight: bold;
+    text-decoration: underline;
+    margin: 2px 90px 2px 100px;
+    width: 110px;
+}
+
+.message {
+    margin: 2px 90px 2px 100px;
+    width: 200px;
+}
+
+.date {
+    margin-left: 30px;
+}
+
+.action {
+    text-align: center;
+    padding-bottom: 4px;
+    font-style: italic;
+}
+
+/* 1250px or less */
+@media (max-width: 1250px) {
+    .date {
+        display: none;
+    }
+}

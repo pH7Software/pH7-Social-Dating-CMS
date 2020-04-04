@@ -1,0 +1,2 @@
+@import url([$url_def_tpl_css]common.css);
+@import url([$url_theme][$current_tpl_name]/css/_inc/common.custom.css);

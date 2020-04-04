@@ -1,0 +1,47 @@
+/*
+ * Author:        Pierre-Henry Soria <hello@ph7cms.com>
+ * Copyright:     (c) 2016-2019, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+/** Change the color text to a more visible one (darker/whiter) when the background video on the splash homepage is enabled **/
+body {
+    color: #333 !important;
+}
+
+.bt_login_forgot a, #form_login_user label, #promo_text, #promo_text a, #form_join_user em {
+    color: #FFF !important;
+}
+
+#promo_text h2, #promo_text h2 a {
+    color: #F55959 !important;
+}
+
+#promo_text {
+    max-width: 500px;
+}
+
+footer a, footer p {
+    color: #EEE;
+}
+
+/* Not "!important" for this one, otherwise all footer paragraph/link colors will be overwritten as well */
+.ft_dm a.dropdown_item {
+    color: #EEE !important;
+}
+
+#form_join_user label, #form_join_user label a, nav.bottom_nav {
+    color: #EEE !important;
+}
+
+.show_dropdown li a {
+    color: #333 !important;
+}
+
+.ft {
+    color: #FFF !important;
+}
+
+#logo a {
+    color: #EEE;
+}

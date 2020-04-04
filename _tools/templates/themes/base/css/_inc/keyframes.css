@@ -1,0 +1,17 @@
+/*
+ * Author:        Pierre-Henry Soria <ph7software@gmail.com>
+ * Copyright:     (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 12px rgba(51, 204, 255, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 12px rgba(51, 204, 255, 0.9);
+    }
+    100% {
+        box-shadow: 0 0 12px rgba(51, 204, 255, 0.2);
+    }
+}

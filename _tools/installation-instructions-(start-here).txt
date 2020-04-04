@@ -1,0 +1,31 @@
+1. Requirements: https://ph7cms.com/doc/en/requirements
+2. Installation: https://ph7cms.com/doc/en/install
+3. Once you finished the installation, your admin panel URL will be: http://YOUR-PH7CMS-SITE.com/admin123/
+
+
+--- Softaculous/Fantastico Installation ---
+If your web host offers Softaculous/Fantastico with pH7CMS enabled, you can install pH7CMS in one-click.
+Generally, through cPanel -> Softaculous icon -> search for "pH7CMS".
+
+For "Fantastico", search it under "pH7SocialDatingCMS" name in the "Portals/CMS" category.
+
+
+--- Good Hosting ---
+https://ph7cms.com/hosting/
+
+
+--- Useful Doc ---
+Documentation: https://ph7cms.com/doc/
+Github Wiki: https://github.com/pH7Software/pH7-Social-Dating-CMS/wiki/
+pH7CMS Blog: https://ph7cms.com/blog (if you dig well, you will find several tutorials and helpful posts)
+
+
+--- Troubleshooting ---
+If you got an issue and ca't find the answer anywhere on the web,
+a good idea is to dig the Open/Closed Issues
+or open an issue if you couldn't find the answer to your problem.
+Issues: https://github.com/pH7Software/pH7-Social-Dating-CMS/issues
+
+
+---
+Note: I really hope you enjoy using pH7Builder as much as I enjoyed creating it! 😊

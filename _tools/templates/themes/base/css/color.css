@@ -1,0 +1,119 @@
+/*
+ * Author:        Pierre-Henry Soria <ph7software@gmail.com>
+ * Copyright:     (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+.pink {
+    color: #FD00D9;
+}
+
+.pink1 {
+    color: #F06;
+}
+
+.pink2 {
+    color: #F06;
+}
+
+.smooth-pink {
+    color: #EF627E;
+}
+
+.green {
+    color: #5cb85c;
+}
+
+.green1 {
+    color: #11792D;
+}
+
+.green2 {
+    color: #11E90C;
+}
+
+.red {
+    color: #d9534f;
+}
+
+.red2 {
+    color: #F44336;
+}
+
+.red3 {
+    color: #F55959;
+}
+
+.cinnabar-red {
+    color: #E33D41;
+}
+
+.dark-red {
+    color: #8B0000;
+}
+
+.gray {
+    color: #999;
+}
+
+.orange {
+    color: #ff7102;
+}
+
+
+/*** Begin pH ***/
+
+/* Color pH */
+.pH0, .pH1 {
+    color: #F24C9E;
+}
+
+.pH2 {
+    text-shadow: 1px 2px 1px #000;
+}
+
+.pH3 {
+    color: #FFCBDB;
+    text-shadow: 2px 1px 2px #000;
+}
+
+/* Hover pH */
+.pH0:hover {
+    color: #fff;
+    text-shadow: 0 0 2px #fff, 0 0 4px #fff, 0 0 6px #fff, 0 0 11px #ff2d95, 0 0 14px #ff2d95, 0 0 22px #ff2d95, 0 0 350px #ff2d95, 0 0 32px #ff2d95;
+    letter-spacing: 5px;
+}
+
+.pH1:hover {
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.8), 0 0 9px #F24C9E, 0 0 20px rgba(203, 203, 240, 11);
+    color: #fff;
+}
+
+.pH2:hover {
+    text-shadow: 0px 1px 0px #999, 0px 2px 0px #888, 0.6px 3px 0.6px #777, 0px 3px 0px #666, 0px 3px 0px #555, 0px 6px 0px #444, 0px 5px 0px #333, 0px 6px 5px #001135;
+}
+
+.pH3:hover {
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.8), 0 0 9px #F24C9E;
+}
+
+/* Transition pH */
+.pH0, .pH2 {
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -khtml-transition: all 0.5s ease-in-out;
+}
+
+.pH0:hover, .pH2:hover {
+    transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    -khtml-transition: all 0.4s ease;
+}
+
+/*** End pH ***/

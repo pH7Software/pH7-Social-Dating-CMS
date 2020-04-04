@@ -1,0 +1,86 @@
+{
+  "name": "ph7software/ph7cms",
+  "description": "pH7CMS is a Professional Social/Dating App/Site Builder",
+  "keywords": [
+    "business builder",
+    "community builder",
+    "CMS",
+    "dating",
+    "social",
+    "social network",
+    "social networking",
+    "community",
+    "community management",
+    "dating website",
+    "dating app",
+    "user",
+    "member",
+    "member area",
+    "payment",
+    "business",
+    "startup",
+    "membership"
+  ],
+  "type": "project",
+  "homepage": "https://ph7cms.com",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Pierre-Henry Soria",
+      "email": "hi@ph7.me",
+      "homepage": "https://ph7.me",
+      "role": "Senior Software Developer"
+    }
+  ],
+  "config": {
+    "vendor-dir": "_protected/vendor",
+    "bin-dir": "_protected/vendor/bin",
+    "cache-dir": "_protected/vendor/cache",
+    "autoloader-suffix": "PH7"
+  },
+  "require": {
+    "php": ">=5.6.0",
+    "ext-curl": "*",
+    "ext-zip": "*",
+    "ext-zlib": "*",
+    "ext-mbstring": "*",
+    "ext-exif": "*",
+    "ext-dom": "*",
+    "ext-xml": "*",
+    "ext-json": "*",
+    "ext-gd": "*",
+    "ext-hash": "*",
+    "ext-pdo_mysql": "*",
+    "geoip2/geoip2": "~2.0",
+    "swiftmailer/swiftmailer": "^5.4",
+    "ph-7/qrcode-generator-php-class": "^2.1",
+    "robthree/twofactorauth": "^1.6",
+    "shrikeh/teapot": "^2.3",
+    "facebook/graph-sdk": "^5.6",
+    "stripe/stripe-php": "^5.9",
+    "braintree/braintree_php": "^3.27",
+    "arcansecurity/skeerel-php": "^2.3",
+    "twilio/sdk": "^5.28",
+    "arcturial/clickatell": "^3.0",
+    "fzaninotto/faker": "^1.8",
+    "guzzlehttp/guzzle": "^6.3"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.7",
+    "phake/phake": "^2.3",
+    "friendsofphp/php-cs-fixer": "^2.2"
+  },
+  "suggest": {
+    "symfony/thanks": "Thank your favorite PHP projects on GitHub (in the form of GitHub stars) using the CLI"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "PH7\\Test\\": "_tests"
+    }
+  },
+  "support": {
+    "source": "https://github.com/pH7Software/pH7-Social-Dating-CMS",
+    "issues": "https://github.com/pH7Software/pH7-Social-Dating-CMS/issues",
+    "docs": "https://ph7cms.com/doc"
+  }
+}

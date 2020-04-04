@@ -1,0 +1,48 @@
+/*********************/
+/** pHRating CSS **/
+/*********************/
+
+/**Div containing the color of the stars */
+.pHRatingAverage {
+    background-color: #f62929;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 100%;
+}
+
+.pHRatingColor {
+    background-color: #f4c239; /* bgcolor of the stars*/
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    height: 100%;
+}
+
+/** Div containing the stars **/
+.pHStar {
+    position: relative;
+    left: 0;
+    z-index: 3;
+}
+
+/** P contains the rate information **/
+p.pHRatingInfo {
+    position: absolute;
+    z-index: 9999;
+    background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFsAAAAiCAYAAAAwG6WQAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAd5JREFUeNrsmk1uwjAQhScTww0iRWJRcYaKu9CuegykVq3aI9B1JVbdUC5RDlI2IMqPWENiux7jiAMQe1G9iYwBZ/Xp6fllYjW4HXR3u90zET240SNUa2WtlWnp5omb39R+v39l5tH4fewXD4cDVVUFUlfW6XSixc+CptNpT2v9aIzJs/5NfzO8GxZlWdLsa0br9ZrcImhdWVmWUafTobqu/ajqaqsoo2Lzu6H599yDbm5EXV/iEHmeNzwLlTnazrP9AOQ4vi1c5VLyRRtNzlMAO6KlyFANdYCOC9shDrAzwE6nbMCOD/vs2RxgM6hEg02er+Kgaoayo9IWvJKzYSNII/8SNlMzUBE9WzZI79mOMzOUHRG3YwxlJ2JtL2mEkUailhW+PmdzyNkMZccTtnU+HdIIIfqlSSOwkUQ2cumNYIOMq2zrE4mSSOKVjegXT9n2zNdHP0IjKrqyffRDizXRBkny8oAAOwVsQhpJnkY4dP3g2Uk8Gw81KR5q8MI3nWc350bk5A5gx4R9Bq7kx2q5AuyYG2SYlSW7NcYUHLp/qHZLTpoZbQT5VllrP5yNjDhnF0+YwLs9Ncs5P11rOlVH+Wsinv3iYHf1Ud+7xRKY2gRu5UOOBn8qpZ7+BBgAI+yYSauSEegAAAAASUVORK5CYII=) no-repeat;
+    color: #FFF;
+    display: none;
+    width: 91px;
+    height: 29px;
+    font-size: 16px;
+    text-align: center;
+    padding-top: 5px;
+}
+
+p.pHRatingInfo span.maxRate {
+    color: #c9c9c9;
+    font-size: 14px;
+}

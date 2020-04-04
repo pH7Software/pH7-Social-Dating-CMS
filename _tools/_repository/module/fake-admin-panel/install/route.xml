@@ -1,0 +1,1 @@
+<route url="admin" path="modules" module="fake-admin-panel" controller="main" action="login" />

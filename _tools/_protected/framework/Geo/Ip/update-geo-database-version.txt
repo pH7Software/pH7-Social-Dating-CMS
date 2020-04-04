@@ -1,0 +1,4 @@
+GeoLite2 City database is updated on the first Tuesday of each month by MaxMind.
+
+You can download the latest version here: http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz
+and replace “GeoLite2-City.mmdb” file by the newer one you just downloaded.

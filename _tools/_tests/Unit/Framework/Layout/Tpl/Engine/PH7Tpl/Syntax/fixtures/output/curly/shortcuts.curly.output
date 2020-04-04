@@ -1,0 +1,4 @@
+<?php  $browser->noCache() ;?>
+<?php echo  $registry->module ;?>
+<?php echo  $str->upperFirst('pierre-Henry') ;?>
+<?php echo  $config->values['language']['lang'] ;?>

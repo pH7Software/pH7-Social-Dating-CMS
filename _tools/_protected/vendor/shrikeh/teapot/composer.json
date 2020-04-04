@@ -1,0 +1,50 @@
+{
+  "name": "shrikeh/teapot",
+  "type": "library",
+  "description": "PHP HTTP Response Status library",
+  "keywords": ["http"],
+  "homepage": "https://shrikeh.github.io/teapot/",
+  "license": "MIT",
+  "authors": [
+      {
+          "name": "Barney Hanlon",
+          "email": "barney@shrikeh.net"
+      },
+      {
+        "name": "Andreas Möller",
+        "email": "am@localheinz.com"
+      }
+  ],
+  "require": {
+      "php": ">=5.5",
+      "psr/http-message": "^1.0",
+      "teapot/status-code": "^1.0"
+  },
+  "require-dev": {
+    "phpspec/phpspec": "~3.0.0",
+    "bossa/phpspec2-expect": "^2.0",
+    "behat/behat": "^3.2",
+    "squizlabs/php_codesniffer": "^2.7",
+    "escapestudios/symfony2-coding-standard": "^2.9"
+  },
+  "config": {
+    "bin-dir": "bin"
+  },
+  "archive": {
+    "exclude": ["*", "!/src"]
+  },
+  "prefer-stable": true,
+  "autoload": {
+    "psr-4": {
+      "Teapot\\": "src"
+    }
+  },
+  "archive": {
+    "exclude": ["*", "!/src"]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "examples\\Teapot\\": "examples"
+    }
+  }
+}

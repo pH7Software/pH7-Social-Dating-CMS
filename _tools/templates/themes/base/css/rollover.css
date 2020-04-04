@@ -1,0 +1,47 @@
+/*
+ * Author:        Pierre-Henry Soria <ph7software@gmail.com>
+ * Copyright:     (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+ul.rollover li {
+    display: inline;
+    text-align: center;
+}
+
+ul.rollover li img {
+    width: 60px;
+    height: 60px;
+
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -khtml-transition: all 0.3s ease-in-out;
+
+    z-index: 0;
+}
+
+ul.rollover li a:hover > img {
+    width: 70px;
+    height: 70px;
+    border: 1px solid #eee;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+
+    transform: scale(1.5, 1.5);
+    -webkit-transform: scale(1.5, 1.5);
+    -moz-transform: scale(1.5, 1.5);
+    -o-transform: scale(1.5, 1.5);
+    -ms-transform: scale(1.5, 1.5);
+    -khtml-transform: scale(1.5, 1.5);
+
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -khtml-transition: all 0.5s ease;
+
+    z-index: 999;
+}

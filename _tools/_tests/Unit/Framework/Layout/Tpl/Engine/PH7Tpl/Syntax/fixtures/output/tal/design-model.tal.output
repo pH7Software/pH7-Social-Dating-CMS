@@ -1,0 +1,8 @@
+<?php $this->designModel->langList() ?>
+<?php $this->designModel->ad(160, 600) ?>
+<?php $this->designModel->ad(160, 600, false) ?>
+<?php $this->designModel->analyticsApi() ?>
+<?php $this->designModel->analyticsApi(true, false) ?>
+<?php $this->designModel->customCode('js') ?>
+<?php $this->designModel->file('css') ?>
+<?php $this->designModel->file('css', false) ?>

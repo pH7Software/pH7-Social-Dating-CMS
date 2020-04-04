@@ -1,0 +1,3 @@
+<?php foreach($aData as $sData) { ?>
+    <?php echo $sData ?>
+<?php } ?>

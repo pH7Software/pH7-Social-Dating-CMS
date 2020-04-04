@@ -1,0 +1,27 @@
+####################
+# pH7CMS: The Social Dating CMS (by Pierre-Henry Soria)
+# URL: https://ph7cms.com
+####################
+
+# Disallow Internet Archiver Wayback Machine
+# Uncomment the two lines below if you don't want to be saved in archive.org
+# User-agent: ia_archiver
+# Disallow: /
+
+
+# Rules for Google
+User-agent: googlebot
+Crawl-delay: 0
+Disallow:
+
+
+# Rules for All Other Search Engines
+User-agent: *
+Crawl-delay: 10
+Disallow:
+
+# Don't index the different themes
+Disallow: /*?*tpl=*
+
+
+Sitemap: /site-map-xml

@@ -1,0 +1,253 @@
+/*
+ * Author:        Pierre-Henry Soria <ph7software@gmail.com>
+ * Copyright:     (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+.design-box {
+    text-align: left;
+    border: 1px solid #CCC;
+    margin-right: 20px;
+    margin-bottom: 15px;
+    padding: 5px;
+    border-radius: 5px;
+    background-image: url(../img/bg_box.png);
+}
+
+.design-box h2 {
+    text-align: center;
+    text-shadow: #666 0 -1px 0;
+    padding-bottom: 4px;
+}
+
+.dropdown_menu {
+    position: relative;
+    float: left;
+    margin: 0;
+    z-index: 800;
+}
+
+.dropdown_item_css {
+    position: relative;
+}
+
+.dropdown_menu .dropdown_item_css {
+    display: inline-block;
+}
+
+.dropdown_item {
+    padding-right: 14px;
+}
+
+.dropdown_menu .dropdown_item, .dropdown_menu .dropdown_item:hover {
+    color: #62656B !important;
+}
+
+.dropdown_menu i {
+    position: absolute;
+    float: none;
+    width: 7px;
+    font-size: 0;
+}
+
+* html .dropdown_item_css {
+    display: none !important;
+}
+
+.dropdown_menu:hover .show_dropdown {
+    display: block;
+    position: absolute;
+    top: -6px;
+    left: -11px;
+}
+
+.show_dropdown::before {
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 138px;
+    height: 3px;
+    background-image: url(../img/dropdown_before.png);
+    content: '';
+}
+
+.show_dropdown::after {
+    position: absolute;
+    top: 0;
+    bottom: -1px;
+    right: -4px;
+    width: 3px;
+    background-image: url(../img/dropdown_after.png);
+    content: '';
+}
+
+.show_dropdown {
+    display: none;
+    padding: 5px 0;
+    border: 1px solid;
+    border-color: #E0E0E0 #A3A3A3 #A3A3A3 #E0E0E0;
+    width: 135px;
+    background-color: #FFF;
+}
+
+.dropdown_menu li {
+    position: relative;
+    display: block;
+    padding: 2px 7px 2px;
+    white-space: nowrap;
+}
+
+.dropdown_menu li > a:hover {
+    border-radius: 4px;
+    background-color: #EEE;
+}
+
+.dropdown_menu li a {
+    display: block;
+}
+
+.dropdown_menu li.first a {
+    display: inline;
+}
+
+.dropdown_menu li.separate {
+    padding: 5px 10px 1px;
+    border-top: 1px solid #E5E5E5;
+}
+
+.show_dropdown li i {
+    margin-left: -9px;
+}
+
+.ft_copy {
+    float: left;
+    margin-left: -10px;
+    font-size: .967em;
+}
+
+.ft {
+    margin-left: 20%;
+    font-size: .820em;
+    line-height: 1.636;
+}
+
+.ft_dm {
+    float: none;
+    display: inline-block;
+    zoom: 1;
+}
+
+.ft_dm:hover {
+    z-index: 1090;
+}
+
+.ft_dm a.dropdown_item {
+    color: #64697A !important;
+    padding: 0;
+    margin-right: 5px;
+}
+
+.ft_dm a.dropdown_item:hover {
+    color: #ff5223 !important;
+}
+
+.ft_dm li .dropdown_item {
+    float: left;
+}
+
+.ft_dm li .dropdown_item, .ft_dm li .dropdown_item:hover {
+    color: #999 !important;
+}
+
+.ft_dm i {
+    height: 9px;
+    margin: 4px 0 0 -9px;
+    background: url(../img/arrow.gif) 0 0 no-repeat;
+}
+
+.ft_dm .show_dropdown {
+    width: auto;
+    min-width: 138px;
+}
+
+.ft_dm:hover .show_dropdown {
+    padding: 6px 0 0;
+    top: auto;
+    bottom: -3px;
+    bottom: -1px;
+    left: -8px;
+}
+
+.ft_dm_to_left:hover .show_dropdown {
+    left: auto;
+    right: -3px;
+}
+
+.warning_block {
+    background-color: #f17a7a;
+    max-width: 340px;
+    color: #fff;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    padding: 3px;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.warning_block p {
+    font-size: .8em;
+}
+
+.box-left {
+    float: left;
+}
+
+.box-right {
+    float: right;
+}
+
+.icon-wrap i {
+    font-size: 80px;
+    color: #428bca;
+    line-height: 100px;
+}
+
+/*** Overwrite with media queries for small devices ***/
+/* 1200px or less */
+@media (max-width: 1200px) {
+    .box-right {
+        width: 600px;
+    }
+}
+
+/* 1075px or less */
+@media (max-width: 1075px) {
+    .box-right {
+        width: 550px;
+    }
+}
+
+/* 1010px or less */
+@media (max-width: 1010px) {
+    .box-right {
+        width: 500px;
+    }
+}
+
+/* 985px or less */
+@media (max-width: 985px) {
+    .box-right {
+        width: 530px;
+    }
+}
+
+/* 745px or less */
+@media (max-width: 770px) {
+    .box-left {
+        display: none;
+    }
+
+    .box-right {
+        width: 100%;
+    }
+}

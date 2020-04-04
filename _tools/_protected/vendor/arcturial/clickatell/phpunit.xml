@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php">
+
+    <testsuites>
+        <testsuite name="ClickatellSuite">
+            <directory suffix="Test.php">test/</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <exclude>
+                <directory>vendor/</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>

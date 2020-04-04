@@ -1,0 +1,22 @@
+       _   _   _____ 
+ _ __ | | | | |___  |
+| '_ \| |_| |    / / 
+| |_) |  _  |   / /  
+| .__/|_| |_|  /_/   
+|_|                  
+
+/* ¡pH7! Team */
+
+This website is built by a small volunteer team of engineers, programmers, designers, and others in many different sites across the globe. It is updated continuously, and constantly evolving to give the best image of the next generation Web!
+If you want to help us as volunteer and if you know one of the following languages ​​(C++, Java, Python, PHP 7+ OOP, HTML5/CSS, JavaScript OOP/Node.js, Ruby on Rails, Objective-C/Swift, SQL, Unix Server, Apache/Nginx) or professional hackers who could help us
+in the security of our web software to find any security vulnerability to create the most secure web-based software or help us in the translation,
+please fork the GitHub repository https://github.com/pH7Software/pH7-Social-Dating-CMS, add your changes and open a pull request.
+Thank you!
+
+- Pierre-Henry Soria (founder and developer of pH7CMS)
+- pH7CMS Website: https://ph7cms.com
+- Personal GitHub: https://github.com/pH-7
+- pH7CMS GitHub: https://github.com/pH7Software
+
+
+P.S. Moreover, a contribution to an open source project like pH7CMS looks great on your CV!

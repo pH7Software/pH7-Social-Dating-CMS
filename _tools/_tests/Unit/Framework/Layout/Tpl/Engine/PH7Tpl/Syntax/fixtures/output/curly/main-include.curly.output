@@ -1,0 +1,1 @@
+<?php $this->display('page.inc.tpl', PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS); ?>

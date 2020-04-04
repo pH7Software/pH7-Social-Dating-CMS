@@ -1,0 +1,65 @@
+/*
+ * Author:        Pierre-Henry Soria <ph7software@gmail.com>
+ * Copyright:     (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+.bottom_nav {
+    float: right;
+}
+
+.bottom_nav a {
+    text-decoration: underline;
+}
+
+/* Change the color of the menu links */
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:focus,
+.navbar-default .navbar-nav > .open > a:hover,
+.dropdown-menu > li > a,
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    font-size: 13px;
+    color: #08c;
+}
+
+/* Do some changes when the menu is toggled */
+@media screen and (max-width: 767px) {
+    /* Align the text to center only */
+    .navbar-default .navbar-nav > li > a,
+    .dropdown-menu > li > a {
+        text-align: center;
+    }
+
+    /* Add gray stripes to separate each main drop-down menu */
+    .navbar-default .navbar-nav > li {
+        border-top: 1px solid #dfdfdf;
+    }
+
+    /* Change size for the sub-sub drop-down menus for better distinction */
+    .navbar-default .navbar-nav .open .dropdown-menu > li > ul > li > a {
+        font-size: 11px;
+    }
+}
+
+/* Rewrite some CSS classes for Bootstrap fixed menu for better render in pH7CMS desin */
+.navbar-default {
+    border-color: #ccc !important;
+}
+
+.navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse {
+    max-height: none;
+}
+
+/* Change the padding space between each drop-down menu */
+.nav > li > a {
+    padding: 10px 9px;
+}
+
+/* Change the default minimum height of the navbar */
+.navbar {
+    min-height: 45px !important;
+}

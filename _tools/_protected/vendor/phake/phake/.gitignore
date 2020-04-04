@@ -1,0 +1,12 @@
+.buildpath
+.project
+.settings
+.idea
+nbproject
+vendor
+bin
+composer.lock
+composer.phar
+phpunit.xml
+docs/_build
+rtd-docs/_build
