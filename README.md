@@ -308,7 +308,7 @@ Finally, **please consider using green Web hosting** (which use Green Power supp
 
 ## 🖋 Contact
 
-You can send me an email for any suggestions or feedback at: *hello {AT} ph7cms {D0T} com*
+Feel free to send me an email for any suggestions or feedback you may have 🤩, at *hello {AT} ph7cms {D0T} com*
 
 
 ## ⚖️ License
