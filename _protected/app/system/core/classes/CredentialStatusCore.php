@@ -10,6 +10,6 @@ namespace PH7;
 
 final class CredentialStatusCore
 {
-    const EMAIL_DOES_NOT_EXIST = 'email_does_not_exist';
-    const PASSWORD_DOES_NOT_EXIST = 'password_does_not_exist';
+    const INCORRECT_EMAIL_IN_DB = 1;
+    const INCORRECT_PASSWORD_IN_DB = 2;
 }
