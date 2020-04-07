@@ -478,13 +478,13 @@ class UserCoreModel extends Model
     public function isOnline($iProfileId, $iTimeout = 1)
     {
         $iProfileId = (int)$iProfileId;
-        $iTime = (int)$iTime;
+        $iTimeout = (int)$iTimeout;
 
         $rStmt = Db::getInstance()->prepare('SELECT profileId FROM' . Db::prefix(DbTableName::MEMBER) . 'WHERE profileId = :profileId
             AND userStatus = :userStatus AND lastActivity >= DATE_SUB(:currentTime, INTERVAL :time MINUTE) LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
         $rStmt->bindValue(':userStatus', self::ONLINE_STATUS, PDO::PARAM_INT);
-        $rStmt->bindValue(':time', $iTime, PDO::PARAM_INT);
+        $rStmt->bindValue(':time', $iTimeout, PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $this->sCurrentDate, PDO::PARAM_STR);
         $rStmt->execute();
 
