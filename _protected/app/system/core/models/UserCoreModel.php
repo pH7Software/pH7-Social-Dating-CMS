@@ -471,11 +471,11 @@ class UserCoreModel extends Model
      * Check online status.
      *
      * @param int $iProfileId
-     * @param int $iTime Number of minutes that a member becomes inactive (offline).
+     * @param int $iTimeout Number of minutes when a user becomes inactive (offline).
      *
      * @return bool
      */
-    public function isOnline($iProfileId, $iTime = 1)
+    public function isOnline($iProfileId, $iTimeout = 1)
     {
         $iProfileId = (int)$iProfileId;
         $iTime = (int)$iTime;
