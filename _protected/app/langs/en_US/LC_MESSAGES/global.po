@@ -6259,7 +6259,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: _protected/app/system/modules/mail/controllers/MainController.php:77
-msgid "MailBox : Compose a new message"
+msgid "Messages : Compose new message"
 msgstr ""
 
 #: _protected/app/system/modules/mail/controllers/MainController.php:78
@@ -6267,7 +6267,7 @@ msgid "Compose a new message"
 msgstr ""
 
 #: _protected/app/system/modules/mail/controllers/MainController.php:86
-msgid "MailBox : Inbox"
+msgid "Messages"
 msgstr ""
 
 #: _protected/app/system/modules/mail/controllers/MainController.php:94
@@ -6283,7 +6283,7 @@ msgid "Sorry %0%, you don't have any messages in your inbox."
 msgstr ""
 
 #: _protected/app/system/modules/mail/controllers/MainController.php:148
-msgid "MailBox : Messages Sent"
+msgid "Messages : Sent"
 msgstr ""
 
 #: _protected/app/system/modules/mail/controllers/MainController.php:156
@@ -6301,7 +6301,7 @@ msgid "No messages found."
 msgstr ""
 
 #: _protected/app/system/modules/mail/controllers/MainController.php:208
-msgid "MailBox : Trash"
+msgid "Messages : Trash"
 msgstr ""
 
 #: _protected/app/system/modules/mail/controllers/MainController.php:257

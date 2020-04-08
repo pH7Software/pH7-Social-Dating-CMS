@@ -169,7 +169,7 @@
           {if $is_mail_enabled}
             <li class="dropdown">
               <a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'My Emails'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">
-                <i class="fa fa-envelope-o fa-fw"></i> {lang 'Mail'} {if $count_unread_mail}<span class="badge">{count_unread_mail}</span>{/if} <span class="caret"></span>
+                <i class="fa fa-envelope-o fa-fw"></i> {lang 'Messages'} {if $count_unread_mail}<span class="badge">{count_unread_mail}</span>{/if} <span class="caret"></span>
               </a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ $design->url('mail','main','compose') }}" title="{lang 'Compose'}"><i class="fa fa-pencil"></i> {lang 'Compose'}</a></li>
