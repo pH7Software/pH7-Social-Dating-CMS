@@ -315,9 +315,8 @@ namespace {
      */
     function nt($sMsg1, $sMsg2, $iNumber)
     {
-        $sMsg1 = str_replace('%n%', $iNumber, $sMsg1);
-        $sMsg2 = str_replace('%n%', $iNumber, $sMsg2);
+        $sString = ngettext($sMsg1, $sMsg2, $iNumber);
 
-        return ngettext($sMsg1, $sMsg2, $iNumber);
+        return str_replace('%n%', $iNumber, $sString);
     }
 }
