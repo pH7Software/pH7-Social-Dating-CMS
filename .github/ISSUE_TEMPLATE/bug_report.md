@@ -20,5 +20,5 @@ Steps to reproduce the behavior:
 **Expected behavior**
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**Screenshots / Screencasts **
+If applicable, add screenshots or screencast the scenario to help explain your issue the best you can.
