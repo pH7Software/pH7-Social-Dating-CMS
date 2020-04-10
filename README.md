@@ -264,8 +264,7 @@ Just clone the repository, make your changes and then make a push ;-)
 
 *WARNING: Your code/modification must be of excellent quality and follow the [Code Convention](https://ph7cms.com/doc/en/code-convention) and [PSR](https://www.php-fig.org/psr/).* I manually review and validate all improvements and changes you I've done.
 
-
-![Beautiful Profile Dating Page](https://user-images.githubusercontent.com/1325411/35779585-68f0d5fc-09c7-11e8-91eb-bf793fcfab6e.png)
+![pH7Software GitHub. Me, at a Costa coffee shop on Feb 4th, 2017.](https://user-images.githubusercontent.com/1325411/78962138-32ffa100-7ae3-11ea-8d35-83d78f3cbc48.jpg)
 
 
 ## 🌲 pH7CMS; The Eco-Friendly CMS ❤️
@@ -318,5 +317,11 @@ Feel free to send me an email for any suggestions or feedback you may have 🤩,
 License: [General Public License 3](https://www.gnu.org/licenses/gpl.html) or later; See the *PH7.LICENSE.txt* and *PH7.COPYRIGHT.txt* files for more details.
 
 
+
+---
+
+![Beautiful Profile Dating Page](https://user-images.githubusercontent.com/1325411/35779585-68f0d5fc-09c7-11e8-91eb-bf793fcfab6e.png)
+
 ![pH7CMS allows anyone to start a web dating app like Tinder/Bumble or Badoo](https://cloud.githubusercontent.com/assets/1325411/19419477/5476b45c-93d0-11e6-823d-d293f186c0f7.png)
+
 ![Admin Panel, Browse Users](https://cloud.githubusercontent.com/assets/1325411/14080251/b476e5c6-f4fb-11e5-825e-ddc992ba1055.png)
