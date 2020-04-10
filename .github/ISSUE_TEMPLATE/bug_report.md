@@ -21,11 +21,11 @@ Steps to reproduce the behavior:
 4. See error
 
 
-**- Expected Behavior**
+**Expected Behavior**
 
 (a clear and concise description of what you expected to happen.)
 
 
-**- Screenshots / Screencasts**
+**Screenshots / Screencasts**
 
 (if applicable, add screenshots or screencast the scenario to help explain your issue the best you can.)
