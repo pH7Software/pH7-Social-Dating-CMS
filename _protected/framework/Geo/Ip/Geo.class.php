@@ -149,7 +149,6 @@ class Geo
         $oReader = new Reader(__DIR__ . PH7_DS . self::DATABASE_FILENAME);
 
         return @$oReader->city($sIpAddr);
-
     }
 
     /**
