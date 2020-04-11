@@ -71,6 +71,17 @@ class Url
      */
     public static function httpBuildQuery(array $aParams, $sNumericPrefix = null, $sArgSeparator = '&amp;', $iEncType = PHP_QUERY_RFC1738)
     {
-        return http_build_query($aParams, $sNumericPrefix, $sArgSeparator, $iEncType);
+       // http_build_query don't handle UTF-8 encoded parameter values
+       // return http_build_query($aParams, $sNumericPrefix, $sArgSeparator, $iEncType);
+
+       $sQuery = "";
+       $sLast = array_key_last($aParams);
+       foreach($aParams as $sKey => $sVal) {
+          $sQuery .= $sKey . "=" . $sVal;
+          if ($sKey !== $sLast) {
+            $sQuery .= $sArgSeparator;
+          }
+       }
+       return $sQuery;
     }
 }
