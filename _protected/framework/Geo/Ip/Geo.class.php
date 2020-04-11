@@ -76,13 +76,12 @@ class Geo
      *
      * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
      *
-     * @return string|null Country Name.
+     * @return string|null Country Name. GeoLite2 and GeoIP2 names are UTF-8 encoded
      */
     public static function getCountry($sIpAddress = null)
     {
         try {
-            // Encode to UTF8 for Latin and other characters of the GeoIP database are displayed correctly
-            $sCountryName = utf8_encode(static::get($sIpAddress)->country->name);
+            $sCountryName = static::get($sIpAddress)->country->name;
 
             // TODO: When support PHP 7.1, specify multiple exceptions using "|" pipe
         } catch (AddressNotFoundException $oE) {
@@ -99,13 +98,12 @@ class Geo
      *
      * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
      *
-     * @return string|null City Name.
+     * @return string|null City Name. GeoLite2 and GeoIP2 names are UTF-8 encoded
      */
     public static function getCity($sIpAddress = null)
     {
         try {
-            // Encode to UTF8 for Latin and other characters of the GeoIP database are displayed correctly
-            $sCity = utf8_encode(static::get($sIpAddress)->city->name);
+            $sCity = static::get($sIpAddress)->city->name;
 
             // TODO: When support PHP 7.1, specify multiple exceptions using "|" pipe
         } catch (AddressNotFoundException $oE) {
@@ -151,6 +149,7 @@ class Geo
         $oReader = new Reader(__DIR__ . PH7_DS . self::DATABASE_FILENAME);
 
         return @$oReader->city($sIpAddr);
+
     }
 
     /**
