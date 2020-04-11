@@ -32,7 +32,7 @@ class Geo
     /**
      * Get the country ISO Code (e.g., GB, IT, ES, RU, FR, ...).
      *
-     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site.
      *
      * @return string|null Country Code.
      */
@@ -53,7 +53,7 @@ class Geo
     /**
      * Get the Zip Code (postal code).
      *
-     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site.
      *
      * @return string|null Zip Code.
      */
@@ -74,9 +74,9 @@ class Geo
     /**
      * Get the country name.
      *
-     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site.
      *
-     * @return string|null Country Name. GeoLite2 and GeoIP2 names are UTF-8 encoded
+     * @return string|null Country Name. GeoLite2 and GeoIP2 names are UTF-8 encoded.
      */
     public static function getCountry($sIpAddress = null)
     {
@@ -96,9 +96,9 @@ class Geo
     /**
      * Get the city name.
      *
-     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site.
      *
-     * @return string|null City Name. GeoLite2 and GeoIP2 names are UTF-8 encoded
+     * @return string|null City Name. GeoLite2 and GeoIP2 names are UTF-8 encoded.
      */
     public static function getCity($sIpAddress = null)
     {
@@ -118,7 +118,7 @@ class Geo
     /**
      * Get the state (region) name.
      *
-     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site.
      *
      * @return string State Name.
      */
@@ -130,7 +130,7 @@ class Geo
     /**
      * Get Geo Ip Data Information.
      *
-     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site.
      *
      * @return \GeoIp2\Model\City
      *
