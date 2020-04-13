@@ -762,7 +762,7 @@ class Design
      * @param string $sUsername Username of member.
      * @param string $sFirstName First name of member.
      * @param string $sSex Sex of member.
-     * @param string $sForceUrlKey Specify a specific URL from the like. Default NULL (current URL).
+     * @param string $sForceUrlKey Specify a specific URL to be liked. Default NULL (current browser URL).
      *
      * @return void
      */
