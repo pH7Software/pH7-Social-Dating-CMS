@@ -18,7 +18,7 @@ const CACHED_FILES = [
 
 self.addEventListener('install', async event => {
     const cache = await caches.open(STATIC_CACHE_NAME);
-    cache.addAll(CACHED_FILES);
+    await cache.addAll(CACHED_FILES);
 });
 
 self.addEventListener('fetch', event => {
