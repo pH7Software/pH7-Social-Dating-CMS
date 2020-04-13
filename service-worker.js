@@ -47,3 +47,24 @@ async function networkFirst(request) {
         return await cache.match(request);
     }
 }
+
+// Add to Home Screen.
+self.addEventListener('fetch', event => {
+  // Workaround for https://bugs.chromium.org/p/chromium/issues/detail?id=823392
+  if (event.request.cache == 'only-if-cached' && event.request.mode != 'same-origin') {
+    return;
+  }
+  event.respondWith(
+    //  Try to find response in cache.
+    caches.match(event.request)
+      .then((resp) => {
+        // If response is found in cache, return it. Otherwise fetch.
+        return resp || fetch(event.request);
+      })
+      .catch((err) => {
+        // Something went wrong.
+        console.log("Service worker Fetch: ", err);
+      })
+  );
+});
+
