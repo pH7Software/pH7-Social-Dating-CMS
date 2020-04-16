@@ -21,6 +21,7 @@
     <meta name="category" content="{meta_category}" />
     <meta name="rating" content="{meta_rating}" />
     <meta name="distribution" content="{meta_distribution}" />
+    <meta name="theme-color" content="#ffffff" />
     {if $header}{header}{/if}
 
     {if $is_pwa_enabled}
@@ -40,7 +41,6 @@
        <link rel="icon" type="image/png" sizes="16x16" href="{url_tpl_mod_img}favicon-16x16.png">
        <meta name="msapplication-TileColor" content="#ffffff">
        <meta name="msapplication-TileImage" content="{url_tpl_mod_img}ms-icon-144x144.png">
-       <meta name="theme-color" content="#ffffff">
     {/if}
 
     <!-- Begin Copyright pH7 Dating/Social CMS by Pierre-Henry SORIA, All Rights Reserved -->
