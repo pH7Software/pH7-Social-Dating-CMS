@@ -161,7 +161,7 @@ class SettingForm
 
         $oForm->addElement(new Number(t('Maximum age for registration:'), 'max_age_registration', ['value' => DbConfig::getSetting('maxAgeRegistration'), 'min' => DbConfig::getSetting('minAgeRegistration') + 1, 'validation' => new Str(1, 3), 'required' => 1]));
 
-        $oForm->addElement(new Select(t('Date of Birth field type:'), 'is_user_age_range_field', ['1' => t('Age Range (without month and day of birth )'), '0' => t('Date-Picker calendar (full date of birth)')], ['value' => DbConfig::getSetting('isUserAgeRangeField'), 'required' => 1]));
+        $oForm->addElement(new Select(t('Date of Birth field type:'), 'is_user_age_range_field', ['1' => t('Age Range (without month and day of birth)'), '0' => t('Date-Picker calendar (full date of birth)')], ['value' => DbConfig::getSetting('isUserAgeRangeField'), 'required' => 1]));
 
         $oForm->addElement(new Select(t('Require photo to be uploaded:'), 'require_registration_avatar', ['1' => t('Yes'), '0' => t('No')], ['description' => t('Require Members to upload a profile photo during sign up.') . '<br /><small>' . t("Doesn't guarantee that all users will have a profile photo, because users can still close the tab without completely finishing the registration process.") . '</small>', 'value' => DbConfig::getSetting('requireRegistrationAvatar'), 'required' => 1]));
 

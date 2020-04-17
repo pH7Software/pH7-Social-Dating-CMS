@@ -3410,7 +3410,7 @@ msgid "Date of Birth field type:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:111
-msgid "Age Range (without month and day of birth )"
+msgid "Age Range (without month and day of birth)"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:111
