@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<browserconfig><msapplication><tile><square70x70logo src="{% PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG %}ms-icon-70x70.png"/><square150x150logo src="{% PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG %}ms-icon-150x150.png"/><square310x310logo src="{{ $design->url(PH7_LAYOUT . PH7_SYS,'pwa/' ,'themes/' ,'base/' ,'img') }}ms-icon-310x310.png"/><TileColor>#ffffff</TileColor></tile></msapplication></browserconfig>
