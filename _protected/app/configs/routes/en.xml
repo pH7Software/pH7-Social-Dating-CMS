@@ -8,6 +8,7 @@
 
     <!-- Progressive Web App (PWA) -->
     <route url="manifest\.json" path="system/modules" module="pwa" controller="main" action="manifest" />
+    <route url="browserconfig\.xml" path="system/modules" module="pwa" controller="main" action="browserconfig" />
 
     <!-- User -->
       <route url="@([a-zA-Z0-9_-]+)" path="system/modules" module="user" controller="profile" action="index" vars="username" />
