@@ -6,7 +6,7 @@
  * It can also retrieve the URL roads, initialize the languages​​, themes, database, etc.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2011-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Router
  */
@@ -147,29 +147,30 @@ final class FrontController
             if ($this->isRewrittenUrl($oRoute, $aMatches)) {
                 $this->setRewritingRouter();
 
-                $sPathModule = $oRoute->getAttribute('path') . PH7_SH;
+                // Get the module path from routes/*.xml file (e.g., "system/modules" or just "modules")
+                $sModulePath = $oRoute->getAttribute('path') . PH7_SH;
 
-                // Get module
+                // Get module, from the `routes/<LANG_CODE>.xml` file
                 $this->oRegistry->module = $oRoute->getAttribute('module');
 
                 // Check if file exist
-                if (!$this->oConfig->load(PH7_PATH_APP . $sPathModule . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
+                if (!$this->oConfig->load(PH7_PATH_APP . $sModulePath . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
                     $this->notFound('The <b>' . $this->oRegistry->module .
-                        '</b> system module is not found.<br />File: <b>' . PH7_PATH_APP . $sPathModule . $this->oRegistry->module . PH7_DS .
-                        '</b><br /> or the <b>' . PH7_CONFIG_FILE . '</b> file is not found.<br />File: <b>' . PH7_PATH_APP . $sPathModule . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '</b>');
+                        '</b> system module is not found.<br />File: <b>' . PH7_PATH_APP . $sModulePath . $this->oRegistry->module . PH7_DS .
+                        '</b><br /> or the <b>' . PH7_CONFIG_FILE . '</b> file is not found.<br />File: <b>' . PH7_PATH_APP . $sModulePath . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '</b>');
                 }
 
                 /***** PATH THE MODULE *****/
-                $this->oRegistry->path_module = PH7_PATH_APP . $sPathModule . $this->oRegistry->module . PH7_DS;
+                $this->oRegistry->path_module = PH7_PATH_APP . $sModulePath . $this->oRegistry->module . PH7_DS;
 
                 /***** URL THE MODULE *****/
                 $this->oRegistry->url_module = PH7_URL_ROOT . $this->oRegistry->module . PH7_SH;
 
                 /***** PATH THE TEMPLATE *****/
-                $this->oRegistry->path_themes_module = PH7_PATH_ROOT . PH7_LAYOUT . $sPathModule . $this->oRegistry->module . PH7_DS . PH7_TPL;
+                $this->oRegistry->path_themes_module = PH7_PATH_ROOT . PH7_LAYOUT . $sModulePath . $this->oRegistry->module . PH7_DS . PH7_TPL;
 
                 /***** URL THE TEMPLATE *****/
-                $this->oRegistry->url_themes_module = PH7_RELATIVE . PH7_LAYOUT . $sPathModule . $this->oRegistry->module . PH7_SH . PH7_TPL;
+                $this->oRegistry->url_themes_module = PH7_RELATIVE . PH7_LAYOUT . $sModulePath . $this->oRegistry->module . PH7_SH . PH7_TPL;
 
                 // Get the default controller
                 $this->oRegistry->controller = ucfirst($oRoute->getAttribute('controller')) . self::CONTROLLER_SUFFIX;
