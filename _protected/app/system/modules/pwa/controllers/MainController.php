@@ -12,9 +12,9 @@ use PH7\Framework\Http\Http;
 
 class MainController extends Controller
 {
-    const CONTENT_TYPE = 'application/json';
+    const JSON_CONTENT_TYPE = 'application/json';
     const JSON_TPL_EXT = '.json.tpl';
-    const CONTENT_TYPE_XML = 'application/xml';
+    const XML_CONTENT_TYPE = 'application/xml';
     const XML_TPL_EXT = '.xml.tpl';
     const STATIC_CACHE_LIFETIME = 86400; // 86400 secs = 24 hours
 
