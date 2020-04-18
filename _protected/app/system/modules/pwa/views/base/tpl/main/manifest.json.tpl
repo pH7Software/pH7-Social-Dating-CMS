@@ -10,7 +10,7 @@
   "scope": "/",
   "theme_color": "{bg_color}",
   "background_color": "{bg_color}",
-  "display": "standalone",
+  "display": "minimal-ui",
   "icons": [
     {
       "src": "{url_tpl_mod_img}icon-72x72.png",
