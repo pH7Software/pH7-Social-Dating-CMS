@@ -29,6 +29,7 @@ class MainController extends Controller
         $this->jsonOutput();
     }
     
+    // Add XML browserconfig
     public function browserConfig() 
     { 
         $this->setContentType(); 
@@ -53,6 +54,13 @@ class MainController extends Controller
 
         $this->view->display($this->httpRequest->currentController() . PH7_DS . $this->registry->action . self::JSON_TPL_EXT);
     }
+    
+    /**
+     * @return void
+     *
+     * @throws Framework\Http\Exception
+     * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
+     */
     
     private function xmlOutput()
     {
@@ -82,6 +90,14 @@ class MainController extends Controller
     {
         Http::setContentType(self::CONTENT_TYPE);
     }
+    
+    /**
+     * Set the appropriate header output format.
+     *
+     * @return void
+     *
+     * @throws Framework\Http\Exception
+     */
     
     private function setContentTypeXml()
     {
