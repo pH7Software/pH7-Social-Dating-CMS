@@ -8,7 +8,7 @@
   "homepage_url": "{url_root}",
   "orientation": "{orientation}",
   "scope": "/",
-  "theme_color": "transparent",
+  "theme_color": "{bg_color}",
   "background_color": "{bg_color}",
   "display": "standalone",
   "icons": [
