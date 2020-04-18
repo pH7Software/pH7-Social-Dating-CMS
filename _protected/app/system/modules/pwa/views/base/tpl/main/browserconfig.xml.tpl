@@ -1,10 +1,11 @@
-<?php echo '<' . '?xml version="1.0" encoding="utf-8" ?' . '>'; ?>
+{{ $design->xmlHeader() }}
 <browserconfig>
     <msapplication>
         <tile>
-            <square150x150logo src="{url_root}templates/system/pwa/themes/base/img/mstile-150x150.png" />
-            <TileColor>#da532c</TileColor>
+            <square70x70logo src="{url_tpl_mod_img}ms-icon-70x70.png"/>
+            <square150x150logo src="{url_tpl_mod_img}mstile-150x150.png" />
+            <square310x310logo src="{url_tpl_mod_img}ms-icon-310x310.png" />
+            <TileColor>{hex_title_color}</TileColor>
         </tile>
     </msapplication>
 </browserconfig>
-
