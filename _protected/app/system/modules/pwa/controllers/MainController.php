@@ -23,20 +23,21 @@ class MainController extends Controller
         $this->setContentType();
         $this->enableStaticTplCache();
 
-        $this->view->bg_color = $this->config->values['module.setting']['background_color'];
+        $this->view->hex_bg_color = $this->config->values['module.setting']['hex.background_color'];
         $this->view->orientation = $this->config->values['module.setting']['orientation_mode'];
 
         $this->jsonOutput();
     }
-    
-    // Add XML browserconfig
-    public function browserConfig() 
-    { 
-        $this->setContentType(); 
-        $this->enableStaticTplCache(); 
-     
-        $this->xmlOutput(); 
-    } 
+
+    public function browserConfig()
+    {
+        $this->setContentType();
+        $this->enableStaticTplCache();
+
+        $this->view->hex_title_color = $this->config->values['module.setting']['hex.title_color'];
+
+        $this->xmlOutput();
+    }
 
     /**
      * @return void
@@ -54,7 +55,7 @@ class MainController extends Controller
 
         $this->view->display($this->httpRequest->currentController() . PH7_DS . $this->registry->action . self::JSON_TPL_EXT);
     }
-    
+
     /**
      * @return void
      *
@@ -71,7 +72,7 @@ class MainController extends Controller
 
         $this->view->display($this->httpRequest->currentController() . PH7_DS . $this->registry->action . self::XML_TPL_EXT);
     }
-    
+
     private function enableStaticTplCache()
     {
         $this->view->setCaching(true);
@@ -89,7 +90,7 @@ class MainController extends Controller
     {
         Http::setContentType(self::CONTENT_TYPE);
     }
-    
+
     /**
      * Set the appropriate header output format.
      *
@@ -99,6 +100,6 @@ class MainController extends Controller
      */
     private function setContentTypeXml()
     {
-        Http::setContentType(self::CONTENT_TYPE_XML);
+        Http::setContentType(self::XMLCONTENT_TYPE);
     }
 }
