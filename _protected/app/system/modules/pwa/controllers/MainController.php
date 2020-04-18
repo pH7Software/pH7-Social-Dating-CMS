@@ -61,7 +61,6 @@ class MainController extends Controller
      * @throws Framework\Http\Exception
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
-    
     private function xmlOutput()
     {
         /* Don't Compress XML */
@@ -98,7 +97,6 @@ class MainController extends Controller
      *
      * @throws Framework\Http\Exception
      */
-    
     private function setContentTypeXml()
     {
         Http::setContentType(self::CONTENT_TYPE_XML);
