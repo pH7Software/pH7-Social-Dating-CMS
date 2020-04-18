@@ -38,6 +38,8 @@
        <link rel="icon" type="image/png" sizes="32x32" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}favicon-32x32.png">
        <link rel="icon" type="image/png" sizes="96x96" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}favicon-96x96.png">
        <link rel="icon" type="image/png" sizes="16x16" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}favicon-16x16.png">
+       <meta name="apple-mobile-web-app-capable" content="yes">
+       <meta name="apple-mobile-web-app-title" content="{site_name}">
        <meta name="msapplication-TileColor" content="#ffffff">
        <meta name="msapplication-TileImage" content="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}ms-icon-144x144.png">  
     {/if}
