@@ -25,25 +25,12 @@
     {if $header}{header}{/if}
 
     {if $is_pwa_enabled}
-       <link rel="manifest" href="{{ $design->url('pwa','main','manifest') }}" />
-       {{ $design->staticFiles('js', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_JS, 'sw-register.js') }}
-       <link rel="apple-touch-icon" sizes="57x57" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}apple-icon-57x57.png">
-       <link rel="apple-touch-icon" sizes="60x60" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}apple-icon-60x60.png">
-       <link rel="apple-touch-icon" sizes="72x72" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}apple-icon-72x72.png">
-       <link rel="apple-touch-icon" sizes="76x76" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}apple-icon-76x76.png">
-       <link rel="apple-touch-icon" sizes="114x114" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}apple-icon-114x114.png">
-       <link rel="apple-touch-icon" sizes="144x144" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}apple-icon-144x144.png">
-       <link rel="apple-touch-icon" sizes="152x152" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}apple-icon-152x152.png">
-       <link rel="apple-touch-icon" sizes="180x180" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}apple-icon-180x180.png">
-       <link rel="icon" type="image/png" sizes="32x32" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}favicon-32x32.png">
-       <link rel="icon" type="image/png" sizes="96x96" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}favicon-96x96.png">
-       <link rel="icon" type="image/png" sizes="16x16" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}favicon-16x16.png">
-       <meta name="apple-mobile-web-app-capable" content="yes">
-       <meta name="apple-mobile-web-app-title" content="{site_name}">
-       <meta name="msapplication-TileColor" content="#ffffff">
-       <meta name="msapplication-TileImage" content="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}ms-icon-144x144.png">  
+      <link rel="manifest" href="{{ $design->url('pwa','main','manifest') }}" />
+      <meta name="msapplication-config" content="{{ $design->url('pwa','main','browserconfig') }}" />
+      {{ $design->staticFiles('js', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_JS, 'sw-register.js') }}
+      {main_include 'pwa-icon-tags.inc.tpl'}
     {/if}
-    
+
     <!-- Begin Copyright pH7 Dating/Social CMS by Pierre-Henry SORIA, All Rights Reserved -->
     <!-- Do not modify or remove this code! Think of those who spend a lot of time to develop this CMS & Framework for you -->
     <meta name="creator" content="pH7CMS, Pierre-Henry Soria - {software_url}" />
