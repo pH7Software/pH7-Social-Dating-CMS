@@ -8,8 +8,8 @@
   "homepage_url": "{url_root}",
   "orientation": "{orientation}",
   "scope": "/",
-  "theme_color": "{bg_color}",
-  "background_color": "{bg_color}",
+  "theme_color": "{hex_bg_color}",
+  "background_color": "{hex_bg_color}",
   "display": "standalone",
   "icons": [
     {
