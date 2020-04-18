@@ -14,6 +14,8 @@ class MainController extends Controller
 {
     const CONTENT_TYPE = 'application/json';
     const JSON_TPL_EXT = '.json.tpl';
+    const CONTENT_TYPE_XML = 'application/xml';
+    const XML_TPL_EXT = '.xml.tpl';
     const STATIC_CACHE_LIFETIME = 86400; // 86400 secs = 24 hours
 
     public function manifest()
@@ -26,6 +28,14 @@ class MainController extends Controller
 
         $this->jsonOutput();
     }
+    
+    public function browserConfig() 
+    { 
+        $this->setContentType(); 
+        $this->enableStaticTplCache(); 
+     
+        $this->xmlOutput(); 
+    } 
 
     /**
      * @return void
@@ -43,7 +53,18 @@ class MainController extends Controller
 
         $this->view->display($this->httpRequest->currentController() . PH7_DS . $this->registry->action . self::JSON_TPL_EXT);
     }
+    
+    private function xmlOutput()
+    {
+        /* Don't Compress XML */
+        $this->view->setHtmlCompress(false);
+        $this->view->setPhpCompress(false);
 
+        $this->setContentTypeXml();
+
+        $this->view->display($this->httpRequest->currentController() . PH7_DS . $this->registry->action . self::XML_TPL_EXT);
+    }
+    
     private function enableStaticTplCache()
     {
         $this->view->setCaching(true);
@@ -60,5 +81,10 @@ class MainController extends Controller
     private function setContentType()
     {
         Http::setContentType(self::CONTENT_TYPE);
+    }
+    
+    private function setContentTypeXml()
+    {
+        Http::setContentType(self::CONTENT_TYPE_XML);
     }
 }
