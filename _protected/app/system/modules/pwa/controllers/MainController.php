@@ -20,7 +20,6 @@ class MainController extends Controller
 
     public function manifest()
     {
-        $this->setContentType();
         $this->enableStaticTplCache();
 
         $this->view->hex_bg_color = $this->config->values['module.setting']['hex.background_color'];
@@ -31,7 +30,6 @@ class MainController extends Controller
 
     public function browserConfig()
     {
-        $this->setContentType();
         $this->enableStaticTplCache();
 
         $this->view->hex_title_color = $this->config->values['module.setting']['hex.title_color'];
