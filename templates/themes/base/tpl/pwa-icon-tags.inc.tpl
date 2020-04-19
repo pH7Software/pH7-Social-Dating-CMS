@@ -12,5 +12,3 @@
 <link rel="icon" type="image/png" sizes="16x16" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}favicon-16x16.png" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-title" content="{site_name}" />
-
-
