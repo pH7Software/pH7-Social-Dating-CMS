@@ -49,7 +49,7 @@ class MainController extends Controller
         $this->view->setHtmlCompress(false);
         $this->view->setPhpCompress(false);
 
-        $this->setContentType();
+        $this->setJsonContentType();
 
         $this->view->display($this->httpRequest->currentController() . PH7_DS . $this->registry->action . self::JSON_TPL_EXT);
     }
@@ -66,7 +66,7 @@ class MainController extends Controller
         $this->view->setHtmlCompress(false);
         $this->view->setPhpCompress(false);
 
-        $this->setContentTypeXml();
+        $this->setXmlContentType();
 
         $this->view->display($this->httpRequest->currentController() . PH7_DS . $this->registry->action . self::XML_TPL_EXT);
     }
@@ -78,26 +78,26 @@ class MainController extends Controller
     }
 
     /**
-     * Set the appropriate header output format.
+     * Set the appropriate header output for JSON format.
      *
      * @return void
      *
      * @throws Framework\Http\Exception
      */
-    private function setContentType()
+    private function setJsonContentType()
     {
-        Http::setContentType(self::CONTENT_TYPE);
+        Http::setContentType(self::JSON_CONTENT_TYPE);
     }
 
     /**
-     * Set the appropriate header output format.
+     * Set the appropriate header output for XML format.
      *
      * @return void
      *
      * @throws Framework\Http\Exception
      */
-    private function setContentTypeXml()
+    private function setXmlContentType()
     {
-        Http::setContentType(self::XMLCONTENT_TYPE);
+        Http::setContentType(self::XML_CONTENT_TYPE);
     }
 }
