@@ -132,7 +132,7 @@ class MainController extends Controller
                 $this->sTitle = t('No messages in your inbox');
                 $this->notFound();
                 // We modify the default error message
-                $this->view->error = t("You don't have any new messages for the moment.");
+                $this->view->error = t("You don't have any new messages ☹ Go <a href='%0%'>speak with others</a>!", Uri::get('user', 'browse', 'index'));
             } else {
                 $this->view->msgs = $oMail;
             }

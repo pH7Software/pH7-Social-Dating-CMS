@@ -6279,7 +6279,7 @@ msgid "No messages in your inbox"
 msgstr ""
 
 #: _protected/app/system/modules/mail/controllers/MainController.php:135
-msgid "You don't have any new messages for the moment."
+msgid "You don't have any new messages ☹ Go <a href='%0%'>speak with others</a>!"
 msgstr ""
 
 #: _protected/app/system/modules/mail/controllers/MainController.php:148
