@@ -1,6 +1,6 @@
 {if empty($msg)}
   <p class="center bold">
-    {lang 'Sorry, this message was not found.'}
+    {lang 'That message was not found.'}
   </p>
 {else}
   {* Set Variables *}

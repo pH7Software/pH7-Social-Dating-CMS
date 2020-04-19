@@ -6279,7 +6279,7 @@ msgid "No messages in your inbox"
 msgstr ""
 
 #: _protected/app/system/modules/mail/controllers/MainController.php:135
-msgid "Sorry %0%, you don't have any messages in your inbox."
+msgid "You don't have any new messages for the moment."
 msgstr ""
 
 #: _protected/app/system/modules/mail/controllers/MainController.php:148
@@ -14167,7 +14167,7 @@ msgid "Add Friend"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/main/msg.inc.cpl.php:19
-msgid "Sorry, this message was not found."
+msgid "That message was not found."
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/main/msg.inc.cpl.php:19
