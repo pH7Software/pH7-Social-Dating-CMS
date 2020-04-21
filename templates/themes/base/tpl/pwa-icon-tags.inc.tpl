@@ -1,7 +1,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}favicon-32x32.png" />
 <link rel="icon" type="image/png" sizes="96x96" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}favicon-96x96.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}favicon-16x16.png" />
+
 <link rel="mask-icon" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}pinned-tab.svg" color="#da532c" />
+
 <link rel="apple-touch-icon" sizes="57x57" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}apple-icon-57x57.png" />
 <link rel="apple-touch-icon" sizes="60x60" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}apple-icon-60x60.png" />
 <link rel="apple-touch-icon" sizes="72x72" href="{{ PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_IMG }}apple-icon-72x72.png" />
