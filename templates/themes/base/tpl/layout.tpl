@@ -21,7 +21,6 @@
     <meta name="category" content="{meta_category}" />
     <meta name="rating" content="{meta_rating}" />
     <meta name="distribution" content="{meta_distribution}" />
-    <meta name="theme-color" content="#ffffff" />
     {if $header}{header}{/if}
 
     {if $is_pwa_enabled}
