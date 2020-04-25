@@ -6,7 +6,8 @@
     <div class="col-xs-12 col-sm-4 col-md-3">
         {{ UserDesignCoreModel::userStatus($id) }}
         {{ (new AvatarDesignCore)->lightBox($username, $first_name, $sex, 400) }}
-        <h3 itemprop="name"><span itemprop="name">{first_name}</span> {middle_name} <span itemprop="familyName">{last_name}</span>
+        <h3 itemprop="name">
+            <span itemprop="name">{first_name}</span> {middle_name} <span itemprop="familyName">{last_name}</span>
             {if empty($last_name) OR empty($middle_name)}
                 {* Display the username if middle or last name is empty *}
                 <span itemprop="additionalName" class="italic">({username})</span>
