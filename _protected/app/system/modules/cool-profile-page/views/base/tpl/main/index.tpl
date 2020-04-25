@@ -187,6 +187,7 @@
         {/if}
 
         {if $is_relatedprofile_enabled}
+            <h2 class="center">{lang 'Similar Profiles'}</h2>
             <div class="profile-section">
                 <div class="content" id="related_profile">
                     <script>
