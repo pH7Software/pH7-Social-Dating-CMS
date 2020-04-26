@@ -12,7 +12,11 @@
 
 
     {* Menu for All *}
-      <nav class="navbar navbar-default navbar-fixed-top">
+      {if $top_navbar_type == 'inverse'}
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+      {else}
+        <nav class="navbar navbar-default navbar-fixed-top">
+      {/if}
         <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">

@@ -1165,6 +1165,7 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('adminEmail', @sAdminEmail, '', 'email'),
 ('defaultLanguage', 'en_US', '', 'language'),
 ('defaultTemplate', 'base', '', 'design'),
+('navbarType', 'default', 'Choose between "default" or "dark"', 'design'),
 ('backgroundColor', '', 'Override background color. Leave empty to disable', 'design'),
 ('textColor', '', 'Override text color. Leave empty to disable', 'design'),
 ('heading1Color', '', 'Override H1 color. Leave empty to disable', 'design'),

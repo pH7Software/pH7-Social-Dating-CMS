@@ -130,6 +130,7 @@ class SettingFormProcess extends Form
         'clean_messenger' => 'cleanMessenger',
 
         // Design
+        'navbar_type' => 'navbarType',
         'background_color' => 'backgroundColor',
         'text_color' => 'textColor',
         'heading1_color' => 'heading1Color',
