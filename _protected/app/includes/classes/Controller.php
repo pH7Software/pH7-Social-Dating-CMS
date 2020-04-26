@@ -13,25 +13,4 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 abstract class Controller extends FwkController
 {
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->addMenuCssFile();
-    }
-
-    /**
-     * Add the menu.css file (when navbar isn't set to 'dark' mode).
-     *
-     * @return void
-     */
-    protected function addMenuCssFile()
-    {
-        if (DbConfig::getSetting('navbarType') !== 'inverse') {
-            $this->design->addCss(
-                PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS,
-                'menu.css'
-            );
-        }
-    }
 }

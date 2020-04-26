@@ -1,0 +1,15 @@
+/*
+ * Author:        Pierre-Henry Soria <hello@ph7cms.com>
+ * Copyright:     (c) 2020, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+.navbar #logo a {
+    color: #9d9d9d;
+}
+
+.navbar #logo a:hover, .navbar #logo a:active {
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 0 5px #fff, 0 0 8px rgba(255, 255, 255, .6);
+}
