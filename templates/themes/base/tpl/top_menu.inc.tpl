@@ -12,7 +12,7 @@
 
 
     {* Menu for All *}
-      {if $top_navbar_type == 'inverse'}
+      {if $top_navbar_type === 'inverse'}
         <nav class="navbar navbar-inverse navbar-fixed-top">
       {else}
         <nav class="navbar navbar-default navbar-fixed-top">
