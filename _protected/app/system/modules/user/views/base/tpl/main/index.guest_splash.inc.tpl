@@ -8,12 +8,12 @@
 </div>
 
 {if !$is_mobile}
-    <div class="left col-lg-7 col-md-8 col-sm-6 col-xs-11 animated fadeInLeft">
+    <div class="pull-left col-lg-7 col-md-8 col-sm-7 col-xs-11 animated fadeInLeft">
         {manual_include 'user_promo_block.inc.tpl'}
     </div>
 {/if}
 
-<div class="left col-lg-4 col-md-4 col-sm-6 col-xs-11 animated fadeInRight">
+<div class="pull-left col-lg-4 col-md-4 col-sm-5 col-xs-11 animated fadeInRight">
     <h1 class="red3 italic underline">{headline}</h1>
 
     {* For small devices, the following will be activated through /templates/themes/base/css/splash.css *}

@@ -1,4 +1,4 @@
-<div class="right col-lg-4 col-md-4 col-sm-5 col-xs-10 animated fadeInRight">
+<div class="pull-right col-lg-4 col-md-4 col-sm-5 col-xs-10 animated fadeInRight">
     <h1 class="red3 italic underline">{headline}</h1>
     <div class="center">
         <a href="{{ $design->url('user','main','login') }}" class="btn btn-primary btn-lg">
@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<div class="left col-lg-7 col-md-8 col-sm-7 col-xs-12">
+<div class="pull-left col-lg-7 col-md-8 col-sm-7 col-xs-12">
     <div class="folio_block">
         <h1 class="red3 italic underline">{slogan}</h1>
 
