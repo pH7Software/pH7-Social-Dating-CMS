@@ -61,7 +61,7 @@
                 {if AdminCore::auth()}
                     <p><a class="btn btn-default btn-sm" href="{{ $design->url('blog', 'admin', 'edit', $post->blogId) }}">{lang 'Edit Article'}</a> | {{ $design->popupLinkConfirm(t('Delete Article'), 'blog', 'admin', 'delete', $post->blogId, 'btn btn-default btn-sm') }}</p>
                 {/if}
-                {{ $design->likeApi() }}
+                {{ $design->socialMediaWidgets() }}
                 <hr /><br />
             {/each}
             {main_include 'page_nav.inc.tpl'}

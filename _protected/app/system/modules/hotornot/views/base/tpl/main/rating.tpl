@@ -16,7 +16,7 @@
         <p class="center">
             {{ $design->like($data->username, $data->firstName, $data->sex, (new UserCore)->getProfileLink($data->username)) }} | {{ $design->report($data->profileId, $data->username, $data->firstName, $data->sex) }}
         </p>
-        {{ $design->likeApi() }}
+        {{ $design->socialMediaWidgets() }}
     {else}
         <p class="bold">{error}</p>
     {/if}

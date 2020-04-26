@@ -19,7 +19,7 @@
         {{ ShareUrlCoreForm::display(Framework\Mvc\Router\Uri::get('game','main','game',"$game->title,$game->gameId")) }}
         {{ ShareEmbedCoreForm::display(PH7_URL_DATA_SYS_MOD . 'game/file/' . $game->file) }}
 
-        {{ $design->likeApi() }}
+        {{ $design->socialMediaWidgets() }}
 
         {if AdminCore::auth()}
             <div>

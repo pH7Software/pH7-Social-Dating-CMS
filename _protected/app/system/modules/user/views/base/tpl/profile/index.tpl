@@ -402,7 +402,7 @@
     <p class="center">
         {{ $design->like($username, $first_name, $sex) }} | {{ $design->report($id, $username, $first_name, $sex) }}
     </p>
-    {{ $design->likeApi() }}
+    {{ $design->socialMediaWidgets() }}
 
     {{ CommentDesignCore::link($id, 'profile') }}
 

@@ -34,7 +34,7 @@
         <p class="center">
             {{ $design->like($picture->username, $picture->firstName, $picture->sex) }} | {{ $design->report($picture->profileId, $picture->username, $picture->firstName, $picture->sex) }}
         </p>
-        {{ $design->likeApi() }}
+        {{ $design->socialMediaWidgets() }}
     {else}
         <p>{error}</p>
     {/if}

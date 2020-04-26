@@ -22,7 +22,7 @@
             {{ ShareUrlCoreForm::display(Framework\Mvc\Router\Uri::get('blog','main','read',$post_id)) }}
             {{ RatingDesignCore::voting($blog_id,DbTableName::BLOG,'center') }}
 
-            {{ $design->likeApi() }}
+            {{ $design->socialMediaWidgets() }}
 
             {if $enable_comment}
                 <p>------------------------------</p>

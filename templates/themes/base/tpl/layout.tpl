@@ -171,7 +171,7 @@
 
       <div role="contentinfo">
         <div class="ft_copy">
-          {{ $design->littleLikeApi() }}
+          {{ $design->littleSocialMediaWidgets() }}
 
           <p>
             &copy; <ph:date value="Y" /> <strong>{site_name}</strong>  {{ $design->link() }}

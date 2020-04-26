@@ -30,7 +30,7 @@
         <p class="center">
             {{ $design->like($video->username, $video->firstName, $video->sex) }} | {{ $design->report($video->profileId, $video->username, $video->firstName, $video->sex) }}
         </p>
-        {{ $design->likeApi() }}
+        {{ $design->socialMediaWidgets() }}
     {else}
         <p>{error}</p>
     {/if}

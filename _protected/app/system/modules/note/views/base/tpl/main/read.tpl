@@ -32,7 +32,7 @@
             {{ ShareUrlCoreForm::display(Framework\Mvc\Router\Uri::get('note','main','read',"$post->username,$post->postId")) }}
             {{ RatingDesignCore::voting($post->noteId,DbTableName::NOTE,'center') }}
 
-            {{ $design->likeApi() }}
+            {{ $design->socialMediaWidgets() }}
 
             {if $post->enableComment}
                 <p>------------------------------</p>

@@ -88,7 +88,7 @@
                     </div>
                 {/if}
 
-                {{ $design->likeApi() }}
+                {{ $design->socialMediaWidgets() }}
                 <hr /><br />
             {/each}
             {main_include 'page_nav.inc.tpl'}
