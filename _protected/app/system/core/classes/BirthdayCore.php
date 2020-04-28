@@ -60,8 +60,8 @@ class BirthdayCore extends Core
     private function sendMail(stdClass $oUser, Mailable $oMailEngine)
     {
         $this->view->content = t('Hi %0%!', $oUser->firstName) . '<br />' .
-            t("The %site_name%'s team wish you a very happy birthday!") . '<br />' .
-            t('Enjoy it well and enjoy yourself!');
+            t('We wish you a great Happy Birthday!') . '<br />' .
+            t('Enjoy yourself and have an amazing day!');
 
         $sHtmlMsg = $this->view->parseMail(
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/tpl/mail/sys/mod/user/birthday.tpl',
