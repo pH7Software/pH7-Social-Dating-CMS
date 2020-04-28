@@ -7,7 +7,7 @@
 
         {each $f in $friends}
             <div class="s_photo" id="friend_{% $f->fdId %}">
-                {{ $avatarDesign->get($f->username, $f->firstName, $f->sex, 64, true) }}
+                {{ $avatarDesign->get($f->username, $f->firstName, $f->sex, 64, $bRollover = true) }}
                 <em><abbr title="{% $f->firstName %}">{% $f->username %}</abbr></em><br />
 
                 {if $is_user_auth AND $sess_member_id == $member_id}

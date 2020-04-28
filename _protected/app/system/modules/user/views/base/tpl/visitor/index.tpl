@@ -8,7 +8,7 @@
         <p class="italic underline"><strong><a href="{{ $design->url('user','visitor','index',$username) }}">{visitor_number}</a></strong></p><br />
         {each $v in $visitors}
             <div class="s_photo">
-                {{ $avatarDesign->get($v->username, $v->firstName, $v->sex, 64, true) }}
+                {{ $avatarDesign->get($v->username, $v->firstName, $v->sex, 64, $bRollover = true) }}
             </div>
         {/each}
 

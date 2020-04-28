@@ -2,7 +2,7 @@
     {if !empty($births)}
         {each $birth in $births}
             <div class="s_photo">
-                {{ $avatarDesign->get($birth->username, $birth->firstName, $birth->sex, 64, true) }}
+                {{ $avatarDesign->get($birth->username, $birth->firstName, $birth->sex, 64, $bRollover = true) }}
             </div>
         {/each}
         {main_include 'page_nav.inc.tpl'}
