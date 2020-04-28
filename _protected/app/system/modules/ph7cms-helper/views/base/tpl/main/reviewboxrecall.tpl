@@ -7,7 +7,7 @@
                 <img src="{url_tpl_mod_img}review-recall.svg" alt="Sourceforge Review" />
             </a>
             <figcaption>
-                <em>{lang 'I believe in you! Thank YOU! 🤗'}</em>
+                <em>{lang 'I believe in you! 🤗'}</em>
             </figcaption>
         </figure>
     </div>
