@@ -1,6 +1,6 @@
 /*
  * Author:        Pierre-Henry Soria <ph7software@gmail.com>
- * Copyright:     (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * Copyright:     (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
@@ -45,7 +45,7 @@
     }
 }
 
-/* Rewrite some CSS classes for Bootstrap fixed menu for better render in pH7CMS desin */
+/* Rewrite some CSS classes for Bootstrap's fixed menu to give a better render with the design */
 .navbar-default {
     border-color: #ccc !important;
 }
@@ -59,7 +59,7 @@
     padding: 10px 9px;
 }
 
-/* Change the default minimum height of the navbar */
+/* Amend the default minimum height of the navbar */
 .navbar {
     min-height: 45px !important;
 }
