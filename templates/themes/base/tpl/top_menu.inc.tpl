@@ -244,7 +244,7 @@
                       </a>
                   <ul class="dropdown-menu" role="menu">
                       <li><a href="{{ $design->url('friend','main','index') }}" title="{lang 'Friends List'}">{lang 'Friends List'}</a></li>
-                    <li><a href="{{ $design->url('friend','main','search',$username) }}" title="{lang 'Find a friend in my list'}">{lang 'Find a Friend'}</a></li>
+                    <li><a href="{{ $design->url('friend','main','search',$username) }}" title="{lang 'Find a friend from my list'}">{lang 'Find a Friend'}</a></li>
                   </ul>
                 </li>
               {/if}
@@ -255,7 +255,7 @@
                 </a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="{{ $design->url('user','visitor','index') }}" title="{lang 'Who Visited My Profile'}">{lang 'Who See Me'}</a></li>
-                  <li><a href="{{ $design->url('user','visitor','search') }}" title="{lang 'Find who visited my profile'}">{lang 'Find Visitor(s)'}</a></li>
+                  <li><a href="{{ $design->url('user','visitor','search',$username) }}" title="{lang 'See who visited my profile'}">{lang 'Find Visitor(s)'}</a></li>
                 </ul>
               </li>
 

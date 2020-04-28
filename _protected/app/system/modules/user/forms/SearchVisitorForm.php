@@ -22,7 +22,7 @@ class SearchVisitorForm
 
         $oForm = new \PFBC\Form('form_search');
         $oForm->configure(['action' => Uri::get('user', 'visitor', 'index', $sUsername) . PH7_SH, 'method' => 'get']);
-        $oForm->addElement(new Search(t('Find Search a Visitor of "%0%"', $sUsername), 'looking', ['description' => t('Enter the First/Last Name, Username, Email or ID of your friend.')]));
+        $oForm->addElement(new Search(t('See who visited "%0%" profile', $sUsername), 'looking', ['description' => t('Enter the First/Last Name, Username, Email or ID of your friend.')]));
         $oForm->addElement(new Select(t('Browse By:'), 'order', [SearchCoreModel::LAST_VISIT => t('Last Seen on your profile'), SearchCoreModel::USERNAME => t('Username'), SearchCoreModel::FIRST_NAME => t('First Name'), SearchCoreModel::LAST_NAME => t('Last Name'), SearchCoreModel::EMAIL => t('Email'), SearchCoreModel::LATEST => t('Latest'), SearchCoreModel::LAST_ACTIVITY => t('Last Activity'), SearchCoreModel::VIEWS => t('Popular'), SearchCoreModel::RATING => t('Rated')]));
         $oForm->addElement(new Select(t('Direction:'), 'sort', [SearchCoreModel::DESC => t('Descending'), SearchCoreModel::ASC => t('Ascending')]));
         $oForm->addElement(new Button(t('Search'), 'submit', ['icon' => 'search']));
