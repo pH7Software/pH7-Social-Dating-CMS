@@ -348,7 +348,7 @@ class SettingForm
         /********** Design (Color) **********/
         $oForm->addElement(new HTMLExternal('</div></div><div class="content" id="design"><div class="col-md-10"><h2 class="underline">' . t('Override Website Colors') . '</h2>'));
 
-        $oForm->addElement(new Select(t('Top Navigation Bar Style'), 'navbar_type', ['default' => t('White (default)'), 'inverse' => t('Dark')], ['value' => DbConfig::getSetting('navbarType'), 'required' => 1]));
+        $oForm->addElement(new Select(t('Top Navigation Bar Style'), 'navbar_type', ['default' => t('White & Blue (default)'), 'inverse' => t('Sober Dark')], ['value' => DbConfig::getSetting('navbarType'), 'required' => 1]));
 
         $oForm->addElement(new Color(t('Website Background:'), 'background_color', ['value' => DbConfig::getSetting('backgroundColor')]));
 
