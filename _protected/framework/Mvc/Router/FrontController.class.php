@@ -153,7 +153,7 @@ final class FrontController
                 // Get module, from the `routes/<LANG_CODE>.xml` file
                 $this->oRegistry->module = $oRoute->getAttribute('module');
 
-                // Check if file exist
+                // Check if config module file exists
                 if (!$this->oConfig->load(PH7_PATH_APP . $sModulePath . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
                     $this->notFound('The <b>' . $this->oRegistry->module .
                         '</b> system module is not found.<br />File: <b>' . PH7_PATH_APP . $sModulePath . $this->oRegistry->module . PH7_DS .
@@ -203,7 +203,7 @@ final class FrontController
             $this->oRegistry->module = DbConfig::getSetting('defaultSysModule');
         }
 
-        // Check if file exist
+        // See if config module file exists
         if (!$this->oConfig->load(PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
             $this->notFound('The <b>' . $this->oRegistry->module . '</b> system module is not found.<br />File: <b>' . PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS .
                 '</b><br /> or the <b>' . PH7_CONFIG_FILE . '</b> file is not found.<br />File: <b>' . PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '</b>');
@@ -260,7 +260,7 @@ final class FrontController
             $this->oRegistry->module = $this->oUri->fragment(1);
         }
 
-        // Check if file exist
+        // Check if config module file exists
         if (!$this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
             $this->notFound('The <b>' . $this->oRegistry->module . '</b> module is not found.<br />File: <b>' . PH7_PATH_MOD . $this->oRegistry->module . PH7_DS .
                 '</b><br /> or the <b>' . PH7_CONFIG_FILE . '</b> file is not found.<br />File: <b>' . PH7_PATH_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '</b>');
