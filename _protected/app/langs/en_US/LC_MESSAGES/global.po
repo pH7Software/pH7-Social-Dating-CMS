@@ -7179,7 +7179,7 @@ msgid "This one cannot be deleted."
 msgstr ""
 
 #: _protected/app/system/modules/payment/controllers/MainController.php:69
-msgid "Payment Zone"
+msgid "Choose your package 🤩"
 msgstr ""
 
 #: _protected/app/system/modules/payment/controllers/MainController.php:80
@@ -16047,19 +16047,19 @@ msgid "If the problem persists, please contact your payment provider or "
 msgstr ""
 
 #: _protected/app/system/modules/payment/views/base/tpl/main/index.tpl:2
-msgid "Want to be a VIP member?"
+msgid "Want to be a VIP member? 👑"
 msgstr ""
 
 #: _protected/app/system/modules/payment/views/base/tpl/main/index.tpl:3
-msgid "Want to access to many additional features?"
+msgid "Want to access to many additional features? 😻"
 msgstr ""
 
 #: _protected/app/system/modules/payment/views/base/tpl/main/index.tpl:4
-msgid "Want to increase your chances of meeting someone reliable?"
+msgid "Want to increase your chances of meeting someone reliable? 🥰"
 msgstr ""
 
 #: _protected/app/system/modules/payment/views/base/tpl/main/index.tpl:7
-msgid "Secure your membership TODAY and get all premium advantages!"
+msgid "Secure your membership TODAY. Get all premium advantages before anyone else!"
 msgstr ""
 
 #: _protected/app/system/modules/payment/views/base/tpl/main/index.tpl:11
@@ -16107,7 +16107,7 @@ msgid "There are no other memberships available for the moment."
 msgstr ""
 
 #: _protected/app/system/modules/payment/views/base/tpl/main/membership.tpl:41
-msgid "Please come back later on."
+msgid "Please come back later on 😉"
 msgstr ""
 
 #: _protected/app/system/modules/payment/views/base/tpl/main/pay.tpl:16

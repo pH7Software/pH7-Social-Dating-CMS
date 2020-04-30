@@ -68,7 +68,7 @@ class MainController extends Controller
 
     public function index()
     {
-        $this->view->page_title = $this->view->h1_title = t('Payment Zone');
+        $this->view->page_title = $this->view->h1_title = t('Choose your package 🤩');
         $this->output();
     }
 

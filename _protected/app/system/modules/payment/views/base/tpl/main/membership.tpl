@@ -40,7 +40,7 @@
                     {if $num_enabled_membership === 0}
                         <li class="red">
                             {lang 'There are no other memberships available for the moment.'}<br />
-                            {lang 'Please come back later on.'}
+                            {lang 'Please come back later on 😉'}
                         </li>
                     {/if}
                 </ul>
