@@ -49,3 +49,13 @@
 .navbar {
     min-height: 45px !important;
 }
+
+
+/* Bottom menu */
+.bottom_nav {
+    float: right;
+}
+
+.bottom_nav a {
+    text-decoration: underline;
+}
