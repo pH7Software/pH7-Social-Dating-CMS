@@ -84,12 +84,14 @@ class InstallController extends Controller
      * Enable/Disable Site Settings according to the chosen niche
      */
     const SOCIAL_SETTINGS = [
+        'navbarType' => 'default',
         'socialMediaWidgets' => '1',
         'requireRegistrationAvatar' => '0',
         'isUserAgeRangeField' => '0'
     ];
 
     const DATING_SETTINGS = [
+        'navbarType' => 'inverse',
         'socialMediaWidgets' => '0',
         'requireRegistrationAvatar' => '1',
         'isUserAgeRangeField' => '1'
