@@ -13,7 +13,7 @@
             {{ $country_name = t($user->country) }}
             {{ $age = UserBirthDateCore::getAgeFromBirthDate($user->birthDate) }}
 
-            <div class="thumb_photo">
+            <div class="col-md-3 thumb_photo">
                 {{ UserDesignCoreModel::userStatus($user->profileId) }}
 
                 {* Sex Icon *}
