@@ -119,7 +119,7 @@ $LANG = array(
     'wait_importing_database' => 'Please wait while importing the database.<br />
         This may take several minutes.',
     'add_sample_data' => 'Generate sample profiles (you will be able to remove them later on)',
-    'niche' => 'Choose the Kind of Site you Want to Build 😇',
+    'niche' => 'Choose the Kind of WebApp you Want to Build 😇',
     'social_dating_niche' => 'Social-Dating Niche 🥰',
     'social_niche' => 'Community Niche 🥳',
     'dating_niche' => 'Dating Niche 😍',
