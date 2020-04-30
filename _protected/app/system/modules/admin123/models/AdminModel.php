@@ -108,7 +108,7 @@ class AdminModel extends AdminCoreModel
         $mLooking = trim($mLooking);
         $bDigitSearch = ctype_digit($mLooking);
 
-        $sSqlLimit = !$bCount ? ' LIMIT :offset, :limit' : '';
+        $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = !$bCount ? '*' : 'COUNT(profileId)';
 
         if ($bDigitSearch) {

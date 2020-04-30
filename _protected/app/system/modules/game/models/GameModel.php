@@ -148,7 +148,7 @@ class GameModel extends GameCoreModel
             $sSqlWhere = ' WHERE gameId = :looking';
         }
 
-        $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
+        $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::GAME) . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
