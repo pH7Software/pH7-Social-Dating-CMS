@@ -84,7 +84,7 @@ class SearchUserCoreForm
         $oForm->addElement(new Textbox(t('City:'), SearchQueryCore::CITY, self::$aCityOption));
         $oForm->addElement(new Checkbox('', SearchQueryCore::ORDER, [SearchCoreModel::LATEST => '<span class="bold">' . t('Latest members') . '</span>'], self::$aLatestOrder));
         $oForm->addElement(new Checkbox('', SearchQueryCore::AVATAR, ['1' => '<span class="bold">' . t('Only with Avatar') . '</span>'], self::$aAvatarOnly));
-        $oForm->addElement(new Checkbox('', SearchQueryCore::ONLINE, ['1' => '<span class="bold green2">' . t('Only Online') . '</span>'], self::$aOnlineOnly));
+        $oForm->addElement(new Checkbox('', SearchQueryCore::ONLINE, ['1' => '<span class="bold green">' . t('Only Online') . '</span>'], self::$aOnlineOnly));
         $oForm->addElement(new Button(t('Search'), 'submit', ['icon' => 'search']));
         $oForm->addElement(new HTMLExternal('<p class="center"><a href="' . Uri::get('user', 'search', 'advanced') . '">' . t('Advanced Search') . '</a></p>'));
         $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
@@ -138,7 +138,7 @@ class SearchUserCoreForm
         $oForm->addElement(new Textbox(t('Postal Code:'), SearchQueryCore::ZIP_CODE, ['id' => 'str_zip_code']));
         $oForm->addElement(new Email(t('Email Address:'), SearchQueryCore::EMAIL));
         $oForm->addElement(new Checkbox('', SearchQueryCore::AVATAR, ['1' => '<span class="bold">' . t('Only with Avatar') . '</span>']));
-        $oForm->addElement(new Checkbox('', SearchQueryCore::ONLINE, ['1' => '<span class="bold green2">' . t('Only Online') . '</span>']));
+        $oForm->addElement(new Checkbox('', SearchQueryCore::ONLINE, ['1' => '<span class="bold green">' . t('Only Online') . '</span>']));
         $oForm->addElement(
             new Select(
                 t('Browse By:'),
