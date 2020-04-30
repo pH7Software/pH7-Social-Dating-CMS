@@ -16,6 +16,8 @@ class MainController extends Controller
     const HTML_CACHE_ENABLED = false;
     const STATIC_CACHE_LIFETIME = 604800; // A week
 
+    const DATE_FORMAT_LEGAL_PAGE = 'M d, Y';
+
     /** @var string */
     private $sTitle;
 
@@ -26,8 +28,9 @@ class MainController extends Controller
         // Enable caching to all template pages of this module
         $this->enableStaticTplCache();
 
-        // Global variable for all template pages of this module
+        // Global variables for all template pages of this module
         $this->view->admin_email = DbConfig::getSetting('adminEmail');
+        $this->view->website_creation_date = $this->dateTime->get(StatisticCoreModel::getDateOfCreation())->date(self::DATE_FORMAT_LEGAL_PAGE);
     }
 
     public function index()
