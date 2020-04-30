@@ -4,7 +4,7 @@
  * @desc             Checks the data entered by a form via Ajax and indicates if there are errors (Asynchronous data).
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / App / System / Core / Asset / Ajax
  * @version          1.2
@@ -152,7 +152,7 @@ class ValidateCoreAjax
         } elseif ($sParam === 'guest' && $this->oExistsModel->email($sValue, $sTable)) {
             $this->sMsg = t('This email already used by another member.');
         } elseif ($sParam === 'user' && !$this->oExistsModel->email($sValue, $sTable)) {
-            $this->sMsg = sprintf(t('Oops! "%s" is not associated with any %site_name% account.'), substr($sValue, 0, 50));
+            $this->sMsg = t('Oops! "%0%" is not associated with any %site_name% account.', substr($sValue, 0, 50));
         } else {
             $this->iStatus = 1;
             $this->sMsg = t('Valid Email!');
@@ -172,7 +172,7 @@ class ValidateCoreAjax
         $iMax = DbConfig::getSetting('maxPasswordLength');
 
         if (!$this->oValidate->password($sValue, $iMin, $iMax)) {
-            $this->sMsg = sprintf(t('Your Password has to contain from %d to %d characters.'), $iMin, $iMax);
+            $this->sMsg = t('Your Password has to contain from %0% to %1% characters.', $iMin, $iMax);
         } else {
             $this->iStatus = 1;
             $this->sMsg = t('Correct Password!');
@@ -197,7 +197,7 @@ class ValidateCoreAjax
         if (!$this->oValidate->date($sValue)) {
             $this->sMsg = t('Your must enter a valid date (Month-Day-Year).');
         } elseif (!$this->oValidate->birthDate($sValue, $iMin, $iMax)) {
-            $this->sMsg = sprintf(t('You must be %d to %d years to register on the site.'), $iMin, $iMax);
+            $this->sMsg = t('You must be %0% to %1% years to register on the site.', $iMin, $iMax);
         } else {
             $this->iStatus = 1;
             $this->sMsg = t('OK!');
@@ -218,9 +218,9 @@ class ValidateCoreAjax
         $sValue = trim($sValue);
         if (!empty($sValue)) {
             if (!empty($iMin) && $this->oStr->length($sValue) < $iMin) {
-                $this->sMsg = sprintf(t('Please, enter %d character(s) or more.'), $iMin);
+                $this->sMsg = t('Please, enter %0% character(s) or more.', $iMin);
             } elseif (!empty($iMax) && $this->oStr->length($sValue) > $iMax) {
-                $this->sMsg = sprintf(t('Please, enter %d character(s) or less.'), $iMax);
+                $this->sMsg = t('Please, enter %0% character(s) or less.', $iMax);
             } elseif (!is_string($sValue)) {
                 $this->sMsg = t('Please enter a string.');
             } else {

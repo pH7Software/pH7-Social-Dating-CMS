@@ -158,7 +158,7 @@ msgid "This email already used by another member."
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:155
-msgid "Oops! \"%s\" is not associated with any %site_name% account."
+msgid "Oops! \"%0%\" is not associated with any %site_name% account."
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:158
@@ -167,7 +167,7 @@ msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:175
 #, php-format
-msgid "Your Password has to contain from %d to %d characters."
+msgid "Your Password has to contain from %0% to %1% characters."
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:178
@@ -180,7 +180,7 @@ msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:200
 #, php-format
-msgid "You must be %d to %d years to register on the site."
+msgid "You must be %0% to %1% years to register on the site."
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:203
@@ -194,12 +194,12 @@ msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:221
 #, php-format
-msgid "Please, enter %d character(s) or more."
+msgid "Please, enter %0% character(s) or more."
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:223
 #, php-format
-msgid "Please, enter %d character(s) or less."
+msgid "Please, enter %0% character(s) or less."
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:225
