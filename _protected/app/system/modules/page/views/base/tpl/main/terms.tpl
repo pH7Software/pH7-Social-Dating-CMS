@@ -106,9 +106,11 @@ and its licensors. Except for that information which is in the public domain or 
 <p>You agree to indemnify and hold {site_name}, its subsidiaries, affiliates, officers, agents, and other partners and employees, harmless from any loss, liability, claim, or demand, including reasonable attorneys' fees, made by any third party due to or arising out of your use of the Service in violation of this Agreement and/or arising from a breach of this Agreement and/or any breach of your representations and warranties set forth above. </p>
 <p>&nbsp;</p>
 <p><b>13) Other.</b></p>
-<p>This Agreement is accepted upon your use of the Website and is further affirmed by you becoming a Member of the Service. This Agreement constitutes the entire agreement between you and {site_name} regarding the use of the Website and/or the Service. The failure of {site_name} to exercise or enforce any right or provision of this Agreement shall not operate as a waiver of such right or provision. The section titles in this Agreement are for convenience only and have no legal or contractual effect. Please contact us with any questions regarding this Agreement. {site_name} is a trademark of &lt;owners business name&gt;.</p>
+<p>This Agreement is accepted upon your use of the Website and is further affirmed by you becoming a Member of the Service. This Agreement constitutes the entire agreement between you and {site_name} regarding the use of the Website and/or the Service. The failure of {site_name} to exercise or enforce any right or provision of this Agreement shall not operate as a waiver of such right or provision. The section titles in this Agreement are for convenience only and have no legal or contractual effect.
+  Please <a href="{{ $design->url('contact','contact','index') }}">contact us</a> with any questions regarding this Agreement.
+</p>
 <p>&nbsp;</p>
 <p class="bold red">I HAVE READ THIS AGREEMENT AND AGREE TO ALL OF THE PROVISIONS CONTAINED ABOVE.</p>
-<p class="small text-muted">Last updated on December 18th, 2015.</p>
+<p class="small text-muted">Last updated on {website_creation_date}.</p>
 
 </div>
