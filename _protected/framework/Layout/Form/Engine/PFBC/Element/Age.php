@@ -14,9 +14,6 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class Age extends OptionElement
 {
-    const MIN_AGE_TYPE = 'min_age';
-    const MAX_AGE_TYPE = 'max_age';
-
     /** @var string */
     private $sHtmlOutput;
 
@@ -38,51 +35,26 @@ class Age extends OptionElement
         $this->iMinAge = (int)DbConfig::getSetting('minAgeRegistration');
         $this->iMaxAge = (int)DbConfig::getSetting('maxAgeRegistration');
 
-        $sSelect1 = static::getOptions(static::MIN_AGE_TYPE);
-        $sSelect2 = static::getOptions(static::MAX_AGE_TYPE);
-
         $this->sHtmlOutput = '<div class="pfbc-label"><label><strong>*</strong> ' . t('Age Range') . '</label></div>';
-        $this->sHtmlOutput .= '<select name="age1">' . $sSelect1 . '</select> - <select name="age2">' . $sSelect2 . '</select>';
+
+        $this->sHtmlOutput .= sprintf(
+            '<input type="number" name="age1" placeholder="%d" min="%d" max="%d" />',
+            $this->iMinAge + 5,
+            $this->iMinAge,
+            $this->iMaxAge - 1
+        );
+
+        $this->sHtmlOutput .= ' - ';
+
+        $this->sHtmlOutput .= sprintf('<input type="number" name="age2" placeholder="%d" min="%d" max="%d" />',
+            $this->iMaxAge - 10,
+            $this->iMinAge + 1,
+            $this->iMaxAge
+        );
     }
 
     public function render()
     {
         echo $this->sHtmlOutput;
-    }
-
-    /**
-     * @param string $sType 'min_age' or 'max_age'
-     *
-     * @return string The age field with the default selected minimum and maximum age registration.
-     */
-    private function getOptions($sType)
-    {
-        $sSelect = '';
-
-        for ($iAge = $this->iMinAge; $iAge <= $this->iMaxAge; $iAge++) {
-            $sSelect .= '<option value="' . $iAge . '"';
-
-            if ($this->isValueSelected($iAge, $sType)) {
-                $sSelect .= ' selected="selected"';
-            }
-
-            $sSelect .= '>' . $iAge . '</option>';
-        }
-
-        return $sSelect;
-    }
-
-    /**
-     * @param int $iAge
-     * @param string $sType
-     *
-     * @return bool
-     */
-    private function isValueSelected($iAge, $sType)
-    {
-        $sAttrName = $sType === static::MIN_AGE_TYPE ? 'iMinAge' : 'iMaxAge';
-
-        return (!empty($this->attributes['value'][$sType]) && $iAge == $this->attributes['value'][$sType]) ||
-            (empty($this->attributes['value'][$sType]) && $iAge == $this->$sAttrName);
     }
 }
