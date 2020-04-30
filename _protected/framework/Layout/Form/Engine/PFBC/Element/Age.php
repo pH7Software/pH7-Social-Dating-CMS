@@ -44,7 +44,7 @@ class Age extends OptionElement
             $this->iMaxAge - 1
         );
 
-        $this->sHtmlOutput .= ' - ';
+        $this->sHtmlOutput .= '-';
 
         $this->sHtmlOutput .= sprintf('<input type="number" name="age2" placeholder="%d" min="%d" max="%d" />',
             $this->iMaxAge - 10,
