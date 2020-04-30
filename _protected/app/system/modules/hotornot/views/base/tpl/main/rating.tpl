@@ -6,8 +6,9 @@
 
     {if empty($error)}
         {{ $avatarDesign->get($data->username, $data->firstName, $data->sex, 400) }}
+
         <div class="hon_click">
-            {{ RatingDesignCore::voting($data->profileId,DbTableName::MEMBER,'center') }}
+            {{ RatingDesignCore::voting($data->profileId,DbTableName::MEMBER, 'center') }}
         </div>
 
         {manual_include 'yes_no_buttons.inc.tpl'}
