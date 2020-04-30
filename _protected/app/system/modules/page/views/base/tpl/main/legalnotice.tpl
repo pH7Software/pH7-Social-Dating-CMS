@@ -30,6 +30,6 @@ Contact: <a href="mailto:{admin_email}" rel="nofollow">{admin_email}</a>.</p>
 <p><strong>About Us</strong></p>
 <p>INFORMATION ON YOU HERE</p>
 <p>&nbsp;</p>
-<p>For other questions, please <a href="{{ $design->url('contact','contact','index') }}" title="Contact Us">Contact us</a>.</p>
+<p>For other questions, please <a href="{{ $design->url('contact','contact','index') }}">contact us</a>.</p>
 
 </div>
