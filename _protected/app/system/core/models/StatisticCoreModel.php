@@ -26,7 +26,7 @@ class StatisticCoreModel extends StatisticModel
     /**
      * Get the date since the website has been created.
      *
-     * @return string The date.
+     * @return string The creation date.
      */
     public static function getDateOfCreation()
     {
