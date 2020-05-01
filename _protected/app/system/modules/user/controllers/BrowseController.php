@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Controller
  */
@@ -57,7 +57,7 @@ class BrowseController extends Controller
             );
         } else {
             /**
-             * @internal Here, we can put HTML tags in the <title> tag since the template will remove them before the output.
+             * @internal Here, we can put HTML tags in `<title>` tag since the template will strip them out before the output.
              */
             $this->view->page_title = t('Browse Members');
             $this->view->h1_title = '<span class="pH1">' . t('Browse Members') . '</span>';
