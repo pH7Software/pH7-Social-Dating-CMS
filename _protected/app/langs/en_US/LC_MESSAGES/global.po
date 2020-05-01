@@ -7605,6 +7605,9 @@ msgid "Profile"
 msgstr ""
 
 #: _protected/app/system/modules/report/forms/ReportForm.php:37
+msgid "Profile Image"
+msgstr ""
+
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
 msgid "Avatar"
 msgstr ""

@@ -47,7 +47,7 @@ class ReportForm
                 'type',
                 [
                     'user' => t('Profile'),
-                    'avatar' => t('Avatar'),
+                    'avatar' => t('Profile Image'),
                     'mail' => t('Message'),
                     'comment' => t('Comment'),
                     'picture' => t('Photo'),
