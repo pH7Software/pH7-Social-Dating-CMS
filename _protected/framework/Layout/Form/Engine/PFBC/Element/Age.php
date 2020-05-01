@@ -87,7 +87,7 @@ HTML;
     private function maxAgeHtmlField()
     {
         return <<<'HTML'
-        <input 
+        <input
             type="number"
             value="%d"
             name="age2"
@@ -95,7 +95,7 @@ HTML;
             min="%d"
             max="%d"
             onfocus="if('%d' == this.value) this.value = '';"
-            onblur="if ('' == this.value) this.value = '%d';" 
+            onblur="if ('' == this.value) this.value = '%d';"
             />
 HTML;
     }

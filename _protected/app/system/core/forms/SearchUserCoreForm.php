@@ -326,7 +326,7 @@ class SearchUserCoreForm
     }
 
     /**
-     * If a user is logged, get "approximately" the relative age for better and more intuitive search.
+     * If a user is logged, get "approximately" the relative age for better and more intuitive searches.
      *
      * @param UserCoreModel $oUserModel
      * @param Session $oSession
