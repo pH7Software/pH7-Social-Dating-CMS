@@ -53,7 +53,7 @@ class BrowseController extends Controller
             Header::redirect(
                 Uri::get('user', 'browse', 'index'),
                 t('No results. Please try again with wider or different search criteria.'),
-                Design::WARNING_TYPE
+                Design::ERROR_TYPE
             );
         } else {
             /**
