@@ -51,8 +51,8 @@ class BrowseController extends Controller
 
         if (empty($oUsers)) {
             Header::redirect(
-                Uri::get('user', 'search', 'index'),
-                t('No results. Please try again with wider or new search criteria.'),
+                Uri::get('user', 'browse', 'index'),
+                t('No results. Please try again with wider or different search criteria.'),
                 Design::WARNING_TYPE
             );
         } else {
