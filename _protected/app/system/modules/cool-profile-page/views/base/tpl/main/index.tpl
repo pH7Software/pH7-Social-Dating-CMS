@@ -2,7 +2,8 @@
     {main_include 'profile_background.inc.tpl'}
 {/if}
 
-<div class="row" itemscope="itemscope" itemtype="http://schema.org/Person">
+<div class="col-xs-12 col-sm-12 col-md-11 col-lg-10 col-lg-offset-1">
+  <div class="row" itemscope="itemscope" itemtype="http://schema.org/Person">
     <div class="col-xs-12 col-sm-4 col-md-3">
         {{ UserDesignCoreModel::userStatus($id) }}
         {{ (new AvatarDesignCore)->lightBox($username, $first_name, $sex, 400) }}
@@ -235,4 +236,5 @@
 
         {{ CommentDesignCore::link($id, 'profile') }}
     </div>
+  </div>
 </div>
