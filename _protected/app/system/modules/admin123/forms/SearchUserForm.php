@@ -49,13 +49,15 @@ class SearchUserForm
         $oForm->addElement(new Select(t('Membership Group:'), 'group_id', $aGroupName, ['value' => 2]));
         unset($aGroupName);
 
-        $oForm->addElement(new Checkbox('', 'ban', ['1' => '<span class="bold">' . t('Only banned user') . '</span>']));
+        $oForm->addElement(
+            new Checkbox('', 'ban', ['1' => '<span class="bold">' . t('Only banned user') . '</span>'])
+        );
         $oForm->addElement(
             new Select(
                 t('Browse By:'),
                 'order',
                 [
-                    SearchCoreModel::LATEST => t('Latest Members'),
+                    SearchCoreModel::LATEST => t('Newest'),
                     SearchCoreModel::LAST_ACTIVITY => t('Last Activity'),
                     SearchCoreModel::LAST_EDIT => t('Last Account Edit'),
                     SearchCoreModel::PENDING_APPROVAL => t('Pending approval'),

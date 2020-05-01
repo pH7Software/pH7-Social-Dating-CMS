@@ -1250,17 +1250,21 @@ msgid "Looking for a:"
 msgstr ""
 
 #: _protected/app/system/core/forms/SearchUserCoreForm.php:78
-msgid "Latest members"
+#: _protected/app/system/core/forms/SearchUserCoreForm.php:139
+#: _protected/app/system/modules/admin123/forms/SearchUserForm.php:34
+msgid "Newest"
 msgstr ""
 
 #: _protected/app/system/core/forms/SearchUserCoreForm.php:79
 #: _protected/app/system/core/forms/SearchUserCoreForm.php:132
-msgid "Only with Avatar"
+msgid "With photo"
 msgstr ""
 
 #: _protected/app/system/core/forms/SearchUserCoreForm.php:80
 #: _protected/app/system/core/forms/SearchUserCoreForm.php:133
-msgid "Only Online"
+#: _protected/app/system/modules/admin123/forms/SettingForm.php:72
+#: _protected/app/system/modules/user/forms/PrivacyForm.php:88
+msgid "Online"
 msgstr ""
 
 #: _protected/app/system/core/forms/SearchUserCoreForm.php:81
@@ -1330,11 +1334,6 @@ msgstr ""
 #: _protected/app/system/modules/user/forms/SearchVisitorForm.php:23
 #: _protected/app/system/modules/video/forms/SearchVideoForm.php:20
 msgid "Browse By:"
-msgstr ""
-
-#: _protected/app/system/core/forms/SearchUserCoreForm.php:139
-#: _protected/app/system/modules/admin123/forms/SearchUserForm.php:34
-msgid "Latest Members"
 msgstr ""
 
 #: _protected/app/system/core/forms/SearchUserCoreForm.php:140
@@ -3274,11 +3273,6 @@ msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:72
 msgid "Site Status:"
-msgstr ""
-
-#: _protected/app/system/modules/admin123/forms/SettingForm.php:72
-#: _protected/app/system/modules/user/forms/PrivacyForm.php:88
-msgid "Online"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:72
