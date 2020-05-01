@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
@@ -27,9 +27,24 @@ class SearchUserForm
         }
 
         $oForm = new \PFBC\Form('form_user_search');
-        $oForm->configure(['action' => Uri::get(PH7_ADMIN_MOD, 'user', 'result') . PH7_SH, 'method' => 'get']);
-        $oForm->addElement(new Hidden('submit_user_search', 'form_user_search'));
-        $oForm->addElement(new Textbox(t('Search for:'), 'what'));
+        $oForm->configure(
+            [
+                'action' => Uri::get(PH7_ADMIN_MOD, 'user', 'result') . PH7_SH,
+                'method' => 'get'
+            ]
+        );
+        $oForm->addElement(
+            new Hidden(
+                'submit_user_search',
+                'form_user_search'
+            )
+        );
+        $oForm->addElement(
+            new Textbox(
+                t('Search for:'),
+                'what'
+            )
+        );
         $oForm->addElement(
             new Select(
                 t('Where:'),
@@ -46,7 +61,14 @@ class SearchUserForm
             )
         );
 
-        $oForm->addElement(new Select(t('Membership Group:'), 'group_id', $aGroupName, ['value' => 2]));
+        $oForm->addElement(
+            new Select(
+                t('Membership Group:'),
+                'group_id',
+                $aGroupName,
+                ['value' => 2]
+            )
+        );
         unset($aGroupName);
 
         $oForm->addElement(
@@ -80,7 +102,13 @@ class SearchUserForm
                 ]
             )
         );
-        $oForm->addElement(new Button(t('Search'), 'submit', ['icon' => 'search']));
+        $oForm->addElement(
+            new Button(
+                t('Search'),
+                'submit',
+                ['icon' => 'search']
+            )
+        );
         $oForm->render();
     }
 }
