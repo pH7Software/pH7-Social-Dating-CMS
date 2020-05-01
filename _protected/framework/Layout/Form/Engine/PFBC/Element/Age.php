@@ -79,6 +79,7 @@ class Age extends OptionElement
             max="%d"
             onfocus="if('%d' == this.value) this.value = '';"
             onblur="if ('' == this.value) this.value = '%d';"
+            required="required"
             />
 HTML;
     }
@@ -95,6 +96,7 @@ HTML;
             max="%d"
             onfocus="if('%d' == this.value) this.value = '';"
             onblur="if ('' == this.value) this.value = '%d';"
+            required="required"
             />
 HTML;
     }
