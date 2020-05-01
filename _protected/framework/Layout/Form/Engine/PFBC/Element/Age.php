@@ -1,7 +1,7 @@
 <?php
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @link             http://ph7cms.com
  * @package          PH7 / Framework / Layout / Form / Engine / PFBC / Element
@@ -14,6 +14,9 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class Age extends OptionElement
 {
+    const MIN_AGE_TYPE = 'min_age';
+    const MAX_AGE_TYPE = 'max_age';
+
     /** @var string */
     private $sHtmlOutput;
 
@@ -38,17 +41,24 @@ class Age extends OptionElement
         $this->sHtmlOutput = '<div class="pfbc-label"><label><strong>*</strong> ' . t('Age Range') . '</label></div>';
 
         $this->sHtmlOutput .= sprintf(
-            '<input type="number" name="age1" placeholder="%d" min="%d" max="%d" />',
+            $this->minAgeHtmlField(),
+            $this->minAgeDefaultValue(),
             $this->iMinAge + 5,
             $this->iMinAge,
-            $this->iMaxAge - 1
+            $this->iMaxAge - 1,
+            $this->iMinAge,
+            $this->iMinAge
         );
 
         $this->sHtmlOutput .= '-';
 
-        $this->sHtmlOutput .= sprintf('<input type="number" name="age2" placeholder="%d" min="%d" max="%d" />',
+        $this->sHtmlOutput .= sprintf(
+            $this->maxAgeHtmlField(),
+            $this->maxAgeDefaultValue(),
             $this->iMaxAge - 10,
             $this->iMinAge + 1,
+            $this->iMaxAge,
+            $this->iMaxAge,
             $this->iMaxAge
         );
     }
@@ -56,5 +66,53 @@ class Age extends OptionElement
     public function render()
     {
         echo $this->sHtmlOutput;
+    }
+
+    private function minAgeHtmlField()
+    {
+        return <<<'HTML'
+        <input
+            type="number"
+            value="%d"
+            name="age1"
+            placeholder="%d"
+            min="%d"
+            max="%d"
+            onfocus="if('%d' == this.value) this.value = '';"
+            onblur="if ('' == this.value) this.value = '%d';"
+            />
+HTML;
+    }
+
+    private function maxAgeHtmlField()
+    {
+        return <<<'HTML'
+        <input 
+            type="number"
+            value="%d"
+            name="age2"
+            placeholder="%d"
+            min="%d"
+            max="%d"
+            onfocus="if('%d' == this.value) this.value = '';"
+            onblur="if ('' == this.value) this.value = '%d';" 
+            />
+HTML;
+    }
+
+    /**
+     * @return int
+     */
+    private function minAgeDefaultValue()
+    {
+        return !empty($this->attributes['value'][static::MIN_AGE_TYPE]) ? $this->attributes['value'][static::MIN_AGE_TYPE] : $this->iMinAge;
+    }
+
+    /**
+     * @return int
+     */
+    private function maxAgeDefaultValue()
+    {
+        return !empty($this->attributes['value'][static::MAX_AGE_TYPE]) ? $this->attributes['value'][static::MAX_AGE_TYPE] : $this->iMaxAge;
     }
 }
