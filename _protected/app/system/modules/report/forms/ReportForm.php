@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Report / Form
  */
@@ -35,12 +35,37 @@ class ReportForm
         }
 
         $oForm = new \PFBC\Form('form_report');
-        $oForm->configure(['action' => $oHttpRequest->currentUrl()]);
-        $oForm->addElement(new Hidden('submit_report', 'form_report'));
+        $oForm->configure(
+            [
+                'action' => $oHttpRequest->currentUrl()
+            ]
+        );
+        $oForm->addElement(
+            new Hidden(
+                'submit_report',
+                'form_report'
+            )
+        );
         $oForm->addElement(new Token('report'));
-        $oForm->addElement(new Hidden('spammer', $oHttpRequest->get('spammer'), ['required' => 1]));
-        $oForm->addElement(new Hidden('url', $oHttpRequest->get('url'), ['validation' => new Url]));
-        $oForm->addElement(new HTMLExternal('<h3 class="center">' . t('Do your want to report this?') . '</h4>'));
+        $oForm->addElement(
+            new Hidden(
+                'spammer',
+                $oHttpRequest->get('spammer'),
+                ['required' => 1]
+            )
+        );
+        $oForm->addElement(
+            new Hidden(
+                'url',
+                $oHttpRequest->get('url'),
+                ['validation' => new Url]
+            )
+        );
+        $oForm->addElement(
+            new HTMLExternal(
+                '<h3 class="center">' . t('Do your want to report this?') . '</h4>'
+            )
+        );
         $oForm->addElement(
             new Select(
                 t('Type the Content'),
@@ -71,9 +96,28 @@ class ReportForm
                 ]
             )
         );
-        $oForm->addElement(new Button(t('Report It'), 'submit', ['icon' => 'check']));
-        $oForm->addElement(new Button(t('Cancel'), 'cancel', ['onclick' => 'parent.$.colorbox.close();return false', 'icon' => 'cancel']));
-        $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'str.js"></script>'));
+        $oForm->addElement(
+            new Button(
+                t('Report It'),
+                'submit',
+                ['icon' => 'check']
+            )
+        );
+        $oForm->addElement(
+            new Button(
+                t('Cancel'),
+                'cancel',
+                [
+                    'onclick' => 'parent.$.colorbox.close();return false',
+                    'icon' => 'cancel'
+                ]
+            )
+        );
+        $oForm->addElement(
+            new HTMLExternal(
+                '<script src="' . PH7_URL_STATIC . PH7_JS . 'str.js"></script>'
+            )
+        );
         $oForm->render();
     }
 }
