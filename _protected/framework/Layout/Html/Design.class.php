@@ -568,7 +568,7 @@ class Design
     public function ip($sIp = null, $bPrint = true)
     {
         $sIp = Ip::get($sIp);
-        $sHtml = '<a href="' . Ip::api($sIp) . '" title="' . t('See info of this IP, %0%', $sIp) . '" target="_blank" rel="noopener noreferrer">' . $this->oStr->extract($sIp, self::MAX_IP_LENGTH_SHOWN) . '</a>';
+        $sHtml = '<a href="' . Ip::api($sIp) . '" title="' . t('Get information about this IP address') . '" target="_blank" rel="noopener noreferrer">' . $this->oStr->extract($sIp, self::MAX_IP_LENGTH_SHOWN) . '</a>';
 
         if (!$bPrint) {
             return $sHtml;

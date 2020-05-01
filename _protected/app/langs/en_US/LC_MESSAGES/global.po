@@ -14715,7 +14715,7 @@ msgid "THANKS to"
 msgstr ""
 
 #: _protected/framework/Layout/Html/Design.class.php:569
-msgid "See info of this IP, %0%"
+msgid "Get information about this IP address"
 msgstr ""
 
 #: _protected/framework/Layout/Html/Design.class.php:593
