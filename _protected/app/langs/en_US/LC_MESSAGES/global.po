@@ -5062,7 +5062,7 @@ msgid "Comment Not Found"
 msgstr ""
 
 #: _protected/app/system/modules/comment/controllers/CommentController.php:185
-msgid "No comments yet, <a class=\"bold\" href=\"%0%\">add one</a>!"
+msgid "No comments yet 😥 <a class=\"bold\" href=\"%0%\">Add one</a>!"
 msgstr ""
 
 #: _protected/app/system/modules/comment/forms/CommentForm.php:30
