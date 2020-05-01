@@ -89,7 +89,12 @@ class SearchUserCoreForm
                 self::$aMatchSexOption
             )
         );
-        $oForm->addElement(new Age(self::$aAgeOption));
+        $oForm->addElement(
+            new Age(
+                t('Age Range:'),
+                self::$aAgeOption
+            )
+        );
         $oForm->addElement(
             new Select(
                 t('Country:'),
@@ -205,7 +210,12 @@ class SearchUserCoreForm
                 self::$aMatchSexOption
             )
         );
-        $oForm->addElement(new Age(self::$aAgeOption));
+        $oForm->addElement(
+            new Age(
+                t('Age Range:'),
+                self::$aAgeOption
+            )
+        );
         $oForm->addElement(
             new Select(
                 t('Country:'),

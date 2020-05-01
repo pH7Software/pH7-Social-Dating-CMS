@@ -29,18 +29,17 @@ class Age extends OptionElement
     /**
      * Generate the select field for age search.
      *
+     * @param string $sLabel
      * @param array|null $aProperties
      */
-    public function __construct($aProperties = null)
+    public function __construct($sLabel, array $aProperties = null)
     {
-        parent::__construct('', '', [], $aProperties);
+        parent::__construct($sLabel, '', [], $aProperties);
 
         $this->iMinAge = (int)DbConfig::getSetting('minAgeRegistration');
         $this->iMaxAge = (int)DbConfig::getSetting('maxAgeRegistration');
 
-        $this->sHtmlOutput = '<div class="pfbc-label"><label><strong>*</strong> ' . t('Age Range') . '</label></div>';
-
-        $this->sHtmlOutput .= sprintf(
+        $this->sHtmlOutput = sprintf(
             $this->minAgeHtmlField(),
             $this->minAgeDefaultValue(),
             $this->iMinAge + 5,
