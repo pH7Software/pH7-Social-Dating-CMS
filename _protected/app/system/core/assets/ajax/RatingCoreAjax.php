@@ -17,6 +17,7 @@ defined('PH7') or exit('Restricted access');
 use PH7\Framework\Cookie\Cookie;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Session\Session;
 use Teapot\StatusCode;
 
@@ -47,6 +48,9 @@ class RatingCoreAjax
 
     /** @var int */
     private $iId;
+
+    /** @var int */
+    private $iProfileId;
 
     /** @var float */
     private $fScore;
@@ -88,39 +92,42 @@ class RatingCoreAjax
      */
     private function initialize()
     {
+        $bStatusOk = true;
         $this->oRatingModel = new RatingCoreModel;
         $this->sTable = $this->oHttpRequest->post('table');
         $this->iId = (int)$this->oHttpRequest->post('id');
+        $this->iProfileId = (int)(new Session)->get('member_id');
 
-        if ($this->isMemberDbTable()) {
-            $iProfileId = (int)(new Session)->get('member_id');
-
-            if ($iProfileId === $this->iId) {
+        if ($this->isMemberDbTable() ||
+            $this->isMembersAlbumPictureOrVideo()) {
                 $this->iStatus = 0;
-                $this->sTxt = t('You can not vote your own profile!');
-                return;
+                $this->sTxt = t('You cannot vote for yourself!');
+                $bStatusOk = false;
+        }
+
+        if ($bStatusOk) {
+            /**
+             * @internal Today's IP address is also easier to change than delete a cookie, so we have chosen the Cookie instead save the IP address in the database.
+             */
+            $oCookie = new Cookie;
+            $sCookieName = 'pHSVoting' . $this->iId . $this->sTable;
+            if ($oCookie->exists($sCookieName)) {
+                $this->iStatus = 0;
+                $this->sTxt = t('You have already voted!');
+                $bStatusOk = false;
+            } else {
+                $oCookie->set($sCookieName, 1, self::COOKIE_LIFETIME);
             }
+            unset($oCookie);
         }
 
-        /**
-         * @internal Today's IP address is also easier to change than delete a cookie, so we have chosen the Cookie instead save the IP address in the database.
-         */
-        $oCookie = new Cookie;
-        $sCookieName = 'pHSVoting' . $this->iId . $this->sTable;
-        if ($oCookie->exists($sCookieName)) {
-            $this->iStatus = 0;
-            $this->sTxt = t('You have already voted!');
-            return;
-        } else {
-            $oCookie->set($sCookieName, 1, self::COOKIE_LIFETIME);
+        if ($bStatusOk) {
+            $this->select();
+            $this->update();
+            $this->iStatus = 1;
+            $sVoteTxt = self::$iVotes > 1 ? t('Votes') : t('Vote');
+            $this->sTxt = t('Score: %0% - %2%: %1%', number_format($this->fScore / self::$iVotes, 1), self::$iVotes, $sVoteTxt);
         }
-        unset($oCookie);
-
-        $this->select();
-        $this->update();
-        $this->iStatus = 1;
-        $sVoteTxt = self::$iVotes > 1 ? t('Votes') : t('Vote');
-        $this->sTxt = t('Score: %0% - %2%: %1%', number_format($this->fScore / self::$iVotes, 1), self::$iVotes, $sVoteTxt);
     }
 
     /**
@@ -166,7 +173,20 @@ class RatingCoreAjax
      */
     private function isMemberDbTable()
     {
-        return $this->sTable === DbTableName::MEMBER;
+        return ($this->sTable === DbTableName::MEMBER && $this->iProfileId === $this->iId);
+    }
+
+    /**
+     * @return true if id is a member's album, photo or video
+     */
+    private function isMembersAlbumPictureOrVideo()
+    {
+        $bIsMemberOwned = false;
+        $iId = (new UserCoreModel)->readProfileIdOf($this->iId, $this->sTable);
+        if ($this->iProfileId==$iId) {
+            $bIsMemberOwned = true;
+        }
+        return $bIsMemberOwned;
     }
 }
 
