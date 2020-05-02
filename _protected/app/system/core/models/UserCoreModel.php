@@ -122,10 +122,10 @@ class UserCoreModel extends Model
         $sDbPassword = !empty($oRow->password) ? $oRow->password : '';
 
         if (strtolower($sEmail) !== strtolower($sDbEmail)) {
-            return CredentialStatusCore::INCORRECT_EMAIL_IN_DB;
+            return CredentialStatusCore::EMAIL_DOES_NOT_EXIST;
         }
         if (!Security::checkPwd($sPassword, $sDbPassword)) {
-            return CredentialStatusCore::INCORRECT_PASSWORD_IN_DB;
+            return CredentialStatusCore::PASSWORD_DOES_NOT_EXIST;
         }
 
         return true;
@@ -471,20 +471,20 @@ class UserCoreModel extends Model
      * Check online status.
      *
      * @param int $iProfileId
-     * @param int $iTimeout Number of minutes when a user becomes inactive (offline).
+     * @param int $iTime Number of minutes that a member becomes inactive (offline).
      *
      * @return bool
      */
-    public function isOnline($iProfileId, $iTimeout = 1)
+    public function isOnline($iProfileId, $iTime = 1)
     {
         $iProfileId = (int)$iProfileId;
-        $iTimeout = (int)$iTimeout;
+        $iTime = (int)$iTime;
 
         $rStmt = Db::getInstance()->prepare('SELECT profileId FROM' . Db::prefix(DbTableName::MEMBER) . 'WHERE profileId = :profileId
             AND userStatus = :userStatus AND lastActivity >= DATE_SUB(:currentTime, INTERVAL :time MINUTE) LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
         $rStmt->bindValue(':userStatus', self::ONLINE_STATUS, PDO::PARAM_INT);
-        $rStmt->bindValue(':time', $iTimeout, PDO::PARAM_INT);
+        $rStmt->bindValue(':time', $iTime, PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $this->sCurrentDate, PDO::PARAM_STR);
         $rStmt->execute();
 
@@ -1680,6 +1680,47 @@ class UserCoreModel extends Model
         }
 
         return '';
+    }
+
+    /**
+     * 200502 Mdi
+     *
+     * @param int $iId
+     * @param string $sTable
+     *
+     * @return profileId of picture, video or album
+     */
+    public function readProfileIdOf($iId, $sTable = DbTableName::PICTURE)
+    {
+        $iProfileId = 0;
+        $this->cache->start(
+            self::CACHE_GROUP,
+            'readProfileId' . $iId . $sTable,
+            static::CACHE_TIME
+        );
+
+        $sTable = Various::checkTable($sTable);
+
+        if (!$iProfileId = $this->cache->get()) {
+            switch ($sTable) {
+                case DbTableName::ALBUM_PICTURE:
+                case DbTableName::ALBUM_VIDEO:
+                    $sColumn = 'albumId';
+                    break;
+                case DbTableName::VIDEO:
+                    $sColumn = 'videoId';
+                    break;
+                default:
+                    $sColumn = 'pictureId';
+            }
+            $rStmt = Db::getInstance()->prepare('SELECT profileId FROM ' . Db::prefix($sTable) . ' WHERE ' . $sColumn . ' = :id LIMIT 1');
+            $rStmt->bindValue(':id', $iId, PDO::PARAM_INT);
+            $rStmt->execute();
+            $iProfileId = (int)$rStmt->fetchColumn();
+            Db::free($rStmt);
+            $this->cache->put($iProfileId);
+        }
+        return $iProfileId;
     }
 
     /**
