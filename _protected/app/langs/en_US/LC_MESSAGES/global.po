@@ -15330,7 +15330,7 @@ msgid "Logo"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/setting/general.tpl:12
-msgid "Design (color)"
+msgid "Design (colors)"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/tool/backup.tpl:12
