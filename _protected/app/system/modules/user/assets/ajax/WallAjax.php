@@ -105,7 +105,7 @@ class WallAjax extends Core
         );
 
         if (!$this->mContents) {
-            echo '<p class="alert alert-danger">', t('No news feed available at the moment. Start commenting some profiles!'), '</p>';
+            echo '<p class="alert alert-danger">', t('No news feed available at the moment. <a href="%0%">Start commenting some profiles</a>!', Uri::get('user', 'browse', 'index')), '</p>';
         } else {
             foreach ($this->mContents as $oRow) {
                 echo '<p>';
