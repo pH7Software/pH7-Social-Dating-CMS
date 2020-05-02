@@ -8,10 +8,6 @@
 
 namespace PH7;
 
-use PH7\Framework\Geo\Map\Map as GeoMap;
-use PH7\Framework\Mvc\Model\DbConfig;
-use stdClass;
-
 defined('PH7') or exit('Restricted access');
 
 class Map
