@@ -6,9 +6,10 @@
 
 namespace PFBC\Error;
 
+use PFBC\Error;
 use PH7\Framework\Http\Http;
 
-class Standard extends \PFBC\Error
+class Standard extends Error
 {
     public function applyAjaxErrorResponse()
     {

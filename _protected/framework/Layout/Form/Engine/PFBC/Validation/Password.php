@@ -6,9 +6,10 @@
 
 namespace PFBC\Validation;
 
+use PFBC\Validation;
 use PH7\Framework\Mvc\Model\DbConfig;
 
-class Password extends \PFBC\Validation
+class Password extends Validation
 {
     /** @var int */
     protected $iMin;

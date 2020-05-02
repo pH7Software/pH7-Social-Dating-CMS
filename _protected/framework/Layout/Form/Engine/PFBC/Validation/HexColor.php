@@ -5,7 +5,9 @@
 
 namespace PFBC\Validation;
 
-class HexColor extends \PFBC\Validation
+use PFBC\Validation;
+
+class HexColor extends Validation
 {
     public function __construct()
     {

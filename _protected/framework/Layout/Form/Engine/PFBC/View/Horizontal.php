@@ -6,7 +6,12 @@
 
 namespace PFBC\View;
 
-class Horizontal extends \PFBC\View
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\View;
+
+class Horizontal extends View
 {
     protected $labelPaddingTop;
 
@@ -26,11 +31,11 @@ class Horizontal extends \PFBC\View
         for ($e = 0; $e < $elementSize; ++$e) {
             $element = $elements[$e];
 
-            if ($element instanceof \PFBC\Element\Hidden || $element instanceof \PFBC\Element\HTMLExternal) {
+            if ($element instanceof Hidden || $element instanceof HTMLExternal) {
                 $element->render();
             } else {
                 echo '<div class="pfbc-element">', $element->getPreHTML();
-                if (!$element instanceof \PFBC\Element\Button) {
+                if (!$element instanceof Button) {
                     $this->renderLabel($element);
                 }
                 $element->render();

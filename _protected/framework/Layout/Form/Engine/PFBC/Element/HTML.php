@@ -2,7 +2,9 @@
 
 namespace PFBC\Element;
 
-class HTML extends \PFBC\Element
+use PFBC\Element;
+
+class HTML extends Element
 {
     public function __construct($value)
     {

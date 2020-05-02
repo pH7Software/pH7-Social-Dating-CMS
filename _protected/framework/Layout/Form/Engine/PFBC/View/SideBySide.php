@@ -6,7 +6,12 @@
 
 namespace PFBC\View;
 
-class SideBySide extends \PFBC\View
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\View;
+
+class SideBySide extends View
 {
     protected $labelWidth;
     protected $labelRightAlign;
@@ -35,13 +40,13 @@ class SideBySide extends \PFBC\View
         for ($e = 0; $e < $elementSize; ++$e) {
             $element = $elements[$e];
 
-            if ($element instanceof \PFBC\Element\Hidden || $element instanceof \PFBC\Element\HTMLExternal)
+            if ($element instanceof Hidden || $element instanceof HTMLExternal)
                 $element->render();
-            elseif ($element instanceof \PFBC\Element\Button) {
-                if ($e == 0 || !$elements[($e - 1)] instanceof \PFBC\Element\Button)
+            elseif ($element instanceof Button) {
+                if ($e == 0 || !$elements[($e - 1)] instanceof Button)
                     echo '<div class="pfbc-element pfbc-buttons">';
                 $element->render();
-                if (($e + 1) == $elementSize || !$elements[($e + 1)] instanceof \PFBC\Element\Button)
+                if (($e + 1) == $elementSize || !$elements[($e + 1)] instanceof Button)
                     echo '</div>';
             } else {
                 echo '<div id="pfbc-element-', $elementCount, '" class="pfbc-element">', $element->getPreHTML();
@@ -68,7 +73,7 @@ class SideBySide extends \PFBC\View
             $elementWidth = 100 - $this->labelWidth - $this->labelPaddingRight;
         }
 
-        \PFBC\View::renderCSS();
+        View::renderCSS();
         echo <<<CSS
 #$id { width: $width{$widthSuffix}; }
 #$id .pfbc-element { margin-bottom: 1em; padding-bottom: 1em; border-bottom: 1px solid #f4f4f4; }
@@ -97,7 +102,7 @@ CSS;
         for ($e = 0; $e < $elementSize; ++$e) {
             $element = $elements[$e];
             $elementWidth = $element->getWidth();
-            if (!$element instanceof \PFBC\Element\Hidden && !$element instanceof \PFBC\Element\HTMLExternal && !$element instanceof \PFBC\Element\HTMLExternal) {
+            if (!$element instanceof Hidden && !$element instanceof HTMLExternal && !$element instanceof HTMLExternal) {
                 if (!empty($elementWidth)) {
                     echo '#', $id, ' #pfbc-element-', $elementCount, ' { width: ', $elementWidth, $widthSuffix, '; }';
                     if ($widthSuffix === 'px') {

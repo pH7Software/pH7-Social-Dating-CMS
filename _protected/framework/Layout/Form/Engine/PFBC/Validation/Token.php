@@ -5,10 +5,11 @@
 
 namespace PFBC\Validation;
 
+use PFBC\Validation;
 use PH7\Framework\Layout\Form\Message;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
 
-class Token extends \PFBC\Validation
+class Token extends Validation
 {
     /** @var string */
     private $sName;

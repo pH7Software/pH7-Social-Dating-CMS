@@ -5,10 +5,11 @@
 
 namespace PFBC\Validation;
 
+use PFBC\Validation;
 use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Mvc\Model\DbConfig;
 
-class BirthDate extends \PFBC\Validation
+class BirthDate extends Validation
 {
     const DATE_PATTERN = 'm/d/Y';
 

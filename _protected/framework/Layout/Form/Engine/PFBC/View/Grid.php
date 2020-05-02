@@ -6,7 +6,12 @@
 
 namespace PFBC\View;
 
-class Grid extends \PFBC\View
+use PFBC\Element\Button;
+use PFBC\Element\Hidden;
+use PFBC\Element\HTMLExternal;
+use PFBC\View;
+
+class Grid extends View
 {
     protected $form;
     protected $grid;
@@ -57,14 +62,14 @@ JS;
         for ($e = 0; $e < $elementSize; ++$e) {
             $element = $elements[$e];
 
-            if ($element instanceof \PFBC\Element\Hidden || $element instanceof \PFBC\Element\HTMLExternal)
+            if ($element instanceof Hidden || $element instanceof HTMLExternal)
                 $element->render();
-            elseif ($element instanceof \PFBC\Element\Button) {
+            elseif ($element instanceof Button) {
                 /*Consecutive Button elements are rendered horizontally in the same row.*/
-                if ($e == 0 || !$elements[($e - 1)] instanceof \PFBC\Element\Button)
+                if ($e == 0 || !$elements[($e - 1)] instanceof Button)
                     echo '<div class="pfbc-grid pfbc-grid-1"><div class="pfbc-element pfbc-buttons">';
                 $element->render();
-                if (($e + 1) == $elementSize || !$elements[($e + 1)] instanceof \PFBC\Element\Button)
+                if (($e + 1) == $elementSize || !$elements[($e + 1)] instanceof Button)
                     echo '</div></div>';
             } else {
                 echo $element->getPreHTML();
@@ -124,7 +129,7 @@ CSS;
         $gridElements = [];
         foreach ($elements as $element) {
             /*Hidden, HTMLExternal, and Button element classes aren't included in the grid.*/
-            if (!$element instanceof \PFBC\Element\Hidden && !$element instanceof \PFBC\Element\HTMLExternal && !$element instanceof \PFBC\Element\Button) {
+            if (!$element instanceof Hidden && !$element instanceof HTMLExternal && !$element instanceof Button) {
                 ++$this->gridIncludedElements;
                 $gridElements[] = $element;
             }

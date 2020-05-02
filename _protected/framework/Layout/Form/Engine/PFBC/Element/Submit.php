@@ -6,7 +6,9 @@
 
 namespace PFBC\Element;
 
-class Submit extends \PFBC\Element
+use PFBC\Element;
+
+class Submit extends Element
 {
     /**
      * @param string $sLabel

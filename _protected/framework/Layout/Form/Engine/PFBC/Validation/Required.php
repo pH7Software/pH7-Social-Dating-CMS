@@ -6,7 +6,9 @@
 
 namespace PFBC\Validation;
 
-class Required extends \PFBC\Validation
+use PFBC\Validation;
+
+class Required extends Validation
 {
     public function __construct()
     {

@@ -5,10 +5,11 @@
 
 namespace PFBC\Validation;
 
+use PFBC\Validation;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Security\Spam\Captcha\Captcha;
 
-class CCaptcha extends \PFBC\Validation
+class CCaptcha extends Validation
 {
     /** @var bool */
     private $bIsCaseSensitive;

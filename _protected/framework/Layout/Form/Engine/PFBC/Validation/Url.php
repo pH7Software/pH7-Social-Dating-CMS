@@ -6,7 +6,9 @@
 
 namespace PFBC\Validation;
 
-class Url extends \PFBC\Validation
+use PFBC\Validation;
+
+class Url extends Validation
 {
     public function __construct()
     {

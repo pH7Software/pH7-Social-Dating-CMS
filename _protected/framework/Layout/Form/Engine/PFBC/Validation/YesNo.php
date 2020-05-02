@@ -6,7 +6,9 @@
 
 namespace PFBC\Validation;
 
-class YesNo extends \PFBC\Validation
+use PFBC\Validation;
+
+class YesNo extends Validation
 {
     public function __construct()
     {

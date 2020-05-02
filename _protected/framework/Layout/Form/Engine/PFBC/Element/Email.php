@@ -6,6 +6,8 @@
 
 namespace PFBC\Element;
 
+use PFBC\Form;
+
 class Email extends Textbox
 {
     /** @var bool */
@@ -30,7 +32,7 @@ class Email extends Textbox
         parent::render();
 
         if ($this->bMailCheck) {
-            echo '<script src="' . (new \PFBC\Form)->getResourcesPath() . PH7_SH . PH7_JS . 'jquery/mailcheck.js"></script>
+            echo '<script src="' . (new Form)->getResourcesPath() . PH7_SH . PH7_JS . 'jquery/mailcheck.js"></script>
             <script src="' . PH7_RELATIVE . 'asset/js/mailcheck.js"></script>';
         }
     }

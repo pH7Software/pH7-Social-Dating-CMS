@@ -6,10 +6,11 @@
 
 namespace PFBC\Validation;
 
+use PFBC\Validation;
 use PH7\DbTableName;
 use PH7\ExistsCoreModel;
 
-class CEmail extends \PFBC\Validation
+class CEmail extends Validation
 {
     const GUEST_MODE = 'guest';
 

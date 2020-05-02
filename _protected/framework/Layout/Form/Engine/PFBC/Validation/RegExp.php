@@ -6,7 +6,9 @@
 
 namespace PFBC\Validation;
 
-class RegExp extends \PFBC\Validation
+use PFBC\Validation;
+
+class RegExp extends Validation
 {
     /** @var string */
     protected $pattern;

@@ -5,6 +5,8 @@
 
 namespace PFBC\Element;
 
+use PFBC\Validation\Numeric;
+
 class Range extends Textbox
 {
     public function render()
@@ -14,7 +16,7 @@ class Range extends Textbox
             'id' => 'rangeInput',
             'oninput' => 'rangeOutput.value = rangeInput.value'
         ];
-        $this->validation[] = new \PFBC\Validation\Numeric;
+        $this->validation[] = new Numeric;
         parent::render();
 
         echo <<<'HTML'

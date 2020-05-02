@@ -6,9 +6,10 @@
 
 namespace PFBC\Validation;
 
+use PFBC\Validation;
 use PH7\Framework\Str\Str as FwkStr;
 
-class Str extends \PFBC\Validation
+class Str extends Validation
 {
     /** @var FwkStr */
     protected $oStr;

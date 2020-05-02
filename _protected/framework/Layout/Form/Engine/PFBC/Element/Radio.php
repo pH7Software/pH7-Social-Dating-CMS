@@ -5,7 +5,9 @@
 
 namespace PFBC\Element;
 
-class Radio extends \PFBC\OptionElement
+use PFBC\OptionElement;
+
+class Radio extends OptionElement
 {
     protected $attributes = ['type' => 'radio'];
     protected $inline;

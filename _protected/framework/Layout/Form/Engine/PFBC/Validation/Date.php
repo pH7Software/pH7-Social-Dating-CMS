@@ -6,7 +6,9 @@
 
 namespace PFBC\Validation;
 
-class Date extends \PFBC\Validation
+use PFBC\Validation;
+
+class Date extends Validation
 {
     public function __construct()
     {

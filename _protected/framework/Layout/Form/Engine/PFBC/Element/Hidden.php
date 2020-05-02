@@ -6,7 +6,10 @@
 
 namespace PFBC\Element;
 
-class Hidden extends \PFBC\Element
+use PFBC\Element;
+use PFBC\Form;
+
+class Hidden extends Element
 {
     /** @var array */
     protected $attributes = ['type' => 'hidden'];
@@ -21,7 +24,7 @@ class Hidden extends \PFBC\Element
         }
 
         // We remove the session of the hidden fields
-        unset($_SESSION['pfbc'][\PFBC\Form::getFormId()]['values'][$sName]);
+        unset($_SESSION['pfbc'][Form::getFormId()]['values'][$sName]);
 
         parent::__construct('', $sName, $aProperties);
     }

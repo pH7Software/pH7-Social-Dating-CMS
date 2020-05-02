@@ -5,7 +5,9 @@
 
 namespace PFBC\Element;
 
-class Sort extends \PFBC\OptionElement
+use PFBC\OptionElement;
+
+class Sort extends OptionElement
 {
     protected $jQueryOptions;
 

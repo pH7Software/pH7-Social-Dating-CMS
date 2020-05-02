@@ -6,11 +6,12 @@
 
 namespace PFBC\Validation;
 
+use PFBC\Validation;
 use PH7\DbTableName;
 use PH7\ExistsCoreModel;
 use PH7\Framework\Security\Ban\Ban;
 
-class BankAccount extends \PFBC\Validation
+class BankAccount extends Validation
 {
     /** @var string */
     protected $sTable;

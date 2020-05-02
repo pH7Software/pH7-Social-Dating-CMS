@@ -6,7 +6,9 @@
 
 namespace PFBC\Element;
 
-class Select extends \PFBC\OptionElement
+use PFBC\OptionElement;
+
+class Select extends OptionElement
 {
     /** @var array */
     protected $attributes = ['class' => 'pfbc-select'];
