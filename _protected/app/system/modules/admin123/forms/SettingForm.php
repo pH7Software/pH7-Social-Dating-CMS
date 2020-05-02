@@ -103,6 +103,7 @@ class SettingForm
 
         unset($oFile);
 
+
         /********** Logo Settings **********/
         $oForm->addElement(new HTMLExternal('</div></div><div class="content" id="icon"><div class="col-md-10"><h2 class="underline">' . t('Icon Logo') . '</h2>'));
 
