@@ -482,11 +482,11 @@ msgid "Hi %0%!"
 msgstr ""
 
 #: _protected/app/system/core/classes/BirthdayCore.php:63
-msgid "The %site_name%'s team wish you a very happy birthday!"
+msgid "We wish you a very Happy Birthday!"
 msgstr ""
 
 #: _protected/app/system/core/classes/BirthdayCore.php:64
-msgid "Enjoy it well and enjoy yourself!"
+msgid "Enjoy yourself and have an amazing day!"
 msgstr ""
 
 #: _protected/app/system/core/classes/BirthdayCore.php:72
