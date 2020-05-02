@@ -9,7 +9,6 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Controller\Controller as FwkController;
-use PH7\Framework\Mvc\Model\DbConfig;
 
 abstract class Controller extends FwkController
 {
