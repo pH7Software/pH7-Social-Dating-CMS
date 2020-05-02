@@ -34,8 +34,6 @@ class Page
      */
     public static function maintenance($iMaintenanceTime)
     {
-        // Set the HTTP status codes for the Maintenance page
-        // 200430 Mdi - Bug fix
         Http::setMaintenanceCode($iMaintenanceTime);
 
         // Prevent caching in the browser
