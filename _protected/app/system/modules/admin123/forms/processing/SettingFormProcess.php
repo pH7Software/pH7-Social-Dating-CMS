@@ -48,11 +48,16 @@ class SettingFormProcess extends Form
         'display_powered_by_link' => 'displayPoweredByLink',
         'is_software_news_feed' => 'isSoftwareNewsFeed',
 
-        // Email
-        'email_name' => 'emailName',
-        'admin_email' => 'adminEmail',
-        'feedback_email' => 'feedbackEmail',
-        'return_email' => 'returnEmail',
+        // Design
+        'navbar_type' => 'navbarType',
+        'background_color' => 'backgroundColor',
+        'text_color' => 'textColor',
+        'heading1_color' => 'heading1Color',
+        'heading2_color' => 'heading2Color',
+        'heading3_color' => 'heading3Color',
+        'link_color' => 'linkColor',
+        'footer_link_color' => 'footerLinkColor',
+        'link_hover_color' => 'linkHoverColor',
 
         // Registration
         'user_activation_type' => 'userActivationType',
@@ -79,6 +84,12 @@ class SettingFormProcess extends Form
         'nudity_filter' => 'nudityFilter',
         'video_manual_approval' => 'videoManualApproval',
         'webcam_picture_manual_approval' => 'webcamPictureManualApproval',
+
+        // Email
+        'email_name' => 'emailName',
+        'admin_email' => 'adminEmail',
+        'feedback_email' => 'feedbackEmail',
+        'return_email' => 'returnEmail',
 
         // Security
         'min_password_length' => 'minPasswordLength',
@@ -128,17 +139,6 @@ class SettingFormProcess extends Form
         'clean_msg' => 'cleanMsg',
         'clean_comment' => 'cleanComment',
         'clean_messenger' => 'cleanMessenger',
-
-        // Design
-        'navbar_type' => 'navbarType',
-        'background_color' => 'backgroundColor',
-        'text_color' => 'textColor',
-        'heading1_color' => 'heading1Color',
-        'heading2_color' => 'heading2Color',
-        'heading3_color' => 'heading3Color',
-        'link_color' => 'linkColor',
-        'footer_link_color' => 'footerLinkColor',
-        'link_hover_color' => 'linkHoverColor',
 
         // API
         'google_api_key' => 'googleApiKey',

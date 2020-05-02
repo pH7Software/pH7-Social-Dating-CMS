@@ -111,6 +111,32 @@ class SettingForm
         $oForm->addElement(new HTMLExternal('<div class="s_marg"><img src="' . PH7_URL_TPL . PH7_TPL_NAME . PH7_SH . PH7_IMG . 'logo.png?v=' . File::version(PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . 'logo.png') . '" alt="' . t('Icon Logo') . '" title="' . t('The current logo of your website.') . '" /></div>'));
 
 
+        /********** Design (Color) **********/
+        $oForm->addElement(new HTMLExternal('</div></div><div class="content" id="design"><div class="col-md-10"><h2 class="underline">' . t('Override Website Colors') . '</h2>'));
+
+        $oForm->addElement(new Select(t('Top Navigation Bar Style'), 'navbar_type', ['default' => t('White & Blue (default)'), 'inverse' => t('Sober Dark')], ['value' => DbConfig::getSetting('navbarType'), 'required' => 1]));
+
+        $oForm->addElement(new Color(t('Website Background:'), 'background_color', ['value' => DbConfig::getSetting('backgroundColor')]));
+
+        $oForm->addElement(new Color(t('Text:'), 'text_color', ['value' => DbConfig::getSetting('textColor')]));
+
+        $oForm->addElement(new Color(t('First Heading (H1):'), 'heading1_color', ['value' => DbConfig::getSetting('heading1Color')]));
+
+        $oForm->addElement(new Color(t('Second Heading (H2):'), 'heading2_color', ['value' => DbConfig::getSetting('heading2Color')]));
+
+        $oForm->addElement(new Color(t('Third Heading (H3):'), 'heading3_color', ['value' => DbConfig::getSetting('heading3Color')]));
+
+        $oForm->addElement(new Color(t('Links:'), 'link_color', ['value' => DbConfig::getSetting('linkColor')]));
+
+        $oForm->addElement(new Color(t('Footer Links:'), 'footer_link_color', ['value' => DbConfig::getSetting('footerLinkColor')]));
+
+        $oForm->addElement(new Color(t('Links Hover:'), 'link_hover_color', ['value' => DbConfig::getSetting('linkHoverColor')]));
+
+        $oForm->addElement(new HTMLExternal(
+            '<div class="right"><a href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'resetcolor', (new SecurityToken)->url(), false) . '">' . t('Reset Colors') . '</a></div>'
+        ));
+
+
         /********** Registration **********/
         $oForm->addElement(new HTMLExternal('</div></div><div class="content" id="registration"><div class="col-md-10"><h2 class="underline">' . t('Registration') . '</h2>'));
 
@@ -343,32 +369,6 @@ class SettingForm
         $oForm->addElement(new Number(t('Delete old Comments:'), 'clean_comment', ['description' => t('Delete comments older than X days. 0 to disable.'), 'value' => DbConfig::getSetting('cleanComment'), 'required' => 1]));
 
         $oForm->addElement(new Number(t('Delete old IM Messages:'), 'clean_messenger', ['description' => t('Delete IM messages older than X days. 0 to disable.'), 'value' => DbConfig::getSetting('cleanMessenger'), 'required' => 1]));
-
-
-        /********** Design (Color) **********/
-        $oForm->addElement(new HTMLExternal('</div></div><div class="content" id="design"><div class="col-md-10"><h2 class="underline">' . t('Override Website Colors') . '</h2>'));
-
-        $oForm->addElement(new Select(t('Top Navigation Bar Style'), 'navbar_type', ['default' => t('White & Blue (default)'), 'inverse' => t('Sober Dark')], ['value' => DbConfig::getSetting('navbarType'), 'required' => 1]));
-
-        $oForm->addElement(new Color(t('Website Background:'), 'background_color', ['value' => DbConfig::getSetting('backgroundColor')]));
-
-        $oForm->addElement(new Color(t('Text:'), 'text_color', ['value' => DbConfig::getSetting('textColor')]));
-
-        $oForm->addElement(new Color(t('First Heading (H1):'), 'heading1_color', ['value' => DbConfig::getSetting('heading1Color')]));
-
-        $oForm->addElement(new Color(t('Second Heading (H2):'), 'heading2_color', ['value' => DbConfig::getSetting('heading2Color')]));
-
-        $oForm->addElement(new Color(t('Third Heading (H3):'), 'heading3_color', ['value' => DbConfig::getSetting('heading3Color')]));
-
-        $oForm->addElement(new Color(t('Links:'), 'link_color', ['value' => DbConfig::getSetting('linkColor')]));
-
-        $oForm->addElement(new Color(t('Footer Links:'), 'footer_link_color', ['value' => DbConfig::getSetting('footerLinkColor')]));
-
-        $oForm->addElement(new Color(t('Links Hover:'), 'link_hover_color', ['value' => DbConfig::getSetting('linkHoverColor')]));
-
-        $oForm->addElement(new HTMLExternal(
-            '<div class="right"><a href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'resetcolor', (new SecurityToken)->url(), false) . '">' . t('Reset Colors') . '</a></div>'
-        ));
 
 
         /********** API **********/
