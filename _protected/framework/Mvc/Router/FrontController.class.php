@@ -349,7 +349,7 @@ final class FrontController
                 ->setDefaultLang(PH7_PREF_LANG)
                 ->init()
                 ->load(self::MAIN_GETTEXT_FILENAME, PH7_PATH_APP_LANG)
-                ->getLang();
+                ->getLocaleName();
 
             define('PH7_LANG_NAME', $sLangName);
         }

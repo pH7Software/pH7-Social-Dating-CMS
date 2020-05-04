@@ -136,11 +136,11 @@ namespace PH7\Framework\Translate {
         }
 
         /**
-         * Get the current language name.
+         * Get the current locale name.
          *
          * @return string The locale language name (e.g., en_US).
          */
-        public function getLang()
+        public function getLocaleName()
         {
             return $this->sLangName;
         }
