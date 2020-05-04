@@ -4,7 +4,7 @@
  * @desc           Import new Users from CSV data file.
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2015-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2015-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Inc / Class
  */
@@ -81,7 +81,7 @@ class ImportUser extends Core
         $this->aFile = $aFile;
         $this->rHandler = @fopen($this->aFile['tmp_name'], 'rb');
         $this->aFileData = @fgetcsv($this->rHandler, 0, $sDelimiter, $sEnclosure);
-        $this->aRes = $this->run();
+        $this->aRes = $this->run($sDelimiter, $sEnclosure);
     }
 
     /**
@@ -265,9 +265,12 @@ class ImportUser extends Core
     }
 
     /**
+     * @param string $sDelimiter
+     * @param string $sEnclosure
+     *
      * @return array
      */
-    private function run()
+    private function run($sDelimiter, $sEnclosure)
     {
         $iErrType = $this->hasError();
 
@@ -283,8 +286,8 @@ class ImportUser extends Core
             $oExistsModel = new ExistsCoreModel;
             $oValidate = new Validate;
 
-            while ($this->aFileData !== false) {
-                $sEmail = trim($this->aFileData[$this->aTmpData['email']]);
+            while (false !== ($aUserData = fgetcsv($this->rHandler, 0, $sDelimiter, $sEnclosure))) {
+                $sEmail = trim($aUserData[$this->aTmpData['email']]);
                 if ($oValidate->email($sEmail) && !$oExistsModel->email($sEmail)) {
                     $this->setData($iRow);
                     $oUserModel->add(escape($this->aData[$iRow], true));
