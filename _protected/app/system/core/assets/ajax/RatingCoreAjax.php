@@ -92,7 +92,7 @@ class RatingCoreAjax
         $this->sTable = $this->oHttpRequest->post('table');
         $this->iId = (int)$this->oHttpRequest->post('id');
 
-        if ($this->isMemberDbTable()) {
+        if ($this->hasCorrectDbTable()) {
             $iProfileId = (int)(new Session)->get('member_id');
 
             if ($iProfileId === $this->iId) {
@@ -164,7 +164,7 @@ class RatingCoreAjax
     /**
      * @return bool
      */
-    private function isMemberDbTable()
+    private function hasCorrectDbTable()
     {
         return $this->sTable === DbTableName::MEMBER;
     }
