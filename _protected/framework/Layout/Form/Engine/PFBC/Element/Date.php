@@ -12,12 +12,11 @@ class Date extends Textbox
     public function render()
     {
         $this->validation[] = new \PFBC\Validation\Date;
+        $this->attributes['type'] = 'date';
 
         $iCurrentYear = date('Y');
         $iMin = $iCurrentYear - DbConfig::getSetting('maxAgeRegistration');
         $iMax = $iCurrentYear - DbConfig::getSetting('minAgeRegistration');
-
-        $this->attributes['type'] = 'date';
         $this->attributes['min'] = $iMin;
         $this->attributes['max'] = $iMax;
 
