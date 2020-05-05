@@ -34,4 +34,17 @@ class Email extends Textbox
             <script src="' . PH7_RELATIVE . 'asset/js/mailcheckConfig.js"></script>';
         }
     }
+
+    /**
+     * @return array|void
+     */
+    public function getJSFiles()
+    {
+        if ($this->bMailCheck) {
+            return [
+                $this->form->getResourcesPath() . PH7_SH . PH7_JS . 'jquery/mailcheck.js',
+                PH7_RELATIVE . 'asset/js/mailcheckConfig.js'
+            ];
+        }
+    }
 }
