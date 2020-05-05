@@ -28,11 +28,6 @@ class Email extends Textbox
         $this->attributes['type'] = 'email'; // Email Type
         $this->validation[] = new \PFBC\Validation\Email;
         parent::render();
-
-        if ($this->bMailCheck) {
-            echo '<script src="' . $this->form->getResourcesPath() . PH7_SH . PH7_JS . 'jquery/mailcheck.js"></script>
-            <script src="' . PH7_RELATIVE . 'asset/js/mailcheckConfig.js"></script>';
-        }
     }
 
     /**
