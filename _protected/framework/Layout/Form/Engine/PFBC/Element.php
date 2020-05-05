@@ -10,9 +10,15 @@ use PFBC\Element\CKEditor;
 
 abstract class Element extends Base
 {
+    /** @var array */
     protected $attributes;
+
+    /** @var Form */
     protected $form;
+
+    /** @var string */
     protected $label;
+
     protected $description;
     protected $validation = [];
     protected $preHTML;
