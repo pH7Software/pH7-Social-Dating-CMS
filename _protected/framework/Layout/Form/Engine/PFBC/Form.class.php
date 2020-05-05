@@ -394,6 +394,8 @@ class Form extends Base
 
     private function renderCSS()
     {
+        $this->renderCSSFiles();
+
         echo '<style scoped="scoped">';
         $this->view->renderCSS();
         $this->error->renderCSS();
