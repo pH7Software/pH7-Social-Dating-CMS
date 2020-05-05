@@ -6,8 +6,6 @@
 
 namespace PFBC\Element;
 
-use PFBC\Form;
-
 class Email extends Textbox
 {
     /** @var bool */
