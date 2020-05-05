@@ -216,7 +216,7 @@ final class FrontController
         $this->oRegistry->url_module = PH7_URL_ROOT . $this->oRegistry->module . PH7_SH;
 
         /***** PATH THE TEMPLATE *****/
-        $this->oRegistry->path_themes_module = PH7_PATH_TPL_SYS_MOD . PH7_DS . $this->oRegistry->module . PH7_DS . PH7_TPL;
+        $this->oRegistry->path_themes_module = PH7_PATH_TPL_SYS_MOD . $this->oRegistry->module . PH7_DS . PH7_TPL;
 
         /***** URL THE TEMPLATE *****/
         $this->oRegistry->url_themes_module = PH7_URL_TPL_SYS_MOD . $this->oRegistry->module . PH7_SH . PH7_TPL;
