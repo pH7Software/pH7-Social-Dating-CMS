@@ -412,7 +412,7 @@ class UserCore
         );
         $oUserModel->sessionLog(
             $oUserData->profileId,
-            $oUserData->username,
+            $oUserData->email,
             $oUserData->firstName
         );
         $oUserModel->setLastActivity($oUserData->profileId);

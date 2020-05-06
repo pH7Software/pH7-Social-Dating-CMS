@@ -109,7 +109,7 @@ class AdminCore extends UserCore
         );
         $oAdminModel->sessionLog(
             $oAdminData->profileId,
-            $oAdminData->username,
+            $oAdminData->email,
             $oAdminData->firstName
         );
         $oAdminModel->setLastActivity($oAdminData->profileId, DbTableName::ADMIN);

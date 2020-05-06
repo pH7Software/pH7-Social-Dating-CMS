@@ -81,7 +81,7 @@ class AffiliateCore extends UserCore
         );
         $oAffModel->sessionLog(
             $oAffData->profileId,
-            $oAffData->username,
+            $oAffData->email,
             $oAffData->firstName
         );
         $oAffModel->setLastActivity($oAffData->profileId, DbTableName::AFFILIATE);
