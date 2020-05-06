@@ -761,6 +761,7 @@ CREATE TABLE IF NOT EXISTS ph7_affiliates_log_login (
 
 
 CREATE TABLE IF NOT EXISTS ph7_admins_log_sess (
+  sessionId int(10) unsigned NOT NULL AUTO_INCREMENT,
   profileId tinyint(3) unsigned NOT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(191) DEFAULT NULL,
@@ -775,7 +776,7 @@ CREATE TABLE IF NOT EXISTS ph7_admins_log_sess (
   userAgent varchar(100) NOT NULL,
   guest smallint(4) unsigned NOT NULL DEFAULT 1,
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY profileId (profileId),
+  PRIMARY KEY (sessionId),
   FOREIGN KEY (profileId) REFERENCES ph7_admins(profileId),
   KEY sessionHash (sessionHash),
   KEY lastActivity (lastActivity)
@@ -783,6 +784,7 @@ CREATE TABLE IF NOT EXISTS ph7_admins_log_sess (
 
 
 CREATE TABLE IF NOT EXISTS ph7_members_log_sess (
+  sessionId int(10) unsigned NOT NULL AUTO_INCREMENT,
   profileId int(10) unsigned NOT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(120) DEFAULT NULL,
@@ -797,7 +799,7 @@ CREATE TABLE IF NOT EXISTS ph7_members_log_sess (
   userAgent varchar(100) NOT NULL,
   guest smallint(4) unsigned NOT NULL DEFAULT 1,
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY profileId (profileId),
+  PRIMARY KEY (sessionId),
   FOREIGN KEY (profileId) REFERENCES ph7_members(profileId),
   KEY sessionHash (sessionHash),
   KEY lastActivity (lastActivity)
@@ -805,6 +807,7 @@ CREATE TABLE IF NOT EXISTS ph7_members_log_sess (
 
 
 CREATE TABLE IF NOT EXISTS ph7_affiliates_log_sess (
+  sessionId int(10) unsigned NOT NULL AUTO_INCREMENT,
   profileId int(10) unsigned NOT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(120) DEFAULT NULL,
@@ -819,7 +822,7 @@ CREATE TABLE IF NOT EXISTS ph7_affiliates_log_sess (
   userAgent varchar(100) NOT NULL,
   guest smallint(4) unsigned NOT NULL DEFAULT 1,
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY profileId (profileId),
+  PRIMARY KEY (sessionId),
   FOREIGN KEY (profileId) REFERENCES ph7_affiliates(profileId),
   KEY sessionHash (sessionHash),
   KEY lastActivity (lastActivity)

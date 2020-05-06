@@ -898,6 +898,7 @@ ALTER SEQUENCE ph7_affiliates_log_login_seq RESTART WITH 1;
 
 
 CREATE TABLE IF NOT EXISTS ph7_admins_log_sess (
+  sessionId int check (sessionId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_admins_log_sess_seq'),
   profileId smallint check (profileId > 0) DEFAULT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(240) DEFAULT NULL,
@@ -912,7 +913,7 @@ CREATE TABLE IF NOT EXISTS ph7_admins_log_sess (
   userAgent varchar(100) NOT NULL,
   guest smallint check (guest > 0) NOT NULL DEFAULT 1,
   dateTime timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY profileId (profileId),
+  PRIMARY KEY (sessionId),
   FOREIGN KEY (profileId) REFERENCES ph7_admins(profileId),
   KEY sessionHash (sessionHash),
   KEY lastActivity (lastActivity)
@@ -920,6 +921,7 @@ CREATE TABLE IF NOT EXISTS ph7_admins_log_sess (
 
 
 CREATE TABLE IF NOT EXISTS ph7_members_log_sess (
+  sessionId int check (sessionId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_members_log_sess'),
   profileId int check (profileId > 0) DEFAULT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(120) DEFAULT NULL,
@@ -934,7 +936,7 @@ CREATE TABLE IF NOT EXISTS ph7_members_log_sess (
   userAgent varchar(100) NOT NULL,
   guest smallint check (guest > 0) NOT NULL DEFAULT 1,
   dateTime timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY profileId (profileId),
+  PRIMARY KEY (sessionId),
   FOREIGN KEY (profileId) REFERENCES ph7_members(profileId),
   KEY sessionHash (sessionHash),
   KEY lastActivity (lastActivity)
@@ -942,6 +944,7 @@ CREATE TABLE IF NOT EXISTS ph7_members_log_sess (
 
 
 CREATE TABLE IF NOT EXISTS ph7_affiliates_log_sess (
+  sessionId int check (sessionId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_affiliates_log_sess'),
   profileId int check (profileId > 0) DEFAULT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(120) DEFAULT NULL,
@@ -956,7 +959,7 @@ CREATE TABLE IF NOT EXISTS ph7_affiliates_log_sess (
   userAgent varchar(100) NOT NULL,
   guest smallint check (guest > 0) NOT NULL DEFAULT 1,
   dateTime timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY profileId (profileId),
+  PRIMARY KEY (sessionId),
   FOREIGN KEY (profileId) REFERENCES ph7_affiliates(profileId),
   KEY sessionHash (sessionHash),
   KEY lastActivity (lastActivity)

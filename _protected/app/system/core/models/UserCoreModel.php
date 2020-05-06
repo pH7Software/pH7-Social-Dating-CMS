@@ -134,6 +134,7 @@ class UserCoreModel extends Model
     /**
      * Set Log Session.
      *
+     * @param int $iProfileId
      * @param string $sEmail
      * @param string $sUsername
      * @param string $sFirstName
@@ -141,12 +142,15 @@ class UserCoreModel extends Model
      *
      * @return void
      */
-    public function sessionLog($sEmail, $sUsername, $sFirstName, $sTable = DbTableName::MEMBER)
+    public function sessionLog($iProfileId, $sEmail, $sUsername, $sFirstName, $sTable = DbTableName::MEMBER)
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix($sTable . '_log_sess') . '(email, username, firstName, ip)
-        VALUES (:email, :username, :firstName, :ip)');
+        $rStmt = Db::getInstance()->prepare(
+            'INSERT INTO' . Db::prefix($sTable . '_log_sess') . '(profileId, email, username, firstName, ip) 
+            VALUES (:profileId, :email, :username, :firstName, :ip)'
+        );
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
         $rStmt->bindValue(':email', $sEmail, PDO::PARAM_STR);
         $rStmt->bindValue(':username', $sUsername, PDO::PARAM_STR);
         $rStmt->bindValue(':firstName', $sFirstName, PDO::PARAM_STR);
