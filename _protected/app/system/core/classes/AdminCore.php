@@ -107,6 +107,11 @@ class AdminCore extends UserCore
             'Logged in!',
             DbTableName::ADMIN
         );
+        $oAdminModel->sessionLog(
+            $oAdminData->profileId,
+            $oAdminData->username,
+            $oAdminData->firstName
+        );
         $oAdminModel->setLastActivity($oAdminData->profileId, DbTableName::ADMIN);
     }
 }
