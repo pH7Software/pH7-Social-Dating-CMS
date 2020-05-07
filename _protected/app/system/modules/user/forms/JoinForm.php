@@ -230,7 +230,19 @@ class JoinForm
         if (DbConfig::getSetting('isUserAgeRangeField')) {
             self::getRangeBirthDateFieldForm($oForm);
         } else {
-            $oForm->addElement(new Date(t('Your Date of Birth'), 'birth_date', ['id' => 'birth_date', 'description' => t('Please specify your date of birth using the calendar.'), 'onblur' => 'CValid(this.value, this.id)', 'validation' => new BirthDate, 'required' => 1]));
+            $oForm->addElement(
+                new Date(
+                    t('Your Date of Birth'),
+                    'birth_date',
+                    [
+                        'id' => 'birth_date',
+                        'description' => t('Please specify your date of birth using the calendar.'),
+                        'onblur' => 'CValid(this.value, this.id)',
+                        'validation' => new BirthDate,
+                        'required' => 1
+                    ]
+                )
+            );
             $oForm->addElement(new HTMLExternal('<span class="input_error birth_date"></span>'));
         }
     }
