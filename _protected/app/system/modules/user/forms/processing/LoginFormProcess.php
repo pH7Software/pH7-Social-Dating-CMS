@@ -10,6 +10,7 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Geo\Ip\Geo;
 use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
@@ -93,10 +94,20 @@ class LoginFormProcess extends Form implements LoginableForm
         } else {
             $oSecurityModel->clearLoginAttempts();
             $this->session->remove('captcha_user_enabled');
-            $iId = $this->oUserModel->getId($sEmail);
-            $oUserData = $this->oUserModel->readProfile($iId);
+            $iProfileId = $this->oUserModel->getId($sEmail);
+            $oUserData = $this->oUserModel->readProfile($iProfileId);
 
             $this->updatePwdHashIfNeeded($sPassword, $oUserData->password, $sEmail);
+
+            $sLocationName = Geo::getCountry();
+            if (Geo::getCountry($this->oUserModel->getLastUsedIp($iProfileId)) !== $sLocationName) {
+                SecurityCore::sendSuspiciousLocationAlert(
+                    $sLocationName,
+                    $oUserData,
+                    $this->browser,
+                    $this->view
+                );
+            }
 
             if ($this->httpRequest->postExists(RememberMeCore::CHECKBOX_FIELD_NAME)) {
                 $this->session->set(RememberMeCore::STAY_LOGGED_IN_REQUESTED, 1);
@@ -104,7 +115,7 @@ class LoginFormProcess extends Form implements LoginableForm
 
             if ($this->isSmsVerificationEligible($oUserData)) {
                 // Store the user ID before redirecting to sms-verification module
-                $this->session->set(SmsVerificationCore::PROFILE_ID_SESS_NAME, $iId);
+                $this->session->set(SmsVerificationCore::PROFILE_ID_SESS_NAME, $iProfileId);
 
                 $this->redirectToSmsVerification();
             }
@@ -114,9 +125,9 @@ class LoginFormProcess extends Form implements LoginableForm
                 \PFBC\Form::setError('form_login_user', $mStatus);
             } else {
                 $o2FactorModel = new TwoFactorAuthCoreModel('user');
-                if ($o2FactorModel->isEnabled($iId)) {
+                if ($o2FactorModel->isEnabled($iProfileId)) {
                     // Store the user ID for 2FA
-                    $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iId);
+                    $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iProfileId);
 
                     $this->redirectToTwoFactorAuth();
                 } else {

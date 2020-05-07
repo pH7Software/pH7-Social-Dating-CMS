@@ -205,23 +205,4 @@ class Security
         $rStmt->execute();
         Db::free($rStmt);
     }
-
-    /**
-     * @param int $iProfileId
-     * @param string $sTable
-     *
-     * @return void
-     */
-    public function getLastSessionIp($iProfileId, $sTable = DbTableName::MEMBER)
-    {
-        Various::checkModelTable($sTable);
-
-        $rStmt = Db::getInstance()->prepare('SELECT ip FROM' . Db::prefix($sTable . '_log_sess') . 'WHERE profileId = :profileId ORDER BY dateTime DESC LIMIT 1');
-        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
-        $rStmt->execute();
-        $sLastUsedIp = $rStmt->fetchColumn();
-        Db::free($rStmt);
-
-        return $sLastUsedIp;
-    }
 }

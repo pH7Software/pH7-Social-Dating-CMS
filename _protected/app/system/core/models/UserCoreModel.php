@@ -158,6 +158,25 @@ class UserCoreModel extends Model
     }
 
     /**
+     * @param int $iProfileId
+     * @param string $sTable
+     *
+     * @return string The latest used user's IP address.
+     */
+    public function getLastUsedIp($iProfileId, $sTable = DbTableName::MEMBER)
+    {
+        Various::checkModelTable($sTable);
+
+        $rStmt = Db::getInstance()->prepare('SELECT ip FROM' . Db::prefix($sTable . '_log_sess') . 'WHERE profileId = :profileId ORDER BY dateTime DESC LIMIT 1');
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->execute();
+        $sLastUsedIp = $rStmt->fetchColumn();
+        Db::free($rStmt);
+
+        return $sLastUsedIp;
+    }
+
+    /**
      * Read Profile Data.
      *
      * @param int $iProfileId The user ID

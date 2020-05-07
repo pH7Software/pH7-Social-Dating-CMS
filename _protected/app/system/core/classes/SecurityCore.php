@@ -12,6 +12,8 @@ use PH7\Framework\Layout\Tpl\Engine\Templatable;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Navigation\Browser;
+use stdClass;
 
 class SecurityCore
 {
@@ -70,5 +72,39 @@ class SecurityCore
         unset($oUserModel);
 
         return $sFirstName;
+    }
+
+    /**
+     * Send a Security Alert Login Attempts email.
+     *
+     * @param string $sLocationName
+     * @param stdClass $oUserData
+     * @param Browser $oBrowser
+     * @param Templatable $oView
+     *
+     * @return void
+     */
+    public static function sendSuspiciousLocationAlert($sLocationName, stdClass $oUserData, Browser $oBrowser, Templatable $oView)
+    {
+        $oView->content = t('Hi %0%', $oUserData->firstName) . '<br />' .
+            t('Your account "%0% has just been logged-in from a different location than usual.', $oUserData->username) . '<br />' .
+            t('We are sending this notification in case this was not done by you.') . '<br />' .
+            '<strong>' . t('Details:') . '</strong><br /><ol><li>' .
+            t('Location: %0% (determined from IP address).', $sLocationName) . '<li></li>' .
+            t('Web Browser: %0%', $oBrowser->getUserAgent()) . '</li></ol><br /><hr />' .
+            t('If this was not you, we urge you to update your password as soon as possible.') . '<br />' .
+            t('Have a nice day!');
+
+        $sMessageHtml = $oView->parseMail(
+            PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/alert_suspicious_location.tpl',
+            $oUserData->email
+        );
+
+        $aInfo = [
+            'to' => $oUserData->email,
+            'subject' => t('Foreign login to your account - %site_name%')
+        ];
+
+        (new Mail)->send($aInfo, $sMessageHtml);
     }
 }
