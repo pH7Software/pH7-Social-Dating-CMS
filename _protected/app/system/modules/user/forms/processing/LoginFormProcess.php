@@ -181,7 +181,13 @@ class LoginFormProcess extends Form implements LoginableForm
      */
     public function isFromForeignLocation($iProfileId, $sLocationName)
     {
-        return Geo::getCountry($this->oUserModel->getLastUsedIp($iProfileId)) !== $sLocationName;
+        $sLatestUsedIp = $this->oUserModel->getLastUsedIp($iProfileId);
+
+        if (!empty($sLatestUsedIp)) {
+            return Geo::getCountry($sLatestUsedIp) !== $sLocationName;
+        }
+
+        return false;
     }
 
     /**
