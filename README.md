@@ -122,6 +122,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Social Bookmark (Social Media Sharing Buttons)
 * Anti-Scam and Anti-Fraud Tools
 * Login Attempt Protections
+* Suspicious Login Detection from foreign locations
 * Powerful Anti-Spam System (and detects duplicate contents) powered by the Invisible Intelligent Spam Detection System™
 * pCO8 SECURITY pH7Framework™ (offers one of the highest protection for your webapp)
 * Full Security system against XSS, CSRF, SQL injection, authentication hacking, session fixation, brute-force, reverse tabnabbing phishing attacks, ... and can even prevent some DDoS attacks!
