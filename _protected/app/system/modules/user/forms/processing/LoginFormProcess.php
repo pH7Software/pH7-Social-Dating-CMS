@@ -183,7 +183,7 @@ class LoginFormProcess extends Form implements LoginableForm
     {
         $sLatestUsedIp = $this->oUserModel->getLastUsedIp($iProfileId);
 
-        if (!empty($sLatestUsedIp)) {
+        if (!empty($sLatestUsedIp) && (new Validate)->ip($sLatestUsedIp)) {
             return Geo::getCountry($sLatestUsedIp) !== $sLocationName;
         }
 
