@@ -40,7 +40,7 @@ class SecurityCore
             t('Someone tried to login more than %0% times with the IP address: "%1%".', $iMaxAttempts, $sIp) . '<br />' .
             t('For safety and security reasons, we have blocked access to this person for a delay of %0% minutes.', $iAttemptTime) . '<br /><ol><li>' .
             t('If it was you who tried to login to your account, we suggest to <a href="%1%">request a new password</a> in %0% minutes.', $iAttemptTime, $sForgotPwdLink) . '</li><li>' .
-            t('If you do not know the person who made the login attempts, you should be very careful and change your password to a new complex one.') . '</li></ol><br /><hr />' .
+            t("If you don't know the person who made the login attempts, you should be very careful and change your password to a new complex one.") . '</li></ol><br /><hr />' .
             t('Have a nice day!');
 
         $sMessageHtml = $oView->parseMail(
@@ -88,12 +88,12 @@ class SecurityCore
     {
         $oView->content = t('Hi %0%', $oUserData->firstName) . '<br />' .
             t('Your account "%0% has just been logged-in from a different location than usual.', $oUserData->username) . '<br />' .
-            t('We are sending this notification in case this was not done by you.') . '<br />' .
+            t("We are sending this notification in case this wasn't done by you.") . '<br />' .
             '<strong>' . t('Details:') . '</strong><br /><ol><li>' .
             t('Location: %0% (determined from IP address).', $sLocationName) . '<li></li>' .
-            t('Web Browser: %0%', $oBrowser->getUserAgent()) . '</li></ol><br /><hr />' .
-            t('If this was not you, we urge you to update your password as soon as possible.') . '<br />' .
-            t('Have a nice day!');
+            t('Browser: %0%', $oBrowser->getUserAgent()) . '</li></ol><br /><hr />' .
+            t("If this wasn't you, please <a href='%0%'>login</a> immediately to change your password.", Uri::get('user', 'main', 'login')) . '<br />' .
+            t('Have a great day!');
 
         $sMessageHtml = $oView->parseMail(
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/alert_suspicious_location.tpl',
