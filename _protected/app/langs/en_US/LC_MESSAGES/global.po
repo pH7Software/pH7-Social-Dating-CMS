@@ -653,7 +653,7 @@ msgstr ""
 
 #: _protected/app/system/core/classes/SecurityCore.php:41
 msgid ""
-"If you do not know the person who made the login attempts, you should be "
+"If you don't know the person who made the login attempts, you should be "
 "very careful and change your password to a new complex one."
 msgstr ""
 
