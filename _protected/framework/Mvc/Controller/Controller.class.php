@@ -190,9 +190,7 @@ abstract class Controller extends Core implements Controllable
             'top_navbar_type' => M\DbConfig::getSetting('navbarType'),
             'is_guest_homepage' => $this->isGuestOnHomepage($aAuthViewVars['is_user_auth']),
             'is_disclaimer' => !$bIsMobApp && (bool)M\DbConfig::getSetting('disclaimer'),
-            'is_cookie_consent_bar' => !$bIsMobApp && (bool)M\DbConfig::getSetting('cookieConsentBar'),
-            'country' => Geo::getCountry(),
-            'city' => Geo::getCity()
+            'is_cookie_consent_bar' => !$bIsMobApp && (bool)M\DbConfig::getSetting('cookieConsentBar')
         ];
 
         $this->view->assigns($aAuthViewVars);
