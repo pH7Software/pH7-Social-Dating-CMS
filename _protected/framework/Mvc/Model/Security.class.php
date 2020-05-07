@@ -117,17 +117,19 @@ class Security
         $rStmt->execute();
 
         if ($rStmt->rowCount() == 1) {
-            $oRow = $rStmt->fetch(PDO::FETCH_OBJ);
+            $oAttemptRow = $rStmt->fetch(PDO::FETCH_OBJ);
 
-            if ($oRow->attempts >= $iMaxAttempts) {
-                $sLockoutTime = (new DateTime($oRow->lastLogin))->add(DateInterval::createFromDateString("$iAttemptTime minutes"))->format('Y-m-d H:i:s');
+            if ($oAttemptRow->attempts >= $iMaxAttempts) {
+                $sLockoutTime = (new DateTime($oAttemptRow->lastLogin))->add(
+                    DateInterval::createFromDateString("$iAttemptTime minutes")
+                )->format('Y-m-d H:i:s');
 
-                if ($sLockoutTime > $this->sCurrentTime) {
+                if ($this->sCurrentTime <= $sLockoutTime) {
                     /**
                      * Send email to prevent that someone tries to hack their member account.
-                     * We test that the number of attempts equals the number of maximim tantatives to avoid duplication of sending emails.
+                     * We test that the number of attempts equals the number of maximum attempts to avoid sending several same emails.
                      */
-                    if ($oRow->attempts == $iMaxAttempts) {
+                    if ($oAttemptRow->attempts == $iMaxAttempts) {
                         (new SecurityCore)->sendLoginAttemptsExceededAlert(
                             $iMaxAttempts,
                             $iAttemptTime,
