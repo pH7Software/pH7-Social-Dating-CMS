@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Form / Processing
  */
@@ -101,7 +101,7 @@ class LoginFormProcess extends Form implements LoginableForm
             $this->updatePwdHashIfNeeded($sPassword, $oUserData->password, $sEmail);
 
             $sLocationName = Geo::getCountry();
-            if ($this->isFromForeignLocation($iProfileId, $sLocationName)) {
+            if ($this->isForeignLocation($iProfileId, $sLocationName)) {
                 SecurityCore::sendSuspiciousLocationAlert(
                     $sLocationName,
                     $oUserData,
@@ -179,7 +179,7 @@ class LoginFormProcess extends Form implements LoginableForm
      *
      * @return bool
      */
-    public function isFromForeignLocation($iProfileId, $sLocationName)
+    public function isForeignLocation($iProfileId, $sLocationName)
     {
         $sLatestUsedIp = $this->oUserModel->getLastUsedIp($iProfileId);
 
