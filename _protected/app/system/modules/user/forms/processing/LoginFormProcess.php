@@ -175,7 +175,6 @@ class LoginFormProcess extends Form implements LoginableForm
     /**
      * @param int $iProfileId
      * @param string $sLocationName
-     * @param UserCoreModel $oUserModel
      *
      * @return bool
      */
