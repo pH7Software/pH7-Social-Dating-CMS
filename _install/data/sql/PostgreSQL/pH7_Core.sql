@@ -905,7 +905,6 @@ CREATE TABLE IF NOT EXISTS ph7_admins_log_sess (
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
   ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
-  guest smallint check (guest > 0) NOT NULL DEFAULT 1,
   dateTime timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (sessionId),
   FOREIGN KEY (profileId) REFERENCES ph7_admins(profileId)
@@ -920,7 +919,6 @@ CREATE TABLE IF NOT EXISTS ph7_members_log_sess (
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
   ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
-  guest smallint check (guest > 0) NOT NULL DEFAULT 1,
   dateTime timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (sessionId),
   FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
@@ -935,7 +933,6 @@ CREATE TABLE IF NOT EXISTS ph7_affiliates_log_sess (
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
   ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
-  guest smallint check (guest > 0) NOT NULL DEFAULT 1,
   dateTime timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (sessionId),
   FOREIGN KEY (profileId) REFERENCES ph7_affiliates(profileId)

@@ -768,7 +768,6 @@ CREATE TABLE IF NOT EXISTS ph7_admins_log_sess (
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
   ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
-  guest smallint(4) unsigned NOT NULL DEFAULT 1,
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (sessionId),
   FOREIGN KEY (profileId) REFERENCES ph7_admins(profileId)
@@ -783,7 +782,6 @@ CREATE TABLE IF NOT EXISTS ph7_members_log_sess (
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
   ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
-  guest smallint(4) unsigned NOT NULL DEFAULT 1,
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (sessionId),
   FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
@@ -798,7 +796,6 @@ CREATE TABLE IF NOT EXISTS ph7_affiliates_log_sess (
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
   ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
-  guest smallint(4) unsigned NOT NULL DEFAULT 1,
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (sessionId),
   FOREIGN KEY (profileId) REFERENCES ph7_affiliates(profileId)

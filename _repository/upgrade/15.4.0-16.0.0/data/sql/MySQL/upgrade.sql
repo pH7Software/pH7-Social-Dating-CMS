@@ -11,7 +11,8 @@ ALTER TABLE ph7_admins_log_sess
     DROP COLUMN userAgent,
     DROP COLUMN lastActivity,
     DROP COLUMN location,
-    DROP COLUMN password;
+    DROP COLUMN password,
+    DROP COLUMN guest;
 
 ALTER TABLE ph7_members_log_sess
     DROP COLUMN sessionHash,
@@ -19,7 +20,8 @@ ALTER TABLE ph7_members_log_sess
     DROP COLUMN userAgent,
     DROP COLUMN lastActivity,
     DROP COLUMN location,
-    DROP COLUMN password;
+    DROP COLUMN password,
+    DROP COLUMN guest;
 
 ALTER TABLE ph7_affiliates_log_sess
     DROP COLUMN sessionHash,
@@ -27,7 +29,8 @@ ALTER TABLE ph7_affiliates_log_sess
     DROP COLUMN userAgent,
     DROP COLUMN lastActivity,
     DROP COLUMN location,
-    DROP COLUMN password;
+    DROP COLUMN password,
+    DROP COLUMN guest;
 
 -- Remove outdated keys
 ALTER TABLE ph7_admins_log_sess
