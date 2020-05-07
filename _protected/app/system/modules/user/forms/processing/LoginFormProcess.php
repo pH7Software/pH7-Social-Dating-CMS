@@ -17,6 +17,7 @@ use PH7\Framework\Mvc\Model\Security as SecurityModel;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Security;
+use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Url\Header;
 use stdClass;
 
