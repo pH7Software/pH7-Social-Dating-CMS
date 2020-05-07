@@ -631,7 +631,7 @@ msgid ""
 msgstr ""
 
 #: _protected/app/system/core/classes/SecurityCore.php:37
-msgid "Dear, %0%"
+msgid "Hi %0%"
 msgstr ""
 
 #: _protected/app/system/core/classes/SecurityCore.php:38
@@ -654,13 +654,7 @@ msgstr ""
 #: _protected/app/system/core/classes/SecurityCore.php:41
 msgid ""
 "If you do not know the person who made the login attempts, you should be "
-"very careful and change your password to a new one more complicated."
-msgstr ""
-
-#: _protected/app/system/core/classes/SecurityCore.php:42
-msgid ""
-"We also recommend that you change the password of your emailbox, because it "
-"is with this emalbox we send a potential new password in case you forget it."
+"very careful and change your password to a new complex one."
 msgstr ""
 
 #: _protected/app/system/core/classes/SecurityCore.php:43
