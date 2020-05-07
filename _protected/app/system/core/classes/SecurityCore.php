@@ -75,8 +75,6 @@ class SecurityCore
     }
 
     /**
-     * Send a Security Alert Login Attempts email.
-     *
      * @param string $sLocationName
      * @param stdClass $oUserData
      * @param Browser $oBrowser

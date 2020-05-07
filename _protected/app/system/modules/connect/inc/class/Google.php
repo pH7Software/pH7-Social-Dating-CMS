@@ -42,11 +42,6 @@ class Google extends Api implements IApi
     /** @var array */
     private $aUserInfo;
 
-    /**
-     * @param Session $oSession
-     * @param HttpRequest $oHttpRequest
-     * @param Registry $oRegistry
-     */
     public function __construct(Session $oSession, HttpRequest $oHttpRequest, Registry $oRegistry)
     {
         parent::__construct();
