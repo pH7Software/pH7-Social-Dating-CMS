@@ -141,7 +141,7 @@ class UserCoreModel extends Model
      *
      * @return void
      */
-    public function sessionLog($iProfileId, $sEmail, $sFirstName, $sTable = DbTableName::MEMBER)
+    public function addSessionLog($iProfileId, $sEmail, $sFirstName, $sTable = DbTableName::MEMBER)
     {
         Various::checkModelTable($sTable);
 

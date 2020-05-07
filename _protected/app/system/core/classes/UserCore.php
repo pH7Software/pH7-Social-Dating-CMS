@@ -410,7 +410,7 @@ class UserCore
             '*****',
             'Logged in!'
         );
-        $oUserModel->sessionLog(
+        $oUserModel->addSessionLog(
             $oUserData->profileId,
             $oUserData->email,
             $oUserData->firstName
