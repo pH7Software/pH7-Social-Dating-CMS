@@ -27,7 +27,7 @@ class SecurityCore
      *
      * @return void
      */
-    public function sendAlertLoginAttemptsExceeded($iMaxAttempts, $iAttemptTime, $sIp, $sTo, Templatable $oView, $sTable = DbTableName::MEMBER)
+    public function sendLoginAttemptsExceededAlert($iMaxAttempts, $iAttemptTime, $sIp, $sTo, Templatable $oView, $sTable = DbTableName::MEMBER)
     {
         Various::checkModelTable($sTable);
 

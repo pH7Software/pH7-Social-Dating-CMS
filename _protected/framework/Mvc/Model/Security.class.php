@@ -128,7 +128,7 @@ class Security
                      * We test that the number of attempts equals the number of maximim tantatives to avoid duplication of sending emails.
                      */
                     if ($oRow->attempts == $iMaxAttempts) {
-                        (new SecurityCore)->sendAlertLoginAttemptsExceeded(
+                        (new SecurityCore)->sendLoginAttemptsExceededAlert(
                             $iMaxAttempts,
                             $iAttemptTime,
                             $this->sIp,
