@@ -100,7 +100,7 @@ class LoginFormProcess extends Form implements LoginableForm
             $this->updatePwdHashIfNeeded($sPassword, $oUserData->password, $sEmail);
 
             $sLocationName = Geo::getCountry();
-            if (Geo::getCountry($this->oUserModel->getLastUsedIp($iProfileId)) !== $sLocationName) {
+            if ($this->isFromForeignLocation($iProfileId, $sLocationName)) {
                 SecurityCore::sendSuspiciousLocationAlert(
                     $sLocationName,
                     $oUserData,
@@ -170,6 +170,18 @@ class LoginFormProcess extends Form implements LoginableForm
     {
         $iNumberAttempts = (int)$this->session->get('captcha_user_enabled');
         $this->session->set('captcha_user_enabled', $iNumberAttempts++);
+    }
+
+    /**
+     * @param int $iProfileId
+     * @param string $sLocationName
+     * @param UserCoreModel $oUserModel
+     *
+     * @return bool
+     */
+    public function isFromForeignLocation($iProfileId, $sLocationName)
+    {
+        return Geo::getCountry($this->oUserModel->getLastUsedIp($iProfileId)) !== $sLocationName;
     }
 
     /**
