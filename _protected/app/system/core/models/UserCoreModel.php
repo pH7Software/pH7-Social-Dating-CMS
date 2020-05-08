@@ -14,7 +14,6 @@ use PDO;
 use PH7\Framework\CArray\ObjArr;
 use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
-use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Model;
