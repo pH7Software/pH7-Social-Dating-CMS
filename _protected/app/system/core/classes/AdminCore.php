@@ -107,7 +107,7 @@ class AdminCore extends UserCore
             'Logged in!',
             DbTableName::ADMIN
         );
-        $oAdminModel->addSessionLog(
+        $oSecurityModel->addSessionLog(
             $oAdminData->profileId,
             $oAdminData->email,
             $oAdminData->firstName,

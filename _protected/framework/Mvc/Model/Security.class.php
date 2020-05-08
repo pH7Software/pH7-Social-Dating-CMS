@@ -92,6 +92,32 @@ class Security
     }
 
     /**
+     * Set User Log Session.
+     *
+     * @param int $iProfileId
+     * @param string $sEmail
+     * @param string $sFirstName
+     * @param string $sTable
+     *
+     * @return void
+     */
+    public function addSessionLog($iProfileId, $sEmail, $sFirstName, $sTable = DbTableName::MEMBER)
+    {
+        Various::checkModelTable($sTable);
+
+        $rStmt = Db::getInstance()->prepare(
+            'INSERT INTO' . Db::prefix($sTable . '_log_sess') . '(profileId, email, firstName, ip)
+            VALUES (:profileId, :email, :firstName, :ip)'
+        );
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':email', $sEmail, PDO::PARAM_STR);
+        $rStmt->bindValue(':firstName', $sFirstName, PDO::PARAM_STR);
+        $rStmt->bindValue(':ip', $this->sIp, PDO::PARAM_STR);
+        $rStmt->execute();
+        Db::free($rStmt);
+    }
+
+    /**
      * Blocking access to the login page after exceeded login attempts.
      *
      * @param int $iMaxAttempts
