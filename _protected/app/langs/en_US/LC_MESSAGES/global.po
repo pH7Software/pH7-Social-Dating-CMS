@@ -4561,7 +4561,7 @@ msgstr ""
 #: _protected/app/system/modules/user/forms/processing/JoinFormProcess.php:120
 #: _protected/app/system/modules/user/forms/processing/JoinFormProcess.php:140
 msgid ""
-"Please try again with new information in the form fields or come back later."
+"Please try again or come back later."
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/forms/processing/JoinFormProcess.php:77

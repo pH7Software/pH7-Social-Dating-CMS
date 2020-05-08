@@ -65,7 +65,7 @@ class JoinFormProcess extends Form
         } elseif (!$iProfileId = $this->oUserModel->join($aData)) {
             \PFBC\Form::setError('form_join_user',
                 t('An error occurred during registration!') . '<br />' .
-                t('Please try again with new information in the form fields or come back later.')
+                t('Please try again or come back later.')
             );
         } else {
             /**
@@ -117,7 +117,7 @@ class JoinFormProcess extends Form
         if (!$this->oUserModel->exe($aData1, '2_1') || !$this->oUserModel->exe($aData2, '2_2')) {
             \PFBC\Form::setError('form_join_user2',
                 t('An error occurred during registration!') . '<br />' .
-                t('Please try again with new information in the form fields or come back later.')
+                t('Please try again or come back later.')
             );
         } else {
             $this->session->set('mail_step2', $this->session->get('mail_step1'));
@@ -137,7 +137,7 @@ class JoinFormProcess extends Form
         if (!$this->oUserModel->exe($aData, '3')) {
             \PFBC\Form::setError('form_join_user3',
                 t('An error occurred during registration!') . '<br />' .
-                t('Please try again with new information in the form fields or come back later.')
+                t('Please try again or come back later.')
             );
         } else {
             $this->session->set('mail_step3', $this->session->get('mail_step1'));
