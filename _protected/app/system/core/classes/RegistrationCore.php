@@ -92,7 +92,7 @@ abstract class RegistrationCore
     {
         switch ($this->iActiveType) {
             case self::NO_ACTIVATION:
-                $sMsg = t('Log in now!');
+                $sMsg = t('Your account has just been created. You can now login!');
                 break;
 
             case self::EMAIL_ACTIVATION:

@@ -142,8 +142,7 @@ class JoinFormProcess extends Form
         } else {
             $this->session->set('mail_step3', $this->session->get('mail_step1'));
             Header::redirect(
-                Uri::get('user', 'signup', 'step4'),
-                t('Your account has just been created!')
+                Uri::get('user', 'signup', 'step4')
             );
         }
     }

@@ -586,7 +586,7 @@ msgid "Hello %0%, Welcome to %site_name%!"
 msgstr ""
 
 #: _protected/app/system/core/classes/RegistrationCore.php:95
-msgid "Log in now!"
+msgid "Your account has just been created. You can now login!"
 msgstr ""
 
 #: _protected/app/system/core/classes/RegistrationCore.php:99
