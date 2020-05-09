@@ -39,6 +39,16 @@ class Age extends OptionElement
         $this->iMinAge = (int)DbConfig::getSetting('minAgeRegistration');
         $this->iMaxAge = (int)DbConfig::getSetting('maxAgeRegistration');
 
+        $this->generateHtmlElements();
+    }
+
+    public function render()
+    {
+        echo $this->sHtmlOutput;
+    }
+
+    private function generateHtmlElements()
+    {
         $this->sHtmlOutput = sprintf(
             $this->minAgeHtmlField(),
             $this->minAgeDefaultValue(),
@@ -60,11 +70,6 @@ class Age extends OptionElement
             $this->iMaxAge,
             $this->iMaxAge
         );
-    }
-
-    public function render()
-    {
-        echo $this->sHtmlOutput;
     }
 
     private function minAgeHtmlField()
