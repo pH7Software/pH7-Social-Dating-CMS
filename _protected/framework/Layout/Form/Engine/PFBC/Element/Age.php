@@ -78,7 +78,7 @@ class Age extends OptionElement
         <input
             type="number"
             value="%d"
-            name="age1"
+            name="min_age"
             placeholder="%d"
             min="%d"
             max="%d"
@@ -95,7 +95,7 @@ HTML;
         <input
             type="number"
             value="%d"
-            name="age2"
+            name="max_age"
             placeholder="%d"
             min="%d"
             max="%d"

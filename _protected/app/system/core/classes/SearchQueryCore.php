@@ -14,8 +14,8 @@ final class SearchQueryCore
     const SEX = 'sex';
     const MATCH_SEX = 'match_sex';
     const AGE = 'age';
-    const MIN_AGE = 'age1';
-    const MAX_AGE = 'age2';
+    const MIN_AGE = 'min_age';
+    const MAX_AGE = 'max_age';
     const COUNTRY = 'country';
     const CITY = 'city';
     const STATE = 'state';

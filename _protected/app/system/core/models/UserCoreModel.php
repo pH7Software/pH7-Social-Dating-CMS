@@ -358,7 +358,7 @@ class UserCoreModel extends Model
         $sSqlMiddleName = $bIsMiddleName ? ' AND LOWER(middleName) LIKE LOWER(:middleName)' : '';
         $sSqlLastName = $bIsLastName ? ' AND LOWER(lastName) LIKE LOWER(:lastName)' : '';
         $sSqlSingleAge = $bIsSingleAge ? ' AND birthDate LIKE :birthDate ' : '';
-        $sSqlAge = $bIsAge ? ' AND birthDate BETWEEN DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age2 YEAR) AND DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age1 YEAR) ' : '';
+        $sSqlAge = $bIsAge ? ' AND birthDate BETWEEN DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :maxAge YEAR) AND DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :minAge YEAR) ' : '';
         $sSqlHeight = $bIsHeight ? ' AND height = :height ' : '';
         $sSqlWeight = $bIsWeight ? ' AND weight = :weight ' : '';
         $sSqlCountry = $bIsCountry ? ' AND country = :country ' : '';
@@ -411,8 +411,8 @@ class UserCoreModel extends Model
             $rStmt->bindValue(':birthDate', '%' . $aParams[SearchQueryCore::AGE] . '%', PDO::PARAM_STR);
         }
         if ($bIsAge) {
-            $rStmt->bindValue(':age1', $aParams[SearchQueryCore::MIN_AGE], PDO::PARAM_INT);
-            $rStmt->bindValue(':age2', $aParams[SearchQueryCore::MAX_AGE], PDO::PARAM_INT);
+            $rStmt->bindValue(':minAge', $aParams[SearchQueryCore::MIN_AGE], PDO::PARAM_INT);
+            $rStmt->bindValue(':maxAge', $aParams[SearchQueryCore::MAX_AGE], PDO::PARAM_INT);
         }
         if ($bIsHeight) {
             $rStmt->bindValue(':height', $aParams[SearchQueryCore::HEIGHT], PDO::PARAM_INT);
