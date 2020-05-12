@@ -157,7 +157,7 @@ class SignupController extends Controller
         $sPageTitle = t('Free Sign Up to Meet Lovely People!');
 
         if ($bUserRef) {
-            $sPageTitle = t('Register for free to meet %0% on %site_name%. The Real Social Dating app!', $sFirstName);
+            $sPageTitle = t('Sign up to meet %0% on %site_name%. The Real Social Dating app!', $sFirstName);
         }
 
         return $sPageTitle;
@@ -177,7 +177,7 @@ class SignupController extends Controller
         $sHeading = t('Sign Up on %site_name%! 🎉');
 
         if ($bUserRef) {
-            $sHeading = t('😍 Register for Free to Meet <span class="pink2">%0%</span> (a.k.a <span class="pink1">%1%</span>) on <span class="pink2">%site_name%</span>!', $sFirstName, $this->str->upperFirst($sUsername));
+            $sHeading = t('😍 Sign Up to Meet <span class="pink2">%0%</span> (a.k.a <span class="pink1">%1%</span>) on <span class="pink2">%site_name%</span> 🥰', $sFirstName, $this->str->upperFirst($sUsername));
         }
 
         return $sHeading;

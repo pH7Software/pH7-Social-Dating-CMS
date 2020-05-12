@@ -8102,7 +8102,7 @@ msgstr ""
 
 #: _protected/app/system/modules/user/controllers/SignupController.php:159
 msgid ""
-"Register for free to meet %0% on %site_name%. The Real Social Dating app!"
+"Sign up to meet %0% on %site_name%. The Real Social Dating app!"
 msgstr ""
 
 #: _protected/app/system/modules/user/controllers/SignupController.php:176
@@ -8111,8 +8111,8 @@ msgstr ""
 
 #: _protected/app/system/modules/user/controllers/SignupController.php:179
 msgid ""
-"😍 Register for Free to Meet <span class=\"pink2\">%0%</span> (a.k.a <span "
-"class=\"pink1\">%1%</span>) on <span class=\"pink2\">%site_name%</span>!"
+"😍 Sign Up to Meet <span class=\"pink2\">%0%</span> (a.k.a <span "
+"class=\"pink1\">%1%</span>) on <span class=\"pink2\">%site_name%</span> 🥰"
 msgstr ""
 
 #: _protected/app/system/modules/user/controllers/VisitorController.php:65
