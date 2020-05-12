@@ -12,6 +12,7 @@
     padding: 5px;
     border-radius: 5px;
     background-image: url(../img/bg_box.png);
+    width: 100%;
 }
 
 .design-box h2 {
