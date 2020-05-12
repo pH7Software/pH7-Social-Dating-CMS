@@ -59,7 +59,7 @@ class Age extends OptionElement
             $this->iMinAge
         );
 
-        $this->sHtmlOutput .= '-';
+        $this->sHtmlOutput .= ' ~ ';
 
         $this->sHtmlOutput .= sprintf(
             $this->maxAgeHtmlField(),
