@@ -5,7 +5,7 @@
     </div>
 </div>
 
-<div class="box-right col-md-9 col-lg-9 col-xl-9 col-xl-offset-1">
+<div class="box-right col-xs-12 col-md-9 col-lg-9 col-xl-9 col-xl-offset-1">
     {if empty($users)}
         <p class="center bold">{lang 'Whoops! No users found.'}</p>
     {else}
@@ -13,7 +13,7 @@
             {{ $country_name = t($user->country) }}
             {{ $age = UserBirthDateCore::getAgeFromBirthDate($user->birthDate) }}
 
-            <div class="col-md-3 thumb_photo">
+            <div class="col-xs-6 col-md-4 col-lg-3 thumb_photo">
                 {{ UserDesignCoreModel::userStatus($user->profileId) }}
 
                 {* Sex Icon *}
@@ -25,7 +25,7 @@
                     {{ $sex_ico = '' }}
                 {/if}
 
-                {{ $avatarDesign->get($user->username, $user->firstName, $user->sex, 64) }}
+                {{ $avatarDesign->get($user->username, $user->firstName, $user->sex, 150) }}
                 <p class="cy_ico">
                     <a href="{% (new UserCore)->getProfileLink($user->username) %}" title="{lang 'Name: %0%', $user->firstName}<br> {lang 'Gender: %0% %1%', t($user->sex), $sex_ico}<br> {lang 'Seeking: %0%', t($user->matchSex)}<br> {lang 'Age: %0%', $age}<br> {lang 'From: %0%', $country_name}<br> {lang 'City: %0%', $str->upperFirst($user->city)}<br> {lang 'State: %0%', $str->upperFirst($user->state)}">
                         <strong>{% $str->extract($user->username, PH7_MAX_USERNAME_LENGTH_SHOWN) %}</strong>
