@@ -1186,7 +1186,7 @@ msgstr ""
 #: _protected/app/system/core/forms/SearchUserCoreForm.php:104
 #: _protected/data/cache/pH7tpl_compile/cool-profile-page_24c864680ee1bf87a84b989b035a6c21/base/main/index.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/profile/index.cpl.php:19
-msgid "I am a:"
+msgid "I am:"
 msgstr ""
 
 #: _protected/app/system/core/forms/SearchUserCoreForm.php:56
@@ -1234,13 +1234,6 @@ msgstr ""
 #: _protected/app/system/modules/user/forms/JoinForm.php:101
 #: _protected/app/system/modules/user/forms/JoinForm.php:114
 msgid "Couple"
-msgstr ""
-
-#: _protected/app/system/core/forms/SearchUserCoreForm.php:65
-#: _protected/app/system/modules/user/forms/EditForm.php:88
-#: _protected/data/cache/pH7tpl_compile/cool-profile-page_24c864680ee1bf87a84b989b035a6c21/base/main/index.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/profile/index.cpl.php:19
-msgid "Looking for a:"
 msgstr ""
 
 #: _protected/app/system/core/forms/SearchUserCoreForm.php:78

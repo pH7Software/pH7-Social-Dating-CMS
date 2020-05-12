@@ -67,7 +67,7 @@ class SearchUserCoreForm
         );
         $oForm->addElement(
             new Select(
-                t('I am a:'),
+                t('I am:'),
                 SearchQueryCore::MATCH_SEX,
                 [
                     GenderTypeUserCore::MALE => t('Man'),
@@ -79,7 +79,7 @@ class SearchUserCoreForm
         );
         $oForm->addElement(
             new Checkbox(
-                t('Looking for a:'),
+                t('Looking for:'),
                 SearchQueryCore::SEX,
                 [
                     GenderTypeUserCore::FEMALE => t('Woman'),
@@ -188,7 +188,7 @@ class SearchUserCoreForm
         );
         $oForm->addElement(
             new Select(
-                t('I am a:'),
+                t('I am:'),
                 SearchQueryCore::MATCH_SEX,
                 [
                     GenderTypeUserCore::MALE => t('Male'),
