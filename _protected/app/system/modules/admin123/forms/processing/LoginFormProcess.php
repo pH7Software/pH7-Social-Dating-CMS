@@ -96,15 +96,15 @@ class LoginFormProcess extends Form implements LoginableForm
         } else {
             $oSecurityModel->clearLoginAttempts(DbTableName::ADMIN);
             $this->session->remove('captcha_admin_enabled');
-            $iId = $this->oAdminModel->getId($sEmail, null, DbTableName::ADMIN);
-            $oAdminData = $this->oAdminModel->readProfile($iId, DbTableName::ADMIN);
+            $iProfileId = $this->oAdminModel->getId($sEmail, null, DbTableName::ADMIN);
+            $oAdminData = $this->oAdminModel->readProfile($iProfileId, DbTableName::ADMIN);
 
             $this->updatePwdHashIfNeeded($sPassword, $oAdminData->password, $sEmail);
 
             $o2FactorModel = new TwoFactorAuthCoreModel(PH7_ADMIN_MOD);
-            if ($o2FactorModel->isEnabled($iId)) {
+            if ($o2FactorModel->isEnabled($iProfileId)) {
                 // Store the admin ID for 2FA
-                $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iId);
+                $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iProfileId);
 
                 $this->redirectToTwoFactorAuth();
             } else {

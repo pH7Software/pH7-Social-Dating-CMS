@@ -92,8 +92,8 @@ class LoginFormProcess extends Form implements LoginableForm
         } else {
             $oSecurityModel->clearLoginAttempts(DbTableName::AFFILIATE);
             $this->session->remove('captcha_aff_enabled');
-            $iId = $this->oAffModel->getId($sEmail, null, DbTableName::AFFILIATE);
-            $oAffData = $this->oAffModel->readProfile($iId, DbTableName::AFFILIATE);
+            $iProfileId = $this->oAffModel->getId($sEmail, null, DbTableName::AFFILIATE);
+            $oAffData = $this->oAffModel->readProfile($iProfileId, DbTableName::AFFILIATE);
 
             $this->updatePwdHashIfNeeded($sPassword, $oAffData->password, $sEmail);
 
@@ -102,9 +102,9 @@ class LoginFormProcess extends Form implements LoginableForm
                 \PFBC\Form::setError('form_login_aff', $mStatus);
             } else {
                 $o2FactorModel = new TwoFactorAuthCoreModel('affiliate');
-                if ($o2FactorModel->isEnabled($iId)) {
+                if ($o2FactorModel->isEnabled($iProfileId)) {
                     // Store the affiliate ID for 2FA
-                    $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iId);
+                    $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iProfileId);
 
                     $this->redirectToTwoFactorAuth();
                 } else {
