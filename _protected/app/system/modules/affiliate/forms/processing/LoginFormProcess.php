@@ -108,7 +108,12 @@ class LoginFormProcess extends Form implements LoginableForm
 
                     $this->redirectToTwoFactorAuth();
                 } else {
-                    $oAff->setAuth($oAffData, $this->oAffModel, $this->session, $oSecurityModel);
+                    $oAff->setAuth(
+                        $oAffData,
+                        $this->oAffModel,
+                        $this->session,
+                        $oSecurityModel
+                    );
                     $this->redirectToAccountPage();
                 }
             }

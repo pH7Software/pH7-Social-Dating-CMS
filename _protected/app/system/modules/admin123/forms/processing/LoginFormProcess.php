@@ -108,7 +108,12 @@ class LoginFormProcess extends Form implements LoginableForm
 
                 $this->redirectToTwoFactorAuth();
             } else {
-                (new AdminCore)->setAuth($oAdminData, $this->oAdminModel, $this->session, $oSecurityModel);
+                (new AdminCore)->setAuth(
+                    $oAdminData,
+                    $this->oAdminModel,
+                    $this->session,
+                    $oSecurityModel
+                );
 
                 Header::redirect(
                     Uri::get(PH7_ADMIN_MOD, 'main', 'index'),
