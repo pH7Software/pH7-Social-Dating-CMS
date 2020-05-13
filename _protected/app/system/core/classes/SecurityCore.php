@@ -88,8 +88,8 @@ class SecurityCore
             t('Your account "%0% has just been logged-in from a different location than usual.', $oUserData->username) . '<br />' .
             t("We are sending this notification in case this wasn't done by you.") . '<br />' .
             '<strong>' . t('Details:') . '</strong><br /><ol><li>' .
-            t('Location: %0% (determined from IP address).', $sLocationName) . '<li></li>' .
-            t('Browser: %0%', $oBrowser->getUserAgent()) . '</li></ol><br /><hr />' .
+            t('<strong>Location:</strong> %0% (determined from IP address).', $sLocationName) . '<li></li>' .
+            t('<strong>Browser:</strong> %0%', $oBrowser->getUserAgent()) . '</li></ol><br /><hr />' .
             t("If this wasn't you, please <a href='%0%'>login</a> immediately to change your password.", Uri::get('user', 'main', 'login')) . '<br />' .
             t('Have a great day!');
 
