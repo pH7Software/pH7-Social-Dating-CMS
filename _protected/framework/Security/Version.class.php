@@ -159,7 +159,7 @@ final class Version
      */
     private static function isUpdateAlertEnabled(DOMElement $oInfo)
     {
-        // "Validate::bool()" returns TRUE for "1", "true", "on" and "yes", FALSE otherwise
+        // "Validate::bool()" returns TRUE for "1", "true", "on", and "yes", FALSE otherwise
         return (new Validate)->bool($oInfo->getElementsByTagName('upd-alert')->item(0)->nodeValue);
     }
 }

@@ -95,7 +95,7 @@ abstract class Controller implements Controllable
     }
 
     /**
-     * Check if the session is already initialized (thanks to "session_status()" PHP >= 5.4)
+     * Check if the session is already initialized (thanks to "session_status()" PHP >= 5.4).
      * And initialize it if it isn't the case.
      *
      * @return void
