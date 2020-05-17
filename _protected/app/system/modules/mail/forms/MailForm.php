@@ -76,6 +76,7 @@ class MailForm
                     'onblur' => 'CValid(this.value,this.id,2,2500)',
                     'value' => $oHttpRequest->get('message'),
                     'validation' => new Str(2, 2500),
+                    'placeholder' => t('Say something nice to %0% 😊', $oHttpRequest->get('recipient')),
                     'required' => 1
                 ]
             )
