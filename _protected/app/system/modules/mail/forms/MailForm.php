@@ -76,7 +76,6 @@ class MailForm
                     'onblur' => 'CValid(this.value,this.id,2,2500)',
                     'value' => $oHttpRequest->get('message'),
                     'validation' => new Str(2, 2500),
-                    'basic' => 1,
                     'required' => 1
                 ]
             )
