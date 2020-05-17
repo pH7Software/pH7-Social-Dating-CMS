@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Comment / Form
  */
@@ -41,6 +41,7 @@ class CommentForm
                 [
                     'id' => 'str_com',
                     'onblur' => 'CValid(this.value,this.id,2,2500)',
+                    'placeholder' => t('Write something nice... 🤗'),
                     'required' => 1,
                     'validation' => new Str(2, 2500)
                 ]
