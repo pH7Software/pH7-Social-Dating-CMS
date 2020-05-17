@@ -28,8 +28,8 @@
         <p>{lang 'Well... you are not alone! I totally understand you!'}</p>
         <p>
             {lang '...if you want to help me making the software (and so, your website) the best on the market.'}<br />
-            {lang 'And impress the big sharks out there'}<br />
-            {lang 'would you be kind to make a contribution and be part of this amazing project?'}
+            {lang 'And impress the big sharks out there! 🦈'}<br />
+            {lang 'Would you be willing to give a contribution? And being part of this amazing project?'}
         </p>
         <p class="s_tMarg">
             {lang 'Once you made a donation, I will ship faster and better to you new features and changes to the software 🚀'}

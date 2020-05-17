@@ -16201,11 +16201,11 @@ msgid "...if you want to help me making the software (and so, your website) the 
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/upsetbox.tpl:31
-msgid "And impress the big sharks out there"
+msgid "And impress the big sharks out there! 🦈"
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/upsetbox.tpl:32
-msgid "would you be kind to make a contribution and be part of this amazing project?"
+msgid "Would you be willing to give a contribution? And being part of this amazing project?"
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/upsetbox.tpl:35
