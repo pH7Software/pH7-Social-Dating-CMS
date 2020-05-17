@@ -7362,7 +7362,7 @@ msgid "Edit Photo"
 msgstr ""
 
 #: _protected/app/system/modules/picture/controllers/MainController.php:107
-msgid "No photo albums found."
+msgid "Oops! 😵 Nothing here for the moment."
 msgstr ""
 
 #: _protected/app/system/modules/picture/controllers/MainController.php:111

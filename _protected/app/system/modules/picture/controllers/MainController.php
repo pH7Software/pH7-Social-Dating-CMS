@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Picture / Controller
  */
@@ -106,7 +106,7 @@ class MainController extends Controller
         $this->view->is_add_album_btn_shown = $this->httpRequest->get('show_add_album_btn', 'bool');
 
         if (empty($oAlbums)) {
-            $this->sTitle = t('No photo albums found.');
+            $this->sTitle = t('Oops! 😵 Nothing here for the moment.');
             $this->notFound(false); // Because the Ajax blocks profile, we cannot put HTTP error code 404, so the attribute is FALSE
         } else {
             // We can include HTML tags in the title since the template will erase them before displaying
