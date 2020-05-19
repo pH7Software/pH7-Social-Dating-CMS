@@ -23,11 +23,6 @@
     # RewriteBase /
 </IfModule>
 
-<IfModule mod_php5.c>
-    php_flag allow_url_include Off
-    php_flag expose_php Off
-</IfModule>
-
 
 ### Security and Spam ###
 
