@@ -17,7 +17,7 @@
             </li>
 
             <li>
-                {lang 'You think you will never succeed with your website?'}
+                {lang 'You think you will never succeed with your current website?'}
             </li>
 
             <li>

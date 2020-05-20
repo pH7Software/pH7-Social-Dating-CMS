@@ -16184,7 +16184,7 @@ msgid "Nowadays, competitors are so strong, and you alone, cannot do much?"
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/upsetbox.tpl:20
-msgid "You think you will never succeed with your website?"
+msgid "You think you will never succeed with your current website?"
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/upsetbox.tpl:24
