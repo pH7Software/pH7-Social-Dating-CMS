@@ -14,7 +14,7 @@
 </div>
 
 <div class="left col-lg-7 col-md-8 col-sm-7 col-xs-12">
-    <div class="folio_block">
+    <div class="folio_block animated fadeInDown">
         <h1 class="red3 italic underline">{slogan}</h1>
 
         <div class="splash_slideshow">
@@ -43,6 +43,8 @@
     </div>
 
     {if $is_users_block}
-        <div class="carousel">{{ $userDesignModel->carouselProfiles() }}</div>
+        <div class="carousel animated fadeInLeft">
+            {{ $userDesignModel->carouselProfiles() }}
+        </div>
     {/if}
 </div>
