@@ -1,4 +1,4 @@
-<div class="left col-md-8">
+<div class="left col-md-8 animated fadeInDownBig">
     {{ VideoForm::display() }}
 </div>
 
