@@ -4,7 +4,7 @@
 
 <div class="col-xs-12 col-sm-12 col-md-11 col-lg-10 col-lg-offset-1">
   <div class="row" itemscope="itemscope" itemtype="http://schema.org/Person">
-    <div class="col-xs-12 col-sm-4 col-md-3">
+    <div class="col-xs-12 col-sm-4 col-md-3 animated fadeInLeftBig">
         {{ UserDesignCoreModel::userStatus($id) }}
         {{ (new AvatarDesignCore)->lightBox($username, $first_name, $sex, 400) }}
         <h3 itemprop="name">
@@ -147,7 +147,7 @@
         {{ $design->socialMediaWidgets() }}
     </div>
 
-    <div class="col-xs-12 col-sm-6 col-md-6">
+    <div class="col-xs-12 col-sm-6 col-md-6 animated fadeInDownBig">
         {if !empty($punchline)}
             <div class="profile-section">
                 <h1 class="cinnabar-red italic center">{punchline}</h1>
@@ -222,7 +222,7 @@
         {manual_include 'interested_or_not.buttons.inc.tpl'}
     </div>
 
-    <div class="col-xs-12 col-sm-2 col-md-3">
+    <div class="col-xs-12 col-sm-2 col-md-3 animated fadeInRightBig">
         {if $is_map_enabled}
             <div class="s_bMarg">
                 <h2>{lang 'Location'}</h2>
