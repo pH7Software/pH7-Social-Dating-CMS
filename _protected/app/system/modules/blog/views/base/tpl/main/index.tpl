@@ -70,9 +70,14 @@
 
         <p>
             {if AdminCore::auth()}
-                <a class="btn btn-default btn-sm" href="{{ $design->url('blog', 'admin', 'add') }}">{lang 'Add a new Article'}</a>
+                <a class="btn btn-default btn-sm" href="{{ $design->url('blog', 'admin', 'add') }}">
+                    {lang 'Add a new Article'}
+                </a>
             {/if}
-            <a class="btn btn-default btn-sm" href="{{ $design->url('blog','main','search') }}">{lang 'Search for Blog Post'}</a>
+
+            <a class="btn btn-default btn-sm" href="{{ $design->url('blog','main','search') }}">
+                {lang 'Search for Blog Post'}
+            </a>
         </p>
         <p>
             <a href="{{ $design->url('xml','rss','xmlrouter','blog') }}">

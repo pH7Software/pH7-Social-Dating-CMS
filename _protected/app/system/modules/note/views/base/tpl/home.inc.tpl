@@ -97,8 +97,12 @@
 
     <div class="center">
         <p>
-            <a class="btn btn-default btn-sm" href="{{ $design->url('note','main','add') }}">{lang 'Add a new Article'}</a>
-            <a class="btn btn-default btn-sm" href="{{ $design->url('note','main','search') }}">{lang 'Search a Note'}</a>
+            <a class="btn btn-default btn-sm" href="{{ $design->url('note','main','add') }}">
+                {lang 'Add a new Article'}
+            </a>
+            <a class="btn btn-default btn-sm" href="{{ $design->url('note','main','search') }}">
+                {lang 'Search a Note'}
+            </a>
         </p>
         <p>
             <a href="{{ $design->url('xml','rss','xmlrouter','note') }}">

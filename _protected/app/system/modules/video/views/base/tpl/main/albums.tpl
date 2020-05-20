@@ -32,7 +32,7 @@
     {/if}
 
     {if $is_add_album_btn_shown}
-        <p class="bottom">
+        <p class="bottom s_tMarg">
             <a class="btn btn-default btn-md" href="{{ $design->url('video', 'main', 'addalbum') }}">
                 {lang 'Add a new album'}
             </a>
