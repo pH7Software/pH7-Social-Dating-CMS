@@ -67,7 +67,15 @@ class AlbumForm
                 ]
             )
         );
-        $oForm->addElement(new Button);
+        $oForm->addElement(
+            new Button(
+                t('Submit'),
+                'submit',
+                [
+                    'icon' => 'image'
+                ]
+            )
+        );
         $oForm->render();
     }
 }
