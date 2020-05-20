@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Picture / Form
  */
@@ -86,7 +86,11 @@ class PictureForm
                 ]
             )
         );
-        $oForm->addElement(new HTMLExternal('<p class="pfbc-label"><em><span class="bold">' . t('Note:') . '</span> ' . t('Please be patient while downloading pictures, this may take time (especially if you download a lot of photos at once).') . '</em></p>'));
+        $oForm->addElement(
+            new HTMLExternal(
+                '<p class="pfbc-label"><em><span class="bold">' . t('Note:') . '</span> ' . t('Please be patient while downloading pictures, this may take time (especially if you download a lot of photos at once).') . '</em></p>'
+            )
+        );
         $oForm->addElement(
             new Textarea(
                 t('Description for your photo(s):'),
@@ -96,7 +100,15 @@ class PictureForm
                 ]
             )
         );
-        $oForm->addElement(new Button(t('Upload'), 'submit', ['icon' => 'image']));
+        $oForm->addElement(
+            new Button(
+                t('Upload'),
+                'submit',
+                [
+                    'icon' => 'image'
+                ]
+            )
+        );
         $oForm->render();
     }
 

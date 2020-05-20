@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Video / Form
  */
@@ -111,7 +111,11 @@ class VideoForm
                 ]
             )
         );
-        $oForm->addElement(new HTMLExternal('</div><div class="hidden" id="embed">'));
+        $oForm->addElement(
+            new HTMLExternal(
+                '</div><div class="hidden" id="embed">'
+            )
+        );
         $oForm->addElement(
             new Textbox(
                 t('Embed URL:'),
@@ -134,8 +138,20 @@ class VideoForm
                 ]
             )
         );
-        $oForm->addElement(new Button(t('Upload'), 'submit', ['icon' => 'video']));
-        $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'form.js"></script>'));
+        $oForm->addElement(
+            new Button(
+                t('Upload'),
+                'submit',
+                [
+                    'icon' => 'video'
+                ]
+            )
+        );
+        $oForm->addElement(
+            new HTMLExternal(
+                '<script src="' . PH7_URL_STATIC . PH7_JS . 'form.js"></script>'
+            )
+        );
         $oForm->render();
     }
 
