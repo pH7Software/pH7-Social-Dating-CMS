@@ -196,7 +196,7 @@ class UserController extends Controller
     {
         if (!(new Validate)->email($sUserEmail)) {
             Header::redirect(
-                $this->httpRequest->previousPage(),
+                Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
                 t("The URL isn't valid. It doesn't contain the user's email as a parameter."),
                 Design::ERROR_TYPE
             );
