@@ -821,7 +821,7 @@ msgid ""
 msgstr ""
 
 #: _protected/app/system/core/forms/ChangePasswordCoreForm.php:32
-msgid "Old password:"
+msgid "Current password:"
 msgstr ""
 
 #: _protected/app/system/core/forms/ChangePasswordCoreForm.php:35

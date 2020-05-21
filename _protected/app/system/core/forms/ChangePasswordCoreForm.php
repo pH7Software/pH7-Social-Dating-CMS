@@ -32,9 +32,24 @@ class ChangePasswordCoreForm
 
         $oForm = new \PFBC\Form('form_change_password');
         $oForm->configure(['action' => '']);
-        $oForm->addElement(new Hidden('submit_change_password', 'form_change_password'));
+        $oForm->addElement(
+            new Hidden(
+                'submit_change_password',
+                'form_change_password'
+            )
+        );
         $oForm->addElement(new Token('change_password'));
-        $oForm->addElement(new Password(t('Old password:'), 'old_password', ['required' => 1]));
+
+
+        $oForm->addElement(
+            new Password(
+                t('Current password:'),
+                'current_password',
+                [
+                    'required' => 1
+                ]
+            )
+        );
         $oForm->addElement(
             new Password(
                 t('New password:'),
@@ -48,10 +63,34 @@ class ChangePasswordCoreForm
                 ]
             )
         );
-        $oForm->addElement(new HTMLExternal('<span class="input_error password"></span>'));
-        $oForm->addElement(new Password(t('Repeat new password:'), 'new_password2', ['required' => 1]));
-        $oForm->addElement(new Button(t('Change Password!'), 'submit', ['icon' => 'key']));
-        $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
+        $oForm->addElement(
+            new HTMLExternal(
+                '<span class="input_error password"></span>'
+            )
+        );
+        $oForm->addElement(
+            new Password(
+                t('Repeat new password:'),
+                'new_password2',
+                [
+                    'required' => 1
+                ]
+            )
+        );
+        $oForm->addElement(
+            new Button(
+                t('Change Password!'),
+                'submit',
+                [
+                    'icon' => 'key'
+                ]
+            )
+        );
+        $oForm->addElement(
+            new HTMLExternal(
+                '<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'
+            )
+        );
         $oForm->render();
     }
 }

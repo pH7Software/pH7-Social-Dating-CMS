@@ -47,12 +47,12 @@ class ChangePasswordCoreFormProcess extends Form
             $mLogin = $oPasswordModel->adminLogin(
                 $sEmail,
                 $this->session->get('admin_username'),
-                $this->httpRequest->post('old_password', Http::NO_CLEAN)
+                $this->httpRequest->post('current_password', Http::NO_CLEAN)
             );
         } else {
             $mLogin = $oPasswordModel->login(
                 $sEmail,
-                $this->httpRequest->post('old_password', Http::NO_CLEAN),
+                $this->httpRequest->post('current_password', Http::NO_CLEAN),
                 $sTable
             );
         }
@@ -60,7 +60,7 @@ class ChangePasswordCoreFormProcess extends Form
         // Check
         if ($this->httpRequest->post('new_password', Http::NO_CLEAN) !== $this->httpRequest->post('new_password2', Http::NO_CLEAN)) {
             \PFBC\Form::setError('form_change_password', t("The passwords don't match."));
-        } elseif ($this->httpRequest->post('old_password', Http::NO_CLEAN) === $this->httpRequest->post('new_password', Http::NO_CLEAN)) {
+        } elseif ($this->httpRequest->post('current_password', Http::NO_CLEAN) === $this->httpRequest->post('new_password', Http::NO_CLEAN)) {
             \PFBC\Form::setError('form_change_password', t('Your current and new passwords are identical. So why do you want to change it?'));
         } elseif ($mLogin !== true) {
             \PFBC\Form::setError('form_change_password', t("Your current password isn't correct."));
