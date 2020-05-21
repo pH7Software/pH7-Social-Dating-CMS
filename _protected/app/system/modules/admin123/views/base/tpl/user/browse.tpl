@@ -9,7 +9,7 @@
                     <th>{lang 'User ID#'}</th>
                     <th>{lang 'Email Address'}</th>
                     <th>{lang 'User'}</th>
-                    <th>{lang 'Avatar'}</th>
+                    <th>{lang 'Profile Photo'}</th>
                     <th>{lang 'IP'}</th>
                     <th>{lang 'Membership Group + ID'}</th>
                     <th>{lang 'Registration Date'}</th>
