@@ -114,7 +114,7 @@
                             <a href="{{ $design->url('user', 'setting', 'edit', $user->profileId) }}" title="{lang "Edit User's Profile Information"}">{lang 'Edit'}</a> |
                             <a href="{{ $design->url('user', 'setting', 'avatar', "$user->profileId,$user->username,$user->firstName,$user->sex", false) }}" title="{lang "Edit User's Profile Photo"}">{lang 'Profile Photo'}</a> |
                             <a href="{{ $design->url('user','setting','design', "$user->profileId,$user->username,$user->firstName,$user->sex", false) }}" title="{lang "Edit the Wallpaper of the User's Profile Page"}">{lang 'Wallpaper'}</a> |
-                            <a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'password', $user->email, false) }}" title="{lang "Edit the User's Password"}">{lang 'Password'}</a>
+                            <a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'password') }}{% $user->email %}" title="{lang "Edit the User's Password"}">{lang 'Password'}</a>
                             {if $is_mail_enabled}
                                 | <a href="{{ $design->url('mail', 'main', 'compose', $user->username) }}" title="{lang 'Send a message to this user'}">{lang 'Send PM'}</a>
                             {/if}
