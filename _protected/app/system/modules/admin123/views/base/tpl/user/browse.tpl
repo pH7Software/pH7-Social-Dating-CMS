@@ -1,4 +1,4 @@
-<form method="post" action="{{ $design->url(PH7_ADMIN_MOD,'user','browse') }}">
+<form method="post" action="{{ $design->url(PH7_ADMIN_MOD, 'user', 'browse') }}">
     {{ $designSecurity->inputToken('user_action') }}
 
     <div class="table-responsive">
@@ -27,7 +27,7 @@
                       <button
                           class="btn btn-default btn-md"
                           type="submit"
-                          formaction="{{ $design->url(PH7_ADMIN_MOD,'user','banall') }}"
+                          formaction="{{ $design->url(PH7_ADMIN_MOD, 'user', 'banall') }}"
                           >{lang 'Ban'}
                       </button>
                   </th>
@@ -35,7 +35,7 @@
                       <button
                           class="btn btn-default btn-md"
                           type="submit"
-                          formaction="{{ $design->url(PH7_ADMIN_MOD,'user','unbanall') }}"
+                          formaction="{{ $design->url(PH7_ADMIN_MOD, 'user', 'unbanall') }}"
                           >{lang 'UnBan'}
                       </button>
                   </th>
@@ -44,7 +44,7 @@
                           class="red btn btn-default btn-md"
                           type="submit"
                           onclick="return checkChecked()"
-                          formaction="{{ $design->url(PH7_ADMIN_MOD,'user','deleteall') }}"
+                          formaction="{{ $design->url(PH7_ADMIN_MOD, 'user', 'deleteall') }}"
                           >{lang 'Delete'}
                       </button>
                   </th>
@@ -52,7 +52,7 @@
                       <button
                           class="btn btn-default btn-md"
                           type="submit"
-                          formaction="{{ $design->url(PH7_ADMIN_MOD,'user','approveall') }}"
+                          formaction="{{ $design->url(PH7_ADMIN_MOD, 'user', 'approveall') }}"
                           >{lang 'Approve'}
                       </button>
                   </th>
@@ -60,7 +60,7 @@
                       <button
                           class="btn btn-default btn-md"
                           type="submit"
-                          formaction="{{ $design->url(PH7_ADMIN_MOD,'user','disapproveall') }}"
+                          formaction="{{ $design->url(PH7_ADMIN_MOD, 'user', 'disapproveall') }}"
                           >{lang 'Disapprove'}
                       </button>
                   </th>

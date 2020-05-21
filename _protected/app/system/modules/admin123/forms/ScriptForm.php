@@ -42,7 +42,15 @@ class ScriptForm
                 ]
             )
         );
-        $oForm->addElement(new Button(t('Save Changes'), 'submit', ['icon' => 'check']));
+        $oForm->addElement(
+            new Button(
+                t('Save Changes'),
+                'submit',
+                [
+                    'icon' => 'check'
+                ]
+            )
+        );
         $oForm->render();
     }
 }

@@ -40,7 +40,6 @@ class ChangePasswordCoreForm
         );
         $oForm->addElement(new Token('change_password'));
 
-
         $oForm->addElement(
             new Password(
                 t('Current password:'),
