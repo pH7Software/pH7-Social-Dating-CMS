@@ -1,10 +1,10 @@
-<div class="col-xs-10">
-    <div class="pull-left col-xs-6 animated fadeInLeft">
+<div class="col-xs-12 col-md-10">
+    <div class="pull-left col-xs-12 col-md-6 animated fadeInLeft">
         {include 'progressbar.inc.tpl'}
         {{ JoinForm::step1() }}
     </div>
 
-    <div class="pull-right col-xs-4 animated fadeInRight">
+    <div class="pull-right col-xs-12 col-md-4 animated fadeInRight">
         <div class="center">
             <p>
                 {lang 'Already registered?'} <a href="{{ $design->url('user','main','login') }}"><strong>{lang 'Sign In!'}</strong></a>
