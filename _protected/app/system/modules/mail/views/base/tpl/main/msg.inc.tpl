@@ -4,8 +4,8 @@
   </p>
 {else}
   {* Set Variables *}
-  {{ $usernameSender = (empty($msg->username)) ? PH7_ADMIN_USERNAME : escape($msg->username) }}
-  {{ $firstNameSender = (empty($msg->firstName)) ? PH7_ADMIN_USERNAME : escape($msg->firstName) }}
+  {{ $username_sender = (empty($msg->username)) ? PH7_ADMIN_USERNAME : escape($msg->username) }}
+  {{ $firstName_sender = (empty($msg->firstName)) ? PH7_ADMIN_USERNAME : escape($msg->firstName) }}
   {{ $subject = escape(Framework\Security\Ban\Ban::filterWord($msg->title)) }}
   {{ $message = Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($msg->message)) }}
   {{ $is_outbox = ($msg->sender == $member_id) }}
@@ -17,7 +17,7 @@
   <div class="center">
     <dl>
       <dt>{lang 'Author:'}</dt>
-      <dd>{{ $avatarDesign->get($usernameSender, $firstNameSender, null, 32) }}</dd>
+      <dd>{{ $avatarDesign->get($username_sender, $firstName_sender, null, 32) }}</dd>
       <dt>{lang 'Subject:'}</dt>
       <dd>{subject}</dd>
       <dt>{lang 'Message:'}</dt>
@@ -26,7 +26,7 @@
       <dd>{% Framework\Date\Various::textTimeStamp($msg->sendDate) %}</dd>
     </dl>
 
-    <div><a href="{{ $design->url('mail','main','compose',"$usernameSender,$subject") }}">{lang 'Reply'}</a> | {{ LinkCoreForm::display($label_txt, 'mail', 'main', $set_to, array('id'=>$msg->messageId)) }}
+    <div><a href="{{ $design->url('mail','main','compose',"$username_sender,$subject") }}">{lang 'Reply'}</a> | {{ LinkCoreForm::display($label_txt, 'mail', 'main', $set_to, array('id'=>$msg->messageId)) }}
     {if $is_trash} | {{ LinkCoreForm::display(t('Move to Inbox'), 'mail', 'main', 'setrestore', array('id'=>$msg->messageId)) }}{/if}</div>
   </div>
 {/if}

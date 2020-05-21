@@ -11,8 +11,8 @@
 
             {each $msg in $msgs}
                 {* Set Variables *}
-                {{ $usernameSender = (empty($msg->username)) ? PH7_ADMIN_USERNAME : $msg->username }}
-                {{ $firstNameSender = (empty($msg->firstName)) ? PH7_ADMIN_USERNAME : $msg->firstName }}
+                {{ $username_sender = (empty($msg->username)) ? PH7_ADMIN_USERNAME : $msg->username }}
+                {{ $firstName_sender = (empty($msg->firstName)) ? PH7_ADMIN_USERNAME : $msg->firstName }}
                 {{ $subject = escape(substr(Framework\Security\Ban\Ban::filterWord($msg->title, false),0,20), true) }}
                 {{ $message = escape(Framework\Security\Ban\Ban::filterWord($msg->message), true) }}
                 {{ $is_outbox = ($msg->sender == $member_id) }}
@@ -31,7 +31,7 @@
                         <span class="label label-primary">{lang 'New'}</span>
                     {/if}
 
-                    <div class="user">{{ $avatarDesign->get($usernameSender, $firstNameSender, null, 32) }}</div>
+                    <div class="user">{{ $avatarDesign->get($username_sender, $firstName_sender, null, 32) }}</div>
 
                     {if $is_admin}
                         <div class="content" title="{lang 'See more'}"><a href="#divShow_{% $msg->messageId %}">
@@ -55,7 +55,7 @@
                     {/if}
 
                     <div class="action">
-                        <a href="{{ $design->url('mail','main','compose',"$usernameSender,$subject") }}">{lang 'Reply'}</a> | <a href="javascript:void(0)" onclick="mail('{move_to}',{% $msg->messageId %},'{csrf_token}')">{label_txt}</a>
+                        <a href="{{ $design->url('mail','main','compose',"$username_sender,$subject") }}">{lang 'Reply'}</a> | <a href="javascript:void(0)" onclick="mail('{move_to}',{% $msg->messageId %},'{csrf_token}')">{label_txt}</a>
                         {if $is_trash}
                             | <a href="javascript:void(0)" onclick="mail('restore',{% $msg->messageId %},'{csrf_token}')">{lang 'Restore'}</a>
                         {/if}
