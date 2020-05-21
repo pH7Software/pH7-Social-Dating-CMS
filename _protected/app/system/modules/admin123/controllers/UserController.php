@@ -194,19 +194,18 @@ class UserController extends Controller
 
     public function password($sUserEmail = null)
     {
-        $this->view->page_title = $this->view->h1_title = t('Update User Password');
-
         if (!(new Validate)->email($sUserEmail)) {
             Header::redirect(
                 $this->httpRequest->previousPage(),
                 t("The URL isn't valid. It doesn't contain the user's email as a parameter."),
                 Design::ERROR_TYPE
             );
+        } else {
+            $this->view->page_title = $this->view->h1_title = t('Update User Password');
+            $this->view->user_password = $sUserEmail;
+
+            $this->output();
         }
-
-        $this->view->user_password = $sUserEmail;
-
-        $this->output();
     }
 
     public function loginUserAs($iId = null)
