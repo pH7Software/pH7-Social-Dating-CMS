@@ -14045,7 +14045,7 @@ msgid "Send a message to this user"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
-msgid "Send Mail"
+msgid "Send PM"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/user/browse.cpl.php:19
