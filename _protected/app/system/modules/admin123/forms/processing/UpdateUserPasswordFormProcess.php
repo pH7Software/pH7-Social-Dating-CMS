@@ -11,6 +11,8 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class UpdateUserPasswordFormProcess extends Form
 {
@@ -28,23 +30,30 @@ class UpdateUserPasswordFormProcess extends Form
         if ($this->httpRequest->post('new_password', Http::NO_CLEAN) !== $this->httpRequest->post('new_password2', Http::NO_CLEAN)) {
             \PFBC\Form::setError('form_update_password', t("The passwords don't match."));
         } else {
-            $this->updatePassword($sUserEmail);
-
-            \PFBC\Form::setSuccess(
-                'form_update_password',
-                t('The user password has been successfully changed!')
-            );
+            if ($this->updatePassword($sUserEmail)) {
+                Header::redirect(
+                    Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
+                    t('The user password has been successfully changed!')
+                );
+            } else {
+                \PFBC\Form::setError(
+                    'form_update_password',
+                    t("The password couldn't be updated for the account with email: %0%", $sUserEmail)
+                );
+            }
         }
     }
 
     /**
      * @param string $sUserEmail
      *
+     * @return bool
+     *
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
     private function updatePassword($sUserEmail)
     {
-        (new UserCoreModel)->changePassword(
+        return (new UserCoreModel)->changePassword(
             $sUserEmail,
             $this->httpRequest->post('new_password', Http::NO_CLEAN),
             DbTableName::MEMBER
