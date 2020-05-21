@@ -83,7 +83,7 @@
         {if $is_mail_enabled AND $is_logged AND !$is_own_profile}
             <li>
                 <a rel="nofollow" href="{mail_link}">
-                    <span>{lang 'Send Message'}</span>
+                    <span>{lang 'Message'}</span>
                 </a>
             </li>
         {/if}

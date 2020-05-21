@@ -208,7 +208,7 @@
             <ul class="dropdown-menu" role="menu">
               <li><a href="{{ $design->url('user','setting','index') }}" title="{lang 'My Settings'}"><i class="fa fa-cog fa-fw"></i> {lang 'Edit Profile'}</a></li>
               <li><a href="{% (new UserCore)->getProfileLink($username) %}" title="{lang 'See My Profile'}"><i class="fa fa-user fa-fw"></i> {lang 'See My Profile'}</a></li>
-              <li><a href="{{ $design->url('user','setting','avatar') }}" title="{lang 'Change Profile Photo'}"><i class="fa fa-upload"></i> {lang 'Change Profile Photo'}</a></li>
+              <li><a href="{{ $design->url('user','setting','avatar') }}" title="{lang 'Change Profile Photo'}"><i class="fa fa-upload"></i> {lang 'Profile Photo'}</a></li>
 
               {if $is_picture_enabled}
                 <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('picture','main','index') }}" title="{lang 'Photo Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-picture-o"></i> {lang 'Photo Gallery'}</a>

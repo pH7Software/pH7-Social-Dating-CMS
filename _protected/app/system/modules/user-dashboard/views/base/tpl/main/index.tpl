@@ -8,7 +8,7 @@
             <ul>
                 <li>
                     <a href="{{ $design->url('user','setting','avatar') }}" title="{lang 'Change My Profile Photo'}">
-                        <i class="fa fa-upload"></i> {lang 'Change Profile Photo'}
+                        <i class="fa fa-upload"></i> {lang 'Profile Photo'}
                     </a>
                 </li>
                 <li>
