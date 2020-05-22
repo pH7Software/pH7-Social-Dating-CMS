@@ -171,15 +171,15 @@ namespace PH7\Framework\Translate {
          */
         public function init()
         {
-            if ($this->doesUserLangExists()) {
+            if ($this->doesUserLangExist()) {
                 $this->sLangName = $this->sUserLang;
                 include PH7_PATH_APP_LANG . $this->sUserLang . '/language.php';
                 date_default_timezone_set($this->oConfig->values['language.application']['timezone']);
-            } elseif ($this->doesDefaultSettingLangExists()) {
+            } elseif ($this->doesDefaultSettingLangExist()) {
                 $this->sLangName = $this->sDefaultLang;
                 include PH7_PATH_APP_LANG . $this->sDefaultLang . '/language.php';
                 date_default_timezone_set($this->oConfig->values['language.application']['timezone']);
-            } elseif ($this->doesSystemLangExists()) {
+            } elseif ($this->doesSystemLangExist()) {
                 $this->sLangName = PH7_DEFAULT_LANG;
                 include PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . '/language.php';
                 date_default_timezone_set($this->oConfig->values['language.application']['timezone']);
@@ -218,7 +218,7 @@ namespace PH7\Framework\Translate {
         /**
          * @return bool
          */
-        private function doesUserLangExists()
+        private function doesUserLangExist()
         {
             return !empty($this->sUserLang) &&
                 $this->oConfig->load(PH7_PATH_APP_LANG . $this->sUserLang . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) &&
@@ -228,7 +228,7 @@ namespace PH7\Framework\Translate {
         /**
          * @return bool
          */
-        private function doesDefaultSettingLangExists()
+        private function doesDefaultSettingLangExist()
         {
             return $this->oConfig->load(PH7_PATH_APP_LANG . $this->sDefaultLang . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) &&
                 is_file(PH7_PATH_APP_LANG . $this->sDefaultLang . '/language.php');
@@ -237,7 +237,7 @@ namespace PH7\Framework\Translate {
         /**
          * @return bool
          */
-        private function doesSystemLangExists()
+        private function doesSystemLangExist()
         {
             return $this->oConfig->load(PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) &&
                 is_file(PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . '/language.php');
