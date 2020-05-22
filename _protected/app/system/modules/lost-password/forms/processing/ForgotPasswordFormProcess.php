@@ -83,7 +83,8 @@ class ForgotPasswordFormProcess extends Form
     private function getResetPasswordUrl(stdClass $oData)
     {
         /**
-         * @internal We place the text outside of Uri::get(), otherwise special characters will be deleted and the parameters passed in the url will be unusable thereafter.
+         * @internal We place the email and hash outside of `Uri::get()`,
+         * otherwise special characters (such as `@`) will be renamed and the parameters passed in the URL will be unusable thereafter.
          * */
         $sResetPwdUrl = Uri::get(
             'lost-password',
