@@ -45,11 +45,15 @@ class Language
     /**
      * Get the language of the client browser.
      *
-     * @return string First two letters of the languages ​​of the client browser.
+     * @return string|null First two letters of the languages ​​of the client browser.
      */
     public function getBrowser()
     {
-        $sLang = explode(',', @$_SERVER['HTTP_ACCEPT_LANGUAGE']);
+        if (empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+            return null;
+        }
+
+        $sLang = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 
         return htmlspecialchars(
             strtolower(
