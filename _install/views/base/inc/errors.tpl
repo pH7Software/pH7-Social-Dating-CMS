@@ -1,7 +1,7 @@
 {if $errors}
     <div class="error">
-        {section name=i loop=$errors}
-            <p>{$errors[i]}</p>
+        {section name=key loop=$errors}
+            <p>{$errors[key]}</p>
         {/section}
     </div>
 {/if}

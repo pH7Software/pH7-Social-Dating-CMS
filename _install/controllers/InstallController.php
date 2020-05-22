@@ -172,8 +172,11 @@ class InstallController extends Controller
         }
 
         $this->oView->assign('sept_number', 3);
-        $this->oView->assign('errors', @$aErrors);
-        unset($aErrors);
+
+        if (!empty($aErrors) && is_array($aErrors)) {
+            $this->oView->assign('errors', $aErrors);
+        }
+
         $this->oView->display('config_path.tpl');
     }
 
@@ -294,8 +297,10 @@ class InstallController extends Controller
         $this->oView->assign('def_db_charset', DbDefaultConfig::CHARSET);
 
         $this->oView->assign('sept_number', 4);
-        $this->oView->assign('errors', @$aErrors);
-        unset($aErrors);
+
+        if (!empty($aErrors) && is_array($aErrors)) {
+            $this->oView->assign('errors', $aErrors);
+        }
 
         $this->oView->display('config_system.tpl');
     }
@@ -435,8 +440,11 @@ class InstallController extends Controller
         $this->oView->assign('def_site_name', self::DEFAULT_SITE_NAME);
         $this->oView->assign('def_admin_username', self::DEFAULT_ADMIN_USERNAME);
         $this->oView->assign('sept_number', 5);
-        $this->oView->assign('errors', @$aErrors);
-        unset($aErrors);
+
+        if (!empty($aErrors) && is_array($aErrors)) {
+            $this->oView->assign('errors', $aErrors);
+        }
+
         $this->oView->display('config_site.tpl');
     }
 
@@ -500,8 +508,11 @@ class InstallController extends Controller
         }
 
         $this->oView->assign('sept_number', 6);
-        $this->oView->assign('errors', @$aErrors);
-        unset($aErrors);
+
+        if (!empty($aErrors) && is_array($aErrors)) {
+            $this->oView->assign('errors', $aErrors);
+        }
+
         $this->oView->display('niche.tpl');
     }
 
