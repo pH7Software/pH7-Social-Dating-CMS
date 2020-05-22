@@ -55,6 +55,8 @@ class ForgotPasswordFormProcess extends Form
      * @param int $iProfileId The user profile ID.
      *
      * @return int Number of recipients who were accepted for delivery.
+     *
+     * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
     private function sendMail($sTable, $iProfileId)
     {
