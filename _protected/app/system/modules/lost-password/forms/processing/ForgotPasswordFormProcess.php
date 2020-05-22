@@ -13,6 +13,7 @@ defined('PH7') or die('Restricted access');
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Util\Various;
+use stdClass;
 
 class ForgotPasswordFormProcess extends Form
 {
@@ -58,20 +59,12 @@ class ForgotPasswordFormProcess extends Form
     protected function sendMail($sTable, $iProfileId)
     {
         $oData = $this->oUserModel->readProfile($iProfileId, $sTable);
-
-        /** We place the text outside of Uri::get(), otherwise special characters will be deleted and the parameters passed in the url will be unusable thereafter. **/
-        $sResetUrl = Uri::get(
-            'lost-password',
-            'main',
-            'reset',
-            $this->httpRequest->get('mod')
-        );
-        $sResetUrl .= PH7_SH . $oData->email . PH7_SH . $oData->hashValidation;
+        $sResetPwdUrl = $this->getResetPasswordUrl($oData);
 
         $this->view->content = t('Hello %0%!', $oData->username) . '<br />' .
             t('Someone (from the IP: %0%) has requested a new password for this account.', $this->design->ip(null, false)) . '<br />' .
             t('If you requested it, click on the link below, otherwise please ignore this email and your password will remain unchanged.') .
-            '<br /><a href="' . $sResetUrl . '">' . $sResetUrl . '</a>';
+            '<br /><a href="' . $sResetPwdUrl . '">' . $sResetPwdUrl . '</a>';
 
         $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/lost-password/confirm-lost-password.tpl', $oData->email);
 
@@ -83,5 +76,21 @@ class ForgotPasswordFormProcess extends Form
         unset($oData);
 
         return (new Mail)->send($aInfo, $sMessageHtml);
+    }
+
+    private function getResetPasswordUrl(stdClass $oData)
+    {
+        /**
+         * @internal We place the text outside of Uri::get(), otherwise special characters will be deleted and the parameters passed in the url will be unusable thereafter.
+         * */
+        $sResetPwdUrl = Uri::get(
+            'lost-password',
+            'main',
+            'reset',
+            $this->httpRequest->get('mod')
+        );
+        $sResetPwdUrl .= PH7_SH . $oData->email . PH7_SH . $oData->hashValidation;
+
+        return $sResetPwdUrl;
     }
 }
