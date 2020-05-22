@@ -4,5 +4,6 @@
             {lang 'Back to Browse Users'}
         </a>
     </p>
+
     {{ UpdateUserPassword::display($user_password) }}
 </div>
