@@ -94,13 +94,7 @@ class BrowsePictureAjax
             $this->aModified[$iIndex] = filemtime($aG[$iIndex]);
         }
 
-        // Multisort will sort the array with the filenames
-        // according to their timestamps, given in $modified:
-
         array_multisort($this->aModified, SORT_DESC, $this->aNames);
-
-        // browse.php can also paginate results with an optional
-        // GET parameter with the filename of the image to start from:
 
         if ($this->oHttpRequest->getExists('start') && strlen($this->oHttpRequest->get('start') > 1)) {
             $this->mStart = array_search($this->oHttpRequest->get('start'), $this->aNames);
