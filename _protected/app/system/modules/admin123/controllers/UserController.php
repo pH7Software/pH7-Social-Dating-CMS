@@ -194,7 +194,7 @@ class UserController extends Controller
 
     public function password($sUserEmail = null)
     {
-        if (!(new Validate)->email($sUserEmail)) {
+        if (!empty($sUserEmail) && !(new Validate)->email($sUserEmail)) {
             Header::redirect(
                 Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
                 t("The URL isn't valid. It doesn't contain the user's email as a parameter."),
