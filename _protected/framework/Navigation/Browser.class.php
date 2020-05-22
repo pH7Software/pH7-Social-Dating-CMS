@@ -42,6 +42,7 @@ class Browser
     {
         $oStr = new Str;
         $sLang = explode(',', Server::getVar(Server::HTTP_ACCEPT_LANGUAGE))[0];
+
         // The rtrim function is slightly faster than chop function
         $iFullLangCode = ($bFullLangCode ? 5 : 2);
 

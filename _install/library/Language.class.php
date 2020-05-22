@@ -45,7 +45,7 @@ class Language
     /**
      * Get the language of the client browser.
      *
-     * @return string|null First two letters of the languages ​​of the client browser.
+     * @return string|null First two letters of the languages of the client browser.
      */
     public function getBrowser()
     {
