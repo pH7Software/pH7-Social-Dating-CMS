@@ -56,7 +56,7 @@ class ForgotPasswordFormProcess extends Form
      *
      * @return int Number of recipients who were accepted for delivery.
      */
-    protected function sendMail($sTable, $iProfileId)
+    private function sendMail($sTable, $iProfileId)
     {
         $oData = $this->oUserModel->readProfile($iProfileId, $sTable);
         $sResetPwdUrl = $this->getResetPasswordUrl($oData);
