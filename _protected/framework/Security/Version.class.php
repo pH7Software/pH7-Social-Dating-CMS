@@ -117,7 +117,7 @@ final class Version
     }
 
     /**
-     * @return array|bool
+     * @return array|bool Returns an array with the release details, or FALSE if cannot retrieve the remote info.
      */
     private static function retrieveXmlInfoFromRemoteServer()
     {
