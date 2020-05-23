@@ -74,7 +74,7 @@
 
             {if $is_map_enabled}
               <li>
-                <a href="{{ $design->url('map', 'country', 'index', Framework\Geo\Ip\Geo::getCountry() . PH7_SH. Framework\Geo\Ip\Geo::getCountry()) }}" title="{lang 'Users nearby through the map!'}"><i class="fa fa-map-marker"></i> {lang 'People Nearby'}</a>
+                <a href="{{ $design->url('map', 'country', 'index', Framework\Geo\Ip\Geo::getCountry() . PH7_SH. Framework\Geo\Ip\Geo::getCity()) }}" title="{lang 'Users nearby through the map!'}"><i class="fa fa-map-marker"></i> {lang 'People Nearby'}</a>
               </li>
             {/if}
 
