@@ -27,11 +27,11 @@ class ValidateSiteCoreTest extends PHPUnit_Framework_TestCase
         $this->oValidateSite = new ValidateSiteCore($oSession);
     }
 
-    public function testInjectJsSuggestionBox()
+    public function testInjectAssetSuggestionBoxFiles()
     {
         $oDesign = Phake::mock(Design::class);
 
-        $this->oValidateSite->injectJsSuggestionBox($oDesign);
+        $this->oValidateSite->injectAssetSuggestionBoxFiles($oDesign);
 
         Phake::verify($oDesign)->addJs(Phake::anyParameters());
     }

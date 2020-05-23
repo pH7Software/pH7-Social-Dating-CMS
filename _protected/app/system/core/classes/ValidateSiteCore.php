@@ -19,6 +19,8 @@ class ValidateSiteCore
 {
     const SESS_IS_VISITED = 'suggestionbox_visited';
     const VALIDATE_FORM_PAGE_DELAY = '2 months';
+
+    const SUGGESTION_BOX_CSS_FILENAME = 'suggestionbox.css';
     const SUGGESTION_BOX_JS_FILENAME = 'suggestionbox.js';
 
     /**
@@ -77,8 +79,12 @@ class ValidateSiteCore
         return $this->shouldSeeDialog();
     }
 
-    public function injectJsSuggestionBox(Design $oDesign)
+    public function injectAssetSuggestionBoxFiles(Design $oDesign)
     {
+        $oDesign->addCss(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . 'ph7cms-helper' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
+            self::SUGGESTION_BOX_CSS_FILENAME
+        );
         $oDesign->addJs(
             PH7_LAYOUT . PH7_SYS . PH7_MOD . 'ph7cms-helper' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
             self::SUGGESTION_BOX_JS_FILENAME
