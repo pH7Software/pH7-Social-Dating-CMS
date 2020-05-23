@@ -13668,7 +13668,7 @@ msgid "Switch back to Admin Panel"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/info/software.cpl.php:19
-msgid "Let others know about pH7CMS"
+msgid "Let others know about pH7CMS 🤗"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/info/software.cpl.php:19
@@ -13719,7 +13719,7 @@ msgid "Contribute to %software_name%"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/info/software.cpl.php:19
-msgid "Give a Nice Review on Sourceforge"
+msgid "Give a Nice Review on Sourceforge 💫"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/infotop_menu.inc.cpl.php:19
