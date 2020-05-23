@@ -14,7 +14,7 @@
         </div>
 
         <div class="panel panel-default">
-            <h2 class="panel-heading underline">{lang 'Software Information'}</h2>
+            <h2 class="panel-heading underline">{lang 'Software Information 👀'}</h2>
             <div class="panel-body">
                 <ul class="list-group">
                     <li class="list-group-item">
@@ -33,7 +33,7 @@
         </div>
 
         <div class="panel panel-default">
-            <h2 class="panel-heading underline">{lang 'Software Version'}</h2>
+            <h2 class="panel-heading underline">{lang 'Software Version ✅'}</h2>
             <div class="panel-body">
                 <ul class="list-group">
                     <li class="list-group-item">{lang 'Version: %software_version%'}</li>
@@ -45,12 +45,12 @@
         </div>
 
         <div class="panel panel-default">
-            <h2 class="panel-heading underline">{lang 'Help %software_name%'}</h2>
+            <h2 class="panel-heading underline">{lang 'Help %software_name% 🏆'}</h2>
             <div class="panel-body">
                 <ul class="list-group">
                     <li class="list-group-item">
                         <a class="bold" href="{{ $design->url('ph7cms-helper','main','suggestionbox','?box=donationbox') }}">
-                            {lang 'Contribute to %software_name%'}
+                            {lang 'Contribute to %software_name% 💪'}
                         </a>
                     </li>
                     <li class="list-group-item">

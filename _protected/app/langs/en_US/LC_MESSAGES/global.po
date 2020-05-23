@@ -13678,7 +13678,7 @@ msgid ""
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/info/software.cpl.php:19
-msgid "Software Information"
+msgid "Software Information 👀"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/info/software.cpl.php:19
@@ -13691,7 +13691,7 @@ msgid "Author: %0%"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/info/software.cpl.php:19
-msgid "Software Version"
+msgid "Software Version ✅"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/info/software.cpl.php:19
@@ -13711,11 +13711,11 @@ msgid "Release Date: %0%"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/info/software.cpl.php:19
-msgid "Help %software_name%"
+msgid "Help %software_name% 🏆"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/info/software.cpl.php:19
-msgid "Contribute to %software_name%"
+msgid "Contribute to %software_name% 💪"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/info/software.cpl.php:19
