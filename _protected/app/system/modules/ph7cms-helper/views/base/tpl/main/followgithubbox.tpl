@@ -1,6 +1,8 @@
 <div class="col-md-12">
     <div id="box_block" class="center">
-        <h1>{lang "Follow <a href='%0%'>pH7CMS's Author</a> on Github!", $config->values['module.setting']['github.author_profile_link']}</h1>
+        <h1>
+            {lang "Follow <a href='%0%'>pH7CMS's Author</a> on Github!", $config->values['module.setting']['github.author_profile_link']}
+        </h1>
 
         <p>&nbsp;</p>
 

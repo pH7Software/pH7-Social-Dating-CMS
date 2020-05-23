@@ -34,7 +34,7 @@ var $amendBoxBgColor = (function () {
     ];
 
     var sRandomHexColor = aHexColors[Math.floor((Math.random() * aHexColors.length))];
-    $('#cboxContent').css('background-color', sRandomHexColor + ' !important')
+    $('#cboxContent').css('background-color', sRandomHexColor + ' !important');
 });
 
 $(document).ready(function () {
