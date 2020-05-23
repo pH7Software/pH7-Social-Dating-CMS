@@ -162,18 +162,6 @@
           {designModel.ad(728, 90)}
       </div>
 
-      {* To avoid scammers *}
-      {if $is_user_auth AND $current_url != $url_root}
-        <div class="warning_block center">
-          <p>
-            <strong>{lang 'Attention!'}</strong>
-            {lang 'Some of the women (or men) profiles you see on dating sites might be scams to collect money.'}<br />
-            {lang 'People who are really interested in you will never ask for money.'}<br />
-            {lang "Be careful, don't send the money to anybody!"}
-          </p>
-        </div>
-      {/if}
-
       <div role="contentinfo">
         <div class="ft_copy">
           {{ $design->littleSocialMediaWidgets() }}
