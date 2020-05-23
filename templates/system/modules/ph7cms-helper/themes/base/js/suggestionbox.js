@@ -29,7 +29,8 @@ var $amendBoxBgColor = (function () {
         '#ffccbc',
         '#e0f7fa',
         '#fce4ec',
-        '#b2dfdb'
+        '#b2dfdb',
+        '#b3dfae'
     ];
 
     var sRandomHexColor = aHexColors[Math.floor((Math.random() * aHexColors.length))];
