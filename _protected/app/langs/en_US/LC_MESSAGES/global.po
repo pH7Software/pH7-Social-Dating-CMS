@@ -1830,11 +1830,11 @@ msgid "Admin Panel"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/MainController.php:35
-msgid "Admin Dashboard"
+msgid "Admin Dashboard 🚀"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/MainController.php:36
-msgid "Hi <em>%0%</em>! Welcome back to your site!"
+msgid "Hi <em>%0%</em>! 🔆 Welcome back to your site!"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/MainController.php:37
