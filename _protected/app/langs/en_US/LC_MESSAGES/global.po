@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pH7CMS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-12 23:42+1300\n"
-"PO-Revision-Date: 2019-02-12 23:42+1300\n"
+"PO-Revision-Date: 2020-05-23 16:24+1000\n"
 "Last-Translator: Pierre-Henry Soria <hi@ph7.me>\n"
 "Language-Team: ¡pH7! - Pierre-Henry Soria <hello@ph7cms.com>\n"
 "Language: en_US\n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Poedit-Basepath: ../../../../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: _protected/app/includes/classes/Cron.php:35
@@ -22,9 +22,7 @@ msgid "This cron has already been executed."
 msgstr ""
 
 #: _protected/app/includes/classes/ProfileBaseController.php:115
-msgid ""
-"Whoops! \"%0%\" profile is only visible to members. Please <a href=\"%1%"
-"\">login</a> or <a href=\"%2%\">register</a> to see this profile."
+msgid "Whoops! \"%0%\" profile is only visible to members. Please <a href=\"%1%\">login</a> or <a href=\"%2%\">register</a> to see this profile."
 msgstr ""
 
 #: _protected/app/includes/classes/ProfileBaseController.php:118
@@ -52,16 +50,11 @@ msgid "Hello World"
 msgstr ""
 
 #: _protected/app/modules/helloworld/controllers/HomeController.php:30
-msgid ""
-"This module is just an example to show how easy you can create modules with "
-"pH7CMS"
+msgid "This module is just an example to show how easy you can create modules with pH7CMS"
 msgstr ""
 
 #: _protected/app/modules/helloworld/controllers/HomeController.php:31
-msgid ""
-"hello world, test, developpers, CMS, Dating CMS, CMS Dating, Social CMS, "
-"pH7, pH7 CMS, Dating Script, Social Dating Script, Dating Software, Social "
-"Network Software, Social Networking Software"
+msgid "hello world, test, developpers, CMS, Dating CMS, CMS Dating, Social CMS, pH7, pH7 CMS, Dating Script, Social Dating Script, Dating Software, Social Network Software, Social Networking Software"
 msgstr ""
 
 #: _protected/app/modules/helloworld/controllers/HomeController.php:34
@@ -338,9 +331,7 @@ msgid "Upgrade %software_name% | Version %0%"
 msgstr ""
 
 #: _protected/app/system/core/assets/file/UpgradeCoreFile.php:116
-msgid ""
-"Psst! Do not forget to read the <a href=\"%0%\">documentation page</a> "
-"before proceeding with the update."
+msgid "Psst! Do not forget to read the <a href=\"%0%\">documentation page</a> before proceeding with the update."
 msgstr ""
 
 #: _protected/app/system/core/assets/file/UpgradeCoreFile.php:149
@@ -361,10 +352,7 @@ msgid "Version Name: %0%, Version Number: %1%, Version Build: %2%"
 msgstr ""
 
 #: _protected/app/system/core/assets/file/UpgradeCoreFile.php:181
-msgid ""
-"Upgrade <span class=\"bold italic\">%software_version_name% %software_version"
-"% Build %software_build%</span> to version <span class=\"bold italic\">%0%</"
-"span>"
+msgid "Upgrade <span class=\"bold italic\">%software_version_name% %software_version% Build %software_build%</span> to version <span class=\"bold italic\">%0%</span>"
 msgstr ""
 
 #: _protected/app/system/core/assets/file/UpgradeCoreFile.php:182
@@ -384,9 +372,7 @@ msgid "Upgrade patch is not valid!"
 msgstr ""
 
 #: _protected/app/system/core/assets/file/UpgradeCoreFile.php:201
-msgid ""
-"No upgrade patches available for your current version: %software_version%, "
-"build %software_build%"
+msgid "No upgrade patches available for your current version: %software_version%, build %software_build%"
 msgstr ""
 
 #: _protected/app/system/core/assets/file/UpgradeCoreFile.php:227
@@ -402,9 +388,7 @@ msgid "Status... OK!"
 msgstr ""
 
 #: _protected/app/system/core/assets/file/UpgradeCoreFile.php:234
-msgid ""
-"The upgrade directory <em>(~%0%)</em> could not be deleted, please delete it "
-"manually using an FTP client or SSH."
+msgid "The upgrade directory <em>(~%0%)</em> could not be deleted, please delete it manually using an FTP client or SSH."
 msgstr ""
 
 #: _protected/app/system/core/assets/file/UpgradeCoreFile.php:235
@@ -420,8 +404,7 @@ msgid "Conclusion Message:"
 msgstr ""
 
 #: _protected/app/system/core/assets/file/UpgradeCoreFile.php:300
-msgid ""
-"Unable to execute the upgrade of the database SQL.<br />Error Message: %0%"
+msgid "Unable to execute the upgrade of the database SQL.<br />Error Message: %0%"
 msgstr ""
 
 #: _protected/app/system/core/assets/file/UpgradeCoreFile.php:313
@@ -429,15 +412,11 @@ msgid "Your site must be in maintenance mode to begin the upgrade."
 msgstr ""
 
 #: _protected/app/system/core/assets/file/UpgradeCoreFile.php:317
-msgid ""
-"You must put your site in development mode in order to launch the upgrade of "
-"your site!"
+msgid "You must put your site in development mode in order to launch the upgrade of your site!"
 msgstr ""
 
 #: _protected/app/system/core/assets/file/UpgradeCoreFile.php:318
-msgid ""
-"1) Please change the permission of the ~%0% file for writing for all groups "
-"(0666 in octal)."
+msgid "1) Please change the permission of the ~%0% file for writing for all groups (0666 in octal)."
 msgstr ""
 
 #: _protected/app/system/core/assets/file/UpgradeCoreFile.php:319
@@ -454,9 +433,7 @@ msgid "3) After installation, please edit ~%0% file and find the code:"
 msgstr ""
 
 #: _protected/app/system/core/assets/file/UpgradeCoreFile.php:327
-msgid ""
-"4) Change the permission of the file to write only for users and reading for "
-"the other groups (0644 in octal)."
+msgid "4) Change the permission of the file to write only for users and reading for the other groups (0644 in octal)."
 msgstr ""
 
 #: _protected/app/system/core/assets/file/UpgradeCoreFile.php:368
@@ -524,10 +501,7 @@ msgid "Password: %0% (please change it next time you login)."
 msgstr ""
 
 #: _protected/app/system/core/classes/RegistrationCore.php:59
-msgid ""
-"Password: ****** (hidden to protect against theft of your account. If you "
-"have forgotten your password, please request a new one <a href=\"%0%\">here</"
-"a>)."
+msgid "Password: ****** (hidden to protect against theft of your account. If you have forgotten your password, please request a new one <a href=\"%0%\">here</a>)."
 msgstr ""
 
 #: _protected/app/system/core/classes/RegistrationCore.php:62
@@ -564,9 +538,7 @@ msgstr ""
 #: _protected/app/system/modules/affiliate/controllers/AdminController.php:394
 #: _protected/app/system/modules/affiliate/inc/class/Registration.php:43
 #: _protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:94
-msgid ""
-"You are receiving this email because we received a registration application "
-"with \"%0%\" email address for %site_name% (%site_url%)."
+msgid "You are receiving this email because we received a registration application with \"%0%\" email address for %site_name% (%site_url%)."
 msgstr ""
 
 #: _protected/app/system/core/classes/RegistrationCore.php:71
@@ -575,10 +547,7 @@ msgstr ""
 #: _protected/app/system/modules/affiliate/controllers/AdminController.php:395
 #: _protected/app/system/modules/affiliate/inc/class/Registration.php:44
 #: _protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:95
-msgid ""
-"If you think someone has used your email address without your knowledge to "
-"create an account on %site_name%, please contact us using our contact form "
-"available on our website."
+msgid "If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website."
 msgstr ""
 
 #: _protected/app/system/core/classes/RegistrationCore.php:78
@@ -590,16 +559,11 @@ msgid "Your account has just been created. You can now login!"
 msgstr ""
 
 #: _protected/app/system/core/classes/RegistrationCore.php:99
-msgid ""
-"Please activate your account by clicking the activation link you received by "
-"email. If you can not find the email, please look in your SPAM FOLDER and "
-"mark as not spam."
+msgid "Please activate your account by clicking the activation link you received by email. If you can not find the email, please look in your SPAM FOLDER and mark as not spam."
 msgstr ""
 
 #: _protected/app/system/core/classes/RegistrationCore.php:103
-msgid ""
-"Your account must be approved by an administrator. You will receive an email "
-"of any decision."
+msgid "Your account must be approved by an administrator. You will receive an email of any decision."
 msgstr ""
 
 #: _protected/app/system/core/classes/RegistrationCore.php:107
@@ -625,9 +589,7 @@ msgstr ""
 
 #: _protected/app/system/core/classes/RegistrationCore.php:134
 #: _protected/app/system/modules/affiliate/inc/class/Registration.php:79
-msgid ""
-"Caution! Your account is not activated yet. You will receive an email of any "
-"decision."
+msgid "Caution! Your account is not activated yet. You will receive an email of any decision."
 msgstr ""
 
 #: _protected/app/system/core/classes/SecurityCore.php:37
@@ -635,26 +597,19 @@ msgid "Hi %0%"
 msgstr ""
 
 #: _protected/app/system/core/classes/SecurityCore.php:38
-msgid ""
-"Someone tried to login more than %0% times with the IP address: \"%1%\"."
+msgid "Someone tried to login more than %0% times with the IP address: \"%1%\"."
 msgstr ""
 
 #: _protected/app/system/core/classes/SecurityCore.php:39
-msgid ""
-"For safety and security reasons, we have blocked access to this person for a "
-"delay of %0% minutes."
+msgid "For safety and security reasons, we have blocked access to this person for a delay of %0% minutes."
 msgstr ""
 
 #: _protected/app/system/core/classes/SecurityCore.php:40
-msgid ""
-"If it was you who tried to login to your account, we suggest to <a href=\"%1%"
-"\">request a new password</a> in %0% minutes."
+msgid "If it was you who tried to login to your account, we suggest to <a href=\"%1%\">request a new password</a> in %0% minutes."
 msgstr ""
 
 #: _protected/app/system/core/classes/SecurityCore.php:41
-msgid ""
-"If you don't know the person who made the login attempts, you should be "
-"very careful and change your password to a new complex one."
+msgid "If you don't know the person who made the login attempts, you should be very careful and change your password to a new complex one."
 msgstr ""
 
 #: _protected/app/system/core/classes/SecurityCore.php:43
@@ -666,22 +621,15 @@ msgid "Security Alert: Login Attempts - %site_name%"
 msgstr ""
 
 #: _protected/app/system/core/classes/UserCore.php:468
-msgid ""
-"Sorry, your account has not been activated yet. Please activate it by "
-"clicking on the activation link you received by email."
+msgid "Sorry, your account has not been activated yet. Please activate it by clicking on the activation link you received by email."
 msgstr ""
 
 #: _protected/app/system/core/classes/UserCore.php:470
-msgid ""
-"Sorry, your account has not been activated yet. An administrator has to "
-"review it manually."
+msgid "Sorry, your account has not been activated yet. An administrator has to review it manually."
 msgstr ""
 
 #: _protected/app/system/core/classes/UserCore.php:472
-msgid ""
-"Your account does not have a valid activation status. Please <a href=\"%0%"
-"\">contact the database administrator</a> in order to fix the issue with "
-"your account."
+msgid "Your account does not have a valid activation status. Please <a href=\"%0%\">contact the database administrator</a> in order to fix the issue with your account."
 msgstr ""
 
 #: _protected/app/system/core/classes/UserCore.php:475
@@ -697,8 +645,7 @@ msgid "Your account has been successfully validated. You can now login!"
 msgstr ""
 
 #: _protected/app/system/core/classes/UserCore.php:517
-msgid ""
-"Oops! The URL is either invalid or you already have activated your account."
+msgid "Oops! The URL is either invalid or you already have activated your account."
 msgstr ""
 
 #: _protected/app/system/core/classes/UserCore.php:525
@@ -815,9 +762,7 @@ msgid "No %software_name%'s news found."
 msgstr ""
 
 #: _protected/app/system/core/classes/design/XmlDesignCore.php:94
-msgid ""
-"It seems you don't have Internet (or pH7CMS feed news is temporarily "
-"unavailable). Some features on the dashboard won't be available."
+msgid "It seems you don't have Internet (or pH7CMS feed news is temporarily unavailable). Some features on the dashboard won't be available."
 msgstr ""
 
 #: _protected/app/system/core/forms/ChangePasswordCoreForm.php:32
@@ -903,23 +848,15 @@ msgid "Development"
 msgstr ""
 
 #: _protected/app/system/core/forms/ConfigFileCoreForm.php:67
-msgid ""
-"If you see \"Internal Server Error\" message on your site, please set to "
-"\"development\" mode in order to see the details of the error. If your site "
-"is on production (and visible by everyone) please set it to the production "
-"mode for security reasons."
+msgid "If you see \"Internal Server Error\" message on your site, please set to \"development\" mode in order to see the details of the error. If your site is on production (and visible by everyone) please set it to the production mode for security reasons."
 msgstr ""
 
 #: _protected/app/system/core/forms/ConfigFileCoreForm.php:106
-msgid ""
-"Enable General Cache. Database caching and other expensive server "
-"calculations"
+msgid "Enable General Cache. Database caching and other expensive server calculations"
 msgstr ""
 
 #: _protected/app/system/core/forms/ConfigFileCoreForm.php:110
-msgid ""
-"Enable HTML Cache. Caches some HTML pages (e.g., TOS, privacy, site map, ... "
-"pages)"
+msgid "Enable HTML Cache. Caches some HTML pages (e.g., TOS, privacy, site map, ... pages)"
 msgstr ""
 
 #: _protected/app/system/core/forms/ConfigFileCoreForm.php:114
@@ -927,8 +864,7 @@ msgid "Enable Static Cache. Used to store compressed/minified JS/CSS files"
 msgstr ""
 
 #: _protected/app/system/core/forms/ConfigFileCoreForm.php:118
-msgid ""
-"Enable data-URIs; Converts images to base64 (if file size is lower than %0%)"
+msgid "Enable data-URIs; Converts images to base64 (if file size is lower than %0%)"
 msgstr ""
 
 #: _protected/app/system/core/forms/ConfigFileCoreForm.php:122
@@ -970,21 +906,15 @@ msgid "Save"
 msgstr ""
 
 #: _protected/app/system/core/forms/CountryRestrictionCoreForm.php:73
-msgid ""
-"You can select/multi-select the amount of countries to be displayed on the "
-"registration form and user search forms."
+msgid "You can select/multi-select the amount of countries to be displayed on the registration form and user search forms."
 msgstr ""
 
 #: _protected/app/system/core/forms/CountryRestrictionCoreForm.php:75
-msgid ""
-"You can select/multi-select the amount of countries to be displayed on the "
-"registration form."
+msgid "You can select/multi-select the amount of countries to be displayed on the registration form."
 msgstr ""
 
 #: _protected/app/system/core/forms/CountryRestrictionCoreForm.php:79
-msgid ""
-"If you need to block all Internet traffic to your website from a specific "
-"country, please use <a href=\"%0%\">Country Blocker</a> tool."
+msgid "If you need to block all Internet traffic to your website from a specific country, please use <a href=\"%0%\">Country Blocker</a> tool."
 msgstr ""
 
 #: _protected/app/system/core/forms/DeleteUserCoreForm.php:32
@@ -1146,15 +1076,11 @@ msgid "Website:"
 msgstr ""
 
 #: _protected/app/system/core/forms/DynamicFieldCoreForm.php:91
-msgid ""
-"The URL of your social profile, such as Facebook, Instagram, Snapchat, "
-"LinkedIn, ..."
+msgid "The URL of your social profile, such as Facebook, Instagram, Snapchat, LinkedIn, ..."
 msgstr ""
 
 #: _protected/app/system/core/forms/DynamicFieldCoreForm.php:91
-msgid ""
-"Your Personal Website/Blog (any promotional/affiliated contents will be "
-"removed)"
+msgid "Your Personal Website/Blog (any promotional/affiliated contents will be removed)"
 msgstr ""
 
 #: _protected/app/system/core/forms/DynamicFieldCoreForm.php:97
@@ -1448,9 +1374,7 @@ msgid "The passwords don't match."
 msgstr ""
 
 #: _protected/app/system/core/forms/processing/ChangePasswordCoreFormProcess.php:64
-msgid ""
-"Your current and new passwords are identical. So why do you want to change "
-"it?"
+msgid "Your current and new passwords are identical. So why do you want to change it?"
 msgstr ""
 
 #: _protected/app/system/core/forms/processing/ChangePasswordCoreFormProcess.php:66
@@ -1466,9 +1390,7 @@ msgid "Configuration updated!"
 msgstr ""
 
 #: _protected/app/system/core/forms/processing/ConfigFileCoreFormProcess.php:53
-msgid ""
-"The config file could not be saved. Please check your file permissions (must "
-"be in write mode)"
+msgid "The config file could not be saved. Please check your file permissions (must be in write mode)"
 msgstr ""
 
 #: _protected/app/system/core/forms/processing/CountryRestrictionCoreFormProcess.php:47
@@ -1580,9 +1502,7 @@ msgstr ""
 
 #: _protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:29
 #: _protected/app/system/modules/lost-password/forms/processing/ForgotPasswordFormProcess.php:38
-msgid ""
-"Oops, this \"%0%\" is not associated with any %site_name% account. Please, "
-"make sure that you entered the e-mail address used in creating your account."
+msgid "Oops, this \"%0%\" is not associated with any %site_name% account. Please, make sure that you entered the e-mail address used in creating your account."
 msgstr ""
 
 #: _protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:33
@@ -1598,9 +1518,7 @@ msgid "Your activation link is <em>\"%0%\"</em>."
 msgstr ""
 
 #: _protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:65
-msgid ""
-"Password: ***** (this field is hidden to protect against theft of your "
-"account)."
+msgid "Password: ***** (this field is hidden to protect against theft of your account)."
 msgstr ""
 
 #: _protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:74
@@ -1951,22 +1869,15 @@ msgid "%0%, build %1%"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/MainController.php:333
-msgid ""
-"🍰 A <a href=\"%0%\" target=\"_blank\" rel=\"noopener\">New Release</a> 🎁 "
-"just for YOU! 😍"
+msgid "🍰 A <a href=\"%0%\" target=\"_blank\" rel=\"noopener\">New Release</a> 🎁 just for YOU! 😍"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/MainController.php:334
-msgid ""
-"%software_name% <strong>%0%</strong> is available! Please update it today to "
-"keep your site safe and stable."
+msgid "%software_name% <strong>%0%</strong> is available! Please update it today to keep your site safe and stable."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/MainController.php:336
-msgid ""
-"Read <a href=\"%0%\" target=\"_blank\" rel=\"noopener\">this</a> to learn "
-"how to upgrade your site, step-by-step. Once you follow the steps, run the "
-"upgrade wizard <a href=\"%1%\" target=\"_blank\" rel=\"noopener\">here</a>."
+msgid "Read <a href=\"%0%\" target=\"_blank\" rel=\"noopener\">this</a> to learn how to upgrade your site, step-by-step. Once you follow the steps, run the upgrade wizard <a href=\"%1%\" target=\"_blank\" rel=\"noopener\">here</a>."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/ModeratorController.php:54
@@ -2384,9 +2295,7 @@ msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/ToolController.php:187
 #: _protected/app/system/modules/admin123/controllers/ToolController.php:230
-msgid ""
-"Dump file must be a SQL type (extension \".sql\" or compressed archive \".gz"
-"\")"
+msgid "Dump file must be a SQL type (extension \".sql\" or compressed archive \".gz\")"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/ToolController.php:190
@@ -2582,9 +2491,7 @@ msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/UserController.php:434
 #: _protected/app/system/modules/affiliate/controllers/AdminController.php:383
-msgid ""
-"Congratulations! Your account has been approved by our team of "
-"administrators.<br />You can now %0% to meeting new people!"
+msgid "Congratulations! Your account has been approved by our team of administrators.<br />You can now %0% to meeting new people!"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/UserController.php:443
@@ -2652,9 +2559,7 @@ msgid "Gender:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/AddAdminForm.php:46
-msgid ""
-"Knowing the time zone, the other administrators may know when they can "
-"contact you easily."
+msgid "Knowing the time zone, the other administrators may know when they can contact you easily."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/AddFakeProfilesForm.php:31
@@ -2662,9 +2567,7 @@ msgid "Number of Profile:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/AddFakeProfilesForm.php:31
-msgid ""
-"Number of fake profiles to add in the same time. Choosing 15 or 25 profiles "
-"might take a few minutes."
+msgid "Number of fake profiles to add in the same time. Choosing 15 or 25 profiles might take a few minutes."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/AddFakeProfilesForm.php:32
@@ -2790,15 +2693,11 @@ msgid "Banner:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/AdsForm.php:42
-msgid ""
-"The predefined variable for the URL of an affiliate account to put in the "
-"HTML is: %0%."
+msgid "The predefined variable for the URL of an affiliate account to put in the HTML is: %0%."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/AdsForm.php:45
-msgid ""
-"The predefined variable to the URL of your site to indicate this in the HTML "
-"is: %0%."
+msgid "The predefined variable to the URL of your site to indicate this in the HTML is: %0%."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/AnalyticsApiForm.php:30
@@ -2810,11 +2709,7 @@ msgid "Countries to exclude"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/BlockCountryForm.php:37
-msgid ""
-"Visitors who come from one of these selected countries will receive a "
-"friendly message saying that the service isn't available in their country. "
-"Logged admins and admin panel won't be affected, so you will still be able "
-"to login to your admin panel from anywhere in the world."
+msgid "Visitors who come from one of these selected countries will receive a friendly message saying that the service isn't available in their country. Logged admins and admin panel won't be affected, so you will still be able to login to your admin panel from anywhere in the world."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/DisableModuleForm.php:49
@@ -2822,9 +2717,7 @@ msgid "Change the default Chat by yours"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/DisableModuleForm.php:53
-msgid ""
-"Only for development purpose to test it before <a href=\"%0%\">opening a PR</"
-"a>. <a href=\"%1%\">Social APIs</a> have to be updated."
+msgid "Only for development purpose to test it before <a href=\"%0%\">opening a PR</a>. <a href=\"%1%\">Social APIs</a> have to be updated."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/EditForm.php:40
@@ -2836,22 +2729,15 @@ msgid "Female"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/EditForm.php:59
-msgid ""
-"With your time zone, the other administrators may know when they can contact "
-"you easily."
+msgid "With your time zone, the other administrators may know when they can contact you easily."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/ImportUserForm.php:30
-msgid ""
-"Import members into your site from a <strong><abbr title=\"Comma Separated "
-"Values\">CSV</abbr></strong> file. You should be able to find websites that "
-"offer dating profiles database. Make sure they offer CSV format."
+msgid "Import members into your site from a <strong><abbr title=\"Comma Separated Values\">CSV</abbr></strong> file. You should be able to find websites that offer dating profiles database. Make sure they offer CSV format."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/ImportUserForm.php:31
-msgid ""
-"Note: This tool cannot import profile photos. Please use the <a href=\"%0%"
-"\">Fake Profile Generator</a> if you need profiles with photos"
+msgid "Note: This tool cannot import profile photos. Please use the <a href=\"%0%\">Fake Profile Generator</a> if you need profiles with photos"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/ImportUserForm.php:34
@@ -3016,9 +2902,7 @@ msgid "File Contents"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/ProtectedFileForm.php:48
-msgid ""
-"There is no warranty that the default terms/privacy pages meets the legal "
-"requirements for your website."
+msgid "There is no warranty that the default terms/privacy pages meets the legal requirements for your website."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/ProtectedFileForm.php:49
@@ -3049,8 +2933,7 @@ msgid "Search an Admin:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SearchAdminForm.php:19
-msgid ""
-"Enter their ID, First Name, Last Name, Username, Email, Sex or IP address."
+msgid "Enter their ID, First Name, Last Name, Username, Email, Sex or IP address."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SearchAdminForm.php:20
@@ -3143,8 +3026,7 @@ msgid "Default Language:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:56
-msgid ""
-"Documentation: <a href=\"%0%\">Translate your site to another language</a>."
+msgid "Documentation: <a href=\"%0%\">Translate your site to another language</a>."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:58
@@ -3197,9 +3079,7 @@ msgid "No"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:60
-msgid ""
-"Display only the profiles with a profile photo on profile blocks (such as "
-"the homepage)."
+msgid "Display only the profiles with a profile photo on profile blocks (such as the homepage)."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:62
@@ -3211,10 +3091,7 @@ msgid "Enable (recommended)"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:62
-msgid ""
-"Use the Splash Page for visitors (not logged), otherwise the classic page "
-"will be used. <br /><em>Available only if \"User\" is the Default Module.</"
-"em>"
+msgid "Use the Splash Page for visitors (not logged), otherwise the classic page will be used. <br /><em>Available only if \"User\" is the Default Module.</em>"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:64
@@ -3222,9 +3099,7 @@ msgid "Background Splash Video:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:64
-msgid ""
-"Enable/Disable the \"Animated Video\" on the Splash Homepage. <br /"
-"><em>Available only if \"User\" is the Default Module.</em>"
+msgid "Enable/Disable the \"Animated Video\" on the Splash Homepage. <br /><em>Available only if \"User\" is the Default Module.</em>"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:66
@@ -3232,9 +3107,7 @@ msgid "Display Profiles on Guest Homepage:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:66
-msgid ""
-"Display or not the newest users on the homepage for visitors. <br /"
-"><em>Available only if \"User\" is the Default Module.</em>"
+msgid "Display or not the newest users on the homepage for visitors. <br /><em>Available only if \"User\" is the Default Module.</em>"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:68
@@ -3242,10 +3115,7 @@ msgid "Number of Profiles on Splash Page:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:68
-msgid ""
-"The number of profile photos to display on the Splash Homepage. <br /"
-"><em>Available only if \"Profiles on Guest Homepage\" is enabled and if "
-"\"User\" is the Default Module.</em>"
+msgid "The number of profile photos to display on the Splash Homepage. <br /><em>Available only if \"Profiles on Guest Homepage\" is enabled and if \"User\" is the Default Module.</em>"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:70
@@ -3253,9 +3123,7 @@ msgid "Ajax Site with AjPH:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:70
-msgid ""
-"Be careful! 'Full Ajax Navigation' feature is still in <strong>beta version</"
-"strong> and may not be working properly on all pages."
+msgid "Be careful! 'Full Ajax Navigation' feature is still in <strong>beta version</strong> and may not be working properly on all pages."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:72
@@ -3267,9 +3135,7 @@ msgid "Maintenance (offline)"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:72
-msgid ""
-"Maintenance mode is useful if you are working on your website or update it. "
-"Logged admins and admin panel won't be affected by the maintenance page."
+msgid "Maintenance mode is useful if you are working on your website or update it. Logged admins and admin panel won't be affected by the maintenance page."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:74
@@ -3285,11 +3151,7 @@ msgid "Adult Disclaimer:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:76
-msgid ""
-"Show an Adult Warning to enter to your website. This is useful for websites "
-"with adult content. <br /><strong>WARNING: this disclaimer offered by a "
-"third-party provider may sometimes open a new tab promoting third-party "
-"adult websites.</strong>"
+msgid "Show an Adult Warning to enter to your website. This is useful for websites with adult content. <br /><strong>WARNING: this disclaimer offered by a third-party provider may sometimes open a new tab promoting third-party adult websites.</strong>"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:78
@@ -3297,11 +3159,7 @@ msgid "Cookie Consent Bar:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:78
-msgid ""
-"Enable a Cookie Consent Bar to prevent your users that your website uses "
-"cookies. This is required by EU Law (if you have visitors from EU "
-"countries). The Cookie Bar will only be displayed if the visitor is in the "
-"EU."
+msgid "Enable a Cookie Consent Bar to prevent your users that your website uses cookies. This is required by EU Law (if you have visitors from EU countries). The Cookie Bar will only be displayed if the visitor is in the EU."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:80
@@ -3313,10 +3171,7 @@ msgid "Disable (NOT recommended)"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:80
-msgid ""
-"Are you proud of using <a href=\"%software_website%\">pH7CMS</a> brand? Are "
-"you proud to say your dating app has been made by the Leading Dating "
-"Software provider?"
+msgid "Are you proud of using <a href=\"%software_website%\">pH7CMS</a> brand? Are you proud to say your dating app has been made by the Leading Dating Software provider?"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:82
@@ -3324,8 +3179,7 @@ msgid "Show the News Feed:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:82
-msgid ""
-"Show the latest news about the software in the admin dashboard (recommend)."
+msgid "Show the latest news about the software in the admin dashboard (recommend)."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:87
@@ -3334,9 +3188,7 @@ msgid "Icon Logo"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:89
-msgid ""
-"Add your small logo/icon that represents/distinguishes the best your site/"
-"concept/brand."
+msgid "Add your small logo/icon that represents/distinguishes the best your site/concept/brand."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:91
@@ -3407,10 +3259,7 @@ msgid "Require Members to upload a profile photo during sign up."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:113
-msgid ""
-"Doesn't guarantee that all users will have a profile photo, because users "
-"can still close the tab without completely finishing the registration "
-"process."
+msgid "Doesn't guarantee that all users will have a profile photo, because users can still close the tab without completely finishing the registration process."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:115
@@ -3503,9 +3352,7 @@ msgid "Nudity Filter:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:137
-msgid ""
-"Photos will be automatically pending approval if there are detected as "
-"\"Nude/Adult Photos\""
+msgid "Photos will be automatically pending approval if there are detected as \"Nude/Adult Photos\""
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:139
@@ -3632,19 +3479,11 @@ msgid "IP Restriction for Admin Panel Access:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:203
-msgid ""
-"By entering <a href=\"%0%\" title=\"Get your current IP address\">your IP</"
-"a>, you will get a higher security and exclude all other people and bots "
-"that tried to login with another IP address even if the login is correct! "
-"Leave blank to disable this feature. Be careful, for using this feature you "
-"need to have a static IP (not a dynamic one). If you are not sure, please "
-"contact your ISP."
+msgid "By entering <a href=\"%0%\" title=\"Get your current IP address\">your IP</a>, you will get a higher security and exclude all other people and bots that tried to login with another IP address even if the login is correct! Leave blank to disable this feature. Be careful, for using this feature you need to have a static IP (not a dynamic one). If you are not sure, please contact your ISP."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:205
-msgid ""
-"Indicate a word that will replace the banned word in <a href=\"%0%\">the "
-"list</a>."
+msgid "Indicate a word that will replace the banned word in <a href=\"%0%\">the list</a>."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:207
@@ -3652,10 +3491,7 @@ msgid "Enable/Disable CSRF security tokens in forms:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:207
-msgid ""
-"Sometimes this protection can be annoying for users if there are not fast "
-"enough to fulfill the forms. However, if disabled, your website can be "
-"vulnerable on CSRF attacks in forms."
+msgid "Sometimes this protection can be annoying for users if there are not fast enough to fulfill the forms. However, if disabled, your website can be vulnerable on CSRF attacks in forms."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:209
@@ -3676,9 +3512,7 @@ msgid "Yes (recommended for security reasons)"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:211
-msgid ""
-"This protection can cause problems for logged in users with dynamic IPs. "
-"Please disable if their IP changes frequently during the session."
+msgid "This protection can cause problems for logged in users with dynamic IPs. Please disable if their IP changes frequently during the session."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:214
@@ -3686,9 +3520,7 @@ msgid "Protect for Affiliates against session cookies hijacking:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:214
-msgid ""
-"This protection can cause problems for affiliates with dynamic IPs. Please "
-"disable if their IP changes frequently during the session."
+msgid "This protection can cause problems for affiliates with dynamic IPs. Please disable if their IP changes frequently during the session."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:217
@@ -3700,9 +3532,7 @@ msgid "Yes (highly recommended for security reasons)"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:217
-msgid ""
-"This protection can cause problems for admins with dynamic IPs. Please "
-"disable if their IP changes frequently during the session."
+msgid "This protection can cause problems for admins with dynamic IPs. Please disable if their IP changes frequently during the session."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:219
@@ -3732,9 +3562,7 @@ msgid "Deactivate"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:219
-msgid ""
-"Enable it ONLY if you think your website has real DDoS attacks or if your "
-"server is highly overloaded."
+msgid "Enable it ONLY if you think your website has real DDoS attacks or if your server is highly overloaded."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:223
@@ -3750,9 +3578,7 @@ msgid "Registration delay for Users:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:227
-msgid ""
-"Number of minutes that has to pass before a user with the same IP address "
-"can register again. Enter \"0\" to disable."
+msgid "Number of minutes that has to pass before a user with the same IP address can register again. Enter \"0\" to disable."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:230
@@ -3760,9 +3586,7 @@ msgid "Registration delay for Affiliates:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:230
-msgid ""
-"Number of minutes that has to pass before an affiliate with the same IP "
-"address can register again. Enter \"0\" to disable."
+msgid "Number of minutes that has to pass before an affiliate with the same IP address can register again. Enter \"0\" to disable."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:233
@@ -3802,9 +3626,7 @@ msgid "Send Forum Message delay:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:242
-msgid ""
-"Number of minutes for the same user can send a reply message in the same "
-"topic."
+msgid "Number of minutes for the same user can send a reply message in the same topic."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:247
@@ -3900,11 +3722,7 @@ msgid "API"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:300
-msgid ""
-"You can get your key <a href=\"%0%\">here</a>. Then, select \"<strong>Google "
-"Maps JavaScript API</strong>\" for \"<em>Which API are you using</em>\" and "
-"\"<strong>Web browser (Javascript)</strong>\" for \"<em>Where will you be "
-"calling the API from</em>\", then you will get your API key to paste here. "
+msgid "You can get your key <a href=\"%0%\">here</a>. Then, select \"<strong>Google Maps JavaScript API</strong>\" for \"<em>Which API are you using</em>\" and \"<strong>Web browser (Javascript)</strong>\" for \"<em>Where will you be calling the API from</em>\", then you will get your API key to paste here. "
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:301
@@ -3924,10 +3742,7 @@ msgid "Chat API:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:307
-msgid ""
-"Documentation: <a href=\"%0%\">Change the default chat service by your real "
-"one</a>.<br /> <small>Parsing tags are permitted (e.g. #!http://api.your-"
-"service-chat.com/?url=%0%&name=%1%!#).</small>"
+msgid "Documentation: <a href=\"%0%\">Change the default chat service by your real one</a>.<br /> <small>Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).</small>"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:311
@@ -3935,10 +3750,7 @@ msgid "Chatroulette API:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:311
-msgid ""
-"Documentation: <a href=\"%0%\">Change the default chatroulette provider by "
-"yours</a>.<br /> <small>Parsing tags are permitted (e.g. #!http://api.your-"
-"service-chat.com/?url=%0%&name=%1%!#).</small>"
+msgid "Documentation: <a href=\"%0%\">Change the default chatroulette provider by yours</a>.<br /> <small>Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).</small>"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:315
@@ -3950,9 +3762,7 @@ msgid "Secret word for the cron URL:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:317
-msgid ""
-"Your very secret word for the cron URL. It will be used for running "
-"automated cron jobs."
+msgid "Your very secret word for the cron URL. It will be used for running automated cron jobs."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:319
@@ -4022,9 +3832,7 @@ msgid "Module Status saved!"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/processing/EditFormProcess.php:42
-msgid ""
-"Username has to be from %0% to %1% characters long, or it is not available, "
-"or already taken by another admin."
+msgid "Username has to be from %0% to %1% characters long, or it is not available, or already taken by another admin."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/processing/EditFormProcess.php:57
@@ -4062,9 +3870,7 @@ msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/processing/ProtectedFileFormProcess.php:28
 #: _protected/app/system/modules/admin123/forms/processing/PublicFileFormProcess.php:28
-msgid ""
-"The file could not be saved. Please check your file permissions (must be in  "
-"write mode)"
+msgid "The file could not be saved. Please check your file permissions (must be in  write mode)"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/processing/ScriptFormProcess.php:31
@@ -4100,16 +3906,11 @@ msgid "The banner has been saved!"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/inc/class/ImportUser.php:237
-msgid ""
-"Invalid File Format! Please select a valid CSV file containing the member "
-"data."
+msgid "Invalid File Format! Please select a valid CSV file containing the member data."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/inc/class/ImportUser.php:241
-msgid ""
-"The file is too large. Please select a smaller file or change your server "
-"PHP settings. Especially \"upload_max_filesize\" and \"post_max_size\" "
-"directives in the php.ini file."
+msgid "The file is too large. Please select a smaller file or change your server PHP settings. Especially \"upload_max_filesize\" and \"post_max_size\" directives in the php.ini file."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/inc/class/ImportUser.php:245
@@ -4139,33 +3940,23 @@ msgid "Your content has been disapproved :("
 msgstr ""
 
 #: _protected/app/system/modules/admin123/inc/class/UserNotifierString.php:42
-msgid ""
-"Congratulation! The content you recently posted at <a href=\"%site_url%\">"
-"%site_name%</a> has been successfully approved by the team."
+msgid "Congratulation! The content you recently posted at <a href=\"%site_url%\">%site_name%</a> has been successfully approved by the team."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/inc/class/UserNotifierString.php:44
-msgid ""
-"Other users will now enjoy what you posted and thanks to you, our online "
-"service gets better! :)"
+msgid "Other users will now enjoy what you posted and thanks to you, our online service gets better! :)"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/inc/class/UserNotifierString.php:58
-msgid ""
-"Your content you recently posted at <a href=\"%site_url%\">%site_name%</a> "
-"has unfortunately been disapproved by our moderation team."
+msgid "Your content you recently posted at <a href=\"%site_url%\">%site_name%</a> has unfortunately been disapproved by our moderation team."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/inc/class/UserNotifierString.php:60
-msgid ""
-"Indeed, it looks like it does not respect our <a href=\"%0%\">terms of "
-"service</a>."
+msgid "Indeed, it looks like it does not respect our <a href=\"%0%\">terms of service</a>."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/inc/class/UserNotifierString.php:62
-msgid ""
-"Please feel free to post again a content at any time as long as it respects "
-"our <a href=\"%0%\">terms of service</a>"
+msgid "Please feel free to post again a content at any time as long as it respects our <a href=\"%0%\">terms of service</a>"
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/controllers/AccountController.php:20
@@ -4343,9 +4134,7 @@ msgid "Become an Affiliate with the dating affiliate program of %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/controllers/HomeController.php:25
-msgid ""
-"affiliate,dating,dating site,social network,pay per click affiliate program, "
-"affiliate program"
+msgid "affiliate,dating,dating site,social network,pay per click affiliate program, affiliate program"
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/controllers/HomeController.php:30
@@ -4448,8 +4237,7 @@ msgstr ""
 
 #: _protected/app/system/modules/affiliate/forms/EditForm.php:59
 #: _protected/app/system/modules/user/forms/EditForm.php:68
-msgid ""
-"For security reasons and to avoid spam, you cannot change your email address."
+msgid "For security reasons and to avoid spam, you cannot change your email address."
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/forms/EditForm.php:77
@@ -4517,9 +4305,7 @@ msgid "Search an Affiliate:"
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/forms/SearchAffiliateForm.php:19
-msgid ""
-"Enter their ID, First Name, Last Name, Username, Email, Bank Account, Sex or "
-"IP address."
+msgid "Enter their ID, First Name, Last Name, Username, Email, Bank Account, Sex or IP address."
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/forms/SearchAffiliateForm.php:20
@@ -4553,8 +4339,7 @@ msgstr ""
 #: _protected/app/system/modules/user/forms/processing/JoinFormProcess.php:68
 #: _protected/app/system/modules/user/forms/processing/JoinFormProcess.php:120
 #: _protected/app/system/modules/user/forms/processing/JoinFormProcess.php:140
-msgid ""
-"Please try again or come back later."
+msgid "Please try again or come back later."
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/forms/processing/JoinFormProcess.php:77
@@ -4581,15 +4366,11 @@ msgid "Dear %0% %1%, welcome to affiliate platform %site_name%!"
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/inc/class/Registration.php:36
-msgid ""
-"Hello %0%! We are proud to welcome you as an affiliate on our %site_name%!"
+msgid "Hello %0%! We are proud to welcome you as an affiliate on our %site_name%!"
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/inc/class/Registration.php:41
-msgid ""
-"Password: ****** (This field is hidden to protect against theft of your "
-"account. If you have forgotten your password, please request a new one <a "
-"href=\"%0%\">here</a>)."
+msgid "Password: ****** (This field is hidden to protect against theft of your account. If you have forgotten your password, please request a new one <a href=\"%0%\">here</a>)."
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/inc/class/Registration.php:50
@@ -4601,9 +4382,7 @@ msgid "Please %0% to make money from today!"
 msgstr ""
 
 #: _protected/app/system/modules/api/config/Permission.php:27
-msgid ""
-"Your API key and/or the URL of your external application don't match with "
-"the one in your pH7CMS's configuration system!"
+msgid "Your API key and/or the URL of your external application don't match with the one in your pH7CMS's configuration system!"
 msgstr ""
 
 #: _protected/app/system/modules/api/controllers/UserController.php:73
@@ -4615,9 +4394,7 @@ msgid "The Email is not valid."
 msgstr ""
 
 #: _protected/app/system/modules/api/controllers/UserController.php:79
-msgid ""
-"The Username must contain from %0% to %1% characters, the Username is not "
-"available or it is already used by other member."
+msgid "The Username must contain from %0% to %1% characters, the Username is not available or it is already used by other member."
 msgstr ""
 
 #: _protected/app/system/modules/api/controllers/UserController.php:82
@@ -4657,9 +4434,7 @@ msgid "Users' Birthdays %0%"
 msgstr ""
 
 #: _protected/app/system/modules/birthday/controllers/UserController.php:50
-msgid ""
-"birthday,birthdate,anniversary,birth,friend,dating,social networking,profile,"
-"social"
+msgid "birthday,birthdate,anniversary,birth,friend,dating,social networking,profile,social"
 msgstr ""
 
 #: _protected/app/system/modules/birthday/controllers/UserController.php:85
@@ -4781,9 +4556,7 @@ msgid "Sorry, we weren't able to find the page you requested."
 msgstr ""
 
 #: _protected/app/system/modules/blog/controllers/MainController.php:240
-msgid ""
-"You can go back on the <a href=\"%0%\">blog homepage</a> or <a href=\"%1%"
-"\">search with different keywords</a>."
+msgid "You can go back on the <a href=\"%0%\">blog homepage</a> or <a href=\"%1%\">search with different keywords</a>."
 msgstr ""
 
 #: _protected/app/system/modules/blog/forms/AdminBlogForm.php:45
@@ -4956,20 +4729,15 @@ msgid "Free Chat Room Dating"
 msgstr ""
 
 #: _protected/app/system/modules/chat/controllers/HomeController.php:20
-msgid ""
-"Find Your Match at The Best Free Online Dating Site with Free Chat Rooms, "
-"Single Chat Meet People"
+msgid "Find Your Match at The Best Free Online Dating Site with Free Chat Rooms, Single Chat Meet People"
 msgstr ""
 
 #: _protected/app/system/modules/chat/controllers/HomeController.php:21
-msgid ""
-"chat, speed dating, meet singles, dating, free dating, chat room, chat webcam"
+msgid "chat, speed dating, meet singles, dating, free dating, chat room, chat webcam"
 msgstr ""
 
 #: _protected/app/system/modules/chat/controllers/HomeController.php:22
-msgid ""
-"Welcome to <span class=\"pH3\">Free Chat Room</span> on <span class=\"pH0\">"
-"%site_name%</span>!"
+msgid "Welcome to <span class=\"pH3\">Free Chat Room</span> on <span class=\"pH0\">%site_name%</span>!"
 msgstr ""
 
 #: _protected/app/system/modules/chatroulette/controllers/HomeController.php:19
@@ -4977,22 +4745,15 @@ msgid "Free Video Room, Live Speed Dating ChatRoulette"
 msgstr ""
 
 #: _protected/app/system/modules/chatroulette/controllers/HomeController.php:20
-msgid ""
-"Free Live Speed Dating with the Chatroulette of %site_name%, Meet new people "
-"near you and make new friends, sex friends and free flirting, Free online "
-"dating site for singles without registration with Video Chat Rooms!"
+msgid "Free Live Speed Dating with the Chatroulette of %site_name%, Meet new people near you and make new friends, sex friends and free flirting, Free online dating site for singles without registration with Video Chat Rooms!"
 msgstr ""
 
 #: _protected/app/system/modules/chatroulette/controllers/HomeController.php:21
-msgid ""
-"chat, chatroulette, sex friend, single, speed dating, meet singles, dating, "
-"free dating, chat room, chat webcam"
+msgid "chat, chatroulette, sex friend, single, speed dating, meet singles, dating, free dating, chat room, chat webcam"
 msgstr ""
 
 #: _protected/app/system/modules/chatroulette/controllers/HomeController.php:22
-msgid ""
-"Welcome to <span class=\"pH1\">Speed Dating ChatRoulette</span> of <span "
-"class=\"pH0\">%site_name%</span>!"
+msgid "Welcome to <span class=\"pH1\">Speed Dating ChatRoulette</span> of <span class=\"pH0\">%site_name%</span>!"
 msgstr ""
 
 #: _protected/app/system/modules/comment/assets/ajax/CommentAjax.php:71
@@ -5010,9 +4771,7 @@ msgid "Whoops! The comment could not be removed!"
 msgstr ""
 
 #: _protected/app/system/modules/comment/controllers/CommentController.php:49
-msgid ""
-"comment,comments,social,community,friend,social network,people,dating,post,"
-"wall,social dating"
+msgid "comment,comments,social,community,friend,social network,people,dating,post,wall,social dating"
 msgstr ""
 
 #: _protected/app/system/modules/comment/controllers/CommentController.php:110
@@ -5028,8 +4787,7 @@ msgid "comment,%0%"
 msgstr ""
 
 #: _protected/app/system/modules/comment/controllers/CommentController.php:123
-msgid ""
-"No comments yet, please return to the <a href=\"%0%\">previous page</a>."
+msgid "No comments yet, please return to the <a href=\"%0%\">previous page</a>."
 msgstr ""
 
 #: _protected/app/system/modules/comment/controllers/CommentController.php:130
@@ -5094,15 +4852,11 @@ msgid "Welcome to Universal Login"
 msgstr ""
 
 #: _protected/app/system/modules/connect/controllers/MainController.php:39
-msgid ""
-"Universal Login, Use the service Facebook, Twitter, Outlook, Microsoft, "
-"Google, or other account to login on the social dating site %site_name%"
+msgid "Universal Login, Use the service Facebook, Twitter, Outlook, Microsoft, Google, or other account to login on the social dating site %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/connect/controllers/MainController.php:40
-msgid ""
-"connect, login, Register, universal login, Facebook, Twitter, Outlook, "
-"Microsoft, Google, social network, dating site, email"
+msgid "connect, login, Register, universal login, Facebook, Twitter, Outlook, Microsoft, Google, social network, dating site, email"
 msgstr ""
 
 #: _protected/app/system/modules/connect/controllers/MainController.php:48
@@ -5172,9 +4926,7 @@ msgid "Your Phone Number:"
 msgstr ""
 
 #: _protected/app/system/modules/contact/forms/ContactForm.php:39
-msgid ""
-"Enter the full phone number including its country calling codes (e.g., "
-"+44768374890)."
+msgid "Enter the full phone number including its country calling codes (e.g., +44768374890)."
 msgstr ""
 
 #: _protected/app/system/modules/contact/forms/ContactForm.php:41
@@ -5258,9 +5010,7 @@ msgstr ""
 
 #: _protected/app/system/modules/cool-profile-page/controllers/MainController.php:62
 #: _protected/app/system/modules/user/controllers/ProfileController.php:79
-msgid ""
-"A <span class=\"pH1\">%0%</span> of <span class=\"pH3\">%1% years</span>, "
-"from <span class=\"pH2\">%2%, %3% %4%</span>"
+msgid "A <span class=\"pH1\">%0%</span> of <span class=\"pH3\">%1% years</span>, from <span class=\"pH2\">%2%, %3% %4%</span>"
 msgstr ""
 
 #: _protected/app/system/modules/error/controllers/HttpController.php:35
@@ -5276,9 +5026,7 @@ msgid "Unauthorized"
 msgstr ""
 
 #: _protected/app/system/modules/error/controllers/HttpController.php:46
-msgid ""
-"Your IP address or the username/password you entered were not correct. Your "
-"request was denied as you have no permission to access the data."
+msgid "Your IP address or the username/password you entered were not correct. Your request was denied as you have no permission to access the data."
 msgstr ""
 
 #: _protected/app/system/modules/error/controllers/HttpController.php:51
@@ -5286,9 +5034,7 @@ msgid "Payment Required"
 msgstr ""
 
 #: _protected/app/system/modules/error/controllers/HttpController.php:54
-msgid ""
-"The data is not accessible at the time. The owner of the space has not yet "
-"payed their service provider."
+msgid "The data is not accessible at the time. The owner of the space has not yet payed their service provider."
 msgstr ""
 
 #: _protected/app/system/modules/error/controllers/HttpController.php:59
@@ -5304,10 +5050,7 @@ msgid "Method Not Allowed"
 msgstr ""
 
 #: _protected/app/system/modules/error/controllers/HttpController.php:70
-msgid ""
-"A request was made of a resource using a request method not supported by "
-"that resource;[2] for example, using GET on a form which requires data to be "
-"presented via POST, or using PUT on a read-only resource."
+msgid "A request was made of a resource using a request method not supported by that resource;[2] for example, using GET on a form which requires data to be presented via POST, or using PUT on a read-only resource."
 msgstr ""
 
 #: _protected/app/system/modules/error/controllers/HttpController.php:75
@@ -5315,10 +5058,7 @@ msgid "Internal Server Error"
 msgstr ""
 
 #: _protected/app/system/modules/error/controllers/HttpController.php:78
-msgid ""
-"The server encountered an error. This is most often caused by a scripting "
-"problem, a failed database access attempt, or other similar reasons.<br /"
-">Please come back later!"
+msgid "The server encountered an error. This is most often caused by a scripting problem, a failed database access attempt, or other similar reasons.<br />Please come back later!"
 msgstr ""
 
 #: _protected/app/system/modules/error/controllers/HttpController.php:83
@@ -5326,9 +5066,7 @@ msgid "Not Implemented"
 msgstr ""
 
 #: _protected/app/system/modules/error/controllers/HttpController.php:86
-msgid ""
-"The method you are using to access the document can not be performed by the "
-"server.<br />Possible methods include:"
+msgid "The method you are using to access the document can not be performed by the server.<br />Possible methods include:"
 msgstr ""
 
 #: _protected/app/system/modules/error/controllers/HttpController.php:100
@@ -5336,9 +5074,7 @@ msgid "Bad Gateway"
 msgstr ""
 
 #: _protected/app/system/modules/error/controllers/HttpController.php:103
-msgid ""
-"The server was acting as a gateway or proxy and received an invalid response "
-"from the upstream server."
+msgid "The server was acting as a gateway or proxy and received an invalid response from the upstream server."
 msgstr ""
 
 #: _protected/app/system/modules/error/controllers/HttpController.php:108
@@ -5346,11 +5082,7 @@ msgid "Gateway Timeout"
 msgstr ""
 
 #: _protected/app/system/modules/error/controllers/HttpController.php:111
-msgid ""
-"Most likely the client has lost connectivity (disconnected from the "
-"internet) or the client's host is having technical difficulties.<br /> This "
-"could also meanthat a server that allows access to the requested server is "
-"down, having bandwidth/load issues, or otherwise unavailable."
+msgid "Most likely the client has lost connectivity (disconnected from the internet) or the client's host is having technical difficulties.<br /> This could also meanthat a server that allows access to the requested server is down, having bandwidth/load issues, or otherwise unavailable."
 msgstr ""
 
 #: _protected/app/system/modules/error/controllers/HttpController.php:116
@@ -5358,8 +5090,7 @@ msgid "HTTP Version Not Supported"
 msgstr ""
 
 #: _protected/app/system/modules/error/controllers/HttpController.php:119
-msgid ""
-"The server does not support the HTTP protocol version used in the request."
+msgid "The server does not support the HTTP protocol version used in the request."
 msgstr ""
 
 #: _protected/app/system/modules/field/controllers/FieldController.php:29
@@ -5408,10 +5139,7 @@ msgstr ""
 
 #: _protected/app/system/modules/field/forms/AddFieldForm.php:38
 #: _protected/app/system/modules/field/forms/EditFieldForm.php:34
-msgid ""
-"Field Name must contain 2-30 alphanumeric characters ([a-z], [A-Z], [0-9] "
-"and [_]). Then, you can translate the language key in <span class="
-"\"italic underline\">%0%</span>"
+msgid "Field Name must contain 2-30 alphanumeric characters ([a-z], [A-Z], [0-9] and [_]). Then, you can translate the language key in <span class=\"italic underline\">%0%</span>"
 msgstr ""
 
 #: _protected/app/system/modules/field/forms/AddFieldForm.php:45
@@ -5439,15 +5167,11 @@ msgid "Add"
 msgstr ""
 
 #: _protected/app/system/modules/field/forms/EditFieldForm.php:33
-msgid ""
-"Note: The field will always have the default value even if you updated to "
-"another value. Your change is saved, but cannot be retrieve on the form."
+msgid "Note: The field will always have the default value even if you updated to another value. Your change is saved, but cannot be retrieve on the form."
 msgstr ""
 
 #: _protected/app/system/modules/field/forms/EditFieldForm.php:35
-msgid ""
-"Note: The field will always have the default value (%0%) even if you updated "
-"to another value. Your change is saved, but cannot be retrieve on the form."
+msgid "Note: The field will always have the default value (%0%) even if you updated to another value. Your change is saved, but cannot be retrieve on the form."
 msgstr ""
 
 #: _protected/app/system/modules/field/forms/EditFieldForm.php:36
@@ -5455,9 +5179,7 @@ msgid "The default value of the field (optional)."
 msgstr ""
 
 #: _protected/app/system/modules/field/forms/EditFieldForm.php:36
-msgid ""
-"Note: The default value will always be empty even if you added a default "
-"string. Your change is saved, but cannot be retrieve on the form."
+msgid "Note: The default value will always be empty even if you added a default string. Your change is saved, but cannot be retrieve on the form."
 msgstr ""
 
 #: _protected/app/system/modules/field/forms/processing/AddFieldFormProcess.php:29
@@ -5514,9 +5236,7 @@ msgid "Oops! Your Forum could not be deleted."
 msgstr ""
 
 #: _protected/app/system/modules/forum/controllers/ForumController.php:51
-msgid ""
-"forum,discussion,dating forum,social forum,people,meet people,forums,free "
-"dating forum,free forum,community forum,social forum"
+msgid "forum,discussion,dating forum,social forum,people,meet people,forums,free dating forum,free forum,community forum,social forum"
 msgstr ""
 
 #: _protected/app/system/modules/forum/controllers/ForumController.php:75
@@ -5548,9 +5268,7 @@ msgid "%0% - Topics - Discussion Forums"
 msgstr ""
 
 #: _protected/app/system/modules/forum/controllers/ForumController.php:117
-msgid ""
-"%0%,forum,discussion,dating forum,social forum,people,meet people,forums,"
-"free dating forum"
+msgid "%0%,forum,discussion,dating forum,social forum,people,meet people,forums,free dating forum"
 msgstr ""
 
 #: _protected/app/system/modules/forum/controllers/ForumController.php:156
@@ -5646,9 +5364,7 @@ msgid "Oops! Your message could not be deleted."
 msgstr ""
 
 #: _protected/app/system/modules/forum/controllers/ForumController.php:411
-msgid ""
-"Please return to the <a href=\"%0%\">main forum page</a> or <a href=\"%1%"
-"\">the previous page</a>."
+msgid "Please return to the <a href=\"%0%\">main forum page</a> or <a href=\"%1%\">the previous page</a>."
 msgstr ""
 
 #: _protected/app/system/modules/forum/forms/CategoryForm.php:34
@@ -5778,15 +5494,11 @@ msgid "%0% wants to be friends with you on %1%"
 msgstr ""
 
 #: _protected/app/system/modules/friend/controllers/MainController.php:82
-msgid ""
-"%0%'s friends. Meet new people and make new friends, sex friends, hot "
-"friends for Flirt, Speed Dating or social relationship with %site_name%"
+msgid "%0%'s friends. Meet new people and make new friends, sex friends, hot friends for Flirt, Speed Dating or social relationship with %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/friend/controllers/MainController.php:87
-msgid ""
-"friend,friends,girl friend,boy friend,sex friend,hot friend,new friend,"
-"friendship,dating,flirt,%0%"
+msgid "friend,friends,girl friend,boy friend,sex friend,hot friend,new friend,friendship,dating,flirt,%0%"
 msgstr ""
 
 #: _protected/app/system/modules/friend/controllers/MainController.php:121
@@ -5907,8 +5619,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: _protected/app/system/modules/game/controllers/MainController.php:162
-msgid ""
-"Search the Flash Game in the Category %0% - Community Dating Social Games"
+msgid "Search the Flash Game in the Category %0% - Community Dating Social Games"
 msgstr ""
 
 #: _protected/app/system/modules/game/controllers/MainController.php:173
@@ -5932,9 +5643,7 @@ msgid "Wrong download ID specified!"
 msgstr ""
 
 #: _protected/app/system/modules/game/controllers/MainController.php:304
-msgid ""
-"Please return to the <a href=\"%0%\">main game page</a> or <a href=\"%1%"
-"\">the previous page</a>."
+msgid "Please return to the <a href=\"%0%\">main game page</a> or <a href=\"%1%\">the previous page</a>."
 msgstr ""
 
 #: _protected/app/system/modules/game/forms/AdminEditForm.php:50
@@ -6001,9 +5710,7 @@ msgid "The game has been successfully updated"
 msgstr ""
 
 #: _protected/app/system/modules/game/forms/processing/AdminFormProcess.php:50
-msgid ""
-"Impossible to upload the game. Please check if the folder \"%0%\" has the "
-"write permission (CHMOD 755) or contact your host to check it."
+msgid "Impossible to upload the game. Please check if the folder \"%0%\" has the write permission (CHMOD 755) or contact your host to check it."
 msgstr ""
 
 #: _protected/app/system/modules/game/forms/processing/AdminFormProcess.php:72
@@ -6031,9 +5738,7 @@ msgid "Hot On Not - Free Online Dating Site"
 msgstr ""
 
 #: _protected/app/system/modules/hotornot/controllers/MainController.php:45
-msgid ""
-"hot, hot or not, hotornot, sexy, rate, rating, voting, women, free, dating, "
-"speed dating, flirt"
+msgid "hot, hot or not, hotornot, sexy, rate, rating, voting, women, free, dating, speed dating, flirt"
 msgstr ""
 
 #: _protected/app/system/modules/hotornot/controllers/MainController.php:55
@@ -6054,8 +5759,7 @@ msgid "%0% is offline. Send a <a href='%1%'>Private Message</a> instead."
 msgstr ""
 
 #: _protected/app/system/modules/im/assets/ajax/MessengerAjax.php:192
-msgid ""
-"You need to <a href='%0%'>upgrade your membership</a> to be able to chat."
+msgid "You need to <a href='%0%'>upgrade your membership</a> to be able to chat."
 msgstr ""
 
 #: _protected/app/system/modules/im/assets/ajax/MessengerAjax.php:194
@@ -6087,8 +5791,7 @@ msgid "Invite your Friends!"
 msgstr ""
 
 #: _protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:31
-msgid ""
-"To prevent spam, you cannot put more than %0% email addresses at a time."
+msgid "To prevent spam, you cannot put more than %0% email addresses at a time."
 msgstr ""
 
 #: _protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:37
@@ -6105,9 +5808,7 @@ msgid "Hello!"
 msgstr ""
 
 #: _protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:64
-msgid ""
-"You have received a privilege on the invitation from your friend on the new "
-"platform to meet new generation - %site_name%"
+msgid "You have received a privilege on the invitation from your friend on the new platform to meet new generation - %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:65
@@ -6119,16 +5820,11 @@ msgid "Message left by your friend:"
 msgstr ""
 
 #: _protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:67
-msgid ""
-"You are receiving this message because \"%0%\" you know has entered your "
-"email address in the form of invitation of friends to our site. This is not "
-"spam!"
+msgid "You are receiving this message because \"%0%\" you know has entered your email address in the form of invitation of friends to our site. This is not spam!"
 msgstr ""
 
 #: _protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:76
-msgid ""
-"Privilege on the invitation from your friend for the new generation "
-"community platform - %site_name%"
+msgid "Privilege on the invitation from your friend for the new generation community platform - %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/lost-password/controllers/MainController.php:35
@@ -6156,9 +5852,7 @@ msgid "Your new password is: %0%"
 msgstr ""
 
 #: _protected/app/system/modules/lost-password/controllers/MainController.php:106
-msgid ""
-"Please change it once you are <a href=\"%0%\">logged in</a> (Account -> Edit "
-"Profile -> Change Password)."
+msgid "Please change it once you are <a href=\"%0%\">logged in</a> (Account -> Edit Profile -> Change Password)."
 msgstr ""
 
 #: _protected/app/system/modules/lost-password/controllers/MainController.php:152
@@ -6174,14 +5868,11 @@ msgid "Password reset instructions sent to %0%"
 msgstr ""
 
 #: _protected/app/system/modules/lost-password/forms/processing/ForgotPasswordFormProcess.php:72
-msgid ""
-"Someone (from the IP: %0%) has requested a new password for this account."
+msgid "Someone (from the IP: %0%) has requested a new password for this account."
 msgstr ""
 
 #: _protected/app/system/modules/lost-password/forms/processing/ForgotPasswordFormProcess.php:73
-msgid ""
-"If you requested it, click on the link below, otherwise please ignore this "
-"email and your password will remain unchanged."
+msgid "If you requested it, click on the link below, otherwise please ignore this email and your password will remain unchanged."
 msgstr ""
 
 #: _protected/app/system/modules/lost-password/forms/processing/ForgotPasswordFormProcess.php:80
@@ -6189,9 +5880,7 @@ msgid "Request for new password - %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/love-calculator/controllers/MainController.php:59
-msgid ""
-"Love Calculator with <span class=\"pH1\">You</span> and <span class=\"pH1\">"
-"%0%</span>"
+msgid "Love Calculator with <span class=\"pH1\">You</span> and <span class=\"pH1\">%0%</span>"
 msgstr ""
 
 #: _protected/app/system/modules/love-calculator/controllers/MainController.php:85
@@ -6350,9 +6039,7 @@ msgid "Search a message:"
 msgstr ""
 
 #: _protected/app/system/modules/mail/forms/SearchMailForm.php:19
-msgid ""
-"Enter a keyword in the Subject, Contents, Author (username, first name, last "
-"name) or message ID."
+msgid "Enter a keyword in the Subject, Contents, Author (username, first name, last name) or message ID."
 msgstr ""
 
 #: _protected/app/system/modules/mail/forms/SearchMailForm.php:20
@@ -6426,9 +6113,7 @@ msgid "Oops! You can not send a message to yourself."
 msgstr ""
 
 #: _protected/app/system/modules/mail/forms/processing/MailFormProcess.php:45
-msgid ""
-"Oops! You cannot reply to administrator! If you want to contact us, please "
-"use our <a href=\"%0%\">contact form</a>."
+msgid "Oops! You cannot reply to administrator! If you want to contact us, please use our <a href=\"%0%\">contact form</a>."
 msgstr ""
 
 #: _protected/app/system/modules/mail/forms/processing/MailFormProcess.php:47
@@ -6460,25 +6145,15 @@ msgid "Oops! The country name is not specified."
 msgstr ""
 
 #: _protected/app/system/modules/map/controllers/CountryController.php:102
-msgid ""
-"Free online dating in %0% %1%, meet people, find friends. Single men & women "
-"in %2% %3%"
+msgid "Free online dating in %0% %1%, meet people, find friends. Single men & women in %2% %3%"
 msgstr ""
 
 #: _protected/app/system/modules/map/controllers/CountryController.php:103
-msgid ""
-"Free online dating in %0% with single women & men. Personals, meet people & "
-"find friends in %1% on internet dating site. Find sweet love or sex dating "
-"and flirt in %2%, %3% with %site_name%"
+msgid "Free online dating in %0% with single women & men. Personals, meet people & find friends in %1% on internet dating site. Find sweet love or sex dating and flirt in %2%, %3% with %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/map/controllers/CountryController.php:104
-msgid ""
-"meeting woman, meeting man, %0%, %1%, meet people, networking, friends, "
-"communicate, meet online, online community, clubs, announces meeting, free "
-"dating, dating, %2% dating, communication, matrimonial meeting, sharing "
-"photos, flirt, finding friends, classifieds, personals, online, social "
-"networking"
+msgid "meeting woman, meeting man, %0%, %1%, meet people, networking, friends, communicate, meet online, online community, clubs, announces meeting, free dating, dating, %2% dating, communication, matrimonial meeting, sharing photos, flirt, finding friends, classifieds, personals, online, social networking"
 msgstr ""
 
 #: _protected/app/system/modules/map/controllers/CountryController.php:105
@@ -6508,21 +6183,15 @@ msgid "Wow! You are the %0%th member! YOU ARE AWESOME! 😍"
 msgstr ""
 
 #: _protected/app/system/modules/milestone-celebration/controllers/MainController.php:68
-msgid ""
-"#WOW! I'm the %0%th member on %site_url%! #milestone succeeded!!! #%site_name"
-"%"
+msgid "#WOW! I'm the %0%th member on %site_url%! #milestone succeeded!!! #%site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/milestone-celebration/inc/class/MessageGenerator.php:31
-msgid ""
-"Do you think it is the right time to <a href=\"%0%\">Become a Patron</a> and "
-"support the development of the software?"
+msgid "Do you think it is the right time to <a href=\"%0%\">Become a Patron</a> and support the development of the software?"
 msgstr ""
 
 #: _protected/app/system/modules/milestone-celebration/inc/class/MessageGenerator.php:32
-msgid ""
-"Are you generous enough to thank the development of the software? <a href="
-"\"%0%\">Become a patron</a> today."
+msgid "Are you generous enough to thank the development of the software? <a href=\"%0%\">Become a patron</a> today."
 msgstr ""
 
 #: _protected/app/system/modules/milestone-celebration/inc/class/MessageGenerator.php:33
@@ -6636,15 +6305,11 @@ msgid "Subscribe to our Newsletter"
 msgstr ""
 
 #: _protected/app/system/modules/newsletter/controllers/HomeController.php:16
-msgid ""
-"Newsletters - Subscribe to our newsletter %site_name% | Social networking, "
-"dating website."
+msgid "Newsletters - Subscribe to our newsletter %site_name% | Social networking, dating website."
 msgstr ""
 
 #: _protected/app/system/modules/newsletter/controllers/HomeController.php:17
-msgid ""
-"newsletter, newsletters, subscription, email, social, social network, social "
-"networking, community, metting, dating, friends, people"
+msgid "newsletter, newsletters, subscription, email, social, social network, social networking, community, metting, dating, friends, people"
 msgstr ""
 
 #: _protected/app/system/modules/newsletter/forms/MsgForm.php:29
@@ -6698,10 +6363,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: _protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:49
-msgid ""
-"Please activate your subscription by clicking the activation link you "
-"received by email. If you can not find the email, please look in your SPAM "
-"FOLDER and mark as not spam."
+msgid "Please activate your subscription by clicking the activation link you received by email. If you can not find the email, please look in your SPAM FOLDER and mark as not spam."
 msgstr ""
 
 #: _protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:56
@@ -6852,16 +6514,12 @@ msgid "Edit the Note"
 msgstr ""
 
 #: _protected/app/system/modules/note/controllers/MainController.php:385
-msgid ""
-"You can go back on the <a href=\"%0%\">note homepage</a> or <a href=\"%1%"
-"\">search with different keywords</a>."
+msgid "You can go back on the <a href=\"%0%\">note homepage</a> or <a href=\"%1%\">search with different keywords</a>."
 msgstr ""
 
 #: _protected/app/system/modules/note/forms/EditNoteForm.php:95
 #: _protected/app/system/modules/note/forms/NoteForm.php:70
-msgid ""
-"Select a category that fits the best for your article. You can select up to "
-"three different categories"
+msgid "Select a category that fits the best for your article. You can select up to three different categories"
 msgstr ""
 
 #: _protected/app/system/modules/note/forms/EditNoteForm.php:98
@@ -6873,9 +6531,7 @@ msgid "Language of the post:"
 msgstr ""
 
 #: _protected/app/system/modules/note/forms/SearchNoteForm.php:22
-msgid ""
-"Enter Name, Keyword of posts, Author (username, first name, last name) or ID "
-"of a note."
+msgid "Enter Name, Keyword of posts, Author (username, first name, last name) or ID of a note."
 msgstr ""
 
 #: _protected/app/system/modules/note/forms/SearchNoteForm.php:29
@@ -6888,15 +6544,11 @@ msgid "You cannot select more than %0% categories."
 msgstr ""
 
 #: _protected/app/system/modules/note/forms/processing/EditNoteFormProcess.php:186
-msgid ""
-"Your updated note has been received. It will not be visible until it is "
-"approved by our moderators. Please do not send a new one."
+msgid "Your updated note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one."
 msgstr ""
 
 #: _protected/app/system/modules/note/forms/processing/NoteFormProcess.php:128
-msgid ""
-"Your note has been received. It will not be visible until it is approved by "
-"our moderators. Please do not send a new one."
+msgid "Your note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one."
 msgstr ""
 
 #: _protected/app/system/modules/page/controllers/MainController.php:36
@@ -6904,15 +6556,11 @@ msgid "Online Dating Sie for Single!"
 msgstr ""
 
 #: _protected/app/system/modules/page/controllers/MainController.php:37
-msgid ""
-"Meet new people and have meetings near you with %site_name%, the new online "
-"dating free site  new generation with webcam chat!"
+msgid "Meet new people and have meetings near you with %site_name%, the new online dating free site  new generation with webcam chat!"
 msgstr ""
 
 #: _protected/app/system/modules/page/controllers/MainController.php:38
-msgid ""
-"dating, free dating, online dating, people, meeting, romance, woman, man, "
-"dating site, flirt, chat, chat room, webcam, video chat, %site_name%"
+msgid "dating, free dating, online dating, people, meeting, romance, woman, man, dating site, flirt, chat, chat room, webcam, video chat, %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/page/controllers/MainController.php:39
@@ -7060,9 +6708,7 @@ msgid "Share this site with others!"
 msgstr ""
 
 #: _protected/app/system/modules/page/controllers/MainController.php:135
-msgid ""
-"Do you like %site_name% and want it even more popular, then share this site "
-"on your website, blog, discussion forum, etc..."
+msgid "Do you like %site_name% and want it even more popular, then share this site on your website, blog, discussion forum, etc..."
 msgstr ""
 
 #: _protected/app/system/modules/page/controllers/MainController.php:143
@@ -7250,9 +6896,7 @@ msgid "Buyer IP address: %0%"
 msgstr ""
 
 #: _protected/app/system/modules/payment/controllers/MainController.php:351
-msgid ""
-"It might be now the perfect time to <a href=\"%0%\">become a Patron</a> and "
-"support the development of the software?"
+msgid "It might be now the perfect time to <a href=\"%0%\">become a Patron</a> and support the development of the software?"
 msgstr ""
 
 #: _protected/app/system/modules/payment/controllers/MainController.php:360
@@ -7271,9 +6915,7 @@ msgstr ""
 
 #: _protected/app/system/modules/payment/forms/EditMembershipForm.php:80
 #: _protected/app/system/modules/payment/forms/MembershipForm.php:55
-msgid ""
-"Currency: %0%. 0 = Free. To change the currency, please <a href=\"%1%\">go "
-"to settings</a>."
+msgid "Currency: %0%. 0 = Free. To change the currency, please <a href=\"%1%\">go to settings</a>."
 msgstr ""
 
 #: _protected/app/system/modules/payment/forms/EditMembershipForm.php:89
@@ -7338,9 +6980,7 @@ msgid "Thanks a LOT for your donation!!! Highly appreciate :-)"
 msgstr ""
 
 #: _protected/app/system/modules/picture/controllers/MainController.php:58
-msgid ""
-"picture,photo,pictures,photos,album,albums,photo album,picture album,gallery,"
-"picture dating"
+msgid "picture,photo,pictures,photos,album,albums,photo album,picture album,gallery,picture dating"
 msgstr ""
 
 #: _protected/app/system/modules/picture/controllers/MainController.php:69
@@ -7374,8 +7014,7 @@ msgid "Photo Gallery Community"
 msgstr ""
 
 #: _protected/app/system/modules/picture/controllers/MainController.php:113
-msgid ""
-"%0%'s Albums | Photo Albums of the Dating Social Community - %site_name%"
+msgid "%0%'s Albums | Photo Albums of the Dating Social Community - %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/picture/controllers/MainController.php:140
@@ -7407,9 +7046,7 @@ msgid "%0%'s photo, %1%, %2%"
 msgstr ""
 
 #: _protected/app/system/modules/picture/controllers/MainController.php:174
-msgid ""
-"picture,photo,pictures,photos,album,albums,photo album,picture album,gallery,"
-"%0%,%1%,%2%"
+msgid "picture,photo,pictures,photos,album,albums,photo album,picture album,gallery,%0%,%1%,%2%"
 msgstr ""
 
 #: _protected/app/system/modules/picture/controllers/MainController.php:213
@@ -7440,15 +7077,11 @@ msgid "Search - %site_name% is a Dating Social Photo Community!"
 msgstr ""
 
 #: _protected/app/system/modules/picture/controllers/MainController.php:273
-msgid ""
-"search,picture,photo, photo gallery,dating,social network,community,music,"
-"movie,news,picture sharing"
+msgid "search,picture,photo, photo gallery,dating,social network,community,music,movie,news,picture sharing"
 msgstr ""
 
 #: _protected/app/system/modules/picture/controllers/MainController.php:304
-msgid ""
-"Please return to <a href=\"%0%\">the previous page</a> or <a href=\"%1%"
-"\">add new photos</a> in this album."
+msgid "Please return to <a href=\"%0%\">the previous page</a> or <a href=\"%1%\">add new photos</a> in this album."
 msgstr ""
 
 #: _protected/app/system/modules/picture/forms/AlbumForm.php:32
@@ -7496,9 +7129,7 @@ msgid "Tip:"
 msgstr ""
 
 #: _protected/app/system/modules/picture/forms/PictureForm.php:48
-msgid ""
-"You can select multiple photos at once by clicking multiple files while "
-"holding down the \"CTRL\" key."
+msgid "You can select multiple photos at once by clicking multiple files while holding down the \"CTRL\" key."
 msgstr ""
 
 #: _protected/app/system/modules/picture/forms/PictureForm.php:49
@@ -7507,9 +7138,7 @@ msgid "Note:"
 msgstr ""
 
 #: _protected/app/system/modules/picture/forms/PictureForm.php:49
-msgid ""
-"Please be patient while downloading pictures, this may take time (especially "
-"if you download a lot of photos at once)."
+msgid "Please be patient while downloading pictures, this may take time (especially if you download a lot of photos at once)."
 msgstr ""
 
 #: _protected/app/system/modules/picture/forms/PictureForm.php:50
@@ -7539,9 +7168,7 @@ msgid "Please add a category before you add some photos."
 msgstr ""
 
 #: _protected/app/system/modules/picture/forms/processing/PictureFormProcess.php:150
-msgid ""
-"Your photo(s) has/have been received. It will not be visible until it is "
-"approved by our moderators. Please do not send a new one."
+msgid "Your photo(s) has/have been received. It will not be visible until it is approved by our moderators. Please do not send a new one."
 msgstr ""
 
 #: _protected/app/system/modules/picture/forms/processing/PictureFormProcess.php:151
@@ -7680,10 +7307,7 @@ msgid "Comment:"
 msgstr ""
 
 #: _protected/app/system/modules/report/forms/ReportForm.php:38
-msgid ""
-"Please tell us why you want to report this content (scam, illegal content, "
-"adult content, etc.). Help us to eliminate scams, fake profiles, spam ... "
-"Thank you"
+msgid "Please tell us why you want to report this content (scam, illegal content, adult content, etc.). Help us to eliminate scams, fake profiles, spam ... Thank you"
 msgstr ""
 
 #: _protected/app/system/modules/report/forms/ReportForm.php:39
@@ -7768,9 +7392,7 @@ msgid "The digit code generated by your authenticator app:"
 msgstr ""
 
 #: _protected/app/system/modules/two-factor-auth/forms/VerificationCodeForm.php:37
-msgid ""
-"Open your two-factor authentication app on your device to view the 6 digit "
-"code."
+msgid "Open your two-factor authentication app on your device to view the 6 digit code."
 msgstr ""
 
 #: _protected/app/system/modules/two-factor-auth/forms/processing/VerificationCodeFormProcess.php:53
@@ -7882,8 +7504,7 @@ msgid "You are now logged out. Hope to see you again very soon!"
 msgstr ""
 
 #: _protected/app/system/modules/user/controllers/ProfileController.php:76
-msgid ""
-"Meet <span class=\"pH1\">%0%</span> on <span class=\"pH0\">%site_name%</span>"
+msgid "Meet <span class=\"pH1\">%0%</span> on <span class=\"pH0\">%site_name%</span>"
 msgstr ""
 
 #: _protected/app/system/modules/user/controllers/ProfileController.php:158
@@ -8067,10 +7688,7 @@ msgid "Action: %0%"
 msgstr ""
 
 #: _protected/app/system/modules/user/controllers/SignupController.php:64
-msgid ""
-"Sign Up today to meet friends, sex friends, singles, families, neighbors and "
-"many others people near or far from you! %site_name% is a free social dating "
-"with profiles, blog, rating, hot or not, video chat rooms"
+msgid "Sign Up today to meet friends, sex friends, singles, families, neighbors and many others people near or far from you! %site_name% is a free social dating with profiles, blog, rating, hot or not, video chat rooms"
 msgstr ""
 
 #: _protected/app/system/modules/user/controllers/SignupController.php:76
@@ -8090,8 +7708,7 @@ msgid "Free Sign Up to Meet Lovely People!"
 msgstr ""
 
 #: _protected/app/system/modules/user/controllers/SignupController.php:159
-msgid ""
-"Sign up to meet %0% on %site_name%. The Real Social Dating app!"
+msgid "Sign up to meet %0% on %site_name%. The Real Social Dating app!"
 msgstr ""
 
 #: _protected/app/system/modules/user/controllers/SignupController.php:176
@@ -8099,15 +7716,11 @@ msgid "Sign Up on %site_name%! 🎉"
 msgstr ""
 
 #: _protected/app/system/modules/user/controllers/SignupController.php:179
-msgid ""
-"😍 Sign Up to Meet <span class=\"pink2\">%0%</span> (a.k.a <span "
-"class=\"pink1\">%1%</span>) on <span class=\"pink2\">%site_name%</span> 🥰"
+msgid "😍 Sign Up to Meet <span class=\"pink2\">%0%</span> (a.k.a <span class=\"pink1\">%1%</span>) on <span class=\"pink2\">%site_name%</span> 🥰"
 msgstr ""
 
 #: _protected/app/system/modules/user/controllers/VisitorController.php:65
-msgid ""
-"The Last %0%'s visitors. Meet new people and make new visitors on your "
-"social profile. Make new Visitors and Friends with %site_name%"
+msgid "The Last %0%'s visitors. Meet new people and make new visitors on your social profile. Make new Visitors and Friends with %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/user/controllers/VisitorController.php:70
@@ -8228,9 +7841,7 @@ msgid "About Me"
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/JoinForm.php:158
-msgid ""
-"Describe yourself in a few words. Your description should be at least 20 "
-"characters long."
+msgid "Describe yourself in a few words. Your description should be at least 20 characters long."
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/JoinForm.php:195
@@ -8279,10 +7890,7 @@ msgid "Newsletters"
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/NotificationForm.php:35
-msgid ""
-"By enabling this option, you would be likely to receive occasional news on "
-"our website and our services and offers, promotions and other benefits to "
-"our partners."
+msgid "By enabling this option, you would be likely to receive occasional news on our website and our services and offers, promotions and other benefits to our partners."
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/NotificationForm.php:36
@@ -8323,9 +7931,7 @@ msgstr ""
 
 #: _protected/app/system/modules/user/forms/PrivacyForm.php:58
 #, php-format
-msgid ""
-"Yes, include my profile in search results (%site_name%'s search, Google, "
-"Bing, Yahoo, etc.)."
+msgid "Yes, include my profile in search results (%site_name%'s search, Google, Bing, Yahoo, etc.)."
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/PrivacyForm.php:59
@@ -8341,15 +7947,11 @@ msgid "Would you like to display members that have viewed your profile?"
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/PrivacyForm.php:73
-msgid ""
-"Yes, display members who viewed my profile (Selecting this option will allow "
-"other members to see that you visited their profile)."
+msgid "Yes, display members who viewed my profile (Selecting this option will allow other members to see that you visited their profile)."
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/PrivacyForm.php:74
-msgid ""
-"No, don't display members who viewed my profile. (Selecting this option will "
-"prevent you from seeing who visited your profile)."
+msgid "No, don't display members who viewed my profile. (Selecting this option will prevent you from seeing who visited your profile)."
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/PrivacyForm.php:82
@@ -8369,9 +7971,7 @@ msgid "Last Seen on your profile"
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/processing/AvatarFormProcess.php:44
-msgid ""
-"Your profile photo has been received. It will not be visible until it is "
-"approved by our moderators. Please do not send a new one."
+msgid "Your profile photo has been received. It will not be visible until it is approved by our moderators. Please do not send a new one."
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/processing/AvatarFormProcess.php:45
@@ -8379,9 +7979,7 @@ msgid "Your profile photo has been updated successfully!"
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/processing/DesignFormProcess.php:44
-msgid ""
-"Your Wallpaper has been received. It will not be visible until it is "
-"approved by our moderators. Please do not send a new one."
+msgid "Your Wallpaper has been received. It will not be visible until it is approved by our moderators. Please do not send a new one."
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/processing/DesignFormProcess.php:45
@@ -8414,9 +8012,7 @@ msgid "Youtube API Key - Setting"
 msgstr ""
 
 #: _protected/app/system/modules/video/controllers/MainController.php:57
-msgid ""
-"video,videos,free,free videos,music,online,watch,dating,video dating,social,"
-"community,social network,people video,flirt"
+msgid "video,videos,free,free videos,music,online,watch,dating,video dating,social,community,social network,people video,flirt"
 msgstr ""
 
 #: _protected/app/system/modules/video/controllers/MainController.php:76
@@ -8440,8 +8036,7 @@ msgid "Video Gallery Community"
 msgstr ""
 
 #: _protected/app/system/modules/video/controllers/MainController.php:114
-msgid ""
-"%0%'s Albums | Video Albums of the Dating Social Community - %site_name%"
+msgid "%0%'s Albums | Video Albums of the Dating Social Community - %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/video/controllers/MainController.php:145
@@ -8499,14 +8094,11 @@ msgid "Search - %site_name% is a Dating Social Video Community!"
 msgstr ""
 
 #: _protected/app/system/modules/video/controllers/MainController.php:284
-msgid ""
-"search,video,dating,social network,community,music,movie,news,video sharing"
+msgid "search,video,dating,social network,community,music,movie,news,video sharing"
 msgstr ""
 
 #: _protected/app/system/modules/video/controllers/MainController.php:313
-msgid ""
-"Please return to <a href=\"%0%\">the previous page</a> or <a href=\"%1%"
-"\">add a new video</a> in this album."
+msgid "Please return to <a href=\"%0%\">the previous page</a> or <a href=\"%1%\">add a new video</a> in this album."
 msgstr ""
 
 #: _protected/app/system/modules/video/forms/EditVideoForm.php:46
@@ -8540,9 +8132,7 @@ msgid "Video:"
 msgstr ""
 
 #: _protected/app/system/modules/video/forms/VideoForm.php:51
-msgid ""
-"Please be patient while downloading video, this may take time (especially if "
-"you download a long video)."
+msgid "Please be patient while downloading video, this may take time (especially if you download a long video)."
 msgstr ""
 
 #: _protected/app/system/modules/video/forms/VideoForm.php:52
@@ -8570,15 +8160,11 @@ msgid "Please add a category before you add a video."
 msgstr ""
 
 #: _protected/app/system/modules/video/forms/processing/VideoFormProcess.php:75
-msgid ""
-"Unable to retrieve information from the video. Are you sure that the URL of "
-"the video is correct?"
+msgid "Unable to retrieve information from the video. Are you sure that the URL of the video is correct?"
 msgstr ""
 
 #: _protected/app/system/modules/video/forms/processing/VideoFormProcess.php:87
-msgid ""
-"Oops! The embed video link looks incorrect? Please make sure that the link "
-"is correct."
+msgid "Oops! The embed video link looks incorrect? Please make sure that the link is correct."
 msgstr ""
 
 #: _protected/app/system/modules/video/forms/processing/VideoFormProcess.php:109
@@ -8590,9 +8176,7 @@ msgid "You have to choose video type."
 msgstr ""
 
 #: _protected/app/system/modules/video/forms/processing/VideoFormProcess.php:185
-msgid ""
-"Your video has been received. It will not be visible until it is approved by "
-"our moderators. Please do not send a new one."
+msgid "Your video has been received. It will not be visible until it is approved by our moderators. Please do not send a new one."
 msgstr ""
 
 #: _protected/app/system/modules/video/forms/processing/VideoFormProcess.php:186
@@ -8616,9 +8200,7 @@ msgid "Webcam Picture Party Fun"
 msgstr ""
 
 #: _protected/app/system/modules/webcam/controllers/WebcamController.php:29
-msgid ""
-"Come take your best pictures of you and your friends on the wall of the best "
-"photo shoots!"
+msgid "Come take your best pictures of you and your friends on the wall of the best photo shoots!"
 msgstr ""
 
 #: _protected/app/system/modules/webcam/controllers/WebcamController.php:30
@@ -8631,9 +8213,7 @@ msgid "Webcam Video Party Fun"
 msgstr ""
 
 #: _protected/app/system/modules/webcam/controllers/WebcamController.php:44
-msgid ""
-"Come take your best videos of you and your friends on the wall of the best "
-"video shoots!"
+msgid "Come take your best videos of you and your friends on the wall of the best video shoots!"
 msgstr ""
 
 #: _protected/app/system/modules/xml/controllers/RssController.php:24
@@ -8641,9 +8221,7 @@ msgid "RSS Feed List"
 msgstr ""
 
 #: _protected/app/system/modules/xml/controllers/RssController.php:26
-msgid ""
-"RSS Feed %site_name%, Free Online Dating Site with Video Chat Rooms, Meet "
-"Single People with %site_name%"
+msgid "RSS Feed %site_name%, Free Online Dating Site with Video Chat Rooms, Meet Single People with %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/xml/controllers/RssController.php:93
@@ -8679,9 +8257,7 @@ msgid "Site Map"
 msgstr ""
 
 #: _protected/app/system/modules/xml/controllers/SitemapController.php:26
-msgid ""
-"Map of Website, Free Online Social Dating Website with Video Chat Rooms, "
-"Meet Single People with %site_name%"
+msgid "Map of Website, Free Online Social Dating Website with Video Chat Rooms, Meet Single People with %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/xml/controllers/SitemapController.php:98
@@ -9185,9 +8761,7 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/signuplayout.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/visitorlayout.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/video_f6fa126c5efdb5b591bfcfd28780c0a0/base/mainlayout.cpl.php:19
-msgid ""
-"JavaScript is disabled on your Web browser!<br /> Please enable JavaScript "
-"via the options of your Web browser in order to use this website."
+msgid "JavaScript is disabled on your Web browser!<br /> Please enable JavaScript via the options of your Web browser in order to use this website."
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/accountlayout.cpl.php:19
@@ -13407,9 +12981,7 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/visitortop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/video_f6fa126c5efdb5b591bfcfd28780c0a0/base/maintop_menu.inc.cpl.php:19
 #, php-format
-msgid ""
-"Will You Be Nice Today? Like 81% of our users who contribute on a regular "
-"basis."
+msgid "Will You Be Nice Today? Like 81% of our users who contribute on a regular basis."
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/accounttop_menu.inc.cpl.php:19
@@ -13601,9 +13173,7 @@ msgid "Let others know about pH7CMS 🤗"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/info/software.cpl.php:19
-msgid ""
-"Here is a <a class=\"bold underline\" href=\"%0%\">pre-written Tweet</a> "
-"(which you can edit, of course)."
+msgid "Here is a <a class=\"bold underline\" href=\"%0%\">pre-written Tweet</a> (which you can edit, of course)."
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/info/software.cpl.php:19
@@ -13667,9 +13237,7 @@ msgid "Your logged IP is:"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/main/news.inc.cpl.php:19
-msgid ""
-"Latest <a href=\"%software_website%\" title=\"%software_name%\">pH7CMS "
-"Software</a>'s News"
+msgid "Latest <a href=\"%software_website%\" title=\"%software_name%\">pH7CMS Software</a>'s News"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/main/news.inc.cpl.php:19
@@ -13848,9 +13416,7 @@ msgid "Size"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/tool/freespace.cpl.php:19
-msgid ""
-"Note: If all folders are on the same hard disk, you will have the same size "
-"everywhere."
+msgid "Note: If all folders are on the same hard disk, you will have the same size everywhere."
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/tool/index.cpl.php:19
@@ -14127,8 +13693,7 @@ msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/ph7cms-helper_c718c7a0c6017242b5287b948f02581d/base/main/donationbox.cpl.php:19
 #, php-format
-msgid ""
-"Be like the 81% of users who contribute to the software on a regular basis 🙏"
+msgid "Be like the 81% of users who contribute to the software on a regular basis 🙏"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/ph7cms-helper_c718c7a0c6017242b5287b948f02581d/base/main/donationbox.cpl.php:19
@@ -14367,9 +13932,7 @@ msgid "Invalid Log Option."
 msgstr ""
 
 #: _protected/framework/Geo/Map/Api.class.php:626
-msgid ""
-"You need to get a Google Maps API key to get it working. Please go to your "
-"pH7CMS Admin Panel -> Settings -> General -> API -> Google Maps API Key"
+msgid "You need to get a Google Maps API key to get it working. Please go to your pH7CMS Admin Panel -> Settings -> General -> API -> Google Maps API Key"
 msgstr ""
 
 #: _protected/framework/Geo/Map/Api.class.php:725
@@ -14404,15 +13967,11 @@ msgid "%element% is invalid."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/AlphaNumeric.php:16
-msgid ""
-"Error: %element% must be alphanumeric (letters A-Z, numbers 0-9, underscores "
-"and dashes)."
+msgid "Error: %element% must be alphanumeric (letters A-Z, numbers 0-9, underscores and dashes)."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/BankAccount.php:39
-msgid ""
-"Error: Another account with the same bank account already exists. Please "
-"choose another one."
+msgid "Error: Another account with the same bank account already exists. Please choose another one."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/BankAccount.php:42
@@ -14444,15 +14003,11 @@ msgid "Error: %element% must be a valid email address."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/HexColor.php:13
-msgid "Error: The HEX color value is invalid. Has to be \"#XXXXXX\" format."
-"<br /> Maybe your browser is outdated or the version does not support "
-"\"color\" input type.<br /> Please retry with another browser such as Firefox,"
-" Chrome, Brave."
+msgid "Error: The HEX color value is invalid. Has to be \"#XXXXXX\" format.<br /> Maybe your browser is outdated or the version does not support \"color\" input type.<br /> Please retry with another browser such as Firefox, Chrome, Brave."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Name.php:14
-msgid ""
-"Error: %element% must be a valid name. The name doesn't seem to be correct."
+msgid "Error: %element% must be a valid name. The name doesn't seem to be correct."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Numeric.php:14
@@ -14464,15 +14019,11 @@ msgid "Error: Your password has to be from %0% to %1% characters long."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Phone.php:14
-msgid ""
-"Error: Your phone number is incorrect. Please enter full phone number with "
-"area code (e.g., +44768374890)."
+msgid "Error: Your phone number is incorrect. Please enter full phone number with area code (e.g., +44768374890)."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/RegExp.php:21
-msgid ""
-"Error: %element% contains invalid characters. Here is the rule to be "
-"followed: \"%0%\""
+msgid "Error: %element% contains invalid characters. Here is the rule to be followed: \"%0%\""
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Required.php:13
@@ -14488,15 +14039,11 @@ msgid "Error: %element% cannot exceed %0% character(s)."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Url.php:14
-msgid ""
-"Error: %element% must contain a URL (e.g., <a href=\"http://ph7cms.com"
-"\">http://ph7cms.com</a>)."
+msgid "Error: %element% must contain a URL (e.g., <a href=\"http://ph7cms.com\">http://ph7cms.com</a>)."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Username.php:33
-msgid ""
-"Error: Nickname has to be from %0% to %1% characters long, or it is not "
-"available, or already used by other user."
+msgid "Error: Nickname has to be from %0% to %1% characters long, or it is not available, or already used by other user."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/YesNo.php:13
@@ -14504,21 +14051,15 @@ msgid "Error: You must accept our %element%."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Form.class.php:27
-msgid ""
-"The security token does not exist or the security time of the token has "
-"expired. Please try again!"
+msgid "The security token does not exist or the security time of the token has expired. Please try again!"
 msgstr ""
 
 #: _protected/framework/Layout/Form/Form.class.php:37
-msgid ""
-"The file type is incompatible or too large. Please try again a smaller image "
-"with .gif, .png or .jpg extension."
+msgid "The file type is incompatible or too large. Please try again a smaller image with .gif, .png or .jpg extension."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Form.class.php:47
-msgid ""
-"The file type is incompatible or too large. The accepted file types are: ."
-"mov, .avi, .flv, .mp4, .mpg/.mpeg, .wmv, .ogg, .ogv, .webm or .mkv"
+msgid "The file type is incompatible or too large. The accepted file types are: .mov, .avi, .flv, .mp4, .mpg/.mpeg, .wmv, .ogg, .ogv, .webm or .mkv"
 msgstr ""
 
 #: _protected/framework/Layout/Form/Form.class.php:59
@@ -14526,32 +14067,23 @@ msgid "The HTTP parameter must be a %0% type!"
 msgstr ""
 
 #: _protected/framework/Layout/Form/Form.class.php:69
-msgid ""
-"Oops! Our email server encountered an internal error and the email could not "
-"be sent. Please try again later!"
+msgid "Oops! Our email server encountered an internal error and the email could not be sent. Please try again later!"
 msgstr ""
 
 #: _protected/framework/Layout/Form/Form.class.php:81
-msgid ""
-"Oops! You have exceeded allowed login attemts. Please try again in %0% %1%."
+msgid "Oops! You have exceeded allowed login attemts. Please try again in %0% %1%."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Form.class.php:89
-msgid ""
-"Oops! It seems that you have already sent the same message to prevent spam "
-"you can not send multiple same content."
+msgid "Oops! It seems that you have already sent the same message to prevent spam you can not send multiple same content."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Form.class.php:97
-msgid ""
-"Oops! It seems that you abuse of links. Why links are that important for "
-"you...?"
+msgid "Oops! It seems that you abuse of links. Why links are that important for you...?"
 msgstr ""
 
 #: _protected/framework/Layout/Form/Form.class.php:105
-msgid ""
-"Oops! It seems that you abuse of emails. Why emails are that important for "
-"you...?"
+msgid "Oops! It seems that you abuse of emails. Why emails are that important for you...?"
 msgstr ""
 
 #: _protected/framework/Layout/Form/Form.class.php:118
@@ -14559,9 +14091,7 @@ msgid "Oops! You have to wait %0% %1% before you can send another."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Form.class.php:130
-msgid ""
-"Oops! Somebody has recently registered with the same IP address. You have to "
-"wait %0% %1% before try again."
+msgid "Oops! Somebody has recently registered with the same IP address. You have to wait %0% %1% before try again."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Form.class.php:144
@@ -14652,9 +14182,7 @@ msgid "You need to be a user to report contents."
 msgstr ""
 
 #: _protected/framework/Layout/Html/Design.class.php:878
-msgid ""
-"Report feature is not available for this content since the user who posted "
-"that content has been removed."
+msgid "Report feature is not available for this content since the user who posted that content has been removed."
 msgstr ""
 
 #: _protected/framework/Layout/Html/Mail.class.php:75
@@ -14662,10 +14190,7 @@ msgid "Best regards,<br />%0% team."
 msgstr ""
 
 #: _protected/framework/Layout/Html/Mail.class.php:85
-msgid ""
-"This message was sent to %0%.<br /> You receive this message because you are "
-"registered on %1%.<br /> You can change the email alerts by visiting your "
-"account."
+msgid "This message was sent to %0%.<br /> You receive this message because you are registered on %1%.<br /> You can change the email alerts by visiting your account."
 msgstr ""
 
 #: _protected/framework/Math/Measure/Height.class.php:48
@@ -14689,9 +14214,7 @@ msgid "Whoops! The page you requested was not found."
 msgstr ""
 
 #: _protected/framework/Mvc/Controller/Controller.class.php:112
-msgid ""
-"You may have clicked an expired link or mistyped the address. Some web "
-"addresses are case sensitive."
+msgid "You may have clicked an expired link or mistyped the address. Some web addresses are case sensitive."
 msgstr ""
 
 #: _protected/framework/Mvc/Controller/Controller.class.php:118
@@ -14707,9 +14230,7 @@ msgid "Oops! You are not authorized to access this page!"
 msgstr ""
 
 #: _protected/framework/Mvc/Controller/Controller.class.php:332
-msgid ""
-"You are too far away from us :( Unfortunately, we are not available in your "
-"country."
+msgid "You are too far away from us :( Unfortunately, we are not available in your country."
 msgstr ""
 
 #: _protected/framework/Payment/Gateway/Api/PayPal.class.php:110
@@ -14749,11 +14270,7 @@ msgid "Invalid connection to 2CheckOut."
 msgstr ""
 
 #: _protected/framework/Video/Video.class.php:66
-msgid ""
-"FFmpeg is not installed on the server or the path cannot be found. Please "
-"install and configure the path in \"~/YOUR-PROTECTED-FOLDER/app/configs/"
-"config.ini\" or contact the administrator of the site/server or web hosting "
-"by saying the problem."
+msgid "FFmpeg is not installed on the server or the path cannot be found. Please install and configure the path in \"~/YOUR-PROTECTED-FOLDER/app/configs/config.ini\" or contact the administrator of the site/server or web hosting by saying the problem."
 msgstr ""
 
 #: _protected/framework/Xml/Link.class.php:62
@@ -14810,9 +14327,7 @@ msgid "2) Find this piece of code \"%0%\" and add the following code after it."
 msgstr ""
 
 #: _repository/module/fake-admin-panel/install/info/in_conclusion.php:38
-msgid ""
-"3) Save the file and go to your Admin Panel -> Mods -> Fake Admin Panel -> "
-"Config Fake Admin Panel"
+msgid "3) Save the file and go to your Admin Panel -> Mods -> Fake Admin Panel -> Config Fake Admin Panel"
 msgstr ""
 
 #: _repository/module/fake-admin-panel/install/info/in_conclusion.php:39
@@ -14890,9 +14405,7 @@ msgstr ""
 #: _repository/upgrade/1.0.2-1.0.3/info/introduction.php:16
 #: _repository/upgrade/1.0.3-1.0.10/info/introduction.php:16
 #: _repository/upgrade/1.1.0-1.1.2/info/introduction.php:16
-msgid ""
-"Please make a backup of your site and your database before proceeding with "
-"upgrade!"
+msgid "Please make a backup of your site and your database before proceeding with upgrade!"
 msgstr ""
 
 #: _repository/upgrade/0.1.4-0.1.6/info/conclusion.php:17
@@ -14908,9 +14421,7 @@ msgid "Edit your \"%0%\" file."
 msgstr ""
 
 #: _repository/upgrade/1.0.0-1.0.1/info/conclusion.php:20
-msgid ""
-"Add M after the size of the \"upload.max_size\" variable (e.g., this: "
-"\"upload.max_size = 500M\" instead of \"upload.max_size = 500\""
+msgid "Add M after the size of the \"upload.max_size\" variable (e.g., this: \"upload.max_size = 500M\" instead of \"upload.max_size = 500\""
 msgstr ""
 
 #: _repository/upgrade/1.0.0-1.0.1/info/conclusion.php:21
@@ -14923,15 +14434,11 @@ msgid "Be careful because this version has a new hash algorithm password."
 msgstr ""
 
 #: _repository/upgrade/1.0.10-1.1.0/info/introduction.php:18
-msgid ""
-"If you have a lot of members, please, stay with your current version if you "
-"do not want all your members must reset their password."
+msgid "If you have a lot of members, please, stay with your current version if you do not want all your members must reset their password."
 msgstr ""
 
 #: _repository/upgrade/1.0.10-1.1.0/info/introduction.php:19
-msgid ""
-"Also for you (and other admins), be sure to reset your password with the new "
-"system hash."
+msgid "Also for you (and other admins), be sure to reset your password with the new system hash."
 msgstr ""
 
 #: _repository/upgrade/1.0.3-1.0.10/info/conclusion.php:18
@@ -14958,9 +14465,7 @@ msgstr ""
 #: _repository/upgrade/6.0.13-7.1.3/info/introduction.php:17
 #: _repository/upgrade/7.1.3-8.0.2/info/introduction.php:17
 #: _repository/upgrade/8.0.2-10.0.8/info/introduction.php:17
-msgid ""
-"Please make a backup of your website and database before proceeding the "
-"upgrade."
+msgid "Please make a backup of your website and database before proceeding the upgrade."
 msgstr ""
 
 #: _repository/upgrade/14.3.4-14.3.6/info/conclusion.php:17
@@ -14998,25 +14503,23 @@ msgid "WYSIWYG editor for Forum:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:76
-msgid "Enable WYSIWYG editor (CKEditor) for the forum posts. If disabled, the "
-"simple textarea field will be used."
+msgid "Enable WYSIWYG editor (CKEditor) for the forum posts. If disabled, the simple textarea field will be used."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:112
 msgid "Self-activation via SMS"
 msgstr ""
 
- #: _protected/app/system/modules/admin123/forms/SettingForm.php
- msgid "Leave it blank to disable the watermark text on images."
- msgstr ""
+#: _protected/app/system/modules/admin123/forms/SettingForm.php
+msgid "Leave it blank to disable the watermark text on images."
+msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/processing/AddFakeProfilesFormProcess.php:70
 msgid "None of the received fake profiles were valid for the system. Please try again."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/processing/AddFakeProfilesFormProcess.php:76
-msgid "An error occurred when requesting user data to %0%. Maybe, you could try again"
-" later."
+msgid "An error occurred when requesting user data to %0%. Maybe, you could try again later."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/admin/browse.tpl:10
@@ -15052,8 +14555,7 @@ msgid "Getting Started Smoothly"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/main/get_started_intro.inc.tpl:6
-msgid "Welcome to your admin dashboard! You will find everything you need to "
-"customize and manage your website in here 🙂"
+msgid "Welcome to your admin dashboard! You will find everything you need to customize and manage your website in here 🙂"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/main/get_started_intro.inc.tpl:10
@@ -15306,20 +14808,15 @@ msgid "Cache"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/tool/cacheconfig.tpl:5
-msgid "WARNING! Before enabling minify Java compiler, be sure to make sure that "
-"Java is installed on your server otherwise it will not work. It is usually "
-"available on dedicated servers, sometimes on shared hosting."
+msgid "WARNING! Before enabling minify Java compiler, be sure to make sure that Java is installed on your server otherwise it will not work. It is usually available on dedicated servers, sometimes on shared hosting."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/user/addfakeprofiles.tpl:6
-msgid "If you generate too many profiles, you might see duplicated profiles, due to "
-"the fact they are generated randomly."
+msgid "If you generate too many profiles, you might see duplicated profiles, due to the fact they are generated randomly."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/user/import.tpl:4
-msgid "Please import small or medium size file or split it in several files. The"
-" importation can takes minutes (or can even be hours!) depending of the file"
-" size.<br /> DO NOT interrupt the script."
+msgid "Please import small or medium size file or split it in several files. The importation can takes minutes (or can even be hours!) depending of the file size.<br /> DO NOT interrupt the script."
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/views/base/tpl/account/delete.tpl:4
@@ -15439,8 +14936,7 @@ msgstr ""
 
 #: _protected/app/system/modules/affiliate/views/base/tpl/home/resendactivation.tpl:3
 #: _protected/app/system/modules/user/views/base/tpl/main/resendactivation.tpl:3
-msgid "Simply enter your registered email address in the field below, and click "
-"the \"Send Activation\" button."
+msgid "Simply enter your registered email address in the field below, and click the \"Send Activation\" button."
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/views/base/tpl/home/resendactivation.tpl:4
@@ -15450,8 +14946,7 @@ msgstr ""
 
 #: _protected/app/system/modules/affiliate/views/base/tpl/home/resendactivation.tpl:10
 #: _protected/app/system/modules/user/views/base/tpl/main/resendactivation.tpl:10
-msgid "After you click the \"Send Activation\" button, the account activation email"
-" will be sent to you, using this email address."
+msgid "After you click the \"Send Activation\" button, the account activation email will be sent to you, using this email address."
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/views/base/tpl/home/resendactivation.tpl:11
@@ -15682,10 +15177,7 @@ msgid "Not Interested 👎"
 msgstr ""
 
 #: _protected/app/system/modules/lost-password/views/base/tpl/main/forgot.tpl:2
-msgid "If you forgot your password, enter your account email address below and "
-"we will send<br /> you an email containing a special link that will help you "
-"create a new password.<br /> Make sure you enter the <em>same email address "
-"you use to sign in to your profile</em>."
+msgid "If you forgot your password, enter your account email address below and we will send<br /> you an email containing a special link that will help you create a new password.<br /> Make sure you enter the <em>same email address you use to sign in to your profile</em>."
 msgstr ""
 
 #: _protected/app/system/modules/love-calculator/views/base/tpl/main/index.tpl:8
@@ -15729,10 +15221,7 @@ msgid "Inactive Account"
 msgstr ""
 
 #: _protected/app/system/modules/newsletter/views/base/tpl/admin/index.tpl:5
-msgid "WARNING! Before sending your emails, it is preferable that you have a "
-"dedicated hosting or agreement with your hosting company so that your hosting"
-" account will not be banned because many hosting not tolerate the sending of "
-"mass emails.<br /> Sending can take time! DO NOT interrupt the script."
+msgid "WARNING! Before sending your emails, it is preferable that you have a dedicated hosting or agreement with your hosting company so that your hosting account will not be banned because many hosting not tolerate the sending of mass emails.<br /> Sending can take time! DO NOT interrupt the script."
 msgstr ""
 
 #: _protected/app/system/modules/note/views/base/tpl/admin/unmoderated.tpl:5
@@ -15748,8 +15237,7 @@ msgid "Top Authors"
 msgstr ""
 
 #: _protected/app/system/modules/note/views/base/tpl/home.inc.tpl:85
-msgid "Login as this author to edit/delete this post. Please first approve this "
-"note as an administrator to be able to edit or delete it."
+msgid "Login as this author to edit/delete this post. Please first approve this note as an administrator to be able to edit or delete it."
 msgstr ""
 
 #: _protected/app/system/modules/note/views/base/tpl/home.inc.tpl:101
@@ -15777,11 +15265,7 @@ msgid "pH7 Social / Dating CMS"
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/about.tpl:5
-msgid ""
-"is a <a href=\"https://sourceforge.net/projects/ph7socialdating/\">Free</a>"
-" and <a href=\"https://github.com/pH7Software/pH7-Social-Dating-CMS\">Open"
-" Source</a> <strong>Social Dating Software</strong> for building online "
-"dating web apps and social networks."
+msgid "is a <a href=\"https://sourceforge.net/projects/ph7socialdating/\">Free</a> and <a href=\"https://github.com/pH7Software/pH7-Social-Dating-CMS\">Open Source</a> <strong>Social Dating Software</strong> for building online dating web apps and social networks."
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/about.tpl:7
@@ -15805,9 +15289,7 @@ msgid "contact us"
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/faq.tpl:9
-msgid "If you cannot login, check to make sure that your \"caps lock\" key is "
-"off. Your username and password are CaSe SeNsItIvE. If you still cannot login,"
-" you can request to"
+msgid "If you cannot login, check to make sure that your \"caps lock\" key is off. Your username and password are CaSe SeNsItIvE. If you still cannot login, you can request to"
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/faq.tpl:15
@@ -15815,9 +15297,7 @@ msgid "How can I update my profile?"
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/faq.tpl:20
-msgid "To update your profile, you must go into your profile and settings in "
-"your profile editing. You can move through the different parts of your profile"
-" by clicking the tabs at the top of the page."
+msgid "To update your profile, you must go into your profile and settings in your profile editing. You can move through the different parts of your profile by clicking the tabs at the top of the page."
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/faq.tpl:25
@@ -15825,9 +15305,7 @@ msgid "How can I delete my account?"
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/faq.tpl:30
-msgid "If you are absolutely sure that you want to delete your account, you can"
-" do so in your privacy settings. Please note that your account will be "
-"permanently deleted and irrecoverable!"
+msgid "If you are absolutely sure that you want to delete your account, you can do so in your privacy settings. Please note that your account will be permanently deleted and irrecoverable!"
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/faq.tpl:36
@@ -15843,9 +15321,7 @@ msgid "How can I deal with someone that is bothering me?"
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/faq.tpl:52
-msgid "If someone is bothering or harassing you, blocking them is usually the "
-"best solution. Please report it via our contact form with the url of the "
-"profile of the person and the explanation of what the person has done wrong."
+msgid "If someone is bothering or harassing you, blocking them is usually the best solution. Please report it via our contact form with the url of the profile of the person and the explanation of what the person has done wrong."
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/faq.tpl:58
@@ -15853,9 +15329,7 @@ msgid "By who this Web App has been developed?"
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/helpus.tpl:14
-msgid "A contribution to an open source project such as "
-"<a href=\"https://ph7cms.com/what-is-the-best-dating-software-provider/\">"
-"pH7CMS, Open Source Social/Dating Provider</a> looks great on your CV!"
+msgid "A contribution to an open source project such as <a href=\"https://ph7cms.com/what-is-the-best-dating-software-provider/\">pH7CMS, Open Source Social/Dating Provider</a> looks great on your CV!"
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/index.tpl:3
@@ -15871,13 +15345,11 @@ msgid "For love, flirting, simple date, romantic encounter..."
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/index.tpl:6
-msgid "It offers many services like webcam chat rooms, speed dating, entertainment"
-" video games, forum discussions, live messenger, etc."
+msgid "It offers many services like webcam chat rooms, speed dating, entertainment video games, forum discussions, live messenger, etc."
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/index.tpl:7
-msgid "So come quickly and join us on the next generation of online dating "
-"communities!"
+msgid "So come quickly and join us on the next generation of online dating communities!"
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/index.tpl:11
@@ -15913,8 +15385,7 @@ msgid "Your Link Here!"
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/sharesite.tpl:3
-msgid "Share %site_name% with your colleagues, your family, your neighbors, your"
-" friends or on your website, blog, discussion forum, etc..."
+msgid "Share %site_name% with your colleagues, your family, your neighbors, your friends or on your website, blog, discussion forum, etc..."
 msgstr ""
 
 #: _protected/app/system/modules/payment/views/base/tpl/admin/index.tpl:2
@@ -15946,13 +15417,11 @@ msgid "Add new Membership"
 msgstr ""
 
 #: _protected/app/system/modules/payment/views/base/tpl/main/error.tpl:3
-msgid "The purchase failed. The payment status of your purchase might be just "
-"pending, in progress or invalid."
+msgid "The purchase failed. The payment status of your purchase might be just pending, in progress or invalid."
 msgstr ""
 
 #: _protected/app/system/modules/payment/views/base/tpl/main/error.tpl:7
-msgid "If the problem persists, please contact your payment provider or "
-"<a href=\"%0%\">contact us</a>."
+msgid "If the problem persists, please contact your payment provider or <a href=\"%0%\">contact us</a>."
 msgstr ""
 
 #: _protected/app/system/modules/payment/views/base/tpl/main/index.tpl:2
@@ -16060,8 +15529,7 @@ msgid "Will you do it? Awesome! 😊️"
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/reviewbox.tpl:3
-msgid "Are you Feeling Generous Enough? Will you <a href=\"%0%\">Give a Nice "
-"Review</a>?"
+msgid "Are you Feeling Generous Enough? Will you <a href=\"%0%\">Give a Nice Review</a>?"
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/reviewbox.tpl:10
@@ -16121,8 +15589,7 @@ msgid "Well... you are not alone! I totally understand you!"
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/upsetbox.tpl:30
-msgid "...if you want to help me making the software (and so, your website) the "
-"best on the market."
+msgid "...if you want to help me making the software (and so, your website) the best on the market."
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/upsetbox.tpl:31
@@ -16134,8 +15601,7 @@ msgid "Would you be willing to give a contribution? And being part of this amazi
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/upsetbox.tpl:35
-msgid "Once you made a donation, I will ship faster and better to you new features"
-" and changes to the software 🚀"
+msgid "Once you made a donation, I will ship faster and better to you new features and changes to the software 🚀"
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/upsetbox.tpl:40
@@ -16177,8 +15643,7 @@ msgid "Number of Profiles:"
 msgstr ""
 
 #: _protected/app/system/modules/profile-faker/forms/GenerateProfileForm.php:49
-msgid "Number of profiles to generate. Choosing a high number might take a few "
-"minutes to load."
+msgid "Number of profiles to generate. Choosing a high number might take a few minutes to load."
 msgstr ""
 
 #: _protected/app/system/modules/profile-faker/forms/GenerateProfileForm.php:59
@@ -16306,8 +15771,7 @@ msgid "Your Phone Number"
 msgstr ""
 
 #: _protected/app/system/modules/sms-verification/forms/PhoneNumberForm.php:34
-msgid "In order to verify your account, please enter your phone number and we will"
-" text you with a verification code."
+msgid "In order to verify your account, please enter your phone number and we will text you with a verification code."
 msgstr ""
 
 #: _protected/app/system/modules/sms-verification/forms/VerificationForm.php:31
@@ -16331,8 +15795,7 @@ msgid "The SMS verification code is invalid. <a href=\"%0%\">Try to resend a new
 msgstr ""
 
 #: _protected/app/system/modules/two-factor-auth/views/base/tpl/main/setup.tpl:3
-msgid "To use this, you have first to download a TOTP \"Two-Factor Authentication\""
-" app such as <a href=\"%0%\">Android</a> and <a href=\"%1%\">iOS</a>."
+msgid "To use this, you have first to download a TOTP \"Two-Factor Authentication\" app such as <a href=\"%0%\">Android</a> and <a href=\"%1%\">iOS</a>."
 msgstr ""
 
 #: _protected/app/system/modules/two-factor-auth/views/base/tpl/main/setup.tpl:8
@@ -16344,8 +15807,7 @@ msgid "Turn Off Two-Factor Authentication"
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/PrivacyForm.php:74
-msgid "No, don\'t display members who viewed my profile. (Selecting this option"
-" will prevent you from seeing who visited your profile)."
+msgid "No, don't display members who viewed my profile. (Selecting this option will prevent you from seeing who visited your profile)."
 msgstr ""
 
 #: _protected/app/system/modules/user/views/base/tpl/main/accountdeleted.tpl:3
@@ -16491,10 +15953,7 @@ msgid "You need a Google API key to retrieve the Youtube video infos."
 msgstr ""
 
 #: _protected/app/system/modules/video/views/base/tpl/admin/config.tpl:6
-msgid "You can get one <a href=\"%0%\">here</a>. Enable YouTube Data API (which "
-"is disabled by default). Finally create an API key. Select \"Api Key\" for the "
-"Credential type, then select \"Server Key\", then you will get your API key to "
-"paste in this form. "
+msgid "You can get one <a href=\"%0%\">here</a>. Enable YouTube Data API (which is disabled by default). Finally create an API key. Select \"Api Key\" for the Credential type, then select \"Server Key\", then you will get your API key to paste in this form. "
 msgstr ""
 
 #: _protected/app/system/modules/video/views/base/tpl/main/album.tpl:27
@@ -16599,7 +16058,7 @@ msgid "Oops! No links to display. Come back later ;)"
 msgstr ""
 
 #: _protected/framework/Layout/Tpl/Engine/PH7Tpl/Syntax/Curly.class.php:256
-msgid "([^\{\}]+)"
+msgid "([^\\{\\}]+)"
 msgstr ""
 
 #: _repository/module/fake-admin-panel/install/info/in_conclusion.php:19
@@ -16661,8 +16120,7 @@ msgid "My email address has changed."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/main/news.inc.tpl:2
-msgid "Latest <a href=\"%software_website%\" title=\"%software_name%\">pH7CMS "
-"Software</a>\'s News"
+msgid "Latest <a href=\"%software_website%\" title=\"%software_name%\">pH7CMS Software</a>'s News"
 msgstr ""
 
 #: _protected/app/system/modules/two-factor-auth/controllers/MainController.php:121
@@ -16674,7 +16132,6 @@ msgid "For security reasons, you cannot change your nickname."
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/EditForm.php:68
-msgid "For security reasons and to avoid spam, you cannot change your email "
-"address. If it has changed, you will need to <a href=\"%0%\">delete</a> your "
-"account and create a new one."
+msgid "For security reasons and to avoid spam, you cannot change your email address. If it has changed, you will need to <a href=\"%0%\">delete</a> your account and create a new one."
 msgstr ""
+
