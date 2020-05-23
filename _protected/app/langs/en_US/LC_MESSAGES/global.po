@@ -13241,7 +13241,7 @@ msgid "Latest <a href=\"%software_website%\" title=\"%software_name%\">pH7CMS So
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/main/news.inc.cpl.php:19
-msgid "More %software_name%'s News!"
+msgid "» Read more news! «"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/main/stat.cpl.php:19
