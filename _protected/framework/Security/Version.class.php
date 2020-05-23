@@ -142,14 +142,12 @@ final class Version
         }
         unset($oDom);
 
-        $mData = [
+        return [
             'is_alert' => $bIsAlert,
             'name' => $sVerName,
             'version' => $sVerNumber,
             'build' => $sVerBuild
         ];
-
-        return $mData;
     }
 
     /**
