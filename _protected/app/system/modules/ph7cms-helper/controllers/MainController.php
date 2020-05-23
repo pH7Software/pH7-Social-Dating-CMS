@@ -73,8 +73,9 @@ class MainController extends Controller
 
             $this->view->form_action = $oPayPal->getUrl();
             $this->view->form_body = $oPayPal->generate();
+        } else {
+            $this->injectCssFile();
         }
-
         $this->manualTplInclude($sBoxType . PH7Tpl::TEMPLATE_FILE_EXT);
 
         $this->output();
@@ -122,6 +123,14 @@ class MainController extends Controller
         }
 
         return self::VIEW_OPTIONS[array_rand(self::VIEW_OPTIONS)];
+    }
+
+    private function injectCssFile()
+    {
+        $this->design->addCss(
+            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
+            ValidateSiteCore::SUGGESTION_BOX_CSS_FILENAME
+        );
     }
 
     private function setPageVisit()
