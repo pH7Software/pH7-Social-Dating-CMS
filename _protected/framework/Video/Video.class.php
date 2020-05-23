@@ -4,10 +4,10 @@
  * @desc             Class is used to create/manipulate videos using FFmpeg.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Video
- * @link             http://ph7cms.com
+ * @link             https://ph7cms.com
  */
 
 namespace PH7\Framework\Video;
@@ -58,7 +58,6 @@ class Video extends Upload
      */
     public function __construct($aFile)
     {
-        $this->oFile = new File;
         $this->sFfmpegPath = Config::getInstance()->values['video']['handle.ffmpeg_path'];
 
         if (!file_exists($this->sFfmpegPath)) {
@@ -66,6 +65,7 @@ class Video extends Upload
             throw new MissingProgramException($sMsg);
         }
 
+        $this->oFile = new File;
         $this->aFile = $aFile;
         $this->sType = $this->aFile['type'];
 
@@ -82,14 +82,14 @@ class Video extends Upload
     public function validate()
     {
         if (!is_uploaded_file($this->aFile['tmp_name'])) {
-            if (!isDebug()) {
-                return false;
-            } else {
+            if (isDebug()) {
                 throw new TooLargeException('Video file could not be uploaded. Possibly too large.');
+            } else {
+                return false;
             }
-        } else {
-            return in_array($this->sType, self::SUPPORTED_TYPES, true);
         }
+
+        return in_array($this->sType, self::SUPPORTED_TYPES, true);
     }
 
     /**

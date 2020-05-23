@@ -4,7 +4,7 @@
  * @desc             Class is used to create/manipulate images using GD library.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Image
  * @link             https://ph7.me
@@ -97,46 +97,45 @@ class Image
         if (!$mImgType || !is_file($this->sFile)) {
             if (isDebug()) {
                 throw new TooLargeException('The file could not be uploaded. Possibly too large.');
-            } else {
-                return false;
             }
-        } else {
-            switch ($mImgType) {
-                case self::JPG:
-                    $this->rImage = imagecreatefromjpeg($this->sFile);
-                    $this->sType = self::JPG_NAME;
-                    break;
-
-                case self::PNG:
-                    $this->rImage = imagecreatefrompng($this->sFile);
-                    $this->sType = self::PNG_NAME;
-                    break;
-
-                case self::GIF:
-                    $this->rImage = imagecreatefromgif($this->sFile);
-                    $this->sType = self::GIF_NAME;
-                    break;
-
-                case self::WEBP: // Will only work with PHP >= 7.1
-                    $this->rImage = imagecreatefromwebp($this->sFile);
-                    $this->sType = self::WEBP_NAME;
-                    break;
-
-                // Invalid Zone
-                default:
-                    return false; // File type incompatible. Please save the image in .jpg, .png or .gif
-            }
-
-            $this->iWidth = imagesx($this->rImage);
-            $this->iHeight = imagesy($this->rImage);
-
-            if ($this->isTooLarge()) {
-                // Automatic resizing if the image is too large
-                $this->dynamicResize($this->iMaxWidth, $this->iMaxHeight);
-            }
-
-            return true;
+            return false;
         }
+
+        switch ($mImgType) {
+            case self::JPG:
+                $this->rImage = imagecreatefromjpeg($this->sFile);
+                $this->sType = self::JPG_NAME;
+                break;
+
+            case self::PNG:
+                $this->rImage = imagecreatefrompng($this->sFile);
+                $this->sType = self::PNG_NAME;
+                break;
+
+            case self::GIF:
+                $this->rImage = imagecreatefromgif($this->sFile);
+                $this->sType = self::GIF_NAME;
+                break;
+
+            case self::WEBP: // Will only work with PHP >= 7.1
+                $this->rImage = imagecreatefromwebp($this->sFile);
+                $this->sType = self::WEBP_NAME;
+                break;
+
+            // Invalid Zone
+            default:
+                return false; // File type incompatible. Please save the image in .jpg, .png or .gif
+        }
+
+        $this->iWidth = imagesx($this->rImage);
+        $this->iHeight = imagesy($this->rImage);
+
+        if ($this->isTooLarge()) {
+            // Automatic resizing if the image is too large
+            $this->dynamicResize($this->iMaxWidth, $this->iMaxHeight);
+        }
+
+        return true;
     }
 
     /**
