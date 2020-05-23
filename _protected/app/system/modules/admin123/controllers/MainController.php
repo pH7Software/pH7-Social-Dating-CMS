@@ -32,9 +32,9 @@ class MainController extends Controller
         }
 
         $this->view->page_title = t('Admin Panel');
-        $this->view->h1_title = t('Admin Dashboard 🚀');
-        $this->view->h2_title = t('Hi <em>%0%</em>! 🔆 Welcome back to your site!', $this->session->get('admin_first_name'));
-        $this->view->h3_title = t('How are you doing today?');
+        $this->view->h1_title = t('Admin Dashboard');
+        $this->view->h2_title = t('Hi <em>%0%</em>! Welcome back to your site! 🤗', $this->session->get('admin_first_name'));
+        $this->view->h3_title = t('How are you doing today? 🔆');
 
         $this->view->is_news_feed = (bool)DbConfig::getSetting('isSoftwareNewsFeed');
         $this->view->software_blog_url = self::SOFTWARE_BLOG_URL;
