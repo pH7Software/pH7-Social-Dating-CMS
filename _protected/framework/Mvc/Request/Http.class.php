@@ -286,13 +286,13 @@ class Http extends \PH7\Framework\Http\Http
     /**
      * Get Request URI.
      *
-     * @return string URI
+     * @return string Gives REQUEST_URI without relative subfolder path and the left first slash removed.
      */
     public function requestUri()
     {
         $sUri = $this->getUri();
 
-        // Remove the relative subfolder path and the first (left) slash
+        // Remove relative subfolder path and the first left slash
         $sRequestUri = ltrim($sUri, PH7_SH);
         $sRelative = ltrim(PH7_RELATIVE, PH7_SH);
 
