@@ -1020,8 +1020,11 @@ class UserCoreModel extends Model
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_WHO_VIEW) . 'WHERE profileId = ' . $iProfileId);
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_WHO_VIEW) . 'WHERE visitorId = ' . $iProfileId);
 
-        // DELETE REPORT
+        // DELETE REPORT FROM THE USER
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::REPORT) . 'WHERE spammerId = ' . $iProfileId);
+
+        // DELETE USER LOG SESSIONS
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_LOG_SESS) . 'WHERE profileId = ' . $iProfileId);
 
         // DELETE TOPICS of FORUMS
         /*
