@@ -86,6 +86,7 @@ class AdminModel extends AdminCoreModel
         }
 
         $oDb = Db::getInstance();
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::ADMIN_LOG_SESS) . 'WHERE profileId = ' . $iProfileId);
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::ADMIN) . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
         unset($oDb);
     }
