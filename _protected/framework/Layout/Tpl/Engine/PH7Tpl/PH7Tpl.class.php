@@ -326,18 +326,20 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
         }
 
         $this->sTemplateDirFile = $this->sTemplateDir . 'tpl' . PH7_DS . $this->sTplFile;
+        $bIsMainDir = $this->isMainDir($sDirPath);
+        $sCurrentController = $this->getCurrentController();
+        $sTplFileName = $this->file->getFileWithoutExt($this->sTplFile);
 
         $this->file->createDir($this->sCompileDir);
-        $bIsMainDir = $this->isMainDir($sDirPath);
 
         if ($bIsMainDir) {
             $this->sCompileDir2 = $this->sCompileDir . static::MAIN_COMPILE_DIR . PH7_DS . PH7_TPL_NAME . PH7_DS;
         } else {
-            $this->sCompileDir2 = $this->sCompileDir . $this->registry->module . '_' . md5($this->registry->path_module) . PH7_DS . PH7_TPL_MOD_NAME . PH7_DS . $this->getCurrentController() . PH7_DS;
+            $this->sCompileDir2 = $this->sCompileDir . $this->registry->module . '_' . md5($this->registry->path_module) . PH7_DS . PH7_TPL_MOD_NAME . PH7_DS . $sCurrentController . PH7_DS;
         }
 
-        $this->sCompileDirFile = ($bIsMainDir ? $this->sCompileDir2 . $this->file->getFileWithoutExt($this->sTplFile) . static::COMPILE_FILE_EXT : $this->sCompileDir2) .
-            str_replace($this->getCurrentController(), '', $this->file->getFileWithoutExt($this->sTplFile)) . static::COMPILE_FILE_EXT;
+        $this->sCompileDirFile = ($bIsMainDir ? $this->sCompileDir2 . $sTplFileName . static::COMPILE_FILE_EXT : $this->sCompileDir2) .
+            str_replace($sCurrentController, '', $sTplFileName) . static::COMPILE_FILE_EXT;
 
         if (!$this->file->existFile($this->sTemplateDirFile)) {
             throw new TplException(
