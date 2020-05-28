@@ -136,11 +136,11 @@ class UserCoreModel extends Model
      *
      * @return string The latest used user's IP address.
      */
-    public function getLastUsedIp($iProfileId, $sTable = DbTableName::MEMBER)
+    public function getLastUsedIp($iProfileId, $sTable = DbTableName::MEMBER_LOG_SESS)
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT ip FROM' . Db::prefix($sTable . '_log_sess') . 'WHERE profileId = :profileId ORDER BY dateTime DESC LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('SELECT ip FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId ORDER BY dateTime DESC LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
         $rStmt->execute();
         $sLastUsedIp = $rStmt->fetchColumn();

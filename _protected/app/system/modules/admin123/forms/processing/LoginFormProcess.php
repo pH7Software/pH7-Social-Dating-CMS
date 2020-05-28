@@ -52,7 +52,7 @@ class LoginFormProcess extends Form implements LoginableForm
                 $iTimeDelay,
                 $sEmail,
                 $this->view,
-                DbTableName::ADMIN
+                DbTableName::ADMIN_ATTEMPT_LOGIN
             )
         ) {
             \PFBC\Form::setError('form_admin_login', Form::loginAttemptsExceededMsg($iTimeDelay));
@@ -73,11 +73,11 @@ class LoginFormProcess extends Form implements LoginableForm
                     $sUsername,
                     $sPassword,
                     'Failed! Incorrect Email, Username or Password',
-                    DbTableName::ADMIN
+                    DbTableName::ADMIN_LOG_LOGIN
                 );
 
                 if ($bIsLoginAttempt) {
-                    $oSecurityModel->addLoginAttempt(DbTableName::ADMIN);
+                    $oSecurityModel->addLoginAttempt(DbTableName::ADMIN_ATTEMPT_LOGIN);
                 }
 
                 $this->enableCaptcha();
@@ -90,11 +90,11 @@ class LoginFormProcess extends Form implements LoginableForm
                     $sUsername,
                     $sPassword,
                     'Failed! Wrong IP address',
-                    DbTableName::ADMIN
+                    DbTableName::ADMIN_LOG_LOGIN
                 );
             }
         } else {
-            $oSecurityModel->clearLoginAttempts(DbTableName::ADMIN);
+            $oSecurityModel->clearLoginAttempts(DbTableName::ADMIN_ATTEMPT_LOGIN);
             $this->session->remove('captcha_admin_enabled');
             $iProfileId = $this->oAdminModel->getId($sEmail, null, DbTableName::ADMIN);
             $oAdminData = $this->oAdminModel->readProfile($iProfileId, DbTableName::ADMIN);

@@ -45,7 +45,7 @@ class LoginFormProcess extends Form implements LoginableForm
                 $iTimeDelay,
                 $sEmail,
                 $this->view,
-                DbTableName::AFFILIATE
+                DbTableName::AFFILIATE_ATTEMPT_LOGIN
             )
         ) {
             \PFBC\Form::setError('form_login_aff', Form::loginAttemptsExceededMsg($iTimeDelay));
@@ -68,7 +68,7 @@ class LoginFormProcess extends Form implements LoginableForm
                     'Guest',
                     'No Password',
                     'Failed! Incorrect Username',
-                    DbTableName::AFFILIATE
+                    DbTableName::AFFILIATE_LOG_LOGIN
                 );
             } elseif ($sLogin === CredentialStatusCore::INCORRECT_PASSWORD_IN_DB) {
                 $oSecurityModel->addLoginLog(
@@ -76,11 +76,11 @@ class LoginFormProcess extends Form implements LoginableForm
                     'Guest',
                     '*****',
                     'Failed! Incorrect Password',
-                    DbTableName::AFFILIATE
+                    DbTableName::AFFILIATE_LOG_LOGIN
                 );
 
                 if ($bIsLoginAttempt) {
-                    $oSecurityModel->addLoginAttempt(DbTableName::AFFILIATE);
+                    $oSecurityModel->addLoginAttempt(DbTableName::AFFILIATE_ATTEMPT_LOGIN);
                 }
 
                 $this->enableCaptcha();
@@ -90,7 +90,7 @@ class LoginFormProcess extends Form implements LoginableForm
                 \PFBC\Form::setError('form_login_aff', $sWrongPwdTxt);
             }
         } else {
-            $oSecurityModel->clearLoginAttempts(DbTableName::AFFILIATE);
+            $oSecurityModel->clearLoginAttempts(DbTableName::AFFILIATE_ATTEMPT_LOGIN);
             $this->session->remove('captcha_aff_enabled');
             $iProfileId = $this->oAffModel->getId($sEmail, null, DbTableName::AFFILIATE);
             $oAffData = $this->oAffModel->readProfile($iProfileId, DbTableName::AFFILIATE);

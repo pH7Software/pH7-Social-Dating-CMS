@@ -72,15 +72,15 @@ class Security
      * @param string $sUsername
      * @param string $sPassword
      * @param int $sStatus
-     * @param string $sTable Default DbTableName::MEMBER
+     * @param string $sTable
      *
      * @return void
      */
-    public function addLoginLog($sEmail, $sUsername, $sPassword, $sStatus, $sTable = DbTableName::MEMBER)
+    public function addLoginLog($sEmail, $sUsername, $sPassword, $sStatus, $sTable = DbTableName::MEMBER_LOG_LOGIN)
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix($sTable . '_log_login') . '(email, username, password, status, ip)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix($sTable) . '(email, username, password, status, ip)
         VALUES (:email, :username, :password, :status, :ip)');
         $rStmt->bindValue(':email', $sEmail, PDO::PARAM_STR);
         $rStmt->bindValue(':username', $sUsername, PDO::PARAM_STR);
@@ -101,12 +101,12 @@ class Security
      *
      * @return void
      */
-    public function addSessionLog($iProfileId, $sEmail, $sFirstName, $sTable = DbTableName::MEMBER)
+    public function addSessionLog($iProfileId, $sEmail, $sFirstName, $sTable = DbTableName::MEMBER_LOG_LOGIN)
     {
         Various::checkModelTable($sTable);
 
         $rStmt = Db::getInstance()->prepare(
-            'INSERT INTO' . Db::prefix($sTable . '_log_sess') . '(profileId, email, firstName, ip)
+            'INSERT INTO' . Db::prefix($sTable) . '(profileId, email, firstName, ip)
             VALUES (:profileId, :email, :firstName, :ip)'
         );
         $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
@@ -133,12 +133,12 @@ class Security
         $iAttemptTime,
         $sEmail,
         Templatable $oView,
-        $sTable = DbTableName::MEMBER
+        $sTable = DbTableName::MEMBER_ATTEMPT_LOGIN
     )
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sTable . '_attempts_login') . 'WHERE ip = :ip LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sTable) . 'WHERE ip = :ip LIMIT 1');
         $rStmt->bindValue(':ip', $this->sIp, PDO::PARAM_STR);
         $rStmt->execute();
 
@@ -183,12 +183,12 @@ class Security
      *
      * @return void
      */
-    public function addLoginAttempt($sTable = DbTableName::MEMBER)
+    public function addLoginAttempt($sTable = DbTableName::MEMBER_ATTEMPT_LOGIN)
     {
         Various::checkModelTable($sTable);
 
         $rStmt = Db::getInstance()->prepare(
-            'SELECT * FROM' . Db::prefix($sTable . '_attempts_login') . 'WHERE ip = :ip LIMIT 1'
+            'SELECT * FROM' . Db::prefix($sTable) . 'WHERE ip = :ip LIMIT 1'
         );
         $rStmt->bindValue(':ip', $this->sIp, PDO::PARAM_STR);
         $rStmt->execute();
@@ -197,7 +197,7 @@ class Security
             $oRow = $rStmt->fetch(PDO::FETCH_OBJ);
             $iAttempts = $oRow->attempts + 1;
             $rStmt = Db::getInstance()->prepare(
-                'UPDATE' . Db::prefix($sTable . '_attempts_login') . 'SET attempts = :attempts, lastLogin = :currentTime WHERE ip = :ip'
+                'UPDATE' . Db::prefix($sTable) . 'SET attempts = :attempts, lastLogin = :currentTime WHERE ip = :ip'
             );
             $rStmt->bindValue(':ip', $this->sIp, PDO::PARAM_STR);
             $rStmt->bindValue(':attempts', $iAttempts, PDO::PARAM_INT);
@@ -205,7 +205,7 @@ class Security
             $rStmt->execute();
         } else {
             $rStmt = Db::getInstance()->prepare(
-                'INSERT INTO' . Db::prefix($sTable . '_attempts_login') . '(ip, attempts, lastLogin) VALUES (:ip, 1, :lastLogin)'
+                'INSERT INTO' . Db::prefix($sTable) . '(ip, attempts, lastLogin) VALUES (:ip, 1, :lastLogin)'
             );
             $rStmt->bindValue(':ip', $this->sIp, PDO::PARAM_STR);
             $rStmt->bindValue(':lastLogin', $this->sCurrentTime, PDO::PARAM_STR);
@@ -222,12 +222,12 @@ class Security
      *
      * @return void
      */
-    public function clearLoginAttempts($sTable = DbTableName::MEMBER)
+    public function clearLoginAttempts($sTable = DbTableName::MEMBER_ATTEMPT_LOGIN)
     {
         Various::checkModelTable($sTable);
 
         $rStmt = Db::getInstance()->prepare(
-            'DELETE FROM' . Db::prefix($sTable . '_attempts_login') . 'WHERE ip = :ip'
+            'DELETE FROM' . Db::prefix($sTable) . 'WHERE ip = :ip'
         );
         $rStmt->bindValue(':ip', $this->sIp, PDO::PARAM_STR);
         $rStmt->execute();

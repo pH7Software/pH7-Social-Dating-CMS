@@ -105,13 +105,13 @@ class AdminCore extends UserCore
             $oAdminData->username,
             '*****',
             'Logged in!',
-            DbTableName::ADMIN
+            DbTableName::ADMIN_LOG_LOGIN
         );
         $oSecurityModel->addSessionLog(
             $oAdminData->profileId,
             $oAdminData->email,
             $oAdminData->firstName,
-            DbTableName::ADMIN
+            DbTableName::ADMIN_LOG_SESS
         );
         $oAdminModel->setLastActivity($oAdminData->profileId, DbTableName::ADMIN);
     }
