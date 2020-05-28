@@ -6,8 +6,8 @@
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
- * @copyright        (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
- * @version          1.4.0
+ * @copyright        (c) 2011-2020, Pierre-Henry Soria. All Rights Reserved.
+ * @version          1.4.1
  * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
  *
  * @history          Supports now PHP 5 with beautiful object code (POO), (removed all the ugly object code from PHP 4.x).
@@ -35,7 +35,7 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
 {
     const NAME = 'PH7Tpl';
     const AUTHOR = 'Pierre-Henry Soria';
-    const VERSION = '1.4.0';
+    const VERSION = '1.4.1';
     const LICENSE = 'Creative Commons Attribution 3.0 License - http://creativecommons.org/licenses/by/3.0/';
     const ERR_MSG = 'It seems you have removed the copyright notice(s) in the software. If you really want to remove them, please email: %s';
     const DATETIME_FORMAT = 'Y-m-d H:i:s';
@@ -328,14 +328,15 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
         $this->sTemplateDirFile = $this->sTemplateDir . 'tpl' . PH7_DS . $this->sTplFile;
 
         $this->file->createDir($this->sCompileDir);
+        $bIsMainDir = $this->isMainDir($sDirPath);
 
-        if ($this->isMainDir($sDirPath)) {
+        if ($bIsMainDir) {
             $this->sCompileDir2 = $this->sCompileDir . static::MAIN_COMPILE_DIR . PH7_DS . PH7_TPL_NAME . PH7_DS;
         } else {
-            $this->sCompileDir2 = $this->sCompileDir . $this->registry->module . '_' . md5($this->registry->path_module) . PH7_DS . PH7_TPL_MOD_NAME . PH7_DS . $this->getCurrentController();
+            $this->sCompileDir2 = $this->sCompileDir . $this->registry->module . '_' . md5($this->registry->path_module) . PH7_DS . PH7_TPL_MOD_NAME . PH7_DS . $this->getCurrentController() . PH7_DS;
         }
 
-        $this->sCompileDirFile = ($this->isMainDir($sDirPath) ? $this->sCompileDir2 . $this->file->getFileWithoutExt($this->sTplFile) . static::COMPILE_FILE_EXT : $this->sCompileDir2) .
+        $this->sCompileDirFile = ($bIsMainDir ? $this->sCompileDir2 . $this->file->getFileWithoutExt($this->sTplFile) . static::COMPILE_FILE_EXT : $this->sCompileDir2) .
             str_replace($this->getCurrentController(), '', $this->file->getFileWithoutExt($this->sTplFile)) . static::COMPILE_FILE_EXT;
 
         if (!$this->file->existFile($this->sTemplateDirFile)) {
@@ -773,7 +774,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      */
     final private function isMainDir($sDirPath)
     {
-        return !empty($sDirPath) && preg_match('#' . $this->addSlashes(PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS) . '#', $sDirPath);
+        return is_dir($sDirPath) && preg_match('#' . $this->addSlashes(PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS) . '#', $sDirPath);
     }
 
     /**
