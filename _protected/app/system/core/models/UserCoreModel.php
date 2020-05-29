@@ -961,72 +961,72 @@ class UserCoreModel extends Model
 
         $oDb = Db::getInstance();
 
-        // DELETE MESSAGES
+        // PRIVATE MESSAGES
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MESSAGE) . 'WHERE sender = ' . $iProfileId);
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MESSAGE) . 'WHERE recipient = ' . $iProfileId);
 
-        // DELETE MESSAGES OF MESSENGER
+        // MESSENGER MESSAGES
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MESSENGER) . 'WHERE fromUser = ' . Db::getInstance()->quote($sUsername));
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MESSENGER) . 'WHERE toUser = ' . Db::getInstance()->quote($sUsername));
 
-        // DELETE PROFILE COMMENTS
+        // PROFILE COMMENTS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_PROFILE) . 'WHERE sender = ' . $iProfileId);
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_PROFILE) . 'WHERE recipient = ' . $iProfileId);
 
-        // DELETE PICTURE COMMENTS
+        // PICTURE COMMENTS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_PICTURE) . 'WHERE sender = ' . $iProfileId);
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_PICTURE) . 'WHERE recipient = ' . $iProfileId);
 
-        // DELETE VIDEO COMMENTS
+        // VIDEO COMMENTS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_VIDEO) . 'WHERE sender = ' . $iProfileId);
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_VIDEO) . 'WHERE recipient = ' . $iProfileId);
 
-        // DELETE NOTE COMMENTS
+        // NOTE COMMENTS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_NOTE) . 'WHERE sender = ' . $iProfileId);
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_NOTE) . 'WHERE recipient = ' . $iProfileId);
 
-        // DELETE BLOG COMMENTS
+        // BLOG COMMENTS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_BLOG) . 'WHERE sender = ' . $iProfileId);
 
-        // DELETE GAME COMMENTS
+        // GAME COMMENTS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_GAME) . 'WHERE sender = ' . $iProfileId);
 
-        // DELETE PICTURES ALBUMS AND PICTURES
+        // PHOTO ALBUMS AND PICTURES
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::PICTURE) . 'WHERE profileId = ' . $iProfileId);
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::ALBUM_PICTURE) . 'WHERE profileId = ' . $iProfileId);
 
-        // DELETE VIDEOS ALBUMS AND VIDEOS
+        // VIDEO ALBUMS AND VIDEOS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::VIDEO) . 'WHERE profileId = ' . $iProfileId);
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::ALBUM_VIDEO) . 'WHERE profileId = ' . $iProfileId);
 
-        // DELETE FRIENDS
+        // FRIENDS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_FRIEND) . 'WHERE profileId = ' . $iProfileId);
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_FRIEND) . 'WHERE friendId = ' . $iProfileId);
 
-        // DELETE WALL
+        // WALL (FEED)
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_WALL) . 'WHERE profileId = ' . $iProfileId);
 
-        // DELETE BACKGROUND
+        // PROFILE BACKGROUND
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_BACKGROUND) . 'WHERE profileId = ' . $iProfileId);
 
-        // DELETE NOTES
+        // NOTES
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::NOTE_CATEGORY) . 'WHERE profileId = ' . $iProfileId);
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::NOTE) . 'WHERE profileId = ' . $iProfileId);
 
-        // DELETE LIKE
+        // LIKES
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::LIKE) . 'WHERE keyId LIKE ' . Db::getInstance()->quote('%' . $sUsername . '.html'));
 
-        // DELETE PROFILE VISITS
+        // PROFILE VISITS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_WHO_VIEW) . 'WHERE profileId = ' . $iProfileId);
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_WHO_VIEW) . 'WHERE visitorId = ' . $iProfileId);
 
-        // DELETE REPORT FROM THE USER
+        // REPORT FROM THE USER
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::REPORT) . 'WHERE spammerId = ' . $iProfileId);
 
-        // DELETE USER LOG SESSIONS
+        // USER LOG SESSIONS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_LOG_SESS) . 'WHERE profileId = ' . $iProfileId);
 
-        // DELETE TOPICS of FORUMS
+        // FORUM TOPICS
         /*
         No! Ghost Profile is ultimately the best solution!
         WARNING: Do not change this part of code without asking permission to Pierre-Henry Soria
@@ -1034,16 +1034,16 @@ class UserCoreModel extends Model
         //$oDb->exec('DELETE FROM' . Db::prefix(DbTableName::FORUM_MESSAGE) . 'WHERE profileId = ' . $iProfileId);
         //$oDb->exec('DELETE FROM' . Db::prefix(DbTableName::FORUM_TOPIC) . 'WHERE profileId = ' . $iProfileId);
 
-        // DELETE NOTIFICATIONS
+        // NOTIFICATIONS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_NOTIFICATION) . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
 
-        // DELETE PRIVACY SETTINGS
+        // PRIVACY SETTINGS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_PRIVACY) . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
 
-        // DELETE INFO FIELDS
+        // INFO FIELDS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER_INFO) . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
 
-        // DELETE USER
+        // USER PROFILE DATA
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::MEMBER) . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
 
         unset($oDb); // Destruction of the object
