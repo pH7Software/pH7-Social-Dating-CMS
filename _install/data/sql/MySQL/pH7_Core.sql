@@ -157,8 +157,8 @@ CREATE TABLE IF NOT EXISTS ph7_members_notifications (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- GHOST User. Do not remove ghost default member!
-INSERT INTO ph7_members (profileId, email, username, password, firstName, lastName, birthDate, ip, lastActivity, joinDate) VALUES
-(1, 'ghost@ghost', 'ghost', @sPassword, 'Ghost', 'The Ghost', '1001-01-01', '00.000.00.00', @sCurrentDate, @sCurrentDate);
+INSERT INTO ph7_members (profileId, email, username, password, firstName, lastName, birthDate, ip, lastActivity, joinDate, active) VALUES
+(1, 'ghost@ghost', 'ghost', @sPassword, 'Ghost', 'The Ghost', '1001-01-01', '00.000.00.00', @sCurrentDate, @sCurrentDate, 0);
 INSERT INTO ph7_members_info (profileId, description, address, city, state, zipCode, country) VALUES
 (1, 'This profile doesn''t exist anymore. So I''m the ghost who replaces him/her during this time', 'The Ghost City', 'Ghost Town', 'Ghost State', '000000', 'US');
 -- Privacy settings
