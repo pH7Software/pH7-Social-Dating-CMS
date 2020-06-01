@@ -120,7 +120,7 @@
                             {/if}
                             • <a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'loginuseras', $user->profileId) }}" title="{lang 'Login as the user (to edit all the user account).'}">{lang 'Login'}</a> •
 
-                            {if $user->ban == 0}
+                            {if $user->ban == UserCore::BAN_STATUS}
                                 {{ $design->popupLinkConfirm(t('Ban'), PH7_ADMIN_MOD, 'user', 'ban', $user->profileId) }}
                             {else}
                                 {{ $design->popupLinkConfirm(t('UnBan'), PH7_ADMIN_MOD, 'user', 'unban', $user->profileId) }}

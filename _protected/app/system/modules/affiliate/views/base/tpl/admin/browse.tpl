@@ -120,7 +120,7 @@
                             <a href="{{ $design->url('affiliate','account','edit',$aff->profileId) }}" title="{lang "Edit Affiliate's Account"}">{lang 'Edit'}</a> |
                             <a href="{{ $design->url('affiliate','admin','loginuseras',$aff->profileId) }}" title="{lang 'Login as the affiliate (to edit all the user account).'}">{lang 'Login'}</a> |
 
-                            {if $aff->ban == 0}
+                            {if $aff->ban == UserCore::BAN_STATUS}
                                 {{ $design->popupLinkConfirm(t('Ban'), 'affiliate', 'admin', 'ban', $aff->profileId) }}
                             {else}
                                 {{ $design->popupLinkConfirm(t('UnBan'), 'affiliate', 'admin', 'unban', $aff->profileId) }}
