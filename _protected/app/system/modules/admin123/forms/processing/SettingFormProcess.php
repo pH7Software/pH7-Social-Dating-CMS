@@ -43,7 +43,6 @@ class SettingFormProcess extends Form
         'social_media_widgets' => 'socialMediaWidgets',
         'disclaimer' => 'disclaimer',
         'cookie_consent_bar' => 'cookieConsentBar',
-        'full_ajax_site' => 'fullAjaxSite',
         'site_status' => 'siteStatus',
         'display_powered_by_link' => 'displayPoweredByLink',
         'is_software_news_feed' => 'isSoftwareNewsFeed',

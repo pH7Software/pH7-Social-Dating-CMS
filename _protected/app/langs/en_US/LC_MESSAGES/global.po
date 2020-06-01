@@ -3118,14 +3118,6 @@ msgstr ""
 msgid "The number of profile photos to display on the Splash Homepage. <br /><em>Available only if \"Profiles on Guest Homepage\" is enabled and if \"User\" is the Default Module.</em>"
 msgstr ""
 
-#: _protected/app/system/modules/admin123/forms/SettingForm.php:70
-msgid "Ajax Site with AjPH:"
-msgstr ""
-
-#: _protected/app/system/modules/admin123/forms/SettingForm.php:70
-msgid "Be careful! 'Full Ajax Navigation' feature is still in <strong>beta version</strong> and may not be working properly on all pages."
-msgstr ""
-
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:72
 msgid "Site Status:"
 msgstr ""

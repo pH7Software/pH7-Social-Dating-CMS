@@ -93,8 +93,6 @@ class SettingForm
 
         $oForm->addElement(new Select(t('Cookie Consent Bar:'), 'cookie_consent_bar', [1 => t('Enable'), 0 => t('Disable')], ['description' => t('Enable a Cookie Consent Bar to prevent your users that your website uses cookies. This is required by EU Law (if you have visitors from EU countries). The Cookie Bar will only be displayed if the visitor is in the EU.'), 'value' => DbConfig::getSetting('cookieConsentBar'), 'required' => 1]));
 
-        $oForm->addElement(new Select(t('Ajax Site with AjPH:'), 'full_ajax_site', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t("Be careful! 'Full Ajax Navigation' feature is still in <strong>beta version</strong> and may not be working properly on all pages."), 'value' => DbConfig::getSetting('fullAjaxSite'), 'required' => 1]));
-
         $oForm->addElement(new Select(t('Site Status:'), 'site_status', [DbConfig::ENABLED_SITE => t('Online'), DbConfig::MAINTENANCE_SITE => t('Maintenance (offline)')], ['description' => t("Maintenance mode is useful if you are working on your website or update it. Logged admins and admin panel won't be affected by the maintenance page."), 'value' => DbConfig::getSetting('siteStatus'), 'required' => 1]));
 
         $oForm->addElement(new Select(t('Show "Powered By" link in footer:'), 'display_powered_by_link', [1 => t('Enable'), 0 => t('Disable (NOT recommended)')], ['description' => t('Are you proud of using <a href="%software_website%">pH7CMS</a> brand? Are you proud to say your dating app has been made by the Leading Dating Software provider?'), 'value' => DbConfig::getSetting('displayPoweredByLink'), 'required' => 1]));

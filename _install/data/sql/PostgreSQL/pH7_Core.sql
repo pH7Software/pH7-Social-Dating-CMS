@@ -1158,7 +1158,6 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('profileWithAvatarSet', 0, '1 to display only the profiles with a profile photo.', 'homepage'),
 ('bgSplashVideo', 1, '0 to disable or 1 to enable the background splash video', 'homepage'),
 ('numberProfileSplashPage', 44, 'Number of profiles to display on the splash homepage', 'homepage'),
-('fullAjaxSite', 0, 'enable = 1 or disable = 0', 'general'),
 ('ipLogin', '', '', 'security'),
 ('timeDelayUserRegistration', 1440, '1440 minutes = 24 hours (in minutes!)', 'spam'),
 ('timeDelayAffRegistration', 2880, '2880 minutes = 2 days (in minutes!)', 'spam'),
