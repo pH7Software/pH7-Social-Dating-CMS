@@ -162,9 +162,11 @@ INSERT INTO ph7_members (profileId, email, username, password, firstName, lastNa
 INSERT INTO ph7_members_info (profileId, description, address, city, state, zipCode, country) VALUES
 (1, 'This profile doesn''t exist anymore. So I''m the ghost who replaces him/her during this time', 'The Ghost City', 'Ghost Town', 'Ghost State', '000000', 'US');
 -- Privacy settings
-INSERT INTO ph7_members_privacy (profileId, privacyProfile, searchProfile, userSaveViews) VALUES (1, 'all', 'yes', 'yes');
+INSERT INTO ph7_members_privacy (profileId, privacyProfile, searchProfile, userSaveViews) VALUES
+(1, 'all', 'yes', 'yes');
 -- Notifications
-INSERT INTO ph7_members_notifications (profileId, enableNewsletters, newMsg, friendRequest) VALUES (1, 0, 0, 0);
+INSERT INTO ph7_members_notifications (profileId, enableNewsletters, newMsg, friendRequest) VALUES
+(1, 0, 0, 0);
 
 
 CREATE TABLE IF NOT EXISTS ph7_affiliates (
