@@ -199,7 +199,7 @@
 
     {* Cookie info bar *}
     {if $is_cookie_consent_bar}
-      {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'cookie_consent/eu-states.js') }}
+      <script src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?always=1"></script>
     {/if}
 
     {* JS code Injection *}
