@@ -12,14 +12,14 @@
     </p>
 
     <p class="bold s_tMarg">
-        {lang}To continue, please confirm you are over <span class="underline">18</span>.{/lang}
+        {lang}To continue, please acknowledge and confirm you are over <span class="underline">18</span>.{/lang}
     </p>
 
     <p class="s_tMarg">
-        <button id="accept-over18" class="btn btn-success btn-lg">
+        <button id="agree-over18" class="btn btn-success btn-lg">
             {lang 'I am over 18'}
         </button>
-        <button id="close-window" class="btn btn-secondary btn-lg">
+        <button id="disagree-under18" class="btn btn-secondary btn-lg">
             {lang 'I am under 18'}
         </button>
     </p>
