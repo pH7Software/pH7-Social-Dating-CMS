@@ -219,8 +219,6 @@
 
     {if $is_disclaimer AND !AdminCore::isAdminPanel()}
       {main_include 'disclaimer.inc.tpl'}
-      {{ $design->staticFiles('css', PH7_STATIC . PH7_CSS . PH7_JS, 'disclaimer.css') }}
-      {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'disclaimer.js') }}
     {/if}
     <!-- End Footer JavaScript -->
 

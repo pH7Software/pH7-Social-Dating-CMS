@@ -1,5 +1,9 @@
+{* Set variables for TOS and Privacy links *}
 {{ $terms_url = Framework\Mvc\Router\Uri::get('page', 'main', 'terms') }}
 {{ $privacy_url = Framework\Mvc\Router\Uri::get('page', 'main', 'privacy') }}
+
+{{ $design->staticFiles('css', PH7_STATIC . PH7_CSS . PH7_JS, 'disclaimer.css') }}
+{{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'disclaimer.js') }}
 
 <div id="disclaimer-window">
     <h1 class="center">
