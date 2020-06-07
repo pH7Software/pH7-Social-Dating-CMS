@@ -1,0 +1,46 @@
+/*
+ * Author:        Pierre-Henry Soria <hello@ph7cms.com>
+ * Copyright:     (c) 2020, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+#disclaimer-window {
+    display: none;
+    position: absolute;
+    border-radius: 10px;
+    z-index: 1002;
+    margin: 1rem;
+    min-width: 350px;
+    background: #fff;
+    border: 5px solid #666;
+    padding: 12px;
+    overflow: hidden;
+}
+
+/* 420px or less */
+@media (max-width: 420px) {
+    #disclaimer-window {
+        margin: 1rem 0 1rem 0;
+    }
+}
+
+#disclaimer-window h1 {
+    text-align: center;
+    font-weight: 700;
+    padding: 3px;
+}
+
+#disclaimer-window button {
+    text-transform: capitalize;
+}
+
+#disclaimer-background {
+    display: none;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #333;
+    position: fixed;
+    z-index: 1001;
+}
