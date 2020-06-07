@@ -22,7 +22,7 @@
                     <th><input type="checkbox" name="all_action" /></th>
                     <th>
                         <button
-                            class="red btn btn-default btn-md"
+                            class="btn btn-danger btn-md"
                             type="submit"
                             onclick="return checkChecked()"
                             formaction="{{ $design->url('newsletter','admin','deleteall') }}"

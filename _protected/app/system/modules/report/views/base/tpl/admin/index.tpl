@@ -21,7 +21,7 @@
             <p>
                 <input type="checkbox" name="all_action" />
                 <button
-                    class="red btn btn-default btn-md"
+                    class="btn btn-danger btn-md"
                     type="submit"
                     onclick="return checkChecked(false)"
                     formaction="{{ $design->url('report','admin','deleteall') }}"

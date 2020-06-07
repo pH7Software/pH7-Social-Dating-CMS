@@ -41,7 +41,7 @@
                   </th>
                   <th>
                       <button
-                          class="red btn btn-default btn-md"
+                          class="btn btn-danger btn-md"
                           type="submit"
                           onclick="return checkChecked()"
                           formaction="{{ $design->url(PH7_ADMIN_MOD, 'user', 'deleteall') }}"
