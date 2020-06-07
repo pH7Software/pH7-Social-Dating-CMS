@@ -217,10 +217,10 @@
     {{ $design->message() }}
     {{ $design->error() }}
 
-    {if $is_disclaimer AND !$is_admin_auth AND !AdminCore::isAdminPanel()}
-      {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'disclaimer.js') }}
-      {{ $design->staticFiles('css', PH7_STATIC . PH7_CSS . PH7_JS, 'disclaimer.css') }}
+    {if $is_disclaimer AND !AdminCore::isAdminPanel()}
       {main_include 'disclaimer.inc.tpl'}
+      {{ $design->staticFiles('css', PH7_STATIC . PH7_CSS . PH7_JS, 'disclaimer.css') }}
+      {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'disclaimer.js') }}
     {/if}
     <!-- End Footer JavaScript -->
 
