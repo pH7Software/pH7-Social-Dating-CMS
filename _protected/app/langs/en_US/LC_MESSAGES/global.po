@@ -221,7 +221,7 @@ msgid "Please enter a correct phone number with area code!"
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:315
-msgid "You must read and approve the terms of use!"
+msgid "You need to read and accept the terms of use."
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/popup/confirmCoreAjax.php:43
