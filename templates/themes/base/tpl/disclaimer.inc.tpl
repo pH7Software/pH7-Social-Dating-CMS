@@ -12,21 +12,21 @@
     </p>
 
     <p class="bold s_tMarg">
-        {lang}To continue, please confirm you are over 18.{/lang}
+        {lang}To continue, please confirm you are over <span class="underline">18</span>.{/lang}
     </p>
 
     <p class="s_tMarg">
-        <button id="accept-over18" class="btn btn-default btn-lg">
-            {lang '✅ I am over 18'}
+        <button id="accept-over18" class="btn btn-success btn-lg">
+            {lang 'I am over 18'}
         </button>
-        <button id="close-window" class="btn btn-default btn-lg">
-            {lang '❌ EXIT'}
+        <button id="close-window" class="btn btn-secondary btn-lg">
+            {lang 'I am under 18'}
         </button>
     </p>
 
     <p class="s_tMarg">
         <small>
-            {lang 'By entering to to <strong>%site_url%</strong>, you are agreeing to the <a class="bold" href="%0%" target="_blank" rel="nofollow">Terms of Use</a> and <a class="bold" href="%1%" target="_blank" rel="nofollow">Privacy Policy</a>.', $terms_url, $privacy_url}
+            {lang 'By entering to to "%site_url%", you are agreeing to the <a href="%0%" target="_blank" rel="nofollow">Terms of Use</a> and <a href="%1%" target="_blank" rel="nofollow">Privacy Policy</a>.', $terms_url, $privacy_url}
         </small>
     </p>
 </div>
