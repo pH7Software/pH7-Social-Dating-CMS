@@ -8,10 +8,21 @@ const disagreedRedirectLink = "https://google.com";
 const cookieName = 'agreed18';
 let dialogStatus = 0;
 
-if (!doesCookieExist(cookieName)) {
-    centerPopup();
-    loadDisclaimer();
-}
+$(document).ready(function () {
+    if (!doesCookieExist(cookieName)) {
+        centerPopup();
+        loadDisclaimer();
+    }
+
+    $('#agree-over18').on('click', function () {
+        disableDisclaimer();
+        document.cookie = cookieName + '=true';
+    });
+
+    $('#disagree-under18').on('click', function () {
+        location.href = disagreedRedirectLink
+    });
+});
 
 function loadDisclaimer() {
     if (dialogStatus == 0) {
@@ -61,15 +72,3 @@ function doesCookieExist(name) {
     }
     return null;
 }
-
-
-$(document).ready(function () {
-    $('#agree-over18').on('click', function () {
-        disableDisclaimer();
-        document.cookie = cookieName + '=true';
-    });
-
-    $('#disagree-under18').on('click', function () {
-        location.href = disagreedRedirectLink
-    });
-});

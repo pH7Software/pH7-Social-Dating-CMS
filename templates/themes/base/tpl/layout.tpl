@@ -218,7 +218,10 @@
     {{ $design->error() }}
 
     {if $is_disclaimer AND !AdminCore::isAdminPanel()}
-      {main_include 'disclaimer.inc.tpl'}
+      {* Include the disclaimer's asset files *}
+      {{ $design->staticFiles('css', PH7_STATIC . PH7_CSS . PH7_JS, 'disclaimer.css') }}
+      {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'disclaimer.js') }}
+      {main_include 'disclaimer-dialog.inc.tpl'}
     {/if}
     <!-- End Footer JavaScript -->
 
