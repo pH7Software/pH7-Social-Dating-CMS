@@ -50,9 +50,9 @@ class Disclaimer {
 
     isAccepted() {
         try {
-            return localStorage.getItem(localKeyName);
+            return sessionStorage.getItem(localKeyName);
         } catch (e) {
-            console.log('Cannot use localStorage', e);
+            console.log('Cannot use sessionStorage', e);
         }
 
         return null;
@@ -60,9 +60,9 @@ class Disclaimer {
 
     setAccepted() {
         try {
-            localStorage.setItem(localKeyName, '1');
+            sessionStorage.setItem(localKeyName, '1');
         } catch (e) {
-            console.log('Cannot use localStorage', e);
+            console.log('Cannot use sessionStorage', e);
         }
     }
 }
