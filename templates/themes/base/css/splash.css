@@ -211,7 +211,7 @@ video#bgvid {
     }
 }
 
-/* 925px or less */
+/* 760px or less */
 @media (max-width: 760px) {
     .left, .right, .login_block {
         text-align: center;

@@ -1,10 +1,10 @@
 /*
  * Author:        Pierre-Henry Soria <ph7software@gmail.com>
- * Copyright:     (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * Copyright:     (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
-var sButtonPattern = 'button[type=submit]';
+const sButtonPattern = 'button[type=submit]';
 
 function enable_button() {
     $(sButtonPattern).attr('disabled', false);
@@ -16,8 +16,8 @@ function disable_button() {
     $(sButtonPattern).css({background: '#FFF'});
 }
 
-var sInputAgree = 'input[name="agree[]"]';
-$(sInputAgree).click(function () {
+const sInputAgree = 'input[name="agree[]"]';
+$(sInputAgree).on('click', function () {
     $(sInputAgree + ':checked').val() == 1 ? enable_button() : disable_button();
 });
 
@@ -35,7 +35,7 @@ function checkChecked(bIsConfirmAlert) {
     if (typeof bIsConfirmAlert == "undefined")
         bIsConfirmAlert = true; // Default value
 
-    var iCountChecked = 0;
+    let iCountChecked = 0;
     $('input[name="action[]"]').each(function () {
         iCountChecked += $(this).is(':checked');
     });

@@ -242,7 +242,7 @@
     }
 }
 
-/* 745px or less */
+/* 770px or less */
 @media (max-width: 770px) {
     .box-left {
         display: none;

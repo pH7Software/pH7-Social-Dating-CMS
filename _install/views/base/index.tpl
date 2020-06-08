@@ -14,7 +14,7 @@
 <p class="italic">&bull; {$LANG.requirements2_desc}</p>
 
 <p>
-    <button type="button" onclick="window.location='{$smarty.const.PH7_URL_SLUG_INSTALL}license'"
+    <button type="button" onclick="document.location.href='{$smarty.const.PH7_URL_SLUG_INSTALL}license'"
         class="btn btn-primary btn-lg">{$LANG.go}</button>
 </p>
 

@@ -36,7 +36,7 @@
                     {if $is_admin}
                         <div class="content" title="{lang 'See more'}"><a href="#divShow_{% $msg->messageId %}">
                     {else}
-                        <div class="content" title="{lang 'See more'}" onclick="window.location='{{ $design->url('mail','main',$slug_url,$msg->messageId) }}'">
+                        <div class="content" title="{lang 'See more'}" onclick="location.href='{{ $design->url('mail','main',$slug_url,$msg->messageId) }}'">
                     {/if}
 
                     <div class="subject">{subject}</div>
