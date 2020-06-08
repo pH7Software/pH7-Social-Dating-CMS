@@ -34,13 +34,13 @@ class Disclaimer {
         const windowWidth = document.documentElement.clientWidth;
         const windowHeight = document.documentElement.clientHeight;
 
-        const popupHeight = $('#disclaimer-window').height();
-        const popupWidth = $('#disclaimer-window').width();
+        const dialogHeight = $('#disclaimer-window').height();
+        const dialogWidth = $('#disclaimer-window').width();
 
         $('#disclaimer-window').css({
             "position": "absolute",
-            "top": windowHeight / 2 - popupHeight / 2,
-            "left": windowWidth / 2 - popupWidth / 2
+            "top": windowHeight / 2 - dialogHeight / 2,
+            "left": windowWidth / 2 - dialogWidth / 2
         });
 
         $('#disclaimer-background').css({
