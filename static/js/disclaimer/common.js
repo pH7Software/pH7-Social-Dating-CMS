@@ -11,11 +11,11 @@ $(document).ready(function () {
 
     if (!oDisclaimer.isAccepted()) {
         oDisclaimer.centerDialog();
-        oDisclaimer.load();
+        oDisclaimer.loadDialog();
     }
 
     document.getElementById('agree-over18').onclick = function () {
-        oDisclaimer.disable();
+        oDisclaimer.disableDialog();
         oDisclaimer.setAccepted();
     };
     document.getElementById('disagree-under18').onclick = function () {

@@ -11,7 +11,7 @@ class Disclaimer {
         this.dialogStatus = 0;
     }
 
-    load() {
+    loadDialog() {
         if (this.dialogStatus == 0) {
             $('#disclaimer-background').css({
                 'opacity': 0.95
@@ -22,7 +22,7 @@ class Disclaimer {
         }
     }
 
-    disable() {
+    disableDialog() {
         if (this.dialogStatus == 1) {
             $('#disclaimer-window').fadeOut('slow');
             $('#disclaimer-background').fadeOut('slow');
