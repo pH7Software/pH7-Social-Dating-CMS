@@ -2,7 +2,7 @@
 {{ $terms_url = Framework\Mvc\Router\Uri::get('page', 'main', 'terms') }}
 {{ $privacy_url = Framework\Mvc\Router\Uri::get('page', 'main', 'privacy') }}
 
-<div id="disclaimer-window">
+<div id="disclaimer-dialog">
     <div class="center">
         <h1>
             {lang}Welcome to %site_name% ❤️{/lang}

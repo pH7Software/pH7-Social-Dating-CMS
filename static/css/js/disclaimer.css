@@ -4,7 +4,7 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
-#disclaimer-window {
+#disclaimer-dialog {
     display: none;
     position: absolute;
     border-radius: 10px;
@@ -19,23 +19,23 @@
 
 /* 420px or less */
 @media (max-width: 420px) {
-    #disclaimer-window {
+    #disclaimer-dialog {
         margin: 1rem 0 1rem 0;
         border: 0;
     }
 }
 
-#disclaimer-window h1 {
+#disclaimer-dialog h1 {
     text-align: center;
     font-weight: 700;
     padding: 3px;
 }
 
-#disclaimer-window p {
+#disclaimer-dialog p {
     margin-top: 12px;
 }
 
-#disclaimer-window button {
+#disclaimer-dialog button {
     text-transform: capitalize;
 }
 

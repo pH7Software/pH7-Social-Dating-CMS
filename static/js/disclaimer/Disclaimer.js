@@ -8,24 +8,27 @@ const localKeyName = 'agreed18';
 
 class Disclaimer {
     constructor() {
+        this.backgroundElement = $('#disclaimer-background');
+        this.dialogElement = $('#disclaimer-dialog');
+
         this.dialogStatus = 0;
     }
 
     loadDialog() {
         if (this.dialogStatus == 0) {
-            $('#disclaimer-background').css({
+            this.backgroundElement.css({
                 'opacity': 0.95
             });
-            $('#disclaimer-background').fadeIn('slow');
-            $('#disclaimer-window').fadeIn('slow');
+            this.backgroundElement.fadeIn('slow');
+            this.dialogElement.fadeIn('slow');
             this.dialogStatus = 1;
         }
     }
 
     disableDialog() {
         if (this.dialogStatus == 1) {
-            $('#disclaimer-window').fadeOut('slow');
-            $('#disclaimer-background').fadeOut('slow');
+            this.dialogElement.fadeOut('slow');
+            this.backgroundElement.fadeOut('slow');
             this.dialogStatus = 0;
         }
     }
@@ -34,16 +37,16 @@ class Disclaimer {
         const windowWidth = document.documentElement.clientWidth;
         const windowHeight = document.documentElement.clientHeight;
 
-        const dialogHeight = $('#disclaimer-window').height();
-        const dialogWidth = $('#disclaimer-window').width();
+        const dialogHeight = this.dialogElement.height();
+        const dialogWidth = this.dialogElement.width();
 
-        $('#disclaimer-window').css({
+        this.dialogElement.css({
             "position": "absolute",
             "top": windowHeight / 2 - dialogHeight / 2,
             "left": windowWidth / 2 - dialogWidth / 2
         });
 
-        $('#disclaimer-background').css({
+        this.backgroundElement.css({
             "height": windowHeight
         });
     }
