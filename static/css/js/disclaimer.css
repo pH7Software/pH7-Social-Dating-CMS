@@ -31,6 +31,10 @@
     padding: 3px;
 }
 
+#disclaimer-window p {
+    margin-top: 12px;
+}
+
 #disclaimer-window button {
     text-transform: capitalize;
 }

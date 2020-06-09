@@ -8,15 +8,15 @@
             {lang}Welcome to %site_name% ❤️{/lang}
         </h1>
 
-        <p class="italic s_tMarg">
+        <p class="italic">
             {lang}This site contains sexually-oriented adult materials which may be offensive to some viewers.{/lang}
         </p>
 
-        <p class="bold s_tMarg">
+        <p class="bold">
             {lang}To continue, please acknowledge and confirm you are over <span class="underline">18</span>.{/lang}
         </p>
 
-        <p class="s_tMarg">
+        <p>
             <button id="agree-over18" class="btn btn-success btn-lg">
                 {lang 'I am over 18'}
             </button>
@@ -25,7 +25,7 @@
             </button>
         </p>
 
-        <p class="s_tMarg">
+        <p>
             <small>
                 {lang 'By entering to to "%site_url%", you are agreeing to the <a href="%0%" target="_blank" rel="nofollow">Terms of Use</a> and <a href="%1%" target="_blank" rel="nofollow">Privacy Policy</a>.', $terms_url, $privacy_url}
             </small>
