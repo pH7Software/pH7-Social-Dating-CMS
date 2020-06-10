@@ -4,14 +4,14 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
-const disagreedRedirectLink = "https://google.com";
+const disagreedRedirectLink = "https://google.com"; // <= URL to show when the visitor is likely to be under 18yrs
 
 $(document).ready(function () {
-    let oDisclaimer = new Disclaimer();
+    const oDisclaimer = new Disclaimer();
 
     if (!oDisclaimer.isAccepted()) {
-        oDisclaimer.centerDialog();
         oDisclaimer.loadDialog();
+        oDisclaimer.centerDialog();
     }
 
     document.getElementById('agree-over18').onclick = function () {
