@@ -34,8 +34,8 @@ class Disclaimer {
     }
 
     centerDialog() {
-        const windowWidth = document.documentElement.clientWidth;
         const windowHeight = document.documentElement.clientHeight;
+        const windowWidth = document.documentElement.clientWidth;
 
         const dialogHeight = this.dialogElement.height();
         const dialogWidth = this.dialogElement.width();
