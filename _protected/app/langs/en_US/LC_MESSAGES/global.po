@@ -221,7 +221,7 @@ msgid "Please enter a correct phone number with area code!"
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:315
-msgid "You must read and approve the terms of use!"
+msgid "You need to read and accept the terms of use."
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/popup/confirmCoreAjax.php:43
@@ -3143,7 +3143,7 @@ msgid "Adult Disclaimer:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:76
-msgid "Show an Adult Warning to enter to your website. This is useful for websites with adult content. <br /><strong>WARNING: this disclaimer offered by a third-party provider may sometimes open a new tab promoting third-party adult websites.</strong>"
+msgid "Show an Adult Warning to enter to your website. Useful for websites that contain adult materials."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:78

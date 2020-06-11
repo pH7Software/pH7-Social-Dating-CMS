@@ -84,20 +84,118 @@ class SettingForm
         $oForm->addElement(new Number(t('Number of Profiles on Splash Page:'), 'number_profile_splash_page', ['description' => t('The number of profile photos to display on the Splash Homepage. <br /><em>Available only if "Profiles on Guest Homepage" is enabled and if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('numberProfileSplashPage'), 'validation' => new Str(1, 2), 'required' => 1]));
 
         if ($bIsForumEnabled) {
-            $oForm->addElement(new Select(t('WYSIWYG editor for Forum:'), 'wysiwyg_editor_forum', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('Enable WYSIWYG editor (CKEditor) for the forum posts. If disabled, the simple textarea field will be used.'), 'value' => DbConfig::getSetting('wysiwygEditorForum'), 'required' => 1]));
+            $oForm->addElement(
+                new Select(
+                    t('WYSIWYG editor for Forum:'),
+                    'wysiwyg_editor_forum',
+                    [
+                        '1' => t('Enable'),
+                        '0' => t('Disable')
+                    ],
+                    [
+                        'description' => t('Enable WYSIWYG editor (CKEditor) for the forum posts. If disabled, the simple textarea field will be used.'),
+                        'value' => DbConfig::getSetting('wysiwygEditorForum'),
+                        'required' => 1
+                    ]
+                )
+            );
         }
 
-        $oForm->addElement(new Select(t('Social Media Widgets:'), 'social_media_widgets', [1 => t('Enable'), 0 => t('Disable')], ['description' => t('Enable the Social Media Sharing such as Like and Sharing buttons.'), 'value' => DbConfig::getSetting('socialMediaWidgets'), 'required' => 1]));
+        $oForm->addElement(
+            new Select(
+                t('Social Media Widgets:'),
+                'social_media_widgets',
+                [
+                    1 => t('Enable'),
+                    0 => t('Disable')
+                ],
+                [
+                    'description' => t('Enable the Social Media Sharing such as Like and Sharing buttons.'),
+                    'value' => DbConfig::getSetting('socialMediaWidgets'),
+                    'required' => 1
+                ]
+            )
+        );
 
-        $oForm->addElement(new Select(t('Adult Disclaimer:'), 'disclaimer', [1 => t('Enable'), 0 => t('Disable')], ['description' => t('Show an Adult Warning to enter to your website. This is useful for websites with adult content. <br /><strong>WARNING: this disclaimer offered by a third-party provider may sometimes open a new tab promoting third-party adult websites.</strong>'), 'value' => DbConfig::getSetting('disclaimer'), 'required' => 1]));
+        $oForm->addElement(
+            new Select(
+                t('Adult Disclaimer:'),
+                'disclaimer',
+                [
+                    1 => t('Enable'),
+                    0 => t('Disable')
+                ],
+                [
+                    'description' => t('Show an Adult Warning to enter to your website. Useful for websites that contain adult materials.'),
+                    'value' => DbConfig::getSetting('disclaimer'),
+                    'required' => 1
+                ]
+            )
+        );
 
-        $oForm->addElement(new Select(t('Cookie Consent Bar:'), 'cookie_consent_bar', [1 => t('Enable'), 0 => t('Disable')], ['description' => t('Enable a Cookie Consent Bar to prevent your users that your website uses cookies. This is required by EU Law (if you have visitors from EU countries). The Cookie Bar will only be displayed if the visitor is in the EU.'), 'value' => DbConfig::getSetting('cookieConsentBar'), 'required' => 1]));
+        $oForm->addElement(
+            new Select(
+                t('Cookie Consent Bar:'),
+                'cookie_consent_bar',
+                [
+                    1 => t('Enable'),
+                    0 => t('Disable')
+                ],
+                [
+                    'description' => t('Enable a Cookie Consent Bar to prevent your users that your website uses cookies. This is required by EU Law (if you have visitors from EU countries). The Cookie Bar will only be displayed if the visitor is in the EU.'),
+                    'value' => DbConfig::getSetting('cookieConsentBar'),
+                    'required' => 1
+                ]
+            )
+        );
 
-        $oForm->addElement(new Select(t('Site Status:'), 'site_status', [DbConfig::ENABLED_SITE => t('Online'), DbConfig::MAINTENANCE_SITE => t('Maintenance (offline)')], ['description' => t("Maintenance mode is useful if you are working on your website or update it. Logged admins and admin panel won't be affected by the maintenance page."), 'value' => DbConfig::getSetting('siteStatus'), 'required' => 1]));
+        $oForm->addElement(
+            new Select(
+                t('Site Status:'),
+                'site_status',
+                [
+                    DbConfig::ENABLED_SITE => t('Online'),
+                    DbConfig::MAINTENANCE_SITE => t('Maintenance (offline)')
+                ],
+                [
+                    'description' => t("Maintenance mode is useful if you are working on your website or update it. Logged admins and admin panel won't be affected by the maintenance page."),
+                    'value' => DbConfig::getSetting('siteStatus'),
+                    'required' => 1
+                ]
+            )
+        );
 
-        $oForm->addElement(new Select(t('Show "Powered By" link in footer:'), 'display_powered_by_link', [1 => t('Enable'), 0 => t('Disable (NOT recommended)')], ['description' => t('Are you proud of using <a href="%software_website%">pH7CMS</a> brand? Are you proud to say your dating app has been made by the Leading Dating Software provider?'), 'value' => DbConfig::getSetting('displayPoweredByLink'), 'required' => 1]));
+        $oForm->addElement(
+            new Select(
+                t('Show "Powered By" link in footer:'),
+                'display_powered_by_link',
+                [
+                    1 => t('Enable'),
+                    0 => t('Disable (NOT recommended)')
+                ],
+                [
+                    'description' => t('Are you proud of using <a href="%software_website%">pH7CMS</a> brand? Are you proud to say your dating app has been made by the Leading Dating Software provider?'),
+                    'value' => DbConfig::getSetting('displayPoweredByLink'),
+                    'required' => 1
+                ]
+            )
+        );
 
-        $oForm->addElement(new Select(t('Show the News Feed:'), 'is_software_news_feed', [1 => t('Enable'), 0 => t('Disable')], ['description' => t('Show the latest news about the software in the admin dashboard (recommend).'), 'value' => DbConfig::getSetting('isSoftwareNewsFeed'), 'required' => 1]));
+        $oForm->addElement(
+            new Select(
+                t('Show the News Feed:'),
+                'is_software_news_feed',
+                [
+                    1 => t('Enable'),
+                    0 => t('Disable')
+                ],
+                [
+                    'description' => t('Show the latest news about the software in the admin dashboard (recommend).'),
+                    'value' => DbConfig::getSetting('isSoftwareNewsFeed'),
+                    'required' => 1
+                ]
+            )
+        );
 
         unset($oFile);
 

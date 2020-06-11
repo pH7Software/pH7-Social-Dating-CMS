@@ -60,6 +60,10 @@
       {{ $design->staticFiles('css', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_CSS, 'messenger.css') }}
     {/if}
 
+    {if $is_disclaimer}
+      {{ $design->staticFiles('css', PH7_STATIC . PH7_CSS . PH7_JS, 'disclaimer.css') }}
+    {/if}
+
     <!-- Other sheet CSS for modules etc. -->
     {{ $design->css() }}
     {designModel.files('css')}
@@ -216,8 +220,10 @@
     <!-- Common Dialogs -->
     {{ $design->message() }}
     {{ $design->error() }}
-    {if $is_disclaimer AND !$is_admin_auth AND !AdminCore::isAdminPanel()}
-      {main_include 'disclaimer.inc.tpl'}
+
+    {if $is_disclaimer AND !AdminCore::isAdminPanel()}
+      {{ $design->staticFiles('js', PH7_STATIC . PH7_JS . 'disclaimer', 'Disclaimer.js,common.js') }}
+      {main_include 'disclaimer-dialog.inc.tpl'}
     {/if}
     <!-- End Footer JavaScript -->
 

@@ -312,7 +312,7 @@ class ValidateCoreAjax
     protected function terms($sValue)
     {
         if ($sValue !== 'true') {
-            $this->sMsg = t('You must read and approve the terms of use!');
+            $this->sMsg = t('You need to read and accept the terms of use.');
         } else {
             $this->iStatus = 1;
         }
