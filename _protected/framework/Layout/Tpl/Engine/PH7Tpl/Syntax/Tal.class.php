@@ -1,14 +1,13 @@
 <?php
-/***************************************************************************
- * @title            Template Attribute Language (TAL) syntax for pH7TPl template engine.
- * @desc             This alternative pH7Tpl syntax is a sort of Template Attribute Language.
+/**
+ * Template Attribute Language (TAL) syntax for pH7TPl template engine.
+ * This alternative pH7Tpl syntax is a kind of “Template Attribute Language”
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @category         PH7 Template Engine
+ * @copyright        (c) 2018-2020, Pierre-Henry Soria. All Rights Reserved.
+ * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl / Syntax
- * @copyright        (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
- ***************************************************************************/
+ */
 
 namespace PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax;
 

@@ -1,19 +1,14 @@
 <?php
-/***************************************************************************
- * @title            PH7 Template Engine
- * @desc             Template Engine with Compiler and Cache for pH7 CMS!
- *
+/**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
  * @copyright        (c) 2011-2020, Pierre-Henry Soria. All Rights Reserved.
- * @version          1.4.1
- * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
+ * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  *
  * @history          Supports now PHP 5 with beautiful object code (POO), (removed all the ugly object code from PHP 4.x).
  * @history          Supports now PHP 5.3 (added namespace and incorporate the template engine into the pH7Framework).
  * @history          Supports PHP 5.4 (added class member access on instantiation, e.g. (new Foo)->bar(), ...).
- ***************************************************************************/
+ */
 
 namespace PH7\Framework\Layout\Tpl\Engine\PH7Tpl;
 
@@ -36,7 +31,6 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
     const NAME = 'PH7Tpl';
     const AUTHOR = 'Pierre-Henry Soria';
     const VERSION = '1.4.1';
-    const LICENSE = 'Creative Commons Attribution 3.0 License - http://creativecommons.org/licenses/by/3.0/';
     const ERR_MSG = 'It seems you have removed the copyright notice(s) in the software. If you really want to remove them, please email: %s';
     const DATETIME_FORMAT = 'Y-m-d H:i:s';
 
@@ -558,7 +552,7 @@ Created on ' . gmdate(self::DATETIME_FORMAT) . '
 Compiled file from: ' . $this->sTemplateDirFile . '
 Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::AUTHOR . '
 */
-/***************************************************************************
+/**
  *     ' . self::SOFTWARE_NAME . ' ' . self::SOFTWARE_COMPANY . '
  *               --------------------
  * @since      Mon Mar 21 2011
@@ -566,8 +560,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
  * @email      ' . self::SOFTWARE_EMAIL . '
  * @link       ' . self::SOFTWARE_WEBSITE . '
  * @copyright  ' . sprintf(self::SOFTWARE_COPYRIGHT, date('Y')) . '
- * @license    ' . self::LICENSE . '
- ***************************************************************************/
+ */
 ';
     }
 

@@ -1,14 +1,10 @@
 <?php
 /**
- * @title            Kernel Class
- * @desc             Kernel Class of pH7CMS.
- *
  * @author           Pierre-Henry Soria <pierre@soria.pw>
- * @copyright        (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
- * @link             http://ph7cms.com
+ * @copyright        (c) 2011-2020, Pierre-Henry Soria. All Rights Reserved.
+ * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @link             https://ph7cms.com
  * @package          PH7 / Framework / Core
- * @version          1.6
  */
 
 namespace PH7\Framework\Core;

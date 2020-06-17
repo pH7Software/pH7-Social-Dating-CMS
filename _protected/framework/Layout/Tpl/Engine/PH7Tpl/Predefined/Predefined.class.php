@@ -1,14 +1,10 @@
 <?php
-/***************************************************************************
- * @title            PH7 Template Engine
- * @desc             Main Predefined Abstract Class
- *
+/**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @category         PH7 Template Engine
+ * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
+ * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl / Predefined
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
- ***************************************************************************/
+ */
 
 namespace PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Predefined;
 
