@@ -18,8 +18,18 @@ class SearchVideoForm
     public static function display()
     {
         $oForm = new \PFBC\Form('form_search');
-        $oForm->configure(['action' => Uri::get('video', 'main', 'result') . PH7_SH, 'method' => 'get']);
-        $oForm->addElement(new Search(t('ID or Name of Video:'), 'looking'));
+        $oForm->configure(
+            [
+                'action' => Uri::get('video', 'main', 'result') . PH7_SH,
+                'method' => 'get'
+            ]
+        );
+        $oForm->addElement(
+            new Search(
+                t('ID or Name of Video:'),
+                'looking'
+            )
+        );
         $oForm->addElement(
             new Select(
                 t('Browse By:'),
