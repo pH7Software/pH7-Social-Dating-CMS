@@ -28,8 +28,7 @@ function init() {
     echo "14) save code"
     echo "15) backup"
     echo "16) remove sensitive data"
-    echo "17) update geoip db"
-    echo "18) git checkout"
+    echo "17) git checkout"
 
 
     read option
@@ -50,7 +49,6 @@ function init() {
       "save code") save-code;;
       "backup") backup;;
       "remove sensitive data") remove-sensitive-data;;
-      "update geoip db") update-geoip-db;;
       "git checkout") git-checkout;;
       *) _error
     esac
