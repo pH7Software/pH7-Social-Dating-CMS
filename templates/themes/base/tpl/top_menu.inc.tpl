@@ -11,7 +11,7 @@
     }}
 
 
-    {* Menu for All *}
+    {* Menu for all *}
       {if $top_navbar_type === 'inverse'}
         <nav class="navbar navbar-inverse navbar-fixed-top">
       {else}
@@ -38,7 +38,7 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
 
-    {* Guest Menu *}
+    {* Guest menu *}
       {if !$is_user_auth AND !$is_aff_auth AND !$is_admin_auth}
         <li>
           <a class="bold" href="{{ $design->url('user', 'signup', 'step1') }}" title="{lang 'Join Now!'}">
@@ -53,7 +53,7 @@
       {/if}
 
 
-    {* Menu Guest, Member and Admin *}
+    {* Guest, Member and Admin menu (except for Affiliate) *}
       {if !$is_aff_auth}
         <li class="dropdown">
           <a href="{{ $design->url('user', 'browse', 'index') }}" title="{lang 'Members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">
@@ -96,7 +96,7 @@
       {/if}
 
 
-    {* Menu Guest, Member and LoginUserAs of Admin Panel *}
+    {* Guest, Member and LoginUserAs from Admin Panel *}
       {if (!$is_aff_auth AND !$is_admin_auth) OR $admin_logged_as_user }
         {if $is_chat_enabled OR $is_chatroulette_enabled}
           <li class="dropdown"><a href="#" title="{lang 'Free Social Dating Chat Rooms'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-weixin"></i> {lang 'Chat'} <span class="caret"></span></a>
@@ -168,7 +168,7 @@
       {/if}
 
 
-    {* Member Menu *}
+    {* Member menu *}
       {if $is_user_auth AND ( !$is_aff_auth AND !$is_admin_auth ) OR $admin_logged_as_user }
           {if $is_mail_enabled}
             <li class="dropdown">
@@ -265,7 +265,7 @@
       {/if}
 
 
-    {* Affiliate Menu *}
+    {* Affiliate menu *}
       {if $is_affiliate_enabled AND $is_aff_auth AND ( !$is_user_auth AND !$is_admin_auth OR $admin_logged_as_affiliate ) }
         <li><a href="{{ $design->url('affiliate','ads','index') }}" title="{lang 'Get Ad Banners'}"><i class="fa fa-money"></i> {lang 'Banners'}</a></li>
 
@@ -280,7 +280,7 @@
       {/if}
 
 
-    {* Admin Menu *}
+    {* Admin menu *}
       {if $is_admin_auth AND ( !$is_user_auth AND !$is_aff_auth ) }
         {{ $count_total_reports = ReportCoreModel::totalReports() }}
         <li class="dropdown">
