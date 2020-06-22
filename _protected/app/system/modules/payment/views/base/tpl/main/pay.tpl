@@ -16,7 +16,7 @@
     {if !$is_paypal AND !$is_stripe AND !$is_braintree AND !$is_2co AND !$is_skeerel AND !$is_ccbill}
         <p class="err_msg">{lang 'No Payment System Enabled!'}</p>
     {else}
-        {if $membership->enable == 1 AND $membership->price != 0}
+        {if $membership->enable == 1 AND !$membership->price <= 0}
             {{ $oDesign = new PaymentDesign }}
 
             <div class="paypal_logo left">
