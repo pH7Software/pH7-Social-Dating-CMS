@@ -148,8 +148,7 @@ class MainController extends Controller
                 break;
 
             default:
-                $this->paypalHandler(); // Default payment gateway
-            //$this->displayPageNotFound(t('Provider Not Found!'));
+                $this->defaultHandler();
         }
 
         // Set the page titles
@@ -421,6 +420,11 @@ class MainController extends Controller
         } catch (Exception $oE) {
             $this->design->setMessage($this->str->escape($oE->getMessage(), true));
         }
+    }
+
+    private function defaultHandler()
+    {
+        $this->paypalHandler();
     }
 
     /**
