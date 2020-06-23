@@ -108,7 +108,10 @@ class MainController extends Controller
                 break;
 
             default:
-                $this->displayPageNotFound(t('The %0% API is incorrect.', $this->sApi));
+                $this->displayPageNotFound(
+                    t('The %0% API is incorrect.',
+                        $this->sApi)
+                );
         }
     }
 }
