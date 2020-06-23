@@ -211,9 +211,6 @@ Created on ' . gmdate(static::DATETIME_FORMAT) . '
 File ID: ' . $this->sId . '
 */
 /**
- *     ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_COMPANY . '
- *               --------------------
- * @since      Mon Oct 14 2011
  * @author     Pierre-Henry Soria
  * @email      ' . Kernel::SOFTWARE_EMAIL . '
  * @link       ' . Kernel::SOFTWARE_WEBSITE . '

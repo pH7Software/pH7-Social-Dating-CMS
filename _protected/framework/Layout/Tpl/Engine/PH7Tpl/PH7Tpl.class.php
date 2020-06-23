@@ -553,9 +553,6 @@ Compiled file from: ' . $this->sTemplateDirFile . '
 Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::AUTHOR . '
 */
 /**
- *     ' . self::SOFTWARE_NAME . ' ' . self::SOFTWARE_COMPANY . '
- *               --------------------
- * @since      Mon Mar 21 2011
  * @author     Pierre-Henry Soria
  * @email      ' . self::SOFTWARE_EMAIL . '
  * @link       ' . self::SOFTWARE_WEBSITE . '

@@ -1,7 +1,5 @@
 <?php
 /**
- * @title          Constants File
- *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @link           https://ph7cms.com
  * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
@@ -13,9 +11,9 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-################################### CONSTANTS ###################################
+############ CONSTANTS ############
 
-#################### OTHER ####################
+###### OTHER ######
 
 /***** VARIOUS *****/
 
@@ -120,7 +118,7 @@ define('PH7_IMG', 'img/');
 
 define('PH7_STATIC', 'static/');
 
-#################### PATH ####################
+###### PATH ######
 
 /***** DATA *****/
 
@@ -167,7 +165,7 @@ define('PH7_PATH_TPL_SYS_MOD', PH7_PATH_ROOT . PH7_LAYOUT . PH7_SYS . PH7_MOD);
 
 define('PH7_PATH_STATIC', PH7_PATH_ROOT . PH7_STATIC);
 
-#################### URL (PUBLIC) ####################
+###### URL (PUBLIC) ######
 
 /***** DATA *****/
 
