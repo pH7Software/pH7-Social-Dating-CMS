@@ -88,29 +88,40 @@ class MainController extends Controller
     {
         switch ($this->sApi) {
             case self::FB_PROVIDER:
-                if (!$this->config->values['module.api']['facebook.enabled']) continue;
+                if (!$this->config->values['module.api']['facebook.enabled']) {
+                  continue;
+                }
+
                 $this->sUrl = new Facebook;
                 break;
 
             case self::GOOGLE_PROVIDER:
-                if (!$this->config->values['module.api']['google.enabled']) continue;
+                if (!$this->config->values['module.api']['google.enabled']) {
+                  continue;
+                }
+
                 $this->sUrl = new Google($this->session, $this->httpRequest, $this->registry);
                 break;
 
             case self::TWITTER_PROVIDER:
-                if (!$this->config->values['module.api']['twitter.enabled']) continue;
+                if (!$this->config->values['module.api']['twitter.enabled']) {
+                  continue;
+                }
+
                 $this->sUrl = new Twitter;
                 break;
 
             case self::MICROSOFT_PROVIDER:
-                if (!$this->config->values['module.api']['microsoft.enabled']) continue;
+                if (!$this->config->values['module.api']['microsoft.enabled']) {
+                  continue;
+                }
+
                 $this->sUrl = new Microsoft;
                 break;
 
             default:
                 $this->displayPageNotFound(
-                    t('The %0% API is incorrect.',
-                        $this->sApi)
+                    t('The %0% API is incorrect.', $this->sApi)
                 );
         }
     }
