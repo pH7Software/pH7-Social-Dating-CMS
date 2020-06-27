@@ -964,7 +964,7 @@ HTML;
 
         // DO NOT REMOVE THE COPYRIGHT CODE BELOW! Thank you!
         echo '<html><head><meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <title>', (!empty($aMeta['title']) ? $aMeta['title'] : ''), '</title>';
 
