@@ -3,7 +3,9 @@
 <div class="center">
     <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
-            <h3 class="panel-heading">{lang 'Choose your membership'}</h3>
+            <h3 class="panel-heading">
+                {lang 'Choose your membership'}
+            </h3>
             <div class="panel-body">
                 <ul class="list-group">
                     {each $membership in $memberships}
@@ -29,7 +31,11 @@
                                     <p class="italic">{% $membership->description %}</p>
                                 </div>
                                 <p class="pull-right">
-                                    <a class="btn btn-default" href="{{ $design->url('payment', 'main', 'pay', $membership->groupId) }}" title="{lang 'Purchase this membership!'}">
+                                    <a
+                                        class="btn btn-default"
+                                        href="{{ $design->url('payment', 'main', 'pay', $membership->groupId) }}"
+                                        title="{lang 'Purchase this membership!'}"
+                                    >
                                         {lang 'Choose It'}
                                     </a>
                                 </p>
