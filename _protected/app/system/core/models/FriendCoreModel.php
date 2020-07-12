@@ -22,7 +22,7 @@ class FriendCoreModel extends Model
      * "Get" and "Find" "Friends" or "Mutual Friends"
      *
      * @param int $iIdProfileId User ID
-     * @param int $iFriendId Enter a user Friend ID to find a mutual friend in the friends list or null = the whole list. Default is NULL
+     * @param int|null $iFriendId Enter a user Friend ID to find a mutual friend in the friends list or null = the whole list. Default is NULL
      * @param int|string $mLooking Integer for profile ID or string for a keyword
      * @param bool $bCount Put 'true' for count friends or 'false' for the result of friends
      * @param string $sOrderBy
