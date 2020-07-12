@@ -221,25 +221,34 @@ class Various
     /**
      * Check the model table.
      *
-     * @see self::launchErr()
-     *
      * @param string $sTable
      *
      * @return string Returns the table if it is correct.
      *
      * @throws PH7InvalidArgumentException If the table is not valid.
+     * @see self::launchErr()
+     *
      */
     public static function checkModelTable($sTable)
     {
         switch ($sTable) {
             case DbTableName::MEMBER:
-            case DbTableName::AFFILIATE:
             case DbTableName::MEMBER_INFO:
-            case DbTableName::AFFILIATE_INFO:
             case DbTableName::MEMBER_COUNTRY:
+            case DbTableName::MEMBER_ATTEMPT_LOGIN:
+            case DbTableName::MEMBER_LOG_LOGIN:
+            case DbTableName::MEMBER_LOG_SESS:
+            case DbTableName::AFFILIATE:
+            case DbTableName::AFFILIATE_INFO:
             case DbTableName::AFFILIATE_COUNTRY:
-            case DbTableName::SUBSCRIBER:
+            case DbTableName::AFFILIATE_ATTEMPT_LOGIN:
+            case DbTableName::AFFILIATE_LOG_LOGIN:
+            case DbTableName::AFFILIATE_LOG_SESS:
             case DbTableName::ADMIN:
+            case DbTableName::ADMIN_ATTEMPT_LOGIN:
+            case DbTableName::ADMIN_LOG_LOGIN:
+            case DbTableName::ADMIN_LOG_SESS:
+            case DbTableName::SUBSCRIBER:
                 return $sTable;
 
             default:
