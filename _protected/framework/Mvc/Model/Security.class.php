@@ -101,7 +101,7 @@ class Security
      *
      * @return void
      */
-    public function addSessionLog($iProfileId, $sEmail, $sFirstName, $sTable = DbTableName::MEMBER_LOG_LOGIN)
+    public function addSessionLog($iProfileId, $sEmail, $sFirstName, $sTable = DbTableName::MEMBER_LOG_SESS)
     {
         Various::checkModelTable($sTable);
 
