@@ -3,7 +3,7 @@
  * @desc             Various Page methods with also the pagination methods.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Navigation
  */
@@ -90,15 +90,16 @@ class Page
     }
 
     /**
-     * Clean a Dynamic URL for some features CMS.
+     * Clean Dynamic URL.
      *
      * @param string $sVar The Query URL (e.g. www.pierre-henry-soria.com/my-mod/?query=value).
      *
-     * @return string $sPageUrl The new clean URL.
+     * @return string $sPageUrl The new cleaned URL.
      */
     public static function cleanDynamicUrl($sVar)
     {
         $sCurrentUrl = PH7_URL_PROT . PH7_DOMAIN . (new HttpRequest)->getUri();
+        $sCurrentUrl = htmlspecialchars($sCurrentUrl, ENT_QUOTES);
         $sUrl = preg_replace(self::REGEX_URL_QUESTION_MARKS, '', $sCurrentUrl);
 
         if (self::areParametersInUrlFound($sCurrentUrl)) {
