@@ -130,11 +130,11 @@ class File
      *
      * @param string $sFile File name.
      * @param string $sContents Contents file.
-     * @param int $iFlag Constant (see http://php.net/manual/function.file-put-contents.php).
+     * @param int $iFlag Flag filesystem constant (see http://php.net/manual/function.file-put-contents.php).
      *
      * @return int|bool Returns the number of bytes that were written to the file, or FALSE on failure.
      */
-    public function putFile($sFile, $sContents, $iFlag = 0)
+    public function putFile($sFile, $sContents, $iFlag = FILE_TEXT)
     {
         return @file_put_contents($sFile, $sContents, $iFlag);
     }
