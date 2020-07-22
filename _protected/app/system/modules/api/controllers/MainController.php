@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2015-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2015-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Api / Controller
  * @link           http://ph7cms.com
@@ -36,9 +36,9 @@ class MainController extends Controller
      *
      * @return void
      */
-    public function test()
+    public function ping()
     {
-        if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_POST) {
+        if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_GET) {
             $this->oRest->response('', StatusCode::NOT_ACCEPTABLE);
         } else {
             $this->oRest->response($this->set(['return' => 'It Works!']));
