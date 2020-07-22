@@ -97,7 +97,7 @@ class VideoForm
                 t('Video:'),
                 'video',
                 [
-                    'description' => '<span class="bold">' . t('Note:') . '</span> ' . t('Please be patient while downloading video, this may take time (especially if you download a long video).') . '</em>',
+                    'description' => '<span class="bold">' . t('Note:') . '</span> ' . t('Please be patient while uploading, this may take time (especially if you are uploading a long video).') . '</em>',
                     'accept' => 'video/*'
                 ]
             )
