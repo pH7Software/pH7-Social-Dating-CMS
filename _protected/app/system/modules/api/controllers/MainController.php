@@ -14,6 +14,7 @@ use PH7\Framework\Api\AllowCors;
 use PH7\Framework\Api\Api;
 use PH7\Framework\Http\Rest\Rest;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Security\Version;
 use Teapot\StatusCode;
 
 class MainController extends Controller
@@ -42,6 +43,35 @@ class MainController extends Controller
             $this->oRest->response('', StatusCode::NOT_ACCEPTABLE);
         } else {
             $this->oRest->response($this->set(['return' => 'It Works!']));
+        }
+    }
+
+    /**
+     * Gives software information
+     * (such as software name, website URL, version number, version name, etc).
+     *
+     * @return void
+     */
+    public function info()
+    {
+        if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_GET) {
+            $this->oRest->response('', StatusCode::NOT_ACCEPTABLE);
+        } else {
+            $aInfo = [
+                'software' => [
+                    'name' => self::SOFTWARE_NAME,
+                    'url' => self::SOFTWARE_WEBSITE,
+                    'github' => self::SOFTWARE_GIT_REPO_URL,
+                    'version' => [
+                        'number' => Version::KERNEL_VERSION,
+                        'build' => Version::KERNEL_BUILD,
+                        'name' => Version::KERNEL_VERSION_NAME,
+                        'date' => Version::KERNEL_RELEASE_DATE
+                    ]
+                ]
+            ];
+
+            $this->oRest->response($this->set($aInfo));
         }
     }
 
