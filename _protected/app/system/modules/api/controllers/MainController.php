@@ -33,7 +33,7 @@ class MainController extends Controller
     }
 
     /**
-     * Test if the API works well.
+     * Test if the API is responding.
      *
      * @return void
      */
@@ -42,7 +42,7 @@ class MainController extends Controller
         if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_GET) {
             $this->oRest->response('', StatusCode::NOT_ACCEPTABLE);
         } else {
-            $this->oRest->response($this->set(['return' => 'It Works!']));
+            $this->oRest->response($this->set(['return' => 'Up!']));
         }
     }
 
