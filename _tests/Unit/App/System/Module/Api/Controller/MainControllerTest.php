@@ -1,7 +1,7 @@
 <?php
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2017-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2017-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Test / Unit / App / System / Module / Api / Controller
  */
@@ -24,7 +24,7 @@ class MainControllerTest extends PHPUnit_Framework_TestCase
 
     public function testDenyRequest()
     {
-        $oResponse = $this->oClient->get($this->getApiUrl('test'), [
+        $oResponse = $this->oClient->get($this->getApiUrl('ping'), [
             'query' => [
                 'private_api_key' => 'dev772277',
                 'url' => 'doesntexist.com'
@@ -36,7 +36,7 @@ class MainControllerTest extends PHPUnit_Framework_TestCase
 
     public function testWrongTestRequestMethod()
     {
-        $oResponse = $this->oClient->get($this->getApiUrl('test'), [
+        $oResponse = $this->oClient->post($this->getApiUrl('ping'), [
             'query' => [
                 'private_api_key' => 'dev772277',
                 'url' => 'ph7cms.com'
@@ -57,7 +57,7 @@ class MainControllerTest extends PHPUnit_Framework_TestCase
 
     public function testCorrectTestUri()
     {
-        $oResponse = $this->oClient->post($this->getApiUrl('test'), [
+        $oResponse = $this->oClient->get($this->getApiUrl('ping'), [
             'query' => [
                 'private_api_key' => 'dev772277',
                 'url' => 'ph7cms.com'
