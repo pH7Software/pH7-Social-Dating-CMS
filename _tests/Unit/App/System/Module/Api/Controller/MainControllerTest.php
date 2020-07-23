@@ -65,7 +65,7 @@ class MainControllerTest extends PHPUnit_Framework_TestCase
         ]);
 
         $this->assertSame(200, $oResponse->getStatusCode());
-        $this->assertSame(['return' => 'Up!'], json_decode($oResponse->getBody(), true));
+        $this->assertSame(['return' => 'Pong'], json_decode($oResponse->getBody(), true));
     }
 
     /**

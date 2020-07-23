@@ -42,7 +42,7 @@ class MainController extends Controller
         if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_GET) {
             $this->oRest->response('', StatusCode::NOT_ACCEPTABLE);
         } else {
-            $this->oRest->response($this->set(['return' => 'Up!']));
+            $this->oRest->response($this->set(['return' => 'Pong']));
         }
     }
 
