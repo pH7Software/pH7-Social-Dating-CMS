@@ -265,13 +265,15 @@ abstract class Controller extends Core implements Controllable
 
     private function setUserNotifications()
     {
+        $iMemberId = $this->session->get('member_id');
+
         $aNotificationCounter = [
-            'count_unread_mail' => MailCoreModel::countUnreadMsg($this->session->get('member_id')),
-            'count_pen_friend_request' => FriendCoreModel::getPending($this->session->get('member_id'))
+            'count_unread_mail' => MailCoreModel::countUnreadMsg($iMemberId),
+            'count_pen_friend_request' => FriendCoreModel::getPending($iMemberId)
         ];
         $this->view->assigns($aNotificationCounter);
 
-        unset($aNotificationCounter);
+        unset($aNotificationCounter, $iMemberId);
     }
 
     /**
