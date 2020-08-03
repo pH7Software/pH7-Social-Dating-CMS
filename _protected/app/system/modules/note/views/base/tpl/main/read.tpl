@@ -19,8 +19,8 @@
 
             {{ $design->like($post->username,$post->firstName,$post->sex) }} | {{ $design->report($post->profileId,$post->username,$post->firstName,$post->sex) }}
 
-            <p class="small italic">
-                {lang 'Posted on:'} {% $dateTime->get($post->createdDate)->dateTime() %} {if !empty($post->updatedDate)} | {lang 'Updated Post:'}{% $dateTime->get($post->updatedDate)->dateTime() %}{/if} | {lang 'Views:'} {% Framework\Mvc\Model\Statistic::getView($post->noteId,DbTableName::NOTE) %}
+            <p class="small italic text-muted">
+                {lang 'Posted on %0%', $dateTime->get($post->createdDate)->dateTime()} {if !empty($post->updatedDate)} | {lang 'Last Edited: %0%', $dateTime->get($post->updatedDate)->dateTime()}{/if} | {lang 'Views: %0%', Framework\Mvc\Model\Statistic::getView($post->noteId,DbTableName::NOTE)}
             </p>
 
             {if $is_user_auth AND $member_id === $post->profileId}

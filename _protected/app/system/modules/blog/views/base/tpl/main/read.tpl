@@ -10,8 +10,8 @@
             <hr />
             {{ BlogDesign::categories($categories, 'blog') }}
 
-            <p class="small italic">
-                {lang 'Posted on:'} {created_date} {if !empty($updated_date)} | {lang 'Updated Post:'}{updated_date}{/if} | {lang 'Views:'} {% Framework\Mvc\Model\Statistic::getView($blog_id,DbTableName::BLOG) %}
+            <p class="small italic text-muted">
+                {lang 'Posted on %0%', $created_date} {if !empty($updated_date)} | {lang 'Last Edited: %0%', $updated_date}{/if} | {lang 'Views: %0%', Framework\Mvc\Model\Statistic::getView($blog_id,DbTableName::BLOG)}
             </p>
             {if AdminCore::auth()}
                 <p>

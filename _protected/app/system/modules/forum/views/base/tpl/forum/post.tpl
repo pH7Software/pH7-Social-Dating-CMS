@@ -24,10 +24,10 @@
 
         <div class="post-ident">
             {{ $design->littleSocialMediaWidgets() }}
-            <p class="small italic">
+            <p class="small italic text-muted">
                 {lang 'Posted on %0%', $dateTime->get($post->createdDate)->dateTime()}
                 {if !empty($post->updatedDate)}
-                    | <span class="post-edit">{lang 'Last Edited %0%', $dateTime->get($post->updatedDate)->dateTime()}</span>
+                    | <span class="post-edit">{lang 'Last Edited: %0%', $dateTime->get($post->updatedDate)->dateTime()}</span>
                 {/if}
             </p>
             <p>
@@ -73,7 +73,7 @@
                     </p>
 
                     <div class="post-ident">
-                        <p class="small italic">
+                        <p class="small italic text-muted">
                             <a href="{relative_url}">#</a> | {lang 'Posted on %0%', $dateTime->get($msg->createdDate)->dateTime()}
                             {if !empty($msg->updatedDate)} | <span class="post-edit">{lang 'Last Edited %0%', $dateTime->get($msg->updatedDate)->dateTime()}</span>{/if}
                         </p>

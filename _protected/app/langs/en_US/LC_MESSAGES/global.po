@@ -7410,7 +7410,7 @@ msgstr ""
 
 #: _protected/app/system/modules/user/assets/ajax/WallAjax.php:92
 #: _protected/app/system/modules/user/assets/ajax/WallAjax.php:119
-msgid "Last Edited %0%"
+msgid "Last Edited: %0%"
 msgstr ""
 
 #: _protected/app/system/modules/user/assets/ajax/WallAjax.php:108
