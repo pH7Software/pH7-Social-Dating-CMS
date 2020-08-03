@@ -7403,11 +7403,6 @@ msgstr ""
 msgid "Oops...! No news feed available at the moment."
 msgstr ""
 
-#: _protected/app/system/modules/user/assets/ajax/WallAjax.php:89
-#: _protected/app/system/modules/user/assets/ajax/WallAjax.php:116
-msgid "Posted on: %0%"
-msgstr ""
-
 #: _protected/app/system/modules/user/assets/ajax/WallAjax.php:92
 #: _protected/app/system/modules/user/assets/ajax/WallAjax.php:119
 msgid "Last Edited: %0%"
@@ -14999,16 +14994,6 @@ msgstr ""
 
 #: _protected/app/system/modules/blog/views/base/tpl/main/index.tpl:75
 msgid "Search for Blog Post"
-msgstr ""
-
-#: _protected/app/system/modules/blog/views/base/tpl/main/read.tpl:14
-#: _protected/app/system/modules/note/views/base/tpl/main/read.tpl:23
-msgid "Posted on:"
-msgstr ""
-
-#: _protected/app/system/modules/blog/views/base/tpl/main/read.tpl:14
-#: _protected/app/system/modules/note/views/base/tpl/main/read.tpl:23
-msgid "Updated Post:"
 msgstr ""
 
 #: _protected/app/system/modules/comment/views/base/tpl/comment/post.tpl:15
