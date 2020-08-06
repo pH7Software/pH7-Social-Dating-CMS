@@ -88,7 +88,7 @@ class PictureForm
         );
         $oForm->addElement(
             new HTMLExternal(
-                '<p class="pfbc-label"><em><span class="bold">' . t('Note:') . '</span> ' . t('Please be patient while downloading pictures, this may take time (especially if you download a lot of photos at once).') . '</em></p>'
+                '<p class="pfbc-label"><em><span class="bold">' . t('Note:') . '</span> ' . t('Please be patient while uploading, this may take time (especially if you are uploading a lot of photos at once).') . '</em></p>'
             )
         );
         $oForm->addElement(

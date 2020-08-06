@@ -7130,7 +7130,7 @@ msgid "Note:"
 msgstr ""
 
 #: _protected/app/system/modules/picture/forms/PictureForm.php:49
-msgid "Please be patient while downloading pictures, this may take time (especially if you download a lot of photos at once)."
+msgid "Please be patient while uploading, this may take time (especially if you are uploading a lot of photos at once)."
 msgstr ""
 
 #: _protected/app/system/modules/picture/forms/PictureForm.php:50
@@ -8119,7 +8119,7 @@ msgid "Video:"
 msgstr ""
 
 #: _protected/app/system/modules/video/forms/VideoForm.php:51
-msgid "Please be patient while downloading video, this may take time (especially if you download a long video)."
+msgid "Please be patient while uploading, this may take time (especially if you are uploading a long video)."
 msgstr ""
 
 #: _protected/app/system/modules/video/forms/VideoForm.php:52
