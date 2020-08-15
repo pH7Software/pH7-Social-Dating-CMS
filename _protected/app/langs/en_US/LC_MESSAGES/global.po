@@ -886,7 +886,7 @@ msgid "Cancel"
 msgstr ""
 
 #: _protected/app/system/core/forms/CountryRestrictionCoreForm.php:34
-msgid "Countries to be showed on registration forms"
+msgid "Countries to be showed on registration and search forms"
 msgstr ""
 
 #: _protected/app/system/core/forms/CountryRestrictionCoreForm.php:44
@@ -906,7 +906,7 @@ msgid "Save"
 msgstr ""
 
 #: _protected/app/system/core/forms/CountryRestrictionCoreForm.php:73
-msgid "You can select/multi-select the amount of countries to be displayed on the registration form and user search forms."
+msgid "You can select/multi-select the amount of countries to be displayed on the registration and user search forms."
 msgstr ""
 
 #: _protected/app/system/core/forms/CountryRestrictionCoreForm.php:75
