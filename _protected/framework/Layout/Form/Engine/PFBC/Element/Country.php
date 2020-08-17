@@ -185,6 +185,7 @@ class Country extends Select
         'QA',
         'RE',
         'RO',
+        'RS',
         'RU',
         'RW',
         'SH',

@@ -201,6 +201,7 @@ Framework\Registry\Registry::getInstance()->lang = [
     'ST' => 'Sao Tome And Principe',
     'SA' => 'Saudi Arabia',
     'SN' => 'Senegal',
+    'RS' => 'Serbia',
     'SC' => 'Seychelles',
     'SL' => 'Sierra Leone',
     'SG' => 'Singapore',
