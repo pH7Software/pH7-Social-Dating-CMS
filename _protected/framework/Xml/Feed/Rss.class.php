@@ -72,7 +72,7 @@ class Rss extends DomDocument
                 // Create the sub elements here
                 case 'image':
                 case 'skipHour':
-                case 'skipDay': {
+                case 'skipDay':
                     $oImage = $this->createElement('image');
                     $this->oChannel->appendChild($oImage);
 
@@ -80,8 +80,7 @@ class Rss extends DomDocument
                         $oSub = $this->createElement($sSubElement, $sSubValue);
                         $oImage->appendChild($oSub);
                     }
-                } break;
-
+                    break;
                 case 'title':
                 case 'pubDate':
                 case 'link':
