@@ -43,6 +43,7 @@ class Variable extends Predefined
         $this->addVar('software_url', 'self::SOFTWARE_WEBSITE');
         $this->addVar('software_doc_url', 'self::SOFTWARE_DOC_URL');
         $this->addVar('software_issue_url', 'self::SOFTWARE_ISSUE_URL');
+        $this->addVar('software_forum_url', 'self::SOFTWARE_DISCUSSION_URL');
         $this->addVar('software_review_url', 'self::SOFTWARE_REVIEW_URL');
         $this->addVar('software_version', 'self::SOFTWARE_VERSION');
     }
