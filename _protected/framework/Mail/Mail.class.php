@@ -18,6 +18,7 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class Mail implements Mailable
 {
+    const TEXT_CONTENT_TYPE = 'text/plain'; 
     const HTML_CONTENT_TYPE = 'text/html';
 
     /**
@@ -49,6 +50,9 @@ class Mail implements Mailable
             ->setTo([escape($sToMail, true) => escape($sToName, true)]);
 
         if ($iFormatType === Mailable::HTML_FORMAT) {
+            $html2Text = new \kranemora\Html2Text\Html2Text;
+            $sPlainContents = $html2Text->convert($sContents);
+            $oMessage->addPart($sPlainContents, self::TEXT_CONTENT_TYPE);
             $oMessage->addPart($sContents, self::HTML_CONTENT_TYPE);
         } else {
             $oMessage->setBody($sContents);
