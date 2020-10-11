@@ -21,7 +21,7 @@ use PH7\Framework\Security\Validate\Validate;
 final class Version
 {
     /**
-     * Cache lifetime set to 1 day.
+     * Cache lifetime set for 1 day.
      */
     const CACHE_TIME = 86400;
 
