@@ -1,6 +1,6 @@
 <div class="center">
     <iframe
-        src="{chat_room}"
+        src="{chatroom_url}"
         frameborder="0"
         scrolling="no"
         allow="microphone; camera"

@@ -1,6 +1,6 @@
 <div class="center">
     <iframe
-        src="{chatroulette}"
+        src="{chatroulette_url}"
         frameborder="0"
         scrolling="no"
         allow="microphone; camera"
