@@ -27,7 +27,7 @@ use Teapot\StatusCode;
 
 class Validate
 {
-    const REGEX_INVALID_NAME_PATTERN = '`(?:[\|<>"\=\]\[\}\{\\\\$€@%~^#\(\):;\?!¿¡\*])|(?:(?:https?|ftps?)://)|(?:[0-9])`';
+    const REGEX_INVALID_NAME_PATTERN = '`(?:[\|<>"\=\]\[\}\{\\\\$€@%~^#\(\):;\?!¿\*])|(?:(?:https?|ftps?)://)|(?:[0-9])`';
     const REGEX_DATE_FORMAT = '`^\d\d/\d\d/\d\d\d\d$`';
 
     const MAX_INT_NUMBER = 999999999999;
