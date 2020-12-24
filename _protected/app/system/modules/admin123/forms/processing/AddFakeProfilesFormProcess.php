@@ -4,7 +4,7 @@
  * @desc           Generate Fake Profiles from Web API.
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2014-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2014-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
@@ -75,7 +75,7 @@ class AddFakeProfilesFormProcess extends Form
         } else {
             \PFBC\Form::setError(
                 'form_add_fake_profiles',
-                t('An error occurred when requesting user data to %0%. Maybe, you could try again later.', self::API_URL)
+                t('An error occurred when requesting user data from %0%. The API might be temporarily down. Try again later.', self::API_URL)
             );
         }
 

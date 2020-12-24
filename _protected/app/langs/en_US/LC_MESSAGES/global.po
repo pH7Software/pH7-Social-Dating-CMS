@@ -14506,7 +14506,7 @@ msgid "None of the received fake profiles were valid for the system. Please try 
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/processing/AddFakeProfilesFormProcess.php:76
-msgid "An error occurred when requesting user data to %0%. Maybe, you could try again later."
+msgid "An error occurred when requesting user data from %0%. The API might be temporarily down. Try again later."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/admin/browse.tpl:10
