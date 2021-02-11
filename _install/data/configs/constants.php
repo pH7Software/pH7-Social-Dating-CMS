@@ -1,7 +1,7 @@
 <?php
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @link             https://ph7cms.com
  * @package          PH7
@@ -15,7 +15,12 @@ defined('PH7') or exit(header('Location: ./'));
 
 ###### URL ######
 // Check the SSL protocol compatibility
-$sHttp = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) === 'on') ? 'https://' : 'http://';
+$sUrlProtocol = (
+    (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) === 'on') ||
+    (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ||
+    (!empty($_SERVER['REQUEST_SCHEME']) && $_SERVER['REQUEST_SCHEME'] === 'https')
+) ? 'https://' : 'http://';
+
 // Determine the domain name, with the port if necessary
 $sServerName = $_SERVER['SERVER_NAME'] !== $_SERVER['HTTP_HOST'] ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 $sDomain = ($_SERVER['SERVER_PORT'] !== '80' && $_SERVER['SERVER_PORT'] !== '443' && strpos($sServerName, ':') === false) ? $sServerName . ':' . $_SERVER['SERVER_PORT'] : $sServerName;
@@ -45,7 +50,7 @@ define('PH7_PATH_FRAMEWORK', PH7_PATH_PROTECTED . 'framework/');
 define('PH7_PATH_LIBRARY', PH7_PATH_PROTECTED . 'library/');
 
 ###### URL (PUBLIC) ######
-define('PH7_URL_PROT', $sHttp); // URL protocol
+define('PH7_URL_PROT', $sUrlProtocol);
 define('PH7_DOMAIN', $sDomain); // URL domain
 define('PH7_DOMAIN_COOKIE', $sDomain_cookie);
 define('PH7_URL_ROOT', PH7_URL_PROT . PH7_DOMAIN . PH7_SELF);
