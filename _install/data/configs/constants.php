@@ -19,7 +19,7 @@ $sUrlProtocol = (
     (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) === 'on') ||
     (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ||
     (!empty($_SERVER['REQUEST_SCHEME']) && $_SERVER['REQUEST_SCHEME'] === 'https') ||
-    (!empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] === '443')
+    $_SERVER['SERVER_PORT'] === '443'
 ) ? 'https://' : 'http://';
 
 // Determine the domain name, with the port if necessary
