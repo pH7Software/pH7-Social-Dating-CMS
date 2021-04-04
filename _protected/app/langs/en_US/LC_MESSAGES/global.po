@@ -15242,7 +15242,7 @@ msgid "pH7 Social / Dating CMS"
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/about.tpl:5
-msgid "is a <a href=\"https://sourceforge.net/projects/ph7socialdating/\">Free</a> and <a href=\"https://github.com/pH7Software/pH7-Social-Dating-CMS\">Open Source</a> <strong>Social Dating Software</strong> for building online dating web apps and social networks."
+msgid "is a <a href=\"https://sourceforge.net/projects/ph7socialdating/\" title=\"Free Dating Web App Solution\">Free</a> and <a href=\"https://github.com/pH7Software/pH7-Social-Dating-CMS\" title=\"Open Source Social Dating Software\">Open Source</a> <strong>Social Dating Software</strong> for building online dating web apps and social networks."
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/about.tpl:7
