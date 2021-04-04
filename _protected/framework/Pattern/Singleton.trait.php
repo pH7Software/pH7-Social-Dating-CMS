@@ -38,8 +38,4 @@ trait Singleton
     {
         return static::getInstance();
     }
-
-    private function __sleep()
-    {
-    }
 }
