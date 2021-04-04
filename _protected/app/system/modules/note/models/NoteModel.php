@@ -19,7 +19,7 @@ class NoteModel extends NoteCoreModel
      *
      * @return array
      */
-    public function getCategory($iNoteId = null, $iOffset, $iLimit)
+    public function getCategory($iNoteId, $iOffset, $iLimit)
     {
         $this->cache->start(self::CACHE_GROUP, 'category' . $iNoteId . $iOffset . $iLimit, static::CACHE_LIFETIME);
         if (!$aCategories = $this->cache->get()) {

@@ -27,7 +27,7 @@ class GameCoreModel extends Model
      *
      * @return array|stdClass
      */
-    public function get($sTitle = null, $iGameId = null, $iOffset, $iLimit, $sOrder = SearchCoreModel::NAME)
+    public function get($sTitle, $iGameId, $iOffset, $iLimit, $sOrder = SearchCoreModel::NAME)
     {
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;

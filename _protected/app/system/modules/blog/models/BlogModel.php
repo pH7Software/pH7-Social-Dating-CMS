@@ -19,7 +19,7 @@ class BlogModel extends BlogCoreModel
      *
      * @return array
      */
-    public function getCategory($iBlogId = null, $iOffset, $iLimit)
+    public function getCategory($iBlogId, $iOffset, $iLimit)
     {
         $this->cache->start(
             self::CACHE_GROUP,

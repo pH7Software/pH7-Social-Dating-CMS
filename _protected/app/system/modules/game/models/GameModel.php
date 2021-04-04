@@ -20,7 +20,7 @@ class GameModel extends GameCoreModel
      *
      * @return array|\stdClass|bool
      */
-    public function getCategory($iCategoryId = null, $iOffset, $iLimit, $bCount = false)
+    public function getCategory($iCategoryId, $iOffset, $iLimit, $bCount = false)
     {
         $this->cache->start(static::CACHE_GROUP, 'category' . $iCategoryId . $iOffset . $iLimit . $bCount, static::CACHE_TIME);
 
