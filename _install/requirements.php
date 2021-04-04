@@ -43,6 +43,7 @@ $aRequirementsNeeded = array(
     ),
     FUNCTION_KEY => array(
         'exif_imagetype' => 'exif',
+        'imagettftext' => 'FreeType Support',
         'curl_init' => 'cURL'
     ),
     DIRECTIVE_KEY => array(
