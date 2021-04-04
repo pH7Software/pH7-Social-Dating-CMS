@@ -34,5 +34,7 @@
         </p>
     {/if}
 {else}
-  <p>{error}</p>
+    <div class="center">
+        <p>{error}</p>
+    </div>
 {/if}
