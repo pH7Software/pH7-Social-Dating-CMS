@@ -40,7 +40,7 @@ class Header
         Http::setHeadersByCode(Http::getStatusCode($iRedirectCode));
 
         $oHttpRequest = new HttpRequest;
-        $sUrl = ($sUrl !== null) ? $sUrl : $oHttpRequest->currentUrl();
+        $sUrl = $sUrl !== null ? $sUrl : $oHttpRequest->currentUrl();
         $sUrl = $oHttpRequest->pH7Url($sUrl);
         unset($oHttpRequest);
 
