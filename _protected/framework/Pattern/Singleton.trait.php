@@ -39,13 +39,6 @@ trait Singleton
         return static::getInstance();
     }
 
-    /**
-     * Private serialize/unserialize method to prevent serializing/unserializing.
-     */
-    private function __wakeup()
-    {
-    }
-
     private function __sleep()
     {
     }
