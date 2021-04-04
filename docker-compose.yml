@@ -14,7 +14,7 @@ services:
         links:
             - php
     php:
-        image: php:7.2-fpm
+        image: php:7.4-fpm
         volumes:
             - .:/var/www:/var/www/
         command: bash -c "composer install"
