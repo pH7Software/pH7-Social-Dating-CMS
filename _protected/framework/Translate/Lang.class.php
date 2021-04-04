@@ -256,7 +256,6 @@ namespace PH7\Framework\Translate {
 
             mb_internal_encoding(PH7_ENCODING);
             mb_http_output(PH7_ENCODING);
-            mb_http_input(PH7_ENCODING);
             mb_language('uni');
             mb_regex_encoding(PH7_ENCODING);
         }
