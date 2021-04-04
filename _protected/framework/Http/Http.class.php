@@ -314,7 +314,7 @@ class Http
      *
      * @return bool TRUE if the headers were sent, FALSE if not.
      */
-    final private static function isSent()
+    private static function isSent()
     {
         return headers_sent();
     }

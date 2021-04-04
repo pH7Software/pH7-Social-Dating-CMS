@@ -305,7 +305,7 @@ File ID: ' . $this->sId . '
      * @throws IOException If the file cannot be written.
      * @throws \PH7\Framework\File\Permission\PermissionException If the file cannot be created.
      */
-    final private function write($sData)
+    private function write($sData)
     {
         if (!$this->bEnabled) {
             return null;

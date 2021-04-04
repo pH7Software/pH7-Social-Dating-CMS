@@ -207,7 +207,7 @@ abstract class Controller extends Core implements Controllable
      *
      * @return void
      */
-    final private function setMetaTplVars()
+    private function setMetaTplVars()
     {
         $oInfo = M\DbConfig::getMetaMain(PH7_LANG_NAME);
 
