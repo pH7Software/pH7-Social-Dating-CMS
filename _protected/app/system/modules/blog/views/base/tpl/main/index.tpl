@@ -44,45 +44,48 @@
             <p>{error}</p>
         {else}
             {each $post in $posts}
-                <h1>
-                    <a href="{{ $design->url('blog','main','read',$post->postId) }}" title="{% $post->title %}" data-load="ajax">{% escape($post->title) %}</a>
-                </h1>
+                <div class="vs_tbMarg">
+                    <h1>
+                        <a href="{{ $design->url('blog','main','read',$post->postId) }}" title="{% $post->title %}" data-load="ajax">{% escape($post->title) %}</a>
+                    </h1>
 
-                <div class="left">
-                    <a href="{{ $design->url('blog','main','read',$post->postId) }}" class="pic thumb" data-load="ajax">
-                        <img src="{% Blog::getThumb($post->blogId) %}" alt="{% $post->pageTitle %}" title="{% $post->pageTitle %}" />
-                    </a>
+                    <div class="left">
+                        <a href="{{ $design->url('blog','main','read',$post->postId) }}" class="pic thumb" data-load="ajax">
+                            <img src="{% Blog::getThumb($post->blogId) %}" alt="{% $post->pageTitle %}" title="{% $post->pageTitle %}" />
+                        </a>
+                    </div>
+
+                    {* Don't check the post with \PH7\Framework\Security\Ban\Ban::filterWord() since this blog is only allowed for administrators *}
+                    {% escape($str->extract($post->content, 400), true) %}
+                    <p><a href="{{ $design->url('blog','main','read',$post->postId) }}" data-load="ajax">{lang 'See more'}</a></p>
+
+                    {if AdminCore::auth()}
+                        <p><a class="btn btn-default btn-sm" href="{{ $design->url('blog', 'admin', 'edit', $post->blogId) }}">{lang 'Edit Article'}</a> | {{ $design->popupLinkConfirm(t('Delete Article'), 'blog', 'admin', 'delete', $post->blogId, 'btn btn-default btn-sm') }}</p>
+                    {/if}
+                    {{ $design->socialMediaWidgets() }}
+                    <hr />
                 </div>
-
-                {* Don't check the post with \PH7\Framework\Security\Ban\Ban::filterWord() since this blog is only allowed for administrators *}
-                {% escape($str->extract($post->content, 400), true) %}
-                <p><a href="{{ $design->url('blog','main','read',$post->postId) }}" data-load="ajax">{lang 'See more'}</a></p>
-
-                {if AdminCore::auth()}
-                    <p><a class="btn btn-default btn-sm" href="{{ $design->url('blog', 'admin', 'edit', $post->blogId) }}">{lang 'Edit Article'}</a> | {{ $design->popupLinkConfirm(t('Delete Article'), 'blog', 'admin', 'delete', $post->blogId, 'btn btn-default btn-sm') }}</p>
-                {/if}
-                {{ $design->socialMediaWidgets() }}
-                <hr /><br />
             {/each}
             {main_include 'page_nav.inc.tpl'}
         {/if}
-        <br />
 
-        <p>
-            {if AdminCore::auth()}
-                <a class="btn btn-default btn-sm" href="{{ $design->url('blog', 'admin', 'add') }}">
-                    {lang 'Add a new Article'}
+        <div class="s_tMarg">
+            <p>
+                {if AdminCore::auth()}
+                    <a class="btn btn-default btn-sm" href="{{ $design->url('blog', 'admin', 'add') }}">
+                        {lang 'Add a new Article'}
+                    </a>
+                {/if}
+
+                <a class="btn btn-default btn-sm" href="{{ $design->url('blog','main','search') }}">
+                    {lang 'Search for Blog Post'}
                 </a>
-            {/if}
-
-            <a class="btn btn-default btn-sm" href="{{ $design->url('blog','main','search') }}">
-                {lang 'Search for Blog Post'}
-            </a>
-        </p>
-        <p>
-            <a href="{{ $design->url('xml','rss','xmlrouter','blog') }}">
-                <img src="{url_static_img}icon/feed.svg" alt="RSS Feed" />
-            </a>
-        </p>
+            </p>
+            <p>
+                <a href="{{ $design->url('xml','rss','xmlrouter','blog') }}">
+                    <img src="{url_static_img}icon/feed.svg" alt="RSS Feed" />
+                </a>
+            </p>
+        </div>
     </div>
 </div>
