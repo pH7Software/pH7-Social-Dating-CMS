@@ -103,14 +103,14 @@ class PictureModel extends PictureCoreModel
     /**
      * @param int $iProfileId
      * @param int $iAlbumId
-     * @param int|null $iPictureId
+     * @param int|null $iPictureId '1' = Approved | '0' = Pending
      * @param string $sApproved
      * @param int $iOffset
      * @param int $iLimit
      *
      * @return array|\stdClass
      */
-    public function photo($iProfileId, $iAlbumId, $iPictureId = null, $sApproved = '1', $iOffset, $iLimit)
+    public function photo($iProfileId, $iAlbumId, $iPictureId, $sApproved, $iOffset, $iLimit)
     {
         $this->cache->start(self::CACHE_GROUP, 'photo' . $iProfileId . $iAlbumId . $iPictureId . $sApproved . $iOffset . $iLimit, static::CACHE_TIME);
 

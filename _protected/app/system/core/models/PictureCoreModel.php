@@ -21,14 +21,14 @@ class PictureCoreModel extends Model
     /**
      * @param null|int $iProfileId
      * @param null|int $iAlbumId
-     * @param string $sApproved
+     * @param string $sApproved '1' = Approved | '0' = Pending
      * @param int $iOffset
      * @param int $iLimit
      * @param string $sOrder
      *
      * @return \stdClass|array
      */
-    public function album($iProfileId = null, $iAlbumId = null, $sApproved = '1', $iOffset, $iLimit, $sOrder = self::CREATED)
+    public function album($iProfileId, $iAlbumId, $sApproved, $iOffset, $iLimit, $sOrder = self::CREATED)
     {
         $this->cache->start(self::CACHE_GROUP, 'album' . $iProfileId . $iAlbumId . $sApproved . $iOffset . $iLimit . $sOrder, static::CACHE_TIME);
 

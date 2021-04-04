@@ -73,7 +73,7 @@ class WallModel extends Model
      *
      * @return array
      */
-    public function get($iProfileId, $iWallId = null, $iOffset, $iLimit)
+    public function get($iProfileId, $iWallId, $iOffset, $iLimit)
     {
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;

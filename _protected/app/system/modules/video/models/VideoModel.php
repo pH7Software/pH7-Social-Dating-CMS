@@ -108,13 +108,13 @@ class VideoModel extends VideoCoreModel
      * @param int $iProfileId
      * @param int $iAlbumId
      * @param int|null $iVideoId
-     * @param string $sApproved
+     * @param string $sApproved '1' = Approved | '0' = Pending
      * @param int $iOffset
      * @param int $iLimit
      *
      * @return array|\stdClass
      */
-    public function video($iProfileId, $iAlbumId, $iVideoId = null, $sApproved = '1', $iOffset, $iLimit)
+    public function video($iProfileId, $iAlbumId, $iVideoId, $sApproved, $iOffset, $iLimit)
     {
         $this->cache->start(self::CACHE_GROUP, 'video' . $iProfileId . $iAlbumId . $iVideoId . $sApproved . $iOffset . $iLimit, static::CACHE_TIME);
 

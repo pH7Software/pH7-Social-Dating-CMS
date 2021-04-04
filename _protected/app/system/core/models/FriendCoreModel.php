@@ -22,9 +22,9 @@ class FriendCoreModel extends Model
      * "Get" and "Find" "Friends" or "Mutual Friends"
      *
      * @param int $iIdProfileId User ID
-     * @param int|null $iFriendId Enter a user Friend ID to find a mutual friend in the friends list or null = the whole list. Default is NULL
-     * @param int|string $mLooking Integer for profile ID or string for a keyword
-     * @param bool $bCount Put 'true' for count friends or 'false' for the result of friends
+     * @param int|null $iFriendId Enter a user Friend ID to find a mutual friend in the friends list or "NULL" for the whole list.
+     * @param int|string $mLooking Integer for profile ID or string for a keyword.
+     * @param bool $bCount TRUE for count friends or FALSE for the result of friends.
      * @param string $sOrderBy
      * @param int $iSort
      * @param int $iOffset
@@ -32,7 +32,7 @@ class FriendCoreModel extends Model
      *
      * @return int|array Integer for the number friends returned or an array containing a stdClass object with the friends list)
      */
-    public function get($iIdProfileId, $iFriendId = null, $mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
+    public function get($iIdProfileId, $iFriendId, $mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
         $bCount = (bool)$bCount;
         $iOffset = (int)$iOffset;
