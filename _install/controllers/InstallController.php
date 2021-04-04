@@ -106,8 +106,8 @@ class InstallController extends Controller
         $sLangSelect = '';
 
         foreach ($aLangs as $sLang) {
-            $sSel = (empty($_REQUEST['l']) ? $sLang === $this->sCurrentLang ? '" selected="selected' : '' : ($sLang === $_REQUEST['l']) ? '" selected="selected' : '');
-            $sLangSelect .= '<option value="?l=' . $sLang . $sSel . '">' . $aLangsList[$sLang] . '</option>';
+            $sSelectedAttr = (empty($_REQUEST['l']) && $sLang === $this->sCurrentLang || $sLang === $_REQUEST['l']) ? '" selected="selected' : '';
+            $sLangSelect .= '<option value="?l=' . $sLang . $sSelectedAttr . '">' . $aLangsList[$sLang] . '</option>';
         }
 
         $this->oView->assign('lang_select', $sLangSelect);
