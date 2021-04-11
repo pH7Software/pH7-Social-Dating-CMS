@@ -6,6 +6,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.39] - 2021-02-17
+
+### Security
+- Prevent access to `$smarty.template_object` in sandbox mode
+- Fixed code injection vulnerability by using illegal function names in `{function name='blah'}{/function}` 
+
+## [3.1.38] - 2021-01-08
+
+### Fixed
+- Smarty::SMARTY_VERSION wasn't updated https://github.com/smarty-php/smarty/issues/628
+
+## [3.1.37] - 2021-01-07
+
+### Changed
+- Changed error handlers and handling of undefined constants for php8-compatibility (set $errcontext argument optional) https://github.com/smarty-php/smarty/issues/605
+- Changed expected error levels in unit tests for php8-compatibility
+- Travis unit tests now run for all php versions >= 5.3, including php8
+- Travis runs on Xenial where possible
+
+### Fixed
+- PHP5.3 compatibility fixes
+- Brought lexer source functionally up-to-date with compiled version
+
+## [3.1.36] - 2020-04-14
+
+### Fixed
+ - Smarty::SMARTY_VERSION wasn't updated in v3.1.35 https://github.com/smarty-php/smarty/issues/584
+
 ## [3.1.35] - 2020-04-14
  - remove whitespaces after comments https://github.com/smarty-php/smarty/issues/447
  - fix foreachelse on arrayiterators https://github.com/smarty-php/smarty/issues/506
