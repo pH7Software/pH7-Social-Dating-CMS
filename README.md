@@ -232,12 +232,12 @@ Designed & Coded with lots of ❤ by [Pierre-Henry Soria](https://ph7.me). A SUP
 
 ## 🤝 Hire Me At Your Company?
 
-Do you need a software engineer like me (and willing to relocate) at your company..? **[Let's chat together](https://www.linkedin.com/in/ph7enry/)**! 😊
+Do you need a software engineer like me (and willing to relocate) at your company? **[Let's chat together](https://www.linkedin.com/in/ph7enry/)**! 😊
 
 
 ## 💲 Offer Me A Cup of Tea? (...or tea bags...) 🍵
 
-You appreciate the project, the several years I spent on it, and don't want to let it die...?
+You appreciate the project, all the years intensively spent on the core development, and don't want to let it die...?
 
 [![Paypal](templates/system/modules/ph7cms-helper/themes/base/img/paypal-donate.en.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6)
 [![Patreon](templates/system/modules/ph7cms-helper/themes/base/img/support-patreon.en.png)](https://www.patreon.com/bePatron?u=3534366 "Become a Patron")
@@ -279,29 +279,29 @@ pH7CMS's templates also use lighter colors since LCD monitors use less electrici
 Finally, **please consider using green Web hosting** (which use Green Power supply).
 
 
--> Other [10 Easy Ways to Green Your Social Community](https://mashable.com/2010/01/01/green-your-web-site/) 😉 <-
+👉 Other [10 Easy Ways to Green Your Social Community](https://mashable.com/2010/01/01/green-your-web-site/) 👈
 
 
-## Calculate Carbon Footprint of your Social Dating Service 🌍
+## 💪 Calculate Carbon Footprint of your Social Dating Service 🌍
 
  How is your website impacting the planet? => Check it on the Website Carbon Calculator such as [https://www.websitecarbon.com](https://www.websitecarbon.com)
 
 
 ## 🔨 Tools/Software Used to Develop pH7CMS
 
-* LAMP on **Fedora/Ubuntu** (and Mac/Windows with MAMP/WampServer/XAMPP for testing purpose)
+* LAMP on **Fedora/Ubuntu** (and Mac/Windows with MAMP/WampServer/XAMPP for testing purpose).
 
 * **Geany &amp; Sublime Text** for coding the whole project. That's it! However, since pH7CMS 5.0, **PhpStorm** (and sometimes Atom) are used as well.
 
 * **GIMP** for editing the assets, etc.
 
-* **Trimage** (and **ImageOptim** when developing on Mac) for compressing &amp; optimizing the images
+* **Trimage** (and **ImageOptim** when developing on Mac) for compressing &amp; optimizing the images.
 
-* **Poedit** for translating the Gettext files
+* **Poedit** for translating the Gettext files.
 
-* **FileZilla** for FTP client
+* **FileZilla** for FTP client.
 
-* **Git** for the version control system
+* **Git** for the version control system.
 
 * Sometimes, when working on Mac, **Sequel Pro** is used to lookup easily at a database.
 
