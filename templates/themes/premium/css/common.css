@@ -1,0 +1,406 @@
+/*
+ * Author:        Pierre-Henry Soria <ph7software@gmail.com>
+ * Copyright:     (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+* {
+    margin: 0;
+}
+
+body, td, pre {
+    font-family: 'Open Sans', Verdana, Arial, sans-serif;
+    font-size: 13px;
+    color: #666;
+}
+
+body {
+    background-color: #ffeded;
+}
+
+#links {
+    float: right;
+}
+
+#links a {
+    display: block;
+    float: left;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    background-color: #f5f4f4;
+    border-radius: 0.5em;
+    white-space: nowrap;
+    margin-left: 0.25em;
+}
+
+#logo {
+    background: url(../img/logo.png) no-repeat;
+    height: 45px;
+    overflow: hidden;
+    padding-left: 50px;
+    margin-left: 20px;
+}
+
+#logo h1 {
+    font-size: 2em;
+}
+
+.navbar #logo {
+    overflow: hidden;
+}
+
+.navbar #logo h1 {
+    font-size: 1.5rem;
+    margin-top: -5px;
+}
+
+#logo h1::first-letter {
+    text-transform: none;
+}
+
+.navbar-brand {
+    padding: 3px 15px;
+}
+
+/* Allowing logo name starting by a lowercase like "pH7" */
+header {
+    padding: 10px 0 10px;
+    background: url(../img/header2.png) repeat-x top;
+}
+
+header, #content {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+#headings, .loginas, .noscript {
+    margin-top: 6rem;
+}
+
+.loginas {
+    margin-bottom: -6rem;
+}
+
+#content::after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+footer {
+    padding: 10px;
+    margin: 10px 20px;
+    font-size: .9em;
+    text-align: center;
+    border-top: 1px solid #C8C8C8;
+}
+
+footer a {
+    color: #666;
+}
+
+.clear {
+    clear: both;
+    height: 1px;
+    overflow: hidden;
+}
+
+.center, .middle {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.center {
+    text-align: center;
+}
+
+.link {
+    background-color: #f3f3f3;
+    padding: 4px;
+    border: 1px solid #999;
+}
+
+.msg_content {
+    margin: 18px 2px 18px 2px;
+}
+
+.middle {
+    vertical-align: middle !important;
+}
+
+.top {
+    position: absolute;
+    top: 0 !important;
+}
+
+.right {
+    float: right !important;
+}
+
+.left {
+    float: left !important;
+}
+
+.break {
+    border-bottom: 1px solid #ccc;
+    padding: 4px 0 4px 0;
+    margin-bottom: 5px;
+    width: 25%;
+}
+
+.br {
+    border-bottom: 1px dashed black;
+    display: block;
+}
+
+hr {
+    border: 0;
+    color: #9E9E9E;
+    background-color: #9E9E9E;
+    height: 1px;
+    margin: 5px auto 5px auto;
+    width: 100%;
+}
+
+.bold, .err_msg {
+    font-weight: bold !important;
+    font-size: 13px;
+}
+
+.err_msg {
+    text-align: center;
+    color: #d9534f;
+    text-transform: uppercase;
+}
+
+.msg {
+    text-align: center;
+    margin: 3px auto 3px;
+    font-style: italic;
+}
+
+label#percent {
+    position: absolute;
+    padding-left: 115px;
+    padding-top: 6px;
+    font-size: 80%;
+    font-weight: bold;
+}
+
+.thumb_photo, .s_photo, .m_photo, .m_video {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.thumb_photo img, .s_photo img, .m_photo img {
+    margin: 2px;
+    padding: 4px;
+    border: 1px #DFDFDF solid;
+    background: #fff;
+    box-shadow: 3px 3px 3px #ccc;
+}
+
+.s_photo img {
+    padding: 3px;
+}
+
+.thumb_photo img:hover {
+    box-shadow: 8px 8px 8px #666;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+.thumb_photo {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.thumb_photo img {
+    width: 160px;
+    height: 150px;
+}
+
+.s_photo {
+    width: 72px;
+    margin: 4px;
+}
+
+.s_photo img {
+    width: 62px;
+    height: 62px;
+}
+
+.m_photo {
+    width: 150px;
+    margin: 16px;
+}
+
+.m_photo img {
+    width: 140px;
+    height: 140px;
+}
+
+.m_video {
+    width: 180px;
+    margin: 16px;
+}
+
+.user_status span {
+    position: absolute;
+    font-size: 3.5rem;
+    line-height: 1rem;
+    margin: .5rem;
+}
+
+.cy_ico img {
+    width: 16px;
+    height: 11px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.picture:hover a {
+    opacity: .5;
+}
+
+.picture a {
+    background-position: center center;
+    background-color: rgba(14, 14, 14, 0.3);
+    float: left;
+    height: 110px;
+    width: 145px;
+    margin: 1px 1px 0 0;
+    overflow: hidden;
+    -moz-transition: 0.25s;
+    -webkit-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+}
+
+.picture a:hover {
+    opacity: 1;
+}
+
+.picture_block {
+    display: inline-block;
+    margin: 10px 8px 10px;
+    overflow: hidden;
+}
+
+.img_picture {
+    height: 200px;
+    width: 200px;
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.img_picture:hover {
+    transform: scale(1);
+    transition: all 0.3s ease-in-out;
+}
+
+.thumb_img, .avatar, .map {
+    opacity: .9;
+    border-radius: 5px;
+    margin-right: 12px;
+    box-shadow: 0 1px 3px rgba(51, 51, 51, 0.3);
+    border: 1px solid #999;
+}
+
+img, video, iframe {
+    max-width: 100%;
+}
+
+.fixed {
+    position: fixed;
+}
+
+/*--- Advertising Available ---*/
+.ad_728_90 {}
+.ad_200_200 {}
+.ad_250_250 {}
+.ad_468_60 {}
+.ad_300_250 {}
+.ad_336_280 {}
+.ad_120_600 {}
+.ad_160_600 {}
+
+/*** Media Queries ***/
+/* 980px or more */
+@media (min-width: 980px) {
+    header, #content {
+        width: 78%;
+    }
+
+    .picture_block {
+        width: 90%;
+    }
+}
+
+/* 979px or less */
+@media (max-width: 979px) {
+    body {
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+
+    header, #content {
+        width: auto;
+        float: none;
+    }
+
+    .picture_block {
+        width: auto;
+        float: none;
+    }
+}
+
+/* 900px or more */
+@media (min-width: 900px) {
+    .profile_desc {
+        float: right;
+        max-width: 500px;
+        margin-left: 25%;
+        position: absolute;
+        top: 25rem;
+    }
+
+    .profile_desc .punchline {
+        margin-top: 2px;
+        margin-bottom: 10px;
+        font-weight: bold;
+        font-size: 18px;
+        color: #E33D41;
+    }
+}
+
+/* less than 900px  */
+@media (max-width: 899px) {
+    .right {
+        float: inherit !important;
+    }
+
+    .left {
+        float: inherit !important;
+    }
+
+    .profile_desc {
+        margin: 20px 0 20px;
+    }
+
+    .profile_desc .punchline {
+        display: none;
+    }
+}

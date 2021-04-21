@@ -1,0 +1,98 @@
+/*
+ * Author:        Pierre-Henry Soria <hello@ph7cms.com>
+ * Copyright:     (c) 2020, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+h2 {
+    text-align: center;
+    font-size: 1.85rem;
+    overflow: hidden;
+}
+
+h2:before,
+h2:after {
+    background-color: #ccc;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+}
+
+h2:before {
+    right: 0.5em;
+    margin-left: -50%;
+}
+
+h2:after {
+    left: 0.5em;
+    margin-right: -50%;
+}
+
+.chat, .message, .friend, .heart {
+    font-size: 80px;
+    line-height: 100px;
+}
+
+.chat {
+    color: #ff4000;
+}
+
+.message {
+    color: #45c000;
+}
+
+.friend {
+    color: #2b65f8;
+}
+
+.heart {
+    color: #F06;
+}
+
+.shadow {
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+}
+
+.card {
+    margin: 5px;
+    padding: 0 10px 10px 10px;
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+}
+
+.cover-container {
+    height: auto;
+    padding: 0 10px 10px 10px;
+}
+
+.cover-content {
+    box-shadow: 0px 1px 1px #CCC;
+    border: 1px solid #BFBFBF;
+    background: #fff;
+    color: #6B6B6B;
+    border-radius: 3px;
+    overflow: auto;
+}
+
+.cover-image {
+    float: left;
+    top: 0;
+    padding-top: 250px;
+    width: 100%;
+}
+
+.cover-image img {
+    width: 100%;
+}
