@@ -50,7 +50,7 @@ final class Version
      *
      * More details: https://ph7cms.com/new-versioning-system/
      */
-    const KERNEL_VERSION = '16.0.2';
+    const KERNEL_VERSION = '16.1.0';
     const KERNEL_BUILD = '1';
     const KERNEL_RELEASE_DATE = '2021-04-28';
 
