@@ -3,9 +3,7 @@
 <url>
     <link title="{lang 'About %site_name%'}" url="{{ $design->url('page','main','index') }}" />
 
-    {if $is_webcam_enabled}
-        <link title="{lang 'Webcam Picture Party Fun'}" url="{{ $design->url('webcam','webcam','picture') }}" />
-    {/if}
+    <link title="Members" url="{{ $design->url('user','browse','index') }}" />
 
     {if $is_forum_enabled}
         <link title="{lang 'Discussion Forums'}" url="{{ $design->url('forum','forum','index') }}" />
@@ -44,7 +42,11 @@
     {/if}
 
     {if $is_map_enabled}
-        <link title="{lang 'People Nearby'}" url="{{ $design->url('map','country','index') }}" />
+        <link title="{lang 'People Nearby'}" url="{{ $design->url('map','country','index', Framework\Geo\Ip\Geo::getCountry() . PH7_SH. Framework\Geo\Ip\Geo::getCity()) }}" />
+    {/if}
+
+    {if $is_webcam_enabled}
+        <link title="{lang 'Webcam Picture Party Fun'}" url="{{ $design->url('webcam','webcam','picture') }}" />
     {/if}
 
     <link title="{lang 'About Us'}" url="{{ $design->url('page','main','about') }}" />
