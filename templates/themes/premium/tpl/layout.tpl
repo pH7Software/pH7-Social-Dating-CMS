@@ -80,13 +80,6 @@
     {{ $design->externalJsFile(PH7_URL_STATIC . PH7_JS . 'jquery/jquery.js') }}
     <!-- End Header JavaScript -->
 
-    {* Begin AjPh *}
-    {if $browser->isFullAjaxSite()}
-      {{ $design->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'js/ajph.css') }}
-      {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'ajph.js') }}
-    {/if}
-    {* End AjPh *}
-
     {{ XmlDesignCore::sitemapHeaderLink() }}
     {{ XmlDesignCore::rssHeaderLinks() }}
 
@@ -148,17 +141,13 @@
       {{ $lang_file =  Framework\Translate\Lang::getJsFile(PH7_PATH_STATIC . PH7_JS . PH7_LANG) }}
       {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, PH7_LANG . $lang_file) }}
 
-      <div id="ajph">
-        <div id="sub_ajph">
-          {if !empty($manual_include)}
-            {manual_include $manual_include}
-          {elseif !empty($pOH_not_found)}
-            {main_include 'error.inc.tpl'}
-          {else}
-            {auto_include}
-          {/if}
-        </div>
-      </div>
+      {if !empty($manual_include)}
+        {manual_include $manual_include}
+      {elseif !empty($pOH_not_found)}
+        {main_include 'error.inc.tpl'}
+      {else}
+        {auto_include}
+      {/if}
     </main>
     <div role="banner" class="center ad_468_60">
         {designModel.ad(468, 60)}
