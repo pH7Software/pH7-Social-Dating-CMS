@@ -15768,7 +15768,7 @@ msgid "Congratulations! Your phone number has been successfully verified."
 msgstr ""
 
 #: _protected/app/system/modules/sms-verification/forms/processing/VerificationFormProcess.php:55
-msgid "The SMS verification code is invalid. <a href=\"%0%\">Try to resend a new one?</a>"
+msgid "The verification code is invalid. <a href=\"%0%\">Try to resend a new one?</a>"
 msgstr ""
 
 #: _protected/app/system/modules/two-factor-auth/views/base/tpl/main/setup.tpl:3

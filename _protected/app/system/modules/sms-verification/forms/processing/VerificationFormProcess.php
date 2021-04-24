@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2019-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / SMS Verification / Form / Processing
  */
@@ -52,7 +52,7 @@ class VerificationFormProcess extends Form
         } else {
             \PFBC\Form::setError(
                 'form_sms_verification',
-                t('The SMS verification code is invalid. <a href="%0%">Try to resend a new one?</a>', Uri::get('sms-verification', 'main', 'send'))
+                t('The verification code is invalid. <a href="%0%">Try to resend a new one?</a>', Uri::get('sms-verification', 'main', 'send'))
             );
         }
     }
