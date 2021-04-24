@@ -1,0 +1,73 @@
+/*
+ * Author:        Pierre-Henry Soria <ph7software@gmail.com>
+ * Copyright:     (c) 2020, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+.pink {
+    color: #FD00D9;
+}
+
+.pink1 {
+    color: #F06;
+}
+
+.pink2 {
+    color: #F06;
+}
+
+.smooth-pink {
+    color: #EF627E;
+}
+
+.green {
+    color: #5cb85c;
+}
+
+.green1 {
+    color: #11792D;
+}
+
+.red {
+    color: #d9534f;
+}
+
+.red2 {
+    color: #F44336;
+}
+
+.red3 {
+    color: #F55959;
+}
+
+.cinnabar-red {
+    color: #E33D41;
+}
+
+.dark-red {
+    color: #8B0000;
+}
+
+.gray {
+    color: #999;
+}
+
+.orange {
+    color: #ff7102;
+}
+
+
+/*** Begin pH ***/
+
+/* Color pH */
+.pH0, .pH1 {
+}
+
+.pH2 {
+    text-shadow: 1px 2px 1px #000;
+}
+
+.pH3 {
+    color: #FFCBDB;
+    text-shadow: 2px 1px 2px #000;
+}

@@ -1,0 +1,56 @@
+.bottom_nav {
+    float: right;
+}
+
+.bottom_nav a {
+    text-decoration: underline;
+}
+
+.navbar #logo a {
+    color: #9d9d9d;
+}
+
+.navbar #logo a h1 {
+    font-size: 13px;
+}
+
+.navbar #logo a:hover, .navbar #logo a:active {
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 0 0 5px #fff, 0 0 8px rgba(255, 255, 255, .6);
+}
+
+/* Change the color of the menu links */
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:focus,
+.navbar-default .navbar-nav > .open > a:hover,
+.dropdown-menu > li > a,
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+    font-size: 13px;
+}
+
+/* Do some changes when the menu is toggled */
+@media screen and (max-width: 767px) {
+    /* Change size for the sub-sub drop-down menus for better distinction */
+    .navbar-default .navbar-nav .open .dropdown-menu > li > ul > li > a {
+        font-size: 11px;
+    }
+}
+
+.navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse {
+    max-height: none;
+}
+
+/* Change the padding space between each drop-down menu */
+.nav > li > a {
+    padding: 10px 9px;
+}
+
+/* Amend the default minimum height of the navbar */
+.navbar {
+    min-height: 45px !important;
+}
