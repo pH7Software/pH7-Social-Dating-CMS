@@ -423,10 +423,10 @@
 
       </ul>
 
-            <form method="get" action="{{ $design->url('user', 'browse', 'index') }}/" class="navbar-form navbar-right">
+            <form method="get" action="{{ $design->url('user', 'browse', 'index') }}" class="navbar-form navbar-right">
               <div class="input-group">
-                <input type="search" name="sex" style="height:14px;width:300px" class="form-control"
-                       placeholder="{lang 'Man, Woman, Couple?'}" required="required">
+                <input type="search" name="keyword" style="height:14px;width:300px" class="form-control"
+                       placeholder="{lang 'Name, City, Email, Gender?'}" required="required">
               </div>
             </form>
           </div><!-- /.navbar-collapse -->

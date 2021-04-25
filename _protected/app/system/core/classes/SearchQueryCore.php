@@ -10,6 +10,7 @@ namespace PH7;
 
 final class SearchQueryCore
 {
+    const KEYWORD = 'keyword';
     const BIRTH_DATE = 'birth_date';
     const SEX = 'sex';
     const MATCH_SEX = 'match_sex';

@@ -46,6 +46,8 @@ class UserCoreModel extends Model
 
     const DATETIME_FORMAT = 'Y-m-d H:i:s';
 
+    const QUERY_SEARCH_USER = 'SELECT %s FROM %s AS m LEFT JOIN %s AS p USING(profileId) LEFT JOIN %s AS i USING(profileId)';
+
     /** @var string */
     protected $sCurrentDate;
 
@@ -334,6 +336,7 @@ class UserCoreModel extends Model
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
+        $bIsKeyword = !empty($aParams[SearchQueryCore::KEYWORD]) && Str::noSpaces($aParams[SearchQueryCore::KEYWORD]);
         $bIsMail = !empty($aParams[SearchQueryCore::EMAIL]) && Str::noSpaces($aParams[SearchQueryCore::EMAIL]);
         $bIsFirstName = !$bIsMail && !empty($aParams[SearchQueryCore::FIRST_NAME]) && Str::noSpaces($aParams[SearchQueryCore::FIRST_NAME]);
         $bIsMiddleName = !$bIsMail && !empty($aParams[SearchQueryCore::MIDDLE_NAME]) && Str::noSpaces($aParams[SearchQueryCore::MIDDLE_NAME]);
@@ -384,63 +387,76 @@ class UserCoreModel extends Model
         }
         $sSqlOrder = SearchCoreModel::order($aParams[SearchQueryCore::ORDER], $aParams[SearchQueryCore::SORT]);
 
-        $rStmt = Db::getInstance()->prepare(
-            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::MEMBER) . 'AS m LEFT JOIN' . Db::prefix(DbTableName::MEMBER_PRIVACY) . 'AS p USING(profileId)
-            LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) . 'AS i USING(profileId) WHERE username <> :ghostUsername AND searchProfile = \'yes\'
-            AND (groupId <> :visitorGroup) AND (groupId <> :pendingGroup) AND (ban = 0)' . $sSqlHideLoggedProfile . $sSqlFirstName . $sSqlMiddleName . $sSqlLastName . $sSqlMatchSex . $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState .
-            $sSqlZipCode . $sSqlHeight . $sSqlWeight . $sSqlEmail . $sSqlOnline . $sSqlAvatar . $sSqlOrder . $sSqlLimit
-        );
+        $sSqlQuery = sprintf(static::QUERY_SEARCH_USER, $sSqlSelect, Db::prefix(DbTableName::MEMBER), Db::prefix(DbTableName::MEMBER_PRIVACY), Db::prefix(DbTableName::MEMBER_INFO));
+        $sSqlQuery .= ' WHERE username <> :ghostUsername AND searchProfile = \'yes\' AND (groupId <> :visitorGroup) AND (groupId <> :pendingGroup) AND (ban = 0)';
+
+        if ($bIsKeyword) {
+            $sSqlQuery .= ' AND (
+                LOWER(username) LIKE LOWER(:keyword) OR LOWER(firstName) LIKE LOWER(:keyword) OR LOWER(lastName) LIKE LOWER(:keyword) 
+                OR LOWER(city) LIKE LOWER(:keyword) OR LOWER(state) LIKE LOWER(:keyword) OR LOWER(zipCode) LIKE LOWER(:keyword) OR email LIKE :keyword
+            )';
+        } else {
+            $sSqlQuery .= $sSqlHideLoggedProfile . $sSqlFirstName . $sSqlMiddleName . $sSqlLastName . $sSqlMatchSex . $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState .
+            $sSqlZipCode . $sSqlHeight . $sSqlWeight . $sSqlEmail . $sSqlOnline . $sSqlAvatar;
+        }
+
+        $rStmt = Db::getInstance()->prepare($sSqlQuery . $sSqlOrder . $sSqlLimit);
 
         $rStmt->bindValue(':ghostUsername', PH7_GHOST_USERNAME, PDO::PARAM_STR);
         $rStmt->bindValue(':visitorGroup', self::VISITOR_GROUP, PDO::PARAM_INT);
         $rStmt->bindValue(':pendingGroup', self::PENDING_GROUP, PDO::PARAM_INT);
 
-        if ($bIsMatchSex) {
-            $rStmt->bindValue(':matchSex', $aParams[SearchQueryCore::MATCH_SEX], PDO::PARAM_STR);
+        if ($bIsKeyword) {
+            $rStmt->bindValue(':keyword', '%' . $aParams[SearchQueryCore::KEYWORD] . '%', PDO::PARAM_STR);
+        } else {
+            if ($bIsMatchSex) {
+                $rStmt->bindValue(':matchSex', $aParams[SearchQueryCore::MATCH_SEX], PDO::PARAM_STR);
+            }
+            if ($bIsFirstName) {
+                $rStmt->bindValue(':firstName', '%' . $aParams[SearchQueryCore::FIRST_NAME] . '%', PDO::PARAM_STR);
+            }
+            if ($bIsMiddleName) {
+                $rStmt->bindValue(':middleName', '%' . $aParams[SearchQueryCore::MIDDLE_NAME] . '%', PDO::PARAM_STR);
+            }
+            if ($bIsLastName) {
+                $rStmt->bindValue(':lastName', '%' . $aParams[SearchQueryCore::LAST_NAME] . '%', PDO::PARAM_STR);
+            }
+            if ($bIsSingleAge) {
+                $rStmt->bindValue(':birthDate', '%' . $aParams[SearchQueryCore::AGE] . '%', PDO::PARAM_STR);
+            }
+            if ($bIsAge) {
+                $rStmt->bindValue(':minAge', $aParams[SearchQueryCore::MIN_AGE], PDO::PARAM_INT);
+                $rStmt->bindValue(':maxAge', $aParams[SearchQueryCore::MAX_AGE], PDO::PARAM_INT);
+            }
+            if ($bIsHeight) {
+                $rStmt->bindValue(':height', $aParams[SearchQueryCore::HEIGHT], PDO::PARAM_INT);
+            }
+            if ($bIsWeight) {
+                $rStmt->bindValue(':weight', $aParams[SearchQueryCore::WEIGHT], PDO::PARAM_INT);
+            }
+            if ($bIsCountry) {
+                $rStmt->bindParam(':country', $aParams[SearchQueryCore::COUNTRY], PDO::PARAM_STR, 2);
+            }
+            if ($bIsCity) {
+                $rStmt->bindValue(':city', '%' . str_replace('-', ' ', $aParams[SearchQueryCore::CITY]) . '%', PDO::PARAM_STR);
+            }
+            if ($bIsState) {
+                $rStmt->bindValue(':state', '%' . str_replace('-', ' ', $aParams[SearchQueryCore::STATE]) . '%', PDO::PARAM_STR);
+            }
+            if ($bIsZipCode) {
+                $rStmt->bindValue(':zipCode', '%' . $aParams[SearchQueryCore::ZIP_CODE] . '%', PDO::PARAM_STR);
+            }
+            if ($bIsMail) {
+                $rStmt->bindValue(':email', '%' . $aParams[SearchQueryCore::EMAIL] . '%', PDO::PARAM_STR);
+            }
+            if ($bIsOnline) {
+                $rStmt->bindValue(':userStatus', self::ONLINE_STATUS, PDO::PARAM_INT);
+            }
+            if ($bHideUserLogged) {
+                $rStmt->bindValue(':profileId', $this->iProfileId, PDO::PARAM_INT);
+            }
         }
-        if ($bIsFirstName) {
-            $rStmt->bindValue(':firstName', '%' . $aParams[SearchQueryCore::FIRST_NAME] . '%', PDO::PARAM_STR);
-        }
-        if ($bIsMiddleName) {
-            $rStmt->bindValue(':middleName', '%' . $aParams[SearchQueryCore::MIDDLE_NAME] . '%', PDO::PARAM_STR);
-        }
-        if ($bIsLastName) {
-            $rStmt->bindValue(':lastName', '%' . $aParams[SearchQueryCore::LAST_NAME] . '%', PDO::PARAM_STR);
-        }
-        if ($bIsSingleAge) {
-            $rStmt->bindValue(':birthDate', '%' . $aParams[SearchQueryCore::AGE] . '%', PDO::PARAM_STR);
-        }
-        if ($bIsAge) {
-            $rStmt->bindValue(':minAge', $aParams[SearchQueryCore::MIN_AGE], PDO::PARAM_INT);
-            $rStmt->bindValue(':maxAge', $aParams[SearchQueryCore::MAX_AGE], PDO::PARAM_INT);
-        }
-        if ($bIsHeight) {
-            $rStmt->bindValue(':height', $aParams[SearchQueryCore::HEIGHT], PDO::PARAM_INT);
-        }
-        if ($bIsWeight) {
-            $rStmt->bindValue(':weight', $aParams[SearchQueryCore::WEIGHT], PDO::PARAM_INT);
-        }
-        if ($bIsCountry) {
-            $rStmt->bindParam(':country', $aParams[SearchQueryCore::COUNTRY], PDO::PARAM_STR, 2);
-        }
-        if ($bIsCity) {
-            $rStmt->bindValue(':city', '%' . str_replace('-', ' ', $aParams[SearchQueryCore::CITY]) . '%', PDO::PARAM_STR);
-        }
-        if ($bIsState) {
-            $rStmt->bindValue(':state', '%' . str_replace('-', ' ', $aParams[SearchQueryCore::STATE]) . '%', PDO::PARAM_STR);
-        }
-        if ($bIsZipCode) {
-            $rStmt->bindValue(':zipCode', '%' . $aParams[SearchQueryCore::ZIP_CODE] . '%', PDO::PARAM_STR);
-        }
-        if ($bIsMail) {
-            $rStmt->bindValue(':email', '%' . $aParams[SearchQueryCore::EMAIL] . '%', PDO::PARAM_STR);
-        }
-        if ($bIsOnline) {
-            $rStmt->bindValue(':userStatus', self::ONLINE_STATUS, PDO::PARAM_INT);
-        }
-        if ($bHideUserLogged) {
-            $rStmt->bindValue(':profileId', $this->iProfileId, PDO::PARAM_INT);
-        }
+
         if (!$bCount) {
             $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
@@ -448,17 +464,16 @@ class UserCoreModel extends Model
 
         $rStmt->execute();
 
-        if (!$bCount) {
-            $aRow = $rStmt->fetchAll(PDO::FETCH_OBJ);
+        if ($bCount) {
+            $iTotalUsers = (int)$rStmt->fetchColumn();
             Db::free($rStmt);
 
-            return $aRow;
+            return $iTotalUsers;
         }
 
-        $iTotalUsers = (int)$rStmt->fetchColumn();
+        $aRow = $rStmt->fetchAll(PDO::FETCH_OBJ);
         Db::free($rStmt);
-
-        return $iTotalUsers;
+        return $aRow;
     }
 
     /**
@@ -1093,8 +1108,8 @@ class UserCoreModel extends Model
         $sSqlHideLoggedProfile = $bHideUserLogged ? ' AND (m.profileId <> :profileId)' : '';
         $sSqlShowOnlyWithAvatars = $bOnlyAvatarsSet ? $this->getUserWithAvatarOnlySql() : '';
 
-        $sSqlQuery = 'SELECT * FROM' . Db::prefix(DbTableName::MEMBER) . 'AS m LEFT JOIN' . Db::prefix(DbTableName::MEMBER_PRIVACY) . 'AS p USING(profileId)
-            LEFT JOIN' . Db::prefix(DbTableName::MEMBER_INFO) . 'AS i USING(profileId) WHERE (username <> :ghostUsername) AND
+        $sSqlQuery = sprintf(static::QUERY_SEARCH_USER, '*', Db::prefix(DbTableName::MEMBER), Db::prefix(DbTableName::MEMBER_PRIVACY), Db::prefix(DbTableName::MEMBER_INFO)) .
+            ' WHERE (username <> :ghostUsername) AND
             (searchProfile = \'yes\') AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND
             (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId <> :visitorGroup) AND (groupId <> :pendingGroup) AND (ban = 0)' .
             $sSqlHideLoggedProfile . $sSqlShowOnlyWithAvatars . $sOrder . $sSqlLimit;
