@@ -42,7 +42,7 @@ COMMENT;
                !!    w !!
                !!      !!
 
-    💡 ✓ Build your SOCIAL DATING Web APP ⬇
+    💡 ✓ Build your SOCIAL DATING Web APP ⬇ (in just 45 minutes)
     https://github.com/pH7Software/pH7-Social-Dating-CMS
 -->\n
 COMMENT;
