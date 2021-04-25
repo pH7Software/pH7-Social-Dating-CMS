@@ -3,7 +3,7 @@
  * @title            Page's DNA Generator
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2018-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Layout / Html
  */
@@ -31,6 +31,22 @@ final class PageDna
 -->\n
 COMMENT;
 
+    const COMMENT_PH7BUILDER = <<<COMMENT
+        \n<!--
+     mmmmmmmmmmmmmmmmmmm
+     | ❤️ pH7Builder 🚀 |
+     mmmmmmmmmmmmmmmmmmm
+        \   &__&
+         \  (oo)\_______
+            (__)\       )\/\
+               !!    w !!
+               !!      !!
+
+    💡 ✓ Build your SOCIAL DATING Web APP ⬇
+    https://github.com/pH7Software/pH7-Social-Dating-CMS
+-->\n
+COMMENT;
+
     const COMMENT_BUILT_WITH_PH7CMS = <<<COMMENT
         \n<!--
      BUILT WITH pH7CMS – https://ph7cms.com
@@ -45,7 +61,7 @@ COMMENT;
      #
      "
 
-    Enjoy! ❤️
+    Enjoy! ❤️ https://pH7CMS.com
 -->\n
 COMMENT;
 
@@ -107,6 +123,7 @@ COMMENT;
 
     const COMMENTS = [
         self::COMMENT_PH7CMS,
+        self::COMMENT_PH7BUILDER,
         self::COMMENT_BUILT_WITH_PH7CMS,
         self::COMMENT_FOR_YOU,
         self::COMMENT_SOCIAL_DATING_SOFTWARE
