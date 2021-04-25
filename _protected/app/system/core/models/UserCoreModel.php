@@ -393,7 +393,8 @@ class UserCoreModel extends Model
         if ($bIsKeyword) {
             $sSqlQuery .= ' AND (
                 LOWER(username) LIKE LOWER(:keyword) OR LOWER(firstName) LIKE LOWER(:keyword) OR LOWER(lastName) LIKE LOWER(:keyword) 
-                OR LOWER(city) LIKE LOWER(:keyword) OR LOWER(state) LIKE LOWER(:keyword) OR LOWER(zipCode) LIKE LOWER(:keyword) OR email LIKE :keyword
+                OR LOWER(city) LIKE LOWER(:keyword) OR LOWER(state) LIKE LOWER(:keyword) OR LOWER(zipCode) LIKE LOWER(:keyword) 
+                OR LOWER(punchline) LIKE LOWER(:keyword) OR email LIKE :keyword
             )';
         } else {
             $sSqlQuery .= $sSqlHideLoggedProfile . $sSqlFirstName . $sSqlMiddleName . $sSqlLastName . $sSqlMatchSex . $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState .
