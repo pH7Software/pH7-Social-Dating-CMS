@@ -92,7 +92,7 @@ class AdminModel extends AdminCoreModel
     }
 
     /**
-     * @param int|string $mLooking
+     * @param int|string $mLooking A keyword.
      * @param bool $bCount
      * @param string $sOrderBy
      * @param string $iSort
