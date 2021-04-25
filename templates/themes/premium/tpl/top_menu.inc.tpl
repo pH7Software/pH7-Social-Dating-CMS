@@ -426,7 +426,7 @@
             <form method="get" action="{{ $design->url('user', 'browse', 'index') }}" class="navbar-form navbar-right">
               <div class="input-group">
                 <input type="search" name="keyword" style="height:14px;width:300px" class="form-control"
-                       placeholder="{lang 'Name, Email, City, Gender, Keyword, ...'}" required="required">
+                       placeholder="{lang 'Name, Email, City, Gender, Keyword, ...'}">
               </div>
             </form>
           </div><!-- /.navbar-collapse -->
