@@ -54,7 +54,7 @@ input:not([type=image]):not([type=range]), textarea, select {
     color: #3F3F3F;
     text-shadow: 0 1px 0 rgba(200, 200, 200, .6);
     box-shadow: 1px 1px 4px #aaa inset;
-    border-radius: 5px;
+    border-radius: 5px !important;
     transition: border linear 0.3s, box-shadow linear 0.3s;
     -webkit-transition: border linear 0.3s, box-shadow linear 0.3s;
     -moz-transition: border linear 0.3s, box-shadow linear 0.3s;
