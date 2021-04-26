@@ -106,7 +106,7 @@ class InstallController extends Controller
         $sLangSelect = '';
 
         foreach ($aLangs as $sLang) {
-            $sSelectedAttr = (empty($_REQUEST['l']) && $sLang === $this->sCurrentLang || $sLang === $_REQUEST['l']) ? '" selected="selected' : '';
+            $sSelectedAttr = (empty($_REQUEST['l']) && $sLang === $this->sCurrentLang || !empty($_REQUEST['l']) && $sLang === $_REQUEST['l']) ? '" selected="selected' : '';
             $sLangSelect .= '<option value="?l=' . $sLang . $sSelectedAttr . '">' . $aLangsList[$sLang] . '</option>';
         }
 
