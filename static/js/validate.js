@@ -9,10 +9,10 @@
  *
  * @return {Void}
  */
-var RED_COLOR = '#F44336';
+var RED_COLOR = '#d9534f';
 var GREEN_COLOR = '#8BC34A';
-var DARK_RED_COLOR = '#cc0000';
-var DARK_GREEN_COLOR = '#00cc00';
+var DARK_RED_COLOR = '#d9534f';
+var DARK_GREEN_COLOR = '#5cb85c';
 
 function checkMail() {
     var sReg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
