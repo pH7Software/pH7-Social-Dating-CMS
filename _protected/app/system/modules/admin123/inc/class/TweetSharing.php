@@ -14,7 +14,7 @@ use PH7\Framework\Url\Url;
 final class TweetSharing
 {
     const TWITTER_TWEET_URL = 'https://twitter.com/intent/tweet?text=';
-    const TWITTER_TWEET_MSG = "I built my Social #DatingWebApp with #pH7CMS 😍\n#DatingSoftware -> %0% => %1% 🚀";
+    const TWITTER_TWEET_MSG = "I built my #Social #DatingWebApp with #pH7Builder 😍\n#DatingSoftware -> %0% => %1% 🚀";
 
     /**
      * @return string
