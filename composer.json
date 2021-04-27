@@ -35,7 +35,7 @@
   "config": {
     "platform": {
       "php": "5.6.0"
-    }
+    },
     "vendor-dir": "_protected/vendor",
     "bin-dir": "_protected/vendor/bin",
     "cache-dir": "_protected/vendor/cache",
