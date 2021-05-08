@@ -14,7 +14,7 @@ defined('PH7') or die('Restricted access');
 
 use PDO;
 
-class Db extends PDO
+class Database extends PDO
 {
     const DBMS_MYSQL_NAME = 'MySQL';
     const DBMS_POSTGRESQL_NAME = 'PostgreSQL';
@@ -25,6 +25,7 @@ class Db extends PDO
     public function __construct(array $aParams)
     {
         $aDriverOptions[PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES ' . $aParams['db_charset'];
+
         parent::__construct(
             "{$aParams['db_type']}:host={$aParams['db_hostname']};dbname={$aParams['db_name']};",
             $aParams['db_username'],

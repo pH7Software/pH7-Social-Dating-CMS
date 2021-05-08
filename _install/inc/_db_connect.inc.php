@@ -21,4 +21,4 @@ $aParams = array(
     'db_charset' => $_SESSION['db']['charset']
 );
 
-$DB = new Db($aParams);
+$DB = new Database($aParams);
