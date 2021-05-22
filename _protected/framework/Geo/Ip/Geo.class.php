@@ -3,7 +3,7 @@
  * @title            Ip localization Class
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Geo / Ip
  */
@@ -130,7 +130,7 @@ class Geo
     /**
      * Get Geo Ip Data Information.
      *
-     * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site.
+     * @param string|null $sIpAddress Specify an IP address. If NULL, it will use the current customer who visits the site.
      *
      * @return \GeoIp2\Model\City
      *
@@ -139,16 +139,19 @@ class Geo
      */
     private static function get($sIpAddress = null)
     {
-        $sIpAddr = ($sIpAddress !== null ? $sIpAddress : Ip::get());
+        // Set current IP address if none are given
+        if (empty($sIpAddress)) {
+            $sIpAddress = Ip::get();
+        }
 
-        if ($sIpAddr === Ip::DEFAULT_IP) {
-            // Set a valid IP address, if it's the invalid local one
-            $sIpAddr = self::DEFAULT_VALID_IP;
+        // Set a valid IP if the (invalid) local IP one is given
+        if ($sIpAddress === Ip::DEFAULT_IP) {
+            $sIpAddress = self::DEFAULT_VALID_IP;
         }
 
         $oReader = new Reader(__DIR__ . PH7_DS . self::DATABASE_FILENAME);
 
-        return @$oReader->city($sIpAddr);
+        return @$oReader->city($sIpAddress);
     }
 
     /**
