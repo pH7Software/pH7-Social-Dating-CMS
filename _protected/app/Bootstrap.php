@@ -91,7 +91,7 @@ class Bootstrap
             new Server; // Start Server
 
             $this->startPageBenchmark();
-            //Framework\Compress\Compress::setZlipCompression();
+            // Framework\Compress\Compress::enableZlipCompression();
 
             // Initialize the FrontController, we are asking the front controller to process the HTTP request
             FrontController::getInstance()->runRouter();

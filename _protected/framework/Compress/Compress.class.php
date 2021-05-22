@@ -5,7 +5,7 @@
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @author           Some pieces of code are inspired by Schepp Christian Schaefer's script (CSS JS booster).
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Compress
  */
@@ -94,6 +94,11 @@ class Compress
         return $sPhpCode;
     }
 
+    /**
+     * @param string $sHtml
+     *
+     * @return string Gives HTML compact minified version (without any unnecessary comments, blank lines, etc).
+     */
     public function parseHtml($sHtml)
     {
         preg_match_all('!(<(?:code|pre).*>[^<]+</(?:code|pre)>)!', $sHtml, $aPre); // Exclude pre or code tags
@@ -112,6 +117,11 @@ class Compress
         return $sHtml;
     }
 
+    /**
+     * @param string $sContent
+     *
+     * @return string The CSS minified version.
+     */
     public function parseCss($sContent)
     {
         if ($this->bJavaCompiler) {
@@ -164,6 +174,11 @@ class Compress
         return $sCssMinified;
     }
 
+    /**
+     * @param string $sContent
+     *
+     * @return string The JS minified version.
+     */
     public function parseJs($sContent)
     {
         if ($this->bJavaCompiler) {
@@ -227,7 +242,7 @@ class Compress
      *
      * @return void
      */
-    public static function setZlipCompression()
+    public static function enableZlipCompression()
     {
         ini_set('zlib.output_compression', self::COMPRESSION_LEVEL);
         ini_set('zlib.output_compression_level', self::COMPRESSION_BYTE_BUFFER_SIZE);
