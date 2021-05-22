@@ -3,7 +3,7 @@
  * @title            Controller Core Class
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @link             http://ph7cms.com
  * @package          PH7 / Install / Library
@@ -43,7 +43,7 @@ abstract class Controller implements Controllable
      * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa", 12.* was "PHS", 14.* was "pKb", 15.* was ABSOLUTE™ and v16 is ACIDIC
      */
     const SOFTWARE_VERSION_NAME = 'ABSOLUTE™';
-    const SOFTWARE_VERSION = '16.0.0';
+    const SOFTWARE_VERSION = '16.1.1';
     const SOFTWARE_BUILD = '1';
 
     const DEFAULT_LANG = 'en';

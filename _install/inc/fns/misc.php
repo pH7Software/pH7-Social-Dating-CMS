@@ -220,12 +220,12 @@ function delete_dir($sPath)
 /**
  * Executes SQL queries.
  *
- * @param Db $oDb
+ * @param Database $oDb
  * @param string $sSqlFile SQL File.
  *
  * @return bool|array Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
  */
-function exec_query_file(Db $oDb, $sSqlFile)
+function exec_query_file(Database $oDb, $sSqlFile)
 {
     if (!is_file($sSqlFile)) {
         return false;

@@ -3,7 +3,7 @@
  * @title            InstallController Class
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Install / Controller
  */
@@ -189,8 +189,8 @@ class InstallController extends Controller
             session_regenerate_id(true);
 
             if (empty($_SESSION['val'])) {
-                $_SESSION['db']['type_name'] = Db::DBMS_MYSQL_NAME;
-                $_SESSION['db']['type'] = Db::DSN_MYSQL_PREFIX;
+                $_SESSION['db']['type_name'] = Database::DBMS_MYSQL_NAME;
+                $_SESSION['db']['type'] = Database::DSN_MYSQL_PREFIX;
 
                 $_SESSION['db']['hostname'] = DbDefaultConfig::HOSTNAME;
                 $_SESSION['db']['username'] = DbDefaultConfig::USERNAME;
@@ -242,7 +242,7 @@ class InstallController extends Controller
                                 $aErrors[] = $LANG['no_app_config_writable'];
                             } else {
                                 if (!(
-                                    $DB->getAttribute(\PDO::ATTR_DRIVER_NAME) === Db::DSN_MYSQL_PREFIX &&
+                                    $DB->getAttribute(\PDO::ATTR_DRIVER_NAME) === Database::DSN_MYSQL_PREFIX &&
                                     version_compare($DB->getAttribute(\PDO::ATTR_SERVER_VERSION), PH7_REQUIRED_SQL_VERSION, '>='))
                                 ) {
                                     $aErrors[] = $LANG['require_mysql_version'];
@@ -576,13 +576,13 @@ class InstallController extends Controller
     /**
      * Update module status (enabled/disabled).
      *
-     * @param Db $oDb
+     * @param Database $oDb
      * @param string $sModName Module Name.
      * @param string $sStatus '1' = Enabled | '0' = Disabled (need to be string because in DB it is an "enum").
      *
      * @return int|bool Returns the number of rows on success or FALSE on failure.
      */
-    private function updateMods(Db $oDb, $sModName, $sStatus)
+    private function updateMods(Database $oDb, $sModName, $sStatus)
     {
         $rStmt = $oDb->prepare(
             sprintf(SqlQuery::UPDATE_SYS_MODULE, $_SESSION['db']['prefix'] . DbTableName::SYS_MOD_ENABLED)
@@ -594,12 +594,12 @@ class InstallController extends Controller
     /**
      * Set the adequate website's theme for the chosen niche.
      *
-     * @param Db $oDb
+     * @param Database $oDb
      * @param string $sThemeName
      *
      * @return int|bool Returns the number of rows on success or FALSE on failure.
      */
-    private function updateTheme(Db $oDb, $sThemeName)
+    private function updateTheme(Database $oDb, $sThemeName)
     {
         $rStmt = $oDb->prepare(
             sprintf(SqlQuery::UPDATE_THEME, $_SESSION['db']['prefix'] . DbTableName::SETTING)

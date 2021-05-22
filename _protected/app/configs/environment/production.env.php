@@ -4,7 +4,7 @@
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @link           http://ph7cms.com
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / Config / Environment
  */
@@ -13,18 +13,20 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-/************************/
-// SECURITY CHECK
-/************************/
+define('PH7_ENV_DISABLED', 'Off');
 
-// If php.ini is inadequate, we fix it.
+// If php.ini is inadequate, let's fix it
 error_reporting(0);
 //error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT);
-ini_set('display_errors', 'Off');
-ini_set('display_startup_errors', 'Off');
-ini_set('track_errors', 'Off');
-ini_set('html_errors', 'Off');
+ini_set('display_errors', PH7_ENV_DISABLED);
+ini_set('display_startup_errors', PH7_ENV_DISABLED);
+ini_set('track_errors', PH7_ENV_DISABLED);
+ini_set('html_errors', PH7_ENV_DISABLED);
 
+
+//////////
+// SECURITY CHECK
+//////////
 if (is_dir(PH7_PATH_ROOT . '_install/')) {
     $sMsg = '<p class="warning">Security Alert – <a href="' . Framework\Core\Kernel::SOFTWARE_WEBSITE . '">pH7CMS</a></p>
      <p class="error">Please remove "_install/" folder from your server before continuing.</p>
