@@ -133,7 +133,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Anyone can easily contribute to pH7CMS project thanks to the [GitHub repository](https://github.com/pH7Software/pH7-Social-Dating-CMS)
 
 
-**It's not a hazard that pH7CMS is considered to be the first choice for creating an enterprise level dating web app or social networking website**
+**It's not a hazard that pH7CMS is considered to be the first choice for creating an enterprise level dating Web application or a social networking platform**
 
 *Great features [like here](https://ph7cms.com/social-dating-features/) and many other unique and exclusive features are waiting for YOU. Already released in pH7CMS!*
 
@@ -142,7 +142,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 
 ## ⚙ Requirements
 
-* **Application Server** PHP 5.6 or higher (recommended version: **PHP 7.0.4** or higher).
+* **Application Server** PHP 5.6 or higher (recommended version: **PHP 7.0.4** or higher). Compatible with PHP 8 as well 🚀
 
 * **Database** MySQL/MariaDB 5.5.3 or higher.
 
