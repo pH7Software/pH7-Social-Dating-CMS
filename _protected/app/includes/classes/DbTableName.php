@@ -1,7 +1,7 @@
 <?php
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2018-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / App / Include / Class
  */
@@ -66,7 +66,6 @@ final class DbTableName
     const MESSENGER = 'messenger';
     const META_MAIN = 'meta_main';
     const SYS_MOD_ENABLED = 'sys_mods_enabled';
-    const MODULE = 'modules';
     const REPORT = 'report';
     const SETTING = 'settings';
     const STATIC_FILE = 'static_files';
