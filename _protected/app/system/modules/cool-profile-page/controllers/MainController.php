@@ -24,9 +24,8 @@ class MainController extends ProfileBaseController
     {
         parent::__construct();
 
-        // Set the Profile ID and Visitor ID
-        $this->iProfileId = $this->httpRequest->get('profile_id', 'int');
-        $this->iVisitorId = (int)$this->session->get('member_id');
+        $this->setProfileId($this->httpRequest->get('profile_id'));
+        $this->setVisitorId($this->session->get('member_id'));
     }
 
     public function index()

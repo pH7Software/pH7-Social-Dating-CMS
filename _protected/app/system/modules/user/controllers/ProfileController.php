@@ -35,9 +35,8 @@ class ProfileController extends ProfileBaseController
         // Set the Profile username
         $this->sUsername = $this->httpRequest->get('username', 'string');
 
-        // Set the Profile ID and Visitor ID
-        $this->iProfileId = $this->oUserModel->getId(null, $this->sUsername);
-        $this->iVisitorId = (int)$this->session->get('member_id');
+        $this->setProfileId($this->oUserModel->getId(null, $this->sUsername));
+        $this->setVisitorId($this->session->get('member_id'));
     }
 
     public function index()

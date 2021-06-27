@@ -81,6 +81,26 @@ abstract class ProfileBaseController extends Controller
     }
 
     /**
+     * @param int $iProfileId
+     *
+     * @return void
+     */
+    protected function setProfileId($iProfileId)
+    {
+        $this->iProfileId = (int)$iProfileId;
+    }
+
+    /**
+     * @param int $iVisitorId
+     *
+     * @return void
+     */
+    protected function setVisitorId($iVisitorId)
+    {
+        $this->iVisitorId = (int)$iVisitorId;
+    }
+
+    /**
      * @return int
      */
     public function getProfileId()
