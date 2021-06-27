@@ -48,10 +48,10 @@ class VisitorCore
         unset($oVisitorModel);
     }
 
-    public function isViewUpdateEligible(stdClass $oPrivacyViewsUser, stdClass $oPrivacyViewsVisitor)
+    public function isViewUpdateEligible(stdClass $oUserPrivacyViews, stdClass $oVisitorPrivacyViews)
     {
-        return $oPrivacyViewsUser->userSaveViews === PrivacyCore::YES &&
-            $oPrivacyViewsVisitor->userSaveViews === PrivacyCore::YES &&
+        return $oUserPrivacyViews->userSaveViews === PrivacyCore::YES &&
+            $oVisitorPrivacyViews->userSaveViews === PrivacyCore::YES &&
             !$this->oProfile->isOwnProfile();
     }
 }

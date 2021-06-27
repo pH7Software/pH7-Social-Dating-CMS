@@ -107,25 +107,23 @@ abstract class ProfileBaseController extends Controller
      */
     protected function initPrivacy(stdClass $oUser)
     {
-        // Check Privacy Profile
-        $oPrivacyViewsUser = $this->oUserModel->getPrivacySetting($this->iProfileId);
+        $oUserPrivacyViews = $this->oUserModel->getPrivacySetting($this->iProfileId);
 
-        if ($oPrivacyViewsUser->searchProfile === PrivacyCore::NO) {
+        if ($oUserPrivacyViews->searchProfile === PrivacyCore::NO) {
             $this->excludeProfileFromSearchEngines();
         }
 
-        if (!$this->bUserAuth && $oPrivacyViewsUser->privacyProfile === PrivacyCore::ONLY_USERS) {
+        if (!$this->bUserAuth && $oUserPrivacyViews->privacyProfile === PrivacyCore::ONLY_USERS) {
             $this->view->error = t('Whoops! "%0%" profile is only visible to members. Please <a href="%1%">login</a> or <a href="%2%">register</a> to see this profile.',
                 $oUser->username, Uri::get('user', 'main', 'login'), Uri::get('user', 'signup', 'step1'));
-        } elseif ($oPrivacyViewsUser->privacyProfile === PrivacyCore::ONLY_ME && !$this->isOwnProfile()) {
+        } elseif ($oUserPrivacyViews->privacyProfile === PrivacyCore::ONLY_ME && !$this->isOwnProfile()) {
             $this->view->error = t('Whoops! "%0%" profile is not available to you.', $oUser->username);
         }
 
-        // Update the "Who's Viewed Your Profile"
         if ($this->bUserAuth) {
-            $this->updateProfileViews($oPrivacyViewsUser);
+            $this->updateProfileViews($oUserPrivacyViews);
         }
-        unset($oPrivacyViewsUser);
+        unset($oUserPrivacyViews);
     }
 
     /**
@@ -376,14 +374,21 @@ abstract class ProfileBaseController extends Controller
         );
     }
 
-    private function updateProfileViews(stdClass $oPrivacyViewsUser)
+    /**
+     * Update the "Who's Viewed Your Profile"
+     *
+     * @param stdClass $oUserPrivacyViews
+     *
+     * @return void
+     */
+    private function updateProfileViews(stdClass $oUserPrivacyViews)
     {
         $oVisitor = new VisitorCore($this);
-        $oPrivacyViewsVisitor = $this->oUserModel->getPrivacySetting($this->iVisitorId);
+        $oVisitorPrivacyViews = $this->oUserModel->getPrivacySetting($this->iVisitorId);
 
-        if ($oVisitor->isViewUpdateEligible($oPrivacyViewsUser, $oPrivacyViewsVisitor)) {
+        if ($oVisitor->isViewUpdateEligible($oUserPrivacyViews, $oVisitorPrivacyViews)) {
             $oVisitor->updateViews();
         }
-        unset($oPrivacyViewsVisitor);
+        unset($oVisitorPrivacyViews);
     }
 }
