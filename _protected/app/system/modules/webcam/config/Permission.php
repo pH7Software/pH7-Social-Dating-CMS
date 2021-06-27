@@ -16,10 +16,18 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {// If the admin is not logged (but can be if the admin use "login as user" feature)
+        if ($this->isNotAdmin()) {
             if (!$this->checkMembership() || !$this->group->webcam_access) {
                 $this->paymentRedirect();
             }
         }
+    }
+
+    /**
+     * @return bool TRUE if the admin is not logged in (TRUE as well if the admin use "login as user").
+     */
+    private function isNotAdmin()
+    {
+        return !AdminCore::auth() || UserCore::isAdminLoggedAs();
     }
 }

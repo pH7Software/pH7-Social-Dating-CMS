@@ -3,7 +3,7 @@
  * @title          Profile Controller
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Controller
  */
@@ -52,8 +52,8 @@ class ProfileController extends ProfileBaseController
                 $this->redirectToCoolProfileStyle();
             }
 
-            // The administrators can view all profiles and profile visits are not saved.
-            if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
+            // The admins can view all profiles. And profile views won't be increased when admins visit a profile
+            if ($this->isNotAdmin()) {
                 $this->initPrivacy($oUser);
             }
 
@@ -191,6 +191,15 @@ class ProfileController extends ProfileBaseController
     private function doesProfileExist(stdClass $oUser)
     {
         return !empty($oUser->username) && $this->str->equalsIgnoreCase($this->sUsername, $oUser->username);
+    }
+
+
+    /**
+     * @return bool TRUE if the admin is not logged in (TRUE as well if the admin use "login as user").
+     */
+    private function isNotAdmin()
+    {
+        return !AdminCore::auth() || UserCore::isAdminLoggedAs();
     }
 
     /**
