@@ -293,6 +293,8 @@ Finally, **please consider using green Web hosting** (which use Green Power supp
 
 * **Geany &amp; Sublime Text** for coding the whole project. That's it! However, since pH7CMS 5.0, **PhpStorm** (and sometimes Atom) are used as well.
 
+* **Sequel Pro**, sometimes for easy GUI database viewing.
+
 * **GIMP** for editing the assets, etc.
 
 * **Trimage** (and **ImageOptim** when developing on Mac) for compressing &amp; optimizing the images.
