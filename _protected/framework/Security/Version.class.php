@@ -27,7 +27,7 @@ final class Version
 
     const CACHE_GROUP = 'str/security';
 
-    const LATEST_VERSION_URL = 'http://xml.ph7cms.com/software-info.xml';
+    const LATEST_VERSION_URL = 'https://xml.ph7cms.com/software-info.xml';
     const VERSION_PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
     const FRAMEWORK_TAG_NAME = 'ph7';
     const PACKAGE_TAG_NAME = 'ph7builder';

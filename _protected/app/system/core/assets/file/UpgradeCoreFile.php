@@ -33,7 +33,7 @@ class UpgradeCore
     /**
      * Remote update URL.
      */
-    const REMOTE_URL = 'http://update.ph7cms.com/';
+    const REMOTE_URL = 'https://update.ph7cms.com/';
     const ARCHIVE_EXT = '.zip';
     const MIN_SQL_FILE_SIZE = 12; // Size in bytes
 

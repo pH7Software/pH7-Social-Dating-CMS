@@ -37,7 +37,7 @@ class ToolTest extends PHPUnit_Framework_TestCase
      */
     public function testSoftwareApiUrl()
     {
-        $this->assertSame('http://api.ph7cms.com/', Tool::SOFTWARE_API_URL);
+        $this->assertSame('https://api.ph7cms.com/', Tool::SOFTWARE_API_URL);
     }
 
     public function testValidGetApiAccess()
