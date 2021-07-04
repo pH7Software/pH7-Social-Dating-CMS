@@ -53,8 +53,8 @@
       {/if}
 
 
-    {* Guest, Member and Admin menu (except for Affiliate) *}
-      {if !$is_aff_auth}
+    {* Guest, Member and LoginUserAs (except Affiliate & Admin) *}
+      {if (!$is_aff_auth AND !$is_admin_auth) OR $admin_logged_as_user}
         <li class="dropdown">
           <a href="{{ $design->url('user', 'browse', 'index') }}" title="{lang 'Members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">
             <i class="fa fa-users fa-fw"></i> {lang 'People'} <span class="caret"></span>
@@ -529,6 +529,17 @@
         </li>
 
         <li class="dropdown">
+          <a href="{{ $design->url(PH7_ADMIN_MOD,'account','index') }}" title="{lang 'My account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">
+            <i class="fa fa-cog"></i> {lang 'Account'} <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'account','edit') }}" title="{lang 'Edit My Account'}"><i class="fa fa-pencil fa-fw"></i> {lang 'Edit My Account'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'account','password') }}" title="{lang 'Change Password'}"><i class="fa fa-key fa-fw"></i> {lang 'Change Password'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'main','logout') }}" title="{lang 'Logout'}"><i class="fa fa-sign-out"></i> {lang 'Logout'}</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
           <a class="bold dropdown-toggle" href="{software_doc_url}" title="{lang 'Need some Helps?'}" role="button" aria-expanded="false" data-toggle="dropdown">
             <i class="fa fa-life-ring"></i> {lang 'Help'} <span class="caret"></span>
           </a>
@@ -538,17 +549,6 @@
             <li><a href="{software_issue_url}" title="{lang 'Report a Problem'}"><i class="fa fa-bug"></i> {lang 'Report a Bug'}</a></li>
             <li><a href="{software_forum_url}" title="{lang 'Discussions Board'}"><i class="fa fa-bug"></i> {lang 'Forums'}</a></li>
             <li><a href="{software_review_url}" title="{lang 'Help pH7CMS by giving a nice review! Highly appreciated :)'}"><i class="fa fa-heart"></i> {lang 'Give Nice Review'}</a></li>
-          </ul>
-        </li>
-
-        <li class="dropdown">
-          <a href="{{ $design->url(PH7_ADMIN_MOD,'account','index') }}" title="{lang 'My account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">
-            <i class="fa fa-cog"></i> {lang 'Account'} <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'account','edit') }}" title="{lang 'Edit My Account'}"><i class="fa fa-pencil fa-fw"></i> {lang 'Edit My Account'}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'account','password') }}" title="{lang 'Change Password'}"><i class="fa fa-key fa-fw"></i> {lang 'Change Password'}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'main','logout') }}" title="{lang 'Logout'}"><i class="fa fa-sign-out"></i> {lang 'Logout'}</a></li>
           </ul>
         </li>
       {/if}
