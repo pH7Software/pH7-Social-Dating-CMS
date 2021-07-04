@@ -118,7 +118,7 @@ $LANG = array(
     'no_dir' => 'The directory does not exist.',
     'wait_importing_database' => 'Please wait while importing the database.<br />
         This may take several minutes.',
-    'add_sample_data' => 'Generate sample profiles (you will be able to remove them later on)',
+    'add_sample_data' => 'Generate sample profiles (you will be able to remove them later)',
     'niche' => 'Choose the Kind of WebApp you Want to Build 😇',
     'social_dating_niche' => 'Social-Dating Niche 🥰',
     'social_niche' => 'Community Niche 🥳',
