@@ -84,7 +84,7 @@ class UserCore
     /**
      * Delete User.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sUsername
      *
      * @return void
@@ -205,7 +205,7 @@ class UserCore
     /**
      * Delete the avatar (image) and track database.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sUsername
      *
      * @return void
@@ -246,7 +246,7 @@ class UserCore
     /**
      * Set a background on user profile.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sUsername
      * @param string $sFile
      * @param int $iApproved (1 = approved | 0 = pending)
@@ -297,7 +297,7 @@ class UserCore
     }
 
     /**
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sUsername
      *
      * @return void
@@ -579,7 +579,7 @@ class UserCore
      * This method is a wrapper for the cache of the profile of users.
      * Clean UserCoreModel / readProfile Cache
      *
-     * @param integer $iId Profile ID.
+     * @param int $iId Profile ID.
      * @param string $sTable Default DbTableName::MEMBER
      *
      * @return void
@@ -593,7 +593,7 @@ class UserCore
      * This method is a wrapper for the Info Fields cache.
      * Clean UserCoreModel / infoFields Cache
      *
-     * @param integer $iId Profile ID.
+     * @param int $iId Profile ID.
      * @param string $sTable Default DbTableName::MEMBER_INFO
      *
      * @return void
@@ -617,7 +617,7 @@ class UserCore
      * Generic method to clear the user cache.
      *
      * @param string $sId Cache ID.
-     * @param integer $iId User ID.
+     * @param int $iId User ID.
      * @param string $sTable Table name.
      *
      * @return void

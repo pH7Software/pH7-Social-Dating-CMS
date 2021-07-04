@@ -102,7 +102,7 @@ class NoteFormProcess extends Form implements NudityDetectable
     /**
      * Set the categorie(s).
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param NoteModel $oNoteModel
      *
      * @return void

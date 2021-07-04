@@ -23,7 +23,7 @@ class SettingFormProcess extends Form
     const LOGO_HEIGHT = 45;
     const MAX_WATERMARK_SIZE = 5;
 
-    /** @var boolean */
+    /** @var bool */
     private $bIsErr = false;
 
     /** @var array */

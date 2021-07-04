@@ -56,7 +56,7 @@ class Affiliate extends AffiliateCore
     /**
      * Set an Affiliate Cookie.
      *
-     * @param integer $iAffId
+     * @param int $iAffId
      * @param Cookie $oCookie
      *
      * @return void

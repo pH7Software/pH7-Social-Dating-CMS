@@ -218,7 +218,7 @@ class elFinder
     /**
      * Max allowed archive files size (0 - no limit)
      *
-     * @var integer
+     * @var int
      */
     protected $maxArcFilesSize = 0;
 
@@ -1657,7 +1657,7 @@ class elFinder
         while($_response !== "\r\n"){
             $_response = fgets($fp, $readsize);
             $header .= $_response;
-        };
+        }
 
         $rccd = array_pad(explode(' ',$header,2), 2, ''); // array('HTTP/1.1','200')
         $rc = (int)$rccd[1];
@@ -2281,7 +2281,7 @@ class elFinder
                 $result['warning'] = $this->error(self::ERROR_UPLOAD_FILE, $name, $volume->error());
                 fclose($fp);
                 if (! is_uploaded_file($tmpname)) {
-                    if ( unlink($tmpname)) unset($GLOBALS['elFinderTempFiles'][$tmpname]);;
+                    if ( unlink($tmpname)) unset($GLOBALS['elFinderTempFiles'][$tmpname]);
                     continue;
                 }
                 break;
@@ -2737,7 +2737,7 @@ class elFinder
      * @param string $errstr
      * @param string $errfile
      * @param int    $errline
-     * @return void|boolean
+     * @return void|bool
      */
     public static function phpErrorHandler($errno, $errstr, $errfile, $errline) {
         static $base = null;

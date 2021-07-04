@@ -510,8 +510,8 @@ class elFinderVolumeLocalFileSystem extends elFinderVolumeDriver {
      * Get stat `owner`, `group` and `isowner` by `uid` and `gid`
      * Sub-fuction of _stat() and _scandir()
      *
-     * @param integer $uid
-     * @param integer $gid
+     * @param int $uid
+     * @param int $gid
      * @return array  stat
      */
     protected function getOwnerStat($uid, $gid) {
@@ -1160,7 +1160,7 @@ class elFinderVolumeLocalFileSystem extends elFinderVolumeDriver {
      * Delete dirctory trees
      *
      * @param string $localpath path need convert encoding to server encoding
-     * @return boolean
+     * @return bool
      * @author Naoki Sawada
      */
     protected function delTree($localpath) {

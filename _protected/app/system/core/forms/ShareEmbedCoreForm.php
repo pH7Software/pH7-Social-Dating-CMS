@@ -17,9 +17,9 @@ class ShareEmbedCoreForm
      * Embed code
      *
      * @param string $sFileUrl
-     * @param integer $iEmbedWidth Width of the embed code.
-     * @param integer $iEmbedHeight Height of the embed code.
-     * @param integer $iWidth Width of the form in pixel.
+     * @param int $iEmbedWidth Width of the embed code.
+     * @param int $iEmbedHeight Height of the embed code.
+     * @param int $iWidth Width of the form in pixel.
      *
      * @return void
      */

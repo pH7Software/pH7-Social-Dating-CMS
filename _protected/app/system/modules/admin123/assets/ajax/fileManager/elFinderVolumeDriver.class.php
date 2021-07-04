@@ -2600,7 +2600,7 @@ abstract class elFinderVolumeDriver {
      *
      * @param string $hash  file hash
      * @param array $options  options array
-     * @return boolean|string
+     * @return bool|string
      * @author Naoki Sawada
      */
     public function getContentUrl($hash, $options = array()) {
@@ -2650,7 +2650,7 @@ abstract class elFinderVolumeDriver {
      * @param string $baseTargetHash
      * @param string $path
      * @param array  $result
-     * @return boolean|string
+     * @return bool|string
      * @author Naoki Sawada
      */
     public function getUploadTaget($baseTargetHash, $path, & $result) {
@@ -2684,7 +2684,7 @@ abstract class elFinderVolumeDriver {
     /**
      * Return this uploadMaxSize value
      *
-     * @return integer
+     * @return int
      * @author Naoki Sawada
      */
     public function getUploadMaxSize() {
@@ -3252,7 +3252,7 @@ abstract class elFinderVolumeDriver {
      * Delete dirctory trees
      *
      * @param string $localpath path need convert encoding to server encoding
-     * @return boolean
+     * @return bool
      * @author Naoki Sawada
      */
     protected function delTree($localpath) {
@@ -3422,7 +3422,7 @@ abstract class elFinderVolumeDriver {
      * Return true if file MIME type can save with check uploadOrder config.
      *
      * @param string $mime
-     * @return boolean
+     * @return bool
      */
     protected function allowPutMime($mime) {
         // logic based on http://httpd.apache.org/docs/2.2/mod/mod_authz_host.html#order
@@ -3748,7 +3748,7 @@ abstract class elFinderVolumeDriver {
      * @return string
      * @author Dmitry (dio) Levashov
      **/
-    static protected function mimetypeInternalDetect($path = '') {
+    protected static function mimetypeInternalDetect($path = '') {
         // load default MIME table file "mime.types"
         if (!elFinderVolumeDriver::$mimetypesLoaded) {
             elFinderVolumeDriver::$mimetypesLoaded = true;
@@ -5496,7 +5496,7 @@ abstract class elFinderVolumeDriver {
      * Remove directory recursive on local file system
      *
      * @param string $dir Target dirctory path
-     * @return boolean
+     * @return bool
      * @author Naoki Sawada
      */
     public function rmdirRecursive($dir) {

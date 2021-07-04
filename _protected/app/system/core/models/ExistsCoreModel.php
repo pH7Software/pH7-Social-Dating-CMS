@@ -48,7 +48,7 @@ class ExistsCoreModel
     /**
      * Checks if the same ID already exists. Ignore the ghost ID (1)
      *
-     * @param integer $iId
+     * @param int $iId
      * @param string $sTable Default is "Members"
      *
      * @return bool

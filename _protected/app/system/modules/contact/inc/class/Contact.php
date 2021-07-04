@@ -31,7 +31,7 @@ class Contact extends Core
     /**
      * Initialize the properties of the class, then send the feedback to the admin.
      *
-     * @return integer Number of recipients who were accepted for delivery.
+     * @return int Number of recipients who were accepted for delivery.
      *
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */

@@ -8,7 +8,9 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
+use stdClass;
 
 class GameModel extends GameCoreModel
 {
@@ -18,7 +20,7 @@ class GameModel extends GameCoreModel
      * @param int $iLimit
      * @param bool $bCount
      *
-     * @return array|\stdClass|bool
+     * @return array|stdClass|bool
      */
     public function getCategory($iCategoryId, $iOffset, $iLimit, $bCount = false)
     {
@@ -39,12 +41,12 @@ class GameModel extends GameCoreModel
             $rStmt = Db::getInstance()->prepare($sSql);
 
             if ($bIsCategoryId) {
-                $rStmt->bindValue(':categoryId', $iCategoryId, \PDO::PARAM_INT);
+                $rStmt->bindValue(':categoryId', $iCategoryId, PDO::PARAM_INT);
             }
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
             $rStmt->execute();
-            $mData = $bIsCategoryId ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = $bIsCategoryId ? $rStmt->fetch(PDO::FETCH_OBJ) : $rStmt->fetchAll(PDO::FETCH_OBJ);
             Db::free($rStmt);
 
             $this->cache->put($mData);
@@ -79,17 +81,17 @@ class GameModel extends GameCoreModel
             'AS c ON g.categoryId = c.categoryId WHERE c.name LIKE :name' . $sSqlOrder . $sSqlLimit;
         $rStmt = Db::getInstance()->prepare($sSql);
 
-        $rStmt->bindValue(':name', '%' . $sCategoryName . '%', \PDO::PARAM_STR);
+        $rStmt->bindValue(':name', '%' . $sCategoryName . '%', PDO::PARAM_STR);
 
         if (!$bCount) {
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
         if (!$bCount) {
-            $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = $rStmt->fetchAll(PDO::FETCH_OBJ);
         } else {
             $mData = (int)$rStmt->fetchColumn();
         }
@@ -110,7 +112,7 @@ class GameModel extends GameCoreModel
 
         if (!$sFile = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT file FROM' . Db::prefix(DbTableName::GAME) . 'WHERE gameId = :gameId LIMIT 1');
-            $rStmt->bindValue(':gameId', $iGameId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':gameId', $iGameId, PDO::PARAM_INT);
             $rStmt->execute();
             $sFile = $rStmt->fetchColumn();
             Db::free($rStmt);
@@ -153,20 +155,20 @@ class GameModel extends GameCoreModel
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::GAME) . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         if ($bDigitSearch) {
-            $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
+            $rStmt->bindValue(':looking', $mLooking, PDO::PARAM_INT);
         } else {
-            $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+            $rStmt->bindValue(':looking', '%' . $mLooking . '%', PDO::PARAM_STR);
         }
 
         if (!$bCount) {
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
         if (!$bCount) {
-            $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = $rStmt->fetchAll(PDO::FETCH_OBJ);
         } else {
             $mData = (int)$rStmt->fetchColumn();
         }
@@ -202,7 +204,7 @@ class GameModel extends GameCoreModel
     public function setDownloadStat($iId)
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::GAME) . 'SET downloads = downloads+1 WHERE gameId = :id LIMIT 1');
-        $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':id', $iId, PDO::PARAM_INT);
         $rStmt->execute();
         Db::free($rStmt);
     }
@@ -218,9 +220,9 @@ class GameModel extends GameCoreModel
     public function getDownloadStat($iId)
     {
         $rStmt = Db::getInstance()->prepare('SELECT downloads FROM' . Db::prefix(DbTableName::GAME) . 'WHERE gameId = :id LIMIT 1');
-        $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':id', $iId, PDO::PARAM_INT);
         $rStmt->execute();
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        $oRow = $rStmt->fetch(PDO::FETCH_OBJ);
         Db::free($rStmt);
 
         return (int)$oRow->downloads;
@@ -231,13 +233,13 @@ class GameModel extends GameCoreModel
         $sSql = 'INSERT INTO' . Db::prefix(DbTableName::GAME) .
             '(categoryId, name, title, description, keywords, thumb, file) VALUES(:categoryId, :name, :title, :description, :keywords, :thumb, :file)';
         $rStmt = Db::getInstance()->prepare($sSql);
-        $rStmt->bindValue(':categoryId', $aData['category_id'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':name', $aData['name'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':title', $aData['title'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':description', $aData['description'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':keywords', $aData['keywords'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':thumb', $aData['thumb'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':file', $aData['file'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':categoryId', $aData['category_id'], PDO::PARAM_INT);
+        $rStmt->bindValue(':name', $aData['name'], PDO::PARAM_STR);
+        $rStmt->bindValue(':title', $aData['title'], PDO::PARAM_STR);
+        $rStmt->bindValue(':description', $aData['description'], PDO::PARAM_STR);
+        $rStmt->bindValue(':keywords', $aData['keywords'], PDO::PARAM_STR);
+        $rStmt->bindValue(':thumb', $aData['thumb'], PDO::PARAM_STR);
+        $rStmt->bindValue(':file', $aData['file'], PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -248,12 +250,12 @@ class GameModel extends GameCoreModel
             'UPDATE' . Db::prefix(DbTableName::GAME) .
             'SET categoryId = :categoryId, name = :name, title = :title, description = :description, keywords = :keywords WHERE gameId = :id LIMIT 1'
         );
-        $rStmt->bindValue(':id', $aData['id'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':categoryId', $aData['category_id'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':name', $aData['name'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':title', $aData['title'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':description', $aData['description'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':keywords', $aData['keywords'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':id', $aData['id'], PDO::PARAM_INT);
+        $rStmt->bindValue(':categoryId', $aData['category_id'], PDO::PARAM_INT);
+        $rStmt->bindValue(':name', $aData['name'], PDO::PARAM_STR);
+        $rStmt->bindValue(':title', $aData['title'], PDO::PARAM_STR);
+        $rStmt->bindValue(':description', $aData['description'], PDO::PARAM_STR);
+        $rStmt->bindValue(':keywords', $aData['keywords'], PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -261,7 +263,7 @@ class GameModel extends GameCoreModel
     public function delete($iId)
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::GAME) . 'WHERE gameId = :id LIMIT 1');
-        $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':id', $iId, PDO::PARAM_INT);
 
         return $rStmt->execute();
     }

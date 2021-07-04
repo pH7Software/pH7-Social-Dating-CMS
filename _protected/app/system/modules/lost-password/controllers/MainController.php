@@ -84,7 +84,7 @@ class MainController extends Controller
      * @param string $sTable DB table name.
      * @param string $sEmail The user email address.
      *
-     * @return integer Number of recipients who were accepted for delivery.
+     * @return int Number of recipients who were accepted for delivery.
      */
     protected function sendMail($sTable, $sEmail)
     {

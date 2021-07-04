@@ -101,7 +101,7 @@ class AffiliateCore extends UserCore
     /**
      * Update the Affiliate Commission.
      *
-     * @param integer $iAffId Affiliate ID
+     * @param int $iAffId Affiliate ID
      * @param Config $oConfig
      * @param Registry $oRegistry
      *
@@ -128,7 +128,7 @@ class AffiliateCore extends UserCore
     /**
      * Delete Affiliate.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sUsername
      *
      * @return void

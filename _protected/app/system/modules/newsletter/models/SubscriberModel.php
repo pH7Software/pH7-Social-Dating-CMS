@@ -8,7 +8,9 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
+use stdClass;
 
 class SubscriberModel extends SubscriberCoreModel
 {
@@ -22,9 +24,9 @@ class SubscriberModel extends SubscriberCoreModel
         $rStmt = Db::getInstance()->prepare(
             'SELECT email, name AS firstName FROM' . Db::prefix(DbTableName::SUBSCRIBER) . 'WHERE active = :status'
         );
-        $rStmt->bindValue(':status', self::ACTIVE_STATUS, \PDO::PARAM_INT);
+        $rStmt->bindValue(':status', self::ACTIVE_STATUS, PDO::PARAM_INT);
         $rStmt->execute();
-        $aRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        $aRow = $rStmt->fetchAll(PDO::FETCH_OBJ);
         Db::free($rStmt);
 
         return $aRow;
@@ -40,7 +42,7 @@ class SubscriberModel extends SubscriberCoreModel
     public function unsubscribe($sEmail)
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::SUBSCRIBER) . 'WHERE email = :email LIMIT 1');
-        $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
+        $rStmt->bindValue(':email', $sEmail, PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -55,7 +57,7 @@ class SubscriberModel extends SubscriberCoreModel
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return int|\stdClass Integer for the number subscribers returned or string for the subscribers list returned
+     * @return int|stdClass Integer for the number subscribers returned or string for the subscribers list returned
      */
     public function browse($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
@@ -73,19 +75,19 @@ class SubscriberModel extends SubscriberCoreModel
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::SUBSCRIBER) . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         if ($bDigitSearch) {
-            $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
+            $rStmt->bindValue(':looking', $mLooking, PDO::PARAM_INT);
         } else {
-            $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+            $rStmt->bindValue(':looking', '%' . $mLooking . '%', PDO::PARAM_STR);
         }
 
         if (!$bCount) {
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         }
         $rStmt->execute();
 
         if (!$bCount) {
-            $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = $rStmt->fetchAll(PDO::FETCH_OBJ);
         } else {
             $mData = (int)$rStmt->fetchColumn();
         }

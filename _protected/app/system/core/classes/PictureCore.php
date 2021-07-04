@@ -14,7 +14,7 @@ use PH7\Framework\File\File;
 class PictureCore
 {
     /**
-     * @param integer $iAlbumId
+     * @param int $iAlbumId
      * @param string $sUsername
      * @param string $sPictureLink (file with the extension)
      *

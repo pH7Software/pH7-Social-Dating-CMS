@@ -21,6 +21,7 @@ use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Pattern\Statik;
 use PH7\Framework\Video\Api as VideoApi;
 use PH7\Framework\Video\InvalidApiProviderException;
+use stdClass;
 
 class VideoDesignCore
 {
@@ -39,7 +40,7 @@ class VideoDesignCore
     /**
      * Generates HTML contents Video.
      *
-     * @param \stdClass $oData
+     * @param stdClass $oData
      * @param string $sMedia Type of the media ('preview' or 'movie').
      * @param int $iWidth
      * @param int $iHeight

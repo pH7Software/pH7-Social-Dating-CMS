@@ -8,8 +8,10 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Model;
+use stdClass;
 
 class VideoCoreModel extends Model
 {
@@ -26,7 +28,7 @@ class VideoCoreModel extends Model
      * @param int $iLimit
      * @param string $sOrder
      *
-     * @return array|\stdClass
+     * @return array|stdClass
      */
     public function album($iProfileId, $iAlbumId, $sApproved, $iOffset, $iLimit, $sOrder = self::CREATED)
     {
@@ -49,18 +51,18 @@ class VideoCoreModel extends Model
 
             $rStmt = Db::getInstance()->prepare($sSqlQuery);
             if ($bIsProfileId) {
-                $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+                $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
             }
             if ($bIsAlbumId) {
-                $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
+                $rStmt->bindValue(':albumId', $iAlbumId, PDO::PARAM_INT);
             }
-            $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
+            $rStmt->bindValue(':approved', $sApproved, PDO::PARAM_STR);
 
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
 
             $rStmt->execute();
-            $mData = ($bIsProfileId && $bIsAlbumId) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = ($bIsProfileId && $bIsAlbumId) ? $rStmt->fetch(PDO::FETCH_OBJ) : $rStmt->fetchAll(PDO::FETCH_OBJ);
             Db::free($rStmt);
             $this->cache->put($mData);
         }
@@ -81,10 +83,10 @@ class VideoCoreModel extends Model
 
         $sSqlVideoId = $bVideoId ? ' AND videoId=:videoId ' : '';
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::VIDEO) . 'WHERE profileId=:profileId AND albumId=:albumId' . $sSqlVideoId);
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':albumId', $iAlbumId, PDO::PARAM_INT);
         if ($bVideoId) {
-            $rStmt->bindValue(':videoId', $iVideoId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':videoId', $iVideoId, PDO::PARAM_INT);
         }
 
         return $rStmt->execute();

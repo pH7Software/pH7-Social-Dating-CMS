@@ -10,6 +10,7 @@ namespace PH7;
 
 use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
+use stdClass;
 
 class HotOrNotModel extends UserCoreModel
 {
@@ -23,7 +24,7 @@ class HotOrNotModel extends UserCoreModel
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return \stdClass DATA ot the user (profileId, username, firstName, sex, avatar).
+     * @return stdClass DATA ot the user (profileId, username, firstName, sex, avatar).
      */
     public function getPicture($iProfileId = null, $iApproved = 1, $iOffset = 0, $iLimit = 1)
     {
@@ -31,7 +32,7 @@ class HotOrNotModel extends UserCoreModel
         $rStmt = Db::getInstance()->prepare('SELECT profileId, username, firstName, sex, avatar FROM' . Db::prefix(DbTableName::MEMBER) .
             'WHERE (username <> :ghostUsername) AND (ban = 0)' . $sSql . ' AND (avatar IS NOT NULL) AND (approvedAvatar = :approved) ORDER BY RAND() LIMIT :offset, :limit');
 
-        $rStmt->bindValue(':ghostUsername', PH7_GHOST_USERNAME, \PDO::PARAM_STR);
+        $rStmt->bindValue(':ghostUsername', PH7_GHOST_USERNAME, PDO::PARAM_STR);
 
         if (!empty($iProfileId)) {
             $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);

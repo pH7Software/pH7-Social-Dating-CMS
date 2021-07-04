@@ -8,7 +8,9 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
+use stdClass;
 
 class BlogModel extends BlogCoreModel
 {
@@ -36,14 +38,14 @@ class BlogModel extends BlogCoreModel
             $rStmt = Db::getInstance()->prepare($sSqlQuery);
 
             if ($iBlogId !== null) {
-                $rStmt->bindParam(':blogId', $iBlogId, \PDO::PARAM_INT);
+                $rStmt->bindParam(':blogId', $iBlogId, PDO::PARAM_INT);
             }
 
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
             $rStmt->execute();
 
-            $aCategories = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $aCategories = $rStmt->fetchAll(PDO::FETCH_OBJ);
             Db::free($rStmt);
             $this->cache->put($aCategories);
         }
@@ -58,8 +60,8 @@ class BlogModel extends BlogCoreModel
     public function addCategory($iCategoryId, $iBlogId)
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::BLOG_CATEGORY) . '(categoryId, blogId) VALUES(:categoryId, :blogId)');
-        $rStmt->bindParam(':categoryId', $iCategoryId, \PDO::PARAM_INT);
-        $rStmt->bindParam(':blogId', $iBlogId, \PDO::PARAM_INT);
+        $rStmt->bindParam(':categoryId', $iCategoryId, PDO::PARAM_INT);
+        $rStmt->bindParam(':blogId', $iBlogId, PDO::PARAM_INT);
         $rStmt->execute();
         Db::free($rStmt);
     }
@@ -67,7 +69,7 @@ class BlogModel extends BlogCoreModel
     /**
      * @param string $sPostId
      *
-     * @return \stdClass|bool Returns the data, or FALSE on failure.
+     * @return stdClass|bool Returns the data, or FALSE on failure.
      */
     public function readPost($sPostId)
     {
@@ -78,9 +80,9 @@ class BlogModel extends BlogCoreModel
                 'SELECT * FROM' . Db::prefix(DbTableName::BLOG) . 'AS b LEFT JOIN' .
                 Db::prefix(DbTableName::BLOG_CATEGORY) . 'AS c ON b.blogId = c.blogId WHERE b.postId = :postId LIMIT 1'
             );
-            $rStmt->bindValue(':postId', $sPostId, \PDO::PARAM_STR);
+            $rStmt->bindValue(':postId', $sPostId, PDO::PARAM_STR);
             $rStmt->execute();
-            $oPost = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $oPost = $rStmt->fetch(PDO::FETCH_OBJ);
             Db::free($rStmt);
             $this->cache->put($oPost);
         }
@@ -100,20 +102,20 @@ class BlogModel extends BlogCoreModel
             VALUES (:postId, :langId, :title, :content, :slogan, :tags, :pageTitle, :metaDescription, :metaKeywords, :metaRobots, :metaAuthor, :metaCopyright, :enableComment, :createdDate)';
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
 
-        $rStmt->bindValue(':postId', $aPost['post_id'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':langId', $aPost['lang_id'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':title', $aPost['title'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':content', $aPost['content'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':slogan', $aPost['slogan'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':tags', $aPost['tags'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':pageTitle', $aPost['page_title'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':metaDescription', $aPost['meta_description'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':metaKeywords', $aPost['meta_keywords'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':metaRobots', $aPost['meta_robots'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':metaAuthor', $aPost['meta_author'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':metaCopyright', $aPost['meta_copyright'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':enableComment', $aPost['enable_comment'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':createdDate', $aPost['created_date'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':postId', $aPost['post_id'], PDO::PARAM_STR);
+        $rStmt->bindValue(':langId', $aPost['lang_id'], PDO::PARAM_STR);
+        $rStmt->bindValue(':title', $aPost['title'], PDO::PARAM_STR);
+        $rStmt->bindValue(':content', $aPost['content'], PDO::PARAM_STR);
+        $rStmt->bindValue(':slogan', $aPost['slogan'], PDO::PARAM_STR);
+        $rStmt->bindValue(':tags', $aPost['tags'], PDO::PARAM_STR);
+        $rStmt->bindValue(':pageTitle', $aPost['page_title'], PDO::PARAM_STR);
+        $rStmt->bindValue(':metaDescription', $aPost['meta_description'], PDO::PARAM_STR);
+        $rStmt->bindValue(':metaKeywords', $aPost['meta_keywords'], PDO::PARAM_STR);
+        $rStmt->bindValue(':metaRobots', $aPost['meta_robots'], PDO::PARAM_STR);
+        $rStmt->bindValue(':metaAuthor', $aPost['meta_author'], PDO::PARAM_STR);
+        $rStmt->bindValue(':metaCopyright', $aPost['meta_copyright'], PDO::PARAM_STR);
+        $rStmt->bindValue(':enableComment', $aPost['enable_comment'], PDO::PARAM_INT);
+        $rStmt->bindValue(':createdDate', $aPost['created_date'], PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -147,17 +149,17 @@ class BlogModel extends BlogCoreModel
             $sSqlOrder . $sSqlLimit;
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
 
-        $rStmt->bindValue(':name', '%' . $sCategoryName . '%', \PDO::PARAM_STR);
+        $rStmt->bindValue(':name', '%' . $sCategoryName . '%', PDO::PARAM_STR);
 
         if (!$bCount) {
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
         if (!$bCount) {
-            $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = $rStmt->fetchAll(PDO::FETCH_OBJ);
         } else {
             $mData = (int)$rStmt->fetchColumn();
         }
@@ -201,20 +203,20 @@ class BlogModel extends BlogCoreModel
         );
 
         if ($bDigitSearch) {
-            $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
+            $rStmt->bindValue(':looking', $mLooking, PDO::PARAM_INT);
         } else {
-            $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+            $rStmt->bindValue(':looking', '%' . $mLooking . '%', PDO::PARAM_STR);
         }
 
         if (!$bCount) {
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
         if (!$bCount) {
-            $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = $rStmt->fetchAll(PDO::FETCH_OBJ);
         } else {
             $mData = (int)$rStmt->fetchColumn();
         }
@@ -237,9 +239,9 @@ class BlogModel extends BlogCoreModel
             $rStmt = Db::getInstance()->prepare(
                 'SELECT postId FROM' . Db::prefix(DbTableName::BLOG) . 'WHERE blogId = :blogId LIMIT 1'
             );
-            $rStmt->bindValue(':blogId', $iBlogId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':blogId', $iBlogId, PDO::PARAM_INT);
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $oRow = $rStmt->fetch(PDO::FETCH_OBJ);
             Db::free($rStmt);
             $sData = $oRow->postId;
             unset($oRow);
@@ -262,7 +264,7 @@ class BlogModel extends BlogCoreModel
             $rStmt = Db::getInstance()->prepare(
                 'SELECT COUNT(postId) FROM' . Db::prefix(DbTableName::BLOG) . 'WHERE postId = :postId LIMIT 1'
             );
-            $rStmt->bindValue(':postId', $sPostId, \PDO::PARAM_STR);
+            $rStmt->bindValue(':postId', $sPostId, PDO::PARAM_STR);
             $rStmt->execute();
 
             $bPostExists = $rStmt->fetchColumn() == 1;
@@ -282,7 +284,7 @@ class BlogModel extends BlogCoreModel
     {
         $iBlogId = (int)$iBlogId;
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::BLOG) . 'WHERE blogId = :blogId');
-        $rStmt->bindValue(':blogId', $iBlogId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':blogId', $iBlogId, PDO::PARAM_INT);
 
         return $rStmt->execute();
     }
@@ -297,7 +299,7 @@ class BlogModel extends BlogCoreModel
         $rStmt = Db::getInstance()->prepare(
             'DELETE FROM' . Db::prefix(DbTableName::BLOG_CATEGORY) . 'WHERE blogId = :blogId'
         );
-        $rStmt->bindValue(':blogId', $iBlogId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':blogId', $iBlogId, PDO::PARAM_INT);
         $rStmt->execute();
     }
 

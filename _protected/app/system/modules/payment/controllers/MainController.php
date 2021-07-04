@@ -20,6 +20,9 @@ use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Payment\Gateway\Api\Api as ApiInterface;
 use stdClass;
+use Stripe\Charge;
+use Stripe\Error\Base;
+use Stripe\Error\Card;
 
 class MainController extends Controller
 {
@@ -302,7 +305,7 @@ class MainController extends Controller
             $sAmount = $this->httpRequest->post('amount');
 
             try {
-                $oCharge = \Stripe\Charge::create(
+                $oCharge = Charge::create(
                     [
                         'amount' => Stripe::getAmount($sAmount),
                         'currency' => $this->config->values['module.setting']['currency_code'],
@@ -324,10 +327,10 @@ class MainController extends Controller
                         $this->notification(Stripe::class, $iItemNumber);
                     }
                 }
-            } catch (\Stripe\Error\Card $oE) {
+            } catch (Card $oE) {
                 // The card has been declined
                 // Do nothing here as "$this->bStatus" is by default FALSE and so it will display "Error occurred" msg later
-            } catch (\Stripe\Error\Base $oE) {
+            } catch (Base $oE) {
                 $this->design->setMessage($this->str->escape($oE->getMessage(), true));
             }
         }

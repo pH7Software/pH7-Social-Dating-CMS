@@ -115,7 +115,7 @@ class Module
      * @param string $sSwitch Module::INSTALL or Module::UNINSTALL constant.
      * @param string $sFolder The folder
      *
-     * @return boolean Returns TRUE if it is correct, FALSE otherwise.
+     * @return bool Returns TRUE if it is correct, FALSE otherwise.
      */
     public function checkModFolder($sSwitch, $sFolder)
     {
@@ -131,7 +131,7 @@ class Module
      * @param string $sSwitch Module::INSTALL or Module::UNINSTALL constant.
      * @param string $sFolder
      *
-     * @return boolean
+     * @return bool
      */
     public function readConfig($sSwitch, $sFolder)
     {
@@ -146,7 +146,7 @@ class Module
      *
      * @param string $sSwitch Module::INSTALL or Module::UNINSTALL constant.
      *
-     * @return string|boolean Returns "false" if the file does not exist or if it fails, otherwise returns the "file contents".
+     * @return string|bool Returns "false" if the file does not exist or if it fails, otherwise returns the "file contents".
      */
     public function readInstruction($sSwitch)
     {
@@ -236,7 +236,7 @@ class Module
     /**
      * Add the module routes in the global configs/routes/<lang>.xml file.
      *
-     * @return boolean
+     * @return bool
      */
     private function addRoute()
     {
@@ -252,7 +252,7 @@ class Module
     /**
      * Remove the module routes in the global configs/routes/<lang>.xml file.
      *
-     * @return boolean
+     * @return bool
      */
     private function removeRoute()
     {
@@ -269,7 +269,7 @@ class Module
      *
      * @param string $sModuleDir Folder of module.
      *
-     * @return boolean Returns TRUE if the folder has been deleted, FALSE otherwise.
+     * @return bool Returns TRUE if the folder has been deleted, FALSE otherwise.
      */
     private function removeModDir($sModuleDir)
     {

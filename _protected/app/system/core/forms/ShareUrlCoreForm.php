@@ -16,8 +16,8 @@ class ShareUrlCoreForm
 {
     /**
      * @param $sUrl The URL to share. If you enter nothing, it will be the current URL.
-     * @param integer $iWidth Width of the form in pixel.
-     * @param boolean $bShowShareUrlLabel If TURE, it shows 'Share URL:' label beside the field.
+     * @param int $iWidth Width of the form in pixel.
+     * @param bool $bShowShareUrlLabel If TURE, it shows 'Share URL:' label beside the field.
      *
      * @return void
      */

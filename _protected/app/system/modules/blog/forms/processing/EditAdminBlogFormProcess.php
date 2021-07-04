@@ -109,7 +109,7 @@ class EditAdminBlogFormProcess extends Form
     /**
      * Update categories.
      *
-     * @param integer $iBlogId
+     * @param int $iBlogId
      * @param stdClass $oPost Post data from the database.
      * @param BlogModel $oBlogModel
      *
