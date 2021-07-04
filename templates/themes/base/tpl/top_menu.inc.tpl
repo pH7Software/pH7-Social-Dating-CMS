@@ -97,7 +97,7 @@
 
 
     {* Guest, Member and LoginUserAs from Admin Panel *}
-      {if (!$is_aff_auth AND !$is_admin_auth) OR $admin_logged_as_user }
+      {if (!$is_aff_auth AND !$is_admin_auth) OR $admin_logged_as_user}
         {if $is_chat_enabled OR $is_chatroulette_enabled}
           <li class="dropdown"><a href="#" title="{lang 'Free Social Dating Chat Rooms'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-weixin"></i> {lang 'Chat'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
@@ -169,7 +169,7 @@
 
 
     {* Member menu *}
-      {if $is_user_auth AND ( !$is_aff_auth AND !$is_admin_auth ) OR $admin_logged_as_user }
+      {if $is_user_auth AND ( !$is_aff_auth AND !$is_admin_auth ) OR $admin_logged_as_user}
           {if $is_mail_enabled}
             <li class="dropdown">
               <a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'My Messages'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">
@@ -281,7 +281,7 @@
 
 
     {* Admin menu *}
-      {if $is_admin_auth AND ( !$is_user_auth AND !$is_aff_auth ) }
+      {if $is_admin_auth AND ( !$is_user_auth AND !$is_aff_auth )}
         {{ $count_total_reports = ReportCoreModel::totalReports() }}
         <li class="dropdown">
           <a href="{{ $design->url(PH7_ADMIN_MOD,'user','index') }}" title="{lang 'Users/Admins Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">
@@ -466,7 +466,7 @@
               <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','video') }}" title="{lang 'Moderate Videos'}"><i class="fa fa-youtube-play"></i> {lang 'Videos'} {if $count_moderate_total_video }<span class="badge">{count_moderate_total_video}</span>{/if}</a></li>
             {/if}
 
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','avatar') }}" title="{lang 'Moderate Profile Photos'}"><i class="fa fa-picture-o"></i> {lang 'Profile Photos'} {if $count_moderate_total_avatar }<span class="badge">{count_moderate_total_avatar}</span>{/if}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','avatar') }}" title="{lang 'Moderate Profile Photos'}"><i class="fa fa-picture-o"></i> {lang 'Profile Photos'} {if $count_moderate_total_avatar}<span class="badge">{count_moderate_total_avatar}</span>{/if}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','background') }}" title="{lang 'Moderate Profile Background'}"><i class="fa fa-picture-o"></i> {lang 'Profile Backgrounds'} {if $count_moderate_total_background}<span class="badge">{count_moderate_total_background}</span>{/if}</a></li>
 
             {if $is_note_enabled}
