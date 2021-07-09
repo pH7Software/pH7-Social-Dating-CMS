@@ -74,7 +74,7 @@ class AdminCore extends UserCore
      * Set an admin authentication.
      *
      * @param stdClass $oAdminData User database object.
-     * @param AdminCoreModel $oAdminModel
+     * @param UserCoreModel $oAdminModel
      * @param Session $oSession
      * @param SecurityModel $oSecurityModel
      *
@@ -82,10 +82,10 @@ class AdminCore extends UserCore
      */
     public function setAuth(
         stdClass $oAdminData,
-        AdminCoreModel $oAdminModel,
+        UserCoreModel $oAdminModel,
         Session $oSession,
-        SecurityModel $oSecurityModel)
-    {
+        SecurityModel $oSecurityModel
+    ) {
         // Regenerate the session ID to prevent session fixation attack
         $oSession->regenerateId();
 

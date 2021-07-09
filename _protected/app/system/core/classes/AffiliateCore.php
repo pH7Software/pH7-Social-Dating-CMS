@@ -45,7 +45,7 @@ class AffiliateCore extends UserCore
      * Set an affiliate authentication.
      *
      * @param stdClass $oAffData User database object.
-     * @param AffiliateCoreModel $oAffModel
+     * @param UserCoreModel $oAffModel
      * @param Session $oSession
      * @param SecurityModel $oSecurityModel
      *
@@ -53,7 +53,7 @@ class AffiliateCore extends UserCore
      */
     public function setAuth(
         stdClass $oAffData,
-        AffiliateCoreModel $oAffModel,
+        UserCoreModel $oAffModel,
         Session $oSession,
         SecurityModel $oSecurityModel)
     {
@@ -130,11 +130,11 @@ class AffiliateCore extends UserCore
      *
      * @param int $iProfileId
      * @param string $sUsername
-     * @param AffiliateCoreModel $oAffModel
+     * @param UserCoreModel $oAffModel
      *
      * @return void
      */
-    public function delete($iProfileId, $sUsername, AffiliateCoreModel $oAffModel)
+    public function delete($iProfileId, $sUsername, UserCoreModel $oAffModel)
     {
         $oAffModel->delete($iProfileId, $sUsername);
     }

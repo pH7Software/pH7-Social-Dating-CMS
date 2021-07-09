@@ -29,13 +29,13 @@ class Admin extends AdminCore
      *
      * @param int $iProfileId
      * @param string $sUsername
-     * @param AdminModel $oAdminModel
+     * @param UserCoreModel $oAdminModel
      *
      * @return void
      *
      * @throws ForbiddenActionException
      */
-    public function delete($iProfileId, $sUsername, AdminModel $oAdminModel)
+    public function delete($iProfileId, $sUsername, UserCoreModel $oAdminModel)
     {
         $iProfileId = (int)$iProfileId;
 
