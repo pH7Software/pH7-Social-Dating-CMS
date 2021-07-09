@@ -35,7 +35,11 @@
                   <th> </th>
                   <th> </th>
                   <th> </th>
-                  <th> </th>
+                  <th>
+                      <a class="btn btn-default btn-md" href="{{ $design->url(PH7_ADMIN_MOD,'admin','add') }}">
+                          {lang 'Add Admin'}
+                      </a>
+                  </th>
                 </tr>
             </tfoot>
 

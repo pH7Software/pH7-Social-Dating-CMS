@@ -69,7 +69,11 @@
                   <th> </th>
                   <th> </th>
                   <th> </th>
-                  <th> </th>
+                  <th>
+                      <a class="btn btn-default btn-md" href="{{ $design->url('affiliate','admin','add') }}">
+                          {lang 'Add Affiliate'}
+                      </a>
+                  </th>
                 </tr>
             </tfoot>
 
