@@ -353,7 +353,7 @@ class UserController extends Controller
             $iId = (int)$aData[0];
             $sUsername = (string)$aData[1];
 
-            $this->oUser->delete($iId, $sUsername);
+            $this->oUser->delete($iId, $sUsername, $this->oAdminModel);
 
             Header::redirect(
                 Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
@@ -420,7 +420,7 @@ class UserController extends Controller
                     $iId = (int)$aData[0];
                     $sUsername = (string)$aData[1];
 
-                    $this->oUser->delete($iId, $sUsername);
+                    $this->oUser->delete($iId, $sUsername, $this->oAdminModel);
                 }
                 $this->sMsg = t('The profile(s) has/have been deleted.');
             }

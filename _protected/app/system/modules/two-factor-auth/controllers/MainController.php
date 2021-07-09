@@ -130,7 +130,7 @@ class MainController extends Controller
     /**
      * Get Session Profile ID.
      *
-     * @return integer
+     * @return int
      *
      * @throws PH7InvalidArgumentException Explanatory message if the specified module is wrong.
      */

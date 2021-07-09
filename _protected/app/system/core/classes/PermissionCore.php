@@ -13,6 +13,7 @@ defined('PH7') or exit('Restricted access');
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
+use stdClass;
 
 abstract class PermissionCore extends Framework\Core\Core
 {
@@ -21,7 +22,7 @@ abstract class PermissionCore extends Framework\Core\Core
     /** @var UserCoreModel */
     private $oUserModel;
 
-    /** @var \stdClass */
+    /** @var stdClass */
     protected $group;
 
     public function __construct()

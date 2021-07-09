@@ -11,6 +11,7 @@ namespace PH7;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Cookie\Cookie;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\File\File;
 use PH7\Framework\Image\Image;
 use PH7\Framework\Ip\Ip;
@@ -86,12 +87,13 @@ class UserCore
      *
      * @param int $iProfileId
      * @param string $sUsername
+     * @param UserCoreModel $oUserModel
      *
      * @return void
      *
      * @throws ForbiddenActionException
      */
-    public function delete($iProfileId, $sUsername)
+    public function delete($iProfileId, $sUsername, UserCoreModel $oUserModel)
     {
         if ($this->isGhost($sUsername)) {
             throw new ForbiddenActionException('You cannot delete this profile!');
@@ -105,7 +107,7 @@ class UserCore
         $oFile->deleteDir(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'note/' . PH7_IMG . $sUsername);
         unset($oFile);
 
-        (new UserCoreModel)->delete($iProfileId, $sUsername);
+        $oUserModel->delete($iProfileId, $sUsername);
 
         /* Clean UserCoreModel and Avatar Cache */
         (new Cache)
@@ -124,7 +126,7 @@ class UserCore
      * @return bool TRUE if success, FALSE if the extension is wrong.
      *
      * @throws Framework\File\Permission\PermissionException
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException
+     * @throws PH7InvalidArgumentException
      */
     public function setAvatar($iProfileId, $sUsername, $sFile, $iApproved = 1)
     {

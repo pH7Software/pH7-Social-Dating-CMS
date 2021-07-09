@@ -10,7 +10,10 @@ namespace PH7;
 
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Config\Config;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\File\File;
+use PH7\Framework\File\Permission\PermissionException;
+use PH7\Framework\File\TooLargeException;
 use PH7\Framework\Image\Image;
 use PH7\Framework\Navigation\Browser;
 use stdClass;
@@ -27,9 +30,9 @@ class Blog extends WriteCore
      *
      * @return void
      *
-     * @throws \PH7\Framework\File\TooLargeException
-     * @throws \PH7\Framework\File\Permission\PermissionException
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException
+     * @throws TooLargeException
+     * @throws PermissionException
+     * @throws PH7InvalidArgumentException
      */
     public function setThumb(stdClass $oPost, File $oFile)
     {
