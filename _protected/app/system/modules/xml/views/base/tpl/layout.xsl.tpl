@@ -1,8 +1,9 @@
 {{ $design->xmlHeader() }}
 <xsl:stylesheet
-        version="2.0"
-        xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
->
+    version="2.0"
+    xmlns:sitemap="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    >
 
     <!-- Output in HTML5 with doctype-system="about:legacy-compat" -->
     <xsl:output method="html" doctype-system="about:legacy-compat" encoding="utf-8" indent="yes" />
