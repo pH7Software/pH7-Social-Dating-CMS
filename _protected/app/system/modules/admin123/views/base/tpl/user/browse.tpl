@@ -141,11 +141,11 @@
                 {/each}
             </tbody>
         </table>
-
-        {if $total_users > UserMilestoneCore::MILLENARIAN_WEBSITE}
-            {manual_include 'milestone_reached.inc.tpl'}
-        {/if}
     </div>
 </form>
+
+{if $total_users > UserMilestoneCore::MILLENARIAN_WEBSITE}
+    {manual_include 'milestone_reached.inc.tpl'}
+{/if}
 
 {main_include 'page_nav.inc.tpl'}
