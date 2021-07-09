@@ -69,11 +69,7 @@
                   <th> </th>
                   <th> </th>
                   <th> </th>
-                  <th>
-                      <a class="btn btn-default btn-md" href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'add') }}">
-                          {lang 'Add User'}
-                      </a>
-                  </th>
+                  <th> </th>
                 </tr>
             </tfoot>
 
