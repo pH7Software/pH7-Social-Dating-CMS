@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mail\Mailable;
 use stdClass;
@@ -55,7 +56,7 @@ class BirthdayCore extends Core
      *
      * @return int Number of recipients who were accepted for delivery.
      *
-     * @throws \PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception
+     * @throws Exception
      */
     private function sendMail(stdClass $oUser, Mailable $oMailEngine)
     {

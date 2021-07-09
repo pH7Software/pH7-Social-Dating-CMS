@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Cache\Cache;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Pattern\Statik;
@@ -42,7 +43,7 @@ class CommentCore
      *
      * @see Various::launchErr()
      *
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException If the table is not valid.
+     * @throws PH7InvalidArgumentException If the table is not valid.
      */
     public static function checkTable($sTable)
     {

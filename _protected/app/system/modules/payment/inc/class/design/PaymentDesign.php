@@ -14,6 +14,7 @@ use Braintree_ClientToken;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Payment\Gateway\Api\Api as PaymentApi;
 use Skeerel\Skeerel;
+use Skeerel\Util\Session as SkeerelSession;
 use stdClass;
 
 class PaymentDesign extends Framework\Core\Core
@@ -155,7 +156,7 @@ class PaymentDesign extends Framework\Core\Core
         Skeerel::generateSessionStateParameter(Skeerel::DEFAULT_COOKIE_NAME);
 
         $sWebsiteId = $this->config->values['module.setting']['skeerel.website_id'];
-        $sSessionState = \Skeerel\Util\Session::get(Skeerel::DEFAULT_COOKIE_NAME);
+        $sSessionState = SkeerelSession::get(Skeerel::DEFAULT_COOKIE_NAME);
         $sJsLibrary = Skeerel::JS_LIBRARY_URL;
         $bSandboxMode = (bool)$this->config->values['module.setting']['sandbox.enabled'];
         $sPrice = $oMembership->price; // Decimal price format (e.g., 19.95)

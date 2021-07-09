@@ -293,7 +293,7 @@ class AdminController extends Controller
         $iId = (int)$aData[0];
         $sUsername = (string)$aData[1];
 
-        $this->oAff->delete($iId, $sUsername);
+        $this->oAff->delete($iId, $sUsername, $this->oAffModel);
         Header::redirect(
             Uri::get('affiliate', 'admin', 'browse'),
             t('The affiliate has been deleted.')
@@ -350,7 +350,7 @@ class AdminController extends Controller
                 $iId = (int)$aData[0];
                 $sUsername = (string)$aData[1];
 
-                $this->oAff->delete($iId, $sUsername);
+                $this->oAff->delete($iId, $sUsername, $this->oAffModel);
             }
             $this->sMsg = t('The affiliate(s) has/have been deleted.');
         }

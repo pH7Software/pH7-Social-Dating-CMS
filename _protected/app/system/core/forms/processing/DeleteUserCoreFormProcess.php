@@ -19,6 +19,9 @@ use PH7\Framework\Url\Header;
 /** For "user" and "affiliate" modules **/
 class DeleteUserCoreFormProcess extends Form
 {
+    /** @var oUserModel */
+    private $oUserModel;
+
     /** @var string */
     private $sSessPrefix;
 
@@ -32,12 +35,14 @@ class DeleteUserCoreFormProcess extends Form
     {
         parent::__construct();
 
+        $this->oUserModel = new UserCoreModel;
+
         $this->sSessPrefix = $this->registry->module === 'user' ? 'member' : 'affiliate';
         $this->sUsername = $this->session->get($this->sSessPrefix . '_username');
         $this->sEmail = $this->session->get($this->sSessPrefix . '_email');
         $sTable = $this->registry->module === 'user' ? DbTableName::MEMBER : DbTableName::AFFILIATE;
 
-        $mLogin = (new UserCoreModel)->login($this->sEmail, $this->httpRequest->post('password', Http::NO_CLEAN), $sTable);
+        $mLogin = $this->oUserModel->login($this->sEmail, $this->httpRequest->post('password', Http::NO_CLEAN), $sTable);
         if ($mLogin === CredentialStatusCore::INCORRECT_PASSWORD_IN_DB) {
             \PFBC\Form::setError('form_delete_account', t('Oops! This password you entered is incorrect.'));
         } else {
@@ -100,13 +105,13 @@ class DeleteUserCoreFormProcess extends Form
      */
     private function removeAccount()
     {
-        $oUserModel = $this->registry->module === 'user' ? new UserCore : new AffiliateCore;
-        $oUserModel->delete($this->session->get($this->sSessPrefix . '_id'), $this->sUsername);
-        unset($oUserModel);
+        $oUser = $this->registry->module === 'user' ? new UserCore : new AffiliateCore;
+        $oUser->delete($this->session->get($this->sSessPrefix . '_id'), $this->sUsername, $this->oUserModel);
+        unset($oUser);
     }
 
     /**
-     * Redirect the user to the goodbye (accountdeleted) page.
+     * Redirect the user to the goodbye (accountDeleted) page.
      *
      * @return void
      *

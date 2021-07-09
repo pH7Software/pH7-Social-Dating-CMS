@@ -74,7 +74,7 @@ class AdminCore extends UserCore
      * Set an admin authentication.
      *
      * @param stdClass $oAdminData User database object.
-     * @param UserCoreModel $oAdminModel
+     * @param AdminCoreModel $oAdminModel
      * @param Session $oSession
      * @param SecurityModel $oSecurityModel
      *
@@ -82,7 +82,7 @@ class AdminCore extends UserCore
      */
     public function setAuth(
         stdClass $oAdminData,
-        UserCoreModel $oAdminModel,
+        AdminCoreModel $oAdminModel,
         Session $oSession,
         SecurityModel $oSecurityModel)
     {

@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use Faker\Factory as Faker;
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Translate\Lang;
@@ -39,7 +40,7 @@ class FakerFactory
     public function generateMembers()
     {
         $oUserModel = new UserCoreModel;
-        $oFaker = \Faker\Factory::create($this->sLocale);
+        $oFaker = Faker::create($this->sLocale);
 
         $iMaxAge = DbConfig::getSetting('maxAgeRegistration');
         $iMinAge = DbConfig::getSetting('minAgeRegistration');
@@ -83,7 +84,7 @@ class FakerFactory
     public function generateAffiliates()
     {
         $oAffModel = new AffiliateCoreModel;
-        $oFaker = \Faker\Factory::create($this->sLocale);
+        $oFaker = Faker::create($this->sLocale);
 
         $iMaxUsernameLength = DbConfig::getSetting('maxUsernameLength');
 
@@ -123,7 +124,7 @@ class FakerFactory
     public function generateSubscribers()
     {
         $oSubscriberModel = new SubscriberCoreModel;
-        $oFaker = \Faker\Factory::create($this->sLocale);
+        $oFaker = Faker::create($this->sLocale);
 
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
             $sSex = empty($this->sSex) ? $this->getRandomGender() : $this->sSex;

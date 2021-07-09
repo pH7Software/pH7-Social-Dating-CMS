@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Ads\Ads;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Pattern\Statik;
@@ -58,7 +59,7 @@ class AdsCore extends Ads
      *
      * @return string|void Returns the table name if it is correct, nothing otherwise.
      *
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException If the table is not valid.
+     * @throws PH7InvalidArgumentException If the table is not valid.
      */
     public static function checkTable($sTable)
     {
@@ -76,7 +77,7 @@ class AdsCore extends Ads
      *
      * @return string|void Returns the table if it is correct, nothing otherwise.
      *
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException If the table is not valid.
+     * @throws PH7InvalidArgumentException If the table is not valid.
      */
     public static function convertTableToId($sTable)
     {

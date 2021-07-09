@@ -8,7 +8,9 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
+use stdClass;
 
 class VideoModel extends VideoCoreModel
 {
@@ -27,12 +29,12 @@ class VideoModel extends VideoCoreModel
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::ALBUM_VIDEO) . '(profileId, name, description, thumb, createdDate, approved)
             VALUES (:profileId, :name, :description, :thumb, :createdDate, :approved)');
 
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':name', $sTitle, \PDO::PARAM_STR);
-        $rStmt->bindValue(':description', $sDescription, \PDO::PARAM_STR);
-        $rStmt->bindValue(':thumb', $sThumb, \PDO::PARAM_STR);
-        $rStmt->bindValue(':createdDate', $sCreatedDate, \PDO::PARAM_STR);
-        $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':name', $sTitle, PDO::PARAM_STR);
+        $rStmt->bindValue(':description', $sDescription, PDO::PARAM_STR);
+        $rStmt->bindValue(':thumb', $sThumb, PDO::PARAM_STR);
+        $rStmt->bindValue(':createdDate', $sCreatedDate, PDO::PARAM_STR);
+        $rStmt->bindValue(':approved', $sApproved, PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -55,15 +57,15 @@ class VideoModel extends VideoCoreModel
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::VIDEO) . '(profileId, albumId, title, description, file, thumb, duration, createdDate, approved)
             VALUES (:profileId, :albumId, :title, :description, :file, :thumb, :duration, :createdDate, :approved)');
 
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':title', $sTitle, \PDO::PARAM_STR);
-        $rStmt->bindValue(':description', $sDescription, \PDO::PARAM_STR);
-        $rStmt->bindValue(':file', $sFile, \PDO::PARAM_STR);
-        $rStmt->bindValue(':thumb', $sThumb, \PDO::PARAM_STR);
-        $rStmt->bindValue(':duration', $sDuration, \PDO::PARAM_STR);
-        $rStmt->bindValue(':createdDate', $sCreatedDate, \PDO::PARAM_STR);
-        $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':albumId', $iAlbumId, PDO::PARAM_INT);
+        $rStmt->bindValue(':title', $sTitle, PDO::PARAM_STR);
+        $rStmt->bindValue(':description', $sDescription, PDO::PARAM_STR);
+        $rStmt->bindValue(':file', $sFile, PDO::PARAM_STR);
+        $rStmt->bindValue(':thumb', $sThumb, PDO::PARAM_STR);
+        $rStmt->bindValue(':duration', $sDuration, PDO::PARAM_STR);
+        $rStmt->bindValue(':createdDate', $sCreatedDate, PDO::PARAM_STR);
+        $rStmt->bindValue(':approved', $sApproved, PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -77,8 +79,8 @@ class VideoModel extends VideoCoreModel
     public function deleteAlbum($iProfileId, $iAlbumId)
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::ALBUM_VIDEO) . 'WHERE profileId = :profileId AND albumId = :albumId');
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':albumId', $iAlbumId, PDO::PARAM_INT);
 
         return $rStmt->execute();
     }
@@ -94,9 +96,9 @@ class VideoModel extends VideoCoreModel
 
         if (!$aData = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT albumId, name FROM' . Db::prefix(DbTableName::ALBUM_VIDEO) . ' WHERE profileId = :profileId');
-            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
             $rStmt->execute();
-            $aData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $aData = $rStmt->fetchAll(PDO::FETCH_OBJ);
             Db::free($rStmt);
             $this->cache->put($aData);
         }
@@ -112,7 +114,7 @@ class VideoModel extends VideoCoreModel
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return array|\stdClass
+     * @return array|stdClass
      */
     public function video($iProfileId, $iAlbumId, $iVideoId, $sApproved, $iOffset, $iLimit)
     {
@@ -127,17 +129,17 @@ class VideoModel extends VideoCoreModel
                 . Db::prefix(DbTableName::ALBUM_VIDEO) . 'AS a ON v.albumId = a.albumId INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
                 'AS m ON v.profileId = m.profileId WHERE v.profileId = :profileId AND v.albumId = :albumId AND' . $sSqlVideoId . 'v.approved = :approved LIMIT :offset, :limit');
 
-            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-            $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+            $rStmt->bindValue(':albumId', $iAlbumId, PDO::PARAM_INT);
             if (!empty($iVideoId)) {
-                $rStmt->bindValue(':videoId', $iVideoId, \PDO::PARAM_INT);
+                $rStmt->bindValue(':videoId', $iVideoId, PDO::PARAM_INT);
             }
-            $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindValue(':approved', $sApproved, PDO::PARAM_STR);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
             $rStmt->execute();
 
-            $mData = !empty($iVideoId) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = !empty($iVideoId) ? $rStmt->fetch(PDO::FETCH_OBJ) : $rStmt->fetchAll(PDO::FETCH_OBJ);
             Db::free($rStmt);
             $this->cache->put($mData);
         }
@@ -158,7 +160,7 @@ class VideoModel extends VideoCoreModel
             $sSqlProfileId = $iProfileId !== null ? ' WHERE profileId = :profileId' : '';
             $rStmt = Db::getInstance()->prepare('SELECT COUNT(albumId) FROM' . Db::prefix(DbTableName::ALBUM_VIDEO) . $sSqlProfileId);
             if ($iProfileId !== null) {
-                $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+                $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
             }
             $rStmt->execute();
             $iTotalAlbums = (int)$rStmt->fetchColumn();
@@ -180,7 +182,7 @@ class VideoModel extends VideoCoreModel
 
         if (!$iTotalVideos = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT COUNT(videoId) FROM' . Db::prefix(DbTableName::VIDEO) . 'WHERE profileId = :profileId');
-            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
             $rStmt->execute();
             $iTotalVideos = (int)$rStmt->fetchColumn();
             Db::free($rStmt);
@@ -204,11 +206,11 @@ class VideoModel extends VideoCoreModel
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::ALBUM_VIDEO) . 'SET name = :name, description = :description, updatedDate = :updatedDate
             WHERE profileId = :profileId AND albumId = :albumId');
 
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':name', $sTitle, \PDO::PARAM_STR);
-        $rStmt->bindValue(':description', $sDescription, \PDO::PARAM_STR);
-        $rStmt->bindValue(':updatedDate', $sUpdatedDate, \PDO::PARAM_STR);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':albumId', $iAlbumId, PDO::PARAM_INT);
+        $rStmt->bindValue(':name', $sTitle, PDO::PARAM_STR);
+        $rStmt->bindValue(':description', $sDescription, PDO::PARAM_STR);
+        $rStmt->bindValue(':updatedDate', $sUpdatedDate, PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -228,12 +230,12 @@ class VideoModel extends VideoCoreModel
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix(DbTableName::VIDEO) . 'SET title = :title, description = :description, updatedDate = :updatedDate
             WHERE profileId = :profileId AND albumId = :albumId AND videoId = :videoId');
 
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':videoId', $iVideoId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':title', $sTitle, \PDO::PARAM_STR);
-        $rStmt->bindValue(':description', $sDescription, \PDO::PARAM_STR);
-        $rStmt->bindValue(':updatedDate', $sUpdatedDate, \PDO::PARAM_STR);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':albumId', $iAlbumId, PDO::PARAM_INT);
+        $rStmt->bindValue(':videoId', $iVideoId, PDO::PARAM_INT);
+        $rStmt->bindValue(':title', $sTitle, PDO::PARAM_STR);
+        $rStmt->bindValue(':description', $sDescription, PDO::PARAM_STR);
+        $rStmt->bindValue(':updatedDate', $sUpdatedDate, PDO::PARAM_STR);
 
         return $rStmt->execute();
     }
@@ -247,7 +249,7 @@ class VideoModel extends VideoCoreModel
      * @param int $iLimit
      * @param string $sApproved
      *
-     * @return int|\stdClass
+     * @return int|stdClass
      */
     public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $sApproved = '1')
     {
@@ -270,22 +272,22 @@ class VideoModel extends VideoCoreModel
         );
 
         if ($bDigitSearch) {
-            $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
+            $rStmt->bindValue(':looking', $mLooking, PDO::PARAM_INT);
         } else {
-            $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+            $rStmt->bindValue(':looking', '%' . $mLooking . '%', PDO::PARAM_STR);
         }
 
-        $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
+        $rStmt->bindValue(':approved', $sApproved, PDO::PARAM_STR);
 
         if (!$bCount) {
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
         if (!$bCount) {
-            $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = $rStmt->fetchAll(PDO::FETCH_OBJ);
         } else {
             $mData = (int)$rStmt->fetchColumn();
         }

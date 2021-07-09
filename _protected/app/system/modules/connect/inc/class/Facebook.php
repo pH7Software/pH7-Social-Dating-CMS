@@ -33,10 +33,10 @@ class Facebook extends Api implements IApi
 {
     const GRAPH_URL = 'https://graph.facebook.com/';
 
-    /** @var \Facebook\GraphNodes\GraphUser */
+    /** @var GraphUser */
     private $oProfile;
 
-    /** @var \Facebook\GraphNodes\GraphLocation */
+    /** @var GraphLocation */
     private $oLocation;
 
     /** @var string */

@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 
 class Comment extends CommentCore
@@ -17,7 +18,7 @@ class Comment extends CommentCore
      *
      * @return string|void Returns the table if it is correct.
      *
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException
+     * @throws PH7InvalidArgumentException
      */
     public static function getTable($sTable)
     {

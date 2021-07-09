@@ -1,6 +1,9 @@
 <?php
+
+use PH7\Admin;
+
 defined('PH7') or exit('Restricted access');
-if (!\PH7\Admin::auth()) exit('Restricted access'); // Accessible only for admins
+if (!Admin::auth()) exit('Restricted access'); // Accessible only for admins
 
 /**
  * Copyright (c) 2011, oov. All rights reserved.
