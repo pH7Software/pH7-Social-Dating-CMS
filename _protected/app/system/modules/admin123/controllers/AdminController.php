@@ -157,11 +157,14 @@ class AdminController extends Controller
 
     public function deleteAll()
     {
+        $aActions = $this->httpRequest->post('action');
+        $bActionsEligible = !empty($aActions) && is_array($aActions) && count($aActions) > 0;
+
         try {
             if (!(new SecurityToken)->check('admin_action')) {
                 $this->sMsg = Form::errorTokenMsg();
-            } elseif (count($this->httpRequest->post('action')) > 0) {
-                foreach ($this->httpRequest->post('action') as $sAction) {
+            } elseif ($bActionsEligible) {
+                foreach ($aActions as $sAction) {
                     $aData = explode('_', $sAction);
                     $iId = (int)$aData[0];
                     $sUsername = (string)$aData[1];

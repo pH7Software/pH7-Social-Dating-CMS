@@ -221,10 +221,13 @@ class AdminController extends Controller
 
     public function approveAll()
     {
+        $aActions = $this->httpRequest->post('action');
+        $bActionsEligible = !empty($aActions) && is_array($aActions) && count($aActions) > 0;
+
         if (!(new SecurityToken)->check('aff_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        } elseif (count($this->httpRequest->post('action')) > 0) {
-            foreach ($this->httpRequest->post('action') as $sAction) {
+        } elseif ($bActionsEligible) {
+            foreach ($aActions as $sAction) {
                 $iId = (int)explode('_', $sAction)[0];
                 $this->sMsg = $this->moderateRegistration($iId, 1);
             }
@@ -238,10 +241,13 @@ class AdminController extends Controller
 
     public function disapproveAll()
     {
+        $aActions = $this->httpRequest->post('action');
+        $bActionsEligible = !empty($aActions) && is_array($aActions) && count($aActions) > 0;
+
         if (!(new SecurityToken)->check('aff_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        } elseif (count($this->httpRequest->post('action')) > 0) {
-            foreach ($this->httpRequest->post('action') as $sAction) {
+        } elseif ($bActionsEligible) {
+            foreach ($aActions as $sAction) {
                 $iId = (int)explode('_', $sAction)[0];
                 $this->sMsg = $this->moderateRegistration($iId, 0);
             }
@@ -302,10 +308,13 @@ class AdminController extends Controller
 
     public function banAll()
     {
+        $aActions = $this->httpRequest->post('action');
+        $bActionsEligible = !empty($aActions) && is_array($aActions) && count($aActions) > 0;
+
         if (!(new SecurityToken)->check('aff_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        } elseif (count($this->httpRequest->post('action')) > 0) {
-            foreach ($this->httpRequest->post('action') as $sAction) {
+        } elseif ($bActionsEligible) {
+            foreach ($aActions as $sAction) {
                 $iId = (int)explode('_', $sAction)[0];
 
                 $this->oAffModel->ban($iId, 1, DbTableName::AFFILIATE);
@@ -322,10 +331,13 @@ class AdminController extends Controller
 
     public function unBanAll()
     {
+        $aActions = $this->httpRequest->post('action');
+        $bActionsEligible = !empty($aActions) && is_array($aActions) && count($aActions) > 0;
+
         if (!(new SecurityToken)->check('aff_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        } elseif (count($this->httpRequest->post('action')) > 0) {
-            foreach ($this->httpRequest->post('action') as $sAction) {
+        } elseif ($bActionsEligible) {
+            foreach ($aActions as $sAction) {
                 $iId = (int)explode('_', $sAction)[0];
 
                 $this->oAffModel->ban($iId, 0, DbTableName::AFFILIATE);
@@ -342,10 +354,13 @@ class AdminController extends Controller
 
     public function deleteAll()
     {
+        $aActions = $this->httpRequest->post('action');
+        $bActionsEligible = !empty($aActions) && is_array($aActions) && count($aActions) > 0;
+
         if (!(new SecurityToken)->check('aff_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        } elseif (count($this->httpRequest->post('action')) > 0) {
-            foreach ($this->httpRequest->post('action') as $sAction) {
+        } elseif ($bActionsEligible) {
+            foreach ($aActions as $sAction) {
                 $aData = explode('_', $sAction);
                 $iId = (int)$aData[0];
                 $sUsername = (string)$aData[1];
