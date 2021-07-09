@@ -244,8 +244,6 @@ msgstr[1] ""
 
 #: _protected/app/system/core/assets/cron/96h/DatabaseCoreCron.php:69
 #: _protected/app/system/core/assets/cron/96h/GeneralCoreCron.php:27
-#: _protected/app/system/modules/admin123/controllers/UserController.php:460
-#: _protected/app/system/modules/affiliate/controllers/AdminController.php:410
 #: _repository/upgrade/0.1.2-0.1.3/info/conclusion.php:16
 #: _repository/upgrade/0.1.3-0.1.4/info/conclusion.php:16
 #: _repository/upgrade/0.1.4-0.1.6/info/conclusion.php:16
@@ -278,6 +276,11 @@ msgstr[1] ""
 #: _repository/upgrade/7.1.3-8.0.2/info/conclusion.php:17
 #: _repository/upgrade/8.0.2-10.0.8/info/conclusion.php:17
 msgid "Done!"
+msgstr ""
+
+#: _protected/app/system/modules/admin123/controllers/UserController.php:460
+#: _protected/app/system/modules/affiliate/controllers/AdminController.php:410
+msgid "Done! ✔"
 msgstr ""
 
 #: _protected/app/system/core/assets/cron/96h/DatabaseCoreCron.php:114

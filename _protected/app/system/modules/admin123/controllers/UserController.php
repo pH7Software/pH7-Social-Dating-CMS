@@ -511,7 +511,7 @@ class UserController extends Controller
 
                     $this->oUser->clearReadProfileCache($oUser->profileId);
 
-                    $sOutputMsg = t('Done!');
+                    $sOutputMsg = t('Done! ✔');
                 } else {
                     $sOutputMsg = t('Error! Bad argument in the URL.');
                 }

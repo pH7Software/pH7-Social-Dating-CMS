@@ -416,7 +416,7 @@ class AdminController extends Controller
                     $this->sendRegistrationMail($sSubject, $oUser);
                     $this->oAff->clearReadProfileCache($oUser->profileId, DbTableName::AFFILIATE);
 
-                    $sOutputMsg = t('Done!');
+                    $sOutputMsg = t('Done! ✔');
                 } else {
                     $sOutputMsg = t('Error! Bad argument in the URL.');
                 }
