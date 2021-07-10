@@ -281,7 +281,7 @@ class UserController extends Controller
     public function approveAll()
     {
         $aActions = $this->httpRequest->post('action');
-        $bActionsEligible = !empty($aActions) && is_array($aActions) && count($aActions) > 0;
+        $bActionsEligible = $this->areActionsEligible($aActions);
 
         if (!(new SecurityToken)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
@@ -301,7 +301,7 @@ class UserController extends Controller
     public function disapproveAll()
     {
         $aActions = $this->httpRequest->post('action');
-        $bActionsEligible = !empty($aActions) && is_array($aActions) && count($aActions) > 0;
+        $bActionsEligible = $this->areActionsEligible($aActions);
 
         if (!(new SecurityToken)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
@@ -377,7 +377,7 @@ class UserController extends Controller
     public function banAll()
     {
         $aActions = $this->httpRequest->post('action');
-        $bActionsEligible = !empty($aActions) && is_array($aActions) && count($aActions) > 0;
+        $bActionsEligible = $this->areActionsEligible($aActions);
 
         if (!(new SecurityToken)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
@@ -401,7 +401,7 @@ class UserController extends Controller
     public function unBanAll()
     {
         $aActions = $this->httpRequest->post('action');
-        $bActionsEligible = !empty($aActions) && is_array($aActions) && count($aActions) > 0;
+        $bActionsEligible = $this->areActionsEligible($aActions);
 
         if (!(new SecurityToken)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
@@ -424,7 +424,7 @@ class UserController extends Controller
     public function deleteAll()
     {
         $aActions = $this->httpRequest->post('action');
-        $bActionsEligible = !empty($aActions) && is_array($aActions) && count($aActions) > 0;
+        $bActionsEligible = $this->areActionsEligible($aActions);
 
         try {
             if (!(new SecurityToken)->check('user_action')) {
@@ -542,5 +542,17 @@ class UserController extends Controller
         ];
 
         return in_array($sWhere, $aWhereOptions, true);
+    }
+
+    /**
+     * Determines if the action can be processed or not
+     * by checking if the POST 'actions' has a correct value.
+     *
+     * @param array|null $mActions
+     *
+     * @return bool
+     */
+    private function areActionsEligible($mActions) {
+        return !empty($mActions) && is_array($mActions) && count($mActions) > 0;
     }
 }
