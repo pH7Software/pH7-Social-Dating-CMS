@@ -19,7 +19,7 @@ use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Util\Various;
 
-class UserController extends Controller
+class UserController extends BulkActionController
 {
     const PROFILES_PER_PAGE = 15;
     const SEARCH_NOT_FOUND_REDIRECT_DELAY = 2; // Seconds
@@ -542,17 +542,5 @@ class UserController extends Controller
         ];
 
         return in_array($sWhere, $aWhereOptions, true);
-    }
-
-    /**
-     * Determines if the action can be processed or not
-     * by checking if the POST 'actions' has a correct value.
-     *
-     * @param array|null $mActions
-     *
-     * @return bool
-     */
-    private function areActionsEligible($mActions) {
-        return !empty($mActions) && is_array($mActions) && count($mActions) > 0;
     }
 }

@@ -17,7 +17,7 @@ use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Url\Header;
 
-class AdminController extends Controller
+class AdminController extends BulkActionController
 {
     const PROFILES_PER_PAGE = 15;
 
@@ -158,7 +158,7 @@ class AdminController extends Controller
     public function deleteAll()
     {
         $aActions = $this->httpRequest->post('action');
-        $bActionsEligible = !empty($aActions) && is_array($aActions) && count($aActions) > 0;
+        $bActionsEligible = $this->areActionsEligible($aActions);
 
         try {
             if (!(new SecurityToken)->check('admin_action')) {

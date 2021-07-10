@@ -14,7 +14,7 @@ use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Url\Header;
 
-class AdminController extends Controller
+class AdminController extends BulkActionController
 {
     const REPORTS_PER_PAGE = 15;
 
@@ -101,10 +101,13 @@ class AdminController extends Controller
 
     public function deleteAll()
     {
+        $aActions = $this->httpRequest->post('action');
+        $bActionsEligible = $this->areActionsEligible($aActions);
+
         if (!(new Token)->check('report_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        } elseif (count($this->httpRequest->post('action')) > 0) {
-            foreach ($this->httpRequest->post('action') as $iId) {
+        } elseif ($bActionsEligible) {
+            foreach ($aActions as $iId) {
                 $iId = (int)$iId;
                 $this->oReportModel->delete($iId);
             }

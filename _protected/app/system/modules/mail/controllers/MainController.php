@@ -16,7 +16,7 @@ use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Url\Header;
 use stdClass;
 
-class MainController extends Controller
+class MainController extends BulkActionController
 {
     const EMAILS_PER_PAGE = 10;
 
@@ -346,11 +346,14 @@ class MainController extends Controller
 
     public function setTrashAll()
     {
+        $aActions = $this->httpRequest->post('action');
+        $bActionsEligible = $this->areActionsEligible($aActions);
+
         if (!(new Token)->check('mail_action')) {
             $this->sMsg = Form::errorTokenMsg();
         } else {
-            if (count($this->httpRequest->post('action')) > 0) {
-                foreach ($this->httpRequest->post('action') as $iId) {
+            if ($bActionsEligible) {
+                foreach ($aActions as $iId) {
                     $iId = (int)$iId;
 
                     $this->oMailModel->setReadMsg($iId);
@@ -392,11 +395,14 @@ class MainController extends Controller
 
     public function setRestoreAll()
     {
+        $aActions = $this->httpRequest->post('action');
+        $bActionsEligible = $this->areActionsEligible($aActions);
+
         if (!(new Token)->check('mail_action')) {
             $this->sMsg = Form::errorTokenMsg();
         } else {
-            if (count($this->httpRequest->post('action')) > 0) {
-                foreach ($this->httpRequest->post('action') as $iId) {
+            if ($bActionsEligible) {
+                foreach ($aActions as $iId) {
                     $iId = (int)$iId;
                     $this->oMailModel->setTo(
                         $this->iProfileId,
@@ -444,11 +450,14 @@ class MainController extends Controller
 
     public function setDeleteAll()
     {
+        $aActions = $this->httpRequest->post('action');
+        $bActionsEligible = $this->areActionsEligible($aActions);
+
         if (!(new Token)->check('mail_action')) {
             $this->sMsg = Form::errorTokenMsg();
         } else {
-            if (count($this->httpRequest->post('action')) > 0) {
-                foreach ($this->httpRequest->post('action') as $iId) {
+            if ($bActionsEligible) {
+                foreach ($aActions as $iId) {
                     $iId = (int)$iId;
 
                     if ($this->bAdminLogged) {

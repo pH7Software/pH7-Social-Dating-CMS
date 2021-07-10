@@ -13,7 +13,7 @@ use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Url\Header;
 
-class AdminController extends Controller
+class AdminController extends BulkActionController
 {
     const SUBSCRIBERS_PER_PAGE = 30;
     const REDIRECTION_DELAY_IN_SEC = 5;
@@ -101,11 +101,13 @@ class AdminController extends Controller
     public function deleteAll()
     {
         $sMsg = ''; // Default msg value
+        $aActions = $this->httpRequest->post('action');
+        $bActionsEligible = $this->areActionsEligible($aActions);
 
         if (!(new SecurityToken)->check('subscriber_action')) {
             $sMsg = Form::errorTokenMsg();
-        } elseif (count($this->httpRequest->post('action')) > 0) {
-            foreach ($this->httpRequest->post('action') as $sEmail) {
+        } elseif ($bActionsEligible) {
+            foreach ($aActions as $sEmail) {
                 $this->oSubscriberModel->unsubscribe($sEmail);
             }
 

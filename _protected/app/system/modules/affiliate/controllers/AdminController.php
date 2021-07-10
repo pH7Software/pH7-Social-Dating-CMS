@@ -18,7 +18,7 @@ use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Util\Various;
 
-class AdminController extends Controller
+class AdminController extends BulkActionController
 {
     const PROFILES_PER_PAGE = 15;
     const REDIRECTION_DELAY_IN_SEC = 5;
@@ -222,7 +222,7 @@ class AdminController extends Controller
     public function approveAll()
     {
         $aActions = $this->httpRequest->post('action');
-        $bActionsEligible = !empty($aActions) && is_array($aActions) && count($aActions) > 0;
+        $bActionsEligible = $this->areActionsEligible($aActions);
 
         if (!(new SecurityToken)->check('aff_action')) {
             $this->sMsg = Form::errorTokenMsg();
@@ -242,7 +242,7 @@ class AdminController extends Controller
     public function disapproveAll()
     {
         $aActions = $this->httpRequest->post('action');
-        $bActionsEligible = !empty($aActions) && is_array($aActions) && count($aActions) > 0;
+        $bActionsEligible = $this->areActionsEligible($aActions);
 
         if (!(new SecurityToken)->check('aff_action')) {
             $this->sMsg = Form::errorTokenMsg();
@@ -309,7 +309,7 @@ class AdminController extends Controller
     public function banAll()
     {
         $aActions = $this->httpRequest->post('action');
-        $bActionsEligible = !empty($aActions) && is_array($aActions) && count($aActions) > 0;
+        $bActionsEligible = $this->areActionsEligible($aActions);
 
         if (!(new SecurityToken)->check('aff_action')) {
             $this->sMsg = Form::errorTokenMsg();
@@ -332,7 +332,7 @@ class AdminController extends Controller
     public function unBanAll()
     {
         $aActions = $this->httpRequest->post('action');
-        $bActionsEligible = !empty($aActions) && is_array($aActions) && count($aActions) > 0;
+        $bActionsEligible = $this->areActionsEligible($aActions);
 
         if (!(new SecurityToken)->check('aff_action')) {
             $this->sMsg = Form::errorTokenMsg();
@@ -355,7 +355,7 @@ class AdminController extends Controller
     public function deleteAll()
     {
         $aActions = $this->httpRequest->post('action');
-        $bActionsEligible = !empty($aActions) && is_array($aActions) && count($aActions) > 0;
+        $bActionsEligible = $this->areActionsEligible($aActions);
 
         if (!(new SecurityToken)->check('aff_action')) {
             $this->sMsg = Form::errorTokenMsg();
