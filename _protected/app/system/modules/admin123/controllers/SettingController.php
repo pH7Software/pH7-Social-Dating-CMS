@@ -44,7 +44,7 @@ class SettingController extends Controller
         if ((new SecurityToken)->checkUrl()) {
             $this->resetColorFields();
 
-            $sMsg = t('Colors successfully reset!');
+            $sMsg = t('Colors are successfully reset!');
             $sMsgType = Design::SUCCESS_TYPE;
         } else {
             $sMsg = Form::errorTokenMsg();

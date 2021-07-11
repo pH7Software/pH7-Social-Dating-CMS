@@ -2109,7 +2109,7 @@ msgid "General Settings"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/SettingController.php:47
-msgid "Colors successfully reset!"
+msgid "Colors are successfully reset!"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/SettingController.php:77
