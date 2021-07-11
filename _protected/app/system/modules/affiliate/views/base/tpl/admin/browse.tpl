@@ -125,12 +125,12 @@
                             <a href="{{ $design->url('affiliate','admin','loginuseras',$aff->profileId) }}" title="{lang 'Login as the affiliate (to edit all the user account).'}">{lang 'Login'}</a> |
 
                             {if $aff->ban == UserCore::BAN_STATUS}
-                                {{ $design->popupLinkConfirm(t('Ban'), 'affiliate', 'admin', 'ban', $aff->profileId) }}
-                            {else}
                                 {{ $design->popupLinkConfirm(t('UnBan'), 'affiliate', 'admin', 'unban', $aff->profileId) }}
+                            {else}
+                                {{ $design->popupLinkConfirm(t('Ban'), 'affiliate', 'admin', 'ban', $aff->profileId) }}
                             {/if}
 
-                            {if $aff->active != 1}
+                            {if $aff->active != RegistrationCore::NO_ACTIVATION}
                                 | {{ $design->popupLinkConfirm(t('Approve'), 'affiliate', 'admin', 'approve', $aff->profileId) }}
                                 or {{ $design->popupLinkConfirm(t('Disapprove (notified user by email)'), 'affiliate', 'admin', 'disapprove', $aff->profileId) }}
                             {/if}
