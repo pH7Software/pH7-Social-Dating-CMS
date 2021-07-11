@@ -8,7 +8,7 @@
 
 namespace PH7;
 
-abstract class BulkActionController extends Controller
+trait BulkAction
 {
     /**
      * Determines if the action can be processed or not

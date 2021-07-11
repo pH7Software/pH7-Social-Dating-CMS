@@ -13,8 +13,10 @@ use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Url\Header;
 
-class AdminController extends BulkActionController
+class AdminController extends Controller
 {
+    use BulkAction;
+
     const SUBSCRIBERS_PER_PAGE = 30;
     const REDIRECTION_DELAY_IN_SEC = 5;
 

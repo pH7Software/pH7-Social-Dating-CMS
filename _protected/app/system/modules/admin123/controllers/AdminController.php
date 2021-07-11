@@ -17,8 +17,10 @@ use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Url\Header;
 
-class AdminController extends BulkActionController
+class AdminController extends Controller
 {
+    use BulkAction;
+
     const PROFILES_PER_PAGE = 15;
 
     /** @var AdminModel */

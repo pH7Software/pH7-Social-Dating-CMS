@@ -16,8 +16,10 @@ use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Url\Header;
 use stdClass;
 
-class MainController extends BulkActionController
+class MainController extends Controller
 {
+    use BulkAction;
+
     const EMAILS_PER_PAGE = 10;
 
     /** @var MailModel */

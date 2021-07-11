@@ -18,8 +18,10 @@ use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Util\Various;
 
-class AdminController extends BulkActionController
+class AdminController extends Controller
 {
+    use BulkAction;
+
     const PROFILES_PER_PAGE = 15;
     const REDIRECTION_DELAY_IN_SEC = 5;
 

@@ -19,8 +19,10 @@ use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Util\Various;
 
-class UserController extends BulkActionController
+class UserController extends Controller
 {
+    use BulkAction;
+
     const PROFILES_PER_PAGE = 15;
     const SEARCH_NOT_FOUND_REDIRECT_DELAY = 2; // Seconds
 
