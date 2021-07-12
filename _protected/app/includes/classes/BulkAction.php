@@ -18,7 +18,8 @@ trait BulkAction
      *
      * @return bool
      */
-    protected function areActionsEligible($mActions) {
+    protected function areActionsEligible($mActions)
+    {
         return !empty($mActions) && is_array($mActions) && count($mActions) > 0;
     }
 }
