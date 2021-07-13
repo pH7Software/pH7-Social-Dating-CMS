@@ -21,6 +21,8 @@ use PH7\Framework\File\TooLargeException;
 
 class Image
 {
+    const MAX_FILENAME_LENGTH = 16;
+
     /*** Alias ***/
     const JPG = IMAGETYPE_JPEG;
     const PNG = IMAGETYPE_PNG;
@@ -344,7 +346,9 @@ class Image
 
             // Invalid Zone
             default:
-                throw new PH7InvalidArgumentException('Invalid image crop zone ' . $sZone . ' given for image helper zoneCrop().');
+                throw new PH7InvalidArgumentException(
+                    'Invalid image crop zone ' . $sZone . ' given for image helper zoneCrop().'
+                );
         }
 
         return $this->crop($iX, $iY, $iWidth, $iHeight);
@@ -433,7 +437,9 @@ class Image
 
             // Invalid Zone
             default:
-                throw new PH7InvalidArgumentException('Invalid format Image in method ' . __METHOD__ . ' of class ' . __CLASS__);
+                throw new PH7InvalidArgumentException(
+                    'Invalid format Image in method ' . __METHOD__ . ' of class ' . __CLASS__
+                );
         }
 
         return $this;
@@ -473,7 +479,9 @@ class Image
 
             // Invalid Zone
             default:
-                throw new PH7InvalidArgumentException('Invalid format image in method ' . __METHOD__ . ' of class ' . __CLASS__);
+                throw new PH7InvalidArgumentException(
+                    'Invalid format image in method ' . __METHOD__ . ' of class ' . __CLASS__
+                );
         }
 
         return $this;
@@ -484,7 +492,7 @@ class Image
      */
     public function getFileName()
     {
-        return $this->rImage;
+        return substr($this->sFile, 0, self::MAX_FILENAME_LENGTH);
     }
 
     /**
