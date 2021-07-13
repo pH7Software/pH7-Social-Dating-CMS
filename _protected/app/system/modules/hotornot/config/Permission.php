@@ -16,8 +16,7 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        // If the admin is not logged (but can be if the admin use "login as user" feature)
-        if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
+        if ($this->isNotAdmin()) {
             if (!$this->checkMembership() || !$this->group->hot_or_not) {
                 $this->paymentRedirect();
             }

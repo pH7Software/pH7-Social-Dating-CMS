@@ -130,4 +130,13 @@ abstract class PermissionCore extends Framework\Core\Core
     {
         return t('Please go to the admin panel and log in as administrator.');
     }
+
+
+    /**
+     * @return bool TRUE if the admin is not logged in (TRUE as well if the admin use "login as user").
+     */
+    protected function isNotAdmin()
+    {
+        return !AdminCore::auth() || UserCore::isAdminLoggedAs();
+    }
 }

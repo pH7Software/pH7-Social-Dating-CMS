@@ -23,8 +23,7 @@ class Permission extends PermissionCore
             $this->signInRedirect();
         }
 
-        // If the admin is not logged (but can still be if admin use "login as user" feature)
-        if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
+        if ($this->isNotAdmin()) {
             if (!$this->checkMembership() || !$this->group->view_pictures) {
                 $this->paymentRedirect();
             } elseif (($this->registry->action === 'addalbum' || $this->registry->action === 'addphoto') &&
