@@ -76,7 +76,7 @@ class AdminBlogForm
         $oForm->addElement(new HTMLExternal('<div class="label_flow">'));
         $oForm->addElement(new Checkbox(t('Categories:'), 'category_id', $aCategoryNames, ['description' => t('Select a category that fits the best for your article.'), 'required' => 1]));
         $oForm->addElement(new HTMLExternal('</div>'));
-        $oForm->addElement(new Textarea(t('Body:'), 'content', ['validation' => new Str(30), 'required' => 1]));
+        $oForm->addElement(new Textarea(t('Body:'), 'content', ['validation' => new Str(30), 'rows' => 8, 'required' => 1]));
         $oForm->addElement(new Textbox(t('Language of the article:'), 'lang_id', ['description' => t('e.g., "en", "fr", "es", "js"'), 'value' => PH7_LANG_CODE, 'pattern' => '[a-z]{2}', 'validation' => new Str(2, 2), 'required' => 1]));
         $oForm->addElement(new Textbox(t('Slogan:'), 'slogan', ['validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)]));
         $oForm->addElement(new File(t('Thumbnail:'), 'thumb', ['accept' => 'image/*']));

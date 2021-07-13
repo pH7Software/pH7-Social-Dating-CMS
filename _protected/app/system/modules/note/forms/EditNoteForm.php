@@ -95,6 +95,7 @@ class EditNoteForm
                         'data-profile_id' => $iProfileId,
                         'id' => 'post_id',
                         'validation' => new \PFBC\Validation\Str(2, 50),
+                        'rows' => 8,
                         'required' => 1
                     ]
                 )
