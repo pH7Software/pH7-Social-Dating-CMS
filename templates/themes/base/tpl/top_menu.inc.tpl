@@ -479,10 +479,6 @@
                 </ul>
               </li>
             {/if}
-
-            {if $is_webcam_enabled}
-              <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picturewebcam') }}" title="{lang 'Moderate the Webcam Pictures'}"><i class="fa fa-camera"></i> {lang 'Webcam Pictures'}</a></li>
-            {/if}
           </ul>
         </li>
 

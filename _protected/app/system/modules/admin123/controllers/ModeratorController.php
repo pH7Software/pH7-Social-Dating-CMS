@@ -175,18 +175,6 @@ class ModeratorController extends Controller
         $this->output();
     }
 
-    public function pictureWebcam()
-    {
-        Header::redirect(
-            Uri::get(
-                'webcam',
-                'webcam',
-                'picture'
-            ),
-            t('Welcome to the Picture Webcam in "administrator mode"')
-        );
-    }
-
     public function approvedPictureAlbum()
     {
         if ($this->oModeratorModel->approvedPictureAlbum(
