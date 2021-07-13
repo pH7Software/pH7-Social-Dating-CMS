@@ -12,7 +12,6 @@ namespace PH7;
 
 use PFBC\Element\Button;
 use PFBC\Element\Checkbox;
-use PFBC\Element\CKEditor;
 use PFBC\Element\Country;
 use PFBC\Element\Date;
 use PFBC\Element\Email;
@@ -21,6 +20,7 @@ use PFBC\Element\Hidden;
 use PFBC\Element\HTMLExternal;
 use PFBC\Element\Password;
 use PFBC\Element\Radio;
+use PFBC\Element\Textarea;
 use PFBC\Element\Textbox;
 use PFBC\Element\Token;
 use PFBC\Validation\BirthDate;
@@ -82,7 +82,7 @@ class AddUserForm
         $oForm->addElement(new Textbox(t('State/Province:'), 'state', ['id' => 'str_state', 'validation' => new Str(2, 150)]));
         $oForm->addElement(new Textbox(t('Postal Code:'), 'zip_code', ['id' => 'str_zip_code', 'validation' => new Str(2, 15)]));
         $oForm->addElement(new Textbox(t('Punchline/Headline:'), 'punchline', ['validation' => new Str(5, 150)]));
-        $oForm->addElement(new CKEditor(t('Description:'), 'description', ['validation' => new Str(10, 2000), 'required' => 1]));
+        $oForm->addElement(new Textarea(t('Description:'), 'description', ['validation' => new Str(10, 2000), 'required' => 1]));
         $oForm->addElement(new File(t('Profile Photo:'), 'avatar', ['accept' => 'image/*']));
         $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
         $oForm->addElement(new Button);

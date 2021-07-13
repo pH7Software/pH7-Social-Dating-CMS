@@ -9,9 +9,9 @@
 namespace PH7;
 
 use PFBC\Element\Button;
-use PFBC\Element\CKEditor;
 use PFBC\Element\Hidden;
 use PFBC\Element\HTMLExternal;
+use PFBC\Element\Textarea;
 use PFBC\Element\Textbox;
 use PFBC\Element\Token;
 use PFBC\Validation\Str;
@@ -52,7 +52,7 @@ class MetaMainForm
 
         $oForm->addElement(new Textbox(t('Slogan:'), 'slogan', ['description' => t('Left slogan (headline) mainly displaying on the visitors homepage'), 'value' => $oMeta->slogan, 'validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH), 'required' => 1]));
 
-        $oForm->addElement(new CKEditor(t('SEO text:'), 'promo_text', ['description' => t('Promotional text displaying on the visitors homepage.'), 'value' => $oMeta->promoText, 'required' => 1]));
+        $oForm->addElement(new Textarea(t('SEO text:'), 'promo_text', ['description' => t('Promotional text displaying on the visitors homepage.'), 'value' => $oMeta->promoText, 'required' => 1]));
 
         $oForm->addElement(new Textbox(t('Description (meta tag):'), 'meta_description', ['value' => $oMeta->metaDescription, 'validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH), 'required' => 1]));
 

@@ -10,11 +10,11 @@ namespace PH7;
 
 use PFBC\Element\Button;
 use PFBC\Element\Checkbox;
-use PFBC\Element\CKEditor;
 use PFBC\Element\File;
 use PFBC\Element\Hidden;
 use PFBC\Element\HTMLExternal;
 use PFBC\Element\Radio;
+use PFBC\Element\Textarea;
 use PFBC\Element\Textbox;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
@@ -96,7 +96,7 @@ class EditAdminBlogForm
             $oForm->addElement(new HTMLExternal('<div class="label_flow">'));
             $oForm->addElement(new Checkbox(t('Categories:'), 'category_id', $aCategoryNames, ['description' => t('Select a category that fits the best for your article.'), 'value' => $aSelectedCategories, 'required' => 1]));
             $oForm->addElement(new HTMLExternal('</div>'));
-            $oForm->addElement(new CKEditor(t('Body:'), 'content', ['value' => $oPost->content, 'validation' => new \PFBC\Validation\Str(30), 'required' => 1]));
+            $oForm->addElement(new Textarea(t('Body:'), 'content', ['value' => $oPost->content, 'validation' => new \PFBC\Validation\Str(30), 'rows' => 8, 'required' => 1]));
             $oForm->addElement(new Textbox(t('Language of your article:'), 'lang_id', ['value' => $oPost->langId, 'description' => t('e.g., "en", "fr", "es", "jp"'), 'pattern' => '[a-z]{2}', 'validation' => new \PFBC\Validation\Str(2, 2), 'required' => 1]));
             $oForm->addElement(new Textbox(t('Slogan:'), 'slogan', ['value' => $oPost->slogan, 'validation' => new \PFBC\Validation\Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)]));
             $oForm->addElement(new File(t('Thumbnail:'), 'thumb', ['accept' => 'image/*']));
