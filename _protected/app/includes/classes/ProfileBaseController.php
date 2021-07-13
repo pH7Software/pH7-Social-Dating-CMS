@@ -134,8 +134,12 @@ abstract class ProfileBaseController extends Controller
         }
 
         if (!$this->bUserAuth && $oUserPrivacyViews->privacyProfile === PrivacyCore::ONLY_USERS) {
-            $this->view->error = t('Whoops! "%0%" profile is only visible to members. Please <a href="%1%">login</a> or <a href="%2%">register</a> to see this profile.',
-                $oUser->username, Uri::get('user', 'main', 'login'), Uri::get('user', 'signup', 'step1'));
+            $this->view->error = t(
+                'Whoops! "%0%" profile is only visible to members. Please <a href="%1%">login</a> or <a href="%2%">register</a> to see this profile.',
+                $oUser->username,
+                Uri::get('user', 'main', 'login'),
+                Uri::get('user', 'signup', 'step1')
+            );
         } elseif ($oUserPrivacyViews->privacyProfile === PrivacyCore::ONLY_ME && !$this->isOwnProfile()) {
             $this->view->error = t('Whoops! "%0%" profile is not available to you.', $oUser->username);
         }
@@ -227,7 +231,8 @@ abstract class ProfileBaseController extends Controller
             $sMailLink = Uri::get(
                 'user',
                 'signup',
-                'step1', '?' . Url::httpBuildQuery($aUrlParms),
+                'step1',
+                '?' . Url::httpBuildQuery($aUrlParms),
                 false
             );
         }
@@ -278,7 +283,12 @@ abstract class ProfileBaseController extends Controller
 
         if ($this->bUserAuth) {
             if ($this->isFriend(FriendCoreModel::PENDING_REQUEST)) {
-                $sFriendLink = Uri::get('friend', 'main', 'index', $this->session->get('member_username') . '?looking=' . $oUser->username);
+                $sFriendLink = Uri::get(
+                    'friend',
+                    'main',
+                    'index',
+                    $this->session->get('member_username') . '?looking=' . $oUser->username
+                );
             } elseif ($this->isFriend(FriendCoreModel::APPROVED_REQUEST)) {
                 $sFriendLink = 'javascript:void(0)" onclick="friend(\'delete\',' . $this->iProfileId . ',\'' . $sCsrfToken . '\')';
             } else {
@@ -296,7 +306,8 @@ abstract class ProfileBaseController extends Controller
             $sFriendLink = Uri::get(
                 'user',
                 'signup',
-                'step1', '?' . Url::httpBuildQuery($aUrlParms),
+                'step1',
+                '?' . Url::httpBuildQuery($aUrlParms),
                 false
             );
         }
@@ -314,9 +325,15 @@ abstract class ProfileBaseController extends Controller
      */
     protected function getFilteredData(stdClass $oUser, stdClass $oFields)
     {
-        $sFirstName = !empty($oUser->firstName) ? $this->str->escape($this->str->upperFirst($oUser->firstName), true) : '';
+        $sFirstName = !empty($oUser->firstName) ? $this->str->escape(
+            $this->str->upperFirst($oUser->firstName),
+            true
+        ) : '';
         $sLastName = !empty($oUser->lastName) ? $this->str->escape($this->str->upperFirst($oUser->lastName), true) : '';
-        $sMiddleName = !empty($oFields->middleName) ? $this->str->escape($this->str->upperFirst($oFields->middleName), true) : '';
+        $sMiddleName = !empty($oFields->middleName) ? $this->str->escape(
+            $this->str->upperFirst($oFields->middleName),
+            true
+        ) : '';
 
         $sCountry = !empty($oFields->country) ? $oFields->country : '';
         $sCity = !empty($oFields->city) ? $this->str->escape($this->str->upperFirst($oFields->city), true) : '';
