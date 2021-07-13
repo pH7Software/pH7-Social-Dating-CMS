@@ -39,6 +39,5 @@ return [
     'create_forum_topics' => 1,
     'answer_forum_topics' => 1,
     'games_access' => 1,
-    'webcam_access' => 1,
     'member_site_access' => 1,
 ];

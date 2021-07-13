@@ -82,7 +82,6 @@ class SettingFormProcess extends Form
         'picture_manual_approval' => 'pictureManualApproval',
         'nudity_filter' => 'nudityFilter',
         'video_manual_approval' => 'videoManualApproval',
-        'webcam_picture_manual_approval' => 'webcamPictureManualApproval',
 
         // Email
         'email_name' => 'emailName',

@@ -70,9 +70,6 @@
     <!-- Hot Or Not -->
       <route url="hot-or-not" path="system/modules" module="hotornot" controller="main" action="rating" />
 
-    <!-- Webcam -->
-      <route url="picture-webcam" path="system/modules" module="webcam" controller="webcam" action="picture" />
-
     <!-- Mail -->
       <route url="mail/compose/?([a-zA-Z0-9_-]+)?/?([^/]+)?" path="system/modules" module="mail" controller="main" action="compose" vars="recipient,title" />
       <route url="mail/outbox/?([0-9]+)?" path="system/modules" module="mail" controller="main" action="outbox" vars="id" />

@@ -1911,10 +1911,6 @@ msgstr ""
 msgid "Profile Backgrounds Moderation"
 msgstr ""
 
-#: _protected/app/system/modules/admin123/controllers/ModeratorController.php:186
-msgid "Welcome to the Picture Webcam in \"administrator mode\""
-msgstr ""
-
 #: _protected/app/system/modules/admin123/controllers/ModeratorController.php:199
 msgid "The photo album has been approved!"
 msgstr ""
@@ -3368,10 +3364,6 @@ msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:147
 msgid "Videos Manual Approval:"
-msgstr ""
-
-#: _protected/app/system/modules/admin123/forms/SettingForm.php:149
-msgid "Webcam Pictures Manual Approval:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:149
@@ -8177,35 +8169,6 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
-#: _protected/app/system/modules/webcam/assets/ajax/BrowsePictureAjax.php:128
-msgid "The photo has been deleted!"
-msgstr ""
-
-#: _protected/app/system/modules/webcam/assets/ajax/BrowsePictureAjax.php:130
-msgid "Sorry, we haven't found any photos!"
-msgstr ""
-
-#: _protected/app/system/modules/webcam/controllers/WebcamController.php:26
-msgid "Webcam Picture Party Fun"
-msgstr ""
-
-#: _protected/app/system/modules/webcam/controllers/WebcamController.php:29
-msgid "Come take your best pictures of you and your friends on the wall of the best photo shoots!"
-msgstr ""
-
-#: _protected/app/system/modules/webcam/controllers/WebcamController.php:30
-#: _protected/app/system/modules/webcam/controllers/WebcamController.php:45
-msgid "Guaranteed fun!"
-msgstr ""
-
-#: _protected/app/system/modules/webcam/controllers/WebcamController.php:41
-msgid "Webcam Video Party Fun"
-msgstr ""
-
-#: _protected/app/system/modules/webcam/controllers/WebcamController.php:44
-msgid "Come take your best videos of you and your friends on the wall of the best video shoots!"
-msgstr ""
-
 #: _protected/app/system/modules/xml/controllers/RssController.php:24
 msgid "RSS Feed List"
 msgstr ""
@@ -12210,52 +12173,6 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/signuptop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/visitortop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/video_f6fa126c5efdb5b591bfcfd28780c0a0/base/maintop_menu.inc.cpl.php:19
-msgid "Moderate the Webcam Pictures"
-msgstr ""
-
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/accounttop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/infotop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/moduletop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/tooltop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/usertop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/hometop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/connect_35f0edcc582717793663d723f2cb335c/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/cool-profile-page_24c864680ee1bf87a84b989b035a6c21/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/error_440d7b9b5d26e425e8c5f919d93855c4/base/httptop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/ph7cms-helper_c718c7a0c6017242b5287b948f02581d/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/picture_10d1588a50ebee22e4a7c126111489e2/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/browsetop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/profiletop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/signuptop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/visitortop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/video_f6fa126c5efdb5b591bfcfd28780c0a0/base/maintop_menu.inc.cpl.php:19
-msgid "Webcam Pictures"
-msgstr ""
-
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/accounttop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/infotop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/moduletop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/tooltop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/usertop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/hometop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/connect_35f0edcc582717793663d723f2cb335c/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/cool-profile-page_24c864680ee1bf87a84b989b035a6c21/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/error_440d7b9b5d26e425e8c5f919d93855c4/base/httptop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/ph7cms-helper_c718c7a0c6017242b5287b948f02581d/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/picture_10d1588a50ebee22e4a7c126111489e2/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/browsetop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/profiletop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/signuptop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/visitortop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/video_f6fa126c5efdb5b591bfcfd28780c0a0/base/maintop_menu.inc.cpl.php:19
 msgid "File/Page CMS"
 msgstr ""
 
@@ -15940,13 +15857,6 @@ msgstr ""
 msgid "Add new videos"
 msgstr ""
 
-#: _protected/app/system/modules/webcam/views/base/tpl/webcam/picture.tpl:8
-msgid "Shoot!"
-msgstr ""
-
-#: _protected/app/system/modules/webcam/views/base/tpl/webcam/picture.tpl:11
-msgid "Upload!"
-msgstr ""
 
 #: _protected/app/system/modules/xml/views/base/tpl/blog.rss.xml.tpl:7
 #: _protected/app/system/modules/xml/views/base/tpl/comment.inc.rss.xml.tpl:7
