@@ -16,7 +16,7 @@
         <p>{error}</p>
     {/if}
 
-    <p>
+    <p class="vs_tbMarg">
         {if isset($forum_name,$forum_id)}
             <a class="btn btn-default btn-sm" rel="nofollow" href="{{ $design->url('forum', 'forum', 'addtopic', "$forum_name,$forum_id") }}">{lang 'Create a new Topic'}</a>
         {else}
