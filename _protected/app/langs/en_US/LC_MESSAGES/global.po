@@ -15018,7 +15018,7 @@ msgid "Views: %0%"
 msgstr ""
 
 #: _protected/app/system/modules/forum/views/base/tpl/forum/topic.tpl:21
-msgid "Create a new Topic"
+msgid "Create new Topic"
 msgstr ""
 
 #: _protected/app/system/modules/forum/views/base/tpl/forum/topic.tpl:23

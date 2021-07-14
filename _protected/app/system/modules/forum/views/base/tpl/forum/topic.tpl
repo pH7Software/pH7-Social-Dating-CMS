@@ -18,9 +18,13 @@
 
     <p class="vs_tbMarg">
         {if isset($forum_name,$forum_id)}
-            <a class="btn btn-default btn-sm" rel="nofollow" href="{{ $design->url('forum', 'forum', 'addtopic', "$forum_name,$forum_id") }}">{lang 'Create a new Topic'}</a>
+            <a class="btn btn-default btn-sm" rel="nofollow" href="{{ $design->url('forum', 'forum', 'addtopic', "$forum_name,$forum_id") }}">
+                {lang 'Create new Topic'}
+            </a>
         {else}
-            <a class="btn btn-default btn-sm" rel="nofollow" href="{{ $design->url('forum', 'forum', 'search') }}">{lang 'New Search'}</a>
+            <a class="btn btn-default btn-sm" rel="nofollow" href="{{ $design->url('forum', 'forum', 'search') }}">
+                {lang 'New Search'}
+            </a>
         {/if}
     </p>
 
