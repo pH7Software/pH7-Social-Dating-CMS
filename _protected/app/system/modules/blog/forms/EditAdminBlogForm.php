@@ -153,9 +153,7 @@ class EditAdminBlogForm
             $oForm->addElement(new File(t('Thumbnail:'), 'thumb', ['accept' => 'image/*']));
             $oForm->addElement(
                 new HTMLExternal(
-                    '<p><br /><img src="' . Blog::getThumb($oPost->blogId) . '" alt="' . t(
-                        'Thumbnail'
-                    ) . '" title="' . t('The current thumbnail of your post.') . '" class="avatar" /></p>'
+                    '<p><br /><img src="' . Blog::getThumb($oPost->blogId) . '" alt="' . t('Thumbnail') . '" title="' . t('The current thumbnail of your post.') . '" class="avatar" /></p>'
                 )
             );
 
