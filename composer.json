@@ -63,7 +63,7 @@
     "facebook/graph-sdk": "^5.6",
     "stripe/stripe-php": "^5.9",
     "braintree/braintree_php": "^3.27",
-    "arcansecurity/skeerel-php": "^2.3",
+    "arcansecurity/skeerel-php": "^2.5",
     "twilio/sdk": "^5.28",
     "arcturial/clickatell": "^3.0",
     "fakerphp/faker": "^1.9",
