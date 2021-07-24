@@ -330,7 +330,7 @@ CREATE TABLE IF NOT EXISTS ph7_albums_pictures (
   albumId int check (albumId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_albums_pictures_seq'),
   profileId int check (profileId > 0) NOT NULL,
   name varchar(80) NOT NULL,
-  thumb char(11) NOT NULL,
+  thumb char(11) NOT NULL, -- e.g. 2-thumb.jpg
   approved enum('1','0') DEFAULT '1',
   votes int check (votes > 0) DEFAULT 0,
   score double precision check (score > 0) DEFAULT 0,
@@ -351,7 +351,7 @@ CREATE TABLE IF NOT EXISTS ph7_albums_videos (
   albumId int check (albumId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_albums_videos_seq'),
   profileId int check (profileId > 0) NOT NULL,
   name varchar(80) NOT NULL,
-  thumb char(11) NOT NULL,
+  thumb char(11) NOT NULL, -- e.g. 5-thumb.jpg
   approved enum('1','0') DEFAULT '1',
   votes int check (votes > 0) DEFAULT 0,
   score double precision check (score > 0) DEFAULT 0,

@@ -295,7 +295,7 @@ CREATE TABLE IF NOT EXISTS ph7_albums_pictures (
   albumId int(10) unsigned NOT NULL AUTO_INCREMENT,
   profileId int(10) unsigned NOT NULL,
   name varchar(80) NOT NULL,
-  thumb char(11) NOT NULL,
+  thumb char(11) NOT NULL, -- e.g. 2-thumb.jpg
   approved enum('1','0') DEFAULT '1',
   votes int(9) unsigned DEFAULT 0,
   score float(9) unsigned DEFAULT 0,
@@ -312,7 +312,7 @@ CREATE TABLE IF NOT EXISTS ph7_albums_videos (
   albumId int(10) unsigned NOT NULL AUTO_INCREMENT,
   profileId int(10) unsigned NOT NULL,
   name varchar(80) NOT NULL,
-  thumb char(11) NOT NULL,
+  thumb char(11) NOT NULL, -- e.g. 5-thumb.jpg
   approved enum('1','0') DEFAULT '1',
   votes int(9) unsigned DEFAULT 0,
   score float(9) unsigned DEFAULT 0,
