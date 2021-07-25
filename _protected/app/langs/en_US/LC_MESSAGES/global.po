@@ -15749,7 +15749,7 @@ msgid "Warning:"
 msgstr ""
 
 #: _protected/app/system/modules/user/views/base/tpl/setting/avatar.tpl:12
-msgid "Your profile photo must contain a photo of you under penalty of banishment of your account!"
+msgid "Your profile photo must contain a photo of yourself under penalty of banishment of your account!"
 msgstr ""
 
 #: _protected/app/system/modules/user/views/base/tpl/setting/avatar.tpl:18
