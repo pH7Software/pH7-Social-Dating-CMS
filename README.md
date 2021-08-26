@@ -316,7 +316,7 @@ Feel free to send me an email for any suggestions or feedback you may have 🤩,
 
 **pH7CMS** is generously distributed under **Open Source, Free** License.
 
-License: [GNU General Public License 3](https://www.gnu.org/licenses/gpl.html) or later; See the *PH7.LICENSE.txt* and *PH7.COPYRIGHT.txt* files for more details.
+Generously distributed under [MIT](https://opensource.org/licenses/MIT); See the *PH7.LICENSE.txt* and *PH7.COPYRIGHT.txt* files for further details.
 
 
 
