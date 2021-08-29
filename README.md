@@ -314,10 +314,9 @@ Feel free to send me an email for any suggestions or feedback you may have 🤩,
 
 ## ⚖️ License
 
-**pH7CMS** is generously distributed under **Open Source, Free** License.
+**pH7Builder** (AKA pH7CMS) is an open-source software generously distributed under the [MIT](https://opensource.org/licenses/MIT).
 
-Generously distributed under [MIT](https://opensource.org/licenses/MIT); See the *PH7.LICENSE.txt* and *PH7.COPYRIGHT.txt* files for further details.
-
+See the *PH7.LICENSE.txt* and *PH7.COPYRIGHT.txt* files for further details.
 
 
 ---

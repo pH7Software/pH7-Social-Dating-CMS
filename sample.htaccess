@@ -1,7 +1,7 @@
 ####################
 # Author:         Pierre-Henry Soria <hello@ph7cms.com>
 # Copyright:      (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
-# License:        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+# License:        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 ####################
 
 ## Note: You can remove some lines below if your Apache server already supports one of the parameters below (this will relieve Apache since this file is read on every request). ##

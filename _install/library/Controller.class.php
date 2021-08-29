@@ -4,7 +4,7 @@
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @link             http://ph7cms.com
  * @package          PH7 / Install / Library
  */
@@ -32,7 +32,7 @@ abstract class Controller implements Controllable
     const AUTHOR_URL = 'https://github.com/pH-7';
     const SOFTWARE_GIT_REPO_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS';
     const SOFTWARE_TWITTER = '@pH7Soft';
-    const SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.';
+    const SOFTWARE_LICENSE = 'MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.';
     const SOFTWARE_COPYRIGHT = '© (c) 2012-%s, Pierre-Henry Soria. All Rights Reserved.';
     const TOTAL_INSTALL_STEPS = 7;
 
