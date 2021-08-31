@@ -426,7 +426,7 @@ class Db
         $sMySQLVer = self::$oDb->getAttribute(PDO::ATTR_SERVER_VERSION);
 
         if (version_compare($sMySQLVer, self::REQUIRED_SQL_VERSION, '<')) {
-            $sMsg = 'ERROR: Your MySQL version is ' . $sMySQLVer . '. pH7CMS requires MySQL ' . self::REQUIRED_SQL_VERSION . ' or newer.';
+            $sMsg = 'ERROR: Your MySQL version is ' . $sMySQLVer . '. pH7Builder requires MySQL ' . self::REQUIRED_SQL_VERSION . ' or newer.';
             exit($sMsg);
         }
     }

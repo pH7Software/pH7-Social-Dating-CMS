@@ -9,5 +9,5 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('navbarType', 'default', 'Choose between "default" or "dark"', 'design');
 
 
--- Update pH7CMS's SQL schema version
-UPDATE ph7_modules SET version = '1.5.8' WHERE vendorName = 'pH7CMS';
+-- Update pH7Builder's SQL schema version
+UPDATE ph7_modules SET version = '1.5.8' WHERE vendorName = 'pH7Builder';

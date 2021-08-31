@@ -18,7 +18,7 @@ $LANG = array(
     'welcome_voice' => 'Welcome to ' . Controller::SOFTWARE_NAME . ', version ' . Controller::SOFTWARE_VERSION . '. ' .
         'I hope you will enjoy your new social web app.',
     'CMS_desc' => '<p>Welcome to ' . Controller::SOFTWARE_NAME . ' Installer.<br />
-        Thank you for choosing <strong>pH7CMS</strong>, and we hope you will love it!</p>',
+        Thank you for choosing <strong>pH7Builder</strong>, and we hope you will love it!</p>',
     'choose_install_lang' => 'Please choose your language to begin the installation',
     'requirements_desc' => 'WARNING! Please make sure <abbr title="Your Server. On local host, it will be you (your computer)">you are</abbr> connected to the Internet and your server has the <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank" rel="noopener">minimum requirements</a>.',
     'requirements2_desc' => 'Before to continue, please create a MySQL database and assign a user to it with full privileges. Once you created the MySQL database and its user, make sure to write down the database name, username and password since you will need them for installation.',
@@ -42,7 +42,7 @@ $LANG = array(
     'welcome_to_installer' => 'Installation of',
     'config_site' => 'Configure your website!',
     'config_system' => 'Database/System Configuration',
-    'finish' => 'Woohoo! 🚀 pH7CMS is now installed! 😋',
+    'finish' => 'Woohoo! 🚀 pH7Builder is now installed! 😋',
     'go_your_site' => 'Go to your new website!',
     'go_your_admin_panel' => 'Go to your admin panel',
     'error_page_not_found' => 'Page not found',
@@ -62,7 +62,7 @@ $LANG = array(
     'db_username' => 'Database username',
     'db_password' => 'Database password',
     'db_prefix' => 'Table name prefix',
-    'desc_db_prefix' => 'This option is useful when you have multiple installations of pH7CMS on the same database.
+    'desc_db_prefix' => 'This option is useful when you have multiple installations of pH7Builder on the same database.
         We also recommend that you change the default value ​​in order to increase the security of your website.',
     'db_encoding' => 'Encoding',
     'desc_db_encoding' => 'Database encoding. Leave utf8mb4 for international encoding, including emojis.',

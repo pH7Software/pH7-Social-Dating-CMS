@@ -1,6 +1,6 @@
 <?php
 /**
- * This module is just an example to show how easy you can create modules with pH7CMS
+ * This module is just an example to show how easy you can create modules with pH7Builder
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
@@ -27,7 +27,7 @@ class HomeController extends Controller
 
         // Meta Tags
         $this->view->page_title = t('Hello World');
-        $this->view->meta_description = t('This module is just an example to show how easy you can create modules with pH7CMS');
+        $this->view->meta_description = t('This module is just an example to show how easy you can create modules with pH7Builder');
         $this->view->meta_keywords = t('hello world, test, developpers, CMS, Dating CMS, CMS Dating, Social CMS, pH7, pH7 CMS, Dating Script, Social Dating Script, Dating Software, Social Network Software, Social Networking Software');
 
         /* Heading html tags (H1 to H4) */

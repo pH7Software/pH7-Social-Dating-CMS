@@ -175,7 +175,7 @@ function save-code() {
     _save-project-to-repo git@bitbucket.org:pH_7/ph7cms-social-dating-app-site-builder.git
 
     # GitLab repo
-    _save-project-to-repo git@gitlab.com:pH-7/pH7CMS.git
+    _save-project-to-repo git@gitlab.com:pH-7/pH7Builder.git
 
     # GitHub repo
     _save-project-to-repo git@github.com:pH7Software/pH7-Social-Dating-CMS.git

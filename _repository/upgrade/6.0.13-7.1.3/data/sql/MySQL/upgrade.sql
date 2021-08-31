@@ -7,5 +7,5 @@
 INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('profileWithAvatarSet', 0, '1 to display only the profiles with a profile photo.', 'homepage');
 
--- Update pH7CMS's SQL schema version
-UPDATE pH7_Modules SET version = '1.3.7' WHERE vendorName = 'pH7CMS';
+-- Update pH7Builder's SQL schema version
+UPDATE pH7_Modules SET version = '1.3.7' WHERE vendorName = 'pH7Builder';

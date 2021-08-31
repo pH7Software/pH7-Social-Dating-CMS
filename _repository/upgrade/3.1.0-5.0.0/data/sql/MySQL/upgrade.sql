@@ -36,5 +36,5 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('defaultSysModule', 'user', 'The default module running by default on the index page. Recommended to keep the "user" module', 'general');
 
 
--- Update pH7CMS's SQL schema version
-UPDATE pH7_Modules SET version = '1.3.3' WHERE vendorName = 'pH7CMS';
+-- Update pH7Builder's SQL schema version
+UPDATE pH7_Modules SET version = '1.3.3' WHERE vendorName = 'pH7Builder';

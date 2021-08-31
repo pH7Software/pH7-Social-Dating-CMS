@@ -1,6 +1,6 @@
 <?php
 /**
- * This script checks the server requirements for pH7CMS software.
+ * This script checks the server requirements for pH7Builder software.
  *
  * It was written in order to be standarlone and can be used in different projects.
  * If you want to use it in your project, please keep the license and the developer details below in order to have the right to distribute it.
@@ -26,7 +26,7 @@ define('DIRECTIVE_KEY', 'directive');
 $aErrors = array();
 
 if (version_compare(PHP_VERSION, PH7_REQUIRED_SERVER_VERSION, '<')) {
-    $aErrors[] = 'Your current PHP version is ' . PHP_VERSION . '. pH7CMS requires PHP ' . PH7_REQUIRED_SERVER_VERSION . ' or newer.<br /> Please ask your Web host to upgrade PHP to ' . PH7_REQUIRED_SERVER_VERSION . ' or newer.';
+    $aErrors[] = 'Your current PHP version is ' . PHP_VERSION . '. pH7Builder requires PHP ' . PH7_REQUIRED_SERVER_VERSION . ' or newer.<br /> Please ask your Web host to upgrade PHP to ' . PH7_REQUIRED_SERVER_VERSION . ' or newer.';
 }
 
 $aRequirementsNeeded = array(
@@ -89,7 +89,7 @@ foreach ($aRequirementsNeeded as $sType => $aRequirements) {
 
 $iErrors = !empty($aErrors) ? count($aErrors) : 0;
 if ($iErrors > 0) {
-    display_html_header('Requirements - pH7CMS Installation');
+    display_html_header('Requirements - pH7Builder Installation');
 
     printf('<h3 class="error underline italic">You have %d error(s):</h3>', $iErrors);
 

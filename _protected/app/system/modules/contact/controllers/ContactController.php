@@ -16,7 +16,7 @@ class ContactController extends Controller
     {
         /**
          * For SEO: Google shouldn't waste time indexing a contact form.
-         * Instead, it will use that time indexing important pages on pH7CMS
+         * Instead, it will use that time indexing important pages on pH7Builder
          */
         $this->view->header = Meta::NOINDEX;
 

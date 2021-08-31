@@ -8,5 +8,5 @@
 UPDATE ph7_static_files SET file = '//static.addtoany.com/menu/page.js' WHERE staticId = 1;
 
 
--- Update pH7CMS's SQL schema version
-UPDATE ph7_modules SET version = '1.4.9' WHERE vendorName = 'pH7CMS';
+-- Update pH7Builder's SQL schema version
+UPDATE ph7_modules SET version = '1.4.9' WHERE vendorName = 'pH7Builder';

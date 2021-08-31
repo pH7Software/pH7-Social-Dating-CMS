@@ -53,5 +53,5 @@ CREATE TABLE IF NOT EXISTS ph7_affiliates_log_sess (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
--- Update pH7CMS's SQL schema version
-UPDATE ph7_modules SET version = '1.5.9' WHERE vendorName = 'pH7CMS';
+-- Update pH7Builder's SQL schema version
+UPDATE ph7_modules SET version = '1.5.9' WHERE vendorName = 'pH7Builder';

@@ -15,8 +15,8 @@
 
     RewriteEngine On
 
-    ## Uncomment the below "#RewriteBase /" (remove "#") if pH7CMS is installed in a folder, and add the folder name after the slash "/"
-    ## Example: If pH7CMS is installed in "/public_html/ph7cms/", then it should be "RewriteBase /ph7cms/", however it may depends of your Apache configuration.
+    ## Uncomment the below "#RewriteBase /" (remove "#") if pH7Builder is installed in a folder, and add the folder name after the slash "/"
+    ## Example: If pH7Builder is installed in "/public_html/ph7cms/", then it should be "RewriteBase /ph7cms/", however it may depends of your Apache configuration.
     ## If you need, please ask your hosting company or check the Apache doc: http://httpd.apache.org/docs/current/mod/mod_rewrite.html
 
     # RewriteBase /
@@ -663,7 +663,7 @@ ErrorDocument 505 /error/http/index?code=505
     # RewriteCond %{SERVER_PORT} 80
     # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-    ### For pH7CMS's URL router (DO NOT REMOVE THESE FOLLOWING CODE) ###
+    ### For pH7Builder's URL router (DO NOT REMOVE THESE FOLLOWING CODE) ###
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
 
@@ -832,6 +832,6 @@ AddType video/webm .webm
 AddType video/mp4 .mp4
 AddType application/rss+xml .xml
 
-# Personal pH7CMS extension file
+# Personal pH7Builder extension file
 #AddType application/x-httpd-php .ph7
 #DirectoryIndex init.ph7

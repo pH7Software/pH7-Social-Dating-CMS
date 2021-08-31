@@ -5,7 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Api / Controller
  * @link           http://ph7cms.com
- * @link           http://github.com/pH7Software/pH7CMS-HTTP-REST-Push-Data
+ * @link           http://github.com/pH7Software/pH7Builder-HTTP-REST-Push-Data
  */
 
 namespace PH7;

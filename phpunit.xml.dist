@@ -6,7 +6,7 @@
     verbose="true"
     colors="true">
     <testsuites>
-        <testsuite name="pH7CMS Protected">
+        <testsuite name="pH7Builder Protected">
             <directory>_tests/Unit</directory>
         </testsuite>
     </testsuites>

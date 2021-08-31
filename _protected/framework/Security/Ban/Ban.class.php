@@ -1,6 +1,6 @@
 <?php
 /**
- * Method for managing the banishment of pH7CMS.
+ * Method for managing the banishment of pH7Builder.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.

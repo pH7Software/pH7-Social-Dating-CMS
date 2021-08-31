@@ -1,7 +1,7 @@
 <?php
 /**
  * @title            Autoloader Class
- * @desc             Loading Framework Class of pH7CMS.
+ * @desc             Loading Framework Class of pH7Builder.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
@@ -87,7 +87,7 @@ final class Autoloader
                 break;
 
 
-            /***** To include third-party libraries that does not have the same naming convention than pH7CMS *****/
+            /***** To include third-party libraries that does not have the same naming convention than pH7Builder *****/
 
             // Include PFBC (PHP Form Builder Class) library
             case is_file(PH7_PATH_FRAMEWORK . 'Layout/Form/Engine/' . $sClass . '.class.php'):
@@ -138,8 +138,8 @@ final class Autoloader
 
         $sMsg = <<<HTML
 <p class="warning">Third-Party Libraries Not Installed</p>
-<p>Oops! It seems you downloaded pH7CMS from Github. We don't include third-party libraries on Github.<br />
-Please <strong><a href="{$sInstallComposerLink}" target="_blank" rel="noopener">read those instructions</a></strong> to install the third-party libraries or download pH7CMS from <strong><a href="{$sDownloadLink}" target="_blank" rel="noopener">Sourceforge</a></strong> if you don't understand how to download the third-party libraries separately.</p>'
+<p>Oops! It seems you downloaded pH7Builder from Github. We don't include third-party libraries on Github.<br />
+Please <strong><a href="{$sInstallComposerLink}" target="_blank" rel="noopener">read those instructions</a></strong> to install the third-party libraries or download pH7Builder from <strong><a href="{$sDownloadLink}" target="_blank" rel="noopener">Sourceforge</a></strong> if you don't understand how to download the third-party libraries separately.</p>'
 HTML;
         echo html_body('You need to run Composer', $sMsg);
     }

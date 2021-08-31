@@ -276,7 +276,7 @@ class Form extends Base
     {
         $errors = [];
         if (session_status() !== PHP_SESSION_ACTIVE) {
-            $errors[''] = ['Error: pH7CMS requires an active session to work properly.  Simply add session_start() to your script before any output has been sent to the browser.'];
+            $errors[''] = ['Error: pH7Builder requires an active session to work properly.  Simply add session_start() to your script before any output has been sent to the browser.'];
         } else {
             $errors = [];
             $id = $this->attributes['id'];

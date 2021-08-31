@@ -1,7 +1,7 @@
 <?php
 /**
  * @title            Import Class
- * @desc             Generic Importer Class to import data from other platforms (such as phpFox, SocialEngine, mooSocial, Skadate, DatingScript, DatingPro) to pH7CMS.
+ * @desc             Generic Importer Class to import data from other platforms (such as phpFox, SocialEngine, mooSocial, Skadate, DatingScript, DatingPro) to pH7Builder.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
