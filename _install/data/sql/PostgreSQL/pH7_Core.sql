@@ -4,7 +4,7 @@
 --
 -- Author:        Pierre-Henry Soria <hello@ph7cms.com>
 -- Copyright:     (c) 2017-2020, Pierre-Henry Soria. All Rights Reserved.
--- License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+-- License:       MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 -- Package:       PH7 / Install / Data / Sql / PostgreSQL
 --
 -- Upgrade:       Convert the MySQL file version to PostgreSQL
