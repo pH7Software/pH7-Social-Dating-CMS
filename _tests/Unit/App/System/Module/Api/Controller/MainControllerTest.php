@@ -11,6 +11,7 @@ namespace PH7\Test\Unit\App\System\Module\Api\Controller;
 use GuzzleHttp\Client;
 use PH7\Framework\Mvc\Router\Uri;
 use PHPUnit_Framework_TestCase;
+use Teapot\StatusCode;
 
 class MainControllerTest extends PHPUnit_Framework_TestCase
 {
@@ -31,7 +32,7 @@ class MainControllerTest extends PHPUnit_Framework_TestCase
             ]
         ]);
 
-        $this->assertSame(403, $oResponse->getStatusCode());
+        $this->assertSame(StatusCode::FORBIDDEN, $oResponse->getStatusCode());
     }
 
     public function testWrongTestRequestMethod()
@@ -43,7 +44,7 @@ class MainControllerTest extends PHPUnit_Framework_TestCase
             ]
         ]);
 
-        $this->assertSame(406, $oResponse->getStatusCode());
+        $this->assertSame(StatusCode::NOT_ACCEPTABLE, $oResponse->getStatusCode());
         $this->assertNull(json_decode($oResponse->getBody()));
     }
 
@@ -64,7 +65,7 @@ class MainControllerTest extends PHPUnit_Framework_TestCase
             ]
         ]);
 
-        $this->assertSame(200, $oResponse->getStatusCode());
+        $this->assertSame(StatusCode::OK, $oResponse->getStatusCode());
         $this->assertSame(['return' => 'Pong'], json_decode($oResponse->getBody(), true));
     }
 
