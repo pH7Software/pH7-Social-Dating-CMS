@@ -1,7 +1,7 @@
 --
 -- Author:        Pierre-Henry Soria <hi@ph7.me>
 -- Copyright:     (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
--- License:       GNU General Public License
+-- License:       MIT License
 --
 
 CREATE SEQUENCE ph7_members_countries_seq;

@@ -23,7 +23,7 @@
   ],
   "type": "project",
   "homepage": "https://ph7cms.com",
-  "license": "GPL-3.0-or-later",
+  "license": "MIT",
   "authors": [
     {
       "name": "Pierre-Henry Soria",
