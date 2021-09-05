@@ -9,6 +9,7 @@
 
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
+        # Disable Directory Browsing
         Options -MultiViews -Indexes
     </IfModule>
     Options +FollowSymLinks
