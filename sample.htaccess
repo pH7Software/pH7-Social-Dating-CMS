@@ -648,6 +648,7 @@ ErrorDocument 505 /error/http/index?code=505
 <IfModule mod_rewrite.c>
     <IfModule mod_env.c>
         # Tell PHP that the mod_rewrite module is ENABLED.
+        # This variable is used in the PHP codebase to determinate if mod_rewrite is enabled.
         SetEnv HTTP_MOD_REWRITE On
     </IfModule>
 
