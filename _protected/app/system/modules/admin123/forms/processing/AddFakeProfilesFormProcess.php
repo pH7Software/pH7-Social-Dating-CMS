@@ -117,6 +117,7 @@ class AddFakeProfilesFormProcess extends Form
             return $rData;
         }
 
+        // In case the first if-statement step fails with the versioning URL request
         return $this->file->getFile($sApiUrl . $sApiParams);
     }
 
