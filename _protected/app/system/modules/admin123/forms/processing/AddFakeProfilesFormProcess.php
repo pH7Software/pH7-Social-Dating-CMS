@@ -113,11 +113,11 @@ class AddFakeProfilesFormProcess extends Form
      */
     private function getApiResults($sApiUrl, $sApiParams, $sApiVersion)
     {
-        if ($rData = $this->file->getFile($sApiUrl . PH7_SH . $sApiVersion . PH7_SH . $sApiParams)) {
+        if ($rData = $this->file->getFile($sApiUrl . $sApiVersion . PH7_SH . $sApiParams)) {
             return $rData;
         }
 
-        return $this->file->getFile($sApiUrl . PH7_SH . $sApiParams);
+        return $this->file->getFile($sApiUrl . $sApiParams);
     }
 
     /**
