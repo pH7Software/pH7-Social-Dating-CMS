@@ -21,7 +21,7 @@ $LANG = array(
         Thank you for choosing <strong>pH7CMS</strong>, and we hope you will love it!</p>',
     'choose_install_lang' => 'Please choose your language to begin the installation',
     'requirements_desc' => 'WARNING! Please make sure <abbr title="Your Server. On local host, it will be you (your computer)">you are</abbr> connected to the Internet and your server has the <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank" rel="noopener">minimum requirements</a>.',
-    'requirements2_desc' => 'Before to continue, please create a MySQL database and assign a user to it with full privileges. Once you created the MySQL database and its user, make sure to write down the database name, username and password since you will need them for installation.',
+    'requirements2_desc' => 'Before to continue, please create a MySQL database and assign a user to it with full privileges. Once you created the MySQL database and its user, make sure to write down the database name, username and password since you will need them for the installation.',
     'config_path' => '&quot;protected&quot; directory path',
     'desc_config_path' => 'Please specify the full path of your &quot;protected&quot; folder.<br />
         It is wise and advisable (but not mandatory in any case) to put this directory outside of the public directory of the Web server.',
@@ -33,7 +33,7 @@ $LANG = array(
     'license_agreements' => 'License and Agreements',
     'license_agreements_desc' => 'Please read the license and agreements carefully and accept them before continuing the installation.',
     'register' => 'Save It!',
-    'site_name' => 'Site Name',
+    'site_name' => 'A Unique Site Name',
     'agree_license' => 'I have <strong>read</strong> and <strong>agree</strong> to the above Terms.',
     'conform_to_laws' => 'I <strong>agree to always keep my website fully legal and to conform with any applicable laws and regulations</strong> that may apply to me, to my corporation, to my website and its users, and to review and <a href="https://ph7cms.com/doc/en/how-to-edit-the-static-and-legal-pages" target="_blank" rel="noopener">update the "TOS", "Privacy Policy" (and any other required legal pages of my website)</a> in order to fully comply with the applicable laws and regulations.',
     'responsibilities_agreement' => 'I <strong>agree to use the software at my own risk</strong> and that the author of this software cannot in any case be held liable for direct or indirect damage, nor for any other damage of any kind whatsoever, resulting from the use of this software or the impossibility to use it for any reason whatsoever.',
@@ -59,7 +59,7 @@ $LANG = array(
     'db_hostname' => 'Database server hostname',
     'desc_db_hostname' => 'Usually &quot;localhost&quot; or &quot;127.0.0.1&quot;',
     'db_name' => 'Database name',
-    'db_username' => 'Database username',
+    'db_username' => 'Database user name',
     'db_password' => 'Database password',
     'db_prefix' => 'Table name prefix',
     'desc_db_prefix' => 'This option is useful when you have multiple installations of pH7CMS on the same database.
