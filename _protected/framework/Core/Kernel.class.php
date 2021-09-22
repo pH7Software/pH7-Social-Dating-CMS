@@ -31,6 +31,7 @@ abstract class Kernel
     const SOFTWARE_RELEASE_URL = self::SOFTWARE_GIT_REPO_URL . '/releases';
     const SOFTWARE_REVIEW_URL = 'https://sourceforge.net/projects/ph7socialdating/reviews/';
     const PATREON_URL = 'https://www.patreon.com/bePatron?u=3534366';
+    const BUYMEACOFFEE_URL = 'https://www.buymeacoffee.com/ph7cms';
     const SOFTWARE_EMAIL = 'hello@ph7cms.com';
     const SOFTWARE_TWITTER = '@pH7Soft';
     const SOFTWARE_AUTHOR = 'Pierre-Henry Soria';

@@ -45,7 +45,7 @@ class MilestoneNotifier
         $this->oView->greeting = t('Hi there! 😊');
         $this->oView->content = t('Something AMAZING and AWESOME just happened to your website!!!') . '<br />';
         $this->oView->content .= t('Indeed, your website reached the %0% users!!! Congratulations! 😍', $iTotalUsers);
-        $this->oView->become_patron = MessageGenerator::getPatreonParagraph();
+        $this->oView->become_patron = MessageGenerator::getPatronParagraph();
 
         $sMessageHtml = $this->oView->parseMail(
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . self::MAIL_TEMPLATE_FILE_PATH,
