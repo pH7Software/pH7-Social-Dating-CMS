@@ -21,7 +21,7 @@ With **[pH7CMS](https://sourceforge.net/projects/ph7socialdating/files/latest/do
 
 ![Professional PHP Social Dating Builder Software](https://cloud.githubusercontent.com/assets/1325411/19419476/5475b32c-93d0-11e6-9756-8e7db8df129f.png)
 
-### 🤗 100% Owned by You ❤
+### 🤗 100% Owned by YOU ❤
 
 **Don't let your webapp be controlled by others! 🚀**
 
@@ -30,7 +30,10 @@ By choosing pH7CMS, you have complete control of your website and your users!
 You get and own all data and files, hosted on your own server! ✌️
 
 
-## 👀 Software Overview
+👉 Convinced by the software? ☕️ Wanna **[offer me a coffee](https://buymeacoffee.com/ph7cms)**, and boost the software development at the same time?
+
+
+## 👀 Software Overview 🎉
 
 **pH7 Dating CMS** is a **Social community CMS** based on a powerful modular OOP architecture, and using the **MVC** architecture (Model-View-Controller).
 
