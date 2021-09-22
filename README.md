@@ -30,7 +30,7 @@ By choosing pH7CMS, you have complete control of your website and your users!
 You get and own all data and files, hosted on your own server! ✌️
 
 
-👉 Convinced by the software? ☕️ Wanna **[offer me a coffee](https://buymeacoffee.com/ph7cms)**, and boost the software development at the same time?
+👉 Convinced by the software? ☕️ Wanna **[offer me a coffee](https://www.buymeacoffee.com/ph7cms)**, and boost the software development at the same time?
 
 
 ## 👀 Software Overview 🎉
