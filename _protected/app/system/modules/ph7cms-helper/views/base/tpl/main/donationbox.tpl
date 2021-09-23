@@ -16,7 +16,7 @@
                 </a>
             {elseif mt_rand(0,1) === 0}
                 <a class="bold" href="{% $config->values['module.setting']['patreon.link'] %}" rel="noreferrer">
-                    {lang 'Become a Patron!'}
+                    {lang 'Become a Patron! 🤗'}
                 </a>
             {else}
                 {{ $patreon_btns = ['become-patreon.en.png', 'support-patreon.en.png'] }}
