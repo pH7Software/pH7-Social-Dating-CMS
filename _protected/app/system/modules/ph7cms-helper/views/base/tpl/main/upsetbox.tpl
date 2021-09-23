@@ -1,7 +1,7 @@
 <div class="col-md-12">
     <div class="center s_bMarg">
         <h1>
-            {* gives random boolean *}
+            {* give random boolean *}
             {if mt_rand(0,1) === 1}
                 {lang '😡 Upset? 🔨'}
             {else}
