@@ -11,6 +11,10 @@
 
         <p class="s_bMarg">
             {if mt_rand(0,1) === 1} {* gives random boolean *}
+                <a class="bold" href="{% $config->values['module.setting']['buymeacoffee.link'] %}" rel="noreferrer">
+                    {lang '🎁 Gift me a cup of coffee 😋'}
+                </a>
+            {elseif mt_rand(0,1) === 0}
                 <a class="bold" href="{% $config->values['module.setting']['patreon.link'] %}" rel="noreferrer">
                     {lang 'Become a Patron!'}
                 </a>
