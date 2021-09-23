@@ -1,6 +1,5 @@
 <?php
 /**
- * @title            Version Class
  * @desc             Version Information for the security of packaged software.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
