@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "071e94af5a739a95b2e4ca51884c6f44",
+    "content-hash": "c20a2b2c6bedccebac21b9476217a115",
     "packages": [
         {
             "name": "arcansecurity/skeerel-php",
@@ -770,6 +770,71 @@
                 "vCard"
             ],
             "time": "2021-07-04T06:07:32+00:00"
+        },
+        {
+            "name": "ph7software/secure-password-generator",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pH7Software/Secure-Password-Generator.git",
+                "reference": "3e7599e945b8e683da79ecfc0fd642f7ac151329"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pH7Software/Secure-Password-Generator/zipball/3e7599e945b8e683da79ecfc0fd642f7ac151329",
+                "reference": "3e7599e945b8e683da79ecfc0fd642f7ac151329",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PH7\\Generator\\\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pierre-Henry Soria",
+                    "email": "hi@ph7.me",
+                    "homepage": "https://github.com/pH-7"
+                }
+            ],
+            "description": "A simple way to generate random passwords",
+            "homepage": "https://ph7.me",
+            "keywords": [
+                "generator",
+                "password",
+                "password generator",
+                "security"
+            ],
+            "support": {
+                "issues": "https://github.com/pH7Software/Secure-Password-Generator/issues",
+                "source": "https://github.com/pH7Software/Secure-Password-Generator/tree/1.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://www.buymeacoffee.com/ph7cms",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/pH-7",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/ph7cms",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2021-09-28T23:06:22+00:00"
         },
         {
             "name": "psr/http-message",
@@ -4037,20 +4102,20 @@
     "platform": {
         "php": ">=5.6.0",
         "ext-curl": "*",
-        "ext-zip": "*",
-        "ext-zlib": "*",
-        "ext-mbstring": "*",
-        "ext-exif": "*",
         "ext-dom": "*",
-        "ext-xml": "*",
-        "ext-json": "*",
+        "ext-exif": "*",
         "ext-gd": "*",
         "ext-hash": "*",
-        "ext-pdo_mysql": "*"
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "ext-pdo_mysql": "*",
+        "ext-xml": "*",
+        "ext-zip": "*",
+        "ext-zlib": "*"
     },
     "platform-dev": [],
     "platform-overrides": {
         "php": "5.6"
     },
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.1.0"
 }

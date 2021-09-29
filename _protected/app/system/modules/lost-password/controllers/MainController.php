@@ -14,7 +14,7 @@ use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\Engine\Util\Various as VariousModel;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
-use PH7\Framework\Util\Various;
+use PH7\Generator\Password as PasswordGenerator;
 
 class MainController extends Controller
 {
@@ -89,7 +89,7 @@ class MainController extends Controller
     protected function sendMail($sTable, $sEmail)
     {
         // Get new password and change it in DB
-        $sNewPassword = Various::genRndWord(self::DEFAULT_PASSWORD_LENGTH);
+        $sNewPassword = PasswordGenerator::generate(self::DEFAULT_PASSWORD_LENGTH);
         (new UserCoreModel)->changePassword($sEmail, $sNewPassword, $sTable);
 
         $this->view->content = t('Hello,') . '<br />' .
