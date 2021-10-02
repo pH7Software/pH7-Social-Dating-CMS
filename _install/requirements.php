@@ -10,7 +10,7 @@
  * @author         Pierre-Henry Soria
  * @email          <hello@ph7cms.com>
  * @copyright      (c) 2011-2021, Pierre-Henry Soria. All Rights Reserved.
- * @license        Lesser General Public License (LGPL) (http://www.gnu.org/copyleft/lesser.html)
+ * @license        MIT (https://opensource.org/licenses/MIT)
  * @language       (PHP) and (HTML5 + CSS)
  * @since          2011/10/25
  * @version        Last revision: 2017/10/23
@@ -94,7 +94,7 @@ if ($iErrors > 0) {
     printf('<h3 class="error underline italic">You have %d error(s):</h3>', $iErrors);
 
     for ($iKey = 0; $iKey < $iErrors; $iKey++) {
-        printf('<p class="error">%d) %s</p>', $iKey + 1, $aErrors[$iKey]);
+        printf('<p class="error">❌ %d) %s</p>', $iKey + 1, $aErrors[$iKey]);
     }
 
     display_html_footer();
