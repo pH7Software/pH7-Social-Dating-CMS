@@ -34,7 +34,7 @@
 *.doc binary
 *.docx binary
 
-## Exclude testing files from distribution
+## Exclude development files from distribution
 /.github export-ignore
 /_tests/Unit/App export-ignore
 /_tests/Unit/fixtures export-ignore
