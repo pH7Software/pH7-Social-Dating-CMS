@@ -83,6 +83,7 @@
       "PH7\\Test\\": "_tests"
     }
   },
+  "minimum-stability": "stable",
   "support": {
     "source": "https://github.com/pH7Software/pH7-Social-Dating-CMS",
     "issues": "https://github.com/pH7Software/pH7-Social-Dating-CMS/issues",
