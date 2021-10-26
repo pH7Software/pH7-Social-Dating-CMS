@@ -33,6 +33,25 @@ You get and own all data and files, hosted on your own server! ✌️
 👉 Convinced by the software? ☕️ Wanna **[offer me a coffee](https://www.buymeacoffee.com/ph7cms)**, and boost the software development at the same time?
 
 
+## 📖 Contents
+
+- [Software Overview](#-software-overview-)
+  - [Features](#-how-powerful-your-social-dating-webapp-will-be-)
+- [Requirements](#-requirements)  
+- [Installation](#-installation)
+  - [Nginx Configuration (only for nginx server)](#-nginx-configuration)
+- [Translations](#-translations)
+- [Resources / Documentation](#-documentation)
+- [Contributing to the project](#-contributing)
+- [License](#%EF%B8%8F-license)
+- [Why pH7CMS is Eco-Friendly?](#-ph7cms-the-eco-friendly-cms-%EF%B8%8F)  
+- [The toolsets I use](#-toolssoftware-used-to-develop-ph7cms)
+- [About Me](#-the-cook)
+  - [Contact Me](#-contact)
+  - [Hire Me?](#-hire-me-at-your-company)
+  - [Offer me a cup of tea?](#-offer-me-a-cup-of-tea-or-tea-bags-)
+
+
 ## 👀 Software Overview 🎉
 
 **pH7 Dating CMS** is a **Social community CMS** based on a powerful modular OOP architecture, and using the **MVC** architecture (Model-View-Controller).
