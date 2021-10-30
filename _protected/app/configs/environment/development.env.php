@@ -15,7 +15,7 @@ defined('PH7') or exit('Restricted access');
 
 define('PH7_ENV_ENABLED', 'On');
 
-// If php.ini is inadequate, let's fix it
+// If php.ini is inadequate for us, let's fix it
 error_reporting(E_ALL); // Since PHP 5.4 E_STRICT became part of E_ALL
 ini_set('display_errors', PH7_ENV_ENABLED);
 ini_set('display_startup_errors', PH7_ENV_ENABLED);
