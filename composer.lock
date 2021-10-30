@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2925130a1ae0d11b6d3a775238e5c0af",
+    "content-hash": "ace4fd8de22e994419d3e8c683e7237a",
     "packages": [
         {
             "name": "arcansecurity/skeerel-php",
@@ -841,6 +841,60 @@
                 "source": "https://github.com/paragonie/random_compat"
             },
             "time": "2021-04-17T09:33:01+00:00"
+        },
+        {
+            "name": "ph-7/ph2gravatar",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pH-7/pH2Gravatar.git",
+                "reference": "6ff9a8e2ea40f1f0c85eb09d55e358afc50a841f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pH-7/pH2Gravatar/zipball/6ff9a8e2ea40f1f0c85eb09d55e358afc50a841f",
+                "reference": "6ff9a8e2ea40f1f0c85eb09d55e358afc50a841f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PH7\\PH2Gravatar\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pierre-Henry Soria",
+                    "email": "hi@ph7.me",
+                    "homepage": "https://ph7.me"
+                }
+            ],
+            "description": "🎉 An easy and elegant way to generate gravatars 🖼",
+            "keywords": [
+                "avatar",
+                "gravatar",
+                "gravatar image",
+                "gravatar url",
+                "identicon",
+                "profile",
+                "profile image",
+                "profile photo"
+            ],
+            "support": {
+                "issues": "https://github.com/pH-7/pH2Gravatar/issues",
+                "source": "https://github.com/pH-7/pH2Gravatar/tree/v1.1.0"
+            },
+            "time": "2021-10-24T21:19:35+00:00"
         },
         {
             "name": "ph-7/qrcode-generator-php-class",
@@ -4430,7 +4484,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.6.0",
+        "php": ">=7.2.0",
         "ext-curl": "*",
         "ext-dom": "*",
         "ext-exif": "*",
@@ -4445,7 +4499,7 @@
     },
     "platform-dev": [],
     "platform-overrides": {
-        "php": "5.6"
+        "php": "7.2"
     },
     "plugin-api-version": "2.1.0"
 }
