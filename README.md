@@ -163,7 +163,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 
 ## ⚙ Requirements
 
-* **Application Server** PHP 5.6 or higher (recommended version: **PHP 7.0.4** or higher). Compatible with **PHP 8** as well! 🚀
+* **Application Server** PHP 7.2 or higher (recommended version: **PHP 7.3** or higher). Compatible with **PHP 8** as well! 🚀
 
 * **Database** MySQL/MariaDB 5.5.3 or higher.
 
