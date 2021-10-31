@@ -24,7 +24,7 @@ use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Parse\Emoticon;
 use PH7\Framework\Session\Session;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class MessengerAjax extends PermissionCore
 {

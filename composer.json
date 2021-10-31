@@ -62,11 +62,11 @@
     "fakerphp/faker": "^1.9",
     "geoip2/geoip2": "~2.0",
     "guzzlehttp/guzzle": "^6.3",
+    "ph-7/just-http-status-codes": "^1.1",
     "ph-7/ph2gravatar": "^1.1",
     "ph-7/qrcode-generator-php-class": "^2.1",
     "ph7software/secure-password-generator": "^1.2",
     "robthree/twofactorauth": "^1.6",
-    "shrikeh/teapot": "^2.3",
     "stripe/stripe-php": "^5.9",
     "swiftmailer/swiftmailer": "^5.4",
     "twilio/sdk": "^5.28"

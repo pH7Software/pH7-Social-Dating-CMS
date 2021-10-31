@@ -7,7 +7,7 @@
  */
 
 declare(strict_types=1);
-
+git
 namespace PH7\Framework\Layout\Html;
 
 defined('PH7') or exit('Restricted access');

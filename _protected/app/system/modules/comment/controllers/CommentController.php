@@ -14,7 +14,7 @@ use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Security\CSRF\Token as CSRFToken;
 use PH7\Framework\Url\Header;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class CommentController extends Controller
 {

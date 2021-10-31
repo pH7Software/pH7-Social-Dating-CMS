@@ -34,7 +34,7 @@ use PH7\Framework\Security\DDoS\Stop as DDoSStoper;
 use PH7\FriendCoreModel;
 use PH7\MailCoreModel;
 use PH7\UserCore;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 abstract class Controller extends Core implements Controllable
 {

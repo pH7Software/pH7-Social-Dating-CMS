@@ -15,7 +15,7 @@ use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\CSRF\Token;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class FriendAjax extends Core
 {

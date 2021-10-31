@@ -21,7 +21,7 @@ use PH7\Framework\Http\Http;
 use PH7\Framework\Layout\Optimization;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Navigation\Browser;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class Gzip
 {

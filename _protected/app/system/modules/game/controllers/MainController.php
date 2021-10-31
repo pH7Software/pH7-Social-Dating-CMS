@@ -13,7 +13,7 @@ use PH7\Framework\Mvc\Model\Statistic as StatModel;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use stdClass;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class MainController extends Controller
 {
