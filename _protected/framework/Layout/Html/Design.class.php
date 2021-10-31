@@ -6,6 +6,8 @@
  * @package          PH7 / Framework / Layout / Html
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Layout\Html;
 
 defined('PH7') or exit('Restricted access');
@@ -111,7 +113,7 @@ class Design
         $this->oHttpRequest = new HttpRequest;
     }
 
-    public function langList()
+    public function langList(): void
     {
         $sCurrentPage = Page::cleanDynamicUrl('l');
         //$aLangs = (new File)->getDirList(Registry::getInstance()->path_module_lang);
@@ -138,7 +140,7 @@ class Design
      *
      * @return void
      */
-    public function regionalUrls()
+    public function regionalUrls(): void
     {
         $sCurrentPage = Page::cleanDynamicUrl('l');
         $aLangs = (new File)->getDirList(PH7_PATH_APP_LANG);
@@ -160,7 +162,7 @@ class Design
      *
      * @return void
      */
-    public function setMessage($sMsg)
+    public function setMessage(string $sMsg): void
     {
         $this->aMessages[] = $sMsg;
     }
@@ -170,7 +172,7 @@ class Design
      *
      * @return void
      */
-    public function message()
+    public function message(): void
     {
         if ($this->oHttpRequest->getExists('msg')) {
             $this->aMessages[] = substr($this->oHttpRequest->get('msg'), 0, self::MAX_MESSAGE_LENGTH_SHOWN);
