@@ -18,7 +18,7 @@ interface Configurable
      *
      * @return bool Returns FALSE if the file doesn't exist, TRUE otherwise.
      */
-    public function load($sFile);
+    public function load($sFile): bool;
 
     /**
      * Get a config option by key.
@@ -27,7 +27,7 @@ interface Configurable
      *
      * @return string
      */
-    public function getValue($sKey);
+    public function getValue($sKey): string;
 
     /**
      * Set dynamically a value to config data.
@@ -37,5 +37,5 @@ interface Configurable
      *
      * @return void
      */
-    public function setValue($sKey, $sValue);
+    public function setValue($sKey, $sValue): void;
 }
