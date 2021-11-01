@@ -74,7 +74,7 @@ class CArray
      * @param string $sKey The key in the array.
      * @param array $aArray The array.
      *
-     * @return string The value of the array. If the value is not found, Returns NULL.
+     * @return string|null The value of the array. If the value is not found, returns NULL
      */
     public static function getValueByKey($sKey, array $aArray)
     {
