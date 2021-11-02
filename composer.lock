@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8cc36c98dfe27d51c9e80679f9f71acf",
+    "content-hash": "7d0b25b6ccc3e8c2be7894273585608e",
     "packages": [
         {
             "name": "arcansecurity/skeerel-php",
@@ -903,6 +903,60 @@
             "time": "2021-10-31T12:00:37+00:00"
         },
         {
+            "name": "ph-7/passcode-password-generator",
+            "version": "v2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pH-7/passcode-password-generator.git",
+                "reference": "67a8389c1307658fc35b71f52ac5cc8755a007af"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pH-7/passcode-password-generator/zipball/67a8389c1307658fc35b71f52ac5cc8755a007af",
+                "reference": "67a8389c1307658fc35b71f52ac5cc8755a007af",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PH7\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pierre-Henry Soria",
+                    "email": "hi@ph7.me",
+                    "homepage": "https://ph7.me",
+                    "role": "Cool&Passionate Software Developer"
+                }
+            ],
+            "description": "A simple way to generate random passcodes and passwords.",
+            "homepage": "https://pierrehenry.be",
+            "keywords": [
+                "digit",
+                "digits",
+                "generator",
+                "passcode",
+                "passcode generator",
+                "security"
+            ],
+            "support": {
+                "issues": "https://github.com/pH-7/passcode-password-generator/issues",
+                "source": "https://github.com/pH-7/passcode-password-generator/tree/v2.0.2"
+            },
+            "time": "2021-09-30T08:22:48+00:00"
+        },
+        {
             "name": "ph-7/ph2gravatar",
             "version": "v1.1.0",
             "source": {
@@ -1006,71 +1060,6 @@
                 "source": "https://github.com/pH-7/QRCode-Generator-PHP-Class/tree/2.2.0"
             },
             "time": "2021-07-04T06:07:32+00:00"
-        },
-        {
-            "name": "ph7software/secure-password-generator",
-            "version": "1.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/pH7Software/Secure-Password-Generator.git",
-                "reference": "39f7bcb2a18917a52181795765f0a7fc4289a9d7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/pH7Software/Secure-Password-Generator/zipball/39f7bcb2a18917a52181795765f0a7fc4289a9d7",
-                "reference": "39f7bcb2a18917a52181795765f0a7fc4289a9d7",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.5"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "PH7\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Pierre-Henry Soria",
-                    "email": "hi@ph7.me",
-                    "homepage": "https://github.com/pH-7"
-                }
-            ],
-            "description": "A simple way to generate random passwords",
-            "homepage": "https://ph7.me",
-            "keywords": [
-                "generator",
-                "password",
-                "password generator",
-                "security"
-            ],
-            "support": {
-                "issues": "https://github.com/pH7Software/Secure-Password-Generator/issues",
-                "source": "https://github.com/pH7Software/Secure-Password-Generator/tree/1.2.0"
-            },
-            "funding": [
-                {
-                    "url": "https://www.buymeacoffee.com/ph7cms",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/pH-7",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/ph7cms",
-                    "type": "patreon"
-                }
-            ],
-            "time": "2021-09-29T21:59:03+00:00"
         },
         {
             "name": "psr/http-message",
