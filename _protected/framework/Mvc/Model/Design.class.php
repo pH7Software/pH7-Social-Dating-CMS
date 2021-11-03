@@ -9,6 +9,8 @@
  * @package          PH7 / Framework / Mvc / Model
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Mvc\Model;
 
 defined('PH7') or exit('Restricted access');
@@ -26,8 +28,8 @@ use PH7\Framework\Translate\Lang;
 
 class Design extends HtmlDesign
 {
-    const CACHE_STATIC_GROUP = 'db/design/static';
-    const CACHE_TIME = 172800;
+    protected const CACHE_STATIC_GROUP = 'db/design/static';
+    protected const CACHE_TIME = 172800;
 
     /** @var Cache */
     private $oCache;
@@ -38,7 +40,7 @@ class Design extends HtmlDesign
         $this->oCache = new Cache;
     }
 
-    public function langList()
+    public function langList(): void
     {
         $sCurrentPage = Page::cleanDynamicUrl('l');
 
@@ -102,7 +104,7 @@ class Design extends HtmlDesign
      *
      * @return string|void
      */
-    public function analyticsApi($bPrint = true, $bOnlyActive = true)
+    public function analyticsApi(bool $bPrint = true, bool $bOnlyActive = true)
     {
         $this->oCache->start(self::CACHE_STATIC_GROUP, 'analyticsApi' . $bOnlyActive, static::CACHE_TIME);
 

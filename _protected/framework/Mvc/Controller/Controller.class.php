@@ -11,6 +11,8 @@
  * @link             http://pierrehenry.be
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Mvc\Controller;
 
 defined('PH7') or exit('Restricted access');
@@ -61,7 +63,7 @@ abstract class Controller extends Core implements Controllable
     /**
      * {@inheritdoc}
      */
-    final public function output($sFile = null)
+    final public function output($sFile = null): void
     {
         /**
          * Remove database information for the tpl files in order to prevent any attack attempt.
@@ -92,7 +94,7 @@ abstract class Controller extends Core implements Controllable
      *
      * @return void
      */
-    final public function manualTplInclude($sFile)
+    final public function manualTplInclude($sFile): void
     {
         $this->view->manual_include = $sFile;
     }
@@ -100,7 +102,7 @@ abstract class Controller extends Core implements Controllable
     /**
      * {@inheritdoc}
      */
-    public function displayPageNotFound($sMsg = '', $b404Status = true)
+    public function displayPageNotFound(string $sMsg = '', bool $b404Status = true): void
     {
         if ($b404Status) {
             Http::setHeadersByCode(StatusCode::NOT_FOUND);
@@ -135,7 +137,7 @@ abstract class Controller extends Core implements Controllable
      *
      * @return void Quits the page with the exit() function
      */
-    public function displayPageDenied($b403Status = true)
+    public function displayPageDenied(bool $b403Status = true): void
     {
         if ($b403Status) {
             Http::setHeadersByCode(StatusCode::FORBIDDEN);
@@ -156,7 +158,7 @@ abstract class Controller extends Core implements Controllable
      *
      * @return void
      */
-    private function assignSiteInfoRegistryVars()
+    private function assignSiteInfoRegistryVars(): void
     {
         // Site URL
         $this->registry->site_url = PH7_URL_ROOT;
@@ -171,7 +173,7 @@ abstract class Controller extends Core implements Controllable
      *
      * @return void
      */
-    private function assignGlobalTplVars()
+    private function assignGlobalTplVars(): void
     {
         /**
          * Set design object to the template.
@@ -207,7 +209,7 @@ abstract class Controller extends Core implements Controllable
      *
      * @return void
      */
-    private function setMetaTplVars()
+    private function setMetaTplVars(): void
     {
         $oInfo = M\DbConfig::getMetaMain(PH7_LANG_NAME);
 
@@ -231,7 +233,7 @@ abstract class Controller extends Core implements Controllable
         unset($oInfo, $aMetaVars);
     }
 
-    private function setModsStatusTplVars()
+    private function setModsStatusTplVars(): void
     {
         $aModsEnabled = [
             'is_connect_enabled' => SysMod::isEnabled('connect'),
@@ -262,7 +264,7 @@ abstract class Controller extends Core implements Controllable
         unset($aModsEnabled);
     }
 
-    private function setUserNotifications()
+    private function setUserNotifications(): void
     {
         $iMemberId = $this->session->get('member_id');
 
@@ -282,7 +284,7 @@ abstract class Controller extends Core implements Controllable
      *
      * @return bool TRUE if visitor is on the homepage (index), FALSE otherwise.
      */
-    private function isGuestOnHomepage($bIsUserLogged)
+    private function isGuestOnHomepage(bool $bIsUserLogged): bool
     {
         return !$bIsUserLogged && $this->registry->module === self::CORE_MAIN_MODULE &&
             $this->registry->controller === 'MainController' &&
@@ -294,7 +296,7 @@ abstract class Controller extends Core implements Controllable
      *
      * @return void If the module is disabled, displays the Not Found page and exit the script.
      */
-    private function checkModStatus()
+    private function checkModStatus(): void
     {
         if (!SysMod::isEnabled($this->registry->module)) {
             $this->displayPageNotFound();
@@ -306,7 +308,7 @@ abstract class Controller extends Core implements Controllable
      *
      * @return void
      */
-    private function checkPerms()
+    private function checkPerms(): void
     {
         if (is_file($this->registry->path_module_config . 'Permission.php')) {
             require $this->registry->path_module_config . 'Permission.php';
@@ -320,14 +322,14 @@ abstract class Controller extends Core implements Controllable
      *
      * @return void If banned, exit the script after displaying the ban page.
      */
-    private function checkBanStatus()
+    private function checkBanStatus(): void
     {
         if (Ban::isIp(Ip::get())) {
             Page::banned();
         }
     }
 
-    private function checkCountryBlacklist()
+    private function checkCountryBlacklist(): void
     {
         if ($this->isBlockedCountryPageEligible()) {
             $sMessage = t('You are too far away from us :( Unfortunately, we are not available in your country.');
@@ -340,7 +342,7 @@ abstract class Controller extends Core implements Controllable
      *
      * @return void If the status if maintenance, exit the script after displaying the maintenance page.
      */
-    private function checkSiteStatus()
+    private function checkSiteStatus(): void
     {
         if ($this->isMaintenancePageEligible()) {
             // Set 1 hour for the duration time of the "Service Unavailable" HTTP status
@@ -353,7 +355,7 @@ abstract class Controller extends Core implements Controllable
      *
      * @return void
      */
-    private function ddosProtection()
+    private function ddosProtection(): void
     {
         if (!isDebug() && (bool)M\DbConfig::getSetting('DDoS')) {
             $oDDoS = new DDoSStoper;
@@ -371,17 +373,14 @@ abstract class Controller extends Core implements Controllable
      *
      * @return bool
      */
-    private function isMaintenancePageEligible()
+    private function isMaintenancePageEligible(): bool
     {
         return M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE &&
             !AdminCore::auth() &&
             !AdminCore::isAdminPanel();
     }
 
-    /**
-     * @return bool
-     */
-    private function isBlockedCountryPageEligible()
+    private function isBlockedCountryPageEligible(): bool
     {
         $sCountryCode = Country::fixCode(Geo::getCountryCode());
 

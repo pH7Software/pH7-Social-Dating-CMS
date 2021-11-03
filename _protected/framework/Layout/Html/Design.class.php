@@ -206,7 +206,7 @@ class Design
      *
      * @return void
      */
-    public function setError($sErr)
+    public function setError(string $sErr): void
     {
         $this->aErrors[] = $sErr;
     }
@@ -216,7 +216,7 @@ class Design
      *
      * @return void
      */
-    public function error()
+    public function error(): void
     {
         if ($this->oHttpRequest->getExists('err')) {
             $this->aErrors[] = substr($this->oHttpRequest->get('err'), 0, self::MAX_MESSAGE_LENGTH_SHOWN);
