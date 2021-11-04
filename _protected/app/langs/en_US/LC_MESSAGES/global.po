@@ -7819,7 +7819,7 @@ msgid "Next"
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/JoinForm.php:158
-msgid "About Me"
+msgid "About Me 🤗"
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/JoinForm.php:158
