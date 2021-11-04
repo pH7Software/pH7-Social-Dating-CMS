@@ -25,7 +25,7 @@ class CArray
      *
      * @return array Returns the merged array (the original arrays are not changed).
      */
-    public static function merge(array $aFrom, array $aTo)
+    public static function merge(array $aFrom, array $aTo): array
     {
         foreach ($aTo as $mKey => $mVal) {
             if (is_int($mKey)) {
@@ -46,7 +46,7 @@ class CArray
      * @param string $sValue The value in the array.
      * @param array $aArray The array.
      *
-     * @return string|null The name key. If the key is not found, Returns NULL.
+     * @return string|null The name key. If the key is not found, returns NULL
      */
     public static function getKeyByValue($sValue, array $aArray): ?string
     {
@@ -61,9 +61,9 @@ class CArray
      * @param string $sValue The value in the array.
      * @param array $aArray The array.
      *
-     * @return string|null The name key. If the key is not found, Returns NULL.
+     * @return string|null The name key. If the key is not found, returns NULL
      */
-    public static function getKeyByValueIgnoreCase($sValue, array $aArray)
+    public static function getKeyByValueIgnoreCase($sValue, array $aArray): ?string
     {
         $mKey = array_search(strtolower($sValue), array_map('strtolower', $aArray), true);
 
@@ -88,7 +88,7 @@ class CArray
      *
      * @param string|boolean $mKey The key for needle if it is found in the array, FALSE otherwise.
      *
-     * @return string|null The name key. If the key is not found, Returns NULL.
+     * @return string|null The name key. If the key is not found, returns NULL
      */
     private static function get($mKey): ?string
     {
