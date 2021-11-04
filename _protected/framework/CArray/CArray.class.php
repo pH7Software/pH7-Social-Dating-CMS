@@ -4,10 +4,12 @@
  * @desc             Useful methods for the handing Array.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / CArray
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\CArray;
 
