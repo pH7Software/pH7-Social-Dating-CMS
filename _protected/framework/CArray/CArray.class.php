@@ -44,7 +44,7 @@ class CArray
      * @param string $sValue The value in the array.
      * @param array $aArray The array.
      *
-     * @return string|null The name key. If the key is not found, Returns NULL.
+     * @return string|null The name key. If the key is not found, returns NULL
      */
     public static function getKeyByValue($sValue, array $aArray)
     {
@@ -59,7 +59,7 @@ class CArray
      * @param string $sValue The value in the array.
      * @param array $aArray The array.
      *
-     * @return string|null The name key. If the key is not found, Returns NULL.
+     * @return string|null The name key. If the key is not found, returns NULL
      */
     public static function getKeyByValueIgnoreCase($sValue, array $aArray)
     {
@@ -86,7 +86,7 @@ class CArray
      *
      * @param string|boolean $mKey The key for needle if it is found in the array, FALSE otherwise.
      *
-     * @return string|null The name key. If the key is not found, Returns NULL.
+     * @return string|null The name key. If the key is not found, returns NULL
      */
     private static function get($mKey)
     {
