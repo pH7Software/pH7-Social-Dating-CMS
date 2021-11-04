@@ -46,7 +46,7 @@ class CArray
      *
      * @return string|null The name key. If the key is not found, Returns NULL.
      */
-    public static function getKeyByValue($sValue, array $aArray)
+    public static function getKeyByValue($sValue, array $aArray): ?string
     {
         $mKey = array_search($sValue, $aArray, true);
 
@@ -74,9 +74,9 @@ class CArray
      * @param string $sKey The key in the array.
      * @param array $aArray The array.
      *
-     * @return string The value of the array. If the value is not found, Returns NULL.
+     * @return string|null The value of the array. If the value is not found, returns NULL
      */
-    public static function getValueByKey($sKey, array $aArray)
+    public static function getValueByKey(string $sKey, array $aArray): ?string
     {
         return array_key_exists($sKey, $aArray) && !empty($aArray[$sKey]) ? $aArray[$sKey] : null;
     }
@@ -88,7 +88,7 @@ class CArray
      *
      * @return string|null The name key. If the key is not found, Returns NULL.
      */
-    private static function get($mKey)
+    private static function get($mKey): ?string
     {
         return $mKey !== false ? $mKey : null;
     }

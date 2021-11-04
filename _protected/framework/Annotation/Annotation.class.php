@@ -11,6 +11,8 @@
  * @version          1.1
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Annotation;
 
 defined('PH7') or exit('Restricted access');
@@ -26,8 +28,7 @@ abstract class Annotation
 
     const CACHE_GROUP = 'str/annotation';
 
-    /** @var Cache */
-    private $oCache;
+    private Cache $oCache;
 
     /**
      * Get an Annotation.
@@ -36,7 +37,7 @@ abstract class Annotation
      *
      * @return string|null The value annotation. If the annotation name is not found, Returns NULL.
      */
-    public function getAnnotation($sName)
+    public function getAnnotation(string $sName): ?string
     {
         $aAnnotations = $this->getAnnotations();
 
