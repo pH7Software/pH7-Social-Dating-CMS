@@ -22,10 +22,10 @@ use ReflectionClass;
 
 abstract class Annotation
 {
-    const REGEX_COMMENT = '/\/\*\*(.*)\*\//';
-    const REGEX_NEWLINE = '/\n/';
+    private const REGEX_COMMENT = '/\/\*\*(.*)\*\//';
+    private const REGEX_NEWLINE = '/\n/';
 
-    const CACHE_GROUP = 'str/annotation';
+    protected const CACHE_GROUP = 'str/annotation';
 
     private Cache $oCache;
 
