@@ -66,6 +66,5 @@ If you do not agree to this policy, please do not use our Site. Your continued u
 <p>If you have any questions about this policy<br />
 privacy practices of this site, please contact us via our &quot;<a href="{{ $design->url('contact','contact','index') }}" title="Contact Us">contact form</a>&quot;.</p>
 <p>&nbsp;</p>
-<p class="small text-muted">Last updated on {website_creation_date}.</p>
-
+<p class="small text-muted">Last updated on <em>{website_creation_date}.</em></p>
 </div>

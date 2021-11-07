@@ -1,11 +1,10 @@
 <?php
 /**
- * @title            Version Class
  * @desc             Version Information for the security of packaged software.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Security
  */
 
@@ -27,7 +26,7 @@ final class Version
 
     const CACHE_GROUP = 'str/security';
 
-    const LATEST_VERSION_URL = 'https://xml.ph7cms.com/software-info.xml';
+    const LATEST_VERSION_URL = 'https://xml.ph7builder.com/software-info.xml';
     const VERSION_PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
     const FRAMEWORK_TAG_NAME = 'ph7';
     const PACKAGE_TAG_NAME = 'ph7builder';
@@ -50,9 +49,9 @@ final class Version
      *
      * More details: https://ph7cms.com/new-versioning-system/
      */
-    const KERNEL_VERSION = '16.2.0';
+    const KERNEL_VERSION = '16.3.2';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELEASE_DATE = '2021-07-20';
+    const KERNEL_RELEASE_DATE = '2021-12-20';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7CMS.com';

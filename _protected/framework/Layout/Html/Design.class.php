@@ -2,7 +2,7 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Layout / Html
  */
 
@@ -639,14 +639,8 @@ class Design
             $sSize = ($iSize == 32 || $iSize == 64 || $iSize == 100 || $iSize == 150 || $iSize == 200 || $iSize == 400) ? '-' . $iSize : '';
 
             $sAvatar = @$oGetAvatar->pic;
-            $sExt = PH7_DOT . (new File)->getFileExt($sAvatar);
-
             $sDir = 'user/avatar/img/' . $sUsername . PH7_SH;
             $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . $sDir . $sAvatar;
-            $sUrl = PH7_URL_DATA_SYS_MOD . $sDir . str_replace($sExt, $sSize . $sExt, $sAvatar);
-
-            $bIsModerationMode = AdminCore::isAdminPanel();
-
             if (!is_file($sPath) || $oGetAvatar->approvedAvatar == '0') {
                 /* If sex is empty, it is recovered in the database using information from member */
                 $sSex = !empty($sSex) ? $sSex : $oUserModel->getSex(null, $sUsername, DbTableName::MEMBER);
@@ -656,11 +650,8 @@ class Design
 
                 /** If the user doesn't have an avatar **/
                 if (!is_file($sPath)) {
-                    /* The user has no avatar, we try to get a Gravatar */
-
-                    // Get the User Email
+                    /* The user has no avatar, we then try to get a Gravatar */
                     $sEmail = $oUserModel->getEmail($iProfileId);
-
                     $bSecuredGravatar = Http::isSsl();
                     $sUrl = $this->getGravatarUrl($sEmail, '404', $iSize, 'g', $bSecuredGravatar);
 
@@ -668,9 +659,12 @@ class Design
                         // If no Gravatar set, it returns 404, and we then set the default pH7CMS's avatar
                         $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/' . $sIcon . '_no_picture' . $sSize . self::AVATAR_IMG_EXT;
                     }
-                } elseif (!$bIsModerationMode) { // We don't display pending approval image when admins are on the panel admin
+                } elseif (!AdminCore::isAdminPanel()) { // We don't display pending approval image when admins are on the panel admin
                     $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/pending' . $sSize . self::AVATAR_IMG_EXT;
                 }
+            } else {
+                $sExt = PH7_DOT . (new File)->getFileExt($sAvatar);
+                $sUrl = PH7_URL_DATA_SYS_MOD . $sDir . str_replace($sExt, $sSize . $sExt, $sAvatar);
             }
             unset($oUserModel);
 

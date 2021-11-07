@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Lost Password / Controller
  */
 
@@ -14,7 +14,7 @@ use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\Engine\Util\Various as VariousModel;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
-use PH7\Framework\Util\Various;
+use PH7\Generator\Password as PasswordGenerator;
 
 class MainController extends Controller
 {
@@ -89,7 +89,7 @@ class MainController extends Controller
     protected function sendMail($sTable, $sEmail)
     {
         // Get new password and change it in DB
-        $sNewPassword = Various::genRndWord(self::DEFAULT_PASSWORD_LENGTH);
+        $sNewPassword = PasswordGenerator::generate(self::DEFAULT_PASSWORD_LENGTH);
         (new UserCoreModel)->changePassword($sEmail, $sNewPassword, $sTable);
 
         $this->view->content = t('Hello,') . '<br />' .

@@ -5,7 +5,7 @@
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / CArray
  */
 
@@ -44,7 +44,7 @@ class CArray
      * @param string $sValue The value in the array.
      * @param array $aArray The array.
      *
-     * @return string|null The name key. If the key is not found, Returns NULL.
+     * @return string|null The name key. If the key is not found, returns NULL
      */
     public static function getKeyByValue($sValue, array $aArray)
     {
@@ -59,7 +59,7 @@ class CArray
      * @param string $sValue The value in the array.
      * @param array $aArray The array.
      *
-     * @return string|null The name key. If the key is not found, Returns NULL.
+     * @return string|null The name key. If the key is not found, returns NULL
      */
     public static function getKeyByValueIgnoreCase($sValue, array $aArray)
     {
@@ -74,7 +74,7 @@ class CArray
      * @param string $sKey The key in the array.
      * @param array $aArray The array.
      *
-     * @return string The value of the array. If the value is not found, Returns NULL.
+     * @return string|null The value of the array. If the value is not found, returns NULL
      */
     public static function getValueByKey($sKey, array $aArray)
     {
@@ -86,7 +86,7 @@ class CArray
      *
      * @param string|boolean $mKey The key for needle if it is found in the array, FALSE otherwise.
      *
-     * @return string|null The name key. If the key is not found, Returns NULL.
+     * @return string|null The name key. If the key is not found, returns NULL
      */
     private static function get($mKey)
     {

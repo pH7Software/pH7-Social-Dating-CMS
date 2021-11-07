@@ -4,7 +4,7 @@
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Connect / Inc / Class
  * @version        2.0
  */
@@ -28,6 +28,7 @@ use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Util\Various;
+use PH7\Generator\Password as PasswordGenerator;
 
 class Facebook extends Api implements IApi
 {
@@ -150,7 +151,7 @@ class Facebook extends Api implements IApi
         $this->aUserInfo = [
             'email' => $this->oProfile->getEmail(),
             'username' => $this->sUsername,
-            'password' => Various::genRndWord(Registration::DEFAULT_PASSWORD_LENGTH),
+            'password' => PasswordGenerator::generate(Registration::DEFAULT_PASSWORD_LENGTH),
             'first_name' => $this->oProfile->getFirstName(),
             'last_name' => $this->oProfile->getLastName(),
             'sex' => $sSex,

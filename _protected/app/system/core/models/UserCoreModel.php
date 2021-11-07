@@ -4,7 +4,7 @@
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
 
@@ -392,8 +392,8 @@ class UserCoreModel extends Model
 
         if ($bIsKeyword) {
             $sSqlQuery .= ' AND (
-                LOWER(username) LIKE LOWER(:keyword) OR LOWER(firstName) LIKE LOWER(:keyword) OR LOWER(lastName) LIKE LOWER(:keyword) 
-                OR LOWER(city) LIKE LOWER(:keyword) OR LOWER(state) LIKE LOWER(:keyword) OR LOWER(zipCode) LIKE LOWER(:keyword) 
+                LOWER(username) LIKE LOWER(:keyword) OR LOWER(firstName) LIKE LOWER(:keyword) OR LOWER(lastName) LIKE LOWER(:keyword)
+                OR LOWER(city) LIKE LOWER(:keyword) OR LOWER(state) LIKE LOWER(:keyword) OR LOWER(zipCode) LIKE LOWER(:keyword)
                 OR sex LIKE :keyword OR LOWER(punchline) LIKE LOWER(:keyword) OR email LIKE :keyword
             )';
         } else {

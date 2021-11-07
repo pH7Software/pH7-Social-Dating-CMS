@@ -6,7 +6,7 @@
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / Framework / Util
  */
 
@@ -69,9 +69,14 @@ class Various
     {
         $sWord = '';
         $aSpecialChars = ['-', '_', '~', '|', '%', '^', '!', '$', '#', '@', '?'];
-        $aKeys = array_merge(range(0, 9), range('a', 'z'), $aSpecialChars);
+        $aKeys = array_merge(
+            range(0, 9),
+            range('a', 'z'),
+            range('Z', 'Z'),
+            $aSpecialChars
+        );
 
-        for ($iQuantity = 0; $iQuantity < $iLength; $iQuantity++) {
+        for ($iAmount = 0; $iAmount < $iLength; $iAmount++) {
             $sWord .= $aKeys[array_rand($aKeys)];
         }
 

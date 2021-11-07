@@ -1,7 +1,7 @@
 ####################
 # Author:         Pierre-Henry Soria <hello@ph7cms.com>
 # Copyright:      (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
-# License:        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+# License:        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 ####################
 
 ## Note: You can remove some lines below if your Apache server already supports one of the parameters below (this will relieve Apache since this file is read on every request). ##
@@ -9,6 +9,7 @@
 
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
+        # Disable Directory Browsing
         Options -MultiViews -Indexes
     </IfModule>
     Options +FollowSymLinks
@@ -647,6 +648,7 @@ ErrorDocument 505 /error/http/index?code=505
 <IfModule mod_rewrite.c>
     <IfModule mod_env.c>
         # Tell PHP that the mod_rewrite module is ENABLED.
+        # This variable is used in the PHP codebase to determinate if mod_rewrite is enabled.
         SetEnv HTTP_MOD_REWRITE On
     </IfModule>
 
@@ -659,7 +661,7 @@ ErrorDocument 505 /error/http/index?code=505
     # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
     # RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 
-    # Force the URL to be https (only if you have an SSL certificate). May not be necessary if HSTS is enabled
+    # Force the URL to be https (only if you have an SSL certificate). May not be necessary if HSTS is enabled. Can potentially break your website
     # RewriteCond %{SERVER_PORT} 80
     # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 

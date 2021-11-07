@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Milestone Celebration / Inc / Class
  */
 
@@ -45,7 +45,7 @@ class MilestoneNotifier
         $this->oView->greeting = t('Hi there! 😊');
         $this->oView->content = t('Something AMAZING and AWESOME just happened to your website!!!') . '<br />';
         $this->oView->content .= t('Indeed, your website reached the %0% users!!! Congratulations! 😍', $iTotalUsers);
-        $this->oView->become_patron = MessageGenerator::getPatreonParagraph();
+        $this->oView->become_patron = MessageGenerator::getPatronParagraph();
 
         $sMessageHtml = $this->oView->parseMail(
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . self::MAIL_TEMPLATE_FILE_PATH,

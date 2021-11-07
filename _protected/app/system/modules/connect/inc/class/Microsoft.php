@@ -4,7 +4,7 @@
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Connect / Inc / Class
  * @version        0.6
  */
@@ -23,6 +23,7 @@ use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Util\Various;
+use PH7\Generator\Password as PasswordGenerator;
 use stdClass;
 
 class Microsoft extends Api
@@ -126,7 +127,7 @@ class Microsoft extends Api
         $this->aUserInfo = [
             'email' => $oProfile->emails->account,
             'username' => $this->sUsername,
-            'password' => Various::genRndWord(Registration::DEFAULT_PASSWORD_LENGTH),
+            'password' => PasswordGenerator::generate(Registration::DEFAULT_PASSWORD_LENGTH),
             'first_name' => !empty($oProfile->first_name) ? $oProfile->first_name : '',
             'last_name' => !empty($oProfile->last_name) ? $oProfile->last_name : '',
             'sex' => $sSex,
