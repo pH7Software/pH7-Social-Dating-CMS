@@ -10,7 +10,7 @@ namespace PH7;
 
 defined('PH7') or die('Restricted access');
 
-use PH7\Framework\Image\Image;
+use PH7\Framework\Image\FileStorage;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
@@ -26,7 +26,7 @@ class AdminFormProcess extends Form
         parent::__construct();
 
         // Thumbnail
-        $oImg = new Image($_FILES['thumb']['tmp_name']);
+        $oImg = new FileStorage($_FILES['thumb']['tmp_name']);
         if (!$oImg->validate()) {
             \PFBC\Form::setError('form_game', Form::wrongImgFileTypeMsg());
             return; // Stop execution of the method.

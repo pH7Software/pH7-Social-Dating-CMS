@@ -19,7 +19,7 @@ use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\File\File;
 use PH7\Framework\File\TooLargeException;
 
-class Image
+class FileStorage
 {
     const MAX_FILENAME_LENGTH = 16;
 

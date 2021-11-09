@@ -10,7 +10,7 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Image\Image;
+use PH7\Framework\Image\FileStorage;
 use PH7\Framework\Layout\Gzip\Gzip;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Navigation\Browser;
@@ -246,7 +246,7 @@ class SettingFormProcess extends Form
     private function updateLogo()
     {
         if ($this->isLogoUploaded()) {
-            $oLogo = new Image($_FILES['logo']['tmp_name']);
+            $oLogo = new FileStorage($_FILES['logo']['tmp_name']);
             if (!$oLogo->validate()) {
                 \PFBC\Form::setError('form_setting', Form::wrongImgFileTypeMsg());
                 $this->bIsErr = true;

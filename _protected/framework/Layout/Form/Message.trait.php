@@ -10,7 +10,7 @@
 
 namespace PH7\Framework\Layout\Form;
 
-use PH7\Framework\Image\Image;
+use PH7\Framework\Image\FileStorage;
 use PH7\Framework\Video\Video;
 
 trait Message
@@ -166,7 +166,7 @@ trait Message
      */
     private static function getImageExtensions()
     {
-        return '.' . implode(', .', Image::SUPPORTED_TYPES);
+        return '.' . implode(', .', FileStorage::SUPPORTED_TYPES);
     }
 
     /**
