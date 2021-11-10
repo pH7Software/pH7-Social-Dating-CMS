@@ -35,19 +35,31 @@ class AmazonCloudStorage implements Storageable
     }
 
     /**
-     * @param string $sFile
-     *
-     * @return string The signed URL where the image is hosted on AWS S3.
+     * {@inheritdoc}
      */
     public function save($sFile)
     {
         $this->oS3Client->putObject([
             'Bucket' => $this->sBucket,
             'Key'    => $sFile,
-            'SourceFile' => $this->sTempFileLocation
+            'SourceFile' => $this->sTempFileLocation,
+            'ACL' => 'public-read'
         ]);
 
-        return $this->getSignedUrl($sFile);
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function remove($sFile)
+    {
+        $this->oS3Client->deleteObject([
+            'Bucket' => $this->sBucket,
+            'Key' => $sFile
+        ]);
+
+        return $this;
     }
 
     /**

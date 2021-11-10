@@ -10,5 +10,15 @@ namespace PH7\Framework\Image;
 
 interface Storageable
 {
+    /**
+     * @param string $sFile
+     * @return self
+     */
     public function save($sFile);
+
+    /**
+     * @param string $sFile
+     * @return self
+     */
+    public function remove($sFile);
 }

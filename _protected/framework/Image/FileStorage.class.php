@@ -487,6 +487,20 @@ class FileStorage implements Storageable
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function remove($sFile)
+    {
+        // If it exists, remove the temporary image file
+        (new File)->deleteFile($sFile);
+
+        // Free the memory associated with the image
+        @imagedestroy($this->rImage);
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getFileName()
@@ -582,10 +596,6 @@ class FileStorage implements Storageable
      */
     public function __destruct()
     {
-        // If it exists, remove the temporary image file
-        (new File)->deleteFile($this->sFile);
-
-        // Free the memory associated with the image
-        @imagedestroy($this->rImage);
+        $this->remove($this->sFile);
     }
 }
