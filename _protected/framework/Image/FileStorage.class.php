@@ -1,6 +1,5 @@
 <?php
 /**
- * @title            Image Class
  * @desc             Class is used to create/manipulate images using GD library.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
@@ -19,7 +18,7 @@ use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\File\File;
 use PH7\Framework\File\TooLargeException;
 
-class FileStorage
+class FileStorage implements Storageable
 {
     const MAX_FILENAME_LENGTH = 16;
 
