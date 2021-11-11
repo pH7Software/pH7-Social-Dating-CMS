@@ -3,7 +3,7 @@
 -- Title:         SQL Core (base) Install File
 --
 -- Author:        Pierre-Henry Soria <hello@ph7cms.com>
--- Copyright:     (c) 2017-2020, Pierre-Henry Soria. All Rights Reserved.
+-- Copyright:     (c) 2017-2021, Pierre-Henry Soria. All Rights Reserved.
 -- License:       MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 -- Package:       PH7 / Install / Data / Sql / PostgreSQL
 --
@@ -1108,7 +1108,7 @@ ALTER SEQUENCE ph7_modules_seq RESTART WITH 1;
 
 INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of pH7CMS SQL schema (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.6.0', 1);
+('pH7CMS', 'SQL System Schema', '1.6.1', 1);
 
 
 CREATE SEQUENCE ph7_report_seq;
