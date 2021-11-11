@@ -13,7 +13,7 @@ use PH7\Framework\Config\Config;
 use PH7\Framework\Cookie\Cookie;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\File\File;
-use PH7\Framework\Image\Image;
+use PH7\Framework\Image\FileStorage;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Model\DbConfig;
@@ -138,7 +138,7 @@ class UserCore
             error_reporting(0);
         }
 
-        $oAvatar1 = new Image(
+        $oAvatar1 = new FileStorage(
             $sFile,
             self::MAX_WIDTH_AVATAR,
             self::MAX_HEIGHT_AVATAR
@@ -267,7 +267,7 @@ class UserCore
             error_reporting(0);
         }
 
-        $oWallpaper = new Image(
+        $oWallpaper = new FileStorage(
             $sFile,
             self::MAX_WIDTH_BACKGROUND_IMAGE,
             self::MAX_HEIGHT_BACKGROUND_IMAGE
