@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Image;
 
 use PH7\Framework\Config\Config;
@@ -9,10 +11,7 @@ final class StorageHelper
 {
     use Statik;
 
-    /**
-     * @return string
-     */
-    public static function getStorageClassName()
+    public static function getStorageClassName(): string
     {
         switch (true) {
             case self::isAmaZonCloudStorageSetup():
@@ -23,10 +22,7 @@ final class StorageHelper
         }
     }
 
-    /**
-     * @return bool
-     */
-    private static function isAmaZonCloudStorageSetup()
+    private static function isAmaZonCloudStorageSetup(): bool
     {
         $aRequiredAwsKeys = [
             'aws.access_key_id',
