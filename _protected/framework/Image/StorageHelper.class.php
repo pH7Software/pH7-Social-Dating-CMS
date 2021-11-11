@@ -35,7 +35,7 @@ final class StorageHelper
         ];
 
         foreach ($aRequiredAwsKeys as $sKey) {
-            if(empty(Config::getInstance()->values['storage'][$sKey])) {
+            if (empty(Config::getInstance()->values['storage'][$sKey])) {
                 return false;
             }
         }
