@@ -13,6 +13,8 @@ use PH7\Framework\Config\Config;
 
 class AmazonCloudStorage implements Storageable
 {
+    const ACL_PUBLIC_READ = 'public-read';
+
     /** @var S3Client */
     private $oS3Client;
 
@@ -41,9 +43,9 @@ class AmazonCloudStorage implements Storageable
     {
         $this->oS3Client->putObject([
             'Bucket' => $this->sBucket,
-            'Key'    => $sFile,
+            'Key' => $sFile,
             'SourceFile' => $this->sTempFileLocation,
-            'ACL' => 'public-read'
+            'ACL' => self::ACL_PUBLIC_READ
         ]);
 
         return $this;
