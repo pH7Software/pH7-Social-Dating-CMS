@@ -5,28 +5,22 @@ namespace PH7\Framework\Image;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Pattern\Statik;
 
-final class Storage
+final class StorageHelper
 {
     use Statik;
 
-    /** @var Storageable|null */
-    private static $oStorage = null;
-
-    public static function get()
+    /**
+     * @return string
+     */
+    public static function getStorageClassName()
     {
-        if (self::$oStorage === null) {
-            switch (true) {
-                case self::isAmaZonCloudStorageSetup():
-                    self::$oStorage = new AmazonCloudStorage();
-                    break;
+        switch (true) {
+            case self::isAmaZonCloudStorageSetup():
+                return AmazonCloudStorage::class;
 
-                default :
-                    self::$oStorage = new FileStorage();
-                    break;
-            }
+            default:
+                return FileStorage::class ;
         }
-
-        return self::$oStorage;
     }
 
     /**
