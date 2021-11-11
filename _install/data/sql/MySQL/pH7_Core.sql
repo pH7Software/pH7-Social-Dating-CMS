@@ -3,7 +3,7 @@
 -- Title:         SQL Core (base) Install File
 --
 -- Author:        Pierre-Henry Soria <hello@ph7cms.com>
--- Copyright:     (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
+-- Copyright:     (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
 -- License:       MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 -- Package:       PH7 / Install / Data / Sql / MySQL
 --
@@ -332,6 +332,8 @@ CREATE TABLE IF NOT EXISTS ph7_pictures (
   title varchar(80) NOT NULL,
   description varchar(191) DEFAULT NULL,
   file varchar(40) NOT NULL,
+  file_cdn_url varchar(40) NOT NULL,
+  file_cdn_url varchar(40) NOT NULL,
   approved enum('1','0') DEFAULT '1',
   votes int(9) unsigned DEFAULT 0,
   score float(9) unsigned DEFAULT 0,
@@ -807,6 +809,7 @@ CREATE TABLE IF NOT EXISTS ph7_affiliates_log_sess (
 CREATE TABLE IF NOT EXISTS ph7_members_background (
   profileId int(10) unsigned NOT NULL,
   file varchar(5) NOT NULL,
+  file_cdn_url varchar(40) NOT NULL,
   approved tinyint(1) unsigned NOT NULL DEFAULT 1,
   PRIMARY KEY profileId (profileId),
   FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
@@ -947,7 +950,7 @@ CREATE TABLE IF NOT EXISTS ph7_modules (
 
 INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of pH7CMS SQL schema (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.6.0', 1);
+('pH7CMS', 'SQL System Schema', '1.6.1', 1);
 
 
 CREATE TABLE IF NOT EXISTS ph7_report (

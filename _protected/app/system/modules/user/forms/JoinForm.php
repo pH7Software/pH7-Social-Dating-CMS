@@ -174,7 +174,7 @@ class JoinForm
         $oForm->addElement(new Hidden('submit_join_user3', 'form_join_user3'));
         $oForm->addElement(new Token('join3'));
 
-        $oForm->addElement(new Textarea(t('About Me'), 'description', ['id' => 'str_description', 'description' => t('Describe yourself in a few words. Your description should be at least 20 characters long.'), 'onblur' => 'CValid(this.value,this.id,20,4000)', 'validation' => new Str(20, 4000), 'required' => 1]));
+        $oForm->addElement(new Textarea(t('About Me 🤗'), 'description', ['id' => 'str_description', 'description' => t('Describe yourself in a few words. Your description should be at least 20 characters long.'), 'onblur' => 'CValid(this.value,this.id,20,4000)', 'validation' => new Str(20, 4000), 'required' => 1]));
         $oForm->addElement(new HTMLExternal('<span class="input_error str_description"></span>'));
 
         $oForm->addElement(new Button(t('Next'), 'submit', ['icon' => 'seek-next']));

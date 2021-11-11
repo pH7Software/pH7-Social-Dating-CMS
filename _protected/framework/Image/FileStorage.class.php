@@ -1,6 +1,5 @@
 <?php
 /**
- * @title            Image Class
  * @desc             Class is used to create/manipulate images using GD library.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
@@ -19,7 +18,7 @@ use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\File\File;
 use PH7\Framework\File\TooLargeException;
 
-class Image
+class FileStorage implements Storageable
 {
     const MAX_FILENAME_LENGTH = 16;
 
@@ -488,6 +487,20 @@ class Image
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function remove($sFile)
+    {
+        // If it exists, remove the temporary image file
+        (new File)->deleteFile($sFile);
+
+        // Free the memory associated with the image
+        @imagedestroy($this->rImage);
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getFileName()
@@ -583,10 +596,6 @@ class Image
      */
     public function __destruct()
     {
-        // If it exists, remove the temporary image file
-        (new File)->deleteFile($this->sFile);
-
-        // Free the memory associated with the image
-        @imagedestroy($this->rImage);
+        $this->remove($this->sFile);
     }
 }

@@ -13,7 +13,7 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Image\Image;
+use PH7\Framework\Image\FileStorage;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Moderation\Filter;
@@ -70,7 +70,7 @@ class PictureFormProcess extends Form implements NudityDetectable
          */
         $this->aPhotos = $_FILES['photos']['tmp_name'];
         for ($this->iPhotoIndex = 0, $iNumPhotos = count($this->aPhotos); $this->iPhotoIndex < $iNumPhotos; $this->iPhotoIndex++) {
-            $oPicture1 = new Image(
+            $oPicture1 = new FileStorage(
                 $this->aPhotos[$this->iPhotoIndex],
                 self::MAX_IMAGE_WIDTH,
                 self::MAX_IMAGE_HEIGHT
@@ -179,11 +179,11 @@ class PictureFormProcess extends Form implements NudityDetectable
     /**
      * Create a nice picture title if no title is specified.
      *
-     * @param Image $oPicture
+     * @param FileStorage $oPicture
      *
      * @return string
      */
-    private function getImageTitle(Image $oPicture)
+    private function getImageTitle(FileStorage $oPicture)
     {
         if ($this->isPhotoTitleEligible()) {
             return $this->httpRequest->post('title');
@@ -203,11 +203,11 @@ class PictureFormProcess extends Form implements NudityDetectable
     }
 
     /**
-     * @param Image $oPicture
+     * @param FileStorage $oPicture
      *
      * @return string
      */
-    private function getTitleFromFileName(Image $oPicture)
+    private function getTitleFromFileName(FileStorage $oPicture)
     {
         return $this->str->upperFirst(
             str_replace(

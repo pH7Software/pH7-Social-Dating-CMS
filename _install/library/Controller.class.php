@@ -44,6 +44,7 @@ abstract class Controller implements Controllable
      */
     const SOFTWARE_VERSION_NAME = 'ABSOLUTE™';
     const SOFTWARE_VERSION = '16.5.0';
+
     const SOFTWARE_BUILD = '1';
 
     const DEFAULT_LANG = 'en';

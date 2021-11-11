@@ -57,6 +57,7 @@
     "ext-zlib": "*",
     "arcansecurity/skeerel-php": "^2.5",
     "arcturial/clickatell": "^3.0",
+    "aws/aws-sdk-php": "^3.200",
     "braintree/braintree_php": "^3.27",
     "facebook/graph-sdk": "^5.6",
     "fakerphp/faker": "^1.9",
