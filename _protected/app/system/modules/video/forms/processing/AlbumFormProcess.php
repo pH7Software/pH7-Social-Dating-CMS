@@ -10,7 +10,7 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Image\FileStorage;
+use PH7\Framework\Image\FileStorage as FileStorageImage;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Router\Uri;
@@ -38,7 +38,7 @@ class AlbumFormProcess extends Form implements NudityDetectable
         }
 
         // Resizing and saving the video album thumbnail
-        $oPicture = new FileStorage($_FILES['album']['tmp_name']);
+        $oPicture = new FileStorageImage($_FILES['album']['tmp_name']);
         if (!$oPicture->validate()) {
             \PFBC\Form::setError('form_video_album', Form::wrongImgFileTypeMsg());
         } else {

@@ -14,7 +14,7 @@ use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\File\File;
 use PH7\Framework\File\Permission\PermissionException;
 use PH7\Framework\File\TooLargeException;
-use PH7\Framework\Image\FileStorage;
+use PH7\Framework\Image\FileStorage as FileStorageImage;
 use PH7\Framework\Util\Various;
 use stdClass;
 
@@ -39,7 +39,7 @@ class Note extends WriteCore
      */
     public function setThumb(stdClass $oPost, NoteModel $oNoteModel, File $oFile)
     {
-        $oImage = new FileStorage($_FILES['thumb']['tmp_name']);
+        $oImage = new FileStorageImage($_FILES['thumb']['tmp_name']);
         if (!$oImage->validate()) {
             \PFBC\Form::setError('form_note', Form::wrongImgFileTypeMsg());
         } else {

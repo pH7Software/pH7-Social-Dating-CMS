@@ -13,7 +13,7 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Image\FileStorage;
+use PH7\Framework\Image\FileStorage as FileStorageImage;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Moderation\Filter;
@@ -70,7 +70,7 @@ class PictureFormProcess extends Form implements NudityDetectable
          */
         $this->aPhotos = $_FILES['photos']['tmp_name'];
         for ($this->iPhotoIndex = 0, $iNumPhotos = count($this->aPhotos); $this->iPhotoIndex < $iNumPhotos; $this->iPhotoIndex++) {
-            $oPicture1 = new FileStorage(
+            $oPicture1 = new FileStorageImage(
                 $this->aPhotos[$this->iPhotoIndex],
                 self::MAX_IMAGE_WIDTH,
                 self::MAX_IMAGE_HEIGHT
