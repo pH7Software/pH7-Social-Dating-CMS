@@ -28,18 +28,16 @@ class AmazonCloudStorage implements Storageable
      * @param string $sTempFileLocation The source file.
      * @param string $sBucket S3 bucket.
      */
-    public function __construct($sTempFileLocation, $sBucket)
+    public function __construct(string $sTempFileLocation, string $sBucket)
     {
         $this->sTempFileLocation = $sTempFileLocation;
         $this->sBucket = $sBucket;
 
         $this->oS3Client = new S3Client($this->getConfiguration());
+
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function save($sFile)
+    public function save(string $sFile): self
     {
         $this->oS3Client->putObject([
             'Bucket' => $this->sBucket,
@@ -51,10 +49,7 @@ class AmazonCloudStorage implements Storageable
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function remove($sFile)
+    public function remove(string $sFile): self
     {
         $this->oS3Client->deleteObject([
             'Bucket' => $this->sBucket,
@@ -69,15 +64,12 @@ class AmazonCloudStorage implements Storageable
      *
      * @return string The signed URL where the image is hosted on AWS S3.
      */
-    public function getSignedUrl($sFile)
+    public function getSignedUrl(string $sFile): string
     {
         return $this->oS3Client->getObjectUrl($this->sBucket, $sFile);
     }
 
-    /**
-     * @return array
-     */
-    private function getConfiguration()
+    private function getConfiguration(): array
     {
         return [
             'region'  => Config::getInstance()->values['storage']['aws.default_region'],

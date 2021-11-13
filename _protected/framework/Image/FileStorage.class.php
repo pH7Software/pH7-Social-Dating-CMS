@@ -20,31 +20,43 @@ use PH7\Framework\File\TooLargeException;
 
 class FileStorage implements Storageable
 {
-    const MAX_FILENAME_LENGTH = 16;
+    public const MAX_FILENAME_LENGTH = 16;
 
     /*** Alias ***/
-    const JPG = IMAGETYPE_JPEG;
-    const PNG = IMAGETYPE_PNG;
-    const GIF = IMAGETYPE_GIF;
-    const WEBP = 18; // TODO: From PHP 7.1, IMAGETYPE_WEBP is available
+    public const JPG = IMAGETYPE_JPEG;
+    public const PNG = IMAGETYPE_PNG;
+    public const GIF = IMAGETYPE_GIF;
+    public const WEBP = 18; // TODO: From PHP 7.1, IMAGETYPE_WEBP is available
 
-    const JPG_NAME = 'jpg';
-    const PNG_NAME = 'png';
-    const GIF_NAME = 'gif';
-    const WEBP_NAME = 'webp';
+    public const JPG_NAME = 'jpg';
+    public const PNG_NAME = 'png';
+    public const GIF_NAME = 'gif';
+    public const WEBP_NAME = 'webp';
 
-    const SUPPORTED_TYPES = [
+   public const SUPPORTED_TYPES = [
         self::JPG_NAME,
         self::PNG_NAME,
         self::GIF_NAME,
         self::WEBP_NAME
     ];
 
-    const DEFAULT_MAX_WIDTH = 3000;
-    const DEFAULT_MAX_HEIGHT = 3000;
+    // Available zone corps
+    private const ZONE_CROP_CENTER = 'center';
+    private const ZONE_CORP_TOP_LEFT = 'top-left';
+    private const ZONE_CORP_TOP = 'top';
+    private const ZONE_CORP_TOP_RIGHT = 'top-right';
+    private const ZONE_CORP_RIGHT = 'right';
+    private const ZONE_CORP_BOTTOM_RIGHT = 'bottom-right';
+    private const ZONE_CORP_BOTTOM = 'bottom';
+    private const ZONE_CORP_BOTTOM_LEFT = 'bottom-left';
+    private const ZONE_CORP_LEFT = 'left';
 
-    const DEFAULT_IMAGE_QUALITY = 100;
-    const DEFAULT_COMPRESSION_LEVEL = 4;
+
+    private const DEFAULT_MAX_WIDTH = 3000;
+    private const DEFAULT_MAX_HEIGHT = 3000;
+
+    private const DEFAULT_IMAGE_QUALITY = 100;
+    private const DEFAULT_COMPRESSION_LEVEL = 4;
 
     /** @var string */
     private $sFile;
@@ -207,7 +219,7 @@ class FileStorage implements Storageable
      *
      * @return self
      */
-    public function crop($iX = 0, $iY = 0, $iWidth = 1, $iHeight = 1)
+    public function crop($iX = 0, $iY = 0, $iWidth = 1, $iHeight = 1): self
     {
         $rTmp = imagecreatetruecolor($iWidth, $iHeight);
         imagecopyresampled(
@@ -286,59 +298,51 @@ class FileStorage implements Storageable
      *
      * @throws PH7InvalidArgumentException If the image crop is invalid.
      */
-    public function zoneCrop($iWidth, $iHeight, $sZone = 'center')
+    public function zoneCrop($iWidth, $iHeight, $sZone = self::ZONE_CROP_CENTER)
     {
         switch ($sZone) {
-            // Center
-            case 'center':
+            case self::ZONE_CROP_CENTER:
                 $iX = ($iWidth - $this->iWidth) / -2;
                 $iY = ($iHeight - $this->iHeight) / -2;
                 break;
 
-            // Top Left
-            case 'top-left':
+            case self::ZONE_CORP_TOP_LEFT:
                 $iX = 0;
                 $iY = 0;
                 break;
 
-            // Top
-            case 'top':
+            case self::ZONE_CORP_TOP:
                 $iX = ($this->iWidth - $iWidth) / 2;
                 $iY = 0;
                 break;
 
-            // Top Right
-            case 'top-right':
+            case self::ZONE_CORP_TOP_RIGHT:
                 $iX = $this->iWidth - $iWidth;
                 $iY = 0;
                 break;
 
             // Right
-            case 'right':
+            case self::ZONE_CORP_RIGHT:
                 $iX = $this->iWidth - $iWidth;
                 $iY = ($this->iHeight - $iHeight) / 2;
                 break;
 
-            // Bottom Right
-            case 'bottom-right':
+            case self::ZONE_CORP_BOTTOM_RIGHT:
                 $iX = $this->iWidth - $iWidth;
                 $iY = $this->iHeight - $iHeight;
                 break;
 
-            // Bottom
-            case 'bottom':
+            case self::ZONE_CORP_BOTTOM:
                 $iX = ($this->iWidth - $iWidth) / 2;
                 $iY = $this->iHeight - $iHeight;
                 break;
 
-            // Bottom Left
-            case 'bottom-left':
+            case self::ZONE_CORP_BOTTOM_LEFT:
                 $iX = 0;
                 $iY = $this->iHeight - $iHeight;
                 break;
 
-            // Left
-            case 'left':
+            case self::ZONE_CORP_LEFT:
                 $iX = 0;
                 $iY = ($this->iHeight - $iHeight) / 2;
                 break;
