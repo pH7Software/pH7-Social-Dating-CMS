@@ -15,7 +15,7 @@ use RuntimeException;
 
 class WebsiteChecker
 {
-    const REQUIRED_SERVER_VERSION = '5.6.0';
+    const REQUIRED_SERVER_VERSION = '7.4.0';
     const REQUIRED_CONFIG_FILE_NAME = '_constants.php';
     const INSTALL_FOLDER_NAME = '_install/';
 
