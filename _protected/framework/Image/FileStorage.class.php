@@ -10,6 +10,8 @@
  * @linkGD           https://php.net/manual/book.image.php
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Image;
 
 defined('PH7') or exit('Restricted access');

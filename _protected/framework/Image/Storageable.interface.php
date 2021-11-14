@@ -6,6 +6,8 @@
  * @package          PH7 / Framework / Image
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Image;
 
 interface Storageable

@@ -6,6 +6,8 @@
  * @package          PH7 / Framework / Image
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Image;
 
 use Aws\S3\S3Client;
@@ -13,16 +15,13 @@ use PH7\Framework\Config\Config;
 
 class AmazonCloudStorage implements Storageable
 {
-    const ACL_PUBLIC_READ = 'public-read';
+    private const ACL_PUBLIC_READ = 'public-read';
 
-    /** @var S3Client */
-    private $oS3Client;
+    private S3Client $oS3Client;
 
-    /** @var string */
-    private $sTempFileLocation;
+    private string $sTempFileLocation;
 
-    /** @var string */
-    private $sBucket;
+    private string $sBucket;
 
     /**
      * @param string $sTempFileLocation The source file.
