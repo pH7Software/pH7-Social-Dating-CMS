@@ -13,5 +13,6 @@ namespace PH7\Framework\Image;
 interface Storageable
 {
     public function save(string $sFile): self;
+
     public function remove(string $sFile): self;
 }
