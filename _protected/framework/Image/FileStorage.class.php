@@ -10,8 +10,6 @@
  * @linkGD           https://php.net/manual/book.image.php
  */
 
-declare(strict_types=1);
-
 namespace PH7\Framework\Image;
 
 defined('PH7') or exit('Restricted access');
@@ -35,7 +33,7 @@ class FileStorage implements Storageable
     public const GIF_NAME = 'gif';
     public const WEBP_NAME = 'webp';
 
-   public const SUPPORTED_TYPES = [
+    public const SUPPORTED_TYPES = [
         self::JPG_NAME,
         self::PNG_NAME,
         self::GIF_NAME,
@@ -177,13 +175,7 @@ class FileStorage implements Storageable
         return $this;
     }
 
-    /**
-     * @param int $iX Width
-     * @param int $iY Height
-     *
-     * @return self
-     */
-    public function resize($iX = null, $iY = null)
+    public function resize(?int $iX = null, ?int $iY = null): self
     {
         if (!$iX) { // If height is not given
             $iX = $this->iWidth * ($iY / $this->iHeight);
@@ -262,13 +254,13 @@ class FileStorage implements Storageable
             $this->resize(null, $iNewHeight);
 
             $iW = ($iNewWidth - $this->iWidth) / -2;
-            $this->crop($iW, 0, $iNewWidth, $iNewHeight);
+            $this->crop((int)$iW, 0, $iNewWidth, $iNewHeight);
         } else {
             // Wider image
             $this->resize($iNewWidth, null);
 
             $iY = ($iNewHeight - $this->iHeight) / -2;
-            $this->crop(0, $iY, $iNewWidth, $iNewHeight);
+            $this->crop(0, (int)$iY, $iNewWidth, $iNewHeight);
         }
 
         $this->iWidth = $iNewWidth;
@@ -421,7 +413,7 @@ class FileStorage implements Storageable
      *
      * @throws PH7InvalidArgumentException If the image format is invalid.
      */
-    public function save($sFile)
+    public function save(string $sFile): self
     {
         switch ($this->sType) {
             case self::JPG_NAME:
@@ -492,10 +484,7 @@ class FileStorage implements Storageable
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function remove($sFile)
+    public function remove(string $sFile): self
     {
         // If it exists, remove the temporary image file
         (new File)->deleteFile($sFile);
