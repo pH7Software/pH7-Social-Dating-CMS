@@ -14583,7 +14583,7 @@ msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/module/to_install.inc.tpl:2
 #: _protected/app/system/modules/admin123/views/base/tpl/module/to_uninstall.inc.tpl:2
-msgid "No modules available in your %software_name% repository"
+msgid "No 3rd-party modules available in your %software_name% repository"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/module/to_install.inc.tpl:4
