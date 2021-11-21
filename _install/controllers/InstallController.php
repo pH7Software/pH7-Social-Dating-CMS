@@ -358,27 +358,21 @@ class InstallController extends Controller
                             $_SESSION['val'][$sKey] = trim($sVal);
                         }
 
-                        if (validate_email($_SESSION['val']['admin_login_email']) && validate_email(
-                                $_SESSION['val']['admin_email']
-                            ) && validate_email($_SESSION['val']['admin_feedback_email']) && validate_email(
-                                $_SESSION['val']['admin_return_email']
-                            )) {
+                        if (validate_email($_SESSION['val']['admin_login_email']) &&
+                            validate_email($_SESSION['val']['admin_email']) &&
+                            validate_email($_SESSION['val']['admin_feedback_email']) &&
+                            validate_email($_SESSION['val']['admin_return_email'])
+                        ) {
                             if (validate_username($_SESSION['val']['admin_username']) === 0) {
                                 if (validate_password($_SESSION['val']['admin_password']) === 0) {
                                     if (validate_identical(
                                         $_SESSION['val']['admin_password'],
                                         $_SESSION['val']['admin_passwords']
                                     )) {
-                                        if (!find(
-                                                $_SESSION['val']['admin_password'],
-                                                $_SESSION['val']['admin_username']
-                                            ) && !find(
-                                                $_SESSION['val']['admin_password'],
-                                                $_SESSION['val']['admin_first_name']
-                                            ) && !find(
-                                                $_SESSION['val']['admin_password'],
-                                                $_SESSION['val']['admin_last_name']
-                                            )) {
+                                        if (!find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_username']) &&
+                                            !find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_first_name']) &&
+                                            !find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_last_name'])
+                                        ) {
                                             if (validate_name($_SESSION['val']['admin_first_name'])) {
                                                 if (validate_name($_SESSION['val']['admin_last_name'])) {
                                                     $this->initializeClasses();
@@ -458,9 +452,7 @@ class InstallController extends Controller
 
                                                         redirect(PH7_URL_SLUG_INSTALL . 'niche');
                                                     } catch (\PDOException $oE) {
-                                                        $aErrors[] = $LANG['database_error'] . escape(
-                                                                $oE->getMessage()
-                                                            );
+                                                        $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                                                     }
                                                 } else {
                                                     $aErrors[] = $LANG['bad_last_name'];
