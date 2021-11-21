@@ -309,13 +309,6 @@ class MainController extends Controller
         $this->view->year_total_note_comments = $oStatModel->totalNoteComments(365);
         $this->view->total_note_comments = $oStatModel->totalNoteComments();
 
-        // Game Comments
-        $this->view->today_total_game_comments = $oStatModel->totalGameComments(1);
-        $this->view->week_total_game_comments = $oStatModel->totalGameComments(7);
-        $this->view->month_total_game_comments = $oStatModel->totalGameComments(31);
-        $this->view->year_total_game_comments = $oStatModel->totalGameComments(365);
-        $this->view->total_game_comments = $oStatModel->totalGameComments();
-
 
         unset($oStatModel);
     }

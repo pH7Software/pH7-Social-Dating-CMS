@@ -44,13 +44,4 @@
   </url>
 {/if}
 
-{if $is_game_enabled}
-  <url>
-    <loc>{{ $design->url('xml','sitemap','xmlrouter','comment-game') }}</loc>
-    <lastmod>{current_date}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-{/if}
-
 {{ XmlDesign::xslFooter() }}

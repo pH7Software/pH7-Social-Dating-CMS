@@ -150,11 +150,6 @@ class DataCoreModel extends Model
         return (new CommentCoreModel)->gets('video');
     }
 
-    public function getCommentsGames()
-    {
-        return (new CommentCoreModel)->gets('game');
-    }
-
     public function getRecipientCommentsProfiles($iRecipientId)
     {
         return (new CommentCoreModel)->read(
@@ -210,17 +205,6 @@ class DataCoreModel extends Model
         );
     }
 
-    public function getRecipientCommentsGames($iRecipientId)
-    {
-        return (new CommentCoreModel)->read(
-            $iRecipientId,
-            '1',
-            0,
-            static::MAX_ITEMS,
-            'game'
-        );
-    }
-
     public function getAlbumsPictures()
     {
         return (new PictureCoreModel)->album(
@@ -262,17 +246,6 @@ class DataCoreModel extends Model
             SearchCoreModel::CREATED,
             0,
             static::MAX_ITEMS
-        );
-    }
-
-    public function getGames()
-    {
-        return (new GameCoreModel)->get(
-            null,
-            null,
-            0,
-            static::MAX_ITEMS,
-            SearchCoreModel::ADDED_DATE
         );
     }
 }

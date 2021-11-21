@@ -305,14 +305,5 @@
             <td>{year_total_note_comments}</td>
             <td>{total_note_comments}</td>
         </tr>
-
-        <tr>
-            <td>{lang 'Game Comments'}</td>
-            <td>{today_total_game_comments}</td>
-            <td>{week_total_game_comments}</td>
-            <td>{month_total_game_comments}</td>
-            <td>{year_total_game_comments}</td>
-            <td>{total_game_comments}</td>
-        </tr>
     </table>
 </div>

@@ -43,10 +43,6 @@ class Comment extends CommentCore
                 $sNewTable = DbTableName::NOTE;
                 break;
 
-            case 'game':
-                $sNewTable = DbTableName::GAME;
-                break;
-
             default:
                 Various::launchErr($sTable);
         }
