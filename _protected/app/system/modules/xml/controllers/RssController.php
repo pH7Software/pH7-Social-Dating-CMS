@@ -73,7 +73,6 @@ class RssController extends MainController implements XmlControllable
             case 'forum-topic':
                 $this->sAction = $sAction;
                 break;
-
             case 'comment-profile':
             case 'comment-blog':
             case 'comment-note':

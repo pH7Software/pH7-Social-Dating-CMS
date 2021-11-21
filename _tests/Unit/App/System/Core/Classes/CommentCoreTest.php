@@ -41,8 +41,7 @@ class CommentCoreTest extends PHPUnit_Framework_TestCase
             ['picture'],
             ['video'],
             ['blog'],
-            ['note'],
-            ['game']
+            ['note']
         ];
     }
 }

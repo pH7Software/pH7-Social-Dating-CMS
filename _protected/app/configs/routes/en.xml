@@ -140,14 +140,6 @@
       <route url="comment/read/([a-zA-Z]+)/([0-9]+)" path="system/modules" module="comment" controller="comment" action="read" vars="table,id" />
       <route url="comment/post/([a-zA-Z]+)/([0-9]+)" path="system/modules" module="comment" controller="comment" action="post" vars="table,id" />
 
-    <!-- Game -->
-      <route url="free-online-game" path="system/modules" module="game" controller="main" action="index" />
-      <route url="game/([^/]+)/([0-9]+)" path="system/modules" module="game" controller="main" action="game" vars="title,id" />
-      <route url="game/category/([^/]+)/?([a-zA-Z]+)?/?([a-zA-Z]+)?" path="system/modules" module="game" controller="main" action="category" vars="name,order,sort" />
-      <route url="download/game/([0-9]+)" path="system/modules" module="game" controller="main" action="download" vars="id" />
-      <!-- admin -->
-      <route url="game/admin/edit/([^/]+)/([0-9]+)" path="system/modules" module="game" controller="admin" action="edit" vars="title,id" />
-
     <!-- Chat -->
       <route url="free-chat-room" path="system/modules" module="chat" controller="home" action="index" />
 

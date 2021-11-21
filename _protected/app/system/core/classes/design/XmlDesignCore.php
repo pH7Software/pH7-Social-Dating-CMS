@@ -66,7 +66,6 @@ class XmlDesignCore
         self::generateRssTagLink(t('Latest Note Comments'), Uri::get('xml', 'rss', 'xmlrouter', 'comment-note'));
         self::generateRssTagLink(t('Latest Picture Comments'), Uri::get('xml', 'rss', 'xmlrouter', 'comment-picture'));
         self::generateRssTagLink(t('Latest Video Comments'), Uri::get('xml', 'rss', 'xmlrouter', 'comment-video'));
-        self::generateRssTagLink(t('Latest Game Comments'), Uri::get('xml', 'rss', 'xmlrouter', 'comment-game'));
     }
 
     /**

@@ -756,10 +756,6 @@ msgstr ""
 msgid "Latest Video Comments"
 msgstr ""
 
-#: _protected/app/system/core/classes/design/XmlDesignCore.php:69
-msgid "Latest Game Comments"
-msgstr ""
-
 #: _protected/app/system/core/classes/design/XmlDesignCore.php:90
 msgid "No %software_name%'s news found."
 msgstr ""
@@ -1003,8 +999,6 @@ msgstr ""
 #: _protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:52
 #: _protected/app/system/modules/forum/forms/EditForumForm.php:46
 #: _protected/app/system/modules/forum/forms/ForumForm.php:53
-#: _protected/app/system/modules/game/forms/AdminEditForm.php:52
-#: _protected/app/system/modules/game/forms/AdminForm.php:44
 #: _protected/app/system/modules/payment/forms/EditMembershipForm.php:48
 #: _protected/app/system/modules/payment/forms/MembershipForm.php:33
 msgid "Description:"
@@ -1191,7 +1185,6 @@ msgstr ""
 #: _protected/app/system/modules/blog/forms/SearchBlogForm.php:24
 #: _protected/app/system/modules/forum/forms/SearchTopicForm.php:22
 #: _protected/app/system/modules/friend/forms/SearchFriendForm.php:28
-#: _protected/app/system/modules/game/forms/SearchGameForm.php:27
 #: _protected/app/system/modules/mail/forms/SearchMailForm.php:25
 #: _protected/app/system/modules/newsletter/forms/SearchSubscriberForm.php:54
 #: _protected/app/system/modules/note/forms/SearchNoteForm.php:32
@@ -1242,7 +1235,6 @@ msgstr ""
 #: _protected/app/system/modules/blog/forms/SearchBlogForm.php:22
 #: _protected/app/system/modules/forum/forms/SearchTopicForm.php:20
 #: _protected/app/system/modules/friend/forms/SearchFriendForm.php:26
-#: _protected/app/system/modules/game/forms/SearchGameForm.php:25
 #: _protected/app/system/modules/mail/forms/SearchMailForm.php:20
 #: _protected/app/system/modules/newsletter/forms/SearchSubscriberForm.php:35
 #: _protected/app/system/modules/note/forms/SearchNoteForm.php:30
@@ -1320,7 +1312,6 @@ msgstr ""
 #: _protected/app/system/modules/blog/forms/SearchBlogForm.php:23
 #: _protected/app/system/modules/forum/forms/SearchTopicForm.php:21
 #: _protected/app/system/modules/friend/forms/SearchFriendForm.php:27
-#: _protected/app/system/modules/game/forms/SearchGameForm.php:26
 #: _protected/app/system/modules/mail/forms/SearchMailForm.php:24
 #: _protected/app/system/modules/newsletter/forms/SearchSubscriberForm.php:46
 #: _protected/app/system/modules/note/forms/SearchNoteForm.php:31
@@ -1337,7 +1328,6 @@ msgstr ""
 #: _protected/app/system/modules/blog/forms/SearchBlogForm.php:23
 #: _protected/app/system/modules/forum/forms/SearchTopicForm.php:21
 #: _protected/app/system/modules/friend/forms/SearchFriendForm.php:27
-#: _protected/app/system/modules/game/forms/SearchGameForm.php:26
 #: _protected/app/system/modules/mail/forms/SearchMailForm.php:24
 #: _protected/app/system/modules/newsletter/forms/SearchSubscriberForm.php:50
 #: _protected/app/system/modules/note/forms/SearchNoteForm.php:31
@@ -1354,7 +1344,6 @@ msgstr ""
 #: _protected/app/system/modules/blog/forms/SearchBlogForm.php:23
 #: _protected/app/system/modules/forum/forms/SearchTopicForm.php:21
 #: _protected/app/system/modules/friend/forms/SearchFriendForm.php:27
-#: _protected/app/system/modules/game/forms/SearchGameForm.php:26
 #: _protected/app/system/modules/mail/forms/SearchMailForm.php:24
 #: _protected/app/system/modules/newsletter/forms/SearchSubscriberForm.php:49
 #: _protected/app/system/modules/note/forms/SearchNoteForm.php:31
@@ -1703,7 +1692,6 @@ msgstr ""
 #: _protected/app/system/modules/admin123/controllers/AdminController.php:81
 #: _protected/app/system/modules/affiliate/controllers/AdminController.php:106
 #: _protected/app/system/modules/forum/controllers/ForumController.php:252
-#: _protected/app/system/modules/game/controllers/MainController.php:207
 #: _protected/app/system/modules/newsletter/controllers/AdminController.php:134
 #: _protected/app/system/modules/picture/controllers/MainController.php:266
 #: _protected/app/system/modules/video/controllers/MainController.php:277
@@ -2981,7 +2969,6 @@ msgstr ""
 #: _protected/app/system/modules/blog/forms/SearchBlogForm.php:22
 #: _protected/app/system/modules/forum/forms/SearchTopicForm.php:20
 #: _protected/app/system/modules/friend/forms/SearchFriendForm.php:26
-#: _protected/app/system/modules/game/forms/SearchGameForm.php:25
 #: _protected/app/system/modules/note/forms/SearchNoteForm.php:30
 #: _protected/app/system/modules/picture/forms/SearchPictureForm.php:20
 #: _protected/app/system/modules/user/forms/SearchVisitorForm.php:23
@@ -2992,7 +2979,6 @@ msgstr ""
 #: _protected/app/system/modules/admin123/forms/SearchUserForm.php:34
 #: _protected/app/system/modules/blog/forms/SearchBlogForm.php:22
 #: _protected/app/system/modules/friend/forms/SearchFriendForm.php:26
-#: _protected/app/system/modules/game/forms/SearchGameForm.php:25
 #: _protected/app/system/modules/note/forms/SearchNoteForm.php:30
 #: _protected/app/system/modules/picture/forms/SearchPictureForm.php:20
 #: _protected/app/system/modules/user/forms/SearchVisitorForm.php:23
@@ -4666,7 +4652,6 @@ msgstr ""
 
 #: _protected/app/system/modules/blog/forms/SearchBlogForm.php:22
 #: _protected/app/system/modules/forum/forms/SearchTopicForm.php:20
-#: _protected/app/system/modules/game/forms/SearchGameForm.php:25
 #: _protected/app/system/modules/note/forms/SearchNoteForm.php:30
 #: _protected/app/system/modules/picture/forms/SearchPictureForm.php:20
 #: _protected/app/system/modules/video/forms/SearchVideoForm.php:20
@@ -5358,8 +5343,6 @@ msgstr ""
 #: _protected/app/system/modules/forum/forms/EditCategoryForm.php:36
 #: _protected/app/system/modules/forum/forms/EditForumForm.php:43
 #: _protected/app/system/modules/forum/forms/ForumForm.php:40
-#: _protected/app/system/modules/game/forms/AdminEditForm.php:49
-#: _protected/app/system/modules/game/forms/AdminForm.php:41
 msgid "Category Name:"
 msgstr ""
 
@@ -5535,173 +5518,6 @@ msgstr ""
 #: _protected/app/system/modules/friend/forms/SearchFriendForm.php:25
 #: _protected/app/system/modules/user/forms/SearchVisitorForm.php:22
 msgid "Enter the First/Last Name, Username, Email or ID of your friend."
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/AdminController.php:20
-msgid "Welcome to the Game administrator mode."
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/AdminController.php:26
-msgid "Add a new Game"
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/AdminController.php:35
-msgid "Edit Game"
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/AdminController.php:56
-msgid "The game has been removed."
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/AdminController.php:58
-msgid "The game could not be removed."
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/MainController.php:57
-msgid "game,free,flash,game site,flash game,games,gaming,online game"
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/MainController.php:78
-#: _protected/app/system/modules/game/controllers/MainController.php:102
-msgid "No Games Found!"
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/MainController.php:81
-msgid "Games Zone - Free Games"
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/MainController.php:82
-msgid "Games Zone Party"
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/MainController.php:83
-msgid "Free Games for Gamers, Flash Games, Free Online Games"
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/MainController.php:105
-msgid "Game - %0%"
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/MainController.php:106
-msgid "%0% Games Zone - %1%"
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/MainController.php:108
-msgid "Flash Game - %0%"
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/MainController.php:155
-msgid "No \"%0%\" category found."
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/MainController.php:158
-msgid "Search by Category: \"%0%\" Game"
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/MainController.php:161
-#: _protected/app/system/modules/game/controllers/MainController.php:213
-msgid "%n% Game Found!"
-msgid_plural "%n% Games Found!"
-msgstr[0] ""
-msgstr[1] ""
-
-#: _protected/app/system/modules/game/controllers/MainController.php:162
-msgid "Search the Flash Game in the Category %0% - Community Dating Social Games"
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/MainController.php:173
-msgid "Search Game - Looking a new Game"
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/MainController.php:210
-msgid "Game - Your search returned"
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/MainController.php:214
-msgid "Search - Free Games for Gamers, Flash Games, Free Online Games"
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/MainController.php:215
-msgid "search,game,free,flash,game site,flash game,games,gaming,online game"
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/MainController.php:242
-msgid "Wrong download ID specified!"
-msgstr ""
-
-#: _protected/app/system/modules/game/controllers/MainController.php:304
-msgid "Please return to the <a href=\"%0%\">main game page</a> or <a href=\"%1%\">the previous page</a>."
-msgstr ""
-
-#: _protected/app/system/modules/game/forms/AdminEditForm.php:50
-#: _protected/app/system/modules/game/forms/AdminForm.php:42
-msgid "Name of the Game:"
-msgstr ""
-
-#: _protected/app/system/modules/game/forms/AdminEditForm.php:51
-#: _protected/app/system/modules/game/forms/AdminForm.php:43
-msgid "Title of the Game:"
-msgstr ""
-
-#: _protected/app/system/modules/game/forms/AdminEditForm.php:53
-#: _protected/app/system/modules/game/forms/AdminForm.php:45
-msgid "Keywords:"
-msgstr ""
-
-#: _protected/app/system/modules/game/forms/AdminEditForm.php:57
-msgid "Game Not Found!"
-msgstr ""
-
-#: _protected/app/system/modules/game/forms/AdminForm.php:46
-msgid "Thumbnail of the Game:"
-msgstr ""
-
-#: _protected/app/system/modules/game/forms/AdminForm.php:47
-msgid "File of the Game:"
-msgstr ""
-
-#: _protected/app/system/modules/game/forms/SearchGameForm.php:17
-msgid "Enter Name, Description, Keyword or ID of a Game."
-msgstr ""
-
-#: _protected/app/system/modules/game/forms/SearchGameForm.php:24
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/accounttop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/infotop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/moduletop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/tooltop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/usertop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/hometop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/connect_35f0edcc582717793663d723f2cb335c/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/cool-profile-page_24c864680ee1bf87a84b989b035a6c21/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/error_440d7b9b5d26e425e8c5f919d93855c4/base/httptop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/ph7cms-helper_c718c7a0c6017242b5287b948f02581d/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/picture_10d1588a50ebee22e4a7c126111489e2/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/browsetop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/profiletop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/signuptop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/visitortop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/video_f6fa126c5efdb5b591bfcfd28780c0a0/base/maintop_menu.inc.cpl.php:19
-msgid "Search Games"
-msgstr ""
-
-#: _protected/app/system/modules/game/forms/SearchGameForm.php:25
-msgid "Downloaded"
-msgstr ""
-
-#: _protected/app/system/modules/game/forms/processing/AdminEditFormProcess.php:37
-msgid "The game has been successfully updated"
-msgstr ""
-
-#: _protected/app/system/modules/game/forms/processing/AdminFormProcess.php:50
-msgid "Impossible to upload the game. Please check if the folder \"%0%\" has the write permission (CHMOD 755) or contact your host to check it."
-msgstr ""
-
-#: _protected/app/system/modules/game/forms/processing/AdminFormProcess.php:72
-msgid "The game has been successfully added!"
 msgstr ""
 
 #: _protected/app/system/modules/hotornot/controllers/MainController.php:40
