@@ -89,7 +89,6 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Chat Rooms
 * Chatroulette
 * Instant Messenger (IM module)
-* Games (with high quality and viral games installed)
 * In-built affiliate system (that encourages brand influencers/ambassadors to promote your dating platform)
 * Newsletter
 * Activity Streams
