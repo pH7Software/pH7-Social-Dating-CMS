@@ -24,7 +24,9 @@ class Database extends PDO
 
     public function __construct(array $aParams)
     {
-        $aDriverOptions[PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES ' . $aParams['db_charset'];
+        if ($this->isMySQL()) {
+            $aDriverOptions[PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES ' . $aParams['db_charset'];
+        }
 
         parent::__construct(
             "{$aParams['db_type']}:host={$aParams['db_hostname']};dbname={$aParams['db_name']};",
@@ -34,5 +36,17 @@ class Database extends PDO
         );
 
         $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+
+    /**
+     * Checks if the DBMS is MySQL.
+     *
+     * @param array $aParams
+     *
+     * @return bool
+     */
+    private function isMySQL(array $aParams)
+    {
+        return $aParams['db_type'] === Database::DBMS_MYSQL_NAME;
     }
 }
