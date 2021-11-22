@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PH7\Cli\Installer\Command;
 
-use PH7\Cli\Installer\Cli\Helper;
+use PH7\Cli\Installer\Misc\Helper;
 use PH7\Cli\Installer\Exception\Validation\InvalidPathException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -56,7 +56,7 @@ class InstallerCommand extends Command
     {
         $io->section('Protected Path');
 
-        $sProtectedPath = $io->ask('Full path of the "protected" directory');
+        $sProtectedPath = $io->ask('Full path to the "protected" folder');
 
         if (is_file($sProtectedPath)) {
             if (is_readable($sProtectedPath)) {

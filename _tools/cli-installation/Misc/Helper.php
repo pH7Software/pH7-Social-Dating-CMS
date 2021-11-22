@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PH7\Cli\Installer\Cli;
+namespace PH7\Cli\Installer\Misc;
 
 class Helper {
     public static function getFfmpegPath()
