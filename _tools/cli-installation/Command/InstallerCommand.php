@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PH7\Cli\Installer\Command;
 
+use Exception;
 use PDO;
 use PDOException;
 use PH7\Cli\Installer\Exception\FileNotWritableException;
@@ -39,13 +40,22 @@ class InstallerCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         try {
-            $this->license($io);
-        } catch (InvalidLicenseAgreementException $except) {
-            $io->error($except->getMessage());
-        }
+            try {
+                $this->license($io);
+            } catch (InvalidLicenseAgreementException $except) {
+                $io->error($except->getMessage());
 
-        try {
-            $this->configProtectedPath($io);
+                return Command::FAILURE;
+            }
+
+            try {
+                $this->configProtectedPath($io);
+            } catch (FileNotWritableException $except) {
+                $io->error($except->getMessage());
+
+                return Command::FAILURE;
+            }
+
             try {
                 $dbDetails = $this->getDatabaseSetup($io);
                 $db = new MySQL([
@@ -72,21 +82,39 @@ class InstallerCommand extends Command
                 return Command::FAILURE;
             }
 
+            try {
+                $this->buildAppConfigFile(
+                    array_merge($appSettings, $dbDetails)
+                );
+            } catch (FileNotWritableException $except) {
+                $io->error($except->getMessage());
 
-            $this->buildAppConfigFile(
-                array_merge($appSettings, $dbDetails)
+                return Command::FAILURE;
+            }
+
+            try {
+                $this->configureSite($io, $db);
+            } catch (PDOException $except) {
+                $io->error(
+                    sprintf('MySQL error: %s', $except->getMessage())
+                );
+
+                return Command::FAILURE;
+            }
+
+            $output->writeln(
+                $io->success('The installation is now completed! 🤗')
             );
 
-            $this->configureSite($io, $db);
-        } catch (FileNotWritableException $except) {
+            return Command::SUCCESS;
+        } catch (Exception $except) {
             $io->error($except->getMessage());
+            $io->writeln('Please try again 😊');
+            $io->writeln('Or report any bugs/issues at');
+            $io->writeln('https://github.com/pH7Software/pH7-Social-Dating-CMS/issues');
+
+            return Command::FAILURE;
         }
-
-        $output->writeln(
-            $io->success('The installation is now completed! 🤗')
-        );
-
-        return Command::SUCCESS;
     }
 
     private function license(SymfonyStyle $io): void
