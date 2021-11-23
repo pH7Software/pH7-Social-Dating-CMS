@@ -4,12 +4,18 @@ declare(strict_types=1);
 
 namespace PH7\Cli\Installer\Command;
 
+use PDO;
 use PDOException;
+use PH7\Cli\Installer\Exception\FileNotWritableException;
 use PH7\Cli\Installer\Exception\InvalidEmailException;
+use PH7\Cli\Installer\Exception\InvalidLicenseAgreementException;
 use PH7\Cli\Installer\Exception\Validation\InvalidPathException;
-use PH7\Cli\Installer\Misc\Database;
+use PH7\Cli\Installer\Misc\DbDefaultConfig;
 use PH7\Cli\Installer\Misc\Helper;
+use PH7\Cli\Installer\Misc\MySQL;
+use PH7\Cli\Installer\Misc\SqlQuery;
 use PH7\Cli\Installer\Misc\Validation;
+use PH7\DbTableName;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -30,50 +36,60 @@ class InstallerCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $helper = $this->getHelper('question');
         $io = new SymfonyStyle($input, $output);
 
-        $this->license($io);
-        $this->configProtectedPath();
         try {
-            $dbDetails = $this->getDatabaseSetup();
-            $db = new Database([
-                'db_type' => Database::DSN_MYSQL_PREFIX,
-                'db_hostname' => $dbDetails['db_host'],
-                'db_name' => $dbDetails['db_name'],
-                'db_username' => $dbDetails['db_user'],
-                'db_password' => $dbDetails['db_password'],
-            ]);
-        } catch (PDOException $except) {
-            $io->error(
-                sprintf('Database error: %s', $except->getMessage())
+            $this->license($io);
+        } catch (InvalidLicenseAgreementException $except) {
+            $io->error($except->getMessage());
+        }
+
+        try {
+            $this->configProtectedPath($io);
+            try {
+                $dbDetails = $this->getDatabaseSetup($io);
+                $db = new MySQL([
+                    'db_type' => MySQL::DSN_MYSQL_PREFIX,
+                    'db_hostname' => $dbDetails['db_host'],
+                    'db_name' => $dbDetails['db_name'],
+                    'db_username' => $dbDetails['db_user'],
+                    'db_password' => $dbDetails['db_password'],
+                    'db_charset' => DbDefaultConfig::CHARSET
+                ]);
+            } catch (PDOException $except) {
+                $io->error(
+                    sprintf('Database error: %s', $except->getMessage())
+                );
+
+                return Command::FAILURE;
+            }
+
+            try {
+                $appSettings = $this->getAppSettings($io);
+            } catch (InvalidEmailException $except) {
+                $io->error($except->getMessage());
+
+                return Command::FAILURE;
+            }
+
+
+            $this->buildAppConfigFile(
+                array_merge($appSettings, $dbDetails)
             );
 
-            return Command::FAILURE;
-        }
-
-        try {
-            $appSettings = $this->getAppSettings();
-        } catch (InvalidEmailException $except) {
+            $this->configureSite($io, $db);
+        } catch (FileNotWritableException $except) {
             $io->error($except->getMessage());
-
-            return Command::FAILURE;
         }
-
-
-        $this->buildAppConfigFile(
-            array_merge($appSettings, $dbDetails)
-        );
-
 
         $output->writeln(
-            $io->success('The installation is now completed')
+            $io->success('The installation is now completed! 🤗')
         );
 
         return Command::SUCCESS;
     }
 
-    private function license(SymfonyStyle $io): int
+    private function license(SymfonyStyle $io): void
     {
         $io->section('License Agreement');
 
@@ -81,35 +97,29 @@ class InstallerCommand extends Command
         $answer = $io->choice($message, ['y' => 'yes', 'n' => 'no'], 'y');
 
         if ($answer === Answer::NO) {
-            $io->error('Before installing the software, you will have to agree with it.');
-            $io->error('Come back later if you changed your mind.');
+            $message = "Before installing the software, you will have to agree with it.\n
+            Come back later if you changed your mind.";
 
-            return Command::INVALID;
+            throw new InvalidLicenseAgreementException($message);
         }
-
-        return Command::SUCCESS;
     }
 
-    private function configProtectedPath(SymfonyStyle $io): int
+    private function configProtectedPath(SymfonyStyle $io): void
     {
         $io->section('Protected Path');
 
-        $sProtectedPath = $io->ask('Full path to the "protected" folder');
+        $protectedPath = $io->ask('Full path to the "protected" folder');
 
-        if (is_file($sProtectedPath)) {
-            if (is_readable($sProtectedPath)) {
-                $sConstantContent = file_get_contents(self::ROOT_INSTALL . 'data/configs/constants.php');
+        if (is_file($protectedPath)) {
+            if (is_readable($protectedPath)) {
+                $constantContent = file_get_contents(self::ROOT_INSTALL . 'data/configs/constants.php');
             }
         } else {
             throw new InvalidPathException();
         }
 
-        if (!@file_put_contents(self::ROOT_PROJECT . '_constants.php', $sConstantContent)) {
-            $io->error('Please change the permissions of the root public directory to write mode (CHMOD 777)');
-
-            return Command::FAILURE;
-        } else {
-            return Command::SUCCESS;
+        if (!@file_put_contents(self::ROOT_PROJECT . '_constants.php', $constantContent)) {
+            throw new FileNotWritableException('Please change the permissions of the root public directory to write mode (CHMOD 777)');
         }
     }
 
@@ -148,7 +158,7 @@ class InstallerCommand extends Command
         ];
     }
 
-    private function buildAppConfigFile(array $aData)
+    private function buildAppConfigFile(array $aData): void
     {
         @require_once self::ROOT_PROJECT . '_constants.php';
         @require_once PH7_PATH_APP . 'configs/constants.php';
@@ -156,24 +166,77 @@ class InstallerCommand extends Command
 
         // Config File
         @chmod(PH7_PATH_APP_CONFIG, 0777);
-        $sConfigContent = file_get_contents(PH7_ROOT_INSTALL . 'data/configs/config.ini');
+        $configContent = file_get_contents(PH7_ROOT_INSTALL . 'data/configs/config.ini');
 
-        $sConfigContent = str_replace('%bug_report_email%', $aData['bug_report_email'], $sConfigContent);
-        $sConfigContent = str_replace('%ffmpeg_path%', Helper::cleanString($aData['ffmpeg_path']), $sConfigContent);
+        $configContent = str_replace('%bug_report_email%', $aData['bug_report_email'], $configContent);
+        $configContent = str_replace('%ffmpeg_path%', Helper::cleanString($aData['ffmpeg_path']), $configContent);
 
-        $sConfigContent = str_replace('%db_type_name%', Database::DBMS_MYSQL_NAME, $sConfigContent);
-        $sConfigContent = str_replace('%db_type%', Database::DSN_MYSQL_PREFIX, $sConfigContent);
-        $sConfigContent = str_replace('%db_hostname%', $aData['db_name'], $sConfigContent);
-        $sConfigContent = str_replace('%db_username%', Helper::cleanString($aData['db_user']), $sConfigContent);
-        $sConfigContent = str_replace('%db_password%', Helper::cleanString($aData['db_password']), $sConfigContent);
-        $sConfigContent = str_replace('%db_name%', Helper::cleanString($aData['db_name']), $sConfigContent);
-        $sConfigContent = str_replace('%db_prefix%', 'ph7_', $sConfigContent);
-        $sConfigContent = str_replace('%db_charset%', Database::CHARSET, $sConfigContent);
-        $sConfigContent = str_replace('%db_port%', Database::PORT, $sConfigContent);
+        $configContent = str_replace('%db_type_name%', MySQL::DBMS_MYSQL_NAME, $configContent);
+        $configContent = str_replace('%db_type%', MySQL::DSN_MYSQL_PREFIX, $configContent);
+        $configContent = str_replace('%db_hostname%', $aData['db_host'], $configContent);
+        $configContent = str_replace('%db_username%', Helper::cleanString($aData['db_user']), $configContent);
+        $configContent = str_replace('%db_password%', Helper::cleanString($aData['db_password']), $configContent);
+        $configContent = str_replace('%db_name%', Helper::cleanString($aData['db_name']), $configContent);
+        $configContent = str_replace('%db_prefix%', DbDefaultConfig::PREFIX, $configContent);
+        $configContent = str_replace('%db_charset%', DbDefaultConfig::CHARSET, $configContent);
+        $configContent = str_replace('%db_port%', DbDefaultConfig::PORT, $configContent);
 
-        $sConfigContent = str_replace('%private_key%', Helper::generateHash(40), $sConfigContent);
-        $sConfigContent = str_replace('%rand_id%', Helper::generateHash(5), $sConfigContent);
+        $configContent = str_replace('%private_key%', Helper::generateHash(40), $configContent);
+        $configContent = str_replace('%rand_id%', Helper::generateHash(5), $configContent);
 
-        return @file_put_contents(PH7_PATH_APP_CONFIG . 'config.ini', $sConfigContent);
+        if (@file_put_contents(PH7_PATH_APP_CONFIG . 'config.ini', $configContent)) {
+            throw new FileNotWritableException('Please change the permissions for "protected/app/configs" directory to write mode (CHMOD 777)');
+        }
+    }
+
+    private function configureSite(SymfonyStyle $io, PDO $db): void
+    {
+        $io->section('Admin Dashboard Configuration');
+
+        $siteName = $io->ask('Site Name');
+
+        $adminUsername = $io->ask('Admin Username');
+        $adminPassword = $io->ask('Admin Password');
+        $adminLoginEmail = $io->ask('Admin Login Email (to login to dashboard)');
+        $adminEmail = $io->ask('Admin Email');
+        $adminFirstName = $io->ask('Admin First Name');
+        $adminLastName = $io->ask('Admin First Name');
+        $adminFeedbackEmail = $io->ask('Contact Email');
+        $noReplyEmail = $io->ask('No-reply Email');
+
+        $rStmt = $db->prepare(
+            sprintf(SqlQuery::ADD_ADMIN, DbDefaultConfig::PREFIX . DbTableName::ADMIN)
+        );
+
+        $sCurrentDate = date('Y-m-d H:i:s');
+        $rStmt->execute([
+            'username' => $adminUsername,
+            'password' => Framework\Security\Security::hashPwd($adminPassword),
+            'email' => $adminLoginEmail,
+            'firstName' => $adminFirstName,
+            'lastName' => $adminLastName,
+            'joinDate' => $sCurrentDate,
+            'lastActivity' => $sCurrentDate,
+        ]);
+
+        $rStmt = $db->prepare(
+            sprintf(SqlQuery::UPDATE_SITE_NAME, DbDefaultConfig::PREFIX . DbTableName::SETTING)
+        );
+        $rStmt->execute(['siteName' => $siteName]);
+
+        $rStmt = $db->prepare(
+            sprintf(SqlQuery::UPDATE_ADMIN_EMAIL, DbDefaultConfig::PREFIX . DbTableName::SETTING)
+        );
+        $rStmt->execute(['adminEmail' => $adminEmail]);
+
+        $rStmt = $db->prepare(
+            sprintf(SqlQuery::UPDATE_FEEDBACK_EMAIL, DbDefaultConfig::PREFIX . DbTableName::SETTING)
+        );
+        $rStmt->execute(['feedbackEmail' => $adminFeedbackEmail]);
+
+        $rStmt = $db->prepare(
+            sprintf(SqlQuery::UPDATE_RETURN_EMAIL, DbDefaultConfig::PREFIX . DbTableName::SETTING)
+        );
+        $rStmt->execute(['returnEmail' => $noReplyEmail]);
     }
 }
