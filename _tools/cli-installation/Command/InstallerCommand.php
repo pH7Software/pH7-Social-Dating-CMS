@@ -50,7 +50,7 @@ class InstallerCommand extends Command
 
             try {
                 $this->configProtectedPath($io);
-            } catch (FileNotWritableException $except) {
+            } catch (InvalidPathException | FileNotWritableException $except) {
                 $io->error($except->getMessage());
 
                 return Command::FAILURE;
@@ -110,7 +110,7 @@ class InstallerCommand extends Command
         } catch (Exception $except) {
             $io->error($except->getMessage());
             $io->writeln('Please try again 😊');
-            $io->writeln('Or report any bugs/issues at');
+            $io->writeln('Or report any bugs/issues at:');
             $io->writeln('https://github.com/pH7Software/pH7-Social-Dating-CMS/issues');
 
             return Command::FAILURE;
@@ -141,13 +141,14 @@ class InstallerCommand extends Command
         if (is_file($protectedPath)) {
             if (is_readable($protectedPath)) {
                 $constantContent = file_get_contents(self::ROOT_INSTALL . 'data/configs/constants.php');
-            }
-        } else {
-            throw new InvalidPathException();
-        }
+                $constantContent = str_replace('%path_protected%', addslashes($protectedPath), $constantContent);
 
-        if (!@file_put_contents(self::ROOT_PROJECT . '_constants.php', $constantContent)) {
-            throw new FileNotWritableException('Please change the permissions of the root public directory to write mode (CHMOD 777)');
+                if (!@file_put_contents(self::ROOT_PROJECT . '_constants.php', $constantContent)) {
+                    throw new FileNotWritableException('Please change the permissions of the root public directory to write mode (CHMOD 777)');
+                }
+            }
+
+            throw new InvalidPathException('The protected directory wasn\'t found or doesn\'t have the right (CHMOD 777) writing permission');
         }
     }
 
@@ -228,7 +229,7 @@ class InstallerCommand extends Command
         $adminLoginEmail = $io->ask('Admin Login Email (to login to dashboard)');
         $adminEmail = $io->ask('Admin Email');
         $adminFirstName = $io->ask('Admin First Name');
-        $adminLastName = $io->ask('Admin First Name');
+        $adminLastName = $io->ask('Admin Last Name');
         $adminFeedbackEmail = $io->ask('Contact Email');
         $noReplyEmail = $io->ask('No-reply Email');
 
