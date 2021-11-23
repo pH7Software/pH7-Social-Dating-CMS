@@ -2,6 +2,7 @@
 
 require ROOT_DIR . '/vendor/autoload.php';
 
+use PH7\Cli\Installer\Command\InstallerCommand;
 use Symfony\Component\Console\Application;
 
 $application = new Application();

@@ -12,6 +12,7 @@ class Database extends PDO
     public const DSN_MYSQL_PREFIX = 'mysql';
     public const DSN_POSTGRESQL_PREFIX = 'pgsql';
     public const CHARSET = 'utf8mb4';
+    public const PORT = '3306';
 
     private const REQUIRED_VERSION = '5.5.3';
 

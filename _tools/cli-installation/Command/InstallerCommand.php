@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PH7\Cli\Installer\Command;
 
 use PDOException;
+use PH7\Cli\Installer\Exception\InvalidEmailException;
 use PH7\Cli\Installer\Exception\Validation\InvalidPathException;
 use PH7\Cli\Installer\Misc\Database;
 use PH7\Cli\Installer\Misc\Helper;
@@ -13,8 +14,6 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use function PH7\clean_string;
-use function PH7\generate_hash;
 
 class InstallerCommand extends Command
 {
@@ -49,12 +48,29 @@ class InstallerCommand extends Command
             $io->error(
                 sprintf('Database error: %s', $except->getMessage())
             );
+
+            return Command::FAILURE;
         }
 
-        $appSettings = $this->getAppSettings();
+        try {
+            $appSettings = $this->getAppSettings();
+        } catch (InvalidEmailException $except) {
+            $io->error($except->getMessage());
 
-        return Command::FAILURE;
+            return Command::FAILURE;
+        }
 
+
+        $this->buildAppConfigFile(
+            array_merge($appSettings, $dbDetails)
+        );
+
+
+        $output->writeln(
+            $io->success('The installation is now completed')
+        );
+
+        return Command::SUCCESS;
     }
 
     private function license(SymfonyStyle $io): int
@@ -114,7 +130,7 @@ class InstallerCommand extends Command
         ];
     }
 
-    private function getAppSettings(SymfonyStyle $io): array|int
+    private function getAppSettings(SymfonyStyle $io): array
     {
         $io->section('Application Settings');
 
@@ -123,9 +139,7 @@ class InstallerCommand extends Command
 
         $validation = new Validation($bugReportEmail);
         if (!$validation->isValidEmail()) {
-            $io->error('Email not valid. Please enter a valid email.');
-
-            return Command::INVALID;
+            throw new InvalidEmailException('Email not valid. Please enter a valid email.');
         }
 
         return [
@@ -134,27 +148,32 @@ class InstallerCommand extends Command
         ];
     }
 
-    private function parseAppConfigFile() {
+    private function buildAppConfigFile(array $aData)
+    {
+        @require_once self::ROOT_PROJECT . '_constants.php';
+        @require_once PH7_PATH_APP . 'configs/constants.php';
         @require_once PH7_PATH_APP . 'configs/constants.php';
 
         // Config File
         @chmod(PH7_PATH_APP_CONFIG, 0777);
         $sConfigContent = file_get_contents(PH7_ROOT_INSTALL . 'data/configs/config.ini');
 
-        $sConfigContent = str_replace('%bug_report_email%', $_SESSION['val']['bug_report_email'], $sConfigContent);
-        $sConfigContent = str_replace('%ffmpeg_path%', clean_string($_SESSION['val']['ffmpeg_path']), $sConfigContent);
+        $sConfigContent = str_replace('%bug_report_email%', $aData['bug_report_email'], $sConfigContent);
+        $sConfigContent = str_replace('%ffmpeg_path%', Helper::cleanString($aData['ffmpeg_path']), $sConfigContent);
 
-        $sConfigContent = str_replace('%db_type_name%', $_SESSION['db']['type_name'], $sConfigContent);
-        $sConfigContent = str_replace('%db_type%', $_SESSION['db']['type'], $sConfigContent);
-        $sConfigContent = str_replace('%db_hostname%', $_SESSION['db']['hostname'], $sConfigContent);
-        $sConfigContent = str_replace('%db_username%', clean_string($_SESSION['db']['username']), $sConfigContent);
-        $sConfigContent = str_replace('%db_password%', clean_string($_SESSION['db']['password']), $sConfigContent);
-        $sConfigContent = str_replace('%db_name%', clean_string($_SESSION['db']['name']), $sConfigContent);
-        $sConfigContent = str_replace('%db_prefix%', clean_string($_SESSION['db']['prefix']), $sConfigContent);
-        $sConfigContent = str_replace('%db_charset%', $_SESSION['db']['charset'], $sConfigContent);
-        $sConfigContent = str_replace('%db_port%', $_SESSION['db']['port'], $sConfigContent);
+        $sConfigContent = str_replace('%db_type_name%', Database::DBMS_MYSQL_NAME, $sConfigContent);
+        $sConfigContent = str_replace('%db_type%', Database::DSN_MYSQL_PREFIX, $sConfigContent);
+        $sConfigContent = str_replace('%db_hostname%', $aData['db_name'], $sConfigContent);
+        $sConfigContent = str_replace('%db_username%', Helper::cleanString($aData['db_user']), $sConfigContent);
+        $sConfigContent = str_replace('%db_password%', Helper::cleanString($aData['db_password']), $sConfigContent);
+        $sConfigContent = str_replace('%db_name%', Helper::cleanString($aData['db_name']), $sConfigContent);
+        $sConfigContent = str_replace('%db_prefix%', 'ph7_', $sConfigContent);
+        $sConfigContent = str_replace('%db_charset%', Database::CHARSET, $sConfigContent);
+        $sConfigContent = str_replace('%db_port%', Database::PORT, $sConfigContent);
 
-        $sConfigContent = str_replace('%private_key%', generate_hash(40), $sConfigContent);
-        $sConfigContent = str_replace('%rand_id%', generate_hash(5), $sConfigContent);
+        $sConfigContent = str_replace('%private_key%', Helper::generateHash(40), $sConfigContent);
+        $sConfigContent = str_replace('%rand_id%', Helper::generateHash(5), $sConfigContent);
+
+        return @file_put_contents(PH7_PATH_APP_CONFIG . 'config.ini', $sConfigContent);
     }
 }
