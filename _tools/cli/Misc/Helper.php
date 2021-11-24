@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PH7\Cli\Installer\Misc;
+namespace PH7\Cli\Misc;
 
 class Helper
 {

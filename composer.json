@@ -82,7 +82,7 @@
   },
   "autoload": {
     "psr-4": {
-      "PH7\\Cli\\Installer\\": "_tools/cli-installation"
+      "PH7\\Cli\\": "_tools/cli"
     }
   },
   "autoload-dev": {

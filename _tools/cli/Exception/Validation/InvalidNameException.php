@@ -1,6 +1,6 @@
 <?php
 
-namespace PH7\Cli\Installer\Exception\Validation;
+namespace PH7\Cli\Exception\Validation;
 
 use RuntimeException;
 

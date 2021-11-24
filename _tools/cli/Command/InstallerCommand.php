@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace PH7\Cli\Installer\Command;
+namespace PH7\Cli\Command;
 
 use Exception;
 use PDO;
 use PDOException;
-use PH7\Cli\Installer\Exception\FileNotWritableException;
-use PH7\Cli\Installer\Exception\InvalidEmailException;
-use PH7\Cli\Installer\Exception\InvalidLicenseAgreementException;
-use PH7\Cli\Installer\Exception\Validation\InvalidPathException;
-use PH7\Cli\Installer\Misc\DbDefaultConfig;
-use PH7\Cli\Installer\Misc\Helper;
-use PH7\Cli\Installer\Misc\MySQL;
-use PH7\Cli\Installer\Misc\SqlQuery;
-use PH7\Cli\Installer\Misc\Validation;
+use PH7\Cli\Exception\FileNotWritableException;
+use PH7\Cli\Exception\InvalidEmailException;
+use PH7\Cli\Exception\InvalidLicenseAgreementException;
+use PH7\Cli\Exception\Validation\InvalidPathException;
+use PH7\Cli\Misc\DbDefaultConfig;
+use PH7\Cli\Misc\Helper;
+use PH7\Cli\Misc\MySQL;
+use PH7\Cli\Misc\SqlQuery;
+use PH7\Cli\Misc\Validation;
 use PH7\DbTableName;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

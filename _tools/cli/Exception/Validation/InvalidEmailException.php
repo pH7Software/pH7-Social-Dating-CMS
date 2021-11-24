@@ -1,6 +1,6 @@
 <?php
 
-namespace PH7\Cli\Installer\Exception;
+namespace PH7\Cli\Exception;
 
 use RuntimeException;
 

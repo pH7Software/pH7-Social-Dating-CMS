@@ -1,6 +1,6 @@
 <?php
 
-namespace PH7\Cli\Installer\Misc;
+namespace PH7\Cli\Misc;
 
 class Validation
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace PH7\Cli\Installer\Command;
+namespace PH7\Cli\Command;
 
 final class Answer
 {

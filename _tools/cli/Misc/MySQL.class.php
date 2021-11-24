@@ -1,9 +1,9 @@
 <?php
 
-namespace PH7\Cli\Installer\Misc;
+namespace PH7\Cli\Misc;
 
 use PDO;
-use PH7\Cli\Installer\Exception\SQLInvalidVersion;
+use PH7\Cli\Exception\SQLInvalidVersion;
 
 class MySQL extends PDO
 {
