@@ -1,10 +1,12 @@
-## 🚀 pH7Builder CLI Installation Wizard 🧙
+# 🚀 pH7Builder CLI
+
+## Installation Wizard  🧙
 
 ### The first CLI Dating Builder Installer Tool 😻 (ever invented! 🪄)
 
 ### 🤔 How to use it?
 
-Inside of this folder (`_tools/cli-installation`), run `php installer ph7builder:run`
+Inside of this folder (`_tools/cli`), run `php ph7cms setup:install`
 
 Then, follow the instructions.
 
