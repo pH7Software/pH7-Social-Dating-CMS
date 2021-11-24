@@ -126,7 +126,7 @@ class InstallerCommand extends Command
 
         if ($answer === Answer::NO) {
             $message = "Before installing the software, you will have to agree with it.\n
-            Come back later if you changed your mind.";
+            Come back later if you change your mind.";
 
             throw new InvalidLicenseAgreementException($message);
         }
