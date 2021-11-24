@@ -30,7 +30,7 @@ class InstallerCommand extends Command
 
     protected function configure(): void
     {
-        $this->setName('ph7builder:run')
+        $this->setName('run')
             ->setDescription(sprintf('Installing %s, as simple as possible!', self::SOFTWARE_NAME));
 
     }
