@@ -1,6 +1,16 @@
 #!/usr/bin/env php
 
-require ROOT_DIR . '/vendor/autoload.php';
+<?php
+/**
+ * Copyright (c) Pierre-Henry Soria <hi@ph7.me>
+ * MIT License - https://opensource.org/licenses/MIT
+ */
+
+define('PH7_ROOT_PROJECT', dirname(__DIR__, 2) . DIRECTORY_SEPARATOR);
+define('PH7_CLI_INSTALLER_DIR', __DIR__ . DIRECTORY_SEPARATOR);
+define('PH7_PROTECTED_DIR', '_protected/');
+
+require PH7_ROOT_PROJECT . PH7_PROTECTED_DIR . 'vendor/autoload.php';
 
 use PH7\Cli\Installer\Command\InstallerCommand;
 use Symfony\Component\Console\Application;

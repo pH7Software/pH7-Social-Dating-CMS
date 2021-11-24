@@ -25,12 +25,12 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class InstallerCommand extends Command
 {
     protected const SOFTWARE_NAME = 'pH7CMS';
-    private const ROOT_INSTALL = __DIR__ . DIRECTORY_SEPARATOR;
-    private const ROOT_PROJECT = __DIR__ . '../../../';
+    private const CLI_INSTALLER_DIR = PH7_CLI_INSTALLER_DIR;
+    private const ROOT_PROJECT = PH7_ROOT_PROJECT;
 
     protected function configure(): void
     {
-        $this->setName('install:run')
+        $this->setName('ph7builder:run')
             ->setDescription(sprintf('Installing %s, as simple as possible!', self::SOFTWARE_NAME));
 
     }
@@ -49,7 +49,7 @@ class InstallerCommand extends Command
             }
 
             try {
-                $this->configProtectedPath($io);
+                $this->configProtectedPath();
             } catch (InvalidPathException | FileNotWritableException $except) {
                 $io->error($except->getMessage());
 
@@ -132,15 +132,12 @@ class InstallerCommand extends Command
         }
     }
 
-    private function configProtectedPath(SymfonyStyle $io): void
+    private function configProtectedPath(): void
     {
-        $io->section('Protected Path');
-
-        $protectedPath = $io->ask('Full path to the "protected" folder');
-
+        $protectedPath = self::ROOT_PROJECT . PH7_PROTECTED_DIR;
         if (is_file($protectedPath)) {
             if (is_readable($protectedPath)) {
-                $constantContent = file_get_contents(self::ROOT_INSTALL . 'data/configs/constants.php');
+                $constantContent = file_get_contents(self::CLI_INSTALLER_DIR . 'data/configs/constants.php');
                 $constantContent = str_replace('%path_protected%', addslashes($protectedPath), $constantContent);
 
                 if (!@file_put_contents(self::ROOT_PROJECT . '_constants.php', $constantContent)) {
@@ -195,7 +192,7 @@ class InstallerCommand extends Command
 
         // Config File
         @chmod(PH7_PATH_APP_CONFIG, 0777);
-        $configContent = file_get_contents(PH7_ROOT_INSTALL . 'data/configs/config.ini');
+        $configContent = file_get_contents(PH7_CLI_INSTALLER_DIR . 'data/configs/config.ini');
 
         $configContent = str_replace('%bug_report_email%', $aData['bug_report_email'], $configContent);
         $configContent = str_replace('%ffmpeg_path%', Helper::cleanString($aData['ffmpeg_path']), $configContent);
