@@ -24,8 +24,7 @@ class Helper
         return substr(
             hash(
                 'whirlpool',
-                time() . hash('sha512',
-                    getenv('REMOTE_ADDR') . uniqid($sPrefix, true) . microtime(true) * 999999999999)
+                time() . hash('sha512', getenv('REMOTE_ADDR') . uniqid($sPrefix, true) . microtime(true) * 999999999999)
             ),
             0,
             $length
