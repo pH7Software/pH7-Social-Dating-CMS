@@ -34,4 +34,5 @@ them [by raising an issue on GitHub](https://github.com/pH7Software/pH7-Social-D
 
 ## 👋 Contact & Say Hello
 
-Was made by [Pierre-Henry Soria](https://www.linkedin.com/in/ph7enry)
+Was made by [Pierre-Henry Soria](https://www.linkedin.com/in/ph7enry). Don't forget to say 〝hi” 😊
+I will be more than happy to chat with you! 🤗
