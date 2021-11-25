@@ -1,6 +1,6 @@
 <?php
 
-namespace PH7\Cli\Misc;
+namespace PH7\Cli\Misc\Database;
 
 final class DbDefaultConfig
 {
