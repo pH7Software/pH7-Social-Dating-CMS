@@ -13,9 +13,9 @@ class Validation
     private const NAME_MIN_LENGTH = 2;
     private const NAME_MAX_LENGTH = 20;
 
-    private string $value;
+    private ?string $value;
 
-    public function __construct(string $value)
+    public function __construct(?string $value)
     {
         $this->value = $value;
     }

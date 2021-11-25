@@ -235,7 +235,7 @@ class InstallerCommand extends Command
     {
         $io->section('Admin Dashboard Configuration');
 
-        $siteName = $io->ask('Site Name');
+        $siteName = $io->ask('Site Name (optional)');
 
         $adminUsername = $io->ask('Admin Username');
         $adminPassword = $io->ask('Admin Password');
@@ -247,8 +247,8 @@ class InstallerCommand extends Command
         $noReplyEmail = $io->ask('No-reply Email');
 
         // Validate the fields
-        foreach ([$adminLoginEmail, $adminEmail] as $emailAddress) {
-            $this->checkEmailAddress($emailAddress);
+        foreach ([$adminLoginEmail, $adminEmail] as $email) {
+            $this->checkEmailAddress($email);
         }
 
         $rStmt = $db->prepare(
@@ -266,10 +266,13 @@ class InstallerCommand extends Command
             'lastActivity' => $sCurrentDate,
         ]);
 
-        $rStmt = $db->prepare(
-            sprintf(SqlQuery::UPDATE_SITE_NAME, DbDefaultConfig::PREFIX . DbTableName::SETTING)
-        );
-        $rStmt->execute(['siteName' => $siteName]);
+        if (!empty($siteName)) {
+            // Only update the default site name if it was mentioned
+            $rStmt = $db->prepare(
+                sprintf(SqlQuery::UPDATE_SITE_NAME, DbDefaultConfig::PREFIX . DbTableName::SETTING)
+            );
+            $rStmt->execute(['siteName' => $siteName]);
+        }
 
         $rStmt = $db->prepare(
             sprintf(SqlQuery::UPDATE_ADMIN_EMAIL, DbDefaultConfig::PREFIX . DbTableName::SETTING)
