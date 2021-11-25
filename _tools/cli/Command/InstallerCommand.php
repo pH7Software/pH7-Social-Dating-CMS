@@ -149,7 +149,7 @@ class InstallerCommand extends Command
                 $constantContent = str_replace('%path_protected%', addslashes($protectedPath), $constantContent);
 
                 if (!@file_put_contents(self::ROOT_PROJECT . '_constants.php', $constantContent)) {
-                    throw new FileNotWritableException('Please change the permissions of the root public directory to write mode (CHMOD 777)');
+                    throw new FileNotWritableException('Please change the permissions of the public root directory to write mode (CHMOD 777)');
                 }
             }
 
@@ -227,7 +227,7 @@ class InstallerCommand extends Command
         $configContent = str_replace('%rand_id%', Helper::generateHash(5), $configContent);
 
         if (@file_put_contents(PH7_PATH_APP_CONFIG . 'config.ini', $configContent)) {
-            throw new FileNotWritableException('Please change the permissions for "protected/app/configs" directory to write mode (CHMOD 777)');
+            throw new FileNotWritableException('Please change the permissions for "protected/app/configs" to write mode (CHMOD 777)');
         }
     }
 
