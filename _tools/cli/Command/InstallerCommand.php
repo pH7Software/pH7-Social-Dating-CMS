@@ -31,6 +31,7 @@ class InstallerCommand extends Command
     protected const SOFTWARE_NAME = 'pH7CMS';
     private const CLI_DIR = PH7_CLI_DIR;
     private const ROOT_PROJECT = PH7_ROOT_PROJECT;
+    private const INSTALL_DIR_NAME = '_install/';
 
     protected function configure(): void
     {
@@ -138,10 +139,10 @@ class InstallerCommand extends Command
 
     private function configProtectedPath(): void
     {
-        $protectedPath = self::ROOT_PROJECT . PH7_PROTECTED_DIR;
+        $protectedPath = self::ROOT_PROJECT . PH7_PROTECTED_DIR_NAME;
         if (is_file($protectedPath)) {
             if (is_readable($protectedPath)) {
-                $constantContent = file_get_contents(self::CLI_DIR . 'data/configs/constants.php');
+                $constantContent = file_get_contents(self::ROOT_PROJECT . self::INSTALL_DIR_NAME . 'data/configs/constants.php');
                 $constantContent = str_replace('%path_protected%', addslashes($protectedPath), $constantContent);
 
                 if (!@file_put_contents(self::ROOT_PROJECT . '_constants.php', $constantContent)) {
@@ -196,7 +197,7 @@ class InstallerCommand extends Command
 
         // Config File
         @chmod(PH7_PATH_APP_CONFIG, 0777);
-        $configContent = file_get_contents(self::CLI_DIR . 'data/configs/config.ini');
+        $configContent = file_get_contents(self::ROOT_PROJECT . self::INSTALL_DIR_NAME . 'data/configs/config.ini');
 
         $configContent = str_replace('%bug_report_email%', $aData['bug_report_email'], $configContent);
         $configContent = str_replace('%ffmpeg_path%', Helper::cleanString($aData['ffmpeg_path']), $configContent);
