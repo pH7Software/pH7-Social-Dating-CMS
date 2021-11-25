@@ -1,4 +1,8 @@
 <?php
+/**
+ * Copyright (c) Pierre-Henry Soria <hi@ph7.me>
+ * MIT License - https://opensource.org/licenses/MIT
+ */
 
 declare(strict_types=1);
 
