@@ -104,6 +104,10 @@ class InstallerCommand extends Command
                 );
 
                 return Command::FAILURE;
+            } catch (InvalidEmailException $except) {
+                $io->error($except->getMessage());
+
+                return Command::FAILURE;
             }
 
             $output->writeln(
