@@ -17,8 +17,8 @@ use PH7\Cli\Exception\InvalidLicenseAgreementException;
 use PH7\Cli\Exception\Validation\InvalidPathException;
 use PH7\Cli\Misc\Database\DbDefaultConfig;
 use PH7\Cli\Misc\Database\MySQL;
+use PH7\Cli\Misc\Database\SqlQuery;
 use PH7\Cli\Misc\Helper;
-use PH7\Cli\Misc\SqlQuery;
 use PH7\Cli\Misc\Validation;
 use PH7\DbTableName;
 use Symfony\Component\Console\Command\Command;
@@ -175,21 +175,29 @@ class InstallerCommand extends Command
     {
         $io->section('Application Settings');
 
-        $fFmpeg = $io->ask('Optional. The path to the FFmpeg executable', Helper::getFfmpegPath());
+        $currentFfmpegPath = Helper::getFfmpegPath();
+        $ffmpegPath = $io->ask(sprintf('Optional. The path to the FFmpeg executable [%s]', $currentFfmpegPath), $currentFfmpegPath);
         $bugReportEmail = $io->ask('Bug reports email');
 
-        $validation = new Validation($bugReportEmail);
-        if (!$validation->isValidEmail()) {
-            throw new InvalidEmailException('Email not valid. Please enter a valid email.');
-        }
+        $this->checkEmailAddress($bugReportEmail);
 
         return [
-            $fFmpeg,
-            $bugReportEmail
+            'bug_report_email' => $bugReportEmail,
+            'ffmpeg_path' => $ffmpegPath
         ];
     }
 
-    private function buildAppConfigFile(array $aData): void
+    private function checkEmailAddress(?string $email): void
+    {
+        $validation = new Validation($email);
+        if (!$validation->isValidEmail()) {
+            throw new InvalidEmailException(
+                sprintf('%s is not a valid email. Please retry with a valid email.', $email)
+            );
+        }
+    }
+
+    private function buildAppConfigFile(array $data): void
     {
         @require_once self::ROOT_PROJECT . '_constants.php';
         @require_once PH7_PATH_APP . 'configs/constants.php';
@@ -199,15 +207,15 @@ class InstallerCommand extends Command
         @chmod(PH7_PATH_APP_CONFIG, 0777);
         $configContent = file_get_contents(self::ROOT_PROJECT . self::INSTALL_DIR_NAME . 'data/configs/config.ini');
 
-        $configContent = str_replace('%bug_report_email%', $aData['bug_report_email'], $configContent);
-        $configContent = str_replace('%ffmpeg_path%', Helper::cleanString($aData['ffmpeg_path']), $configContent);
+        $configContent = str_replace('%bug_report_email%', $data['bug_report_email'], $configContent);
+        $configContent = str_replace('%ffmpeg_path%', Helper::cleanString($data['ffmpeg_path']), $configContent);
 
         $configContent = str_replace('%db_type_name%', MySQL::DBMS_MYSQL_NAME, $configContent);
         $configContent = str_replace('%db_type%', MySQL::DSN_MYSQL_PREFIX, $configContent);
-        $configContent = str_replace('%db_hostname%', $aData['db_host'], $configContent);
-        $configContent = str_replace('%db_username%', Helper::cleanString($aData['db_user']), $configContent);
-        $configContent = str_replace('%db_password%', Helper::cleanString($aData['db_password']), $configContent);
-        $configContent = str_replace('%db_name%', Helper::cleanString($aData['db_name']), $configContent);
+        $configContent = str_replace('%db_hostname%', $data['db_host'], $configContent);
+        $configContent = str_replace('%db_username%', Helper::cleanString($data['db_user']), $configContent);
+        $configContent = str_replace('%db_password%', Helper::cleanString($data['db_password']), $configContent);
+        $configContent = str_replace('%db_name%', Helper::cleanString($data['db_name']), $configContent);
         $configContent = str_replace('%db_prefix%', DbDefaultConfig::PREFIX, $configContent);
         $configContent = str_replace('%db_charset%', DbDefaultConfig::CHARSET, $configContent);
         $configContent = str_replace('%db_port%', DbDefaultConfig::PORT, $configContent);
@@ -234,6 +242,11 @@ class InstallerCommand extends Command
         $adminLastName = $io->ask('Admin Last Name');
         $adminFeedbackEmail = $io->ask('Contact Email');
         $noReplyEmail = $io->ask('No-reply Email');
+
+        // Validate the fields
+        foreach ([$adminLoginEmail, $adminEmail] as $emailAddress) {
+            $this->checkEmailAddress($emailAddress);
+        }
 
         $rStmt = $db->prepare(
             sprintf(SqlQuery::ADD_ADMIN, DbDefaultConfig::PREFIX . DbTableName::ADMIN)

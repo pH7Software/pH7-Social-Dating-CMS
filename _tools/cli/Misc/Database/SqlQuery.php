@@ -4,7 +4,7 @@
  * MIT License - https://opensource.org/licenses/MIT
  */
 
-namespace PH7\Cli\Misc;
+namespace PH7\Cli\Misc\Database;
 
 final class SqlQuery
 {
