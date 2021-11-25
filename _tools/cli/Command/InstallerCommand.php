@@ -292,6 +292,6 @@ class InstallerCommand extends Command
 
     private function isSiteNameFieldNotEmpty(?string $siteName): bool
     {
-        return empty($siteName) || strlen($siteName) <= 2;
+        return empty($siteName) || strlen($siteName) <= 1;
     }
 }
