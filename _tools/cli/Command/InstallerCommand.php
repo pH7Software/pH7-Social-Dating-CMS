@@ -235,7 +235,7 @@ class InstallerCommand extends Command
     {
         $io->section('Admin Dashboard Configuration');
 
-        $siteName = $io->ask('Site Name (optional)');
+        $siteName = (string)$io->ask('Site Name (optional)');
 
         $adminUsername = $io->ask('Admin Username');
         $adminPassword = $io->ask('Admin Password');
@@ -266,8 +266,8 @@ class InstallerCommand extends Command
             'lastActivity' => $sCurrentDate,
         ]);
 
-        if (!empty($siteName)) {
-            // Only update the default site name if it was mentioned
+        // Only update the default site name if it was mentioned
+        if ($this->isSiteNameFieldNotEmpty($siteName)) {
             $rStmt = $db->prepare(
                 sprintf(SqlQuery::UPDATE_SITE_NAME, DbDefaultConfig::PREFIX . DbTableName::SETTING)
             );
@@ -288,5 +288,10 @@ class InstallerCommand extends Command
             sprintf(SqlQuery::UPDATE_RETURN_EMAIL, DbDefaultConfig::PREFIX . DbTableName::SETTING)
         );
         $rStmt->execute(['returnEmail' => $noReplyEmail]);
+    }
+
+    private function isSiteNameFieldNotEmpty(?string $siteName): bool
+    {
+        return empty($siteName) || strlen($siteName) <= 2;
     }
 }
