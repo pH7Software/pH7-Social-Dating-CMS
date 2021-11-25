@@ -29,7 +29,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class InstallerCommand extends Command
 {
     protected const SOFTWARE_NAME = 'pH7CMS';
-    private const CLI_DIR = PH7_CLI_DIR;
     private const ROOT_PROJECT = PH7_ROOT_PROJECT;
     private const INSTALL_DIR_NAME = '_install/';
 
