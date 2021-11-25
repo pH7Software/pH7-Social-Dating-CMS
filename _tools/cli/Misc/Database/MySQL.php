@@ -23,10 +23,6 @@ class MySQL extends PDO
     {
         $driverOptions[PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES ' . $params['db_charset'];
 
-        if (!$this->checkVersion()) {
-            throw new SQLInvalidVersion('Invalid DB version');
-        }
-
         parent::__construct(
             "{$params['db_type']}:host={$params['db_hostname']};dbname={$params['db_name']};",
             $params['db_username'],
@@ -35,11 +31,15 @@ class MySQL extends PDO
         );
 
         $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        if (!$this->checkVersion()) {
+            throw new SQLInvalidVersion('Invalid DB version');
+        }
     }
 
     private function checkVersion(): bool
     {
-        $this->getAttribute(PDO::ATTR_DRIVER_NAME) === self::DSN_MYSQL_PREFIX &&
-        version_compare($this->getAttribute(PDO::ATTR_SERVER_VERSION), self::REQUIRED_VERSION, '>=');
+        $this->getAttribute(self::ATTR_DRIVER_NAME) === self::DSN_MYSQL_PREFIX &&
+        version_compare($this->getAttribute(self::ATTR_SERVER_VERSION), self::REQUIRED_VERSION, '>=');
     }
 }
