@@ -161,7 +161,7 @@ class InstallerCommand extends Command
     {
         $io->section('Database Configuration');
 
-        $dbHostName = $io->ask('Database Host Name');
+        $dbHostName = $io->ask('Database Host Name (e.g. localhost)');
         $dbUser = $io->ask('Database User');
         $dbPassword = $io->ask('Database Password');
         $dbName = $io->ask('Database Name');
