@@ -13,7 +13,7 @@ use PH7\Framework\Config\Config;
 use PH7\Framework\Cookie\Cookie;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\File\File;
-use PH7\Framework\Image\FileStorage;
+use PH7\Framework\Image\FileStorage as FileStorageImage;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Model\DbConfig;
@@ -138,14 +138,14 @@ class UserCore
             error_reporting(0);
         }
 
-        $oAvatar1 = new FileStorage(
+        $oAvatar1 = new FileStorageImage(
             $sFile,
             self::MAX_WIDTH_AVATAR,
             self::MAX_HEIGHT_AVATAR
         );
 
         if (!$oAvatar1->validate()) {
-            return false; // File type incompatible!
+            return false; // File type incompatible
         }
 
         // We removes the old avatar if it exists and we delete the cache at the same time.
@@ -267,7 +267,7 @@ class UserCore
             error_reporting(0);
         }
 
-        $oWallpaper = new FileStorage(
+        $oWallpaper = new FileStorageImage(
             $sFile,
             self::MAX_WIDTH_BACKGROUND_IMAGE,
             self::MAX_HEIGHT_BACKGROUND_IMAGE

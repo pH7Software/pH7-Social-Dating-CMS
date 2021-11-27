@@ -1,5 +1,5 @@
 {if !$oModule->showAvailableMods(Module::UNINSTALL)}
-    <h2 class="underline">{lang 'No modules available in your %software_name% repository'}</h2>
+    <h2 class="underline">{lang 'No 3rd-party modules available in your %software_name% repository'}</h2>
 {else}
     <h2 class="underline">{lang 'Module(s) installed on your website:'}</h2><br />
 

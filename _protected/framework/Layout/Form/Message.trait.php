@@ -10,7 +10,7 @@
 
 namespace PH7\Framework\Layout\Form;
 
-use PH7\Framework\Image\FileStorage;
+use PH7\Framework\Image\FileStorage as FileStorageImage;
 use PH7\Framework\Video\Video;
 
 trait Message

@@ -6,11 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.40] - 2021-10-13
+
+### Changed
+- modifier escape now triggers a E_USER_NOTICE when an unsupported escape type is used https://github.com/smarty-php/smarty/pull/649
+
+### Security
+- More advanced javascript escaping to handle https://html.spec.whatwg.org/multipage/scripting.html#restrictions-for-contents-of-script-elements thanks to m-haritonov
+
 ## [3.1.39] - 2021-02-17
 
 ### Security
-- Prevent access to `$smarty.template_object` in sandbox mode
-- Fixed code injection vulnerability by using illegal function names in `{function name='blah'}{/function}` 
+- Prevent access to `$smarty.template_object` in sandbox mode. This addresses CVE-2021-26119.
+- Fixed code injection vulnerability by using illegal function names in `{function name='blah'}{/function}`. This addresses CVE-2021-26120.
 
 ## [3.1.38] - 2021-01-08
 

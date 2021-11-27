@@ -97,13 +97,8 @@ class Bootstrap
 
             // Initialize the FrontController, we are asking the front controller to process the HTTP request
             FrontController::getInstance()->runRouter();
-        /**  TODO: When pH7CMS will support PHP 7.1
         } catch (FileNotFoundException | Except\UserException $oE) {
-        //*/
-        } catch (FileNotFoundException $oE) {
             echo $oE->getMessage();
-        } catch (Except\UserException $oE) {
-            echo $oE->getMessage(); // Simple User Error with Exception
         } catch (Except\PH7Exception $oE) {
             Except\PH7Exception::launch($oE);
         } catch (Exception $oE) {
