@@ -4,6 +4,8 @@
  * MIT License - https://opensource.org/licenses/MIT
  */
 
+declare(strict_types=1);
+
 namespace PH7\Cli\Misc\Database;
 
 use PDO;
