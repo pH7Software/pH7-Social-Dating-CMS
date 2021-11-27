@@ -40,7 +40,6 @@ final class DbTableName
     const COMMENT_NOTE = 'comments_note';
     const COMMENT_PICTURE = 'comments_picture';
     const COMMENT_VIDEO = 'comments_video';
-    const COMMENT_GAME = 'comments_game';
     const COMMENT_PROFILE = 'comments_profile';
     const FORUM = 'forums';
     const FORUM_CATEGORY = 'forums_categories';
@@ -70,8 +69,6 @@ final class DbTableName
     const SETTING = 'settings';
     const STATIC_FILE = 'static_files';
     const CUSTOM_CODE = 'custom_code';
-    const GAME = 'games';
-    const GAME_CATEGORY = 'games_categories';
 
     const USER_TABLES = [
         self::ADMIN,

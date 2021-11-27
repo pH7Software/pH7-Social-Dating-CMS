@@ -238,7 +238,6 @@ abstract class Controller extends Core implements Controllable
         $aModsEnabled = [
             'is_connect_enabled' => SysMod::isEnabled('connect'),
             'is_affiliate_enabled' => SysMod::isEnabled('affiliate'),
-            'is_game_enabled' => SysMod::isEnabled('game'),
             'is_chat_enabled' => SysMod::isEnabled('chat'),
             'is_chatroulette_enabled' => SysMod::isEnabled('chatroulette'),
             'is_picture_enabled' => SysMod::isEnabled('picture'),

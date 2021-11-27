@@ -69,15 +69,6 @@
   </url>
 {/if}
 
-{if $is_game_enabled}
-  <url>
-    <loc>{{ $design->url('game','main','index') }}</loc>
-    <lastmod>{current_date}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-{/if}
-
 <url>
   <loc>{{ $design->url('page','main','about') }}</loc>
   <lastmod>{current_date}</lastmod>

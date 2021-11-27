@@ -33,10 +33,6 @@
         <link title="{lang 'Community Notes'}" url="{{ $design->url('note','main','index') }}" />
     {/if}
 
-    {if $is_game_enabled}
-        <link title="{lang 'Games Zone Party'}" url="{{ $design->url('game','main','index') }}" />
-    {/if}
-
     {if $is_birthday_enabled}
         <link title="{lang 'User Birthday'}" url="{{ $design->url('birthday','user','index') }}" />
     {/if}
