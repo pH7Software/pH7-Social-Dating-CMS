@@ -21,7 +21,7 @@ use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Util\Backup;
 use PH7\Framework\Mvc\Model\Engine\Util\Various as DbVarious;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class DatabaseCoreCron extends Cron
 {

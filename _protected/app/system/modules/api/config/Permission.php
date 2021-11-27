@@ -14,7 +14,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Api\Tool;
 use PH7\Framework\Http\Http;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class Permission extends PermissionCore
 {

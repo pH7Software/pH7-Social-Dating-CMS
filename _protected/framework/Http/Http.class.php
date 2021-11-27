@@ -14,7 +14,7 @@ namespace PH7\Framework\Http;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Server\Server;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class Http
 {

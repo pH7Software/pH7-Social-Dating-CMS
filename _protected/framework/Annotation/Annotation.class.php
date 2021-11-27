@@ -5,11 +5,12 @@
  *                   To use annotations, you must inherit your class with this Annotation class.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Annotation
- * @version          1.1
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Annotation;
 
@@ -21,13 +22,12 @@ use ReflectionClass;
 
 abstract class Annotation
 {
-    const REGEX_COMMENT = '/\/\*\*(.*)\*\//';
-    const REGEX_NEWLINE = '/\n/';
+    private const REGEX_COMMENT = '/\/\*\*(.*)\*\//';
+    private const REGEX_NEWLINE = '/\n/';
 
-    const CACHE_GROUP = 'str/annotation';
+    protected const CACHE_GROUP = 'str/annotation';
 
-    /** @var Cache */
-    private $oCache;
+    private Cache $oCache;
 
     /**
      * Get an Annotation.
@@ -36,7 +36,7 @@ abstract class Annotation
      *
      * @return string|null The value annotation. If the annotation name is not found, Returns NULL.
      */
-    public function getAnnotation($sName)
+    public function getAnnotation(string $sName): ?string
     {
         $aAnnotations = $this->getAnnotations();
 

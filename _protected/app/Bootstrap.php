@@ -7,6 +7,8 @@
  * @package        PH7 / App / Core
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -57,7 +59,7 @@ class Bootstrap
      *
      * @return void
      */
-    public function setTimezoneIfNotSet()
+    public function setTimezoneIfNotSet(): void
     {
         if (!ini_get('date.timezone')) {
             ini_set('date.timezone', PH7_DEFAULT_TIMEZONE);
@@ -74,7 +76,7 @@ class Bootstrap
      * @throws Except\UserException
      * @throws FileNotFoundException
      */
-    public function run()
+    public function run(): void
     {
         try {
             $this->loadInitFiles();
@@ -111,7 +113,7 @@ class Bootstrap
      *
      * @return void
      */
-    private function loadInitFiles()
+    private function loadInitFiles(): void
     {
         // Load Framework Classes
         require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
@@ -152,7 +154,7 @@ class Bootstrap
      *
      * @return void
      */
-    private function closeAppSession()
+    private function closeAppSession(): void
     {
         if (session_status() === PHP_SESSION_ACTIVE) {
             session_write_close();
@@ -164,7 +166,7 @@ class Bootstrap
      *
      * @return void HTML output.
      */
-    private function notRewriteModEnabledError()
+    private function notRewriteModEnabledError(): void
     {
         $sMsg = '<p class="warning"><a href="' . Kernel::SOFTWARE_WEBSITE . '">pH7CMS</a> requires Apache "mod_rewrite".</p>
         <p>Firstly, please <strong>make sure the ".htaccess" file has been uploaded to the root directory where pH7CMS is installed</strong>. If not, use your FTP client (such as Filezilla) and upload it again from pH7CMS unziped package and try again.<br />

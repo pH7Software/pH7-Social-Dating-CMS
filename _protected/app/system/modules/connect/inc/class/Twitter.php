@@ -26,7 +26,7 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Util\Various;
 use PH7\Generator\Password as PasswordGenerator;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 use tmhOAuth;
 use tmhUtilities;
 

@@ -21,7 +21,7 @@ use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Security\Spam\Captcha\Captcha;
 use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Str\Str;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class ValidateCoreAjax
 {

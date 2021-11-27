@@ -15,7 +15,7 @@ use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Security\Validate\Validate;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class UserController extends MainController
 {

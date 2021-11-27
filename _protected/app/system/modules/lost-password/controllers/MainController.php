@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Lost Password / Controller
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 use PH7\Framework\Layout\Html\Design;
@@ -25,7 +27,7 @@ class MainController extends Controller
      *
      * @return void
      */
-    public function forgot($sMod = '')
+    public function forgot(string $sMod = ''): void
     {
         // For better SEO, exclude not interesting pages from search engines
         $this->view->header = Meta::NOINDEX;
@@ -37,14 +39,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    /**
-     * @param string $sMod
-     * @param string $sEmail
-     * @param string $sHash
-     *
-     * @return void
-     */
-    public function reset($sMod = '', $sEmail = '', $sHash = '')
+    public function reset(string $sMod = '', string $sEmail = '', string $sHash = ''): void
     {
         $this->checkMod($sMod);
 
@@ -69,10 +64,7 @@ class MainController extends Controller
         }
     }
 
-    /**
-     * @return void
-     */
-    public function account()
+    public function account(): void
     {
         $sUrl = $this->getUserHomepageUrl();
         Header::redirect($sUrl);
@@ -86,7 +78,7 @@ class MainController extends Controller
      *
      * @return int Number of recipients who were accepted for delivery.
      */
-    protected function sendMail($sTable, $sEmail)
+    protected function sendMail(string $sTable, string $sEmail): int
     {
         // Get new password and change it in DB
         $sNewPassword = PasswordGenerator::generate(self::DEFAULT_PASSWORD_LENGTH);
@@ -128,10 +120,7 @@ class MainController extends Controller
         }
     }
 
-    /**
-     * @return string
-     */
-    private function getUserHomepageUrl()
+    private function getUserHomepageUrl(): string
     {
         if (UserCore::auth()) {
             $sUrl = Uri::get('user', 'account', 'index');
@@ -146,12 +135,7 @@ class MainController extends Controller
         return $sUrl;
     }
 
-    /**
-     * @param string $sMod
-     *
-     * @return void
-     */
-    private function checkMod($sMod)
+    private function checkMod(string $sMod): void
     {
         $aMods = ['user', 'affiliate', PH7_ADMIN_MOD];
 

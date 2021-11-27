@@ -15,7 +15,7 @@ use PH7\Framework\Api\Api;
 use PH7\Framework\Http\Rest\Rest;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Security\Version;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class MainController extends Controller
 {

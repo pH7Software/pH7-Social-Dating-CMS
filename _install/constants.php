@@ -3,8 +3,8 @@
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
-
  */
+
 defined('PH7') or exit('Restricted access');
 
 //------------ Variables ------------//
@@ -30,7 +30,7 @@ $sPhp_self = str_replace('\\', '', dirname(htmlspecialchars($_SERVER['PHP_SELF']
 
 //------ Other ------//
 define('PH7_ADMIN_MOD', 'admin123');
-define('PH7_REQUIRED_SERVER_VERSION', '5.6.0');
+define('PH7_REQUIRED_SERVER_VERSION', '7.4.0');
 define('PH7_REQUIRED_SQL_VERSION', '5.5.3');
 define('PH7_ENCODING', 'utf-8');
 define('PH7_DEFAULT_TIMEZONE', 'America/Chicago');

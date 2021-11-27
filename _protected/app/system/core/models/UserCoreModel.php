@@ -848,7 +848,7 @@ class UserCoreModel extends Model
      *
      * @return stdClass The Avatar (SQL alias is pic), profileId and approvedAvatar
      */
-    public function getAvatar($iProfileId, $iApproved = null)
+    public function getAvatar($iProfileId, $iApproved = null): stdClass
     {
         $this->cache->start(self::CACHE_GROUP, 'avatar' . $iProfileId, static::CACHE_TIME);
 

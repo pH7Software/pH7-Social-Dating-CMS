@@ -17,7 +17,7 @@ defined('PH7') or exit('Restricted access');
 use PH7\Framework\Http\Http;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class Header
 {

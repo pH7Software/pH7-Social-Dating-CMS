@@ -16,7 +16,7 @@ use PH7\Framework\Navigation\Page;
 use PH7\Framework\Parse\Emoticon;
 use PH7\Framework\Url\Header;
 use stdClass;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class MainController extends Controller
 {

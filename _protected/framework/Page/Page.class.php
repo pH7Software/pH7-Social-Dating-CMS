@@ -14,7 +14,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Http\Http;
 use PH7\Framework\Navigation\Browser;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class Page
 {

@@ -18,7 +18,7 @@ use PH7\Framework\Cookie\Cookie;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Session\Session;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class RatingCoreAjax
 {
