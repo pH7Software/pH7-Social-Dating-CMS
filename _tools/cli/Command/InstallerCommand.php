@@ -72,7 +72,7 @@ class InstallerCommand extends Command
                 ]);
             } catch (PDOException $except) {
                 $io->error(
-                    sprintf('Database error: %s', $except->getMessage())
+                    sprintf('DB error: %s', $except->getMessage())
                 );
 
                 return Command::FAILURE;
