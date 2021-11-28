@@ -34,7 +34,7 @@
   ],
   "config": {
     "platform": {
-      "php": "5.6"
+      "php": "7.4"
     },
     "vendor-dir": "_protected/vendor",
     "bin-dir": "_protected/vendor/bin",
@@ -43,7 +43,7 @@
     "sort-packages": true
   },
   "require": {
-    "php": ">=5.6.0",
+    "php": ">=7.4",
     "ext-curl": "*",
     "ext-dom": "*",
     "ext-exif": "*",
@@ -69,6 +69,7 @@
     "shrikeh/teapot": "^2.3",
     "stripe/stripe-php": "^5.9",
     "swiftmailer/swiftmailer": "^5.4",
+    "symfony/console": "^5.3",
     "twilio/sdk": "^5.28"
   },
   "require-dev": {
@@ -78,6 +79,11 @@
   },
   "suggest": {
     "symfony/thanks": "Thank your favorite PHP projects on GitHub (in the form of GitHub stars) using the CLI"
+  },
+  "autoload": {
+    "psr-4": {
+      "PH7\\Cli\\": "_tools/cli"
+    }
   },
   "autoload-dev": {
     "psr-4": {
