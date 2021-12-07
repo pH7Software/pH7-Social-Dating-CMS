@@ -10,6 +10,8 @@
  * @version          1.2 (Last update 10/13/2015)
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Mail;
 
 defined('PH7') or exit('Restricted access');
@@ -18,7 +20,7 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class Mail implements Mailable
 {
-    const HTML_CONTENT_TYPE = 'text/html';
+    private const HTML_CONTENT_TYPE = 'text/html';
 
     /**
      * Send an email with Swift library engine.
@@ -29,7 +31,7 @@ class Mail implements Mailable
      *
      * @return int Number of recipients who were accepted for delivery.
      */
-    public function send(array $aInfo, $sContents, $iFormatType = Mailable::HTML_FORMAT)
+    public function send(array $aInfo, $sContents, $iFormatType = Mailable::HTML_FORMAT): int
     {
         /*** Default values ***/
         $sFromMail = empty($aInfo['from']) ? DbConfig::getSetting('returnEmail') : $aInfo['from'];

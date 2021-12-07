@@ -14,7 +14,7 @@ use PH7\Framework\Geo\Map\Map as GeoMap;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Navigation\Page;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class CountryController extends Controller
 {

@@ -7,6 +7,8 @@
  * @version          1.0
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Mvc\Controller;
 
 defined('PH7') or exit('Restricted access');
@@ -21,7 +23,7 @@ interface Controllable
      *
      * @return void
      */
-    public function output($sFile);
+    public function output($sFile): void;
 
     /**
      * Set a Not Found Error Message with HTTP 404 Code Status.
@@ -31,5 +33,5 @@ interface Controllable
      *
      * @return void Quits the page with the exit() function
      */
-    public function displayPageNotFound($sMsg = '', $b404Status = true);
+    public function displayPageNotFound(string $sMsg = '', bool $b404Status = true): void;
 }

@@ -16,7 +16,7 @@ use PH7\Framework\Http\Http;
 use PH7\Framework\Layout\Gzip\Gzip;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Security\CSRF\Token;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class CacheAjax extends Kernel
 {

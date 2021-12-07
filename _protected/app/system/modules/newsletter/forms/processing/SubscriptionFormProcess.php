@@ -17,7 +17,7 @@ use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Util\Various;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class SubscriptionFormProcess extends Form
 {

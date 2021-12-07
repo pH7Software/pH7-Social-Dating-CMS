@@ -34,7 +34,7 @@ use PH7\Framework\Url\Header;
 use PH7\Framework\Url\Uri;
 use ReflectionException;
 use ReflectionMethod;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 /**
  * @class Singleton Class

@@ -18,7 +18,7 @@ use PH7\Framework\File\Stream;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Str\Str;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class Rest extends Http
 {

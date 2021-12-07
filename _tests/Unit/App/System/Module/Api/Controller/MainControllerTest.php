@@ -11,7 +11,7 @@ namespace PH7\Test\Unit\App\System\Module\Api\Controller;
 use GuzzleHttp\Client;
 use PH7\Framework\Mvc\Router\Uri;
 use PHPUnit_Framework_TestCase;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class MainControllerTest extends PHPUnit_Framework_TestCase
 {

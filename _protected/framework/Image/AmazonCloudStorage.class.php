@@ -6,6 +6,8 @@
  * @package          PH7 / Framework / Image
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Image;
 
 use Aws\S3\S3Client;
@@ -13,33 +15,28 @@ use PH7\Framework\Config\Config;
 
 class AmazonCloudStorage implements Storageable
 {
-    const ACL_PUBLIC_READ = 'public-read';
+    private const ACL_PUBLIC_READ = 'public-read';
 
-    /** @var S3Client */
-    private $oS3Client;
+    private S3Client $oS3Client;
 
-    /** @var string */
-    private $sTempFileLocation;
+    private string $sTempFileLocation;
 
-    /** @var string */
-    private $sBucket;
+    private string $sBucket;
 
     /**
      * @param string $sTempFileLocation The source file.
      * @param string $sBucket S3 bucket.
      */
-    public function __construct($sTempFileLocation, $sBucket)
+    public function __construct(string $sTempFileLocation, string $sBucket)
     {
         $this->sTempFileLocation = $sTempFileLocation;
         $this->sBucket = $sBucket;
 
         $this->oS3Client = new S3Client($this->getConfiguration());
+
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function save($sFile)
+    public function save(string $sFile): self
     {
         $this->oS3Client->putObject([
             'Bucket' => $this->sBucket,
@@ -51,10 +48,7 @@ class AmazonCloudStorage implements Storageable
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function remove($sFile)
+    public function remove(string $sFile): self
     {
         $this->oS3Client->deleteObject([
             'Bucket' => $this->sBucket,
@@ -69,15 +63,12 @@ class AmazonCloudStorage implements Storageable
      *
      * @return string The signed URL where the image is hosted on AWS S3.
      */
-    public function getSignedUrl($sFile)
+    public function getSignedUrl(string $sFile): string
     {
         return $this->oS3Client->getObjectUrl($this->sBucket, $sFile);
     }
 
-    /**
-     * @return array
-     */
-    private function getConfiguration()
+    private function getConfiguration(): array
     {
         return [
             'region'  => Config::getInstance()->values['storage']['aws.default_region'],
