@@ -1,0 +1,22 @@
+#!/usr/bin/env php
+
+<?php
+/**
+ * Copyright (c) Pierre-Henry Soria <hi@ph7.me>
+ * MIT License - https://opensource.org/licenses/MIT
+ */
+
+define('PH7_ROOT_PROJECT', dirname(__DIR__, 2) . DIRECTORY_SEPARATOR);
+define('PH7_CLI_DIR', __DIR__ . DIRECTORY_SEPARATOR);
+define('PH7_PROTECTED_DIR_NAME', '_protected/');
+
+require PH7_ROOT_PROJECT . PH7_PROTECTED_DIR_NAME . 'vendor/autoload.php';
+
+use PH7\Cli\Command\InstallerCommand;
+use Symfony\Component\Console\Application;
+
+$application = new Application();
+
+$application->add(new InstallerCommand());
+
+$application->run();

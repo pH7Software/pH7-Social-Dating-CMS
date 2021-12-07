@@ -24,7 +24,7 @@ class Database extends PDO
 
     public function __construct(array $aParams)
     {
-        if ($this->isMySQL()) {
+        if ($this->isMySQL($aParams['db_type'])) {
             $aDriverOptions[PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES ' . $aParams['db_charset'];
         }
 
@@ -41,12 +41,12 @@ class Database extends PDO
     /**
      * Checks if the DBMS is MySQL.
      *
-     * @param array $aParams
+     * @param string $sDbType
      *
      * @return bool
      */
-    private function isMySQL(array $aParams)
+    private function isMySQL($sDbType)
     {
-        return $aParams['db_type'] === Database::DBMS_MYSQL_NAME;
+        return $sDbType === Database::DBMS_MYSQL_NAME;
     }
 }

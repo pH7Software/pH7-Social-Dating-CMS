@@ -19,7 +19,10 @@
     "payment",
     "business",
     "startup",
-    "membership"
+    "membership",
+    "osdate",
+    "dating script",
+    "tinder"
   ],
   "type": "project",
   "homepage": "https://ph7cms.com",
@@ -70,6 +73,7 @@
     "robthree/twofactorauth": "^1.6",
     "stripe/stripe-php": "^5.9",
     "swiftmailer/swiftmailer": "^5.4",
+    "symfony/console": "^5.3",
     "twilio/sdk": "^5.28"
   },
   "require-dev": {
@@ -79,6 +83,11 @@
   },
   "suggest": {
     "symfony/thanks": "Thank your favorite PHP projects on GitHub (in the form of GitHub stars) using the CLI"
+  },
+  "autoload": {
+    "psr-4": {
+      "PH7\\Cli\\": "_tools/cli"
+    }
   },
   "autoload-dev": {
     "psr-4": {
