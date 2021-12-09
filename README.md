@@ -32,6 +32,8 @@ You get and own all data and files, hosted on your own server! ✌️
 
 👉 Convinced by the software? ☕️ Wanna **[offer me a coffee](https://www.buymeacoffee.com/ph7cms)**, and boost the software development at the same time?
 
+[![Buy Me A Coffee](static/img/buymeacoffee-logo.svg)](https://www.buymeacoffee.com/ph7cms)
+
 
 ## 📖 Contents
 
