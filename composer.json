@@ -19,7 +19,10 @@
     "payment",
     "business",
     "startup",
-    "membership"
+    "membership",
+    "osdate",
+    "dating script",
+    "tinder"
   ],
   "type": "project",
   "homepage": "https://ph7cms.com",
@@ -34,7 +37,7 @@
   ],
   "config": {
     "platform": {
-      "php": "5.6"
+      "php": "7.4"
     },
     "vendor-dir": "_protected/vendor",
     "bin-dir": "_protected/vendor/bin",
@@ -43,7 +46,7 @@
     "sort-packages": true
   },
   "require": {
-    "php": ">=5.6.0",
+    "php": ">=7.4.0",
     "ext-curl": "*",
     "ext-dom": "*",
     "ext-exif": "*",
@@ -63,21 +66,28 @@
     "fakerphp/faker": "^1.9",
     "geoip2/geoip2": "~2.0",
     "guzzlehttp/guzzle": "^6.3",
+    "ph-7/just-http-status-codes": "^1.1",
+    "ph-7/passcode-password-generator": "^2.0",
+    "ph-7/ph2gravatar": "^1.1",
     "ph-7/qrcode-generator-php-class": "^2.1",
-    "ph7software/secure-password-generator": "^1.2",
     "robthree/twofactorauth": "^1.6",
-    "shrikeh/teapot": "^2.3",
     "stripe/stripe-php": "^5.9",
     "swiftmailer/swiftmailer": "^5.4",
+    "symfony/console": "^5.3",
     "twilio/sdk": "^5.28"
   },
   "require-dev": {
-    "phpunit/phpunit": "^5.7",
-    "phake/phake": "^2.3",
-    "friendsofphp/php-cs-fixer": "^2.2"
+    "phpunit/phpunit": "^9.5",
+    "friendsofphp/php-cs-fixer": "^2.2",
+    "phake/phake": "^4.1"
   },
   "suggest": {
     "symfony/thanks": "Thank your favorite PHP projects on GitHub (in the form of GitHub stars) using the CLI"
+  },
+  "autoload": {
+    "psr-4": {
+      "PH7\\Cli\\": "_tools/cli"
+    }
   },
   "autoload-dev": {
     "psr-4": {
