@@ -1,4 +1,12 @@
 <?php
+/**
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @copyright        (c) 2021, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @package          PH7 / Framework / Image
+ */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Image;
 
@@ -9,10 +17,7 @@ final class StorageHelper
 {
     use Statik;
 
-    /**
-     * @return string
-     */
-    public static function getStorageClassName()
+    public static function getStorageClassName(): string
     {
         switch (true) {
             case self::isAmaZonCloudStorageSetup():
@@ -23,10 +28,7 @@ final class StorageHelper
         }
     }
 
-    /**
-     * @return bool
-     */
-    private static function isAmaZonCloudStorageSetup()
+    private static function isAmaZonCloudStorageSetup(): bool
     {
         $aRequiredAwsKeys = [
             'aws.access_key_id',

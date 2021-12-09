@@ -9,7 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Http\Http;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 abstract class Cron extends Framework\Cron\Run\Cron
 {

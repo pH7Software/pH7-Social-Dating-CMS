@@ -30,8 +30,4 @@
   {if $is_video_enabled}
     <link title="{lang 'Video Comments'}" url="{{ $design->url('xml','rss','xmlrouter','comment-video') }}" />
   {/if}
-
-  {if $is_game_enabled}
-    <link title="{lang 'Game Comments'}" url="{{ $design->url('xml','rss','xmlrouter','comment-game') }}" />
-  {/if}
 </url>

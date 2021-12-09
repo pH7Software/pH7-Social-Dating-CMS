@@ -165,10 +165,6 @@ class Various
                 $sId = 'noteId';
                 break;
 
-            case DbTableName::GAME:
-                $sId = 'gameId';
-                break;
-
             case DbTableName::FORUM_TOPIC:
                 $sId = 'topicId';
                 break;
@@ -204,7 +200,6 @@ class Various
             case DbTableName::ALBUM_VIDEO:
             case DbTableName::PICTURE:
             case DbTableName::VIDEO:
-            case DbTableName::GAME:
             case DbTableName::BLOG:
             case DbTableName::NOTE:
                 return $sTable;

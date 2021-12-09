@@ -17,6 +17,8 @@ defined('PH7') or exit('Restricted access');
 
 class InstallController extends Controller
 {
+    const CORE_SQL_FILE = 'pH7_Core.sql';
+
     const TOTAL_MEMBERS_SAMPLE = 16;
     const TOTAL_AFFILIATES_SAMPLE = 1;
     const TOTAL_SUBSCRIBERS_SAMPLE = 1;
@@ -27,7 +29,6 @@ class InstallController extends Controller
     const SOCIAL_MODS = [
         'connect' => '0',
         'affiliate' => '0',
-        'game' => '0',
         'chat' => '0',
         'chatroulette' => '0',
         'picture' => '1',
@@ -54,7 +55,6 @@ class InstallController extends Controller
     const DATING_MODS = [
         'connect' => '0',
         'affiliate' => '1',
-        'game' => '0',
         'chat' => '1',
         'chatroulette' => '1',
         'picture' => '1',
@@ -148,7 +148,11 @@ class InstallController extends Controller
                     if (is_readable($_SESSION['val']['path_protected'])) {
                         $sConstantContent = file_get_contents(PH7_ROOT_INSTALL . 'data/configs/constants.php');
 
-                        $sConstantContent = str_replace('%path_protected%', addslashes($_SESSION['val']['path_protected']), $sConstantContent);
+                        $sConstantContent = str_replace(
+                            '%path_protected%',
+                            addslashes($_SESSION['val']['path_protected']),
+                            $sConstantContent
+                        );
 
                         if (!@file_put_contents(PH7_ROOT_PUBLIC . '_constants.php', $sConstantContent)) {
                             $aErrors[] = $LANG['no_public_writable'];
@@ -220,16 +224,48 @@ class InstallController extends Controller
                             @chmod(PH7_PATH_APP_CONFIG, 0777);
                             $sConfigContent = file_get_contents(PH7_ROOT_INSTALL . 'data/configs/config.ini');
 
-                            $sConfigContent = str_replace('%bug_report_email%', $_SESSION['val']['bug_report_email'], $sConfigContent);
-                            $sConfigContent = str_replace('%ffmpeg_path%', clean_string($_SESSION['val']['ffmpeg_path']), $sConfigContent);
+                            $sConfigContent = str_replace(
+                                '%bug_report_email%',
+                                $_SESSION['val']['bug_report_email'],
+                                $sConfigContent
+                            );
+                            $sConfigContent = str_replace(
+                                '%ffmpeg_path%',
+                                clean_string($_SESSION['val']['ffmpeg_path']),
+                                $sConfigContent
+                            );
 
-                            $sConfigContent = str_replace('%db_type_name%', $_SESSION['db']['type_name'], $sConfigContent);
+                            $sConfigContent = str_replace(
+                                '%db_type_name%',
+                                $_SESSION['db']['type_name'],
+                                $sConfigContent
+                            );
                             $sConfigContent = str_replace('%db_type%', $_SESSION['db']['type'], $sConfigContent);
-                            $sConfigContent = str_replace('%db_hostname%', $_SESSION['db']['hostname'], $sConfigContent);
-                            $sConfigContent = str_replace('%db_username%', clean_string($_SESSION['db']['username']), $sConfigContent);
-                            $sConfigContent = str_replace('%db_password%', clean_string($_SESSION['db']['password']), $sConfigContent);
-                            $sConfigContent = str_replace('%db_name%', clean_string($_SESSION['db']['name']), $sConfigContent);
-                            $sConfigContent = str_replace('%db_prefix%', clean_string($_SESSION['db']['prefix']), $sConfigContent);
+                            $sConfigContent = str_replace(
+                                '%db_hostname%',
+                                $_SESSION['db']['hostname'],
+                                $sConfigContent
+                            );
+                            $sConfigContent = str_replace(
+                                '%db_username%',
+                                clean_string($_SESSION['db']['username']),
+                                $sConfigContent
+                            );
+                            $sConfigContent = str_replace(
+                                '%db_password%',
+                                clean_string($_SESSION['db']['password']),
+                                $sConfigContent
+                            );
+                            $sConfigContent = str_replace(
+                                '%db_name%',
+                                clean_string($_SESSION['db']['name']),
+                                $sConfigContent
+                            );
+                            $sConfigContent = str_replace(
+                                '%db_prefix%',
+                                clean_string($_SESSION['db']['prefix']),
+                                $sConfigContent
+                            );
                             $sConfigContent = str_replace('%db_charset%', $_SESSION['db']['charset'], $sConfigContent);
                             $sConfigContent = str_replace('%db_port%', $_SESSION['db']['port'], $sConfigContent);
 
@@ -241,27 +277,20 @@ class InstallController extends Controller
                             } else {
                                 if (!(
                                     $DB->getAttribute(\PDO::ATTR_DRIVER_NAME) === Database::DSN_MYSQL_PREFIX &&
-                                    version_compare($DB->getAttribute(\PDO::ATTR_SERVER_VERSION), PH7_REQUIRED_SQL_VERSION, '>='))
+                                    version_compare(
+                                        $DB->getAttribute(\PDO::ATTR_SERVER_VERSION),
+                                        PH7_REQUIRED_SQL_VERSION,
+                                        '>='
+                                    ))
                                 ) {
                                     $aErrors[] = $LANG['require_mysql_version'];
                                 } else {
                                     ignore_user_abort(true);
 
-                                    $aDumps = [
-                                        /** Game **/
-                                        // We need to install the Game before the "Core SQL" for foreign key reasons
-                                        'pH7_SchemaGame',
-                                        'pH7_DataGame',
-                                        /** Core (main SQL schema/data) **/
-                                        'pH7_Core'
-                                    ];
-
-                                    for ($iFileKey = 0, $iCount = count($aDumps); $iFileKey < $iCount; $iFileKey++) {
-                                        exec_query_file(
-                                            $DB,
-                                            PH7_ROOT_INSTALL . 'data/sql/' . $_SESSION['db']['type_name'] . '/' . $aDumps[$iFileKey] . '.sql'
-                                        );
-                                    }
+                                    exec_query_file(
+                                        $DB,
+                                        PH7_ROOT_INSTALL . 'data/sql/' . $_SESSION['db']['type_name'] . '/' . self::CORE_SQL_FILE
+                                    );
 
                                     // We finalise it by setting the correct permission to the config files
                                     $this->chmodConfigFiles();
@@ -329,11 +358,21 @@ class InstallController extends Controller
                             $_SESSION['val'][$sKey] = trim($sVal);
                         }
 
-                        if (validate_email($_SESSION['val']['admin_login_email']) && validate_email($_SESSION['val']['admin_email']) && validate_email($_SESSION['val']['admin_feedback_email']) && validate_email($_SESSION['val']['admin_return_email'])) {
+                        if (validate_email($_SESSION['val']['admin_login_email']) &&
+                            validate_email($_SESSION['val']['admin_email']) &&
+                            validate_email($_SESSION['val']['admin_feedback_email']) &&
+                            validate_email($_SESSION['val']['admin_return_email'])
+                        ) {
                             if (validate_username($_SESSION['val']['admin_username']) === 0) {
                                 if (validate_password($_SESSION['val']['admin_password']) === 0) {
-                                    if (validate_identical($_SESSION['val']['admin_password'], $_SESSION['val']['admin_passwords'])) {
-                                        if (!find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_username']) && !find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_first_name']) && !find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_last_name'])) {
+                                    if (validate_identical(
+                                        $_SESSION['val']['admin_password'],
+                                        $_SESSION['val']['admin_passwords']
+                                    )) {
+                                        if (!find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_username']) &&
+                                            !find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_first_name']) &&
+                                            !find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_last_name'])
+                                        ) {
                                             if (validate_name($_SESSION['val']['admin_first_name'])) {
                                                 if (validate_name($_SESSION['val']['admin_last_name'])) {
                                                     $this->initializeClasses();
@@ -343,40 +382,63 @@ class InstallController extends Controller
                                                         require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
 
                                                         $rStmt = $DB->prepare(
-                                                            sprintf(SqlQuery::ADD_ADMIN, $_SESSION['db']['prefix'] . DbTableName::ADMIN)
+                                                            sprintf(
+                                                                SqlQuery::ADD_ADMIN,
+                                                                $_SESSION['db']['prefix'] . DbTableName::ADMIN
+                                                            )
                                                         );
 
                                                         $sCurrentDate = date('Y-m-d H:i:s');
                                                         $rStmt->execute([
-                                                            'username' => $_SESSION['val']['admin_username'],
-                                                            'password' => Framework\Security\Security::hashPwd($_SESSION['val']['admin_password']),
-                                                            'email' => $_SESSION['val']['admin_login_email'],
-                                                            'firstName' => $_SESSION['val']['admin_first_name'],
-                                                            'lastName' => $_SESSION['val']['admin_last_name'],
-                                                            'joinDate' => $sCurrentDate,
-                                                            'lastActivity' => $sCurrentDate,
-                                                            'ip' => client_ip()
-                                                        ]);
+                                                                            'username' => $_SESSION['val']['admin_username'],
+                                                                            'password' => Framework\Security\Security::hashPwd(
+                                                                                $_SESSION['val']['admin_password']
+                                                                            ),
+                                                                            'email' => $_SESSION['val']['admin_login_email'],
+                                                                            'firstName' => $_SESSION['val']['admin_first_name'],
+                                                                            'lastName' => $_SESSION['val']['admin_last_name'],
+                                                                            'joinDate' => $sCurrentDate,
+                                                                            'lastActivity' => $sCurrentDate,
+                                                                            'ip' => client_ip()
+                                                                        ]);
 
                                                         $rStmt = $DB->prepare(
-                                                            sprintf(SqlQuery::UPDATE_SITE_NAME, $_SESSION['db']['prefix'] . DbTableName::SETTING)
+                                                            sprintf(
+                                                                SqlQuery::UPDATE_SITE_NAME,
+                                                                $_SESSION['db']['prefix'] . DbTableName::SETTING
+                                                            )
                                                         );
                                                         $rStmt->execute(['siteName' => $_SESSION['val']['site_name']]);
 
                                                         $rStmt = $DB->prepare(
-                                                            sprintf(SqlQuery::UPDATE_ADMIN_EMAIL, $_SESSION['db']['prefix'] . DbTableName::SETTING)
+                                                            sprintf(
+                                                                SqlQuery::UPDATE_ADMIN_EMAIL,
+                                                                $_SESSION['db']['prefix'] . DbTableName::SETTING
+                                                            )
                                                         );
-                                                        $rStmt->execute(['adminEmail' => $_SESSION['val']['admin_email']]);
+                                                        $rStmt->execute(
+                                                            ['adminEmail' => $_SESSION['val']['admin_email']]
+                                                        );
 
                                                         $rStmt = $DB->prepare(
-                                                            sprintf(SqlQuery::UPDATE_FEEDBACK_EMAIL, $_SESSION['db']['prefix'] . DbTableName::SETTING)
+                                                            sprintf(
+                                                                SqlQuery::UPDATE_FEEDBACK_EMAIL,
+                                                                $_SESSION['db']['prefix'] . DbTableName::SETTING
+                                                            )
                                                         );
-                                                        $rStmt->execute(['feedbackEmail' => $_SESSION['val']['admin_feedback_email']]);
+                                                        $rStmt->execute(
+                                                            ['feedbackEmail' => $_SESSION['val']['admin_feedback_email']]
+                                                        );
 
                                                         $rStmt = $DB->prepare(
-                                                            sprintf(SqlQuery::UPDATE_RETURN_EMAIL, $_SESSION['db']['prefix'] . DbTableName::SETTING)
+                                                            sprintf(
+                                                                SqlQuery::UPDATE_RETURN_EMAIL,
+                                                                $_SESSION['db']['prefix'] . DbTableName::SETTING
+                                                            )
                                                         );
-                                                        $rStmt->execute(['returnEmail' => $_SESSION['val']['admin_return_email']]);
+                                                        $rStmt->execute(
+                                                            ['returnEmail' => $_SESSION['val']['admin_return_email']]
+                                                        );
 
                                                         if (!empty($_POST['sample_data_request'])) {
                                                             $this->populateSampleUserData(
@@ -472,7 +534,6 @@ class InstallController extends Controller
                             $aModUpdate = self::DATING_MODS;
                             $aSettingUpdate = self::DATING_SETTINGS;
                             break;
-
                         // For 'base' niche (template), don't do anything. Just use the default settings already setup in the database
                     }
 
@@ -533,7 +594,8 @@ class InstallController extends Controller
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['confirm_remove_install'])) {
                 remove_install_dir();
-                clearstatcache(); // We remove the files status cache as the "_install" folder doesn't exist anymore by now.
+                clearstatcache(
+                ); // We remove the files status cache as the "_install" folder doesn't exist anymore by now.
                 exit(header('Location: ' . PH7_URL_ROOT));
             }
 

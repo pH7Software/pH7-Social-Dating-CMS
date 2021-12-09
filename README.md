@@ -91,7 +91,6 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Chat Rooms
 * Chatroulette
 * Instant Messenger (IM module)
-* Games (with high quality and viral games installed)
 * In-built affiliate system (that encourages brand influencers/ambassadors to promote your dating platform)
 * Newsletter
 * Activity Streams
@@ -165,7 +164,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 
 ## ⚙ Requirements
 
-* **Application Server** PHP 5.6 or higher (recommended version: **PHP 7.0.4** or higher). Compatible with **PHP 8** as well! 🚀
+* **Application Server** PHP 7.4 or higher. Compatible with **PHP 8** as well! 🚀
 
 * **Database** MySQL/MariaDB 5.5.3 or higher.
 

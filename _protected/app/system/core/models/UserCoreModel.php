@@ -848,7 +848,7 @@ class UserCoreModel extends Model
      *
      * @return stdClass The Avatar (SQL alias is pic), profileId and approvedAvatar
      */
-    public function getAvatar($iProfileId, $iApproved = null)
+    public function getAvatar($iProfileId, $iApproved = null): stdClass
     {
         $this->cache->start(self::CACHE_GROUP, 'avatar' . $iProfileId, static::CACHE_TIME);
 
@@ -1003,9 +1003,6 @@ class UserCoreModel extends Model
 
         // BLOG COMMENTS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_BLOG) . 'WHERE sender = ' . $iProfileId);
-
-        // GAME COMMENTS
-        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_GAME) . 'WHERE sender = ' . $iProfileId);
 
         // PHOTO ALBUMS AND PICTURES
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::PICTURE) . 'WHERE profileId = ' . $iProfileId);

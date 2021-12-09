@@ -162,11 +162,6 @@ class StatisticCoreModel extends StatisticModel
         return $this->totalComments('note', $iDay);
     }
 
-    public function totalGameComments($iDay = 0)
-    {
-        return $this->totalComments('game', $iDay);
-    }
-
     /**
      * @param string $sTable
      * @param int $iDay

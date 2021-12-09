@@ -62,7 +62,6 @@ class MainController extends Controller
         $this->view->pictures = $this->oDataModel->getPictures();
         $this->view->albums_videos = $this->oDataModel->getAlbumsVideos();
         $this->view->videos = $this->oDataModel->getVideos();
-        $this->view->games = $this->oDataModel->getGames();
 
         // For the Comments
         $this->generateCommentRouter($sAction, $mParam);
@@ -126,11 +125,6 @@ class MainController extends Controller
             case 'comment-video':
                 $this->view->table = 'video';
                 $this->view->comments = $this->isParamValid($mParam) ? $this->oDataModel->getRecipientCommentsVideos($mParam) : $this->oDataModel->getCommentsVideos();
-                break;
-
-            case 'comment-game':
-                $this->view->table = 'game';
-                $this->view->comments = $this->isParamValid($mParam) ? $this->oDataModel->getRecipientCommentsGames($mParam) : $this->view->comments = $this->oDataModel->getCommentsGames();
                 break;
         }
     }

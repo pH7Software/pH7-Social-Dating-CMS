@@ -23,7 +23,7 @@ use PH7\Framework\Math\Measure\Year as YearMeasure;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Str\Str;
 use PH7\UserCore;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class Validate
 {
@@ -45,7 +45,7 @@ class Validate
     const DEF_MIN_AGE = 18;
     const DEF_MAX_AGE = 99;
 
-    const VALID_HTTP_WEBSITE_RESPONSES = [
+    private const VALID_HTTP_WEBSITE_RESPONSES = [
         StatusCode::OK,
         StatusCode::MOVED_PERMANENTLY,
         StatusCode::FOUND

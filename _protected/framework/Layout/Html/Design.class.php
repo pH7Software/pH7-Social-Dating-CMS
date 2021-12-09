@@ -1,10 +1,12 @@
 <?php
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Layout / Html
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Layout\Html;
 
@@ -37,6 +39,7 @@ use PH7\Framework\Str\Str;
 use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Url;
 use PH7\GenderTypeUserCore;
+use PH7\PH2Gravatar\Gravatar\Image as GravatarImage;
 use PH7\UserCore;
 use PH7\UserCoreModel;
 
@@ -110,7 +113,7 @@ class Design
         $this->oHttpRequest = new HttpRequest;
     }
 
-    public function langList()
+    public function langList(): void
     {
         $sCurrentPage = Page::cleanDynamicUrl('l');
         //$aLangs = (new File)->getDirList(Registry::getInstance()->path_module_lang);
@@ -137,7 +140,7 @@ class Design
      *
      * @return void
      */
-    public function regionalUrls()
+    public function regionalUrls(): void
     {
         $sCurrentPage = Page::cleanDynamicUrl('l');
         $aLangs = (new File)->getDirList(PH7_PATH_APP_LANG);
@@ -159,7 +162,7 @@ class Design
      *
      * @return void
      */
-    public function setMessage($sMsg)
+    public function setMessage(string $sMsg): void
     {
         $this->aMessages[] = $sMsg;
     }
@@ -169,7 +172,7 @@ class Design
      *
      * @return void
      */
-    public function message()
+    public function message(): void
     {
         if ($this->oHttpRequest->getExists('msg')) {
             $this->aMessages[] = substr($this->oHttpRequest->get('msg'), 0, self::MAX_MESSAGE_LENGTH_SHOWN);
@@ -203,7 +206,7 @@ class Design
      *
      * @return void
      */
-    public function setError($sErr)
+    public function setError(string $sErr): void
     {
         $this->aErrors[] = $sErr;
     }
@@ -213,7 +216,7 @@ class Design
      *
      * @return void
      */
-    public function error()
+    public function error(): void
     {
         if ($this->oHttpRequest->getExists('err')) {
             $this->aErrors[] = substr($this->oHttpRequest->get('err'), 0, self::MAX_MESSAGE_LENGTH_SHOWN);
@@ -379,7 +382,7 @@ class Design
                 $bSoftwareName = true;
             }
 
-            echo ($bSoftwareName ? '<span class="italic">' . t('Big thanks to') : ''), ' <strong>', ($bLink ? '<a class="underline" href="' . Kernel::SOFTWARE_WEBSITE . '" title="' . Kernel::SOFTWARE_DESCRIPTION . '">' : ''), ($bSoftwareName ? Kernel::SOFTWARE_NAME : ''), ($bVersion ? ' ' . Kernel::SOFTWARE_VERSION : ''), ($bLink ? '</a>' : ''), ($bSoftwareName ? '</strong>' : '');
+            echo ($bSoftwareName ? '<span class="italic">' . t('Big thanks to') : ''), ' <strong>', ($bLink ? '<a class="underline" href="' . Kernel::SOFTWARE_WEBSITE . '" title="' . Kernel::SOFTWARE_DESCRIPTION . '">' : ''), ($bSoftwareName ? Kernel::SOFTWARE_NAME : ''), ($bVersion ? ' ' . Kernel::SOFTWARE_VERSION : ''), ($bLink ? '</a>' : ''), ($bSoftwareName ? '</strong> <span role="img" aria-label="love">❤️</span></span>' : '');
         }
 
         if ($bComment) {
@@ -650,10 +653,9 @@ class Design
 
                 /** If the user doesn't have an avatar **/
                 if (!is_file($sPath)) {
-                    /* The user has no avatar, we then try to get a Gravatar */
+                    /* The user has no avatar, we then get a Gravatar if exists */
                     $sEmail = $oUserModel->getEmail($iProfileId);
-                    $bSecuredGravatar = Http::isSsl();
-                    $sUrl = $this->getGravatarUrl($sEmail, '404', $iSize, 'g', $bSecuredGravatar);
+                    $sUrl = GravatarImage::get($sEmail, ['size' => $iSize, 'display' => '404', 'rating' => 'g']);
 
                     if (!(new Validate)->url($sUrl, true)) {
                         // If no Gravatar set, it returns 404, and we then set the default pH7CMS's avatar
@@ -703,25 +705,6 @@ class Design
         }
 
         echo $sHtml;
-    }
-
-    /**
-     * Get the Gravatar URL.
-     *
-     * @param string $sEmail The user email address.
-     * @param string $sType Default image type to show [ 404 | mp | identicon | monsterid | wavatar ]
-     * @param int $iSize The size of the image. Default: 80
-     * @param string $sRating The max image rating allowed. Default: 'g' (for all)
-     * @param bool $bSecure Display avatar via HTTPS, for example if the site uses HTTPS, you should use this option to not get a warning with most Web browsers. Default: FALSE
-     *
-     * @return string The Gravatar Link.
-     */
-    public function getGravatarUrl($sEmail, $sType = 'wavatar', $iSize = 80, $sRating = 'g', $bSecure = false)
-    {
-        $sProtocol = $bSecure ? 'https' : 'http';
-        $bSubDomain = $bSecure ? 'secure' : 'www';
-
-        return $sProtocol . '://' . $bSubDomain . '.gravatar.com/avatar/' . md5(strtolower($sEmail)) . '?d=' . $sType . '&s=' . $iSize . '&r=' . $sRating;
     }
 
     /**

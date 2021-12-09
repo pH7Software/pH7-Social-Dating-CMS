@@ -23,8 +23,7 @@ class CommentCore
         'picture',
         'video',
         'blog',
-        'note',
-        'game'
+        'note'
     ];
 
     /**

@@ -120,7 +120,6 @@ class VariousTest extends PHPUnit_Framework_TestCase
             [DbTableName::ALBUM_VIDEO, 'albums_videos'],
             [DbTableName::PICTURE, 'pictures'],
             [DbTableName::VIDEO, 'videos'],
-            [DbTableName::GAME, 'games'],
             [DbTableName::BLOG, 'blogs'],
             [DbTableName::NOTE, 'notes'],
             [DbTableName::AD, 'ads'],
@@ -184,7 +183,6 @@ class VariousTest extends PHPUnit_Framework_TestCase
             [DbTableName::ALBUM_VIDEO, 'albumId'],
             [DbTableName::BLOG, 'blogId'],
             [DbTableName::NOTE, 'noteId'],
-            [DbTableName::GAME, 'gameId'],
             [DbTableName::FORUM_TOPIC, 'topicId']
         ];
     }

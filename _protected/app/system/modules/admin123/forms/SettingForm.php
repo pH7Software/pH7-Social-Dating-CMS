@@ -585,7 +585,6 @@ class SettingForm
             'chat',
             'chatroulette',
             'forum',
-            'game',
             'hotornot',
             'picture',
             'video'

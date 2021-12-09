@@ -10,7 +10,7 @@ namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 defined('PH7') or die('Restricted access');
 
