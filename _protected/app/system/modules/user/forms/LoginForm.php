@@ -42,7 +42,7 @@ class LoginForm implements Authenticable
         $oForm->addElement(new Email(t('Your Email:'), 'mail', ['id' => 'email_login', 'onblur' => 'CValid(this.value, this.id,\'user\')', 'required' => 1]));
         $oForm->addElement(new HTMLExternal('<span class="input_error email_login"></span>'));
         $oForm->addElement(new Password(t('Your Password:'), 'password', ['required' => 1]));
-        $oForm->addElement(new Checkbox('', RememberMeCore::CHECKBOX_FIELD_NAME, [1 => t('Stay signed in (for up to %0% months)', RememberMeCore::getRememberDurationInDays())]));
+        $oForm->addElement(new Checkbox('', RememberMeCore::CHECKBOX_FIELD_NAME, [1 => t('Stay signed in (for up to %0% days)', RememberMeCore::getRememberDurationInDays())]));
 
         if (static::isCaptchaEligible()) {
             $oForm->addElement(new CCaptcha(t('Captcha'), 'captcha', ['id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:')]));

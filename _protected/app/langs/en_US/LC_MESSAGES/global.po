@@ -7659,6 +7659,9 @@ msgid "Your Date of Birth"
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/LoginForm.php:33
+msgid "Stay signed in (for up to %0% days)"
+msgstr ""
+
 #: _protected/app/system/modules/user/forms/LoginSplashForm.php:34
 msgid "Stay signed in"
 msgstr ""
