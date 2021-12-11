@@ -22,7 +22,7 @@ class Cookie
      * Set a PHP cookie.
      *
      * @param array|string $mName Name of the cookie.
-     * @param string|null $sValue value of the cookie, Optional if the cookie data is in a array.
+     * @param string|null $sValue value of the cookie, Optional if the cookie data is in an array.
      * @param int|null $iTime The time the cookie expires. This is a Unix timestamp.
      * @param bool|null $bSecure If TRUE cookie will only be sent over a secure HTTPS connection from the client.
      *

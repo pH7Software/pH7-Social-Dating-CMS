@@ -36,7 +36,7 @@ class Session
      * Set a PHP session.
      *
      * @param array|string $mName Name of the session.
-     * @param string|null $sValue Value of the session, Optional if the session data is in a array.
+     * @param string|null $sValue Value of the session, Optional if the session data is in an array.
      *
      * @return void
      */
