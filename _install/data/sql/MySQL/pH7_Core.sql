@@ -333,7 +333,6 @@ CREATE TABLE IF NOT EXISTS ph7_pictures (
   description varchar(191) DEFAULT NULL,
   file varchar(40) NOT NULL,
   file_cdn_url varchar(40) NOT NULL,
-  file_cdn_url varchar(40) NOT NULL,
   approved enum('1','0') DEFAULT '1',
   votes int(9) unsigned DEFAULT 0,
   score float(9) unsigned DEFAULT 0,
