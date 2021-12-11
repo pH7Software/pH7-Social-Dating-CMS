@@ -39,17 +39,12 @@ class RememberMeCore
         return (int)ceil(self::$iCookieDuration / (3600 * 24));
     }
 
-    /**
-     * @param Session $oSession
-     *
-     * @return bool
-     */
-    public function isEligible(Session $oSession)
+    public function isEligible(Session $oSession): bool
     {
         return $oSession->exists(self::STAY_LOGGED_IN_REQUESTED);
     }
 
-    public function enableSession(stdClass $oUserData)
+    public function enableSession(stdClass $oUserData): void
     {
         $aCookieData = [
             // Hash one more time the password for the cookie
