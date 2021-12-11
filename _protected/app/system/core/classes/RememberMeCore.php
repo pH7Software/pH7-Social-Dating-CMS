@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2019-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
@@ -15,8 +15,29 @@ use stdClass;
 
 class RememberMeCore
 {
-    const CHECKBOX_FIELD_NAME = 'remember';
-    const STAY_LOGGED_IN_REQUESTED = 'stayed_logged_requested';
+    public const CHECKBOX_FIELD_NAME = 'remember';
+    public const STAY_LOGGED_IN_REQUESTED = 'stayed_logged_requested';
+    public const DEFAULT_DURATION = 7890000; // 3 months
+
+    private static int $iCookieDuration;
+
+    public function __construct()
+    {
+        $this->setRememberDuration(self::DEFAULT_DURATION);
+    }
+
+    /**
+     * @param int $iDurationSeconds Duration in seconds.
+     */
+    public function setRememberDuration(int $iDurationSeconds): void
+    {
+        self::$iCookieDuration = $iDurationSeconds;
+    }
+
+    public static function getRememberDurationInDays(): int
+    {
+        return ceil(self::$iCookieDuration / (3600 * 24));
+    }
 
     /**
      * @param Session $oSession
@@ -35,6 +56,6 @@ class RememberMeCore
             'member_remember' => Security::hashCookie($oUserData->password),
             'member_id' => $oUserData->profileId
         ];
-        (new Cookie)->set($aCookieData);
+        (new Cookie)->set($aCookieData, null, self::$iCookieDuration);
     }
 }
