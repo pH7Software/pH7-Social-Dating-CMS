@@ -11,6 +11,8 @@
  * @linkDomDocument  http://php.net/manual/class.domdocument.php
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Xml\Feed;
 
 defined('PH7') or exit('Restricted access');
