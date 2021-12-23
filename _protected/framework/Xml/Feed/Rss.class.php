@@ -28,14 +28,7 @@ class Rss extends DomDocument
      */
     private $oChannel;
 
-    /**
-     * Sets up the DOM environment.
-     *
-     * @param string $sTitle The site title
-     * @param string $sLink The link to the site
-     * @param string $sDescription The site description
-     */
-    public function __construct($sTitle, $sLink, $sDescription)
+    public function __construct(string $sTitle, string $sLink, string $sDescription)
     {
         // Call the parent constructor (DomDocument)
         parent::__construct();

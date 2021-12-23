@@ -17,7 +17,7 @@ class RememberMeCore
 {
     public const CHECKBOX_FIELD_NAME = 'remember';
     public const STAY_LOGGED_IN_REQUESTED = 'stayed_logged_requested';
-    public const DEFAULT_DURATION = 7890000; // 3 months
+    public const DEFAULT_DURATION = 7776000; // 90 days
 
     private static int $iCookieDuration;
 
@@ -36,20 +36,15 @@ class RememberMeCore
 
     public static function getRememberDurationInDays(): int
     {
-        return ceil(self::$iCookieDuration / (3600 * 24));
+        return (int)ceil(self::$iCookieDuration / (3600 * 24));
     }
 
-    /**
-     * @param Session $oSession
-     *
-     * @return bool
-     */
-    public function isEligible(Session $oSession)
+    public function isEligible(Session $oSession): bool
     {
         return $oSession->exists(self::STAY_LOGGED_IN_REQUESTED);
     }
 
-    public function enableSession(stdClass $oUserData)
+    public function enableSession(stdClass $oUserData): void
     {
         $aCookieData = [
             // Hash one more time the password for the cookie
