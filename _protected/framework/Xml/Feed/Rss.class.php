@@ -19,7 +19,7 @@ use DomDocument;
 
 class Rss extends DomDocument
 {
-    const DOCUMENT_VERSION = '2.0';
+    private const DOCUMENT_VERSION = '2.0';
 
     /**
      * RSS channel object.
@@ -63,7 +63,7 @@ class Rss extends DomDocument
      *
      * @return self
      */
-    public function addItem($aItems)
+    public function addItem($aItems): self
     {
         $oItem = $this->createElement('item');
 
@@ -113,7 +113,7 @@ class Rss extends DomDocument
     /**
      * Create the XML.
      *
-     * @return string The XML string
+     * @return string|false The XML string, or FALSE if an error occurred.
      */
     public function __toString()
     {
