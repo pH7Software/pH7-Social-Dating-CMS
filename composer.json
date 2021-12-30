@@ -74,6 +74,7 @@
     "stripe/stripe-php": "^5.9",
     "swiftmailer/swiftmailer": "^5.4",
     "symfony/console": "^5.3",
+    "twbs/bootstrap": "^3.4",
     "twilio/sdk": "^5.28"
   },
   "require-dev": {
@@ -93,6 +94,14 @@
     "psr-4": {
       "PH7\\Test\\": "_tests"
     }
+  },
+  "scripts": {
+    "post-cmd": [
+      "cp -R _protected/vendor/twbs/bootstrap/dist/css/bootstrap.min.css static/css/bootstrap.css",
+      "cp -R _protected/vendor/twbs/bootstrap/dist/js/bootstrap.min.js static/js/bootstrap.js"
+    ],
+    "post-install-cmd": ["composer run-script post-cmd"],
+    "post-update-cmd": ["composer run-script post-install-cmd"]
   },
   "minimum-stability": "stable",
   "support": {
