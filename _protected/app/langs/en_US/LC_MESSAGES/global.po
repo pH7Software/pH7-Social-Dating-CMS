@@ -4819,10 +4819,6 @@ msgstr ""
 msgid "Config Universal Login - API Keys"
 msgstr ""
 
-#: _protected/app/system/modules/connect/controllers/MainController.php:37
-msgid "Welcome to Universal Login"
-msgstr ""
-
 #: _protected/app/system/modules/connect/controllers/MainController.php:39
 msgid "Universal Login, Use the service Facebook, Twitter, Outlook, Microsoft, Google, or other account to login on the social dating site %site_name%"
 msgstr ""
@@ -7569,10 +7565,6 @@ msgstr ""
 #: _protected/app/system/modules/user/forms/EditWallForm.php:37
 #: _protected/app/system/modules/user/forms/WallForm.php:33
 msgid "Content:"
-msgstr ""
-
-#: _protected/app/system/modules/user/forms/JoinForm.php:42
-msgid "Universal Login"
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/JoinForm.php:45

@@ -20,10 +20,6 @@ use stdClass;
 
 class DisableModuleForm
 {
-    const DEV_STAGE_MODULES = [
-        'connect'
-    ];
-
     public static function display()
     {
         if (isset($_POST['submit_module'])) {
@@ -54,10 +50,6 @@ class DisableModuleForm
                 $sAdditionalText .= ' • <a class="small" href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'general') . '#p=api">' . t('Change the default Chat by yours') . '</a>';
             }
 
-            if (self::isModuleInDevStage($oModDetails)) {
-                $sAdditionalText .= ' • <span class="small red">' . t('Only for development purpose to test it before <a href="%0%">opening a PR</a>. <a href="%1%">Social APIs</a> have to be updated.', 'https://github.com/pH7Software/pH7-Social-Dating-CMS/pulls', 'https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/master/_protected/app/system/modules/connect/inc/class/') . '</span>';
-            }
-
             $aModuleNames[$oModDetails->moduleId] = $oModDetails->moduleTitle . $sAdditionalText;
         }
         unset($oModuleData);
@@ -69,19 +61,5 @@ class DisableModuleForm
         $oForm->addElement(new Checkbox('', 'module_id', $aModuleNames, ['value' => $aSelectedMods]));
         $oForm->addElement(new Button(t('Save'), 'submit', ['icon' => 'check']));
         $oForm->render();
-    }
-
-    /**
-     * @param stdClass $oModuleDetails
-     *
-     * @return bool
-     */
-    private static function isModuleInDevStage(stdClass $oModuleDetails)
-    {
-        return in_array(
-            $oModuleDetails->folderName,
-            self::DEV_STAGE_MODULES,
-            true
-        );
     }
 }
