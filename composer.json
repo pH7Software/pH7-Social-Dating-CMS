@@ -94,6 +94,9 @@
       "PH7\\Test\\": "_tests"
     }
   },
+  "scripts": {
+    "test": "_protected/vendor/bin/phpunit"
+  },
   "minimum-stability": "stable",
   "support": {
     "source": "https://github.com/pH7Software/pH7-Social-Dating-CMS",
