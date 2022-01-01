@@ -8,7 +8,7 @@
 
 namespace PH7;
 
-defined('PH7') or die('Restricted access');
+defined('PH7') or exit('Restricted access');
 
 /**
  * This file is not required. It is only used to add checks or functions before the module's controller is invoked.
