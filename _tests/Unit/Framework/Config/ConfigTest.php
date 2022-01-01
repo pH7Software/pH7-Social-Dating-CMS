@@ -9,14 +9,14 @@
 namespace PH7\Test\Unit\Framework\Config;
 
 use PH7\Framework\Config\Config;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class ConfigTest extends PHPUnit_Framework_TestCase
+class ConfigTest extends TestCase
 {
     /** @var Config */
-    private $oConfig;
+    private Config $oConfig;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->oConfig = Config::getInstance();
     }
