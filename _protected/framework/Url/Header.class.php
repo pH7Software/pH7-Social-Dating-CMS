@@ -10,6 +10,8 @@
  * @version          1.2
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Url;
 
 defined('PH7') or exit('Restricted access');
