@@ -12,6 +12,7 @@ require_once PH7_PATH_SYS . 'core/classes/AdsCore.php';
 
 use PH7\AdsCore;
 use PH7\DbTableName;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 
 class AdsCoreTest extends PHPUnit_Framework_TestCase
@@ -39,11 +40,10 @@ class AdsCoreTest extends PHPUnit_Framework_TestCase
         $this->assertSame($sExpectedValue, AdsCore::checkTable($sTableName));
     }
 
-    /**
-     * @expectedException \PH7\Framework\Error\CException\PH7InvalidArgumentException
-     */
     public function testIncorrectTable()
     {
+        $this->expectException(PH7InvalidArgumentException::class);
+
         AdsCore::checkTable('wrong_table');
     }
 
@@ -57,11 +57,10 @@ class AdsCoreTest extends PHPUnit_Framework_TestCase
         $this->assertSame('adsId', AdsCore::convertTableToId($sTableName));
     }
 
-    /**
-     * @expectedException \PH7\Framework\Error\CException\PH7InvalidArgumentException
-     */
     public function testIncorrectTableToId()
     {
+        $this->expectException(PH7InvalidArgumentException::class);
+
         AdsCore::convertTableToId('wrong_table');
     }
 

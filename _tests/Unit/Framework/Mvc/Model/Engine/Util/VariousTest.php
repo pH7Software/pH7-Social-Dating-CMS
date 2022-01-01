@@ -9,6 +9,7 @@
 namespace PH7\Test\Unit\Framework\Mvc\Model\Engine\Util;
 
 use PH7\DbTableName;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mvc\Model\Engine\Util\Various as DbVarious;
 use PHPUnit_Framework_TestCase;
 
@@ -25,11 +26,10 @@ class VariousTest extends PHPUnit_Framework_TestCase
         $this->assertSame($sExpectedTable, DbVarious::checkTable($sTable));
     }
 
-    /**
-     * @expectedException \PH7\Framework\Error\CException\PH7InvalidArgumentException
-     */
     public function testIncorrectTable()
     {
+        $this->expectException(PH7InvalidArgumentException::class);
+
         DbVarious::checkTable('incorrect_table');
     }
 
@@ -44,11 +44,10 @@ class VariousTest extends PHPUnit_Framework_TestCase
         $this->assertSame($sExpectedTable, DbVarious::checkModelTable($sTable));
     }
 
-    /**
-     * @expectedException \PH7\Framework\Error\CException\PH7InvalidArgumentException
-     */
     public function testIncorrectModelTable()
     {
+        $this->expectException(PH7InvalidArgumentException::class);
+
         DbVarious::checkModelTable('incorrect_table');
     }
 
@@ -63,11 +62,10 @@ class VariousTest extends PHPUnit_Framework_TestCase
         $this->assertSame($sExpectedTable, DbVarious::convertModToTable($sMod));
     }
 
-    /**
-     * @expectedException \PH7\Framework\Error\CException\PH7InvalidArgumentException
-     */
     public function testIncorrectModToTable()
     {
+        $this->expectException(PH7InvalidArgumentException::class);
+
         DbVarious::convertModToTable('wrong_module');
     }
 
@@ -82,11 +80,10 @@ class VariousTest extends PHPUnit_Framework_TestCase
         $this->assertSame($sExpectedMod, DbVarious::convertTableToMod($sTable));
     }
 
-    /**
-     * @expectedException \PH7\Framework\Error\CException\PH7InvalidArgumentException
-     */
     public function testIncorrectTableToMod()
     {
+        $this->expectException(PH7InvalidArgumentException::class);
+
         DbVarious::convertTableToMod('wrong_table');
     }
 
@@ -101,11 +98,10 @@ class VariousTest extends PHPUnit_Framework_TestCase
         $this->assertSame($sExpectedColumnId, DbVarious::convertTableToId($sTable));
     }
 
-    /**
-     * @expectedException \PH7\Framework\Error\CException\PH7InvalidArgumentException
-     */
     public function testIncorrectTableToId()
     {
+        $this->expectException(PH7InvalidArgumentException::class);
+
         DbVarious::convertTableToId('wrong_table');
     }
 

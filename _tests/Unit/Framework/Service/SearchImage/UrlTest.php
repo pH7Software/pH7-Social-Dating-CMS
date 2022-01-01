@@ -8,6 +8,7 @@
 
 namespace PH7\Test\Unit\Framework\Service\SearchImage;
 
+use PH7\Framework\Service\SearchImage\InvalidUrlException;
 use PH7\Framework\Service\SearchImage\Url;
 use PHPUnit_Framework_TestCase;
 
@@ -24,11 +25,11 @@ class UrlTest extends PHPUnit_Framework_TestCase
      * @param string $sUrl
      *
      * @dataProvider invalidUrlsProvider
-     *
-     * @expectedException \PH7\Framework\Service\SearchImage\InvalidUrlException
      */
     public function testInvalidValue($sUrl)
     {
+        $this->expectException(InvalidUrlException::class);
+
         new Url($sUrl);
     }
 

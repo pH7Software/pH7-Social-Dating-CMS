@@ -21,11 +21,9 @@ class ConfigTest extends TestCase
         $this->oConfig = Config::getInstance();
     }
 
-    /**
-     * @expectedException \PH7\Framework\Config\KeyAlreadyExistsException
-     */
     public function testSetDuplicateKey()
     {
+        $this->expectException(\PH7\Framework\Config\KeyAlreadyExistsException::class);
         $this->oConfig->setValue('key1', 'Blablabla');
         $this->oConfig->setValue('key1', 'Nananana'); // Duplicate key
     }
@@ -37,14 +35,14 @@ class ConfigTest extends TestCase
         $this->assertSame($sName, $this->oConfig->getValue('name'));
     }
 
-    public function testInvalidLoad()
-    {
-        $this->assertFalse($this->oConfig->load('invalid_path/config.ini'));
-    }
-
     public function testValidLoad()
     {
         $this->assertTrue($this->oConfig->load(PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE));
+    }
+
+    public function testValueIsCasted()
+    {
+        $this->assertIsBool('base', $this->oConfig->values['test']['enabled']);
     }
 
     public function testDefaultIniValues()

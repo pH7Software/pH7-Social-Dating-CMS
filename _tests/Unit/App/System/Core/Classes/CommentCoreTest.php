@@ -11,6 +11,7 @@ namespace PH7\Test\Unit\App\System\Core\Classes;
 require_once PH7_PATH_SYS . 'core/classes/CommentCore.php';
 
 use PH7\CommentCore;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PHPUnit_Framework_TestCase;
 
 class CommentCoreTest extends PHPUnit_Framework_TestCase
@@ -23,11 +24,10 @@ class CommentCoreTest extends PHPUnit_Framework_TestCase
         $this->assertSame($sTableName, CommentCore::checkTable($sTableName));
     }
 
-    /**
-     * @expectedException \PH7\Framework\Error\CException\PH7InvalidArgumentException
-     */
     public function testIncorrectTable()
     {
+        $this->expectException(PH7InvalidArgumentException::class);
+
         CommentCore::checkTable('incorrect_table');
     }
 
