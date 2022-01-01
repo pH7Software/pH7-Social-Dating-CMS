@@ -1,10 +1,9 @@
 <?php
 /**
- * @title            Config Class
  * @desc             Loading and management config files.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2011-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Config
  * @version          1.2
@@ -104,22 +103,12 @@ class Config implements Configurable
         }
     }
 
-    /**
-     * Set Production Mode site.
-     *
-     * @return void
-     */
-    public function setProductionMode()
+    public function setProductionMode(): void
     {
         $this->setMode(self::PRODUCTION_MODE);
     }
 
-    /**
-     * Set Development Mode site.
-     *
-     * @return void
-     */
-    public function setDevelopmentMode()
+    public function setDevelopmentMode(): void
     {
         $this->setMode(self::DEVELOPMENT_MODE);
     }
@@ -127,16 +116,16 @@ class Config implements Configurable
     /**
      * Set a Mode (Generic method).
      *
-     * @param string $sReplace The Mode site.
+     * @param string $sReplace The environment mode.
      *
      * @see Config::setProductionMode()
      * @see Config::setDevelopmentMode()
      *
      * @return void
      */
-    private function setMode($sReplace)
+    private function setMode(string $sReplaceMode): void
     {
-        $sSearch = $sReplace === self::DEVELOPMENT_MODE ? self::PRODUCTION_MODE : self::DEVELOPMENT_MODE;
+        $sSearch = $sReplaceMode === self::DEVELOPMENT_MODE ? self::PRODUCTION_MODE : self::DEVELOPMENT_MODE;
 
         $oFile = new File;
 
@@ -145,7 +134,7 @@ class Config implements Configurable
 
         $sFileContents = $oFile->getFile($this->sConfigAppFilePath);
         $sSearchContents = 'environment = ' . $sSearch;
-        $sReplaceContents = 'environment = ' . $sReplace;
+        $sReplaceContents = 'environment = ' . $sReplaceMode;
         $sNewContents = str_replace($sSearchContents, $sReplaceContents, $sFileContents);
         $oFile->putFile($this->sConfigAppFilePath, $sNewContents);
 
@@ -160,7 +149,7 @@ class Config implements Configurable
      *
      * @return void
      */
-    private function read()
+    private function read(): void
     {
         /** Load configuration files **/
         // 1) Load app config file
