@@ -57,9 +57,9 @@ class Header
      *
      * @return string The URL.
      */
-    public static function selfUrl()
+    public static function selfUrl(): string
     {
-        $sSecure = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') ? 's' : '';
+        $sSecure = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) === 'on') ? 's' : '';
         $sServerProtocol = strtolower($_SERVER['SERVER_PROTOCOL']);
         $sProtocol = substr($sServerProtocol, 0, strpos($sServerProtocol, PH7_SH)) . $sSecure;
 
