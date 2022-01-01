@@ -70,13 +70,13 @@ class Config implements Configurable
     /**
      * {@inheritdoc}
      */
-    public function load($sFile): bool
+    public function load(string $sFile): bool
     {
         if (!is_file($sFile)) {
             return false;
         }
 
-        $aContents = parse_ini_file($sFile, true);
+        $aContents = $this->parseIniFile($sFile);
         $this->values = array_merge($this->values, $aContents);
 
         return true;
@@ -85,7 +85,7 @@ class Config implements Configurable
     /**
      * {@inheritdoc}
      */
-    public function getValue($sKey): string
+    public function getValue(string $sKey): string
     {
         return $this->values[$sKey];
     }
@@ -95,7 +95,7 @@ class Config implements Configurable
      *
      * @throws KeyAlreadyExistsException
      */
-    public function setValue($sKey, $sValue): void
+    public function setValue(string $sKey, string $sValue): void
     {
         if (!array_key_exists($sKey, $this->values)) {
             $this->values[$sKey] = $sValue;
@@ -164,12 +164,17 @@ class Config implements Configurable
     {
         /** Load configuration files **/
         // 1) Load app config file
-        $this->values = parse_ini_file($this->sConfigAppFilePath, true);
+        $this->values = $this->parseIniFile($this->sConfigAppFilePath);
         // 2) Now we have to use array_merge() function, so we do with the Config::load() method for loading system config file
         $this->load($this->sConfigSysFilePath);
 
         /* The config constants */
         define('PH7_DEFAULT_THEME', $this->values['application']['default_theme']);
         define('PH7_DEFAULT_LANG', $this->values['application']['default_lang']);
+    }
+
+    private function parseIniFile(string $sFile)
+    {
+        return parse_ini_file($sFile, true, INI_SCANNER_TYPED);
     }
 }
