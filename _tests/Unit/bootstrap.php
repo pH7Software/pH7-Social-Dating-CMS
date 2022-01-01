@@ -36,7 +36,7 @@ define('PH7_PATH_APP', PH7_PATH_PROTECTED . 'app/');
 define('PH7_PATH_SYS', PH7_PATH_APP . 'system/');
 define('PH7_PATH_SYS_MOD', PH7_PATH_SYS . 'modules/');
 define('PH7_PATH_APP_LANG', PH7_PATH_APP . 'langs/');
-define('PH7_PATH_TEST', __DIR__ . '/');
+define('PH7_PATH_TEST', __DIR__ . PH7_PS);
 
 // Config constants
 define('PH7_CONFIG', 'config/');
