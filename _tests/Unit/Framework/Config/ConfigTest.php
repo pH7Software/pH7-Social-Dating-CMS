@@ -35,6 +35,11 @@ class ConfigTest extends TestCase
         $this->assertSame($sName, $this->oConfig->getValue('name'));
     }
 
+    public function testInvalidLoad()
+    {
+        $this->assertFalse($this->oConfig->load('invalid_path/config.ini'));
+    }
+
     public function testValidLoad()
     {
         $this->assertTrue($this->oConfig->load(PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE));
