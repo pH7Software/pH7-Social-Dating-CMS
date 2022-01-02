@@ -6,6 +6,8 @@
  * @package          PH7 / Test / Unit / Framework / Layout / Tpl / Engine / PH7Tpl / Syntax
  */
 
+declare(strict_types=1);
+
 namespace PH7\Test\Unit\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax;
 
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax\EmptyCodeException;
