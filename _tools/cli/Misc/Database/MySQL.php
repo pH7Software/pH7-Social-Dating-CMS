@@ -23,7 +23,9 @@ class MySQL extends PDO
 
     public function __construct(array $params)
     {
-        $driverOptions[self::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES ' . $params['db_charset'];
+        $driverOptions = [
+            self::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES ' . $params['db_charset']
+        ];
 
         parent::__construct(
             "{$params['db_type']}:host={$params['db_hostname']};dbname={$params['db_name']};",
