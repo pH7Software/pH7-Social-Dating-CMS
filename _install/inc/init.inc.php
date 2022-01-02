@@ -15,7 +15,7 @@ defined('PH7') or exit('Restricted access');
 
 use Exception;
 
-define('WEBSITE_ALREADY_INSTALLED_MESSAGE', 'Your site is already installed.<br /> If you want to redo a clean installation, please delete your "_constants.php" file and delete all the content of your database.');
+define('WEBSITE_ALREADY_INSTALLED_MESSAGE', 'Your site is already installed.<br /> If you wish to do a new clean installation, please delete your "_constants.php" file and delete all the contents of your database (e.g. MySQL).');
 
 /* We define the URL if mod_rewrite is enabled (to enable it, sample.htaccess has to be renamed to .htaccess) */
 define('PH7_URL_SLUG_INSTALL', PH7_URL_INSTALL . (!is_url_rewrite() ? '?a=' : ''));
