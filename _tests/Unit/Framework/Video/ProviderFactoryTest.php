@@ -6,6 +6,8 @@
  * @package          PH7 / Test / Unit / Framework / Video
  */
 
+declare(strict_types=1);
+
 namespace PH7\Test\Unit\Framework\Video;
 
 use PH7\Framework\Video\Api\Dailymotion;
@@ -14,33 +16,27 @@ use PH7\Framework\Video\Api\Vimeo;
 use PH7\Framework\Video\Api\Youtube;
 use PH7\Framework\Video\InvalidApiProviderException;
 use PH7\Framework\Video\ProviderFactory;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class ProviderFactoryTest extends PHPUnit_Framework_TestCase
+final class ProviderFactoryTest extends TestCase
 {
     /**
-     * @param string $sClassName
-     * @param string $sExpectedClass
-     *
      * @dataProvider videoApiProvider
      */
-    public function testCreateValidApiProvider($sClassName, $sExpectedClass)
+    public function testCreateValidApiProvider(string $sClassName, string $sExpectedClass): void
     {
         $oProvider = ProviderFactory::create($sClassName);
         $this->assertInstanceOf($sExpectedClass, $oProvider);
     }
 
-    public function testCreateWrongApiProvider()
+    public function testCreateWrongApiProvider(): void
     {
         $this->expectException(InvalidApiProviderException::class);
 
         ProviderFactory::create('invalidVideoApiProvider');
     }
 
-    /**
-     * @return array
-     */
-    public function videoApiProvider()
+    public function videoApiProvider(): array
     {
         return [
             ['youtu', Youtube::class],

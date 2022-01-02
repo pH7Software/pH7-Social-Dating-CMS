@@ -6,19 +6,19 @@
  * @package          PH7 / Test / Unit / Framework / Layout / Tpl / Engine / PH7Tpl / Predefined
  */
 
+declare(strict_types=1);
+
 namespace PH7\Test\Unit\Framework\Layout\Tpl\Engine\PH7Tpl\Predefined;
 
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Predefined\Func as PredefinedFunc;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class FuncTest extends PHPUnit_Framework_TestCase
+final class FuncTest extends TestCase
 {
     /**
-     * @param string $sDateFormat
-     *
      * @dataProvider dateFormatsProvider
      */
-    public function testDataFunction($sDateFormat)
+    public function testDataFunction(string $sDateFormat): void
     {
         $oPredefinedFunc = new PredefinedFunc('<ph:date value="' . $sDateFormat . '" />');
         $this->assertAttributeSame(
@@ -32,10 +32,7 @@ class FuncTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     * @return array
-     */
-    public function dateFormatsProvider()
+    public function dateFormatsProvider(): array
     {
         return [
             ['Y/m/d'],

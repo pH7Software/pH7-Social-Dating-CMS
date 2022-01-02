@@ -11,16 +11,16 @@ namespace PH7\Test\Unit\App\System\Module\Payment\Inc\Classes;
 require_once PH7_PATH_SYS_MOD . 'payment/inc/class/GroupId.php';
 
 use PH7\GroupId;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class GroupIdTest extends PHPUnit_Framework_TestCase
+final class GroupIdTest extends TestCase
 {
     const VISITOR_GROUP = 1;
     const PENDING_GROUP = 9;
     const DEFAULT_MEMBERSHIP_ID = 2;
     const CUSTOM_GROUP = 22;
 
-    public function testUndeletableWithVisitorGroup()
+    public function testUndeletableWithVisitorGroup(): void
     {
         $bResult = GroupId::undeletable(
             self::VISITOR_GROUP,
@@ -30,7 +30,7 @@ class GroupIdTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($bResult);
     }
 
-    public function testUndeletableWithPendingGroup()
+    public function testUndeletableWithPendingGroup(): void
     {
         $bResult = GroupId::undeletable(
             self::PENDING_GROUP,
@@ -40,7 +40,7 @@ class GroupIdTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($bResult);
     }
 
-    public function testUndeletableWithDefaultGroup()
+    public function testUndeletableWithDefaultGroup(): void
     {
         $bResult = GroupId::undeletable(
             self::DEFAULT_MEMBERSHIP_ID,
@@ -50,7 +50,7 @@ class GroupIdTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($bResult);
     }
 
-    public function testUndeletableWithCustomGroup()
+    public function testUndeletableWithCustomGroup(): void
     {
         $bResult = GroupId::undeletable(
             self::CUSTOM_GROUP,

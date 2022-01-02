@@ -6,28 +6,30 @@
  * @package          PH7 / Test / Unit / Framework / Geo / Map
  */
 
+declare(strict_types=1);
+
 namespace PH7\Test\Unit\Framework\Geo\Map;
 
 use PH7\Framework\Geo\Map\Api as ApiMap;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class ApiTest extends PHPUnit_Framework_TestCase
+class ApiTest extends TestCase
 {
-    public function testApiKeyIsSet()
+    public function testApiKeyIsSet(): void
     {
         $oMap = new ApiMap;
         $oMap->setKey('OIzaSyBu-916IsoKajomJNIgngS6HL_kDIKU0aU');
         $this->assertFalse($oMap->isApiKeyNotSet());
     }
 
-    public function testWrongApiKeySet()
+    public function testWrongApiKeySet(): void
     {
         $oMap = new ApiMap;
         $oMap->setKey('invalid');
         $this->assertTrue($oMap->isApiKeyNotSet());
     }
 
-    public function testApiKeyIsNotSet()
+    public function testApiKeyIsNotSet(): void
     {
         $oMap = new ApiMap;
         $this->assertTrue($oMap->isApiKeyNotSet());

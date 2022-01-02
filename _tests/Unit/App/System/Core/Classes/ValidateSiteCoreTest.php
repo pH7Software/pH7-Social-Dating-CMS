@@ -6,6 +6,8 @@
  * @package          PH7 / Test / Unit / App / System / Core / Classes
  */
 
+declare(strict_types=1);
+
 namespace PH7\Test\Unit\App\System\Core\Classes;
 
 require_once PH7_PATH_SYS . 'core/classes/AdsCore.php';
@@ -14,12 +16,11 @@ use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Session\Session;
 use PH7\ValidateSiteCore;
 use Phake;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class ValidateSiteCoreTest extends PHPUnit_Framework_TestCase
+class ValidateSiteCoreTest extends TestCase
 {
-    /** @var ValidateSiteCore */
-    private $oValidateSite;
+    private ValidateSiteCore $oValidateSite;
 
     protected function setUp(): void
     {
@@ -27,7 +28,7 @@ class ValidateSiteCoreTest extends PHPUnit_Framework_TestCase
         $this->oValidateSite = new ValidateSiteCore($oSession);
     }
 
-    public function testInjectAssetSuggestionBoxFiles()
+    public function testInjectAssetSuggestionBoxFiles(): void
     {
         $oDesign = Phake::mock(Design::class);
 

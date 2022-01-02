@@ -6,17 +6,19 @@
  * @package          PH7 / Test / Unit / App / System / Module / Payment / Inc / Classes
  */
 
+declare(strict_types=1);
+
 namespace PH7\Test\Unit\App\System\Module\Payment\Inc\Classes;
 
 require_once PH7_PATH_SYS_MOD . 'payment/inc/class/Api.php';
 require_once PH7_PATH_SYS_MOD . 'payment/inc/class/Stripe.php';
 
 use PH7\Stripe;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class StripeTest extends PHPUnit_Framework_TestCase
+final class StripeTest extends TestCase
 {
-    public function testAmount()
+    public function testAmount(): void
     {
         $iAmount = Stripe::getAmount('19.99');
 

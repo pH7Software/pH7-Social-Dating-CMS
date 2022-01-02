@@ -10,9 +10,9 @@ namespace PH7\Test\Unit\Framework\Security;
 
 use PH7\Framework\Security\InvalidAlgorithmException;
 use PH7\Framework\Security\Security;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class SecurityTest extends PHPUnit_Framework_TestCase
+class SecurityTest extends TestCase
 {
     public function testUserHashWithInvalidAlgorithm()
     {

@@ -9,12 +9,12 @@
 namespace PH7\Test\Unit\Framework\CArray;
 
 use PH7\Framework\CArray\ObjArr;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use stdClass;
 
-class ObjArrTest extends PHPUnit_Framework_TestCase
+class ObjArrTest extends TestCase
 {
-    public function testToObject()
+    public function testToObject(): void
     {
         $aData = ['one' => 'abc', 'two' => 'def', 'three' => 'ghi'];
 
@@ -29,7 +29,7 @@ class ObjArrTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($oExpected, $oResults);
     }
 
-    public function testToArray()
+    public function testToArray(): void
     {
         $oData = new stdClass();
         $oData->one = 'abc';
