@@ -6,17 +6,18 @@
  * @package          PH7 / Test / Unit / Framework / Security / Validate
  */
 
+declare(strict_types=1);
+
 namespace PH7\Test\Unit\Framework\Security\Validate;
 
 use PH7\Framework\Security\Validate\Validate;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class ValidateTest extends PHPUnit_Framework_TestCase
+final class ValidateTest extends TestCase
 {
-    /** @var Validate */
-    private $oValidate;
+    private Validate $oValidate;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->oValidate = new Validate();
     }
@@ -24,7 +25,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider validHexCodesProvider
      */
-    public function testValidHexCode($sHexCode)
+    public function testValidHexCode(string $sHexCode): void
     {
         $this->assertTrue($this->oValidate->hex($sHexCode));
     }
@@ -32,7 +33,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidHexCodesProvider
      */
-    public function testInvalidHexCode($sHexCode)
+    public function testInvalidHexCode(string $sHexCode): void
     {
         $this->assertFalse($this->oValidate->hex($sHexCode));
     }
@@ -40,7 +41,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider validNamesProvider
      */
-    public function testValidName($sName, $iMinLength, $iMaxLength)
+    public function testValidName(string $sName, int $iMinLength, int $iMaxLength): void
     {
         $this->assertTrue($this->oValidate->name($sName, $iMinLength, $iMaxLength));
     }
@@ -48,15 +49,15 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidNamesProvider
      */
-    public function testInvalidName($sName, $iMinLength, $iMaxLength)
+    public function testInvalidName($mName, int $iMinLength, int $iMaxLength): void
     {
-        $this->assertFalse($this->oValidate->name($sName, $iMinLength, $iMaxLength));
+        $this->assertFalse($this->oValidate->name($mName, $iMinLength, $iMaxLength));
     }
 
     /**
      * @dataProvider validPhoneNumbersProvider
      */
-    public function testValidPhoneNumber($sPhoneNumber)
+    public function testValidPhoneNumber(string $sPhoneNumber): void
     {
         $this->assertSame(1, $this->oValidate->phone($sPhoneNumber));
     }
@@ -64,7 +65,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidPhoneNumbersProvider
      */
-    public function testInvalidPhoneNumber($sPhoneNumber)
+    public function testInvalidPhoneNumber(string $sPhoneNumber): void
     {
         $this->assertSame(0, $this->oValidate->phone($sPhoneNumber));
     }
@@ -72,7 +73,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider validPasswordsProvider
      */
-    public function testValidPassword($sPassword, $iMinLength, $iMaxLength)
+    public function testValidPassword(string $sPassword, int $iMinLength, int $iMaxLength): void
     {
         $this->assertTrue($this->oValidate->password($sPassword, $iMinLength, $iMaxLength));
     }
@@ -80,7 +81,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidPasswordsProvider
      */
-    public function testInvalidPassword($sPassword, $iMinLength, $iMaxLength)
+    public function testInvalidPassword(string $sPassword, int $iMinLength, int $iMaxLength): void
     {
         $this->assertFalse($this->oValidate->password($sPassword, $iMinLength, $iMaxLength));
     }
@@ -88,23 +89,23 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider validIntegersProvider
      */
-    public function testValidInteger($iNumber)
+    public function testValidInteger($mNumber): void
     {
-        $this->assertTrue($this->oValidate->int($iNumber, 0, 60000));
+        $this->assertTrue($this->oValidate->int($mNumber, 0, 60000));
     }
 
     /**
      * @dataProvider invalidIntegersProvider
      */
-    public function testInvalidInteger($iNumber)
+    public function testInvalidInteger($mNumber): void
     {
-        $this->assertFalse($this->oValidate->int($iNumber, 0, 40000));
+        $this->assertFalse($this->oValidate->int($mNumber, 0, 40000));
     }
 
     /**
      * @dataProvider validFloatsProvider
      */
-    public function testValidFloat($fFloat)
+    public function testValidFloat($fFloat): void
     {
         $this->assertTrue($this->oValidate->float($fFloat));
     }
@@ -112,15 +113,15 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidFloatsProvider
      */
-    public function testInvalidFloat($fFloat)
+    public function testInvalidFloat($mInvalidFloat): void
     {
-        $this->assertFalse($this->oValidate->float($fFloat));
+        $this->assertFalse($this->oValidate->float($mInvalidFloat));
     }
 
     /**
      * @dataProvider validDateOfBirthsProvider
      */
-    public function testBirthDate($sDate, $iMinAge, $iMaxAge)
+    public function testBirthDate(string $sDate, int $iMinAge, int $iMaxAge): void
     {
         $this->assertTrue($this->oValidate->birthDate($sDate, $iMinAge, $iMaxAge));
     }
@@ -128,15 +129,12 @@ class ValidateTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidDateOfBirthsProvider
      */
-    public function testInvalidBirthDate($sDate, $iMinAge, $iMaxAge)
+    public function testInvalidBirthDate(string $sDate, int $iMinAge, int $iMaxAge): void
     {
         $this->assertFalse($this->oValidate->birthDate($sDate, $iMinAge, $iMaxAge));
     }
 
-    /**
-     * @return array
-     */
-    public function validHexCodesProvider()
+    public function validHexCodesProvider(): array
     {
         return [
             ['#eee'],
@@ -145,10 +143,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function invalidHexCodesProvider()
+    public function invalidHexCodesProvider(): array
     {
         return [
             ['eee'],
@@ -157,10 +152,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function validNamesProvider()
+    public function validNamesProvider(): array
     {
         return [
             ['Píėrre', 2, 20],
@@ -174,10 +166,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function invalidNamesProvider()
+    public function invalidNamesProvider(): array
     {
         return [
             ['abcdef', 2, 4],
@@ -192,10 +181,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function validPhoneNumbersProvider()
+    public function validPhoneNumbersProvider(): array
     {
         return [
             ['+44768374890'],
@@ -207,10 +193,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function invalidPhoneNumbersProvider()
+    public function invalidPhoneNumbersProvider(): array
     {
         return [
             ['0768374890'],
@@ -220,10 +203,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function validPasswordsProvider()
+    public function validPasswordsProvider(): array
     {
         return [
             ['8374878*&@*#*5r8hjvfj^', 2, 40],
@@ -231,10 +211,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function invalidPasswordsProvider()
+    public function invalidPasswordsProvider(): array
     {
         return [
             ['1234567', 10, 30],
@@ -243,10 +220,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function validIntegersProvider()
+    public function validIntegersProvider(): array
     {
         return [
             [1],
@@ -256,10 +230,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function invalidIntegersProvider()
+    public function invalidIntegersProvider(): array
     {
         return [
             ['one'],
@@ -269,10 +240,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function validFloatsProvider()
+    public function validFloatsProvider(): array
     {
         return [
             [1.5],
@@ -282,22 +250,19 @@ class ValidateTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function invalidFloatsProvider()
+    public function invalidFloatsProvider(): array
     {
         return [
             ['one'],
             ['lalal'],
-            ['']
+            [''],
+            [0],
+            [324],
+            [null]
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function validDateOfBirthsProvider()
+    public function validDateOfBirthsProvider(): array
     {
         return [
             ['02/02/1989', 18, 99],
@@ -307,10 +272,7 @@ class ValidateTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function invalidDateOfBirthsProvider()
+    public function invalidDateOfBirthsProvider(): array
     {
         return [
             ['00/00/0000', 18, 99],

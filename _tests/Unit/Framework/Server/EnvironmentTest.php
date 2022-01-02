@@ -6,24 +6,26 @@
  * @package          PH7 / Test / Unit / Framework / Server
  */
 
+declare(strict_types=1);
+
 namespace PH7\Test\Unit\Framework\Server;
 
 use PH7\Framework\Server\Environment;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class EnvironmentTest extends PHPUnit_Framework_TestCase
+final class EnvironmentTest extends TestCase
 {
-    public function testWrongEnvFile()
+    public function testWrongEnvFile(): void
     {
         $this->assertSame('production.env', Environment::getFileName('wrong_env_name'));
     }
 
-    public function testCorrectProdEnvName()
+    public function testCorrectProdEnvName(): void
     {
         $this->assertSame('production.env', Environment::getFileName('production'));
     }
 
-    public function testCorrectDevEnvName()
+    public function testCorrectDevEnvName(): void
     {
         $this->assertSame('development.env', Environment::getFileName('development'));
     }

@@ -6,15 +6,17 @@
  * @package          PH7 / Test / Unit / Framework / Service / SearchImage
  */
 
+declare(strict_types=1);
+
 namespace PH7\Test\Unit\Framework\Service\SearchImage;
 
 use PH7\Framework\Service\SearchImage\InvalidUrlException;
 use PH7\Framework\Service\SearchImage\Url;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class UrlTest extends PHPUnit_Framework_TestCase
+final class UrlTest extends TestCase
 {
-    public function testValidValue()
+    public function testValidValue(): void
     {
         $sTestUrl = 'https://ph7cms.com/dating-business-by-steps/';
         $oUrl = new Url($sTestUrl);
@@ -22,21 +24,16 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param string $sUrl
-     *
      * @dataProvider invalidUrlsProvider
      */
-    public function testInvalidValue($sUrl)
+    public function testInvalidValue(string $sUrl): void
     {
         $this->expectException(InvalidUrlException::class);
 
         new Url($sUrl);
     }
 
-    /**
-     * @return array
-     */
-    public function invalidUrlsProvider()
+    public function invalidUrlsProvider(): array
     {
         return [
             ['blablabla'],

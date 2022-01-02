@@ -6,14 +6,16 @@
  * @package          PH7 / Test / Unit / Framework / Geo / Misc
  */
 
+declare(strict_types=1);
+
 namespace PH7\Test\Unit\Framework\Geo\Misc;
 
 use PH7\Framework\Geo\Misc\Country;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class CountryTest extends PHPUnit_Framework_TestCase
+class CountryTest extends TestCase
 {
-    public function testGbCountryCode()
+    public function testGbCountryCode(): void
     {
         $sCountryCode = Country::fixCode('GB');
         $sExpectedCountryCode = 'UK';

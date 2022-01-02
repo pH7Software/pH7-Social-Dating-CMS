@@ -9,9 +9,9 @@
 namespace PH7\Test\Unit\Framework\Ajax;
 
 use PH7\Framework\Ajax\Ajax;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class AjaxTest extends PHPUnit_Framework_TestCase
+class AjaxTest extends TestCase
 {
     public function testJsonSuccessMsg()
     {

@@ -6,14 +6,16 @@
  * @package          PH7 / Test / Unit / Framework / Config
  */
 
+declare(strict_types=1);
+
 namespace PH7\Test\Unit\Framework\Url;
 
 use PH7\Framework\Url\Url;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class UrlTest extends PHPUnit_Framework_TestCase
+final class UrlTest extends TestCase
 {
-    public function testEncode()
+    public function testEncode(): void
     {
         $sUrl = 'https://ph7cms.com/my-route & the new_2£POST!';
         $sExpected = 'https%3A%2F%2Fph7cms.com%2Fmy-route+%26+the+new_2%C2%A3POST%21';
@@ -21,7 +23,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
         $this->assertSame($sExpected, Url::encode($sUrl));
     }
 
-    public function testDecode()
+    public function testDecode(): void
     {
         $sEncodedUrl = 'https%3A%2F%2Fph7cms.com%2Fmy-route+%26+the+new_2%C2%A3POST%21';
         $sExpected = 'https://ph7cms.com/my-route & the new_2£POST!';
@@ -30,20 +32,14 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param string $sActualUrl
-     * @param string $sExpectedUrl
-     *
      * @dataProvider urlsProvider
      */
-    public function testClean($sActualUrl, $sExpectedUrl)
+    public function testClean(string $sActualUrl, string $sExpectedUrl)
     {
         $this->assertSame($sExpectedUrl, Url::clean($sActualUrl));
     }
 
-    /**
-     * @return array
-     */
-    public function urlsProvider()
+    public function urlsProvider(): array
     {
         return [
             ['https://ph7cms.com/my post is this one', 'https://ph7cms.com/my%20post%20is%20this%20one'],

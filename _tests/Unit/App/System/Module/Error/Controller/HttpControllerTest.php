@@ -10,9 +10,9 @@ namespace PH7\Test\Unit\App\System\Module\Error\Controller;
 
 use GuzzleHttp\Client;
 use PH7\Framework\Mvc\Router\Uri;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class HttpControllerTest extends PHPUnit_Framework_TestCase
+final class HttpControllerTest extends TestCase
 {
     /** @var Client */
     protected $oClient;

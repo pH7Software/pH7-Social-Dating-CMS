@@ -9,11 +9,11 @@
 namespace PH7\Test\Unit\Framework\Layout\Tpl\Engine\PH7Tpl\Predefined;
 
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Predefined\Variable as PredefinedVariable;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class VariableTest extends PHPUnit_Framework_TestCase
+class VariableTest extends TestCase
 {
-    public function testSoftwareNameVariable()
+    public function testSoftwareNameVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{software_name}');
         $this->assertAttributeSame(
@@ -27,7 +27,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testSoftwareNameWithTalVariableDelimiters()
+    public function testSoftwareNameWithTalVariableDelimiters(): void
     {
         $oPredefinedVar = new PredefinedVariable('[[software_name]]');
         $oPredefinedVar->setLeftDelimiter('[[');
@@ -44,7 +44,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testSoftwareUrlVariable()
+    public function testSoftwareUrlVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{software_url}');
         $this->assertAttributeSame(
@@ -58,7 +58,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testSoftwareDocUrlVariable()
+    public function testSoftwareDocUrlVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{software_doc_url}');
         $this->assertAttributeSame(
@@ -72,7 +72,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testSoftwareIssueUrlVariable()
+    public function testSoftwareIssueUrlVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{software_issue_url}');
         $this->assertAttributeSame(
@@ -86,7 +86,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testSoftwareReviewUrlVariable()
+    public function testSoftwareReviewUrlVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{software_review_url}');
         $this->assertAttributeSame(
@@ -100,7 +100,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testSoftwareVersionVariable()
+    public function testSoftwareVersionVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{software_version}');
         $this->assertAttributeSame(
@@ -114,7 +114,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testUrlRootVariable()
+    public function testUrlRootVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{url_root}');
         $this->assertAttributeSame(
@@ -128,7 +128,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testUrlRelativeVariable()
+    public function testUrlRelativeVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{url_relative}');
         $this->assertAttributeSame(
@@ -142,7 +142,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testCurrentUrlVariable()
+    public function testCurrentUrlVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{current_url}');
         $this->assertAttributeSame(
@@ -156,7 +156,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testUrlAdminModVariable()
+    public function testUrlAdminModVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{url_admin_mod}');
         $this->assertAttributeSame(
@@ -170,7 +170,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testUrlStaticVariable()
+    public function testUrlStaticVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{url_static}');
         $this->assertAttributeSame(
@@ -184,7 +184,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testUrlStaticCssVariable()
+    public function testUrlStaticCssVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{url_static_css}');
         $this->assertAttributeSame(
@@ -212,7 +212,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testUrlStaticJsVariable()
+    public function testUrlStaticJsVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{url_static_js}');
         $this->assertAttributeSame(
@@ -226,7 +226,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testUrlDataVariable()
+    public function testUrlDataVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{url_data}');
         $this->assertAttributeSame(
@@ -240,7 +240,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testUrlDataSysVariable()
+    public function testUrlDataSysVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{url_data_sys}');
         $this->assertAttributeSame(
@@ -254,7 +254,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testUrlDataModVariable()
+    public function testUrlDataModVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{url_data_mod}');
         $this->assertAttributeSame(
@@ -268,7 +268,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testUrlDataSysModVariable()
+    public function testUrlDataSysModVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{url_data_sys_mod}');
         $this->assertAttributeSame(
@@ -282,7 +282,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testUrlTplVariable()
+    public function testUrlTplVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{url_tpl}');
         $this->assertAttributeSame(
@@ -296,7 +296,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testUrlTplCssVariable()
+    public function testUrlTplCssVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{url_tpl_css}');
         $this->assertAttributeSame(
@@ -310,7 +310,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testUrlTplImgVariable()
+    public function testUrlTplImgVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{url_tpl_img}');
         $this->assertAttributeSame(
@@ -324,7 +324,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testUrlTplJsVariable()
+    public function testUrlTplJsVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{url_tpl_js}');
         $this->assertAttributeSame(
@@ -338,7 +338,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testUrlTplModVariable()
+    public function testUrlTplModVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{url_tpl_mod}');
         $this->assertAttributeSame(
@@ -352,7 +352,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testUrlTplModCssVariable()
+    public function testUrlTplModCssVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{url_tpl_mod_css}');
         $this->assertAttributeSame(
@@ -366,7 +366,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testUrlTplModImgVariable()
+    public function testUrlTplModImgVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{url_tpl_mod_img}');
         $this->assertAttributeSame(
@@ -380,7 +380,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testUrlTplModJsVariable()
+    public function testUrlTplModJsVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{url_tpl_mod_js}');
         $this->assertAttributeSame(
@@ -394,7 +394,7 @@ class VariableTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testIpVariable()
+    public function testIpVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{ip}');
         $this->assertAttributeSame(
