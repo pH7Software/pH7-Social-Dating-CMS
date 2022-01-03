@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Core / Class
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 use PH7\Framework\Cookie\Cookie;
