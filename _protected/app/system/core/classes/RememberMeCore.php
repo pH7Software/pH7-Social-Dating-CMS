@@ -17,13 +17,15 @@ class RememberMeCore
 {
     public const CHECKBOX_FIELD_NAME = 'remember';
     public const STAY_LOGGED_IN_REQUESTED = 'stayed_logged_requested';
-    public const DEFAULT_DURATION = 7776000; // 90 days
+    public const DEFAULT_COOKIE_DURATION = 7776000; // 90 days
 
     private static int $iCookieDuration;
 
     public function __construct()
     {
-        $this->setRememberDuration(self::DEFAULT_DURATION);
+        if (!isset(self::$iCookieDuration)) {
+            $this->setRememberDuration(self::DEFAULT_COOKIE_DURATION);
+        }
     }
 
     /**
@@ -36,6 +38,10 @@ class RememberMeCore
 
     public static function getRememberDurationInDays(): int
     {
+        if (!isset(self::$iCookieDuration)) {
+            self::$iCookieDuration = self::DEFAULT_COOKIE_DURATION;
+        }
+
         return (int)ceil(self::$iCookieDuration / (3600 * 24));
     }
 
