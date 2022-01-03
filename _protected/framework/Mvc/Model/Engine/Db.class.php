@@ -22,12 +22,14 @@ use PDOStatement;
  */
 class Db
 {
-    const REQUIRED_SQL_VERSION = 5.0;
+    public const REQUIRED_SQL_VERSION = 5.0;
 
-    const ASC = 'ASC';
-    const DESC = 'DESC';
-    const RAND = 'RAND()';
-    const SET_DELIMITER = ',';
+    public const ASC = 'ASC';
+    public const DESC = 'DESC';
+    public const RAND = 'RAND()';
+    public const SET_DELIMITER = ',';
+
+    private const ERROR_MESSAGE = 'Error establishing a database connection';
 
     /** @var string */
     private static $sDsn;
@@ -101,7 +103,7 @@ class Db
                 self::$oDb = new PDO(self::$sDsn, self::$sUsername, self::$sPassword, self::$aDriverOptions);
                 self::$oDb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (Exception $oE) {
-                exit('Error Establishing a Database Connection');
+                exit(self::ERROR_MESSAGE);
             }
 
             static::checkMySqlVersion();
