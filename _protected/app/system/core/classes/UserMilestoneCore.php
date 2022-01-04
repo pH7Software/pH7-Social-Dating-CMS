@@ -10,7 +10,7 @@ namespace PH7;
 
 class UserMilestoneCore
 {
-    const MILLENARIAN_WEBSITE = 1000;
+    const MILLENARIAN = 1000;
 
     const NUMBER_USERS = [
         100,
