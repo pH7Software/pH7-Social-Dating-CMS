@@ -21,7 +21,7 @@ class RssController extends MainController implements XmlControllable
         parent::__construct();
     }
 
-    public function index()
+    public function index(): void
     {
         $this->sTitle = t('RSS Feed List');
         $this->view->page_title = $this->sTitle;
@@ -40,14 +40,14 @@ class RssController extends MainController implements XmlControllable
         $this->output();
     }
 
-    public function xmlLink()
+    public function xmlLink(): void
     {
         parent::xmlLink();
 
         $this->view->display('rss_links.xml.tpl');
     }
 
-    public function xmlRouter()
+    public function xmlRouter(): void
     {
         $sAction = $this->httpRequest->get('action');
         $mParam = $this->httpRequest->get('param');
@@ -67,7 +67,7 @@ class RssController extends MainController implements XmlControllable
      *
      * @return void
      */
-    private function generateRssCommentRouter($sAction, $mParam)
+    private function generateRssCommentRouter($sAction, $mParam): void
     {
         switch ($sAction) {
             case 'blog':

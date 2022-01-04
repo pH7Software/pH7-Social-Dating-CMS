@@ -35,13 +35,13 @@ class MainController extends Controller
         $this->enableStaticTplCache();
     }
 
-    public function xslLayout()
+    public function xslLayout(): void
     {
         $this->setContentType();
         $this->view->display('layout.xsl.tpl');
     }
 
-    protected function xmlLink()
+    protected function xmlLink(): void
     {
         $this->setContentType();
     }
@@ -52,7 +52,7 @@ class MainController extends Controller
      *
      * @return void
      */
-    protected function generateXmlRouter($sAction, $mParam = null)
+    protected function generateXmlRouter($sAction, $mParam = null): void
     {
         $this->view->members = $this->oDataModel->getProfiles();
         $this->view->blogs = $this->oDataModel->getBlogs();
@@ -100,7 +100,7 @@ class MainController extends Controller
      *
      * @return void
      */
-    private function generateCommentRouter($sAction, $mParam)
+    private function generateCommentRouter($sAction, $mParam): void
     {
         switch ($sAction) {
             case 'comment-profile':
