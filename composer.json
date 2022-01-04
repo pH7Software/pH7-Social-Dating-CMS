@@ -102,7 +102,7 @@
       "cp -R _protected/vendor/twbs/bootstrap/dist/js/bootstrap.min.js static/js/bootstrap.js"
     ],
     "post-install-cmd": ["composer run-script post-cmd"],
-    "post-update-cmd": ["composer run-script post-install-cmd"]
+    "post-update-cmd": ["composer run-script post-cmd"]
   },
   "minimum-stability": "stable",
   "support": {
