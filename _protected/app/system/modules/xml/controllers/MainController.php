@@ -6,14 +6,15 @@
  * @package        PH7 / App / System / Module / Xml / Controller
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 class MainController extends Controller
 {
-    const STATIC_CACHE_LIFETIME = 86400; // 86400 secs = 24 hours
+    protected const STATIC_CACHE_LIFETIME = 86400; // 86400 secs = 24 hours
 
-    /** @var DataCoreModel */
-    protected $oDataModel;
+    protected DataCoreModel $oDataModel;
 
     /** @var string */
     protected $sTitle;
@@ -36,13 +37,13 @@ class MainController extends Controller
 
     public function xslLayout()
     {
-        $this->setContentType(); // Header
+        $this->setContentType();
         $this->view->display('layout.xsl.tpl');
     }
 
     protected function xmlLink()
     {
-        $this->setContentType(); // Header
+        $this->setContentType();
     }
 
     /**
@@ -67,18 +68,18 @@ class MainController extends Controller
         $this->generateCommentRouter($sAction, $mParam);
     }
 
-    protected function xmlOutput()
+    protected function xmlOutput(): void
     {
         /* Compression damages the XML files, so disable them */
         $this->view->setHtmlCompress(false);
         $this->view->setPhpCompress(false);
 
-        // Display
-        $this->setContentType(); // Header
+        // Output
+        $this->setContentType();
         $this->view->display($this->sAction . PH7_DOT . $this->sXmlType . '.xml.tpl');
     }
 
-    protected function setContentType()
+    protected function setContentType(): void
     {
         header('Content-Type: text/xml; charset=' . PH7_ENCODING);
     }
@@ -88,7 +89,7 @@ class MainController extends Controller
      *
      * @return bool
      */
-    protected function isParamValid($mParam)
+    protected function isParamValid($mParam): bool
     {
         return !empty($mParam) && is_numeric($mParam);
     }
@@ -129,7 +130,7 @@ class MainController extends Controller
         }
     }
 
-    private function enableStaticTplCache()
+    private function enableStaticTplCache(): void
     {
         $this->view->setCaching(true);
         $this->view->setCacheExpire(self::STATIC_CACHE_LIFETIME);
