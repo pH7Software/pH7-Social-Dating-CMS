@@ -49,7 +49,7 @@ class RssController extends MainController implements XmlControllable
 
     public function xmlRouter(): void
     {
-        $sAction = $this->httpRequest->get('action');
+        $sAction = $this->httpRequest->get('action', 'string');
         $mParam = $this->httpRequest->get('param');
         $this->generateXmlRouter($sAction, $mParam);
         $this->sXmlType = 'rss';
@@ -67,7 +67,7 @@ class RssController extends MainController implements XmlControllable
      *
      * @return void
      */
-    private function generateRssCommentRouter($sAction, $mParam): void
+    private function generateRssCommentRouter(string $sAction, $mParam): void
     {
         switch ($sAction) {
             case 'blog':

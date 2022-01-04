@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Xml / Controller
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
@@ -19,7 +21,7 @@ class SitemapController extends MainController implements XmlControllable
         parent::__construct();
     }
 
-    public function index()
+    public function index(): void
     {
         $this->sTitle = t('Site Map');
         $this->view->page_title = $this->sTitle;
@@ -38,16 +40,16 @@ class SitemapController extends MainController implements XmlControllable
         $this->output();
     }
 
-    public function xmlLink()
+    public function xmlLink(): void
     {
         parent::xmlLink();
 
         $this->view->display('links.xml.tpl');
     }
 
-    public function xmlRouter()
+    public function xmlRouter(): void
     {
-        $sAction = $this->httpRequest->get('action');
+        $sAction = $this->httpRequest->get('action', 'string');
         $this->generateXmlRouter($sAction);
         $this->sXmlType = 'sitemap';
         $this->view->current_date = DateFormat::getSitemap(); // Date format for sitemap
@@ -62,12 +64,7 @@ class SitemapController extends MainController implements XmlControllable
         $this->xmlOutput();
     }
 
-    /**
-     * @param string $sAction
-     *
-     * @return void
-     */
-    private function generateXmlCommentRouter($sAction)
+    private function generateXmlCommentRouter(string $sAction): void
     {
         switch ($sAction) {
             case 'main':

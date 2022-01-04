@@ -52,7 +52,7 @@ class MainController extends Controller
      *
      * @return void
      */
-    protected function generateXmlRouter($sAction, $mParam = null): void
+    protected function generateXmlRouter(string $sAction, $mParam = null): void
     {
         $this->view->members = $this->oDataModel->getProfiles();
         $this->view->blogs = $this->oDataModel->getBlogs();
@@ -100,7 +100,7 @@ class MainController extends Controller
      *
      * @return void
      */
-    private function generateCommentRouter($sAction, $mParam): void
+    private function generateCommentRouter(string $sAction, $mParam): void
     {
         switch ($sAction) {
             case 'comment-profile':
