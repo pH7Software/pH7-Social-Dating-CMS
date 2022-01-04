@@ -1,18 +1,20 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hi@ph7.me>
- * @copyright      (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2018-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
 class UserMilestoneCore
 {
-    const MILLENARIAN = 1000;
+    public const MILLENARIAN = 1000;
 
-    const NUMBER_USERS = [
+    private const NUMBER_USERS = [
         100,
         500,
         1000,
@@ -28,18 +30,14 @@ class UserMilestoneCore
         1000000 // Congrats!
     ];
 
-    /** @var UserCoreModel */
-    private $oUserModel;
+    private UserCoreModel $oUserModel;
 
     public function __construct(UserCoreModel $oUserModel)
     {
         $this->oUserModel = $oUserModel;
     }
 
-    /**
-     * @return bool
-     */
-    public function isTotalUserReached()
+    public function isTotalUserReached(): bool
     {
         return in_array(
             $this->oUserModel->total(),
