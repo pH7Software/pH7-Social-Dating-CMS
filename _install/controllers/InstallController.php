@@ -594,8 +594,7 @@ class InstallController extends Controller
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['confirm_remove_install'])) {
                 remove_install_dir();
-                clearstatcache(
-                ); // We remove the files status cache as the "_install" folder doesn't exist anymore by now.
+                clearstatcache(); // We remove the files status cache as the "_install" folder doesn't exist anymore by now.
                 exit(header('Location: ' . PH7_URL_ROOT));
             }
 
