@@ -1,9 +1,9 @@
 <?php
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
- * @link             https://ph7cms.com
+ * @link             https://ph7builder.com
  * @package          PH7
  */
 
