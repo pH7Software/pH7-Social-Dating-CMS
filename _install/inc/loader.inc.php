@@ -13,14 +13,18 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-// Autoloading Class Files
+require_once __DIR__ . '/vendor/autoload.php';
+
+// Autoload other specific files
 spl_autoload_register(function ($sClass) {
     // Hack to remove namespace and backslash
     $sClass = str_replace(array(__NAMESPACE__ . '\\', '\\'), '/', $sClass);
 
-    if (is_file(PH7_ROOT_INSTALL . 'library/' . $sClass . '.class.php'))
+    if (is_file(PH7_ROOT_INSTALL . 'library/' . $sClass . '.class.php')) {
         require_once PH7_ROOT_INSTALL . 'library/' . $sClass . '.class.php';
+    }
 
-    if (is_file(PH7_ROOT_INSTALL . 'controllers/' . $sClass . '.php'))
+    if (is_file(PH7_ROOT_INSTALL . 'controllers/' . $sClass . '.php')) {
         require_once PH7_ROOT_INSTALL . 'controllers/' . $sClass . '.php';
+    }
 });
