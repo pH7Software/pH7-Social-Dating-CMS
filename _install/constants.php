@@ -1,15 +1,15 @@
 <?php
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
 defined('PH7') or exit('Restricted access');
 
-//------------ Variables ------------//
+//---------- Variables ----------//
 
-//------ URL ------//
+//----- URL -----//
 // Check the SSL protocol compatibility
 // You need to clear caches if you move your server from HTTP to HTTPS. Admin Panel -> Tool -> Caches -> Caches Manager
 $sUrlProtocol = (
@@ -26,9 +26,9 @@ $sDomain = ($_SERVER['SERVER_PORT'] !== '80' && $_SERVER['SERVER_PORT'] !== '443
 // Determine the current file of the application
 $sPhp_self = str_replace('\\', '', dirname(htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES))); // Remove backslashes for Windows compatibility
 
-//------------ Constants ------------//
+//---------- Constants ----------//
 
-//------ Other ------//
+//----- Other -----//
 define('PH7_ADMIN_MOD', 'admin123');
 define('PH7_REQUIRED_SERVER_VERSION', '7.4.0');
 define('PH7_REQUIRED_SQL_VERSION', '5.5.3');
@@ -37,11 +37,11 @@ define('PH7_DEFAULT_TIMEZONE', 'America/Chicago');
 define('PH7_DS', DIRECTORY_SEPARATOR);
 define('PH7_PS', PATH_SEPARATOR);
 
-//------ URL ------//
+//----- URL -----//
 define('PH7_URL_INSTALL', $sUrlProtocol . $sDomain . $sPhp_self . '/'); // INSTALL URL
 define('PH7_URL_ROOT', dirname(PH7_URL_INSTALL) . '/'); // ROOT URL
 
-//------ PATH ------//
+//----- PATH -----//
 define('PH7_ROOT_PUBLIC', dirname(__DIR__) . PH7_DS); // PUBLIC ROOT
 define('PH7_ROOT_INSTALL', __DIR__ . PH7_DS); // ROOT INSTALL'
 define('PH7_PATH_PUBLIC_DATA_SYS_MOD', PH7_ROOT_PUBLIC . 'data/system/modules/');
