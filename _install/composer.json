@@ -1,0 +1,20 @@
+{
+  "require": {
+    "smarty/smarty": "^4.0"
+  },
+  "autoload": {
+    "additionalFileExtensions": [
+      ".class.php"
+    ],
+    "classmap": [
+      "controllers",
+      "library"
+    ],
+    "files": [
+      "inc/log.inc.php",
+      "requirements.php",
+      "inc/fns/misc.php",
+      "inc/init.inc.php"
+    ]
+  }
+}
