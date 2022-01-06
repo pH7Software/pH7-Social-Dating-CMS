@@ -301,7 +301,7 @@ class InstallController extends Controller
                                     redirect(PH7_URL_SLUG_INSTALL . 'config_site');
                                 }
                             }
-                        } catch (\PDOException $oE) {
+                        } catch (PDOException $oE) {
                             $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                         }
                     } else {
@@ -451,7 +451,7 @@ class InstallController extends Controller
                                                         $_SESSION['step5'] = 1;
 
                                                         redirect(PH7_URL_SLUG_INSTALL . 'niche');
-                                                    } catch (\PDOException $oE) {
+                                                    } catch (PDOException $oE) {
                                                         $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                                                     }
                                                 } else {
