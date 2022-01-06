@@ -10,7 +10,7 @@
 
 namespace PH7;
 
-$LANG = array(
+$LANG = [
     'lang' => 'en',
     'charset' => 'utf-8',
     'lang_name' => 'English',
@@ -140,4 +140,4 @@ $LANG = array(
     'admin_url' => 'Admin Panel URL',
     'powered' => 'Proudly powered by',
     'loading' => 'Loading...',
-);
+];

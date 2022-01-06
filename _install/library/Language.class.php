@@ -72,23 +72,17 @@ class Language
      *
      * @return string
      */
-    public function get()
+    public function get(): string
     {
         return $this->sLang;
     }
 
-    /**
-     * @return bool
-     */
-    private function doesUserLangExist()
+    private function doesUserLangExist(): bool
     {
         return !empty($_GET['l']) && is_file(PH7_ROOT_INSTALL . self::LANG_FOLDER_NAME . $_GET['l'] . PH7_DS . self::LANG_FILENAME);
     }
 
-    /**
-     * @return bool
-     */
-    private function doesCookieLangExist()
+    private function doesCookieLangExist(): bool
     {
         return isset($_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang']) &&
             is_file(PH7_ROOT_INSTALL . self::LANG_FOLDER_NAME . $_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang'] . PH7_DS . self::LANG_FILENAME);

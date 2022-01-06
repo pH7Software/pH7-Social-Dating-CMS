@@ -50,11 +50,9 @@ abstract class Controller implements Controllable
     const DEFAULT_LANG = 'en';
     const DEFAULT_THEME = 'base';
 
-    /** @var Smarty */
-    protected $oView;
+    protected Smarty $oView;
 
-    /** @var string */
-    protected $sCurrentLang;
+    protected string $sCurrentLang;
 
     public function __construct()
     {

@@ -1,11 +1,13 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2018-2021, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2018-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @link           https://ph7cms.com
  * @package        PH7 / ROOT
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -15,17 +17,17 @@ use RuntimeException;
 
 class WebsiteChecker
 {
-    const REQUIRED_SERVER_VERSION = '7.4.0';
-    const REQUIRED_CONFIG_FILE_NAME = '_constants.php';
-    const INSTALL_FOLDER_NAME = '_install/';
+    private const REQUIRED_SERVER_VERSION = '7.4.0';
+    private const REQUIRED_CONFIG_FILE_NAME = '_constants.php';
+    private const INSTALL_FOLDER_NAME = '_install/';
 
-    const PHP_VERSION_ERROR_MESSAGE = 'ERROR: Your current PHP version is %s. pH7CMS requires PHP %s or newer.<br /> Please ask your Web host to upgrade PHP to %s or newer.';
-    const NO_CONFIG_FOUND_ERROR_MESSAGE = 'CONFIG FILE NOT FOUND! If you want to make a new installation, please re-upload _install/ folder and clear your database.';
+    private const PHP_VERSION_ERROR_MESSAGE = 'ERROR: Your current PHP version is %s. pH7CMS requires PHP %s or newer.<br /> Please ask your Web host to upgrade PHP to %s or newer.';
+    private const NO_CONFIG_FOUND_ERROR_MESSAGE = 'CONFIG FILE NOT FOUND! If you want to make a new installation, please re-upload _install/ folder and clear your database.';
 
     /**
      * @throws RuntimeException
      */
-    public function checkPhpVersion()
+    public function checkPhpVersion(): void
     {
         if ($this->isIncompatiblePhpVersion()) {
             throw new RuntimeException(
@@ -44,45 +46,36 @@ class WebsiteChecker
      *
      * @return void
      */
-    public function clearBrowserCache()
+    public function clearBrowserCache(): void
     {
         header('Cache-Control: no-store, no-cache, must-revalidate');
         header('Expires: Thu, 01 Jan 1970 00:00:00 GMT');
     }
 
-    public function moveToInstaller()
+    public function moveToInstaller(): void
     {
-        header('Location: ' . self::INSTALL_FOLDER_NAME);
+        $sFilePath = str_replace('\\', '', dirname(htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES))); // Remove backslashes for Windows compatibility
+        $sFilePath = substr($sFilePath, -1) !== '/' ? $sFilePath . '/' : $sFilePath;
+
+        header('Location: ' . $sFilePath . self::INSTALL_FOLDER_NAME);
     }
 
-    /**
-     * @return bool
-     */
-    public function doesConfigFileExist()
+    public function doesConfigFileExist(): bool
     {
         return is_file(__DIR__ . '/' . self::REQUIRED_CONFIG_FILE_NAME);
     }
 
-    /**
-     * @return string
-     */
-    public function getNoConfigFoundMessage()
+    public function getNoConfigFoundMessage(): string
     {
         return self::NO_CONFIG_FOUND_ERROR_MESSAGE;
     }
 
-    /**
-     * @return bool
-     */
-    public function doesInstallFolderExist()
+    public function doesInstallFolderExist(): bool
     {
         return is_dir(__DIR__ . '/' . self::INSTALL_FOLDER_NAME);
     }
 
-    /**
-     * @return bool
-     */
-    private function isIncompatiblePhpVersion()
+    private function isIncompatiblePhpVersion(): bool
     {
         return version_compare(PHP_VERSION, self::REQUIRED_SERVER_VERSION, '<');
     }

@@ -1,14 +1,14 @@
 <?php
 /**
- * @title            InstallController Class
- *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Install / Controller
  */
 
 namespace PH7;
+
+use PDOException;
 
 defined('PH7') or exit('Restricted access');
 
@@ -551,7 +551,7 @@ class InstallController extends Controller
                             $this->updateSettings($aSettingUpdate);
 
                             $this->updateTheme($DB, $sTheme);
-                        } catch (\PDOException $oE) {
+                        } catch (PDOException $oE) {
                             $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                         }
                     }
