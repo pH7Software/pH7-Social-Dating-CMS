@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f771647a7900b7d06992bbbbf9e7ee02",
+    "content-hash": "9e18bcabc35cdab9235d1d3b515ccfee",
     "packages": [
         {
             "name": "arcansecurity/skeerel-php",
@@ -999,6 +999,55 @@
                 "source": "https://github.com/jmespath/jmespath.php/tree/2.6.1"
             },
             "time": "2021-06-14T00:11:39+00:00"
+        },
+        {
+            "name": "ph-7/datatype",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pH-7/PHP-type-names.git",
+                "reference": "94aef69f411b072a76bec73eecd75eb35770ec6c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pH-7/PHP-type-names/zipball/94aef69f411b072a76bec73eecd75eb35770ec6c",
+                "reference": "94aef69f411b072a76bec73eecd75eb35770ec6c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PH7\\Datatype\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pierre-Henry Soria",
+                    "email": "hi@ph7.me"
+                }
+            ],
+            "description": "List of PHp data type constant readable names",
+            "keywords": [
+                "constants",
+                "php types",
+                "type names",
+                "types"
+            ],
+            "support": {
+                "issues": "https://github.com/pH-7/PHP-type-names/issues",
+                "source": "https://github.com/pH-7/PHP-type-names/tree/v1.0.0"
+            },
+            "time": "2022-01-07T08:47:31+00:00"
         },
         {
             "name": "ph-7/just-http-status-codes",
