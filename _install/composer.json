@@ -11,10 +11,7 @@
       "library"
     ],
     "files": [
-      "inc/log.inc.php",
-      "requirements.php",
-      "inc/fns/misc.php",
-      "inc/init.inc.php"
+      "inc/fns/misc.php"
     ]
   }
 }

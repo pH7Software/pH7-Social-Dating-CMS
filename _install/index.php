@@ -19,9 +19,7 @@ include PH7_ROOT_INSTALL . 'inc/log.inc.php';
 
 require 'requirements.php';
 
-include_once PH7_ROOT_INSTALL . 'inc/fns/misc.php';
-require_once PH7_ROOT_INSTALL . 'library/Smarty/Smarty.class.php';
-require_once PH7_ROOT_INSTALL . 'inc/loader.inc.php';
+require_once PH7_ROOT_INSTALL . 'vendor/autoload.php';
 
 require PH7_ROOT_INSTALL . 'inc/init.inc.php';
 
