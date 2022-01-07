@@ -39,7 +39,7 @@ use PH7\Framework\Str\Str;
 use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Url;
 use PH7\GenderTypeUserCore;
-use PH7\PH2Gravatar\Gravatar\Image as GravatarImage;
+use PH7\PH2Gravatar\Image as GravatarImage;
 use PH7\UserCore;
 use PH7\UserCoreModel;
 

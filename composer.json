@@ -68,7 +68,7 @@
     "guzzlehttp/guzzle": "^6.3",
     "ph-7/just-http-status-codes": "^1.1",
     "ph-7/passcode-password-generator": "^2.0",
-    "ph-7/ph2gravatar": "^1.1",
+    "ph-7/ph2gravatar": "^2.0",
     "ph-7/qrcode-generator-php-class": "^2.1",
     "robthree/twofactorauth": "^1.6",
     "stripe/stripe-php": "^5.9",
