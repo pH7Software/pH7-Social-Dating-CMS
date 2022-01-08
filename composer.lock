@@ -158,16 +158,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.209.0",
+            "version": "3.209.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "34afa064da0bf2816640b91b7e376ee781cded42"
+                "reference": "3a418a7a9beae4675685efe7bb426ee0ae338a40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/34afa064da0bf2816640b91b7e376ee781cded42",
-                "reference": "34afa064da0bf2816640b91b7e376ee781cded42",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3a418a7a9beae4675685efe7bb426ee0ae338a40",
+                "reference": "3a418a7a9beae4675685efe7bb426ee0ae338a40",
                 "shasum": ""
             },
             "require": {
@@ -243,9 +243,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.209.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.209.1"
             },
-            "time": "2022-01-06T19:13:57+00:00"
+            "time": "2022-01-07T19:12:55+00:00"
         },
         {
             "name": "braintree/braintree_php",
@@ -1111,16 +1111,16 @@
         },
         {
             "name": "ph-7/passcode-password-generator",
-            "version": "v2.0.3",
+            "version": "v2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pH-7/passcode-password-generator.git",
-                "reference": "4f654fc3c96d369f1bf777edfc2f24f685341952"
+                "reference": "2845c22001b9da34da948d7ee76e1c6a90ea0c11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pH-7/passcode-password-generator/zipball/4f654fc3c96d369f1bf777edfc2f24f685341952",
-                "reference": "4f654fc3c96d369f1bf777edfc2f24f685341952",
+                "url": "https://api.github.com/repos/pH-7/passcode-password-generator/zipball/2845c22001b9da34da948d7ee76e1c6a90ea0c11",
+                "reference": "2845c22001b9da34da948d7ee76e1c6a90ea0c11",
                 "shasum": ""
             },
             "require": {
@@ -1132,7 +1132,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "PH7\\": "src"
+                    "PH7\\Generator\\": "src/Generator"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1159,9 +1159,9 @@
             ],
             "support": {
                 "issues": "https://github.com/pH-7/passcode-password-generator/issues",
-                "source": "https://github.com/pH-7/passcode-password-generator/tree/v2.0.3"
+                "source": "https://github.com/pH-7/passcode-password-generator/tree/v2.0.4"
             },
-            "time": "2021-12-07T09:39:43+00:00"
+            "time": "2022-01-07T07:53:20+00:00"
         },
         {
             "name": "ph-7/ph2gravatar",
