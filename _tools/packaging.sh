@@ -31,15 +31,15 @@ function run() {
 
             # Install dependencies for production only (without dev packages)
             php ./composer.phar install --no-dev
-            php ./composer.phar _install install --no-dev
+            php ./composer.phar install --working-dir _install --no-dev
 
             # Update the libraries to their latest versions
             # php ./composer.phar update --no-dev
-            php ./composer.phar _install update --no-dev
+            # php ./composer.phar update --working-dir _install --no-dev
 
             # Optimize Composer
             php ./composer.phar dump-autoload --optimize --no-dev
-            php ./composer.phar _install dump-autoload --optimize --no-dev
+            php ./composer.phar dump-autoload --working-dir _install --optimize --no-dev
 
             ## Caches
             # public
