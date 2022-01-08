@@ -8,14 +8,15 @@
 
 namespace PH7;
 
+use PH7\Datatype\Type;
 use PH7\Framework\Analytics\Statistic;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Url\Header;
-use stdClass;
 use PH7\JustHttp\StatusCode;
+use stdClass;
 
 class MainController extends Controller
 {
@@ -92,7 +93,8 @@ class MainController extends Controller
     {
         $iProfileId = $this->httpRequest->getExists('username') ? $this->iProfileId : null;
         $this->view->total_pages = $this->oPage->getTotalPages(
-            $this->oPictureModel->totalAlbums($iProfileId), self::ALBUMS_PER_PAGE
+            $this->oPictureModel->totalAlbums($iProfileId),
+            self::ALBUMS_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oAlbums = $this->oPictureModel->album(
@@ -127,12 +129,13 @@ class MainController extends Controller
     public function album()
     {
         $this->view->total_pages = $this->oPage->getTotalPages(
-            $this->oPictureModel->totalPhotos($this->iProfileId), self::ALBUMS_PER_PAGE
+            $this->oPictureModel->totalPhotos($this->iProfileId),
+            self::ALBUMS_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oAlbum = $this->oPictureModel->photo(
             $this->iProfileId,
-            $this->httpRequest->get('album_id', 'int'),
+            $this->httpRequest->get('album_id', Type::INTEGER),
             null,
             1,
             $this->oPage->getFirstItem(),
@@ -161,8 +164,8 @@ class MainController extends Controller
     {
         $oPicture = $this->oPictureModel->photo(
             $this->iProfileId,
-            $this->httpRequest->get('album_id', 'int'),
-            $this->httpRequest->get('picture_id', 'int'),
+            $this->httpRequest->get('album_id', Type::INTEGER),
+            $this->httpRequest->get('picture_id', Type::INTEGER),
             1,
             0,
             1
@@ -190,13 +193,13 @@ class MainController extends Controller
 
     public function deletePhoto()
     {
-        $iPictureId = $this->httpRequest->post('picture_id', 'int');
+        $iPictureId = $this->httpRequest->post('picture_id', Type::INTEGER);
 
         CommentCoreModel::deleteRecipient($iPictureId, 'picture');
 
         $this->oPictureModel->deletePhoto(
             $this->session->get('member_id'),
-            $this->httpRequest->post('album_id', 'int'),
+            $this->httpRequest->post('album_id', Type::INTEGER),
             $iPictureId
         );
 
@@ -221,8 +224,8 @@ class MainController extends Controller
 
     public function deleteAlbum()
     {
-        $this->oPictureModel->deletePhoto($this->session->get('member_id'), $this->httpRequest->post('album_id', 'int'));
-        $this->oPictureModel->deleteAlbum($this->session->get('member_id'), $this->httpRequest->post('album_id', 'int'));
+        $this->oPictureModel->deletePhoto($this->session->get('member_id'), $this->httpRequest->post('album_id', Type::INTEGER));
+        $this->oPictureModel->deleteAlbum($this->session->get('member_id'), $this->httpRequest->post('album_id', Type::INTEGER));
         $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'picture/img/' . $this->session->get('member_username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
         $this->file->deleteDir($sDir);
 
@@ -255,7 +258,8 @@ class MainController extends Controller
             null
         );
         $this->view->total_pages = $this->oPage->getTotalPages(
-            $this->iTotalPictures, self::PHOTOS_PER_PAGE
+            $this->iTotalPictures,
+            self::PHOTOS_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oSearch = $this->oPictureModel->search(
