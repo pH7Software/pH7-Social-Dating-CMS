@@ -1,5 +1,4 @@
 - name: Lock Threads
-  uses: dessant/lock-threads@v3.0.0
 
 on:
   schedule:
@@ -19,7 +18,7 @@ jobs:
       - uses: dessant/lock-threads@v3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          issue-inactive-days: '30'
+          issue-inactive-days: 30
           add-issue-labels: 'locked, outdated'
           exclude-any-issue-labels: 'help wanted'
           pr-lock-reason: 'no replies'
