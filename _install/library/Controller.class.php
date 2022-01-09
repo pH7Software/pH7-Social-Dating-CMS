@@ -9,6 +9,8 @@
  * @package          PH7 / Install / Library
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -98,7 +100,7 @@ abstract class Controller implements Controllable
      *
      * @return void
      */
-    protected function initializePHPSession()
+    protected function initializePHPSession(): void
     {
         if (session_status() !== PHP_SESSION_ACTIVE) {
             @session_start();
@@ -110,7 +112,7 @@ abstract class Controller implements Controllable
      *
      * @return void
      */
-    protected function checkTimezone()
+    protected function checkTimezone(): void
     {
         if (!ini_get(self::PHP_TIMEZONE_DIRECTIVE)) {
             date_default_timezone_set(PH7_DEFAULT_TIMEZONE);
