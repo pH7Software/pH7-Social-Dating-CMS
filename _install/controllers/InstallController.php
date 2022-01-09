@@ -525,14 +525,14 @@ class InstallController extends Controller
                     switch ($_POST['niche_submit']) {
                         case 'zendate':
                             $bUpdateNeeded = true;
-                            $sTheme = 'zendate';
+                            $sThemeName = 'zendate';
                             $aModUpdate = self::SOCIAL_MODS;
                             $aSettingUpdate = self::SOCIAL_SETTINGS;
                             break;
 
                         case 'datelove':
                             $bUpdateNeeded = true;
-                            $sTheme = 'datelove';
+                            $sThemeName = 'datelove';
                             $aModUpdate = self::DATING_MODS;
                             $aSettingUpdate = self::DATING_SETTINGS;
                             break;
@@ -552,7 +552,7 @@ class InstallController extends Controller
 
                             $this->updateSettings($aSettingUpdate);
 
-                            $this->updateTheme($DB, $sTheme);
+                            $this->updateTheme($DB, $sThemeName);
                         } catch (PDOException $oE) {
                             $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                         }
@@ -597,7 +597,8 @@ class InstallController extends Controller
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['confirm_remove_install'])) {
                 remove_install_dir();
                 clearstatcache(); // We remove the files status cache as the "_install" folder doesn't exist anymore by now.
-                exit(header('Location: ' . PH7_URL_ROOT));
+                header('Location: ' . PH7_URL_ROOT);
+                exit;
             }
 
             $this->oView->assign('sept_number', 7);
