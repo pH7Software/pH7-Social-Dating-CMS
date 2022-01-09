@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace PH7\Test\Unit\Framework\Mvc\Request;
 
+use PH7\Datatype\Type;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Request\WrongRequestMethodException;
 use PHPUnit\Framework\TestCase;
@@ -28,7 +29,7 @@ final class HttpTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_GET['string_id'] = '123';
 
-        $sActual = $this->oHttpRequest->get('string_id', 'int');
+        $sActual = $this->oHttpRequest->get('string_id', Type::INTEGER);
 
         $this->assertSame(123, $sActual);
     }
@@ -48,7 +49,7 @@ final class HttpTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_GET['boolean_key'] = 'true';
 
-        $sActual = $this->oHttpRequest->get('boolean_key', 'bool');
+        $sActual = $this->oHttpRequest->get('boolean_key', Type::BOOLEAN);
 
         $this->assertTrue($sActual);
     }
@@ -57,7 +58,7 @@ final class HttpTest extends TestCase
     {
         $_GET['id'] = 123;
 
-        $bActual = $this->oHttpRequest->getExists('id', 'string');
+        $bActual = $this->oHttpRequest->getExists('id', Type::STRING);
 
         $this->assertFalse($bActual);
     }
@@ -66,7 +67,7 @@ final class HttpTest extends TestCase
     {
         $_GET['id'] = 0;
 
-        $bActual = $this->oHttpRequest->getExists('id', 'int');
+        $bActual = $this->oHttpRequest->getExists('id', Type::INTEGER);
 
         $this->assertTrue($bActual);
     }
@@ -103,7 +104,7 @@ final class HttpTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = 'POST';
         $_POST['string_id'] = '123';
 
-        $sActual = $this->oHttpRequest->post('string_id', 'int');
+        $sActual = $this->oHttpRequest->post('string_id', Type::INTEGER);
 
         $this->assertSame(123, $sActual);
     }
@@ -123,7 +124,7 @@ final class HttpTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = 'POST';
         $_POST['boolean_key'] = 0;
 
-        $sActual = $this->oHttpRequest->post('boolean_key', 'bool');
+        $sActual = $this->oHttpRequest->post('boolean_key', Type::BOOLEAN);
 
         $this->assertFalse($sActual);
     }
@@ -132,7 +133,7 @@ final class HttpTest extends TestCase
     {
         $_POST['id'] = 123;
 
-        $bActual = $this->oHttpRequest->postExists('id', 'string');
+        $bActual = $this->oHttpRequest->postExists('id', Type::STRING);
 
         $this->assertFalse($bActual);
     }
@@ -141,7 +142,7 @@ final class HttpTest extends TestCase
     {
         $_POST['id'] = 0;
 
-        $bActual = $this->oHttpRequest->postExists('id', 'int');
+        $bActual = $this->oHttpRequest->postExists('id', Type::INTEGER);
 
         $this->assertTrue($bActual);
     }
@@ -192,4 +193,3 @@ final class HttpTest extends TestCase
         $this->assertSame('Pierre', $this->oHttpRequest->post('setname'));
     }
 }
-
