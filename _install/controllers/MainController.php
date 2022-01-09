@@ -6,6 +6,8 @@
  * @package          PH7 / Install / Controller
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
