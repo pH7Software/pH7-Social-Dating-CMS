@@ -1,7 +1,7 @@
 <div class="col-md-12">
     <div class="center s_bMarg">
         <h1>
-            {* gives random boolean *}
+            {* give random boolean *}
             {if mt_rand(0,1) === 1}
                 {lang '😡 Upset? 🔨'}
             {else}
@@ -41,8 +41,12 @@
 
         <p>
             {if mt_rand(0,1) === 1}
+                <a class="bold" href="{% $config->values['module.setting']['buymeacoffee.link'] %}" rel="noreferrer">
+                    {lang '🎁 Gift me a coffee ☕'}
+                </a>
+            {elseif mt_rand(0,1) === 0}
                 <a class="bold" href="{% $config->values['module.setting']['patreon.link'] %}" rel="noreferrer">
-                    {lang 'Become a Patron!'}
+                    {lang 'Become a Patron! 🥳'}
                 </a>
             {else}
                 {{ $patreon_btns = ['become-patreon.en.png', 'support-patreon.en.png'] }}

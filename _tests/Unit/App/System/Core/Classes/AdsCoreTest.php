@@ -2,9 +2,11 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Test / Unit / App / System / Core / Classes
  */
+
+declare(strict_types=1);
 
 namespace PH7\Test\Unit\App\System\Core\Classes;
 
@@ -12,63 +14,54 @@ require_once PH7_PATH_SYS . 'core/classes/AdsCore.php';
 
 use PH7\AdsCore;
 use PH7\DbTableName;
-use PHPUnit_Framework_TestCase;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 
-class AdsCoreTest extends PHPUnit_Framework_TestCase
+final class AdsCoreTest extends TestCase
 {
-    public function testGetAffiliateTable()
+    public function testGetAffiliateTable(): void
     {
         $_GET['ads_type'] = 'affiliate';
 
         $this->assertSame('ads_affiliates', AdsCore::getTable());
     }
 
-    public function testGetAdsTable()
+    public function testGetAdsTable(): void
     {
         $this->assertSame('ads', AdsCore::getTable());
     }
 
     /**
-     * @param string $sTableName
-     * @param string $sExpectedValue
-     *
      * @dataProvider tableNamesProvider
      */
-    public function testCorrectTable($sTableName, $sExpectedValue)
+    public function testCorrectTable(string $sTableName, string $sExpectedValue): void
     {
         $this->assertSame($sExpectedValue, AdsCore::checkTable($sTableName));
     }
 
-    /**
-     * @expectedException \PH7\Framework\Error\CException\PH7InvalidArgumentException
-     */
-    public function testIncorrectTable()
+    public function testIncorrectTable(): void
     {
+        $this->expectException(PH7InvalidArgumentException::class);
+
         AdsCore::checkTable('wrong_table');
     }
 
     /**
-     * @param string $sTableName
-     *
      * @dataProvider tableNamesProvider
      */
-    public function testCorrectTableToId($sTableName)
+    public function testCorrectTableToId(string $sTableName): void
     {
         $this->assertSame('adsId', AdsCore::convertTableToId($sTableName));
     }
 
-    /**
-     * @expectedException \PH7\Framework\Error\CException\PH7InvalidArgumentException
-     */
-    public function testIncorrectTableToId()
+    public function testIncorrectTableToId(): void
     {
+        $this->expectException(PH7InvalidArgumentException::class);
+
         AdsCore::convertTableToId('wrong_table');
     }
 
-    /**
-     * @return array
-     */
-    public function tableNamesProvider()
+    public function tableNamesProvider(): array
     {
         return [
             [DbTableName::AD, 'ads'],

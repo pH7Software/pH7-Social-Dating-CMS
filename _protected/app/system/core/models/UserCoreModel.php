@@ -4,7 +4,7 @@
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
 
@@ -392,8 +392,8 @@ class UserCoreModel extends Model
 
         if ($bIsKeyword) {
             $sSqlQuery .= ' AND (
-                LOWER(username) LIKE LOWER(:keyword) OR LOWER(firstName) LIKE LOWER(:keyword) OR LOWER(lastName) LIKE LOWER(:keyword) 
-                OR LOWER(city) LIKE LOWER(:keyword) OR LOWER(state) LIKE LOWER(:keyword) OR LOWER(zipCode) LIKE LOWER(:keyword) 
+                LOWER(username) LIKE LOWER(:keyword) OR LOWER(firstName) LIKE LOWER(:keyword) OR LOWER(lastName) LIKE LOWER(:keyword)
+                OR LOWER(city) LIKE LOWER(:keyword) OR LOWER(state) LIKE LOWER(:keyword) OR LOWER(zipCode) LIKE LOWER(:keyword)
                 OR sex LIKE :keyword OR LOWER(punchline) LIKE LOWER(:keyword) OR email LIKE :keyword
             )';
         } else {
@@ -848,7 +848,7 @@ class UserCoreModel extends Model
      *
      * @return stdClass The Avatar (SQL alias is pic), profileId and approvedAvatar
      */
-    public function getAvatar($iProfileId, $iApproved = null)
+    public function getAvatar($iProfileId, $iApproved = null): stdClass
     {
         $this->cache->start(self::CACHE_GROUP, 'avatar' . $iProfileId, static::CACHE_TIME);
 
@@ -1003,9 +1003,6 @@ class UserCoreModel extends Model
 
         // BLOG COMMENTS
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_BLOG) . 'WHERE sender = ' . $iProfileId);
-
-        // GAME COMMENTS
-        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::COMMENT_GAME) . 'WHERE sender = ' . $iProfileId);
 
         // PHOTO ALBUMS AND PICTURES
         $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::PICTURE) . 'WHERE profileId = ' . $iProfileId);

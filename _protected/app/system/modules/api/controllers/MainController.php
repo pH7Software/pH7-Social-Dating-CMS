@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2015-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Api / Controller
  * @link           http://ph7cms.com
  * @link           http://github.com/pH7Software/pH7Builder-HTTP-REST-Push-Data
@@ -15,7 +15,7 @@ use PH7\Framework\Api\Api;
 use PH7\Framework\Http\Rest\Rest;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Security\Version;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class MainController extends Controller
 {

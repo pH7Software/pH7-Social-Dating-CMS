@@ -5,7 +5,7 @@
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / App / System / Core / Asset / Cron / 96H
  * @version          1.1
  */
@@ -21,7 +21,7 @@ use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Util\Backup;
 use PH7\Framework\Mvc\Model\Engine\Util\Various as DbVarious;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class DatabaseCoreCron extends Cron
 {
@@ -75,12 +75,6 @@ class DatabaseCoreCron extends Cron
         Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::MEMBER) . 'SET views=0');
         Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::MEMBER) . 'SET votes=0');
         Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::MEMBER) . 'SET score=0');
-
-
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::GAME) . 'SET views=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::GAME) . 'SET votes=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::GAME) . 'SET score=0');
-        //Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::GAME) . 'SET downloads=0');
 
         Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::PICTURE) . 'SET views=0');
         Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::PICTURE) . 'SET votes=0');
@@ -176,7 +170,7 @@ class DatabaseCoreCron extends Cron
 
         // If the option is enabled for Comments
         if ($iCleanComment > 0) {
-            $aCommentMods = ['blog', 'note', 'picture', 'video', 'game', 'profile'];
+            $aCommentMods = ['blog', 'note', 'picture', 'video', 'profile'];
             foreach ($aCommentMods as $sSuffixTable) {
                 if ($iRow = ($this->pruningDb($iCleanComment, CommentCoreModel::TABLE_PREFIX_NAME . $sSuffixTable, 'updatedDate') > 0)) {
                     echo t('Deleted %0% %1% comment(s) ... OK!', $iRow, $sSuffixTable) . '<br />';

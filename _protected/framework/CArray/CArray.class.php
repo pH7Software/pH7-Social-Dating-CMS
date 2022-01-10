@@ -4,10 +4,12 @@
  * @desc             Useful methods for the handing Array.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / CArray
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\CArray;
 
@@ -23,7 +25,7 @@ class CArray
      *
      * @return array Returns the merged array (the original arrays are not changed).
      */
-    public static function merge(array $aFrom, array $aTo)
+    public static function merge(array $aFrom, array $aTo): array
     {
         foreach ($aTo as $mKey => $mVal) {
             if (is_int($mKey)) {
@@ -44,9 +46,9 @@ class CArray
      * @param string $sValue The value in the array.
      * @param array $aArray The array.
      *
-     * @return string|null The name key. If the key is not found, Returns NULL.
+     * @return string|null The name key. If the key is not found, returns NULL
      */
-    public static function getKeyByValue($sValue, array $aArray)
+    public static function getKeyByValue($sValue, array $aArray): ?string
     {
         $mKey = array_search($sValue, $aArray, true);
 
@@ -59,9 +61,9 @@ class CArray
      * @param string $sValue The value in the array.
      * @param array $aArray The array.
      *
-     * @return string|null The name key. If the key is not found, Returns NULL.
+     * @return string|null The name key. If the key is not found, returns NULL
      */
-    public static function getKeyByValueIgnoreCase($sValue, array $aArray)
+    public static function getKeyByValueIgnoreCase($sValue, array $aArray): ?string
     {
         $mKey = array_search(strtolower($sValue), array_map('strtolower', $aArray), true);
 
@@ -74,9 +76,9 @@ class CArray
      * @param string $sKey The key in the array.
      * @param array $aArray The array.
      *
-     * @return string The value of the array. If the value is not found, Returns NULL.
+     * @return string|null The value of the array. If the value is not found, returns NULL
      */
-    public static function getValueByKey($sKey, array $aArray)
+    public static function getValueByKey(string $sKey, array $aArray): ?string
     {
         return array_key_exists($sKey, $aArray) && !empty($aArray[$sKey]) ? $aArray[$sKey] : null;
     }
@@ -86,9 +88,9 @@ class CArray
      *
      * @param string|boolean $mKey The key for needle if it is found in the array, FALSE otherwise.
      *
-     * @return string|null The name key. If the key is not found, Returns NULL.
+     * @return string|null The name key. If the key is not found, returns NULL
      */
-    private static function get($mKey)
+    private static function get($mKey): ?string
     {
         return $mKey !== false ? $mKey : null;
     }

@@ -2,13 +2,13 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2019-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Install / Library
  */
 
 namespace PH7;
 
-defined('PH7') or die('Restricted access');
+defined('PH7') or exit('Restricted access');
 
 final class SqlQuery
 {

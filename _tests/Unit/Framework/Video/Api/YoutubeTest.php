@@ -2,38 +2,39 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2017-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Test / Unit / Framework / Video / Api
  */
+
+declare(strict_types=1);
 
 namespace PH7\Test\Unit\Framework\Video\Api;
 
 use PH7\Framework\Video\Api\Youtube;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class YoutubeTest extends PHPUnit_Framework_TestCase
+final class YoutubeTest extends TestCase
 {
-    /** @var Youtube */
-    private $oYoutube;
+    private Youtube $oYoutube;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->oYoutube = new Youtube;
     }
 
-    public function testApiKeyIsSet()
+    public function testApiKeyIsSet(): void
     {
         $this->oYoutube->setKey('OIzaSyBu-916IsoKajomJNIgngS6HL_kDIKU0aU');
         $this->assertTrue($this->oYoutube->isApiKeySet());
     }
 
-    public function testWrongApiKeySet()
+    public function testWrongApiKeySet(): void
     {
         $this->oYoutube->setKey('invalid');
         $this->assertFalse($this->oYoutube->isApiKeySet());
     }
 
-    public function testApiKeyIsNotSet()
+    public function testApiKeyIsNotSet(): void
     {
         $this->assertFalse($this->oYoutube->isApiKeySet());
     }

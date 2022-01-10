@@ -1,7 +1,7 @@
 --
 -- Author:        Pierre-Henry Soria <hello@ph7cms.com>
 -- Copyright:     (c) 2016-2019, Pierre-Henry Soria. All Rights Reserved.
--- License:       GNU General Public License; https://www.gnu.org/licenses/gpl-3.0.en.html
+-- License:       MIT License; https://www.gnu.org/licenses/gpl-3.0.en.html
 --
 
 ALTER TABLE pH7_SysModsEnabled ADD COLUMN moduleTitle varchar(50) NOT NULL;

@@ -2,7 +2,7 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2017-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Test / Unit / App / System / Module / Error / Controller
  */
 
@@ -10,9 +10,9 @@ namespace PH7\Test\Unit\App\System\Module\Error\Controller;
 
 use GuzzleHttp\Client;
 use PH7\Framework\Mvc\Router\Uri;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class HttpControllerTest extends PHPUnit_Framework_TestCase
+final class HttpControllerTest extends TestCase
 {
     /** @var Client */
     protected $oClient;
@@ -27,7 +27,7 @@ class HttpControllerTest extends PHPUnit_Framework_TestCase
         $oResponse = $this->oClient->get($this->getUrl());
 
         $this->assertSame(404, $oResponse->getStatusCode());
-        $this->assertRegExp('/Page Not Found/', $oResponse->getBody()->__toString());
+        $this->assertMatchesRegularExpression('/Page Not Found/', $oResponse->getBody()->__toString());
     }
 
     public function testBadRequestPage()
@@ -35,7 +35,7 @@ class HttpControllerTest extends PHPUnit_Framework_TestCase
         $oResponse = $this->oClient->get($this->getUrl(400));
 
         $this->assertSame(400, $oResponse->getStatusCode());
-        $this->assertRegExp('/Bad Request/', $oResponse->getBody()->__toString());
+        $this->assertMatchesRegularExpression('/Bad Request/', $oResponse->getBody()->__toString());
     }
 
     public function testUnauthorizedPage()
@@ -43,7 +43,7 @@ class HttpControllerTest extends PHPUnit_Framework_TestCase
         $oResponse = $this->oClient->get($this->getUrl(401));
 
         $this->assertSame(401, $oResponse->getStatusCode());
-        $this->assertRegExp('/Unauthorized/', $oResponse->getBody()->__toString());
+        $this->assertMatchesRegularExpression('/Unauthorized/', $oResponse->getBody()->__toString());
     }
 
     public function testPaymentRequiredPage()
@@ -51,7 +51,7 @@ class HttpControllerTest extends PHPUnit_Framework_TestCase
         $oResponse = $this->oClient->get($this->getUrl(402));
 
         $this->assertSame(402, $oResponse->getStatusCode());
-        $this->assertRegExp('/Payment Required/', $oResponse->getBody()->__toString());
+        $this->assertMatchesRegularExpression('/Payment Required/', $oResponse->getBody()->__toString());
     }
 
     public function testForbiddenPage()
@@ -59,7 +59,7 @@ class HttpControllerTest extends PHPUnit_Framework_TestCase
         $oResponse = $this->oClient->get($this->getUrl(403));
 
         $this->assertSame(403, $oResponse->getStatusCode());
-        $this->assertRegExp('/Forbidden/', $oResponse->getBody()->__toString());
+        $this->assertMatchesRegularExpression('/Forbidden/', $oResponse->getBody()->__toString());
     }
 
     public function testMethodNotAllowedPage()
@@ -67,7 +67,7 @@ class HttpControllerTest extends PHPUnit_Framework_TestCase
         $oResponse = $this->oClient->get($this->getUrl(405));
 
         $this->assertSame(405, $oResponse->getStatusCode());
-        $this->assertRegExp('/Method Not Allowed/', $oResponse->getBody()->__toString());
+        $this->assertMatchesRegularExpression('/Method Not Allowed/', $oResponse->getBody()->__toString());
     }
 
     public function testInternalServerErrorPage()
@@ -75,7 +75,7 @@ class HttpControllerTest extends PHPUnit_Framework_TestCase
         $oResponse = $this->oClient->get($this->getUrl(500));
 
         $this->assertSame(500, $oResponse->getStatusCode());
-        $this->assertRegExp('/Internal Server Error/', $oResponse->getBody()->__toString());
+        $this->assertMatchesRegularExpression('/Internal Server Error/', $oResponse->getBody()->__toString());
     }
 
     public function testNotImplementedPage()
@@ -83,7 +83,7 @@ class HttpControllerTest extends PHPUnit_Framework_TestCase
         $oResponse = $this->oClient->get($this->getUrl(501));
 
         $this->assertSame(501, $oResponse->getStatusCode());
-        $this->assertRegExp('/Not Implemented/', $oResponse->getBody()->__toString());
+        $this->assertMatchesRegularExpression('/Not Implemented/', $oResponse->getBody()->__toString());
     }
 
     public function testBadGatewayPage()
@@ -91,7 +91,7 @@ class HttpControllerTest extends PHPUnit_Framework_TestCase
         $oResponse = $this->oClient->get($this->getUrl(502));
 
         $this->assertSame(502, $oResponse->getStatusCode());
-        $this->assertRegExp('/Bad Gateway/', $oResponse->getBody()->__toString());
+        $this->assertMatchesRegularExpression('/Bad Gateway/', $oResponse->getBody()->__toString());
     }
 
     public function testGatewayTimeoutPage()
@@ -99,7 +99,7 @@ class HttpControllerTest extends PHPUnit_Framework_TestCase
         $oResponse = $this->oClient->get($this->getUrl(504));
 
         $this->assertSame(504, $oResponse->getStatusCode());
-        $this->assertRegExp('/Gateway Timeout/', $oResponse->getBody()->__toString());
+        $this->assertMatchesRegularExpression('/Gateway Timeout/', $oResponse->getBody()->__toString());
     }
 
     public function testHttpVersionNotSupportedPage()
@@ -107,7 +107,7 @@ class HttpControllerTest extends PHPUnit_Framework_TestCase
         $oResponse = $this->oClient->get($this->getUrl(505));
 
         $this->assertSame(505, $oResponse->getStatusCode());
-        $this->assertRegExp('/HTTP Version Not Supported/', $oResponse->getBody()->__toString());
+        $this->assertMatchesRegularExpression('/HTTP Version Not Supported/', $oResponse->getBody()->__toString());
     }
 
     private function getUrl($sUri = '')

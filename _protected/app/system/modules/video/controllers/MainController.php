@@ -2,12 +2,13 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Video / Controller
  */
 
 namespace PH7;
 
+use PH7\Datatype\Type;
 use PH7\Framework\Analytics\Statistic;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
@@ -15,7 +16,7 @@ use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Url\Header;
 use stdClass;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class MainController extends Controller
 {
@@ -104,7 +105,7 @@ class MainController extends Controller
             $this->oPage->getNbItemsPerPage()
         );
 
-        $this->view->is_add_album_btn_shown = $this->httpRequest->get('show_add_album_btn', 'bool');
+        $this->view->is_add_album_btn_shown = $this->httpRequest->get('show_add_album_btn', Type::BOOL);
 
         if (empty($oAlbums)) {
             $this->sTitle = t('No video albums found.');
@@ -137,7 +138,7 @@ class MainController extends Controller
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oAlbum = $this->oVideoModel->video(
             $this->iProfileId,
-            $this->httpRequest->get('album_id', 'int'),
+            $this->httpRequest->get('album_id', Type::INTEGER),
             null,
             1,
             $this->oPage->getFirstItem(),
@@ -170,8 +171,8 @@ class MainController extends Controller
 
         $oVideo = $this->oVideoModel->video(
             $this->iProfileId,
-            $this->httpRequest->get('album_id', 'int'),
-            $this->httpRequest->get('video_id', 'int'),
+            $this->httpRequest->get('album_id', Type::INTEGER),
+            $this->httpRequest->get('video_id', Type::INTEGER),
             1,
             0,
             1
@@ -199,13 +200,13 @@ class MainController extends Controller
 
     public function deleteVideo()
     {
-        $iVideoId = $this->httpRequest->post('video_id', 'int');
+        $iVideoId = $this->httpRequest->post('video_id', Type::INTEGER);
 
         CommentCoreModel::deleteRecipient($iVideoId, 'video');
 
         $this->oVideoModel->deleteVideo(
             $this->session->get('member_id'),
-            $this->httpRequest->post('album_id', 'int'),
+            $this->httpRequest->post('album_id', Type::INTEGER),
             $iVideoId
         );
 
@@ -231,8 +232,8 @@ class MainController extends Controller
 
     public function deleteAlbum()
     {
-        $this->oVideoModel->deleteVideo($this->session->get('member_id'), $this->httpRequest->post('album_id', 'int'));
-        $this->oVideoModel->deleteAlbum($this->session->get('member_id'), $this->httpRequest->post('album_id', 'int'));
+        $this->oVideoModel->deleteVideo($this->session->get('member_id'), $this->httpRequest->post('album_id', Type::INTEGER));
+        $this->oVideoModel->deleteAlbum($this->session->get('member_id'), $this->httpRequest->post('album_id', Type::INTEGER));
         $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $this->session->get('member_username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
         $this->file->deleteDir($sDir);
 

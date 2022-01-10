@@ -2,28 +2,30 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2017-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Test / Unit / Framework / Server
  */
+
+declare(strict_types=1);
 
 namespace PH7\Test\Unit\Framework\Server;
 
 use PH7\Framework\Server\Environment;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class EnvironmentTest extends PHPUnit_Framework_TestCase
+final class EnvironmentTest extends TestCase
 {
-    public function testWrongEnvFile()
+    public function testWrongEnvFile(): void
     {
         $this->assertSame('production.env', Environment::getFileName('wrong_env_name'));
     }
 
-    public function testCorrectProdEnvName()
+    public function testCorrectProdEnvName(): void
     {
         $this->assertSame('production.env', Environment::getFileName('production'));
     }
 
-    public function testCorrectDevEnvName()
+    public function testCorrectDevEnvName(): void
     {
         $this->assertSame('development.env', Environment::getFileName('development'));
     }

@@ -5,7 +5,7 @@
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Cookie
  */
 
@@ -22,7 +22,7 @@ class Cookie
      * Set a PHP cookie.
      *
      * @param array|string $mName Name of the cookie.
-     * @param string|null $sValue value of the cookie, Optional if the cookie data is in a array.
+     * @param string|null $sValue value of the cookie, Optional if the cookie data is in an array.
      * @param int|null $iTime The time the cookie expires. This is a Unix timestamp.
      * @param bool|null $bSecure If TRUE cookie will only be sent over a secure HTTPS connection from the client.
      *

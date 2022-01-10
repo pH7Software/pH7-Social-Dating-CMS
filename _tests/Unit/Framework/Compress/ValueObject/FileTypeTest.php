@@ -2,45 +2,40 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Test / Unit / Framework / Compress / ValueObject
  */
+
+declare(strict_types=1);
 
 namespace PH7\Test\Unit\Framework\Date\ValueObject;
 
 use PH7\Framework\Compress\ValueObject\FileType;
 use PH7\Framework\Compress\ValueObject\InvalidFileTypeException;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class FileTypeTest extends PHPUnit_Framework_TestCase
+final class FileTypeTest extends TestCase
 {
     /**
-     * @param string $sFileType
-     *
      * @dataProvider validTypesProvider
      */
-    public function testValidFileType($sFileType)
+    public function testValidFileType(string $sFileType): void
     {
         $oFileType = new FileType($sFileType);
         $this->assertSame($sFileType, $oFileType->getValue());
     }
 
     /**
-     * @param string $sFileType
-     *
      * @dataProvider invalidTypesProvider
      */
-    public function testInvalidFileType($sFileType)
+    public function testInvalidFileType(string $sFileType): void
     {
         $this->expectException(InvalidFileTypeException::class);
 
         new FileType($sFileType);
     }
 
-    /**
-     * @return array
-     */
-    public function validTypesProvider()
+    public function validTypesProvider(): array
     {
         return [
             ['js'],
@@ -48,10 +43,7 @@ class FileTypeTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function invalidTypesProvider()
+    public function invalidTypesProvider(): array
     {
         return [
             [''],

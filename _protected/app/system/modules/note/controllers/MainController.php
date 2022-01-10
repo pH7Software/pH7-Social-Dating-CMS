@@ -2,12 +2,13 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Note / Controller
  */
 
 namespace PH7;
 
+use PH7\Datatype\Type;
 use PH7\Framework\Analytics\Statistic;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Http\Http;
@@ -18,7 +19,7 @@ use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Url\Header;
 use stdClass;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class MainController extends Controller
 {
@@ -137,7 +138,7 @@ class MainController extends Controller
     {
         $sCategory = str_replace('-', ' ', $this->httpRequest->get('name'));
         $sOrder = $this->httpRequest->get('order');
-        $iSort = $this->httpRequest->get('sort', 'int');
+        $iSort = $this->httpRequest->get('sort', Type::INTEGER);
 
         $this->iTotalNotes = $this->oNoteModel->category(
             $sCategory,
@@ -187,7 +188,7 @@ class MainController extends Controller
     {
         $sAuthor = $this->httpRequest->get('author');
         $sOrder = $this->httpRequest->get('order');
-        $iSort = $this->httpRequest->get('sort', 'int');
+        $iSort = $this->httpRequest->get('sort', Type::INTEGER);
 
         $this->iTotalNotes = $this->oNoteModel->author(
             $sAuthor,
@@ -244,7 +245,7 @@ class MainController extends Controller
     {
         $sKeywords = $this->httpRequest->get('looking');
         $sOrder = $this->httpRequest->get('order');
-        $iSort = $this->httpRequest->get('sort', 'int');
+        $iSort = $this->httpRequest->get('sort', Type::INTEGER);
 
         $this->iTotalNotes = $this->oNoteModel->search(
             $sKeywords,

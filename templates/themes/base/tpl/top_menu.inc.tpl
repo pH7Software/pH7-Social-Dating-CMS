@@ -141,15 +141,6 @@
           </li>
         {/if}
 
-        {if $is_game_enabled}
-          <li class="dropdown"><a href="{{ $design->url('game','main','index') }}" title="{lang 'Games Zone'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-gamepad"></i> {lang 'Game'} <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="{{ $design->url('game','main','index') }}" rel="nofollow" title="{lang 'Games Zone'}" data-load="ajax"><i class="fa fa-gamepad"></i> {lang 'Game'}</a></li>
-              <li><a href="{{ $design->url('game','main','search') }}" title="{lang 'Search Games'}" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search'}</a></li>
-            </ul>
-          </li>
-        {/if}
-
         {if $is_forum_enabled}
           <li class="dropdown"><a href="{{ $design->url('forum','forum','index') }}" title="{lang 'Forums'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-comments"></i> {lang 'Forum'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
@@ -370,15 +361,6 @@
 
             {if $is_note_enabled}
               <li><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Note Posts'}"><i class="fa fa-newspaper-o"></i> {lang 'Note'}</a></li>
-            {/if}
-
-            {if $is_game_enabled}
-              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('game','admin','index') }}" title="{lang 'Admin Game'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-gamepad"></i> {lang 'Game'}</a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="{{ $design->url('game','admin','index') }}" title="{lang 'Admin Game'}">{lang 'Admin Game'}</a></li>
-                  <li><a href="{{ $design->url('game','admin','add') }}" title="{lang 'Add a Game'}">{lang 'Add a Game'}</a></li>
-                </ul>
-              </li>
             {/if}
 
             {if $is_affiliate_enabled}

@@ -52,7 +52,7 @@ class Form extends Base
             'method' => 'post'
         ]);
 
-        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+        if (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) === 'on') {
             $this->prefix = 'https';
         }
 

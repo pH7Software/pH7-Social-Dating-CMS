@@ -2,18 +2,20 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Test / Unit / Framework / CArray
  */
+
+declare(strict_types=1);
 
 namespace PH7\Test\Unit\Framework\CArray;
 
 use PH7\Framework\CArray\CArray;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class CArrayTest extends PHPUnit_Framework_TestCase
+final class CArrayTest extends TestCase
 {
-    public function testMerge()
+    public function testMerge(): void
     {
         $aArrayOne = ['abc', 'haha', 'Pierre'];
         $aArrayTwo = ['Julie', 'Amelie', 'Pied', 'manger'];
@@ -34,7 +36,7 @@ class CArrayTest extends PHPUnit_Framework_TestCase
         );
     }
 
-    public function testKeyByValueExists()
+    public function testKeyByValueExists(): void
     {
         $aData = ['James', 'henry' => 'Henry', 'pierre' => 'Pierre'];
 
@@ -43,7 +45,7 @@ class CArrayTest extends PHPUnit_Framework_TestCase
         $this->assertSame('pierre', $sResult);
     }
 
-    public function testKeyByValueDoesntExist()
+    public function testKeyByValueDoesntExist(): void
     {
         $aData = ['James', 'henry' => 'Henry'];
 
@@ -52,7 +54,7 @@ class CArrayTest extends PHPUnit_Framework_TestCase
         $this->assertNull($sResult);
     }
 
-    public function testKeyByValueIgnoreCaseExists()
+    public function testKeyByValueIgnoreCaseExists(): void
     {
         $aData = ['pierre' => 'Pierre', 'henry' => 'Henry'];
 
@@ -61,7 +63,7 @@ class CArrayTest extends PHPUnit_Framework_TestCase
         $this->assertSame('pierre', $sResult);
     }
 
-    public function testKeyByValueIgnoreCaseDoesntExist()
+    public function testKeyByValueIgnoreCaseDoesntExist(): void
     {
         $aData = ['henry' => 'Henry'];
 
@@ -70,7 +72,7 @@ class CArrayTest extends PHPUnit_Framework_TestCase
         $this->assertNull($sResult);
     }
 
-    public function testValueByKeyExists()
+    public function testValueByKeyExists(): void
     {
         $aData = ['key' => 'JAMES'];
 
@@ -79,7 +81,7 @@ class CArrayTest extends PHPUnit_Framework_TestCase
         $this->assertSame('JAMES', $sResult);
     }
 
-    public function testValueByKeyDoesntExist()
+    public function testValueByKeyDoesntExist(): void
     {
         $aData = ['key' => 'JAMES'];
 

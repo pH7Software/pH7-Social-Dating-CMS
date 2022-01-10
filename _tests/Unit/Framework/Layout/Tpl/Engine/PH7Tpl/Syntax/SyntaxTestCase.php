@@ -2,46 +2,30 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Test / Unit / Framework / Layout / Tpl / Engine / PH7Tpl / Syntax
  */
+
+declare(strict_types=1);
 
 namespace PH7\Test\Unit\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax;
 
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax\Syntax;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-abstract class SyntaxTestCase extends PHPUnit_Framework_TestCase
+abstract class SyntaxTestCase extends TestCase
 {
-    const FIXTURE_PATH = __DIR__ . '/fixtures/';
+    private const FIXTURE_PATH = __DIR__ . '/fixtures/';
 
-    /**
-     * @return string
-     */
-    abstract protected function getInputDirectory();
+    abstract protected function getInputDirectory(): string;
 
-    /**
-     * @return string
-     */
-    abstract protected function getOutputDirectory();
+    abstract protected function getOutputDirectory(): string;
 
-    /**
-     * @return string
-     */
     abstract protected function getInputTemplateFileExtension();
 
-    /**
-     * @return string
-     */
-    abstract protected function getOutputPhpFileExtension();
+    abstract protected function getOutputPhpFileExtension(): string;
 
-    /**
-     * @param string $sName
-     * @param Syntax $oSyntaxEngine
-     *
-     * @return void
-     */
-    protected function assertFile($sName, Syntax $oSyntaxEngine)
+    protected function assertFile(string $sName, Syntax $oSyntaxEngine): void
     {
         $sTplCode = file_get_contents(static::FIXTURE_PATH . $this->getInputDirectory() . $sName . $this->getInputTemplateFileExtension());
         $sPhpCode = file_get_contents(static::FIXTURE_PATH . $this->getOutputDirectory() . $sName . $this->getOutputPhpFileExtension());

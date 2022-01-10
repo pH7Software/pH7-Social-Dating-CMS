@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Form
  */
 
@@ -42,7 +42,7 @@ class LoginForm implements Authenticable
         $oForm->addElement(new Email(t('Your Email:'), 'mail', ['id' => 'email_login', 'onblur' => 'CValid(this.value, this.id,\'user\')', 'required' => 1]));
         $oForm->addElement(new HTMLExternal('<span class="input_error email_login"></span>'));
         $oForm->addElement(new Password(t('Your Password:'), 'password', ['required' => 1]));
-        $oForm->addElement(new Checkbox('', RememberMeCore::CHECKBOX_FIELD_NAME, [1 => t('Stay signed in')]));
+        $oForm->addElement(new Checkbox('', RememberMeCore::CHECKBOX_FIELD_NAME, [1 => t('Stay signed in (for up to %0% days)', RememberMeCore::getRememberDurationInDays())]));
 
         if (static::isCaptchaEligible()) {
             $oForm->addElement(new CCaptcha(t('Captcha'), 'captcha', ['id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:')]));

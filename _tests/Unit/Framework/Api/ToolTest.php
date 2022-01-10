@@ -2,7 +2,7 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2017-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Test / Unit / Framework / Api
  */
 
@@ -11,17 +11,15 @@ namespace PH7\Test\Unit\Framework\Api;
 use PH7\Framework\Api\Tool;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class ToolTest extends PHPUnit_Framework_TestCase
+class ToolTest extends TestCase
 {
-    /** @var HttpRequest */
-    private $oHttpRequest;
+    private HttpRequest $oHttpRequest;
 
-    /** Config */
-    private $oConfig;
+    private Config $oConfig;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->oHttpRequest = new HttpRequest();
         $this->oConfig = Config::getInstance();
@@ -32,15 +30,13 @@ class ToolTest extends PHPUnit_Framework_TestCase
 
     /**
      * Make sure the constant value doesn't get changed by mistake...
-     *
-     * @return void
      */
-    public function testSoftwareApiUrl()
+    public function testSoftwareApiUrl(): void
     {
         $this->assertSame('https://api.ph7cms.com/', Tool::SOFTWARE_API_URL);
     }
 
-    public function testValidGetApiAccess()
+    public function testValidGetApiAccess(): void
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_GET['private_api_key'] = 'c56cd417b958b9ce37bdd80569ef94836ccdc5c7';
@@ -49,7 +45,7 @@ class ToolTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(Tool::checkAccess($this->oConfig, $this->oHttpRequest));
     }
 
-    public function testValidPostApiAccess()
+    public function testValidPostApiAccess(): void
     {
         $_SERVER['REQUEST_METHOD'] = 'POST';
         $_POST['private_api_key'] = 'c56cd417b958b9ce37bdd80569ef94836ccdc5c7';
@@ -58,7 +54,7 @@ class ToolTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(Tool::checkAccess($this->oConfig, $this->oHttpRequest));
     }
 
-    public function testInvalidUrlApiAccess()
+    public function testInvalidUrlApiAccess(): void
     {
         $_SERVER['REQUEST_METHOD'] = 'POST';
         $_POST['private_api_key'] = 'c56cd417b958b9ce37bdd80569ef94836ccdc5c7';
@@ -67,7 +63,7 @@ class ToolTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(Tool::checkAccess($this->oConfig, $this->oHttpRequest));
     }
 
-    public function testInvalidApiKeyApiAccess()
+    public function testInvalidApiKeyApiAccess(): void
     {
         $_SERVER['REQUEST_METHOD'] = 'POST';
         $_POST['private_api_key'] = 'wrong_api_key';
@@ -76,7 +72,7 @@ class ToolTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(Tool::checkAccess($this->oConfig, $this->oHttpRequest));
     }
 
-    public function testDevApiKeyApiAccess()
+    public function testDevApiKeyApiAccess(): void
     {
         $_SERVER['SERVER_NAME'] = '127.0.0.1';
         $_SERVER['REQUEST_METHOD'] = 'POST';

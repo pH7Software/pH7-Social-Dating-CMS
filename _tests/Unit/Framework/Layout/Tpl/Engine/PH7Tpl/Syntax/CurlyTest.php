@@ -2,9 +2,11 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Test / Unit / Framework / Layout / Tpl / Engine / PH7Tpl / Syntax
  */
+
+declare(strict_types=1);
 
 namespace PH7\Test\Unit\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax;
 
@@ -18,17 +20,16 @@ class CurlyTest extends SyntaxTestCase
     const INPUT_TPL_FILE_EXT = '.curly.tpl';
     const OUTPUT_PHP_FILE_EXT = '.curly.output';
 
-    /** @var CurlySyntax */
-    private $oCurlySyntax;
+    private CurlySyntax $oCurlySyntax;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->oCurlySyntax = new CurlySyntax;
     }
 
-    public function testParseUnsetCode()
+    public function testParseUnsetCode(): void
     {
         $this->expectException(EmptyCodeException::class);
         $this->expectExceptionCode(EmptyCodeException::CURLY_SYNTAX);
@@ -36,147 +37,147 @@ class CurlyTest extends SyntaxTestCase
         $this->oCurlySyntax->parse();
     }
 
-    public function testAutoIncludeStatement()
+    public function testAutoIncludeStatement(): void
     {
         $this->assertFile('auto-include', $this->oCurlySyntax);
     }
 
-    public function testIncludeStatement()
+    public function testIncludeStatement(): void
     {
         $this->assertFile('include', $this->oCurlySyntax);
     }
 
-    public function testMainIncludeStatement()
+    public function testMainIncludeStatement(): void
     {
         $this->assertFile('main-include', $this->oCurlySyntax);
     }
 
-    public function testDefMainAutoIncludeStatement()
+    public function testDefMainAutoIncludeStatement(): void
     {
         $this->assertFile('def-main-auto-include', $this->oCurlySyntax);
     }
 
-    public function testDefMainIncludeStatement()
+    public function testDefMainIncludeStatement(): void
     {
         $this->assertFile('def-main-include', $this->oCurlySyntax);
     }
 
-    public function testManualIncludeStatement()
+    public function testManualIncludeStatement(): void
     {
         $this->assertFile('manual-include', $this->oCurlySyntax);
     }
 
-    public function testPhpCode()
+    public function testPhpCode(): void
     {
         $this->assertFile('php-code', $this->oCurlySyntax);
     }
 
-    public function testPhpCodeWithSemicolon()
+    public function testPhpCodeWithSemicolon(): void
     {
         $this->assertFile('php-code-semicolon', $this->oCurlySyntax);
     }
 
-    public function testEcho()
+    public function testEcho(): void
     {
         $this->assertFile('echo', $this->oCurlySyntax);
     }
 
-    public function testEchoWithSemicolon()
+    public function testEchoWithSemicolon(): void
     {
         $this->assertFile('echo-semicolon', $this->oCurlySyntax);
     }
 
-    public function testIfStatement()
+    public function testIfStatement(): void
     {
         $this->assertFile('if', $this->oCurlySyntax);
     }
 
-    public function testElseifStatement()
+    public function testElseifStatement(): void
     {
         $this->assertFile('elseif', $this->oCurlySyntax);
     }
 
-    public function testElseStatement()
+    public function testElseStatement(): void
     {
         $this->assertFile('else', $this->oCurlySyntax);
     }
 
-    public function testForLoop()
+    public function testForLoop(): void
     {
         $this->assertFile('for', $this->oCurlySyntax);
     }
 
-    public function testWhileLoop()
+    public function testWhileLoop(): void
     {
         $this->assertFile('while', $this->oCurlySyntax);
     }
 
-    public function testEachLoop()
+    public function testEachLoop(): void
     {
         $this->assertFile('each', $this->oCurlySyntax);
     }
 
-    public function testDesignModelObject()
+    public function testDesignModelObject(): void
     {
         $this->assertFile('design-model', $this->oCurlySyntax);
     }
 
-    public function testEscapeFunction()
+    public function testEscapeFunction(): void
     {
         $this->assertFile('escape', $this->oCurlySyntax);
     }
 
-    public function testInlineLangFunction()
+    public function testInlineLangFunction(): void
     {
         $this->assertFile('lang-inline', $this->oCurlySyntax);
     }
 
-    public function testLangFunction()
+    public function testLangFunction(): void
     {
         $this->assertFile('lang', $this->oCurlySyntax);
     }
 
-    public function testLiteralFunction()
+    public function testLiteralFunction(): void
     {
         $this->assertFile('literal', $this->oCurlySyntax);
     }
 
-    public function testVariable()
+    public function testVariable(): void
     {
         $this->assertFile('variable', $this->oCurlySyntax);
     }
 
-    public function testObjectShortcuts()
+    public function testObjectShortcuts(): void
     {
         $this->assertFile('shortcuts', $this->oCurlySyntax);
     }
 
-    public function testSingleLineComment()
+    public function testSingleLineComment(): void
     {
         $this->assertFile('comment-single-line', $this->oCurlySyntax);
     }
 
-    public function testComment()
+    public function testComment(): void
     {
         $this->assertFile('comment', $this->oCurlySyntax);
     }
 
-    protected function getInputDirectory()
+    protected function getInputDirectory(): string
     {
         return self::INPUT_DIR;
     }
 
-    protected function getOutputDirectory()
+    protected function getOutputDirectory(): string
     {
         return self::OUTPUT_DIR;
     }
 
-    protected function getInputTemplateFileExtension()
+    protected function getInputTemplateFileExtension(): string
     {
         return self::INPUT_TPL_FILE_EXT;
     }
 
-    protected function getOutputPhpFileExtension()
+    protected function getOutputPhpFileExtension(): string
     {
         return self::OUTPUT_PHP_FILE_EXT;
     }

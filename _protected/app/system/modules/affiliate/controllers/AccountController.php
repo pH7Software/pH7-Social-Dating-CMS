@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Controller
  */
 
@@ -19,15 +19,15 @@ class AccountController extends Controller
     {
         $this->setTitle(t('Account - Affiliate'));
 
+        $sReferralUrl = $this->getReferralLink();
+
         $this->view->currency_sign = $this->config->values['module.setting']['currency_sign'];
         $this->view->currency_code = $this->config->values['module.setting']['currency_code'];
         $this->view->min_withdrawal = $this->config->values['module.setting']['min_withdrawal_money'];
         $this->view->amount = (new AffiliateModel)->getAmount($this->session->get('affiliate_id'));
-        $this->view->referral_link_url = Uri::get(
-            'affiliate',
-            'router',
-            'refer',
-            $this->session->get('affiliate_username')
+        $this->view->referral_link_url = $sReferralUrl;
+        $this->view->tweet_msg_url = SocialSharing::getTwitterLink(
+            t("Let's have fun! 😻 Let's try something different 😍\n-> %0% 🥳", $sReferralUrl)
         );
         $this->view->contact_url = Uri::get('contact', 'contact', 'index');
 
@@ -109,6 +109,21 @@ class AccountController extends Controller
             $this->config,
             $this->registry,
             'affiliate'
+        );
+    }
+
+    /**
+     * Give a referral affiliation link.
+     *
+     * @return string
+     */
+    private function getReferralLink()
+    {
+        return Uri::get(
+            'affiliate',
+            'router',
+            'refer',
+            $this->session->get('affiliate_username')
         );
     }
 

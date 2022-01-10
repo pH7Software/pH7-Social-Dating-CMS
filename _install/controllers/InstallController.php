@@ -1,14 +1,16 @@
 <?php
 /**
- * @title            InstallController Class
- *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Install / Controller
  */
 
+declare(strict_types=1);
+
 namespace PH7;
+
+use PDOException;
 
 defined('PH7') or exit('Restricted access');
 
@@ -17,17 +19,18 @@ defined('PH7') or exit('Restricted access');
 
 class InstallController extends Controller
 {
-    const TOTAL_MEMBERS_SAMPLE = 16;
-    const TOTAL_AFFILIATES_SAMPLE = 1;
-    const TOTAL_SUBSCRIBERS_SAMPLE = 1;
+    private const CORE_SQL_FILE = 'pH7_Core.sql';
+
+    private const TOTAL_MEMBERS_SAMPLE = 16;
+    private const TOTAL_AFFILIATES_SAMPLE = 1;
+    private const TOTAL_SUBSCRIBERS_SAMPLE = 1;
 
     /**
      * Enable/Disable Modules according to the chosen niche
      */
-    const SOCIAL_MODS = [
+    private const SOCIAL_MODS = [
         'connect' => '0',
         'affiliate' => '0',
-        'game' => '0',
         'chat' => '0',
         'chatroulette' => '0',
         'picture' => '1',
@@ -51,10 +54,9 @@ class InstallController extends Controller
         'sms-verification' => '0'
     ];
 
-    const DATING_MODS = [
+    private const DATING_MODS = [
         'connect' => '0',
         'affiliate' => '1',
-        'game' => '0',
         'chat' => '1',
         'chatroulette' => '1',
         'picture' => '1',
@@ -81,14 +83,14 @@ class InstallController extends Controller
     /**
      * Enable/Disable Site Settings according to the chosen niche
      */
-    const SOCIAL_SETTINGS = [
+    private const SOCIAL_SETTINGS = [
         'navbarType' => 'default',
         'socialMediaWidgets' => '1',
         'requireRegistrationAvatar' => '0',
         'isUserAgeRangeField' => '0'
     ];
 
-    const DATING_SETTINGS = [
+    private const DATING_SETTINGS = [
         'navbarType' => 'inverse',
         'socialMediaWidgets' => '0',
         'requireRegistrationAvatar' => '1',
@@ -97,7 +99,7 @@ class InstallController extends Controller
 
 
     /********************* STEP 1 *********************/
-    public function index()
+    public function index(): void
     {
         $aLangs = get_dir_list(PH7_ROOT_INSTALL . Language::LANG_FOLDER_NAME);
         $aLangsList = include PH7_ROOT_INSTALL . 'inc/lang_list.inc.php';
@@ -114,7 +116,7 @@ class InstallController extends Controller
     }
 
     /********************* STEP 2 *********************/
-    public function license()
+    public function license(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['license_agreements_submit'])) {
             if ($this->isAgreementsAgreed()) {
@@ -131,7 +133,7 @@ class InstallController extends Controller
     }
 
     /********************* STEP 3 *********************/
-    public function config_path()
+    public function config_path(): void
     {
         global $LANG;
 
@@ -148,7 +150,11 @@ class InstallController extends Controller
                     if (is_readable($_SESSION['val']['path_protected'])) {
                         $sConstantContent = file_get_contents(PH7_ROOT_INSTALL . 'data/configs/constants.php');
 
-                        $sConstantContent = str_replace('%path_protected%', addslashes($_SESSION['val']['path_protected']), $sConstantContent);
+                        $sConstantContent = str_replace(
+                            '%path_protected%',
+                            addslashes($_SESSION['val']['path_protected']),
+                            $sConstantContent
+                        );
 
                         if (!@file_put_contents(PH7_ROOT_PUBLIC . '_constants.php', $sConstantContent)) {
                             $aErrors[] = $LANG['no_public_writable'];
@@ -179,7 +185,7 @@ class InstallController extends Controller
     }
 
     /********************* STEP 4 *********************/
-    public function config_system()
+    public function config_system(): void
     {
         global $LANG;
 
@@ -220,16 +226,48 @@ class InstallController extends Controller
                             @chmod(PH7_PATH_APP_CONFIG, 0777);
                             $sConfigContent = file_get_contents(PH7_ROOT_INSTALL . 'data/configs/config.ini');
 
-                            $sConfigContent = str_replace('%bug_report_email%', $_SESSION['val']['bug_report_email'], $sConfigContent);
-                            $sConfigContent = str_replace('%ffmpeg_path%', clean_string($_SESSION['val']['ffmpeg_path']), $sConfigContent);
+                            $sConfigContent = str_replace(
+                                '%bug_report_email%',
+                                $_SESSION['val']['bug_report_email'],
+                                $sConfigContent
+                            );
+                            $sConfigContent = str_replace(
+                                '%ffmpeg_path%',
+                                clean_string($_SESSION['val']['ffmpeg_path']),
+                                $sConfigContent
+                            );
 
-                            $sConfigContent = str_replace('%db_type_name%', $_SESSION['db']['type_name'], $sConfigContent);
+                            $sConfigContent = str_replace(
+                                '%db_type_name%',
+                                $_SESSION['db']['type_name'],
+                                $sConfigContent
+                            );
                             $sConfigContent = str_replace('%db_type%', $_SESSION['db']['type'], $sConfigContent);
-                            $sConfigContent = str_replace('%db_hostname%', $_SESSION['db']['hostname'], $sConfigContent);
-                            $sConfigContent = str_replace('%db_username%', clean_string($_SESSION['db']['username']), $sConfigContent);
-                            $sConfigContent = str_replace('%db_password%', clean_string($_SESSION['db']['password']), $sConfigContent);
-                            $sConfigContent = str_replace('%db_name%', clean_string($_SESSION['db']['name']), $sConfigContent);
-                            $sConfigContent = str_replace('%db_prefix%', clean_string($_SESSION['db']['prefix']), $sConfigContent);
+                            $sConfigContent = str_replace(
+                                '%db_hostname%',
+                                $_SESSION['db']['hostname'],
+                                $sConfigContent
+                            );
+                            $sConfigContent = str_replace(
+                                '%db_username%',
+                                clean_string($_SESSION['db']['username']),
+                                $sConfigContent
+                            );
+                            $sConfigContent = str_replace(
+                                '%db_password%',
+                                clean_string($_SESSION['db']['password']),
+                                $sConfigContent
+                            );
+                            $sConfigContent = str_replace(
+                                '%db_name%',
+                                clean_string($_SESSION['db']['name']),
+                                $sConfigContent
+                            );
+                            $sConfigContent = str_replace(
+                                '%db_prefix%',
+                                clean_string($_SESSION['db']['prefix']),
+                                $sConfigContent
+                            );
                             $sConfigContent = str_replace('%db_charset%', $_SESSION['db']['charset'], $sConfigContent);
                             $sConfigContent = str_replace('%db_port%', $_SESSION['db']['port'], $sConfigContent);
 
@@ -241,27 +279,20 @@ class InstallController extends Controller
                             } else {
                                 if (!(
                                     $DB->getAttribute(\PDO::ATTR_DRIVER_NAME) === Database::DSN_MYSQL_PREFIX &&
-                                    version_compare($DB->getAttribute(\PDO::ATTR_SERVER_VERSION), PH7_REQUIRED_SQL_VERSION, '>='))
+                                    version_compare(
+                                        $DB->getAttribute(\PDO::ATTR_SERVER_VERSION),
+                                        PH7_REQUIRED_SQL_VERSION,
+                                        '>='
+                                    ))
                                 ) {
                                     $aErrors[] = $LANG['require_mysql_version'];
                                 } else {
                                     ignore_user_abort(true);
 
-                                    $aDumps = [
-                                        /** Game **/
-                                        // We need to install the Game before the "Core SQL" for foreign key reasons
-                                        'pH7_SchemaGame',
-                                        'pH7_DataGame',
-                                        /** Core (main SQL schema/data) **/
-                                        'pH7_Core'
-                                    ];
-
-                                    for ($iFileKey = 0, $iCount = count($aDumps); $iFileKey < $iCount; $iFileKey++) {
-                                        exec_query_file(
-                                            $DB,
-                                            PH7_ROOT_INSTALL . 'data/sql/' . $_SESSION['db']['type_name'] . '/' . $aDumps[$iFileKey] . '.sql'
-                                        );
-                                    }
+                                    exec_query_file(
+                                        $DB,
+                                        PH7_ROOT_INSTALL . 'data/sql/' . $_SESSION['db']['type_name'] . '/' . self::CORE_SQL_FILE
+                                    );
 
                                     // We finalise it by setting the correct permission to the config files
                                     $this->chmodConfigFiles();
@@ -272,7 +303,7 @@ class InstallController extends Controller
                                     redirect(PH7_URL_SLUG_INSTALL . 'config_site');
                                 }
                             }
-                        } catch (\PDOException $oE) {
+                        } catch (PDOException $oE) {
                             $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                         }
                     } else {
@@ -304,7 +335,7 @@ class InstallController extends Controller
     }
 
     /********************* STEP 5 *********************/
-    public function config_site()
+    public function config_site(): void
     {
         global $LANG;
 
@@ -329,11 +360,21 @@ class InstallController extends Controller
                             $_SESSION['val'][$sKey] = trim($sVal);
                         }
 
-                        if (validate_email($_SESSION['val']['admin_login_email']) && validate_email($_SESSION['val']['admin_email']) && validate_email($_SESSION['val']['admin_feedback_email']) && validate_email($_SESSION['val']['admin_return_email'])) {
+                        if (validate_email($_SESSION['val']['admin_login_email']) &&
+                            validate_email($_SESSION['val']['admin_email']) &&
+                            validate_email($_SESSION['val']['admin_feedback_email']) &&
+                            validate_email($_SESSION['val']['admin_return_email'])
+                        ) {
                             if (validate_username($_SESSION['val']['admin_username']) === 0) {
                                 if (validate_password($_SESSION['val']['admin_password']) === 0) {
-                                    if (validate_identical($_SESSION['val']['admin_password'], $_SESSION['val']['admin_passwords'])) {
-                                        if (!find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_username']) && !find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_first_name']) && !find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_last_name'])) {
+                                    if (validate_identical(
+                                        $_SESSION['val']['admin_password'],
+                                        $_SESSION['val']['admin_passwords']
+                                    )) {
+                                        if (!find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_username']) &&
+                                            !find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_first_name']) &&
+                                            !find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_last_name'])
+                                        ) {
                                             if (validate_name($_SESSION['val']['admin_first_name'])) {
                                                 if (validate_name($_SESSION['val']['admin_last_name'])) {
                                                     $this->initializeClasses();
@@ -343,40 +384,63 @@ class InstallController extends Controller
                                                         require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
 
                                                         $rStmt = $DB->prepare(
-                                                            sprintf(SqlQuery::ADD_ADMIN, $_SESSION['db']['prefix'] . DbTableName::ADMIN)
+                                                            sprintf(
+                                                                SqlQuery::ADD_ADMIN,
+                                                                $_SESSION['db']['prefix'] . DbTableName::ADMIN
+                                                            )
                                                         );
 
                                                         $sCurrentDate = date('Y-m-d H:i:s');
                                                         $rStmt->execute([
-                                                            'username' => $_SESSION['val']['admin_username'],
-                                                            'password' => Framework\Security\Security::hashPwd($_SESSION['val']['admin_password']),
-                                                            'email' => $_SESSION['val']['admin_login_email'],
-                                                            'firstName' => $_SESSION['val']['admin_first_name'],
-                                                            'lastName' => $_SESSION['val']['admin_last_name'],
-                                                            'joinDate' => $sCurrentDate,
-                                                            'lastActivity' => $sCurrentDate,
-                                                            'ip' => client_ip()
-                                                        ]);
+                                                                            'username' => $_SESSION['val']['admin_username'],
+                                                                            'password' => Framework\Security\Security::hashPwd(
+                                                                                $_SESSION['val']['admin_password']
+                                                                            ),
+                                                                            'email' => $_SESSION['val']['admin_login_email'],
+                                                                            'firstName' => $_SESSION['val']['admin_first_name'],
+                                                                            'lastName' => $_SESSION['val']['admin_last_name'],
+                                                                            'joinDate' => $sCurrentDate,
+                                                                            'lastActivity' => $sCurrentDate,
+                                                                            'ip' => client_ip()
+                                                                        ]);
 
                                                         $rStmt = $DB->prepare(
-                                                            sprintf(SqlQuery::UPDATE_SITE_NAME, $_SESSION['db']['prefix'] . DbTableName::SETTING)
+                                                            sprintf(
+                                                                SqlQuery::UPDATE_SITE_NAME,
+                                                                $_SESSION['db']['prefix'] . DbTableName::SETTING
+                                                            )
                                                         );
                                                         $rStmt->execute(['siteName' => $_SESSION['val']['site_name']]);
 
                                                         $rStmt = $DB->prepare(
-                                                            sprintf(SqlQuery::UPDATE_ADMIN_EMAIL, $_SESSION['db']['prefix'] . DbTableName::SETTING)
+                                                            sprintf(
+                                                                SqlQuery::UPDATE_ADMIN_EMAIL,
+                                                                $_SESSION['db']['prefix'] . DbTableName::SETTING
+                                                            )
                                                         );
-                                                        $rStmt->execute(['adminEmail' => $_SESSION['val']['admin_email']]);
+                                                        $rStmt->execute(
+                                                            ['adminEmail' => $_SESSION['val']['admin_email']]
+                                                        );
 
                                                         $rStmt = $DB->prepare(
-                                                            sprintf(SqlQuery::UPDATE_FEEDBACK_EMAIL, $_SESSION['db']['prefix'] . DbTableName::SETTING)
+                                                            sprintf(
+                                                                SqlQuery::UPDATE_FEEDBACK_EMAIL,
+                                                                $_SESSION['db']['prefix'] . DbTableName::SETTING
+                                                            )
                                                         );
-                                                        $rStmt->execute(['feedbackEmail' => $_SESSION['val']['admin_feedback_email']]);
+                                                        $rStmt->execute(
+                                                            ['feedbackEmail' => $_SESSION['val']['admin_feedback_email']]
+                                                        );
 
                                                         $rStmt = $DB->prepare(
-                                                            sprintf(SqlQuery::UPDATE_RETURN_EMAIL, $_SESSION['db']['prefix'] . DbTableName::SETTING)
+                                                            sprintf(
+                                                                SqlQuery::UPDATE_RETURN_EMAIL,
+                                                                $_SESSION['db']['prefix'] . DbTableName::SETTING
+                                                            )
                                                         );
-                                                        $rStmt->execute(['returnEmail' => $_SESSION['val']['admin_return_email']]);
+                                                        $rStmt->execute(
+                                                            ['returnEmail' => $_SESSION['val']['admin_return_email']]
+                                                        );
 
                                                         if (!empty($_POST['sample_data_request'])) {
                                                             $this->populateSampleUserData(
@@ -389,7 +453,7 @@ class InstallController extends Controller
                                                         $_SESSION['step5'] = 1;
 
                                                         redirect(PH7_URL_SLUG_INSTALL . 'niche');
-                                                    } catch (\PDOException $oE) {
+                                                    } catch (PDOException $oE) {
                                                         $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                                                     }
                                                 } else {
@@ -447,7 +511,7 @@ class InstallController extends Controller
     }
 
     /********************* STEP 6 *********************/
-    public function niche()
+    public function niche(): void
     {
         global $LANG;
 
@@ -461,18 +525,17 @@ class InstallController extends Controller
                     switch ($_POST['niche_submit']) {
                         case 'zendate':
                             $bUpdateNeeded = true;
-                            $sTheme = 'zendate';
+                            $sThemeName = 'zendate';
                             $aModUpdate = self::SOCIAL_MODS;
                             $aSettingUpdate = self::SOCIAL_SETTINGS;
                             break;
 
                         case 'datelove':
                             $bUpdateNeeded = true;
-                            $sTheme = 'datelove';
+                            $sThemeName = 'datelove';
                             $aModUpdate = self::DATING_MODS;
                             $aSettingUpdate = self::DATING_SETTINGS;
                             break;
-
                         // For 'base' niche (template), don't do anything. Just use the default settings already setup in the database
                     }
 
@@ -489,8 +552,8 @@ class InstallController extends Controller
 
                             $this->updateSettings($aSettingUpdate);
 
-                            $this->updateTheme($DB, $sTheme);
-                        } catch (\PDOException $oE) {
+                            $this->updateTheme($DB, $sThemeName);
+                        } catch (PDOException $oE) {
                             $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                         }
                     }
@@ -515,7 +578,7 @@ class InstallController extends Controller
     }
 
     /********************* STEP 7 *********************/
-    public function finish()
+    public function finish(): void
     {
         $sConstantsPath = PH7_ROOT_PUBLIC . '_constants.php';
         if (is_file($sConstantsPath)) {
@@ -534,7 +597,8 @@ class InstallController extends Controller
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['confirm_remove_install'])) {
                 remove_install_dir();
                 clearstatcache(); // We remove the files status cache as the "_install" folder doesn't exist anymore by now.
-                exit(header('Location: ' . PH7_URL_ROOT));
+                header('Location: ' . PH7_URL_ROOT);
+                exit;
             }
 
             $this->oView->assign('sept_number', 7);
@@ -547,7 +611,7 @@ class InstallController extends Controller
     /**
      * Send an email to say the installation is now done, and give some information...
      */
-    private function sendWelcomeEmail()
+    private function sendWelcomeEmail(): void
     {
         global $LANG;
 
@@ -565,7 +629,7 @@ class InstallController extends Controller
      *
      * @return bool
      */
-    private function canEmailBeSent()
+    private function canEmailBeSent(): bool
     {
         return !empty($_SESSION['val']['admin_login_email']) &&
             !empty($_SESSION['val']['admin_username']);
@@ -580,7 +644,7 @@ class InstallController extends Controller
      *
      * @return int|bool Returns the number of rows on success or FALSE on failure.
      */
-    private function updateMods(Database $oDb, $sModName, $sStatus)
+    private function updateMods(Database $oDb, string $sModName, string $sStatus)
     {
         $rStmt = $oDb->prepare(
             sprintf(SqlQuery::UPDATE_SYS_MODULE, $_SESSION['db']['prefix'] . DbTableName::SYS_MOD_ENABLED)
@@ -597,7 +661,7 @@ class InstallController extends Controller
      *
      * @return int|bool Returns the number of rows on success or FALSE on failure.
      */
-    private function updateTheme(Database $oDb, $sThemeName)
+    private function updateTheme(Database $oDb, string $sThemeName)
     {
         $rStmt = $oDb->prepare(
             sprintf(SqlQuery::UPDATE_THEME, $_SESSION['db']['prefix'] . DbTableName::SETTING)
@@ -611,7 +675,7 @@ class InstallController extends Controller
      *
      * @return void
      */
-    private function updateSettings(array $aParams)
+    private function updateSettings(array $aParams): void
     {
         // Initialize the site's database to get "\PH7\Framework\Mvc\Model\Engine\Db" class working (as it uses that DB and not the installer one)
         Framework\Mvc\Router\FrontController::getInstance()->_initializeDatabase();
@@ -633,7 +697,7 @@ class InstallController extends Controller
      *
      * @throws Framework\Translate\Exception
      */
-    private function populateSampleUserData($iMemberNumber, $iAffiliateNumber, $iSubscriberNumber)
+    private function populateSampleUserData(int $iMemberNumber, int $iAffiliateNumber, int $iSubscriberNumber): void
     {
         (new Framework\Translate\Lang)
             ->setDefaultLang('en_US')
@@ -699,7 +763,7 @@ class InstallController extends Controller
     /**
      * @return bool
      */
-    private function isAgreementsAgreed()
+    private function isAgreementsAgreed(): bool
     {
         return
             !empty($_POST['license_agreed']) &&
@@ -712,7 +776,7 @@ class InstallController extends Controller
      *
      * @return void
      */
-    private function chmodConfigFiles()
+    private function chmodConfigFiles(): void
     {
         @chmod(PH7_PATH_APP_CONFIG . 'config.ini', 0644);
         @chmod(PH7_ROOT_PUBLIC . '_constants.php', 0644);
@@ -723,7 +787,7 @@ class InstallController extends Controller
      *
      * @return void
      */
-    private function initializeClasses()
+    private function initializeClasses(): void
     {
         @require_once PH7_ROOT_PUBLIC . '_constants.php';
         @require_once PH7_PATH_APP . 'configs/constants.php';
@@ -739,14 +803,14 @@ class InstallController extends Controller
         App\Includes\Classes\Loader\Autoloader::getInstance()->init();
     }
 
-    private function removeSessions()
+    private function removeSessions(): void
     {
         $_SESSION = [];
         session_unset();
         session_destroy();
     }
 
-    private function removeCookies()
+    private function removeCookies(): void
     {
         $sCookieName = self::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang';
 
@@ -770,7 +834,7 @@ class InstallController extends Controller
      *
      * @return string
      */
-    private function loadImg()
+    private function loadImg(): string
     {
         global $LANG;
 

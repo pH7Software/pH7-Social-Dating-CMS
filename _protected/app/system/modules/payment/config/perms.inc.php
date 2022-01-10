@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Payment / Config
  */
 
@@ -38,6 +38,5 @@ return [
     'forum_access' => 1,
     'create_forum_topics' => 1,
     'answer_forum_topics' => 1,
-    'games_access' => 1,
     'member_site_access' => 1,
 ];

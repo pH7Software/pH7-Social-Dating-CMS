@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
 
@@ -150,11 +150,6 @@ class DataCoreModel extends Model
         return (new CommentCoreModel)->gets('video');
     }
 
-    public function getCommentsGames()
-    {
-        return (new CommentCoreModel)->gets('game');
-    }
-
     public function getRecipientCommentsProfiles($iRecipientId)
     {
         return (new CommentCoreModel)->read(
@@ -210,17 +205,6 @@ class DataCoreModel extends Model
         );
     }
 
-    public function getRecipientCommentsGames($iRecipientId)
-    {
-        return (new CommentCoreModel)->read(
-            $iRecipientId,
-            '1',
-            0,
-            static::MAX_ITEMS,
-            'game'
-        );
-    }
-
     public function getAlbumsPictures()
     {
         return (new PictureCoreModel)->album(
@@ -262,17 +246,6 @@ class DataCoreModel extends Model
             SearchCoreModel::CREATED,
             0,
             static::MAX_ITEMS
-        );
-    }
-
-    public function getGames()
-    {
-        return (new GameCoreModel)->get(
-            null,
-            null,
-            0,
-            static::MAX_ITEMS,
-            SearchCoreModel::ADDED_DATE
         );
     }
 }

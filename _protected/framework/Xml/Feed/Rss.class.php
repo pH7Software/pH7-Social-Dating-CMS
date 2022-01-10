@@ -5,11 +5,13 @@
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Xml / Feed
  * @version          1.3
  * @linkDomDocument  http://php.net/manual/class.domdocument.php
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Xml\Feed;
 
@@ -19,7 +21,7 @@ use DomDocument;
 
 class Rss extends DomDocument
 {
-    const DOCUMENT_VERSION = '2.0';
+    private const DOCUMENT_VERSION = '2.0';
 
     /**
      * RSS channel object.
@@ -28,14 +30,7 @@ class Rss extends DomDocument
      */
     private $oChannel;
 
-    /**
-     * Sets up the DOM environment.
-     *
-     * @param string $sTitle The site title
-     * @param string $sLink The link to the site
-     * @param string $sDescription The site description
-     */
-    public function __construct($sTitle, $sLink, $sDescription)
+    public function __construct(string $sTitle, string $sLink, string $sDescription)
     {
         // Call the parent constructor (DomDocument)
         parent::__construct();
@@ -63,7 +58,7 @@ class Rss extends DomDocument
      *
      * @return self
      */
-    public function addItem($aItems)
+    public function addItem($aItems): self
     {
         $oItem = $this->createElement('item');
 
@@ -113,7 +108,7 @@ class Rss extends DomDocument
     /**
      * Create the XML.
      *
-     * @return string The XML string
+     * @return string|false The XML string, or FALSE if an error occurred.
      */
     public function __toString()
     {

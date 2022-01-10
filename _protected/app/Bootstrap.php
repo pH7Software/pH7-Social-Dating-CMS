@@ -1,11 +1,13 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @link           https://ph7cms.com
  * @package        PH7 / App / Core
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -57,7 +59,7 @@ class Bootstrap
      *
      * @return void
      */
-    public function setTimezoneIfNotSet()
+    public function setTimezoneIfNotSet(): void
     {
         if (!ini_get('date.timezone')) {
             ini_set('date.timezone', PH7_DEFAULT_TIMEZONE);
@@ -74,7 +76,7 @@ class Bootstrap
      * @throws Except\UserException
      * @throws FileNotFoundException
      */
-    public function run()
+    public function run(): void
     {
         try {
             $this->loadInitFiles();
@@ -95,13 +97,8 @@ class Bootstrap
 
             // Initialize the FrontController, we are asking the front controller to process the HTTP request
             FrontController::getInstance()->runRouter();
-        /**  TODO: When pH7Builder will support PHP 7.1
         } catch (FileNotFoundException | Except\UserException $oE) {
-        //*/
-        } catch (FileNotFoundException $oE) {
             echo $oE->getMessage();
-        } catch (Except\UserException $oE) {
-            echo $oE->getMessage(); // Simple User Error with Exception
         } catch (Except\PH7Exception $oE) {
             Except\PH7Exception::launch($oE);
         } catch (Exception $oE) {
@@ -116,7 +113,7 @@ class Bootstrap
      *
      * @return void
      */
-    private function loadInitFiles()
+    private function loadInitFiles(): void
     {
         // Load Framework Classes
         require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
@@ -157,7 +154,7 @@ class Bootstrap
      *
      * @return void
      */
-    private function closeAppSession()
+    private function closeAppSession(): void
     {
         if (session_status() === PHP_SESSION_ACTIVE) {
             session_write_close();
@@ -169,7 +166,7 @@ class Bootstrap
      *
      * @return void HTML output.
      */
-    private function notRewriteModEnabledError()
+    private function notRewriteModEnabledError(): void
     {
         $sMsg = '<p class="warning"><a href="' . Kernel::SOFTWARE_WEBSITE . '">pH7Builder</a> requires Apache "mod_rewrite".</p>
         <p>Firstly, please <strong>make sure the ".htaccess" file has been uploaded to the root directory where pH7Builder is installed</strong>. If not, use your FTP client (such as Filezilla) and upload it again from pH7Builder unziped package and try again.<br />

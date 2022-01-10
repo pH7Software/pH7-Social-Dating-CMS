@@ -5,7 +5,7 @@
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @author         Steve Guidetti <http://net.tutsplus.com/tutorials/php/creating-a-twitter-oauth-application/>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Connect / Inc / Class
  * @version        0.9
  */
@@ -25,7 +25,8 @@ use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Util\Various;
-use Teapot\StatusCode;
+use PH7\Generator\Password as PasswordGenerator;
+use PH7\JustHttp\StatusCode;
 use tmhOAuth;
 use tmhUtilities;
 
@@ -205,7 +206,7 @@ class Twitter extends Api implements IApi
         $this->aUserInfo = [
             'email' => $aProfile['email'],
             'username' => $this->sUsername,
-            'password' => Various::genRndWord(Registration::DEFAULT_PASSWORD_LENGTH),
+            'password' => PasswordGenerator::generate(Registration::DEFAULT_PASSWORD_LENGTH),
             'first_name' => !empty($aProfile['given_name']) ? $aProfile['given_name'] : '',
             'last_name' => !empty($aProfile['family_name']) ? $aProfile['family_name'] : '',
             'sex' => $sSex,

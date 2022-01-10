@@ -4,13 +4,13 @@
  *
  * @author           Pierre-Henry Soria <hi@ph7.me>
  * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Install / Library
  */
 
 namespace PH7;
 
-defined('PH7') or die('Restricted access');
+defined('PH7') or exit('Restricted access');
 
 use PDO;
 
@@ -24,7 +24,11 @@ class Database extends PDO
 
     public function __construct(array $aParams)
     {
-        $aDriverOptions[PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES ' . $aParams['db_charset'];
+        $aDriverOptions = [];
+
+        if ($this->isMySQL($aParams['db_type'])) {
+            $aDriverOptions[PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES ' . $aParams['db_charset'];
+        }
 
         parent::__construct(
             "{$aParams['db_type']}:host={$aParams['db_hostname']};dbname={$aParams['db_name']};",
@@ -34,5 +38,17 @@ class Database extends PDO
         );
 
         $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+
+    /**
+     * Checks if the DBMS is MySQL.
+     *
+     * @param string $sDbType
+     *
+     * @return bool
+     */
+    private function isMySQL($sDbType)
+    {
+        return $sDbType === Database::DSN_MYSQL_PREFIX;
     }
 }

@@ -1,7 +1,7 @@
 --
 -- Author:        Pierre-Henry Soria <hello@ph7cms.com>
 -- Copyright:     (c) 2019, Pierre-Henry Soria. All Rights Reserved.
--- License:       GNU General Public License
+-- License:       MIT License
 --
 
 -- Fix wrong SQL type for expirationDays (when has more than '255' as value)

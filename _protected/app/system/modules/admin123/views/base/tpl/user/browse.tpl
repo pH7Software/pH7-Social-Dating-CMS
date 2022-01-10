@@ -140,7 +140,7 @@
     </div>
 </form>
 
-{if $total_users > UserMilestoneCore::MILLENARIAN_WEBSITE}
+{if $total_users > UserMilestoneCore::MILLENARIAN}
     {manual_include 'milestone_reached.inc.tpl'}
 {/if}
 

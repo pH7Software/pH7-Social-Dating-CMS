@@ -1,6 +1,6 @@
 # pH7 Social Dating CMS
 
-## ⚡️The 2021 <span style="text-decoration:underline">Killer Dating WebApp Builder</span>! ❤️
+## ⚡️The 2022 <span style="text-decoration:underline">Killer Dating WebApp Builder</span>! ❤️
 
 ### 🚀 The Most Secure, User-Friendly & Open Source Social Dating Web App Software
 
@@ -21,7 +21,7 @@ With **[pH7Builder](https://sourceforge.net/projects/ph7socialdating/files/lates
 
 ![Professional PHP Social Dating Builder Software](https://cloud.githubusercontent.com/assets/1325411/19419476/5475b32c-93d0-11e6-9756-8e7db8df129f.png)
 
-### 🤗 100% Owned by You ❤
+### 🤗 100% Owned by YOU ❤
 
 **Don't let your webapp be controlled by others! 🚀**
 
@@ -30,7 +30,31 @@ By choosing pH7Builder, you have complete control of your website and your users
 You get and own all data and files, hosted on your own server! ✌️
 
 
-## 👀 Software Overview
+👉 Convinced by the software? ☕️ Wanna **[offer me a coffee](https://www.buymeacoffee.com/ph7cms)**, and boost the software development at the same time?
+
+[![Buy Me A Coffee](static/img/buymeacoffee-logo.svg)](https://www.buymeacoffee.com/ph7cms)
+
+
+## 📖 Contents
+
+- [Software Overview](#-software-overview-)
+  - [Features](#-how-powerful-your-social-dating-webapp-will-be-)
+- [Requirements](#-requirements)
+- [Installation](#-installation)
+  - [Nginx Configuration (only for nginx server)](#-nginx-configuration)
+- [Translations](#-translations)
+- [Resources / Documentation](#-documentation)
+- [Contributing to the project](#-contributing)
+- [License](#%EF%B8%8F-license)
+- [Why pH7CMS is Eco-Friendly?](#-ph7cms-the-eco-friendly-cms-%EF%B8%8F)
+- [The toolsets I use](#-toolssoftware-used-to-develop-ph7cms)
+- [About Me](#-the-cook)
+  - [Contact Me](#-contact)
+  - [Hire Me?](#-hire-me-at-your-company)
+  - [Offer me a cup of tea?](#-offer-me-a-cup-of-tea-or-tea-bags-)
+
+
+## 👀 Software Overview 🎉
 
 **pH7 Dating CMS** is a **Social community CMS** based on a powerful modular OOP architecture, and using the **MVC** architecture (Model-View-Controller).
 
@@ -67,8 +91,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Chat Rooms
 * Chatroulette
 * Instant Messenger (IM module)
-* Games (with high quality and viral games installed)
-* Affiliate
+* In-built affiliate system (that encourages brand influencers/ambassadors to promote your dating platform)
 * Newsletter
 * Activity Streams
 * User Mentions (using the “@” symbol with the username such as [@pH-7](https://github.com/pH-7))
@@ -141,7 +164,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 
 ## ⚙ Requirements
 
-* **Application Server** PHP 5.6 or higher (recommended version: **PHP 7.0.4** or higher). Compatible with **PHP 8** as well! 🚀
+* **Application Server** PHP 7.4 or higher. Compatible with **PHP 8** as well! 🚀
 
 * **Database** MySQL/MariaDB 5.5.3 or higher.
 
@@ -162,7 +185,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 
   * Github:
     * Clone pH7Builder from Github `git clone git@github.com:pH7Software/pH7-Social-Dating-CMS.git`
-      (use `--depth=1` if you don't need the history)
+      (use `--depth=1` if you don't need the git history)
     * [Install Composer](https://getcomposer.org/doc/00-intro.md)
     * From a command line opened in the folder, run `composer install` to install pH7Builder's dependencies.
   * Composer:
@@ -314,10 +337,9 @@ Feel free to send me an email for any suggestions or feedback you may have 🤩,
 
 ## ⚖️ License
 
-**pH7Builder** is generously distributed under **Open Source, Free** License.
+**pH7Builder** is an open-source software generously distributed under the [MIT](https://opensource.org/licenses/MIT).
 
-License: [GNU General Public License 3](https://www.gnu.org/licenses/gpl.html) or later; See the *PH7.LICENSE.txt* and *PH7.COPYRIGHT.txt* files for more details.
-
+See the `PH7.LICENSE.txt` and `PH7.COPYRIGHT.txt` files for further details.
 
 
 ---

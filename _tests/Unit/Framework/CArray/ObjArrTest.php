@@ -2,19 +2,19 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Test / Unit / Framework / CArray
  */
 
 namespace PH7\Test\Unit\Framework\CArray;
 
 use PH7\Framework\CArray\ObjArr;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use stdClass;
 
-class ObjArrTest extends PHPUnit_Framework_TestCase
+class ObjArrTest extends TestCase
 {
-    public function testToObject()
+    public function testToObject(): void
     {
         $aData = ['one' => 'abc', 'two' => 'def', 'three' => 'ghi'];
 
@@ -29,7 +29,7 @@ class ObjArrTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($oExpected, $oResults);
     }
 
-    public function testToArray()
+    public function testToArray(): void
     {
         $oData = new stdClass();
         $oData->one = 'abc';

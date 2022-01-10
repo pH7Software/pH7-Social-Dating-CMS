@@ -4,7 +4,7 @@
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Connect / Inc / Class
  * @version        1.1
  */
@@ -27,6 +27,7 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Registry\Registry;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Util\Various;
+use PH7\Generator\Password as PasswordGenerator;
 
 class Google extends Api implements IApi
 {
@@ -121,7 +122,7 @@ class Google extends Api implements IApi
         $this->aUserInfo = [
             'email' => $aProfile['email'],
             'username' => $this->sUsername,
-            'password' => Various::genRndWord(Registration::DEFAULT_PASSWORD_LENGTH),
+            'password' => PasswordGenerator::generate(Registration::DEFAULT_PASSWORD_LENGTH),
             'first_name' => !empty($aProfile['given_name']) ? $aProfile['given_name'] : '',
             'last_name' => !empty($aProfile['family_name']) ? $aProfile['family_name'] : '',
             'sex' => $sSex,

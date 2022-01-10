@@ -5,7 +5,7 @@
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Model / Engine
  * @version          1.6
  */
@@ -22,12 +22,14 @@ use PDOStatement;
  */
 class Db
 {
-    const REQUIRED_SQL_VERSION = 5.0;
+    public const REQUIRED_SQL_VERSION = 5.0;
 
-    const ASC = 'ASC';
-    const DESC = 'DESC';
-    const RAND = 'RAND()';
-    const SET_DELIMITER = ',';
+    public const ASC = 'ASC';
+    public const DESC = 'DESC';
+    public const RAND = 'RAND()';
+    public const SET_DELIMITER = ',';
+
+    private const ERROR_MESSAGE = 'Error establishing a database connection';
 
     /** @var string */
     private static $sDsn;
@@ -101,7 +103,7 @@ class Db
                 self::$oDb = new PDO(self::$sDsn, self::$sUsername, self::$sPassword, self::$aDriverOptions);
                 self::$oDb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (Exception $oE) {
-                exit('Error Establishing a Database Connection');
+                exit(self::ERROR_MESSAGE);
             }
 
             static::checkMySqlVersion();

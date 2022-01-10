@@ -4,13 +4,13 @@
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Install / Library
  */
 
 namespace PH7;
 
-defined('PH7') or die('Restricted access');
+defined('PH7') or exit('Restricted access');
 
 class Language
 {
@@ -72,23 +72,17 @@ class Language
      *
      * @return string
      */
-    public function get()
+    public function get(): string
     {
         return $this->sLang;
     }
 
-    /**
-     * @return bool
-     */
-    private function doesUserLangExist()
+    private function doesUserLangExist(): bool
     {
         return !empty($_GET['l']) && is_file(PH7_ROOT_INSTALL . self::LANG_FOLDER_NAME . $_GET['l'] . PH7_DS . self::LANG_FILENAME);
     }
 
-    /**
-     * @return bool
-     */
-    private function doesCookieLangExist()
+    private function doesCookieLangExist(): bool
     {
         return isset($_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang']) &&
             is_file(PH7_ROOT_INSTALL . self::LANG_FOLDER_NAME . $_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang'] . PH7_DS . self::LANG_FILENAME);

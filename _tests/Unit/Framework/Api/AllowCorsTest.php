@@ -2,18 +2,20 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Test / Unit / Framework / Api
  */
+
+declare(strict_types=1);
 
 namespace PH7\Test\Unit\Framework\Api;
 
 use PH7\Framework\Api\AllowCors;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class AllowCorsTest extends PHPUnit_Framework_TestCase
+final class AllowCorsTest extends TestCase
 {
-    public function testCorsHeader()
+    public function testCorsHeader(): void
     {
         if (!function_exists('xdebug_get_headers')) {
             $this->markTestSkipped('Xdebug is required for this test. Please install it.');
@@ -27,7 +29,7 @@ class AllowCorsTest extends PHPUnit_Framework_TestCase
         $this->assertContains('Access-Control-Allow-Methods:GET, POST, PUT, DELETE, PATCH, OPTIONS', $aHeaders);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         header_remove();
     }

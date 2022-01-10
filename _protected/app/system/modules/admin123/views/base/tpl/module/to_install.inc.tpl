@@ -1,5 +1,5 @@
 {if !$oModule->showAvailableMods(Module::INSTALL)}
-    <h2 class="underline">{lang 'No modules available in your %software_name% repository'}</h2>
+    <h2 class="underline">{lang 'No 3rd-party modules available in your %software_name% repository'}</h2>
 {else}
     <h2 class="underline">{lang 'Module(s) available to install:'}</h2><br />
 

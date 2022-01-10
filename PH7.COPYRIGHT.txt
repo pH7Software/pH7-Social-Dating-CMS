@@ -3,10 +3,10 @@ Except certain files and libraries (JavaScript, PHP, or other) whose license and
 
 All the Copyright Notice, Links and Copyright Comments can never be removed from the source code!
 
-Copyright (C) 2011-2021  Pierre-Henry Soria
+Copyright (C) 2011-2022  Pierre-Henry Soria
 
 This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License, v3.
+it under the terms of the MIT license.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of

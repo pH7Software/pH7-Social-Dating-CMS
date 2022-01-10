@@ -5,7 +5,7 @@
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Http / Rest
  * @version          1.3
  */
@@ -18,7 +18,7 @@ use PH7\Framework\File\Stream;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Str\Str;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class Rest extends Http
 {

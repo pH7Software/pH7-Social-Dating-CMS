@@ -2,27 +2,29 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2017-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Test / Unit / App / System / Module / Api / Controller
  */
+
+declare(strict_types=1);
 
 namespace PH7\Test\Unit\App\System\Module\Api\Controller;
 
 use GuzzleHttp\Client;
 use PH7\Framework\Mvc\Router\Uri;
-use PHPUnit_Framework_TestCase;
+use PH7\JustHttp\StatusCode;
+use PHPUnit\Framework\TestCase;
 
-class MainControllerTest extends PHPUnit_Framework_TestCase
+class MainControllerTest extends TestCase
 {
-    /** @var Client */
-    protected $oClient;
+    protected Client $oClient;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->oClient = new Client(['exceptions' => false]);
     }
 
-    public function testDenyRequest()
+    public function testDenyRequest(): void
     {
         $oResponse = $this->oClient->get($this->getApiUrl('ping'), [
             'query' => [
@@ -31,10 +33,10 @@ class MainControllerTest extends PHPUnit_Framework_TestCase
             ]
         ]);
 
-        $this->assertSame(403, $oResponse->getStatusCode());
+        $this->assertSame(StatusCode::FORBIDDEN, $oResponse->getStatusCode());
     }
 
-    public function testWrongTestRequestMethod()
+    public function testWrongTestRequestMethod(): void
     {
         $oResponse = $this->oClient->post($this->getApiUrl('ping'), [
             'query' => [
@@ -43,19 +45,19 @@ class MainControllerTest extends PHPUnit_Framework_TestCase
             ]
         ]);
 
-        $this->assertSame(406, $oResponse->getStatusCode());
-        $this->assertNull(json_decode($oResponse->getBody()));
+        $this->assertSame(StatusCode::NOT_ACCEPTABLE, $oResponse->getStatusCode());
+        $this->assertNull(json_decode((string)$oResponse->getBody()));
     }
 
-    public function testNotFoundRequest()
+    public function testNotFoundRequest(): void
     {
         $oResponse = $this->oClient->get($this->getApiUrl('blablabla'));
 
         // If website is on development mode, it will return "500" code, otherwise, "404"
-        $this->assertRegExp('/404|500/', (string)$oResponse->getStatusCode());
+        $this->assertMatchesRegularExpression('/404|500/', (string)$oResponse->getStatusCode());
     }
 
-    public function testCorrectTestUri()
+    public function testCorrectTestUri(): void
     {
         $oResponse = $this->oClient->get($this->getApiUrl('ping'), [
             'query' => [
@@ -64,8 +66,8 @@ class MainControllerTest extends PHPUnit_Framework_TestCase
             ]
         ]);
 
-        $this->assertSame(200, $oResponse->getStatusCode());
-        $this->assertSame(['return' => 'Pong'], json_decode($oResponse->getBody(), true));
+        $this->assertSame(StatusCode::OK, $oResponse->getStatusCode());
+        $this->assertSame(['return' => 'Pong'], json_decode((string)$oResponse->getBody(), true));
     }
 
     /**
@@ -74,7 +76,7 @@ class MainControllerTest extends PHPUnit_Framework_TestCase
      *
      * @return string
      */
-    protected function getApiUrl($sAction, $sController = 'main')
+    protected function getApiUrl(string $sAction, string $sController = 'main'): string
     {
         return Uri::get('api', $sController, $sAction);
     }

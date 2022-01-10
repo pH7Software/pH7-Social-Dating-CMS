@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Video / Form / Processing
  */
 
@@ -10,7 +10,7 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Image\Image;
+use PH7\Framework\Image\FileStorage as FileStorageImage;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Router\Uri;
@@ -38,7 +38,7 @@ class AlbumFormProcess extends Form implements NudityDetectable
         }
 
         // Resizing and saving the video album thumbnail
-        $oPicture = new Image($_FILES['album']['tmp_name']);
+        $oPicture = new FileStorageImage($_FILES['album']['tmp_name']);
         if (!$oPicture->validate()) {
             \PFBC\Form::setError('form_video_album', Form::wrongImgFileTypeMsg());
         } else {

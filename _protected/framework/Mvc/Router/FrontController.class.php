@@ -7,7 +7,7 @@
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2011-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Router
  */
 
@@ -34,7 +34,7 @@ use PH7\Framework\Url\Header;
 use PH7\Framework\Url\Uri;
 use ReflectionException;
 use ReflectionMethod;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 /**
  * @class Singleton Class
@@ -304,7 +304,9 @@ final class FrontController
      */
     public function _initializeDatabase()
     {
-        $aDriverOptions[PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES ' . $this->oConfig->values['database']['charset'];
+        $aDriverOptions = [
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES ' . $this->oConfig->values['database']['charset']
+        ];
 
         /* DSN */
         Db::getInstance(

@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Note / Inc / Class
  */
 
@@ -14,7 +14,7 @@ use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\File\File;
 use PH7\Framework\File\Permission\PermissionException;
 use PH7\Framework\File\TooLargeException;
-use PH7\Framework\Image\Image;
+use PH7\Framework\Image\FileStorage as FileStorageImage;
 use PH7\Framework\Util\Various;
 use stdClass;
 
@@ -39,7 +39,7 @@ class Note extends WriteCore
      */
     public function setThumb(stdClass $oPost, NoteModel $oNoteModel, File $oFile)
     {
-        $oImage = new Image($_FILES['thumb']['tmp_name']);
+        $oImage = new FileStorageImage($_FILES['thumb']['tmp_name']);
         if (!$oImage->validate()) {
             \PFBC\Form::setError('form_note', Form::wrongImgFileTypeMsg());
         } else {

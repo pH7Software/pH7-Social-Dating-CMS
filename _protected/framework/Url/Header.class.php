@@ -5,10 +5,12 @@
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Url
  * @version          1.2
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Url;
 
@@ -17,7 +19,7 @@ defined('PH7') or exit('Restricted access');
 use PH7\Framework\Http\Http;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class Header
 {
@@ -57,9 +59,9 @@ class Header
      *
      * @return string The URL.
      */
-    public static function selfUrl()
+    public static function selfUrl(): string
     {
-        $sSecure = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') ? 's' : '';
+        $sSecure = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) === 'on') ? 's' : '';
         $sServerProtocol = strtolower($_SERVER['SERVER_PROTOCOL']);
         $sProtocol = substr($sServerProtocol, 0, strpos($sServerProtocol, PH7_SH)) . $sSecure;
 

@@ -2,117 +2,97 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Test / Unit / Framework / Mvc/ Model / Engine / Util
  */
+
+declare(strict_types=1);
 
 namespace PH7\Test\Unit\Framework\Mvc\Model\Engine\Util;
 
 use PH7\DbTableName;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mvc\Model\Engine\Util\Various as DbVarious;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class VariousTest extends PHPUnit_Framework_TestCase
+class VariousTest extends TestCase
 {
     /**
-     * @param string $sTable
-     * @param string $sExpectedTable
-     *
      * @dataProvider tablesProvider
      */
-    public function testCorrectTable($sTable, $sExpectedTable)
+    public function testCorrectTable(string $sTable, string $sExpectedTable): void
     {
         $this->assertSame($sExpectedTable, DbVarious::checkTable($sTable));
     }
 
-    /**
-     * @expectedException \PH7\Framework\Error\CException\PH7InvalidArgumentException
-     */
-    public function testIncorrectTable()
+    public function testIncorrectTable(): void
     {
+        $this->expectException(PH7InvalidArgumentException::class);
+
         DbVarious::checkTable('incorrect_table');
     }
 
     /**
-     * @param string $sTable
-     * @param string $sExpectedTable
-     *
      * @dataProvider modelTablesProvider
      */
-    public function testCorrectModelTable($sTable, $sExpectedTable)
+    public function testCorrectModelTable(string $sTable, string $sExpectedTable): void
     {
         $this->assertSame($sExpectedTable, DbVarious::checkModelTable($sTable));
     }
 
-    /**
-     * @expectedException \PH7\Framework\Error\CException\PH7InvalidArgumentException
-     */
-    public function testIncorrectModelTable()
+    public function testIncorrectModelTable(): void
     {
+        $this->expectException(PH7InvalidArgumentException::class);
+
         DbVarious::checkModelTable('incorrect_table');
     }
 
     /**
-     * @param string $sExpectedTable
-     * @param string $sMod
-     *
      * @dataProvider modsToTablesProvider
      */
-    public function testCorrectModToTable($sMod, $sExpectedTable)
+    public function testCorrectModToTable(string $sMod, string $sExpectedTable): void
     {
         $this->assertSame($sExpectedTable, DbVarious::convertModToTable($sMod));
     }
 
-    /**
-     * @expectedException \PH7\Framework\Error\CException\PH7InvalidArgumentException
-     */
-    public function testIncorrectModToTable()
+    public function testIncorrectModToTable(): void
     {
+        $this->expectException(PH7InvalidArgumentException::class);
+
         DbVarious::convertModToTable('wrong_module');
     }
 
     /**
-     * @param string $sTable
-     * @param string $sExpectedMod
-     *
      * @dataProvider tablesToModsProvider
      */
-    public function testCorrectTableToMod($sTable, $sExpectedMod)
+    public function testCorrectTableToMod(string $sTable, string $sExpectedMod): void
     {
         $this->assertSame($sExpectedMod, DbVarious::convertTableToMod($sTable));
     }
 
-    /**
-     * @expectedException \PH7\Framework\Error\CException\PH7InvalidArgumentException
-     */
-    public function testIncorrectTableToMod()
+    public function testIncorrectTableToMod(): void
     {
+        $this->expectException(PH7InvalidArgumentException::class);
+
         DbVarious::convertTableToMod('wrong_table');
     }
 
     /**
-     * @param string $sTable
-     * @param string $sExpectedColumnId
-     *
      * @dataProvider tablesToIdsProvider
      */
-    public function testCorrectTableToId($sTable, $sExpectedColumnId)
+    public function testCorrectTableToId(string $sTable, string $sExpectedColumnId): void
     {
         $this->assertSame($sExpectedColumnId, DbVarious::convertTableToId($sTable));
     }
 
-    /**
-     * @expectedException \PH7\Framework\Error\CException\PH7InvalidArgumentException
-     */
-    public function testIncorrectTableToId()
+    public function testIncorrectTableToId(): void
     {
+        $this->expectException(PH7InvalidArgumentException::class);
+
         DbVarious::convertTableToId('wrong_table');
     }
 
-    /**
-     * @return array
-     */
-    public function tablesProvider()
+    public function tablesProvider(): array
     {
         return [
             [DbTableName::MEMBER, 'members'],
@@ -120,7 +100,6 @@ class VariousTest extends PHPUnit_Framework_TestCase
             [DbTableName::ALBUM_VIDEO, 'albums_videos'],
             [DbTableName::PICTURE, 'pictures'],
             [DbTableName::VIDEO, 'videos'],
-            [DbTableName::GAME, 'games'],
             [DbTableName::BLOG, 'blogs'],
             [DbTableName::NOTE, 'notes'],
             [DbTableName::AD, 'ads'],
@@ -128,10 +107,7 @@ class VariousTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function modelTablesProvider()
+    public function modelTablesProvider(): array
     {
         return [
             [DbTableName::MEMBER, 'members'],
@@ -145,10 +121,7 @@ class VariousTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function modsToTablesProvider()
+    public function modsToTablesProvider(): array
     {
         return [
             ['user', 'members'],
@@ -158,10 +131,7 @@ class VariousTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function tablesToModsProvider()
+    public function tablesToModsProvider(): array
     {
         return [
             [DbTableName::MEMBER, 'user'],
@@ -171,10 +141,7 @@ class VariousTest extends PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function tablesToIdsProvider()
+    public function tablesToIdsProvider(): array
     {
         return [
             [DbTableName::MEMBER, 'profileId'],
@@ -184,7 +151,6 @@ class VariousTest extends PHPUnit_Framework_TestCase
             [DbTableName::ALBUM_VIDEO, 'albumId'],
             [DbTableName::BLOG, 'blogId'],
             [DbTableName::NOTE, 'noteId'],
-            [DbTableName::GAME, 'gameId'],
             [DbTableName::FORUM_TOPIC, 'topicId']
         ];
     }

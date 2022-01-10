@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Form
  */
 
@@ -38,16 +38,14 @@ class BannerForm
 
         $oSysVar = new SysVar;
         foreach ($oAds as $oRow) {
-            // Begin ads div tags
-            $oForm->addElement(new HTMLExternal('<div id="ad_' . $oRow->adsId . '">'));
+            $oForm->addElement(new HTMLExternal('<div id="ad_' . $oRow->adsId . '">')); // Begin ads div tag
 
             $oForm->addElement(new Hidden('id_ads', $oRow->adsId));
             $oForm->addElement(new HTMLExternal('<h2>' . $oRow->name . '</h2>'));
             $oForm->addElement(new HTMLExternal('<p>' . t('Preview Banner:') . '</p>'));
             $oForm->addElement(new HTMLExternal('<div>' . $oSysVar->parse($oRow->code) . '</div>'));
             $oForm->addElement(new Textarea(t('Banner:'), 'code', ['readonly' => 'readonly', 'onclick' => 'this.select()', 'value' => $oSysVar->parse($oRow->code)]));
-            // End ads div tags
-            $oForm->addElement(new HTMLExternal('</div>'));
+            $oForm->addElement(new HTMLExternal('</div>')); // End ads div tag
             $oForm->addElement(new HTMLExternal('<br /><hr /><br />'));
         }
         $oForm->render();

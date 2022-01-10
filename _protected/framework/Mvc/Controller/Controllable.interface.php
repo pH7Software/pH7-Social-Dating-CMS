@@ -2,10 +2,12 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Controller
  * @version          1.0
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Mvc\Controller;
 
@@ -21,7 +23,7 @@ interface Controllable
      *
      * @return void
      */
-    public function output($sFile);
+    public function output($sFile): void;
 
     /**
      * Set a Not Found Error Message with HTTP 404 Code Status.
@@ -31,5 +33,5 @@ interface Controllable
      *
      * @return void Quits the page with the exit() function
      */
-    public function displayPageNotFound($sMsg = '', $b404Status = true);
+    public function displayPageNotFound(string $sMsg = '', bool $b404Status = true): void;
 }

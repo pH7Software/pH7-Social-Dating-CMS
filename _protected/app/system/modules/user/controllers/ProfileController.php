@@ -4,12 +4,13 @@
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Controller
  */
 
 namespace PH7;
 
+use PH7\Datatype\Type;
 use PH7\Framework\Analytics\Statistic;
 use PH7\Framework\Date\Various as VDate;
 use PH7\Framework\Http\Http;
@@ -17,7 +18,7 @@ use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 use stdClass;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class ProfileController extends ProfileBaseController
 {
@@ -33,7 +34,7 @@ class ProfileController extends ProfileBaseController
         parent::__construct();
 
         // Set the Profile username
-        $this->sUsername = $this->httpRequest->get('username', 'string');
+        $this->sUsername = $this->httpRequest->get('username', Type::STRING);
 
         $this->setProfileId($this->oUserModel->getId(null, $this->sUsername));
         $this->setVisitorId($this->session->get('member_id'));

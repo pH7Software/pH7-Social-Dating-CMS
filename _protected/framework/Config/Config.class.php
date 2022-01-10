@@ -1,14 +1,15 @@
 <?php
 /**
- * @title            Config Class
  * @desc             Loading and management config files.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @copyright        (c) 2011-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Config
  * @version          1.2
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Config;
 
@@ -68,13 +69,13 @@ class Config implements Configurable
     /**
      * {@inheritdoc}
      */
-    public function load($sFile)
+    public function load(string $sFile): bool
     {
         if (!is_file($sFile)) {
             return false;
         }
 
-        $aContents = parse_ini_file($sFile, true);
+        $aContents = $this->parseIniFile($sFile);
         $this->values = array_merge($this->values, $aContents);
 
         return true;
@@ -83,7 +84,7 @@ class Config implements Configurable
     /**
      * {@inheritdoc}
      */
-    public function getValue($sKey)
+    public function getValue(string $sKey): string
     {
         return $this->values[$sKey];
     }
@@ -93,7 +94,7 @@ class Config implements Configurable
      *
      * @throws KeyAlreadyExistsException
      */
-    public function setValue($sKey, $sValue)
+    public function setValue(string $sKey, string $sValue): void
     {
         if (!array_key_exists($sKey, $this->values)) {
             $this->values[$sKey] = $sValue;
@@ -102,22 +103,12 @@ class Config implements Configurable
         }
     }
 
-    /**
-     * Set Production Mode site.
-     *
-     * @return void
-     */
-    public function setProductionMode()
+    public function setProductionMode(): void
     {
         $this->setMode(self::PRODUCTION_MODE);
     }
 
-    /**
-     * Set Development Mode site.
-     *
-     * @return void
-     */
-    public function setDevelopmentMode()
+    public function setDevelopmentMode(): void
     {
         $this->setMode(self::DEVELOPMENT_MODE);
     }
@@ -125,16 +116,16 @@ class Config implements Configurable
     /**
      * Set a Mode (Generic method).
      *
-     * @param string $sReplace The Mode site.
+     * @param string $sReplace The environment mode.
      *
      * @see Config::setProductionMode()
      * @see Config::setDevelopmentMode()
      *
      * @return void
      */
-    private function setMode($sReplace)
+    private function setMode(string $sReplaceMode): void
     {
-        $sSearch = $sReplace === self::DEVELOPMENT_MODE ? self::PRODUCTION_MODE : self::DEVELOPMENT_MODE;
+        $sSearch = $sReplaceMode === self::DEVELOPMENT_MODE ? self::PRODUCTION_MODE : self::DEVELOPMENT_MODE;
 
         $oFile = new File;
 
@@ -143,7 +134,7 @@ class Config implements Configurable
 
         $sFileContents = $oFile->getFile($this->sConfigAppFilePath);
         $sSearchContents = 'environment = ' . $sSearch;
-        $sReplaceContents = 'environment = ' . $sReplace;
+        $sReplaceContents = 'environment = ' . $sReplaceMode;
         $sNewContents = str_replace($sSearchContents, $sReplaceContents, $sFileContents);
         $oFile->putFile($this->sConfigAppFilePath, $sNewContents);
 
@@ -158,16 +149,21 @@ class Config implements Configurable
      *
      * @return void
      */
-    private function read()
+    private function read(): void
     {
         /** Load configuration files **/
         // 1) Load app config file
-        $this->values = parse_ini_file($this->sConfigAppFilePath, true);
+        $this->values = $this->parseIniFile($this->sConfigAppFilePath);
         // 2) Now we have to use array_merge() function, so we do with the Config::load() method for loading system config file
         $this->load($this->sConfigSysFilePath);
 
         /* The config constants */
         define('PH7_DEFAULT_THEME', $this->values['application']['default_theme']);
         define('PH7_DEFAULT_LANG', $this->values['application']['default_lang']);
+    }
+
+    private function parseIniFile(string $sFile)
+    {
+        return parse_ini_file($sFile, true, INI_SCANNER_TYPED);
     }
 }

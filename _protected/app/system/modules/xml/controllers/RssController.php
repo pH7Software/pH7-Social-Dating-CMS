@@ -2,12 +2,15 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Xml / Controller
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
+use PH7\Datatype\Type;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Xml\Exception as XmlException;
 use PH7\Framework\Xml\Link;
@@ -19,7 +22,7 @@ class RssController extends MainController implements XmlControllable
         parent::__construct();
     }
 
-    public function index()
+    public function index(): void
     {
         $this->sTitle = t('RSS Feed List');
         $this->view->page_title = $this->sTitle;
@@ -38,16 +41,16 @@ class RssController extends MainController implements XmlControllable
         $this->output();
     }
 
-    public function xmlLink()
+    public function xmlLink(): void
     {
         parent::xmlLink();
 
         $this->view->display('rss_links.xml.tpl');
     }
 
-    public function xmlRouter()
+    public function xmlRouter(): void
     {
-        $sAction = $this->httpRequest->get('action');
+        $sAction = $this->httpRequest->get('action', Type::STRING);
         $mParam = $this->httpRequest->get('param');
         $this->generateXmlRouter($sAction, $mParam);
         $this->sXmlType = 'rss';
@@ -65,7 +68,7 @@ class RssController extends MainController implements XmlControllable
      *
      * @return void
      */
-    private function generateRssCommentRouter($sAction, $mParam)
+    private function generateRssCommentRouter(string $sAction, $mParam): void
     {
         switch ($sAction) {
             case 'blog':
@@ -73,17 +76,11 @@ class RssController extends MainController implements XmlControllable
             case 'forum-topic':
                 $this->sAction = $sAction;
                 break;
-
             case 'comment-profile':
             case 'comment-blog':
             case 'comment-note':
             case 'comment-picture':
             case 'comment-video':
-            case 'comment-game':
-                $this->view->setCaching(false); // We disable the cache since they are dynamic pages managed by the router
-                $this->sAction = 'comment.inc';
-                break;
-
             case 'forum-post':
                 if ($this->isParamValid($mParam)) {
                     $this->view->setCaching(false); // We disable the cache since they are dynamic pages managed by the router

@@ -5,7 +5,7 @@
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Security / Validate
  */
 
@@ -23,7 +23,7 @@ use PH7\Framework\Math\Measure\Year as YearMeasure;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Str\Str;
 use PH7\UserCore;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class Validate
 {
@@ -45,7 +45,7 @@ class Validate
     const DEF_MIN_AGE = 18;
     const DEF_MAX_AGE = 99;
 
-    const VALID_HTTP_WEBSITE_RESPONSES = [
+    private const VALID_HTTP_WEBSITE_RESPONSES = [
         StatusCode::OK,
         StatusCode::MOVED_PERMANENTLY,
         StatusCode::FOUND

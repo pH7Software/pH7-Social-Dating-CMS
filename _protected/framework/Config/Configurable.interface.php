@@ -1,8 +1,8 @@
 <?php
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Config
  */
 
@@ -18,7 +18,7 @@ interface Configurable
      *
      * @return bool Returns FALSE if the file doesn't exist, TRUE otherwise.
      */
-    public function load($sFile);
+    public function load(string $sFile): bool;
 
     /**
      * Get a config option by key.
@@ -27,7 +27,7 @@ interface Configurable
      *
      * @return string
      */
-    public function getValue($sKey);
+    public function getValue(string $sKey): string;
 
     /**
      * Set dynamically a value to config data.
@@ -37,5 +37,5 @@ interface Configurable
      *
      * @return void
      */
-    public function setValue($sKey, $sValue);
+    public function setValue(string $sKey, string $sValue): void;
 }

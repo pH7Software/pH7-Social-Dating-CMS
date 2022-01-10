@@ -2,9 +2,11 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Test / Unit / App / System / Core / Classes
  */
+
+declare(strict_types=1);
 
 namespace PH7\Test\Unit\App\System\Core\Classes;
 
@@ -14,12 +16,11 @@ use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Session\Session;
 use PH7\ValidateSiteCore;
 use Phake;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class ValidateSiteCoreTest extends PHPUnit_Framework_TestCase
+class ValidateSiteCoreTest extends TestCase
 {
-    /** @var ValidateSiteCore */
-    private $oValidateSite;
+    private ValidateSiteCore $oValidateSite;
 
     protected function setUp(): void
     {
@@ -27,7 +28,7 @@ class ValidateSiteCoreTest extends PHPUnit_Framework_TestCase
         $this->oValidateSite = new ValidateSiteCore($oSession);
     }
 
-    public function testInjectAssetSuggestionBoxFiles()
+    public function testInjectAssetSuggestionBoxFiles(): void
     {
         $oDesign = Phake::mock(Design::class);
 

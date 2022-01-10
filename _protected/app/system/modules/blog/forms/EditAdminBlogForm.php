@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Blog / Form
  */
 
@@ -16,6 +16,7 @@ use PFBC\Element\HTMLExternal;
 use PFBC\Element\Radio;
 use PFBC\Element\Textarea;
 use PFBC\Element\Textbox;
+use PH7\Datatype\Type;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\CSRF\Token;
@@ -37,7 +38,7 @@ class EditAdminBlogForm
 
         $oBlogModel = new BlogModel;
 
-        $iBlogId = (new Http)->get('id', 'int');
+        $iBlogId = (new Http)->get('id', Type::INTEGER);
         $sPostId = $oBlogModel->getPostId($iBlogId);
         $oPost = $oBlogModel->readPost($sPostId);
 

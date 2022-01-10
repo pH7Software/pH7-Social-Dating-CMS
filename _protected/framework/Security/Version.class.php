@@ -1,11 +1,10 @@
 <?php
 /**
- * @title            Version Class
  * @desc             Version Information for the security of packaged software.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Security
  */
 
@@ -27,7 +26,7 @@ final class Version
 
     const CACHE_GROUP = 'str/security';
 
-    const LATEST_VERSION_URL = 'https://xml.ph7cms.com/software-info.xml';
+    const LATEST_VERSION_URL = 'https://xml.ph7builder.com/software-info.xml';
     const VERSION_PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
     const FRAMEWORK_TAG_NAME = 'ph7';
     const PACKAGE_TAG_NAME = 'ph7builder';
@@ -40,7 +39,7 @@ final class Version
      * VERSION NAMES:
      *
      * 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO",
-     * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa", 12.* was "PHS", 14.* was "pKb", 15.* was ABSOLUTE™ and v16 is ACIDIC
+     * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa", 12.* was "PHS", 14.* was "pKb", 15.* was ABSOLUTE™ and v16/v17 is ACIDIC
      */
     const KERNEL_VERSION_NAME = 'ACIDIC';
 
@@ -50,9 +49,9 @@ final class Version
      *
      * More details: https://ph7cms.com/new-versioning-system/
      */
-    const KERNEL_VERSION = '16.2.2';
+    const KERNEL_VERSION = '17.0.0';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELEASE_DATE = '2021-07-30';
+    const KERNEL_RELEASE_DATE = '2021-11-24';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7Builder.com';
