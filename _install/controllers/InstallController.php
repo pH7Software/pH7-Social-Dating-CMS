@@ -29,7 +29,6 @@ class InstallController extends Controller
      * Enable/Disable Modules according to the chosen niche
      */
     private const SOCIAL_MODS = [
-        'connect' => '0',
         'affiliate' => '0',
         'chat' => '0',
         'chatroulette' => '0',
@@ -55,7 +54,6 @@ class InstallController extends Controller
     ];
 
     private const DATING_MODS = [
-        'connect' => '0',
         'affiliate' => '1',
         'chat' => '1',
         'chatroulette' => '1',

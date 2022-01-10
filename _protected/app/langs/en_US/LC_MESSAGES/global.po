@@ -4815,56 +4815,6 @@ msgstr ""
 msgid "Oops! You don't have the permission to update the comment."
 msgstr ""
 
-#: _protected/app/system/modules/connect/controllers/AdminController.php:15
-msgid "Config Universal Login - API Keys"
-msgstr ""
-
-#: _protected/app/system/modules/connect/controllers/MainController.php:37
-msgid "Welcome to Universal Login"
-msgstr ""
-
-#: _protected/app/system/modules/connect/controllers/MainController.php:39
-msgid "Universal Login, Use the service Facebook, Twitter, Outlook, Microsoft, Google, or other account to login on the social dating site %site_name%"
-msgstr ""
-
-#: _protected/app/system/modules/connect/controllers/MainController.php:40
-msgid "connect, login, Register, universal login, Facebook, Twitter, Outlook, Microsoft, Google, social network, dating site, email"
-msgstr ""
-
-#: _protected/app/system/modules/connect/controllers/MainController.php:48
-msgid "You are successfully registered!"
-msgstr ""
-
-#: _protected/app/system/modules/connect/controllers/MainController.php:49
-#: _protected/app/system/modules/connect/controllers/MainController.php:74
-msgid "Loading..."
-msgstr ""
-
-#: _protected/app/system/modules/connect/controllers/MainController.php:62
-msgid "Signing in..."
-msgstr ""
-
-#: _protected/app/system/modules/connect/controllers/MainController.php:111
-msgid "The %0% API is incorrect."
-msgstr ""
-
-#: _protected/app/system/modules/connect/inc/class/Api.php:86
-msgid "Hi %0%, welcome to %site_name%"
-msgstr ""
-
-#: _protected/app/system/modules/connect/inc/class/Facebook.php:114
-#: _protected/app/system/modules/connect/inc/class/Google.php:91
-#: _protected/app/system/modules/connect/inc/class/Microsoft.php:91
-#: _protected/app/system/modules/connect/inc/class/Twitter.php:100
-msgid "You have now been registered! %0%"
-msgstr ""
-
-#: _protected/app/system/modules/connect/inc/class/Facebook.php:127
-#: _protected/app/system/modules/connect/inc/class/Microsoft.php:103
-#: _protected/app/system/modules/connect/inc/class/Twitter.php:113
-msgid "Oops! An error has occurred. Please try again later."
-msgstr ""
-
 #: _protected/app/system/modules/contact/controllers/ContactController.php:23
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/accountbottom_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/infobottom_menu.inc.cpl.php:19
@@ -4874,7 +4824,6 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/userbottom_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/adminbottom_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/homebottom_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/connect_35f0edcc582717793663d723f2cb335c/base/mainbottom_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/cool-profile-page_24c864680ee1bf87a84b989b035a6c21/base/mainbottom_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/error_440d7b9b5d26e425e8c5f919d93855c4/base/httpbottom_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/mainbottom_menu.inc.cpl.php:19
@@ -5866,7 +5815,6 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/usertop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admintop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/hometop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/connect_35f0edcc582717793663d723f2cb335c/base/maintop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/cool-profile-page_24c864680ee1bf87a84b989b035a6c21/base/maintop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/error_440d7b9b5d26e425e8c5f919d93855c4/base/httptop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/maintop_menu.inc.cpl.php:19
@@ -5894,7 +5842,6 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/usertop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admintop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/hometop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/connect_35f0edcc582717793663d723f2cb335c/base/maintop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/cool-profile-page_24c864680ee1bf87a84b989b035a6c21/base/maintop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/error_440d7b9b5d26e425e8c5f919d93855c4/base/httptop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/main/msg.inc.cpl.php:19
@@ -7569,10 +7516,6 @@ msgstr ""
 #: _protected/app/system/modules/user/forms/EditWallForm.php:37
 #: _protected/app/system/modules/user/forms/WallForm.php:33
 msgid "Content:"
-msgstr ""
-
-#: _protected/app/system/modules/user/forms/JoinForm.php:42
-msgid "Universal Login"
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/JoinForm.php:45
