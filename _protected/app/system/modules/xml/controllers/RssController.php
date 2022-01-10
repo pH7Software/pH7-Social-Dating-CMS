@@ -6,8 +6,11 @@
  * @package        PH7 / App / System / Module / Xml / Controller
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
+use PH7\Datatype\Type;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Xml\Exception as XmlException;
 use PH7\Framework\Xml\Link;
@@ -19,7 +22,7 @@ class RssController extends MainController implements XmlControllable
         parent::__construct();
     }
 
-    public function index()
+    public function index(): void
     {
         $this->sTitle = t('RSS Feed List');
         $this->view->page_title = $this->sTitle;
@@ -38,16 +41,16 @@ class RssController extends MainController implements XmlControllable
         $this->output();
     }
 
-    public function xmlLink()
+    public function xmlLink(): void
     {
         parent::xmlLink();
 
         $this->view->display('rss_links.xml.tpl');
     }
 
-    public function xmlRouter()
+    public function xmlRouter(): void
     {
-        $sAction = $this->httpRequest->get('action');
+        $sAction = $this->httpRequest->get('action', Type::STRING);
         $mParam = $this->httpRequest->get('param');
         $this->generateXmlRouter($sAction, $mParam);
         $this->sXmlType = 'rss';
@@ -65,7 +68,7 @@ class RssController extends MainController implements XmlControllable
      *
      * @return void
      */
-    private function generateRssCommentRouter($sAction, $mParam)
+    private function generateRssCommentRouter(string $sAction, $mParam): void
     {
         switch ($sAction) {
             case 'blog':

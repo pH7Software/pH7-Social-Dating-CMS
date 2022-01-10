@@ -244,7 +244,7 @@ class Http extends \PH7\Framework\Http\Http
         }
 
         $this->bStrip = $bStrip;
-        $this->setType($this->aGet, $sKey, $sParam);
+        $this->checkType($this->aGet, $sKey, $sParam);
 
         return $this->cleanData($this->aGet, $sKey, $sParam);
     }
@@ -278,7 +278,7 @@ class Http extends \PH7\Framework\Http\Http
         }
 
         $this->bStrip = $bStrip;
-        $this->setType($this->aPost, $sKey, $sParam);
+        $this->checkType($this->aPost, $sKey, $sParam);
 
         return $this->cleanData($this->aPost, $sKey, $sParam);
     }
@@ -359,7 +359,7 @@ class Http extends \PH7\Framework\Http\Http
     }
 
     /**
-     * Set the type of a request variable.
+     * Set the type of a request variable of eligible.
      *
      * @param array $aType Request variable type ($_GET, $_POST, $_COOKIE, $_REQUEST).
      * @param string $sKey
@@ -367,7 +367,7 @@ class Http extends \PH7\Framework\Http\Http
      *
      * @return void
      */
-    protected function setType(&$aType, $sKey, $sType)
+    protected function checkType(&$aType, $sKey, $sType)
     {
         if (!empty($sType) && $sType !== self::ONLY_XSS_CLEAN) {
             settype($aType[$sKey], $sType);

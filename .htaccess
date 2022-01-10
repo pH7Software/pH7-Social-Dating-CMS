@@ -670,7 +670,6 @@ ErrorDocument 505 /error/http/index?code=505
     RewriteCond %{REQUEST_FILENAME} !-d
 
     RewriteRule ^(.*)$ index.php?$1 [L,QSA]
-    #RewriteRule ^(.*)$ init.ph7?$1 [L,QSA]
 
 
     # Start Bad Bot Prvention
@@ -833,7 +832,3 @@ ErrorDocument 505 /error/http/index?code=505
 AddType video/webm .webm
 AddType video/mp4 .mp4
 AddType application/rss+xml .xml
-
-# Personal pH7CMS extension file
-#AddType application/x-httpd-php .ph7
-#DirectoryIndex init.ph7

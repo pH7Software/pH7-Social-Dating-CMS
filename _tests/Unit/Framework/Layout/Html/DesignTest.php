@@ -13,41 +13,38 @@ namespace PH7\Test\Unit\Framework\Layout\Html;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Session\Session;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class DesignTest extends PHPUnit_Framework_TestCase
+class DesignTest extends TestCase
 {
-    /** @var Design */
-    private $oDesign;
+    private Design $oDesign;
 
-    /** @var Session */
-    private $oSession;
+    private Session $oSession;
 
-    /** @var Config */
-    private $oConfig;
+    private Config $oConfig;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->oConfig = Config::getInstance();
         $this->oSession = new Session;
         $this->oDesign = new Design;
     }
 
-    public function testSetFlashMsgWithDefaultType()
+    public function testSetFlashMsgWithDefaultType(): void
     {
         $this->oDesign->setFlashMsg('Hey You!');
         $this->assertSame('Hey You!', $this->oSession->get('flash_msg'));
         $this->assertSame('success', $this->oSession->get('flash_type'));
     }
 
-    public function testSetFlashMsgWithErrorType()
+    public function testSetFlashMsgWithErrorType(): void
     {
         $this->oDesign->setFlashMsg('Wrong Message!', Design::ERROR_TYPE);
         $this->assertSame('Wrong Message!', $this->oSession->get('flash_msg'));
         $this->assertSame('danger', $this->oSession->get('flash_type'));
     }
 
-    public function testSetFlashMsgWithWrongType()
+    public function testSetFlashMsgWithWrongType(): void
     {
         $this->oDesign->setFlashMsg('blabla', 'wrong_type');
         $this->assertSame('blabla', $this->oSession->get('flash_msg'));

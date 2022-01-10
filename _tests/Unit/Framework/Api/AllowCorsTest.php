@@ -6,14 +6,16 @@
  * @package          PH7 / Test / Unit / Framework / Api
  */
 
+declare(strict_types=1);
+
 namespace PH7\Test\Unit\Framework\Api;
 
 use PH7\Framework\Api\AllowCors;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class AllowCorsTest extends PHPUnit_Framework_TestCase
+final class AllowCorsTest extends TestCase
 {
-    public function testCorsHeader()
+    public function testCorsHeader(): void
     {
         if (!function_exists('xdebug_get_headers')) {
             $this->markTestSkipped('Xdebug is required for this test. Please install it.');
@@ -27,7 +29,7 @@ class AllowCorsTest extends PHPUnit_Framework_TestCase
         $this->assertContains('Access-Control-Allow-Methods:GET, POST, PUT, DELETE, PATCH, OPTIONS', $aHeaders);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         header_remove();
     }

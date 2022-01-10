@@ -3,14 +3,14 @@
  * @title            Spanish Language File
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2013-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2013-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Lang / ES
  */
 
 namespace PH7;
 
-$LANG = array(
+$LANG = [
     'lang' => 'es',
     'charset' => 'utf-8',
     'lang_name' => 'Español',
@@ -132,4 +132,4 @@ $LANG = array(
     'admin_url' => 'URL del panel de administración',
     'powered' => 'Desarrollado por',
     'loading' => 'Cargando ...',
-);
+];

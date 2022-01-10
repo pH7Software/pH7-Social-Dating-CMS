@@ -6,49 +6,51 @@
  * @package          PH7 / Test / Unit / Framework / Server
  */
 
+declare(strict_types=1);
+
 namespace PH7\Test\Unit\Framework\Server;
 
 use PH7\Framework\Server\Server;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class ServerTest extends PHPUnit_Framework_TestCase
+final class ServerTest extends TestCase
 {
-    public function testGetServerName()
+    public function testGetServerName(): void
     {
         $_SERVER['SERVER_NAME'] = 'ph7cms.com';
 
         $this->assertSame('ph7cms.com', Server::getName());
     }
 
-    public function testItIsLocalHost()
+    public function testItIsLocalHost(): void
     {
         $_SERVER['SERVER_NAME'] = '127.0.0.1';
 
         $this->assertTrue(Server::isLocalHost());
     }
 
-    public function testItIsNotLocalHost()
+    public function testItIsNotLocalHost(): void
     {
         $_SERVER['HTTP_HOST'] = 'ph7cms.com';
 
         $this->assertFalse(Server::isLocalHost());
     }
 
-    public function testGetUndefinedServerKey()
+    public function testGetUndefinedServerKey(): void
     {
         $sActual = Server::getVar('UNDEFINED');
 
         $this->assertNull($sActual);
     }
 
-    public function testGetUndefinedServerKeyWithDefaultValue()
+    public function testGetUndefinedServerKeyWithDefaultValue(): void
     {
         $sActual = Server::getVar('UNDEFINED', 'My default value');
 
         $this->assertSame('My default value', $sActual);
     }
 
-    public function testGetDefinedServerKey()
+    public function testGetDefinedServerKey(): void
     {
         $_SERVER['SOMETHING'] = "<b>I'm the value</b>";
         $sActual = Server::getVar('SOMETHING');

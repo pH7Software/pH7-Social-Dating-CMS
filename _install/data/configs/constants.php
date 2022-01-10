@@ -1,9 +1,9 @@
 <?php
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
- * @link             https://ph7cms.com
+ * @link             https://ph7builder.com
  * @package          PH7
  */
 
@@ -11,9 +11,9 @@ namespace PH7;
 
 defined('PH7') or exit(header('Location: ./'));
 
-############ VARIABLES ############
+########## VARIABLES ##########
 
-###### URL ######
+##### URL #####
 // Check the SSL protocol compatibility
 $sUrlProtocol = (
     (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) === 'on') ||
@@ -34,23 +34,23 @@ $sDomain_cookie = '.' . str_replace('www.', '', $sDomain);
 $sPhp_self = str_replace('\\', '', dirname(htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES))); // Remove backslashes for Windows compatibility
 
 
-############ CONSTANTS ############
+########## CONSTANTS ##########
 
-###### OTHER ######
+##### OTHER #####
 define('PH7_DS', DIRECTORY_SEPARATOR);
 define('PH7_PS', PATH_SEPARATOR);
 define('PH7_SH', '/'); // SlasH
 define('PH7_SELF', (substr($sPhp_self, -1) !== PH7_SH) ? $sPhp_self . PH7_SH : $sPhp_self);
 define('PH7_RELATIVE', PH7_SELF);
 
-###### PATH ######
+##### PATH #####
 define('PH7_PATH_ROOT', __DIR__ . PH7_DS);
 define('PH7_PATH_PROTECTED', '%path_protected%');
 define('PH7_PATH_APP', PH7_PATH_PROTECTED . 'app/');
 define('PH7_PATH_FRAMEWORK', PH7_PATH_PROTECTED . 'framework/');
 define('PH7_PATH_LIBRARY', PH7_PATH_PROTECTED . 'library/');
 
-###### URL (PUBLIC) ######
+##### URL (PUBLIC) #####
 define('PH7_URL_PROT', $sUrlProtocol);
 define('PH7_DOMAIN', $sDomain); // URL domain
 define('PH7_DOMAIN_COOKIE', $sDomain_cookie);

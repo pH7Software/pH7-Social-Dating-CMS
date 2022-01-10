@@ -1,14 +1,16 @@
 <?php
 /**
- * @title            InstallController Class
- *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Install / Controller
  */
 
+declare(strict_types=1);
+
 namespace PH7;
+
+use PDOException;
 
 defined('PH7') or exit('Restricted access');
 
@@ -17,16 +19,16 @@ defined('PH7') or exit('Restricted access');
 
 class InstallController extends Controller
 {
-    const CORE_SQL_FILE = 'pH7_Core.sql';
+    private const CORE_SQL_FILE = 'pH7_Core.sql';
 
-    const TOTAL_MEMBERS_SAMPLE = 16;
-    const TOTAL_AFFILIATES_SAMPLE = 1;
-    const TOTAL_SUBSCRIBERS_SAMPLE = 1;
+    private const TOTAL_MEMBERS_SAMPLE = 16;
+    private const TOTAL_AFFILIATES_SAMPLE = 1;
+    private const TOTAL_SUBSCRIBERS_SAMPLE = 1;
 
     /**
      * Enable/Disable Modules according to the chosen niche
      */
-    const SOCIAL_MODS = [
+    private const SOCIAL_MODS = [
         'affiliate' => '0',
         'chat' => '0',
         'chatroulette' => '0',
@@ -51,7 +53,7 @@ class InstallController extends Controller
         'sms-verification' => '0'
     ];
 
-    const DATING_MODS = [
+    private const DATING_MODS = [
         'affiliate' => '1',
         'chat' => '1',
         'chatroulette' => '1',
@@ -79,14 +81,14 @@ class InstallController extends Controller
     /**
      * Enable/Disable Site Settings according to the chosen niche
      */
-    const SOCIAL_SETTINGS = [
+    private const SOCIAL_SETTINGS = [
         'navbarType' => 'default',
         'socialMediaWidgets' => '1',
         'requireRegistrationAvatar' => '0',
         'isUserAgeRangeField' => '0'
     ];
 
-    const DATING_SETTINGS = [
+    private const DATING_SETTINGS = [
         'navbarType' => 'inverse',
         'socialMediaWidgets' => '0',
         'requireRegistrationAvatar' => '1',
@@ -95,7 +97,7 @@ class InstallController extends Controller
 
 
     /********************* STEP 1 *********************/
-    public function index()
+    public function index(): void
     {
         $aLangs = get_dir_list(PH7_ROOT_INSTALL . Language::LANG_FOLDER_NAME);
         $aLangsList = include PH7_ROOT_INSTALL . 'inc/lang_list.inc.php';
@@ -112,7 +114,7 @@ class InstallController extends Controller
     }
 
     /********************* STEP 2 *********************/
-    public function license()
+    public function license(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['license_agreements_submit'])) {
             if ($this->isAgreementsAgreed()) {
@@ -129,7 +131,7 @@ class InstallController extends Controller
     }
 
     /********************* STEP 3 *********************/
-    public function config_path()
+    public function config_path(): void
     {
         global $LANG;
 
@@ -181,7 +183,7 @@ class InstallController extends Controller
     }
 
     /********************* STEP 4 *********************/
-    public function config_system()
+    public function config_system(): void
     {
         global $LANG;
 
@@ -299,7 +301,7 @@ class InstallController extends Controller
                                     redirect(PH7_URL_SLUG_INSTALL . 'config_site');
                                 }
                             }
-                        } catch (\PDOException $oE) {
+                        } catch (PDOException $oE) {
                             $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                         }
                     } else {
@@ -331,7 +333,7 @@ class InstallController extends Controller
     }
 
     /********************* STEP 5 *********************/
-    public function config_site()
+    public function config_site(): void
     {
         global $LANG;
 
@@ -449,7 +451,7 @@ class InstallController extends Controller
                                                         $_SESSION['step5'] = 1;
 
                                                         redirect(PH7_URL_SLUG_INSTALL . 'niche');
-                                                    } catch (\PDOException $oE) {
+                                                    } catch (PDOException $oE) {
                                                         $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                                                     }
                                                 } else {
@@ -507,7 +509,7 @@ class InstallController extends Controller
     }
 
     /********************* STEP 6 *********************/
-    public function niche()
+    public function niche(): void
     {
         global $LANG;
 
@@ -521,14 +523,14 @@ class InstallController extends Controller
                     switch ($_POST['niche_submit']) {
                         case 'zendate':
                             $bUpdateNeeded = true;
-                            $sTheme = 'zendate';
+                            $sThemeName = 'zendate';
                             $aModUpdate = self::SOCIAL_MODS;
                             $aSettingUpdate = self::SOCIAL_SETTINGS;
                             break;
 
                         case 'datelove':
                             $bUpdateNeeded = true;
-                            $sTheme = 'datelove';
+                            $sThemeName = 'datelove';
                             $aModUpdate = self::DATING_MODS;
                             $aSettingUpdate = self::DATING_SETTINGS;
                             break;
@@ -548,8 +550,8 @@ class InstallController extends Controller
 
                             $this->updateSettings($aSettingUpdate);
 
-                            $this->updateTheme($DB, $sTheme);
-                        } catch (\PDOException $oE) {
+                            $this->updateTheme($DB, $sThemeName);
+                        } catch (PDOException $oE) {
                             $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                         }
                     }
@@ -574,7 +576,7 @@ class InstallController extends Controller
     }
 
     /********************* STEP 7 *********************/
-    public function finish()
+    public function finish(): void
     {
         $sConstantsPath = PH7_ROOT_PUBLIC . '_constants.php';
         if (is_file($sConstantsPath)) {
@@ -592,9 +594,9 @@ class InstallController extends Controller
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['confirm_remove_install'])) {
                 remove_install_dir();
-                clearstatcache(
-                ); // We remove the files status cache as the "_install" folder doesn't exist anymore by now.
-                exit(header('Location: ' . PH7_URL_ROOT));
+                clearstatcache(); // We remove the files status cache as the "_install" folder doesn't exist anymore by now.
+                header('Location: ' . PH7_URL_ROOT);
+                exit;
             }
 
             $this->oView->assign('sept_number', 7);
@@ -607,7 +609,7 @@ class InstallController extends Controller
     /**
      * Send an email to say the installation is now done, and give some information...
      */
-    private function sendWelcomeEmail()
+    private function sendWelcomeEmail(): void
     {
         global $LANG;
 
@@ -625,7 +627,7 @@ class InstallController extends Controller
      *
      * @return bool
      */
-    private function canEmailBeSent()
+    private function canEmailBeSent(): bool
     {
         return !empty($_SESSION['val']['admin_login_email']) &&
             !empty($_SESSION['val']['admin_username']);
@@ -640,7 +642,7 @@ class InstallController extends Controller
      *
      * @return int|bool Returns the number of rows on success or FALSE on failure.
      */
-    private function updateMods(Database $oDb, $sModName, $sStatus)
+    private function updateMods(Database $oDb, string $sModName, string $sStatus)
     {
         $rStmt = $oDb->prepare(
             sprintf(SqlQuery::UPDATE_SYS_MODULE, $_SESSION['db']['prefix'] . DbTableName::SYS_MOD_ENABLED)
@@ -657,7 +659,7 @@ class InstallController extends Controller
      *
      * @return int|bool Returns the number of rows on success or FALSE on failure.
      */
-    private function updateTheme(Database $oDb, $sThemeName)
+    private function updateTheme(Database $oDb, string $sThemeName)
     {
         $rStmt = $oDb->prepare(
             sprintf(SqlQuery::UPDATE_THEME, $_SESSION['db']['prefix'] . DbTableName::SETTING)
@@ -671,7 +673,7 @@ class InstallController extends Controller
      *
      * @return void
      */
-    private function updateSettings(array $aParams)
+    private function updateSettings(array $aParams): void
     {
         // Initialize the site's database to get "\PH7\Framework\Mvc\Model\Engine\Db" class working (as it uses that DB and not the installer one)
         Framework\Mvc\Router\FrontController::getInstance()->_initializeDatabase();
@@ -693,7 +695,7 @@ class InstallController extends Controller
      *
      * @throws Framework\Translate\Exception
      */
-    private function populateSampleUserData($iMemberNumber, $iAffiliateNumber, $iSubscriberNumber)
+    private function populateSampleUserData(int $iMemberNumber, int $iAffiliateNumber, int $iSubscriberNumber): void
     {
         (new Framework\Translate\Lang)
             ->setDefaultLang('en_US')
@@ -759,7 +761,7 @@ class InstallController extends Controller
     /**
      * @return bool
      */
-    private function isAgreementsAgreed()
+    private function isAgreementsAgreed(): bool
     {
         return
             !empty($_POST['license_agreed']) &&
@@ -772,7 +774,7 @@ class InstallController extends Controller
      *
      * @return void
      */
-    private function chmodConfigFiles()
+    private function chmodConfigFiles(): void
     {
         @chmod(PH7_PATH_APP_CONFIG . 'config.ini', 0644);
         @chmod(PH7_ROOT_PUBLIC . '_constants.php', 0644);
@@ -783,7 +785,7 @@ class InstallController extends Controller
      *
      * @return void
      */
-    private function initializeClasses()
+    private function initializeClasses(): void
     {
         @require_once PH7_ROOT_PUBLIC . '_constants.php';
         @require_once PH7_PATH_APP . 'configs/constants.php';
@@ -799,14 +801,14 @@ class InstallController extends Controller
         App\Includes\Classes\Loader\Autoloader::getInstance()->init();
     }
 
-    private function removeSessions()
+    private function removeSessions(): void
     {
         $_SESSION = [];
         session_unset();
         session_destroy();
     }
 
-    private function removeCookies()
+    private function removeCookies(): void
     {
         $sCookieName = self::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang';
 
@@ -830,7 +832,7 @@ class InstallController extends Controller
      *
      * @return string
      */
-    private function loadImg()
+    private function loadImg(): string
     {
         global $LANG;
 

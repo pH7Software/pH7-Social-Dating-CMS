@@ -12,7 +12,7 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 use PH7\JustHttp\StatusCode;
 
-defined('PH7') or die('Restricted access');
+defined('PH7') or exit('Restricted access');
 
 class Permission extends PermissionCore
 {

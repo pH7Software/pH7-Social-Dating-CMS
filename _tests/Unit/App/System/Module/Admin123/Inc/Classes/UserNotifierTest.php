@@ -18,9 +18,9 @@ use PH7\Framework\Mail\Mailable;
 use PH7\UserNotifier;
 use Phake;
 use Phake_IMock;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class UserNotifierTest extends PHPUnit_Framework_TestCase
+final class UserNotifierTest extends TestCase
 {
     const VALID_EMAIL = 'hi@ph7.me';
 
@@ -33,14 +33,14 @@ class UserNotifierTest extends PHPUnit_Framework_TestCase
     /** @var Templatable|Phake_IMock */
     private $oViewMock;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->oMailMock = Phake::mock(Mailable::class);
         $this->oViewMock = Phake::mock(Templatable::class);
         $this->oUserNotifier = new UserNotifier($this->oMailMock, $this->oViewMock);
     }
 
-    public function testSendApprovedContent()
+    public function testSendApprovedContent(): void
     {
         $this->oUserNotifier
             ->setUserEmail(self::VALID_EMAIL)
@@ -50,7 +50,7 @@ class UserNotifierTest extends PHPUnit_Framework_TestCase
         $this->assertSendMethodsCalled();
     }
 
-    public function testSendDisapprovedContent()
+    public function testSendDisapprovedContent(): void
     {
         $this->oUserNotifier
             ->setUserEmail(self::VALID_EMAIL)
@@ -60,7 +60,7 @@ class UserNotifierTest extends PHPUnit_Framework_TestCase
         $this->assertSendMethodsCalled();
     }
 
-    public function testThrowsExceptionWhenContentStatusIsMissing()
+    public function testThrowsExceptionWhenContentStatusIsMissing(): void
     {
         $this->expectException(PH7RuntimeException::class);
 
@@ -69,7 +69,7 @@ class UserNotifierTest extends PHPUnit_Framework_TestCase
             ->send();
     }
 
-    public function testThrowsExceptionWhenEmailIsNull()
+    public function testThrowsExceptionWhenEmailIsNull(): void
     {
         $this->expectException(InvalidEmailException::class);
 
@@ -79,7 +79,7 @@ class UserNotifierTest extends PHPUnit_Framework_TestCase
             ->send();
     }
 
-    public function testThrowsExceptionWhenEmailIsInvalid()
+    public function testThrowsExceptionWhenEmailIsInvalid(): void
     {
         $this->expectException(InvalidEmailException::class);
 
@@ -89,7 +89,7 @@ class UserNotifierTest extends PHPUnit_Framework_TestCase
             ->send();
     }
 
-    private function assertSendMethodsCalled()
+    private function assertSendMethodsCalled(): void
     {
         Phake::inOrder(
             Phake::verify($this->oViewMock)->parseMail(

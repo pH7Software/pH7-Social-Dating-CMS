@@ -1,0 +1,17 @@
+{
+  "require": {
+    "smarty/smarty": "^4.0"
+  },
+  "autoload": {
+    "additionalFileExtensions": [
+      ".class.php"
+    ],
+    "classmap": [
+      "controllers",
+      "library"
+    ],
+    "files": [
+      "inc/fns/misc.php"
+    ]
+  }
+}

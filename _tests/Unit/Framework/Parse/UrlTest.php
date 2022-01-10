@@ -6,14 +6,16 @@
  * @package          PH7 / Test / Unit / Framework / Config
  */
 
+declare(strict_types=1);
+
 namespace PH7\Test\Unit\Framework\Parse;
 
 use PH7\Framework\Parse\Url as UrlParser;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class UrlTest extends PHPUnit_Framework_TestCase
+final class UrlTest extends TestCase
 {
-    public function testClean()
+    public function testClean(): void
     {
         $sUrl = 'https://ph7cms.com/my-route & the new_2£POST!';
         $sExpected = 'https//ph7cmscom/my-route-&-the-new_2-post';
@@ -22,20 +24,14 @@ class UrlTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param string $sActualUrl
-     * @param string $sExpectedUrl
-     *
      * @dataProvider urlsNamesProvider
      */
-    public function testName($sActualUrl, $sExpectedUrl)
+    public function testName(string $sActualUrl, string $sExpectedUrl): void
     {
         $this->assertSame($sExpectedUrl, UrlParser::name($sActualUrl));
     }
 
-    /**
-     * @return array
-     */
-    public function urlsNamesProvider()
+    public function urlsNamesProvider(): array
     {
         return [
             ['https://ph7cms.com', 'Ph7cms'],

@@ -304,7 +304,9 @@ final class FrontController
      */
     public function _initializeDatabase()
     {
-        $aDriverOptions[PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES ' . $this->oConfig->values['database']['charset'];
+        $aDriverOptions = [
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES ' . $this->oConfig->values['database']['charset']
+        ];
 
         /* DSN */
         Db::getInstance(

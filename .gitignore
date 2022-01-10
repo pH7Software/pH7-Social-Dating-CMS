@@ -1,5 +1,7 @@
 _install/data/caches/smarty_cache/*
 _install/data/caches/smarty_compile/*
+_install/vendor/*
+_install/composer.lock
 data/*
 _constants.php
 _protected/app/configs/config.ini

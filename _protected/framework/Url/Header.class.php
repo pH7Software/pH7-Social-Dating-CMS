@@ -10,6 +10,8 @@
  * @version          1.2
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Url;
 
 defined('PH7') or exit('Restricted access');
@@ -57,9 +59,9 @@ class Header
      *
      * @return string The URL.
      */
-    public static function selfUrl()
+    public static function selfUrl(): string
     {
-        $sSecure = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') ? 's' : '';
+        $sSecure = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) === 'on') ? 's' : '';
         $sServerProtocol = strtolower($_SERVER['SERVER_PROTOCOL']);
         $sProtocol = substr($sServerProtocol, 0, strpos($sServerProtocol, PH7_SH)) . $sSecure;
 

@@ -6,34 +6,33 @@
  * @package          PH7 / Test / Unit / Framework / Navigation
  */
 
+declare(strict_types=1);
+
 namespace PH7\Test\Unit\Framework\Navigation;
 
 use PH7\Framework\Navigation\Browser;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class BrowserTest extends PHPUnit_Framework_TestCase
+final class BrowserTest extends TestCase
 {
     /**
      * @dataProvider defaultBrowserHexCodesProvider
      */
-    public function testFoundDefaultBrowserHexCode($sHexCode)
+    public function testFoundDefaultBrowserHexCode(string $sHexCode): void
     {
         $bResult = Browser::isDefaultBrowserHexCodeFound($sHexCode);
 
         $this->assertTrue($bResult);
     }
 
-    public function testNotFoundDefaultBrowserHexCode()
+    public function testNotFoundDefaultBrowserHexCode(): void
     {
         $bResult = Browser::isDefaultBrowserHexCodeFound('#FFF');
 
         $this->assertFalse($bResult);
     }
 
-    /**
-     * @return array
-     */
-    public function defaultBrowserHexCodesProvider()
+    public function defaultBrowserHexCodesProvider(): array
     {
         return [
             ['#000'],

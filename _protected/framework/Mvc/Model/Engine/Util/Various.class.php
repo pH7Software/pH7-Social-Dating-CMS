@@ -9,6 +9,8 @@
  * @package          PH7 / Framework / Mvc / Model / Engine / Util
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Mvc\Model\Engine\Util;
 
 defined('PH7') or exit('Restricted access');
@@ -36,7 +38,7 @@ class Various
      *
      * @return bool|array Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
      */
-    public static function execQueryFile($sSqlFile)
+    public static function execQueryFile(string $sSqlFile)
     {
         if (!is_file($sSqlFile)) {
             return false;
@@ -60,7 +62,7 @@ class Various
      *
      * @throws PH7InvalidArgumentException If the table is not valid.
      */
-    public static function convertModToTable($Mod)
+    public static function convertModToTable(string $Mod): string
     {
         switch ($Mod) {
             case 'user':
@@ -97,7 +99,7 @@ class Various
      *
      * @throws PH7InvalidArgumentException If the table is not valid.
      */
-    public static function convertTableToMod($sTable)
+    public static function convertTableToMod(string $sTable): string
     {
         switch ($sTable) {
             case DbTableName::MEMBER:
@@ -134,7 +136,7 @@ class Various
      *
      * @throws PH7InvalidArgumentException If the table is not valid.
      */
-    public static function convertTableToId($sTable)
+    public static function convertTableToId(string $sTable): string
     {
         switch ($sTable) {
             case DbTableName::MEMBER:
@@ -192,7 +194,7 @@ class Various
      *
      * @throws PH7InvalidArgumentException If the table is not valid.
      */
-    public static function checkTable($sTable)
+    public static function checkTable(string $sTable): string
     {
         switch ($sTable) {
             case DbTableName::MEMBER:
@@ -224,7 +226,7 @@ class Various
      * @see self::launchErr()
      *
      */
-    public static function checkModelTable($sTable)
+    public static function checkModelTable(string $sTable): string
     {
         switch ($sTable) {
             case DbTableName::MEMBER:
@@ -258,17 +260,12 @@ class Various
      *
      * @throws PH7InvalidArgumentException Explanatory message.
      */
-    public static function launchErr($sTable)
+    public static function launchErr(string $sTable)
     {
         throw new PH7InvalidArgumentException(sprintf('Invalid data table: "%s"!', $sTable));
     }
 
-    /**
-     * @param string $sSqlContent
-     *
-     * @return string
-     */
-    public static function renameTablePrefix($sSqlContent)
+    public static function renameTablePrefix(string $sSqlContent): string
     {
         return str_replace(PH7_TABLE_PREFIX, Db::prefix(), $sSqlContent);
     }

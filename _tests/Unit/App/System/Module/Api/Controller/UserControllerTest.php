@@ -8,9 +8,9 @@
 
 namespace PH7\Test\Unit\App\System\Module\Api\Controller;
 
-class UserControllerTest extends MainControllerTest
+final class UserControllerTest extends MainControllerTest
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
     }

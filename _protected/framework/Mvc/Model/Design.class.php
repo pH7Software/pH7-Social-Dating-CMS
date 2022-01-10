@@ -4,7 +4,7 @@
  * @desc             Design Model for the HTML contents.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Model
  */
@@ -28,7 +28,7 @@ use PH7\Framework\Translate\Lang;
 
 class Design extends HtmlDesign
 {
-    protected const CACHE_STATIC_GROUP = 'db/design/static';
+    public const CACHE_STATIC_GROUP = 'db/design/static';
     protected const CACHE_TIME = 172800;
 
     /** @var Cache */
