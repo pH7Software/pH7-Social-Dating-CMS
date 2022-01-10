@@ -139,7 +139,6 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Message templates
 * Multi Themes and many personalizable
 * Includes top HTML5 features
-* Allow to sign in to your site with Facebook, Google and Twitter thanks to pH7Builder's Connect module
 * Invite Friends
 * Social Bookmark (Social Media Sharing Buttons)
 * Anti-Scam and Anti-Fraud Tools
