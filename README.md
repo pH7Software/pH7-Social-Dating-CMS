@@ -330,9 +330,9 @@ Finally, **please consider using green Web hosting** (which use Green Power supp
 * Sometimes, when working on Mac, **Sequel Pro** is used to lookup easily at a database.
 
 
-## 🖋 Contact
+## 🖋 Contact (Suggestions / Feedback)
 
-Feel free to send me an email for any suggestions or feedback you may have 🤩, at *hello {AT} ph7cms {D0T} com*
+Feel free to send me an email at *hello {AT} ph7cms {D0T} com*
 
 
 ## ⚖️ License
