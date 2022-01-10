@@ -2,7 +2,7 @@
 /**
  * @title Front Controller Class
  *
- * This class is used to instantiate the Controller and the action with the MVC pattern, in short it is the heart of pH7CMS's software.
+ * This class is used to instantiate the Controller and the action with the MVC pattern, in short it is the heart of pH7Builder's software.
  * It can also retrieve the URL roads, initialize the languages​​, themes, database, etc.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
@@ -872,7 +872,7 @@ final class FrontController
      */
     private function indexFileRouter()
     {
-        // The following code will be useless if pH7CMS will be able to work without mod_rewrite
+        // The following code will be useless if pH7Builder will be able to work without mod_rewrite
         if ($this->oHttpRequest->currentUrl() === PH7_URL_ROOT . static::INDEX_FILE) {
             $this->notFound('In "production" mode, it simulates "404 page not found" if the index.php filename is called, to avoid disclosing the language index filename (e.g. for security reasons...).');
         }

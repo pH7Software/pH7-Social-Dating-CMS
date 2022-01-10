@@ -21,7 +21,7 @@ class WebsiteChecker
     private const REQUIRED_CONFIG_FILE_NAME = '_constants.php';
     private const INSTALL_FOLDER_NAME = '_install/';
 
-    private const PHP_VERSION_ERROR_MESSAGE = 'ERROR: Your current PHP version is %s. pH7CMS requires PHP %s or newer.<br /> Please ask your Web host to upgrade PHP to %s or newer.';
+    private const PHP_VERSION_ERROR_MESSAGE = 'ERROR: Your current PHP version is %s. pH7Builder requires PHP %s or newer.<br /> Please ask your Web host to upgrade PHP to %s or newer.';
     private const NO_CONFIG_FOUND_ERROR_MESSAGE = 'CONFIG FILE NOT FOUND! If you want to make a new installation, please re-upload _install/ folder and clear your database.';
 
     /**

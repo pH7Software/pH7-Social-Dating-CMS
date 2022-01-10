@@ -21,8 +21,8 @@ use PH7\Framework\Str\Str;
 
 abstract class Kernel
 {
-    const SOFTWARE_NAME = 'pH7CMS';
-    const SOFTWARE_DESCRIPTION = 'pH7CMS Dating Web App Builder. The ONLY Free, Open Source, Pro Dating Startup Builder for Growing Your Online Business';
+    const SOFTWARE_NAME = 'pH7Builder';
+    const SOFTWARE_DESCRIPTION = 'pH7Builder Dating Web App Builder. The ONLY Free, Open Source, Pro Dating Startup Builder for Growing Your Online Business';
     const SOFTWARE_WEBSITE = 'https://ph7cms.com';
     const SOFTWARE_DOC_URL = 'https://ph7cms.com/doc';
     const SOFTWARE_GIT_REPO_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS';

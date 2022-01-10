@@ -1,7 +1,7 @@
 <?php
 /**
  * @title            SysVar Class
- * @desc             Parse the global pH7CMS variables.
+ * @desc             Parse the global pH7Builder variables.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.

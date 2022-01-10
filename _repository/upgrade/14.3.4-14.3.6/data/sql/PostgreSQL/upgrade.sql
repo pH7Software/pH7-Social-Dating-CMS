@@ -15,5 +15,5 @@ INSERT INTO ph7_sys_mods_enabled (moduleTitle, folderName, premiumMod, enabled) 
 ('Let''s Celebrate Users'' Birthdays', 'birthday', '0', '1');
 
 
--- Update pH7CMS's SQL schema version
-UPDATE ph7_modules SET version = '1.5.0' WHERE vendorName = 'pH7CMS';
+-- Update pH7Builder's SQL schema version
+UPDATE ph7_modules SET version = '1.5.0' WHERE vendorName = 'pH7Builder';

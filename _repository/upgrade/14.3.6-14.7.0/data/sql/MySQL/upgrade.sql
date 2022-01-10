@@ -9,5 +9,5 @@ INSERT INTO ph7_sys_mods_enabled (moduleTitle, folderName, premiumMod, enabled) 
 ('Progressive Web App (https required)', 'pwa', '0', '0');
 
 
--- Update pH7CMS's SQL schema version
-UPDATE ph7_modules SET version = '1.5.1' WHERE vendorName = 'pH7CMS';
+-- Update pH7Builder's SQL schema version
+UPDATE ph7_modules SET version = '1.5.1' WHERE vendorName = 'pH7Builder';

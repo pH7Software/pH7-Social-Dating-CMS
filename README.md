@@ -9,14 +9,12 @@
 
 **pH7's Social Dating Solution™** is a **Professional**, **Open Source** All-Inclusive **Turnkey Dating Software**. Fully responsive design, low-resource-intensive, powerful and very secure.
 
-pH7CMS (currently known as **pH7Builder**) offers 40+ modules and based on its homemade framework (pH7Framework).
-
-pH7Builder is the first Professional, Free and Open Source Social Dating Site Builder Software. By far, the first choice for creating enterprise-level Dating Apps/Service or social networking sites.
+**pH7Builder** (formerly known as **pH7CMS**) is the first Professional, Free and Open Source Social Dating Site Builder Software. By far, the first choice for creating enterprise-level Dating Apps/Service or social networking sites.
 
 
 **Imagine in 3 months' time, you have a well-known successful online community with thousands of happy users and without spending a dime for it! Instead, you spent money on advertising, user acquisition, and other marketing strategies... Imagine the time you have saved. The amazing business and freedom you have now created.**
 
-With **[pH7CMS](https://sourceforge.net/projects/ph7socialdating/files/latest/download)**, *THIS IS TOTALLY POSSIBLE!* (however, you have to be motivated! Nothing comes as magic).
+With **[pH7Builder](https://sourceforge.net/projects/ph7socialdating/files/latest/download)**, *THIS IS TOTALLY POSSIBLE!* (however, you have to be motivated! Nothing comes as magic).
 
 
 ![Professional PHP Social Dating Builder Software](https://cloud.githubusercontent.com/assets/1325411/19419476/5475b32c-93d0-11e6-9756-8e7db8df129f.png)
@@ -26,7 +24,7 @@ With **[pH7CMS](https://sourceforge.net/projects/ph7socialdating/files/latest/do
 **Don't let your webapp be controlled by others! 🚀**
 
 Why your business has to be under the mercy of others?
-By choosing pH7CMS, you have complete control of your website and your users!
+By choosing pH7Builder, you have complete control of your website and your users!
 You get and own all data and files, hosted on your own server! ✌️
 
 
@@ -62,7 +60,7 @@ It is designed with the **KISS** principle in mind, and the whole source code ca
 
 This Free and Open Source **Social Dating Site Builder** wants to be low resource-intensive, powerful, stable and secure. The software also comes with 40+ system modules and is based on **pH7Framework** *(written specifically for this project)* that has over 52 packages.
 
-*To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **best online dating service** or **social networking** website on the World Wide Web!*
+*To summarize, **pH7Builder** gives you **the perfect ingredients** to create the **best online dating service** or **social networking** website on the World Wide Web!*
 
 
 ## 😻 How Powerful Your Social-Dating WebApp Will Be? 🚀
@@ -139,7 +137,6 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Message templates
 * Multi Themes and many personalizable
 * Includes top HTML5 features
-* Allow to sign in to your site with Facebook, Google and Twitter thanks to pH7CMS's Connect module
 * Invite Friends
 * Social Bookmark (Social Media Sharing Buttons)
 * Anti-Scam and Anti-Fraud Tools
@@ -152,14 +149,14 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Progressive Web App (PWA) support (requires HTTPS)
 * Admin Panel - Block Access with IP Restriction
 * Beautiful Code: Very thoroughly commented about what's happening throughout the PHP code, beautiful indentation and very readable, even for non-programmers
-* Anyone can easily contribute to pH7CMS project thanks to the [GitHub repository](https://github.com/pH7Software/pH7-Social-Dating-CMS)
+* Anyone can easily contribute to pH7Builder project thanks to the [GitHub repository](https://github.com/pH7Software/pH7-Social-Dating-CMS)
 
 
-**It's not a hazard that pH7CMS is considered to be the first choice for creating an enterprise level dating Web application or a social networking platform**
+**It's not a hazard that pH7Builder is considered to be the first choice for creating an enterprise level dating Web application or a social networking platform**
 
-*Great features [like here](https://ph7cms.com/social-dating-features/) and many other unique and exclusive features are waiting for YOU. Already released in pH7CMS!*
+*Great features [like here](https://ph7cms.com/social-dating-features/) and many other unique and exclusive features are waiting for YOU. Already released in pH7Builder!*
 
-![Build a Social Dating Web App with pH7CMS](https://cloud.githubusercontent.com/assets/1325411/19419481/657386a4-93d0-11e6-8eee-95deba2d30a0.png)
+![Build a Social Dating Web App with pH7Builder](https://cloud.githubusercontent.com/assets/1325411/19419481/657386a4-93d0-11e6-8eee-95deba2d30a0.png)
 
 
 ## ⚙ Requirements
@@ -178,28 +175,28 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 
 * **Minimum Web Space** 2.0 GB
 
-* **pH7CMS's Video Module Requirement (only if enabled)** [FFmpeg](https://ffmpeg.org)
+* **pH7Builder's Video Module Requirement (only if enabled)** [FFmpeg](https://ffmpeg.org)
 
 
 ## 🛠 Installation
 
   * Github:
-    * Clone pH7CMS from Github `git clone git@github.com:pH7Software/pH7-Social-Dating-CMS.git`
+    * Clone pH7Builder from Github `git clone git@github.com:pH7Software/pH7-Social-Dating-CMS.git`
       (use `--depth=1` if you don't need the git history)
     * [Install Composer](https://getcomposer.org/doc/00-intro.md)
-    * From a command line opened in the folder, run `composer install` to install pH7CMS's dependencies.
+    * From a command line opened in the folder, run `composer install` to install pH7Builder's dependencies.
   * Composer:
     * [Install Composer](https://getcomposer.org/doc/00-intro.md)
     * `composer create-project ph7software/ph7cms --prefer-dist ph7cms`
   * Sourceforge:
     * Directly download the latest stable version from [Sourceforge](https://sourceforge.net/projects/ph7socialdating/).
   * Softaculous:
-    * If your Web host offers Softaculous, you might be able to install [pH7CMS in one-click with Softaculous](https://www.softaculous.com/apps/socialnetworking/pH7CMS).
+    * If your Web host offers Softaculous, you might be able to install [pH7Builder in one-click with Softaculous](https://www.softaculous.com/apps/socialnetworking/pH7Builder).
 
 
 ## 🏗 Nginx Configuration
 
-In order to get pH7CMS working on nginx server, you need to add some custom nginx configuration.
+In order to get pH7Builder working on nginx server, you need to add some custom nginx configuration.
 
 Create `/etc/nginx/ph7cms.conf` and add the following:
 
@@ -267,19 +264,19 @@ You appreciate the project, all the years intensively spent on the core developm
 
 ## ⚡ Official Website
 
-[pH7CMS.com](https://ph7cms.com)
+[pH7Builder.com](https://ph7cms.com)
 
 
 ## 📚 Documentation
 
-[pH7CMS Documentation](https://ph7cms.com/doc/)
+[pH7Builder Documentation](https://ph7cms.com/doc/)
 
 
 ## 💖 Contributing
 
 ![I Love Open Source](static/img/love-open-source-logo.png)
 
-Anyone can contribute on **[pH7CMS GitHub](https://github.com/pH7Software/pH7-Social-Dating-CMS)** repository!
+Anyone can contribute on **[pH7Builder GitHub](https://github.com/pH7Software/pH7-Social-Dating-CMS)** repository!
 
 Finding bugs, improving the CMS/doc or adding translations. Any contribution is welcome and highly appreciated!
 
@@ -290,13 +287,13 @@ Just clone the repository, make your changes and then make a push ;-)
 ![pH7Software GitHub. Me, at a Costa coffee shop on Feb 4th, 2017.](https://user-images.githubusercontent.com/1325411/78962138-32ffa100-7ae3-11ea-8d35-83d78f3cbc48.jpg)
 
 
-## 🌲 pH7CMS; The Eco-Friendly CMS ❤️
+## 🌲 pH7Builder; The Eco-Friendly CMS ❤️
 
 ![Eco Friendly. Love the World and Love the Nature](static/img/love-nature.svg)
 
-[pH7CMS](https://ph7cms.com) has been designed to reduce power and CPU usage of your server in order to preserve the nature and help to save our environment.
+[pH7Builder](https://ph7cms.com) has been designed to reduce power and CPU usage of your server in order to preserve the nature and help to save our environment.
 
-pH7CMS's templates also use lighter colors since LCD monitors use less electricity to display them.
+pH7Builder's templates also use lighter colors since LCD monitors use less electricity to display them.
 
 Finally, **please consider using green Web hosting** (which use Green Power supply).
 
@@ -309,11 +306,11 @@ Finally, **please consider using green Web hosting** (which use Green Power supp
  How is your website impacting the planet? => Check it on the Website Carbon Calculator such as [https://www.websitecarbon.com](https://www.websitecarbon.com)
 
 
-## 🔨 Tools/Software Used to Develop pH7CMS
+## 🔨 Tools/Software Used to Develop pH7Builder
 
 * LAMP on **Fedora/Ubuntu** (and Mac/Windows with MAMP/WampServer/XAMPP for testing purpose).
 
-* **Geany &amp; Sublime Text** for coding the whole project. That's it! However, since pH7CMS 5.0, **PhpStorm** (and sometimes Atom) are used as well.
+* **Geany &amp; Sublime Text** for coding the whole project. That's it! However, since pH7Builder 5.0, **PhpStorm** (and sometimes Atom) are used as well.
 
 * **Sequel Pro**, sometimes for easy GUI database viewing.
 
@@ -330,22 +327,22 @@ Finally, **please consider using green Web hosting** (which use Green Power supp
 * Sometimes, when working on Mac, **Sequel Pro** is used to lookup easily at a database.
 
 
-## 🖋 Contact
+## 🖋 Contact (Suggestions / Feedback)
 
-Feel free to send me an email for any suggestions or feedback you may have 🤩, at *hello {AT} ph7cms {D0T} com*
+Feel free to send me an email at *hello {AT} ph7cms {D0T} com*
 
 
 ## ⚖️ License
 
-**pH7Builder** (AKA pH7CMS) is an open-source software generously distributed under the [MIT](https://opensource.org/licenses/MIT).
+**pH7Builder** (also known as pH7CMS) is an open-source software generously distributed under the [MIT](https://opensource.org/licenses/MIT).
 
-See the *PH7.LICENSE.txt* and *PH7.COPYRIGHT.txt* files for further details.
+See the `PH7.LICENSE.txt` and `PH7.COPYRIGHT.txt` files for further details.
 
 
 ---
 
 ![Beautiful Profile Dating Page](https://user-images.githubusercontent.com/1325411/35779585-68f0d5fc-09c7-11e8-91eb-bf793fcfab6e.png)
 
-![pH7CMS allows anyone to start a web dating app like Tinder/Bumble or Badoo](https://cloud.githubusercontent.com/assets/1325411/19419477/5476b45c-93d0-11e6-823d-d293f186c0f7.png)
+![pH7Builder allows anyone to start a web dating app like Tinder/Bumble or Badoo](https://cloud.githubusercontent.com/assets/1325411/19419477/5476b45c-93d0-11e6-823d-d293f186c0f7.png)
 
 ![Admin Panel, Browse Users](https://cloud.githubusercontent.com/assets/1325411/14080251/b476e5c6-f4fb-11e5-825e-ddc992ba1055.png)

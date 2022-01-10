@@ -14,7 +14,7 @@ namespace PH7\Framework\Search;
 defined('PH7') or exit('Restricted access');
 
 /**
- * This class is still under development. If you are a developer and you want to join me working on pH7CMS
+ * This class is still under development. If you are a developer and you want to join me working on pH7Builder
  * Please use the open source Github repo: https://github.com/pH7Software/pH7-Social-Dating-CMS
  *
  * Thank you!

@@ -122,7 +122,7 @@ class MainController extends Controller
         $sTxtMsg .= t('Print it and keep it in a safe place, like your wallet.') . "\r\n\r\n\r\n";
         $sTxtMsg .= t('Regards, %site_name%') . "\r\n";
         $sTxtMsg .= '-----' . "\r\n";
-        $sTxtMsg .= t('Powered by "pH7CMS.com" software.') . "\r\n";
+        $sTxtMsg .= t('Powered by "pH7Builder.com" software.') . "\r\n";
 
         return $sTxtMsg;
     }

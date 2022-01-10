@@ -13,5 +13,5 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('wysiwygEditorForum', 0, 'Enable or not the WYSIWYG. 0 = Disable | 1 = Enable', 'general');
 
 
--- Update pH7CMS's SQL schema version
-UPDATE ph7_modules SET version = '1.5.5' WHERE vendorName = 'pH7CMS';
+-- Update pH7Builder's SQL schema version
+UPDATE ph7_modules SET version = '1.5.5' WHERE vendorName = 'pH7Builder';

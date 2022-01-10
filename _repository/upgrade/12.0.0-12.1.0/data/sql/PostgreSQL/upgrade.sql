@@ -12,5 +12,5 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('linkColor', '', 'Overwrite links color', 'design'),
 ('linkHoverColor', '', 'Overwrite links hover color', 'design');
 
--- Update pH7CMS's SQL schema version
-UPDATE ph7_modules SET version = '1.4.3' WHERE vendorName = 'pH7CMS';
+-- Update pH7Builder's SQL schema version
+UPDATE ph7_modules SET version = '1.4.3' WHERE vendorName = 'pH7Builder';

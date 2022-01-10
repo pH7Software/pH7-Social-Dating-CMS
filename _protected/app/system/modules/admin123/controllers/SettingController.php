@@ -146,7 +146,7 @@ class SettingController extends Controller
     }
 
     /**
-     * Check if the locale language name (eg "en_US") specified in the URL path exists in pH7CMS.
+     * Check if the locale language name (eg "en_US") specified in the URL path exists in pH7Builder.
      *
      * @return bool
      */
