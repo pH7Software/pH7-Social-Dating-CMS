@@ -236,7 +236,6 @@ abstract class Controller extends Core implements Controllable
     private function setModsStatusTplVars(): void
     {
         $aModsEnabled = [
-            'is_connect_enabled' => SysMod::isEnabled('connect'),
             'is_affiliate_enabled' => SysMod::isEnabled('affiliate'),
             'is_chat_enabled' => SysMod::isEnabled('chat'),
             'is_chatroulette_enabled' => SysMod::isEnabled('chatroulette'),

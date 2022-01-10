@@ -56,11 +56,6 @@ class JoinForm
         $oForm->addElement(new Hidden('submit_join_user', 'form_join_user'));
         $oForm->addElement(new Token('join'));
 
-        // Check if the Connect module is enabled
-        if (SysMod::isEnabled('connect')) {
-            $oForm->addElement(new HTMLExternal('<div class="center s_tMarg"><a href="' . Uri::get('connect', 'main', 'index') . '" class="btn btn-primary"><strong>' . t('Universal Login') . '</strong></a></div>'));
-        }
-
         $oForm->addElement(new Textbox(t('Your First Name'), 'first_name', ['placeholder' => t('First Name'), 'id' => 'name_first', 'onblur' => 'CValid(this.value,this.id)', 'required' => 1, 'validation' => new Name]));
         $oForm->addElement(new HTMLExternal('<span class="input_error name_first"></span>'));
 

@@ -1067,7 +1067,6 @@ INSERT INTO ph7_sys_mods_enabled (moduleTitle, folderName, premiumMod, enabled) 
 ('Newsletter', 'newsletter', '0', '1'),
 ('Invite Friends', 'invite', '0', '1'),
 ('SMS Verification', 'sms-verification', '0', '0'),
-('Social Media Auth (connect)', 'connect', '0', '0'),
 ('Progressive Web App (HTTPS required)', 'pwa', '0', '0');
 
 
