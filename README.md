@@ -9,7 +9,7 @@
 
 **pH7's Social Dating Solution™** is a **Professional**, **Open Source** All-Inclusive **Turnkey Dating Software**. Fully responsive design, low-resource-intensive, powerful and very secure.
 
-pH7Builder (currently known as **pH7Builder**) offers 40+ modules and based on its homemade framework (pH7Framework).
+**pH7Builder** (AKA "pH7CMS") offers 40+ modules and based on its homemade framework (pH7Framework).
 
 pH7Builder is the first Professional, Free and Open Source Social Dating Site Builder Software. By far, the first choice for creating enterprise-level Dating Apps/Service or social networking sites.
 
@@ -336,7 +336,7 @@ Feel free to send me an email at *hello {AT} ph7cms {D0T} com*
 
 ## ⚖️ License
 
-**pH7Builder** is an open-source software generously distributed under the [MIT](https://opensource.org/licenses/MIT).
+**pH7Builder** (also known as pH7CMS) is an open-source software generously distributed under the [MIT](https://opensource.org/licenses/MIT).
 
 See the `PH7.LICENSE.txt` and `PH7.COPYRIGHT.txt` files for further details.
 
