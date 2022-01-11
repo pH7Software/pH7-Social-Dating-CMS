@@ -40,7 +40,7 @@ class Cookie
         } else {
             $sCookieName = Config::getInstance()->values['cookie']['prefix'] . $mName;
 
-            /* Check if we are not in localhost mode, otherwise may not work. */
+            /* Check if we are not in localhost mode, otherwise may not work */
             if (!Server::isLocalHost()) {
                 setcookie(
                     $sCookieName,
@@ -124,7 +124,7 @@ class Cookie
             if (!Server::isLocalHost()) {
                 setcookie(
                     $sCookieName,
-                    0,
+                    '',
                     0,
                     Config::getInstance()->values['cookie']['path'],
                     Config::getInstance()->values['cookie']['domain'],
@@ -132,10 +132,10 @@ class Cookie
                     true
                 );
             } else {
-                setcookie($sCookieName, 0, 0, PH7_SH);
+                setcookie($sCookieName, '', 0, PH7_SH);
             }
 
-            // then, we delete the cookie value locally to avoid using it by mistake in following our script
+            // then, we delete the cookie value locally to avoid using it by mistake later on in the script
             unset($_COOKIE[$sCookieName]);
         }
     }

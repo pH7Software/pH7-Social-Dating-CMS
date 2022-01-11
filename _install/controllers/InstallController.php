@@ -815,15 +815,15 @@ class InstallController extends Controller
         // We are asking the browser to delete the cookie.
         setcookie(
             $sCookieName,
+            '',
             0,
-            0,
-            null,
-            null,
+            '',
+            '',
             false,
             true
         );
 
-        // and then, we delete the cookie value locally to avoid using it by mistake in following our script.
+        // and then, we delete the cookie value locally to avoid using it by mistake later on in our script
         unset($_COOKIE[$sCookieName]);
     }
 
