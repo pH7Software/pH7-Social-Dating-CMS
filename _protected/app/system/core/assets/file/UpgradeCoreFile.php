@@ -126,9 +126,9 @@ class UpgradeCore
     }
 
     /**
-     * Checks and returns the correct needed version for the current pH7CMS installation.
+     * Checks and returns the correct needed version for the current pH7Builder installation.
      *
-     * @return string|bool The version needed number for the current pH7CMS installation.
+     * @return string|bool The version needed number for the current pH7Builder installation.
      */
     public function getNextVersion()
     {
@@ -329,7 +329,7 @@ class UpgradeCore
     }
 
     /**
-     * Download the new version patches from pH7CMS remote server to the client server.
+     * Download the new version patches from pH7Builder remote server to the client server.
      * Then, extract the file to "_repository/upgrade/" directory to set it as available for the next update.
      * Then, remove zip archive file, as we don't need it anymore.
      *

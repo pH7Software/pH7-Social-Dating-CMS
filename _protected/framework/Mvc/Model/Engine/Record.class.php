@@ -1,7 +1,7 @@
 <?php
 /**
  * @title          Record Class
- * @desc           Record Database Class. It's the pH7CMS home-made Object-Relational Mapping (ORM).
+ * @desc           Record Database Class. It's the pH7Builder home-made Object-Relational Mapping (ORM).
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.

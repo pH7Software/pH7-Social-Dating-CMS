@@ -59,7 +59,7 @@ class MainController extends Controller
     {
         $this->setPageVisit();
 
-        $this->view->page_title = t('Will You Help pH7CMS?');
+        $this->view->page_title = t('Will You Help pH7Builder?');
 
         $sBoxType = $this->getSuggestionBox();
         if ($this->doesSuggestionBoxIsDonation($sBoxType)) {

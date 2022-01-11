@@ -174,7 +174,7 @@ class SettingForm
                     0 => t('Disable (NOT recommended)')
                 ],
                 [
-                    'description' => t('Are you proud of using <a href="%software_website%">pH7CMS</a> brand? Are you proud to say your dating app has been made by the Leading Dating Software provider?'),
+                    'description' => t('Are you proud of using <a href="%software_website%">pH7Builder</a> brand? Are you proud to say your dating app has been made by the Leading Dating Software provider?'),
                     'value' => DbConfig::getSetting('displayPoweredByLink'),
                     'required' => 1
                 ]

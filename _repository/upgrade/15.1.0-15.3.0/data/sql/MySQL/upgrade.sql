@@ -11,5 +11,5 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('heading3Color', '', 'Override H3 color. Leave empty to disable', 'design');
 
 
--- Update pH7CMS's SQL schema version
-UPDATE ph7_modules SET version = '1.5.7' WHERE vendorName = 'pH7CMS';
+-- Update pH7Builder's SQL schema version
+UPDATE ph7_modules SET version = '1.5.7' WHERE vendorName = 'pH7Builder';

@@ -18,7 +18,7 @@ class Permission extends PermissionCore
 
         /*
          * This file is not required, It serves the permissions of the module.
-         * pH7CMS includes this file only if it exists.
+         * pH7Builder includes this file only if it exists.
          *
          * Example of Code:
          * if (!UserCore::auth() && ($this->registry->controller === 'HelloWorldController')) {

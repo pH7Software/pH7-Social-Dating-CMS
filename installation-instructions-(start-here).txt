@@ -4,8 +4,8 @@
 
 
 --- Softaculous/Fantastico Installation ---
-If your web host offers Softaculous/Fantastico with pH7CMS enabled, you can install pH7CMS in one-click.
-Generally, through cPanel -> Softaculous icon -> search for "pH7CMS".
+If your web host offers Softaculous/Fantastico with pH7Builder enabled, you can install pH7Builder in one-click.
+Generally, through cPanel -> Softaculous icon -> search for "pH7Builder".
 
 For "Fantastico", search it under "pH7SocialDatingCMS" name in the "Portals/CMS" category.
 
@@ -17,7 +17,7 @@ https://ph7cms.com/hosting/
 --- Useful Doc ---
 Documentation: https://ph7cms.com/doc/
 Github Wiki: https://github.com/pH7Software/pH7-Social-Dating-CMS/wiki/
-pH7CMS Blog: https://ph7cms.com/blog (if you dig well, you will find several tutorials and helpful posts)
+pH7Builder Blog: https://ph7cms.com/blog (if you dig well, you will find several tutorials and helpful posts)
 
 
 --- Troubleshooting ---

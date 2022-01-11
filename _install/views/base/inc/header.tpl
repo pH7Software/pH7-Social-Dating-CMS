@@ -12,15 +12,15 @@
         <!---- Copyright pH7 Dating/Social CMS; All Rights Reserved ---->
         <meta name="author" content="{$software_author}" />
         <meta name="copyright" content="{$software_copyright}" />
-        <meta name="creator" content="pH7CMS (Pierre-Henry Soria)" />
-        <meta name="designer" content="pH7CMS (Pierre-Henry Soria)" />
+        <meta name="creator" content="pH7Builder (Pierre-Henry Soria)" />
+        <meta name="designer" content="pH7Builder (Pierre-Henry Soria)" />
         <meta name="generator" content="{$software_name} {$software_version}" />
         <!---- End Copyright pH7 Dating/Social CMS; All Rights Reserved ---->
         <!-- End Title and Meta -->
         <!-------- Sheet Css -------->
         <!-- Bootstrap -->
         <link rel="stylesheet" href="{$smarty.const.PH7_URL_ROOT}static/css/bootstrap.css" />
-        <!-- pH7CMS CSS -->
+        <!-- pH7Builder CSS -->
         <link rel="stylesheet" media="all" href="{$smarty.const.PH7_URL_INSTALL}themes/{$tpl_name}/css/common.css" />
         <!-------- End Css -------->
         <script>var sInstallUrl = "{$smarty.const.PH7_URL_INSTALL}";</script>
@@ -30,7 +30,7 @@
             <!-- Begin Header -->
             <header>
                 <div role="banner" id="logo">
-                    <h1><a href="{$smarty.const.PH7_URL_ROOT}"><img src="{$smarty.const.PH7_URL_ROOT}templates/themes/base/img/logo.png" alt="{$software_name|upper}" title="{$software_name|upper}" /> pH7CMS</a></h1>
+                    <h1><a href="{$smarty.const.PH7_URL_ROOT}"><img src="{$smarty.const.PH7_URL_ROOT}templates/themes/base/img/logo.png" alt="{$software_name|upper}" title="{$software_name|upper}" /> pH7Builder</a></h1>
                 </div>
 
                 <noscript>

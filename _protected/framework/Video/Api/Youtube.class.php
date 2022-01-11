@@ -8,7 +8,7 @@
  * @package          PH7 / Framework / Video / Api
  * @version          1.2
  * @link             http://ph7cms.com
- * @history          28/03/2016 - Since pH7CMS 1.3.7, it's now compatible with Youtube API v3. Since Youtube API v3, it requires a Google API key. This is available through pH7CMS's admin panel.
+ * @history          28/03/2016 - Since pH7Builder 1.3.7, it's now compatible with Youtube API v3. Since Youtube API v3, it requires a Google API key. This is available through pH7Builder's admin panel.
  */
 
 namespace PH7\Framework\Video\Api;

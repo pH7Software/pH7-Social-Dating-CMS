@@ -367,7 +367,7 @@ class Design
     /**
      * Provide a "Powered By" link.
      *
-     * @param bool $bLink To include a link to pH7CMS or pH7Framework.
+     * @param bool $bLink To include a link to pH7Builder or pH7Framework.
      * @param bool $bSoftwareName
      * @param bool $bVersion To include the version being used.
      * @param bool $bComment HTML comment.
@@ -658,7 +658,7 @@ class Design
                     $sUrl = GravatarImage::get($sEmail, ['size' => $iSize, 'display' => '404', 'rating' => 'g']);
 
                     if (!(new Validate)->url($sUrl, true)) {
-                        // If no Gravatar set, it returns 404, and we then set the default pH7CMS's avatar
+                        // If no Gravatar set, it returns 404, and we then set the default pH7Builder's avatar
                         $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/' . $sIcon . '_no_picture' . $sSize . self::AVATAR_IMG_EXT;
                     }
                 } elseif (!AdminCore::isAdminPanel()) { // We don't display pending approval image when admins are on the panel admin

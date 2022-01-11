@@ -1,5 +1,5 @@
 ####################
-# pH7CMS: The Social Dating CMS (by Pierre-Henry Soria)
+# pH7Builder: The Social Dating CMS (by Pierre-Henry Soria)
 # URL: https://ph7cms.com
 ####################
 

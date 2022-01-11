@@ -7,5 +7,5 @@
 -- Fix wrong SQL type for expirationDays (when has more than '255' as value)
 ALTER TABLE ph7_memberships MODIFY expirationDays smallint(4) unsigned NOT NULL;
 
--- Update pH7CMS's SQL schema version
-UPDATE ph7_modules SET version = '1.5.6' WHERE vendorName = 'pH7CMS';
+-- Update pH7Builder's SQL schema version
+UPDATE ph7_modules SET version = '1.5.6' WHERE vendorName = 'pH7Builder';

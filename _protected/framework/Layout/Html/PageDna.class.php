@@ -25,7 +25,7 @@ final class PageDna
      #
      "
 
-     🚀 Everything you Need to Create & Launch Your Own Social/Dating WebApp => https://pH7CMS.com
+     🚀 Everything you Need to Create & Launch Your Own Social/Dating WebApp => https://pH7Builder.com
      https://github.com/pH7Software/pH7-Social-Dating-CMS
 
 -->\n
@@ -49,7 +49,7 @@ COMMENT;
 
     const COMMENT_BUILT_WITH_PH7CMS = <<<COMMENT
         \n<!--
-     BUILT WITH pH7CMS – https://ph7cms.com
+     BUILT WITH pH7Builder – https://ph7cms.com
      https://github.com/pH7Software/pH7-Social-Dating-CMS
 
 
@@ -61,7 +61,7 @@ COMMENT;
      #
      "
 
-    Enjoy! ❤️ https://pH7CMS.com
+    Enjoy! ❤️ https://pH7Builder.com
 -->\n
 COMMENT;
 
@@ -86,7 +86,7 @@ COMMENT;
      #      #   #   #              #    #   #  #   #    "
      #      "#m#"   #              #    "#m#"  "mm"#    #
 
-     HERE YOU GO! 😍 => https://pH7CMS.com
+     HERE YOU GO! 😍 => https://pH7Builder.com
      https://github.com/pH7Software/pH7-Social-Dating-CMS
 
 -->\n
@@ -94,7 +94,7 @@ COMMENT;
 
     const COMMENT_SOCIAL_DATING_SOFTWARE = <<<COMMENT
         \n<!--
-     💪 BUILT WITH pH7CMS ❤️ – https://ph7cms.com
+     💪 BUILT WITH pH7Builder ❤️ – https://ph7cms.com
 
       mmmm                  "           ""#
      #"   "  mmm    mmm   mmm     mmm     #
@@ -116,7 +116,7 @@ COMMENT;
          "# #   #    #      #    #m#m#  m"""#   #     #""""
      "mmm#" "#m#"    #      "mm   # #   "mm"#   #     "#mm"
 
-     EVERYTHING Your BUSINESS NEEDS to Create & Launch a SOCIAL/DATING WebApp => https://pH7CMS.com
+     EVERYTHING Your BUSINESS NEEDS to Create & Launch a SOCIAL/DATING WebApp => https://pH7Builder.com
      https://github.com/pH7Software/pH7-Social-Dating-CMS
 -->\n
 COMMENT;

@@ -13,5 +13,5 @@ INSERT INTO pH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VA
 ('Friends', 'friend', '0', '1');
 
 
--- Update pH7CMS's SQL schema version
-UPDATE pH7_Modules SET version = '1.3.4' WHERE vendorName = 'pH7CMS';
+-- Update pH7Builder's SQL schema version
+UPDATE pH7_Modules SET version = '1.3.4' WHERE vendorName = 'pH7Builder';

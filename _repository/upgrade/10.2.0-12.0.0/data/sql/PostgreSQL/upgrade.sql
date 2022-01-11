@@ -81,5 +81,5 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('captchaCaseSensitive', 1, '1 to enable captcha case sensitive | 0 to enable', 'spam');
 
 
--- Update pH7CMS's SQL schema version
-UPDATE ph7_modules SET version = '1.4.2' WHERE vendorName = 'pH7CMS';
+-- Update pH7Builder's SQL schema version
+UPDATE ph7_modules SET version = '1.4.2' WHERE vendorName = 'pH7Builder';
