@@ -33,7 +33,7 @@ if (is_dir(PH7_PATH_ROOT . '_install/')) {
      <p>You can delete this folder using an FTP client (FileZilla or other).</p>
      <p>You can also delete this folder with an SSH connection if your host allows. Below is the UNIX command to do this is:<br />
      <code>sudo rm -rf /YOUR-PUBLIC-SERVER-PATH/YOUR-WEBSITE/_install/</code></p>
-     <p>After doing this, please <a href="' . PH7_URL_ROOT . '">reload pH7CMS</a></p>';
+     <p>→ Once done, please <a href="' . PH7_URL_ROOT . '">reload pH7CMS</a></p>';
 
     echo html_body('SECURITY ALERT : Please remove "_install" folder', $sMsg);
     exit;
