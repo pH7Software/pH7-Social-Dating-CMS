@@ -258,8 +258,8 @@ label#percent {
     position: absolute;
     font-size: 3.5rem;
     line-height: 1rem;
-    margin: .5rem;
-    padding-top: 2rem;
+    padding-left: 2rem;
+    padding-top: 2.8rem;
 }
 
 .cy_ico img {
