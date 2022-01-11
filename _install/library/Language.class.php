@@ -17,12 +17,14 @@ class Language
     public const LANG_FILENAME = 'install.lang.php';
     public const LANG_FOLDER_NAME = 'langs/';
 
+    private const REQUEST_PARAM_NAME = 'l';
+
     private string $sLang;
 
     public function __construct()
     {
         if ($this->doesUserLangExist()) {
-            $this->sLang = $_GET['l'];
+            $this->sLang = $_GET[self::REQUEST_PARAM_NAME];
             $this->createCookie($this->sLang);
         } elseif ($this->doesCookieLangExist()) {
             $this->sLang = $_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang'];
@@ -70,7 +72,7 @@ class Language
 
     private function doesUserLangExist(): bool
     {
-        return !empty($_GET['l']) && is_file(PH7_ROOT_INSTALL . self::LANG_FOLDER_NAME . $_GET['l'] . PH7_DS . self::LANG_FILENAME);
+        return !empty($_GET[self::REQUEST_PARAM_NAME]) && is_file(PH7_ROOT_INSTALL . self::LANG_FOLDER_NAME . $_GET[self::REQUEST_PARAM_NAME] . PH7_DS . self::LANG_FILENAME);
     }
 
     private function doesCookieLangExist(): bool
