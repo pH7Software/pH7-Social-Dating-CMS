@@ -15,8 +15,7 @@ use PH7\Framework\Mvc\Request\Http;
 /** For "user", "affiliate" and "admin" modules **/
 class ChangePasswordCoreFormProcess extends Form
 {
-    /** @var bool */
-    private $bIsAdminModule;
+    private bool $bIsAdminModule;
 
     /**
      * @internal Need to use Http::NO_CLEAN arg in Http::post() since password might contains special character like "<" and will otherwise be converted to HTML entities
@@ -31,11 +30,9 @@ class ChangePasswordCoreFormProcess extends Form
     }
 
     /**
-     * @return void
-     *
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    private function executePasswordChanging()
+    private function executePasswordChanging(): void
     {
         $oPasswordModel = $this->getPasswordModel();
 
@@ -82,10 +79,7 @@ class ChangePasswordCoreFormProcess extends Form
         }
     }
 
-    /**
-     * @return string
-     */
-    private function getUserEmail()
+    private function getUserEmail(): string
     {
         if ($this->registry->module === 'user') {
             return $this->session->get('member_email');
@@ -98,10 +92,7 @@ class ChangePasswordCoreFormProcess extends Form
         return $this->session->get('affiliate_email');
     }
 
-    /**
-     * @return string
-     */
-    private function getTableName()
+    private function getTableName(): string
     {
         if ($this->registry->module === 'user') {
             return DbTableName::MEMBER;
