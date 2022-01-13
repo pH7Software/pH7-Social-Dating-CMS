@@ -48,7 +48,7 @@ abstract class Annotation
      *
      * @return array
      */
-    public function getAnnotations()
+    public function getAnnotations(): array
     {
         $sClassName = get_class($this);
 
@@ -94,7 +94,7 @@ abstract class Annotation
      *
      * @param string $sClassName
      */
-    protected function initializeAnnotations($sClassName)
+    protected function initializeAnnotations(string $sClassName): string
     {
         $this->oCache = (new Cache)->start(
             static::CACHE_GROUP,
@@ -110,7 +110,7 @@ abstract class Annotation
      *
      * @return void
      */
-    protected function saveAnnotations(array $aAnnotations)
+    protected function saveAnnotations(array $aAnnotations): void
     {
         $this->oCache->put($aAnnotations);
     }
