@@ -22,10 +22,9 @@ use PHPUnit\Framework\TestCase;
 
 final class UserNotifierTest extends TestCase
 {
-    const VALID_EMAIL = 'hi@ph7.me';
+    private const VALID_EMAIL = 'hi@ph7.me';
 
-    /** @var UserNotifier */
-    private $oUserNotifier;
+    private UserNotifier $oUserNotifier;
 
     /** @var Mailable|Phake_IMock */
     private $oMailMock;
