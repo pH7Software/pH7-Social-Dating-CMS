@@ -205,7 +205,7 @@ class Http extends \PH7\Framework\Http\Http
      * @param string $sKey
      * @param string $sParam Optional, set a type of the request | Value types are: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
      *
-     * @return string|void Uses Str::escape() method to secure the data display unless you specified the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
+     * @return string|null Uses Str::escape() method to secure the data display unless you specified the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
      */
     public function gets($sKey, $sParam = null)
     {
@@ -216,6 +216,8 @@ class Http extends \PH7\Framework\Http\Http
         if ($this->postExists($sKey, $sParam)) {
             return $this->post($sKey, $sParam);
         }
+
+        return null;
     }
 
     /**

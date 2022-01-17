@@ -9,6 +9,8 @@
  * @link             http://ph7cms.com
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Api;
 
 defined('PH7') or exit('Restricted access');
@@ -30,7 +32,7 @@ class Tool
      *
      * @return bool Returns TRUE if the app has access, FALSE otherwise.
      */
-    public static function checkAccess(Config $oConfig, HttpRequest $oRequest)
+    public static function checkAccess(Config $oConfig, HttpRequest $oRequest): bool
     {
         if (self::isApiKeyValid($oRequest->gets('private_api_key'), $oConfig)) {
             return self::isUrlAllowed($oRequest->gets('url'), $oConfig);
@@ -39,25 +41,13 @@ class Tool
         return false;
     }
 
-    /**
-     * @param string $sPrivateApiKey
-     * @param Config $oConfig
-     *
-     * @return bool
-     */
-    private static function isApiKeyValid($sPrivateApiKey, Config $oConfig)
+    private static function isApiKeyValid(?string $sPrivateApiKey, Config $oConfig): bool
     {
         return strcmp($sPrivateApiKey, $oConfig->values['ph7cms.api']['private_key']) === 0 ||
             (Server::isLocalHost() && $sPrivateApiKey === self::DEV_APP_API_KEY);
     }
 
-    /**
-     * @param string $sUrl
-     * @param Config $oConfig
-     *
-     * @return bool
-     */
-    private static function isUrlAllowed($sUrl, Config $oConfig)
+    private static function isUrlAllowed(?string $sUrl, Config $oConfig): bool
     {
         return in_array(
             $sUrl,
