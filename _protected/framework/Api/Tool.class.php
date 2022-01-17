@@ -41,13 +41,13 @@ class Tool
         return false;
     }
 
-    private static function isApiKeyValid(?string $sPrivateApiKey, Config $oConfig): bool
+    private static function isApiKeyValid(string $sPrivateApiKey, Config $oConfig): bool
     {
         return strcmp($sPrivateApiKey, $oConfig->values['ph7cms.api']['private_key']) === 0 ||
             (Server::isLocalHost() && $sPrivateApiKey === self::DEV_APP_API_KEY);
     }
 
-    private static function isUrlAllowed(?string $sUrl, Config $oConfig): bool
+    private static function isUrlAllowed(string $sUrl, Config $oConfig): bool
     {
         return in_array(
             $sUrl,
