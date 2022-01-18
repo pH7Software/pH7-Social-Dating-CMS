@@ -46,7 +46,7 @@
     "sort-packages": true
   },
   "require": {
-    "php": ">=7.4.0",
+    "php": "^7.4 || ^8.0",
     "ext-curl": "*",
     "ext-dom": "*",
     "ext-exif": "*",
@@ -98,12 +98,17 @@
   },
   "scripts": {
     "test": "_protected/vendor/bin/phpunit",
+    "test-ci": "_protected/vendor/bin/phpunit --coverage-text --coverage-clover=build/coverage.xml",
     "post-cmd": [
       "cp -R _protected/vendor/twbs/bootstrap/dist/css/bootstrap.min.css static/css/bootstrap.css",
       "cp -R _protected/vendor/twbs/bootstrap/dist/js/bootstrap.min.js static/js/bootstrap.js"
     ],
-    "post-install-cmd": ["@post-cmd"],
-    "post-update-cmd": ["@post-cmd"]
+    "post-install-cmd": [
+      "@post-cmd"
+    ],
+    "post-update-cmd": [
+      "@post-cmd"
+    ]
   },
   "minimum-stability": "stable",
   "support": {
