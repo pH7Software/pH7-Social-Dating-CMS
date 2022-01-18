@@ -37,8 +37,8 @@
 # Remove the version number and installed module versions in the list at the bottom error pages (404, 403, ...)
 ServerSignature Off
 
-# Deny access to all CGI, Perl, Python, Bash, SQL, Template, INI configuration, cache, log, temporary and text files
-<FilesMatch "\.(cgi|pl|py|sh|bash|sql|tpl|ini|cache|log|tmp|txt|md)$">
+# Deny access to all CGI, Perl, Python, Bash, SQL, Template, INI configuration, cache, log, lock, tmp & plain files
+<FilesMatch "\.(cgi|pl|py|sh|bash|sql|tpl|ini|cache|log|lock|tmp|txt|md)$">
     # Apache 2.4+
     <IfModule mod_authz_core.c>
         Require all denied
