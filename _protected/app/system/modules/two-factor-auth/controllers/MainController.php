@@ -12,6 +12,7 @@ use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Parse\Url;
 use PH7\Framework\Url\Header;
+use PH7\Link\Name as UrlName;
 use RobThree\Auth\TwoFactorAuth as Authenticator;
 
 class MainController extends Controller
@@ -171,7 +172,7 @@ class MainController extends Controller
      */
     private function getAuthenticatorName()
     {
-        return str_replace('/', '-', Url::name($this->registry->site_url)) . '-' . $this->sMod;
+        return str_replace('/', '-', UrlName::parse($this->registry->site_url)) . '-' . $this->sMod;
     }
 
     /**

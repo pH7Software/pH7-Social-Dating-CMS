@@ -31,7 +31,6 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Navigation\Pagination;
-use PH7\Framework\Parse\Url as UrlParser;
 use PH7\Framework\Registry\Registry;
 use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Session\Session;
@@ -39,6 +38,7 @@ use PH7\Framework\Str\Str;
 use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Url;
 use PH7\GenderTypeUserCore;
+use PH7\Link\Name as UrlName;
 use PH7\PH2Gravatar\Image as GravatarImage;
 use PH7\UserCore;
 use PH7\UserCoreModel;
@@ -865,7 +865,7 @@ HTML;
      */
     public function urlTag($sLink, $bNoFollow = true)
     {
-        $sLinkName = UrlParser::name($sLink);
+        $sLinkName = UrlName::parse($sLink);
         $aDefAttrs = ['href' => $sLink, 'title' => $sLinkName];
 
         if ($bNoFollow) {

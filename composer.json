@@ -66,6 +66,7 @@
     "fakerphp/faker": "^1.9",
     "geoip2/geoip2": "~2.0",
     "guzzlehttp/guzzle": "^6.3",
+    "ph-7/cute-link-names": "^1.1",
     "ph-7/datatype": "^1.0",
     "ph-7/just-http-status-codes": "^1.1",
     "ph-7/passcode-password-generator": "^2.0",

@@ -22,21 +22,4 @@ final class UrlTest extends TestCase
 
         $this->assertSame($sExpected, UrlParser::clean($sUrl));
     }
-
-    /**
-     * @dataProvider urlsNamesProvider
-     */
-    public function testName(string $sActualUrl, string $sExpectedUrl): void
-    {
-        $this->assertSame($sExpectedUrl, UrlParser::name($sActualUrl));
-    }
-
-    public function urlsNamesProvider(): array
-    {
-        return [
-            ['https://ph7cms.com', 'Ph7cms'],
-            ['https://ph7cms.com/dating-business-by-steps/', 'Ph7cms.com/dating-business-by-steps/'],
-            ['https://www.ph7cms.com?myparam=value-foo-bar', 'Ph7cms.com?myparam=value-foo-bar']
-        ];
-    }
 }

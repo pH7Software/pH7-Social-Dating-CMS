@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a4238e75a23944d1397af95c0ee44465",
+    "content-hash": "49cd0dfc788569740daef470e9e94749",
     "packages": [
         {
             "name": "arcansecurity/skeerel-php",
@@ -1000,6 +1000,54 @@
                 "source": "https://github.com/jmespath/jmespath.php/tree/2.6.1"
             },
             "time": "2021-06-14T00:11:39+00:00"
+        },
+        {
+            "name": "ph-7/cute-link-names",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pH-7/CuteLinkNames.git",
+                "reference": "b3d5904b51ef431a3581d76b6947e926042661d4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pH-7/CuteLinkNames/zipball/b3d5904b51ef431a3581d76b6947e926042661d4",
+                "reference": "b3d5904b51ef431a3581d76b6947e926042661d4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PH7\\Link\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pierre-Henry Soria",
+                    "email": "hi@ph7.me"
+                }
+            ],
+            "description": "A simple class that converts your URLs to link names",
+            "keywords": [
+                "parser  name",
+                "url",
+                "url-parser"
+            ],
+            "support": {
+                "issues": "https://github.com/pH-7/CuteLinkNames/issues",
+                "source": "https://github.com/pH-7/CuteLinkNames/tree/v1.1.1"
+            },
+            "time": "2022-01-19T10:17:06+00:00"
         },
         {
             "name": "ph-7/datatype",
