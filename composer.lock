@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "49cd0dfc788569740daef470e9e94749",
+    "content-hash": "e75c16aecd92bf8be2ee2a389d490a9c",
     "packages": [
         {
             "name": "arcansecurity/skeerel-php",
@@ -1003,16 +1003,16 @@
         },
         {
             "name": "ph-7/cute-link-names",
-            "version": "v1.1.1",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pH-7/CuteLinkNames.git",
-                "reference": "b3d5904b51ef431a3581d76b6947e926042661d4"
+                "reference": "9ab18ed0380ff98ece897288b42ee33d83ed5023"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pH-7/CuteLinkNames/zipball/b3d5904b51ef431a3581d76b6947e926042661d4",
-                "reference": "b3d5904b51ef431a3581d76b6947e926042661d4",
+                "url": "https://api.github.com/repos/pH-7/CuteLinkNames/zipball/9ab18ed0380ff98ece897288b42ee33d83ed5023",
+                "reference": "9ab18ed0380ff98ece897288b42ee33d83ed5023",
                 "shasum": ""
             },
             "require": {
@@ -1045,9 +1045,9 @@
             ],
             "support": {
                 "issues": "https://github.com/pH-7/CuteLinkNames/issues",
-                "source": "https://github.com/pH-7/CuteLinkNames/tree/v1.1.1"
+                "source": "https://github.com/pH-7/CuteLinkNames/tree/v2.0.0"
             },
-            "time": "2022-01-19T10:17:06+00:00"
+            "time": "2022-01-19T10:35:38+00:00"
         },
         {
             "name": "ph-7/datatype",
