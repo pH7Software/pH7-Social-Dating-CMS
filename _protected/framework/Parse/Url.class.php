@@ -75,21 +75,4 @@ class Url
 
         return $sUrl;
     }
-
-    /**
-     * Gets the name of a URL.
-     *
-     * @param string $sLink The link
-     *
-     * @return string The name of the domain with the first letter capitalized.
-     */
-    public static function name($sLink)
-    {
-        $oStr = new Str;
-        $sUrlName = preg_replace(self::REGEX_URL_FORMAT, '', $oStr->lower($sLink));
-        $sLink = $oStr->upperFirst($sUrlName);
-        unset($oStr);
-
-        return $sLink;
-    }
 }
