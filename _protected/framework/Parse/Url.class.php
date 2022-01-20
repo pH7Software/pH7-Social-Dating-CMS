@@ -8,6 +8,8 @@
  * @package          PH7 / Framework / Parse
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Parse;
 
 defined('PH7') or exit('Restricted access');
@@ -16,10 +18,8 @@ use PH7\Framework\Str\Str;
 
 class Url
 {
-    const REGEX_SPACE = '/[\s]+/';
-    const REGEX_URL_FORMAT = '#(^https?://|www\.|\.[a-z]{2,4}/?$)#i';
-
-    const UNWANTED_SPECIAL_CHARS = [
+    private const REGEX_SPACE = '/[\s]+/';
+    private const UNWANTED_SPECIAL_CHARS = [
         '«',
         '»',
         '"',
@@ -60,7 +60,7 @@ class Url
      *
      * @return string The new clean URL
      */
-    public static function clean($sUrl, $bFullClean = true)
+    public static function clean(string $sUrl, bool $bFullClean = true): string
     {
         $sUrl = preg_replace(self::REGEX_SPACE, '-', $sUrl);
         $sUrl = str_replace(self::UNWANTED_SPECIAL_CHARS, '-', $sUrl);
