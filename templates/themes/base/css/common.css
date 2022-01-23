@@ -255,6 +255,11 @@ label#percent {
     position: absolute;
     font-size: 3.5rem;
     line-height: 1rem;
+    margin: .5rem;
+}
+
+.user_status#dropdown_setting span {
+    margin: unset;
     padding-left: 2rem;
     padding-top: 2.8rem;
 }

@@ -88,7 +88,7 @@ class PrivacyForm
         $oForm->addElement(new HTMLExternal('<h3><u>' . t('Presence:') . '</u></h3>'));
         $oForm->addElement(
             new Select(
-                t('Your status <div class="user_status right" id="status_div"></div>'),
+                t('Your status <div class="user_status right" id="dropdown_setting"></div>'),
                 'user_status',
                 [
                     UserModel::ONLINE_STATUS => t('Online'),

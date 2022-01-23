@@ -7703,7 +7703,7 @@ msgid "Presence:"
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/PrivacyForm.php:85
-msgid "Your status <div class=\"user_status right\" id=\"status_div\"></div>"
+msgid "Your status <div class=\"user_status right\" id=\"dropdown_setting\"></div>"
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/SearchVisitorForm.php:22

@@ -9,7 +9,7 @@ function display_status() {
     var sStatusTitle = $(sSelected).text();
     var iStatusVal = $(sSelected).val();
     var sCssClass = (iStatusVal == 1 ? 'green' : (iStatusVal == 2 ? 'orange' : (iStatusVal == 3 ? 'red' : 'gray')));
-    $('#status_div').html('<span class="' + sCssClass + '" title="' + sStatusTitle + '">•</span>');
+    $('.user_status#dropdown_setting').html('<span class="' + sCssClass + '" title="' + sStatusTitle + '">•</span>');
 }
 
 function init_status() {
