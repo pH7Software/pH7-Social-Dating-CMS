@@ -48,15 +48,14 @@ class Video extends Upload
     /** @var string */
     private $sFfmpegPath;
 
-    /** @var array */
-    private $aFile;
+    private array $aFile;
 
     /**
      * @param array $aFile Example: $_FILES['video']
      *
      * @throws MissingProgramException If FFmpeg is not installed.
      */
-    public function __construct($aFile)
+    public function __construct(array $aFile)
     {
         $this->sFfmpegPath = Config::getInstance()->values['video']['handle.ffmpeg_path'];
 
