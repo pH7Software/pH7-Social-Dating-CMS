@@ -9,6 +9,8 @@
  * @package          PH7 / Framework / Session
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Session;
 
 defined('PH7') or exit('Restricted access');
@@ -59,7 +61,7 @@ class Session
      *
      * @return string If the session exists, returns the session with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the session doesn't exist.
      */
-    public function get($sName, $bEscape = true)
+    public function get(string $sName, $bEscape = true)
     {
         $sSessionName = Config::getInstance()->values['session']['prefix'] . $sName;
 

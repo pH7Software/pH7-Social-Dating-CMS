@@ -16,8 +16,8 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Parse\Emoticon;
 use PH7\Framework\Url\Header;
-use stdClass;
 use PH7\JustHttp\StatusCode;
+use stdClass;
 
 class MainController extends Controller
 {

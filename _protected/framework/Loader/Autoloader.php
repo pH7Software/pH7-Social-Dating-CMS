@@ -17,6 +17,7 @@ namespace PH7\Framework\Loader;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Pattern\Singleton;
+
 use function PH7\html_body;
 
 /**

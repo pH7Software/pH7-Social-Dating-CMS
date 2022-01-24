@@ -16,7 +16,6 @@ use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Module as ModuleModel;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
-use stdClass;
 
 class DisableModuleForm
 {

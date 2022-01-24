@@ -18,8 +18,8 @@ use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Url\Header;
-use stdClass;
 use PH7\JustHttp\StatusCode;
+use stdClass;
 
 class MainController extends Controller
 {

@@ -32,9 +32,9 @@ use PH7\Framework\Registry\Registry;
 use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Url\Uri;
+use PH7\JustHttp\StatusCode;
 use ReflectionException;
 use ReflectionMethod;
-use PH7\JustHttp\StatusCode;
 
 /**
  * @class Singleton Class

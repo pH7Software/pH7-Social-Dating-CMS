@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Mail / Form / Processing
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -19,10 +21,9 @@ use PH7\Framework\Url\Header;
 
 class MailFormProcess extends Form
 {
-    const MAX_ALLOWED_LINKS = 0;
+    private const MAX_ALLOWED_LINKS = 0;
 
-    /** @var UserCoreModel */
-    private $oUserModel;
+    private UserCoreModel $oUserModel;
 
     public function __construct()
     {
@@ -145,29 +146,18 @@ class MailFormProcess extends Form
         return $this->session->get('member_first_name');
     }
 
-    /**
-     * @param int $iRecipientId
-     *
-     * @return bool TRUE if the email notification is accepted and the recipient isn't online.
-     */
-    private function canSendEmail($iRecipientId)
+    private function canSendEmail($iRecipientId): bool
     {
         return $this->oUserModel->isNotification($iRecipientId, 'newMsg') &&
             !$this->oUserModel->isOnline($iRecipientId);
     }
 
-    /**
-     * @return bool
-     */
-    private function isAdminEligible()
+    private function isAdminEligible(): bool
     {
         return AdminCore::auth() && !UserCore::auth() && !UserCore::isAdminLoggedAs();
     }
 
-    /**
-     * @return string
-     */
-    private function getRedirectUrl()
+    private function getRedirectUrl(): string
     {
         if ($this->isAdminEligible()) {
             return Uri::get(PH7_ADMIN_MOD, 'user', 'browse');

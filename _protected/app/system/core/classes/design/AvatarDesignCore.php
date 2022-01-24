@@ -46,12 +46,12 @@ class AvatarDesignCore extends Design
     public function get($sUsername = '', $sFirstName = '', $sSex = null, $iSize = self::DEF_AVATAR_SIZE, $bRollover = false)
     {
         if ($sUsername === PH7_ADMIN_USERNAME) {
-            list($sUsername, $sFirstName, $sSex) = $this->getAdminAvatarDetails();
+            [$sUsername, $sFirstName, $sSex] = $this->getAdminAvatarDetails();
         }
 
         // The profile does not exist, so it creates a fake profile = ghost
         if (empty($sUsername) || $sUsername === PH7_GHOST_USERNAME) {
-            list($sUsername, $sFirstName, $sSex) = $this->getGhostAvatarDetails();
+            [$sUsername, $sFirstName, $sSex] = $this->getGhostAvatarDetails();
         }
 
         $iSize = (int)$iSize;
@@ -77,7 +77,7 @@ class AvatarDesignCore extends Design
     {
         // The profile does not exist, so it creates a fake profile = ghost
         if (empty($sUsername)) {
-            list($sUsername, $sFirstName, $sSex) = $this->getGhostAvatarDetails();
+            [$sUsername, $sFirstName, $sSex] = $this->getGhostAvatarDetails();
         }
 
         echo '<div class="picture_block" itemscope="itemscope" itemtype="http://schema.org/Person">

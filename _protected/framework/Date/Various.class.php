@@ -59,7 +59,7 @@ class Various
             return 0;
         }
 
-        list($iH, $iM, $iS) = explode(':', $iHMS);
+        [$iH, $iM, $iS] = explode(':', $iHMS);
         $iSeconds = 0;
         $iSeconds += ((int)$iH * 3600);
         $iSeconds += ((int)$iM * 60);

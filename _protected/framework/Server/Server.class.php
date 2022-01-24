@@ -15,6 +15,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\Url\Uri;
+
 use function PH7\is_internet;
 
 final class Server

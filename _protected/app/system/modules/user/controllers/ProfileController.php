@@ -17,8 +17,8 @@ use PH7\Framework\Http\Http;
 use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
-use stdClass;
 use PH7\JustHttp\StatusCode;
+use stdClass;
 
 class ProfileController extends ProfileBaseController
 {

@@ -166,7 +166,7 @@ trait Message
      */
     private static function getImageExtensions()
     {
-        return '.' . implode(', .', FileStorage::SUPPORTED_TYPES);
+        return '.' . implode(', .', FileStorageImage::SUPPORTED_TYPES);
     }
 
     /**

@@ -8,6 +8,9 @@
  * @package        PH7 / App / System / Core / Model
  */
 
+declare(strict_types=1);
+
+
 namespace PH7;
 
 use PDO;
@@ -1651,10 +1654,7 @@ class UserCoreModel extends Model
         unset($oDb);
     }
 
-    /**
-     * @return string
-     */
-    public function getUserWithAvatarOnlySql()
+    public function getUserWithAvatarOnlySql(): string
     {
         return ' AND avatar IS NOT NULL AND approvedAvatar = 1';
     }
