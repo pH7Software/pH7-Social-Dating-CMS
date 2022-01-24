@@ -32,7 +32,8 @@ class MailForm
             Header::redirect();
         }
 
-        $oHttpRequest = new HttpRequest; // For Reply Function
+        $oHttpRequest = new HttpRequest;
+        $sRecipient = $oHttpRequest->get('recipient');
 
         $oForm = new \PFBC\Form('form_compose_mail');
         $oForm->configure(['action' => '']);
@@ -44,7 +45,7 @@ class MailForm
                 'recipient',
                 [
                     'id' => 'recipient',
-                    'value' => $oHttpRequest->get('recipient'),
+                    'value' => $sRecipient,
                     'required' => 1
                 ]
             )
@@ -70,7 +71,7 @@ class MailForm
                 [
                     'id' => 'str_msg',
                     'onblur' => 'CValid(this.value,this.id,2,2500)',
-                    'placeholder' => t('Say something nice to %0% 😊', $oHttpRequest->get('recipient')),
+                    'placeholder' => !empty($sRecipient) ? t('Say something nice to %0% 😊', $sRecipient) : t('Say something nice 😊'),
                     'value' => $oHttpRequest->get('message'),
                     'validation' => new Str(2, 2500),
                     'required' => 1
