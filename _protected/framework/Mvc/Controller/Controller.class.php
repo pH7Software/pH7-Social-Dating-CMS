@@ -94,7 +94,7 @@ abstract class Controller extends Core implements Controllable
      *
      * @return void
      */
-    final public function manualTplInclude($sFile): void
+    final public function manualTplInclude(string $sFile): void
     {
         $this->view->manual_include = $sFile;
     }
