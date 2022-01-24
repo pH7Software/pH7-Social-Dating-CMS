@@ -9,6 +9,8 @@
  * @package          PH7 / Framework / Cookie
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Cookie;
 
 defined('PH7') or exit('Restricted access');
@@ -84,7 +86,7 @@ class Cookie
      *
      * @return bool
      */
-    public function exists($mName)
+    public function exists($mName): bool
     {
         $bExists = false; // Default value
 
@@ -108,7 +110,7 @@ class Cookie
      *
      * @return void
      */
-    public function remove($mName)
+    public function remove($mName): void
     {
         if (is_array($mName)) {
             foreach ($mName as $sName) {

@@ -23,7 +23,7 @@ class Session
     /**
      * @param bool|null $bDisableSessionCache Disable PHP's session cache.
      */
-    public function __construct($bDisableSessionCache = false)
+    public function __construct(bool $bDisableSessionCache = false)
     {
         if (!$this->isSessionActivated()) {
             if ($bDisableSessionCache) {
@@ -75,7 +75,7 @@ class Session
      *
      * @return bool
      */
-    public function exists($mName)
+    public function exists($mName): bool
     {
         $bExists = false; // Default value
 
@@ -99,7 +99,7 @@ class Session
      *
      * @return void
      */
-    public function remove($mName)
+    public function remove($mName): void
     {
         if (is_array($mName)) {
             foreach ($mName as $sName) {
@@ -119,7 +119,7 @@ class Session
      *
      * @return void
      */
-    public function regenerateId()
+    public function regenerateId(): void
     {
         if ($this->isSessionActivated()) {
             session_regenerate_id(true);
@@ -129,7 +129,7 @@ class Session
     /**
      * Destroy all PHP's sessions.
      */
-    public function destroy()
+    public function destroy(): void
     {
         if (!empty($_SESSION)) {
             $_SESSION = [];
@@ -143,7 +143,7 @@ class Session
      *
      * @return void
      */
-    private function initializePHPSession()
+    private function initializePHPSession(): void
     {
         session_name(Config::getInstance()->values['session']['cookie_name']);
 
@@ -165,15 +165,12 @@ class Session
         @session_start();
     }
 
-    /**
-     * @return bool
-     */
-    private function isSessionActivated()
+    private function isSessionActivated(): bool
     {
         return session_status() === PHP_SESSION_ACTIVE;
     }
 
-    private function close()
+    private function close(): void
     {
         session_write_close();
     }
