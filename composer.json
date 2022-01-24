@@ -58,6 +58,7 @@
     "ext-xml": "*",
     "ext-zip": "*",
     "ext-zlib": "*",
+    "ext-pdo": "*",
     "arcansecurity/skeerel-php": "^2.5",
     "arcturial/clickatell": "^3.0",
     "aws/aws-sdk-php": "^3.200",
