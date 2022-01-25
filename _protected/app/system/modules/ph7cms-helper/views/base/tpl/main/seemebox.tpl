@@ -3,7 +3,7 @@
         <h1>{lang 'Sex!'} ❤️</h1>
 
         <p>
-            {lang 'Sorry, just need your attention 😉'} {lang "Don't forget to 'Star' the software you ❤"}
+            {lang 'Sorry, just need your attention 😉'} {lang "Don't forget to <a href='%0%'>'Star'</a> the software you ❤️", $config->values['module.setting']['github.repository_link']}
         </p>
 
         <iframe

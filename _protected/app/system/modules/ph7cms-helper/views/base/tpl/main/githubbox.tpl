@@ -6,10 +6,14 @@
 
         <figure class="center">
             <a href="{% $config->values['module.setting']['github.repository_link'] %}">
-                <img src="{url_tpl_mod_img}github.svg" alt="pH7Builder on Github" />
+                <img
+                    src="{url_tpl_mod_img}github.svg"
+                    alt="pH7Builder on Github"
+                    title="{lang 'Star pH7Builder on Github'}"
+                />
             </a>
             <figcaption>
-                <em>{lang 'Will you do it? Awesome! 😊️'}</em>
+                <em>{lang '😊️ Will you do it? 👀'}</em>
             </figcaption>
         </figure>
     </div>

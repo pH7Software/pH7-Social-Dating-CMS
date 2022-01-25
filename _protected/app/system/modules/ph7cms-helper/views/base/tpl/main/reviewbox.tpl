@@ -6,10 +6,14 @@
 
         <figure class="center">
             <a href="{% $config->values['module.setting']['review.link'] %}">
-                <img src="{url_tpl_mod_img}review.svg" alt="Sourceforge Reviews" />
+                <img
+                    src="{url_tpl_mod_img}review.svg"
+                    alt="Sourceforge Reviews"
+                    title="{lang 'Leave a Review'}"
+                />
             </a>
             <figcaption>
-                <em>{lang 'Really appreciate it! 😊'}</em>
+                <em>{lang 'Really appreciate! 😊'}</em>
             </figcaption>
         </figure>
     </div>

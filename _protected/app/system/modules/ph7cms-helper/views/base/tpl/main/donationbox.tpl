@@ -24,7 +24,12 @@
                 {{ $patreon_btn = $patreon_btns[mt_rand(0,1)] }}
 
                 <a href="{% $config->values['module.setting']['patreon.link'] %}" rel="noreferrer">
-                    <img class="img-rounded" src="{url_tpl_mod_img}{patreon_btn}" alt="Patreon" />
+                    <img
+                        class="img-rounded"
+                        src="{url_tpl_mod_img}{patreon_btn}"
+                        alt="Patreon"
+                        title="{lang 'Go to Patreon'}"
+                    />
                 </a>
             {/if}
         </p>

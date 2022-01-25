@@ -15184,7 +15184,7 @@ msgid "<a href=\"%0%\">Star pH7Builder</a> on Github?"
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/githubbox.tpl:10
-msgid "Will you do it? Awesome! 😊️"
+msgid "😊️ Will you do it? 👀"
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/reviewbox.tpl:3
@@ -15192,7 +15192,7 @@ msgid "Are you Feeling Generous Enough? Will you <a href=\"%0%\">Give a Nice Rev
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/reviewbox.tpl:10
-msgid "Really appreciate it! 😊"
+msgid "Really appreciate! 😊"
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/reviewboxrecall.tpl:3
