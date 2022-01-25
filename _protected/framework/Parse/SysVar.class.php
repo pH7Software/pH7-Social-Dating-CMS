@@ -1,10 +1,9 @@
 <?php
 /**
- * @title            SysVar Class
  * @desc             Parse the global pH7Builder variables.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Parse
  */
@@ -20,11 +19,14 @@ use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Registry\Registry;
 use PH7\Framework\Session\Session;
+use PH7\Framework\Str\Str;
 
 class SysVar
 {
     private const REGEX_NOT_PARSING = '/#!.+!#/';
     private const NOT_PARSING_DELIMITERS = ['#!', '!#'];
+
+    private Str $oStr;
 
     private string $sVar;
 
@@ -37,6 +39,11 @@ class SysVar
         '%software_email%' => Kernel::SOFTWARE_EMAIL,
         '%software_website%' => Kernel::SOFTWARE_WEBSITE
     ];
+
+    public function __construct()
+    {
+        $this->oStr = new Str;
+    }
 
     /**
      * Parser for the System variables.
@@ -62,10 +69,10 @@ class SysVar
     private function parseSiteVars(): void
     {
         $oRegistry = Registry::getInstance();
-        $this->sVar = str_replace('%site_name%', $oRegistry->site_name, $this->sVar);
-        $this->sVar = str_replace('%url_relative%', PH7_RELATIVE, $this->sVar);
-        $this->sVar = str_replace(['%site_url%', '%url_root%'], $oRegistry->site_url, $this->sVar);
-        $this->sVar = str_replace('%url_static%', PH7_URL_STATIC, $this->sVar);
+        $this->sVar = $this->oStr->replace('%site_name%', $oRegistry->site_name, $this->sVar);
+        $this->sVar = $this->oStr->replace('%url_relative%', PH7_RELATIVE, $this->sVar);
+        $this->sVar = $this->oStr->replace(['%site_url%', '%url_root%'], $oRegistry->site_url, $this->sVar);
+        $this->sVar = $this->oStr->replace('%url_static%', PH7_URL_STATIC, $this->sVar);
         unset($oRegistry);
     }
 
@@ -73,7 +80,7 @@ class SysVar
     {
         $oSession = new Session;
         $sAffUsername = $oSession->exists('affiliate_username') ? $oSession->get('affiliate_username') : 'aid';
-        $this->sVar = str_replace(
+        $this->sVar = $this->oStr->replace(
             '%affiliate_url%',
             Uri::get('affiliate', 'router', 'refer', $sAffUsername),
             $this->sVar
@@ -83,19 +90,19 @@ class SysVar
 
     private function parseGlobalVars(): void
     {
-        $this->sVar = str_replace('%ip%', Ip::get(), $this->sVar);
+        $this->sVar = $this->oStr->replace('%ip%', Ip::get(), $this->sVar);
     }
 
     private function parseKernelVars(): void
     {
         foreach (self::$aKernelVariables as $sKey => $sValue) {
-            $this->sVar = str_replace($sKey, $sValue, $this->sVar);
+            $this->sVar = $this->oStr->replace($sKey, $sValue, $this->sVar);
         }
     }
 
     private function removeNotParsingDelimiters(): void
     {
-        $this->sVar = str_replace(self::NOT_PARSING_DELIMITERS, '', $this->sVar);
+        $this->sVar = $this->oStr->replace(self::NOT_PARSING_DELIMITERS, '', $this->sVar);
     }
 
     private function notParsingVars(): bool

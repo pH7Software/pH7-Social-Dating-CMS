@@ -201,6 +201,11 @@ namespace PH7\Framework\Str {
             return trim($sText, $sCharList);
         }
 
+        public static function replace($sSearchValue, $sReplaceValue = '', $sValue = '')
+        {
+            return str_replace($sSearchValue, $sReplaceValue, $sValue);
+        }
+
         /**
          * Cut a piece of string to make an extract (an ellipsis).
          *
