@@ -23,8 +23,8 @@ use PH7\Framework\Session\Session;
 
 class SysVar
 {
-    const REGEX_NOT_PARSING = '/#!.+!#/';
-    const NOT_PARSING_DELIMITERS = ['#!', '!#'];
+    private const REGEX_NOT_PARSING = '/#!.+!#/';
+    private const NOT_PARSING_DELIMITERS = ['#!', '!#'];
 
     private string $sVar;
 
