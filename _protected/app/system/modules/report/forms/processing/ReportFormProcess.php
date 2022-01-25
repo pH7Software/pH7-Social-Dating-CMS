@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Report / Form / Processing
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -41,10 +43,7 @@ class ReportFormProcess extends Form
         }
     }
 
-    /**
-     * @return string
-     */
-    private function getUrl()
+    private function getUrl(): string
     {
         return $this->httpRequest->postExists('url') ?
             $this->httpRequest->post('url') :

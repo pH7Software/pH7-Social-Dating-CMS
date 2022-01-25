@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / User / Form / Processing
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -15,8 +17,7 @@ use PH7\Framework\Security\Moderation\Filter;
 
 class AvatarFormProcess extends Form implements NudityDetectable
 {
-    /** @var int */
-    private $iApproved;
+    private int $iApproved;
 
     public function __construct()
     {
@@ -54,12 +55,12 @@ class AvatarFormProcess extends Form implements NudityDetectable
         }
     }
 
-    public function isNudityFilterEligible()
+    public function isNudityFilterEligible(): bool
     {
         return $this->iApproved === 1 && !AdminCore::auth() && DbConfig::getSetting('nudityFilter');
     }
 
-    public function checkNudityFilter()
+    public function checkNudityFilter(): void
     {
         if (Filter::isNudity($_FILES['avatar']['tmp_name'])) {
             // Avatar doesn't seem suitable for anyone. Overwrite "$iApproved" to set it for moderation
@@ -67,10 +68,7 @@ class AvatarFormProcess extends Form implements NudityDetectable
         }
     }
 
-    /**
-     * @return bool
-     */
-    private function doesAdminEdit()
+    private function doesAdminEdit(): bool
     {
         $aGetVariableNames = ['profile_id', 'username'];
 

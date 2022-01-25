@@ -9,6 +9,8 @@
  * @package          PH7 / Framework / Parse
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Parse;
 
 defined('PH7') or exit('Restricted access');
@@ -24,11 +26,9 @@ class SysVar
     const REGEX_NOT_PARSING = '/#!.+!#/';
     const NOT_PARSING_DELIMITERS = ['#!', '!#'];
 
-    /** @var string */
-    private $sVar;
+    private string $sVar;
 
-    /** @var array */
-    private static $aKernelVariables = [
+    private static array $aKernelVariables = [
         '%software_name%' => Kernel::SOFTWARE_NAME,
         '%software_author%' => 'Pierre-Henry Soria',
         '%software_version_name%' => Kernel::SOFTWARE_VERSION_NAME,
@@ -40,12 +40,8 @@ class SysVar
 
     /**
      * Parser for the System variables.
-     *
-     * @param string $sVar
-     *
-     * @return string The new parsed text
      */
-    public function parse($sVar)
+    public function parse(string $sVar): string
     {
         $this->sVar = $sVar;
 
@@ -63,7 +59,7 @@ class SysVar
         return $this->sVar;
     }
 
-    private function parseSiteVars()
+    private function parseSiteVars(): void
     {
         $oRegistry = Registry::getInstance();
         $this->sVar = str_replace('%site_name%', $oRegistry->site_name, $this->sVar);
@@ -73,7 +69,7 @@ class SysVar
         unset($oRegistry);
     }
 
-    private function parseAffiliateVars()
+    private function parseAffiliateVars(): void
     {
         $oSession = new Session;
         $sAffUsername = $oSession->exists('affiliate_username') ? $oSession->get('affiliate_username') : 'aid';
@@ -85,28 +81,25 @@ class SysVar
         unset($oSession);
     }
 
-    private function parseGlobalVars()
+    private function parseGlobalVars(): void
     {
         $this->sVar = str_replace('%ip%', Ip::get(), $this->sVar);
     }
 
-    private function parseKernelVars()
+    private function parseKernelVars(): void
     {
         foreach (self::$aKernelVariables as $sKey => $sValue) {
             $this->sVar = str_replace($sKey, $sValue, $this->sVar);
         }
     }
 
-    private function removeNotParsingDelimiters()
+    private function removeNotParsingDelimiters(): void
     {
         $this->sVar = str_replace(self::NOT_PARSING_DELIMITERS, '', $this->sVar);
     }
 
-    /**
-     * @return bool
-     */
-    private function notParsingVars()
+    private function notParsingVars(): bool
     {
-        return preg_match(self::REGEX_NOT_PARSING, $this->sVar);
+        return (bool)preg_match(self::REGEX_NOT_PARSING, $this->sVar);
     }
 }

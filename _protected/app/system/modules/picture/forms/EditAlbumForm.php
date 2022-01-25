@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Picture / Form
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 use PFBC\Element\Button;
@@ -22,7 +24,7 @@ use PH7\Framework\Url\Header;
 
 class EditAlbumForm
 {
-    public static function display()
+    public static function display(): void
     {
         if (isset($_POST['submit_edit_picture_album'])) {
             if (\PFBC\Form::isValid($_POST['submit_edit_picture_album'])) {

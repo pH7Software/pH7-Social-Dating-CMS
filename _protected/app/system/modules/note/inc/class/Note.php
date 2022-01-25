@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Note / Inc / Class
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 use PH7\Framework\Cache\Cache;
@@ -37,7 +39,7 @@ class Note extends WriteCore
      * @throws PermissionException
      * @throws PH7InvalidArgumentException
      */
-    public function setThumb(stdClass $oPost, NoteModel $oNoteModel, File $oFile)
+    public function setThumb(stdClass $oPost, NoteModel $oNoteModel, File $oFile): void
     {
         $oImage = new FileStorageImage($_FILES['thumb']['tmp_name']);
         if (!$oImage->validate()) {
@@ -57,30 +59,18 @@ class Note extends WriteCore
         unset($oImage);
     }
 
-    /**
-     * @return bool
-     */
-    public function isThumbnailUploaded()
+    public function isThumbnailUploaded(): bool
     {
         return !empty($_FILES['thumb']['tmp_name']);
     }
 
-    /**
-     * Checks the Post ID.
-     *
-     * @param string $sPostId
-     * @param int $iProfileId
-     * @param NoteModel $oNoteModel
-     *
-     * @return bool
-     */
-    public function checkPostId($sPostId, $iProfileId, NoteModel $oNoteModel)
+    public function checkPostId(string $sPostId, int $iProfileId, NoteModel $oNoteModel): bool
     {
         return preg_match('#^' . Config::getInstance()->values['module.setting']['post_id.pattern'] . '$#', $sPostId) &&
             !$oNoteModel->postIdExists($sPostId, $iProfileId);
     }
 
-    public static function clearCache()
+    public static function clearCache(): void
     {
         (new Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
     }

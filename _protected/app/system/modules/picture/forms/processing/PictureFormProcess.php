@@ -9,6 +9,8 @@
  * @version        1.4
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -31,21 +33,18 @@ class PictureFormProcess extends Form implements NudityDetectable
     const PICTURE5_SIZE = 1000;
     const PICTURE6_SIZE = 1200;
 
-    /** @var array */
-    private $aPhotos;
+    private array $aPhotos;
 
-    /** @var string */
-    private $sApproved;
+    private string $sApproved;
 
-    /** @var int */
-    private $iPhotoIndex;
+    private int $iPhotoIndex;
 
     public function __construct()
     {
         parent::__construct();
 
         /**
-         * This can cause minor errors (eg if a user sent a file that is not a photo).
+         * This can cause minor errors (e.g. if a user sent a file that is not a photo).
          * So we hide the errors if we are not in development mode.
          */
         if (!isDebug()) {
@@ -163,12 +162,12 @@ class PictureFormProcess extends Form implements NudityDetectable
         );
     }
 
-    public function isNudityFilterEligible()
+    public function isNudityFilterEligible(): bool
     {
         return $this->sApproved === '1' && DbConfig::getSetting('nudityFilter');
     }
 
-    public function checkNudityFilter()
+    public function checkNudityFilter(): void
     {
         if (Filter::isNudity($this->aPhotos[$this->iPhotoIndex])) {
             // The photo(s) seems to be suitable for adults only, so set for moderation
@@ -178,36 +177,24 @@ class PictureFormProcess extends Form implements NudityDetectable
 
     /**
      * Create a nice picture title if no title is specified.
-     *
-     * @param FileStorage $oPicture
-     *
-     * @return string
      */
-    private function getImageTitle(FileStorage $oPicture)
+    private function getImageTitle(FileStorageImage $oPicture): string
     {
         if ($this->isPhotoTitleEligible()) {
             return $this->httpRequest->post('title');
         }
 
-        // Otherwise get the name from the filename
+        // Otherwise, get the name from the filename
         return $this->getTitleFromFileName($oPicture);
     }
 
-    /**
-     * @return bool
-     */
-    private function isPhotoTitleEligible()
+    private function isPhotoTitleEligible(): bool
     {
         return $this->httpRequest->postExists('title') &&
             $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2;
     }
 
-    /**
-     * @param FileStorage $oPicture
-     *
-     * @return string
-     */
-    private function getTitleFromFileName(FileStorage $oPicture)
+    private function getTitleFromFileName(FileStorageImage $oPicture): string
     {
         return $this->str->upperFirst(
             str_replace(

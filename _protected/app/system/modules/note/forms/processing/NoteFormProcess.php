@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Note / Form / Processing
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -19,8 +21,7 @@ use PH7\Framework\Url\Header;
 
 class NoteFormProcess extends Form implements NudityDetectable
 {
-    /** @var int */
-    private $iApproved;
+    private int $iApproved;
 
     public function __construct()
     {
@@ -31,7 +32,7 @@ class NoteFormProcess extends Form implements NudityDetectable
         $oNote = new Note;
         $oNoteModel = new NoteModel;
         $sCurrentTime = $this->dateTime->get()->dateTime('Y-m-d H:i:s');
-        $iProfileId = $this->session->get('member_id');
+        $iProfileId = (int)$this->session->get('member_id');
         $iTimeDelay = (int)DbConfig::getSetting('timeDelaySendNote');
 
         $sPostId = $this->str->lower($this->httpRequest->post('post_id'));
@@ -87,12 +88,12 @@ class NoteFormProcess extends Form implements NudityDetectable
         }
     }
 
-    public function isNudityFilterEligible()
+    public function isNudityFilterEligible(): bool
     {
         return $this->iApproved === 1 && DbConfig::getSetting('nudityFilter');
     }
 
-    public function checkNudityFilter()
+    public function checkNudityFilter(): void
     {
         if (Filter::isNudity($_FILES['thumb']['tmp_name'])) {
             $this->iApproved = 0;
@@ -110,7 +111,7 @@ class NoteFormProcess extends Form implements NudityDetectable
      * @internal WARNING: Be careful, you should use Http::NO_CLEAN constant,
      * otherwise Http::post() method removes the special tags and damages the SQL queries for entry into the database.
      */
-    private function setCategories($iProfileId, NoteModel $oNoteModel)
+    private function setCategories($iProfileId, NoteModel $oNoteModel): void
     {
         $aCategoryIds = $this->httpRequest->post('category_id', Http::NO_CLEAN);
 
@@ -126,17 +127,13 @@ class NoteFormProcess extends Form implements NudityDetectable
     /**
      * @return bool TRUE if the maximum allowed categories has been reached, FALSE otherwise.
      */
-    private function hasCategoriesReachedLimit()
+    private function hasCategoriesReachedLimit(): bool
     {
         $aCategories = $this->httpRequest->post('category_id');
 
         return is_array($aCategories) && count($aCategories) > Note::MAX_CATEGORY_ALLOWED;
     }
-
-    /**
-     * @param string $sPostId
-     */
-    private function redirectToPostPage($sPostId)
+    private function redirectToPostPage(string $sPostId): void
     {
         if ($this->iApproved === 0) {
             $sMsg = t('Your note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');

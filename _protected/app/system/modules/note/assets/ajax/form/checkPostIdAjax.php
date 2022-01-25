@@ -10,15 +10,16 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Datatype\Type;
 use PH7\Framework\Mvc\Request\Http;
 
 $oHttpRequest = new Http;
 $iStatus = 0; // Error Default Value
 
 if ($oHttpRequest->postExists('post_id')) {
-    $iPostId = $oHttpRequest->post('post_id');
-    $iProfileId = $oHttpRequest->post('profile_id');
-    $iStatus = (new Note)->checkPostId($iPostId, $iProfileId, new NoteModel) ? 1 : 0;
+    $sPostId = $oHttpRequest->post('post_id');
+    $iProfileId = $oHttpRequest->post('profile_id', Type::INTEGER);
+    $iStatus = (new Note)->checkPostId($sPostId, $iProfileId, new NoteModel) ? 1 : 0;
 }
 
 echo json_encode(['status' => $iStatus]);

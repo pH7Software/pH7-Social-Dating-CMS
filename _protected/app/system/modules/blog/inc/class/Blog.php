@@ -20,7 +20,7 @@ use stdClass;
 
 class Blog extends WriteCore
 {
-    const THUMBNAIL_IMAGE_SIZE = 100;
+    private const THUMBNAIL_IMAGE_SIZE = 100;
 
     /**
      * Sets the Blog Thumbnail.

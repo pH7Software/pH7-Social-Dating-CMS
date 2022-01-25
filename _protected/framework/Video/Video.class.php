@@ -23,7 +23,7 @@ use PH7\Framework\File\Upload;
 
 class Video extends Upload
 {
-    const SUPPORTED_TYPES = [
+    public const SUPPORTED_TYPES = [
         'mov' => 'video/mov',
         'avi' => 'video/avi',
         'flv' => 'video/flv',
@@ -37,16 +37,13 @@ class Video extends Upload
         'mkv' => 'video/mkv'
     ];
 
-    const MP4_TYPE = 'mp4';
+    private const MP4_TYPE = 'mp4';
 
-    /** @var File */
-    private $oFile;
+    private File $oFile;
 
-    /** @var string */
-    private $sType;
+    private string $sType;
 
-    /** @var string */
-    private $sFfmpegPath;
+    private string $sFfmpegPath;
 
     private array $aFile;
 

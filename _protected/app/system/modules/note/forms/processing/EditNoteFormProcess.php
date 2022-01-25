@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Note / Form / Processing
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -19,8 +21,7 @@ use stdClass;
 
 class EditNoteFormProcess extends Form implements NudityDetectable
 {
-    /** @var int */
-    private $iApproved;
+    private int $iApproved;
 
     public function __construct()
     {
@@ -32,7 +33,7 @@ class EditNoteFormProcess extends Form implements NudityDetectable
         $oNoteModel = new NoteModel;
         $iNoteId = $this->httpRequest->get('id');
         $sPostId = $oNoteModel->getPostId($iNoteId);
-        $iProfileId = $this->session->get('member_id');
+        $iProfileId = (int)$this->session->get('member_id');
         $oPost = $oNoteModel->readPost($sPostId, $iProfileId);
 
         /*** Updating the ID of the post if it has changed ***/
@@ -122,12 +123,12 @@ class EditNoteFormProcess extends Form implements NudityDetectable
         $this->redirectToPostPage($sPostId);
     }
 
-    public function isNudityFilterEligible()
+    public function isNudityFilterEligible(): bool
     {
         return $this->iApproved === 1 && DbConfig::getSetting('nudityFilter');
     }
 
-    public function checkNudityFilter()
+    public function checkNudityFilter(): void
     {
         if (Filter::isNudity($_FILES['thumb']['tmp_name'])) {
             $this->iApproved = 0;
@@ -167,7 +168,7 @@ class EditNoteFormProcess extends Form implements NudityDetectable
         return true;
     }
 
-    private function thumbnail(stdClass $oPost, NoteModel $oNoteModel, Note $oNote)
+    private function thumbnail(stdClass $oPost, NoteModel $oNoteModel, Note $oNote): void
     {
         if ($oNote->isThumbnailUploaded()) {
             if ($this->isNudityFilterEligible()) {
@@ -178,12 +179,7 @@ class EditNoteFormProcess extends Form implements NudityDetectable
         }
     }
 
-    /**
-     * @param string $sPostId
-     *
-     * @return void
-     */
-    private function redirectToPostPage($sPostId)
+    private function redirectToPostPage(string $sPostId): void
     {
         if ($this->iApproved === 0) {
             $sMsg = t('Your updated note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');

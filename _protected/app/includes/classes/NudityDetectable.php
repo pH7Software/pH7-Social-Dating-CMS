@@ -10,15 +10,10 @@ namespace PH7;
 
 interface NudityDetectable
 {
-    /**
-     * @return bool
-     */
-    public function isNudityFilterEligible();
+    public function isNudityFilterEligible(): bool;
 
     /**
      * Overwrite $iApproved if the image doesn't seem suitable to anyone.
-     *
-     * @return void
      */
-    public function checkNudityFilter();
+    public function checkNudityFilter(): void;
 }

@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Video / Form
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 use PFBC\Element\Button;
@@ -20,6 +22,7 @@ use PFBC\Element\Token;
 use PFBC\Validation\RegExp;
 use PFBC\Validation\Str;
 use PFBC\Validation\Url;
+use PH7\Datatype\Type;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
@@ -29,7 +32,7 @@ use PH7\Framework\Url\Header;
 
 class VideoForm
 {
-    public static function display()
+    public static function display(): void
     {
         if (isset($_POST['submit_video'])) {
             if (\PFBC\Form::isValid($_POST['submit_video'])) {
@@ -158,12 +161,15 @@ class VideoForm
     /**
      * Get album ID value.
      *
-     * @return int|null
+     * @return int|null The album ID if found, NULL otherwise.
      */
-    private static function getAlbumId()
+    private static function getAlbumId(): ?int
     {
         $oHttpRequest = new HttpRequest;
-        $iAlbumId = $oHttpRequest->getExists('album_id') ? $oHttpRequest->get('album_id') : null;
+        $iAlbumId = $oHttpRequest->getExists('album_id') ? $oHttpRequest->get(
+            'album_id',
+            Type::INTEGER
+        ) : null;
         unset($oHttpRequest);
 
         return $iAlbumId;
