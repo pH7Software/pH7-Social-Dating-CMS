@@ -52,14 +52,15 @@ class PictureModel extends PictureCoreModel
      */
     public function addPhoto($iProfileId, $iAlbumId, $sTitle, $sDescription, $sFile, $sCreatedDate, $sApproved = '1')
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::PICTURE) . '(profileId, albumId, title, description, file, createdDate, approved)
-            VALUES (:profileId, :albumId, :title, :description, :file, :createdDate, :approved)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::PICTURE) . '(profileId, albumId, title, description, file, file_cdn_url, createdDate, approved)
+            VALUES (:profileId, :albumId, :title, :description, :file, :file_cdn_url, :createdDate, :approved)');
 
         $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
         $rStmt->bindValue(':albumId', $iAlbumId, PDO::PARAM_INT);
         $rStmt->bindValue(':title', $sTitle, PDO::PARAM_STR);
         $rStmt->bindValue(':description', $sDescription, PDO::PARAM_STR);
         $rStmt->bindValue(':file', $sFile, PDO::PARAM_STR);
+        $rStmt->bindValue(':file_cdn_url', '', PDO::PARAM_STR);
         $rStmt->bindValue(':createdDate', $sCreatedDate, PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $sApproved, PDO::PARAM_STR);
 
