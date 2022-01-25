@@ -201,9 +201,16 @@ namespace PH7\Framework\Str {
             return trim($sText, $sCharList);
         }
 
-        public static function replace($sSearchValue, $sReplaceValue = '', $sValue = '')
+        /**
+         * @param array|string $mSearchValue
+         * @param array|string $mReplaceValue
+         * @param array|string $mValue
+         *
+         * @return string|string[]
+         */
+        public static function replace($mSearchValue, $mReplaceValue = '', $mValue = '')
         {
-            return str_replace($sSearchValue, $sReplaceValue, $sValue);
+            return str_replace($mSearchValue, $mReplaceValue, $mValue);
         }
 
         /**
