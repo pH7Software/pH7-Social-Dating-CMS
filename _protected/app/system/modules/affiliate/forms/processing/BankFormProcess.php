@@ -6,7 +6,10 @@
  * @package        PH7 / App / System / Module / Affiliate / Form / Processing
  */
 
+declare(strict_types=1);
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 class BankFormProcess extends Form
@@ -35,9 +38,9 @@ class BankFormProcess extends Form
     }
 
     /**
-     * @param int $iProfileId
+     * @param int|string $iProfileId
      */
-    private function clearCache($iProfileId)
+    private function clearCache($iProfileId): void
     {
         (new Framework\Cache\Cache)->start(
             UserCoreModel::CACHE_GROUP,

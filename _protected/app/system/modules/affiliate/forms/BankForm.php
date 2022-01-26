@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Affiliate / Form
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 use PFBC\Element\Button;
@@ -14,6 +16,7 @@ use PFBC\Element\Hidden;
 use PFBC\Element\HTMLExternal;
 use PFBC\Element\Token;
 use PFBC\Validation\BankAccount;
+use PH7\Datatype\Type;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Session\Session;
@@ -21,7 +24,7 @@ use PH7\Framework\Url\Header as UrlHeader;
 
 class BankForm
 {
-    public static function display()
+    public static function display(): void
     {
         $oHttpRequest = new HttpRequest;
 
@@ -88,21 +91,18 @@ class BankForm
     /**
      * @param HttpRequest $oHttpRequest
      *
-     * @return int
+     * @return int|string
      */
     private static function getProfileId(HttpRequest $oHttpRequest)
     {
         if (self::isAdminLogged() && $oHttpRequest->getExists('profile_id')) {
-            return $oHttpRequest->get('profile_id', 'int');
+            return $oHttpRequest->get('profile_id', Type::INTEGER);
         }
 
         return (new Session)->get('affiliate_id');
     }
 
-    /**
-     * @return bool
-     */
-    private static function isAdminLogged()
+    private static function isAdminLogged(): bool
     {
         return AdminCore::auth() && !Affiliate::auth();
     }
