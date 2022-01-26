@@ -31,8 +31,22 @@ class AnalyticsApiForm
         $oForm->configure(['action' => '']);
         $oForm->addElement(new Hidden('submit_analytics', 'form_analytics'));
         $oForm->addElement(new Token('analytics'));
-        $oForm->addElement(new Textarea(t('Your analytics tracking code (e.g., Google Analytics, Matomo)'), 'code', ['value' => (new Design)->analyticsApi(false)]));
-        $oForm->addElement(new Button);
+        $oForm->addElement(
+            new Textarea(
+                t('Your analytics tracking code (e.g., Google Analytics, Matomo)'),
+                'code',
+                ['value' => (new Design)->analyticsApi(false)]
+            )
+        );
+        $oForm->addElement(
+            new Button(
+                t('Save'),
+                'submit',
+                [
+                    'icon' => 'check'
+                ]
+            )
+        );
         $oForm->render();
     }
 }
