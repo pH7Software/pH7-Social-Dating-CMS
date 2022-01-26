@@ -6,8 +6,11 @@
  * @package        PH7 / App / System / Module / Affiliate / Controller
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
+use PH7\Datatype\Type;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Layout\Html\Security as HtmlSecurity;
@@ -19,27 +22,23 @@ use PH7\Framework\Url\Header;
 use PH7\Framework\Util\Various;
 use stdClass;
 
-class AdminController extends Controller
+class AdminController extends Controller implements UserModeratable
 {
     use BulkAction;
 
-    const PROFILES_PER_PAGE = 15;
-    const REDIRECTION_DELAY_IN_SEC = 5;
+    private const PROFILES_PER_PAGE = 15;
+    private const REDIRECTION_DELAY_IN_SEC = 5;
 
-    /** @var Affiliate */
-    private $oAff;
+    private Affiliate $oAff;
 
-    /** @var AffiliateModel */
-    private $oAffModel;
+    private AffiliateModel $oAffModel;
 
-    /** @var string */
+    /** @var string|null */
     private $sMsg;
 
-    /** @var string */
-    private $sTitle;
+    private string $sTitle;
 
-    /** @var int */
-    private $iTotalUsers;
+    private int $iTotalUsers;
 
     public function __construct()
     {
@@ -49,7 +48,7 @@ class AdminController extends Controller
         $this->oAffModel = new AffiliateModel;
     }
 
-    public function index()
+    public function index(): void
     {
         Header::redirect(
             Uri::get('affiliate', 'admin', 'browse'),
@@ -57,7 +56,7 @@ class AdminController extends Controller
         );
     }
 
-    public function config()
+    public function config(): void
     {
         $this->sTitle = t('Affiliate Settings');
         $this->view->page_title = $this->sTitle;
@@ -65,7 +64,7 @@ class AdminController extends Controller
         $this->output();
     }
 
-    public function banner()
+    public function banner(): void
     {
         Header::redirect(
             Uri::get(
@@ -77,13 +76,13 @@ class AdminController extends Controller
         );
     }
 
-    public function countryRestriction()
+    public function countryRestriction(): void
     {
         $this->view->page_title = $this->view->h1_title = t('Country Restrictions - Affiliate');
         $this->output();
     }
 
-    public function browse()
+    public function browse(): void
     {
         $sKeywords = $this->httpRequest->get('looking');
         $sOrder = $this->httpRequest->get('order');
@@ -135,7 +134,7 @@ class AdminController extends Controller
         $this->output();
     }
 
-    public function search()
+    public function search(): void
     {
         $this->sTitle = t('Affiliate Search');
         $this->view->page_title = $this->sTitle;
@@ -143,7 +142,7 @@ class AdminController extends Controller
         $this->output();
     }
 
-    public function add()
+    public function add(): void
     {
         $this->sTitle = t('Add an Affiliate');
         $this->view->page_title = $this->sTitle;
@@ -151,7 +150,7 @@ class AdminController extends Controller
         $this->output();
     }
 
-    public function loginUserAs($iId = null)
+    public function loginUserAs($iId = null): void
     {
         if ($oUser = $this->oAffModel->readProfile($iId, DbTableName::AFFILIATE)) {
             $aSessionData = [
@@ -182,7 +181,7 @@ class AdminController extends Controller
         }
     }
 
-    public function logoutUserAs()
+    public function logoutUserAs(): void
     {
         $this->sMsg = t('You are now logged out as affiliate: %0%!', $this->session->get('affiliate_username'));
 
@@ -206,23 +205,23 @@ class AdminController extends Controller
         );
     }
 
-    public function approve()
+    public function approve(): void
     {
         Header::redirect(
             Uri::get('affiliate', 'admin', 'browse'),
-            $this->moderateRegistration($this->httpRequest->post('id'), 1)
+            $this->moderateRegistration($this->httpRequest->post('id', Type::INTEGER), 1)
         );
     }
 
-    public function disapprove()
+    public function disapprove(): void
     {
         Header::redirect(
             Uri::get('affiliate', 'admin', 'browse'),
-            $this->moderateRegistration($this->httpRequest->post('id'), 0)
+            $this->moderateRegistration($this->httpRequest->post('id', Type::INTEGER), 0)
         );
     }
 
-    public function approveAll()
+    public function approveAll(): void
     {
         $aActions = $this->httpRequest->post('action');
         $bActionsEligible = $this->areActionsEligible($aActions);
@@ -242,7 +241,7 @@ class AdminController extends Controller
         );
     }
 
-    public function disapproveAll()
+    public function disapproveAll(): void
     {
         $aActions = $this->httpRequest->post('action');
         $bActionsEligible = $this->areActionsEligible($aActions);
@@ -262,7 +261,7 @@ class AdminController extends Controller
         );
     }
 
-    public function ban()
+    public function ban(): void
     {
         $iId = $this->httpRequest->post('id');
 
@@ -279,7 +278,7 @@ class AdminController extends Controller
         );
     }
 
-    public function unBan()
+    public function unBan(): void
     {
         $iId = $this->httpRequest->post('id');
 
@@ -296,7 +295,7 @@ class AdminController extends Controller
         );
     }
 
-    public function delete()
+    public function delete(): void
     {
         $aData = explode('_', $this->httpRequest->post('id'));
         $iId = (int)$aData[0];
@@ -309,7 +308,7 @@ class AdminController extends Controller
         );
     }
 
-    public function banAll()
+    public function banAll(): void
     {
         $aActions = $this->httpRequest->post('action');
         $bActionsEligible = $this->areActionsEligible($aActions);
@@ -332,7 +331,7 @@ class AdminController extends Controller
         );
     }
 
-    public function unBanAll()
+    public function unBanAll(): void
     {
         $aActions = $this->httpRequest->post('action');
         $bActionsEligible = $this->areActionsEligible($aActions);
@@ -355,7 +354,7 @@ class AdminController extends Controller
         );
     }
 
-    public function deleteAll()
+    public function deleteAll(): void
     {
         $aActions = $this->httpRequest->post('action');
         $bActionsEligible = $this->areActionsEligible($aActions);
@@ -380,15 +379,10 @@ class AdminController extends Controller
     }
 
     /**
-     * @param int $iId
-     * @param int $iStatus
-     *
-     * @return string Status message.
-     *
      * @throws Framework\File\IOException
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
-    private function moderateRegistration($iId, $iStatus)
+    private function moderateRegistration(int $iId, int $iStatus): string
     {
         if (isset($iId, $iStatus)) {
             if ($oUser = $this->oAffModel->readProfile($iId, DbTableName::AFFILIATE)) {
@@ -415,7 +409,7 @@ class AdminController extends Controller
                     $this->sMsg = null;
                 }
 
-                if (!empty($this->sMsg)) {
+                if (!empty($sSubject) && !empty($this->sMsg)) {
                     $this->sendRegistrationMail($sSubject, $oUser);
                     $this->oAff->clearReadProfileCache($oUser->profileId, DbTableName::AFFILIATE);
 
@@ -441,9 +435,8 @@ class AdminController extends Controller
      *
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
-    private function sendRegistrationMail($sSubject, stdClass $oUser)
+    public function sendRegistrationMail(string $sSubject, stdClass $oUser): void
     {
-        // Set body messages + footer
         $this->view->content = t('Dear %0%,', $oUser->firstName) . '<br />' . $this->sMsg;
         $this->view->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $oUser->email) . '<br />' .
             t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
@@ -463,10 +456,8 @@ class AdminController extends Controller
 
     /**
      * Redirect to admin browse page, then display the default "Not Found" page.
-     *
-     * @return void
      */
-    private function setNotFoundPage()
+    private function setNotFoundPage(): void
     {
         $this->design->setRedirect(
             Uri::get(
