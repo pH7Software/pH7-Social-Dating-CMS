@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e75c16aecd92bf8be2ee2a389d490a9c",
+    "content-hash": "fb05ce06ba78a2dc24115cc02cb3f071",
     "packages": [
         {
             "name": "arcansecurity/skeerel-php",
@@ -6069,7 +6069,8 @@
         "ext-pdo_mysql": "*",
         "ext-xml": "*",
         "ext-zip": "*",
-        "ext-zlib": "*"
+        "ext-zlib": "*",
+        "ext-pdo": "*"
     },
     "platform-dev": [],
     "platform-overrides": {
