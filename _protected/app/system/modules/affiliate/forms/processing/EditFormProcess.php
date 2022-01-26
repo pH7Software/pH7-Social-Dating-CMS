@@ -48,7 +48,7 @@ class EditFormProcess extends Form
             );
         }
 
-        if (AdminCore::auth()) {
+        if (AdminCore::auth() && $this->httpRequest->postExists('sex')) {
             // For security reasons, only admins can change profile gender
             if (!$this->str->equals($this->httpRequest->post('sex'), $oAff->sex)) {
                 $oAffModel->updateProfile(
@@ -63,7 +63,7 @@ class EditFormProcess extends Form
             }
         }
 
-        if (AdminCore::auth()) {
+        if (AdminCore::auth() && $this->httpRequest->postExists('birth_date')) {
             // For security reasons, only admins can change date of birth
             if (!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oAff->birthDate)) {
                 $oAffModel->updateProfile(
