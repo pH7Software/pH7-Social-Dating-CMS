@@ -55,7 +55,7 @@ class BankForm
                 AffiliateDesign::getPayPalIcon() . t('Your Bank Account:'),
                 'bank_account',
                 [
-                    'id' => 'email_paypal',
+                    'id' => 'paypal_email',
                     'onblur' => 'CValid(this.value,this.id)',
                     'description' => t('Your Bank Account (PayPal Email Address).'),
                     'value' => self::getAffiliateBankAccount($oHttpRequest),
@@ -64,7 +64,7 @@ class BankForm
                 ]
             )
         );
-        $oForm->addElement(new HtmlExternal('<span class="input_error email_paypal"></span>'));
+        $oForm->addElement(new HtmlExternal('<span class="input_error paypal_email"></span>'));
         $oForm->addElement(new Button);
         $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();

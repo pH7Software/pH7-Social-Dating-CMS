@@ -737,7 +737,7 @@ class InstallController extends Controller
                 // Specific data only for affiliates
                 $aUser['website'] = 'https://pierrehenry.be';
                 $aUser['phone'] = $oFaker->phoneNumber;
-                $aUser['bank_account'] = $oFaker->bankAccountNumber;
+                $aUser['bank_account'] = $oFaker->companyEmail;
                 $oAffModel->add($aUser);
             }
 
