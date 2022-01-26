@@ -17,6 +17,7 @@ use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Util\Various;
+use stdClass;
 
 class AdminController extends Controller
 {
