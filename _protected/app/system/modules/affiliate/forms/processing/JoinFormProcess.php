@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Affiliate / Form / Processing
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -19,8 +21,7 @@ use PH7\Framework\Util\Various;
 
 class JoinFormProcess extends Form
 {
-    /** @var int */
-    private $iActiveType;
+    private int $iActiveType;
 
     public function __construct()
     {
@@ -29,7 +30,7 @@ class JoinFormProcess extends Form
         $this->iActiveType = (int)DbConfig::getSetting('affActivationType');
     }
 
-    public function step1()
+    public function step1(): void
     {
         $sBirthDate = $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d');
         $iAffId = (int)(new Cookie)->get(AffiliateCore::COOKIE_NAME);
@@ -79,10 +80,7 @@ class JoinFormProcess extends Form
         unset($oAffModel);
     }
 
-    /**
-     * @return bool
-     */
-    private function isUserActivated()
+    private function isUserActivated(): bool
     {
         return $this->iActiveType === RegistrationCore::NO_ACTIVATION;
     }
