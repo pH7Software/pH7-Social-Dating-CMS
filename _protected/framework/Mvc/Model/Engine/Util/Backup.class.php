@@ -30,17 +30,17 @@ class Backup implements GenerableFile
     const GZIP_COMPRESS_LEVEL = 9;
 
     /** @var string */
-    private $sPathName;
+    private $sPath;
 
     /** @var string */
     private $sSql;
 
     /**
-     * @param string $sPathName Can be null for showing the data only ( by using Backup->back()->show() ).
+     * @param string|null $sFullPath Can be null for showing the data only ( by using Backup->back()->show() ).
      */
-    public function __construct($sPathName = null)
+    public function __construct($sFullPath = null)
     {
-        $this->sPathName = $sPathName;
+        $this->sPath = $sFullPath;
     }
 
     /**
@@ -134,7 +134,7 @@ class Backup implements GenerableFile
      */
     public function save()
     {
-        $rHandle = fopen($this->sPathName, 'wb');
+        $rHandle = fopen($this->sPath, 'wb');
         fwrite($rHandle, $this->sSql);
         fclose($rHandle);
     }
@@ -146,7 +146,7 @@ class Backup implements GenerableFile
      */
     public function saveArchive()
     {
-        $rArchive = gzopen($this->sPathName, 'w');
+        $rArchive = gzopen($this->sPath, 'w');
         gzwrite($rArchive, $this->sSql);
         gzclose($rArchive);
     }
@@ -158,7 +158,7 @@ class Backup implements GenerableFile
      */
     public function restore()
     {
-        $mRet = Various::execQueryFile($this->sPathName);
+        $mRet = Various::execQueryFile($this->sPath);
         return $mRet !== true ? print_r($mRet, true) : true;
     }
 
@@ -169,11 +169,11 @@ class Backup implements GenerableFile
      */
     public function restoreArchive()
     {
-        $rArchive = gzopen($this->sPathName, 'r');
+        $rArchive = gzopen($this->sPath, 'r');
 
         $sSqlContent = '';
         while (!feof($rArchive)) {
-            $sSqlContent .= gzread($rArchive, filesize($this->sPathName));
+            $sSqlContent .= gzread($rArchive, filesize($this->sPath));
         }
 
         gzclose($rArchive);
@@ -235,7 +235,7 @@ class Backup implements GenerableFile
         /***** Set Headers *****/
         (new Browser)->noCache(); // No cache
         header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename=' . $this->sPathName);
+        header('Content-Disposition: attachment; filename=' . $this->sPath);
 
         /***** Show the SQL contents *****/
         echo $bArchive ? gzencode($this->sSql, self::GZIP_COMPRESS_LEVEL, FORCE_GZIP) : $this->sSql;
