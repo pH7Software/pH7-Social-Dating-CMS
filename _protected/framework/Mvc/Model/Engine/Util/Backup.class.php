@@ -63,8 +63,7 @@ class Backup implements GenerableFile
         foreach ($aTables as $sTable) {
             $rResult = $oDb->query('SHOW CREATE TABLE ' . $sTable);
 
-            $iNum = (int)$rResult->rowCount();
-
+            $iNum = $rResult->rowCount();
             if ($iNum > 0) {
                 $aRow = $rResult->fetch();
 
@@ -85,8 +84,7 @@ class Backup implements GenerableFile
 
             $rResult = $oDb->query('SELECT * FROM ' . $sTable);
 
-            $iNum = (int)$rResult->rowCount();
-
+            $iNum = $rResult->rowCount();
             if ($iNum > 0) {
                 while ($aRow = $rResult->fetch()) {
                     foreach ($aRow as $sColumn => $sValue) {
