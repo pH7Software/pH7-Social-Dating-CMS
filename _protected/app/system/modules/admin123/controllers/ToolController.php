@@ -133,15 +133,15 @@ class ToolController extends Controller
 
                 switch ($this->httpRequest->post('backup_type')) {
                     case 'server':
-                        $sFullPath = PH7_PATH_BACKUP_SQL . 'Database-dump.' . $sCurrentDate . '.sql';
-                        (new Backup($sFullPath))->back()->save();
-                        $this->view->msg_success = t('Data successfully dumped into file "%0%"', $sFullPath);
+                        $sFileName = 'Database-dump.' . $sCurrentDate . '.sql';
+                        (new Backup(PH7_PATH_BACKUP_SQL .  $sFileName))->back()->save();
+                        $this->view->msg_success = t('Data successfully dumped into file "%0%"', $sFileName);
                         break;
 
                     case 'server_archive':
-                        $sFullPath = PH7_PATH_BACKUP_SQL . 'Database-dump.' . $sCurrentDate . '.sql.gz';
-                        (new Backup($sFullPath))->back()->saveArchive();
-                        $this->view->msg_success = t('Data successfully dumped into file "%0%"', $sFullPath);
+                        $sFileName = 'Database-dump.' . $sCurrentDate . '.sql.gz';
+                        (new Backup(PH7_PATH_BACKUP_SQL . $sFileName))->back()->saveArchive();
+                        $this->view->msg_success = t('Data successfully dumped into file "%0%"', $sFileName);
                         break;
 
                     case 'client':
