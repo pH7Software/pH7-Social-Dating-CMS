@@ -1,12 +1,12 @@
 <?php
 /**
- * @title          Tool Controller
- *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -24,12 +24,11 @@ use PH7\Framework\Url\Header;
 
 class ToolController extends Controller
 {
-    const BACKUP_FILE_EXTS = ['.sql', '.gz'];
+    private const BACKUP_FILE_EXTS = ['.sql', '.gz'];
 
-    /** @var string */
-    private $sTitle;
+    private string $sTitle;
 
-    public function index()
+    public function index(): void
     {
         $this->sTitle = t('General Tools');
         $this->view->page_title = $this->sTitle;
@@ -38,7 +37,7 @@ class ToolController extends Controller
         $this->output();
     }
 
-    public function cache()
+    public function cache(): void
     {
         // Add a CSRF token for the remove ajax cache request
         $this->view->csrf_token = (new Token)->generate('cache');
@@ -65,7 +64,7 @@ class ToolController extends Controller
         $this->output();
     }
 
-    public function cacheConfig()
+    public function cacheConfig(): void
     {
         $this->sTitle = t('Cache Settings');
         $this->view->page_title = $this->sTitle;
@@ -74,7 +73,7 @@ class ToolController extends Controller
         $this->output();
     }
 
-    public function freeSpace()
+    public function freeSpace(): void
     {
         $this->addGeneralCssFile();
 
@@ -92,7 +91,7 @@ class ToolController extends Controller
         $this->output();
     }
 
-    public function envMode()
+    public function envMode(): void
     {
         $this->sTitle = t('Environment Mode');
         $this->view->page_title = $this->sTitle;
@@ -101,7 +100,7 @@ class ToolController extends Controller
         $this->output();
     }
 
-    public function blockCountry()
+    public function blockCountry(): void
     {
         $this->view->page_title = t('Country Blacklist');
         $this->view->h1_title = t('Block Countries');
@@ -109,7 +108,7 @@ class ToolController extends Controller
         $this->output();
     }
 
-    public function backup()
+    public function backup(): void
     {
         $this->addGeneralCssFile();
 
@@ -237,7 +236,7 @@ class ToolController extends Controller
         $this->output();
     }
 
-    public function optimize()
+    public function optimize(): void
     {
         $this->checkPost();
 
@@ -248,7 +247,7 @@ class ToolController extends Controller
         );
     }
 
-    public function repair()
+    public function repair(): void
     {
         $this->checkPost();
 
@@ -261,10 +260,8 @@ class ToolController extends Controller
 
     /**
      * Includes the CSS file for the chart and/or for backup textarea field size.
-     *
-     * @return void
      */
-    private function addGeneralCssFile()
+    private function addGeneralCssFile(): void
     {
         $this->design->addCss(
             PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
@@ -275,9 +272,9 @@ class ToolController extends Controller
     /**
      * Checks and stops the script if the method is not POST.
      *
-     * @return string The text by exit() function.
+     * @return void The text by exit() function.
      */
-    private function checkPost()
+    private function checkPost(): void
     {
         if (!$this->isPost()) {
             exit(Form::wrongRequestMethodMsg('POST'));
@@ -286,20 +283,13 @@ class ToolController extends Controller
 
     /**
      * Checks if the request been made ​​by the post method.
-     *
-     * @return bool
      */
-    private function isPost()
+    private function isPost(): bool
     {
         return $this->httpRequest->postExists('is');
     }
 
-    /**
-     * @param array $aDumpList
-     *
-     * @return array
-     */
-    private function removePaths(array $aDumpList)
+    private function removePaths(array $aDumpList): array
     {
         return array_map(function ($sFullPath) {
             return str_replace(PH7_PATH_BACKUP_SQL, '', $sFullPath);
