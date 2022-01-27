@@ -183,8 +183,10 @@ class ToolController extends Controller
                     $mStatus = t('Please select a dump file.');
                 }
 
-                $sMsg = ($mStatus === true) ? t('Data successfully restored from server!') : $mStatus;
-                $sMsgType = ($mStatus === true) ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
+                $sMsg = $mStatus === true ?
+                    t('Data successfully restored from server!') :
+                    (empty($mStatus) ? t('An error occurred.') : $mStatus);
+                $sMsgType = $mStatus === true ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
                 $this->design->setFlashMsg($sMsg, $sMsgType);
             }
         }
