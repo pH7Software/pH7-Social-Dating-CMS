@@ -173,7 +173,7 @@ class ToolController extends Controller
 
                 if (!empty($sDumpFile)) {
                     if ($this->file->getFileExt($sDumpFile) === Backup::SQL_FILE_EXT) {
-                        $mStatus = (new Backup($sDumpFile))->restore();
+                        $mStatus = (new Backup(PH7_PATH_BACKUP_SQL . $sDumpFile))->restore();
                     } elseif ($this->file->getFileExt($sDumpFile) === Backup::ARCHIVE_FILE_EXT) {
                         $mStatus = (new Backup(PH7_PATH_BACKUP_SQL . $sDumpFile))->restoreArchive();
                     } else {
