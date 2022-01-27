@@ -26,6 +26,12 @@ class ToolController extends Controller
 {
     private const BACKUP_FILE_EXTS = ['.sql', '.gz'];
 
+    private const SERVER_ACTION = 'server';
+    private const SERVER_ARCHIVE_ACTION = 'server_archive';
+    private const CLIENT_ACTION = 'client';
+    private const CLIENT_ARCHIVE_ACTION = 'client_archive';
+    private const SHOW_ACTION = 'show';
+
     private string $sTitle;
 
     public function index(): void
@@ -132,27 +138,27 @@ class ToolController extends Controller
                 $sCurrentDate = (new CDateTime)->get()->date();
 
                 switch ($this->httpRequest->post('backup_type')) {
-                    case 'server':
+                    case self::SERVER_ACTION:
                         $sFileName = 'Database-dump.' . $sCurrentDate . '.sql';
-                        (new Backup(PH7_PATH_BACKUP_SQL .  $sFileName))->back()->save();
+                        (new Backup(PH7_PATH_BACKUP_SQL . $sFileName))->back()->save();
                         $this->view->msg_success = t('Data successfully dumped into file "%0%"', $sFileName);
                         break;
 
-                    case 'server_archive':
+                    case self::SERVER_ARCHIVE_ACTION:
                         $sFileName = 'Database-dump.' . $sCurrentDate . '.sql.gz';
                         (new Backup(PH7_PATH_BACKUP_SQL . $sFileName))->back()->saveArchive();
                         $this->view->msg_success = t('Data successfully dumped into file "%0%"', $sFileName);
                         break;
 
-                    case 'client':
+                    case self::CLIENT_ACTION:
                         (new Backup($sSiteName . '_' . $sCurrentDate . '.sql'))->back()->download();
                         break;
 
-                    case 'client_archive':
+                    case self::CLIENT_ARCHIVE_ACTION:
                         (new Backup($sSiteName . '_' . $sCurrentDate . '.sql.gz'))->back()->downloadArchive();
                         break;
 
-                    case 'show':
+                    case self::SHOW_ACTION:
                         $this->view->sql_content = (new Backup)->back()->show();
                         break;
 
