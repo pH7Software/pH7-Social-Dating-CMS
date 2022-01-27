@@ -112,7 +112,7 @@ class RatingCoreAjax
             $this->sTxt = t('You have already voted!');
             return;
         } else {
-            $oCookie->set($sCookieName, 1, self::COOKIE_LIFETIME);
+            $oCookie->set($sCookieName, '1', self::COOKIE_LIFETIME);
         }
         unset($oCookie);
 

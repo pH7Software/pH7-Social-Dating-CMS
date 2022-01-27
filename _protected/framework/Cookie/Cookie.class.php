@@ -30,7 +30,7 @@ class Cookie
      *
      * @return void
      */
-    public function set($mName, $sValue = null, $iTime = null, $bSecure = null)
+    public function set($mName, ?string $sValue = null, ?int $iTime = null, ?bool $bSecure = null): void
     {
         $iTime = time() + ((int)!empty($iTime) ? $iTime : Config::getInstance()->values['cookie']['expiration']);
         $bSecure = !empty($bSecure) && is_bool($bSecure) ? $bSecure : Server::isHttps();
