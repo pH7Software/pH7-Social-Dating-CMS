@@ -508,7 +508,7 @@ class UserController extends Controller implements UserModeratable
         return $sOutputMsg;
     }
 
-    public function sendRegistrationMail(string $sSubject, stdClass $oUser): void
+    private function sendRegistrationMail(string $sSubject, stdClass $oUser): void
     {
         $this->view->content = t('Hi %0%,', $oUser->firstName) . '<br />' . $this->sMsg;
         $this->view->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $oUser->email) . '<br />' .

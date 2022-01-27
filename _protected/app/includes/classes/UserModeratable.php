@@ -8,8 +8,6 @@
 
 namespace PH7;
 
-use stdClass;
-
 interface UserModeratable
 {
     public function approve(): void;
@@ -31,6 +29,4 @@ interface UserModeratable
     public function unBanAll(): void;
 
     public function deleteAll(): void;
-
-    public function sendRegistrationMail(string $sSubject, stdClass $oUser): void;
 }
