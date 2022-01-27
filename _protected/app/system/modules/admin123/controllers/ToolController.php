@@ -120,7 +120,7 @@ class ToolController extends Controller
         $this->view->h1_title = $this->sTitle;
 
         $aDumpList = $this->file->getFileList(PH7_PATH_BACKUP_SQL, static::BACKUP_FILE_EXTS);
-        $this->removePaths($aDumpList);
+        $aDumpList = $this->removePaths($aDumpList);
         $this->view->aDumpList = $aDumpList;
 
         $oSecurityToken = new Token;
