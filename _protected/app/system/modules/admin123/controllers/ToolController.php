@@ -147,13 +147,13 @@ class ToolController extends Controller
                     case self::SERVER_ACTION:
                         $sFileName = 'Database-dump.' . $sCurrentDate . '.sql';
                         (new Backup(PH7_PATH_BACKUP_SQL . $sFileName))->back()->save();
-                        $this->view->msg_success = t('Data successfully dumped into file "%0%"', $sFileName);
+                        $this->view->msg_success = t('Data dumped into backup file "%0%"', $sFileName);
                         break;
 
                     case self::SERVER_ARCHIVE_ACTION:
                         $sFileName = 'Database-dump.' . $sCurrentDate . '.sql.gz';
                         (new Backup(PH7_PATH_BACKUP_SQL . $sFileName))->back()->saveArchive();
-                        $this->view->msg_success = t('Data successfully dumped into file "%0%"', $sFileName);
+                        $this->view->msg_success = t('Data dumped into backup file "%0%"', $sFileName);
                         break;
 
                     case self::CLIENT_ACTION:

@@ -2273,7 +2273,7 @@ msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/ToolController.php:145
 #: _protected/app/system/modules/admin123/controllers/ToolController.php:151
-msgid "Data successfully dumped into file \"%0%\""
+msgid "Data dumped into backup file \"%0%\""
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/ToolController.php:168
