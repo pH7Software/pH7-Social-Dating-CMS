@@ -18,7 +18,7 @@ final class UrlTest extends TestCase
 {
     public function testValidValue(): void
     {
-        $sTestUrl = 'https://ph7cms.com/dating-business-by-steps/';
+        $sTestUrl = 'https://ph7cms.com/dating-startup-by-step/';
         $oUrl = new Url($sTestUrl);
         $this->assertSame($sTestUrl, $oUrl->getValue());
     }
