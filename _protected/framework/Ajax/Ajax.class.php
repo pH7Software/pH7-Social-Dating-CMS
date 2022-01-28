@@ -8,6 +8,8 @@
  * @package          PH7 / Framework / Ajax
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Ajax {
     defined('PH7') or exit('Restricted access');
 
@@ -19,7 +21,7 @@ namespace PH7\Framework\Ajax {
          *
          * @return string JSON Format
          */
-        public static function jsonMsg($iStatus, $sTxt)
+        public static function jsonMsg(int $iStatus, string $sTxt): string
         {
             return '{"status":' . $iStatus . ',"txt":"' . $sTxt . '"}';
         }
@@ -31,13 +33,8 @@ namespace {
 
     /**
      * Alias of Ajax::jsonMsg() method.
-     *
-     * @param int $iStatus
-     * @param string $sTxt
-     *
-     * @return string
      */
-    function jsonMsg($iStatus, $sTxt)
+    function jsonMsg(int $iStatus, string $sTxt): string
     {
         return Ajax::jsonMsg($iStatus, $sTxt);
     }
