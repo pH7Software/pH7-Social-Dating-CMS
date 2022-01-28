@@ -42,7 +42,7 @@ async function networkFirst(request) {
 
     try {
         const response = await fetch(request);
-        cache.put(request, response.clone());
+        await cache.put(request, response.clone());
         return response;
     } catch (error) {
         return await cache.match(request);
