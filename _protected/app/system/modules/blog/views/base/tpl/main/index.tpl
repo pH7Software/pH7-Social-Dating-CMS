@@ -50,8 +50,8 @@
                     </h1>
 
                     <div class="left">
-                        <a href="{{ $design->url('blog','main','read',$post->postId) }}" class="pic thumb" data-load="ajax">
-                            <img src="{% Blog::getThumb($post->blogId) %}" alt="{% $post->pageTitle %}" title="{% $post->pageTitle %}" />
+                        <a href="{{ $design->url('blog','main','read',$post->postId) }}" class="pic" data-load="ajax">
+                            <img src="{% Blog::getThumb($post->blogId) %}" alt="{% $post->pageTitle %}" title="{% $post->pageTitle %}" class="thumb" />
                         </a>
                     </div>
 
