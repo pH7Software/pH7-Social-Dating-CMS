@@ -14,15 +14,14 @@ use PHPUnit\Framework\TestCase;
 
 final class HttpControllerTest extends TestCase
 {
-    /** @var Client */
-    protected $oClient;
+    protected Client $oClient;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->oClient = new Client(['exceptions' => false]);
     }
 
-    public function testNotFoundPage()
+    public function testNotFoundPage(): void
     {
         $oResponse = $this->oClient->get($this->getUrl());
 
