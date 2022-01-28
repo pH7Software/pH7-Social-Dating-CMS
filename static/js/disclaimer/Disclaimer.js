@@ -15,7 +15,7 @@ class Disclaimer {
     }
 
     loadDialog() {
-        if (this.dialogStatus == 0) {
+        if (this.dialogStatus === 0) {
             this.backgroundElement.css({
                 'opacity': 0.95
             });
@@ -26,7 +26,7 @@ class Disclaimer {
     }
 
     disableDialog() {
-        if (this.dialogStatus == 1) {
+        if (this.dialogStatus === 1) {
             this.dialogElement.fadeOut('slow');
             this.backgroundElement.fadeOut('slow');
             this.dialogStatus = 0;
