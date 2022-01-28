@@ -39,7 +39,7 @@ class EditCommentForm
         $oData = (new CommentModel)->get($oHttpRequest->get('id'), 1, $oHttpRequest->get('table'));
         $oForm->addElement(
             new Textarea(
-                t('Edit your comment:'),
+                t('Your comment:'),
                 'comment',
                 [
                     'value' => $oData->comment,
@@ -54,7 +54,15 @@ class EditCommentForm
 
         $oForm->addElement(new HTMLExternal('<span class="input_error str_com"></span>'));
 
-        $oForm->addElement(new Button(t('Save')));
+        $oForm->addElement(
+            new Button(
+                t('Save'),
+                'submit',
+                [
+                    'icon' => 'check'
+                ]
+            )
+        );
         $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
     }

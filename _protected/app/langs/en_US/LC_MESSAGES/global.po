@@ -4782,12 +4782,8 @@ msgstr ""
 msgid "No comments yet 😥 <a class=\"bold\" href=\"%0%\">Add one</a>!"
 msgstr ""
 
-#: _protected/app/system/modules/comment/forms/CommentForm.php:30
-msgid "Your comment:"
-msgstr ""
-
 #: _protected/app/system/modules/comment/forms/EditCommentForm.php:34
-msgid "Edit your comment:"
+msgid "Your comment:"
 msgstr ""
 
 #: _protected/app/system/modules/comment/forms/processing/CommentFormProcess.php:37
@@ -7052,6 +7048,7 @@ msgstr ""
 msgid "Note"
 msgstr ""
 
+#: _protected/app/system/modules/comment/forms/CommentForm.php:30
 #: _protected/app/system/modules/report/forms/ReportForm.php:38
 msgid "Comment:"
 msgstr ""

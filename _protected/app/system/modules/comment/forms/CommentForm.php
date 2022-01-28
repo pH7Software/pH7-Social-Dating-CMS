@@ -36,7 +36,7 @@ class CommentForm
         $oForm->addElement(new Token('comment'));
         $oForm->addElement(
             new Textarea(
-                t('Your comment:'),
+                t('Comment:'),
                 'comment',
                 [
                     'id' => 'str_com',
@@ -64,7 +64,15 @@ class CommentForm
             $oForm->addElement(new HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }
 
-        $oForm->addElement(new Button);
+        $oForm->addElement(
+            new Button(
+                t('Add'),
+                'submit',
+                [
+                    'icon' => 'check'
+                ]
+            )
+        );
         $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
     }
