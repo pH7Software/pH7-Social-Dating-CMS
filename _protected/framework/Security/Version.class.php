@@ -51,7 +51,7 @@ final class Version
      */
     const KERNEL_VERSION = '17.0.0';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELEASE_DATE = '2021-11-24';
+    const KERNEL_RELEASE_DATE = '2022-01-30';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7Builder.com';
