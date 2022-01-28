@@ -6,6 +6,8 @@
  * @package          PH7 / Test / Unit / App / System / Module / Error / Controller
  */
 
+declare(strict_types=1);
+
 namespace PH7\Test\Unit\App\System\Module\Error\Controller;
 
 use GuzzleHttp\Client;
@@ -29,7 +31,7 @@ final class HttpControllerTest extends TestCase
         $this->assertMatchesRegularExpression('/Page Not Found/', $oResponse->getBody()->__toString());
     }
 
-    public function testBadRequestPage()
+    public function testBadRequestPage(): void
     {
         $oResponse = $this->oClient->get($this->getUrl(400));
 
@@ -37,7 +39,7 @@ final class HttpControllerTest extends TestCase
         $this->assertMatchesRegularExpression('/Bad Request/', $oResponse->getBody()->__toString());
     }
 
-    public function testUnauthorizedPage()
+    public function testUnauthorizedPage(): void
     {
         $oResponse = $this->oClient->get($this->getUrl(401));
 
@@ -45,7 +47,7 @@ final class HttpControllerTest extends TestCase
         $this->assertMatchesRegularExpression('/Unauthorized/', $oResponse->getBody()->__toString());
     }
 
-    public function testPaymentRequiredPage()
+    public function testPaymentRequiredPage(): void
     {
         $oResponse = $this->oClient->get($this->getUrl(402));
 
@@ -53,7 +55,7 @@ final class HttpControllerTest extends TestCase
         $this->assertMatchesRegularExpression('/Payment Required/', $oResponse->getBody()->__toString());
     }
 
-    public function testForbiddenPage()
+    public function testForbiddenPage(): void
     {
         $oResponse = $this->oClient->get($this->getUrl(403));
 
@@ -61,7 +63,7 @@ final class HttpControllerTest extends TestCase
         $this->assertMatchesRegularExpression('/Forbidden/', $oResponse->getBody()->__toString());
     }
 
-    public function testMethodNotAllowedPage()
+    public function testMethodNotAllowedPage(): void
     {
         $oResponse = $this->oClient->get($this->getUrl(405));
 
@@ -69,7 +71,7 @@ final class HttpControllerTest extends TestCase
         $this->assertMatchesRegularExpression('/Method Not Allowed/', $oResponse->getBody()->__toString());
     }
 
-    public function testInternalServerErrorPage()
+    public function testInternalServerErrorPage(): void
     {
         $oResponse = $this->oClient->get($this->getUrl(500));
 
@@ -77,7 +79,7 @@ final class HttpControllerTest extends TestCase
         $this->assertMatchesRegularExpression('/Internal Server Error/', $oResponse->getBody()->__toString());
     }
 
-    public function testNotImplementedPage()
+    public function testNotImplementedPage(): void
     {
         $oResponse = $this->oClient->get($this->getUrl(501));
 
@@ -85,7 +87,7 @@ final class HttpControllerTest extends TestCase
         $this->assertMatchesRegularExpression('/Not Implemented/', $oResponse->getBody()->__toString());
     }
 
-    public function testBadGatewayPage()
+    public function testBadGatewayPage(): void
     {
         $oResponse = $this->oClient->get($this->getUrl(502));
 
@@ -93,7 +95,7 @@ final class HttpControllerTest extends TestCase
         $this->assertMatchesRegularExpression('/Bad Gateway/', $oResponse->getBody()->__toString());
     }
 
-    public function testGatewayTimeoutPage()
+    public function testGatewayTimeoutPage(): void
     {
         $oResponse = $this->oClient->get($this->getUrl(504));
 
@@ -101,7 +103,7 @@ final class HttpControllerTest extends TestCase
         $this->assertMatchesRegularExpression('/Gateway Timeout/', $oResponse->getBody()->__toString());
     }
 
-    public function testHttpVersionNotSupportedPage()
+    public function testHttpVersionNotSupportedPage(): void
     {
         $oResponse = $this->oClient->get($this->getUrl(505));
 
@@ -109,7 +111,7 @@ final class HttpControllerTest extends TestCase
         $this->assertMatchesRegularExpression('/HTTP Version Not Supported/', $oResponse->getBody()->__toString());
     }
 
-    private function getUrl($sUri = '')
+    private function getUrl(string$sUri = ''): string
     {
         return Uri::get('error', 'http', 'index', $sUri);
     }
