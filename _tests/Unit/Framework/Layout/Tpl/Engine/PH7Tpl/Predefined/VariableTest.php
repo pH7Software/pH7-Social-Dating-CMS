@@ -9,10 +9,13 @@
 namespace PH7\Test\Unit\Framework\Layout\Tpl\Engine\PH7Tpl\Predefined;
 
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Predefined\Variable as PredefinedVariable;
+use PH7\Test\Unit\AssertionHelper;
 use PHPUnit\Framework\TestCase;
 
 class VariableTest extends TestCase
 {
+    use AssertionHelper;
+
     public function testSoftwareNameVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{software_name}');

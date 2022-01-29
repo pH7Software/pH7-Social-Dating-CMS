@@ -17,7 +17,7 @@ abstract class Predefined
     const WRITE = 'echo ';
 
     /** @var string */
-    private $sCode;
+    protected $sCode;
 
     /** @var string */
     private $sLeftDelimiter = '{';

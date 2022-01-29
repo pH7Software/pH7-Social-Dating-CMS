@@ -11,10 +11,13 @@ declare(strict_types=1);
 namespace PH7\Test\Unit\Framework\Layout\Tpl\Engine\PH7Tpl\Predefined;
 
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Predefined\Func as PredefinedFunc;
+use PH7\Test\Unit\AssertionHelper;
 use PHPUnit\Framework\TestCase;
 
 final class FuncTest extends TestCase
 {
+    use AssertionHelper;
+
     /**
      * @dataProvider dateFormatsProvider
      */
