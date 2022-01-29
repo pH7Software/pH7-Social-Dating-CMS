@@ -33,10 +33,7 @@ require 'includes/helpers/misc.php';
 
 class Bootstrap
 {
-    /**
-     * @var Bootstrap $oInstance
-     */
-    private static $oInstance = null;
+    private static ?self $oInstance = null;
 
     /**
      * Set constructor/cloning to private since it's a singleton class.
@@ -49,15 +46,13 @@ class Bootstrap
      *
      * @return Bootstrap Returns the instance class or create initial instance of the class.
      */
-    public static function getInstance()
+    public static function getInstance(): self
     {
         return null === static::$oInstance ? static::$oInstance = new static : static::$oInstance;
     }
 
     /**
      * Set a default timezone if it is not already configured in environment.
-     *
-     * @return void
      */
     public function setTimezoneIfNotSet(): void
     {
@@ -68,8 +63,6 @@ class Bootstrap
 
     /**
      * Initialize the app, load the files and launch the main FrontController router.
-     *
-     * @return void
      *
      * @throws Exception
      * @throws Except\PH7Exception
@@ -110,8 +103,6 @@ class Bootstrap
 
     /**
      * Load all necessary files for running the app.
-     *
-     * @return void
      */
     private function loadInitFiles(): void
     {
@@ -141,18 +132,14 @@ class Bootstrap
 
     /**
      * Initialize the benchmark time. It is calculated in Framework\Layout\Html\Design::stat()
-     *
-     * @return void
      */
-    private function startPageBenchmark()
+    private function startPageBenchmark(): void
     {
         Registry::getInstance()->start_time = microtime(true);
     }
 
     /**
      * If sessions status are enabled, writes session data and ends session.
-     *
-     * @return void
      */
     private function closeAppSession(): void
     {
