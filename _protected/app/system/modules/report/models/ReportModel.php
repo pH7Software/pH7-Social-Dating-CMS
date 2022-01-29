@@ -8,6 +8,8 @@
  * @package        PH7 / App / System / Module / Report / Model
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 use PDO;
@@ -50,13 +52,9 @@ class ReportModel extends ReportCoreModel
     }
 
     /**
-     * @param int|null $iId
-     * @param int $iOffset
-     * @param $iLimit
-     *
-     * @return int array|\stdClass
+     * @return array|\stdClass|bool
      */
-    public function get($iId, $iOffset, $iLimit)
+    public function get(?int $iId, int $iOffset, int $iLimit)
     {
         $sSqlId = !empty($iId) ? ' WHERE reportId = :id ' : ' ';
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::REPORT) . $sSqlId . 'LIMIT :offset, :limit');
@@ -70,12 +68,7 @@ class ReportModel extends ReportCoreModel
         return !empty($iId) ? $rStmt->fetch(PDO::FETCH_OBJ) : $rStmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    /**
-     * @param int $iReportId
-     *
-     * @return bool
-     */
-    public function delete($iReportId)
+    public function delete(int $iReportId): bool
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::REPORT) . 'WHERE reportId = :reportId LIMIT 1');
         $rStmt->bindValue(':reportId', $iReportId, PDO::PARAM_INT);

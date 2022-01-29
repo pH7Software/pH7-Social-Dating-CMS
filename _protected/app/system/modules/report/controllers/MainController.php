@@ -6,11 +6,13 @@
  * @package        PH7 / App / System / Module / Report / Controller
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 class MainController extends Controller
 {
-    public function abuse()
+    public function abuse(): void
     {
         $this->view->page_title = t('Report Abuse/Content');
 

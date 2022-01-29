@@ -258,7 +258,7 @@ class Http extends \PH7\Framework\Http\Http
      * @param string $sParam Optional, set a type of the request | Value types are: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
      * @param bool $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities, so less secure.
      *
-     * @return string The string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
+     * @return mixed The string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
      *
      * @throws WrongRequestMethodException If the request is not POST.
      */

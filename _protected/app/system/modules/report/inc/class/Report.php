@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Report / Inc / Class
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 use PH7\Framework\Date\CDateTime;
@@ -15,28 +17,20 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class Report
 {
-    /** @var Templatable */
-    private $oView;
+    private Templatable $oView;
 
     /** @var string|bool */
     private $mStatus = false;
 
-    /**
-     * @param Templatable $oView
-     */
     public function __construct(Templatable $oView)
     {
         $this->oView = $oView;
     }
 
     /**
-     * Add the fields in the database.
-     *
-     * @param array $aData The data to add.
-     *
-     * @return Report
+     * Add the fields into the database.
      */
-    public function add(array $aData)
+    public function add(array $aData): self
     {
         if ($this->areValidProfileIds($aData)) {
             $this->mStatus = (new ReportModel)->add($aData);
@@ -66,7 +60,7 @@ class Report
      *
      * @return int Number of recipients who were accepted for delivery.
      */
-    protected function sendMail(array $aData)
+    protected function sendMail(array $aData): int
     {
         $oUser = new UserCore;
         $oUserModel = new UserCoreModel;
@@ -96,12 +90,7 @@ class Report
         return (new Mail)->send($aInfo, $sHtmlMessage);
     }
 
-    /**
-     * @param array $aData
-     *
-     * @return bool
-     */
-    private function areValidProfileIds(array $aData)
+    private function areValidProfileIds(array $aData): bool
     {
         $oExistsModel = new ExistsCoreModel;
 

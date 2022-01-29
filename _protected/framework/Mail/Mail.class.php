@@ -81,7 +81,7 @@ class Mail implements Mailable
     /**
      * Send an email with the native PHP mail() function in text and HTML format.
      *
-     * @param array $aParams The parameters information to send email.
+     * @param array $aParams The parameters' information to send email.
      *
      * @return bool Returns TRUE if the mail was successfully accepted for delivery, FALSE otherwise.
      */

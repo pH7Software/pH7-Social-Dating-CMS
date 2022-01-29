@@ -6,10 +6,13 @@
  * @package        PH7 / App / System / Module / Report / Asset / Ajax
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Datatype\Type;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Security\CSRF\Token;
@@ -17,14 +20,9 @@ use PH7\JustHttp\StatusCode;
 
 class ReportAjax
 {
-    /** @var HttpRequest */
-    private $oHttpRequest;
+    private HttpRequest $oHttpRequest;
 
-    /** @var ReportModel */
-    private $oReportModel;
-
-    /** @var bool */
-    private $bStatus;
+    private ReportModel $oReportModel;
 
     public function __construct()
     {
@@ -47,15 +45,13 @@ class ReportAjax
     }
 
     /**
-     * @return string
-     *
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    private function delete()
+    private function delete(): string
     {
-        $this->bStatus = $this->oReportModel->delete($this->oHttpRequest->post('reportId'));
+        $bStatus = $this->oReportModel->delete($this->oHttpRequest->post('reportId', Type::INTEGER));
 
-        if ($this->bStatus) {
+        if ($bStatus) {
             return jsonMsg(1, t('The report has been deleted.'));
         }
 
@@ -63,11 +59,9 @@ class ReportAjax
     }
 
     /**
-     * @return string
-     *
      * @throws Framework\Http\Exception
      */
-    private function badRequest()
+    private function badRequest(): string
     {
         Http::setHeadersByCode(StatusCode::BAD_REQUEST);
 
