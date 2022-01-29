@@ -249,6 +249,8 @@ Designed & Coded with lots of ❤️ by **[Pierre-Henry Soria](https://ph7.me)**
 
 [![Pierre-Henry Soria](https://avatars0.githubusercontent.com/u/1325411?s=200)](https://pierrehenry.be "My personal website :-)")
 
+[![@phenrysay][twitter-image]](https://twitter.com/phenrysay) [![pH-7][github-image]](https://github.com/pH-7)
+
 
 ## 🤝 Hire Me At Your Company?
 
@@ -347,3 +349,9 @@ See the `PH7.LICENSE.txt` and `PH7.COPYRIGHT.txt` files for further details.
 ![pH7Builder allows anyone to start a web dating app like Tinder/Bumble or Badoo](https://cloud.githubusercontent.com/assets/1325411/19419477/5476b45c-93d0-11e6-823d-d293f186c0f7.png)
 
 ![Admin Panel, Browse Users](https://cloud.githubusercontent.com/assets/1325411/14080251/b476e5c6-f4fb-11e5-825e-ddc992ba1055.png)
+
+
+<!-- GitHub's Markdown reference links -->
+
+[twitter-image]: https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white
+[github-image]: https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
