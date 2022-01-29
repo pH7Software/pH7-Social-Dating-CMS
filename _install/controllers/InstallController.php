@@ -758,9 +758,6 @@ class InstallController extends Controller
         }
     }
 
-    /**
-     * @return bool
-     */
     private function isAgreementsAgreed(): bool
     {
         return
@@ -771,8 +768,6 @@ class InstallController extends Controller
 
     /**
      * Set the correct permission to the config files.
-     *
-     * @return void
      */
     private function chmodConfigFiles(): void
     {
@@ -782,8 +777,6 @@ class InstallController extends Controller
 
     /**
      * Require & Initialize the classes.
-     *
-     * @return void
      */
     private function initializeClasses(): void
     {
