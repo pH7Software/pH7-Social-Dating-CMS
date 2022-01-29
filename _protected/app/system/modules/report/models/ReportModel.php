@@ -56,7 +56,7 @@ class ReportModel extends ReportCoreModel
      *
      * @return int array|\stdClass
      */
-    public function get($iId = null, $iOffset, $iLimit)
+    public function get($iId, $iOffset, $iLimit)
     {
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
