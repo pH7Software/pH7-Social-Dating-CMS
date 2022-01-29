@@ -20,7 +20,7 @@ final class GenderTypeUserCoreTest extends TestCase
     /**
      * @dataProvider validGenderTypesProvider
      */
-    public function testValidGenders(string $sGender, string $bIncludeCoupleGender)
+    public function testValidGenders(string $sGender, bool $bIncludeCoupleGender)
     {
         $bResult = GenderTypeUserCore::isGenderValid($sGender, $bIncludeCoupleGender);
 
@@ -30,7 +30,7 @@ final class GenderTypeUserCoreTest extends TestCase
     /**
      * @dataProvider invalidGenderTypesProvider
      */
-    public function testInvalidGenders(string $sGender, string $bIncludeCoupleGender): void
+    public function testInvalidGenders(string $sGender, bool $bIncludeCoupleGender): void
     {
         $bResult = GenderTypeUserCore::isGenderValid($sGender, $bIncludeCoupleGender);
 

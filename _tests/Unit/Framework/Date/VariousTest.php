@@ -6,6 +6,8 @@
  * @package          PH7 / Test / Unit / Framework / Date
  */
 
+declare(strict_types=1);
+
 namespace PH7\Test\Unit\Framework\Date;
 
 use PH7\Framework\Date\Various;
@@ -33,7 +35,7 @@ class VariousTest extends TestCase
     /**
      * @dataProvider secAndTimeProvider
      */
-    public function testSecToTime(int $iSec, int $sTime): void
+    public function testSecToTime(int $iSec, string $sTime): void
     {
         $sResult = Various::secToTime($iSec);
 
