@@ -206,7 +206,7 @@ class Backup implements GenerableFile
             '-- ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_VERSION . ', Build ' . Kernel::SOFTWARE_BUILD . "\r\n" .
             '-- Database name: ' . Config::getInstance()->values['database']['name'] . "\r\n" .
             '-- Created on ' . (new CDateTime)->get()->dateTime() . "\r\n" .
-            "--r\n\r\n";
+            "--\r\n\r\n";
 
         return $sSql;
     }
