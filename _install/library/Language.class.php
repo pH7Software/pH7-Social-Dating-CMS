@@ -8,6 +8,8 @@
  * @package          PH7 / Install / Library
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -40,7 +42,7 @@ class Language
      *
      * @return string|null First two letters of the languages of the client browser.
      */
-    public function getBrowser()
+    public function getBrowser(): ?string
     {
         if (empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
             return null;
@@ -62,8 +64,6 @@ class Language
 
     /**
      * Gives the correct chosen language (e.g., fr, en, es, ...).
-     *
-     * @return string
      */
     public function get(): string
     {

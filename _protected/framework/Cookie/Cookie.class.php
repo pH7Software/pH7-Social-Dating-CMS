@@ -68,11 +68,11 @@ class Cookie
      * Get the cookie value by giving its name.
      *
      * @param string $sName Name of the cookie.
-     * @param bool|null $bEscape
+     * @param bool $bEscape
      *
      * @return string If the cookie exists, returns the cookie with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the cookie doesn't exist.
      */
-    public function get($sName, $bEscape = true)
+    public function get(string $sName, bool $bEscape = true)
     {
         $sCookieName = Config::getInstance()->values['cookie']['prefix'] . $sName;
 
