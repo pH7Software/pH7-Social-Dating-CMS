@@ -3,7 +3,7 @@
 -- Title:         SQL Core (base) Install File
 --
 -- Author:        Pierre-Henry Soria <hello@ph7cms.com>
--- Copyright:     (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
+-- Copyright:     (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
 -- License:       MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 -- Package:       PH7 / Install / Data / Sql / MySQL
 --
@@ -678,7 +678,7 @@ CREATE TABLE IF NOT EXISTS ph7_log_error (
   logId mediumint(10) unsigned NOT NULL AUTO_INCREMENT,
   logError longtext,
   PRIMARY KEY (logId),
-  FULLTEXT KEY logError (logError) -- FULLTEXT is not supported by InnoDB in MySQL < 5.6.4, so set MyISAM engine
+  FULLTEXT KEY logError (logError) -- FULLTEXT is not supported by InnoDB in MySQL < 5.6.4, so set MyISAM instead
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
 
 
