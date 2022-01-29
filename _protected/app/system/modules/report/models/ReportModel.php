@@ -58,9 +58,6 @@ class ReportModel extends ReportCoreModel
      */
     public function get($iId, $iOffset, $iLimit)
     {
-        $iOffset = (int)$iOffset;
-        $iLimit = (int)$iLimit;
-
         $sSqlId = !empty($iId) ? ' WHERE reportId = :id ' : ' ';
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::REPORT) . $sSqlId . 'LIMIT :offset, :limit');
         if (!empty($iId)) {
