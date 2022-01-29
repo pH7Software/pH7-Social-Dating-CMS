@@ -36,12 +36,13 @@ final class Version
     /**
      * Framework Kernel.
      *
-     * VERSION NAMES:
+     * @history VERSION NAMES:
      *
      * 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO",
-     * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa", 12.* was "PHS", 14.* was "pKb", 15.* was ABSOLUTE™ and v16/v17 is ACIDIC
+     * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa", 12.* was "PHS", 14.* was "pKb",
+     * v15.* was ABSOLUTE™, v16 was ACIDIC, and v17 is PURE™
      */
-    const KERNEL_VERSION_NAME = 'ACIDIC';
+    const KERNEL_VERSION_NAME = 'PURE™';
 
     /**
      * VERSION NUMBERS:
