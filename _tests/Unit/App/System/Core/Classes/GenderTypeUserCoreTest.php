@@ -40,18 +40,18 @@ final class GenderTypeUserCoreTest extends TestCase
     public function validGenderTypesProvider(): array
     {
         return [
-            ['male', GenderTypeUserCore::CONSIDER_COUPLE_GENDER],
-            ['female', GenderTypeUserCore::CONSIDER_COUPLE_GENDER],
-            ['male', GenderTypeUserCore::IGNORE_COUPLE_GENDER],
-            ['female', GenderTypeUserCore::IGNORE_COUPLE_GENDER],
-            ['couple', GenderTypeUserCore::CONSIDER_COUPLE_GENDER]
+            [GenderTypeUserCore::MALE, GenderTypeUserCore::CONSIDER_COUPLE_GENDER],
+            [GenderTypeUserCore::FEMALE, GenderTypeUserCore::CONSIDER_COUPLE_GENDER],
+            [GenderTypeUserCore::MALE, GenderTypeUserCore::IGNORE_COUPLE_GENDER],
+            [GenderTypeUserCore::FEMALE, GenderTypeUserCore::IGNORE_COUPLE_GENDER],
+            [GenderTypeUserCore::COUPLE, GenderTypeUserCore::CONSIDER_COUPLE_GENDER]
         ];
     }
 
     public function invalidGenderTypesProvider(): array
     {
         return [
-            ['couple', GenderTypeUserCore::IGNORE_COUPLE_GENDER],
+            [GenderTypeUserCore::COUPLE, GenderTypeUserCore::IGNORE_COUPLE_GENDER],
             ['visitor', GenderTypeUserCore::CONSIDER_COUPLE_GENDER],
             ['woman', GenderTypeUserCore::CONSIDER_COUPLE_GENDER],
             ['man', GenderTypeUserCore::IGNORE_COUPLE_GENDER]

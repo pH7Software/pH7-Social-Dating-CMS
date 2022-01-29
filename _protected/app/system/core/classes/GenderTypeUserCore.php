@@ -10,14 +10,14 @@ namespace PH7;
 
 final class GenderTypeUserCore
 {
-    const CONSIDER_COUPLE_GENDER = true;
-    const IGNORE_COUPLE_GENDER = false;
+    public const CONSIDER_COUPLE_GENDER = true;
+    public const IGNORE_COUPLE_GENDER = false;
 
-    const FEMALE = 'female';
-    const MALE = 'male';
-    const COUPLE = 'couple';
+    public const FEMALE = 'female';
+    public const MALE = 'male';
+    public const COUPLE = 'couple';
 
-    const GENDERS = [
+    public const GENDERS = [
         self::FEMALE => self::FEMALE,
         self::MALE => self::MALE,
         self::COUPLE => self::COUPLE
