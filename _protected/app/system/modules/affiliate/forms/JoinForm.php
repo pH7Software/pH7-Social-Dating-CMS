@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Affiliate / Form
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 use PFBC\Element\Button;
@@ -32,7 +34,7 @@ use PH7\Framework\Url\Header;
 
 class JoinForm
 {
-    public static function step1()
+    public static function step1(): void
     {
         if (isset($_POST['submit_join_aff'])) {
             if (\PFBC\Form::isValid($_POST['submit_join_aff'])) {
