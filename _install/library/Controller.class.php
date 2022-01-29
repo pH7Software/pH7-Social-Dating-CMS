@@ -38,12 +38,6 @@ abstract class Controller implements Controllable
     const SOFTWARE_COPYRIGHT = '© (c) 2012-%s, Pierre-Henry Soria. All Rights Reserved.';
     const TOTAL_INSTALL_STEPS = 7;
 
-    /**
-     * VERSION NAMES:
-     *
-     * 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO",
-     * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa", 12.* was "PHS", 14.* was "pKb", 15.* was ABSOLUTE™ and v16 is ACIDIC
-     */
     const SOFTWARE_VERSION_NAME = 'PURE™';
     const SOFTWARE_VERSION = '17.0.0';
 
