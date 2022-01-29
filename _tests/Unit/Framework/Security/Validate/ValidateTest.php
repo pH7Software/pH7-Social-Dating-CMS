@@ -196,7 +196,7 @@ final class ValidateTest extends TestCase
     public function invalidPhoneNumbersProvider(): array
     {
         return [
-            ['0768374890'],
+            ['++0768374890'],
             ['0485'],
             ['zerozerozero'],
             ['']
@@ -256,8 +256,6 @@ final class ValidateTest extends TestCase
             ['one'],
             ['lalal'],
             [''],
-            [0],
-            [324],
             [null]
         ];
     }

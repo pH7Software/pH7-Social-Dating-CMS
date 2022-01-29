@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 abstract class SyntaxTestCase extends TestCase
 {
-    private const FIXTURE_PATH = __DIR__ . '/fixtures/';
+    protected const FIXTURE_PATH = __DIR__ . '/fixtures/';
 
     abstract protected function getInputDirectory(): string;
 
