@@ -162,7 +162,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 
 ## ⚙ Requirements
 
-* **Application Server** PHP 7.4 or newer (compatible with **PHP 8 and beyond**! 🚀).
+* **Application Server** PHP 7.4 or newer (optimized for **PHP 8+ and beyond**! 🚀).
 
 * **Database** MySQL/MariaDB 5.5.3 or newer.
 
@@ -245,9 +245,9 @@ You can find and add other languages on the [I18N repo](https://github.com/pH7So
 
 ## 👨‍🍳 The Cook
 
-[![Pierre-Henry Soria](https://avatars0.githubusercontent.com/u/1325411?s=200)](https://pierrehenry.be "My personal website :-)")
+Designed & Coded with lots of ❤️ by **[Pierre-Henry Soria](https://ph7.me)**. A **SUPER Passionate** Belgian Software Engineer 🍫🍺
 
-Designed & Coded with lots of ❤ by [Pierre-Henry Soria](https://ph7.me). A SUPER Passionate Belgian Software Engineer 🍫🍺
+[![Pierre-Henry Soria](https://avatars0.githubusercontent.com/u/1325411?s=200)](https://pierrehenry.be "My personal website :-)")
 
 
 ## 🤝 Hire Me At Your Company?
