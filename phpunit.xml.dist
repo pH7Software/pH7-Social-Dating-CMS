@@ -9,6 +9,11 @@
         <testsuite name="pH7Builder Protected">
             <directory>_tests/Unit</directory>
         </testsuite>
+
+        <testsuite name="pH7Builder Protected CI">
+            <directory>_tests/Unit</directory>
+            <exclude>_tests/Unit/App/System/Module/Api/Controller/MainControllerTest.php</exclude>
+        </testsuite>
     </testsuites>
 
     <filter>

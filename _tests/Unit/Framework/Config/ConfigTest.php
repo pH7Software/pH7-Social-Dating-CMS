@@ -21,6 +21,9 @@ class ConfigTest extends TestCase
     protected function setUp(): void
     {
         $this->oConfig = Config::getInstance();
+
+        // Load the testing config.ini file for each test
+        $this->oConfig->load(PH7_PATH_TEST . 'fixtures/' . PH7_CONFIG_FILE);
     }
 
     public function testSetDuplicateKey(): void
@@ -34,6 +37,7 @@ class ConfigTest extends TestCase
     public function testGetValue(): void
     {
         $sName = 'Pierre-Henry Soria';
+
         $this->oConfig->setValue('name', $sName);
         $this->assertSame($sName, $this->oConfig->getValue('name'));
     }
@@ -50,7 +54,6 @@ class ConfigTest extends TestCase
 
     public function testValueIsCasted(): void
     {
-        $this->oConfig->load(PH7_PATH_TEST . 'fixtures/' . PH7_CONFIG_FILE);
         $this->assertIsBool($this->oConfig->values['test']['enabled']);
     }
 
@@ -58,8 +61,6 @@ class ConfigTest extends TestCase
     {
         $this->assertSame('base', $this->oConfig->values['application']['default_theme']);
         $this->assertSame('en_US', $this->oConfig->values['application']['default_lang']);
-        $this->oConfig->setValue('ph7cms', 'pH7 Social Dating CMS');
-        $this->assertSame('development', $this->oConfig->values['mode']['environment']);
-        $this->assertSame('pH7 Social Dating CMS', $this->oConfig->getValue('ph7cms'));
+        $this->assertSame('production', $this->oConfig->values['mode']['environment']);
     }
 }

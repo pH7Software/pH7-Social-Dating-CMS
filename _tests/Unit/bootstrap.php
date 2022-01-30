@@ -1,7 +1,7 @@
 <?php
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2017-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2017-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Test / Unit
  */
@@ -75,34 +75,25 @@ define('PH7_PATH_CACHE', PH7_PATH_PROTECTED . 'data/cache/');
 // Max Values constants
 define('PH7_MAX_URL_LENGTH', 120);
 
-try {
-    // Fix if timezone isn't correctly set
-    if (!ini_get('date.timezone')) {
-        date_default_timezone_set(PH7_DEFAULT_TIMEZONE);
-    }
+// Fix if timezone isn't correctly set
+if (!ini_get('date.timezone')) {
+    date_default_timezone_set(PH7_DEFAULT_TIMEZONE);
+}
 
-    // Loading Framework Classes
-    require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
-    FrameworkLoader::getInstance()->init();
+// Loading Framework Classes
+require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
+FrameworkLoader::getInstance()->init();
 
-    // Loading classes from ~/protected/app/includes/classes/*
-    require PH7_PATH_APP . 'includes/classes/Loader/Autoloader.php';
-    AppLoader::getInstance()->init();
+// Loading classes from ~/protected/app/includes/classes/*
+require PH7_PATH_APP . 'includes/classes/Loader/Autoloader.php';
+AppLoader::getInstance()->init();
 
-    if (!function_exists('escape')) {
-        new Str; // Load class to get escape() function
-    }
+if (!function_exists('escape')) {
+    new Str; // Load class to get escape() function
+}
 
-    if (!function_exists('t')) {
-        include PH7_PATH_APP_LANG . 'en_US/language.php';
-        // Load class to include t() function
-        new Lang;
-    }
-
-    // Because these tests cannot run without the main config.ini file, throw an exception if pH7Builder isn't setup
-    if (!is_file(PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE)) {
-        throw new RuntimeException('You need to install pH7Builder first so that config.ini main file is initialized and tests can then work properly.');
-    }
-} catch (RuntimeException $oExcept) {
-    echo $oExcept->getMessage();
+if (!function_exists('t')) {
+    include PH7_PATH_APP_LANG . 'en_US/language.php';
+    // Load class to include t() function
+    new Lang;
 }
