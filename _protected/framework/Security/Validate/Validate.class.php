@@ -199,7 +199,7 @@ class Validate
      */
     public function float($fFloat)
     {
-        $fFloat = filter_var($fFloat, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $fFloat = filter_var($fFloat, FILTER_SANITIZE_NUMBER_FLOAT);
 
         return filter_var($fFloat, FILTER_VALIDATE_FLOAT) !== false;
     }
