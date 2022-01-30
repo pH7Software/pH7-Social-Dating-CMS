@@ -1048,7 +1048,7 @@ ALTER SEQUENCE ph7_sys_mods_enabled_seq RESTART WITH 1;
 INSERT INTO ph7_sys_mods_enabled (moduleTitle, folderName, premiumMod, enabled) VALUES
 ('Affiliate', 'affiliate', '0', '1'),
 ('Chat', 'chat', '1', '1'),
-('Chatroulette', 'chatroulette', '1', '1'),
+('Chatroulette', 'chatroulette', '1', '0'),
 ('Photo', 'picture', '0', '1'),
 ('Video', 'video', '0', '1'),
 ('Hot or Not', 'hotornot', '0', '1'),
@@ -1087,7 +1087,7 @@ ALTER SEQUENCE ph7_modules_seq RESTART WITH 1;
 
 INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of pH7Builder SQL schema (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7Builder', 'SQL System Schema', '1.6.2', 1);
+('pH7Builder', 'SQL System Schema', '1.6.3', 1);
 
 
 CREATE SEQUENCE ph7_report_seq;

@@ -56,7 +56,7 @@ class InstallController extends Controller
     private const DATING_MODS = [
         'affiliate' => '1',
         'chat' => '1',
-        'chatroulette' => '1',
+        'chatroulette' => '0',
         'picture' => '1',
         'video' => '0',
         'friend' => '0',
