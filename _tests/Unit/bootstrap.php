@@ -36,7 +36,7 @@ define('PH7_PATH_APP', PH7_PATH_PROTECTED . 'app/');
 define('PH7_PATH_SYS', PH7_PATH_APP . 'system/');
 define('PH7_PATH_SYS_MOD', PH7_PATH_SYS . 'modules/');
 define('PH7_PATH_APP_LANG', PH7_PATH_APP . 'langs/');
-define('PH7_PATH_TEST', __DIR__ . PH7_PS);
+define('PH7_PATH_TEST', __DIR__ . PH7_DS);
 
 // Config constants
 define('PH7_CONFIG', 'config/');
@@ -75,16 +75,10 @@ define('PH7_PATH_CACHE', PH7_PATH_PROTECTED . 'data/cache/');
 // Max Values constants
 define('PH7_MAX_URL_LENGTH', 120);
 
-
 try {
     // Fix if timezone isn't correctly set
     if (!ini_get('date.timezone')) {
         date_default_timezone_set(PH7_DEFAULT_TIMEZONE);
-    }
-
-    // Because these tests cannot run without the main config.ini file, throw an exception if pH7Builder isn't setup
-    if (!is_file(PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE)) {
-        throw new RuntimeException('You need to install pH7Builder first so that config.ini main file is initialized and tests can then work properly.');
     }
 
     // Loading Framework Classes
@@ -103,6 +97,11 @@ try {
         include PH7_PATH_APP_LANG . 'en_US/language.php';
         // Load class to include t() function
         new Lang;
+    }
+
+    // Because these tests cannot run without the main config.ini file, throw an exception if pH7Builder isn't setup
+    if (!is_file(PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE)) {
+        throw new RuntimeException('You need to install pH7Builder first so that config.ini main file is initialized and tests can then work properly.');
     }
 } catch (RuntimeException $oExcept) {
     echo $oExcept->getMessage();

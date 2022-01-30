@@ -45,12 +45,13 @@ class ConfigTest extends TestCase
 
     public function testValidLoad(): void
     {
-        $this->assertTrue($this->oConfig->load(PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE));
+        $this->assertTrue($this->oConfig->load(PH7_PATH_TEST . 'fixtures/' . PH7_CONFIG_FILE));
     }
 
     public function testValueIsCasted(): void
     {
-        $this->assertIsBool('base', $this->oConfig->values['test']['enabled']);
+        $this->oConfig->load(PH7_PATH_TEST . 'fixtures/' . PH7_CONFIG_FILE);
+        $this->assertIsBool($this->oConfig->values['test']['enabled']);
     }
 
     public function testDefaultIniValues(): void
