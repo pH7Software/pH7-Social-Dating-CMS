@@ -20,7 +20,7 @@ class UserBirthDateCoreTest extends TestCase
     /**
      * @dataProvider invalidBirthDateProvider
      */
-    public function testInvalidAgeFromBirthDate(string $sBirthDate): void
+    public function testInvalidAgeFromBirthDate(?string $sBirthDate): void
     {
         $iAge = UserBirthDateCore::getAgeFromBirthDate($sBirthDate);
 
