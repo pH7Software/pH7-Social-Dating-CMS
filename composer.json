@@ -95,10 +95,7 @@
   "autoload-dev": {
     "psr-4": {
       "PH7\\Test\\": "_tests"
-    },
-    "files": [
-      "_tests/Unit/requirements_check.inc.php"
-    ]
+    }
   },
   "scripts": {
     "test": "_protected/vendor/bin/phpunit",

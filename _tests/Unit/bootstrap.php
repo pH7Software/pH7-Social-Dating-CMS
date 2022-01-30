@@ -75,6 +75,9 @@ define('PH7_PATH_CACHE', PH7_PATH_PROTECTED . 'data/cache/');
 // Max Values constants
 define('PH7_MAX_URL_LENGTH', 120);
 
+
+include PH7_PATH_TEST . 'requirements_check.inc.php';
+
 // Fix if timezone isn't correctly set
 if (!ini_get('date.timezone')) {
     date_default_timezone_set(PH7_DEFAULT_TIMEZONE);
