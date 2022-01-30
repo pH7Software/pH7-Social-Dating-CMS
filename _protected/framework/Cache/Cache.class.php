@@ -1,10 +1,12 @@
 <?php
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2011-2020, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2011-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Cache
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Cache;
 
@@ -18,30 +20,24 @@ use PH7\Framework\File\GenerableFile;
 
 class Cache implements GenerableFile
 {
-    const DATETIME_FORMAT = 'Y-m-d H:i:s';
-    const CACHE_DIR = 'pH7_cache/';
-    const CACHE_FILE_EXT = '.cache.php';
+    public const CACHE_DIR = 'pH7_cache/';
 
-    /** @var File */
-    private $oFile;
+    private const DATETIME_FORMAT = 'Y-m-d H:i:s';
+    private const CACHE_FILE_EXT = '.cache.php';
 
-    /** @var string */
-    private $sCacheDir;
+    private File $oFile;
 
-    /** @var string */
-    private $sGroup;
+    private string $sCacheDir;
 
-    /** @var string */
-    private $sId;
+    private string $sGroup;
 
-    /** @var int */
-    private $iTtl;
+    private ?string $sId;
 
-    /** @var string */
-    private $sPrefix = 'pH7_';
+    private int $iTtl;
 
-    /** @var bool */
-    private $bEnabled = true;
+    private string $sPrefix = 'pH7_';
+
+    private bool $bEnabled = true;
 
     public function __construct()
     {
@@ -56,9 +52,9 @@ class Cache implements GenerableFile
      *
      * @return self
      */
-    public function enabled($bIsEnable)
+    public function enabled(bool $bIsEnable): self
     {
-        $this->bEnabled = (bool)$bIsEnable;
+        $this->bEnabled = $bIsEnable;
 
         return $this;
     }
@@ -74,7 +70,7 @@ class Cache implements GenerableFile
      *
      * @throws PH7InvalidArgumentException An explanatory message if the directory does not exist.
      */
-    public function setCacheDir($sCacheDir)
+    public function setCacheDir(string $sCacheDir): self
     {
         if (is_dir($sCacheDir)) {
             $this->sCacheDir = $sCacheDir;
@@ -94,7 +90,7 @@ class Cache implements GenerableFile
      *
      * @return self
      */
-    public function setPrefix($sPrefix)
+    public function setPrefix(string $sPrefix): self
     {
         $this->sPrefix = $sPrefix;
 
@@ -105,12 +101,12 @@ class Cache implements GenerableFile
      * Start the cache.
      *
      * @param string $sGroup The Group Cache (This creates a folder).
-     * @param string $sId (The ID for the file).
-     * @param int $iTtl Cache lifetime in seconds. If NULL, the file never expires.
+     * @param string|null $sId (The ID for the file).
+     * @param int|null $iTtl Cache lifetime in seconds. If NULL, the file never expires.
      *
      * @return self
      */
-    public function start($sGroup, $sId, $iTtl)
+    public function start(string $sGroup, ?string $sId, ?int $iTtl): self
     {
         $this->checkCacheDir();
 
@@ -126,7 +122,7 @@ class Cache implements GenerableFile
      *
      * @return self
      */
-    public function setExpire()
+    public function setExpire(): self
     {
         // How long to cache for (in seconds, e.g. 3600*24 = 24 hour)
         @touch($this->getFile(), time() + $this->iTtl);
@@ -141,7 +137,7 @@ class Cache implements GenerableFile
      *
      * @return bool|int|float|string|array|object Returns the converted cache value if successful, FALSE otherwise.
      */
-    public function get($bPrint = false)
+    public function get(bool $bPrint = false)
     {
         $mData = $this->read($bPrint);
 
@@ -155,19 +151,19 @@ class Cache implements GenerableFile
     /**
      * Puts the data in the cache.
      *
-     * @param string $sData
+     * @param bool|int|float|string|array|object $mData
      *
      * @return string|null|self If the cache is disabled, returns null, otherwise returns this class.
      *
      * @throws IOException
      */
-    public function put($sData)
+    public function put($mData)
     {
         if (!$this->bEnabled) {
             return null;
         }
 
-        $this->write(serialize($sData));
+        $this->write(serialize($mData));
 
         return $this;
     }
@@ -177,7 +173,7 @@ class Cache implements GenerableFile
      *
      * @return self this
      */
-    public function clear()
+    public function clear(): self
     {
         if (!empty($this->sId)) {
             $this->oFile->deleteFile($this->getFile());
@@ -203,7 +199,7 @@ class Cache implements GenerableFile
      *
      * @return string
      */
-    final public function getHeaderContents()
+    final public function getHeaderContents(): string
     {
         return 'defined(\'PH7\') or exit(\'Restricted access\');
 /*
@@ -224,7 +220,7 @@ File ID: ' . $this->sId . '
      *
      * @return bool
      */
-    private function check()
+    private function check(): bool
     {
         if ($this->hasCacheExpired()) {
             $this->oFile->deleteFile($this->getFile());
@@ -239,7 +235,7 @@ File ID: ' . $this->sId . '
      *
      * @return bool
      */
-    private function hasCacheExpired()
+    private function hasCacheExpired(): bool
     {
         $sFile = $this->getFile();
 
@@ -252,7 +248,7 @@ File ID: ' . $this->sId . '
      *
      * @return self
      */
-    private function checkCacheDir()
+    private function checkCacheDir(): self
     {
         $this->sCacheDir = empty($this->sCacheDir) ? PH7_PATH_CACHE . static::CACHE_DIR : $this->sCacheDir;
 
@@ -264,7 +260,7 @@ File ID: ' . $this->sId . '
      *
      * @return string
      */
-    private function getFile()
+    private function getFile(): string
     {
         return $this->sCacheDir . $this->sGroup . sha1($this->sId) . static::CACHE_FILE_EXT;
     }
@@ -276,7 +272,7 @@ File ID: ' . $this->sId . '
      *
      * @return bool|string Returns TRUE or a string if successful, FALSE otherwise.
      */
-    private function read($bPrint)
+    private function read(bool $bPrint)
     {
         if ($this->check()) {
             require $this->getFile();
@@ -298,14 +294,14 @@ File ID: ' . $this->sId . '
     /**
      * Writes data in a cache file.
      *
-     * @param string $sData
+     * @param string $sSerializedData
      *
      * @return bool|null
      *
      * @throws IOException If the file cannot be written.
      * @throws \PH7\Framework\File\Permission\PermissionException If the file cannot be created.
      */
-    private function write($sData)
+    private function write(string $sSerializedData): ?bool
     {
         if (!$this->bEnabled) {
             return null;
@@ -316,7 +312,7 @@ File ID: ' . $this->sId . '
 
         $sPhpHeader = $this->getHeaderContents();
 
-        $sData = '<?php ' . $sPhpHeader . '$_mData = <<<\'EOF\'' . File::EOL . $sData . File::EOL . 'EOF;' . File::EOL;
+        $sData = '<?php ' . $sPhpHeader . '$_mData = <<<\'EOF\'' . File::EOL . $sSerializedData . File::EOL . 'EOF;' . File::EOL;
 
         if ($rHandle = @fopen($sFile, 'wb')) {
             if (@flock($rHandle, LOCK_EX)) {
