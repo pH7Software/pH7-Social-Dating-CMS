@@ -105,7 +105,8 @@
       "cp -R _protected/vendor/twbs/bootstrap/dist/js/bootstrap.min.js static/js/bootstrap.js"
     ],
     "post-install-cmd": [
-      "@post-cmd"
+      "@post-cmd",
+      "composer install --working-dir _install"
     ],
     "post-update-cmd": [
       "@post-cmd"
