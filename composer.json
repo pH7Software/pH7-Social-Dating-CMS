@@ -106,7 +106,7 @@
     ],
     "post-install-cmd": [
       "@post-cmd",
-      "composer install --working-dir _install"
+      "@composer install --working-dir _install"
     ],
     "post-update-cmd": [
       "@post-cmd"
