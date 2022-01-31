@@ -12,5 +12,5 @@ them [by raising an issue on GitHub](https://github.com/pH7Software/pH7-Social-D
 
 ## 👋 Say Hello
 
-Don't forget to say “hi” 😊 on the community [discussions board](https://github.com/pH7Software/pH7-Social-Dating-CMS/discussions).
+Don't forget to say “hi” to the community, on [the discussions board](https://github.com/pH7Software/pH7-Social-Dating-CMS/discussions) 😊
 
