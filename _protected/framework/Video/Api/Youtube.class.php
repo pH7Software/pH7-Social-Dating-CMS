@@ -45,11 +45,10 @@ class Youtube extends Api implements Apible
      */
     public function getInfo($sUrl)
     {
-        $sDataUrl = sprintf(static::API_URL, $this->getVideoId($sUrl), $this->sApiKey);
+        if ($this->isApiKeySet()) {
+            $sDataUrl = sprintf(static::API_URL, $this->getVideoId($sUrl), $this->sApiKey);
 
-        if ($oData = $this->getData($sDataUrl)) {
-            // Use Youtube's API to get the Youtube video's data only if the API key has been set, otherwise it won't work
-            if ($this->isApiKeySet()) {
+            if ($oData = $this->getData($sDataUrl)) {
                 if (!empty($oData->error->errors[0]->message)) {
                     throw new InvalidApiKeyException(
                         sprintf('YouTube API: %s', $oData->error->errors[0]->message)
@@ -58,17 +57,19 @@ class Youtube extends Api implements Apible
 
                 $this->oData = $oData->items[0]->snippet;
                 $this->oContentDetails = $oData->items[0]->contentDetails; // Need only for getting the video duration
+
+                return $this;
             }
 
-            return $this;
+            return false;
+        } else {
+            throw new InvalidApiKeyException(
+                t('YouTube requires an API key to be set. Admin Dashboard -> Mod -> Video Youtube API key')
+            );
         }
-
-        return false;
     }
 
     /**
-     * Redefine this method to the specific needs of Youtube API.
-     *
      * @see Youtube::getInfo();
      *
      * @return int|bool The video duration if found, FALSE otherwise.
