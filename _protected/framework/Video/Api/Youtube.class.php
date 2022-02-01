@@ -72,7 +72,7 @@ class Youtube extends Api implements Apible
     /**
      * @see Youtube::getInfo();
      *
-     * @return int|bool The video duration if found, FALSE otherwise.
+     * @return float|int The video duration if found, FALSE otherwise.
      */
     public function getDuration()
     {
