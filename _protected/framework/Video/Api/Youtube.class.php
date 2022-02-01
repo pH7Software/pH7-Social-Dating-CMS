@@ -11,7 +11,11 @@
  * @history          28/03/2016 - Since pH7Builder 1.3.7, it's now compatible with Youtube API v3. Since Youtube API v3, it requires a Google API key. This is available through pH7Builder's admin panel.
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Video\Api;
+
+use stdClass;
 
 defined('PH7') or exit('Restricted access');
 
@@ -49,7 +53,7 @@ class Youtube extends Api implements Apible
             $sDataUrl = sprintf(static::API_URL, $this->getVideoId($sUrl), $this->sApiKey);
 
             if ($oData = $this->getData($sDataUrl)) {
-                $sErrorMessage = $oData->error->message ?? $oData->error->errors[0]->message ?? null;
+                $sErrorMessage = $this->retrieveErrorMessage($oData);
                 if (isset($sErrorMessage)) {
                     throw new InvalidApiKeyException(
                         sprintf('YouTube API: %s', $sErrorMessage)
@@ -135,10 +139,12 @@ class Youtube extends Api implements Apible
         return $iDuration;
     }
 
-    /**
-     * @return bool
-     */
-    public function isApiKeySet()
+    private function retrieveErrorMessage(stdClass $oData): ?string
+    {
+        return $oData->error->message ?? $oData->error->errors[0]->message ?? null;
+    }
+
+    public function isApiKeySet(): bool
     {
         return !empty($this->sApiKey) && strlen($this->sApiKey) > self::API_KEY_MIN_LENGTH;
     }
