@@ -17,24 +17,25 @@ use PH7\Framework\Url\Header;
 
 class ValidateSiteCore
 {
-    const SESS_IS_VISITED = 'suggestionbox_visited';
-    const VALIDATE_FORM_PAGE_DELAY = '2 months';
+    public const SESS_IS_VISITED = 'suggestionbox_visited';
 
-    const SUGGESTION_BOX_CSS_FILENAME = 'suggestionbox.css';
-    const SUGGESTION_BOX_JS_FILENAME = 'suggestionbox.js';
+    public const SUGGESTION_BOX_CSS_FILENAME = 'suggestionbox.css';
+    public const SUGGESTION_BOX_JS_FILENAME = 'suggestionbox.js';
+
+    private const VALIDATE_FORM_PAGE_DELAY = '2 months';
 
     /**
      * Add more "true" or "false" to give
      * more/less probability of showing up the dialog.
      */
-    const STATUS = [
+    private const STATUS = [
         true,
         true,
         true,
         false
     ];
 
-    const VALIDATE_FORM_POPUP_DELAYS = [
+    private const VALIDATE_FORM_POPUP_DELAYS = [
         '4 hours',
         '1 day',
         '2 days',
