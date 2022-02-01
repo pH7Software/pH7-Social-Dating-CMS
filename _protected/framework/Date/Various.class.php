@@ -9,6 +9,8 @@
  * @package          PH7 / Framework / Date
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Date;
 
 defined('PH7') or exit('Restricted access');
@@ -23,8 +25,9 @@ class Various
      * @param string $sTime A date/time string valid formats (http://php.net/manual/en/datetime.formats.php).
      *
      * @return int
+     * @throws \Exception
      */
-    public static function getTime($sTime = 'now')
+    public static function getTime(string $sTime = 'now'): int
     {
         return (new DateTime($sTime))->getTimestamp();
     }
@@ -36,7 +39,7 @@ class Various
      *
      * @return int The Unix timestamp representing including the time modification.
      */
-    public static function setTime($sTime)
+    public static function setTime(string $sTime): int
     {
         $oDate = new DateTime;
         $oDate->modify($sTime);
@@ -49,17 +52,17 @@ class Various
     /**
      * Convert the time (e.g. hour:minutes:seconds) to seconds.
      *
-     * @param int $iHMS Hours:Minutes:Seconds e.g., 08:02:11
+     * @param string $sHMS Hours:Minutes:Seconds e.g., 08:02:11
      *
      * @return int
      */
-    public static function timeToSec($iHMS)
+    public static function timeToSec(string $sHMS): int
     {
-        if (strpos($iHMS, ':') === false) {
+        if (strpos($sHMS, ':') === false) {
             return 0;
         }
 
-        [$iH, $iM, $iS] = explode(':', $iHMS);
+        [$iH, $iM, $iS] = explode(':', $sHMS);
         $iSeconds = 0;
         $iSeconds += ((int)$iH * 3600);
         $iSeconds += ((int)$iM * 60);
@@ -75,14 +78,14 @@ class Various
      *
      * @return string Example: 09:23
      */
-    public static function secToTime($iSeconds)
+    public static function secToTime($iSeconds): string
     {
         $iSeconds = (int)$iSeconds;
 
         $iTime1 = floor($iSeconds / 60);
         $iTime2 = ($iSeconds % 60);
 
-        return static::checkSecToTime($iTime1) . ':' . static::checkSecToTime($iTime2);
+        return static::checkSecToTime((int)$iTime1) . ':' . static::checkSecToTime($iTime2);
     }
 
     /**
@@ -92,7 +95,7 @@ class Various
      *
      * @return string Returns the text of the time stamp.
      */
-    public static function textTimeStamp($mTime)
+    public static function textTimeStamp($mTime): string
     {
         if (is_string($mTime)) {
             // Converting the date string format into timeStamp
@@ -133,13 +136,11 @@ class Various
      * Checks the value format 00:00 of the conversion of seconds to the time.
      *
      * @see self::secToTime()
-     *
-     * @param int $iVal
-     *
-     * @return int
      */
-    private static function checkSecToTime($iVal)
+    private static function checkSecToTime(int $iVal): string
     {
-        return strlen($iVal) === 1 ? 0 . $iVal : $iVal;
+        $sVal = (string)$iVal;
+
+        return strlen($sVal) === 1 ? 0 . $sVal : $sVal;
     }
 }

@@ -1,10 +1,12 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2015-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2015-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -46,14 +48,11 @@ class ValidateSiteCore
         '21 days'
     ];
 
-    /** @var Session */
-    private $oSession;
+    private Session $oSession;
 
-    /** @var ValidateSiteCoreModel */
-    private $oValidateSiteModel;
+    private ValidateSiteCoreModel $oValidateSiteModel;
 
-    /** @var int */
-    private $iSiteCreationDate;
+    private int $iSiteCreationDate;
 
     public function __construct(Session $oSession)
     {
@@ -64,10 +63,8 @@ class ValidateSiteCore
 
     /**
      * Check if the JS donation box has to be added and redirect if the site hasn't been validated yet for a while.
-     *
-     * @return bool
      */
-    public function needToInject()
+    public function needToInject(): bool
     {
         if (self::STATUS[array_rand(self::STATUS)] === false) {
             return false;
@@ -80,7 +77,7 @@ class ValidateSiteCore
         return $this->shouldSeeDialog();
     }
 
-    public function injectAssetSuggestionBoxFiles(Design $oDesign)
+    public function injectAssetSuggestionBoxFiles(Design $oDesign): void
     {
         $oDesign->addCss(
             PH7_LAYOUT . PH7_SYS . PH7_MOD . 'ph7cms-helper' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
@@ -95,26 +92,21 @@ class ValidateSiteCore
     /**
      * After over 2 months, if the site is still not validated, maybe the validation box doesn't really work...,
      * so we redirect directly to the page form.
-     *
-     * @return bool
      */
-    private function shouldBeRedirected()
+    private function shouldBeRedirected(): bool
     {
         return $this->isNotValidated() && $this->hasPageNotBeenSeenYet() &&
             ($this->isSoftwareNoticeHidden() || $this->removeTime(self::VALIDATE_FORM_PAGE_DELAY) >= $this->iSiteCreationDate);
     }
 
-    /**
-     * @return bool
-     */
-    private function shouldSeeDialog()
+    private function shouldSeeDialog(): bool
     {
         $sTime = self::VALIDATE_FORM_POPUP_DELAYS[array_rand(self::VALIDATE_FORM_POPUP_DELAYS)];
 
         return !$this->oValidateSiteModel->is() && $this->removeTime($sTime) >= $this->iSiteCreationDate;
     }
 
-    private function redirectToDonationBox()
+    private function redirectToDonationBox(): void
     {
         $aBoxes = ['donationbox', 'upsetbox'];
 
@@ -128,36 +120,22 @@ class ValidateSiteCore
         );
     }
 
-    /**
-     * @return bool
-     */
-    private function hasPageNotBeenSeenYet()
+    private function hasPageNotBeenSeenYet(): bool
     {
         return !$this->oSession->exists(self::SESS_IS_VISITED);
     }
 
-    /**
-     * @return bool
-     */
-    private function isSoftwareNoticeHidden()
+    private function isSoftwareNoticeHidden(): bool
     {
         return !(bool)DbConfig::getSetting('displayPoweredByLink');
     }
 
-    /**
-     * @return bool
-     */
-    private function isNotValidated()
+    private function isNotValidated(): bool
     {
         return !$this->oValidateSiteModel->is();
     }
 
-    /**
-     * @param string $sTime
-     *
-     * @return int The changed timestamp.
-     */
-    private function removeTime($sTime)
+    private function removeTime(string $sTime): int
     {
         return VDate::setTime('-' . $sTime);
     }
