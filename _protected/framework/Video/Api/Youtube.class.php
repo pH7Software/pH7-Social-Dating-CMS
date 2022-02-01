@@ -39,9 +39,9 @@ class Youtube extends Api implements Apible
     /**
      * @param string $sUrl The video URL (e.g., https://www.youtube.com/watch?v=q-1eHnBOg4A).
      *
-     * @return self|bool FALSE if unable to open the API URL, otherwise Youtube
+     * @return self|bool FALSE if unable to open the API URL, otherwise YouTube
      *
-     * @throws InvalidApiKeyException If there is a problem with Youtube API service.
+     * @throws InvalidApiKeyException If there is a problem with YouTube API service.
      */
     public function getInfo($sUrl)
     {
