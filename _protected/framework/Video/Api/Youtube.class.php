@@ -49,9 +49,10 @@ class Youtube extends Api implements Apible
             $sDataUrl = sprintf(static::API_URL, $this->getVideoId($sUrl), $this->sApiKey);
 
             if ($oData = $this->getData($sDataUrl)) {
-                if (!empty($oData->error->errors[0]->message)) {
+                $sErrorMessage = $oData->error->message ?? $oData->error->errors[0]->message ?? null;
+                if (isset($sErrorMessage)) {
                     throw new InvalidApiKeyException(
-                        sprintf('YouTube API: %s', $oData->error->errors[0]->message)
+                        sprintf('YouTube API: %s', $sErrorMessage)
                     );
                 }
 
