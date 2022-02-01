@@ -15605,7 +15605,7 @@ msgid "The Latest News"
 msgstr ""
 
 #: _protected/app/system/modules/video/views/base/tpl/admin/config.tpl:5
-msgid "You need a Google API key to retrieve the Youtube video infos."
+msgid "You need a Google API key to retrieve the YouTube video info."
 msgstr ""
 
 #: _protected/app/system/modules/video/views/base/tpl/admin/config.tpl:6
