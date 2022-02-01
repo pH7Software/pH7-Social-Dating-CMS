@@ -141,4 +141,3 @@ class Youtube extends Api implements Apible
         return !empty($this->sApiKey) && strlen($this->sApiKey) > self::API_KEY_MIN_LENGTH;
     }
 }
-
