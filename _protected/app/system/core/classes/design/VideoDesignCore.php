@@ -25,11 +25,11 @@ use stdClass;
 
 class VideoDesignCore
 {
-    const PREVIEW_MEDIA_MODE = 'preview';
-    const MOVIE_MEDIA_MODE = 'movie';
+    public const PREVIEW_MEDIA_MODE = 'preview';
+    public const MOVIE_MEDIA_MODE = 'movie';
 
-    const WEBM_EXT = '.webm';
-    const MP4_EXT = '.mp4';
+    private const WEBM_EXT = '.webm';
+    private const MP4_EXT = '.mp4';
 
     /**
      * @internal Import the trait to set the class static.
