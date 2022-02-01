@@ -13,7 +13,7 @@ namespace PH7\Framework\Video\Api;
 
 defined('PH7') or exit('Restricted access');
 
-class Dailymotion extends Api implements IApi
+class Dailymotion extends Api implements Apible
 {
     const API_URL = 'https://api.dailymotion.com/video/';
     const PLAYER_URL = 'https://www.dailymotion.com/embed/video/';

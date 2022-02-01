@@ -40,7 +40,7 @@ class Api
     /**
      * @param string $sUrl The video URL.
      *
-     * @return Api\IApi|bool The Video API class (e.g. Api\Youtube, Api\Vimeo, ..) or FALSE if the data cannot be retrieved.
+     * @return Api\Apible|bool The Video API class (e.g. Api\Youtube, Api\Vimeo, ..) or FALSE if the data cannot be retrieved.
      *
      * @throws InvalidApiProviderException
      * @throws Api\InvalidApiKeyException If the YouTube API is invalid.

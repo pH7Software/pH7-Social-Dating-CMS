@@ -15,7 +15,7 @@ namespace PH7\Framework\Video\Api;
 
 defined('PH7') or exit('Restricted access');
 
-class Youtube extends Api implements IApi
+class Youtube extends Api implements Apible
 {
     const API_URL = 'https://www.googleapis.com/youtube/v3/videos?id=%s&key=%s&part=snippet,contentDetails,statistics,status';
     const PLAYER_URL = 'https://www.youtube.com/embed/';

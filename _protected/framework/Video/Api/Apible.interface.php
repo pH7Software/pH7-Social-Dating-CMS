@@ -12,7 +12,7 @@
 namespace PH7\Framework\Video\Api;
 
 // The prototypes of the methods
-interface IApi
+interface Apible
 {
     /**
      * @param string $sUrl
@@ -24,7 +24,7 @@ interface IApi
     /**
      * @param string $sUrl
      *
-     * @return IApi|bool
+     * @return Apible|bool
      */
     public function getInfo($sUrl);
 

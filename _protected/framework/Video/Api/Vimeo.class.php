@@ -13,7 +13,7 @@ namespace PH7\Framework\Video\Api;
 
 defined('PH7') or exit('Restricted access');
 
-class Vimeo extends Api implements IApi
+class Vimeo extends Api implements Apible
 {
     const API_URL = 'https://vimeo.com/api/v2/video/';
     const PLAYER_URL = 'https://player.vimeo.com/video/';

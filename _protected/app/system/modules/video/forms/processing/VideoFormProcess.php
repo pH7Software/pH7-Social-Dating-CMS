@@ -22,7 +22,7 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Util\Various;
 use PH7\Framework\Video as V;
-use PH7\Framework\Video\Api\IApi;
+use PH7\Framework\Video\Api\Apible;
 
 class VideoFormProcess extends Form
 {
@@ -200,11 +200,11 @@ class VideoFormProcess extends Form
     /**
      * Creates a nice title if no title is specified.
      *
-     * @param IApi $oInfo
+     * @param Apible $oInfo
      *
      * @return string
      */
-    private function getApiVideoTitle(IApi $oInfo)
+    private function getApiVideoTitle(Apible $oInfo)
     {
         if ($this->httpRequest->postExists('title') &&
             $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2
@@ -216,11 +216,11 @@ class VideoFormProcess extends Form
     }
 
     /**
-     * @param IApi $oInfo
+     * @param Apible $oInfo
      *
      * @return string
      */
-    private function getApiVideoDescription(IApi $oInfo)
+    private function getApiVideoDescription(Apible $oInfo)
     {
         if ($this->httpRequest->postExists('description')) {
             return $this->httpRequest->post('description');
