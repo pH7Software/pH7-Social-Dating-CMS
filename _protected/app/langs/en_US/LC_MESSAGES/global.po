@@ -15609,7 +15609,7 @@ msgid "You need a Google API key to retrieve the YouTube video info."
 msgstr ""
 
 #: _protected/app/system/modules/video/views/base/tpl/admin/config.tpl:6
-msgid "You can get one <a href=\"%0%\">here</a>. Enable YouTube Data API (which is disabled by default). Finally create an API key. Select \"Api Key\" for the Credential type, then select \"Server Key\", then you will get your API key to paste in this form. "
+msgid "You can get one <a href=\"%0%\">here</a>. Enable YouTube Data API v3 (disabled by default). Finally create an API key. Select \"Api Key\" for the Credential type, then select \"Server Key\", then you will get your API key to paste in this form. "
 msgstr ""
 
 #: _protected/app/system/modules/video/views/base/tpl/main/album.tpl:27
