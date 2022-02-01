@@ -443,7 +443,10 @@ class File
      */
     public function deleteDir($sPath)
     {
-        return (is_file($sPath) ? unlink($sPath) : (is_dir($sPath) ? array_map([$this, 'deleteDir'], glob($sPath . '/*')) === @rmdir($sPath) : false));
+        return (is_file($sPath) ? unlink($sPath) : (is_dir($sPath) ? array_map(
+                [$this, 'deleteDir'],
+                glob($sPath . '/*')
+            ) === @rmdir($sPath) : false));
     }
 
     /**
@@ -455,7 +458,9 @@ class File
      */
     public function remove($sDir)
     {
-        $oIterator = new RecursiveIteratorIterator($this->getDirIterator($sDir), RecursiveIteratorIterator::CHILD_FIRST);
+        $oIterator = new RecursiveIteratorIterator(
+            $this->getDirIterator($sDir), RecursiveIteratorIterator::CHILD_FIRST
+        );
 
         foreach ($oIterator as $sPath) {
             $sPath->isFile() ? unlink($sPath) : @rmdir($sPath);
@@ -844,7 +849,9 @@ class File
         }
 
         $bRet = false; // Default value
-        $oIterator = new RecursiveIteratorIterator($this->getDirIterator($sFrom), RecursiveIteratorIterator::SELF_FIRST);
+        $oIterator = new RecursiveIteratorIterator(
+            $this->getDirIterator($sFrom), RecursiveIteratorIterator::SELF_FIRST
+        );
 
         foreach ($oIterator as $sFromFile) {
             // http://php.net/manual/en/recursivedirectoryiterator.getsubpathname.php#example-4559
