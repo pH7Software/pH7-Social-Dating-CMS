@@ -750,6 +750,11 @@ class File
         curl_setopt($rCh, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($rCh, CURLOPT_FOLLOWLOCATION, 1);
         $mRes = curl_exec($rCh);
+
+        if ($mRes === false) {
+            throw new CurlException(curl_error($rCh), curl_errno($rCh));
+        }
+
         curl_close($rCh);
         unset($rCh);
 
