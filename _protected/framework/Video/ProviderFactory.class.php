@@ -9,45 +9,45 @@
  * @link             http://ph7cms.com
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Video;
 
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Config\Config;
 use PH7\Framework\Registry\Registry;
+use PH7\Framework\Video\Api\Apible;
 
 class ProviderFactory
 {
-    const VIDEO_MODULE_NAME = 'video';
+    public const VIDEO_MODULE_NAME = 'video';
 
-    const INVALID_API_PROVIDER_MESSAGE = 'Invalid API video type. Wrong specified type is: %s';
+    private const INVALID_API_PROVIDER_MESSAGE = 'Invalid API video type. Wrong specified type is: %s';
 
-    const YOUTUBE_NAMES = [
+    private const VIMEO_NAME = 'vimeo';
+    private const METACAFE_NAME = 'metacafe';
+
+    private const YOUTUBE_NAMES = [
         'youtube',
         'youtu'
     ];
-    const DAILYMOTION_NAMES = [
+    private const DAILYMOTION_NAMES = [
         'dailymotion',
         'dai'
     ];
-    const VIMEO_NAME = 'vimeo';
-    const METACAFE_NAME = 'metacafe';
 
     /**
-     * @param string $sVideoPlatform
-     *
-     * @return Api\IApi
-     *
      * @throws InvalidApiProviderException
      */
-    public static function create($sVideoPlatform)
+    public static function create(string $sVideoPlatform): Apible
     {
         switch ($sVideoPlatform) {
             case in_array($sVideoPlatform, self::YOUTUBE_NAMES, true):
                 $oYoutube = new Api\Youtube;
                 if (self::isVideoModule()) {
                     $sKey = Config::getInstance()->values['module.api']['youtube.key'];
-                    $oYoutube->setKey($sKey); // Youtube's API v3+ requires an API key
+                    $oYoutube->setKey($sKey); // YouTube's API v3+ requires an API key
                 }
                 return $oYoutube;
 
@@ -74,10 +74,8 @@ class ProviderFactory
 
     /**
      * Check if the page request is done from the "video" module.
-     *
-     * @return bool
      */
-    private static function isVideoModule()
+    private static function isVideoModule(): bool
     {
         return Registry::getInstance()->module === self::VIDEO_MODULE_NAME;
     }
