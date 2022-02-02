@@ -37,7 +37,9 @@ class ProtectedFileForm
             $sFullPath = self::getRealPath();
 
             if (!$rData = @file_get_contents($sFullPath)) {
-                \PFBC\Form::clearErrors('form_file'); // First, remove the previous error message (if existing) to avoid duplicate error messages
+                // First, remove the previous error message (if existing) to avoid duplicate error messages
+                \PFBC\Form::clearErrors('form_file');
+
                 \PFBC\Form::setError('form_file', t('The following requested file was not found: %0%', escape(PH7_PATH_PROTECTED . $_GET['file'])));
             }
 
