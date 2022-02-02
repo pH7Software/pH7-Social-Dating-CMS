@@ -8,6 +8,8 @@
  * @package          PH7 / Framework / File
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\File;
 
 defined('PH7') or exit('Restricted access');
@@ -16,20 +18,16 @@ use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 abstract class Upload
 {
-    /** @var string */
-    protected $sMaxSize;
+    protected string $sMaxSize;
 
-    /** @var int */
-    protected $iFileSize;
+    protected int $iFileSize;
 
     /**
      * Check if everything is correct.
      *
-     * @return bool
-     *
      * @throws PH7InvalidArgumentException
      */
-    public function check()
+    public function check(): bool
     {
         return $this->checkSize();
     }
@@ -37,27 +35,23 @@ abstract class Upload
     /**
      * Get maximum file size.
      *
-     * @return int Bytes.
-     *
      * @throws PH7InvalidArgumentException
      */
-    public function getMaxSize()
+    public function getMaxSize(): int
     {
         $iMaxSize = Various::sizeToBytes($this->sMaxSize);
         $iUploadMaxFileSize = Various::sizeToBytes(ini_get('upload_max_filesize'));
         $iPostMaxSize = Various::sizeToBytes(ini_get('post_max_size'));
 
-        return min($iMaxSize, $iUploadMaxFileSize, $iPostMaxSize);
+        return (int)min($iMaxSize, $iUploadMaxFileSize, $iPostMaxSize);
     }
 
     /**
      * Check the file size.
      *
-     * @return bool
-     *
      * @throws PH7InvalidArgumentException
      */
-    protected function checkSize()
+    protected function checkSize(): bool
     {
         return $this->iFileSize < $this->getMaxSize();
     }
