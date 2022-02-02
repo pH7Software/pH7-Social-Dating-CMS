@@ -48,7 +48,7 @@ class Various
      *
      * @param string The size (e.g.,10K, 10M, 10G).
      *
-     * @return string The integer bytes.
+     * @return int The integer bytes.
      *
      * @throws PH7InvalidArgumentException Explanatory message.
      */
