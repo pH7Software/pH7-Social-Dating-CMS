@@ -224,7 +224,7 @@ class Gzip
                 $this->getContents();
 
                 // Store the file in the cache
-                if (!$this->oFile->putFile($sFullCacheFile, $this->sContents)) {
+                if ($this->oFile->putFile($sFullCacheFile, $this->sContents) === false) {
                     throw new Exception('Cannot write cache file: ' . $sFullCacheFile);
                 }
             }

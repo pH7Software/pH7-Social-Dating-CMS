@@ -604,7 +604,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
                 $sOutput = (new Compress)->parseHtml($sOutput);
             }
 
-            if (!$this->file->putFile($this->sCacheDirFile, $sOutput)) {
+            if ($this->file->putFile($this->sCacheDirFile, $sOutput) === false) {
                 throw new TplException(
                     sprintf('Unable to write HTML cached file "%s"', $this->sCacheDirFile)
                 );
