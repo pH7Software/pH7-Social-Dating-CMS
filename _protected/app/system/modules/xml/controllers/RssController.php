@@ -76,14 +76,23 @@ class RssController extends MainController implements XmlControllable
             case 'forum-topic':
                 $this->sAction = $sAction;
                 break;
+
             case 'comment-profile':
             case 'comment-blog':
             case 'comment-note':
             case 'comment-picture':
             case 'comment-video':
+                // We disable the cache because of dynamic pages managed by the router
+                $this->view->setCaching(
+                    false
+                );
+                $this->sAction = 'comment.inc';
+                break;
+
             case 'forum-post':
                 if ($this->isParamValid($mParam)) {
-                    $this->view->setCaching(false); // We disable the cache since they are dynamic pages managed by the router
+                    // We disable the cache since they are dynamic pages managed by the router
+                    $this->view->setCaching(false);
                     $this->view->forums_messages = $this->oDataModel->getForumsMessages($mParam);
                     $this->sAction = $sAction;
                 } else {

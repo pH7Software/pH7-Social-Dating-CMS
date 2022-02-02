@@ -78,11 +78,18 @@ class SitemapController extends MainController implements XmlControllable
             case 'comment':
             case 'picture':
             case 'video':
+                $this->sAction = $sAction;
+                break;
+
             case 'comment-profile':
             case 'comment-blog':
             case 'comment-note':
             case 'comment-picture':
             case 'comment-video':
+                // Disable the cache since they are dynamic pages managed by the router
+                $this->view->setCaching(false);
+                $this->sAction = 'comment.inc';
+                break;
 
             default:
                 $this->displayPageNotFound(t('Sitemap Not Found!'));
