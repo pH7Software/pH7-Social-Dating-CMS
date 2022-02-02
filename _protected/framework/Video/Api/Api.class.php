@@ -9,6 +9,8 @@
  * @link             http://ph7cms.com
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Video\Api;
 
 defined('PH7') or exit('Restricted access');
@@ -90,7 +92,7 @@ abstract class Api
      *
      * @return string|bool The embed URL if id is valid, false otherwise.
      */
-    public function getEmbedUrl($sUrl)
+    public function getEmbedUrl(string $sUrl)
     {
         if (!$this->getVideoId($sUrl)) {
             return false;
@@ -102,12 +104,8 @@ abstract class Api
     /**
      * Generic method (but still specialized in Youtube API while remaining open to other APIs)
      * to retrieve the ID of the video. It can be redefined if the recovery of the video ID is more specific.
-     *
-     * @param string $sUrl
-     *
-     * @return string string
      */
-    public function getVideoId($sUrl)
+    public function getVideoId(string $sUrl)
     {
         $aData = parse_url($sUrl);
         $sUrl = str_replace(
@@ -142,11 +140,9 @@ abstract class Api
      *
      * @return \stdClass|bool Returns data object on success or FALSE on failure.
      */
-    protected function getData($sUrl)
+    protected function getData(string $sUrl)
     {
         $sData = (new File)->getUrlContents($sUrl);
-        $oData = json_decode($sData);
-
-        return $oData;
+        return json_decode($sData);
     }
 }

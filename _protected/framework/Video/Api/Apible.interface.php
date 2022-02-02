@@ -9,6 +9,8 @@
  * @link             http://ph7cms.com
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Video\Api;
 
 // The prototypes of the methods
@@ -19,14 +21,14 @@ interface Apible
      *
      * @return string|bool Returns the video embed URL if it was found, FALSE otherwise.
      */
-    public function getVideo($sUrl);
+    public function getVideo(string $sUrl);
 
     /**
      * @param string $sUrl
      *
      * @return Apible|bool
      */
-    public function getInfo($sUrl);
+    public function getInfo(string $sUrl);
 
     /**
      * @see \PH7\Framework\Video\Api\Api::getInfo();
@@ -52,24 +54,24 @@ interface Apible
     /**
      * @param string $sUrl
      * @param string $sMedia ("preview" or "movie").
-     * @param int $iWidth
-     * @param int $iHeight
+     * @param int|string $mWidth Could be `400` or '100%'
+     * @param int|string $mHeight Could be `600` or '100%'
      *
      * @return string The HTML code.
      */
-    public function getMeta($sUrl, $sMedia, $iWidth, $iHeight);
+    public function getMeta(string $sUrl, string $sMedia, $mWidth, $mHeight): string;
 
     /**
      * @param string $sUrl
      *
      * @return string|bool The embed URL if id is valid, FALSE otherwise.
      */
-    public function getEmbedUrl($sUrl);
+    public function getEmbedUrl(string $sUrl);
 
     /**
      * @param string $sUrl
      *
      * @return int|bool Returns the ID of the video if it was found, FALSE otherwise.
      */
-    public function getVideoId($sUrl);
+    public function getVideoId(string $sUrl);
 }

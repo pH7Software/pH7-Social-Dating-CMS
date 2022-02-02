@@ -26,7 +26,7 @@ class Dailymotion extends Api implements Apible
      *
      * @return string|bool Returns the video embed URL if it was found, FALSE otherwise.
      */
-    public function getVideo($sUrl)
+    public function getVideo(string $sUrl)
     {
         return $this->getEmbedUrl($sUrl);
     }
@@ -36,7 +36,7 @@ class Dailymotion extends Api implements Apible
      *
      * @return Dailymotion|bool FALSE if unable to open the URL, otherwise Dailymotion class.
      */
-    public function getInfo($sUrl)
+    public function getInfo(string $sUrl)
     {
         $sDataUrl = static::API_URL . $this->getVideoId($sUrl) . '?fields=title,duration';
 
@@ -46,12 +46,12 @@ class Dailymotion extends Api implements Apible
     /**
      * @param string $sUrl
      * @param string $sMedia
-     * @param int $iWidth
-     * @param int $iHeight
+     * @param int|string $iWidth
+     * @param int|string $iHeight
      *
      * @return string
      */
-    public function getMeta($sUrl, $sMedia, $iWidth, $iHeight)
+    public function getMeta(string $sUrl, string $sMedia, $iWidth, $iHeight): string
     {
         if ($sMedia === 'preview') {
             return 'https://dailymotion.com/thumbnail/160x120/video/' . $this->getVideoId($sUrl);
@@ -67,7 +67,7 @@ class Dailymotion extends Api implements Apible
      *
      * @return int|bool Returns the ID of the video if it was found, FALSE otherwise.
      */
-    public function getVideoId($sUrl)
+    public function getVideoId(string $sUrl)
     {
         preg_match(static::REGEX_EMBED_FORMAT1, $sUrl, $aMatch);
         if (!empty($aMatch[1])) {

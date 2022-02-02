@@ -27,7 +27,7 @@ class Metacafe extends Api implements Apible
      *
      * @return string|bool Returns the embed video URL if found, FALSE otherwise.
      */
-    public function getVideo($sUrl)
+    public function getVideo(string $sUrl)
     {
         return $this->getEmbedUrl($sUrl);
     }
@@ -37,7 +37,7 @@ class Metacafe extends Api implements Apible
      *
      * @return Metacafe|bool
      */
-    public function getInfo($sUrl)
+    public function getInfo(string $sUrl)
     {
         $oDom = new DOMDocument;
         if (!@$oDom->load(static::API_URL . $this->getVideoId($sUrl))) {
@@ -108,12 +108,12 @@ class Metacafe extends Api implements Apible
     /**
      * @param string $sUrl
      * @param string $sMedia
-     * @param int $iWidth
-     * @param int $iHeight
+     * @param int|string $iWidth
+     * @param int|string $iHeight
      *
      * @return string
      */
-    public function getMeta($sUrl, $sMedia, $iWidth, $iHeight)
+    public function getMeta(string $sUrl, string $sMedia, $iWidth, $iHeight): string
     {
         $sIdVideo = $this->getVideoId($sUrl);
         $sVideoUrl = $this->getEmbedUrl($sUrl);
@@ -132,7 +132,7 @@ class Metacafe extends Api implements Apible
      *
      * @return int|bool Returns the ID of the video if it was found, FALSE otherwise.
      */
-    public function getVideoId($sUrl)
+    public function getVideoId(string $sUrl)
     {
         preg_match(static::REGEX_URI_FORMAT, $sUrl, $aMatch);
 
@@ -146,7 +146,7 @@ class Metacafe extends Api implements Apible
      *
      * @return bool|string
      */
-    public function getEmbedUrl($sUrl)
+    public function getEmbedUrl(string $sUrl)
     {
         if (!$this->getVideoId($sUrl)) {
             return false;

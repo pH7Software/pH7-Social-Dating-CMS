@@ -35,7 +35,7 @@ class Youtube extends Api implements Apible
      *
      * @return string|bool Returns the embed video URL if found, FALSE otherwise.
      */
-    public function getVideo($sUrl)
+    public function getVideo(string $sUrl)
     {
         return $this->getEmbedUrl($sUrl);
     }
@@ -47,7 +47,7 @@ class Youtube extends Api implements Apible
      *
      * @throws InvalidApiKeyException If there is a problem with YouTube API service.
      */
-    public function getInfo($sUrl)
+    public function getInfo(string $sUrl)
     {
         if ($this->isApiKeySet()) {
             $sDataUrl = sprintf(static::API_URL, $this->getVideoId($sUrl), $this->sApiKey);
@@ -87,12 +87,12 @@ class Youtube extends Api implements Apible
     /**
      * @param string $sUrl
      * @param string $sMedia
-     * @param int $iWidth
-     * @param int $iHeight
+     * @param int|string $iWidth
+     * @param int|string $iHeight
      *
      * @return string
      */
-    public function getMeta($sUrl, $sMedia, $iWidth, $iHeight)
+    public function getMeta(string $sUrl, string $sMedia, $iWidth, $iHeight): string
     {
         if ($sMedia === 'preview') {
             $aThumb = ['default', 1, 2, 3];
@@ -107,15 +107,15 @@ class Youtube extends Api implements Apible
     }
 
     /**
-     * Get the Youtube duration time.
+     * Get the YouTube video's duration time.
      *
      * @author Yahia/Chris Z-S – I've been inspired by Yahia example <http://stackoverflow.com/a/26178914>
      *
-     * @param string $sDuration Youtube duration format (e.g., PT4M13S).
+     * @param string $sDuration YouTube video's duration format (e.g., PT4M13S).
      *
-     * @return int Youtube Duration in seconds.
+     * @return int YouTube Duration in seconds.
      */
-    protected function getDurationTime($sDuration)
+    protected function getDurationTime(string $sDuration)
     {
         preg_match_all(self::REGEX_TIME_FORMAT, $sDuration, $aMatches);
         $iDuration = 0; // Default value
