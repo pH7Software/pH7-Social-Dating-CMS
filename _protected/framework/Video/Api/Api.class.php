@@ -21,32 +21,25 @@ use PH7\Framework\Str\Str;
 
 abstract class Api
 {
-    /** @var Str */
-    protected $oStr;
+    protected Str $oStr;
 
-    /** @var \stdClass */
+    /** @var \stdClass|\DOMXPath */
     protected $oData;
 
-    /** @var string */
-    protected $sApiKey;
+    protected string $sApiKey;
 
-    /** @var bool */
-    protected $bAutoplay;
+    protected bool $bAutoplay;
 
     public function __construct()
     {
         $this->oStr = new Str;
-        $this->bAutoplay = DbConfig::getSetting('autoplayVideo');
+        $this->bAutoplay = (bool)DbConfig::getSetting('autoplayVideo');
     }
 
     /**
-     * Set API key (currently only required by Youtube API class).
-     *
-     * @param string $sApiKey
-     *
-     * @return void
+     * Set API key (currently only required by YouTube API class).
      */
-    public function setKey($sApiKey)
+    public function setKey(string $sApiKey): void
     {
         $this->sApiKey = trim($sApiKey);
     }
