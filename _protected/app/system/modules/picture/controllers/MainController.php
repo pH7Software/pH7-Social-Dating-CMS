@@ -73,7 +73,7 @@ class MainController extends Controller
 
     public function addPhoto()
     {
-        $this->view->page_title = $this->view->h2_title = t('Add some new Photos');
+        $this->view->page_title = $this->view->h2_title = t('Add some Photos');
         $this->output();
     }
 

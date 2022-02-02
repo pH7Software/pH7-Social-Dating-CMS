@@ -56,7 +56,7 @@ class LikeCoreAjax
     {
         $sTxt = (static::$iVotesLike > 1) ?
             nt('You and one other have voted for this!', 'You and %n% other people have voted for this!', static::$iVotesLike - 1) :
-            t('Congrats! You are the first to like it');
+            t("Congrats! You're the first one!");
 
         return '{"votes":' . static::$iVotesLike . ',"txt":"' . $sTxt . '"}';
     }

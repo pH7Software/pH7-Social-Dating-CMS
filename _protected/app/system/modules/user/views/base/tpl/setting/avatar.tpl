@@ -10,6 +10,6 @@
     {{ AvatarForm::display() }}
 
     <p>
-        <span class="underline err_msg">{lang 'Warning:'}</span> {lang 'Your profile photo must contain a photo of yourself under penalty of banishment of your account!'}
+        <span class="underline err_msg">{lang 'Warning:'}</span> {lang 'Your profile photo must be a photo of yourself.'}
     </p>
 </div>

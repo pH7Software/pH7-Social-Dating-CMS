@@ -107,7 +107,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: _protected/app/system/core/assets/ajax/LikeCoreAjax.php:59
-msgid "Congrats! You are the first to like it"
+msgid "Congrats! You're the first one!"
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/RatingCoreAjax.php:60
@@ -6735,7 +6735,7 @@ msgid "Add a new Album"
 msgstr ""
 
 #: _protected/app/system/modules/picture/controllers/MainController.php:75
-msgid "Add some new Photos"
+msgid "Add some Photos"
 msgstr ""
 
 #: _protected/app/system/modules/picture/controllers/MainController.php:81
@@ -15508,7 +15508,7 @@ msgid "Warning:"
 msgstr ""
 
 #: _protected/app/system/modules/user/views/base/tpl/setting/avatar.tpl:12
-msgid "Your profile photo must contain a photo of yourself under penalty of banishment of your account!"
+msgid "Your profile photo must be a photo of yourself."
 msgstr ""
 
 #: _protected/app/system/modules/user/views/base/tpl/setting/avatar.tpl:18
