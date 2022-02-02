@@ -39,7 +39,7 @@ abstract class Controller implements Controllable
     const TOTAL_INSTALL_STEPS = 7;
 
     const SOFTWARE_VERSION_NAME = 'PURE™';
-    const SOFTWARE_VERSION = '17.0.0';
+    const SOFTWARE_VERSION = '17.0.3';
 
     const SOFTWARE_BUILD = '1';
 
