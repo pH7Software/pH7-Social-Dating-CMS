@@ -51,15 +51,6 @@
   </url>
 {/if}
 
-{if $is_chatroulette_enabled}
-  <url>
-    <loc>{{ $design->url('chatroulette','home','index') }}</loc>
-    <lastmod>{current_date}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-{/if}
-
 {if $is_blog_enabled}
   <url>
     <loc>{{ $design->url('blog','main','index') }}</loc>

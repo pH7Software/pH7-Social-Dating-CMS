@@ -21,10 +21,6 @@
         <link title="{lang 'Chat Rooms'}" url="{{ $design->url('chat','home','index') }}" />
     {/if}
 
-    {if $is_chatroulette_enabled}
-        <link title="{lang 'Free Chatroulette Speed Dating'}" url="{{ $design->url('chatroulette','home','index') }}" />
-    {/if}
-
     {if $is_blog_enabled}
         <link title="{lang 'Blog'}" url="{{ $design->url('blog','main','index') }}" />
     {/if}

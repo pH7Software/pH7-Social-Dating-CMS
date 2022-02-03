@@ -143,9 +143,6 @@
     <!-- Chat -->
       <route url="free-chat-room" path="system/modules" module="chat" controller="home" action="index" />
 
-    <!-- Chatroulette -->
-      <route url="free-chatroulette-speed-dating" path="system/modules" module="chatroulette" controller="home" action="index" />
-
     <!-- Search -->
       <route url="search/([a-zA-Z0-9_-]+)" path="system/modules" module="search" controller="main" action="search" vars="table" />
       <route url="result/([a-zA-Z0-9_-]+)" path="system/modules" module="search" controller="main" action="result" vars="table" />

@@ -31,7 +31,6 @@ class InstallController extends Controller
     private const SOCIAL_MODS = [
         'affiliate' => '0',
         'chat' => '0',
-        'chatroulette' => '0',
         'picture' => '1',
         'video' => '1',
         'friend' => '1',
@@ -56,7 +55,6 @@ class InstallController extends Controller
     private const DATING_MODS = [
         'affiliate' => '1',
         'chat' => '1',
-        'chatroulette' => '0',
         'picture' => '1',
         'video' => '0',
         'friend' => '0',
