@@ -102,7 +102,7 @@
     {if (!$is_aff_auth AND !$is_admin_auth) OR $admin_logged_as_user}
         {if $is_chat_enabled}
           <li>
-            <a href="{{ $design->url('chat','home','index') }}" rel="nofollow" title="{lang 'Chat Rooms'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">
+            <a href="{{ $design->url('chat','home','index') }}" rel="nofollow" title="{lang 'Chat Rooms'}" data-load="ajax">
               <i class="fa fa-weixin"></i> {lang 'Chat'}
             </a>
           </li>
