@@ -18,6 +18,6 @@
     {main_include 'page_nav.inc.tpl'}
 {else}
     <p class="center">
-        {lang 'No Profile Photos found for the moderation treatment.'}
+        {lang 'No Profile Photos found for moderation treatments.'}
     </p>
 {/if}

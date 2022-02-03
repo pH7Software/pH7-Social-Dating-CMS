@@ -14224,7 +14224,7 @@ msgid "Posted by"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/moderator/avatar.tpl:21
-msgid "No Profile Photos found for the moderation treatment."
+msgid "No Profile Photos found for moderation treatments."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/moderator/background.tpl:6
@@ -14238,7 +14238,7 @@ msgid "Wallpaper"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/moderator/background.tpl:23
-msgid "No Profile Backgrounds found for the moderation treatment."
+msgid "No Profile Backgrounds found for moderation treatments."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/moderator/picture.tpl:12
@@ -14251,19 +14251,19 @@ msgid "Posted on %0%"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/moderator/picture.tpl:26
-msgid "No Pictures found for the moderation treatment."
+msgid "No Pictures found for moderation treatments."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/moderator/picturealbum.tpl:27
-msgid "No Picture Albums found for the moderation treatment."
+msgid "No Picture Albums found for moderation treatments."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/moderator/video.tpl:23
-msgid "No Videos found for the moderation treatment."
+msgid "No Videos found for moderation treatments."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/moderator/videoalbum.tpl:29
-msgid "No Video Albums found for the moderation treatment."
+msgid "No Video Albums found for moderation treatments."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/module/install.tpl;3
@@ -14811,7 +14811,7 @@ msgid "WARNING! Before sending your emails, it is preferable that you have a ded
 msgstr ""
 
 #: _protected/app/system/modules/note/views/base/tpl/admin/unmoderated.tpl:5
-msgid "No Notes found for the moderation treatment."
+msgid "No Notes found for moderation treatments."
 msgstr ""
 
 #: _protected/app/system/modules/note/views/base/tpl/home.inc.tpl:3

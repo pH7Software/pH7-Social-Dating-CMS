@@ -26,6 +26,6 @@
         </ul>
         {main_include 'page_nav.inc.tpl'}
     {else}
-        <p>{lang 'No Video Albums found for the moderation treatment.'}</p>
+        <p>{lang 'No Video Albums found for moderation treatments.'}</p>
     {/if}
 </div>

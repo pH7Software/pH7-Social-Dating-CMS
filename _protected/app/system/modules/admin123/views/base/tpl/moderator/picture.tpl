@@ -23,6 +23,6 @@
     {main_include 'page_nav.inc.tpl'}
 {else}
     <p class="center">
-        {lang 'No Pictures found for the moderation treatment.'}
+        {lang 'No Pictures found for moderation treatments.'}
     </p>
 {/if}
