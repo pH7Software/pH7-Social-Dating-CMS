@@ -5137,15 +5137,15 @@ msgid "Nothing found!"
 msgstr ""
 
 #: _protected/app/system/modules/forum/controllers/ForumController.php:78
-msgid "Discussions Board | %site_name%"
+msgid "Discussion Board | %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/forum/controllers/ForumController.php:79
-msgid "Discussion Forums, Social Network Site - %site_name%"
+msgid "Community Discussion Board - %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/forum/controllers/ForumController.php:80
-msgid "Discussion Forums, Social Network Site"
+msgid "Discussions - %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/forum/controllers/ForumController.php:112

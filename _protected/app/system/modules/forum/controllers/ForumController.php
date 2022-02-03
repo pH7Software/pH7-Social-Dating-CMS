@@ -76,8 +76,8 @@ class ForumController extends Controller
             $this->notFound();
         } else {
             $this->view->page_title = t('Discussion Board | %site_name%');
-            $this->view->meta_description = t('Discussion Board, Social Network Site - %site_name%');
-            $this->view->h1_title = t('Discussion Board, Social Network Site');
+            $this->view->meta_description = t('Community Discussion Board - %site_name%');
+            $this->view->h1_title = t('Discussions - %site_name%');
 
             $this->view->categories = $oCategories;
             $this->view->forums = $oForums;
