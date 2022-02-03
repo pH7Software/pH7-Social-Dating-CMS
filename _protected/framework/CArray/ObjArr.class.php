@@ -46,7 +46,7 @@ class ObjArr
      *
      * @param stdClass|array $oObj The object to convert.
      *
-     * @return array
+     * @return array|object
      */
     public static function toArray($oObj)
     {
