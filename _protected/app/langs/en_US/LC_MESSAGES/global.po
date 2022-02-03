@@ -6132,7 +6132,7 @@ msgid "Note Posts of %site_name% community"
 msgstr ""
 
 #: _protected/app/system/modules/note/controllers/MainController.php:66
-msgid "Community Blog. Let Users talk!"
+msgid "Notes. Let Users talk!"
 msgstr ""
 
 #: _protected/app/system/modules/note/controllers/MainController.php:83
