@@ -5137,7 +5137,7 @@ msgid "Nothing found!"
 msgstr ""
 
 #: _protected/app/system/modules/forum/controllers/ForumController.php:78
-msgid "Discussion Forums - %site_name%"
+msgid "Discussions Board | %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/forum/controllers/ForumController.php:79
@@ -6997,7 +6997,7 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/signuptop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/visitortop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/video_f6fa126c5efdb5b591bfcfd28780c0a0/base/maintop_menu.inc.cpl.php:19
-msgid "Forum"
+msgid "Discussions"
 msgstr ""
 
 #: _protected/app/system/modules/report/forms/ReportForm.php:37
@@ -9164,7 +9164,7 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/signuptop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/visitortop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/video_f6fa126c5efdb5b591bfcfd28780c0a0/base/maintop_menu.inc.cpl.php:19
-msgid "Forums"
+msgid "Discussions Board"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/accounttop_menu.inc.cpl.php:19

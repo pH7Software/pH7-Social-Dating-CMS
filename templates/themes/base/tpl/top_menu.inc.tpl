@@ -135,9 +135,9 @@
         {/if}
 
         {if $is_forum_enabled}
-          <li class="dropdown"><a href="{{ $design->url('forum','forum','index') }}" title="{lang 'Forums'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-comments"></i> {lang 'Forum'} <span class="caret"></span></a>
+          <li class="dropdown"><a href="{{ $design->url('forum','forum','index') }}" title="{lang 'Discussions Board'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-comments"></i> {lang 'Discussions'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="{{ $design->url('forum','forum','index') }}" rel="nofollow" title="{lang 'Forums'}" data-load="ajax"><i class="fa fa-comments"></i> {lang 'Forum'}</a></li>
+              <li><a href="{{ $design->url('forum','forum','index') }}" rel="nofollow" title="{lang 'Discussions Board'}" data-load="ajax"><i class="fa fa-comments"></i> {lang 'Discussions'}</a></li>
               <li><a href="{{ $design->url('forum','forum','search') }}" title="{lang 'Search Topics'}" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search'}</a></li>
             </ul>
           </li>
@@ -344,7 +344,7 @@
             {/if}
 
             {if $is_forum_enabled}
-              <li><a href="{{ $design->url('forum','admin','index') }}" title="{lang 'Forum - Admin Mode'}"><i class="fa fa-comments"></i> {lang 'Forum'}</a></li>
+              <li><a href="{{ $design->url('forum','admin','index') }}" title="{lang 'Discussions Board - Admin Mode'}"><i class="fa fa-comments"></i> {lang 'Discussions'}</a></li>
             {/if}
 
             {if $is_blog_enabled}
@@ -519,7 +519,7 @@
             <li><a class="bold" href="{{ $design->url('ph7cms-helper','main','suggestionbox','?box=donationbox') }}" title="{lang 'Will You Be Nice Today? Like 81% of our users who contribute on a regular basis.'}"><i class="fa fa-trophy"></i> {lang 'Will You Be Nice Today?'}</a></li>
             <li><a href="{software_doc_url}" title="{lang 'Software Documentation'}"><i class="fa fa-book"></i> {lang 'Documentation'}</a></li>
             <li><a href="{software_issue_url}" title="{lang 'Report a Problem'}"><i class="fa fa-bug"></i> {lang 'Report a Bug'}</a></li>
-            <li><a href="{software_forum_url}" title="{lang 'Discussions Board'}"><i class="fa fa-bug"></i> {lang 'Forums'}</a></li>
+            <li><a href="{software_forum_url}" title="{lang 'Discussions Board'}"><i class="fa fa-group"></i> {lang 'Community Support'}</a></li>
             <li><a href="{software_review_url}" title="{lang 'Help pH7Builder by giving a nice review! Highly appreciated :)'}"><i class="fa fa-heart"></i> {lang 'Give Nice Review'}</a></li>
           </ul>
         </li>
