@@ -3718,14 +3718,6 @@ msgstr ""
 msgid "Documentation: <a href=\"%0%\">Change the default chat service by your real one</a>.<br /> <small>Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).</small>"
 msgstr ""
 
-#: _protected/app/system/modules/admin123/forms/SettingForm.php:311
-msgid "Chatroulette API:"
-msgstr ""
-
-#: _protected/app/system/modules/admin123/forms/SettingForm.php:311
-msgid "Documentation: <a href=\"%0%\">Change the default chatroulette provider by yours</a>.<br /> <small>Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).</small>"
-msgstr ""
-
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:315
 msgid "Automation"
 msgstr ""
@@ -4710,22 +4702,6 @@ msgstr ""
 
 #: _protected/app/system/modules/chat/controllers/HomeController.php:22
 msgid "Welcome to <span class=\"pH3\">Free Chat Room</span> on <span class=\"pH0\">%site_name%</span>!"
-msgstr ""
-
-#: _protected/app/system/modules/chatroulette/controllers/HomeController.php:19
-msgid "Free Video Room, Live Speed Dating ChatRoulette"
-msgstr ""
-
-#: _protected/app/system/modules/chatroulette/controllers/HomeController.php:20
-msgid "Free Live Speed Dating with the Chatroulette of %site_name%, Meet new people near you and make new friends, sex friends and free flirting, Free online dating site for singles without registration with Video Chat Rooms!"
-msgstr ""
-
-#: _protected/app/system/modules/chatroulette/controllers/HomeController.php:21
-msgid "chat, chatroulette, sex friend, single, speed dating, meet singles, dating, free dating, chat room, chat webcam"
-msgstr ""
-
-#: _protected/app/system/modules/chatroulette/controllers/HomeController.php:22
-msgid "Welcome to <span class=\"pH1\">Speed Dating ChatRoulette</span> of <span class=\"pH0\">%site_name%</span>!"
 msgstr ""
 
 #: _protected/app/system/modules/comment/assets/ajax/CommentAjax.php:71
@@ -8955,52 +8931,6 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/visitortop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/video_f6fa126c5efdb5b591bfcfd28780c0a0/base/maintop_menu.inc.cpl.php:19
 msgid "Chat Rooms"
-msgstr ""
-
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/accounttop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/infotop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/moduletop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/tooltop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/usertop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/hometop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/connect_35f0edcc582717793663d723f2cb335c/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/cool-profile-page_24c864680ee1bf87a84b989b035a6c21/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/error_440d7b9b5d26e425e8c5f919d93855c4/base/httptop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/ph7cms-helper_c718c7a0c6017242b5287b948f02581d/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/picture_10d1588a50ebee22e4a7c126111489e2/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/browsetop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/profiletop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/signuptop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/visitortop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/video_f6fa126c5efdb5b591bfcfd28780c0a0/base/maintop_menu.inc.cpl.php:19
-msgid "Chat Roulette"
-msgstr ""
-
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/accounttop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/infotop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/moduletop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/tooltop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/usertop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/hometop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/connect_35f0edcc582717793663d723f2cb335c/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/cool-profile-page_24c864680ee1bf87a84b989b035a6c21/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/error_440d7b9b5d26e425e8c5f919d93855c4/base/httptop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/ph7cms-helper_c718c7a0c6017242b5287b948f02581d/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/picture_10d1588a50ebee22e4a7c126111489e2/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/browsetop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/profiletop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/signuptop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/visitortop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/video_f6fa126c5efdb5b591bfcfd28780c0a0/base/maintop_menu.inc.cpl.php:19
-msgid "Chatroulette"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/accounttop_menu.inc.cpl.php:19
@@ -15668,10 +15598,6 @@ msgstr ""
 
 #: _protected/app/system/modules/xml/views/base/tpl/links.xml.tpl:19
 msgid "Videos Movie"
-msgstr ""
-
-#: _protected/app/system/modules/xml/views/base/tpl/links.xml.tpl:27
-msgid "Free Chatroulette Speed Dating"
 msgstr ""
 
 #: _protected/app/system/modules/xml/views/base/tpl/links.xml.tpl:43

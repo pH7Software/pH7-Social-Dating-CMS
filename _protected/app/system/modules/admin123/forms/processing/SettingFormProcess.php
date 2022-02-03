@@ -142,7 +142,6 @@ class SettingFormProcess extends Form
         'google_api_key' => 'googleApiKey',
         'ip_api' => 'ipApi',
         'chat_api' => 'chatApi',
-        'chatroulette_api' => 'chatrouletteApi',
 
         // Automation
         'cron_security_hash' => 'cronSecurityHash',

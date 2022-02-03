@@ -99,19 +99,12 @@
 
 
     {* Guest, Member and LoginUserAs from Admin Panel *}
-      {if (!$is_aff_auth AND !$is_admin_auth) OR $admin_logged_as_user}
-        {if $is_chat_enabled OR $is_chatroulette_enabled}
-          <li class="dropdown"><a href="#" title="{lang 'Free Social Dating Chat Rooms'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-weixin"></i> {lang 'Chat'} <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              {if $is_chat_enabled}
-                <li><a href="{{ $design->url('chat','home','index') }}" rel="nofollow" title="{lang 'Chat Rooms'}" data-load="ajax"><i class="fa fa-weixin"></i> {lang 'Chat'}</a></li>
-              {/if}
-
-              {if $is_chatroulette_enabled}
-                <li><a href="{{ $design->url('chatroulette','home','index') }}" title="{lang 'Chat Roulette'}"><i class="fa fa-random"></i> {lang 'Chatroulette'}</a></li>
-              {/if}
-
-            </ul>
+    {if (!$is_aff_auth AND !$is_admin_auth) OR $admin_logged_as_user}
+        {if $is_chat_enabled}
+          <li>
+            <a href="{{ $design->url('chat','home','index') }}" title="{lang 'Chat Rooms'}" data-load="ajax">
+              <i class="fa fa-weixin"></i> {lang 'Chat'}
+            </a>
           </li>
         {/if}
 

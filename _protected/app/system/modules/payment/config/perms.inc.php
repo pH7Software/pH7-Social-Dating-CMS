@@ -27,7 +27,6 @@ return [
     'upload_videos' => 1,
     'instant_messaging' => 1,
     'chat' => 1,
-    'chatroulette' => 1,
     'hot_or_not' => 1,
     'love_calculator' => 1,
     'read_notes' => 1,
