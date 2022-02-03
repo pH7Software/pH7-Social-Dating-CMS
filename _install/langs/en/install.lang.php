@@ -99,7 +99,7 @@ $LANG = [
     'remove_install_folder_auto' => 'Automatically delete the &quot;install&quot; directory (this requires access rights to delete the &quot;install&quot; directory).',
     'confirm_remove_install_folder_auto' => 'WARNING, All files in the /_install/ folder will be removed.',
     'title_email_finish_install' => 'About your installation: Information',
-    'content_email_finish_install' => '<p><strong>Congratulations! Your website is now successfully installed!</strong></p>
+    'content_email_finish_install' => '<p><strong>Congrats! 🥳 Your website has successfully been installed! 😍</strong></p>
         <p>I hope you\'ll enjoy <em>' . Controller::SOFTWARE_NAME . '</em> a lot!</p>
         <p>The URL of Your OWN Social/Dating website is: <em><a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></em></p>
         <p>Your Admin Panel URL is: <em><a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></em><br />
