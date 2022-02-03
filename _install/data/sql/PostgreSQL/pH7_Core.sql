@@ -1050,7 +1050,7 @@ INSERT INTO ph7_sys_mods_enabled (moduleTitle, folderName, premiumMod, enabled) 
 ('Photo', 'picture', '0', '1'),
 ('Video', 'video', '0', '1'),
 ('Hot or Not', 'hotornot', '0', '1'),
-('Forum', 'forum', '0', '1'),
+('Discussions', 'forum', '0', '1'),
 ('Note (blog for users)', 'note', '0', '1'),
 ('Blog (company blog)', 'blog', '0', '1'),
 ('Love Calculator', 'love-calculator', '0', '1'),
