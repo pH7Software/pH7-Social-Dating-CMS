@@ -1,4 +1,4 @@
-<div class="col-md-8">
+<div class="col-md-6">
     <p>{lang}If you forgot your password, enter your account email address below and we will send<br /> you an email containing a special link that will help you create a new password.<br /> Make sure you enter the <em>same email address you use to sign in to your profile</em>.{/lang}</p>
     {{ ForgotPasswordForm::display() }}
 </div>
