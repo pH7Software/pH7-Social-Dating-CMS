@@ -23,7 +23,7 @@ create a second database, or using the [traditional Web installer](http://ph7cms
 
 * Scaling the new [pH7Builder](https://github.com/pH7Software/pH7-Social-Dating-CMS) instances by automatizing the
   installation.
-* Quick installations on servers.
+* Quick installations on Web hosting/cloud servers.
 * Ideal for SaaS services, to automatically run a new pH7Builder instance in the background.
 * Quick installation on local stacks for testing purpose.
 
