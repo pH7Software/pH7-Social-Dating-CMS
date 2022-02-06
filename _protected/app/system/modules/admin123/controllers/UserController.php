@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  */
@@ -34,8 +34,7 @@ class UserController extends Controller implements UserModeratable
 
     private AdminModel $oAdminModel;
 
-    /** @var string|null */
-    private $sMsg;
+    private ?string $sMsg;
 
     private int $iTotalUsers;
 
@@ -195,7 +194,7 @@ class UserController extends Controller implements UserModeratable
         }
     }
 
-    public function password($sUserEmail = null): void
+    public function password(?string $sUserEmail = null): void
     {
         if (!empty($sUserEmail) && !(new Validate)->email($sUserEmail)) {
             Header::redirect(
