@@ -427,11 +427,6 @@ class AdminController extends Controller implements UserModeratable
     }
 
     /**
-     * @param string $sSubject
-     * @param stdClass $oUser
-     *
-     * @return void
-     *
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
     private function sendRegistrationMail(string $sSubject, stdClass $oUser): void
