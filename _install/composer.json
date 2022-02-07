@@ -1,6 +1,6 @@
 {
   "require": {
-    "smarty/smarty": "^4.0"
+    "smarty/smarty": "^4.1"
   },
   "autoload": {
     "additionalFileExtensions": [
