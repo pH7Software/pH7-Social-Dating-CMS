@@ -39,9 +39,19 @@ final class HttpTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_GET['float_value'] = '10.3';
 
-        $sActual = $this->oHttpRequest->get('float_value', 'float');
+        $sActual = $this->oHttpRequest->get('float_value', Type::FLOAT);
 
         $this->assertSame(10.3, $sActual);
+    }
+
+    public function testGetRequestCastedToArray(): void
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_GET['array_value'] = '';
+
+        $sActual = $this->oHttpRequest->get('array_value', Type::ARRAY);
+
+        $this->assertIsArray($sActual);
     }
 
     public function testGetRequestCastedToBool(): void
@@ -114,9 +124,19 @@ final class HttpTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = 'POST';
         $_POST['float_value'] = '10.3';
 
-        $sActual = $this->oHttpRequest->post('float_value', 'float');
+        $sActual = $this->oHttpRequest->post('float_value', Type::FLOAT);
 
         $this->assertSame(10.3, $sActual);
+    }
+
+    public function testPostRequestCastedToArray(): void
+    {
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_POST['array_value'] = '';
+
+        $sActual = $this->oHttpRequest->post('array_value', Type::ARRAY);
+
+        $this->assertIsArray($sActual);
     }
 
     public function testPostRequestCastedToBool(): void
