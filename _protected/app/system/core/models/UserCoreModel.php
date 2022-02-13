@@ -10,7 +10,6 @@
 
 declare(strict_types=1);
 
-
 namespace PH7;
 
 use PDO;
@@ -849,9 +848,9 @@ class UserCoreModel extends Model
      * @param int $iProfileId
      * @param string|null $iApproved (1 = approved | 0 = pending | NULL = approved and pending)
      *
-     * @return stdClass The Avatar (SQL alias is pic), profileId and approvedAvatar
+     * @return stdClass|boolean The Avatar (SQL alias is pic), profileId and approvedAvatar
      */
-    public function getAvatar($iProfileId, $iApproved = null): stdClass
+    public function getAvatar($iProfileId, $iApproved = null)
     {
         $this->cache->start(self::CACHE_GROUP, 'avatar' . $iProfileId, static::CACHE_TIME);
 
@@ -1643,11 +1642,9 @@ class UserCoreModel extends Model
     }
 
     /**
-     * @param string $sTable
-     *
      * @throws PH7InvalidArgumentException If the specified table is incorrect.
      */
-    public function clearCountries($sTable = DbTableName::MEMBER_COUNTRY)
+    public function clearCountries(string $sTable = DbTableName::MEMBER_COUNTRY): void
     {
         Various::checkModelTable($sTable);
 
@@ -1666,7 +1663,7 @@ class UserCoreModel extends Model
      *
      * @return string
      */
-    private function getSexInClauseSql(array $aSex)
+    private function getSexInClauseSql(array $aSex): string
     {
         $sGender = '';
 
