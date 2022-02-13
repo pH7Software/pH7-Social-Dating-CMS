@@ -29,17 +29,18 @@ class CountryRestrictionCoreFormProcess extends Form
 
         $this->sTable = $sTable;
         $oUserModel = new UserCoreModel;
-
-        // First, clear everything
-        $oUserModel->clearCountries($this->sTable);
-
-        // Then, reindex the table
         $aCountries = (array)$this->httpRequest->post('countries');
+
+        // Validation: Make sure at least one country has been selected
         if ($this->areCountriesNotSet($aCountries)) {
             \PFBC\Form::setError('form_country_restriction', t('You need to select at least one country.'));
             return;
         }
 
+        // Firstly, clear everything
+        $oUserModel->clearCountries($this->sTable);
+
+        // Secondly, reindex the table
         foreach ($aCountries as $sCountry) {
             if ($this->isEligibleToAdd($sCountry)) {
                 $oUserModel->addCountry($sCountry, $this->sTable);
