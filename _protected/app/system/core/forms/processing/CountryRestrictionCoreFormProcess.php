@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Core / Form / Processing
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 use PH7\Framework\Cache\Cache;
@@ -35,7 +37,13 @@ class CountryRestrictionCoreFormProcess extends Form
         $oUserModel->clearCountries($this->sTable);
 
         // Then, reindex the table
-        foreach ($this->httpRequest->post('countries') as $sCountry) {
+        $aCountries = (array)$this->httpRequest->post('countries');
+        if ($this->areCountriesNotSet($aCountries)) {
+            \PFBC\Form::setError('form_country_restriction', t('You need to select at least one country.'));
+            return;
+        }
+
+        foreach ($aCountries as $sCountry) {
             if ($this->isEligibleToAdd($sCountry)) {
                 $oUserModel->addCountry($sCountry, $this->sTable);
             }
@@ -59,17 +67,17 @@ class CountryRestrictionCoreFormProcess extends Form
             $this->isCountryCodeUppercase($sCountryCode);
     }
 
-    /**
-     * @param string $sCountryCode
-     *
-     * @return bool
-     */
-    private function isCountryCodeUppercase($sCountryCode)
+    private function areCountriesNotSet(array $aCountries)
+    {
+        return empty($aCountries) || count($aCountries) === 1 && empty($aCountries[0]);
+    }
+
+    private function isCountryCodeUppercase(string $sCountryCode): bool
     {
         return strtoupper($sCountryCode) === $sCountryCode;
     }
 
-    private function clearCache()
+    private function clearCache(): void
     {
         (new Cache)->start(
             UserCoreModel::CACHE_GROUP,
