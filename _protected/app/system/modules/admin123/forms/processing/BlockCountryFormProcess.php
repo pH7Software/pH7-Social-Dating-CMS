@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2018-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
@@ -15,7 +15,7 @@ use PH7\Framework\Mvc\Model\BlockCountry as BlockCountryModel;
 
 class BlockCountryFormProcess extends Form
 {
-    const COUNTRY_CODE_LENGTH = 2;
+    private const COUNTRY_CODE_LENGTH = 2;
 
     public function __construct()
     {
@@ -39,28 +39,18 @@ class BlockCountryFormProcess extends Form
         \PFBC\Form::setSuccess('form_country_blocklist', t('Successfully saved!'));
     }
 
-    /**
-     * @param string $sCountryCode
-     *
-     * @return bool
-     */
-    private function isEligibleToAdd($sCountryCode)
+    private function isEligibleToAdd(string $sCountryCode): bool
     {
         return !empty(trim($sCountryCode)) && strlen($sCountryCode) === self::COUNTRY_CODE_LENGTH &&
             $this->isCountryCodeUppercase($sCountryCode);
     }
 
-    /**
-     * @param string $sCountryCode
-     *
-     * @return bool
-     */
-    private function isCountryCodeUppercase($sCountryCode)
+    private function isCountryCodeUppercase(string $sCountryCode): bool
     {
         return strtoupper($sCountryCode) === $sCountryCode;
     }
 
-    private function clearCache()
+    private function clearCache(): void
     {
         (new Cache)->start(
             BlockCountryModel::CACHE_GROUP,

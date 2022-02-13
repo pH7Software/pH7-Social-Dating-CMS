@@ -1,10 +1,12 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2018-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Form
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -17,9 +19,9 @@ use PH7\Framework\Url\Header;
 
 class CountryRestrictionCoreForm
 {
-    const FORM_COUNTRY_FIELD_SIZE = 20;
+    private const FORM_COUNTRY_FIELD_SIZE = 20;
 
-    public static function display($sTable = DbTableName::MEMBER_COUNTRY)
+    public static function display(string $sTable = DbTableName::MEMBER_COUNTRY): void
     {
         if (isset($_POST['submit_country_restriction'])) {
             if (\PFBC\Form::isValid($_POST['submit_country_restriction'])) {
@@ -49,12 +51,7 @@ class CountryRestrictionCoreForm
         $oForm->render();
     }
 
-    /**
-     * @param string $sTable
-     *
-     * @return array
-     */
-    private static function getSelectedCountries($sTable)
+    private static function getSelectedCountries(string $sTable): array
     {
         $aSelectedCountries = [];
 
@@ -66,12 +63,7 @@ class CountryRestrictionCoreForm
         return $aSelectedCountries;
     }
 
-    /**
-     * @param string $sModuleType
-     *
-     * @return string
-     */
-    private static function getCountryFieldDesc($sModuleType)
+    private static function getCountryFieldDesc(string $sModuleType): string
     {
         if ($sModuleType === DbTableName::MEMBER_COUNTRY) {
             $sMessage = t('You can select/multi-select the amount of countries to be displayed on the registration and user search forms.');
