@@ -43,7 +43,8 @@ class CountryRestrictionCoreForm
                     'description' => self::getCountryFieldDesc($sTable),
                     'multiple' => 'multiple',
                     'size' => self::FORM_COUNTRY_FIELD_SIZE,
-                    'value' => self::getSelectedCountries($sTable)
+                    'value' => self::getSelectedCountries($sTable),
+                    'required' => 1
                 ]
             )
         );
