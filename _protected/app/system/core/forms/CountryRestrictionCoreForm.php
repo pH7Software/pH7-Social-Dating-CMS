@@ -37,7 +37,7 @@ class CountryRestrictionCoreForm
         $oForm->addElement(new Token('block_country'));
         $oForm->addElement(
             new Country(
-                t('Countries to be showed on registration and search forms'),
+                t('List of countries for registration and search forms'),
                 'countries[]',
                 [
                     'description' => self::getCountryFieldDesc($sTable),

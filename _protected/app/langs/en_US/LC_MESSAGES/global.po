@@ -885,7 +885,7 @@ msgid "Cancel"
 msgstr ""
 
 #: _protected/app/system/core/forms/CountryRestrictionCoreForm.php:34
-msgid "Countries to be showed on registration and search forms"
+msgid "List of countries for registration and search forms"
 msgstr ""
 
 #: _protected/app/system/core/forms/CountryRestrictionCoreForm.php:44
