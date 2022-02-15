@@ -49,7 +49,7 @@ class CountryRestrictionCoreForm
                         'this.setCustomValidity("%s")',
                         t('You need to select at least one country.')
                     ),
-                    'oninput' => 'this.setCustomValidity("")',
+                    'oninput' => 'this.setCustomValidity(\'\')',
                 ]
             )
         );

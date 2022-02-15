@@ -62,7 +62,7 @@ class AddFieldForm
                         'this.setCustomValidity("%s")',
                         t('Field name must contain 2-30 alphanumeric characters ([a-z], [A-Z], [0-9] and [_]).'),
                     ),
-                    'oninput' => 'this.setCustomValidity("")',
+                    'oninput' => 'this.setCustomValidity(\'\')',
                     'validation' => new RegExp($sFieldPattern)
                 ]
             )
