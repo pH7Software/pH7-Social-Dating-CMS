@@ -37,7 +37,7 @@ class CountryRestrictionCoreForm
         $oForm->addElement(new Token('block_country'));
         $oForm->addElement(
             new Country(
-                t('List of countries for registration and search forms'),
+                t('List of available countries'),
                 'countries[]',
                 [
                     'description' => self::getCountryFieldDesc($sTable),
@@ -71,9 +71,9 @@ class CountryRestrictionCoreForm
     private static function getCountryFieldDesc(string $sModuleType): string
     {
         if ($sModuleType === DbTableName::MEMBER_COUNTRY) {
-            $sMessage = t('You can select/multi-select the amount of countries to be displayed on the registration and user search forms.');
+            $sMessage = t('You can select/multi-select the list of available countries <strong>to be shown on the registration and user search forms</strong>.');
         } else {
-            $sMessage = t('You can select/multi-select the amount of countries to be displayed on the registration form.');
+            $sMessage = t('You can select/multi-select the list of available countries <strong>to be shown on the registration form</strong>.');
         }
 
         $sMessage .= '<br />';
