@@ -220,6 +220,7 @@ class DynamicFieldCoreForm
                                 'this.setCustomValidity("%s")',
                                 t('Enter full number with area code.')
                             ),
+                            'oninput' => 'this.setCustomValidity("")',
                             'value' => $this->sVal
                         ]
                     )
