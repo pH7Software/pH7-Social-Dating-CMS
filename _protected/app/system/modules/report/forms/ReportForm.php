@@ -93,7 +93,7 @@ class ReportForm
                 t('Comment:'),
                 'desc',
                 [
-                    'title' => t('Please tell us why you want to report this content (scam, illegal content, adult content, etc.). Help us to eliminate scams, fake profiles, spam ... Thank you'),
+                    'description' => t('Tell us why you want to report this content (scam, illegal content, adult content, etc.). Help us to eliminate scams, fake profiles, spam ... Thank you'),
                     'required' => 1
                 ]
             )

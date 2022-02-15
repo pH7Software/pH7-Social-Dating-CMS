@@ -7030,7 +7030,7 @@ msgid "Comment:"
 msgstr ""
 
 #: _protected/app/system/modules/report/forms/ReportForm.php:38
-msgid "Please tell us why you want to report this content (scam, illegal content, adult content, etc.). Help us to eliminate scams, fake profiles, spam ... Thank you"
+msgid "Tell us why you want to report this content (scam, illegal content, adult content, etc.). Help us to eliminate scams, fake profiles, spam ... Thank you"
 msgstr ""
 
 #: _protected/app/system/modules/report/forms/ReportForm.php:39

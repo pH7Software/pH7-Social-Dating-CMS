@@ -44,7 +44,11 @@ class CountryRestrictionCoreForm
                     'multiple' => 'multiple',
                     'size' => self::FORM_COUNTRY_FIELD_SIZE,
                     'value' => self::getSelectedCountries($sTable),
-                    'required' => 1
+                    'required' => 1,
+                    'oninvalid' => sprintf(
+                        'this.setCustomValidity(\'%s\')',
+                        t('You need to select at least one country.')
+                    ),
                 ]
             )
         );
