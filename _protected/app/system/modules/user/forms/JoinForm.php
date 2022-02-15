@@ -132,16 +132,51 @@ class JoinForm
 
         self::generateBirthDateField($oForm);
 
-        $oForm->addElement(new Select(t('Your Country'), 'country', Form::getCountryValues(), ['id' => 'str_country', 'value' => Geo::getCountryCode(), 'required' => 1]));
+        $oForm->addElement(
+            new Select(
+                t('Your Country'),
+                'country',
+                Form::getCountryValues(),
+                ['id' => 'str_country', 'value' => Geo::getCountryCode(), 'required' => 1]
+            )
+        );
 
-        $oForm->addElement(new Textbox(t('Your City'), 'city', ['id' => 'str_city', 'value' => Geo::getCity(), 'onblur' => 'CValid(this.value,this.id,2,150)', 'description' => t('Select the city where you live/where you want to meet people.'), 'validation' => new Str(2, 150), 'required' => 1]));
+        $oForm->addElement(
+            new Textbox(
+                t('Your City'),
+                'city',
+                [
+                    'id' => 'str_city',
+                    'value' => Geo::getCity(),
+                    'onblur' => 'CValid(this.value,this.id,2,150)',
+                    'description' => t('Select the city where you live/where you want to meet people.'),
+                    'validation' => new Str(2, 150),
+                    'required' => 1
+                ]
+            )
+        );
         $oForm->addElement(new HTMLExternal('<span class="input_error str_city"></span>'));
 
-        $oForm->addElement(new Textbox(t('Your Postal Code'), 'zip_code', ['id' => 'str_zip_code', 'value' => Geo::getZipCode(), 'onblur' => 'CValid(this.value,this.id,2,15)', 'validation' => new Str(2, 15)]));
+        $oForm->addElement(
+            new Textbox(
+                t('Your Postal Code'),
+                'zip_code',
+                [
+                    'id' => 'str_zip_code',
+                    'value' => Geo::getZipCode(),
+                    'onblur' => 'CValid(this.value,this.id,2,15)',
+                    'validation' => new Str(2, 15)
+                ]
+            )
+        );
         $oForm->addElement(new HTMLExternal('<span class="input_error str_zip_code"></span>'));
 
         $oForm->addElement(new Button(t('Next'), 'submit', ['icon' => 'seek-next']));
-        $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script><script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
+        $oForm->addElement(
+            new HTMLExternal(
+                '<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script><script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'
+            )
+        );
         $oForm->render();
     }
 
@@ -168,7 +203,21 @@ class JoinForm
         $oForm->addElement(new Hidden('submit_join_user3', 'form_join_user3'));
         $oForm->addElement(new Token('join3'));
 
-        $oForm->addElement(new Textarea(t('About Me 🤗'), 'description', ['id' => 'str_description', 'description' => t('Describe yourself in a few words. Your description should be at least 20 characters long.'), 'onblur' => 'CValid(this.value,this.id,20,4000)', 'validation' => new Str(20, 4000), 'required' => 1]));
+        $oForm->addElement(
+            new Textarea(
+                t('About Me 🤗'),
+                'description',
+                [
+                    'id' => 'str_description',
+                    'description' => t(
+                        'Describe yourself in a few words. Your description should be at least 20 characters long.'
+                    ),
+                    'onblur' => 'CValid(this.value,this.id,20,4000)',
+                    'validation' => new Str(20, 4000),
+                    'required' => 1
+                ]
+            )
+        );
         $oForm->addElement(new HTMLExternal('<span class="input_error str_description"></span>'));
 
         $oForm->addElement(new Button(t('Next'), 'submit', ['icon' => 'seek-next']));
