@@ -62,7 +62,7 @@ class EditFieldForm
                     'value' => (new Http)->get('name'),
                     'pattern' => $sFieldPattern,
                     'oninvalid' => sprintf(
-                        'this.setCustomValidity(\'%s\')',
+                        'this.setCustomValidity("%s")',
                         t('Field name must contain 2-30 alphanumeric characters ([a-z], [A-Z], [0-9] and [_]).')
                     ),
                     'required' => 1,

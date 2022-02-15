@@ -217,7 +217,7 @@ class DynamicFieldCoreForm
                             'id' => $this->getFieldId('phone'),
                             'onblur' => 'CValid(this.value, this.id)',
                             'oninvalid' => sprintf(
-                                'this.setCustomValidity(\'%s\')',
+                                'this.setCustomValidity("%s")',
                                 t('Enter full number with area code.')
                             ),
                             'value' => $this->sVal
