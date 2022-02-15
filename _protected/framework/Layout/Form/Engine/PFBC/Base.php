@@ -65,24 +65,25 @@ abstract class Base
      * attributes.
      * There is an ignore parameter that allows special attributes from being included.
      *
-     * @param array|string $ignore
+     * @param array|string $mIgnore
      *
      * @return string
      */
-    public function getAttributes($ignore = '')
+    public function getAttributes($mIgnore = '')
     {
-        $str = '';
+        $sHtmlAttributes = '';
         if (!empty($this->attributes)) {
-            if (!is_array($ignore)) {
-                $ignore = [$ignore];
+            if (!is_array($mIgnore)) {
+                $mIgnore = [$mIgnore];
             }
 
-            $attributes = array_diff(array_keys($this->attributes), $ignore);
-            foreach ($attributes as $attribute) {
-                $str .= ' ' . $attribute . '="' . $this->filter($this->attributes[$attribute]) . '"';
+            $aAttributes = array_diff(array_keys($this->attributes), $mIgnore);
+            foreach ($aAttributes as $sAttribute) {
+                $sHtmlAttributes .= ' ' . $sAttribute . '="' . $this->filter($this->attributes[$sAttribute]) . '"';
             }
         }
-        return $str;
+
+        return $sHtmlAttributes;
     }
 
     /**
