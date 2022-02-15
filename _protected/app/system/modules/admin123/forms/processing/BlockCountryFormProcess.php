@@ -10,6 +10,7 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Datatype\Type;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Mvc\Model\BlockCountry as BlockCountryModel;
 
@@ -27,7 +28,8 @@ class BlockCountryFormProcess extends Form
         $oBlockCountryModel->clear();
 
         // Then, reindex the table
-        foreach ($this->httpRequest->post('countries') as $sCountry) {
+        $aCountries = $this->httpRequest->post('countries', Type::ARRAY);
+        foreach ($aCountries as $sCountry) {
             if ($this->isEligibleToAdd($sCountry)) {
                 $oBlockCountryModel->add($sCountry);
             }

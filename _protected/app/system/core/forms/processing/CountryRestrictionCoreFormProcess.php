@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace PH7;
 
+use PH7\Datatype\Type;
 use PH7\Framework\Cache\Cache;
 
 defined('PH7') or exit('Restricted access');
@@ -29,18 +30,12 @@ class CountryRestrictionCoreFormProcess extends Form
 
         $this->sTable = $sTable;
         $oUserModel = new UserCoreModel;
-        $aCountries = (array)$this->httpRequest->post('countries');
-
-        // Validation: Make sure at least one country has been selected
-        if ($this->areCountriesNotSet($aCountries)) {
-            \PFBC\Form::setError('form_country_restriction', t('You need to select at least one country.'));
-            return;
-        }
 
         // Firstly, clear everything
         $oUserModel->clearCountries($this->sTable);
 
         // Secondly, reindex the table
+        $aCountries = $this->httpRequest->post('countries', Type::ARRAY);
         foreach ($aCountries as $sCountry) {
             if ($this->isEligibleToAdd($sCountry)) {
                 $oUserModel->addCountry($sCountry, $this->sTable);
@@ -58,11 +53,6 @@ class CountryRestrictionCoreFormProcess extends Form
         return !empty(trim($sCountryCode)) &&
             strlen($sCountryCode) === self::COUNTRY_CODE_LENGTH &&
             $this->isCountryCodeUppercase($sCountryCode);
-    }
-
-    private function areCountriesNotSet(array $aCountries): bool
-    {
-        return empty($aCountries) || count($aCountries) === 1 && empty($aCountries[0]);
     }
 
     private function isCountryCodeUppercase(string $sCountryCode): bool
