@@ -19,6 +19,8 @@ use PH7\Framework\Url\Header;
 
 class CountryRestrictionCoreForm
 {
+    use HtmlForm;
+
     private const FORM_COUNTRY_FIELD_SIZE = 20;
 
     public static function display(string $sTable = DbTableName::MEMBER_COUNTRY): void
@@ -39,18 +41,18 @@ class CountryRestrictionCoreForm
             new Country(
                 t('List of available countries'),
                 'countries[]',
-                [
-                    'description' => self::getCountryFieldDesc($sTable),
-                    'multiple' => 'multiple',
-                    'size' => self::FORM_COUNTRY_FIELD_SIZE,
-                    'value' => self::getSelectedCountries($sTable),
-                    'required' => 1,
-                    'oninvalid' => sprintf(
-                        'this.setCustomValidity("%s")',
+                array_merge(
+                    [
+                        'description' => self::getCountryFieldDesc($sTable),
+                        'multiple' => 'multiple',
+                        'size' => self::FORM_COUNTRY_FIELD_SIZE,
+                        'value' => self::getSelectedCountries($sTable),
+                        'required' => 1,
+                    ],
+                    self::setCustomValidity(
                         t('You need to select at least one country.')
-                    ),
-                    'oninput' => 'this.setCustomValidity(\'\')',
-                ]
+                    )
+                )
             )
         );
         $oForm->addElement(new Button(t('Save'), 'submit', ['icon' => 'check']));

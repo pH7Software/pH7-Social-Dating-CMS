@@ -25,6 +25,8 @@ defined('PH7') or exit('Restricted access');
 
 class DynamicFieldCoreForm
 {
+    use HtmlForm;
+
     /** @var \PFBC\Form */
     private $oForm;
 
@@ -213,16 +215,16 @@ class DynamicFieldCoreForm
                     new Phone(
                         t('Phone Number:'),
                         $this->sColumn,
-                        [
-                            'id' => $this->getFieldId('phone'),
-                            'onblur' => 'CValid(this.value, this.id)',
-                            'oninvalid' => sprintf(
-                                'this.setCustomValidity("%s")',
+                        array_merge(
+                            [
+                                'id' => $this->getFieldId('phone'),
+                                'onblur' => 'CValid(this.value, this.id)',
+                                'value' => $this->sVal,
+                            ],
+                            self::setCustomValidity(
                                 t('Enter full number with area code.')
                             ),
-                            'oninput' => 'this.setCustomValidity(\'\')',
-                            'value' => $this->sVal
-                        ]
+                        )
                     )
                 );
                 $this->addCheckErrSpan('phone');
