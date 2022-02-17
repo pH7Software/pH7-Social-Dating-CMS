@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Core / Class / Design
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
@@ -27,7 +29,7 @@ class CommentDesignCore
      *
      * @return void
      */
-    public static function link($iId, $sTable)
+    public static function link($iId, string $sTable): void
     {
         $iCommentNumber = (new CommentCoreModel)->total($iId, $sTable);
 

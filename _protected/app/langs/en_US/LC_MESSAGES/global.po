@@ -13683,7 +13683,7 @@ msgid "Oops! It seems that you abuse of emails. Why emails are that important fo
 msgstr ""
 
 #: _protected/framework/Layout/Form/Form.class.php:118
-msgid "Oops! You have to wait %0% %1% before you can send another."
+msgid "Oops! Please wait %0% %1% before sending another one 😉"
 msgstr ""
 
 #: _protected/framework/Layout/Form/Form.class.php:130

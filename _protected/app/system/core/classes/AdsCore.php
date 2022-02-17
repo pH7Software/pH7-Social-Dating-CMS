@@ -73,7 +73,7 @@ class AdsCore extends Ads
     }
 
     /**
-     * Convert table to Ads's ID.
+     * Convert table to Ads' ID.
      *
      * @param string $sTable
      *
