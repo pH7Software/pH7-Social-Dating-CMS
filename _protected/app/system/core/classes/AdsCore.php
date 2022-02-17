@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Core / Class
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 use PH7\Framework\Ads\Ads;
@@ -37,7 +39,7 @@ class AdsCore extends Ads
      *
      * @return string The Table.
      */
-    public static function getTable()
+    public static function getTable(): string
     {
         $oHttpRequest = new Http;
         if ($oHttpRequest->getExists('ads_type') &&
@@ -61,7 +63,7 @@ class AdsCore extends Ads
      *
      * @throws PH7InvalidArgumentException If the table is not valid.
      */
-    public static function checkTable($sTable)
+    public static function checkTable(string $sTable)
     {
         if (self::doesTableExist($sTable)) {
             return $sTable;
@@ -79,7 +81,7 @@ class AdsCore extends Ads
      *
      * @throws PH7InvalidArgumentException If the table is not valid.
      */
-    public static function convertTableToId($sTable)
+    public static function convertTableToId(string $sTable)
     {
         if (self::doesTableExist($sTable)) {
             return static::ID_COLUMN_NAME;
@@ -88,12 +90,7 @@ class AdsCore extends Ads
         Various::launchErr($sTable);
     }
 
-    /**
-     * @param string $sTable
-     *
-     * @return bool
-     */
-    private static function doesTableExist($sTable)
+    private static function doesTableExist(string $sTable): bool
     {
         return in_array($sTable, self::TABLE_NAMES, true);
     }

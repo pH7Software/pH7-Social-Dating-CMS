@@ -260,7 +260,7 @@ class Various
      *
      * @throws PH7InvalidArgumentException Explanatory message.
      */
-    public static function launchErr(string $sTable)
+    public static function launchErr(string $sTable): void
     {
         throw new PH7InvalidArgumentException(sprintf('Invalid data table: "%s"!', $sTable));
     }

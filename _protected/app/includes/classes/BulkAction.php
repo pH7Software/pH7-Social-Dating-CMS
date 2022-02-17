@@ -15,8 +15,10 @@ trait BulkAction
     /**
      * Determines if the action can be processed or not
      * by checking if the POST 'actions' has a correct value.
+     *
+     * @param array|string|null $mActions
      */
-    protected function areActionsEligible(?array $mActions): bool
+    protected function areActionsEligible($mActions): bool
     {
         return !empty($mActions) && is_array($mActions) && count($mActions) > 0;
     }
