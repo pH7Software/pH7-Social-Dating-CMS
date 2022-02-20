@@ -17,7 +17,6 @@ use PH7\Framework\Mail\InvalidEmailException;
 use PH7\Framework\Mail\Mailable;
 use PH7\UserNotifier;
 use Phake;
-use Phake_IMock;
 use PHPUnit\Framework\TestCase;
 
 final class UserNotifierTest extends TestCase
@@ -26,10 +25,10 @@ final class UserNotifierTest extends TestCase
 
     private UserNotifier $oUserNotifier;
 
-    /** @var Mailable|Phake_IMock */
+    /** @var Mailable|Phake\IMock */
     private $oMailMock;
 
-    /** @var Templatable|Phake_IMock */
+    /** @var Templatable|Phake\IMock */
     private $oViewMock;
 
     protected function setUp(): void
