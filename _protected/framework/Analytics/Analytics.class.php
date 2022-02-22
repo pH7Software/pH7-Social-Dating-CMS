@@ -4,7 +4,7 @@
  * @desc             Compute Stats of Site Referers.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Analytics
  * @version          0.6
@@ -99,7 +99,7 @@ class Analytics extends StoreStats
         'vodafone' => 'Vodafone',
         'docomo' => 'NTT DoCoMo',
         'o2' => 'O2',
-        'mobile' => 'Generic Mobile'
+        'mobile|cellphone|smartphone|up.link|up.browser|wireless|j2me|midp|cldc' => 'Generic Mobile'
     ];
 
     /**
@@ -109,6 +109,8 @@ class Analytics extends StoreStats
      */
     private static $aWebBrowsers = [
         'msie|internet explorer' => 'Internet Explorer',
+        'edge' => 'Edge',
+        'brave' => 'Brave',
         'firefox' => 'Firefox',
         'safari' => 'Safari',
         'chrome' => 'Google Chrome',
@@ -150,9 +152,7 @@ class Analytics extends StoreStats
         'yahoo' => 'Yahoo',
         'askjeeves' => 'AskJeeves',
         'fastcrawler' => 'FastCrawler',
-        'lycos' => 'Lycos',
         'facebookexternalhit' => 'Facebook',
-        'ph7hizupcrawler' => 'pH7Zup Crawler',
         'infoseek' => 'InfoSeek Robot 1.0',
         'duckduckbot' => 'DuckDuckGo',
         'qwantify' => 'Qwant'
