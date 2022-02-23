@@ -9,6 +9,8 @@
  * @package          PH7 / Framework / Navigation
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Navigation;
 
 defined('PH7') or exit('Restricted access');
@@ -22,9 +24,9 @@ use PH7\Framework\Str\Str;
  */
 class Browser
 {
-    const FAVICON_GENERATOR_URL = 'https://www.google.com/s2/favicons?domain=';
+    private const FAVICON_GENERATOR_URL = 'https://www.google.com/s2/favicons?domain=';
 
-    const DEFAULT_BROWSER_HEX_CODES = [
+    private const DEFAULT_BROWSER_HEX_CODES = [
         '#000',
         '#000000'
     ];
@@ -37,7 +39,7 @@ class Browser
      *
      * @return string Client's Language Code (in lowercase).
      */
-    public function getLanguage($bFullLangCode = false)
+    public function getLanguage(bool $bFullLangCode = false): string
     {
         $oStr = new Str;
         $sLang = explode(',', Server::getVar(Server::HTTP_ACCEPT_LANGUAGE))[0];
@@ -53,7 +55,7 @@ class Browser
      *
      * @return Browser
      */
-    public function cache()
+    public function cache(): self
     {
         header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 3600 * 24 * 30) . ' GMT');
         header('Cache-Control: no-cache, must-revalidate');
@@ -64,10 +66,8 @@ class Browser
 
     /**
      * Prevent caching in the browser.
-     *
-     * @return Browser
      */
-    public function noCache()
+    public function noCache(): self
     {
         $sNow = gmdate('D, d M Y H:i:s') . ' GMT';
         header('Expires: ' . $sNow);
@@ -109,7 +109,7 @@ class Browser
      *
      * @return bool TRUE if mobile device, FALSE otherwise.
      */
-    public function isMobile()
+    public function isMobile(): bool
     {
         if (null !== Server::getVar(Server::HTTP_X_WAP_PROFILE) ||
             null !== Server::getVar(Server::HTTP_PROFILE)

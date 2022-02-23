@@ -9,6 +9,8 @@
  * @package          PH7 / Framework / Translate
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Translate {
     defined('PH7') or exit('Restricted access');
 
@@ -30,17 +32,13 @@ namespace PH7\Framework\Translate {
 
         const DEFAULT_LOCALE = 'en_US';
 
-        /** @var Config */
-        private $oConfig;
+        private Config $oConfig;
 
-        /** @var string */
-        private $sDefaultLang;
+        private string $sDefaultLang;
 
-        /** @var string */
-        private $sUserLang;
+        private string $sUserLang;
 
-        /** @var string */
-        private $sLangName;
+        private string $sLangName;
 
         public function __construct()
         {
@@ -59,7 +57,7 @@ namespace PH7\Framework\Translate {
          *
          * @throws Exception If the language file is not found.
          */
-        public static function getJsFile($sPath, $sFileName = PH7_LANG_CODE)
+        public static function getJsFile(string $sPath, string $sFileName = PH7_LANG_CODE)
         {
             if (is_file($sPath . $sFileName . '.js')) {
                 return $sFileName . '.js';
@@ -82,7 +80,7 @@ namespace PH7\Framework\Translate {
          *
          * @return string e.g., "en"
          */
-        public static function getIsoCode($sLocaleName, $iPositionLangCode = self::FIRST_ISO_CODE)
+        public static function getIsoCode(string $sLocaleName, int $iPositionLangCode = self::FIRST_ISO_CODE): string
         {
             if ($iPositionLangCode === self::LAST_ISO_CODE) {
                 return strtolower(

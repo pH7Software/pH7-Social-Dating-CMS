@@ -323,7 +323,7 @@ namespace PH7\Framework\Str {
          *
          * @return array The array escaped.
          */
-        protected function arrayEscape(array $aData, $bStrip)
+        protected function arrayEscape(array $aData, bool $bStrip)
         {
             foreach ($aData as $sKey => $mValue) {
                 $aData[$sKey] = is_array($mValue) ? $this->arrayEscape($mValue, $bStrip) : $this->cEscape($mValue, $bStrip);
