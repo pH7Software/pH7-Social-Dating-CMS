@@ -13,7 +13,7 @@
 **pH7Builder** (formerly known as **pH7CMS**) is the first Professional, Free and Open Source Social Dating Site Builder Software. By far, the first choice for creating enterprise-level Dating Apps/Service or social networking sites.
 
 
-**Imagine in 3 months' time, you have a well-known successful online community with thousands of happy users and without spending a dime for it! Instead, you spent money on advertising, user acquisition, and other marketing strategies... Imagine the time you have saved. The amazing business and freedom you have now created.**
+**✨ Imagine in 3 months' time, you have a well-known successful online community with thousands of happy users and without spending a dime for it! Instead, you spent money on advertising, user acquisition, and other marketing strategies... Imagine the time you have saved. The amazing business and freedom you have now created.**
 
 With **[pH7Builder](https://sourceforge.net/projects/ph7socialdating/files/latest/download)**, *THIS IS TOTALLY POSSIBLE!* (however, you have to be motivated! Nothing comes as magic).
 
