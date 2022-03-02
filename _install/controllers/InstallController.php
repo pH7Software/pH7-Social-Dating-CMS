@@ -21,6 +21,8 @@ class InstallController extends Controller
 {
     private const CORE_SQL_FILE = 'pH7_Core.sql';
 
+    private const SAMPLE_USERS_MIN_AGE = 18;
+    private const SAMPLE_USERS_MAX_AGE = 60;
     private const TOTAL_MEMBERS_SAMPLE = 16;
     private const TOTAL_AFFILIATES_SAMPLE = 1;
     private const TOTAL_SUBSCRIBERS_SAMPLE = 1;
@@ -710,7 +712,7 @@ class InstallController extends Controller
         for ($iProfile = 1; $iProfile <= $iMemberNumber; $iProfile++) {
             $sSex = $oFaker->randomElement(['male', 'female']);
             $sMatchSex = $oFaker->randomElement(['male', 'female', 'couple']);
-            $sBirthDate = $oFaker->dateTimeBetween('-60 years', '-18 years')->format('Y-m-d');
+            $sBirthDate = $oFaker->dateTimeBetween(sprintf('-%s years', self::SAMPLE_USERS_MAX_AGE), sprintf('-%s years', self::SAMPLE_USERS_MIN_AGE))->format('Y-m-d');
 
             $aUser = [];
             $aUser['username'] = str_replace(['.', ' '], '-', $oFaker->userName);
