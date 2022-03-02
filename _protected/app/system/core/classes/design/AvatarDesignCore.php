@@ -8,6 +8,8 @@
  * @package        PH7 / App / System / Core / Class / Design
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 use PH7\Framework\Layout\Html\Design;
@@ -22,8 +24,7 @@ class AvatarDesignCore extends Design
     const DEF_AVATAR_SIZE = 32;
     const DEF_LIGHTBOX_AVATAR_SIZE = 400;
 
-    /** @var UserCore */
-    private $oUser;
+    private UserCore $oUser;
 
     public function __construct()
     {
