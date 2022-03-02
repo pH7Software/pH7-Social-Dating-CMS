@@ -76,7 +76,7 @@ class Cookie
     {
         $sCookieName = Config::getInstance()->values['cookie']['prefix'] . $sName;
 
-        return (isset($_COOKIE[$sCookieName]) ? ($bEscape ? escape($_COOKIE[$sCookieName]) : $_COOKIE[$sCookieName]) : '');
+        return (isset($_COOKIE[$sCookieName]) ? ($bEscape && is_string($_COOKIE[$sCookieName]) ? escape($_COOKIE[$sCookieName]) : $_COOKIE[$sCookieName]) : '');
     }
 
     /**

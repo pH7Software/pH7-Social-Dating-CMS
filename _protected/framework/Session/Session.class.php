@@ -65,7 +65,7 @@ class Session
     {
         $sSessionName = Config::getInstance()->values['session']['prefix'] . $sName;
 
-        return (isset($_SESSION[$sSessionName]) ? ($bEscape ? escape($_SESSION[$sSessionName]) : $_SESSION[$sSessionName]) : '');
+        return (isset($_SESSION[$sSessionName]) ? ($bEscape && is_string($_SESSION[$sSessionName]) ? escape($_SESSION[$sSessionName]) : $_SESSION[$sSessionName]) : '');
     }
 
     /**
