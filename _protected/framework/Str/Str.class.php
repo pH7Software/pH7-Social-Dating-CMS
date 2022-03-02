@@ -105,8 +105,9 @@ namespace PH7\Framework\Str {
 
             if (!empty($sFilter)) {
                 $aFilters = explode(',', $sFilter);
-                foreach ($aFilters as $sFilter)
+                foreach ($aFilters as $sFilter) {
                     $sText = $this->replace($sFilter, $sFlag, $sText);
+                }
             }
 
             $sText = preg_replace('/[\r\n\t]+/', '', $sText); // Remove new lines, spaces, tabs
