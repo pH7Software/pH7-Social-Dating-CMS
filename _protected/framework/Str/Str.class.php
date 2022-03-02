@@ -318,16 +318,14 @@ namespace PH7\Framework\Str {
 
         /**
          * Escape an array of any dimension.
-         *
-         * @param array $aData
-         * @param bool $bStrip
-         *
-         * @return array The array escaped.
          */
-        protected function arrayEscape(array $aData, bool $bStrip)
+        protected function arrayEscape(array $aData, bool $bStrip): array
         {
             foreach ($aData as $sKey => $mValue) {
-                $aData[$sKey] = is_array($mValue) ? $this->arrayEscape($mValue, $bStrip) : $this->cEscape($mValue, $bStrip);
+                $aData[$sKey] = is_array($mValue) ? $this->arrayEscape($mValue, $bStrip) : $this->cEscape(
+                    $mValue,
+                    $bStrip
+                );
             }
 
             return $aData;
