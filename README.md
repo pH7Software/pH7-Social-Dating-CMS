@@ -13,7 +13,7 @@
 **pH7Builder** (formerly known as **pH7CMS**) is the first Professional, Free and Open Source Social Dating Site Builder Software. By far, the first choice for creating enterprise-level Dating Apps/Service or social networking sites.
 
 
-**Imagine in 3 months' time, you have a well-known successful online community with thousands of happy users and without spending a dime for it! Instead, you spent money on advertising, user acquisition, and other marketing strategies... Imagine the time you have saved. The amazing business and freedom you have now created.**
+**✨ Imagine in 3 months' time, you have a well-known successful online community with thousands of happy users and without spending a dime for it! Instead, you spent money on advertising, user acquisition, and other marketing strategies... Imagine the time you have saved. The amazing business and freedom you have now created.**
 
 With **[pH7Builder](https://sourceforge.net/projects/ph7socialdating/files/latest/download)**, *THIS IS TOTALLY POSSIBLE!* (however, you have to be motivated! Nothing comes as magic).
 
@@ -180,9 +180,9 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 
 ## 🛠 Installation
 
-  * Github:
-    * Clone pH7Builder from Github `git clone git@github.com:pH7Software/pH7-Social-Dating-CMS.git`
-      (use `--depth=1` if you don't need the git history)
+  * Git Repository:
+    * Clone pH7Builder from Github `git clone git@github.com:pH7Software/pH7-Social-Dating-CMS.git ph7builder`
+      (use `--depth=1` flag at the end of the line if you don't need the git history)
     * [Install Composer](https://getcomposer.org/doc/00-intro.md)
     * From a command line opened in the folder, run `composer install` to install pH7Builder's dependencies.
   * Composer:
