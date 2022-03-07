@@ -1,10 +1,12 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Blog / Inc / Class
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -34,7 +36,7 @@ class Blog extends WriteCore
      * @throws PermissionException
      * @throws PH7InvalidArgumentException
      */
-    public function setThumb(stdClass $oPost, File $oFile)
+    public function setThumb(stdClass $oPost, File $oFile): void
     {
         if (!empty($_FILES['thumb']['tmp_name'])) {
             $oImage = new FileStorageImage($_FILES['thumb']['tmp_name']);
@@ -64,7 +66,7 @@ class Blog extends WriteCore
      *
      * @return string The URL of the thumbnail.
      */
-    public static function getThumb($iBlogId)
+    public static function getThumb($iBlogId): string
     {
         $sFullPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'blog' . PH7_DS . PH7_IMG . $iBlogId . PH7_DS . static::THUMBNAIL_FILENAME;
 
@@ -85,13 +87,13 @@ class Blog extends WriteCore
      *
      * @return bool
      */
-    public function checkPostId($sPostId, BlogModel $oBlogModel)
+    public function checkPostId($sPostId, BlogModel $oBlogModel): bool
     {
         return preg_match('#^' . Config::getInstance()->values['module.setting']['post_id.pattern'] . '$#', $sPostId) &&
             !$oBlogModel->postIdExists($sPostId);
     }
 
-    public static function clearCache()
+    public static function clearCache(): void
     {
         (new Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();
     }
