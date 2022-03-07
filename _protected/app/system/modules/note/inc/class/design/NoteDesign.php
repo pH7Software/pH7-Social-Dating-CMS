@@ -17,9 +17,6 @@ class NoteDesign extends WriteDesignCoreModel
 {
     private const POST_AVATAR_SIZE = 100;
 
-    /**
-     * @return void Output the URL of the thumbnail.
-     */
     public static function thumb(stdClass $oNoteModel): void
     {
         echo '<div itemprop="image">';
