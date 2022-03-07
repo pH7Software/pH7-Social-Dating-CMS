@@ -114,7 +114,7 @@ class BlogModel extends BlogCoreModel
         $rStmt->bindValue(':metaRobots', $aPost['meta_robots'], PDO::PARAM_STR);
         $rStmt->bindValue(':metaAuthor', $aPost['meta_author'], PDO::PARAM_STR);
         $rStmt->bindValue(':metaCopyright', $aPost['meta_copyright'], PDO::PARAM_STR);
-        $rStmt->bindValue(':enableComment', $aPost['enable_comment'], PDO::PARAM_INT);
+        $rStmt->bindValue(':enableComment', $aPost['enable_comment'], PDO::PARAM_STR);
         $rStmt->bindValue(':createdDate', $aPost['created_date'], PDO::PARAM_STR);
 
         return $rStmt->execute();
