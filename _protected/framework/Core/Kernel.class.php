@@ -34,8 +34,7 @@ abstract class Kernel
     const BUYMEACOFFEE_URL = 'https://www.buymeacoffee.com/ph7cms';
     const SOFTWARE_EMAIL = 'hello@ph7cms.com';
     const SOFTWARE_TWITTER = '@pH7Soft';
-    const SOFTWARE_AUTHOR = 'Pierre-Henry Soria';
-    const SOFTWARE_COMPANY = 'Web Engineer: Pierre-Henry Soria';
+    const SOFTWARE_COMPANY = 'Engineer, Pierre-Henry Soria';
     const SOFTWARE_COPYRIGHT = '(c) 2011-%s, Pierre-Henry Soria. All Rights Reserved.';
     const SOFTWARE_VERSION_NAME = Version::KERNEL_VERSION_NAME;
     const SOFTWARE_VERSION = Version::KERNEL_VERSION;
