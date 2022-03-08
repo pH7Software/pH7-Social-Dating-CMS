@@ -32,7 +32,7 @@ class SysVar
 
     private static array $aKernelVariables = [
         '%software_name%' => Kernel::SOFTWARE_NAME,
-        '%software_author%' => 'Pierre-Henry Soria',
+        '%software_author%' => Kernel::SOFTWARE_AUTHOR,
         '%software_version_name%' => Kernel::SOFTWARE_VERSION_NAME,
         '%software_version%' => Kernel::SOFTWARE_VERSION,
         '%software_build%' => Kernel::SOFTWARE_BUILD,

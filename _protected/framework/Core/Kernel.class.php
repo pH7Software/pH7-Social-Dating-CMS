@@ -22,7 +22,7 @@ use PH7\Framework\Str\Str;
 abstract class Kernel
 {
     const SOFTWARE_NAME = 'pH7Builder';
-    const SOFTWARE_DESCRIPTION = 'pH7Builder Dating Web App Builder. The ONLY Free, Open Source, Pro Dating Startup Builder for Growing Your Online Business';
+    const SOFTWARE_DESCRIPTION = 'pH7Builder Dating Web App Builder. The ONLY Free, Open Source, Pro Dating Startup Builder for Growing Your Online Social Business';
     const SOFTWARE_WEBSITE = 'https://ph7cms.com';
     const SOFTWARE_DOC_URL = 'https://ph7cms.com/doc';
     const SOFTWARE_GIT_REPO_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS';
@@ -34,15 +34,14 @@ abstract class Kernel
     const BUYMEACOFFEE_URL = 'https://www.buymeacoffee.com/ph7cms';
     const SOFTWARE_EMAIL = 'hello@ph7cms.com';
     const SOFTWARE_TWITTER = '@pH7Soft';
-    const SOFTWARE_COMPANY = 'Engineer, Pierre-Henry Soria';
+    const SOFTWARE_AUTHOR = 'Pierre-Henry Soria';
+    const SOFTWARE_COMPANY = 'Web Engineer, Pierre-Henry Soria';
     const SOFTWARE_COPYRIGHT = '(c) 2011-%s, Pierre-Henry Soria. All Rights Reserved.';
     const SOFTWARE_VERSION_NAME = Version::KERNEL_VERSION_NAME;
     const SOFTWARE_VERSION = Version::KERNEL_VERSION;
     const SOFTWARE_BUILD = Version::KERNEL_BUILD;
     const SOFTWARE_TECHNOLOGY_NAME = Version::KERNEL_TECHNOLOGY_NAME;
     const SOFTWARE_SERVER_NAME = Version::KERNEL_SERVER_NAME;
-    const SOFTWARE_USER_AGENT = 'pH7 Web Simulator/1.1.2'; // USER AGENT NAME of Web Simulator
-    const SOFTWARE_CRAWLER_NAME = 'ph7crawler'; // CRAWLER BOT NAME
 
     /** @var Config */
     protected $config;
