@@ -1,13 +1,13 @@
 <?php
 /**
- * Method for managing the banishment of pH7Builder.
- *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Security / Ban
- * @version          1.3
+ * @version          2.0
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Security\Ban;
 
@@ -18,23 +18,21 @@ use PH7\Framework\Pattern\Statik;
 
 class Ban
 {
-    const DIR = 'banned/';
-    const EXT = '.txt';
-    const USERNAME_FILE = 'username.txt';
-    const EMAIL_FILE = 'email.txt';
-    const WORD_FILE = 'word.txt';
-    const BANK_ACCOUNT_FILE = 'bank_account.txt';
-    const IP_FILE = 'ip.txt';
-    const COMMENT_SIGN = '#';
+    public const DIR = 'banned/';
+    public const EXT = '.txt';
+    public const USERNAME_FILE = 'username.txt';
+    public const EMAIL_FILE = 'email.txt';
+    public const WORD_FILE = 'word.txt';
+    public const BANK_ACCOUNT_FILE = 'bank_account.txt';
+    public const IP_FILE = 'ip.txt';
 
-    /** @var string */
-    private static $sFile;
+    private const COMMENT_SIGN = '#';
 
-    /** @var string */
-    private static $sVal;
+    private static string $sFile;
 
-    /** @var bool */
-    private static $bIsEmail = false;
+    private static string $sVal;
+
+    private static bool $bIsEmail = false;
 
     /**
      * Import the trait to set the class static.
@@ -44,12 +42,8 @@ class Ban
 
     /**
      * Checks if the username is not a banned username.
-     *
-     * @param string $sVal
-     *
-     * @return bool
      */
-    public static function isUsername($sVal)
+    public static function isUsername(string $sVal): bool
     {
         self::$sFile = static::USERNAME_FILE;
         self::$sVal = $sVal;
@@ -57,12 +51,7 @@ class Ban
         return self::is();
     }
 
-    /**
-     * @param string $sVal
-     *
-     * @return bool
-     */
-    public static function isEmail($sVal)
+    public static function isEmail(string $sVal): bool
     {
         self::$sFile = static::EMAIL_FILE;
         self::$sVal = $sVal;
@@ -71,12 +60,7 @@ class Ban
         return self::is();
     }
 
-    /**
-     * @param string $sVal
-     *
-     * @return bool
-     */
-    public static function isBankAccount($sVal)
+    public static function isBankAccount(string $sVal): bool
     {
         self::$sFile = static::BANK_ACCOUNT_FILE;
         self::$sVal = $sVal;
@@ -85,12 +69,7 @@ class Ban
         return self::is();
     }
 
-    /**
-     * @param string $sVal
-     *
-     * @return bool
-     */
-    public static function isIp($sVal)
+    public static function isIp(string $sVal): bool
     {
         self::$sFile = static::IP_FILE;
         self::$sVal = $sVal;
@@ -98,15 +77,7 @@ class Ban
         return self::is();
     }
 
-    /**
-     * Filter words.
-     *
-     * @param string $sVal
-     * @param bool $bWordReplace
-     *
-     * @return string
-     */
-    public static function filterWord($sVal, $bWordReplace = true)
+    public static function filterWord(string $sVal, bool $bWordReplace = true): string
     {
         self::$sFile = static::WORD_FILE;
         self::$sVal = $sVal;
@@ -119,7 +90,7 @@ class Ban
      *
      * @return bool Returns TRUE if the text is banned, FALSE otherwise.
      */
-    private static function is()
+    private static function is(): bool
     {
         self::setCaseInsensitive();
 
@@ -137,9 +108,9 @@ class Ban
      *
      * @param bool $bWordReplace TRUE = Replace the ban word by an other word. FALSE = Replace the ban word by an empty string.
      *
-     * @return string The clean text.
+     * @return string|null The clean text.
      */
-    private static function replace($bWordReplace)
+    private static function replace(bool $bWordReplace): ?string
     {
         $aBans = file(PH7_PATH_APP_CONFIG . static::DIR . self::$sFile);
 
@@ -162,14 +133,14 @@ class Ban
      *
      * @return bool Returns TRUE if the value is banned, FALSE otherwise.
      */
-    private static function check($sVal)
+    private static function check(string $sVal): bool
     {
         $aBans = file(PH7_PATH_APP_CONFIG . static::DIR . self::$sFile);
 
         return in_array($sVal, array_map('trim', $aBans), true);
     }
 
-    private static function setCaseInsensitive()
+    private static function setCaseInsensitive(): void
     {
         self::$sVal = strtolower(self::$sVal);
     }
