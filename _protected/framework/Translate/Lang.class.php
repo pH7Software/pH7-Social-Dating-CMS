@@ -295,7 +295,8 @@ namespace {
         $sToken = (Registry::getInstance()->lang !== '' && array_key_exists($sToken, Registry::getInstance()->lang) ? Registry::getInstance()->lang[$sToken] : gettext($sToken));
 
         for ($iArg = 1, $iFuncArgs = count($aTokens); $iArg < $iFuncArgs; $iArg++) {
-            $sToken = str_replace('%' . ($iArg - 1) . '%', $aTokens[$iArg], $sToken);
+            $sParamValue = (string)$aTokens[$iArg];
+            $sToken = str_replace('%' . ($iArg - 1) . '%', $sParamValue, $sToken);
         }
 
         return (new SysVar)->parse($sToken);
@@ -306,14 +307,14 @@ namespace {
      *
      * @param string $sMsg1 Singular string.
      * @param string $sMsg2 Plurial string.
-     * @param integer $iNumber
+     * @param int|string $mNumber
      *
      * @return string Returns the text with ngettext function which is the correct plural form of message identified by msgid1 and msgid2 for count n.
      */
-    function nt($sMsg1, $sMsg2, $iNumber)
+    function nt($sMsg1, $sMsg2, $mNumber)
     {
-        $sString = ngettext($sMsg1, $sMsg2, $iNumber);
+        $sString = ngettext($sMsg1, $sMsg2, $mNumber);
 
-        return str_replace('%n%', $iNumber, $sString);
+        return str_replace('%n%', (string)$mNumber, $sString);
     }
 }
