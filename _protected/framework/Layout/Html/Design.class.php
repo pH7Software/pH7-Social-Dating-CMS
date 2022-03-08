@@ -674,9 +674,10 @@ class Design
              * @internal Clean URL for parameters in Gravatar URL to make the HTML code valid.
              * If we set replace '&' by '&amp;' before checking the 404's Gravatar URL, it will always return '200 OK', that's why we need to clean the URL now.
              */
-            $oCache->put(Url::clean($sUrl));
-        }
+            $sUrl = Url::clean($sUrl);
 
+            $oCache->put($sUrl);
+        }
         unset($oCache);
 
         if (!$bPrint) {

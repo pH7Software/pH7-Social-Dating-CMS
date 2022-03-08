@@ -1,10 +1,12 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Controller
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -15,16 +17,13 @@ use PH7\Framework\Url\Header;
 
 class BrowseController extends Controller
 {
-    const MAX_PROFILE_PER_PAGE = 40;
+    private const MAX_PROFILE_PER_PAGE = 40;
 
-    /** @var UserModel */
-    private $oUserModel;
+    private UserModel $oUserModel;
 
-    /** @var Page */
-    private $oPage;
+    private Page $oPage;
 
-    /** @var int */
-    private $iTotalUsers;
+    private int $iTotalUsers;
 
     public function __construct()
     {
@@ -34,7 +33,7 @@ class BrowseController extends Controller
         $this->oPage = new Page;
     }
 
-    public function index()
+    public function index(): void
     {
         $this->iTotalUsers = $this->oUserModel->search($_GET, true, null, null);
         $this->view->total_pages = $this->oPage->getTotalPages(
