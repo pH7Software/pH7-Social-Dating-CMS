@@ -306,7 +306,7 @@ namespace {
      * Plural version of t() function.
      *
      * @param string $sMsg1 Singular string.
-     * @param string $sMsg2 Plurial string.
+     * @param string $sMsg2 Plural string.
      * @param int|string $mNumber
      *
      * @return string Returns the text with ngettext function which is the correct plural form of message identified by msgid1 and msgid2 for count n.
