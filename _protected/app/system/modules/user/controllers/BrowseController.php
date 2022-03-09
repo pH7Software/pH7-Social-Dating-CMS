@@ -17,7 +17,7 @@ use PH7\Framework\Url\Header;
 
 class BrowseController extends Controller
 {
-    private const MAX_PROFILE_PER_PAGE = 50;
+    private const MAX_PROFILE_PER_PAGE = 52;
 
     private UserModel $oUserModel;
 
