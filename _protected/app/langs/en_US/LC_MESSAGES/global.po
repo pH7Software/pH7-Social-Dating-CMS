@@ -15213,7 +15213,7 @@ msgid "Modified %0%"
 msgstr ""
 
 #: _protected/app/system/modules/profile-faker/controllers/GeneratorController.php:15
-msgid "Generate Fake Members (without profile photo)"
+msgid "Generate Members (without profile photo)"
 msgstr ""
 
 #: _protected/app/system/modules/profile-faker/controllers/GeneratorController.php:21
