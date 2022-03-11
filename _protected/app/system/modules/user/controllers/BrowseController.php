@@ -17,7 +17,7 @@ use PH7\Framework\Url\Header;
 
 class BrowseController extends Controller
 {
-    private const MAX_PROFILE_PER_PAGE = 52;
+    private const MAX_PROFILES_PER_PAGE = 52;
 
     private UserModel $oUserModel;
 
@@ -38,7 +38,7 @@ class BrowseController extends Controller
         $this->iTotalUsers = $this->oUserModel->search($_GET, true, null, null);
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->iTotalUsers,
-            self::MAX_PROFILE_PER_PAGE
+            self::MAX_PROFILES_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oUsers = $this->oUserModel->search(

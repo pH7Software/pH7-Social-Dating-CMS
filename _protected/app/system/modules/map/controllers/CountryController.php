@@ -22,7 +22,7 @@ class CountryController extends Controller
     const MAP_WIDTH_SIZE = '100%';
     const MAP_HEIGHT_SIZE = '520px';
 
-    const MAX_PROFILE_PER_PAGE = 20;
+    const MAX_PROFILES_PER_PAGE = 20;
 
     /**
      * @param string|null $sCountry
@@ -53,7 +53,7 @@ class CountryController extends Controller
                 null,
                 null
             );
-            $this->view->total_pages = $oPage->getTotalPages($iTotalUsers, self::MAX_PROFILE_PER_PAGE);
+            $this->view->total_pages = $oPage->getTotalPages($iTotalUsers, self::MAX_PROFILES_PER_PAGE);
             $this->view->current_page = $oPage->getCurrentPage();
             $this->view->first_user = $oPage->getFirstItem();
             $this->view->nb_user_by_page = $oPage->getNbItemsPerPage();

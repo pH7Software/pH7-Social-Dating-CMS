@@ -12,7 +12,7 @@ use PH7\Framework\Navigation\Page;
 
 class VisitorController extends Controller
 {
-    const MAX_PROFILE_PER_PAGE = 10;
+    const MAX_PROFILES_PER_PAGE = 10;
 
     /** @var UserModel */
     private $oUserModel;
@@ -72,7 +72,7 @@ class VisitorController extends Controller
 
     public function index()
     {
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalVisitors, self::MAX_PROFILE_PER_PAGE);
+        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalVisitors, self::MAX_PROFILES_PER_PAGE);
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $this->iTotalVisitors = $this->oVisitorModel->get(

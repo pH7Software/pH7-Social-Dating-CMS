@@ -12,7 +12,7 @@ use PH7\Framework\Navigation\Page;
 
 class UserController extends Controller
 {
-    const MAX_PROFILE_PER_PAGE = 20;
+    const MAX_PROFILES_PER_PAGE = 20;
 
     /** @var BirthdayModel */
     private $oBirthModel;
@@ -60,7 +60,7 @@ class UserController extends Controller
         $this->checkType($sGender);
 
         $this->view->total_pages = $this->oPage->getTotalPages(
-            $this->iTotalBirths, self::MAX_PROFILE_PER_PAGE
+            $this->iTotalBirths, self::MAX_PROFILES_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
 
