@@ -87,8 +87,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Dating Scammer Detector (see if profile photos aren't used by scammers)
 * Full Moderation of all contents posted by your users
 * Watermark Branding
-* Chat Rooms
-* Instant Messenger (IM module)
+* Instant Messenger
 * In-built affiliate system (that encourages brand influencers/ambassadors to promote your dating platform)
 * Newsletter
 * Activity Streams
