@@ -773,16 +773,16 @@ ErrorDocument 505 /error/http/index?code=505
 # Modify Headers
 <IfModule mod_headers.c>
     # Cache files
-    <FilesMatch "\.(jpe?g|png|gif|ico|webp|swf|mp3|mp4|flv|webm|pdf)$">
+    <FilesMatch "\.(jpe?g|png|gif|ico|webp|mp3|mp4|flv|webm|pdf)$">
         Header set Cache-Control "public"
-        Header set Expires "Mon, 20 Apr 2060 20:00:00 GMT"
+        Header set Expires "Mon, 20 Apr 2070 20:00:00 GMT"
         Header unset Last-Modified
     </FilesMatch>
 
     # Cache JavaScript & CSS
     <FilesMatch "\.(js|css)$">
         Header set Cache-Control "public"
-        Header set Expires "Mon, 20 Apr 2060 20:00:00 GMT"
+        Header set Expires "Mon, 20 Apr 2070 20:00:00 GMT"
         Header unset Last-Modified
     </FilesMatch>
 </IfModule>
@@ -801,7 +801,7 @@ ErrorDocument 505 /error/http/index?code=505
         # Don't compress images/archives/music/video/etc
         SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
         SetEnvIfNoCase Request_URI \.(?:exe|t?gz|zip|bz2|sit|rar)$ no-gzip dont-vary
-        SetEnvIfNoCase Request_URI \.(?:avi|mov|mp3|mp4|rm|flv|swf|mp?g)$ no-gzip dont-vary
+        SetEnvIfNoCase Request_URI \.(?:avi|mov|mp3|mp4|rm|flv|mp?g)$ no-gzip dont-vary
     </IfModule>
     <IfModule mod_headers.c>
         # Make sure proxies don't deliver the wrong content
@@ -813,7 +813,7 @@ ErrorDocument 505 /error/http/index?code=505
 <IfModule mod_expires.c>
     ExpiresActive On
     ExpiresDefault "access plus 1 month"
-    # expire images/css/js/swf files after a month in the client's cache
+    # expire images/css/js files after a month in the client's cache
     ExpiresByType text/css "access plus 31 days"
     ExpiresByType text/javascript "access plus 31 days"
     ExpiresByType application/javascript "access plus 31 days"
@@ -822,8 +822,6 @@ ErrorDocument 505 /error/http/index?code=505
     ExpiresByType image/gif "access plus 31 days"
     ExpiresByType image/jpeg "access plus 31 days"
     ExpiresByType image/png "access plus 31 days"
-    ExpiresByType application/x-shockwave-flash "access plus 31 days"
-    ExpiresByType image/vnd.microsoft.icon "access plus 31 days"
     ExpiresByType image/x-icon "access plus 1 year"
 </IfModule>
 
