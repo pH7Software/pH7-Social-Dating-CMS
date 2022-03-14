@@ -49,7 +49,7 @@ You get and own all data and files, hosted on your own server! ✌️
 - [The toolsets I use](#-toolssoftware-used-to-develop-ph7cms)
 - [About Me](#-the-cook)
   - [Contact Me](#-contact)
-  - [Hire Me?](#-hire-me-at-your-company)
+  - [Hire Me](#-hire-me-at-your-company)
   - [Offer me a cup of tea?](#-offer-me-a-cup-of-tea-or-tea-bags-)
 
 
@@ -252,7 +252,9 @@ Designed & Coded with lots of ❤️ by **[Pierre-Henry Soria](https://ph7.me)**
 
 ## 🤝 Hire Me At Your Company?
 
-Do you need a software engineer like me (and willing to relocate) at your company? **[Let's chat together](https://www.linkedin.com/in/ph7enry/)**! 😊
+Are you building a scalable social/dating Web application? 
+
+Do you think you might need a software engineer like me at your company? (who could even be willing to relocate) 👉 **[Let's chat together](https://www.linkedin.com/in/ph7enry/)**! 😊
 
 
 ## 💲 Offer Me A Cup of Tea? (...or tea bags...) 🍵
