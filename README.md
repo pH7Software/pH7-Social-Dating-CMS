@@ -55,7 +55,7 @@ You get and own all data and files, hosted on your own server! ✌️
 
 ## 👀 Software Overview 🎉
 
-**pH7 Dating CMS** is a **Social community CMS** based on a powerful modular OOP architecture, and using the **MVC** architecture (Model-View-Controller).
+**pH7 Dating CMS** is a **scalable social community CMS** based on a powerful modular OOP architecture, and using the **MVC** architecture (Model-View-Controller).
 
 It is designed with the **KISS** principle in mind, and the whole source code can be read and understood in minutes. For better flexibility, the software uses **PDO** (PHP Data Objects) abstraction which allows the choice of the database. The principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (no duplicate code) and **YAGNI** principle to avoid unused code/not needed functionality in the software.
 
