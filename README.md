@@ -280,7 +280,7 @@ You appreciate the project, all the years intensively spent on the core developm
 
 - Any issues, **[search/open an issue](https://github.com/pH7Software/pH7-Social-Dating-CMS/issues)**.
 
-- **Discussions Board** [https://github.com/pH7Software/pH7-Social-Dating-CMS/discussions](https://github.com/pH7Software/pH7-Social-Dating-CMS/discussions)
+- Chitchat, sharing knowledge/experience, **[discussions Board](https://github.com/pH7Software/pH7-Social-Dating-CMS/discussions)**
 
 
 ## 💖 Contributing
