@@ -4,7 +4,8 @@
 
 ### The first CLI Dating Builder Installer Tool 😻 (ever invented! 🪄)
 
-### 🤔 How to use it?
+
+### 🍰 Get started. How to use?
 
 Inside of this folder (`_tools/cli`), run `php ph7cms setup:install`
 
@@ -36,3 +37,10 @@ them [by raising an issue on GitHub](https://github.com/pH7Software/pH7-Social-D
 
 This CLI installer was made by [Pierre-Henry Soria](https://www.linkedin.com/in/ph7enry). Don't forget to say 〝hi” 😊
 I will be more than happy to chat with you! 🤗
+
+
+## How I built this? Full video 📺
+
+[![Watch the video](https://i1.ytimg.com/vi/qFJrezJ2X8s/sddefault.jpg)](https://www.youtube.com/watch?v=qFJrezJ2X8s)
+
+👉 **[Click here to watch on YouTube](https://www.youtube.com/watch?v=qFJrezJ2X8s)**
