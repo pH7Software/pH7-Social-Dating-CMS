@@ -49,7 +49,7 @@ You get and own all data and files, hosted on your own server! ✌️
 - [Why pH7CMS is Eco-Friendly?](#-ph7cms-the-eco-friendly-cms-%EF%B8%8F)
 - [The toolsets I use](#-toolssoftware-used-to-develop-ph7cms)
 - [About Me](#-the-cook)
-  - [Contact Me](#-contact-suggestions--feedback)
+  - [Contact Me](#-contact-suggestion--feedback)
   - [Hire Me](#-hire-me-at-your-company)
   - [Offer me a cup of tea?](#-offer-me-a-cup-of-tea-or-tea-bags-)
 
@@ -338,7 +338,7 @@ Finally, **please consider using green Web hosting** (which use Green Power supp
 * Sometimes, when working on Mac, **Sequel Pro** is used to lookup easily at a database.
 
 
-## 🖋 Contact (Suggestions / Feedback)
+## 🖋 Contact (Suggestion / Feedback)
 
 Feel free to send me an email at *hello {AT} ph7cms {D0T} com*
 
