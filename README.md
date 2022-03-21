@@ -43,6 +43,7 @@ You get and own all data and files, hosted on your own server! ✌️
   - [Nginx Configuration (only for nginx server)](#-nginx-configuration)
 - [Translations](#-translations)
 - [Resources / Documentation](#-documentation)
+- [Troubleshooting](#-troubleshooting)
 - [Contributing to the project](#-contributing)
 - [License](#%EF%B8%8F-license)
 - [Why pH7CMS is Eco-Friendly?](#-ph7cms-the-eco-friendly-cms-%EF%B8%8F)
@@ -273,6 +274,13 @@ You appreciate the project, all the years intensively spent on the core developm
 ## 📚 Documentation
 
 [pH7Builder Documentation](https://ph7cms.com/doc/)
+
+
+## 🤯 Troubleshooting
+
+- Any issues, **[search/open an issue](https://github.com/pH7Software/pH7-Social-Dating-CMS/issues)**.
+
+- **Discussions Board** [https://github.com/pH7Software/pH7-Social-Dating-CMS/discussions](https://github.com/pH7Software/pH7-Social-Dating-CMS/discussions)
 
 
 ## 💖 Contributing
