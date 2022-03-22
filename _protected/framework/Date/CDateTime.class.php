@@ -43,9 +43,16 @@ class CDateTime
      */
     public function get($mTime = null, $mTimeZone = null): self
     {
-        $sSetTime = $mTime !== null ? date(self::DEFAULT_DATE_FORMAT, (!is_numeric($mTime) ? strtotime($mTime) : $mTime)) : 'now';
+        $sSetTime = function () use ($mTime) {
+            if ($mTime !== null) {
+                $iTimestamp = !is_numeric($mTime) ? strtotime($mTime) : $mTime;
+                return date(self::DEFAULT_DATE_FORMAT, $iTimestamp);
+            }
+            return 'now';
+        };
+
         $sSetTimeZone = $mTimeZone !== null ? $mTimeZone : $this->oConfig->values['language.application']['timezone'];
-        $this->oDateTime = new DateTime($sSetTime, new DateTimeZone($sSetTimeZone));
+        $this->oDateTime = new DateTime($sSetTime(), new DateTimeZone($sSetTimeZone));
 
         return $this;
     }
