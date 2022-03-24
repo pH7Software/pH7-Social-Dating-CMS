@@ -44,6 +44,7 @@
     "cache-dir": "_protected/vendor/cache",
     "autoloader-suffix": "PH7",
     "preferred-install": "dist",
+    "optimize-autoloader": true,
     "sort-packages": true
   },
   "require": {
