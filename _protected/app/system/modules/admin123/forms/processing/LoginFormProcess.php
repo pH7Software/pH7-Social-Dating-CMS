@@ -30,17 +30,12 @@ class LoginFormProcess extends Form implements LoginableForm
     {
         parent::__construct();
 
-        $sIp = Ip::get();
         $this->oAdminModel = new AdminModel;
         $oSecurityModel = new SecurityModel;
 
         $sEmail = $this->httpRequest->post('mail');
         $sUsername = $this->httpRequest->post('username');
         $sPassword = $this->httpRequest->post('password', HttpRequest::NO_CLEAN);
-
-
-        /*** Security IP Login ***/
-        $sIpLogin = DbConfig::getSetting('ipLogin');
 
         /*** Check if the connection is not locked ***/
         $bIsLoginAttempt = (bool)DbConfig::getSetting('isAdminLoginAttempt');
@@ -62,10 +57,10 @@ class LoginFormProcess extends Form implements LoginableForm
 
         /*** Check Login ***/
         $bIsLogged = $this->oAdminModel->adminLogin($sEmail, $sUsername, $sPassword);
-        $bIpNotAllowed = !empty(trim($sIpLogin)) && $sIpLogin !== $sIp;
+        $bIpAllowed = $this->isIpAllowed();
 
         // If the login is failed or if the IP address is not allowed
-        if (!$bIsLogged || $bIpNotAllowed) {
+        if (!$bIsLogged || !$bIpAllowed) {
             $this->preventBruteForce(self::BRUTE_FORCE_SLEEP_DELAY);
 
             if (!$bIsLogged) {
@@ -83,7 +78,7 @@ class LoginFormProcess extends Form implements LoginableForm
 
                 $this->enableCaptcha();
                 \PFBC\Form::setError('form_admin_login', t('"Email", "Username" or "Password" is Incorrect'));
-            } elseif ($bIpNotAllowed) {
+            } elseif (!$bIpAllowed) {
                 $this->enableCaptcha();
                 \PFBC\Form::setError('form_admin_login', t('Incorrect Login!'));
                 $oSecurityModel->addLoginLog(
@@ -140,6 +135,17 @@ class LoginFormProcess extends Form implements LoginableForm
     public function enableCaptcha(): void
     {
         $this->session->set('captcha_admin_enabled', 1);
+    }
+
+    /**
+     * Checks if the IP is whitelisted to login on the admin panel.
+     */
+    private function isIpAllowed(): bool
+    {
+        $sAllowedIpLogin = (string)DbConfig::getSetting('ipLogin');
+        $sAllowedIpLogin = trim($sAllowedIpLogin);
+
+        return empty($sAllowedIpLogin) || $sAllowedIpLogin === Ip::get();
     }
 
     private function redirectToTwoFactorAuth(): void
