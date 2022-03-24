@@ -86,7 +86,7 @@ class Ban
     }
 
     /**
-     * Generic method that checks if there.
+     * Generic method that checks if a keyword has been banned.
      *
      * @return bool Returns TRUE if the text is banned, FALSE otherwise.
      */
@@ -95,7 +95,11 @@ class Ban
         self::setCaseInsensitive();
 
         if (self::$bIsEmail) {
-            if (self::check(strrchr(self::$sVal, '@'))) {
+            $mEmailDomain = strrchr(self::$sVal, '@');
+            if ($mEmailDomain === false) {
+                return false;
+            }
+            if (self::check($mEmailDomain)) {
                 return true;
             }
         }
