@@ -6,6 +6,8 @@
  * @package          PH7 / App / Include / Class
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 interface Authenticable
@@ -15,12 +17,12 @@ interface Authenticable
      *
      * @return bool
      */
-    public static function isCaptchaEligible();
+    public static function isCaptchaEligible(): bool;
 
     /**
      * Remove the session if the affiliate is logged on as "user" or "affiliate".
      *
      * @return void
      */
-    public static function clearCurrentSessions();
+    public static function clearCurrentSessions(): void;
 }

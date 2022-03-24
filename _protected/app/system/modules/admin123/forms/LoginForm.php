@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Admin / From
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 use PFBC\Element\Button;
@@ -21,7 +23,7 @@ use PH7\Framework\Url\Header;
 
 class LoginForm implements Authenticable
 {
-    public static function display()
+    public static function display(): void
     {
         static::clearCurrentSessions();
 
@@ -64,7 +66,7 @@ class LoginForm implements Authenticable
     /**
      * {@inheritDoc}
      */
-    public static function isCaptchaEligible()
+    public static function isCaptchaEligible(): bool
     {
         return (new Session)->exists('captcha_admin_enabled');
     }
@@ -72,7 +74,7 @@ class LoginForm implements Authenticable
     /**
      * {@inheritDoc}
      */
-    public static function clearCurrentSessions()
+    public static function clearCurrentSessions(): void
     {
         if (UserCore::auth() || AffiliateCore::auth()) {
             (new Session)->destroy();
