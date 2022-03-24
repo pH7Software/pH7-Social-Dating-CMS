@@ -43,6 +43,7 @@
     "bin-dir": "_protected/vendor/bin",
     "cache-dir": "_protected/vendor/cache",
     "autoloader-suffix": "PH7",
+    "preferred-install": "dist",
     "sort-packages": true
   },
   "require": {
