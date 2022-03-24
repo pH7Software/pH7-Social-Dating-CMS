@@ -1,7 +1,7 @@
 <?php
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2017-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2017-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / App / Include / Class
  */
@@ -16,12 +16,8 @@ interface LoginableForm
      * Check if the existing password hash in the user record is outdated
      * with the current algorithm and password hashing options.
      * If so, we create and save the new password to match with the new algorithm and options.
-     *
-     * @param string $sPassword
-     * @param string $sUserPasswordHash
-     * @param string $sEmail
      */
-    public function updatePwdHashIfNeeded($sPassword, $sUserPasswordHash, $sEmail): void;
+    public function updatePwdHashIfNeeded(string $sPassword, string $sUserPasswordHash, string $sEmail): void;
 
     /**
      * Enable the Captcha on the login form.
