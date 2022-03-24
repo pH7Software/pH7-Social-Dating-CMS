@@ -3,16 +3,18 @@
  * @title          Login Form Process
  *
  * @author         Pierre-Henry Soria <hi@ph7.me>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License <http://www.gnu.org/licenses/gpl.html>
  * @package        PH7 / App / Module / Fake Admin Panel / Form / Processing
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
 class LoginFormProcess extends Form
 {
-    const BRUTE_FORCE_SLEEP_DELAY = 6;
+    private const BRUTE_FORCE_SLEEP_DELAY = 6;
 
     public function __construct()
     {
