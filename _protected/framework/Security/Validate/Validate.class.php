@@ -1,6 +1,5 @@
 <?php
 /**
- * @title            Validate Class
  * @desc             Various methods to Validate.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
