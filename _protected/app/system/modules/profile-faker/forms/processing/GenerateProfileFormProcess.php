@@ -1,10 +1,12 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2019-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Profile Faker / Form / Processing
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -12,15 +14,14 @@ defined('PH7') or exit('Restricted access');
 
 class GenerateProfileFormProcess extends Form
 {
-    /** @var int */
-    private $iProfileType;
+    private int $iProfileType;
 
     /**
      * @param int $iProfileType The profile type to generate.
      *
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    public function __construct($iProfileType)
+    public function __construct(int $iProfileType)
     {
         parent::__construct();
 
@@ -36,11 +37,9 @@ class GenerateProfileFormProcess extends Form
     }
 
     /**
-     * @param int $iAmountProfiles
-     *
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    private function generate($iAmountProfiles)
+    private function generate(int $iAmountProfiles): void
     {
         $oFakerFactory = new FakerFactory(
             $iAmountProfiles,

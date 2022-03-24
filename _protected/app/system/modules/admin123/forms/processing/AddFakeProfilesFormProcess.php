@@ -9,6 +9,8 @@
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -29,14 +31,11 @@ class AddFakeProfilesFormProcess extends Form
     const API_URL = 'https://randomuser.me/api/';
     const API_VER = '1.3';
 
-    /** @var Validate */
-    private $oValidate;
+    private Validate $oValidate;
 
-    /** @var ExistsCoreModel */
-    private $oExistsModel;
+    private ExistsCoreModel $oExistsModel;
 
-    /** @var int */
-    private static $iTotalGenerated = 0;
+    private static int $iTotalGenerated = 0;
 
     public function __construct()
     {
@@ -82,6 +81,9 @@ class AddFakeProfilesFormProcess extends Form
         unset($oUser, $oUserModel, $aData);
     }
 
+    /**
+     * @return string|bool|null
+     */
     protected function getApiClient()
     {
         $sApiUrl = static::API_URL;
@@ -92,7 +94,7 @@ class AddFakeProfilesFormProcess extends Form
         return json_decode($rUserData, true);
     }
 
-    private function getApiParameters()
+    private function getApiParameters(): array
     {
         return [
             'results' => $this->httpRequest->post('num'),
@@ -109,9 +111,9 @@ class AddFakeProfilesFormProcess extends Form
      * @param string $sApiParams Parameters to send to the API.
      * @param string $sApiVersion Version of the API it will use. If fails from the API server, it will ignore it.
      *
-     * @return void
+     * @return string|bool
      */
-    private function getApiResults($sApiUrl, $sApiParams, $sApiVersion)
+    private function getApiResults(string $sApiUrl, string $sApiParams, string $sApiVersion)
     {
         if ($rData = $this->file->getFile($sApiUrl . $sApiVersion . PH7_SH . $sApiParams)) {
             return $rData;
@@ -122,14 +124,9 @@ class AddFakeProfilesFormProcess extends Form
     }
 
     /**
-     * Add User's Avatar.
-     *
-     * @param array $aData
-     * @param UserCore $oUser
-     *
-     * @return void
+     * Add user's avatar.
      */
-    private function addAvatar(array $aData, UserCore $oUser)
+    private function addAvatar(array $aData, UserCore $oUser): void
     {
         /**
          * Sometimes, cURL fails under Windows or some other specific server configs,
@@ -151,15 +148,7 @@ class AddFakeProfilesFormProcess extends Form
         $this->file->deleteFile($sTmpFile);
     }
 
-    /**
-     * @param string $sUsername
-     * @param string $sEmail
-     * @param array $aUser
-     * @param UserCore $oUser
-     *
-     * @return array
-     */
-    private function storeUserDataIntoArray($sUsername, $sEmail, array $aUser, UserCore $oUser)
+    private function storeUserDataIntoArray(string $sUsername, string $sEmail, array $aUser, UserCore $oUser): array
     {
         $aData = [];
         $aData['username'] = $sUsername;
@@ -181,13 +170,7 @@ class AddFakeProfilesFormProcess extends Form
         return $aData;
     }
 
-    /**
-     * @param string $sEmail
-     * @param string $sUsername
-     *
-     * @return bool
-     */
-    private function isValidProfile($sEmail, $sUsername)
+    private function isValidProfile(string $sEmail, string $sUsername): bool
     {
         return $this->oValidate->email($sEmail) &&
             !$this->oExistsModel->email($sEmail) &&

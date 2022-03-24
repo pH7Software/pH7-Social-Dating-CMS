@@ -1,10 +1,12 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2019-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Profile Faker / Form
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -18,14 +20,14 @@ use PH7\Framework\Url\Header;
 
 class GenerateProfileForm
 {
-    const DEFAULT_AMOUNT_VALUE = 20;
+    private const DEFAULT_AMOUNT_VALUE = 20;
 
     /**
      * @param int $iProfileType
      *
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    public static function display($iProfileType)
+    public static function display(int $iProfileType): void
     {
         if (isset($_POST['submit_generate_profiles'])) {
             if (\PFBC\Form::isValid($_POST['submit_generate_profiles'])) {
@@ -91,7 +93,7 @@ class GenerateProfileForm
     /**
      * @return array
      */
-    private static function getNationalities()
+    private static function getNationalities(): array
     {
         return [
             'en_US' => t('American'),

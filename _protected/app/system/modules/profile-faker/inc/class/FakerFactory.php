@@ -1,43 +1,43 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2019-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Profile Faker / Inc / Class
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
 use Faker\Factory as Faker;
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Translate\Lang;
 use PH7\Framework\Util\Various;
 
 class FakerFactory
 {
-    /** @var int */
-    private $iAmount;
+    private int $iAmount;
 
-    /** @var string|null */
-    private $sSex;
+    private string $sSex;
 
-    /** @var string */
-    private $sLocale;
+    private string $sLocale;
 
     /**
      * @param int $iAmount Number of profile to generate.
      * @param string $sSex Profile gender.
      * @param string $sLocale The locale if specified. e.g., en_US, en_IE, fr_FR, fr_BE, nl_NL, es_ES, ...
      */
-    public function __construct($iAmount, $sSex, $sLocale = Lang::DEFAULT_LOCALE)
+    public function __construct(int $iAmount, string $sSex, string $sLocale = Lang::DEFAULT_LOCALE)
     {
         $this->iAmount = $iAmount;
         $this->sSex = $sSex;
         $this->sLocale = $sLocale;
     }
 
-    public function generateMembers()
+    public function generateMembers(): void
     {
         $oUserModel = new UserCoreModel;
         $oFaker = Faker::create($this->sLocale);
