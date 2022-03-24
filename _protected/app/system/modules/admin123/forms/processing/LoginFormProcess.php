@@ -126,7 +126,7 @@ class LoginFormProcess extends Form implements LoginableForm
     /**
      * {@inheritDoc}
      */
-    public function updatePwdHashIfNeeded($sPassword, $sUserPasswordHash, $sEmail)
+    public function updatePwdHashIfNeeded($sPassword, $sUserPasswordHash, $sEmail): void
     {
         if ($sNewPwdHash = Security::pwdNeedsRehash($sPassword, $sUserPasswordHash)) {
             $this->oAdminModel->changePassword($sEmail, $sNewPwdHash, DbTableName::ADMIN);
@@ -136,12 +136,12 @@ class LoginFormProcess extends Form implements LoginableForm
     /**
      * {@inheritDoc}
      */
-    public function enableCaptcha()
+    public function enableCaptcha(): void
     {
         $this->session->set('captcha_admin_enabled', 1);
     }
 
-    private function redirectToTwoFactorAuth()
+    private function redirectToTwoFactorAuth(): void
     {
         Header::redirect(
             Uri::get(

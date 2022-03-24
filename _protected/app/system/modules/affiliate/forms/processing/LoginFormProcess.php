@@ -123,7 +123,7 @@ class LoginFormProcess extends Form implements LoginableForm
     /**
      * {@inheritDoc}
      */
-    public function updatePwdHashIfNeeded($sPassword, $sUserPasswordHash, $sEmail)
+    public function updatePwdHashIfNeeded($sPassword, $sUserPasswordHash, $sEmail): void
     {
         if ($sNewPwdHash = Security::pwdNeedsRehash($sPassword, $sUserPasswordHash)) {
             $this->oAffModel->changePassword($sEmail, $sNewPwdHash, DbTableName::AFFILIATE);
@@ -133,12 +133,12 @@ class LoginFormProcess extends Form implements LoginableForm
     /**
      * {@inheritDoc}
      */
-    public function enableCaptcha()
+    public function enableCaptcha(): void
     {
         $this->session->set('captcha_aff_enabled', 1);
     }
 
-    private function redirectToAccountPage()
+    private function redirectToAccountPage(): void
     {
         Header::redirect(
             Uri::get(
@@ -150,7 +150,7 @@ class LoginFormProcess extends Form implements LoginableForm
         );
     }
 
-    private function redirectToTwoFactorAuth()
+    private function redirectToTwoFactorAuth(): void
     {
         Header::redirect(
             Uri::get(

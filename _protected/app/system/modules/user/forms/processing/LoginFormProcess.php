@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / User / Form / Processing
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -25,8 +27,7 @@ class LoginFormProcess extends Form implements LoginableForm
 {
     const BRUTE_FORCE_SLEEP_DELAY = 1;
 
-    /** @var UserCoreModel */
-    private $oUserModel;
+    private UserCoreModel $oUserModel;
 
     public function __construct()
     {
@@ -157,7 +158,7 @@ class LoginFormProcess extends Form implements LoginableForm
     /**
      * {@inheritDoc}
      */
-    public function updatePwdHashIfNeeded($sPassword, $sUserPasswordHash, $sEmail)
+    public function updatePwdHashIfNeeded($sPassword, $sUserPasswordHash, $sEmail): void
     {
         if ($sNewPwdHash = Security::pwdNeedsRehash($sPassword, $sUserPasswordHash)) {
             $this->oUserModel->changePassword($sEmail, $sNewPwdHash, DbTableName::MEMBER);
@@ -167,7 +168,7 @@ class LoginFormProcess extends Form implements LoginableForm
     /**
      * {@inheritDoc}
      */
-    public function enableCaptcha()
+    public function enableCaptcha(): void
     {
         $iNumberAttempts = (int)$this->session->get('captcha_user_enabled');
         $this->session->set('captcha_user_enabled', $iNumberAttempts++);
@@ -176,10 +177,8 @@ class LoginFormProcess extends Form implements LoginableForm
     /**
      * @param int $iProfileId
      * @param string $sLocationName
-     *
-     * @return bool
      */
-    public function isForeignLocation($iProfileId, $sLocationName)
+    public function isForeignLocation($iProfileId, $sLocationName): bool
     {
         $sLatestUsedIp = $this->oUserModel->getLastUsedIp($iProfileId);
 
@@ -190,25 +189,20 @@ class LoginFormProcess extends Form implements LoginableForm
         return false;
     }
 
-    /**
-     * @param stdClass $oUserData
-     *
-     * @return bool
-     */
-    private function isSmsVerificationEligible(stdClass $oUserData)
+    private function isSmsVerificationEligible(stdClass $oUserData): bool
     {
         return $oUserData->active == RegistrationCore::SMS_ACTIVATION &&
             SysMod::isEnabled('sms-verification');
     }
 
-    private function redirectToSmsVerification()
+    private function redirectToSmsVerification(): void
     {
         Header::redirect(
             Uri::get('sms-verification', 'main', 'send')
         );
     }
 
-    private function redirectToTwoFactorAuth()
+    private function redirectToTwoFactorAuth(): void
     {
         Header::redirect(
             Uri::get(

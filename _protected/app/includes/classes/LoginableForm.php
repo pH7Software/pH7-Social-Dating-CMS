@@ -6,6 +6,8 @@
  * @package          PH7 / App / Include / Class
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 interface LoginableForm
@@ -18,15 +20,11 @@ interface LoginableForm
      * @param string $sPassword
      * @param string $sUserPasswordHash
      * @param string $sEmail
-     *
-     * @return void
      */
-    public function updatePwdHashIfNeeded($sPassword, $sUserPasswordHash, $sEmail);
+    public function updatePwdHashIfNeeded($sPassword, $sUserPasswordHash, $sEmail): void;
 
     /**
      * Enable the Captcha on the login form.
-     *
-     * @return void
      */
-    public function enableCaptcha();
+    public function enableCaptcha(): void;
 }
