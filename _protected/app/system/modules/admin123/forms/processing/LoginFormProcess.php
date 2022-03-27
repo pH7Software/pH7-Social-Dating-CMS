@@ -77,7 +77,7 @@ class LoginFormProcess extends Form implements LoginableForm
                 }
 
                 $this->enableCaptcha();
-                \PFBC\Form::setError('form_admin_login', t('"Email", "Username" or "Password" is Incorrect'));
+                \PFBC\Form::setError('form_admin_login', t('"Email", "Username" or "Password" is incorrect'));
             } elseif (!$bIpAllowed) {
                 $this->enableCaptcha();
                 \PFBC\Form::setError('form_admin_login', t('Incorrect Login!'));

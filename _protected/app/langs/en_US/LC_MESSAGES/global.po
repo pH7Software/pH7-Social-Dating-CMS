@@ -3810,7 +3810,7 @@ msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/processing/LoginFormProcess.php:84
 #: _repository/module/fake-admin-panel/forms/processing/LoginFormProcess.php:27
-msgid "\"Email\", \"Username\" or \"Password\" is Incorrect"
+msgid "\"Email\", \"Username\" or \"Password\" is incorrect"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/processing/LoginFormProcess.php:87
