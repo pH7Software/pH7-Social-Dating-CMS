@@ -1,6 +1,5 @@
 <?php
 /**
- * @title            Lang Class
  * @desc             Loading and management files languages (I18N).
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>

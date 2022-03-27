@@ -1,6 +1,5 @@
 <?php
 /**
- * @title            Load Template Class
  * @desc             Loading template files.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
