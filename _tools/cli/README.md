@@ -7,7 +7,7 @@
 
 ### 🍰 Get started. How to use?
 
-Inside of this folder (`_tools/cli`), run `php ph7cms setup:install`
+Inside this folder (`_tools/cli`), run `php ph7cms setup:install`
 
 Then, follow the instructions.
 
