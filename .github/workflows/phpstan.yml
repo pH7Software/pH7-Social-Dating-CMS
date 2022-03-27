@@ -36,4 +36,4 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Run PHPStan
-        run: composer analyse --error-format=github
+        run: _protected/vendor/bin/phpstan analyse --error-format=github
