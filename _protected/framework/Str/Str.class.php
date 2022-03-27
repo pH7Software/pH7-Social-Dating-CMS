@@ -293,12 +293,8 @@ namespace PH7\Framework\Str {
 
         /**
          * Check if the string doesn't have any blank spaces.
-         *
-         * @param string $sValue
-         *
-         * @return bool
          */
-        public static function noSpaces($sValue)
+        public static function noSpaces(string $sValue): bool
         {
             return trim($sValue) !== '';
         }
