@@ -1,6 +1,5 @@
 name: PHPStan
 
-
 on: [ push ]
 
 jobs:
@@ -8,7 +7,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ 'ubuntu-latest', 'windows-2022', 'macos-latest' ]
+        os: [ 'ubuntu-latest' ]
         php-versions: [ '7.4', '8.0', '8.1' ]
     name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.os }}
 
@@ -36,4 +35,4 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Run PHPStan
-        run: _protected/vendor/bin/phpstan analyse --error-format=github
+        run: _protected/vendor/bin/phpstan analyse _protected --error-format=github
