@@ -8,6 +8,8 @@
  * @package          PH7 / Framework / Layout
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Layout;
 
 defined('PH7') or exit('Restricted access');
@@ -28,7 +30,7 @@ class LoadTemplate
 
     private string $sDefaultTpl;
 
-    private string $sUserTpl;
+    private ?string $sUserTpl;
 
     private string $sTplName;
 
@@ -170,6 +172,7 @@ class LoadTemplate
     {
         $oCookie = new Cookie;
 
+        $this->sUserTpl = null;
         if ($this->isTplParamSet()) {
             $this->sUserTpl = $_REQUEST[self::REQUEST_PARAM_NAME];
             $oCookie->set(self::COOKIE_NAME, $this->sUserTpl, static::COOKIE_LIFETIME);
