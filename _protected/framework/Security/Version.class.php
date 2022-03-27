@@ -52,7 +52,7 @@ final class Version
      */
     const KERNEL_VERSION = '17.1.8';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELEASE_DATE = '2022-03-16';
+    const KERNEL_RELEASE_DATE = '2022-04-02';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7Builder.com';
