@@ -4,7 +4,7 @@
  * @desc             Loading and management files languages (I18N).
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2010-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2010-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Translate
  */
@@ -22,15 +22,17 @@ namespace PH7\Framework\Translate {
     class Lang
     {
         private const COOKIE_NAME = 'pHSLang';
-        const COOKIE_LIFETIME = 172800;
-        const REQUEST_PARAM_NAME = 'l';
-        const LANG_FOLDER_LENGTH = 5;
+        private const COOKIE_LIFETIME = 172800;
+        private const REQUEST_PARAM_NAME = 'l';
+
+        public const LANG_FOLDER_LENGTH = 5;
         public const ISO_LANG_CODE_LENGTH = 2;
 
         public const FIRST_ISO_CODE = 1;
         public const LAST_ISO_CODE = 2;
 
-        const DEFAULT_LOCALE = 'en_US';
+        public const DEFAULT_LOCALE = 'en_US';
+
 
         private Config $oConfig;
 
@@ -138,7 +140,7 @@ namespace PH7\Framework\Translate {
          *
          * @return string The locale language name (e.g., en_US).
          */
-        public function getLocaleName()
+        public function getLocaleName(): string
         {
             return $this->sLangName;
         }

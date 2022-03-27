@@ -73,7 +73,8 @@ class Language
 
     private function doesUserLangExist(): bool
     {
-        return !empty($_GET[self::REQUEST_PARAM_NAME]) && is_file(PH7_ROOT_INSTALL . self::LANG_FOLDER_NAME . $_GET[self::REQUEST_PARAM_NAME] . PH7_DS . self::LANG_FILENAME);
+        return !empty($_GET[self::REQUEST_PARAM_NAME]) &&
+            is_file(PH7_ROOT_INSTALL . self::LANG_FOLDER_NAME . $_GET[self::REQUEST_PARAM_NAME] . PH7_DS . self::LANG_FILENAME);
     }
 
     private function doesCookieLangExist(): bool
