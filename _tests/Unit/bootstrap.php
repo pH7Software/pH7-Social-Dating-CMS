@@ -13,6 +13,9 @@ use PH7\Framework\Translate\Lang;
 
 define('PH7', 1);
 
+// Set default HTTP_ACCEPT_LANGUAGE SERVER var
+$_SERVER['HTTP_ACCEPT_LANGUAGE'] = 'en-GB,en;q=0.9';
+
 // Timezone constant
 define('PH7_DEFAULT_TIMEZONE', 'America/Chicago');
 
@@ -90,8 +93,6 @@ FrameworkLoader::getInstance()->init();
 // Loading classes from ~/protected/app/includes/classes/*
 require PH7_PATH_APP . 'includes/classes/Loader/Autoloader.php';
 AppLoader::getInstance()->init();
-
-$_SERVER['HTTP_ACCEPT_LANGUAGE'] = 'en-GB,en;q=0.9';
 
 if (!function_exists('escape')) {
     new Str; // Load class to get escape() function
