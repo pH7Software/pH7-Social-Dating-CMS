@@ -43,7 +43,7 @@ class CDateTime
      */
     public function get($mTime = null, $mTimeZone = null): self
     {
-        $sSetTime = function () use ($mTime) {
+        $sSetTime = static function () use ($mTime) {
             if ($mTime !== null) {
                 $iTimestamp = !is_numeric($mTime) ? strtotime($mTime) : $mTime;
                 return date(self::DEFAULT_DATE_FORMAT, $iTimestamp);
