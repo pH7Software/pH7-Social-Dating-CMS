@@ -19,6 +19,7 @@ class Language
     public const LANG_FILENAME = 'install.lang.php';
     public const LANG_FOLDER_NAME = 'langs/';
 
+    private const ISO_LANG_CODE_LENGTH = 2;
     private const REQUEST_PARAM_NAME = 'l';
 
     private string $sLang;
@@ -55,7 +56,7 @@ class Language
                 substr(
                     rtrim($sLang),
                     0,
-                    2
+                    self::ISO_LANG_CODE_LENGTH
                 )
             ),
             ENT_QUOTES
