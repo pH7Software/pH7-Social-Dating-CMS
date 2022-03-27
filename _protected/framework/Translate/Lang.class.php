@@ -21,14 +21,14 @@ namespace PH7\Framework\Translate {
 
     class Lang
     {
-        const COOKIE_NAME = 'pHSLang';
+        private const COOKIE_NAME = 'pHSLang';
         const COOKIE_LIFETIME = 172800;
         const REQUEST_PARAM_NAME = 'l';
         const LANG_FOLDER_LENGTH = 5;
-        const ISO_LANG_CODE_LENGTH = 2;
+        public const ISO_LANG_CODE_LENGTH = 2;
 
-        const FIRST_ISO_CODE = 1;
-        const LAST_ISO_CODE = 2;
+        public const FIRST_ISO_CODE = 1;
+        public const LAST_ISO_CODE = 2;
 
         const DEFAULT_LOCALE = 'en_US';
 

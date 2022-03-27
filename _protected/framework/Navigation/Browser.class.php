@@ -18,6 +18,7 @@ defined('PH7') or exit('Restricted access');
 use PH7\Framework\Http\Http;
 use PH7\Framework\Server\Server;
 use PH7\Framework\Str\Str;
+use PH7\Framework\Translate\Lang;
 
 /**
  * @internal In this class, there're some yoda conditions.
@@ -44,9 +45,9 @@ class Browser
         $oStr = new Str;
         $sLang = explode(',', Server::getVar(Server::HTTP_ACCEPT_LANGUAGE))[0];
 
-        // The rtrim function is slightly faster than chop function
-        $iFullLangCode = ($bFullLangCode ? 5 : 2);
+        $iFullLangCode = $bFullLangCode ? 5 : Lang::ISO_LANG_CODE_LENGTH;
 
+        // The rtrim function is slightly faster than chop function
         return $oStr->escape($oStr->lower(substr(rtrim($sLang), 0, $iFullLangCode)));
     }
 
