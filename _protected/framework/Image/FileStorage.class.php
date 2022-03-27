@@ -26,7 +26,7 @@ class FileStorage implements Storageable
     public const JPG = IMAGETYPE_JPEG;
     public const PNG = IMAGETYPE_PNG;
     public const GIF = IMAGETYPE_GIF;
-    public const WEBP = 18; // TODO: From PHP 7.1, IMAGETYPE_WEBP is available
+    public const WEBP = IMAGETYPE_WEBP;
 
     public const JPG_NAME = 'jpg';
     public const PNG_NAME = 'png';
