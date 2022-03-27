@@ -91,6 +91,8 @@ FrameworkLoader::getInstance()->init();
 require PH7_PATH_APP . 'includes/classes/Loader/Autoloader.php';
 AppLoader::getInstance()->init();
 
+$_SERVER['HTTP_ACCEPT_LANGUAGE'] = 'en-GB,en;q=0.9';
+
 if (!function_exists('escape')) {
     new Str; // Load class to get escape() function
 }
