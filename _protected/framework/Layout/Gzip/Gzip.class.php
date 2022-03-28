@@ -116,11 +116,10 @@ class Gzip
     /**
      * Displays compressed files.
      *
-     * @return void
-     *
      * @throws Exception If the cache file couldn't be written or read.
+     * @throws \PH7\Framework\Http\Exception If HTTP headers have already been sent.
      */
-    public function run()
+    public function run(): void
     {
         if (!$this->isValidStaticTypeFile()) {
             Http::setHeadersByCode(StatusCode::SERVICE_UNAVAILABLE);
