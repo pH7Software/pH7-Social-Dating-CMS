@@ -15,10 +15,10 @@ use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax\EmptyCodeException;
 
 class CurlyTest extends SyntaxTestCase
 {
-    const INPUT_DIR = 'input/curly/';
-    const OUTPUT_DIR = 'output/curly/';
-    const INPUT_TPL_FILE_EXT = '.curly.tpl';
-    const OUTPUT_PHP_FILE_EXT = '.curly.output';
+    protected const INPUT_DIR = 'input/curly/';
+    protected const OUTPUT_DIR = 'output/curly/';
+    protected const INPUT_TPL_FILE_EXT = '.curly.tpl';
+    protected const OUTPUT_PHP_FILE_EXT = '.curly.output';
 
     private CurlySyntax $oCurlySyntax;
 

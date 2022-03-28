@@ -15,10 +15,10 @@ use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax\Tal as TalSyntax;
 
 class TalTest extends SyntaxTestCase
 {
-    const INPUT_DIR = 'input/tal/';
-    const OUTPUT_DIR = 'output/tal/';
-    const INPUT_TPL_FILE_EXT = '.tal.tpl';
-    const OUTPUT_PHP_FILE_EXT = '.tal.output';
+    protected const INPUT_DIR = 'input/tal/';
+    protected const OUTPUT_DIR = 'output/tal/';
+    protected const INPUT_TPL_FILE_EXT = '.tal.tpl';
+    protected const OUTPUT_PHP_FILE_EXT = '.tal.output';
 
     private TalSyntax $oTalSyntax;
 
