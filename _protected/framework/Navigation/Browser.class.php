@@ -170,7 +170,7 @@ class Browser
 
     public function getIfModifiedSince(): ?string
     {
-        return substr(Server::getVar(Server::HTTP_IF_MODIFIED_SINCE));
+        return substr(Server::getVar(Server::HTTP_IF_MODIFIED_SINCE), 0, 29);
     }
 
     public function isAjaxRequest(): bool
