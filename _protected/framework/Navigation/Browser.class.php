@@ -155,7 +155,7 @@ class Browser
     /**
      * @return string|null The HTTP User Agent is it exists, otherwise the NULL value.
      */
-    public function getUserAgent()
+    public function getUserAgent(): ?string
     {
         return Server::getVar(Server::HTTP_USER_AGENT);
     }
@@ -163,7 +163,7 @@ class Browser
     /**
      * @return string|null The HTTP Referer is it exists, otherwise the NULL value.
      */
-    public function getHttpReferer()
+    public function getHttpReferer(): ?string
     {
         return Server::getVar(Server::HTTP_REFERER);
     }
@@ -178,14 +178,7 @@ class Browser
         return array_key_exists(Server::HTTP_X_REQUESTED_WITH, Server::getVar());
     }
 
-
-
-    /**
-     * @param string $sValue
-     *
-     * @return bool
-     */
-    public static function isDefaultBrowserHexCodeFound($sValue)
+    public static function isDefaultBrowserHexCodeFound(string $sValue): bool
     {
         return in_array($sValue, self::DEFAULT_BROWSER_HEX_CODES, true);
     }
@@ -197,7 +190,7 @@ class Browser
      *
      * @return string The favicon image.
      */
-    public static function favicon($sUrl)
+    public static function favicon(string $sUrl): string
     {
         $sDomainName = Http::getHostName($sUrl);
 
