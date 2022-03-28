@@ -15,6 +15,15 @@ use PHPUnit\Framework\TestCase;
 
 final class BrowserTest extends TestCase
 {
+    private Browser $oBrowser;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->oBrowser = new Browser();
+    }
+
     /**
      * @dataProvider defaultBrowserHexCodesProvider
      */
@@ -30,6 +39,22 @@ final class BrowserTest extends TestCase
         $bResult = Browser::isDefaultBrowserHexCodeFound('#FFF');
 
         $this->assertFalse($bResult);
+    }
+
+    public function testIfModifiedSinceExists(): void
+    {
+        $sExpectedDate = 'Tue, 29 Feb 2022 10:20:26 GMT';
+
+        $_SERVER['HTTP_IF_MODIFIED_SINCE'] = $sExpectedDate;
+
+        $this->assertSame($sExpectedDate, $this->oBrowser->getIfModifiedSince());
+    }
+
+    public function testIfModifiedSinceDoesNotExist(): void
+    {
+        unset($_SERVER['HTTP_IF_MODIFIED_SINCE']);
+
+        $this->assertNull($this->oBrowser->getIfModifiedSince());
     }
 
     public function defaultBrowserHexCodesProvider(): array
