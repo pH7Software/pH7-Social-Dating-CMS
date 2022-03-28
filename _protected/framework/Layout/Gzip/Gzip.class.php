@@ -63,9 +63,9 @@ class Gzip
 
     private string $sCacheDir;
 
-    private array $aElements;
+    private ?string $sIfModifiedDate;
 
-    private ?int $iIfModified;
+    private array $aElements;
 
     private bool $bCaching;
 
@@ -181,7 +181,7 @@ class Gzip
 
         $oBrowser = new Browser;
 
-        $this->iIfModified = !empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? substr($_SERVER['HTTP_IF_MODIFIED_SINCE'], 0, 29) : null;
+        $this->sIfModifiedDate = $oBrowser->getIfModifiedSince();
 
         $this->sCacheDir .= $this->oHttpRequest->get('t') . PH7_DS;
         $this->oFile->createDir($this->sCacheDir);
@@ -442,7 +442,7 @@ class Gzip
      */
     private function hasHttpHeaderExpired(string $sSourcePath): bool
     {
-        return !empty($this->iIfModified) && $this->oFile->getModifTime($sSourcePath) > $this->iIfModified;
+        return !empty($this->sIfModifiedDate) && $this->oFile->getModifTime($sSourcePath) > $this->sIfModifiedDate;
     }
 
     /**

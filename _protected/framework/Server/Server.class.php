@@ -45,6 +45,7 @@ final class Server
     const HTTP_USER_AGENT = 'HTTP_USER_AGENT';
     const HTTP_REFERER = 'HTTP_REFERER';
     const HTTP_X_REQUESTED_WITH = 'HTTP_X_REQUESTED_WITH';
+    const HTTP_IF_MODIFIED_SINCE = 'HTTP_IF_MODIFIED_SINCE';
 
     const LOCAL_IP = '127.0.0.1';
     const LOCAL_HOSTNAME = 'localhost';

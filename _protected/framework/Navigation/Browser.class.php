@@ -168,13 +168,17 @@ class Browser
         return Server::getVar(Server::HTTP_REFERER);
     }
 
-    /**
-     * @return bool
-     */
-    public function isAjaxRequest()
+    public function getIfModifiedSince(): ?string
+    {
+        return substr(Server::getVar(Server::HTTP_IF_MODIFIED_SINCE));
+    }
+
+    public function isAjaxRequest(): bool
     {
         return array_key_exists(Server::HTTP_X_REQUESTED_WITH, Server::getVar());
     }
+
+
 
     /**
      * @param string $sValue
