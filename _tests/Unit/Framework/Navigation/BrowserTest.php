@@ -41,7 +41,7 @@ final class BrowserTest extends TestCase
         $this->assertFalse($bResult);
     }
 
-    public function testIfModifiedSinceExists(): void
+    public function testIfModifiedSinceHeaderExists(): void
     {
         $sExpectedDate = 'Tue, 29 Feb 2022 10:20:26 GMT';
 
@@ -50,7 +50,7 @@ final class BrowserTest extends TestCase
         $this->assertSame($sExpectedDate, $this->oBrowser->getIfModifiedSince());
     }
 
-    public function testIfModifiedSinceDoesNotExist(): void
+    public function testIfModifiedSinceHeaderDoesNotExist(): void
     {
         unset($_SERVER['HTTP_IF_MODIFIED_SINCE']);
 
