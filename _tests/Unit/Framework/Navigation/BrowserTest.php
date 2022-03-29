@@ -48,6 +48,38 @@ final class BrowserTest extends TestCase
         $this->assertFalse($bResult);
     }
 
+    public function testUserAgentSet(): void
+    {
+        $sExpectedUserAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10)';
+
+        $_SERVER['HTTP_USER_AGENT'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10)';
+
+        $this->assertSame($sExpectedUserAgent, $this->oBrowser->getUserAgent());
+    }
+
+    public function testUserAgentUnset(): void
+    {
+        $_SERVER['HTTP_USER_AGENT'] = '';
+
+        $this->assertNull($this->oBrowser->getUserAgent());
+    }
+
+    public function testHttpRefererSet(): void
+    {
+        $sExpectedReferer = 'https://ph7builder.com';
+
+        $_SERVER['HTTP_REFERER'] = $sExpectedReferer;
+
+        $this->assertSame($sExpectedReferer, $this->oBrowser->getHttpReferer());
+    }
+
+    public function testHttpRefererUnset(): void
+    {
+        unset($_SERVER['HTTP_REFERER']);
+
+        $this->assertNull($this->oBrowser->getHttpReferer());
+    }
+
     public function testIfModifiedSinceHeaderExists(): void
     {
         $sExpectedDate = 'Tue, 29 Feb 2022 08:16:20 GMT';
