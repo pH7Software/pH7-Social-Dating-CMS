@@ -1,7 +1,7 @@
 <?php
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2020, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2020-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Test / Unit / Framework / Navigation
  */
@@ -24,6 +24,13 @@ final class BrowserTest extends TestCase
         $this->oBrowser = new Browser();
     }
 
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        $this->cleanupGlobalServerVars();
+    }
+
     /**
      * @dataProvider defaultBrowserHexCodesProvider
      */
@@ -43,7 +50,7 @@ final class BrowserTest extends TestCase
 
     public function testIfModifiedSinceHeaderExists(): void
     {
-        $sExpectedDate = 'Tue, 29 Feb 2022 10:20:26 GMT';
+        $sExpectedDate = 'Tue, 29 Feb 2022 08:16:20 GMT';
 
         $_SERVER['HTTP_IF_MODIFIED_SINCE'] = $sExpectedDate;
 
@@ -57,11 +64,48 @@ final class BrowserTest extends TestCase
         $this->assertNull($this->oBrowser->getIfModifiedSince());
     }
 
+    /**
+     * @dataProvider mobileServerHeadersProvider
+     */
+    public function testIsMobile(string $sServerKeyName, string $sServerValue): void
+    {
+        $_SERVER[$sServerKeyName] = $sServerValue;
+
+        $this->assertTrue($this->oBrowser->isMobile());
+    }
+
+    public function testIsNotMobile(): void
+    {
+        $_SERVER['HTTP_USER_AGENT'] = 'Windows ...';
+
+        $this->assertFalse($this->oBrowser->isMobile());
+    }
+
     public function defaultBrowserHexCodesProvider(): array
     {
         return [
             ['#000'],
             ['#000000']
         ];
+    }
+
+    public function mobileServerHeadersProvider(): array
+    {
+        return [
+            ['HTTP_X_WAP_PROFILE', 'something'],
+            ['HTTP_PROFILE', 'something'],
+            ['HTTP_USER_AGENT', 'Mobile'],
+            ['HTTP_USER_AGENT', 'Phone'],
+            ['HTTP_USER_AGENT', 'Android 123'],
+            ['HTTP_USER_AGENT', 'My Opera Mini 000'],
+        ];
+    }
+
+    private function cleanupGlobalServerVars(): void
+    {
+        unset($_SERVER['HTTP_X_WAP_PROFILE']);
+        unset($_SERVER['HTTP_PROFILE']);
+        unset($_SERVER['HTTP_USER_AGENT']);
+        unset($_SERVER['HTTP_IF_MODIFIED_SINCE']);
     }
 }
