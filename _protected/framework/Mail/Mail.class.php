@@ -1,13 +1,12 @@
 <?php
 /**
- * @title            Mail Class
  * @desc             Mail Class derived from Swift Class
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mail
- * @version          1.2 (Last update 10/13/2015)
+ * @version          1.3 (Last update 11/04/2021)
  */
 
 declare(strict_types=1);
@@ -85,7 +84,7 @@ class Mail implements Mailable
      *
      * @return bool Returns TRUE if the mail was successfully accepted for delivery, FALSE otherwise.
      */
-    protected function phpMail(array $aParams)
+    protected function phpMail(array $aParams): bool
     {
         // If the email sender is empty, we define the server email.
         if (empty($aParams['from'])) {
