@@ -128,7 +128,7 @@ class Browser
             }
         }
 
-        $sUserAgent = self::getUserAgent();
+        $sUserAgent = $this->getUserAgent();
         if (null !== $sUserAgent) {
             // For most mobile/tablet browsers
             if (false !== strpos($sUserAgent, 'Mobile')) {
