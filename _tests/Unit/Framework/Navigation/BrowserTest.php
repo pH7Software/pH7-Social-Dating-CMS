@@ -98,6 +98,14 @@ final class BrowserTest extends TestCase
         $this->assertFalse($this->oBrowser->isMobile());
     }
 
+    public function testFavicon(): void
+    {
+        $sActual = Browser::favicon('https://ph7cms.com');
+        $sExpected = 'https://www.google.com/s2/favicons?domain=ph7cms.com';
+
+        $this->assertSame($sExpected, $sActual);
+    }
+
     public function defaultBrowserHexCodesProvider(): array
     {
         return [
