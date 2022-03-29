@@ -1,10 +1,12 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Contact / Inc / Class
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -13,29 +15,22 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class Contact extends Core
 {
-    /** @var string */
-    private $sMail;
+    private string $sMail;
 
-    /** @var string */
-    private $sSubject;
+    private string $sSubject;
 
-    /** @var string */
-    private $sFeedbackEmail;
+    private string $sFeedbackEmail;
 
-    /** @var string */
-    private $sPhone;
+    private string $sPhone;
 
-    /** @var string */
-    private $sUrl;
+    private string $sUrl;
 
     /**
      * Initialize the properties of the class, then send the feedback to the admin.
      *
      * @return int Number of recipients who were accepted for delivery.
-     *
-     * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
-    public function sendMessage()
+    public function sendMessage(): int
     {
         $this->sFeedbackEmail = DbConfig::getSetting('feedbackEmail');
         $this->sMail = $this->httpRequest->post('mail');
@@ -51,7 +46,7 @@ class Contact extends Core
      *
      * @return int Number of recipients who were accepted for delivery.
      */
-    private function goMail()
+    private function goMail(): int
     {
         $this->view->last_name = t('Last Name: %0%', $this->httpRequest->post('last_name'));
         $this->view->first_name = t('First Name: %0%', $this->httpRequest->post('first_name'));
