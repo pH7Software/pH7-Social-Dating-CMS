@@ -94,12 +94,13 @@ class Browser
         }
 
         $sEncoding = Server::getVar(Server::HTTP_ACCEPT_ENCODING);
-        if (false !== strpos($sEncoding, 'gzip')) {
-            return 'gzip';
-        }
 
         if (false !== strpos($sEncoding, 'x-gzip')) {
             return 'x-gzip';
+        }
+
+        if (false !== strpos($sEncoding, 'gzip')) {
+            return 'gzip';
         }
 
         return false;

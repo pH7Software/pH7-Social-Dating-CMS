@@ -65,6 +65,23 @@ final class BrowserTest extends TestCase
     }
 
     /**
+     * @dataProvider encodingServerHeadersProvider
+     */
+    public function testGetEncodingType(string $sEncodingType): void
+    {
+        $_SERVER['HTTP_ACCEPT_ENCODING'] = $sEncodingType;
+
+        $this->assertSame($sEncodingType, $this->oBrowser->encoding());
+    }
+
+    public function testInvalidEncoding(): void
+    {
+        $_SERVER['HTTP_ACCEPT_ENCODING'] = 'wrong encoding type';
+
+        $this->assertFalse($this->oBrowser->encoding());
+    }
+
+    /**
      * @dataProvider mobileServerHeadersProvider
      */
     public function testIsMobile(string $sServerKeyName, string $sServerValue): void
@@ -89,6 +106,14 @@ final class BrowserTest extends TestCase
         ];
     }
 
+    public function encodingServerHeadersProvider(): array
+    {
+        return [
+            ['gzip'],
+            ['x-gzip'],
+        ];
+    }
+
     public function mobileServerHeadersProvider(): array
     {
         return [
@@ -103,6 +128,7 @@ final class BrowserTest extends TestCase
 
     private function cleanupGlobalServerVars(): void
     {
+        unset($_SERVER['HTTP_ACCEPT_ENCODING']);
         unset($_SERVER['HTTP_X_WAP_PROFILE']);
         unset($_SERVER['HTTP_PROFILE']);
         unset($_SERVER['HTTP_USER_AGENT']);
