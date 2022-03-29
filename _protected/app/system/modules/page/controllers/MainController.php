@@ -1,10 +1,12 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Page / Controller
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -13,13 +15,12 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class MainController extends Controller
 {
-    const HTML_CACHE_ENABLED = false;
-    const STATIC_CACHE_LIFETIME = 604800; // A week
+    private const HTML_CACHE_ENABLED = false;
+    private const STATIC_CACHE_LIFETIME = 604800; // A week
 
-    const DATE_FORMAT_LEGAL_PAGE = 'M d, Y';
+    private const DATE_FORMAT_LEGAL_PAGE = 'M d, Y';
 
-    /** @var string */
-    private $sTitle;
+    private string $sTitle;
 
     public function __construct()
     {
@@ -72,9 +73,9 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function terms()
+    public function terms(): void
     {
-        // For SEO: Google shouldn't waste time indexing TOS page
+        // SEO - Google shouldn't waste time indexing TOS page
         $this->view->header = Meta::NOINDEX;
 
         $this->sTitle = t('Terms and Conditions of Use');
@@ -85,7 +86,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function affiliateTerms()
+    public function affiliateTerms(): void
     {
         $this->view->header = Meta::NOINDEX;
 
@@ -97,7 +98,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function privacy()
+    public function privacy(): void
     {
         $this->view->header = Meta::NOINDEX;
 
@@ -109,7 +110,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function legalNotice()
+    public function legalNotice(): void
     {
         $this->view->header = Meta::NOINDEX;
 
@@ -124,7 +125,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function helpUs()
+    public function helpUs(): void
     {
         $this->sTitle = t('Help Us');
         $this->view->page_title = $this->sTitle;
@@ -134,7 +135,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function shareSite()
+    public function shareSite(): void
     {
         $this->sTitle = t('Share this site with others!');
         $this->view->page_title = $this->sTitle;
@@ -144,7 +145,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function job()
+    public function job(): void
     {
         $this->sTitle = t('Jobs - Careers @ %site_name%');
         $this->view->page_title = $this->sTitle;
@@ -154,7 +155,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function link()
+    public function link(): void
     {
         $this->sTitle = t('Links / Partners of %site_name%');
         $this->view->page_title = $this->sTitle;
@@ -164,7 +165,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    private function enableStaticTplCache()
+    private function enableStaticTplCache(): void
     {
         $this->view->setCaching(self::HTML_CACHE_ENABLED);
         $this->view->setCacheExpire(self::STATIC_CACHE_LIFETIME);
