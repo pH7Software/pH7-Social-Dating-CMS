@@ -5507,7 +5507,7 @@ msgid "To:"
 msgstr ""
 
 #: _protected/app/system/modules/invite/forms/InviteForm.php:34
-msgid "Upto 10 email addresses separated by commas."
+msgid "Upto 10 email addresses separated by commas \",\""
 msgstr ""
 
 #: _protected/app/system/modules/invite/forms/InviteForm.php:39

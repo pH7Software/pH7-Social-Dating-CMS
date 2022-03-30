@@ -17,8 +17,8 @@ use PH7\Framework\Security\Validate\Validate;
 
 class InviteFormProcess extends Form
 {
-    const MAX_EMAIL_ADDRESSES = 10;
-    const EMAIL_DELIMITER = ',';
+    private const MAX_EMAIL_ADDRESSES = 10;
+    private const EMAIL_DELIMITER = ',';
 
     public function __construct()
     {
@@ -80,11 +80,9 @@ class InviteFormProcess extends Form
     }
 
     /**
-     * @return array
-     *
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    private function getEmails()
+    private function getEmails(): array
     {
         return explode(
             self::EMAIL_DELIMITER,
