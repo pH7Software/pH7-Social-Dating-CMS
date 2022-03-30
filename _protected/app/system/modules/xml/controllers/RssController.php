@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Xml / Controller
  */
@@ -17,6 +17,8 @@ use PH7\Framework\Xml\Link;
 
 class RssController extends MainController implements XmlControllable
 {
+    private const RSS_TYPE = 'rss';
+
     public function __construct()
     {
         parent::__construct();
@@ -53,7 +55,7 @@ class RssController extends MainController implements XmlControllable
         $sAction = $this->httpRequest->get('action', Type::STRING);
         $mParam = $this->httpRequest->get('param');
         $this->generateXmlRouter($sAction, $mParam);
-        $this->sXmlType = 'rss';
+        $this->sXmlType = self::RSS_TYPE;
         $this->view->current_date = DateFormat::getRss(); // Date format for RSS feed
 
         // RSS router
