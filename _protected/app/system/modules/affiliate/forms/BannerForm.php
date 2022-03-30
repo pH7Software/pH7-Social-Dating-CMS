@@ -56,7 +56,8 @@ class BannerForm
             $oForm->addElement(new HTMLExternal('</div>')); // End ads div tag
             $oForm->addElement(new HTMLExternal('<br /><hr /><br />'));
         }
-        $oForm->render();
         unset($oSysVar);
+
+        $oForm->render();
     }
 }
