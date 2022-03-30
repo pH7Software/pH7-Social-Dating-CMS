@@ -23,20 +23,17 @@ use stdClass;
 
 class Newsletter extends Core
 {
-    const MAX_BULK_EMAIL_NUMBER = 250;
-    const SLEEP_SEC = 10;
+    private const MAX_BULK_EMAIL_NUMBER = 200;
+    private const SLEEP_SEC = 5;
 
-    const MEMBER_DATA_METHOD = 'getProfiles';
-    const SUBSCRIBER_DATA_METHOD = 'getSubscribers';
+    private const MEMBER_DATA_METHOD = 'getProfiles';
+    private const SUBSCRIBER_DATA_METHOD = 'getSubscribers';
 
-    /** @var SubscriberModel */
-    private $oSubscriberModel;
+    private SubscriberModel $oSubscriberModel;
 
-    /** @var string */
-    private $sSubscribersMethod;
+    private string $sSubscribersMethod;
 
-    /** @var int */
-    private static $iTotalSent = 0;
+    private static int $iTotalSent = 0;
 
     public function __construct()
     {
@@ -52,7 +49,7 @@ class Newsletter extends Core
      *
      * @return array ['status' => integer, 'nb_mail_sent' => integer]
      */
-    public function sendMessages()
+    public function sendMessages(): array
     {
         $iStatus = 0; // Default value
 
@@ -89,7 +86,7 @@ class Newsletter extends Core
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    private function sendMail(stdClass $oSubscriber, Mailable $oMailEngine)
+    private function sendMail(stdClass $oSubscriber, Mailable $oMailEngine): int
     {
         $this->view->content = $this->httpRequest->post('body', Http::NO_CLEAN);
 
@@ -107,21 +104,13 @@ class Newsletter extends Core
         return $oMailEngine->send($aInfo, $sHtmlMsg);
     }
 
-    /**
-     * @param stdClass $oSubscriber
-     *
-     * @return bool
-     */
-    private function isUserOptedIn(stdClass $oSubscriber)
+    private function isUserOptedIn(stdClass $oSubscriber): bool
     {
         return $this->isMemberData($oSubscriber) &&
             !$this->oSubscriberModel->isNotification($oSubscriber->profileId, 'enableNewsletters');
     }
 
-    /**
-     * @return bool
-     */
-    private function isMemberData()
+    private function isMemberData(): bool
     {
         return $this->sSubscribersMethod === self::MEMBER_DATA_METHOD;
     }

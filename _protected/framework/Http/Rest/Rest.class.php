@@ -1,10 +1,9 @@
 <?php
 /**
- * @title            Rest Class
  * @desc             Rest (REpresentational State Transfer) Class.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Http / Rest
  * @version          1.3
@@ -22,15 +21,13 @@ use PH7\JustHttp\StatusCode;
 
 class Rest extends Http
 {
-    const CONTENT_TYPE = 'application/json';
+    private const CONTENT_TYPE = 'application/json';
 
-    /** @var int */
-    private $iCode;
+    private int $iCode;
 
-    /** @var string */
-    private $sData;
+    private string $sData;
 
-    /** @var array */
+    /** @var array|string */
     private $aRequest;
 
     /**
@@ -42,14 +39,12 @@ class Rest extends Http
     }
 
     /**
-     * @param string $sData The data from a request
+     * @param string|false $mData The data from a request
      * @param int $iStatus Status Code. Default 200
-     *
-     * @return void
      */
-    public function response($sData, $iStatus = StatusCode::OK)
+    public function response(string $mData, int $iStatus = StatusCode::OK): void
     {
-        $this->sData = $sData;
+        $this->sData = (string)$mData;
 
         /**
          * @internal Http::getStatusCode() returns FALSE when it doesn't find any valid HTTP codes.
@@ -75,10 +70,7 @@ class Rest extends Http
         return Stream::getInput();
     }
 
-    /**
-     * @return void
-     */
-    private function inputs()
+    private function inputs(): void
     {
         switch ($this->getRequestMethod()) {
             case HttpRequest::METHOD_POST:
