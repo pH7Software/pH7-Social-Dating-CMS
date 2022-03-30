@@ -485,7 +485,18 @@ class SettingForm
         /********** Automation **********/
         $oForm->addElement(new HTMLExternal('</div></div><div class="content" id="automation"><div class="col-md-10"><h2 class="underline">' . t('Automation') . '</h2>'));
 
-        $oForm->addElement(new Textbox(t('Secret word for the cron URL:'), 'cron_security_hash', ['description' => t('Your very secret word for the cron URL. It will be used for running automated cron jobs.'), 'value' => DbConfig::getSetting('cronSecurityHash'), 'required' => 1, 'validation' => new Str(1, 64)]));
+        $oForm->addElement(
+            new Textbox(
+                t('Secret word for the cron URL:'),
+                'cron_security_hash',
+                [
+                    'description' => t('Your very secret word for the cron URL. It will be used for running automated cron jobs.'),
+                    'value' => DbConfig::getSetting('cronSecurityHash'),
+                    'required' => 1,
+                    'validation' => new Str(1, 64)
+                ]
+            )
+        );
 
         $oForm->addElement(new Number(t('User inactivity timeout:'), 'user_timeout', ['description' => t('The number of minutes that a member becomes inactive (offline).'), 'value' => DbConfig::getSetting('userTimeout'), 'required' => 1]));
 

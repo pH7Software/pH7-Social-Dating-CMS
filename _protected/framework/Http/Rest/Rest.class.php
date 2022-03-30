@@ -119,18 +119,16 @@ class Rest extends Http
         }
 
         $mData = (new Str)->escape($mData);
+
         return trim($mData);
     }
 
-    /**
-     * Headers Output.
-     *
-     * @return void
-     */
-    private function output()
+    private function output(): void
     {
+        // Headers output
         static::setHeadersByCode($this->iCode);
         static::setContentType(self::CONTENT_TYPE); //Output format
+
         echo $this->sData;
         exit;
     }

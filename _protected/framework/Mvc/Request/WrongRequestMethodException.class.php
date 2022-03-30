@@ -27,6 +27,7 @@ class WrongRequestMethodException extends UserException
      */
     public function __construct($sMethodName, $iCode)
     {
-        parent::__construct(Message::wrongRequestMethodMsg($sMethodName), $iCode);
+        $sMessage = Message::wrongRequestMethodMsg($sMethodName);
+        parent::__construct($sMessage, $iCode);
     }
 }
