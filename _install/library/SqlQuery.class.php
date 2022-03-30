@@ -26,4 +26,6 @@ final class SqlQuery
     public const UPDATE_THEME = "UPDATE %s SET settingValue = :theme WHERE settingName = :setting LIMIT 1";
 
     public const UPDATE_SYS_MODULE = "UPDATE %s SET enabled = :status WHERE folderName = :modName LIMIT 1";
+
+    public const UPDATE_CRON_SECURITY_HASH = "UPDATE %s SET settingValue = :securityHash WHERE settingName = 'cronSecurityHash' LIMIT 1";
 }

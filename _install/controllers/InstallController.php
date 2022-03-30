@@ -440,6 +440,16 @@ class InstallController extends Controller
                                                             ['returnEmail' => $_SESSION['val']['admin_return_email']]
                                                         );
 
+                                                        $rStmt = $DB->prepare(
+                                                            sprintf(
+                                                                SqlQuery::UPDATE_CRON_SECURITY_HASH,
+                                                                $_SESSION['db']['prefix'] . DbTableName::SETTING
+                                                            )
+                                                        );
+                                                        $rStmt->execute(
+                                                            ['securityHash' => generate_hash(2) . 'change_this_secret_cron' . generate_hash(3)]
+                                                        );
+
                                                         if (!empty($_POST['sample_data_request'])) {
                                                             $this->populateSampleUserData(
                                                                 self::TOTAL_MEMBERS_SAMPLE,
