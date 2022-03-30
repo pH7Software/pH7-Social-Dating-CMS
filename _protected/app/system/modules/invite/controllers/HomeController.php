@@ -6,11 +6,13 @@
  * @package        PH7 / App / System / Module / Invite / Controller
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 class HomeController extends Controller
 {
-    public function invitation()
+    public function invitation(): void
     {
         $this->view->page_title = t('Invite your Friends');
         $this->view->meta_description = t('Invite your friends to join %site_name%');

@@ -48,7 +48,7 @@ class InviteFormProcess extends Form
     }
 
     /**
-     * Send the confirm email.
+     * Send the confirmation email.
      *
      * @param string $sEmailAddress The user email.
      * @param Mailable $oMailEngine
