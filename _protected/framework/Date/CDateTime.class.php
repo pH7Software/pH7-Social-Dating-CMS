@@ -45,7 +45,7 @@ class CDateTime
     {
         $sSetTime = static function () use ($mTime) {
             if ($mTime !== null) {
-                $iTimestamp = !is_numeric($mTime) ? strtotime($mTime) : $mTime;
+                $iTimestamp = !is_numeric($mTime) ? (int)strtotime($mTime) : $mTime;
                 return date(self::DEFAULT_DATE_FORMAT, $iTimestamp);
             }
             return 'now';
