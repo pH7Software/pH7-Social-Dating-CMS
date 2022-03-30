@@ -42,7 +42,7 @@ class BannedCoreCron extends Cron
     private const BANNED_IP_FILE_PATH = PH7_PATH_APP_CONFIG . Ban::DIR . Ban::IP_FILE;
 
     private const ERROR_CALLING_WEB_SERVICE_MESSAGE = 'Error calling web service for banned IP URL name: %s';
-    private const ERROR_ADD_BANNED_IP_MESSAGE = 'Error writing new banned IP addresses.';
+    private const ERROR_ADD_BANNED_IP_MESSAGE = 'Error while writing new banned IP addresses.';
 
     /**
      * Web client used to fetch IPs
@@ -52,12 +52,12 @@ class BannedCoreCron extends Cron
     /**
      * Contain new blocked IP just fetched.
      */
-    private array $aNewIps;
+    private array $aNewIps = [];
 
     /**
      * Contain existing blocked IPs.
      */
-    private array $aOldIps;
+    private array $aOldIps = [];
 
     /**
      * IP extracting regular expression.
@@ -129,10 +129,6 @@ class BannedCoreCron extends Cron
      */
     private function callWebService(string $sUrl): bool
     {
-        if ($this->invalidNewIp()) {
-            $this->aNewIps = [];
-        }
-
         $oRemoteResource = $this->oWebClient->get($sUrl);
 
         /**
@@ -163,27 +159,32 @@ class BannedCoreCron extends Cron
     /**
      * Process existing banned IP file and only keep validating IP addresses.
      */
-    private function processExistingIps(): void
+    private function processExistingIps(): bool
     {
         /**
          * We fill a temporary array with current IP addresses
          */
-        $aBannedIps = file(self::BANNED_IP_FILE_PATH);
-        $this->aOldIps = [];
+        if (!$aBannedIps = file(self::BANNED_IP_FILE_PATH)) {
+            return false;
+        }
+
         $aIps = preg_grep($this->sIpRegExp, $aBannedIps);
 
-        if (!empty($aIps)) {
+        if (is_array($aIps)) {
             /**
              * Use a foreach loop in case we have more than one IP per line
              */
             foreach ($aIps as $sIp) {
                 $this->aOldIps[] = $sIp;
             }
+            return true;
         }
+
+        return false;
     }
 
     /**
-     * Read both IPs array, merge and extract only unique one.
+     * Read both IPs array, merge and extract only the unique ones.
      */
     private function processIps(): void
     {
@@ -225,7 +226,7 @@ class BannedCoreCron extends Cron
      */
     private function writeIps(): bool
     {
-        if ($this->invalidNewIp()) {
+        if ($this->invalidNewIps()) {
             return false;
         }
 
@@ -235,7 +236,7 @@ class BannedCoreCron extends Cron
             $this->addIp($sIp);
         }
 
-        return true;
+        return $this->removeDuplicatedEntries();
     }
 
     /**
@@ -243,12 +244,24 @@ class BannedCoreCron extends Cron
      */
     private function addIp(string $sIpAddress): void
     {
-        file_put_contents(self::BANNED_IP_FILE_PATH, $sIpAddress . "\n", FILE_APPEND);
+        $this->file->putFile(self::BANNED_IP_FILE_PATH, $sIpAddress . "\n", FILE_APPEND);
     }
 
-    private function invalidNewIp(): bool
+    private function invalidNewIps(): bool
     {
         return empty($this->aNewIps) || !is_array($this->aNewIps);
+    }
+
+    private function removeDuplicatedEntries(): bool
+    {
+        if (!$aBannedIps = file(self::BANNED_IP_FILE_PATH)) {
+            return false;
+        }
+
+        // Remove duplicated rows
+        $aBannedIps = array_unique($aBannedIps);
+
+        return (bool)$this->file->save(self::BANNED_IP_FILE_PATH, $aBannedIps);
     }
 }
 
