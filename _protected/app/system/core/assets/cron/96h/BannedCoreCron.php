@@ -3,10 +3,12 @@
  * @title            BannedIP Cron Class
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>, Polyna-Maude R.-Summerside <polynamaude@gmail.com>
- * @copyright        (c) 2013-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2013-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / App / System / Core / Asset / Cron / 96H
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -17,6 +19,7 @@ use GuzzleHttp\Client;
 use PH7\Framework\Error\Logger;
 use PH7\Framework\File\Permission\Chmod;
 use PH7\Framework\Security\Ban\Ban;
+use PH7\JustHttp\StatusCode;
 
 /** Reset time limit and increase memory **/
 @set_time_limit(0);
@@ -30,60 +33,54 @@ class BannedCoreCron extends Cron
      *
      * @var array
      */
-    const SVC_URLS = [
+    private const SVC_URLS = [
         'https://www.blocklist.de/downloads/export-ips_all.txt',
         'https://www.badips.com/get/list/ssh/2?age=30d',
         'https://www.rjmblocklist.com/free/badips.txt'
     ];
 
-    const BANNED_IP_FILE_PATH = PH7_PATH_APP_CONFIG . Ban::DIR . Ban::IP_FILE;
+    private const BANNED_IP_FILE_PATH = PH7_PATH_APP_CONFIG . Ban::DIR . Ban::IP_FILE;
 
-    const ERROR_CALLING_WEB_SERVICE_MESSAGE = 'Error calling web service for banned IP URL name: %s';
-    const ERROR_ADD_BANNED_IP_MESSAGE = 'Error writing new banned IP addresses.';
+    private const ERROR_CALLING_WEB_SERVICE_MESSAGE = 'Error calling web service for banned IP URL name: %s';
+    private const ERROR_ADD_BANNED_IP_MESSAGE = 'Error writing new banned IP addresses.';
 
     /**
      * Web client used to fetch IPs
-     *
-     * @var Client
      */
-    private $oWebClient;
+    private Client $oWebClient;
 
     /**
-     * Contain new blocked IP just fetched
-     *
-     * @var array
+     * Contain new blocked IP just fetched.
      */
-    private $aNewIps;
+    private array $aNewIps;
 
     /**
-     * Contain existing blocked IP
-     *
-     * @var array
+     * Contain existing blocked IPs.
      */
-    private $aOldIps;
+    private array $aOldIps;
 
     /**
      * IP extracting regular expression.
-     *
-     * @var string
      */
-    private $sIpRegExp;
+    private string $sIpRegExp;
 
     public function __construct()
     {
         parent::__construct();
 
+        $this->oWebClient = new Client();
+
         /**
-         * Set valid IP regular expression using lazy mode (false)
+         * Set valid IP regular expression using lazy mode ($bStrict = false)
          */
         $this->sIpRegExp = self::regexpIps();
 
         $this->doProcess();
 
-        echo t('Banned IPs list updated!');
+        echo t('The IPs banned list has been updated!');
     }
 
-    protected function doProcess()
+    protected function doProcess(): void
     {
         /**
          * Process each web url we have in the $svcUrl array
@@ -129,17 +126,9 @@ class BannedCoreCron extends Cron
 
     /**
      * Call the web service with the given url and add received IP into $aNewIps
-     *
-     * @param string $sUrl
-     *
-     * @return bool
      */
-    private function callWebService($sUrl)
+    private function callWebService(string $sUrl): bool
     {
-        if (is_null($this->oWebClient)) {
-            $this->oWebClient = new Client();
-        }
-
         if ($this->invalidNewIp()) {
             $this->aNewIps = [];
         }
@@ -149,7 +138,7 @@ class BannedCoreCron extends Cron
         /**
          * Check we get a valid response
          */
-        if ($oRemoteResource->getStatusCode() !== 200) {
+        if ($oRemoteResource->getStatusCode() !== StatusCode::OK) {
             return false;
         }
 
@@ -173,10 +162,8 @@ class BannedCoreCron extends Cron
 
     /**
      * Process existing banned IP file and only keep validating IP addresses.
-     *
-     * @return void
      */
-    private function processExistingIps()
+    private function processExistingIps(): void
     {
         /**
          * We fill a temporary array with current IP addresses
@@ -197,10 +184,8 @@ class BannedCoreCron extends Cron
 
     /**
      * Read both IPs array, merge and extract only unique one.
-     *
-     * @return void
      */
-    private function processIps()
+    private function processIps(): void
     {
         $aNewIps = array_unique(array_merge($this->aNewIps, $this->aOldIps), SORT_STRING);
         $this->aNewIps = $aNewIps;
@@ -209,19 +194,13 @@ class BannedCoreCron extends Cron
     /**
      * Return a valid IPv4 regular expression
      * Using strict reject octal form (leading zero)
-     *
-     * @param bool $bStrict
-     *
-     * @return string
      */
-    public static function regexpIps($bStrict = false)
+    public static function regexpIps(bool $bStrict = false): string
     {
         if ($bStrict) {
             /**
              * Regular Expression representing a valid IPv4 class address
              * Rejecting octal form (leading zero)
-             *
-             * @var string $sIpRegExp
              */
             $sIpRegExp = '/(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.';
             $sIpRegExp .= '(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.';
@@ -230,9 +209,7 @@ class BannedCoreCron extends Cron
         } else {
             /**
              * Regular Expression representing a valid IPv4 class address
-             * We accept leading 0 but they normally imply octal so we shouldn't !!!
-             *
-             * @var string $sIpRegExp
+             * We accept leading 0, but they normally imply octal so we shouldn't!
              */
             $sIpRegExp = '/(25[0-5]|2[0-9][0-9]|[01]?[0-9][0-9]?)\.';
             $sIpRegExp .= '(25[0-5]|2[0-9][0-9]|[01]?[0-9][0-9]?)\.';
@@ -245,10 +222,8 @@ class BannedCoreCron extends Cron
 
     /**
      * Write IPs to the configs/banned/ip.txt file.
-     *
-     * @return bool
      */
-    private function writeIps()
+    private function writeIps(): bool
     {
         if ($this->invalidNewIp()) {
             return false;
@@ -265,20 +240,13 @@ class BannedCoreCron extends Cron
 
     /**
      * Add single address IP into the banned IPs list.
-     *
-     * @param string $sIpAddress
-     *
-     * @return void
      */
-    private function addIp($sIpAddress)
+    private function addIp(string $sIpAddress): void
     {
         file_put_contents(self::BANNED_IP_FILE_PATH, $sIpAddress . "\n", FILE_APPEND);
     }
 
-    /**
-     * @return bool
-     */
-    private function invalidNewIp()
+    private function invalidNewIp(): bool
     {
         return empty($this->aNewIps) || !is_array($this->aNewIps);
     }
