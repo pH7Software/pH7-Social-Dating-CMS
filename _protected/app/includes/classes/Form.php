@@ -15,6 +15,7 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class Form extends Framework\Layout\Form\Form
 {
+    // Import the trait
     use Framework\Layout\Form\Message;
 
     const MIN_STRING_FIELD_LENGTH = 2;

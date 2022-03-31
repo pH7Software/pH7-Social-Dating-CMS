@@ -18,6 +18,9 @@ use PH7\Framework\Layout\Form\Message;
 
 class WrongRequestMethodException extends UserException
 {
+    // Import Message trait
+    use Message;
+
     const GET_METHOD = 1;
     const POST_METHOD = 2;
 
@@ -27,7 +30,7 @@ class WrongRequestMethodException extends UserException
      */
     public function __construct($sMethodName, $iCode)
     {
-        $sMessage = Message::wrongRequestMethodMsg($sMethodName);
+        $sMessage = self::wrongRequestMethodMsg($sMethodName);
         parent::__construct($sMessage, $iCode);
     }
 }
