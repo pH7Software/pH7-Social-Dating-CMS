@@ -18,8 +18,8 @@ class Form extends Framework\Layout\Form\Form
     // Import the trait
     use Framework\Layout\Form\Message;
 
-    const MIN_STRING_FIELD_LENGTH = 2;
-    const MAX_STRING_FIELD_LENGTH = 200;
+    public const MIN_STRING_FIELD_LENGTH = 2;
+    public const MAX_STRING_FIELD_LENGTH = 200;
 
     /**
      * To get Value Data from the database.
@@ -77,12 +77,8 @@ class Form extends Framework\Layout\Form\Form
 
     /**
      * Prevent against brute-force attack to avoid drowning the server and database.
-     *
-     * @param int $iDelayInSec Delay in seconds.
-     *
-     * @return void
      */
-    protected function preventBruteForce($iDelayInSec)
+    protected function preventBruteForce(int $iDelayInSec): void
     {
         sleep($iDelayInSec);
     }
