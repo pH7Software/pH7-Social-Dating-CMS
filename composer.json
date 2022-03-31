@@ -67,7 +67,7 @@
     "facebook/graph-sdk": "^5.6",
     "fakerphp/faker": "^1.9",
     "geoip2/geoip2": "~2.0",
-    "guzzlehttp/guzzle": "^6.3",
+    "guzzlehttp/guzzle": "^7.4",
     "ph-7/cute-link-names": "^2.0",
     "ph-7/datatype": "^1.0",
     "ph-7/just-http-status-codes": "^1.1",
