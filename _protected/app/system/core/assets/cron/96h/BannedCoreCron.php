@@ -44,6 +44,8 @@ class BannedCoreCron extends Cron
     private const ERROR_CALLING_WEB_SERVICE_MESSAGE = 'Error calling web service for banned IP URL name: %s';
     private const ERROR_ADD_BANNED_IP_MESSAGE = 'Error while writing new banned IP addresses.';
 
+    private const NEW_LINE = "\r\n";
+
     /**
      * Web client used to fetch IPs
      */
@@ -150,7 +152,7 @@ class BannedCoreCron extends Cron
             /**
              * Trim the IP from return carriage and new line, then add to the current array
              */
-            $this->aNewIps[] = rtrim($sBannedIp, "\r\n");
+            $this->aNewIps[] = rtrim($sBannedIp, self::NEW_LINE);
         }
 
         return true;
@@ -244,7 +246,7 @@ class BannedCoreCron extends Cron
      */
     private function addIp(string $sIpAddress): void
     {
-        $this->file->putFile(self::BANNED_IP_FILE_PATH, $sIpAddress . "\n", FILE_APPEND);
+        $this->file->putFile(self::BANNED_IP_FILE_PATH, $sIpAddress . self::NEW_LINE, FILE_APPEND);
     }
 
     private function invalidNewIps(): bool
@@ -261,7 +263,9 @@ class BannedCoreCron extends Cron
         // Remove duplicated rows
         $aBannedIps = array_unique($aBannedIps);
 
-        return (bool)$this->file->save(self::BANNED_IP_FILE_PATH, $aBannedIps);
+        $sBannedIps = implode(self::NEW_LINE, $aBannedIps);
+
+        return (bool)$this->file->save(self::BANNED_IP_FILE_PATH, $sBannedIps);
     }
 }
 
