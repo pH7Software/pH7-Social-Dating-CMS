@@ -41,13 +41,13 @@ class BannedCoreCron extends Cron
 
     private const BANNED_IP_FILE_PATH = PH7_PATH_APP_CONFIG . Ban::DIR . Ban::IP_FILE;
 
-    private const ERROR_CALLING_WEB_SERVICE_MESSAGE = 'Error calling web service for banned IP URL name: %s';
+    private const ERROR_CALLING_WEB_SERVICE_MESSAGE = 'Error while calling web service: %s';
     private const ERROR_ADD_BANNED_IP_MESSAGE = 'Error while writing new banned IP addresses.';
 
     private const NEW_LINE = "\r\n";
 
     /**
-     * Web client used to fetch IPs
+     * Web client used to fetch IPs.
      */
     private Client $oWebClient;
 
@@ -93,7 +93,7 @@ class BannedCoreCron extends Cron
                  * If we don't get TRUE, then, we have an error...
                  */
                 if (!$this->callWebService($sUrl)) {
-                    (new Logger())->msg(
+                    $this->logErrorMessage(
                         sprintf(self::ERROR_CALLING_WEB_SERVICE_MESSAGE, $sUrl)
                     );
                 }
@@ -102,7 +102,7 @@ class BannedCoreCron extends Cron
                  * Catch exception, so we can continue if one service fails
                  */
             } catch (Exception $oExcept) {
-                (new Logger())->msg(
+                $this->logErrorMessage(
                     sprintf(self::ERROR_CALLING_WEB_SERVICE_MESSAGE, $sUrl)
                 );
             }
@@ -119,10 +119,10 @@ class BannedCoreCron extends Cron
         $this->processIps();
 
         /**
-         * Write the new banned IP file
+         * Update the banned IP file
          */
         if (!$this->writeIps()) {
-            (new Logger())->msg(self::ERROR_ADD_BANNED_IP_MESSAGE);
+            $this->logErrorMessage(self::ERROR_ADD_BANNED_IP_MESSAGE);
         }
     }
 
@@ -266,6 +266,11 @@ class BannedCoreCron extends Cron
         $sBannedIps = implode(self::NEW_LINE, $aBannedIps);
 
         return (bool)$this->file->save(self::BANNED_IP_FILE_PATH, $sBannedIps);
+    }
+
+    private function logErrorMessage(string $sMessage): void
+    {
+        (new Logger())->msg($sMessage);
     }
 }
 
