@@ -12,6 +12,8 @@
 namespace PH7\Framework\Structure {
     defined('PH7') or exit('Restricted access');
 
+    use PH7\Framework\File\File;
+
     class General
     {
         /**
@@ -24,7 +26,7 @@ namespace PH7\Framework\Structure {
         public static function emit()
         {
             $aArgs = func_get_args();
-            return implode("\t", $aArgs) . \PH7\Framework\File\File::EOL;
+            return implode("\t", $aArgs) . File::EOL;
         }
 
         /**
@@ -43,19 +45,21 @@ namespace PH7\Framework\Structure {
 }
 
 namespace {
+    use PH7\Framework\Structure\General as GeneralStructure;
+
     /**
-     * Alias for \PH7\Framework\Structure\General::ifsetor()
+     * Alias for GeneralStructure::ifsetor()
      */
     function ifsetor($sVar, $sOr = '')
     {
-        return (new PH7\Framework\Structure\General)->ifsetor($sVar, $sOr);
+        return (new GeneralStructure)->ifsetor($sVar, $sOr);
     }
 
     /**
-     * Alias for \PH7\Framework\Structure\General::emit()
+     * Alias for GeneralStructure::emit()
      */
     function emit()
     {
-        return PH7\Framework\Structure\General::emit();
+        return GeneralStructure::emit();
     }
 }
