@@ -24,17 +24,14 @@ use PH7\Framework\Pattern\Singleton;
  */
 class Config implements Configurable
 {
-    const DEVELOPMENT_MODE = 'development';
-    const PRODUCTION_MODE = 'production';
+    private const DEVELOPMENT_MODE = 'development';
+    private const PRODUCTION_MODE = 'production';
 
-    /** @var array */
-    public $values = [];
+    public array $values = [];
 
-    /** @var string */
-    private $sConfigAppFilePath;
+    private string $sConfigAppFilePath;
 
-    /** @var string */
-    private $sConfigSysFilePath;
+    private string $sConfigSysFilePath;
 
     /** Import the Singleton trait*/
     use Singleton;

@@ -12,12 +12,12 @@ defined('PH7') or exit('Restricted access');
 
 class Environment
 {
-    const ENV_FILE_EXT = '.env';
+    private const ENV_FILE_EXT = '.env';
 
-    const PRODUCTION_MODE = 'production';
-    const DEVELOPMENT_MODE = 'development';
+    public const PRODUCTION_MODE = 'production';
+    public const DEVELOPMENT_MODE = 'development';
 
-    const MODES = [
+    private const MODES = [
         self::PRODUCTION_MODE,
         self::DEVELOPMENT_MODE
     ];

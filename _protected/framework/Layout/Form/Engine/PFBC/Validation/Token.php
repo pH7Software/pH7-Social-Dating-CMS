@@ -14,12 +14,8 @@ class Token extends Validation
     // Import `Message` trait
     use Message;
 
-    /** @var string */
     private string $sName;
 
-    /**
-     * @param string $sName
-     */
     public function __construct(string $sName)
     {
         $this->message = self::errorTokenMsg();
@@ -27,9 +23,11 @@ class Token extends Validation
     }
 
     /**
+     * @param string $sValue
+     *
      * @return bool Returns TRUE if the token is validated, FALSE otherwise.
      */
-    public function isValid($sValue)
+    public function isValid($sValue): bool
     {
         return (new SecurityToken)->check($this->sName, $sValue);
     }
