@@ -41,7 +41,7 @@ class BannedCoreCron extends Cron
 
     private const BANNED_IP_FILE_PATH = PH7_PATH_APP_CONFIG . Ban::DIR . Ban::IP_FILE;
 
-    private const ERROR_CALLING_WEB_SERVICE_MESSAGE = 'Error while calling web service: %s';
+    private const ERROR_CALLING_WEB_SERVICE_MESSAGE = 'BannedCoreCron: Error while calling: %s';
     private const ERROR_ADD_BANNED_IP_MESSAGE = 'Error while writing new banned IP addresses.';
 
     private const NEW_LINE = "\r\n";
