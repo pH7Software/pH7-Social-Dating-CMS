@@ -447,7 +447,7 @@ class InstallController extends Controller
                                                             )
                                                         );
                                                         $rStmt->execute(
-                                                            ['securityHash' => generate_hash(2) . 'change_this_secret_cron' . generate_hash(3)]
+                                                            ['securityHash' => generate_hash(2) . 'Change_this_secret_word_' . generate_hash(3)]
                                                         );
 
                                                         if (!empty($_POST['sample_data_request'])) {
