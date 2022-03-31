@@ -81,6 +81,21 @@ final class HttpTest extends TestCase
         $this->assertFalse($sIsSsl);
     }
 
+    public function testDetectSubdomain(): void
+    {
+        $bIsASubdomain = $this->oHttp->detectSubdomain('https://learning.ph7builder.com');
+        $this->assertTrue($bIsASubdomain);
+
+        $bIsNotASubdomain = $this->oHttp->detectSubdomain('https://ph7builder.com');
+        $this->assertFalse($bIsNotASubdomain);
+    }
+
+    public function testGetSubdomain(): void
+    {
+        $sActualSubdomain = $this->oHttp->getSubdomain('https://learning.ph7builder.com');
+        $this->assertSame('learning', $sActualSubdomain);
+    }
+
     public function urlsAndHostNamesProvider(): array
     {
         return [
