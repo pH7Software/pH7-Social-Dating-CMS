@@ -54,10 +54,11 @@ class WebsiteChecker
 
     public function moveToInstaller(): void
     {
-        $sFilePath = str_replace('\\', '', dirname(htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES))); // Remove backslashes for Windows compatibility
-        $sFilePath = substr($sFilePath, -1) !== '/' ? $sFilePath . '/' : $sFilePath;
+        // Remove backslashes for Windows compatibility
+        $sUrlPath = str_replace('\\', '', dirname(htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES)));
+        $sUrlPath = substr($sUrlPath, -1) !== '/' ? $sUrlPath . '/' : $sUrlPath;
 
-        header('Location: ' . $sFilePath . self::INSTALL_FOLDER_NAME);
+        header('Location: ' . $sUrlPath . self::INSTALL_FOLDER_NAME);
     }
 
     public function doesConfigFileExist(): bool
