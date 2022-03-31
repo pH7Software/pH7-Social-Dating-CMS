@@ -6,12 +6,14 @@
  * @package          PH7 / Test / Unit / Framework / Http
  */
 
+declare(strict_types=1);
+
 namespace PH7\Test\Unit\Framework\Http;
 
 use PH7\Framework\Http\Http;
 use PHPUnit\Framework\TestCase;
 
-class HttpTest extends TestCase
+final class HttpTest extends TestCase
 {
     private Http $oHttp;
 
