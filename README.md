@@ -31,7 +31,7 @@ You get and own all data and files, hosted on your own server! ✌️
 
 👉 Convinced by the software? ☕️ Wanna **[offer me a coffee](https://www.buymeacoffee.com/ph7cms)**, and boost the software development at the same time?
 
-[![Ko Fi - Offfer Me A Flat White](static/img/kofi-logo.png)](https://ko-fi.com/phenry) [![Buy Me A Coffee](static/img/buymeacoffee-logo.svg)](https://www.buymeacoffee.com/ph7cms)
+[![Ko Fi - Offer Me A Flat White](static/img/kofi-logo.png)](https://ko-fi.com/phenry) [![Buy Me A Coffee](static/img/buymeacoffee-logo.svg)](https://www.buymeacoffee.com/ph7cms)
 
 
 ## 📖 Contents
@@ -285,7 +285,7 @@ You appreciate the project, all the years intensively spent on the core developm
 
 ## 💖 Contributing
 
-[![I Love Open Source](static/img/love-open-source-logo.png)](https://ko-fi.com/phenry) [![Ko Fi - Offfer Me A Flat White](static/img/kofi-logo.png)](https://ko-fi.com/phenry)
+[![I Love Open Source](static/img/love-open-source-logo.png)](https://ko-fi.com/phenry) [![Ko Fi - Offer Me A Flat White](static/img/kofi-logo.png)](https://ko-fi.com/phenry)
 
 Anyone can contribute on **[pH7Builder GitHub](https://github.com/pH7Software/pH7-Social-Dating-CMS)** repository!
 
