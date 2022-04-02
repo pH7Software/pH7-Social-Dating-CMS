@@ -31,7 +31,7 @@ You get and own all data and files, hosted on your own server! ✌️
 
 👉 Convinced by the software? ☕️ Wanna **[offer me a coffee](https://www.buymeacoffee.com/ph7cms)**, and boost the software development at the same time?
 
-[![Ko Fi - Offfer Me A Flat White](static/img/kofi-logo.svg)](https://ko-fi.com/phenry) [![Buy Me A Coffee](static/img/buymeacoffee-logo.svg)](https://www.buymeacoffee.com/ph7cms)
+[![Ko Fi - Offfer Me A Flat White](static/img/kofi-logo.png)](https://ko-fi.com/phenry) [![Buy Me A Coffee](static/img/buymeacoffee-logo.svg)](https://www.buymeacoffee.com/ph7cms)
 
 
 ## 📖 Contents
@@ -285,7 +285,7 @@ You appreciate the project, all the years intensively spent on the core developm
 
 ## 💖 Contributing
 
-[![Ko Fi - Offfer Me A Flat White](static/img/kofi-logo.svg)](https://ko-fi.com/phenry)
+[![I Love Open Source](static/img/love-open-source-logo.png)](https://ko-fi.com/phenry) [![Ko Fi - Offfer Me A Flat White](static/img/kofi-logo.png)](https://ko-fi.com/phenry)
 
 Anyone can contribute on **[pH7Builder GitHub](https://github.com/pH7Software/pH7-Social-Dating-CMS)** repository!
 
@@ -296,8 +296,6 @@ Just clone the repository, make your changes and then make a push ;-)
 *WARNING: Your code/modification must be of excellent quality and follow the [Code Convention](https://ph7cms.com/doc/en/code-convention) and [PSR](https://www.php-fig.org/psr/).* I manually review and validate all improvements and changes you I've done.
 
 ![pH7Software GitHub. Me, at a Costa coffee shop on Feb 4th, 2017.](https://user-images.githubusercontent.com/1325411/78962138-32ffa100-7ae3-11ea-8d35-83d78f3cbc48.jpg)
-
-![I Love Open Source](static/img/love-open-source-logo.png)
 
 
 ## 🌲 pH7Builder; The Eco-Friendly CMS ❤️
