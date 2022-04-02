@@ -29,7 +29,7 @@ By choosing pH7Builder, you have complete control of your website and your users
 You get and own all data and files, hosted on your own server! ✌️
 
 
-👉 Convinced by the software? ☕️ Wanna **[offer me a coffee](https://www.buymeacoffee.com/ph7cms)**, and boost the software development at the same time?
+👉 Convinced by the software? ☕️ Would like to help by **[offer me a coffee](https://www.buymeacoffee.com/ph7cms)**? - and boost the software development at the same time! 🚀
 
 [![Ko Fi - Offer Me A Flat White](static/img/kofi-logo.png)](https://ko-fi.com/phenry) [![Buy Me A Coffee](static/img/buymeacoffee-logo.svg)](https://www.buymeacoffee.com/ph7cms)
 
