@@ -47,3 +47,9 @@
 phpcs.xml.dist export-ignore
 phpunit.xml.dist export-ignore
 composer.lock export-ignore
+
+## Also ignoring binary files unnecessary for software's production version
+/static/img/love-nature.svg
+/static/img/buymeacoffee-logo.svg
+/static/img/kofi-logo.png
+/static/img/love-open-source-logo.png
