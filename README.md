@@ -56,7 +56,7 @@ You get and own all data and files, hosted on your own server! ✌️
 
 ## 👀 Software Overview 🎉
 
-**pH7 Dating CMS** is a **scalable social community CMS** based on a powerful modular OOP architecture, and using the **MVC** architecture (Model-View-Controller).
+**pH7 Dating CMS** is a **scalable social community CMS** based on a powerful modular OOP and server-side rendering architecture, using the **MVC** architecture (Model-View-Controller).
 
 It is designed with the **KISS** principle in mind, and the whole source code can be read and understood in minutes. For better flexibility, the software uses **PDO** (PHP Data Objects) abstraction which allows the choice of the database. The principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (no duplicate code) and **YAGNI** principle to avoid unused code/not needed functionality in the software.
 
@@ -118,7 +118,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Maintenance Mode
 * Database Backup
 * Report Abuse
-* SEO-Friendly (Title, Content, Code, ...), Sitemap module, [hreflang](https://support.google.com/webmasters/answer/189077), possibility to translate each URL, ...
+* SEO-Friendly (Title, Headings, Content, Code, ...), Sitemap module, [hreflang](https://support.google.com/webmasters/answer/189077), possibility to translate each URL, ...
 * [Schema.org markup](https://moz.com/learn/seo/schema-structured-data) on your webapp considerably increases the ranking in search engines results and enable great features such as Google Rich Snippets
 * Multilingual URLs
 * Check that all UGC (User-Generated Content) are Unique (to avoid spam and malicious users)
