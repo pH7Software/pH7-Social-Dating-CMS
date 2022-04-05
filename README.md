@@ -220,7 +220,7 @@ server {
 
     server_name www.yoursite.com;
     root /var/www/ph7cms_public_root;
-    index index.php; #you can use index.ph7; for hidding the *.php ...
+    index index.php;
     client_max_body_size 50M;
 
     error_log /var/log/nginx/yoursite.error.log;
