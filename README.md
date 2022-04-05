@@ -96,7 +96,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Member Approval System
 * Advanced Admin Panel
 * Complete Membership System
-* Payment Gateways Integration for PayPal, Stripe, Braintree, Bitcoin, 2CheckOut and [Skeerel Pay](https://skeerel.com)
+* Payment Gateways Integration for PayPal, Stripe, Braintree, 2CheckOut, and [Skeerel Pay](https://skeerel.com)
 * Statistics & Analytics System
 * Live Notification System
 * Registration delay (to avoid spam)
