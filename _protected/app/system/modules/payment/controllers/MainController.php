@@ -303,6 +303,7 @@ class MainController extends Controller
         if ($this->httpRequest->postExists('stripeToken')) {
             \Stripe\Stripe::setApiKey($this->config->values['module.setting']['stripe.secret_key']);
             $sAmount = $this->httpRequest->post('amount');
+            $sStripeEmail = $this->httpRequest->post('stripeEmail');
 
             try {
                 $oCharge = StripeCharge::create(
@@ -310,7 +311,7 @@ class MainController extends Controller
                         'amount' => Stripe::getAmount($sAmount),
                         'currency' => $this->config->values['module.setting']['currency_code'],
                         'source' => $this->httpRequest->post('stripeToken'),
-                        'description' => t('Membership charged for %0%', $this->httpRequest->post('stripeEmail'))
+                        'description' => t('Membership charged for %0%', $sStripeEmail)
                     ]
                 );
 
