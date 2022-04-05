@@ -262,7 +262,7 @@ Do you think you might need a software engineer like me at your company? (who co
 
 You appreciate the project, all the years intensively spent on the core development, and don't want to let it die...?
 
-[![Paypal](templates/system/modules/ph7cms-helper/themes/base/img/paypal-donate.en.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6)
+[![Paypal](templates/system/modules/ph7cms-helper/themes/base/img/paypal-donate.en.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6 "PayPal button")
 [![Patreon](templates/system/modules/ph7cms-helper/themes/base/img/support-patreon.en.png)](https://www.patreon.com/bePatron?u=3534366 "Become a Patron")
 
 
@@ -360,6 +360,5 @@ See the `PH7.LICENSE.txt` and `PH7.COPYRIGHT.txt` files for further details.
 
 
 <!-- GitHub's Markdown reference links -->
-
 [twitter-image]: https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white
 [github-image]: https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
