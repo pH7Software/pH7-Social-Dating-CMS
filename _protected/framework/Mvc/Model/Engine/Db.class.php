@@ -200,7 +200,7 @@ class Db
      */
     public function lastInsertId($sName = null)
     {
-        return self::$oDb->lastInsertId($sName);
+        return (string)self::$oDb->lastInsertId($sName);
     }
 
     /**
