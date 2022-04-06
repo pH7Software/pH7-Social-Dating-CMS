@@ -65,15 +65,19 @@ class JoinFormProcess extends Form
                 t('Please try again with new information in the form fields or come back later.')
             );
         } else {
+            $oRegistration = new Registration($this->view);
+
             /** Update the Affiliate Commission **/
             if ($this->isUserActivated()) {
                 AffiliateCore::updateJoinCom($iAffId, $this->config, $this->registry);
             }
 
-            // Send an email and sets the welcome message
+            // Send an email confirming the account registration
+            $oRegistration->sendMail($aData);
+
             \PFBC\Form::setSuccess(
                 'form_join_aff',
-                t('Your affiliate account has been created! %0%', (new Registration($this->view))->sendMail($aData)->getMsg())
+                $oRegistration->getMsg()
             );
         }
 
