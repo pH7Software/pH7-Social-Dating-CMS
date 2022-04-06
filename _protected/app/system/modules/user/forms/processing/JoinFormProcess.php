@@ -76,7 +76,7 @@ class JoinFormProcess extends Form
                 AffiliateCore::updateJoinCom($iAffId, $this->config, $this->registry);
             }
 
-            // Send email
+            // Send confirmation email
             (new Registration($this->view))->sendMail($aData);
 
             $aSessData = [
