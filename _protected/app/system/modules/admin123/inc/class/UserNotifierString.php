@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Admin / Inc / Class
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
@@ -18,26 +20,17 @@ final class UserNotifierString
      */
     use Statik;
 
-    /**
-     * @return string
-     */
-    public static function getApprovedSubject()
+    public static function getApprovedSubject(): string
     {
         return t('Your content has been approved!');
     }
 
-    /**
-     * @return string
-     */
-    public static function getDisapprovedSubject()
+    public static function getDisapprovedSubject(): string
     {
         return t('Your content has been disapproved :(');
     }
 
-    /**
-     * @return string
-     */
-    public static function getApprovedMessage()
+    public static function getApprovedMessage(): string
     {
         $sMsg = t('Congratulation! The content you recently posted at <a href="%site_url%">%site_name%</a> has been successfully approved by the team.');
         $sMsg .= '<br />';
@@ -47,11 +40,9 @@ final class UserNotifierString
     }
 
     /**
-     * @return string
-     *
      * @throws Framework\File\IOException
      */
-    public static function getDisapprovedMessage()
+    public static function getDisapprovedMessage(): string
     {
         $sTermsUrl = Uri::get('page', 'main', 'terms');
 
