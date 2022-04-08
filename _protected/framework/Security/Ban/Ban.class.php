@@ -116,9 +116,9 @@ class Ban
      */
     private static function replace(bool $bWordReplace): ?string
     {
-        $aBans = file(PH7_PATH_APP_CONFIG . static::DIR . self::$sFile);
+        $aBannedContents = self::readFile();
 
-        foreach ($aBans as $sBan) {
+        foreach ($aBannedContents as $sBan) {
             $sBan = trim($sBan);
             if (empty($sBan) || strpos($sBan, self::COMMENT_SIGN) === 0) {
                 // Skip comments
@@ -139,13 +139,18 @@ class Ban
      */
     private static function check(string $sVal): bool
     {
-        $aBans = file(PH7_PATH_APP_CONFIG . static::DIR . self::$sFile);
+        $aBannedContents = self::readFile();
 
-        return in_array($sVal, array_map('trim', $aBans), true);
+        return in_array($sVal, array_map('trim', $aBannedContents), true);
     }
 
     private static function setCaseInsensitive(): void
     {
         self::$sVal = strtolower(self::$sVal);
+    }
+
+    private static function readFile(): array
+    {
+        return (array)file(PH7_PATH_APP_CONFIG . static::DIR . self::$sFile, FILE_SKIP_EMPTY_LINES);
     }
 }
