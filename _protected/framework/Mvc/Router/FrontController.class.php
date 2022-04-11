@@ -649,15 +649,14 @@ final class FrontController
 
     /**
      * Run the module's controller (or display an error message if the controller doesn't exist).
-     *
-     * @return void
      */
-    private function runController()
+    private function runController(): void
     {
         $sController = self::PROJECT_NAMESPACE . $this->oRegistry->controller;
 
         try {
             $oMvc = new ReflectionMethod($sController, $this->oRegistry->action);
+
             if ($oMvc->isPublic()) {
                 // Perform the controller's action
                 $oMvc->invokeArgs(new $sController, $this->getRequestParameter());
