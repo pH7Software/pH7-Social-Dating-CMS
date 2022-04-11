@@ -27,7 +27,7 @@ class Session
     {
         if (!$this->isSessionActivated()) {
             if ($bDisableSessionCache) {
-                session_cache_limiter(false);
+                session_cache_limiter();
             }
 
             $this->initializePHPSession();
