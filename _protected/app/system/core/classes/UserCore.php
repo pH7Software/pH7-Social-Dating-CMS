@@ -392,7 +392,7 @@ class UserCore
         // Regenerate the session ID to prevent session fixation attack
         $oSession->regenerateId();
 
-        // Now we connect the member
+        // Now we create the user's sessions
         $aSessionData = [
             'member_id' => $oUserData->profileId,
             'member_email' => $oUserData->email,
