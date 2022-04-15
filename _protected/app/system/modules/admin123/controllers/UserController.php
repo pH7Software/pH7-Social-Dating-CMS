@@ -196,7 +196,8 @@ class UserController extends Controller implements UserModeratable
 
     public function password(?string $sUserEmail = null): void
     {
-        if (!empty($sUserEmail) && !(new Validate)->email($sUserEmail)) {
+        $bInvalidEmailId = empty($sUserEmail) || !(new Validate)->email($sUserEmail);
+        if ($bInvalidEmailId) {
             Header::redirect(
                 Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
                 t("The URL isn't valid. It doesn't contain the user's email as a parameter."),
@@ -204,7 +205,7 @@ class UserController extends Controller implements UserModeratable
             );
         } else {
             $this->view->page_title = $this->view->h1_title = t('Update User Password');
-            $this->view->user_password = $sUserEmail;
+            $this->view->user_email = $sUserEmail;
 
             $this->output();
         }

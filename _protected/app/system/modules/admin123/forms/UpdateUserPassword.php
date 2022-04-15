@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Admin / From
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 use PFBC\Element\Button;
@@ -16,7 +18,7 @@ use PH7\Framework\Url\Header;
 
 class UpdateUserPassword
 {
-    public static function display($sUserEmail)
+    public static function display(string $sUserEmail): void
     {
         if (isset($_POST['submit_update_password'])) {
             if (\PFBC\Form::isValid($_POST['submit_update_password'])) {

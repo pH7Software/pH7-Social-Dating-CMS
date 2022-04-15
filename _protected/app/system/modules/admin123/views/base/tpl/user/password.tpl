@@ -5,5 +5,5 @@
         </a>
     </p>
 
-    {{ UpdateUserPassword::display($user_password) }}
+    {{ UpdateUserPassword::display($user_email) }}
 </div>
