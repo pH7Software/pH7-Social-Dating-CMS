@@ -389,18 +389,20 @@ class InstallController extends Controller
                                                         );
 
                                                         $sCurrentDate = date('Y-m-d H:i:s');
-                                                        $rStmt->execute([
-                                                                            'username' => $_SESSION['val']['admin_username'],
-                                                                            'password' => Framework\Security\Security::hashPwd(
-                                                                                $_SESSION['val']['admin_password']
-                                                                            ),
-                                                                            'email' => $_SESSION['val']['admin_login_email'],
-                                                                            'firstName' => $_SESSION['val']['admin_first_name'],
-                                                                            'lastName' => $_SESSION['val']['admin_last_name'],
-                                                                            'joinDate' => $sCurrentDate,
-                                                                            'lastActivity' => $sCurrentDate,
-                                                                            'ip' => client_ip()
-                                                                        ]);
+                                                        $rStmt->execute(
+                                                            [
+                                                                'username' => $_SESSION['val']['admin_username'],
+                                                                'password' => Framework\Security\Security::hashPwd(
+                                                                    $_SESSION['val']['admin_password']
+                                                                ),
+                                                                'email' => $_SESSION['val']['admin_login_email'],
+                                                                'firstName' => $_SESSION['val']['admin_first_name'],
+                                                                'lastName' => $_SESSION['val']['admin_last_name'],
+                                                                'joinDate' => $sCurrentDate,
+                                                                'lastActivity' => $sCurrentDate,
+                                                                'ip' => client_ip()
+                                                            ]
+                                                        );
 
                                                         $rStmt = $DB->prepare(
                                                             sprintf(
@@ -505,7 +507,6 @@ class InstallController extends Controller
         } else {
             redirect(PH7_URL_SLUG_INSTALL . 'niche');
         }
-
 
         $this->oView->assign('def_site_name', self::DEFAULT_SITE_NAME);
         $this->oView->assign('def_admin_username', self::DEFAULT_ADMIN_USERNAME);
