@@ -33,13 +33,12 @@ class Mail implements Mailable
     public function send(array $aInfo, string $sContents, int $iFormatType = Mailable::ALL_FORMATS): int
     {
         /*** Default values ***/
-        $sFromMail = empty($aInfo['from']) ? DbConfig::getSetting('returnEmail') : $aInfo['from'];
-        $sFromName = empty($aInfo['form_name']) ? DbConfig::getSetting('emailName') : $aInfo['form_name'];
+        $sFromMail = empty($aInfo['from']) ? DbConfig::getSetting('returnEmail') : escape($aInfo['from'], true);
+        $sFromName = empty($aInfo['form_name']) ? DbConfig::getSetting('emailName') : escape($aInfo['form_name'], true);
+        $sToMail = empty($aInfo['to']) ? DbConfig::getSetting('adminEmail') : escape($aInfo['to'], true);
+        $sToName = empty($aInfo['to_name']) ? $sToMail : escape($aInfo['to_name'], true);
 
-        $sToMail = empty($aInfo['to']) ? DbConfig::getSetting('adminEmail') : $aInfo['to'];
-        $sToName = empty($aInfo['to_name']) ? $sToMail : $aInfo['to_name'];
-
-        $sSubject = $aInfo['subject'];
+        $sSubject = escape($aInfo['subject'], true);
 
         try {
             // Setup the mailer
@@ -47,10 +46,10 @@ class Mail implements Mailable
             $oMailer = new Mailer($oTransport);
 
             $oMessage = new EmailMessage();
-            $oMessage->from(new Address(escape($sFromMail, true), escape($sFromName, true)));
-            $oMessage->to(new Address(escape($sToMail, true), escape($sToName, true)));
+            $oMessage->from(new Address($sFromMail, $sFromName));
+            $oMessage->to(new Address($sToMail, $sToName));
             $oMessage->priority(EmailMessage::PRIORITY_HIGHEST);
-            $oMessage->subject(escape($sSubject, true));
+            $oMessage->subject($sSubject);
 
             if ($iFormatType === Mailable::TEXT_FORMAT || $iFormatType === Mailable::ALL_FORMATS) {
                 $oMessage->text($sContents);
