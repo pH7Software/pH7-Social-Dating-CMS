@@ -6,8 +6,6 @@
  * @package          PH7 / App / Include / Class
  */
 
-declare(strict_types=1);
-
 namespace PH7;
 
 interface LoginableForm

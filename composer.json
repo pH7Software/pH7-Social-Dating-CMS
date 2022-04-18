@@ -76,8 +76,8 @@
     "ph-7/qrcode-generator-php-class": "^2.1",
     "robthree/twofactorauth": "^1.6",
     "stripe/stripe-php": "^5.9",
-    "swiftmailer/swiftmailer": "^5.4",
     "symfony/console": "^5.3",
+    "symfony/mailer": "^5.4",
     "twbs/bootstrap": "^3.4",
     "twilio/sdk": "^5.28"
   },

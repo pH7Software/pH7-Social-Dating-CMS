@@ -1,12 +1,13 @@
 <?php
 /**
- * @desc             Mail Class derived from Swift Class
- *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mail
- * @version          1.3 (Last update 11/04/2021)
+ * @version          2.0
+ *
+ * @history          11/04/2021 - Use strict type declarations
+ * @history          04/18/2022 - Moved from Swift Mailer (now discontinued) to Symfony Mailer.
  */
 
 declare(strict_types=1);
@@ -16,21 +17,20 @@ namespace PH7\Framework\Mail;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Model\DbConfig;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport\SendmailTransport;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email as EmailMessage;
 
 class Mail implements Mailable
 {
-    private const HTML_CONTENT_TYPE = 'text/html';
-
     /**
-     * Send an email with Swift library engine.
-     *
-     * @param array $aInfo
-     * @param string $sContents
-     * @param int $iFormatType
+     * Send an email with Symfony Mailer library engine.
      *
      * @return int Number of recipients who were accepted for delivery.
      */
-    public function send(array $aInfo, $sContents, $iFormatType = Mailable::HTML_FORMAT): int
+    public function send(array $aInfo, string $sContents, int $iFormatType = Mailable::ALL_FORMATS): int
     {
         /*** Default values ***/
         $sFromMail = empty($aInfo['from']) ? DbConfig::getSetting('returnEmail') : $aInfo['from'];
@@ -41,27 +41,33 @@ class Mail implements Mailable
 
         $sSubject = $aInfo['subject'];
 
-        // Setup the mailer
-        $oTransport = \Swift_MailTransport::newInstance();
-        $oMailer = \Swift_Mailer::newInstance($oTransport);
-        $oMessage = \Swift_Message::newInstance()
-            ->setSubject(escape($sSubject, true))
-            ->setFrom([escape($sFromMail, true) => escape($sFromName, true)])
-            ->setTo([escape($sToMail, true) => escape($sToName, true)]);
+        try {
+            // Setup the mailer
+            $oTransport = new SendmailTransport();
+            $oMailer = new Mailer($oTransport);
 
-        if ($iFormatType === Mailable::HTML_FORMAT) {
-            $oMessage->addPart($sContents, self::HTML_CONTENT_TYPE);
-        } else {
-            $oMessage->setBody($sContents);
+            $oMessage = new EmailMessage();
+            $oMessage->from(new Address(escape($sFromMail, true), escape($sFromName, true)));
+            $oMessage->to(new Address(escape($sToMail, true), escape($sToName, true)));
+            $oMessage->priority(EmailMessage::PRIORITY_HIGHEST);
+            $oMessage->subject(escape($sSubject, true));
+
+            if ($iFormatType === Mailable::TEXT_FORMAT || $iFormatType === Mailable::ALL_FORMATS) {
+                $oMessage->text($sContents);
+            }
+
+            if ($iFormatType === Mailable::HTML_FORMAT || $iFormatType === Mailable::ALL_FORMATS) {
+                $oMessage->html($sContents);
+            }
+
+            $iResult = $oMailer->send($oMessage);
+        } catch (TransportExceptionInterface $e) {
+            $iResult = 0;
         }
 
-        $iResult = $oMailer->send($oMessage);
-
-        unset($oTransport, $oMailer, $oMessage);
-
         /*
-         * Check if Swift is able to send message, otherwise we use the traditional native PHP mail() function
-         * as on some hosts config, Swift Mail doesn't work.
+         * Check if Symfony Mailer is able to send message, otherwise we use the traditional native PHP mail() function
+         * as on some hosts config, Symfony Mailer doesn't work.
          */
         if (!$iResult) {
             $aData = [
@@ -70,7 +76,6 @@ class Mail implements Mailable
                 'subject' => $sSubject,
                 'body' => $sContents
             ];
-
             $iResult = (int)$this->phpMail($aData);
         }
 

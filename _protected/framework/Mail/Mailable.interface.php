@@ -12,6 +12,7 @@ interface Mailable
 {
     const HTML_FORMAT = 1;
     const TEXT_FORMAT = 2;
+    const ALL_FORMATS = 3;
 
     /**
      * @param array $aInfo
@@ -20,5 +21,5 @@ interface Mailable
      *
      * @return int Number of recipients who were accepted for delivery.
      */
-    public function send(array $aInfo, $sContents, $iFormatType);
+    public function send(array $aInfo, string $sContents, int $iFormatType): int;
 }
