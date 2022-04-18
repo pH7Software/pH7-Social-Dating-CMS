@@ -75,10 +75,8 @@ class MainController extends Controller
      *
      * @param string $sTable DB table name.
      * @param string $sEmail The user email address.
-     *
-     * @return int Number of recipients who were accepted for delivery.
      */
-    protected function sendMail(string $sTable, string $sEmail): int
+    protected function sendMail(string $sTable, string $sEmail): bool
     {
         // Get new password and change it in DB
         $sNewPassword = PasswordGenerator::generate(self::DEFAULT_PASSWORD_LENGTH);

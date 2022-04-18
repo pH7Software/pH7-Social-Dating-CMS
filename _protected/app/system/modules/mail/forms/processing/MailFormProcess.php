@@ -86,10 +86,8 @@ class MailFormProcess extends Form
      *
      * @param int $iRecipientId
      * @param int $iMsgId
-     *
-     * @return int Number of recipients who were accepted for delivery.
      */
-    private function sendMail($iRecipientId, $iMsgId)
+    private function sendMail($iRecipientId, $iMsgId): bool
     {
         $this->view->content = t('Hello %0%!', $this->httpRequest->post('recipient')) . '<br />' .
             t('You received a new message from %0%', $this->getSenderUsername()) . '<br />' .

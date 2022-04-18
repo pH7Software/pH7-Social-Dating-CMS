@@ -58,7 +58,7 @@ class InviteFormProcess extends Form
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    private function sendMail($sEmailAddress, Mailable $oMailEngine)
+    private function sendMail(string $sEmailAddress, Mailable $oMailEngine): bool
     {
         $this->view->content = t('Hello!') . '<br />' .
             t('You have received a privilege on the invitation from your friend on the new platform to meet new generation - %site_name%') . '<br />' .

@@ -14,33 +14,18 @@ interface Templatable
 {
     /**
      * Display the template.
-     *
-     * @param string $sTplFile
-     * @param string $sDirPath
-     * @param bool $bInclude
-     *
-     * @return string
      */
-    public function display($sTplFile, $sDirPath, $bInclude);
+    public function display(?string $sTplFile, ?string $sDirPath, bool $bInclude): string;
 
     /**
      * @param string $sName
      * @param mixed $mValue
      * @param bool $bEscape
      * @param bool $bEscapeStrip
-     *
-     * @return void
      */
-    public function assign($sName, $mValue, $bEscape, $bEscapeStrip);
+    public function assign(string $sName, $mValue, bool $bEscape, bool $bEscapeStrip): void;
 
-    /**
-     * @param array $aVars
-     * @param bool $bEscape
-     * @param bool $bEscapeStrip
-     *
-     * @return void
-     */
-    public function assigns(array $aVars, $bEscape, $bEscapeStrip);
+    public function assigns(array $aVars, bool $bEscape, bool $bEscapeStrip);
 
     /**
      * @param string $sMailTplFile
@@ -50,5 +35,5 @@ interface Templatable
      *
      * @throws TplException
      */
-    public function parseMail($sMailTplFile, $sEmailAddress);
+    public function parseMail(string $sMailTplFile, string $sEmailAddress): string;
 }

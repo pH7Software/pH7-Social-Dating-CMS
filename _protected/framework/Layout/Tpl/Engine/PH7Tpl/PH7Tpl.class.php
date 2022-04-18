@@ -302,16 +302,10 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
     }
 
     /**
-     * @param string $sTplFile Default NULL
-     * @param string $sDirPath Default NULL
-     * @param bool $bInclude Default TRUE
-     *
-     * @return string
-     *
      * @throws TplException If the template file does no exist.
      * @throws PH7InvalidArgumentException
      */
-    public function display($sTplFile = null, $sDirPath = null, $bInclude = true)
+    public function display(?string $sTplFile = null, ?string $sDirPath = null, bool $bInclude = true): string
     {
         $this->sTplFile = $sTplFile;
 

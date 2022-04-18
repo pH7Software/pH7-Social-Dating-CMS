@@ -86,7 +86,7 @@ class Newsletter extends Core
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    private function sendMail(stdClass $oSubscriber, Mailable $oMailEngine): int
+    private function sendMail(stdClass $oSubscriber, Mailable $oMailEngine): bool
     {
         $this->view->content = $this->httpRequest->post('body', Http::NO_CLEAN);
 

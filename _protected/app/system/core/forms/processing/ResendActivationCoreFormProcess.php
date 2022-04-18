@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Core / Form / Processing
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -17,7 +19,7 @@ use stdClass;
 /** For "user" and "affiliate" module **/
 class ResendActivationCoreFormProcess extends Form
 {
-    public function __construct($sTable)
+    public function __construct(string $sTable)
     {
         parent::__construct();
 
@@ -32,9 +34,9 @@ class ResendActivationCoreFormProcess extends Form
             if (!$mHash = (new UserCoreModel)->getHashValidation($sMail)) {
                 \PFBC\Form::setError('form_resend_activation', t('Oops! Your account is already activated.'));
             } else {
-                $iRet = $this->sendMail($mHash, $sTable);
+                $bRet = $this->sendMail($mHash, $sTable);
 
-                if ($iRet) {
+                if ($bRet) {
                     \PFBC\Form::setSuccess('form_resend_activation', t('Your activation link has been emailed to you.'));
                 } else {
                     \PFBC\Form::setError('form_resend_activation', Form::errorSendingEmail());
@@ -48,10 +50,8 @@ class ResendActivationCoreFormProcess extends Form
      *
      * @param stdClass $oHash User data from the DB.
      * @param string $sTable Table name.
-     *
-     * @return int Number of recipients who were accepted for delivery.
      */
-    protected function sendMail(stdClass $oHash, $sTable)
+    protected function sendMail(stdClass $oHash, string $sTable): bool
     {
         $sMod = ($sTable === DbTableName::AFFILIATE) ? 'affiliate' : 'user';
         $sActivateLink = Uri::get($sMod, 'account', 'activate') . PH7_SH . $oHash->email . PH7_SH . $oHash->hashValidation;

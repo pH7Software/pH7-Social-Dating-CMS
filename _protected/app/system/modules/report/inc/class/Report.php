@@ -58,9 +58,9 @@ class Report
     /**
      * @param array $aData Report's details.
      *
-     * @return int Number of recipients who were accepted for delivery.
+     * @return bool Number of recipients who were accepted for delivery.
      */
-    protected function sendMail(array $aData): int
+    protected function sendMail(array $aData): bool
     {
         $oUser = new UserCore;
         $oUserModel = new UserCoreModel;

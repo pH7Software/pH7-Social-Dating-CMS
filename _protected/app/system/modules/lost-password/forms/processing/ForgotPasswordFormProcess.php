@@ -54,11 +54,9 @@ class ForgotPasswordFormProcess extends Form
      * @param string $sTable DB table name.
      * @param int $iProfileId The user profile ID.
      *
-     * @return int Number of recipients who were accepted for delivery.
-     *
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
-    private function sendMail($sTable, $iProfileId)
+    private function sendMail(string $sTable, $iProfileId): bool
     {
         $oData = $this->oUserModel->readProfile($iProfileId, $sTable);
         $sResetPwdUrl = $this->getResetPasswordUrl($oData);

@@ -27,10 +27,8 @@ class Contact extends Core
 
     /**
      * Initialize the properties of the class, then send the feedback to the admin.
-     *
-     * @return int Number of recipients who were accepted for delivery.
      */
-    public function sendMessage(): int
+    public function sendMessage(): bool
     {
         $this->sFeedbackEmail = DbConfig::getSetting('feedbackEmail');
         $this->sMail = $this->httpRequest->post('mail');
@@ -38,15 +36,10 @@ class Contact extends Core
         $this->sPhone = $this->httpRequest->postExists('phone') ? $this->httpRequest->post('phone') : t('No Phone');
         $this->sUrl = $this->httpRequest->postExists('website') ? $this->httpRequest->post('website') : t('No Site');
 
-        return $this->goMail();
+        return $this->sendEmail();
     }
 
-    /**
-     * Send the email.
-     *
-     * @return int Number of recipients who were accepted for delivery.
-     */
-    private function goMail(): int
+    private function sendEmail(): bool
     {
         $this->view->last_name = t('Last Name: %0%', $this->httpRequest->post('last_name'));
         $this->view->first_name = t('First Name: %0%', $this->httpRequest->post('first_name'));

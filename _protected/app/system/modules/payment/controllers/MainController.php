@@ -244,11 +244,9 @@ class MainController extends Controller
      *
      * @param int $iMembershipId
      *
-     * @return int Number of recipients who were accepted for delivery.
-     *
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
-    private function sendNotifyMail($iMembershipId)
+    private function sendNotifyMail($iMembershipId): bool
     {
         $sAdminEmail = DbConfig::getSetting('adminEmail');
         $oMembershipData = $this->oPayModel->getMemberships($iMembershipId);
