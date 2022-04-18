@@ -28,11 +28,9 @@ abstract class RegistrationCore
     /**
      * @internal Set protected visibility because this attribute is used in child classes.
      */
-    /** @var int */
-    protected $iActiveType;
+    protected int $iActiveType;
 
-    /** @var Templatable */
-    protected $oView;
+    protected Templatable $oView;
 
     public function __construct(Templatable $oView)
     {

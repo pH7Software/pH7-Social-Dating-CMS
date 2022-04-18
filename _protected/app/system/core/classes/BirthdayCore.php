@@ -63,7 +63,7 @@ class BirthdayCore extends Core
      *
      * @throws Exception
      */
-    private function sendMail(stdClass $oUser, Mailable $oMailEngine): int
+    private function sendMail(stdClass $oUser, Mailable $oMailEngine): bool
     {
         $this->view->content = t('Hi %0%!', $oUser->firstName) . '<br />' .
             t('We wish you a very Happy Birthday!') . '<br />' .
