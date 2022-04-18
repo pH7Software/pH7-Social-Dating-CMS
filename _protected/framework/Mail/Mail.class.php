@@ -16,21 +16,21 @@ namespace PH7\Framework\Mail;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Error\Logger;
 use PH7\Framework\Mvc\Model\DbConfig;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport\SendmailTransport;
 use Symfony\Component\Mime\Address;
+use PH7\HtmlToText\Convert as Html2Text;
 use Symfony\Component\Mime\Email as EmailMessage;
 
 class Mail implements Mailable
 {
     /**
      * Send an email with Symfony Mailer library engine.
-     *
-     * @return int Number of recipients who were accepted for delivery.
      */
-    public function send(array $aInfo, string $sContents, int $iFormatType = Mailable::ALL_FORMATS): int
+    public function send(array $aInfo, string $sContents, int $iFormatType = Mailable::ALL_FORMATS): bool
     {
         /*** Default values ***/
         $sFromMail = empty($aInfo['from']) ? DbConfig::getSetting('returnEmail') : escape($aInfo['from'], true);
@@ -52,33 +52,36 @@ class Mail implements Mailable
             $oMessage->subject($sSubject);
 
             if ($iFormatType === Mailable::TEXT_FORMAT || $iFormatType === Mailable::ALL_FORMATS) {
-                $oMessage->text($sContents);
+                $html2Text = new Html2Text($sContents);
+                $oMessage->text($html2Text->getText());
             }
 
             if ($iFormatType === Mailable::HTML_FORMAT || $iFormatType === Mailable::ALL_FORMATS) {
                 $oMessage->html($sContents);
             }
 
-            $iResult = $oMailer->send($oMessage);
+            $oMailer->send($oMessage);
+            $bResult = true;
         } catch (TransportExceptionInterface $oE) {
-            $iResult = 0;
+            (new Logger())->msg('Error while sending email with Symfony Mailer. ' . $oE->getMessage());
+            $bResult = false;
         }
 
         /*
          * Check if Symfony Mailer is able to send message, otherwise we use the traditional native PHP mail() function
          * as on some hosts config, Symfony Mailer doesn't work.
          */
-        if (!$iResult) {
+        if (!$bResult) {
             $aData = [
                 'from' => $sFromMail,
                 'to' => $sToMail,
                 'subject' => $sSubject,
                 'body' => $sContents
             ];
-            $iResult = (int)$this->phpMail($aData);
+            $bResult = $this->phpMail($aData);
         }
 
-        return $iResult;
+        return $bResult;
     }
 
     /**

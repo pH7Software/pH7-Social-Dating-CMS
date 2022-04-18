@@ -14,12 +14,5 @@ interface Mailable
     const TEXT_FORMAT = 2;
     const ALL_FORMATS = 3;
 
-    /**
-     * @param array $aInfo
-     * @param string $sContents
-     * @param int $iFormatType
-     *
-     * @return int Number of recipients who were accepted for delivery.
-     */
-    public function send(array $aInfo, string $sContents, int $iFormatType): int;
+    public function send(array $aInfo, string $sContents, int $iFormatType): bool;
 }
