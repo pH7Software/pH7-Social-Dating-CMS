@@ -60,7 +60,7 @@ class Mail implements Mailable
             }
 
             $iResult = $oMailer->send($oMessage);
-        } catch (TransportExceptionInterface $e) {
+        } catch (TransportExceptionInterface $oE) {
             $iResult = 0;
         }
 
