@@ -442,20 +442,6 @@ function is_software_installed($sCtrlName, $sAction)
 }
 
 /**
- * Check license key.
- *
- * @param string $sKey The License Key.
- *
- * @return int
- */
-function check_license($sKey)
-{
-    $sKey = strtolower(trim($sKey));
-
-    return preg_match('/^ph7-[a-z0-9]{36}$/', $sKey);
-}
-
-/**
  * @param string $sTweetMsg
  * @param string $sTwitterUsername
  * @param string $sGitRepoUrl
