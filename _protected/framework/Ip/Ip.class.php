@@ -19,8 +19,8 @@ use PH7\Framework\Server\Server;
 
 class Ip
 {
-    const DEFAULT_IP = '127.0.0.1';
-    const IP_PATTERN = '[a-z0-9:.]{7,}';
+    public const DEFAULT_IP = '127.0.0.1';
+    private const IP_PATTERN = '[a-z0-9:.]{7,}';
 
     /**
      * Get IP address.
