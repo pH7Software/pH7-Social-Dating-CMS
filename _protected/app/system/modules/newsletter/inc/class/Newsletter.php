@@ -72,7 +72,10 @@ class Newsletter extends Core
         }
         unset($oMail, $oSubscribers);
 
-        return ['status' => $iStatus, 'nb_mail_sent' => self::$iTotalSent];
+        return [
+            'status' => $iStatus,
+            'nb_mail_sent' => self::$iTotalSent
+        ];
     }
 
     /**
@@ -80,8 +83,6 @@ class Newsletter extends Core
      *
      * @param stdClass $oSubscriber Subscriber data from the DB.
      * @param Mailable $oMailEngine
-     *
-     * @return int Number of recipients who were accepted for delivery.
      *
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      * @throws Framework\Mvc\Request\WrongRequestMethodException

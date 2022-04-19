@@ -27,7 +27,6 @@ class Logger extends Core
 
     private string $sIp;
 
-    /** @var string */
     private string $sContents;
 
     public function init(array $aData): void
@@ -73,7 +72,7 @@ class Logger extends Core
     /**
      * Send an email to admin.
      */
-    private function sendMessage(): int
+    private function sendMessage(): bool
     {
         $aInfo = [
             'to' => $this->config->values['logging']['bug_report_email'],

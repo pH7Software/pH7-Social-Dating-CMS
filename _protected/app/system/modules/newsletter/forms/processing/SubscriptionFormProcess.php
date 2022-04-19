@@ -80,10 +80,8 @@ class SubscriptionFormProcess extends Form
      * Send a email to confirm their email address.
      *
      * @param array $aData The data details.
-     *
-     * @return int Number of recipients who were accepted for delivery.
      */
-    private function sendMail(array $aData)
+    private function sendMail(array $aData): bool
     {
         $sActivateLink = Uri::get('newsletter', 'home', 'activate') . PH7_SH . $aData['email'] . PH7_SH . $aData['hash_validation'];
 

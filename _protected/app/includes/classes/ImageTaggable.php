@@ -14,10 +14,6 @@ trait ImageTaggable
 {
     /**
      * Add an image to the social meta tags (for FB, Twitter, Google, ...).
-     *
-     * @param stdClass $oData
-     *
-     * @return void
      */
-    abstract protected function imageToSocialMetaTags(stdClass $oData);
+    abstract protected function imageToSocialMetaTags(stdClass $oData): void;
 }

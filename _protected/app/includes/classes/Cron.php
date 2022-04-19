@@ -27,7 +27,7 @@ abstract class Cron extends Framework\Cron\Run\Cron
      *
      * @throws Framework\Http\Exception
      */
-    private function isAlreadyExecuted()
+    private function isAlreadyExecuted(): void
     {
         if (!$this->checkDelay()) {
             Http::setHeadersByCode(StatusCode::FORBIDDEN);

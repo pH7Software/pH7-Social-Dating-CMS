@@ -54,10 +54,8 @@ class UserCore
 
     /**
      * Check if a user is authenticated.
-     *
-     * @return bool
      */
-    public static function auth()
+    public static function auth(): bool
     {
         $oSession = new Session;
         $bSessionIpCheck = ((bool)DbConfig::getSetting('isUserSessionIpCheck')) ? $oSession->get('member_ip') === Ip::get() : true;
@@ -257,7 +255,7 @@ class UserCore
      *
      * @throws Framework\File\Permission\PermissionException
      */
-    public function setBackground($iProfileId, $sUsername, $sFile, $iApproved = 1)
+    public function setBackground($iProfileId, $sUsername, $sFile, $iApproved = 1): bool
     {
         /**
          * This can cause minor errors (eg if a user sent a file that is not a photo).
@@ -538,23 +536,17 @@ class UserCore
     /**
      * Get the correct matching sex.
      *
-     * @param string $sSex
-     *
      * @return string The Match Sex.
      */
-    public function getMatchSex($sSex)
+    public function getMatchSex(string $sSex): string
     {
         return ($sSex === GenderTypeUserCore::MALE ? GenderTypeUserCore::FEMALE : ($sSex === GenderTypeUserCore::FEMALE ? GenderTypeUserCore::MALE : GenderTypeUserCore::COUPLE));
     }
 
     /**
      * Logout a user.
-     *
-     * @param Session $oSession
-     *
-     * @return void
      */
-    public function logout(Session $oSession)
+    public function logout(Session $oSession): void
     {
         $oSession->destroy();
         $this->revokeRememberMeSession();
@@ -562,10 +554,8 @@ class UserCore
 
     /**
      * Revoke the "Remember Me" cookies (if exist) in order to completely logout the user.
-     *
-     * @return void
      */
-    public function revokeRememberMeSession()
+    public function revokeRememberMeSession(): void
     {
         $oCookie = new Cookie;
         $aRememberMeCookieNames = ['member_remember', 'member_id'];
@@ -583,10 +573,8 @@ class UserCore
      *
      * @param int $iId Profile ID.
      * @param string $sTable Default DbTableName::MEMBER
-     *
-     * @return void
      */
-    public function clearReadProfileCache($iId, $sTable = DbTableName::MEMBER)
+    public function clearReadProfileCache($iId, $sTable = DbTableName::MEMBER): void
     {
         $this->clearCache('readProfile', $iId, $sTable);
     }
@@ -597,20 +585,13 @@ class UserCore
      *
      * @param int $iId Profile ID.
      * @param string $sTable Default DbTableName::MEMBER_INFO
-     *
-     * @return void
      */
-    public function clearInfoFieldCache($iId, $sTable = DbTableName::MEMBER_INFO)
+    public function clearInfoFieldCache($iId, $sTable = DbTableName::MEMBER_INFO): void
     {
         $this->clearCache('infoFields', $iId, $sTable);
     }
 
-    /**
-     * @param string $sUsername
-     *
-     * @return bool
-     */
-    private function isGhost($sUsername)
+    private function isGhost(string $sUsername): bool
     {
         return $sUsername === PH7_GHOST_USERNAME;
     }
@@ -624,7 +605,7 @@ class UserCore
      *
      * @return void
      */
-    private function clearCache($sId, $iId, $sTable)
+    private function clearCache($sId, $iId, $sTable): void
     {
         VariousModel::checkModelTable($sTable);
 
