@@ -366,7 +366,7 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
      *
      * @throws TplException If the template file could not be opened.
      */
-    public function parseMail($sMailTplFile, $sEmailAddress)
+    public function parseMail(string $sMailTplFile, string $sEmailAddress): string
     {
         /**
          * If the template doesn't contain theme for emails, we retrieve the emails default themes.
@@ -470,7 +470,7 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
      *
      * @return void
      */
-    public function assign($sName, $mValue, $bEscape = false, $bEscapeStrip = false)
+    public function assign(string $sName, $mValue, bool $bEscape = false, bool $bEscapeStrip = false): void
     {
         if ($bEscape === true) {
             $mValue = $this->str->escape($mValue, $bEscapeStrip);
@@ -487,10 +487,8 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
      * @param array $aVars
      * @param bool $bEscape Specify TRUE if you want to protect your variables against XSS.
      * @param bool $bEscapeStrip If you use escape method, you can also set this parameter to "true" to strip HTML and PHP tags from a string.
-     *
-     * @return void
      */
-    public function assigns(array $aVars, $bEscape = false, $bEscapeStrip = false)
+    public function assigns(array $aVars, bool $bEscape = false, bool $bEscapeStrip = false): void
     {
         foreach ($aVars as $sKey => $sValue) {
             $this->assign($sKey, $sValue, $bEscape, $bEscapeStrip); // Assign a string variable
