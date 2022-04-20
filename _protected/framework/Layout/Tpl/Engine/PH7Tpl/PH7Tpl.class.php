@@ -302,10 +302,13 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
     }
 
     /**
+     * @return void|string
+     * TODO When min version will be PHP 8, add union return types "void|string"
+     *
      * @throws TplException If the template file does no exist.
      * @throws PH7InvalidArgumentException
      */
-    public function display(?string $sTplFile = null, ?string $sDirPath = null, bool $bInclude = true): string
+    public function display(?string $sTplFile = null, ?string $sDirPath = null, bool $bInclude = true)
     {
         $this->sTplFile = $sTplFile;
 

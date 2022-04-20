@@ -25,10 +25,8 @@ class AffiliateCore extends UserCore
 
     /**
      * Check if an affiliate is authenticated.
-     *
-     * @return bool
      */
-    public static function auth()
+    public static function auth(): bool
     {
         $oSession = new Session;
         $bSessionIpCheck = ((bool)DbConfig::getSetting('isAffiliateSessionIpCheck')) ? $oSession->get('affiliate_ip') === Ip::get() : true;
@@ -48,14 +46,12 @@ class AffiliateCore extends UserCore
      * @param UserCoreModel $oAffModel
      * @param Session $oSession
      * @param SecurityModel $oSecurityModel
-     *
-     * @return void
      */
     public function setAuth(
         stdClass $oAffData,
         UserCoreModel $oAffModel,
         Session $oSession,
-        SecurityModel $oSecurityModel)
+        SecurityModel $oSecurityModel): void
     {
         // Regenerate the session ID to prevent session fixation attack
         $oSession->regenerateId();
@@ -90,10 +86,8 @@ class AffiliateCore extends UserCore
 
     /**
      * Check if an admin is logged as an affiliate.
-     *
-     * @return bool
      */
-    public static function isAdminLoggedAs()
+    public static function isAdminLoggedAs(): bool
     {
         return (new Session)->exists('login_affiliate_as');
     }
@@ -131,10 +125,8 @@ class AffiliateCore extends UserCore
      * @param int $iProfileId
      * @param string $sUsername
      * @param UserCoreModel $oAffModel
-     *
-     * @return void
      */
-    public function delete($iProfileId, $sUsername, UserCoreModel $oAffModel)
+    public function delete($iProfileId, $sUsername, UserCoreModel $oAffModel): void
     {
         $oAffModel->delete($iProfileId, $sUsername);
     }

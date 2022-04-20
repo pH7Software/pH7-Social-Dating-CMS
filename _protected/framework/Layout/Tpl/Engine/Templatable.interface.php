@@ -12,7 +12,17 @@ use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception as TplException;
 
 interface Templatable
 {
-    public function display(?string $sTplFile, ?string $sDirPath, bool $bInclude): string;
+    /**
+     * Display/Output the template.
+     *
+     * @param string|null $sTplFile
+     * @param string|null $sDirPath
+     * @param bool $bInclude
+     *
+     * @return void|string
+     * TODO When min version will be PHP 8, add union return types "void|string"
+     */
+    public function display(?string $sTplFile, ?string $sDirPath, bool $bInclude);
 
     public function assign(string $sName, $mValue, bool $bEscape, bool $bEscapeStrip): void;
 
