@@ -27,7 +27,7 @@ class Permission extends PermissionCore
             $this->signUpRedirect();
         }
 
-        if ((!$bUserAuth && !$bAdminAuth) && ($this->registry->controller === 'SettingController')) {
+        if ((!$bUserAuth && !$bAdminAuth) && $this->registry->controller === 'SettingController') {
             $this->signUpRedirect();
         }
 
