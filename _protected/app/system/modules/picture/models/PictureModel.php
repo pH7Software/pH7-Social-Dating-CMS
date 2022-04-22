@@ -265,7 +265,7 @@ class PictureModel extends PictureCoreModel
 
         $rStmt = Db::getInstance()->prepare(
             'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::PICTURE) . 'AS p INNER JOIN' .
-            Db::prefix(DbTableName::ALBUM_PICTURE) . 'AS a ON p.albumId = a.albumId INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
+            Db::prefix(DbTableName::ALBUM_PICTURE) . 'AS a USING(albumId) INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
             'AS m ON p.profileId = m.profileId' . $sSqlWhere . ' AND p.approved = :approved' . $sSqlOrder . $sSqlLimit);
 
         if ($bDigitSearch) {
