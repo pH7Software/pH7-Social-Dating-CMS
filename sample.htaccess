@@ -826,7 +826,7 @@ ErrorDocument 505 /error/http/index?code=505
 </IfModule>
 
 # For the videos extensions
-#AddType video/ogg .ogg
+#AddType video/ogg .ogg # <- Uncomment if you plan to support Ogg video format
 AddType video/webm .webm
 AddType video/mp4 .mp4
 AddType application/rss+xml .xml
