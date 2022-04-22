@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Payment / Form / Processing
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -30,12 +32,21 @@ class MembershipFormProcess extends Form
         ];
         (new PaymentModel)->addMembership($aData);
 
-        /* Clean UserCoreModel Cache */
-        (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
+        $this->clearCache();
+        $this->redirectToMembershipList();
+    }
 
+    private function redirectToMembershipList(): void
+    {
         Header::redirect(
             Uri::get('payment', 'admin', 'membershiplist'),
             t('The Membership has been added!')
         );
+    }
+
+    private function clearCache(): void
+    {
+        // Clear UserCoreModel Cache
+        (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
     }
 }
