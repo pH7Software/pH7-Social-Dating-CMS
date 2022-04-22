@@ -295,7 +295,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    protected function imageToSocialMetaTags(stdClass $oVideo)
+    protected function imageToSocialMetaTags(stdClass $oVideo): void
     {
         $sImageUrl = PH7_URL_DATA_SYS_MOD . 'video/file/' . $oVideo->username . '/' . $oVideo->albumId . '/' . $oVideo->thumb;
         $this->view->image_social_meta_tag = $sImageUrl;

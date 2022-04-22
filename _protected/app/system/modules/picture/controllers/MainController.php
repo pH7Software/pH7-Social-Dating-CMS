@@ -288,7 +288,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    protected function imageToSocialMetaTags(stdClass $oPicture)
+    protected function imageToSocialMetaTags(stdClass $oPicture): void
     {
         $sFilename = str_replace('original', '600', $oPicture->file);
         $sImageUrl = PH7_URL_DATA_SYS_MOD . 'picture/img/' . $oPicture->username . '/' . $oPicture->albumId . '/' . $sFilename;

@@ -221,7 +221,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    protected function imageToSocialMetaTags(stdClass $oPost)
+    protected function imageToSocialMetaTags(stdClass $oPost): void
     {
         $this->view->image_social_meta_tag = Blog::getThumb($oPost->blogId);
     }
