@@ -20,13 +20,8 @@ use PH7\Generator\Password as PasswordGenerator;
 
 class MainController extends Controller
 {
-    const DEFAULT_PASSWORD_LENGTH = 8;
+    private const DEFAULT_PASSWORD_LENGTH = 8;
 
-    /**
-     * @param string $sMod
-     *
-     * @return void
-     */
     public function forgot(string $sMod = ''): void
     {
         // For better SEO, exclude not interesting pages from search engines
@@ -46,7 +41,11 @@ class MainController extends Controller
         $sTable = VariousModel::convertModToTable($sMod);
 
         if (!(new UserCoreModel)->checkHashValidation($sEmail, $sHash, $sTable)) {
-            Header::redirect($this->registry->site_url, t('Oops! Email or hash is invalid.'), Design::ERROR_TYPE);
+            Header::redirect(
+                $this->registry->site_url,
+                t('Oops! Email or hash is invalid.'),
+                Design::ERROR_TYPE
+            );
         } else {
             if (!$this->sendMail($sTable, $sEmail)) {
                 Header::redirect(
@@ -99,12 +98,7 @@ class MainController extends Controller
         return (new Mail)->send($aInfo, $sMessageHtml);
     }
 
-    /**
-     * @param string $sTableName
-     *
-     * @return string
-     */
-    private function getLoginUrl($sTableName)
+    private function getLoginUrl(string $sTableName): string
     {
         switch ($sTableName) {
             case DbTableName::MEMBER:

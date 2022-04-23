@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Lost Password / Form / Processing
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -17,15 +19,11 @@ use stdClass;
 
 class ForgotPasswordFormProcess extends Form
 {
-    const BRUTE_FORCE_SLEEP_DELAY = 1;
+    private const BRUTE_FORCE_SLEEP_DELAY = 1;
 
-    /** @var UserCoreModel */
-    private $oUserModel;
+    private UserCoreModel $oUserModel;
 
-    /**
-     * @param string $sTable
-     */
-    public function __construct($sTable)
+    public function __construct(string $sTable)
     {
         parent::__construct();
 
@@ -78,7 +76,7 @@ class ForgotPasswordFormProcess extends Form
         return (new Mail)->send($aInfo, $sMessageHtml);
     }
 
-    private function getResetPasswordUrl(stdClass $oData)
+    private function getResetPasswordUrl(stdClass $oData): string
     {
         /**
          * @internal We place the email and hash outside of `Uri::get()`,

@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Lost Password / Form
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -22,7 +24,7 @@ use PH7\Framework\Url\Header;
 
 class ForgotPasswordForm
 {
-    public static function display()
+    public static function display(): void
     {
         $sTable = Various::convertModToTable((new Http)->get('mod'));
 
