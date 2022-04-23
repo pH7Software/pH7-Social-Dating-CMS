@@ -30,7 +30,7 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
 {
     const NAME = 'PH7Tpl';
     const AUTHOR = 'Pierre-Henry Soria';
-    const VERSION = '1.4.1';
+    const VERSION = '1.6.0';
     const ERR_MSG = 'It seems you have removed the copyright notice(s) in the software. If you really want to remove them, please email: %s';
     const DATETIME_FORMAT = 'Y-m-d H:i:s';
 
