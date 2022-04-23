@@ -752,14 +752,13 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
 
     /**
      * Checks if the directory passed by the argument of the method is the main directory.
-     *
-     * @param string $sDirPath
-     *
-     * @return bool
      */
-    private function isMainDir($sDirPath)
+    private function isMainDir(?string $sDirPath): bool
     {
-        return is_dir($sDirPath) && preg_match('#' . $this->addSlashes(PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS) . '#', $sDirPath);
+        return
+            !empty($sDirPath) &&
+            is_dir($sDirPath) &&
+            preg_match('#' . $this->addSlashes(PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS) . '#', $sDirPath);
     }
 
     /**
