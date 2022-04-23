@@ -37,7 +37,11 @@ class ForgotPasswordFormProcess extends Form
                 t('Oops, this "%0%" is not associated with any %site_name% account. Please, make sure that you entered the e-mail address used in creating your account.', escape(substr($sEmail, 0, PH7_MAX_EMAIL_LENGTH)))
             );
         } else {
-            $this->oUserModel->setNewHashValidation($iProfileId, Various::genRnd(null, UserCoreModel::HASH_VALIDATION_LENGTH), $sTable);
+            $this->oUserModel->setNewHashValidation(
+                $iProfileId,
+                Various::genRnd(null, UserCoreModel::HASH_VALIDATION_LENGTH),
+                $sTable
+            );
             (new UserCore)->clearReadProfileCache($iProfileId, $sTable); // Clean the profile data (for the new hash)
 
             if (!$this->sendMail($sTable, $iProfileId)) {
@@ -64,7 +68,10 @@ class ForgotPasswordFormProcess extends Form
             t('If you requested it, click on the link below, otherwise please ignore this email and your password will remain unchanged.') .
             '<br /><a href="' . $sResetPwdUrl . '">' . $sResetPwdUrl . '</a>';
 
-        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/lost-password/confirm-lost-password.tpl', $oData->email);
+        $sMessageHtml = $this->view->parseMail(
+            PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/lost-password/confirm-lost-password.tpl',
+            $oData->email
+        );
 
         $aInfo = [
             'to' => $oData->email,
