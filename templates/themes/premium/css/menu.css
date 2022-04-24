@@ -1,11 +1,3 @@
-.bottom_nav {
-    float: right;
-}
-
-.bottom_nav a {
-    text-decoration: underline;
-}
-
 .navbar #logo a {
     color: #9d9d9d;
 }
@@ -53,4 +45,14 @@
 /* Amend the default minimum height of the navbar */
 .navbar {
     min-height: 45px !important;
+}
+
+
+/* Bottom menu */
+.bottom_nav {
+    float: right;
+}
+
+.bottom_nav a {
+    text-decoration: underline;
 }
