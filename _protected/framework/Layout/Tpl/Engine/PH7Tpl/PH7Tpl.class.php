@@ -10,6 +10,8 @@
  * @history          Supports PHP 5.4 (added class member access on instantiation, e.g. (new Foo)->bar(), ...).
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Layout\Tpl\Engine\PH7Tpl;
 
 defined('PH7') or exit('Restricted access');
