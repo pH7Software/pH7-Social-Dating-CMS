@@ -257,6 +257,8 @@ Are you building a scalable social/dating Web application?
 
 Do you think you might need a software engineer like me at your company? (who could even be willing to relocate) 👉 **[Let's chat together](https://www.linkedin.com/in/ph7enry/)**! 😊
 
+[![Whatsapp](https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/61426874095?text=I%27m%20looking%20for%20a%20software%20developer%20like%20you)
+
 
 ## 💲 Offer Me A Cup of Tea? (...or tea bags...) 🍵
 
