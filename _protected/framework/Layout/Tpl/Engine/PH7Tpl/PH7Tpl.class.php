@@ -2,13 +2,15 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
- * @copyright        (c) 2011-2020, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2011-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  *
  * @history          Supports now PHP 5 with beautiful object code (POO), (removed all the ugly object code from PHP 4.x).
  * @history          Supports now PHP 5.3 (added namespace and incorporate the template engine into the pH7Framework).
  * @history          Supports PHP 5.4 (added class member access on instantiation, e.g. (new Foo)->bar(), ...).
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Layout\Tpl\Engine\PH7Tpl;
 
