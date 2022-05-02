@@ -33,7 +33,7 @@ Designed and Created by [Pierre-Henry Soria](https://pierrehenry.be).
 
 ## 🔢 Version
 
-v1.4.1
+`v1.4.1`
 
 
 ## ⚖️ License
