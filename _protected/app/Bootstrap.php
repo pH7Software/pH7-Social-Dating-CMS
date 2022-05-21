@@ -114,7 +114,11 @@ class Bootstrap
         // For All environment
         Import::file(PH7_PATH_APP . 'configs/environment/all.env');
         // Specific to the current environment
-        Import::file(PH7_PATH_APP . 'configs/environment/' . Env::getFileName(Config::getInstance()->values['mode']['environment']));
+        Import::file(
+            PH7_PATH_APP . 'configs/environment/' . Env::getFileName(
+                Config::getInstance()->values['mode']['environment']
+            )
+        );
 
         // Load Class ~/protected/app/includes/classes/*
         Import::pH7App('includes.classes.Loader.Autoloader');
