@@ -71,18 +71,16 @@ class FieldController extends Controller
 
         if (Field::unmodifiable($sMod, $sName) || !Field::doesExist($sMod, $sName)) {
             $bStatus = false;
-        } else {
-            $bStatus = (new FieldModel(Field::getTable($sMod), $sName))->delete();
-            if ($bStatus) {
-                Field::clearCache();
-            }
+        } elseif ($bStatus = (new FieldModel(Field::getTable($sMod), $sName))->delete()) {
+            Field::clearCache();
         }
 
         $sMsg = $bStatus ? t('The field has been deleted') : t('An error occurred while deleting the field.');
         $sMsgType = $bStatus ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
 
         Header::redirect(
-            Uri::get('field',
+            Uri::get(
+                'field',
                 'field',
                 'all',
                 $sMod
