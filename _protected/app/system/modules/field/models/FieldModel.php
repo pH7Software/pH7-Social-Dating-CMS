@@ -69,9 +69,9 @@ class FieldModel extends Model
         $aColumn = [];
         if ($rStmt->rowCount() > 0) {
             while ($aRow = $rStmt->fetch()) {
-                foreach ($aRow as $sColumn => $sValue) {
-                    if ($this->isColumnEligible($sColumn)) {
-                        $aColumn[] = $sColumn;
+                foreach ($aRow as $mColumn => $sValue) {
+                    if ($this->isColumnEligible($mColumn)) {
+                        $aColumn[] = $mColumn;
                     }
                 }
             }
@@ -180,8 +180,11 @@ class FieldModel extends Model
         return $sSql;
     }
 
-    private function isColumnEligible(string $sColumn): bool
+    /**
+     * @param string|int $mColumn
+     */
+    private function isColumnEligible($mColumn): bool
     {
-        return !is_numeric($sColumn) && $sColumn !== self::PROFILE_ID_COLUMN;
+        return !is_numeric($mColumn) && $mColumn !== self::PROFILE_ID_COLUMN;
     }
 }
