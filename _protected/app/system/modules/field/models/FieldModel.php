@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Field / Model
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
@@ -16,30 +18,26 @@ use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 class FieldModel extends Model
 {
-    const MAX_VARCHAR_LENGTH = 191; // 191 max for MySQL's utf8mb4
-    const MAX_INT_LENGTH = 11;
-    const DEF_INT_LENGTH = 9;
-    const FIELD_TEXTBOX_TYPE = 'textbox';
-    const FIELD_NUMBER_TYPE = 'number';
-    const PROFILE_ID_COLUMN = 'profileId';
+    public const MAX_VARCHAR_LENGTH = 191; // 191 max for MySQL's utf8mb4
+
+    private const MAX_INT_LENGTH = 11;
+    private const DEF_INT_LENGTH = 9;
+    private const FIELD_TEXTBOX_TYPE = 'textbox';
+    private const FIELD_NUMBER_TYPE = 'number';
+    private const PROFILE_ID_COLUMN = 'profileId';
+
+    private string $sTable;
+
+    private ?string $sName;
+
+    private ?string $sType;
+
+    private ?int $iLength;
+
+    private ?string $sDefVal;
 
     /** @var string */
-    private $sTable;
-
-    /** @var null|string */
-    private $sName;
-
-    /** @var null|string */
-    private $sType;
-
-    /** @var null|int */
-    private $iLength;
-
-    /** @var null|string */
-    private $sDefVal;
-
-    /** @var string */
-    private $sSql;
+    private string $sSql;
 
     /**
      * @param string|null $sTable Table name.
@@ -48,7 +46,7 @@ class FieldModel extends Model
      * @param int|null $iLength Length field.
      * @param string|null $sDefVal Default field value.
      */
-    public function __construct($sTable, $sName = null, $sType = null, $iLength = null, $sDefVal = null)
+    public function __construct(string $sTable, ?string $sName = null, ?string $sType = null, ?int $iLength = null, ?string $sDefVal = null)
     {
         parent::__construct();
 
@@ -64,7 +62,7 @@ class FieldModel extends Model
      *
      * @return array All fields.
      */
-    public function all()
+    public function all(): array
     {
         $rStmt = Db::getInstance()->query('SELECT * FROM' . Db::prefix($this->sTable) . 'LIMIT 1');
 
@@ -82,19 +80,13 @@ class FieldModel extends Model
         return $aColumn;
     }
 
-    /**
-     * @return bool
-     */
-    public function insert()
+    public function insert(): bool
     {
         $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'ADD ' . $this->sName . $this->getSqlType() . $this->getSqlDefault() . ';';
         return $this->execute();
     }
 
-    /**
-     * @return bool
-     */
-    public function update()
+    public function update(): bool
     {
         $sOldFieldName = (new HttpRequest)->get('name');
         $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'CHANGE ' . $sOldFieldName . ' ' . $this->sName . $this->getSqlType() . $this->getSqlDefault() . ';';
@@ -102,10 +94,7 @@ class FieldModel extends Model
         return $this->execute();
     }
 
-    /**
-     * @return bool
-     */
-    public function delete()
+    public function delete(): bool
     {
         $this->sSql = 'ALTER TABLE' . Db::prefix($this->sTable) . 'DROP ' . $this->sName;
         return $this->execute();
@@ -113,10 +102,8 @@ class FieldModel extends Model
 
     /**
      * Count the number of fields.
-     *
-     * @return int
      */
-    public function total()
+    public function total(): int
     {
         return count($this->all());
     }
@@ -124,16 +111,16 @@ class FieldModel extends Model
     /**
      * Executes SQL queries.
      *
-     * @return bool|array Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
+     * @return bool Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
      *
      * @throws PH7InvalidArgumentException Explanatory message.
      */
-    private function execute()
+    private function execute(): bool
     {
         $oDb = Db::getInstance();
         $rStmt = $oDb->exec($this->sSql);
 
-        return $rStmt === false ? $oDb->errorInfo() : true;
+        return $rStmt !== false;
     }
 
     /**
@@ -141,7 +128,7 @@ class FieldModel extends Model
      *
      * @throws PH7InvalidArgumentException
      */
-    private function getSqlType()
+    private function getSqlType(): string
     {
         $sSql = ' ';
 
@@ -185,23 +172,15 @@ class FieldModel extends Model
         return $sSql;
     }
 
-    /**
-     * @return string
-     */
-    private function getSqlDefault()
+    private function getSqlDefault(): string
     {
         $sSql = ' DEFAULT ';
-        $sSql .= isset($this->sDefVal) ? Db::getInstance()->quote($this->sDefVal) : 'NULL';
+        $sSql .= $this->sDefVal !== null ? Db::getInstance()->quote($this->sDefVal) : 'NULL';
 
         return $sSql;
     }
 
-    /**
-     * @param string $sColumn
-     *
-     * @return bool
-     */
-    private function isColumnEligible($sColumn)
+    private function isColumnEligible(string $sColumn): bool
     {
         return !is_numeric($sColumn) && $sColumn !== self::PROFILE_ID_COLUMN;
     }
