@@ -3,7 +3,7 @@
  * Uri Router for URLs rewrite.
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Router
  */
@@ -22,17 +22,16 @@ use PH7\Framework\Pattern\Statik;
 class Uri
 {
     // Set to FALSE if you got too many files (e.g. if inode files usage is overaged on shared hosting)
-    const URI_CACHE_ENABLED = true;
+    public const URI_CACHE_ENABLED = true;
 
-    const CACHE_GROUP = 'str/uri/' . PH7_LANG_CODE;
-    const CACHE_TIME = 86400; // 24h
+    public const VARS_PARAM_DELIMITER = ',';
 
-    const VARS_PARAM_DELIMITER = ',';
+    public const ROUTE_FILE_EXT = '.xml';
 
-    const ROUTE_FILE_EXT = '.xml';
+    private const CACHE_GROUP = 'str/uri/' . PH7_LANG_CODE;
+    private const CACHE_TIME = 86400; // 24h
 
-    /** @var bool */
-    private static $bFullClean;
+    private static bool $bFullClean;
 
     /**
      * Import the trait to set the class static.
@@ -43,13 +42,9 @@ class Uri
     /**
      * Load route file.
      *
-     * @param DOMDocument $oDom
-     *
-     * @return DOMDocument
-     *
      * @throws IOException If the file is not found.
      */
-    public static function loadFile(DOMDocument $oDom)
+    public static function loadFile(DOMDocument $oDom): DOMDocument
     {
         $oCache = (new Cache)->start(
             self::CACHE_GROUP,
@@ -80,7 +75,7 @@ class Uri
      *
      * @throws IOException
      */
-    public static function get($sModule, $sController, $sAction, $sVars = null, $bFullClean = true)
+    public static function get(string $sModule, string $sController, string $sAction, ?string $sVars = null, bool $bFullClean = true): string
     {
         self::$bFullClean = $bFullClean;
 
@@ -108,12 +103,7 @@ class Uri
         return $sUrl;
     }
 
-    /**
-     * @param string|null $sCacheId
-     *
-     * @return void
-     */
-    public static function clearCache($sCacheId = null)
+    public static function clearCache(?string $sCacheId = null): void
     {
         (new Cache)->start(
             self::CACHE_GROUP,
@@ -125,7 +115,7 @@ class Uri
     /**
      * @return bool TRUE if the URL has changed from the cached URL, FALSE otherwise.
      */
-    public static function isCachedUrlOutdated()
+    public static function isCachedUrlOutdated(): bool
     {
         $sHomepageRoute = self::get('user', 'main', 'index');
 
@@ -135,21 +125,17 @@ class Uri
     /**
      * @param string $sLangCode The two-letter language code. e.g., en, fr, de, ru, ...
      *
-     * @return bool
+     * @return bool TRUE if the language route file exists (e.g. `en.xml`), FALSE otherwise.
      */
-    private static function doesLangRouteFileExist($sLangCode)
+    private static function doesLangRouteFileExist(string $sLangCode): bool
     {
         return is_file(PH7_PATH_APP_CONFIG . 'routes/' . $sLangCode . self::ROUTE_FILE_EXT);
     }
 
     /**
-     * @param array $aParams
-     *
-     * @return string
-     *
      * @throws IOException If the XML file is not found.
      */
-    private static function uri(array $aParams)
+    private static function uri(array $aParams): string
     {
         $sModule = $aParams['module'];
         $sController = $aParams['controller'];
@@ -179,7 +165,7 @@ class Uri
      *
      * @throws IOException If the file is not found.
      */
-    private static function getRouteFilePath()
+    private static function getRouteFilePath(): string
     {
         $sPathDefaultLang = PH7_PATH_APP_CONFIG . 'routes/' . PH7_DEFAULT_LANG_CODE . self::ROUTE_FILE_EXT;
 
@@ -201,7 +187,7 @@ class Uri
      *
      * @return string The contents parsed.
      */
-    private static function parseVariable($sContents)
+    private static function parseVariable(string $sContents): string
     {
         /**
          * Replace the "[$admin_mod]" variable by the "PH7_ADMIN_MOD" constant.
@@ -211,22 +197,12 @@ class Uri
         return $sContents;
     }
 
-    /**
-     * @param array $aParams
-     *
-     * @return bool
-     */
-    private static function areVariablesSet(array $aParams)
+    private static function areVariablesSet(array $aParams): bool
     {
         return !empty($aParams['vars']);
     }
 
-    /**
-     * @param string $sVariables
-     *
-     * @return string
-     */
-    private static function getVariables($sVariables)
+    private static function getVariables(string $sVariables): string
     {
         $sVariables = self::removePunctuationCommas($sVariables);
 
@@ -242,12 +218,8 @@ class Uri
 
     /**
      * Strip the special characters from the URI.
-     *
-     * @param DOMElement $oRoute
-     *
-     * @return string
      */
-    private static function stripSpecialCharacters(DOMElement $oRoute)
+    private static function stripSpecialCharacters(DOMElement $oRoute): string
     {
         $sUri = $oRoute->getAttribute('url');
         $sUri = str_replace('\\', '', $sUri);
@@ -259,12 +231,8 @@ class Uri
 
     /**
      * Omits commas that may be part of a string sentence present in the URL parameters.
-     *
-     * @param string $sValue
-     *
-     * @return string
      */
-    private static function removePunctuationCommas($sValue)
+    private static function removePunctuationCommas(string $sValue): string
     {
         return str_replace([', ', ' ,'], '', $sValue);
     }
