@@ -46,8 +46,13 @@ class FieldModel extends Model
      * @param int|null $iLength Length field.
      * @param string|null $sDefVal Default field value.
      */
-    public function __construct(string $sTable, ?string $sName = null, ?string $sType = null, ?int $iLength = null, ?string $sDefVal = null)
-    {
+    public function __construct(
+        string $sTable,
+        ?string $sName = null,
+        ?string $sType = null,
+        ?int $iLength = null,
+        ?string $sDefVal = null
+    ) {
         parent::__construct();
 
         $this->sTable = Various::checkModelTable($sTable);
