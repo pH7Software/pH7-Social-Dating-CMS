@@ -1,10 +1,12 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2015-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2015-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / pH7CMS Helper / Controller
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -17,12 +19,12 @@ use PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
-    const HASH_VALIDATION = 'JkdjkPh7Pd5548OOSdgPU_92AIdO';
-    const INTERNAL_VERIFY_HASH = '681cd81b17b71c746e9ab7ac0445d3a3c960c329';
-    const HASH_VALIDATION_START_POSITION = 3;
-    const HASH_VALIDATION_LENGTH = 24;
+    private const HASH_VALIDATION = 'JkdjkPh7Pd5548OOSdgPU_92AIdO';
+    private const INTERNAL_VERIFY_HASH = '681cd81b17b71c746e9ab7ac0445d3a3c960c329';
+    private const HASH_VALIDATION_START_POSITION = 3;
+    private const HASH_VALIDATION_LENGTH = 24;
 
-    const VIEW_OPTIONS = [
+    private const VIEW_OPTIONS = [
         'donationbox',
         'upsetbox',
         'reviewbox',
@@ -34,7 +36,7 @@ class MainController extends Controller
         'reviewboxrecall'
     ];
 
-    const DONATION_AMOUNTS = [
+    private const DONATION_AMOUNTS = [
         19,
         29,
         47,
@@ -45,8 +47,7 @@ class MainController extends Controller
         597
     ];
 
-    /** @var ValidateSiteModel */
-    private $oValidateModel;
+    private ValidateSiteModel $oValidateModel;
 
     public function __construct()
     {
@@ -55,7 +56,7 @@ class MainController extends Controller
         $this->oValidateModel = new ValidateSiteModel;
     }
 
-    public function suggestionBox()
+    public function suggestionBox(): void
     {
         $this->setPageVisit();
 
@@ -81,9 +82,9 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function donationValidator($sHash = null)
+    public function donationValidator(?string $sHash = null): void
     {
-        if (!empty($sHash) && $this->donationCheckHash($sHash)) {
+        if (!empty($sHash) && $this->isDonationHashValid($sHash)) {
             if (!$this->oValidateModel->is()) {
                 // Set the site to "validated" status
                 $this->oValidateModel->set();
@@ -101,20 +102,14 @@ class MainController extends Controller
         }
     }
 
-    /**
-     * @return bool
-     */
-    private function donationCheckHash($sHash)
+    private function isDonationHashValid(string $sHash): bool
     {
         $sHash = substr($sHash, self::HASH_VALIDATION_START_POSITION, self::HASH_VALIDATION_LENGTH);
 
         return self::INTERNAL_VERIFY_HASH === sha1($sHash);
     }
 
-    /**
-     * @return string
-     */
-    private function getSuggestionBox()
+    private function getSuggestionBox(): string
     {
         if ($this->httpRequest->getExists('box') &&
             $this->doesViewExist($this->httpRequest->get('box'))
@@ -125,7 +120,7 @@ class MainController extends Controller
         return self::VIEW_OPTIONS[array_rand(self::VIEW_OPTIONS)];
     }
 
-    private function injectCssFile()
+    private function injectCssFile(): void
     {
         $this->design->addCss(
             PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
@@ -133,27 +128,17 @@ class MainController extends Controller
         );
     }
 
-    private function setPageVisit()
+    private function setPageVisit(): void
     {
         $this->session->set(ValidateSiteCore::SESS_IS_VISITED, 1);
     }
 
-    /**
-     * @param string $sBoxType
-     *
-     * @return bool
-     */
-    private function doesSuggestionBoxIsDonation($sBoxType)
+    private function doesSuggestionBoxIsDonation(string $sBoxType): bool
     {
         return $sBoxType === self::VIEW_OPTIONS[0] || $sBoxType === self::VIEW_OPTIONS[1];
     }
 
-    /**
-     * @param string $sViewName
-     *
-     * @return bool
-     */
-    private function doesViewExist($sViewName)
+    private function doesViewExist(string $sViewName): bool
     {
         return in_array($sViewName, self::VIEW_OPTIONS, true);
     }
