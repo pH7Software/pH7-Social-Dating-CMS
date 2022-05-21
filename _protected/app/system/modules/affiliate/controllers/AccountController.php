@@ -1,10 +1,12 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Controller
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -13,9 +15,9 @@ use PH7\Framework\Url\Header;
 
 class AccountController extends Controller
 {
-    const REDIRECTION_DELAY = 4; // In seconds
+    private const REDIRECTION_DELAY = 4; // In seconds
 
-    public function index()
+    public function index(): void
     {
         $this->setTitle(t('Account - Affiliate'));
 
@@ -34,7 +36,7 @@ class AccountController extends Controller
         $this->output();
     }
 
-    public function edit()
+    public function edit(): void
     {
         // Adding Css Style for Tabs
         $this->design->addCss(
@@ -46,13 +48,13 @@ class AccountController extends Controller
         $this->output();
     }
 
-    public function password()
+    public function password(): void
     {
         $this->setTitle(t('Change Password'));
         $this->output();
     }
 
-    public function delete()
+    public function delete(): void
     {
         $this->setTitle(t('Delete Affiliate Account'));
 
@@ -80,7 +82,7 @@ class AccountController extends Controller
         $this->output();
     }
 
-    public function yesDelete()
+    public function yesDelete(): void
     {
         if (!$this->session->exists('yes_delete')) {
             Header::redirect(
@@ -101,7 +103,7 @@ class AccountController extends Controller
      *
      * @throws Framework\File\IOException
      */
-    public function activate($sMail, $sHash)
+    public function activate($sMail, $sHash): void
     {
         (new UserCore)->activateAccount(
             $sMail,
@@ -114,10 +116,8 @@ class AccountController extends Controller
 
     /**
      * Give a referral affiliation link.
-     *
-     * @return string
      */
-    private function getReferralLink()
+    private function getReferralLink(): string
     {
         return Uri::get(
             'affiliate',
@@ -129,12 +129,8 @@ class AccountController extends Controller
 
     /**
      * Set title and heading.
-     *
-     * @param string $sTitle
-     *
-     * @return void
      */
-    private function setTitle($sTitle)
+    private function setTitle(string $sTitle): void
     {
         $this->view->page_title = $this->view->h1_title = $sTitle;
     }
