@@ -20,10 +20,10 @@ use PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
-    const DURATION_SITE_CONSIDERED_NEW = '12 days';
-    const SOFTWARE_BLOG_URL = 'https://ph7cms.com/blog/';
+    private const DURATION_SITE_CONSIDERED_NEW = '8 days';
+    private const SOFTWARE_BLOG_URL = 'https://ph7cms.com/blog/';
 
-    public function index()
+    public function index(): void
     {
         // Add ph7cms-helper's JS file if needed
         $oValidateSite = new ValidateSiteCore($this->session);
