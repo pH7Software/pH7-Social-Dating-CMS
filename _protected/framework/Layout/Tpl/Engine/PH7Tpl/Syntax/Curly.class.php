@@ -282,7 +282,7 @@ class Curly extends Syntax implements Parsable
     {
         $this->sCode = preg_replace(
             '#{\*.+\*}#sU',
-            null,
+            '',
             $this->sCode
         );
     }

@@ -66,7 +66,7 @@ class Db
     }
 
     /**
-     * @param string|null $sDsn
+     * @param string $sDsn
      * @param string|null $sUsername
      * @param string|null $sPassword
      * @param array|null $aDriverOptions
@@ -74,7 +74,7 @@ class Db
      *
      * @return self Returns the PDO instance class or create initial connection.
      */
-    public static function getInstance($sDsn = null, $sUsername = null, $sPassword = null, $aDriverOptions = null, $sPrefix = null)
+    public static function getInstance($sDsn = '', $sUsername = null, $sPassword = null, $aDriverOptions = null, $sPrefix = null)
     {
         if (self::$oInstance === null) {
             if (!empty($sDsn)) {
