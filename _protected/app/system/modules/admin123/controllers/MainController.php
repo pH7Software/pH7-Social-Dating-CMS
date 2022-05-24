@@ -3,10 +3,12 @@
  * @title          Main Controller
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -47,7 +49,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function stat()
+    public function stat(): void
     {
         $this->view->page_title = t('Statistics');
         $this->view->h1_title = t('Site statistics');
@@ -57,7 +59,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function login()
+    public function login(): void
     {
         // Prohibit the referencing in search engines of the admin panel
         $this->view->header = Meta::NOINDEX;
@@ -67,7 +69,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function logout()
+    public function logout(): void
     {
         (new Admin)->logout($this->session);
 
@@ -77,7 +79,7 @@ class MainController extends Controller
         );
     }
 
-    protected function addStats()
+    protected function addStats(): void
     {
         $this->addCssFile();
 
@@ -313,10 +315,7 @@ class MainController extends Controller
         unset($oStatModel);
     }
 
-    /**
-     * @return void
-     */
-    protected function checkUpdates()
+    protected function checkUpdates(): void
     {
         if (Version::isUpdateEligible()) {
             $aLatestVerInfo = Version::getLatestInfo();
@@ -331,10 +330,7 @@ class MainController extends Controller
         }
     }
 
-    /**
-     * @return bool
-     */
-    private function isWebsiteNew()
+    private function isWebsiteNew(): bool
     {
         $iSiteCreationDate = VDate::getTime(StatisticCoreModel::getDateOfCreation());
 
@@ -343,10 +339,8 @@ class MainController extends Controller
 
     /**
      * Adding the common CSS for the statistic chart.
-     *
-     * @return void
      */
-    private function addCssFile()
+    private function addCssFile(): void
     {
         $this->design->addCss(
             PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
