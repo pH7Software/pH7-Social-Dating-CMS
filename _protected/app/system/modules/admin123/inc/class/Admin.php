@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Inc / Class
  */
@@ -13,13 +13,9 @@ use PH7\Framework\Session\Session;
 class Admin extends AdminCore
 {
     /**
-     * Logout function for admins.
-     *
-     * @param Session $oSession
-     *
-     * @return void
+     * Logout an admin.
      */
-    public function logout(Session $oSession)
+    public function logout(Session $oSession): void
     {
         $oSession->destroy();
     }
