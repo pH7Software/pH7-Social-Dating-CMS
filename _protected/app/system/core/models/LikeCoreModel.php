@@ -48,7 +48,7 @@ class LikeCoreModel extends Model
     public function update($sKey, $fLastIp)
     {
         $sSqlQuery = 'UPDATE' . Db::prefix(DbTableName::LIKE) .
-            'SET votes = votes + 1 , lastVote = NOW() , lastIp =:lastIp WHERE keyId =:key';
+            'SET votes = votes + 1 , lastVote = NOW(), lastIp =:lastIp WHERE keyId =:key';
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindValue(':key', $sKey, PDO::PARAM_STR);
