@@ -75,8 +75,6 @@ final class BrowserTest extends TestCase
 
     public function testHttpRefererUnset(): void
     {
-        unset($_SERVER['HTTP_REFERER']);
-
         $this->assertNull($this->oBrowser->getHttpReferer());
     }
 
@@ -91,8 +89,6 @@ final class BrowserTest extends TestCase
 
     public function testIfModifiedSinceHeaderDoesNotExist(): void
     {
-        unset($_SERVER['HTTP_IF_MODIFIED_SINCE']);
-
         $this->assertNull($this->oBrowser->getIfModifiedSince());
     }
 
@@ -173,5 +169,6 @@ final class BrowserTest extends TestCase
         unset($_SERVER['HTTP_PROFILE']);
         unset($_SERVER['HTTP_USER_AGENT']);
         unset($_SERVER['HTTP_IF_MODIFIED_SINCE']);
+        unset($_SERVER['HTTP_REFERER']);
     }
 }
