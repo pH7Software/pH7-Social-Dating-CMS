@@ -29,6 +29,11 @@ final class ServerTest extends TestCase
         $this->assertTrue(Server::isLocalHost());
     }
 
+    public function testNotFoundServerName(): void
+    {
+        $this->assertNull(Server::getName());
+    }
+
     public function testItIsNotLocalHost(): void
     {
         $_SERVER['HTTP_HOST'] = 'ph7cms.com';
@@ -56,5 +61,18 @@ final class ServerTest extends TestCase
         $sActual = Server::getVar('SOMETHING');
 
         $this->assertSame('&lt;b&gt;I&#039;m the value&lt;/b&gt;', $sActual);
+    }
+    
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        $this->cleanupGlobalServerVars();
+    }
+
+    private function cleanupGlobalServerVars(): void
+    {
+        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['HTTP_HOST']);
     }
 }
