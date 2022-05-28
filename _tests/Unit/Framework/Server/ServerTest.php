@@ -22,16 +22,16 @@ final class ServerTest extends TestCase
         $this->assertSame('ph7cms.com', Server::getName());
     }
 
+    public function testNotFoundServerName(): void
+    {
+        $this->assertNull(Server::getName());
+    }
+
     public function testItIsLocalHost(): void
     {
         $_SERVER['SERVER_NAME'] = '127.0.0.1';
 
         $this->assertTrue(Server::isLocalHost());
-    }
-
-    public function testNotFoundServerName(): void
-    {
-        $this->assertNull(Server::getName());
     }
 
     public function testItIsNotLocalHost(): void
