@@ -4,10 +4,12 @@
  * @desc           This class is used to manage settings of the web server and can simulate a server secure and reliable.
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / Framework / Server
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Server;
 
@@ -69,7 +71,7 @@ final class Server
      *
      * @return bool TRUE if windows, FALSE if not.
      */
-    public static function isWindows()
+    public static function isWindows(): bool
     {
         return 0 === stripos(PHP_OS, 'WIN');
     }
@@ -79,7 +81,7 @@ final class Server
      *
      * @return bool TRUE if Unix, FALSE if not.
      */
-    public static function isUnix()
+    public static function isUnix(): bool
     {
         $sOS = strtoupper(PHP_OS);
 
@@ -91,7 +93,7 @@ final class Server
      *
      * @return bool TRUE if windows, FALSE if not.
      */
-    public static function isMac()
+    public static function isMac(): bool
     {
         return 0 === stripos(PHP_OS, 'MAC');
     }
@@ -101,9 +103,9 @@ final class Server
      *
      * @internal We use LOCAL_ADDR variable for compatibility with Windows servers.
      *
-     * @return string IP address.
+     * @return string|null IP address if found. NULL otherwise.
      */
-    public static function getIp()
+    public static function getIp(): ?string
     {
         return self::getVar(
             self::SERVER_ADDR,
@@ -131,9 +133,9 @@ final class Server
     /**
      * Get the server name.
      *
-     * @return string
+     * @return string|null The name of the server host if exists, NULL otherwise.
      */
-    public static function getName()
+    public static function getName(): ?string
     {
         return self::getVar(self::SERVER_NAME);
     }
@@ -143,7 +145,7 @@ final class Server
      *
      * @return bool TRUE if it is in local mode, FALSE if not.
      */
-    public static function isLocalHost()
+    public static function isLocalHost(): bool
     {
         $sServerName = self::getName();
         $sHttpHost = self::getVar(self::HTTP_HOST);
@@ -157,7 +159,7 @@ final class Server
      *
      * @return bool
      */
-    public static function isRewriteMod()
+    public static function isRewriteMod(): bool
     {
         // Check if mod_rewrite is installed and is configured to be used via .htaccess
         if (!strtolower(getenv('HTTP_MOD_REWRITE')) === 'on') {
@@ -179,15 +181,12 @@ final class Server
      *
      * @return bool Returns TRUE if the Internet connection is enabled, FALSE otherwise.
      */
-    public static function checkInternetConnection()
+    public static function checkInternetConnection(): bool
     {
         return is_internet();
     }
 
-    /**
-     * @return bool
-     */
-    public static function isHttps()
+    public static function isHttps(): bool
     {
         return substr(PH7_URL_PROT, 0, 5) === 'https';
     }
