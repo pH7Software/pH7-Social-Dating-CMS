@@ -39,10 +39,8 @@ class Session
      *
      * @param array|string $mName Name of the session.
      * @param string|null $sValue Value of the session, Optional if the session data is in an array.
-     *
-     * @return void
      */
-    public function set($mName, $sValue = null)
+    public function set($mName, $sValue = null): void
     {
         if (is_array($mName)) {
             foreach ($mName as $sName => $sVal) {
@@ -61,7 +59,7 @@ class Session
      *
      * @return string If the session exists, returns the session with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the session doesn't exist.
      */
-    public function get(string $sName, $bEscape = true)
+    public function get(string $sName, ?bool $bEscape = true): string
     {
         $sSessionName = Config::getInstance()->values['session']['prefix'] . $sName;
 
@@ -96,8 +94,6 @@ class Session
      * Delete the session(s) if the session exists.
      *
      * @param array|string $mName Name of the session to delete.
-     *
-     * @return void
      */
     public function remove($mName): void
     {
@@ -116,8 +112,6 @@ class Session
 
     /**
      * Session regenerate ID.
-     *
-     * @return void
      */
     public function regenerateId(): void
     {
@@ -140,8 +134,6 @@ class Session
 
     /**
      * Check if the session is already initialized and initialize it if it isn't the case.
-     *
-     * @return void
      */
     private function initializePHPSession(): void
     {

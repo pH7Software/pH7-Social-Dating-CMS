@@ -75,7 +75,7 @@ class UserCore
      *
      * @return bool
      */
-    public static function isAdminLoggedAs()
+    public static function isAdminLoggedAs(): bool
     {
         return (new Session)->exists('login_user_as');
     }

@@ -27,8 +27,6 @@ class Cookie
      * @param string|null $sValue value of the cookie, Optional if the cookie data is in an array.
      * @param int|null $iTime The time the cookie expires. This is a Unix timestamp.
      * @param bool|null $bSecure If TRUE cookie will only be sent over a secure HTTPS connection from the client.
-     *
-     * @return void
      */
     public function set($mName, ?string $sValue = null, ?int $iTime = null, ?bool $bSecure = null): void
     {
@@ -68,11 +66,11 @@ class Cookie
      * Get the cookie value by giving its name.
      *
      * @param string $sName Name of the cookie.
-     * @param bool $bEscape
+     * @param bool|null $bEscape
      *
      * @return string If the cookie exists, returns the cookie with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the cookie doesn't exist.
      */
-    public function get(string $sName, bool $bEscape = true)
+    public function get(string $sName, ?bool $bEscape = true): string
     {
         $sCookieName = Config::getInstance()->values['cookie']['prefix'] . $sName;
 
@@ -107,8 +105,6 @@ class Cookie
      * Delete the cookie(s) key if the cookie exists.
      *
      * @param array|string $mName Name of the cookie to delete.
-     *
-     * @return void
      */
     public function remove($mName): void
     {

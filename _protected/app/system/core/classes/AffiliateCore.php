@@ -98,10 +98,8 @@ class AffiliateCore extends UserCore
      * @param int $iAffId Affiliate ID
      * @param Config $oConfig
      * @param Registry $oRegistry
-     *
-     * @return void
      */
-    public static function updateJoinCom($iAffId, Config $oConfig, Registry $oRegistry)
+    public static function updateJoinCom($iAffId, Config $oConfig, Registry $oRegistry): void
     {
         if ($iAffId < 1) {
             // If there is no valid ID, we stop the method
