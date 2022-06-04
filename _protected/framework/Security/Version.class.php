@@ -31,7 +31,7 @@ final class Version
     const FRAMEWORK_TAG_NAME = 'ph7';
     const PACKAGE_TAG_NAME = 'ph7builder';
 
-    const UPGRADE_DOC_URL = 'https://ph7cms.com/doc/en/upgrade';
+    const UPGRADE_DOC_URL = 'https://ph7builder.com/doc/en/upgrade';
 
     /**
      * Framework Kernel.
@@ -48,7 +48,7 @@ final class Version
      * VERSION NUMBERS:
      * MAJOR.MINOR.PATCH[.build]
      *
-     * More details: https://ph7cms.com/new-versioning-system/
+     * More details: https://ph7builder.com/new-versioning-system/
      */
     const KERNEL_VERSION = '17.2.0';
     const KERNEL_BUILD = '1';

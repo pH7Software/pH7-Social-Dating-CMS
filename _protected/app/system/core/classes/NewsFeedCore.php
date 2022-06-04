@@ -19,7 +19,7 @@ use PH7\Framework\Error\CException\PH7Exception;
 class NewsFeedCore
 {
     const DEFAULT_NUMBER_ITEMS = 10;
-    const NEWS_URL = 'https://ph7cms.com/feed/';
+    const NEWS_URL = 'https://ph7builder.com/feed/';
     const CACHE_GROUP = 'str/sys/mod/admin';
     const CACHE_LIFETIME = 3600 * 24;
 

@@ -27,7 +27,7 @@ abstract class Controller implements Controllable
     const DEFAULT_ADMIN_USERNAME = 'administrator';
     const SOFTWARE_PREFIX_COOKIE_NAME = 'pH7';
     const SOFTWARE_WEBSITE = 'https://ph7cms.com';
-    const SOFTWARE_REQUIREMENTS_URL = 'https://ph7cms.com/doc/en/requirements';
+    const SOFTWARE_REQUIREMENTS_URL = 'https://ph7builder.com/doc/en/requirements';
     const PAYPAL_DONATE_URL = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6';
     const PATREON_URL = 'https://www.patreon.com/bePatron?u=3534366';
     const SOFTWARE_AUTHOR = 'Pierre-Henry Soria';

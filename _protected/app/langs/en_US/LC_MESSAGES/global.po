@@ -14915,7 +14915,7 @@ msgid "By who this Web App has been developed?"
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/helpus.tpl:14
-msgid "A contribution to an open source project such as <a href=\"https://ph7cms.com/what-is-the-best-dating-software-provider/\">pH7Builder, Open Source Social/Dating Provider</a> looks great on your CV!"
+msgid "A contribution to an open source project such as <a href=\"https://ph7builder.com/what-is-the-best-dating-software-provider/\">pH7Builder, Open Source Social/Dating Provider</a> looks great on your CV!"
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/index.tpl:3

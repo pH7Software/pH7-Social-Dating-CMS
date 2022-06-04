@@ -35,7 +35,7 @@ $LANG = [
     'register' => 'Save It!',
     'site_name' => 'A Unique Site Name',
     'agree_license' => 'I have <strong>read</strong> and <strong>agree</strong> to the above Terms.',
-    'conform_to_laws' => 'I <strong>agree to always keep my website fully legal and to conform with any applicable laws and regulations</strong> that may apply to me, to my corporation, to my website and its users, and to review and <a href="https://ph7cms.com/doc/en/how-to-edit-the-static-and-legal-pages" target="_blank" rel="noopener">update the "TOS", "Privacy Policy" (and any other required legal pages of my website)</a> in order to fully comply with the applicable laws and regulations.',
+    'conform_to_laws' => 'I <strong>agree to always keep my website fully legal and to conform with any applicable laws and regulations</strong> that may apply to me, to my corporation, to my website and its users, and to review and <a href="https://ph7builder.com/doc/en/how-to-edit-the-static-and-legal-pages" target="_blank" rel="noopener">update the "TOS", "Privacy Policy" (and any other required legal pages of my website)</a> in order to fully comply with the applicable laws and regulations.',
     'responsibilities_agreement' => 'I <strong>agree to use the software at my own risk</strong> and that the author of this software cannot in any case be held liable for direct or indirect damage, nor for any other damage of any kind whatsoever, resulting from the use of this software or the impossibility to use it for any reason whatsoever.',
     'step' => 'Step',
     'welcome' => 'Welcome to the installation of',

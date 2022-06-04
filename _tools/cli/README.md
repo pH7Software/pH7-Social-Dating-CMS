@@ -18,7 +18,7 @@ the `_protected` folder.
 
 The database configuration has less options. For instance, you can't change the prefix when creating the tables in the
 database, meaning you won't be able to have two same installations using the same database (if so, you will have to
-create a second database, or using the [traditional Web installer](http://ph7cms.com/doc/en/insall) instead).
+create a second database, or using the [traditional Web installer](http://ph7builder.com/doc/en/insall) instead).
 
 ## 🤔 Why pH7Builder CLI installation can be useful
 

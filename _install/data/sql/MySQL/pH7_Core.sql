@@ -20,7 +20,7 @@ SET @sDefaultSysModule = 'user';
 SET @sDefaultTemplate = 'base';
 SET @sIpApiUrl = 'https://whatismyipaddress.com/ip/';
 SET @sDefaultVideoUrl = 'https://www.youtube.com/watch?v=q-1eHnBOg4A';
-SET @sChatApiUrl = 'https://ph7cms.com/addons/chat/?name=%site_name%&url=%site_url%&skin=4';
+SET @sChatApiUrl = 'https://ph7builder.com/addons/chat/?name=%site_name%&url=%site_url%&skin=4';
 
 SET @iUserVisitorGroup = 1;
 SET @iUserPendingGroup = 9;

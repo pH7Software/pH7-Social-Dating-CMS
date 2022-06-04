@@ -154,7 +154,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 
 **It's not a hazard that pH7Builder is considered to be the first choice for creating an enterprise level dating Web application or a social networking platform**
 
-*Great features [like here](https://ph7cms.com/social-dating-features/) and many other unique and exclusive features are waiting for YOU. Already released in pH7Builder!*
+*Great features [like here](https://ph7builder.com/social-dating-features/) and many other unique and exclusive features are waiting for YOU. Already released in pH7Builder!*
 
 ![Build a Social Dating Web App with pH7Builder](https://cloud.githubusercontent.com/assets/1325411/19419481/657386a4-93d0-11e6-8eee-95deba2d30a0.png)
 
@@ -169,7 +169,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 
 * **Web Server** Apache with mod_php or with PHP in CGI, FastCGI mode (nginx, LiteSpeed and IIS should also work. You might have to change some pieces of code and change the URL rewriting to make it work).
 
-* **URL rewriting extension module** [Apache](https://ph7cms.com/doc/en/how-to-install-rewrite-module), nginx, LiteSpeed, IIS (for Web.config, you have a [good tutorial here](https://web.archive.org/web/20190116102700/http://www.phpgenious.com/2010/04/url-rewriting-with-php-and-iis-7/)).
+* **URL rewriting extension module** [Apache](https://ph7builder.com/doc/en/how-to-install-rewrite-module), nginx, LiteSpeed, IIS (for Web.config, you have a [good tutorial here](https://web.archive.org/web/20190116102700/http://www.phpgenious.com/2010/04/url-rewriting-with-php-and-iis-7/)).
 
 * **Specific Requirement** Server has to be connected to Internet.
 
@@ -275,7 +275,7 @@ You appreciate the project, all the years intensively spent on the core developm
 
 ## 📚 Documentation
 
-[pH7Builder Documentation](https://ph7cms.com/doc/)
+[pH7Builder Documentation](https://ph7builder.com/doc/)
 
 
 ## 🤯 Troubleshooting
@@ -295,7 +295,7 @@ Finding bugs, improving the CMS/doc or adding translations. Any contribution is 
 
 Just clone the repository, make your changes and then make a push ;-)
 
-*WARNING: Your code/modification must be of excellent quality and follow the [Code Convention](https://ph7cms.com/doc/en/code-convention) and [PSR](https://www.php-fig.org/psr/).* I manually review and validate all improvements and changes you I've done.
+*WARNING: Your code/modification must be of excellent quality and follow the [Code Convention](https://ph7builder.com/doc/en/code-convention) and [PSR](https://www.php-fig.org/psr/).* I manually review and validate all improvements and changes you I've done.
 
 ![pH7Software GitHub. Me, at a Costa coffee shop on Feb 4th, 2017.](https://user-images.githubusercontent.com/1325411/78962138-32ffa100-7ae3-11ea-8d35-83d78f3cbc48.jpg)
 

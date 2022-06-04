@@ -11,7 +11,7 @@
   <p>&nbsp;</p>
 
   <p>
-    &laquo;<em>{lang}A contribution to an open source project such as <a href="https://ph7cms.com/what-is-the-best-dating-software-provider/">pH7Builder, Open Source Social/Dating Provider</a> looks great on your CV!{/lang}</em>&raquo;<br />
+    &laquo;<em>{lang}A contribution to an open source project such as <a href="https://ph7builder.com/what-is-the-best-dating-software-provider/">pH7Builder, Open Source Social/Dating Provider</a> looks great on your CV!{/lang}</em>&raquo;<br />
     <br />{lang 'Thank you!'}
   </p>
 </div>

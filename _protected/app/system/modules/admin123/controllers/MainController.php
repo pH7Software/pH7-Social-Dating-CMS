@@ -23,7 +23,7 @@ use PH7\Framework\Url\Header;
 class MainController extends Controller
 {
     private const DURATION_SITE_CONSIDERED_NEW = '8 days';
-    private const SOFTWARE_BLOG_URL = 'https://ph7cms.com/blog/';
+    private const SOFTWARE_BLOG_URL = 'https://ph7builder.com/blog/';
 
     public function index(): void
     {

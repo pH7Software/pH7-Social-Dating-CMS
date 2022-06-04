@@ -21,7 +21,7 @@ use PH7\Framework\Server\Server;
 
 class Tool
 {
-    const SOFTWARE_API_URL = 'https://api.ph7cms.com/';
+    const SOFTWARE_API_URL = 'https://api.ph7builder.com/';
     const DEV_APP_API_KEY = 'dev772277';
 
     /**

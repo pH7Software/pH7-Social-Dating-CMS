@@ -21,7 +21,7 @@
 @sNoReplyEmail := 'noreply@yoursite.com';
 @sIpApiUrl := 'https://whatismyipaddress.com/ip/';
 @sDefaultVideoUrl := 'https://www.youtube.com/watch?v=q-1eHnBOg4A';
-@sChatApiUrl := 'https://ph7cms.com/addons/chat/?name=%site_name%&url=%site_url%&skin=4';
+@sChatApiUrl := 'https://ph7builder.com/addons/chat/?name=%site_name%&url=%site_url%&skin=4';
 
 @sCurrentDate := CURRENT_TIMESTAMP;
 @sPassword := SHA1(RAND() + UNIX_TIMESTAMP());
