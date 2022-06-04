@@ -270,7 +270,7 @@ You appreciate the project, all the years intensively spent on the core developm
 
 ## ⚡ Official Website
 
-[pH7Builder.com](https://ph7cms.com)
+[pH7Builder.com](https://ph7builder.com)
 
 
 ## 📚 Documentation
@@ -304,7 +304,7 @@ Just clone the repository, make your changes and then make a push ;-)
 
 ![Eco Friendly. Love the World and Love the Nature](static/img/love-nature.svg)
 
-[pH7Builder](https://ph7cms.com) has been designed to reduce power and CPU usage of your server in order to preserve the nature and help to save our environment.
+[pH7Builder](https://ph7builder.com) has been designed to reduce power and CPU usage of your server in order to preserve the nature and help to save our environment.
 
 pH7Builder's templates also use lighter colors since LCD monitors use less electricity to display them.
 

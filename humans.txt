@@ -14,7 +14,7 @@ please fork the GitHub repository https://github.com/pH7Software/pH7-Social-Dati
 Thank you!
 
 - Pierre-Henry Soria (founder and developer of pH7Builder)
-- pH7Builder Website: https://ph7cms.com
+- pH7Builder Website: https://ph7builder.com
 - Personal GitHub: https://github.com/pH-7
 - pH7Builder GitHub: https://github.com/pH7Software
 

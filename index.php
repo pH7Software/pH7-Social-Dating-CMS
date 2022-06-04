@@ -5,7 +5,7 @@
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2011-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
- * @link           https://ph7cms.com
+ * @link           https://ph7builder.com
  * @package        PH7 / ROOT
  */
 
