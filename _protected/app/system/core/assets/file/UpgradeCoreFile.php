@@ -116,8 +116,9 @@ class UpgradeCore
 
     /**
      * Checks and returns the correct needed version for the current pH7Builder installation.
+     * It will look at the next release version after the one currently installed.
      *
-     * @return string The version needed number for the current pH7Builder installation.
+     * @return string The needed version number for the current pH7Builder installation.
      */
     public function getNextVersion(): string
     {
@@ -127,7 +128,7 @@ class UpgradeCore
             return (string)$aVersions[$iKey + 1];
         }
 
-        // If no next version is found, just returns the current one.
+        // If no next version is found, just returns the current one
         return Kernel::SOFTWARE_VERSION;
     }
 
