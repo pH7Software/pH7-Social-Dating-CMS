@@ -1,10 +1,9 @@
 <?php
 /**
- * @title            Session Class
  * @desc             Handler Session
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Session
  */
@@ -57,9 +56,9 @@ class Session
      * @param string $sName Name of the session.
      * @param bool|null $bEscape
      *
-     * @return string If the session exists, returns the session with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the session doesn't exist.
+     * @return mixed If the session exists, returns the session with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the session doesn't exist.
      */
-    public function get(string $sName, ?bool $bEscape = true): string
+    public function get(string $sName, ?bool $bEscape = true)
     {
         $sSessionName = Config::getInstance()->values['session']['prefix'] . $sName;
 
