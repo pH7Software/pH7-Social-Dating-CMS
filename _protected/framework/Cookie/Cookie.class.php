@@ -1,10 +1,9 @@
 <?php
 /**
- * @title            Cookie Class
  * @desc             Handler Cookie
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Cookie
  */
@@ -68,9 +67,9 @@ class Cookie
      * @param string $sName Name of the cookie.
      * @param bool|null $bEscape
      *
-     * @return string If the cookie exists, returns the cookie with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the cookie doesn't exist.
+     * @return mixed If the cookie exists, returns the cookie with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the cookie doesn't exist.
      */
-    public function get(string $sName, ?bool $bEscape = true): string
+    public function get(string $sName, ?bool $bEscape = true)
     {
         $sCookieName = Config::getInstance()->values['cookie']['prefix'] . $sName;
 
