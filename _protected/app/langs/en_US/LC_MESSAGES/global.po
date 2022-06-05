@@ -1868,7 +1868,7 @@ msgid "%software_name% <strong>%0%</strong> is available! Update it today to kee
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/MainController.php:336
-msgid "👉 <a href=\"%1%\" target=\"_blank\" rel=\"noopener\">Run the upgrade wizard</a>."
+msgid "👉 <a href=\"%0%\" target=\"_blank\" rel=\"noopener\">Run the upgrade wizard</a> 👈"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/ModeratorController.php:54

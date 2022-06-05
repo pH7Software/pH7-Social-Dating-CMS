@@ -324,7 +324,7 @@ class MainController extends Controller
             $sMsg = '<h3>' . t('🍰 A <a href="%0%" target="_blank" rel="noopener">New Release</a> 🎁 just for YOU! 😍', Kernel::SOFTWARE_RELEASE_URL) . '</h3>';
             $sMsg .= t('%software_name% <strong>%0%</strong> is available! Update it today to keep your site safe and stable.', $sLatestVer);
             $sMsg .= '<br /><br />';
-            $sMsg .= t('👉 <a href="%1%" target="_blank" rel="noopener">Run the upgrade wizard</a>.', PH7_URL_ROOT . 'asset/file/Upgrade');
+            $sMsg .= t('👉 <a href="%0%" target="_blank" rel="noopener">Run the upgrade wizard</a> 👈', PH7_URL_ROOT . 'asset/file/Upgrade');
 
             $this->design->setMessage($sMsg);
         }
