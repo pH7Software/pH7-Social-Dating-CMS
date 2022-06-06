@@ -345,7 +345,7 @@ class ImportUser extends Core
      */
     private function getRandomEmail($sFiveChars)
     {
-        return sprintf('peterzhenry%s@%s.ph7cms.com', $sFiveChars, $sFiveChars);
+        return sprintf('peterzhenry%s@%s.ph7builder.com', $sFiveChars, $sFiveChars);
     }
 
     /**
