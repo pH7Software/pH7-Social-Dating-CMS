@@ -1,6 +1,6 @@
 1. Requirements: https://ph7builder.com/doc/en/requirements
 2. Installation: https://ph7builder.com/doc/en/install
-3. Once you finished the installation, your admin panel URL will be: http://YOUR-PH7CMS-SITE.com/admin123/
+3. Once you finished the installation, your admin panel URL will be: http://YOUR-SITE.com/admin123/
 
 
 --- Softaculous/Fantastico Installation ---
