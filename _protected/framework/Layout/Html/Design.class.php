@@ -1,6 +1,6 @@
 <?php
 /**
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Layout / Html
@@ -412,7 +412,7 @@ class Design
     /**
      * @return void Output the relevant link based on the client browser's language.
      */
-    final public function smartLink()
+    final public function smartLink(): void
     {
         // Get Client's Language Code
         $sLangCode = (new Browser)->getLanguage(true);
@@ -422,9 +422,9 @@ class Design
             ['title' => 'Flirt Hot Girls', 'link' => 'https://01script.com/p/dooba'],
             ['title' => 'Speed Dating', 'link' => 'https://01script.com/p/dooba'],
             ['title' => 'Date your Friends', 'link' => 'https://01script.com/p/dooba'],
-            ['title' => 'Free Dating CMS', 'link' => Kernel::SOFTWARE_GIT_REPO_URL],
-            ['title' => 'Dating Software', 'link' => Kernel::SOFTWARE_GIT_REPO_URL],
-            ['title' => 'Create a Tinder-Like Dating App', 'link' => Kernel::SOFTWARE_GIT_REPO_URL]
+            ['title' => 'Create Your Own Dating Web App', 'link' => Kernel::SOFTWARE_GIT_REPO_URL],
+            ['title' => 'Dating Builder Software', 'link' => Kernel::SOFTWARE_GIT_REPO_URL],
+            ['title' => 'Build a Tinder-Like Dating App', 'link' => Kernel::SOFTWARE_GIT_REPO_URL]
         ];
 
         if ($sLangCode === 'en-ie') {

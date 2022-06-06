@@ -1,6 +1,6 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Form
@@ -68,7 +68,7 @@ class AddAffiliateForm
         $oForm->addElement(new Textbox(t('Postal Code:'), 'zip_code', ['id' => 'str_zip_code', 'validation' => new Str(2, 15), 'required' => 1]));
         $oForm->addElement(new Phone(t('Phone Number:'), 'phone', ['description' => t('Enter full phone number with area code (e.g., +44768374890).'), 'required' => 1]));
         $oForm->addElement(new Textarea(t('Description:'), 'description', ['description' => t("Description of the affiliate's site(s)."), 'validation' => new Str(10, 2000), 'required' => 1]));
-        $oForm->addElement(new Url(t('Website:'), 'website', ['description' => t('Main website where the affiliate is the owner (e.g. http://ph7cms.com)'), 'required' => 1]));
+        $oForm->addElement(new Url(t('Website:'), 'website', ['description' => t('Main website where the affiliate is the owner (e.g. http://ph7builder.com)'), 'required' => 1]));
         $oForm->addElement(new Email(t('Bank Account:'), 'bank_account', ['description' => t('Bank Account (PayPal Email Address).'), 'validation' => new BankAccount]));
         $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
         $oForm->addElement(new Button);

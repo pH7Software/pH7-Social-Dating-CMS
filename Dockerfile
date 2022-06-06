@@ -36,13 +36,13 @@ RUN apt-get install -y && \
 RUN apt-get install -y nginx
 
 # Remove the default Nginx configuration file
-RUN rm -v /etc/nginx/ph7cms.conf
+RUN rm -v /etc/nginx/ph7builder.conf
 
 # Copy a configuration file from the current directory
-ADD ph7cms.conf /etc/nginx/
+ADD ph7builder.conf /etc/nginx/
 
 # Append "daemon off;" to the beginning of the configuration
-RUN echo "daemon off;" >> /etc/nginx/ph7cms.conf
+RUN echo "daemon off;" >> /etc/nginx/ph7builder.conf
 
 # Install PHP!
 FROM php:${PHP_VERSION}-fpm

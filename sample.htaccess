@@ -1,5 +1,5 @@
 ####################
-# Author:         Pierre-Henry Soria <hello@ph7cms.com>
+# Author:         Pierre-Henry Soria <hello@ph7builder.com>
 # Copyright:      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
 # License:        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 ####################
@@ -17,7 +17,7 @@
     RewriteEngine On
 
     ## Uncomment the below "#RewriteBase /" (remove "#") if pH7Builder is installed in a folder, and add the folder name after the slash "/"
-    ## Example: If pH7Builder is installed in "/public_html/ph7cms/", then it should be "RewriteBase /ph7cms/", however it may depends of your Apache configuration.
+    ## Example: If pH7Builder is installed in "/public_html/ph7builder/", then it should be "RewriteBase /ph7builder/", however it may depends of your Apache configuration.
     ## If you need, please ask your hosting company or check the Apache doc: http://httpd.apache.org/docs/current/mod/mod_rewrite.html
 
     # RewriteBase /

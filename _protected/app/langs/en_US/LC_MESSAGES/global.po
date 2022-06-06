@@ -5,7 +5,7 @@ msgstr ""
 "POT-Creation-Date: 2019-02-12 23:42+1300\n"
 "PO-Revision-Date: 2020-05-23 16:24+1000\n"
 "Last-Translator: Pierre-Henry Soria <hi@ph7.me>\n"
-"Language-Team: ¡pH7! - Pierre-Henry Soria <hello@ph7cms.com>\n"
+"Language-Team: ¡pH7! - Pierre-Henry Soria <hello@ph7builder.com>\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -209,7 +209,7 @@ msgid "Your name doesn't seem to be correct."
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:262
-msgid "Your must enter a valid url (e.g., http://ph7cms.com)."
+msgid "Your must enter a valid url (e.g. http://ph7builder.com)."
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:284
@@ -4143,7 +4143,7 @@ msgid "Description of the affiliate's site(s)."
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:53
-msgid "Main website where the affiliate is the owner (e.g. http://ph7cms.com)"
+msgid "Main website where the affiliate is the owner (e.g. http://ph7builder.com)"
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:54
@@ -13635,7 +13635,7 @@ msgid "Error: %element% cannot exceed %0% character(s)."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Url.php:14
-msgid "Error: %element% must contain a URL (e.g., <a href=\"http://ph7cms.com\">http://ph7cms.com</a>)."
+msgid "Error: %element% must contain a URL (e.g. <a href=\"http://ph7builder.com\">http://ph7builder.com</a>)."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Username.php:33

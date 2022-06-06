@@ -46,8 +46,8 @@ You get and own all data and files, hosted on your own server! ✌️
 - [Troubleshooting](#-troubleshooting)
 - [Contributing to the project](#-contributing)
 - [License](#%EF%B8%8F-license)
-- [Why pH7CMS is Eco-Friendly?](#-ph7cms-the-eco-friendly-cms-%EF%B8%8F)
-- [The toolsets I use](#-toolssoftware-used-to-develop-ph7cms)
+- [Why pH7Builder is Eco-Friendly?](#-ph7builder-the-eco-friendly-cms-%EF%B8%8F)
+- [The toolsets I use](#-toolssoftware-used-to-develop-ph7builder)
 - [About Me](#-the-cook)
   - [Contact Me](#-contact-suggestion--feedback)
   - [Hire Me](#-hire-me-at-your-company)
@@ -187,7 +187,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
     * From a command line opened in the project folder, run `composer install` to install pH7Builder's dependencies.
   * Composer:
     * [Install Composer](https://getcomposer.org/doc/00-intro.md)
-    * `composer create-project ph7software/ph7cms --prefer-dist ph7cms`
+    * `composer create-project ph7software/ph7builder --prefer-dist ph7builder`
   * Sourceforge:
     * Directly download the latest stable version from [Sourceforge](https://sourceforge.net/projects/ph7socialdating/).
   * Softaculous:
@@ -198,7 +198,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 
 In order to get pH7Builder working on nginx server, you need to add some custom nginx configuration.
 
-Create `/etc/nginx/ph7cms.conf` and add the following:
+Create `/etc/nginx/ph7builder.conf` and add the following:
 
 ```nginx
 location / {
@@ -209,7 +209,7 @@ location / {
 
 *Please note that the above code is the strict minimum and obviously you can add more rules by comparing with the [main Apache .htaccess file](https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/master/.htaccess).*
 
-Finally, in your nginx server configuration, you will have to include `ph7cms.conf` file to complete the configuration like below:
+Finally, in your nginx server configuration, you will have to include `ph7builder.conf` file to complete the configuration like below:
 
 In file, e.g., *`/etc/nginx/sites-enabled/yoursite.conf`* for Ubuntu and other OS based on Debian or `/etc/nginx/conf.d/yoursite.conf` for CentOS and other OS based on Red Hat.
 
@@ -219,15 +219,15 @@ server {
     listen 80;
 
     server_name www.yoursite.com;
-    root /var/www/ph7cms_public_root;
+    root /var/www/ph7builder_public_root;
     index index.php;
     client_max_body_size 50M;
 
     error_log /var/log/nginx/yoursite.error.log;
     access_log /var/log/nginx/yoursite.access.log;
 
-    # Include ph7cms.conf. You can also directly add the "location" rule instead of including the conf file
-    include /etc/nginx/ph7cms.conf;
+    # Include ph7builder.conf. You can also directly add the "location" rule instead of including the conf file
+    include /etc/nginx/ph7builder.conf;
 }
 ```
 
@@ -342,7 +342,7 @@ Finally, **please consider using green Web hosting** (which use Green Power supp
 
 ## 🖋 Contact (Suggestion / Feedback)
 
-Feel free to send me an email at *hello {AT} ph7cms {D0T} com*
+Feel free to send me an email at *hello {AT} ph7builder {D0T} com*
 
 
 ## ⚖️ License

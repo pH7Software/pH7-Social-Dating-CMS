@@ -2,7 +2,7 @@
 --
 -- Title:         SQL Core (base) Install File
 --
--- Author:        Pierre-Henry Soria <hello@ph7cms.com>
+-- Author:        Pierre-Henry Soria <hello@ph7builder.com>
 -- Copyright:     (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
 -- License:       MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 -- Package:       PH7 / Install / Data / Sql / MySQL

@@ -2,7 +2,7 @@
 /**
  * @title            Page's DNA Generator
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2018-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Layout / Html
@@ -49,7 +49,7 @@ COMMENT;
 
     const COMMENT_BUILT_WITH_PH7CMS = <<<COMMENT
         \n<!--
-     BUILT WITH pH7Builder – https://ph7cms.com
+     BUILT WITH pH7Builder – https://ph7builder.com
      https://github.com/pH7Software/pH7-Social-Dating-CMS
 
 
@@ -94,7 +94,7 @@ COMMENT;
 
     const COMMENT_SOCIAL_DATING_SOFTWARE = <<<COMMENT
         \n<!--
-     💪 BUILT WITH pH7Builder ❤️ – https://ph7cms.com
+     💪 BUILT WITH pH7Builder ❤️ – https://ph7builder.com
 
       mmmm                  "           ""#
      #"   "  mmm    mmm   mmm     mmm     #

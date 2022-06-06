@@ -51,7 +51,7 @@ defined('PH7') or exit('Restricted access');
  * @link https://github.com/rgrove/jsmin-php
  *
  * THIS FILE HAS BEEN MODIFIED BY:
- * @author Pierre-Henry Soria <hello@ph7cms.com>
+ * @author Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
  */
 class JS

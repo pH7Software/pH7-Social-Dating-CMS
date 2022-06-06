@@ -8,7 +8,7 @@ services:
         volumes:
             - .:/var/www:/var/www/
             - ./sites:/etc/nginx/conf.d
-            - ./nginx.conf:/etc/nginx/ph7cms.conf
+            - ./nginx.conf:/etc/nginx/ph7builder.conf
         depends_on:
             - php
         links:
