@@ -5,14 +5,14 @@
  */
 
 /**
- * Force target_blank with window.open JavaScript method.
+ * Force target '_blank' with window.open JavaScript method.
  */
 (function () {
     $('a').click(function () {
         var href = $(this).attr('href');
 
         if (
-            href.indexOf('ph7cms.com') == -1 && href.indexOf('youtube.com') == -1 &&
+            href.indexOf('ph7builder.com') == -1 && href.indexOf('youtube.com') == -1 &&
             href.indexOf('youtu.be') == -1 && href.indexOf('vimeo.com') == -1 &&
             href.indexOf('dailymotion.com') == -1 && href.indexOf('metacafe.com') == -1 &&
             href.indexOf('gravatar.com') == -1 && href.indexOf('softaculous.com') == -1 &&
