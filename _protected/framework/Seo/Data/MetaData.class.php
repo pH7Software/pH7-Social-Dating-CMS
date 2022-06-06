@@ -24,7 +24,7 @@ final class MetaData
             'metaKeywords' => 'meet people, community, single, friends, meet singles, women, men, dating site, dating service, dating website, online dating website',
             'headline' => 'Be on the right place!',
             'slogan' => 'Online Dating Community with Chat Rooms',
-            'promoText' => 'You\'re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Dating Sites like that with <a href="https://ph7cms.com">pH7Builder</a>. It is Professional, Free, Open Source, ...',
+            'promoText' => 'You\'re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Dating Sites like that with <a href="https://ph7builder.com">pH7Builder</a>. It is Professional, Free, Open Source, ...',
             'metaRobots' => 'index, follow, all',
             'metaAuthor' => 'Pierre-Henry Soria (pH7Builder.com)',
             'metaCopyright' => 'Pierre-Henry Soria. All Rights Reserved.',

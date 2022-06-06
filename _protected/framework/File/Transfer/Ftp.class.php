@@ -8,7 +8,7 @@
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / File / Transfer
  * @version          0.8
- * @link             http://ph7cms.com
+ * @link             http://ph7builder.com
  * @linkDoc          http://php.net/manual/book.ftp.php
  */
 

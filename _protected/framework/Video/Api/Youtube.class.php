@@ -1,13 +1,11 @@
 <?php
 /**
- * @title            Youtube Class
- *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Video / Api
  * @version          1.2
- * @link             http://ph7cms.com
+ * @link             http://ph7builder.com
  * @history          28/03/2016 - Since pH7Builder 1.3.7, it's now compatible with Youtube API v3. Since Youtube API v3, it requires a Google API key. This is available through pH7Builder's admin panel.
  */
 
@@ -89,8 +87,6 @@ class Youtube extends Api implements Apible
      * @param string $sMedia
      * @param int|string $iWidth
      * @param int|string $iHeight
-     *
-     * @return string
      */
     public function getMeta(string $sUrl, string $sMedia, $iWidth, $iHeight): string
     {

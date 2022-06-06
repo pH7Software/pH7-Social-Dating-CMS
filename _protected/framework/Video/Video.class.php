@@ -7,7 +7,7 @@
  * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Video
- * @link             https://ph7cms.com
+ * @link             https://ph7builder.com
  */
 
 namespace PH7\Framework\Video;

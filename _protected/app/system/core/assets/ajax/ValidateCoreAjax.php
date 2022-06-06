@@ -259,7 +259,7 @@ class ValidateCoreAjax
     protected function url($sValue)
     {
         if (!$this->oValidate->url($sValue)) {
-            $this->sMsg = t('Your must enter a valid url (e.g., http://ph7builder.com).');
+            $this->sMsg = t('Your must enter a valid url (e.g. http://ph7builder.com).');
         } else {
             $this->iStatus = 1;
             $this->sMsg = t('OK!');
