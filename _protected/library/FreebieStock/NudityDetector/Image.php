@@ -3,7 +3,7 @@
 /**
  * @author FreebieVectors.com
  *
- * Modified by Pierre-Henry Soria <hello@ph7cms.com>
+ * Modified by Pierre-Henry Soria <hello@ph7builder.com>
  *
  * General image utilities
  */

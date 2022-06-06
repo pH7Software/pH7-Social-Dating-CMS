@@ -3,7 +3,7 @@
 /**
  * @author FreebieVectors.com
  *
- * Modified by Pierre-Henry Soria <hello@ph7cms.com>
+ * Modified by Pierre-Henry Soria <hello@ph7builder.com>
  *
  * Image nudity detertor based on flesh color quantity.
  * Source: http://www.naun.org/multimedia/NAUN/computers/20-462.pdf

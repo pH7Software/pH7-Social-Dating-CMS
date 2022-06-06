@@ -3,7 +3,7 @@
  * @title          Server Class
  * @desc           This class is used to manage settings of the web server and can simulate a server secure and reliable.
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / Framework / Server
