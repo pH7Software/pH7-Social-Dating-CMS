@@ -412,7 +412,7 @@ class Design
     /**
      * @return void Output the relevant link based on the client browser's language.
      */
-    final public function smartLink()
+    final public function smartLink(): void
     {
         // Get Client's Language Code
         $sLangCode = (new Browser)->getLanguage(true);
@@ -422,9 +422,9 @@ class Design
             ['title' => 'Flirt Hot Girls', 'link' => 'https://01script.com/p/dooba'],
             ['title' => 'Speed Dating', 'link' => 'https://01script.com/p/dooba'],
             ['title' => 'Date your Friends', 'link' => 'https://01script.com/p/dooba'],
-            ['title' => 'Free Dating CMS', 'link' => Kernel::SOFTWARE_GIT_REPO_URL],
-            ['title' => 'Dating Software', 'link' => Kernel::SOFTWARE_GIT_REPO_URL],
-            ['title' => 'Create a Tinder-Like Dating App', 'link' => Kernel::SOFTWARE_GIT_REPO_URL]
+            ['title' => 'Create Your Own Dating Web App', 'link' => Kernel::SOFTWARE_GIT_REPO_URL],
+            ['title' => 'Dating Builder Software', 'link' => Kernel::SOFTWARE_GIT_REPO_URL],
+            ['title' => 'Build a Tinder-Like Dating App', 'link' => Kernel::SOFTWARE_GIT_REPO_URL]
         ];
 
         if ($sLangCode === 'en-ie') {
