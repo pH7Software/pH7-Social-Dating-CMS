@@ -4,7 +4,7 @@
  * @copyright      (c) 2015-2020, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Api / Controller
- * @link           http://ph7cms.com
+ * @link           http://ph7builder.com
  * @link           http://github.com/pH7Software/pH7Builder-HTTP-REST-Push-Data
  */
 
