@@ -135,15 +135,19 @@ class UpgradeCore
 
     private function prepare(): void
     {
-        if (!AdminCore::auth()) {
-            // Checking if the administrator is logged in
+        // Checking if the administrator is logged in
+        if (AdminCore::auth()) {
+            // Download the next upgrade patch to "~/_repository/" folder
+            $sNextVersion = $this->getNextVersion();
+
+            if (!$this->download($sNextVersion)) {
+                $this->aErrors[] = t("Couldn't properly download the patch zip archive. Please try again later on.");
+            }
+        } else {
             $this->aErrors[] = t('You must be logged in as administrator to upgrade your site.');
         }
 
         if (!$this->hasErrors()) {
-            // Download the next upgrade patch to "~/_repository/" folder
-            $this->download($this->getNextVersion());
-
             $aAvailableUpgrades = $this->getAvailableUpgrades();
             if (empty($aAvailableUpgrades)) {
                 $this->sHtml .= '<h2>' . t('No upgrade patches available for %software_name%.') . '</h2>';
@@ -326,15 +330,28 @@ class UpgradeCore
      * Then, extract the file to "_repository/upgrade/" directory to set it as available for the next update.
      * Then, remove zip archive file, as we don't need it anymore.
      */
-    private function download(string $sNewVersion): void
+    private function download(string $sNewVersion): bool
     {
         $sZipFileName = $sNewVersion . self::ARCHIVE_EXT;
         $sDestinationPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS;
 
         $rFile = $this->oFile->getUrlContents(self::REMOTE_URL . $sZipFileName);
         $this->oFile->putFile(PH7_PATH_REPOSITORY . PH7_TMP . $sZipFileName, $rFile);
-        $this->oFile->zipExtract(PH7_PATH_REPOSITORY . PH7_TMP . $sZipFileName, $sDestinationPath);
+
+        // TODO Need to retrieve the valid checksum of each release from the remote server, where it gives these details
+        $sRemoveChecksumPatch = md5_file(PH7_PATH_REPOSITORY . PH7_TMP . $sZipFileName);
+
+        if (!$this->isPatchChecksumLegit(PH7_PATH_REPOSITORY . PH7_TMP . $sZipFileName, $sRemoveChecksumPatch)) {
+            $bStatus = false;
+        } else {
+            // Extract zip archive
+            $bStatus = $this->oFile->zipExtract(PH7_PATH_REPOSITORY . PH7_TMP . $sZipFileName, $sDestinationPath);
+        }
+
+        // Delete zip archive
         $this->oFile->deleteFile(PH7_PATH_REPOSITORY . PH7_TMP . $sZipFileName);
+
+        return $bStatus;
     }
 
     /**
@@ -505,6 +522,14 @@ class UpgradeCore
     private function isUpgradeRequested(): bool
     {
         return $this->oHttpRequest->postExists('submit_upgrade');
+    }
+
+    /**
+     * Checks the checksum of the downloaded zip archive to be sure of its integrity and authenticity before proceeding to the upgrade with the patch file.
+     */
+    private function isPatchChecksumLegit(string $sZipFilePath, string $sValidChecksum): bool
+    {
+        return md5_file($sZipFilePath) === $sValidChecksum;
     }
 }
 
