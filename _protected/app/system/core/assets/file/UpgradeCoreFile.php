@@ -465,10 +465,10 @@ class UpgradeCore
 
         if (version_compare($sNumber, Kernel::SOFTWARE_VERSION, '==')) {
             return version_compare($sBuild, Kernel::SOFTWARE_BUILD, '>');
-        } else {
-            if (version_compare($sNumber, Kernel::SOFTWARE_VERSION, '>')) {
-                return true;
-            }
+        }
+
+        if (version_compare($sNumber, Kernel::SOFTWARE_VERSION, '>')) {
+            return true;
         }
 
         return false;
