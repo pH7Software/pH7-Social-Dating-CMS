@@ -159,6 +159,11 @@ class Config implements Configurable
         define('PH7_DEFAULT_LANG', $this->values['application']['default_lang']);
     }
 
+    /**
+     * @param string $sFile The ini config file to parse.
+     *
+     * @return array|bool The file settings as associative array on success, FALSE otherwise.
+     */
     private function parseIniFile(string $sFile)
     {
         return parse_ini_file($sFile, true, INI_SCANNER_TYPED);

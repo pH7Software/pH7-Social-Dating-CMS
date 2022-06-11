@@ -322,9 +322,9 @@ class MainController extends Controller
             $sLatestVer = t('%0%, build %1%', $aLatestVerInfo['version'], $aLatestVerInfo['build']);
 
             $sMsg = '<h3>' . t('🍰 A <a href="%0%" target="_blank" rel="noopener">New Release</a> 🎁 just for YOU! 😍', Kernel::SOFTWARE_RELEASE_URL) . '</h3>';
-            $sMsg .= t('%software_name% <strong>%0%</strong> is available! Please update it today to keep your site safe and stable.', $sLatestVer);
+            $sMsg .= t('%software_name% <strong>%0%</strong> is available! Update it today to keep your site safe and stable.', $sLatestVer);
             $sMsg .= '<br /><br />';
-            $sMsg .= t('Read <a href="%0%" target="_blank" rel="noopener">this</a> to learn how to upgrade your site, step-by-step. Once you follow the steps, run the upgrade wizard <a href="%1%" target="_blank" rel="noopener">here</a>.', Version::UPGRADE_DOC_URL, PH7_URL_ROOT . 'asset/file/Upgrade');
+            $sMsg .= t('👉 <a href="%0%" target="_blank" rel="noopener">Run the upgrade wizard</a> 👈', PH7_URL_ROOT . 'asset/file/Upgrade');
 
             $this->design->setMessage($sMsg);
         }

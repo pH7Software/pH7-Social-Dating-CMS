@@ -1864,11 +1864,11 @@ msgid "🍰 A <a href=\"%0%\" target=\"_blank\" rel=\"noopener\">New Release</a>
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/MainController.php:334
-msgid "%software_name% <strong>%0%</strong> is available! Please update it today to keep your site safe and stable."
+msgid "%software_name% <strong>%0%</strong> is available! Update it today to keep your site safe and stable."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/MainController.php:336
-msgid "Read <a href=\"%0%\" target=\"_blank\" rel=\"noopener\">this</a> to learn how to upgrade your site, step-by-step. Once you follow the steps, run the upgrade wizard <a href=\"%1%\" target=\"_blank\" rel=\"noopener\">here</a>."
+msgid "👉 <a href=\"%0%\" target=\"_blank\" rel=\"noopener\">Run the upgrade wizard</a> 👈"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/ModeratorController.php:54
