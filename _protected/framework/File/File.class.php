@@ -711,11 +711,11 @@ class File
     /**
      * Reading Directories.
      *
-     * @param string $sPath
+     * @param string $sPath The full path.
      *
      * @return array|bool Returns an ARRAY with the folders or FALSE if the folder could not be opened.
      */
-    public function readDirs($sPath = './')
+    public function readDirs(string $sPath = './')
     {
         if (!($rHandle = opendir($sPath))) {
             return false; // TODO: Return when yield is used will be OK with PHP 7
@@ -742,7 +742,7 @@ class File
      *
      * @return string|bool Return the result content on success, FALSE on failure.
      */
-    public function getUrlContents($sUrl)
+    public function getUrlContents(string $sUrl)
     {
         $rCh = curl_init();
         curl_setopt($rCh, CURLOPT_URL, $sUrl);
@@ -767,9 +767,9 @@ class File
      * @param string $sFile Zip file.
      * @param string $sDir Destination to extract the file.
      *
-     * @return bool
+     * @return bool TRUE if successful, FALSE otherwise.
      */
-    public function zipExtract($sFile, $sDir)
+    public function zipExtract(string $sFile, string $sDir): bool
     {
         $oZip = new ZipArchive;
         $mRes = $oZip->open($sFile);
@@ -780,17 +780,13 @@ class File
             return true;
         }
 
-        return false; // Return error value
+        return false;
     }
 
     /**
      * Check if the file is binary.
-     *
-     * @param string $sFile
-     *
-     * @return bool
      */
-    public function isBinary($sFile)
+    public function isBinary(string $sFile): bool
     {
         if (file_exists($sFile)) {
             if (!is_file($sFile)) {
@@ -819,13 +815,9 @@ class File
     }
 
     /**
-     * Create a recurive directory iterator for a given directory.
-     *
-     * @param string $sPath
-     *
-     * @return RecursiveDirectoryIterator
+     * Create a recursive directory iterator for a given directory.
      */
-    private function getDirIterator($sPath)
+    private function getDirIterator(string $sPath): RecursiveDirectoryIterator
     {
         return new RecursiveDirectoryIterator($sPath);
     }
@@ -837,13 +829,10 @@ class File
      * @param string $sTo Directory.
      * @param string $sFuncName The function name. Choose between 'copy' and 'rename'.
      *
-     * @return bool
-     *
      * @throws PH7InvalidArgumentException If the function name is invalid.
-     * @throws PermissionException If the directory cannot be created
-     *
+     * @throws PermissionException If the directory cannot be created.
      */
-    private function recursiveDirIterator($sFrom, $sTo, $sFuncName)
+    private function recursiveDirIterator(string $sFrom, string $sTo, string $sFuncName): bool
     {
         if (!in_array($sFuncName, self::DIR_HANDLE_FUNC_NAMES, true)) {
             throw new PH7InvalidArgumentException('Wrong function name: ' . $sFuncName);
