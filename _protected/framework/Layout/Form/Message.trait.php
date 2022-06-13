@@ -117,7 +117,9 @@ trait Message
     {
         if ($iWaitTime > 60) {
             $iDivide = ($iWaitTime < 1440) ? 60 : 1440;
-            $iWaitTime = floor($iWaitTime / $iDivide);
+
+            // Cast float value from `floor()` to integer
+            $iWaitTime = (int)floor($iWaitTime / $iDivide);
         }
 
         return $iWaitTime;
