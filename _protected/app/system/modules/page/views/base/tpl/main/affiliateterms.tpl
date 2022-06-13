@@ -1,6 +1,6 @@
 <div class="center">
   <p>
-    To be an authorized affiliate of <strong><a href="{url_root}">{site_name}</a></strong> (URL address is {url_root}), you agree to abide by the terms and conditions contained in this agreement.<br />
+    To be an authorized affiliate of <strong><a href="{url_root}">{site_name}</a></strong> (URL address: {url_root}), you agree to abide by the terms and conditions contained in this agreement.<br />
     Please read this agreement carefully before registering and using the {site_name} service as an affiliate. By signing up for the {site_name} affiliate program, you indicate your acceptance of this agreement and its terms and conditions.
   </p>
 
