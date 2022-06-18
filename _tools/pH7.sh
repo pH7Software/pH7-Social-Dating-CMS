@@ -7,7 +7,7 @@
 #
 # Author:          Pierre-Henry Soria <hello@ph7builder.com>
 # Copyright:       (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
-# License:         MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+# License:         MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
 ##
 
 function init() {

@@ -2,7 +2,7 @@
 /**
  * @author           Pierre-Henry Soria <pierre@soria.pw>
  * @copyright        (c) 2011-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @link             https://ph7builder.com
  * @package          PH7 / Framework / Core
  */

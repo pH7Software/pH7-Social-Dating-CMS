@@ -16,7 +16,7 @@ We want to train a large team to work on this dating software open source projec
 Please contact us to work on this exciting project.
 Thank you.
 
-For license, please read the PH7.LICENSE.txt and PH7.COPYRIGHT.txt files.
+For license, please read the LICENSE.md and COPYRIGHT.md files.
 
 
 ==============================================
