@@ -2,12 +2,14 @@
 /**
  * @title            ACL (Access Control Lists) Main Class
  *
- * @author           Pierre-Henry SORIA <hello@ph7builder.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Acl
  * @version          0.9
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Acl;
 
@@ -15,22 +17,11 @@ defined('PH7') or exit('Restricted access');
 
 class Acl
 {
-    /**
-     * @var array $aRoles
-     */
-    protected $aRoles = [];
+    protected array $aRoles = [];
 
-    /**
-     * @var array $aResources
-     */
-    protected $aResources = [];
+    protected array $aResources = [];
 
-    /**
-     * @param string $sName
-     *
-     * @return Role Instance of Role
-     */
-    public function addRole($sName)
+    public function addRole(string $sName): Role
     {
         $oRole = new Role;
         $oRole->sName = $sName;
@@ -40,13 +31,7 @@ class Acl
         return $oRole;
     }
 
-    /**
-     * @param string $sName
-     * @param array $aAllowed
-     *
-     * @return AclResource
-     */
-    public function addResource($sName, array $aAllowed)
+    public function addResource(string $sName, array $aAllowed): AclResource
     {
         $oResource = new AclResource;
         $oResource->sName = $sName;
@@ -57,44 +42,31 @@ class Acl
         return $oResource;
     }
 
-    /**
-     * @param Role $oRole
-     * @param AclResource $oResource
-     *
-     * @return boolean
-     */
-    public function isAllowed(Role $oRole, AclResource $oResource)
+    public function isAllowed(Role $oRole, AclResource $oResource): bool
     {
         return in_array($oRole->sName, $oResource->aAllowed, true);
     }
 
-
-    /**
-     * @param string $sName
-     *
-     * @return resource
-     */
-    public function getResource($sName)
+    public function getResource(string $sName): ?AclResource
     {
         foreach ($this->aResources as $oResource) {
-            if ($oResource->getName() == $sName) {
+            if ($oResource->getName() === $sName) {
                 return $oResource;
             }
         }
+
+        return null;
     }
 
-    /**
-     * @param string $sName
-     *
-     * @return Role
-     */
-    public function getRole($sName)
+    public function getRole(string $sName): ?Role
     {
         foreach ($this->aRoles as $oRole) {
-            if ($oRole->getName() == $sName) {
+            if ($oRole->getName() === $sName) {
                 return $oRole;
             }
         }
+
+        return null;
     }
 
     /* Add more methods here */
