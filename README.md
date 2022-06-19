@@ -349,7 +349,7 @@ Feel free to send me an email at *hello {AT} ph7builder {D0T} com*
 
 **pH7Builder** (also known as pH7CMS) is an open-source software generously distributed under the [MIT license](https://opensource.org/licenses/MIT).
 
-See the `PH7.LICENSE.txt` and `PH7.COPYRIGHT.txt` files for further details.
+See the `LICENSE.md` and `COPYRIGHT.md` files for further details.
 
 
 ---
