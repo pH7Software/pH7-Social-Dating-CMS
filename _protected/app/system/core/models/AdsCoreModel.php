@@ -23,12 +23,14 @@ class AdsCoreModel extends AdsModel
     /**
      * Get Advertisements in the database.
      *
-     * @param string|null $mActive 1 = active otherwise null. Default value is '1'
-     * @param string $sTable The table.
+     * @param string|null $mActive 1 (self::ACTIVE) = active, NULL otherwise.
+     * @param int $iOffset
+     * @param int $iLimit
+     * @param string $sTable The table name.
      *
      * @return array The advertisements data.
      */
-    public function get($mActive = self::ACTIVE, $iOffset, $iLimit, $sTable = AdsCore::AD_TABLE_NAME)
+    public function get(?string $mActive, int $iOffset, int $iLimit, string $sTable = AdsCore::AD_TABLE_NAME)
     {
         AdsCore::checkTable($sTable);
         $iOffset = (int)$iOffset;

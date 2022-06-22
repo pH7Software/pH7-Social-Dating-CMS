@@ -57,34 +57,22 @@ class Page
         return ($this->iTotalPages < 1) ? 1 : $this->iTotalPages;
     }
 
-    /**
-     * @return int
-     */
-    public function getTotalItems()
+    public function getTotalItems(): int
     {
         return $this->iTotalItems;
     }
 
-    /**
-     * @return int
-     */
-    public function getFirstItem()
+    public function getFirstItem(): int
     {
         return $this->iFirstItem < 0 ? 0 : $this->iFirstItem;
     }
 
-    /**
-     * @return int
-     */
-    public function getNbItemsPerPage()
+    public function getNbItemsPerPage(): int
     {
         return $this->iNbItemsPerPage;
     }
 
-    /**
-     * @return int
-     */
-    public function getCurrentPage()
+    public function getCurrentPage(): int
     {
         return $this->iCurrentPage;
     }
