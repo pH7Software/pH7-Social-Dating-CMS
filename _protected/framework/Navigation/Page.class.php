@@ -21,23 +21,17 @@ class Page
     const REGEX_URL_PARAMS = '#\?(.+[^\./])=(.+[^\./])$#';
     const REGEX_URL_QUESTION_MARKS = '#\?.+$#';
 
-    /** @var HttpRequest */
-    private $oHttpRequest;
+    private HttpRequest $oHttpRequest;
 
-    /** @var int */
-    private $iTotalPages;
+    private int $iTotalPages;
 
-    /** @var int */
-    private $iTotalItems;
+    private int $iTotalItems;
 
-    /** @var int */
-    private $iNbItemsPerPage;
+    private int $iNbItemsPerPage;
 
-    /** @var int */
-    private $iCurrentPage;
+    private int $iCurrentPage;
 
-    /** @var int */
-    private $iFirstItem;
+    private int $iFirstItem;
 
     public function __construct()
     {
