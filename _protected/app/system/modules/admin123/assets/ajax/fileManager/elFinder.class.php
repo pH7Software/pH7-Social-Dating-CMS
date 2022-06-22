@@ -1317,9 +1317,7 @@ function zipdl($args)
         if (($volume = $this->volume($targets[0])) !== false) {
             if ($dlres = $volume->zipdl($targets)) {
                 $path = $dlres['path'];
-                register_shutdown_function(function ($f) {
-                    return connection_status() && is_file($f) && unlink($f);
-                }, $path);
+                register_shutdown_function(fn ($f) => connection_status() && is_file($f) && unlink($f), $path);
                 if (count($targets) === 1) {
                     $name = basename($volume->path($targets[0]));
                 } else {
@@ -1345,9 +1343,7 @@ function zipdl($args)
         }
         $file = $targets[1];
         $path = $volume->getTempPath() . DIRECTORY_SEPARATOR . $file;
-        register_shutdown_function(function ($f) {
-            return is_file($f) && unlink($f);
-        }, $path);
+        register_shutdown_function(fn ($f) => is_file($f) && unlink($f), $path);
         if (!is_readable($path)) {
             return ['error' => 'File not found', 'header' => $h404, 'raw' => true];
         }
