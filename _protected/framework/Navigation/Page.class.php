@@ -16,10 +16,10 @@ use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 class Page
 {
-    const DEFAULT_NUMBER_ITEMS = 10;
+    private const DEFAULT_NUMBER_ITEMS = 10;
 
-    const REGEX_URL_PARAMS = '#\?(.+[^\./])=(.+[^\./])$#';
-    const REGEX_URL_QUESTION_MARKS = '#\?.+$#';
+    private const REGEX_URL_PARAMS = '#\?(.+[^\./])=(.+[^\./])$#';
+    private const REGEX_URL_QUESTION_MARKS = '#\?.+$#';
 
     private HttpRequest $oHttpRequest;
 
