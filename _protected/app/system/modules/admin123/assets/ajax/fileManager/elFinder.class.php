@@ -3,9 +3,11 @@
 use PH7\Admin;
 
 defined('PH7') or exit('Restricted access');
+
+// Accessible only for admins
 if (!Admin::auth()) {
     exit('Restricted access');
-} // Accessible only for admins
+}
 
 /**
  * elFinder - file manager for web.
