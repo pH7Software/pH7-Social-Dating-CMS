@@ -38,13 +38,7 @@ class Page
         $this->oHttpRequest = new HttpRequest;
     }
 
-    /**
-     * @param int $iTotalItems
-     * @param int $iNbItemsPerPage Default 10
-     *
-     * @return int The number of pages.
-     */
-    public function getTotalPages($iTotalItems, $iNbItemsPerPage = self::DEFAULT_NUMBER_ITEMS)
+    public function getTotalPages(int $iTotalItems, int $iNbItemsPerPage = self::DEFAULT_NUMBER_ITEMS): int
     {
         $this->totalPages($iTotalItems, $iNbItemsPerPage);
 
@@ -78,7 +72,7 @@ class Page
      *
      * @return string $sPageUrl The new cleaned URL.
      */
-    public static function cleanDynamicUrl($sVar)
+    public static function cleanDynamicUrl(string $sVar): string
     {
         $sCurrentUrl = PH7_URL_PROT . PH7_DOMAIN . (new HttpRequest)->getUri();
         $sCurrentUrl = htmlspecialchars($sCurrentUrl, ENT_QUOTES);
@@ -91,13 +85,7 @@ class Page
         return $sUrl . self::trailingSlash($sUrl) . '?' . $sVar . '=';
     }
 
-    /**
-     * @param int $iTotalItems
-     * @param int $iNbItemsPerPage
-     *
-     * @return void
-     */
-    private function totalPages($iTotalItems, $iNbItemsPerPage)
+    private function totalPages(int $iTotalItems, int $iNbItemsPerPage): void
     {
         $this->iTotalItems = (int)$iTotalItems;
         $this->iNbItemsPerPage = (int)$iNbItemsPerPage; // or intval() function, but it is slower than casting
@@ -111,32 +99,18 @@ class Page
 
     /**
      * Returns a trailing slash if needed.
-     *
-     * @param string $sUrl
-     *
-     * @return string
      */
-    private static function trailingSlash($sUrl)
+    private static function trailingSlash(string $sUrl): string
     {
         return substr($sUrl, -1) !== PH7_SH && !strstr($sUrl, PH7_PAGE_EXT) ? PH7_SH : '';
     }
 
-    /**
-     * @param string $sCurrentUrl
-     *
-     * @return bool
-     */
-    private static function areParametersInUrlFound($sCurrentUrl)
+    private static function areParametersInUrlFound(string $sCurrentUrl): bool
     {
-        return preg_match(self::REGEX_URL_PARAMS, $sCurrentUrl);
+        return (bool)preg_match(self::REGEX_URL_PARAMS, $sCurrentUrl);
     }
 
-    /**
-     * @param string $sCurrentUrl
-     *
-     * @return string
-     */
-    private static function getUrlSlug($sCurrentUrl)
+    private static function getUrlSlug(string $sCurrentUrl): string
     {
         $sGlueName = sprintf('&amp;%s=', Pagination::REQUEST_PARAM_NAME);
 
