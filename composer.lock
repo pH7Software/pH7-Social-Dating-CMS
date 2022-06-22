@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f59ef575a52bfef028099c76d3198ff8",
+    "content-hash": "2235bc4e943d54d0da28314767e88675",
     "packages": [
         {
             "name": "arcansecurity/skeerel-php",
@@ -249,16 +249,16 @@
         },
         {
             "name": "braintree/braintree_php",
-            "version": "3.40.0",
+            "version": "4.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/braintree/braintree_php.git",
-                "reference": "840fc6ebf8d96756fed475cce94565fef178187d"
+                "reference": "758fa7ceec5d115508187df777e1552fabe31dad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/braintree/braintree_php/zipball/840fc6ebf8d96756fed475cce94565fef178187d",
-                "reference": "840fc6ebf8d96756fed475cce94565fef178187d",
+                "url": "https://api.github.com/repos/braintree/braintree_php/zipball/758fa7ceec5d115508187df777e1552fabe31dad",
+                "reference": "758fa7ceec5d115508187df777e1552fabe31dad",
                 "shasum": ""
             },
             "require": {
@@ -267,10 +267,10 @@
                 "ext-hash": "*",
                 "ext-openssl": "*",
                 "ext-xmlwriter": "*",
-                "php": ">=5.4.0"
+                "php": ">=7.2.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "3.7.*"
+                "phpunit/phpunit": "^7.5"
             },
             "type": "library",
             "autoload": {
@@ -294,9 +294,9 @@
             "description": "Braintree PHP Client Library",
             "support": {
                 "issues": "https://github.com/braintree/braintree_php/issues",
-                "source": "https://github.com/braintree/braintree_php/tree/3.40.0"
+                "source": "https://github.com/braintree/braintree_php/tree/4.8.0"
             },
-            "time": "2019-03-28T23:16:53+00:00"
+            "time": "2020-03-12T21:19:39+00:00"
         },
         {
             "name": "composer/ca-bundle",
