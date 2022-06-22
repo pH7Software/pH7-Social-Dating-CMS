@@ -48,7 +48,7 @@ class Bootstrap
      */
     public static function getInstance(): self
     {
-        return null === static::$oInstance ? static::$oInstance = new static : static::$oInstance;
+        return null === self::$oInstance ? self::$oInstance = new self : self::$oInstance;
     }
 
     /**
