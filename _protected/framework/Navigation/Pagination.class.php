@@ -14,8 +14,8 @@ defined('PH7') or exit('Restricted access');
 
 class Pagination
 {
-    const REQUEST_PARAM_NAME = 'p';
-    const NEARBY_PAGES_LIMIT = 4;
+    public const REQUEST_PARAM_NAME = 'p';
+    private const NEARBY_PAGES_LIMIT = 4;
 
     /** @var string */
     private $sPageName;
