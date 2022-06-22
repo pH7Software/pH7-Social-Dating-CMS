@@ -41,7 +41,7 @@ class Pagination
      * @param string $sPageName Default 'p'
      * @param array $aOptions Optional options.
      */
-    public function __construct($iTotalPages, $iCurrentPage, $sPageName = self::REQUEST_PARAM_NAME, array $aOptions = [])
+    public function __construct(int $iTotalPages, int $iCurrentPage, string $sPageName = self::REQUEST_PARAM_NAME, array $aOptions = [])
     {
         // Set the total number of page
         $this->iTotalPages = $iTotalPages;
