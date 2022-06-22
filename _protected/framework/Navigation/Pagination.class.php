@@ -17,23 +17,17 @@ class Pagination
     public const REQUEST_PARAM_NAME = 'p';
     private const NEARBY_PAGES_LIMIT = 4;
 
-    /** @var string */
-    private $sPageName;
+    private string $sPageName;
 
-    /** @var int */
-    private $iTotalPages;
+    private int $iTotalPages;
 
-    /** @var int */
-    private $iCurrentPage;
+    private int $iCurrentPage;
 
-    /** @var int */
-    private $iShowItems;
+    private int $iShowItems;
 
-    /** @var string */
-    private $sHtmlOutput;
+    private string $sHtmlOutput;
 
-    /** @var array */
-    private static $aOptions = [
+    private static array $aOptions = [
         'range' => self::NEARBY_PAGES_LIMIT - 1, // Number of pages to display on the pagination
         'text_first_page' => '&laquo;', // Button text "First Page"
         'text_last_page' => '&raquo;', // Button text "Last Page"
