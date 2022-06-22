@@ -76,7 +76,7 @@ class UpgradeCore
 
     private string $sVerNumber;
 
-    private int $sVerBuild;
+    private string $sVerBuild;
 
     private bool $bAutoRemoveUpgradeDir = false;
 
@@ -201,9 +201,9 @@ class UpgradeCore
 
                     $this->readConfig();
 
-                    $this->sVerName = $this->oConfig->values['upgrade.version']['name']; // Version name upgrade
-                    $this->sVerNumber = $this->oConfig->values['upgrade.version']['number']; // Version number upgrade
-                    $this->iVerBuild = $this->oConfig->values['upgrade.version']['build']; // Version build upgrade
+                    $this->sVerName = (string)$this->oConfig->values['upgrade.version']['name']; // Version name upgrade
+                    $this->sVerNumber = (string)$this->oConfig->values['upgrade.version']['number']; // Version number upgrade
+                    $this->sVerBuild = (string)$this->oConfig->values['upgrade.version']['build']; // Version build upgrade
 
                     DbConfig::setSiteMode(DbConfig::MAINTENANCE_SITE);
                     $this->oConfig->setDevelopmentMode();
@@ -437,8 +437,8 @@ class UpgradeCore
             $sContents = str_replace('KERNEL_VERSION = \'' . Version::KERNEL_VERSION . '\'', 'KERNEL_VERSION = \'' . $this->sVerNumber . '\'', $sContents);
         }
 
-        if ($this->iVerBuild != Version::KERNEL_BUILD) {
-            $sContents = str_replace('KERNEL_BUILD = \'' . Version::KERNEL_BUILD . '\'', 'KERNEL_BUILD = \'' . $this->iVerBuild . '\'', $sContents);
+        if ($this->sVerBuild !== Version::KERNEL_BUILD) {
+            $sContents = str_replace('KERNEL_BUILD = \'' . Version::KERNEL_BUILD . '\'', 'KERNEL_BUILD = \'' . $this->sVerBuild . '\'', $sContents);
         }
 
         $this->oFile->putFile($sVersionPathFile, $sContents);
