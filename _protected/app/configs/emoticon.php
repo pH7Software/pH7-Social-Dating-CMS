@@ -56,7 +56,6 @@ return [
     'shade_hmm'        =>    [':coolhmm:', 'Cool hmm'],
     'shade_mad'        =>    [':coolmad:', 'Cool mad'],
     'shade_cheese'     =>    [':coolcheese:', 'Cool cheese'],
-    'vampire'          =>    [':vampire:', 'Vampire'],
     'snake'            =>    [['°°', ':snake:'], 'Snake'],
     'exclaim'          =>    [':exclaim:', 'Excaim'],
     'vampire'          =>    [':vampire:', 'Vampire'],
