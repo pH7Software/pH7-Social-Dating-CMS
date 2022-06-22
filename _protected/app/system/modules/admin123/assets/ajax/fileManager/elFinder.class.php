@@ -799,7 +799,8 @@ class elFinder
         } else {
             return $result;
         }
-        //TODO: Add return statement here
+
+        return array();
     }
 
     /**
