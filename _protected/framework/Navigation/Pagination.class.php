@@ -67,17 +67,15 @@ class Pagination
      *
      * @return string Html code.
      */
-    public function getHtmlCode()
+    public function getHtmlCode(): string
     {
         return $this->sHtmlOutput;
     }
 
     /**
      * Generate the HTML pagination code.
-     *
-     * @return void
      */
-    private function generateHtmlPaging()
+    private function generateHtmlPaging(): void
     {
         // If you have more than one page, it displays the navigation
         if ($this->iTotalPages > 1) {
