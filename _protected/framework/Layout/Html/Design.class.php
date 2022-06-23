@@ -607,12 +607,9 @@ class Design
     /**
      * Pagination.
      *
-     * @param int $iTotalPages
-     * @param int $iCurrentPage
-     *
      * @return void The HTML pagination code.
      */
-    public function pagination($iTotalPages, $iCurrentPage)
+    public function pagination(int $iTotalPages, int $iCurrentPage): void
     {
         echo (new Pagination($iTotalPages, $iCurrentPage))->getHtmlCode();
     }
