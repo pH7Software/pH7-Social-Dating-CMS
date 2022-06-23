@@ -28,6 +28,7 @@ define('PH7_PS', PATH_SEPARATOR);
 define('PH7_SH', '/'); // SlasH
 define('PH7_PAGE_EXT', '.html');
 define('PH7_URL_PROT', 'http://');
+define('PH7_DOMAIN', 'localhost:8888');
 define('PH7_URL_ROOT', PH7_URL_PROT . 'localhost:8888/');
 define('PH7_URL_STATIC', '');
 define('PH7_RELATIVE', '');
