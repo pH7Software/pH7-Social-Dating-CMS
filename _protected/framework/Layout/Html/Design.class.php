@@ -706,13 +706,13 @@ class Design
     }
 
     /**
-     * Get favicon from a URL.
+     * Get the favicon of a website, displayed with the HTML `<img /> tag.
      *
-     * @param string $sUrl
+     * @param string $sUrl The URL for which you want to retrieve its favicon.
      *
-     * @return void The HTML favicon image.
+     * @return void The HTML favicon image (wrapped in `<img />`).
      */
-    public function favicon($sUrl)
+    public function favicon(string $sUrl): bool
     {
         $iFaviconSize = 16;
         $sImg = Browser::favicon($sUrl);
