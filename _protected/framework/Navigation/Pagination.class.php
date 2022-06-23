@@ -18,14 +18,11 @@ class Pagination
     private const NEARBY_PAGES_LIMIT = 4;
 
     private string $sPageName;
+    private string $sHtmlOutput = '';
 
     private int $iTotalPages;
-
     private int $iCurrentPage;
-
     private int $iShowItems;
-
-    private string $sHtmlOutput = '';
 
     private static array $aOptions = [
         'range' => self::NEARBY_PAGES_LIMIT - 1, // Number of pages to display on the pagination
