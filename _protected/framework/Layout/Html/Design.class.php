@@ -692,7 +692,7 @@ class Design
      *
      * @return void|string The absolute user profile link.
      */
-    public function getProfileLink($sUsername, $bPrint = true)
+    public function getProfileLink(string $sUsername, bool $bPrint = true)
     {
         $sHtml = '<a href="';
         $sHtml .= (new UserCore)->getProfileLink($sUsername);
@@ -901,13 +901,13 @@ HTML;
      * Generate any HTML tag.
      *
      * @param string $sTag
-     * @param array $aAttrs Optional. Default NULL
+     * @param array|null $aAttrs Optional. Default NULL
      * @param bool $bPair Optional. Default FALSE
      * @param string $sText Optional. Add text, available only for pair tag. Default NULL
      *
      * @return string The custom HTML tag.
      */
-    public function htmlTag($sTag, array $aAttrs = null, $bPair = false, $sText = null)
+    public function htmlTag(string $sTag, ?array $aAttrs = null, bool $bPair = false, ?string $sText = null): string
     {
         $sAttrs = '';
 
@@ -920,20 +920,15 @@ HTML;
         echo ($bPair ? '<' . $sTag . $sAttrs . '>' . ($sText === null ? '' : $sText) . '</' . $sTag . '>' : '<' . $sTag . $sAttrs . ' />');
     }
 
-    public function htmlHeader()
+    public function htmlHeader(): void
     {
         echo '<!DOCTYPE html>';
     }
 
     /**
      * Useful HTML Header.
-     *
-     * @param array $aMeta
-     * @param bool $bLogo
-     *
-     * @return void
      */
-    final public function usefulHtmlHeader(array $aMeta = null, $bLogo = false)
+    final public function usefulHtmlHeader(array $aMeta = null, bool $bLogo = false): void
     {
         $this->bIsDiv = true;
 
@@ -982,7 +977,7 @@ HTML;
         echo $this->flashMsg(), '<div class="msg"></div><div class="m_marg">';
     }
 
-    public function htmlFooter()
+    public function htmlFooter(): void
     {
         if ($this->bIsDiv) {
             echo '</div>';
