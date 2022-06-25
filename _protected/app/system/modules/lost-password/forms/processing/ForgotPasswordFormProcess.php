@@ -34,7 +34,7 @@ class ForgotPasswordFormProcess extends Form
             $this->preventBruteForce(self::BRUTE_FORCE_SLEEP_DELAY);
             \PFBC\Form::setError(
                 'form_forgot_password',
-                t('Oops, this "%0%" is not associated with any %site_name% account. Please, make sure that you entered the e-mail address used in creating your account.', escape(substr($sEmail, 0, PH7_MAX_EMAIL_LENGTH)))
+                t('Oops, this "%0%" is not associated with any %site_name% accounts. Make sure you entered the same email used when creating your account.', escape(substr($sEmail, 0, PH7_MAX_EMAIL_LENGTH)))
             );
         } else {
             $this->oUserModel->setNewHashValidation(

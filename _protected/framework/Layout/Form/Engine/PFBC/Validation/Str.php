@@ -45,12 +45,12 @@ class Str extends Validation
         }
 
         if (!empty($this->iMin) && $this->oStr->length($sValue) < $this->iMin) {
-            $this->message = t('Error: %element% must be at least %0% character(s) long.', $this->iMin);
+            $this->message = t('%element% must be at least %0% character(s) long.', $this->iMin);
             return false;
         }
 
         if (!empty($this->iMax) && $this->oStr->length($sValue) > $this->iMax) {
-            $this->message = t('Error: %element% cannot exceed %0% character(s).', $this->iMax);
+            $this->message = t('%element% cannot exceed %0% character(s).', $this->iMax);
             return false;
         }
 

@@ -12,7 +12,7 @@ class Required extends Validation
 {
     public function __construct()
     {
-        $this->message = t('Error: %element% is a required field.');
+        $this->message = t('%element% is a required field.');
     }
 
     /**

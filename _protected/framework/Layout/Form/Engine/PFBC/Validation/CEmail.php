@@ -26,7 +26,7 @@ class CEmail extends Validation
 
         $this->sTable = $sTable;
         $this->sType = $sType;
-        $this->message = t('Error: Invalid email or already used by another user.');
+        $this->message = t('Invalid email or already used by another user.');
     }
 
     public function isValid($sValue)

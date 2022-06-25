@@ -62,7 +62,7 @@ class LoginFormProcess extends Form implements LoginableForm
                 $this->enableCaptcha();
                 \PFBC\Form::setError(
                     'form_login_aff',
-                    t('Oops! "%0%" is not associated with any %site_name% account.', escape(substr($sEmail, 0, PH7_MAX_EMAIL_LENGTH)))
+                    t('Oops! "%0%" is not associated with any %site_name% accounts.', escape(substr($sEmail, 0, PH7_MAX_EMAIL_LENGTH)))
                 );
                 $oSecurityModel->addLoginLog(
                     $sEmail,

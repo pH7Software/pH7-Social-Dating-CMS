@@ -13,7 +13,7 @@ class Numeric extends Validation
     public function __construct()
     {
         parent::__construct();
-        $this->message = t('Error: %element% must be numeric.');
+        $this->message = t('%element% must be numeric.');
     }
 
     public function isValid($sValue)

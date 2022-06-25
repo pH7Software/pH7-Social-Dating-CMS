@@ -152,7 +152,7 @@ class ValidateCoreAjax
         } elseif ($sParam === 'guest' && $this->oExistsModel->email($sValue, $sTable)) {
             $this->sMsg = t('This email already used by another member.');
         } elseif ($sParam === 'user' && !$this->oExistsModel->email($sValue, $sTable)) {
-            $this->sMsg = t('Oops! "%0%" is not associated with any %site_name% account.', substr($sValue, 0, 50));
+            $this->sMsg = t('Oops! "%0%" is not associated with any %site_name% accounts.', substr($sValue, 0, 50));
         } else {
             $this->iStatus = 1;
             $this->sMsg = t('Valid Email!');

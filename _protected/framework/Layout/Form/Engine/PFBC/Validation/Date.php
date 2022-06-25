@@ -13,7 +13,7 @@ class Date extends Validation
     public function __construct()
     {
         parent::__construct();
-        $this->message = t('Error: %element% must contain a valid date.');
+        $this->message = t('%element% must contain a valid date.');
     }
 
     public function isValid($sValue)

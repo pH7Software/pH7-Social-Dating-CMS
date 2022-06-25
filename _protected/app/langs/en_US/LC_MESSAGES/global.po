@@ -151,7 +151,7 @@ msgid "This email already used by another member."
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:155
-msgid "Oops! \"%0%\" is not associated with any %site_name% account."
+msgid "Oops! \"%0%\" is not associated with any %site_name% accounts."
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:158
@@ -1494,7 +1494,7 @@ msgstr ""
 
 #: _protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:29
 #: _protected/app/system/modules/lost-password/forms/processing/ForgotPasswordFormProcess.php:38
-msgid "Oops, this \"%0%\" is not associated with any %site_name% account. Please, make sure that you entered the e-mail address used in creating your account."
+msgid "Oops, this \"%0%\" is not associated with any %site_name% accounts. Make sure you entered the same email used when creating your account."
 msgstr ""
 
 #: _protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:33
@@ -4313,7 +4313,7 @@ msgstr ""
 
 #: _protected/app/system/modules/affiliate/forms/processing/LoginFormProcess.php:64
 #: _protected/app/system/modules/user/forms/processing/LoginFormProcess.php:65
-msgid "Oops! \"%0%\" is not associated with any %site_name% account."
+msgid "Oops! \"%0%\" is not associated with any %site_name% accounts."
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/forms/processing/LoginFormProcess.php:88
@@ -13563,19 +13563,19 @@ msgid "%element% is invalid."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/AlphaNumeric.php:16
-msgid "Error: %element% must be alphanumeric (letters A-Z, numbers 0-9, underscores and dashes)."
+msgid "%element% must be alphanumeric (letters A-Z, numbers 0-9, underscores and dashes)."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/BankAccount.php:39
-msgid "Error: Another account with the same bank account already exists. Please choose another one."
+msgid "Another account with the same bank account already exists. Please choose another one."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/BankAccount.php:42
-msgid "Error: This bank account is not supported by our payment system."
+msgid "This bank account is not supported by our payment system."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/BankAccount.php:45
-msgid "Error: Your bank account is incorrect."
+msgid "Your bank account is incorrect."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/BirthDate.php:27
@@ -13587,19 +13587,19 @@ msgid "The code of Captcha entered was incorrect. Please re-try."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/CEmail.php:28
-msgid "Error: Invalid email or already used by another user."
+msgid "Invalid email or already used by another user."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Date.php:14
-msgid "Error: %element% must contain a valid date."
+msgid "%element% must contain a valid date."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Email.php:14
-msgid "Error: %element% must be a valid email address."
+msgid "%element% must be a valid email address."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/HexColor.php:13
-msgid "Error: The HEX color value is invalid. Has to be \"#XXXXXX\" format.<br /> Maybe your browser is outdated or the version does not support \"color\" input type.<br /> Please retry with another browser such as Firefox, Chrome, Brave."
+msgid "The HEX color value is invalid. Has to be \"#XXXXXX\" format.<br /> Maybe your browser is outdated or the version does not support \"color\" input type.<br /> Please retry with another browser such as Firefox, Chrome, Brave."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Name.php:14
@@ -13607,43 +13607,43 @@ msgid "%element% must be a valid name."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Numeric.php:14
-msgid "Error: %element% must be numeric."
+msgid "%element% must be numeric."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Password.php:25
-msgid "Error: Your password has to be from %0% to %1% characters long."
+msgid "Your password has to be from %0% to %1% characters long."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Phone.php:14
-msgid "Error: Your phone number is incorrect. Please enter full phone number with area code (e.g., +44768374890)."
+msgid "Your phone number is incorrect. Please enter full phone number with area code (e.g., +44768374890)."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/RegExp.php:21
-msgid "Error: %element% contains invalid characters. Here is the rule to be followed: \"%0%\""
+msgid "%element% contains invalid characters. Here is the rule to be followed: \"%0%\""
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Required.php:13
-msgid "Error: %element% is a required field."
+msgid "%element% is a required field."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Str.php:47
-msgid "Error: %element% must be at least %0% character(s) long."
+msgid "%element% must be at least %0% character(s) long."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Str.php:52
-msgid "Error: %element% cannot exceed %0% character(s)."
+msgid "%element% cannot exceed %0% character(s)."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Url.php:14
-msgid "Error: %element% must contain a URL (e.g. <a href=\"http://ph7builder.com\">http://ph7builder.com</a>)."
+msgid "%element% must contain a URL (e.g. <a href=\"http://ph7builder.com\">http://ph7builder.com</a>)."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Username.php:33
-msgid "Error: Nickname has to be from %0% to %1% characters long, or it is not available, or already used by other user."
+msgid "Nickname has to be from %0% to %1% characters long, or it is not available, or already used by other user."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/YesNo.php:13
-msgid "Error: You must accept our %element%."
+msgid "You must accept our %element%."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Form.class.php:27

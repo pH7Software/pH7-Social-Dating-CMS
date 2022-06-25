@@ -28,7 +28,7 @@ class ResendActivationCoreFormProcess extends Form
         if (!(new ExistsCoreModel)->email($sMail, $sTable)) {
             \PFBC\Form::setError(
                 'form_resend_activation',
-                t('Oops, this "%0%" is not associated with any %site_name% account. Please, make sure that you entered the e-mail address used in creating your account.', escape(substr($sMail, 0, PH7_MAX_EMAIL_LENGTH)))
+                t('Oops, this "%0%" is not associated with any %site_name% accounts. Make sure you entered the same email used when creating your account.', escape(substr($sMail, 0, PH7_MAX_EMAIL_LENGTH)))
             );
         } else {
             if (!$mHash = (new UserCoreModel)->getHashValidation($sMail)) {
