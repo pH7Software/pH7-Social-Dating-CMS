@@ -13603,7 +13603,7 @@ msgid "Error: The HEX color value is invalid. Has to be \"#XXXXXX\" format.<br /
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Name.php:14
-msgid "Error: %element% must be a valid name. The name doesn't seem to be correct."
+msgid "%element% must be a valid name."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Numeric.php:14
