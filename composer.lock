@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2235bc4e943d54d0da28314767e88675",
+    "content-hash": "5766b7f8134bc0b2196bebd7ab5c6c4d",
     "packages": [
         {
             "name": "arcansecurity/skeerel-php",
