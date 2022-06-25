@@ -6,7 +6,7 @@
  * It can also retrieve the URL roads, initialize the languages​​, themes, database, etc.
  *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright        (c) 2011-2020, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2011-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Mvc / Router
  */
@@ -60,23 +60,17 @@ final class FrontController
     const REGEX_URL_EXTRA_OPTIONS = '/?(?:\?[^/]+\=[^/]+)?';
     const REGEX_URL_PARAMS = '#&[^/]+\=[^/]+$#';
 
-    /** @var Config */
-    private $oConfig;
+    private Config $oConfig;
 
-    /** @var Registry */
-    private $oRegistry;
+    private Registry $oRegistry;
 
-    /** @var Http */
-    private $oHttpRequest;
+    private Http $oHttpRequest;
 
-    /** @var Uri */
-    private $oUri;
+    private Uri $oUri;
 
-    /** @var array */
-    private $aRequestParameter = [];
+    private array $aRequestParameter = [];
 
-    /** @var bool */
-    private $bIsRouterRewritten = false;
+    private bool $bIsRouterRewritten = false;
 
     use Singleton; // Import the Singleton trait
 
