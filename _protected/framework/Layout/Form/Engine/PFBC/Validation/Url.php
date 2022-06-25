@@ -16,7 +16,7 @@ class Url extends Validation
         $this->message = t('Error: %element% must contain a URL (e.g. <a href="http://ph7builder.com">http://ph7builder.com</a>).');
     }
 
-    public function isValid($sValue)
+    public function isValid($sValue): bool
     {
         return $this->isNotApplicable($sValue) || $this->oValidate->url($sValue);
     }
