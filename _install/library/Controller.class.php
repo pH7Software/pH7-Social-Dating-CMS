@@ -19,31 +19,31 @@ use Smarty;
 
 abstract class Controller implements Controllable
 {
-    const PHP_TIMEZONE_DIRECTIVE = 'date.timezone';
-    const VIEW_CACHE_LIFETIME = 24 * 3600; //thanks PHP5.6 for scalar expr in consts
+    public const SOFTWARE_NAME = 'pH7Builder';
+    public const DEFAULT_SITE_NAME = 'My Dating WebApp';
+    public const DEFAULT_ADMIN_USERNAME = 'administrator';
+    public const SOFTWARE_PREFIX_COOKIE_NAME = 'pH7';
+    public const SOFTWARE_WEBSITE = 'https://ph7builder.com';
+    public const SOFTWARE_REQUIREMENTS_URL = 'https://ph7builder.com/doc/en/requirements';
+    public const PAYPAL_DONATE_URL = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6';
+    public const PATREON_URL = 'https://www.patreon.com/bePatron?u=3534366';
+    public const SOFTWARE_AUTHOR = 'Pierre-Henry Soria';
+    public const AUTHOR_URL = 'https://github.com/pH-7';
+    public const SOFTWARE_GIT_REPO_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS';
+    public const SOFTWARE_TWITTER = '@pH7Soft';
+    public const SOFTWARE_COPYRIGHT = '© (c) 2012-%s, Pierre-Henry Soria. All Rights Reserved.';
 
-    const SOFTWARE_NAME = 'pH7Builder';
-    const DEFAULT_SITE_NAME = 'My Dating WebApp';
-    const DEFAULT_ADMIN_USERNAME = 'administrator';
-    const SOFTWARE_PREFIX_COOKIE_NAME = 'pH7';
-    const SOFTWARE_WEBSITE = 'https://ph7builder.com';
-    const SOFTWARE_REQUIREMENTS_URL = 'https://ph7builder.com/doc/en/requirements';
-    const PAYPAL_DONATE_URL = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6';
-    const PATREON_URL = 'https://www.patreon.com/bePatron?u=3534366';
-    const SOFTWARE_AUTHOR = 'Pierre-Henry Soria';
-    const AUTHOR_URL = 'https://github.com/pH-7';
-    const SOFTWARE_GIT_REPO_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS';
-    const SOFTWARE_TWITTER = '@pH7Soft';
-    const SOFTWARE_COPYRIGHT = '© (c) 2012-%s, Pierre-Henry Soria. All Rights Reserved.';
-    const TOTAL_INSTALL_STEPS = 7;
+    public const SOFTWARE_VERSION_NAME = 'PURE™';
+    public const SOFTWARE_VERSION = '17.2.0';
 
-    const SOFTWARE_VERSION_NAME = 'PURE™';
-    const SOFTWARE_VERSION = '17.2.0';
+    public const SOFTWARE_BUILD = '1';
 
-    const SOFTWARE_BUILD = '1';
+    public const DEFAULT_LANG = 'en';
+    public const DEFAULT_THEME = 'base';
 
-    const DEFAULT_LANG = 'en';
-    const DEFAULT_THEME = 'base';
+    private const PHP_TIMEZONE_DIRECTIVE = 'date.timezone';
+    private const VIEW_CACHE_LIFETIME = 24 * 3600; //thanks PHP5.6 for scalar expr in consts
+    private const TOTAL_INSTALL_STEPS = 7;
 
     protected Smarty $oView;
 

@@ -21,19 +21,17 @@ use PH7\Framework\Security\Validate\Validate;
 
 final class Version
 {
-    /**
-     * Cache lifetime set for 1 day.
-     */
-    const CACHE_TIME = 86400;
+    private const CACHE_GROUP = 'str/security';
+    private const CACHE_TIME = 86400; // Cache lifetime set for 1 day
 
-    const CACHE_GROUP = 'str/security';
+    private const LATEST_VERSION_URL = 'https://xml.ph7builder.com/software-info.xml';
 
-    const LATEST_VERSION_URL = 'https://xml.ph7builder.com/software-info.xml';
-    const VERSION_PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
-    const FRAMEWORK_TAG_NAME = 'ph7';
-    const PACKAGE_TAG_NAME = 'ph7builder';
+    public const UPGRADE_DOC_URL = 'https://ph7builder.com/doc/en/upgrade';
 
-    const UPGRADE_DOC_URL = 'https://ph7builder.com/doc/en/upgrade';
+    public const VERSION_PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
+
+    private const FRAMEWORK_TAG_NAME = 'ph7';
+    private const PACKAGE_TAG_NAME = 'ph7builder';
 
     /**
      * Framework Kernel.
@@ -44,7 +42,7 @@ final class Version
      * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa", 12.* was "PHS", 14.* was "pKb",
      * v15.* was ABSOLUTE™, v16.* was ACIDIC, and v17.* is PURE™
      */
-    const KERNEL_VERSION_NAME = 'PURE™';
+    public const KERNEL_VERSION_NAME = 'PURE™';
 
     /**
      * VERSION NUMBERS:
@@ -52,13 +50,13 @@ final class Version
      *
      * More details: https://ph7builder.com/new-versioning-system/
      */
-    const KERNEL_VERSION = '17.2.0';
-    const KERNEL_BUILD = '1';
-    const KERNEL_RELEASE_DATE = '2022-06-27';
+    public const KERNEL_VERSION = '17.2.0';
+    public const KERNEL_BUILD = '1';
+    public const KERNEL_RELEASE_DATE = '2022-06-27';
 
     /***** Framework Server *****/
-    const KERNEL_TECHNOLOGY_NAME = 'pH7Builder.com';
-    const KERNEL_SERVER_NAME = 'pH7WS/1.0.0';
+    public const KERNEL_TECHNOLOGY_NAME = 'pH7Builder.com';
+    public const KERNEL_SERVER_NAME = 'pH7WS/1.0.0';
 
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
