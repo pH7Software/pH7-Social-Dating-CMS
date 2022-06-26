@@ -89,12 +89,6 @@ function run() {
             rm ./docker-compose.yml
             rm ./.dockerignore
 
-            ## TMP folders
-            # elFinder cache folders
-            rm -rf ./.quarantine/
-            rm -rf ./.tmb/
-            rm -rf ./_protected/.quarantine/
-            rm -rf ./_protected/.tmb/
             # Composer cache folder
             rm -rf ./_install/vendor/cache/
             rm -rf ./_protected/vendor/cache/
