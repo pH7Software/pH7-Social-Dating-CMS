@@ -8,6 +8,8 @@
  * @package          PH7 / Framework / Security
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Security;
 
 defined('PH7') or exit('Restricted access');
@@ -87,7 +89,7 @@ final class Version
      *
      * @return bool Returns TRUE if a new update is available, FALSE otherwise.
      */
-    public static function isUpdateEligible()
+    public static function isUpdateEligible(): bool
     {
         if (!$aLatestInfo = self::getLatestInfo()) {
             return false;
@@ -150,12 +152,7 @@ final class Version
         ];
     }
 
-    /**
-     * @param DOMElement $oInfo
-     *
-     * @return bool
-     */
-    private static function isUpdateAlertEnabled(DOMElement $oInfo)
+    private static function isUpdateAlertEnabled(DOMElement $oInfo): bool
     {
         // "Validate::bool()" returns TRUE for "1", "true", "on", and "yes", FALSE otherwise
         return (new Validate)->bool($oInfo->getElementsByTagName('upd-alert')->item(0)->nodeValue);
