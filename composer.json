@@ -118,7 +118,8 @@
       "@composer install --working-dir _install"
     ],
     "post-update-cmd": [
-      "@post-cmd"
+      "@post-cmd",
+      "@composer update --working-dir _install"
     ]
   },
   "minimum-stability": "stable",
