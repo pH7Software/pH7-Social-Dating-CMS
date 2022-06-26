@@ -90,8 +90,6 @@ abstract class Controller implements Controllable
     /**
      * Check if the session is already initialized (thanks to "session_status()" PHP >= 5.4).
      * And initialize it if it isn't the case.
-     *
-     * @return void
      */
     protected function initializePHPSession(): void
     {
@@ -102,8 +100,6 @@ abstract class Controller implements Controllable
 
     /**
      * Set a default timezone if it is not already configured.
-     *
-     * @return void
      */
     protected function checkTimezone(): void
     {
