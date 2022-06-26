@@ -3,7 +3,7 @@
  * @desc             Version Information for the security of packaged software.
  *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Security
  */
@@ -52,7 +52,7 @@ final class Version
      */
     const KERNEL_VERSION = '17.2.0';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELEASE_DATE = '2022-04-02';
+    const KERNEL_RELEASE_DATE = '2022-06-27';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7Builder.com';
