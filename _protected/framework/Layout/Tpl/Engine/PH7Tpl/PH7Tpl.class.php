@@ -17,6 +17,7 @@ namespace PH7\Framework\Layout\Tpl\Engine\PH7Tpl;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Compress\Compress;
+use PH7\Framework\Config\Config;
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\File\GenerableFile;
