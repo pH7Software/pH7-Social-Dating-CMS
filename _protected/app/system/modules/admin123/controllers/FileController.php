@@ -20,39 +20,13 @@ use PH7\Framework\Url\Header;
 
 class FileController extends Controller
 {
-    const PUBLIC_DIR_NAME = 'public';
-    const PROTECTED_DIR_NAME = 'protected';
-
     const THEME_FILE_EXTS = [
         '.tpl',
         '.css',
         '.js'
     ];
 
-    /** @var string */
-    private $sTitle;
-
-    public function index()
-    {
-        Header::redirect(
-            Uri::get(PH7_ADMIN_MOD, 'file', 'display')
-        );
-    }
-
-    public function display($sDir = '')
-    {
-        /* Add the stylesheet files for the elFinder File Manager */
-        $this->design->addCss(PH7_STATIC . 'fileManager/css/', 'elfinder.css,theme.css');
-
-        $bIsProtectedDir = $sDir === self::PROTECTED_DIR_NAME;
-
-        $sIsDirTxt = $bIsProtectedDir ? t('Protected') : t('Public');
-        $this->sTitle = t('File Manager System | %0%', $sIsDirTxt);
-        $this->view->type = $bIsProtectedDir ? self::PROTECTED_DIR_NAME : self::PUBLIC_DIR_NAME;
-        $this->view->page_title = $this->view->h2_title = $this->sTitle;
-
-        $this->output();
-    }
+    private string $sTitle;
 
     public function themeDisplay()
     {
