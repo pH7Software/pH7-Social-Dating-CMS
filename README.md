@@ -253,7 +253,7 @@ Designed & Coded with lots of ❤️ by **[Pierre-Henry Soria](https://ph7.me)**
 
 ## 🤝 Hire Me At Your Company?
 
-Are you building a scalable social/dating Web application? 
+Are you building a scalable social/dating Web application?
 
 Do you think you might need a software engineer like me at your company? (who could even be willing to relocate) 👉 **[Let's chat together](https://www.linkedin.com/in/ph7enry/)**! 😊
 

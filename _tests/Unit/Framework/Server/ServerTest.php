@@ -62,7 +62,7 @@ final class ServerTest extends TestCase
 
         $this->assertSame('&lt;b&gt;I&#039;m the value&lt;/b&gt;', $sActual);
     }
-    
+
     protected function tearDown(): void
     {
         parent::tearDown();

@@ -32,7 +32,7 @@ class InstallerCommand extends Command
 
     private const ROOT_PROJECT = PH7_ROOT_PROJECT;
     private const INSTALL_DIR_NAME = '_install/';
-    
+
     private const SUCCESS_MESSAGE = 'The installation is now completed! 🤗';
 
     protected function configure(): void
