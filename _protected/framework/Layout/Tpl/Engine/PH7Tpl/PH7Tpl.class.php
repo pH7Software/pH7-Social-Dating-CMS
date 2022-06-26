@@ -113,7 +113,7 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
     private $_oVars;
 
     // Hack that keeps the $config variable in the template files
-    protected $config;
+    protected Config $config;
 
     public function __construct(Syntax $oSyntaxEngine)
     {

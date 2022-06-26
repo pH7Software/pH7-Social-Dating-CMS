@@ -43,23 +43,17 @@ abstract class Kernel
     const SOFTWARE_TECHNOLOGY_NAME = Version::KERNEL_TECHNOLOGY_NAME;
     const SOFTWARE_SERVER_NAME = Version::KERNEL_SERVER_NAME;
 
-    /** @var Config */
-    protected $config;
+    protected Config $config;
 
-    /** @var Str */
-    protected $str;
+    protected Str $str;
 
-    /** @var File */
-    protected $file;
+    protected File $file;
 
-    /** @var Http */
-    protected $httpRequest;
+    protected Http $httpRequest;
 
-    /** @var Browser */
-    protected $browser;
+    protected Browser $browser;
 
-    /** @var Registry */
-    protected $registry;
+    protected Registry $registry;
 
     public function __construct()
     {
