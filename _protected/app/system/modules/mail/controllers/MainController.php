@@ -120,7 +120,7 @@ class MainController extends Controller
                 self::EMAILS_PER_PAGE
             );
             $this->view->current_page = $this->oPage->getCurrentPage();
-            $oMail = $this->oMailModel->search(
+            $aMail = $this->oMailModel->search(
                 null,
                 false,
                 SearchCoreModel::SEND_DATE,
@@ -131,13 +131,13 @@ class MainController extends Controller
                 MailModel::INBOX
             );
 
-            if (empty($oMail)) {
+            if (empty($aMail)) {
                 $this->sTitle = t('No messages in your inbox');
                 $this->notFound();
                 // We modify the default error message
                 $this->view->error = t("You don't have any new messages ☹ Go <a href='%0%'>speak with others</a>!", Uri::get('user', 'browse', 'index'));
             } else {
-                $this->view->msgs = $oMail;
+                $this->view->msgs = $aMail;
             }
 
             $this->manualTplInclude('msglist.inc.tpl');
@@ -180,7 +180,7 @@ class MainController extends Controller
                 self::EMAILS_PER_PAGE
             );
             $this->view->current_page = $this->oPage->getCurrentPage();
-            $oMail = $this->oMailModel->search(
+            $aMail = $this->oMailModel->search(
                 null,
                 false,
                 SearchCoreModel::SEND_DATE,
@@ -191,13 +191,13 @@ class MainController extends Controller
                 MailModel::OUTBOX
             );
 
-            if (empty($oMail)) {
+            if (empty($aMail)) {
                 $this->sTitle = t('Not Found!');
                 $this->notFound();
                 // We modify the default error message
                 $this->view->error = t('No messages found.');
             } else {
-                $this->view->msgs = $oMail;
+                $this->view->msgs = $aMail;
             }
 
             $this->manualTplInclude('msglist.inc.tpl');
@@ -242,7 +242,7 @@ class MainController extends Controller
                 self::EMAILS_PER_PAGE
             );
             $this->view->current_page = $this->oPage->getCurrentPage();
-            $oMail = $this->oMailModel->search(
+            $aMail = $this->oMailModel->search(
                 null,
                 false,
                 SearchCoreModel::SEND_DATE,
@@ -253,13 +253,13 @@ class MainController extends Controller
                 MailModel::TRASH
             );
 
-            if (empty($oMail)) {
+            if (empty($aMail)) {
                 $this->sTitle = t('Not Found!');
                 $this->notFound();
                 // We modify the default 404 error message
                 $this->view->error = t('Trash is empty!');
             } else {
-                $this->view->msgs = $oMail;
+                $this->view->msgs = $aMail;
             }
 
             $this->manualTplInclude('msglist.inc.tpl');
@@ -298,7 +298,7 @@ class MainController extends Controller
             self::EMAILS_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oSearch = $this->oMailModel->search(
+        $aSearch = $this->oMailModel->search(
             $sKeywords,
             false,
             $sOrder,
@@ -309,7 +309,7 @@ class MainController extends Controller
             $iType
         );
 
-        if (empty($oSearch)) {
+        if (empty($aSearch)) {
             $this->sTitle = t("Your search didn't match any of your messages.");
             $this->notFound();
         } else {
@@ -317,7 +317,7 @@ class MainController extends Controller
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
             $this->view->h3_title = nt('%n% message found!', '%n% messages found!', $this->iTotalMails);
-            $this->view->msgs = $oSearch;
+            $this->view->msgs = $aSearch;
         }
 
         $this->manualTplInclude('msglist.inc.tpl');
@@ -525,12 +525,7 @@ class MainController extends Controller
         return $this->bStatus ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
     }
 
-    /**
-     * @param stdClass $oMsg
-     *
-     * @return void
-     */
-    private function setRead(stdClass $oMsg)
+    private function setRead(stdClass $oMsg): void
     {
         if ($oMsg->status == MailModel::UNREAD_STATUS) {
             $this->oMailModel->setReadMsg($oMsg->messageId);

@@ -476,7 +476,8 @@ class UserCoreModel extends Model
 
         $aRow = $rStmt->fetchAll(PDO::FETCH_OBJ);
         Db::free($rStmt);
-        return $aRow;
+
+        return (array)$aRow;
     }
 
     /**

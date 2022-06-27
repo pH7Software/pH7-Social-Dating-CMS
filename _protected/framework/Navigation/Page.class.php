@@ -38,7 +38,7 @@ class Page
         $this->oHttpRequest = new HttpRequest;
     }
 
-    public function getTotalPages(int $iTotalItems, int $iNbItemsPerPage = self::DEFAULT_NUMBER_ITEMS): int
+    public function getTotalPages(?int $iTotalItems, int $iNbItemsPerPage = self::DEFAULT_NUMBER_ITEMS): int
     {
         $this->totalPages($iTotalItems, $iNbItemsPerPage);
 
@@ -85,10 +85,10 @@ class Page
         return $sUrl . self::trailingSlash($sUrl) . '?' . $sVar . '=';
     }
 
-    private function totalPages(int $iTotalItems, int $iNbItemsPerPage): void
+    private function totalPages(?int $iTotalItems, int $iNbItemsPerPage): void
     {
         $this->iTotalItems = (int)$iTotalItems;
-        $this->iNbItemsPerPage = (int)$iNbItemsPerPage; // or intval() function, but it is slower than casting
+        $this->iNbItemsPerPage = $iNbItemsPerPage; // or intval() function, but it is slower than casting
         $this->iCurrentPage = $this->oHttpRequest->getExists(Pagination::REQUEST_PARAM_NAME) ? $this->oHttpRequest->get(Pagination::REQUEST_PARAM_NAME, 'int') : 1;
 
         // Ternary condition to prevent division by zero

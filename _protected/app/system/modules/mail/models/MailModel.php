@@ -232,7 +232,7 @@ class MailModel extends MailCoreModel
      * @param int|null $iProfileId
      * @param int $iType
      *
-     * @return int|stdClass
+     * @return int|array
      */
     public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $iProfileId = null, $iType = self::ALL)
     {
@@ -287,11 +287,7 @@ class MailModel extends MailCoreModel
 
         $rStmt->execute();
 
-        if (!$bCount) {
-            $mData = $rStmt->fetchAll(PDO::FETCH_OBJ);
-        } else {
-            $mData = (int)$rStmt->fetchColumn();
-        }
+        $mData = $bCount ?  (int)$rStmt->fetchColumn() : $rStmt->fetchAll(PDO::FETCH_OBJ);
 
         Db::free($rStmt);
 

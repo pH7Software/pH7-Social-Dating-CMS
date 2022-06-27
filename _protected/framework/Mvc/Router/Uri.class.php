@@ -68,14 +68,14 @@ class Uri
      * @param string $sModule
      * @param string $sController
      * @param string $sAction
-     * @param string|null $sVars Default NULL
+     * @param string|int|null $sVars Default NULL
      * @param bool $bFullClean Default TRUE
      *
      * @return string
      *
      * @throws IOException
      */
-    public static function get(string $sModule, string $sController, string $sAction, ?string $sVars = null, bool $bFullClean = true): string
+    public static function get(string $sModule, string $sController, string $sAction, $sVars = null, bool $bFullClean = true): string
     {
         self::$bFullClean = $bFullClean;
 

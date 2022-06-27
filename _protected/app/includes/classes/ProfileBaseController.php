@@ -50,10 +50,8 @@ abstract class ProfileBaseController extends Controller
 
     /**
      * Add CSS files for the profile page's design.
-     *
-     * @return void
      */
-    abstract protected function addCssFiles();
+    abstract protected function addCssFiles(): void;
 
     public function __construct()
     {
@@ -90,26 +88,18 @@ abstract class ProfileBaseController extends Controller
         $this->iVisitorId = (int)$iVisitorId;
     }
 
-    /**
-     * @return int
-     */
-    public function getProfileId()
+    public function getProfileId(): int
     {
         return $this->iProfileId;
     }
 
-    /**
-     * @return int
-     */
-    public function getVisitorId()
+    public function getVisitorId(): int
     {
         return $this->iVisitorId;
     }
 
     /**
      * Privacy Profile.
-     *
-     * @param stdClass $oUser
      *
      * @throws Framework\File\IOException
      */
@@ -158,7 +148,7 @@ abstract class ProfileBaseController extends Controller
     /**
      * Set the Google Maps code to the view.
      */
-    protected function setMap(string $sCity, string $sCountry, stdClass $oUser)
+    protected function setMap(string $sCity, string $sCountry, stdClass $oUser): void
     {
         $sFullAddress = $sCity . ' ' . t($sCountry);
         $sMarkerText = t('Meet <b>%0%</b> near here!', $oUser->username);
@@ -253,7 +243,7 @@ abstract class ProfileBaseController extends Controller
      *
      * @return string The correct anchor "Manage Friend" link.
      */
-    protected function getFriendLink(string $sFirstName, stdClass $oUser)
+    protected function getFriendLink(string $sFirstName, stdClass $oUser): string
     {
         $sCsrfToken = (new Token)->generate('friend');
 

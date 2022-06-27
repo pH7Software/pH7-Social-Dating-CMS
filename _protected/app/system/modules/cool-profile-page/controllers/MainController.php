@@ -28,7 +28,7 @@ class MainController extends ProfileBaseController
         $this->setVisitorId($this->session->get('member_id'));
     }
 
-    public function index()
+    public function index(): void
     {
         $this->addCssFiles();
         $this->addAdditionalAssetFiles();
@@ -120,10 +120,8 @@ class MainController extends ProfileBaseController
 
     /**
      * Add the General and Tabs Menu stylesheets.
-     *
-     * @return void
      */
-    protected function addCssFiles()
+    protected function addCssFiles(): void
     {
         $this->design->addCss(
             PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,

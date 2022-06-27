@@ -14,6 +14,7 @@ use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Url\Header;
+use stdClass;
 
 class BrowseController extends Controller
 {
@@ -41,14 +42,14 @@ class BrowseController extends Controller
             self::MAX_PROFILES_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oUsers = $this->oUserModel->search(
+        $aUsers = $this->oUserModel->search(
             $_GET,
             false,
             $this->oPage->getFirstItem(),
             $this->oPage->getNbItemsPerPage()
         );
 
-        if (empty($oUsers)) {
+        if (!empty($aUsers) && $this->isSearch()) {
             Header::redirect(
                 Uri::get('user', 'browse', 'index'),
                 t('No results. Please try again with wider or different search criteria.'),
@@ -63,8 +64,13 @@ class BrowseController extends Controller
             $this->view->h3_title = t('Meet new People with %0%', '<span class="pH0">' . $this->registry->site_name . '</span>');
             $this->view->meta_description = t('Meet new People and Friends near you with %site_name% - Browse Members');
             $this->view->avatarDesign = new AvatarDesignCore;
-            $this->view->users = $oUsers;
+            $this->view->users = $aUsers;
             $this->output();
         }
+    }
+
+    private function isSearch(): bool
+    {
+        return !empty($_GET) && count($_GET) > 1;
     }
 }
