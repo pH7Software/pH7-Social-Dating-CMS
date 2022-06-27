@@ -49,7 +49,7 @@ class BrowseController extends Controller
             $this->oPage->getNbItemsPerPage()
         );
 
-        if (!empty($aUsers) && $this->isSearch()) {
+        if ($this->isSearch() && !empty($aUsers)) {
             Header::redirect(
                 Uri::get('user', 'browse', 'index'),
                 t('No results. Please try again with wider or different search criteria.'),
