@@ -13,10 +13,8 @@
 namespace PH7;
 
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
-use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Service\Suggestion;
-use PH7\Framework\Url\Header;
 
 class FileController extends Controller
 {
