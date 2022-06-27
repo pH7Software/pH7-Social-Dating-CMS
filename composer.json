@@ -67,7 +67,6 @@
     "arcturial/clickatell": "^3.0",
     "aws/aws-sdk-php": "^3.200",
     "braintree/braintree_php": "^4.8",
-    "facebook/graph-sdk": "^5.6",
     "fakerphp/faker": "^1.9",
     "geoip2/geoip2": "~2.0",
     "guzzlehttp/guzzle": "^7.4",
