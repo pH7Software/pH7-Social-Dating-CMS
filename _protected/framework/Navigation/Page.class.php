@@ -52,7 +52,7 @@ class Page
 
     public function getFirstItem(): int
     {
-        return $this->iFirstItem < 0 ? 0 : $this->iFirstItem;
+        return max($this->iFirstItem, 0);
     }
 
     public function getNbItemsPerPage(): int
