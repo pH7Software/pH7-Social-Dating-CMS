@@ -87,8 +87,8 @@ class Page
 
     private function totalPages(?int $iTotalItems, int $iNbItemsPerPage): void
     {
-        $this->iTotalItems = (int)$iTotalItems;
-        $this->iNbItemsPerPage = $iNbItemsPerPage; // or intval() function, but it is slower than casting
+        $this->iTotalItems = (int)$iTotalItems; // or intval() function, but it is slower than casting
+        $this->iNbItemsPerPage = $iNbItemsPerPage;
         $this->iCurrentPage = $this->oHttpRequest->getExists(Pagination::REQUEST_PARAM_NAME) ? $this->oHttpRequest->get(Pagination::REQUEST_PARAM_NAME, 'int') : 1;
 
         // Ternary condition to prevent division by zero
