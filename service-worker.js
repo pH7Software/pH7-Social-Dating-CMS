@@ -26,28 +26,37 @@ self.addEventListener('fetch', (event) => {
     const url = new URL(request.url);
 
     if (url.origin === location.origin) {
-        event.respondWith(cacheData(request));
+        event.respondWith(cachedData(request));
     } else {
-        event.respondWith(networkFirst(request));
+        event.respondWith(fetchNetworkRequest(request));
     }
 });
 
-async function cacheData(request) {
+const isPageValid = (response) => {
+    return response.ok && response.status === 200;
+};
+
+const cachedData = async (request) => {
     const cachedResponse = await caches.match(request);
     return cachedResponse || fetch(request);
-}
+};
 
-async function networkFirst(request) {
+const fetchNetworkRequest = async (request) => {
     const cache = await caches.open(DYNAMIC_CACHE_NAME);
 
     try {
         const response = await fetch(request);
-        await cache.put(request, response.clone());
+
+        // Then, cache the page if 200 code (we don't want to cache a 404, 403, 500, ...)
+        if(isPageValid(response)) {
+            await cache.put(request, response.clone());
+        }
+
         return response;
     } catch (error) {
         return await cache.match(request);
     }
-}
+};
 
 // Add to Home Screen
 self.addEventListener('fetch', (event) => {
