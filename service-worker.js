@@ -64,7 +64,7 @@ self.addEventListener('fetch', event => {
             })
             .catch((err) => {
                 // Something went wrong
-                console.log("Service worker Fetch: ", err);
+                console.error("Worker couldn't fetch the request: ", err);
             })
     );
 });
