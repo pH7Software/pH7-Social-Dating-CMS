@@ -21,8 +21,8 @@ self.addEventListener('install', async event => {
     await cache.addAll(CACHED_FILES);
 });
 
-self.addEventListener('fetch', event => {
-    const {request} = event;
+self.addEventListener('fetch', (event) => {
+    const { request } = event;
     const url = new URL(request.url);
 
     if (url.origin === location.origin) {
@@ -50,7 +50,7 @@ async function networkFirst(request) {
 }
 
 // Add to Home Screen
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', (event) => {
     // Workaround for https://bugs.chromium.org/p/chromium/issues/detail?id=823392
     if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') {
         return;
@@ -62,9 +62,9 @@ self.addEventListener('fetch', event => {
                 // If response is found in cache, then return it, otherwise fetch it
                 return resp || fetch(event.request);
             })
-            .catch((err) => {
+            .catch((error) => {
                 // Something went wrong
-                console.error("Worker couldn't fetch the request: ", err);
+                console.error("Worker couldn't fetch the request: ", error);
             })
     );
 });
