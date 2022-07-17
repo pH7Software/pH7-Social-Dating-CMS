@@ -50,7 +50,7 @@ final class Version
      *
      * More details: https://ph7builder.com/new-versioning-system/
      */
-    public const KERNEL_VERSION = '17.2.0';
+    public const KERNEL_VERSION = '18.0.0';
     public const KERNEL_BUILD = '1';
     public const KERNEL_RELEASE_DATE = '2022-06-27';
 

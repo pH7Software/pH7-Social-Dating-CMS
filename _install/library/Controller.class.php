@@ -34,7 +34,7 @@ abstract class Controller implements Controllable
     public const SOFTWARE_COPYRIGHT = '© (c) 2012-%s, Pierre-Henry Soria. All Rights Reserved.';
 
     public const SOFTWARE_VERSION_NAME = 'PURE™';
-    public const SOFTWARE_VERSION = '17.2.0';
+    public const SOFTWARE_VERSION = '18.0.0';
 
     public const SOFTWARE_BUILD = '1';
 
