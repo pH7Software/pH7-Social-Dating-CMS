@@ -70,7 +70,7 @@ final class Version
      *
      * @return array|bool Returns version information in an array or FALSE if an error occurred.
      */
-    public static function getLatestInfo()
+    public static function getLatestInfo(): array|bool
     {
         $oCache = (new Cache)->start(self::CACHE_GROUP, 'version-info', self::CACHE_TIME);
         if (!$mData = $oCache->get()) {
@@ -117,9 +117,9 @@ final class Version
     }
 
     /**
-     * @return array|bool Returns an array with the release details, or FALSE if cannot retrieve the remote info.
+     * @return array|bool Returns an array with the release details, or FALSE if it can't retrieve the remote info.
      */
-    private static function retrieveXmlInfoFromRemoteServer()
+    private static function retrieveXmlInfoFromRemoteServer(): array|bool
     {
         $oDom = new DOMDocument;
 
