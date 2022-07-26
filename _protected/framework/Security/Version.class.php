@@ -34,7 +34,7 @@ final class Version
     private const PACKAGE_TAG_NAME = 'ph7builder';
 
     /**
-     * Framework Kernel.
+     * Framework Kernel Information.
      *
      * @history VERSION NAMES:
      *
@@ -54,7 +54,7 @@ final class Version
     public const KERNEL_BUILD = '1';
     public const KERNEL_RELEASE_DATE = '2022-06-27';
 
-    /***** Framework Server *****/
+    /*** Framework Server ***/
     public const KERNEL_TECHNOLOGY_NAME = 'pH7Builder.com';
     public const KERNEL_SERVER_NAME = 'pH7WS/1.0.0';
 
