@@ -19,6 +19,9 @@ use PH7\Framework\Url\Header;
 
 class VerificationCodeForm
 {
+    private const DIGIT_CODE_FIELD_LENGTH = 6;
+    private const DIGIT_CODE_FIELD_PATTERN = '\d{6}';
+
     public static function display()
     {
         if (isset($_POST['submit_verification_code'])) {
@@ -39,8 +42,8 @@ class VerificationCodeForm
                 'verification_code',
                 [
                     'description' => '<i class="fa fa-mobile"></i> ' . t('Open your two-factor authentication app on your device to view the 6 digit code.'),
-                    'pattern' => '\d{6}',
-                    'maxlength' => 6,
+                    'pattern' => self::DIGIT_CODE_FIELD_PATTERN,
+                    'maxlength' => self::DIGIT_CODE_FIELD_LENGTH,
                     'autocomplete' => 'off',
                     'required' => 1
                 ]
