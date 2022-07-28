@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Two-Factor Auth / Form
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -22,7 +24,7 @@ class VerificationCodeForm
     private const DIGIT_CODE_FIELD_LENGTH = 6;
     private const DIGIT_CODE_FIELD_PATTERN = '\d{6}';
 
-    public static function display()
+    public static function display(): void
     {
         if (isset($_POST['submit_verification_code'])) {
             if (\PFBC\Form::isValid($_POST['submit_verification_code'])) {

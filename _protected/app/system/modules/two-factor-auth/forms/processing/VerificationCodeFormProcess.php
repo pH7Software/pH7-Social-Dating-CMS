@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Two-Factor Auth / Form / Processing
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -26,9 +28,9 @@ class VerificationCodeFormProcess extends Form
      * OTP_TOLERANCE=2, verifies current and last two OTPS
      * - Text from: http://hayageek.com/two-factor-authentication-with-google-authenticator-php/
      */
-    const OTP_TOLERANCE = 1;
+    private const OTP_TOLERANCE = 1;
 
-    public function __construct($sMod)
+    public function __construct(string $sMod)
     {
         parent::__construct();
 
@@ -60,7 +62,7 @@ class VerificationCodeFormProcess extends Form
                 new SecurityModel
             );
 
-            Header::redirect($this->getAccountUrl($sMod), t('You are successfully logged in!'));
+            $this->redirectToAccountPage($sMod);
         } else {
             \PFBC\Form::setError(
                 'form_verification_code',
@@ -74,11 +76,11 @@ class VerificationCodeFormProcess extends Form
      *
      * @param string $sMod Module name.
      *
-     * @return string Correct class nlass name
+     * @return string Correct class name.
      *
      * @throws PH7InvalidArgumentException Explanatory message if the specified module is wrong.
      */
-    protected function getClassName($sMod)
+    protected function getClassName(string $sMod): string
     {
         switch ($sMod) {
             case 'user':
@@ -102,17 +104,20 @@ class VerificationCodeFormProcess extends Form
         return $sFullClassName;
     }
 
-    /**
-     * @param string $sModName
-     *
-     * @return string
-     */
-    private function getAccountUrl($sModName)
+    private function getAccountUrl(string $sModName): string
     {
         if ($sModName === PH7_ADMIN_MOD) {
             return Uri::get(PH7_ADMIN_MOD, 'main', 'index');
         }
 
         return Uri::get($sModName, 'account', 'index');
+    }
+
+    private function redirectToAccountPage(string $sMod): void
+    {
+        Header::redirect(
+            $this->getAccountUrl($sMod),
+            t('You are successfully logged in!')
+        );
     }
 }
