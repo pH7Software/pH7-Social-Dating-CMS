@@ -19,17 +19,13 @@ use PH7\Framework\Session\Session;
 
 abstract class Core extends Kernel
 {
-    /** @var Session */
-    protected $session;
+    protected Session $session;
 
-    /** @var Design */
-    protected $design;
+    protected Design $design;
 
-    /** @var CDateTime */
-    protected $dateTime;
+    protected CDateTime $dateTime;
 
-    /** @var PH7Tpl */
-    protected $view;
+    protected PH7Tpl $view;
 
     public function __construct()
     {
