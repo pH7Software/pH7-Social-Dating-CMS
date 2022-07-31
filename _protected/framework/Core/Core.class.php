@@ -1,11 +1,13 @@
 <?php
 /**
  * @author           Pierre-Henry Soria <hi@ph7.me>
- * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @link             https://ph7builder.com
  * @package          PH7 / Framework / Core
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Core;
 

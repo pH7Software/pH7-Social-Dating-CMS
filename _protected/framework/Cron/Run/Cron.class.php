@@ -8,6 +8,8 @@
  * @package          PH7 / Framework / Cron / Run
  */
 
+declare(strict_types=1);
+
 namespace PH7\Framework\Cron\Run;
 
 defined('PH7') or exit('Restricted access');

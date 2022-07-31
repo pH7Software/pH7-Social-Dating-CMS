@@ -1,14 +1,14 @@
 <?php
 /**
- * @title            General Cron Class
  * @desc             General Periodic Cron.
  *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / App / System / Core / Asset / Cron / 96H
- * @version          1.0
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -29,10 +29,8 @@ class GeneralCoreCron extends Cron
 
     /**
      * Checks file permissions and tries to correct them if they are incorrect.
-     *
-     * @return void
      */
-    private function chmod()
+    private function chmod(): void
     {
         /** Check and correct the file permissions if necessary **/
         $this->file->chmod(PH7_PATH_ROOT . '_constants.php', Chmod::MODE_WRITE_READ);
