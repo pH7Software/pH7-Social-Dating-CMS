@@ -188,7 +188,7 @@ class UserCoreModel extends Model
      *
      * @return int Total Users
      */
-    public function total($sTable = DbTableName::MEMBER, $iDay = 0, $sGender = 'all')
+    public function total(string $sTable = DbTableName::MEMBER, int $iDay = 0, string $sGender = 'all'): int
     {
         Various::checkModelTable($sTable);
 
@@ -827,10 +827,8 @@ class UserCoreModel extends Model
      * @param int $iProfileId
      * @param string|null $sAvatar NULL to remove the avatar.
      * @param int $iApproved
-     *
-     * @return bool
      */
-    public function setAvatar($iProfileId, $sAvatar, $iApproved)
+    public function setAvatar($iProfileId, $sAvatar, $iApproved): bool
     {
         $sSql = 'UPDATE' . Db::prefix(DbTableName::MEMBER) .
             'SET avatar = :avatar, approvedAvatar = :approved WHERE profileId = :profileId LIMIT 1';

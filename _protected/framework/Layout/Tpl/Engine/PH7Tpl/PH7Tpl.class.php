@@ -59,8 +59,7 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
         'lang'
     ];
 
-    /** @var DesignModel */
-    private $designModel;
+    private DesignModel $designModel;
 
     /** @var Syntax */
     private $oSyntaxEngine;
@@ -95,8 +94,7 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
     /** @var string */
     private $sCacheDirFile;
 
-    /** @var bool */
-    private $bCaching = false;
+    private bool $bCaching = false;
 
     /** @var bool */
     private $bHtmlCompressor;
@@ -107,11 +105,9 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
     /** @var int|null */
     private $mCacheExpire;
 
-    /** @var array */
-    private $_aVars = [];
+    private array $_aVars = [];
 
-    /** @var PH7Tpl */
-    private $_oVars;
+    private PH7Tpl $_oVars;
 
     // Hack that keeps the $config variable in the template files
     protected Config $config;
@@ -271,10 +267,8 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
      *
      * @param string $sName The variable name to use in the template
      * @param mixed $mValue (string, object, array, integer, ...) Value Variable
-     *
-     * @return void
      */
-    public function __set($sName, $mValue)
+    public function __set(string $sName, $mValue): void
     {
         $this->assign($sName, $mValue);
     }
@@ -288,7 +282,7 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
      *
      * @return mixed The variable value.
      */
-    public function __get($sKey)
+    public function __get(string $sKey)
     {
         return $this->getVar($sKey);
     }
@@ -811,7 +805,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     /**
      * @return bool Returns TRUE if the cache has expired, FALSE otherwise.
      */
-    private function hasCacheExpired()
+    private function hasCacheExpired(): bool
     {
         return
             $this->file->getModifTime($this->sCompileDirFile) > $this->file->getModifTime($this->sCacheDirFile) ||
@@ -820,12 +814,8 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
 
     /**
      * Add slashes to avoid errors with "preg_replace()" with Windows' backslashes in directories.
-     *
-     * @param string $sStr
-     *
-     * @return string Escaped string
      */
-    private function addSlashes($sStr)
+    private function addSlashes(string $sStr): string
     {
         return addslashes($sStr);
     }
@@ -857,22 +847,15 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
         return $this;
     }
 
-    /**
-     * @param string $sKeyword
-     *
-     * @return bool
-     */
-    private function isKeywordFoundInCode($sKeyword)
+    private function isKeywordFoundInCode(string $sKeyword): bool
     {
         return strpos($this->sCode, $sKeyword) !== false;
     }
 
     /**
      * Set the error message.
-     *
-     * @return void
      */
-    private function setErrMsg()
+    private function setErrMsg(): void
     {
         $this->sCode = sprintf(static::ERR_MSG, self::SOFTWARE_EMAIL);
     }

@@ -126,7 +126,7 @@ class UserCore
      * @throws Framework\File\Permission\PermissionException
      * @throws PH7InvalidArgumentException
      */
-    public function setAvatar($iProfileId, $sUsername, $sFile, $iApproved = 1)
+    public function setAvatar($iProfileId, $sUsername, $sFile, $iApproved = 1): bool
     {
         /**
          * This can cause minor errors (eg if a user sent a file that is not a photo).

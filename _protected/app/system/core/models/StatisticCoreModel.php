@@ -49,7 +49,7 @@ class StatisticCoreModel extends StatisticModel
      *
      * @return int Total Users
      */
-    public function totalMembers($iDay = 0, $sGender = 'all')
+    public function totalMembers(int $iDay = 0, string $sGender = 'all')
     {
         return (new UserCoreModel)->total(DbTableName::MEMBER, $iDay, $sGender);
     }

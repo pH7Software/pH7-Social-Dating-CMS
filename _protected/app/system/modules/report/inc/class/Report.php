@@ -19,8 +19,7 @@ class Report
 {
     private Templatable $oView;
 
-    /** @var string|bool */
-    private $mStatus = false;
+    private string|bool $mStatus = false;
 
     public function __construct(Templatable $oView)
     {
