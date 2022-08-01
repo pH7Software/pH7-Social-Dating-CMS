@@ -14,8 +14,11 @@ interface Templatable
 {
     /**
      * Display/Output the template.
+     *
+     * @return string|never
+     * TODO When min version will be PHP 8.1, add union return types "string|never"
      */
-    public function display(?string $sTplFile, ?string $sDirPath, bool $bInclude): ?string;
+    public function display(?string $sTplFile, ?string $sDirPath, bool $bInclude);
 
     public function assign(string $sName, $mValue, bool $bEscape, bool $bEscapeStrip): void;
 
