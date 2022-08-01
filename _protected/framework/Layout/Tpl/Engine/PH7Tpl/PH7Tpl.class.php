@@ -503,9 +503,9 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
      *
      * @return mixed Value of that variable.
      */
-    public function getVar($sVarName)
+    public function getVar(string $sVarName)
     {
-        return isset($this->_aVars[$sVarName]) ? $this->_aVars[$sVarName] : '';
+        return $this->_aVars[$sVarName] ?? '';
     }
 
     /**
