@@ -1,7 +1,7 @@
 <?php
 /**
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Service
  */
@@ -15,63 +15,45 @@ defined('PH7') or exit('Restricted access');
  */
 abstract class Emoticon
 {
-    const DIR = 'smile/';
-    const EXT = '.gif';
+    private const DIR = 'smile/';
+    private const EXT = '.gif';
 
     /**
-     * Gets the list of emoticons.
-     *
-     * @return array
+     * Get the list of emoticons.
      */
-    protected static function get()
+    protected static function get(): array
     {
         return include PH7_PATH_APP_CONFIG . 'emoticon.php';
     }
 
     /**
-     * Gets the path of emoticon.
-     *
-     * @param string $sName
-     *
-     * @return string Emoticon path.
+     * Get the emoticon's path.
      */
-    protected static function getPath($sName)
+    protected static function getPath(string $sName): string
     {
         return PH7_PATH_STATIC . PH7_IMG . static::DIR . $sName . static::EXT;
     }
 
     /**
-     * Gets the URL of emoticon.
-     *
-     * @param string $sName
-     *
-     * @return string Emoticon URL.
+     * Get the emoticon's URL.
      */
-    protected static function getUrl($sName)
+    protected static function getUrl(string $sName): string
     {
         return PH7_URL_STATIC . PH7_IMG . static::DIR . $sName . static::EXT;
     }
 
     /**
-     * Gets the name of emoticon.
-     *
-     * @param array $aVal
-     *
-     * @return string Emoticon name.
+     * Gets the emoticon's name.
      */
-    protected static function getName(array $aVal)
+    protected static function getName(array $aVal): string
     {
         return $aVal[1];
     }
 
     /**
-     * Gets the emoticon code.
-     *
-     * @param array $aVal
-     *
-     * @return array|string Emoticon code.
+     * Get the emoticon's code.
      */
-    protected static function getCode(array $aVal)
+    protected static function getCode(array $aVal): array|string
     {
         return $aVal[0];
     }

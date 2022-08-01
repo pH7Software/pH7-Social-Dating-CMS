@@ -250,8 +250,6 @@ class Http
     /**
      * Get the subdomain in a URL address.
      *
-     * @param string $sUrl
-     *
      * @return string|null Returns the "subdomain" in the URL address if he has found a subdomain otherwise "null".
      */
     public function getSubdomain(string $sUrl): ?string
@@ -292,7 +290,7 @@ class Http
     }
 
     /**
-     * @return string The HTTP server protocol.
+     * @return string|null The HTTP server protocol.
      */
     public static function getProtocol(): ?string
     {

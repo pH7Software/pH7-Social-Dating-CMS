@@ -125,6 +125,7 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
 
         /** Instance objects to the class **/
         $this->_oVars = $this;
+
         $this->designModel = new DesignModel;
         $this->oSyntaxEngine = new $oSyntaxEngine;
 

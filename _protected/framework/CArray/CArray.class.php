@@ -4,7 +4,7 @@
  * @desc             Useful methods for the handing Array.
  *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / CArray
  */
@@ -86,7 +86,7 @@ class CArray
     /**
      * Check if the key exists.
      *
-     * @param string|boolean $mKey The key for needle if it is found in the array, FALSE otherwise.
+     * @param string|bool $mKey The key for needle if it is found in the array, FALSE otherwise.
      *
      * @return string|null The name key. If the key is not found, returns NULL
      */
