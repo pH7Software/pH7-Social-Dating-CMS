@@ -157,10 +157,6 @@ class Design
 
     /**
      * Set an information message.
-     *
-     * @param string $sMsg
-     *
-     * @return void
      */
     public function setMessage(string $sMsg): void
     {
@@ -168,9 +164,7 @@ class Design
     }
 
     /**
-     * Display the information message.
-     *
-     * @return void
+     * Display the information messages.
      */
     public function message(): void
     {
@@ -201,10 +195,6 @@ class Design
 
     /**
      * Set an error message.
-     *
-     * @param string $sErr
-     *
-     * @return void
      */
     public function setError(string $sErr): void
     {
@@ -212,9 +202,7 @@ class Design
     }
 
     /**
-     * Display the error message.
-     *
-     * @return void
+     * Display the error messages.
      */
     public function error(): void
     {
@@ -247,10 +235,8 @@ class Design
      * @param string $sMsg , Optional, display a message after redirect of the page.
      * @param string $sType Type of message: "success", "info", "warning" or "error". Default: "success".
      * @param int $iTime Optional, a time. Default: "3" seconds.
-     *
-     * @return void
      */
-    public function setRedirect($sUrl = null, $sMsg = null, $sType = self::SUCCESS_TYPE, $iTime = self::DEFAULT_REDIRECTION_DELAY)
+    public function setRedirect($sUrl = null, $sMsg = null, $sType = self::SUCCESS_TYPE, $iTime = self::DEFAULT_REDIRECTION_DELAY): void
     {
         if ($sMsg !== null) {
             $this->setFlashMsg($sMsg, $sType);
