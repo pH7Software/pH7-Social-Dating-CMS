@@ -39,7 +39,7 @@ RUN apt-get install -y nginx
 RUN rm -v /etc/nginx/ph7builder.conf
 
 # Copy a configuration file from the current directory
-ADD ph7builder.conf /etc/nginx/
+COPY ph7builder.conf /etc/nginx/
 
 # Append "daemon off;" to the beginning of the configuration
 RUN echo "daemon off;" >> /etc/nginx/ph7builder.conf
