@@ -226,7 +226,7 @@
     {{ $design->message() }}
     {{ $design->error() }}
     {if $is_disclaimer AND !$is_admin_auth AND !AdminCore::isAdminPanel()}
-      {main_include 'disclaimer.inc.tpl'}
+      {main_include 'disclaimer-dialog.inc.tpl'}
     {/if}
     <!-- End Footer JavaScript -->
 
