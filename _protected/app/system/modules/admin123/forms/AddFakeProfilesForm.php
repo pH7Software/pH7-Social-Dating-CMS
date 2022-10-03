@@ -104,13 +104,17 @@ class AddFakeProfilesForm
             'FI' => t('Finnish'),
             'FR' => t('French'),
             'DE' => t('German'),
+            'IN' => t('Indian'),
             'IR' => t('Iranian'),
             'IE' => t('Irish'),
+            'MX' => t('Mexican'),
             'NZ' => t('New Zealander'),
             'NO' => t('Norwegian'),
+            'RS' => t('Serbian'),
             'ES' => t('Spanish'),
             'CH' => t('Swiss'),
-            'TR' => t('Turkish')
+            'TR' => t('Turkish'),
+            'UA' => t('Ukrainian')
         ];
     }
 }
