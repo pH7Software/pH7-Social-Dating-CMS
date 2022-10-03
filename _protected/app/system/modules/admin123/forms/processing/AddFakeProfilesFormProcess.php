@@ -4,7 +4,7 @@
  * @desc           Generate Fake Profiles from Web API.
  *
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright      (c) 2014-2021, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2014-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
@@ -28,7 +28,7 @@ class AddFakeProfilesFormProcess extends Form
 {
     public const SERVICE_NAME = 'RandomUser';
     public const SERVICE_URL = 'https://randomuser.me';
-    public const API_VER = '1.3';
+    public const API_VER = '1.4';
 
     private const API_URL = 'https://randomuser.me/api/';
 
