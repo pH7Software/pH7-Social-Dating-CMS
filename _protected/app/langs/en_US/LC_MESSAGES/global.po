@@ -3485,7 +3485,7 @@ msgid "Yes (recommended for security reasons)"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:211
-msgid "This protection can cause problems for logged in users with dynamic IPs. Please disable if their IP changes frequently during the session."
+msgid "This protection can cause problems for logged in users with dynamic IPs. Please disable if their IP changes frequently during their session."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:214
@@ -3493,7 +3493,7 @@ msgid "Protect for Affiliates against session cookies hijacking:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:214
-msgid "This protection can cause problems for affiliates with dynamic IPs. Please disable if their IP changes frequently during the session."
+msgid "This protection can cause problems for affiliates with dynamic IPs. Please disable if their IP changes frequently during their session."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:217
@@ -3505,7 +3505,7 @@ msgid "Yes (highly recommended for security reasons)"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:217
-msgid "This protection can cause problems for admins with dynamic IPs. Please disable if their IP changes frequently during the session."
+msgid "This protection can cause problems for admins with dynamic IPs. Please disable if their IP changes frequently during their session."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:219
@@ -15708,4 +15708,3 @@ msgstr ""
 #: _protected/app/system/modules/user/forms/EditForm.php:68
 msgid "For security reasons and to avoid spam, you cannot change your email address. If it has changed, you will need to <a href=\"%0%\">delete</a> your account and create a new one."
 msgstr ""
-
