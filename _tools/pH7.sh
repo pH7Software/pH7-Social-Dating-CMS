@@ -310,7 +310,7 @@ function _cache-permissions() {
 
 # Save a git project to the specified repo (e.g. github, bitbucket)
 function _save-project-to-repo() {
-    git remote rm  $1 # Remve remmote name if it already exists
+    git remote rm  $1 # Remove remote name if it already exists
     git remote add $1 $2
     git push
 }
