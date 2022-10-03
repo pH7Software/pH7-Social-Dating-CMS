@@ -119,7 +119,7 @@ class File
      *
      * @return string|bool Returns the read data or FALSE on failure.
      */
-    public function getFile($sFile, $bIncPath = false)
+    public function getFile($sFile, $bIncPath = false): string|bool
     {
         return @file_get_contents($sFile, $bIncPath);
     }
