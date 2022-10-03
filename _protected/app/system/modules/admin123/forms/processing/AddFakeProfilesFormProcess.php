@@ -162,7 +162,7 @@ class AddFakeProfilesFormProcess extends Form
         $aData['country'] = Country::fixCode($aUser['nat']);
         $aData['city'] = $this->str->upperFirst($aUser['location']['city']);
         $aData['state'] = $this->str->upperFirst($aUser['location']['state']);
-        $aData['address'] = $this->str->upperFirstWords($aUser['location']['street']);
+        $aData['address'] = $this->str->upperFirstWords($aUser['location']['street']['name']);
         $aData['zip_code'] = $aUser['location']['postcode'];
         $aData['birth_date'] = $this->dateTime->get($aUser['dob']['date'])->date('Y-m-d');
         $aData['avatar'] = $aUser['picture']['large'];
