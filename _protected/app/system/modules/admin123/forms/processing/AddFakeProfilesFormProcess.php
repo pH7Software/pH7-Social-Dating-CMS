@@ -82,10 +82,7 @@ class AddFakeProfilesFormProcess extends Form
         unset($oUser, $oUserModel, $aData);
     }
 
-    /**
-     * @return string|bool|null
-     */
-    protected function getApiClient()
+    protected function getApiClient(): array|bool|null
     {
         $sApiUrl = static::API_URL;
         $sApiParams = '?' . Url::httpBuildQuery($this->getApiParameters(), null, '&');
@@ -111,10 +108,8 @@ class AddFakeProfilesFormProcess extends Form
      * @param string $sApiUrl API URL.
      * @param string $sApiParams Parameters to send to the API.
      * @param string $sApiVersion Version of the API it will use. If fails from the API server, it will ignore it.
-     *
-     * @return string|bool
      */
-    private function getApiResults(string $sApiUrl, string $sApiParams, string $sApiVersion)
+    private function getApiResults(string $sApiUrl, string $sApiParams, string $sApiVersion): string|bool
     {
         if ($rData = $this->file->getFile($sApiUrl . $sApiVersion . PH7_SH . $sApiParams)) {
             return $rData;
