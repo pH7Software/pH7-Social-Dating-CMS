@@ -56,24 +56,16 @@ namespace PH7\Framework\Str {
 
         /**
          * Make a string's first character uppercase.
-         *
-         * @param string $sText
-         *
-         * @return string
          */
-        public function upperFirst($sText)
+        public function upperFirst(string $sText): string
         {
             return ucfirst($sText);
         }
 
         /**
          * Uppercase the first character of each word in a string.
-         *
-         * @param string $sText
-         *
-         * @return string
          */
-        public function upperFirstWords($sText)
+        public function upperFirstWords(string $sText): string
         {
             return ucwords($sText);
         }
