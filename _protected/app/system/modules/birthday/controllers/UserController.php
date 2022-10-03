@@ -43,12 +43,7 @@ class UserController extends Controller
         $this->view->meta_keywords = t('birthday,birthdate,anniversary,birth,friend,dating,social networking,profile,social');
     }
 
-    /**
-     * @param string $sGender
-     *
-     * @return void
-     */
-    public function index($sGender = BirthdayModel::ALL)
+    public function index(string $sGender = BirthdayModel::ALL): void
     {
         $this->checkType($sGender);
 
