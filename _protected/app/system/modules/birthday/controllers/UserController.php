@@ -15,11 +15,8 @@ class UserController extends Controller
     private const MAX_PROFILES_PER_PAGE = 20;
 
     private BirthdayModel $oBirthModel;
-
     private Page $oPage;
-
     private string $sCurrentDate;
-
     private int $iTotalBirths = 0;
 
     public function __construct()
@@ -40,7 +37,9 @@ class UserController extends Controller
         /**
          *  Predefined meta_keywords tags.
          */
-        $this->view->meta_keywords = t('birthday,birthdate,anniversary,birth,friend,dating,social networking,profile,social');
+        $this->view->meta_keywords = t(
+            'birthday,birthdate,anniversary,birth,friend,dating,social networking,profile,social'
+        );
     }
 
     public function index(string $sGender = BirthdayModel::ALL): void
@@ -48,7 +47,8 @@ class UserController extends Controller
         $this->checkType($sGender);
 
         $this->view->total_pages = $this->oPage->getTotalPages(
-            $this->iTotalBirths, self::MAX_PROFILES_PER_PAGE
+            $this->iTotalBirths,
+            self::MAX_PROFILES_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
 
@@ -80,7 +80,8 @@ class UserController extends Controller
         $this->output();
     }
 
-    private function getPageTitle(): string {
+    private function getPageTitle(): string
+    {
         $sHtmlCurrentDate = ' &ndash; <span class="pH3">' . $this->sCurrentDate . '</span>';
         return nt('%n% Birthday', '%n% Birthdays', $this->iTotalBirths) . $sHtmlCurrentDate;
     }
