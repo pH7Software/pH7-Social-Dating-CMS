@@ -15,6 +15,7 @@ namespace PH7\Framework\Server;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Cache\Cache;
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\Url\Uri;
 
@@ -173,6 +174,23 @@ final class Server
         }
 
         return true;
+    }
+
+    public static function cachedIsRewriteMod(): bool
+    {
+        $oCache = (new Cache)->start(
+            'str/server',
+            'isRewriteModStatus',
+            86400
+        );
+
+        if (!$bIsEnabled = $oCache->get()) {
+            $bIsEnabled = self::isRewriteMod();
+            $oCache->put($bIsEnabled);
+        }
+        unset($oCache);
+
+        return $bIsEnabled;
     }
 
     /**

@@ -74,8 +74,8 @@ class Bootstrap
         try {
             $this->loadInitFiles();
 
-            //** Temporary code. In the near future, pH7Builder will be usable without mod_rewrite
-            if (!Server::isRewriteMod()) {
+            //** Temporary code. In the near future, pH7Builder will be working without mod_rewrite
+            if (!Server::cachedIsRewriteMod()) {
                 $this->notRewriteModEnabledError();
                 exit;
             }  //*/
