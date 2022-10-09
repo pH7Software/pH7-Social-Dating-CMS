@@ -67,7 +67,7 @@ class LoginFormProcess extends Form implements LoginableForm
                 $oSecurityModel->addLoginLog(
                     $sEmail,
                     $sUsername,
-                    $sPassword,
+                    '*****',
                     'Failed! Incorrect Email, Username or Password',
                     DbTableName::ADMIN_LOG_LOGIN
                 );
@@ -84,7 +84,7 @@ class LoginFormProcess extends Form implements LoginableForm
                 $oSecurityModel->addLoginLog(
                     $sEmail,
                     $sUsername,
-                    $sPassword,
+                    '*****',
                     'Failed! Wrong IP address',
                     DbTableName::ADMIN_LOG_LOGIN
                 );
