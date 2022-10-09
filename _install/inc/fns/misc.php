@@ -342,7 +342,8 @@ function is_url_rewrite()
     }
 
     // Check if mod_rewrite is installed and is configured to be used via .htaccess
-    if (!$bIsRewrite = (strtolower(getenv('HTTP_MOD_REWRITE')) === 'on')) {
+    $sHttpModRewrite = (string)getenv('HTTP_MOD_REWRITE');
+    if (!$bIsRewrite = (strtolower($sHttpModRewrite) === 'on')) {
         $sOutputMsg = 'mod_rewrite Works!';
 
         if (!empty($_GET['a']) && $_GET['a'] === 'test_mod_rewrite') {
