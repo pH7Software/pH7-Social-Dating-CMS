@@ -20,9 +20,7 @@ class BrowseController extends Controller
     private const MAX_PROFILES_PER_PAGE = 52;
 
     private UserModel $oUserModel;
-
     private Page $oPage;
-
     private int $iTotalUsers;
 
     public function __construct()
