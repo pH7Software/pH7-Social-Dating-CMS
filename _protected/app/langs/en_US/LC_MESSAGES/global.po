@@ -3232,7 +3232,7 @@ msgid "Require photo to be uploaded:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:113
-msgid "Require Members to upload a profile photo during sign up."
+msgid "Require members to upload a profile photo during sign up."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:113

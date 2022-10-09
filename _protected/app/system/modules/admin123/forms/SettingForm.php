@@ -286,9 +286,9 @@ class SettingForm
 
         $oForm->addElement(new Select(t('Date of Birth field type:'), 'is_user_age_range_field', ['1' => t('Age Range (without month and day of birth)'), '0' => t('Date-Picker calendar (full date of birth)')], ['value' => DbConfig::getSetting('isUserAgeRangeField'), 'required' => 1]));
 
-        $oForm->addElement(new Select(t('Require photo to be uploaded:'), 'require_registration_avatar', ['1' => t('Yes'), '0' => t('No')], ['description' => t('Require Members to upload a profile photo during sign up.') . '<br /><small>' . t("Doesn't guarantee that all users will have a profile photo, because users can still close the tab without completely finishing the registration process.") . '</small>', 'value' => DbConfig::getSetting('requireRegistrationAvatar'), 'required' => 1]));
+        $oForm->addElement(new Select(t('Require photo to be uploaded:'), 'require_registration_avatar', ['1' => t('Yes'), '0' => t('No')], ['description' => t('Require members to upload a profile photo during sign up.') . '<br /><small>' . t("Doesn't guarantee that all users will have a profile photo, because users can still close the tab without completely finishing the registration process.") . '</small>', 'value' => DbConfig::getSetting('requireRegistrationAvatar'), 'required' => 1]));
 
-        $oForm->addElement(new Select(t('Default Membership Group:'), 'default_membership_group_id', self::getMembershipGroups(), ['value' => DbConfig::getSetting('defaultMembershipGroupId'), 'required' => 1]));
+        $oForm->addElement(new Select(t('Default Membership Group:'), 'default_membership_group_id', self::getMembershipGroups(), ['description' => t('The default membership where the users will be added to.'), 'value' => DbConfig::getSetting('defaultMembershipGroupId'), 'required' => 1]));
 
 
         /********** Picture and Video **********/
