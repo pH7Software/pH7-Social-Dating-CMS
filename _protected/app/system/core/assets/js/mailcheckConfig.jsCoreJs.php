@@ -18,10 +18,12 @@ use PH7\Framework\Compress\Compress;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Service\Suggestion;
 
+const CACHE_LIFETIME = 120 * 48 * 30;
+
 $oCache = (new Cache)->start(
     'str/js',
     'mailcheckConfig',
-    120 * 48 * 30
+    CACHE_LIFETIME
 );
 
 if (!$sData = $oCache->get()) {
@@ -53,6 +55,6 @@ if (!$sData = $oCache->get()) {
 
     $oCache->put($sData);
 }
-
 unset($oCache);
+
 echo $sData;
