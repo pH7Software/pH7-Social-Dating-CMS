@@ -188,7 +188,6 @@ final class Server
             $bIsEnabled = self::isRewriteMod();
             $oCache->put($bIsEnabled);
         }
-        unset($oCache);
 
         return $bIsEnabled;
     }
