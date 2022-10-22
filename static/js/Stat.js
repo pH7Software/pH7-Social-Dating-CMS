@@ -12,7 +12,7 @@ function Stat() {
         $.post(pH7Url.base + this.sUrl, {type: 'total_users'}, function (iData) {
             $('.stat_total_users').flipCounter({number: parseInt(iData)});
         });
-        setTimeout(function () {
+        setInterval(function () {
             oMe.totalUsers()
         }, 1000);
     };

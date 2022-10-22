@@ -6,6 +6,6 @@
 
 function updateActivity() {
     $.get(pH7Url.base + 'user/asset/ajax/setActivity');
-    setTimeout('updateActivity()', 10000)
+    setInterval('updateActivity()', 10000)
 }
 updateActivity();

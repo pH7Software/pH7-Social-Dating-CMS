@@ -243,7 +243,7 @@ var Messenger = {
                         }
                     }
 
-                    setTimeout(function () {
+                    setInterval(function () {
                         oMe.heartbeat()
                     }, oMe.iHeartbeatTime);
                 }
@@ -363,7 +363,7 @@ var Messenger = {
                         $("#chatbox_" + oMe.sBoxTitle + " .chatboxcontent").scrollTop($("#chatbox_" + oMe.sBoxTitle + " .chatboxcontent")[0].scrollHeight);
                     }
 
-                    setTimeout(function () {
+                    setInterval(function () {
                         oMe.heartbeat()
                     }, oMe.iHeartbeatTime);
                 }

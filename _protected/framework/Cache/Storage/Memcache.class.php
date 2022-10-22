@@ -15,15 +15,14 @@ namespace PH7\Framework\Cache\Storage;
 defined('PH7') or exit('Restricted access');
 
 /**
- * Memcache class is still not done. If you are a developer and want to help me
+ * Memcache storage class is still not done. If you are a developer and want to help me
  * to continue the development of this class, you're welcome!
  *
- * Our open source Github repo is: https://github.com/pH7Software/pH7-Social-Dating-CMS
+ * Our open source GitHub repo is: https://github.com/pH7Software/pH7-Social-Dating-CMS
  *
  * Thank you,
  * Pierre-Henry Soria
  */
-
 class Memcache
 {
     public function __construct()
