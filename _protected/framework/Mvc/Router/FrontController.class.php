@@ -854,7 +854,7 @@ final class FrontController
     }
 
     /**
-     * We display an error page if someone request "index.php" filename in order to avoid disclosing and explicitly request the PHP index filename (e.g. for security reasons...).
+     * We display an error page if someone requests "index.php" filename in order to avoid disclosing and explicitly request the PHP index filename for security reasons.
      * Otherwise, if the URL rewrite extension is not enabled, we redirect the page to index.php file (then [URL]/index.php/[REQUEST]/ ).
      *
      * @see self::notFound()
@@ -867,12 +867,12 @@ final class FrontController
     {
         // The following code will be useless if pH7Builder will be able to work without mod_rewrite
         if ($this->oHttpRequest->currentUrl() === PH7_URL_ROOT . static::INDEX_FILE) {
-            $this->notFound('In "production" mode, it simulates "404 page not found" if the index.php filename is called, to avoid disclosing the language index filename (e.g. for security reasons...).');
+            $this->notFound('In "production" mode, it simulates "404 page not found" if the index.php filename is called, to avoid disclosing the language index filename for security reasons.');
         }
     }
 
     /**
-     * This method has two different behaviors depending of the environment mode site.
+     * This method has two different behaviors depending on the environment mode site.
      * 1. In production mode: Displays the page not found using the system module "error".
      * 2. In development mode: It throws an Exception with displaying an explanatory message that indicates why this page was not found.
      *
