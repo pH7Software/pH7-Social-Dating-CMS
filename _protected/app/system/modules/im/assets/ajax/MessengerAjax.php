@@ -28,13 +28,11 @@ use PH7\JustHttp\StatusCode;
 
 class MessengerAjax extends PermissionCore
 {
-    const DATETIME_FORMAT = 'Y-m-d H:i:s';
+    private const DATETIME_FORMAT = 'Y-m-d H:i:s';
 
-    /** @var HttpRequest */
-    private $oHttpRequest;
+    private HttpRequest $oHttpRequest;
 
-    /** @var MessengerModel */
-    private $oMessengerModel;
+    private MessengerModel $oMessengerModel;
 
     public function __construct()
     {
