@@ -347,7 +347,7 @@ namespace PH7\Framework\Str {
          */
         protected function htmlSpecialChars($sText)
         {
-            return htmlspecialchars($sText, ENT_QUOTES, static::ENCODING);
+            return htmlspecialchars((string)$sText, ENT_QUOTES, static::ENCODING);
         }
 
         /**

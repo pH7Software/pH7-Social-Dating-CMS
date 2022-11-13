@@ -128,7 +128,7 @@ final class Server
             return $_SERVER;
         }
 
-        return !empty($_SERVER[$sKey]) ? htmlspecialchars($_SERVER[$sKey], ENT_QUOTES) : $sDefVal;
+        return !empty($_SERVER[$sKey]) ? htmlspecialchars((string)$_SERVER[$sKey], ENT_QUOTES) : $sDefVal;
     }
 
     /**
