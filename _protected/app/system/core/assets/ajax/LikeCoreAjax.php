@@ -13,7 +13,6 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Datatype\Type;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
@@ -58,8 +57,8 @@ class LikeCoreAjax
     private function initialize(): void
     {
         $this->oLikeModel = new LikeCoreModel;
-        $this->sKey = $this->oHttpRequest->post('key', Type::STRING);
-        $this->iVote = $this->oHttpRequest->post('vote', Type::INTEGER);
+        $this->sKey = $this->oHttpRequest->post('key');
+        $this->iVote = (int)$this->oHttpRequest->post('vote');
         $this->sLastIp = Ip::get();
         $this->select();
     }
