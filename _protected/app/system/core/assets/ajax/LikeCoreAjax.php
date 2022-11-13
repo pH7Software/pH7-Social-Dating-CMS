@@ -1,44 +1,37 @@
 <?php
 /**
- * @title          Like Ajax Class
  * @desc           Simple Like Page Ajax Class.
  *
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Core / Asset / Ajax
- * @version        1.1
+ * @version        1.2
  */
 
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Datatype\Type;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 class LikeCoreAjax
 {
-    /** @var int */
-    private static $iVotesLike = 0;
+    private static int $iVotesLike = 0;
 
-    /** @var HttpRequest */
-    private $oHttpRequest;
+    private HttpRequest $oHttpRequest;
 
-    /** @var LikeCoreModel */
-    private $oLikeModel;
+    private LikeCoreModel $oLikeModel;
 
-    /** @var string */
-    private $sKey;
+    private string $sKey;
 
-    /** @var float */
-    private $sLastIp;
+    private string $sLastIpVoted;
 
-    /** @var string */
-    private $sLastIpVoted;
+    private string $sLastIp;
 
-    /** @var int */
-    private $iVote;
+    private int $iVote;
 
     public function __construct()
     {
@@ -49,10 +42,8 @@ class LikeCoreAjax
 
     /**
      * Showing votes.
-     *
-     * @return string
      */
-    public function show()
+    public function show(): string
     {
         $sTxt = (static::$iVotesLike > 1) ?
             nt('You and one other have voted for this!', 'You and %n% other people have voted for this!', static::$iVotesLike - 1) :
@@ -63,24 +54,20 @@ class LikeCoreAjax
 
     /**
      * Initialize the methods of the class.
-     *
-     * @return void
      */
-    private function initialize()
+    private function initialize(): void
     {
         $this->oLikeModel = new LikeCoreModel;
-        $this->sKey = $this->oHttpRequest->post('key');
-        $this->iVote = $this->oHttpRequest->postExists('vote');
+        $this->sKey = $this->oHttpRequest->post('key', Type::STRING);
+        $this->iVote = $this->oHttpRequest->post('vote', Type::INTEGER);
         $this->sLastIp = Ip::get();
         $this->select();
     }
 
     /**
      * Gets the likes and insert it into the DB if it's the first like, otherwise update the like.
-     *
-     * @return void
      */
-    private function select()
+    private function select(): void
     {
         $oResult = $this->oLikeModel->select($this->sKey);
 
@@ -103,17 +90,15 @@ class LikeCoreAjax
      *
      * @return bool Returns true if the user is connected, false otherwise.
      */
-    private function checkPerm()
+    private function checkPerm(): bool
     {
         return UserCore::auth();
     }
 
     /**
      * Adds voting into the database and increment the static vote attribute.
-     *
-     * @return void
      */
-    private function insert()
+    private function insert(): void
     {
         static::$iVotesLike++;
         $this->oLikeModel->insert($this->sKey, $this->sLastIp);
@@ -121,10 +106,8 @@ class LikeCoreAjax
 
     /**
      * Updates the like into the database.
-     *
-     * @return void
      */
-    private function update()
+    private function update(): void
     {
         if ($this->sLastIpVoted != $this->sLastIp) {
             static::$iVotesLike++;
@@ -132,10 +115,7 @@ class LikeCoreAjax
         }
     }
 
-    /**
-     * @return bool
-     */
-    private function isUserVoting()
+    private function isUserVoting(): bool
     {
         return $this->iVote && $this->checkPerm();
     }

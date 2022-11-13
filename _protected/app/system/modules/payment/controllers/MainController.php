@@ -122,27 +122,27 @@ class MainController extends Controller
     public function process($sProvider = '')
     {
         switch ($sProvider) {
-            case static::PAYPAL_GATEWAY_NAME:
+            case self::PAYPAL_GATEWAY_NAME:
                 $this->paypalHandler();
                 break;
 
-            case static::STRIPE_GATEWAY_NAME:
+            case self::STRIPE_GATEWAY_NAME:
                 $this->stripeHandler();
                 break;
 
-            case static::BRAINTREE_GATEWAY_NAME:
+            case self::BRAINTREE_GATEWAY_NAME:
                 $this->braintreeHandler();
                 break;
 
-            case static::TWO_CHECKOUT_GATEWAY_NAME:
+            case self::TWO_CHECKOUT_GATEWAY_NAME:
                 $this->twoCheckOutHandler();
                 break;
 
-            case static::SKEEREL_GATEWAY_NAME:
+            case self::SKEEREL_GATEWAY_NAME:
                 $this->skeerelHandler();
                 break;
 
-            case static::CCBILL_GATEWAY_NAME:
+            case self::CCBILL_GATEWAY_NAME:
                 // Still in developing...
                 // You are more than welcome to contribute on GitHub: https://github.com/pH7Software/pH7-Social-Dating-CMS
                 break;
