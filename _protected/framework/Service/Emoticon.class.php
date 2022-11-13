@@ -31,7 +31,7 @@ abstract class Emoticon
      */
     protected static function getPath(string $sName): string
     {
-        return PH7_PATH_STATIC . PH7_IMG . static::DIR . $sName . static::EXT;
+        return PH7_PATH_STATIC . PH7_IMG . self::DIR . $sName . self::EXT;
     }
 
     /**
@@ -39,7 +39,7 @@ abstract class Emoticon
      */
     protected static function getUrl(string $sName): string
     {
-        return PH7_URL_STATIC . PH7_IMG . static::DIR . $sName . static::EXT;
+        return PH7_URL_STATIC . PH7_IMG . self::DIR . $sName . self::EXT;
     }
 
     /**
