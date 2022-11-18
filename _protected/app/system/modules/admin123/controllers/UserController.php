@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace PH7;
 
-use PH7\DataType\Type;
+use PH7\Datatype\Type;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Layout\Html\Security as HtmlSecurity;
