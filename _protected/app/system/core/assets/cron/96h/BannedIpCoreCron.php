@@ -25,7 +25,7 @@ use PH7\JustHttp\StatusCode;
 @set_time_limit(0);
 @ini_set('memory_limit', '528M');
 
-class BannedCoreCron extends Cron
+class BannedIpCoreCron extends Cron
 {
     /**
      * Contain the URL of the remote services we call to get the list of accurate banned IPs.
@@ -275,4 +275,4 @@ class BannedCoreCron extends Cron
 }
 
 // Get the job done!
-new BannedCoreCron;
+new BannedIpCoreCron;
