@@ -79,7 +79,7 @@ class BannedIpCoreCron extends Cron
 
         $this->doProcess();
 
-        echo t('The IPs banned list has been updated!');
+        echo t('The banned IP list has been updated!');
     }
 
     protected function doProcess(): void
