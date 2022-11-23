@@ -41,8 +41,8 @@ class BannedIpCoreCron extends Cron
 
     private const BANNED_IP_FILE_PATH = PH7_PATH_APP_CONFIG . Ban::DIR . Ban::IP_FILE;
 
-    private const ERROR_CALLING_WEB_SERVICE_MESSAGE = 'BannedCoreCron: Error while calling: %s';
-    private const ERROR_ADD_BANNED_IP_MESSAGE = 'Error while writing new banned IP addresses.';
+    private const ERROR_CALLING_WEB_SERVICE_MESSAGE = '%s: Error while calling: %s';
+    private const ERROR_ADD_BANNED_IP_MESSAGE = '%s: Error while writing new banned IP addresses.';
 
     private const NEW_LINE = "\r\n";
 
@@ -94,7 +94,7 @@ class BannedIpCoreCron extends Cron
                  */
                 if (!$this->callWebService($sUrl)) {
                     $this->logErrorMessage(
-                        sprintf(self::ERROR_CALLING_WEB_SERVICE_MESSAGE, $sUrl)
+                        sprintf(self::ERROR_CALLING_WEB_SERVICE_MESSAGE, static::class, $sUrl)
                     );
                 }
 
@@ -103,7 +103,7 @@ class BannedIpCoreCron extends Cron
                  */
             } catch (Exception $oExcept) {
                 $this->logErrorMessage(
-                    sprintf(self::ERROR_CALLING_WEB_SERVICE_MESSAGE, $sUrl)
+                    sprintf(self::ERROR_CALLING_WEB_SERVICE_MESSAGE, static::class, $sUrl)
                 );
             }
         }
@@ -122,7 +122,9 @@ class BannedIpCoreCron extends Cron
          * Update the banned IP file
          */
         if (!$this->writeIps()) {
-            $this->logErrorMessage(self::ERROR_ADD_BANNED_IP_MESSAGE);
+            $this->logErrorMessage(
+                sprintf(self::ERROR_ADD_BANNED_IP_MESSAGE, static::class)
+            );
         }
     }
 
