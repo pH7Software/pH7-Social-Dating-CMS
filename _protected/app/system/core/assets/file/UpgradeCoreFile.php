@@ -341,7 +341,7 @@ class UpgradeCore
         // TODO Need to retrieve the valid checksum of each release from the remote server, where it gives these details
         $sRemoveChecksumPatch = md5_file(PH7_PATH_REPOSITORY . PH7_TMP . $sZipFileName);
 
-        if (!$this->isPatchChecksumLegit(PH7_PATH_REPOSITORY . PH7_TMP . $sZipFileName, $sRemoveChecksumPatch)) {
+        if (!$this->isPatchChecksumMatch(PH7_PATH_REPOSITORY . PH7_TMP . $sZipFileName, $sRemoveChecksumPatch)) {
             $bStatus = false;
         } else {
             // Extract zip archive
@@ -527,7 +527,7 @@ class UpgradeCore
     /**
      * Checks the checksum of the downloaded zip archive to be sure of its integrity and authenticity before proceeding to the upgrade with the patch file.
      */
-    private function isPatchChecksumLegit(string $sZipFilePath, string $sValidChecksum): bool
+    private function isPatchChecksumMatch(string $sZipFilePath, string $sValidChecksum): bool
     {
         return md5_file($sZipFilePath) === $sValidChecksum;
     }
