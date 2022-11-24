@@ -2,6 +2,12 @@
 
 ## CLI Installation Wizard 🧙
 
+- [Good to Know](#-good-to-know)
+- [How pH7Builder CLI installation can be useful](#-how-ph7builder-cli-installation-can-be-useful)
+- [Troubleshooting](#-troubleshooting)
+- [How this library was built. Backstage)](#-how-i-built-this-backstage-full-video)
+- [Contact. Say Hi](#-contact--say-hello)
+
 ### The first CLI Dating Builder Installer Tool 😻 (ever invented! 🪄)
 
 
@@ -22,7 +28,7 @@ database, meaning you won't be able to have two same installations using the sam
 create a second database, or using the [traditional Web installer](http://ph7builder.com/doc/en/insall) instead).
 
 
-## 🤔 Why pH7Builder CLI installation can be useful
+## 🤔 How pH7Builder CLI installation can be useful
 
 * Scaling the new [pH7Builder](https://github.com/pH7Software/pH7-Social-Dating-CMS) instances by automatizing the
   installation.
