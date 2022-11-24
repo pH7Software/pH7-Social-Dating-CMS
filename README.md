@@ -45,13 +45,13 @@ You get and own all data and files, hosted on your own server! ✌️
 - [Resources / Documentation](#-documentation)
 - [Troubleshooting](#-troubleshooting)
 - [Contributing to the project](#-contributing)
-- [License](#%EF%B8%8F-license)
 - [Why pH7Builder is Eco-Friendly?](#-ph7builder-the-eco-friendly-cms-%EF%B8%8F)
 - [About Me](#-the-cook)
   - [Contact Me](#-contact-suggestion--feedback)
   - [Hire Me](#-hire-me-at-your-company)
   - [Offer me a cup of tea?](#-offer-me-a-cup-of-tea-or-tea-bags-)
 - [Tools Used to Develop pH7Builder](#-toolssoftware-used-to-develop-ph7builder)
+- [License](#%EF%B8%8F-license)
 
 
 ## 👀 Software Overview 🎉
