@@ -45,13 +45,13 @@ You get and own all data and files, hosted on your own server! ✌️
 - [Resources / Documentation](#-documentation)
 - [Troubleshooting](#-troubleshooting)
 - [Contributing to the project](#-contributing)
-- [License](#%EF%B8%8F-license)
 - [Why pH7Builder is Eco-Friendly?](#-ph7builder-the-eco-friendly-cms-%EF%B8%8F)
-- [The toolsets I use](#-toolssoftware-used-to-develop-ph7builder)
 - [About Me](#-the-cook)
   - [Contact Me](#-contact-suggestion--feedback)
   - [Hire Me](#-hire-me-at-your-company)
   - [Offer me a cup of tea?](#-offer-me-a-cup-of-tea-or-tea-bags-)
+- [Tools Used to Develop pH7Builder](#-toolssoftware-used-to-develop-ph7builder)
+- [License](#%EF%B8%8F-license)
 
 
 ## 👀 Software Overview 🎉
@@ -161,7 +161,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 
 ## ⚙ Requirements
 
-* **Application Server** PHP 8.0 or newer (optimized for **PHP 8+ and beyond**! 🚀).
+* **Application Server** PHP 8.0 or newer 🚀
 
 * **Database** MySQL/MariaDB 5.5.3 or newer.
 
