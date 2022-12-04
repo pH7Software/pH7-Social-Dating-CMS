@@ -10,6 +10,9 @@ use PFBC\Validation;
 use PH7\DbTableName;
 use PH7\ExistsCoreModel;
 
+/**
+ * Validates a customer email address.
+ */
 class CEmail extends Validation
 {
     const GUEST_MODE = 'guest';
