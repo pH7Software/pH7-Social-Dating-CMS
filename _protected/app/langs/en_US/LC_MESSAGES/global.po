@@ -147,7 +147,7 @@ msgid "Invalid Email Address!"
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:153
-msgid "This email already used by another member."
+msgid "Email already used by another user. <a href=\"%0%\">Password forgotten?</a>"
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:155
