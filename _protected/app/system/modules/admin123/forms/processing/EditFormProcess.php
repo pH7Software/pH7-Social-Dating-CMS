@@ -56,7 +56,7 @@ class EditFormProcess extends Form
         }
 
         if (!$this->str->equals($this->httpRequest->post('mail'), $oAdmin->email)) {
-            if ((new ExistsCoreModel)->email($this->httpRequest->post('mail'), DbTableName::ADMIN)) {
+            if ((new ExistCoreModel)->email($this->httpRequest->post('mail'), DbTableName::ADMIN)) {
                 \PFBC\Form::setError(
                     'form_admin_edit_account',
                     t('Invalid email or already used by another admin.')

@@ -34,7 +34,7 @@ class AddFakeProfilesFormProcess extends Form
 
     private Validate $oValidate;
 
-    private ExistsCoreModel $oExistsModel;
+    private ExistCoreModel $oExistsModel;
 
     private static int $iTotalGenerated = 0;
 
@@ -44,7 +44,7 @@ class AddFakeProfilesFormProcess extends Form
 
         $oUser = new UserCore;
         $oUserModel = new UserCoreModel;
-        $this->oExistsModel = new ExistsCoreModel;
+        $this->oExistsModel = new ExistCoreModel;
         $this->oValidate = new Validate;
 
         $aUserData = $this->getApiClient()['results'];

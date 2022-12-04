@@ -8,7 +8,7 @@ namespace PFBC\Validation;
 
 use PFBC\Validation;
 use PH7\DbTableName;
-use PH7\ExistsCoreModel;
+use PH7\ExistCoreModel;
 
 class CEmail extends Validation
 {
@@ -32,7 +32,7 @@ class CEmail extends Validation
     public function isValid($sValue)
     {
         if ($this->isNotApplicable($sValue) || $this->oValidate->email($sValue)) {
-            return !($this->sType === self::GUEST_MODE && (new ExistsCoreModel)->email($sValue, $this->sTable));
+            return !($this->sType === self::GUEST_MODE && (new ExistCoreModel)->email($sValue, $this->sTable));
         }
 
         return false;

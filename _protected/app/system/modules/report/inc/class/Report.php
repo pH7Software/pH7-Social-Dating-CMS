@@ -91,7 +91,7 @@ class Report
 
     private function areValidProfileIds(array $aData): bool
     {
-        $oExistsModel = new ExistsCoreModel;
+        $oExistsModel = new ExistCoreModel;
 
         return $oExistsModel->id($aData['reporter_id']) && $oExistsModel->id($aData['spammer_id']);
     }

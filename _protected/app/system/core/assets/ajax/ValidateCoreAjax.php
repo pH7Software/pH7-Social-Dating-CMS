@@ -31,7 +31,7 @@ class ValidateCoreAjax
     /** @var Validate */
     private $oValidate;
 
-    /** @var ExistsCoreModel */
+    /** @var ExistCoreModel */
     private $oExistsModel;
 
     /** @var string Default message value */
@@ -44,7 +44,7 @@ class ValidateCoreAjax
     {
         $this->oStr = new Str;
         $this->oValidate = new Validate;
-        $this->oExistsModel = new ExistsCoreModel;
+        $this->oExistsModel = new ExistCoreModel;
     }
 
     /**

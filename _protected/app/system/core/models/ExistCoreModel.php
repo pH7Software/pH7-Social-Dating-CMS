@@ -16,7 +16,7 @@ use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 
-class ExistsCoreModel
+class ExistCoreModel
 {
     /**
      * Checks if the same email address already exists.

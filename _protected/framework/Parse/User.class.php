@@ -13,7 +13,7 @@ namespace PH7\Framework\Parse;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\ExistsCoreModel;
+use PH7\ExistCoreModel;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\UserCore;
 
@@ -57,7 +57,7 @@ class User
             $aMatches[1] = array_unique($aMatches[1]);
 
             foreach ($aMatches[1] as $sUsername) {
-                if ((new ExistsCoreModel)->username($sUsername)) {
+                if ((new ExistCoreModel)->username($sUsername)) {
                     yield $sUsername; // "yield" thanks to PHP 5.5
                 }
             }

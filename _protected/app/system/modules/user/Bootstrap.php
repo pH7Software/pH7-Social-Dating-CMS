@@ -20,7 +20,7 @@ use PH7\Framework\Session\Session;
 if (!UserCore::auth() && Registry::getInstance()->action !== 'soon') {
     $oCookie = new Cookie;
     if ($oCookie->exists(['member_remember', 'member_id'])) {
-        if ((new ExistsCoreModel)->id($oCookie->get('member_id'))) {
+        if ((new ExistCoreModel)->id($oCookie->get('member_id'))) {
             $oUserModel = new UserCoreModel;
             $oUser = $oUserModel->readProfile($oCookie->get('member_id'));
             if ($oCookie->get('member_remember') === Security::hashCookie($oUser->password)) {

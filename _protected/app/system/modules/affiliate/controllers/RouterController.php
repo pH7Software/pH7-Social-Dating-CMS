@@ -30,7 +30,7 @@ class RouterController extends Controller
     {
         $sUsername = $this->httpRequest->get('aff');
 
-        if ((new ExistsCoreModel)->username($sUsername, DbTableName::AFFILIATE)) {
+        if ((new ExistCoreModel)->username($sUsername, DbTableName::AFFILIATE)) {
             (new Affiliate)->addRefer($sUsername);
         }
     }

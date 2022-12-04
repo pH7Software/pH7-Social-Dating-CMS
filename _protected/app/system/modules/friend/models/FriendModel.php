@@ -37,7 +37,7 @@ class FriendModel extends FriendCoreModel
         $iFriendId = (int)$iFriendId;
 
         // Check if the two existing ID
-        $oExistsModel = new ExistsCoreModel;
+        $oExistsModel = new ExistCoreModel;
 
         if ($oExistsModel->id($iProfileId, DbTableName::MEMBER) && $oExistsModel->id($iFriendId, DbTableName::MEMBER)) {
             if ($this->inList($iProfileId, $iFriendId) === false) {

@@ -15,7 +15,7 @@ defined('PH7') or exit('Restricted access');
 use DateTime;
 use Exception;
 use PH7\DbTableName;
-use PH7\ExistsCoreModel;
+use PH7\ExistCoreModel;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Math\Measure\Year as YearMeasure;
@@ -236,13 +236,13 @@ class Validate
          */
         if ($sTable === DbTableName::ADMIN) {
             return preg_match('#^' . PH7_USERNAME_PATTERN . '{' . $iMin . ',' . $iMax . '}$#', $sUsername) &&
-                !(new ExistsCoreModel)->username($sUsername, $sTable);
+                !(new ExistCoreModel)->username($sUsername, $sTable);
         }
 
         return preg_match('#^' . PH7_USERNAME_PATTERN . '{' . $iMin . ',' . $iMax . '}$#', $sUsername) &&
             !file_exists(PH7_PATH_ROOT . UserCore::PROFILE_PAGE_PREFIX . $sUsername) &&
             !Ban::isUsername($sUsername) &&
-            !(new ExistsCoreModel)->username($sUsername, $sTable);
+            !(new ExistCoreModel)->username($sUsername, $sTable);
     }
 
     /**

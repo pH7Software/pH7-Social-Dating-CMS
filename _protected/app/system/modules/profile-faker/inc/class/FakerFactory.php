@@ -170,7 +170,7 @@ class FakerFactory
 
     private function isValidProfile(string $sEmail, string $sUsername): bool
     {
-        $oExistsModel = new ExistsCoreModel;
+        $oExistsModel = new ExistCoreModel;
         $oValidate = new Validate;
 
         return $oValidate->email($sEmail) &&

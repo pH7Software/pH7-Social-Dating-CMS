@@ -283,7 +283,7 @@ class ImportUser extends Core
 
             $iRow = 0;
             $oUserModel = new UserCoreModel;
-            $oExistsModel = new ExistsCoreModel;
+            $oExistsModel = new ExistCoreModel;
             $oValidate = new Validate;
 
             while (false !== ($aUserData = fgetcsv($this->rHandler, 0, $sDelimiter, $sEnclosure))) {
