@@ -18,6 +18,7 @@ use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Spam\Captcha\Captcha;
 use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Str\Str;
@@ -150,7 +151,7 @@ class ValidateCoreAjax
         if (!$this->oValidate->email($sValue)) {
             $this->sMsg = t('Invalid Email Address!');
         } elseif ($sParam === 'guest' && $this->oExistsModel->email($sValue, $sTable)) {
-            $this->sMsg = t('This email already used by another member.');
+            $this->sMsg = t('Email already used by another user. Did you <a href="%0%">forget your password</a>?', Uri::get('lost-password', 'main', 'forgot', 'user'));
         } elseif ($sParam === 'user' && !$this->oExistsModel->email($sValue, $sTable)) {
             $this->sMsg = t('Oops! "%0%" is not associated with any %site_name% accounts.', substr($sValue, 0, 50));
         } else {
