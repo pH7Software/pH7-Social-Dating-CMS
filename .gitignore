@@ -11,6 +11,7 @@ _protected/data/tmp/*
 _protected/data/log/pH7log/*
 _protected/data/backup/*
 _protected/data/cache/*
+!_protected/data/cache/.keep
 _protected/vendor/*
 
 data/*
