@@ -25,7 +25,6 @@ class MainController extends Controller
     private const REDIRECTION_DELAY_IN_SEC = 3;
 
     private string $sTitle;
-
     private bool $bIsMobile;
 
     /**
@@ -45,7 +44,7 @@ class MainController extends Controller
 
         // Only visitors
         if (!UserCore::auth()) {
-            // To check if the site is called by a Mobile or Mobile Native App
+            // Check if the site is called from a Mobile Native App or Mobile Phone
             $this->bIsMobile = $this->view->is_mobile = (MobApp::is($this->httpRequest, $this->session) || $this->browser->isMobile());
 
             $this->view->is_users_block = (bool)DbConfig::getSetting('usersBlock');
