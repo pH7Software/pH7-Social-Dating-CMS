@@ -165,7 +165,9 @@ class MainController extends Controller
             /* 'index.guest.inc.tpl' is not responsive enough for very small screen resolutions, so set to 'index.guest_splash.inc.tpl' by default */
             $sPage = static::GUEST_SPLASH_FILE;
         } else {
+            // Check if "Splash Homepage" has been enabled or not from admin general settings
             $bIsSplashPage = (bool)DbConfig::getSetting('splashPage');
+
             $sPage = $bIsSplashPage ? static::GUEST_SPLASH_FILE : static::GUEST_FILE;
         }
 
