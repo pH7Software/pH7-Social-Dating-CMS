@@ -157,6 +157,7 @@ final class BrowserTest extends TestCase
             ['HTTP_PROFILE', 'something'],
             ['HTTP_USER_AGENT', 'Mobile'],
             ['HTTP_USER_AGENT', 'Phone'],
+            ['HTTP_USER_AGENT', 'iPhone OS'],
             ['HTTP_USER_AGENT', 'Android 123'],
             ['HTTP_USER_AGENT', 'My Opera Mini 000'],
         ];

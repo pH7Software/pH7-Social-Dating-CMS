@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / User / Controller
  */
@@ -16,24 +16,21 @@ use PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
-    const GUEST_CLASSIC_PAGE_TYPE = 'classic';
-    const GUEST_SPLASH_PAGE_TYPE = 'splash';
+    private const GUEST_CLASSIC_PAGE_TYPE = 'classic';
+    private const GUEST_SPLASH_PAGE_TYPE = 'splash';
 
-    const GUEST_SPLASH_FILE = 'index.guest_splash';
-    const GUEST_FILE = 'index.guest';
+    private const GUEST_SPLASH_FILE = 'index.guest_splash';
+    private const GUEST_FILE = 'index.guest';
 
-    const REDIRECTION_DELAY_IN_SEC = 3;
+    private const REDIRECTION_DELAY_IN_SEC = 3;
 
-    /** @var string */
-    private $sTitle;
-
-    /** @var bool */
-    private $bIsMobile;
+    private string $sTitle;
+    private bool $bIsMobile;
 
     /**
      * Displaying the main homepage of the website.
      */
-    public function index()
+    public function index(): void
     {
         /**
          * @internal We don't have to put the title here as it's the homepage, so it's the default title that is used.
@@ -47,7 +44,7 @@ class MainController extends Controller
 
         // Only visitors
         if (!UserCore::auth()) {
-            // To check if the site is called by a Mobile or Mobile Native App
+            // Check if the site is called from a Mobile Native App or Mobile Phone
             $this->bIsMobile = $this->view->is_mobile = (MobApp::is($this->httpRequest, $this->session) || $this->browser->isMobile());
 
             $this->view->is_users_block = (bool)DbConfig::getSetting('usersBlock');
@@ -85,25 +82,27 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function login()
+    public function login(): void
     {
         // Display Sign In page
         $this->sTitle = t('Sign In to %site_name%');
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
-    public function resendActivation()
+    public function resendActivation(): void
     {
         // Display Resend Activation page
         $this->sTitle = t('Resend activation email');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
-    public function soon()
+    public function soon(): void
     {
         $this->sTitle = t('See you soon!');
         $this->view->page_title = $this->sTitle;
@@ -119,7 +118,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function accountDeleted()
+    public function accountDeleted(): void
     {
         $this->sTitle = t('Sad to see you leaving us! :(');
         $this->view->page_title = $this->sTitle;
@@ -135,14 +134,14 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function logout()
+    public function logout(): void
     {
         (new User)->logout($this->session);
 
         $this->redirectToSoonPage();
     }
 
-    private function redirectToSoonPage()
+    private function redirectToSoonPage(): void
     {
         Header::redirect(
             Uri::get('user', 'main', 'soon'),
@@ -157,15 +156,17 @@ class MainController extends Controller
      *
      * @throws PH7InvalidArgumentException
      */
-    private function getGuestTplPage()
+    private function getGuestTplPage(): string
     {
         if (isDebug() && $this->httpRequest->getExists('force')) {
             $sPage = $this->getGuestForcedPage();
         } elseif ($this->bIsMobile) {
-            /* 'index.guest.inc.tpl' is not responsive enough for very small screen resolutions, so set to 'index.guest_splash.inc.tpl' by default */
+            // 'index.guest.inc.tpl' is not responsive enough for very small screen resolutions, so set to 'index.guest_splash.inc.tpl' by default
             $sPage = static::GUEST_SPLASH_FILE;
         } else {
+            // Check if "Splash Homepage" has been enabled or not from admin general settings
             $bIsSplashPage = (bool)DbConfig::getSetting('splashPage');
+
             $sPage = $bIsSplashPage ? static::GUEST_SPLASH_FILE : static::GUEST_FILE;
         }
 
@@ -174,12 +175,8 @@ class MainController extends Controller
 
     /**
      * Add CSS/JS files for visitor's homepage.
-     *
-     * @param bool $bIsBgVideo
-     *
-     * @return void
      */
-    private function addGuestAssetFiles($bIsBgVideo)
+    private function addGuestAssetFiles(string $bIsBgVideo): void
     {
         $sIsCssVidSplashFile = $bIsBgVideo === true ? 'video_splash.css,' : '';
         $this->design->addCss(
@@ -195,10 +192,8 @@ class MainController extends Controller
 
     /**
      * Add CSS/JS files for logged in users' homepage.
-     *
-     * @return void
      */
-    private function addUserAssetFiles()
+    private function addUserAssetFiles(): void
     {
         $this->design->addCss(
             PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS,
@@ -214,11 +209,9 @@ class MainController extends Controller
      * When you are in the development mode, you can force the guest page by set a "force" GET request with the "splash" or "classic" parameter.
      * Example: "/?force=splash" or "/?force=classic"
      *
-     * @return string
-     *
      * @throws PH7InvalidArgumentException
      */
-    private function getGuestForcedPage()
+    private function getGuestForcedPage(): string
     {
         switch ($this->httpRequest->get('force')) {
             case self::GUEST_CLASSIC_PAGE_TYPE:
@@ -238,10 +231,8 @@ class MainController extends Controller
 
     /**
      * Returns TRUE if it's the guest splash page, FALSE otherwise.
-     *
-     * @return bool
      */
-    private function isGuestSplashPage()
+    private function isGuestSplashPage(): bool
     {
         return $this->getGuestTplPage() === static::GUEST_SPLASH_FILE;
     }
