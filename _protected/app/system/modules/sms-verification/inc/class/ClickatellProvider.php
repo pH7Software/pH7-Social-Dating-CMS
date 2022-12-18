@@ -10,6 +10,7 @@ namespace PH7;
 
 use Clickatell\ClickatellException;
 use Clickatell\Rest as Client;
+use PH7\Framework\Error\Logger;
 
 class ClickatellProvider extends SmsProvider implements SmsProvidable
 {
@@ -42,6 +43,8 @@ class ClickatellProvider extends SmsProvider implements SmsProvidable
 
             return false;
         } catch (ClickatellException $oExcept) {
+            (new Logger())->msg('Clickatell error while sending SMS: ' . $oExcept->getMessage());
+
             return false;
         }
     }
