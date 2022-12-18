@@ -135,9 +135,9 @@
         {/if}
 
         {if $is_forum_enabled}
-          <li class="dropdown"><a href="{{ $design->url('forum','forum','index') }}" title="{lang 'Discussions Board'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-comments"></i> {lang 'Discussions'} <span class="caret"></span></a>
+          <li class="dropdown"><a href="{{ $design->url('forum','forum','index') }}" title="{lang 'Discussions Board'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-comments-o"></i> {lang 'Discussions'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="{{ $design->url('forum','forum','index') }}" rel="nofollow" title="{lang 'Discussions Board'}" data-load="ajax"><i class="fa fa-comments"></i> {lang 'Discussions'}</a></li>
+              <li><a href="{{ $design->url('forum','forum','index') }}" rel="nofollow" title="{lang 'Discussions Board'}" data-load="ajax"><i class="fa fa-comments-o"></i> {lang 'Discussions'}</a></li>
               <li><a href="{{ $design->url('forum','forum','search') }}" title="{lang 'Search Topics'}" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search'}</a></li>
             </ul>
           </li>
@@ -344,11 +344,11 @@
             {/if}
 
             {if $is_forum_enabled}
-              <li><a href="{{ $design->url('forum','admin','index') }}" title="{lang 'Discussions Board - Admin Mode'}"><i class="fa fa-comments"></i> {lang 'Discussions'}</a></li>
+              <li><a href="{{ $design->url('forum','admin','index') }}" title="{lang 'Discussions Board - Admin Mode'}"><i class="fa fa-comments-o"></i> {lang 'Discussions'}</a></li>
             {/if}
 
             {if $is_blog_enabled}
-              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('blog','admin','index') }}" title="{lang 'Admin Blog'}"><i class="fa fa-commenting-o"></i> {lang 'Blog'}</a>
+              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('blog','admin','index') }}" title="{lang 'Admin Blog'}"><i class="fa fa-comments-o"></i> {lang 'Blog'}</a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="{{ $design->url('blog','admin','index') }}" title="{lang 'Admin Control - Blog'}">{lang 'Admin Blog'}</a></li>
                   <li><a href="{{ $design->url('blog','admin','add') }}" title="{lang 'Add a Blog Post'}">{lang 'Add a Post'}</a></li>
