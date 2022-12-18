@@ -82,7 +82,7 @@
     "symfony/console": "^5.4",
     "symfony/mailer": "^5.4",
     "twbs/bootstrap": "^3.4",
-    "twilio/sdk": "^5.28"
+    "twilio/sdk": "^6.44"
   },
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
