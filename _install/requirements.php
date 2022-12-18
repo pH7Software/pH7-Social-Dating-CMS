@@ -9,7 +9,7 @@
  * @file           requirements
  * @author         Pierre-Henry Soria
  * @email          <hello@ph7builder.com>
- * @copyright      (c) 2011-2021, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2011-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT (https://opensource.org/licenses/MIT)
  * @language       (PHP) and (HTML5 + CSS)
  * @since          2011/10/25

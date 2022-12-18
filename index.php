@@ -3,7 +3,7 @@
  * @desc           Index file for the public root.
  *
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright      (c) 2011-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2011-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license        See LICENSE.md and COPYRIGHT.md in the root directory.
  * @link           https://ph7builder.com
  * @package        PH7 / ROOT
