@@ -11,13 +11,9 @@ use PH7\Framework\Security\CSRF\Token as SecurityToken;
 
 class Token extends Hidden
 {
-    /** @var string */
-    private $sName;
+    private string $sName;
 
-    /**
-     * @param string $sName
-     */
-    public function __construct($sName)
+    public function __construct(string $sName)
     {
         if (!$this->isEnabled()) {
             return; // If it's disabled, we stop the execution of the class
@@ -42,9 +38,9 @@ class Token extends Hidden
      *
      * @return bool Returns TRUE if the security token is enabled, FALSE otherwise.
      */
-    private function isEnabled()
+    private function isEnabled(): bool
     {
         // Check if the CSRF security token for forms is enabled
-        return DbConfig::getSetting('securityToken');
+        return (bool)DbConfig::getSetting('securityToken');
     }
 }
