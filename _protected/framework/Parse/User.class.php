@@ -4,7 +4,7 @@
  * @desc             Parse some User methods.
  *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Parse
  */
@@ -19,7 +19,7 @@ use PH7\UserCore;
 
 class User
 {
-    const AT = '@';
+    private const AT = '@';
 
     /**
      * Parse the "@<username>" to the link of profile.
@@ -28,7 +28,7 @@ class User
      *
      * @return string The contents with the links to username profiles.
      */
-    public static function atUsernameToLink($sContents)
+    public static function atUsernameToLink(string $sContents): string
     {
         foreach (self::getAtUsernames($sContents) as $sUsername) {
             $sUsernameLink = (new UserCore)->getProfileLink($sUsername);
@@ -45,12 +45,8 @@ class User
 
     /**
      * Get the "@<username>" in the contents.
-     *
-     * @param string $sContents
-     *
-     * @return \Generator
      */
-    private static function getAtUsernames($sContents)
+    private static function getAtUsernames(string $sContents): \Generator
     {
         if (self::areProfileFound($sContents, $aMatches)) {
             // Delete duplicate usernames
@@ -64,15 +60,9 @@ class User
         }
     }
 
-    /**
-     * @param string $sContents
-     * @param array $aMatches
-     *
-     * @return false|int
-     */
-    private static function areProfileFound($sContents, &$aMatches)
+    private static function areProfileFound(string $sContents, &$aMatches): bool
     {
-        return preg_match_all(
+        return (bool)preg_match_all(
             '#' . static::AT . '(' . PH7_USERNAME_PATTERN . '{' . DbConfig::getSetting('minUsernameLength') . ',' . DbConfig::getSetting('maxUsernameLength') . '})#u',
             $sContents,
             $aMatches,
