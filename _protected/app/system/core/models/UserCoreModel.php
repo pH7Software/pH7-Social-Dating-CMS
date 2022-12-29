@@ -135,6 +135,8 @@ class UserCoreModel extends Model
     }
 
     /**
+     * Retrieve the user's IP address from the log session table.
+     *
      * @param int $iProfileId
      * @param string $sTable
      *

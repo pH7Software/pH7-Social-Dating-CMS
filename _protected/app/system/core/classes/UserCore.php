@@ -410,6 +410,8 @@ class UserCore
             '*****',
             'Logged in!'
         );
+
+        // Insert user log session and current IP address.
         $oSecurityModel->addSessionLog(
             $oUserData->profileId,
             $oUserData->email,

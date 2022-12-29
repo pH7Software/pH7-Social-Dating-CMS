@@ -101,6 +101,7 @@ class LoginFormProcess extends Form implements LoginableForm
 
             $this->updatePwdHashIfNeeded($sPassword, $oUserData->password, $sEmail);
 
+            // Check if the country the user logged in is different from the last time.
             $sLocationName = Geo::getCountry();
             if ($this->isForeignLocation($iProfileId, $sLocationName)) {
                 SecurityCore::sendSuspiciousLocationAlert(
