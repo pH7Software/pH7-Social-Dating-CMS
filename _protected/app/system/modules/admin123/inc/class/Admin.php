@@ -27,11 +27,9 @@ class Admin extends AdminCore
      * @param string $sUsername
      * @param UserCoreModel $oAdminModel
      *
-     * @return void
-     *
      * @throws ForbiddenActionException
      */
-    public function delete($iProfileId, $sUsername, UserCoreModel $oAdminModel)
+    public function delete($iProfileId, string $sUsername, UserCoreModel $oAdminModel): void
     {
         $iProfileId = (int)$iProfileId;
 

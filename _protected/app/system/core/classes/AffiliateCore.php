@@ -124,7 +124,7 @@ class AffiliateCore extends UserCore
      * @param string $sUsername
      * @param UserCoreModel $oAffModel
      */
-    public function delete($iProfileId, $sUsername, UserCoreModel $oAffModel): void
+    public function delete($iProfileId, string $sUsername, UserCoreModel $oAffModel): void
     {
         $oAffModel->delete($iProfileId, $sUsername);
     }

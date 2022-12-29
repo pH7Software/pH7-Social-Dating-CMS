@@ -91,7 +91,7 @@ class UserCore
      *
      * @throws ForbiddenActionException
      */
-    public function delete($iProfileId, $sUsername, UserCoreModel $oUserModel)
+    public function delete($iProfileId, string $sUsername, UserCoreModel $oUserModel): void
     {
         if ($this->isGhost($sUsername)) {
             throw new ForbiddenActionException('You cannot delete this profile!');

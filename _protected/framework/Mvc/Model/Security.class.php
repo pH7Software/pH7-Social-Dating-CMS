@@ -26,11 +26,9 @@ use PH7\SecurityCore;
 
 class Security
 {
-    /** @var string */
-    private $sIp;
+    private string $sIp;
 
-    /** @var string */
-    private $sCurrentTime;
+    private string $sCurrentTime;
 
     public function __construct()
     {
@@ -46,7 +44,7 @@ class Security
      *
      * @return bool Returns TRUE if no IP has been found (and the new IP has been added to the block list), otherwise FALSE.
      */
-    public function blockIp($sIp, $iExpir = 86400)
+    public function blockIp(string $sIp, int $iExpir = 86400): bool
     {
         $iExpir = time() + (int)$iExpir;
         $rStmt = Db::getInstance()->prepare('SELECT ip FROM' . Db::prefix(DbTableName::BLOCK_IP) . 'WHERE ip = :ip LIMIT 1');
@@ -67,16 +65,8 @@ class Security
 
     /**
      * Add Login Log.
-     *
-     * @param string $sEmail
-     * @param string $sUsername
-     * @param string $sPassword
-     * @param int $sStatus
-     * @param string $sTable
-     *
-     * @return void
      */
-    public function addLoginLog($sEmail, $sUsername, $sPassword, $sStatus, $sTable = DbTableName::MEMBER_LOG_LOGIN)
+    public function addLoginLog(string $sEmail, string $sUsername, string $sPassword, string $sStatus, string $sTable = DbTableName::MEMBER_LOG_LOGIN): void
     {
         Various::checkModelTable($sTable);
 
@@ -98,10 +88,8 @@ class Security
      * @param string $sEmail
      * @param string $sFirstName
      * @param string $sTable
-     *
-     * @return void
      */
-    public function addSessionLog($iProfileId, $sEmail, $sFirstName, $sTable = DbTableName::MEMBER_LOG_SESS)
+    public function addSessionLog($iProfileId, string $sEmail, string $sFirstName, string $sTable = DbTableName::MEMBER_LOG_SESS): void
     {
         Various::checkModelTable($sTable);
 
@@ -129,12 +117,12 @@ class Security
      * @return bool Returns TRUE if attempts are allowed, FALSE otherwise.
      */
     public function checkLoginAttempt(
-        $iMaxAttempts,
-        $iAttemptTime,
-        $sEmail,
+        int $iMaxAttempts,
+        int $iAttemptTime,
+        string $sEmail,
         Templatable $oView,
-        $sTable = DbTableName::MEMBER_ATTEMPT_LOGIN
-    )
+        string $sTable = DbTableName::MEMBER_ATTEMPT_LOGIN
+    ): bool
     {
         Various::checkModelTable($sTable);
 
@@ -177,13 +165,9 @@ class Security
     }
 
     /**
-     * Add Loging Attempt.
-     *
-     * @param string $sTable
-     *
-     * @return void
+     * Add Login Attempt.
      */
-    public function addLoginAttempt($sTable = DbTableName::MEMBER_ATTEMPT_LOGIN)
+    public function addLoginAttempt(string $sTable = DbTableName::MEMBER_ATTEMPT_LOGIN): void
     {
         Various::checkModelTable($sTable);
 
@@ -217,12 +201,8 @@ class Security
 
     /**
      * Clear Login Attempts.
-     *
-     * @param string $sTable
-     *
-     * @return void
      */
-    public function clearLoginAttempts($sTable = DbTableName::MEMBER_ATTEMPT_LOGIN)
+    public function clearLoginAttempts(string $sTable = DbTableName::MEMBER_ATTEMPT_LOGIN): void
     {
         Various::checkModelTable($sTable);
 
