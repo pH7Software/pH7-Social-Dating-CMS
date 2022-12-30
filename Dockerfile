@@ -1,6 +1,7 @@
 # Set the wanted Ubuntu & PHP versions
 ARG UBUNTU_VERSION=22.04
 ARG PHP_VERSION=8.1.0
+ARG PHP_BASE_IMAGE=fpm
 
 
 # Set the base image to Ubuntu
@@ -44,8 +45,8 @@ COPY ph7builder.conf /etc/nginx/
 # Append "daemon off;" to the beginning of the configuration
 RUN echo "daemon off;" >> /etc/nginx/ph7builder.conf
 
-# Install PHP!
-FROM php:${PHP_VERSION}-fpm
+# Get PHP with its Docker image
+FROM php:${PHP_VERSION}-${PHP_BASE_IMAGE}
 
 RUN docker-php-ext-install bz2 && \
     docker-php-ext-configure gd \
