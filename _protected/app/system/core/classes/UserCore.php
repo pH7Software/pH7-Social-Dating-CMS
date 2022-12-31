@@ -188,14 +188,19 @@ class UserCore
         // Add the avatar
         (new UserCoreModel)->setAvatar($iProfileId, $sFile1, $iApproved);
 
-        /* Saved the new avatars */
-        $oAvatar1->save($sPath . $sFile1);
-        $oAvatar2->save($sPath . $sFile2);
-        $oAvatar3->save($sPath . $sFile3);
-        $oAvatar4->save($sPath . $sFile4);
-        $oAvatar5->save($sPath . $sFile5);
-        $oAvatar6->save($sPath . $sFile6);
-        $oAvatar7->save($sPath . $sFile7);
+        try {
+            /* Saved the new avatars */
+            $oAvatar1->save($sPath . $sFile1);
+            $oAvatar2->save($sPath . $sFile2);
+            $oAvatar3->save($sPath . $sFile3);
+            $oAvatar4->save($sPath . $sFile4);
+            $oAvatar5->save($sPath . $sFile5);
+            $oAvatar6->save($sPath . $sFile6);
+            $oAvatar7->save($sPath . $sFile7);
+        } catch (PH7InvalidArgumentException $oExcept) {
+            // Returns FALSE if FileStorage throws PH7InvalidArgumentException
+            return false;
+        }
 
         unset($oAvatar1, $oAvatar2, $oAvatar3, $oAvatar4, $oAvatar5, $oAvatar6, $oAvatar7);
 
