@@ -139,7 +139,6 @@ class RatingCoreAjax
         if ($oCookie->exists($sCookieName)) {
             $this->iStatus = 0;
             $this->sTxt = t('You have already voted!');
-            return;
         } else {
             $oCookie->set($sCookieName, '1', self::COOKIE_LIFETIME);
         }

@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / User / Form / Processing
  */
@@ -12,6 +12,7 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\File\TooLargeException;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Security\Moderation\Filter;
 
@@ -37,22 +38,28 @@ class AvatarFormProcess extends Form implements NudityDetectable
             $this->checkNudityFilter();
         }
 
-        $bAvatar = (new UserCore)->setAvatar(
-            $iProfileId,
-            $sUsername,
-            $_FILES['avatar']['tmp_name'],
-            $this->iApproved
-        );
+        try {
+            $bAvatar = (new UserCore)->setAvatar(
+                $iProfileId,
+                $sUsername,
+                $_FILES['avatar']['tmp_name'],
+                $this->iApproved
+            );
+        } catch (TooLargeException $oExcept) {
+            \PFBC\Form::setError('form_avatar', t("The image couldn't be uploaded. Possibly too large."));
+            return;
+        }
 
         if (!$bAvatar) {
             \PFBC\Form::setError('form_avatar', Form::wrongImgFileTypeMsg());
-        } else {
-            $sModerationText = t('Your profile photo has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
-            $sText = t('Your profile photo has been updated successfully!');
-            $sMsg = $this->iApproved === 0 ? $sModerationText : $sText;
-
-            \PFBC\Form::setSuccess('form_avatar', $sMsg);
+            return;
         }
+
+        $sModerationText = t('Your profile photo has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
+        $sText = t('Your profile photo has been updated successfully!');
+        $sMsg = $this->iApproved === 0 ? $sModerationText : $sText;
+
+        \PFBC\Form::setSuccess('form_avatar', $sMsg);
     }
 
     public function isNudityFilterEligible(): bool
