@@ -491,7 +491,7 @@ class FileStorage implements Storageable
         (new File)->deleteFile($sFile);
 
         // Free the memory associated with the image
-        // Make sure $rImage is correct is not null. Needs to be an instance of GdImage
+        // Make sure $rImage is the correct type and not null. Needs to be an instance of GdImage
         if ($this->rImage instanceof GdImage) {
             @imagedestroy($this->rImage);
         }
