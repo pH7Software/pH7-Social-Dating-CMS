@@ -146,7 +146,7 @@ class UserCore
             return false; // File type incompatible
         }
 
-        // We removes the old avatar if it exists and we delete the cache at the same time.
+        // We remove the old avatar if it exists and we delete the cache at the same time.
         $this->deleteAvatar($iProfileId, $sUsername);
 
         $oAvatar2 = clone $oAvatar1;

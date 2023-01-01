@@ -14,6 +14,7 @@ namespace PH7\Framework\Image;
 
 defined('PH7') or exit('Restricted access');
 
+use GdImage;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\File\File;
 use PH7\Framework\File\TooLargeException;
@@ -64,7 +65,7 @@ class FileStorage implements Storageable
     /** @var string */
     private $sType;
 
-    /** @var resource */
+    /** @var resource|GdImage|false */
     private $rImage;
 
     /** @var int */
@@ -109,7 +110,7 @@ class FileStorage implements Storageable
 
         if (!$mImgType || !is_file($this->sFile)) {
             if (isDebug()) {
-                throw new TooLargeException('The file could not be uploaded. Possibly too large.');
+                throw new TooLargeException('DebugMode: The file could not be uploaded. Possibly too large.');
             }
             return false;
         }
@@ -490,7 +491,10 @@ class FileStorage implements Storageable
         (new File)->deleteFile($sFile);
 
         // Free the memory associated with the image
-        @imagedestroy($this->rImage);
+        // Make sure $rImage is correct is not null. Needs to be an instance of GdImage
+        if ($this->rImage instanceof GdImage) {
+            @imagedestroy($this->rImage);
+        }
 
         return $this;
     }

@@ -12,7 +12,6 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\File\TooLargeException;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Security\Moderation\Filter;
 
@@ -38,17 +37,12 @@ class AvatarFormProcess extends Form implements NudityDetectable
             $this->checkNudityFilter();
         }
 
-        try {
-            $bAvatar = (new UserCore)->setAvatar(
-                $iProfileId,
-                $sUsername,
-                $_FILES['avatar']['tmp_name'],
-                $this->iApproved
-            );
-        } catch (TooLargeException $oExcept) {
-            \PFBC\Form::setError('form_avatar', t("The image couldn't be uploaded. Possibly too large."));
-            return;
-        }
+        $bAvatar = (new UserCore)->setAvatar(
+            $iProfileId,
+            $sUsername,
+            $_FILES['avatar']['tmp_name'],
+            $this->iApproved
+        );
 
         if (!$bAvatar) {
             \PFBC\Form::setError('form_avatar', Form::wrongImgFileTypeMsg());
