@@ -194,7 +194,6 @@ class UserCoreModel extends Model
     {
         Various::checkModelTable($sTable);
 
-        $iDay = (int)$iDay;
         $bIsDay = ($iDay > 0);
 
         if ($sTable === DbTableName::MEMBER) {
