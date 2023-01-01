@@ -314,7 +314,7 @@ class SettingForm
         /********** Moderation **********/
         $oForm->addElement(new HTMLExternal('</div></div><div class="content" id="moderation"><div class="col-md-10"><h2 class="underline">' . t('Moderation') . '</h2>'));
 
-        $oForm->addElement(new Select(t('Nudity Filter:'), 'nudity_filter', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('Photos will be automatically pending approval if there are detected as "Nude/Adult Photos"'), 'value' => DbConfig::getSetting('nudityFilter'), 'required' => 1]));
+        $oForm->addElement(new Select(t('Nudity Filter:'), 'nudity_filter', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('Photos will be automatically pending approval if there are detected as "Nude/Adult" photos'), 'value' => DbConfig::getSetting('nudityFilter'), 'required' => 1]));
 
         $oForm->addElement(new Select(t('Profile Photo Manual Approval:'), 'avatar_manual_approval', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('avatarManualApproval'), 'required' => 1]));
 
