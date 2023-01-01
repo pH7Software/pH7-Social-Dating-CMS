@@ -3,7 +3,7 @@
  * @desc             Useful methods for handling files.
  *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / File
  */
@@ -44,10 +44,8 @@ class File
 
     /**
      * Mime Types list.
-     *
-     * @var array $aMimeTypes
      */
-    private static $aMimeTypes = [
+    private static array $aMimeTypes = [
         'pdf' => 'application/pdf',
         'txt' => 'text/plain',
         'html' => 'text/html',
@@ -80,9 +78,9 @@ class File
     /**
      * @param string $sExt Extension File.
      *
-     * @return string (string | null) Returns the "mime type" if it is found, otherwise "null"
+     * @return string|null Returns the "mime type" if it is found, otherwise "null"
      */
-    public function getMimeType($sExt)
+    public function getMimeType(string $sExt): ?string
     {
         return array_key_exists($sExt, self::$aMimeTypes) ? self::$aMimeTypes[$sExt] : null;
     }
@@ -94,7 +92,7 @@ class File
      *
      * @return string
      */
-    public function getFileExt($sFile)
+    public function getFileExt(string $sFile): string
     {
         return strtolower(pathinfo($sFile, PATHINFO_EXTENSION));
     }
@@ -106,7 +104,7 @@ class File
      *
      * @return string
      */
-    public function getFileWithoutExt($sFile)
+    public function getFileWithoutExt(string $sFile): string
     {
         return pathinfo($sFile, PATHINFO_FILENAME);
     }
@@ -119,7 +117,7 @@ class File
      *
      * @return string|bool Returns the read data or FALSE on failure.
      */
-    public function getFile($sFile, $bIncPath = false): string|bool
+    public function getFile(string $sFile, bool $bIncPath = false): string|bool
     {
         return @file_get_contents($sFile, $bIncPath);
     }
@@ -133,7 +131,7 @@ class File
      *
      * @return int|bool Returns the number of bytes that were written to the file, or FALSE on failure.
      */
-    public function putFile($sFile, $sContents, $iFlag = FILE_TEXT)
+    public function putFile(string $sFile, string $sContents, int $iFlag = FILE_TEXT): int|bool
     {
         return @file_put_contents($sFile, $sContents, $iFlag);
     }
@@ -169,7 +167,7 @@ class File
      *
      * @return bool TRUE if file exists, FALSE otherwise.
      */
-    public function existDir($mDir)
+    public function existDir($mDir): bool
     {
         $bExists = false; // Default value
 
@@ -216,7 +214,7 @@ class File
      *
      * @return int The size of the file in bytes.
      */
-    public function size($sFile)
+    public function size(string $sFile): int
     {
         return (int)@filesize($sFile);
     }
@@ -227,7 +225,7 @@ class File
      *
      * @return array List of files sorted alphabetically.
      */
-    public function getFileList($sDir, $mExt = null)
+    public function getFileList(string $sDir, string|array|null $mExt = null): array
     {
         $aTree = [];
         $sDir = $this->checkExtDir($sDir);
@@ -416,10 +414,8 @@ class File
      * If the file does not exist, the function does nothing.
      *
      * @param string|array $mFile
-     *
-     * @return void
      */
-    public function deleteFile($mFile)
+    public function deleteFile($mFile): void
     {
         if (is_array($mFile)) {
             foreach ($mFile as $sF) {
@@ -437,10 +433,8 @@ class File
      * A "rmdir" function improved PHP which also delete files in a directory.
      *
      * @param string $sPath The path
-     *
-     * @return bool
      */
-    public function deleteDir($sPath)
+    public function deleteDir(string $sPath): bool
     {
         return (is_file($sPath) ? unlink($sPath) : (is_dir($sPath) ? array_map(
                 [$this, 'deleteDir'],

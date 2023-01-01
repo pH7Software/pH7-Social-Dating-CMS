@@ -624,7 +624,7 @@ class Design
 
             $sSize = ($iSize == 32 || $iSize == 64 || $iSize == 100 || $iSize == 150 || $iSize == 200 || $iSize == 400) ? '-' . $iSize : '';
 
-            $sAvatar = @$oGetAvatar->pic;
+            $sAvatar = (string)$oGetAvatar->pic;
             $sDir = 'user/avatar/img/' . $sUsername . PH7_SH;
             $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . $sDir . $sAvatar;
             if (!is_file($sPath) || $oGetAvatar->approvedAvatar == '0') {

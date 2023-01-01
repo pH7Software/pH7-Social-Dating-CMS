@@ -212,14 +212,12 @@ class UserCore
      *
      * @param int $iProfileId
      * @param string $sUsername
-     *
-     * @return void
      */
-    public function deleteAvatar($iProfileId, $sUsername)
+    public function deleteAvatar($iProfileId, $sUsername): void
     {
         // We start to delete the file before the data in the database if we could not delete the file since we would have lost the link to the file found in the database.
         $sGetAvatar = (new UserCoreModel)->getAvatar($iProfileId, null);
-        $sFile = $sGetAvatar->pic;
+        $sFile = (string)$sGetAvatar->pic;
 
         $oFile = new File;
         $sExt = PH7_DOT . $oFile->getFileExt($sFile);

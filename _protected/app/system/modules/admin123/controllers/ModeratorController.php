@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  */
@@ -18,27 +18,22 @@ use PH7\Framework\Url\Header;
 
 class ModeratorController extends Controller
 {
-    const STR_APPROVE_STATUS = '1';
-    const STR_DISAPPROVE_STATUS = '0';
-    const INT_APPROVE_STATUS = 1;
-    const INT_DISAPPROVE_STATUS = 0;
+    private const STR_APPROVE_STATUS = '1';
+    private const STR_DISAPPROVE_STATUS = '0';
+    private const INT_APPROVE_STATUS = 1;
+    private const INT_DISAPPROVE_STATUS = 0;
 
-    const ITEMS_PER_PAGE = 20;
+    private const ITEMS_PER_PAGE = 20;
 
-    /** @var Page */
-    private $oPage;
+    private Page $oPage;
 
-    /** @var ModeratorModel */
-    private $oModeratorModel;
+    private ModeratorModel $oModeratorModel;
 
-    /** @var UserNotifier */
-    private $oUserNotifier;
+    private UserNotifier $oUserNotifier;
 
-    /** @var string */
-    private $sMsg;
+    private string $sMsg;
 
-    /** @var string */
-    private $sMsgType;
+    private string $sMsgType;
 
     public function __construct()
     {
@@ -49,14 +44,14 @@ class ModeratorController extends Controller
         $this->oModeratorModel = new ModeratorModel;
     }
 
-    public function index()
+    public function index(): void
     {
         $this->view->page_title = $this->view->h2_title = t('Moderation Panel');
 
         $this->output();
     }
 
-    public function pictureAlbum()
+    public function pictureAlbum(): void
     {
         $this->view->page_title = $this->view->h2_title = t('Photo Albums Moderation');
 
@@ -75,7 +70,7 @@ class ModeratorController extends Controller
         $this->output();
     }
 
-    public function picture()
+    public function picture(): void
     {
         $this->view->page_title = $this->view->h2_title = t('Pictures Moderation');
 
@@ -94,7 +89,7 @@ class ModeratorController extends Controller
         $this->output();
     }
 
-    public function videoAlbum()
+    public function videoAlbum(): void
     {
         $this->view->page_title = $this->view->h2_title = t('Video Albums Moderation');
 
@@ -113,7 +108,7 @@ class ModeratorController extends Controller
         $this->output();
     }
 
-    public function video()
+    public function video(): void
     {
         $this->design->addCss(
             PH7_LAYOUT . PH7_SYS . PH7_MOD . 'video/' . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
@@ -137,7 +132,7 @@ class ModeratorController extends Controller
         $this->output();
     }
 
-    public function avatar()
+    public function avatar(): void
     {
         $this->view->page_title = $this->view->h2_title = t('Profile Photos Moderation');
 
@@ -157,7 +152,7 @@ class ModeratorController extends Controller
         $this->output();
     }
 
-    public function background()
+    public function background(): void
     {
         $this->view->page_title = $this->view->h2_title = t('Profile Backgrounds Moderation');
 
@@ -175,7 +170,7 @@ class ModeratorController extends Controller
         $this->output();
     }
 
-    public function approvedPictureAlbum()
+    public function approvedPictureAlbum(): void
     {
         if ($this->oModeratorModel->approvedPictureAlbum(
             $this->httpRequest->post('album_id'),
@@ -202,7 +197,7 @@ class ModeratorController extends Controller
         );
     }
 
-    public function approvedPhoto()
+    public function approvedPhoto(): void
     {
         if ($this->oModeratorModel->approvedPicture(
             $this->httpRequest->post('picture_id'),
@@ -229,7 +224,7 @@ class ModeratorController extends Controller
         );
     }
 
-    public function approvedVideoAlbum()
+    public function approvedVideoAlbum(): void
     {
         if ($this->oModeratorModel->approvedVideoAlbum(
             $this->httpRequest->post('album_id'),
@@ -256,7 +251,7 @@ class ModeratorController extends Controller
         );
     }
 
-    public function approvedVideo()
+    public function approvedVideo(): void
     {
         if ($this->oModeratorModel->approvedVideo(
             $this->httpRequest->post('video_id'),
@@ -283,7 +278,7 @@ class ModeratorController extends Controller
         );
     }
 
-    public function approvedAvatar()
+    public function approvedAvatar(): void
     {
         if ($this->oModeratorModel->approvedAvatar(
             $this->httpRequest->post('id'),
@@ -310,7 +305,7 @@ class ModeratorController extends Controller
         );
     }
 
-    public function approvedBackground()
+    public function approvedBackground(): void
     {
         if ($this->oModeratorModel->approvedBackground(
             $this->httpRequest->post('id'),
@@ -337,7 +332,7 @@ class ModeratorController extends Controller
         );
     }
 
-    public function disapprovedPictureAlbum()
+    public function disapprovedPictureAlbum(): void
     {
         if ($this->oModeratorModel->approvedPictureAlbum(
             $this->httpRequest->post('album_id'),
@@ -364,7 +359,7 @@ class ModeratorController extends Controller
         );
     }
 
-    public function disapprovedPhoto()
+    public function disapprovedPhoto(): void
     {
         if ($this->oModeratorModel->approvedPicture(
             $this->httpRequest->post('picture_id'),
@@ -391,7 +386,7 @@ class ModeratorController extends Controller
         );
     }
 
-    public function disapprovedVideoAlbum()
+    public function disapprovedVideoAlbum(): void
     {
         if ($this->oModeratorModel->approvedVideoAlbum(
             $this->httpRequest->post('album_id'),
@@ -418,7 +413,7 @@ class ModeratorController extends Controller
         );
     }
 
-    public function disapprovedVideo()
+    public function disapprovedVideo(): void
     {
         if ($this->oModeratorModel->approvedVideo(
             $this->httpRequest->post('video_id'),
@@ -445,7 +440,7 @@ class ModeratorController extends Controller
         );
     }
 
-    public function disapprovedAvatar()
+    public function disapprovedAvatar(): void
     {
         if ($this->oModeratorModel->approvedAvatar(
             $this->httpRequest->post('id'),
@@ -472,7 +467,7 @@ class ModeratorController extends Controller
         );
     }
 
-    public function disapprovedBackground()
+    public function disapprovedBackground(): void
     {
         if ($this->oModeratorModel->approvedBackground(
             $this->httpRequest->post('id'),
@@ -499,7 +494,7 @@ class ModeratorController extends Controller
         );
     }
 
-    public function deletePictureAlbum()
+    public function deletePictureAlbum(): void
     {
         if (
             (new PictureCoreModel)->deletePhoto($this->httpRequest->post('id'), $this->httpRequest->post('album_id')) &&
@@ -528,7 +523,7 @@ class ModeratorController extends Controller
         );
     }
 
-    public function deletePhoto()
+    public function deletePhoto(): void
     {
         $bPicture = (new PictureCoreModel)->deletePhoto(
             $this->httpRequest->post('id'),
@@ -563,7 +558,7 @@ class ModeratorController extends Controller
         );
     }
 
-    public function deleteVideoAlbum()
+    public function deleteVideoAlbum(): void
     {
         if (
             (new VideoCoreModel)->deleteVideo($this->httpRequest->post('id'), $this->httpRequest->post('album_id')) &&
@@ -592,7 +587,7 @@ class ModeratorController extends Controller
         );
     }
 
-    public function deleteVideo()
+    public function deleteVideo(): void
     {
         $bVideo = (new VideoCoreModel)->deleteVideo(
             $this->httpRequest->post('id'),
@@ -627,7 +622,7 @@ class ModeratorController extends Controller
         );
     }
 
-    public function deleteAvatar()
+    public function deleteAvatar(): void
     {
         (new Admin)->deleteAvatar(
             $this->httpRequest->post('id'),
@@ -645,7 +640,7 @@ class ModeratorController extends Controller
         );
     }
 
-    public function deleteBackground()
+    public function deleteBackground(): void
     {
         (new Admin)->deleteBackground(
             $this->httpRequest->post('id'),
@@ -663,7 +658,7 @@ class ModeratorController extends Controller
         );
     }
 
-    private function notifyUserForApprovedContent()
+    private function notifyUserForApprovedContent(): void
     {
         try {
             $iProfileId = $this->httpRequest->post('id', 'int');
@@ -681,7 +676,7 @@ class ModeratorController extends Controller
         }
     }
 
-    private function notifyUserForDisapprovedContent()
+    private function notifyUserForDisapprovedContent(): void
     {
         try {
             $iProfileId = $this->httpRequest->post('id', 'int');
@@ -701,10 +696,8 @@ class ModeratorController extends Controller
 
     /**
      * Clear "Design Avatar" & "UserCoreModel Avatar" Cache
-     *
-     * @return void
      */
-    private function clearAvatarCache()
+    private function clearAvatarCache(): void
     {
         (new Cache)
             ->start(Design::CACHE_AVATAR_GROUP . $this->httpRequest->post('username'), null, null)->clear()
@@ -713,10 +706,8 @@ class ModeratorController extends Controller
 
     /**
      * Clear UserCoreModel Background Cache
-     *
-     * @return void
      */
-    private function clearUserBgCache()
+    private function clearUserBgCache(): void
     {
         (new Cache)->start(
             UserCoreModel::CACHE_GROUP,
