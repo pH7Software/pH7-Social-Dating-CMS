@@ -3329,7 +3329,7 @@ msgid "Nudity Filter:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:137
-msgid "Photos will be automatically pending approval if there are detected as \"Nude/Adult Photos\""
+msgid "Photos will be automatically pending approval if there are detected as \"Nude/Adult\" photos"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:139
