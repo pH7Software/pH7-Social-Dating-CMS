@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hi@ph7.me>
- * @copyright      (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2018-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / Inc / Class
  */

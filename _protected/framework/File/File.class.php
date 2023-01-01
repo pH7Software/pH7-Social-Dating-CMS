@@ -37,7 +37,7 @@ class File
         self::COPY_FUNC_NAME
     ];
 
-    const WILDCARD_SYMBOL = '*';
+    private const WILDCARD_SYMBOL = '*';
 
     // End Of Line relative to the operating system
     const EOL = PHP_EOL;
@@ -464,12 +464,8 @@ class File
 
     /**
      * Clean paths if wildcard is found in order to get valid paths.
-     *
-     * @param string $sPath
-     *
-     * @return string
      */
-    public function removeWildcards($sPath)
+    public function removeWildcards(string $sPath): string
     {
         return str_replace(self::WILDCARD_SYMBOL, '', $sPath);
     }
