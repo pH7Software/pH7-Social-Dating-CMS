@@ -38,11 +38,12 @@ final class Version
      *
      * @history VERSION NAMES:
      *
-     * 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO",
-     * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa", 12.* was "PHS", 14.* was "pKb",
-     * v15.* was ABSOLUTE™, v16.* was ACIDIC, and v17.* is PURE™
+     * 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", v2.* was "H2O",
+     * v3.* was "H3O", v4.* was "HCO", v5.* was "pCO", v6.* was "WoW",
+     * v7.* and v8.* were "NaOH", v10.* was "pKa", v12.* was "PHS", v14.* was "pKb",
+     * v15.* was ABSOLUTE™, v16.* was ACIDIC, v17.* was PURE™ and v18 is SENSATION
      */
-    public const KERNEL_VERSION_NAME = 'PURE™';
+    public const KERNEL_VERSION_NAME = 'SENSATION';
 
     /**
      * VERSION NUMBERS:
@@ -52,7 +53,7 @@ final class Version
      */
     public const KERNEL_VERSION = '18.0.0';
     public const KERNEL_BUILD = '1';
-    public const KERNEL_RELEASE_DATE = '2022-06-27';
+    public const KERNEL_RELEASE_DATE = '2023-01-02';
 
     /*** Framework Server ***/
     public const KERNEL_TECHNOLOGY_NAME = 'pH7Builder.com';
