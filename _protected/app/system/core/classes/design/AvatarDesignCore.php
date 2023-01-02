@@ -76,7 +76,7 @@ class AvatarDesignCore extends Design
      *
      * @return void
      */
-    public function lightbox($sUsername = '', $sFirstName = '', $sSex = null, $iSize = self::DEF_LIGHTBOX_AVATAR_SIZE)
+    public function lightbox($sUsername = '', $sFirstName = '', $sSex = null, $iSize = self::DEF_LIGHTBOX_AVATAR_SIZE): void
     {
         // The profile does not exist, so it creates a fake profile = ghost
         if (empty($sUsername)) {

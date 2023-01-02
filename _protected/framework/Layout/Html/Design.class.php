@@ -627,30 +627,37 @@ class Design
             $sAvatar = (string)$oGetAvatar->pic;
             $sDir = 'user/avatar/img/' . $sUsername . PH7_SH;
             $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . $sDir . $sAvatar;
-            if (!is_file($sPath) || $oGetAvatar->approvedAvatar == '0') {
-                /* If sex is empty, it is recovered in the database using information from member */
-                $sSex = !empty($sSex) ? $sSex : $oUserModel->getSex(null, $sUsername, DbTableName::MEMBER);
-                $sSex = $this->oStr->lower($sSex);
-                $sIcon = (GenderTypeUserCore::isGenderValid($sSex) || $sSex === PH7_ADMIN_USERNAME) ? $sSex : 'visitor';
-                $sUrlTplName = defined('PH7_TPL_NAME') ? PH7_TPL_NAME : PH7_DEFAULT_THEME;
 
-                /** If the user doesn't have an avatar **/
-                if (!is_file($sPath)) {
-                    /* The user has no avatar, we then get a Gravatar if exists */
-                    $sEmail = $oUserModel->getEmail($iProfileId);
-                    $sUrl = GravatarImage::get($sEmail, ['size' => $iSize, 'display' => '404', 'rating' => 'g']);
+            // Retrieve the correct avatar URL
+            $sUrl = (function() use ($iProfileId, $sUsername, $sAvatar, $sDir, $sPath, $sSize, $iSize, $oGetAvatar, $oUserModel): string {
+                // If avatar path doesn't exist or is approval pending
+                if (!is_file($sPath) || $oGetAvatar->approvedAvatar == '0') {
+                    /* If sex is empty, it is recovered in the database using information from member */
+                    $sSex = !empty($sSex) ? $sSex : $oUserModel->getSex(null, $sUsername, DbTableName::MEMBER);
+                    $sSex = $this->oStr->lower($sSex);
+                    $sIcon = (GenderTypeUserCore::isGenderValid($sSex) || $sSex === PH7_ADMIN_USERNAME) ? $sSex : 'visitor';
+                    $sUrlTplName = defined('PH7_TPL_NAME') ? PH7_TPL_NAME : PH7_DEFAULT_THEME;
 
-                    if (!(new Validate)->url($sUrl, true)) {
-                        // If no Gravatar set, it returns 404, and we then set the default pH7Builder's avatar
-                        $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/' . $sIcon . '_no_picture' . $sSize . self::AVATAR_IMG_EXT;
+                    /* If the user doesn't have an avatar */
+                    if (!is_file($sPath)) {
+                        /* The user has no avatar, we then get a Gravatar if exists */
+                        $sEmail = $oUserModel->getEmail($iProfileId);
+                        $sUrl = GravatarImage::get($sEmail, ['size' => $iSize, 'display' => '404', 'rating' => 'g']);
+
+                        if (!(new Validate)->url($sUrl, true)) {
+                            // If no Gravatar set, it returns 404, and we then set the default pH7Builder's avatar
+                            $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/' . $sIcon . '_no_picture' . $sSize . self::AVATAR_IMG_EXT;
+                        }
+
+                        return $sUrl;
+                    } elseif (!AdminCore::isAdminPanel()) { // We don't display pending approval image when admins are on the panel admin
+                        return PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/pending' . $sSize . self::AVATAR_IMG_EXT;
                     }
-                } elseif (!AdminCore::isAdminPanel()) { // We don't display pending approval image when admins are on the panel admin
-                    $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/pending' . $sSize . self::AVATAR_IMG_EXT;
                 }
-            } else {
                 $sExt = PH7_DOT . (new File)->getFileExt($sAvatar);
-                $sUrl = PH7_URL_DATA_SYS_MOD . $sDir . str_replace($sExt, $sSize . $sExt, $sAvatar);
-            }
+                return PH7_URL_DATA_SYS_MOD . $sDir . str_replace($sExt, $sSize . $sExt, $sAvatar);
+            })();
+
             unset($oUserModel);
 
             /**
