@@ -388,9 +388,9 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
         foreach ($this->_aVars as $sKey => $sValue) {
             /*** Variables ***/
 
-            // We can't convert an object to a string with str_replace, which we tested the variables with is_object function
+            // Skip any objects before parsing with str_replace
             if (!is_object($sValue)) {
-                $sCode = str_replace('{' . $sKey . '}', $sValue, $sCode);
+                $sCode = str_replace('{' . $sKey . '}', (string)$sValue, $sCode);
             }
 
             // Email Address
