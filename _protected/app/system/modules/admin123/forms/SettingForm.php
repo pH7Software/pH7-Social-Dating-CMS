@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
@@ -354,15 +354,15 @@ class SettingForm
 
         $oForm->addElement(new Number(t('Maximum password length:'), 'max_password_length', ['value' => DbConfig::getSetting('maxPasswordLength'), 'required' => 1]));
 
-        $oForm->addElement(new HTMLExternal('<br /><h3 class="underline">' . t('Login Attempt Protection') . '</h3>'));
+        $oForm->addElement(new HTMLExternal('<br /><h3 class="underline">' . t('Protection - Failed Login Attempts') . '</h3>'));
 
-        $oForm->addElement(new Select(t('Blocking login attempts exceeded for Users:'), 'is_user_login_attempt', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('isUserLoginAttempt'), 'required' => 1]));
+        $oForm->addElement(new Select(t('Blocking exceeded login attempts for Users:'), 'is_user_login_attempt', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('isUserLoginAttempt'), 'required' => 1]));
 
         if ($bIsAffiliateEnabled) {
-            $oForm->addElement(new Select(t('Blocking login attempts exceeded for Affiliates:'), 'is_affiliate_login_attempt', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('isAffiliateLoginAttempt'), 'required' => 1]));
+            $oForm->addElement(new Select(t('Blocking exceeded login attempts for Affiliates:'), 'is_affiliate_login_attempt', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('isAffiliateLoginAttempt'), 'required' => 1]));
         }
 
-        $oForm->addElement(new Select(t('Blocking login attempts exceeded for Admins:'), 'is_admin_login_attempt', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('isAdminLoginAttempt'), 'required' => 1]));
+        $oForm->addElement(new Select(t('Blocking exceeded login attempts for Admins:'), 'is_admin_login_attempt', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('isAdminLoginAttempt'), 'required' => 1]));
 
         $oForm->addElement(new Number(t('Max number of login attempts before blocking for Users:'), 'max_user_login_attempts', ['value' => DbConfig::getSetting('maxUserLoginAttempts'), 'required' => 1]));
 

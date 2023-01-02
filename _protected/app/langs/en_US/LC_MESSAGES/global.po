@@ -3394,19 +3394,19 @@ msgid "Maximum password length:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:173
-msgid "Login Attempt Protection"
+msgid "Protection - Failed Login Attempts"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:175
-msgid "Blocking login attempts exceeded for Users:"
+msgid "Blocking exceeded login attempts for Users:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:178
-msgid "Blocking login attempts exceeded for Affiliates:"
+msgid "Blocking exceeded login attempts for Affiliates:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:181
-msgid "Blocking login attempts exceeded for Admins:"
+msgid "Blocking exceeded login attempts for Admins:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:183
