@@ -33,8 +33,8 @@ abstract class Controller implements Controllable
     public const SOFTWARE_TWITTER = '@pH7Soft';
     public const SOFTWARE_COPYRIGHT = '© (c) 2012-%s, Pierre-Henry Soria. All Rights Reserved.';
 
-    public const SOFTWARE_VERSION_NAME = 'SENSATION';
-    public const SOFTWARE_VERSION = '18.0.0';
+    public const SOFTWARE_VERSION_NAME = 'PURE™';
+    public const SOFTWARE_VERSION = '17.9.0';
 
     public const SOFTWARE_BUILD = '1';
 

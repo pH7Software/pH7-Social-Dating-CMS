@@ -41,9 +41,9 @@ final class Version
      * 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", v2.* was "H2O",
      * v3.* was "H3O", v4.* was "HCO", v5.* was "pCO", v6.* was "WoW",
      * v7.* and v8.* were "NaOH", v10.* was "pKa", v12.* was "PHS", v14.* was "pKb",
-     * v15.* was ABSOLUTE™, v16.* was ACIDIC, v17.* was PURE™ and v18 is SENSATION
+     * v15.* was ABSOLUTE™, v16.* was ACIDIC, v17.* is PURE™
      */
-    public const KERNEL_VERSION_NAME = 'SENSATION';
+    public const KERNEL_VERSION_NAME = 'PURE™';
 
     /**
      * VERSION NUMBERS:
@@ -51,7 +51,7 @@ final class Version
      *
      * More details: https://ph7builder.com/new-versioning-system/
      */
-    public const KERNEL_VERSION = '18.0.0';
+    public const KERNEL_VERSION = '17.9.0';
     public const KERNEL_BUILD = '1';
     public const KERNEL_RELEASE_DATE = '2023-01-02';
 
