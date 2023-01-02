@@ -628,7 +628,9 @@ class Design
             $sDir = 'user/avatar/img/' . $sUsername . PH7_SH;
             $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . $sDir . $sAvatar;
 
-            // Retrieve the correct avatar URL
+            /**
+             * Retrieve the correct avatar URL.
+             */
             $sUrl = (function() use ($iProfileId, $sUsername, $sAvatar, $sDir, $sPath, $sSize, $iSize, $oGetAvatar, $oUserModel): string {
                 // If avatar path doesn't exist or is approval pending
                 if (!is_file($sPath) || $oGetAvatar->approvedAvatar == '0') {
