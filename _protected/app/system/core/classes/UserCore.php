@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
@@ -35,22 +35,22 @@ use stdClass;
 class UserCore
 {
     /** The prefix of the profile page URI path (eg https://mysite.com/@<USERNAME>) */
-    const PROFILE_PAGE_PREFIX = '@';
+    public const PROFILE_PAGE_PREFIX = '@';
 
-    const BAN_STATUS = 1;
+    public const BAN_STATUS = 1;
 
-    const MAX_WIDTH_AVATAR = 600;
-    const MAX_HEIGHT_AVATAR = 800;
+    public const MAX_WIDTH_AVATAR = 600;
+    public const MAX_HEIGHT_AVATAR = 800;
 
-    const MAX_WIDTH_BACKGROUND_IMAGE = 600;
-    const MAX_HEIGHT_BACKGROUND_IMAGE = 800;
+    public const MAX_WIDTH_BACKGROUND_IMAGE = 600;
+    public const MAX_HEIGHT_BACKGROUND_IMAGE = 800;
 
-    const AVATAR2_SIZE = 32;
-    const AVATAR3_SIZE = 64;
-    const AVATAR4_SIZE = 100;
-    const AVATAR5_SIZE = 150;
-    const AVATAR6_SIZE = 200;
-    const AVATAR7_SIZE = 400;
+    public const AVATAR2_SIZE = 32;
+    public const AVATAR3_SIZE = 64;
+    public const AVATAR4_SIZE = 100;
+    public const AVATAR5_SIZE = 150;
+    public const AVATAR6_SIZE = 200;
+    public const AVATAR7_SIZE = 400;
 
     /**
      * Check if a user is authenticated.
@@ -432,7 +432,7 @@ class UserCore
      *
      * @return string Username
      */
-    public function findUsername($sNickname, $sFirstName, $sLastName)
+    public function findUsername(string $sNickname, string $sFirstName, string $sLastName): string
     {
         $iMaxLen = DbConfig::getSetting('maxUsernameLength');
         $sRnd = Various::genRnd('pH_Pierre-Henry_Soria_Sanz_González', 4); // Random String
@@ -469,7 +469,7 @@ class UserCore
      *
      * @return bool|string Returns a boolean TRUE if the account status is correct, otherwise returns an error message.
      */
-    public function checkAccountStatus(stdClass $oDbProfileData)
+    public function checkAccountStatus(stdClass $oDbProfileData): bool|string
     {
         $mStatus = true; // Default value
 
