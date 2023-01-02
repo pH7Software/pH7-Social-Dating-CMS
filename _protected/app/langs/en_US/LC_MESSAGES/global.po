@@ -3551,7 +3551,7 @@ msgid "Registration delay for Users:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:227
-msgid "Number of minutes that has to pass before a user with the same IP address can register again. Enter \"0\" to disable."
+msgid "Number of minutes to wait before a user with the same IP address can register again. Enter \"0\" to disable."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:230
@@ -3559,7 +3559,7 @@ msgid "Registration delay for Affiliates:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:230
-msgid "Number of minutes that has to pass before an affiliate with the same IP address can register again. Enter \"0\" to disable."
+msgid "Number of minutes to wait before an affiliate with the same IP address can register again. Enter \"0\" to disable."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:233
@@ -15434,7 +15434,7 @@ msgid "Remove the profile photo?"
 msgstr ""
 
 #: _protected/app/system/modules/user/views/base/tpl/setting/avatar.tpl:12
-msgid "Warning:"
+msgid "Careful"
 msgstr ""
 
 #: _protected/app/system/modules/user/views/base/tpl/setting/avatar.tpl:12

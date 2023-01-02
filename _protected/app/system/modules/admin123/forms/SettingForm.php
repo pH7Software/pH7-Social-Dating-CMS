@@ -408,10 +408,10 @@ class SettingForm
 
         $oForm->addElement(new HTMLExternal('<br /><h3 class="underline">' . t('Time Delay') . '</h3>'));
 
-        $oForm->addElement(new Number(t('Registration delay for Users:'), 'time_delay_user_registration', ['description' => t('Number of minutes that has to pass before a user with the same IP address can register again. Enter "0" to disable.'), 'value' => DbConfig::getSetting('timeDelayUserRegistration'), 'required' => 1]));
+        $oForm->addElement(new Number(t('Registration delay for Users:'), 'time_delay_user_registration', ['description' => t('Number of minutes to wait before a user with the same IP address can register again. Enter "0" to disable.'), 'value' => DbConfig::getSetting('timeDelayUserRegistration'), 'required' => 1]));
 
         if ($bIsAffiliateEnabled) {
-            $oForm->addElement(new Number(t('Registration delay for Affiliates:'), 'time_delay_aff_registration', ['description' => t('Number of minutes that has to pass before an affiliate with the same IP address can register again. Enter "0" to disable.'), 'value' => DbConfig::getSetting('timeDelayAffRegistration'), 'required' => 1]));
+            $oForm->addElement(new Number(t('Registration delay for Affiliates:'), 'time_delay_aff_registration', ['description' => t('Number of minutes to wait before an affiliate with the same IP address can register again. Enter "0" to disable.'), 'value' => DbConfig::getSetting('timeDelayAffRegistration'), 'required' => 1]));
         }
 
         if ($bIsNoteEnabled) {

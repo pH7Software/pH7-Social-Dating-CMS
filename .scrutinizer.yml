@@ -11,7 +11,7 @@ tools:
     # Runs PHP CodeSniffer
     php_code_sniffer: true
 
-     # PHP Mess Detector (http://phpmd.org)
+    # PHP Mess Detector (http://phpmd.org)
     php_mess_detector: true
 
     # Security Advisory Checker
