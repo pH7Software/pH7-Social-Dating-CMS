@@ -630,6 +630,8 @@ class ModeratorController extends Controller
         );
         $this->notifyUserForDisapprovedContent();
 
+        $this->sMsg = t('Profile photo removed.');
+
         Header::redirect(
             Uri::get(
                 PH7_ADMIN_MOD,
