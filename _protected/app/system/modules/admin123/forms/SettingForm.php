@@ -31,11 +31,11 @@ use PH7\Framework\Url\Header;
 
 class SettingForm
 {
-    const CHANGE_CHAT_DOC_URL = 'https://ph7builder.com/how-to-change-chat/';
-    const I18N_DOC_URL = 'https://ph7builder.com/doc/en/how-to-translate-to-another-language';
-    const GOOGLE_API_KEY_URL = 'https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend,places_backend&amp;keyType=CLIENT_SIDE&amp;reusekey=true';
+    private const CHANGE_CHAT_DOC_URL = 'https://ph7builder.com/how-to-change-chat/';
+    private const I18N_DOC_URL = 'https://ph7builder.com/doc/en/how-to-translate-to-another-language';
+    private const GOOGLE_API_KEY_URL = 'https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend,places_backend&amp;keyType=CLIENT_SIDE&amp;reusekey=true';
 
-    public static function display()
+    public static function display(): void
     {
         if (isset($_POST['submit_setting'])) {
             if (\PFBC\Form::isValid($_POST['submit_setting'])) {
@@ -507,12 +507,7 @@ class SettingForm
         $oForm->render();
     }
 
-    /**
-     * @param File $oFile
-     *
-     * @return array
-     */
-    private static function getTpls(File $oFile)
+    private static function getTpls(File $oFile): array
     {
         $aTpls = [];
 
@@ -524,12 +519,7 @@ class SettingForm
         return $aTpls;
     }
 
-    /**
-     * @param File $oFile
-     *
-     * @return array
-     */
-    private static function getLangs(File $oFile)
+    private static function getLangs(File $oFile): array
     {
         $aLangs = [];
 
@@ -542,10 +532,7 @@ class SettingForm
         return $aLangs;
     }
 
-    /**
-     * @return array
-     */
-    private static function getDefMods()
+    private static function getDefMods(): array
     {
         $aMods = [];
 
@@ -561,10 +548,7 @@ class SettingForm
         return $aMods;
     }
 
-    /**
-     * @return array
-     */
-    private static function getMembershipGroups()
+    private static function getMembershipGroups(): array
     {
         $aGroupNames = [];
 
@@ -578,10 +562,8 @@ class SettingForm
 
     /**
      * Get the list of modules that are possible to enable as a default system module.
-     *
-     * @return array
      */
-    private static function getActivatableDefMods()
+    private static function getActivatableDefMods(): array
     {
         return [
             'user',
