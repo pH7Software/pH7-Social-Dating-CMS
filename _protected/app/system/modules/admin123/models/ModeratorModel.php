@@ -96,18 +96,13 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    /**
-     * @param int $iOffset
-     * @param int $iLimit
-     *
-     * @return array
-     */
-    public function getAvatars($iOffset, $iLimit)
+    public function getAvatars(int $iOffset, int $iLimit): array
     {
-        $iOffset = (int)$iOffset;
-        $iLimit = (int)$iLimit;
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::MEMBER) .
-            'WHERE approvedAvatar = 0 LIMIT :offset, :limit');
+        $sSql = 'SELECT profileId, username, firstName, sex, approvedAvatar FROM' .
+            Db::prefix(DbTableName::MEMBER) .
+            'WHERE approvedAvatar = 0 LIMIT :offset, :limit';
+
+        $rStmt = Db::getInstance()->prepare($sSql);
         $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         $rStmt->execute();
