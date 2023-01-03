@@ -4,7 +4,7 @@
  * @desc             Useful methods for the management of the Models.
  *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Mvc / Model / Engine / Util
  */
@@ -38,7 +38,7 @@ class Various
      *
      * @return bool|array Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
      */
-    public static function execQueryFile(string $sSqlFile)
+    public static function execQueryFile(string $sSqlFile): bool|array
     {
         if (!is_file($sSqlFile)) {
             return false;
