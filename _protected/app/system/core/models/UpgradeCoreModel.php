@@ -1,10 +1,12 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -20,7 +22,7 @@ class UpgradeCoreModel extends Model
      *
      * @return bool|array Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
      */
-    public function run($sSqlUpgradeFile)
+    public function run(string $sSqlUpgradeFile): bool|array
     {
         return Various::execQueryFile($sSqlUpgradeFile);
     }
