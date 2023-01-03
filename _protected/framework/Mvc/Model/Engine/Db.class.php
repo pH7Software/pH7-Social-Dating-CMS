@@ -4,7 +4,7 @@
  * @desc             PDO Singleton Class
  *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright        (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2011-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Mvc / Model / Engine
  * @version          1.6
@@ -144,10 +144,8 @@ class Db
 
     /**
      * Fetch extended error information associated with the last operation on the database handle.
-     *
-     * @return array
      */
-    public function errorInfo()
+    public function errorInfo(): array
     {
         return self::$oDb->errorInfo();
     }
