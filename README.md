@@ -90,7 +90,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Watermark Branding
 * Instant Messenger
 * In-built affiliate system (that encourages brand influencers/ambassadors to promote your dating platform)
-* Newsletter
+* Mailing List Newsletter
 * Activity Streams
 * User Mentions (using the “@” symbol with the username such as [@pH-7](https://github.com/pH-7))
 * Member Approval System
