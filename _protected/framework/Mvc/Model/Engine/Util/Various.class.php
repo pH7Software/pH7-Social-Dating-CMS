@@ -69,7 +69,7 @@ class Various
             'affiliate' => DbTableName::AFFILIATE,
             'newsletter' => DbTableName::SUBSCRIBER,
             PH7_ADMIN_MOD => DbTableName::ADMIN,
-            default => static::launchErr($Mod),
+            default => static::launchErr($sMod),
         }
     }
 
