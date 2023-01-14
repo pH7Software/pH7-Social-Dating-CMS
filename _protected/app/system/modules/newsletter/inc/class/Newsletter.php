@@ -57,8 +57,8 @@ class Newsletter extends Core
 
         $oMail = new Mail;
         foreach ($oSubscribers as $oSubscriber) {
-            if ($this->isUserOptedIn($oSubscriber)) {
-                continue; // Skip that one if it isn't opted-in
+            if (!$this->isOptedInSubscriber($oSubscriber)) {
+                continue; // Skip the subscribers who haven't opted-in
             }
 
             if (!$iStatus = $this->sendMail($oSubscriber, $oMail)) {
@@ -105,7 +105,7 @@ class Newsletter extends Core
         return $oMailEngine->send($aInfo, $sHtmlMsg);
     }
 
-    private function isUserOptedIn(stdClass $oSubscriber): bool
+    private function isOptedInSubscriber(stdClass $oSubscriber): bool
     {
         return $this->isMemberData($oSubscriber) &&
             !$this->oSubscriberModel->isNotification($oSubscriber->profileId, 'enableNewsletters');
