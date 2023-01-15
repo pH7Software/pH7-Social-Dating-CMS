@@ -43,8 +43,6 @@ abstract class WriteCore
     /**
      * @param string $sMod Module name. Choose between 'blog' and 'note'.
      *
-     * @return void
-     *
      * @throws PH7InvalidArgumentException If the module is incorrect.
      */
     public static function checkMod($sMod): void
