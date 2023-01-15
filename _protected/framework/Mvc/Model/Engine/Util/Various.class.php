@@ -70,7 +70,7 @@ class Various
             'newsletter' => DbTableName::SUBSCRIBER,
             PH7_ADMIN_MOD => DbTableName::ADMIN,
             default => static::launchErr($sMod),
-        }
+        };
     }
 
     /**
