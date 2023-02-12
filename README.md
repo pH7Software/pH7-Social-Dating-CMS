@@ -20,13 +20,14 @@ With **[pH7Builder](https://sourceforge.net/projects/ph7socialdating/files/lates
 
 ![Professional PHP Social Dating Builder Software](https://cloud.githubusercontent.com/assets/1325411/19419476/5475b32c-93d0-11e6-9756-8e7db8df129f.png)
 
-### 🤗 100% Owned by YOU ❤
+### 🤗 100% Owned by YOU! ❤
 
 **Don't let your webapp be controlled by others! 🚀**
 
 Why your business has to be under the mercy of others?
-By choosing pH7Builder, you have complete control of your website and your users!
-You get and own all data and files, hosted on your own server! ✌️
+
+Unlike cloud or SaaS solutions, by choosing pH7Builder, you have the complete control of your website, database and your users!
+You get and own all data and files, hosted to your own server (the one you choose) ✌️
 
 
 👉 Convinced by the software? ☕️ Would like to help by **[offer me a coffee](https://www.buymeacoffee.com/ph7cms)**? - and boost the software development at the same time! 🚀
