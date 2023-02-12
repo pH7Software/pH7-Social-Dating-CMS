@@ -30,7 +30,7 @@ Unlike cloud or SaaS solutions, by choosing pH7Builder, you have the complete co
 You get and own all data and files, hosted to your own server (the one you choose) ✌️
 
 
-👉 Convinced by the software? ☕️ You could help by **[offer me a coffee](https://www.buymeacoffee.com/ph7cms)**? - and boost the software development at the same time! 🚀🤗
+👉 Convinced by the software? ☕️ You could help by **[offering me a coffee](https://www.buymeacoffee.com/ph7cms)**? - and boost the software development at the same time! 🚀🤗
 
 [![Ko Fi - Offer Me A Flat White](static/img/kofi-logo.png)](https://ko-fi.com/phenry) [![Buy Me A Coffee](static/img/buymeacoffee-logo.svg)](https://www.buymeacoffee.com/ph7cms)
 
