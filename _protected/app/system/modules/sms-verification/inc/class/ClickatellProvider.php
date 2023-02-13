@@ -14,10 +14,7 @@ use PH7\Framework\Error\Logger;
 
 class ClickatellProvider extends SmsProvider implements SmsProvidable
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function send($sPhoneNumber, $sTextMessage)
+    public function send(string $sPhoneNumber, string $sTextMessage): bool
     {
         $oClickatell = new Client($this->sApiToken);
 

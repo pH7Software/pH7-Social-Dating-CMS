@@ -6,25 +6,24 @@
  * @package        PH7 / App / System / Module / SMS Verification / Inc / Class
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 class SmsProvider
 {
-    /** @var string */
-    protected $sSenderNumber;
+    protected string $sSenderNumber;
 
-    /** @var string */
-    protected $sApiToken;
+    protected string $sApiToken;
 
-    /** @var string */
-    protected $sApiId;
+    protected ?string $sApiId;
 
     /**
      * @param string $sSenderNumber
      * @param string $sApiToken
      * @param string|null $sApiId At the moment, this parameter is only used by Twilio API.
      */
-    public function __construct($sSenderNumber, $sApiToken, $sApiId = null)
+    public function __construct(string $sSenderNumber, string $sApiToken, ?string $sApiId = null)
     {
         $this->sSenderNumber = $sSenderNumber;
         $this->sApiToken = $sApiToken;

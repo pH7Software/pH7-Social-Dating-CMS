@@ -12,18 +12,14 @@ use PH7\Framework\Config\Config;
 
 class SmsGatewayFactory
 {
-    const CLICKATELL_NAME = 'clickatell';
-    const TWILIO_NAME = 'twilio';
-    const INVALID_SMS_GATEWAY_MESSAGE = '"%s" is an invalid SMS gateway specified.';
+    private const CLICKATELL_NAME = 'clickatell';
+    private const TWILIO_NAME = 'twilio';
+    private const INVALID_SMS_GATEWAY_MESSAGE = '"%s" is an invalid SMS gateway specified.';
 
     /**
-     * @param string $sSmsGateway
-     *
-     * @return SmsProvidable
-     *
      * @throws InvalidSmsGatewayException
      */
-    public static function create($sSmsGateway)
+    public static function create(string $sSmsGateway): SmsProvidable
     {
         switch ($sSmsGateway) {
             case self::CLICKATELL_NAME:

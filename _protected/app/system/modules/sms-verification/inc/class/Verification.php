@@ -21,10 +21,8 @@ class Verification
 
     /**
      * @param int $iProfileId
-     *
-     * @return string
      */
-    public static function getVerificationCode($iProfileId)
+    public static function getVerificationCode($iProfileId): string
     {
         $sUserHashValidation = Record::getInstance()->getOne(
             DbTableName::MEMBER,

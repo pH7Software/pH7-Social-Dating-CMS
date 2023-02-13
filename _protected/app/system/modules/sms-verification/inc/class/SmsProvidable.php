@@ -6,15 +6,11 @@
  * @package        PH7 / App / System / Module / SMS Verification / Inc / Class
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
 interface SmsProvidable
 {
-    /**
-     * @param string $sPhoneNumber
-     * @param string $sTextMessage
-     *
-     * @return bool
-     */
-    public function send($sPhoneNumber, $sTextMessage);
+    public function send(string $sPhoneNumber, string $sTextMessage): bool;
 }

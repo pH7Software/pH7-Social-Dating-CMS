@@ -14,10 +14,7 @@ use Twilio\Exceptions\TwilioException;
 
 class TwilioProvider extends SmsProvider implements SmsProvidable
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function send($sPhoneNumber, $sTextMessage)
+    public function send(string $sPhoneNumber, string $sTextMessage): bool
     {
         $oClient = new Client($this->sApiId, $this->sApiToken);
 

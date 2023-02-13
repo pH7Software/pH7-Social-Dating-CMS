@@ -118,8 +118,6 @@ final class Autoloader
 
     /**
      * Display a message if composer isn't installed.
-     *
-     * @return void
      */
     private function showComposerNotInstalledPage(): void
     {
