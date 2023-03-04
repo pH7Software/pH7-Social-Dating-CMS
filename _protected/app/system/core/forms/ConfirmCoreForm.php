@@ -36,7 +36,7 @@ class ConfirmCoreForm
         $oForm->addElement(new HTMLExternal('<p class="err_msg s_marg">' . t('Warning, this action is irreversible!') . '</p>'));
         $oForm->addElement(new Button($aParam['label'], 'submit'));
         /**
-         * Bug Ajax jQuery -> https://github.com/jquery/jquery-mobile/issues/3202
+         * Currently a bug with Ajax jQuery: https://github.com/jquery/jquery-mobile/issues/3202
          * $oForm->addElement(new \PFBC\Element\Button($aParam['label'], 'submit', ['formaction'=>$sUrl]));
          */
         $oForm->addElement(

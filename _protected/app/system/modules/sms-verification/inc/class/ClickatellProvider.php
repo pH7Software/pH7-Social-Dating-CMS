@@ -41,7 +41,6 @@ class ClickatellProvider extends SmsProvider implements SmsProvidable
             return false;
         } catch (ClickatellException $oExcept) {
             (new Logger())->msg('Clickatell error while sending SMS: ' . $oExcept->getMessage());
-
             return false;
         }
     }
