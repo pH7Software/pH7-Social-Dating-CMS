@@ -53,27 +53,22 @@ class ImportUser extends Core
     /** @var bool|resource */
     private $rHandler;
 
-    /** @var array */
-    private $aFile;
+    private array $aFile;
 
-    /** @var array */
-    private $aData = [];
+    private array $aData = [];
 
-    /** @var array */
-    private $aTmpData;
+    private array $aTmpData = [];
 
-    /** @var array */
-    private $aFileData;
+    private array $aFileData;
 
-    /** @var array */
-    private $aRes;
+    private array $aRes;
 
     /**
      * @param array $aFile
      * @param string $sDelimiter Field delimiter (one character).
      * @param string $sEnclosure Field enclosure (one character).
      */
-    public function __construct(array $aFile, $sDelimiter, $sEnclosure)
+    public function __construct(array $aFile, string $sDelimiter, string $sEnclosure)
     {
         parent::__construct();
 
@@ -87,7 +82,7 @@ class ImportUser extends Core
     /**
      * @return array (boolean | string) ['status', 'msg']
      */
-    public function getResponse()
+    public function getResponse(): array
     {
         return $this->aRes;
     }
@@ -96,10 +91,8 @@ class ImportUser extends Core
      * Check and set the data from the CSV file.
      *
      * @param int $iRow Number of row of the CSV file
-     *
-     * @return void
      */
-    private function setData($iRow)
+    private function setData(int $iRow): void
     {
         $oUser = new UserCore;
 
@@ -124,10 +117,8 @@ class ImportUser extends Core
 
     /**
      * Set default values for the "ImportUser::$aTmpData" array.
-     *
-     * @return void
      */
-    private function setDefVals()
+    private function setDefVals(): void
     {
         $sFiveChars = Various::genRnd($this->aFile['name'], 5);
 
@@ -149,7 +140,7 @@ class ImportUser extends Core
         ];
     }
 
-    private function setTmpData()
+    private function setTmpData(): void
     {
         foreach ($this->aFileData as $sKey => $sVal) {
             $sVal = $this->cleanValue($sVal);
@@ -217,7 +208,7 @@ class ImportUser extends Core
      *
      * @return string The error message.
      */
-    private function getErrMsg($iErrType)
+    private function getErrMsg(int $iErrType): string
     {
         switch ($iErrType) {
             case static::ERR_BAD_FILE:
@@ -238,12 +229,8 @@ class ImportUser extends Core
 
     /**
      * Check (and modify if incorrect) the gender type.
-     *
-     * @param string $sSex
-     *
-     * @return string
      */
-    private function fixGender($sSex)
+    private function fixGender(string $sSex): string
     {
         $sSex = strtolower($sSex);
 
@@ -256,21 +243,13 @@ class ImportUser extends Core
 
     /**
      * Remove the temporary file.
-     *
-     * @return void
      */
-    private function removeTmpFile()
+    private function removeTmpFile(): void
     {
         $this->file->deleteFile($this->aFile['tmp_name']);
     }
 
-    /**
-     * @param string $sDelimiter
-     * @param string $sEnclosure
-     *
-     * @return array
-     */
-    private function run($sDelimiter, $sEnclosure)
+    private function run(string $sDelimiter, string $sEnclosure): array
     {
         $iErrType = $this->hasError();
 
@@ -311,7 +290,7 @@ class ImportUser extends Core
      *
      * @return string
      */
-    private function getRandomDate()
+    private function getRandomDate(): string
     {
         return date('Y') - mt_rand(20, 50) . '-' . mt_rand(1, 12) . '-' . mt_rand(1, 28);
     }
@@ -319,7 +298,7 @@ class ImportUser extends Core
     /**
      * @return int
      */
-    private function hasError()
+    private function hasError(): int
     {
         $sExtFile = $this->file->getFileExt($this->aFile['name']);
 
@@ -338,12 +317,7 @@ class ImportUser extends Core
         return static::NO_ERROR;
     }
 
-    /**
-     * @param string $sFiveChars
-     *
-     * @return string
-     */
-    private function getRandomEmail($sFiveChars)
+    private function getRandomEmail(string $sFiveChars): string
     {
         return sprintf('peterzhenry%s@%s.ph7cms.com', $sFiveChars, $sFiveChars);
     }
@@ -355,7 +329,7 @@ class ImportUser extends Core
      *
      * @return string
      */
-    private function cleanValue($sValue)
+    private function cleanValue(string $sValue): string
     {
         return strtolower(
             trim(
