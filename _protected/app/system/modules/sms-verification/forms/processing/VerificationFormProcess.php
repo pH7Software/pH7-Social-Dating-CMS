@@ -89,13 +89,14 @@ class VerificationFormProcess extends Form
 
     /**
      * @param int $iProfileId
-     *
-     * @return bool
-     *
-     * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
     private function isVerificationCodeValid($iProfileId): bool
     {
-        return $this->httpRequest->post('verification_code') === Verification::getVerificationCode($iProfileId);
+        try {
+            return $this->httpRequest->post('verification_code') === Verification::getVerificationCode($iProfileId);
+        } catch (\Exception $oExcept) {
+            // If request isn't POST, return false
+            return false;
+        }
     }
 }
