@@ -2,7 +2,7 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
- * @copyright        (c) 2011-2020, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2011-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  *
  * @history          Supports now PHP 5 with beautiful object code (POO), (removed all the ugly object code from PHP 4.x).
