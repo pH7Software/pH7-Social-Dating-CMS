@@ -13,10 +13,10 @@ in the security of our web software to find any security vulnerability to create
 please fork the GitHub repository https://github.com/pH7Software/pH7-Social-Dating-CMS, add your changes and open a pull request.
 Thank you!
 
-- Pierre-Henry Soria (founder and developer of pH7CMS)
-- pH7CMS Website: https://ph7cms.com
+- Pierre-Henry Soria (founder and developer of pH7Builder)
+- pH7Builder Website: https://ph7builder.com
 - Personal GitHub: https://github.com/pH-7
-- pH7CMS GitHub: https://github.com/pH7Software
+- pH7Builder GitHub: https://github.com/pH7Software
 
 
-P.S. Moreover, a contribution to an open source project like pH7CMS looks great on your CV!
+P.S. Moreover, a contribution to an open source project like pH7Builder looks great on your CV!

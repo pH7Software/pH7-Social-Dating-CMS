@@ -3,9 +3,9 @@
  * @title            Db (Database) Class
  * @desc             PDO Singleton Class
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2011-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Mvc / Model / Engine
  * @version          1.6
  */
@@ -66,7 +66,7 @@ class Db
     }
 
     /**
-     * @param string|null $sDsn
+     * @param string $sDsn
      * @param string|null $sUsername
      * @param string|null $sPassword
      * @param array|null $aDriverOptions
@@ -74,7 +74,7 @@ class Db
      *
      * @return self Returns the PDO instance class or create initial connection.
      */
-    public static function getInstance($sDsn = null, $sUsername = null, $sPassword = null, $aDriverOptions = null, $sPrefix = null)
+    public static function getInstance($sDsn = '', $sUsername = null, $sPassword = null, $aDriverOptions = null, $sPrefix = null)
     {
         if (self::$oInstance === null) {
             if (!empty($sDsn)) {
@@ -144,10 +144,8 @@ class Db
 
     /**
      * Fetch extended error information associated with the last operation on the database handle.
-     *
-     * @return array
      */
-    public function errorInfo()
+    public function errorInfo(): array
     {
         return self::$oDb->errorInfo();
     }
@@ -200,7 +198,7 @@ class Db
      */
     public function lastInsertId($sName = null)
     {
-        return self::$oDb->lastInsertId($sName);
+        return (string)self::$oDb->lastInsertId($sName);
     }
 
     /**
@@ -428,7 +426,7 @@ class Db
         $sMySQLVer = self::$oDb->getAttribute(PDO::ATTR_SERVER_VERSION);
 
         if (version_compare($sMySQLVer, self::REQUIRED_SQL_VERSION, '<')) {
-            $sMsg = 'ERROR: Your MySQL version is ' . $sMySQLVer . '. pH7CMS requires MySQL ' . self::REQUIRED_SQL_VERSION . ' or newer.';
+            $sMsg = 'ERROR: Your MySQL version is ' . $sMySQLVer . '. pH7Builder requires MySQL ' . self::REQUIRED_SQL_VERSION . ' or newer.';
             exit($sMsg);
         }
     }

@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2018-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
 
@@ -10,14 +10,14 @@ namespace PH7;
 
 final class GenderTypeUserCore
 {
-    const CONSIDER_COUPLE_GENDER = true;
-    const IGNORE_COUPLE_GENDER = false;
+    public const CONSIDER_COUPLE_GENDER = true;
+    public const IGNORE_COUPLE_GENDER = false;
 
-    const FEMALE = 'female';
-    const MALE = 'male';
-    const COUPLE = 'couple';
+    public const FEMALE = 'female';
+    public const MALE = 'male';
+    public const COUPLE = 'couple';
 
-    const GENDERS = [
+    public const GENDERS = [
         self::FEMALE => self::FEMALE,
         self::MALE => self::MALE,
         self::COUPLE => self::COUPLE

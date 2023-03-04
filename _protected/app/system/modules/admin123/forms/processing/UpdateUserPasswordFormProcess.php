@@ -1,10 +1,12 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2020, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2020-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -17,13 +19,11 @@ use PH7\Framework\Url\Header;
 class UpdateUserPasswordFormProcess extends Form
 {
     /**
-     * @param string $sUserEmail
-     *
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      *
      * @internal Need to use Http::NO_CLEAN arg in Http::post() since password might contains special character like "<" and will otherwise be converted to HTML entities
      */
-    public function __construct($sUserEmail)
+    public function __construct(string $sUserEmail)
     {
         parent::__construct();
 
@@ -45,13 +45,9 @@ class UpdateUserPasswordFormProcess extends Form
     }
 
     /**
-     * @param string $sUserEmail
-     *
-     * @return bool
-     *
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    private function updatePassword($sUserEmail)
+    private function updatePassword(string $sUserEmail): bool
     {
         return (new UserCoreModel)->changePassword(
             $sUserEmail,

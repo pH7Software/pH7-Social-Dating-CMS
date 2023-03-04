@@ -2,9 +2,9 @@
 /**
  * @desc             Loading and management config files.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2011-2022, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Config
  * @version          1.2
  */
@@ -24,17 +24,14 @@ use PH7\Framework\Pattern\Singleton;
  */
 class Config implements Configurable
 {
-    const DEVELOPMENT_MODE = 'development';
-    const PRODUCTION_MODE = 'production';
+    private const DEVELOPMENT_MODE = 'development';
+    private const PRODUCTION_MODE = 'production';
 
-    /** @var array */
-    public $values = [];
+    public array $values = [];
 
-    /** @var string */
-    private $sConfigAppFilePath;
+    private string $sConfigAppFilePath;
 
-    /** @var string */
-    private $sConfigSysFilePath;
+    private string $sConfigSysFilePath;
 
     /** Import the Singleton trait*/
     use Singleton;
@@ -162,6 +159,11 @@ class Config implements Configurable
         define('PH7_DEFAULT_LANG', $this->values['application']['default_lang']);
     }
 
+    /**
+     * @param string $sFile The ini config file to parse.
+     *
+     * @return array|bool The file settings as associative array on success, FALSE otherwise.
+     */
     private function parseIniFile(string $sFile)
     {
         return parse_ini_file($sFile, true, INI_SCANNER_TYPED);

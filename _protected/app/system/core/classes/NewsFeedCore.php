@@ -2,9 +2,9 @@
 /**
  * @title          Retrieve News Feed from a RSS URL.
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2013-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Core / Class
  * @version        1.0
  */
@@ -19,7 +19,7 @@ use PH7\Framework\Error\CException\PH7Exception;
 class NewsFeedCore
 {
     const DEFAULT_NUMBER_ITEMS = 10;
-    const NEWS_URL = 'https://ph7cms.com/feed/';
+    const NEWS_URL = 'https://ph7builder.com/feed/';
     const CACHE_GROUP = 'str/sys/mod/admin';
     const CACHE_LIFETIME = 3600 * 24;
 

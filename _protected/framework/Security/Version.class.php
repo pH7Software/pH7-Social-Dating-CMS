@@ -2,11 +2,13 @@
 /**
  * @desc             Version Information for the security of packaged software.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Security
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Security;
 
@@ -19,43 +21,43 @@ use PH7\Framework\Security\Validate\Validate;
 
 final class Version
 {
-    /**
-     * Cache lifetime set for 1 day.
-     */
-    const CACHE_TIME = 86400;
+    private const CACHE_GROUP = 'str/security';
+    private const CACHE_TIME = 86400; // Cache lifetime set for 1 day
 
-    const CACHE_GROUP = 'str/security';
+    private const LATEST_VERSION_URL = 'https://xml.ph7builder.com/software-info.xml';
 
-    const LATEST_VERSION_URL = 'https://xml.ph7builder.com/software-info.xml';
-    const VERSION_PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
-    const FRAMEWORK_TAG_NAME = 'ph7';
-    const PACKAGE_TAG_NAME = 'ph7builder';
+    public const UPGRADE_DOC_URL = 'https://ph7builder.com/doc/en/upgrade';
 
-    const UPGRADE_DOC_URL = 'https://ph7cms.com/doc/en/upgrade';
+    public const VERSION_PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
+
+    private const FRAMEWORK_TAG_NAME = 'ph7';
+    private const PACKAGE_TAG_NAME = 'ph7builder';
 
     /**
-     * Framework Kernel.
+     * Framework Kernel Information.
      *
-     * VERSION NAMES:
+     * @history VERSION NAMES:
      *
-     * 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO",
-     * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa", 12.* was "PHS", 14.* was "pKb", 15.* was ABSOLUTE™ and v16 is ACIDIC
+     * 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", v2.* was "H2O",
+     * v3.* was "H3O", v4.* was "HCO", v5.* was "pCO", v6.* was "WoW",
+     * v7.* and v8.* were "NaOH", v10.* was "pKa", v12.* was "PHS", v14.* was "pKb",
+     * v15.* was ABSOLUTE™, v16.* was ACIDIC, v17.* was PURE™ and v18 is SENSATION
      */
-    const KERNEL_VERSION_NAME = 'ACIDIC';
+    public const KERNEL_VERSION_NAME = 'SENSATION';
 
     /**
      * VERSION NUMBERS:
      * MAJOR.MINOR.PATCH[.build]
      *
-     * More details: https://ph7cms.com/new-versioning-system/
+     * More details: https://ph7builder.com/new-versioning-system/
      */
-    const KERNEL_VERSION = '16.5.0';
-    const KERNEL_BUILD = '1';
-    const KERNEL_RELEASE_DATE = '2021-11-24';
+    public const KERNEL_VERSION = '18.0.0';
+    public const KERNEL_BUILD = '1';
+    public const KERNEL_RELEASE_DATE = '2023-01-02';
 
-    /***** Framework Server *****/
-    const KERNEL_TECHNOLOGY_NAME = 'pH7CMS.com';
-    const KERNEL_SERVER_NAME = 'pH7WS/1.0.0';
+    /*** Framework Server ***/
+    public const KERNEL_TECHNOLOGY_NAME = 'pH7Builder.com';
+    public const KERNEL_SERVER_NAME = 'pH7WS/1.0.0';
 
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
@@ -69,7 +71,7 @@ final class Version
      *
      * @return array|bool Returns version information in an array or FALSE if an error occurred.
      */
-    public static function getLatestInfo()
+    public static function getLatestInfo(): array|bool
     {
         $oCache = (new Cache)->start(self::CACHE_GROUP, 'version-info', self::CACHE_TIME);
         if (!$mData = $oCache->get()) {
@@ -86,7 +88,7 @@ final class Version
      *
      * @return bool Returns TRUE if a new update is available, FALSE otherwise.
      */
-    public static function isUpdateEligible()
+    public static function isUpdateEligible(): bool
     {
         if (!$aLatestInfo = self::getLatestInfo()) {
             return false;
@@ -116,9 +118,9 @@ final class Version
     }
 
     /**
-     * @return array|bool Returns an array with the release details, or FALSE if cannot retrieve the remote info.
+     * @return array|bool Returns an array with the release details, or FALSE if it can't retrieve the remote info.
      */
-    private static function retrieveXmlInfoFromRemoteServer()
+    private static function retrieveXmlInfoFromRemoteServer(): array|bool
     {
         $oDom = new DOMDocument;
 
@@ -149,12 +151,7 @@ final class Version
         ];
     }
 
-    /**
-     * @param DOMElement $oInfo
-     *
-     * @return bool
-     */
-    private static function isUpdateAlertEnabled(DOMElement $oInfo)
+    private static function isUpdateAlertEnabled(DOMElement $oInfo): bool
     {
         // "Validate::bool()" returns TRUE for "1", "true", "on", and "yes", FALSE otherwise
         return (new Validate)->bool($oInfo->getElementsByTagName('upd-alert')->item(0)->nodeValue);

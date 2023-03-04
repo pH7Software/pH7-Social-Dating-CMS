@@ -12,7 +12,7 @@ class YesNo extends Validation
 {
     public function __construct()
     {
-        $this->message = t('Error: You must accept our %element%.');
+        $this->message = t('You must accept our %element%.');
     }
 
     public function isValid($sValue)

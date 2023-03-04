@@ -11,22 +11,23 @@ use PH7\Framework\Security\CSRF\Token as SecurityToken;
 
 class Token extends Validation
 {
-    /** @var string */
-    private $sName;
+    // Import `Message` trait
+    use Message;
 
-    /**
-     * @param string $sName
-     */
-    public function __construct($sName)
+    private string $sName;
+
+    public function __construct(string $sName)
     {
-        $this->message = Message::errorTokenMsg();
+        $this->message = self::errorTokenMsg();
         $this->sName = $sName;
     }
 
     /**
+     * @param string $sValue
+     *
      * @return bool Returns TRUE if the token is validated, FALSE otherwise.
      */
-    public function isValid($sValue)
+    public function isValid($sValue): bool
     {
         return (new SecurityToken)->check($this->sName, $sValue);
     }

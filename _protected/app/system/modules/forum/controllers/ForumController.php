@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Forum / Controller
  */
 
@@ -48,7 +48,7 @@ class ForumController extends Controller
         $this->view->member_id = $this->session->get('member_id');
 
         // Predefined meta_keywords tags
-        $this->view->meta_keywords = t('forum,discussion,dating forum,social forum,people,meet people,forums,free dating forum,free forum,community forum,social forum');
+        $this->view->meta_keywords = t('forum,discussion,dating forum,social forum,people,meet people,discussions,free dating forum,free forum,community forum,social forum');
 
         // Adding Css Style for the Layout Forum
         $this->design->addCss(
@@ -75,9 +75,9 @@ class ForumController extends Controller
             $this->sTitle = t('Nothing found!');
             $this->notFound();
         } else {
-            $this->view->page_title = t('Discussion Forums - %site_name%');
-            $this->view->meta_description = t('Discussion Forums, Social Network Site - %site_name%');
-            $this->view->h1_title = t('Discussion Forums, Social Network Site');
+            $this->view->page_title = t('Discussion Board | %site_name%');
+            $this->view->meta_description = t('Community Discussion Board - %site_name%');
+            $this->view->h1_title = t('Discussions - %site_name%');
 
             $this->view->categories = $oCategories;
             $this->view->forums = $oForums;
@@ -113,8 +113,8 @@ class ForumController extends Controller
             $this->notFound();
         } else {
             $this->view->page_title = t('%0% - Forums', $this->str->upperFirst($sForumName));
-            $this->view->meta_description = t('%0% - Topics - Discussion Forums', $sForumName);
-            $this->view->meta_keywords = t('%0%,forum,discussion,dating forum,social forum,people,meet people,forums,free dating forum', $this->getNameAsKeywords($sForumName));
+            $this->view->meta_description = t('%0% - Topics - Discussions Board', $sForumName);
+            $this->view->meta_keywords = t('%0%,forum,discussion,dating forum,social forum,people,meet people,forums,free dating forum,discussion', $this->getNameAsKeywords($sForumName));
             $this->view->h1_title = $this->str->upperFirst($sForumName);
             $this->view->topics = $oTopics;
         }
@@ -161,7 +161,7 @@ class ForumController extends Controller
             // Adding the RSS link
             $this->view->header = '<link rel="alternate" type="application/rss+xml" title="' . t('Latest Forum Posts') . '" href="' . Uri::get('xml', 'rss', 'xmlrouter', 'forum-post,' . $oPost->topicId) . '" />';
             $this->view->page_title = t('%0% -> %1% - Forum', $this->str->upperFirst($sForumName), $this->getTitle($oPost->title));
-            $this->view->meta_description = t('%0% Topics - Discussion Forums', $this->getShortedMessage($oPost->message));
+            $this->view->meta_description = t('%0% Topics - Discussions Board', $this->getShortedMessage($oPost->message));
 
             // Generates beautiful meta keywords for good SEO
             $this->view->meta_keywords = t('%0%,%1%,forum,discussion,dating forum,social forum', $this->getNameAsKeywords($sForumName), $this->getTitleAsKeywords($oPost->title));

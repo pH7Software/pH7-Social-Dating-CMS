@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / SMS Verification / Inc / Class
  */
 
@@ -12,18 +12,14 @@ use PH7\Framework\Config\Config;
 
 class SmsGatewayFactory
 {
-    const CLICKATELL_NAME = 'clickatell';
-    const TWILIO_NAME = 'twilio';
-    const INVALID_SMS_GATEWAY_MESSAGE = '"%s" is an invalid SMS gateway specified.';
+    private const CLICKATELL_NAME = 'clickatell';
+    private const TWILIO_NAME = 'twilio';
+    private const INVALID_SMS_GATEWAY_MESSAGE = '"%s" is an invalid SMS gateway specified.';
 
     /**
-     * @param string $sSmsGateway
-     *
-     * @return SmsProvidable
-     *
      * @throws InvalidSmsGatewayException
      */
-    public static function create($sSmsGateway)
+    public static function create(string $sSmsGateway): SmsProvidable
     {
         switch ($sSmsGateway) {
             case self::CLICKATELL_NAME:

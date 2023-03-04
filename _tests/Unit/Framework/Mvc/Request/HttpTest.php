@@ -2,7 +2,7 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2017-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Test / Unit / Framework / Mvc/ Request
  */
 
@@ -39,9 +39,19 @@ final class HttpTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = 'GET';
         $_GET['float_value'] = '10.3';
 
-        $sActual = $this->oHttpRequest->get('float_value', 'float');
+        $sActual = $this->oHttpRequest->get('float_value', Type::FLOAT);
 
         $this->assertSame(10.3, $sActual);
+    }
+
+    public function testGetRequestCastedToArray(): void
+    {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_GET['array_value'] = '';
+
+        $sActual = $this->oHttpRequest->get('array_value', Type::ARRAY);
+
+        $this->assertIsArray($sActual);
     }
 
     public function testGetRequestCastedToBool(): void
@@ -114,9 +124,19 @@ final class HttpTest extends TestCase
         $_SERVER['REQUEST_METHOD'] = 'POST';
         $_POST['float_value'] = '10.3';
 
-        $sActual = $this->oHttpRequest->post('float_value', 'float');
+        $sActual = $this->oHttpRequest->post('float_value', Type::FLOAT);
 
         $this->assertSame(10.3, $sActual);
+    }
+
+    public function testPostRequestCastedToArray(): void
+    {
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+        $_POST['array_value'] = '';
+
+        $sActual = $this->oHttpRequest->post('array_value', Type::ARRAY);
+
+        $this->assertIsArray($sActual);
     }
 
     public function testPostRequestCastedToBool(): void

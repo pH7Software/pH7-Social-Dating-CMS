@@ -2,18 +2,18 @@
 /**
  * @title            Vimeo Class
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Video / Api
- * @link             http://ph7cms.com
+ * @link             http://ph7builder.com
  */
 
 namespace PH7\Framework\Video\Api;
 
 defined('PH7') or exit('Restricted access');
 
-class Vimeo extends Api implements IApi
+class Vimeo extends Api implements Apible
 {
     const API_URL = 'https://vimeo.com/api/v2/video/';
     const PLAYER_URL = 'https://player.vimeo.com/video/';
@@ -24,7 +24,7 @@ class Vimeo extends Api implements IApi
      *
      * @return string|bool Returns the video embed URL if it was found and is valid, FALSE otherwise.
      */
-    public function getVideo($sUrl)
+    public function getVideo(string $sUrl)
     {
         return $this->getEmbedUrl($sUrl);
     }
@@ -34,7 +34,7 @@ class Vimeo extends Api implements IApi
      *
      * @return Vimeo|bool FALSE if unable to open the url, otherwise Vimeo class.
      */
-    public function getInfo($sUrl)
+    public function getInfo(string $sUrl)
     {
         $sDataUrl = static::API_URL . $this->getVideoId($sUrl) . '.json';
 
@@ -49,12 +49,12 @@ class Vimeo extends Api implements IApi
     /**
      * @param string $sUrl
      * @param string $sMedia
-     * @param int $iWidth
-     * @param int $iHeight
+     * @param int|string $iWidth
+     * @param int|string $iHeight
      *
      * @return string
      */
-    public function getMeta($sUrl, $sMedia, $iWidth, $iHeight)
+    public function getMeta(string $sUrl, string $sMedia, $iWidth, $iHeight): string
     {
         if ($sMedia === 'preview') {
             // First load the video information.
@@ -74,7 +74,7 @@ class Vimeo extends Api implements IApi
      *
      * @return int|bool Returns the ID of the video if it was found, FALSE otherwise.
      */
-    public function getVideoId($sUrl)
+    public function getVideoId(string $sUrl)
     {
         preg_match(static::REGEX_VIDEO_ID, $sUrl, $aMatch);
 

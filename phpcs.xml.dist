@@ -2,6 +2,8 @@
 <ruleset name="PHP_CodeSniffer">
     <file>_protected</file>
 
+    <exclude-pattern>_protected/vendor</exclude-pattern>
+
     <arg name="colors"/>
     <arg name="report" value="full"/>
 

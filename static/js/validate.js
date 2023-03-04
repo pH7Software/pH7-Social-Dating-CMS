@@ -1,7 +1,7 @@
 /*!
  * Author:        Pierre-Henry Soria <ph7software@gmail.com>
  * Copyright:     (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * License:       MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * License:       MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  */
 
 /**
@@ -144,13 +144,18 @@ function CValid(sInputVal, sFieldId, sParam1, sParam2) {
             $('.' + sFieldId).fadeIn();
             $('#' + sField).css("border", 'solid ' + DARK_GREEN_COLOR + ' 1px');
             $('.' + sField).css("color", GREEN_COLOR);
-            if (typeof sMsg !== "undefined") $('.' + sField).text(sMsg);
+            if (typeof sMsg !== "undefined") {
+                $('.' + sField).text(sMsg);
+            }
         }
         else {
             $('.' + sFieldId).fadeIn();
             $('#' + sField).css("border", '1px solid ' + DARK_RED_COLOR);
             $('.' + sField).css("color", RED_COLOR);
-            if (typeof sMsg !== "undefined") $('.' + sField).text(sMsg.substring(0, 150));
+            if (typeof sMsg !== "undefined") {
+                // Allow HTML tags coming from asset/ajax/Validate
+                $('.' + sField).html(sMsg.substring(0, 150));
+            }
         }
     }, 'json');
 }

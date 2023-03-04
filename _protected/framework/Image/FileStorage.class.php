@@ -2,9 +2,9 @@
 /**
  * @desc             Class is used to create/manipulate images using GD library.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Image
  * @link             https://ph7.me
  * @linkGD           https://php.net/manual/book.image.php
@@ -14,6 +14,7 @@ namespace PH7\Framework\Image;
 
 defined('PH7') or exit('Restricted access');
 
+use GdImage;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\File\File;
 use PH7\Framework\File\TooLargeException;
@@ -26,7 +27,7 @@ class FileStorage implements Storageable
     public const JPG = IMAGETYPE_JPEG;
     public const PNG = IMAGETYPE_PNG;
     public const GIF = IMAGETYPE_GIF;
-    public const WEBP = 18; // TODO: From PHP 7.1, IMAGETYPE_WEBP is available
+    public const WEBP = IMAGETYPE_WEBP;
 
     public const JPG_NAME = 'jpg';
     public const PNG_NAME = 'png';
@@ -64,7 +65,7 @@ class FileStorage implements Storageable
     /** @var string */
     private $sType;
 
-    /** @var resource */
+    /** @var resource|GdImage|false */
     private $rImage;
 
     /** @var int */
@@ -109,7 +110,7 @@ class FileStorage implements Storageable
 
         if (!$mImgType || !is_file($this->sFile)) {
             if (isDebug()) {
-                throw new TooLargeException('The file could not be uploaded. Possibly too large.');
+                throw new TooLargeException('DebugMode: The file could not be uploaded. Possibly too large.');
             }
             return false;
         }
@@ -490,7 +491,10 @@ class FileStorage implements Storageable
         (new File)->deleteFile($sFile);
 
         // Free the memory associated with the image
-        @imagedestroy($this->rImage);
+        // Make sure $rImage is the correct type and not null. Needs to be an instance of GdImage
+        if ($this->rImage instanceof GdImage) {
+            @imagedestroy($this->rImage);
+        }
 
         return $this;
     }

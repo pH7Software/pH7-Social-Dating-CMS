@@ -1,10 +1,12 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -18,16 +20,16 @@ use PH7\Framework\Url\Header;
 
 class SettingController extends Controller
 {
-    const ADS_PER_PAGE = 10;
+    private const ADS_PER_PAGE = 10;
 
-    public function index()
+    public function index(): void
     {
         Header::redirect(
             Uri::get(PH7_ADMIN_MOD, 'setting', 'general')
         );
     }
 
-    public function general()
+    public function general(): void
     {
         // Add Css Style for Tabs
         $this->design->addCss(
@@ -39,7 +41,7 @@ class SettingController extends Controller
         $this->output();
     }
 
-    public function resetColor()
+    public function resetColor(): void
     {
         if ((new SecurityToken)->checkUrl()) {
             $this->resetColorFields();
@@ -58,7 +60,7 @@ class SettingController extends Controller
         );
     }
 
-    public function ads()
+    public function ads(): void
     {
         $oPage = new Page;
         $sTable = AdsCore::getTable();
@@ -79,31 +81,31 @@ class SettingController extends Controller
         $this->output();
     }
 
-    public function addAds()
+    public function addAds(): void
     {
         $this->view->page_title = $this->view->h1_title = t('Add a New Banner');
         $this->output();
     }
 
-    public function analyticsApi()
+    public function analyticsApi(): void
     {
         $this->view->page_title = $this->view->h1_title = t('Analytics API Code');
         $this->output();
     }
 
-    public function style()
+    public function style(): void
     {
         $this->view->page_title = $this->view->h1_title = t('Style Code Injection');
         $this->output();
     }
 
-    public function script()
+    public function script(): void
     {
         $this->view->page_title = $this->view->h1_title = t('JavaScript Code Injection');
         $this->output();
     }
 
-    public function metaMain()
+    public function metaMain(): void
     {
         // divShow.js for the Language Menu List
         $this->design->addJs(PH7_STATIC . PH7_JS, 'divShow.js');
@@ -125,7 +127,7 @@ class SettingController extends Controller
         $this->output();
     }
 
-    private function resetColorFields()
+    private function resetColorFields(): void
     {
         $aColorFields = [
             'backgroundColor',
@@ -146,11 +148,9 @@ class SettingController extends Controller
     }
 
     /**
-     * Check if the locale language name (eg "en_US") specified in the URL path exists in pH7CMS.
-     *
-     * @return bool
+     * Check if the locale language name (eg "en_US") specified in the URL path exists in pH7Builder.
      */
-    private function langNameFromUrlDoesNotExist()
+    private function langNameFromUrlDoesNotExist(): bool
     {
         $aLangs = $this->file->getDirList(PH7_PATH_APP_LANG);
 

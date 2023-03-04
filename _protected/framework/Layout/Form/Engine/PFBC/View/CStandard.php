@@ -4,7 +4,7 @@
  */
 
 namespace PFBC\View;
-// Class for pH7CMS
+// Class for pH7Builder
 
 use PFBC\Element\Button;
 use PFBC\Element\Hidden;

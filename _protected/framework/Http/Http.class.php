@@ -1,13 +1,14 @@
 <?php
 /**
- * @title            Http Class
  * @desc             HTTP Management Class.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Http
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Http;
 
@@ -18,7 +19,7 @@ use PH7\JustHttp\StatusCode;
 
 class Http
 {
-    const STATUS_CODE = [
+    protected const STATUS_CODE = [
         100 => '100 Continue',
         101 => '101 Switching Protocols',
         102 => '102 Processing',
@@ -84,14 +85,14 @@ class Http
 
 
     /**
+     * Give the HTTP status code name (e.g. "204 No Content").
+     *
      * @param int $iStatus The "code" for the HTTP status.
      *
      * @return string|bool $iStatus Returns the "HTTP status code" if found, FALSE otherwise.
      */
-    public static function getStatusCode($iStatus)
+    public static function getStatusCode(int $iStatus)
     {
-        $iStatus = (int)$iStatus;
-
         return !empty(static::STATUS_CODE[$iStatus]) ? static::STATUS_CODE[$iStatus] : false;
     }
 
@@ -100,7 +101,7 @@ class Http
      *
      * @return array
      */
-    public static function getHeadersList()
+    public static function getHeadersList(): array
     {
         return headers_list();
     }
@@ -112,7 +113,7 @@ class Http
      *
      * @return string $sUrl Returns the URL to lower case and without the www. if present in the URL.
      */
-    public static function getHostName($sUrl)
+    public static function getHostName(string $sUrl): string
     {
         $sUrl = str_ireplace('www.', '', $sUrl);
         $sHost = parse_url($sUrl, PHP_URL_HOST);
@@ -147,7 +148,7 @@ class Http
      *
      * @throws Exception
      */
-    public static function setHeadersByCode($iCode = StatusCode::OK)
+    public static function setHeadersByCode(int $iCode = StatusCode::OK): void
     {
         if (!static::getStatusCode($iCode)) {
             $iCode = StatusCode::OK;
@@ -163,7 +164,7 @@ class Http
      *
      * @throws Exception
      */
-    public static function setContentType($sType)
+    public static function setContentType(string $sType): void
     {
         static::setHeaders('Content-Type: ' . $sType);
     }
@@ -173,14 +174,14 @@ class Http
      *
      * @param int $iMaintenanceTime Time site will be down for (in seconds).
      */
-    public static function setMaintenanceCode($iMaintenanceTime)
+    public static function setMaintenanceCode(int $iMaintenanceTime): void
     {
         header(static::getProtocol() . ' 503 Service Temporarily Unavailable');
         header('Retry-After: ' . $iMaintenanceTime);
     }
 
     /**
-     * Required HTTP Authentification.
+     * Required HTTP Authentication.
      *
      * @param string $sUsr
      * @param string $sPwd
@@ -188,7 +189,7 @@ class Http
      *
      * @return bool TRUE if the authentication is correct, otherwise FALSE.
      */
-    public static function requireAuth($sUsr, $sPwd, $sMsg = 'HTTP Basic Authentication')
+    public static function requireAuth(string $sUsr, string $sPwd, string $sMsg = 'HTTP Basic Authentication'): bool
     {
         $sAuthUsr = Server::getVar(Server::AUTH_USER);
         $sAuthPwd = Server::getVar(Server::AUTH_PW);
@@ -210,24 +211,21 @@ class Http
      *
      * @return bool
      */
-    public static function isSsl()
+    public static function isSsl(): bool
     {
-        $sHttps = strtolower(Server::getVar(Server::HTTPS));
+        $sHttps = Server::getVar(Server::HTTPS);
 
         if (null !== $sHttps) {
             $sHttps = strtolower($sHttps);
 
-            if ('on' == $sHttps) {
+            if ('on' == $sHttps || '1' == $sHttps) {
                 return true;
-            } elseif ('1' == $sHttps) {
-                return true;
-            } else {
-                $iPort = Server::getVar(Server::SERVER_PORT);
-
-                if ('443' == $iPort) {
-                    return true;
-                }
             }
+        }
+
+        $iPort = Server::getVar(Server::SERVER_PORT);
+        if ('443' == $iPort) {
+            return true;
         }
 
         return false;
@@ -235,24 +233,16 @@ class Http
 
     /**
      * Check if the URL is relative.
-     *
-     * @param string $sUrl
-     *
-     * @return bool
      */
-    public function isRelativeUrl($sUrl)
+    public function isRelativeUrl(string $sUrl): bool
     {
         return stristr($sUrl, 'http') === false;
     }
 
     /**
      * Detects if the URL is a subdomain.
-     *
-     * @param string $sUrl URL
-     *
-     * @return bool
      */
-    public function detectSubdomain($sUrl)
+    public function detectSubdomain(string $sUrl): bool
     {
         return $this->getSubdomain($sUrl) !== null;
     }
@@ -260,11 +250,9 @@ class Http
     /**
      * Get the subdomain in a URL address.
      *
-     * @param string $sUrl
-     *
      * @return string|null Returns the "subdomain" in the URL address if he has found a subdomain otherwise "null".
      */
-    public function getSubdomain($sUrl)
+    public function getSubdomain(string $sUrl): ?string
     {
         $sHost = static::getHostName($sUrl);
         $aDomainParts = explode('.', $sHost);
@@ -275,7 +263,7 @@ class Http
     /**
      * @return string|null The Request Method or the NULL value.
      */
-    public function getRequestMethod()
+    public function getRequestMethod(): ?string
     {
         return Server::getVar(Server::REQUEST_METHOD);
     }
@@ -286,9 +274,9 @@ class Http
      *
      * @return string
      */
-    public function getRequestUri()
+    public function getRequestUri(): string
     {
-        $sRequestUri = Server::getVar(Server::REQUEST_URI);
+        $sRequestUri = Server::getVar(Server::REQUEST_URI, '');
 
         return rawurldecode($sRequestUri);
     }
@@ -296,15 +284,15 @@ class Http
     /**
      * @return string|null The Query String or the NULL value.
      */
-    public function getQueryString()
+    public function getQueryString(): ?string
     {
         return Server::getVar(Server::QUERY_STRING);
     }
 
     /**
-     * @return string The HTTP server protocol.
+     * @return string|null The HTTP server protocol.
      */
-    public static function getProtocol()
+    public static function getProtocol(): ?string
     {
         return Server::getVar(Server::SERVER_PROTOCOL);
     }
@@ -314,7 +302,7 @@ class Http
      *
      * @return bool TRUE if the headers were sent, FALSE if not.
      */
-    private static function isSent()
+    private static function isSent(): bool
     {
         return headers_sent();
     }

@@ -2,9 +2,9 @@
 --
 -- Title:         SQL Core (base) Install File
 --
--- Author:        Pierre-Henry Soria <hello@ph7cms.com>
+-- Author:        Pierre-Henry Soria <hello@ph7builder.com>
 -- Copyright:     (c) 2017-2021, Pierre-Henry Soria. All Rights Reserved.
--- License:       MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+-- License:       MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
 -- Package:       PH7 / Install / Data / Sql / PostgreSQL
 --
 -- Upgrade:       Convert the MySQL file version to PostgreSQL
@@ -21,8 +21,7 @@
 @sNoReplyEmail := 'noreply@yoursite.com';
 @sIpApiUrl := 'https://whatismyipaddress.com/ip/';
 @sDefaultVideoUrl := 'https://www.youtube.com/watch?v=q-1eHnBOg4A';
-@sChatApiUrl := 'https://ph7cms.com/addons/chat/?name=%site_name%&url=%site_url%&skin=4';
-@sChatrouletteApiUrl := 'https://ph7cms.com/addons/chatroulette/?name=%site_name%&url=%site_url%&skin=1';
+@sChatApiUrl := 'https://ph7builder.com/addons/chat/?name=%site_name%&url=%site_url%&skin=4';
 
 @sCurrentDate := CURRENT_TIMESTAMP;
 @sPassword := SHA1(RAND() + UNIX_TIMESTAMP());
@@ -72,12 +71,12 @@ CREATE TABLE IF NOT EXISTS ph7_memberships (
 ALTER SEQUENCE ph7_memberships_seq RESTART WITH 1;
 
 INSERT INTO ph7_memberships (groupId, name, description, permissions, price, expirationDays, enable) VALUES
-(1, 'Visitor (not visible)', 'This subscription is offered to all visitors who visit the site.', 'a:22:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"0";s:10:"send_mails";s:1:"0";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"0";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"0";s:17:"instant_messaging";s:1:"0";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"0";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"0";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"0";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"0";s:19:"answer_forum_topics";s:1:"0";s:18:"member_site_access";s:1:"0";}', 0.00, 0, '1'),
-(9, 'Pending (not visible)', 'Pending subscription provisional migration to a different subscription.', 'a:22:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"0";s:10:"send_mails";s:1:"0";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"0";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"0";s:17:"instant_messaging";s:1:"0";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"0";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"0";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"0";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"0";s:19:"answer_forum_topics";s:1:"0";s:18:"member_site_access";s:1:"0";}', 0.00, 15, '0'),
-(2, 'Regular (Free)', 'Free Membership.', 'a:22:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:18:"member_site_access";s:1:"1";}', 0.00, 0, '1'),
-(4, 'Platinum', 'The membership for the small budget.', 'a:22:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:18:"member_site_access";s:1:"1";}', 9.99, 5, '1'),
-(5, 'Silver', 'The premium membership!', 'a:22:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:18:"member_site_access";s:1:"1";}', 19.99, 10, '1'),
-(6, 'Gold', 'The must membership! The Gold!!!', 'a:22:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:18:"member_site_access";s:1:"1";}', 29.99, 30, '1');
+(1, 'Visitor (not visible)', 'This subscription is offered to all visitors who visit the site.', 'a:21:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"0";s:10:"send_mails";s:1:"0";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"0";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"0";s:17:"instant_messaging";s:1:"0";s:4:"chat";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"0";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"0";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"0";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"0";s:19:"answer_forum_topics";s:1:"0";s:18:"member_site_access";s:1:"0";}', 0.00, 0, '1'),
+(9, 'Pending (not visible)', 'Pending subscription provisional migration to a different subscription.', 'a:21:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"0";s:10:"send_mails";s:1:"0";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"0";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"0";s:17:"instant_messaging";s:1:"0";s:4:"chat";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"0";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"0";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"0";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"0";s:19:"answer_forum_topics";s:1:"0";s:18:"member_site_access";s:1:"0";}', 0.00, 15, '0'),
+(2, 'Regular (Free)', 'Free Membership.', 'a:21:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:18:"member_site_access";s:1:"1";}', 0.00, 0, '1'),
+(4, 'Platinum', 'The membership for the small budget.', 'a:21:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:18:"member_site_access";s:1:"1";}', 9.99, 5, '1'),
+(5, 'Silver', 'The premium membership!', 'a:21:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:18:"member_site_access";s:1:"1";}', 19.99, 10, '1'),
+(6, 'Gold', 'The must membership! The Gold!!!', 'a:21:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:18:"member_site_access";s:1:"1";}', 29.99, 30, '1');
 
 
 CREATE SEQUENCE ph7_members_seq;
@@ -273,22 +272,22 @@ CREATE TABLE IF NOT EXISTS ph7_ads (
 ALTER SEQUENCE ph7_ads_seq RESTART WITH 1;
 
 INSERT INTO ph7_ads (adsId, name, code, active, width, height, views, clicks) VALUES
-(1, 'Sponsor pH7CMS 1 (728x90)', '<a href="#0"><img data-src="holder.js/728x90" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 728, 90, 0, 0),
-(2, 'Sponsor pH7CMS 2 (728x90)', '<a href="#0"><img data-src="holder.js/728x90" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 728, 90, 0, 0),
-(3, 'Sponsor pH7CMS 3 (200x200)', '<a href="#0"><img data-src="holder.js/200x200" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 200, 200, 0, 0),
-(4, 'Sponsor pH7CMS 4 (200x200)', '<a href="#0"><img data-src="holder.js/200x200" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 200, 200, 0, 0),
-(5, 'Sponsor pH7CMS 5 (250x250)', '<a href="#0"><img data-src="holder.js/250x250" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 250, 250, 0, 0),
-(6, 'Sponsor pH7CMS 6 (250x250)', '<a href="#0"><img data-src="holder.js/250x250" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 250, 250, 0, 0),
-(7, 'Sponsor pH7CMS 7 (468x60)', '<a href="#0"><img data-src="holder.js/468x60" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 468, 60, 0, 0),
-(8, 'Sponsor pH7CMS 8 (468x60)', '<a href="#0"><img data-src="holder.js/468x60" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 468, 60, 0, 0),
-(9, 'Sponsor pH7CMS 9 (300x250)', '<a href="#0"><img data-src="holder.js/300x250" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 300, 250, 0, 0),
-(10, 'Sponsor pH7CMS 10 (300x250)', '<a href="#0"><img data-src="holder.js/300x250" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 300, 250, 0, 0),
-(11, 'Sponsor pH7CMS 11 (336x280)', '<a href="#0"><img data-src="holder.js/336x280" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 336, 280, 0, 0),
-(12, 'Sponsor pH7CMS 12 (336x280)', '<a href="#0"><img data-src="holder.js/336x280" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 336, 280, 0, 0),
-(13, 'Sponsor pH7CMS 13 (120x600)', '<a href="#0"><img data-src="holder.js/120x600" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 120, 600, 0, 0),
-(14, 'Sponsor pH7CMS 14 (120x600)', '<a href="#0"><img data-src="holder.js/120x600" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 120, 600, 0, 0),
-(15, 'Sponsor pH7CMS 15 (160x600)', '<a href="#0"><img data-src="holder.js/160x600" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 160, 600, 0, 0),
-(16, 'Sponsor pH7CMS 16 (160x600)', '<a href="#0"><img data-src="holder.js/160x600" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 160, 600, 0, 0);
+(1, 'Sponsor pH7Builder 1 (728x90)', '<a href="#0"><img data-src="holder.js/728x90" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 728, 90, 0, 0),
+(2, 'Sponsor pH7Builder 2 (728x90)', '<a href="#0"><img data-src="holder.js/728x90" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 728, 90, 0, 0),
+(3, 'Sponsor pH7Builder 3 (200x200)', '<a href="#0"><img data-src="holder.js/200x200" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 200, 200, 0, 0),
+(4, 'Sponsor pH7Builder 4 (200x200)', '<a href="#0"><img data-src="holder.js/200x200" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 200, 200, 0, 0),
+(5, 'Sponsor pH7Builder 5 (250x250)', '<a href="#0"><img data-src="holder.js/250x250" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 250, 250, 0, 0),
+(6, 'Sponsor pH7Builder 6 (250x250)', '<a href="#0"><img data-src="holder.js/250x250" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 250, 250, 0, 0),
+(7, 'Sponsor pH7Builder 7 (468x60)', '<a href="#0"><img data-src="holder.js/468x60" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 468, 60, 0, 0),
+(8, 'Sponsor pH7Builder 8 (468x60)', '<a href="#0"><img data-src="holder.js/468x60" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 468, 60, 0, 0),
+(9, 'Sponsor pH7Builder 9 (300x250)', '<a href="#0"><img data-src="holder.js/300x250" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 300, 250, 0, 0),
+(10, 'Sponsor pH7Builder 10 (300x250)', '<a href="#0"><img data-src="holder.js/300x250" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 300, 250, 0, 0),
+(11, 'Sponsor pH7Builder 11 (336x280)', '<a href="#0"><img data-src="holder.js/336x280" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 336, 280, 0, 0),
+(12, 'Sponsor pH7Builder 12 (336x280)', '<a href="#0"><img data-src="holder.js/336x280" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 336, 280, 0, 0),
+(13, 'Sponsor pH7Builder 13 (120x600)', '<a href="#0"><img data-src="holder.js/120x600" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 120, 600, 0, 0),
+(14, 'Sponsor pH7Builder 14 (120x600)', '<a href="#0"><img data-src="holder.js/120x600" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 120, 600, 0, 0),
+(15, 'Sponsor pH7Builder 15 (160x600)', '<a href="#0"><img data-src="holder.js/160x600" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 160, 600, 0, 0),
+(16, 'Sponsor pH7Builder 16 (160x600)', '<a href="#0"><img data-src="holder.js/160x600" alt="%site_name% by %software_name%" title="%site_name% powered by %software_name%" /></a>', '0', 160, 600, 0, 0);
 
 
 CREATE SEQUENCE ph7_ads_affiliates_seq;
@@ -1029,7 +1028,7 @@ CREATE TABLE IF NOT EXISTS ph7_meta_main (
 ) ;
 
 INSERT INTO ph7_meta_main (langId, pageTitle, metaDescription, metaKeywords, headline, slogan, promoText, metaRobots, metaAuthor, metaCopyright, metaRating, metaDistribution, metaCategory) VALUES
-('en_US', 'Home', 'The Best Online Social Dating Service to meet people and keep in touch with your friends', 'meet people, community, single, friends, meet singles, women, men, dating site, dating service, dating website, online dating website', 'Be on the right place!', 'The Place to meet lovely people', 'You''re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Social Dating Web Apps or Websites like this one with the #1 <a href="https://ph7cms.com">Dating Web App Builder</a>. It''s Professional, Modern, Open Source, and gives you the Best Way to launch a new Social/Dating Business!', 'index, follow, all', 'Pierre-Henry Soria', 'Copyright Pierre-Henry Soria. All Rights Reserved.', 'general', 'global', 'dating');
+('en_US', 'Home', 'The Best Online Social Dating Service to meet people and keep in touch with your friends', 'meet people, community, single, friends, meet singles, women, men, dating site, dating service, dating website, online dating website', 'Be on the right place!', 'The Place to meet lovely people', 'You''re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Social Dating Web Apps or Websites like this one with the #1 <a href="https://ph7builder.com">Dating Web App Builder</a>. It''s Professional, Modern, Open Source, and gives you the Best Way to launch a new Social/Dating Business!', 'index, follow, all', 'Pierre-Henry Soria', 'Copyright Pierre-Henry Soria. All Rights Reserved.', 'general', 'global', 'dating');
 
 
 CREATE SEQUENCE ph7_sys_mods_enabled_seq;
@@ -1048,11 +1047,10 @@ ALTER SEQUENCE ph7_sys_mods_enabled_seq RESTART WITH 1;
 INSERT INTO ph7_sys_mods_enabled (moduleTitle, folderName, premiumMod, enabled) VALUES
 ('Affiliate', 'affiliate', '0', '1'),
 ('Chat', 'chat', '1', '1'),
-('Chatroulette', 'chatroulette', '1', '1'),
 ('Photo', 'picture', '0', '1'),
 ('Video', 'video', '0', '1'),
 ('Hot or Not', 'hotornot', '0', '1'),
-('Forum', 'forum', '0', '1'),
+('Discussions', 'forum', '0', '1'),
 ('Note (blog for users)', 'note', '0', '1'),
 ('Blog (company blog)', 'blog', '0', '1'),
 ('Love Calculator', 'love-calculator', '0', '1'),
@@ -1067,7 +1065,6 @@ INSERT INTO ph7_sys_mods_enabled (moduleTitle, folderName, premiumMod, enabled) 
 ('Newsletter', 'newsletter', '0', '1'),
 ('Invite Friends', 'invite', '0', '1'),
 ('SMS Verification', 'sms-verification', '0', '0'),
-('Social Media Auth (connect)', 'connect', '0', '0'),
 ('Progressive Web App (HTTPS required)', 'pwa', '0', '0');
 
 
@@ -1087,8 +1084,8 @@ CREATE TABLE IF NOT EXISTS ph7_modules (
 ALTER SEQUENCE ph7_modules_seq RESTART WITH 1;
 
 INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
-/* Gives the current version of pH7CMS SQL schema (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.6.2', 1);
+/* Gives the current version of pH7Builder SQL schema (this helps to update and shows whether it is necessary or not to update the database as well) */
+('pH7Builder', 'SQL System Schema', '1.6.4', 1);
 
 
 CREATE SEQUENCE ph7_report_seq;
@@ -1132,7 +1129,7 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('footerLinkColor', '', 'Override footer links color. Leave empty to disable', 'design'),
 ('linkHoverColor', '', 'Override links hover color. Leave empty to disable', 'design'),
 ('defaultSysModule', 'user', 'The default module running by default on the index page. Recommended to keep the "user" module', 'general'),
-('emailName', 'pH7CMS', '', 'email'),
+('emailName', 'pH7Builder', '', 'email'),
 ('feedbackEmail', @sFeedbackEmail, '', 'email'),
 ('splashPage', 1, 'Use Splash Page | enable = 1 or disable = 0', 'homepage'),
 ('usersBlock', 1, '0 to disable | 1 to enable the profile photos on the homepage', 'homepage'),
@@ -1194,7 +1191,7 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('smtpHostName', 'mail.example.com', '', 'email'),
 ('smtpPassword', 123456, '', 'email'),
 ('smtpPort', 25, '', 'email'),
-('watermarkTextImage', 'pH7CMS.com', 'Watermark text', 'image'),
+('watermarkTextImage', 'pH7Builder.com', 'Watermark text', 'image'),
 ('sizeWatermarkTextImage', 2, 'Between 0 to 5', 'image'),
 ('banWordReplace', '[removed]',  '',  'security'),
 ('securityToken', 0, '0 to disable or 1 to enable the CSRF security token in the forms', 'security'),
@@ -1206,7 +1203,6 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('cleanMessenger', 0, 'Delete IM messages older than X days. 0 = Disable', 'pruning'),
 ('ipApi', @sIpApiUrl, 'IP Api URL', 'api'),
 ('chatApi', @sChatApiUrl, 'Chat Api URL', 'api'),
-('chatrouletteApi', @sChatrouletteApiUrl, 'Chatroulette Api URL', 'api'),
 ('googleApiKey', '', 'Google Maps API key https://developers.google.com/maps/documentation/javascript/get-api-key', 'api'),
 ('cronSecurityHash', 'change_this_secret_cron_word_by_yours', 'The secret word for the URL of the cron', 'automation'),
 ('userTimeout', 1, 'User inactivity timeout. The number of minutes that a member becomes inactive (offline)', 'automation'),

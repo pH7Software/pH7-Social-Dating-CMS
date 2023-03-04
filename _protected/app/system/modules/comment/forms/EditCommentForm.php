@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Comment / Form
  */
 
@@ -39,7 +39,7 @@ class EditCommentForm
         $oData = (new CommentModel)->get($oHttpRequest->get('id'), 1, $oHttpRequest->get('table'));
         $oForm->addElement(
             new Textarea(
-                t('Edit your comment:'),
+                t('Your comment:'),
                 'comment',
                 [
                     'value' => $oData->comment,
@@ -54,7 +54,15 @@ class EditCommentForm
 
         $oForm->addElement(new HTMLExternal('<span class="input_error str_com"></span>'));
 
-        $oForm->addElement(new Button(t('Save')));
+        $oForm->addElement(
+            new Button(
+                t('Save'),
+                'submit',
+                [
+                    'icon' => 'check'
+                ]
+            )
+        );
         $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
     }

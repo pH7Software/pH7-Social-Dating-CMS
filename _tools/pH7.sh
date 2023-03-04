@@ -5,9 +5,9 @@
 # Description:     To work correctly, you have to execute this script when you're in the project root with your terminal (generally the parent folder of "_tools/").
 #                  (e.g., you@you:/path/to/root-project$ bash _tools/pH7.sh).
 #
-# Author:          Pierre-Henry Soria <hello@ph7cms.com>
-# Copyright:       (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
-# License:         MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+# Author:          Pierre-Henry Soria <hello@ph7builder.com>
+# Copyright:       (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+# License:         MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
 ##
 
 function init() {
@@ -172,13 +172,13 @@ function file-strict-permissions() {
 # Push the project into GitHub and Bitbucket repos
 function save-code() {
     # Bitbucket repo
-    _save-project-to-repo git@bitbucket.org:pH_7/ph7cms-social-dating-app-site-builder.git
+    _save-project-to-repo bitbucket git@bitbucket.org:pH_7/ph7cms-social-dating-app-site-builder.git
 
     # GitLab repo
-    _save-project-to-repo git@gitlab.com:pH-7/pH7CMS.git
+    _save-project-to-repo gitlab git@gitlab.com:pH-7/pH7Builder.git
 
     # GitHub repo
-    _save-project-to-repo git@github.com:pH7Software/pH7-Social-Dating-CMS.git
+    _save-project-to-repo github git@github.com:pH7Software/pH7-Social-Dating-CMS.git
 
     echo "Yaaay! Changes successfully saved into remote repos!"
 
@@ -310,8 +310,8 @@ function _cache-permissions() {
 
 # Save a git project to the specified repo (e.g. github, bitbucket)
 function _save-project-to-repo() {
-    git remote rm origin
-    git remote add origin $1
+    git remote rm  $1 # Remove remote name if it already exists
+    git remote add $1 $2
     git push
 }
 

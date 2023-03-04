@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Blog / Controller
  */
 
@@ -16,8 +16,8 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Parse\Emoticon;
 use PH7\Framework\Url\Header;
-use stdClass;
 use PH7\JustHttp\StatusCode;
+use stdClass;
 
 class MainController extends Controller
 {
@@ -221,7 +221,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    protected function imageToSocialMetaTags(stdClass $oPost)
+    protected function imageToSocialMetaTags(stdClass $oPost): void
     {
         $this->view->image_social_meta_tag = Blog::getThumb($oPost->blogId);
     }

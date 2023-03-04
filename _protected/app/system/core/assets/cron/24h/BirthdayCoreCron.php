@@ -2,12 +2,14 @@
 /**
  * @title            Birthday Cron Class
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2013-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2013-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / App / System / Core / Asset / Cron / 24H
- * @version          1.0
+ * @version          1.2
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -15,8 +17,7 @@ defined('PH7') or exit('Restricted access');
 
 class BirthdayCoreCron extends Cron
 {
-    /** @var int */
-    private $iNum;
+    private int $iNum;
 
     public function __construct()
     {
@@ -25,7 +26,7 @@ class BirthdayCoreCron extends Cron
         $this->send();
     }
 
-    private function send()
+    private function send(): void
     {
         $this->iNum = (new BirthdayCore)->sendMails();
 
@@ -36,10 +37,7 @@ class BirthdayCoreCron extends Cron
         }
     }
 
-    /**
-     * @return bool
-     */
-    private function hasBirthdays()
+    private function hasBirthdays(): bool
     {
         return $this->iNum === 0;
     }

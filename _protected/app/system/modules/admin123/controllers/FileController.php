@@ -2,59 +2,31 @@
 /**
  * @title          File Controller
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
- * @version        1.4
+ * @version        1.5
  * @history        Removed the functionality of deletions and adding files for security reasons and to maintain proper operations.
  */
 
 namespace PH7;
 
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
-use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Service\Suggestion;
-use PH7\Framework\Url\Header;
 
 class FileController extends Controller
 {
-    const PUBLIC_DIR_NAME = 'public';
-    const PROTECTED_DIR_NAME = 'protected';
-
-    const THEME_FILE_EXTS = [
+    private const THEME_FILE_EXTS = [
         '.tpl',
         '.css',
         '.js'
     ];
 
-    /** @var string */
-    private $sTitle;
+    private string $sTitle;
 
-    public function index()
-    {
-        Header::redirect(
-            Uri::get(PH7_ADMIN_MOD, 'file', 'display')
-        );
-    }
-
-    public function display($sDir = '')
-    {
-        /* Add the stylesheet files for the elFinder File Manager */
-        $this->design->addCss(PH7_STATIC . 'fileManager/css/', 'elfinder.css,theme.css');
-
-        $bIsProtectedDir = $sDir === self::PROTECTED_DIR_NAME;
-
-        $sIsDirTxt = $bIsProtectedDir ? t('Protected') : t('Public');
-        $this->sTitle = t('File Manager System | %0%', $sIsDirTxt);
-        $this->view->type = $bIsProtectedDir ? self::PROTECTED_DIR_NAME : self::PUBLIC_DIR_NAME;
-        $this->view->page_title = $this->view->h2_title = $this->sTitle;
-
-        $this->output();
-    }
-
-    public function themeDisplay()
+    public function themeDisplay(): void
     {
         $this->sTitle = t('Template Files');
 
@@ -64,7 +36,7 @@ class FileController extends Controller
         $this->output();
     }
 
-    public function mailDisplay()
+    public function mailDisplay(): void
     {
         $this->sTitle = t('Email Templates');
 
@@ -78,7 +50,7 @@ class FileController extends Controller
         $this->output();
     }
 
-    public function banDisplay()
+    public function banDisplay(): void
     {
         $this->sTitle = t('Banned Files');
 
@@ -88,7 +60,7 @@ class FileController extends Controller
         $this->output();
     }
 
-    public function suggestionDisplay()
+    public function suggestionDisplay(): void
     {
         $this->sTitle = t('Suggestion Files');
 
@@ -98,7 +70,7 @@ class FileController extends Controller
         $this->output();
     }
 
-    public function pageDisplay()
+    public function pageDisplay(): void
     {
         $this->sTitle = t('Pages');
 
@@ -111,7 +83,7 @@ class FileController extends Controller
         $this->output();
     }
 
-    public function somethingProtectedAppDisplay()
+    public function somethingProtectedAppDisplay(): void
     {
         $this->displayAction(PH7_PATH_APP . $this->httpRequest->get('dir'));
         $this->manualTplInclude('protecteddisplay.inc.tpl');
@@ -119,7 +91,7 @@ class FileController extends Controller
         $this->output();
     }
 
-    public function publicEdit()
+    public function publicEdit(): void
     {
         $this->sTitle = t('Edit Public Files');
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
@@ -127,7 +99,7 @@ class FileController extends Controller
         $this->output();
     }
 
-    public function protectedEdit()
+    public function protectedEdit(): void
     {
         $this->sTitle = t('Edit Protected Files');
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
@@ -140,10 +112,8 @@ class FileController extends Controller
      *
      * @param string $sFile Full path.
      * @param string|array|null $mExt Retrieves only files with specific extensions.
-     *
-     * @return void
      */
-    private function displayAction($sFile, $mExt = null)
+    private function displayAction(string $sFile, string|array|null $mExt = null): void
     {
         if (!$this->isPageTitleSet()) {
             $this->sTitle = t('File Manager');
@@ -153,10 +123,7 @@ class FileController extends Controller
         $this->view->filesList = $this->file->getFileList($sFile, $mExt);
     }
 
-    /**
-     * @return bool
-     */
-    private function isPageTitleSet()
+    private function isPageTitleSet(): bool
     {
         return !empty($this->sTitle);
     }

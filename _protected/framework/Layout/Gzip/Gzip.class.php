@@ -2,9 +2,9 @@
 /**
  * @desc             Compression and optimization of static files.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Layout / Gzip
  */
 
@@ -25,74 +25,59 @@ use PH7\JustHttp\StatusCode;
 
 class Gzip
 {
-    const REGEX_IMAGE_FORMAT = '/url\([\'"]*(.+?\.)(gif|png|jpg|jpeg|otf|eot|ttf|woff|svg)[\'"]*\)*/msi';
-    const REGEX_JS_INCLUDE_FORMAT = '/include\([\'"]*(.+?\.)(js)[\'"]*\)\s{0,};/msi';
-    const REGEX_CSS_IMPORT_FORMAT = '/@import\s+url\([\'"]*(.+?\.)(css)[\'"]*\)\s{0,};/msi';
-    const CACHE_DIR = 'pH7_static/';
-    const MAX_IMG_SIZE_BASE64_CONVERTOR = 24000; // 24KB
-    const GZIP_COMPRESS_LEVEL = 9;
+    public const CACHE_DIR = 'pH7_static/';
+    public const MAX_IMG_SIZE_BASE64_CONVERTOR = 24000; // 24KB
 
-    const HTML_NAME = 'html';
-    const CSS_NAME = 'css';
-    const JS_ABBR_NAME = 'js';
-    const JS_NAME = 'javascript';
+    private const REGEX_IMAGE_FORMAT = '/url\([\'"]*(.+?\.)(gif|png|jpg|jpeg|otf|eot|ttf|woff|svg)[\'"]*\)*/msi';
+    private const REGEX_JS_INCLUDE_FORMAT = '/include\([\'"]*(.+?\.)(js)[\'"]*\)\s{0,};/msi';
+    private const REGEX_CSS_IMPORT_FORMAT = '/@import\s+url\([\'"]*(.+?\.)(css)[\'"]*\)\s{0,};/msi';
 
-    const ASSET_FILES_ACCEPTED = [
+    private const GZIP_COMPRESS_LEVEL = 9;
+
+    private const HTML_NAME = 'html';
+    private const CSS_NAME = 'css';
+    private const JS_ABBR_NAME = 'js';
+    private const JS_NAME = 'javascript';
+
+    private const ASSET_FILES_ACCEPTED = [
         self::HTML_NAME,
         self::CSS_NAME,
         self::JS_ABBR_NAME
     ];
 
+    private File $oFile;
 
-    /** @var File */
-    private $oFile;
+    private HttpRequest $oHttpRequest;
 
-    /** @var HttpRequest */
-    private $oHttpRequest;
+    private string $sBase;
 
-    /** @var string */
-    private $sBase;
+    private string $sBaseUrl;
 
-    /** @var string */
-    private $sBaseUrl;
+    private string $sType;
 
-    /** @var string */
-    private $sType;
+    private string $sDir;
 
-    /** @var string */
-    private $sDir;
+    private string $sFiles;
 
-    /** @var string */
-    private $sFiles;
+    private string $sContents;
 
-    /** @var string */
-    private $sContents;
+    private string $sCacheDir;
 
-    /** @var string */
-    private $sCacheDir;
+    private ?string $sIfModifiedDate;
 
-    /** @var array */
-    private $aElements;
+    private array $aElements;
 
-    /** @var integer */
-    private $iIfModified;
+    private bool $bCaching;
 
-    /** @var boolean */
-    private $bCaching;
+    private bool $bCompressor;
 
-    /** @var boolean */
-    private $bCompressor;
+    private bool $bDataUri;
 
-    /** @var boolean */
-    private $bDataUri;
+    private bool $bGzipContent;
 
-    /** @var boolean */
-    private $bGzipContent;
+    private bool $bIsGzip;
 
-    /** @var boolean */
-    private $bIsGzip;
-
-    /** @var string|boolean */
+    /** @var string|bool */
     private $mEncoding;
 
     public function __construct()
@@ -115,17 +100,15 @@ class Gzip
      *
      * @param string $sCacheDir
      *
-     * @return void
-     *
      * @throws PH7InvalidArgumentException If the cache directory does not exist.
      */
-    public function setCacheDir($sCacheDir)
+    public function setCacheDir(string $sCacheDir): void
     {
         if (is_dir($sCacheDir)) {
             $this->sCacheDir = $sCacheDir;
         } else {
             throw new PH7InvalidArgumentException(
-                sprintf('%s cache directory cannot be found!', $sCacheDir)
+                sprintf('"%s" cache directory cannot be found!', $sCacheDir)
             );
         }
     }
@@ -133,11 +116,10 @@ class Gzip
     /**
      * Displays compressed files.
      *
-     * @return void
-     *
      * @throws Exception If the cache file couldn't be written or read.
+     * @throws \PH7\Framework\Http\Exception If HTTP headers have already been sent.
      */
-    public function run()
+    public function run(): void
     {
         if (!$this->isValidStaticTypeFile()) {
             Http::setHeadersByCode(StatusCode::SERVICE_UNAVAILABLE);
@@ -190,18 +172,16 @@ class Gzip
     /**
      * Set Caching.
      *
-     * @return string The cached contents.
-     *
      * @throws PermissionException If the cache directory couldn't be created.
      * @throws Exception If the cache file couldn't be written or read.
      */
-    public function cache()
+    public function cache(): void
     {
         $this->checkCacheDir();
 
         $oBrowser = new Browser;
 
-        $this->iIfModified = !empty($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? substr($_SERVER['HTTP_IF_MODIFIED_SINCE'], 0, 29) : null;
+        $this->sIfModifiedDate = $oBrowser->getIfModifiedSince();
 
         $this->sCacheDir .= $this->oHttpRequest->get('t') . PH7_DS;
         $this->oFile->createDir($this->sCacheDir);
@@ -224,7 +204,7 @@ class Gzip
                 $this->getContents();
 
                 // Store the file in the cache
-                if (!$this->oFile->putFile($sFullCacheFile, $this->sContents)) {
+                if ($this->oFile->putFile($sFullCacheFile, $this->sContents) === false) {
                     throw new Exception('Cannot write cache file: ' . $sFullCacheFile);
                 }
             }
@@ -246,10 +226,8 @@ class Gzip
 
     /**
      * Routing for files compressing.
-     *
-     * @return void
      */
-    protected function makeCompress()
+    protected function makeCompress(): void
     {
         $oCompress = new Compress;
 
@@ -275,11 +253,9 @@ class Gzip
     }
 
     /**
-     * Transform the contents into a gzip compressed string.
-     *
-     * @return void
+     * Transforms the contents into a gzip compressed string.
      */
-    protected function gzipContent()
+    protected function gzipContent(): void
     {
         $this->sContents = gzencode(
             $this->sContents,
@@ -288,12 +264,7 @@ class Gzip
         );
     }
 
-    /**
-     * Get contents of the files.
-     *
-     * @return void
-     */
-    protected function getContents()
+    protected function getContents(): void
     {
         $this->sContents = '';
         foreach ($this->aElements as $sElement) {
@@ -324,10 +295,7 @@ class Gzip
         }
     }
 
-    /**
-     * @return void
-     */
-    protected function setHeaders()
+    protected function setHeaders(): void
     {
         // Send Content-Type
         header('Content-Type: text/' . $this->sType);
@@ -341,11 +309,11 @@ class Gzip
     }
 
     /**
-     * Check if gzip is activate.
+     * Check if gzip is activated.
      *
-     * @return boolean Returns FALSE if compression is disabled or is not valid, otherwise returns TRUE
+     * @return bool Returns FALSE if compression is disabled or is not valid, otherwise returns TRUE
      */
-    protected function isGzip()
+    protected function isGzip(): bool
     {
         $this->mEncoding = (new Browser)->encoding();
 
@@ -354,10 +322,8 @@ class Gzip
 
     /**
      * Parser the CSS/JS variables in cascading style sheets and JavaScript files.
-     *
-     * @return void
      */
-    protected function parseVariable()
+    protected function parseVariable(): void
     {
         $sBaseUrl = $this->sBaseUrl;
 
@@ -372,10 +338,7 @@ class Gzip
         $this->setVariables(include('variables.inc.php'));
     }
 
-    /**
-     * @return void
-     */
-    protected function getSubCssFile()
+    protected function getSubCssFile(): void
     {
         // We also collect the files included in the CSS files. So we can also cache and compressed.
         preg_match_all(self::REGEX_CSS_IMPORT_FORMAT, $this->sContents, $aHit, PREG_PATTERN_ORDER);
@@ -386,10 +349,7 @@ class Gzip
         }
     }
 
-    /**
-     * @return void
-     */
-    protected function getSubJsFile()
+    protected function getSubJsFile(): void
     {
         // We also collect the files included in the JavaScript files. So we can also cache and compressed.
         preg_match_all(self::REGEX_JS_INCLUDE_FORMAT, $this->sContents, $aHit, PREG_PATTERN_ORDER);
@@ -401,11 +361,9 @@ class Gzip
     }
 
     /**
-     * Get the images into the CSS files.
-     *
-     * @return void
+     * Gets the images into the CSS files.
      */
-    private function getImageIntoCss()
+    private function getImageIntoCss(): void
     {
         preg_match_all(self::REGEX_IMAGE_FORMAT, $this->sContents, $aHit, PREG_PATTERN_ORDER);
 
@@ -430,13 +388,13 @@ class Gzip
     }
 
     /**
-     * Set CSS/JS variables.
+     * Sets CSS/JS variables.
      *
      * @param array $aVars Variable names containing the values.
      *
      * @return void
      */
-    private function setVariables(array $aVars)
+    private function setVariables(array $aVars): void
     {
         // Replace the variable name by the content
         foreach ($aVars as $sKey => $sVal) {
@@ -444,7 +402,7 @@ class Gzip
         }
     }
 
-    private function setCachedDateHeaderComment()
+    private function setCachedDateHeaderComment(): void
     {
         $this->sContents = '/*Cached on ' . gmdate('d M Y H:i:s') . '*/' . File::EOL . $this->sContents;
     }
@@ -452,10 +410,8 @@ class Gzip
     /**
      * Checks if the cache directory has been defined otherwise we create a default directory.
      * If the directory cache does not exist, it creates a directory.
-     *
-     * @return void
      */
-    private function checkCacheDir()
+    private function checkCacheDir(): void
     {
         $this->sCacheDir = empty($this->sCacheDir) ? PH7_PATH_CACHE . static::CACHE_DIR : $this->sCacheDir;
     }
@@ -465,7 +421,7 @@ class Gzip
      *
      * @return bool
      */
-    private function isSourceStaticFileExists($sSourcePath)
+    private function isSourceStaticFileExists(string $sSourcePath): bool
     {
         return is_file($sSourcePath) && substr($sSourcePath, 0, strlen($this->sBase)) === $this->sBase;
     }
@@ -476,40 +432,29 @@ class Gzip
      *
      * @return bool Returns TRUE if the cache has expired, FALSE otherwise.
      */
-    private function hasCacheExpired($sSourcePath, $sFullCacheFile)
+    private function hasCacheExpired(string $sSourcePath, string $sFullCacheFile): bool
     {
         return $this->oFile->getModifTime($sSourcePath) > $this->oFile->getModifTime($sFullCacheFile);
     }
 
     /**
      * @param string $sSourcePath The (uncached) source static file.
-     *
-     * @return bool
      */
-    private function hasHttpHeaderExpired($sSourcePath)
+    private function hasHttpHeaderExpired(string $sSourcePath): bool
     {
-        return !empty($this->iIfModified) && $this->oFile->getModifTime($sSourcePath) > $this->iIfModified;
+        return !empty($this->sIfModifiedDate) && $this->oFile->getModifTime($sSourcePath) > $this->sIfModifiedDate;
     }
 
     /**
      * Returns TRUE if the image-file exists and if file-size is lower than 24 KB
-     *
-     * @param string $sImgPath
-     *
-     * @return bool
      */
-    private function isDataUriEligible($sImgPath)
+    private function isDataUriEligible(string $sImgPath): bool
     {
         return $this->bDataUri && is_file($sImgPath) &&
             $this->oFile->size($sImgPath) < self::MAX_IMG_SIZE_BASE64_CONVERTOR;
     }
 
-    /**
-     * @param string $sPath
-     *
-     * @return bool
-     */
-    private function isValidStaticFileExtension($sPath)
+    private function isValidStaticFileExtension(string $sPath): bool
     {
         return
             ($this->sType === self::HTML_NAME && substr($sPath, -5) === '.html') ||
@@ -519,10 +464,8 @@ class Gzip
 
     /**
      * Checks if the static type file is valid.
-     *
-     * @return bool
      */
-    private function isValidStaticTypeFile()
+    private function isValidStaticTypeFile(): bool
     {
         return $this->oHttpRequest->getExists('t') &&
             in_array($this->oHttpRequest->get('t'), self::ASSET_FILES_ACCEPTED, true);
@@ -535,7 +478,7 @@ class Gzip
      *
      * @return string The path without backslashes and/or double slashes.
      */
-    private function clearUrl($sPath)
+    private function clearUrl(string $sPath): string
     {
         return str_replace(['\\', '//'], '/', $sPath);
     }

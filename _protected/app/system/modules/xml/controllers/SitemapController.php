@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Xml / Controller
  */
 
@@ -17,6 +17,8 @@ use PH7\Framework\Xml\Link;
 
 class SitemapController extends MainController implements XmlControllable
 {
+    private const SITEMAP_TYPE = 'sitemap';
+
     public function __construct()
     {
         parent::__construct();
@@ -52,7 +54,7 @@ class SitemapController extends MainController implements XmlControllable
     {
         $sAction = $this->httpRequest->get('action', Type::STRING);
         $this->generateXmlRouter($sAction);
-        $this->sXmlType = 'sitemap';
+        $this->sXmlType = self::SITEMAP_TYPE;
         $this->view->current_date = DateFormat::getSitemap(); // Date format for sitemap
 
         // XML router
@@ -78,11 +80,18 @@ class SitemapController extends MainController implements XmlControllable
             case 'comment':
             case 'picture':
             case 'video':
+                $this->sAction = $sAction;
+                break;
+
             case 'comment-profile':
             case 'comment-blog':
             case 'comment-note':
             case 'comment-picture':
             case 'comment-video':
+                // Disable the cache since they are dynamic pages managed by the router
+                $this->view->setCaching(false);
+                $this->sAction = 'comment.inc';
+                break;
 
             default:
                 $this->displayPageNotFound(t('Sitemap Not Found!'));

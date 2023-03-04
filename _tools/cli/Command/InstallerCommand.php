@@ -29,8 +29,11 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class InstallerCommand extends Command
 {
     protected const SOFTWARE_NAME = 'pH7CMS';
+
     private const ROOT_PROJECT = PH7_ROOT_PROJECT;
     private const INSTALL_DIR_NAME = '_install/';
+
+    private const SUCCESS_MESSAGE = 'The installation is now completed! 🤗';
 
     protected function configure(): void
     {
@@ -111,7 +114,7 @@ class InstallerCommand extends Command
             }
 
             $output->writeln(
-                $io->success('The installation is now completed! 🤗')
+                $io->success(self::SUCCESS_MESSAGE)
             );
 
             return Command::SUCCESS;

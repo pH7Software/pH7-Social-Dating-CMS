@@ -2,11 +2,13 @@
 /**
  * @title            Advertisement Class
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2013-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Ads
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Ads;
 
@@ -21,7 +23,7 @@ use stdClass;
 
 class Ads
 {
-    const PARAM_URL = 'ad_click';
+    public const PARAM_URL = 'ad_click';
 
     /**
      * Output Advertisement.
@@ -31,7 +33,7 @@ class Ads
      *
      * @return string
      */
-    public static function output(stdClass $oData, HttpRequest $oHttpRequest)
+    public static function output(stdClass $oData, HttpRequest $oHttpRequest): string
     {
         // Update ad's statistic shows
         Statistic::setView($oData->adsId, DbTableName::AD);
@@ -43,13 +45,7 @@ class Ads
         return (new SysVar)->parse($oData->code);
     }
 
-    /**
-     * @param stdClass $oData
-     * @param HttpRequest $oHttpRequest
-     *
-     * @return bool
-     */
-    private static function hasAdBeenClicked(stdClass $oData, HttpRequest $oHttpRequest)
+    private static function hasAdBeenClicked(stdClass $oData, HttpRequest $oHttpRequest): bool
     {
         return $oHttpRequest->getExists(static::PARAM_URL) &&
             $oHttpRequest->get(static::PARAM_URL) == $oData->adsId;

@@ -1,6 +1,6 @@
 {
-  "name": "ph7software/ph7cms",
-  "description": "pH7CMS is a Professional Social/Dating App/Site Builder",
+  "name": "ph7software/ph7builder",
+  "description": "pH7Builder is a Professional Social/Dating App/Site Builder",
   "keywords": [
     "business builder",
     "community builder",
@@ -25,7 +25,7 @@
     "tinder"
   ],
   "type": "project",
-  "homepage": "https://ph7cms.com",
+  "homepage": "https://ph7builder.com",
   "license": "MIT",
   "authors": [
     {
@@ -37,16 +37,21 @@
   ],
   "config": {
     "platform": {
-      "php": "7.4"
+      "php": "8.0"
     },
     "vendor-dir": "_protected/vendor",
     "bin-dir": "_protected/vendor/bin",
     "cache-dir": "_protected/vendor/cache",
     "autoloader-suffix": "PH7",
-    "sort-packages": true
+    "preferred-install": "dist",
+    "optimize-autoloader": true,
+    "sort-packages": true,
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   },
   "require": {
-    "php": ">=7.4.0",
+    "php": "^8.0",
     "ext-curl": "*",
     "ext-dom": "*",
     "ext-exif": "*",
@@ -61,30 +66,33 @@
     "arcansecurity/skeerel-php": "^2.5",
     "arcturial/clickatell": "^3.0",
     "aws/aws-sdk-php": "^3.200",
-    "braintree/braintree_php": "^3.27",
-    "facebook/graph-sdk": "^5.6",
+    "braintree/braintree_php": "^4.8",
     "fakerphp/faker": "^1.9",
     "geoip2/geoip2": "~2.0",
-    "guzzlehttp/guzzle": "^6.3",
+    "guzzlehttp/guzzle": "^7.4",
+    "ph-7/cute-link-names": "^2.0",
     "ph-7/datatype": "^1.0",
+    "ph-7/html-to-text": "^2.0",
     "ph-7/just-http-status-codes": "^1.1",
     "ph-7/passcode-password-generator": "^2.0",
     "ph-7/ph2gravatar": "^2.0",
     "ph-7/qrcode-generator-php-class": "^2.1",
     "robthree/twofactorauth": "^1.6",
     "stripe/stripe-php": "^5.9",
-    "swiftmailer/swiftmailer": "^5.4",
-    "symfony/console": "^5.3",
+    "symfony/console": "^5.4",
+    "symfony/mailer": "^5.4",
     "twbs/bootstrap": "^3.4",
-    "twilio/sdk": "^5.28"
+    "twilio/sdk": "^6.44"
   },
   "require-dev": {
-    "phpunit/phpunit": "^9.5",
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
     "friendsofphp/php-cs-fixer": "^2.2",
-    "phake/phake": "^4.1"
+    "phake/phake": "^4.1",
+    "phpstan/phpstan": "^1.5",
+    "phpunit/phpunit": "^9.5"
   },
   "suggest": {
-    "symfony/thanks": "Thank your favorite PHP projects on GitHub (in the form of GitHub stars) using the CLI"
+    "symfony/thanks": "Thank your favorite PHP projects on GitHub (in the form of GitHub stars) using CLI"
   },
   "autoload": {
     "psr-4": {
@@ -98,17 +106,25 @@
   },
   "scripts": {
     "test": "_protected/vendor/bin/phpunit",
+    "test-ci": "_protected/vendor/bin/phpunit --coverage-text --coverage-clover=build/coverage.xml",
+    "analyse": "_protected/vendor/bin/phpstan analyse",
     "post-cmd": [
       "cp -R _protected/vendor/twbs/bootstrap/dist/css/bootstrap.min.css static/css/bootstrap.css",
       "cp -R _protected/vendor/twbs/bootstrap/dist/js/bootstrap.min.js static/js/bootstrap.js"
     ],
-    "post-install-cmd": ["@post-cmd"],
-    "post-update-cmd": ["@post-cmd"]
+    "post-install-cmd": [
+      "@post-cmd",
+      "@composer install --working-dir _install"
+    ],
+    "post-update-cmd": [
+      "@post-cmd",
+      "@composer update --working-dir _install"
+    ]
   },
   "minimum-stability": "stable",
   "support": {
     "source": "https://github.com/pH7Software/pH7-Social-Dating-CMS",
     "issues": "https://github.com/pH7Software/pH7-Social-Dating-CMS/issues",
-    "docs": "https://ph7cms.com/doc"
+    "docs": "https://ph7builder.com/doc"
   }
 }

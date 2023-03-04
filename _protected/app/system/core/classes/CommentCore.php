@@ -1,10 +1,12 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -17,8 +19,7 @@ use PH7\Framework\Session\Session;
 
 class CommentCore
 {
-    /** @var array */
-    private static $aLowercaseTableNames = [
+    private static array $aLowercaseTableNames = [
         'profile',
         'picture',
         'video',
@@ -44,7 +45,7 @@ class CommentCore
      *
      * @throws PH7InvalidArgumentException If the table is not valid.
      */
-    public static function checkTable($sTable)
+    public static function checkTable(string $sTable)
     {
         $sTable = strtolower($sTable); // Case insensitivity
 
@@ -56,23 +57,15 @@ class CommentCore
     }
 
     /**
-     * @param HttpRequest $oHttpRequest
-     * @param Session $oSession
-     *
-     * @return bool
-     *
      * @internal Since the ID digits might be string or integer, it won't work if we use the identity operator (===)
      */
-    public static function isRemovalEligible(HttpRequest $oHttpRequest, Session $oSession)
+    public static function isRemovalEligible(HttpRequest $oHttpRequest, Session $oSession): bool
     {
         return ($oSession->get('member_id') == $oHttpRequest->post('recipient_id') ||
                 $oSession->get('member_id') == $oHttpRequest->post('sender_id')) || AdminCore::auth();
     }
 
-    /**
-     * @return void
-     */
-    public static function clearCache()
+    public static function clearCache(): void
     {
         (new Cache)->start(
             CommentCoreModel::CACHE_GROUP,
@@ -81,12 +74,7 @@ class CommentCore
         )->clear();
     }
 
-    /**
-     * @param string $sTable
-     *
-     * @return bool
-     */
-    private static function doesTableNameExist($sTable)
+    private static function doesTableNameExist(string $sTable): bool
     {
         return in_array($sTable, self::$aLowercaseTableNames, true);
     }

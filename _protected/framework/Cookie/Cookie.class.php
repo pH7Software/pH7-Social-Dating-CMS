@@ -1,13 +1,14 @@
 <?php
 /**
- * @title            Cookie Class
  * @desc             Handler Cookie
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Cookie
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Cookie;
 
@@ -25,10 +26,8 @@ class Cookie
      * @param string|null $sValue value of the cookie, Optional if the cookie data is in an array.
      * @param int|null $iTime The time the cookie expires. This is a Unix timestamp.
      * @param bool|null $bSecure If TRUE cookie will only be sent over a secure HTTPS connection from the client.
-     *
-     * @return void
      */
-    public function set($mName, $sValue = null, $iTime = null, $bSecure = null)
+    public function set($mName, ?string $sValue = null, ?int $iTime = null, ?bool $bSecure = null): void
     {
         $iTime = time() + ((int)!empty($iTime) ? $iTime : Config::getInstance()->values['cookie']['expiration']);
         $bSecure = !empty($bSecure) && is_bool($bSecure) ? $bSecure : Server::isHttps();
@@ -40,7 +39,7 @@ class Cookie
         } else {
             $sCookieName = Config::getInstance()->values['cookie']['prefix'] . $mName;
 
-            /* Check if we are not in localhost mode, otherwise may not work. */
+            /* Check if we are not in localhost mode, otherwise may not work */
             if (!Server::isLocalHost()) {
                 setcookie(
                     $sCookieName,
@@ -68,13 +67,13 @@ class Cookie
      * @param string $sName Name of the cookie.
      * @param bool|null $bEscape
      *
-     * @return string If the cookie exists, returns the cookie with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the cookie doesn't exist.
+     * @return mixed If the cookie exists, returns the cookie with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the cookie doesn't exist.
      */
-    public function get($sName, $bEscape = true)
+    public function get(string $sName, ?bool $bEscape = true)
     {
         $sCookieName = Config::getInstance()->values['cookie']['prefix'] . $sName;
 
-        return (isset($_COOKIE[$sCookieName]) ? ($bEscape ? escape($_COOKIE[$sCookieName]) : $_COOKIE[$sCookieName]) : '');
+        return (isset($_COOKIE[$sCookieName]) ? ($bEscape && is_string($_COOKIE[$sCookieName]) ? escape($_COOKIE[$sCookieName]) : $_COOKIE[$sCookieName]) : '');
     }
 
     /**
@@ -84,7 +83,7 @@ class Cookie
      *
      * @return bool
      */
-    public function exists($mName)
+    public function exists($mName): bool
     {
         $bExists = false; // Default value
 
@@ -105,10 +104,8 @@ class Cookie
      * Delete the cookie(s) key if the cookie exists.
      *
      * @param array|string $mName Name of the cookie to delete.
-     *
-     * @return void
      */
-    public function remove($mName)
+    public function remove($mName): void
     {
         if (is_array($mName)) {
             foreach ($mName as $sName) {
@@ -124,7 +121,7 @@ class Cookie
             if (!Server::isLocalHost()) {
                 setcookie(
                     $sCookieName,
-                    0,
+                    '',
                     0,
                     Config::getInstance()->values['cookie']['path'],
                     Config::getInstance()->values['cookie']['domain'],
@@ -132,10 +129,10 @@ class Cookie
                     true
                 );
             } else {
-                setcookie($sCookieName, 0, 0, PH7_SH);
+                setcookie($sCookieName, '', 0, PH7_SH);
             }
 
-            // then, we delete the cookie value locally to avoid using it by mistake in following our script
+            // then, we delete the cookie value locally to avoid using it by mistake later on in the script
             unset($_COOKIE[$sCookieName]);
         }
     }

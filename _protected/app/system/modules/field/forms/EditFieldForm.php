@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2013-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Field / Form
  */
 
@@ -22,6 +22,8 @@ use PH7\Framework\Url\Header;
 
 class EditFieldForm
 {
+    use HtmlForm;
+
     public static function display()
     {
         if (isset($_POST['submit_edit_field'])) {
@@ -57,15 +59,20 @@ class EditFieldForm
             new Textbox(
                 t('Field Name:'),
                 'name',
-                [
-                    'description' => t('Field Name must contain 2-30 alphanumeric characters ([a-z], [A-Z], [0-9] and [_]). Then, you can translate the language key in <span class="italic underline">%0%</span>', PH7_PATH_APP_LANG . PH7_LANG_NAME . PH7_DS . 'language.php'),
-                    'value' => (new Http)->get('name'),
-                    'pattern' => $sFieldPattern,
-                    'title' => t('Field name must contain 2-30 alphanumeric characters ([a-z], [A-Z], [0-9] and [_]).'),
-                    'required' => 1,
-                    'validation' => new RegExp($sFieldPattern)
-                ]
-            ));
+                array_merge(
+                    [
+                        'description' => t('Field Name must contain 2-30 alphanumeric characters ([a-z], [A-Z], [0-9] and [_]). Then, you can translate the language key in <span class="italic underline">%0%</span>', PH7_PATH_APP_LANG . PH7_LANG_NAME . PH7_DS . 'language.php'),
+                        'value' => (new Http)->get('name'),
+                        'pattern' => $sFieldPattern,
+                        'required' => 1,
+                        'validation' => new RegExp($sFieldPattern),
+                    ],
+                    self::setCustomValidity(
+                        t('Field name must contain 2-30 alphanumeric characters ([a-z], [A-Z], [0-9] and [_]).')
+                    )
+                )
+            )
+        );
         $oForm->addElement(
             new Number(
                 t('Length Field:'),

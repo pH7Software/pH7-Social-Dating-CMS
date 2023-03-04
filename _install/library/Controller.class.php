@@ -2,10 +2,10 @@
 /**
  * @title            Controller Core Class
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
- * @link             http://ph7cms.com
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
+ * @link             http://ph7builder.com
  * @package          PH7 / Install / Library
  */
 
@@ -19,38 +19,31 @@ use Smarty;
 
 abstract class Controller implements Controllable
 {
-    const PHP_TIMEZONE_DIRECTIVE = 'date.timezone';
-    const VIEW_CACHE_LIFETIME = 24 * 3600; //thanks PHP5.6 for scalar expr in consts
+    public const SOFTWARE_NAME = 'pH7Builder';
+    public const DEFAULT_SITE_NAME = 'My Dating WebApp';
+    public const DEFAULT_ADMIN_USERNAME = 'administrator';
+    public const SOFTWARE_PREFIX_COOKIE_NAME = 'pH7';
+    public const SOFTWARE_WEBSITE = 'https://ph7builder.com';
+    public const SOFTWARE_REQUIREMENTS_URL = 'https://ph7builder.com/doc/en/requirements';
+    public const PAYPAL_DONATE_URL = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6';
+    public const PATREON_URL = 'https://www.patreon.com/bePatron?u=3534366';
+    public const SOFTWARE_AUTHOR = 'Pierre-Henry Soria';
+    public const AUTHOR_URL = 'https://github.com/pH-7';
+    public const SOFTWARE_GIT_REPO_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS';
+    public const SOFTWARE_TWITTER = '@pH7Soft';
+    public const SOFTWARE_COPYRIGHT = '© (c) 2012-%s, Pierre-Henry Soria. All Rights Reserved.';
 
-    const SOFTWARE_NAME = 'pH7CMS';
-    const DEFAULT_SITE_NAME = 'My Dating WebApp';
-    const DEFAULT_ADMIN_USERNAME = 'administrator';
-    const SOFTWARE_PREFIX_COOKIE_NAME = 'pH7';
-    const SOFTWARE_WEBSITE = 'https://ph7cms.com';
-    const SOFTWARE_REQUIREMENTS_URL = 'https://ph7cms.com/doc/en/requirements';
-    const PAYPAL_DONATE_URL = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6';
-    const PATREON_URL = 'https://www.patreon.com/bePatron?u=3534366';
-    const SOFTWARE_AUTHOR = 'Pierre-Henry Soria';
-    const AUTHOR_URL = 'https://github.com/pH-7';
-    const SOFTWARE_GIT_REPO_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS';
-    const SOFTWARE_TWITTER = '@pH7Soft';
-    const SOFTWARE_LICENSE = 'MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.';
-    const SOFTWARE_COPYRIGHT = '© (c) 2012-%s, Pierre-Henry Soria. All Rights Reserved.';
-    const TOTAL_INSTALL_STEPS = 7;
+    public const SOFTWARE_VERSION_NAME = 'SENSATION';
+    public const SOFTWARE_VERSION = '18.0.0';
 
-    /**
-     * VERSION NAMES:
-     *
-     * 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO",
-     * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH", 10.* was "pKa", 12.* was "PHS", 14.* was "pKb", 15.* was ABSOLUTE™ and v16 is ACIDIC
-     */
-    const SOFTWARE_VERSION_NAME = 'ABSOLUTE™';
-    const SOFTWARE_VERSION = '16.5.0';
+    public const SOFTWARE_BUILD = '1';
 
-    const SOFTWARE_BUILD = '1';
+    public const DEFAULT_LANG = 'en';
+    public const DEFAULT_THEME = 'base';
 
-    const DEFAULT_LANG = 'en';
-    const DEFAULT_THEME = 'base';
+    private const PHP_TIMEZONE_DIRECTIVE = 'date.timezone';
+    private const VIEW_CACHE_LIFETIME = 24 * 3600; //thanks PHP5.6 for scalar expr in consts
+    private const TOTAL_INSTALL_STEPS = 7;
 
     protected Smarty $oView;
 
@@ -97,8 +90,6 @@ abstract class Controller implements Controllable
     /**
      * Check if the session is already initialized (thanks to "session_status()" PHP >= 5.4).
      * And initialize it if it isn't the case.
-     *
-     * @return void
      */
     protected function initializePHPSession(): void
     {
@@ -109,8 +100,6 @@ abstract class Controller implements Controllable
 
     /**
      * Set a default timezone if it is not already configured.
-     *
-     * @return void
      */
     protected function checkTimezone(): void
     {

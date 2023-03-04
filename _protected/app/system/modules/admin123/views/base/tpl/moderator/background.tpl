@@ -20,6 +20,6 @@
     {main_include 'page_nav.inc.tpl'}
 {else}
     <p class="center">
-        {lang 'No Profile Backgrounds found for the moderation treatment.'}
+        {lang 'No Profile Backgrounds found for moderation treatments.'}
     </p>
 {/if}

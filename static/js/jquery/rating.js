@@ -53,9 +53,10 @@
                 getStarWidth();
                 $(this).height(starHeight);
 
-                var average = parseFloat($(this).attr('id').split('_')[0]),
-                    id = parseInt($(this).attr('id').split('_')[1]), // get the id of the box for database
-                    table = $(this).attr('id').split('_')[2], // Table
+                const idAttribute = $(this).attr('id');
+                var average = parseFloat(idAttribute.split('_')[0]),
+                    id = parseInt(idAttribute.split('_')[1]), // get the id of the box for database
+                    table = (typeof idAttribute.split('_')[3] !== 'undefined') ? idAttribute.split('_')[2] + '_' + idAttribute.split('_')[3] : idAttribute.split('_')[2], // Table
                     widthRatingContainer = starWidth * opts.length, // Width of the Container
                     widthColor = average / opts.rateMax * widthRatingContainer, // Width of the color Container
 
@@ -142,8 +143,8 @@
                             average.width(newWidth);
 
                             $.post(opts.url, {
-                                    id: id,
-                                    table: table,
+                                    id,
+                                    table,
                                     score: rate,
                                     action: 'rating'
                                 },

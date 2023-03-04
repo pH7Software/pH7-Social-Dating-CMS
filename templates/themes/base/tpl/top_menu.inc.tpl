@@ -99,19 +99,12 @@
 
 
     {* Guest, Member and LoginUserAs from Admin Panel *}
-      {if (!$is_aff_auth AND !$is_admin_auth) OR $admin_logged_as_user}
-        {if $is_chat_enabled OR $is_chatroulette_enabled}
-          <li class="dropdown"><a href="#" title="{lang 'Free Social Dating Chat Rooms'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-weixin"></i> {lang 'Chat'} <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              {if $is_chat_enabled}
-                <li><a href="{{ $design->url('chat','home','index') }}" rel="nofollow" title="{lang 'Chat Rooms'}" data-load="ajax"><i class="fa fa-weixin"></i> {lang 'Chat'}</a></li>
-              {/if}
-
-              {if $is_chatroulette_enabled}
-                <li><a href="{{ $design->url('chatroulette','home','index') }}" title="{lang 'Chat Roulette'}"><i class="fa fa-random"></i> {lang 'Chatroulette'}</a></li>
-              {/if}
-
-            </ul>
+    {if (!$is_aff_auth AND !$is_admin_auth) OR $admin_logged_as_user}
+        {if $is_chat_enabled}
+          <li>
+            <a href="{{ $design->url('chat','home','index') }}" title="{lang 'Chat Rooms'}" data-load="ajax">
+              <i class="fa fa-weixin"></i> {lang 'Chat'}
+            </a>
           </li>
         {/if}
 
@@ -142,9 +135,9 @@
         {/if}
 
         {if $is_forum_enabled}
-          <li class="dropdown"><a href="{{ $design->url('forum','forum','index') }}" title="{lang 'Forums'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-comments"></i> {lang 'Forum'} <span class="caret"></span></a>
+          <li class="dropdown"><a href="{{ $design->url('forum','forum','index') }}" title="{lang 'Discussions Board'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-comments-o"></i> {lang 'Discussions'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="{{ $design->url('forum','forum','index') }}" rel="nofollow" title="{lang 'Forums'}" data-load="ajax"><i class="fa fa-comments"></i> {lang 'Forum'}</a></li>
+              <li><a href="{{ $design->url('forum','forum','index') }}" rel="nofollow" title="{lang 'Discussions Board'}" data-load="ajax"><i class="fa fa-comments-o"></i> {lang 'Discussions'}</a></li>
               <li><a href="{{ $design->url('forum','forum','search') }}" title="{lang 'Search Topics'}" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search'}</a></li>
             </ul>
           </li>
@@ -328,8 +321,12 @@
             <i class="fa fa-puzzle-piece"></i> {lang 'Mod'} <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','disable') }}" title="{lang 'Enable/Disable System Modules'}"><i class="fa fa-toggle-on"></i> {lang 'Enable/Disable Modules'}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{lang 'Third-party Modules Manager'}"><i class="fa fa-plug"></i> {lang '3rd-party Mods Manager'}</a></li>
+            <li>
+              <a href="{{ $design->url(PH7_ADMIN_MOD,'module','disable') }}" title="{lang 'Enable/Disable System Modules'}"><i class="fa fa-toggle-on"></i> {lang 'Enable/Disable Modules'}</a>
+            </li>
+            <li>
+              <a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{lang 'Third-party Modules Manager'}"><i class="fa fa-plug"></i> {lang '3rd-party Mods Manager'}</a>
+            </li>
 
             {if $is_newsletter_enabled}
               <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('newsletter', 'admin', 'index') }}" title="{lang 'Mass Mailer'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-newspaper-o"></i> {lang 'Newsletters'}</a>
@@ -347,11 +344,11 @@
             {/if}
 
             {if $is_forum_enabled}
-              <li><a href="{{ $design->url('forum','admin','index') }}" title="{lang 'Forum - Admin Mode'}"><i class="fa fa-comments"></i> {lang 'Forum'}</a></li>
+              <li><a href="{{ $design->url('forum','admin','index') }}" title="{lang 'Discussions Board - Admin Mode'}"><i class="fa fa-comments-o"></i> {lang 'Discussions'}</a></li>
             {/if}
 
             {if $is_blog_enabled}
-              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('blog','admin','index') }}" title="{lang 'Admin Blog'}"><i class="fa fa-commenting-o"></i> {lang 'Blog'}</a>
+              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('blog','admin','index') }}" title="{lang 'Admin Blog'}"><i class="fa fa-comments-o"></i> {lang 'Blog'}</a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="{{ $design->url('blog','admin','index') }}" title="{lang 'Admin Control - Blog'}">{lang 'Admin Blog'}</a></li>
                   <li><a href="{{ $design->url('blog','admin','add') }}" title="{lang 'Add a Blog Post'}">{lang 'Add a Post'}</a></li>
@@ -411,11 +408,6 @@
             {if $is_smsverification_enabled}
               <li><a href="{{ $design->url('sms-verification', 'admin', 'config') }}"><i class="fa-user-check"></i> {lang 'SMS Gateway Verification APIs'}</a></li>
             {/if}
-
-            {if $is_connect_enabled}
-              <li><a href="{{ $design->url('connect', 'admin', 'config') }}"><i class="fa fa-share-alt-square"></i> {lang 'Universal Login Setting'}</a></li>
-            {/if}
-
           </ul>
         </li>
 
@@ -465,12 +457,10 @@
         </li>
 
         <li class="dropdown">
-          <a href="{{ $design->url(PH7_ADMIN_MOD,'file','index') }}" title="{lang 'File/Page CMS'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">
+          <a href="{{ $design->url(PH7_ADMIN_MOD,'file','pagedisplay') }}" title="{lang 'File/Page CMS'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">
             <i class="fa fa-file"></i> {lang 'File/Page'} <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','display') }}" title="{lang 'Public File Manager'}"><i class="fa fa-file"></i> {lang 'Public Files'}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','display','protected') }}" title="{lang 'Protected File Manager'}"><i class="fa fa-file"></i> {lang 'Protected Files'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','pagedisplay') }}" title="{lang 'Display Static Pages'}"><i class="fa fa-pencil-square-o"></i> {lang 'Page Module'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','maildisplay') }}" title="{lang 'Display Email Template'}"><i class="fa fa-pencil"></i> {lang 'Email Template'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','themedisplay') }}" title="{lang 'Display all Templates Files'}"><i class="fa fa-paint-brush"></i> {lang 'Templates Files'}</a></li>
@@ -527,8 +517,8 @@
             <li><a class="bold" href="{{ $design->url('ph7cms-helper','main','suggestionbox','?box=donationbox') }}" title="{lang 'Will You Be Nice Today? Like 81% of our users who contribute on a regular basis.'}"><i class="fa fa-trophy"></i> {lang 'Will You Be Nice Today?'}</a></li>
             <li><a href="{software_doc_url}" title="{lang 'Software Documentation'}"><i class="fa fa-book"></i> {lang 'Documentation'}</a></li>
             <li><a href="{software_issue_url}" title="{lang 'Report a Problem'}"><i class="fa fa-bug"></i> {lang 'Report a Bug'}</a></li>
-            <li><a href="{software_forum_url}" title="{lang 'Discussions Board'}"><i class="fa fa-bug"></i> {lang 'Forums'}</a></li>
-            <li><a href="{software_review_url}" title="{lang 'Help pH7CMS by giving a nice review! Highly appreciated :)'}"><i class="fa fa-heart"></i> {lang 'Give Nice Review'}</a></li>
+            <li><a href="{software_forum_url}" title="{lang 'Discussions Board'}"><i class="fa fa-group"></i> {lang 'Community Support'}</a></li>
+            <li><a href="{software_review_url}" title="{lang 'Help pH7Builder by giving a nice review! Highly appreciated :)'}"><i class="fa fa-heart"></i> {lang 'Give Nice Review'}</a></li>
           </ul>
         </li>
       {/if}

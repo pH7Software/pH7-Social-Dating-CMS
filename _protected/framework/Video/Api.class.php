@@ -1,13 +1,13 @@
 <?php
 /**
- * @title            Video API Class
- *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Video
- * @link             http://ph7cms.com
+ * @link             http://ph7builder.com
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Video;
 
@@ -17,10 +17,11 @@ use PH7\Framework\Http\Http;
 
 class Api
 {
-    const REGEX_URL_PATTERN = '#(^https?://|www\.|\.[a-z]{2,4}/?(.+)?$)#i';
+    private const REGEX_URL_PATTERN = '#(^https?://|www\.|\.[a-z]{2,4}/?(.+)?$)#i';
 
-    const DEF_VIDEO_WIDTH = 480;
-    const DEF_VIDEO_HEIGHT = 295;
+    private const DEF_VIDEO_WIDTH = 480;
+    private const DEF_VIDEO_HEIGHT = 295;
+    private const DEF_MEDIA_MODE = 'movie';
 
     /**
      * @param string $sUrl
@@ -29,7 +30,7 @@ class Api
      *
      * @throws InvalidApiProviderException
      */
-    public function getVideo($sUrl)
+    public function getVideo(string $sUrl)
     {
         $sVideoPlatform = $this->getVideoPlatformNameFromUrl($sUrl);
         $oApiProvider = ProviderFactory::create($sVideoPlatform);
@@ -40,12 +41,12 @@ class Api
     /**
      * @param string $sUrl The video URL.
      *
-     * @return Api\IApi|bool The Video API class (e.g. Api\Youtube, Api\Vimeo, ..) or FALSE if the data cannot be retrieved.
+     * @return Api\Apible|bool The Video API class (e.g. Api\Youtube, Api\Vimeo, ..) or FALSE if the data cannot be retrieved.
      *
      * @throws InvalidApiProviderException
      * @throws Api\InvalidApiKeyException If the YouTube API is invalid.
      */
-    public function getInfo($sUrl)
+    public function getInfo(string $sUrl)
     {
         $sVideoPlatform = $this->getVideoPlatformNameFromUrl($sUrl);
         $oApiProvider = ProviderFactory::create($sVideoPlatform);
@@ -56,16 +57,16 @@ class Api
     /**
      * @param string $sUrl
      * @param string $sMedia (preview or movie)
-     * @param int $iWidth
-     * @param int $iHeight
+     * @param int|string $iWidth
+     * @param int|string $iHeight
      *
      * @return string The HTML video integration code.
      *
      * @throws InvalidApiProviderException
      */
-    public function getMeta($sUrl, $sMedia, $iWidth, $iHeight)
+    public function getMeta(string $sUrl, string $sMedia, $iWidth, $iHeight)
     {
-        $sMedia = isset($sMedia) ? $sMedia : 'movie';
+        $sMedia = isset($sMedia) ? $sMedia : self::DEF_MEDIA_MODE;
         $iWidth = isset($iWidth) ? $iWidth : self::DEF_VIDEO_WIDTH;
         $iHeight = isset($iHeight) ? $iHeight : self::DEF_VIDEO_HEIGHT;
 
@@ -80,7 +81,7 @@ class Api
      *
      * @return string The name for the specific video platform.
      */
-    private function getVideoPlatformNameFromUrl($sUrl)
+    private function getVideoPlatformNameFromUrl(string $sUrl): string
     {
         $oHttp = new Http;
         if ($oHttp->detectSubdomain($sUrl)) {

@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
 
@@ -31,11 +31,11 @@ use PH7\Framework\Url\Header;
 
 class SettingForm
 {
-    const CHANGE_CHAT_DOC_URL = 'https://ph7cms.com/how-to-change-chat/';
-    const I18N_DOC_URL = 'https://ph7cms.com/doc/en/how-to-translate-to-another-language';
-    const GOOGLE_API_KEY_URL = 'https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend,places_backend&amp;keyType=CLIENT_SIDE&amp;reusekey=true';
+    private const CHANGE_CHAT_DOC_URL = 'https://ph7builder.com/how-to-change-chat/';
+    private const I18N_DOC_URL = 'https://ph7builder.com/doc/en/how-to-translate-to-another-language';
+    private const GOOGLE_API_KEY_URL = 'https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend,places_backend&amp;keyType=CLIENT_SIDE&amp;reusekey=true';
 
-    public static function display()
+    public static function display(): void
     {
         if (isset($_POST['submit_setting'])) {
             if (\PFBC\Form::isValid($_POST['submit_setting'])) {
@@ -174,7 +174,7 @@ class SettingForm
                     0 => t('Disable (NOT recommended)')
                 ],
                 [
-                    'description' => t('Are you proud of using <a href="%software_website%">pH7CMS</a> brand? Are you proud to say your dating app has been made by the Leading Dating Software provider?'),
+                    'description' => t('Are you proud of using <a href="%software_website%">pH7Builder</a> brand? Are you proud to say your dating app has been made by the Leading Dating Software provider?'),
                     'value' => DbConfig::getSetting('displayPoweredByLink'),
                     'required' => 1
                 ]
@@ -286,9 +286,9 @@ class SettingForm
 
         $oForm->addElement(new Select(t('Date of Birth field type:'), 'is_user_age_range_field', ['1' => t('Age Range (without month and day of birth)'), '0' => t('Date-Picker calendar (full date of birth)')], ['value' => DbConfig::getSetting('isUserAgeRangeField'), 'required' => 1]));
 
-        $oForm->addElement(new Select(t('Require photo to be uploaded:'), 'require_registration_avatar', ['1' => t('Yes'), '0' => t('No')], ['description' => t('Require Members to upload a profile photo during sign up.') . '<br /><small>' . t("Doesn't guarantee that all users will have a profile photo, because users can still close the tab without completely finishing the registration process.") . '</small>', 'value' => DbConfig::getSetting('requireRegistrationAvatar'), 'required' => 1]));
+        $oForm->addElement(new Select(t('Require photo to be uploaded:'), 'require_registration_avatar', ['1' => t('Yes'), '0' => t('No')], ['description' => t('Require members to upload a profile photo during sign up.') . '<br /><small>' . t("Doesn't guarantee that all users will have a profile photo, because users can still close the tab without completely finishing the registration process.") . '</small>', 'value' => DbConfig::getSetting('requireRegistrationAvatar'), 'required' => 1]));
 
-        $oForm->addElement(new Select(t('Default Membership Group:'), 'default_membership_group_id', self::getMembershipGroups(), ['value' => DbConfig::getSetting('defaultMembershipGroupId'), 'required' => 1]));
+        $oForm->addElement(new Select(t('Default Membership Group:'), 'default_membership_group_id', self::getMembershipGroups(), ['description' => t('The default membership where the users will be added to.'), 'value' => DbConfig::getSetting('defaultMembershipGroupId'), 'required' => 1]));
 
 
         /********** Picture and Video **********/
@@ -314,7 +314,7 @@ class SettingForm
         /********** Moderation **********/
         $oForm->addElement(new HTMLExternal('</div></div><div class="content" id="moderation"><div class="col-md-10"><h2 class="underline">' . t('Moderation') . '</h2>'));
 
-        $oForm->addElement(new Select(t('Nudity Filter:'), 'nudity_filter', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('Photos will be automatically pending approval if there are detected as "Nude/Adult Photos"'), 'value' => DbConfig::getSetting('nudityFilter'), 'required' => 1]));
+        $oForm->addElement(new Select(t('Nudity Filter:'), 'nudity_filter', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('Photos will be automatically pending approval if there are detected as "Nude/Adult" photos'), 'value' => DbConfig::getSetting('nudityFilter'), 'required' => 1]));
 
         $oForm->addElement(new Select(t('Profile Photo Manual Approval:'), 'avatar_manual_approval', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('avatarManualApproval'), 'required' => 1]));
 
@@ -354,15 +354,15 @@ class SettingForm
 
         $oForm->addElement(new Number(t('Maximum password length:'), 'max_password_length', ['value' => DbConfig::getSetting('maxPasswordLength'), 'required' => 1]));
 
-        $oForm->addElement(new HTMLExternal('<br /><h3 class="underline">' . t('Login Attempt Protection') . '</h3>'));
+        $oForm->addElement(new HTMLExternal('<br /><h3 class="underline">' . t('Protection - Failed Login Attempts') . '</h3>'));
 
-        $oForm->addElement(new Select(t('Blocking login attempts exceeded for Users:'), 'is_user_login_attempt', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('isUserLoginAttempt'), 'required' => 1]));
+        $oForm->addElement(new Select(t('Blocking exceeded login attempts for Users:'), 'is_user_login_attempt', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('isUserLoginAttempt'), 'required' => 1]));
 
         if ($bIsAffiliateEnabled) {
-            $oForm->addElement(new Select(t('Blocking login attempts exceeded for Affiliates:'), 'is_affiliate_login_attempt', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('isAffiliateLoginAttempt'), 'required' => 1]));
+            $oForm->addElement(new Select(t('Blocking exceeded login attempts for Affiliates:'), 'is_affiliate_login_attempt', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('isAffiliateLoginAttempt'), 'required' => 1]));
         }
 
-        $oForm->addElement(new Select(t('Blocking login attempts exceeded for Admins:'), 'is_admin_login_attempt', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('isAdminLoginAttempt'), 'required' => 1]));
+        $oForm->addElement(new Select(t('Blocking exceeded login attempts for Admins:'), 'is_admin_login_attempt', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('isAdminLoginAttempt'), 'required' => 1]));
 
         $oForm->addElement(new Number(t('Max number of login attempts before blocking for Users:'), 'max_user_login_attempts', ['value' => DbConfig::getSetting('maxUserLoginAttempts'), 'required' => 1]));
 
@@ -392,13 +392,13 @@ class SettingForm
 
         $oForm->addElement(new Number(t('CSRF token lifetime:'), 'security_token_lifetime', ['description' => t('Time in seconds.'), 'value' => DbConfig::getSetting('securityTokenLifetime'), 'required' => 1]));
 
-        $oForm->addElement(new Select(t('Protect for Users against session cookies hijacking:'), 'is_user_session_ip_check', ['1' => t('Yes (recommended for security reasons)'), '0' => t('No')], ['description' => t('This protection can cause problems for logged in users with dynamic IPs. Please disable if their IP changes frequently during the session.'), 'value' => DbConfig::getSetting('isUserSessionIpCheck'), 'required' => 1]));
+        $oForm->addElement(new Select(t('Protect for Users against session cookies hijacking:'), 'is_user_session_ip_check', ['1' => t('Yes (recommended for security reasons)'), '0' => t('No')], ['description' => t('This protection can cause problems for logged in users with dynamic IPs. Please disable if their IP changes frequently during their session.'), 'value' => DbConfig::getSetting('isUserSessionIpCheck'), 'required' => 1]));
 
         if ($bIsAffiliateEnabled) {
-            $oForm->addElement(new Select(t('Protect for Affiliates against session cookies hijacking:'), 'is_affiliate_session_ip_check', ['1' => t('Yes (recommended for security reasons)'), '0' => t('No')], ['description' => t('This protection can cause problems for affiliates with dynamic IPs. Please disable if their IP changes frequently during the session.'), 'value' => DbConfig::getSetting('isAffiliateSessionIpCheck'), 'required' => 1]));
+            $oForm->addElement(new Select(t('Protect for Affiliates against session cookies hijacking:'), 'is_affiliate_session_ip_check', ['1' => t('Yes (recommended for security reasons)'), '0' => t('No')], ['description' => t('This protection can cause problems for affiliates with dynamic IPs. Please disable if their IP changes frequently during their session.'), 'value' => DbConfig::getSetting('isAffiliateSessionIpCheck'), 'required' => 1]));
         }
 
-        $oForm->addElement(new Select(t('Protect for Admins against session cookies hijacking:'), 'is_admin_session_ip_check', ['1' => t('Yes (highly recommended for security reasons)'), '0' => t('No')], ['description' => t('This protection can cause problems for admins with dynamic IPs. Please disable if their IP changes frequently during the session.'), 'value' => DbConfig::getSetting('isAdminSessionIpCheck'), 'required' => 1]));
+        $oForm->addElement(new Select(t('Protect for Admins against session cookies hijacking:'), 'is_admin_session_ip_check', ['1' => t('Yes (highly recommended for security reasons)'), '0' => t('No')], ['description' => t('This protection can cause problems for admins with dynamic IPs. Please disable if their IP changes frequently during their session.'), 'value' => DbConfig::getSetting('isAdminSessionIpCheck'), 'required' => 1]));
 
         $oForm->addElement(new Select(t('System against DDoS attacks:'), 'stop_DDoS', ['1' => t('Activate'), '0' => t('Deactivate')], ['description' => t('Enable it ONLY if you think your website has real DDoS attacks or if your server is highly overloaded.'), 'value' => DbConfig::getSetting('DDoS'), 'required' => 1]));
 
@@ -408,10 +408,10 @@ class SettingForm
 
         $oForm->addElement(new HTMLExternal('<br /><h3 class="underline">' . t('Time Delay') . '</h3>'));
 
-        $oForm->addElement(new Number(t('Registration delay for Users:'), 'time_delay_user_registration', ['description' => t('Number of minutes that has to pass before a user with the same IP address can register again. Enter "0" to disable.'), 'value' => DbConfig::getSetting('timeDelayUserRegistration'), 'required' => 1]));
+        $oForm->addElement(new Number(t('Registration delay for Users:'), 'time_delay_user_registration', ['description' => t('Number of minutes to wait before a user with the same IP address can register again. Enter "0" to disable.'), 'value' => DbConfig::getSetting('timeDelayUserRegistration'), 'required' => 1]));
 
         if ($bIsAffiliateEnabled) {
-            $oForm->addElement(new Number(t('Registration delay for Affiliates:'), 'time_delay_aff_registration', ['description' => t('Number of minutes that has to pass before an affiliate with the same IP address can register again. Enter "0" to disable.'), 'value' => DbConfig::getSetting('timeDelayAffRegistration'), 'required' => 1]));
+            $oForm->addElement(new Number(t('Registration delay for Affiliates:'), 'time_delay_aff_registration', ['description' => t('Number of minutes to wait before an affiliate with the same IP address can register again. Enter "0" to disable.'), 'value' => DbConfig::getSetting('timeDelayAffRegistration'), 'required' => 1]));
         }
 
         if ($bIsNoteEnabled) {
@@ -482,15 +482,21 @@ class SettingForm
             $oForm->addElement(new Url(t('Chat API:'), 'chat_api', ['description' => t('Documentation: <a href="%0%">Change the default chat service by your real one</a>.<br /> <small>Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).</small>', self::CHANGE_CHAT_DOC_URL, '<strong>%site_url%</strong>', '<strong>%site_name%</strong>'), 'value' => DbConfig::getSetting('chatApi'), 'required' => 1]));
         }
 
-        if (SysMod::isEnabled('chatroulette')) {
-            $oForm->addElement(new Url(t('Chatroulette API:'), 'chatroulette_api', ['description' => t('Documentation: <a href="%0%">Change the default chatroulette provider by yours</a>.<br /> <small>Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).</small>', self::CHANGE_CHAT_DOC_URL, '<strong>%site_url%</strong>', '<strong>%site_name%</strong>'), 'value' => DbConfig::getSetting('chatrouletteApi'), 'required' => 1]));
-        }
-
-
         /********** Automation **********/
         $oForm->addElement(new HTMLExternal('</div></div><div class="content" id="automation"><div class="col-md-10"><h2 class="underline">' . t('Automation') . '</h2>'));
 
-        $oForm->addElement(new Textbox(t('Secret word for the cron URL:'), 'cron_security_hash', ['description' => t('Your very secret word for the cron URL. It will be used for running automated cron jobs.'), 'value' => DbConfig::getSetting('cronSecurityHash'), 'required' => 1, 'validation' => new Str(1, 64)]));
+        $oForm->addElement(
+            new Textbox(
+                t('Secret word for the cron URL:'),
+                'cron_security_hash',
+                [
+                    'description' => t('Your very secret word for the cron URL. It will be used for running automated cron jobs.'),
+                    'value' => DbConfig::getSetting('cronSecurityHash'),
+                    'required' => 1,
+                    'validation' => new Str(1, 64)
+                ]
+            )
+        );
 
         $oForm->addElement(new Number(t('User inactivity timeout:'), 'user_timeout', ['description' => t('The number of minutes that a member becomes inactive (offline).'), 'value' => DbConfig::getSetting('userTimeout'), 'required' => 1]));
 
@@ -501,12 +507,7 @@ class SettingForm
         $oForm->render();
     }
 
-    /**
-     * @param File $oFile
-     *
-     * @return array
-     */
-    private static function getTpls(File $oFile)
+    private static function getTpls(File $oFile): array
     {
         $aTpls = [];
 
@@ -518,12 +519,7 @@ class SettingForm
         return $aTpls;
     }
 
-    /**
-     * @param File $oFile
-     *
-     * @return array
-     */
-    private static function getLangs(File $oFile)
+    private static function getLangs(File $oFile): array
     {
         $aLangs = [];
 
@@ -536,10 +532,7 @@ class SettingForm
         return $aLangs;
     }
 
-    /**
-     * @return array
-     */
-    private static function getDefMods()
+    private static function getDefMods(): array
     {
         $aMods = [];
 
@@ -555,10 +548,7 @@ class SettingForm
         return $aMods;
     }
 
-    /**
-     * @return array
-     */
-    private static function getMembershipGroups()
+    private static function getMembershipGroups(): array
     {
         $aGroupNames = [];
 
@@ -571,11 +561,9 @@ class SettingForm
     }
 
     /**
-     * Get the list of modules that are possible to enable as the default system module.
-     *
-     * @return array
+     * Get the list of modules that are possible to enable as a default system module.
      */
-    private static function getActivatableDefMods()
+    private static function getActivatableDefMods(): array
     {
         return [
             'user',
@@ -583,7 +571,6 @@ class SettingForm
             'blog',
             'note',
             'chat',
-            'chatroulette',
             'forum',
             'hotornot',
             'picture',

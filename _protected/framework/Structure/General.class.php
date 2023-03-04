@@ -3,14 +3,16 @@
  * @title            General Class
  * @desc             Useful methods for the code structure.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Structure
  */
 
 namespace PH7\Framework\Structure {
     defined('PH7') or exit('Restricted access');
+
+    use PH7\Framework\File\File;
 
     class General
     {
@@ -24,7 +26,7 @@ namespace PH7\Framework\Structure {
         public static function emit()
         {
             $aArgs = func_get_args();
-            return implode("\t", $aArgs) . \PH7\Framework\File\File::EOL;
+            return implode("\t", $aArgs) . File::EOL;
         }
 
         /**
@@ -43,19 +45,21 @@ namespace PH7\Framework\Structure {
 }
 
 namespace {
+    use PH7\Framework\Structure\General as GeneralStructure;
+
     /**
-     * Alias for \PH7\Framework\Structure\General::ifsetor()
+     * Alias for GeneralStructure::ifsetor()
      */
     function ifsetor($sVar, $sOr = '')
     {
-        return (new PH7\Framework\Structure\General)->ifsetor($sVar, $sOr);
+        return (new GeneralStructure)->ifsetor($sVar, $sOr);
     }
 
     /**
-     * Alias for \PH7\Framework\Structure\General::emit()
+     * Alias for GeneralStructure::emit()
      */
     function emit()
     {
-        return PH7\Framework\Structure\General::emit();
+        return GeneralStructure::emit();
     }
 }

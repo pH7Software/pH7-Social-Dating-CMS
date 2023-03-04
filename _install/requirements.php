@@ -1,6 +1,6 @@
 <?php
 /**
- * This script checks the server requirements for pH7CMS software.
+ * This script checks the server requirements for pH7Builder software.
  *
  * It was written in order to be standarlone and can be used in different projects.
  * If you want to use it in your project, please keep the license and the developer details below in order to have the right to distribute it.
@@ -8,8 +8,8 @@
  * @package        Install
  * @file           requirements
  * @author         Pierre-Henry Soria
- * @email          <hello@ph7cms.com>
- * @copyright      (c) 2011-2021, Pierre-Henry Soria. All Rights Reserved.
+ * @email          <hello@ph7builder.com>
+ * @copyright      (c) 2011-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT (https://opensource.org/licenses/MIT)
  * @language       (PHP) and (HTML5 + CSS)
  * @since          2011/10/25
@@ -26,7 +26,7 @@ define('DIRECTIVE_KEY', 'directive');
 $aErrors = array();
 
 if (does_meet_minimum_required_php_version()) {
-    $aErrors[] = 'Your current PHP version is ' . PHP_VERSION . '. pH7CMS requires PHP ' . PH7_REQUIRED_SERVER_VERSION . ' or newer.<br /> Please ask your Web host to upgrade PHP to ' . PH7_REQUIRED_SERVER_VERSION . ' or newer.';
+    $aErrors[] = 'Your current PHP version is ' . PHP_VERSION . '. pH7Builder requires PHP ' . PH7_REQUIRED_SERVER_VERSION . ' or newer.<br /> Please ask your Web host to upgrade PHP to ' . PH7_REQUIRED_SERVER_VERSION . ' or newer.';
 }
 
 $aRequirementsNeeded = array(
@@ -43,7 +43,7 @@ $aRequirementsNeeded = array(
     ),
     FUNCTION_KEY => array(
         'exif_imagetype' => 'exif',
-        'imagettftext' => 'FreeType Support',
+        'imagettftext' => 'GD FreeType Support',
         'curl_init' => 'cURL'
     ),
     DIRECTIVE_KEY => array(
@@ -89,7 +89,7 @@ foreach ($aRequirementsNeeded as $sType => $aRequirements) {
 
 $iErrors = !empty($aErrors) ? count($aErrors) : 0;
 if ($iErrors > 0) {
-    display_html_header('Requirements - pH7CMS Installation');
+    display_html_header('Requirements - pH7Builder Installation');
 
     printf('<h3 class="error underline italic">You have %d error(s):</h3>', $iErrors);
 

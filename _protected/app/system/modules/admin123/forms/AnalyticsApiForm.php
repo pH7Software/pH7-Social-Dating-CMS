@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
 
@@ -31,8 +31,22 @@ class AnalyticsApiForm
         $oForm->configure(['action' => '']);
         $oForm->addElement(new Hidden('submit_analytics', 'form_analytics'));
         $oForm->addElement(new Token('analytics'));
-        $oForm->addElement(new Textarea(t('Your analytics tracking code (e.g., Google Analytics, Matomo)'), 'code', ['value' => (new Design)->analyticsApi(false)]));
-        $oForm->addElement(new Button);
+        $oForm->addElement(
+            new Textarea(
+                t('Your analytics tracking code (e.g., Google Analytics, Matomo)'),
+                'code',
+                ['value' => (new Design)->analyticsApi(false)]
+            )
+        );
+        $oForm->addElement(
+            new Button(
+                t('Save'),
+                'submit',
+                [
+                    'icon' => 'check'
+                ]
+            )
+        );
         $oForm->render();
     }
 }

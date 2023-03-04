@@ -3,12 +3,14 @@
  * @title          Rating Ajax Class
  * @desc           Simple Rating Page Class with Ajax.
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Core / Asset / Ajax
  * @version        1.2
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -25,31 +27,23 @@ class RatingCoreAjax
     /**
      * Cache lifetime set to 1 week.
      */
-    const COOKIE_LIFETIME = 3600 * 24 * 7;
+    private const COOKIE_LIFETIME = 3600 * 24 * 7;
 
-    /** @var HttpRequest */
-    private $oHttpRequest;
+    private HttpRequest $oHttpRequest;
 
-    /** @var RatingCoreModel */
-    private $oRatingModel;
+    private RatingCoreModel $oRatingModel;
 
-    /** @var string */
-    private $sTxt;
+    private string $sTxt;
 
-    /** @var string */
-    private $sTable;
+    private string $sTable;
 
-    /** @var int */
-    private static $iVotes;
+    private static int $iVotes;
 
-    /** @var int */
-    private $iStatus;
+    private int $iStatus;
 
-    /** @var int */
-    private $iId;
+    private int $iId;
 
-    /** @var float */
-    private $fScore;
+    private float $fScore;
 
     public function __construct()
     {
@@ -73,20 +67,16 @@ class RatingCoreAjax
 
     /**
      * Displays the votes.
-     *
-     * @return string
      */
-    public function show()
+    public function show(): string
     {
         return jsonMsg($this->iStatus, $this->sTxt);
     }
 
     /**
      * Initialize the methods of the class.
-     *
-     * @return void
      */
-    private function initialize()
+    private function initialize(): void
     {
         $this->oRatingModel = new RatingCoreModel;
         $this->sTable = $this->oHttpRequest->post('table');
@@ -102,33 +92,23 @@ class RatingCoreAjax
             }
         }
 
-        /**
-         * @internal Today's IP address is also easier to change than delete a cookie, so we have chosen the Cookie instead save the IP address in the database.
-         */
-        $oCookie = new Cookie;
-        $sCookieName = 'pHSVoting' . $this->iId . $this->sTable;
-        if ($oCookie->exists($sCookieName)) {
-            $this->iStatus = 0;
-            $this->sTxt = t('You have already voted!');
-            return;
-        } else {
-            $oCookie->set($sCookieName, 1, self::COOKIE_LIFETIME);
-        }
-        unset($oCookie);
-
+        $this->eligibilityChecker();
         $this->select();
         $this->update();
         $this->iStatus = 1;
         $sVoteTxt = self::$iVotes > 1 ? t('Votes') : t('Vote');
-        $this->sTxt = t('Score: %0% - %2%: %1%', number_format($this->fScore / self::$iVotes, 1), self::$iVotes, $sVoteTxt);
+        $this->sTxt = t(
+            'Score: %0% - %2%: %1%',
+            number_format($this->fScore / self::$iVotes, 1),
+            self::$iVotes,
+            $sVoteTxt
+        );
     }
 
     /**
      * Adds voting in the database and increment the static attribute to vote.
-     *
-     * @return void
      */
-    private function select()
+    private function select(): void
     {
         $iVotes = $this->oRatingModel->getVote($this->iId, $this->sTable);
         $fRate = $this->oRatingModel->getScore($this->iId, $this->sTable);
@@ -141,19 +121,31 @@ class RatingCoreAjax
 
     /**
      * Updates the vote in the database.
-     *
-     * @return void
      */
-    private function update()
+    private function update(): void
     {
         $this->oRatingModel->updateVotes($this->iId, $this->sTable);
         $this->oRatingModel->updateScore($this->fScore, $this->iId, $this->sTable);
     }
 
-    /**
-     * @return bool
-     */
-    private function isValidRequestToRate()
+    private function eligibilityChecker(): void
+    {
+        /**
+         * @internal In today's world, IP address is also easier to change than deleting a cookie,
+         * so we have chosen the cookie approach instead of saving the IP address in the database.
+         */
+        $oCookie = new Cookie;
+        $sCookieName = 'pHSVoting' . $this->iId . $this->sTable;
+        if ($oCookie->exists($sCookieName)) {
+            $this->iStatus = 0;
+            $this->sTxt = t('You have already voted!');
+        } else {
+            $oCookie->set($sCookieName, '1', self::COOKIE_LIFETIME);
+        }
+        unset($oCookie);
+    }
+
+    private function isValidRequestToRate(): bool
     {
         return $this->oHttpRequest->postExists('action') &&
             $this->oHttpRequest->postExists('table') &&
@@ -161,10 +153,7 @@ class RatingCoreAjax
             $this->oHttpRequest->postExists('id');
     }
 
-    /**
-     * @return bool
-     */
-    private function hasCorrectDbTable()
+    private function hasCorrectDbTable(): bool
     {
         return $this->sTable === DbTableName::MEMBER;
     }

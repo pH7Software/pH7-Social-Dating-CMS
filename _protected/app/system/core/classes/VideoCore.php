@@ -2,12 +2,13 @@
 /**
  * @title          Video Core Class
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Core / Class
- * @version        1.0
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -16,19 +17,16 @@ use PH7\Framework\File\File;
 
 class VideoCore
 {
-    const DEFAULT_THUMBNAIL_EXT = '.jpg';
-    const REGEX_API_URL_FORMAT = '#(^https?://(www\.)?.+\.[a-z]{2,8})#i';
+    public const DEFAULT_THUMBNAIL_EXT = '.jpg';
+
+    private const REGEX_API_URL_FORMAT = '#(^https?://(www\.)?.+\.[a-z]{2,8})#i';
 
     /**
      * Check if this is a url, if so, this is a video from an external site.
-     *
-     * @param string $sFile
-     *
-     * @return bool
      */
-    public function isApi($sFile)
+    public function isApi(string $sFile): bool
     {
-        return preg_match(static::REGEX_API_URL_FORMAT, $sFile);
+        return (bool)preg_match(static::REGEX_API_URL_FORMAT, $sFile);
     }
 
     /**
@@ -46,7 +44,7 @@ class VideoCore
         $sVideoLink,
         $sVideoExt = '.webm,.mp4',
         $sThumbExt = self::DEFAULT_THUMBNAIL_EXT
-    )
+    ): void
     {
         $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $sUsername . PH7_DS . $iAlbumId . PH7_DS;
 
@@ -68,7 +66,7 @@ class VideoCore
         unset($oFile);
     }
 
-    public static function clearCache()
+    public static function clearCache(): void
     {
         (new Cache)->start(
             VideoCoreModel::CACHE_GROUP,

@@ -3,15 +3,17 @@
  * @title          Video Design Core Class
  * @desc           Class supports the viewing of videos in HTML5.
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Core / Class / Design
  * @version        1.3
  *
  * @history        01/13/2013 -Removed support Ogg Theora Vorbis | We do not support Ogg more, because now the WebM format is preferable and is now compatible with almost all browsers.
  * @history        03/29/2013 -Adding "video not found", if the requested video is not found on the server.
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -25,11 +27,11 @@ use stdClass;
 
 class VideoDesignCore
 {
-    const PREVIEW_MEDIA_MODE = 'preview';
-    const MOVIE_MEDIA_MODE = 'movie';
+    public const PREVIEW_MEDIA_MODE = 'preview';
+    public const MOVIE_MEDIA_MODE = 'movie';
 
-    const WEBM_EXT = '.webm';
-    const MP4_EXT = '.mp4';
+    private const WEBM_EXT = '.webm';
+    private const MP4_EXT = '.mp4';
 
     /**
      * @internal Import the trait to set the class static.
@@ -42,18 +44,18 @@ class VideoDesignCore
      *
      * @param stdClass $oData
      * @param string $sMedia Type of the media ('preview' or 'movie').
-     * @param int $iWidth
-     * @param int $iHeight
+     * @param int|string $mWidth Could be `400` or '100%'
+     * @param int|string $mHeight Could be `600` or '100%'
      *
      * @return void
      */
-    public static function generate($oData, $sMedia = self::MOVIE_MEDIA_MODE, $iWidth = 600, $iHeight = 400)
+    public static function generate(stdClass $oData, string $sMedia = self::MOVIE_MEDIA_MODE, $mWidth = 600, $mHeight = 400): void
     {
         $sDurationTag = '<div class="video_duration">' . Various::secToTime($oData->duration) . '</div>';
 
         if ((new VideoCore)->isApi($oData->file)) {
             try {
-                $oVideo = (new VideoApi)->getMeta($oData->file, $sMedia, $iWidth, $iHeight);
+                $oVideo = (new VideoApi)->getMeta($oData->file, $sMedia, $mWidth, $mHeight);
 
                 if ($sMedia === self::PREVIEW_MEDIA_MODE) {
                     echo $sDurationTag, '<a href="', $oData->file, '" title="', $oData->title, '" data-popup="frame-video"><img src="', $oVideo, '" alt="', $oData->title, '" title="', $oData->title, '" /></a>';
@@ -89,7 +91,7 @@ class VideoDesignCore
 
             $sParam = self::isAutoplayVideo($sMedia) ? 'autoplay="autoplay"' : '';
             $sVideoTag = '
-            <video poster="' . $sThumbUrl . '" width="' . $iWidth . '" height="' . $iHeight . '" controls="controls" ' . $sParam . '>
+            <video poster="' . $sThumbUrl . '" width="' . $mWidth . '" height="' . $mHeight . '" controls="controls" ' . $sParam . '>
                 <source src="' . PH7_URL_DATA_SYS_MOD . $sVidPath1 . '" type="video/webm" />
                 <source src="' . PH7_URL_DATA_SYS_MOD . $sVidPath2 . '" type="video/mp4" />
                 ' . t('Your browser is obsolete. Please use a browser that supports HTML5.') . '
@@ -110,12 +112,7 @@ class VideoDesignCore
         }
     }
 
-    /**
-     * @param string $sMedia
-     *
-     * @return bool
-     */
-    private static function isAutoplayVideo($sMedia)
+    private static function isAutoplayVideo(string $sMedia): bool
     {
         return $sMedia === self::MOVIE_MEDIA_MODE && DbConfig::getSetting('autoplayVideo');
     }

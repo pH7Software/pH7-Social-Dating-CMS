@@ -1,10 +1,12 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2013-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2013-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -13,13 +15,16 @@ use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mail\Mailable;
 use stdClass;
 
+/** Reset the time limit and increase the memory **/
+@set_time_limit(0);
+@ini_set('memory_limit', '528M');
+
 class BirthdayCore extends Core
 {
-    const MAX_BULK_EMAIL_NUMBER = 300;
-    const SLEEP_SEC = 10;
+    private const MAX_BULK_EMAIL_NUMBER = 200;
+    private const SLEEP_SEC = 5;
 
-    /** @var int */
-    private static $iTotalSent = 0;
+    private static int $iTotalSent = 0;
 
     /**
      * Sent Birthday emails.
@@ -28,7 +33,7 @@ class BirthdayCore extends Core
      *
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
-    public function sendMails()
+    public function sendMails(): int
     {
         $oBirths = (new BirthdayCoreModel)->get();
         $oMail = new Mail;
@@ -58,7 +63,7 @@ class BirthdayCore extends Core
      *
      * @throws Exception
      */
-    private function sendMail(stdClass $oUser, Mailable $oMailEngine)
+    private function sendMail(stdClass $oUser, Mailable $oMailEngine): bool
     {
         $this->view->content = t('Hi %0%!', $oUser->firstName) . '<br />' .
             t('We wish you a very Happy Birthday!') . '<br />' .

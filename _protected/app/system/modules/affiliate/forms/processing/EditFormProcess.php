@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Form / Processing
  */
 
@@ -48,7 +48,7 @@ class EditFormProcess extends Form
             );
         }
 
-        if (AdminCore::auth()) {
+        if (AdminCore::auth() && $this->httpRequest->postExists('sex')) {
             // For security reasons, only admins can change profile gender
             if (!$this->str->equals($this->httpRequest->post('sex'), $oAff->sex)) {
                 $oAffModel->updateProfile(
@@ -63,7 +63,7 @@ class EditFormProcess extends Form
             }
         }
 
-        if (AdminCore::auth()) {
+        if (AdminCore::auth() && $this->httpRequest->postExists('birth_date')) {
             // For security reasons, only admins can change date of birth
             if (!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oAff->birthDate)) {
                 $oAffModel->updateProfile(

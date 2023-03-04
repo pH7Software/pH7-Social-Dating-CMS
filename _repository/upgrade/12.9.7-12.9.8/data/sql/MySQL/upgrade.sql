@@ -8,5 +8,5 @@
 DROP TABLE ph7_license;
 
 
--- Update pH7CMS's SQL schema version
-UPDATE ph7_modules SET version = '1.4.6' WHERE vendorName = 'pH7CMS';
+-- Update pH7Builder's SQL schema version
+UPDATE ph7_modules SET version = '1.4.6' WHERE vendorName = 'pH7Builder';

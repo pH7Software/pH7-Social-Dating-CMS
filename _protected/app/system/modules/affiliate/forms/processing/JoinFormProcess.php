@@ -1,10 +1,12 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Form / Processing
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -19,8 +21,7 @@ use PH7\Framework\Util\Various;
 
 class JoinFormProcess extends Form
 {
-    /** @var int */
-    private $iActiveType;
+    private int $iActiveType;
 
     public function __construct()
     {
@@ -29,7 +30,7 @@ class JoinFormProcess extends Form
         $this->iActiveType = (int)DbConfig::getSetting('affActivationType');
     }
 
-    public function step1()
+    public function step1(): void
     {
         $sBirthDate = $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d');
         $iAffId = (int)(new Cookie)->get(AffiliateCore::COOKIE_NAME);
@@ -64,25 +65,26 @@ class JoinFormProcess extends Form
                 t('Please try again with new information in the form fields or come back later.')
             );
         } else {
+            $oRegistration = new Registration($this->view);
+
             /** Update the Affiliate Commission **/
             if ($this->isUserActivated()) {
                 AffiliateCore::updateJoinCom($iAffId, $this->config, $this->registry);
             }
 
-            // Send an email and sets the welcome message
+            // Send an email confirming the account registration
+            $oRegistration->sendMail($aData);
+
             \PFBC\Form::setSuccess(
                 'form_join_aff',
-                t('Your affiliate account has been created! %0%', (new Registration($this->view))->sendMail($aData)->getMsg())
+                $oRegistration->getMsg()
             );
         }
 
         unset($oAffModel);
     }
 
-    /**
-     * @return bool
-     */
-    private function isUserActivated()
+    private function isUserActivated(): bool
     {
         return $this->iActiveType === RegistrationCore::NO_ACTIVATION;
     }

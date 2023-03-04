@@ -3,9 +3,9 @@
  * @title            Various Class.
  * @desc             Useful methods for the management of the Models.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Mvc / Model / Engine / Util
  */
 
@@ -38,7 +38,7 @@ class Various
      *
      * @return bool|array Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
      */
-    public static function execQueryFile(string $sSqlFile)
+    public static function execQueryFile(string $sSqlFile): bool|array
     {
         if (!is_file($sSqlFile)) {
             return false;
@@ -56,36 +56,21 @@ class Various
     /**
      * Convert mod to table.
      *
-     * @param string $Mod
+     * @param string $sMod
      *
      * @return string The table name if the specified module was valid.
      *
      * @throws PH7InvalidArgumentException If the table is not valid.
      */
-    public static function convertModToTable(string $Mod): string
+    public static function convertModToTable(string $sMod): string
     {
-        switch ($Mod) {
-            case 'user':
-                $sTable = DbTableName::MEMBER;
-                break;
-
-            case 'affiliate':
-                $sTable = DbTableName::AFFILIATE;
-                break;
-
-            case 'newsletter':
-                $sTable = DbTableName::SUBSCRIBER;
-                break;
-
-            case PH7_ADMIN_MOD:
-                $sTable = DbTableName::ADMIN;
-                break;
-
-            default:
-                static::launchErr($Mod);
-        }
-
-        return $sTable;
+        return match ($sMod) {
+            'user' => DbTableName::MEMBER,
+            'affiliate' => DbTableName::AFFILIATE,
+            'newsletter' => DbTableName::SUBSCRIBER,
+            PH7_ADMIN_MOD => DbTableName::ADMIN,
+            default => static::launchErr($sMod),
+        };
     }
 
     /**
@@ -260,7 +245,7 @@ class Various
      *
      * @throws PH7InvalidArgumentException Explanatory message.
      */
-    public static function launchErr(string $sTable)
+    public static function launchErr(string $sTable): void
     {
         throw new PH7InvalidArgumentException(sprintf('Invalid data table: "%s"!', $sTable));
     }

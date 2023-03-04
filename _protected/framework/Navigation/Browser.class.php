@@ -3,11 +3,13 @@
  * @title            Browser Class
  * @desc             Useful Browser methods.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Navigation
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Navigation;
 
@@ -16,15 +18,16 @@ defined('PH7') or exit('Restricted access');
 use PH7\Framework\Http\Http;
 use PH7\Framework\Server\Server;
 use PH7\Framework\Str\Str;
+use PH7\Framework\Translate\Lang;
 
 /**
  * @internal In this class, there're some yoda conditions.
  */
 class Browser
 {
-    const FAVICON_GENERATOR_URL = 'https://www.google.com/s2/favicons?domain=';
+    private const FAVICON_GENERATOR_URL = 'https://www.google.com/s2/favicons?domain=';
 
-    const DEFAULT_BROWSER_HEX_CODES = [
+    private const DEFAULT_BROWSER_HEX_CODES = [
         '#000',
         '#000000'
     ];
@@ -37,14 +40,14 @@ class Browser
      *
      * @return string Client's Language Code (in lowercase).
      */
-    public function getLanguage($bFullLangCode = false)
+    public function getLanguage(bool $bFullLangCode = false): string
     {
         $oStr = new Str;
         $sLang = explode(',', Server::getVar(Server::HTTP_ACCEPT_LANGUAGE))[0];
 
-        // The rtrim function is slightly faster than chop function
-        $iFullLangCode = ($bFullLangCode ? 5 : 2);
+        $iFullLangCode = $bFullLangCode ? 5 : Lang::ISO_LANG_CODE_LENGTH;
 
+        // The rtrim function is slightly faster than chop function
         return $oStr->escape($oStr->lower(substr(rtrim($sLang), 0, $iFullLangCode)));
     }
 
@@ -53,7 +56,7 @@ class Browser
      *
      * @return Browser
      */
-    public function cache()
+    public function cache(): self
     {
         header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 3600 * 24 * 30) . ' GMT');
         header('Cache-Control: no-cache, must-revalidate');
@@ -64,10 +67,8 @@ class Browser
 
     /**
      * Prevent caching in the browser.
-     *
-     * @return Browser
      */
-    public function noCache()
+    public function noCache(): self
     {
         $sNow = gmdate('D, d M Y H:i:s') . ' GMT';
         header('Expires: ' . $sNow);
@@ -93,12 +94,13 @@ class Browser
         }
 
         $sEncoding = Server::getVar(Server::HTTP_ACCEPT_ENCODING);
-        if (false !== strpos($sEncoding, 'gzip')) {
-            return 'gzip';
-        }
 
         if (false !== strpos($sEncoding, 'x-gzip')) {
             return 'x-gzip';
+        }
+
+        if (false !== strpos($sEncoding, 'gzip')) {
+            return 'gzip';
         }
 
         return false;
@@ -109,7 +111,7 @@ class Browser
      *
      * @return bool TRUE if mobile device, FALSE otherwise.
      */
-    public function isMobile()
+    public function isMobile(): bool
     {
         if (null !== Server::getVar(Server::HTTP_X_WAP_PROFILE) ||
             null !== Server::getVar(Server::HTTP_PROFILE)
@@ -126,7 +128,7 @@ class Browser
             }
         }
 
-        $sUserAgent = self::getUserAgent();
+        $sUserAgent = $this->getUserAgent();
         if (null !== $sUserAgent) {
             // For most mobile/tablet browsers
             if (false !== strpos($sUserAgent, 'Mobile')) {
@@ -154,7 +156,7 @@ class Browser
     /**
      * @return string|null The HTTP User Agent is it exists, otherwise the NULL value.
      */
-    public function getUserAgent()
+    public function getUserAgent(): ?string
     {
         return Server::getVar(Server::HTTP_USER_AGENT);
     }
@@ -162,25 +164,28 @@ class Browser
     /**
      * @return string|null The HTTP Referer is it exists, otherwise the NULL value.
      */
-    public function getHttpReferer()
+    public function getHttpReferer(): ?string
     {
         return Server::getVar(Server::HTTP_REFERER);
     }
 
-    /**
-     * @return bool
-     */
-    public function isAjaxRequest()
+    public function getIfModifiedSince(): ?string
+    {
+        $sIfModifiedSinceHttp = Server::getVar(Server::HTTP_IF_MODIFIED_SINCE);
+
+        if (!empty($sIfModifiedSinceHttp)) {
+            return substr($sIfModifiedSinceHttp, 0, 29);
+        }
+
+        return null;
+    }
+
+    public function isAjaxRequest(): bool
     {
         return array_key_exists(Server::HTTP_X_REQUESTED_WITH, Server::getVar());
     }
 
-    /**
-     * @param string $sValue
-     *
-     * @return bool
-     */
-    public static function isDefaultBrowserHexCodeFound($sValue)
+    public static function isDefaultBrowserHexCodeFound(string $sValue): bool
     {
         return in_array($sValue, self::DEFAULT_BROWSER_HEX_CODES, true);
     }
@@ -192,7 +197,7 @@ class Browser
      *
      * @return string The favicon image.
      */
-    public static function favicon($sUrl)
+    public static function favicon(string $sUrl): string
     {
         $sDomainName = Http::getHostName($sUrl);
 

@@ -3,14 +3,16 @@
  * @title            Backup (Database) Class
  * @desc             Backs up the database.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2011-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Mvc / Model / Engine / Util
  * @version          1.3
  * @history          04/13/2014 - Replaced the bzip2 compression program by gzip because bzip2 is much too slow to compress and uncompress files and the compression is only a little higher.
  *                   In addition, gzip is much more common on shared hosting that bzip2.
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Mvc\Model\Engine\Util;
 
@@ -25,36 +27,35 @@ use PH7\Framework\Navigation\Browser;
 
 class Backup implements GenerableFile
 {
-    const SQL_FILE_EXT = 'sql';
-    const ARCHIVE_FILE_EXT = 'gz';
-    const GZIP_COMPRESS_LEVEL = 9;
+    public const SQL_FILE_EXT = 'sql';
+    public const ARCHIVE_FILE_EXT = 'gz';
 
-    /** @var string */
-    private $sPathName;
+    private const GZIP_COMPRESS_LEVEL = 9;
 
-    /** @var string */
-    private $sSql;
+    private ?string $sPath;
+
+    private string $sSql;
 
     /**
-     * @param string $sPathName Can be null for showing the data only ( by using Backup->back()->show() ).
+     * @param string|null $sFullPath Can be null for showing the data only ( by using Backup->back()->show() ).
      */
-    public function __construct($sPathName = null)
+    public function __construct(?string $sFullPath = null)
     {
-        $this->sPathName = $sPathName;
+        $this->sPath = $sFullPath;
     }
 
     /**
      * Makes a SQL contents backup.
-     *
-     * @return self
      */
-    public function back()
+    public function back(): self
     {
         $this->sSql = $this->getHeaderContents();
 
         $aTables = $aColumns = $aValues = [];
         $oAllTables = Db::showTables();
-        while ($aRow = $oAllTables->fetch()) $aTables[] = $aRow[0];
+        while ($aRow = $oAllTables->fetch()) {
+            $aTables[] = $aRow[0];
+        }
         unset($oAllTables);
 
         $oDb = Db::getInstance();
@@ -63,8 +64,7 @@ class Backup implements GenerableFile
         foreach ($aTables as $sTable) {
             $rResult = $oDb->query('SHOW CREATE TABLE ' . $sTable);
 
-            $iNum = (int)$rResult->rowCount();
-
+            $iNum = $rResult->rowCount();
             if ($iNum > 0) {
                 $aRow = $rResult->fetch();
 
@@ -85,24 +85,25 @@ class Backup implements GenerableFile
 
             $rResult = $oDb->query('SELECT * FROM ' . $sTable);
 
-            $iNum = (int)$rResult->rowCount();
-
+            $iNum = $rResult->rowCount();
             if ($iNum > 0) {
                 while ($aRow = $rResult->fetch()) {
                     foreach ($aRow as $sColumn => $sValue) {
                         if (!is_numeric($sColumn)) {
-                            if (!empty($sValue) && !is_numeric($sValue)) {
+                            if (!empty($sValue) && is_string($sValue)) {
                                 $sValue = Db::getInstance()->quote($sValue);
+                                $sValue = str_replace(["\r", "\n"], ['', '\n'], $sValue);
                             }
-
-                            $sValue = str_replace(["\r", "\n"], ['', '\n'], $sValue);
 
                             $aColumns[] = $sColumn;
                             $aValues[] = $sValue;
                         }
                     }
 
-                    $this->sSql .= 'INSERT INTO ' . $sTable . ' (' . implode(', ', $aColumns) . ') VALUES(\'' . implode('\', \'', $aValues) . "');\n";
+                    $this->sSql .= 'INSERT INTO ' . $sTable . ' (' . implode(', ', $aColumns) . ') VALUES(\'' . implode(
+                            '\', \'',
+                            $aValues
+                        ) . "');\n";
 
                     unset($aColumns, $aValues);
                 }
@@ -119,34 +120,28 @@ class Backup implements GenerableFile
 
     /**
      * Gets the SQL contents.
-     *
-     * @return string
      */
-    public function show()
+    public function show(): string
     {
         return $this->sSql;
     }
 
     /**
      * Saves the backup in the server.
-     *
-     * @return void
      */
-    public function save()
+    public function save(): void
     {
-        $rHandle = fopen($this->sPathName, 'wb');
+        $rHandle = fopen($this->sPath, 'wb');
         fwrite($rHandle, $this->sSql);
         fclose($rHandle);
     }
 
     /**
      * Saves the backup in the gzip compressed archive in the server.
-     *
-     * @return void
      */
-    public function saveArchive()
+    public function saveArchive(): void
     {
-        $rArchive = gzopen($this->sPathName, 'w');
+        $rArchive = gzopen($this->sPath, 'w');
         gzwrite($rArchive, $this->sSql);
         gzclose($rArchive);
     }
@@ -158,7 +153,7 @@ class Backup implements GenerableFile
      */
     public function restore()
     {
-        $mRet = Various::execQueryFile($this->sPathName);
+        $mRet = Various::execQueryFile($this->sPath);
         return $mRet !== true ? print_r($mRet, true) : true;
     }
 
@@ -169,11 +164,11 @@ class Backup implements GenerableFile
      */
     public function restoreArchive()
     {
-        $rArchive = gzopen($this->sPathName, 'r');
+        $rArchive = gzopen($this->sPath, 'r');
 
         $sSqlContent = '';
         while (!feof($rArchive)) {
-            $sSqlContent .= gzread($rArchive, filesize($this->sPathName));
+            $sSqlContent .= gzread($rArchive, filesize($this->sPath));
         }
 
         gzclose($rArchive);
@@ -188,36 +183,30 @@ class Backup implements GenerableFile
 
     /**
      * Download the backup on the desktop.
-     *
-     * @return void
      */
-    public function download()
+    public function download(): void
     {
         $this->downloadBackup();
     }
 
     /**
      * Download the backup in the gzip compressed archive on the desktop.
-     *
-     * @return void
      */
-    public function downloadArchive()
+    public function downloadArchive(): void
     {
         $this->downloadBackup(true);
     }
 
     /**
      * Returns the SQL header containing useful information relative to the backup.
-     *
-     * @return string
      */
-    public function getHeaderContents()
+    public function getHeaderContents(): string
     {
         $sSql = "-- Database Backup\n" .
             '-- ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_VERSION . ', Build ' . Kernel::SOFTWARE_BUILD . "\r\n" .
             '-- Database name: ' . Config::getInstance()->values['database']['name'] . "\r\n" .
             '-- Created on ' . (new CDateTime)->get()->dateTime() . "\r\n" .
-            "--r\n\r\n";
+            "--\r\n\r\n";
 
         return $sSql;
     }
@@ -229,13 +218,13 @@ class Backup implements GenerableFile
      *
      * @return void
      */
-    private function downloadBackup($bArchive = false)
+    private function downloadBackup(bool $bArchive = false): void
     {
         ob_start();
         /***** Set Headers *****/
         (new Browser)->noCache(); // No cache
         header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename=' . $this->sPathName);
+        header('Content-Disposition: attachment; filename=' . $this->sPath);
 
         /***** Show the SQL contents *****/
         echo $bArchive ? gzencode($this->sSql, self::GZIP_COMPRESS_LEVEL, FORCE_GZIP) : $this->sSql;

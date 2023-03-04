@@ -2,7 +2,7 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2017-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Test / Unit / Framework / Server
  */
 
@@ -20,6 +20,11 @@ final class ServerTest extends TestCase
         $_SERVER['SERVER_NAME'] = 'ph7cms.com';
 
         $this->assertSame('ph7cms.com', Server::getName());
+    }
+
+    public function testNotFoundServerName(): void
+    {
+        $this->assertNull(Server::getName());
     }
 
     public function testItIsLocalHost(): void
@@ -56,5 +61,18 @@ final class ServerTest extends TestCase
         $sActual = Server::getVar('SOMETHING');
 
         $this->assertSame('&lt;b&gt;I&#039;m the value&lt;/b&gt;', $sActual);
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        $this->cleanupGlobalServerVars();
+    }
+
+    private function cleanupGlobalServerVars(): void
+    {
+        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['HTTP_HOST']);
     }
 }

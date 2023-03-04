@@ -4,7 +4,7 @@
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Install / Inc
  * @version          1.7
  */
@@ -342,7 +342,8 @@ function is_url_rewrite()
     }
 
     // Check if mod_rewrite is installed and is configured to be used via .htaccess
-    if (!$bIsRewrite = (strtolower(getenv('HTTP_MOD_REWRITE')) === 'on')) {
+    $sHttpModRewrite = (string)getenv('HTTP_MOD_REWRITE');
+    if (!$bIsRewrite = (strtolower($sHttpModRewrite) === 'on')) {
         $sOutputMsg = 'mod_rewrite Works!';
 
         if (!empty($_GET['a']) && $_GET['a'] === 'test_mod_rewrite') {
@@ -439,20 +440,6 @@ function is_software_installed($sCtrlName, $sAction)
     return is_file(PH7_ROOT_PUBLIC . '_constants.php') &&
         $sCtrlName === 'InstallController' &&
         in_array($sAction, array('index', 'license'), true);
-}
-
-/**
- * Check license key.
- *
- * @param string $sKey The License Key.
- *
- * @return int
- */
-function check_license($sKey)
-{
-    $sKey = strtolower(trim($sKey));
-
-    return preg_match('/^ph7-[a-z0-9]{36}$/', $sKey);
 }
 
 /**

@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / User / Form
  */
 
@@ -88,7 +88,7 @@ class PrivacyForm
         $oForm->addElement(new HTMLExternal('<h3><u>' . t('Presence:') . '</u></h3>'));
         $oForm->addElement(
             new Select(
-                t('Your status <div class="user_status right" id="status_div"></div>'),
+                t('Your status <div class="user_status right" id="dropdown_setting"></div>'),
                 'user_status',
                 [
                     UserModel::ONLINE_STATUS => t('Online'),

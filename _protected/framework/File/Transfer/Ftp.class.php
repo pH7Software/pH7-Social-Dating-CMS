@@ -3,12 +3,12 @@
  * @title            FTP Class
  * @desc             Management of the file transfer protocol.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / File / Transfer
  * @version          0.8
- * @link             http://ph7cms.com
+ * @link             http://ph7builder.com
  * @linkDoc          http://php.net/manual/book.ftp.php
  */
 

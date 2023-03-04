@@ -1,13 +1,13 @@
 <?php
 /**
- * @title            Mail Class
- * @desc             Mail Class derived from Swift Class
- *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Mail
- * @version          1.2 (Last update 10/13/2015)
+ * @version          2.0
+ *
+ * @history          11/04/2021 - Use strict type declarations
+ * @history          04/18/2022 - Moved from Swift Mailer (now discontinued) to Symfony Mailer.
  */
 
 declare(strict_types=1);
@@ -16,76 +16,82 @@ namespace PH7\Framework\Mail;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Error\Logger;
 use PH7\Framework\Mvc\Model\DbConfig;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport\SendmailTransport;
+use Symfony\Component\Mime\Address;
+use PH7\HtmlToText\Convert as Html2Text;
+use Symfony\Component\Mime\Email as EmailMessage;
 
 class Mail implements Mailable
 {
-    private const HTML_CONTENT_TYPE = 'text/html';
-
     /**
-     * Send an email with Swift library engine.
-     *
-     * @param array $aInfo
-     * @param string $sContents
-     * @param int $iFormatType
-     *
-     * @return int Number of recipients who were accepted for delivery.
+     * Send an email with Symfony Mailer library engine.
      */
-    public function send(array $aInfo, $sContents, $iFormatType = Mailable::HTML_FORMAT): int
+    public function send(array $aInfo, string $sContents, int $iFormatType = Mailable::ALL_FORMATS): bool
     {
         /*** Default values ***/
-        $sFromMail = empty($aInfo['from']) ? DbConfig::getSetting('returnEmail') : $aInfo['from'];
-        $sFromName = empty($aInfo['form_name']) ? DbConfig::getSetting('emailName') : $aInfo['form_name'];
+        $sFromMail = empty($aInfo['from']) ? DbConfig::getSetting('returnEmail') : escape($aInfo['from'], true);
+        $sFromName = empty($aInfo['form_name']) ? DbConfig::getSetting('emailName') : escape($aInfo['form_name'], true);
+        $sToMail = empty($aInfo['to']) ? DbConfig::getSetting('adminEmail') : escape($aInfo['to'], true);
+        $sToName = empty($aInfo['to_name']) ? $sToMail : escape($aInfo['to_name'], true);
 
-        $sToMail = empty($aInfo['to']) ? DbConfig::getSetting('adminEmail') : $aInfo['to'];
-        $sToName = empty($aInfo['to_name']) ? $sToMail : $aInfo['to_name'];
+        $sSubject = escape($aInfo['subject'], true);
 
-        $sSubject = $aInfo['subject'];
+        try {
+            // Setup the mailer
+            $oTransport = new SendmailTransport();
+            $oMailer = new Mailer($oTransport);
 
-        // Setup the mailer
-        $oTransport = \Swift_MailTransport::newInstance();
-        $oMailer = \Swift_Mailer::newInstance($oTransport);
-        $oMessage = \Swift_Message::newInstance()
-            ->setSubject(escape($sSubject, true))
-            ->setFrom([escape($sFromMail, true) => escape($sFromName, true)])
-            ->setTo([escape($sToMail, true) => escape($sToName, true)]);
+            $oMessage = new EmailMessage();
+            $oMessage->from(new Address($sFromMail, $sFromName));
+            $oMessage->to(new Address($sToMail, $sToName));
+            $oMessage->priority(EmailMessage::PRIORITY_HIGHEST);
+            $oMessage->subject($sSubject);
 
-        if ($iFormatType === Mailable::HTML_FORMAT) {
-            $oMessage->addPart($sContents, self::HTML_CONTENT_TYPE);
-        } else {
-            $oMessage->setBody($sContents);
+            if ($iFormatType === Mailable::TEXT_FORMAT || $iFormatType === Mailable::ALL_FORMATS) {
+                $html2Text = new Html2Text($sContents);
+                $oMessage->text($html2Text->getText());
+            }
+
+            if ($iFormatType === Mailable::HTML_FORMAT || $iFormatType === Mailable::ALL_FORMATS) {
+                $oMessage->html($sContents);
+            }
+
+            $oMailer->send($oMessage);
+            $bResult = true;
+        } catch (TransportExceptionInterface $oE) {
+            (new Logger())->msg('Error while sending email with Symfony Mailer. ' . $oE->getMessage());
+            $bResult = false;
         }
 
-        $iResult = $oMailer->send($oMessage);
-
-        unset($oTransport, $oMailer, $oMessage);
-
         /*
-         * Check if Swift is able to send message, otherwise we use the traditional native PHP mail() function
-         * as on some hosts config, Swift Mail doesn't work.
+         * Check if Symfony Mailer is able to send message, otherwise we use the traditional native PHP mail() function
+         * as on some hosts config, Symfony Mailer doesn't work.
          */
-        if (!$iResult) {
+        if (!$bResult) {
             $aData = [
                 'from' => $sFromMail,
                 'to' => $sToMail,
                 'subject' => $sSubject,
                 'body' => $sContents
             ];
-
-            $iResult = (int)$this->phpMail($aData);
+            $bResult = $this->phpMail($aData);
         }
 
-        return $iResult;
+        return $bResult;
     }
 
     /**
      * Send an email with the native PHP mail() function in text and HTML format.
      *
-     * @param array $aParams The parameters information to send email.
+     * @param array $aParams The parameters' information to send email.
      *
      * @return bool Returns TRUE if the mail was successfully accepted for delivery, FALSE otherwise.
      */
-    protected function phpMail(array $aParams)
+    protected function phpMail(array $aParams): bool
     {
         // If the email sender is empty, we define the server email.
         if (empty($aParams['from'])) {

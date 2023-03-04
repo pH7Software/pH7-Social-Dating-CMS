@@ -1,10 +1,12 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Core / Form / Processing
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -19,17 +21,13 @@ use PH7\Framework\Url\Header;
 /** For "user" and "affiliate" modules **/
 class DeleteUserCoreFormProcess extends Form
 {
-    /** @var oUserModel */
-    private $oUserModel;
+    private UserModel $oUserModel;
 
-    /** @var string */
-    private $sSessPrefix;
+    private string $sSessPrefix;
 
-    /** @var string */
-    private $sUsername;
+    private string $sUsername;
 
-    /** @var string */
-    private $sEmail;
+    private string $sEmail;
 
     public function __construct()
     {
@@ -58,12 +56,10 @@ class DeleteUserCoreFormProcess extends Form
     /**
      * Send an email to the admin saying the reason why a user wanted to delete their account.
      *
-     * @return int
-     *
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    private function sendWarnEmail()
+    private function sendWarnEmail(): bool
     {
         $sAdminEmail = DbConfig::getSetting('adminEmail');
 
@@ -100,10 +96,8 @@ class DeleteUserCoreFormProcess extends Form
 
     /**
      * Remove the user/affiliate account.
-     *
-     * @return void
      */
-    private function removeAccount()
+    private function removeAccount(): void
     {
         $oUser = $this->registry->module === 'user' ? new UserCore : new AffiliateCore;
         $oUser->delete($this->session->get($this->sSessPrefix . '_id'), $this->sUsername, $this->oUserModel);
@@ -113,11 +107,9 @@ class DeleteUserCoreFormProcess extends Form
     /**
      * Redirect the user to the goodbye (accountDeleted) page.
      *
-     * @return void
-     *
      * @throws Framework\File\IOException
      */
-    private function redirectToGoodbyePage()
+    private function redirectToGoodbyePage(): void
     {
         Header::redirect(
             Uri::get('user', 'main', 'accountdeleted')

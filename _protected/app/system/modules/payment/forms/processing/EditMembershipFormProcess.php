@@ -1,10 +1,12 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Payment / Form / Processing
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -16,8 +18,7 @@ use PH7\Framework\Url\Header;
 
 class EditMembershipFormProcess extends Form
 {
-    /** @var array */
-    private static $aFields = [
+    private static array $aFields = [
         'name' => 'name',
         'description' => 'description',
         'price' => 'price',
@@ -37,13 +38,8 @@ class EditMembershipFormProcess extends Form
 
         unset($oPayModel);
 
-        /* Clean UserCoreModel Cache */
-        (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
-
-        Header::redirect(
-            Uri::get('payment', 'admin', 'membershiplist'),
-            t('The Membership has been saved successfully!')
-        );
+        $this->clearCache();
+        $this->redirectToMembershipList();
     }
 
     /**
@@ -51,10 +47,8 @@ class EditMembershipFormProcess extends Form
      *
      * @param PaymentModel $oPayModel
      * @param int $iGroupId
-     *
-     * @return void
      */
-    private function updateTextFields(PaymentModel $oPayModel, $iGroupId)
+    private function updateTextFields(PaymentModel $oPayModel, $iGroupId): void
     {
         $oMembership = $oPayModel->getMemberships($iGroupId);
 
@@ -70,12 +64,24 @@ class EditMembershipFormProcess extends Form
      *
      * @param PaymentModel $oPayModel
      * @param int $iGroupId
-     *
-     * @return void
      */
-    private function updatePermsFields(PaymentModel $oPayModel, $iGroupId)
+    private function updatePermsFields(PaymentModel $oPayModel, $iGroupId): void
     {
         $aPerms = serialize($this->httpRequest->post('perms'));
         $oPayModel->updateMembershipGroup('permissions', $aPerms, $iGroupId);
+    }
+
+    private function redirectToMembershipList(): void
+    {
+        Header::redirect(
+            Uri::get('payment', 'admin', 'membershiplist'),
+            t('The Membership has been saved successfully!')
+        );
+    }
+
+    private function clearCache(): void
+    {
+        // Clear UserCoreModel Cache
+        (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
     }
 }

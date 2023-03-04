@@ -2,16 +2,19 @@
 /**
  * @title            Page Class
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Page
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Page;
 
 defined('PH7') or exit('Restricted access');
 
+use Exception;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Navigation\Browser;
 use PH7\JustHttp\StatusCode;
@@ -25,14 +28,7 @@ class Page
     {
     }
 
-    /**
-     * Set a maintenance page.
-     *
-     * @param int $iMaintenanceTime Time in seconds that the site will be down for maintenance.
-     *
-     * @return void
-     */
-    public static function maintenance($iMaintenanceTime)
+    public static function maintenance(int $iMaintenanceTime): void
     {
         Http::setMaintenanceCode($iMaintenanceTime);
 
@@ -46,14 +42,7 @@ class Page
         exit;
     }
 
-    /**
-     * Set a message page.
-     *
-     * @param string $sMsg Information message.
-     *
-     * @return void
-     */
-    public static function message($sMsg)
+    public static function message(string $sMsg): void
     {
         // Inclusion of the HTML Message page
         include PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/tpl/other/msg.html.php';
@@ -64,10 +53,8 @@ class Page
 
     /**
      * Set IP address banned page.
-     *
-     * @return void
      */
-    public static function banned()
+    public static function banned(): void
     {
         // Set the "forbidden" status code
         Http::setHeadersByCode(StatusCode::FORBIDDEN);
@@ -79,14 +66,7 @@ class Page
         exit;
     }
 
-    /**
-     * Set exception page.
-     *
-     * @param \Exception $oExcept
-     *
-     * @return void
-     */
-    public static function exception(\Exception $oExcept)
+    public static function exception(Exception $oExcept): void
     {
         // Set 500 HTTP status code
         Http::setHeadersByCode(StatusCode::INTERNAL_SERVER_ERROR);
@@ -98,12 +78,7 @@ class Page
         include PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/tpl/error/except.html.php';
     }
 
-    /**
-     * Set error 500 page.
-     *
-     * @return void
-     */
-    public static function error500()
+    public static function error500(): void
     {
         // Set 500 HTTP status code
         Http::setHeadersByCode(StatusCode::INTERNAL_SERVER_ERROR);

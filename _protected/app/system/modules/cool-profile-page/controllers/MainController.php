@@ -2,9 +2,9 @@
 /**
  * @title          Profile Controller
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Cool Profile Page / Controller
  */
 
@@ -28,7 +28,7 @@ class MainController extends ProfileBaseController
         $this->setVisitorId($this->session->get('member_id'));
     }
 
-    public function index()
+    public function index(): void
     {
         $this->addCssFiles();
         $this->addAdditionalAssetFiles();
@@ -120,10 +120,8 @@ class MainController extends ProfileBaseController
 
     /**
      * Add the General and Tabs Menu stylesheets.
-     *
-     * @return void
      */
-    protected function addCssFiles()
+    protected function addCssFiles(): void
     {
         $this->design->addCss(
             PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,

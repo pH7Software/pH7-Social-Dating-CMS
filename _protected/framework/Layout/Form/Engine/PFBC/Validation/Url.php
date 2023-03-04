@@ -13,10 +13,10 @@ class Url extends Validation
     public function __construct()
     {
         parent::__construct();
-        $this->message = t('Error: %element% must contain a URL (e.g., <a href="http://ph7cms.com">http://ph7cms.com</a>).');
+        $this->message = t('%element% must contain a URL (e.g. <a href="http://ph7builder.com">http://ph7builder.com</a>).');
     }
 
-    public function isValid($sValue)
+    public function isValid($sValue): bool
     {
         return $this->isNotApplicable($sValue) || $this->oValidate->url($sValue);
     }

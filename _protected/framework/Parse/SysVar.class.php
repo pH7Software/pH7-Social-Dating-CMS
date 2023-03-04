@@ -1,13 +1,14 @@
 <?php
 /**
- * @title            SysVar Class
- * @desc             Parse the global pH7CMS variables.
+ * @desc             Parse the global pH7Builder variables.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Parse
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Parse;
 
@@ -18,19 +19,20 @@ use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Registry\Registry;
 use PH7\Framework\Session\Session;
+use PH7\Framework\Str\Str;
 
 class SysVar
 {
-    const REGEX_NOT_PARSING = '/#!.+!#/';
-    const NOT_PARSING_DELIMITERS = ['#!', '!#'];
+    private const REGEX_NOT_PARSING = '/#!.+!#/';
+    private const NOT_PARSING_DELIMITERS = ['#!', '!#'];
 
-    /** @var string */
-    private $sVar;
+    private Str $oStr;
 
-    /** @var array */
-    private static $aKernelVariables = [
+    private string $sVar;
+
+    private static array $aKernelVariables = [
         '%software_name%' => Kernel::SOFTWARE_NAME,
-        '%software_author%' => 'Pierre-Henry Soria',
+        '%software_author%' => Kernel::SOFTWARE_AUTHOR,
         '%software_version_name%' => Kernel::SOFTWARE_VERSION_NAME,
         '%software_version%' => Kernel::SOFTWARE_VERSION,
         '%software_build%' => Kernel::SOFTWARE_BUILD,
@@ -38,14 +40,15 @@ class SysVar
         '%software_website%' => Kernel::SOFTWARE_WEBSITE
     ];
 
+    public function __construct()
+    {
+        $this->oStr = new Str;
+    }
+
     /**
      * Parser for the System variables.
-     *
-     * @param string $sVar
-     *
-     * @return string The new parsed text
      */
-    public function parse($sVar)
+    public function parse(string $sVar): string
     {
         $this->sVar = $sVar;
 
@@ -63,21 +66,21 @@ class SysVar
         return $this->sVar;
     }
 
-    private function parseSiteVars()
+    private function parseSiteVars(): void
     {
         $oRegistry = Registry::getInstance();
-        $this->sVar = str_replace('%site_name%', $oRegistry->site_name, $this->sVar);
-        $this->sVar = str_replace('%url_relative%', PH7_RELATIVE, $this->sVar);
-        $this->sVar = str_replace(['%site_url%', '%url_root%'], $oRegistry->site_url, $this->sVar);
-        $this->sVar = str_replace('%url_static%', PH7_URL_STATIC, $this->sVar);
+        $this->sVar = $this->oStr->replace('%site_name%', (string)$oRegistry->site_name, $this->sVar);
+        $this->sVar = $this->oStr->replace('%url_relative%', PH7_RELATIVE, $this->sVar);
+        $this->sVar = $this->oStr->replace(['%site_url%', '%url_root%'], (string)$oRegistry->site_url, $this->sVar);
+        $this->sVar = $this->oStr->replace('%url_static%', PH7_URL_STATIC, $this->sVar);
         unset($oRegistry);
     }
 
-    private function parseAffiliateVars()
+    private function parseAffiliateVars(): void
     {
         $oSession = new Session;
         $sAffUsername = $oSession->exists('affiliate_username') ? $oSession->get('affiliate_username') : 'aid';
-        $this->sVar = str_replace(
+        $this->sVar = $this->oStr->replace(
             '%affiliate_url%',
             Uri::get('affiliate', 'router', 'refer', $sAffUsername),
             $this->sVar
@@ -85,28 +88,25 @@ class SysVar
         unset($oSession);
     }
 
-    private function parseGlobalVars()
+    private function parseGlobalVars(): void
     {
-        $this->sVar = str_replace('%ip%', Ip::get(), $this->sVar);
+        $this->sVar = $this->oStr->replace('%ip%', Ip::get(), $this->sVar);
     }
 
-    private function parseKernelVars()
+    private function parseKernelVars(): void
     {
         foreach (self::$aKernelVariables as $sKey => $sValue) {
-            $this->sVar = str_replace($sKey, $sValue, $this->sVar);
+            $this->sVar = $this->oStr->replace($sKey, $sValue, $this->sVar);
         }
     }
 
-    private function removeNotParsingDelimiters()
+    private function removeNotParsingDelimiters(): void
     {
-        $this->sVar = str_replace(self::NOT_PARSING_DELIMITERS, '', $this->sVar);
+        $this->sVar = $this->oStr->replace(self::NOT_PARSING_DELIMITERS, '', $this->sVar);
     }
 
-    /**
-     * @return bool
-     */
-    private function notParsingVars()
+    private function notParsingVars(): bool
     {
-        return preg_match(self::REGEX_NOT_PARSING, $this->sVar);
+        return (bool)preg_match(self::REGEX_NOT_PARSING, $this->sVar);
     }
 }

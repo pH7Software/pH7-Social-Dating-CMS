@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Picture / Controller
  */
 
@@ -73,7 +73,7 @@ class MainController extends Controller
 
     public function addPhoto()
     {
-        $this->view->page_title = $this->view->h2_title = t('Add some new Photos');
+        $this->view->page_title = $this->view->h2_title = t('Add some Photos');
         $this->output();
     }
 
@@ -288,7 +288,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    protected function imageToSocialMetaTags(stdClass $oPicture)
+    protected function imageToSocialMetaTags(stdClass $oPicture): void
     {
         $sFilename = str_replace('original', '600', $oPicture->file);
         $sImageUrl = PH7_URL_DATA_SYS_MOD . 'picture/img/' . $oPicture->username . '/' . $oPicture->albumId . '/' . $sFilename;

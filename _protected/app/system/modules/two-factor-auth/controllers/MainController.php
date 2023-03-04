@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2016-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Two-Factor Auth / Controller
  */
 
@@ -12,6 +12,7 @@ use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Parse\Url;
 use PH7\Framework\Url\Header;
+use PH7\Link\Name as UrlName;
 use RobThree\Auth\TwoFactorAuth as Authenticator;
 
 class MainController extends Controller
@@ -122,7 +123,7 @@ class MainController extends Controller
         $sTxtMsg .= t('Print it and keep it in a safe place, like your wallet.') . "\r\n\r\n\r\n";
         $sTxtMsg .= t('Regards, %site_name%') . "\r\n";
         $sTxtMsg .= '-----' . "\r\n";
-        $sTxtMsg .= t('Powered by "pH7CMS.com" software.') . "\r\n";
+        $sTxtMsg .= t('Powered by "pH7Builder.com" software.') . "\r\n";
 
         return $sTxtMsg;
     }
@@ -171,7 +172,7 @@ class MainController extends Controller
      */
     private function getAuthenticatorName()
     {
-        return str_replace('/', '-', Url::name($this->registry->site_url)) . '-' . $this->sMod;
+        return str_replace('/', '-', UrlName::parse($this->registry->site_url)) . '-' . $this->sMod;
     }
 
     /**

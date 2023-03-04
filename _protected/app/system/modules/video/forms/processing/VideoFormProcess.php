@@ -3,9 +3,9 @@
  * @title          Video Form Process Class
  * @desc           Class that allows to download the video to the server and save the information about the video in the database.
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Video / Form / Processing
  * @version        1.1
  *
@@ -22,7 +22,7 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Util\Various;
 use PH7\Framework\Video as V;
-use PH7\Framework\Video\Api\IApi;
+use PH7\Framework\Video\Api\Apible;
 
 class VideoFormProcess extends Form
 {
@@ -37,7 +37,7 @@ class VideoFormProcess extends Form
         parent::__construct();
 
         /**
-         * This can cause minor errors (eg if a user sent a file that is not a video).
+         * This can cause minor errors (e.g. if a user sent a file that is not a video).
          * So we hide the errors if we are not in development mode.
          */
         if (!isDebug()) {
@@ -200,11 +200,11 @@ class VideoFormProcess extends Form
     /**
      * Creates a nice title if no title is specified.
      *
-     * @param IApi $oInfo
+     * @param Apible $oInfo
      *
      * @return string
      */
-    private function getApiVideoTitle(IApi $oInfo)
+    private function getApiVideoTitle(Apible $oInfo)
     {
         if ($this->httpRequest->postExists('title') &&
             $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2
@@ -216,11 +216,11 @@ class VideoFormProcess extends Form
     }
 
     /**
-     * @param IApi $oInfo
+     * @param Apible $oInfo
      *
      * @return string
      */
-    private function getApiVideoDescription(IApi $oInfo)
+    private function getApiVideoDescription(Apible $oInfo)
     {
         if ($this->httpRequest->postExists('description')) {
             return $this->httpRequest->post('description');

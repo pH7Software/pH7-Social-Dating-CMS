@@ -2,7 +2,7 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Test / Unit / Framework / Layout / Tpl / Engine / PH7Tpl / Syntax
  */
 
@@ -15,10 +15,10 @@ use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Syntax\EmptyCodeException;
 
 class CurlyTest extends SyntaxTestCase
 {
-    const INPUT_DIR = 'input/curly/';
-    const OUTPUT_DIR = 'output/curly/';
-    const INPUT_TPL_FILE_EXT = '.curly.tpl';
-    const OUTPUT_PHP_FILE_EXT = '.curly.output';
+    protected const INPUT_DIR = 'input/curly/';
+    protected const OUTPUT_DIR = 'output/curly/';
+    protected const INPUT_TPL_FILE_EXT = '.curly.tpl';
+    protected const OUTPUT_PHP_FILE_EXT = '.curly.output';
 
     private CurlySyntax $oCurlySyntax;
 

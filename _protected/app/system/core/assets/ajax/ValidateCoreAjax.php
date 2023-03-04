@@ -3,9 +3,9 @@
  * @title            Validate Ajax Class
  * @desc             Checks the data entered by a form via Ajax and indicates if there are errors (Asynchronous data).
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / App / System / Core / Asset / Ajax
  * @version          1.2
  */
@@ -18,6 +18,7 @@ use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Spam\Captcha\Captcha;
 use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Str\Str;
@@ -31,7 +32,7 @@ class ValidateCoreAjax
     /** @var Validate */
     private $oValidate;
 
-    /** @var ExistsCoreModel */
+    /** @var ExistCoreModel */
     private $oExistsModel;
 
     /** @var string Default message value */
@@ -44,7 +45,7 @@ class ValidateCoreAjax
     {
         $this->oStr = new Str;
         $this->oValidate = new Validate;
-        $this->oExistsModel = new ExistsCoreModel;
+        $this->oExistsModel = new ExistCoreModel;
     }
 
     /**
@@ -150,9 +151,9 @@ class ValidateCoreAjax
         if (!$this->oValidate->email($sValue)) {
             $this->sMsg = t('Invalid Email Address!');
         } elseif ($sParam === 'guest' && $this->oExistsModel->email($sValue, $sTable)) {
-            $this->sMsg = t('This email already used by another member.');
+            $this->sMsg = t('Email already used. Yours? <a href="%0%">Password forgotten?</a>', Uri::get('lost-password', 'main', 'forgot', 'user'));
         } elseif ($sParam === 'user' && !$this->oExistsModel->email($sValue, $sTable)) {
-            $this->sMsg = t('Oops! "%0%" is not associated with any %site_name% account.', substr($sValue, 0, 50));
+            $this->sMsg = t('Oops! "%0%" is not associated with any %site_name% accounts.', substr($sValue, 0, 50));
         } else {
             $this->iStatus = 1;
             $this->sMsg = t('Valid Email!');
@@ -259,7 +260,7 @@ class ValidateCoreAjax
     protected function url($sValue)
     {
         if (!$this->oValidate->url($sValue)) {
-            $this->sMsg = t('Your must enter a valid url (e.g., http://ph7cms.com).');
+            $this->sMsg = t('Your must enter a valid url (e.g. http://ph7builder.com).');
         } else {
             $this->iStatus = 1;
             $this->sMsg = t('OK!');

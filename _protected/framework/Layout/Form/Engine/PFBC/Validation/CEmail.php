@@ -8,8 +8,11 @@ namespace PFBC\Validation;
 
 use PFBC\Validation;
 use PH7\DbTableName;
-use PH7\ExistsCoreModel;
+use PH7\ExistCoreModel;
 
+/**
+ * Validates a customer email address.
+ */
 class CEmail extends Validation
 {
     const GUEST_MODE = 'guest';
@@ -26,13 +29,13 @@ class CEmail extends Validation
 
         $this->sTable = $sTable;
         $this->sType = $sType;
-        $this->message = t('Error: Invalid email or already used by another user.');
+        $this->message = t('Invalid email or already used by another user.');
     }
 
     public function isValid($sValue)
     {
         if ($this->isNotApplicable($sValue) || $this->oValidate->email($sValue)) {
-            return !($this->sType === self::GUEST_MODE && (new ExistsCoreModel)->email($sValue, $this->sTable));
+            return !($this->sType === self::GUEST_MODE && (new ExistCoreModel)->email($sValue, $this->sTable));
         }
 
         return false;

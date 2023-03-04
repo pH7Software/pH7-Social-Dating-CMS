@@ -1,13 +1,14 @@
 <?php
 /**
- * @title            Statistic Class
- * @desc             View Statistics methods.
+ *                   View Statistics methods.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Analytics
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Analytics;
 
@@ -20,7 +21,7 @@ use PH7\Framework\Session\Session;
 class Statistic
 {
     /** pHV = "pH Views" */
-    const SESSION_PREFIX = 'pHV';
+    private const SESSION_PREFIX = 'pHV';
 
     /**
      * Import the trait to set the class static.
@@ -34,10 +35,8 @@ class Statistic
      *
      * @param int $iId
      * @param string $sTable
-     *
-     * @return void
      */
-    public static function setView($iId, $sTable)
+    public static function setView($iId, string $sTable): void
     {
         $oSession = new Session;
         $sSessionName = static::SESSION_PREFIX . $iId . $sTable;

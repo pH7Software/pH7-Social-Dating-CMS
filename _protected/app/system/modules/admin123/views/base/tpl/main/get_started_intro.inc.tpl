@@ -1,6 +1,6 @@
 <div class="center">
     <div class="s_bMarg border">
-        <h2>🍰 <span class="underline">{lang 'Getting Started Smoothly'}</span> 👌</h2>
+        <h2>🍰 <span class="underline">{lang 'Getting Started'}</span> 👌</h2>
 
         <p>
             {lang 'Welcome to your admin dashboard! You will find everything you need to customize and manage your website in here 🙂'}

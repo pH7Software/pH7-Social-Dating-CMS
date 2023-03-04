@@ -1,6 +1,6 @@
 ####################
-# pH7CMS: The Social Dating CMS (by Pierre-Henry Soria)
-# URL: https://ph7cms.com
+# pH7Builder: The Social Dating CMS (by Pierre-Henry Soria)
+# URL: https://ph7builder.com
 ####################
 
 # Disallow Internet Archiver Wayback Machine

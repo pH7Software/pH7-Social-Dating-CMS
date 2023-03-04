@@ -3,9 +3,9 @@
  * @title          Import Users; Process Class
  * @desc           Import new Users from CSV data file.
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2015-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2015-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / Inc / Class
  */
 
@@ -23,17 +23,17 @@ use PH7\Framework\Util\Various;
 
 class ImportUser extends Core
 {
-    const NO_ERROR = 0;
-    const ERR_BAD_FILE = 1;
-    const ERR_TOO_LARGE = 2;
-    const ERR_INVALID = 3;
+    private const NO_ERROR = 0;
+    private const ERR_BAD_FILE = 1;
+    private const ERR_TOO_LARGE = 2;
+    private const ERR_INVALID = 3;
 
-    const IMPORT_FILE_EXTENSION = 'csv';
+    private const IMPORT_FILE_EXTENSION = 'csv';
 
     /*
-     * @var array Array containing the DB data types.
+     * @var array Contains the DB data types.
      */
-    const DB_TYPES = [
+    private const DB_TYPES = [
         'first_name',
         'last_name',
         'username',
@@ -50,21 +50,17 @@ class ImportUser extends Core
         'ip'
     ];
 
-    /** @var bool|resource */
+    /** @var resource|false */
     private $rHandler;
 
     private array $aFile;
-
     private array $aData = [];
-
     private array $aTmpData = [];
-
     private array $aFileData;
-
     private array $aRes;
 
     /**
-     * @param array $aFile
+     * @param array $aFile e.g., $_FILES['csv_file']
      * @param string $sDelimiter Field delimiter (one character).
      * @param string $sEnclosure Field enclosure (one character).
      */
@@ -72,10 +68,10 @@ class ImportUser extends Core
     {
         parent::__construct();
 
-        // Initialize necessary attributes
+        // Initialize the necessary attributes
         $this->aFile = $aFile;
         $this->rHandler = @fopen($this->aFile['tmp_name'], 'rb');
-        $this->aFileData = @fgetcsv($this->rHandler, 0, $sDelimiter, $sEnclosure);
+        $this->aFileData = (array)@fgetcsv($this->rHandler, 0, $sDelimiter, $sEnclosure);
         $this->aRes = $this->run($sDelimiter, $sEnclosure);
     }
 
@@ -124,7 +120,7 @@ class ImportUser extends Core
 
         $this->aTmpData = [
             'email' => $this->getRandomEmail($sFiveChars),
-            'username' => 'pH7CMS' . $sFiveChars,
+            'username' => 'pH7Builder' . $sFiveChars,
             'password' => Various::genRnd(),
             'first_name' => 'Alex' . $sFiveChars,
             'last_name' => 'Rolli' . $sFiveChars,
@@ -255,14 +251,14 @@ class ImportUser extends Core
 
         if ($iErrType !== static::NO_ERROR) {
             $this->removeTmpFile();
-            $this->aRes = ['status' => false, 'msg' => $this->getErrMsg($iErrType)];
+            return ['status' => false, 'msg' => $this->getErrMsg($iErrType)];
         } else {
             $this->setDefVals();
             $this->setTmpData();
 
             $iRow = 0;
             $oUserModel = new UserCoreModel;
-            $oExistsModel = new ExistsCoreModel;
+            $oExistsModel = new ExistCoreModel;
             $oValidate = new Validate;
 
             while (false !== ($aUserData = fgetcsv($this->rHandler, 0, $sDelimiter, $sEnclosure))) {
@@ -287,17 +283,12 @@ class ImportUser extends Core
 
     /**
      * Generates a random (birth) date.
-     *
-     * @return string
      */
     private function getRandomDate(): string
     {
         return date('Y') - mt_rand(20, 50) . '-' . mt_rand(1, 12) . '-' . mt_rand(1, 28);
     }
 
-    /**
-     * @return int
-     */
     private function hasError(): int
     {
         $sExtFile = $this->file->getFileExt($this->aFile['name']);
@@ -319,15 +310,11 @@ class ImportUser extends Core
 
     private function getRandomEmail(string $sFiveChars): string
     {
-        return sprintf('peterzhenry%s@%s.ph7cms.com', $sFiveChars, $sFiveChars);
+        return sprintf('peterzhenry%s@%s.ph7builder.com', $sFiveChars, $sFiveChars);
     }
 
     /**
      * Clean the text to make comparisons easier...
-     *
-     * @param $sValue
-     *
-     * @return string
      */
     private function cleanValue(string $sValue): string
     {

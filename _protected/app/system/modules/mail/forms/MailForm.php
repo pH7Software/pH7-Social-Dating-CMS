@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Mail / Form
  */
 
@@ -32,7 +32,8 @@ class MailForm
             Header::redirect();
         }
 
-        $oHttpRequest = new HttpRequest; // For Reply Function
+        $oHttpRequest = new HttpRequest;
+        $sRecipient = $oHttpRequest->get('recipient');
 
         $oForm = new \PFBC\Form('form_compose_mail');
         $oForm->configure(['action' => '']);
@@ -44,7 +45,7 @@ class MailForm
                 'recipient',
                 [
                     'id' => 'recipient',
-                    'value' => $oHttpRequest->get('recipient'),
+                    'value' => $sRecipient,
                     'required' => 1
                 ]
             )
@@ -70,7 +71,7 @@ class MailForm
                 [
                     'id' => 'str_msg',
                     'onblur' => 'CValid(this.value,this.id,2,2500)',
-                    'placeholder' => t('Say something nice to %0% 😊', $oHttpRequest->get('recipient')),
+                    'placeholder' => !empty($sRecipient) ? t('Say something nice to %0% 😊', $sRecipient) : t('Say something nice 😊'),
                     'value' => $oHttpRequest->get('message'),
                     'validation' => new Str(2, 2500),
                     'required' => 1

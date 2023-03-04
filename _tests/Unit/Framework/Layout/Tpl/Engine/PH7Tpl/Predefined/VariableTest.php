@@ -2,17 +2,20 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Test / Unit / Framework / Layout / Tpl / Engine / PH7Tpl / Predefined
  */
 
 namespace PH7\Test\Unit\Framework\Layout\Tpl\Engine\PH7Tpl\Predefined;
 
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Predefined\Variable as PredefinedVariable;
+use PH7\Test\Unit\AssertionHelper;
 use PHPUnit\Framework\TestCase;
 
 class VariableTest extends TestCase
 {
+    use AssertionHelper;
+
     public function testSoftwareNameVariable(): void
     {
         $oPredefinedVar = new PredefinedVariable('{software_name}');

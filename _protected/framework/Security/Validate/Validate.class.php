@@ -1,11 +1,10 @@
 <?php
 /**
- * @title            Validate Class
  * @desc             Various methods to Validate.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Security / Validate
  */
 
@@ -16,14 +15,14 @@ defined('PH7') or exit('Restricted access');
 use DateTime;
 use Exception;
 use PH7\DbTableName;
-use PH7\ExistsCoreModel;
+use PH7\ExistCoreModel;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Math\Measure\Year as YearMeasure;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Str\Str;
-use PH7\UserCore;
 use PH7\JustHttp\StatusCode;
+use PH7\UserCore;
 
 class Validate
 {
@@ -217,7 +216,7 @@ class Validate
     }
 
     /**
-     * Validate Username.
+     * Validate username pattern and check if username is unique (doesn't already exist).
      *
      * @param string $sUsername
      * @param int $iMin Default 3
@@ -231,19 +230,19 @@ class Validate
         $sUsername = trim($sUsername);
 
         /**
-         * Do quicker check for admin profiles,
-         * because they don't have profile page URL (www.mysite.com/@<username>)
-         * and don't need to check banned usernames for them.
+         * Do quicker check for admin usernames.
+         * Admin usernames don't have URL pages (www.mysite.com/@<USERNAME>), so no need to check if any file names conflict with the username
+         * and don't need to check for banned usernames either.
          */
         if ($sTable === DbTableName::ADMIN) {
             return preg_match('#^' . PH7_USERNAME_PATTERN . '{' . $iMin . ',' . $iMax . '}$#', $sUsername) &&
-                !(new ExistsCoreModel)->username($sUsername, $sTable);
+                !(new ExistCoreModel)->username($sUsername, $sTable);
         }
 
         return preg_match('#^' . PH7_USERNAME_PATTERN . '{' . $iMin . ',' . $iMax . '}$#', $sUsername) &&
             !file_exists(PH7_PATH_ROOT . UserCore::PROFILE_PAGE_PREFIX . $sUsername) &&
             !Ban::isUsername($sUsername) &&
-            !(new ExistsCoreModel)->username($sUsername, $sTable);
+            !(new ExistCoreModel)->username($sUsername, $sTable);
     }
 
     /**

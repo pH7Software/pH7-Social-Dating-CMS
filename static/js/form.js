@@ -1,7 +1,7 @@
 /*
  * Author:        Pierre-Henry Soria <ph7software@gmail.com>
  * Copyright:     (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
- * License:       MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * License:       MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  */
 
 const sButtonPattern = 'button[type=submit]';

@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Video / Controller
  */
 
@@ -15,8 +15,8 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Url\Header;
-use stdClass;
 use PH7\JustHttp\StatusCode;
+use stdClass;
 
 class MainController extends Controller
 {
@@ -295,7 +295,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    protected function imageToSocialMetaTags(stdClass $oVideo)
+    protected function imageToSocialMetaTags(stdClass $oVideo): void
     {
         $sImageUrl = PH7_URL_DATA_SYS_MOD . 'video/file/' . $oVideo->username . '/' . $oVideo->albumId . '/' . $oVideo->thumb;
         $this->view->image_social_meta_tag = $sImageUrl;

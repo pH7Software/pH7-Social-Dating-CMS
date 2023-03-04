@@ -2,9 +2,9 @@
 /**
  * @title            Ip localization Class
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Geo / Ip
  */
 
@@ -40,10 +40,7 @@ class Geo
     {
         try {
             $sCountryCode = static::get($sIpAddress)->country->isoCode;
-            // TODO: When support PHP 7.1, specify multiple exceptions using "|" pipe
-        } catch (AddressNotFoundException $oE) {
-            $sCountryCode = '';
-        } catch (InvalidDatabaseException $oE) {
+        } catch (AddressNotFoundException | InvalidDatabaseException $oE) {
             $sCountryCode = null;
         }
 
@@ -61,10 +58,7 @@ class Geo
     {
         try {
             $sZipCode = static::get($sIpAddress)->postal->code;
-            // TODO: When support PHP 7.1, specify multiple exceptions using "|" pipe
-        } catch (AddressNotFoundException $oE) {
-            $sZipCode = '';
-        } catch (InvalidDatabaseException $oE) {
+        } catch (AddressNotFoundException | InvalidDatabaseException $oE) {
             $sZipCode = null;
         }
 
@@ -82,11 +76,7 @@ class Geo
     {
         try {
             $sCountryName = static::get($sIpAddress)->country->name;
-
-            // TODO: When support PHP 7.1, specify multiple exceptions using "|" pipe
-        } catch (AddressNotFoundException $oE) {
-            $sCountryName = '';
-        } catch (InvalidDatabaseException $oE) {
+        } catch (AddressNotFoundException | InvalidDatabaseException $oE) {
             $sCountryName = null;
         }
 
@@ -104,11 +94,7 @@ class Geo
     {
         try {
             $sCity = static::get($sIpAddress)->city->name;
-
-            // TODO: When support PHP 7.1, specify multiple exceptions using "|" pipe
-        } catch (AddressNotFoundException $oE) {
-            $sCity = '';
-        } catch (InvalidDatabaseException $oE) {
+        } catch (AddressNotFoundException | InvalidDatabaseException $oE) {
             $sCity = null;
         }
 

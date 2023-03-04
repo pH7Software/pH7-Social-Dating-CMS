@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Invite / Form / Processing
  */
 
@@ -17,8 +17,8 @@ use PH7\Framework\Security\Validate\Validate;
 
 class InviteFormProcess extends Form
 {
-    const MAX_EMAIL_ADDRESSES = 10;
-    const EMAIL_DELIMITER = ',';
+    private const MAX_EMAIL_ADDRESSES = 10;
+    private const EMAIL_DELIMITER = ',';
 
     public function __construct()
     {
@@ -48,7 +48,7 @@ class InviteFormProcess extends Form
     }
 
     /**
-     * Send the confirm email.
+     * Send the confirmation email.
      *
      * @param string $sEmailAddress The user email.
      * @param Mailable $oMailEngine
@@ -58,7 +58,7 @@ class InviteFormProcess extends Form
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    private function sendMail($sEmailAddress, Mailable $oMailEngine)
+    private function sendMail(string $sEmailAddress, Mailable $oMailEngine): bool
     {
         $this->view->content = t('Hello!') . '<br />' .
             t('You have received a privilege on the invitation from your friend on the new platform to meet new generation - %site_name%') . '<br />' .
@@ -80,11 +80,9 @@ class InviteFormProcess extends Form
     }
 
     /**
-     * @return array
-     *
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    private function getEmails()
+    private function getEmails(): array
     {
         return explode(
             self::EMAIL_DELIMITER,

@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
 
@@ -56,7 +56,7 @@ class EditFormProcess extends Form
         }
 
         if (!$this->str->equals($this->httpRequest->post('mail'), $oAdmin->email)) {
-            if ((new ExistsCoreModel)->email($this->httpRequest->post('mail'), DbTableName::ADMIN)) {
+            if ((new ExistCoreModel)->email($this->httpRequest->post('mail'), DbTableName::ADMIN)) {
                 \PFBC\Form::setError(
                     'form_admin_edit_account',
                     t('Invalid email or already used by another admin.')

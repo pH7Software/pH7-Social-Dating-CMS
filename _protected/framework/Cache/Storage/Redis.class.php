@@ -1,8 +1,8 @@
 <?php
 /**
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2017-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Cache / Storage
  */
 
@@ -12,7 +12,7 @@ defined('PH7') or exit('Restricted access');
 
 /**
  * Hasn't be done yet.
- * Feel free to contribute on pH7CMS open source repo: https://github.com/pH7Software/pH7-Social-Dating-CMS
+ * Feel free to contribute on pH7Builder open source repo: https://github.com/pH7Software/pH7-Social-Dating-CMS
  *
  * Thank you!
  * Pierre-Henry Soria

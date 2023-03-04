@@ -24,5 +24,5 @@ ALTER TABLE pH7_Settings DROP PRIMARY KEY, ADD PRIMARY KEY (settingName);
 INSERT INTO pH7_Settings (settingName, settingValue, description, settingGroup) VALUES
 ('displayPoweredByLink', 1, 'Show or not the Branding link in the footer.', 'general');
 
--- Update pH7CMS's SQL schema version
-UPDATE pH7_Modules SET version = '1.4.1' WHERE vendorName = 'pH7CMS';
+-- Update pH7Builder's SQL schema version
+UPDATE pH7_Modules SET version = '1.4.1' WHERE vendorName = 'pH7Builder';

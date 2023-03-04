@@ -2,9 +2,9 @@
 /**
  * @title          Generate a dynamic form from database fields
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2013-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Core / Form
  */
 
@@ -25,6 +25,8 @@ defined('PH7') or exit('Restricted access');
 
 class DynamicFieldCoreForm
 {
+    use HtmlForm;
+
     /** @var \PFBC\Form */
     private $oForm;
 
@@ -62,7 +64,8 @@ class DynamicFieldCoreForm
                         [
                             'id' => $this->getFieldId('str'),
                             'onblur' => 'CValid(this.value,this.id,20,4000)',
-                            'value' => $this->sVal, 'validation' => new Str(20, 4000),
+                            'value' => $this->sVal,
+                            'validation' => new Str(20, 4000),
                             'required' => 1
                         ]
                     )
@@ -108,7 +111,8 @@ class DynamicFieldCoreForm
                         [
                             'id' => $this->getFieldId('str'),
                             'onblur' => 'CValid(this.value,this.id,2,150)',
-                            'value' => $this->sVal, 'validation' => new Str(2, 150),
+                            'value' => $this->sVal,
+                            'validation' => new Str(2, 150),
                             'required' => 1
                         ]
                     )
@@ -211,12 +215,16 @@ class DynamicFieldCoreForm
                     new Phone(
                         t('Phone Number:'),
                         $this->sColumn,
-                        [
-                            'id' => $this->getFieldId('phone'),
-                            'onblur' => 'CValid(this.value, this.id)',
-                            'title' => t('Enter full number with area code.'),
-                            'value' => $this->sVal
-                        ]
+                        array_merge(
+                            [
+                                'id' => $this->getFieldId('phone'),
+                                'onblur' => 'CValid(this.value, this.id)',
+                                'value' => $this->sVal,
+                            ],
+                            self::setCustomValidity(
+                                t('Enter full number with area code.')
+                            ),
+                        )
                     )
                 );
                 $this->addCheckErrSpan('phone');
@@ -262,32 +270,33 @@ class DynamicFieldCoreForm
      */
     protected function getFieldType()
     {
-        if (strstr($this->sColumn, 'textarea'))
+        if (strstr($this->sColumn, 'textarea')) {
             $sType = 'Textarea';
-        elseif (strstr($this->sColumn, 'editor'))
+        } elseif (strstr($this->sColumn, 'editor')) {
             $sType = 'CKEditor';
-        elseif (strstr($this->sColumn, 'email'))
+        } elseif (strstr($this->sColumn, 'email')) {
             $sType = 'Email';
-        elseif (strstr($this->sColumn, 'password'))
+        } elseif (strstr($this->sColumn, 'password')) {
             $sType = 'Password';
-        elseif (strstr($this->sColumn, 'url'))
+        } elseif (strstr($this->sColumn, 'url')) {
             $sType = 'Url';
-        elseif (strstr($this->sColumn, 'phone'))
+        } elseif (strstr($this->sColumn, 'phone')) {
             $sType = 'Phone';
-        elseif (strstr($this->sColumn, 'date'))
+        } elseif (strstr($this->sColumn, 'date')) {
             $sType = 'Date';
-        elseif (strstr($this->sColumn, 'color'))
+        } elseif (strstr($this->sColumn, 'color')) {
             $sType = 'Color';
-        elseif (strstr($this->sColumn, 'number'))
+        } elseif (strstr($this->sColumn, 'number')) {
             $sType = 'Number';
-        elseif (strstr($this->sColumn, 'range'))
+        } elseif (strstr($this->sColumn, 'range')) {
             $sType = 'Range';
-        elseif (stripos($this->sColumn, 'height') !== false)
+        } elseif (stripos($this->sColumn, 'height') !== false) {
             $sType = 'Height';
-        elseif (stripos($this->sColumn, 'weight') !== false)
+        } elseif (stripos($this->sColumn, 'weight') !== false) {
             $sType = 'Weight';
-        else
+        } else {
             $sType = 'Textbox';
+        }
 
         return $sType;
     }

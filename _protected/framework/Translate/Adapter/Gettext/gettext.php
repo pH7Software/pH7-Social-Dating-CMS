@@ -1,6 +1,6 @@
 <?php
 /*
- * Notice: This file has been modified by the pH7CMS development team (well by Pierre-Henry Soria) <http://ph7cms.com>
+ * Notice: This file has been modified by the pH7Builder development team (well by Pierre-Henry Soria) <http://ph7cms.com>
  * Version now compatible with PHP 5+ and PHP 7+ (like PHP4 constructors have been move to PHP5 constructors because the old one wasn't working anymore with the new PHP version).
  */
 

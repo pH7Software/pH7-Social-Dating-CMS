@@ -3,9 +3,9 @@
  * @title            Header Url Class
  * @desc             Header URL methods.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Url
  * @version          1.2
  */
@@ -29,17 +29,13 @@ class Header
      * @param string $sUrl Default NULL, so it's the current URL.
      * @param string $sMessage Default NULL, so no message.
      * @param string $sType Type of message: "Design::SUCCESS_TYPE", "Design::INFO_TYPE", "Design::WARNING_TYPE" or "Design::ERROR_TYPE"
-     * @param int $iRedirectCode Default NULL, so the redirect code will be "301".
+     * @param int $iRedirectCode Optional. Default MOVED_PERMANENTLY 301
      *
      * @return void
      */
-    public static function redirect($sUrl = null, $sMessage = null, $sType = Design::SUCCESS_TYPE, $iRedirectCode = null)
+    public static function redirect($sUrl = null, $sMessage = null, $sType = Design::SUCCESS_TYPE, int $iRedirectCode = StatusCode::MOVED_PERMANENTLY)
     {
-        if (!Http::getStatusCode($iRedirectCode)) {
-            $iRedirectCode = StatusCode::MOVED_PERMANENTLY;
-        }
-
-        Http::setHeadersByCode(Http::getStatusCode($iRedirectCode));
+        Http::setHeadersByCode($iRedirectCode);
 
         $oHttpRequest = new HttpRequest;
         $sUrl = $sUrl !== null ? $sUrl : $oHttpRequest->currentUrl();

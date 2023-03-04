@@ -4,9 +4,9 @@
  * @desc             This class makes use of annotations (similar to Java >= 5).
  *                   To use annotations, you must inherit your class with this Annotation class.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Annotation
  */
 
@@ -48,7 +48,7 @@ abstract class Annotation
      *
      * @return array
      */
-    public function getAnnotations()
+    public function getAnnotations(): array
     {
         $sClassName = get_class($this);
 
@@ -94,7 +94,7 @@ abstract class Annotation
      *
      * @param string $sClassName
      */
-    protected function initializeAnnotations($sClassName)
+    protected function initializeAnnotations(string $sClassName): string
     {
         $this->oCache = (new Cache)->start(
             static::CACHE_GROUP,
@@ -110,7 +110,7 @@ abstract class Annotation
      *
      * @return void
      */
-    protected function saveAnnotations(array $aAnnotations)
+    protected function saveAnnotations(array $aAnnotations): void
     {
         $this->oCache->put($aAnnotations);
     }

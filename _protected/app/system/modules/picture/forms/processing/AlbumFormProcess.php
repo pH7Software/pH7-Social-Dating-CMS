@@ -1,10 +1,12 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Picture / Form / Processing
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -20,10 +22,9 @@ use PH7\Framework\Util\Various;
 
 class AlbumFormProcess extends Form implements NudityDetectable
 {
-    const ALBUM_IMAGE_SIZE = 200;
+    private const ALBUM_IMAGE_SIZE = 200;
 
-    /** @var string */
-    private $sApproved;
+    private string $sApproved;
 
     public function __construct()
     {
@@ -88,12 +89,12 @@ class AlbumFormProcess extends Form implements NudityDetectable
         }
     }
 
-    public function isNudityFilterEligible()
+    public function isNudityFilterEligible(): bool
     {
         return $this->sApproved === '1' && DbConfig::getSetting('nudityFilter');
     }
 
-    public function checkNudityFilter()
+    public function checkNudityFilter(): void
     {
         if (Filter::isNudity($_FILES['album']['tmp_name'])) {
             // The photo doesn't seem suitable for everyone. Overwrite "$sApproved" and set for moderation

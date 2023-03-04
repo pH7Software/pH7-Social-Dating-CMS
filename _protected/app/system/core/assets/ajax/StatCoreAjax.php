@@ -3,9 +3,9 @@
  * @title          Stat Ajax Class
  * @desc           Class of statistical data for the CMS in Ajax.
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Core / Asset / Ajax
  * @version        0.6
  */
@@ -20,11 +20,9 @@ use PH7\JustHttp\StatusCode;
 
 class StatCoreAjax
 {
-    /** @var UserCoreModel */
-    private $oUserModel;
+    private UserCoreModel $oUserModel;
 
-    /** @var mixed */
-    private $mOutput;
+    private string|int $mOutput;
 
     public function __construct()
     {
@@ -32,12 +30,12 @@ class StatCoreAjax
         $this->init();
     }
 
-    public function display()
+    public function display(): string|int
     {
         return $this->mOutput;
     }
 
-    private function init()
+    private function init(): void
     {
         $sType = (new HttpRequest)->post('type');
 

@@ -1,10 +1,12 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / User / Form / Processing
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -23,10 +25,9 @@ use stdClass;
 
 class LoginFormProcess extends Form implements LoginableForm
 {
-    const BRUTE_FORCE_SLEEP_DELAY = 1;
+    private const BRUTE_FORCE_SLEEP_DELAY = 1;
 
-    /** @var UserCoreModel */
-    private $oUserModel;
+    private UserCoreModel $oUserModel;
 
     public function __construct()
     {
@@ -66,7 +67,7 @@ class LoginFormProcess extends Form implements LoginableForm
                 $this->enableCaptcha();
                 \PFBC\Form::setError(
                     'form_login_user',
-                    t('Oops! "%0%" is not associated with any %site_name% account.', escape(substr($sEmail, 0, PH7_MAX_EMAIL_LENGTH)))
+                    t('Oops! "%0%" is not associated with any %site_name% accounts.', escape(substr($sEmail, 0, PH7_MAX_EMAIL_LENGTH)))
                 );
                 $oSecurityModel->addLoginLog(
                     $sEmail,
@@ -100,6 +101,7 @@ class LoginFormProcess extends Form implements LoginableForm
 
             $this->updatePwdHashIfNeeded($sPassword, $oUserData->password, $sEmail);
 
+            // Check if the country the user logged in is different from the last time.
             $sLocationName = Geo::getCountry();
             if ($this->isForeignLocation($iProfileId, $sLocationName)) {
                 SecurityCore::sendSuspiciousLocationAlert(
@@ -157,7 +159,7 @@ class LoginFormProcess extends Form implements LoginableForm
     /**
      * {@inheritDoc}
      */
-    public function updatePwdHashIfNeeded($sPassword, $sUserPasswordHash, $sEmail)
+    public function updatePwdHashIfNeeded(string $sPassword, string $sUserPasswordHash, string $sEmail): void
     {
         if ($sNewPwdHash = Security::pwdNeedsRehash($sPassword, $sUserPasswordHash)) {
             $this->oUserModel->changePassword($sEmail, $sNewPwdHash, DbTableName::MEMBER);
@@ -167,7 +169,7 @@ class LoginFormProcess extends Form implements LoginableForm
     /**
      * {@inheritDoc}
      */
-    public function enableCaptcha()
+    public function enableCaptcha(): void
     {
         $iNumberAttempts = (int)$this->session->get('captcha_user_enabled');
         $this->session->set('captcha_user_enabled', $iNumberAttempts++);
@@ -176,10 +178,8 @@ class LoginFormProcess extends Form implements LoginableForm
     /**
      * @param int $iProfileId
      * @param string $sLocationName
-     *
-     * @return bool
      */
-    public function isForeignLocation($iProfileId, $sLocationName)
+    public function isForeignLocation($iProfileId, $sLocationName): bool
     {
         $sLatestUsedIp = $this->oUserModel->getLastUsedIp($iProfileId);
 
@@ -190,25 +190,20 @@ class LoginFormProcess extends Form implements LoginableForm
         return false;
     }
 
-    /**
-     * @param stdClass $oUserData
-     *
-     * @return bool
-     */
-    private function isSmsVerificationEligible(stdClass $oUserData)
+    private function isSmsVerificationEligible(stdClass $oUserData): bool
     {
         return $oUserData->active == RegistrationCore::SMS_ACTIVATION &&
             SysMod::isEnabled('sms-verification');
     }
 
-    private function redirectToSmsVerification()
+    private function redirectToSmsVerification(): void
     {
         Header::redirect(
             Uri::get('sms-verification', 'main', 'send')
         );
     }
 
-    private function redirectToTwoFactorAuth()
+    private function redirectToTwoFactorAuth(): void
     {
         Header::redirect(
             Uri::get(

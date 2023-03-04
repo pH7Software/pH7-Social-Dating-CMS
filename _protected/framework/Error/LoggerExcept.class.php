@@ -3,9 +3,9 @@
  * @title          Logger Except Class
  * @desc           Handler Logger Exception Management.
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7/ Framework / Error
  * @version        2.0
  */
@@ -50,12 +50,8 @@ final class LoggerExcept extends Logger
 
     /**
      * Write to the logfile.
-     *
-     * @param Exception $oExcept
-     *
-     * @return void
      */
-    public function except(Exception $oExcept)
+    public function except(Exception $oExcept): void
     {
         // Time: Set the log date/time.
         // IP: The IP address of the client.
@@ -100,12 +96,7 @@ final class LoggerExcept extends Logger
         }
     }
 
-    /**
-     * @param string $sContents
-     *
-     * @return void
-     */
-    private function fileHandler($sContents)
+    private function fileHandler(string $sContents): void
     {
         $sFullFile = $this->sDir . static::EXCEPT_DIR . $this->sFileName . '.json';
         $sFullGzipFile = $this->sDir . static::EXCEPT_DIR . static::GZIP_DIR . $this->sFileName . '.gz';
@@ -123,12 +114,7 @@ final class LoggerExcept extends Logger
         }
     }
 
-    /**
-     * @param string $sContents
-     *
-     * @return void
-     */
-    private function sqlHandler($sContents)
+    private function sqlHandler(string $sContents): void
     {
         $sSql = 'INSERT INTO' . Db::prefix(DbTableName::LOG_ERROR) . 'SET logError = :line';
         $rStmt = Db::getInstance()->prepare($sSql);
@@ -136,12 +122,7 @@ final class LoggerExcept extends Logger
         Db::free($rStmt);
     }
 
-    /**
-     * @param string $sContents
-     *
-     * @return void
-     */
-    private function emailHandler($sContents)
+    private function emailHandler(string $sContents): void
     {
         $aInfo = [
             'to' => $this->config->values['logging']['bug_report_email'],
@@ -159,10 +140,8 @@ final class LoggerExcept extends Logger
      * If the log file already exists and is larger than 5 Mb, then returns TRUE, FALSE otherwise.
      *
      * @param string $sFullFile Log file path.
-     *
-     * @return bool
      */
-    private function isGzipEligible($sFullFile)
+    private function isGzipEligible(string $sFullFile): bool
     {
         return is_file($sFullFile) && filesize($sFullFile) >= static::MAX_UNCOMPRESSED_SIZE * 1024 * 1024;
     }

@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
 
@@ -23,12 +23,14 @@ class AdsCoreModel extends AdsModel
     /**
      * Get Advertisements in the database.
      *
-     * @param string|null $mActive 1 = active otherwise null. Default value is '1'
-     * @param string $sTable The table.
+     * @param string|null $mActive 1 (self::ACTIVE) = active, NULL otherwise.
+     * @param int $iOffset
+     * @param int $iLimit
+     * @param string $sTable The table name.
      *
      * @return array The advertisements data.
      */
-    public function get($mActive = self::ACTIVE, $iOffset, $iLimit, $sTable = AdsCore::AD_TABLE_NAME)
+    public function get(?string $mActive, int $iOffset, int $iLimit, string $sTable = AdsCore::AD_TABLE_NAME)
     {
         AdsCore::checkTable($sTable);
         $iOffset = (int)$iOffset;

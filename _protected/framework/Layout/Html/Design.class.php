@@ -1,8 +1,8 @@
 <?php
 /**
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Layout / Html
  */
 
@@ -31,7 +31,6 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Navigation\Pagination;
-use PH7\Framework\Parse\Url as UrlParser;
 use PH7\Framework\Registry\Registry;
 use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Session\Session;
@@ -39,6 +38,7 @@ use PH7\Framework\Str\Str;
 use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Url;
 use PH7\GenderTypeUserCore;
+use PH7\Link\Name as UrlName;
 use PH7\PH2Gravatar\Image as GravatarImage;
 use PH7\UserCore;
 use PH7\UserCoreModel;
@@ -157,10 +157,6 @@ class Design
 
     /**
      * Set an information message.
-     *
-     * @param string $sMsg
-     *
-     * @return void
      */
     public function setMessage(string $sMsg): void
     {
@@ -168,9 +164,7 @@ class Design
     }
 
     /**
-     * Display the information message.
-     *
-     * @return void
+     * Display the information messages.
      */
     public function message(): void
     {
@@ -201,10 +195,6 @@ class Design
 
     /**
      * Set an error message.
-     *
-     * @param string $sErr
-     *
-     * @return void
      */
     public function setError(string $sErr): void
     {
@@ -212,9 +202,7 @@ class Design
     }
 
     /**
-     * Display the error message.
-     *
-     * @return void
+     * Display the error messages.
      */
     public function error(): void
     {
@@ -247,10 +235,8 @@ class Design
      * @param string $sMsg , Optional, display a message after redirect of the page.
      * @param string $sType Type of message: "success", "info", "warning" or "error". Default: "success".
      * @param int $iTime Optional, a time. Default: "3" seconds.
-     *
-     * @return void
      */
-    public function setRedirect($sUrl = null, $sMsg = null, $sType = self::SUCCESS_TYPE, $iTime = self::DEFAULT_REDIRECTION_DELAY)
+    public function setRedirect($sUrl = null, $sMsg = null, $sType = self::SUCCESS_TYPE, $iTime = self::DEFAULT_REDIRECTION_DELAY): void
     {
         if ($sMsg !== null) {
             $this->setFlashMsg($sMsg, $sType);
@@ -367,7 +353,7 @@ class Design
     /**
      * Provide a "Powered By" link.
      *
-     * @param bool $bLink To include a link to pH7CMS or pH7Framework.
+     * @param bool $bLink To include a link to pH7Builder or pH7Framework.
      * @param bool $bSoftwareName
      * @param bool $bVersion To include the version being used.
      * @param bool $bComment HTML comment.
@@ -412,7 +398,7 @@ class Design
     /**
      * @return void Output the relevant link based on the client browser's language.
      */
-    final public function smartLink()
+    final public function smartLink(): void
     {
         // Get Client's Language Code
         $sLangCode = (new Browser)->getLanguage(true);
@@ -422,9 +408,9 @@ class Design
             ['title' => 'Flirt Hot Girls', 'link' => 'https://01script.com/p/dooba'],
             ['title' => 'Speed Dating', 'link' => 'https://01script.com/p/dooba'],
             ['title' => 'Date your Friends', 'link' => 'https://01script.com/p/dooba'],
-            ['title' => 'Free Dating CMS', 'link' => Kernel::SOFTWARE_GIT_REPO_URL],
-            ['title' => 'Dating Software', 'link' => Kernel::SOFTWARE_GIT_REPO_URL],
-            ['title' => 'Create a Tinder-Like Dating App', 'link' => Kernel::SOFTWARE_GIT_REPO_URL]
+            ['title' => 'Create Your Own Dating Web App', 'link' => Kernel::SOFTWARE_GIT_REPO_URL],
+            ['title' => 'Dating Builder Software', 'link' => Kernel::SOFTWARE_GIT_REPO_URL],
+            ['title' => 'Build a Tinder-Like Dating App', 'link' => Kernel::SOFTWARE_GIT_REPO_URL]
         ];
 
         if ($sLangCode === 'en-ie') {
@@ -607,12 +593,9 @@ class Design
     /**
      * Pagination.
      *
-     * @param int $iTotalPages
-     * @param int $iCurrentPage
-     *
      * @return void The HTML pagination code.
      */
-    public function pagination($iTotalPages, $iCurrentPage)
+    public function pagination(int $iTotalPages, int $iCurrentPage): void
     {
         echo (new Pagination($iTotalPages, $iCurrentPage))->getHtmlCode();
     }
@@ -641,42 +624,52 @@ class Design
 
             $sSize = ($iSize == 32 || $iSize == 64 || $iSize == 100 || $iSize == 150 || $iSize == 200 || $iSize == 400) ? '-' . $iSize : '';
 
-            $sAvatar = @$oGetAvatar->pic;
+            $sAvatar = (string)$oGetAvatar->pic;
             $sDir = 'user/avatar/img/' . $sUsername . PH7_SH;
             $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . $sDir . $sAvatar;
-            if (!is_file($sPath) || $oGetAvatar->approvedAvatar == '0') {
-                /* If sex is empty, it is recovered in the database using information from member */
-                $sSex = !empty($sSex) ? $sSex : $oUserModel->getSex(null, $sUsername, DbTableName::MEMBER);
-                $sSex = $this->oStr->lower($sSex);
-                $sIcon = (GenderTypeUserCore::isGenderValid($sSex) || $sSex === PH7_ADMIN_USERNAME) ? $sSex : 'visitor';
-                $sUrlTplName = defined('PH7_TPL_NAME') ? PH7_TPL_NAME : PH7_DEFAULT_THEME;
 
-                /** If the user doesn't have an avatar **/
-                if (!is_file($sPath)) {
-                    /* The user has no avatar, we then get a Gravatar if exists */
-                    $sEmail = $oUserModel->getEmail($iProfileId);
-                    $sUrl = GravatarImage::get($sEmail, ['size' => $iSize, 'display' => '404', 'rating' => 'g']);
+            /**
+             * Retrieve the correct avatar URL.
+             */
+            $sUrl = (function() use ($iProfileId, $sUsername, $sAvatar, $sDir, $sPath, $sSize, $iSize, $oGetAvatar, $oUserModel): string {
+                // If avatar path doesn't exist or is approval pending
+                if (!is_file($sPath) || $oGetAvatar->approvedAvatar == '0') {
+                    /* If sex is empty, it is recovered in the database using information from member */
+                    $sSex = !empty($sSex) ? $sSex : $oUserModel->getSex(null, $sUsername, DbTableName::MEMBER);
+                    $sSex = $this->oStr->lower($sSex);
+                    $sIcon = (GenderTypeUserCore::isGenderValid($sSex) || $sSex === PH7_ADMIN_USERNAME) ? $sSex : 'visitor';
+                    $sUrlTplName = defined('PH7_TPL_NAME') ? PH7_TPL_NAME : PH7_DEFAULT_THEME;
 
-                    if (!(new Validate)->url($sUrl, true)) {
-                        // If no Gravatar set, it returns 404, and we then set the default pH7CMS's avatar
-                        $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/' . $sIcon . '_no_picture' . $sSize . self::AVATAR_IMG_EXT;
+                    /* If the user doesn't have an avatar */
+                    if (!is_file($sPath)) {
+                        /* The user has no avatar, we then get a Gravatar if exists */
+                        $sEmail = $oUserModel->getEmail($iProfileId);
+                        $sUrl = GravatarImage::get($sEmail, ['size' => $iSize, 'display' => '404', 'rating' => 'g']);
+
+                        if (!(new Validate)->url($sUrl, true)) {
+                            // If no Gravatar set, it returns 404, and we then set the default pH7Builder's avatar
+                            $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/' . $sIcon . '_no_picture' . $sSize . self::AVATAR_IMG_EXT;
+                        }
+
+                        return $sUrl;
+                    } elseif (!AdminCore::isAdminPanel()) { // We don't display pending approval image when admins are on the panel admin
+                        return PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/pending' . $sSize . self::AVATAR_IMG_EXT;
                     }
-                } elseif (!AdminCore::isAdminPanel()) { // We don't display pending approval image when admins are on the panel admin
-                    $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/pending' . $sSize . self::AVATAR_IMG_EXT;
                 }
-            } else {
                 $sExt = PH7_DOT . (new File)->getFileExt($sAvatar);
-                $sUrl = PH7_URL_DATA_SYS_MOD . $sDir . str_replace($sExt, $sSize . $sExt, $sAvatar);
-            }
+                return PH7_URL_DATA_SYS_MOD . $sDir . str_replace($sExt, $sSize . $sExt, $sAvatar);
+            })();
+
             unset($oUserModel);
 
             /**
              * @internal Clean URL for parameters in Gravatar URL to make the HTML code valid.
              * If we set replace '&' by '&amp;' before checking the 404's Gravatar URL, it will always return '200 OK', that's why we need to clean the URL now.
              */
-            $oCache->put(Url::clean($sUrl));
-        }
+            $sUrl = Url::clean($sUrl);
 
+            $oCache->put($sUrl);
+        }
         unset($oCache);
 
         if (!$bPrint) {
@@ -694,7 +687,7 @@ class Design
      *
      * @return void|string The absolute user profile link.
      */
-    public function getProfileLink($sUsername, $bPrint = true)
+    public function getProfileLink(string $sUsername, bool $bPrint = true)
     {
         $sHtml = '<a href="';
         $sHtml .= (new UserCore)->getProfileLink($sUsername);
@@ -708,13 +701,13 @@ class Design
     }
 
     /**
-     * Get favicon from a URL.
+     * Get the favicon of a website, displayed with the HTML `<img /> tag.
      *
-     * @param string $sUrl
+     * @param string $sUrl The URL for which you want to retrieve its favicon.
      *
-     * @return void The HTML favicon image.
+     * @return void The HTML favicon image (wrapped in `<img />`).
      */
-    public function favicon($sUrl)
+    public function favicon(string $sUrl): bool
     {
         $iFaviconSize = 16;
         $sImg = Browser::favicon($sUrl);
@@ -865,7 +858,7 @@ HTML;
      */
     public function urlTag($sLink, $bNoFollow = true)
     {
-        $sLinkName = UrlParser::name($sLink);
+        $sLinkName = UrlName::parse($sLink);
         $aDefAttrs = ['href' => $sLink, 'title' => $sLinkName];
 
         if ($bNoFollow) {
@@ -903,13 +896,13 @@ HTML;
      * Generate any HTML tag.
      *
      * @param string $sTag
-     * @param array $aAttrs Optional. Default NULL
+     * @param array|null $aAttrs Optional. Default NULL
      * @param bool $bPair Optional. Default FALSE
      * @param string $sText Optional. Add text, available only for pair tag. Default NULL
      *
      * @return string The custom HTML tag.
      */
-    public function htmlTag($sTag, array $aAttrs = null, $bPair = false, $sText = null)
+    public function htmlTag(string $sTag, ?array $aAttrs = null, bool $bPair = false, ?string $sText = null): string
     {
         $sAttrs = '';
 
@@ -922,20 +915,15 @@ HTML;
         echo ($bPair ? '<' . $sTag . $sAttrs . '>' . ($sText === null ? '' : $sText) . '</' . $sTag . '>' : '<' . $sTag . $sAttrs . ' />');
     }
 
-    public function htmlHeader()
+    public function htmlHeader(): void
     {
         echo '<!DOCTYPE html>';
     }
 
     /**
      * Useful HTML Header.
-     *
-     * @param array $aMeta
-     * @param bool $bLogo
-     *
-     * @return void
      */
-    final public function usefulHtmlHeader(array $aMeta = null, $bLogo = false)
+    final public function usefulHtmlHeader(array $aMeta = null, bool $bLogo = false): void
     {
         $this->bIsDiv = true;
 
@@ -984,7 +972,7 @@ HTML;
         echo $this->flashMsg(), '<div class="msg"></div><div class="m_marg">';
     }
 
-    public function htmlFooter()
+    public function htmlFooter(): void
     {
         if ($this->bIsDiv) {
             echo '</div>';

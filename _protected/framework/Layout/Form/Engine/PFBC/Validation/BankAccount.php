@@ -8,7 +8,7 @@ namespace PFBC\Validation;
 
 use PFBC\Validation;
 use PH7\DbTableName;
-use PH7\ExistsCoreModel;
+use PH7\ExistCoreModel;
 use PH7\Framework\Security\Ban\Ban;
 
 class BankAccount extends Validation
@@ -34,16 +34,16 @@ class BankAccount extends Validation
     {
         if ($this->isNotApplicable($sValue) || $this->oValidate->email($sValue)) {
             if (!Ban::isBankAccount($sValue)) {
-                if (!(new ExistsCoreModel)->bankAccount($sValue, $this->sTable)) {
+                if (!(new ExistCoreModel)->bankAccount($sValue, $this->sTable)) {
                     return true;
                 } else {
-                    $this->message = t('Error: Another account with the same bank account already exists. Please choose another one.');
+                    $this->message = t('Another account with the same bank account already exists. Please choose another one.');
                 }
             } else {
-                $this->message = t('Error: This bank account is not supported by our payment system.');
+                $this->message = t('This bank account is not supported by our payment system.');
             }
         } else {
-            $this->message = t('Error: Your bank account is incorrect.');
+            $this->message = t('Your bank account is incorrect.');
         }
 
         return false;

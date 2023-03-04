@@ -3,9 +3,9 @@
  * @title            Core Controller Class
  * @desc             Base class for controllers.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2011-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2011-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Mvc / Controller
  * @version          2.0
  * @link             http://pierrehenry.be
@@ -34,14 +34,14 @@ use PH7\Framework\Page\Page;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Security\DDoS\Stop as DDoSStoper;
 use PH7\FriendCoreModel;
+use PH7\JustHttp\StatusCode;
 use PH7\MailCoreModel;
 use PH7\UserCore;
-use PH7\JustHttp\StatusCode;
 
 abstract class Controller extends Core implements Controllable
 {
-    const CORE_MAIN_MODULE = 'user';
-    const MAINTENANCE_DURATION_SECONDS = 3600;
+    public const CORE_MAIN_MODULE = 'user';
+    private const MAINTENANCE_DURATION_SECONDS = 3600;
 
     public function __construct()
     {
@@ -94,7 +94,7 @@ abstract class Controller extends Core implements Controllable
      *
      * @return void
      */
-    final public function manualTplInclude($sFile): void
+    final public function manualTplInclude(string $sFile): void
     {
         $this->view->manual_include = $sFile;
     }
@@ -236,10 +236,8 @@ abstract class Controller extends Core implements Controllable
     private function setModsStatusTplVars(): void
     {
         $aModsEnabled = [
-            'is_connect_enabled' => SysMod::isEnabled('connect'),
             'is_affiliate_enabled' => SysMod::isEnabled('affiliate'),
             'is_chat_enabled' => SysMod::isEnabled('chat'),
-            'is_chatroulette_enabled' => SysMod::isEnabled('chatroulette'),
             'is_picture_enabled' => SysMod::isEnabled('picture'),
             'is_video_enabled' => SysMod::isEnabled('video'),
             'is_hotornot_enabled' => SysMod::isEnabled('hotornot'),

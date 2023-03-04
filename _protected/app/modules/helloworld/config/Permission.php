@@ -2,7 +2,7 @@
 /**
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / App / Module / Hello World / Config
  */
 
@@ -18,7 +18,7 @@ class Permission extends PermissionCore
 
         /*
          * This file is not required, It serves the permissions of the module.
-         * pH7CMS includes this file only if it exists.
+         * pH7Builder includes this file only if it exists.
          *
          * Example of Code:
          * if (!UserCore::auth() && ($this->registry->controller === 'HelloWorldController')) {

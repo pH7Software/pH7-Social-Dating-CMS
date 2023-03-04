@@ -3,9 +3,9 @@
  * @title            Form Class
  * @desc             Some useful form methods.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / App / Include / Class
  */
 
@@ -15,10 +15,11 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class Form extends Framework\Layout\Form\Form
 {
+    // Import the trait
     use Framework\Layout\Form\Message;
 
-    const MIN_STRING_FIELD_LENGTH = 2;
-    const MAX_STRING_FIELD_LENGTH = 200;
+    public const MIN_STRING_FIELD_LENGTH = 2;
+    public const MAX_STRING_FIELD_LENGTH = 200;
 
     /**
      * To get Value Data from the database.
@@ -76,12 +77,8 @@ class Form extends Framework\Layout\Form\Form
 
     /**
      * Prevent against brute-force attack to avoid drowning the server and database.
-     *
-     * @param int $iDelayInSec Delay in seconds.
-     *
-     * @return void
      */
-    protected function preventBruteForce($iDelayInSec)
+    protected function preventBruteForce(int $iDelayInSec): void
     {
         sleep($iDelayInSec);
     }

@@ -1,10 +1,12 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Form / Processing
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -19,10 +21,9 @@ use PH7\Framework\Url\Header;
 
 class LoginFormProcess extends Form implements LoginableForm
 {
-    const BRUTE_FORCE_SLEEP_DELAY = 1;
+    private const BRUTE_FORCE_SLEEP_DELAY = 1;
 
-    /** @var AffiliateModel */
-    private $oAffModel;
+    private AffiliateModel $oAffModel;
 
     public function __construct()
     {
@@ -61,7 +62,7 @@ class LoginFormProcess extends Form implements LoginableForm
                 $this->enableCaptcha();
                 \PFBC\Form::setError(
                     'form_login_aff',
-                    t('Oops! "%0%" is not associated with any %site_name% account.', escape(substr($sEmail, 0, PH7_MAX_EMAIL_LENGTH)))
+                    t('Oops! "%0%" is not associated with any %site_name% accounts.', escape(substr($sEmail, 0, PH7_MAX_EMAIL_LENGTH)))
                 );
                 $oSecurityModel->addLoginLog(
                     $sEmail,
@@ -123,7 +124,7 @@ class LoginFormProcess extends Form implements LoginableForm
     /**
      * {@inheritDoc}
      */
-    public function updatePwdHashIfNeeded($sPassword, $sUserPasswordHash, $sEmail)
+    public function updatePwdHashIfNeeded(string $sPassword, string $sUserPasswordHash, string $sEmail): void
     {
         if ($sNewPwdHash = Security::pwdNeedsRehash($sPassword, $sUserPasswordHash)) {
             $this->oAffModel->changePassword($sEmail, $sNewPwdHash, DbTableName::AFFILIATE);
@@ -133,12 +134,12 @@ class LoginFormProcess extends Form implements LoginableForm
     /**
      * {@inheritDoc}
      */
-    public function enableCaptcha()
+    public function enableCaptcha(): void
     {
         $this->session->set('captcha_aff_enabled', 1);
     }
 
-    private function redirectToAccountPage()
+    private function redirectToAccountPage(): void
     {
         Header::redirect(
             Uri::get(
@@ -150,7 +151,7 @@ class LoginFormProcess extends Form implements LoginableForm
         );
     }
 
-    private function redirectToTwoFactorAuth()
+    private function redirectToTwoFactorAuth(): void
     {
         Header::redirect(
             Uri::get(

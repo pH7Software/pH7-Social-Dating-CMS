@@ -3,9 +3,9 @@
  * @title            User Class
  * @desc             Parse some User methods.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Parse
  */
 
@@ -13,13 +13,13 @@ namespace PH7\Framework\Parse;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\ExistsCoreModel;
+use PH7\ExistCoreModel;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\UserCore;
 
 class User
 {
-    const AT = '@';
+    private const AT = '@';
 
     /**
      * Parse the "@<username>" to the link of profile.
@@ -28,7 +28,7 @@ class User
      *
      * @return string The contents with the links to username profiles.
      */
-    public static function atUsernameToLink($sContents)
+    public static function atUsernameToLink(string $sContents): string
     {
         foreach (self::getAtUsernames($sContents) as $sUsername) {
             $sUsernameLink = (new UserCore)->getProfileLink($sUsername);
@@ -45,34 +45,24 @@ class User
 
     /**
      * Get the "@<username>" in the contents.
-     *
-     * @param string $sContents
-     *
-     * @return \Generator
      */
-    private static function getAtUsernames($sContents)
+    private static function getAtUsernames(string $sContents): \Generator
     {
         if (self::areProfileFound($sContents, $aMatches)) {
             // Delete duplicate usernames
             $aMatches[1] = array_unique($aMatches[1]);
 
             foreach ($aMatches[1] as $sUsername) {
-                if ((new ExistsCoreModel)->username($sUsername)) {
+                if ((new ExistCoreModel)->username($sUsername)) {
                     yield $sUsername; // "yield" thanks to PHP 5.5
                 }
             }
         }
     }
 
-    /**
-     * @param string $sContents
-     * @param array $aMatches
-     *
-     * @return false|int
-     */
-    private static function areProfileFound($sContents, &$aMatches)
+    private static function areProfileFound(string $sContents, &$aMatches): bool
     {
-        return preg_match_all(
+        return (bool)preg_match_all(
             '#' . static::AT . '(' . PH7_USERNAME_PATTERN . '{' . DbConfig::getSetting('minUsernameLength') . ',' . DbConfig::getSetting('maxUsernameLength') . '})#u',
             $sContents,
             $aMatches,

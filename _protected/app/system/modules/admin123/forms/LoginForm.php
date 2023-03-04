@@ -1,10 +1,12 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -21,7 +23,7 @@ use PH7\Framework\Url\Header;
 
 class LoginForm implements Authenticable
 {
-    public static function display()
+    public static function display(): void
     {
         static::clearCurrentSessions();
 
@@ -64,7 +66,7 @@ class LoginForm implements Authenticable
     /**
      * {@inheritDoc}
      */
-    public static function isCaptchaEligible()
+    public static function isCaptchaEligible(): bool
     {
         return (new Session)->exists('captcha_admin_enabled');
     }
@@ -72,7 +74,7 @@ class LoginForm implements Authenticable
     /**
      * {@inheritDoc}
      */
-    public static function clearCurrentSessions()
+    public static function clearCurrentSessions(): void
     {
         if (UserCore::auth() || AffiliateCore::auth()) {
             (new Session)->destroy();

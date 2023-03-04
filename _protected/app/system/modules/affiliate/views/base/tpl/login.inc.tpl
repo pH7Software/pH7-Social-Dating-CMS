@@ -1,6 +1,6 @@
 <div class="aff_login">
   <h2>{lang 'Sign In'}</h2>
-  {{ LoginForm::display(300) }}
+  {{ LoginForm::display(320) }}
 
   <p class="small">
     {{ LostPwdDesignCore::link('affiliate') }}

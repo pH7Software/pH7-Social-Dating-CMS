@@ -1,10 +1,12 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Invite / Form
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -24,7 +26,7 @@ use PH7\Framework\Url\Header;
 
 class InviteForm
 {
-    public static function display()
+    public static function display(): void
     {
         if (isset($_POST['submit_invite'])) {
             if (\PFBC\Form::isValid($_POST['submit_invite'])) {
@@ -40,7 +42,7 @@ class InviteForm
         $oForm->addElement(new Token('invite'));
         $oForm->addElement(new Textbox(t('Your name:'), 'first_name', ['id' => 'name_first', 'onblur' => 'CValid(this.value, this.id)', 'required' => 1, 'validation' => new Name]));
         $oForm->addElement(new HTMLExternal('<span class="input_error name_first"></span>'));
-        $oForm->addElement(new Textarea(t('To:'), 'to', ['description' => t('Upto 10 email addresses separated by commas.'), 'required' => 1]));
+        $oForm->addElement(new Textarea(t('To:'), 'to', ['description' => t('Upto 10 email addresses separated by commas ","'), 'required' => 1]));
         $oForm->addElement(new Textarea(t('Message:'), 'message', ['id' => 'str_msg', 'onblur' => 'CValid(this.value,this.id,4)', 'required' => 1, 'validation' => new Str('4')]));
         $oForm->addElement(new HTMLExternal('<span class="input_error str_msg"></span>'));
         $oForm->addElement(new CCaptcha(t('Captcha'), 'captcha', ['id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:')]));

@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2019-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / SMS Verification / Form
  */
 
@@ -16,7 +16,7 @@ use PH7\Framework\Url\Header;
 
 class PhoneNumberForm
 {
-    public static function display()
+    public static function display(): void
     {
         if (isset($_POST['submit_phone_number_verification'])) {
             if (\PFBC\Form::isValid($_POST['submit_phone_number_verification'])) {

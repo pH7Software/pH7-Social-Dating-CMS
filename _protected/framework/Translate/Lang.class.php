@@ -1,13 +1,14 @@
 <?php
 /**
- * @title            Lang Class
  * @desc             Loading and management files languages (I18N).
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2010-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2010-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Translate
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Translate {
     defined('PH7') or exit('Restricted access');
@@ -19,28 +20,26 @@ namespace PH7\Framework\Translate {
 
     class Lang
     {
-        const COOKIE_NAME = 'pHSLang';
-        const COOKIE_LIFETIME = 172800;
-        const REQUEST_PARAM_NAME = 'l';
-        const LANG_FOLDER_LENGTH = 5;
-        const ISO_LANG_CODE_LENGTH = 2;
+        private const COOKIE_NAME = 'pHSLang';
+        private const COOKIE_LIFETIME = 172800;
+        private const REQUEST_PARAM_NAME = 'l';
 
-        const FIRST_ISO_CODE = 1;
-        const LAST_ISO_CODE = 2;
+        public const LANG_FOLDER_LENGTH = 5;
+        public const ISO_LANG_CODE_LENGTH = 2;
 
-        const DEFAULT_LOCALE = 'en_US';
+        public const FIRST_ISO_CODE = 1;
+        public const LAST_ISO_CODE = 2;
 
-        /** @var Config */
-        private $oConfig;
+        public const DEFAULT_LOCALE = 'en_US';
 
-        /** @var string */
-        private $sDefaultLang;
 
-        /** @var string */
-        private $sUserLang;
+        private Config $oConfig;
 
-        /** @var string */
-        private $sLangName;
+        private string $sDefaultLang;
+
+        private string $sUserLang;
+
+        private string $sLangName;
 
         public function __construct()
         {
@@ -59,7 +58,7 @@ namespace PH7\Framework\Translate {
          *
          * @throws Exception If the language file is not found.
          */
-        public static function getJsFile($sPath, $sFileName = PH7_LANG_CODE)
+        public static function getJsFile(string $sPath, string $sFileName = PH7_LANG_CODE)
         {
             if (is_file($sPath . $sFileName . '.js')) {
                 return $sFileName . '.js';
@@ -82,7 +81,7 @@ namespace PH7\Framework\Translate {
          *
          * @return string e.g., "en"
          */
-        public static function getIsoCode($sLocaleName, $iPositionLangCode = self::FIRST_ISO_CODE)
+        public static function getIsoCode(string $sLocaleName, int $iPositionLangCode = self::FIRST_ISO_CODE): string
         {
             if ($iPositionLangCode === self::LAST_ISO_CODE) {
                 return strtolower(
@@ -140,7 +139,7 @@ namespace PH7\Framework\Translate {
          *
          * @return string The locale language name (e.g., en_US).
          */
-        public function getLocaleName()
+        public function getLocaleName(): string
         {
             return $this->sLangName;
         }
@@ -297,7 +296,8 @@ namespace {
         $sToken = (Registry::getInstance()->lang !== '' && array_key_exists($sToken, Registry::getInstance()->lang) ? Registry::getInstance()->lang[$sToken] : gettext($sToken));
 
         for ($iArg = 1, $iFuncArgs = count($aTokens); $iArg < $iFuncArgs; $iArg++) {
-            $sToken = str_replace('%' . ($iArg - 1) . '%', $aTokens[$iArg], $sToken);
+            $sParamValue = (string)$aTokens[$iArg];
+            $sToken = str_replace('%' . ($iArg - 1) . '%', $sParamValue, $sToken);
         }
 
         return (new SysVar)->parse($sToken);
@@ -307,15 +307,15 @@ namespace {
      * Plural version of t() function.
      *
      * @param string $sMsg1 Singular string.
-     * @param string $sMsg2 Plurial string.
-     * @param integer $iNumber
+     * @param string $sMsg2 Plural string.
+     * @param int|string $mNumber
      *
      * @return string Returns the text with ngettext function which is the correct plural form of message identified by msgid1 and msgid2 for count n.
      */
-    function nt($sMsg1, $sMsg2, $iNumber)
+    function nt($sMsg1, $sMsg2, $mNumber)
     {
-        $sString = ngettext($sMsg1, $sMsg2, $iNumber);
+        $sString = ngettext($sMsg1, $sMsg2, $mNumber);
 
-        return str_replace('%n%', $iNumber, $sString);
+        return str_replace('%n%', (string)$mNumber, $sString);
     }
 }

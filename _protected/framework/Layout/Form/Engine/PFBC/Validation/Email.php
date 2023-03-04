@@ -13,7 +13,7 @@ class Email extends Validation
     public function __construct()
     {
         parent::__construct();
-        $this->message = t('Error: %element% must be a valid email address.');
+        $this->message = t('%element% must be a valid email address.');
     }
 
     public function isValid($sValue)

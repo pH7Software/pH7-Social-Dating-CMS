@@ -1,11 +1,10 @@
 <?php
 /**
- * @title            File Class
  * @desc             Useful methods for handling files.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / File
  */
 
@@ -38,17 +37,15 @@ class File
         self::COPY_FUNC_NAME
     ];
 
-    const WILDCARD_SYMBOL = '*';
+    private const WILDCARD_SYMBOL = '*';
 
     // End Of Line relative to the operating system
     const EOL = PHP_EOL;
 
     /**
      * Mime Types list.
-     *
-     * @var array $aMimeTypes
      */
-    private static $aMimeTypes = [
+    private static array $aMimeTypes = [
         'pdf' => 'application/pdf',
         'txt' => 'text/plain',
         'html' => 'text/html',
@@ -81,9 +78,9 @@ class File
     /**
      * @param string $sExt Extension File.
      *
-     * @return string (string | null) Returns the "mime type" if it is found, otherwise "null"
+     * @return string|null Returns the "mime type" if it is found, otherwise "null"
      */
-    public function getMimeType($sExt)
+    public function getMimeType(string $sExt): ?string
     {
         return array_key_exists($sExt, self::$aMimeTypes) ? self::$aMimeTypes[$sExt] : null;
     }
@@ -95,7 +92,7 @@ class File
      *
      * @return string
      */
-    public function getFileExt($sFile)
+    public function getFileExt(string $sFile): string
     {
         return strtolower(pathinfo($sFile, PATHINFO_EXTENSION));
     }
@@ -107,7 +104,7 @@ class File
      *
      * @return string
      */
-    public function getFileWithoutExt($sFile)
+    public function getFileWithoutExt(string $sFile): string
     {
         return pathinfo($sFile, PATHINFO_FILENAME);
     }
@@ -120,7 +117,7 @@ class File
      *
      * @return string|bool Returns the read data or FALSE on failure.
      */
-    public function getFile($sFile, $bIncPath = false)
+    public function getFile(string $sFile, bool $bIncPath = false): string|bool
     {
         return @file_get_contents($sFile, $bIncPath);
     }
@@ -134,7 +131,7 @@ class File
      *
      * @return int|bool Returns the number of bytes that were written to the file, or FALSE on failure.
      */
-    public function putFile($sFile, $sContents, $iFlag = FILE_TEXT)
+    public function putFile(string $sFile, string $sContents, int $iFlag = FILE_TEXT): int|bool
     {
         return @file_put_contents($sFile, $sContents, $iFlag);
     }
@@ -170,7 +167,7 @@ class File
      *
      * @return bool TRUE if file exists, FALSE otherwise.
      */
-    public function existDir($mDir)
+    public function existDir($mDir): bool
     {
         $bExists = false; // Default value
 
@@ -217,7 +214,7 @@ class File
      *
      * @return int The size of the file in bytes.
      */
-    public function size($sFile)
+    public function size(string $sFile): int
     {
         return (int)@filesize($sFile);
     }
@@ -228,7 +225,7 @@ class File
      *
      * @return array List of files sorted alphabetically.
      */
-    public function getFileList($sDir, $mExt = null)
+    public function getFileList(string $sDir, string|array|null $mExt = null): array
     {
         $aTree = [];
         $sDir = $this->checkExtDir($sDir);
@@ -417,10 +414,8 @@ class File
      * If the file does not exist, the function does nothing.
      *
      * @param string|array $mFile
-     *
-     * @return void
      */
-    public function deleteFile($mFile)
+    public function deleteFile($mFile): void
     {
         if (is_array($mFile)) {
             foreach ($mFile as $sF) {
@@ -438,12 +433,13 @@ class File
      * A "rmdir" function improved PHP which also delete files in a directory.
      *
      * @param string $sPath The path
-     *
-     * @return bool
      */
-    public function deleteDir($sPath)
+    public function deleteDir(string $sPath): bool
     {
-        return (is_file($sPath) ? unlink($sPath) : (is_dir($sPath) ? array_map([$this, 'deleteDir'], glob($sPath . '/*')) === @rmdir($sPath) : false));
+        return (is_file($sPath) ? unlink($sPath) : (is_dir($sPath) ? array_map(
+                [$this, 'deleteDir'],
+                glob($sPath . '/*')
+            ) === @rmdir($sPath) : false));
     }
 
     /**
@@ -455,7 +451,9 @@ class File
      */
     public function remove($sDir)
     {
-        $oIterator = new RecursiveIteratorIterator($this->getDirIterator($sDir), RecursiveIteratorIterator::CHILD_FIRST);
+        $oIterator = new RecursiveIteratorIterator(
+            $this->getDirIterator($sDir), RecursiveIteratorIterator::CHILD_FIRST
+        );
 
         foreach ($oIterator as $sPath) {
             $sPath->isFile() ? unlink($sPath) : @rmdir($sPath);
@@ -466,12 +464,8 @@ class File
 
     /**
      * Clean paths if wildcard is found in order to get valid paths.
-     *
-     * @param string $sPath
-     *
-     * @return string
      */
-    public function removeWildcards($sPath)
+    public function removeWildcards(string $sPath): string
     {
         return str_replace(self::WILDCARD_SYMBOL, '', $sPath);
     }
@@ -706,11 +700,11 @@ class File
     /**
      * Reading Directories.
      *
-     * @param string $sPath
+     * @param string $sPath The full path.
      *
      * @return array|bool Returns an ARRAY with the folders or FALSE if the folder could not be opened.
      */
-    public function readDirs($sPath = './')
+    public function readDirs(string $sPath = './')
     {
         if (!($rHandle = opendir($sPath))) {
             return false; // TODO: Return when yield is used will be OK with PHP 7
@@ -737,7 +731,7 @@ class File
      *
      * @return string|bool Return the result content on success, FALSE on failure.
      */
-    public function getUrlContents($sUrl)
+    public function getUrlContents(string $sUrl)
     {
         $rCh = curl_init();
         curl_setopt($rCh, CURLOPT_URL, $sUrl);
@@ -745,6 +739,11 @@ class File
         curl_setopt($rCh, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($rCh, CURLOPT_FOLLOWLOCATION, 1);
         $mRes = curl_exec($rCh);
+
+        if ($mRes === false) {
+            throw new CurlException(curl_error($rCh), curl_errno($rCh));
+        }
+
         curl_close($rCh);
         unset($rCh);
 
@@ -756,10 +755,8 @@ class File
      *
      * @param string $sFile Zip file.
      * @param string $sDir Destination to extract the file.
-     *
-     * @return bool
      */
-    public function zipExtract($sFile, $sDir)
+    public function zipExtract(string $sFile, string $sDir): bool
     {
         $oZip = new ZipArchive;
         $mRes = $oZip->open($sFile);
@@ -770,17 +767,13 @@ class File
             return true;
         }
 
-        return false; // Return error value
+        return false;
     }
 
     /**
      * Check if the file is binary.
-     *
-     * @param string $sFile
-     *
-     * @return bool
      */
-    public function isBinary($sFile)
+    public function isBinary(string $sFile): bool
     {
         if (file_exists($sFile)) {
             if (!is_file($sFile)) {
@@ -809,13 +802,9 @@ class File
     }
 
     /**
-     * Create a recurive directory iterator for a given directory.
-     *
-     * @param string $sPath
-     *
-     * @return RecursiveDirectoryIterator
+     * Create a recursive directory iterator for a given directory.
      */
-    private function getDirIterator($sPath)
+    private function getDirIterator(string $sPath): RecursiveDirectoryIterator
     {
         return new RecursiveDirectoryIterator($sPath);
     }
@@ -827,13 +816,10 @@ class File
      * @param string $sTo Directory.
      * @param string $sFuncName The function name. Choose between 'copy' and 'rename'.
      *
-     * @return bool
-     *
      * @throws PH7InvalidArgumentException If the function name is invalid.
-     * @throws PermissionException If the directory cannot be created
-     *
+     * @throws PermissionException If the directory cannot be created.
      */
-    private function recursiveDirIterator($sFrom, $sTo, $sFuncName)
+    private function recursiveDirIterator(string $sFrom, string $sTo, string $sFuncName): bool
     {
         if (!in_array($sFuncName, self::DIR_HANDLE_FUNC_NAMES, true)) {
             throw new PH7InvalidArgumentException('Wrong function name: ' . $sFuncName);
@@ -844,7 +830,9 @@ class File
         }
 
         $bRet = false; // Default value
-        $oIterator = new RecursiveIteratorIterator($this->getDirIterator($sFrom), RecursiveIteratorIterator::SELF_FIRST);
+        $oIterator = new RecursiveIteratorIterator(
+            $this->getDirIterator($sFrom), RecursiveIteratorIterator::SELF_FIRST
+        );
 
         foreach ($oIterator as $sFromFile) {
             // http://php.net/manual/en/recursivedirectoryiterator.getsubpathname.php#example-4559

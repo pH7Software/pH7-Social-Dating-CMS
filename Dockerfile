@@ -1,6 +1,7 @@
 # Set the wanted Ubuntu & PHP versions
-ARG UBUNTU_VERSION=18.04
-ARG PHP_VERSION=7.4
+ARG UBUNTU_VERSION=22.04
+ARG PHP_VERSION=8.1.0
+ARG PHP_BASE_IMAGE=fpm
 
 
 # Set the base image to Ubuntu
@@ -12,11 +13,11 @@ FROM ubuntu:${UBUNTU_VERSION}
 RUN echo "deb http://archive.ubuntu.com/ubuntu/ raring main universe" >> /etc/apt/sources.list
 
 # Update the repository & upgrade
-RUN apt-get update && apt-get upgrade -y
+RUN apt update && apt upgrade -y
 
 # Install locale for Gettext
-RUN apt-get -y install apt-utils
-RUN apt-get -y install locales
+RUN apt -y install apt-utils
+RUN apt -y install locales
 
 # Set the locale
 RUN locale-gen en_US.UTF-8
@@ -24,28 +25,28 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
-RUN apt-get install -y software-properties-common
+RUN apt install -y software-properties-common
 
 # Install dependencies
-RUN apt-get install -y && \
+RUN apt install -y && \
     bzip2 curl git less mysql-client sudo unzip zip \
     libbz2-dev libfontconfig1 libfontconfig1-dev \
     libfreetype6-dev libjpeg62-turbo-dev libpng12-dev libzip-dev
 
 # Download and Install Nginx
-RUN apt-get install -y nginx
+RUN apt install -y nginx
 
 # Remove the default Nginx configuration file
-RUN rm -v /etc/nginx/ph7cms.conf
+RUN rm -v /etc/nginx/ph7builder.conf
 
 # Copy a configuration file from the current directory
-ADD ph7cms.conf /etc/nginx/
+COPY ph7builder.conf /etc/nginx/
 
 # Append "daemon off;" to the beginning of the configuration
-RUN echo "daemon off;" >> /etc/nginx/ph7cms.conf
+RUN echo "daemon off;" >> /etc/nginx/ph7builder.conf
 
-# Install PHP!
-FROM php:${PHP_VERSION}-fpm
+# Get PHP with its Docker image
+FROM php:${PHP_VERSION}-${PHP_BASE_IMAGE}
 
 RUN docker-php-ext-install bz2 && \
     docker-php-ext-configure gd \

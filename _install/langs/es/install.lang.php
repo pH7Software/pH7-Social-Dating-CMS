@@ -4,7 +4,7 @@
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2013-2022, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Lang / ES
  */
 
@@ -20,7 +20,7 @@ $LANG = [
     'CMS_desc' => '<p>Bienvenido a la instalación de ' . Controller::SOFTWARE_NAME . '.<br />
         Gracias por elegir nuestro CMS y esperamos que sea de su agrado usted.</p>',
     'choose_install_lang' => 'Por favor, elija su idioma para comenzar la instalación',
-    'requirements_desc' => '¡ADVERTENCIA! Por favor, asegúrese que <abbr title ="El servidor remoto o el ordenador si no está localhost">usted es</abbr> conectado a Internet y de que el servidor tiene la <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank" rel="noopener">necesaria requisitos</a> para funcionar pH7CMS.',
+    'requirements_desc' => '¡ADVERTENCIA! Por favor, asegúrese que <abbr title ="El servidor remoto o el ordenador si no está localhost">usted es</abbr> conectado a Internet y de que el servidor tiene la <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank" rel="noopener">necesaria requisitos</a> para funcionar pH7Builder.',
     'requirements2_desc' => 'En primer lugar, cree una base de datos MySQL y asignar a un usuario con privilegios completos. Una vez creada la base de datos MySQL y el usuario, asegúrese de escribir el nombre de la base de datos, el nombre de usuario y contraseña, ya que necesitará para la instalación.',
     'config_path' => 'Ruta del directorio &laquo;protected&raquo;',
     'desc_config_path' => 'Por favor, especifique la ruta completa a la carpeta de &laquo;protected&raquo;.<br />
@@ -35,7 +35,7 @@ $LANG = [
     'register' => '¡Guárdelo!',
     'site_name' => 'Nombre de tu sitio',
     'agree_license' => 'He leído y acepto los términos anteriores.',
-    'conform_to_laws' => 'Estoy de acuerdo en mantener siempre mi sitio web totalmente legal y cumplir con cualquier leyes y regulaciones aplicables que pueda aplicarse a mí, mi corporación, a mi sitio web y a sus usuarios, y para revisar y <a href="https://ph7cms.com/doc/en/how-to-edit-the-static-and-legal-pages" target="_blank" rel="noopener">actualizar los "Términos", "Política de privacidad" (y cualquier otra página legal necesaria)</a> para cumplir plenamente con las leyes y regulaciones aplicables.',
+    'conform_to_laws' => 'Estoy de acuerdo en mantener siempre mi sitio web totalmente legal y cumplir con cualquier leyes y regulaciones aplicables que pueda aplicarse a mí, mi corporación, a mi sitio web y a sus usuarios, y para revisar y <a href="https://ph7builder.com/doc/en/how-to-edit-the-static-and-legal-pages" target="_blank" rel="noopener">actualizar los "Términos", "Política de privacidad" (y cualquier otra página legal necesaria)</a> para cumplir plenamente con las leyes y regulaciones aplicables.',
     'responsibilities_agreement' => 'Estoy de acuerdo en usar el software bajo mi propio riesgo y que el autor de este software no puede, en ningún caso, ser considerado responsable por daños directos o indirectos, ni por ningún otro daño de ningún tipo, como resultado del uso de este software o la imposibilidad de Úsalo por cualquier motivo.',
     'step' => 'Paso',
     'welcome' => 'Bienvenido a la instalación de',
@@ -62,7 +62,8 @@ $LANG = [
     'db_username' => 'Nombre de usuario de la base de datos',
     'db_password' => 'Contraseña para la base de datos',
     'db_prefix' => 'El prefijo de la tabla de la base de datos',
-    'desc_db_prefix' => 'Esta opción es útil cuando tiene varias instalaciones de pH7CMS en la misma base de datos. Recomendamos que usted todavía cambiar los valores por defecto con el fin de aumentar la seguridad de su sitio web.',
+    'desc_db_prefix' => 'Esta opción es útil cuando tiene varias instalaciones de pH7Builder en la misma base de datos.
+        Recomendamos que usted todavía cambiar los valores por defecto con el fin de aumentar la seguridad de su sitio web.',
     'db_encoding' => 'Codificación',
     'desc_db_encoding' => 'Codificación de la base de datos. Deje utf8mb4 para la codificación internacional (compatible con emojis).',
     'db_port' => 'Puerto de la base de datos',
@@ -75,8 +76,11 @@ $LANG = [
     'admin_username' => 'Su nombre de usuario para iniciar sesión en tu panel de administración',
     'admin_login_email' => 'Su correo electrónico para iniciar sesión en tu panel de administración',
     'admin_email' => 'Su dirección de correo electrónico para la administración',
+    'admin_email_placeholder' => 'admin@yoursite.com',
+    'admin_feedback_email' => 'Dirección de correo electrónico para el formulario de contacto',
+    'admin_feedback_email_placeholder' => 'contact@yoursite.com',
     'admin_return_email' => 'Noreply dirección de correo electrónico (por lo general noreply@yoursite.com)',
-    'admin_feedback_email' => 'Dirección de correo electrónico para el formulario de contacto (feedback)',
+    'admin_return_email_placeholder' => 'noreply@yoursite.com',
     'admin_password' => 'Su contraseña',
     'admin_passwords' => 'Por favor, confirme su contraseña',
     'bad_email' => 'E-mail incorrecta',
@@ -126,7 +130,7 @@ $LANG = [
     'note_able_to_change_niche_settings_later' => 'Por favor, tenga en cuenta que puede cambiar el tema y activar/desactivar los módulos más tarde en su panel de administración.',
     'will_you_make_donation' => '¿Me ayudarás a mantener &amp; mejorar el software?',
     'donate_here' => '👉 Haz una donación aquí',
-    'or_paypal_donation' => 'o por PayPal 👍',
+    'or_paypal_donation' => 'o por <span class="underline">PayPal</span> 👍',
     'warning_no_js' => 'Esta página web no es compatible sin tener Javascript activado.<br />
         Por favor, activa JavaScript en las opciones de su navegador web.',
     'admin_url' => 'URL del panel de administración',

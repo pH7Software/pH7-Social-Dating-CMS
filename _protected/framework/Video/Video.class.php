@@ -3,11 +3,11 @@
  * @title            Video Class
  * @desc             Class is used to create/manipulate videos using FFmpeg.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Video
- * @link             https://ph7cms.com
+ * @link             https://ph7builder.com
  */
 
 namespace PH7\Framework\Video;
@@ -23,7 +23,7 @@ use PH7\Framework\File\Upload;
 
 class Video extends Upload
 {
-    const SUPPORTED_TYPES = [
+    public const SUPPORTED_TYPES = [
         'mov' => 'video/mov',
         'avi' => 'video/avi',
         'flv' => 'video/flv',
@@ -37,26 +37,22 @@ class Video extends Upload
         'mkv' => 'video/mkv'
     ];
 
-    const MP4_TYPE = 'mp4';
+    private const MP4_TYPE = 'mp4';
 
-    /** @var File */
-    private $oFile;
+    private File $oFile;
 
-    /** @var string */
-    private $sType;
+    private string $sType;
 
-    /** @var string */
-    private $sFfmpegPath;
+    private string $sFfmpegPath;
 
-    /** @var array */
-    private $aFile;
+    private array $aFile;
 
     /**
      * @param array $aFile Example: $_FILES['video']
      *
      * @throws MissingProgramException If FFmpeg is not installed.
      */
-    public function __construct($aFile)
+    public function __construct(array $aFile)
     {
         $this->sFfmpegPath = Config::getInstance()->values['video']['handle.ffmpeg_path'];
 

@@ -1,12 +1,12 @@
 <?php
 /**
- * @title          Logger Class
- *
  * @author         Pierre-Henry Soria <hi@ph7.me>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License <http://www.gnu.org/licenses/gpl.html>
  * @package        PH7 / App / Module / Fake Admin Panel / Inc / Class
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -21,25 +21,15 @@ class Logger extends Core
     /**
      * Folder of the information logs files.
      */
-    const ATTACK_DIR = '_attackers/';
+    public const ATTACK_DIR = '_attackers/';
 
-    /** @var array */
-    private $aData;
+    private array $aData;
 
-    /** @var string */
-    private $sIp;
+    private string $sIp;
 
-    /** @var string */
-    private $sContents;
+    private string $sContents;
 
-    /**
-     * Constructor.
-     *
-     * @param array $aData The data.
-     *
-     * @return void
-     */
-    public function init(array $aData)
+    public function init(array $aData): void
     {
         // Add form data in the variable.
         $this->aData = $aData;
@@ -59,10 +49,8 @@ class Logger extends Core
 
     /**
      * Build the log message.
-     *
-     * @return self
      */
-    protected function setLogMsg()
+    protected function setLogMsg(): self
     {
         $sReferer = (null !== ($mReferer = $this->browser->getHttpReferer())) ? $mReferer : 'NO HTTP REFERER';
         $sAgent = (null !== ($mAgent = $this->browser->getUserAgent())) ? $mAgent : 'NO USER AGENT';
@@ -83,10 +71,8 @@ class Logger extends Core
 
     /**
      * Send an email to admin.
-     *
-     * @return int
      */
-    private function sendMessage()
+    private function sendMessage(): bool
     {
         $aInfo = [
             'to' => $this->config->values['logging']['bug_report_email'],
@@ -102,10 +88,8 @@ class Logger extends Core
 
     /**
      * Blocking IP address.
-     *
-     * @return self
      */
-    private function blockIp()
+    private function blockIp(): self
     {
         $sFullPath = PH7_PATH_APP_CONFIG . Ban::DIR . Ban::IP_FILE;
         file_put_contents($sFullPath, $this->sIp . "\n", FILE_APPEND);
@@ -115,10 +99,8 @@ class Logger extends Core
 
     /**
      * Write a log file with the hacker information.
-     *
-     * @return self
      */
-    private function writeFile()
+    private function writeFile(): self
     {
         $sFullPath = $this->registry->path_module_inc . static::ATTACK_DIR . $this->sIp . '.log';
         file_put_contents($sFullPath, $this->sContents, FILE_APPEND);

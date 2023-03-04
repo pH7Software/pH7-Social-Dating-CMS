@@ -3,9 +3,9 @@
  * @title            String Class
  * @desc             Many useful functions for string manipulation.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2011-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Str
  */
 
@@ -56,24 +56,16 @@ namespace PH7\Framework\Str {
 
         /**
          * Make a string's first character uppercase.
-         *
-         * @param string $sText
-         *
-         * @return string
          */
-        public function upperFirst($sText)
+        public function upperFirst(string $sText): string
         {
             return ucfirst($sText);
         }
 
         /**
          * Uppercase the first character of each word in a string.
-         *
-         * @param string $sText
-         *
-         * @return string
          */
-        public function upperFirstWords($sText)
+        public function upperFirstWords(string $sText): string
         {
             return ucwords($sText);
         }
@@ -105,8 +97,9 @@ namespace PH7\Framework\Str {
 
             if (!empty($sFilter)) {
                 $aFilters = explode(',', $sFilter);
-                foreach ($aFilters as $sF)
-                    $sText = str_replace($sF, $sFlag, $sText);
+                foreach ($aFilters as $sFilter) {
+                    $sText = $this->replace($sFilter, $sFlag, $sText);
+                }
             }
 
             $sText = preg_replace('/[\r\n\t]+/', '', $sText); // Remove new lines, spaces, tabs
@@ -202,6 +195,18 @@ namespace PH7\Framework\Str {
         }
 
         /**
+         * @param array|string $mSearchValue
+         * @param array|string $mReplaceValue
+         * @param array|string $mValue
+         *
+         * @return string|string[]
+         */
+        public static function replace($mSearchValue, $mReplaceValue = '', $mValue = '')
+        {
+            return str_replace($mSearchValue, $mReplaceValue, $mValue);
+        }
+
+        /**
          * Cut a piece of string to make an extract (an ellipsis).
          *
          * @param string $sText
@@ -280,12 +285,8 @@ namespace PH7\Framework\Str {
 
         /**
          * Check if the string doesn't have any blank spaces.
-         *
-         * @param string $sValue
-         *
-         * @return bool
          */
-        public static function noSpaces($sValue)
+        public static function noSpaces(string $sValue): bool
         {
             return trim($sValue) !== '';
         }
@@ -305,16 +306,14 @@ namespace PH7\Framework\Str {
 
         /**
          * Escape an array of any dimension.
-         *
-         * @param array $aData
-         * @param bool $bStrip
-         *
-         * @return array The array escaped.
          */
-        protected function arrayEscape(array $aData, $bStrip)
+        protected function arrayEscape(array $aData, bool $bStrip): array
         {
             foreach ($aData as $sKey => $mValue) {
-                $aData[$sKey] = is_array($mValue) ? $this->arrayEscape($mValue, $bStrip) : $this->cEscape($mValue, $bStrip);
+                $aData[$sKey] = is_array($mValue) ? $this->arrayEscape($mValue, $bStrip) : $this->cEscape(
+                    $mValue,
+                    $bStrip
+                );
             }
 
             return $aData;
@@ -348,7 +347,7 @@ namespace PH7\Framework\Str {
          */
         protected function htmlSpecialChars($sText)
         {
-            return htmlspecialchars($sText, ENT_QUOTES, static::ENCODING);
+            return htmlspecialchars((string)$sText, ENT_QUOTES, static::ENCODING);
         }
 
         /**

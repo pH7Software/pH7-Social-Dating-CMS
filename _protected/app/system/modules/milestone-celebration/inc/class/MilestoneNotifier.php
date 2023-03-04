@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Milestone Celebration / Inc / Class
  */
 
@@ -14,16 +14,13 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class MilestoneNotifier
 {
-    const MAIL_TEMPLATE_FILE_PATH = '/tpl/mail/sys/mod/milestone-celebration/admin-notifier.tpl';
+    private const MAIL_TEMPLATE_FILE_PATH = '/tpl/mail/sys/mod/milestone-celebration/admin-notifier.tpl';
 
-    /** @var UserCoreModel */
-    private $oUserModel;
+    private UserCoreModel $oUserModel;
 
-    /** @var Mailable */
-    private $oMail;
+    private Mailable $oMail;
 
-    /** @var Templatable */
-    private $oView;
+    private Templatable $oView;
 
     public function __construct(UserCoreModel $oUserModel, Mailable $oMailEngine, Templatable $oView)
     {
@@ -33,11 +30,9 @@ class MilestoneNotifier
     }
 
     /**
-     * @return int
-     *
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
-    public function sendEmailToAdmin()
+    public function sendEmailToAdmin(): bool
     {
         $iTotalUsers = $this->oUserModel->total();
         $sAdminEmail = DbConfig::getSetting('adminEmail');

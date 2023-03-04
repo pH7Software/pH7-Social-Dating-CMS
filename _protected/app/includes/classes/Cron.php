@@ -1,10 +1,12 @@
 <?php
 /**
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / App / Include / Class
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -27,7 +29,7 @@ abstract class Cron extends Framework\Cron\Run\Cron
      *
      * @throws Framework\Http\Exception
      */
-    private function isAlreadyExecuted()
+    private function isAlreadyExecuted(): void
     {
         if (!$this->checkDelay()) {
             Http::setHeadersByCode(StatusCode::FORBIDDEN);

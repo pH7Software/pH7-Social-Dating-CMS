@@ -2,12 +2,12 @@
 /**
  * @title Front Controller Class
  *
- * This class is used to instantiate the Controller and the action with the MVC pattern, in short it is the heart of pH7CMS's software.
+ * This class is used to instantiate the Controller and the action with the MVC pattern, in short it is the heart of pH7Builder's software.
  * It can also retrieve the URL roads, initialize the languages​​, themes, database, etc.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2011-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2011-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Mvc / Router
  */
 
@@ -32,9 +32,9 @@ use PH7\Framework\Registry\Registry;
 use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Url\Uri;
+use PH7\JustHttp\StatusCode;
 use ReflectionException;
 use ReflectionMethod;
-use PH7\JustHttp\StatusCode;
 
 /**
  * @class Singleton Class
@@ -60,23 +60,17 @@ final class FrontController
     const REGEX_URL_EXTRA_OPTIONS = '/?(?:\?[^/]+\=[^/]+)?';
     const REGEX_URL_PARAMS = '#&[^/]+\=[^/]+$#';
 
-    /** @var Config */
-    private $oConfig;
+    private Config $oConfig;
 
-    /** @var Registry */
-    private $oRegistry;
+    private Registry $oRegistry;
 
-    /** @var Http */
-    private $oHttpRequest;
+    private Http $oHttpRequest;
 
-    /** @var Uri */
-    private $oUri;
+    private Uri $oUri;
 
-    /** @var array */
-    private $aRequestParameter = [];
+    private array $aRequestParameter = [];
 
-    /** @var bool */
-    private $bIsRouterRewritten = false;
+    private bool $bIsRouterRewritten = false;
 
     use Singleton; // Import the Singleton trait
 
@@ -649,15 +643,14 @@ final class FrontController
 
     /**
      * Run the module's controller (or display an error message if the controller doesn't exist).
-     *
-     * @return void
      */
-    private function runController()
+    private function runController(): void
     {
         $sController = self::PROJECT_NAMESPACE . $this->oRegistry->controller;
 
         try {
             $oMvc = new ReflectionMethod($sController, $this->oRegistry->action);
+
             if ($oMvc->isPublic()) {
                 // Perform the controller's action
                 $oMvc->invokeArgs(new $sController, $this->getRequestParameter());
@@ -861,7 +854,7 @@ final class FrontController
     }
 
     /**
-     * We display an error page if someone request "index.php" filename in order to avoid disclosing and explicitly request the PHP index filename (e.g. for security reasons...).
+     * We display an error page if someone requests "index.php" filename in order to avoid disclosing and explicitly request the PHP index filename for security reasons.
      * Otherwise, if the URL rewrite extension is not enabled, we redirect the page to index.php file (then [URL]/index.php/[REQUEST]/ ).
      *
      * @see self::notFound()
@@ -872,14 +865,14 @@ final class FrontController
      */
     private function indexFileRouter()
     {
-        // The following code will be useless if pH7CMS will be able to work without mod_rewrite
-        if ($this->oHttpRequest->currentUrl() === PH7_URL_ROOT . static::INDEX_FILE) {
-            $this->notFound('In "production" mode, it simulates "404 page not found" if the index.php filename is called, to avoid disclosing the language index filename (e.g. for security reasons...).');
+        // The following code will be useless if pH7Builder will be able to work without mod_rewrite
+        if ($this->oHttpRequest->currentUrl() === PH7_URL_ROOT . self::INDEX_FILE) {
+            $this->notFound('In "production" mode, it simulates "404 page not found" if the index.php filename is called, to avoid disclosing the language index filename for security reasons.');
         }
     }
 
     /**
-     * This method has two different behaviors depending of the environment mode site.
+     * This method has two different behaviors depending on the environment mode site.
      * 1. In production mode: Displays the page not found using the system module "error".
      * 2. In development mode: It throws an Exception with displaying an explanatory message that indicates why this page was not found.
      *

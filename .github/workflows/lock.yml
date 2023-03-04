@@ -23,7 +23,7 @@ jobs:
           issue-inactive-days: 35
           add-issue-labels: 'locked, outdated'
           exclude-any-issue-labels: 'help wanted'
-          pr-lock-reason: 'no replies'
+          pr-lock-reason: 'off-topic'
           process-only: 'issues'
           issue-comment: >
             Hi there, I locked the thread since there has not been

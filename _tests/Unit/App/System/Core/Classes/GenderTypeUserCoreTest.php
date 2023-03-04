@@ -2,7 +2,7 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Test / Unit / App / System / Core / Classes
  */
 
@@ -20,7 +20,7 @@ final class GenderTypeUserCoreTest extends TestCase
     /**
      * @dataProvider validGenderTypesProvider
      */
-    public function testValidGenders(string $sGender, string $bIncludeCoupleGender)
+    public function testValidGenders(string $sGender, bool $bIncludeCoupleGender)
     {
         $bResult = GenderTypeUserCore::isGenderValid($sGender, $bIncludeCoupleGender);
 
@@ -30,7 +30,7 @@ final class GenderTypeUserCoreTest extends TestCase
     /**
      * @dataProvider invalidGenderTypesProvider
      */
-    public function testInvalidGenders(string $sGender, string $bIncludeCoupleGender): void
+    public function testInvalidGenders(string $sGender, bool $bIncludeCoupleGender): void
     {
         $bResult = GenderTypeUserCore::isGenderValid($sGender, $bIncludeCoupleGender);
 
@@ -40,18 +40,18 @@ final class GenderTypeUserCoreTest extends TestCase
     public function validGenderTypesProvider(): array
     {
         return [
-            ['male', GenderTypeUserCore::CONSIDER_COUPLE_GENDER],
-            ['female', GenderTypeUserCore::CONSIDER_COUPLE_GENDER],
-            ['male', GenderTypeUserCore::IGNORE_COUPLE_GENDER],
-            ['female', GenderTypeUserCore::IGNORE_COUPLE_GENDER],
-            ['couple', GenderTypeUserCore::CONSIDER_COUPLE_GENDER]
+            [GenderTypeUserCore::MALE, GenderTypeUserCore::CONSIDER_COUPLE_GENDER],
+            [GenderTypeUserCore::FEMALE, GenderTypeUserCore::CONSIDER_COUPLE_GENDER],
+            [GenderTypeUserCore::MALE, GenderTypeUserCore::IGNORE_COUPLE_GENDER],
+            [GenderTypeUserCore::FEMALE, GenderTypeUserCore::IGNORE_COUPLE_GENDER],
+            [GenderTypeUserCore::COUPLE, GenderTypeUserCore::CONSIDER_COUPLE_GENDER]
         ];
     }
 
     public function invalidGenderTypesProvider(): array
     {
         return [
-            ['couple', GenderTypeUserCore::IGNORE_COUPLE_GENDER],
+            [GenderTypeUserCore::COUPLE, GenderTypeUserCore::IGNORE_COUPLE_GENDER],
             ['visitor', GenderTypeUserCore::CONSIDER_COUPLE_GENDER],
             ['woman', GenderTypeUserCore::CONSIDER_COUPLE_GENDER],
             ['man', GenderTypeUserCore::IGNORE_COUPLE_GENDER]

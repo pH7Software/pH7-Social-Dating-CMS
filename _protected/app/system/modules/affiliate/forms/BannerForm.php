@@ -1,10 +1,12 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Form
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -16,9 +18,9 @@ use PH7\Framework\Parse\SysVar;
 
 class BannerForm
 {
-    const ADS_PER_PAGE = 10;
+    private const ADS_PER_PAGE = 10;
 
-    public static function display()
+    public static function display(): void
     {
         $oForm = new \PFBC\Form('form_banner_ads');
         $oPage = new Page;
@@ -44,11 +46,18 @@ class BannerForm
             $oForm->addElement(new HTMLExternal('<h2>' . $oRow->name . '</h2>'));
             $oForm->addElement(new HTMLExternal('<p>' . t('Preview Banner:') . '</p>'));
             $oForm->addElement(new HTMLExternal('<div>' . $oSysVar->parse($oRow->code) . '</div>'));
-            $oForm->addElement(new Textarea(t('Banner:'), 'code', ['readonly' => 'readonly', 'onclick' => 'this.select()', 'value' => $oSysVar->parse($oRow->code)]));
+            $oForm->addElement(
+                new Textarea(
+                    t('Banner:'),
+                    'code',
+                    ['readonly' => 'readonly', 'onclick' => 'this.select()', 'value' => $oSysVar->parse($oRow->code)]
+                )
+            );
             $oForm->addElement(new HTMLExternal('</div>')); // End ads div tag
             $oForm->addElement(new HTMLExternal('<br /><hr /><br />'));
         }
-        $oForm->render();
         unset($oSysVar);
+
+        $oForm->render();
     }
 }

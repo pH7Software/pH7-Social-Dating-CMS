@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2013-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2013-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Birthday / Controller
  */
 
@@ -12,22 +12,12 @@ use PH7\Framework\Navigation\Page;
 
 class UserController extends Controller
 {
-    const MAX_PROFILE_PER_PAGE = 20;
+    private const MAX_PROFILES_PER_PAGE = 20;
 
-    /** @var BirthdayModel */
-    private $oBirthModel;
-
-    /** @var Page */
-    private $oPage;
-
-    /** @var string */
-    private $sTitle;
-
-    /** @var string */
-    private $sCurrentDate;
-
-    /** @var int */
-    private $iTotalBirths;
+    private BirthdayModel $oBirthModel;
+    private Page $oPage;
+    private string $sCurrentDate;
+    private int $iTotalBirths = 0;
 
     public function __construct()
     {
@@ -47,20 +37,18 @@ class UserController extends Controller
         /**
          *  Predefined meta_keywords tags.
          */
-        $this->view->meta_keywords = t('birthday,birthdate,anniversary,birth,friend,dating,social networking,profile,social');
+        $this->view->meta_keywords = t(
+            'birthday,birthdate,anniversary,birth,friend,dating,social networking,profile,social'
+        );
     }
 
-    /**
-     * @param string $sGender
-     *
-     * @return void
-     */
-    public function index($sGender = BirthdayModel::ALL)
+    public function index(string $sGender = BirthdayModel::ALL): void
     {
         $this->checkType($sGender);
 
         $this->view->total_pages = $this->oPage->getTotalPages(
-            $this->iTotalBirths, self::MAX_PROFILE_PER_PAGE
+            $this->iTotalBirths,
+            self::MAX_PROFILES_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
 
@@ -81,9 +69,7 @@ class UserController extends Controller
             $this->oPage->getNbItemsPerPage()
         );
 
-        $sHtmlCurrentDate = ' &ndash; <span class="pH3">' . $this->sCurrentDate . '</span>';
-        $this->sTitle = nt('%n% Birthday', '%n% Birthdays', $this->iTotalBirths) . $sHtmlCurrentDate;
-        $this->view->page_title = $this->view->h1_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = $this->getPageTitle();
 
         if ($sGender !== BirthdayModel::ALL) {
             $this->view->h3_title = '<span class="pH0">' . t($sGender) . '</span>';
@@ -94,12 +80,17 @@ class UserController extends Controller
         $this->output();
     }
 
+    private function getPageTitle(): string
+    {
+        $sHtmlCurrentDate = ' &ndash; <span class="pH3">' . $this->sCurrentDate . '</span>';
+        return nt('%n% Birthday', '%n% Birthdays', $this->iTotalBirths) . $sHtmlCurrentDate;
+    }
+
     /**
-     * @param string $sSexType
-     *
-     * @return string|void
+     * @return string|never
+     * TODO With PHP 8.1, add union types "string|never" since `displayPageNotFound` terminates with exit()
      */
-    private function checkType($sSexType)
+    private function checkType(string $sSexType)
     {
         switch ($sSexType) {
             case BirthdayModel::ALL:

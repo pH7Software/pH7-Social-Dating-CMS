@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Payment / Controller
  */
 
@@ -122,27 +122,27 @@ class MainController extends Controller
     public function process($sProvider = '')
     {
         switch ($sProvider) {
-            case static::PAYPAL_GATEWAY_NAME:
+            case self::PAYPAL_GATEWAY_NAME:
                 $this->paypalHandler();
                 break;
 
-            case static::STRIPE_GATEWAY_NAME:
+            case self::STRIPE_GATEWAY_NAME:
                 $this->stripeHandler();
                 break;
 
-            case static::BRAINTREE_GATEWAY_NAME:
+            case self::BRAINTREE_GATEWAY_NAME:
                 $this->braintreeHandler();
                 break;
 
-            case static::TWO_CHECKOUT_GATEWAY_NAME:
+            case self::TWO_CHECKOUT_GATEWAY_NAME:
                 $this->twoCheckOutHandler();
                 break;
 
-            case static::SKEEREL_GATEWAY_NAME:
+            case self::SKEEREL_GATEWAY_NAME:
                 $this->skeerelHandler();
                 break;
 
-            case static::CCBILL_GATEWAY_NAME:
+            case self::CCBILL_GATEWAY_NAME:
                 // Still in developing...
                 // You are more than welcome to contribute on GitHub: https://github.com/pH7Software/pH7-Social-Dating-CMS
                 break;
@@ -244,11 +244,9 @@ class MainController extends Controller
      *
      * @param int $iMembershipId
      *
-     * @return int Number of recipients who were accepted for delivery.
-     *
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
-    private function sendNotifyMail($iMembershipId)
+    private function sendNotifyMail($iMembershipId): bool
     {
         $sAdminEmail = DbConfig::getSetting('adminEmail');
         $oMembershipData = $this->oPayModel->getMemberships($iMembershipId);
@@ -303,6 +301,7 @@ class MainController extends Controller
         if ($this->httpRequest->postExists('stripeToken')) {
             \Stripe\Stripe::setApiKey($this->config->values['module.setting']['stripe.secret_key']);
             $sAmount = $this->httpRequest->post('amount');
+            $sStripeEmail = $this->httpRequest->post('stripeEmail');
 
             try {
                 $oCharge = StripeCharge::create(
@@ -310,7 +309,7 @@ class MainController extends Controller
                         'amount' => Stripe::getAmount($sAmount),
                         'currency' => $this->config->values['module.setting']['currency_code'],
                         'source' => $this->httpRequest->post('stripeToken'),
-                        'description' => t('Membership charged for %0%', $this->httpRequest->post('stripeEmail'))
+                        'description' => t('Membership charged for %0%', $sStripeEmail)
                     ]
                 );
 

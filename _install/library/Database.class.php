@@ -4,9 +4,11 @@
  *
  * @author           Pierre-Henry Soria <hi@ph7.me>
  * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Install / Library
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -42,12 +44,8 @@ class Database extends PDO
 
     /**
      * Checks if the DBMS is MySQL.
-     *
-     * @param string $sDbType
-     *
-     * @return bool
      */
-    private function isMySQL($sDbType)
+    private function isMySQL(string $sDbType): bool
     {
         return $sDbType === Database::DSN_MYSQL_PREFIX;
     }

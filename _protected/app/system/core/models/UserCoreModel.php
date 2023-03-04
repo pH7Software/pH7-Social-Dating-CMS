@@ -2,11 +2,13 @@
 /**
  * @title          User Core Model Class
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -133,6 +135,8 @@ class UserCoreModel extends Model
     }
 
     /**
+     * Retrieve the user's IP address from the log session table.
+     *
      * @param int $iProfileId
      * @param string $sTable
      *
@@ -186,11 +190,10 @@ class UserCoreModel extends Model
      *
      * @return int Total Users
      */
-    public function total($sTable = DbTableName::MEMBER, $iDay = 0, $sGender = 'all')
+    public function total(string $sTable = DbTableName::MEMBER, int $iDay = 0, string $sGender = 'all'): int
     {
         Various::checkModelTable($sTable);
 
-        $iDay = (int)$iDay;
         $bIsDay = ($iDay > 0);
 
         if ($sTable === DbTableName::MEMBER) {
@@ -474,7 +477,8 @@ class UserCoreModel extends Model
 
         $aRow = $rStmt->fetchAll(PDO::FETCH_OBJ);
         Db::free($rStmt);
-        return $aRow;
+
+        return (array)$aRow;
     }
 
     /**
@@ -824,10 +828,8 @@ class UserCoreModel extends Model
      * @param int $iProfileId
      * @param string|null $sAvatar NULL to remove the avatar.
      * @param int $iApproved
-     *
-     * @return bool
      */
-    public function setAvatar($iProfileId, $sAvatar, $iApproved)
+    public function setAvatar($iProfileId, $sAvatar, $iApproved): bool
     {
         $sSql = 'UPDATE' . Db::prefix(DbTableName::MEMBER) .
             'SET avatar = :avatar, approvedAvatar = :approved WHERE profileId = :profileId LIMIT 1';
@@ -846,9 +848,9 @@ class UserCoreModel extends Model
      * @param int $iProfileId
      * @param string|null $iApproved (1 = approved | 0 = pending | NULL = approved and pending)
      *
-     * @return stdClass The Avatar (SQL alias is pic), profileId and approvedAvatar
+     * @return stdClass|boolean The Avatar (SQL alias is pic), profileId and approvedAvatar
      */
-    public function getAvatar($iProfileId, $iApproved = null): stdClass
+    public function getAvatar($iProfileId, $iApproved = null)
     {
         $this->cache->start(self::CACHE_GROUP, 'avatar' . $iProfileId, static::CACHE_TIME);
 
@@ -930,10 +932,12 @@ class UserCoreModel extends Model
     public function addBackground($iProfileId, $sFile, $iApproved = 1)
     {
         $rStmt = Db::getInstance()->prepare(
-            'INSERT INTO' . Db::prefix(DbTableName::MEMBER_BACKGROUND) . '(profileId, file, approved) VALUES (:profileId, :file, :approved)'
+            'INSERT INTO' . Db::prefix(DbTableName::MEMBER_BACKGROUND) . '(profileId, file, file_cdn_url, approved)
+                VALUES (:profileId, :file, :file_cdn_url, :approved)'
         );
         $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
         $rStmt->bindValue(':file', $sFile, PDO::PARAM_STR);
+        $rStmt->bindValue(':file_cdn_url', '', PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $iApproved, PDO::PARAM_INT);
 
         return $rStmt->execute();
@@ -1638,11 +1642,9 @@ class UserCoreModel extends Model
     }
 
     /**
-     * @param string $sTable
-     *
      * @throws PH7InvalidArgumentException If the specified table is incorrect.
      */
-    public function clearCountries($sTable = DbTableName::MEMBER_COUNTRY)
+    public function clearCountries(string $sTable = DbTableName::MEMBER_COUNTRY): void
     {
         Various::checkModelTable($sTable);
 
@@ -1651,10 +1653,7 @@ class UserCoreModel extends Model
         unset($oDb);
     }
 
-    /**
-     * @return string
-     */
-    public function getUserWithAvatarOnlySql()
+    public function getUserWithAvatarOnlySql(): string
     {
         return ' AND avatar IS NOT NULL AND approvedAvatar = 1';
     }
@@ -1664,7 +1663,7 @@ class UserCoreModel extends Model
      *
      * @return string
      */
-    private function getSexInClauseSql(array $aSex)
+    private function getSexInClauseSql(array $aSex): string
     {
         $sGender = '';
 

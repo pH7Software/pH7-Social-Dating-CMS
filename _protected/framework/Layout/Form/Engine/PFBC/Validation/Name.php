@@ -13,10 +13,10 @@ class Name extends Validation
     {
         parent::__construct();
 
-        $this->message = t("Error: %element% must be a valid name. The name doesn't seem to be correct.");
+        $this->message = t("%element% must be a valid name.");
     }
 
-    public function isValid($sValue)
+    public function isValid($sValue): bool
     {
         return $this->isNotApplicable($sValue) || $this->oValidate->name($sValue);
     }

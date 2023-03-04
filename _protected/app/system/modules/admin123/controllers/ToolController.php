@@ -1,12 +1,12 @@
 <?php
 /**
- * @title          Tool Controller
- *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -24,12 +24,17 @@ use PH7\Framework\Url\Header;
 
 class ToolController extends Controller
 {
-    const BACKUP_FILE_EXTS = ['.sql', '.gz'];
+    private const BACKUP_FILE_EXTS = ['.sql', '.gz'];
 
-    /** @var string */
-    private $sTitle;
+    private const SERVER_ACTION = 'server';
+    private const SERVER_ARCHIVE_ACTION = 'server_archive';
+    private const CLIENT_ACTION = 'client';
+    private const CLIENT_ARCHIVE_ACTION = 'client_archive';
+    private const SHOW_ACTION = 'show';
 
-    public function index()
+    private string $sTitle;
+
+    public function index(): void
     {
         $this->sTitle = t('General Tools');
         $this->view->page_title = $this->sTitle;
@@ -38,7 +43,7 @@ class ToolController extends Controller
         $this->output();
     }
 
-    public function cache()
+    public function cache(): void
     {
         // Add a CSRF token for the remove ajax cache request
         $this->view->csrf_token = (new Token)->generate('cache');
@@ -56,8 +61,14 @@ class ToolController extends Controller
         $this->view->h1_title = $this->sTitle;
 
         $this->view->aChartData = [
-            ['title' => t('Database and Other Data'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . Cache::CACHE_DIR)],
-            ['title' => t('Server Code Template'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . PH7Tpl::COMPILE_DIR)],
+            [
+                'title' => t('Database and Other Data'),
+                'size' => $this->file->getDirSize(PH7_PATH_CACHE . Cache::CACHE_DIR)
+            ],
+            [
+                'title' => t('Server Code Template'),
+                'size' => $this->file->getDirSize(PH7_PATH_CACHE . PH7Tpl::COMPILE_DIR)
+            ],
             ['title' => t('HTML Template'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . PH7Tpl::CACHE_DIR)],
             ['title' => t('Static Files'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . Gzip::CACHE_DIR)]
         ];
@@ -65,7 +76,7 @@ class ToolController extends Controller
         $this->output();
     }
 
-    public function cacheConfig()
+    public function cacheConfig(): void
     {
         $this->sTitle = t('Cache Settings');
         $this->view->page_title = $this->sTitle;
@@ -74,7 +85,7 @@ class ToolController extends Controller
         $this->output();
     }
 
-    public function freeSpace()
+    public function freeSpace(): void
     {
         $this->addGeneralCssFile();
 
@@ -92,7 +103,7 @@ class ToolController extends Controller
         $this->output();
     }
 
-    public function envMode()
+    public function envMode(): void
     {
         $this->sTitle = t('Environment Mode');
         $this->view->page_title = $this->sTitle;
@@ -101,7 +112,7 @@ class ToolController extends Controller
         $this->output();
     }
 
-    public function blockCountry()
+    public function blockCountry(): void
     {
         $this->view->page_title = t('Country Blacklist');
         $this->view->h1_title = t('Block Countries');
@@ -109,7 +120,7 @@ class ToolController extends Controller
         $this->output();
     }
 
-    public function backup()
+    public function backup(): void
     {
         $this->addGeneralCssFile();
 
@@ -120,7 +131,7 @@ class ToolController extends Controller
         $this->view->h1_title = $this->sTitle;
 
         $aDumpList = $this->file->getFileList(PH7_PATH_BACKUP_SQL, static::BACKUP_FILE_EXTS);
-        $this->removePaths($aDumpList);
+        $aDumpList = $this->removePaths($aDumpList);
         $this->view->aDumpList = $aDumpList;
 
         $oSecurityToken = new Token;
@@ -133,27 +144,27 @@ class ToolController extends Controller
                 $sCurrentDate = (new CDateTime)->get()->date();
 
                 switch ($this->httpRequest->post('backup_type')) {
-                    case 'server':
-                        $sFullPath = PH7_PATH_BACKUP_SQL . 'Database-dump.' . $sCurrentDate . '.sql';
-                        (new Backup($sFullPath))->back()->save();
-                        $this->view->msg_success = t('Data successfully dumped into file "%0%"', $sFullPath);
+                    case self::SERVER_ACTION:
+                        $sFileName = 'Database-dump.' . $sCurrentDate . '.sql';
+                        (new Backup(PH7_PATH_BACKUP_SQL . $sFileName))->back()->save();
+                        $this->view->msg_success = t('Data dumped into backup file "%0%"', $sFileName);
                         break;
 
-                    case 'server_archive':
-                        $sFullPath = PH7_PATH_BACKUP_SQL . 'Database-dump.' . $sCurrentDate . '.sql.gz';
-                        (new Backup($sFullPath))->back()->saveArchive();
-                        $this->view->msg_success = t('Data successfully dumped into file "%0%"', $sFullPath);
+                    case self::SERVER_ARCHIVE_ACTION:
+                        $sFileName = 'Database-dump.' . $sCurrentDate . '.sql.gz';
+                        (new Backup(PH7_PATH_BACKUP_SQL . $sFileName))->back()->saveArchive();
+                        $this->view->msg_success = t('Data dumped into backup file "%0%"', $sFileName);
                         break;
 
-                    case 'client':
+                    case self::CLIENT_ACTION:
                         (new Backup($sSiteName . '_' . $sCurrentDate . '.sql'))->back()->download();
                         break;
 
-                    case 'client_archive':
+                    case self::CLIENT_ARCHIVE_ACTION:
                         (new Backup($sSiteName . '_' . $sCurrentDate . '.sql.gz'))->back()->downloadArchive();
                         break;
 
-                    case 'show':
+                    case self::SHOW_ACTION:
                         $this->view->sql_content = (new Backup)->back()->show();
                         break;
 
@@ -174,7 +185,7 @@ class ToolController extends Controller
 
                 if (!empty($sDumpFile)) {
                     if ($this->file->getFileExt($sDumpFile) === Backup::SQL_FILE_EXT) {
-                        $mStatus = (new Backup($sDumpFile))->restore();
+                        $mStatus = (new Backup(PH7_PATH_BACKUP_SQL . $sDumpFile))->restore();
                     } elseif ($this->file->getFileExt($sDumpFile) === Backup::ARCHIVE_FILE_EXT) {
                         $mStatus = (new Backup(PH7_PATH_BACKUP_SQL . $sDumpFile))->restoreArchive();
                     } else {
@@ -184,8 +195,10 @@ class ToolController extends Controller
                     $mStatus = t('Please select a dump file.');
                 }
 
-                $sMsg = ($mStatus === true) ? t('Data successfully restored from server!') : $mStatus;
-                $sMsgType = ($mStatus === true) ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
+                $sMsg = $mStatus === true ?
+                    t('Data successfully restored from server!') :
+                    (empty($mStatus) ? t('An error occurred.') : $mStatus);
+                $sMsgType = $mStatus === true ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
                 $this->design->setFlashMsg($sMsg, $sMsgType);
             }
         }
@@ -237,7 +250,7 @@ class ToolController extends Controller
         $this->output();
     }
 
-    public function optimize()
+    public function optimize(): void
     {
         $this->checkPost();
 
@@ -248,7 +261,7 @@ class ToolController extends Controller
         );
     }
 
-    public function repair()
+    public function repair(): void
     {
         $this->checkPost();
 
@@ -261,10 +274,8 @@ class ToolController extends Controller
 
     /**
      * Includes the CSS file for the chart and/or for backup textarea field size.
-     *
-     * @return void
      */
-    private function addGeneralCssFile()
+    private function addGeneralCssFile(): void
     {
         $this->design->addCss(
             PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,
@@ -275,9 +286,9 @@ class ToolController extends Controller
     /**
      * Checks and stops the script if the method is not POST.
      *
-     * @return string The text by exit() function.
+     * @return void The text by exit() function.
      */
-    private function checkPost()
+    private function checkPost(): void
     {
         if (!$this->isPost()) {
             exit(Form::wrongRequestMethodMsg('POST'));
@@ -286,20 +297,13 @@ class ToolController extends Controller
 
     /**
      * Checks if the request been made ​​by the post method.
-     *
-     * @return bool
      */
-    private function isPost()
+    private function isPost(): bool
     {
         return $this->httpRequest->postExists('is');
     }
 
-    /**
-     * @param array $aDumpList
-     *
-     * @return array
-     */
-    private function removePaths(array $aDumpList)
+    private function removePaths(array $aDumpList): array
     {
         return array_map(function ($sFullPath) {
             return str_replace(PH7_PATH_BACKUP_SQL, '', $sFullPath);

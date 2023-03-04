@@ -3,9 +3,9 @@
  * @title          Debug Class
  * @desc           Management debug mode site.
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7/ Framework / Error
  * @version        1.1
  */
@@ -28,12 +28,8 @@ namespace PH7\Framework\Error {
 
         /**
          * Gets Information (message, code, file, line, trace) of an Exception.
-         *
-         * @param Exception $oE
-         *
-         * @return string
          */
-        public static function getInfoExcept(Exception $oE)
+        public static function getInfoExcept(Exception $oE): string
         {
             $sDebug = $oE->getMessage();
             $sDebug .= '<br />';
@@ -53,7 +49,7 @@ namespace PH7\Framework\Error {
          *
          * @return bool Returns true if the development mode is enabled else returns false.
          */
-        public static function is()
+        public static function is(): bool
         {
             return Config::getInstance()->values['mode']['environment'] === Environment::DEVELOPMENT_MODE;
         }
@@ -73,7 +69,7 @@ namespace {
     /**
      * Alias for Debug::is()
      */
-    function isDebug()
+    function isDebug(): bool
     {
         return Debug::is();
     }

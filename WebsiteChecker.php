@@ -1,9 +1,9 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2018-2022, Pierre-Henry Soria. All Rights Reserved.
- * @license        See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
- * @link           https://ph7cms.com
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2018-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @license        See LICENSE.md and COPYRIGHT.md in the root directory.
+ * @link           https://ph7builder.com
  * @package        PH7 / ROOT
  */
 
@@ -17,11 +17,11 @@ use RuntimeException;
 
 class WebsiteChecker
 {
-    private const REQUIRED_SERVER_VERSION = '7.4.0';
+    private const REQUIRED_SERVER_VERSION = '8.0.0';
     private const REQUIRED_CONFIG_FILE_NAME = '_constants.php';
     private const INSTALL_FOLDER_NAME = '_install/';
 
-    private const PHP_VERSION_ERROR_MESSAGE = 'ERROR: Your current PHP version is %s. pH7CMS requires PHP %s or newer.<br /> Please ask your Web host to upgrade PHP to %s or newer.';
+    private const PHP_VERSION_ERROR_MESSAGE = 'ERROR: Your current PHP version is %s. pH7Builder requires PHP %s or newer.<br /> Please ask your Web host to upgrade PHP to %s or newer.';
     private const NO_CONFIG_FOUND_ERROR_MESSAGE = 'CONFIG FILE NOT FOUND! If you want to make a new installation, please re-upload _install/ folder and clear your database.';
 
     /**
@@ -54,10 +54,11 @@ class WebsiteChecker
 
     public function moveToInstaller(): void
     {
-        $sFilePath = str_replace('\\', '', dirname(htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES))); // Remove backslashes for Windows compatibility
-        $sFilePath = substr($sFilePath, -1) !== '/' ? $sFilePath . '/' : $sFilePath;
+        // Remove backslashes for Windows compatibility
+        $sUrlPath = str_replace('\\', '', dirname(htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES)));
+        $sUrlPath = substr($sUrlPath, -1) !== '/' ? $sUrlPath . '/' : $sUrlPath;
 
-        header('Location: ' . $sFilePath . self::INSTALL_FOLDER_NAME);
+        header('Location: ' . $sUrlPath . self::INSTALL_FOLDER_NAME);
     }
 
     public function doesConfigFileExist(): bool

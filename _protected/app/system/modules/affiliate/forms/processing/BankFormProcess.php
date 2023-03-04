@@ -1,12 +1,15 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Form / Processing
  */
 
+declare(strict_types=1);
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 class BankFormProcess extends Form
@@ -35,9 +38,9 @@ class BankFormProcess extends Form
     }
 
     /**
-     * @param int $iProfileId
+     * @param int|string $iProfileId
      */
-    private function clearCache($iProfileId)
+    private function clearCache($iProfileId): void
     {
         (new Framework\Cache\Cache)->start(
             UserCoreModel::CACHE_GROUP,

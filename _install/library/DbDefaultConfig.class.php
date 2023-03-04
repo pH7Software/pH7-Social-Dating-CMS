@@ -1,8 +1,8 @@
 <?php
 /**
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2018-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Install / Library
  */
 
@@ -12,10 +12,10 @@ defined('PH7') or exit('Restricted access');
 
 final class DbDefaultConfig
 {
-    const HOSTNAME = 'localhost';
-    const USERNAME = 'root';
-    const NAME = 'ph7cms';
-    const PREFIX = 'ph7_';
-    const PORT = '3306';
-    const CHARSET = 'utf8mb4';
+    public const HOSTNAME = 'localhost';
+    public const USERNAME = 'root';
+    public const NAME = 'ph7cms';
+    public const PREFIX = 'ph7_';
+    public const PORT = '3306';
+    public const CHARSET = 'utf8mb4';
 }

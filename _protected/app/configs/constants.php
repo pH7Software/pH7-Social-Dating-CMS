@@ -1,9 +1,9 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @link           https://ph7cms.com
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @link           https://ph7builder.com
  * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / Config
  */
 
@@ -27,7 +27,7 @@ define('PH7_DEFAULT_TIMEZONE', 'America/Chicago');
 
 /***** ADMIN MODULE NAME *****/
 
-define('PH7_ADMIN_MOD', 'admin123'); // http://ph7cms.com/doc/en/rename-the-admin-folder
+define('PH7_ADMIN_MOD', 'admin123'); // http://ph7builder.com/doc/en/rename-the-admin-folder
 
 /***** PATTERN USERNAME (for 'Members', 'Affiliates' and 'Admins') *****/
 

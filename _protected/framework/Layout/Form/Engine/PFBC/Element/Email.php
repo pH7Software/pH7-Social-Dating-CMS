@@ -8,8 +8,7 @@ namespace PFBC\Element;
 
 class Email extends Textbox
 {
-    /** @var bool */
-    private $bMailCheck;
+    private bool $bMailCheck;
 
     /**
      * @param string $sLabel

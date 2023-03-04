@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
 
@@ -48,7 +48,7 @@ class LikeCoreModel extends Model
     public function update($sKey, $fLastIp)
     {
         $sSqlQuery = 'UPDATE' . Db::prefix(DbTableName::LIKE) .
-            'SET votes = votes + 1 , lastVote = NOW() , lastIp =:lastIp WHERE keyId =:key';
+            'SET votes = votes + 1 , lastVote = NOW(), lastIp =:lastIp WHERE keyId =:key';
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindValue(':key', $sKey, PDO::PARAM_STR);

@@ -4,7 +4,7 @@
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Lang / EN
  */
 
@@ -18,7 +18,7 @@ $LANG = [
     'welcome_voice' => 'Welcome to ' . Controller::SOFTWARE_NAME . ', version ' . Controller::SOFTWARE_VERSION . '. ' .
         'I hope you will enjoy your new social web app.',
     'CMS_desc' => '<p>Welcome to ' . Controller::SOFTWARE_NAME . ' Installer.<br />
-        Thank you for choosing <strong>pH7CMS</strong>, and we hope you will love it!</p>',
+        Thank you for choosing <strong>pH7Builder</strong>, and we hope you will love it!</p>',
     'choose_install_lang' => 'Please choose your language to begin the installation',
     'requirements_desc' => 'WARNING! Please make sure <abbr title="Your Server. On local host, it will be you (your computer)">you are</abbr> connected to the Internet and your server has the <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank" rel="noopener">minimum requirements</a>.',
     'requirements2_desc' => 'Before to continue, please create a MySQL database and assign a user to it with full privileges. Once you created the MySQL database and its user, make sure to write down the database name, username and password since you will need them for the installation.',
@@ -35,14 +35,14 @@ $LANG = [
     'register' => 'Save It!',
     'site_name' => 'A Unique Site Name',
     'agree_license' => 'I have <strong>read</strong> and <strong>agree</strong> to the above Terms.',
-    'conform_to_laws' => 'I <strong>agree to always keep my website fully legal and to conform with any applicable laws and regulations</strong> that may apply to me, to my corporation, to my website and its users, and to review and <a href="https://ph7cms.com/doc/en/how-to-edit-the-static-and-legal-pages" target="_blank" rel="noopener">update the "TOS", "Privacy Policy" (and any other required legal pages of my website)</a> in order to fully comply with the applicable laws and regulations.',
+    'conform_to_laws' => 'I <strong>agree to always keep my website fully legal and to conform with any applicable laws and regulations</strong> that may apply to me, to my corporation, to my website and its users, and to review and <a href="https://ph7builder.com/doc/en/how-to-edit-the-static-and-legal-pages" target="_blank" rel="noopener">update the "TOS", "Privacy Policy" (and any other required legal pages of my website)</a> in order to fully comply with the applicable laws and regulations.',
     'responsibilities_agreement' => 'I <strong>agree to use the software at my own risk</strong> and that the author of this software cannot in any case be held liable for direct or indirect damage, nor for any other damage of any kind whatsoever, resulting from the use of this software or the impossibility to use it for any reason whatsoever.',
     'step' => 'Step',
     'welcome' => 'Welcome to the installation of',
     'welcome_to_installer' => 'Installation of',
     'config_site' => 'Configure your website!',
     'config_system' => 'Database/System Configuration',
-    'finish' => 'Woohoo! 🚀 pH7CMS is now installed! 😋',
+    'finish' => 'Woohoo! 🚀 pH7Builder is now installed! 😋',
     'go_your_site' => 'Go to your new website!',
     'go_your_admin_panel' => 'Go to your admin panel',
     'error_page_not_found' => 'Page not found',
@@ -62,7 +62,7 @@ $LANG = [
     'db_username' => 'Database user name',
     'db_password' => 'Database password',
     'db_prefix' => 'Table name prefix',
-    'desc_db_prefix' => 'This option is useful when you have multiple installations of pH7CMS on the same database.
+    'desc_db_prefix' => 'This option is useful when you have multiple installations of pH7Builder on the same database.
         We also recommend that you change the default value ​​in order to increase the security of your website.',
     'db_encoding' => 'Encoding',
     'desc_db_encoding' => 'Database encoding. Leave utf8mb4 for international encoding, including emojis.',
@@ -75,9 +75,12 @@ $LANG = [
     'admin_last_name' => 'Your last name',
     'admin_username' => 'Your username (to login into the admin panel)',
     'admin_login_email' => 'Email to login into the admin panel',
-    'admin_email' => 'Admin email address for your website',
-    'admin_return_email' => 'No-reply email address (usually noreply@yoursite.com)',
+    'admin_email' => 'Admin email address',
+    'admin_email_placeholder' => 'admin@yoursite.com',
     'admin_feedback_email' => 'Email address for the contact form of your website',
+    'admin_feedback_email_placeholder' => 'feedback@yoursite.com',
+    'admin_return_email' => 'No-reply email address (usually noreply@yoursite.com)',
+    'admin_return_email_placeholder' => 'noreply@yoursite.com',
     'admin_password' => 'Your password (to login into the admin panel)',
     'admin_passwords' => 'Please confirm your password',
     'bad_email' => 'Incorrect email',
@@ -96,7 +99,7 @@ $LANG = [
     'remove_install_folder_auto' => 'Automatically delete the &quot;install&quot; directory (this requires access rights to delete the &quot;install&quot; directory).',
     'confirm_remove_install_folder_auto' => 'WARNING, All files in the /_install/ folder will be removed.',
     'title_email_finish_install' => 'About your installation: Information',
-    'content_email_finish_install' => '<p><strong>Congratulations! Your website is now successfully installed!</strong></p>
+    'content_email_finish_install' => '<p><strong>Congrats! 🥳 Your website has successfully been installed! 😍</strong></p>
         <p>I hope you\'ll enjoy <em>' . Controller::SOFTWARE_NAME . '</em> a lot!</p>
         <p>The URL of Your OWN Social/Dating website is: <em><a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></em></p>
         <p>Your Admin Panel URL is: <em><a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></em><br />
@@ -134,7 +137,7 @@ $LANG = [
     'note_able_to_change_niche_settings_later' => 'Please note that you will be able to change the template and enable/disable the modules later in your admin panel.',
     'will_you_make_donation' => '😇 Will you help me to maintain &amp; improve the software?',
     'donate_here' => 'Subscribe now to be a patron 🏆',
-    'or_paypal_donation' => '💸 And/Or, you can also contribute through PayPal 🤩',
+    'or_paypal_donation' => '💸 And/Or, you can also contribute <span class="underline">through PayPal</span> 🚀',
     'warning_no_js' => 'JavaScript is disabled on your Web browser!<br />
         Please enable JavaScript via the options of your Web browser in order to use this website.',
     'admin_url' => 'Admin Panel URL',

@@ -1,13 +1,14 @@
 <?php
 /**
- * @title            Session Class
  * @desc             Handler Session
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Session
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Session;
 
@@ -21,11 +22,11 @@ class Session
     /**
      * @param bool|null $bDisableSessionCache Disable PHP's session cache.
      */
-    public function __construct($bDisableSessionCache = false)
+    public function __construct(bool $bDisableSessionCache = false)
     {
         if (!$this->isSessionActivated()) {
             if ($bDisableSessionCache) {
-                session_cache_limiter(false);
+                session_cache_limiter();
             }
 
             $this->initializePHPSession();
@@ -37,10 +38,8 @@ class Session
      *
      * @param array|string $mName Name of the session.
      * @param string|null $sValue Value of the session, Optional if the session data is in an array.
-     *
-     * @return void
      */
-    public function set($mName, $sValue = null)
+    public function set($mName, $sValue = null): void
     {
         if (is_array($mName)) {
             foreach ($mName as $sName => $sVal) {
@@ -57,13 +56,13 @@ class Session
      * @param string $sName Name of the session.
      * @param bool|null $bEscape
      *
-     * @return string If the session exists, returns the session with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the session doesn't exist.
+     * @return mixed If the session exists, returns the session with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the session doesn't exist.
      */
-    public function get($sName, $bEscape = true)
+    public function get(string $sName, ?bool $bEscape = true)
     {
         $sSessionName = Config::getInstance()->values['session']['prefix'] . $sName;
 
-        return (isset($_SESSION[$sSessionName]) ? ($bEscape ? escape($_SESSION[$sSessionName]) : $_SESSION[$sSessionName]) : '');
+        return (isset($_SESSION[$sSessionName]) ? ($bEscape && is_string($_SESSION[$sSessionName]) ? escape($_SESSION[$sSessionName]) : $_SESSION[$sSessionName]) : '');
     }
 
     /**
@@ -73,7 +72,7 @@ class Session
      *
      * @return bool
      */
-    public function exists($mName)
+    public function exists($mName): bool
     {
         $bExists = false; // Default value
 
@@ -94,10 +93,8 @@ class Session
      * Delete the session(s) if the session exists.
      *
      * @param array|string $mName Name of the session to delete.
-     *
-     * @return void
      */
-    public function remove($mName)
+    public function remove($mName): void
     {
         if (is_array($mName)) {
             foreach ($mName as $sName) {
@@ -114,10 +111,8 @@ class Session
 
     /**
      * Session regenerate ID.
-     *
-     * @return void
      */
-    public function regenerateId()
+    public function regenerateId(): void
     {
         if ($this->isSessionActivated()) {
             session_regenerate_id(true);
@@ -127,7 +122,7 @@ class Session
     /**
      * Destroy all PHP's sessions.
      */
-    public function destroy()
+    public function destroy(): void
     {
         if (!empty($_SESSION)) {
             $_SESSION = [];
@@ -138,10 +133,8 @@ class Session
 
     /**
      * Check if the session is already initialized and initialize it if it isn't the case.
-     *
-     * @return void
      */
-    private function initializePHPSession()
+    private function initializePHPSession(): void
     {
         session_name(Config::getInstance()->values['session']['cookie_name']);
 
@@ -163,15 +156,12 @@ class Session
         @session_start();
     }
 
-    /**
-     * @return bool
-     */
-    private function isSessionActivated()
+    private function isSessionActivated(): bool
     {
         return session_status() === PHP_SESSION_ACTIVE;
     }
 
-    private function close()
+    private function close(): void
     {
         session_write_close();
     }

@@ -2,11 +2,13 @@
 /**
  * @title          Add Fake Profiles Class
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2014-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2014-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -18,7 +20,7 @@ use PH7\Framework\Url\Header;
 
 class AddFakeProfilesForm
 {
-    const RANGE_AMOUNT_PROFILE = [
+    private const RANGE_AMOUNT_PROFILE = [
         1,
         5,
         10,
@@ -26,7 +28,7 @@ class AddFakeProfilesForm
         25
     ];
 
-    public static function display()
+    public static function display(): void
     {
         if (isset($_POST['submit_add_fake_profiles'])) {
             if (\PFBC\Form::isValid($_POST['submit_add_fake_profiles'])) {
@@ -87,10 +89,8 @@ class AddFakeProfilesForm
 
     /**
      * Returns the available nationalities accepted by the API -> https://randomuser.me/documentation#nationalities
-     *
-     * @return array
      */
-    private static function getNationalities()
+    private static function getNationalities(): array
     {
         return [
             'ALL' => t('Random Nationalities'),
@@ -104,13 +104,17 @@ class AddFakeProfilesForm
             'FI' => t('Finnish'),
             'FR' => t('French'),
             'DE' => t('German'),
+            'IN' => t('Indian'),
             'IR' => t('Iranian'),
             'IE' => t('Irish'),
+            'MX' => t('Mexican'),
             'NZ' => t('New Zealander'),
             'NO' => t('Norwegian'),
+            'RS' => t('Serbian'),
             'ES' => t('Spanish'),
             'CH' => t('Swiss'),
-            'TR' => t('Turkish')
+            'TR' => t('Turkish'),
+            'UA' => t('Ukrainian')
         ];
     }
 }

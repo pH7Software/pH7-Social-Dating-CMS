@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / User / Controller
  */
 
@@ -12,7 +12,7 @@ use PH7\Framework\Navigation\Page;
 
 class VisitorController extends Controller
 {
-    const MAX_PROFILE_PER_PAGE = 10;
+    const MAX_PROFILES_PER_PAGE = 10;
 
     /** @var UserModel */
     private $oUserModel;
@@ -72,7 +72,7 @@ class VisitorController extends Controller
 
     public function index()
     {
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalVisitors, self::MAX_PROFILE_PER_PAGE);
+        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalVisitors, self::MAX_PROFILES_PER_PAGE);
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $this->iTotalVisitors = $this->oVisitorModel->get(

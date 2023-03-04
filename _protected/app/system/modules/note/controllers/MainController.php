@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Note / Controller
  */
 
@@ -18,8 +18,8 @@ use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Url\Header;
-use stdClass;
 use PH7\JustHttp\StatusCode;
+use stdClass;
 
 class MainController extends Controller
 {
@@ -64,7 +64,7 @@ class MainController extends Controller
     public function index()
     {
         $this->view->page_title = t('Note Posts of %site_name% community');
-        $this->view->h1_title = '<span class="cinnabar-red">' . t('Community Blog. Let Users talk!') . '</span>';
+        $this->view->h1_title = '<span class="cinnabar-red">' . t('Notes. Let Users talk!') . '</span>';
 
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->oNoteModel->totalPosts($this->iApproved), self::POSTS_PER_PAGE

@@ -6,9 +6,9 @@
 #                  To work correctly, you have to execute this script when you're in the project root with your terminal (generally the parent folder of "_tools/").
 #                  (e.g., you@you:/path/to/root-project$ bash _tools/pH7.sh).
 #
-# Author:          Pierre-Henry Soria <hello@ph7cms.com>
+# Author:          Pierre-Henry Soria <hello@ph7builder.com>
 # Copyright:       (c) 2014-2020, Pierre-Henry Soria. All Rights Reserved.
-# License:         MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+# License:         MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
 ##
 
 function run() {
@@ -89,12 +89,6 @@ function run() {
             rm ./docker-compose.yml
             rm ./.dockerignore
 
-            ## TMP folders
-            # elFinder cache folders
-            rm -rf ./.quarantine/
-            rm -rf ./.tmb/
-            rm -rf ./_protected/.quarantine/
-            rm -rf ./_protected/.tmb/
             # Composer cache folder
             rm -rf ./_install/vendor/cache/
             rm -rf ./_protected/vendor/cache/

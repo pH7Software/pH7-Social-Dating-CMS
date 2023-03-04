@@ -54,17 +54,17 @@
 
         <p>
             <span class="mandatory">*</span> <label for="admin_email">{$LANG.admin_email}:</label><br />
-            <input type="email" name="admin_email" id="admin_email" value="{$smarty.session.val.admin_email|escape}" required="required" />
+            <input type="email" name="admin_email" id="admin_email" value="{$smarty.session.val.admin_email|escape}" placeholder="{$LANG.admin_email_placeholder}" required="required" />
         </p>
 
         <p>
             <span class="mandatory">*</span> <label for="admin_feedback_email">{$LANG.admin_feedback_email}:</label><br />
-            <input type="email" name="admin_feedback_email" id="admin_feedback_email" value="{$smarty.session.val.admin_feedback_email|escape}" required="required" />
+            <input type="email" name="admin_feedback_email" id="admin_feedback_email" value="{$smarty.session.val.admin_feedback_email|escape}" placeholder="{$LANG.admin_feedback_email_placeholder}" required="required" />
         </p>
 
         <p>
             <span class="mandatory">*</span> <label for="admin_return_email">{$LANG.admin_return_email}:</label><br />
-            <input type="email" name="admin_return_email" id="admin_return_email" value="{$smarty.session.val.admin_return_email|escape}" required="required" />
+            <input type="email" name="admin_return_email" id="admin_return_email" value="{$smarty.session.val.admin_return_email|escape}" placeholder="{$LANG.admin_return_email_placeholder}" required="required" />
         </p>
 
         <p>

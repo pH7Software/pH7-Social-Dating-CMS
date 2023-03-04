@@ -1,8 +1,8 @@
 <?php
 /**
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Install / Controller
  */
 
@@ -21,6 +21,8 @@ class InstallController extends Controller
 {
     private const CORE_SQL_FILE = 'pH7_Core.sql';
 
+    private const SAMPLE_USERS_MIN_AGE = 18;
+    private const SAMPLE_USERS_MAX_AGE = 60;
     private const TOTAL_MEMBERS_SAMPLE = 16;
     private const TOTAL_AFFILIATES_SAMPLE = 1;
     private const TOTAL_SUBSCRIBERS_SAMPLE = 1;
@@ -29,10 +31,8 @@ class InstallController extends Controller
      * Enable/Disable Modules according to the chosen niche
      */
     private const SOCIAL_MODS = [
-        'connect' => '0',
         'affiliate' => '0',
         'chat' => '0',
-        'chatroulette' => '0',
         'picture' => '1',
         'video' => '1',
         'friend' => '1',
@@ -55,10 +55,8 @@ class InstallController extends Controller
     ];
 
     private const DATING_MODS = [
-        'connect' => '0',
         'affiliate' => '1',
         'chat' => '1',
-        'chatroulette' => '1',
         'picture' => '1',
         'video' => '0',
         'friend' => '0',
@@ -391,18 +389,20 @@ class InstallController extends Controller
                                                         );
 
                                                         $sCurrentDate = date('Y-m-d H:i:s');
-                                                        $rStmt->execute([
-                                                                            'username' => $_SESSION['val']['admin_username'],
-                                                                            'password' => Framework\Security\Security::hashPwd(
-                                                                                $_SESSION['val']['admin_password']
-                                                                            ),
-                                                                            'email' => $_SESSION['val']['admin_login_email'],
-                                                                            'firstName' => $_SESSION['val']['admin_first_name'],
-                                                                            'lastName' => $_SESSION['val']['admin_last_name'],
-                                                                            'joinDate' => $sCurrentDate,
-                                                                            'lastActivity' => $sCurrentDate,
-                                                                            'ip' => client_ip()
-                                                                        ]);
+                                                        $rStmt->execute(
+                                                            [
+                                                                'username' => $_SESSION['val']['admin_username'],
+                                                                'password' => Framework\Security\Security::hashPwd(
+                                                                    $_SESSION['val']['admin_password']
+                                                                ),
+                                                                'email' => $_SESSION['val']['admin_login_email'],
+                                                                'firstName' => $_SESSION['val']['admin_first_name'],
+                                                                'lastName' => $_SESSION['val']['admin_last_name'],
+                                                                'joinDate' => $sCurrentDate,
+                                                                'lastActivity' => $sCurrentDate,
+                                                                'ip' => client_ip()
+                                                            ]
+                                                        );
 
                                                         $rStmt = $DB->prepare(
                                                             sprintf(
@@ -440,6 +440,16 @@ class InstallController extends Controller
                                                         );
                                                         $rStmt->execute(
                                                             ['returnEmail' => $_SESSION['val']['admin_return_email']]
+                                                        );
+
+                                                        $rStmt = $DB->prepare(
+                                                            sprintf(
+                                                                SqlQuery::UPDATE_CRON_SECURITY_HASH,
+                                                                $_SESSION['db']['prefix'] . DbTableName::SETTING
+                                                            )
+                                                        );
+                                                        $rStmt->execute(
+                                                            ['securityHash' => generate_hash(2) . 'Change_this_secret_word_' . generate_hash(3)]
                                                         );
 
                                                         if (!empty($_POST['sample_data_request'])) {
@@ -497,7 +507,6 @@ class InstallController extends Controller
         } else {
             redirect(PH7_URL_SLUG_INSTALL . 'niche');
         }
-
 
         $this->oView->assign('def_site_name', self::DEFAULT_SITE_NAME);
         $this->oView->assign('def_admin_username', self::DEFAULT_ADMIN_USERNAME);
@@ -714,7 +723,7 @@ class InstallController extends Controller
         for ($iProfile = 1; $iProfile <= $iMemberNumber; $iProfile++) {
             $sSex = $oFaker->randomElement(['male', 'female']);
             $sMatchSex = $oFaker->randomElement(['male', 'female', 'couple']);
-            $sBirthDate = $oFaker->dateTimeBetween('-60 years', '-18 years')->format('Y-m-d');
+            $sBirthDate = $oFaker->dateTimeBetween(sprintf('-%s years', self::SAMPLE_USERS_MAX_AGE), sprintf('-%s years', self::SAMPLE_USERS_MIN_AGE))->format('Y-m-d');
 
             $aUser = [];
             $aUser['username'] = str_replace(['.', ' '], '-', $oFaker->userName);
@@ -739,7 +748,7 @@ class InstallController extends Controller
                 // Specific data only for affiliates
                 $aUser['website'] = 'https://pierrehenry.be';
                 $aUser['phone'] = $oFaker->phoneNumber;
-                $aUser['bank_account'] = $oFaker->bankAccountNumber;
+                $aUser['bank_account'] = $oFaker->companyEmail;
                 $oAffModel->add($aUser);
             }
 
@@ -760,9 +769,6 @@ class InstallController extends Controller
         }
     }
 
-    /**
-     * @return bool
-     */
     private function isAgreementsAgreed(): bool
     {
         return
@@ -773,8 +779,6 @@ class InstallController extends Controller
 
     /**
      * Set the correct permission to the config files.
-     *
-     * @return void
      */
     private function chmodConfigFiles(): void
     {
@@ -784,8 +788,6 @@ class InstallController extends Controller
 
     /**
      * Require & Initialize the classes.
-     *
-     * @return void
      */
     private function initializeClasses(): void
     {
@@ -817,15 +819,15 @@ class InstallController extends Controller
         // We are asking the browser to delete the cookie.
         setcookie(
             $sCookieName,
+            '',
             0,
-            0,
-            null,
-            null,
+            '',
+            '',
             false,
             true
         );
 
-        // and then, we delete the cookie value locally to avoid using it by mistake in following our script.
+        // and then, we delete the cookie value locally to avoid using it by mistake later on in our script
         unset($_COOKIE[$sCookieName]);
     }
 

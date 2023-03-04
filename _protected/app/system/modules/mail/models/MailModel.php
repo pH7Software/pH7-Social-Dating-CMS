@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Mail / Model
  */
 
@@ -232,7 +232,7 @@ class MailModel extends MailCoreModel
      * @param int|null $iProfileId
      * @param int $iType
      *
-     * @return int|stdClass
+     * @return int|array
      */
     public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $iProfileId = null, $iType = self::ALL)
     {
@@ -287,11 +287,7 @@ class MailModel extends MailCoreModel
 
         $rStmt->execute();
 
-        if (!$bCount) {
-            $mData = $rStmt->fetchAll(PDO::FETCH_OBJ);
-        } else {
-            $mData = (int)$rStmt->fetchColumn();
-        }
+        $mData = $bCount ?  (int)$rStmt->fetchColumn() : $rStmt->fetchAll(PDO::FETCH_OBJ);
 
         Db::free($rStmt);
 

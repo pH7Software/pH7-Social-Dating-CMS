@@ -1,10 +1,12 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -20,26 +22,20 @@ use PH7\Framework\Url\Header;
 
 class LoginFormProcess extends Form implements LoginableForm
 {
-    const BRUTE_FORCE_SLEEP_DELAY = 2;
+    private const BRUTE_FORCE_SLEEP_DELAY = 2;
 
-    /** @var AdminModel */
-    private $oAdminModel;
+    private AdminModel $oAdminModel;
 
     public function __construct()
     {
         parent::__construct();
 
-        $sIp = Ip::get();
         $this->oAdminModel = new AdminModel;
         $oSecurityModel = new SecurityModel;
 
         $sEmail = $this->httpRequest->post('mail');
         $sUsername = $this->httpRequest->post('username');
         $sPassword = $this->httpRequest->post('password', HttpRequest::NO_CLEAN);
-
-
-        /*** Security IP Login ***/
-        $sIpLogin = DbConfig::getSetting('ipLogin');
 
         /*** Check if the connection is not locked ***/
         $bIsLoginAttempt = (bool)DbConfig::getSetting('isAdminLoginAttempt');
@@ -61,17 +57,17 @@ class LoginFormProcess extends Form implements LoginableForm
 
         /*** Check Login ***/
         $bIsLogged = $this->oAdminModel->adminLogin($sEmail, $sUsername, $sPassword);
-        $bIpNotAllowed = !empty(trim($sIpLogin)) && $sIpLogin !== $sIp;
+        $bIpAllowed = $this->isIpAllowed();
 
-        // If the login is failed or if the IP address is not allowed
-        if (!$bIsLogged || $bIpNotAllowed) {
+        // If the login failed or if the IP address isn't allowed
+        if (!$bIsLogged || !$bIpAllowed) {
             $this->preventBruteForce(self::BRUTE_FORCE_SLEEP_DELAY);
 
             if (!$bIsLogged) {
                 $oSecurityModel->addLoginLog(
                     $sEmail,
                     $sUsername,
-                    $sPassword,
+                    '*****',
                     'Failed! Incorrect Email, Username or Password',
                     DbTableName::ADMIN_LOG_LOGIN
                 );
@@ -81,14 +77,14 @@ class LoginFormProcess extends Form implements LoginableForm
                 }
 
                 $this->enableCaptcha();
-                \PFBC\Form::setError('form_admin_login', t('"Email", "Username" or "Password" is Incorrect'));
-            } elseif ($bIpNotAllowed) {
+                \PFBC\Form::setError('form_admin_login', t('"Email", "Username" or "Password" is incorrect'));
+            } elseif (!$bIpAllowed) {
                 $this->enableCaptcha();
                 \PFBC\Form::setError('form_admin_login', t('Incorrect Login!'));
                 $oSecurityModel->addLoginLog(
                     $sEmail,
                     $sUsername,
-                    $sPassword,
+                    '*****',
                     'Failed! Wrong IP address',
                     DbTableName::ADMIN_LOG_LOGIN
                 );
@@ -126,7 +122,7 @@ class LoginFormProcess extends Form implements LoginableForm
     /**
      * {@inheritDoc}
      */
-    public function updatePwdHashIfNeeded($sPassword, $sUserPasswordHash, $sEmail)
+    public function updatePwdHashIfNeeded(string $sPassword, string $sUserPasswordHash, string $sEmail): void
     {
         if ($sNewPwdHash = Security::pwdNeedsRehash($sPassword, $sUserPasswordHash)) {
             $this->oAdminModel->changePassword($sEmail, $sNewPwdHash, DbTableName::ADMIN);
@@ -136,12 +132,23 @@ class LoginFormProcess extends Form implements LoginableForm
     /**
      * {@inheritDoc}
      */
-    public function enableCaptcha()
+    public function enableCaptcha(): void
     {
         $this->session->set('captcha_admin_enabled', 1);
     }
 
-    private function redirectToTwoFactorAuth()
+    /**
+     * Checks if the IP is whitelisted to login on the admin panel.
+     */
+    private function isIpAllowed(): bool
+    {
+        $sAllowedIpLogin = (string)DbConfig::getSetting('ipLogin');
+        $sAllowedIpLogin = trim($sAllowedIpLogin);
+
+        return empty($sAllowedIpLogin) || $sAllowedIpLogin === Ip::get();
+    }
+
+    private function redirectToTwoFactorAuth(): void
     {
         Header::redirect(
             Uri::get(

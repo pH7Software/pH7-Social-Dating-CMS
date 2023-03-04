@@ -2,7 +2,7 @@
 /**
  * @author           Pierre-Henry Soria <hi@ph7.me>
  * @copyright        (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Test / Unit / Framework / Security / Validate
  */
 
@@ -196,7 +196,7 @@ final class ValidateTest extends TestCase
     public function invalidPhoneNumbersProvider(): array
     {
         return [
-            ['0768374890'],
+            ['++0768374890'],
             ['0485'],
             ['zerozerozero'],
             ['']
@@ -256,8 +256,6 @@ final class ValidateTest extends TestCase
             ['one'],
             ['lalal'],
             [''],
-            [0],
-            [324],
             [null]
         ];
     }

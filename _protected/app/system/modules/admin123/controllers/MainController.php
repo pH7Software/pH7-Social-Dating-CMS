@@ -2,11 +2,13 @@
 /**
  * @title          Main Controller
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -20,10 +22,10 @@ use PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
-    const DURATION_SITE_CONSIDERED_NEW = '12 days';
-    const SOFTWARE_BLOG_URL = 'https://ph7cms.com/blog/';
+    private const DURATION_SITE_CONSIDERED_NEW = '8 days';
+    private const SOFTWARE_BLOG_URL = 'https://ph7builder.com/blog/';
 
-    public function index()
+    public function index(): void
     {
         // Add ph7cms-helper's JS file if needed
         $oValidateSite = new ValidateSiteCore($this->session);
@@ -47,7 +49,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function stat()
+    public function stat(): void
     {
         $this->view->page_title = t('Statistics');
         $this->view->h1_title = t('Site statistics');
@@ -57,7 +59,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function login()
+    public function login(): void
     {
         // Prohibit the referencing in search engines of the admin panel
         $this->view->header = Meta::NOINDEX;
@@ -67,7 +69,7 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function logout()
+    public function logout(): void
     {
         (new Admin)->logout($this->session);
 
@@ -77,7 +79,7 @@ class MainController extends Controller
         );
     }
 
-    protected function addStats()
+    protected function addStats(): void
     {
         $this->addCssFile();
 
@@ -313,28 +315,22 @@ class MainController extends Controller
         unset($oStatModel);
     }
 
-    /**
-     * @return void
-     */
-    protected function checkUpdates()
+    protected function checkUpdates(): void
     {
         if (Version::isUpdateEligible()) {
             $aLatestVerInfo = Version::getLatestInfo();
             $sLatestVer = t('%0%, build %1%', $aLatestVerInfo['version'], $aLatestVerInfo['build']);
 
             $sMsg = '<h3>' . t('🍰 A <a href="%0%" target="_blank" rel="noopener">New Release</a> 🎁 just for YOU! 😍', Kernel::SOFTWARE_RELEASE_URL) . '</h3>';
-            $sMsg .= t('%software_name% <strong>%0%</strong> is available! Please update it today to keep your site safe and stable.', $sLatestVer);
+            $sMsg .= t('%software_name% <strong>%0%</strong> is available! Update it today to keep your site safe and stable.', $sLatestVer);
             $sMsg .= '<br /><br />';
-            $sMsg .= t('Read <a href="%0%" target="_blank" rel="noopener">this</a> to learn how to upgrade your site, step-by-step. Once you follow the steps, run the upgrade wizard <a href="%1%" target="_blank" rel="noopener">here</a>.', Version::UPGRADE_DOC_URL, PH7_URL_ROOT . 'asset/file/Upgrade');
+            $sMsg .= t('👉 <a href="%0%" target="_blank" rel="noopener">Run the upgrade wizard</a> 👈', PH7_URL_ROOT . 'asset/file/Upgrade');
 
             $this->design->setMessage($sMsg);
         }
     }
 
-    /**
-     * @return bool
-     */
-    private function isWebsiteNew()
+    private function isWebsiteNew(): bool
     {
         $iSiteCreationDate = VDate::getTime(StatisticCoreModel::getDateOfCreation());
 
@@ -343,10 +339,8 @@ class MainController extends Controller
 
     /**
      * Adding the common CSS for the statistic chart.
-     *
-     * @return void
      */
-    private function addCssFile()
+    private function addCssFile(): void
     {
         $this->design->addCss(
             PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,

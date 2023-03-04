@@ -17,7 +17,7 @@ pH7Tpl supports two different syntaxes:
 
 ## 💨 Built to be the FASTEST 🌠
 
-It translates all high-level code into PHP, then save it until the .tpl file is modified.
+It translates all high-level syntax code into raw PHP, then saves it until the .tpl file is modified again (which will trigger again the language parsing cycle).
 
 When the tpl "view" files are compiled into PHP code, pH7Tpl also optimizes the PHP code, removes extra open/close PHPtags, strips all comments and compacts the code.
 

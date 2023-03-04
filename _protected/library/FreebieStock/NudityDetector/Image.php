@@ -3,25 +3,23 @@
 /**
  * @author FreebieVectors.com
  *
- * Modified by Pierre-Henry Soria <hello@ph7cms.com>
+ * Modified by Pierre-Henry Soria <hello@ph7builder.com>
  *
  * General image utilities
  */
 class Image
 {
-    const IMAGETYPE_WEBP = 18; // TODO: From PHP 7.1, IMAGETYPE_WEBP is available
-
     /**
      * Full path to the image file
      *
-     * @var String
+     * @var string
      */
     private $file;
 
     /**
      * Image extension
      *
-     * @var String
+     * @var string
      */
     private $extension;
 
@@ -79,7 +77,7 @@ class Image
                 return 'jpg';
             case IMAGETYPE_PNG:
                 return 'png';
-            case self::IMAGETYPE_WEBP:
+            case IMAGETYPE_WEBP:
                 return 'webp';
         }
 
@@ -144,7 +142,7 @@ class Image
             case IMAGETYPE_PNG:
                 $this->resource = imagecreatefrompng($this->file);
                 break;
-            case self::IMAGETYPE_WEBP:
+            case IMAGETYPE_WEBP:
                 $this->resource = imagecreatefromwebp($this->file);
                 break;
 
@@ -202,7 +200,7 @@ class Image
             case IMAGETYPE_PNG:
                 imagepng($this->resource, $file);
                 break;
-            case self::IMAGETYPE_WEBP:
+            case IMAGETYPE_WEBP:
                 imagewebp($this->resource, $file);
                 break;
             default:

@@ -25,7 +25,7 @@ defined('PH7') or exit('Restricted access');
  * @author http://code.google.com/u/1stvamp/ (Issue 64 patch)
  *
  * THIS FILE HAS BEEN MODIFIED BY:
- * @author Pierre-Henry Soria <hello@ph7cms.com>
+ * @author Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
  */
 class Css

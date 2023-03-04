@@ -2,9 +2,11 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Test / Unit / Framework / Date
  */
+
+declare(strict_types=1);
 
 namespace PH7\Test\Unit\Framework\Date;
 
@@ -33,7 +35,7 @@ class VariousTest extends TestCase
     /**
      * @dataProvider secAndTimeProvider
      */
-    public function testSecToTime(int $iSec, int $sTime): void
+    public function testSecToTime(int $iSec, string $sTime): void
     {
         $sResult = Various::secToTime($iSec);
 

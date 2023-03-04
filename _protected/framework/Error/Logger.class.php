@@ -1,14 +1,15 @@
 <?php
 /**
- * @title          Logger Class
  * @desc           Handler Logger Management.
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7/ Framework / Error
- * @version        1.0
+ * @version        1.2
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Error;
 
@@ -19,18 +20,16 @@ use PH7\Framework\File\File;
 
 class Logger extends Core
 {
-    const LOG_DIR = 'pH7log/';
-    const EXCEPT_DIR = 'except/';
-    const GZIP_DIR = 'gzip/';
-    const EXT = '.log';
+    protected const LOG_DIR = 'pH7log/';
+    protected const EXCEPT_DIR = 'except/';
+    protected const GZIP_DIR = 'gzip/';
+    protected const EXT = '.log';
 
-    const FILE_MESSAGE_TYPE = 3;
+    private const FILE_MESSAGE_TYPE = 3;
 
-    /** @var string */
-    protected $sDir;
+    protected string $sDir;
 
-    /** @var string */
-    protected $sFileName;
+    protected string $sFileName;
 
     public function __construct()
     {
@@ -40,7 +39,7 @@ class Logger extends Core
         parent::__construct();
     }
 
-    public function msg($sMsg)
+    public function msg(string $sMsg): void
     {
         error_log(
             $sMsg . File::EOL,

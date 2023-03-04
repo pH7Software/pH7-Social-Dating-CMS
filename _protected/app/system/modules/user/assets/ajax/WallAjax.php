@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / User / Asset / Ajax
  */
 
@@ -84,7 +84,7 @@ class WallAjax extends Core
         } else {
             foreach ($this->mContents as $oRow) {
                 echo '<p>';
-                $this->oAvatarDesign->get($oRow->username, $oRow->firstName, $oRow->sex, 32, DbTableName::MEMBER);
+                $this->oAvatarDesign->get($oRow->username, $oRow->firstName, $oRow->sex, iSize: AvatarDesignCore::DEF_AVATAR_SIZE, bRollover: true);
                 echo '</p><p>', Emoticon::init(escape($this->str->extract(Ban::filterWord($oRow->post), self::MAX_STRING_LENGTH_SHOWN))), '</p>
                     <p class="small italic text-muted">', t('Posted on %0%', $this->dateTime->get($oRow->createdDate)->dateTime());
 
@@ -109,7 +109,7 @@ class WallAjax extends Core
         } else {
             foreach ($this->mContents as $oRow) {
                 echo '<p>';
-                $this->oAvatarDesign->get($oRow->username, $oRow->firstName, $oRow->sex, 32, DbTableName::MEMBER);
+                $this->oAvatarDesign->get($oRow->username, $oRow->firstName, $oRow->sex, iSize: AvatarDesignCore::DEF_AVATAR_SIZE, bRollover: true);
 
                 echo '</p><p>', UserParser::atUsernameToLink(escape($this->str->extract(Ban::filterWord($oRow->comment), self::MAX_STRING_LENGTH_SHOWN))), '</p>
                     <p class="small italic text-muted"><a href="', Uri::get('comment', 'comment', 'read', "profile,$oRow->recipient"), '#', $oRow->commentId, '">', t('Read more'), '</a> &bull; ',

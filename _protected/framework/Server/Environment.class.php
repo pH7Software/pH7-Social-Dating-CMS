@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2017-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / Framework / Server
  */
 
@@ -12,12 +12,12 @@ defined('PH7') or exit('Restricted access');
 
 class Environment
 {
-    const ENV_FILE_EXT = '.env';
+    private const ENV_FILE_EXT = '.env';
 
-    const PRODUCTION_MODE = 'production';
-    const DEVELOPMENT_MODE = 'development';
+    public const PRODUCTION_MODE = 'production';
+    public const DEVELOPMENT_MODE = 'development';
 
-    const MODES = [
+    private const MODES = [
         self::PRODUCTION_MODE,
         self::DEVELOPMENT_MODE
     ];

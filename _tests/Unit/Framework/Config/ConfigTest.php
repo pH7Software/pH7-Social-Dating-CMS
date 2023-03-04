@@ -2,7 +2,7 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2017-2022, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Test / Unit / Framework / Config
  */
 
@@ -21,6 +21,9 @@ class ConfigTest extends TestCase
     protected function setUp(): void
     {
         $this->oConfig = Config::getInstance();
+
+        // Load the testing config.ini file for each test
+        $this->oConfig->load(PH7_PATH_TEST . 'fixtures/' . PH7_CONFIG_FILE);
     }
 
     public function testSetDuplicateKey(): void
@@ -34,6 +37,7 @@ class ConfigTest extends TestCase
     public function testGetValue(): void
     {
         $sName = 'Pierre-Henry Soria';
+
         $this->oConfig->setValue('name', $sName);
         $this->assertSame($sName, $this->oConfig->getValue('name'));
     }
@@ -45,20 +49,18 @@ class ConfigTest extends TestCase
 
     public function testValidLoad(): void
     {
-        $this->assertTrue($this->oConfig->load(PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE));
+        $this->assertTrue($this->oConfig->load(PH7_PATH_TEST . 'fixtures/' . PH7_CONFIG_FILE));
     }
 
     public function testValueIsCasted(): void
     {
-        $this->assertIsBool('base', $this->oConfig->values['test']['enabled']);
+        $this->assertIsBool($this->oConfig->values['test']['enabled']);
     }
 
     public function testDefaultIniValues(): void
     {
         $this->assertSame('base', $this->oConfig->values['application']['default_theme']);
         $this->assertSame('en_US', $this->oConfig->values['application']['default_lang']);
-        $this->oConfig->setValue('ph7cms', 'pH7 Social Dating CMS');
-        $this->assertSame('development', $this->oConfig->values['mode']['environment']);
-        $this->assertSame('pH7 Social Dating CMS', $this->oConfig->getValue('ph7cms'));
+        $this->assertSame('production', $this->oConfig->values['mode']['environment']);
     }
 }

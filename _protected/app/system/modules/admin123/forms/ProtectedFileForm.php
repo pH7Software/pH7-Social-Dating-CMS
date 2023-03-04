@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
 
@@ -37,7 +37,9 @@ class ProtectedFileForm
             $sFullPath = self::getRealPath();
 
             if (!$rData = @file_get_contents($sFullPath)) {
-                \PFBC\Form::clearErrors('form_file'); // First, remove the previous error message (if existing) to avoid duplicate error messages
+                // First, remove the previous error message (if existing) to avoid duplicate error messages
+                \PFBC\Form::clearErrors('form_file');
+
                 \PFBC\Form::setError('form_file', t('The following requested file was not found: %0%', escape(PH7_PATH_PROTECTED . $_GET['file'])));
             }
 

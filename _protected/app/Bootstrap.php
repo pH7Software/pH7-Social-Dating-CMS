@@ -1,9 +1,9 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
- * @link           https://ph7cms.com
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
+ * @link           https://ph7builder.com
  * @package        PH7 / App / Core
  */
 
@@ -33,10 +33,7 @@ require 'includes/helpers/misc.php';
 
 class Bootstrap
 {
-    /**
-     * @var Bootstrap $oInstance
-     */
-    private static $oInstance = null;
+    private static ?self $oInstance = null;
 
     /**
      * Set constructor/cloning to private since it's a singleton class.
@@ -49,15 +46,13 @@ class Bootstrap
      *
      * @return Bootstrap Returns the instance class or create initial instance of the class.
      */
-    public static function getInstance()
+    public static function getInstance(): self
     {
-        return null === static::$oInstance ? static::$oInstance = new static : static::$oInstance;
+        return null === self::$oInstance ? self::$oInstance = new self : self::$oInstance;
     }
 
     /**
      * Set a default timezone if it is not already configured in environment.
-     *
-     * @return void
      */
     public function setTimezoneIfNotSet(): void
     {
@@ -69,8 +64,6 @@ class Bootstrap
     /**
      * Initialize the app, load the files and launch the main FrontController router.
      *
-     * @return void
-     *
      * @throws Exception
      * @throws Except\PH7Exception
      * @throws Except\UserException
@@ -81,8 +74,8 @@ class Bootstrap
         try {
             $this->loadInitFiles();
 
-            //** Temporary code. In the near future, pH7CMS will be usable without mod_rewrite
-            if (!Server::isRewriteMod()) {
+            //** Temporary code. In the near future, pH7Builder will be working without mod_rewrite
+            if (!Server::cachedIsRewriteMod()) {
                 $this->notRewriteModEnabledError();
                 exit;
             }  //*/
@@ -97,7 +90,7 @@ class Bootstrap
 
             // Initialize the FrontController, we are asking the front controller to process the HTTP request
             FrontController::getInstance()->runRouter();
-        } catch (FileNotFoundException | Except\UserException $oE) {
+        } catch (FileNotFoundException|Except\UserException $oE) {
             echo $oE->getMessage();
         } catch (Except\PH7Exception $oE) {
             Except\PH7Exception::launch($oE);
@@ -110,8 +103,6 @@ class Bootstrap
 
     /**
      * Load all necessary files for running the app.
-     *
-     * @return void
      */
     private function loadInitFiles(): void
     {
@@ -123,7 +114,11 @@ class Bootstrap
         // For All environment
         Import::file(PH7_PATH_APP . 'configs/environment/all.env');
         // Specific to the current environment
-        Import::file(PH7_PATH_APP . 'configs/environment/' . Env::getFileName(Config::getInstance()->values['mode']['environment']));
+        Import::file(
+            PH7_PATH_APP . 'configs/environment/' . Env::getFileName(
+                Config::getInstance()->values['mode']['environment']
+            )
+        );
 
         // Load Class ~/protected/app/includes/classes/*
         Import::pH7App('includes.classes.Loader.Autoloader');
@@ -141,18 +136,14 @@ class Bootstrap
 
     /**
      * Initialize the benchmark time. It is calculated in Framework\Layout\Html\Design::stat()
-     *
-     * @return void
      */
-    private function startPageBenchmark()
+    private function startPageBenchmark(): void
     {
         Registry::getInstance()->start_time = microtime(true);
     }
 
     /**
      * If sessions status are enabled, writes session data and ends session.
-     *
-     * @return void
      */
     private function closeAppSession(): void
     {
@@ -168,9 +159,9 @@ class Bootstrap
      */
     private function notRewriteModEnabledError(): void
     {
-        $sMsg = '<p class="warning"><a href="' . Kernel::SOFTWARE_WEBSITE . '">pH7CMS</a> requires Apache "mod_rewrite".</p>
-        <p>Firstly, please <strong>make sure the ".htaccess" file has been uploaded to the root directory where pH7CMS is installed</strong>. If not, use your FTP client (such as Filezilla) and upload it again from pH7CMS unziped package and try again.<br />
-        Secondly, please <strong>make sure "mod_rewrite" is correctly installed</strong>.<br /> Click <a href="https://ph7cms.com/doc/en/how-to-install-rewrite-module" target="_blank" rel="noopener">here</a> if you want to get more information on how to install the rewrite module.<br /><br />
+        $sMsg = '<p class="warning"><a href="' . Kernel::SOFTWARE_WEBSITE . '">pH7Builder</a> requires Apache "mod_rewrite".</p>
+        <p>Firstly, please <strong>make sure the ".htaccess" file has been uploaded to the root directory where pH7Builder is installed</strong>. If not, use your FTP client (such as Filezilla) and upload it again from pH7Builder unziped package and try again.<br />
+        Secondly, please <strong>make sure "mod_rewrite" is correctly installed</strong>.<br /> Click <a href="https://ph7builder.com/doc/en/how-to-install-rewrite-module" target="_blank" rel="noopener">here</a> if you want to get more information on how to install the rewrite module.<br /><br />
         After that, please <a href="' . PH7_URL_ROOT . '">retry</a>.</p>';
 
         echo html_body("Apache's mod_rewrite is required", $sMsg);

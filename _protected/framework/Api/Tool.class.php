@@ -2,12 +2,14 @@
 /**
  * @title            API Tool Class
  *
- * @author           Pierre-Henry SORIA <hello@ph7cms.com>
+ * @author           Pierre-Henry SORIA <hello@ph7builder.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Api
- * @link             http://ph7cms.com
+ * @link             http://ph7builder.com
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Api;
 
@@ -19,7 +21,7 @@ use PH7\Framework\Server\Server;
 
 class Tool
 {
-    const SOFTWARE_API_URL = 'https://api.ph7cms.com/';
+    const SOFTWARE_API_URL = 'https://api.ph7builder.com/';
     const DEV_APP_API_KEY = 'dev772277';
 
     /**
@@ -30,7 +32,7 @@ class Tool
      *
      * @return bool Returns TRUE if the app has access, FALSE otherwise.
      */
-    public static function checkAccess(Config $oConfig, HttpRequest $oRequest)
+    public static function checkAccess(Config $oConfig, HttpRequest $oRequest): bool
     {
         if (self::isApiKeyValid($oRequest->gets('private_api_key'), $oConfig)) {
             return self::isUrlAllowed($oRequest->gets('url'), $oConfig);
@@ -39,25 +41,13 @@ class Tool
         return false;
     }
 
-    /**
-     * @param string $sPrivateApiKey
-     * @param Config $oConfig
-     *
-     * @return bool
-     */
-    private static function isApiKeyValid($sPrivateApiKey, Config $oConfig)
+    private static function isApiKeyValid(string $sPrivateApiKey, Config $oConfig): bool
     {
         return strcmp($sPrivateApiKey, $oConfig->values['ph7cms.api']['private_key']) === 0 ||
             (Server::isLocalHost() && $sPrivateApiKey === self::DEV_APP_API_KEY);
     }
 
-    /**
-     * @param string $sUrl
-     * @param Config $oConfig
-     *
-     * @return bool
-     */
-    private static function isUrlAllowed($sUrl, Config $oConfig)
+    private static function isUrlAllowed(string $sUrl, Config $oConfig): bool
     {
         return in_array(
             $sUrl,

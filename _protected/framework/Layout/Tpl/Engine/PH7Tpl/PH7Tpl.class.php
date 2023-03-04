@@ -1,9 +1,9 @@
 <?php
 /**
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
- * @copyright        (c) 2011-2022, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @copyright        (c) 2011-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  *
  * @history          Supports now PHP 5 with beautiful object code (POO), (removed all the ugly object code from PHP 4.x).
  * @history          Supports now PHP 5.3 (added namespace and incorporate the template engine into the pH7Framework).
@@ -17,6 +17,7 @@ namespace PH7\Framework\Layout\Tpl\Engine\PH7Tpl;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Compress\Compress;
+use PH7\Framework\Config\Config;
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\File\GenerableFile;
@@ -32,7 +33,7 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
 {
     const NAME = 'PH7Tpl';
     const AUTHOR = 'Pierre-Henry Soria';
-    const VERSION = '1.4.1';
+    const VERSION = '1.6.0';
     const ERR_MSG = 'It seems you have removed the copyright notice(s) in the software. If you really want to remove them, please email: %s';
     const DATETIME_FORMAT = 'Y-m-d H:i:s';
 
@@ -58,8 +59,7 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
         'lang'
     ];
 
-    /** @var DesignModel */
-    private $designModel;
+    private DesignModel $designModel;
 
     /** @var Syntax */
     private $oSyntaxEngine;
@@ -94,8 +94,7 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
     /** @var string */
     private $sCacheDirFile;
 
-    /** @var bool */
-    private $bCaching = false;
+    private bool $bCaching = false;
 
     /** @var bool */
     private $bHtmlCompressor;
@@ -106,14 +105,12 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
     /** @var int|null */
     private $mCacheExpire;
 
-    /** @var array */
-    private $_aVars = [];
+    private array $_aVars = [];
 
-    /** @var PH7Tpl */
-    private $_oVars;
+    private PH7Tpl $_oVars;
 
     // Hack that keeps the $config variable in the template files
-    protected $config;
+    protected Config $config;
 
     public function __construct(Syntax $oSyntaxEngine)
     {
@@ -124,6 +121,7 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
 
         /** Instance objects to the class **/
         $this->_oVars = $this;
+
         $this->designModel = new DesignModel;
         $this->oSyntaxEngine = new $oSyntaxEngine;
 
@@ -269,10 +267,8 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
      *
      * @param string $sName The variable name to use in the template
      * @param mixed $mValue (string, object, array, integer, ...) Value Variable
-     *
-     * @return void
      */
-    public function __set($sName, $mValue)
+    public function __set(string $sName, $mValue): void
     {
         $this->assign($sName, $mValue);
     }
@@ -286,7 +282,7 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
      *
      * @return mixed The variable value.
      */
-    public function __get($sKey)
+    public function __get(string $sKey)
     {
         return $this->getVar($sKey);
     }
@@ -304,16 +300,13 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
     }
 
     /**
-     * @param string $sTplFile Default NULL
-     * @param string $sDirPath Default NULL
-     * @param bool $bInclude Default TRUE
-     *
-     * @return string
+     * @return string|never
+     * TODO When min version will be PHP 8.1, add union return types "string|never"
      *
      * @throws TplException If the template file does no exist.
      * @throws PH7InvalidArgumentException
      */
-    public function display($sTplFile = null, $sDirPath = null, $bInclude = true)
+    public function display(?string $sTplFile = null, ?string $sDirPath = null, bool $bInclude = true)
     {
         $this->sTplFile = $sTplFile;
 
@@ -374,7 +367,7 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
      *
      * @throws TplException If the template file could not be opened.
      */
-    public function parseMail($sMailTplFile, $sEmailAddress)
+    public function parseMail(string $sMailTplFile, string $sEmailAddress): string
     {
         /**
          * If the template doesn't contain theme for emails, we retrieve the emails default themes.
@@ -395,9 +388,9 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
         foreach ($this->_aVars as $sKey => $sValue) {
             /*** Variables ***/
 
-            // We can't convert an object to a string with str_replace, which we tested the variables with is_object function
+            // Skip any objects before parsing with str_replace
             if (!is_object($sValue)) {
-                $sCode = str_replace('{' . $sKey . '}', $sValue, $sCode);
+                $sCode = str_replace('{' . $sKey . '}', (string)$sValue, $sCode);
             }
 
             // Email Address
@@ -475,10 +468,8 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
      * @param mixed $mValue (string, object, array, integer, ...) Value Variable
      * @param bool $bEscape Specify "true" if you want to protect your variables against XSS.
      * @param bool $bEscapeStrip If you use escape method, you can also set this parameter to "true" to strip HTML and PHP tags from a string.
-     *
-     * @return void
      */
-    public function assign($sName, $mValue, $bEscape = false, $bEscapeStrip = false)
+    public function assign(string $sName, $mValue, bool $bEscape = false, bool $bEscapeStrip = false): void
     {
         if ($bEscape === true) {
             $mValue = $this->str->escape($mValue, $bEscapeStrip);
@@ -495,10 +486,8 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
      * @param array $aVars
      * @param bool $bEscape Specify TRUE if you want to protect your variables against XSS.
      * @param bool $bEscapeStrip If you use escape method, you can also set this parameter to "true" to strip HTML and PHP tags from a string.
-     *
-     * @return void
      */
-    public function assigns(array $aVars, $bEscape = false, $bEscapeStrip = false)
+    public function assigns(array $aVars, bool $bEscape = false, bool $bEscapeStrip = false): void
     {
         foreach ($aVars as $sKey => $sValue) {
             $this->assign($sKey, $sValue, $bEscape, $bEscapeStrip); // Assign a string variable
@@ -514,9 +503,9 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
      *
      * @return mixed Value of that variable.
      */
-    public function getVar($sVarName)
+    public function getVar(string $sVarName)
     {
-        return isset($this->_aVars[$sVarName]) ? $this->_aVars[$sVarName] : '';
+        return $this->_aVars[$sVarName] ?? '';
     }
 
     /**
@@ -606,7 +595,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
                 $sOutput = (new Compress)->parseHtml($sOutput);
             }
 
-            if (!$this->file->putFile($this->sCacheDirFile, $sOutput)) {
+            if ($this->file->putFile($this->sCacheDirFile, $sOutput) === false) {
                 throw new TplException(
                     sprintf('Unable to write HTML cached file "%s"', $this->sCacheDirFile)
                 );
@@ -630,7 +619,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     }
 
     /**
-     * Get current pH7CMS's controller.
+     * Get current pH7Builder's controller.
      *
      * @return string The current controller
      */
@@ -761,14 +750,13 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
 
     /**
      * Checks if the directory passed by the argument of the method is the main directory.
-     *
-     * @param string $sDirPath
-     *
-     * @return bool
      */
-    private function isMainDir($sDirPath)
+    private function isMainDir(?string $sDirPath): bool
     {
-        return is_dir($sDirPath) && preg_match('#' . $this->addSlashes(PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS) . '#', $sDirPath);
+        return
+            !empty($sDirPath) &&
+            is_dir($sDirPath) &&
+            preg_match('#' . $this->addSlashes(PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS) . '#', $sDirPath);
     }
 
     /**
@@ -817,7 +805,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     /**
      * @return bool Returns TRUE if the cache has expired, FALSE otherwise.
      */
-    private function hasCacheExpired()
+    private function hasCacheExpired(): bool
     {
         return
             $this->file->getModifTime($this->sCompileDirFile) > $this->file->getModifTime($this->sCacheDirFile) ||
@@ -826,12 +814,8 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
 
     /**
      * Add slashes to avoid errors with "preg_replace()" with Windows' backslashes in directories.
-     *
-     * @param string $sStr
-     *
-     * @return string Escaped string
      */
-    private function addSlashes($sStr)
+    private function addSlashes(string $sStr): string
     {
         return addslashes($sStr);
     }
@@ -863,22 +847,15 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
         return $this;
     }
 
-    /**
-     * @param string $sKeyword
-     *
-     * @return bool
-     */
-    private function isKeywordFoundInCode($sKeyword)
+    private function isKeywordFoundInCode(string $sKeyword): bool
     {
         return strpos($this->sCode, $sKeyword) !== false;
     }
 
     /**
      * Set the error message.
-     *
-     * @return void
      */
-    private function setErrMsg()
+    private function setErrMsg(): void
     {
         $this->sCode = sprintf(static::ERR_MSG, self::SOFTWARE_EMAIL);
     }

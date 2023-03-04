@@ -23,7 +23,7 @@ class Password extends Validation
 
         $this->iMin = DbConfig::getSetting('minPasswordLength');
         $this->iMax = DbConfig::getSetting('maxPasswordLength');
-        $this->message = t('Error: Your password has to be from %0% to %1% characters long.', $this->iMin, $this->iMax);
+        $this->message = t('Your password has to be from %0% to %1% characters long.', $this->iMin, $this->iMax);
     }
 
     /**

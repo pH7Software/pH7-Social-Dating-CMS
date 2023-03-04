@@ -2,9 +2,9 @@
 /**
  * @desc             Various Page methods with also the pagination methods.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Navigation
  */
 
@@ -16,75 +16,51 @@ use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 class Page
 {
-    const DEFAULT_NUMBER_ITEMS = 10;
+    private const DEFAULT_NUMBER_ITEMS = 10;
 
-    const REGEX_URL_PARAMS = '#\?(.+[^\./])=(.+[^\./])$#';
-    const REGEX_URL_QUESTION_MARKS = '#\?.+$#';
+    private const REGEX_URL_PARAMS = '#\?(.+[^\./])=(.+[^\./])$#';
+    private const REGEX_URL_QUESTION_MARKS = '#\?.+$#';
 
-    /** @var HttpRequest */
-    private $oHttpRequest;
+    private HttpRequest $oHttpRequest;
 
-    /** @var int */
-    private $iTotalPages;
+    private int $iTotalPages;
 
-    /** @var int */
-    private $iTotalItems;
+    private int $iTotalItems;
 
-    /** @var int */
-    private $iNbItemsPerPage;
+    private int $iNbItemsPerPage;
 
-    /** @var int */
-    private $iCurrentPage;
+    private int $iCurrentPage;
 
-    /** @var int */
-    private $iFirstItem;
+    private int $iFirstItem;
 
     public function __construct()
     {
         $this->oHttpRequest = new HttpRequest;
     }
 
-    /**
-     * @param int $iTotalItems
-     * @param int $iNbItemsPerPage Default 10
-     *
-     * @return int The number of pages.
-     */
-    public function getTotalPages($iTotalItems, $iNbItemsPerPage = self::DEFAULT_NUMBER_ITEMS)
+    public function getTotalPages(?int $iTotalItems, int $iNbItemsPerPage = self::DEFAULT_NUMBER_ITEMS): int
     {
         $this->totalPages($iTotalItems, $iNbItemsPerPage);
 
         return ($this->iTotalPages < 1) ? 1 : $this->iTotalPages;
     }
 
-    /**
-     * @return int
-     */
-    public function getTotalItems()
+    public function getTotalItems(): int
     {
         return $this->iTotalItems;
     }
 
-    /**
-     * @return int
-     */
-    public function getFirstItem()
+    public function getFirstItem(): int
     {
-        return $this->iFirstItem < 0 ? 0 : $this->iFirstItem;
+        return max($this->iFirstItem, 0);
     }
 
-    /**
-     * @return int
-     */
-    public function getNbItemsPerPage()
+    public function getNbItemsPerPage(): int
     {
         return $this->iNbItemsPerPage;
     }
 
-    /**
-     * @return int
-     */
-    public function getCurrentPage()
+    public function getCurrentPage(): int
     {
         return $this->iCurrentPage;
     }
@@ -96,7 +72,7 @@ class Page
      *
      * @return string $sPageUrl The new cleaned URL.
      */
-    public static function cleanDynamicUrl($sVar)
+    public static function cleanDynamicUrl(string $sVar): string
     {
         $sCurrentUrl = PH7_URL_PROT . PH7_DOMAIN . (new HttpRequest)->getUri();
         $sCurrentUrl = htmlspecialchars($sCurrentUrl, ENT_QUOTES);
@@ -109,16 +85,10 @@ class Page
         return $sUrl . self::trailingSlash($sUrl) . '?' . $sVar . '=';
     }
 
-    /**
-     * @param int $iTotalItems
-     * @param int $iNbItemsPerPage
-     *
-     * @return void
-     */
-    private function totalPages($iTotalItems, $iNbItemsPerPage)
+    private function totalPages(?int $iTotalItems, int $iNbItemsPerPage): void
     {
-        $this->iTotalItems = (int)$iTotalItems;
-        $this->iNbItemsPerPage = (int)$iNbItemsPerPage; // or intval() function, but it is slower than casting
+        $this->iTotalItems = (int)$iTotalItems; // or intval() function, but it is slower than casting
+        $this->iNbItemsPerPage = $iNbItemsPerPage;
         $this->iCurrentPage = $this->oHttpRequest->getExists(Pagination::REQUEST_PARAM_NAME) ? $this->oHttpRequest->get(Pagination::REQUEST_PARAM_NAME, 'int') : 1;
 
         // Ternary condition to prevent division by zero
@@ -129,32 +99,18 @@ class Page
 
     /**
      * Returns a trailing slash if needed.
-     *
-     * @param string $sUrl
-     *
-     * @return string
      */
-    private static function trailingSlash($sUrl)
+    private static function trailingSlash(string $sUrl): string
     {
         return substr($sUrl, -1) !== PH7_SH && !strstr($sUrl, PH7_PAGE_EXT) ? PH7_SH : '';
     }
 
-    /**
-     * @param string $sCurrentUrl
-     *
-     * @return bool
-     */
-    private static function areParametersInUrlFound($sCurrentUrl)
+    private static function areParametersInUrlFound(string $sCurrentUrl): bool
     {
-        return preg_match(self::REGEX_URL_PARAMS, $sCurrentUrl);
+        return (bool)preg_match(self::REGEX_URL_PARAMS, $sCurrentUrl);
     }
 
-    /**
-     * @param string $sCurrentUrl
-     *
-     * @return string
-     */
-    private static function getUrlSlug($sCurrentUrl)
+    private static function getUrlSlug(string $sCurrentUrl): string
     {
         $sGlueName = sprintf('&amp;%s=', Pagination::REQUEST_PARAM_NAME);
 

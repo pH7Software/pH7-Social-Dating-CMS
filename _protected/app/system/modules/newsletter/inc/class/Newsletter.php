@@ -1,10 +1,12 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Newsletter / Inc / Class
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -21,20 +23,17 @@ use stdClass;
 
 class Newsletter extends Core
 {
-    const MAX_BULK_EMAIL_NUMBER = 250;
-    const SLEEP_SEC = 10;
+    private const MAX_BULK_EMAIL_NUMBER = 200;
+    private const SLEEP_SEC = 5;
 
-    const MEMBER_DATA_METHOD = 'getProfiles';
-    const SUBSCRIBER_DATA_METHOD = 'getSubscribers';
+    private const MEMBER_DATA_METHOD = 'getProfiles';
+    private const SUBSCRIBER_DATA_METHOD = 'getSubscribers';
 
-    /** @var SubscriberModel */
-    private $oSubscriberModel;
+    private SubscriberModel $oSubscriberModel;
 
-    /** @var string */
-    private $sSubscribersMethod;
+    private string $sSubscribersMethod;
 
-    /** @var int */
-    private static $iTotalSent = 0;
+    private static int $iTotalSent = 0;
 
     public function __construct()
     {
@@ -50,7 +49,7 @@ class Newsletter extends Core
      *
      * @return array ['status' => integer, 'nb_mail_sent' => integer]
      */
-    public function sendMessages()
+    public function sendMessages(): array
     {
         $iStatus = 0; // Default value
 
@@ -58,8 +57,8 @@ class Newsletter extends Core
 
         $oMail = new Mail;
         foreach ($oSubscribers as $oSubscriber) {
-            if ($this->isUserOptedIn($oSubscriber)) {
-                continue; // Skip that one if it isn't opted-in
+            if (!$this->isOptedInSubscriber($oSubscriber)) {
+                continue; // Skip the subscribers who haven't opted-in
             }
 
             if (!$iStatus = $this->sendMail($oSubscriber, $oMail)) {
@@ -73,7 +72,10 @@ class Newsletter extends Core
         }
         unset($oMail, $oSubscribers);
 
-        return ['status' => $iStatus, 'nb_mail_sent' => self::$iTotalSent];
+        return [
+            'status' => $iStatus,
+            'nb_mail_sent' => self::$iTotalSent
+        ];
     }
 
     /**
@@ -82,12 +84,10 @@ class Newsletter extends Core
      * @param stdClass $oSubscriber Subscriber data from the DB.
      * @param Mailable $oMailEngine
      *
-     * @return int Number of recipients who were accepted for delivery.
-     *
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    private function sendMail(stdClass $oSubscriber, Mailable $oMailEngine)
+    private function sendMail(stdClass $oSubscriber, Mailable $oMailEngine): bool
     {
         $this->view->content = $this->httpRequest->post('body', Http::NO_CLEAN);
 
@@ -105,21 +105,13 @@ class Newsletter extends Core
         return $oMailEngine->send($aInfo, $sHtmlMsg);
     }
 
-    /**
-     * @param stdClass $oSubscriber
-     *
-     * @return bool
-     */
-    private function isUserOptedIn(stdClass $oSubscriber)
+    private function isOptedInSubscriber(stdClass $oSubscriber): bool
     {
         return $this->isMemberData($oSubscriber) &&
             !$this->oSubscriberModel->isNotification($oSubscriber->profileId, 'enableNewsletters');
     }
 
-    /**
-     * @return bool
-     */
-    private function isMemberData()
+    private function isMemberData(): bool
     {
         return $this->sSubscribersMethod === self::MEMBER_DATA_METHOD;
     }

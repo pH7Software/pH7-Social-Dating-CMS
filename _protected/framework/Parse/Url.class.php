@@ -2,11 +2,13 @@
 /**
  * @title            Url Parser Class
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Parse
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Parse;
 
@@ -16,10 +18,8 @@ use PH7\Framework\Str\Str;
 
 class Url
 {
-    const REGEX_SPACE = '/[\s]+/';
-    const REGEX_URL_FORMAT = '#(^https?://|www\.|\.[a-z]{2,4}/?$)#i';
-
-    const UNWANTED_SPECIAL_CHARS = [
+    private const REGEX_SPACE = '/[\s]+/';
+    private const UNWANTED_SPECIAL_CHARS = [
         '«',
         '»',
         '"',
@@ -60,7 +60,7 @@ class Url
      *
      * @return string The new clean URL
      */
-    public static function clean($sUrl, $bFullClean = true)
+    public static function clean(string $sUrl, bool $bFullClean = true): string
     {
         $sUrl = preg_replace(self::REGEX_SPACE, '-', $sUrl);
         $sUrl = str_replace(self::UNWANTED_SPECIAL_CHARS, '-', $sUrl);
@@ -74,22 +74,5 @@ class Url
         }
 
         return $sUrl;
-    }
-
-    /**
-     * Gets the name of a URL.
-     *
-     * @param string $sLink The link
-     *
-     * @return string The name of the domain with the first letter capitalized.
-     */
-    public static function name($sLink)
-    {
-        $oStr = new Str;
-        $sUrlName = preg_replace(self::REGEX_URL_FORMAT, '', $oStr->lower($sLink));
-        $sLink = $oStr->upperFirst($sUrlName);
-        unset($oStr);
-
-        return $sLink;
     }
 }

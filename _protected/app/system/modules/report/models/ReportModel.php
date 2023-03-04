@@ -2,11 +2,13 @@
 /**
  * @title          Report Model Class
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Report / Model
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -50,17 +52,10 @@ class ReportModel extends ReportCoreModel
     }
 
     /**
-     * @param int|null $iId
-     * @param int $iOffset
-     * @param $iLimit
-     *
-     * @return int array|\stdClass
+     * @return array|\stdClass|bool
      */
-    public function get($iId = null, $iOffset, $iLimit)
+    public function get(?int $iId, int $iOffset, int $iLimit)
     {
-        $iOffset = (int)$iOffset;
-        $iLimit = (int)$iLimit;
-
         $sSqlId = !empty($iId) ? ' WHERE reportId = :id ' : ' ';
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::REPORT) . $sSqlId . 'LIMIT :offset, :limit');
         if (!empty($iId)) {
@@ -73,12 +68,7 @@ class ReportModel extends ReportCoreModel
         return !empty($iId) ? $rStmt->fetch(PDO::FETCH_OBJ) : $rStmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    /**
-     * @param int $iReportId
-     *
-     * @return bool
-     */
-    public function delete($iReportId)
+    public function delete(int $iReportId): bool
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::REPORT) . 'WHERE reportId = :reportId LIMIT 1');
         $rStmt->bindValue(':reportId', $iReportId, PDO::PARAM_INT);

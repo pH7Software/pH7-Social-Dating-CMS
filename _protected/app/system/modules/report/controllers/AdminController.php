@@ -1,13 +1,16 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Report / Controller
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
+use PH7\Datatype\Type;
 use PH7\Framework\Layout\Html\Security;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
@@ -18,19 +21,15 @@ class AdminController extends Controller
 {
     use BulkAction;
 
-    const REPORTS_PER_PAGE = 15;
+    private const REPORTS_PER_PAGE = 15;
 
-    /** @var ReportModel */
-    private $oReportModel;
+    private ReportModel $oReportModel;
 
-    /** @var string */
-    private $sTitle;
+    private string $sTitle;
 
-    /** @var string */
-    private $sMsg;
+    private string $sMsg;
 
-    /** @var bool */
-    private $bStatus;
+    private bool $bStatus;
 
     public function __construct()
     {
@@ -42,7 +41,7 @@ class AdminController extends Controller
         $this->view->oUserModel = new UserCoreModel;
     }
 
-    public function index()
+    public function index(): void
     {
         // CSRF Token
         $this->view->csrf_token = (new Token)->generate('report');
@@ -80,7 +79,7 @@ class AdminController extends Controller
      *
      * @return void
      */
-    public function report($iId = 0)
+    public function report($iId = 0): void
     {
         $iId = (int)$iId;
 
@@ -93,15 +92,15 @@ class AdminController extends Controller
         $this->output();
     }
 
-    public function delete()
+    public function delete(): void
     {
-        $this->bStatus = $this->oReportModel->delete($this->httpRequest->post('id', 'int'));
+        $this->bStatus = $this->oReportModel->delete($this->httpRequest->post('id', Type::INTEGER));
         $this->sMsg = $this->bStatus ? t('The report has been deleted.') : t('A problem occurred during the deleted of the reporting.');
 
         Header::redirect(Uri::get('report', 'admin', 'index'), $this->sMsg);
     }
 
-    public function deleteAll()
+    public function deleteAll(): void
     {
         $aActions = $this->httpRequest->post('action');
         $bActionsEligible = $this->areActionsEligible($aActions);

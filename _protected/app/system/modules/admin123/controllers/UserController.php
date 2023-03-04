@@ -1,13 +1,16 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
+use PH7\Datatype\Type;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Layout\Html\Security as HtmlSecurity;
@@ -18,25 +21,22 @@ use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Util\Various;
+use stdClass;
 
-class UserController extends Controller
+class UserController extends Controller implements UserModeratable
 {
     use BulkAction;
 
-    const PROFILES_PER_PAGE = 15;
-    const SEARCH_NOT_FOUND_REDIRECT_DELAY = 2; // Seconds
+    private const PROFILES_PER_PAGE = 15;
+    private const SEARCH_NOT_FOUND_REDIRECT_DELAY = 2; // Seconds
 
-    /** @var UserCore */
-    private $oUser;
+    private UserCore $oUser;
 
-    /** @var AdminModel */
-    private $oAdminModel;
+    private AdminModel $oAdminModel;
 
-    /** @var string */
-    private $sMsg;
+    private ?string $sMsg;
 
-    /** @var int */
-    private $iTotalUsers;
+    private int $iTotalUsers;
 
     public function __construct()
     {
@@ -51,14 +51,14 @@ class UserController extends Controller
         $this->view->avatarDesign = new AvatarDesignCore; // For Avatar User
     }
 
-    public function index()
+    public function index(): void
     {
         Header::redirect(
             Uri::get(PH7_ADMIN_MOD, 'user', 'browse')
         );
     }
 
-    public function browse()
+    public function browse(): void
     {
         $this->iTotalUsers = $this->oAdminModel->total();
 
@@ -93,19 +93,19 @@ class UserController extends Controller
         }
     }
 
-    public function add()
+    public function add(): void
     {
         $this->view->page_title = $this->view->h1_title = t('Add a User');
         $this->output();
     }
 
-    public function import()
+    public function import(): void
     {
         $this->view->page_title = $this->view->h1_title = t('Import Users');
         $this->output();
     }
 
-    public function addFakeProfiles()
+    public function addFakeProfiles(): void
     {
         $this->view->page_title = $this->view->h1_title = t('Add Fake Profiles (with profile photo)');
         $this->output();
@@ -117,18 +117,18 @@ class UserController extends Controller
         $this->output();
     }
 
-    public function search()
+    public function search(): void
     {
         $this->view->page_title = $this->view->h1_title = t('User Search');
         $this->output();
     }
 
-    public function result()
+    public function result(): void
     {
         error_reporting(0);
 
-        $iGroupId = $this->httpRequest->get('group_id', 'int');
-        $iBan = $this->httpRequest->get('ban', 'int');
+        $iGroupId = $this->httpRequest->get('group_id', Type::INTEGER);
+        $iBan = $this->httpRequest->get('ban', Type::INTEGER);
         $sWhere = $this->httpRequest->get('where');
         $sWhat = $this->httpRequest->get('what');
 
@@ -194,9 +194,10 @@ class UserController extends Controller
         }
     }
 
-    public function password($sUserEmail = null)
+    public function password(?string $sUserEmail = null): void
     {
-        if (!empty($sUserEmail) && !(new Validate)->email($sUserEmail)) {
+        $bInvalidEmailId = empty($sUserEmail) || !(new Validate)->email($sUserEmail);
+        if ($bInvalidEmailId) {
             Header::redirect(
                 Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
                 t("The URL isn't valid. It doesn't contain the user's email as a parameter."),
@@ -204,13 +205,13 @@ class UserController extends Controller
             );
         } else {
             $this->view->page_title = $this->view->h1_title = t('Update User Password');
-            $this->view->user_password = $sUserEmail;
+            $this->view->user_email = $sUserEmail;
 
             $this->output();
         }
     }
 
-    public function loginUserAs($iId = null)
+    public function loginUserAs($iId = null): void
     {
         if ($oUser = $this->oAdminModel->readProfile($iId)) {
             $aSessionData = [
@@ -239,7 +240,7 @@ class UserController extends Controller
         }
     }
 
-    public function logoutUserAs()
+    public function logoutUserAs(): void
     {
         $this->sMsg = t('You are now logged out as member: %0%!', $this->session->get('member_username'));
 
@@ -264,23 +265,23 @@ class UserController extends Controller
         );
     }
 
-    public function approve()
+    public function approve(): void
     {
         Header::redirect(
             Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
-            $this->moderateRegistration($this->httpRequest->post('id'), 1)
+            $this->moderateRegistration($this->httpRequest->post('id', Type::INTEGER), 1)
         );
     }
 
-    public function disapprove()
+    public function disapprove(): void
     {
         Header::redirect(
             Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
-            $this->moderateRegistration($this->httpRequest->post('id'), 0)
+            $this->moderateRegistration($this->httpRequest->post('id', Type::INTEGER), 0)
         );
     }
 
-    public function approveAll()
+    public function approveAll(): void
     {
         $aActions = $this->httpRequest->post('action');
         $bActionsEligible = $this->areActionsEligible($aActions);
@@ -300,7 +301,7 @@ class UserController extends Controller
         );
     }
 
-    public function disapproveAll()
+    public function disapproveAll(): void
     {
         $aActions = $this->httpRequest->post('action');
         $bActionsEligible = $this->areActionsEligible($aActions);
@@ -320,7 +321,7 @@ class UserController extends Controller
         );
     }
 
-    public function ban()
+    public function ban(): void
     {
         $iId = $this->httpRequest->post('id');
 
@@ -337,7 +338,7 @@ class UserController extends Controller
         );
     }
 
-    public function unBan()
+    public function unBan(): void
     {
         $iId = $this->httpRequest->post('id');
 
@@ -354,7 +355,7 @@ class UserController extends Controller
         );
     }
 
-    public function delete()
+    public function delete(): void
     {
         try {
             $aData = explode('_', $this->httpRequest->post('id'));
@@ -376,7 +377,7 @@ class UserController extends Controller
         }
     }
 
-    public function banAll()
+    public function banAll(): void
     {
         $aActions = $this->httpRequest->post('action');
         $bActionsEligible = $this->areActionsEligible($aActions);
@@ -400,7 +401,7 @@ class UserController extends Controller
         );
     }
 
-    public function unBanAll()
+    public function unBanAll(): void
     {
         $aActions = $this->httpRequest->post('action');
         $bActionsEligible = $this->areActionsEligible($aActions);
@@ -423,7 +424,7 @@ class UserController extends Controller
         );
     }
 
-    public function deleteAll()
+    public function deleteAll(): void
     {
         $aActions = $this->httpRequest->post('action');
         $bActionsEligible = $this->areActionsEligible($aActions);
@@ -460,15 +461,10 @@ class UserController extends Controller
     }
 
     /**
-     * @param int $iId
-     * @param int $iStatus
-     *
-     * @return string Status message.
-     *
      * @throws Framework\File\IOException
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
-    private function moderateRegistration($iId, $iStatus)
+    private function moderateRegistration(int $iId, int $iStatus): string
     {
         if (isset($iId, $iStatus)) {
             if ($oUser = $this->oAdminModel->readProfile($iId)) {
@@ -494,23 +490,8 @@ class UserController extends Controller
                     $this->sMsg = null;
                 }
 
-                if (!empty($this->sMsg)) {
-                    // Set body message + footer
-                    $this->view->content = t('Dear %0%,', $oUser->firstName) . '<br />' . $this->sMsg;
-                    $this->view->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $oUser->email) . '<br />' .
-                        t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
-
-                    // Send email
-                    $sMessageHtml = $this->view->parseMail(
-                        PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/moderate_registration.tpl',
-                        $oUser->email
-                    );
-                    $aInfo = [
-                        'to' => $oUser->email,
-                        'subject' => $sSubject
-                    ];
-                    (new Mail)->send($aInfo, $sMessageHtml);
-
+                if (!empty($sSubject) && !empty($this->sMsg)) {
+                    $this->sendRegistrationMail($sSubject, $oUser);
                     $this->oUser->clearReadProfileCache($oUser->profileId);
 
                     $sOutputMsg = t('Done! ✔');
@@ -527,12 +508,25 @@ class UserController extends Controller
         return $sOutputMsg;
     }
 
-    /**
-     * @param string $sWhere
-     *
-     * @return bool
-     */
-    private function areSearchArgsValid($sWhere)
+    private function sendRegistrationMail(string $sSubject, stdClass $oUser): void
+    {
+        $this->view->content = t('Hi %0%,', $oUser->firstName) . '<br />' . $this->sMsg;
+        $this->view->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $oUser->email) . '<br />' .
+            t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
+
+        // Send email
+        $sMessageHtml = $this->view->parseMail(
+            PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/moderate_registration.tpl',
+            $oUser->email
+        );
+        $aInfo = [
+            'to' => $oUser->email,
+            'subject' => $sSubject
+        ];
+        (new Mail)->send($aInfo, $sMessageHtml);
+    }
+
+    private function areSearchArgsValid(string $sWhere): bool
     {
         $aWhereOptions = [
             'all',

@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Xml / Controller
  */
 
@@ -17,6 +17,8 @@ use PH7\Framework\Xml\Link;
 
 class RssController extends MainController implements XmlControllable
 {
+    private const RSS_TYPE = 'rss';
+
     public function __construct()
     {
         parent::__construct();
@@ -53,7 +55,7 @@ class RssController extends MainController implements XmlControllable
         $sAction = $this->httpRequest->get('action', Type::STRING);
         $mParam = $this->httpRequest->get('param');
         $this->generateXmlRouter($sAction, $mParam);
-        $this->sXmlType = 'rss';
+        $this->sXmlType = self::RSS_TYPE;
         $this->view->current_date = DateFormat::getRss(); // Date format for RSS feed
 
         // RSS router
@@ -76,14 +78,23 @@ class RssController extends MainController implements XmlControllable
             case 'forum-topic':
                 $this->sAction = $sAction;
                 break;
+
             case 'comment-profile':
             case 'comment-blog':
             case 'comment-note':
             case 'comment-picture':
             case 'comment-video':
+                // We disable the cache because of dynamic pages managed by the router
+                $this->view->setCaching(
+                    false
+                );
+                $this->sAction = 'comment.inc';
+                break;
+
             case 'forum-post':
                 if ($this->isParamValid($mParam)) {
-                    $this->view->setCaching(false); // We disable the cache since they are dynamic pages managed by the router
+                    // We disable the cache since they are dynamic pages managed by the router
+                    $this->view->setCaching(false);
                     $this->view->forums_messages = $this->oDataModel->getForumsMessages($mParam);
                     $this->sAction = $sAction;
                 } else {

@@ -1,10 +1,12 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2018-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -17,9 +19,9 @@ use PH7\Framework\Url\Header;
 
 class BlockCountryForm
 {
-    const FORM_COUNTRY_FIELD_SIZE = 20;
+    private const FORM_COUNTRY_FIELD_SIZE = 20;
 
-    public static function display()
+    public static function display(): void
     {
         if (isset($_POST['submit_country_blocklist'])) {
             if (\PFBC\Form::isValid($_POST['submit_country_blocklist'])) {

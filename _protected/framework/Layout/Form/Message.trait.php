@@ -2,11 +2,13 @@
 /**
  * Helper that gives popular predefined form messages to avoid duplicating same strings over and over again.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Layout / Form
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Layout\Form;
 
@@ -17,52 +19,40 @@ trait Message
 {
     /**
      * Launch Error Token Message.
-     *
-     * @return string
      */
-    public static function errorTokenMsg()
+    public static function errorTokenMsg(): string
     {
         return t('The security token does not exist or its lifetime has expired. Please try once again');
     }
 
     /**
      * Launch Wrong Image File Type Message.
-     *
-     * @return string
      */
-    public static function wrongImgFileTypeMsg()
+    public static function wrongImgFileTypeMsg(): string
     {
         return t('The file type is incompatible or too large. Please try with a smaller image with one of the following extensions: %0%', self::getImageExtensions());
     }
 
     /**
      * Launch Wrong Video File Type Message.
-     *
-     * @return string
      */
-    public static function wrongVideoFileTypeMsg()
+    public static function wrongVideoFileTypeMsg(): string
     {
         return t('File type is incompatible or too large. The accepted file types are: %0%', self::getVideoExtensions());
     }
 
     /**
      * Launch Wrong HTTP Request Method Message.
-     *
-     * @param string $sMethodName
-     *
-     * @return string
      */
-    public static function wrongRequestMethodMsg($sMethodName)
+    public static function wrongRequestMethodMsg(string $sMethodName): string
     {
         return t('The HTTP parameter must be a %0% type!', $sMethodName);
     }
 
     /**
      * Launch an Error Sending Email.
-     *
-     * @return string
      */
-    public static function errorSendingEmail()
+    public static function errorSendingEmail(): string
     {
         return t('Oops! Our email server encountered an internal error. The email could not be sent. Please try again later');
     }
@@ -70,35 +60,24 @@ trait Message
     /**
      * Number of connection attempts exceeded.
      *
-     * @param int $iWaitTime
-     *
-     * @return string
+     * @param int $iWaitTime (in minutes)
      */
-    public static function loginAttemptsExceededMsg($iWaitTime)
+    public static function loginAttemptsExceededMsg(int $iWaitTime): string
     {
         return t('Oops! You have exceeded the allowed login attempts. Please try again in %0% %1%.', self::convertTime($iWaitTime), self::getTimeText($iWaitTime));
     }
 
-    /**
-     * @return string
-     */
-    public static function duplicateContentMsg()
+    public static function duplicateContentMsg(): string
     {
         return t("It seems you previously sent the same message. Be unique and you'll increase your chances of receiving a reply 😉");
     }
 
-    /**
-     * @return string
-     */
-    public static function tooManyUrlsMsg()
+    public static function tooManyUrlsMsg(): string
     {
         return t('Oops! It seems you are abusing of links. Why are links so important to you?');
     }
 
-    /**
-     * @return string
-     */
-    public static function tooManyEmailsMsg()
+    public static function tooManyEmailsMsg(): string
     {
         return t('Oops! It seems you abused of emails. Why are emails so important to you?');
     }
@@ -106,56 +85,41 @@ trait Message
 
     /**
      * Wait to write a new message (mainly to reduce spam).
-     *
-     * @param int $iWaitTime (in minutes)
-     *
-     * @return string
      */
-    public static function waitWriteMsg($iWaitTime)
+    public static function waitWriteMsg(int $iWaitTime): string
     {
-        return t('Oops! You should wait %0% %1% before you can send another one 😉', self::convertTime($iWaitTime), self::getTimeText($iWaitTime));
+        return t('Oops! Please wait %0% %1% before sending another one 😉', self::convertTime($iWaitTime), self::getTimeText($iWaitTime));
     }
 
     /**
      * Wait to new registration (mainly to reduce spam).
      *
      * @param int $iWaitTime (in minutes)
-     *
-     * @return string
      */
-    public static function waitRegistrationMsg($iWaitTime)
+    public static function waitRegistrationMsg(int $iWaitTime): string
     {
         return t('Oops! Somebody has recently registered with the same IP address. Do you mind waiting %0% %1%?', self::convertTime($iWaitTime), self::getTimeText($iWaitTime));
     }
 
-    /**
-     * Get Time text.
-     *
-     * @param int $iWaitTime
-     *
-     * @return int
-     */
-    private static function getTimeText($iWaitTime)
+    private static function getTimeText(int $iWaitTime): string
     {
         $iWaitTime = (int)$iWaitTime;
 
-        return ($iWaitTime < 2 ? t('minute') : ($iWaitTime < 60 ? t('minutes') : ($iWaitTime < 120 ? t('hour') : ($iWaitTime < 1440 ? t('hours') : ($iWaitTime < 2880 ? t('day') : t('days'))))));
+        return $iWaitTime < 2 ? t('minute') : ($iWaitTime < 60 ? t('minutes') : ($iWaitTime < 120 ? t('hour') : ($iWaitTime < 1440 ? t('hours') : ($iWaitTime < 2880 ? t('day') : t('days')))));
     }
 
     /**
-     * Conversion time if necessary (we do not do the conversion of minutes so you should rather take hours sharp (same thing for days).
+     * Conversion time if necessary (we do not do the conversion of minutes so you should rather take sharp hours (same thing for days).
      *
-     * @param int $iWaitTime
-     *
-     * @return int
+     * @param int $iWaitTime (in minutes)
      */
-    private static function convertTime($iWaitTime)
+    private static function convertTime(int $iWaitTime): int
     {
-        $iWaitTime = (int)$iWaitTime;
-
         if ($iWaitTime > 60) {
             $iDivide = ($iWaitTime < 1440) ? 60 : 1440;
-            $iWaitTime = floor($iWaitTime / $iDivide);
+
+            // Cast float value from `floor()` to integer
+            $iWaitTime = (int)floor($iWaitTime / $iDivide);
         }
 
         return $iWaitTime;
@@ -164,15 +128,15 @@ trait Message
     /**
      * @return string e.g., .jpg, .png, .gif, .webp
      */
-    private static function getImageExtensions()
+    private static function getImageExtensions(): string
     {
-        return '.' . implode(', .', FileStorage::SUPPORTED_TYPES);
+        return '.' . implode(', .', FileStorageImage::SUPPORTED_TYPES);
     }
 
     /**
      * @return string e.g., .mov, .avi, .flv, .mp4, .mpg
      */
-    private static function getVideoExtensions()
+    private static function getVideoExtensions(): string
     {
         return '.' . implode(', .', array_keys(Video::SUPPORTED_TYPES));
     }

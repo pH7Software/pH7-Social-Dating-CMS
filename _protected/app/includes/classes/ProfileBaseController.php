@@ -1,8 +1,8 @@
 <?php
 /**
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / App / Include / Class
  */
 
@@ -35,31 +35,23 @@ abstract class ProfileBaseController extends Controller
     const MAP_WIDTH_SIZE = '100%';
     const MAP_HEIGHT_SIZE = '260px';
 
-    /** @var UserCoreModel */
-    protected $oUserModel;
+    protected UserCoreModel $oUserModel;
 
-    /** @var int */
-    protected $iProfileId;
+    protected int $iProfileId;
 
-    /** @var int */
-    protected $iVisitorId;
+    protected int $iVisitorId;
 
-    /** @var bool */
-    protected $bUserAuth;
+    protected bool $bUserAuth;
 
     /**
      * Index displaying the user profile page.
-     *
-     * @return void
      */
-    abstract public function index();
+    abstract public function index(): void;
 
     /**
      * Add CSS files for the profile page's design.
-     *
-     * @return void
      */
-    abstract protected function addCssFiles();
+    abstract protected function addCssFiles(): void;
 
     public function __construct()
     {
@@ -75,43 +67,33 @@ abstract class ProfileBaseController extends Controller
     /**
      * @return bool TRUE if the user is on their own profile, FALSE otherwise.
      */
-    public function isOwnProfile()
+    public function isOwnProfile(): bool
     {
         return $this->str->equals($this->iVisitorId, $this->iProfileId);
     }
 
     /**
      * @param int $iProfileId
-     *
-     * @return void
      */
-    protected function setProfileId($iProfileId)
+    protected function setProfileId($iProfileId): void
     {
         $this->iProfileId = (int)$iProfileId;
     }
 
     /**
      * @param int $iVisitorId
-     *
-     * @return void
      */
-    protected function setVisitorId($iVisitorId)
+    protected function setVisitorId($iVisitorId): void
     {
         $this->iVisitorId = (int)$iVisitorId;
     }
 
-    /**
-     * @return int
-     */
-    public function getProfileId()
+    public function getProfileId(): int
     {
         return $this->iProfileId;
     }
 
-    /**
-     * @return int
-     */
-    public function getVisitorId()
+    public function getVisitorId(): int
     {
         return $this->iVisitorId;
     }
@@ -119,13 +101,9 @@ abstract class ProfileBaseController extends Controller
     /**
      * Privacy Profile.
      *
-     * @param stdClass $oUser
-     *
-     * @return void
-     *
      * @throws Framework\File\IOException
      */
-    protected function initPrivacy(stdClass $oUser)
+    protected function initPrivacy(stdClass $oUser): void
     {
         $oUserPrivacyViews = $this->oUserModel->getPrivacySetting($this->iProfileId);
 
@@ -150,13 +128,7 @@ abstract class ProfileBaseController extends Controller
         unset($oUserPrivacyViews);
     }
 
-    /**
-     * @param string $sFirstName
-     * @param stdClass $oUser
-     *
-     * @return void
-     */
-    protected function setMenuBar($sFirstName, stdClass $oUser)
+    protected function setMenuBar(string $sFirstName, stdClass $oUser): void
     {
         if (SysMod::isEnabled('mail')) {
             $this->view->mail_link = $this->getMailLink($sFirstName, $oUser);
@@ -175,14 +147,8 @@ abstract class ProfileBaseController extends Controller
 
     /**
      * Set the Google Maps code to the view.
-     *
-     * @param string $sCity
-     * @param string $sCountry
-     * @param stdClass $oUser
-     *
-     * @return void
      */
-    protected function setMap($sCity, $sCountry, stdClass $oUser)
+    protected function setMap(string $sCity, string $sCountry, stdClass $oUser): void
     {
         $sFullAddress = $sCity . ' ' . t($sCountry);
         $sMarkerText = t('Meet <b>%0%</b> near here!', $oUser->username);
@@ -210,7 +176,7 @@ abstract class ProfileBaseController extends Controller
      *
      * @return string The anchor for the link.
      */
-    protected function getMailLink($sFirstName, stdClass $oUser)
+    protected function getMailLink(string $sFirstName, stdClass $oUser): string
     {
         if ($this->bUserAuth) {
             $sMailLink = Uri::get(
@@ -246,7 +212,7 @@ abstract class ProfileBaseController extends Controller
      *
      * @return string The anchor for the link.
      */
-    protected function getMessengerLink($sFirstName, stdClass $oUser)
+    protected function getMessengerLink($sFirstName, stdClass $oUser): string
     {
         if ($this->bUserAuth) {
             $sMessengerLink = 'javascript:void(0)" onclick="Messenger.chatWith(\'' . $oUser->username . '\')';
@@ -277,7 +243,7 @@ abstract class ProfileBaseController extends Controller
      *
      * @return string The correct anchor "Manage Friend" link.
      */
-    protected function getFriendLink($sFirstName, stdClass $oUser)
+    protected function getFriendLink(string $sFirstName, stdClass $oUser): string
     {
         $sCsrfToken = (new Token)->generate('friend');
 
@@ -317,13 +283,8 @@ abstract class ProfileBaseController extends Controller
 
     /**
      * Returns filtered user/field data.
-     *
-     * @param stdClass $oUser
-     * @param stdClass $oFields
-     *
-     * @return array
      */
-    protected function getFilteredData(stdClass $oUser, stdClass $oFields)
+    protected function getFilteredData(stdClass $oUser, stdClass $oFields): array
     {
         $sFirstName = !empty($oUser->firstName) ? $this->str->escape(
             $this->str->upperFirst($oUser->firstName),
@@ -356,10 +317,8 @@ abstract class ProfileBaseController extends Controller
 
     /**
      * Add JS file for the Ajax Friend Adder feature.
-     *
-     * @return void
      */
-    protected function addAdditionalAssetFiles()
+    protected function addAdditionalAssetFiles(): void
     {
         if (SysMod::isEnabled('friend')) {
             $this->design->addJs(
@@ -371,22 +330,16 @@ abstract class ProfileBaseController extends Controller
 
     /**
      * Set noindex meta tag to exclude the profile from search engines.
-     *
-     * @return void
      */
-    protected function excludeProfileFromSearchEngines()
+    protected function excludeProfileFromSearchEngines(): void
     {
         $this->view->header .= Meta::NOINDEX;
     }
 
     /**
      * Enable the social meta tags (FB, Twitter, ...) with the profile photo.
-     *
-     * @param stdClass $oUser
-     *
-     * @return void
      */
-    protected function imageToSocialMetaTags(stdClass $oUser)
+    protected function imageToSocialMetaTags(stdClass $oUser): void
     {
         $sAvatarImageUrl = $this->design->getUserAvatar(
             $oUser->username,
@@ -399,10 +352,8 @@ abstract class ProfileBaseController extends Controller
 
     /**
      * @param int One the these consts: FriendCoreModel::APPROVED_REQUEST, FriendCoreModel::PENDING_REQUEST, FriendCoreModel::ALL_REQUEST
-     *
-     * @return bool
      */
-    private function isFriend($iStatus = FriendCoreModel::ALL_REQUEST)
+    private function isFriend(int $iStatus = FriendCoreModel::ALL_REQUEST): bool
     {
         return (new FriendCoreModel)->inList(
             $this->iVisitorId,
@@ -415,10 +366,8 @@ abstract class ProfileBaseController extends Controller
      * Update the "Who's Viewed Your Profile"
      *
      * @param stdClass $oUserPrivacyViews
-     *
-     * @return void
      */
-    private function updateProfileViews(stdClass $oUserPrivacyViews)
+    private function updateProfileViews(stdClass $oUserPrivacyViews): void
     {
         $oVisitor = new VisitorCore($this);
         $oVisitorPrivacyViews = $this->oUserModel->getPrivacySetting($this->iVisitorId);

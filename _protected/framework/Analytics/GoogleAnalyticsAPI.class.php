@@ -18,7 +18,7 @@ defined('PH7') or exit('Restricted access');
 *  @version       30/04/2011
 *
 * MODIFIED BY:
-* @author         Pierre-Henry Soria <hello@ph7cms.com>
+* @author         Pierre-Henry Soria <hello@ph7builder.com>
 * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
 */
 

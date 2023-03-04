@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Core / Form
  */
 
@@ -36,7 +36,7 @@ class ConfirmCoreForm
         $oForm->addElement(new HTMLExternal('<p class="err_msg s_marg">' . t('Warning, this action is irreversible!') . '</p>'));
         $oForm->addElement(new Button($aParam['label'], 'submit'));
         /**
-         * Bug Ajax jQuery -> https://github.com/jquery/jquery-mobile/issues/3202
+         * Currently a bug with Ajax jQuery: https://github.com/jquery/jquery-mobile/issues/3202
          * $oForm->addElement(new \PFBC\Element\Button($aParam['label'], 'submit', ['formaction'=>$sUrl]));
          */
         $oForm->addElement(

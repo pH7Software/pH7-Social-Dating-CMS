@@ -1,13 +1,14 @@
 <?php
 /**
- * @title            Load Template Class
  * @desc             Loading template files.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2010-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2010-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Layout
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Layout;
 
@@ -19,28 +20,23 @@ use PH7\Framework\Registry\Registry;
 
 class LoadTemplate
 {
-    const COOKIE_NAME = 'site_tpl';
-    const COOKIE_LIFETIME = 172800;
-    const REQUEST_PARAM_NAME = 'tpl';
-    const MAX_TPL_FOLDER_LENGTH = 50;
+    private const COOKIE_NAME = 'site_tpl';
+    private const COOKIE_LIFETIME = 172800;
+    private const REQUEST_PARAM_NAME = 'tpl';
+    private const MAX_TPL_FOLDER_LENGTH = 50;
 
-    /** @var Config */
-    private $oConfig;
 
-    /** @var string */
-    private $sDefaultTpl;
+    private Config $oConfig;
 
-    /** @var string */
-    private $sUserTpl;
+    private string $sDefaultTpl;
 
-    /** @var string */
-    private $sTplName;
+    private ?string $sUserTpl;
 
-    /** @var string */
-    private $sModTplName;
+    private string $sTplName;
 
-    /** @var string */
-    private $sMailTplName;
+    private string $sModTplName;
+
+    private string $sMailTplName;
 
     public function __construct()
     {
@@ -56,7 +52,7 @@ class LoadTemplate
      *
      * @return self
      */
-    public function setDefaultTpl($sNewDefTpl)
+    public function setDefaultTpl(string $sNewDefTpl)
     {
         $this->sDefaultTpl = $sNewDefTpl;
 
@@ -68,7 +64,7 @@ class LoadTemplate
      *
      * @return string The template name.
      */
-    public function getTpl()
+    public function getTpl(): string
     {
         return $this->sTplName;
     }
@@ -78,7 +74,7 @@ class LoadTemplate
      *
      * @return string The template name.
      */
-    public function getModTpl()
+    public function getModTpl(): string
     {
         return $this->sModTplName;
     }
@@ -88,7 +84,7 @@ class LoadTemplate
      *
      * @return string The mail template name.
      */
-    public function getMailTpl()
+    public function getMailTpl(): string
     {
         return $this->sMailTplName;
     }
@@ -176,6 +172,7 @@ class LoadTemplate
     {
         $oCookie = new Cookie;
 
+        $this->sUserTpl = null;
         if ($this->isTplParamSet()) {
             $this->sUserTpl = $_REQUEST[self::REQUEST_PARAM_NAME];
             $oCookie->set(self::COOKIE_NAME, $this->sUserTpl, static::COOKIE_LIFETIME);
@@ -203,20 +200,15 @@ class LoadTemplate
         return $this->oConfig->load(PH7_PATH_TPL . $this->sDefaultTpl . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
     }
 
-    /**
-     * @return bool
-     */
-    private function doesSystemTplExist()
+    private function doesSystemTplExist(): bool
     {
         return $this->oConfig->load(PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
     }
 
     /**
      * Check if a template name has been specified and if it doesn't exceed the maximum length (50 characters).
-     *
-     * @return bool
      */
-    private function isTplParamSet()
+    private function isTplParamSet(): bool
     {
         return !empty($_REQUEST[self::REQUEST_PARAM_NAME]) &&
             strlen($_REQUEST[self::REQUEST_PARAM_NAME]) <= static::MAX_TPL_FOLDER_LENGTH;

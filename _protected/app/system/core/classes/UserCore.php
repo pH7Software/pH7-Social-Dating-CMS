@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
 
@@ -35,29 +35,27 @@ use stdClass;
 class UserCore
 {
     /** The prefix of the profile page URI path (eg https://mysite.com/@<USERNAME>) */
-    const PROFILE_PAGE_PREFIX = '@';
+    public const PROFILE_PAGE_PREFIX = '@';
 
-    const BAN_STATUS = 1;
+    public const BAN_STATUS = 1;
 
-    const MAX_WIDTH_AVATAR = 600;
-    const MAX_HEIGHT_AVATAR = 800;
+    public const MAX_WIDTH_AVATAR = 600;
+    public const MAX_HEIGHT_AVATAR = 800;
 
-    const MAX_WIDTH_BACKGROUND_IMAGE = 600;
-    const MAX_HEIGHT_BACKGROUND_IMAGE = 800;
+    public const MAX_WIDTH_BACKGROUND_IMAGE = 600;
+    public const MAX_HEIGHT_BACKGROUND_IMAGE = 800;
 
-    const AVATAR2_SIZE = 32;
-    const AVATAR3_SIZE = 64;
-    const AVATAR4_SIZE = 100;
-    const AVATAR5_SIZE = 150;
-    const AVATAR6_SIZE = 200;
-    const AVATAR7_SIZE = 400;
+    public const AVATAR2_SIZE = 32;
+    public const AVATAR3_SIZE = 64;
+    public const AVATAR4_SIZE = 100;
+    public const AVATAR5_SIZE = 150;
+    public const AVATAR6_SIZE = 200;
+    public const AVATAR7_SIZE = 400;
 
     /**
      * Check if a user is authenticated.
-     *
-     * @return bool
      */
-    public static function auth()
+    public static function auth(): bool
     {
         $oSession = new Session;
         $bSessionIpCheck = ((bool)DbConfig::getSetting('isUserSessionIpCheck')) ? $oSession->get('member_ip') === Ip::get() : true;
@@ -77,7 +75,7 @@ class UserCore
      *
      * @return bool
      */
-    public static function isAdminLoggedAs()
+    public static function isAdminLoggedAs(): bool
     {
         return (new Session)->exists('login_user_as');
     }
@@ -93,7 +91,7 @@ class UserCore
      *
      * @throws ForbiddenActionException
      */
-    public function delete($iProfileId, $sUsername, UserCoreModel $oUserModel)
+    public function delete($iProfileId, string $sUsername, UserCoreModel $oUserModel): void
     {
         if ($this->isGhost($sUsername)) {
             throw new ForbiddenActionException('You cannot delete this profile!');
@@ -128,7 +126,7 @@ class UserCore
      * @throws Framework\File\Permission\PermissionException
      * @throws PH7InvalidArgumentException
      */
-    public function setAvatar($iProfileId, $sUsername, $sFile, $iApproved = 1)
+    public function setAvatar($iProfileId, $sUsername, $sFile, $iApproved = 1): bool
     {
         /**
          * This can cause minor errors (eg if a user sent a file that is not a photo).
@@ -148,7 +146,7 @@ class UserCore
             return false; // File type incompatible
         }
 
-        // We removes the old avatar if it exists and we delete the cache at the same time.
+        // We remove the old avatar if it exists and we delete the cache at the same time.
         $this->deleteAvatar($iProfileId, $sUsername);
 
         $oAvatar2 = clone $oAvatar1;
@@ -190,14 +188,19 @@ class UserCore
         // Add the avatar
         (new UserCoreModel)->setAvatar($iProfileId, $sFile1, $iApproved);
 
-        /* Saved the new avatars */
-        $oAvatar1->save($sPath . $sFile1);
-        $oAvatar2->save($sPath . $sFile2);
-        $oAvatar3->save($sPath . $sFile3);
-        $oAvatar4->save($sPath . $sFile4);
-        $oAvatar5->save($sPath . $sFile5);
-        $oAvatar6->save($sPath . $sFile6);
-        $oAvatar7->save($sPath . $sFile7);
+        try {
+            /* Saved the new avatars */
+            $oAvatar1->save($sPath . $sFile1);
+            $oAvatar2->save($sPath . $sFile2);
+            $oAvatar3->save($sPath . $sFile3);
+            $oAvatar4->save($sPath . $sFile4);
+            $oAvatar5->save($sPath . $sFile5);
+            $oAvatar6->save($sPath . $sFile6);
+            $oAvatar7->save($sPath . $sFile7);
+        } catch (PH7InvalidArgumentException $oExcept) {
+            // Returns FALSE if FileStorage throws PH7InvalidArgumentException
+            return false;
+        }
 
         unset($oAvatar1, $oAvatar2, $oAvatar3, $oAvatar4, $oAvatar5, $oAvatar6, $oAvatar7);
 
@@ -209,14 +212,12 @@ class UserCore
      *
      * @param int $iProfileId
      * @param string $sUsername
-     *
-     * @return void
      */
-    public function deleteAvatar($iProfileId, $sUsername)
+    public function deleteAvatar($iProfileId, $sUsername): void
     {
         // We start to delete the file before the data in the database if we could not delete the file since we would have lost the link to the file found in the database.
         $sGetAvatar = (new UserCoreModel)->getAvatar($iProfileId, null);
-        $sFile = $sGetAvatar->pic;
+        $sFile = (string)$sGetAvatar->pic;
 
         $oFile = new File;
         $sExt = PH7_DOT . $oFile->getFileExt($sFile);
@@ -257,7 +258,7 @@ class UserCore
      *
      * @throws Framework\File\Permission\PermissionException
      */
-    public function setBackground($iProfileId, $sUsername, $sFile, $iApproved = 1)
+    public function setBackground($iProfileId, $sUsername, $sFile, $iApproved = 1): bool
     {
         /**
          * This can cause minor errors (eg if a user sent a file that is not a photo).
@@ -392,7 +393,7 @@ class UserCore
         // Regenerate the session ID to prevent session fixation attack
         $oSession->regenerateId();
 
-        // Now we connect the member
+        // Now we create the user's sessions
         $aSessionData = [
             'member_id' => $oUserData->profileId,
             'member_email' => $oUserData->email,
@@ -412,6 +413,8 @@ class UserCore
             '*****',
             'Logged in!'
         );
+
+        // Insert user log session and current IP address.
         $oSecurityModel->addSessionLog(
             $oUserData->profileId,
             $oUserData->email,
@@ -421,7 +424,7 @@ class UserCore
     }
 
     /**
-     * Finds a free username in our database to use for Facebook connect.
+     * Finds a free username in the database to use (e.g. for FB connect or CSV import).
      *
      * @param string $sNickname
      * @param string $sFirstName
@@ -429,7 +432,7 @@ class UserCore
      *
      * @return string Username
      */
-    public function findUsername($sNickname, $sFirstName, $sLastName)
+    public function findUsername(string $sNickname, string $sFirstName, string $sLastName): string
     {
         $iMaxLen = DbConfig::getSetting('maxUsernameLength');
         $sRnd = Various::genRnd('pH_Pierre-Henry_Soria_Sanz_González', 4); // Random String
@@ -450,6 +453,7 @@ class UserCore
         foreach ($aUsernameList as $sUsername) {
             $sUsername = substr($sUsername, 0, $iMaxLen);
 
+            // Check if username is valid and doesn't exist in the database
             if ((new Validate)->username($sUsername)) {
                 return $sUsername;
             }
@@ -466,7 +470,7 @@ class UserCore
      *
      * @return bool|string Returns a boolean TRUE if the account status is correct, otherwise returns an error message.
      */
-    public function checkAccountStatus(stdClass $oDbProfileData)
+    public function checkAccountStatus(stdClass $oDbProfileData): bool|string
     {
         $mStatus = true; // Default value
 
@@ -538,23 +542,17 @@ class UserCore
     /**
      * Get the correct matching sex.
      *
-     * @param string $sSex
-     *
      * @return string The Match Sex.
      */
-    public function getMatchSex($sSex)
+    public function getMatchSex(string $sSex): string
     {
         return ($sSex === GenderTypeUserCore::MALE ? GenderTypeUserCore::FEMALE : ($sSex === GenderTypeUserCore::FEMALE ? GenderTypeUserCore::MALE : GenderTypeUserCore::COUPLE));
     }
 
     /**
      * Logout a user.
-     *
-     * @param Session $oSession
-     *
-     * @return void
      */
-    public function logout(Session $oSession)
+    public function logout(Session $oSession): void
     {
         $oSession->destroy();
         $this->revokeRememberMeSession();
@@ -562,10 +560,8 @@ class UserCore
 
     /**
      * Revoke the "Remember Me" cookies (if exist) in order to completely logout the user.
-     *
-     * @return void
      */
-    public function revokeRememberMeSession()
+    public function revokeRememberMeSession(): void
     {
         $oCookie = new Cookie;
         $aRememberMeCookieNames = ['member_remember', 'member_id'];
@@ -583,10 +579,8 @@ class UserCore
      *
      * @param int $iId Profile ID.
      * @param string $sTable Default DbTableName::MEMBER
-     *
-     * @return void
      */
-    public function clearReadProfileCache($iId, $sTable = DbTableName::MEMBER)
+    public function clearReadProfileCache($iId, $sTable = DbTableName::MEMBER): void
     {
         $this->clearCache('readProfile', $iId, $sTable);
     }
@@ -597,20 +591,13 @@ class UserCore
      *
      * @param int $iId Profile ID.
      * @param string $sTable Default DbTableName::MEMBER_INFO
-     *
-     * @return void
      */
-    public function clearInfoFieldCache($iId, $sTable = DbTableName::MEMBER_INFO)
+    public function clearInfoFieldCache($iId, $sTable = DbTableName::MEMBER_INFO): void
     {
         $this->clearCache('infoFields', $iId, $sTable);
     }
 
-    /**
-     * @param string $sUsername
-     *
-     * @return bool
-     */
-    private function isGhost($sUsername)
+    private function isGhost(string $sUsername): bool
     {
         return $sUsername === PH7_GHOST_USERNAME;
     }
@@ -624,7 +611,7 @@ class UserCore
      *
      * @return void
      */
-    private function clearCache($sId, $iId, $sTable)
+    private function clearCache($sId, $iId, $sTable): void
     {
         VariousModel::checkModelTable($sTable);
 

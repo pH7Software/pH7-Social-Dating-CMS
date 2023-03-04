@@ -1,11 +1,13 @@
 <?php
 /**
  * @author           Pierre-Henry Soria <hi@ph7.me>
- * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
- * @link             https://ph7cms.com
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
+ * @link             https://ph7builder.com
  * @package          PH7 / Framework / Core
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Core;
 
@@ -19,17 +21,13 @@ use PH7\Framework\Session\Session;
 
 abstract class Core extends Kernel
 {
-    /** @var Session */
-    protected $session;
+    protected Session $session;
 
-    /** @var Design */
-    protected $design;
+    protected Design $design;
 
-    /** @var CDateTime */
-    protected $dateTime;
+    protected CDateTime $dateTime;
 
-    /** @var PH7Tpl */
-    protected $view;
+    protected PH7Tpl $view;
 
     public function __construct()
     {

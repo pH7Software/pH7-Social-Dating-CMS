@@ -1,10 +1,12 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hi@ph7.me>
- * @copyright      (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @copyright      (c) 2018-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / Inc / Class
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -20,17 +22,13 @@ class UserNotifier
 
     const MAIL_TEMPLATE_FILE = '/tpl/mail/sys/core/moderation/content_notifier.tpl';
 
-    /** @var Mailable */
-    private $oMail;
+    private Mailable $oMail;
 
-    /** @var Templatable */
-    private $oView;
+    private Templatable $oView;
 
-    /** @var string */
-    private $sEmail;
+    private string $sEmail;
 
-    /** @var int */
-    private $iType;
+    private int $iType;
 
     public function __construct(Mailable $oMailEngine, Templatable $oView)
     {
@@ -139,10 +137,7 @@ class UserNotifier
         return $this->iType;
     }
 
-    /**
-     * @return string
-     */
-    private function getNotifierSubject()
+    private function getNotifierSubject(): string
     {
         if ($this->isContentDisapproved()) {
             return UserNotifierString::getDisapprovedSubject();
@@ -165,18 +160,12 @@ class UserNotifier
         return UserNotifierString::getApprovedMessage();
     }
 
-    /**
-     * @return bool
-     */
-    private function isContentDisapproved()
+    private function isContentDisapproved(): bool
     {
         return $this->getContentStatus() === self::DISAPPROVED_STATUS;
     }
 
-    /**
-     * @return bool
-     */
-    private function isValidEmail()
+    private function isValidEmail(): bool
     {
         return !empty($this->sEmail) &&
             filter_var($this->sEmail, FILTER_VALIDATE_EMAIL) !== false;

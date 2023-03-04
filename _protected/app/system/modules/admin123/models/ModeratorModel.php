@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / Inc / Model
  */
 
@@ -96,18 +96,13 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    /**
-     * @param int $iOffset
-     * @param int $iLimit
-     *
-     * @return array
-     */
-    public function getAvatars($iOffset, $iLimit)
+    public function getAvatars(int $iOffset, int $iLimit): array
     {
-        $iOffset = (int)$iOffset;
-        $iLimit = (int)$iLimit;
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix(DbTableName::MEMBER) .
-            'WHERE approvedAvatar = 0 LIMIT :offset, :limit');
+        $sSql = 'SELECT profileId, username, firstName, sex, approvedAvatar FROM' .
+            Db::prefix(DbTableName::MEMBER) .
+            'WHERE approvedAvatar = 0 LIMIT :offset, :limit';
+
+        $rStmt = Db::getInstance()->prepare($sSql);
         $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         $rStmt->execute();

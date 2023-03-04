@@ -3,9 +3,9 @@
  * @title          Love Calculator
  * @desc           Controller of the Love Calculator Module.
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Love Calculator / Controller
  */
 
@@ -16,7 +16,7 @@ class MainController extends Controller
     /** @var UserCoreModel */
     private $oUserModel;
 
-    /** @var ExistsCoreModel */
+    /** @var ExistCoreModel */
     private $oExists;
 
     /** @var string */
@@ -27,7 +27,7 @@ class MainController extends Controller
         parent::__construct();
 
         $this->oUserModel = new UserCoreModel;
-        $this->oExists = new ExistsCoreModel;
+        $this->oExists = new ExistCoreModel;
 
         $this->design->addCss(
             PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS,

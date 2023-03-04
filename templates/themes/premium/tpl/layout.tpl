@@ -46,8 +46,8 @@
 
     <!-- Begin Copyright pH7 Dating/Social CMS by Pierre-Henry SORIA, All Rights Reserved -->
     <!-- Do not modify or remove this code! Think of those who spend a lot of time to develop this CMS & Framework for you -->
-    <meta name="creator" content="pH7CMS, Pierre-Henry Soria - {software_url}" />
-    <meta name="designer" content="pH7CMS, Pierre-Henry Soria - {software_url}" />
+    <meta name="creator" content="pH7Builder, Pierre-Henry Soria - {software_url}" />
+    <meta name="designer" content="pH7Builder, Pierre-Henry Soria - {software_url}" />
     <meta name="generator" content="{software_name}, {software_version}" />
     <!-- End Copyright -->
 
@@ -226,7 +226,7 @@
     {{ $design->message() }}
     {{ $design->error() }}
     {if $is_disclaimer AND !$is_admin_auth AND !AdminCore::isAdminPanel()}
-      {main_include 'disclaimer.inc.tpl'}
+      {main_include 'disclaimer-dialog.inc.tpl'}
     {/if}
     <!-- End Footer JavaScript -->
 

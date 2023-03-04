@@ -14,10 +14,10 @@
  *
  * ----------------- Modified by Pierre-Henry SORIA ----------------- *
  *
- * @author          Pierre-Henry SORIA <hello@ph7cms.com>
+ * @author          Pierre-Henry SORIA <hello@ph7builder.com>
  * @copyright       (c) 2011-2019, Pierre-Henry Soria, All Rights Reserved.
  * @version         Last update 04/19/2018
- * @package         pH7CMS
+ * @package         pH7Builder
  */
 
 namespace PH7\Framework\Geo\Map;
@@ -31,7 +31,7 @@ use PH7\Framework\Config\Config;
  * Class to use the Google Maps v3 API
  *
  * @author Yohann CERDAN <cerdanyohann@yahoo.fr>
- * @author Pierre-Henry SORIA <hello@ph7cms.com>
+ * @author Pierre-Henry SORIA <hello@ph7builder.com>
  */
 class Api
 {
@@ -629,7 +629,7 @@ class Api
         $this->content .= '<script>' . "\n";
 
         if ($this->isApiKeyNotSet()) {
-            $this->content .= 'document.write("' . t('You need to get a Google Maps API key to get it working. Please go to your pH7CMS Admin Panel -> Settings -> General -> API -> Google Maps API Key') . '".toUpperCase());' . "\n";
+            $this->content .= 'document.write("' . t('You need to get a Google Maps API key to get it working. Please go to your pH7Builder Admin Panel -> Settings -> General -> API -> Google Maps API Key') . '".toUpperCase());' . "\n";
         }
 
         $this->content .= 'function addLoadEvent(func) { ' . "\n";

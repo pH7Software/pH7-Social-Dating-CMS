@@ -1,10 +1,12 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Report / Form
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -22,7 +24,7 @@ use PH7\Framework\Url\Header as HeaderUrl;
 
 class ReportForm
 {
-    public static function display()
+    public static function display(): void
     {
         $oHttpRequest = new Http;
 
@@ -91,7 +93,7 @@ class ReportForm
                 t('Comment:'),
                 'desc',
                 [
-                    'title' => t('Please tell us why you want to report this content (scam, illegal content, adult content, etc.). Help us to eliminate scams, fake profiles, spam ... Thank you'),
+                    'description' => t('Tell us why you want to report this content (scam, illegal content, adult content, etc.). Help us to eliminate scams, fake profiles, spam ... Thank you'),
                     'required' => 1
                 ]
             )

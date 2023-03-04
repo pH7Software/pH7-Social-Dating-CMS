@@ -2,9 +2,9 @@
 /**
  * @title          Profile Controller
  *
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / User / Controller
  */
 
@@ -17,8 +17,8 @@ use PH7\Framework\Http\Http;
 use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
-use stdClass;
 use PH7\JustHttp\StatusCode;
+use stdClass;
 
 class ProfileController extends ProfileBaseController
 {
@@ -26,8 +26,7 @@ class ProfileController extends ProfileBaseController
     const MAP_WIDTH_SIZE = '100%';
     const MAP_HEIGHT_SIZE = '300px';
 
-    /** @var string */
-    private $sUsername;
+    private string $sUsername;
 
     public function __construct()
     {
@@ -40,7 +39,7 @@ class ProfileController extends ProfileBaseController
         $this->setVisitorId($this->session->get('member_id'));
     }
 
-    public function index()
+    public function index(): void
     {
         $this->addCssFiles();
         $this->addAdditionalAssetFiles();
@@ -140,13 +139,7 @@ class ProfileController extends ProfileBaseController
         $this->output();
     }
 
-    /**
-     * @param string $sFirstName
-     * @param stdClass $oUser
-     *
-     * @return void
-     */
-    protected function setMenuBar($sFirstName, stdClass $oUser)
+    protected function setMenuBar(string $sFirstName, stdClass $oUser): void
     {
         parent::setMenuBar($sFirstName, $oUser);
 
@@ -161,10 +154,8 @@ class ProfileController extends ProfileBaseController
 
     /**
      * Add the General and Tabs Menu stylesheets.
-     *
-     * @return void
      */
-    protected function addCssFiles()
+    protected function addCssFiles(): void
     {
         $this->design->addCss(
             PH7_LAYOUT,
@@ -172,10 +163,7 @@ class ProfileController extends ProfileBaseController
         );
     }
 
-    /**
-     * @return string
-     */
-    private function getFriendLinkName()
+    private function getFriendLinkName(): string
     {
         $iNbFriend = FriendCoreModel::total($this->iProfileId);
         $sNbFriend = $iNbFriend > 0 ? ' (' . $iNbFriend . ')' : '';
@@ -184,10 +172,7 @@ class ProfileController extends ProfileBaseController
         return $sFriendTxt . $sNbFriend;
     }
 
-    /**
-     * @return string
-     */
-    private function getMutualFriendLinkName()
+    private function getMutualFriendLinkName(): string
     {
         $iNbMutFriend = (new FriendCoreModel)->get(
             $this->iVisitorId,
@@ -205,12 +190,7 @@ class ProfileController extends ProfileBaseController
         return $sMutFriendTxt . $sNbMutFriend;
     }
 
-    /**
-     * @param stdClass $oUser
-     *
-     * @return bool
-     */
-    private function doesProfileExist(stdClass $oUser)
+    private function doesProfileExist(stdClass $oUser): bool
     {
         return !empty($oUser->username) && $this->str->equalsIgnoreCase($this->sUsername, $oUser->username);
     }
@@ -219,17 +199,15 @@ class ProfileController extends ProfileBaseController
     /**
      * @return bool TRUE if the admin is not logged in (TRUE as well if the admin use "login as user").
      */
-    private function isNotAdmin()
+    private function isNotAdmin(): bool
     {
         return !AdminCore::auth() || UserCore::isAdminLoggedAs();
     }
 
     /**
-     * @return void
-     *
      * @throws Framework\File\IOException
      */
-    private function redirectToCoolProfileStyle()
+    private function redirectToCoolProfileStyle(): void
     {
         Header::redirect(
             Uri::get(
@@ -244,11 +222,9 @@ class ProfileController extends ProfileBaseController
     /**
      * Show a Not Found page.
      *
-     * @return void
-     *
      * @throws Framework\Http\Exception
      */
-    private function notFound()
+    private function notFound(): void
     {
         Http::setHeadersByCode(StatusCode::NOT_FOUND);
 

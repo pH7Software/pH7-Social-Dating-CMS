@@ -3,12 +3,12 @@
  * @title            Http Request
  * @desc             Useful class for managing HTTP request.
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Mvc / Request
  * @version          1.4
- * @link             http://ph7cms.com
+ * @link             http://ph7builder.com
  */
 
 namespace PH7\Framework\Mvc\Request;
@@ -205,7 +205,7 @@ class Http extends \PH7\Framework\Http\Http
      * @param string $sKey
      * @param string $sParam Optional, set a type of the request | Value types are: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
      *
-     * @return string|void Uses Str::escape() method to secure the data display unless you specified the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
+     * @return string Uses Str::escape() method to secure the data display unless you specified the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
      */
     public function gets($sKey, $sParam = null)
     {
@@ -216,6 +216,8 @@ class Http extends \PH7\Framework\Http\Http
         if ($this->postExists($sKey, $sParam)) {
             return $this->post($sKey, $sParam);
         }
+
+        return '';
     }
 
     /**
@@ -256,7 +258,7 @@ class Http extends \PH7\Framework\Http\Http
      * @param string $sParam Optional, set a type of the request | Value types are: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
      * @param bool $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities, so less secure.
      *
-     * @return string The string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
+     * @return mixed The string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
      *
      * @throws WrongRequestMethodException If the request is not POST.
      */

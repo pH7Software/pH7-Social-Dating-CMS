@@ -1,7 +1,7 @@
 ####################
-# Author:         Pierre-Henry Soria <hello@ph7cms.com>
-# Copyright:      (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
-# License:        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+# Author:         Pierre-Henry Soria <hello@ph7builder.com>
+# Copyright:      (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
+# License:        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
 ####################
 
 ## Note: You can remove some lines below if your Apache server already supports one of the parameters below (this will relieve Apache since this file is read on every request). ##
@@ -16,8 +16,8 @@
 
     RewriteEngine On
 
-    ## Uncomment the below "#RewriteBase /" (remove "#") if pH7CMS is installed in a folder, and add the folder name after the slash "/"
-    ## Example: If pH7CMS is installed in "/public_html/ph7cms/", then it should be "RewriteBase /ph7cms/", however it may depends of your Apache configuration.
+    ## Uncomment the below "#RewriteBase /" (remove "#") if pH7Builder is installed in a folder, and add the folder name after the slash "/"
+    ## Example: If pH7Builder is installed in "/public_html/ph7builder/", then it should be "RewriteBase /ph7builder/", however it may depends of your Apache configuration.
     ## If you need, please ask your hosting company or check the Apache doc: http://httpd.apache.org/docs/current/mod/mod_rewrite.html
 
     # RewriteBase /
@@ -37,8 +37,8 @@
 # Remove the version number and installed module versions in the list at the bottom error pages (404, 403, ...)
 ServerSignature Off
 
-# Deny access to all CGI, Perl, Python, Bash, SQL, Template, INI configuration, cache, log, temporary and text files
-<FilesMatch "\.(cgi|pl|py|sh|bash|sql|tpl|ini|cache|log|tmp|txt|md)$">
+# Deny access to all CGI, Perl, Python, Bash, SQL, Template, INI configuration, cache, log, lock, tmp & plain files
+<FilesMatch "\.(cgi|pl|py|sh|bash|sql|tpl|ini|cache|log|lock|tmp|txt|md)$">
     # Apache 2.4+
     <IfModule mod_authz_core.c>
         Require all denied
@@ -665,7 +665,7 @@ ErrorDocument 505 /error/http/index?code=505
     # RewriteCond %{SERVER_PORT} 80
     # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-    ### For pH7CMS's URL router (DO NOT REMOVE THESE FOLLOWING CODE) ###
+    ### For pH7Builder's URL router (DO NOT REMOVE THESE FOLLOWING CODE) ###
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
 
@@ -773,16 +773,16 @@ ErrorDocument 505 /error/http/index?code=505
 # Modify Headers
 <IfModule mod_headers.c>
     # Cache files
-    <FilesMatch "\.(jpe?g|png|gif|ico|webp|swf|mp3|mp4|flv|webm|pdf)$">
+    <FilesMatch "\.(jpe?g|png|gif|ico|webp|mp3|mp4|flv|webm|pdf)$">
         Header set Cache-Control "public"
-        Header set Expires "Mon, 20 Apr 2060 20:00:00 GMT"
+        Header set Expires "Mon, 20 Apr 2070 20:00:00 GMT"
         Header unset Last-Modified
     </FilesMatch>
 
     # Cache JavaScript & CSS
     <FilesMatch "\.(js|css)$">
         Header set Cache-Control "public"
-        Header set Expires "Mon, 20 Apr 2060 20:00:00 GMT"
+        Header set Expires "Mon, 20 Apr 2070 20:00:00 GMT"
         Header unset Last-Modified
     </FilesMatch>
 </IfModule>
@@ -801,7 +801,7 @@ ErrorDocument 505 /error/http/index?code=505
         # Don't compress images/archives/music/video/etc
         SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
         SetEnvIfNoCase Request_URI \.(?:exe|t?gz|zip|bz2|sit|rar)$ no-gzip dont-vary
-        SetEnvIfNoCase Request_URI \.(?:avi|mov|mp3|mp4|rm|flv|swf|mp?g)$ no-gzip dont-vary
+        SetEnvIfNoCase Request_URI \.(?:avi|mov|mp3|mp4|rm|flv|mp?g)$ no-gzip dont-vary
     </IfModule>
     <IfModule mod_headers.c>
         # Make sure proxies don't deliver the wrong content
@@ -813,7 +813,7 @@ ErrorDocument 505 /error/http/index?code=505
 <IfModule mod_expires.c>
     ExpiresActive On
     ExpiresDefault "access plus 1 month"
-    # expire images/css/js/swf files after a month in the client's cache
+    # expire images/css/js files after a month in the client's cache
     ExpiresByType text/css "access plus 31 days"
     ExpiresByType text/javascript "access plus 31 days"
     ExpiresByType application/javascript "access plus 31 days"
@@ -822,13 +822,11 @@ ErrorDocument 505 /error/http/index?code=505
     ExpiresByType image/gif "access plus 31 days"
     ExpiresByType image/jpeg "access plus 31 days"
     ExpiresByType image/png "access plus 31 days"
-    ExpiresByType application/x-shockwave-flash "access plus 31 days"
-    ExpiresByType image/vnd.microsoft.icon "access plus 31 days"
     ExpiresByType image/x-icon "access plus 1 year"
 </IfModule>
 
 # For the videos extensions
-#AddType video/ogg .ogg
+#AddType video/ogg .ogg # <- Uncomment if you plan to support Ogg video format
 AddType video/webm .webm
 AddType video/mp4 .mp4
 AddType application/rss+xml .xml

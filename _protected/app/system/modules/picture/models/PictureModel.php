@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Picture / Model
  */
 
@@ -52,14 +52,15 @@ class PictureModel extends PictureCoreModel
      */
     public function addPhoto($iProfileId, $iAlbumId, $sTitle, $sDescription, $sFile, $sCreatedDate, $sApproved = '1')
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::PICTURE) . '(profileId, albumId, title, description, file, createdDate, approved)
-            VALUES (:profileId, :albumId, :title, :description, :file, :createdDate, :approved)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::PICTURE) . '(profileId, albumId, title, description, file, file_cdn_url, createdDate, approved)
+            VALUES (:profileId, :albumId, :title, :description, :file, :file_cdn_url, :createdDate, :approved)');
 
         $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
         $rStmt->bindValue(':albumId', $iAlbumId, PDO::PARAM_INT);
         $rStmt->bindValue(':title', $sTitle, PDO::PARAM_STR);
         $rStmt->bindValue(':description', $sDescription, PDO::PARAM_STR);
         $rStmt->bindValue(':file', $sFile, PDO::PARAM_STR);
+        $rStmt->bindValue(':file_cdn_url', '', PDO::PARAM_STR);
         $rStmt->bindValue(':createdDate', $sCreatedDate, PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $sApproved, PDO::PARAM_STR);
 
@@ -264,7 +265,7 @@ class PictureModel extends PictureCoreModel
 
         $rStmt = Db::getInstance()->prepare(
             'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::PICTURE) . 'AS p INNER JOIN' .
-            Db::prefix(DbTableName::ALBUM_PICTURE) . 'AS a ON p.albumId = a.albumId INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
+            Db::prefix(DbTableName::ALBUM_PICTURE) . 'AS a USING(albumId) INNER JOIN' . Db::prefix(DbTableName::MEMBER) .
             'AS m ON p.profileId = m.profileId' . $sSqlWhere . ' AND p.approved = :approved' . $sSqlOrder . $sSqlLimit);
 
         if ($bDigitSearch) {

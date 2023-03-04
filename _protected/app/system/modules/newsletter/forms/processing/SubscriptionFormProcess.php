@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Newsletter / Form / Processing
  */
 
@@ -28,7 +28,7 @@ class SubscriptionFormProcess extends Form
         $oSubscriberModel = new SubscriberModel;
         $sEmail = $this->httpRequest->post('email');
         $sName = $this->httpRequest->post('name');
-        $bIsSubscriber = (new ExistsCoreModel)->email($sEmail, DbTableName::SUBSCRIBER);
+        $bIsSubscriber = (new ExistCoreModel)->email($sEmail, DbTableName::SUBSCRIBER);
 
         switch ($this->httpRequest->post('direction')) {
             case 'subscribe': {
@@ -80,10 +80,8 @@ class SubscriptionFormProcess extends Form
      * Send a email to confirm their email address.
      *
      * @param array $aData The data details.
-     *
-     * @return int Number of recipients who were accepted for delivery.
      */
-    private function sendMail(array $aData)
+    private function sendMail(array $aData): bool
     {
         $sActivateLink = Uri::get('newsletter', 'home', 'activate') . PH7_SH . $aData['email'] . PH7_SH . $aData['hash_validation'];
 

@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2013-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2013-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
 
@@ -13,13 +13,13 @@ use PH7\Framework\File\File;
 
 abstract class WriteCore
 {
-    const THUMBNAIL_FILENAME = 'thumb.png';
-    const DEFAULT_THUMBNAIL_FILENAME = 'default_thumb.jpg';
+    public const THUMBNAIL_FILENAME = 'thumb.png';
+    public const DEFAULT_THUMBNAIL_FILENAME = 'default_thumb.jpg';
 
-    const BLOG_NAME = 'blog';
-    const NOTE_NAME = 'note';
+    private const BLOG_NAME = 'blog';
+    private const NOTE_NAME = 'note';
 
-    const ALLOWED_MODULES = [
+    private const ALLOWED_MODULES = [
         self::BLOG_NAME,
         self::NOTE_NAME
     ];
@@ -28,10 +28,8 @@ abstract class WriteCore
      * @param int|string $mId Put the username + the PH7_DS constant + the image file for the Note module or just the post ID for the Blog module.
      * @param string $sMod Module name. Choose between 'blog' and 'note'.
      * @param File $oFile
-     *
-     * @return bool
      */
-    public function deleteThumb($mId, $sMod, File $oFile)
+    public function deleteThumb(int|string $mId, string $sMod, File $oFile): bool
     {
         self::checkMod($sMod);
 
@@ -45,11 +43,9 @@ abstract class WriteCore
     /**
      * @param string $sMod Module name. Choose between 'blog' and 'note'.
      *
-     * @return void
-     *
      * @throws PH7InvalidArgumentException If the module is incorrect.
      */
-    public static function checkMod($sMod)
+    public static function checkMod($sMod): void
     {
         if (!in_array($sMod, self::ALLOWED_MODULES, true)) {
             throw new PH7InvalidArgumentException(

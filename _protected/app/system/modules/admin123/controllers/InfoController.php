@@ -1,10 +1,12 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -14,10 +16,9 @@ use PH7\Framework\Url\Header;
 
 class InfoController extends Controller
 {
-    /** @var string */
-    private $sTitle;
+    private string $sTitle;
 
-    public function index()
+    public function index(): void
     {
         Header::redirect(
             Uri::get(
@@ -28,7 +29,7 @@ class InfoController extends Controller
         );
     }
 
-    public function language()
+    public function language(): void
     {
         $this->sTitle = t('PHP Information');
         $this->view->page_title = $this->sTitle;
@@ -37,7 +38,7 @@ class InfoController extends Controller
         $this->output();
     }
 
-    public function software()
+    public function software(): void
     {
         $this->sTitle = t('%software_name% Information');
         $this->view->page_title = $this->sTitle;

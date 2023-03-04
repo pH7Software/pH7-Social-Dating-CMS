@@ -1,10 +1,12 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / User / Form / Processing
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -15,8 +17,7 @@ use PH7\Framework\Security\Moderation\Filter;
 
 class DesignFormProcess extends Form implements NudityDetectable
 {
-    /** @var int */
-    private $iApproved;
+    private int $iApproved;
 
     public function __construct()
     {
@@ -53,12 +54,12 @@ class DesignFormProcess extends Form implements NudityDetectable
         }
     }
 
-    public function isNudityFilterEligible()
+    public function isNudityFilterEligible(): bool
     {
         return $this->iApproved === 1 && !AdminCore::auth() && DbConfig::getSetting('nudityFilter');
     }
 
-    public function checkNudityFilter()
+    public function checkNudityFilter(): void
     {
         if (Filter::isNudity($_FILES['wallpaper']['tmp_name'])) {
             // The wallpaper doesn't seem suitable for everyone. Overwrite "$iApproved" and set the image for approval

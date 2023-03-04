@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Lost Password / Controller
  */
 
@@ -20,13 +20,8 @@ use PH7\Generator\Password as PasswordGenerator;
 
 class MainController extends Controller
 {
-    const DEFAULT_PASSWORD_LENGTH = 8;
+    private const DEFAULT_PASSWORD_LENGTH = 8;
 
-    /**
-     * @param string $sMod
-     *
-     * @return void
-     */
     public function forgot(string $sMod = ''): void
     {
         // For better SEO, exclude not interesting pages from search engines
@@ -46,7 +41,11 @@ class MainController extends Controller
         $sTable = VariousModel::convertModToTable($sMod);
 
         if (!(new UserCoreModel)->checkHashValidation($sEmail, $sHash, $sTable)) {
-            Header::redirect($this->registry->site_url, t('Oops! Email or hash is invalid.'), Design::ERROR_TYPE);
+            Header::redirect(
+                $this->registry->site_url,
+                t('Oops! Email or hash is invalid.'),
+                Design::ERROR_TYPE
+            );
         } else {
             if (!$this->sendMail($sTable, $sEmail)) {
                 Header::redirect(
@@ -75,10 +74,8 @@ class MainController extends Controller
      *
      * @param string $sTable DB table name.
      * @param string $sEmail The user email address.
-     *
-     * @return int Number of recipients who were accepted for delivery.
      */
-    protected function sendMail(string $sTable, string $sEmail): int
+    protected function sendMail(string $sTable, string $sEmail): bool
     {
         // Get new password and change it in DB
         $sNewPassword = PasswordGenerator::generate(self::DEFAULT_PASSWORD_LENGTH);
@@ -101,12 +98,7 @@ class MainController extends Controller
         return (new Mail)->send($aInfo, $sMessageHtml);
     }
 
-    /**
-     * @param string $sTableName
-     *
-     * @return string
-     */
-    private function getLoginUrl($sTableName)
+    private function getLoginUrl(string $sTableName): string
     {
         switch ($sTableName) {
             case DbTableName::MEMBER:

@@ -2,11 +2,13 @@
 /**
  * @title            Pagination Class
  *
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Framework / Page
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Navigation;
 
@@ -14,26 +16,17 @@ defined('PH7') or exit('Restricted access');
 
 class Pagination
 {
-    const REQUEST_PARAM_NAME = 'p';
-    const NEARBY_PAGES_LIMIT = 4;
+    public const REQUEST_PARAM_NAME = 'p';
+    private const NEARBY_PAGES_LIMIT = 4;
 
-    /** @var string */
-    private $sPageName;
+    private string $sPageRequestName;
+    private string $sHtmlOutput = '';
 
-    /** @var int */
-    private $iTotalPages;
+    private int $iTotalPages;
+    private int $iCurrentPage;
+    private int $iShowItems;
 
-    /** @var int */
-    private $iCurrentPage;
-
-    /** @var int */
-    private $iShowItems;
-
-    /** @var string */
-    private $sHtmlOutput;
-
-    /** @var array */
-    private static $aOptions = [
+    private static array $aOptions = [
         'range' => self::NEARBY_PAGES_LIMIT - 1, // Number of pages to display on the pagination
         'text_first_page' => '&laquo;', // Button text "First Page"
         'text_last_page' => '&raquo;', // Button text "Last Page"
@@ -44,10 +37,10 @@ class Pagination
     /**
      * @param int $iTotalPages
      * @param int $iCurrentPage
-     * @param string $sPageName Default 'p'
+     * @param string $sPageRequestName Default 'p'
      * @param array $aOptions Optional options.
      */
-    public function __construct($iTotalPages, $iCurrentPage, $sPageName = self::REQUEST_PARAM_NAME, array $aOptions = [])
+    public function __construct(int $iTotalPages, int $iCurrentPage, string $sPageRequestName = self::REQUEST_PARAM_NAME, array $aOptions = [])
     {
         // Set the total number of page
         $this->iTotalPages = $iTotalPages;
@@ -59,7 +52,7 @@ class Pagination
         self::$aOptions += $aOptions;
 
         // It retrieves the address of the page
-        $this->sPageName = Page::cleanDynamicUrl($sPageName);
+        $this->sPageRequestName = Page::cleanDynamicUrl($sPageRequestName);
 
 
         // Management pages to see
@@ -73,17 +66,15 @@ class Pagination
      *
      * @return string Html code.
      */
-    public function getHtmlCode()
+    public function getHtmlCode(): string
     {
         return $this->sHtmlOutput;
     }
 
     /**
      * Generate the HTML pagination code.
-     *
-     * @return void
      */
-    private function generateHtmlPaging()
+    private function generateHtmlPaging(): void
     {
         // If you have more than one page, it displays the navigation
         if ($this->iTotalPages > 1) {
@@ -92,34 +83,34 @@ class Pagination
             // Management link to go to the first page
             if (self::$aOptions['text_first_page']) {
                 if ($this->iCurrentPage > 2 && $this->iCurrentPage > self::$aOptions['range'] + 1 && $this->iShowItems < $this->iTotalPages) {
-                    $this->sHtmlOutput .= '<li><a href="' . $this->sPageName . '1"><span aria-hidden="true">' . self::$aOptions['text_first_page'] . '</span></a></li>';
+                    $this->sHtmlOutput .= '<li><a href="' . $this->sPageRequestName . '1"><span aria-hidden="true">' . self::$aOptions['text_first_page'] . '</span></a></li>';
                 }
             }
 
             // Management the Previous link
             if (self::$aOptions['text_previous_page']) {
                 if ($this->iCurrentPage > 2 && $this->iShowItems < $this->iTotalPages) {
-                    $this->sHtmlOutput .= '<li class="previous"><a href="' . $this->sPageName . ($this->iCurrentPage - 1) . '" aria-label="Previous"><span aria-hidden="true">' . self::$aOptions['text_previous_page'] . '</span></a></li>';
+                    $this->sHtmlOutput .= '<li class="previous"><a href="' . $this->sPageRequestName . ($this->iCurrentPage - 1) . '" aria-label="Previous"><span aria-hidden="true">' . self::$aOptions['text_previous_page'] . '</span></a></li>';
                 }
             }
             // Management of other paging buttons...
             for ($iCurrentPage = 1; $iCurrentPage <= $this->iTotalPages; $iCurrentPage++) {
                 if (($iCurrentPage >= $this->iCurrentPage - self::$aOptions['range'] && $iCurrentPage <= $this->iCurrentPage + self::$aOptions['range']) || $this->iTotalPages <= $this->iShowItems) {
-                    $this->sHtmlOutput .= '<li' . ($this->iCurrentPage === $iCurrentPage ? ' class="active"' : '') . '><a href="' . $this->sPageName . $iCurrentPage . '">' . $iCurrentPage . '</a></li>';
+                    $this->sHtmlOutput .= '<li' . ($this->iCurrentPage === $iCurrentPage ? ' class="active"' : '') . '><a href="' . $this->sPageRequestName . $iCurrentPage . '">' . $iCurrentPage . '</a></li>';
                 }
             }
 
             //  Management the "Next" link
             if (self::$aOptions['text_next_page']) {
                 if ($this->iCurrentPage < $this->iTotalPages - 1 && $this->iShowItems < $this->iTotalPages) {
-                    $this->sHtmlOutput .= '<li class="next"><a href="' . $this->sPageName . ($this->iCurrentPage + 1) . '" aria-label="Next"><span aria-hidden="true">' . self::$aOptions['text_next_page'] . '</span></a></li>';
+                    $this->sHtmlOutput .= '<li class="next"><a href="' . $this->sPageRequestName . ($this->iCurrentPage + 1) . '" aria-label="Next"><span aria-hidden="true">' . self::$aOptions['text_next_page'] . '</span></a></li>';
                 }
             }
 
             // Management link to go to the last page
             if (self::$aOptions['text_last_page']) {
                 if ($this->iCurrentPage < $this->iTotalPages - 1 && $this->iCurrentPage + self::$aOptions['range'] < $this->iTotalPages && $this->iShowItems < $this->iTotalPages) {
-                    $this->sHtmlOutput .= '<li><a href="' . $this->sPageName . $this->iTotalPages . '"><span aria-hidden="true">' . self::$aOptions['text_last_page'] . '</span></a></li>';
+                    $this->sHtmlOutput .= '<li><a href="' . $this->sPageRequestName . $this->iTotalPages . '"><span aria-hidden="true">' . self::$aOptions['text_last_page'] . '</span></a></li>';
                 }
             }
 

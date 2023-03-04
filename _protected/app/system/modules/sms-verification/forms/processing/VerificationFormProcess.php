@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2019-2021, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright      (c) 2019-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / SMS Verification / Form / Processing
  */
 
@@ -61,7 +61,7 @@ class VerificationFormProcess extends Form
      * @param int $iProfileId
      * @param UserCoreModel $oUserModel
      */
-    private function setPhoneNumberToDb($iProfileId, UserCoreModel $oUserModel)
+    private function setPhoneNumberToDb($iProfileId, UserCoreModel $oUserModel): void
     {
         $sPhoneNumber = $this->session->get(SmsVerificationCore::PHONE_NUMBER_SESS_NAME);
 
@@ -79,7 +79,7 @@ class VerificationFormProcess extends Form
      * @param int $iProfileId
      * @param UserCoreModel $oUserModel
      */
-    private function approveUser($iProfileId, UserCoreModel $oUserModel)
+    private function approveUser($iProfileId, UserCoreModel $oUserModel): void
     {
         $oUserModel->approve(
             $iProfileId,
@@ -89,13 +89,14 @@ class VerificationFormProcess extends Form
 
     /**
      * @param int $iProfileId
-     *
-     * @return bool
-     *
-     * @throws Framework\Mvc\Request\WrongRequestMethodException
      */
-    private function isVerificationCodeValid($iProfileId)
+    private function isVerificationCodeValid($iProfileId): bool
     {
-        return $this->httpRequest->post('verification_code') === Verification::getVerificationCode($iProfileId);
+        try {
+            return $this->httpRequest->post('verification_code') === Verification::getVerificationCode($iProfileId);
+        } catch (\Exception $oExcept) {
+            // If request isn't POST, return false
+            return false;
+        }
     }
 }

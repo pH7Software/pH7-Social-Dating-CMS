@@ -1,8 +1,8 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Comment / Form
  */
 
@@ -36,7 +36,7 @@ class CommentForm
         $oForm->addElement(new Token('comment'));
         $oForm->addElement(
             new Textarea(
-                t('Your comment:'),
+                t('Comment:'),
                 'comment',
                 [
                     'id' => 'str_com',
@@ -64,7 +64,15 @@ class CommentForm
             $oForm->addElement(new HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }
 
-        $oForm->addElement(new Button);
+        $oForm->addElement(
+            new Button(
+                t('Add'),
+                'submit',
+                [
+                    'icon' => 'check'
+                ]
+            )
+        );
         $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
     }

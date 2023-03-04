@@ -1,10 +1,12 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
+
+declare(strict_types=1);
 
 namespace PH7;
 
@@ -20,14 +22,12 @@ use stdClass;
 // Abstract Class
 class AdminCore extends UserCore
 {
-    const ROOT_PROFILE_ID = 1;
+    public const ROOT_PROFILE_ID = 1;
 
     /**
      * Check if an admin is authenticated.
-     *
-     * @return bool
      */
-    public static function auth()
+    public static function auth(): bool
     {
         $oSession = new Session;
         $bSessionIpCheck = ((bool)DbConfig::getSetting('isAdminSessionIpCheck')) ? $oSession->get('admin_ip') === Ip::get() : true;
@@ -43,7 +43,7 @@ class AdminCore extends UserCore
     /**
      * @return bool TRUE if the user is on the "admin" module, FALSE otherwise.
      */
-    public static function isAdminPanel()
+    public static function isAdminPanel(): bool
     {
         return Registry::getInstance()->module === PH7_ADMIN_MOD;
     }
@@ -52,10 +52,8 @@ class AdminCore extends UserCore
      * Determines if the ID is from Root Admin user (main admin).
      *
      * @param int $iProfileId
-     *
-     * @return bool
      */
-    public static function isRootProfileId($iProfileId)
+    public static function isRootProfileId($iProfileId): bool
     {
         return $iProfileId === static::ROOT_PROFILE_ID;
     }
@@ -65,7 +63,7 @@ class AdminCore extends UserCore
      *
      * @return bool TRUE if the IP is the one the site was installed, FALSE otherwise.
      */
-    public static function isAdminIp(AdminCoreModel $oAdminModel)
+    public static function isAdminIp(AdminCoreModel $oAdminModel): bool
     {
         return $oAdminModel->getRootIp() === Ip::get();
     }
@@ -77,15 +75,13 @@ class AdminCore extends UserCore
      * @param UserCoreModel $oAdminModel
      * @param Session $oSession
      * @param SecurityModel $oSecurityModel
-     *
-     * @return void
      */
     public function setAuth(
         stdClass $oAdminData,
         UserCoreModel $oAdminModel,
         Session $oSession,
         SecurityModel $oSecurityModel
-    ) {
+    ): void {
         // Regenerate the session ID to prevent session fixation attack
         $oSession->regenerateId();
 

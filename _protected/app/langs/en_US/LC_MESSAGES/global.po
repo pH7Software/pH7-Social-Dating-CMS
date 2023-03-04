@@ -1,20 +1,20 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: pH7CMS\n"
+"Project-Id-Version: pH7Builder\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-12 23:42+1300\n"
-"PO-Revision-Date: 2020-05-23 16:24+1000\n"
+"PO-Revision-Date: 2022-08-06 11:29+0930\n"
 "Last-Translator: Pierre-Henry Soria <hi@ph7.me>\n"
-"Language-Team: ¡pH7! - Pierre-Henry Soria <hello@ph7cms.com>\n"
+"Language-Team: ¡pH7! - Pierre-Henry Soria <hello@ph7builder.com>\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: t;nt:1,2\n"
 "X-Poedit-Basepath: ../../../../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.1.1\n"
 "X-Poedit-SearchPath-0: .\n"
 
 #: _protected/app/includes/classes/Cron.php:35
@@ -50,7 +50,7 @@ msgid "Hello World"
 msgstr ""
 
 #: _protected/app/modules/helloworld/controllers/HomeController.php:30
-msgid "This module is just an example to show how easy you can create modules with pH7CMS"
+msgid "This module is just an example to show how easy you can create modules with pH7Builder"
 msgstr ""
 
 #: _protected/app/modules/helloworld/controllers/HomeController.php:31
@@ -107,7 +107,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: _protected/app/system/core/assets/ajax/LikeCoreAjax.php:59
-msgid "Congrats! You are the first to like it"
+msgid "Congrats! You're the first one!"
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/RatingCoreAjax.php:60
@@ -147,11 +147,11 @@ msgid "Invalid Email Address!"
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:153
-msgid "This email already used by another member."
+msgid "Email already used. Yours? <a href=\"%0%\">Password forgotten?</a>"
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:155
-msgid "Oops! \"%0%\" is not associated with any %site_name% account."
+msgid "Oops! \"%0%\" is not associated with any %site_name% accounts."
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:158
@@ -209,7 +209,7 @@ msgid "Your name doesn't seem to be correct."
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:262
-msgid "Your must enter a valid url (e.g., http://ph7cms.com)."
+msgid "Your must enter a valid url (e.g. http://ph7builder.com)."
 msgstr ""
 
 #: _protected/app/system/core/assets/ajax/ValidateCoreAjax.php:284
@@ -761,7 +761,7 @@ msgid "No %software_name%'s news found."
 msgstr ""
 
 #: _protected/app/system/core/classes/design/XmlDesignCore.php:94
-msgid "It seems you don't have Internet (or pH7CMS feed news is temporarily unavailable). Some features on the dashboard won't be available."
+msgid "It seems you don't have Internet (or pH7Builder feed news is temporarily unavailable). Some features on the dashboard won't be available."
 msgstr ""
 
 #: _protected/app/system/core/forms/ChangePasswordCoreForm.php:32
@@ -885,7 +885,7 @@ msgid "Cancel"
 msgstr ""
 
 #: _protected/app/system/core/forms/CountryRestrictionCoreForm.php:34
-msgid "Countries to be showed on registration and search forms"
+msgid "List of countries"
 msgstr ""
 
 #: _protected/app/system/core/forms/CountryRestrictionCoreForm.php:44
@@ -905,11 +905,11 @@ msgid "Save"
 msgstr ""
 
 #: _protected/app/system/core/forms/CountryRestrictionCoreForm.php:73
-msgid "You can select/multi-select the amount of countries to be displayed on the registration and user search forms."
+msgid "You can select/multi-select the list of available countries <strong>to be shown on the registration and user search forms</strong>."
 msgstr ""
 
 #: _protected/app/system/core/forms/CountryRestrictionCoreForm.php:75
-msgid "You can select/multi-select the amount of countries to be displayed on the registration form."
+msgid "You can select/multi-select the list of available countries <strong>to be shown on the registration form</strong>."
 msgstr ""
 
 #: _protected/app/system/core/forms/CountryRestrictionCoreForm.php:79
@@ -1494,7 +1494,7 @@ msgstr ""
 
 #: _protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:29
 #: _protected/app/system/modules/lost-password/forms/processing/ForgotPasswordFormProcess.php:38
-msgid "Oops, this \"%0%\" is not associated with any %site_name% account. Please, make sure that you entered the e-mail address used in creating your account."
+msgid "Oops, this \"%0%\" is not associated with any %site_name% accounts. Make sure you entered the same email used when creating your account."
 msgstr ""
 
 #: _protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:33
@@ -1864,11 +1864,11 @@ msgid "🍰 A <a href=\"%0%\" target=\"_blank\" rel=\"noopener\">New Release</a>
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/MainController.php:334
-msgid "%software_name% <strong>%0%</strong> is available! Please update it today to keep your site safe and stable."
+msgid "%software_name% <strong>%0%</strong> is available! Update it today to keep your site safe and stable."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/MainController.php:336
-msgid "Read <a href=\"%0%\" target=\"_blank\" rel=\"noopener\">this</a> to learn how to upgrade your site, step-by-step. Once you follow the steps, run the upgrade wizard <a href=\"%1%\" target=\"_blank\" rel=\"noopener\">here</a>."
+msgid "👉 <a href=\"%0%\" target=\"_blank\" rel=\"noopener\">Run the upgrade wizard</a> 👈"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/ModeratorController.php:54
@@ -2273,7 +2273,7 @@ msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/ToolController.php:145
 #: _protected/app/system/modules/admin123/controllers/ToolController.php:151
-msgid "Data successfully dumped into file \"%0%\""
+msgid "Data dumped into backup file \"%0%\""
 msgstr ""
 
 #: _protected/app/system/modules/admin123/controllers/ToolController.php:168
@@ -3148,7 +3148,7 @@ msgid "Disable (NOT recommended)"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:80
-msgid "Are you proud of using <a href=\"%software_website%\">pH7CMS</a> brand? Are you proud to say your dating app has been made by the Leading Dating Software provider?"
+msgid "Are you proud of using <a href=\"%software_website%\">pH7Builder</a> brand? Are you proud to say your dating app has been made by the Leading Dating Software provider?"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:82
@@ -3232,7 +3232,7 @@ msgid "Require photo to be uploaded:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:113
-msgid "Require Members to upload a profile photo during sign up."
+msgid "Require members to upload a profile photo during sign up."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:113
@@ -3329,7 +3329,7 @@ msgid "Nudity Filter:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:137
-msgid "Photos will be automatically pending approval if there are detected as \"Nude/Adult Photos\""
+msgid "Photos will be automatically pending approval if there are detected as \"Nude/Adult\" photos"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:139
@@ -3394,19 +3394,19 @@ msgid "Maximum password length:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:173
-msgid "Login Attempt Protection"
+msgid "Protection - Failed Login Attempts"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:175
-msgid "Blocking login attempts exceeded for Users:"
+msgid "Blocking exceeded login attempts for Users:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:178
-msgid "Blocking login attempts exceeded for Affiliates:"
+msgid "Blocking exceeded login attempts for Affiliates:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:181
-msgid "Blocking login attempts exceeded for Admins:"
+msgid "Blocking exceeded login attempts for Admins:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:183
@@ -3485,7 +3485,7 @@ msgid "Yes (recommended for security reasons)"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:211
-msgid "This protection can cause problems for logged in users with dynamic IPs. Please disable if their IP changes frequently during the session."
+msgid "This protection can cause problems for logged in users with dynamic IPs. Please disable if their IP changes frequently during their session."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:214
@@ -3493,7 +3493,7 @@ msgid "Protect for Affiliates against session cookies hijacking:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:214
-msgid "This protection can cause problems for affiliates with dynamic IPs. Please disable if their IP changes frequently during the session."
+msgid "This protection can cause problems for affiliates with dynamic IPs. Please disable if their IP changes frequently during their session."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:217
@@ -3505,7 +3505,7 @@ msgid "Yes (highly recommended for security reasons)"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:217
-msgid "This protection can cause problems for admins with dynamic IPs. Please disable if their IP changes frequently during the session."
+msgid "This protection can cause problems for admins with dynamic IPs. Please disable if their IP changes frequently during their session."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:219
@@ -3551,7 +3551,7 @@ msgid "Registration delay for Users:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:227
-msgid "Number of minutes that has to pass before a user with the same IP address can register again. Enter \"0\" to disable."
+msgid "Number of minutes to wait before a user with the same IP address can register again. Enter \"0\" to disable."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:230
@@ -3559,7 +3559,7 @@ msgid "Registration delay for Affiliates:"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:230
-msgid "Number of minutes that has to pass before an affiliate with the same IP address can register again. Enter \"0\" to disable."
+msgid "Number of minutes to wait before an affiliate with the same IP address can register again. Enter \"0\" to disable."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:233
@@ -3718,14 +3718,6 @@ msgstr ""
 msgid "Documentation: <a href=\"%0%\">Change the default chat service by your real one</a>.<br /> <small>Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).</small>"
 msgstr ""
 
-#: _protected/app/system/modules/admin123/forms/SettingForm.php:311
-msgid "Chatroulette API:"
-msgstr ""
-
-#: _protected/app/system/modules/admin123/forms/SettingForm.php:311
-msgid "Documentation: <a href=\"%0%\">Change the default chatroulette provider by yours</a>.<br /> <small>Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).</small>"
-msgstr ""
-
 #: _protected/app/system/modules/admin123/forms/SettingForm.php:315
 msgid "Automation"
 msgstr ""
@@ -3818,7 +3810,7 @@ msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/processing/LoginFormProcess.php:84
 #: _repository/module/fake-admin-panel/forms/processing/LoginFormProcess.php:27
-msgid "\"Email\", \"Username\" or \"Password\" is Incorrect"
+msgid "\"Email\", \"Username\" or \"Password\" is incorrect"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/forms/processing/LoginFormProcess.php:87
@@ -4151,7 +4143,7 @@ msgid "Description of the affiliate's site(s)."
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:53
-msgid "Main website where the affiliate is the owner (e.g. http://ph7cms.com)"
+msgid "Main website where the affiliate is the owner (e.g. http://ph7builder.com)"
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:54
@@ -4321,7 +4313,7 @@ msgstr ""
 
 #: _protected/app/system/modules/affiliate/forms/processing/LoginFormProcess.php:64
 #: _protected/app/system/modules/user/forms/processing/LoginFormProcess.php:65
-msgid "Oops! \"%0%\" is not associated with any %site_name% account."
+msgid "Oops! \"%0%\" is not associated with any %site_name% accounts."
 msgstr ""
 
 #: _protected/app/system/modules/affiliate/forms/processing/LoginFormProcess.php:88
@@ -4355,7 +4347,7 @@ msgid "Please %0% to make money from today!"
 msgstr ""
 
 #: _protected/app/system/modules/api/config/Permission.php:27
-msgid "Your API key and/or the URL of your external application don't match with the one in your pH7CMS's configuration system!"
+msgid "Your API key and/or the URL of your external application don't match with the one in your pH7Builder's configuration system!"
 msgstr ""
 
 #: _protected/app/system/modules/api/controllers/UserController.php:73
@@ -4712,22 +4704,6 @@ msgstr ""
 msgid "Welcome to <span class=\"pH3\">Free Chat Room</span> on <span class=\"pH0\">%site_name%</span>!"
 msgstr ""
 
-#: _protected/app/system/modules/chatroulette/controllers/HomeController.php:19
-msgid "Free Video Room, Live Speed Dating ChatRoulette"
-msgstr ""
-
-#: _protected/app/system/modules/chatroulette/controllers/HomeController.php:20
-msgid "Free Live Speed Dating with the Chatroulette of %site_name%, Meet new people near you and make new friends, sex friends and free flirting, Free online dating site for singles without registration with Video Chat Rooms!"
-msgstr ""
-
-#: _protected/app/system/modules/chatroulette/controllers/HomeController.php:21
-msgid "chat, chatroulette, sex friend, single, speed dating, meet singles, dating, free dating, chat room, chat webcam"
-msgstr ""
-
-#: _protected/app/system/modules/chatroulette/controllers/HomeController.php:22
-msgid "Welcome to <span class=\"pH1\">Speed Dating ChatRoulette</span> of <span class=\"pH0\">%site_name%</span>!"
-msgstr ""
-
 #: _protected/app/system/modules/comment/assets/ajax/CommentAjax.php:71
 msgid "Your comment has been successfully removed!"
 msgstr ""
@@ -4782,12 +4758,8 @@ msgstr ""
 msgid "No comments yet 😥 <a class=\"bold\" href=\"%0%\">Add one</a>!"
 msgstr ""
 
-#: _protected/app/system/modules/comment/forms/CommentForm.php:30
-msgid "Your comment:"
-msgstr ""
-
 #: _protected/app/system/modules/comment/forms/EditCommentForm.php:34
-msgid "Edit your comment:"
+msgid "Your comment:"
 msgstr ""
 
 #: _protected/app/system/modules/comment/forms/processing/CommentFormProcess.php:37
@@ -4815,56 +4787,6 @@ msgstr ""
 msgid "Oops! You don't have the permission to update the comment."
 msgstr ""
 
-#: _protected/app/system/modules/connect/controllers/AdminController.php:15
-msgid "Config Universal Login - API Keys"
-msgstr ""
-
-#: _protected/app/system/modules/connect/controllers/MainController.php:37
-msgid "Welcome to Universal Login"
-msgstr ""
-
-#: _protected/app/system/modules/connect/controllers/MainController.php:39
-msgid "Universal Login, Use the service Facebook, Twitter, Outlook, Microsoft, Google, or other account to login on the social dating site %site_name%"
-msgstr ""
-
-#: _protected/app/system/modules/connect/controllers/MainController.php:40
-msgid "connect, login, Register, universal login, Facebook, Twitter, Outlook, Microsoft, Google, social network, dating site, email"
-msgstr ""
-
-#: _protected/app/system/modules/connect/controllers/MainController.php:48
-msgid "You are successfully registered!"
-msgstr ""
-
-#: _protected/app/system/modules/connect/controllers/MainController.php:49
-#: _protected/app/system/modules/connect/controllers/MainController.php:74
-msgid "Loading..."
-msgstr ""
-
-#: _protected/app/system/modules/connect/controllers/MainController.php:62
-msgid "Signing in..."
-msgstr ""
-
-#: _protected/app/system/modules/connect/controllers/MainController.php:111
-msgid "The %0% API is incorrect."
-msgstr ""
-
-#: _protected/app/system/modules/connect/inc/class/Api.php:86
-msgid "Hi %0%, welcome to %site_name%"
-msgstr ""
-
-#: _protected/app/system/modules/connect/inc/class/Facebook.php:114
-#: _protected/app/system/modules/connect/inc/class/Google.php:91
-#: _protected/app/system/modules/connect/inc/class/Microsoft.php:91
-#: _protected/app/system/modules/connect/inc/class/Twitter.php:100
-msgid "You have now been registered! %0%"
-msgstr ""
-
-#: _protected/app/system/modules/connect/inc/class/Facebook.php:127
-#: _protected/app/system/modules/connect/inc/class/Microsoft.php:103
-#: _protected/app/system/modules/connect/inc/class/Twitter.php:113
-msgid "Oops! An error has occurred. Please try again later."
-msgstr ""
-
 #: _protected/app/system/modules/contact/controllers/ContactController.php:23
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/accountbottom_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/infobottom_menu.inc.cpl.php:19
@@ -4874,7 +4796,6 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/userbottom_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/adminbottom_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/homebottom_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/connect_35f0edcc582717793663d723f2cb335c/base/mainbottom_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/cool-profile-page_24c864680ee1bf87a84b989b035a6c21/base/mainbottom_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/error_440d7b9b5d26e425e8c5f919d93855c4/base/httpbottom_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/mainbottom_menu.inc.cpl.php:19
@@ -5216,15 +5137,15 @@ msgid "Nothing found!"
 msgstr ""
 
 #: _protected/app/system/modules/forum/controllers/ForumController.php:78
-msgid "Discussion Forums - %site_name%"
+msgid "Discussion Board | %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/forum/controllers/ForumController.php:79
-msgid "Discussion Forums, Social Network Site - %site_name%"
+msgid "Community Discussion Board - %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/forum/controllers/ForumController.php:80
-msgid "Discussion Forums, Social Network Site"
+msgid "Discussions - %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/forum/controllers/ForumController.php:112
@@ -5586,7 +5507,7 @@ msgid "To:"
 msgstr ""
 
 #: _protected/app/system/modules/invite/forms/InviteForm.php:34
-msgid "Upto 10 email addresses separated by commas."
+msgid "Upto 10 email addresses separated by commas \",\""
 msgstr ""
 
 #: _protected/app/system/modules/invite/forms/InviteForm.php:39
@@ -5866,7 +5787,6 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/usertop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admintop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/hometop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/connect_35f0edcc582717793663d723f2cb335c/base/maintop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/cool-profile-page_24c864680ee1bf87a84b989b035a6c21/base/maintop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/error_440d7b9b5d26e425e8c5f919d93855c4/base/httptop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/maintop_menu.inc.cpl.php:19
@@ -5894,7 +5814,6 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/usertop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admintop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/hometop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/connect_35f0edcc582717793663d723f2cb335c/base/maintop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/cool-profile-page_24c864680ee1bf87a84b989b035a6c21/base/maintop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/error_440d7b9b5d26e425e8c5f919d93855c4/base/httptop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/main/msg.inc.cpl.php:19
@@ -5998,7 +5917,7 @@ msgid "Are you generous enough to thank the development of the software? <a href
 msgstr ""
 
 #: _protected/app/system/modules/milestone-celebration/inc/class/MessageGenerator.php:33
-msgid "Subscribe to <a href=\"%0%\">pH7CMS Patreon</a>."
+msgid "Subscribe to <a href=\"%0%\">pH7Builder Patreon</a>."
 msgstr ""
 
 #: _protected/app/system/modules/milestone-celebration/inc/class/MessageGenerator.php:34
@@ -6213,7 +6132,7 @@ msgid "Note Posts of %site_name% community"
 msgstr ""
 
 #: _protected/app/system/modules/note/controllers/MainController.php:66
-msgid "Community Blog. Let Users talk!"
+msgid "Notes. Let Users talk!"
 msgstr ""
 
 #: _protected/app/system/modules/note/controllers/MainController.php:83
@@ -6775,7 +6694,7 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/profiletop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/signuptop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/visitortop_menu.inc.cpl.php:19
-msgid "Will You Help pH7CMS?"
+msgid "Will You Help pH7Builder?"
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/controllers/MainController.php:94
@@ -6792,7 +6711,7 @@ msgid "Add a new Album"
 msgstr ""
 
 #: _protected/app/system/modules/picture/controllers/MainController.php:75
-msgid "Add some new Photos"
+msgid "Add some Photos"
 msgstr ""
 
 #: _protected/app/system/modules/picture/controllers/MainController.php:81
@@ -7078,7 +6997,7 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/signuptop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/visitortop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/video_f6fa126c5efdb5b591bfcfd28780c0a0/base/maintop_menu.inc.cpl.php:19
-msgid "Forum"
+msgid "Discussions"
 msgstr ""
 
 #: _protected/app/system/modules/report/forms/ReportForm.php:37
@@ -7105,12 +7024,13 @@ msgstr ""
 msgid "Note"
 msgstr ""
 
+#: _protected/app/system/modules/comment/forms/CommentForm.php:30
 #: _protected/app/system/modules/report/forms/ReportForm.php:38
 msgid "Comment:"
 msgstr ""
 
 #: _protected/app/system/modules/report/forms/ReportForm.php:38
-msgid "Please tell us why you want to report this content (scam, illegal content, adult content, etc.). Help us to eliminate scams, fake profiles, spam ... Thank you"
+msgid "Tell us why you want to report this content (scam, illegal content, adult content, etc.). Help us to eliminate scams, fake profiles, spam ... Thank you"
 msgstr ""
 
 #: _protected/app/system/modules/report/forms/ReportForm.php:39
@@ -7183,7 +7103,7 @@ msgid "Regards, %site_name%"
 msgstr ""
 
 #: _protected/app/system/modules/two-factor-auth/controllers/MainController.php:107
-msgid "Powered by \"pH7CMS.com\" software."
+msgid "Powered by \"pH7Builder.com\" software."
 msgstr ""
 
 #: _protected/app/system/modules/two-factor-auth/controllers/MainController.php:174
@@ -7191,7 +7111,7 @@ msgid "No module found!"
 msgstr ""
 
 #: _protected/app/system/modules/two-factor-auth/forms/VerificationCodeForm.php:34
-msgid "The digit code generated by your authenticator app:"
+msgid "The 6 digit code provided by your authenticator app:"
 msgstr ""
 
 #: _protected/app/system/modules/two-factor-auth/forms/VerificationCodeForm.php:37
@@ -7571,10 +7491,6 @@ msgstr ""
 msgid "Content:"
 msgstr ""
 
-#: _protected/app/system/modules/user/forms/JoinForm.php:42
-msgid "Universal Login"
-msgstr ""
-
 #: _protected/app/system/modules/user/forms/JoinForm.php:45
 msgid "Your First Name"
 msgstr ""
@@ -7760,7 +7676,7 @@ msgid "Presence:"
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/PrivacyForm.php:85
-msgid "Your status <div class=\"user_status right\" id=\"status_div\"></div>"
+msgid "Your status <div class=\"user_status right\" id=\"dropdown_setting\"></div>"
 msgstr ""
 
 #: _protected/app/system/modules/user/forms/SearchVisitorForm.php:22
@@ -9037,52 +8953,6 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/signuptop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/visitortop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/video_f6fa126c5efdb5b591bfcfd28780c0a0/base/maintop_menu.inc.cpl.php:19
-msgid "Chat Roulette"
-msgstr ""
-
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/accounttop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/infotop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/moduletop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/tooltop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/usertop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/hometop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/connect_35f0edcc582717793663d723f2cb335c/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/cool-profile-page_24c864680ee1bf87a84b989b035a6c21/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/error_440d7b9b5d26e425e8c5f919d93855c4/base/httptop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/ph7cms-helper_c718c7a0c6017242b5287b948f02581d/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/picture_10d1588a50ebee22e4a7c126111489e2/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/browsetop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/profiletop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/signuptop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/visitortop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/video_f6fa126c5efdb5b591bfcfd28780c0a0/base/maintop_menu.inc.cpl.php:19
-msgid "Chatroulette"
-msgstr ""
-
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/accounttop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/infotop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/moduletop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/tooltop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/usertop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/admintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/affiliate_2015fd8d22111a7fa42e3e226d13e530/base/hometop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/connect_35f0edcc582717793663d723f2cb335c/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/cool-profile-page_24c864680ee1bf87a84b989b035a6c21/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/error_440d7b9b5d26e425e8c5f919d93855c4/base/httptop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/mail_649aa988fa47703450dbc9b14cabaf59/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/ph7cms-helper_c718c7a0c6017242b5287b948f02581d/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/picture_10d1588a50ebee22e4a7c126111489e2/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/browsetop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/maintop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/profiletop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/signuptop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/visitortop_menu.inc.cpl.php:19
-#: _protected/data/cache/pH7tpl_compile/video_f6fa126c5efdb5b591bfcfd28780c0a0/base/maintop_menu.inc.cpl.php:19
 msgid "Photo Gallery"
 msgstr ""
 
@@ -9294,7 +9164,7 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/signuptop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/visitortop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/video_f6fa126c5efdb5b591bfcfd28780c0a0/base/maintop_menu.inc.cpl.php:19
-msgid "Forums"
+msgid "Discussions Board"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/accounttop_menu.inc.cpl.php:19
@@ -12776,7 +12646,7 @@ msgstr ""
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/signuptop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/user_92496e072f4a216a2e22292546425ec0/base/visitortop_menu.inc.cpl.php:19
 #: _protected/data/cache/pH7tpl_compile/video_f6fa126c5efdb5b591bfcfd28780c0a0/base/maintop_menu.inc.cpl.php:19
-msgid "Help pH7CMS by giving a nice review! Highly appreciated :)"
+msgid "Help pH7Builder by giving a nice review! Highly appreciated :)"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/accounttop_menu.inc.cpl.php:19
@@ -12895,7 +12765,7 @@ msgid "Switch back to Admin Panel"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/info/software.cpl.php:19
-msgid "Let others know about pH7CMS 🤗"
+msgid "Let others know about pH7Builder 🤗"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/info/software.cpl.php:19
@@ -12963,7 +12833,7 @@ msgid "Your logged IP is:"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/main/news.inc.cpl.php:19
-msgid "Latest <a href=\"%software_website%\" title=\"%software_name%\">pH7CMS Software</a>'s News"
+msgid "Latest <a href=\"%software_website%\" title=\"%software_name%\">pH7Builder Software</a>'s News"
 msgstr ""
 
 #: _protected/data/cache/pH7tpl_compile/admin123_4afd58a4d127bb00dfafed41a3407e91/base/main/news.inc.cpl.php:19
@@ -13658,7 +13528,7 @@ msgid "Invalid Log Option."
 msgstr ""
 
 #: _protected/framework/Geo/Map/Api.class.php:626
-msgid "You need to get a Google Maps API key to get it working. Please go to your pH7CMS Admin Panel -> Settings -> General -> API -> Google Maps API Key"
+msgid "You need to get a Google Maps API key to get it working. Please go to your pH7Builder Admin Panel -> Settings -> General -> API -> Google Maps API Key"
 msgstr ""
 
 #: _protected/framework/Geo/Map/Api.class.php:725
@@ -13693,19 +13563,19 @@ msgid "%element% is invalid."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/AlphaNumeric.php:16
-msgid "Error: %element% must be alphanumeric (letters A-Z, numbers 0-9, underscores and dashes)."
+msgid "%element% must be alphanumeric (letters A-Z, numbers 0-9, underscores and dashes)."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/BankAccount.php:39
-msgid "Error: Another account with the same bank account already exists. Please choose another one."
+msgid "Another account with the same bank account already exists. Please choose another one."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/BankAccount.php:42
-msgid "Error: This bank account is not supported by our payment system."
+msgid "This bank account is not supported by our payment system."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/BankAccount.php:45
-msgid "Error: Your bank account is incorrect."
+msgid "Your bank account is incorrect."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/BirthDate.php:27
@@ -13717,63 +13587,63 @@ msgid "The code of Captcha entered was incorrect. Please re-try."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/CEmail.php:28
-msgid "Error: Invalid email or already used by another user."
+msgid "Invalid email or already used by another user."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Date.php:14
-msgid "Error: %element% must contain a valid date."
+msgid "%element% must contain a valid date."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Email.php:14
-msgid "Error: %element% must be a valid email address."
+msgid "%element% must be a valid email address."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/HexColor.php:13
-msgid "Error: The HEX color value is invalid. Has to be \"#XXXXXX\" format.<br /> Maybe your browser is outdated or the version does not support \"color\" input type.<br /> Please retry with another browser such as Firefox, Chrome, Brave."
+msgid "The HEX color value is invalid. Has to be \"#XXXXXX\" format.<br /> Maybe your browser is outdated or the version does not support \"color\" input type.<br /> Please retry with another browser such as Firefox, Chrome, Brave."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Name.php:14
-msgid "Error: %element% must be a valid name. The name doesn't seem to be correct."
+msgid "%element% must be a valid name."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Numeric.php:14
-msgid "Error: %element% must be numeric."
+msgid "%element% must be numeric."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Password.php:25
-msgid "Error: Your password has to be from %0% to %1% characters long."
+msgid "Your password has to be from %0% to %1% characters long."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Phone.php:14
-msgid "Error: Your phone number is incorrect. Please enter full phone number with area code (e.g., +44768374890)."
+msgid "Your phone number is incorrect. Please enter full phone number with area code (e.g., +44768374890)."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/RegExp.php:21
-msgid "Error: %element% contains invalid characters. Here is the rule to be followed: \"%0%\""
+msgid "%element% contains invalid characters. Here is the rule to be followed: \"%0%\""
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Required.php:13
-msgid "Error: %element% is a required field."
+msgid "%element% is a required field."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Str.php:47
-msgid "Error: %element% must be at least %0% character(s) long."
+msgid "%element% must be at least %0% character(s) long."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Str.php:52
-msgid "Error: %element% cannot exceed %0% character(s)."
+msgid "%element% cannot exceed %0% character(s)."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Url.php:14
-msgid "Error: %element% must contain a URL (e.g., <a href=\"http://ph7cms.com\">http://ph7cms.com</a>)."
+msgid "%element% must contain a URL (e.g. <a href=\"http://ph7builder.com\">http://ph7builder.com</a>)."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/Username.php:33
-msgid "Error: Nickname has to be from %0% to %1% characters long, or it is not available, or already used by other user."
+msgid "Nickname has to be from %0% to %1% characters long, or it is not available, or already used by other user."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Engine/PFBC/Validation/YesNo.php:13
-msgid "Error: You must accept our %element%."
+msgid "You must accept our %element%."
 msgstr ""
 
 #: _protected/framework/Layout/Form/Form.class.php:27
@@ -13813,7 +13683,7 @@ msgid "Oops! It seems that you abuse of emails. Why emails are that important fo
 msgstr ""
 
 #: _protected/framework/Layout/Form/Form.class.php:118
-msgid "Oops! You have to wait %0% %1% before you can send another."
+msgid "Oops! Please wait %0% %1% before sending another one 😉"
 msgstr ""
 
 #: _protected/framework/Layout/Form/Form.class.php:130
@@ -14354,7 +14224,7 @@ msgid "Posted by"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/moderator/avatar.tpl:21
-msgid "No Profile Photos found for the moderation treatment."
+msgid "No Profile Photos found for moderation treatments."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/moderator/background.tpl:6
@@ -14368,7 +14238,7 @@ msgid "Wallpaper"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/moderator/background.tpl:23
-msgid "No Profile Backgrounds found for the moderation treatment."
+msgid "No Profile Backgrounds found for moderation treatments."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/moderator/picture.tpl:12
@@ -14381,19 +14251,19 @@ msgid "Posted on %0%"
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/moderator/picture.tpl:26
-msgid "No Pictures found for the moderation treatment."
+msgid "No Pictures found for moderation treatments."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/moderator/picturealbum.tpl:27
-msgid "No Picture Albums found for the moderation treatment."
+msgid "No Picture Albums found for moderation treatments."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/moderator/video.tpl:23
-msgid "No Videos found for the moderation treatment."
+msgid "No Videos found for moderation treatments."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/moderator/videoalbum.tpl:29
-msgid "No Video Albums found for the moderation treatment."
+msgid "No Video Albums found for moderation treatments."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/module/install.tpl;3
@@ -14941,7 +14811,7 @@ msgid "WARNING! Before sending your emails, it is preferable that you have a ded
 msgstr ""
 
 #: _protected/app/system/modules/note/views/base/tpl/admin/unmoderated.tpl:5
-msgid "No Notes found for the moderation treatment."
+msgid "No Notes found for moderation treatments."
 msgstr ""
 
 #: _protected/app/system/modules/note/views/base/tpl/home.inc.tpl:3
@@ -14985,7 +14855,7 @@ msgid "is a <a href=\"https://sourceforge.net/projects/ph7socialdating/\" title=
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/about.tpl:7
-msgid "pH7CMS is also sometimes called \"CMS-Dating\"."
+msgid "pH7Builder is also sometimes called \"CMS-Dating\"."
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/faq.tpl:4
@@ -15045,7 +14915,7 @@ msgid "By who this Web App has been developed?"
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/helpus.tpl:14
-msgid "A contribution to an open source project such as <a href=\"https://ph7cms.com/what-is-the-best-dating-software-provider/\">pH7CMS, Open Source Social/Dating Provider</a> looks great on your CV!"
+msgid "A contribution to an open source project such as <a href=\"https://ph7builder.com/what-is-the-best-dating-software-provider/\">pH7Builder, Open Source Social/Dating Provider</a> looks great on your CV!"
 msgstr ""
 
 #: _protected/app/system/modules/page/views/base/tpl/main/index.tpl:3
@@ -15229,19 +15099,19 @@ msgid "Staring Eye"
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/followgithubbox.tpl:3
-msgid "Follow <a href='%0%'>pH7CMS's Author</a> on Github!"
+msgid "Follow <a href='%0%'>pH7Builder's Author</a> on Github!"
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/forkgithubbox.tpl:3
-msgid "<a href=\"%0%\">Fork pH7CMS</a> on Github!"
+msgid "<a href=\"%0%\">Fork pH7Builder</a> on Github!"
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/githubbox.tpl:3
-msgid "<a href=\"%0%\">Star pH7CMS</a> on Github?"
+msgid "<a href=\"%0%\">Star pH7Builder</a> on Github?"
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/githubbox.tpl:10
-msgid "Will you do it? Awesome! 😊️"
+msgid "😊️ Will you do it? 👀"
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/reviewbox.tpl:3
@@ -15249,7 +15119,7 @@ msgid "Are you Feeling Generous Enough? Will you <a href=\"%0%\">Give a Nice Rev
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/reviewbox.tpl:10
-msgid "Really appreciate it! 😊"
+msgid "Really appreciate! 😊"
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/reviewboxrecall.tpl:3
@@ -15273,7 +15143,7 @@ msgid "Don't forget to 'Star' the software you ❤"
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/stargithubbox.tpl:3
-msgid "<a href=\"%0%\">Star pH7CMS</a> on Github!"
+msgid "<a href=\"%0%\">Star pH7Builder</a> on Github!"
 msgstr ""
 
 #: _protected/app/system/modules/ph7cms-helper/views/base/tpl/main/upsetbox.tpl:6
@@ -15343,7 +15213,7 @@ msgid "Modified %0%"
 msgstr ""
 
 #: _protected/app/system/modules/profile-faker/controllers/GeneratorController.php:15
-msgid "Generate Fake Members (without profile photo)"
+msgid "Generate Members (without profile photo)"
 msgstr ""
 
 #: _protected/app/system/modules/profile-faker/controllers/GeneratorController.php:21
@@ -15564,11 +15434,11 @@ msgid "Remove the profile photo?"
 msgstr ""
 
 #: _protected/app/system/modules/user/views/base/tpl/setting/avatar.tpl:12
-msgid "Warning:"
+msgid "Careful"
 msgstr ""
 
 #: _protected/app/system/modules/user/views/base/tpl/setting/avatar.tpl:12
-msgid "Your profile photo must contain a photo of yourself under penalty of banishment of your account!"
+msgid "Your profile photo must be a photo of yourself."
 msgstr ""
 
 #: _protected/app/system/modules/user/views/base/tpl/setting/avatar.tpl:18
@@ -15665,17 +15535,16 @@ msgid "The Latest News"
 msgstr ""
 
 #: _protected/app/system/modules/video/views/base/tpl/admin/config.tpl:5
-msgid "You need a Google API key to retrieve the Youtube video infos."
+msgid "You need a Google API key to retrieve the YouTube video info."
 msgstr ""
 
 #: _protected/app/system/modules/video/views/base/tpl/admin/config.tpl:6
-msgid "You can get one <a href=\"%0%\">here</a>. Enable YouTube Data API (which is disabled by default). Finally create an API key. Select \"Api Key\" for the Credential type, then select \"Server Key\", then you will get your API key to paste in this form. "
+msgid "You can get one <a href=\"%0%\">here</a>. Enable YouTube Data API v3 (disabled by default). Finally create an API key. Select \"Api Key\" for the Credential type, then select \"Server Key\", then you will get your API key to paste in this form. "
 msgstr ""
 
 #: _protected/app/system/modules/video/views/base/tpl/main/album.tpl:27
 msgid "Add new videos"
 msgstr ""
-
 
 #: _protected/app/system/modules/xml/views/base/tpl/blog.rss.xml.tpl:7
 #: _protected/app/system/modules/xml/views/base/tpl/comment.inc.rss.xml.tpl:7
@@ -15728,10 +15597,6 @@ msgstr ""
 
 #: _protected/app/system/modules/xml/views/base/tpl/links.xml.tpl:19
 msgid "Videos Movie"
-msgstr ""
-
-#: _protected/app/system/modules/xml/views/base/tpl/links.xml.tpl:27
-msgid "Free Chatroulette Speed Dating"
 msgstr ""
 
 #: _protected/app/system/modules/xml/views/base/tpl/links.xml.tpl:43
@@ -15829,7 +15694,7 @@ msgid "My email address has changed."
 msgstr ""
 
 #: _protected/app/system/modules/admin123/views/base/tpl/main/news.inc.tpl:2
-msgid "Latest <a href=\"%software_website%\" title=\"%software_name%\">pH7CMS Software</a>'s News"
+msgid "Latest <a href=\"%software_website%\" title=\"%software_name%\">pH7Builder Software</a>'s News"
 msgstr ""
 
 #: _protected/app/system/modules/two-factor-auth/controllers/MainController.php:121
