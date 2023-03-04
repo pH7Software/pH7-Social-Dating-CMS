@@ -56,36 +56,21 @@ class Various
     /**
      * Convert mod to table.
      *
-     * @param string $Mod
+     * @param string $sMod
      *
      * @return string The table name if the specified module was valid.
      *
      * @throws PH7InvalidArgumentException If the table is not valid.
      */
-    public static function convertModToTable(string $Mod): string
+    public static function convertModToTable(string $sMod): string
     {
-        switch ($Mod) {
-            case 'user':
-                $sTable = DbTableName::MEMBER;
-                break;
-
-            case 'affiliate':
-                $sTable = DbTableName::AFFILIATE;
-                break;
-
-            case 'newsletter':
-                $sTable = DbTableName::SUBSCRIBER;
-                break;
-
-            case PH7_ADMIN_MOD:
-                $sTable = DbTableName::ADMIN;
-                break;
-
-            default:
-                static::launchErr($Mod);
-        }
-
-        return $sTable;
+        return match ($sMod) {
+            'user' => DbTableName::MEMBER,
+            'affiliate' => DbTableName::AFFILIATE,
+            'newsletter' => DbTableName::SUBSCRIBER,
+            PH7_ADMIN_MOD => DbTableName::ADMIN,
+            default => static::launchErr($sMod),
+        };
     }
 
     /**
