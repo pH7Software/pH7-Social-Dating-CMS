@@ -27,10 +27,10 @@ With **[pH7Builder](https://sourceforge.net/projects/ph7socialdating/files/lates
 Why your business has to be under the mercy of others?
 
 Unlike cloud or SaaS solutions, by choosing pH7Builder, you have the complete control of your website, database and your users!
-You get and own all data and files, hosted to your own server (the one you choose) ✌️
+You get and own all data and files hosted to your own server (the one you choose) ✌️
 
 
-👉 Convinced by the software? ☕️ You could help by **[offering me a coffee](https://www.buymeacoffee.com/ph7cms)**? - and boost the software development at the same time! 🚀🤗
+👉 Convinced by the software? ☕️ You could boost the software development by **[offering a coffee](https://www.buymeacoffee.com/ph7cms)**! 🚀🤗
 
 [![Ko Fi - Offer Me A Flat White](static/img/kofi-logo.png)](https://ko-fi.com/phenry) [![Buy Me A Coffee](static/img/buymeacoffee-logo.svg)](https://www.buymeacoffee.com/ph7cms)
 
