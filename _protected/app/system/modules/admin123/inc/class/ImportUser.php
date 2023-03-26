@@ -263,6 +263,8 @@ class ImportUser extends Core
 
             while (false !== ($aUserData = fgetcsv($this->rHandler, 0, $sDelimiter, $sEnclosure))) {
                 $sEmail = trim($aUserData[$this->aTmpData['email']]);
+
+                // Make sure the email is valid and doesn't exist yet in the database
                 if ($oValidate->email($sEmail) && !$oExistsModel->email($sEmail)) {
                     $this->setData($iRow);
                     $oUserModel->add(escape($this->aData[$iRow], true));

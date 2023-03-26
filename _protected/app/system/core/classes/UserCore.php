@@ -424,7 +424,7 @@ class UserCore
     }
 
     /**
-     * Finds a free username in our database to use for Facebook connect.
+     * Finds a free username in the database to use (e.g. for FB connect or CSV import).
      *
      * @param string $sNickname
      * @param string $sFirstName
@@ -453,6 +453,7 @@ class UserCore
         foreach ($aUsernameList as $sUsername) {
             $sUsername = substr($sUsername, 0, $iMaxLen);
 
+            // Check if username is valid and doesn't exist in the database
             if ((new Validate)->username($sUsername)) {
                 return $sUsername;
             }

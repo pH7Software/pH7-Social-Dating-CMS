@@ -216,7 +216,7 @@ class Validate
     }
 
     /**
-     * Validate Username.
+     * Validate username pattern and check if username is unique (doesn't already exist).
      *
      * @param string $sUsername
      * @param int $iMin Default 3
@@ -230,9 +230,9 @@ class Validate
         $sUsername = trim($sUsername);
 
         /**
-         * Do quicker check for admin profiles,
-         * because they don't have profile page URL (www.mysite.com/@<username>)
-         * and don't need to check banned usernames for them.
+         * Do quicker check for admin usernames.
+         * Admin usernames don't have URL pages (www.mysite.com/@<USERNAME>), so no need to check if any file names conflict with the username
+         * and don't need to check for banned usernames either.
          */
         if ($sTable === DbTableName::ADMIN) {
             return preg_match('#^' . PH7_USERNAME_PATTERN . '{' . $iMin . ',' . $iMax . '}$#', $sUsername) &&
