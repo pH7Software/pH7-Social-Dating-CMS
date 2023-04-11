@@ -68,21 +68,21 @@ class Uri
      * @param string $sModule
      * @param string $sController
      * @param string $sAction
-     * @param string|int|null $sVars Default NULL
+     * @param string|int|null $mVars Default NULL
      * @param bool $bFullClean Default TRUE
      *
      * @return string
      *
      * @throws IOException
      */
-    public static function get(string $sModule, string $sController, string $sAction, $sVars = null, bool $bFullClean = true): string
+    public static function get(string $sModule, string $sController, string $sAction, $mVars = null, bool $bFullClean = true): string
     {
         self::$bFullClean = $bFullClean;
 
         // Caching URI function will speed up the website ~500ms faster (up to 1.4s!)
         $oCache = (new Cache)->start(
             self::CACHE_GROUP,
-            'geturi' . $sModule . $sController . $sAction . $sVars,
+            'geturi' . $sModule . $sController . $sAction . $mVars,
             self::CACHE_TIME
         );
         $oCache->enabled(static::URI_CACHE_ENABLED);
@@ -93,7 +93,7 @@ class Uri
                     'module' => $sModule,
                     'controller' => $sController,
                     'action' => $sAction,
-                    'vars' => $sVars
+                    'vars' => $mVars
                 ]
             );
             $oCache->put($sUrl);
