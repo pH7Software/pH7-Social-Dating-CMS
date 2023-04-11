@@ -25,34 +25,21 @@ class Url
 
     /**
      * URL-encodes string.
-     *
-     * @param string $sUrl
-     *
-     * @return string
      */
-    public static function encode($sUrl)
+    public static function encode(string $sUrl): string
     {
         return urlencode($sUrl);
     }
 
     /**
      * Decodes URL-encoded string.
-     *
-     * @param string $sUrl
-     *
-     * @return string
      */
-    public static function decode($sUrl)
+    public static function decode(string $sUrl): string
     {
         return urldecode($sUrl);
     }
 
-    /**
-     * @param string $sUrl
-     *
-     * @return string
-     */
-    public static function clean($sUrl)
+    public static function clean(string $sUrl): string
     {
         return str_replace([' ', '&'], ['%20', '&amp;'], $sUrl);
     }
@@ -62,14 +49,9 @@ class Url
      *
      * N.B.: We recreate our own function with default parameters (because the default parameters of PHP we do not like;))
      *
-     * @param array $aParams
-     * @param string $sNumericPrefix
-     * @param string $sArgSeparator
-     * @param int $iEncType
-     *
      * @return string Returns a URL-encoded string.
      */
-    public static function httpBuildQuery(array $aParams, $sNumericPrefix = null, $sArgSeparator = '&amp;', $iEncType = PHP_QUERY_RFC1738)
+    public static function httpBuildQuery(array $aParams, string $sNumericPrefix = '', string $sArgSeparator = '&amp;', int $iEncType = PHP_QUERY_RFC1738): string
     {
         return http_build_query($aParams, $sNumericPrefix, $sArgSeparator, $iEncType);
     }
