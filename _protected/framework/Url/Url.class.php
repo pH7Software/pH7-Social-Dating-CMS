@@ -51,7 +51,7 @@ class Url
      *
      * @return string Returns a URL-encoded string.
      */
-    public static function httpBuildQuery(array $aParams, string $sNumericPrefix = '', string $sArgSeparator = '&amp;', int $iEncType = PHP_QUERY_RFC1738): string
+    public static function httpBuildQuery(array $aParams, string $sNumericPrefix = '', string|null $sArgSeparator = '&amp;', int $iEncType = PHP_QUERY_RFC1738): string
     {
         return http_build_query($aParams, $sNumericPrefix, $sArgSeparator, $iEncType);
     }
