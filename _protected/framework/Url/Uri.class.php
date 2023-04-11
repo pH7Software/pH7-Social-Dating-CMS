@@ -1,8 +1,5 @@
 <?php
 /**
- * @title            Uri Class
- * @desc             URI URL methods.
- *
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright        (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
@@ -21,11 +18,9 @@ use PH7\Framework\Pattern\Singleton;
  */
 class Uri
 {
-    /** @var array $aFragments */
-    private static $aFragments;
+    private static array $aFragments;
 
-    /** @var string $sUri */
-    private $sUri;
+    private string $sUri;
 
     /** Import the Singleton trait */
     use Singleton;
@@ -46,10 +41,8 @@ class Uri
 
     /**
      * Counting all fragments of a URL.
-     *
-     * @return int
      */
-    public function totalFragment()
+    public function totalFragment(): int
     {
         return count(self::$aFragments);
     }
@@ -61,7 +54,7 @@ class Uri
      *
      * @return bool|string Returns FALSE if key is not found, otherwise STRING of the URI fragment if success.
      */
-    public function fragment($iKey)
+    public function fragment(int $iKey): bool|string
     {
         if (array_key_exists($iKey, self::$aFragments)) {
             return self::$aFragments[$iKey];
@@ -77,7 +70,7 @@ class Uri
      *
      * @return array Returns the slice segments URI.
      */
-    public function segments($iOffset)
+    public function segments(int $iOffset): array
     {
         return array_slice(self::$aFragments, $iOffset);
     }
