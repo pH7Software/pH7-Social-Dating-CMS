@@ -87,7 +87,7 @@ class ProtectedFileForm
     /**
      * Get the full file path and prevent path traversal and null byte attacks.
      *
-     * @return bool|string The canonicalized absolute path, or FALSE on failure.
+     * @return string|bool The canonicalized absolute path, or FALSE on failure.
      */
     private static function getRealPath(): string|bool
     {
