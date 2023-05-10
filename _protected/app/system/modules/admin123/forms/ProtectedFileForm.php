@@ -20,10 +20,10 @@ use RuntimeException;
 
 class ProtectedFileForm
 {
-    const TERMS_FILENAME = 'terms.tpl';
-    const PRIVACY_FILENAME = 'privacy.tpl';
+    private const TERMS_FILENAME = 'terms.tpl';
+    private const PRIVACY_FILENAME = 'privacy.tpl';
 
-    public static function display()
+    public static function display(): void
     {
         if (isset($_POST['submit_file'])) {
             if (\PFBC\Form::isValid($_POST['submit_file'])) {
@@ -75,12 +75,7 @@ class ProtectedFileForm
         }
     }
 
-    /**
-     * @param string $sFullPath
-     *
-     * @return bool
-     */
-    private static function isLegalPage($sFullPath)
+    private static function isLegalPage(string $sFullPath): bool
     {
         $cIsFound = static function ($sPageFilename) use ($sFullPath) {
             return strpos($sFullPath, $sPageFilename) !== false;
@@ -94,7 +89,7 @@ class ProtectedFileForm
      *
      * @return bool|string The canonicalized absolute path, or FALSE on failure.
      */
-    private static function getRealPath()
+    private static function getRealPath(): string|bool
     {
         $sFullPath = PH7_PATH_PROTECTED . $_GET['file'];
         $mRealProtectedPath = realpath(PH7_PATH_PROTECTED);
@@ -109,7 +104,7 @@ class ProtectedFileForm
         return $mRealFullPath;
     }
 
-    private static function showErrorMessage(RuntimeException $oExcept)
+    private static function showErrorMessage(RuntimeException $oExcept): void
     {
         printf('<p class="col-md-6 col-md-offset-4 red">%s</p>', $oExcept->getMessage());
     }
