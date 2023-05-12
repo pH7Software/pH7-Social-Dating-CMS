@@ -64,6 +64,7 @@ class UserController extends MainController
                 'zip_code',
                 'description'
             ];
+
             if (!$this->areFieldsExist($aData, $aRequiredFields)) {
                 $aResults = [
                     'status' => 'failed',
@@ -249,7 +250,7 @@ class UserController extends MainController
      *
      * Delete a user
      */
-    public function deleteUser($iProfileId): void
+    public function deleteUser(int $iProfileId): void
     {
         if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_DELETE) {
             $this->oRest->response('', StatusCode::NOT_ACCEPTABLE);
