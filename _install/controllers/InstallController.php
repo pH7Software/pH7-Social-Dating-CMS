@@ -593,6 +593,7 @@ class InstallController extends Controller
         if (is_file($sConstantsPath)) {
             @require_once $sConstantsPath;
 
+            // make sure we don't send multiple emails, in case the page gets refreshed
             if ($this->canEmailBeSent()) {
                 $this->sendWelcomeEmail();
 
@@ -634,7 +635,8 @@ class InstallController extends Controller
     }
 
     /**
-     * Verify if the email can be sent (has all necessary global variables).
+     * Verify if the email can be sent (has all necessary global variables)
+     * to assure only one email is send and not multiple ones.
      *
      * @return bool
      */
