@@ -6,8 +6,6 @@
  * @package          PH7 / Framework / Layout / Html
  */
 
-declare(strict_types=1);
-
 namespace PH7\Framework\Layout\Html;
 
 defined('PH7') or exit('Restricted access');
@@ -309,12 +307,12 @@ class Design
      * @param string $sMod
      * @param string $sCtrl
      * @param string $sAct
-     * @param int|string $mId Content ID
-     * @param string $sClass Add a CSS class
+     * @param string $sId Content ID
+     * @param string|null $sClass Add a CSS class
      *
      * @return void HTML output.
      */
-    public function popupLinkConfirm($sLabel, $sMod, $sCtrl, $sAct, $mId, $sClass = null)
+    public function popupLinkConfirm(string $sLabel, string $sMod, string $sCtrl, string $sAct, string $sId, ?string $sClass = null): void
     {
         $sClass = $sClass !== null ? ' class="' . $sClass . '" ' : ' ';
 
