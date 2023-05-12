@@ -246,8 +246,6 @@ class UserController extends MainController
     }
 
     /**
-     * @param int $iProfileId
-     *
      * Delete a user
      */
     public function deleteUser(int $iProfileId): void
