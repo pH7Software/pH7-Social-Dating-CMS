@@ -21,8 +21,7 @@ class MainController extends Controller
 {
     use Api; // Import the Api Trait
 
-    /** @var Rest */
-    protected $oRest;
+    protected Rest $oRest;
 
     public function __construct()
     {
@@ -34,10 +33,8 @@ class MainController extends Controller
 
     /**
      * Test if the API is responding.
-     *
-     * @return void
      */
-    public function ping()
+    public function ping(): void
     {
         if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_GET) {
             $this->oRest->response('', StatusCode::NOT_ACCEPTABLE);
@@ -49,10 +46,8 @@ class MainController extends Controller
     /**
      * Gives software information
      * (such as software name, website URL, version number, version name, etc).
-     *
-     * @return void
      */
-    public function info()
+    public function info(): void
     {
         if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_GET) {
             $this->oRest->response('', StatusCode::NOT_ACCEPTABLE);
@@ -75,7 +70,7 @@ class MainController extends Controller
         }
     }
 
-    private function setCorsHeaders()
+    private function setCorsHeaders(): void
     {
         $oCors = new AllowCors();
         $oCors->init();
