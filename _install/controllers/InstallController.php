@@ -1,7 +1,7 @@
 <?php
 /**
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright        (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Install / Controller
  */
@@ -771,6 +771,9 @@ class InstallController extends Controller
         }
     }
 
+    /**
+     * Check if the user has ticked the license agreement.
+     */
     private function isAgreementsAgreed(): bool
     {
         return
@@ -789,7 +792,7 @@ class InstallController extends Controller
     }
 
     /**
-     * Require & Initialize the classes.
+     * Include and Initialize the needed PHP classes.
      */
     private function initializeClasses(): void
     {
