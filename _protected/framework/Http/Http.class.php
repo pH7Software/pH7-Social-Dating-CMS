@@ -39,7 +39,6 @@ class Http
         303 => '303 See Other',
         304 => '304 Not Modified',
         305 => '305 Use Proxy',
-        306 => '306 Switch Proxy',
         307 => '307 Temporary Redirect',
         400 => '400 Bad Request',
         401 => '401 Unauthorized',
