@@ -29,6 +29,8 @@ use stdClass;
 // Abstract Class
 class UserCoreModel extends Model
 {
+    public const DATETIME_FORMAT = 'Y-m-d H:i:s';
+
     /**
      * Cache lifetime set to 1 week.
      */
@@ -45,8 +47,6 @@ class UserCoreModel extends Model
 
     const VISITOR_GROUP = 1;
     const PENDING_GROUP = 9;
-
-    const DATETIME_FORMAT = 'Y-m-d H:i:s';
 
     const QUERY_SEARCH_USER = 'SELECT %s FROM %s AS m LEFT JOIN %s AS p USING(profileId) LEFT JOIN %s AS i USING(profileId)';
 
