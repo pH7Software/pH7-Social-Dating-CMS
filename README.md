@@ -61,7 +61,9 @@ You get and own all data and files hosted to your own server (the one you choose
 
 It is designed with the **KISS** principle in mind, and the whole source code can be read and understood in minutes. For better flexibility, the software uses **PDO** (PHP Data Objects) abstraction which allows the choice of the database. The principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (no duplicate code) and **YAGNI** principle to avoid unused code/not needed functionality in the software.
 
-This Free and Open Source **Social Dating Site Builder** wants to be low resource-intensive, powerful, stable and secure. The software also comes with 40+ system modules and is based on **[pH7Framework](https://github.com/pH7Software/pH7-Social-Dating-CMS/tree/17.x/_protected/framework#ph7framework)** *(written specifically for this project)* that has over 52 packages.
+This Free and Open Source **Social Dating Site Builder** aims to be low resource-intensive, powerful, stable and secure.
+
+Based on **[pH7Framework](https://github.com/pH7Software/pH7-Social-Dating-CMS/tree/18.x/_protected/framework#ph7framework)**, a framework written specifically for this project, the CMS also comes with over 40 system modules ready to be used.
 
 *To summarize, **pH7Builder** gives you **the perfect ingredients** to create the **best online dating service** or **social networking** website on the World Wide Web!*
 
