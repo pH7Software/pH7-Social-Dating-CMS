@@ -63,7 +63,7 @@ It is designed with the **KISS** principle in mind, and the whole source code ca
 
 This Free and Open Source **Social Dating Site Builder** aims to be low resource-intensive, powerful, stable and secure.
 
-Based on **[pH7Framework](https://github.com/pH7Software/pH7-Social-Dating-CMS/tree/18.x/_protected/framework#ph7framework)**, a framework written specifically for this project, the CMS also comes with over 40 system modules ready to be used.
+Based on **[pH7Framework](https://github.com/pH7Software/pH7-Social-Dating-CMS/tree/18.x/_protected/framework#ph7framework)**, a framework written specifically for this project, the CMS also comes with 40 system modules ready to be used.
 
 *To summarize, **pH7Builder** gives you **the perfect ingredients** to create the **best online dating service** or **social networking** website on the World Wide Web!*
 
