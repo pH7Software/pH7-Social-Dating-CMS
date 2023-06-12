@@ -18,6 +18,8 @@ use PH7\Framework\Translate\Lang;
 // Abstract Class
 class AffiliateCoreModel extends AdminCoreModel
 {
+    private const DATETIME_FORMAT = 'Y-m-d H:i:s';
+
     /**
      * Update Affiliate Commission.
      *
@@ -72,7 +74,7 @@ class AffiliateCoreModel extends AdminCoreModel
      */
     public function add(array $aData)
     {
-        $sCurrentDate = (new CDateTime)->get()->dateTime('Y-m-d H:i:s');
+        $sCurrentDate = (new CDateTime)->get()->dateTime(self::DATETIME_FORMAT);
 
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::AFFILIATE) . '(email, username, password, firstName, lastName, sex, birthDate, bankAccount, lang, ip, joinDate, lastActivity)
         VALUES (:email, :username, :password, :firstName, :lastName, :sex, :birthDate, :bankAccount, :lang, :ip, :joinDate, :lastActivity)');
