@@ -36,6 +36,8 @@ try {
 }
 
 require __DIR__ . '/_constants.php';
+require PH7_PATH_APP . 'configs/constants.php';
+require PH7_PATH_APP . 'includes/helpers/misc.php';
 require PH7_PATH_APP . 'Bootstrap.php';
 
 $oApp = Bootstrap::getInstance();
