@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / App / System / Module / Xml / Controller
  */
@@ -28,7 +28,7 @@ class SitemapController extends MainController implements XmlControllable
     {
         $this->sTitle = t('Site Map');
         $this->view->page_title = $this->sTitle;
-        $this->view->meta_description = t('Map of Website, Free Online Social Dating Website with Video Chat Rooms, Meet Single People with %site_name%');
+        $this->view->meta_description = t('Sitemap - Social Dating Service. Meet Single People with %site_name%');
         $this->view->h1_title = $this->sTitle;
 
         /*** Get the links ***/
