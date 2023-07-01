@@ -80,7 +80,7 @@
     "robthree/twofactorauth": "^1.6",
     "stripe/stripe-php": "^5.9",
     "symfony/console": "^5.4",
-    "symfony/mailer": "^5.4",
+    "symfony/mailer": "^6.0",
     "twbs/bootstrap": "^3.4",
     "twilio/sdk": "^6.44"
   },
