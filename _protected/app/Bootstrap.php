@@ -27,10 +27,6 @@ use PH7\Framework\Registry\Registry;
 use PH7\Framework\Server\Environment as Env;
 use PH7\Framework\Server\Server;
 
-/*** Begin Loading Files ***/
-require 'configs/constants.php';
-require 'includes/helpers/misc.php';
-
 class Bootstrap
 {
     private static ?self $oInstance = null;
