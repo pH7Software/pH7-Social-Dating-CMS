@@ -37,7 +37,7 @@
   ],
   "config": {
     "platform": {
-      "php": "8.0"
+      "php": "8.0.2"
     },
     "vendor-dir": "_protected/vendor",
     "bin-dir": "_protected/vendor/bin",
@@ -80,7 +80,7 @@
     "robthree/twofactorauth": "^1.6",
     "stripe/stripe-php": "^5.9",
     "symfony/console": "^5.4",
-    "symfony/mailer": "^6.0",
+    "symfony/mailer": "~6.0.19",
     "twbs/bootstrap": "^3.4",
     "twilio/sdk": "^6.44"
   },
