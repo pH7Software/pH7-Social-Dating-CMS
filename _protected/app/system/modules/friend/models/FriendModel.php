@@ -36,14 +36,12 @@ class FriendModel extends FriendCoreModel
         $iProfileId = (int)$iProfileId;
         $iFriendId = (int)$iFriendId;
 
-        // Check if the two existing ID
-        $oExistsModel = new ExistCoreModel;
-
-        if ($oExistsModel->id($iProfileId, DbTableName::MEMBER) && $oExistsModel->id($iFriendId, DbTableName::MEMBER)) {
+        if ($this->areProfileAndFriendExist($iProfileId, $iFriendI)) {
             if ($this->inList($iProfileId, $iFriendId) === false) {
-                $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix(DbTableName::MEMBER_FRIEND) .
-                    '(profileId, friendId, pending, requestDate) VALUES (:profileId, :friendId, :pending, :requestDate)');
+                $sSqlQuery = 'INSERT INTO' . Db::prefix(DbTableName::MEMBER_FRIEND) .
+                    '(profileId, friendId, pending, requestDate) VALUES (:profileId, :friendId, :pending, :requestDate)';
 
+                $rStmt = Db::getInstance()->prepare($sSqlQuery);
                 $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
                 $rStmt->bindValue(':friendId', $iFriendId, PDO::PARAM_INT);
                 $rStmt->bindValue(':pending', $iPending, PDO::PARAM_INT);
@@ -108,5 +106,13 @@ class FriendModel extends FriendCoreModel
         $rStmt->bindValue(':friendId', $iFriendId, PDO::PARAM_INT);
 
         return $rStmt->execute();
+    }
+
+    private function areProfileAndFriendExist(int $iProfileId, int $iFriendId): bool
+    {
+        $sTableName = DbTableName::MEMBER;
+
+        $oExistsModel = new ExistCoreModel;
+        return $oExistsModel->id($iProfileId, $sTableName) && $oExistsModel->id($iFriendId, $sTableName);
     }
 }
