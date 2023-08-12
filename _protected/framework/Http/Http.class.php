@@ -129,8 +129,7 @@ class Http
      */
     public static function setHeaders($mHeaders)
     {
-        // Header already sent
-        if (static::isSent()) {
+        if (static::areHeadersSent()) {
             throw new Exception('Headers were already sent.');
         }
 
@@ -301,7 +300,7 @@ class Http
      *
      * @return bool TRUE if the headers were sent, FALSE if not.
      */
-    private static function isSent(): bool
+    private static function areHeadersSent(): bool
     {
         return headers_sent();
     }
