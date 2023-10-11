@@ -79,7 +79,7 @@ final class Security
     public static function pwdNeedsRehash($sPassword, $sHash)
     {
         if (password_needs_rehash($sHash, self::PWD_ALGORITHM, self::$aPwdOptions)) {
-            return self::hashPwd($sPassword);
+            return true;
         }
 
         return false;
