@@ -312,7 +312,7 @@ function _cache-permissions() {
 function _save-project-to-repo() {
     git remote rm  $1 # Remove remote name if it already exists
     git remote add $1 $2
-    git push
+    git push $1
 }
 
 # Save repo on Internet Archive
