@@ -37,7 +37,7 @@
   ],
   "config": {
     "platform": {
-      "php": "8.0"
+      "php": "8.0.2"
     },
     "vendor-dir": "_protected/vendor",
     "bin-dir": "_protected/vendor/bin",
