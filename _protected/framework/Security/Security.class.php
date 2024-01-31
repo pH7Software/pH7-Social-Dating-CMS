@@ -74,12 +74,12 @@ final class Security
      * @param string $sPassword
      * @param string $sHash
      *
-     * @return string|bool Returns the new password if the password needs to be rehash, otherwise FALSE
+     * @return bool Returns TRUE if the password needs to be rehash, otherwise FALSE
      */
     public static function pwdNeedsRehash($sPassword, $sHash)
     {
         if (password_needs_rehash($sHash, self::PWD_ALGORITHM, self::$aPwdOptions)) {
-            return self::hashPwd($sPassword);
+            return true;
         }
 
         return false;
