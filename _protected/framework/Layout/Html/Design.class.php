@@ -322,7 +322,7 @@ class Design
             'mod' => $sMod,
             'ctrl' => $sCtrl,
             'act' => $sAct,
-            'id' => Url::encode($mId)
+            'id' => Url::encode($sId)
         ];
 
         echo '<a', $sClass, 'href="', PH7_URL_ROOT, 'asset/ajax/popup/confirm/?', Url::httpBuildQuery($aHttpParams), '" data-popup="classic">', $sLabel, '</a>';
