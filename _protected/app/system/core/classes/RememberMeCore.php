@@ -57,7 +57,7 @@ class RememberMeCore
         $aCookieData = [
             // Hash one more time the password for the cookie
             'member_remember' => Security::hashCookie($oUserData->password),
-            'member_id' => $oUserData->profileId
+            'member_id' => (string)$oUserData->profileId
         ];
         (new Cookie)->set($aCookieData, null, self::$iCookieDuration);
     }
