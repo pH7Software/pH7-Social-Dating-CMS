@@ -13,4 +13,5 @@ Designed and Developed by [Pierre-Henry Soria](https://pierrehenry.be).
 
 ## ⚖️ License
 
-[General Public License 3](http://www.gnu.org/licenses/gpl.html) or later; See the `LICENSE.md` file.
+
+[General Public License 3](http://www.gnu.org/licenses/gpl.html) or later; See the `LICENSE.md` file in the root directory.
