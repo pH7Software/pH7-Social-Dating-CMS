@@ -1,4 +1,3 @@
-
 # pH7 Social Dating Builder
 
 ## ⚡️ The 2026 <span style="text-decoration:underline">Social Dating WebApp Builder</span>
@@ -300,7 +299,7 @@ Finding bugs, improving the CMS/doc or adding translations. Any contribution is 
 
 Just clone the repository, make your changes and then make a push ;-)
 
-*WARNING: Your code/modification must be of excellent quality and follow the [Code Convention](https://ph7builder.com/doc/en/code-convention) and [PSR](https://www.php-fig.org/psr/).* I manually review and validate all improvements and changes you I've done.
+*WARNING: Your code/modification must be of excellent quality and follow the [Code Convention](https://ph7builder.com/doc/en/code-convention) and [PSR](https://www.php-fig.org/psr/).* I manually review and validate all improvements and changes you've done.
 
 ![pH7Software GitHub. Me, at a Costa coffee shop on Feb 4th, 2017.](https://user-images.githubusercontent.com/1325411/78962138-32ffa100-7ae3-11ea-8d35-83d78f3cbc48.jpg)
 
@@ -319,7 +318,7 @@ Finally, **please consider using green Web hosting** (which use Green Power supp
 👉 Other [10 Easy Ways to Green Your Social Community](https://mashable.com/2010/01/01/green-your-web-site/) 👈
 
 
-## 💪 Calculate Carbon Footprint of your Social Dating Service 🌍
+## 💪 Calculate Carbon Footprint of Your Social Dating Service 🌍
 
  How is your website impacting the planet? => Check it on the Website Carbon Calculator such as [https://www.websitecarbon.com](https://www.websitecarbon.com)
 
@@ -345,7 +344,7 @@ Finally, **please consider using green Web hosting** (which use Green Power supp
 * Sometimes, when working on Mac, **Sequel Pro** is used to lookup easily at a database.
 
 
-## 🖋 Contact (Suggestion / Feedback)
+## 🖋 Contact (Suggestions / Feedback)
 
 Feel free to send me an email at *hello {AT} ph7builder {D0T} com*
 
