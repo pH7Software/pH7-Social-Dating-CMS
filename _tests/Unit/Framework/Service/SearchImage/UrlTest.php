@@ -1,7 +1,7 @@
 <?php
 /**
- * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2017-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @author           Pierre-Henry Soria <hello@ph7builder.com>
+ * @copyright        (c) 2017-2025, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Test / Unit / Framework / Service / SearchImage
  */
@@ -18,7 +18,7 @@ final class UrlTest extends TestCase
 {
     public function testValidValue(): void
     {
-        $sTestUrl = 'https://ph7cms.com/dating-startup-by-step/';
+        $sTestUrl = 'https://ph7builder.com/dating-startup-by-step/';
         $oUrl = new Url($sTestUrl);
         $this->assertSame($sTestUrl, $oUrl->getValue());
     }
