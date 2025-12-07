@@ -15,6 +15,7 @@ defined('PH7') or exit('Restricted access');
 use PH7\Framework\Compress\Compress;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PH7\Framework\Error\Logger;
 use PH7\Framework\File\File;
 use PH7\Framework\File\Permission\PermissionException;
 use PH7\Framework\Http\Http;
@@ -27,6 +28,9 @@ class Gzip
 {
     public const CACHE_DIR = 'pH7_static/';
     public const MAX_IMG_SIZE_BASE64_CONVERTOR = 24000; // 24KB
+
+    private const ERROR_FILE_LOAD_MESSAGE = '%s: Failed to load file: %s';
+    private const ERROR_EXCEPTION_MESSAGE = '%s: Exception: %s for file: %s';
 
     private const REGEX_IMAGE_FORMAT = '/url\([\'"]*(.+?\.)(gif|png|jpg|jpeg|otf|eot|ttf|woff|svg)[\'"]*\)*/msi';
     private const REGEX_JS_INCLUDE_FORMAT = '/include\([\'"]*(.+?\.)(js)[\'"]*\)\s{0,};/msi';
@@ -319,12 +323,16 @@ class Gzip
 
     private function logStaticFileLoadFailure(string $sFullUrl): void
     {
-        error_log("pH7CMS Gzip: Failed to load file: " . $sFullUrl);
+        (new Logger())->msg(
+            sprintf(self::ERROR_FILE_LOAD_MESSAGE, 'pH7Builder Gzip', $sFullUrl)
+        );
     }
 
     private function logStaticFileException(string $sElement, \Exception $oException): void
     {
-        error_log("pH7CMS Gzip Exception: " . $oException->getMessage() . " for file: " . $sElement);
+        (new Logger())->msg(
+            sprintf(self::ERROR_EXCEPTION_MESSAGE, 'pH7Builder Gzip', $oException->getMessage(), $sElement)
+        );
     }
 
     protected function setHeaders(): void
