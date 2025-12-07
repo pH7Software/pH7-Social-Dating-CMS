@@ -349,8 +349,6 @@ abstract class Controller extends Core implements Controllable
 
     /**
      *  Securing the server for DDoS attack only! Not for the attacks DoS.
-     *
-     * @return void
      */
     private function ddosProtection(): void
     {
@@ -363,6 +361,11 @@ abstract class Controller extends Core implements Controllable
         }
     }
 
+    /**
+     * Determines when and where the maintenance page should be displayed.
+     * e.g., Maintenance page should be displayed only when enabled
+     * and shouldn't be displayed in the admin panel.
+     */
     private function isMaintenancePageEligible(): bool
     {
         $bSiteIsInMaintenanceMode = M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE;
