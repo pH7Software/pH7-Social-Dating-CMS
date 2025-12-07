@@ -29,215 +29,245 @@ class DatabaseCoreCron extends Cron
     {
         parent::__construct();
 
-        // Available options
         if ($this->httpRequest->getExists('option')) {
-            switch ($this->httpRequest->get('option')) {
-                // Backup
-                case 'backup':
-                    $this->backup();
-                    break;
-
-                // Restart Stat
-                case 'stat':
-                    $this->stat();
-                    break;
-
-                // Repair Tables
-                case 'repair':
-                    $this->repair();
-                    break;
-
-                // Delete Log
-                case 'remove_log':
-                    $this->removeLog();
-                    break;
-
-                default:
-                    Http::setHeadersByCode(StatusCode::BAD_REQUEST);
-                    exit('Bad Request Error!');
-            }
+            $this->executeRequestedOption();
         }
 
-        // Clean data
-        $this->cleanData();
-
-        // Remove deleted messages
-        $this->removeDeletedMsg();
-
-        // Optimization tables
-        $this->optimize();
+        $this->cleanOldData();
+        $this->removeMessagesDeletedByBothParties();
+        $this->optimizeDatabaseTables();
 
         echo '<br />' . t('Cron job finished!');
     }
 
-    private function stat()
+    private function executeRequestedOption(): void
     {
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::MEMBER) . 'SET views=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::MEMBER) . 'SET votes=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::MEMBER) . 'SET score=0');
+        $sOption = $this->httpRequest->get('option');
 
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::PICTURE) . 'SET views=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::PICTURE) . 'SET votes=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::PICTURE) . 'SET score=0');
+        switch ($sOption) {
+            case 'backup':
+                $this->createDatabaseBackup();
+                break;
 
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::ALBUM_PICTURE) . 'SET views=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::ALBUM_PICTURE) . 'SET votes=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::ALBUM_PICTURE) . 'SET score=0');
+            case 'stat':
+                $this->resetAllStatisticsToZero();
+                break;
 
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::VIDEO) . 'SET views=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::VIDEO) . 'SET votes=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::VIDEO) . 'SET score=0');
+            case 'repair':
+                $this->repairDatabaseTables();
+                break;
 
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::ALBUM_VIDEO) . 'SET views=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::ALBUM_VIDEO) . 'SET votes=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::ALBUM_VIDEO) . 'SET score=0');
+            case 'remove_log':
+                $this->deleteAllLogTables();
+                break;
 
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::BLOG) . 'SET views=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::BLOG) . 'SET votes=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::BLOG) . 'SET score=0');
+            default:
+                Http::setHeadersByCode(StatusCode::BAD_REQUEST);
+                exit('Bad Request Error!');
+        }
+    }
 
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::NOTE) . 'SET views=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::NOTE) . 'SET votes=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::NOTE) . 'SET score=0');
-
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::FORUM_TOPIC) . 'SET views=0');
-
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::AD) . 'SET views=0');
-        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::AD) . 'SET clicks=0');
+    private function resetAllStatisticsToZero(): void
+    {
+        $this->resetStatisticsForTable(DbTableName::MEMBER);
+        $this->resetStatisticsForTable(DbTableName::PICTURE);
+        $this->resetStatisticsForTable(DbTableName::ALBUM_PICTURE);
+        $this->resetStatisticsForTable(DbTableName::VIDEO);
+        $this->resetStatisticsForTable(DbTableName::ALBUM_VIDEO);
+        $this->resetStatisticsForTable(DbTableName::BLOG);
+        $this->resetStatisticsForTable(DbTableName::NOTE);
+        $this->resetForumTopicViews();
+        $this->resetAdvertisementStatistics();
 
         echo t('Restart Statistics... OK!') . '<br />';
     }
 
-    private function backup()
+    private function resetStatisticsForTable(string $sTableName): void
     {
-        (new Backup(PH7_PATH_BACKUP_SQL . 'Periodic-database-update.' . (new CDateTime)->get()->date() . '.sql.gz'))->back()->saveArchive();
+        $oDatabase = Db::getInstance();
+        $sTablePrefix = Db::prefix($sTableName);
+
+        $oDatabase->exec("UPDATE {$sTablePrefix} SET views=0");
+        $oDatabase->exec("UPDATE {$sTablePrefix} SET votes=0");
+        $oDatabase->exec("UPDATE {$sTablePrefix} SET score=0");
+    }
+
+    private function resetForumTopicViews(): void
+    {
+        Db::getInstance()->exec('UPDATE' . Db::prefix(DbTableName::FORUM_TOPIC) . 'SET views=0');
+    }
+
+    private function resetAdvertisementStatistics(): void
+    {
+        $oDatabase = Db::getInstance();
+        $sAdTablePrefix = Db::prefix(DbTableName::AD);
+
+        $oDatabase->exec("UPDATE {$sAdTablePrefix} SET views=0");
+        $oDatabase->exec("UPDATE {$sAdTablePrefix} SET clicks=0");
+    }
+
+    private function createDatabaseBackup(): void
+    {
+        $sBackupFilename = $this->generateBackupFilename();
+        $sBackupPath = PH7_PATH_BACKUP_SQL . $sBackupFilename;
+
+        (new Backup($sBackupPath))->back()->saveArchive();
 
         echo t('Backup of the Database... Ok!') . '<br />';
     }
 
-    private function optimize()
+    private function generateBackupFilename(): string
+    {
+        $sCurrentDate = (new CDateTime)->get()->date();
+        return "Periodic-database-update.{$sCurrentDate}.sql.gz";
+    }
+
+    private function optimizeDatabaseTables(): void
     {
         Db::optimize();
-
         echo t('Optimizing tables... OK!') . '<br />';
     }
 
-    private function repair()
+    private function repairDatabaseTables(): void
     {
         Db::repair();
-
         echo t('Repair Database... Ok!') . '<br />';
     }
 
-    private function removeDeletedMsg()
+    private function removeMessagesDeletedByBothParties(): void
     {
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix(DbTableName::MESSAGE) . 'WHERE FIND_IN_SET(\'sender\', toDelete) AND FIND_IN_SET(\'recipient\', toDelete)');
+        $sSqlQuery = 'DELETE FROM' . Db::prefix(DbTableName::MESSAGE) .
+                     'WHERE FIND_IN_SET(\'sender\', toDelete) AND FIND_IN_SET(\'recipient\', toDelete)';
 
-        if ($rStmt->execute()) {
-            echo nt('Deleted %n% temporary message... OK!', 'Deleted %n% temporary messages... OK!', $rStmt->rowCount()) . '<br />';
+        $oStatement = Db::getInstance()->prepare($sSqlQuery);
+
+        if ($oStatement->execute()) {
+            $iDeletedCount = $oStatement->rowCount();
+            echo nt('Deleted %n% temporary message... OK!', 'Deleted %n% temporary messages... OK!', $iDeletedCount) . '<br />';
         }
     }
 
-    private function removeLog()
+    private function deleteAllLogTables(): void
     {
-        $oDb = Db::getInstance();
+        $oDatabase = Db::getInstance();
 
-        // Optimized: Batch session cleanup in single transaction
-        $oDb->exec('START TRANSACTION');
+        $oDatabase->exec('START TRANSACTION');
 
         try {
-            // Login attempts cleanup
-            $oDb->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::ADMIN_ATTEMPT_LOGIN));
-            $oDb->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::MEMBER_ATTEMPT_LOGIN));
-            $oDb->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::AFFILIATE_ATTEMPT_LOGIN));
+            $this->truncateLoginAttemptTables($oDatabase);
+            $this->truncateLoginLogTables($oDatabase);
+            $this->truncateSessionLogTables($oDatabase);
+            $this->truncateErrorLogTable($oDatabase);
 
-            // Login logs cleanup
-            $oDb->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::ADMIN_LOG_LOGIN));
-            $oDb->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::MEMBER_LOG_LOGIN));
-            $oDb->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::AFFILIATE_LOG_LOGIN));
-
-            // Session logs cleanup - optimized with TRUNCATE for faster performance
-            $oDb->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::ADMIN_LOG_SESS));
-            $oDb->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::MEMBER_LOG_SESS));
-            $oDb->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::AFFILIATE_LOG_SESS));
-
-            // Error logs cleanup
-            $oDb->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::LOG_ERROR));
-
-            $oDb->exec('COMMIT');
+            $oDatabase->exec('COMMIT');
         } catch (\Exception $oException) {
-            $oDb->exec('ROLLBACK');
+            $oDatabase->exec('ROLLBACK');
             throw $oException;
         }
 
         echo t('Deleting Log... OK!') . '<br />';
     }
 
-    /**
-     * Pruning the old data (messages, comments and instant messenger contents).
-     *
-     * @return void
-     */
-    private function cleanData()
+    private function truncateLoginAttemptTables(Db $oDatabase): void
     {
-        $iCleanComment = (int)DbConfig::getSetting('cleanComment');
-        $iCleanMsg = (int)DbConfig::getSetting('cleanMsg');
-        $iCleanMessenger = (int)DbConfig::getSetting('cleanMessenger');
+        $oDatabase->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::ADMIN_ATTEMPT_LOGIN));
+        $oDatabase->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::MEMBER_ATTEMPT_LOGIN));
+        $oDatabase->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::AFFILIATE_ATTEMPT_LOGIN));
+    }
 
-        // If the option is enabled for Comments
-        if ($iCleanComment > 0) {
-            $aCommentMods = ['blog', 'note', 'picture', 'video', 'profile'];
-            foreach ($aCommentMods as $sSuffixTable) {
-                if ($iRow = ($this->pruningDb($iCleanComment, CommentCoreModel::TABLE_PREFIX_NAME . $sSuffixTable, 'updatedDate') > 0)) {
-                    echo t('Deleted %0% %1% comment(s) ... OK!', $iRow, $sSuffixTable) . '<br />';
-                }
-            }
+    private function truncateLoginLogTables(Db $oDatabase): void
+    {
+        $oDatabase->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::ADMIN_LOG_LOGIN));
+        $oDatabase->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::MEMBER_LOG_LOGIN));
+        $oDatabase->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::AFFILIATE_LOG_LOGIN));
+    }
+
+    private function truncateSessionLogTables(Db $oDatabase): void
+    {
+        $oDatabase->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::ADMIN_LOG_SESS));
+        $oDatabase->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::MEMBER_LOG_SESS));
+        $oDatabase->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::AFFILIATE_LOG_SESS));
+    }
+
+    private function truncateErrorLogTable(Db $oDatabase): void
+    {
+        $oDatabase->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::LOG_ERROR));
+    }
+
+    private function cleanOldData(): void
+    {
+        $iDaysToKeepComments = (int)DbConfig::getSetting('cleanComment');
+        $iDaysToKeepMessages = (int)DbConfig::getSetting('cleanMsg');
+        $iDaysToKeepMessenger = (int)DbConfig::getSetting('cleanMessenger');
+
+        if ($iDaysToKeepComments > 0) {
+            $this->deleteOldComments($iDaysToKeepComments);
         }
 
-        // If the option is enabled for Messages
-        if ($iCleanMsg > 0) {
-            if ($iRow = ($this->pruningDb($iCleanMsg, DbTableName::MESSAGE, 'sendDate') > 0)) {
-                echo nt('Deleted %n% message... OK!', 'Deleted %n% messages... OK!', $iRow) . '<br />';
-            }
+        if ($iDaysToKeepMessages > 0) {
+            $this->deleteOldMessages($iDaysToKeepMessages);
         }
 
-        // If the option is enabled for Messenger
-        if ($iCleanMessenger > 0) {
-            if ($iRow = ($this->pruningDb($iCleanMessenger, DbTableName::MESSENGER, 'sent') > 0)) {
-                echo nt('Deleted %n% IM message... OK!', 'Deleted %n% IM messages... OK!', $iRow) . '<br />';
+        if ($iDaysToKeepMessenger > 0) {
+            $this->deleteOldInstantMessages($iDaysToKeepMessenger);
+        }
+    }
+
+    private function deleteOldComments(int $iDaysToKeep): void
+    {
+        $aCommentTypes = ['blog', 'note', 'picture', 'video', 'profile'];
+
+        foreach ($aCommentTypes as $sCommentType) {
+            $sTableName = CommentCoreModel::TABLE_PREFIX_NAME . $sCommentType;
+            $iDeletedRows = $this->deleteOldRecordsFromTable($iDaysToKeep, $sTableName, 'updatedDate');
+
+            if ($iDeletedRows > 0) {
+                echo t('Deleted %0% %1% comment(s) ... OK!', $iDeletedRows, $sCommentType) . '<br />';
             }
         }
     }
 
-    /**
-     * @param int $iOlderThanXDay Delete data older than X days (e.g., 365 for data older than 1 year).
-     * @param string $sTable Table name. Choose between 'Comments<TYPE>', 'Messages' and 'Messenger'
-     * @param string $sDateColumn The DB column that indicates when the data has been created/updated (e.g., sendDate, updatedDate).
-     *
-     * @return int Returns the number of rows.
-     */
-    private function pruningDb($iOlderThanXDay, $sTable, $sDateColumn)
+    private function deleteOldMessages(int $iDaysToKeep): void
     {
-        if ($this->isTableInvalid($sTable)) {
-            DbVarious::launchErr($sTable);
+        $iDeletedRows = $this->deleteOldRecordsFromTable($iDaysToKeep, DbTableName::MESSAGE, 'sendDate');
+
+        if ($iDeletedRows > 0) {
+            echo nt('Deleted %n% message... OK!', 'Deleted %n% messages... OK!', $iDeletedRows) . '<br />';
         }
-
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix($sTable) . 'WHERE (' . $sDateColumn . ' < NOW() - INTERVAL :dayNumber DAY)');
-        $rStmt->bindValue(':dayNumber', $iOlderThanXDay, PDO::PARAM_INT);
-        $rStmt->execute();
-
-        return $rStmt->rowCount();
     }
 
-    /**
-     * @param string $sTable
-     *
-     * @return bool
-     */
-    private function isTableInvalid($sTable)
+    private function deleteOldInstantMessages(int $iDaysToKeep): void
     {
-        return strstr($sTable, CommentCoreModel::TABLE_PREFIX_NAME) === false &&
-            $sTable !== DbTableName::MESSAGE && $sTable !== DbTableName::MESSENGER;
+        $iDeletedRows = $this->deleteOldRecordsFromTable($iDaysToKeep, DbTableName::MESSENGER, 'sent');
+
+        if ($iDeletedRows > 0) {
+            echo nt('Deleted %n% IM message... OK!', 'Deleted %n% IM messages... OK!', $iDeletedRows) . '<br />';
+        }
+    }
+
+    private function deleteOldRecordsFromTable(int $iDaysOld, string $sTableName, string $sDateColumnName): int
+    {
+        if ($this->isInvalidTableForCleaning($sTableName)) {
+            DbVarious::launchErr($sTableName);
+        }
+
+        $sSqlQuery = 'DELETE FROM' . Db::prefix($sTableName) .
+                     "WHERE ({$sDateColumnName} < NOW() - INTERVAL :dayNumber DAY)";
+
+        $oStatement = Db::getInstance()->prepare($sSqlQuery);
+        $oStatement->bindValue(':dayNumber', $iDaysOld, PDO::PARAM_INT);
+        $oStatement->execute();
+
+        return $oStatement->rowCount();
+    }
+
+    private function isInvalidTableForCleaning(string $sTableName): bool
+    {
+        $bIsCommentTable = strstr($sTableName, CommentCoreModel::TABLE_PREFIX_NAME) !== false;
+        $bIsMessageTable = $sTableName === DbTableName::MESSAGE;
+        $bIsMessengerTable = $sTableName === DbTableName::MESSENGER;
+
+        return !$bIsCommentTable && !$bIsMessageTable && !$bIsMessengerTable;
     }
 }
 
