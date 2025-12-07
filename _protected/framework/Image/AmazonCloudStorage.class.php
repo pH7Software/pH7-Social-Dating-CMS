@@ -16,6 +16,8 @@ use PH7\Framework\Config\Config;
 class AmazonCloudStorage implements Storageable
 {
     private const ACL_PUBLIC_READ = 'public-read';
+    private const SIGNED_URL_EXPIRATION = '+20 minutes';
+    private const PDF_CONTENT_TYPE = 'application/pdf';
 
     private S3Client $oS3Client;
 
@@ -59,11 +61,55 @@ class AmazonCloudStorage implements Storageable
     }
 
     /**
+     * Get a signed URL for secure access to private files (e.g., PDFs).
+     *
+     * @param string $sFile
+     * @param string $sExpiration Expiration time (default: +20 minutes)
+     *
+     * @return string The signed URL with temporary access.
+     */
+    public function getSignedUrl(string $sFile, string $sExpiration = self::SIGNED_URL_EXPIRATION): string
+    {
+        $oCommand = $this->oS3Client->getCommand('GetObject', [
+            'Bucket' => $this->sBucket,
+            'Key' => $sFile
+        ]);
+
+        $oRequest = $this->oS3Client->createPresignedRequest($oCommand, $sExpiration);
+
+        return (string)$oRequest->getUri();
+    }
+
+    /**
+     * Get a signed URL specifically for PDF preview with proper content type.
+     *
+     * @param string $sFile
+     * @param string $sExpiration
+     *
+     * @return string The signed URL for PDF preview.
+     */
+    public function getSignedPdfUrl(string $sFile, string $sExpiration = self::SIGNED_URL_EXPIRATION): string
+    {
+        $oCommand = $this->oS3Client->getCommand('GetObject', [
+            'Bucket' => $this->sBucket,
+            'Key' => $sFile,
+            'ResponseContentType' => self::PDF_CONTENT_TYPE,
+            'ResponseContentDisposition' => 'inline'
+        ]);
+
+        $oRequest = $this->oS3Client->createPresignedRequest($oCommand, $sExpiration);
+
+        return (string)$oRequest->getUri();
+    }
+
+    /**
+     * Get the public URL for embedded images.
+     *
      * @param string $sFile
      *
-     * @return string The signed URL where the image is hosted on AWS S3.
+     * @return string The public URL.
      */
-    public function getSignedUrl(string $sFile): string
+    public function getPublicUrl(string $sFile): string
     {
         return $this->oS3Client->getObjectUrl($this->sBucket, $sFile);
     }

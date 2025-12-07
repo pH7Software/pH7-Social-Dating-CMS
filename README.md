@@ -360,7 +360,7 @@ See the `LICENSE.md` and `COPYRIGHT.md` files for further details.
 
 ![Beautiful Profile Dating Page](https://user-images.githubusercontent.com/1325411/35779585-68f0d5fc-09c7-11e8-91eb-bf793fcfab6e.png)
 
-![pH7Builder allows anyone to start a web dating app like Tinder/Bumble or Badoo](https://cloud.githubusercontent.com/assets/1325411/19419477/5476b45c-93d0-11e6-823d-d293f186c0f7.png)
+![pH7Builder allows anyone to start a modern web dating app](https://cloud.githubusercontent.com/assets/1325411/19419477/5476b45c-93d0-11e6-823d-d293f186c0f7.png)
 
 ![Admin Panel, Browse Users](https://cloud.githubusercontent.com/assets/1325411/14080251/b476e5c6-f4fb-11e5-825e-ddc992ba1055.png)
 

@@ -140,19 +140,35 @@ class DatabaseCoreCron extends Cron
 
     private function removeLog()
     {
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::ADMIN_ATTEMPT_LOGIN));
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::MEMBER_ATTEMPT_LOGIN));
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::AFFILIATE_ATTEMPT_LOGIN));
+        $oDb = Db::getInstance();
 
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::ADMIN_LOG_LOGIN));
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::MEMBER_LOG_LOGIN));
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::AFFILIATE_LOG_LOGIN));
+        // Optimized: Batch session cleanup in single transaction
+        $oDb->exec('START TRANSACTION');
 
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::ADMIN_LOG_SESS));
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::MEMBER_LOG_SESS));
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::AFFILIATE_LOG_SESS));
+        try {
+            // Login attempts cleanup
+            $oDb->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::ADMIN_ATTEMPT_LOGIN));
+            $oDb->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::MEMBER_ATTEMPT_LOGIN));
+            $oDb->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::AFFILIATE_ATTEMPT_LOGIN));
 
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::LOG_ERROR));
+            // Login logs cleanup
+            $oDb->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::ADMIN_LOG_LOGIN));
+            $oDb->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::MEMBER_LOG_LOGIN));
+            $oDb->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::AFFILIATE_LOG_LOGIN));
+
+            // Session logs cleanup - optimized with TRUNCATE for faster performance
+            $oDb->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::ADMIN_LOG_SESS));
+            $oDb->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::MEMBER_LOG_SESS));
+            $oDb->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::AFFILIATE_LOG_SESS));
+
+            // Error logs cleanup
+            $oDb->exec('TRUNCATE TABLE' . Db::prefix(DbTableName::LOG_ERROR));
+
+            $oDb->exec('COMMIT');
+        } catch (\Exception $oException) {
+            $oDb->exec('ROLLBACK');
+            throw $oException;
+        }
 
         echo t('Deleting Log... OK!') . '<br />';
     }
