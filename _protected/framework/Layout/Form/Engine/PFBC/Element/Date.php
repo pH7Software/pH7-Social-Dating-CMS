@@ -14,12 +14,18 @@ class Date extends Textbox
         $this->validation[] = new \PFBC\Validation\Date;
         $this->attributes['type'] = 'date';
 
-        $iCurrentYear = date('Y');
-        $iMin = $iCurrentYear - DbConfig::getSetting('maxAgeRegistration');
-        $iMax = $iCurrentYear - DbConfig::getSetting('minAgeRegistration');
-        $this->attributes['min'] = $iMin;
-        $this->attributes['max'] = $iMax;
+        $iCurrentYear = (int)date('Y');
+        $iOldestAllowedBirthYear = $iCurrentYear - (int)DbConfig::getSetting('maxAgeRegistration');
+        $iYoungestAllowedBirthYear = $iCurrentYear - (int)DbConfig::getSetting('minAgeRegistration');
+
+        $this->attributes['min'] = $this->formatAsHtml5DateString($iOldestAllowedBirthYear, 1, 1);
+        $this->attributes['max'] = $this->formatAsHtml5DateString($iYoungestAllowedBirthYear, 12, 31);
 
         parent::render();
+    }
+
+    private function formatAsHtml5DateString(int $iYear, int $iMonth, int $iDay): string
+    {
+        return sprintf('%d-%02d-%02d', $iYear, $iMonth, $iDay);
     }
 }
