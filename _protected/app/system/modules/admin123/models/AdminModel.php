@@ -26,8 +26,8 @@ class AdminModel extends AdminCoreModel
      */
     public function adminLogin($sEmail, $sUsername, $sPassword)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT password FROM ' .
-            Db::prefix(DbTableName::ADMIN) . ' WHERE email = :email AND username = :username LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('SELECT password FROM' .
+            Db::prefix(DbTableName::ADMIN) . 'WHERE email = :email AND username = :username LIMIT 1');
         $rStmt->bindValue(':email', $sEmail, PDO::PARAM_STR);
         $rStmt->bindValue(':username', $sUsername, PDO::PARAM_STR);
         $rStmt->execute();
@@ -86,8 +86,8 @@ class AdminModel extends AdminCoreModel
         }
 
         $oDb = Db::getInstance();
-        $oDb->exec('DELETE FROM ' . Db::prefix(DbTableName::ADMIN_LOG_SESS) . ' WHERE profileId = ' . $iProfileId);
-        $oDb->exec('DELETE FROM ' . Db::prefix(DbTableName::ADMIN) . ' WHERE profileId = ' . $iProfileId . ' LIMIT 1');
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::ADMIN_LOG_SESS) . 'WHERE profileId = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix(DbTableName::ADMIN) . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
         unset($oDb);
     }
 
@@ -124,7 +124,7 @@ class AdminModel extends AdminCoreModel
             $sSqlOrder = ' ORDER BY profileId ASC ';
         }
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM ' . Db::prefix(DbTableName::ADMIN) . $sSqlWhere . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix(DbTableName::ADMIN) . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         if ($bDigitSearch) {
             $rStmt->bindValue(':looking', $mLooking, PDO::PARAM_INT);
