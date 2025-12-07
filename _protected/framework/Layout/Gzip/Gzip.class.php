@@ -267,8 +267,12 @@ class Gzip
     protected function getContents(): void
     {
         $this->sContents = '';
+
         foreach ($this->aElements as $sElement) {
-            $this->sContents .= File::EOL . $this->oFile->getUrlContents(PH7_URL_ROOT . $this->sBaseUrl . $sElement);
+            $sFileContents = $this->loadStaticFileWithErrorHandling($sElement);
+            if ($sFileContents !== null) {
+                $this->sContents .= File::EOL . $sFileContents;
+            }
         }
 
         if ($this->sType === self::CSS_NAME) {
@@ -293,6 +297,34 @@ class Gzip
         if ($this->bIsGzip) {
             $this->gzipContent();
         }
+    }
+
+    private function loadStaticFileWithErrorHandling(string $sElement): ?string
+    {
+        try {
+            $sFullUrl = PH7_URL_ROOT . $this->sBaseUrl . $sElement;
+            $sFileContents = $this->oFile->getUrlContents($sFullUrl);
+
+            if ($sFileContents === false) {
+                $this->logStaticFileLoadFailure($sFullUrl);
+                return null;
+            }
+
+            return $sFileContents;
+        } catch (\Exception $oException) {
+            $this->logStaticFileException($sElement, $oException);
+            return null;
+        }
+    }
+
+    private function logStaticFileLoadFailure(string $sFullUrl): void
+    {
+        error_log("pH7CMS Gzip: Failed to load file: " . $sFullUrl);
+    }
+
+    private function logStaticFileException(string $sElement, \Exception $oException): void
+    {
+        error_log("pH7CMS Gzip Exception: " . $oException->getMessage() . " for file: " . $sElement);
     }
 
     protected function setHeaders(): void

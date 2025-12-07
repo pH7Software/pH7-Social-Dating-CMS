@@ -363,18 +363,19 @@ abstract class Controller extends Core implements Controllable
         }
     }
 
-    /**
-     * Determines when and where the maintenance page should be displayed.
-     * e.g., Maintenance page should be displayed only when enabled
-     * and shouldn't be displayed in the admin panel.
-     *
-     * @return bool
-     */
     private function isMaintenancePageEligible(): bool
     {
-        return M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE &&
-            !AdminCore::auth() &&
-            !AdminCore::isAdminPanel();
+        $bSiteIsInMaintenanceMode = M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE;
+        $bAdminIsAuthenticated = AdminCore::auth();
+        $bUserIsOnAdminPanel = AdminCore::isAdminPanel();
+        $bUserIsOnTwoFactorAuthModule = $this->registry->module === 'two-factor-auth';
+
+        $bShouldBlockAccess = $bSiteIsInMaintenanceMode &&
+            !$bAdminIsAuthenticated &&
+            !$bUserIsOnAdminPanel &&
+            !$bUserIsOnTwoFactorAuthModule;
+
+        return $bShouldBlockAccess;
     }
 
     private function isBlockedCountryPageEligible(): bool

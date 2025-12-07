@@ -4,8 +4,15 @@
  * License:       MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  */
 
-function updateActivity() {
+function sendUserActivityHeartbeat() {
     $.get(pH7Url.base + 'user/asset/ajax/setActivity');
-    setInterval('updateActivity()', 10000)
 }
-updateActivity();
+
+function startUserActivityTracking() {
+    var TEN_SECONDS_IN_MILLISECONDS = 10000;
+
+    sendUserActivityHeartbeat();
+    setInterval(sendUserActivityHeartbeat, TEN_SECONDS_IN_MILLISECONDS);
+}
+
+startUserActivityTracking();
