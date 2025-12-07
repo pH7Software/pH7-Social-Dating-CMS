@@ -395,39 +395,15 @@ class Design
     }
 
     /**
-     * @return void Output the relevant link based on the client browser's language.
+     * @return void Output the relevant link.
      */
     final public function smartLink(): void
     {
-        // Get Client's Language Code
-        $sLangCode = (new Browser)->getLanguage(true);
-
-        // Default links, set to English
         $aSites = [
-            ['title' => 'Flirt Hot Girls', 'link' => 'https://01script.com/p/dooba'],
-            ['title' => 'Speed Dating', 'link' => 'https://01script.com/p/dooba'],
-            ['title' => 'Date your Friends', 'link' => 'https://01script.com/p/dooba'],
             ['title' => 'Create Your Own Dating Web App', 'link' => Kernel::SOFTWARE_GIT_REPO_URL],
             ['title' => 'Dating Builder Software', 'link' => Kernel::SOFTWARE_GIT_REPO_URL],
             ['title' => 'Build a Tinder-Like Dating App', 'link' => Kernel::SOFTWARE_GIT_REPO_URL]
         ];
-
-        if ($sLangCode === 'en-ie') {
-            $aSites[] = ['title' => 'FREE Flirt in Dublin City', 'link' => 'https://01script.com/p/dooba'];
-            $aSites[] = ['title' => 'Date Dubs in the Town!', 'link' => 'https://01script.com/p/dooba'];
-        } elseif ($sLangCode === 'en-gb') {
-            $aSites[] = ['title' => 'Date Brits near from YOU', 'link' => 'https://01script.com/p/dooba'];
-            $aSites[] = ['title' => 'Date Londoners', 'link' => 'https://01script.com/p/dooba'];
-        } elseif (strpos($sLangCode, 'fr') !== false) {
-            /**
-             * Reset the array since we don't want to mix it up with different languages (default one is English, not French)
-             */
-            $aSites = [
-                ['title' => 'Rencontre d\'un soir', 'link' => 'https://01script.com/p/dooba'],
-                ['title' => 'Flirt Coquin', 'link' => 'https://01script.com/p/dooba'],
-                ['title' => 'Rencontre amoureuse', 'link' => 'https://01script.com/p/dooba']
-            ];
-        }
 
         $aSite = $aSites[array_rand($aSites)];
         echo '<a href="', $aSite['link'], '">', $aSite['title'], '</a>';
