@@ -252,7 +252,7 @@ Designed & Coded with lots of ❤️ by **[Pierre-Henry Soria](https://ph7.me)**
 
 [![Pierre-Henry Soria](https://avatars0.githubusercontent.com/u/1325411?s=200)](https://pierrehenry.be "My personal website :-)")
 
-[![@phenrysay][twitter-image]](https://twitter.com/phenrysay) [![pH-7][github-image]](https://github.com/pH-7) [![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6)
+[![@phenrysay][x-badge]](https://x.com/phenrysay) [![BlueSky][bsky-badge]](https://bsky.app/profile/pierrehenry.dev "Follow Me on BlueSky") [![pH-7][github-badge]](https://github.com/pH-7) [![PayPal][paypal-badge]](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6)
 
 
 ## 🤝 Hire Me At Your Company?
@@ -366,5 +366,7 @@ See the `LICENSE.md` and `COPYRIGHT.md` files for further details.
 
 
 <!-- GitHub's Markdown reference links -->
-[twitter-image]: https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white
-[github-image]: https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
+[x-badge]: https://img.shields.io/badge/x-000000?style=for-the-badge&logo=x
+[bsky-badge]: https://img.shields.io/badge/BlueSky-00A8E8?style=for-the-badge&logo=bluesky&logoColor=white
+[github-badge]: https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
+[paypal-badge]: https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white
