@@ -154,7 +154,7 @@ class JoinFormProcess extends Form
             $this->session->set('mail_step4', $this->session->get('mail_step1'));
             $this->redirectUserToDonePage();
         } else {
-            $iApproved = DbConfig::getSetting('avatarManualApproval') == 0 ? 1 : 0;
+            $iApproved = (int)DbConfig::getSetting('avatarManualApproval') === 0 ? 1 : 0;
 
             if ($this->isNudityFilterEligible($iApproved) && $this->hasAvatarNudity()) {
                 // Overwrite "$iApproved" if avatar doesn't look suitable for anyone
