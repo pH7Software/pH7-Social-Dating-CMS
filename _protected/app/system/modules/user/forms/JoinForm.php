@@ -36,6 +36,55 @@ use PH7\Framework\Url\Header;
 
 class JoinForm
 {
+    private static function predictGenderFromFirstName()
+    {
+        $sFirstName = (new Session)->get('first_name');
+
+        if (empty($sFirstName)) {
+            return GenderTypeUserCore::MALE;
+        }
+
+        $sNameInLowerCase = strtolower(trim($sFirstName));
+
+        $aCommonFemaleNames = [
+            'mary', 'maria', 'sarah', 'lisa', 'jennifer', 'linda', 'patricia',
+            'barbara', 'susan', 'jessica', 'nancy', 'margaret', 'ashley',
+            'emily', 'elizabeth', 'michelle', 'amanda', 'melissa', 'deborah',
+            'sophie', 'emma', 'olivia', 'ava', 'isabella', 'mia', 'charlotte',
+            'amelia', 'harper', 'sophia', 'evelyn', 'abigail', 'ella', 'grace'
+        ];
+
+        if (in_array($sNameInLowerCase, $aCommonFemaleNames, true)) {
+            return GenderTypeUserCore::FEMALE;
+        }
+
+        $aFemaleNameEndings = ['ia', 'ina', 'elle', 'ette', 'ine'];
+        foreach ($aFemaleNameEndings as $sEnding) {
+            if (substr($sNameInLowerCase, -strlen($sEnding)) === $sEnding) {
+                return GenderTypeUserCore::FEMALE;
+            }
+        }
+
+        return GenderTypeUserCore::MALE;
+    }
+
+    private static function getOppositeGenderPreferences($sUserGender = null)
+    {
+        if ($sUserGender === null) {
+            $sUserGender = self::predictGenderFromFirstName();
+        }
+
+        if ($sUserGender === GenderTypeUserCore::FEMALE) {
+            return [GenderTypeUserCore::MALE];
+        }
+
+        if ($sUserGender === GenderTypeUserCore::MALE) {
+            return [GenderTypeUserCore::FEMALE];
+        }
+
+        return [GenderTypeUserCore::MALE, GenderTypeUserCore::FEMALE];
+    }
+
     public static function step1()
     {
         if ((new Session)->exists('mail_step1')) {
@@ -104,6 +153,9 @@ class JoinForm
         $oForm->addElement(new Hidden('submit_join_user2', 'form_join_user2'));
         $oForm->addElement(new Token('join2'));
 
+        $sPredictedGender = self::predictGenderFromFirstName();
+        $aDefaultMatchPreferences = self::getOppositeGenderPreferences($sPredictedGender);
+
         $oForm->addElement(
             new Radio(
                 t('I am a'),
@@ -113,7 +165,7 @@ class JoinForm
                     GenderTypeUserCore::MALE => '👨 ' . t('Man'),
                     GenderTypeUserCore::COUPLE => '💑 ' . t('Couple')
                 ],
-                ['value' => GenderTypeUserCore::FEMALE, 'required' => 1]
+                ['value' => $sPredictedGender, 'required' => 1]
             )
         );
 
@@ -126,7 +178,7 @@ class JoinForm
                     GenderTypeUserCore::FEMALE => '👩 ' . t('Woman'),
                     GenderTypeUserCore::COUPLE => '💑 ' . t('Couple')
                 ],
-                ['value' => GenderTypeUserCore::MALE, 'required' => 1]
+                ['value' => $aDefaultMatchPreferences, 'required' => 1]
             )
         );
 
