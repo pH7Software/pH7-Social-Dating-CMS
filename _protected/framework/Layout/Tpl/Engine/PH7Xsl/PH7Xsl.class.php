@@ -95,7 +95,7 @@ class PH7Xsl
         foreach ($aData as $sKey => $sValue) {
             $sNode = $this->oXml->createElement($sKey);
             $sRoot->appendChild($sNode);
-            $sContent = $this->oXml->createTextNode(utf8_encode($sValue));
+            $sContent = $this->oXml->createTextNode(mb_convert_encoding($sValue, 'UTF-8', 'ISO-8859-1'));
             $sNode->appendChild($sContent);
         }
 
