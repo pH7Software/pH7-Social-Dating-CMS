@@ -103,18 +103,18 @@ function get_list_of_locales($locale)
             if ($modifier) {
                 if ($country) {
                     if ($charset)
-                        array_push($locale_names, "${lang}_$country.$charset@$modifier");
-                    array_push($locale_names, "${lang}_$country@$modifier");
+                        array_push($locale_names, "{$lang}_{$country}.{$charset}@{$modifier}");
+                    array_push($locale_names, "{$lang}_{$country}@{$modifier}");
                 } elseif ($charset)
-                    array_push($locale_names, "${lang}.$charset@$modifier");
-                array_push($locale_names, "$lang@$modifier");
+                    array_push($locale_names, "{$lang}.{$charset}@{$modifier}");
+                array_push($locale_names, "{$lang}@{$modifier}");
             }
             if ($country) {
                 if ($charset)
-                    array_push($locale_names, "${lang}_$country.$charset");
-                array_push($locale_names, "${lang}_$country");
+                    array_push($locale_names, "{$lang}_{$country}.{$charset}");
+                array_push($locale_names, "{$lang}_{$country}");
             } elseif ($charset)
-                array_push($locale_names, "${lang}.$charset");
+                array_push($locale_names, "{$lang}.{$charset}");
             array_push($locale_names, $lang);
         }
 
