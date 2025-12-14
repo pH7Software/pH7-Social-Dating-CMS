@@ -14,7 +14,7 @@ function Stat() {
         });
         setInterval(function () {
             oMe.totalUsers()
-        }, 1000);
+        }, 60000);
     };
 }
 

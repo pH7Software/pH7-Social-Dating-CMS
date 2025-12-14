@@ -129,7 +129,7 @@ var tabs = (function () {
         }
     }
 
-    setInterval(pollHash, 250);
+    setInterval(pollHash, 1000);
 
     function getParam(name) {
         var params = getParams();
