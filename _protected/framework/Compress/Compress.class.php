@@ -21,7 +21,6 @@ use PH7\Framework\Url\Url;
 class Compress
 {
     const COMPRESSION_LEVEL = 6;
-    const COMPRESSION_BYTE_BUFFER_SIZE = 2048;
     const GOOGLE_CLOSURE_HOST = 'closure-compiler.appspot.com';
     const GOOGLE_CLOSURE_PARAMS = 'js_code=%s&compilation_level=SIMPLE_OPTIMIZATIONS&output_format=text&output_info=compiled_code';
     const GOOGLE_CLOSURE_PORT = 80;
@@ -239,13 +238,11 @@ class Compress
      * It save your bandwidth and gives faster download of the pages.
      * WARNING: It can consume high CPU resources on the server.
      * So it might be wise not to use this method if the server isn't so powerful.
-     *
-     * @return void
      */
-    public static function enableZlipCompression()
+    public static function enableZlipCompression(): void
     {
-        ini_set('zlib.output_compression', self::COMPRESSION_LEVEL);
-        ini_set('zlib.output_compression_level', self::COMPRESSION_BYTE_BUFFER_SIZE);
+        ini_set('zlib.output_compression', '1'); // enable Zlib compression
+        ini_set('zlib.output_compression_level', self::COMPRESSION_LEVEL);
     }
 
     /**
@@ -269,17 +266,21 @@ class Compress
     /**
      * @param FileType $oType
      *
-     * @return void
+     * @return string The minified content
      */
     private function executeYuiCompressor(FileType $oType)
     {
+        $aOutput = [];
         exec(
             sprintf(
                 'java -jar %s %s --type %s --charset utf-8',
                 $this->sYuiCompressorPath,
                 $this->sTmpFilePath,
                 $oType->getValue()
-            )
+            ),
+            $aOutput
         );
+
+        return implode("\n", $aOutput);
     }
 }
