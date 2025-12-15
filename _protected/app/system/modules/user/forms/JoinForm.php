@@ -46,7 +46,6 @@ class JoinForm
 
         $sNameInLowerCase = strtolower(trim($sFirstName));
 
-        // Common female names (expanded list, cross-cultural)
         $aCommonFemaleNames = [
             'mary', 'maria', 'sarah', 'lisa', 'jennifer', 'linda', 'patricia',
             'barbara', 'susan', 'jessica', 'nancy', 'margaret', 'ashley',
@@ -57,7 +56,6 @@ class JoinForm
             'rebecca', 'rachel', 'hannah', 'alice', 'victoria', 'lucy', 'lily'
         ];
 
-        // Common male names (for accuracy)
         $aCommonMaleNames = [
             'james', 'john', 'robert', 'michael', 'william', 'david', 'richard',
             'joseph', 'thomas', 'charles', 'christopher', 'daniel', 'matthew',
@@ -74,7 +72,6 @@ class JoinForm
             return GenderTypeUserCore::MALE;
         }
 
-        // Name ending patterns (length-optimized)
         $aFemaleEndings = ['ia' => 2, 'ina' => 3, 'elle' => 4, 'ette' => 4, 'ine' => 3, 'anna' => 4, 'lyn' => 3];
         foreach ($aFemaleEndings as $sEnding => $iLength) {
             if (substr($sNameInLowerCase, -$iLength) === $sEnding && strlen($sNameInLowerCase) > $iLength) {
@@ -82,7 +79,6 @@ class JoinForm
             }
         }
 
-        // Default to male (statistically safer default for dating sites)
         return GenderTypeUserCore::MALE;
     }
 
