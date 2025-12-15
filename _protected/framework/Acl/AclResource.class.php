@@ -17,6 +17,9 @@ defined('PH7') or exit('Restricted access');
 
 class AclResource
 {
+    private string $sName;
+    private string $aAllowed;
+
     /**
      * @throws Exception
      */

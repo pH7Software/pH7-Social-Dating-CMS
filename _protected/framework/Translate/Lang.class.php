@@ -203,7 +203,7 @@ namespace PH7\Framework\Translate {
             $oCookie = new Cookie;
 
             if ($this->isLangParamSet()) {
-                $this->sUserLang = $_REQUEST[self::REQUEST_PARAM_NAME];
+                $this->sUserLang = $_REQUEST[self::REQUEST_PARAM_NAME] ?? '';
                 $oCookie->set(static::COOKIE_NAME, $this->sUserLang, static::COOKIE_LIFETIME);
             } elseif ($oCookie->exists(static::COOKIE_NAME)) {
                 $this->sUserLang = $oCookie->get(static::COOKIE_NAME);

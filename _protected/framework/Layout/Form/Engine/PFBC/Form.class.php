@@ -47,7 +47,7 @@ class Form extends Base
         self::$sFormId = $id;
         $this->configure([
             'width' => $width,
-            'action' => basename($_SERVER['SCRIPT_NAME']),
+            'action' => basename($_SERVER['SCRIPT_NAME'] ?? ''),
             'id' => preg_replace("/\W/", '-', $id),
             'method' => 'post'
         ]);
@@ -75,7 +75,7 @@ class Form extends Base
         /*The form's instance is recovered (unserialized) from the session.*/
         $form = self::recover($id);
         if (!empty($form)) {
-            if ($_SERVER['REQUEST_METHOD'] === 'POST')
+            if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST')
                 $data = $_POST;
             else
                 $data = $_GET;

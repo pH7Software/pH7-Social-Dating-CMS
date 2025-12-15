@@ -17,6 +17,9 @@ defined('PH7') or exit('Restricted access');
 
 class Role
 {
+    private string $sName;
+    private string $sPermissions;
+
     /**
      * @throws Exception
      */

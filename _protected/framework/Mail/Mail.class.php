@@ -95,12 +95,12 @@ class Mail implements Mailable
     {
         // If the email sender is empty, we define the server email.
         if (empty($aParams['from'])) {
-            $aParams['from'] = $_SERVER['SERVER_ADMIN'];
+            $aParams['from'] = $_SERVER['SERVER_ADMIN'] ?? 'noreply@localhost';
         }
 
         /*** Headers ***/
         // To avoid the email goes in the spam folder of email client.
-        $sHeaders = "From: \"{$_SERVER['HTTP_HOST']}\" <{$_SERVER['SERVER_ADMIN']}>\r\n";
+        $sHeaders = "From: \"" . ($_SERVER['HTTP_HOST'] ?? 'localhost') . "\" <" . ($_SERVER['SERVER_ADMIN'] ?? 'noreply@localhost') . ">\r\n";
 
         $sHeaders .= "Reply-To: <{$aParams['from']}>\r\n";
         $sHeaders .= "MIME-Version: 1.0\r\n";

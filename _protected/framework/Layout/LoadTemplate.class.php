@@ -174,7 +174,7 @@ class LoadTemplate
 
         $this->sUserTpl = null;
         if ($this->isTplParamSet()) {
-            $this->sUserTpl = $_REQUEST[self::REQUEST_PARAM_NAME];
+            $this->sUserTpl = $_REQUEST[self::REQUEST_PARAM_NAME] ?? '';
             $oCookie->set(self::COOKIE_NAME, $this->sUserTpl, static::COOKIE_LIFETIME);
         } elseif ($oCookie->exists(self::COOKIE_NAME)) {
             $this->sUserTpl = $oCookie->get(self::COOKIE_NAME);

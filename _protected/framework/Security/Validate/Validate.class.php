@@ -449,7 +449,7 @@ class Validate
         {
             if (preg_match("/^220/", $sOut = fgets($rConnect, 1024)))
             {
-                fputs($rConnect, "HELO {$_SERVER['HTTP_HOST']}\r\n");
+                fputs($rConnect, "HELO " . ($_SERVER['HTTP_HOST'] ?? 'localhost') . "\r\n");
                 $sOut = fgets($rConnect, 1024);
                 fputs($rConnect, "MAIL FROM: <{$sEmail}>\r\n");
                 $sFrom = fgets($rConnect, 1024);
