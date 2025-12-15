@@ -46,25 +46,43 @@ class JoinForm
 
         $sNameInLowerCase = strtolower(trim($sFirstName));
 
+        // Common female names (expanded list, cross-cultural)
         $aCommonFemaleNames = [
             'mary', 'maria', 'sarah', 'lisa', 'jennifer', 'linda', 'patricia',
             'barbara', 'susan', 'jessica', 'nancy', 'margaret', 'ashley',
             'emily', 'elizabeth', 'michelle', 'amanda', 'melissa', 'deborah',
             'sophie', 'emma', 'olivia', 'ava', 'isabella', 'mia', 'charlotte',
-            'amelia', 'harper', 'sophia', 'evelyn', 'abigail', 'ella', 'grace'
+            'amelia', 'harper', 'sophia', 'evelyn', 'abigail', 'ella', 'grace',
+            'anna', 'marie', 'claire', 'julie', 'kate', 'katherine', 'laura',
+            'rebecca', 'rachel', 'hannah', 'alice', 'victoria', 'lucy', 'lily'
+        ];
+
+        // Common male names (for accuracy)
+        $aCommonMaleNames = [
+            'james', 'john', 'robert', 'michael', 'william', 'david', 'richard',
+            'joseph', 'thomas', 'charles', 'christopher', 'daniel', 'matthew',
+            'anthony', 'mark', 'donald', 'steven', 'paul', 'andrew', 'joshua',
+            'kevin', 'brian', 'george', 'edward', 'ronald', 'timothy', 'jason',
+            'jeffrey', 'ryan', 'jacob', 'nicholas', 'eric', 'stephen', 'jonathan'
         ];
 
         if (in_array($sNameInLowerCase, $aCommonFemaleNames, true)) {
             return GenderTypeUserCore::FEMALE;
         }
 
-        $aFemaleNameEndings = ['ia', 'ina', 'elle', 'ette', 'ine'];
-        foreach ($aFemaleNameEndings as $sEnding) {
-            if (substr($sNameInLowerCase, -strlen($sEnding)) === $sEnding) {
+        if (in_array($sNameInLowerCase, $aCommonMaleNames, true)) {
+            return GenderTypeUserCore::MALE;
+        }
+
+        // Name ending patterns (length-optimized)
+        $aFemaleEndings = ['ia' => 2, 'ina' => 3, 'elle' => 4, 'ette' => 4, 'ine' => 3, 'anna' => 4, 'lyn' => 3];
+        foreach ($aFemaleEndings as $sEnding => $iLength) {
+            if (substr($sNameInLowerCase, -$iLength) === $sEnding && strlen($sNameInLowerCase) > $iLength) {
                 return GenderTypeUserCore::FEMALE;
             }
         }
 
+        // Default to male (statistically safer default for dating sites)
         return GenderTypeUserCore::MALE;
     }
 
