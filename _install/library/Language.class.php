@@ -3,7 +3,7 @@
  * @title            Language Class
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2026, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package          PH7 / Install / Library
  */
@@ -49,7 +49,7 @@ class Language
             return null;
         }
 
-        $sLang = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE'])[0];
+        $sLang = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '')[0];
 
         return htmlspecialchars(
             strtolower(

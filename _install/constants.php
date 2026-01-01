@@ -1,7 +1,7 @@
 <?php
 /**
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright        (c) 2012-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2026, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  */
 
@@ -16,15 +16,15 @@ $sUrlProtocol = (
     (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) === 'on') ||
     (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ||
     (!empty($_SERVER['REQUEST_SCHEME']) && $_SERVER['REQUEST_SCHEME'] === 'https') ||
-    $_SERVER['SERVER_PORT'] === '443'
+    ($_SERVER['SERVER_PORT'] ?? '') === '443'
 ) ? 'https://' : 'http://';
 
 // Determine the domain name, with the port if necessary
-$sServerName = $_SERVER['SERVER_NAME'] !== $_SERVER['HTTP_HOST'] ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
-$sDomain = ($_SERVER['SERVER_PORT'] !== '80' && $_SERVER['SERVER_PORT'] !== '443' && strpos($sServerName, ':') === false) ? $sServerName . ':' . $_SERVER['SERVER_PORT'] : $sServerName;
+$sServerName = ($_SERVER['SERVER_NAME'] ?? '') !== ($_SERVER['HTTP_HOST'] ?? '') ? ($_SERVER['HTTP_HOST'] ?? '') : ($_SERVER['SERVER_NAME'] ?? '');
+$sDomain = (($_SERVER['SERVER_PORT'] ?? '') !== '80' && ($_SERVER['SERVER_PORT'] ?? '') !== '443' && strpos($sServerName, ':') === false) ? $sServerName . ':' . ($_SERVER['SERVER_PORT'] ?? '') : $sServerName;
 
 // Determine the current file of the application
-$sPhp_self = str_replace('\\', '', dirname(htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES))); // Remove backslashes for Windows compatibility
+$sPhp_self = str_replace('\\', '', dirname(htmlspecialchars($_SERVER['PHP_SELF'] ?? '', ENT_QUOTES))); // Remove backslashes for Windows compatibility
 
 //---------- Constants ----------//
 

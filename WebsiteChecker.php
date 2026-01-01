@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright      (c) 2018-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2018-2026, Pierre-Henry Soria. All Rights Reserved.
  * @license        See LICENSE.md and COPYRIGHT.md in the root directory.
  * @link           https://ph7builder.com
  * @package        PH7 / ROOT
@@ -55,7 +55,7 @@ class WebsiteChecker
     public function moveToInstaller(): void
     {
         // Remove backslashes for Windows compatibility
-        $sUrlPath = str_replace('\\', '', dirname(htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES)));
+        $sUrlPath = str_replace('\\', '', dirname(htmlspecialchars($_SERVER['PHP_SELF'] ?? '', ENT_QUOTES)));
         $sUrlPath = substr($sUrlPath, -1) !== '/' ? $sUrlPath . '/' : $sUrlPath;
 
         header('Location: ' . $sUrlPath . self::INSTALL_FOLDER_NAME);
