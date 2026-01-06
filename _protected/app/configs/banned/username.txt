@@ -1,4 +1,4 @@
-# Do not delete "admin" in this list, otherwise the default avatar "admin" (AvatarDesignCore, ...), etc.. no longer work #
+# Do not delete "admin" from the list, otherwise the default "admin" avatar (AvatarDesignCore, ...), will no longer work #
 
 admin
 root
