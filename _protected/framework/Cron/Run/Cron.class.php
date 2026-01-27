@@ -63,7 +63,7 @@ abstract class Cron extends Core
         }
 
         if ($bStatus) {
-            $this->file->putFile($this->sDelayPathFile, $this->iTime);
+            $this->file->putFile($this->sDelayPathFile, (string) $this->iTime);
         }
 
         return $bStatus;

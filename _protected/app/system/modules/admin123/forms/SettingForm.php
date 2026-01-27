@@ -28,6 +28,7 @@ use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Security\Spam\Captcha\Captcha;
 use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Header;
+use PFBC\Element\Radio;
 
 class SettingForm
 {
@@ -343,6 +344,29 @@ class SettingForm
         $oForm->addElement(new Email(t('Feedback Email:'), 'feedback_email', ['value' => DbConfig::getSetting('feedbackEmail'), 'required' => 1]));
 
         $oForm->addElement(new Email(t('Return Email:'), 'return_email', ['description' => 'Usually noreply@yoursite.com', 'value' => DbConfig::getSetting('returnEmail'), 'required' => 1]));
+
+        $oForm->addElement(new Radio(t('Mail Type:'), 'mail_type',
+            [
+                'mail' => 'mail ' . t('(PHP built-in function, recommended for most users)'),
+                'smtp' => 'SMTP ' . t('(For advanced users; You need to have an SMTP server credentials and fill in all the fields below)'),
+            ],
+            ['value' => DbConfig::getSetting('mailType'), 'required' => 1]));
+        
+        $oForm->addElement(new Textbox(t('SMTP Host:'), 'smtp_host', ['value' => DbConfig::getSetting('smtpHostName'), 'required' => 0]));
+
+        $oForm->addElement(new Textbox(t('SMTP Port:'), 'smtp_port', ['value' => DbConfig::getSetting('smtpPort'), 'required' => 0]));
+
+        $oForm->addElement(new Textbox(t('SMTP Username:'), 'smtp_user', ['value' => DbConfig::getSetting('smtpUsername'), 'required' => 0]));
+
+        $oForm->addElement(new Textbox(t('SMTP Password:'), 'smtp_pass', ['value' => DbConfig::getSetting('smtpPassword'), 'required' => 0]));
+
+        $oForm->addElement(new Radio(t('SMTP Encryption:'), 'smtp_encryption',
+            [
+                'tls' => 'TLS',
+                'ssl' => 'SSL',
+                '' => t('None').' '.t('(No encryption)'),
+            ],
+            ['value' => DbConfig::getSetting('smtpEncryption'), 'required' => 0]));
 
 
         /********** Security **********/

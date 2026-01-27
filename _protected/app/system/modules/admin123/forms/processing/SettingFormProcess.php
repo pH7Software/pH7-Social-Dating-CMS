@@ -88,6 +88,15 @@ class SettingFormProcess extends Form
         'admin_email' => 'adminEmail',
         'feedback_email' => 'feedbackEmail',
         'return_email' => 'returnEmail',
+        
+        // SMTP
+        'mail_type' => 'mailType',
+        'smtp_host' => 'smtpHostName',
+        'smtp_port' => 'smtpPort',
+        'smtp_user' => 'smtpUsername',
+        'smtp_pass' => 'smtpPassword',
+        'smtp_encryption' => 'smtpEncryption',
+
 
         // Security
         'min_password_length' => 'minPasswordLength',
