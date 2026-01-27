@@ -8,6 +8,7 @@
  *
  * @history          11/04/2021 - Use strict type declarations
  * @history          04/18/2022 - Moved from Swift Mailer (now discontinued) to Symfony Mailer.
+ * @history          27/01/2026 - Improved SMTP transport configuration for Symfony Mailer.
  */
 
 declare(strict_types=1);
@@ -24,6 +25,7 @@ use Symfony\Component\Mailer\Transport\SendmailTransport;
 use Symfony\Component\Mime\Address;
 use PH7\HtmlToText\Convert as Html2Text;
 use Symfony\Component\Mime\Email as EmailMessage;
+use Symfony\Component\Mailer\Transport;
 
 class Mail implements Mailable
 {
@@ -42,7 +44,29 @@ class Mail implements Mailable
 
         try {
             // Setup the mailer
-            $oTransport = new SendmailTransport();
+            if (DbConfig::getSetting('mailType') === 'smtp')
+            {
+                $host = DbConfig::getSetting('smtpHostName');
+                $port = (int)(DbConfig::getSetting('smtpPort') ?: 587);
+                $user = (string)DbConfig::getSetting('smtpUsername');
+                $pass = (string)DbConfig::getSetting('smtpPassword');
+                $encryption = DbConfig::getSetting('smtpEncryption'); // 'ssl'|'tls'|''
+
+                if ($encryption === 'ssl' || $port === 465) {
+                    $scheme = 'smtps';
+                } else {
+                    $scheme = 'smtp';
+                }
+                // Build the DSN string
+                $creds = $user !== '' ? rawurlencode($user) . ':' . rawurlencode($pass) . '@' : '';
+                $dsn = sprintf('%s://%s%s:%d', $scheme, $creds, $host, $port);
+
+                $oTransport = Transport::fromDsn($dsn);
+            } else {
+                $oTransport = new SendmailTransport();
+            }
+            // Old way to Setup the mailer
+            //$oTransport = new SendmailTransport();
             $oMailer = new Mailer($oTransport);
 
             $oMessage = new EmailMessage();
