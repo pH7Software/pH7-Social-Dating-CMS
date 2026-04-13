@@ -40,6 +40,9 @@ class Header
         $oHttpRequest = new HttpRequest;
         $sUrl = $sUrl !== null ? $sUrl : $oHttpRequest->currentUrl();
         $sUrl = $oHttpRequest->pH7Url($sUrl);
+        if (!self::isSafeRedirectUrl($sUrl)) {
+            $sUrl = PH7_URL_ROOT;
+        }
         unset($oHttpRequest);
 
         if ($sMessage !== null) {
@@ -48,6 +51,26 @@ class Header
 
         header('Location: ' . $sUrl);
         exit;
+    }
+
+    private static function isSafeRedirectUrl(string $sUrl): bool
+    {
+        if (preg_match('/[\r\n]/', $sUrl)) {
+            return false;
+        }
+
+        $sScheme = strtolower((string)parse_url($sUrl, PHP_URL_SCHEME));
+        if (!in_array($sScheme, ['http', 'https'], true)) {
+            return false;
+        }
+
+        $sHost = Http::getHostName($sUrl);
+        $sCurrentHost = Http::getHostName(PH7_URL_ROOT);
+        if (empty($sHost) || empty($sCurrentHost)) {
+            return false;
+        }
+
+        return $sHost === $sCurrentHost;
     }
 
     /**
