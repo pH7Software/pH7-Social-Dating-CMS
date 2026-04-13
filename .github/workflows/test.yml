@@ -40,5 +40,5 @@ jobs:
       - name: Install Composer Dependencies
         run: composer install --no-interaction --no-progress
 
-      - name: Run Unit Tests
+      - name: Run Unit Tests (CI Suite)
         run: php -d error_reporting="E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED" _protected/vendor/bin/phpunit --testsuite "pH7Builder Protected CI"
