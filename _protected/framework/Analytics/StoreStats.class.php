@@ -36,7 +36,7 @@ class StoreStats
             throw new IOException('Cannot get cache file: ' . $sFullPath);
         }
 
-        $aData = !empty($aGetData) ? unserialize($aGetData) : [];
+        $aData = !empty($aGetData) ? unserialize($aGetData, ['allowed_classes' => false]) : [];
 
         return $aData;
     }
@@ -59,7 +59,7 @@ class StoreStats
 
         if (is_file($sFullPath)) {
             $aLine = file($sFullPath);
-            $aData = unserialize($aLine[0]);
+            $aData = unserialize($aLine[0], ['allowed_classes' => false]);
             $sContents = strtolower($sContents); // Case-insensitive
 
             !empty($aData[$sContents]) ? $aData[$sContents]++ : $aData[$sContents] = 1;

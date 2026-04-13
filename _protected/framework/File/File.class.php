@@ -605,7 +605,7 @@ class File
      */
     public function unpack($sData)
     {
-        return unserialize(urldecode($sData));
+        return unserialize(urldecode($sData), ['allowed_classes' => false]);
     }
 
     /**

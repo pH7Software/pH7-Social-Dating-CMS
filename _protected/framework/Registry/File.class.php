@@ -48,7 +48,7 @@ abstract class File implements \Serializable
      */
     public function unserialize($sData)
     {
-        return unserialize($sData);
+        return unserialize($sData, ['allowed_classes' => false]);
     }
 
     /**
