@@ -43,7 +43,8 @@ class Video extends Upload
         'video/flv' => 'video/x-flv',
         'video/mpg' => 'video/mpeg',
         'video/wmv' => 'video/x-ms-wmv',
-        'video/mkv' => 'video/x-matroska'
+        'video/mkv' => 'video/x-matroska',
+        'application/ogg' => 'video/ogg'
     ];
 
     private const MP4_TYPE = 'mp4';
@@ -103,7 +104,7 @@ class Video extends Upload
         }
 
         $sDetectedMime = $this->detectMimeType();
-        if ($sDetectedMime !== '') {
+        if ($this->isReliableDetectedMime($sDetectedMime)) {
             return $this->mimeMatchesExpected($sDetectedMime, $sExpectedMime);
         }
 
@@ -245,6 +246,13 @@ class Video extends Upload
         $sMimeType = strtolower(trim($sMimeType));
 
         return self::MIME_ALIASES[$sMimeType] ?? $sMimeType;
+    }
+
+    private function isReliableDetectedMime(string $sMimeType): bool
+    {
+        $sMimeType = $this->normalizeMimeType($sMimeType);
+
+        return $sMimeType !== '' && $sMimeType !== 'application/octet-stream';
     }
 
     private function isUploadedTempFile(): bool
