@@ -1,6 +1,6 @@
 # Set the wanted Ubuntu & PHP versions
 ARG UBUNTU_VERSION=22.04
-ARG PHP_VERSION=8.1.0
+ARG PHP_VERSION=8.2.0
 ARG PHP_BASE_IMAGE=fpm
 
 
