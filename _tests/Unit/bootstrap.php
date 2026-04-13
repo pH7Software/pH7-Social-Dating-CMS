@@ -86,21 +86,23 @@ include PH7_PATH_TEST . 'requirements_check.inc.php';
  * Bootstrap the app config needed by framework services during tests.
  * Creates a temporary app config from fixtures when absent and removes it at shutdown.
  */
-function ensureTestAppConfigFile(): void
-{
-    $sAppConfigFile = PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE;
-    $sTestConfigFile = PH7_PATH_TEST . 'fixtures/' . PH7_CONFIG_FILE;
+if (!function_exists('ensureTestAppConfigFile')) {
+    function ensureTestAppConfigFile(): void
+    {
+        $sAppConfigFile = PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE;
+        $sTestConfigFile = PH7_PATH_TEST . 'fixtures/' . PH7_CONFIG_FILE;
 
-    if (is_file($sAppConfigFile) || !is_file($sTestConfigFile)) {
-        return;
-    }
+        if (is_file($sAppConfigFile) || !is_file($sTestConfigFile)) {
+            return;
+        }
 
-    if (copy($sTestConfigFile, $sAppConfigFile)) {
-        register_shutdown_function(static function () use ($sAppConfigFile): void {
-            if (is_file($sAppConfigFile)) {
-                unlink($sAppConfigFile);
-            }
-        });
+        if (copy($sTestConfigFile, $sAppConfigFile)) {
+            register_shutdown_function(static function () use ($sAppConfigFile): void {
+                if (is_file($sAppConfigFile)) {
+                    unlink($sAppConfigFile);
+                }
+            });
+        }
     }
 }
 
