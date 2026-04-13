@@ -69,7 +69,7 @@ final class UserNotifierTest extends TestCase
 
     public function testThrowsExceptionWhenEmailIsNull(): void
     {
-        $this->expectException(InvalidEmailException::class);
+        $this->expectException(\TypeError::class);
 
         $this->oUserNotifier
             ->setUserEmail(null)

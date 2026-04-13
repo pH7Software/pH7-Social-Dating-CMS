@@ -33,7 +33,7 @@ class ToolTest extends TestCase
      */
     public function testSoftwareApiUrl(): void
     {
-        $this->assertSame('https://api.ph7cms.com/', Tool::SOFTWARE_API_URL);
+        $this->assertSame('https://api.ph7builder.com/', Tool::SOFTWARE_API_URL);
     }
 
     public function testValidGetApiAccess(): void
