@@ -353,7 +353,10 @@ class File
     public function systemCopy($sFrom, $sTo)
     {
         if (file_exists($this->removeWildcards($sFrom))) {
-            return system("cp -r $sFrom $sTo");
+            $sFromArg = escapeshellarg($sFrom);
+            $sToArg = escapeshellarg($sTo);
+
+            return system("cp -r -- $sFromArg $sToArg");
         }
 
         return false;
@@ -403,7 +406,10 @@ class File
     public function systemRename($sFrom, $sTo)
     {
         if (file_exists($this->removeWildcards($sFrom))) {
-            return system("mv $sFrom $sTo");
+            $sFromArg = escapeshellarg($sFrom);
+            $sToArg = escapeshellarg($sTo);
+
+            return system("mv -- $sFromArg $sToArg");
         }
 
         return false;
