@@ -41,7 +41,9 @@ class Video extends Upload
 
     private File $oFile;
 
-    private string $sType;
+    private string $sMimeType;
+
+    private string $sExt;
 
     private string $sFfmpegPath;
 
@@ -63,7 +65,8 @@ class Video extends Upload
 
         $this->oFile = new File;
         $this->aFile = $aFile;
-        $this->sType = $this->aFile['type'];
+        $this->sMimeType = (string)($this->aFile['type'] ?? '');
+        $this->sExt = $this->oFile->getFileExt((string)($this->aFile['name'] ?? ''));
 
         /** Attributes from "Upload" abstract class **/
         $this->sMaxSize = Config::getInstance()->values['video']['upload.max_size'];
@@ -85,7 +88,12 @@ class Video extends Upload
             }
         }
 
-        return in_array($this->sType, self::SUPPORTED_TYPES, true);
+        $sMimeType = $this->detectMimeType();
+        $bValidByDetectedMime = in_array($sMimeType, self::SUPPORTED_TYPES, true);
+        $bValidByClientMime = in_array($this->sMimeType, self::SUPPORTED_TYPES, true);
+        $bValidByExtension = array_key_exists($this->sExt, self::SUPPORTED_TYPES);
+
+        return $bValidByDetectedMime || ($bValidByClientMime && $bValidByExtension);
     }
 
     /**
@@ -122,7 +130,9 @@ class Video extends Upload
             $sParams = '-c copy -copyts';
         }
 
-        $this->executeCommand('-i', "{$this->aFile['tmp_name']} $sParams $sFile");
+        $sInput = escapeshellarg($this->aFile['tmp_name']);
+        $sOutput = escapeshellarg($sFile);
+        $this->executeCommand('-i', "$sInput $sParams $sOutput");
 
         return $sFile;
     }
@@ -139,9 +149,11 @@ class Video extends Upload
      */
     public function thumbnail($sPicturePath, $iSeconds, $iWidth, $iHeight)
     {
+        $sInput = escapeshellarg($this->aFile['tmp_name']);
+        $sOutput = escapeshellarg($sPicturePath);
         $this->executeCommand(
             '-itsoffset',
-            "-$iSeconds -i {$this->aFile['tmp_name']} -vcodec mjpeg -vframes 1 -an -f rawvideo -s {$iWidth}x{$iHeight} $sPicturePath"
+            "-$iSeconds -i $sInput -vcodec mjpeg -vframes 1 -an -f rawvideo -s {$iWidth}x{$iHeight} $sOutput"
         );
 
         return $sPicturePath;
@@ -154,9 +166,10 @@ class Video extends Upload
      */
     public function getDuration()
     {
+        $sInput = escapeshellarg($this->aFile['tmp_name']);
         $sTime = $this->executeCommand(
             '-i ',
-            "{$this->aFile['tmp_name']} 2>&1 | grep -i 'duration' | cut -d ' ' -f 4 | sed s/,//"
+            "$sInput 2>&1 | grep -i 'duration' | cut -d ' ' -f 4 | sed s/,//"
         );
 
         return Various::timeToSec($sTime);
@@ -169,7 +182,7 @@ class Video extends Upload
      */
     public function getExt()
     {
-        return $this->sType;
+        return $this->sExt;
     }
 
     /**
@@ -185,11 +198,27 @@ class Video extends Upload
         exec(
             sprintf(
                 '%s %s %s',
-                $this->sFfmpegPath,
+                escapeshellarg($this->sFfmpegPath),
                 $sFlag,
                 $sArgument
             )
         );
+    }
+
+    private function detectMimeType(): string
+    {
+        if (function_exists('finfo_open') && is_file($this->aFile['tmp_name'])) {
+            $rFileInfo = finfo_open(FILEINFO_MIME_TYPE);
+            if ($rFileInfo !== false) {
+                $sDetectedType = finfo_file($rFileInfo, $this->aFile['tmp_name']);
+                finfo_close($rFileInfo);
+                if (is_string($sDetectedType) && $sDetectedType !== '') {
+                    return $sDetectedType;
+                }
+            }
+        }
+
+        return $this->sMimeType;
     }
 
     /**
