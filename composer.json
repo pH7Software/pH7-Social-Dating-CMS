@@ -106,7 +106,7 @@
   "scripts": {
     "test": "_protected/vendor/bin/phpunit",
     "test-ci": "_protected/vendor/bin/phpunit --coverage-text --coverage-clover=build/coverage.xml",
-    "analyse": "_protected/vendor/bin/phpstan analyse",
+    "analyse": "_protected/vendor/bin/phpstan analyse _protected",
     "post-cmd": [
       "cp -R _protected/vendor/twbs/bootstrap/dist/css/bootstrap.min.css static/css/bootstrap.css",
       "cp -R _protected/vendor/twbs/bootstrap/dist/js/bootstrap.min.js static/js/bootstrap.js"
