@@ -13,6 +13,11 @@ use PH7\Framework\Translate\Lang;
 
 define('PH7', 1);
 
+// Keep legacy test stack stable on PHP 8.4+ where upstream test deps emit deprecations.
+if (PHP_VERSION_ID >= 80400) {
+    error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
+}
+
 // Set default HTTP_ACCEPT_LANGUAGE SERVER var
 $_SERVER['HTTP_ACCEPT_LANGUAGE'] = 'en-GB,en;q=0.9';
 
