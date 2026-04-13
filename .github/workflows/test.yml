@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         os: [ 'ubuntu-latest' ]
-        php-versions: [ '8.0', '8.1', '8.2', '8.3' ]
+        php-versions: [ '8.0', '8.1', '8.2', '8.3', '8.4' ]
         phpunit-version: [ '9.5' ]
     name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.os }}
     steps:
@@ -41,4 +41,4 @@ jobs:
         run: composer install --no-interaction --no-progress
 
       - name: Run Unit Tests
-        run: _protected/vendor/bin/phpunit --testsuite "pH7Builder Protected CI"
+        run: php -d error_reporting="E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED" _protected/vendor/bin/phpunit --testsuite "pH7Builder Protected CI"
