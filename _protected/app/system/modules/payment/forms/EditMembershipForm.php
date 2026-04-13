@@ -64,7 +64,7 @@ class EditMembershipForm
         );
 
         $aDefPerms = include dirname(__DIR__) . PH7_DS . PH7_CONFIG . 'perms.inc.php';
-        $aDbPerms = unserialize($oMembership->permissions);
+        $aDbPerms = unserialize($oMembership->permissions, ['allowed_classes' => false]);
         $aPerms = array_merge($aDefPerms, $aDbPerms); // Update new permissions from perms.inc.php file
 
         foreach ($aPerms as $sKey => $sVal) {

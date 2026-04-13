@@ -93,7 +93,7 @@ class UserCoreModel extends Model
             $rStmt->execute();
             $sPermissions = $rStmt->fetchColumn();
             Db::free($rStmt);
-            $oPermissions = ObjArr::toObject(unserialize($sPermissions));
+            $oPermissions = ObjArr::toObject(unserialize($sPermissions, ['allowed_classes' => false]));
             $this->cache->put($oPermissions);
         }
 
