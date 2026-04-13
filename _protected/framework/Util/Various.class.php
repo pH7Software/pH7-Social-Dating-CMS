@@ -32,6 +32,20 @@ class Various
      */
     public static function genRnd($sStr = null, $iLength = self::DEFAULT_LENGTH)
     {
+        $iLength = (int)$iLength;
+        if ($iLength <= 0) {
+            return '';
+        }
+
+        $iBytesLength = (int)max(16, ceil($iLength / 2));
+
+        try {
+            $sChars = bin2hex(random_bytes($iBytesLength));
+            return substr($sChars, 0, $iLength);
+        } catch (\Throwable $oException) {
+            // Graceful fallback for environments where cryptographic RNG is unavailable.
+        }
+
         $sPrefix = (string)mt_rand();
         $sStr = !empty($sStr) ? (string)$sStr : '';
 
