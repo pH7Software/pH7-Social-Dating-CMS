@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         os: [ 'ubuntu-latest' ]
-        php-versions: [ '8.0', '8.1', '8.2', '8.3' ]
+        php-versions: [ '8.2', '8.3', '8.4', '8.5' ]
     name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.os }}
 
     steps:
@@ -38,4 +38,4 @@ jobs:
         run: composer install --no-interaction --no-progress
 
       - name: Run PHPStan
-        run: _protected/vendor/bin/phpstan analyse _protected --error-format=github
+        run: _protected/vendor/bin/phpstan analyse --configuration=phpstan.neon.dist --memory-limit=1G --error-format=github
