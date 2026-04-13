@@ -66,12 +66,14 @@ class Header
         $sScheme = $iProtocolSeparatorPos !== false ? substr($sServerProtocol, 0, $iProtocolSeparatorPos) : 'http';
         $sProtocol = $sScheme . ($bSecure ? 's' : '');
 
-        $sHost = (string)($_SERVER['HTTP_HOST'] ?? $_SERVER['SERVER_NAME'] ?? 'localhost');
+        $sHostHeader = (string)($_SERVER['HTTP_HOST'] ?? '');
+        $sHost = $sHostHeader !== '' ? $sHostHeader : (string)($_SERVER['SERVER_NAME'] ?? 'localhost');
         $iPort = (int)($_SERVER['SERVER_PORT'] ?? 0);
         $sRequestUri = (string)($_SERVER['REQUEST_URI'] ?? PH7_SH);
 
+        $bHostAlreadyContainsPort = $sHostHeader !== '' && strpos($sHostHeader, ':') !== false;
         $bIsStandardPort = ($bSecure && $iPort === 443) || (!$bSecure && $iPort === 80) || $iPort === 0;
-        $sPort = $bIsStandardPort ? '' : ':' . $iPort;
+        $sPort = ($bIsStandardPort || $bHostAlreadyContainsPort) ? '' : ':' . $iPort;
 
         return $sProtocol . '://' . $sHost . $sPort . $sRequestUri;
     }
