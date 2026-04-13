@@ -24,17 +24,26 @@ use PH7\Framework\File\Upload;
 class Video extends Upload
 {
     public const SUPPORTED_TYPES = [
-        'mov' => 'video/mov',
-        'avi' => 'video/avi',
-        'flv' => 'video/flv',
+        'mov' => 'video/quicktime',
+        'avi' => 'video/x-msvideo',
+        'flv' => 'video/x-flv',
         'mp4' => 'video/mp4',
-        'mpg' => 'video/mpg',
+        'mpg' => 'video/mpeg',
         'mpeg' => 'video/mpeg',
-        'wmv' => 'video/wmv',
+        'wmv' => 'video/x-ms-wmv',
         'ogg' => 'video/ogg',
         'ogv' => 'video/ogv',
         'webm' => 'video/webm',
-        'mkv' => 'video/mkv'
+        'mkv' => 'video/x-matroska'
+    ];
+
+    private const MIME_ALIASES = [
+        'video/mov' => 'video/quicktime',
+        'video/avi' => 'video/x-msvideo',
+        'video/flv' => 'video/x-flv',
+        'video/mpg' => 'video/mpeg',
+        'video/wmv' => 'video/x-ms-wmv',
+        'video/mkv' => 'video/x-matroska'
     ];
 
     private const MP4_TYPE = 'mp4';
@@ -80,7 +89,7 @@ class Video extends Upload
      */
     public function validate()
     {
-        if (!is_uploaded_file($this->aFile['tmp_name'])) {
+        if (!$this->isUploadedTempFile()) {
             if (isDebug()) {
                 throw new TooLargeException('Video file could not be uploaded. Possibly too large.');
             } else {
@@ -88,12 +97,17 @@ class Video extends Upload
             }
         }
 
-        $sMimeType = $this->detectMimeType();
-        $bValidByDetectedMime = in_array($sMimeType, self::SUPPORTED_TYPES, true);
-        $bValidByClientMime = in_array($this->sMimeType, self::SUPPORTED_TYPES, true);
-        $bValidByExtension = array_key_exists($this->sExt, self::SUPPORTED_TYPES);
+        $sExpectedMime = $this->getExpectedMimeByExtension();
+        if ($sExpectedMime === null) {
+            return false;
+        }
 
-        return $bValidByDetectedMime || ($bValidByClientMime && $bValidByExtension);
+        $sDetectedMime = $this->detectMimeType();
+        if ($sDetectedMime !== '') {
+            return $this->mimeMatchesExpected($sDetectedMime, $sExpectedMime);
+        }
+
+        return $this->mimeMatchesExpected($this->sMimeType, $sExpectedMime);
     }
 
     /**
@@ -130,7 +144,7 @@ class Video extends Upload
             $sParams = '-c copy -copyts';
         }
 
-        $sInput = escapeshellarg($this->aFile['tmp_name']);
+        $sInput = $this->getEscapedTmpFilePath();
         $sOutput = escapeshellarg($sFile);
         $this->executeCommand('-i', "$sInput $sParams $sOutput");
 
@@ -149,7 +163,7 @@ class Video extends Upload
      */
     public function thumbnail($sPicturePath, $iSeconds, $iWidth, $iHeight)
     {
-        $sInput = escapeshellarg($this->aFile['tmp_name']);
+        $sInput = $this->getEscapedTmpFilePath();
         $sOutput = escapeshellarg($sPicturePath);
         $this->executeCommand(
             '-itsoffset',
@@ -166,7 +180,7 @@ class Video extends Upload
      */
     public function getDuration()
     {
-        $sInput = escapeshellarg($this->aFile['tmp_name']);
+        $sInput = $this->getEscapedTmpFilePath();
         $sTime = $this->executeCommand(
             '-i ',
             "$sInput 2>&1 | grep -i 'duration' | cut -d ' ' -f 4 | sed s/,//"
@@ -191,11 +205,11 @@ class Video extends Upload
      * @param string $sFlag
      * @param string $sArgument
      *
-     * @return void
+     * @return string
      */
     private function executeCommand($sFlag, $sArgument)
     {
-        exec(
+        return (string)exec(
             sprintf(
                 '%s %s %s',
                 escapeshellarg($this->sFfmpegPath),
@@ -218,7 +232,34 @@ class Video extends Upload
             }
         }
 
-        return $this->sMimeType;
+        return '';
+    }
+
+    private function mimeMatchesExpected(string $sMimeType, string $sExpectedMime): bool
+    {
+        return $this->normalizeMimeType($sMimeType) === $sExpectedMime;
+    }
+
+    private function normalizeMimeType(string $sMimeType): string
+    {
+        $sMimeType = strtolower(trim($sMimeType));
+
+        return self::MIME_ALIASES[$sMimeType] ?? $sMimeType;
+    }
+
+    private function isUploadedTempFile(): bool
+    {
+        return isset($this->aFile['tmp_name']) && is_uploaded_file($this->aFile['tmp_name']);
+    }
+
+    private function getExpectedMimeByExtension(): ?string
+    {
+        return self::SUPPORTED_TYPES[$this->sExt] ?? null;
+    }
+
+    private function getEscapedTmpFilePath(): string
+    {
+        return escapeshellarg((string)$this->aFile['tmp_name']);
     }
 
     /**
