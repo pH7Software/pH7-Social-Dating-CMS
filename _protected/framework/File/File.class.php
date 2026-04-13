@@ -575,7 +575,7 @@ class File
                 $sFullPath = $sPath . PH7_DS . $sFile;
 
                 if (is_dir($sFullPath)) {
-                    $iSize = $this->getDirSize($sFullPath);
+                    $iSize += $this->getDirSize($sFullPath);
                 } else {
                     $iSize += $this->size($sFullPath);
                 }
