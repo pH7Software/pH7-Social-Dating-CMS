@@ -29,11 +29,11 @@ class Header
      * @param string $sUrl Default NULL, so it's the current URL.
      * @param string $sMessage Default NULL, so no message.
      * @param string $sType Type of message: "Design::SUCCESS_TYPE", "Design::INFO_TYPE", "Design::WARNING_TYPE" or "Design::ERROR_TYPE"
-     * @param int $iRedirectCode Optional. Default MOVED_PERMANENTLY 301
+     * @param int $iRedirectCode Optional. Default FOUND 302
      *
      * @return void
      */
-    public static function redirect($sUrl = null, $sMessage = null, $sType = Design::SUCCESS_TYPE, int $iRedirectCode = StatusCode::MOVED_PERMANENTLY)
+    public static function redirect($sUrl = null, $sMessage = null, $sType = Design::SUCCESS_TYPE, int $iRedirectCode = StatusCode::FOUND)
     {
         Http::setHeadersByCode($iRedirectCode);
 
