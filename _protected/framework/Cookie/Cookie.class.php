@@ -19,6 +19,8 @@ use PH7\Framework\Server\Server;
 
 class Cookie
 {
+    private const DEFAULT_EXPIRATION = 86400;
+
     /**
      * Set a PHP cookie.
      *
@@ -29,7 +31,13 @@ class Cookie
      */
     public function set($mName, ?string $sValue = null, ?int $iTime = null, ?bool $bSecure = null): void
     {
-        $iTime = time() + ((int)!empty($iTime) ? $iTime : Config::getInstance()->values['cookie']['expiration']);
+        $aCookieConfig = Config::getInstance()->values['cookie'] ?? [];
+        $sCookiePrefix = $aCookieConfig['prefix'] ?? '';
+        $sCookiePath = $aCookieConfig['path'] ?? PH7_SH;
+        $sCookieDomain = $aCookieConfig['domain'] ?? '';
+        $iExpiration = (int)($aCookieConfig['expiration'] ?? self::DEFAULT_EXPIRATION);
+
+        $iTime = time() + ((int)!empty($iTime) ? $iTime : $iExpiration);
         $bSecure = !empty($bSecure) && is_bool($bSecure) ? $bSecure : Server::isHttps();
 
         if (is_array($mName)) {
@@ -37,7 +45,7 @@ class Cookie
                 $this->set($sName, $sVal, $iTime, $bSecure);
             }
         } else {
-            $sCookieName = Config::getInstance()->values['cookie']['prefix'] . $mName;
+            $sCookieName = $sCookiePrefix . $mName;
 
             /* Check if we are not in localhost mode, otherwise may not work */
             if (!Server::isLocalHost()) {
@@ -45,8 +53,8 @@ class Cookie
                     $sCookieName,
                     $sValue,
                     $iTime,
-                    Config::getInstance()->values['cookie']['path'],
-                    Config::getInstance()->values['cookie']['domain'],
+                    $sCookiePath,
+                    $sCookieDomain,
                     $bSecure,
                     true
                 );
@@ -71,7 +79,7 @@ class Cookie
      */
     public function get(string $sName, ?bool $bEscape = true)
     {
-        $sCookieName = Config::getInstance()->values['cookie']['prefix'] . $sName;
+        $sCookieName = (Config::getInstance()->values['cookie']['prefix'] ?? '') . $sName;
 
         return (isset($_COOKIE[$sCookieName]) ? ($bEscape && is_string($_COOKIE[$sCookieName]) ? escape($_COOKIE[$sCookieName]) : $_COOKIE[$sCookieName]) : '');
     }
@@ -94,7 +102,7 @@ class Cookie
                 }
             }
         } else {
-            $bExists = isset($_COOKIE[Config::getInstance()->values['cookie']['prefix'] . $mName]);
+            $bExists = isset($_COOKIE[(Config::getInstance()->values['cookie']['prefix'] ?? '') . $mName]);
         }
 
         return $bExists;
@@ -107,12 +115,17 @@ class Cookie
      */
     public function remove($mName): void
     {
+        $aCookieConfig = Config::getInstance()->values['cookie'] ?? [];
+        $sCookiePrefix = $aCookieConfig['prefix'] ?? '';
+        $sCookiePath = $aCookieConfig['path'] ?? PH7_SH;
+        $sCookieDomain = $aCookieConfig['domain'] ?? '';
+
         if (is_array($mName)) {
             foreach ($mName as $sName) {
                 $this->remove($sName);
             }
         } else {
-            $sCookieName = Config::getInstance()->values['cookie']['prefix'] . $mName;
+            $sCookieName = $sCookiePrefix . $mName;
 
             // We put the cookie into an array. So, if the cookie is in a multi-dimensional arrays, it is clear how much is destroyed
             $_COOKIE[$sCookieName] = array();
@@ -123,8 +136,8 @@ class Cookie
                     $sCookieName,
                     '',
                     0,
-                    Config::getInstance()->values['cookie']['path'],
-                    Config::getInstance()->values['cookie']['domain'],
+                    $sCookiePath,
+                    $sCookieDomain,
                     Server::isHttps(),
                     true
                 );
