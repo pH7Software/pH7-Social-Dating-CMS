@@ -1,6 +1,6 @@
 name: PHPStan
 
-on: [ push ]
+on: [ push, pull_request ]
 
 jobs:
   run:
@@ -8,19 +8,19 @@ jobs:
     strategy:
       matrix:
         os: [ 'ubuntu-latest' ]
-        php-versions: [ '8.0', '8.1' ]
+        php-versions: [ '8.0', '8.1', '8.2', '8.3' ]
     name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.os }}
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
           tools: composer:v2
-          extensions: curl, dom, exif, gd, hash, json, libxml, zip, zlip, mbstring, pdo, bcmath, gmp
+          extensions: curl, dom, exif, gd, hash, json, libxml, zip, zlib, mbstring, pdo_mysql, bcmath, gmp
           coverage: none
 
       - name: Get Composer Cache Directory
@@ -28,7 +28,7 @@ jobs:
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache Composer dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
