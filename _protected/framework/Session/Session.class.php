@@ -19,6 +19,12 @@ use PH7\Framework\Server\Server;
 
 class Session
 {
+    private const DEFAULT_PREFIX = '';
+    private const DEFAULT_COOKIE_NAME = 'PHPSESSID';
+    private const DEFAULT_EXPIRATION = 0;
+    private const DEFAULT_PATH = PH7_SH;
+    private const DEFAULT_DOMAIN = '';
+
     /**
      * @param bool|null $bDisableSessionCache Disable PHP's session cache.
      */
@@ -41,12 +47,14 @@ class Session
      */
     public function set($mName, $sValue = null): void
     {
+        $sPrefix = $this->getPrefix();
+
         if (is_array($mName)) {
             foreach ($mName as $sName => $sVal) {
                 $this->set($sName, $sVal);
             }
         } else {
-            $_SESSION[Config::getInstance()->values['session']['prefix'] . $mName] = $sValue;
+            $_SESSION[$sPrefix . $mName] = $sValue;
         }
     }
 
@@ -60,7 +68,7 @@ class Session
      */
     public function get(string $sName, ?bool $bEscape = true)
     {
-        $sSessionName = Config::getInstance()->values['session']['prefix'] . $sName;
+        $sSessionName = $this->getPrefix() . $sName;
 
         return (isset($_SESSION[$sSessionName]) ? ($bEscape && is_string($_SESSION[$sSessionName]) ? escape($_SESSION[$sSessionName]) : $_SESSION[$sSessionName]) : '');
     }
@@ -75,6 +83,7 @@ class Session
     public function exists($mName): bool
     {
         $bExists = false; // Default value
+        $sPrefix = $this->getPrefix();
 
         if (is_array($mName)) {
             foreach ($mName as $sName) {
@@ -83,7 +92,7 @@ class Session
                 }
             }
         } else {
-            $bExists = isset($_SESSION[Config::getInstance()->values['session']['prefix'] . $mName]);
+            $bExists = isset($_SESSION[$sPrefix . $mName]);
         }
 
         return $bExists;
@@ -96,12 +105,14 @@ class Session
      */
     public function remove($mName): void
     {
+        $sPrefix = $this->getPrefix();
+
         if (is_array($mName)) {
             foreach ($mName as $sName) {
                 $this->remove($sName);
             }
         } else {
-            $sSessionName = Config::getInstance()->values['session']['prefix'] . $mName;
+            $sSessionName = $sPrefix . $mName;
 
             // We put the session in a table so if the session is in the form of multi-dimensional array, it is clear how much is destroyed
             $_SESSION[$sSessionName] = array();
@@ -136,18 +147,19 @@ class Session
      */
     private function initializePHPSession(): void
     {
-        session_name(Config::getInstance()->values['session']['cookie_name']);
+        $aConfig = $this->getConfig();
+        session_name((string)($aConfig['cookie_name'] ?? self::DEFAULT_COOKIE_NAME));
 
         /**
          * In localhost mode, security session_set_cookie_params causing problems in the sessions, so we disable this if we are in localhost mode.
          * Otherwise, if we are in production mode, we activate it.
          */
         if (!Server::isLocalHost()) {
-            $iTime = (int)Config::getInstance()->values['session']['expiration'];
+            $iTime = (int)($aConfig['expiration'] ?? self::DEFAULT_EXPIRATION);
             session_set_cookie_params(
                 $iTime,
-                Config::getInstance()->values['session']['path'],
-                Config::getInstance()->values['session']['domain'],
+                (string)($aConfig['path'] ?? self::DEFAULT_PATH),
+                (string)($aConfig['domain'] ?? self::DEFAULT_DOMAIN),
                 Server::isHttps(),
                 true
             );
@@ -159,6 +171,16 @@ class Session
     private function isSessionActivated(): bool
     {
         return session_status() === PHP_SESSION_ACTIVE;
+    }
+
+    private function getPrefix(): string
+    {
+        return (string)($this->getConfig()['prefix'] ?? self::DEFAULT_PREFIX);
+    }
+
+    private function getConfig(): array
+    {
+        return Config::getInstance()->values['session'] ?? [];
     }
 
     private function close(): void
