@@ -82,6 +82,30 @@ define('PH7_MAX_URL_LENGTH', 120);
 
 include PH7_PATH_TEST . 'requirements_check.inc.php';
 
+/**
+ * Bootstrap the app config needed by framework services during tests.
+ * Creates a temporary app config from fixtures when absent and removes it at shutdown.
+ */
+function ensureTestAppConfigFile(): void
+{
+    $sAppConfigFile = PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE;
+    $sTestConfigFile = PH7_PATH_TEST . 'fixtures/' . PH7_CONFIG_FILE;
+
+    if (is_file($sAppConfigFile) || !is_file($sTestConfigFile)) {
+        return;
+    }
+
+    if (copy($sTestConfigFile, $sAppConfigFile)) {
+        register_shutdown_function(static function () use ($sAppConfigFile): void {
+            if (is_file($sAppConfigFile)) {
+                unlink($sAppConfigFile);
+            }
+        });
+    }
+}
+
+ensureTestAppConfigFile();
+
 // Fix if timezone isn't correctly set
 if (!ini_get('date.timezone')) {
     date_default_timezone_set(PH7_DEFAULT_TIMEZONE);
