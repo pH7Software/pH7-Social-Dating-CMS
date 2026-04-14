@@ -1,7 +1,7 @@
 particlesJS('particles-js', {
     "particles": {
         "number": {
-            "value": 500
+            "value": 120
         },
         "color": {
             "value": "#ddd"
