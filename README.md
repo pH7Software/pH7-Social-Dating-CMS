@@ -165,7 +165,7 @@ Based on **[pH7Framework](https://github.com/pH7Software/pH7-Social-Dating-CMS/t
 
 ## ⚙ Requirements
 
-* **Application Server** PHP 8.0 or newer 🚀
+* **Application Server** PHP 8.2 or newer 🚀
 
 * **Database** MySQL/MariaDB 5.5.3 or newer.
 
