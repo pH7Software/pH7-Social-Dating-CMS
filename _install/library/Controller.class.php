@@ -32,7 +32,7 @@ abstract class Controller implements Controllable
     public const SOFTWARE_COPYRIGHT = '© (c) 2012-%s, Pierre-Henry Soria. All Rights Reserved.';
 
     public const SOFTWARE_VERSION_NAME = 'REVOLUTIONARY™';
-    public const SOFTWARE_VERSION = '18.1.0';
+    public const SOFTWARE_VERSION = '18.2.0';
 
     public const SOFTWARE_BUILD = '1';
 

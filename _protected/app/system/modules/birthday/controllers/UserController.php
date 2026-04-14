@@ -88,7 +88,7 @@ class UserController extends Controller
 
     /**
      * @return string|never
-     * TODO With PHP 8.1, add union types "string|never" since `displayPageNotFound` terminates with exit()
+     * Invalid values terminate through displayPageNotFound().
      */
     private function checkType(string $sSexType)
     {
@@ -101,6 +101,7 @@ class UserController extends Controller
 
             default:
                 $this->displayPageNotFound();
+                throw new \RuntimeException('Unexpected birthday gender type.');
         }
     }
 }

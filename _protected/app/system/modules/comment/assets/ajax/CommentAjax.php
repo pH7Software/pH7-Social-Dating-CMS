@@ -16,7 +16,7 @@ use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Session\Session;
 use PH7\JustHttp\StatusCode;
 
-class Comment
+class CommentAjax
 {
     /** @var Session */
     private $oSession;
@@ -81,5 +81,5 @@ class Comment
 
 // Only for members
 if (UserCore::auth()) {
-    new Comment;
+    new CommentAjax;
 }
