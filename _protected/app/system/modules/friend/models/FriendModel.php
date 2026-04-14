@@ -36,7 +36,7 @@ class FriendModel extends FriendCoreModel
         $iProfileId = (int)$iProfileId;
         $iFriendId = (int)$iFriendId;
 
-        if ($this->areProfileAndFriendExist($iProfileId, $iFriendI)) {
+        if ($this->areProfileAndFriendExist($iProfileId, $iFriendId)) {
             if ($this->inList($iProfileId, $iFriendId) === false) {
                 $sSqlQuery = 'INSERT INTO' . Db::prefix(DbTableName::MEMBER_FRIEND) .
                     '(profileId, friendId, pending, requestDate) VALUES (:profileId, :friendId, :pending, :requestDate)';
@@ -59,8 +59,6 @@ class FriendModel extends FriendCoreModel
         } else {
             $this->sStatus = self::UNEXISTENT_ID_STATUS;
         }
-
-        unset($oExistsModel); // Destruction of the object
 
         return $this->sStatus;
     }
