@@ -9,10 +9,13 @@
 
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
-        # Disable Directory Browsing
-        Options -MultiViews -Indexes
+        # Some shared hosts forbid "Options" in .htaccess and return HTTP 500.
+        # Keep these disabled at vhost/server level when possible.
+        # Options -MultiViews -Indexes
     </IfModule>
-    Options +FollowSymLinks
+    # On restrictive hosts, this directive can trigger HTTP 500.
+    # Prefer enabling FollowSymLinks/SymLinksIfOwnerMatch in server config.
+    # Options +FollowSymLinks
 
     RewriteEngine On
 
@@ -254,7 +257,7 @@ ServerSignature Off
     SetEnvIfNoCase User-Agent "^Go!Zilla" bad_bot
     SetEnvIfNoCase User-Agent "^Go-Ahead-Got-It" bad_bot
     SetEnvIfNoCase User-Agent "^GOFORITBOT" bad_bot
-    SetEnvIfNoCase User-Agent "^gotit" bat_bot
+    SetEnvIfNoCase User-Agent "^gotit" bad_bot
     SetEnvIfNoCase User-Agent "^GrabNet" bad_bot
     SetEnvIfNoCase User-Agent "^Grafula" bad_bot
     SetEnvIfNoCase User-Agent "^grub" bad_bot
@@ -486,9 +489,9 @@ ServerSignature Off
     SetEnvIfNoCase User-Agent "^sootle" bad_bot
     SetEnvIfNoCase User-Agent "^SolomonoBot" bad_bot
     SetEnvIfNoCase User-Agent "^Sosospider" bad_bot
-    SetEnvIfNoCase User-Agent "^So-net” bat_bot" bad_bot
-    SetEnvIfNoCase User-Agent "^SpankBot” bat_bot" bad_bot
-    SetEnvIfNoCase User-Agent "^spanner” bat_bot" bad_bot
+    SetEnvIfNoCase User-Agent "^So-net" bad_bot
+    SetEnvIfNoCase User-Agent "^SpankBot" bad_bot
+    SetEnvIfNoCase User-Agent "^spanner" bad_bot
     SetEnvIfNoCase User-Agent "^SpeedDownload" bad_bot
     SetEnvIfNoCase User-Agent "^Speedy" bad_bot
     SetEnvIfNoCase User-Agent "^Spegla" bad_bot
@@ -636,7 +639,7 @@ ErrorDocument 400 /error/http/index?code=400
 ErrorDocument 401 /error/http/index?code=401
 ErrorDocument 402 /error/http/index?code=402
 ErrorDocument 403 /error/http/index?code=403
-ErrorDocument 404 /error
+ErrorDocument 404 /error/http/index?code=404
 ErrorDocument 405 /error/http/index?code=405
 ErrorDocument 500 /error/http/index?code=500
 ErrorDocument 501 /error/http/index?code=501
@@ -825,8 +828,10 @@ ErrorDocument 505 /error/http/index?code=505
     ExpiresByType image/x-icon "access plus 1 year"
 </IfModule>
 
-# For the videos extensions
-#AddType video/ogg .ogg # <- Uncomment if you plan to support Ogg video format
-AddType video/webm .webm
-AddType video/mp4 .mp4
-AddType application/rss+xml .xml
+# MIME types
+<IfModule mod_mime.c>
+    # AddType video/ogg .ogg # <- Uncomment if you plan to support Ogg video format
+    AddType video/webm .webm
+    AddType video/mp4 .mp4
+    AddType application/rss+xml .xml
+</IfModule>
