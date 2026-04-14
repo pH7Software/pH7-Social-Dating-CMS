@@ -25,7 +25,7 @@ class LostPwdDesignCore
      * @param string $sMod
      * @param bool $bPrint Print or Return the HTML code.
      *
-     * @return void
+     * @return string|null Returns HTML when `$bPrint` is FALSE, otherwise NULL.
      */
     public static function link($sMod, $bPrint = true)
     {
