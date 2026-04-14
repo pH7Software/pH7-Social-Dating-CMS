@@ -1252,12 +1252,13 @@ class UserCoreModel extends Model
             }
 
             $rStmt->execute();
-
-            if ($rStmt->rowCount() === 0) {
+            $mProfileId = $rStmt->fetchColumn();
+            if ($mProfileId === false) {
+                Db::free($rStmt);
                 return false;
             }
 
-            $iProfileId = (int)$rStmt->fetchColumn();
+            $iProfileId = (int)$mProfileId;
             Db::free($rStmt);
             $this->cache->put($iProfileId);
         }
