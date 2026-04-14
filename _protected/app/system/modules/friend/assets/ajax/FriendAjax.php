@@ -43,7 +43,7 @@ class FriendAjax extends Core
                 $this->add();
                 break;
 
-            case 'approval';
+            case 'approval':
                 $this->approval();
                 break;
 
