@@ -8,7 +8,6 @@
 
 namespace PH7;
 
-use Braintree_Transaction;
 use DateInterval;
 use DateTime;
 use Exception;
@@ -340,7 +339,7 @@ class MainController extends Controller
         if ($bNonce = $this->httpRequest->post('payment_method_nonce')) {
             Braintree::init($this->config);
 
-            $oResult = Braintree_Transaction::sale([
+            $oResult = Braintree::sale([
                 'amount' => $this->httpRequest->post('amount'),
                 'paymentMethodNonce' => $bNonce,
                 'options' => ['submitForSettlement' => true]

@@ -8,7 +8,6 @@
 
 namespace PH7;
 
-use Braintree_Configuration;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Payment\Gateway\Api\Braintree as BraintreeGateway;
 
@@ -27,16 +26,42 @@ class Braintree extends BraintreeGateway
             $sEnvironment = 'sandbox';
         }
 
-        Braintree_Configuration::environment($sEnvironment);
+        $sConfigurationClass = self::getConfigurationClass();
+        $sConfigurationClass::environment($sEnvironment);
 
-        Braintree_Configuration::merchantId($oConfig->values['module.setting']['braintree.merchant_id']);
-        Braintree_Configuration::publicKey($oConfig->values['module.setting']['braintree.public_key']);
-        Braintree_Configuration::privateKey($oConfig->values['module.setting']['braintree.private_ke']);
+        $sConfigurationClass::merchantId($oConfig->values['module.setting']['braintree.merchant_id']);
+        $sConfigurationClass::publicKey($oConfig->values['module.setting']['braintree.public_key']);
+        $sConfigurationClass::privateKey($oConfig->values['module.setting']['braintree.private_ke']);
+    }
+
+    public static function generateClientToken(): string
+    {
+        $sClientTokenClass = class_exists(\Braintree\ClientToken::class)
+            ? \Braintree\ClientToken::class
+            : 'Braintree_ClientToken';
+
+        return (string)$sClientTokenClass::generate();
+    }
+
+    public static function sale(array $aPayload)
+    {
+        $sTransactionClass = class_exists(\Braintree\Transaction::class)
+            ? \Braintree\Transaction::class
+            : 'Braintree_Transaction';
+
+        return $sTransactionClass::sale($aPayload);
     }
 
     private static function isSandboxEnabled(Config $oConfig)
     {
         return (bool)$oConfig->values['module.setting']['sandbox.enabled'] ||
             $oConfig->values['module.setting']['braintree.merchant_id'] === static::SANDBOX_MERCHANT_ID;
+    }
+
+    private static function getConfigurationClass(): string
+    {
+        return class_exists(\Braintree\Configuration::class)
+            ? \Braintree\Configuration::class
+            : 'Braintree_Configuration';
     }
 }
