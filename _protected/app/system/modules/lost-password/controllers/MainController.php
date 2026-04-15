@@ -109,6 +109,9 @@ class MainController extends Controller
 
             case DbTableName::ADMIN:
                 return Uri::get(PH7_ADMIN_MOD, 'main', 'login');
+
+            default:
+                return $this->registry->site_url;
         }
     }
 

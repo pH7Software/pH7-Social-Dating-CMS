@@ -39,7 +39,7 @@ class Permission extends PermissionCore
      */
     private function isUserNotAllowed()
     {
-        $this->registry->controller === 'MainController' &&
+        return $this->registry->controller === 'MainController' &&
             !$this->session->exists(SmsVerificationCore::PROFILE_ID_SESS_NAME);
     }
 }

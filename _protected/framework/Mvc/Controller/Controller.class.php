@@ -372,11 +372,14 @@ abstract class Controller extends Core implements Controllable
         $bAdminIsAuthenticated = AdminCore::auth();
         $bUserIsOnAdminPanel = AdminCore::isAdminPanel();
         $bUserIsOnTwoFactorAuthModule = $this->registry->module === 'two-factor-auth';
+        $bUserIsOnTwoFactorVerificationStep = $this->registry->action === 'verificationcode' &&
+            $this->session->exists(\PH7\TwoFactorAuthCore::PROFILE_ID_SESS_NAME);
 
         $bShouldBlockAccess = $bSiteIsInMaintenanceMode &&
             !$bAdminIsAuthenticated &&
             !$bUserIsOnAdminPanel &&
-            !$bUserIsOnTwoFactorAuthModule;
+            !$bUserIsOnTwoFactorAuthModule &&
+            !$bUserIsOnTwoFactorVerificationStep;
 
         return $bShouldBlockAccess;
     }

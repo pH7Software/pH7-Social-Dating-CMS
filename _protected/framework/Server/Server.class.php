@@ -162,7 +162,7 @@ final class Server
     {
         // Check if mod_rewrite is installed and is configured to be used via .htaccess
         $sHttpModRewrite = self::getVar('HTTP_MOD_REWRITE', '');
-        if (!strtolower($sHttpModRewrite) === 'on') {
+        if (strtolower($sHttpModRewrite) !== 'on') {
             $sOutputMsg = 'mod_rewrite Works!';
 
             if (Uri::getInstance()->fragment(0) === 'test_mod_rewrite') {
