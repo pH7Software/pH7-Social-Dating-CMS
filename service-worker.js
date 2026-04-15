@@ -23,6 +23,12 @@ self.addEventListener('install', async event => {
 
 self.addEventListener('fetch', (event) => {
     const { request } = event;
+
+    // Workaround for https://bugs.chromium.org/p/chromium/issues/detail?id=823392
+    if (request.cache === 'only-if-cached' && request.mode !== 'same-origin') {
+        return;
+    }
+
     const url = new URL(request.url);
 
     if (url.origin === location.origin) {
@@ -57,23 +63,3 @@ const fetchNetworkRequest = async (request) => {
         return await cache.match(request);
     }
 };
-
-// Add to Home Screen
-self.addEventListener('fetch', (event) => {
-    // Workaround for https://bugs.chromium.org/p/chromium/issues/detail?id=823392
-    if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') {
-        return;
-    }
-    event.respondWith(
-        //  Try to find response in cache...
-        caches.match(event.request)
-            .then((resp) => {
-                // If response is found in cache, then return it, otherwise fetch it
-                return resp || fetch(event.request);
-            })
-            .catch((error) => {
-                // Something went wrong
-                console.error("Worker couldn't fetch the request: ", error);
-            })
-    );
-});

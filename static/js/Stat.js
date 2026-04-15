@@ -7,16 +7,27 @@
 function Stat() {
     var oMe = this; // Self Object
     this.sUrl = 'asset/ajax/Stat/';
+    this.iRefreshInterval = 60000;
+    this.iTimer = null;
 
     this.totalUsers = function () {
         $.post(pH7Url.base + this.sUrl, {type: 'total_users'}, function (iData) {
             $('.stat_total_users').flipCounter({number: parseInt(iData)});
         });
-        setInterval(function () {
-            oMe.totalUsers()
-        }, 60000);
+    };
+
+    this.start = function () {
+        this.totalUsers();
+
+        if (this.iTimer !== null) {
+            clearInterval(this.iTimer);
+        }
+
+        this.iTimer = setInterval(function () {
+            oMe.totalUsers();
+        }, this.iRefreshInterval);
     };
 }
 
 var oStat = new Stat;
-oStat.totalUsers();
+oStat.start();

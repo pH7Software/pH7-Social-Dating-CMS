@@ -23,6 +23,7 @@ var Messenger = {
     iHeartbeatCount: 0,
     iMinHeartbeat: 1000,
     iMaxHeartbeat: 40000,
+    iHeartbeatTimer: null,
     iBlinkOrder: 0,
     sMessage: '',
 
@@ -35,9 +36,20 @@ var Messenger = {
     // Constructor
     Messenger: function () {
         this.iHeartbeatTime = this.iMinHeartbeat;
+        this.bHeartbeatInProgress = false;
         oMe = this; // Self Object
 
         return this;
+    },
+
+    scheduleHeartbeat: function () {
+        if (this.iHeartbeatTimer !== null) {
+            clearTimeout(this.iHeartbeatTimer);
+        }
+
+        this.iHeartbeatTimer = setTimeout(function () {
+            oMe.heartbeat();
+        }, this.iHeartbeatTime);
     },
 
     // Methods
@@ -153,6 +165,12 @@ var Messenger = {
         $("#chatbox_" + sBoxTitle).show();
     },
     heartbeat: function () {
+        if (this.bHeartbeatInProgress) {
+            return;
+        }
+
+        this.bHeartbeatInProgress = true;
+
         var iItemsFound = 0;
 
         if (bWindowFocus == false) {
@@ -242,10 +260,10 @@ var Messenger = {
                             oMe.iHeartbeatTime = oMe.iMaxHeartbeat;
                         }
                     }
-
-                    setInterval(function () {
-                        oMe.heartbeat()
-                    }, oMe.iHeartbeatTime);
+                },
+                complete: function () {
+                    oMe.bHeartbeatInProgress = false;
+                    oMe.scheduleHeartbeat();
                 }
             });
     },
@@ -363,9 +381,7 @@ var Messenger = {
                         $("#chatbox_" + oMe.sBoxTitle + " .chatboxcontent").scrollTop($("#chatbox_" + oMe.sBoxTitle + " .chatboxcontent")[0].scrollHeight);
                     }
 
-                    setInterval(function () {
-                        oMe.heartbeat()
-                    }, oMe.iHeartbeatTime);
+                    oMe.scheduleHeartbeat();
                 }
             });
     },
