@@ -20,7 +20,6 @@ use PH7\Framework\Ip\Ip;
 class Geo
 {
     const DATABASE_FILENAME = 'GeoLite2-City.mmdb';
-    const DEFAULT_VALID_IP = '128.101.101.101';
 
     /**
      * Static Class.
@@ -106,11 +105,17 @@ class Geo
      *
      * @param string|null $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site.
      *
-     * @return string State Name.
+     * @return string|null State Name.
      */
     public static function getState($sIpAddress = null)
     {
-        return ''; // Currently, with GeoIp2 under the free version, it is impossible to get the region names.
+        try {
+            $sState = static::get($sIpAddress)->mostSpecificSubdivision->name;
+        } catch (AddressNotFoundException | InvalidDatabaseException $oE) {
+            $sState = null;
+        }
+
+        return $sState;
     }
 
     /**
@@ -130,14 +135,12 @@ class Geo
             $sIpAddress = Ip::get();
         }
 
-        // Set a valid IP if the (invalid) local IP one is given
-        if ($sIpAddress === Ip::DEFAULT_IP) {
-            $sIpAddress = self::DEFAULT_VALID_IP;
-        }
-
         $oReader = new Reader(__DIR__ . PH7_DS . self::DATABASE_FILENAME);
-
-        return @$oReader->city($sIpAddress);
+        try {
+            return $oReader->city($sIpAddress);
+        } finally {
+            $oReader->close();
+        }
     }
 
     /**

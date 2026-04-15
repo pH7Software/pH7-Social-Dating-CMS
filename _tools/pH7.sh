@@ -29,6 +29,7 @@ function init() {
     echo "15) backup"
     echo "16) remove sensitive data"
     echo "17) git checkout"
+    echo "18) update geoip db"
 
 
     read option
@@ -50,6 +51,7 @@ function init() {
       "backup") backup;;
       "remove sensitive data") remove-sensitive-data;;
       "git checkout") git-checkout;;
+      "update geoip db") update-geoip-db;;
       *) _error
     esac
 }
@@ -218,42 +220,53 @@ function backup() {
 
 # Update GeoIP database
 function update-geoip-db() {
-    geo_archive_filename="GeoLite2-City.tar.gz"
-    database_geo_lite_url="http://geolite.maxmind.com/download/geoip/database/$geo_archive_filename"
-    target_path="./_protected/framework/Geo/Ip/"
+    edition_id="GeoLite2-City"
+    target_path="./_protected/framework/Geo/Ip"
     db_filename="GeoLite2-City.mmdb"
-    tmp_filename="tmp_db.tar.gz"
-    full_tmp_path=$target_path$tmp_filename
-    full_db_path=$target_path$db_filename
+    tmp_filename="tmp_geoip_db.tar.gz"
+    full_tmp_path="$target_path/$tmp_filename"
+    full_db_path="$target_path/$db_filename"
 
-    echo "Downloading GeoIP Lite DB from $database_geo_lite_url"
-    echo "Temporary saving GeoIp DB to $full_tmp_path"
-    wget $database_geo_lite_url -O $full_tmp_path
-
-    if [ ! -f $full_tmp_path ]; then
-        echo "$full_tmp_path wasn't found."
+    if [ -z "$MAXMIND_LICENSE_KEY" ]; then
+        echo "MAXMIND_LICENSE_KEY is not set."
+        echo "Get a free key from https://www.maxmind.com/en/geolite2/signup and export it first:"
+        echo "export MAXMIND_LICENSE_KEY='your_license_key'"
         exit 1
     fi
 
-    if [ -f $full_db_path ]; then
-        echo "Removing previous Geo DB version at $full_db_path"
-        rm $full_db_path
+    database_geo_lite_url="https://download.maxmind.com/app/geoip_download?edition_id=$edition_id&license_key=$MAXMIND_LICENSE_KEY&suffix=tar.gz"
+
+    echo "Downloading GeoIP Lite DB from $database_geo_lite_url"
+    echo "Temporary saving GeoIP DB to $full_tmp_path"
+    if command -v curl >/dev/null 2>&1; then
+        curl -fsSL "$database_geo_lite_url" -o "$full_tmp_path"
+    elif command -v wget >/dev/null 2>&1; then
+        wget -qO "$full_tmp_path" "$database_geo_lite_url"
+    else
+        echo "Neither curl nor wget was found. Please install one of them."
+        exit 1
     fi
 
-    echo "Extracting archive to $full_tmp_path"
-    tar -xvzf $full_tmp_path -C $target_path --strip-components 1
+    if [ ! -s "$full_tmp_path" ]; then
+        echo "$full_tmp_path wasn't downloaded correctly."
+        exit 1
+    fi
 
-    if [ ! -f $full_db_path ]; then
-        echo "$full_db_path not found! Please try to install GeoIP DB manually (${database_geo_lite_url})"
+    echo "Extracting $db_filename from archive"
+    tar -xzf "$full_tmp_path" -C "$target_path" --wildcards --strip-components 1 "*/$db_filename"
+
+    if [ ! -f "$full_db_path" ]; then
+        echo "$full_db_path not found! Please try to install GeoIP DB manually ($database_geo_lite_url)"
+        rm -f "$full_tmp_path"
         exit 1
     fi
 
     echo "Removing temporary file $full_tmp_path"
-    rm $full_tmp_path
+    rm -f "$full_tmp_path"
 
-    if [ -f ${target_path}LICENSE.txt ] && [ -f ${target_path}COPYRIGHT.txt ] && [ -f ${target_path}README.txt ]; then
-    echo "Removing not necessary txt files."
-        rm ${target_path}LICENSE.txt ${target_path}COPYRIGHT.txt ${target_path}README.txt
+    if [ -f "$target_path/LICENSE.txt" ] && [ -f "$target_path/COPYRIGHT.txt" ] && [ -f "$target_path/README.txt" ]; then
+        echo "Removing unnecessary txt files."
+        rm -f "$target_path/LICENSE.txt" "$target_path/COPYRIGHT.txt" "$target_path/README.txt"
     fi
 
     echo "GeoIP DB successfully updated at $full_db_path"

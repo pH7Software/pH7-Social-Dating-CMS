@@ -15,6 +15,18 @@ use PHPUnit\Framework\TestCase;
 
 final class IpTest extends TestCase
 {
+    protected function tearDown(): void
+    {
+        unset(
+            $_SERVER['HTTP_CF_CONNECTING_IP'],
+            $_SERVER['HTTP_TRUE_CLIENT_IP'],
+            $_SERVER['HTTP_X_REAL_IP'],
+            $_SERVER['HTTP_CLIENT_IP'],
+            $_SERVER['HTTP_X_FORWARDED_FOR'],
+            $_SERVER['REMOTE_ADDR']
+        );
+    }
+
     public function testInvalidIpAddress(): void
     {
         $_SERVER['REMOTE_ADDR'] = '122222';
@@ -35,6 +47,55 @@ final class IpTest extends TestCase
     {
         $_SERVER['REMOTE_ADDR'] = '108.170.3.142';
         $this->assertSame('108.170.3.142', Ip::get());
+    }
+
+    public function testForwardedForListReturnsPublicIp(): void
+    {
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = '10.0.0.5, 52.53.189.95';
+        $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+
+        $this->assertSame('52.53.189.95', Ip::get());
+    }
+
+    public function testCloudflareConnectingIpHasPriority(): void
+    {
+        $_SERVER['HTTP_CF_CONNECTING_IP'] = '104.16.249.249';
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = '10.0.0.5, 52.53.189.95';
+        $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+
+        $this->assertSame('104.16.249.249', Ip::get());
+    }
+
+    public function testTrueClientIpHasPriorityOverXForwardedFor(): void
+    {
+        $_SERVER['HTTP_TRUE_CLIENT_IP'] = '104.18.20.87';
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = '198.51.100.10';
+        $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+
+        $this->assertSame('104.18.20.87', Ip::get());
+    }
+
+    public function testInvalidForwardedForFallsBackToRemoteAddress(): void
+    {
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = 'unknown';
+        $_SERVER['REMOTE_ADDR'] = '52.53.189.95';
+
+        $this->assertSame('52.53.189.95', Ip::get());
+    }
+
+    public function testForwardedForWithPrivateCandidatesFallsBackToDefaultIp(): void
+    {
+        $_SERVER['HTTP_X_FORWARDED_FOR'] = 'unknown, 10.0.0.5, 172.16.0.1';
+        $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+
+        $this->assertSame('127.0.0.1', Ip::get());
+    }
+
+    public function testValidIpv6Address(): void
+    {
+        $_SERVER['REMOTE_ADDR'] = '2606:4700:4700::1111';
+
+        $this->assertSame('2606:4700:4700::1111', Ip::get());
     }
 
     public function testIsPrivate(): void

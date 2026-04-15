@@ -19,7 +19,6 @@ use PH7\Framework\Server\Server;
 class Ip
 {
     public const DEFAULT_IP = '127.0.0.1';
-    private const IP_PATTERN = '[a-z0-9:.]{7,}';
 
     /**
      * Get IP address.
@@ -38,7 +37,7 @@ class Ip
             $sIp = static::DEFAULT_IP; // Avoid invalid local IP for GeoIp
         }
 
-        return preg_match('/^' . static::IP_PATTERN . '$/', $sIp) ? $sIp : static::DEFAULT_IP;
+        return filter_var($sIp, FILTER_VALIDATE_IP) ? $sIp : static::DEFAULT_IP;
     }
 
     /**
@@ -76,13 +75,52 @@ class Ip
      */
     private static function getClientIp()
     {
-        $aVars = [Server::HTTP_CLIENT_IP, Server::HTTP_X_FORWARDED_FOR, Server::REMOTE_ADDR];
+        $aVars = [
+            'HTTP_CF_CONNECTING_IP',
+            'HTTP_TRUE_CLIENT_IP',
+            'HTTP_X_REAL_IP',
+            Server::HTTP_CLIENT_IP,
+            Server::HTTP_X_FORWARDED_FOR,
+            Server::REMOTE_ADDR
+        ];
+
         foreach ($aVars as $sVar) {
-            if (Server::getVar($sVar) !== null) {
-                return Server::getVar($sVar);
+            $sIp = (string)Server::getVar($sVar, '');
+            if ($sIp === '') {
+                continue;
+            }
+
+            $sParsedIp = static::extractClientIp($sIp);
+            if ($sParsedIp !== null) {
+                return $sParsedIp;
             }
         }
 
         return '';
+    }
+
+    private static function extractClientIp(string $sIpList): ?string
+    {
+        $aCandidates = preg_split('/\s*,\s*/', trim($sIpList));
+        if (!is_array($aCandidates) || $aCandidates === []) {
+            return null;
+        }
+
+        $sFirstValidIp = null;
+        foreach ($aCandidates as $sCandidate) {
+            if (!filter_var($sCandidate, FILTER_VALIDATE_IP)) {
+                continue;
+            }
+
+            if (!static::isPrivate($sCandidate)) {
+                return $sCandidate;
+            }
+
+            if ($sFirstValidIp === null) {
+                $sFirstValidIp = $sCandidate;
+            }
+        }
+
+        return $sFirstValidIp;
     }
 }

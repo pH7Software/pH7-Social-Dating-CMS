@@ -1,1 +1,3 @@
 GeoLite2 City database is updated on the first Tuesday of each month by MaxMind.
+Use `_tools/pH7.sh` -> `update geoip db` to download the latest database.
+You must export a valid `MAXMIND_LICENSE_KEY` before running the helper.
