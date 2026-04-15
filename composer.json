@@ -37,7 +37,7 @@
   ],
   "config": {
     "platform": {
-      "php": "8.0.2"
+      "php": "8.2.0"
     },
     "vendor-dir": "_protected/vendor",
     "bin-dir": "_protected/vendor/bin",
@@ -51,7 +51,7 @@
     }
   },
   "require": {
-    "php": "^8.0",
+    "php": "^8.2",
     "ext-curl": "*",
     "ext-dom": "*",
     "ext-exif": "*",
@@ -67,8 +67,8 @@
     "arcturial/clickatell": "^3.0",
     "aws/aws-sdk-php": "^3.200",
     "braintree/braintree_php": "^4.8",
-    "fakerphp/faker": "^1.9",
-    "geoip2/geoip2": "~2.0",
+    "fakerphp/faker": "^1.24",
+    "geoip2/geoip2": "^3.3",
     "guzzlehttp/guzzle": "^7.4",
     "ph-7/cute-link-names": "^2.0",
     "ph-7/datatype": "^1.0",
@@ -87,8 +87,8 @@
     "dealerdirect/phpcodesniffer-composer-installer": "^0.7.2",
     "friendsofphp/php-cs-fixer": "^2.2",
     "phake/phake": "^4.1",
-    "phpstan/phpstan": "^1.5",
-    "phpunit/phpunit": "^9.5"
+    "phpstan/phpstan": "^2.1",
+    "phpunit/phpunit": "^9.6"
   },
   "suggest": {
     "symfony/thanks": "Thank your favorite PHP projects on GitHub (in the form of GitHub stars) using CLI"
@@ -106,7 +106,7 @@
   "scripts": {
     "test": "_protected/vendor/bin/phpunit",
     "test-ci": "_protected/vendor/bin/phpunit --coverage-text --coverage-clover=build/coverage.xml",
-    "analyse": "_protected/vendor/bin/phpstan analyse _protected",
+    "analyse": "_protected/vendor/bin/phpstan analyse --configuration=phpstan.neon.dist --memory-limit=1G",
     "post-cmd": [
       "cp -R _protected/vendor/twbs/bootstrap/dist/css/bootstrap.min.css static/css/bootstrap.css",
       "cp -R _protected/vendor/twbs/bootstrap/dist/js/bootstrap.min.js static/js/bootstrap.js"

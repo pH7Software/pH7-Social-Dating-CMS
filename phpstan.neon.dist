@@ -1,0 +1,5 @@
+parameters:
+    level: 0
+    paths:
+        - _protected/app
+        - _protected/framework
