@@ -16,6 +16,25 @@ use PHPUnit\Framework\TestCase;
 
 final class SecurityTest extends TestCase
 {
+    public function testPwdNeedsRehashReturnsFalseWhenHashIsCurrent(): void
+    {
+        $sPassword = 'my-secure-password';
+        $sHash = Security::hashPwd($sPassword);
+
+        $this->assertFalse(Security::pwdNeedsRehash($sPassword, $sHash));
+    }
+
+    public function testPwdNeedsRehashReturnsNewHashWhenHashIsOutdated(): void
+    {
+        $sPassword = 'my-other-secure-password';
+        $sOutdatedHash = password_hash($sPassword, PASSWORD_BCRYPT, ['cost' => 4]);
+        $sNewHash = Security::pwdNeedsRehash($sPassword, $sOutdatedHash);
+
+        $this->assertIsString($sNewHash);
+        $this->assertNotSame($sOutdatedHash, $sNewHash);
+        $this->assertTrue(Security::checkPwd($sPassword, $sNewHash));
+    }
+
     public function testUserHashWithInvalidAlgorithm(): void
     {
         $this->expectException(InvalidAlgorithmException::class);

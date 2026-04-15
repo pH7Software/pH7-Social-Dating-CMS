@@ -10,14 +10,20 @@ namespace PH7\Test\Unit\App\System\Module\Admin123\Inc\Classes;
 
 require_once PH7_PATH_SYS_MOD . 'admin123/inc/class/UserNotifier.php';
 require_once PH7_PATH_SYS_MOD . 'admin123/inc/class/UserNotifierString.php';
+require_once PH7_PATH_SYS_MOD . 'admin123/models/AdminModel.php';
+require_once PH7_PATH_SYS_MOD . 'admin123/forms/processing/LoginFormProcess.php';
 
+use PH7\AdminModel;
+use PH7\LoginFormProcess;
 use PH7\Framework\Error\CException\PH7RuntimeException;
 use PH7\Framework\Layout\Tpl\Engine\Templatable;
 use PH7\Framework\Mail\InvalidEmailException;
 use PH7\Framework\Mail\Mailable;
+use PH7\Framework\Mvc\Model\DbTableName;
 use PH7\UserNotifier;
 use Phake;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 
 final class UserNotifierTest extends TestCase
 {
@@ -95,6 +101,31 @@ final class UserNotifierTest extends TestCase
                 self::VALID_EMAIL
             ),
             Phake::verify($this->oMailMock)->send(Phake::anyParameters())
+        );
+    }
+}
+
+final class AdminLoginFormProcessTest extends TestCase
+{
+    public function testUpdatePwdHashIfNeededUpdatesOutdatedAdminHash(): void
+    {
+        $oAdminModelMock = Phake::mock(AdminModel::class);
+        $oReflection = new ReflectionClass(LoginFormProcess::class);
+
+        /** @var LoginFormProcess $oLoginFormProcess */
+        $oLoginFormProcess = $oReflection->newInstanceWithoutConstructor();
+
+        $oAdminModelProp = $oReflection->getProperty('oAdminModel');
+        $oAdminModelProp->setAccessible(true);
+        $oAdminModelProp->setValue($oLoginFormProcess, $oAdminModelMock);
+
+        $sOutdatedHash = password_hash('password', PASSWORD_BCRYPT, ['cost' => 4]);
+        $oLoginFormProcess->updatePwdHashIfNeeded('password', (string)$sOutdatedHash, 'admin@ph7.me');
+
+        Phake::verify($oAdminModelMock)->changePassword(
+            'admin@ph7.me',
+            Phake::type('string'),
+            DbTableName::ADMIN
         );
     }
 }
