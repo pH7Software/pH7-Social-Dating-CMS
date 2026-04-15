@@ -51,6 +51,7 @@ class Mail
 
             case 'restore':
                 $this->restore();
+                break;
 
             case 'delete':
                 $this->delete();
