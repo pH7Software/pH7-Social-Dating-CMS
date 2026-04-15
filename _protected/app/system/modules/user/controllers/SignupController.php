@@ -10,6 +10,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
@@ -104,6 +105,14 @@ class SignupController extends Controller
                     'user',
                     'signup',
                     'step3'
+                )
+            );
+        } elseif (DbConfig::getSetting('requireRegistrationAvatar') && !$this->session->exists('mail_step4')) {
+            Header::redirect(
+                Uri::get(
+                    'user',
+                    'signup',
+                    'step4'
                 )
             );
         } else {

@@ -24,6 +24,9 @@ use PH7\Framework\Util\Various;
 
 class JoinFormProcess extends Form
 {
+    private const SIGNUP_RECOVERY_PROFILE_ID_PARAM = 'signup_profile_id';
+    private const SIGNUP_RECOVERY_TOKEN_PARAM = 'signup_recovery_token';
+
     /** @var UserModel */
     private $oUserModel;
 
@@ -88,21 +91,33 @@ class JoinFormProcess extends Form
             $this->session->set($aSessData);
 
             Header::redirect(
-                Uri::get('user', 'signup', 'step2')
+                $this->buildSignupStepUrlWithRecoveryToken(
+                    'step2',
+                    $iProfileId,
+                    $aData['hash_validation']
+                )
             );
         }
     }
 
     public function step2()
     {
-        $iProfileId = $this->oUserModel->getId($this->session->get('mail_step1'));
+        $iProfileId = $this->getCurrentProfileId('mail_step1', 'step2');
+        if ($iProfileId <= 0) {
+            \PFBC\Form::setError('form_join_user2',
+                t('An error occurred during registration!') . '<br />' .
+                t('Please try again or come back later.')
+            );
+            return;
+        }
+
         $sBirthDate = $this->getUserBirthDateValue();
 
         // WARNING FOT "matchSex" FIELD: Be careful, you should use the Http::NO_CLEAN constant, otherwise Http::post() method removes the special tags
         // and damages the SET function SQL for entry into the database
         $aData1 = [
             'sex' => $this->httpRequest->post('sex'),
-            'match_sex' => Form::setVal($this->httpRequest->post('match_sex', Http::NO_CLEAN)),
+            'match_sex' => Form::setVal((array)$this->httpRequest->post('match_sex', Http::NO_CLEAN)),
             'birth_date' => $sBirthDate,
             'profile_id' => $iProfileId
         ];
@@ -121,17 +136,31 @@ class JoinFormProcess extends Form
             );
         } else {
             $this->session->set('mail_step2', $this->session->get('mail_step1'));
+            $sHashValidation = $this->getHashValidationByProfileId($iProfileId);
             Header::redirect(
-                Uri::get('user', 'signup', 'step3')
+                $this->buildSignupStepUrlWithRecoveryToken(
+                    'step3',
+                    $iProfileId,
+                    $sHashValidation
+                )
             );
         }
     }
 
     public function step3()
     {
+        $iProfileId = $this->getCurrentProfileId('mail_step2', 'step3');
+        if ($iProfileId <= 0) {
+            \PFBC\Form::setError('form_join_user3',
+                t('An error occurred during registration!') . '<br />' .
+                t('Please try again or come back later.')
+            );
+            return;
+        }
+
         $aData = [
             'description' => $this->httpRequest->post('description', Http::ONLY_XSS_CLEAN),
-            'profile_id' => $this->oUserModel->getId($this->session->get('mail_step2'))
+            'profile_id' => $iProfileId
         ];
 
         if (!$this->oUserModel->exe($aData, '3')) {
@@ -141,8 +170,13 @@ class JoinFormProcess extends Form
             );
         } else {
             $this->session->set('mail_step3', $this->session->get('mail_step1'));
+            $sHashValidation = $this->getHashValidationByProfileId($iProfileId);
             Header::redirect(
-                Uri::get('user', 'signup', 'step4')
+                $this->buildSignupStepUrlWithRecoveryToken(
+                    'step4',
+                    $iProfileId,
+                    $sHashValidation
+                )
             );
         }
     }
@@ -252,5 +286,92 @@ class JoinFormProcess extends Form
     private function isUserActivated()
     {
         return $this->iActiveType === RegistrationCore::NO_ACTIVATION;
+    }
+
+    private function getCurrentProfileId(string $sEmailSessionKey, string $sExpectedStep): int
+    {
+        $iProfileId = (int)$this->session->get('profile_id');
+        if ($iProfileId > 0) {
+            return $iProfileId;
+        }
+
+        $sEmail = (string)$this->session->get($sEmailSessionKey);
+        if (!empty($sEmail)) {
+            return (int)$this->oUserModel->getId($sEmail);
+        }
+
+        return $this->recoverProfileIdFromToken($sExpectedStep);
+    }
+
+    private function recoverProfileIdFromToken(string $sExpectedStep): int
+    {
+        $iProfileId = $this->httpRequest->get(self::SIGNUP_RECOVERY_PROFILE_ID_PARAM, 'int');
+        $sRecoveryToken = $this->httpRequest->get(self::SIGNUP_RECOVERY_TOKEN_PARAM);
+
+        if ($iProfileId <= 0 || empty($sRecoveryToken)) {
+            return 0;
+        }
+
+        $oProfile = $this->oUserModel->readProfile($iProfileId, DbTableName::MEMBER);
+        if (empty($oProfile) || empty($oProfile->hashValidation)) {
+            return 0;
+        }
+
+        $sHashValidation = (string)$oProfile->hashValidation;
+        if (!$this->isValidRecoveryToken($iProfileId, $sHashValidation, (string)$sRecoveryToken, $sExpectedStep)) {
+            return 0;
+        }
+
+        $aSessionData = [
+            'mail_step1' => $oProfile->email,
+            'username' => $oProfile->username,
+            'first_name' => $oProfile->firstName,
+            'profile_id' => $iProfileId
+        ];
+
+        if ($sExpectedStep === 'step3' || $sExpectedStep === 'step4') {
+            $aSessionData['mail_step2'] = $oProfile->email;
+        }
+
+        if ($sExpectedStep === 'step4') {
+            $aSessionData['mail_step3'] = $oProfile->email;
+        }
+
+        $this->session->set($aSessionData);
+
+        return $iProfileId;
+    }
+
+    private function buildSignupStepUrlWithRecoveryToken(string $sStep, int $iProfileId, string $sHashValidation): string
+    {
+        if (empty($sHashValidation)) {
+            return Uri::get('user', 'signup', $sStep);
+        }
+
+        $sToken = $this->buildRecoveryToken($iProfileId, $sHashValidation, $sStep);
+
+        return Uri::get('user', 'signup', $sStep) . '?' . http_build_query([
+            self::SIGNUP_RECOVERY_PROFILE_ID_PARAM => $iProfileId,
+            self::SIGNUP_RECOVERY_TOKEN_PARAM => $sToken
+        ]);
+    }
+
+    private function getHashValidationByProfileId(int $iProfileId): string
+    {
+        $oProfile = $this->oUserModel->readProfile($iProfileId, DbTableName::MEMBER);
+
+        return !empty($oProfile) && !empty($oProfile->hashValidation) ? (string)$oProfile->hashValidation : '';
+    }
+
+    private function buildRecoveryToken(int $iProfileId, string $sHashValidation, string $sStep): string
+    {
+        return hash('sha256', $iProfileId . '|' . $sHashValidation . '|' . $sStep . '|' . Security::PREFIX_SALT);
+    }
+
+    private function isValidRecoveryToken(int $iProfileId, string $sHashValidation, string $sRecoveryToken, string $sExpectedStep): bool
+    {
+        $sExpectedToken = $this->buildRecoveryToken($iProfileId, $sHashValidation, $sExpectedStep);
+
+        return hash_equals($sExpectedToken, $sRecoveryToken);
     }
 }

@@ -30,12 +30,17 @@ use PFBC\Validation\Str;
 use PFBC\Validation\Username;
 use PH7\Framework\Geo\Ip\Geo;
 use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\Security;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Url\Header;
 
 class JoinForm
 {
+    private const SIGNUP_RECOVERY_PROFILE_ID_PARAM = 'signup_profile_id';
+    private const SIGNUP_RECOVERY_TOKEN_PARAM = 'signup_recovery_token';
+
     private static function predictGenderFromFirstName()
     {
         $sFirstName = (new Session)->get('first_name');
@@ -147,6 +152,7 @@ class JoinForm
     public static function step2()
     {
         $oSession = new Session;
+        self::restoreSignupSessionState($oSession, 'step2');
         if (!$oSession->exists('mail_step1')) {
             Header::redirect(Uri::get('user', 'signup', 'step1'));
         } elseif ($oSession->exists('mail_step2')) {
@@ -249,6 +255,7 @@ class JoinForm
     public static function step3()
     {
         $oSession = new Session;
+        self::restoreSignupSessionState($oSession, 'step3');
         if (!$oSession->exists('mail_step2')) {
             Header::redirect(Uri::get('user', 'signup', 'step2'));
         } elseif ($oSession->exists('mail_step3')) {
@@ -294,6 +301,7 @@ class JoinForm
     public static function step4()
     {
         $oSession = new Session;
+        self::restoreSignupSessionState($oSession, 'step4');
         if (!$oSession->exists('mail_step3')) {
             Header::redirect(Uri::get('user', 'signup', 'step3'));
         } elseif ($oSession->exists('mail_step4')) {
@@ -374,5 +382,54 @@ class JoinForm
                 ]
             )
         );
+    }
+
+    private static function restoreSignupSessionState(Session $oSession, string $sExpectedStep): void
+    {
+        if ($oSession->exists('mail_step1')) {
+            return;
+        }
+
+        $oHttpRequest = new Http;
+        $iProfileId = $oHttpRequest->get(self::SIGNUP_RECOVERY_PROFILE_ID_PARAM, 'int');
+        $sRecoveryToken = (string)$oHttpRequest->get(self::SIGNUP_RECOVERY_TOKEN_PARAM);
+
+        if ($iProfileId <= 0 || empty($sRecoveryToken)) {
+            return;
+        }
+
+        $oUserModel = new UserCoreModel;
+        $oProfile = $oUserModel->readProfile($iProfileId, DbTableName::MEMBER);
+        if (empty($oProfile) || empty($oProfile->hashValidation)) {
+            return;
+        }
+
+        $sHashValidation = (string)$oProfile->hashValidation;
+        $sExpectedToken = self::buildRecoveryToken($iProfileId, $sHashValidation, $sExpectedStep);
+        if (!hash_equals($sExpectedToken, $sRecoveryToken)) {
+            return;
+        }
+
+        $aSessionData = [
+            'mail_step1' => $oProfile->email,
+            'username' => $oProfile->username,
+            'first_name' => $oProfile->firstName,
+            'profile_id' => $iProfileId
+        ];
+
+        if ($sExpectedStep === 'step3' || $sExpectedStep === 'step4') {
+            $aSessionData['mail_step2'] = $oProfile->email;
+        }
+
+        if ($sExpectedStep === 'step4') {
+            $aSessionData['mail_step3'] = $oProfile->email;
+        }
+
+        $oSession->set($aSessionData);
+    }
+
+    private static function buildRecoveryToken(int $iProfileId, string $sHashValidation, string $sStep): string
+    {
+        return hash('sha256', $iProfileId . '|' . $sHashValidation . '|' . $sStep . '|' . Security::PREFIX_SALT);
     }
 }
