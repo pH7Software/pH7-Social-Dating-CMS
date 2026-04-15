@@ -326,6 +326,14 @@ class MainController extends Controller
 
     public function setTrash()
     {
+        if (!$this->isSingleActionTokenValid('settrash')) {
+            Header::redirect(
+                Uri::get('mail', 'main', 'inbox'),
+                Form::errorTokenMsg(),
+                Design::ERROR_TYPE
+            );
+        }
+
         $iId = $this->httpRequest->post('id', Type::INTEGER);
 
         $this->bStatus = $this->oMailModel->setTo(
@@ -378,6 +386,14 @@ class MainController extends Controller
 
     public function setRestore()
     {
+        if (!$this->isSingleActionTokenValid('setrestore')) {
+            Header::redirect(
+                Uri::get('mail', 'main', 'trash'),
+                Form::errorTokenMsg(),
+                Design::ERROR_TYPE
+            );
+        }
+
         $this->bStatus = $this->oMailModel->setTo(
             $this->iProfileId,
             $this->httpRequest->post('id', Type::INTEGER),
@@ -425,6 +441,11 @@ class MainController extends Controller
 
     public function setDelete()
     {
+        if (!$this->isSingleActionTokenValid('setdelete')) {
+            $sUrl = $this->bAdminLogged ? Uri::get('mail', 'admin', 'msglist') : $this->httpRequest->previousPage();
+            Header::redirect($sUrl, Form::errorTokenMsg(), Design::ERROR_TYPE);
+        }
+
         $iId = $this->httpRequest->post('id', Type::INTEGER);
 
         if ($this->bAdminLogged) {
@@ -480,6 +501,14 @@ class MainController extends Controller
 
         $sUrl = $this->bAdminLogged ? Uri::get('mail', 'admin', 'msglist') : $this->httpRequest->previousPage();
         Header::redirect($sUrl, $this->sMsg);
+    }
+
+    private function isSingleActionTokenValid(string $sAction): bool
+    {
+        $sActionToken = substr(Uri::get('mail', 'main', $sAction), -14, -6);
+        $oToken = new Token;
+
+        return $oToken->check($sActionToken) || $oToken->check('mail_action');
     }
 
     /**
