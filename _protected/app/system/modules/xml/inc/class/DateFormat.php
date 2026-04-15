@@ -66,7 +66,7 @@ class DateFormat
     private static function get($sFormat, $sDate)
     {
         if (!in_array($sFormat, self::AVAILABLE_FORMATS, true)) {
-            throw new Exception(self::getExceptionMessage());
+            throw new Exception(self::getExceptionMessage($sFormat));
         }
 
         $iTime = !empty($sDate) ? strtotime($sDate) : time();

@@ -302,7 +302,7 @@ class Record
      *
      * @return array|bool Returns stdClass on success or throw PDOException on failure.
      */
-    public function getAllInOne($mTable, $sField = null, $sId = null, $mWhat = '*', array $aJoin = null, $sOptions = null)
+    public function getAllInOne($mTable, $sField = null, $sId = null, $mWhat = '*', ?array $aJoin = null, $sOptions = null)
     {
         try {
             if (is_array($mTable)) {
@@ -350,6 +350,8 @@ class Record
         } catch (Exception $oE) {
             $this->aErrors[] = $oE->getMessage();
         }
+
+        return false;
     }
 
     /**
@@ -393,6 +395,8 @@ class Record
         } catch (Exception $oE) {
             $this->aErrors[] = $oE->getMessage();
         }
+
+        return false;
     }
 
     /**

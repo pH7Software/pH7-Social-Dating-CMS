@@ -794,13 +794,12 @@ class File
             fclose($rHandle);
             clearstatcache();
 
-            if (!function_exists('is_binary')) // PHP 6
+            if (function_exists('is_binary')) {
                 return is_binary($sContents);
+            }
 
-            return (
-                0 or substr_count($sContents, "^ -~", "^\r\n") / 512 > 0.3
-                or substr_count($sContents, "\x00") > 0
-            );
+            return preg_match('/[^\x09\x0A\x0D\x20-\x7E]/', $sContents) === 1
+                || strpos($sContents, "\x00") !== false;
         }
 
         return false;

@@ -101,7 +101,7 @@ class Api
     protected $useClusterer = false;
     protected $gridSize = 100;
     protected $maxZoom = 9;
-    protected $clustererLibrarypath;
+    protected $clustererLibraryPath = self::MARKER_CLUSTERER_LIBRARY_URL;
 
     /** Enable automatic center/zoom **/
     protected $enableAutomaticCenterZoom = false;
@@ -123,6 +123,9 @@ class Api
 
     /** map center longitude (vertical),  calculated automatically as markers are added to the map **/
     protected $centerLng = null;
+
+    /** precomputed center from explicit latitude/longitude setter **/
+    protected $centerLatLng = null;
 
     /** factor by which to fudge the boundaries so that when we zoom encompass, the markers aren't too close to the edge **/
     protected $coordCoef = 0.01;
@@ -592,7 +595,7 @@ class Api
      */
     public function addKML($url, $category = '', $icon = '')
     {
-        $xml = new SimpleXMLElement($url, null, true);
+        $xml = new \SimpleXMLElement($url, null, true);
         foreach ($xml->Document->Folder->Placemark as $item) {
             $coordinates = explode(',', (string)$item->Point->coordinates);
             $name = (string)$item->name;

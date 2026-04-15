@@ -242,7 +242,7 @@ class Markdown extends Code
         $this->sText = preg_replace(
             '/##### (.+?)\n/',
             '<h5>\1</h5>',
-            $this->sTex
+            $this->sText
         );
     }
 

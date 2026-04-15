@@ -39,6 +39,6 @@ abstract class Xss
      */
     protected function clean($sValue)
     {
-
+        return (string)$sValue;
     }
 }

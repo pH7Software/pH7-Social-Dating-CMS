@@ -90,11 +90,13 @@ abstract class Annotation
     }
 
     /**
-     * Initialize Cache Annotations.
+     * Initialize cache annotations.
      *
      * @param string $sClassName
+     *
+     * @return void
      */
-    protected function initializeAnnotations(string $sClassName): string
+    protected function initializeAnnotations(string $sClassName): void
     {
         $this->oCache = (new Cache)->start(
             static::CACHE_GROUP,

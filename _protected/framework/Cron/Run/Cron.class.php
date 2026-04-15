@@ -71,9 +71,8 @@ abstract class Cron extends Core
 
     /**
      * @return int|false The file contents if it exists, FALSE otherwise.
-     * TODO PHP v8.2 will support `false` as standalone type. Will be able to be stricter by replace return types with "int|false"
      */
-    private function getSavedDelay(): int|bool
+    private function getSavedDelay(): int|false
     {
         if ($this->file->existFile($this->sDelayPathFile)) {
             return (int)$this->file->getFile($this->sDelayPathFile);

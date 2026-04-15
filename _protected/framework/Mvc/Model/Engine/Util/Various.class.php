@@ -198,6 +198,8 @@ class Various
             default:
                 static::launchErr($sTable);
         }
+
+        return $sTable;
     }
 
     /**
@@ -236,6 +238,8 @@ class Various
             default:
                 static::launchErr($sTable);
         }
+
+        return $sTable;
     }
 
     /**

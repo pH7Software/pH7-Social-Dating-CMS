@@ -104,6 +104,7 @@ class FileReader
     private $_pos;
     private $_fd;
     private $_length;
+    protected $error = 0;
 
     public function __construct($filename)
     {
@@ -169,6 +170,8 @@ class FileReader
 // over it (it assumes knowledge of StringReader internals)
 class CachedFileReader extends StringReader
 {
+    protected $error = 0;
+
     public function __construct($filename)
     {
         if (file_exists($filename)) {

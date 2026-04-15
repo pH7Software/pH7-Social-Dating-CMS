@@ -333,6 +333,8 @@ class Form extends Base
             ob_end_clean();
             return $html;
         }
+
+        return false;
     }
 
     public static function getSessionValues($id = 'pfbc')

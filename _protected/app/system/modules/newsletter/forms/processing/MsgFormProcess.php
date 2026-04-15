@@ -8,8 +8,6 @@
 
 namespace PH7;
 
-use Swift_RfcComplianceException;
-
 defined('PH7') or exit('Restricted access');
 
 class MsgFormProcess
@@ -31,7 +29,7 @@ class MsgFormProcess
                     )
                 );
             }
-        } catch (Swift_RfcComplianceException $oE) {
+        } catch (\Throwable $oE) {
             \PFBC\Form::setError('form_msg', $oE->getMessage());
         }
     }

@@ -17,7 +17,7 @@ defined('PH7') or exit('Restricted access');
 /**
  * @abstract
  */
-abstract class File implements \Serializable
+abstract class File
 {
     /** @var string */
     private $sPath;
@@ -52,11 +52,13 @@ abstract class File implements \Serializable
     }
 
     /**
-     * @return void
+     * @return array
      */
     public function __sleep()
     {
         $this->close();
+
+        return [];
     }
 
     /**

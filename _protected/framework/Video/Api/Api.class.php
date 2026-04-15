@@ -21,6 +21,8 @@ use PH7\Framework\Str\Str;
 
 abstract class Api
 {
+    protected const PLAYER_URL = '';
+
     protected Str $oStr;
 
     /** @var \stdClass|\DOMXPath */

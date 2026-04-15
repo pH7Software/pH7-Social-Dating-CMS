@@ -347,6 +347,8 @@ class Design
     final public function softwareComment()
     {
         echo PageDna::generateHtmlComment();
+
+        return '';
     }
 
     /**
@@ -420,9 +422,9 @@ class Design
     public function staticFiles($sType, $sDir, $sFiles, $sCssMedia = 'all')
     {
         if ($sType === 'js') {
-            echo $this->externalJsFile(PH7_RELATIVE . 'asset/gzip/?t=js&amp;d=' . $sDir . '&amp;f=' . $sFiles);
+            $this->externalJsFile(PH7_RELATIVE . 'asset/gzip/?t=js&amp;d=' . $sDir . '&amp;f=' . $sFiles);
         } else {
-            echo $this->externalCssFile(PH7_RELATIVE . 'asset/gzip/?t=css&amp;d=' . $sDir . '&amp;f=' . $sFiles, $sCssMedia);
+            $this->externalCssFile(PH7_RELATIVE . 'asset/gzip/?t=css&amp;d=' . $sDir . '&amp;f=' . $sFiles, $sCssMedia);
         }
     }
 
@@ -606,7 +608,7 @@ class Design
             /**
              * Retrieve the correct avatar URL.
              */
-            $sUrl = (function() use ($iProfileId, $sUsername, $sAvatar, $sDir, $sPath, $sSize, $iSize, $oGetAvatar, $oUserModel): string {
+            $sUrl = (function() use ($iProfileId, $sUsername, $sAvatar, $sDir, $sPath, $sSize, $iSize, $sSex, $oGetAvatar, $oUserModel): string {
                 // If avatar path doesn't exist or is approval pending
                 if (!is_file($sPath) || $oGetAvatar->approvedAvatar == '0') {
                     /* If sex is empty, it is recovered in the database using information from member */
@@ -682,7 +684,7 @@ class Design
      *
      * @return void The HTML favicon image (wrapped in `<img />`).
      */
-    public function favicon(string $sUrl): bool
+    public function favicon(string $sUrl)
     {
         $iFaviconSize = 16;
         $sImg = Browser::favicon($sUrl);
@@ -696,6 +698,7 @@ class Design
                 'height' => $iFaviconSize
             ]
         );
+
     }
 
     /**
@@ -856,7 +859,7 @@ HTML;
      *
      * @return void The HTML image tag.
      */
-    public function imgTag($sImg, $sAlt, array $aAttrs = null)
+    public function imgTag($sImg, $sAlt, ?array $aAttrs = null)
     {
         $aDefAttrs = ['src' => $sImg, 'alt' => $sAlt];
 
@@ -888,6 +891,8 @@ HTML;
         }
 
         echo ($bPair ? '<' . $sTag . $sAttrs . '>' . ($sText === null ? '' : $sText) . '</' . $sTag . '>' : '<' . $sTag . $sAttrs . ' />');
+
+        return '';
     }
 
     public function htmlHeader(): void
@@ -898,7 +903,7 @@ HTML;
     /**
      * Useful HTML Header.
      */
-    final public function usefulHtmlHeader(array $aMeta = null, bool $bLogo = false): void
+    final public function usefulHtmlHeader(?array $aMeta = null, bool $bLogo = false): void
     {
         $this->bIsDiv = true;
 
@@ -944,7 +949,8 @@ HTML;
             </header>';
         }
 
-        echo $this->flashMsg(), '<div class="msg"></div><div class="m_marg">';
+        $this->flashMsg();
+        echo '<div class="msg"></div><div class="m_marg">';
     }
 
     public function htmlFooter(): void

@@ -39,6 +39,7 @@ class Stripe extends Provider implements Api
     public function getMsg()
     {
         // Useless for Stripe. Need it only to be compatible with its API interface.
+        return '';
     }
 
     /**
@@ -47,5 +48,6 @@ class Stripe extends Provider implements Api
     public function valid($sParam1 = '', $sParam2 = '')
     {
         // Useless for Stripe. Need only in order to be compatible with its API interface.
+        return true;
     }
 }

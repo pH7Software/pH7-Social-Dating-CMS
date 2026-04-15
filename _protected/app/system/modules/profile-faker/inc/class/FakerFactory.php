@@ -102,7 +102,7 @@ class FakerFactory
                     [
                         Kernel::SOFTWARE_WEBSITE,
                         'https://pierrehenry.be',
-                        'https://lifyzer.com'
+                        'https://mealsnap.ph7.me'
                     ]
                 );
 

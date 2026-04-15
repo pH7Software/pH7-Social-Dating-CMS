@@ -38,6 +38,7 @@ class Braintree extends Provider implements Api
     public function getMsg()
     {
         // Useless for Braintree. Need it only to be compatible with its API interface.
+        return '';
     }
 
     /**
@@ -46,5 +47,6 @@ class Braintree extends Provider implements Api
     public function valid($sParam1 = '', $sParam2 = '')
     {
         // Useless for Braintree. Need only in order to be compatible with its API interface.
+        return true;
     }
 }

@@ -67,8 +67,6 @@ class EditForm
             $oForm->addElement(new Select(t('Membership Group:'), 'group_id', $aGroupName, ['value' => $oUser->groupId, 'required' => 1]));
             unset($aGroupName);
         }
-        unset($oHR);
-
         $oForm->addElement(new Textbox(t('First Name:'), 'first_name', ['id' => 'name_first', 'onblur' => 'CValid(this.value,this.id)', 'value' => $oUser->firstName, 'required' => 1, 'validation' => new Name]));
         $oForm->addElement(new HTMLExternal('<span class="input_error name_first"></span>'));
 

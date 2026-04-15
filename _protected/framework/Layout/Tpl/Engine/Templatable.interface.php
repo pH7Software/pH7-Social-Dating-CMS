@@ -15,8 +15,7 @@ interface Templatable
     /**
      * Display/Output the template.
      *
-     * @return string|never
-     * TODO When min version will be PHP 8.1, add union return types "string|never"
+     * @return string|null Returns the compiled template path when not including it.
      */
     public function display(?string $sTplFile, ?string $sDirPath, bool $bInclude);
 

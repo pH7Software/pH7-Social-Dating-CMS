@@ -8,7 +8,9 @@ namespace PFBC;
 
 abstract class Base
 {
-    public function configure(array $properties = null)
+    protected $attributes = [];
+
+    public function configure(?array $properties = null)
     {
         if (!empty($properties)) {
             $class = get_class($this);

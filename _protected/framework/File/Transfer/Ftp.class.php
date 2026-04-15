@@ -110,18 +110,17 @@ class Ftp extends File
      *
      * @return bool
      */
-    public function existDir($sDir)
+    public function existDir($sDir): bool
     {
         $sCurrentDir = $this->getCurrentDir();
 
-        if ($this->changeDir($sCurrentDir)) {
-            $this->changeDir($sDir);
-            $sNewDir = $this->getCurrentDir();
-
-            return empty($sNewDir);
+        if (!$this->changeDir($sCurrentDir) || !$this->changeDir($sDir)) {
+            return false;
         }
 
-        return false;
+        $this->changeDir($sCurrentDir);
+
+        return true;
     }
 
     /**
@@ -220,19 +219,15 @@ class Ftp extends File
      *
      * @return bool
      */
-    public function deleteFile($mFile)
+    public function deleteFile($mFile): void
     {
         if (is_array($mFile)) {
-            $bRet = false;
             foreach ($mFile as $sFile) {
-                if (!$bRet = $this->deleteFile($sFile)) {
-                    return false;
-                }
+                $this->deleteFile($sFile);
             }
-            return $bRet;
         } else {
             if ($this->existFile($mFile)) {
-                return ftp_delete($this->rStream, $mFile);
+                @ftp_delete($this->rStream, $mFile);
             }
         }
     }
@@ -244,9 +239,20 @@ class Ftp extends File
      *
      * @return bool
      */
-    public function deleteDir($sPath)
+    public function deleteDir($sPath): bool
     {
-        return $this->existFile($sPath) ? $this->deleteFile($sPath) : array_map([$this, 'deleteDir'], glob($sPath . '/*')) === @ftp_rmdir($this->rStream, $sPath);
+        if ($this->existFile($sPath)) {
+            return @ftp_delete($this->rStream, $sPath);
+        }
+
+        $aFiles = glob($sPath . '/*');
+        if (is_array($aFiles)) {
+            foreach ($aFiles as $sFile) {
+                $this->deleteDir($sFile);
+            }
+        }
+
+        return @ftp_rmdir($this->rStream, $sPath);
     }
 
     /**
