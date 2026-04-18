@@ -259,7 +259,7 @@ class Form extends Base
 
     public function getJQueryUIButtons()
     {
-        return $this->jQueryUIButtons;
+        return $this->isNotJQueryUIButtons();
     }
 
     public function getPrevent()
