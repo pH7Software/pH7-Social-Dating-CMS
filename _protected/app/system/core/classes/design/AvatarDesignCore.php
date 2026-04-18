@@ -97,7 +97,7 @@ class AvatarDesignCore extends Design
     }
 
     /**
-     * @param string $sAvatarUrl Absolute URL with protocol (e.g. https://ph7cms.com)
+     * @param string $sAvatarUrl Absolute URL with protocol (e.g. https://ph7builder.com)
      *
      * @throws InvalidUrlException
      */
