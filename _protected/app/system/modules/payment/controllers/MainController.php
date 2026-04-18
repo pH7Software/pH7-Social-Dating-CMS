@@ -386,8 +386,10 @@ class MainController extends Controller
 
     private function isStripeCardDeclineException(Throwable $oException): bool
     {
+        $sLegacyCardExceptionClass = 'Stripe\\Error\\Card';
+
         return is_a($oException, \Stripe\Exception\CardException::class) ||
-            is_a($oException, \Stripe\Error\Card::class);
+            (class_exists($sLegacyCardExceptionClass, false) && is_a($oException, $sLegacyCardExceptionClass));
     }
 
     /**
