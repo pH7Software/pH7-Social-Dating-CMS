@@ -10,7 +10,7 @@ namespace PH7;
 
 use DateInterval;
 use DateTime;
-use Exception;
+use Throwable;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\File\File;
@@ -20,8 +20,6 @@ use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Payment\Gateway\Api\Api as ApiInterface;
 use stdClass;
 use Stripe\Charge as StripeCharge;
-use Stripe\Error\Base as StripeBase;
-use Stripe\Error\Card as StripeCard;
 
 class MainController extends Controller
 {
@@ -29,7 +27,6 @@ class MainController extends Controller
     const STRIPE_GATEWAY_NAME = 'stripe';
     const BRAINTREE_GATEWAY_NAME = 'braintree';
     const TWO_CHECKOUT_GATEWAY_NAME = '2co';
-    const SKEEREL_GATEWAY_NAME = 'skeerel';
     const CCBILL_GATEWAY_NAME = 'ccbill';
 
     const REDIRECTION_DELAY = 4; // In seconds
@@ -135,10 +132,6 @@ class MainController extends Controller
 
             case self::TWO_CHECKOUT_GATEWAY_NAME:
                 $this->twoCheckOutHandler();
-                break;
-
-            case self::SKEEREL_GATEWAY_NAME:
-                $this->skeerelHandler();
                 break;
 
             case self::CCBILL_GATEWAY_NAME:
@@ -325,11 +318,11 @@ class MainController extends Controller
                         $this->notification(Stripe::class, $iItemNumber);
                     }
                 }
-            } catch (StripeCard $oE) {
-                // The card has been declined
-                // Do nothing here as "$this->bStatus" is by default FALSE and so it will display "Error occurred" msg later
-            } catch (StripeBase $oE) {
-                $this->design->setMessage($this->str->escape($oE->getMessage(), true));
+            } catch (Throwable $oException) {
+                // Card declines are handled as payment failures (without exposing exception details).
+                if (!$this->isStripeCardDeclineException($oException)) {
+                    $this->design->setMessage($this->str->escape($oException->getMessage(), true));
+                }
             }
         }
     }
@@ -386,43 +379,15 @@ class MainController extends Controller
         }
     }
 
-    private function skeerelHandler()
-    {
-        try {
-            if (\Skeerel\Skeerel::verifyAndRemoveSessionStateParameter(
-                $this->httpRequest->get('state')
-            )) {
-                $oSkeerel = new \Skeerel\Skeerel(
-                    $this->config->values['module.setting']['skeerel.website_id'],
-                    $this->config->values['module.setting']['skeerel.website_secret']
-                );
-                $oResult = $oSkeerel->getData($this->httpRequest->get('token'));
-
-                if ($oResult->status) {
-                    $iItemNumber = $this->httpRequest->post('item_number');
-                    if ($this->oUserModel->updateMembership(
-                        $iItemNumber,
-                        $this->iProfileId,
-                        $this->dateTime->get()->dateTime(UserCoreModel::DATETIME_FORMAT)
-                    )) {
-                        $this->bStatus = true; // Status is OK
-                        $this->updateUserGroupId($iItemNumber);
-                        $this->notification(Skeerel::class, $iItemNumber);
-                    }
-                }
-            } else {
-                $this->design->setMessage(
-                    t('Payment state parameter cannot be verified.')
-                );
-            }
-        } catch (Exception $oE) {
-            $this->design->setMessage($this->str->escape($oE->getMessage(), true));
-        }
-    }
-
     private function defaultHandler()
     {
         $this->paypalHandler();
+    }
+
+    private function isStripeCardDeclineException(Throwable $oException): bool
+    {
+        return is_a($oException, \Stripe\Exception\CardException::class) ||
+            is_a($oException, \Stripe\Error\Card::class);
     }
 
     /**

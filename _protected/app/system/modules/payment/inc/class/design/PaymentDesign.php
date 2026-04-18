@@ -12,8 +12,6 @@ namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Payment\Gateway\Api\Api as PaymentApi;
-use Skeerel\Skeerel as SkeerelApi;
-use Skeerel\Util\Session as SkeerelSession;
 use stdClass;
 
 class PaymentDesign extends Framework\Core\Core
@@ -143,36 +141,6 @@ class PaymentDesign extends Framework\Core\Core
         $this->displayGatewayForm($o2CO, $oMembership->name, '2CO');
 
         unset($o2CO);
-    }
-
-    /**
-     * @param stdClass $oMembership
-     *
-     * @return void
-     */
-    public function buttonSkeerel(stdClass $oMembership)
-    {
-        SkeerelApi::generateSessionStateParameter(SkeerelApi::DEFAULT_COOKIE_NAME);
-
-        $sWebsiteId = $this->config->values['module.setting']['skeerel.website_id'];
-        $sSessionState = SkeerelSession::get(SkeerelApi::DEFAULT_COOKIE_NAME);
-        $sJsLibrary = SkeerelApi::JS_LIBRARY_URL;
-        $bSandboxMode = (bool)$this->config->values['module.setting']['sandbox.enabled'];
-        $sPrice = $oMembership->price; // Decimal price format (e.g., 19.95)
-        $sCurrencyCode = $this->config->values['module.setting']['currency_code'];
-        $sRedirectUrl = Uri::get('payment', 'main', 'process', 'skeerel');
-
-        echo <<<HTML
-<script src="$sJsLibrary"
-        id="skeerel-api-script"
-        data-website-id="$sWebsiteId"
-        data-state="$sSessionState"
-        data-redirect-url="$sRedirectUrl"
-        data-payment-test="$bSandboxMode"
-        data-amount="$sPrice"
-        data-currency="$sCurrencyCode">
-</script>
-HTML;
     }
 
     /**

@@ -100,7 +100,7 @@ Based on **[pH7Framework](https://github.com/pH7Software/pH7-Social-Dating-CMS/t
 * Member Approval System
 * Advanced Admin Panel
 * Complete Membership System
-* Payment Gateways Integration for PayPal, Stripe, Braintree, 2CheckOut, and [Skeerel Pay](https://skeerel.com)
+* Payment Gateways Integration for PayPal, Stripe, Braintree, and 2CheckOut
 * Statistics & Analytics System
 * Live Notification System
 * Registration delay (to avoid spam)
