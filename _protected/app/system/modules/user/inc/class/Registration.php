@@ -8,8 +8,15 @@
 
 namespace PH7;
 
+use PH7\Framework\Security\Security;
+
 class Registration extends RegistrationCore
 {
     public const SIGNUP_RECOVERY_PROFILE_ID_PARAM = 'signup_profile_id';
     public const SIGNUP_RECOVERY_TOKEN_PARAM = 'signup_recovery_token';
+
+    public static function buildSignupRecoveryToken(int $iProfileId, string $sHashValidation, string $sStep): string
+    {
+        return hash('sha256', $iProfileId . '|' . $sHashValidation . '|' . $sStep . '|' . Security::PREFIX_SALT);
+    }
 }

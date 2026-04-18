@@ -345,7 +345,7 @@ class JoinFormProcess extends Form
             return Uri::get('user', 'signup', $sStep);
         }
 
-        $sToken = $this->buildRecoveryToken($iProfileId, $sHashValidation, $sStep);
+        $sToken = Registration::buildSignupRecoveryToken($iProfileId, $sHashValidation, $sStep);
 
         return Uri::get('user', 'signup', $sStep) . '?' . http_build_query([
             Registration::SIGNUP_RECOVERY_PROFILE_ID_PARAM => $iProfileId,
@@ -360,14 +360,9 @@ class JoinFormProcess extends Form
         return !empty($oProfile) && !empty($oProfile->hashValidation) ? (string)$oProfile->hashValidation : '';
     }
 
-    private function buildRecoveryToken(int $iProfileId, string $sHashValidation, string $sStep): string
-    {
-        return hash('sha256', $iProfileId . '|' . $sHashValidation . '|' . $sStep . '|' . Security::PREFIX_SALT);
-    }
-
     private function isValidRecoveryToken(int $iProfileId, string $sHashValidation, string $sRecoveryToken, string $sExpectedStep): bool
     {
-        $sExpectedToken = $this->buildRecoveryToken($iProfileId, $sHashValidation, $sExpectedStep);
+        $sExpectedToken = Registration::buildSignupRecoveryToken($iProfileId, $sHashValidation, $sExpectedStep);
 
         return hash_equals($sExpectedToken, $sRecoveryToken);
     }

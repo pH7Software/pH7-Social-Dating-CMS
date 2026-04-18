@@ -32,7 +32,6 @@ use PH7\Framework\Geo\Ip\Geo;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
-use PH7\Framework\Security\Security;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Url\Header;
 
@@ -402,7 +401,7 @@ class JoinForm
         }
 
         $sHashValidation = (string)$oProfile->hashValidation;
-        $sExpectedToken = self::buildRecoveryToken($iProfileId, $sHashValidation, $sExpectedStep);
+        $sExpectedToken = Registration::buildSignupRecoveryToken($iProfileId, $sHashValidation, $sExpectedStep);
         if (!hash_equals($sExpectedToken, $sRecoveryToken)) {
             return;
         }
@@ -423,10 +422,5 @@ class JoinForm
         }
 
         $oSession->set($aSessionData);
-    }
-
-    private static function buildRecoveryToken(int $iProfileId, string $sHashValidation, string $sStep): string
-    {
-        return hash('sha256', $iProfileId . '|' . $sHashValidation . '|' . $sStep . '|' . Security::PREFIX_SALT);
     }
 }
