@@ -38,9 +38,6 @@ use PH7\Framework\Url\Header;
 
 class JoinForm
 {
-    private const SIGNUP_RECOVERY_PROFILE_ID_PARAM = 'signup_profile_id';
-    private const SIGNUP_RECOVERY_TOKEN_PARAM = 'signup_recovery_token';
-
     private static function predictGenderFromFirstName()
     {
         $sFirstName = (new Session)->get('first_name');
@@ -391,8 +388,8 @@ class JoinForm
         }
 
         $oHttpRequest = new Http;
-        $iProfileId = $oHttpRequest->get(self::SIGNUP_RECOVERY_PROFILE_ID_PARAM, 'int');
-        $sRecoveryToken = (string)$oHttpRequest->get(self::SIGNUP_RECOVERY_TOKEN_PARAM);
+        $iProfileId = $oHttpRequest->get(Registration::SIGNUP_RECOVERY_PROFILE_ID_PARAM, 'int');
+        $sRecoveryToken = (string)$oHttpRequest->get(Registration::SIGNUP_RECOVERY_TOKEN_PARAM);
 
         if ($iProfileId <= 0 || empty($sRecoveryToken)) {
             return;

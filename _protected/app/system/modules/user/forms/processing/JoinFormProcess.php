@@ -24,9 +24,6 @@ use PH7\Framework\Util\Various;
 
 class JoinFormProcess extends Form
 {
-    private const SIGNUP_RECOVERY_PROFILE_ID_PARAM = 'signup_profile_id';
-    private const SIGNUP_RECOVERY_TOKEN_PARAM = 'signup_recovery_token';
-
     /** @var UserModel */
     private $oUserModel;
 
@@ -305,8 +302,8 @@ class JoinFormProcess extends Form
 
     private function recoverProfileIdFromToken(string $sExpectedStep): int
     {
-        $iProfileId = $this->httpRequest->get(self::SIGNUP_RECOVERY_PROFILE_ID_PARAM, 'int');
-        $sRecoveryToken = $this->httpRequest->get(self::SIGNUP_RECOVERY_TOKEN_PARAM);
+        $iProfileId = $this->httpRequest->get(Registration::SIGNUP_RECOVERY_PROFILE_ID_PARAM, 'int');
+        $sRecoveryToken = $this->httpRequest->get(Registration::SIGNUP_RECOVERY_TOKEN_PARAM);
 
         if ($iProfileId <= 0 || empty($sRecoveryToken)) {
             return 0;
@@ -351,8 +348,8 @@ class JoinFormProcess extends Form
         $sToken = $this->buildRecoveryToken($iProfileId, $sHashValidation, $sStep);
 
         return Uri::get('user', 'signup', $sStep) . '?' . http_build_query([
-            self::SIGNUP_RECOVERY_PROFILE_ID_PARAM => $iProfileId,
-            self::SIGNUP_RECOVERY_TOKEN_PARAM => $sToken
+            Registration::SIGNUP_RECOVERY_PROFILE_ID_PARAM => $iProfileId,
+            Registration::SIGNUP_RECOVERY_TOKEN_PARAM => $sToken
         ]);
     }
 

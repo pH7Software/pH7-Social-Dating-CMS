@@ -10,4 +10,6 @@ namespace PH7;
 
 class Registration extends RegistrationCore
 {
+    public const SIGNUP_RECOVERY_PROFILE_ID_PARAM = 'signup_profile_id';
+    public const SIGNUP_RECOVERY_TOKEN_PARAM = 'signup_recovery_token';
 }
