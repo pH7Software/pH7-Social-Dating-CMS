@@ -108,16 +108,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.379.1",
+            "version": "3.379.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "261bfa48bb4dc0d9a8d0dcb5af7c329d97de7acc"
+                "reference": "45c385619d43e54ede8daca211960c345d3ff3b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/261bfa48bb4dc0d9a8d0dcb5af7c329d97de7acc",
-                "reference": "261bfa48bb4dc0d9a8d0dcb5af7c329d97de7acc",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/45c385619d43e54ede8daca211960c345d3ff3b7",
+                "reference": "45c385619d43e54ede8daca211960c345d3ff3b7",
                 "shasum": ""
             },
             "require": {
@@ -199,9 +199,9 @@
             "support": {
                 "forum": "https://github.com/aws/aws-sdk-php/discussions",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.379.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.379.2"
             },
-            "time": "2026-04-16T18:06:02+00:00"
+            "time": "2026-04-17T18:05:27+00:00"
         },
         {
             "name": "braintree/braintree_php",
@@ -4539,11 +4539,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.49",
+            "version": "2.1.50",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d0082955396e7f5ba19cf298224b85e1099f0ed8",
-                "reference": "d0082955396e7f5ba19cf298224b85e1099f0ed8",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d452086fb4cf648c6b2d8cf3b639351f79e4f3e2",
+                "reference": "d452086fb4cf648c6b2d8cf3b639351f79e4f3e2",
                 "shasum": ""
             },
             "require": {
@@ -4588,7 +4588,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-04-16T21:10:58+00:00"
+            "time": "2026-04-17T13:10:32+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
