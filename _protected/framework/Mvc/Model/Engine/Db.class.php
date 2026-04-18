@@ -16,6 +16,7 @@ defined('PH7') or exit('Restricted access');
 
 use PDO;
 use PDOStatement;
+use Throwable;
 
 /**
  * @class Singleton Class
@@ -102,7 +103,7 @@ class Db
             try {
                 self::$oDb = new PDO(self::$sDsn, self::$sUsername, self::$sPassword, self::$aDriverOptions);
                 self::$oDb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            } catch (Exception $oE) {
+            } catch (Throwable $oE) {
                 exit(self::ERROR_MESSAGE);
             }
 
@@ -227,7 +228,8 @@ class Db
      */
     public function execute($sStatement)
     {
-        return self::$oDb->execute($sStatement);
+        $rStmt = self::$oDb->prepare($sStatement);
+        return $rStmt !== false && $rStmt->execute();
     }
 
     /**
@@ -372,7 +374,7 @@ class Db
      *
      * @return void
      */
-    public static function free(PDOStatement &$rStmt = null, $bCloseConnection = false)
+    public static function free(?PDOStatement &$rStmt = null, bool $bCloseConnection = false): void
     {
         // Close Cursor
         if ($rStmt !== null) {

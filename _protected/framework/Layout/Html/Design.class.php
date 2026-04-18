@@ -621,7 +621,9 @@ class Design
                     if (!is_file($sPath)) {
                         /* The user has no avatar, we then get a Gravatar if exists */
                         $sEmail = $oUserModel->getEmail($iProfileId);
-                        $sUrl = GravatarImage::get($sEmail, ['size' => $iSize, 'display' => '404', 'rating' => 'g']);
+                        $sUrl = is_string($sEmail) && $sEmail !== ''
+                            ? GravatarImage::get($sEmail, ['size' => $iSize, 'display' => '404', 'rating' => 'g'])
+                            : '';
 
                         if (!(new Validate)->url($sUrl, true)) {
                             // If no Gravatar set, it returns 404, and we then set the default pH7Builder's avatar

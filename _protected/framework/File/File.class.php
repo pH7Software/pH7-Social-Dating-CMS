@@ -201,8 +201,8 @@ class File
             }
             asort($aDirList);
             reset($aDirList);
+            closedir($rHandle);
         }
-        closedir($rHandle);
 
         return $aDirList;
     }
@@ -251,8 +251,8 @@ class File
                 }
             }
             sort($aTree);
+            closedir($rHandle);
         }
-        closedir($rHandle);
 
         return $aTree;
     }
@@ -667,12 +667,15 @@ class File
     public function writeHeader($sHeader, array $aFile = [])
     {
         for ($i = 0, $iCountFiles = count($aFile); $i < $iCountFiles; $i++) {
-            $rHandle = fopen($aFile[$i], 'wb+');
-
-            if ($this->size($aFile[$i]) > 0) {
-                $sData = fread($rHandle, $this->size($aFile[$i]));
-                fwrite($rHandle, $sHeader . static::EOL . $sData);
+            $rHandle = fopen($aFile[$i], 'rb+');
+            if ($rHandle === false) {
+                continue;
             }
+
+            $sData = stream_get_contents($rHandle);
+            rewind($rHandle);
+            ftruncate($rHandle, 0);
+            fwrite($rHandle, $sHeader . static::EOL . (string)$sData);
             fclose($rHandle);
         }
     }
