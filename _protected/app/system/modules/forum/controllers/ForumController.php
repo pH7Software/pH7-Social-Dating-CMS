@@ -13,6 +13,7 @@ use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\Ban\Ban;
+use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Url\Header;
 use PH7\JustHttp\StatusCode;
 
@@ -303,6 +304,13 @@ class ForumController extends Controller
 
     public function deleteTopic()
     {
+        if (!(new Token)->check($this->getActionTokenName('deletetopic'))) {
+            Header::redirect(
+                Uri::get('forum', 'forum', 'index'),
+                Form::errorTokenMsg()
+            );
+        }
+
         $aData = explode('_', $this->httpRequest->post('id'));
         $iTopicId = (int)$aData[0];
         $iForumId = (int)$aData[1];
@@ -322,6 +330,13 @@ class ForumController extends Controller
 
     public function deleteMessage()
     {
+        if (!(new Token)->check($this->getActionTokenName('deletemessage'))) {
+            Header::redirect(
+                Uri::get('forum', 'forum', 'index'),
+                Form::errorTokenMsg()
+            );
+        }
+
         $aData = explode('_', $this->httpRequest->post('id'));
         $iMessageId = (int)$aData[0];
         $iTopicId = (int)$aData[1];
@@ -375,6 +390,11 @@ class ForumController extends Controller
     private function getTitle($sTitle)
     {
         return $this->str->escape(Ban::filterWord($sTitle), true);
+    }
+
+    private function getActionTokenName(string $sAction): string
+    {
+        return substr(Uri::get('forum', 'forum', $sAction), -14, -6);
     }
 
     /**

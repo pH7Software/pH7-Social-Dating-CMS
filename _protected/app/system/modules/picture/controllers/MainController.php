@@ -14,6 +14,7 @@ use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\Ban\Ban;
+use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Url\Header;
 use PH7\JustHttp\StatusCode;
 use stdClass;
@@ -193,6 +194,13 @@ class MainController extends Controller
 
     public function deletePhoto()
     {
+        if (!(new Token)->check($this->getActionTokenName('deletephoto'))) {
+            Header::redirect(
+                Uri::get('picture', 'main', 'albums'),
+                Form::errorTokenMsg()
+            );
+        }
+
         $iPictureId = $this->httpRequest->post('picture_id', Type::INTEGER);
 
         CommentCoreModel::deleteRecipient($iPictureId, 'picture');
@@ -224,6 +232,13 @@ class MainController extends Controller
 
     public function deleteAlbum()
     {
+        if (!(new Token)->check($this->getActionTokenName('deletealbum'))) {
+            Header::redirect(
+                Uri::get('picture', 'main', 'albums'),
+                Form::errorTokenMsg()
+            );
+        }
+
         $this->oPictureModel->deletePhoto($this->session->get('member_id'), $this->httpRequest->post('album_id', Type::INTEGER));
         $this->oPictureModel->deleteAlbum($this->session->get('member_id'), $this->httpRequest->post('album_id', Type::INTEGER));
         $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'picture/img/' . $this->session->get('member_username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
@@ -293,6 +308,11 @@ class MainController extends Controller
         $sFilename = str_replace('original', '600', $oPicture->file);
         $sImageUrl = PH7_URL_DATA_SYS_MOD . 'picture/img/' . $oPicture->username . '/' . $oPicture->albumId . '/' . $sFilename;
         $this->view->image_social_meta_tag = $sImageUrl;
+    }
+
+    private function getActionTokenName(string $sAction): string
+    {
+        return substr(Uri::get('picture', 'main', $sAction), -14, -6);
     }
 
     /**
