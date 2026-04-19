@@ -13,8 +13,9 @@ defined('PH7') or exit('Restricted access');
 // Check the SSL protocol compatibility
 // You need to clear caches if you move your server from HTTP to HTTPS. Admin Panel -> Tool -> Caches -> Caches Manager
 $sUrlProtocol = (
-    (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) === 'on') ||
-    (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') ||
+    (!empty($_SERVER['HTTPS']) && in_array(strtolower((string)$_SERVER['HTTPS']), ['on', '1'], true)) ||
+    (!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && stripos((string)$_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') === 0) ||
+    (!empty($_SERVER['HTTP_X_FORWARDED_SSL']) && strtolower((string)$_SERVER['HTTP_X_FORWARDED_SSL']) === 'on') ||
     (!empty($_SERVER['REQUEST_SCHEME']) && $_SERVER['REQUEST_SCHEME'] === 'https') ||
     ($_SERVER['SERVER_PORT'] ?? '') === '443'
 ) ? 'https://' : 'http://';
