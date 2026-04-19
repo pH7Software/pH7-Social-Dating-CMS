@@ -21,6 +21,8 @@
 
     # Protect hidden/VCS files (except .well-known for ACME challenges)
     RewriteRule "(^|/)\.(?!well-known/)" - [F,L]
+    RewriteCond %{REQUEST_METHOD} ^TRACE$ [NC]
+    RewriteRule .* - [F,L]
 
     # Protect sensitive root files
     RewriteRule "(^|/)(composer\.json|sample\.htaccess|error_log)$" - [F,L,NC]
@@ -37,6 +39,46 @@
 </IfModule>
 
 ### Security and Spam ###
+
+# Deny hidden files/directories even if mod_rewrite is unavailable.
+<FilesMatch "^\.">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Deny sensitive config/build/runtime files.
+<FilesMatch "(^composer\.json$|^sample\.htaccess$|^error_log$|\.env$|\.ini$|\.log$|\.sql$|\.bak$|\.md$|\.lock$|\.tmp$|\.cache$)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Keep these text files publicly reachable.
+<FilesMatch "^(humans\.txt|robots\.txt|(app-)?ads\.txt)$">
+    <IfModule mod_authz_core.c>
+        Require all granted
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Allow from all
+    </IfModule>
+</FilesMatch>
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always unset X-Powered-By
+</IfModule>
 
 ErrorDocument 400 /error/http/index?code=400
 ErrorDocument 401 /error/http/index?code=401
