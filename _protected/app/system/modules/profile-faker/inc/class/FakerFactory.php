@@ -47,7 +47,7 @@ class FakerFactory
         $iMaxUsernameLength = (int)DbConfig::getSetting('maxUsernameLength');
 
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
-            $sEmail = $oFaker->freeEmail;
+            $sEmail = $oFaker->safeEmail;
             $sUsername = Cleanup::username($oFaker->userName, $iMaxUsernameLength);
             if ($this->isValidProfile($sEmail, $sUsername)) {
                 $sSex = empty($this->sSex) ? $this->getRandomGender() : $this->sSex;
@@ -93,7 +93,7 @@ class FakerFactory
         $iMaxUsernameLength = (int)DbConfig::getSetting('maxUsernameLength');
 
         for ($iProfile = 1; $iProfile <= $this->iAmount; $iProfile++) {
-            $sEmail = $oFaker->email;
+            $sEmail = $oFaker->safeEmail;
             $sUsername = Cleanup::username($oFaker->userName, $iMaxUsernameLength);
             if ($this->isValidProfile($sEmail, $sUsername)) {
                 $sSex = empty($this->sSex) ? $this->getRandomGender() : $this->sSex;
@@ -145,7 +145,7 @@ class FakerFactory
 
             $aUser = [];
             $aUser['name'] = $oFaker->name($sSex);
-            $aUser['email'] = $oFaker->email;
+            $aUser['email'] = $oFaker->safeEmail;
             $aUser['active'] = $iAccountStatus;
             $aUser['current_date'] = $oFaker->dateTime()->format('Y-m-d H:i:s');
             $aUser['hash_validation'] = Various::genRnd(null, UserCoreModel::HASH_VALIDATION_LENGTH);
