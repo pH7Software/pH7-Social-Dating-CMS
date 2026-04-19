@@ -597,11 +597,11 @@ class Design
             $oUserModel = new UserCoreModel;
 
             $iProfileId = $oUserModel->getId(null, $sUsername);
-            $oGetAvatar = $oUserModel->getAvatar($iProfileId);
+            $oGetAvatar = $iProfileId !== false ? $oUserModel->getAvatar($iProfileId) : false;
 
             $sSize = ($iSize == 32 || $iSize == 64 || $iSize == 100 || $iSize == 150 || $iSize == 200 || $iSize == 400) ? '-' . $iSize : '';
 
-            $sAvatar = (string)$oGetAvatar->pic;
+            $sAvatar = is_object($oGetAvatar) && isset($oGetAvatar->pic) ? (string)$oGetAvatar->pic : '';
             $sDir = 'user/avatar/img/' . $sUsername . PH7_SH;
             $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . $sDir . $sAvatar;
 
@@ -610,7 +610,7 @@ class Design
              */
             $sUrl = (function() use ($iProfileId, $sUsername, $sAvatar, $sDir, $sPath, $sSize, $iSize, $sSex, $oGetAvatar, $oUserModel): string {
                 // If avatar path doesn't exist or is approval pending
-                if (!is_file($sPath) || $oGetAvatar->approvedAvatar == '0') {
+                if (!is_file($sPath) || !is_object($oGetAvatar) || $oGetAvatar->approvedAvatar == '0') {
                     /* If sex is empty, it is recovered in the database using information from member */
                     $sSex = !empty($sSex) ? $sSex : $oUserModel->getSex(null, $sUsername, DbTableName::MEMBER);
                     $sSex = $this->oStr->lower($sSex);
@@ -620,7 +620,7 @@ class Design
                     /* If the user doesn't have an avatar */
                     if (!is_file($sPath)) {
                         /* The user has no avatar, we then get a Gravatar if exists */
-                        $sEmail = $oUserModel->getEmail($iProfileId);
+                        $sEmail = $iProfileId !== false ? $oUserModel->getEmail($iProfileId) : false;
                         $sUrl = is_string($sEmail) && $sEmail !== ''
                             ? GravatarImage::get($sEmail, ['size' => $iSize, 'display' => '404', 'rating' => 'g'])
                             : '';
