@@ -47,8 +47,7 @@ $aRequirementsNeeded = array(
         'curl_init' => 'cURL'
     ),
     DIRECTIVE_KEY => array(
-        'file_uploads',
-        'allow_url_fopen'
+        'file_uploads'
     )
 );
 

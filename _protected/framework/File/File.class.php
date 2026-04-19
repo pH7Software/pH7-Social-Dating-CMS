@@ -741,21 +741,33 @@ class File
      */
     public function getUrlContents(string $sUrl)
     {
-        $rCh = curl_init();
-        curl_setopt($rCh, CURLOPT_URL, $sUrl);
-        curl_setopt($rCh, CURLOPT_HEADER, 0);
-        curl_setopt($rCh, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($rCh, CURLOPT_FOLLOWLOCATION, 1);
-        $mRes = curl_exec($rCh);
+        if (function_exists('curl_init')) {
+            $rCh = curl_init();
+            if ($rCh === false) {
+                return false;
+            }
 
-        if ($mRes === false) {
-            throw new CurlException(curl_error($rCh), curl_errno($rCh));
+            curl_setopt($rCh, CURLOPT_URL, $sUrl);
+            curl_setopt($rCh, CURLOPT_HEADER, 0);
+            curl_setopt($rCh, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($rCh, CURLOPT_FOLLOWLOCATION, 1);
+            $mRes = curl_exec($rCh);
+
+            if ($mRes === false) {
+                throw new CurlException(curl_error($rCh), curl_errno($rCh));
+            }
+
+            curl_close($rCh);
+            unset($rCh);
+
+            return $mRes;
         }
 
-        curl_close($rCh);
-        unset($rCh);
+        if (filter_var((string)ini_get('allow_url_fopen'), FILTER_VALIDATE_BOOLEAN)) {
+            return @file_get_contents($sUrl);
+        }
 
-        return $mRes;
+        return false;
     }
 
     /**
