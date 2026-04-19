@@ -36,6 +36,15 @@ try {
 }
 
 require __DIR__ . '/_constants.php';
+
+if (!defined('PH7_PATH_APP') || !is_file(PH7_PATH_APP . 'Bootstrap.php')) {
+    $sConfiguredPath = defined('PH7_PATH_APP') ? PH7_PATH_APP : '(undefined)';
+    echo 'Configuration error: invalid "_protected" path. ';
+    echo 'Please update PH7_PATH_PROTECTED in "_constants.php" to the real location of your protected folder. ';
+    echo 'Current PH7_PATH_APP: ' . htmlspecialchars((string)$sConfiguredPath, ENT_QUOTES);
+    exit;
+}
+
 require PH7_PATH_APP . 'configs/constants.php';
 require PH7_PATH_APP . 'includes/helpers/misc.php';
 require PH7_PATH_APP . 'Bootstrap.php';
