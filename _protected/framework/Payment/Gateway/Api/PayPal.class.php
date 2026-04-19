@@ -23,9 +23,8 @@ use PH7\Framework\Url\Url;
  */
 class PayPal extends Provider implements Api
 {
-    const SANDBOX_PAYMENT_URL = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
-    const PAYMENT_URL = 'https://www.paypal.com/cgi-bin/webscr';
-    const PAYPAL_HOST = 'www.paypal.com';
+    const SANDBOX_PAYMENT_URL = 'https://ipnpb.sandbox.paypal.com/cgi-bin/webscr';
+    const PAYMENT_URL = 'https://ipnpb.paypal.com/cgi-bin/webscr';
 
     /* Should we accept valid transactions but hasn't been completed yet? */
     const ACCEPT_VALID_PAYMENT_NOT_COMPLETED = true;
@@ -134,7 +133,10 @@ class PayPal extends Provider implements Api
         curl_setopt($rCh, CURLOPT_POSTFIELDS, $this->sRequest);
         curl_setopt($rCh, CURLOPT_SSL_VERIFYPEER, 1);
         curl_setopt($rCh, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($rCh, CURLOPT_HTTPHEADER, [sprintf('Host: %s', self::PAYPAL_HOST)]);
+        $sHost = (string)parse_url($this->sUrl, PHP_URL_HOST);
+        if ($sHost !== '') {
+            curl_setopt($rCh, CURLOPT_HTTPHEADER, [sprintf('Host: %s', $sHost)]);
+        }
         $mRes = curl_exec($rCh);
 
         if (curl_errno($rCh) === CURLE_SSL_CACERT) {
