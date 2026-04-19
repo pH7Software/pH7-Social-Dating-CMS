@@ -41,6 +41,13 @@ final class ServerTest extends TestCase
         $this->assertFalse(Server::isLocalHost());
     }
 
+    public function testItIsLocalHostWithPort(): void
+    {
+        $_SERVER['HTTP_HOST'] = 'localhost:8080';
+
+        $this->assertTrue(Server::isLocalHost());
+    }
+
     public function testGetUndefinedServerKey(): void
     {
         $sActual = Server::getVar('UNDEFINED');

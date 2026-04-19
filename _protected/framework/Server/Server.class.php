@@ -51,6 +51,7 @@ final class Server
     const HTTP_IF_MODIFIED_SINCE = 'HTTP_IF_MODIFIED_SINCE';
 
     const LOCAL_IP = '127.0.0.1';
+    const LOCAL_IPV6 = '::1';
     const LOCAL_HOSTNAME = 'localhost';
 
     const UNIX_OS = [
@@ -148,11 +149,11 @@ final class Server
      */
     public static function isLocalHost(): bool
     {
-        $sServerName = self::getName();
-        $sHttpHost = self::getVar(self::HTTP_HOST);
+        $aLocalHosts = [self::LOCAL_HOSTNAME, self::LOCAL_IP, self::LOCAL_IPV6];
+        $sServerName = self::normalizeHost(self::getName());
+        $sHttpHost = self::normalizeHost(self::getVar(self::HTTP_HOST));
 
-        return ($sServerName === self::LOCAL_HOSTNAME || $sServerName === self::LOCAL_IP ||
-            $sHttpHost === self::LOCAL_HOSTNAME || $sHttpHost === self::LOCAL_IP);
+        return in_array($sServerName, $aLocalHosts, true) || in_array($sHttpHost, $aLocalHosts, true);
     }
 
     /**
@@ -162,14 +163,14 @@ final class Server
     {
         // Check if mod_rewrite is installed and is configured to be used via .htaccess
         $sHttpModRewrite = self::getVar('HTTP_MOD_REWRITE', '');
-        if (strtolower($sHttpModRewrite) !== 'on') {
+        if (strtolower((string)$sHttpModRewrite) !== 'on') {
             $sOutputMsg = 'mod_rewrite Works!';
 
             if (Uri::getInstance()->fragment(0) === 'test_mod_rewrite') {
                 exit($sOutputMsg);
             }
 
-            $sPage = @file_get_contents(PH7_URL_ROOT . 'test_mod_rewrite');
+            $sPage = self::getUrlContents(PH7_URL_ROOT . 'test_mod_rewrite');
             return $sPage === $sOutputMsg;
         }
 
@@ -205,5 +206,50 @@ final class Server
     public static function isHttps(): bool
     {
         return substr(PH7_URL_PROT, 0, 5) === 'https';
+    }
+
+    private static function getUrlContents(string $sUrl): string
+    {
+        if (function_exists('curl_init')) {
+            $rCurl = curl_init();
+            if ($rCurl !== false) {
+                curl_setopt($rCurl, CURLOPT_TIMEOUT, 10);
+                curl_setopt($rCurl, CURLOPT_CONNECTTIMEOUT, 5);
+                curl_setopt($rCurl, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($rCurl, CURLOPT_FOLLOWLOCATION, true);
+                curl_setopt($rCurl, CURLOPT_URL, $sUrl);
+                $mData = curl_exec($rCurl);
+                curl_close($rCurl);
+
+                return is_string($mData) ? $mData : '';
+            }
+        }
+
+        $bAllowUrlFopen = filter_var((string)ini_get('allow_url_fopen'), FILTER_VALIDATE_BOOLEAN);
+        if ($bAllowUrlFopen) {
+            $mData = @file_get_contents($sUrl);
+            return is_string($mData) ? $mData : '';
+        }
+
+        return '';
+    }
+
+    private static function normalizeHost(?string $sHost): string
+    {
+        $sHost = strtolower(trim((string)$sHost));
+        if ($sHost === '') {
+            return '';
+        }
+
+        if (strpos($sHost, '[') === 0) {
+            $iClosingBracketPos = strpos($sHost, ']');
+            if ($iClosingBracketPos !== false) {
+                $sHost = substr($sHost, 0, $iClosingBracketPos + 1);
+            }
+        } elseif (substr_count($sHost, ':') === 1) {
+            $sHost = (string)preg_replace('/:\d+$/', '', $sHost);
+        }
+
+        return trim($sHost, '[]');
     }
 }
