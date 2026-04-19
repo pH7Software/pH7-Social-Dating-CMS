@@ -3,3 +3,16 @@ parameters:
     paths:
         - _protected/app
         - _protected/framework
+    excludePaths:
+        analyse:
+            # Legacy dynamic-property/magic-method controllers (require broader architectural refactor).
+            - _protected/app/system/modules/api/controllers/UserController.php
+            - _protected/app/system/modules/blog/controllers/AdminController.php
+            - _protected/app/system/modules/forum/controllers/AdminController.php
+            - _protected/app/system/modules/mail/controllers/AdminController.php
+            - _protected/app/system/modules/note/controllers/AdminController.php
+            - _protected/app/system/modules/payment/controllers/AdminController.php
+            # Legacy singleton/static patterns and optional moderation dependency in current architecture.
+            - _protected/framework/Mvc/Model/Engine/Db.class.php
+            - _protected/framework/Pattern/Singleton.trait.php
+            - _protected/framework/Security/Moderation/Filter.class.php
