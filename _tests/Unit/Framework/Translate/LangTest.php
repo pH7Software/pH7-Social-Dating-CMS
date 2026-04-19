@@ -13,13 +13,27 @@ namespace PH7\Test\Unit\Framework\Util;
 use PH7\Framework\Registry\Registry;
 use PH7\Framework\Translate\Lang;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 
 final class LangTest extends TestCase
 {
+    private array $aRequestBackup;
+
+    private array $aCookieBackup;
+
     protected function setUp(): void
     {
+        $this->aRequestBackup = $_REQUEST;
+        $this->aCookieBackup = $_COOKIE;
+
         new Lang; // Load "Lang" class
         Registry::getInstance()->lang = [];
+    }
+
+    protected function tearDown(): void
+    {
+        $_REQUEST = $this->aRequestBackup;
+        $_COOKIE = $this->aCookieBackup;
     }
 
     public function testTranslate(): void
@@ -50,5 +64,17 @@ final class LangTest extends TestCase
         $sLangCode = Lang::getIsoCode($sLocaleName, Lang::LAST_ISO_CODE);
 
         $this->assertSame('us', $sLangCode);
+    }
+
+    public function testTwoLetterRequestLangGetsNormalizedToInstalledLocale(): void
+    {
+        $_REQUEST['l'] = 'en';
+
+        $oLang = new Lang;
+        $oReflection = new ReflectionClass(Lang::class);
+        $oUserLangProp = $oReflection->getProperty('sUserLang');
+        $oUserLangProp->setAccessible(true);
+
+        $this->assertSame('en_US', $oUserLangProp->getValue($oLang));
     }
 }

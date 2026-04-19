@@ -203,15 +203,66 @@ namespace PH7\Framework\Translate {
             $oCookie = new Cookie;
 
             if ($this->isLangParamSet()) {
-                $this->sUserLang = $_REQUEST[self::REQUEST_PARAM_NAME] ?? '';
-                $oCookie->set(static::COOKIE_NAME, $this->sUserLang, static::COOKIE_LIFETIME);
+                $this->sUserLang = $this->normalizeLocaleCode((string)($_REQUEST[self::REQUEST_PARAM_NAME] ?? ''));
+
+                if ($this->sUserLang !== '') {
+                    $oCookie->set(static::COOKIE_NAME, $this->sUserLang, static::COOKIE_LIFETIME);
+                }
             } elseif ($oCookie->exists(static::COOKIE_NAME)) {
-                $this->sUserLang = $oCookie->get(static::COOKIE_NAME);
+                $this->sUserLang = $this->normalizeLocaleCode((string)$oCookie->get(static::COOKIE_NAME));
+
+                if ($this->sUserLang === '') {
+                    $this->sUserLang = (new Browser)->getLanguage();
+                }
             } else {
                 $this->sUserLang = (new Browser)->getLanguage();
             }
 
             unset($oCookie);
+        }
+
+        private function normalizeLocaleCode(string $sLocaleCode): string
+        {
+            $sLocaleCode = str_replace('-', '_', trim($sLocaleCode));
+            if ($sLocaleCode === '') {
+                return '';
+            }
+
+            if (self::isLocaleCode($sLocaleCode)) {
+                return strtolower(substr($sLocaleCode, 0, self::ISO_LANG_CODE_LENGTH)) . '_' .
+                    strtoupper(substr($sLocaleCode, self::ISO_LANG_CODE_LENGTH + 1, self::ISO_LANG_CODE_LENGTH));
+            }
+
+            if (self::isIsoCode($sLocaleCode)) {
+                return $this->resolveLocaleCodeFromIso($sLocaleCode);
+            }
+
+            return '';
+        }
+
+        private function resolveLocaleCodeFromIso(string $sIsoCode): string
+        {
+            $sIsoCode = strtolower($sIsoCode);
+            $aLangDirs = @scandir(PH7_PATH_APP_LANG);
+            if (!is_array($aLangDirs)) {
+                return $sIsoCode;
+            }
+
+            foreach ($aLangDirs as $sLangDir) {
+                if ($sLangDir === '.' || $sLangDir === '..' || !is_dir(PH7_PATH_APP_LANG . $sLangDir)) {
+                    continue;
+                }
+
+                if (self::isLocaleCode($sLangDir) && strtolower(substr($sLangDir, 0, self::ISO_LANG_CODE_LENGTH)) === $sIsoCode) {
+                    return $sLangDir;
+                }
+
+                if (self::isIsoCode($sLangDir) && strtolower($sLangDir) === $sIsoCode) {
+                    return strtolower($sLangDir);
+                }
+            }
+
+            return $sIsoCode;
         }
 
         /**
@@ -266,8 +317,23 @@ namespace PH7\Framework\Translate {
          */
         private function isLangParamSet()
         {
-            return !empty($_REQUEST[self::REQUEST_PARAM_NAME]) &&
-                strlen($_REQUEST[self::REQUEST_PARAM_NAME]) === static::LANG_FOLDER_LENGTH;
+            if (empty($_REQUEST[self::REQUEST_PARAM_NAME])) {
+                return false;
+            }
+
+            $sLangCode = str_replace('-', '_', (string)$_REQUEST[self::REQUEST_PARAM_NAME]);
+
+            return self::isLocaleCode($sLangCode) || self::isIsoCode($sLangCode);
+        }
+
+        private static function isLocaleCode(string $sLangCode): bool
+        {
+            return (bool)preg_match('/^[a-z]{2}_[a-z]{2}$/i', $sLangCode);
+        }
+
+        private static function isIsoCode(string $sLangCode): bool
+        {
+            return (bool)preg_match('/^[a-z]{2}$/i', $sLangCode);
         }
     }
 }
