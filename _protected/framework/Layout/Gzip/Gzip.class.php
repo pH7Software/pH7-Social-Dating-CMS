@@ -31,6 +31,7 @@ class Gzip
 
     private const ERROR_FILE_LOAD_MESSAGE = '%s: Failed to load file: %s';
     private const ERROR_EXCEPTION_MESSAGE = '%s: Exception: %s for file: %s';
+    private const ERROR_CACHE_EXCEPTION_MESSAGE = '%s: Cache Exception: %s';
 
     private const REGEX_IMAGE_FORMAT = '/url\([\'"]*(.+?\.)(gif|png|jpg|jpeg|otf|eot|ttf|woff|svg)[\'"]*\)*/msi';
     private const REGEX_JS_INCLUDE_FORMAT = '/include\([\'"]*(.+?\.)(js)[\'"]*\)\s{0,};/msi';
@@ -167,8 +168,17 @@ class Gzip
 
         $this->setHeaders();
 
-        // If the cache is enabled, reads cache and displays, otherwise reads and displays the contents.
-        $this->bCaching ? $this->cache() : $this->getContents();
+        // If cache generation fails (e.g. permissions), gracefully fallback to direct output.
+        if ($this->bCaching) {
+            try {
+                $this->cache();
+            } catch (\Throwable $oException) {
+                $this->logCacheException($oException);
+                $this->getContents();
+            }
+        } else {
+            $this->getContents();
+        }
 
         echo $this->sContents;
     }
@@ -305,20 +315,36 @@ class Gzip
 
     private function loadStaticFileWithErrorHandling(string $sElement): ?string
     {
+        $sLocalPath = $this->sBase . $sElement;
+
         try {
             $sFullUrl = PH7_URL_ROOT . $this->sBaseUrl . $sElement;
             $sFileContents = $this->oFile->getUrlContents($sFullUrl);
+
+            if (is_string($sFileContents)) {
+                return $sFileContents;
+            }
+
+            $sFileContents = $this->oFile->getFile($sLocalPath);
+            if (is_string($sFileContents)) {
+                return $sFileContents;
+            }
 
             if ($sFileContents === false) {
                 $this->logStaticFileLoadFailure($sFullUrl);
                 return null;
             }
+        } catch (\Throwable $oException) {
+            $sFileContents = $this->oFile->getFile($sLocalPath);
+            if (is_string($sFileContents)) {
+                return $sFileContents;
+            }
 
-            return $sFileContents;
-        } catch (\Exception $oException) {
             $this->logStaticFileException($sElement, $oException);
             return null;
         }
+
+        return null;
     }
 
     private function logStaticFileLoadFailure(string $sFullUrl): void
@@ -328,10 +354,17 @@ class Gzip
         );
     }
 
-    private function logStaticFileException(string $sElement, \Exception $oException): void
+    private function logStaticFileException(string $sElement, \Throwable $oException): void
     {
         (new Logger())->msg(
             sprintf(self::ERROR_EXCEPTION_MESSAGE, 'pH7Builder Gzip', $oException->getMessage(), $sElement)
+        );
+    }
+
+    private function logCacheException(\Throwable $oException): void
+    {
+        (new Logger())->msg(
+            sprintf(self::ERROR_CACHE_EXCEPTION_MESSAGE, 'pH7Builder Gzip', $oException->getMessage())
         );
     }
 
