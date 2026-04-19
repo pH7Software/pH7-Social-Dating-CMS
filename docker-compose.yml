@@ -6,7 +6,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - .:/var/www:/var/www/
+      - .:/var/www/
       - ./sites:/etc/nginx/conf.d
       - ./nginx.conf:/etc/nginx/ph7builder.conf
     depends_on:
@@ -16,10 +16,10 @@ services:
   php:
     image: php:8.2.0-fpm
     volumes:
-      - .:/var/www:/var/www/
+      - .:/var/www/
     command: bash -c "composer install"
-    working_dir: /var/www:/var/www/
+    working_dir: /var/www/
   db:
     image: mysql
     ports:
-      - "8001:5432"
+      - "8001:3306"
