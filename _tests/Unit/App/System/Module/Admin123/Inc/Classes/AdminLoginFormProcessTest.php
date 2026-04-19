@@ -37,14 +37,12 @@ final class AdminLoginFormProcessTest extends TestCase
         $sOutdatedHash = password_hash('password', PASSWORD_BCRYPT, ['cost' => 4]);
         $oLoginFormProcess->updatePwdHashIfNeeded('password', (string)$sOutdatedHash, 'admin@ph7.me');
 
-        $sNewHash = '';
+        $sPasswordSentToChangePassword = '';
         Phake::verify($oAdminModelMock)->changePassword(
             'admin@ph7.me',
-            Phake::capture($sNewHash),
+            Phake::capture($sPasswordSentToChangePassword),
             DbTableName::ADMIN
         );
-        $this->assertNotEmpty($sNewHash);
-        $this->assertTrue(password_verify('password', $sNewHash));
-        $this->assertNotSame($sOutdatedHash, $sNewHash);
+        $this->assertSame('password', $sPasswordSentToChangePassword);
     }
 }

@@ -51,7 +51,9 @@ class LoginFormProcess extends Form implements LoginableForm
                 $iMaxAttempts,
                 $iTimeDelay,
                 $sEmail,
-                $this->view
+                $this->view,
+                DbTableName::MEMBER_ATTEMPT_LOGIN,
+                DbTableName::MEMBER
             )
         ) {
             \PFBC\Form::setError('form_login_user', Form::loginAttemptsExceededMsg($iTimeDelay));
@@ -161,8 +163,8 @@ class LoginFormProcess extends Form implements LoginableForm
      */
     public function updatePwdHashIfNeeded(string $sPassword, string $sUserPasswordHash, string $sEmail): void
     {
-        if ($sNewPwdHash = Security::pwdNeedsRehash($sPassword, $sUserPasswordHash)) {
-            $this->oUserModel->changePassword($sEmail, $sNewPwdHash, DbTableName::MEMBER);
+        if (Security::pwdNeedsRehash($sPassword, $sUserPasswordHash) !== false) {
+            $this->oUserModel->changePassword($sEmail, $sPassword, DbTableName::MEMBER);
         }
     }
 

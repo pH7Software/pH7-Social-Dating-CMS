@@ -112,7 +112,8 @@ class Security
      * @param int $iAttemptTime
      * @param string $sEmail Email address of member.
      * @param Templatable $oView
-     * @param string $sTable Default DbTableName::MEMBER
+     * @param string $sAttemptTable Default DbTableName::MEMBER_ATTEMPT_LOGIN
+     * @param string $sUserTable Default DbTableName::MEMBER
      *
      * @return bool Returns TRUE if attempts are allowed, FALSE otherwise.
      */
@@ -121,12 +122,14 @@ class Security
         int $iAttemptTime,
         string $sEmail,
         Templatable $oView,
-        string $sTable = DbTableName::MEMBER_ATTEMPT_LOGIN
+        string $sAttemptTable = DbTableName::MEMBER_ATTEMPT_LOGIN,
+        string $sUserTable = DbTableName::MEMBER
     ): bool
     {
-        Various::checkModelTable($sTable);
+        Various::checkModelTable($sAttemptTable);
+        Various::checkModelTable($sUserTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sTable) . 'WHERE ip = :ip LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sAttemptTable) . 'WHERE ip = :ip LIMIT 1');
         $rStmt->bindValue(':ip', $this->sIp, PDO::PARAM_STR);
         $rStmt->execute();
 
@@ -150,12 +153,12 @@ class Security
                             $this->sIp,
                             $sEmail,
                             $oView,
-                            $sTable
+                            $sUserTable
                         );
                     }
                 } else {
                     // Clear Login Attempts
-                    $this->clearLoginAttempts($sTable);
+                    $this->clearLoginAttempts($sAttemptTable);
                     return true; // Authorized
                 }
                 return false; // Banned

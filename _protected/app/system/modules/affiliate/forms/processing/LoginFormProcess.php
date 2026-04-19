@@ -46,7 +46,8 @@ class LoginFormProcess extends Form implements LoginableForm
                 $iTimeDelay,
                 $sEmail,
                 $this->view,
-                DbTableName::AFFILIATE_ATTEMPT_LOGIN
+                DbTableName::AFFILIATE_ATTEMPT_LOGIN,
+                DbTableName::AFFILIATE
             )
         ) {
             \PFBC\Form::setError('form_login_aff', Form::loginAttemptsExceededMsg($iTimeDelay));
@@ -126,8 +127,8 @@ class LoginFormProcess extends Form implements LoginableForm
      */
     public function updatePwdHashIfNeeded(string $sPassword, string $sUserPasswordHash, string $sEmail): void
     {
-        if ($sNewPwdHash = Security::pwdNeedsRehash($sPassword, $sUserPasswordHash)) {
-            $this->oAffModel->changePassword($sEmail, $sNewPwdHash, DbTableName::AFFILIATE);
+        if (Security::pwdNeedsRehash($sPassword, $sUserPasswordHash) !== false) {
+            $this->oAffModel->changePassword($sEmail, $sPassword, DbTableName::AFFILIATE);
         }
     }
 

@@ -48,7 +48,8 @@ class LoginFormProcess extends Form implements LoginableForm
                 $iTimeDelay,
                 $sEmail,
                 $this->view,
-                DbTableName::ADMIN_ATTEMPT_LOGIN
+                DbTableName::ADMIN_ATTEMPT_LOGIN,
+                DbTableName::ADMIN
             )
         ) {
             \PFBC\Form::setError('form_admin_login', Form::loginAttemptsExceededMsg($iTimeDelay));
@@ -123,8 +124,8 @@ class LoginFormProcess extends Form implements LoginableForm
      */
     public function updatePwdHashIfNeeded(string $sPassword, string $sUserPasswordHash, string $sEmail): void
     {
-        if ($sNewPwdHash = Security::pwdNeedsRehash($sPassword, $sUserPasswordHash)) {
-            $this->oAdminModel->changePassword($sEmail, $sNewPwdHash, DbTableName::ADMIN);
+        if (Security::pwdNeedsRehash($sPassword, $sUserPasswordHash) !== false) {
+            $this->oAdminModel->changePassword($sEmail, $sPassword, DbTableName::ADMIN);
         }
     }
 
