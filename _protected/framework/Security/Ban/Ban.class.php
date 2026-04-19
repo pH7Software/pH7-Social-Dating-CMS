@@ -47,6 +47,7 @@ class Ban
     {
         self::$sFile = static::USERNAME_FILE;
         self::$sVal = $sVal;
+        self::$bIsEmail = false;
 
         return self::is();
     }
@@ -73,6 +74,7 @@ class Ban
     {
         self::$sFile = static::IP_FILE;
         self::$sVal = $sVal;
+        self::$bIsEmail = false;
 
         return self::is();
     }
