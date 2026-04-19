@@ -15,5 +15,7 @@ use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Security\Spam\Captcha\Captcha;
 
 $iComplexity = DbConfig::getSetting('captchaComplexity');
+$oHttpRequest = new Http;
+$sRandomToken = $oHttpRequest->getExists('r') ? $oHttpRequest->get('r') : null;
 
-(new Captcha)->show((new Http)->getExists('r'), $iComplexity);
+(new Captcha)->show($sRandomToken, $iComplexity);

@@ -87,17 +87,17 @@ class Captcha
     /**
      * Show the captcha image.
      *
-     * @param int|null $iRandom
+     * @param string|null $sRandom
      * @param int $iComplexity
      *
      * @return void
      */
-    public function show($iRandom = null, $iComplexity = self::NUM_CHARACTER_CAPTCHA)
+    public function show($sRandom = null, $iComplexity = self::NUM_CHARACTER_CAPTCHA)
     {
         $iComplexity = $this->getCorrectStringLength($iComplexity);
 
-        if (!empty($iRandom)) {
-            $this->sStr = Various::genRnd($iRandom, $iComplexity);
+        if (!empty($sRandom)) {
+            $this->sStr = Various::genRnd($sRandom, $iComplexity);
         } else {
             $this->sStr = Various::genRnd('pH7_Pierre-Henry_Soria_Sanz_González_captcha', $iComplexity);
         }
@@ -105,17 +105,34 @@ class Captcha
         $this->oSession->set(self::SESSION_NAME, $this->sStr);
 
         $this->sFont = $this->getFont();
-        //$sBackground = PH7_PATH_DATA . 'background/' . mt_rand(1, 5) . '.png';
+        $bTrueTypeReady = function_exists('imagettfbbox') &&
+            function_exists('imagettftext') &&
+            !empty($this->sFont) &&
+            is_file($this->sFont);
 
-        $this->aBox = imagettfbbox($this->iSize, 0, $this->sFont, $this->sStr);
-        $this->iWidth = $this->aBox[2] - $this->aBox[0];
-        $this->iHeight = $this->aBox[1] - $this->aBox[7];
-        unset($this->aBox);
+        if ($bTrueTypeReady) {
+            $this->aBox = imagettfbbox($this->iSize, 0, $this->sFont, $this->sStr);
 
-        $this->iStringWidth = round($this->iWidth / strlen($this->sStr));
+            if (is_array($this->aBox)) {
+                $this->iWidth = $this->aBox[2] - $this->aBox[0];
+                $this->iHeight = $this->aBox[1] - $this->aBox[7];
+            }
+            unset($this->aBox);
+        }
 
-        //$this->rImg = imagecreatefrompng($sBackground);
+        if (empty($this->iWidth) || empty($this->iHeight)) {
+            $this->iStringWidth = imagefontwidth(5) + 2;
+            $this->iWidth = $this->iStringWidth * strlen($this->sStr);
+            $this->iHeight = imagefontheight(5) + $this->iMargin;
+        } else {
+            $this->iStringWidth = (int)round($this->iWidth / max(1, strlen($this->sStr)));
+        }
+
         $this->rImg = imagecreate($this->iWidth + $this->iMargin, $this->iHeight + $this->iMargin);
+        if ($this->rImg === false) {
+            return;
+        }
+
         $this->aColor = [
             imagecolorallocate($this->rImg, 0x99, 0x00, 0x66),
             imagecolorallocate($this->rImg, 0xCC, 0x00, 0x00),
@@ -128,9 +145,16 @@ class Captcha
         $this->rRed = imagecolorallocate($this->rImg, 200, 100, 90);
         $this->rWhite = imagecolorallocate($this->rImg, 255, 255, 255);
 
-        imagefilledrectangle($this->rImg, 0, 0, 399, 99, $this->rWhite);
+        imagefilledrectangle(
+            $this->rImg,
+            0,
+            0,
+            $this->iWidth + $this->iMargin,
+            $this->iHeight + $this->iMargin,
+            $this->rWhite
+        );
 
-        $this->mixing();
+        $this->mixing($bTrueTypeReady);
 
         imageline(
             $this->rImg,
@@ -161,8 +185,10 @@ class Captcha
         unset($this->rBlack, $this->rRed, $this->rWhite);
 
 
-        imageconvolution($this->rImg, self::$aMatrixBlur, 9, 0);
-        imageconvolution($this->rImg, self::$aMatrixBlur, 9, 0);
+        if (function_exists('imageconvolution')) {
+            imageconvolution($this->rImg, self::$aMatrixBlur, 9, 0);
+            imageconvolution($this->rImg, self::$aMatrixBlur, 9, 0);
+        }
 
         (new Browser)->noCache();
         header('Content-type: image/png');
@@ -214,22 +240,34 @@ class Captcha
     /**
      * @return void
      */
-    private function mixing()
+    private function mixing(bool $bTrueTypeReady = true)
     {
         for ($i = 0, $iLength = strlen($this->sStr); $i < $iLength; ++$i) {
             $sText = $this->sStr[$i]; // A string can be seen as an array
-            $iAngle = mt_rand(-70, 70);
+            $mColor = $this->aColor[array_rand($this->aColor)];
 
-            imagettftext(
-                $this->rImg,
-                mt_rand($this->iSize / 2, $this->iSize),
-                $iAngle,
-                ($i * $this->iStringWidth) + $this->iMargin,
-                $this->iHeight + mt_rand(1, $this->iMargin / 2),
-                $this->aColor[array_rand($this->aColor)],
-                $this->sFont,
-                $sText
-            );
+            if ($bTrueTypeReady) {
+                $iAngle = mt_rand(-70, 70);
+                imagettftext(
+                    $this->rImg,
+                    mt_rand($this->iSize / 2, $this->iSize),
+                    $iAngle,
+                    ($i * $this->iStringWidth) + $this->iMargin,
+                    $this->iHeight + mt_rand(1, $this->iMargin / 2),
+                    $mColor,
+                    $this->sFont,
+                    $sText
+                );
+            } else {
+                imagestring(
+                    $this->rImg,
+                    5,
+                    ($i * $this->iStringWidth) + 4,
+                    mt_rand(1, max(1, $this->iHeight - imagefontheight(5))),
+                    $sText,
+                    $mColor
+                );
+            }
         }
     }
 
@@ -256,8 +294,17 @@ class Captcha
      */
     private function getFont()
     {
-        //$count = count(glob(PH7_PATH_DATA . '/font/*.ttf'));
-        //return PH7_PATH_DATA . '/font/' . mt_rand(1,$count) . '.ttf';
-        return PH7_PATH_DATA . '/font/4.ttf';
+        $sDefaultFont = PH7_PATH_DATA . '/font/4.ttf';
+        if (is_file($sDefaultFont)) {
+            return $sDefaultFont;
+        }
+
+        $aFonts = glob(PH7_PATH_DATA . '/font/*.ttf');
+        if (!empty($aFonts)) {
+            $mFont = $aFonts[array_rand($aFonts)];
+            return is_string($mFont) ? $mFont : '';
+        }
+
+        return '';
     }
 }
