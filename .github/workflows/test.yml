@@ -28,13 +28,7 @@ jobs:
 
       - name: Get Composer Cache Directory
         id: composer-cache
-        shell: bash
-        run: |
-          dir="$(composer config cache-files-dir)"
-          if [ -z "$dir" ]; then
-            dir="$HOME/.composer/cache/files"
-          fi
-          echo "dir=$dir" >> "$GITHUB_OUTPUT"
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache Composer dependencies
         uses: actions/cache@v4
