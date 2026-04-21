@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace PH7\Test\Unit\Framework\Date\ValueObject;
+namespace PH7\Test\Unit\Framework\Compress\ValueObject;
 
 use PH7\Framework\Compress\ValueObject\FileType;
 use PH7\Framework\Compress\ValueObject\InvalidFileTypeException;

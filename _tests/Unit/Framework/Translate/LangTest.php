@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace PH7\Test\Unit\Framework\Util;
+namespace PH7\Test\Unit\Framework\Translate;
 
 use PH7\Framework\Registry\Registry;
 use PH7\Framework\Translate\Lang;

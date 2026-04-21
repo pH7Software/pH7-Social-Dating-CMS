@@ -4,7 +4,7 @@
  * MIT License - https://opensource.org/licenses/MIT
  */
 
-namespace PH7\Cli\Exception;
+namespace PH7\Cli\Exception\Validation;
 
 use RuntimeException;
 
