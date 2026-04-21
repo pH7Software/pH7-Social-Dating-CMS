@@ -29,19 +29,28 @@ class ClickatellProvider extends SmsProvider implements SmsProvidable
                 ]
             );
 
-            if (!empty($aResponse) && is_array($aResponse)) {
-                $aMessages = $aResponse['messages'];
-                $aMessage = array_pop($aMessages);
-
-                if ($aMessage['error'] === false) {
-                    return true;
-                }
+            if (!is_array($aResponse)) {
+                return false;
             }
 
-            return false;
+            return $this->isSuccessResponse($aResponse);
         } catch (ClickatellException $oExcept) {
             (new Logger())->msg('Clickatell error while sending SMS: ' . $oExcept->getMessage());
             return false;
         }
+    }
+
+    private function isSuccessResponse(array $aResponse): bool
+    {
+        if (!isset($aResponse['messages']) || !is_array($aResponse['messages'])) {
+            return false;
+        }
+
+        $aMessage = array_pop($aResponse['messages']);
+        if (!is_array($aMessage) || !array_key_exists('error', $aMessage)) {
+            return false;
+        }
+
+        return $aMessage['error'] === false;
     }
 }
