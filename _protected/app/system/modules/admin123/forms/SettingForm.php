@@ -33,7 +33,7 @@ class SettingForm
 {
     private const CHANGE_CHAT_DOC_URL = 'https://ph7builder.com/how-to-change-chat/';
     private const I18N_DOC_URL = 'https://ph7builder.com/doc/en/how-to-translate-to-another-language';
-    private const GOOGLE_API_KEY_URL = 'https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend,places_backend&amp;keyType=CLIENT_SIDE&amp;reusekey=true';
+    private const GOOGLE_API_KEY_URL = 'https://console.cloud.google.com/google/maps-apis/credentials';
 
     public static function display(): void
     {
