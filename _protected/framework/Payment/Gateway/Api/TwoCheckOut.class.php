@@ -16,7 +16,7 @@ defined('PH7') or exit('Restricted access');
 class TwoCheckOut extends Provider implements Api
 {
     /** @var string */
-    private $sUrl = 'https://www.2checkout.com/checkout/';
+    private $sUrl = 'https://secure.2checkout.com/checkout/';
 
     /** @var string */
     private $sMsg;
@@ -80,11 +80,22 @@ class TwoCheckOut extends Provider implements Api
 
         if (
             !empty($_POST['message_type']) &&
-            $_POST['message_type'] == 'FRAUD_STATUS_CHANGED' && !empty($aInsMsg['md5_hash'])
+            $_POST['message_type'] == 'FRAUD_STATUS_CHANGED'
         ) {
-            $sHash = strtoupper(md5($aInsMsg['sale_id'] . $sVendorId . $aInsMsg['invoice_id'] . $sSecretWord));
+            $sHashPayload = $aInsMsg['sale_id'] . $sVendorId . $aInsMsg['invoice_id'] . $sSecretWord;
+            $sLegacyHash = strtoupper(md5($sHashPayload));
+            $sReceivedHash = strtoupper((string)($aInsMsg['md5_hash'] ?? $aInsMsg['hash'] ?? $aInsMsg['HASH'] ?? ''));
 
-            if ($sHash == $aInsMsg['md5_hash']) {
+            if (
+                ($aInsMsg['md5_hash'] ?? '') !== '' &&
+                hash_equals($sLegacyHash, strtoupper((string)$aInsMsg['md5_hash']))
+            ) {
+                $this->bValid = true;
+                $this->sMsg = t('Refund transaction valid.');
+            } elseif (
+                $sReceivedHash !== '' &&
+                $this->validateShaSignature($sHashPayload, $sReceivedHash)
+            ) {
                 $this->bValid = true;
                 $this->sMsg = t('Refund transaction valid.');
             } else {
@@ -92,12 +103,16 @@ class TwoCheckOut extends Provider implements Api
                 $this->sMsg = t('Invalid refund transaction.');
             }
         } elseif (
-            !empty($_REQUEST['key']) && !empty($aInsMsg['order_number']) &&
+            !empty($_REQUEST['key']) &&
+            !empty($aInsMsg['order_number']) &&
             !empty($aInsMsg['total'])
         ) {
-            $sHash = strtoupper(md5($sSecretWord . $sVendorId . $aInsMsg['order_number'] . $aInsMsg['total']));
+            $sHashPayload = $sSecretWord . $sVendorId . $aInsMsg['order_number'] . $aInsMsg['total'];
+            $sLegacyHash = strtoupper(md5($sHashPayload));
+            $sSha2Hash = strtoupper(hash('sha256', $sHashPayload));
+            $sReceivedHash = strtoupper((string)($_REQUEST['key'] ?? ''));
 
-            if ($sHash === ($_REQUEST['key'] ?? '')) {
+            if ($sReceivedHash !== '' && ($sReceivedHash === $sLegacyHash || $sReceivedHash === $sSha2Hash)) {
                 $this->bValid = true;
                 $this->sMsg = t('Purchase transaction valid.');
             } else {
@@ -112,5 +127,48 @@ class TwoCheckOut extends Provider implements Api
         unset($aInsMsg);
 
         return $this->bValid;
+    }
+
+    private function validateShaSignature(string $sPayload, string $sReceivedHash): bool
+    {
+        [$sAlgorithm, $sHash] = $this->splitSignatureWithAlgorithm($sReceivedHash);
+
+        if ($sAlgorithm !== null) {
+            return $this->compareHash($sPayload, $sAlgorithm, $sHash);
+        }
+
+        // If no algorithm prefix is provided, try modern supported SHA variants.
+        return $this->compareHash($sPayload, 'sha256', $sHash) ||
+            $this->compareHash($sPayload, 'sha3-256', $sHash);
+    }
+
+    /**
+     * @return array{0:?string,1:string}
+     */
+    private function splitSignatureWithAlgorithm(string $sReceivedHash): array
+    {
+        $sReceivedHash = strtoupper(trim($sReceivedHash));
+
+        if (strpos($sReceivedHash, ':') === false) {
+            return [null, $sReceivedHash];
+        }
+
+        [$sAlgorithm, $sHash] = explode(':', $sReceivedHash, 2);
+        $sAlgorithm = strtolower(trim($sAlgorithm));
+        $sHash = strtoupper(trim($sHash));
+
+        $aAllowedAlgorithms = ['sha256', 'sha3-256'];
+        if (!in_array($sAlgorithm, $aAllowedAlgorithms, true) || $sHash === '') {
+            return [null, $sReceivedHash];
+        }
+
+        return [$sAlgorithm, $sHash];
+    }
+
+    private function compareHash(string $sPayload, string $sAlgorithm, string $sExpectedHash): bool
+    {
+        $sCalculatedHash = strtoupper(hash($sAlgorithm, $sPayload));
+
+        return hash_equals($sCalculatedHash, $sExpectedHash);
     }
 }
