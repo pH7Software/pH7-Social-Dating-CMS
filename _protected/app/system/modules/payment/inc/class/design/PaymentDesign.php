@@ -17,6 +17,7 @@ use stdClass;
 class PaymentDesign extends Framework\Core\Core
 {
     const DIV_CONTAINER_NAME = 'payment-form';
+    private const BRAINTREE_FORM_ID = 'braintree-payment-form';
     const MAX_STRING_FIELD_LENGTH = 127;
 
     /**
@@ -109,10 +110,32 @@ class PaymentDesign extends Framework\Core\Core
 
         echo '<script>';
         echo '$(function () {';
-        echo "braintree.setup('$sClientToken', 'dropin', {";
-        echo "container: '" . self::DIV_CONTAINER_NAME . "',";
-        echo "paypal: {singleUse: true, amount: '$fPrice', currency: '$sCurrency', locale: '$sLocale'}";
-        echo '})})';
+        echo 'const oForm = document.getElementById(' . json_encode(self::BRAINTREE_FORM_ID) . ');';
+        echo 'if (!oForm || !window.braintree || !braintree.dropin || typeof braintree.dropin.create !== "function") { return; }';
+        echo 'const oDropinOptions = {';
+        echo 'authorization: ' . json_encode($sClientToken) . ',';
+        echo 'container: ' . json_encode('#' . self::DIV_CONTAINER_NAME) . ',';
+        echo 'paypal: {flow: "checkout", amount: ' . json_encode((string)$fPrice) . ', currency: ' . json_encode($sCurrency) . ', locale: ' . json_encode($sLocale) . '}';
+        echo '};';
+        echo 'braintree.dropin.create(oDropinOptions, function (oError, oDropinInstance) {';
+        echo 'if (oError || !oDropinInstance) { console.error(oError); return; }';
+        echo 'oForm.addEventListener("submit", function (oEvent) {';
+        echo 'oEvent.preventDefault();';
+        echo 'oDropinInstance.requestPaymentMethod(function (oNonceError, oPayload) {';
+        echo 'if (oNonceError || !oPayload || !oPayload.nonce) { console.error(oNonceError); return; }';
+        echo 'let oNonceInput = oForm.querySelector(\'input[name="payment_method_nonce"]\');';
+        echo 'if (!oNonceInput) {';
+        echo 'oNonceInput = document.createElement("input");';
+        echo 'oNonceInput.type = "hidden";';
+        echo 'oNonceInput.name = "payment_method_nonce";';
+        echo 'oForm.appendChild(oNonceInput);';
+        echo '}';
+        echo 'oNonceInput.value = oPayload.nonce;';
+        echo 'HTMLFormElement.prototype.submit.call(oForm);';
+        echo '});';
+        echo '});';
+        echo '});';
+        echo '});';
         echo '</script>';
     }
 
@@ -163,7 +186,11 @@ class PaymentDesign extends Framework\Core\Core
      */
     private function displayGatewayForm(PaymentApi $oPaymentProvider, $sMembershipName, $sProviderName)
     {
-        echo '<form action="', $oPaymentProvider->getUrl(), '" method="post">';
+        $sFormId = ($oPaymentProvider instanceof Braintree)
+            ? ' id="' . self::BRAINTREE_FORM_ID . '"'
+            : '';
+
+        echo '<form action="', $oPaymentProvider->getUrl(), '" method="post"', $sFormId, '>';
 
         if ($oPaymentProvider instanceof Braintree) {
             echo $this->getDivFormContainer();
