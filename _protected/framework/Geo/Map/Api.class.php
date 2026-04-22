@@ -620,7 +620,7 @@ class Api
         if ($this->includeJs === true) {
             // Google map JS
             $this->content .= '<script src="' . self::GOOGLE_API_URL . 'js?key=' .
-                $this->key . '&amp;language=' . $this->lang . '">';
+                $this->key . '&amp;language=' . $this->lang . '&amp;v=weekly">';
             $this->content .= '</script>' . "\n";
 
             // Clusterer JS
@@ -716,7 +716,7 @@ class Api
         $this->content .= "\t" . 'function geocodeMarker(address,title,content,category,icon) {' . "\n";
         $this->content .= "\t\t" . 'if (geocoder) {' . "\n";
         $this->content .= "\t\t\t" . 'geocoder.geocode( { "address" : address}, function(results, status) {' . "\n";
-        $this->content .= "\t\t\t\t" . 'if (status == google.maps.GeocoderStatus.OK) {' . "\n";
+        $this->content .= "\t\t\t\t" . 'if (status === "OK") {' . "\n";
         $this->content .= "\t\t\t\t\t" . 'var latlng =  results[0].geometry.location;' . "\n";
         $this->content .= "\t\t\t\t\t" . 'addMarker(results[0].geometry.location,title,content,category,icon)' . "\n";
         $this->content .= "\t\t\t\t" . '}' . "\n";
@@ -728,7 +728,7 @@ class Api
         $this->content .= "\t" . 'function geocodeCenter(address) {' . "\n";
         $this->content .= "\t\t" . 'if (geocoder) {' . "\n";
         $this->content .= "\t\t\t" . 'geocoder.geocode( { "address": address}, function(results, status) {' . "\n";
-        $this->content .= "\t\t\t\t" . 'if (status == google.maps.GeocoderStatus.OK) {' . "\n";
+        $this->content .= "\t\t\t\t" . 'if (status === "OK") {' . "\n";
         $this->content .= "\t\t\t\t" . 'map' . $this->googleMapId . '.setCenter(results[0].geometry.location);' . "\n";
         $this->content .= "\t\t\t\t" . '} else {' . "\n";
         $this->content .= "\t\t\t\t" . 'console.error("' . t('Oops! Google Maps was not successful for the following reason:') . '" + status);' . "\n";
@@ -742,10 +742,10 @@ class Api
         $this->content .= "\t\t" . 'var request = {' . "\n";
         $this->content .= "\t\t" . 'origin:from, ' . "\n";
         $this->content .= "\t\t" . 'destination:to,' . "\n";
-        $this->content .= "\t\t" . 'travelMode: google.maps.DirectionsTravelMode.DRIVING' . "\n";
+        $this->content .= "\t\t" . 'travelMode: (google.maps.TravelMode && google.maps.TravelMode.DRIVING) ? google.maps.TravelMode.DRIVING : "DRIVING"' . "\n";
         $this->content .= "\t\t" . '};' . "\n";
         $this->content .= "\t\t" . 'directionsService.route(request, function(response, status) {' . "\n";
-        $this->content .= "\t\t" . 'if (status == google.maps.DirectionsStatus.OK) {' . "\n";
+        $this->content .= "\t\t" . 'if (status === "OK") {' . "\n";
         $this->content .= "\t\t" . 'directions.setDirections(response);' . "\n";
         $this->content .= "\t\t" . '}' . "\n";
         $this->content .= "\t\t" . '});' . "\n";
@@ -797,12 +797,15 @@ class Api
         $this->content .= "\t\t" . 'if(infowindow) { infowindow.close(); }' . "\n";
         $this->content .= "\t" . '}' . "\n";
 
-        // JS public function to hide/show a category of marker - TODO BUG
+        // JS public function to hide/show a category of marker
         $this->content .= "\t" . 'function toggleHideShow(category) {' . "\n";
+        $this->content .= "\t\t" . 'var shouldShow = null;' . "\n";
         $this->content .= "\t\t" . 'for (var i=0; i<gmarkers.length; i++) {' . "\n";
         $this->content .= "\t\t\t" . 'if (gmarkers[i].mycategory === category) {' . "\n";
-        $this->content .= "\t\t\t\t" . 'if (gmarkers[i].getVisible()===true) { gmarkers[i].setVisible(false); }' . "\n";
-        $this->content .= "\t\t\t\t" . 'else gmarkers[i].setVisible(true);' . "\n";
+        $this->content .= "\t\t\t\t" . 'if (shouldShow === null) {' . "\n";
+        $this->content .= "\t\t\t\t\t" . 'shouldShow = !gmarkers[i].getVisible();' . "\n";
+        $this->content .= "\t\t\t\t" . '}' . "\n";
+        $this->content .= "\t\t\t\t" . 'gmarkers[i].setVisible(shouldShow);' . "\n";
         $this->content .= "\t\t\t" . '}' . "\n";
         $this->content .= "\t\t" . '}' . "\n";
         $this->content .= "\t\t" . 'if(infowindow) { infowindow.close(); }' . "\n";
