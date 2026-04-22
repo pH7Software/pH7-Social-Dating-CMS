@@ -466,6 +466,9 @@ function get_tweet_post($sTweetMsg, $sTwitterUsername, $sGitRepoUrl)
  */
 function send_mail(array $aParams)
 {
+    $sServerAdmin = (string)($_SERVER['SERVER_ADMIN'] ?? 'noreply@localhost');
+    $sHttpHost = (string)($_SERVER['HTTP_HOST'] ?? 'localhost');
+
     // Frontier to separate the text part and the HTML part.
     $sFrontier = "-----=" . md5(mt_rand());
 
@@ -487,12 +490,12 @@ EOF;
 
     // If the email sender is empty, we define the server email.
     if (empty($aParams['from'])) {
-        $aParams['from'] = $_SERVER['SERVER_ADMIN'];
+        $aParams['from'] = $sServerAdmin;
     }
 
     /*** Headers ***/
     // To avoid the email goes to spam folder of email client.
-    $sHeaders = "From: \"{$_SERVER['HTTP_HOST']}\" <{$_SERVER['SERVER_ADMIN']}>\r\n";
+    $sHeaders = "From: \"{$sHttpHost}\" <{$sServerAdmin}>\r\n";
 
     $sHeaders .= "Reply-To: <{$aParams['from']}>\r\n";
     $sHeaders .= "MIME-Version: 1.0\r\n";
