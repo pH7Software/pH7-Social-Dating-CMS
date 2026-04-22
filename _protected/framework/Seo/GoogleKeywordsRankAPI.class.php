@@ -114,7 +114,7 @@ class GoogleKeywordsRankAPI
     public function getKeywordsRank($keywords)
     {
         if (isset($this->url) && isset($keywords)) {
-            $base_url = 'http://www.google.' . $this->extension . '/search?q=' . urlencode($keywords) . '&start=';
+            $base_url = 'https://www.google.' . $this->extension . '/search?q=' . urlencode($keywords) . '&start=';
 
             $index = 0; // counting start from here
             $page = 0;
@@ -127,9 +127,10 @@ class GoogleKeywordsRankAPI
 
                 if ($getContentCode == 200) {
 
-                    if (preg_match_all('/a href="([^"]+)" class=l.+?>.+?<\/a>/', $this->response, $results) > 0) {
-                        foreach ($results[1] as $link) {
-                            $link = preg_replace('(^http://|/$)', '', $link);
+                    $aLinks = $this->extractSearchResultLinks();
+                    if (!empty($aLinks)) {
+                        foreach ($aLinks as $link) {
+                            $link = preg_replace('#^https?://|/$#', '', (string)$link);
                             $index++;
                             if (strlen(stristr($link, $this->url)) > 0) {
                                 return array($keywords, $index);
@@ -174,5 +175,30 @@ class GoogleKeywordsRankAPI
         }
 
         return $keywords_rank;
+    }
+
+    /**
+     * Parse result links from Google Search HTML.
+     *
+     * @return array
+     */
+    private function extractSearchResultLinks()
+    {
+        $aLinks = [];
+        $aMatches = [];
+
+        // Legacy Google markup.
+        if (preg_match_all('/a href="([^"]+)" class=l.+?>.+?<\/a>/', (string)$this->response, $aMatches) > 0) {
+            return $aMatches[1];
+        }
+
+        // Modern Google markup where result URLs are in "/url?q=<target>".
+        if (preg_match_all('#<a[^>]+href="/url\?q=([^"&]+)[^"]*"#i', (string)$this->response, $aMatches) > 0) {
+            foreach ($aMatches[1] as $sUrl) {
+                $aLinks[] = urldecode($sUrl);
+            }
+        }
+
+        return $aLinks;
     }
 }
