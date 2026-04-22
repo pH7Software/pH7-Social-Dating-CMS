@@ -37,6 +37,7 @@ class UpgradeCore
      */
     private const REMOTE_URL = 'https://update.ph7builder.com/';
     private const ARCHIVE_EXT = '.zip';
+    private const CHECKSUM_FILE_EXTENSIONS = ['.sha256', '.sha1', '.md5'];
     private const MIN_SQL_FILE_SIZE = 12; // Size in bytes
 
     /**
@@ -333,23 +334,32 @@ class UpgradeCore
     private function download(string $sNewVersion): bool
     {
         $sZipFileName = $sNewVersion . self::ARCHIVE_EXT;
+        $sZipFilePath = PH7_PATH_REPOSITORY . PH7_TMP . $sZipFileName;
         $sDestinationPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS;
 
         $rFile = $this->oFile->getUrlContents(self::REMOTE_URL . $sZipFileName);
-        $this->oFile->putFile(PH7_PATH_REPOSITORY . PH7_TMP . $sZipFileName, $rFile);
+        if (!is_string($rFile) || $rFile === '') {
+            $this->aErrors[] = t('Unable to download the upgrade archive from the update server.');
+            return false;
+        }
 
-        // TODO Need to retrieve the valid checksum of each release from the remote server, where it gives these details
-        $sRemoveChecksumPatch = md5_file(PH7_PATH_REPOSITORY . PH7_TMP . $sZipFileName);
+        if ($this->oFile->putFile($sZipFilePath, $rFile) === false) {
+            $this->aErrors[] = t('Unable to write the downloaded upgrade archive into the temporary folder.');
+            return false;
+        }
 
-        if (!$this->isPatchChecksumMatch(PH7_PATH_REPOSITORY . PH7_TMP . $sZipFileName, $sRemoveChecksumPatch)) {
+        $sRemoteChecksum = $this->getRemotePatchChecksum($sZipFileName);
+
+        if ($sRemoteChecksum !== null && !$this->isPatchChecksumMatch($sZipFilePath, $sRemoteChecksum)) {
+            $this->aErrors[] = t('Checksum verification failed for the downloaded upgrade archive.');
             $bStatus = false;
         } else {
             // Extract zip archive
-            $bStatus = $this->oFile->zipExtract(PH7_PATH_REPOSITORY . PH7_TMP . $sZipFileName, $sDestinationPath);
+            $bStatus = $this->oFile->zipExtract($sZipFilePath, $sDestinationPath);
         }
 
         // Delete zip archive
-        $this->oFile->deleteFile(PH7_PATH_REPOSITORY . PH7_TMP . $sZipFileName);
+        $this->oFile->deleteFile($sZipFilePath);
 
         return $bStatus;
     }
@@ -524,12 +534,53 @@ class UpgradeCore
         return $this->oHttpRequest->postExists('submit_upgrade');
     }
 
+    private function getRemotePatchChecksum(string $sZipFileName): ?string
+    {
+        foreach (self::CHECKSUM_FILE_EXTENSIONS as $sChecksumExt) {
+            try {
+                $sContents = $this->oFile->getUrlContents(self::REMOTE_URL . $sZipFileName . $sChecksumExt);
+            } catch (\Throwable $oException) {
+                continue;
+            }
+
+            if (!is_string($sContents) || $sContents === '') {
+                continue;
+            }
+
+            if (preg_match('/\b([a-f0-9]{32}|[a-f0-9]{40}|[a-f0-9]{64})\b/i', $sContents, $aMatches)) {
+                return strtolower($aMatches[1]);
+            }
+        }
+
+        return null;
+    }
+
     /**
      * Checks the checksum of the downloaded zip archive to be sure of its integrity and authenticity before proceeding to the upgrade with the patch file.
      */
     private function isPatchChecksumMatch(string $sZipFilePath, string $sValidChecksum): bool
     {
-        return md5_file($sZipFilePath) === $sValidChecksum;
+        if (!is_file($sZipFilePath)) {
+            return false;
+        }
+
+        $iChecksumLength = strlen($sValidChecksum);
+        if ($iChecksumLength === 64) {
+            $sAlgorithm = 'sha256';
+        } elseif ($iChecksumLength === 40) {
+            $sAlgorithm = 'sha1';
+        } elseif ($iChecksumLength === 32) {
+            $sAlgorithm = 'md5';
+        } else {
+            return false;
+        }
+
+        $sCalculatedChecksum = hash_file($sAlgorithm, $sZipFilePath);
+        if (!is_string($sCalculatedChecksum)) {
+            return false;
+        }
+
+        return hash_equals(strtolower($sCalculatedChecksum), strtolower($sValidChecksum));
     }
 }
 
