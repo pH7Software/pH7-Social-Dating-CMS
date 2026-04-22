@@ -27,10 +27,10 @@ class Language
     public function __construct()
     {
         if ($this->doesUserLangExist()) {
-            $this->sLang = $_GET[self::REQUEST_PARAM_NAME];
+            $this->sLang = $this->getUserLang();
             $this->createCookie($this->sLang);
         } elseif ($this->doesCookieLangExist()) {
-            $this->sLang = $_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang'];
+            $this->sLang = $this->getCookieLang();
         } elseif ($this->doesBrowserLangExist()) {
             $this->sLang = $this->getBrowser();
         } else {
@@ -73,14 +73,18 @@ class Language
 
     private function doesUserLangExist(): bool
     {
-        return !empty($_GET[self::REQUEST_PARAM_NAME]) &&
-            is_file(PH7_ROOT_INSTALL . self::LANG_FOLDER_NAME . $_GET[self::REQUEST_PARAM_NAME] . PH7_DS . self::LANG_FILENAME);
+        $sLang = $this->getUserLang();
+
+        return $sLang !== '' &&
+            is_file(PH7_ROOT_INSTALL . self::LANG_FOLDER_NAME . $sLang . PH7_DS . self::LANG_FILENAME);
     }
 
     private function doesCookieLangExist(): bool
     {
-        return isset($_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang']) &&
-            is_file(PH7_ROOT_INSTALL . self::LANG_FOLDER_NAME . $_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang'] . PH7_DS . self::LANG_FILENAME);
+        $sLang = $this->getCookieLang();
+
+        return $sLang !== '' &&
+            is_file(PH7_ROOT_INSTALL . self::LANG_FOLDER_NAME . $sLang . PH7_DS . self::LANG_FILENAME);
     }
 
     private function doesBrowserLangExist(): bool
@@ -99,5 +103,15 @@ class Language
             false,
             true
         );
+    }
+
+    private function getUserLang(): string
+    {
+        return (string)($_GET[self::REQUEST_PARAM_NAME] ?? '');
+    }
+
+    private function getCookieLang(): string
+    {
+        return (string)($_COOKIE[Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang'] ?? '');
     }
 }
