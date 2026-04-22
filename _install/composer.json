@@ -1,11 +1,13 @@
 {
+  "name": "ph7software/ph7builder-install",
+  "description": "Installer dependencies for pH7Builder",
+  "type": "project",
+  "license": "MIT",
   "require": {
+    "php": "^8.2",
     "smarty/smarty": "^4.2"
   },
   "autoload": {
-    "additionalFileExtensions": [
-      ".class.php"
-    ],
     "classmap": [
       "controllers",
       "library"
