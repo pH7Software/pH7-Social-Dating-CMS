@@ -146,17 +146,15 @@ class InstallerCommand extends Command
     private function configProtectedPath(): void
     {
         $protectedPath = self::ROOT_PROJECT . PH7_PROTECTED_DIR_NAME;
-        if (is_file($protectedPath)) {
-            if (is_readable($protectedPath)) {
-                $constantContent = file_get_contents(self::ROOT_PROJECT . self::INSTALL_DIR_NAME . 'data/configs/constants.php');
-                $constantContent = str_replace('%path_protected%', addslashes($protectedPath), $constantContent);
-
-                if (!@file_put_contents(self::ROOT_PROJECT . '_constants.php', $constantContent)) {
-                    throw new FileNotWritableException('Please change the permissions of the public root directory to write mode (CHMOD 777)');
-                }
-            }
-
+        if (!is_dir($protectedPath) || !is_readable($protectedPath)) {
             throw new InvalidPathException('The protected directory wasn\'t found or doesn\'t have the right (CHMOD 777) writing permission');
+        }
+
+        $constantContent = file_get_contents(self::ROOT_PROJECT . self::INSTALL_DIR_NAME . 'data/configs/constants.php');
+        $constantContent = str_replace('%path_protected%', addslashes($protectedPath), $constantContent);
+
+        if (!@file_put_contents(self::ROOT_PROJECT . '_constants.php', $constantContent)) {
+            throw new FileNotWritableException('Please change the permissions of the public root directory to write mode (CHMOD 777)');
         }
     }
 
@@ -229,7 +227,7 @@ class InstallerCommand extends Command
         $configContent = str_replace('%private_key%', Helper::generateHash(40), $configContent);
         $configContent = str_replace('%rand_id%', Helper::generateHash(5), $configContent);
 
-        if (@file_put_contents(PH7_PATH_APP_CONFIG . 'config.ini', $configContent)) {
+        if (!@file_put_contents(PH7_PATH_APP_CONFIG . 'config.ini', $configContent)) {
             throw new FileNotWritableException('Please change the permissions for "protected/app/configs" to write mode (CHMOD 777)');
         }
     }
