@@ -47,7 +47,8 @@ class AddFakeProfilesFormProcess extends Form
         $this->oExistsModel = new ExistCoreModel;
         $this->oValidate = new Validate;
 
-        $aUserData = $this->getApiClient()['results'];
+        $aApiResponse = $this->getApiClient();
+        $aUserData = $aApiResponse['results'] ?? null;
         if (!empty($aUserData) && is_array($aUserData)) {
             foreach ($aUserData as $aUser) {
                 $sEmail = trim($aUser['email']);
@@ -73,9 +74,11 @@ class AddFakeProfilesFormProcess extends Form
                 );
             }
         } else {
+            $sError = is_array($aApiResponse) ? (string)($aApiResponse['error'] ?? '') : '';
+            $sApiErrorMessage = $sError !== '' ? ' (' . $sError . ')' : '';
             \PFBC\Form::setError(
                 'form_add_fake_profiles',
-                t('An error occurred when requesting user data from %0%. The API might be temporarily down. Try again later.', self::API_URL)
+                t('An error occurred when requesting user data from %0%. The API might be temporarily down. Try again later.', self::API_URL) . $sApiErrorMessage
             );
         }
 
@@ -89,15 +92,30 @@ class AddFakeProfilesFormProcess extends Form
         $sApiVer = static::API_VER;
         $rUserData = $this->getApiResults($sApiUrl, $sApiParams, $sApiVer);
 
+        if (!is_string($rUserData) || $rUserData === '') {
+            return null;
+        }
+
         return json_decode($rUserData, true);
     }
 
     private function getApiParameters(): array
     {
+        $sGender = (string)$this->httpRequest->post('sex');
+        $sNat = (string)$this->httpRequest->post('nat');
+
+        // RandomUser accepts male/female for "gender". Omit filter when "both" is selected.
+        $sGenderFilter = ($sGender === GenderTypeUserCore::MALE || $sGender === GenderTypeUserCore::FEMALE)
+            ? $sGender
+            : '';
+
+        // "ALL" is our UI token, not a valid RandomUser nationality code.
+        $sNationalityFilter = strtoupper($sNat) !== 'ALL' ? $sNat : '';
+
         return [
             'results' => $this->httpRequest->post('num'),
-            'gender' => $this->httpRequest->post('sex'),
-            'nat' => $this->httpRequest->post('nat'),
+            'gender' => $sGenderFilter,
+            'nat' => $sNationalityFilter,
             'noinfo' => 1
         ];
     }
@@ -130,6 +148,10 @@ class AddFakeProfilesFormProcess extends Form
          */
         if (!$rFile = $this->file->getUrlContents($aData['avatar'])) {
             $rFile = $this->file->getFile($aData['avatar']);
+        }
+
+        if (!is_string($rFile) || $rFile === '') {
+            return;
         }
 
         // Create a temporary file before creating the avatar images
