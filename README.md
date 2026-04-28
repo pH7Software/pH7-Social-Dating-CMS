@@ -8,7 +8,8 @@
 [![PayPal](https://img.shields.io/badge/Donate-PayPal-lightgrey.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6 "Help keep me off the streets! ;)") [![Build Status](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/build.png?b=master)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/build-status/master) [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![SourceForge](https://img.shields.io/badge/Download-SourceForge-orange.svg)](https://sourceforge.net/projects/ph7socialdating/files/latest/download) [![Patreon](https://img.shields.io/badge/Subscribe-Patreon-red.svg)](https://www.patreon.com/bePatron?u=3534366 "Become a Patron Today!")
 
 > [!Note]
-> **pH7's Social Dating Solution™** is a **Professional**, **Open Source** All-Inclusive **Turnkey Dating Software**. Fully responsive design, low-resource-intensive, powerful and very secure.
+> **pH7's Social Dating Solution™** is a **PROFESSIONAL**, **OPEN-SOURCE**, ALL-INCLUSIVE **TURNKEY DATING SOFTWARE**.  
+> Fully responsive, resource-efficient, and designed to be **POWERFUL** and **SECURE**.
 
 ---
 
