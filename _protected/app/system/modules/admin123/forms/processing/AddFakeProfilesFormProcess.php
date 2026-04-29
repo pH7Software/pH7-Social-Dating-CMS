@@ -88,7 +88,7 @@ class AddFakeProfilesFormProcess extends Form
     protected function getApiClient(): array|bool|null
     {
         $sApiUrl = static::API_URL;
-        $sApiParams = '?' . Url::httpBuildQuery($this->getApiParameters(), null, '&');
+        $sApiParams = '?' . Url::httpBuildQuery($this->getApiParameters(), '', '&');
         $sApiVer = static::API_VER;
         $rUserData = $this->getApiResults($sApiUrl, $sApiParams, $sApiVer);
 
