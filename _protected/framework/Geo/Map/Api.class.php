@@ -461,7 +461,7 @@ class Api
     public function geocoding($address)
     {
         $return = null;
-        $url = self::GOOGLE_API_URL . 'geocode/json?address=' . urlencode($address) . '&amp;key=' . $this->key;
+        $url = self::GOOGLE_API_URL . 'geocode/json?address=' . urlencode($address) . '&key=' . $this->key;
 
         if (function_exists('curl_init')) {
             $data = $this->getContent($url);
@@ -469,13 +469,17 @@ class Api
             $data = file_get_contents($url);
         }
 
-        $response = json_decode($data, true);
+        $response = is_string($data) ? json_decode($data, true) : null;
 
         if (!empty($response['status'])) {
-            if ($response['status'] === 'OK') {
+            if (
+                $response['status'] === 'OK' &&
+                isset($response['results'][0]['geometry']['location']['lat']) &&
+                isset($response['results'][0]['geometry']['location']['lng'])
+            ) {
                 $return = array(
                     $response['status'],
-                    $response['results'][0]['types'],
+                    $response['results'][0]['types'] ?? [],
                     $response['results'][0]['geometry']['location']['lat'],
                     $response['results'][0]['geometry']['location']['lng']
                 );
