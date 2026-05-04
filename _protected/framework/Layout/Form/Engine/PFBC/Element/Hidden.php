@@ -14,7 +14,7 @@ class Hidden extends Element
     /** @var array */
     protected $attributes = ['type' => 'hidden'];
 
-    public function __construct($sName, $sValue = '', array $aProperties = null)
+    public function __construct($sName, $sValue = '', ?array $aProperties = null)
     {
         if (!is_array($aProperties))
             $aProperties = [];

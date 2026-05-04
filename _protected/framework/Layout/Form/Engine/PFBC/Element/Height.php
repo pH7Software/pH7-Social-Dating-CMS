@@ -17,7 +17,7 @@ class Height extends Select
      * @param string $sName
      * @param array|null $aProperties
      */
-    public function __construct($sLabel, $sName, array $aProperties = null)
+    public function __construct($sLabel, $sName, ?array $aProperties = null)
     {
         $aOptions = [];
 

@@ -32,7 +32,7 @@ class Age extends OptionElement
      * @param string $sLabel
      * @param array|null $aProperties
      */
-    public function __construct($sLabel, array $aProperties = null)
+    public function __construct($sLabel, ?array $aProperties = null)
     {
         parent::__construct($sLabel, '', [], $aProperties);
 

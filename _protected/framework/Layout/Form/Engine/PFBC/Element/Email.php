@@ -16,7 +16,7 @@ class Email extends Textbox
      * @param array|null $aProperties
      * @param bool $bMailCheck
      */
-    public function __construct($sLabel, $sName, array $aProperties = null, $bMailCheck = true)
+    public function __construct($sLabel, $sName, ?array $aProperties = null, $bMailCheck = true)
     {
         $this->bMailCheck = $bMailCheck;
         parent::__construct($sLabel, $sName, $aProperties);

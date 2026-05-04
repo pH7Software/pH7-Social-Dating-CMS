@@ -16,7 +16,7 @@ abstract class OptionElement extends Element
      * @param array $options
      * @param array|null $properties
      */
-    public function __construct($label, $name, array $options, array $properties = null)
+    public function __construct($label, $name, array $options, ?array $properties = null)
     {
         $this->options = $options;
         if (!empty($this->options) &&

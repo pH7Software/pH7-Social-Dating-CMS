@@ -18,7 +18,7 @@ class SideBySide extends View
     protected $labelPaddingRight = 5;
     protected $labelPaddingTop;
 
-    public function __construct($labelWidth, array $properties = null)
+    public function __construct($labelWidth, ?array $properties = null)
     {
         if (!empty($properties)) {
             $properties['labelWidth'] = $labelWidth;

@@ -18,7 +18,7 @@ class YesNo extends Radio
      * @param string $sName
      * @param array|null $aProperties
      */
-    public function __construct($sLabel, $sName, array $aProperties = null)
+    public function __construct($sLabel, $sName, ?array $aProperties = null)
     {
         if (!is_array($aProperties)) {
             $aProperties = ['inline' => 1];

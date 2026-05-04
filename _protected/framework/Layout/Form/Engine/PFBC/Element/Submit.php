@@ -14,7 +14,7 @@ class Submit extends Element
      * @param string $sLabel
      * @param array|null $aProperties
      */
-    public function __construct($sLabel, array $aProperties = null)
+    public function __construct($sLabel, ?array $aProperties = null)
     {
         $this->attributes = ['type' => 'submit', 'value' => $sLabel];
 

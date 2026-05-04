@@ -26,7 +26,7 @@ abstract class Element extends Base
     protected $width;
     private $errors = [];
 
-    public function __construct($label, $name, array $properties = null)
+    public function __construct($label, $name, ?array $properties = null)
     {
         $configuration = [
             'label' => $label,

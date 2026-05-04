@@ -18,7 +18,7 @@ class Grid extends View
     protected $gridMargin = 2;
     private $gridIncludedElements = 0;
 
-    public function __construct(array $grid, array $properties = null)
+    public function __construct(array $grid, ?array $properties = null)
     {
         if (!empty($properties)) {
             $properties['grid'] = $grid;

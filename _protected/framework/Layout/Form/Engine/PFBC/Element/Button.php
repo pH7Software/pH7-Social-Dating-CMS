@@ -21,7 +21,7 @@ class Button extends Element
      *
      * @param array|null $aProperties
      */
-    public function __construct($sLabel = '', $sType = '', array $aProperties = null)
+    public function __construct($sLabel = '', $sType = '', ?array $aProperties = null)
     {
         if (empty($sLabel)) {
             // Default translation value

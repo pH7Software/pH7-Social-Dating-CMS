@@ -9,7 +9,7 @@ abstract class View extends Base
 {
     protected $form;
 
-    public function __construct(array $properties = null)
+    public function __construct(?array $properties = null)
     {
         $this->configure($properties);
     }
