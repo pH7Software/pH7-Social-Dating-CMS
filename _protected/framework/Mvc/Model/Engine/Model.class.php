@@ -42,7 +42,7 @@ abstract class Model extends Entity
      *
      * @return bool Returns TRUE on success or FALSE on failure.
      */
-    public function exec($sFile, $sPath, array $aParams = null)
+    public function exec($sFile, $sPath, ?array $aParams = null)
     {
         $rStmt = Db::getInstance()->prepare($this->getQuery($sFile, $sPath));
         $bRet = $rStmt->execute($aParams);
