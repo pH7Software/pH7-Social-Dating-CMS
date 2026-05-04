@@ -1,24 +1,40 @@
 /*
- @see /templates/system/modules/pwa/themes/base/js/sw-register.js
-
- TODO: Implement the Service Worker to cache some static data, html pages, images, etc.
- More info: https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers
-
- 🚀 Feel free to fork the project: https://github.com/pH7Software/pH7-Social-Dating-CMS
- Commit your changes, then open a Pull Request for submitting your awesome changes 🎉
+ * @see /templates/system/modules/pwa/themes/base/js/sw-register.js
  */
 
-const STATIC_CACHE_NAME = 'sta_homepage';
-const DYNAMIC_CACHE_NAME = 'dyn_homepage';
-
-const CACHED_FILES = [
-    '/',
-    // TODO: Add more URLs to be cached here
+const CACHE_VERSION = 'ph7-pwa-v2';
+const STATIC_CACHE_NAME = CACHE_VERSION + '-static';
+const PRE_CACHED_FILES = [
+    './favicon.ico',
+    './manifest.json',
+    './browserconfig.xml'
+];
+const CACHEABLE_DESTINATIONS = [
+    'font',
+    'image',
+    'manifest',
+    'script',
+    'style'
 ];
 
-self.addEventListener('install', async event => {
-    const cache = await caches.open(STATIC_CACHE_NAME);
-    await cache.addAll(CACHED_FILES);
+self.addEventListener('install', (event) => {
+    event.waitUntil(
+        caches.open(STATIC_CACHE_NAME)
+            .then((cache) => cache.addAll(PRE_CACHED_FILES))
+            .then(() => self.skipWaiting())
+    );
+});
+
+self.addEventListener('activate', (event) => {
+    event.waitUntil(
+        caches.keys()
+            .then((cacheNames) => Promise.all(
+                cacheNames
+                    .filter((cacheName) => cacheName.indexOf('ph7-pwa-') === 0 && cacheName !== STATIC_CACHE_NAME)
+                    .map((cacheName) => caches.delete(cacheName))
+            ))
+            .then(() => self.clients.claim())
+    );
 });
 
 self.addEventListener('fetch', (event) => {
@@ -29,37 +45,36 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
-    const url = new URL(request.url);
-
-    if (url.origin === location.origin) {
-        event.respondWith(cachedData(request));
-    } else {
-        event.respondWith(fetchNetworkRequest(request));
+    if (!isCacheableRequest(request)) {
+        return;
     }
+
+    event.respondWith(cacheFirst(request));
 });
 
-const isPageValid = (response) => {
-    return response.ok && response.status === 200;
+const isCacheableRequest = (request) => {
+    const url = new URL(request.url);
+
+    return request.method === 'GET' &&
+        url.origin === location.origin &&
+        CACHEABLE_DESTINATIONS.indexOf(request.destination) !== -1;
 };
 
-const cachedData = async (request) => {
+const isResponseValid = (response) => {
+    return response && response.ok && response.status === 200;
+};
+
+const cacheFirst = async (request) => {
     const cachedResponse = await caches.match(request);
-    return cachedResponse || fetch(request);
-};
-
-const fetchNetworkRequest = async (request) => {
-    const cache = await caches.open(DYNAMIC_CACHE_NAME);
-
-    try {
-        const response = await fetch(request);
-
-        // Then, cache the page if 200 code (we don't want to cache a 404, 403, 500, ...)
-        if(isPageValid(response)) {
-            await cache.put(request, response.clone());
-        }
-
-        return response;
-    } catch (error) {
-        return await cache.match(request);
+    if (cachedResponse) {
+        return cachedResponse;
     }
+
+    const response = await fetch(request);
+    if (isResponseValid(response)) {
+        const cache = await caches.open(STATIC_CACHE_NAME);
+        await cache.put(request, response.clone());
+    }
+
+    return response;
 };
