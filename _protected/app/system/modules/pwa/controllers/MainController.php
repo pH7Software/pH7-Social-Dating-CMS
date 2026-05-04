@@ -12,7 +12,7 @@ use PH7\Framework\Http\Http;
 
 class MainController extends Controller
 {
-    const JSON_CONTENT_TYPE = 'application/json';
+    const MANIFEST_CONTENT_TYPE = 'application/manifest+json';
     const JSON_TPL_EXT = '.json.tpl';
     const XML_CONTENT_TYPE = 'application/xml';
     const XML_TPL_EXT = '.xml.tpl';
@@ -86,7 +86,7 @@ class MainController extends Controller
      */
     private function setJsonContentType()
     {
-        Http::setContentType(self::JSON_CONTENT_TYPE);
+        Http::setContentType(self::MANIFEST_CONTENT_TYPE);
     }
 
     /**
