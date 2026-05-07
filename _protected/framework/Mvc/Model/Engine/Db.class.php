@@ -23,7 +23,7 @@ use Throwable;
  */
 class Db
 {
-    public const REQUIRED_SQL_VERSION = 5.0;
+    public const REQUIRED_SQL_VERSION = '5.5.3';
 
     public const ASC = 'ASC';
     public const DESC = 'DESC';
