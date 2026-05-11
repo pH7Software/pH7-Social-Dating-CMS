@@ -1,0 +1,68 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "a5Mo25hZpw_T0L-aerMav"
+uri = "file://artifacts/mockup-sandbox/public/images/hero-dating.png"
+type = "image"
+title = "Dating app socializing UI"
+
+[[generated]]
+id = "e2mDah6LlAtW7HOuuk0u8"
+uri = "file://artifacts/mockup-sandbox/public/images/profile-1.png"
+type = "image"
+title = "Portrait of a young woman"
+
+[[generated]]
+id = "yeYrG99Sbsae1bd9gCL0U"
+uri = "file://artifacts/mockup-sandbox/public/images/profile-2.png"
+type = "image"
+title = "Portrait of a young man"
+
+[[generated]]
+id = "sJIkmSO6FprjhxeXUoCf9"
+uri = "file://artifacts/mockup-sandbox/public/images/profile-3.png"
+type = "image"
+title = "Portrait of a smiling woman"
+
+[[generated]]
+id = "I5tnPfja5wX3UF6dZ96-A"
+uri = "file://artifacts/mockup-sandbox/public/images/user-main.png"
+type = "image"
+title = "Dating profile portrait"
+
+[[generated]]
+id = "z4qBAgB3aNfuT6GpnCRdd"
+uri = "file://artifacts/mockup-sandbox/public/images/gallery-1.png"
+type = "image"
+title = "Lifestyle photo at cafe"
+
+[[generated]]
+id = "L9m9Iufm5gKseU-EMX9tJ"
+uri = "file://artifacts/mockup-sandbox/public/images/gallery-2.png"
+type = "image"
+title = "Lifestyle photo hiking"
+
+[[generated]]
+id = "baJ7e2ZiRycRBmOjz3_lC"
+uri = "file://artifacts/mockup-sandbox/public/images/gallery-3.png"
+type = "image"
+title = "Lifestyle photo reading"
+
+[[generated]]
+id = "cWzwsajRlZp24GkhONglw"
+uri = "file://artifacts/mockup-sandbox/public/images/gallery-4.png"
+type = "image"
+title = "Lifestyle photo evening"
+
+[[generated]]
+id = "skOW8XAgKh8RQE06u3HOq"
+uri = "file://artifacts/mockup-sandbox/public/images/gallery-5.png"
+type = "image"
+title = "Lifestyle photo pet"
+
+[[generated]]
+id = "fFpRIWwrjRLd-sYigxLXc"
+uri = "file://artifacts/mockup-sandbox/public/images/gallery-6.png"
+type = "image"
+title = "Lifestyle photo cooking"
