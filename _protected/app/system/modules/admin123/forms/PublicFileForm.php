@@ -73,22 +73,25 @@ class PublicFileForm
      */
     public static function getRealPath(?string $sFile = null): string
     {
-        $sFullPath = PH7_PATH_TPL . ($sFile ?? ($_GET['file'] ?? ''));
+        $sFullPath = PH7_PATH_ROOT . ($sFile ?? ($_GET['file'] ?? ''));
         $mRealPublicPath = realpath(PH7_PATH_TPL);
         $mRealFullPath = realpath($sFullPath);
 
-        if (
-            $mRealFullPath === false ||
-            strpos($mRealFullPath, $mRealPublicPath) !== 0 ||
-            !is_file($mRealFullPath) ||
-            !in_array(strtolower(strrchr($mRealFullPath, '.')), self::ALLOWED_EXTENSIONS, true)
-        ) {
+        if (self::isInvalidEditablePublicFilePath($mRealFullPath, $mRealPublicPath)) {
             throw new RuntimeException(
                 t('Invalid specified path, not authorized by the system!')
             );
         }
 
         return $mRealFullPath;
+    }
+
+    private static function isInvalidEditablePublicFilePath(string|bool $mRealFullPath, string $sPublicRootPath): bool
+    {
+        return $mRealFullPath === false ||
+            strpos($mRealFullPath, $sPublicRootPath) !== 0 ||
+            !is_file($mRealFullPath) ||
+            !in_array(strtolower(strrchr($mRealFullPath, '.')), self::ALLOWED_EXTENSIONS, true);
     }
 
     private static function showErrorMessage(RuntimeException $oExcept): void
