@@ -14,11 +14,18 @@ use PFBC\Element\Button;
 use PFBC\Element\Hidden;
 use PFBC\Element\Textarea;
 use PFBC\Element\Token;
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Url\Header;
 use RuntimeException;
 
 class PublicFileForm
 {
+    private const ALLOWED_EXTENSIONS = [
+        PH7Tpl::TEMPLATE_FILE_EXT,
+        '.css',
+        '.js'
+    ];
+
     public static function display(): void
     {
         if (isset($_POST['submit_file'])) {
@@ -62,15 +69,20 @@ class PublicFileForm
     /**
      * Get the full file path and prevent path traversal and null byte attacks.
      *
-     * @return string|bool The canonicalized absolute path, or FALSE on failure.
+     * @return string The canonicalized absolute path.
      */
-    private static function getRealPath(): string|bool
+    public static function getRealPath(?string $sFile = null): string
     {
-        $sFullPath = PH7_PATH_ROOT . ($_GET['file'] ?? '');
-        $mRealPublicPath = realpath(PH7_PATH_ROOT);
+        $sFullPath = PH7_PATH_TPL . ($sFile ?? ($_GET['file'] ?? ''));
+        $mRealPublicPath = realpath(PH7_PATH_TPL);
         $mRealFullPath = realpath($sFullPath);
 
-        if ($mRealFullPath === false || strpos($mRealFullPath, $mRealPublicPath) !== 0) {
+        if (
+            $mRealFullPath === false ||
+            strpos($mRealFullPath, $mRealPublicPath) !== 0 ||
+            !is_file($mRealFullPath) ||
+            !in_array(strtolower(strrchr($mRealFullPath, '.')), self::ALLOWED_EXTENSIONS, true)
+        ) {
             throw new RuntimeException(
                 t('Invalid specified path, not authorized by the system!')
             );

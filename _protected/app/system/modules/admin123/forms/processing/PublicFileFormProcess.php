@@ -21,7 +21,7 @@ class PublicFileFormProcess extends Form
         parent::__construct();
 
         $bStatus = $this->file->save(
-            PH7_PATH_ROOT . $this->httpRequest->get('file'),
+            PublicFileForm::getRealPath($this->httpRequest->get('file')),
             $this->httpRequest->post('content', Http::NO_CLEAN)
         );
 

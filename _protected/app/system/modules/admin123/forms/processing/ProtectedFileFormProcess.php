@@ -21,7 +21,7 @@ class ProtectedFileFormProcess extends Form
         parent::__construct();
 
         $bStatus = $this->file->save(
-            PH7_PATH_PROTECTED . $this->httpRequest->get('file'),
+            ProtectedFileForm::getRealPath($this->httpRequest->get('file')),
             $this->httpRequest->post('content', Http::NO_CLEAN)
         );
 
