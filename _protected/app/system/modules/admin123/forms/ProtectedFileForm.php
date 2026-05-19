@@ -15,13 +15,35 @@ use PFBC\Element\Hidden;
 use PFBC\Element\HTMLExternal;
 use PFBC\Element\Textarea;
 use PFBC\Element\Token;
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Url\Header;
+use PH7\Framework\Security\Ban\Ban;
+use PH7\Framework\Service\Suggestion;
 use RuntimeException;
 
 class ProtectedFileForm
 {
     private const TERMS_FILENAME = 'terms.tpl';
     private const PRIVACY_FILENAME = 'privacy.tpl';
+
+    private const ALLOWED_PATHS = [
+        [
+            'root' => PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS . PH7_TPL_MAIL_NAME . PH7_DS . 'tpl' . PH7_DS . 'mail' . PH7_DS,
+            'extensions' => ['.tpl']
+        ],
+        [
+            'root' => PH7_PATH_APP_CONFIG . Ban::DIR,
+            'extensions' => [Ban::EXT]
+        ],
+        [
+            'root' => PH7_PATH_APP_CONFIG . Suggestion::DIR,
+            'extensions' => [Suggestion::EXT]
+        ],
+        [
+            'root' => PH7_PATH_SYS_MOD . 'page' . PH7_DS . PH7_VIEWS . PH7_TPL_MOD_NAME,
+            'extensions' => [PH7Tpl::TEMPLATE_FILE_EXT]
+        ]
+    ];
 
     public static function display(): void
     {
@@ -87,21 +109,31 @@ class ProtectedFileForm
     /**
      * Get the full file path and prevent path traversal and null byte attacks.
      *
-     * @return string|bool The canonicalized absolute path, or FALSE on failure.
+     * @return string The canonicalized absolute path.
      */
-    private static function getRealPath(): string|bool
+    public static function getRealPath(?string $sFile = null): string
     {
-        $sFullPath = PH7_PATH_PROTECTED . ($_GET['file'] ?? '');
-        $mRealProtectedPath = realpath(PH7_PATH_PROTECTED);
-        $mRealFullPath = realpath($sFullPath);
+        $sRequestedFile = (string)($sFile ?? ($_GET['file'] ?? ''));
 
-        if ($mRealFullPath === false || strpos($mRealFullPath, $mRealProtectedPath) !== 0) {
-            throw new RuntimeException(
-                t('Invalid specified path, not authorized by the system!')
-            );
+        foreach (self::ALLOWED_PATHS as $aAllowedPath) {
+            $sFullPath = $aAllowedPath['root'] . $sRequestedFile;
+            $mRealProtectedPath = realpath($aAllowedPath['root']);
+            $mRealFullPath = realpath($sFullPath);
+
+            if (
+                $mRealProtectedPath !== false &&
+                $mRealFullPath !== false &&
+                strpos($mRealFullPath, $mRealProtectedPath) === 0 &&
+                is_file($mRealFullPath) &&
+                in_array(strtolower(strrchr($mRealFullPath, '.')), $aAllowedPath['extensions'], true)
+            ) {
+                return $mRealFullPath;
+            }
         }
 
-        return $mRealFullPath;
+        throw new RuntimeException(
+            t('Invalid specified path, not authorized by the system!')
+        );
     }
 
     private static function showErrorMessage(RuntimeException $oExcept): void
