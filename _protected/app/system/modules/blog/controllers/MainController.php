@@ -15,6 +15,7 @@ use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Parse\Emoticon;
+use PH7\Framework\Security\Validate\Filter;
 use PH7\Framework\Url\Header;
 use PH7\JustHttp\StatusCode;
 use stdClass;
@@ -98,7 +99,7 @@ class MainController extends Controller
                     'post_id' => $oPost->postId,
                     'blog_id' => $oPost->blogId,
                     'h1_title' => $oPost->title,
-                    'content' => Emoticon::init($oPost->content),
+                    'content' => Emoticon::init((new Filter)->xssClean($oPost->content)),
                     'categories' => $this->oBlogModel->getCategory($oPost->blogId, 0, self::MAX_CATEGORIES),
                     'enable_comment' => $oPost->enableComment,
 
