@@ -31,8 +31,8 @@
         <ul>
             {each $views in $top_views}
                 <li>
-                    <a href="{{ $design->url('note','main','read',"$views->username,$views->postId") }}" title="{% $views->pageTitle %}" data-load="ajax">
-                        {% $views->title %}
+                    <a href="{{ $design->url('note','main','read',"$views->username,$views->postId") }}" title="{% escape($views->pageTitle) %}" data-load="ajax">
+                        {% escape($views->title) %}
                     </a>
                 </li>
             {/each}
@@ -44,8 +44,8 @@
         <ul>
             {each $rating in $top_rating}
                 <li>
-                    <a href="{{ $design->url('note','main','read',"$rating->username,$rating->postId") }}" title="{% $rating->pageTitle %}" data-load="ajax">
-                        {% $rating->title %}
+                    <a href="{{ $design->url('note','main','read',"$rating->username,$rating->postId") }}" title="{% escape($rating->pageTitle) %}" data-load="ajax">
+                        {% escape($rating->title) %}
                     </a>
                 </li>
             {/each}
@@ -63,7 +63,7 @@
                     {{ $content = escape($str->extract(Framework\Security\Ban\Ban::filterWord($post->content), 400), true) }}
 
                     <h1>
-                        <a href="{{ $design->url('note','main','read',"$post->username,$post->postId") }}" title="{% $post->title %}" data-load="ajax">
+                        <a href="{{ $design->url('note','main','read',"$post->username,$post->postId") }}" title="{% escape(Framework\Security\Ban\Ban::filterWord($post->title)) %}" data-load="ajax">
                             {% escape(Framework\Security\Ban\Ban::filterWord($post->title)) %}
                         </a>
                     </h1>
