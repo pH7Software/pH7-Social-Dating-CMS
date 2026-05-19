@@ -15,8 +15,10 @@ use PH7\Framework\Http\Http;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
+use PH7\Framework\Parse\Emoticon;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
+use PH7\Framework\Security\Validate\Filter;
 use PH7\Framework\Url\Header;
 use PH7\JustHttp\StatusCode;
 use stdClass;
@@ -111,6 +113,7 @@ class MainController extends Controller
 
                     /***** CONTENTS *****/
                     'h1_title' => Ban::filterWord($oPost->title),
+                    'content' => Emoticon::init((new Filter)->xssClean(Ban::filterWord($oPost->content))),
                     'categories' => $this->oNoteModel->getCategory($oPost->noteId, 0, self::MAX_CATEGORIES),
 
                     /** Date **/
