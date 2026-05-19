@@ -52,13 +52,14 @@ class VideoDesignCore
     public static function generate(stdClass $oData, string $sMedia = self::MOVIE_MEDIA_MODE, $mWidth = 600, $mHeight = 400): void
     {
         $sDurationTag = '<div class="video_duration">' . Various::secToTime($oData->duration) . '</div>';
+        $sEscapedTitle = escape($oData->title);
 
         if ((new VideoCore)->isApi($oData->file)) {
             try {
                 $oVideo = (new VideoApi)->getMeta($oData->file, $sMedia, $mWidth, $mHeight);
 
                 if ($sMedia === self::PREVIEW_MEDIA_MODE) {
-                    echo $sDurationTag, '<a href="', $oData->file, '" title="', $oData->title, '" data-popup="frame-video"><img src="', $oVideo, '" alt="', $oData->title, '" title="', $oData->title, '" /></a>';
+                    echo $sDurationTag, '<a href="', $oData->file, '" title="', $sEscapedTitle, '" data-popup="frame-video"><img src="', $oVideo, '" alt="', $sEscapedTitle, '" title="', $sEscapedTitle, '" /></a>';
                 } else {
                     echo $oVideo;
                 }
@@ -104,7 +105,7 @@ class VideoDesignCore
             </div>';
 
             if ($sMedia === self::PREVIEW_MEDIA_MODE) {
-                echo $sDurationTag, '<a href="#watch', $oData->videoId, '" title="', $oData->title, '" data-popup="video"><img src="', $sThumbUrl, '" alt="', $oData->title, '" title="', $oData->title, '" /></a>
+                echo $sDurationTag, '<a href="#watch', $oData->videoId, '" title="', $sEscapedTitle, '" data-popup="video"><img src="', $sThumbUrl, '" alt="', $sEscapedTitle, '" title="', $sEscapedTitle, '" /></a>
                 <div class="hidden"><div id="watch', $oData->videoId, '">', $sVideoTag, '</div></div>';
             } else {
                 echo $sVideoTag;

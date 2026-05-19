@@ -17,6 +17,7 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Parse\Emoticon;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Security\CSRF\Token;
+use PH7\Framework\Security\Validate\Filter;
 use PH7\Framework\Url\Url;
 use stdClass;
 
@@ -300,7 +301,7 @@ abstract class ProfileBaseController extends Controller
         $sCity = !empty($oFields->city) ? $this->str->escape($this->str->upperFirst($oFields->city), true) : '';
         $sState = !empty($oFields->state) ? $this->str->escape($this->str->upperFirst($oFields->state), true) : '';
         $sPunchline = !empty($oFields->punchline) ? $this->str->escape(Ban::filterWord($oFields->punchline)) : '';
-        $sDescription = !empty($oFields->description) ? Emoticon::init(Ban::filterWord($oFields->description)) : '';
+        $sDescription = !empty($oFields->description) ? $this->sanitizeDescription($oFields->description) : '';
 
         return [
             'first_name' => $sFirstName,
@@ -313,6 +314,11 @@ abstract class ProfileBaseController extends Controller
             'description' => $sDescription,
             'age' => UserBirthDateCore::getAgeFromBirthDate($oUser->birthDate)
         ];
+    }
+
+    private function sanitizeDescription(string $sDescription): string
+    {
+        return Emoticon::init((new Filter)->xssClean(Ban::filterWord($sDescription)));
     }
 
     /**
