@@ -117,7 +117,7 @@ class ProtectedFileForm
         $sFullPath = PH7_PATH_PROTECTED . $sRequestedFile;
         $mRealFullPath = realpath($sFullPath);
 
-        if ($mRealFullPath === false || !is_file($mRealFullPath)) {
+        if (self::doesNotResolveToExistingProtectedFile($mRealFullPath)) {
             throw new RuntimeException(
                 t('Invalid specified path, not authorized by the system!')
             );
@@ -126,11 +126,7 @@ class ProtectedFileForm
         foreach (self::ALLOWED_PATHS as $aAllowedPath) {
             $mRealProtectedPath = realpath($aAllowedPath['root']);
 
-            if (
-                $mRealProtectedPath !== false &&
-                strpos($mRealFullPath, $mRealProtectedPath) === 0 &&
-                in_array(strtolower(strrchr($mRealFullPath, '.')), $aAllowedPath['extensions'], true)
-            ) {
+            if (self::isAllowedEditableProtectedFilePath($mRealProtectedPath, $mRealFullPath, $aAllowedPath['extensions'])) {
                 return $mRealFullPath;
             }
         }
@@ -138,6 +134,23 @@ class ProtectedFileForm
         throw new RuntimeException(
             t('Invalid specified path, not authorized by the system!')
         );
+    }
+
+    private static function doesNotResolveToExistingProtectedFile(string|bool $mRealFullPath): bool
+    {
+        return $mRealFullPath === false || !is_file($mRealFullPath);
+    }
+
+    private static function isAllowedEditableProtectedFilePath(
+        string|bool $mRealProtectedPath,
+        string|bool $mRealFullPath,
+        array $aAllowedExtensions
+    ): bool {
+        return $mRealProtectedPath !== false &&
+            $mRealFullPath !== false &&
+            strpos($mRealFullPath, $mRealProtectedPath) === 0 &&
+            is_file($mRealFullPath) &&
+            in_array(strtolower(strrchr($mRealFullPath, '.')), $aAllowedExtensions, true);
     }
 
     private static function showErrorMessage(RuntimeException $oExcept): void
