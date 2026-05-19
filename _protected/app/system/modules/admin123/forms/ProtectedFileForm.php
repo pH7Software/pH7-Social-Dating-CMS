@@ -114,17 +114,21 @@ class ProtectedFileForm
     public static function getRealPath(?string $sFile = null): string
     {
         $sRequestedFile = (string)($sFile ?? ($_GET['file'] ?? ''));
+        $sFullPath = PH7_PATH_PROTECTED . $sRequestedFile;
+        $mRealFullPath = realpath($sFullPath);
+
+        if ($mRealFullPath === false || !is_file($mRealFullPath)) {
+            throw new RuntimeException(
+                t('Invalid specified path, not authorized by the system!')
+            );
+        }
 
         foreach (self::ALLOWED_PATHS as $aAllowedPath) {
-            $sFullPath = $aAllowedPath['root'] . $sRequestedFile;
             $mRealProtectedPath = realpath($aAllowedPath['root']);
-            $mRealFullPath = realpath($sFullPath);
 
             if (
                 $mRealProtectedPath !== false &&
-                $mRealFullPath !== false &&
                 strpos($mRealFullPath, $mRealProtectedPath) === 0 &&
-                is_file($mRealFullPath) &&
                 in_array(strtolower(strrchr($mRealFullPath, '.')), $aAllowedPath['extensions'], true)
             ) {
                 return $mRealFullPath;
