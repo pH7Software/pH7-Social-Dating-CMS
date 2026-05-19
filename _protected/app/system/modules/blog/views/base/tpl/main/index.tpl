@@ -20,7 +20,7 @@
         <ul>
             {each $views in $top_rating}
                 <li>
-                    <a href="{{ $design->url('blog','main','read',$views->postId) }}" title="{% $views->pageTitle %}" data-load="ajax">{% $views->title %}</a>
+                    <a href="{{ $design->url('blog','main','read',$views->postId) }}" title="{% escape($views->pageTitle) %}" data-load="ajax">{% escape($views->title) %}</a>
                 </li>
             {/each}
         </ul>
@@ -31,7 +31,7 @@
         <ul>
             {each $rating in $top_rating}
                 <li>
-                    <a href="{{ $design->url('blog','main','read',$rating->postId) }}" title="{% $rating->pageTitle %}" data-load="ajax">{% $rating->title %}</a>
+                    <a href="{{ $design->url('blog','main','read',$rating->postId) }}" title="{% escape($rating->pageTitle) %}" data-load="ajax">{% escape($rating->title) %}</a>
                 </li>
             {/each}
         </ul>
@@ -46,15 +46,15 @@
             {each $post in $posts}
                 <div class="vs_tbMarg">
                     <h1>
-                        <a href="{{ $design->url('blog','main','read',$post->postId) }}" title="{% $post->title %}" data-load="ajax">{% escape($post->title) %}</a>
+                        <a href="{{ $design->url('blog','main','read',$post->postId) }}" title="{% escape($post->title) %}" data-load="ajax">{% escape($post->title) %}</a>
                     </h1>
 
                     <div class="left">
                         <a href="{{ $design->url('blog','main','read',$post->postId) }}" class="pic" data-load="ajax">
                             <img
                                 src="{% Blog::getThumb($post->blogId) %}"
-                                alt="{% $post->pageTitle %}"
-                                title="{% $post->pageTitle %}"
+                                alt="{% escape($post->pageTitle) %}"
+                                title="{% escape($post->pageTitle) %}"
                                 loading="lazy"
                                 class="thumb"
                             />
