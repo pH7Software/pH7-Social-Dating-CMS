@@ -17,6 +17,19 @@ Inside this folder (`_tools/cli`), run `php ph7cms setup:install`
 
 Then, follow the instructions.
 
+For GitHub issue maintenance, you can also run:
+
+`php ph7cms github:issues:resolve 1202 1201 --dry-run`
+
+Useful options:
+
+- `--comment-file=/path/to/comment.md` to post the same comment on every issue
+- `--comment-dir=/path/to/comments` to load one Markdown file per issue number, such as `1202.md`
+- `--close` to close the issues after commenting
+- `--dry-run` to inspect the planned actions without modifying GitHub
+
+The command uses `GITHUB_TOKEN` or `GH_TOKEN` from the environment for authenticated comment and close operations.
+
 
 ## 💡 Good to Know
 

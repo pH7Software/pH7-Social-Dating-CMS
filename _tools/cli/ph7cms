@@ -13,10 +13,12 @@ define('PH7_PROTECTED_DIR_NAME', '_protected/');
 require PH7_ROOT_PROJECT . PH7_PROTECTED_DIR_NAME . 'vendor/autoload.php';
 
 use PH7\Cli\Command\InstallerCommand;
+use PH7\Cli\Command\GitHubIssuesResolveCommand;
 use Symfony\Component\Console\Application;
 
 $application = new Application();
 
 $application->add(new InstallerCommand());
+$application->add(new GitHubIssuesResolveCommand());
 
 $application->run();
