@@ -25,6 +25,9 @@ class GitHubIssuesResolveCommand extends Command
 {
     private const API_BASE_URI = 'https://api.github.com';
     private const DEFAULT_REPOSITORY = 'pH7Software/pH7-Social-Dating-CMS';
+    private const TOKEN_ENV_NAMES = ['GITHUB_TOKEN', 'GH_TOKEN'];
+    private const USER_AGENT = 'pH7CMS-Issue-Resolver';
+    private const HTTP_TIMEOUT = 30;
 
     protected function configure(): void
     {
@@ -103,49 +106,16 @@ class GitHubIssuesResolveCommand extends Command
 
             foreach ($issues as $issueNumber) {
                 try {
-                    $issue = $this->requestJson($client, 'GET', sprintf('/repos/%s/issues/%d', $repository, $issueNumber));
-                    $title = (string)($issue['title'] ?? '');
-                    $state = (string)($issue['state'] ?? 'unknown');
-                    $htmlUrl = (string)($issue['html_url'] ?? '');
-
-                    $io->section(sprintf('#%d [%s] %s', $issueNumber, strtoupper($state), $title));
-                    if ($htmlUrl !== '') {
-                        $io->text($htmlUrl);
-                    }
-
-                    $commentBody = $this->loadCommentBody($issueNumber, $commentFile, $commentDir);
-
-                    if ($commentBody !== null) {
-                        if ($isDryRun) {
-                            $io->text(sprintf('Dry run: would post %d characters of comment text.', mb_strlen($commentBody)));
-                        } else {
-                            $this->requestJson(
-                                $client,
-                                'POST',
-                                sprintf('/repos/%s/issues/%d/comments', $repository, $issueNumber),
-                                ['body' => $commentBody]
-                            );
-                            $io->success(sprintf('Posted comment to issue #%d.', $issueNumber));
-                        }
-                    } else {
-                        $io->text('No comment file supplied for this issue.');
-                    }
-
-                    if ($shouldClose) {
-                        if ($state === 'closed') {
-                            $io->text(sprintf('Issue #%d is already closed.', $issueNumber));
-                        } elseif ($isDryRun) {
-                            $io->text(sprintf('Dry run: would close issue #%d.', $issueNumber));
-                        } else {
-                            $this->requestJson(
-                                $client,
-                                'PATCH',
-                                sprintf('/repos/%s/issues/%d', $repository, $issueNumber),
-                                ['state' => 'closed']
-                            );
-                            $io->success(sprintf('Closed issue #%d.', $issueNumber));
-                        }
-                    }
+                    $this->processIssue(
+                        $client,
+                        $io,
+                        $repository,
+                        $issueNumber,
+                        $commentFile,
+                        $commentDir,
+                        $shouldClose,
+                        $isDryRun
+                    );
                 } catch (Throwable $exception) {
                     $failures[] = sprintf('#%d: %s', $issueNumber, $exception->getMessage());
                     $io->error(sprintf('Issue #%d failed: %s', $issueNumber, $exception->getMessage()));
@@ -174,7 +144,7 @@ class GitHubIssuesResolveCommand extends Command
     {
         $headers = [
             'Accept' => 'application/vnd.github+json',
-            'User-Agent' => 'pH7CMS-Issue-Resolver'
+            'User-Agent' => self::USER_AGENT
         ];
 
         if ($token !== null) {
@@ -185,8 +155,106 @@ class GitHubIssuesResolveCommand extends Command
             'base_uri' => self::API_BASE_URI,
             'headers' => $headers,
             'http_errors' => false,
-            'timeout' => 30,
+            'timeout' => self::HTTP_TIMEOUT,
         ]);
+    }
+
+    private function processIssue(
+        Client $client,
+        SymfonyStyle $io,
+        string $repository,
+        int $issueNumber,
+        ?string $commentFile,
+        ?string $commentDir,
+        bool $shouldClose,
+        bool $isDryRun
+    ): void {
+        $issue = $this->requestJson($client, 'GET', $this->buildIssueUri($repository, $issueNumber));
+        $title = (string)($issue['title'] ?? '');
+        $state = (string)($issue['state'] ?? 'unknown');
+        $htmlUrl = (string)($issue['html_url'] ?? '');
+
+        $this->displayIssueHeader($io, $issueNumber, $title, $state, $htmlUrl);
+
+        $commentBody = $this->loadCommentBody($issueNumber, $commentFile, $commentDir);
+        $this->postCommentIfRequested($client, $io, $repository, $issueNumber, $commentBody, $isDryRun);
+        $this->closeIssueIfRequested($client, $io, $repository, $issueNumber, $state, $shouldClose, $isDryRun);
+    }
+
+    private function displayIssueHeader(
+        SymfonyStyle $io,
+        int $issueNumber,
+        string $title,
+        string $state,
+        string $htmlUrl
+    ): void {
+        $io->section(sprintf('#%d [%s] %s', $issueNumber, strtoupper($state), $title));
+        if ($htmlUrl !== '') {
+            $io->text($htmlUrl);
+        }
+    }
+
+    private function postCommentIfRequested(
+        Client $client,
+        SymfonyStyle $io,
+        string $repository,
+        int $issueNumber,
+        ?string $commentBody,
+        bool $isDryRun
+    ): void {
+        if ($commentBody === null) {
+            $io->text('No comment file supplied for this issue.');
+
+            return;
+        }
+
+        if ($isDryRun) {
+            $io->text(sprintf('Dry run: would post %d characters of comment text.', mb_strlen($commentBody)));
+
+            return;
+        }
+
+        $this->requestJson(
+            $client,
+            'POST',
+            $this->buildIssueUri($repository, $issueNumber) . '/comments',
+            ['body' => $commentBody]
+        );
+        $io->success(sprintf('Posted comment to issue #%d.', $issueNumber));
+    }
+
+    private function closeIssueIfRequested(
+        Client $client,
+        SymfonyStyle $io,
+        string $repository,
+        int $issueNumber,
+        string $state,
+        bool $shouldClose,
+        bool $isDryRun
+    ): void {
+        if (!$shouldClose) {
+            return;
+        }
+
+        if ($state === 'closed') {
+            $io->text(sprintf('Issue #%d is already closed.', $issueNumber));
+
+            return;
+        }
+
+        if ($isDryRun) {
+            $io->text(sprintf('Dry run: would close issue #%d.', $issueNumber));
+
+            return;
+        }
+
+        $this->requestJson(
+            $client,
+            'PATCH',
+            $this->buildIssueUri($repository, $issueNumber),
+            ['state' => 'closed']
+        );
+        $io->success(sprintf('Closed issue #%d.', $issueNumber));
     }
 
     /**
@@ -258,7 +326,7 @@ class GitHubIssuesResolveCommand extends Command
             return trim($token);
         }
 
-        foreach (['GITHUB_TOKEN', 'GH_TOKEN'] as $envName) {
+        foreach (self::TOKEN_ENV_NAMES as $envName) {
             $envValue = getenv($envName);
             if (is_string($envValue) && trim($envValue) !== '') {
                 return trim($envValue);
@@ -285,12 +353,9 @@ class GitHubIssuesResolveCommand extends Command
             return null;
         }
 
-        $path = $commentFile;
-        if ($commentDir !== null) {
-            $path = rtrim($commentDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $issueNumber . '.md';
-        }
+        $path = $this->resolveCommentFilePath($issueNumber, $commentFile, $commentDir);
 
-        if ($path === null || !is_file($path) || !is_readable($path)) {
+        if (!is_file($path) || !is_readable($path)) {
             throw new InvalidArgumentException(sprintf('Comment file not found or not readable for issue #%d: %s', $issueNumber, (string)$path));
         }
 
@@ -305,5 +370,19 @@ class GitHubIssuesResolveCommand extends Command
         }
 
         return $contents;
+    }
+
+    private function resolveCommentFilePath(int $issueNumber, ?string $commentFile, ?string $commentDir): string
+    {
+        if ($commentDir !== null) {
+            return rtrim($commentDir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $issueNumber . '.md';
+        }
+
+        return (string)$commentFile;
+    }
+
+    private function buildIssueUri(string $repository, int $issueNumber): string
+    {
+        return sprintf('/repos/%s/issues/%d', $repository, $issueNumber);
     }
 }
