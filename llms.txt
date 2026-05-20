@@ -1,0 +1,12 @@
+# llms.txt — Placeholder for LLM/AI crawler directives
+# ---------------------------------------------------
+# This file is reserved for future standards regarding LLM (Large Language Model) and AI crawlers.
+# As of May 2026, there is no official industry specification for llms.txt.
+# If/when adopted, use this file to control how AI/LLM bots access, index, or use your content.
+#
+# Example (future syntax, not currently recognized):
+# User-Agent: gptbot
+# Disallow: /private/
+# Allow: /
+#
+# For now, see also robots.txt for traditional web crawlers.
