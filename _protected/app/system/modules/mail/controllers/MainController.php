@@ -505,7 +505,7 @@ class MainController extends Controller
 
     private function isSingleActionTokenValid(string $sAction): bool
     {
-        $sActionToken = substr(Uri::get('mail', 'main', $sAction), -14, -6);
+        $sActionToken = Token::getNameFromUrl(Uri::get('mail', 'main', $sAction));
         $oToken = new Token;
 
         return $oToken->check($sActionToken) || $oToken->check('mail_action');

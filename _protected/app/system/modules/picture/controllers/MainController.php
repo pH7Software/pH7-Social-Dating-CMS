@@ -312,7 +312,7 @@ class MainController extends Controller
 
     private function getActionTokenName(string $sAction): string
     {
-        return substr(Uri::get('picture', 'main', $sAction), -14, -6);
+        return Token::getNameFromUrl(Uri::get('picture', 'main', $sAction));
     }
 
     /**

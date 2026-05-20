@@ -15,6 +15,7 @@ use PFBC\Element\Hidden;
 use PFBC\Element\HTMLExternal;
 use PFBC\Element\Token;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\CSRF\Token as SecurityToken;
 
 class ConfirmCoreForm
 {
@@ -30,7 +31,7 @@ class ConfirmCoreForm
         $oForm = new \PFBC\Form('form_confirm');
         $oForm->configure(['action' => $sUrl]);
         $oForm->addElement(new Hidden('submit_confirm', 'form_confirm'));
-        $oForm->addElement(new Token(substr($sUrl, -14, -6))); // Create a name token and generate a random token
+        $oForm->addElement(new Token(SecurityToken::getNameFromUrl($sUrl)));
         $oForm->addElement(new Hidden('id', $aParam['id']));
         $oForm->addElement(new HTMLExternal('<h2>' . t('Are you sure you want to do this?') . '</h2>'));
         $oForm->addElement(new HTMLExternal('<p class="err_msg s_marg">' . t('Warning, this action is irreversible!') . '</p>'));

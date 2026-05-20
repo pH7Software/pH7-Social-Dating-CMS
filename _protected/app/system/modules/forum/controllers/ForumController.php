@@ -394,7 +394,7 @@ class ForumController extends Controller
 
     private function getActionTokenName(string $sAction): string
     {
-        return substr(Uri::get('forum', 'forum', $sAction), -14, -6);
+        return Token::getNameFromUrl(Uri::get('forum', 'forum', $sAction));
     }
 
     /**

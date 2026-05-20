@@ -15,6 +15,7 @@ use PFBC\Element\Submit;
 use PFBC\Element\Token;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\CSRF\Token as SecurityToken;
 
 class LinkCoreForm
 {
@@ -36,7 +37,7 @@ class LinkCoreForm
         $oForm = new \PFBC\Form('form_link');
         $oForm->configure(['action' => $sUrl, 'class' => 'form_link']);
         $oForm->addElement(new Hidden('submit_link', 'form_link'));
-        $oForm->addElement(new Token(substr($sUrl, -14, -6))); // Create a name token and generate a random token
+        $oForm->addElement(new Token(SecurityToken::getNameFromUrl($sUrl)));
 
         foreach ($aParams as $sKey => $sVal) {
             $oForm->addElement(new Hidden($sKey, $sVal));

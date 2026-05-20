@@ -30,6 +30,9 @@ use PH7\UserCore;
  */
 final class Token
 {
+    private const ACTION_TOKEN_START_OFFSET = -14;
+    private const ACTION_TOKEN_END_TRIM = -6;
+
     /**
      * @internal We have commented on "security_token_http_referer_*" because it causes bugs and it doesn't
      * play a big role for safety because this variable can be changed by users (and the web browser).
@@ -54,6 +57,14 @@ final class Token
         $this->sHttpReferer = $oBrowser->getHttpReferer();
         $this->sUserAgent = $oBrowser->getUserAgent();
         unset($oBrowser);
+    }
+
+    /**
+     * Keep token-name derivation consistent between form generation and controller validation.
+     */
+    public static function getNameFromUrl(string $sUrl): string
+    {
+        return substr($sUrl, self::ACTION_TOKEN_START_OFFSET, self::ACTION_TOKEN_END_TRIM);
     }
 
     /**
