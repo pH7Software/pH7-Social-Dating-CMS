@@ -73,12 +73,7 @@ class AdminController extends Controller
 
     public function deleteCategory()
     {
-        if (!$this->isActionTokenValid('deletecategory')) {
-            Header::redirect(
-                Uri::get('forum', 'forum', 'index'),
-                Form::errorTokenMsg()
-            );
-        }
+        $this->redirectUnlessActionTokenIsValid('deletecategory');
 
         if ($this->oForumModel->deleteCategory($this->httpRequest->post('id'))) {
             $this->sMsg = t('Your Category has been deleted.');
@@ -94,12 +89,7 @@ class AdminController extends Controller
 
     public function deleteForum()
     {
-        if (!$this->isActionTokenValid('deleteforum')) {
-            Header::redirect(
-                Uri::get('forum', 'forum', 'index'),
-                Form::errorTokenMsg()
-            );
-        }
+        $this->redirectUnlessActionTokenIsValid('deleteforum');
 
         if ($this->oForumModel->deleteForum($this->httpRequest->post('id'))) {
             $this->sMsg = t('Your Forum has been deleted.');
@@ -113,8 +103,20 @@ class AdminController extends Controller
         );
     }
 
-    private function isActionTokenValid(string $sAction): bool
+    private function redirectUnlessActionTokenIsValid(string $sAction): void
     {
-        return (new Token)->check(substr(Uri::get('forum', 'admin', $sAction), -14, -6));
+        if ((new Token)->check($this->getActionTokenName($sAction))) {
+            return;
+        }
+
+        Header::redirect(
+            Uri::get('forum', 'forum', 'index'),
+            Form::errorTokenMsg()
+        );
+    }
+
+    private function getActionTokenName(string $sAction): string
+    {
+        return Token::getNameFromUrl(Uri::get('forum', 'admin', $sAction));
     }
 }
