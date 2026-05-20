@@ -1,0 +1,24 @@
+name: Validate Installer
+
+on:
+  push:
+    paths:
+      - '_install/**'
+      - '.github/workflows/validate-installer.yml'
+  pull_request:
+    paths:
+      - '_install/**'
+      - '.github/workflows/validate-installer.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate installer composer.json
+        run: composer validate --strict --working-dir _install
+
+      - name: PHP syntax check for installer
+        run: find _install -type f -name '*.php' -exec php -l {} \; | tee /dev/stderr | (! grep -q "Parse error")
