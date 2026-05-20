@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Url\Header;
 
 class AdminController extends Controller
@@ -72,6 +73,13 @@ class AdminController extends Controller
 
     public function deleteCategory()
     {
+        if (!$this->isActionTokenValid('deletecategory')) {
+            Header::redirect(
+                Uri::get('forum', 'forum', 'index'),
+                Form::errorTokenMsg()
+            );
+        }
+
         if ($this->oForumModel->deleteCategory($this->httpRequest->post('id'))) {
             $this->sMsg = t('Your Category has been deleted.');
         } else {
@@ -86,6 +94,13 @@ class AdminController extends Controller
 
     public function deleteForum()
     {
+        if (!$this->isActionTokenValid('deleteforum')) {
+            Header::redirect(
+                Uri::get('forum', 'forum', 'index'),
+                Form::errorTokenMsg()
+            );
+        }
+
         if ($this->oForumModel->deleteForum($this->httpRequest->post('id'))) {
             $this->sMsg = t('Your Forum has been deleted.');
         } else {
@@ -96,5 +111,10 @@ class AdminController extends Controller
             Uri::get('forum', 'forum', 'index'),
             $this->sMsg
         );
+    }
+
+    private function isActionTokenValid(string $sAction): bool
+    {
+        return (new Token)->check(substr(Uri::get('forum', 'admin', $sAction), -14, -6));
     }
 }
