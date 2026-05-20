@@ -29,6 +29,7 @@ Useful options:
 - `--dry-run` to inspect the planned actions without modifying GitHub
 
 The command uses `GITHUB_TOKEN` or `GH_TOKEN` from the environment for authenticated comment and close operations.
+Prefer environment variables over `--token` so the secret does not end up in shell history.
 
 
 ## 💡 Good to Know
