@@ -1,12 +1,22 @@
-# llms.txt — Placeholder for LLM/AI crawler directives
-# ---------------------------------------------------
-# This file is reserved for future standards regarding LLM (Large Language Model) and AI crawlers.
-# As of May 2026, there is no official industry specification for llms.txt.
-# If/when adopted, use this file to control how AI/LLM bots access, index, or use your content.
+
+# llms.txt — LLM/AI Crawler Directives (Future Standard Placeholder)
+# ---------------------------------------------------------------
+# This file signals LLM/AI bots and search engines that this site is LLM/AI-friendly and ready for future crawling standards.
+#
+# As of May 2026, there is NO official industry specification for llms.txt. This file is provided for future compatibility and transparency.
+#
+# When a standard emerges, use this file to:
+#   - Allow or disallow LLM/AI bots (e.g., GPTBot, Gemini, Claude, Perplexity, etc.)
+#   - Specify allowed/disallowed paths
+#   - Provide contact or policy info for AI/LLM use
 #
 # Example (future syntax, not currently recognized):
 # User-Agent: gptbot
 # Disallow: /private/
 # Allow: /
+# Contact: hello@ph7builder.com
+# Policy: https://ph7builder.com/ai-policy
 #
 # For now, see also robots.txt for traditional web crawlers.
+#
+# Maintainer: Pierre-Henry Soria <hello@ph7builder.com>
