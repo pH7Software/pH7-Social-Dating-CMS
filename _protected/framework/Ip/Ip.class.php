@@ -27,7 +27,7 @@ class Ip
      *
      * @return string IP address. If the IP format is invalid, returns '0.0.0.0'
      */
-    public static function get($sIp = null)
+    public static function get(?string $sIp = null): string
     {
         if ($sIp === null) {
             $sIp = self::getClientIp();
@@ -47,7 +47,7 @@ class Ip
      *
      * @return string API URL with the IP address.
      */
-    public static function api($sIp = null)
+    public static function api(?string $sIp = null): string
     {
         $sIp = $sIp === null ? static::get() : $sIp;
 
@@ -61,7 +61,7 @@ class Ip
      *
      * @return bool Returns TRUE is it's a private IP, FALSE otherwite.
      */
-    public static function isPrivate($sIp)
+    public static function isPrivate(string $sIp): bool
     {
         return filter_var(
             $sIp,
@@ -71,14 +71,6 @@ class Ip
     }
 
     /**
-     * @return string Client IP address.
-     */
-    /**
-     * Returns the client IP address, only trusting proxy headers if the request comes from a trusted proxy.
-     *
-     * @return string
-     */
-    /**
      * Returns the client IP address, only trusting proxy headers if the request comes from a trusted proxy.
      *
      * SECURITY NOTE FOR ADMINS/DEPLOYERS:
@@ -87,9 +79,8 @@ class Ip
      *   - If unsure, leave only localhost entries (default) and do not trust proxy headers.
      *   - See https://cheatsheetseries.owasp.org/cheatsheets/Proxy_Header_Security_Cheat_Sheet.html for best practices.
      */
-    private static function getClientIp()
+    private static function getClientIp(): string
     {
-        // List of trusted proxy IPs (add more as needed)
         $trustedProxies = [
             '127.0.0.1', '::1', // localhost
             '::ffff:127.0.0.1',
@@ -99,33 +90,27 @@ class Ip
         $remoteAddr = (string)Server::getVar(Server::REMOTE_ADDR, '');
         $isTrustedProxy = in_array($remoteAddr, $trustedProxies, true);
 
-        // Only trust proxy headers if coming from a trusted proxy
-        if ($isTrustedProxy) {
-            $aVars = [
+        $ipHeaderVars = $isTrustedProxy
+            ? [
                 'HTTP_CF_CONNECTING_IP',
                 'HTTP_TRUE_CLIENT_IP',
                 'HTTP_X_REAL_IP',
                 Server::HTTP_CLIENT_IP,
                 Server::HTTP_X_FORWARDED_FOR,
                 Server::REMOTE_ADDR
-            ];
-        } else {
-            // Only trust REMOTE_ADDR if not from a trusted proxy
-            $aVars = [Server::REMOTE_ADDR];
-        }
+            ]
+            : [Server::REMOTE_ADDR];
 
-        foreach ($aVars as $sVar) {
-            $sIp = (string)Server::getVar($sVar, '');
-            if ($sIp === '') {
+        foreach ($ipHeaderVars as $header) {
+            $ip = (string)Server::getVar($header, '');
+            if ($ip === '') {
                 continue;
             }
-
-            $sParsedIp = static::extractClientIp($sIp);
-            if ($sParsedIp !== null) {
-                return $sParsedIp;
+            $parsedIp = static::extractClientIp($ip);
+            if ($parsedIp !== null) {
+                return $parsedIp;
             }
         }
-
         return '';
     }
 
