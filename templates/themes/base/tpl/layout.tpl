@@ -16,11 +16,7 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "additionalType": [
-        "https://schema.org/DatingService",
-        "https://schema.org/SocialNetworkingSite"
-      ],
+      "@type": ["SocialNetworkingSite", "DatingService"],
       "name": "{site_name}",
       "url": "{url_root}",
       "logo": "{url_root}favicon.ico",
