@@ -170,4 +170,16 @@ class MainController extends Controller
         $this->view->setCaching(self::HTML_CACHE_ENABLED);
         $this->view->setCacheExpire(self::STATIC_CACHE_LIFETIME);
     }
+
+    public function aiPolicy(): void
+    {
+        // SEO: Noindex, but allow follow for transparency
+        $this->view->header = Meta::NOINDEX;
+        $this->sTitle = t('AI Policy');
+        $this->view->page_title = $this->sTitle;
+        $this->view->meta_description = t('AI Policy - %site_name%');
+        $this->view->h1_title = $this->sTitle;
+        // Optionally add custom meta for LLMs/AI if needed
+        $this->output();
+    }
 }
