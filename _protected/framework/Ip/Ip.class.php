@@ -73,16 +73,46 @@ class Ip
     /**
      * @return string Client IP address.
      */
+    /**
+     * Returns the client IP address, only trusting proxy headers if the request comes from a trusted proxy.
+     *
+     * @return string
+     */
+    /**
+     * Returns the client IP address, only trusting proxy headers if the request comes from a trusted proxy.
+     *
+     * SECURITY NOTE FOR ADMINS/DEPLOYERS:
+     *   - Only add IPs of infrastructure you fully control (e.g., your nginx, HAProxy, or CDN edge nodes) to $trustedProxies.
+     *   - DO NOT add wildcards or public IPs you do not control, or you risk allowing attackers to spoof their IP via headers.
+     *   - If unsure, leave only localhost entries (default) and do not trust proxy headers.
+     *   - See https://cheatsheetseries.owasp.org/cheatsheets/Proxy_Header_Security_Cheat_Sheet.html for best practices.
+     */
     private static function getClientIp()
     {
-        $aVars = [
-            'HTTP_CF_CONNECTING_IP',
-            'HTTP_TRUE_CLIENT_IP',
-            'HTTP_X_REAL_IP',
-            Server::HTTP_CLIENT_IP,
-            Server::HTTP_X_FORWARDED_FOR,
-            Server::REMOTE_ADDR
+        // List of trusted proxy IPs (add more as needed)
+        $trustedProxies = [
+            '127.0.0.1', '::1', // localhost
+            '::ffff:127.0.0.1',
+            // Add your reverse proxy IPs here (e.g., Cloudflare, nginx, etc)
         ];
+
+        $remoteAddr = (string)Server::getVar(Server::REMOTE_ADDR, '');
+        $isTrustedProxy = in_array($remoteAddr, $trustedProxies, true);
+
+        // Only trust proxy headers if coming from a trusted proxy
+        if ($isTrustedProxy) {
+            $aVars = [
+                'HTTP_CF_CONNECTING_IP',
+                'HTTP_TRUE_CLIENT_IP',
+                'HTTP_X_REAL_IP',
+                Server::HTTP_CLIENT_IP,
+                Server::HTTP_X_FORWARDED_FOR,
+                Server::REMOTE_ADDR
+            ];
+        } else {
+            // Only trust REMOTE_ADDR if not from a trusted proxy
+            $aVars = [Server::REMOTE_ADDR];
+        }
 
         foreach ($aVars as $sVar) {
             $sIp = (string)Server::getVar($sVar, '');
