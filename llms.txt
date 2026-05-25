@@ -19,4 +19,8 @@
 #
 # For now, see also robots.txt for traditional web crawlers.
 #
-# Maintainer: Pierre-Henry Soria <hello@ph7builder.com>
+# Site: {site_name}
+# Description: {meta_description}
+# Keywords: {meta_keywords}
+# Maintainer: {$admin_email}
+# Policy: {software_url}ai-policy
