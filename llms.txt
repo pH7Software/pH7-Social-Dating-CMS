@@ -15,12 +15,14 @@
 # Disallow: /private/
 # Allow: /
 # Contact: hello@ph7builder.com
-# Policy: https://ph7builder.com/ai-policy
+# Policy: {software_url}aipolicy
 #
 # For now, see also robots.txt for traditional web crawlers.
 #
 # Site: {site_name}
 # Description: {meta_description}
 # Keywords: {meta_keywords}
-# Maintainer: {$admin_email}
-# Policy: {software_url}ai-policy
+# Software: {software_name} CMS
+# Project Maintainer (CMS): Pierre-Henry Soria <hello@ph7builder.com>
+# Site Maintainer: {$admin_email}
+# Policy: {software_url}aipolicy
