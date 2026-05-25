@@ -41,21 +41,35 @@ class LoginFormProcess extends Form implements LoginableForm
         $sEmail = $this->httpRequest->post('mail');
         $sPassword = $this->httpRequest->post('password', HttpRequest::NO_CLEAN);
 
-        /** Check if the connection is not locked **/
+        /** Check if the connection is not locked (by email or IP, persistent, not session-based) **/
         $bIsLoginAttempt = (bool)DbConfig::getSetting('isUserLoginAttempt');
         $iMaxAttempts = (int)DbConfig::getSetting('maxUserLoginAttempts');
         $iTimeDelay = (int)DbConfig::getSetting('loginUserAttemptTime');
+        $clientIp = \PH7\Framework\Ip\Ip::get();
 
-        if ($bIsLoginAttempt &&
-            !$oSecurityModel->checkLoginAttempt(
+        $isLockedOut = false;
+        if ($bIsLoginAttempt) {
+            // Check lockout by email
+            $lockedByEmail = !$oSecurityModel->checkLoginAttempt(
                 $iMaxAttempts,
                 $iTimeDelay,
                 $sEmail,
                 $this->view,
                 DbTableName::MEMBER_ATTEMPT_LOGIN,
                 DbTableName::MEMBER
-            )
-        ) {
+            );
+            // Check lockout by IP
+            $lockedByIp = !$oSecurityModel->checkLoginAttempt(
+                $iMaxAttempts,
+                $iTimeDelay,
+                $clientIp,
+                $this->view,
+                DbTableName::MEMBER_ATTEMPT_LOGIN,
+                DbTableName::MEMBER
+            );
+            $isLockedOut = $lockedByEmail || $lockedByIp;
+        }
+        if ($isLockedOut) {
             \PFBC\Form::setError('form_login_user', Form::loginAttemptsExceededMsg($iTimeDelay));
             return; // Stop execution of the method.
         }
