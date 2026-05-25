@@ -11,6 +11,31 @@
     <meta name="description" content="{% $str->escape($str->upperFirst($meta_description), true) %}" />
     <meta name="keywords" content="{% $str->escape($meta_keywords, true) %}" />
     {main_include 'social-meta-tags.inc.tpl'}
+
+    <!-- JSON-LD Organization structured data for SEO & LLMs -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "additionalType": [
+        "https://schema.org/DatingService",
+        "https://schema.org/SocialNetworkingSite"
+      ],
+      "name": "{site_name}",
+      "url": "{url_root}",
+      "logo": "{url_root}favicon.ico",
+      "contactPoint": [{
+        "@type": "ContactPoint",
+        "email": "{$admin_email}",
+        "contactType": "customer support",
+        "url": "{software_url}"
+      }],
+      "sameAs": [
+        "{github_url}",
+        "{software_url}"
+      ]
+    }
+    </script>
     <meta name="robots" content="{meta_robots}" />
     <link rel="icon" href="{url_relative}favicon.ico" />
     <link rel="canonical" href="{current_url}" />
