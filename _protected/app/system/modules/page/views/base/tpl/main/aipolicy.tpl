@@ -1,33 +1,22 @@
-{* AI Policy Page Template *}
-{include file="_header.tpl"}
+<div class="center" style="max-width:700px;margin:2em auto;text-align:center;">
+    <h1>{h1_title}</h1>
+    <p>
+        <strong><a href="{software_url}">{software_name}</a></strong> {lang 'is committed to responsible and transparent use of Artificial Intelligence (AI) and Large Language Models (LLMs) on'} <strong>{site_name}</strong>.<br />
+        {lang 'We use AI/LLM technologies to improve user experience, content moderation, and site features. All data processed by AI is handled in accordance with our'} <a href="{privacy_url}">{lang 'Privacy Policy'}</a>.<br />
+        {lang 'If you wish to opt out of AI/LLM data processing, please contact us at'} <a href="mailto:{admin_email}">{admin_email}</a>.<br />
+        <br />
+        {lang 'For more details, see our'} <a href="{terms_url}">{lang 'Terms of Service'}</a> {lang 'and this AI Policy page.'}<br />
+    </p>
 
-{* Robots/meta tags for AI Policy: noindex, follow, and AI/LLM-specific meta if needed *}
-{capture assign=extra_meta}
-    <meta name="robots" content="noindex,follow">
-    <meta name="llm-policy" content="see /ai-policy">
-{/capture}
-{$extra_meta}
+    <p>&nbsp;</p>
 
-<h1>{$h1_title}</h1>
+    <p style="font-style:italic;color:#666;">
+        &laquo;{lang 'We believe in ethical AI and transparency for all our users.'}&raquo;
+    </p>
 
-<p>
-    {t}This page describes our policy regarding the use of Artificial Intelligence (AI) and Large Language Models (LLMs) on {site_name}.{/t}
-</p>
-
-<h2>{t}AI/LLM Data Usage{/t}</h2>
-<p>
-    {t}We may use AI/LLM technologies to improve user experience, content moderation, and site features. Data processed by AI is handled in accordance with our privacy policy.{/t}
-</p>
-
-<h2>{t}Opt-Out{/t}</h2>
-<p>
-    {t}If you wish to opt out of AI/LLM data processing, please contact us at{/t} <a href="mailto:{$admin_email}">{$admin_email}</a>.
-</p>
-
-<h2>{t}More Information{/t}</h2>
-<ul>
-    <li><a href="{$url_root}privacy">{t}Privacy Policy{/t}</a></li>
-    <li><a href="{$url_root}terms">{t}Terms of Service{/t}</a></li>
-</ul>
+    <p style="font-size:smaller;color:#888;">
+        {lang 'Last updated:'} 26 May 2026
+    </p>
+</div>
 
 {include file="_footer.tpl"}
