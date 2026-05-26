@@ -15,7 +15,7 @@
 # Disallow: /private/
 # Allow: /
 # Contact: hello@ph7builder.com
-# Policy: {software_url}aipolicy
+# Policy: {{ $design->url('page','main','aipolicy') }}
 #
 # For now, see also robots.txt for traditional web crawlers.
 #
@@ -25,4 +25,4 @@
 # Software: {software_name} CMS
 # Project Maintainer (CMS): Pierre-Henry Soria <hello@ph7builder.com>
 # Site Maintainer: {$admin_email}
-# Policy: {software_url}aipolicy
+# Policy: {{ $design->url('page','main','aipolicy') }}
