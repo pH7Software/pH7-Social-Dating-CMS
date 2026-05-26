@@ -12,6 +12,7 @@ namespace PH7;
 
 use PH7\Framework\Layout\Html\Meta;
 use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Router\Uri;
 
 class MainController extends Controller
 {
@@ -165,21 +166,25 @@ class MainController extends Controller
         $this->output();
     }
 
-    private function enableStaticTplCache(): void
-    {
-        $this->view->setCaching(self::HTML_CACHE_ENABLED);
-        $this->view->setCacheExpire(self::STATIC_CACHE_LIFETIME);
-    }
-
     public function aiPolicy(): void
     {
-        // SEO: Noindex, but allow follow for transparency
+        // SEO: Set noindex,follow for transparency (page is not indexed but links are followed)
         $this->view->header = Meta::NOINDEX;
+
         $this->sTitle = t('AI Policy');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('AI Policy - %site_name%');
         $this->view->h1_title = $this->sTitle;
-        // Optionally add custom meta for LLMs/AI if needed
+
+        $this->view->terms_url = Uri::get('page', 'main', 'terms');
+        $this->view->privacy_url = Uri::get('page', 'main', 'privacy');
+
         $this->output();
+    }
+
+    private function enableStaticTplCache(): void
+    {
+        $this->view->setCaching(self::HTML_CACHE_ENABLED);
+        $this->view->setCacheExpire(self::STATIC_CACHE_LIFETIME);
     }
 }
