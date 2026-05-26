@@ -24,11 +24,11 @@
         "@type": "ContactPoint",
         "email": "{$admin_email}",
         "contactType": "customer support",
-        "url": "{software_url}"
+        "url": "{{ $design->url('page','main','aipolicy') }}"
       }],
       "sameAs": [
         "{github_url}",
-        "{software_url}"
+        "{{ $design->url('page','main','aipolicy') }}"
       ]
     }
     </script>
