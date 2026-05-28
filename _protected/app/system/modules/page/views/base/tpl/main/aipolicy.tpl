@@ -18,5 +18,3 @@
         {lang 'Last updated:'} 26 May 2026
     </p>
 </div>
-
-{include file="_footer.tpl"}
