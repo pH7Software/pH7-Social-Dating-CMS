@@ -37,10 +37,9 @@ class LoginFormProcess extends Form implements LoginableForm
         $oSecurityModel = new SecurityModel;
         $sEmail = $this->httpRequest->post('mail');
         $sPassword = $this->httpRequest->post('password', HttpRequest::NO_CLEAN);
-        $clientIp = \PH7\Framework\Ip\Ip::get();
         $iTimeDelay = (int)DbConfig::getSetting('loginUserAttemptTime');
 
-        if ($this->isLockedOut($sEmail, $clientIp, $oSecurityModel)) {
+        if ($this->isLockedOut($sEmail, $oSecurityModel)) {
             \PFBC\Form::setError('form_login_user', Form::loginAttemptsExceededMsg($iTimeDelay));
             return;
         }
@@ -110,62 +109,55 @@ class LoginFormProcess extends Form implements LoginableForm
     }
 
     /**
-     * Checks if the login is locked out by email or IP.
+     * Checks if the current IP is locked out.
      */
-    private function isLockedOut(string $email, string $ip, SecurityModel $securityModel): bool
+    private function isLockedOut(string $sEmail, SecurityModel $oSecurityModel): bool
     {
         $bIsLoginAttempt = (bool)DbConfig::getSetting('isUserLoginAttempt');
         $iMaxAttempts = (int)DbConfig::getSetting('maxUserLoginAttempts');
         $iTimeDelay = (int)DbConfig::getSetting('loginUserAttemptTime');
+
         if (!$bIsLoginAttempt) {
             return false;
         }
-        $lockedByEmail = !$securityModel->checkLoginAttempt(
+
+        return !$oSecurityModel->checkLoginAttempt(
             $iMaxAttempts,
             $iTimeDelay,
-            $email,
+            $sEmail,
             $this->view,
             DbTableName::MEMBER_ATTEMPT_LOGIN,
             DbTableName::MEMBER
         );
-        $lockedByIp = !$securityModel->checkLoginAttempt(
-            $iMaxAttempts,
-            $iTimeDelay,
-            $ip,
-            $this->view,
-            DbTableName::MEMBER_ATTEMPT_LOGIN,
-            DbTableName::MEMBER
-        );
-        return $lockedByEmail || $lockedByIp;
     }
 
     /**
      * Handles login failure logic for incorrect email or password.
      */
-    private function handleLoginFailure(string $loginStatus, string $email, SecurityModel $securityModel): void
+    private function handleLoginFailure(string $sLoginStatus, string $sEmail, SecurityModel $oSecurityModel): void
     {
         $this->preventBruteForce(self::BRUTE_FORCE_SLEEP_DELAY);
-        if ($loginStatus === CredentialStatusCore::INCORRECT_EMAIL_IN_DB) {
+        if ($sLoginStatus === CredentialStatusCore::INCORRECT_EMAIL_IN_DB) {
             $this->enableCaptcha();
             \PFBC\Form::setError(
                 'form_login_user',
-                t('Oops! "%0%" is not associated with any %site_name% accounts.', escape(substr($email, 0, PH7_MAX_EMAIL_LENGTH)))
+                t('Oops! "%0%" is not associated with any %site_name% accounts.', escape(substr($sEmail, 0, PH7_MAX_EMAIL_LENGTH)))
             );
-            $securityModel->addLoginLog(
-                $email,
+            $oSecurityModel->addLoginLog(
+                $sEmail,
                 'Guest',
                 'No Password',
                 'Failed! Incorrect Username'
             );
-        } elseif ($loginStatus === CredentialStatusCore::INCORRECT_PASSWORD_IN_DB) {
-            $securityModel->addLoginLog(
-                $email,
+        } elseif ($sLoginStatus === CredentialStatusCore::INCORRECT_PASSWORD_IN_DB) {
+            $oSecurityModel->addLoginLog(
+                $sEmail,
                 'Guest',
                 '*****',
                 'Failed! Incorrect Password'
             );
             if ((bool)DbConfig::getSetting('isUserLoginAttempt')) {
-                $securityModel->addLoginAttempt();
+                $oSecurityModel->addLoginAttempt();
             }
             $this->enableCaptcha();
             $sWrongPwdTxt = t('Oops! This password you entered is incorrect.') . '<br />';
