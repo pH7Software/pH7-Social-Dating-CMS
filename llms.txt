@@ -1,5 +1,5 @@
 
-# llms.txt — LLM/AI Crawler Directives (Future Standard Placeholder)
+# llms.txt - LLM/AI Crawler Directives (Future Standard Placeholder)
 # ---------------------------------------------------------------
 # This file signals LLM/AI bots and search engines that this site is LLM/AI-friendly and ready for future crawling standards.
 #
@@ -15,14 +15,10 @@
 # Disallow: /private/
 # Allow: /
 # Contact: hello@ph7builder.com
-# Policy: {{ $design->url('page','main','aipolicy') }}
+# Policy: /page/main/aipolicy
 #
 # For now, see also robots.txt for traditional web crawlers.
 #
-# Site: {site_name}
-# Description: {meta_description}
-# Keywords: {meta_keywords}
-# Software: {software_name} CMS
+# Software: pH7Builder CMS
 # Project Maintainer (CMS): Pierre-Henry Soria <hello@ph7builder.com>
-# Site Maintainer: {$admin_email}
-# Policy: {{ $design->url('page','main','aipolicy') }}
+# Policy: /page/main/aipolicy
