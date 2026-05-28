@@ -12,26 +12,17 @@
     <meta name="keywords" content="{% $str->escape($meta_keywords, true) %}" />
     {main_include 'social-meta-tags.inc.tpl'}
 
-    <!-- JSON-LD Organization structured data for SEO & LLMs -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": ["SocialNetworkingSite", "DatingService"],
-      "name": "{site_name}",
-      "url": "{url_root}",
-      "logo": "{url_root}favicon.ico",
-      "contactPoint": [{
-        "@type": "ContactPoint",
-        "email": "{$admin_email}",
-        "contactType": "customer support",
-        "url": "{{ $design->url('page','main','aipolicy') }}"
-      }],
-      "sameAs": [
-        "{github_url}",
-        "{{ $design->url('page','main','aipolicy') }}"
+    {{
+      $aJsonLdWebsite = [
+        '@context' => 'https://schema.org',
+        '@type' => ['WebSite', 'SocialNetworkingSite', 'DatingService'],
+        'name' => $site_name,
+        'url' => PH7_URL_ROOT,
+        'logo' => PH7_URL_ROOT . 'favicon.ico',
+        'publishingPrinciples' => \PH7\Framework\Mvc\Router\Uri::get('page', 'main', 'aipolicy')
       ]
-    }
-    </script>
+    }}
+    <script type="application/ld+json">{% json_encode($aJsonLdWebsite, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) %}</script>
     <meta name="robots" content="{meta_robots}" />
     <link rel="icon" href="{url_relative}favicon.ico" />
     <link rel="canonical" href="{current_url}" />
