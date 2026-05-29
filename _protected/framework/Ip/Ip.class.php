@@ -25,7 +25,7 @@ class Ip
      *
      * @param string|null $sIp Allows to specify another IP address than the client one.
      *
-     * @return string IP address. If the IP format is invalid, returns '0.0.0.0'
+     * @return string IP address. If the IP format is invalid, returns the default local IP.
      */
     public static function get(?string $sIp = null): string
     {
@@ -59,7 +59,7 @@ class Ip
      *
      * @param string $sIp The IP address.
      *
-     * @return bool Returns TRUE is it's a private IP, FALSE otherwite.
+     * @return bool Returns TRUE if it is a private or invalid IP, FALSE otherwise.
      */
     public static function isPrivate(string $sIp): bool
     {
