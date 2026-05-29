@@ -97,6 +97,18 @@ class File
         return strtolower(pathinfo($sFile, PATHINFO_EXTENSION));
     }
 
+    public static function getFileExtWithDot(string $sFile): string
+    {
+        $sExtension = pathinfo($sFile, PATHINFO_EXTENSION);
+
+        return $sExtension !== '' ? '.' . strtolower($sExtension) : '';
+    }
+
+    public static function isPathInsideDirectory(string $sFilePath, string $sDirectoryPath): bool
+    {
+        return strpos($sFilePath . PH7_DS, rtrim($sDirectoryPath, PH7_DS) . PH7_DS) === 0;
+    }
+
     /**
      * Give the filename without the dot and the extension (or the last one, if they are more).
      *
