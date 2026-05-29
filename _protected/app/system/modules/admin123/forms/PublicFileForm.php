@@ -14,6 +14,7 @@ use PFBC\Element\Button;
 use PFBC\Element\Hidden;
 use PFBC\Element\Textarea;
 use PFBC\Element\Token;
+use PH7\Framework\File\File;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Url\Header;
 use RuntimeException;
@@ -66,11 +67,6 @@ class PublicFileForm
         }
     }
 
-    /**
-     * Get the full file path and prevent path traversal and null byte attacks.
-     *
-     * @return string The canonicalized absolute path.
-     */
     public static function getRealPath(?string $sFile = null): string
     {
         $sFullPath = PH7_PATH_ROOT . ($sFile ?? ($_GET['file'] ?? ''));
@@ -86,12 +82,13 @@ class PublicFileForm
         return $mRealFullPath;
     }
 
-    private static function isInvalidEditablePublicFilePath(string|bool $mRealFullPath, string $sPublicRootPath): bool
+    private static function isInvalidEditablePublicFilePath(string|bool $mRealFullPath, string|bool $mRealPublicPath): bool
     {
         return $mRealFullPath === false ||
-            strpos($mRealFullPath, $sPublicRootPath) !== 0 ||
+            $mRealPublicPath === false ||
+            !File::isPathInsideDirectory($mRealFullPath, $mRealPublicPath) ||
             !is_file($mRealFullPath) ||
-            !in_array(strtolower(strrchr($mRealFullPath, '.')), self::ALLOWED_EXTENSIONS, true);
+            !in_array(File::getFileExtWithDot($mRealFullPath), self::ALLOWED_EXTENSIONS, true);
     }
 
     private static function showErrorMessage(RuntimeException $oExcept): void
