@@ -15,6 +15,7 @@ use PFBC\Element\Hidden;
 use PFBC\Element\HTMLExternal;
 use PFBC\Element\Textarea;
 use PFBC\Element\Token;
+use PH7\Framework\File\File;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Security\Ban\Ban;
@@ -106,11 +107,6 @@ class ProtectedFileForm
         return $cIsFound(self::TERMS_FILENAME) || $cIsFound(self::PRIVACY_FILENAME);
     }
 
-    /**
-     * Get the full file path and prevent path traversal and null byte attacks.
-     *
-     * @return string The canonicalized absolute path.
-     */
     public static function getRealPath(?string $sFile = null): string
     {
         $sRequestedFile = (string)($sFile ?? ($_GET['file'] ?? ''));
@@ -148,9 +144,9 @@ class ProtectedFileForm
     ): bool {
         return $mRealProtectedPath !== false &&
             $mRealFullPath !== false &&
-            strpos($mRealFullPath, $mRealProtectedPath) === 0 &&
+            File::isPathInsideDirectory($mRealFullPath, $mRealProtectedPath) &&
             is_file($mRealFullPath) &&
-            in_array(strtolower(strrchr($mRealFullPath, '.')), $aAllowedExtensions, true);
+            in_array(File::getFileExtWithDot($mRealFullPath), $aAllowedExtensions, true);
     }
 
     private static function showErrorMessage(RuntimeException $oExcept): void
