@@ -31,7 +31,7 @@ use PH7\UserCore;
 final class Token
 {
     private const ACTION_TOKEN_START_OFFSET = -14;
-    private const ACTION_TOKEN_END_TRIM = -6;
+    private const ACTION_TOKEN_END_OFFSET = -6;
 
     /**
      * @internal We have commented on "security_token_http_referer_*" because it causes bugs and it doesn't
@@ -40,14 +40,11 @@ final class Token
 
     const VAR_NAME = 'pHST';
 
-    /** @var Session */
-    private $oSession;
+    private Session $oSession;
 
-    /** @var null|string */
-    private $sHttpReferer;
+    private ?string $sHttpReferer;
 
-    /** @var null|string */
-    private $sUserAgent;
+    private ?string $sUserAgent;
 
     public function __construct()
     {
@@ -64,7 +61,7 @@ final class Token
      */
     public static function getNameFromUrl(string $sUrl): string
     {
-        return substr($sUrl, self::ACTION_TOKEN_START_OFFSET, self::ACTION_TOKEN_END_TRIM);
+        return substr($sUrl, self::ACTION_TOKEN_START_OFFSET, self::ACTION_TOKEN_END_OFFSET);
     }
 
     /**
