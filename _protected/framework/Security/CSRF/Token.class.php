@@ -4,7 +4,7 @@
  * @desc           Protects against Cross-site request forgery attack.
  *
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2026, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  * @package        PH7 / Framework / Security / CSRF
  * @version        1.2
@@ -71,11 +71,11 @@ final class Token
      *
      * @return string The Token generated random.
      */
-    public function generate($sName)
+    public function generate(string $sName): string
     {
         // If the token is still valid, it returns the correct token
         if ($this->oSession->exists('security_token_' . $sName)) {
-            return $this->oSession->get('security_token_' . $sName);
+            return (string) $this->oSession->get('security_token_' . $sName);
         }
 
         $sToken = Various::genRnd($sName);
@@ -103,7 +103,7 @@ final class Token
      *
      * @return bool Returns TRUE if the token is validated, FALSE otherwise.
      */
-    public function check($sName, $sInputToken = null, $iTime = null)
+    public function check(string $sName, ?string $sInputToken = null, ?int $iTime = null): bool
     {
         $iTime = $iTime === null ? DbConfig::getSetting('securityTokenLifetime') : $iTime;
 
@@ -140,7 +140,7 @@ final class Token
      *
      * @return string
      */
-    public function url()
+    public function url(): string
     {
         return $this->currentSess() !== true ? '?' . static::VAR_NAME . '=' . $this->currentSess() : '';
     }
@@ -150,7 +150,7 @@ final class Token
      *
      * @return bool
      */
-    public function checkUrl()
+    public function checkUrl(): bool
     {
         $oHttpRequest = new HttpRequest;
         $bRet = (($this->currentSess() === true) || $oHttpRequest->currentUrl() === PH7_URL_ROOT ||
@@ -165,7 +165,7 @@ final class Token
      *
      * @return string|bool The "token" if a user is logged or "true" if no user is logged.
      */
-    private function currentSess()
+    private function currentSess(): string|bool
     {
         if (UserCore::auth()) {
             return $this->oSession->get('member_token');
