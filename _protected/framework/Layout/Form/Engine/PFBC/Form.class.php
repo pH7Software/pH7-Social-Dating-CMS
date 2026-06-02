@@ -140,7 +140,7 @@ class Form extends Base
     private static function recover($id)
     {
         if (!empty($_SESSION['pfbc'][$id]['form'])) {
-            return unserialize($_SESSION['pfbc'][$id]['form']);
+            return unserialize($_SESSION['pfbc'][$id]['form'], ['allowed_classes' => true]);
         }
 
         return '';
