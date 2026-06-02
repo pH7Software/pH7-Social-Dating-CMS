@@ -1,57 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<phpunit
-    bootstrap="_tests/Unit/bootstrap.php"
-    processIsolation="true"
-    verbose="true"
-    colors="true">
-    <testsuites>
-        <testsuite name="pH7Builder Protected">
-            <directory>_tests/Unit</directory>
-        </testsuite>
-
-        <testsuite name="pH7Builder Protected CI">
-            <directory>_tests/Unit</directory>
-            <!--
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="_tests/Unit/bootstrap.php" processIsolation="true" verbose="true" colors="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+  <coverage>
+    <include>
+      <directory suffix=".php">_protected</directory>
+    </include>
+    <exclude>
+      <directory>_protected/library</directory>
+      <directory>_protected/vendor</directory>
+    </exclude>
+    <report>
+      <html outputDirectory="coverage"/>
+      <text outputFile="php://stdout" showUncoveredFiles="true" showOnlySummary="true"/>
+    </report>
+  </coverage>
+  <testsuites>
+    <testsuite name="pH7Builder Protected">
+      <directory>_tests/Unit</directory>
+    </testsuite>
+    <testsuite name="pH7Builder Protected CI">
+      <directory>_tests/Unit</directory>
+      <!--
               Keep this suite deterministic for CI:
               exclude tests that require external services (HTTP server, DB, API keys) or special runtime setup.
             -->
-            <exclude>_tests/Unit/App/System/Module/Api/Controller/MainControllerTest.php</exclude>
-            <exclude>_tests/Unit/App/System/Module/Api/Controller/UserControllerTest.php</exclude>
-            <exclude>_tests/Unit/App/System/Core/Classes/ValidateSiteCoreTest.php</exclude>
-            <exclude>_tests/Unit/App/System/Module/Error/Controller/HttpControllerTest.php</exclude>
-            <exclude>_tests/Unit/App/System/Module/Field/Inc/Classes/FieldTest.php</exclude>
-            <exclude>_tests/Unit/Framework/Api/AllowCorsTest.php</exclude>
-            <exclude>_tests/Unit/Framework/Geo/Map/ApiTest.php</exclude>
-            <exclude>_tests/Unit/Framework/Video/Api/YoutubeTest.php</exclude>
-            <exclude>_tests/Unit/Framework/Video/ProviderFactoryTest.php</exclude>
-        </testsuite>
-
-        <testsuite name="pH7Builder Integration">
-            <file>_tests/Unit/App/System/Module/Api/Controller/MainControllerTest.php</file>
-            <file>_tests/Unit/App/System/Module/Api/Controller/UserControllerTest.php</file>
-            <file>_tests/Unit/App/System/Core/Classes/ValidateSiteCoreTest.php</file>
-            <file>_tests/Unit/App/System/Module/Error/Controller/HttpControllerTest.php</file>
-            <file>_tests/Unit/App/System/Module/Field/Inc/Classes/FieldTest.php</file>
-            <file>_tests/Unit/Framework/Api/AllowCorsTest.php</file>
-            <file>_tests/Unit/Framework/Geo/Map/ApiTest.php</file>
-            <file>_tests/Unit/Framework/Video/Api/YoutubeTest.php</file>
-            <file>_tests/Unit/Framework/Video/ProviderFactoryTest.php</file>
-        </testsuite>
-    </testsuites>
-
-    <filter>
-        <whitelist>
-            <directory suffix=".php">_protected</directory>
-            <exclude>
-                <directory>_protected/library</directory>
-                <directory>_protected/vendor</directory>
-            </exclude>
-        </whitelist>
-    </filter>
-
-    <logging>
-        <log type="coverage-text" target="php://stdout" showUncoveredFiles="true" showOnlySummary="true" />
-        <log type="coverage-html" target="coverage" />
-    </logging>
+      <exclude>_tests/Unit/App/System/Module/Api/Controller/MainControllerTest.php</exclude>
+      <exclude>_tests/Unit/App/System/Module/Api/Controller/UserControllerTest.php</exclude>
+      <exclude>_tests/Unit/App/System/Core/Classes/ValidateSiteCoreTest.php</exclude>
+      <exclude>_tests/Unit/App/System/Module/Error/Controller/HttpControllerTest.php</exclude>
+      <exclude>_tests/Unit/App/System/Module/Field/Inc/Classes/FieldTest.php</exclude>
+      <exclude>_tests/Unit/Framework/Api/AllowCorsTest.php</exclude>
+      <exclude>_tests/Unit/Framework/Geo/Map/ApiTest.php</exclude>
+      <exclude>_tests/Unit/Framework/Video/Api/YoutubeTest.php</exclude>
+      <exclude>_tests/Unit/Framework/Video/ProviderFactoryTest.php</exclude>
+    </testsuite>
+    <testsuite name="pH7Builder Integration">
+      <file>_tests/Unit/App/System/Module/Api/Controller/MainControllerTest.php</file>
+      <file>_tests/Unit/App/System/Module/Api/Controller/UserControllerTest.php</file>
+      <file>_tests/Unit/App/System/Core/Classes/ValidateSiteCoreTest.php</file>
+      <file>_tests/Unit/App/System/Module/Error/Controller/HttpControllerTest.php</file>
+      <file>_tests/Unit/App/System/Module/Field/Inc/Classes/FieldTest.php</file>
+      <file>_tests/Unit/Framework/Api/AllowCorsTest.php</file>
+      <file>_tests/Unit/Framework/Geo/Map/ApiTest.php</file>
+      <file>_tests/Unit/Framework/Video/Api/YoutubeTest.php</file>
+      <file>_tests/Unit/Framework/Video/ProviderFactoryTest.php</file>
+    </testsuite>
+  </testsuites>
+  <logging/>
 </phpunit>
