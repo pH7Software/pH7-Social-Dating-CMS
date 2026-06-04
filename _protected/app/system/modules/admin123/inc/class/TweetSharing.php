@@ -13,16 +13,16 @@ use PH7\Framework\Url\Url;
 
 final class TweetSharing
 {
-    const TWITTER_TWEET_URL = 'https://twitter.com/intent/tweet?text=';
-    const TWITTER_TWEET_MSG = "I built my #Social #DatingWebApp with #pH7Builder 😍\n#DatingSoftware -> %0% => %1% 🚀";
+    const X_POST_URL = 'https://x.com/intent/post?text=';
+    const X_POST_MSG = "I built my #Social #DatingWebApp with #pH7Builder 😍\n#DatingSoftware -> %0% => %1% 🚀";
 
     /**
      * @return string
      */
     public static function getMessage()
     {
-        $sMsg = t(self::TWITTER_TWEET_MSG, Kernel::SOFTWARE_TWITTER, Kernel::SOFTWARE_GIT_REPO_URL);
+        $sMsg = t(self::X_POST_MSG, Kernel::SOFTWARE_TWITTER, Kernel::SOFTWARE_GIT_REPO_URL);
 
-        return self::TWITTER_TWEET_URL . Url::encode($sMsg);
+        return self::X_POST_URL . Url::encode($sMsg);
     }
 }

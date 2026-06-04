@@ -13,7 +13,7 @@ use PH7\Framework\Url\Url;
 
 class MainController extends Controller
 {
-    const TWITTER_TWEET_URL = 'https://twitter.com/intent/tweet?text=';
+    const X_POST_URL = 'https://twitter.com/intent/tweet?text=';
 
     /** @var UserCoreModel */
     private $oUserModel;
@@ -67,6 +67,6 @@ class MainController extends Controller
     {
         $sMsg = t("#WOW! I'm the %0%th member on %site_url%! #milestone succeeded!!! #%site_name%", $iTotalUsers);
 
-        return self::TWITTER_TWEET_URL . Url::encode($sMsg);
+        return self::X_POST_URL . Url::encode($sMsg);
     }
 }
