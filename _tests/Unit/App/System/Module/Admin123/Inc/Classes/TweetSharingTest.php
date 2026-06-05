@@ -19,7 +19,7 @@ class TweetSharingTest extends TestCase
 {
     public function testGetMessage(): void
     {
-        $sExpectedLink = 'https://twitter.com/intent/tweet?text=I+built+my+%23Social+%23DatingWebApp+with+%23pH7Builder+%F0%9F%98%8D%0A%23DatingSoftware+-%3E+%40pH7Soft+%3D%3E+https%3A%2F%2Fgithub.com%2FpH7Software%2FpH7-Social-Dating-CMS+%F0%9F%9A%80';
+        $sExpectedLink = 'https://x.com/intent/post?text=I+built+my+%23Social+%23DatingWebApp+with+%23pH7Builder+%F0%9F%98%8D%0A%23DatingSoftware+-%3E+%40pH7Soft+%3D%3E+https%3A%2F%2Fgithub.com%2FpH7Software%2FpH7-Social-Dating-CMS+%F0%9F%9A%80';
         $this->assertSame($sExpectedLink, TweetSharing::getMessage());
     }
 }

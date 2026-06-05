@@ -13,7 +13,7 @@ use PH7\Framework\Url\Url;
 
 class MainController extends Controller
 {
-    const X_POST_URL = 'https://twitter.com/intent/tweet?text=';
+    const X_POST_URL = 'https://x.com/intent/post?text=';
 
     /** @var UserCoreModel */
     private $oUserModel;

@@ -12,7 +12,7 @@ use PH7\Framework\Url\Url;
 
 final class SocialSharing
 {
-    const X_POST_URL = 'https://twitter.com/intent/tweet?text=';
+    const X_POST_URL = 'https://x.com/intent/post?text=';
 
     /**
      * @param string $sTweetText

@@ -451,7 +451,7 @@ function is_software_installed($sCtrlName, $sAction)
  */
 function get_tweet_post($sTweetMsg, $sTwitterUsername, $sGitRepoUrl)
 {
-    $sTwitterTweetUrl = 'https://twitter.com/intent/tweet?text=';
+    $sTwitterTweetUrl = 'https://x.com/intent/post?text=';
     $sMsg = sprintf($sTweetMsg, $sTwitterUsername, $sGitRepoUrl);
 
     return $sTwitterTweetUrl . urlencode($sMsg);

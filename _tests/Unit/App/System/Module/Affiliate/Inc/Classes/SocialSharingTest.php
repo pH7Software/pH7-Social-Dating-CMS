@@ -19,7 +19,7 @@ class SocialSharingTest extends TestCase
 {
     public function testGetMessage(): void
     {
-        $sExpectedLink = 'https://twitter.com/intent/tweet?text=Let%27s+talk%21+%F0%9F%A4%97';
+        $sExpectedLink = 'https://x.com/intent/post?text=Let%27s+talk%21+%F0%9F%A4%97';
         $this->assertSame($sExpectedLink, SocialSharing::getTwitterLink('Let\'s talk! 🤗'));
     }
 }
