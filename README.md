@@ -1,6 +1,6 @@
 # pH7 Social Dating Builder
 
-## ⚡️ The 2026 <span style="text-decoration:underline">Social Dating WebApp Builder</span>
+## ⚡️ The Modern 2026 <span style="text-decoration:underline;font-style:italic">Social Dating WebApp Builder</span>
 
 ### 🚀 Secure, User-Friendly & Open Source Social Dating Web App Software
 
