@@ -2,7 +2,7 @@
 /**
  * @author           Pierre-Henry Soria <hello@ph7builder.com>
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
- * @copyright        (c) 2011-2023, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2011-2026, Pierre-Henry Soria. All Rights Reserved.
  * @license          MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  *
  * @history          Supports now PHP 5 with beautiful object code (POO), (removed all the ugly object code from PHP 4.x).
@@ -300,12 +300,18 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
     }
 
     /**
-     * @return string|null Returns the compiled template path when not including it.
+     * Renders a template file.
      *
-     * @throws TplException If the template file does no exist.
+     * @param string|null $sTplFile   Template file name.
+     * @param string|null $sDirPath   Custom template directory.
+     * @param bool        $bInclude   If false, returns the compiled file path instead of rendering.
+     *
+     * @return string|null Returns the compiled template path when $bInclude is false, otherwise null.
+     *
+     * @throws TplException              If the template file does not exist.
      * @throws PH7InvalidArgumentException
      */
-    public function display(?string $sTplFile = null, ?string $sDirPath = null, bool $bInclude = true)
+    public function display(?string $sTplFile = null, ?string $sDirPath = null, bool $bInclude = true): string|null
     {
         $this->sTplFile = $sTplFile;
 
@@ -331,10 +337,9 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
 
         if (!$this->file->existFile($this->sTemplateDirFile)) {
             throw new TplException(
-                sprintf('%s file does no exist.', $this->sTemplateDirFile)
+                sprintf('%s file does not exist.', $this->sTemplateDirFile)
             );
         }
-
 
         /*** If the file does not exist or if the template has been modified, recompile the makefiles ***/
         if ($this->file->getModifTime($this->sTemplateDirFile) > $this->file->getModifTime($this->sCompileDirFile)) {
@@ -351,9 +356,10 @@ class PH7Tpl extends Kernel implements Templatable, GenerableFile
                 extract($this->_aVars);
                 require $this->sCompileDirFile;
             }
-        } else {
-            return $this->sCompileDirFile;
+            return null;
         }
+
+        return $this->sCompileDirFile;
     }
 
     /**
