@@ -142,7 +142,7 @@ class Cache implements GenerableFile
         $mData = $this->read($bPrint);
 
         if ($mData !== false) {
-            $mData = unserialize($mData, ['allowed_classes' => false]);
+            $mData = unserialize($mData, ['allowed_classes' => [\stdClass::class]]);
         }
 
         return $mData;
