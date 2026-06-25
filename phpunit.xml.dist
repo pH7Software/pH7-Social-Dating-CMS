@@ -45,5 +45,4 @@
       <file>_tests/Unit/Framework/Video/ProviderFactoryTest.php</file>
     </testsuite>
   </testsuites>
-  <logging/>
 </phpunit>
