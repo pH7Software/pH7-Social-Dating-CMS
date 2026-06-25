@@ -14,13 +14,8 @@ final class SocialSharing
 {
     const X_POST_URL = 'https://x.com/intent/post?text=';
 
-    /**
-     * @param string $sTweetText
-     *
-     * @return string
-     */
-    public static function getTwitterLink($sTweetText)
+    public static function getXLink(string $sMessage): string
     {
-        return self::X_POST_URL . Url::encode($sTweetText);
+        return self::X_POST_URL . Url::encode($sMessage);
     }
 }

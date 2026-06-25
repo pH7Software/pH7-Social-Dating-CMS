@@ -28,7 +28,7 @@ class AccountController extends Controller
         $this->view->min_withdrawal = $this->config->values['module.setting']['min_withdrawal_money'];
         $this->view->amount = (new AffiliateModel)->getAmount($this->session->get('affiliate_id'));
         $this->view->referral_link_url = $sReferralUrl;
-        $this->view->tweet_msg_url = SocialSharing::getTwitterLink(
+        $this->view->tweet_msg_url = SocialSharing::getXLink(
             t("Let's have fun! 😻 Let's try something different 😍\n-> %0% 🥳", $sReferralUrl)
         );
         $this->view->contact_url = Uri::get('contact', 'contact', 'index');

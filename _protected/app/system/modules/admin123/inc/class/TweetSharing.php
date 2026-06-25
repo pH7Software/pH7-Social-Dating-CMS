@@ -16,10 +16,7 @@ final class TweetSharing
     const X_POST_URL = 'https://x.com/intent/post?text=';
     const X_POST_MSG = "I built my #Social #DatingWebApp with #pH7Builder 😍\n#DatingSoftware -> %0% => %1% 🚀";
 
-    /**
-     * @return string
-     */
-    public static function getMessage()
+    public static function getMessage(): string
     {
         $sMsg = t(self::X_POST_MSG, Kernel::SOFTWARE_TWITTER, Kernel::SOFTWARE_GIT_REPO_URL);
 
