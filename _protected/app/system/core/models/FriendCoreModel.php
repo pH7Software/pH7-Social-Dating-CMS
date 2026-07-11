@@ -17,6 +17,31 @@ class FriendCoreModel extends Model
     const ALL_REQUEST = 2;
     const APPROVED_REQUEST = 0;
     const PENDING_REQUEST = 1;
+    const JS_FILENAME = 'friend.js';
+
+    private const MODULE_NAME = 'friend';
+    private const DEFAULT_ASSET_THEME = 'base';
+
+    public static function getJsAssetDir(): string
+    {
+        $sThemeDir = self::getJsAssetDirForTheme(PH7_TPL_MOD_NAME);
+
+        if (is_file(self::getRootPath() . $sThemeDir . self::JS_FILENAME)) {
+            return $sThemeDir;
+        }
+
+        return self::getJsAssetDirForTheme(self::DEFAULT_ASSET_THEME);
+    }
+
+    private static function getJsAssetDirForTheme(string $sTheme): string
+    {
+        return PH7_LAYOUT . PH7_SYS . PH7_MOD . self::MODULE_NAME . PH7_SH . PH7_TPL . $sTheme . PH7_SH . PH7_JS;
+    }
+
+    private static function getRootPath(): string
+    {
+        return defined('PH7_PATH_ROOT') ? PH7_PATH_ROOT : dirname(PH7_PATH_PROTECTED) . PH7_DS;
+    }
 
     /**
      * "Get" and "Find" "Friends" or "Mutual Friends"

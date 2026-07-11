@@ -53,8 +53,8 @@ class MainController extends Controller
          *  Adding JavaScript file for Ajax friend.
          */
         $this->design->addJs(
-            PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS,
-            'friend.js'
+            FriendCoreModel::getJsAssetDir(),
+            FriendCoreModel::JS_FILENAME
         );
 
         $this->iMemberId = $this->session->get('member_id');
