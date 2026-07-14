@@ -16,6 +16,12 @@
     display: block;
 }
 
+@media screen and (min-width: 768px) {
+    .navbar-nav > li.dropdown:hover > .dropdown-menu {
+        display: block;
+    }
+}
+
 .dropdown-submenu > a::after {
     display: block;
     content: " ";
