@@ -1,0 +1,285 @@
+/*
+ * Design system: CSS custom properties (design tokens) and component overrides
+ * giving the Bootstrap 3 components a current look without changing any markup.
+ * Includes dark-mode (prefers-color-scheme) and reduced-motion support.
+ * Loaded after the other theme stylesheets in layout.tpl.
+ *
+ * Author:        Pierre-Henry Soria <hello@ph7builder.com>
+ * Copyright:     (c) 2026, Pierre-Henry Soria. All Rights Reserved.
+ * License:       MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
+ */
+
+:root {
+    /* Brand */
+    --ph7-primary: #e8467c;
+    --ph7-primary-dark: #c92e63;
+    --ph7-primary-soft: #fde8ef;
+    --ph7-accent: #7c5cff;
+    --ph7-gradient: linear-gradient(135deg, var(--ph7-primary) 0%, var(--ph7-accent) 100%);
+
+    /* Surfaces & text */
+    --ph7-bg: #ffffff;
+    --ph7-surface: #f7f7fa;
+    --ph7-border: #e4e4ec;
+    --ph7-text: #1c1c26;
+    --ph7-text-muted: #6b6b7a;
+
+    /* Shape & elevation */
+    --ph7-radius-sm: 8px;
+    --ph7-radius: 12px;
+    --ph7-radius-lg: 20px;
+    --ph7-radius-pill: 999px;
+    --ph7-shadow-sm: 0 1px 3px rgba(20, 20, 40, .08);
+    --ph7-shadow: 0 6px 24px rgba(20, 20, 40, .10);
+
+    /* Typography */
+    --ph7-font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+    /* Motion */
+    --ph7-transition: 160ms ease;
+
+    color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --ph7-primary-soft: #3a2030;
+        --ph7-bg: #15151c;
+        --ph7-surface: #1e1e28;
+        --ph7-border: #32323f;
+        --ph7-text: #ececf2;
+        --ph7-text-muted: #a2a2b2;
+        --ph7-shadow-sm: 0 1px 3px rgba(0, 0, 0, .4);
+        --ph7-shadow: 0 6px 24px rgba(0, 0, 0, .5);
+    }
+}
+
+/** BASE **/
+html, body {
+    /* Shorthand on purpose: clears legacy background-image gradients too */
+    background: var(--ph7-bg);
+}
+
+body {
+    font-family: var(--ph7-font);
+    color: var(--ph7-text);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+    font-weight: 700;
+    letter-spacing: -.015em;
+    color: var(--ph7-text);
+}
+
+label, .control-label, legend {
+    color: var(--ph7-text);
+}
+
+a {
+    color: var(--ph7-primary);
+    transition: color var(--ph7-transition);
+}
+
+a:hover, a:focus {
+    color: var(--ph7-primary-dark);
+    text-decoration: none;
+}
+
+:focus-visible {
+    outline: 2px solid var(--ph7-accent);
+    outline-offset: 2px;
+}
+
+/** BUTTONS (Bootstrap 3 classes, modern look) **/
+.btn {
+    border-radius: var(--ph7-radius-pill);
+    font-weight: 600;
+    padding: 8px 20px;
+    transition: transform var(--ph7-transition), box-shadow var(--ph7-transition), background-color var(--ph7-transition);
+    border: 1px solid transparent;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--ph7-shadow-sm);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary, .btn-success {
+    background: var(--ph7-gradient);
+    border: 0;
+    color: #fff;
+    text-shadow: none;
+}
+
+.btn-primary:hover, .btn-primary:focus,
+.btn-success:hover, .btn-success:focus {
+    background: var(--ph7-gradient);
+    filter: brightness(1.08);
+    color: #fff;
+}
+
+.btn-default {
+    background-color: var(--ph7-surface);
+    border-color: var(--ph7-border);
+    color: var(--ph7-text);
+}
+
+.btn-default:hover, .btn-default:focus {
+    background-color: var(--ph7-primary-soft);
+    border-color: var(--ph7-primary);
+    color: var(--ph7-primary-dark);
+}
+
+/** FORMS **/
+.form-control,
+input[type=text], input[type=email], input[type=password],
+input[type=search], input[type=tel], input[type=url],
+input[type=number], input[type=date], select, textarea {
+    border-radius: var(--ph7-radius-sm);
+    border: 1px solid var(--ph7-border);
+    background-color: var(--ph7-bg);
+    color: var(--ph7-text);
+    box-shadow: none;
+    transition: border-color var(--ph7-transition), box-shadow var(--ph7-transition);
+}
+
+.form-control:focus,
+input:focus, select:focus, textarea:focus {
+    border-color: var(--ph7-primary);
+    box-shadow: 0 0 0 3px var(--ph7-primary-soft);
+    outline: none;
+}
+
+/** PANELS / WELLS / BOXES → cards **/
+.panel, .well, .box, .content, .center-block {
+    border-radius: var(--ph7-radius);
+    border: 1px solid var(--ph7-border);
+    background-color: var(--ph7-surface);
+    box-shadow: var(--ph7-shadow-sm);
+}
+
+.panel-heading,
+.panel-default > .panel-heading {
+    border-radius: var(--ph7-radius) var(--ph7-radius) 0 0;
+    background-color: transparent;
+    color: var(--ph7-text);
+    border-bottom: 1px solid var(--ph7-border);
+    font-weight: 600;
+}
+
+/** ALERTS **/
+.alert {
+    border-radius: var(--ph7-radius);
+    border-width: 0;
+    box-shadow: var(--ph7-shadow-sm);
+}
+
+/** LABELS & BADGES **/
+.label, .badge {
+    border-radius: var(--ph7-radius-pill);
+    font-weight: 600;
+    padding: .3em .9em;
+}
+
+/** PAGINATION **/
+.pagination > li > a, .pagination > li > span {
+    border-radius: var(--ph7-radius-sm);
+    margin: 0 2px;
+    border-color: var(--ph7-border);
+    color: var(--ph7-text);
+    background-color: var(--ph7-bg);
+}
+
+.pagination > .active > a, .pagination > .active > span {
+    background: var(--ph7-gradient);
+    border-color: transparent;
+}
+
+/** PROFILE / MEDIA THUMBNAILS **/
+.thumbnail, .img-rounded, .avatar img, .picture img, .thumb_photo {
+    border-radius: var(--ph7-radius);
+    border-color: var(--ph7-border);
+    transition: transform var(--ph7-transition), box-shadow var(--ph7-transition);
+}
+
+.thumbnail:hover, .thumb_photo:hover {
+    transform: scale(1.02);
+    box-shadow: var(--ph7-shadow);
+}
+
+.img-circle {
+    border: 2px solid var(--ph7-bg);
+    box-shadow: var(--ph7-shadow-sm);
+}
+
+/** NAVBAR / MENU **/
+.navbar, #header {
+    background-color: var(--ph7-bg);
+    border-bottom: 1px solid var(--ph7-border);
+    box-shadow: var(--ph7-shadow-sm);
+}
+
+.dropdown-menu {
+    border-radius: var(--ph7-radius);
+    border: 1px solid var(--ph7-border);
+    box-shadow: var(--ph7-shadow);
+    background-color: var(--ph7-bg);
+    overflow: hidden;
+}
+
+.dropdown-menu > li > a {
+    padding: 8px 16px;
+    color: var(--ph7-text);
+    transition: background-color var(--ph7-transition);
+}
+
+.dropdown-menu > li > a:hover {
+    background-color: var(--ph7-primary-soft);
+    color: var(--ph7-primary-dark);
+}
+
+/** TABLES **/
+.table > thead > tr > th {
+    border-bottom: 2px solid var(--ph7-border);
+    color: var(--ph7-text-muted);
+    text-transform: uppercase;
+    font-size: .85em;
+    letter-spacing: .04em;
+}
+
+.table > tbody > tr > td {
+    border-color: var(--ph7-border);
+}
+
+/** DARK-MODE fixes for legacy hardcoded colors **/
+@media (prefers-color-scheme: dark) {
+    pre {
+        background-color: var(--ph7-surface);
+        border-color: var(--ph7-border);
+        color: var(--ph7-text);
+    }
+
+    .table, .panel-body, .modal-content {
+        color: var(--ph7-text);
+    }
+
+    .modal-content {
+        background-color: var(--ph7-surface);
+    }
+}
+
+/** ACCESSIBILITY: respect reduced-motion preference **/
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

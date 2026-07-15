@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pH7Builder — Base Theme Style Guide</title>
+<!--
+  Developer tool: previews the base theme CSS chain (same order as layout.tpl)
+  against representative Bootstrap 3 markup, without needing a full install.
+  Serve the repo root over HTTP, e.g.:  python3 -m http.server -d . 8642
+  then open http://localhost:8642/_tools/theme-preview.html
+-->
+<link rel="stylesheet" href="/static/css/bootstrap.css">
+<link rel="stylesheet" href="/static/css/bootstrap_customize.css">
+<link rel="stylesheet" href="/templates/themes/base/css/common.css">
+<link rel="stylesheet" href="/templates/themes/base/css/style.css">
+<link rel="stylesheet" href="/templates/themes/base/css/layout.css">
+<link rel="stylesheet" href="/templates/themes/base/css/color.css">
+<link rel="stylesheet" href="/templates/themes/base/css/form.css">
+<link rel="stylesheet" href="/templates/themes/base/css/design_system.css">
+</head>
+<body style="padding: 24px;">
+<div class="container">
+    <h1>Base theme style guide</h1>
+    <p>Every component below uses stock Bootstrap 3 markup, restyled by <code>design_system.css</code>.</p>
+
+    <h2>Buttons</h2>
+    <p>
+        <a class="btn btn-primary" href="#">Join for free</a>
+        <a class="btn btn-success" href="#">Like ❤</a>
+        <a class="btn btn-default" href="#">View profile</a>
+    </p>
+
+    <h2>Form</h2>
+    <form class="form-horizontal" onsubmit="return false">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="pv-email">Email</label>
+            <div class="col-sm-4"><input type="email" id="pv-email" class="form-control" placeholder="you@example.com"></div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="pv-pwd">Password</label>
+            <div class="col-sm-4"><input type="password" id="pv-pwd" class="form-control" placeholder="••••••••"></div>
+        </div>
+    </form>
+
+    <h2>Panel & alert</h2>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">Who viewed your profile</div>
+                <div class="panel-body">3 new visitors this week. <span class="label label-info">New</span></div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="alert alert-success">Your profile is now verified ✔</div>
+        </div>
+    </div>
+
+    <h2>Pagination</h2>
+    <ul class="pagination">
+        <li><a href="#">«</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">»</a></li>
+    </ul>
+
+    <h2>Table</h2>
+    <table class="table">
+        <thead><tr><th>Member</th><th>Age</th><th>City</th></tr></thead>
+        <tbody>
+            <tr><td>Alex</td><td>29</td><td>Sydney</td></tr>
+            <tr><td>Sam</td><td>34</td><td>Brussels</td></tr>
+        </tbody>
+    </table>
+
+    <h2>Dropdown (open)</h2>
+    <div class="dropdown open" style="margin-bottom: 120px;">
+        <button class="btn btn-default dropdown-toggle">Menu <span class="caret"></span></button>
+        <ul class="dropdown-menu" style="display:block; position:static;">
+            <li><a href="#">My profile</a></li>
+            <li><a href="#">Messages</a></li>
+            <li><a href="#">Settings</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
