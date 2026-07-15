@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2016-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Two-Factor Auth / Model
  */
 
 namespace PH7;
@@ -12,9 +12,9 @@ class TwoFactorAuthModel extends TwoFactorAuthCoreModel
 {
     /**
      * @param int $iIsEnabled 1 = Enabled | 0 = Disabled
-     * @param int $iProfileId Profile ID.
+     * @param int $iProfileId profile ID
      *
-     * @return int|bool Returns the number of rows on success or FALSE on failure.
+     * @return int|bool returns the number of rows on success or FALSE on failure
      */
     public function setStatus($iIsEnabled, $iProfileId)
     {
@@ -24,10 +24,10 @@ class TwoFactorAuthModel extends TwoFactorAuthCoreModel
     }
 
     /**
-     * @param string $sSecret 2FA secret code.
-     * @param int $iProfileId Profile ID.
+     * @param string $sSecret    2FA secret code
+     * @param int    $iProfileId profile ID
      *
-     * @return int|bool Returns the number of rows on success or FALSE on failure.
+     * @return int|bool returns the number of rows on success or FALSE on failure
      */
     public function setSecret($sSecret, $iProfileId)
     {
@@ -35,9 +35,9 @@ class TwoFactorAuthModel extends TwoFactorAuthCoreModel
     }
 
     /**
-     * @param int $iProfileId Profile ID.
+     * @param int $iProfileId profile ID
      *
-     * @return string The 2FA secret code.
+     * @return string the 2FA secret code
      */
     public function getSecret($iProfileId)
     {

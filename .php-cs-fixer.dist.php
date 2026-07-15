@@ -1,18 +1,26 @@
 <?php
+/**
+ * PHP CS Fixer 3.x configuration (migrated from the legacy .php_cs.dist format).
+ * Same rule intent as before; only the rule names/config syntax were updated.
+ */
 
 $aRules = [
     '@PSR2' => true,
     '@Symfony' => true,
     'concat_space' => ['spacing' => 'one'],
     'array_syntax' => ['syntax' => 'short'],
-    'no_trailing_comma_in_singleline_array' => true,
-    'trailing_comma_in_multiline_array' => false,
+    'no_trailing_comma_in_singleline' => true,
+    'trailing_comma_in_multiline' => false,
     'cast_spaces' => false,
     'combine_consecutive_unsets' => true,
-    'general_phpdoc_annotation_remove' => ['expectedException', 'expectedExceptionMessage', 'expectedExceptionMessageRegExp'],
+    'general_phpdoc_annotation_remove' => [
+        'annotations' => ['expectedException', 'expectedExceptionMessage', 'expectedExceptionMessageRegExp']
+    ],
     'heredoc_to_nowdoc' => true,
-    'no_extra_consecutive_blank_lines' => ['break', 'continue', 'extra', 'return', 'throw', 'use', 'parenthesis_brace_block', 'square_brace_block', 'curly_brace_block'],
-    'no_short_echo_tag' => true,
+    'no_extra_blank_lines' => [
+        'tokens' => ['break', 'continue', 'extra', 'return', 'throw', 'use', 'parenthesis_brace_block', 'square_brace_block', 'curly_brace_block']
+    ],
+    'echo_tag_syntax' => ['format' => 'long'],
     'no_php4_constructor' => true,
     'no_unreachable_default_argument_value' => true,
     'no_useless_else' => true,
@@ -22,14 +30,14 @@ $aRules = [
     'phpdoc_add_missing_param_annotation' => true,
     'phpdoc_order' => true,
     'semicolon_after_instruction' => true,
-    'psr4' => true,
+    'psr_autoloading' => true,
     'strict_comparison' => true,
     'yoda_style' => false,
     'strict_param' => true,
     'standardize_not_equals' => true
 ];
 
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config())
     ->setRiskyAllowed(true)
     ->setRules($aRules)
     ->setFinder(

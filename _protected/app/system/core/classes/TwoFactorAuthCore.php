@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2016-2026, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Core / Class
  */
 
 declare(strict_types=1);
@@ -15,7 +15,7 @@ use RobThree\Auth\TwoFactorAuth;
 
 final class TwoFactorAuthCore
 {
-    const PROFILE_ID_SESS_NAME = '2fa_profile_id';
+    public const PROFILE_ID_SESS_NAME = '2fa_profile_id';
 
     /**
      * QR codes are rendered locally (SVG, no PHP extension required), so the TOTP

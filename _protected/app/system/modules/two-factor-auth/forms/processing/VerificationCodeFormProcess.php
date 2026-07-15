@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2016-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Two-Factor Auth / Form / Processing
  */
 
 declare(strict_types=1);
@@ -22,10 +22,10 @@ class VerificationCodeFormProcess extends Form
 {
     /**
      * Every OPT is valid for 30 sec.
-     * If somebody provides OTP at 29th sec, by the time it reaches the server OTP is expired.
-     * So we can give OTP_TOLERANCE=1, it will check current & previous OTP.
-     * OTP_TOLERANCE=2, verifies current and last two OTPS
-     * - Text from: http://hayageek.com/two-factor-authentication-with-google-authenticator-php/
+     *  * If somebody provides OTP at 29th sec, by the time it reaches the server OTP is expired.
+     *  * So we can give OTP_TOLERANCE=1, it will check current & previous OTP.
+     *  * OTP_TOLERANCE=2, verifies current and last two OTPS
+     * - Text from: http://hayageek.com/two-factor-authentication-with-google-authenticator-php/.
      */
     private const OTP_TOLERANCE = 1;
 
@@ -43,22 +43,22 @@ class VerificationCodeFormProcess extends Form
         if ($bCheck) {
             $sCoreClassName = $this->getClassName($sMod);
             $sCoreModelClassName = $sCoreClassName . 'Model';
-            $sCoreModelClass = new $sCoreModelClassName;
+            $sCoreModelClass = new $sCoreModelClassName();
             $oUserData = $sCoreModelClass->readProfile($iProfileId, Various::convertModToTable($sMod));
 
             if ($sMod === 'user') { // RememberMe is only available for "user" module
-                $oRememberMe = new RememberMeCore;
+                $oRememberMe = new RememberMeCore();
                 if ($oRememberMe->isEligible($this->session)) {
                     $oRememberMe->enableSession($oUserData);
                 }
                 unset($oRememberMe);
             }
 
-            (new $sCoreClassName)->setAuth(
+            (new $sCoreClassName())->setAuth(
                 $oUserData,
                 $sCoreModelClass,
                 $this->session,
-                new SecurityModel
+                new SecurityModel()
             );
 
             $this->redirectToAccountPage($sMod);
@@ -73,11 +73,11 @@ class VerificationCodeFormProcess extends Form
     /**
      * Get main user core class according to the module.
      *
-     * @param string $sMod Module name.
+     * @param string $sMod module name
      *
-     * @return string Correct class name.
+     * @throws PH7InvalidArgumentException explanatory message if the specified module is wrong
      *
-     * @throws PH7InvalidArgumentException Explanatory message if the specified module is wrong.
+     * @return string correct class name
      */
     protected function getClassName(string $sMod): string
     {
@@ -85,19 +85,14 @@ class VerificationCodeFormProcess extends Form
             case 'user':
                 $sFullClassName = UserCore::class;
                 break;
-
             case 'affiliate':
                 $sFullClassName = AffiliateCore::class;
                 break;
-
             case PH7_ADMIN_MOD:
                 $sFullClassName = AdminCore::class;
                 break;
-
             default:
-                throw new PH7InvalidArgumentException(
-                    sprintf('Wrong "%s" module specified to get the class name', $sMod)
-                );
+                throw new PH7InvalidArgumentException(sprintf('Wrong "%s" module specified to get the class name', $sMod));
         }
 
         return $sFullClassName;

@@ -1,12 +1,13 @@
 <?php
+
 /**
  * @title          Server Class
+ *
  * @desc           This class is used to manage settings of the web server and can simulate a server secure and reliable.
  *
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / Framework / Server
  */
 
 declare(strict_types=1);
@@ -23,38 +24,38 @@ use function PH7\is_internet;
 
 final class Server
 {
-    const SERVER_PORT = 'SERVER_PORT';
-    const SERVER_PROTOCOL = 'SERVER_PROTOCOL';
-    const SERVER_NAME = 'SERVER_NAME';
-    const SERVER_ADDR = 'SERVER_ADDR';
-    const LOCAL_ADDR = 'LOCAL_ADDR';
-    const HTTPS = 'HTTPS';
-    const HTTP_HOST = 'HTTP_HOST';
-    const HTTP_X_FORWARDED_HOST = 'HTTP_X_FORWARDED_HOST';
-    const REMOTE_ADDR = 'REMOTE_ADDR';
-    const HTTP_CLIENT_IP = 'HTTP_CLIENT_IP';
-    const HTTP_X_FORWARDED_FOR = 'HTTP_X_FORWARDED_FOR';
-    const AUTH_USER = 'PHP_AUTH_USER';
-    const AUTH_PW = 'PHP_AUTH_PW';
-    const CURRENT_FILE = 'PHP_SELF';
-    const REQUEST_METHOD = 'REQUEST_METHOD';
-    const REQUEST_URI = 'REQUEST_URI';
-    const QUERY_STRING = 'QUERY_STRING';
-    const HTTP_ACCEPT = 'HTTP_ACCEPT';
-    const HTTP_ACCEPT_LANGUAGE = 'HTTP_ACCEPT_LANGUAGE';
-    const HTTP_ACCEPT_ENCODING = 'HTTP_ACCEPT_ENCODING';
-    const HTTP_X_WAP_PROFILE = 'HTTP_X_WAP_PROFILE';
-    const HTTP_PROFILE = 'HTTP_PROFILE';
-    const HTTP_USER_AGENT = 'HTTP_USER_AGENT';
-    const HTTP_REFERER = 'HTTP_REFERER';
-    const HTTP_X_REQUESTED_WITH = 'HTTP_X_REQUESTED_WITH';
-    const HTTP_IF_MODIFIED_SINCE = 'HTTP_IF_MODIFIED_SINCE';
+    public const SERVER_PORT = 'SERVER_PORT';
+    public const SERVER_PROTOCOL = 'SERVER_PROTOCOL';
+    public const SERVER_NAME = 'SERVER_NAME';
+    public const SERVER_ADDR = 'SERVER_ADDR';
+    public const LOCAL_ADDR = 'LOCAL_ADDR';
+    public const HTTPS = 'HTTPS';
+    public const HTTP_HOST = 'HTTP_HOST';
+    public const HTTP_X_FORWARDED_HOST = 'HTTP_X_FORWARDED_HOST';
+    public const REMOTE_ADDR = 'REMOTE_ADDR';
+    public const HTTP_CLIENT_IP = 'HTTP_CLIENT_IP';
+    public const HTTP_X_FORWARDED_FOR = 'HTTP_X_FORWARDED_FOR';
+    public const AUTH_USER = 'PHP_AUTH_USER';
+    public const AUTH_PW = 'PHP_AUTH_PW';
+    public const CURRENT_FILE = 'PHP_SELF';
+    public const REQUEST_METHOD = 'REQUEST_METHOD';
+    public const REQUEST_URI = 'REQUEST_URI';
+    public const QUERY_STRING = 'QUERY_STRING';
+    public const HTTP_ACCEPT = 'HTTP_ACCEPT';
+    public const HTTP_ACCEPT_LANGUAGE = 'HTTP_ACCEPT_LANGUAGE';
+    public const HTTP_ACCEPT_ENCODING = 'HTTP_ACCEPT_ENCODING';
+    public const HTTP_X_WAP_PROFILE = 'HTTP_X_WAP_PROFILE';
+    public const HTTP_PROFILE = 'HTTP_PROFILE';
+    public const HTTP_USER_AGENT = 'HTTP_USER_AGENT';
+    public const HTTP_REFERER = 'HTTP_REFERER';
+    public const HTTP_X_REQUESTED_WITH = 'HTTP_X_REQUESTED_WITH';
+    public const HTTP_IF_MODIFIED_SINCE = 'HTTP_IF_MODIFIED_SINCE';
 
-    const LOCAL_IP = '127.0.0.1';
-    const LOCAL_IPV6 = '::1';
-    const LOCAL_HOSTNAME = 'localhost';
+    public const LOCAL_IP = '127.0.0.1';
+    public const LOCAL_IPV6 = '::1';
+    public const LOCAL_HOSTNAME = 'localhost';
 
-    const UNIX_OS = [
+    public const UNIX_OS = [
         'UNIX',
         'LINUX',
         'FREEBSD',
@@ -88,7 +89,7 @@ final class Server
     /**
      * Check to see if we are on a Windows server.
      *
-     * @return bool TRUE if windows, FALSE if not.
+     * @return bool TRUE if windows, FALSE if not
      */
     public static function isWindows(): bool
     {
@@ -98,7 +99,7 @@ final class Server
     /**
      * See if we are on a Unix server...?
      *
-     * @return bool TRUE if Unix, FALSE if not.
+     * @return bool TRUE if Unix, FALSE if not
      */
     public static function isUnix(): bool
     {
@@ -110,7 +111,7 @@ final class Server
     /**
      * Check to see if we are on a Mac OS server.
      *
-     * @return bool TRUE if windows, FALSE if not.
+     * @return bool TRUE if windows, FALSE if not
      */
     public static function isMac(): bool
     {
@@ -120,7 +121,7 @@ final class Server
     /**
      * Get the IP address of server.
      *
-     * @internal We use LOCAL_ADDR variable for compatibility with Windows servers.
+     * @internal we use LOCAL_ADDR variable for compatibility with Windows servers
      *
      * @return string|null IP address if found. NULL otherwise.
      */
@@ -135,8 +136,8 @@ final class Server
     /**
      * Retrieve a member of the $_SERVER super global.
      *
-     * @param string|null $sKey If NULL, returns the entire $_SERVER variable.
-     * @param string|null $sDefVal A default value to use if server key is not found.
+     * @param string|null $sKey    if NULL, returns the entire $_SERVER variable
+     * @param string|null $sDefVal a default value to use if server key is not found
      *
      * @return string|array|null
      */
@@ -152,7 +153,7 @@ final class Server
     /**
      * Get the server name.
      *
-     * @return string|null The name of the server host if exists, NULL otherwise.
+     * @return string|null the name of the server host if exists, NULL otherwise
      */
     public static function getName(): ?string
     {
@@ -162,7 +163,7 @@ final class Server
     /**
      * Check if the server is in local.
      *
-     * @return bool TRUE if it is in local mode, FALSE if not.
+     * @return bool TRUE if it is in local mode, FALSE if not
      */
     public static function isLocalHost(): bool
     {
@@ -188,6 +189,7 @@ final class Server
             }
 
             $sPage = self::getUrlContents(PH7_URL_ROOT . 'test_mod_rewrite');
+
             return $sPage === $sOutputMsg;
         }
 
@@ -196,7 +198,7 @@ final class Server
 
     public static function cachedIsRewriteMod(): bool
     {
-        $oCache = (new Cache)->start(
+        $oCache = (new Cache())->start(
             'str/server',
             'isRewriteModStatus',
             86400
@@ -213,7 +215,7 @@ final class Server
     /**
      * Alias method of the checkInternetConnection() function (located in ~/_protected/app/includes/helpers/misc.php).
      *
-     * @return bool Returns TRUE if the Internet connection is enabled, FALSE otherwise.
+     * @return bool returns TRUE if the Internet connection is enabled, FALSE otherwise
      */
     public static function checkInternetConnection(): bool
     {
@@ -245,6 +247,7 @@ final class Server
         $bAllowUrlFopen = filter_var((string)ini_get('allow_url_fopen'), FILTER_VALIDATE_BOOLEAN);
         if ($bAllowUrlFopen) {
             $mData = @file_get_contents($sUrl);
+
             return is_string($mData) ? $mData : '';
         }
 

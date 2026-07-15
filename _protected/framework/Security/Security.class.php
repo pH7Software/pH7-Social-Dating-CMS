@@ -1,10 +1,12 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / Framework / Security
+ *
  * @version        1.2
+ *
  * @history        01/15/2014 - This system replaces the other highly secure password hashing created by Pierre-Henry Soria
  */
 
@@ -18,22 +20,22 @@ use PH7\Framework\Util\Various;
 
 final class Security
 {
-    const HASH_LENGTH = 80;
-    const COOKIE_HASH_LENGTH = 40;
-    const PBKDF2_ITERATION = 10000;
+    public const HASH_LENGTH = 80;
+    public const COOKIE_HASH_LENGTH = 40;
+    public const PBKDF2_ITERATION = 10000;
 
     // Argon2id (OWASP recommendation) when compiled in; bcrypt fallback for hosts without it.
-    const PWD_BCRYPT_WORK_FACTOR = 12;
-    const PWD_ARGON2_MEMORY_COST = 65536; // 64 MB, in KiB
-    const PWD_ARGON2_TIME_COST = 4;
-    const PWD_ARGON2_THREADS = 1;
+    public const PWD_BCRYPT_WORK_FACTOR = 12;
+    public const PWD_ARGON2_MEMORY_COST = 65536; // 64 MB, in KiB
+    public const PWD_ARGON2_TIME_COST = 4;
+    public const PWD_ARGON2_THREADS = 1;
 
-    const SHA512_ALGORITHM = 'sha512';
-    const WHIRLPOOL_ALGORITHM = 'whirlpool';
+    public const SHA512_ALGORITHM = 'sha512';
+    public const WHIRLPOOL_ALGORITHM = 'whirlpool';
 
     /*** Our salts. Never change these values, otherwise all passwords and other strings will be incorrect ***/
-    const PREFIX_SALT = 'c好，你今Здраврыве ты ў паітаньне е54йте天rt&eh好嗎_dمرحبا أنت بخير ال好嗎attú^u5atá inniu4a,?478привіなたは大丈夫今日はтивпряьоהעלאai54ng_scси днесpt';
-    const SUFFIX_SALT = '*éà12_you_è§§=≃ù%µµ££$);&,?µp{èàùf*sxdslut_waruआप नमस्क你好，你今ार ठΓει好嗎α σαςb안녕하세oi요 괜찮은 o नमस्कार ठीnjre;,?*-<καλά σήμεραीक आजсегодняm_54tjהעלאdgezsядкمرحبا';
+    public const PREFIX_SALT = 'c好，你今Здраврыве ты ў паітаньне е54йте天rt&eh好嗎_dمرحبا أنت بخير ال好嗎attú^u5atá inniu4a,?478привіなたは大丈夫今日はтивпряьоהעלאai54ng_scси днесpt';
+    public const SUFFIX_SALT = '*éà12_you_è§§=≃ù%µµ££$);&,?µp{èàùf*sxdslut_waruआप नमस्क你好，你今ार ठΓει好嗎α σαςb안녕하세oi요 괜찮은 o नमस्कार ठीnjre;,?*-<καλά σήμεραीक आजсегодняm_54tjהעלאdgezsядкمرحبا';
 
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
@@ -43,7 +45,7 @@ final class Security
     }
 
     /**
-     * @return string|int The best password algorithm available on this PHP build.
+     * @return string|int the best password algorithm available on this PHP build
      */
     public static function getPwdAlgorithm()
     {
@@ -51,7 +53,7 @@ final class Security
     }
 
     /**
-     * @return array The hashing options matching the algorithm returned by getPwdAlgorithm().
+     * @return array the hashing options matching the algorithm returned by getPwdAlgorithm()
      */
     public static function getPwdOptions()
     {
@@ -112,11 +114,11 @@ final class Security
      * Generate a hash for Cookie Password encryption.
      *
      * @param string $sPassword
-     * @param int $iLength
-     *
-     * @return string The password hashed.
+     * @param int    $iLength
      *
      * @throws InvalidAlgorithmException
+     *
+     * @return string the password hashed
      */
     public static function hashCookie($sPassword, $iLength = self::COOKIE_HASH_LENGTH)
     {
@@ -127,7 +129,7 @@ final class Security
      * Generate a hash.
      *
      * @param string $sVal
-     * @param int $iLength
+     * @param int    $iLength
      *
      * @return string
      */
@@ -148,12 +150,12 @@ final class Security
      * Generate a user hash.
      *
      * @param string $sVal
-     * @param int $iLength
-     * @param string $sAlgo The algorithm. Only 'whirlpool' or 'sha512' are accepted.
-     *
-     * @return string
+     * @param int    $iLength
+     * @param string $sAlgo   The algorithm. Only 'whirlpool' or 'sha512' are accepted.
      *
      * @throws InvalidAlgorithmException
+     *
+     * @return string
      */
     public static function userHash($sVal, $iLength, $sAlgo = self::WHIRLPOOL_ALGORITHM)
     {
@@ -161,7 +163,7 @@ final class Security
             throw new InvalidAlgorithmException('Wrong algorithm! Please choose between "whirlpool" or "sha512"');
         }
 
-        $sSalt = self::PREFIX_SALT . Ip::get() . self::SUFFIX_SALT . (new Browser)->getUserAgent();
+        $sSalt = self::PREFIX_SALT . Ip::get() . self::SUFFIX_SALT . (new Browser())->getUserAgent();
 
         return hash_pbkdf2($sAlgo, $sVal, $sSalt, self::PBKDF2_ITERATION, $iLength);
     }

@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2016-2024, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Two-Factor Auth / Controller
  */
 
 namespace PH7;
@@ -17,12 +17,12 @@ use RobThree\Auth\TwoFactorAuth as Authenticator;
 
 class MainController extends Controller
 {
-    const AUTHENTICATOR_IOS_APP_URL = 'https://itunes.apple.com/en/app/google-authenticator/id388497605';
-    const AUTHENTICATOR_ANDROID_APP_URL = 'https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2';
+    public const AUTHENTICATOR_IOS_APP_URL = 'https://itunes.apple.com/en/app/google-authenticator/id388497605';
+    public const AUTHENTICATOR_ANDROID_APP_URL = 'https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2';
 
-    const TWO_FACTOR_SECRET_STRING_LENGTH = 10;
-    const WRONG_MODULE_ERROR_MESSAGE = 'Wrong "%s" module!';
-    const BACKUP_CODE_FILE_EXT = '.txt';
+    public const TWO_FACTOR_SECRET_STRING_LENGTH = 10;
+    public const WRONG_MODULE_ERROR_MESSAGE = 'Wrong "%s" module!';
+    public const BACKUP_CODE_FILE_EXT = '.txt';
 
     private TwoFactorAuthModel $o2FactorModel;
     private Authenticator $oAuthenticator;
@@ -36,15 +36,6 @@ class MainController extends Controller
         parent::__construct();
 
         $this->oAuthenticator = TwoFactorAuthCore::createAuthenticator($this->registry->site_url);
-    }
-
-    public function verificationCode(string $sMod = ''): void
-    {
-        $this->sMod = $sMod;
-        $this->checkMod();
-
-        $this->view->page_title = $this->view->h2_title = t('Verification Code - Two-Factor Authentication');
-        $this->output();
     }
 
     public function setup(string $sMod = ''): void
@@ -85,10 +76,19 @@ class MainController extends Controller
         $this->output();
     }
 
+    public function verificationCode(string $sMod = ''): void
+    {
+        $this->sMod = $sMod;
+        $this->checkMod();
+
+        $this->view->page_title = $this->view->h2_title = t('Verification Code - Two-Factor Authentication');
+        $this->output();
+    }
+
     /**
      * Download the backup 2FA code (text file).
      *
-     * @param string $sSecret The 2FA secret.
+     * @param string $sSecret the 2FA secret
      */
     private function download(string $sSecret): void
     {
@@ -100,7 +100,7 @@ class MainController extends Controller
     }
 
     /**
-     * @param string $sSecret The 2FA secret code.
+     * @param string $sSecret the 2FA secret code
      */
     private function getBackupCodeMessage(string $sSecret): string
     {
@@ -118,7 +118,7 @@ class MainController extends Controller
     /**
      * Get Session Profile ID.
      *
-     * @throws PH7InvalidArgumentException Explanatory message if the specified module is wrong.
+     * @throws PH7InvalidArgumentException explanatory message if the specified module is wrong
      */
     private function getProfileId(): int
     {
@@ -129,11 +129,8 @@ class MainController extends Controller
                 return (int)$this->session->get('affiliate_id');
             case PH7_ADMIN_MOD:
                 return (int)$this->session->get('admin_id');
-
             default:
-                throw new PH7InvalidArgumentException(
-                    sprintf(self::WRONG_MODULE_ERROR_MESSAGE, $this->sMod)
-                );
+                throw new PH7InvalidArgumentException(sprintf(self::WRONG_MODULE_ERROR_MESSAGE, $this->sMod));
         }
     }
 
@@ -151,7 +148,7 @@ class MainController extends Controller
      * Generate an Authenticator Name for the QR code.
      * Note: I don't use the site name because it might include invalid characters.
      *
-     * @return string Unique Authenticator Name for the site.
+     * @return string unique Authenticator Name for the site
      */
     private function getAuthenticatorName(): string
     {
@@ -159,7 +156,7 @@ class MainController extends Controller
     }
 
     /**
-     * @param string $sSecret The 2FA secret code.
+     * @param string $sSecret the 2FA secret code
      */
     private function isTwoFactorSet($sSecret): bool
     {
