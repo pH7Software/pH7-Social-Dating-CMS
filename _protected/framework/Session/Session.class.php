@@ -156,13 +156,15 @@ class Session
          */
         if (!Server::isLocalHost()) {
             $iTime = (int)($aConfig['expiration'] ?? self::DEFAULT_EXPIRATION);
-            session_set_cookie_params(
-                $iTime,
-                (string)($aConfig['path'] ?? self::DEFAULT_PATH),
-                (string)($aConfig['domain'] ?? self::DEFAULT_DOMAIN),
-                Server::isHttps(),
-                true
-            );
+            session_set_cookie_params([
+                'lifetime' => $iTime,
+                'path' => (string)($aConfig['path'] ?? self::DEFAULT_PATH),
+                'domain' => (string)($aConfig['domain'] ?? self::DEFAULT_DOMAIN),
+                'secure' => Server::isHttps(),
+                'httponly' => true,
+                // Lax (not Strict) so links from emails/social networks keep users logged in.
+                'samesite' => 'Lax'
+            ]);
         }
 
         @session_start();

@@ -22,9 +22,11 @@ final class Security
     const COOKIE_HASH_LENGTH = 40;
     const PBKDF2_ITERATION = 10000;
 
-    // Keep bcrypt for maximum compatibility across hosting environments.
-    const PWD_ALGORITHM = PASSWORD_BCRYPT;
-    const PWD_WORK_FACTOR = 12;
+    // Argon2id (OWASP recommendation) when compiled in; bcrypt fallback for hosts without it.
+    const PWD_BCRYPT_WORK_FACTOR = 12;
+    const PWD_ARGON2_MEMORY_COST = 65536; // 64 MB, in KiB
+    const PWD_ARGON2_TIME_COST = 4;
+    const PWD_ARGON2_THREADS = 1;
 
     const SHA512_ALGORITHM = 'sha512';
     const WHIRLPOOL_ALGORITHM = 'whirlpool';
@@ -33,14 +35,35 @@ final class Security
     const PREFIX_SALT = 'c好，你今Здраврыве ты ў паітаньне е54йте天rt&eh好嗎_dمرحبا أنت بخير ال好嗎attú^u5atá inniu4a,?478привіなたは大丈夫今日はтивпряьоהעלאai54ng_scси днесpt';
     const SUFFIX_SALT = '*éà12_you_è§§=≃ù%µµ££$);&,?µp{èàùf*sxdslut_waruआप नमस्क你好，你今ार ठΓει好嗎α σαςb안녕하세oi요 괜찮은 o नमस्कार ठीnjre;,?*-<καλά σήμεραीक आजсегодняm_54tjהעלאdgezsядкمرحبا';
 
-    /** @var array */
-    private static $aPwdOptions = ['cost' => self::PWD_WORK_FACTOR];
-
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
      */
     private function __construct()
     {
+    }
+
+    /**
+     * @return string|int The best password algorithm available on this PHP build.
+     */
+    public static function getPwdAlgorithm()
+    {
+        return defined('PASSWORD_ARGON2ID') ? PASSWORD_ARGON2ID : PASSWORD_BCRYPT;
+    }
+
+    /**
+     * @return array The hashing options matching the algorithm returned by getPwdAlgorithm().
+     */
+    public static function getPwdOptions()
+    {
+        if (self::getPwdAlgorithm() === PASSWORD_BCRYPT) {
+            return ['cost' => self::PWD_BCRYPT_WORK_FACTOR];
+        }
+
+        return [
+            'memory_cost' => self::PWD_ARGON2_MEMORY_COST,
+            'time_cost' => self::PWD_ARGON2_TIME_COST,
+            'threads' => self::PWD_ARGON2_THREADS
+        ];
     }
 
     /**
@@ -52,7 +75,7 @@ final class Security
      */
     public static function hashPwd($sPassword)
     {
-        return password_hash($sPassword, self::PWD_ALGORITHM, self::$aPwdOptions);
+        return password_hash($sPassword, self::getPwdAlgorithm(), self::getPwdOptions());
     }
 
     /**
@@ -78,7 +101,7 @@ final class Security
      */
     public static function pwdNeedsRehash($sPassword, $sHash)
     {
-        if (password_needs_rehash($sHash, self::PWD_ALGORITHM, self::$aPwdOptions)) {
+        if (password_needs_rehash($sHash, self::getPwdAlgorithm(), self::getPwdOptions())) {
             return self::hashPwd($sPassword);
         }
 

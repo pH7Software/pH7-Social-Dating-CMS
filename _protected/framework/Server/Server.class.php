@@ -63,9 +63,26 @@ final class Server
 
     public function __construct()
     {
+        // Don't disclose version/build details (avoids easy fingerprinting of known CVEs).
         header('Server: ' . Kernel::SOFTWARE_SERVER_NAME);
         header('X-Powered-By: ' . Kernel::SOFTWARE_TECHNOLOGY_NAME);
-        header('X-Content-Encoded-By: ' . Kernel::SOFTWARE_NAME . ' - ' . Kernel::SOFTWARE_COMPANY . ' ' . Kernel::SOFTWARE_VERSION . ' Build ' . Kernel::SOFTWARE_BUILD);
+
+        self::sendSecurityHeaders();
+    }
+
+    /**
+     * Baseline security headers for every response (OWASP Secure Headers recommendations).
+     */
+    public static function sendSecurityHeaders(): void
+    {
+        header('X-Frame-Options: SAMEORIGIN');
+        header('X-Content-Type-Options: nosniff');
+        header('Referrer-Policy: strict-origin-when-cross-origin');
+        header('Permissions-Policy: camera=(), microphone=(self), geolocation=(self)');
+
+        if (self::isHttps()) {
+            header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
+        }
     }
 
     /**
