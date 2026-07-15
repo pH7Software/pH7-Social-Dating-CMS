@@ -17,7 +17,6 @@ use PH7\Framework\Mvc\Model\Engine\Util\Various;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
-use RobThree\Auth\TwoFactorAuth as Authenticator;
 
 class VerificationCodeFormProcess extends Form
 {
@@ -34,7 +33,7 @@ class VerificationCodeFormProcess extends Form
     {
         parent::__construct();
 
-        $oAuthenticator = new Authenticator;
+        $oAuthenticator = TwoFactorAuthCore::createAuthenticator();
 
         $iProfileId = $this->session->get(TwoFactorAuthCore::PROFILE_ID_SESS_NAME);
         $sSecret = (new TwoFactorAuthModel($sMod))->getSecret($iProfileId);

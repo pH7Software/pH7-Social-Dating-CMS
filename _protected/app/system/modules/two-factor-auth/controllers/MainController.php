@@ -35,7 +35,7 @@ class MainController extends Controller
     {
         parent::__construct();
 
-        $this->oAuthenticator = new Authenticator($this->registry->site_url);
+        $this->oAuthenticator = TwoFactorAuthCore::createAuthenticator($this->registry->site_url);
     }
 
     public function verificationCode(string $sMod = ''): void
