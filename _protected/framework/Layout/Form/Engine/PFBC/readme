@@ -1,8 +1,6 @@
 PHP Form Builder Class (PFBC)
 
-This library is based on:
-http://code.google.com/p/php-form-builder-class/
-
-I made several changes, added new features, and customized it specifically for pH7CMS.
+This library is based on: http://code.google.com/p/php-form-builder-class/
+Several changes, new features, and additional form fields were introduced to better fit the needs of pH7CMS.
 
 Pierre-Henry Soria
