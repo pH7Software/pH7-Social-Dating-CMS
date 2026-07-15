@@ -1,4 +1,8 @@
-This code is taken from the draft http://code.google.com/p/php-form-builder-class/
-but we made some changes in code (add functionality and other).
+PHP Form Builder Class (PFBC)
 
-pH7 developers team.
+This library is based on:
+http://code.google.com/p/php-form-builder-class/
+
+I made several changes, added new features, and customized it specifically for pH7CMS.
+
+Pierre-Henry Soria
