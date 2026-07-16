@@ -156,6 +156,39 @@ input:focus, select:focus, textarea:focus {
     outline: none;
 }
 
+/** NATIVE COLOR INPUT (replaces the legacy jQuery colorpicker) **/
+/* [type=color] doubled to match form.css's input:not():not() specificity; this file loads later, so it wins the tie */
+input[type=color][type=color] {
+    inline-size: 3.2em;
+    block-size: 2.2em;
+    padding: 3px;
+    border: 1px solid var(--ph7-border);
+    border-radius: var(--ph7-radius-sm);
+    background-color: var(--ph7-bg);
+    cursor: pointer;
+    transition: border-color var(--ph7-transition), box-shadow var(--ph7-transition);
+}
+
+input[type=color][type=color]:hover, input[type=color][type=color]:focus {
+    border-color: var(--ph7-primary);
+    box-shadow: 0 0 0 3px var(--ph7-primary-soft);
+}
+
+input[type=color]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+/* Kept as separate rules: an unknown vendor pseudo-element invalidates a whole selector list */
+input[type=color]::-webkit-color-swatch {
+    border: none;
+    border-radius: calc(var(--ph7-radius-sm) - 3px);
+}
+
+input[type=color]::-moz-color-swatch {
+    border: none;
+    border-radius: calc(var(--ph7-radius-sm) - 3px);
+}
+
 /** PANELS / WELLS / BOXES → cards **/
 .panel, .well, .box, .content, .center-block {
     border-radius: var(--ph7-radius);
