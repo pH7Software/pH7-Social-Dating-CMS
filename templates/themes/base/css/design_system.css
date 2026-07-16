@@ -274,6 +274,51 @@ input:focus, select:focus, textarea:focus {
     }
 }
 
+/** PLUGIN CHROME (apprise dialogs, tipTip tooltips, jQuery UI) — same tokens as the rest of the UI **/
+div.apprise {
+    background: var(--ph7-surface);
+    color: var(--ph7-text);
+    border: 1px solid var(--ph7-border);
+    border-radius: var(--ph7-radius-lg);
+    box-shadow: var(--ph7-shadow);
+    font-family: var(--ph7-font);
+}
+
+.apprise-overlay {
+    background-color: rgba(20, 20, 40, .55);
+    backdrop-filter: blur(2px);
+}
+
+div.apprise .apprise-input input {
+    border-radius: var(--ph7-radius-sm);
+    border: 1px solid var(--ph7-border);
+    background-color: var(--ph7-bg);
+    color: var(--ph7-text);
+    box-shadow: none;
+}
+
+#tiptip_content {
+    background-color: var(--ph7-text);
+    color: var(--ph7-bg);
+    border-radius: var(--ph7-radius-sm);
+    font-family: var(--ph7-font);
+    box-shadow: var(--ph7-shadow-sm);
+}
+
+.ui-widget, .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+    font-family: var(--ph7-font);
+}
+
+.ui-corner-all {
+    border-radius: var(--ph7-radius-sm);
+}
+
+.ui-dialog {
+    border-radius: var(--ph7-radius-lg);
+    border: 1px solid var(--ph7-border);
+    box-shadow: var(--ph7-shadow);
+}
+
 /** ACCESSIBILITY: respect reduced-motion preference **/
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {

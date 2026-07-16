@@ -17,6 +17,8 @@
 <link rel="stylesheet" href="/templates/themes/base/css/layout.css">
 <link rel="stylesheet" href="/templates/themes/base/css/color.css">
 <link rel="stylesheet" href="/templates/themes/base/css/form.css">
+<link rel="stylesheet" href="/templates/themes/base/css/js/jquery/apprise.css">
+<link rel="stylesheet" href="/templates/themes/base/css/js/jquery/tipTip.css">
 <link rel="stylesheet" href="/templates/themes/base/css/design_system.css">
 </head>
 <body style="padding: 24px;">
@@ -73,6 +75,22 @@
             <tr><td>Sam</td><td>34</td><td>Brussels</td></tr>
         </tbody>
     </table>
+
+    <h2>Apprise dialog & tipTip tooltip (forced visible)</h2>
+    <div style="position: relative; height: 220px;">
+        <div class="apprise" style="display:block; position:absolute; top:10px; left:10px; width:280px;">
+            <div class="apprise-inner">
+                <p>Are you sure you want to unmatch Alex?</p>
+                <div class="apprise-buttons">
+                    <button class="btn btn-primary">Yes, unmatch</button>
+                    <button class="btn btn-default">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <div id="tiptip_holder" class="tip_top" style="display:block; position:absolute; top:40px; left:340px;">
+            <div id="tiptip_content">Online 5 minutes ago</div>
+        </div>
+    </div>
 
     <h2>Dropdown (open)</h2>
     <div class="dropdown open" style="margin-bottom: 120px;">

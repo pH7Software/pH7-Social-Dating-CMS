@@ -421,10 +421,13 @@ class Form extends Base
         echo 'jQuery(document).ready(function() {';
 
         /*When the form is submitted, disable all submit buttons to prevent duplicate submissions.*/
-        echo 'jQuery("#', $id, '").bind("submit", function() {';
+        echo 'jQuery("#', $id, '").on("submit", function() {';
         if ($this->isNotJQueryUIButtons()) {
             echo 'jQuery(this).find("button[type=submit]").button("disable");';
-            echo 'jQuery(this).find("button[type=submit] span.ui-button-text").css("padding-right", "2.1em").append(\'<img class="pfbc-loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAIiIiAAAAGdnZyMjIwAAADQ0NEVFRU5OTiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" alt="Loading..."/>\');';
+            /* jQuery UI <=1.11 wraps the label in span.ui-button-text; 1.12+ doesn't, so fall back to the button itself. */
+            echo 'var $pfbcBtnLabel = jQuery(this).find("button[type=submit] span.ui-button-text");';
+            echo 'if (!$pfbcBtnLabel.length) { $pfbcBtnLabel = jQuery(this).find("button[type=submit]"); }';
+            echo '$pfbcBtnLabel.css("padding-right", "2.1em").append(\'<img class="pfbc-loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAIiIiAAAAGdnZyMjIwAAADQ0NEVFRU5OTiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" alt="Loading..."/>\');';
         } else {
             echo 'jQuery(this).find("button[type=submit]").attr("disabled", "disabled");';
         }
@@ -438,7 +441,7 @@ class Form extends Base
         /*For ajax, an anonymous onsubmit javascript function is bound to the form using jQuery.  jQuery's
         serialize function is used to grab each element's name/value pair.*/
         if (!empty($this->ajax)) {
-            echo 'jQuery("#', $id, '").bind("submit", {';
+            echo 'jQuery("#', $id, '").on("submit", {';
             $this->error->clear();
             echo <<<JS
             jQuery.ajax({
@@ -462,7 +465,10 @@ JS;
             echo '}';
 
             if ($this->isNotJQueryUIButtons()) {
-                echo 'jQuery("#', $id, ' button[type=submit] span.ui-button-text").css("padding-right", "1em").find("img").remove();';
+                /* Same jQuery UI 1.12+ fallback as the submit handler above. */
+                echo 'var $pfbcBtnReset = jQuery("#', $id, ' button[type=submit] span.ui-button-text");';
+                echo 'if (!$pfbcBtnReset.length) { $pfbcBtnReset = jQuery("#', $id, ' button[type=submit]"); }';
+                echo '$pfbcBtnReset.css("padding-right", "1em").find("img").remove();';
                 echo 'jQuery("#', $id, ' button[type=submit]").button("enable");';
             } else {
                 echo 'jQuery("#', $id, '").find("button[type=submit]").removeAttr("disabled");';
