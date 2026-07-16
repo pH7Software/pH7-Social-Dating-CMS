@@ -131,9 +131,9 @@ function openBox(sFile) {
             show: 'slide',
             hide: 'puff',
             resizable: false,
-            stack: false,
-            zIndex: 10999,
             open: function (oEvent) {
+                // "stack"/"zIndex" options were removed in jQuery UI 1.12; raise the dialog above the site menu manually
+                $(this).closest('.ui-dialog').css('z-index', 10999);
                 $(this).load(sFile);
             }
         });
