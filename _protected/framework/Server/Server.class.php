@@ -81,6 +81,23 @@ final class Server
         header('Referrer-Policy: strict-origin-when-cross-origin');
         header('Permissions-Policy: camera=(), microphone=(self), geolocation=(self)');
 
+        /*
+         * Report-Only on purpose: nothing is blocked, violations only show in the browser console,
+         * so site owners can discover what their install actually loads before the policy is enforced
+         * (templates still emit inline scripts; nonces are planned with the Bootstrap 5 template pass).
+         */
+        header(
+            'Content-Security-Policy-Report-Only: ' .
+            "default-src 'self'; " .
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval'; " .
+            "style-src 'self' 'unsafe-inline'; " .
+            "img-src 'self' data: blob: https:; " .
+            "font-src 'self' data:; " .
+            "object-src 'none'; " .
+            "base-uri 'self'; " .
+            "frame-ancestors 'self'"
+        );
+
         if (self::isHttps()) {
             header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
         }
