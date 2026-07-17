@@ -1,22 +1,24 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2018-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module /PWA / Controller
  */
 
 namespace PH7;
 
 use PH7\Framework\Http\Http;
+use PH7\Framework\Mvc\Router\Uri;
 
 class MainController extends Controller
 {
-    const MANIFEST_CONTENT_TYPE = 'application/manifest+json';
-    const JSON_TPL_EXT = '.json.tpl';
-    const XML_CONTENT_TYPE = 'application/xml';
-    const XML_TPL_EXT = '.xml.tpl';
-    const STATIC_CACHE_LIFETIME = 86400; // 86400 secs = 24 hours
+    public const MANIFEST_CONTENT_TYPE = 'application/manifest+json';
+    public const JSON_TPL_EXT = '.json.tpl';
+    public const XML_CONTENT_TYPE = 'application/xml';
+    public const XML_TPL_EXT = '.xml.tpl';
+    public const HTML_TPL_EXT = '.html.tpl';
+    public const STATIC_CACHE_LIFETIME = 86400; // 86400 secs = 24 hours
 
     public function manifest()
     {
@@ -24,6 +26,11 @@ class MainController extends Controller
 
         $this->view->hex_bg_color = $this->config->values['module.setting']['hex.background_color'];
         $this->view->orientation = $this->config->values['module.setting']['orientation_mode'];
+
+        /* App shortcuts (long-press/right-click on the installed app icon) */
+        $this->view->browse_members_url = Uri::get('user', 'browse', 'index');
+        $this->view->inbox_url = Uri::get('mail', 'main', 'inbox');
+        $this->view->my_account_url = Uri::get('user', 'account', 'index');
 
         $this->jsonOutput();
     }
@@ -38,10 +45,22 @@ class MainController extends Controller
     }
 
     /**
-     * @return void
-     *
+     * Standalone offline fallback page, pre-cached by the service worker.
+     * Self-contained on purpose (inline styles, no external assets) since it is served without network.
+     */
+    public function offline()
+    {
+        $this->enableStaticTplCache();
+
+        /* Standalone document; don't wrap it in the site layout */
+        $this->view->display($this->httpRequest->currentController() . PH7_DS . $this->registry->action . self::HTML_TPL_EXT);
+    }
+
+    /**
      * @throws Framework\Http\Exception
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
+     *
+     * @return void
      */
     private function jsonOutput()
     {
@@ -55,10 +74,10 @@ class MainController extends Controller
     }
 
     /**
-     * @return void
-     *
      * @throws Framework\Http\Exception
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
+     *
+     * @return void
      */
     private function xmlOutput()
     {
@@ -80,9 +99,9 @@ class MainController extends Controller
     /**
      * Set the appropriate header output for JSON format.
      *
-     * @return void
-     *
      * @throws Framework\Http\Exception
+     *
+     * @return void
      */
     private function setJsonContentType()
     {
@@ -92,9 +111,9 @@ class MainController extends Controller
     /**
      * Set the appropriate header output for XML format.
      *
-     * @return void
-     *
      * @throws Framework\Http\Exception
+     *
+     * @return void
      */
     private function setXmlContentType()
     {

@@ -38,6 +38,8 @@
     {if $is_pwa_enabled}
       <link rel="manifest" href="{{ $design->url('pwa','main','manifest') }}" />
       <meta name="msapplication-config" content="{{ $design->url('pwa','main','browserconfig') }}" />
+      <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+      <meta name="theme-color" content="#15151c" media="(prefers-color-scheme: dark)" />
       {{ $design->staticFiles('js', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'pwa/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_JS, 'sw-register.js') }}
       {main_include 'pwa-icon-tags.inc.tpl'}
     {/if}

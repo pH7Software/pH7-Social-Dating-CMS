@@ -12,6 +12,28 @@
   "theme_color": {% json_encode($hex_bg_color, JSON_UNESCAPED_SLASHES) %},
   "background_color": {% json_encode($hex_bg_color, JSON_UNESCAPED_SLASHES) %},
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "categories": ["social", "lifestyle"],
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "shortcuts": [
+    {
+      "name": "Browse Members",
+      "url": {% json_encode($browse_members_url, JSON_UNESCAPED_SLASHES) %},
+      "icons": [{ "src": "{url_tpl_mod_img}icon-96x96.png", "sizes": "96x96", "type": "image/png" }]
+    },
+    {
+      "name": "Messages",
+      "url": {% json_encode($inbox_url, JSON_UNESCAPED_SLASHES) %},
+      "icons": [{ "src": "{url_tpl_mod_img}icon-96x96.png", "sizes": "96x96", "type": "image/png" }]
+    },
+    {
+      "name": "My Account",
+      "url": {% json_encode($my_account_url, JSON_UNESCAPED_SLASHES) %},
+      "icons": [{ "src": "{url_tpl_mod_img}icon-96x96.png", "sizes": "96x96", "type": "image/png" }]
+    }
+  ],
   "icons": [
     {
       "src": "{url_tpl_mod_img}icon-72x72.png",
@@ -52,6 +74,12 @@
       "src": "{url_tpl_mod_img}icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      "src": "{url_tpl_mod_img}icon-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
