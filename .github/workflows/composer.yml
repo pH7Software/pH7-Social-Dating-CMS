@@ -39,3 +39,7 @@ jobs:
 
       - name: Validate composer.json & composer.lock
         run: composer validate --strict
+
+      - name: Audit dependencies for known security vulnerabilities
+        # Checks composer.lock against the security advisory databases; fails the build on known CVEs
+        run: composer audit --locked
