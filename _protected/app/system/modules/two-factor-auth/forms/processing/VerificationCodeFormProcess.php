@@ -2,7 +2,7 @@
 
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
- * @copyright      (c) 2016-2019, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2016-2026, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
  */
 
@@ -13,6 +13,7 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
 use PH7\Framework\Mvc\Router\Uri;
@@ -22,9 +23,9 @@ class VerificationCodeFormProcess extends Form
 {
     /**
      * Every OPT is valid for 30 sec.
-     *  * If somebody provides OTP at 29th sec, by the time it reaches the server OTP is expired.
-     *  * So we can give OTP_TOLERANCE=1, it will check current & previous OTP.
-     *  * OTP_TOLERANCE=2, verifies current and last two OTPS
+     *  * If somebody provides OTP at 29th sec, by the time it reaches the server OTP is expired.
+     *  * So we can give OTP_TOLERANCE=1, it will check current & previous OTP.
+     *  * OTP_TOLERANCE=2, verifies current and last two OTPS
      * - Text from: http://hayageek.com/two-factor-authentication-with-google-authenticator-php/.
      */
     private const OTP_TOLERANCE = 1;
@@ -34,13 +35,29 @@ class VerificationCodeFormProcess extends Form
         parent::__construct();
 
         $oAuthenticator = TwoFactorAuthCore::createAuthenticator();
+        $oSecurityModel = new SecurityModel();
 
         $iProfileId = $this->session->get(TwoFactorAuthCore::PROFILE_ID_SESS_NAME);
         $sSecret = (new TwoFactorAuthModel($sMod))->getSecret($iProfileId);
         $sCode = $this->httpRequest->post('verification_code');
+
+        /*
+         * A 6-digit OTP can be brute-forced in minutes if attempts are unlimited,
+         * so the same per-IP lockout used by the login forms applies here too.
+         */
+        if ($this->isLockedOut($sMod, $iProfileId, $oSecurityModel)) {
+            \PFBC\Form::setError(
+                'form_verification_code',
+                Form::loginAttemptsExceededMsg($this->getAttemptTimeDelay($sMod))
+            );
+
+            return;
+        }
+
         $bCheck = $oAuthenticator->verifyCode($sSecret, $sCode, self::OTP_TOLERANCE);
 
         if ($bCheck) {
+            $oSecurityModel->clearLoginAttempts($this->getAttemptTable($sMod));
             $sCoreClassName = $this->getClassName($sMod);
             $sCoreModelClassName = $sCoreClassName . 'Model';
             $sCoreModelClass = new $sCoreModelClassName();
@@ -63,6 +80,7 @@ class VerificationCodeFormProcess extends Form
 
             $this->redirectToAccountPage($sMod);
         } else {
+            $oSecurityModel->addLoginAttempt($this->getAttemptTable($sMod));
             \PFBC\Form::setError(
                 'form_verification_code',
                 t('Oops! The Verification Code is incorrect. Please try again.')
@@ -96,6 +114,58 @@ class VerificationCodeFormProcess extends Form
         }
 
         return $sFullClassName;
+    }
+
+    /**
+     * Check the per-IP OTP attempt lockout, reusing the login-attempt settings of the module's role.
+     */
+    private function isLockedOut(string $sMod, $iProfileId, SecurityModel $oSecurityModel): bool
+    {
+        if (!(bool)DbConfig::getSetting('is' . $this->getSettingRole($sMod) . 'LoginAttempt')) {
+            return false;
+        }
+
+        $iMaxAttempts = (int)DbConfig::getSetting('max' . $this->getSettingRole($sMod) . 'LoginAttempts');
+        $sUserTable = Various::convertModToTable($sMod);
+        $sEmail = (string)(new UserCoreModel())->getEmail((int)$iProfileId, $sUserTable);
+
+        return !$oSecurityModel->checkLoginAttempt(
+            $iMaxAttempts,
+            $this->getAttemptTimeDelay($sMod),
+            $sEmail,
+            $this->view,
+            $this->getAttemptTable($sMod),
+            $sUserTable
+        );
+    }
+
+    private function getAttemptTimeDelay(string $sMod): int
+    {
+        return (int)DbConfig::getSetting('login' . $this->getSettingRole($sMod) . 'AttemptTime');
+    }
+
+    private function getAttemptTable(string $sMod): string
+    {
+        switch ($sMod) {
+            case 'affiliate':
+                return DbTableName::AFFILIATE_ATTEMPT_LOGIN;
+            case PH7_ADMIN_MOD:
+                return DbTableName::ADMIN_ATTEMPT_LOGIN;
+            default:
+                return DbTableName::MEMBER_ATTEMPT_LOGIN;
+        }
+    }
+
+    private function getSettingRole(string $sMod): string
+    {
+        switch ($sMod) {
+            case 'affiliate':
+                return 'Affiliate';
+            case PH7_ADMIN_MOD:
+                return 'Admin';
+            default:
+                return 'User';
+        }
     }
 
     private function getAccountUrl(string $sModName): string
