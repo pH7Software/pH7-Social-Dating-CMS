@@ -51,15 +51,10 @@
 }
 
 .window, .profiles_window {
-    border: 1px solid #999;
-    border-radius: 5px;
+    border: 1px solid var(--ph7-border, #999);
+    border-radius: var(--ph7-radius, 5px);
     overflow: hidden;
     position: relative;
-}
-
-h1:hover {
-    color: #1877D5;
-    cursor: default;
 }
 
 .img_reel {
@@ -224,4 +219,35 @@ video#bgvid {
         /* Reset width for small screens */
         width: auto;
     }
+}
+
+/*** 2026 refresh (token-driven; falls back gracefully if design_system.css is absent) ***/
+
+/* The signup/login forms become frosted cards so they stay readable over photo/video backgrounds */
+#form_join_user, #form_login_user {
+    background-color: rgba(255, 255, 255, .82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--ph7-border, rgba(0, 0, 0, .1));
+    border-radius: var(--ph7-radius-lg, 12px);
+    box-shadow: var(--ph7-shadow, 0 6px 24px rgba(20, 20, 40, .1));
+    padding: 1.4em 1.6em;
+}
+
+@media (prefers-color-scheme: dark) {
+    #form_join_user, #form_login_user {
+        background-color: rgba(21, 21, 28, .82);
+    }
+}
+
+/* Modern headline instead of the red italic underline */
+.right h1, .col-lg-4 h1 {
+    font-style: normal;
+    text-decoration: none;
+    letter-spacing: -.02em;
+    background: linear-gradient(135deg, var(--ph7-primary, #e8467c) 0%, var(--ph7-accent, #7c5cff) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--ph7-primary, #e8467c); /* Fallback for browsers without background-clip: text */
 }
