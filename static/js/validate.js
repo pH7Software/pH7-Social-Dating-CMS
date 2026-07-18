@@ -15,7 +15,9 @@ var DARK_RED_COLOR = '#d9534f';
 var DARK_GREEN_COLOR = '#5cb85c';
 
 function checkMail() {
-    var sReg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    // Permissive on purpose: this is only a live typo hint. The authoritative check is the
+    // server's filter_var(FILTER_VALIDATE_EMAIL). Accepts +tags, long TLDs (.technology), IDNs, etc.
+    var sReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (sReg.test($("#email").val()) == false)
         $("#email").css("border", 'solid ' + DARK_RED_COLOR + ' 1px');
     else
