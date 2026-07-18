@@ -17,13 +17,19 @@ function textCounter(a, b) {
     'use strict';
 
     var sLabel = (window.pH7LangCore && pH7LangCore.characters_left) || '%0% characters left';
+    var LOW_THRESHOLD = 10;
 
     function updateCounter($oField, $oCounter) {
         var iMax = parseInt($oField.attr('maxlength'), 10);
         var iLeft = iMax - $oField.val().length;
+        var bLow = iLeft <= LOW_THRESHOLD;
 
         $oCounter.text(sLabel.replace('%0%', iLeft));
-        $oCounter.toggleClass('char_counter_low', iLeft <= 10);
+        $oCounter.toggleClass('char_counter_low', bLow);
+
+        // Only let screen readers announce the count once it's running low; announcing on every
+        // keystroke (aria-live always on) is noisy and drowns out the user's own typing.
+        $oCounter.attr('aria-live', bLow ? 'polite' : 'off');
     }
 
     $(function () {
@@ -42,7 +48,8 @@ function textCounter(a, b) {
             }
             $oField.data('counterBound', true);
 
-            var $oCounter = $('<small>', { 'class': 'char_counter', 'aria-live': 'polite' });
+            // aria-live starts 'off'; updateCounter() switches it on only when the count runs low
+            var $oCounter = $('<small>', { 'class': 'char_counter', 'aria-live': 'off' });
             $oField.after($oCounter);
 
             updateCounter($oField, $oCounter);
