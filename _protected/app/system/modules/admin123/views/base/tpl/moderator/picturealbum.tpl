@@ -6,7 +6,7 @@
                 {{ $absolute_url = Framework\Mvc\Router\Uri::get('picture','main','album',"$album->username,$album->name,$album->albumId") }}
 
                 <div class="thumb_photo">
-                    <a href="{absolute_url}" target="_blank">
+                    <a href="{absolute_url}" target="_blank" rel="noopener">
                         <img src="{url_data_sys_mod}picture/img/{% $album->username %}/{% $album->albumId %}/{% $album->thumb %}" alt="{% $album->name %}" title="{% $album->name %}" loading="lazy" />
                     </a>
                     <p class="italic">
