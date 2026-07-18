@@ -1,0 +1,9 @@
+# Security policy for this pH7Builder site (RFC 9116).
+# Site owners: update the contact/expiry below for your own installation.
+# See also the SECURITY.md file in the repository root.
+
+Contact: https://github.com/pH7Software/pH7-Social-Dating-CMS/security/advisories/new
+Contact: mailto:hi@ph7.me
+Expires: 2027-01-01T00:00:00.000Z
+Preferred-Languages: en
+Policy: https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/HEAD/SECURITY.md
