@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Invite / Form / Processing
  */
 
 namespace PH7;
@@ -31,9 +31,9 @@ class InviteFormProcess extends Form
                 t('To prevent spam, you cannot put more than %0% email addresses at a time.', self::MAX_EMAIL_ADDRESSES)
             );
         } else {
-            $oMail = new Mail;
+            $oMail = new Mail();
             foreach ($aTo as $sEmailAddress) {
-                if (!(new Validate)->email($sEmailAddress)) {
+                if (!(new Validate())->email($sEmailAddress)) {
                     \PFBC\Form::setError('form_invite', t('One or more email addresses are invalid!'));
                 } else {
                     if (!$this->sendMail($sEmailAddress, $oMail)) {
@@ -50,21 +50,22 @@ class InviteFormProcess extends Form
     /**
      * Send the confirmation email.
      *
-     * @param string $sEmailAddress The user email.
-     * @param Mailable $oMailEngine
-     *
-     * @return int Number of recipients who were accepted for delivery.
+     * @param string $sEmailAddress the user email
      *
      * @throws Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      * @throws Framework\Mvc\Request\WrongRequestMethodException
+     *
+     * @return int number of recipients who were accepted for delivery
      */
     private function sendMail(string $sEmailAddress, Mailable $oMailEngine): bool
     {
+        // This email is sent to third-party addresses, so escape the visitor-supplied
+        // message and name to stop HTML/link injection (phishing) under the site's name.
         $this->view->content = t('Hello!') . '<br />' .
             t('You have received a privilege on the invitation from your friend on the new platform to meet new generation - %site_name%') . '<br />' .
             '<strong><a href="' . Uri::get('user', 'signup', 'step1', '?ref=invitation') . '">' . t('Get exclusive privilege to join your friend is waiting for you!') . '</a></strong><br />' .
-            t('Message left by your friend:') . '<br />"<em>' . $this->httpRequest->post('message') . '</em>"';
-        $this->view->footer = t('You are receiving this message because "%0%" you know has entered your email address in the form of invitation of friends to our site. This is not spam!', $this->httpRequest->post('first_name'));
+            t('Message left by your friend:') . '<br />"<em>' . escape($this->httpRequest->post('message')) . '</em>"';
+        $this->view->footer = t('You are receiving this message because "%0%" you know has entered your email address in the form of invitation of friends to our site. This is not spam!', escape($this->httpRequest->post('first_name')));
 
         $sMessageHtml = $this->view->parseMail(
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/invite/invitation.tpl',
