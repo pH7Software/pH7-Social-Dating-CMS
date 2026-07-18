@@ -44,7 +44,6 @@ final class WebsiteCheckerTest extends TestCase
         $oChecker = new WebsiteChecker;
         $oReflection = new ReflectionClass(WebsiteChecker::class);
         $oMethod = $oReflection->getMethod('isIncompatiblePhpVersion');
-        $oMethod->setAccessible(true);
 
         $this->assertFalse($oMethod->invoke($oChecker));
     }

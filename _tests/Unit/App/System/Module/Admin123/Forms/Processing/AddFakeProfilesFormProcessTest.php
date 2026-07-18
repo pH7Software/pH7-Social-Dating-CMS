@@ -39,7 +39,6 @@ final class AddFakeProfilesFormProcessTest extends TestCase
         $this->setKernelProperty($oProcess, 'file', $oFile);
 
         $oMethod = new ReflectionMethod(AddFakeProfilesFormProcess::class, 'getApiClient');
-        $oMethod->setAccessible(true);
         $mResult = $oMethod->invoke($oProcess);
 
         $this->assertNull($mResult);
@@ -95,14 +94,12 @@ final class AddFakeProfilesFormProcessTest extends TestCase
     private function setKernelProperty(AddFakeProfilesFormProcess $oProcess, string $sPropertyName, object $oValue): void
     {
         $oProperty = new ReflectionProperty($oProcess, $sPropertyName);
-        $oProperty->setAccessible(true);
         $oProperty->setValue($oProcess, $oValue);
     }
 
     private function invokeGetApiParameters(AddFakeProfilesFormProcess $oProcess): array
     {
         $oMethod = new ReflectionMethod(AddFakeProfilesFormProcess::class, 'getApiParameters');
-        $oMethod->setAccessible(true);
 
         /** @var array $aParams */
         $aParams = $oMethod->invoke($oProcess);

@@ -31,9 +31,7 @@ trait AssertionHelper
     {
         try {
             $oReflector = new ReflectionProperty($oInstance, $sPropertyName);
-            $oReflector->setAccessible(true);
             $mValue = $oReflector->getValue($oInstance);
-            $oReflector->setAccessible(false);
 
             return $mValue;
         } catch (ReflectionException $oExcept) {
