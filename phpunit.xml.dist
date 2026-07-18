@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="_tests/Unit/bootstrap.php" processIsolation="true" verbose="true" colors="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="_tests/Unit/bootstrap.php" processIsolation="true" colors="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.5/phpunit.xsd" cacheDirectory=".phpunit.cache">
   <coverage>
-    <include>
-      <directory suffix=".php">_protected</directory>
-    </include>
-    <exclude>
-      <directory>_protected/library</directory>
-      <directory>_protected/vendor</directory>
-    </exclude>
     <report>
       <html outputDirectory="coverage"/>
       <text outputFile="php://stdout" showUncoveredFiles="true" showOnlySummary="true"/>
@@ -45,4 +38,13 @@
       <file>_tests/Unit/Framework/Video/ProviderFactoryTest.php</file>
     </testsuite>
   </testsuites>
+  <source>
+    <include>
+      <directory suffix=".php">_protected</directory>
+    </include>
+    <exclude>
+      <directory>_protected/library</directory>
+      <directory>_protected/vendor</directory>
+    </exclude>
+  </source>
 </phpunit>

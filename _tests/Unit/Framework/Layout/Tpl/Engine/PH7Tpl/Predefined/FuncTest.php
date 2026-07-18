@@ -12,15 +12,14 @@ namespace PH7\Test\Unit\Framework\Layout\Tpl\Engine\PH7Tpl\Predefined;
 
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Predefined\Func as PredefinedFunc;
 use PH7\Test\Unit\AssertionHelper;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class FuncTest extends TestCase
 {
     use AssertionHelper;
 
-    /**
-     * @dataProvider dateFormatsProvider
-     */
+    #[DataProvider('dateFormatsProvider')]
     public function testDataFunction(string $sDateFormat): void
     {
         $oPredefinedFunc = new PredefinedFunc('<ph:date value="' . $sDateFormat . '" />');
@@ -35,7 +34,7 @@ final class FuncTest extends TestCase
         );
     }
 
-    public function dateFormatsProvider(): array
+    public static function dateFormatsProvider(): array
     {
         return [
             ['Y/m/d'],

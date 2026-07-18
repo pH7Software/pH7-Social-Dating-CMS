@@ -13,13 +13,12 @@ namespace PH7\Test\Unit\Framework\Mvc\Model\Engine\Util;
 use PH7\DbTableName;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mvc\Model\Engine\Util\Various as DbVarious;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class VariousTest extends TestCase
 {
-    /**
-     * @dataProvider tablesProvider
-     */
+    #[DataProvider('tablesProvider')]
     public function testCorrectTable(string $sTable, string $sExpectedTable): void
     {
         $this->assertSame($sExpectedTable, DbVarious::checkTable($sTable));
@@ -32,9 +31,7 @@ class VariousTest extends TestCase
         DbVarious::checkTable('incorrect_table');
     }
 
-    /**
-     * @dataProvider modelTablesProvider
-     */
+    #[DataProvider('modelTablesProvider')]
     public function testCorrectModelTable(string $sTable, string $sExpectedTable): void
     {
         $this->assertSame($sExpectedTable, DbVarious::checkModelTable($sTable));
@@ -47,9 +44,7 @@ class VariousTest extends TestCase
         DbVarious::checkModelTable('incorrect_table');
     }
 
-    /**
-     * @dataProvider modsToTablesProvider
-     */
+    #[DataProvider('modsToTablesProvider')]
     public function testCorrectModToTable(string $sMod, string $sExpectedTable): void
     {
         $this->assertSame($sExpectedTable, DbVarious::convertModToTable($sMod));
@@ -62,9 +57,7 @@ class VariousTest extends TestCase
         DbVarious::convertModToTable('wrong_module');
     }
 
-    /**
-     * @dataProvider tablesToModsProvider
-     */
+    #[DataProvider('tablesToModsProvider')]
     public function testCorrectTableToMod(string $sTable, string $sExpectedMod): void
     {
         $this->assertSame($sExpectedMod, DbVarious::convertTableToMod($sTable));
@@ -77,9 +70,7 @@ class VariousTest extends TestCase
         DbVarious::convertTableToMod('wrong_table');
     }
 
-    /**
-     * @dataProvider tablesToIdsProvider
-     */
+    #[DataProvider('tablesToIdsProvider')]
     public function testCorrectTableToId(string $sTable, string $sExpectedColumnId): void
     {
         $this->assertSame($sExpectedColumnId, DbVarious::convertTableToId($sTable));
@@ -92,7 +83,7 @@ class VariousTest extends TestCase
         DbVarious::convertTableToId('wrong_table');
     }
 
-    public function tablesProvider(): array
+    public static function tablesProvider(): array
     {
         return [
             [DbTableName::MEMBER, 'members'],
@@ -107,7 +98,7 @@ class VariousTest extends TestCase
         ];
     }
 
-    public function modelTablesProvider(): array
+    public static function modelTablesProvider(): array
     {
         return [
             [DbTableName::MEMBER, 'members'],
@@ -121,7 +112,7 @@ class VariousTest extends TestCase
         ];
     }
 
-    public function modsToTablesProvider(): array
+    public static function modsToTablesProvider(): array
     {
         return [
             ['user', 'members'],
@@ -131,7 +122,7 @@ class VariousTest extends TestCase
         ];
     }
 
-    public function tablesToModsProvider(): array
+    public static function tablesToModsProvider(): array
     {
         return [
             [DbTableName::MEMBER, 'user'],
@@ -141,7 +132,7 @@ class VariousTest extends TestCase
         ];
     }
 
-    public function tablesToIdsProvider(): array
+    public static function tablesToIdsProvider(): array
     {
         return [
             [DbTableName::MEMBER, 'profileId'],

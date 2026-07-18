@@ -55,3 +55,4 @@ Thumbs.db
 # Mac OS
 .DS_Store*
 ._*
+.phpunit.cache

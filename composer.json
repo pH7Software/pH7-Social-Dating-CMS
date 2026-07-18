@@ -88,7 +88,7 @@
     "friendsofphp/php-cs-fixer": "^3.95",
     "phake/phake": "^4.1",
     "phpstan/phpstan": "^2.1",
-    "phpunit/phpunit": "^9.6"
+    "phpunit/phpunit": "^11.5"
   },
   "suggest": {
     "symfony/thanks": "Thank your favorite PHP projects on GitHub (in the form of GitHub stars) using CLI"

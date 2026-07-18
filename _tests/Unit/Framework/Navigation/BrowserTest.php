@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace PH7\Test\Unit\Framework\Navigation;
 
 use PH7\Framework\Navigation\Browser;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class BrowserTest extends TestCase
@@ -31,9 +32,7 @@ final class BrowserTest extends TestCase
         $this->cleanupGlobalServerVars();
     }
 
-    /**
-     * @dataProvider defaultBrowserHexCodesProvider
-     */
+    #[DataProvider('defaultBrowserHexCodesProvider')]
     public function testFoundDefaultBrowserHexCode(string $sHexCode): void
     {
         $bResult = Browser::isDefaultBrowserHexCodeFound($sHexCode);
@@ -92,9 +91,7 @@ final class BrowserTest extends TestCase
         $this->assertNull($this->oBrowser->getIfModifiedSince());
     }
 
-    /**
-     * @dataProvider encodingServerHeadersProvider
-     */
+    #[DataProvider('encodingServerHeadersProvider')]
     public function testGetEncodingType(string $sEncodingType): void
     {
         $_SERVER['HTTP_ACCEPT_ENCODING'] = $sEncodingType;
@@ -109,9 +106,7 @@ final class BrowserTest extends TestCase
         $this->assertFalse($this->oBrowser->encoding());
     }
 
-    /**
-     * @dataProvider mobileServerHeadersProvider
-     */
+    #[DataProvider('mobileServerHeadersProvider')]
     public function testIsMobile(string $sServerKeyName, string $sServerValue): void
     {
         $_SERVER[$sServerKeyName] = $sServerValue;
@@ -134,7 +129,7 @@ final class BrowserTest extends TestCase
         $this->assertSame($sExpected, $sActual);
     }
 
-    public function defaultBrowserHexCodesProvider(): array
+    public static function defaultBrowserHexCodesProvider(): array
     {
         return [
             ['#000'],
@@ -142,7 +137,7 @@ final class BrowserTest extends TestCase
         ];
     }
 
-    public function encodingServerHeadersProvider(): array
+    public static function encodingServerHeadersProvider(): array
     {
         return [
             ['gzip'],
@@ -150,7 +145,7 @@ final class BrowserTest extends TestCase
         ];
     }
 
-    public function mobileServerHeadersProvider(): array
+    public static function mobileServerHeadersProvider(): array
     {
         return [
             ['HTTP_X_WAP_PROFILE', 'something'],

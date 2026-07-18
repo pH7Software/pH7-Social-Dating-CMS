@@ -11,15 +11,14 @@ declare(strict_types=1);
 namespace PH7\Test\Unit\App\System\Core\Classes;
 
 use PH7\GenderTypeUserCore;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 require_once PH7_PATH_SYS . 'core/classes/GenderTypeUserCore.php';
 
 final class GenderTypeUserCoreTest extends TestCase
 {
-    /**
-     * @dataProvider validGenderTypesProvider
-     */
+    #[DataProvider('validGenderTypesProvider')]
     public function testValidGenders(string $sGender, bool $bIncludeCoupleGender)
     {
         $bResult = GenderTypeUserCore::isGenderValid($sGender, $bIncludeCoupleGender);
@@ -27,9 +26,7 @@ final class GenderTypeUserCoreTest extends TestCase
         $this->assertTrue($bResult);
     }
 
-    /**
-     * @dataProvider invalidGenderTypesProvider
-     */
+    #[DataProvider('invalidGenderTypesProvider')]
     public function testInvalidGenders(string $sGender, bool $bIncludeCoupleGender): void
     {
         $bResult = GenderTypeUserCore::isGenderValid($sGender, $bIncludeCoupleGender);
@@ -37,7 +34,7 @@ final class GenderTypeUserCoreTest extends TestCase
         $this->assertFalse($bResult);
     }
 
-    public function validGenderTypesProvider(): array
+    public static function validGenderTypesProvider(): array
     {
         return [
             [GenderTypeUserCore::MALE, GenderTypeUserCore::CONSIDER_COUPLE_GENDER],
@@ -48,7 +45,7 @@ final class GenderTypeUserCoreTest extends TestCase
         ];
     }
 
-    public function invalidGenderTypesProvider(): array
+    public static function invalidGenderTypesProvider(): array
     {
         return [
             [GenderTypeUserCore::COUPLE, GenderTypeUserCore::IGNORE_COUPLE_GENDER],

@@ -13,20 +13,19 @@ namespace PH7\Test\Unit\App\System\Module\ProfileFaker\Inc\Classes;
 require_once PH7_PATH_SYS_MOD . 'profile-faker/inc/class/Cleanup.php';
 
 use PH7\Cleanup;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class CleanupTest extends TestCase
 {
-    /**
-     * @dataProvider usernamesProvider
-     */
+    #[DataProvider('usernamesProvider')]
     public function testUsername(string $sActualUsername, string $sExpectedUsername, int $iMaxLength)
     {
         $sCleanedUsername = Cleanup::username($sActualUsername, $iMaxLength);
         $this->assertSame($sCleanedUsername, $sExpectedUsername);
     }
 
-    public function usernamesProvider(): array
+    public static function usernamesProvider(): array
     {
         return [
             ['pierre.soria', 'pierre-soria', 40],

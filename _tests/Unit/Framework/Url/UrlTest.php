@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace PH7\Test\Unit\Framework\Url;
 
 use PH7\Framework\Url\Url;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class UrlTest extends TestCase
@@ -31,15 +32,13 @@ final class UrlTest extends TestCase
         $this->assertSame($sExpected, Url::decode($sEncodedUrl));
     }
 
-    /**
-     * @dataProvider urlsProvider
-     */
+    #[DataProvider('urlsProvider')]
     public function testClean(string $sActualUrl, string $sExpectedUrl)
     {
         $this->assertSame($sExpectedUrl, Url::clean($sActualUrl));
     }
 
-    public function urlsProvider(): array
+    public static function urlsProvider(): array
     {
         return [
             ['https://ph7builder.com/my post is this one', 'https://ph7builder.com/my%20post%20is%20this%20one'],

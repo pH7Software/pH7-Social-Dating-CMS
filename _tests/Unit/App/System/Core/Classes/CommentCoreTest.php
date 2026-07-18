@@ -12,13 +12,12 @@ require_once PH7_PATH_SYS . 'core/classes/CommentCore.php';
 
 use PH7\CommentCore;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class CommentCoreTest extends TestCase
 {
-    /**
-     * @dataProvider tableNamesProvider
-     */
+    #[DataProvider('tableNamesProvider')]
     public function testCorrectTable(string $sTableName): void
     {
         $this->assertSame($sTableName, CommentCore::checkTable($sTableName));
@@ -31,7 +30,7 @@ final class CommentCoreTest extends TestCase
         CommentCore::checkTable('incorrect_table');
     }
 
-    public function tableNamesProvider(): array
+    public static function tableNamesProvider(): array
     {
         return [
             ['profile'],

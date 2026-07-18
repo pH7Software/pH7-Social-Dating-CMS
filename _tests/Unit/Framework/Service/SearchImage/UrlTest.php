@@ -12,6 +12,7 @@ namespace PH7\Test\Unit\Framework\Service\SearchImage;
 
 use PH7\Framework\Service\SearchImage\InvalidUrlException;
 use PH7\Framework\Service\SearchImage\Url;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class UrlTest extends TestCase
@@ -23,9 +24,7 @@ final class UrlTest extends TestCase
         $this->assertSame($sTestUrl, $oUrl->getValue());
     }
 
-    /**
-     * @dataProvider invalidUrlsProvider
-     */
+    #[DataProvider('invalidUrlsProvider')]
     public function testInvalidValue(string $sUrl): void
     {
         $this->expectException(InvalidUrlException::class);
@@ -33,7 +32,7 @@ final class UrlTest extends TestCase
         new Url($sUrl);
     }
 
-    public function invalidUrlsProvider(): array
+    public static function invalidUrlsProvider(): array
     {
         return [
             ['blablabla'],
