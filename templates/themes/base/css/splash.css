@@ -240,8 +240,8 @@ video#bgvid {
     }
 }
 
-/* Modern headline instead of the red italic underline */
-.right h1, .col-lg-4 h1 {
+/* Modern headline instead of the red italic underline (covers the joining headline and the promo-block slogan) */
+h1.red3 {
     font-style: normal;
     text-decoration: none;
     letter-spacing: -.02em;
