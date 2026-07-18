@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Contact / Form
  */
 
 declare(strict_types=1);
@@ -38,15 +38,15 @@ class ContactForm
             Header::redirect();
         }
 
-        $oSession = new Session;
+        $oSession = new Session();
 
         $oForm = new \PFBC\Form('form_contact');
         $oForm->configure(['action' => '']);
         $oForm->addElement(new Hidden('submit_contact', 'form_contact'));
         $oForm->addElement(new Token('contact'));
-        $oForm->addElement(new Textbox(t('Your First Name:'), 'first_name', ['value' => $oSession->get('member_first_name'), 'id' => 'name_first', 'onblur' => 'CValid(this.value, this.id)', 'required' => 1, 'validation' => new Name]));
+        $oForm->addElement(new Textbox(t('Your First Name:'), 'first_name', ['value' => $oSession->get('member_first_name'), 'id' => 'name_first', 'onblur' => 'CValid(this.value, this.id)', 'required' => 1, 'validation' => new Name()]));
         $oForm->addElement(new HTMLExternal('<span class="input_error name_first"></span>'));
-        $oForm->addElement(new Textbox(t('Your Last Name:'), 'last_name', ['id' => 'name_last', 'onblur' => 'CValid(this.value, this.id)', 'required' => 1, 'validation' => new Name]));
+        $oForm->addElement(new Textbox(t('Your Last Name:'), 'last_name', ['id' => 'name_last', 'onblur' => 'CValid(this.value, this.id)', 'required' => 1, 'validation' => new Name()]));
         $oForm->addElement(new HTMLExternal('<span class="input_error name_last"></span>'));
         $oForm->addElement(new Email(t('Your Email:'), 'mail', ['value' => $oSession->get('member_email'), 'id' => 'email', 'onblur' => 'CValid(this.value, this.id)', 'required' => 1]));
         $oForm->addElement(new HTMLExternal('<span class="input_error email"></span>'));
@@ -56,7 +56,7 @@ class ContactForm
         $oForm->addElement(new HTMLExternal('<span class="input_error url"></span>'));
         $oForm->addElement(new Textbox(t('Your Subject:'), 'subject', ['id' => 'str_subject', 'onblur' => 'CValid(this.value, this.id,4,45)', 'required' => 1, 'validation' => new Str(4, 45)]));
         $oForm->addElement(new HTMLExternal('<span class="input_error str_subject"></span>'));
-        $oForm->addElement(new Textarea(t('Your Message:'), 'message', ['id' => 'str_message', 'onblur' => 'CValid(this.value, this.id,10,2000)', 'required' => 1, 'validation' => new Str(10, 2000)]));
+        $oForm->addElement(new Textarea(t('Your Message:'), 'message', ['id' => 'str_message', 'maxlength' => 2000, 'onblur' => 'CValid(this.value, this.id,10,2000)', 'required' => 1, 'validation' => new Str(10, 2000)]));
         $oForm->addElement(new HTMLExternal('<span class="input_error str_message"></span>'));
         $oForm->addElement(new CCaptcha(t('Captcha'), 'captcha', ['id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:')]));
         $oForm->addElement(new HTMLExternal('<span class="input_error ccaptcha"></span>'));

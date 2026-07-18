@@ -1,9 +1,11 @@
 <?php
+
 /**
  * Changes made by Pierre-Henry Soria.
  */
 
 // JavaScript file is located in the directory ~static/js/str.js which is included in the file ~templates/themes/base/tpl/layout.tpl
+
 namespace PFBC\Element;
 
 use PFBC\Element;
@@ -16,7 +18,7 @@ class Textarea extends Element
 
     public function render()
     {
-        $iLength = !empty($this->attributes['value']) ? (new Str)->length($this->attributes['value']) : 0;
+        $iLength = !empty($this->attributes['value']) ? (new Str())->length($this->attributes['value']) : 0;
 
         echo '<textarea onkeyup="textCounter(\'', $this->attributes['id'], '\',\'', $this->attributes['id'], '_rem_len\')"', $this->getAttributes('value'), $this->getHtmlRequiredIfApplicable(), '>';
 
@@ -24,6 +26,9 @@ class Textarea extends Element
             echo $this->filter($this->attributes['value']);
         }
 
-        echo '</textarea><p><span id="', $this->attributes['id'], '_rem_len">' . $iLength . '</span> ', t('character(s).'), '</p>';
+        // When a maxlength is set, show "typed / max" so the limit is visible; otherwise just the count.
+        $sMaxSuffix = !empty($this->attributes['maxlength']) ? ' / ' . (int)$this->attributes['maxlength'] : '';
+
+        echo '</textarea><p><span id="', $this->attributes['id'], '_rem_len">' . $iLength . '</span>' . $sMaxSuffix . ' ', t('character(s).'), '</p>';
     }
 }
