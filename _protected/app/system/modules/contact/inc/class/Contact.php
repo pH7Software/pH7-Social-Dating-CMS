@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author         Pierre-Henry Soria <hello@ph7builder.com>
  * @copyright      (c) 2012-2022, Pierre-Henry Soria. All Rights Reserved.
  * @license        MIT License; See LICENSE.md and COPYRIGHT.md in the root directory.
- * @package        PH7 / App / System / Module / Contact / Inc / Class
  */
 
 declare(strict_types=1);
@@ -41,13 +41,22 @@ class Contact extends Core
 
     private function sendEmail(): bool
     {
-        $this->view->last_name = t('Last Name: %0%', $this->httpRequest->post('last_name'));
-        $this->view->first_name = t('First Name: %0%', $this->httpRequest->post('first_name'));
-        $this->view->email = t('Email: %0%', '<a href="mailto:' . $this->sMail . '">' . $this->sMail . '</a>');
-        $this->view->phone = t('Phone Number: %0%', '<a href="tel:' . $this->sPhone . '">' . $this->sPhone . '</a>');
-        $this->view->website = t('Website: %0%', '<a href="' . $this->sUrl . '" target="_blank">' . $this->sUrl . '</a>');
-        $this->view->subject = t('Subject: %0%', $this->sSubject);
-        $this->view->message = t('Message: %0%', nl2br($this->httpRequest->post('message')));
+        /*
+         * The mail template outputs these vars as raw HTML (they carry <a> tags), so every
+         * visitor-supplied value is escaped here to prevent HTML/attribute injection landing
+         * in the admin's inbox. The Mail layer only escapes the envelope, not the HTML body.
+         */
+        $sMail = escape($this->sMail);
+        $sPhone = escape($this->sPhone);
+        $sUrl = escape($this->sUrl);
+
+        $this->view->last_name = t('Last Name: %0%', escape($this->httpRequest->post('last_name')));
+        $this->view->first_name = t('First Name: %0%', escape($this->httpRequest->post('first_name')));
+        $this->view->email = t('Email: %0%', '<a href="mailto:' . $sMail . '">' . $sMail . '</a>');
+        $this->view->phone = t('Phone Number: %0%', '<a href="tel:' . $sPhone . '">' . $sPhone . '</a>');
+        $this->view->website = t('Website: %0%', '<a href="' . $sUrl . '" target="_blank" rel="noopener noreferrer nofollow">' . $sUrl . '</a>');
+        $this->view->subject = t('Subject: %0%', escape($this->sSubject));
+        $this->view->message = t('Message: %0%', nl2br(escape($this->httpRequest->post('message'))));
 
         $this->view->footer_title = t('User Information');
         $this->view->footer_content =
@@ -67,6 +76,6 @@ class Contact extends Core
             'to' => $this->sFeedbackEmail
         ];
 
-        return (new Mail)->send($aInfo, $sHtmlMessage);
+        return (new Mail())->send($aInfo, $sHtmlMessage);
     }
 }
