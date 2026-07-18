@@ -132,6 +132,42 @@ final class MatchmakingCoreTest extends TestCase
         $this->assertSame('middle', $aRanked[1]->username);
     }
 
+    public function testBlendedRankFallsBackToContentRankOnColdStart(): void
+    {
+        $oProfile = $this->createProfile(['birthDate' => $this->birthDateForAge(30)]);
+        $oNear = $this->createProfile(['profileId' => 1, 'birthDate' => $this->birthDateForAge(30), 'username' => 'near']);
+        $oFar = $this->createProfile(['profileId' => 2, 'birthDate' => $this->birthDateForAge(55), 'username' => 'far']);
+
+        $aRanked = MatchmakingCore::rankBlended($oProfile, [$oFar, $oNear], [], 2);
+
+        $this->assertSame('near', $aRanked[0]->username);
+        $this->assertSame('far', $aRanked[1]->username);
+    }
+
+    public function testStrongBehavioralAffinityOutranksSlightlyBetterContentScore(): void
+    {
+        $oProfile = $this->createProfile(['birthDate' => $this->birthDateForAge(30)]);
+        // Content-wise "similar" is a bit better (same age); "liked" is older but carries max affinity
+        $oSimilar = $this->createProfile(['profileId' => 1, 'birthDate' => $this->birthDateForAge(30), 'username' => 'similar']);
+        $oLiked = $this->createProfile(['profileId' => 2, 'birthDate' => $this->birthDateForAge(36), 'username' => 'liked']);
+
+        $aRanked = MatchmakingCore::rankBlended($oProfile, [$oSimilar, $oLiked], [2 => 5.0], 2);
+
+        $this->assertSame('liked', $aRanked[0]->username);
+    }
+
+    public function testBlendedRankIgnoresAffinityOfUnknownProfiles(): void
+    {
+        $oProfile = $this->createProfile(['birthDate' => $this->birthDateForAge(30)]);
+        $oNear = $this->createProfile(['profileId' => 1, 'birthDate' => $this->birthDateForAge(30), 'username' => 'near']);
+        $oFar = $this->createProfile(['profileId' => 2, 'birthDate' => $this->birthDateForAge(55), 'username' => 'far']);
+
+        // Affinity data exists but references a profile that isn't among the candidates
+        $aRanked = MatchmakingCore::rankBlended($oProfile, [$oFar, $oNear], [999 => 3.0], 2);
+
+        $this->assertSame('near', $aRanked[0]->username);
+    }
+
     private function createProfile(array $aFields): stdClass
     {
         $oProfile = new stdClass();

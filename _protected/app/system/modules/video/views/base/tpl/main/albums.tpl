@@ -7,7 +7,7 @@
                 <h4>{% Framework\Security\Ban\Ban::filterWord($album->name) %}</h4>
                 <p>
                     <a href="{absolute_url}">
-                        <img src="{url_data_sys_mod}video/file/{% $album->username %}/{% $album->albumId %}/{% $album->thumb %}" alt="{% $album->name %}" title="{% $album->name %}" />
+                        <img src="{url_data_sys_mod}video/file/{% $album->username %}/{% $album->albumId %}/{% $album->thumb %}" alt="{% $album->name %}" title="{% $album->name %}" loading="lazy" />
                     </a>
                 </p>
 

@@ -4,7 +4,7 @@
             <div class="thumb_photo">
                 <p>
                     <a href="{{ $design->url('video', 'main', 'albums', $album->username) }}">
-                        <img src="{url_data_sys_mod}video/file/{% $album->username %}/{% $album->albumId %}/{% $album->thumb %}" alt="{% $album->name %}" title="{% $album->name %}" />
+                        <img src="{url_data_sys_mod}video/file/{% $album->username %}/{% $album->albumId %}/{% $album->thumb %}" alt="{% $album->name %}" title="{% $album->name %}" loading="lazy" />
                     </a>
                 </p>
 

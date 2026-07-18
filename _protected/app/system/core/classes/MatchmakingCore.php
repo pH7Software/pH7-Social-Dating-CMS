@@ -22,6 +22,9 @@ final class MatchmakingCore
     public const WEIGHT_ACTIVITY = 0.25;
     public const WEIGHT_AVATAR = 0.15;
 
+    /** Share of the final score taken by behavioral affinity (BehavioralAffinityCore) when available */
+    public const WEIGHT_BEHAVIOR = 0.3;
+
     /** Age difference (in years) at which the age affinity has dropped to ~60% */
     public const AGE_TOLERANCE_YEARS = 5;
 
@@ -49,6 +52,33 @@ final class MatchmakingCore
     }
 
     /**
+     * Like rank(), but blends in behavioral affinity scores when they're available
+     * (e.g. computed by BehavioralAffinityCore from likes/votes/views).
+     * With no affinity data (cold start), this is identical to rank().
+     *
+     * @param \stdClass   $oProfile        the reference profile
+     * @param \stdClass[] $aCandidates     rows as returned by UserCoreModel::search()
+     * @param array       $aAffinityScores map of [profileId => affinity score] from BehavioralAffinityCore
+     *
+     * @return \stdClass[] the candidates sorted by descending blended score, cut to $iLimit
+     */
+    public static function rankBlended(\stdClass $oProfile, array $aCandidates, array $aAffinityScores, int $iLimit): array
+    {
+        if (empty($aAffinityScores)) {
+            return self::rank($oProfile, $aCandidates, $iLimit);
+        }
+
+        // Normalize affinities to the 0..1 range so they're comparable with the content score
+        $fMaxAffinity = (float)max($aAffinityScores);
+
+        usort($aCandidates, static function (\stdClass $oA, \stdClass $oB) use ($oProfile, $aAffinityScores, $fMaxAffinity): int {
+            return self::getBlendedScore($oProfile, $oB, $aAffinityScores, $fMaxAffinity) <=> self::getBlendedScore($oProfile, $oA, $aAffinityScores, $fMaxAffinity);
+        });
+
+        return array_slice($aCandidates, 0, $iLimit);
+    }
+
+    /**
      * Compatibility score between two profiles, in the 0..1 range.
      */
     public static function score(\stdClass $oProfile, \stdClass $oCandidate): float
@@ -57,6 +87,16 @@ final class MatchmakingCore
             self::WEIGHT_GEO * self::getGeoAffinity($oProfile, $oCandidate) +
             self::WEIGHT_ACTIVITY * self::getActivityScore($oCandidate) +
             self::WEIGHT_AVATAR * self::getAvatarScore($oCandidate);
+    }
+
+    private static function getBlendedScore(\stdClass $oProfile, \stdClass $oCandidate, array $aAffinityScores, float $fMaxAffinity): float
+    {
+        $iCandidateId = (int)($oCandidate->profileId ?? 0);
+        $fBehavior = $fMaxAffinity > 0 && isset($aAffinityScores[$iCandidateId])
+            ? (float)$aAffinityScores[$iCandidateId] / $fMaxAffinity
+            : 0.0;
+
+        return (1 - self::WEIGHT_BEHAVIOR) * self::score($oProfile, $oCandidate) + self::WEIGHT_BEHAVIOR * $fBehavior;
     }
 
     /**
