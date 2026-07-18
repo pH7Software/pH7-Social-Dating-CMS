@@ -20,5 +20,7 @@ var pH7LangCore = {
     misloading: "Ha ocurrido un error, por favor volver a cargar la página.",
     loading: "Loading ...",
     ok: "Bueno",
-    cookie_consent_msg: "Este sitio utiliza cookies para asegurar que le damos la mejor experiencia en nuestro sitio web. Si usted continúa utilizando este sitio vamos a suponer que usted es feliz con ella."
+    cookie_consent_msg: "Este sitio utiliza cookies para asegurar que le damos la mejor experiencia en nuestro sitio web. Si usted continúa utilizando este sitio vamos a suponer que usted es feliz con ella.",
+    show_password: "Mostrar contraseña",
+    hide_password: "Ocultar contraseña",
 };

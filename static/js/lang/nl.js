@@ -20,5 +20,7 @@ var pH7LangCore = {
     misloading: "Er is een fout opgetreden, gelieve de pagina opnieuw te laden.",
     loading: "Laden...",
     ok: "Oké",
-    cookie_consent_msg: "Deze website maakt gebruik van cookies om ervoor te zorgen dat wij u de beste ervaring op onze website. Als u doorgaat met deze site te gebruiken gaan we ervan uit dat u tevreden bent met het."
+    cookie_consent_msg: "Deze website maakt gebruik van cookies om ervoor te zorgen dat wij u de beste ervaring op onze website. Als u doorgaat met deze site te gebruiken gaan we ervan uit dat u tevreden bent met het.",
+    show_password: "Wachtwoord tonen",
+    hide_password: "Wachtwoord verbergen",
 };

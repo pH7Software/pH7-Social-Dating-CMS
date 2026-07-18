@@ -307,6 +307,30 @@ input[type=color]::-moz-color-swatch {
     }
 }
 
+/** PASSWORD VISIBILITY TOGGLE (see static/js/password_toggle.js) **/
+.pwd_toggle {
+    margin-left: .4em;
+    padding: .25em .55em;
+    border: 1px solid var(--ph7-border);
+    border-radius: var(--ph7-radius-sm);
+    background-color: var(--ph7-surface);
+    font-size: 1em;
+    line-height: 1;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: border-color var(--ph7-transition), background-color var(--ph7-transition);
+}
+
+.pwd_toggle:hover, .pwd_toggle:focus {
+    border-color: var(--ph7-primary);
+    background-color: var(--ph7-primary-soft);
+}
+
+.pwd_toggle_active {
+    border-color: var(--ph7-primary);
+    background-color: var(--ph7-primary-soft);
+}
+
 /** PLUGIN CHROME (apprise dialogs, tipTip tooltips, jQuery UI) — same tokens as the rest of the UI **/
 div.apprise {
     background: var(--ph7-surface);
